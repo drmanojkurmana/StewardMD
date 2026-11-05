@@ -1,0 +1,61 @@
+{
+  "id": "paeds-pyloric-stenosis",
+  "title": "Infantile hypertrophic pyloric stenosis",
+  "subtitle": "Fix the alkalosis first, then the pylorus",
+  "category": "paeds_surgery",
+  "specialty": "paediatric",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: hypertrophic pyloric stenosis", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" },
+    { "id": "acr-vomit", "org": "American College of Radiology (ACR)", "title": "ACR Appropriateness Criteria: Vomiting in infants (J Am Coll Radiol 2020;17(11S):S505-S515)", "year": 2020, "url": "https://acsearch.acr.org/list", "accessed": "2026-11-04" },
+    { "id": "nice-ng29", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Intravenous fluid therapy in children and young people in hospital (NG29)", "year": 2015, "version": "NG29, bolus volume updated 2022", "url": "https://www.nice.org.uk/guidance/ng29", "accessed": "2026-11-04" },
+    { "id": "cochrane-pyl", "org": "Cochrane", "title": "Open versus laparoscopic pyloromyotomy for pyloric stenosis (Staerkle et al, CD012827)", "year": 2021, "url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD012827.pub2/full", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Bilious vomiting. That is not pyloric stenosis and needs the bilious vomiting pathway now." },
+      { "text": "A lethargic, poorly perfused infant with a sunken fontanelle and dry nappies: severe dehydration." },
+      { "text": "Apnoeas or hypoventilation in a markedly alkalotic infant. Metabolic alkalosis depresses respiratory drive, and it gets worse after a general anaesthetic." },
+      { "text": "Jaundice or hypoglycaemia in a starved, vomiting infant." }
+    ],
+    "do_now": [
+      { "text": "Stop feeds, site intravenous access and send a capillary or venous blood gas with chloride, sodium, potassium and glucose.", "timeCritical": true, "evidenceRef": "holcomb" },
+      { "text": "Shocked infant: isotonic crystalloid bolus at the NICE NG29 volume, reassessing after each bolus.", "timeCritical": true, "evidenceRef": "nice-ng29" },
+      { "text": "Start isotonic maintenance fluid containing glucose, with potassium added once the infant is passing urine, per local paediatric protocol.", "evidenceRef": "nice-ng29" },
+      { "text": "Pyloromyotomy is never an emergency. It waits until the alkalosis and hypochloraemia are corrected, however long that takes.", "evidenceRef": "holcomb" }
+    ],
+    "assess": [
+      { "text": "Typical infant is a few weeks old with non-bilious projectile vomiting after feeds and remains hungry. A family history is common." },
+      { "text": "Weigh the infant and assess hydration. Compare with the birth weight.", "calcs": ["paeds_weight"] },
+      { "text": "Test feed: palpate for the olive in the right upper quadrant with the stomach empty and the infant settled. Look for visible gastric peristalsis." }
+    ],
+    "investigate": [
+      { "text": "Ultrasound is the investigation of choice: measure pyloric muscle thickness and channel length, and watch for failure of the pylorus to open. Interpret against the radiology department's thresholds." },
+      { "text": "Blood gas: the classic picture is hypochloraemic, hypokalaemic metabolic alkalosis. Repeat it to guide correction rather than guessing." },
+      { "text": "Upper GI contrast study only if ultrasound is non-diagnostic or another diagnosis such as malrotation is suspected." }
+    ],
+    "resuscitate": [
+      { "text": "Correct over 24 to 48 hours as needed with isotonic sodium chloride containing glucose and potassium. Re-check the gas and electrolytes regularly.", "calcs": ["holliday"], "evidenceRef": "nice-ng29" },
+      { "text": "Proceed to surgery only once chloride and bicarbonate are within the ranges set by local paediatric anaesthetic protocol. The anaesthetist sets the bar, not the list.", "evidenceRef": "holcomb" },
+      { "text": "Nasogastric tube is optional in a stable infant; replace large gastric losses volume for volume with isotonic fluid if one is placed.", "evidenceRef": "nice-ng29" }
+    ],
+    "definitive": [
+      { "text": "Ramstedt pyloromyotomy, open or laparoscopic, on a planned list after correction. Both approaches are acceptable; laparoscopy may carry a slightly higher risk of incomplete myotomy.", "evidenceRef": "cochrane-pyl" },
+      { "text": "Before the anaesthetic, the anaesthetist empties the stomach with a nasogastric tube. These infants have full stomachs regardless of fasting time.", "evidenceRef": "holcomb" },
+      { "text": "After surgery, resume feeding early on an ad-libitum or short graded regimen per unit protocol. Some post-operative vomiting is expected and is not a failed operation.", "evidenceRef": "holcomb" }
+    ],
+    "escalate": [
+      { "text": "Transfer to a paediatric surgical unit for the operation. Resuscitation and correction should start before transfer, not after." },
+      { "text": "Paediatric anaesthetic involvement from the start: post-operative apnoea is a real risk in a young, alkalotic, or ex-premature infant." },
+      { "text": "Persistent vomiting beyond the first few post-operative days suggests incomplete myotomy or a missed perforation; discuss with the operating surgeon." }
+    ]
+  },
+  "notes": [
+    "The chloride is the number that tells you when this baby is safe for theatre. Sodium and potassium matter, but the chloride drives correction of the alkalosis.",
+    "A surgeon who takes an uncorrected alkalotic infant to theatre risks a baby who does not breathe adequately afterwards.",
+    "Projectile, non-bilious, hungry, a few weeks old: pattern recognition is strong here, but ultrasound confirms it."
+  ],
+  "calcs": ["paeds_weight", "holliday"]
+}

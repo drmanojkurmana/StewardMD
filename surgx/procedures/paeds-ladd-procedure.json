@@ -1,0 +1,173 @@
+{
+  "id": "paeds-ladd-procedure",
+  "title": "Laparotomy for malrotation (Ladd procedure)",
+  "subtitle": "Derotate anticlockwise, divide the bands, widen the mesentery",
+  "system": "gastrointestinal",
+  "aliases": ["Ladd procedure", "Ladd's procedure", "malrotation surgery", "midgut volvulus laparotomy", "neonatal volvulus"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: malrotation", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" },
+    { "id": "spitz-coran", "org": "CRC Press", "title": "Operative Pediatric Surgery (Spitz L, Coran AG, editors): malrotation", "edition": "7th edition", "year": 2013, "url": "https://www.routledge.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["paeds_weight", "corrected_age", "holliday", "ebv", "allowable_blood_loss"],
+  "chapters": {
+    "indications": [
+      "Malrotation with midgut volvulus: an emergency, because the whole midgut is at risk. Bilious vomiting in a neonate is volvulus until proven otherwise.",
+      "Malrotation with duodenal obstruction from Ladd bands, without volvulus.",
+      "Malrotation found on contrast study in a child with symptoms such as intermittent bilious vomiting or pain.",
+      "Asymptomatic malrotation found incidentally, as an individual decision by the consultant, weighing age and comorbidity such as heterotaxy or cardiac disease."
+    ],
+    "contraindications": [
+      "There is no contraindication to emergency surgery for suspected volvulus; resuscitation runs alongside, not before.",
+      "A laparoscopic Ladd procedure is an option in a stable child without volvulus in experienced hands; it is not the approach for an infant with suspected volvulus and ischaemia."
+    ],
+    "preparation": [
+      "Do not wait for a perfect set of numbers in suspected volvulus; resuscitate and go to theatre.",
+      "Upper gastrointestinal contrast study confirms the position of the duodenojejunal flexure where the child is stable enough and it does not delay surgery.",
+      "Consent the parents for: bowel resection, stoma, planned second-look laparotomy, short bowel syndrome if a long length is lost, appendicectomy, recurrent volvulus (uncommon), adhesive obstruction, and the possibility of finding bowel that cannot be saved.",
+      "Neonatal or paediatric intensive care bed arranged for a child with volvulus."
+    ],
+    "positioning": [
+      "Supine on a warmed mattress, with a forced-air warmer and the abdomen fully exposed."
+    ],
+    "equipment": [
+      "Neonatal or paediatric laparotomy set, warm moist packs, bipolar diathermy, fine absorbable sutures.",
+      "Silo or temporary abdominal closure materials available."
+    ],
+    "anatomy": [
+      "In malrotation the duodenojejunal flexure lies to the right of the midline and the caecum is high, so the base of the small bowel mesentery is very narrow and the midgut can twist around the superior mesenteric vessels.",
+      "Volvulus is usually clockwise when viewed from the front, so derotation is anticlockwise.",
+      "Ladd bands are peritoneal bands from the malpositioned caecum across the duodenum to the right upper quadrant, and they can obstruct the duodenum without volvulus.",
+      "The superior mesenteric artery and vein lie in the narrow mesenteric pedicle and are at risk when the mesentery is widened.",
+      "Malrotation may coexist with intrinsic duodenal stenosis or web, which must be excluded at operation."
+    ],
+    "criticalSafety": [
+      "Eviscerate the whole midgut before trying to understand the anatomy.",
+      "Derotate anticlockwise until the mesentery is flat; count the turns.",
+      "Resect only bowel that is clearly dead. When viability is doubtful over a long length, derotate, close temporarily and look again.",
+      "Protect the superior mesenteric vessels while widening the mesentery."
+    ],
+    "structuresAtRisk": [
+      "Superior mesenteric artery and vein",
+      "Duodenum during division of Ladd bands",
+      "Ischaemic midgut",
+      "Pancreas and common bile duct near the duodenum"
+    ],
+    "commonErrors": [
+      "Derotating in the wrong direction, tightening the volvulus.",
+      "Extensive resection of bowel that might have recovered, leaving the child with short bowel.",
+      "Incomplete division of the bands, leaving duodenal obstruction.",
+      "Failing to check duodenal patency and missing an intrinsic obstruction."
+    ],
+    "complications": [
+      "Short bowel syndrome after major resection.",
+      "Recurrent volvulus, uncommon after a complete Ladd procedure.",
+      "Adhesive small bowel obstruction.",
+      "Wound infection and dehiscence.",
+      "Prolonged ileus and feeding difficulty."
+    ],
+    "postop": [
+      "Neonatal or paediatric intensive care after volvulus; nasogastric drainage and intravenous fluids.",
+      "Planned second-look laparotomy within the agreed window when bowel viability was doubtful.",
+      "Parenteral nutrition if enteral feeding is delayed or a significant length was resected.",
+      "Explain to the parents that the bowel now lies in a non-rotated position, the appendix has gone, and what symptoms should prompt urgent review."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Consent includes resection, stoma, second look and appendicectomy. In volvulus, this conversation happens in minutes, not hours." },
+    { "ref": "step.core.timeout", "emphasis": "State that the bowel may be ischaemic and blood must be available." },
+    { "ref": "step.paeds.physiology-gate", "emphasis": "In suspected volvulus, the gate is safety for induction, not a complete correction; resuscitation continues in theatre." },
+    { "ref": "step.paeds.infant-laparotomy-prep" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.paeds.warming", "emphasis": "Eviscerated bowel loses heat fast: warm packs and fluids ready before incision." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.paeds.transverse-laparotomy", "emphasis": "Right upper quadrant transverse incision above the umbilicus." },
+    { "ref": "step.ladd.eviscerate" },
+    { "ref": "step.ladd.derotate" },
+    { "ref": "step.abd.bowel-handling", "emphasis": "In midgut volvulus resect only clearly necrotic bowel. Where a long length is of doubtful viability, preserve it and plan a second look rather than resect." },
+    { "ref": "step.ladd.second-look" },
+    { "ref": "step.ladd.bands" },
+    { "ref": "step.ladd.mesentery" },
+    { "ref": "step.paeds.incidental-appendicectomy" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.specimen", "emphasis": "Appendix and any resected bowel, labelled with the finding of volvulus." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.paeds.transverse-closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record the direction and number of turns, viability, length of bowel resected and remaining, duodenal patency, and the second-look plan." }
+  ],
+  "steps_local": {
+    "step.ladd.eviscerate": {
+      "id": "step.ladd.eviscerate", "kind": "dissection",
+      "title": "Eviscerating the midgut and recognising the volvulus",
+      "why": "The anatomy of a volvulus cannot be understood from inside the abdomen. Delivering the whole midgut shows the twist at the mesenteric root and lets you derotate it in one movement.",
+      "how": [
+        "Deliver the entire small bowel and right colon out of the wound onto warm moist packs.",
+        "Find the narrow mesenteric root and the twist around it; note the direction and the colour of the bowel.",
+        "Note chylous or bloodstained fluid, which indicates lymphatic or venous obstruction."
+      ],
+      "structuresAtRisk": ["Ischaemic, friable midgut", "Superior mesenteric vessels"],
+      "pitfalls": ["Trying to derotate inside the abdomen.", "Handling ischaemic bowel by the wall instead of supporting it with the whole hand."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ladd.derotate": {
+      "id": "step.ladd.derotate", "kind": "reconstruction", "critical": true,
+      "title": "Derotating the volvulus anticlockwise",
+      "why": "Volvulus is usually clockwise, so anticlockwise derotation, often remembered as turning back the clock, untwists it. Rotating the wrong way tightens the twist and completes the infarction.",
+      "how": [
+        "Hold the whole midgut in both hands and rotate it anticlockwise as viewed from the front, one full turn at a time.",
+        "Continue until the mesentery lies flat with no twist at its root; count and record the number of turns.",
+        "Confirm by seeing the duodenum and caecum lying separately with an untwisted pedicle between them.",
+        "Wrap the bowel in warm moist packs and give it time before assessing viability."
+      ],
+      "structuresAtRisk": ["Superior mesenteric vessels", "Ischaemic midgut"],
+      "pitfalls": ["Rotating clockwise because the twist was not identified first.", "Stopping after one turn when more remain."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ladd.second-look": {
+      "id": "step.ladd.second-look", "kind": "bailout",
+      "title": "Doubtful viability: preserve, close temporarily and look again",
+      "why": "Ischaemic midgut that looks doubtful after derotation often recovers. Resecting it all at the first operation can leave the child with short bowel for life; a second look at an agreed interval lets the bowel declare itself.",
+      "how": [
+        "Resect only segments that are clearly necrotic or perforated, leaving the ends closed if continuity is not safe.",
+        "If a long length remains doubtful, complete the derotation, do not perform a full resection, and close the abdomen temporarily or with a silo.",
+        "Plan a second-look laparotomy at the interval the consultant sets, usually within the next one to two days, with the family informed.",
+        "If the entire midgut is necrotic, stop and make a senior decision with the family about whether further surgery is in the child's interest."
+      ],
+      "structuresAtRisk": ["Doubtfully viable midgut"],
+      "pitfalls": ["Resecting every segment that looks dusky at the first look.", "A tight primary closure over oedematous bowel that then becomes ischaemic again."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ladd.bands": {
+      "id": "step.ladd.bands", "kind": "dissection", "critical": true,
+      "title": "Dividing Ladd bands and confirming duodenal patency",
+      "why": "Ladd bands compress the duodenum; dividing them relieves the extrinsic obstruction. An intrinsic stenosis or web can coexist and must be excluded, or the child will keep vomiting after a technically good operation.",
+      "how": [
+        "Identify the peritoneal bands running from the caecum and ascending colon across the duodenum to the right upper quadrant.",
+        "Divide them close to the colon, freeing the duodenum and straightening it so it runs directly down the right side of the abdomen.",
+        "Ask the anaesthetist to advance the nasogastric tube while you guide it through the duodenum into the proximal jejunum to confirm patency.",
+        "If the tube will not pass, look for a duodenal web or stenosis and deal with it as the consultant directs."
+      ],
+      "structuresAtRisk": ["Duodenal wall", "Pancreas", "Common bile duct"],
+      "pitfalls": ["Leaving bands across the second part of the duodenum.", "Assuming patency without testing it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ladd.mesentery": {
+      "id": "step.ladd.mesentery", "kind": "reconstruction", "critical": true,
+      "title": "Widening the mesentery and placing the bowel in non-rotation",
+      "why": "Volvulus happens because the mesenteric base is narrow. Separating the duodenum from the caecum and broadening the base makes the twist unlikely to recur, and placing the bowel in non-rotation keeps the base wide.",
+      "how": [
+        "Divide the peritoneum and adhesions on the anterior surface of the mesentery between the duodenum and the caecum to separate them widely.",
+        "Keep the superior mesenteric vessels in view throughout and divide only peritoneum and adhesions, never vessels in the pedicle.",
+        "Return the bowel with the small bowel on the right side of the abdomen and the colon on the left, with the caecum in the left upper quadrant.",
+        "Check that the mesentery lies flat and broad before closing."
+      ],
+      "structuresAtRisk": ["Superior mesenteric artery and vein", "Mesenteric lymphatics"],
+      "pitfalls": ["Dividing vessels while widening the mesentery.", "Returning the bowel in a position that recreates a narrow pedicle."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

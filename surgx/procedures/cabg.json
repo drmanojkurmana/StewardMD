@@ -1,0 +1,192 @@
+{
+  "id": "cabg",
+  "title": "Coronary artery bypass grafting",
+  "subtitle": "Outline level: conduits, cardiopulmonary bypass, anastomoses, weaning",
+  "system": "cardiac",
+  "aliases": ["CABG", "coronary bypass", "on-pump CABG", "heart bypass surgery"],
+  "estMinutes": 240,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "esc-eacts-revasc-2018", "org": "European Society of Cardiology (ESC) and European Association for Cardio-Thoracic Surgery (EACTS)", "title": "2018 ESC/EACTS Guidelines on myocardial revascularization", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/30165437/", "accessed": "2026-11-04" },
+    { "id": "acc-aha-revasc-2021", "org": "American College of Cardiology, American Heart Association and Society for Cardiovascular Angiography and Interventions", "title": "2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/34895950/", "accessed": "2026-11-04" },
+    { "id": "eacts-cpb-2019", "org": "EACTS, EACTA and EBCP", "title": "2019 EACTS/EACTA/EBCP guidelines on cardiopulmonary bypass in adult cardiac surgery", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31576396/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["ccs_angina", "nyha", "bmi"],
+  "chapters": {
+    "indications": [
+      "Left main coronary disease, and multivessel disease, particularly with diabetes, impaired left ventricular function or complex anatomy, where the Heart Team judges that surgery offers better long-term outcomes than percutaneous intervention (ESC/EACTS 2018; ACC/AHA/SCAI 2021).",
+      "Angina not controlled by optimal medical therapy with anatomy unsuitable for percutaneous intervention.",
+      "Coronary disease in a patient undergoing other cardiac surgery, such as valve replacement.",
+      "Emergency surgery after failed percutaneous intervention or for mechanical complications of infarction, at a higher risk."
+    ],
+    "contraindications": [
+      "No graftable target vessels.",
+      "Prohibitive frailty or comorbidity, where the Heart Team prefers percutaneous or medical management.",
+      "Patient preference after a balanced discussion of the alternatives."
+    ],
+    "preparation": [
+      "Heart Team decision with the coronary angiogram, left ventricular function, valve assessment and a surgical risk score documented.",
+      "Antiplatelet and anticoagulant management per protocol: aspirin is usually continued; P2Y12 inhibitors are stopped for the recommended interval unless surgery is urgent.",
+      "Assess conduits: Allen test or duplex of the radial artery if it is to be used, and leg veins; carotid assessment where indicated.",
+      "Cross-match blood; optimise anaemia, glucose and renal function; infection prevention bundle.",
+      "Consent risks to discuss: death; stroke; myocardial infarction; bleeding needing re-operation; atrial fibrillation; kidney injury; sternal and leg wound infection; prolonged ventilation; cognitive change; graft failure and recurrent angina."
+    ],
+    "positioning": [
+      "Supine with the arms tucked or, if a radial artery is harvested, the arm out on a board; roll between the scapulae.",
+      "Legs slightly abducted and externally rotated, knees supported, for vein harvest."
+    ],
+    "equipment": [
+      "Sternotomy set, internal mammary retractor, fine coronary instruments and fine monofilament sutures.",
+      "Cardiopulmonary bypass circuit with perfusionist, cannulae, cardioplegia delivery and vents.",
+      "Transoesophageal echocardiography; epiaortic ultrasound where used.",
+      "Transit-time flow measurement for grafts where available.",
+      "Temporary pacing, defibrillator with internal paddles, and an intra-aortic balloon pump available."
+    ],
+    "anatomy": [
+      "The left anterior descending artery runs in the anterior interventricular groove and supplies the anterior wall and septum; it is the most important target, and the left internal mammary artery graft to it carries the strongest survival evidence.",
+      "The circumflex artery runs in the left atrioventricular groove giving obtuse marginal branches to the lateral wall; the right coronary artery runs in the right atrioventricular groove to the posterior descending artery in a right-dominant circulation.",
+      "The internal mammary arteries run behind the costal cartilages about one to two centimetres from the sternal edge, accompanied by two veins, with the phrenic nerve crossing near the first rib.",
+      "The ascending aorta receives the aortic cannula, the cross-clamp, cardioplegia and the proximal vein graft anastomoses, so its atheroma burden matters."
+    ],
+    "criticalSafety": [
+      "Full heparinisation to the target clotting time before cannulation and bypass, confirmed with the perfusionist.",
+      "Assess the ascending aorta for atheroma before cannulation and clamping to reduce stroke.",
+      "Correct graft lie and length: a kinked or tense graft fails regardless of the anastomosis.",
+      "No protamine while the pump suckers are returning blood to the circuit.",
+      "Check graft function (flow measurement, ECG, regional wall motion on echocardiography) before closing."
+    ],
+    "structuresAtRisk": [
+      "Internal mammary artery during harvest",
+      "Phrenic nerve near the first rib and on the pericardium",
+      "Ascending aorta (dissection at cannulation or clamping, atheroembolism)",
+      "Coronary back wall at the anastomosis",
+      "Posterior left ventricle when lifting the heart"
+    ],
+    "commonErrors": [
+      "Diathermy injury or traction on the mammary artery during harvest.",
+      "A graft too short (tense, tearing) or too long (kinked).",
+      "Grafting a target proximal to the stenosis or into an intramyocardial segment without care.",
+      "Incomplete de-airing before cross-clamp removal.",
+      "Weaning from bypass before the checklist is complete."
+    ],
+    "complications": [
+      "Bleeding and tamponade, sometimes needing re-sternotomy.",
+      "Peri-operative myocardial infarction and low cardiac output.",
+      "Stroke and delirium.",
+      "Atrial fibrillation.",
+      "Acute kidney injury.",
+      "Sternal and leg wound infection.",
+      "Early graft failure; later vein graft disease."
+    ],
+    "postop": [
+      "Intensive care with monitoring of haemodynamics, drains, rhythm and urine output; clear thresholds for reporting bleeding.",
+      "Restart aspirin early after surgery per protocol; continue statin; consider dual antiplatelet therapy when indicated.",
+      "Atrial fibrillation prophylaxis per unit practice; potassium and magnesium correction.",
+      "Cardiac rehabilitation, risk factor control and secondary prevention."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Document the Heart Team decision. Include stroke, death, bleeding and re-operation." },
+    { "ref": "step.core.timeout", "emphasis": "State the grafting plan (targets and conduits), the cannulation strategy, the aortic assessment and blood availability." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Timed prophylaxis with redosing for duration and bypass, per cardiac unit protocol." },
+    { "ref": "step.core.positioning", "emphasis": "Roll between the scapulae, legs prepared for vein harvest, radial artery arm out if used." },
+    { "ref": "step.core.prep-drape", "emphasis": "Chin to toes including both legs, so that any vein can be harvested." },
+    { "ref": "step.thor.sternotomy-open" },
+    { "ref": "step.cabg.ima-harvest" },
+    { "ref": "step.vasc.vein-harvest", "emphasis": "Usually done by a second operator during mammary harvest, open or endoscopic. Prepare the vein with low-pressure distension and keep it in a buffered solution until use." },
+    { "ref": "step.thor.pericardium-open" },
+    { "ref": "step.cabg.bypass" },
+    { "ref": "step.vasc.end-to-side-anastomosis", "emphasis": "Distal coronary anastomoses on the arrested heart, usually the most compromised territory first and the mammary artery to the left anterior descending; then the proximal vein-to-aorta anastomoses, under a side-biting clamp or a single cross-clamp per surgeon." },
+    { "ref": "step.cabg.weaning" },
+    { "ref": "step.cabg.failure-to-wean" },
+    { "ref": "step.vasc.heparin-reversal" },
+    { "ref": "step.core.haemostasis", "emphasis": "Check every anastomosis, the mammary bed, side branches of the conduits, cannulation sites and the sternal edges." },
+    { "ref": "step.thor.pacing-wires" },
+    { "ref": "step.thor.chest-drains", "emphasis": "Mediastinal drains, plus a pleural drain on the side of an opened pleura or mammary harvest. Keep drains off the grafts." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.thor.sternal-closure", "emphasis": "Bilateral mammary harvest in a diabetic or obese patient raises the risk of sternal complications; consider reinforcement." },
+    { "ref": "step.core.skin-closure", "emphasis": "Sternal and leg wounds; the leg wound is a common site of infection and haematoma." },
+    { "ref": "step.core.debrief", "emphasis": "Record each graft (conduit, target, flow), bypass and cross-clamp times, inotropic support, pacing needs and bleeding concerns." },
+    { "ref": "step.thor.emergency-resternotomy", "emphasis": "Hand over the re-sternotomy plan for the intensive care team, and the threshold for calling the surgeon about drain output." }
+  ],
+  "steps_local": {
+    "step.cabg.ima-harvest": {
+      "id": "step.cabg.ima-harvest",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Internal mammary artery harvest",
+      "why": "The left internal mammary artery to the left anterior descending artery is the graft most strongly linked with long-term survival. Its value is lost if it is injured during harvest by diathermy, traction or clips.",
+      "how": [
+        "Elevate the left hemisternum with a mammary retractor and reduce the ventilation volume to bring the pleura away.",
+        "Harvest the artery as a pedicle with its veins and fascia, or skeletonised, using low-power diathermy and clips on the branches, never touching the artery itself.",
+        "Mobilise from the first rib to the bifurcation, taking care of the phrenic nerve near the first rib.",
+        "After heparin, divide the distal end, check free flow, and protect the artery (for example with a topical vasodilator and a moist swab) until use."
+      ],
+      "structuresAtRisk": ["Internal mammary artery", "Phrenic nerve", "Pleura", "Intercostal vessels"],
+      "pitfalls": [
+        "Diathermy too close to the artery, causing dissection or spasm.",
+        "Dividing the artery before heparin is given.",
+        "A pedicle too short to reach the target without tension."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cabg.bypass": {
+      "id": "step.cabg.bypass",
+      "kind": "prep",
+      "critical": true,
+      "title": "Heparinisation, cannulation, bypass and cardioplegic arrest",
+      "why": "Cardiopulmonary bypass and cardioplegia give a still, bloodless field for the coronary anastomoses. Every step carries a specific catastrophe (aortic dissection, air embolism, inadequate heparin) that a deliberate sequence and shared communication with the perfusionist prevent.",
+      "how": [
+        "Give full-dose heparin and confirm the target clotting time with the perfusionist before cannulation (EACTS/EACTA/EBCP 2019).",
+        "Assess the ascending aorta by palpation and, where used, epiaortic ultrasound; place aortic purse strings in a soft area and cannulate the aorta, then the right atrium, with the anaesthetist controlling blood pressure during aortic cannulation.",
+        "Start bypass on the perfusionist's confirmation of lines and pressures; vent the heart as needed.",
+        "Apply the cross-clamp and deliver cardioplegia (antegrade, and retrograde if used) to achieve diastolic arrest; note the cross-clamp time and repeat cardioplegia at intervals per protocol."
+      ],
+      "structuresAtRisk": ["Ascending aorta", "Right atrium", "Brain from atheroembolism or air"],
+      "pitfalls": [
+        "Cannulating or clamping through atheroma.",
+        "Air in the arterial line from an unprimed cannula.",
+        "Starting bypass before confirming adequate anticoagulation."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cabg.weaning": {
+      "id": "step.cabg.weaning",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "De-airing, reperfusion and weaning from bypass",
+      "why": "Coming off bypass is the moment the new grafts and the heart are tested. A checklist (temperature, rhythm, electrolytes, ventilation, de-airing, graft function) prevents the common, avoidable causes of failure to wean.",
+      "how": [
+        "De-air the heart and aortic root before removing the cross-clamp, then reperfuse and rewarm to the target temperature.",
+        "Confirm rhythm (pace or defibrillate as needed), potassium, calcium, haemoglobin and acid-base status, and resume ventilation of both lungs.",
+        "Check graft lie and flow (transit-time flow measurement where available), ECG for new ischaemia and echocardiography for regional wall motion.",
+        "Wean in stages by reducing venous drainage as the heart fills and ejects, with inotropes or vasopressors as agreed; decannulate once stable."
+      ],
+      "structuresAtRisk": ["Grafts (kinking, tension) as the heart fills", "Brain from residual air"],
+      "pitfalls": [
+        "Weaning a cold, hyperkalaemic or bradycardic heart.",
+        "Lungs not re-inflated, or the grafts kinked by the re-expanding lung."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cabg.failure-to-wean": {
+      "id": "step.cabg.failure-to-wean",
+      "kind": "bailout",
+      "title": "Failure to wean from bypass",
+      "why": "A heart that will not come off bypass is usually telling you something specific, often a graft problem or ongoing ischaemia. Going back on bypass promptly protects the heart while the cause is found; pushing inotropes alone does not.",
+      "how": [
+        "Return to full bypass early rather than persisting with a failing heart, and call for senior surgical and anaesthetic help.",
+        "Look for a cause: graft kink, twist, tension or poor flow; new regional wall motion abnormality; valve dysfunction; air; arrhythmia; metabolic derangement.",
+        "Correct technical problems (revise or add a graft), rest the heart on bypass, and re-attempt weaning with appropriate inotropic support.",
+        "Consider mechanical support such as an intra-aortic balloon pump, and further options per the unit's protocol, if the heart still cannot support the circulation."
+      ],
+      "structuresAtRisk": ["Myocardium", "Grafts"],
+      "pitfalls": [
+        "Escalating inotropes without checking the grafts.",
+        "Repeated weaning attempts without a change in management."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

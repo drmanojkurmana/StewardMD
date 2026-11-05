@@ -1,0 +1,250 @@
+{
+  "id": "carpal-tunnel-release",
+  "title": "Open carpal tunnel release",
+  "subtitle": "Decompression of the median nerve at the wrist",
+  "system": "musculoskeletal",
+  "aliases": [
+    "CTR",
+    "carpal tunnel decompression",
+    "median nerve decompression",
+    "open CTD"
+  ],
+  "estMinutes": 25,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "nice-cks-cts",
+      "org": "National Institute for Health and Care Excellence (NICE) Clinical Knowledge Summaries",
+      "title": "Carpal tunnel syndrome",
+      "year": 2024,
+      "url": "https://cks.nice.org.uk/topics/carpal-tunnel-syndrome/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "aaos-cts-2016",
+      "org": "American Academy of Orthopaedic Surgeons (AAOS)",
+      "title": "Management of Carpal Tunnel Syndrome: Evidence-Based Clinical Practice Guideline",
+      "year": 2016,
+      "url": "https://www.orthoguidelines.org",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "lalonde-2017-walant",
+      "org": "Lalonde DH. J Hand Surg Eur 42:886",
+      "title": "Conceptual origins, current practice, and views of wide awake hand surgery",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Lalonde+conceptual+origins+current+practice+and+views+of+wide+awake+hand+surgery",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "quickdash"
+  ],
+  "chapters": {
+    "indications": [
+      "Carpal tunnel syndrome with persistent or progressive symptoms despite non-operative treatment (splinting, steroid injection).",
+      "Constant numbness, thenar weakness or wasting, or severe changes on nerve conduction studies: earlier surgery.",
+      "Acute carpal tunnel syndrome after trauma (for example a distal radius fracture): urgent release."
+    ],
+    "contraindications": [
+      "Uncertain diagnosis: exclude cervical radiculopathy and proximal median nerve compression; nerve conduction studies help when the diagnosis is uncertain or before surgery per local practice.",
+      "Mild, intermittent symptoms that have not had non-operative treatment.",
+      "Local skin infection."
+    ],
+    "preparation": [
+      "Clinical diagnosis with documented sensory and motor examination (thenar bulk and abductor pollicis brevis power).",
+      "Nerve conduction studies where the diagnosis is uncertain, symptoms are atypical, or local practice requires them before surgery.",
+      "Plan anaesthesia: wide-awake local, local with tourniquet, or regional block.",
+      "Consent risks to discuss: infection, scar tenderness and pillar pain, incomplete relief (especially with severe, long-standing compression), nerve injury (including the recurrent motor and palmar cutaneous branches), complex regional pain syndrome, recurrence, and weak grip in the first months."
+    ],
+    "positioning": [
+      "Supine, arm on a hand table, shoulder abducted no more than 90 degrees; lead hand or assistant to hold the fingers.",
+      "Forearm supinated with the wrist slightly extended over a rolled towel."
+    ],
+    "equipment": [
+      "Hand set with small self-retaining retractors, McDonald's dissector, fine scissors, bipolar diathermy.",
+      "Upper arm tourniquet if not using WALANT; loupe magnification."
+    ],
+    "anatomy": [
+      "Kaplan's cardinal line and the radial border of the ring finger axis locate the incision ulnar to the thenar crease, away from the palmar cutaneous branch.",
+      "The recurrent motor branch usually arises from the radial side of the median nerve distal to the ligament, but extraligamentous, subligamentous and transligamentous variants are common.",
+      "The superficial palmar arch lies in the fat just distal to the ligament.",
+      "Guyon's canal, with the ulnar nerve and artery, lies ulnar to the hook of hamate."
+    ],
+    "criticalSafety": [
+      "Incise ulnar to the thenar crease and divide the ligament on its ulnar side.",
+      "See the nerve before dividing each part of the ligament.",
+      "Release completely, including the distal antebrachial fascia."
+    ],
+    "structuresAtRisk": [
+      "Median nerve",
+      "Recurrent motor branch",
+      "Palmar cutaneous branch of the median nerve",
+      "Superficial palmar arch",
+      "Ulnar nerve and artery in Guyon's canal"
+    ],
+    "commonErrors": [
+      "Incomplete proximal release.",
+      "Incision crossing the wrist crease at a right angle.",
+      "Incision too radial, injuring the palmar cutaneous branch."
+    ],
+    "complications": [
+      "Persistent or recurrent symptoms, usually from incomplete release or severe pre-existing nerve damage.",
+      "Scar tenderness and pillar pain.",
+      "Nerve injury, haematoma, infection.",
+      "Complex regional pain syndrome."
+    ],
+    "postop": [
+      "Elevate and move the fingers from the start; no splint is needed after a routine release.",
+      "Wound check and suture removal per local practice; avoid heavy gripping for the first weeks.",
+      "Explain that numbness may take months to improve and that severe pre-existing wasting may not recover.",
+      "Return early for increasing pain, swelling, redness or new weakness."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Routine antibiotic prophylaxis is generally not needed for a short clean hand operation; follow local policy."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine, arm on a hand table, shoulder abducted no more than 90 degrees; lead hand or assistant to hold the fingers."
+    },
+    {
+      "ref": "step.hand.anaesthesia",
+      "emphasis": "Infiltrate along the planned incision and proximally into the forearm subcutaneous tissue, not into the carpal tunnel or the nerve."
+    },
+    {
+      "ref": "step.ortho.tourniquet",
+      "emphasis": "Not needed with WALANT; if used, an upper arm cuff, with the time recorded."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.hand.incision",
+      "emphasis": "In line with the radial border of the ring finger, ulnar to the thenar crease, from Kaplan's cardinal line to just short of the distal wrist crease."
+    },
+    {
+      "ref": "step.ctr.palmar-fascia"
+    },
+    {
+      "ref": "step.hand.nerve-protection",
+      "emphasis": "Look for the median nerve through the first opening in the ligament, and for any transligamentous motor branch."
+    },
+    {
+      "ref": "step.ctr.divide-tcl"
+    },
+    {
+      "ref": "step.ctr.release-check"
+    },
+    {
+      "ref": "step.hand.unexpected-findings",
+      "emphasis": "A mass, florid tenosynovitis or an anomalous muscle in the canal: send tissue and stop if the operation needs to change."
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure",
+      "emphasis": "Interrupted non-absorbable or absorbable sutures per local practice; do not close the palmar fascia."
+    },
+    {
+      "ref": "step.hand.dressing-therapy",
+      "emphasis": "Bulky non-constricting dressing, no splint; finger movement from the start."
+    },
+    {
+      "ref": "step.ortho.nv-check"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.ctr.palmar-fascia": {
+      "id": "step.ctr.palmar-fascia",
+      "kind": "dissection",
+      "title": "Through fat and palmar fascia to the transverse carpal ligament",
+      "why": "The palmar fascia and fat lie over the ligament, with the palmar cutaneous branch radially and the superficial palmar arch distally. Dividing them in the line of the incision exposes the ligament without wandering.",
+      "how": [
+        "Spread the subcutaneous fat longitudinally and retract it with small self-retainers.",
+        "Divide the palmar fascia in line with the incision, and the thin palmaris brevis fibres distally if present.",
+        "Expose the transverse carpal ligament's transverse fibres across the full length of the wound."
+      ],
+      "structuresAtRisk": [
+        "Palmar cutaneous branch of the median nerve",
+        "Superficial palmar arch (distal)",
+        "Ulnar nerve and artery in Guyon's canal (ulnar)"
+      ],
+      "pitfalls": [
+        "Straying ulnarly into Guyon's canal.",
+        "Straying radially onto the thenar muscles and the recurrent motor branch."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ctr.divide-tcl": {
+      "id": "step.ctr.divide-tcl",
+      "kind": "resection",
+      "critical": true,
+      "title": "Dividing the transverse carpal ligament under vision",
+      "why": "The release is the operation. Dividing along the ulnar side of the ligament keeps the blade away from the median nerve and its recurrent motor branch, which is variable and sometimes passes through the ligament.",
+      "how": [
+        "Incise the ligament in its middle third until the nerve is seen beneath, then protect the nerve with a blunt dissector or McDonald's elevator.",
+        "Divide the ligament distally along its ulnar side under direct vision until the distal fat pad is reached; the superficial palmar arch lies just beyond.",
+        "Divide proximally to the distal wrist crease under vision, then release the distal antebrachial fascia with scissors under the skin bridge, lifting the skin to see.",
+        "Watch for a recurrent motor branch passing through the ligament and preserve it."
+      ],
+      "structuresAtRisk": [
+        "Median nerve",
+        "Recurrent motor (thenar) branch",
+        "Superficial palmar arch",
+        "Palmar cutaneous branch"
+      ],
+      "pitfalls": [
+        "Blind proximal release that leaves the antebrachial fascia intact.",
+        "Dividing the recurrent motor branch when it passes through the ligament."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ctr.release-check": {
+      "id": "step.ctr.release-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Checking the release is complete",
+      "why": "Incomplete release, usually proximally or distally, is the commonest cause of persistent symptoms. A check before closing takes seconds.",
+      "how": [
+        "Pass a blunt instrument along the canal proximally and distally: it should meet no residual band.",
+        "Inspect the nerve for constriction, colour change or an anomalous branch; do not perform routine neurolysis or tenosynovectomy.",
+        "Look in the floor of the canal for a mass, ganglion or synovitis that would change the diagnosis."
+      ],
+      "structuresAtRisk": [
+        "Median nerve"
+      ],
+      "pitfalls": [
+        "Closing without checking the proximal end.",
+        "Unnecessary internal neurolysis, which adds scarring without benefit."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

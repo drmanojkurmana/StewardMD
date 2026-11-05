@@ -1,0 +1,175 @@
+{
+  "id": "surgical-tracheostomy",
+  "title": "Open surgical tracheostomy",
+  "subtitle": "The airway is the anaesthetist's until the new tube is confirmed",
+  "system": "ent",
+  "aliases": ["tracheostomy", "open tracheostomy", "surgical trach", "tracheotomy"],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "ntsp-2012", "org": "National Tracheostomy Safety Project (NTSP)", "title": "Multidisciplinary guidelines for the management of tracheostomy and laryngectomy airway emergencies (Anaesthesia 2012)", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/22731935/", "accessed": "2026-11-04" },
+    { "id": "ncepod-2014", "org": "National Confidential Enquiry into Patient Outcome and Death (NCEPOD)", "title": "On the right Trach? A review of the care received by patients who underwent a tracheostomy", "year": 2014, "url": "https://www.ncepod.org.uk/2014tc.html", "accessed": "2026-11-04" },
+    { "id": "das-2015", "org": "Difficult Airway Society (DAS)", "title": "Difficult Airway Society 2015 guidelines for management of unanticipated difficult intubation in adults", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/26556848/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["rass", "pf_ratio"],
+  "chapters": {
+    "indications": [
+      "Prolonged mechanical ventilation, or difficult weaning, to reduce sedation and dead space and allow earlier mobilisation.",
+      "Upper airway obstruction from tumour, trauma, infection, bilateral vocal fold palsy or angioedema that is not otherwise reversible.",
+      "Inability to protect the airway or clear secretions, for example after brain injury or with bulbar palsy.",
+      "Planned as part of major head and neck resection or reconstruction.",
+      "Open surgical rather than percutaneous technique is chosen for difficult anatomy: an impalpable cricoid, a large thyroid, previous neck surgery or radiotherapy, a short fat neck, or an unstable cervical spine."
+    ],
+    "contraindications": [
+      "Relative only, and weighed against the alternative: uncorrected coagulopathy, very high oxygen or PEEP requirements, local sepsis at the site, and an unstable cervical spine.",
+      "A patient with a predictable short ventilation course gains little and carries all the long-term risks."
+    ],
+    "preparation": [
+      "Discuss the indication with the intensive care and anaesthetic teams and record the plan for the airway if the tube is lost.",
+      "Correct coagulation and hold anticoagulants per local protocol. Group and save.",
+      "Choose the tube: size, cuffed, fenestrated or not, adjustable flange if the neck is deep. Have the next size down open and ready.",
+      "Pre-oxygenate on 100 per cent oxygen, then reduce the inspired oxygen to the lowest safe level before the trachea is opened, because diathermy near an open airway in high oxygen causes airway fire.",
+      "Consent covers bleeding, tube displacement, subcutaneous emphysema, pneumothorax, infection, tracheal stenosis, scar, voice change and, rarely, tracheo-innominate fistula. In an incapacitated patient, follow local best-interests process and discuss with the family."
+    ],
+    "positioning": [
+      "Supine, shoulder roll, neck extended if the cervical spine allows. Extension brings the trachea up into the neck by several rings.",
+      "Head ring, arms by the side, the anaesthetist with access to the tube and the circuit throughout.",
+      "Head of the table up slightly to reduce venous congestion."
+    ],
+    "equipment": [
+      "Tracheostomy set with cricoid hook, tracheal dilator, Langenbeck retractors, bipolar and monopolar diathermy.",
+      "The chosen tube with its cuff tested, the obturator, a size smaller, a 10 mL syringe, tube ties and sutures.",
+      "Waveform capnography connected and seen to work before the trachea is opened.",
+      "A fibreoptic scope available to confirm position when anatomy is difficult."
+    ],
+    "anatomy": [
+      "Landmarks from above: thyroid notch, cricothyroid membrane, cricoid cartilage, then the tracheal rings. The cricoid is the only complete ring in the airway and must not be damaged.",
+      "The thyroid isthmus crosses the second to fourth tracheal rings and is divided or retracted to reach the trachea.",
+      "Anterior jugular veins run in the superficial fascia either side of the midline. The strap muscles meet at an avascular midline raphe.",
+      "The brachiocephalic (innominate) artery crosses the trachea low in the neck and may be high-riding, especially in children and with neck extension. A tracheostomy placed too low erodes into it.",
+      "The recurrent laryngeal nerves run in the tracheo-oesophageal grooves, lateral to the dissection if it stays in the midline."
+    ],
+    "criticalSafety": [
+      "The patient is oxygenated through the existing tube until the new tube is in the trachea and confirmed by waveform capnography. Withdraw the endotracheal tube under direct vision, not out of the mouth.",
+      "No monopolar diathermy to open the trachea, and inspired oxygen at the lowest safe level: an airway fire is a never event that is entirely within the team's control.",
+      "Stay in the midline, from skin to trachea. Most bleeding and nerve injury comes from drifting laterally.",
+      "The patient leaves theatre with the bedhead sign completed and spare tubes and emergency equipment at the bedside, as the NTSP guidance describes."
+    ],
+    "structuresAtRisk": [
+      "Cricoid cartilage",
+      "Anterior jugular veins and thyroid isthmus",
+      "Brachiocephalic artery",
+      "Recurrent laryngeal nerves",
+      "Oesophagus, from the posterior tracheal wall",
+      "Pleural apices, especially in children"
+    ],
+    "commonErrors": [
+      "Placing the tracheostomy too low through a low incision, increasing the risk of innominate erosion and making re-insertion harder.",
+      "Opening the trachea before the anaesthetist is ready, the tube cuff is deflated and the circuit is set.",
+      "Pulling the endotracheal tube back too far before the new tube is confirmed, and losing the airway.",
+      "Securing the tube with ties alone and no flange sutures in a deep neck."
+    ],
+    "complications": [
+      "Immediate: haemorrhage, loss of the airway, false passage into the pretracheal space, pneumothorax, airway fire.",
+      "Early: tube displacement or blockage, the two complications that cause most avoidable deaths and that NCEPOD and the NTSP focus on. Also subcutaneous emphysema and stoma infection.",
+      "Late: tracheal stenosis, granulation tissue, tracheo-oesophageal fistula, tracheo-innominate fistula (a sentinel bleed demands urgent assessment), and difficulty decannulating."
+    ],
+    "postop": [
+      "Chest X-ray when clinically indicated, for example after a difficult insertion or a suspected pneumothorax.",
+      "Humidification, regular suction and inner tube checks. A blocked inner tube is a blocked airway.",
+      "Stay sutures, if used, are labelled and left in place until the tract has formed per local policy. Do not plan the first tube change before the tract is mature unless the tube is failing.",
+      "Every member of the ward team knows the NTSP emergency algorithm and where the emergency equipment is."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout", "emphasis": "State the inspired oxygen plan, the diathermy plan and the tube size aloud. The team must know when the trachea will be opened." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.ent.airway-share", "emphasis": "The anaesthetist owns the airway until the new tube is confirmed. Agree the words used to signal each stage." },
+    { "ref": "step.core.positioning", "emphasis": "Neck extension brings the trachea up. Without it the tracheostomy ends up too low." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.trach.incision" },
+    { "ref": "step.trach.isthmus" },
+    { "ref": "step.core.haemostasis", "emphasis": "Haemostasis is complete BEFORE the trachea is opened. Blood running into an open airway is aspirated." },
+    { "ref": "step.trach.window" },
+    { "ref": "step.trach.confirm" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.ent.airway-handover", "emphasis": "Bedhead sign, spare tubes (same size and one smaller), obturator, suction and humidification with the patient before leaving theatre." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.trach.incision": {
+      "id": "step.trach.incision",
+      "kind": "access",
+      "title": "Incision and midline approach through the strap muscles",
+      "why": "The midline raphe between the strap muscles is the avascular corridor to the trachea. Staying in it is what keeps the operation bloodless and away from the nerves.",
+      "how": [
+        "Palpate and mark the cricoid and the sternal notch. Make a horizontal incision about midway between them, or two finger-breadths above the notch.",
+        "Divide the platysma and retract or ligate the anterior jugular veins.",
+        "Find the midline raphe and separate the strap muscles along it, re-palpating the trachea frequently to stay central."
+      ],
+      "structuresAtRisk": ["Anterior jugular veins"],
+      "pitfalls": [
+        "Losing the midline in a deep neck. Palpate the trachea again rather than dissect blindly."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.trach.isthmus": {
+      "id": "step.trach.isthmus",
+      "kind": "dissection",
+      "title": "Divide or retract the thyroid isthmus",
+      "why": "The isthmus lies over the rings where the window will be. Dividing it securely gives a clear view and removes a source of bleeding that would otherwise ooze into the stoma for days.",
+      "how": [
+        "Identify the isthmus and decide whether it can be retracted upwards or must be divided.",
+        "If dividing, create a plane between the isthmus and the trachea, clamp both sides, divide, and suture-ligate each stump.",
+        "Clear the pretracheal fascia over the second to fourth rings and place a cricoid hook to lift and stabilise the trachea."
+      ],
+      "structuresAtRisk": ["Thyroid isthmus", "Cricoid cartilage"],
+      "pitfalls": [
+        "Relying on diathermy alone for the isthmus, which then bleeds after the patient coughs."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.trach.window": {
+      "id": "step.trach.window",
+      "kind": "access",
+      "critical": true,
+      "title": "Open the trachea and insert the tube",
+      "why": "This is the moment the airway changes hands. It must be coordinated aloud: the anaesthetist deflates the cuff and withdraws the tube only on the surgeon's word, and only as far as needed.",
+      "how": [
+        "Confirm with the anaesthetist: inspired oxygen reduced, monopolar diathermy put away, suction ready, new tube cuff tested.",
+        "Place stay sutures either side of the planned opening if that is local practice, and label them.",
+        "Open the trachea at the second to third or third to fourth rings with a scalpel, as a window, slit or inferiorly based flap per local practice. Never involve the first ring or cricoid.",
+        "Ask the anaesthetist to withdraw the endotracheal tube under direct vision until its tip is just above the opening. Do not remove it.",
+        "Insert the tracheostomy tube with its obturator along the curve of the trachea, remove the obturator, insert the inner tube, inflate the cuff and connect the circuit."
+      ],
+      "structuresAtRisk": ["Cricoid cartilage", "Posterior tracheal wall and oesophagus", "Endotracheal tube cuff"],
+      "pitfalls": [
+        "Using monopolar diathermy to cut into the trachea in high oxygen.",
+        "Withdrawing the endotracheal tube completely before the tracheostomy is confirmed.",
+        "Creating a false passage anterior to the trachea in a deep neck."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.trach.confirm": {
+      "id": "step.trach.confirm",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Confirm with capnography, then secure",
+      "why": "A tracheostomy tube can sit in a false passage and look perfect. Sustained waveform capnography is the confirmation; chest movement and a misting tube are not.",
+      "how": [
+        "Confirm a sustained capnography trace and bilateral chest expansion. Pass a suction catheter freely through the tube, or use a fibreoptic scope if in doubt.",
+        "Only then remove the endotracheal tube completely.",
+        "Suture the flange to the skin and apply tube ties, tight enough to admit one finger.",
+        "Complete the bedhead sign before the patient leaves theatre."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Removing the endotracheal tube before capnography is confirmed.",
+        "Ties too loose in a patient who will be turned and moved."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

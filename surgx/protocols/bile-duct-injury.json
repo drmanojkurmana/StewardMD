@@ -1,0 +1,66 @@
+{
+  "id": "bile-duct-injury",
+  "title": "Bile duct injury after cholecystectomy",
+  "subtitle": "Recognise, drain, define, refer to HPB",
+  "category": "perioperative",
+  "specialty": "general",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "wses-bdi-2020", "org": "World Society of Emergency Surgery (WSES)", "title": "2020 WSES guidelines for the detection and management of bile duct injury during cholecystectomy", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/34112197/", "accessed": "2026-11-04" },
+    { "id": "strasberg-1995", "org": "Journal of the American College of Surgeons", "title": "An analysis of the problem of biliary injury during laparoscopic cholecystectomy (Strasberg classification)", "year": 1995, "url": "https://pubmed.ncbi.nlm.nih.gov/8000648/", "accessed": "2026-11-04" },
+    { "id": "sages-cvs", "org": "Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)", "title": "Safe Cholecystectomy Program: Critical View of Safety and the universal culture of safety", "year": 2018, "url": "https://www.sages.org/safe-cholecystectomy-program/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "After cholecystectomy: a patient who is not well enough to go home on day one, or who returns with pain, distension, fever, nausea or jaundice." },
+      { "text": "Bile in the drain, bile on the abdomen at re-look, or a bilious collection on ultrasound." },
+      { "text": "Rising bilirubin and alkaline phosphatase, with or without a leak: possible clipped or transected duct." },
+      { "text": "Intra-operatively: bile in the field from an unexpected source, a second duct seen when only two structures should exist, or a cholangiogram showing a cut-off or no proximal filling." },
+      { "text": "Associated arterial injury: haemobilia, liver ischaemia or a pseudoaneurysm after a duct injury, usually of the right hepatic artery." }
+    ],
+    "do_now": [
+      { "text": "Recognised during the operation without HPB expertise on site: do not attempt repair. Place adequate drains in the subhepatic space, do not clip or ligate further, and arrange transfer to an HPB centre.", "timeCritical": true, "evidenceRef": "wses-bdi-2020" },
+      { "text": "Call for a second senior surgeon to confirm the anatomy before doing anything irreversible.", "timeCritical": true, "evidenceRef": "sages-cvs" },
+      { "text": "Suspected after the operation: resuscitate, start antibiotics for biliary sepsis per local protocol, and image urgently.", "timeCritical": true, "evidenceRef": "wses-bdi-2020" },
+      { "text": "Drain any bile collection percutaneously to control sepsis and the leak; source control comes before anatomical repair.", "timeCritical": true, "evidenceRef": "wses-bdi-2020" }
+    ],
+    "assess": [
+      { "text": "Classify by Strasberg once the anatomy is defined: A is a leak from the cystic duct or a minor duct in the liver bed; B and C are occlusion or transection of an aberrant right hepatic duct; D is a lateral injury to a major duct; E1 to E5 are circumferential injuries graded by level relative to the confluence." },
+      { "text": "Record the operative details for the receiving team: what was clipped and divided, energy use, cholangiogram images, and any bleeding controlled near the porta." },
+      { "text": "Assess for sepsis and organ dysfunction; bile peritonitis often presents with vague symptoms before collapse.", "calcs": ["qsofa", "sofa"] }
+    ],
+    "investigate": [
+      { "text": "Ultrasound or contrast CT for collections and free fluid; CT angiography if a vascular injury is suspected." },
+      { "text": "MRCP to define the biliary anatomy, including the proximal ducts, which ERCP may not show in a complete transection." },
+      { "text": "ERCP for diagnosis and treatment of a leak from the cystic duct stump or a minor duct." },
+      { "text": "Percutaneous transhepatic cholangiography to define and drain the proximal ducts in complete transection or occlusion." },
+      { "text": "LFTs, inflammatory markers and blood cultures; trend the bilirubin." }
+    ],
+    "resuscitate": [
+      { "text": "Strasberg A leak: ERCP with sphincterotomy and/or stent, plus percutaneous drainage of any collection.", "evidenceRef": "wses-bdi-2020" },
+      { "text": "Treat cholangitis with antibiotics and biliary drainage before any reconstructive plan.", "evidenceRef": "wses-bdi-2020" },
+      { "text": "Nutritional support and correction of coagulopathy in a jaundiced or septic patient awaiting repair.", "evidenceRef": "wses-bdi-2020" }
+    ],
+    "definitive": [
+      { "text": "Major injuries (Strasberg E, and many C and D) are repaired by an experienced hepatobiliary surgeon, usually as a Roux-en-Y hepaticojejunostomy.", "evidenceRef": "wses-bdi-2020" },
+      { "text": "Timing of repair is decided by the HPB centre: an early repair when the injury is recognised promptly without sepsis, otherwise a delayed repair after sepsis and leak are controlled.", "evidenceRef": "wses-bdi-2020" },
+      { "text": "Do not attempt a primary duct-to-duct repair over a T-tube for a transection without HPB expertise; it frequently leads to stricture.", "evidenceRef": "wses-bdi-2020" },
+      { "text": "Minor lateral injuries recognised intra-operatively may be repaired over a T-tube by a surgeon with the skill, or drained and referred.", "evidenceRef": "wses-bdi-2020" },
+      { "text": "Prevention remains the definitive treatment: achieve the Critical View of Safety, and bail out by subtotal cholecystectomy when it cannot be achieved.", "evidenceRef": "sages-cvs" }
+    ],
+    "escalate": [
+      { "text": "Telephone the regional HPB unit at the moment of recognition, intra-operatively or afterwards, and transfer with images and the operative note." },
+      { "text": "Interventional radiology for drainage and percutaneous transhepatic access." },
+      { "text": "Advanced endoscopy for ERCP." },
+      { "text": "Disclose the injury to the patient and family promptly and honestly, and document the conversation." }
+    ]
+  },
+  "notes": [
+    "Outcome after bile duct injury depends more on who repairs it, and when, than on the injury itself. The first surgeon's most important decision is to drain and refer rather than repair.",
+    "A patient who is not well on the first morning after a laparoscopic cholecystectomy has a complication until proven otherwise. Wind and constipation are diagnoses of exclusion.",
+    "Most classical injuries come from misidentifying the common duct as the cystic duct. The Critical View of Safety and a willingness to bail out are what prevent them."
+  ],
+  "calcs": ["qsofa", "sofa"]
+}

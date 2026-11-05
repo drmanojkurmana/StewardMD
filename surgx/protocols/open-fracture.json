@@ -1,0 +1,215 @@
+{
+  "id": "open-fracture",
+  "title": "Open fractures",
+  "subtitle": "Antibiotics in the hour, orthoplastic debridement",
+  "category": "ortho_trauma",
+  "specialty": "orthopaedics",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "boast-open",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Open Fractures",
+      "year": 2017,
+      "url": "https://www.boa.ac.uk/resource/boast-4-pdf.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng37",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Fractures (complex): assessment and management (NG37)",
+      "year": 2016,
+      "version": "NG37",
+      "url": "https://www.nice.org.uk/guidance/ng37",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng39",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Major trauma: assessment and initial management (NG39)",
+      "year": 2016,
+      "version": "NG39",
+      "url": "https://www.nice.org.uk/guidance/ng39",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "gustilo-1976",
+      "org": "Gustilo RB, Anderson JT. J Bone Joint Surg Am 58:453",
+      "title": "Prevention of infection in the treatment of one thousand and twenty-five open fractures of long bones",
+      "year": 1976,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/773941/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "gustilo-1984",
+      "org": "Gustilo RB et al. J Trauma 24:742",
+      "title": "Problems in the management of type III (severe) open fractures: a new classification of type III open fractures",
+      "year": 1984,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/6471139/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "atls",
+      "org": "American College of Surgeons Committee on Trauma",
+      "title": "Advanced Trauma Life Support (ATLS) Student Course Manual",
+      "edition": "10th edition",
+      "year": 2018,
+      "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "A pulse that is absent, or does not feel the same as the other side, after the limb is realigned. Treat it as an arterial injury."
+      },
+      {
+        "text": "Pain out of proportion or pain on passive stretch. An open wound does not decompress the compartments."
+      },
+      {
+        "text": "Agricultural, aquatic or sewage contamination. These wounds go to theatre immediately, not on the next list."
+      },
+      {
+        "text": "Bone visible in the wound with stripped periosteum, a segmental fracture, or a crush mechanism: likely to need flap cover, so a plastic surgeon is needed from the start."
+      },
+      {
+        "text": "Haemodynamic instability. The limb is rarely the priority; complete the primary survey first."
+      },
+      {
+        "text": "A small wound over a high-energy fracture. Wound size on arrival underestimates the zone of injury."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Give intravenous prophylactic antibiotics as soon as possible, ideally within 1 hour of injury, using the network open-fracture antibiotic guideline.",
+        "timeCritical": true,
+        "evidenceRef": "boast-open"
+      },
+      {
+        "text": "Handle the wound only to remove gross contamination and to photograph it, then cover with saline-soaked gauze and an occlusive film. No irrigation or 'mini-washout' in the emergency department.",
+        "timeCritical": true,
+        "evidenceRef": "nice-ng37"
+      },
+      {
+        "text": "Realign and splint the limb. Examine and document vascular and neurological status before and after every reduction or splint.",
+        "timeCritical": true,
+        "evidenceRef": "boast-open"
+      },
+      {
+        "text": "Control external haemorrhage with direct pressure, and use a tourniquet only if direct pressure fails to control life-threatening bleeding.",
+        "timeCritical": true,
+        "evidenceRef": "nice-ng39"
+      },
+      {
+        "text": "Check tetanus immunisation status and give vaccine or immunoglobulin according to the national schedule.",
+        "evidenceRef": "atls"
+      },
+      {
+        "text": "Refer at consultant level to orthopaedics and plastic surgery together. Long-bone, hindfoot and midfoot open fractures belong in a centre that can provide orthoplastic care.",
+        "evidenceRef": "boast-open"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Primary survey first. A dramatic open fracture is a classic distracting injury."
+      },
+      {
+        "text": "Record wound site, size, contamination and whether bone is exposed. Take photographs at first exposure so the wound is not repeatedly uncovered."
+      },
+      {
+        "text": "Gustilo-Anderson grading for orientation only: type I a clean wound under 1 cm; type II over 1 cm without extensive soft-tissue damage; type III extensive soft-tissue injury or high energy. IIIA has adequate soft-tissue cover, IIIB needs a flap because of periosteal stripping and bone exposure, IIIC has an arterial injury needing repair."
+      },
+      {
+        "text": "The grade is finalised in theatre after debridement, not in the emergency department."
+      },
+      {
+        "text": "Pulses, capillary return and named nerve motor and sensory function, with times. Repeat after every manoeuvre.",
+        "calcs": [
+          "abi"
+        ]
+      },
+      {
+        "text": "Examine the compartments of the injured segment and the joints above and below."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Radiographs in two planes including the joint above and below."
+      },
+      {
+        "text": "Trauma CT where indicated, starting with a head-to-toe scanogram; extremity CT angiography per local policy if a pulse deficit persists after realignment."
+      },
+      {
+        "text": "Group and save, baseline bloods and coagulation. Store wound photographs in the clinical record."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Haemorrhagic shock is managed as major trauma: blood products, warming and early tranexamic acid when there is active or suspected active bleeding.",
+        "evidenceRef": "nice-ng39"
+      },
+      {
+        "text": "Splintage is analgesia. Titrate intravenous analgesia and reassess neurovascular status after it takes effect.",
+        "evidenceRef": "boast-open"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Debride immediately for highly contaminated wounds or vascular compromise; within 12 hours of injury for other high-energy open fractures; within 24 hours for all other open fractures.",
+        "timeCritical": true,
+        "evidenceRef": "boast-open"
+      },
+      {
+        "text": "Debridement is planned and performed concurrently by consultants in orthopaedic and plastic surgery (the orthoplastic approach).",
+        "evidenceRef": "nice-ng37"
+      },
+      {
+        "text": "Extend wounds along fasciotomy lines to preserve the perforators that supply local flaps.",
+        "evidenceRef": "boast-open"
+      },
+      {
+        "text": "After debridement, re-prepare and re-drape with fresh instruments before any fixation at the same sitting: from here it is clean surgery.",
+        "evidenceRef": "boast-open"
+      },
+      {
+        "text": "Use definitive internal fixation only when definitive soft-tissue cover can follow immediately; otherwise stabilise temporarily, for example with a spanning external fixator.",
+        "evidenceRef": "boast-open"
+      },
+      {
+        "text": "Achieve definitive soft-tissue closure or cover within 72 hours of injury if it cannot be done at debridement. In the interval, use a temporary dressing that prevents desiccation and limits dressing changes.",
+        "evidenceRef": "nice-ng37"
+      },
+      {
+        "text": "Base salvage versus amputation on multidisciplinary assessment, not on an injury severity score. When indicated, perform delayed primary amputation within 72 hours of injury.",
+        "evidenceRef": "nice-ng37"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "No orthoplastic service on site: arrange consultant-to-consultant transfer rather than a local debridement by a single specialty."
+      },
+      {
+        "text": "A dysvascular limb follows the arterial injury pathway: see the pulseless limb protocol."
+      },
+      {
+        "text": "Signs of compartment syndrome go to theatre for fasciotomy without waiting for the debridement slot."
+      }
+    ]
+  },
+  "notes": [
+    "Early antibiotics have the clearest link to lower infection. The debridement clocks exist so that the excision is done well, by the right consultants, rather than at night by whoever is free.",
+    "Hand, wrist, forefoot and digit open fractures can be managed locally on the same principles.",
+    "Low-pressure saline irrigation is adequate; the FLOW trial found no advantage for high pressure and more reoperations with soap."
+  ],
+  "calcs": [
+    "abi",
+    "shock_index",
+    "gcs"
+  ]
+}

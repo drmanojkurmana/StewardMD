@@ -1,0 +1,62 @@
+{
+  "id": "ruptured-ectopic",
+  "title": "Ruptured ectopic pregnancy",
+  "subtitle": "Positive test, pain, collapse: theatre",
+  "category": "obgyn_emergency",
+  "specialty": "obgyn",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "nice-ng126", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Ectopic pregnancy and miscarriage: diagnosis and initial management (NG126)", "year": 2019, "version": "NG126, updated 2023", "url": "https://www.nice.org.uk/guidance/ng126", "accessed": "2026-11-04" },
+    { "id": "rcog-gtg21", "org": "Royal College of Obstetricians and Gynaecologists (RCOG) and Association of Early Pregnancy Units", "title": "Diagnosis and management of ectopic pregnancy (Green-top Guideline No. 21)", "year": 2016, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/diagnosis-and-management-of-ectopic-pregnancy-green-top-guideline-no-21/", "accessed": "2026-11-04" },
+    { "id": "nice-ng24", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Blood transfusion (NG24)", "year": 2015, "version": "NG24", "url": "https://www.nice.org.uk/guidance/ng24", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Any woman of reproductive age with abdominal pain and collapse, syncope or shock: ruptured ectopic until proven otherwise." },
+      { "text": "Shoulder-tip pain, pain on defaecation, or peritonism in early pregnancy: haemoperitoneum." },
+      { "text": "A positive pregnancy test with no intrauterine pregnancy seen and free fluid in the pelvis or Morison pouch." },
+      { "text": "Relative bradycardia can occur with haemoperitoneum. A normal heart rate does not exclude major bleeding." },
+      { "text": "Atypical presentations: diarrhoea, dizziness and vague pain. Ectopic pregnancy is a recognised cause of maternal death when it is dismissed as gastroenteritis." }
+    ],
+    "do_now": [
+      { "text": "Urine or serum pregnancy test in every woman of reproductive age with abdominal pain or collapse.", "timeCritical": true, "evidenceRef": "nice-ng126" },
+      { "text": "Shocked woman with a positive test: two large-bore cannulae, crossmatch, activate the major haemorrhage protocol, and call the gynaecologist and anaesthetist to go to theatre.", "timeCritical": true, "evidenceRef": "rcog-gtg21" },
+      { "text": "Do not delay theatre for a formal ultrasound in a haemodynamically unstable woman with a positive test and suspected rupture.", "timeCritical": true, "evidenceRef": "rcog-gtg21" },
+      { "text": "Transfuse red cells and components according to the major haemorrhage protocol; avoid large crystalloid volumes in active bleeding.", "timeCritical": true, "evidenceRef": "nice-ng24" }
+    ],
+    "assess": [
+      { "text": "Last menstrual period, contraception (an intrauterine device or progestogen-only method does not exclude ectopic), previous ectopic, tubal surgery, pelvic infection, assisted conception." },
+      { "text": "Haemodynamic status trended over time, abdominal and gentle pelvic examination.", "calcs": ["shock_index"] },
+      { "text": "Rhesus status: every woman having surgical management needs it known." }
+    ],
+    "investigate": [
+      { "text": "Transvaginal ultrasound in the stable woman: an adnexal mass separate from the ovary, with or without free fluid, and an empty uterus." },
+      { "text": "Serum hCG, full blood count, group and crossmatch, coagulation." },
+      { "text": "Bedside abdominal ultrasound for free fluid in the unstable patient, without it delaying theatre." },
+      { "text": "Pregnancy of unknown location in a stable woman: serial hCG at 48 hours and specialist early pregnancy unit follow-up." }
+    ],
+    "resuscitate": [
+      { "text": "Restore circulation with blood; permissive approach to blood pressure until bleeding is controlled in theatre.", "evidenceRef": "nice-ng24" },
+      { "text": "Anti-D immunoglobulin for rhesus-negative women having surgical removal of an ectopic pregnancy, per NICE NG126.", "evidenceRef": "nice-ng126" }
+    ],
+    "definitive": [
+      { "text": "Surgery for ruptured ectopic, significant pain, an adnexal mass of 35 mm or more, a visible fetal heartbeat, or an hCG of 5000 IU/L or more, per NICE NG126.", "evidenceRef": "nice-ng126" },
+      { "text": "Laparoscopy is preferred to laparotomy when the surgeon is experienced; laparotomy is appropriate in the shocked woman when it is the fastest route to control.", "evidenceRef": "rcog-gtg21" },
+      { "text": "Salpingectomy when the contralateral tube is healthy. Consider salpingotomy when there are risk factors for infertility such as contralateral tubal damage, with follow-up hCG because of the risk of persistent trophoblast.", "evidenceRef": "nice-ng126" },
+      { "text": "Medical management with methotrexate is for the stable woman with an unruptured ectopic who meets the NG126 criteria. It is never an option for rupture.", "evidenceRef": "nice-ng126" }
+    ],
+    "escalate": [
+      { "text": "Senior gynaecologist and anaesthetist for every unstable woman, at the same time as theatre is called." },
+      { "text": "General surgeon on call who finds a haemoperitoneum in early pregnancy: control bleeding and call gynaecology; do not leave the woman bleeding while waiting." },
+      { "text": "Interstitial, cervical, caesarean scar and abdominal pregnancies need specialist management and may need interventional radiology." }
+    ]
+  },
+  "notes": [
+    "Every woman of reproductive age with abdominal pain gets a pregnancy test. Not doing one is the error, not the result.",
+    "The shocked woman with a positive test is a theatre case. Her ultrasound is done by the surgeon through the laparoscope.",
+    "After surgery, ask about the experience. Pregnancy loss is a bereavement, and clinicians often forget to acknowledge it."
+  ],
+  "calcs": ["shock_index", "edd"]
+}

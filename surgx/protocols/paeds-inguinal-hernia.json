@@ -1,0 +1,60 @@
+{
+  "id": "paeds-inguinal-hernia",
+  "title": "Inguinal hernia in a child",
+  "subtitle": "The incarcerated hernia: reduce, wait, repair",
+  "category": "paeds_surgery",
+  "specialty": "paediatric",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "aap-2023", "org": "American Academy of Pediatrics (AAP)", "title": "Assessment and management of inguinal hernias in children (Clinical Report, Committee on Fetus and Newborn, Sections on Surgery and Urology, Pediatrics 2023)", "year": 2023, "url": "https://publications.aap.org/pediatrics", "accessed": "2026-11-04" },
+    { "id": "aap-2012", "org": "American Academy of Pediatrics (AAP) Section on Surgery", "title": "Assessment and management of inguinal hernia in infants (Pediatrics 2012;130(4):768-773)", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/23008462/", "accessed": "2026-11-04" },
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: inguinal hernias and hydroceles", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A tense, tender, irreducible groin lump with a crying or vomiting child: incarcerated hernia." },
+      { "text": "Overlying redness, oedema, bilious vomiting, blood in the stool or systemic upset: suggests strangulated bowel." },
+      { "text": "A firm, discoloured or tender testis on the same side. Incarceration can compress the testicular vessels." },
+      { "text": "An irreducible groin mass in a girl: often an ovary, which can tort and infarct." },
+      { "text": "Ex-premature infants: higher incarceration risk and a real risk of post-anaesthetic apnoea." }
+    ],
+    "do_now": [
+      { "text": "Incarcerated hernia without signs of strangulation: analgesia, positioning and sedation per local protocol, then an experienced clinician attempts gentle sustained manual reduction (taxis).", "timeCritical": true, "evidenceRef": "holcomb" },
+      { "text": "Peritonitis, signs of strangulation, or failed reduction: nil by mouth, intravenous access, fluids, and emergency surgery.", "timeCritical": true, "evidenceRef": "holcomb" },
+      { "text": "Call the paediatric surgeon early. Repeated forceful attempts by several juniors damage bowel and testis.", "timeCritical": true, "evidenceRef": "holcomb" }
+    ],
+    "assess": [
+      { "text": "History of an intermittent groin or scrotal swelling, worse with crying, and gestation at birth." },
+      { "text": "Examine both groins and both testes. Distinguish from hydrocele (transilluminates, can get above it), undescended testis, torsion and lymphadenopathy.", "calcs": ["paeds_weight"] },
+      { "text": "After reduction: observe for recurrence, abdominal signs and the passage of stool." }
+    ],
+    "investigate": [
+      { "text": "The diagnosis is clinical. Ultrasound helps when the lump is uncertain, the gonad is not palpable, or a hydrocele cannot be distinguished." },
+      { "text": "Plain abdominal film only if obstruction or perforation is suspected." },
+      { "text": "Electrolytes and blood gas in a vomiting, dehydrated or systemically unwell child." }
+    ],
+    "resuscitate": [
+      { "text": "Correct dehydration and electrolytes with isotonic fluids before an emergency operation in an obstructed child.", "evidenceRef": "holcomb" },
+      { "text": "Nasogastric decompression in a child with bowel obstruction.", "evidenceRef": "holcomb" }
+    ],
+    "definitive": [
+      { "text": "After successful reduction, repair once the oedema has settled, usually within days and in the same admission or soon after. Recurrence of incarceration is common if repair is long delayed.", "evidenceRef": "holcomb" },
+      { "text": "Reducible hernia: elective herniotomy without undue delay. The timing in preterm infants (before or after discharge from the neonatal unit) remains debated; decide with neonatology and anaesthesia.", "evidenceRef": "aap-2023" },
+      { "text": "Open herniotomy (high ligation of the patent processus vaginalis) and laparoscopic repair are both effective in experienced hands; repair should be done by a paediatric surgical specialist or a high-volume surgeon.", "evidenceRef": "aap-2023" },
+      { "text": "Emergency operation for irreducible or strangulated hernia: reduce and assess the bowel and testis; resect non-viable bowel.", "evidenceRef": "holcomb" }
+    ],
+    "escalate": [
+      { "text": "Ex-premature infants below the local post-menstrual age threshold need overnight apnoea monitoring after a general anaesthetic." },
+      { "text": "Transfer to a paediatric surgical unit if local anaesthetic or surgical support for infants is not available." },
+      { "text": "Contralateral exploration is a surgeon-level decision with limited evidence; discuss with the parents rather than doing it routinely." }
+    ]
+  },
+  "notes": [
+    "Paediatric inguinal hernia is a patent processus vaginalis. The operation is a herniotomy: no mesh and no posterior wall repair.",
+    "The testis is the overlooked casualty of an incarcerated hernia. Document its position and condition before and after reduction.",
+    "Reduction is achieved by gentle sustained pressure that funnels the contents back through the ring, not by squeezing harder."
+  ],
+  "calcs": ["paeds_weight"]
+}

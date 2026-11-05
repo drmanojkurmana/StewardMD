@@ -1,0 +1,163 @@
+{
+  "id": "uro-turp",
+  "title": "Transurethral resection of the prostate (TURP)",
+  "subtitle": "Resect between the bladder neck and the verumontanum, and watch the fluid",
+  "system": "urology",
+  "aliases": ["TURP", "TUR-P", "bipolar TURP", "prostate resection"],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-luts", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Management of Non-neurogenic Male Lower Urinary Tract Symptoms", "year": 2024, "url": "https://uroweb.org/guidelines/management-of-non-neurogenic-male-luts", "accessed": "2026-11-04" },
+    { "id": "nice-cg97", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Lower urinary tract symptoms in men: management (CG97)", "year": 2010, "url": "https://www.nice.org.uk/guidance/cg97", "accessed": "2026-11-04" },
+    { "id": "hahn-2006", "org": "British Journal of Anaesthesia (Hahn RG)", "title": "Fluid absorption in endoscopic surgery", "year": 2006, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Hahn+Fluid+absorption+in+endoscopic+surgery+British+Journal+of+Anaesthesia", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["ipss", "corr_na", "osm", "rcri", "caprini", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Moderate to severe lower urinary tract symptoms from benign prostatic obstruction that are bothersome despite, or unsuitable for, medical therapy.",
+      "Absolute indications: refractory urinary retention, recurrent infection, bladder stones, recurrent haematuria from the prostate, or upper tract dilatation and renal impairment from obstruction.",
+      "Prostate volume in the mid-range is the classic TURP territory; very large glands may be better served by enucleation or open or robotic simple prostatectomy."
+    ],
+    "contraindications": [
+      "Active untreated urinary infection.",
+      "Uncorrected coagulopathy or anticoagulation that cannot be safely managed peri-operatively.",
+      "Detrusor underactivity without obstruction, where resection will not restore voiding; establish the diagnosis with urodynamics when in doubt.",
+      "Suspected prostate cancer that has not been staged and discussed."
+    ],
+    "preparation": [
+      "Symptom score, flow rate and post-void residual; urodynamics where the diagnosis is uncertain (younger men, neurological disease, low flow with low residual, previous failed surgery).",
+      "Sterile urine before surgery; treat a positive culture, and give culture-directed prophylaxis in catheterised men.",
+      "Plan anticoagulant and antiplatelet management with the prescribing team.",
+      "Consent must cover retrograde ejaculation, bleeding and transfusion, infection, TUR syndrome, urethral stricture, bladder neck contracture, incontinence, erectile dysfunction, failure to void, and the need for further treatment.",
+      "Prostate-specific antigen and cancer assessment when the result would change management."
+    ],
+    "positioning": [
+      "Lithotomy with the hips flexed and abducted, the buttocks just over the end of the table, and both legs supported in padded stirrups.",
+      "Spinal anaesthesia is commonly used and lets the anaesthetist detect early confusion from fluid absorption."
+    ],
+    "equipment": [
+      "Continuous-flow resectoscope with 30 degree lens; monopolar (glycine) or bipolar (saline) generator and loops.",
+      "Urethral sounds or Otis urethrotome; Ellik evacuator.",
+      "Three-way catheter and irrigation set; a fluid-balance chart for the irrigant.",
+      "Point-of-care sodium measurement available in theatre for monopolar cases."
+    ],
+    "anatomy": [
+      "The verumontanum marks the distal limit of resection. The external urethral sphincter lies just distal to it, and resection beyond it causes incontinence.",
+      "The ureteric orifices lie close to the bladder neck, especially with a large median lobe that hides them.",
+      "The prostatic capsule is seen as a fibrous layer of circular fibres; fat or large venous sinuses beyond it mean the capsule has been breached.",
+      "The bladder neck is at roughly the 6 o'clock position on the floor, with lateral lobes at 3 and 9 and the median lobe protruding into the bladder."
+    ],
+    "criticalSafety": [
+      "Identify the verumontanum before the first cut and recheck it repeatedly. Never resect distal to it.",
+      "Identify both ureteric orifices before resecting a median lobe.",
+      "Monopolar resection: watch the fluid. Opened venous sinuses and capsular perforation increase absorption; finish quickly and tell the anaesthetist if either is seen.",
+      "Confusion, restlessness, visual disturbance, nausea, hypertension then hypotension, or bradycardia during or after a monopolar TURP is TUR syndrome until a sodium says otherwise."
+    ],
+    "structuresAtRisk": [
+      "External urethral sphincter",
+      "Ureteric orifices",
+      "Prostatic capsule and periprostatic venous plexus",
+      "Trigone (undermining at the bladder neck)",
+      "Rectum (deep posterior resection at the apex)"
+    ],
+    "commonErrors": [
+      "Losing orientation and resecting distal to the verumontanum.",
+      "Undermining the trigone at the bladder neck, so the catheter tip passes under it.",
+      "Over-deep resection of the bladder neck in a small gland, leading to bladder neck contracture.",
+      "Chasing a bleeding sinus at high pressure while absorbing irrigant.",
+      "Continuing a long monopolar resection after a capsular perforation."
+    ],
+    "complications": [
+      "Bleeding, clot retention and transfusion, early or secondary.",
+      "TUR syndrome: dilutional hyponatraemia and fluid overload from irrigant absorption with monopolar resection; much less frequent with bipolar saline resection.",
+      "Capsular perforation with extravasation; bladder perforation.",
+      "Retrograde ejaculation (common), urethral stricture, bladder neck contracture, incontinence, erectile dysfunction.",
+      "Urinary infection and sepsis; failure to void after catheter removal.",
+      "Incidental prostate cancer on histology."
+    ],
+    "postop": [
+      "Continuous irrigation until the effluent is clear, with strict recording of irrigant in and out.",
+      "Check serum sodium after any monopolar TURP with prolonged resection, perforation or new symptoms.",
+      "Treat TUR syndrome by stopping absorption, restricting fluid, a loop diuretic for overload, and hypertonic saline for severe symptomatic hyponatraemia per local protocol in a monitored setting; avoid over-rapid correction.",
+      "Trial without catheter usually within a few days; warn about haematuria and secondary bleeding around the second week.",
+      "Review histology and discuss any incidental cancer at the multidisciplinary meeting."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout", "emphasis": "State the energy platform and the irrigation fluid aloud at the time-out. The fluid is a safety decision, not a nursing detail." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Sterile urine before resection; culture-directed prophylaxis for catheterised men." },
+    { "ref": "step.core.positioning", "emphasis": "Lithotomy with padded stirrups and both legs raised and lowered together. Check the common peroneal nerve at the lateral knee." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.uro.cystoscopy", "emphasis": "Map the verumontanum, the lobes, the bladder neck and both ureteric orifices before any resection." },
+    { "ref": "step.uro.resectoscope" },
+    { "ref": "step.turp.median-lobe" },
+    { "ref": "step.turp.lateral-lobes" },
+    { "ref": "step.turp.apex" },
+    { "ref": "step.turp.fluid-watch" },
+    { "ref": "step.uro.chip-evacuation", "emphasis": "Weigh the resected tissue; the weight goes in the operative note." },
+    { "ref": "step.core.haemostasis", "emphasis": "Coagulate arterial bleeders at low irrigation pressure. Venous sinus ooze is best managed by finishing the resection and catheter traction, not by prolonged diathermy." },
+    { "ref": "step.uro.perforation-check" },
+    { "ref": "step.uro.three-way-catheter" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.turp.median-lobe": {
+      "id": "step.turp.median-lobe", "kind": "resection", "critical": true,
+      "title": "Bladder neck and median lobe",
+      "why": "A median lobe hides the ureteric orifices and the trigone. Resecting it first opens the channel for the irrigant and improves the view for the rest of the operation.",
+      "how": [
+        "Identify both ureteric orifices before starting, then resect the median lobe in controlled strokes from the bladder neck towards the verumontanum.",
+        "Develop a channel at the 6 o'clock position down to the circular fibres of the bladder neck, but no deeper.",
+        "Keep the loop moving in a controlled arc; withdraw the whole resectoscope rather than the loop alone for long strokes."
+      ],
+      "structuresAtRisk": ["Ureteric orifices", "Trigone"],
+      "pitfalls": ["Undermining the trigone by resecting too deep at the bladder neck.", "Resecting a ureteric orifice hidden by a large median lobe."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.turp.lateral-lobes": {
+      "id": "step.turp.lateral-lobes", "kind": "resection",
+      "title": "Lateral lobes",
+      "why": "Systematic resection of each lateral lobe down to the capsule removes the obstructing tissue while keeping orientation and haemostasis manageable.",
+      "how": [
+        "Resect each lateral lobe from the bladder neck towards the apex, working from 12 o'clock downwards or from the floor upwards per the surgeon's method, and stay consistent.",
+        "Stop at the capsule: circular white fibres. Fat or large open sinuses mean you are through it.",
+        "Coagulate arterial bleeders as you go to keep the field clear."
+      ],
+      "structuresAtRisk": ["Prostatic capsule", "Periprostatic venous plexus"],
+      "pitfalls": ["Chasing tissue into the capsule on one side while the other lobe is still obstructing.", "Opening large venous sinuses early in a monopolar case."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.turp.apex": {
+      "id": "step.turp.apex", "kind": "resection", "critical": true,
+      "title": "Apical resection, staying proximal to the verumontanum",
+      "why": "The apex is where continence is won or lost. The external sphincter sits just distal to the verumontanum, and most post-TURP stress incontinence follows apical over-resection.",
+      "how": [
+        "Re-identify the verumontanum and keep it in view while resecting apical tissue on each side.",
+        "Use short, shallow strokes at the apex and never start a stroke distal to the verumontanum.",
+        "Withdraw the scope into the bulbar urethra and look back to confirm an open channel and an intact sphincter."
+      ],
+      "structuresAtRisk": ["External urethral sphincter", "Rectum"],
+      "pitfalls": ["Resecting the verumontanum itself, losing the landmark.", "A deep posterior apical cut towards the rectum."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.turp.fluid-watch": {
+      "id": "step.turp.fluid-watch", "kind": "checkpoint", "critical": true,
+      "title": "TUR syndrome watch: time, pressure, sinuses and sodium",
+      "why": "Irrigant absorption is silent until it is dangerous. Resection time, irrigation pressure, open venous sinuses and capsular perforation all increase it, and the awake spinal patient is the best monitor.",
+      "how": [
+        "Tell the anaesthetist the start time of resection and update them on sinuses or perforation.",
+        "Keep the irrigation pressure as low as gives a clear view; empty the bladder regularly with an intermittent-flow scope.",
+        "On any symptom or sign (confusion, nausea, visual disturbance, hypertension then hypotension, bradycardia), stop resecting, achieve haemostasis, finish, and check sodium and osmolality.",
+        "Prefer bipolar saline resection for large glands or long cases where it is available."
+      ],
+      "structuresAtRisk": ["Periprostatic venous plexus"],
+      "pitfalls": ["Assuming the restless patient needs more sedation rather than a sodium.", "Giving intravenous fluid for the subsequent hypotension in a patient who is already overloaded."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

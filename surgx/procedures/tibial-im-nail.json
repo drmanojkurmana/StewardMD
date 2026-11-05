@@ -1,0 +1,250 @@
+{
+  "id": "tibial-im-nail",
+  "title": "Intramedullary nailing of the tibia",
+  "subtitle": "Reamed locked nailing of a tibial shaft fracture",
+  "system": "musculoskeletal",
+  "aliases": [
+    "tibial nail",
+    "IM nail tibia",
+    "intramedullary nailing"
+  ],
+  "estMinutes": 120,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "sprint-2008",
+      "org": "SPRINT Investigators. J Bone Joint Surg Am 90:2567",
+      "title": "Randomized trial of reamed and unreamed intramedullary nailing of tibial shaft fractures",
+      "year": 2008,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/19047701/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng37",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Fractures (complex): assessment and management (NG37)",
+      "year": 2016,
+      "version": "NG37",
+      "url": "https://www.nice.org.uk/guidance/ng37",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "boast-acs",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Diagnosis and Management of Compartment Syndrome of the Extremities",
+      "year": 2025,
+      "version": "updated July 2025",
+      "url": "https://www.boa.ac.uk/resource/boast-10-pdf.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "boast-open",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Open Fractures",
+      "year": 2017,
+      "url": "https://www.boa.ac.uk/resource/boast-4-pdf.html",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "caprini"
+  ],
+  "chapters": {
+    "indications": [
+      "Displaced or unstable tibial shaft fractures in skeletally mature patients.",
+      "Open tibial shaft fractures once debridement is complete and definitive soft-tissue cover can follow immediately."
+    ],
+    "contraindications": [
+      "Open growth plates.",
+      "Active infection in the canal or at the entry site.",
+      "An open fracture in which definitive soft-tissue cover cannot be achieved at the same time: stabilise temporarily instead.",
+      "Very proximal or very distal fractures where a nail cannot control alignment without additional techniques."
+    ],
+    "preparation": [
+      "Full-length tibial and fibular radiographs including knee and ankle; CT if there is intra-articular extension.",
+      "Neurovascular and compartment assessment documented before anaesthesia.",
+      "Consent includes compartment syndrome, malalignment, anterior knee pain, infection, non-union and further surgery."
+    ],
+    "positioning": [
+      "Supine on a radiolucent table.",
+      "Knee flexed over a radiolucent support for an infrapatellar entry, or semi-extended for a suprapatellar entry.",
+      "C-arm from the opposite side so anteroposterior and lateral views of the whole tibia are possible."
+    ],
+    "equipment": [
+      "Tibial nail system with targeting jig, ball-tipped guidewire, flexible reamers and locking screws.",
+      "Reduction aids: pointed reduction clamps, a femoral distractor or blocking screws.",
+      "Image intensifier."
+    ],
+    "anatomy": [
+      "The entry point lies just medial to the lateral tibial spine on the AP view and at the anterior edge of the plateau on the lateral view.",
+      "The tibial canal is triangular; the anteromedial surface is subcutaneous along its length.",
+      "The anterior tibial artery and deep peroneal nerve run on the interosseous membrane; the saphenous nerve and vein lie medially at the ankle."
+    ],
+    "criticalSafety": [
+      "Correct entry point on both views is the single biggest determinant of alignment in proximal fractures.",
+      "Keep the guidewire centred in the distal fragment on both views before reaming.",
+      "Do not ream with a tourniquet inflated: the bone cannot dissipate the heat.",
+      "Maintain awareness of compartment syndrome for 48 hours after fixation."
+    ],
+    "structuresAtRisk": [
+      "Patellar tendon and articular cartilage at the entry site",
+      "Anterior tibial artery and deep peroneal nerve with locking screws",
+      "Saphenous nerve and vein at the distal medial screws",
+      "Superficial peroneal nerve near the distal lateral screws"
+    ],
+    "commonErrors": [
+      "A medial entry point in a proximal third fracture, producing valgus and procurvatum.",
+      "Distraction at the fracture after locking, a known cause of non-union.",
+      "Malrotation, unnoticed because it is not visible on plain images."
+    ],
+    "complications": [
+      "Compartment syndrome.",
+      "Anterior knee pain, particularly after infrapatellar entry.",
+      "Malunion, delayed union and non-union.",
+      "Deep infection, more frequent after open fractures.",
+      "Thermal necrosis from reaming, and fat embolism."
+    ],
+    "postop": [
+      "Hourly neurovascular and compartment observations initially, with explicit monitoring if a regional block was used.",
+      "Weight-bearing as the construct and fracture pattern allow, usually as tolerated for a stable locked nail.",
+      "Thromboprophylaxis per local protocol; wound review; radiographs at follow-up to track union."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Knee flexion for infrapatellar entry, or semi-extension for suprapatellar. Check both full-length views before draping."
+    },
+    {
+      "ref": "step.ortho.image-intensifier"
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.tibnail.entry"
+    },
+    {
+      "ref": "step.ortho.reduction-check",
+      "emphasis": "Restore length, alignment and rotation before the guidewire crosses the fracture. Compare rotation with the other leg."
+    },
+    {
+      "ref": "step.ortho.guidewire",
+      "emphasis": "Ball-tipped guidewire centred in the distal fragment on both views, ending just above the ankle physeal scar."
+    },
+    {
+      "ref": "step.tibnail.ream"
+    },
+    {
+      "ref": "step.ortho.implant-check"
+    },
+    {
+      "ref": "step.tibnail.insert-lock"
+    },
+    {
+      "ref": "step.ortho.final-imaging"
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure"
+    },
+    {
+      "ref": "step.ortho.nv-check",
+      "emphasis": "Compartments of the leg checked and documented now, and the 48-hour observation plan handed over."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.tibnail.entry": {
+      "id": "step.tibnail.entry",
+      "kind": "access",
+      "critical": true,
+      "title": "Entry point",
+      "why": "The nail follows the entry point. An entry that is medial or too distal drives a proximal fracture into valgus and procurvatum and no amount of reaming corrects it.",
+      "how": [
+        "Approach through a patellar tendon split, medial parapatellar incision, or a suprapatellar portal with a protective sleeve.",
+        "Place the awl or entry wire just medial to the lateral tibial spine on the AP view and at the anterior edge of the plateau on the lateral view.",
+        "Confirm on both views before opening the canal."
+      ],
+      "structuresAtRisk": [
+        "Patellar tendon",
+        "Articular cartilage of the knee",
+        "Intermeniscal ligament"
+      ],
+      "pitfalls": [
+        "Medial entry in a proximal fracture.",
+        "Entry too posterior, risking the posterior cortex."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tibnail.ream": {
+      "id": "step.tibnail.ream",
+      "kind": "reconstruction",
+      "title": "Measuring and reaming",
+      "why": "Reaming allows a larger, stiffer nail. SPRINT suggested a possible benefit of reamed nailing in closed fractures, with no difference shown in open fractures.",
+      "how": [
+        "Measure nail length from the guidewire.",
+        "Ream in small increments with sharp reamers, advancing slowly, with the fracture held reduced.",
+        "Ream slightly beyond the planned nail diameter, per the system technique."
+      ],
+      "structuresAtRisk": [
+        "Endosteal blood supply (thermal injury)",
+        "Posterior cortex"
+      ],
+      "pitfalls": [
+        "Reaming with the tourniquet inflated.",
+        "Pushing blunt reamers fast and generating heat."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tibnail.insert-lock": {
+      "id": "step.tibnail.insert-lock",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Nail insertion and locking",
+      "why": "Locking controls length and rotation; inserting the nail without losing reduction is what makes the locking worth doing.",
+      "how": [
+        "Insert the nail by hand through the jig while the reduction is held, without forceful hammering.",
+        "Seat the nail so it does not protrude above the entry point.",
+        "Lock distally freehand using perfect-circle technique, then proximally through the jig; backslap to close any distraction before the second set of screws."
+      ],
+      "structuresAtRisk": [
+        "Anterior tibial artery and deep peroneal nerve",
+        "Saphenous nerve and vein",
+        "Superficial peroneal nerve"
+      ],
+      "pitfalls": [
+        "Locking in distraction.",
+        "Prominent nail at the knee causing pain."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

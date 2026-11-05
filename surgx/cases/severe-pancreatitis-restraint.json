@@ -1,0 +1,85 @@
+{
+  "id": "severe-pancreatitis-restraint",
+  "title": "Severe acute pancreatitis, day 2 to day 14",
+  "subtitle": "When not to operate",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "acute-pancreatitis",
+  "sources": [
+    { "id": "iap-apa-2013", "org": "International Association of Pancreatology (IAP) and American Pancreatic Association (APA)", "title": "IAP/APA evidence-based guidelines for the management of acute pancreatitis", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/24054878/", "accessed": "2026-11-04" },
+    { "id": "atlanta-2012", "org": "Acute Pancreatitis Classification Working Group", "title": "Classification of acute pancreatitis 2012: revision of the Atlanta classification", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/23100216/", "accessed": "2026-11-04" },
+    { "id": "panter-2010", "org": "Dutch Pancreatitis Study Group (New England Journal of Medicine)", "title": "A step-up approach or open necrosectomy for necrotizing pancreatitis (PANTER trial)", "year": 2010, "url": "https://pubmed.ncbi.nlm.nih.gov/20410514/", "accessed": "2026-11-04" },
+    { "id": "waterfall-2022", "org": "ERICA Consortium (New England Journal of Medicine)", "title": "Aggressive or moderate fluid resuscitation in acute pancreatitis (WATERFALL trial)", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/36103415/", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 46-year-old man with gallstones was admitted yesterday with epigastric pain radiating to the back and a lipase of eight times the upper limit of normal. Ultrasound showed gallstones and a common bile duct of 6 mm. He has now been on the ward for 30 hours. His bilirubin is 28 micromol/L and he has no rigors. He is breathless and his urine output has fallen over the last eight hours despite 4 litres of fluid.",
+  "vitals": { "Temp": "37.9 C", "HR": "118", "BP": "96/58", "RR": "28", "SpO2": "91% on 4 L", "Urine": "15 mL/h", "Creatinine": "186 micromol/L (admission 92)" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "Day 2. What is the most important next step?",
+      "hint": "Count the organ systems that are failing.",
+      "options": [
+        { "id": "a", "text": "Refer to critical care now for respiratory and renal dysfunction, with careful goal-directed fluids", "correct": true, "feedback": "Correct. He has two failing organ systems. Critical care is needed now, not when the 48-hour mark confirms what is already obvious." },
+        { "id": "b", "text": "Give another 4 litres of crystalloid rapidly to restore urine output", "correct": false, "feedback": "He has already had substantial volume and is now hypoxaemic. High-volume resuscitation caused more fluid overload without better outcomes in WATERFALL." },
+        { "id": "c", "text": "Request an urgent CT to stage the necrosis", "correct": false, "feedback": "A CT now will not change management and early CT underestimates necrosis. The problem today is organ support." },
+        { "id": "d", "text": "Start meropenem to prevent infected necrosis", "correct": false, "feedback": "Prophylactic antibiotics do not prevent infected necrosis or death in sterile pancreatitis and are not recommended." }
+      ],
+      "why": "In the early phase of acute pancreatitis, death comes from organ failure driven by the systemic inflammatory response. The right action is organ support in the right place, with fluids titrated to response rather than to a fixed volume. Neither imaging nor antibiotics treat this phase.",
+      "missedRedFlags": ["Hypoxaemia with a respiratory rate of 28 after 4 litres of fluid", "Creatinine doubling within 30 hours"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "Day 4. He has needed non-invasive ventilation and his creatinine is still rising. How is his pancreatitis classified under the Revised Atlanta classification?",
+      "hint": "The classification turns on one variable and its duration.",
+      "options": [
+        { "id": "a", "text": "Severe acute pancreatitis: persistent organ failure beyond 48 hours", "correct": true, "feedback": "Correct. Persistent organ failure, of more than 48 hours, defines severe disease regardless of the enzyme level or imaging." },
+        { "id": "b", "text": "Moderately severe, because the CT has not yet shown necrosis", "correct": false, "feedback": "Moderately severe means transient organ failure or local complications without persistent organ failure. He has persistent organ failure." },
+        { "id": "c", "text": "Mild, because the lipase was only eight times normal", "correct": false, "feedback": "Enzyme levels do not grade severity at all." },
+        { "id": "d", "text": "It cannot be classified until a CT is done", "correct": false, "feedback": "Revised Atlanta grades severity on organ failure. Imaging defines the local complications, not the severity grade." }
+      ],
+      "why": "The Revised Atlanta classification grades severity by organ failure and its duration. Severe disease carries a substantial mortality and justifies care in a unit with critical care, interventional radiology and advanced endoscopy. Knowing this moves the conversation from 'how bad is the pancreas' to 'where should this man be'."
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "Day 5. A colleague suggests ERCP 'to clear the duct, since it is gallstone pancreatitis'. Bilirubin is 31 micromol/L, there is no fever spike, and the duct is not dilated. What do you advise?",
+      "hint": "What would ERCP be treating?",
+      "options": [
+        { "id": "a", "text": "No ERCP now: there is no cholangitis and no persistent biliary obstruction; reconsider if either develops", "correct": true, "feedback": "Correct. Early ERCP is for cholangitis or persistent obstruction. In predicted severe biliary pancreatitis without them, it adds risk without benefit." },
+        { "id": "b", "text": "Urgent ERCP and sphincterotomy today because all biliary pancreatitis benefits", "correct": false, "feedback": "Routine early ERCP has not improved outcomes in biliary pancreatitis without cholangitis." },
+        { "id": "c", "text": "Emergency cholecystectomy to remove the source", "correct": false, "feedback": "Cholecystectomy during severe pancreatitis with organ failure is dangerous. It is delayed until the inflammation and collections settle." },
+        { "id": "d", "text": "MRCP is contraindicated so nothing can be done", "correct": false, "feedback": "MRCP or endoscopic ultrasound can be used when stones are suspected; it is not contraindicated." }
+      ],
+      "why": "The gallstone caused the attack, but the stone is usually passed by the time the patient is admitted. ERCP treats cholangitis and persistent obstruction; it does not abort pancreatitis. The question to ask before any intervention is what it would actually treat.",
+      "alternatives": ["If he develops fever with rising bilirubin and duct dilatation, urgent ERCP within 24 hours becomes the right answer."]
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "Day 8. He is off non-invasive ventilation but has a tense, distended abdomen. A CT on day 7 shows 50% pancreatic necrosis with acute necrotic collections and no gas. A surgical colleague wants to perform necrosectomy 'before it gets infected'. What do you advise?",
+      "hint": "What did the PANTER trial and the IAP/APA guideline teach about timing?",
+      "options": [
+        { "id": "a", "text": "No intervention: sterile necrosis is managed conservatively, and any intervention is delayed until collections are walled off, ideally around four weeks", "correct": true, "feedback": "Correct. Early necrosectomy for sterile necrosis increases mortality. Restraint here is the operation." },
+        { "id": "b", "text": "Open necrosectomy now to prevent infection", "correct": false, "feedback": "Open necrosectomy in the first weeks, on non-demarcated sterile necrosis, causes bleeding, organ failure and death. It was the operation the step-up approach replaced." },
+        { "id": "c", "text": "Percutaneous aspiration of every collection to check for infection", "correct": false, "feedback": "Routine fine-needle aspiration is not needed; infection is usually diagnosed clinically and on CT. Needling sterile collections risks introducing infection." },
+        { "id": "d", "text": "Start prophylactic carbapenem because the necrosis is extensive", "correct": false, "feedback": "Extensive necrosis is not an indication for prophylactic antibiotics." }
+      ],
+      "why": "Necrosis in the first two weeks is not demarcated: dead and living tissue cannot be separated, and surgery causes haemorrhage and worsens organ failure. Sterile necrosis does not need intervention at all. Infected necrosis is treated with antibiotics and, if needed, delayed step-up drainage. The surgeon's decisive contribution in this phase is to not operate.",
+      "missedRedFlags": ["The tense, distended abdomen, which needs a bladder pressure to exclude abdominal compartment syndrome"],
+      "alternatives": ["If bladder pressure is above 20 mmHg with new organ dysfunction, treat abdominal compartment syndrome medically first; surgical decompression is the last resort, not a necrosectomy."]
+    },
+    {
+      "id": "dp5", "phase": "operate",
+      "prompt": "Day 14. He spikes fevers, his CRP has risen again and new organ dysfunction is appearing. CT shows gas within a partially walled-off necrotic collection. What is the plan?",
+      "hint": "Name the first step of the step-up approach.",
+      "options": [
+        { "id": "a", "text": "Antibiotics that penetrate necrosis, and if he does not settle, percutaneous or endoscopic transluminal drainage as the first step, with minimally invasive necrosectomy only if drainage fails", "correct": true, "feedback": "Correct. This is the step-up approach. In PANTER about a third of patients needed nothing more than drainage, with fewer major complications than open necrosectomy." },
+        { "id": "b", "text": "Open necrosectomy today because the necrosis is infected", "correct": false, "feedback": "Infection is an indication for intervention, not for open surgery first. Open necrosectomy caused more new organ failure and long-term complications than step-up." },
+        { "id": "c", "text": "Continue antibiotics alone for six weeks without imaging", "correct": false, "feedback": "Some patients settle on antibiotics, but a deteriorating patient with organ dysfunction needs reassessment and a drainage plan, not an indefinite course." },
+        { "id": "d", "text": "Laparotomy and cholecystectomy together", "correct": false, "feedback": "Cholecystectomy is deferred until collections resolve or for at least six weeks; adding it now multiplies the risk." }
+      ],
+      "why": "Gas in a collection with clinical deterioration means infected necrosis. Antibiotics are started, intervention is delayed as long as the patient allows, and the first intervention is drainage. Minimally invasive necrosectomy follows only if drainage fails. Transfer to a specialist pancreatic centre is appropriate if these options are not available locally.",
+      "missedRedFlags": ["New organ dysfunction in the second week, which is infection until proven otherwise"],
+      "alternatives": ["A sudden drop in haemoglobin or haemodynamic collapse in this phase suggests a pseudoaneurysm bleed: CT angiography and embolisation, not laparotomy."]
+    }
+  ]
+}

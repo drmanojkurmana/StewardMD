@@ -1,0 +1,205 @@
+{
+  "id": "uro-pcnl",
+  "title": "Percutaneous nephrolithotomy (PCNL)",
+  "subtitle": "The right calyx, end-on through the papilla, and a plan for bleeding",
+  "system": "urology",
+  "aliases": ["PCNL", "PCN lithotomy", "percutaneous nephrolithotripsy", "mini-PCNL", "supine PCNL", "prone PCNL"],
+  "estMinutes": 120,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-stones", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urolithiasis", "year": 2024, "url": "https://uroweb.org/guidelines/urolithiasis", "accessed": "2026-11-04" },
+    { "id": "aua-stones", "org": "American Urological Association (AUA) and Endourological Society", "title": "Surgical Management of Stones: AUA/Endourological Society Guideline", "year": 2016, "url": "https://www.auanet.org/guidelines-and-quality/guidelines/kidney-stones-surgical-management-guideline", "accessed": "2026-11-04" },
+    { "id": "nice-ng118", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Renal and ureteric stones: assessment and management (NG118)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng118", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["qsofa", "ckdepi", "allowable_blood_loss", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Large renal stones, including staghorn calculi, where PCNL is the first-line treatment in the stone guidelines.",
+      "Lower pole stones above the size threshold in the guidelines, or with unfavourable anatomy, and stones that have failed shock wave lithotripsy or flexible ureteroscopy.",
+      "Stones in a calyceal diverticulum, or associated with an anatomical abnormality that needs percutaneous access.",
+      "Large proximal ureteric stones in selected patients, by antegrade approach."
+    ],
+    "contraindications": [
+      "Untreated urinary infection: treat first, and decompress an infected obstructed kidney before definitive treatment.",
+      "Uncorrected coagulopathy, or anticoagulant or antiplatelet drugs that cannot be safely stopped.",
+      "Pregnancy.",
+      "A tumour in the access tract or the kidney, or no safe access line (bowel, spleen or liver on the path on CT).",
+      "Relative: severe obesity, spinal deformity or a patient unable to tolerate the prone position; consider supine PCNL or another approach."
+    ],
+    "preparation": [
+      "Contrast CT, or non-contrast CT with an assessment of the collecting system, to map the stone and calyces and to look for retrorenal colon, an enlarged liver or spleen, and the relationship of the upper pole to the ribs and pleura.",
+      "Mid-stream urine culture, with any infection treated; consider a renal pelvis urine or stone culture at surgery.",
+      "Full blood count, group and save (crossmatch per local policy for large staghorn stones), renal function and coagulation.",
+      "Consent: bleeding with possible transfusion and, rarely, angioembolisation or nephrectomy; infection and sepsis; injury to colon, pleura (pneumothorax or hydrothorax), spleen or liver; residual stone and need for further procedures; nephrostomy or stent; urine leak; loss of renal function.",
+      "Agree the access plan (who punctures, under fluoroscopy or ultrasound, prone or supine) at the team brief."
+    ],
+    "positioning": [
+      "Lithotomy first for cystoscopy and ureteric catheter placement, unless a supine position allows simultaneous retrograde access.",
+      "Prone: turned with the airway secured and the anaesthetist controlling the head, chest and pelvic supports so the abdomen hangs free, eyes and face protected, arms abducted no more than 90 degrees, breasts and genitalia free of pressure.",
+      "Supine (for example Galdakao-modified Valdivia): the flank raised on a support, ipsilateral leg extended and contralateral leg in lithotomy, allowing combined antegrade and retrograde access.",
+      "C-arm or ultrasound positioned before draping to show the whole kidney."
+    ],
+    "equipment": [
+      "Cystoscope, guidewires, open-ended or occlusion-balloon ureteric catheter and contrast.",
+      "Ultrasound and C-arm, puncture needle, J-tip and stiff guidewires.",
+      "Dilators (serial, balloon or one-shot) and Amplatz sheaths in the planned size; nephroscope (standard or mini) and flexible nephroscope.",
+      "Lithotripter: ultrasonic, pneumatic, combined, or laser; stone forceps and baskets.",
+      "Nephrostomy tubes, double-J stents, and haemostatic options (balloon tamponade catheter, nephrostomy clamp)."
+    ],
+    "anatomy": [
+      "The kidney lies obliquely, with its posterior calyces pointing posterolaterally; a posterior calyx gives the most direct, least vascular route to the collecting system.",
+      "Brodel's line on the posterolateral convexity is a relatively avascular plane between the anterior and posterior arterial territories.",
+      "The ideal puncture enters the calyx end-on through the papilla (the fornix), avoiding the infundibulum, where the interlobar vessels run.",
+      "The pleura reaches down to about the twelfth rib posteriorly; supracostal punctures, particularly above the eleventh rib, risk the pleura and lung.",
+      "A retrorenal colon, more common on the left, at the lower pole and in thin patients, lies on the puncture path and must be excluded on CT."
+    ],
+    "criticalSafety": [
+      "Puncture end-on through the papilla of a chosen calyx; never through the infundibulum or the renal pelvis directly.",
+      "Dilate only to the calyx, under fluoroscopy, and never beyond the tip of the guidewire's safe course.",
+      "Pus on puncture: place a nephrostomy and stop.",
+      "Significant bleeding: stop, tamponade with the sheath or a nephrostomy, and escalate. Persistent or delayed arterial bleeding needs angiography and embolisation.",
+      "Supracostal access means a chest assessment before the patient leaves theatre or recovery."
+    ],
+    "structuresAtRisk": [
+      "Interlobar and segmental renal vessels",
+      "Renal pelvis (tear during dilatation)",
+      "Pleura and lung",
+      "Colon",
+      "Spleen and liver",
+      "Duodenum (right) and renal vein (with medial perforation)"
+    ],
+    "commonErrors": [
+      "Choosing the calyx that is easiest to hit instead of the one that gives access to the stone.",
+      "Infundibular puncture, followed by arterial bleeding.",
+      "Over-advancing the dilator and tearing the far wall of the pelvis.",
+      "Prolonged operating in an infected stone with high irrigation pressure, leading to sepsis.",
+      "Ignoring a falling oxygen saturation after a supracostal puncture."
+    ],
+    "complications": [
+      "Fever and sepsis, the most common serious complication.",
+      "Bleeding needing transfusion; delayed haemorrhage from an arteriovenous fistula or pseudoaneurysm, presenting days or weeks later.",
+      "Pleural injury: hydrothorax, pneumothorax or haemothorax.",
+      "Colonic injury, presenting with faecal drainage or nephrocolic fistula.",
+      "Urine leak and urinoma; prolonged nephrostomy drainage.",
+      "Residual stones needing further treatment; loss of renal function, rarely nephrectomy."
+    ],
+    "postop": [
+      "Observe for sepsis and bleeding: temperature, heart rate, blood pressure, haemoglobin and the colour of nephrostomy and catheter drainage.",
+      "Chest examination and chest X-ray after supracostal or difficult upper pole access, or with any respiratory change.",
+      "Nephrostomy management per plan: clamp, then remove if comfortable and draining down the ureter; a nephrostogram where there is doubt.",
+      "New or recurrent heavy bleeding after the early period suggests a pseudoaneurysm or arteriovenous fistula: urgent angiography and embolisation.",
+      "Assess stone-free status with imaging, plan a second look for residual stone, and organise stone analysis and metabolic evaluation."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the side and the planned calyx of entry against the CT; check the transfusion plan and group and save are in place." },
+    { "ref": "step.core.timeout", "emphasis": "Plan for bleeding, for sepsis and for a failed puncture, aloud. Confirm blood is available if the stone is a staghorn." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Guided by the urine culture; infected and struvite stones may need a treatment course before surgery." },
+    { "ref": "step.core.positioning", "emphasis": "The turn to prone is a team manoeuvre led by the anaesthetist. Check the eyes, the face, the endotracheal tube, the chest and pelvic supports, and the brachial plexus after turning." },
+    { "ref": "step.uro.fluoro-setup", "emphasis": "If puncturing under fluoroscopy, keep your hands out of the beam: use a needle holder or ultrasound guidance." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.uro.cystoscopy", "emphasis": "Purpose here is to place a ureteric catheter; this is usually done in lithotomy before turning prone." },
+    { "ref": "step.uro.safety-guidewire", "emphasis": "A ureteric catheter left over the wire up to the pelvis lets you opacify or distend the system and stops fragments falling down the ureter." },
+    { "ref": "step.uro.retrograde-pyelogram", "emphasis": "Opacify through the ureteric catheter once positioned for puncture. Air injected through the catheter outlines posterior calyces, which fill with air in the prone patient." },
+    { "ref": "step.pcnl.puncture" },
+    { "ref": "step.uro.infected-system-bailout", "emphasis": "Pus from the needle: pass a wire, place a nephrostomy, stop, and treat the infection. Return for the stone later." },
+    { "ref": "step.pcnl.dilatation" },
+    { "ref": "step.uro.lithotripsy", "emphasis": "Work through the sheath with outflow kept free, so that intrarenal pressure stays low." },
+    { "ref": "step.uro.fragment-clearance", "emphasis": "Use the flexible nephroscope for calyces not reached through the rigid tract, and fluoroscopy to look for residual stone." },
+    { "ref": "step.pcnl.bleeding" },
+    { "ref": "step.uro.dj-stent", "emphasis": "Antegrade or retrograde; decide based on residual stone, ureteric oedema, pelvic tear and whether a nephrostomy is left." },
+    { "ref": "step.pcnl.exit" },
+    { "ref": "step.uro.stent-register" },
+    { "ref": "step.core.specimen", "emphasis": "Stone for analysis and, if taken, stone or pelvic urine for culture." },
+    { "ref": "step.core.counts", "emphasis": "Account for wires, dilators, sheaths and baskets." },
+    { "ref": "step.pcnl.chest-check" },
+    { "ref": "step.core.debrief", "emphasis": "Record the calyx used, the rib relationship, stone-free status, drainage, and what would prompt a return or angiography." }
+  ],
+  "steps_local": {
+    "step.pcnl.puncture": {
+      "id": "step.pcnl.puncture", "kind": "access", "critical": true,
+      "title": "Calyceal puncture: posterior calyx, end-on through the papilla",
+      "why": "The puncture is the operation. A well-chosen, papillary puncture gives a straight line to the stone and a near-avascular tract; an infundibular or pelvic puncture is where the arterial bleeding and the failed operations come from.",
+      "how": [
+        "Choose the calyx that gives the straightest line to the bulk of the stone, usually a posterior lower or middle calyx; an upper pole calyx gives the best line to the pelviureteric junction and staghorn branches but may be supracostal.",
+        "Puncture under ultrasound or fluoroscopy (bull's-eye or triangulation technique), aiming to enter the calyx end-on through the papilla.",
+        "Confirm entry by urine return or contrast, and note its appearance; if blood returns freely, withdraw and reassess the line.",
+        "Pass a J-tip wire into the collecting system and, ideally, down the ureter or into a distant calyx, then a second safety wire once the tract allows."
+      ],
+      "structuresAtRisk": ["Interlobar and segmental arteries", "Pleura and lung (supracostal access)", "Colon", "Spleen and liver"],
+      "pitfalls": [
+        "Multiple passes through the parenchyma searching for the calyx, each one a potential bleeding source.",
+        "A supracostal puncture without telling the anaesthetist or planning a chest check."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.pcnl.dilatation": {
+      "id": "step.pcnl.dilatation", "kind": "access", "critical": true,
+      "title": "Tract dilatation and sheath placement",
+      "why": "The dilator follows the wire, and it can go further than you want it to. Over-dilating tears the pelvis or perforates the far wall; under-dilating loses the tract and starts the bleeding again.",
+      "how": [
+        "Make a skin incision large enough for the sheath and dilate along the wire under fluoroscopy, with the wire secure and not buckling.",
+        "Advance each dilator or balloon only to the calyx, watching the tip on fluoroscopy; stop at the stone or the calyceal neck.",
+        "Pass the Amplatz sheath over the final dilator, check its position in the calyx and keep it there with a hand on it.",
+        "If the tract bleeds heavily on dilatation, place the sheath to tamponade and proceed only if the view is adequate; otherwise use the bleeding step."
+      ],
+      "structuresAtRisk": ["Renal pelvis (tear or perforation)", "Infundibulum", "Renal vein (medial perforation)"],
+      "pitfalls": [
+        "Losing the tract after removing the sheath without a wire in place.",
+        "A sheath lying outside the calyx, irrigating into the retroperitoneum."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.pcnl.bleeding": {
+      "id": "step.pcnl.bleeding", "kind": "bailout", "critical": true,
+      "title": "Bleeding: tamponade, stop and escalate",
+      "why": "Bleeding in PCNL is common and usually venous, and venous bleeding stops with tamponade. Persistent or pulsatile bleeding is arterial and does not; continuing the operation in a blood-filled kidney adds harm and no stone clearance.",
+      "how": [
+        "When the view is lost to blood, stop irrigation and lithotripsy and advance the sheath into the calyx to tamponade the tract.",
+        "If bleeding continues, abandon the stone work, place a nephrostomy (or a balloon tamponade catheter) and clamp it; inform the anaesthetist and check haemoglobin.",
+        "Persistent haemodynamic instability or bleeding that does not stop with tamponade needs urgent angiography and selective embolisation; call the senior urologist and interventional radiologist early.",
+        "Return for the residual stone at a second session."
+      ],
+      "structuresAtRisk": ["Segmental and interlobar arteries", "Renal vein and its tributaries"],
+      "pitfalls": [
+        "Continuing to fragment in a red field to finish the stone.",
+        "Unclamping the nephrostomy in recovery to 'see if it is still bleeding', and losing the tamponade."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.pcnl.exit": {
+      "id": "step.pcnl.exit", "kind": "closure",
+      "title": "Exit strategy: nephrostomy, stent or tubeless",
+      "why": "How the kidney is drained at the end decides the patient's pain, the length of stay and whether a second look is easy. The decision is made on bleeding, residual stone, infection and tract integrity, not on habit.",
+      "how": [
+        "Leave a nephrostomy if there is significant bleeding, residual stone needing a second look, a pelvic perforation, infection, or more than one tract.",
+        "Consider a tubeless finish (stent or ureteric catheter only, or totally tubeless) in an uncomplicated procedure with a single tract, minimal bleeding and complete clearance.",
+        "Check the nephrostomy or stent position with contrast on fluoroscopy and save the image.",
+        "Secure the nephrostomy firmly to the skin; a nephrostomy lost on day one may mean a new puncture."
+      ],
+      "structuresAtRisk": ["Tract (urine leak or bleeding)", "Nephrostomy (displacement)"],
+      "pitfalls": [
+        "A tubeless finish after a bloody procedure.",
+        "A nephrostomy with its tip coiled outside the collecting system."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.pcnl.chest-check": {
+      "id": "step.pcnl.chest-check", "kind": "checkpoint",
+      "title": "Chest check after upper or supracostal access",
+      "why": "A hydrothorax or pneumothorax from a supracostal tract often shows only as falling oxygen saturation or breathlessness after the patient is turned back. A check in theatre finds it while the team is still there.",
+      "how": [
+        "After turning supine, ask the anaesthetist about ventilation pressures and saturation, and examine the chest on the operated side.",
+        "Screen the chest with fluoroscopy before leaving theatre, or arrange a chest X-ray in recovery, after any supracostal or upper pole access.",
+        "A significant effusion or pneumothorax needs drainage; tell the patient and record it."
+      ],
+      "structuresAtRisk": ["Pleura and lung"],
+      "pitfalls": [
+        "Attributing post-operative breathlessness to atelectasis without imaging."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

@@ -1,55 +1,3037 @@
 {
   "_comment": "SURGX catalog. Small on purpose: the app fetches this first (no-store, so it is never the stale copy), then only the unit the clinician actually opened. Modelled on clinix/manifest.json and atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load). Protocols marked kind:'engine' are NOT authored here - they are projections of the ws-surgery.js decision engine, which remains the single home of that clinical logic.",
   "schemaVersion": 1,
-  "contentVersion": "0.1.2-isofig",
-  "updated": "2026-08-24",
+  "contentVersion": "0.2.0-allspec",
+  "updated": "2026-11-04",
   "categories": [
-    { "id": "trauma", "title": "Trauma" },
-    { "id": "resuscitation", "title": "Shock and resuscitation" },
-    { "id": "abdomen", "title": "Acute abdomen" },
-    { "id": "infection", "title": "Surgical infection" },
-    { "id": "perioperative", "title": "Peri-operative" }
+    {
+      "id": "trauma",
+      "title": "Trauma"
+    },
+    {
+      "id": "resuscitation",
+      "title": "Shock and resuscitation"
+    },
+    {
+      "id": "abdomen",
+      "title": "Acute abdomen"
+    },
+    {
+      "id": "infection",
+      "title": "Surgical infection"
+    },
+    {
+      "id": "perioperative",
+      "title": "Peri-operative"
+    },
+    {
+      "id": "neuro_cranial",
+      "title": "Cranial neurosurgical emergencies"
+    },
+    {
+      "id": "neuro_spine",
+      "title": "Spinal emergencies"
+    },
+    {
+      "id": "uro_emergency",
+      "title": "Urological emergencies"
+    },
+    {
+      "id": "uro_trauma",
+      "title": "Genitourinary trauma"
+    },
+    {
+      "id": "paeds_surgery",
+      "title": "Paediatric surgical emergencies"
+    },
+    {
+      "id": "obgyn_emergency",
+      "title": "Obstetric and gynaecological emergencies"
+    },
+    {
+      "id": "onco_emergencies",
+      "title": "Oncological emergencies"
+    },
+    {
+      "id": "onco_periop",
+      "title": "Cancer surgery: principles and recovery"
+    },
+    {
+      "id": "breast",
+      "title": "Breast"
+    },
+    {
+      "id": "endocrine_surgery",
+      "title": "Endocrine surgery"
+    },
+    {
+      "id": "vascular",
+      "title": "Vascular emergencies"
+    },
+    {
+      "id": "thoracic",
+      "title": "Chest and cardiothoracic emergencies"
+    },
+    {
+      "id": "ent_airway",
+      "title": "ENT airway emergencies"
+    },
+    {
+      "id": "ent_emergency",
+      "title": "ENT emergencies"
+    },
+    {
+      "id": "eye_emergency",
+      "title": "Eye emergencies"
+    },
+    {
+      "id": "ortho_trauma",
+      "title": "Orthopaedic trauma"
+    },
+    {
+      "id": "ortho_emergency",
+      "title": "Limb and joint emergencies"
+    },
+    {
+      "id": "plastics_emergency",
+      "title": "Hand and plastic surgery emergencies"
+    }
   ],
   "protocols": [
-    { "id": "atls-primary-survey", "kind": "authored", "title": "Trauma primary survey (ABCDE)", "subtitle": "The first ten minutes", "category": "trauma", "file": "protocols/atls-primary-survey.json", "review": "ai_drafted" },
-    { "id": "haemorrhagic-shock", "kind": "authored", "title": "Haemorrhagic shock", "subtitle": "Recognise, stop the bleeding, resuscitate", "category": "resuscitation", "file": "protocols/haemorrhagic-shock.json", "review": "ai_drafted" },
-    { "id": "surgical-sepsis", "kind": "authored", "title": "Sepsis with a surgical source", "subtitle": "Source control is the treatment", "category": "resuscitation", "file": "protocols/surgical-sepsis.json", "review": "ai_drafted" },
-    { "id": "chest-trauma", "kind": "authored", "title": "Chest trauma", "subtitle": "The six that kill early", "category": "trauma", "file": "protocols/chest-trauma.json", "review": "ai_drafted" },
-    { "id": "head-injury", "kind": "authored", "title": "Head injury", "subtitle": "Who scans, who transfers, who watches", "category": "trauma", "file": "protocols/head-injury.json", "review": "ai_drafted" },
-    { "id": "burns", "kind": "authored", "title": "Major burns", "subtitle": "Airway, area, fluids, transfer", "category": "trauma", "file": "protocols/burns.json", "review": "ai_drafted" },
-    { "id": "upper-gi-bleed", "kind": "authored", "title": "Upper GI bleeding", "subtitle": "Resuscitate, risk-stratify, scope", "category": "abdomen", "file": "protocols/upper-gi-bleed.json", "review": "ai_drafted" },
-    { "id": "postop-deterioration", "kind": "authored", "title": "Post-operative deterioration", "subtitle": "It is a leak until proven otherwise", "category": "perioperative", "file": "protocols/postop-deterioration.json", "review": "ai_drafted" },
-
-    { "id": "acute_abdomen", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "gi_perforation", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "bowel_obstruction", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "cholecystitis", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "cholangitis", "kind": "engine", "category": "abdomen", "subtitle": "Shared with Internal Medicine" },
-    { "id": "liver_abscess", "kind": "engine", "category": "abdomen", "subtitle": "Shared with Internal Medicine" },
-    { "id": "colitis", "kind": "engine", "category": "abdomen", "subtitle": "Shared with Internal Medicine" },
-    { "id": "hernia", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "nec_sti", "kind": "engine", "category": "infection", "subtitle": "Surgical emergency" },
-    { "id": "abscess", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" },
-    { "id": "cellulitis", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" },
-    { "id": "wound_infection", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" },
-    { "id": "diabetic_foot", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" }
+    {
+      "id": "atls-primary-survey",
+      "kind": "authored",
+      "title": "Trauma primary survey (ABCDE)",
+      "subtitle": "The first ten minutes",
+      "category": "trauma",
+      "file": "protocols/atls-primary-survey.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "haemorrhagic-shock",
+      "kind": "authored",
+      "title": "Haemorrhagic shock",
+      "subtitle": "Recognise, stop the bleeding, resuscitate",
+      "category": "resuscitation",
+      "file": "protocols/haemorrhagic-shock.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "surgical-sepsis",
+      "kind": "authored",
+      "title": "Sepsis with a surgical source",
+      "subtitle": "Source control is the treatment",
+      "category": "resuscitation",
+      "file": "protocols/surgical-sepsis.json",
+      "review": "ai_drafted",
+      "specialty": "general"
+    },
+    {
+      "id": "chest-trauma",
+      "kind": "authored",
+      "title": "Chest trauma",
+      "subtitle": "The six that kill early",
+      "category": "trauma",
+      "file": "protocols/chest-trauma.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "head-injury",
+      "kind": "authored",
+      "title": "Head injury",
+      "subtitle": "Who scans, who transfers, who watches",
+      "category": "trauma",
+      "file": "protocols/head-injury.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "burns",
+      "kind": "authored",
+      "title": "Major burns",
+      "subtitle": "Airway, area, fluids, transfer",
+      "category": "trauma",
+      "file": "protocols/burns.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "upper-gi-bleed",
+      "kind": "authored",
+      "title": "Upper GI bleeding",
+      "subtitle": "Resuscitate, risk-stratify, scope",
+      "category": "abdomen",
+      "file": "protocols/upper-gi-bleed.json",
+      "review": "ai_drafted",
+      "specialty": "general"
+    },
+    {
+      "id": "postop-deterioration",
+      "kind": "authored",
+      "title": "Post-operative deterioration",
+      "subtitle": "It is a leak until proven otherwise",
+      "category": "perioperative",
+      "file": "protocols/postop-deterioration.json",
+      "review": "ai_drafted",
+      "specialty": "periop"
+    },
+    {
+      "id": "acute_abdomen",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "gi_perforation",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "bowel_obstruction",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "cholecystitis",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "cholangitis",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Shared with Internal Medicine",
+      "specialty": "general"
+    },
+    {
+      "id": "liver_abscess",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Shared with Internal Medicine",
+      "specialty": "general"
+    },
+    {
+      "id": "colitis",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Shared with Internal Medicine",
+      "specialty": "general"
+    },
+    {
+      "id": "hernia",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "nec_sti",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Surgical emergency",
+      "specialty": "general"
+    },
+    {
+      "id": "abscess",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "cellulitis",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "wound_infection",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "diabetic_foot",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "raised-icp",
+      "kind": "authored",
+      "title": "Raised intracranial pressure and herniation",
+      "subtitle": "Recognise, buy time, decompress",
+      "category": "neuro_cranial",
+      "specialty": "neurosurgery",
+      "file": "protocols/raised-icp.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "acute-spinal-cord-injury",
+      "kind": "authored",
+      "title": "Acute spinal cord injury",
+      "subtitle": "Protect, perfuse, classify, decompress",
+      "category": "neuro_spine",
+      "specialty": "neurosurgery",
+      "file": "protocols/acute-spinal-cord-injury.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "cauda-equina-syndrome",
+      "kind": "authored",
+      "title": "Cauda equina syndrome",
+      "subtitle": "Suspect early, scan the same day, decompress",
+      "category": "neuro_spine",
+      "specialty": "neurosurgery",
+      "file": "protocols/cauda-equina-syndrome.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "aneurysmal-sah",
+      "kind": "authored",
+      "title": "Aneurysmal subarachnoid haemorrhage",
+      "subtitle": "Diagnose, grade, secure the aneurysm",
+      "category": "neuro_cranial",
+      "specialty": "neurosurgery",
+      "file": "protocols/aneurysmal-sah.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "traumatic-haematoma-surgery",
+      "kind": "authored",
+      "title": "Extradural and acute subdural haematoma",
+      "subtitle": "The decision to operate",
+      "category": "neuro_cranial",
+      "specialty": "neurosurgery",
+      "file": "protocols/traumatic-haematoma-surgery.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "csf-device-malfunction",
+      "kind": "authored",
+      "title": "EVD and shunt malfunction or infection",
+      "subtitle": "Blocked, overdraining or infected CSF devices",
+      "category": "neuro_cranial",
+      "specialty": "neurosurgery",
+      "file": "protocols/csf-device-malfunction.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "mscc",
+      "kind": "authored",
+      "title": "Metastatic spinal cord compression",
+      "subtitle": "Suspect, steroid, scan, decide within 24 hours",
+      "category": "neuro_spine",
+      "specialty": "neurosurgery",
+      "file": "protocols/mscc.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-acute-retention",
+      "kind": "authored",
+      "title": "Acute urinary retention",
+      "subtitle": "Drain the bladder, then find the cause",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-acute-retention.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-acute-scrotum",
+      "kind": "authored",
+      "title": "Testicular torsion and the acute scrotum",
+      "subtitle": "Torsion until the theatre says otherwise",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-acute-scrotum.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-fournier",
+      "kind": "authored",
+      "title": "Fournier gangrene",
+      "subtitle": "Necrotising infection of the perineum: cut early, cut again",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-fournier.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-obstructed-kidney",
+      "kind": "authored",
+      "title": "Renal colic and the obstructed infected kidney",
+      "subtitle": "Infection behind a stone: decompress first",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-obstructed-kidney.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-priapism",
+      "kind": "authored",
+      "title": "Priapism",
+      "subtitle": "Ischaemic or not: the corporal gas decides",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-priapism.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-visible-haematuria",
+      "kind": "authored",
+      "title": "Visible haematuria and clot retention",
+      "subtitle": "Stop the clots, then find the cancer",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-visible-haematuria.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-catheter-emergencies",
+      "kind": "authored",
+      "title": "Paraphimosis and catheter emergencies",
+      "subtitle": "Traumatic catheterisation, stuck balloons, urethral injury",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-catheter-emergencies.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-renal-bladder-trauma",
+      "kind": "authored",
+      "title": "Renal and bladder trauma",
+      "subtitle": "Grade it, keep the kidney, find the rupture",
+      "category": "uro_trauma",
+      "specialty": "urology",
+      "file": "protocols/uro-renal-bladder-trauma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-bilious-vomiting",
+      "kind": "authored",
+      "title": "Bilious vomiting in a neonate or infant",
+      "subtitle": "Malrotation with volvulus until proven otherwise",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-bilious-vomiting.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-intussusception",
+      "kind": "authored",
+      "title": "Intussusception",
+      "subtitle": "Enema reduction first, theatre when it fails or the child is sick",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-intussusception.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-pyloric-stenosis",
+      "kind": "authored",
+      "title": "Infantile hypertrophic pyloric stenosis",
+      "subtitle": "Fix the alkalosis first, then the pylorus",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-pyloric-stenosis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-trauma",
+      "kind": "authored",
+      "title": "The injured child",
+      "subtitle": "Weight first, blood early, scan selectively",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-trauma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-inguinal-hernia",
+      "kind": "authored",
+      "title": "Inguinal hernia in a child",
+      "subtitle": "The incarcerated hernia: reduce, wait, repair",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-inguinal-hernia.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-appendicitis",
+      "kind": "authored",
+      "title": "Appendicitis in a child",
+      "subtitle": "Score, ultrasound, then decide",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-appendicitis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ruptured-ectopic",
+      "kind": "authored",
+      "title": "Ruptured ectopic pregnancy",
+      "subtitle": "Positive test, pain, collapse: theatre",
+      "category": "obgyn_emergency",
+      "specialty": "obgyn",
+      "file": "protocols/ruptured-ectopic.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ovarian-torsion",
+      "kind": "authored",
+      "title": "Ovarian (adnexal) torsion",
+      "subtitle": "Suspect it, scope it, untwist it",
+      "category": "obgyn_emergency",
+      "specialty": "obgyn",
+      "file": "protocols/ovarian-torsion.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pph-surgical",
+      "kind": "authored",
+      "title": "Postpartum haemorrhage: the surgical ladder",
+      "subtitle": "Drugs, balloon, sutures, ligation, hysterectomy",
+      "category": "obgyn_emergency",
+      "specialty": "obgyn",
+      "file": "protocols/pph-surgical.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "acute-abdomen-pregnancy",
+      "kind": "authored",
+      "title": "The pregnant woman with an acute abdomen",
+      "subtitle": "Two patients, one operation, no delay",
+      "category": "obgyn_emergency",
+      "specialty": "obgyn",
+      "file": "protocols/acute-abdomen-pregnancy.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "malignant-bowel-obstruction",
+      "kind": "authored",
+      "title": "Malignant bowel obstruction",
+      "subtitle": "Decompress, define the level, decide the goal",
+      "category": "onco_emergencies",
+      "specialty": "oncology",
+      "file": "protocols/malignant-bowel-obstruction.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "oncological-surgical-emergencies",
+      "kind": "authored",
+      "title": "Oncological surgical emergencies",
+      "subtitle": "Neutropenic enterocolitis, tumour perforation, tumour bleeding",
+      "category": "onco_emergencies",
+      "specialty": "oncology",
+      "file": "protocols/oncological-surgical-emergencies.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "svc-obstruction",
+      "kind": "authored",
+      "title": "Superior vena cava obstruction",
+      "subtitle": "The surgeon's role: tissue, airway caution, stent first",
+      "category": "onco_emergencies",
+      "specialty": "oncology",
+      "file": "protocols/svc-obstruction.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "cancer-operation-principles",
+      "kind": "authored",
+      "title": "Principles of a cancer operation",
+      "subtitle": "MDT before knife, margins, nodes, orientation",
+      "category": "onco_periop",
+      "specialty": "oncology",
+      "file": "protocols/cancer-operation-principles.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "postop-major-cancer-surgery",
+      "kind": "authored",
+      "title": "After major cancer surgery",
+      "subtitle": "ERAS care, chyle leak, pancreatic fistula grading",
+      "category": "onco_periop",
+      "specialty": "oncology",
+      "file": "protocols/postop-major-cancer-surgery.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "breast-triple-assessment",
+      "kind": "authored",
+      "title": "Breast lump: triple assessment",
+      "subtitle": "Who to refer, and why all three must agree",
+      "category": "breast",
+      "specialty": "breast",
+      "file": "protocols/breast-triple-assessment.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "breast-abscess-mastitis",
+      "kind": "authored",
+      "title": "Breast abscess and lactational mastitis",
+      "subtitle": "Keep feeding, aspirate before you cut",
+      "category": "breast",
+      "specialty": "breast",
+      "file": "protocols/breast-abscess-mastitis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "thyroid-neck-haematoma",
+      "kind": "authored",
+      "title": "Neck haematoma after thyroid surgery",
+      "subtitle": "SCOOP at the bedside, then theatre",
+      "category": "endocrine_surgery",
+      "specialty": "endocrine",
+      "file": "protocols/thyroid-neck-haematoma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "post-thyroidectomy-hypocalcaemia",
+      "kind": "authored",
+      "title": "Hypocalcaemia after thyroidectomy",
+      "subtitle": "Predict with PTH, treat symptoms with IV calcium",
+      "category": "endocrine_surgery",
+      "specialty": "endocrine",
+      "file": "protocols/post-thyroidectomy-hypocalcaemia.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "adrenal-crisis-phaeo-periop",
+      "kind": "authored",
+      "title": "Adrenal crisis and phaeochromocytoma surgery",
+      "subtitle": "Hydrocortisone now; alpha-block before the knife",
+      "category": "endocrine_surgery",
+      "specialty": "endocrine",
+      "file": "protocols/adrenal-crisis-phaeo-periop.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "raaa",
+      "kind": "authored",
+      "title": "Ruptured abdominal aortic aneurysm",
+      "subtitle": "Permissive hypotension, CT if it responds, EVAR first if it fits",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/raaa.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "acute-limb-ischaemia",
+      "kind": "authored",
+      "title": "Acute limb ischaemia",
+      "subtitle": "Heparin now, classify, revascularise by the clock",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/acute-limb-ischaemia.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "clti-diabetic-foot",
+      "kind": "authored",
+      "title": "Chronic limb-threatening ischaemia and the ischaemic diabetic foot",
+      "subtitle": "Drain sepsis first, then stage with WIfI and revascularise",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/clti-diabetic-foot.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "acute-mesenteric-ischaemia",
+      "kind": "authored",
+      "title": "Acute mesenteric ischaemia",
+      "subtitle": "Suspect early, CT angiography, revascularise before you resect",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/acute-mesenteric-ischaemia.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "limb-vascular-trauma",
+      "kind": "authored",
+      "title": "Limb vascular trauma and haemorrhage control",
+      "subtitle": "Tourniquet, hard signs, shunt or repair",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/limb-vascular-trauma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "av-access-complications",
+      "kind": "authored",
+      "title": "Dialysis access complications",
+      "subtitle": "Bleeding, thrombosis and steal in AV fistulas and grafts",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/av-access-complications.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "chest-drain-management",
+      "kind": "authored",
+      "title": "Chest drain: insertion and management",
+      "subtitle": "Safe triangle, image guidance, and when not to",
+      "category": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "protocols/chest-drain-management.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "massive-haemothorax",
+      "kind": "authored",
+      "title": "Massive haemothorax and resuscitative thoracotomy",
+      "subtitle": "Drain output, the thoracotomy decision, and who should be opened",
+      "category": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "protocols/massive-haemothorax.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "cardiac-tamponade",
+      "kind": "authored",
+      "title": "Cardiac tamponade after cardiac surgery and in trauma",
+      "subtitle": "Recognise it, open the chest early, avoid the induction trap",
+      "category": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "protocols/cardiac-tamponade.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pneumothorax",
+      "kind": "authored",
+      "title": "Spontaneous and tension pneumothorax",
+      "subtitle": "Symptoms and risk, not size alone, decide the intervention",
+      "category": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "protocols/pneumothorax.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "acute-pancreatitis",
+      "kind": "authored",
+      "title": "Acute pancreatitis",
+      "subtitle": "Classify by organ failure, resuscitate moderately, delay intervention",
+      "category": "abdomen",
+      "specialty": "general",
+      "file": "protocols/acute-pancreatitis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "lower-gi-bleed",
+      "kind": "authored",
+      "title": "Acute lower GI bleeding",
+      "subtitle": "Shock index first, localise before you operate",
+      "category": "abdomen",
+      "specialty": "general",
+      "file": "protocols/lower-gi-bleed.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "colonic-volvulus",
+      "kind": "authored",
+      "title": "Sigmoid and caecal volvulus",
+      "subtitle": "Decompress the sigmoid, resect the caecum",
+      "category": "abdomen",
+      "specialty": "general",
+      "file": "protocols/colonic-volvulus.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "anastomotic-leak",
+      "kind": "authored",
+      "title": "Anastomotic leak",
+      "subtitle": "Suspect early, scan early, control the source",
+      "category": "perioperative",
+      "specialty": "general",
+      "file": "protocols/anastomotic-leak.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "bile-duct-injury",
+      "kind": "authored",
+      "title": "Bile duct injury after cholecystectomy",
+      "subtitle": "Recognise, drain, define, refer to HPB",
+      "category": "perioperative",
+      "specialty": "general",
+      "file": "protocols/bile-duct-injury.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "perianal-sepsis",
+      "kind": "authored",
+      "title": "Perianal sepsis and acute anorectal conditions",
+      "subtitle": "Abscess, thrombosed haemorrhoid, fissure, pilonidal",
+      "category": "abdomen",
+      "specialty": "general",
+      "file": "protocols/perianal-sepsis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "who-safety-checklist",
+      "kind": "authored",
+      "title": "WHO Surgical Safety Checklist",
+      "subtitle": "Sign in, time out, sign out: what each item prevents",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/who-safety-checklist.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "surgical-prophylaxis",
+      "kind": "authored",
+      "title": "Surgical antibiotic prophylaxis",
+      "subtitle": "Right drug, right time, stop at the end",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/surgical-prophylaxis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "periop-antithrombotic",
+      "kind": "authored",
+      "title": "Peri-operative anticoagulants and antiplatelets",
+      "subtitle": "When to stop, whether to bridge, when to restart",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/periop-antithrombotic.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "periop-diabetes-steroids",
+      "kind": "authored",
+      "title": "Peri-operative diabetes, SGLT2 inhibitors and steroid cover",
+      "subtitle": "Keep glucose safe, avoid ketoacidosis, prevent adrenal crisis",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/periop-diabetes-steroids.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "eras-bundle",
+      "kind": "authored",
+      "title": "Enhanced Recovery After Surgery",
+      "subtitle": "ERAS colorectal bundle: compliance is the intervention",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/eras-bundle.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "postop-vte-prophylaxis",
+      "kind": "authored",
+      "title": "Post-operative VTE prophylaxis",
+      "subtitle": "Assess every patient, balance clot against bleed",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/postop-vte-prophylaxis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-epistaxis",
+      "kind": "authored",
+      "title": "Epistaxis",
+      "subtitle": "The ladder: pressure, cautery, pack, ligate or embolise",
+      "category": "ent_emergency",
+      "specialty": "ent",
+      "file": "protocols/ent-epistaxis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-post-tonsillectomy-haemorrhage",
+      "kind": "authored",
+      "title": "Post-tonsillectomy haemorrhage",
+      "subtitle": "Every bleed is admitted; a child hides blood loss until late",
+      "category": "ent_emergency",
+      "specialty": "ent",
+      "file": "protocols/ent-post-tonsillectomy-haemorrhage.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-stridor-airway",
+      "kind": "authored",
+      "title": "Stridor and the emergency airway",
+      "subtitle": "Including front-of-neck access and tracheostomy emergencies",
+      "category": "ent_airway",
+      "specialty": "ent",
+      "file": "protocols/ent-stridor-airway.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-deep-neck-infection",
+      "kind": "authored",
+      "title": "Deep neck space infection and Ludwig angina",
+      "subtitle": "Including peritonsillar abscess: the airway first, then the pus",
+      "category": "ent_airway",
+      "specialty": "ent",
+      "file": "protocols/ent-deep-neck-infection.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-foreign-body",
+      "kind": "authored",
+      "title": "Airway and oesophageal foreign body",
+      "subtitle": "A choking history means bronchoscopy; a button battery means now",
+      "category": "ent_airway",
+      "specialty": "ent",
+      "file": "protocols/ent-foreign-body.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-sudden-hearing-loss-facial-palsy",
+      "kind": "authored",
+      "title": "Sudden sensorineural hearing loss and acute facial palsy",
+      "subtitle": "Bell's palsy and the otological causes: the steroid window is short",
+      "category": "ent_emergency",
+      "specialty": "ent",
+      "file": "protocols/ent-sudden-hearing-loss-facial-palsy.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "eye-chemical-injury",
+      "kind": "authored",
+      "title": "Chemical eye injury",
+      "subtitle": "Irrigate first, examine second, check the pH last",
+      "category": "eye_emergency",
+      "specialty": "ophthalmology",
+      "file": "protocols/eye-chemical-injury.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "eye-open-globe-orbital-trauma",
+      "kind": "authored",
+      "title": "Open globe and orbital trauma",
+      "subtitle": "Shield the globe; release a tense orbit with a lateral canthotomy",
+      "category": "eye_emergency",
+      "specialty": "ophthalmology",
+      "file": "protocols/eye-open-globe-orbital-trauma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "eye-acute-angle-closure-red-eye",
+      "kind": "authored",
+      "title": "Acute angle closure and the acute red eye",
+      "subtitle": "Painful red eye with blurred vision is never conjunctivitis",
+      "category": "eye_emergency",
+      "specialty": "ophthalmology",
+      "file": "protocols/eye-acute-angle-closure-red-eye.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "open-fracture",
+      "kind": "authored",
+      "title": "Open fractures",
+      "subtitle": "Antibiotics in the hour, orthoplastic debridement",
+      "category": "ortho_trauma",
+      "specialty": "orthopaedics",
+      "file": "protocols/open-fracture.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "hip-fracture",
+      "kind": "authored",
+      "title": "Hip fracture pathway",
+      "subtitle": "Analgesia now, theatre within a day, walk the next",
+      "category": "ortho_trauma",
+      "specialty": "orthopaedics",
+      "file": "protocols/hip-fracture.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pelvic-fracture-haemorrhage",
+      "kind": "authored",
+      "title": "Pelvic fracture with haemorrhage",
+      "subtitle": "Binder, blood, then embolise or pack",
+      "category": "ortho_trauma",
+      "specialty": "orthopaedics",
+      "file": "protocols/pelvic-fracture-haemorrhage.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "compartment-syndrome",
+      "kind": "authored",
+      "title": "Acute compartment syndrome",
+      "subtitle": "Pain out of proportion is the sign; fasciotomy is the treatment",
+      "category": "ortho_emergency",
+      "specialty": "orthopaedics",
+      "file": "protocols/compartment-syndrome.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "septic-arthritis",
+      "kind": "authored",
+      "title": "Septic arthritis",
+      "subtitle": "Aspirate, then wash out; the child's hip included",
+      "category": "ortho_emergency",
+      "specialty": "orthopaedics",
+      "file": "protocols/septic-arthritis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "dislocation-neurovascular",
+      "kind": "authored",
+      "title": "Major joint dislocation with neurovascular compromise",
+      "subtitle": "Examine, reduce, re-examine, image the artery",
+      "category": "ortho_emergency",
+      "specialty": "orthopaedics",
+      "file": "protocols/dislocation-neurovascular.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pulseless-limb-fracture",
+      "kind": "authored",
+      "title": "The pulseless limb after fracture or dislocation",
+      "subtitle": "Realign, re-examine, revascularise within the hour",
+      "category": "ortho_emergency",
+      "specialty": "orthopaedics",
+      "file": "protocols/pulseless-limb-fracture.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "hand-trauma",
+      "kind": "authored",
+      "title": "Hand injuries",
+      "subtitle": "Flexor tendons, injection injuries and fight bites",
+      "category": "plastics_emergency",
+      "specialty": "plastics",
+      "file": "protocols/hand-trauma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "flap-monitoring",
+      "kind": "authored",
+      "title": "Flap monitoring and the failing flap",
+      "subtitle": "Free and pedicled flaps: the first 48 hours",
+      "category": "plastics_emergency",
+      "specialty": "plastics",
+      "file": "protocols/flap-monitoring.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "facial-lacerations-bites",
+      "kind": "authored",
+      "title": "Complex facial lacerations and dog bites",
+      "subtitle": "Clean, protect the nerves and ducts, align the landmarks",
+      "category": "plastics_emergency",
+      "specialty": "plastics",
+      "file": "protocols/facial-lacerations-bites.json",
+      "review": "ai_drafted"
+    }
   ],
   "stepPacks": [
-    { "id": "core", "file": "steps/core.json", "title": "Steps shared by every operation", "shared": true },
-    { "id": "laparoscopy", "file": "steps/laparoscopy.json", "title": "Laparoscopic access and closure", "shared": true },
-    { "id": "abdomen", "file": "steps/abdomen.json", "title": "Open abdominal steps", "shared": true },
-    { "id": "softtissue", "file": "steps/softtissue.json", "title": "Soft-tissue and drainage steps", "shared": true }
+    {
+      "id": "core",
+      "file": "steps/core.json",
+      "title": "Steps shared by every operation",
+      "shared": true
+    },
+    {
+      "id": "laparoscopy",
+      "file": "steps/laparoscopy.json",
+      "title": "Laparoscopic access and closure",
+      "shared": true
+    },
+    {
+      "id": "abdomen",
+      "file": "steps/abdomen.json",
+      "title": "Open abdominal steps",
+      "shared": true
+    },
+    {
+      "id": "softtissue",
+      "file": "steps/softtissue.json",
+      "title": "Soft-tissue and drainage steps",
+      "shared": true
+    },
+    {
+      "id": "neuro",
+      "file": "steps/neuro.json",
+      "title": "Shared neurosurgical and spinal steps",
+      "shared": true
+    },
+    {
+      "id": "urology",
+      "file": "steps/urology.json",
+      "title": "Shared urology steps",
+      "shared": true
+    },
+    {
+      "id": "paeds",
+      "file": "steps/paeds.json",
+      "title": "Shared paediatric surgical steps",
+      "shared": true
+    },
+    {
+      "id": "obgyn",
+      "file": "steps/obgyn.json",
+      "title": "Shared obstetric and gynaecological steps",
+      "shared": true
+    },
+    {
+      "id": "onco",
+      "file": "steps/onco.json",
+      "title": "Shared cancer-operation steps (oncology, breast, endocrine)",
+      "shared": true
+    },
+    {
+      "id": "vascular",
+      "file": "steps/vascular.json",
+      "title": "Shared open arterial steps",
+      "shared": true
+    },
+    {
+      "id": "bowel",
+      "file": "steps/bowel.json",
+      "title": "Shared bowel, stoma and anastomosis steps",
+      "shared": true
+    },
+    {
+      "id": "ent",
+      "file": "steps/ent.json",
+      "title": "Shared ENT steps",
+      "shared": true
+    },
+    {
+      "id": "ortho",
+      "file": "steps/ortho.json",
+      "title": "Shared orthopaedic and limb steps",
+      "shared": true
+    },
+    {
+      "id": "hernia",
+      "file": "steps/hernia.json",
+      "title": "Shared hernia and hiatal steps",
+      "shared": true
+    },
+    {
+      "id": "anorectal",
+      "file": "steps/anorectal.json",
+      "title": "Shared anorectal and perianal steps",
+      "shared": true
+    },
+    {
+      "id": "hand",
+      "file": "steps/hand.json",
+      "title": "Shared hand surgery steps",
+      "shared": true
+    },
+    {
+      "id": "thoracic",
+      "file": "steps/thoracic.json",
+      "title": "Shared cardiothoracic steps",
+      "shared": true
+    },
+    {
+      "id": "hpb",
+      "file": "steps/hpb.json",
+      "title": "Shared hepatopancreatobiliary and spleen steps",
+      "shared": true
+    },
+    {
+      "id": "neck",
+      "file": "steps/neck.json",
+      "title": "Shared central neck steps (thyroid, parathyroid, neck dissection)",
+      "shared": true
+    }
   ],
   "procedures": [
-    { "id": "appendicectomy", "title": "Appendicectomy", "subtitle": "Open and laparoscopic", "system": "gastrointestinal", "file": "procedures/appendicectomy.json", "stepPacks": ["core", "laparoscopy", "abdomen"], "review": "ai_drafted", "estMinutes": 45 },
-    { "id": "lap-cholecystectomy", "title": "Laparoscopic cholecystectomy", "subtitle": "Critical View of Safety", "system": "hepatobiliary", "file": "procedures/lap-cholecystectomy.json", "stepPacks": ["core", "laparoscopy"], "review": "ai_drafted", "estMinutes": 60 },
-    { "id": "hernia-repair", "title": "Open inguinal hernia repair", "subtitle": "Lichtenstein tension-free mesh", "system": "abdominal wall", "file": "procedures/hernia-repair.json", "stepPacks": ["core", "abdomen"], "review": "ai_drafted", "estMinutes": 50 },
-    { "id": "laparotomy", "title": "Exploratory laparotomy", "subtitle": "Systematic exploration and damage control", "system": "gastrointestinal", "file": "procedures/laparotomy.json", "stepPacks": ["core", "abdomen"], "review": "ai_drafted", "estMinutes": 90 },
-    { "id": "abscess-drainage", "title": "Abscess incision and drainage", "subtitle": "Source control at its simplest", "system": "soft tissue", "file": "procedures/abscess-drainage.json", "stepPacks": ["core", "softtissue"], "review": "ai_drafted", "estMinutes": 20 }
+    {
+      "id": "appendicectomy",
+      "title": "Appendicectomy",
+      "subtitle": "Open and laparoscopic",
+      "system": "gastrointestinal",
+      "file": "procedures/appendicectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45,
+      "specialty": "general"
+    },
+    {
+      "id": "lap-cholecystectomy",
+      "title": "Laparoscopic cholecystectomy",
+      "subtitle": "Critical View of Safety",
+      "system": "hepatobiliary",
+      "file": "procedures/lap-cholecystectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60,
+      "specialty": "general"
+    },
+    {
+      "id": "hernia-repair",
+      "title": "Open inguinal hernia repair",
+      "subtitle": "Lichtenstein tension-free mesh",
+      "system": "abdominal wall",
+      "file": "procedures/hernia-repair.json",
+      "stepPacks": [
+        "core",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 50,
+      "specialty": "general"
+    },
+    {
+      "id": "laparotomy",
+      "title": "Exploratory laparotomy",
+      "subtitle": "Systematic exploration and damage control",
+      "system": "gastrointestinal",
+      "file": "procedures/laparotomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90,
+      "specialty": "general"
+    },
+    {
+      "id": "abscess-drainage",
+      "title": "Abscess incision and drainage",
+      "subtitle": "Source control at its simplest",
+      "system": "soft tissue",
+      "file": "procedures/abscess-drainage.json",
+      "stepPacks": [
+        "core",
+        "softtissue"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 20,
+      "specialty": "general"
+    },
+    {
+      "id": "burr-hole-csdh",
+      "title": "Burr hole evacuation of chronic subdural haematoma",
+      "subtitle": "Wash out, drain, prevent recurrence",
+      "system": "neurological",
+      "specialty": "neurosurgery",
+      "file": "procedures/burr-hole-csdh.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "trauma-craniotomy-edh",
+      "title": "Trauma craniotomy for extradural haematoma",
+      "subtitle": "With decompressive craniectomy as the bailout",
+      "system": "neurological",
+      "specialty": "neurosurgery",
+      "file": "procedures/trauma-craniotomy-edh.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "evd-insertion",
+      "title": "External ventricular drain insertion",
+      "subtitle": "Frontal approach at Kocher point",
+      "system": "neurological",
+      "specialty": "neurosurgery",
+      "file": "procedures/evd-insertion.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "lumbar-discectomy-ces",
+      "title": "Lumbar decompression for cauda equina syndrome",
+      "subtitle": "Discectomy with laminotomy or laminectomy",
+      "system": "spine",
+      "specialty": "neurosurgery",
+      "file": "procedures/lumbar-discectomy-ces.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "uro-turp",
+      "title": "Transurethral resection of the prostate (TURP)",
+      "subtitle": "Resect between the bladder neck and the verumontanum, and watch the fluid",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-turp.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "uro-turbt",
+      "title": "Transurethral resection of bladder tumour (TURBT)",
+      "subtitle": "Complete resection with detrusor muscle in the specimen",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-turbt.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "uro-scrotal-exploration",
+      "title": "Scrotal exploration with bilateral orchidopexy",
+      "subtitle": "Untwist, judge viability, fix both sides",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-scrotal-exploration.json",
+      "stepPacks": [
+        "core"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "uro-suprapubic-catheter",
+      "title": "Suprapubic catheter insertion",
+      "subtitle": "Full bladder, no bowel in the way",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-suprapubic-catheter.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25
+    },
+    {
+      "id": "pyloromyotomy",
+      "title": "Pyloromyotomy (Ramstedt)",
+      "subtitle": "Open or laparoscopic, after correction",
+      "system": "gastrointestinal",
+      "specialty": "paediatric",
+      "file": "procedures/pyloromyotomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "paeds"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "paeds-herniotomy",
+      "title": "Paediatric inguinal herniotomy",
+      "subtitle": "High ligation of the patent processus vaginalis",
+      "system": "abdominal wall",
+      "specialty": "paediatric",
+      "file": "procedures/paeds-herniotomy.json",
+      "stepPacks": [
+        "core",
+        "paeds"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 30
+    },
+    {
+      "id": "lscs",
+      "title": "Lower segment caesarean section",
+      "subtitle": "Category, incision, delivery, closure",
+      "system": "obstetric",
+      "specialty": "obgyn",
+      "file": "procedures/lscs.json",
+      "stepPacks": [
+        "core",
+        "obgyn"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "lap-salpingectomy",
+      "title": "Laparoscopic salpingectomy for ectopic pregnancy",
+      "subtitle": "Evacuate, identify, remove the tube",
+      "system": "gynaecological",
+      "specialty": "obgyn",
+      "file": "procedures/lap-salpingectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "obgyn"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "total-thyroidectomy",
+      "title": "Total thyroidectomy",
+      "subtitle": "Nerves, parathyroids, neuromonitoring",
+      "system": "endocrine",
+      "specialty": "endocrine",
+      "file": "procedures/total-thyroidectomy.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "modified-radical-mastectomy",
+      "title": "Modified radical mastectomy",
+      "subtitle": "Total mastectomy with level I and II axillary clearance",
+      "system": "breast",
+      "specialty": "breast",
+      "file": "procedures/modified-radical-mastectomy.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "wle-sentinel-node-biopsy",
+      "title": "Wide local excision with sentinel node biopsy",
+      "subtitle": "Breast-conserving surgery and axillary staging",
+      "system": "breast",
+      "specialty": "breast",
+      "file": "procedures/wle-sentinel-node-biopsy.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "right-hemicolectomy",
+      "title": "Right hemicolectomy",
+      "subtitle": "Oncological lymphadenectomy and complete mesocolic excision principles",
+      "system": "gastrointestinal",
+      "specialty": "oncology",
+      "file": "procedures/right-hemicolectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "abdomen",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "open-raaa-repair",
+      "title": "Open repair of ruptured abdominal aortic aneurysm",
+      "subtitle": "Outline level, with damage control",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/open-raaa-repair.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "femoral-embolectomy",
+      "title": "Femoral embolectomy",
+      "subtitle": "Balloon catheter embolectomy for acute limb ischaemia",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/femoral-embolectomy.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "below-knee-amputation",
+      "title": "Below-knee amputation",
+      "subtitle": "Long posterior myocutaneous flap",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/below-knee-amputation.json",
+      "stepPacks": [
+        "core"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "chest-drain-insertion",
+      "title": "Intercostal chest drain insertion",
+      "subtitle": "Seldinger and blunt dissection techniques",
+      "system": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "procedures/chest-drain-insertion.json",
+      "stepPacks": [
+        "core"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 30
+    },
+    {
+      "id": "hartmanns-procedure",
+      "title": "Hartmann's procedure",
+      "subtitle": "Sigmoid resection, end colostomy, closed rectal stump",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/hartmanns-procedure.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "loop-ileostomy",
+      "title": "Loop ileostomy: formation and closure",
+      "subtitle": "Defunctioning stoma and its reversal",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/loop-ileostomy.json",
+      "stepPacks": [
+        "core",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "lap-perforated-duodenal-ulcer",
+      "title": "Laparoscopic repair of perforated duodenal ulcer",
+      "subtitle": "Omental patch, washout, treat the cause",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/lap-perforated-duodenal-ulcer.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "abdomen",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "small-bowel-resection",
+      "title": "Small bowel resection with anastomosis",
+      "subtitle": "Resect what is dead, keep what is alive, measure what is left",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/small-bowel-resection.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "tonsillectomy",
+      "title": "Tonsillectomy",
+      "subtitle": "Stay on the capsule, check the fossae twice",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/tonsillectomy.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "surgical-tracheostomy",
+      "title": "Open surgical tracheostomy",
+      "subtitle": "The airway is the anaesthetist's until the new tube is confirmed",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/surgical-tracheostomy.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "fess",
+      "title": "Functional endoscopic sinus surgery (FESS)",
+      "subtitle": "Read the CT before the nose: the orbit and skull base are millimetres away",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/fess.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "myringotomy-grommets",
+      "title": "Myringotomy and grommet insertion",
+      "subtitle": "Anteroinferior incision, away from the ossicles",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/myringotomy-grommets.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 15
+    },
+    {
+      "id": "dynamic-hip-screw",
+      "title": "Dynamic hip screw",
+      "subtitle": "Sliding hip screw for an intertrochanteric fracture",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/dynamic-hip-screw.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "tibial-im-nail",
+      "title": "Intramedullary nailing of the tibia",
+      "subtitle": "Reamed locked nailing of a tibial shaft fracture",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/tibial-im-nail.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "open-fracture-debridement",
+      "title": "Debridement of an open fracture with external fixation",
+      "subtitle": "Orthoplastic wound excision, lavage and spanning frame",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/open-fracture-debridement.json",
+      "stepPacks": [
+        "core",
+        "ortho",
+        "softtissue"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "leg-fasciotomy",
+      "title": "Fasciotomy of the leg",
+      "subtitle": "Two-incision, four-compartment decompression",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/leg-fasciotomy.json",
+      "stepPacks": [
+        "core",
+        "ortho",
+        "softtissue"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "split-skin-graft",
+      "title": "Split-thickness skin graft",
+      "subtitle": "Harvest, mesh, inset and protect",
+      "system": "skin and soft tissue",
+      "specialty": "plastics",
+      "file": "procedures/split-skin-graft.json",
+      "stepPacks": [
+        "core",
+        "ortho",
+        "softtissue"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "lap-inguinal-hernia-repair",
+      "title": "Laparoscopic inguinal hernia repair",
+      "subtitle": "TEP and TAPP preperitoneal mesh repair",
+      "system": "abdominal wall",
+      "specialty": "general",
+      "file": "procedures/lap-inguinal-hernia-repair.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "hernia"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "open-ventral-hernia-repair",
+      "title": "Open umbilical and incisional hernia repair with mesh",
+      "subtitle": "Sublay (retromuscular) and preperitoneal mesh",
+      "system": "abdominal wall",
+      "specialty": "general",
+      "file": "procedures/open-ventral-hernia-repair.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "hernia"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "haemorrhoidectomy",
+      "title": "Excisional haemorrhoidectomy",
+      "subtitle": "Milligan-Morgan open technique",
+      "system": "anorectal",
+      "specialty": "general",
+      "file": "procedures/haemorrhoidectomy.json",
+      "stepPacks": [
+        "core",
+        "anorectal"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "lateral-internal-sphincterotomy",
+      "title": "Lateral internal sphincterotomy",
+      "subtitle": "Chronic anal fissure, tailored division",
+      "system": "anorectal",
+      "specialty": "general",
+      "file": "procedures/lateral-internal-sphincterotomy.json",
+      "stepPacks": [
+        "core",
+        "anorectal"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25
+    },
+    {
+      "id": "fistula-in-ano-surgery",
+      "title": "Fistula-in-ano: fistulotomy and seton",
+      "subtitle": "Find the internal opening, protect the sphincter",
+      "system": "anorectal",
+      "specialty": "general",
+      "file": "procedures/fistula-in-ano-surgery.json",
+      "stepPacks": [
+        "core",
+        "anorectal"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "pilonidal-sinus-excision",
+      "title": "Pilonidal sinus excision",
+      "subtitle": "Excision with open healing or off-midline closure",
+      "system": "skin and soft tissue",
+      "specialty": "general",
+      "file": "procedures/pilonidal-sinus-excision.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "anorectal"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 50
+    },
+    {
+      "id": "lap-nissen-fundoplication",
+      "title": "Laparoscopic Nissen fundoplication",
+      "subtitle": "Hiatal repair and 360 degree floppy wrap",
+      "system": "upper gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/lap-nissen-fundoplication.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "hernia"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "lap-sleeve-gastrectomy",
+      "title": "Laparoscopic sleeve gastrectomy",
+      "subtitle": "Bougie-calibrated vertical gastrectomy",
+      "system": "upper gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/lap-sleeve-gastrectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "hernia",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "uro-ureteroscopy-laser",
+      "title": "Ureteroscopy with laser lithotripsy",
+      "subtitle": "Safety wire first, low pressure, never force the scope",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-ureteroscopy-laser.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "uro-dj-stent",
+      "title": "Retrograde double-J ureteric stent insertion",
+      "subtitle": "Decompress the kidney, prove both coils, book the removal",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-dj-stent.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25
+    },
+    {
+      "id": "uro-pcnl",
+      "title": "Percutaneous nephrolithotomy (PCNL)",
+      "subtitle": "The right calyx, end-on through the papilla, and a plan for bleeding",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-pcnl.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "uro-radical-nephrectomy",
+      "title": "Radical nephrectomy (open and laparoscopic principles)",
+      "subtitle": "Outside Gerota's fascia, artery before vein, specimen out intact",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-radical-nephrectomy.json",
+      "stepPacks": [
+        "core",
+        "urology",
+        "onco",
+        "laparoscopy",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "uro-hydrocele-repair",
+      "title": "Hydrocele repair (Jaboulay or Lord)",
+      "subtitle": "Image the testis first, then choose the repair for the sac",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-hydrocele-repair.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "uro-adult-circumcision",
+      "title": "Adult circumcision",
+      "subtitle": "Bipolar only, mark before cutting, control the frenular artery",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-adult-circumcision.json",
+      "stepPacks": [
+        "core"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "uro-varicocelectomy",
+      "title": "Subinguinal microsurgical varicocelectomy",
+      "subtitle": "Ligate the veins, save the artery, the lymphatics and the vas",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-varicocelectomy.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "uro-inguinal-orchidectomy",
+      "title": "Radical inguinal orchidectomy for testicular tumour",
+      "subtitle": "Markers first, inguinal approach, clamp the cord before the testis moves",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-inguinal-orchidectomy.json",
+      "stepPacks": [
+        "core",
+        "urology",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "total-hip-replacement",
+      "title": "Total hip replacement (posterior approach)",
+      "subtitle": "Primary hip arthroplasty through the posterior approach",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/total-hip-replacement.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "hip-hemiarthroplasty",
+      "title": "Hemiarthroplasty of the hip",
+      "subtitle": "Cemented hemiarthroplasty for a displaced intracapsular neck of femur fracture",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/hip-hemiarthroplasty.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "total-knee-replacement",
+      "title": "Total knee replacement",
+      "subtitle": "Primary cemented knee arthroplasty through a medial parapatellar approach",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/total-knee-replacement.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 110
+    },
+    {
+      "id": "ankle-orif",
+      "title": "Open reduction and internal fixation of the ankle",
+      "subtitle": "Lateral malleolus plate and syndesmosis fixation for an unstable ankle fracture",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/ankle-orif.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "distal-radius-fixation",
+      "title": "Distal radius fracture fixation",
+      "subtitle": "Volar locking plate, with K-wire fixation as the alternative",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/distal-radius-fixation.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "acl-reconstruction",
+      "title": "Arthroscopic ACL reconstruction (hamstring graft)",
+      "subtitle": "Anatomical single-bundle reconstruction with semitendinosus and gracilis autograft",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/acl-reconstruction.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 100
+    },
+    {
+      "id": "carpal-tunnel-release",
+      "title": "Open carpal tunnel release",
+      "subtitle": "Decompression of the median nerve at the wrist",
+      "system": "musculoskeletal",
+      "specialty": "plastics",
+      "file": "procedures/carpal-tunnel-release.json",
+      "stepPacks": [
+        "core",
+        "hand",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25
+    },
+    {
+      "id": "trigger-finger-release",
+      "title": "Trigger finger release",
+      "subtitle": "Open A1 pulley release, wide awake or under tourniquet",
+      "system": "musculoskeletal",
+      "specialty": "plastics",
+      "file": "procedures/trigger-finger-release.json",
+      "stepPacks": [
+        "core",
+        "hand",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 20
+    },
+    {
+      "id": "flexor-tendon-repair",
+      "title": "Flexor tendon repair (zone II)",
+      "subtitle": "Primary repair with a multistrand core suture and epitendinous suture",
+      "system": "musculoskeletal",
+      "specialty": "plastics",
+      "file": "procedures/flexor-tendon-repair.json",
+      "stepPacks": [
+        "core",
+        "hand",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "vp-shunt-insertion",
+      "title": "Ventriculoperitoneal shunt insertion",
+      "subtitle": "Frontal or parieto-occipital catheter, valve and peritoneal catheter",
+      "system": "neurological",
+      "specialty": "neurosurgery",
+      "file": "procedures/vp-shunt-insertion.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "craniotomy-supratentorial-tumour",
+      "title": "Craniotomy for supratentorial tumour",
+      "subtitle": "Navigation-guided resection of an intra-axial tumour",
+      "system": "neurological",
+      "specialty": "neurosurgery",
+      "file": "procedures/craniotomy-supratentorial-tumour.json",
+      "stepPacks": [
+        "core",
+        "neuro",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 210
+    },
+    {
+      "id": "decompressive-craniectomy",
+      "title": "Decompressive craniectomy (planned)",
+      "subtitle": "Large fronto-temporo-parietal craniectomy with expansile duraplasty",
+      "system": "neurological",
+      "specialty": "neurosurgery",
+      "file": "procedures/decompressive-craniectomy.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "acdf",
+      "title": "Anterior cervical discectomy and fusion",
+      "subtitle": "Smith-Robinson approach, discectomy, cage and plate",
+      "system": "spine",
+      "specialty": "neurosurgery",
+      "file": "procedures/acdf.json",
+      "stepPacks": [
+        "core",
+        "neuro",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "lumbar-laminectomy-stenosis",
+      "title": "Lumbar laminectomy for canal stenosis",
+      "subtitle": "Central and lateral recess decompression without fusion",
+      "system": "spine",
+      "specialty": "neurosurgery",
+      "file": "procedures/lumbar-laminectomy-stenosis.json",
+      "stepPacks": [
+        "core",
+        "neuro",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 100
+    },
+    {
+      "id": "posterior-lumbar-fusion-tlif",
+      "title": "Posterior lumbar instrumented fusion (TLIF)",
+      "subtitle": "Pedicle screws, decompression and transforaminal interbody fusion",
+      "system": "spine",
+      "specialty": "neurosurgery",
+      "file": "procedures/posterior-lumbar-fusion-tlif.json",
+      "stepPacks": [
+        "core",
+        "neuro",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 210
+    },
+    {
+      "id": "septoplasty",
+      "title": "Septoplasty",
+      "subtitle": "Stay under the perichondrium, leave the L-strut",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/septoplasty.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "adenoidectomy",
+      "title": "Adenoidectomy",
+      "subtitle": "Feel the palate first, spare the tori and the lower fringe",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/adenoidectomy.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25
+    },
+    {
+      "id": "mastoidectomy",
+      "title": "Cortical and modified radical mastoidectomy",
+      "subtitle": "Find the lateral canal, then you know where the nerve is",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/mastoidectomy.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "tympanoplasty-underlay",
+      "title": "Tympanoplasty type 1 (underlay)",
+      "subtitle": "Freshen the edge, see the chain, graft medial to the remnant",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/tympanoplasty-underlay.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "superficial-parotidectomy",
+      "title": "Superficial parotidectomy with facial nerve identification",
+      "subtitle": "Find the trunk first, keep the capsule intact",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/superficial-parotidectomy.json",
+      "stepPacks": [
+        "core",
+        "ent",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "microlaryngoscopy-biopsy",
+      "title": "Direct laryngoscopy and microlaryngoscopy with biopsy",
+      "subtitle": "Agree the airway first, map before you bite",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/microlaryngoscopy-biopsy.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "quinsy-drainage",
+      "title": "Peritonsillar abscess (quinsy) drainage under local anaesthetic",
+      "subtitle": "Aspirate before you cut, and never aim laterally",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/quinsy-drainage.json",
+      "stepPacks": [
+        "core",
+        "ent",
+        "softtissue"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 20
+    },
+    {
+      "id": "carotid-endarterectomy",
+      "title": "Carotid endarterectomy",
+      "subtitle": "Plaque removal with patch closure, under local or general anaesthesia",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/carotid-endarterectomy.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "fem-pop-bypass",
+      "title": "Femoro-popliteal bypass (above knee, vein graft)",
+      "subtitle": "Reversed great saphenous vein to the above-knee popliteal artery",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/fem-pop-bypass.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "av-fistula-radiocephalic",
+      "title": "Radiocephalic arteriovenous fistula",
+      "subtitle": "Wrist fistula for haemodialysis access",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/av-fistula-radiocephalic.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "gsv-ablation-stripping",
+      "title": "Great saphenous vein surgery",
+      "subtitle": "Endovenous thermal ablation, and open high tie with stripping",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/gsv-ablation-stripping.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "above-knee-amputation",
+      "title": "Above-knee amputation",
+      "subtitle": "Transfemoral amputation with equal flaps and adductor myodesis",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/above-knee-amputation.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "vats-bullectomy-pleurodesis",
+      "title": "VATS bullectomy with pleurodesis",
+      "subtitle": "Definitive surgery for recurrent or persistent pneumothorax",
+      "system": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "procedures/vats-bullectomy-pleurodesis.json",
+      "stepPacks": [
+        "core",
+        "thoracic"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "median-sternotomy",
+      "title": "Median sternotomy and closure",
+      "subtitle": "Opening, closing, and emergency re-sternotomy",
+      "system": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "procedures/median-sternotomy.json",
+      "stepPacks": [
+        "core",
+        "thoracic",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "cabg",
+      "title": "Coronary artery bypass grafting",
+      "subtitle": "Outline level: conduits, cardiopulmonary bypass, anastomoses, weaning",
+      "system": "cardiac",
+      "specialty": "cardiothoracic",
+      "file": "procedures/cabg.json",
+      "stepPacks": [
+        "core",
+        "thoracic",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 240
+    },
+    {
+      "id": "paeds-orchidopexy",
+      "title": "Inguinal orchidopexy for undescended testis",
+      "subtitle": "Mobilise, ligate the processus, gain length, fix in a dartos pouch",
+      "system": "genitourinary",
+      "specialty": "paediatric",
+      "file": "procedures/paeds-orchidopexy.json",
+      "stepPacks": [
+        "core",
+        "paeds"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "paeds-circumcision",
+      "title": "Paediatric circumcision",
+      "subtitle": "Check the anatomy, protect the glans, bipolar only",
+      "system": "genitourinary",
+      "specialty": "paediatric",
+      "file": "procedures/paeds-circumcision.json",
+      "stepPacks": [
+        "core",
+        "paeds"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 30
+    },
+    {
+      "id": "paeds-intussusception-reduction",
+      "title": "Operative reduction of intussusception",
+      "subtitle": "Squeeze, do not pull; resect when it will not reduce or is not viable",
+      "system": "gastrointestinal",
+      "specialty": "paediatric",
+      "file": "procedures/paeds-intussusception-reduction.json",
+      "stepPacks": [
+        "core",
+        "paeds",
+        "abdomen",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "paeds-ladd-procedure",
+      "title": "Laparotomy for malrotation (Ladd procedure)",
+      "subtitle": "Derotate anticlockwise, divide the bands, widen the mesentery",
+      "system": "gastrointestinal",
+      "specialty": "paediatric",
+      "file": "procedures/paeds-ladd-procedure.json",
+      "stepPacks": [
+        "core",
+        "paeds",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "total-abdominal-hysterectomy",
+      "title": "Total abdominal hysterectomy",
+      "subtitle": "Pedicle by pedicle, close to the uterus, ureters seen",
+      "system": "gynaecological",
+      "specialty": "obgyn",
+      "file": "procedures/total-abdominal-hysterectomy.json",
+      "stepPacks": [
+        "core",
+        "obgyn",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "lap-ovarian-cystectomy",
+      "title": "Laparoscopic ovarian cystectomy",
+      "subtitle": "Benign cyst out intact, ovary kept, bipolar sparing",
+      "system": "gynaecological",
+      "specialty": "obgyn",
+      "file": "procedures/lap-ovarian-cystectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "obgyn"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "evacuation-rpoc",
+      "title": "Surgical management of miscarriage: manual or electric vacuum aspiration",
+      "subtitle": "Know the axis, gentle dilatation, suction not sharp curettage",
+      "system": "gynaecological",
+      "specialty": "obgyn",
+      "file": "procedures/evacuation-rpoc.json",
+      "stepPacks": [
+        "core",
+        "obgyn"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 20
+    },
+    {
+      "id": "mcdonald-cerclage",
+      "title": "Transvaginal cervical cerclage (McDonald)",
+      "subtitle": "High purse-string at the cervicovaginal junction, gentle on the membranes",
+      "system": "obstetric",
+      "specialty": "obgyn",
+      "file": "procedures/mcdonald-cerclage.json",
+      "stepPacks": [
+        "core",
+        "obgyn"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 30
+    },
+    {
+      "id": "open-myomectomy",
+      "title": "Open (abdominal) myomectomy",
+      "subtitle": "Plan the incisions, control the blood supply, close the dead space",
+      "system": "gynaecological",
+      "specialty": "obgyn",
+      "file": "procedures/open-myomectomy.json",
+      "stepPacks": [
+        "core",
+        "obgyn",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "lap-anterior-resection-tme",
+      "title": "Laparoscopic anterior resection with total mesorectal excision",
+      "subtitle": "Holy plane, nerve preservation, safe low anastomosis",
+      "system": "gastrointestinal",
+      "specialty": "oncology",
+      "file": "procedures/lap-anterior-resection-tme.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 240
+    },
+    {
+      "id": "left-hemicolectomy-sigmoid",
+      "title": "Left hemicolectomy and sigmoid colectomy",
+      "subtitle": "Ureter first, the right tie, a tension-free colorectal join",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/left-hemicolectomy-sigmoid.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "open-subtotal-cholecystectomy",
+      "title": "Open and subtotal cholecystectomy",
+      "subtitle": "The bail-out operation for the difficult gallbladder",
+      "system": "hepatobiliary",
+      "specialty": "general",
+      "file": "procedures/open-subtotal-cholecystectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "lap-cbd-exploration",
+      "title": "Laparoscopic common bile duct exploration",
+      "subtitle": "Transcystic or choledochotomy, single-stage stone clearance",
+      "system": "hepatobiliary",
+      "specialty": "general",
+      "file": "procedures/lap-cbd-exploration.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "abdomen",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "splenectomy",
+      "title": "Splenectomy: trauma and elective",
+      "subtitle": "Mobilise, control the hilum, protect the pancreatic tail, vaccinate",
+      "system": "upper gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/splenectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "pancreaticoduodenectomy",
+      "title": "Pancreaticoduodenectomy (Whipple)",
+      "subtitle": "Outline: resectability, point of no return, three anastomoses, the bail-out",
+      "system": "hepatobiliary",
+      "specialty": "oncology",
+      "file": "procedures/pancreaticoduodenectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "onco",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 420
+    },
+    {
+      "id": "right-hepatectomy",
+      "title": "Right hepatectomy",
+      "subtitle": "Principles of liver resection: inflow, outflow, transection, Pringle",
+      "system": "hepatobiliary",
+      "specialty": "oncology",
+      "file": "procedures/right-hepatectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "onco",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 300
+    },
+    {
+      "id": "hemithyroidectomy",
+      "title": "Hemithyroidectomy (thyroid lobectomy)",
+      "subtitle": "One lobe and the isthmus, with the nerve and parathyroids kept",
+      "system": "endocrine",
+      "specialty": "endocrine",
+      "file": "procedures/hemithyroidectomy.json",
+      "stepPacks": [
+        "core",
+        "onco",
+        "neck"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "parathyroidectomy",
+      "title": "Parathyroidectomy",
+      "subtitle": "Focused excision of a localised adenoma, bilateral exploration as the fallback",
+      "system": "endocrine",
+      "specialty": "endocrine",
+      "file": "procedures/parathyroidectomy.json",
+      "stepPacks": [
+        "core",
+        "onco",
+        "neck"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "modified-radical-neck-dissection",
+      "title": "Modified radical neck dissection",
+      "subtitle": "Levels I to V cleared, accessory nerve, jugular vein and sternomastoid kept",
+      "system": "head and neck",
+      "specialty": "oncology",
+      "file": "procedures/modified-radical-neck-dissection.json",
+      "stepPacks": [
+        "core",
+        "onco",
+        "neck"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "axillary-lymph-node-dissection",
+      "title": "Axillary lymph node dissection",
+      "subtitle": "Level I and II clearance with the axillary vein and three nerves defined",
+      "system": "breast",
+      "specialty": "breast",
+      "file": "procedures/axillary-lymph-node-dissection.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "breast-fibroadenoma-excision",
+      "title": "Excision of a benign breast lump (fibroadenoma)",
+      "subtitle": "Concordant diagnosis first, then a small cosmetic excision",
+      "system": "breast",
+      "specialty": "breast",
+      "file": "procedures/breast-fibroadenoma-excision.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "d2-gastrectomy",
+      "title": "D2 gastrectomy for gastric cancer",
+      "subtitle": "Subtotal and total gastrectomy with station-based D2 lymphadenectomy",
+      "system": "gastrointestinal",
+      "specialty": "oncology",
+      "file": "procedures/d2-gastrectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 240
+    },
+    {
+      "id": "laparoscopic-adrenalectomy",
+      "title": "Laparoscopic adrenalectomy",
+      "subtitle": "Lateral transperitoneal approach, vein control and an intact capsule",
+      "system": "endocrine",
+      "specialty": "endocrine",
+      "file": "procedures/laparoscopic-adrenalectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "ivor-lewis-oesophagectomy",
+      "title": "Oesophagectomy (Ivor Lewis principles)",
+      "subtitle": "Outline: abdominal gastric conduit, right chest resection, intrathoracic anastomosis",
+      "system": "gastrointestinal",
+      "specialty": "oncology",
+      "file": "procedures/ivor-lewis-oesophagectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 360
+    }
   ],
   "cases": [
-    { "id": "rlq-pain-young-man", "title": "Right iliac fossa pain", "subtitle": "Emergency - who goes to theatre", "file": "cases/rlq-pain-young-man.json", "levels": ["student", "intern", "resident", "surgeon"], "review": "ai_drafted" },
-    { "id": "preop-cardiac-risk", "title": "Fit for surgery?", "subtitle": "Pre-operative decision-making", "file": "cases/preop-cardiac-risk.json", "levels": ["intern", "resident", "surgeon"], "review": "ai_drafted" },
-    { "id": "pod3-tachycardia", "title": "Tachycardia on day three", "subtitle": "Post-operative deterioration", "file": "cases/pod3-tachycardia.json", "levels": ["intern", "resident", "surgeon"], "review": "ai_drafted" }
+    {
+      "id": "rlq-pain-young-man",
+      "title": "Right iliac fossa pain",
+      "subtitle": "Emergency - who goes to theatre",
+      "file": "cases/rlq-pain-young-man.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted",
+      "specialty": "general"
+    },
+    {
+      "id": "preop-cardiac-risk",
+      "title": "Fit for surgery?",
+      "subtitle": "Pre-operative decision-making",
+      "file": "cases/preop-cardiac-risk.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted",
+      "specialty": "periop"
+    },
+    {
+      "id": "pod3-tachycardia",
+      "title": "Tachycardia on day three",
+      "subtitle": "Post-operative deterioration",
+      "file": "cases/pod3-tachycardia.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted",
+      "specialty": "general"
+    },
+    {
+      "id": "edh-lucid-interval",
+      "title": "Talking, then not",
+      "subtitle": "Lucid interval after a blow to the head",
+      "specialty": "neurosurgery",
+      "file": "cases/edh-lucid-interval.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "back-pain-retention",
+      "title": "Back pain and a full bladder",
+      "subtitle": "Suspected cauda equina syndrome",
+      "specialty": "neurosurgery",
+      "file": "cases/back-pain-retention.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-teen-scrotal-pain",
+      "title": "Scrotal pain at 2am",
+      "subtitle": "A 15-year-old with sudden left testicular pain",
+      "specialty": "urology",
+      "file": "cases/uro-teen-scrotal-pain.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-fever-obstructing-stone",
+      "title": "Fever with an obstructing stone",
+      "subtitle": "Renal colic that has become urosepsis",
+      "specialty": "urology",
+      "file": "cases/uro-fever-obstructing-stone.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "projectile-vomiting-infant",
+      "title": "Three weeks old and vomiting",
+      "subtitle": "Paediatric surgery: correct first, operate second",
+      "specialty": "paediatric",
+      "file": "cases/projectile-vomiting-infant.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "collapse-ectopic",
+      "title": "Collapse with abdominal pain",
+      "subtitle": "Emergency gynaecology: test, resuscitate, operate",
+      "specialty": "obgyn",
+      "file": "cases/collapse-ectopic.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "stridor-post-thyroidectomy",
+      "title": "Stridor four hours after thyroidectomy",
+      "subtitle": "Endocrine surgery - the neck that is closing",
+      "specialty": "endocrine",
+      "file": "cases/stridor-post-thyroidectomy.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ovarian-cancer-distension",
+      "title": "Vomiting and distension in known ovarian cancer",
+      "subtitle": "Surgical oncology - the right operation, or none",
+      "specialty": "oncology",
+      "file": "cases/ovarian-cancer-distension.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "cold-leg-af",
+      "title": "Sudden cold painful leg",
+      "subtitle": "Acute limb ischaemia in atrial fibrillation",
+      "specialty": "vascular",
+      "file": "cases/cold-leg-af.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pulsatile-mass-collapse",
+      "title": "Collapse, abdominal pain and a pulsatile mass",
+      "subtitle": "Ruptured abdominal aortic aneurysm",
+      "specialty": "vascular",
+      "file": "cases/pulsatile-mass-collapse.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "severe-pancreatitis-restraint",
+      "title": "Severe acute pancreatitis, day 2 to day 14",
+      "subtitle": "When not to operate",
+      "specialty": "general",
+      "file": "cases/severe-pancreatitis-restraint.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "apixaban-clopidogrel-hernia",
+      "title": "Apixaban and clopidogrel before a hernia repair",
+      "subtitle": "Peri-operative antithrombotic planning",
+      "specialty": "periop",
+      "file": "cases/apixaban-clopidogrel-hernia.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "post-tonsillectomy-bleed-night",
+      "title": "Bleeding on day six after tonsillectomy",
+      "subtitle": "Secondary post-tonsillectomy haemorrhage at night",
+      "specialty": "ent",
+      "file": "cases/post-tonsillectomy-bleed-night.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "displaced-tracheostomy-ward",
+      "title": "The tracheostomy that moved",
+      "subtitle": "Displaced tracheostomy on the ward",
+      "specialty": "ent",
+      "file": "cases/displaced-tracheostomy-ward.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "crushed-leg-pain",
+      "title": "The crushed leg",
+      "subtitle": "Pain out of proportion on the trauma ward",
+      "specialty": "orthopaedics",
+      "file": "cases/crushed-leg-pain.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "elderly-fall-hip",
+      "title": "Fallen and cannot weight-bear",
+      "subtitle": "The hip fracture pathway, from front door to first walk",
+      "specialty": "orthopaedics",
+      "file": "cases/elderly-fall-hip.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    }
+  ],
+  "specialties": [
+    {
+      "id": "general",
+      "title": "General, GI and HPB surgery"
+    },
+    {
+      "id": "trauma",
+      "title": "Trauma"
+    },
+    {
+      "id": "periop",
+      "title": "Peri-operative care"
+    },
+    {
+      "id": "neurosurgery",
+      "title": "Neurosurgery and spine"
+    },
+    {
+      "id": "urology",
+      "title": "Urology"
+    },
+    {
+      "id": "paediatric",
+      "title": "Paediatric surgery"
+    },
+    {
+      "id": "obgyn",
+      "title": "Obstetric and gynaecological surgery"
+    },
+    {
+      "id": "oncology",
+      "title": "Surgical oncology"
+    },
+    {
+      "id": "breast",
+      "title": "Breast surgery"
+    },
+    {
+      "id": "endocrine",
+      "title": "Endocrine surgery"
+    },
+    {
+      "id": "vascular",
+      "title": "Vascular surgery"
+    },
+    {
+      "id": "cardiothoracic",
+      "title": "Cardiothoracic surgery"
+    },
+    {
+      "id": "ent",
+      "title": "ENT and head and neck"
+    },
+    {
+      "id": "ophthalmology",
+      "title": "Eye emergencies"
+    },
+    {
+      "id": "orthopaedics",
+      "title": "Orthopaedics and trauma"
+    },
+    {
+      "id": "plastics",
+      "title": "Plastics, burns and hand"
+    }
   ]
 }

@@ -1,0 +1,186 @@
+{
+  "id": "septic-arthritis",
+  "title": "Septic arthritis",
+  "subtitle": "Aspirate, then wash out; the child's hip included",
+  "category": "ortho_emergency",
+  "specialty": "orthopaedics",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "boast-msk-sti",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Management of musculoskeletal soft tissue infections (including native large joint infections)",
+      "year": 2025,
+      "url": "https://www.boa.ac.uk/resource/management-of-musculoskeletal-soft-tissue-infections.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "boast-paed-msk",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: The Management of Children with Acute Musculoskeletal Infection",
+      "year": 2022,
+      "url": "https://www.boa.ac.uk/resource/boast-the-management-of-children-with-acute-musculoskeletal-infection.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "bsr-hot-joint",
+      "org": "British Society for Rheumatology, BHPR, BOA, RCGP and BSAC (Coakley G et al). Rheumatology 45:1039",
+      "title": "Guidelines for management of the hot swollen joint in adults",
+      "year": 2006,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16829534/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "kocher-1999",
+      "org": "Kocher MS et al. J Bone Joint Surg Am 81:1662",
+      "title": "Differentiating between septic arthritis and transient synovitis of the hip in children: an evidence-based clinical prediction algorithm",
+      "year": 1999,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10608376/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "kocher-2004",
+      "org": "Kocher MS et al. J Bone Joint Surg Am 86:1629",
+      "title": "Validation of a clinical prediction rule for the differentiation between septic arthritis and transient synovitis of the hip in children",
+      "year": 2004,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15292409/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "An acutely hot, swollen, painful joint with restricted movement is septic until aspiration says otherwise."
+      },
+      {
+        "text": "Signs of sepsis: hypotension, tachycardia, tachypnoea, confusion or a raised lactate."
+      },
+      {
+        "text": "A febrile child who will not weight-bear, or an infant who will not move a limb."
+      },
+      {
+        "text": "Immunosuppression, diabetes, rheumatoid arthritis, intravenous drug use, or a recent joint injection."
+      },
+      {
+        "text": "A prosthetic joint: this follows the peri-prosthetic joint infection pathway, not this one."
+      },
+      {
+        "text": "Crystals in the aspirate do not exclude infection. The two coexist."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "A patient with sepsis gets the sepsis six immediately, including blood cultures and empirical antibiotics.",
+        "timeCritical": true,
+        "evidenceRef": "boast-msk-sti"
+      },
+      {
+        "text": "In a child meeting high-risk sepsis criteria, start empirical intravenous antibiotics immediately; in a stable child going to theatre, antibiotics may wait for deep samples.",
+        "timeCritical": true,
+        "evidenceRef": "boast-paed-msk"
+      },
+      {
+        "text": "In a stable adult, aspirate the joint before antibiotics, and send fluid for Gram stain, culture and crystal microscopy.",
+        "timeCritical": true,
+        "evidenceRef": "boast-msk-sti"
+      },
+      {
+        "text": "Take blood cultures before the first antibiotic dose.",
+        "evidenceRef": "bsr-hot-joint"
+      },
+      {
+        "text": "Children: inpatient care shared by orthopaedics and paediatrics, with full blood count, CRP, blood cultures and ESR, and radiographs of the affected joint.",
+        "evidenceRef": "boast-paed-msk"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Paediatric hip, septic arthritis versus transient synovitis: non-weight-bearing, temperature above 38.5 C, ESR above 40 mm/h and white cell count above 12 x 10^9/L. Probability rises steeply with each criterion present.",
+        "calcs": [
+          "kocher"
+        ]
+      },
+      {
+        "text": "Use the criteria to support the decision to aspirate, not to replace clinical judgement. Their performance falls when applied outside the population in which they were derived."
+      },
+      {
+        "text": "Differentials: crystal arthritis, reactive arthritis, haemarthrosis, adjacent osteomyelitis, and in children Perthes disease or a slipped upper femoral epiphysis."
+      },
+      {
+        "text": "Ask about sexual history: gonococcal arthritis is often polyarticular with tenosynovitis and skin lesions."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Ultrasound confirms a hip effusion and guides aspiration."
+      },
+      {
+        "text": "Children: MRI is the preferred second-line test, ideally within 48 hours, to look for osteomyelitis, pyomyositis or abscess; ultrasound in the same time frame."
+      },
+      {
+        "text": "Synovial fluid white cell count, Gram stain, culture and crystals. A negative Gram stain does not exclude infection."
+      },
+      {
+        "text": "Inflammatory markers trend, rather than single values, to guide progress."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Fluids, oxygen if needed, and lactate monitoring under the sepsis pathway.",
+        "evidenceRef": "boast-msk-sti"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Children: surgical drainage of septic arthritis as soon as possible, ideally within 24 hours of diagnosis.",
+        "timeCritical": true,
+        "evidenceRef": "boast-paed-msk"
+      },
+      {
+        "text": "Adults: urgent drainage of the infected native joint, by arthroscopic or open washout, or by repeated closed aspiration in selected accessible joints, with a low threshold to return if not improving.",
+        "timeCritical": true,
+        "evidenceRef": "bsr-hot-joint"
+      },
+      {
+        "text": "Treat native joint infection as time-critical: cartilage damage begins early.",
+        "evidenceRef": "boast-msk-sti"
+      },
+      {
+        "text": "Empirical antibiotics per local microbiology policy after samples, rationalised to culture. In children, use improving temperature, CRP, ESR and white count with examination to guide the switch to oral therapy and total duration.",
+        "evidenceRef": "boast-paed-msk"
+      },
+      {
+        "text": "Follow children with bone or joint infection clinically and radiographically for at least 12 months.",
+        "evidenceRef": "boast-paed-msk"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Microbiology on the day for the empirical choice, and again when cultures return."
+      },
+      {
+        "text": "Complex paediatric cases transfer to a specialist centre within 24 hours of referral."
+      },
+      {
+        "text": "A patient failing to improve after washout needs a repeat washout and imaging for an adjacent collection, not just a new antibiotic."
+      }
+    ]
+  },
+  "notes": [
+    "The child's hip is the classic trap: a well-looking child with transient synovitis and a septic hip can look alike on the first visit. Aspirate when in doubt.",
+    "Kingella kingae is a common pathogen under about 4 years and is easily missed on routine culture; tell the laboratory the age.",
+    "Every hot joint deserves crystal microscopy, and every crystal-positive joint with fever still deserves a culture."
+  ],
+  "calcs": [
+    "kocher",
+    "qsofa",
+    "news2",
+    "sirs"
+  ]
+}

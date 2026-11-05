@@ -1,0 +1,154 @@
+{
+  "id": "svc-obstruction",
+  "title": "Superior vena cava obstruction",
+  "subtitle": "The surgeon's role: tissue, airway caution, stent first",
+  "category": "onco_emergencies",
+  "specialty": "oncology",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "wilson-nejm",
+      "org": "New England Journal of Medicine",
+      "title": "Superior vena cava syndrome with malignant causes (Wilson LD, Detterbeck FC, Yahalom J)",
+      "year": 2007,
+      "url": "https://www.nejm.org/doi/full/10.1056/NEJMcp067190",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "yu-jto",
+      "org": "Journal of Thoracic Oncology",
+      "title": "Superior vena cava syndrome: a proposed classification system and algorithm for management (Yu JB, Wilson LD, Detterbeck FC)",
+      "year": 2008,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Yu+Wilson+Detterbeck+superior+vena+cava+syndrome+proposed+classification+system",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng122",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Lung cancer: diagnosis and management (NG122)",
+      "year": 2019,
+      "url": "https://www.nice.org.uk/guidance/ng122",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Stridor, voice change or laryngeal oedema: airway compromise, the life-threatening presentation."
+      },
+      {
+        "text": "Confusion, reduced conscious level or headache worse on lying flat: cerebral oedema."
+      },
+      {
+        "text": "Syncope or hypotension, especially with a large anterior mediastinal mass compressing the heart or great vessels."
+      },
+      {
+        "text": "A request for a general anaesthetic for a biopsy in a patient with an anterior mediastinal mass and orthopnoea. Induction can cause complete airway or cardiovascular collapse."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Sit the patient up, give oxygen, and assess airway and neurological state. Severe symptoms need same-day oncology and interventional radiology input.",
+        "timeCritical": true,
+        "evidenceRef": "yu-jto"
+      },
+      {
+        "text": "Life-threatening features (stridor, cerebral oedema, haemodynamic compromise): arrange urgent endovenous stenting, which relieves symptoms fastest, before a tissue diagnosis if necessary.",
+        "timeCritical": true,
+        "evidenceRef": "yu-jto"
+      },
+      {
+        "text": "Without life-threatening features, avoid steroids until tissue is obtained: they can make lymphoma and thymoma undiagnosable.",
+        "evidenceRef": "wilson-nejm"
+      },
+      {
+        "text": "Site IV access in the lower limb where possible; upper-limb veins drain into the obstructed system.",
+        "evidenceRef": "wilson-nejm"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Grade the severity: facial and arm swelling and venous distension at one end, laryngeal or cerebral oedema and haemodynamic compromise at the other."
+      },
+      {
+        "text": "Orthopnoea, positional dyspnoea and syncope: these predict collapse under anaesthesia and must be explicitly sought before any sedation."
+      },
+      {
+        "text": "Likely cause: lung cancer and lymphoma account for most malignant cases; consider germ cell tumour, thymoma and metastatic disease, and catheter or device-related thrombosis."
+      },
+      {
+        "text": "Performance status and whether the cancer is already diagnosed and staged.",
+        "calcs": [
+          "ecog"
+        ]
+      }
+    ],
+    "investigate": [
+      {
+        "text": "CT chest with IV contrast to define the obstruction, the mass, collateral circulation, thrombus and the airway."
+      },
+      {
+        "text": "Tissue by the least invasive route: an accessible peripheral lymph node, CT-guided biopsy, or bronchoscopic and endobronchial ultrasound sampling. Pleural fluid cytology if there is an effusion."
+      },
+      {
+        "text": "Tumour markers for a young patient with an anterior mediastinal mass (AFP, beta-hCG) and LDH."
+      },
+      {
+        "text": "Flow-volume loop or awake airway assessment before any anaesthetic, decided with the anaesthetist."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Corticosteroids are reserved for airway oedema or steroid-responsive tumours once tissue is secured, or when the airway cannot wait.",
+        "evidenceRef": "wilson-nejm"
+      },
+      {
+        "text": "Anticoagulation when the cause is thrombosis, including catheter-related, after discussion of bleeding risk.",
+        "evidenceRef": "wilson-nejm"
+      },
+      {
+        "text": "Avoid sedation and supine positioning in a symptomatic patient with a mediastinal mass until an airway plan exists.",
+        "evidenceRef": "wilson-nejm"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Endovenous stent for symptomatic obstruction gives the quickest relief and does not compromise later histology; it is offered for symptom relief in lung cancer.",
+        "evidenceRef": "nice-ng122"
+      },
+      {
+        "text": "Treat the cause once the histology is known: chemotherapy for chemosensitive tumours such as small cell lung cancer, lymphoma and germ cell tumours, and radiotherapy where appropriate.",
+        "evidenceRef": "nice-ng122"
+      },
+      {
+        "text": "Surgical bypass or resection of the SVC is rarely indicated: for benign causes refractory to endovascular treatment, or as part of resection of a selected thymoma or lung cancer in a specialist thoracic unit.",
+        "evidenceRef": "wilson-nejm"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Oncology and interventional radiology the same day for severe symptoms."
+      },
+      {
+        "text": "Senior anaesthetist before any biopsy under anaesthesia; cardiothoracic surgery if cardiopulmonary bypass standby is being considered for a critical mediastinal mass."
+      },
+      {
+        "text": "Critical care for airway compromise or cerebral oedema."
+      }
+    ]
+  },
+  "notes": [
+    "SVCO is rarely an emergency in itself: the collateral circulation buys days. The real emergencies are the airway and the brain.",
+    "The surgeon is most often asked for a biopsy. The best contribution is choosing the safest route to tissue, often not a general anaesthetic.",
+    "Steroids given 'just in case' can cost the patient a diagnosis of lymphoma. Ask whether the airway truly cannot wait."
+  ],
+  "calcs": [
+    "ecog"
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "id": "carotid-endarterectomy",
+  "title": "Carotid endarterectomy",
+  "subtitle": "Plaque removal with patch closure, under local or general anaesthesia",
+  "system": "vascular",
+  "aliases": ["CEA", "carotid endarterectomy", "carotid surgery"],
+  "estMinutes": 120,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "esvs-carotid-2023", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2023 Clinical Practice Guidelines on the Management of Atherosclerotic Carotid and Vertebral Artery Disease", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/35598721/", "accessed": "2026-11-04" },
+    { "id": "gala-2008", "org": "GALA Trial Collaborative Group, The Lancet", "title": "General anaesthesia versus local anaesthesia for carotid surgery (GALA): a multicentre, randomised controlled trial", "year": 2008, "url": "https://pubmed.ncbi.nlm.nih.gov/19041130/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["abcd2", "nihss", "rcri"],
+  "chapters": {
+    "indications": [
+      "Recently symptomatic (TIA, amaurosis fugax or non-disabling stroke) internal carotid stenosis of 70 to 99 percent (NASCET method), performed as soon as the patient is neurologically stable, ideally within 14 days of symptoms (ESVS 2023).",
+      "Symptomatic 50 to 69 percent stenosis, considered case by case, where the benefit is smaller and depends on timing and patient factors.",
+      "Selected asymptomatic 60 to 99 percent stenosis with features suggesting a higher stroke risk on medical therapy, in a patient with good life expectancy, decided in a multidisciplinary setting."
+    ],
+    "contraindications": [
+      "A disabling stroke with no useful recovery to protect, or a large infarct with haemorrhagic transformation at risk of worsening with reperfusion.",
+      "Carotid occlusion: there is nothing to endarterectomise and no benefit.",
+      "Stenosis that is not accessible from the neck (a very high bifurcation or intracranial disease), or a hostile neck after radiotherapy or previous surgery, where stenting may be preferred.",
+      "Short life expectancy or high operative risk in asymptomatic disease."
+    ],
+    "preparation": [
+      "Confirm the side, the degree of stenosis on duplex (and CT or MR angiography if duplex is equivocal), and the symptom history and timing yourself.",
+      "Best medical therapy started and continued: antiplatelet (do not stop aspirin), statin and blood pressure control.",
+      "Agree the anaesthetic technique with the anaesthetist: general or local/regional. GALA found no difference in stroke, myocardial infarction or death between them, so choose by patient, surgeon and team preference.",
+      "Consent risks to discuss: stroke or death from the operation; cranial nerve injury (most often hypoglossal, vagus or marginal mandibular, usually temporary); neck haematoma that can compress the airway; myocardial infarction; hyperperfusion syndrome; wound infection; restenosis.",
+      "Document a baseline neurological examination to compare with on waking."
+    ],
+    "positioning": [
+      "Supine with the head on a ring, turned slightly away from the operative side and the neck gently extended with a roll under the shoulders.",
+      "Head-up tilt to reduce venous pressure; under local anaesthesia keep the drapes off the face so the patient can talk and squeeze a toy in the contralateral hand."
+    ],
+    "equipment": [
+      "Vascular set with fine instruments, vessel slings, bulldog and angled clamps.",
+      "Carotid shunt available and checked, in every case, even when shunting is selective.",
+      "Patch material (prosthetic, bovine pericardium or vein) and fine monofilament sutures.",
+      "Cerebral monitoring per unit practice (awake testing, stump pressure, transcranial Doppler or near-infrared spectroscopy) and a handheld Doppler or duplex for completion checks."
+    ],
+    "anatomy": [
+      "The common carotid artery runs in the carotid sheath with the internal jugular vein lateral and the vagus nerve posterior between them.",
+      "The bifurcation usually lies at the level of the upper border of the thyroid cartilage; the internal carotid continues posterolaterally without branches in the neck, the external carotid gives off the superior thyroid artery anteromedially.",
+      "The common facial vein crosses the bifurcation and drains into the internal jugular; dividing it opens the field.",
+      "The hypoglossal nerve crosses the internal and external carotid arteries superficially, a few centimetres above the bifurcation, tethered by the sternocleidomastoid branch of the occipital artery and the descendens hypoglossi (ansa cervicalis).",
+      "The carotid sinus at the bifurcation mediates the baroreflex: handling it can cause bradycardia and hypotension.",
+      "The marginal mandibular branch of the facial nerve lies just below the angle of the jaw; the superior laryngeal nerve passes deep to the carotid branches."
+    ],
+    "criticalSafety": [
+      "Minimal handling of the bifurcation before clamping: dissection of a diseased bulb can release embolic plaque and cause a stroke on the table.",
+      "Clamp the internal carotid first and release it last.",
+      "Achieve a clean, tapered distal endpoint in the internal carotid; an intimal flap left there thromboses the artery.",
+      "The shunt must be ready before clamping, not fetched after the patient deteriorates.",
+      "Any new deficit on waking needs immediate assessment and usually re-exploration or imaging within minutes, not observation."
+    ],
+    "structuresAtRisk": [
+      "Hypoglossal nerve",
+      "Vagus nerve and recurrent laryngeal function",
+      "Marginal mandibular branch of the facial nerve",
+      "Superior laryngeal nerve",
+      "Greater auricular nerve at the upper end of the incision",
+      "Internal jugular vein",
+      "Glossopharyngeal nerve during high exposure"
+    ],
+    "commonErrors": [
+      "Delaying a symptomatic patient for a routine list, when most of the benefit is lost after the first weeks.",
+      "Dissecting around the bulb before clamping.",
+      "An arteriotomy that stops short of the end of the plaque in the internal carotid.",
+      "Primary closure of a small internal carotid, narrowing it.",
+      "Uncontrolled hypertension after surgery, which drives hyperperfusion syndrome and haematoma."
+    ],
+    "complications": [
+      "Peri-operative stroke from embolism, thrombosis at the endarterectomy site, or hypoperfusion during clamping.",
+      "Cranial nerve injury: hoarseness, tongue deviation, lower lip weakness; most recover.",
+      "Neck haematoma with airway compromise.",
+      "Cerebral hyperperfusion syndrome: headache, seizures, intracerebral haemorrhage, usually in the first days and associated with high blood pressure.",
+      "Myocardial infarction.",
+      "Patch infection, false aneurysm and restenosis."
+    ],
+    "postop": [
+      "Neurological observations and wound and airway checks at short intervals in a monitored area for the first hours.",
+      "Strict blood pressure control to the unit's target; treat hypertension and hypotension promptly.",
+      "Any neck swelling with stridor or difficulty breathing: open the wound at the bedside and call the surgeon and anaesthetist.",
+      "Continue antiplatelet and statin therapy lifelong; duplex surveillance per unit protocol."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the symptomatic side with the patient and the imaging. Include stroke, death, cranial nerve injury and neck haematoma in the discussion." },
+    { "ref": "step.core.timeout", "emphasis": "State the clamp plan, the shunt availability and the cerebral monitoring method aloud at the time-out." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.cea.anaesthesia-monitoring" },
+    { "ref": "step.core.positioning", "emphasis": "Head on a ring, turned away, gentle extension, head-up tilt; airway and contralateral hand accessible under local anaesthesia." },
+    { "ref": "step.core.prep-drape", "emphasis": "From the mastoid and ear lobe to below the clavicle, so that the incision can be extended up behind the angle of the jaw." },
+    { "ref": "step.cea.exposure" },
+    { "ref": "step.cea.nerves" },
+    { "ref": "step.vasc.vessel-control", "emphasis": "Sling the common, external and internal carotid arteries and the superior thyroid artery with the minimum of dissection at the bulb. Control the internal carotid well beyond the palpable end of the plaque." },
+    { "ref": "step.vasc.heparin", "emphasis": "Given before clamping per local protocol; confirm with the anaesthetist." },
+    { "ref": "step.cea.shunt" },
+    { "ref": "step.cea.endarterectomy" },
+    { "ref": "step.cea.patch-closure" },
+    { "ref": "step.vasc.flush-backbleed", "emphasis": "Back-bleed the internal carotid and flush the external and common carotid before the last sutures, irrigating out any debris." },
+    { "ref": "step.vasc.restore-flow", "emphasis": "Restore flow into the external carotid first, then the internal carotid last, so that any residual debris or air goes to the face rather than the brain." },
+    { "ref": "step.vasc.heparin-reversal", "emphasis": "Practice varies; decide explicitly. Bleeding into the neck is an airway problem, not only a wound problem." },
+    { "ref": "step.core.haemostasis", "emphasis": "Check at a blood pressure close to the patient's normal; the patch suture line and the needle holes are the usual sources." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Send the plaque if local policy requires it; label the side." },
+    { "ref": "step.core.skin-closure", "emphasis": "Close the platysma as a separate layer; a drain is optional and does not prevent an airway-threatening haematoma." },
+    { "ref": "step.cea.neuro-check" },
+    { "ref": "step.core.debrief", "emphasis": "Record shunt use, clamp time, patch type, the endpoint, the neurological state on waking and the blood pressure target." }
+  ],
+  "steps_local": {
+    "step.cea.anaesthesia-monitoring": {
+      "id": "step.cea.anaesthesia-monitoring",
+      "kind": "prep",
+      "title": "Anaesthetic technique and cerebral monitoring",
+      "why": "The way you will know whether the brain tolerates clamping depends on the anaesthetic. An awake patient is the most direct monitor; under general anaesthesia you need a surrogate or a routine shunt.",
+      "how": [
+        "Agree with the anaesthetist on local or regional anaesthesia (superficial or intermediate cervical plexus block plus local infiltration) or general anaesthesia.",
+        "Under local anaesthesia, rehearse the neurological test with the patient before draping: speech, orientation and contralateral hand grip.",
+        "Under general anaesthesia, agree the monitoring (stump pressure, transcranial Doppler, near-infrared spectroscopy or EEG) or a policy of routine shunting.",
+        "Agree an arterial pressure target during clamping, usually at or slightly above the patient's baseline."
+      ],
+      "structuresAtRisk": ["Phrenic nerve with a deep cervical plexus block, causing diaphragm weakness"],
+      "pitfalls": [
+        "Starting under local anaesthesia in a patient who cannot lie still or cooperate.",
+        "No agreed plan for what counts as clamp intolerance."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cea.exposure": {
+      "id": "step.cea.exposure",
+      "kind": "access",
+      "title": "Exposure of the carotid sheath",
+      "why": "A good exposure lets you control the internal carotid beyond the plaque without traction on the bulb or the nerves. Most difficult carotid operations are difficult because the incision was too short or too low.",
+      "how": [
+        "Incise along the anterior border of sternocleidomastoid, centred on the bifurcation as marked on duplex; curve the upper end posteriorly towards the mastoid rather than towards the jaw.",
+        "Divide platysma and retract sternocleidomastoid laterally; open the carotid sheath along the anterior border of the internal jugular vein.",
+        "Ligate and divide the common facial vein to expose the bifurcation, and retract the jugular laterally.",
+        "Infiltrate local anaesthetic around the carotid sinus if bradycardia or hypotension occurs with handling."
+      ],
+      "structuresAtRisk": ["Greater auricular nerve", "Marginal mandibular nerve", "Internal jugular vein", "Carotid sinus"],
+      "pitfalls": [
+        "Extending the incision forward towards the jaw and stretching the marginal mandibular nerve with the retractor.",
+        "Pulling on the bulb to improve the view."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cea.nerves": {
+      "id": "step.cea.nerves",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Identifying and protecting the cranial nerves",
+      "why": "Cranial nerve injury is the commonest complication of carotid surgery. Most injuries come from traction, retractors and clamps rather than division, and they are avoided by seeing each nerve before working near it.",
+      "how": [
+        "Find the hypoglossal nerve as it crosses the internal and external carotid arteries above the bifurcation. To mobilise it upwards, divide the sternocleidomastoid artery and vein and, if needed, the descendens hypoglossi.",
+        "Identify the vagus in the posterior sheath between the artery and the jugular vein before applying any clamp, so that it is not caught.",
+        "Keep self-retaining retractors shallow at the upper end, and avoid them pressing on the angle of the jaw.",
+        "Avoid diathermy close to a nerve; use fine ties or bipolar."
+      ],
+      "structuresAtRisk": ["Hypoglossal nerve", "Vagus nerve", "Superior laryngeal nerve", "Marginal mandibular nerve"],
+      "pitfalls": [
+        "Mistaking the hypoglossal nerve for a vessel loop of the ansa and dividing it.",
+        "Including the vagus in the common carotid clamp."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cea.shunt": {
+      "id": "step.cea.shunt",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Clamping, clamp tolerance and shunting",
+      "why": "Most patients tolerate carotid clamping because the circle of Willis fills the hemisphere, but some do not. A shunt restores flow within a minute; the skill is recognising the need and inserting it without dislodging plaque or raising an intimal flap.",
+      "how": [
+        "Clamp the internal carotid first, then the common and the external carotid, and start timing.",
+        "Under local anaesthesia, test speech, orientation and hand grip immediately and every few minutes; under general anaesthesia, read the agreed monitor.",
+        "If intolerance appears (or the unit shunts routinely), extend the arteriotomy into the internal carotid beyond the plaque, insert the shunt into the internal carotid first, back-bleed it to expel air and debris, then insert the proximal end into the common carotid and secure both.",
+        "Confirm flow in the shunt with a Doppler; if the patient does not recover promptly, check the shunt position, raise the blood pressure and tell the team."
+      ],
+      "structuresAtRisk": ["Intima of the distal internal carotid, injured by the shunt tip or its balloon", "Brain, from air or plaque debris through the shunt"],
+      "pitfalls": [
+        "Shunt not opened, checked and on the trolley before clamping.",
+        "Pushing the shunt under a loose plaque edge, creating a dissection.",
+        "Forgetting a clamp or tourniquet on the shunt, leaving it occluded."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cea.endarterectomy": {
+      "id": "step.cea.endarterectomy",
+      "kind": "resection",
+      "critical": true,
+      "title": "Arteriotomy, plaque removal and the distal endpoint",
+      "why": "The endpoint in the internal carotid decides whether the artery stays open. A flap that lifts with flow will dissect or thrombose, and the result is a stroke after an apparently good operation.",
+      "how": [
+        "Make a longitudinal arteriotomy from the common carotid through the bulb into the internal carotid, past the end of the plaque into soft, normal artery.",
+        "Develop the endarterectomy plane in the media with a dissector, divide the plaque proximally, and remove the external carotid plaque by eversion.",
+        "Feather the plaque off distally in the internal carotid so that it breaks cleanly into a thin taper; if a step or loose flap remains, secure it with fine interrupted tacking sutures placed from inside out.",
+        "Irrigate with heparinised saline and remove every loose fibre circumferentially; consider eversion endarterectomy as an alternative technique where you are trained in it."
+      ],
+      "structuresAtRisk": ["Distal internal carotid intima", "Back wall of the artery if the plane is too deep"],
+      "pitfalls": [
+        "Stopping the arteriotomy short of the end of the plaque, so that the endpoint is blind.",
+        "Leaving circumferential fronds that become embolic or thrombogenic.",
+        "Too deep a plane, thinning the wall to adventitia."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cea.patch-closure": {
+      "id": "step.cea.patch-closure",
+      "kind": "reconstruction",
+      "title": "Closure of the arteriotomy with a patch",
+      "why": "Patch angioplasty reduces early thrombosis and restenosis compared with routine primary closure of a longitudinal arteriotomy, and ESVS recommends patch closure (or eversion) over routine primary closure.",
+      "how": [
+        "Cut the patch to the length and shape of the arteriotomy so that it widens without forming an aneurysmal bulge.",
+        "Sew with a fine continuous monofilament from each end towards the middle, taking care at the distal internal carotid apex, with the shunt in place if one is used.",
+        "Remove the shunt before the last few sutures, re-clamp, then flush and back-bleed before tying."
+      ],
+      "structuresAtRisk": ["Distal internal carotid apex", "Hypoglossal nerve over the upper end of the patch"],
+      "pitfalls": [
+        "A patch so wide that it forms a bulb with turbulent flow and mural thrombus.",
+        "Narrowing at the distal apex from large bites."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cea.neuro-check": {
+      "id": "step.cea.neuro-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Neurological assessment before leaving theatre",
+      "why": "A new deficit after carotid endarterectomy is often due to thrombosis or a flap at the operated site, and the brain can be saved only if this is found and corrected within minutes.",
+      "how": [
+        "Wake the patient in theatre (or continue the awake assessment) and examine speech, face, arm and leg strength, and tongue protrusion before leaving.",
+        "If there is a new deficit, scan the artery with duplex on the table and, if it is occluded or the endpoint is doubtful, re-open the wound and re-explore without delay.",
+        "Record the neurological state on leaving theatre, and the clamp time and shunt use, so that later changes can be judged."
+      ],
+      "structuresAtRisk": ["Brain", "Operated internal carotid"],
+      "pitfalls": [
+        "Attributing a new weakness to the anaesthetic and waiting.",
+        "Leaving theatre without a documented baseline to compare with."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

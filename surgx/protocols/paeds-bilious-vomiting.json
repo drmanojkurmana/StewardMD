@@ -1,0 +1,62 @@
+{
+  "id": "paeds-bilious-vomiting",
+  "title": "Bilious vomiting in a neonate or infant",
+  "subtitle": "Malrotation with volvulus until proven otherwise",
+  "category": "paeds_surgery",
+  "specialty": "paediatric",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: malrotation and midgut volvulus", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" },
+    { "id": "acr-vomit", "org": "American College of Radiology (ACR)", "title": "ACR Appropriateness Criteria: Vomiting in infants (J Am Coll Radiol 2020;17(11S):S505-S515)", "year": 2020, "url": "https://acsearch.acr.org/list", "accessed": "2026-11-04" },
+    { "id": "nice-ng29", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Intravenous fluid therapy in children and young people in hospital (NG29)", "year": 2015, "version": "NG29, bolus volume updated 2022", "url": "https://www.nice.org.uk/guidance/ng29", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Green (bilious) vomiting in any neonate or infant. It is a surgical emergency until a contrast study says otherwise, even if the baby looks well." },
+      { "text": "Abdominal distension, tenderness, abdominal wall erythema or blood per rectum: suggests ischaemic bowel and a volvulus that has already declared itself." },
+      { "text": "Shock, acidosis or a rising lactate in a vomiting baby. Do not wait for a study; this baby needs theatre." },
+      { "text": "A soft, flat abdomen does not exclude volvulus. Early volvulus often has a reassuringly normal examination." }
+    ],
+    "do_now": [
+      { "text": "Stop feeds, pass a wide-bore nasogastric tube on free drainage with regular aspiration, and site intravenous access.", "timeCritical": true, "evidenceRef": "holcomb" },
+      { "text": "Call the paediatric surgeon on the first report of bilious vomiting, not after the investigations are back.", "timeCritical": true, "evidenceRef": "holcomb" },
+      { "text": "Resuscitate a shocked baby with an isotonic crystalloid bolus at the NICE NG29 volume (10 to 20 mL/kg for term neonates, 10 mL/kg for older infants), reassessing after each bolus.", "timeCritical": true, "evidenceRef": "nice-ng29" },
+      { "text": "Arrange an urgent upper gastrointestinal contrast study in a stable baby; a shocked or peritonitic baby goes straight to laparotomy.", "timeCritical": true, "evidenceRef": "acr-vomit" }
+    ],
+    "assess": [
+      { "text": "Age at onset, gestation, birth weight, passage of meconium, feeding history and stool colour. Confirm the vomit is green, not yellow, by looking at it yourself." },
+      { "text": "Weight now, perfusion, capillary refill, fontanelle and urine output.", "calcs": ["paeds_weight"] },
+      { "text": "Examine for distension, tenderness, palpable loops, hernias and the anus. Look for features of Down syndrome or other anomalies associated with duodenal atresia." }
+    ],
+    "investigate": [
+      { "text": "Capillary blood gas with lactate, glucose, electrolytes, full blood count, coagulation, group and save." },
+      { "text": "Plain abdominal radiograph can show a double bubble (duodenal obstruction) or a dilated proximal pattern, but a normal film does not exclude malrotation." },
+      { "text": "Upper GI contrast study is the investigation of choice for suspected malrotation: the duodenojejunal flexure should lie left of the left pedicle at the level of the pylorus. A corkscrew duodenum indicates volvulus." },
+      { "text": "Ultrasound showing an inverted superior mesenteric artery and vein relationship or a whirlpool sign supports the diagnosis, where the operator is experienced, but it does not replace the contrast study when in doubt." }
+    ],
+    "resuscitate": [
+      { "text": "Correct dehydration and electrolytes with isotonic fluids; maintenance volumes by weight, and replace nasogastric losses.", "calcs": ["holliday"], "evidenceRef": "nice-ng29" },
+      { "text": "Check and correct glucose. Neonates without feeds become hypoglycaemic quickly.", "evidenceRef": "nice-ng29" },
+      { "text": "Broad-spectrum antibiotics per local protocol when bowel ischaemia, perforation or sepsis is suspected.", "evidenceRef": "holcomb" }
+    ],
+    "definitive": [
+      { "text": "Malrotation with volvulus: emergency Ladd procedure. Detorsion is anticlockwise, then divide Ladd bands, widen the mesenteric base, perform appendicectomy, and return the small bowel to the right and the colon to the left.", "evidenceRef": "holcomb" },
+      { "text": "Frankly necrotic bowel: resect only what is clearly dead. With extensive doubtful bowel, detorse, close temporarily and plan a second look at 24 to 48 hours rather than resecting widely.", "evidenceRef": "holcomb" },
+      { "text": "Malrotation without volvulus in a symptomatic infant still needs an early Ladd procedure, on the next available list, not an elective date.", "evidenceRef": "holcomb" },
+      { "text": "Duodenal atresia or other atresias: duodenoduodenostomy or the appropriate repair once resuscitated. These are urgent but not minute-critical.", "evidenceRef": "holcomb" }
+    ],
+    "escalate": [
+      { "text": "Transfer to a paediatric surgical centre without delay if there is none on site. Send the baby with a nasogastric tube on drainage, intravenous fluids and a trained escort." },
+      { "text": "Neonatal intensive care for the shocked or post-resection baby, and for any baby who may develop short bowel." },
+      { "text": "Senior paediatric radiologist for an equivocal contrast study. An uncertain duodenojejunal flexure position in a vomiting baby is resolved in theatre, not by a repeat study tomorrow." }
+    ]
+  },
+  "notes": [
+    "Bilious vomiting in the first weeks of life is malrotation with volvulus until proven otherwise. The cost of a negative contrast study is small; the cost of missing a volvulus is the entire midgut.",
+    "The baby with volvulus can look well for the first few hours. Clinical stability is not a reason to delay the study.",
+    "Yellow vomit is not bilious. Green is. Ask the parent or nurse to show you, and record the colour exactly."
+  ],
+  "calcs": ["paeds_weight", "holliday"]
+}

@@ -1,147 +1,1537 @@
 {
   "_comment": "SURGX evidence index. Each record is OUR OWN explanation of what a source says and why it matters, plus a pointer to the authoritative document. It deliberately does NOT reproduce recommendation tables, algorithms or figures: summarising with attribution is ordinary scholarly use, reproducing the artefact is not ours to do. surgx-evidence.js validateRecord() rejects any record with a `verbatim` field or without an originalSummary.",
   "schemaVersion": 1,
-  "updated": "2026-08-24",
+  "updated": "2026-11-04",
   "records": [
     {
       "id": "ev.atls",
       "title": "The ABCDE primary survey",
       "category": "trauma",
-      "topics": ["trauma", "resuscitation", "airway", "shock"],
+      "topics": [
+        "trauma",
+        "resuscitation",
+        "airway",
+        "shock"
+      ],
       "originalSummary": "The primary survey exists because injured patients die in a predictable order, and treating problems in that order buys the most time. Its real contribution is not the letters but the discipline: a problem found at A is treated before anyone moves to B, and any deterioration sends you back to the start. The evidence base for the sequence itself is largely observational and consensus-driven; what is well supported is that a standardised, rehearsed team process reduces missed injuries and shortens time to definitive care.",
-      "source": { "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-08-24" },
-      "protocolRefs": ["atls-primary-survey", "chest-trauma", "burns"]
+      "source": {
+        "org": "American College of Surgeons Committee on Trauma",
+        "title": "Advanced Trauma Life Support (ATLS) Student Course Manual",
+        "edition": "10th edition",
+        "year": 2018,
+        "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "atls-primary-survey",
+        "chest-trauma",
+        "burns"
+      ]
     },
     {
       "id": "ev.damage-control",
       "title": "Damage control resuscitation and the lethal triad",
       "category": "trauma",
-      "topics": ["trauma", "haemorrhage", "transfusion", "resuscitation"],
+      "topics": [
+        "trauma",
+        "haemorrhage",
+        "transfusion",
+        "resuscitation"
+      ],
       "originalSummary": "Hypothermia, acidosis and coagulopathy reinforce one another, and each one makes the next harder to correct. The practical consequence is a change in what a first operation is for: control bleeding and contamination, then leave, correct the physiology in intensive care, and return. The associated resuscitation strategy favours early blood components over crystalloid, keeps the patient warm, and accepts a lower blood pressure until the bleeding is controlled. The strongest single piece of evidence in this area is for early antifibrinolytic therapy in traumatic haemorrhage, where the benefit is clearly time-dependent.",
-      "source": { "org": "National Institute for Health and Care Excellence (NICE)", "title": "Major trauma: assessment and initial management (NG39)", "year": 2016, "version": "NG39", "url": "https://www.nice.org.uk/guidance/ng39", "accessed": "2026-08-24" },
-      "protocolRefs": ["haemorrhagic-shock", "atls-primary-survey"]
+      "source": {
+        "org": "National Institute for Health and Care Excellence (NICE)",
+        "title": "Major trauma: assessment and initial management (NG39)",
+        "year": 2016,
+        "version": "NG39",
+        "url": "https://www.nice.org.uk/guidance/ng39",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "haemorrhagic-shock",
+        "atls-primary-survey"
+      ]
     },
     {
       "id": "ev.source-control",
       "title": "Why source control beats broader antibiotics",
       "category": "infection",
-      "topics": ["sepsis", "infection", "abdomen", "abscess", "source control"],
+      "topics": [
+        "sepsis",
+        "infection",
+        "abdomen",
+        "abscess",
+        "source control"
+      ],
       "originalSummary": "Antimicrobials work on organisms that are perfused and dividing. Pus, dead tissue, an obstructed duct and a colonised implant are none of those things, which is why a patient failing on an appropriate antibiotic almost never needs a broader one. The consistent finding across intra-abdominal infection literature is that delay to source control, rather than choice of agent, drives mortality. The practical corollary is to choose the least invasive intervention that will actually control the source, and to re-image or re-explore rather than escalate the prescription.",
-      "source": { "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" },
-      "protocolRefs": ["surgical-sepsis", "postop-deterioration", "abscess"]
+      "source": {
+        "org": "World Society of Emergency Surgery (WSES)",
+        "title": "Guidelines for the management of intra-abdominal infections",
+        "year": 2017,
+        "url": "https://wjes.biomedcentral.com/",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "surgical-sepsis",
+        "postop-deterioration",
+        "abscess"
+      ]
     },
     {
       "id": "ev.ssc",
       "title": "The sepsis bundle, and the surgical element it adds",
       "category": "resuscitation",
-      "topics": ["sepsis", "shock", "resuscitation", "antibiotics"],
+      "topics": [
+        "sepsis",
+        "shock",
+        "resuscitation",
+        "antibiotics"
+      ],
       "originalSummary": "The sepsis bundle is a set of time-bound actions - cultures, antimicrobials, fluid, lactate, vasopressor - whose benefit comes largely from the fact that they happen quickly rather than from any one of them individually. In surgical sepsis there is a sixth element that the general bundle understates: identifying and controlling the anatomical source. The lactate is the most useful repeated measurement, not because it diagnoses anything but because a lactate that will not fall is a source that has not been controlled.",
-      "source": { "org": "Surviving Sepsis Campaign", "title": "International guidelines for management of sepsis and septic shock", "year": 2021, "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines", "accessed": "2026-08-24" },
-      "protocolRefs": ["surgical-sepsis", "postop-deterioration"]
+      "source": {
+        "org": "Surviving Sepsis Campaign",
+        "title": "International guidelines for management of sepsis and septic shock",
+        "year": 2021,
+        "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "surgical-sepsis",
+        "postop-deterioration"
+      ]
     },
     {
       "id": "ev.cvs",
       "title": "The Critical View of Safety",
       "category": "hepatobiliary",
-      "topics": ["cholecystectomy", "biliary", "safety", "gallbladder"],
+      "topics": [
+        "cholecystectomy",
+        "biliary",
+        "safety",
+        "gallbladder"
+      ],
       "originalSummary": "The classical bile duct injury happens because the common bile duct is mistaken for the cystic duct, usually after retraction that aligns the two. The Critical View of Safety is a positive confirmation of anatomy rather than a dissection technique: the hepatocystic triangle cleared, the lower third of the gallbladder separated from the cystic plate, and exactly two structures seen entering the gallbladder. Its power is that it is a checkpoint with a defined pass mark, which makes failure to achieve it a recognisable event that triggers a bail-out rather than a slower version of the same dissection.",
-      "source": { "org": "Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)", "title": "Safe Cholecystectomy Program: Critical View of Safety and the universal culture of safety", "year": 2018, "url": "https://www.sages.org/safe-cholecystectomy-program/", "accessed": "2026-08-24" },
-      "procedureRefs": ["lap-cholecystectomy"]
+      "source": {
+        "org": "Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)",
+        "title": "Safe Cholecystectomy Program: Critical View of Safety and the universal culture of safety",
+        "year": 2018,
+        "url": "https://www.sages.org/safe-cholecystectomy-program/",
+        "accessed": "2026-08-24"
+      },
+      "procedureRefs": [
+        "lap-cholecystectomy"
+      ]
     },
     {
       "id": "ev.tg18",
       "title": "Grading acute cholecystitis and cholangitis",
       "category": "hepatobiliary",
-      "topics": ["cholecystitis", "cholangitis", "biliary", "grading"],
+      "topics": [
+        "cholecystitis",
+        "cholangitis",
+        "biliary",
+        "grading"
+      ],
       "originalSummary": "The value of a formal severity grade in biliary sepsis is that it separates three quite different patients who present similarly: the one for early cholecystectomy, the one for percutaneous drainage, and the one whose duct must be decompressed tonight. It also changes the conversation from an impression to a category, which is what makes it possible to hand over. The diagnostic criteria combine local signs, systemic inflammation and imaging, and the associated flowcharts tie each grade to a management pathway.",
-      "source": { "org": "Tokyo Guidelines Steering Committee", "title": "Tokyo Guidelines 2018 (TG18) for acute cholangitis and cholecystitis", "year": 2018, "version": "TG18", "url": "https://onlinelibrary.wiley.com/journal/18686982", "accessed": "2026-08-24" },
-      "protocolRefs": ["cholecystitis", "cholangitis"],
-      "procedureRefs": ["lap-cholecystectomy"]
+      "source": {
+        "org": "Tokyo Guidelines Steering Committee",
+        "title": "Tokyo Guidelines 2018 (TG18) for acute cholangitis and cholecystitis",
+        "year": 2018,
+        "version": "TG18",
+        "url": "https://onlinelibrary.wiley.com/journal/18686982",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "cholecystitis",
+        "cholangitis"
+      ],
+      "procedureRefs": [
+        "lap-cholecystectomy"
+      ]
     },
     {
       "id": "ev.appendicitis",
       "title": "Appendicitis: scoring, imaging and the non-operative option",
       "category": "abdomen",
-      "topics": ["appendicitis", "abdomen", "scoring", "antibiotics"],
+      "topics": [
+        "appendicitis",
+        "abdomen",
+        "scoring",
+        "antibiotics"
+      ],
       "originalSummary": "Scoring instruments in appendicitis earn their place at both ends: a low score with normal inflammatory markers safely avoids imaging and admission, and a high score in a typical patient supports operating without a CT. Ultrasound has good specificity but poor sensitivity, so a non-visualised appendix is not a negative test. Antibiotic-first management of selected uncomplicated appendicitis is genuinely supported by trial evidence, with a recurrence rate that must be part of the conversation rather than a footnote.",
-      "source": { "org": "World Society of Emergency Surgery (WSES)", "title": "Diagnosis and treatment of acute appendicitis: Jerusalem guidelines, 2020 update", "year": 2020, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" },
-      "protocolRefs": ["acute_abdomen"],
-      "procedureRefs": ["appendicectomy"]
+      "source": {
+        "org": "World Society of Emergency Surgery (WSES)",
+        "title": "Diagnosis and treatment of acute appendicitis: Jerusalem guidelines, 2020 update",
+        "year": 2020,
+        "url": "https://wjes.biomedcentral.com/",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "acute_abdomen"
+      ],
+      "procedureRefs": [
+        "appendicectomy"
+      ]
     },
     {
       "id": "ev.ssti",
       "title": "Skin and soft-tissue infection: what antibiotics can and cannot do",
       "category": "infection",
-      "topics": ["cellulitis", "abscess", "necrotising", "infection"],
+      "topics": [
+        "cellulitis",
+        "abscess",
+        "necrotising",
+        "infection"
+      ],
       "originalSummary": "The central distinction is purulent versus non-purulent. A purulent collection is treated by drainage, with antibiotics as an adjunct for surrounding cellulitis, systemic features or immunocompromise. Non-purulent cellulitis is treated with antibiotics and elevation, and the commonest error is treating bilateral lower-leg venous change as infection. Necrotising infection sits outside both: it is a clinical and operative diagnosis, imaging delays it, and the extent of the first debridement is the strongest determinant of survival.",
-      "source": { "org": "Infectious Diseases Society of America (IDSA)", "title": "Practice guidelines for the diagnosis and management of skin and soft tissue infections", "year": 2014, "url": "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", "accessed": "2026-08-24" },
-      "protocolRefs": ["cellulitis", "abscess", "nec_sti"],
-      "procedureRefs": ["abscess-drainage"]
+      "source": {
+        "org": "Infectious Diseases Society of America (IDSA)",
+        "title": "Practice guidelines for the diagnosis and management of skin and soft tissue infections",
+        "year": 2014,
+        "url": "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "cellulitis",
+        "abscess",
+        "nec_sti"
+      ],
+      "procedureRefs": [
+        "abscess-drainage"
+      ]
     },
     {
       "id": "ev.diabetic-foot",
       "title": "Diabetic foot infection: perfusion, bone and the deep specimen",
       "category": "infection",
-      "topics": ["diabetic foot", "infection", "osteomyelitis", "ischaemia"],
+      "topics": [
+        "diabetic foot",
+        "infection",
+        "osteomyelitis",
+        "ischaemia"
+      ],
       "originalSummary": "Three things separate a diabetic foot infection from a soft-tissue infection elsewhere. Perfusion must be assessed in every case, because infection does not clear in an ischaemic foot however good the antibiotic. Bone involvement is common and is suggested by a positive probe-to-bone test at the bedside, long before imaging is conclusive. And the specimen that guides therapy is deep tissue or bone, not a superficial swab, which grows colonisers and misdirects treatment for weeks.",
-      "source": { "org": "International Working Group on the Diabetic Foot (IWGDF) / IDSA", "title": "Guidelines on the diagnosis and treatment of diabetes-related foot infections", "year": 2023, "url": "https://iwgdfguidelines.org/", "accessed": "2026-08-24" },
-      "protocolRefs": ["diabetic_foot"]
+      "source": {
+        "org": "International Working Group on the Diabetic Foot (IWGDF) / IDSA",
+        "title": "Guidelines on the diagnosis and treatment of diabetes-related foot infections",
+        "year": 2023,
+        "url": "https://iwgdfguidelines.org/",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "diabetic_foot"
+      ]
     },
     {
       "id": "ev.ugib",
       "title": "Upper GI bleeding: risk scores that work in both directions",
       "category": "abdomen",
-      "topics": ["gi bleeding", "endoscopy", "transfusion", "varices"],
+      "topics": [
+        "gi bleeding",
+        "endoscopy",
+        "transfusion",
+        "varices"
+      ],
       "originalSummary": "Upper gastrointestinal bleeding is one of the few areas where a pre-endoscopy score reliably identifies a patient who does not need admission at all, as well as one who must not leave the resuscitation room. Two other findings have changed practice more than any drug: a restrictive transfusion strategy improves outcomes outside massive haemorrhage, and in suspected variceal bleeding a splanchnic vasoconstrictor plus antibiotic prophylaxis started before endoscopy improves survival. Proton pump inhibition matters after endoscopy in high-risk non-variceal lesions, not routinely before it.",
-      "source": { "org": "National Institute for Health and Care Excellence (NICE)", "title": "Acute upper gastrointestinal bleeding in over 16s: management", "year": 2016, "url": "https://www.nice.org.uk/guidance/cg141", "accessed": "2026-08-24" },
-      "protocolRefs": ["upper-gi-bleed"]
+      "source": {
+        "org": "National Institute for Health and Care Excellence (NICE)",
+        "title": "Acute upper gastrointestinal bleeding in over 16s: management",
+        "year": 2016,
+        "url": "https://www.nice.org.uk/guidance/cg141",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "upper-gi-bleed"
+      ]
     },
     {
       "id": "ev.hernia",
       "title": "Groin hernia: tension-free repair and the pain problem",
       "category": "abdominal wall",
-      "topics": ["hernia", "mesh", "chronic pain", "groin"],
+      "topics": [
+        "hernia",
+        "mesh",
+        "chronic pain",
+        "groin"
+      ],
       "originalSummary": "Mesh repair reduced recurrence to the point where the dominant long-term complication of groin hernia surgery is no longer recurrence but chronic pain. That reframes the operation: identifying and deliberately handling the three groin nerves is now as important as the mesh itself. The other consistent lesson is about the femoral canal - it must be inspected in every case, particularly in women, because a missed femoral hernia is the one that strangulates. Watchful waiting is a defensible option in minimally symptomatic reducible inguinal hernia in men.",
-      "source": { "org": "HerniaSurge Group", "title": "International guidelines for groin hernia management", "year": 2018, "url": "https://link.springer.com/journal/10029", "accessed": "2026-08-24" },
-      "procedureRefs": ["hernia-repair"],
-      "protocolRefs": ["hernia"]
+      "source": {
+        "org": "HerniaSurge Group",
+        "title": "International guidelines for groin hernia management",
+        "year": 2018,
+        "url": "https://link.springer.com/journal/10029",
+        "accessed": "2026-08-24"
+      },
+      "procedureRefs": [
+        "hernia-repair"
+      ],
+      "protocolRefs": [
+        "hernia"
+      ]
     },
     {
       "id": "ev.checklist",
       "title": "The surgical safety checklist",
       "category": "perioperative",
-      "topics": ["safety", "checklist", "perioperative", "never events"],
+      "topics": [
+        "safety",
+        "checklist",
+        "perioperative",
+        "never events"
+      ],
       "originalSummary": "The checklist works less because of the items on it and more because it forces every member of the team to speak once, out loud, before the operation starts. That single change alters whether a scrub practitioner will challenge a surgeon later. Implementation quality matters enormously: a checklist recited while people continue working produces none of the measured benefit, which is why the sign-out - the part most often skipped when a list is running late - is the element most worth defending.",
-      "source": { "org": "World Health Organization", "title": "WHO Surgical Safety Checklist and implementation manual", "year": 2009, "url": "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery", "accessed": "2026-08-24" },
-      "procedureRefs": ["appendicectomy", "lap-cholecystectomy", "hernia-repair", "laparotomy", "abscess-drainage"]
+      "source": {
+        "org": "World Health Organization",
+        "title": "WHO Surgical Safety Checklist and implementation manual",
+        "year": 2009,
+        "url": "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery",
+        "accessed": "2026-08-24"
+      },
+      "procedureRefs": [
+        "appendicectomy",
+        "lap-cholecystectomy",
+        "hernia-repair",
+        "laparotomy",
+        "abscess-drainage"
+      ]
     },
     {
       "id": "ev.ssi",
       "title": "Preventing surgical site infection",
       "category": "perioperative",
-      "topics": ["infection", "prophylaxis", "wound", "perioperative"],
+      "topics": [
+        "infection",
+        "prophylaxis",
+        "wound",
+        "perioperative"
+      ],
       "originalSummary": "Most surgical site infections come from the patient's own skin and gut flora, which is why the measures that work are unglamorous: an alcohol-based skin preparation allowed to dry, an antibiotic given within the hour before incision and stopped afterwards, normothermia, glycaemic control, and not closing a dirty wound. The measure that does not work, and that is still widely practised, is continuing prophylactic antibiotics for days after a clean operation; it increases resistance without reducing infection.",
-      "source": { "org": "World Health Organization", "title": "Global guidelines for the prevention of surgical site infection, 2nd edition", "year": 2018, "url": "https://www.who.int/publications/i/item/9789241550475", "accessed": "2026-08-24" },
-      "protocolRefs": ["wound_infection"],
-      "procedureRefs": ["laparotomy", "appendicectomy"]
+      "source": {
+        "org": "World Health Organization",
+        "title": "Global guidelines for the prevention of surgical site infection, 2nd edition",
+        "year": 2018,
+        "url": "https://www.who.int/publications/i/item/9789241550475",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "wound_infection"
+      ],
+      "procedureRefs": [
+        "laparotomy",
+        "appendicectomy"
+      ]
     },
     {
       "id": "ev.clavien",
       "title": "Grading surgical complications consistently",
       "category": "perioperative",
-      "topics": ["complications", "audit", "outcomes", "perioperative"],
+      "topics": [
+        "complications",
+        "audit",
+        "outcomes",
+        "perioperative"
+      ],
       "originalSummary": "The Clavien-Dindo classification grades a complication by the treatment it required rather than by how serious it felt, which is what makes it reproducible between surgeons and between units. Its practical value is in audit and in honest conversation: a unit that grades consistently can tell whether its outcomes are changing, and a surgeon who records a grade III has recorded something a reader can interpret without being there.",
-      "source": { "org": "Dindo, Demartines and Clavien", "title": "Classification of surgical complications: a new proposal with evaluation in a cohort of 6336 patients", "year": 2004, "url": "https://pubmed.ncbi.nlm.nih.gov/15273542/", "accessed": "2026-08-24" },
-      "protocolRefs": ["postop-deterioration"]
+      "source": {
+        "org": "Dindo, Demartines and Clavien",
+        "title": "Classification of surgical complications: a new proposal with evaluation in a cohort of 6336 patients",
+        "year": 2004,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15273542/",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "postop-deterioration"
+      ]
     },
     {
       "id": "ev.icmr-amr",
       "title": "Choosing an empiric regimen in India",
       "category": "infection",
-      "topics": ["antibiotics", "resistance", "india", "stewardship", "infection"],
+      "topics": [
+        "antibiotics",
+        "resistance",
+        "india",
+        "stewardship",
+        "infection"
+      ],
       "originalSummary": "Empiric antimicrobial choice is a local question wearing the clothes of a global one. National surveillance in India shows resistance patterns, particularly among enteric Gram-negative organisms, that differ substantially from those the international guidelines were written around. The practical rule is to take the syndrome from the guideline and the agent from the local antibiogram, then de-escalate on culture with a documented stop date. StewardMD's own stewardship engine and antibiogram tools exist for exactly this step.",
-      "source": { "org": "Indian Council of Medical Research (ICMR)", "title": "Antimicrobial Resistance Surveillance Network annual report", "year": 2024, "url": "https://www.icmr.gov.in/", "accessed": "2026-08-24" },
-      "protocolRefs": ["surgical-sepsis", "acute_abdomen", "gi_perforation", "diabetic_foot"]
+      "source": {
+        "org": "Indian Council of Medical Research (ICMR)",
+        "title": "Antimicrobial Resistance Surveillance Network annual report",
+        "year": 2024,
+        "url": "https://www.icmr.gov.in/",
+        "accessed": "2026-08-24"
+      },
+      "protocolRefs": [
+        "surgical-sepsis",
+        "acute_abdomen",
+        "gi_perforation",
+        "diabetic_foot"
+      ]
+    },
+    {
+      "id": "ev.btf-severe-tbi",
+      "title": "Severe traumatic brain injury: thresholds that matter",
+      "category": "neuro_cranial",
+      "topics": [
+        "neurosurgery",
+        "traumatic brain injury",
+        "intracranial pressure",
+        "critical care"
+      ],
+      "originalSummary": "The Brain Trauma Foundation guidelines distil a large but mostly observational literature into a small number of physiological targets. The consistent message is that secondary insults, especially hypotension and hypoxia, are what turn a survivable injury into a poor outcome, so the systolic pressure floors are age-banded and set higher than for general trauma. Intracranial pressure is treated above 22 mmHg and cerebral perfusion is aimed at roughly 60 to 70 mmHg, but the evidence for any single number is modest, and the guidelines are better read as a framework than as a protocol. Interventions with consistent evidence of harm, such as steroids and prolonged prophylactic hyperventilation, are explicitly discouraged.",
+      "source": {
+        "org": "Brain Trauma Foundation",
+        "title": "Guidelines for the management of severe traumatic brain injury, 4th edition",
+        "edition": "4th edition",
+        "year": 2016,
+        "url": "https://braintrauma.org/guidelines",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "raised-icp",
+        "traumatic-haematoma-surgery",
+        "head-injury"
+      ],
+      "procedureRefs": [
+        "evd-insertion",
+        "trauma-craniotomy-edh"
+      ]
+    },
+    {
+      "id": "ev.rescueicp",
+      "title": "Decompressive craniectomy for refractory intracranial hypertension",
+      "category": "neuro_cranial",
+      "topics": [
+        "neurosurgery",
+        "traumatic brain injury",
+        "decompressive craniectomy"
+      ],
+      "originalSummary": "RESCUEicp randomised patients with traumatic brain injury and intracranial pressure that stayed high despite tiered medical therapy to a large decompressive craniectomy or continued medical care. Surgery substantially reduced mortality, but many of the extra survivors lived with severe disability or in a vegetative state. The trial reframes craniectomy as a values decision rather than a purely technical one: it saves lives, and the family needs to understand the range of outcomes it produces. It was a last-tier intervention in this trial, which differs from the earlier DECRA trial, where early bifrontal craniectomy for diffuse injury did not improve functional outcome.",
+      "source": {
+        "org": "RESCUEicp Trial Collaborators",
+        "title": "Trial of decompressive craniectomy for traumatic intracranial hypertension (N Engl J Med 2016;375:1119-30)",
+        "year": 2016,
+        "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa1605215",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "raised-icp",
+        "traumatic-haematoma-surgery"
+      ],
+      "procedureRefs": [
+        "trauma-craniotomy-edh"
+      ]
+    },
+    {
+      "id": "ev.csdh-drains",
+      "title": "Drains after burr-hole drainage of chronic subdural haematoma",
+      "category": "neuro_cranial",
+      "topics": [
+        "neurosurgery",
+        "chronic subdural haematoma",
+        "recurrence"
+      ],
+      "originalSummary": "In a single-centre randomised trial, placing a drain in the subdural space after burr-hole evacuation of a chronic subdural haematoma reduced recurrence needing further surgery to well under half of the rate seen without a drain, and was associated with lower six-month mortality, without an increase in complications. The finding changed practice, making a drain the default unless the surgeon has a specific reason not to place one. A later national trial of adjuvant dexamethasone found it worsened functional outcome, so steroids are not a routine part of this pathway.",
+      "source": {
+        "org": "Santarius T et al, The Lancet",
+        "title": "Use of drains versus no drains after burr-hole evacuation of chronic subdural haematoma: a randomised controlled trial (Lancet 2009;374:1067-73)",
+        "year": 2009,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Santarius+2009+drains+versus+no+drains+chronic+subdural+haematoma+Lancet",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [],
+      "procedureRefs": [
+        "burr-hole-csdh"
+      ]
+    },
+    {
+      "id": "ev.isat",
+      "title": "Coiling versus clipping for ruptured aneurysms",
+      "category": "neuro_cranial",
+      "topics": [
+        "neurosurgery",
+        "subarachnoid haemorrhage",
+        "aneurysm",
+        "endovascular"
+      ],
+      "originalSummary": "ISAT randomised patients with ruptured aneurysms judged suitable for either treatment to endovascular coiling or neurosurgical clipping. At one year, fewer coiled patients were dead or dependent. The advantage came with a higher rate of late rebleeding and retreatment after coiling, which is why long-term imaging follow-up matters. The trial population was mostly good-grade patients with small anterior circulation aneurysms, so the result does not settle the choice for every aneurysm; it supports a joint decision between neurosurgeon and interventional neuroradiologist for each patient.",
+      "source": {
+        "org": "International Subarachnoid Aneurysm Trial (ISAT) Collaborative Group",
+        "title": "International Subarachnoid Aneurysm Trial of neurosurgical clipping versus endovascular coiling in 2143 patients with ruptured intracranial aneurysms (Lancet 2002;360:1267-74)",
+        "year": 2002,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Molyneux+2002+International+Subarachnoid+Aneurysm+Trial+Lancet",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "aneurysmal-sah"
+      ],
+      "procedureRefs": []
+    },
+    {
+      "id": "ev.mscc-surgery",
+      "title": "Surgery plus radiotherapy for metastatic cord compression",
+      "category": "neuro_spine",
+      "topics": [
+        "spine",
+        "oncology",
+        "metastatic spinal cord compression"
+      ],
+      "originalSummary": "Patchell and colleagues randomised patients with spinal cord compression from metastatic cancer at a single area to direct decompressive surgery followed by radiotherapy, or radiotherapy alone. More patients in the surgical group walked after treatment, kept walking for longer, and regained walking if they had lost it. The trial excluded very radiosensitive tumours and patients with short life expectancy, so the result applies to selected patients. Its lasting lesson is that walking ability is the outcome to protect, and that surgical opinion should be sought early rather than after radiotherapy has failed.",
+      "source": {
+        "org": "Patchell RA et al, The Lancet",
+        "title": "Direct decompressive surgical resection in the treatment of spinal cord compression caused by metastatic cancer: a randomised trial (Lancet 2005;366:643-48)",
+        "year": 2005,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Patchell+2005+direct+decompressive+surgical+resection+metastatic+cancer+Lancet",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "mscc"
+      ],
+      "procedureRefs": []
+    },
+    {
+      "id": "ev.ces-pathway",
+      "title": "The national suspected cauda equina pathway",
+      "category": "neuro_spine",
+      "topics": [
+        "spine",
+        "cauda equina syndrome",
+        "emergency imaging"
+      ],
+      "originalSummary": "The GIRFT national pathway for suspected cauda equina syndrome responds to a pattern of delayed diagnosis and avoidable harm. It treats suspected CES as an emergency at any hour, expects emergency MRI without waiting for a routine list, and asks that patients with confirmed compression go to surgery promptly. It also emphasises clear documentation of saddle sensation and bladder function, communicating results to the patient, and safety-netting those whose scans are normal. Its value is less in any single new finding than in removing the overnight and weekend delays that drive poor outcomes.",
+      "source": {
+        "org": "Getting It Right First Time (GIRFT), NHS England",
+        "title": "National suspected cauda equina syndrome (CES) pathway",
+        "year": 2023,
+        "url": "https://gettingitrightfirsttime.co.uk/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "cauda-equina-syndrome"
+      ],
+      "procedureRefs": [
+        "lumbar-discectomy-ces"
+      ]
+    },
+    {
+      "id": "ev.uro-obstructed-infected-kidney",
+      "title": "Decompression before stone treatment in the obstructed infected kidney",
+      "category": "urology",
+      "topics": [
+        "urology",
+        "urolithiasis",
+        "sepsis",
+        "source control"
+      ],
+      "originalSummary": "An infected, obstructed collecting system behaves like an abscess: antibiotics cannot reach adequate concentrations in urine that is not draining, so the kidney must be decompressed urgently. European guidance treats percutaneous nephrostomy and retrograde ureteric stenting as equally effective for this purpose, leaving the choice to local availability and the patient's anatomy and fitness. The stone itself is left alone until the infection has been treated, because instrumenting an infected system can precipitate severe sepsis. Cultures from the renal pelvis taken at drainage often differ from bladder urine and should guide the antibiotic course. The practical lesson is about time: the route that drains the kidney soonest and most safely tonight is the right one.",
+      "source": {
+        "org": "European Association of Urology (EAU)",
+        "title": "EAU Guidelines on Urolithiasis",
+        "year": 2024,
+        "url": "https://uroweb.org/guidelines/urolithiasis",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "uro-obstructed-kidney"
+      ],
+      "procedureRefs": []
+    },
+    {
+      "id": "ev.uro-renal-colic-nice",
+      "title": "Imaging, analgesia and timing in renal colic",
+      "category": "urology",
+      "topics": [
+        "urology",
+        "urolithiasis",
+        "imaging",
+        "analgesia"
+      ],
+      "originalSummary": "The UK national guideline for stones sets out a simple pathway for adults with suspected ureteric colic: low-dose non-contrast CT within a day of presentation, brought forward when there is fever, a solitary kidney or real diagnostic doubt, with ultrasound first in pregnancy and in children. For pain, a non-steroidal anti-inflammatory drug by any route comes first, intravenous paracetamol is the alternative, and opioids are reserved for when both are unsuitable. Alpha-blockers are offered for smaller distal ureteric stones. For stones that are unlikely to pass or pain that is not tolerated, the guideline expects definitive treatment within a short window rather than prolonged waiting. Its value is in making these timings explicit and auditable.",
+      "source": {
+        "org": "National Institute for Health and Care Excellence (NICE)",
+        "title": "Renal and ureteric stones: assessment and management (NG118)",
+        "year": 2019,
+        "url": "https://www.nice.org.uk/guidance/ng118",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "uro-obstructed-kidney"
+      ],
+      "procedureRefs": []
+    },
+    {
+      "id": "ev.uro-twist-score",
+      "title": "A clinical score for testicular torsion",
+      "category": "urology",
+      "topics": [
+        "urology",
+        "paediatrics",
+        "acute scrotum",
+        "torsion"
+      ],
+      "originalSummary": "This paediatric study derived and validated a short bedside score for testicular torsion from five findings: testicular swelling, a hard testis, an absent cremasteric reflex, nausea or vomiting, and a high-riding testis. Its practical contribution is to give the examining clinician permission to act: children with a high score had torsion often enough to justify going directly to theatre without ultrasound, while those with a low score were unlikely to have it. The middle group is where imaging helps most. The score supports, but never replaces, the surgeon's judgement, and a worried surgeon should still explore a child with a low score. External validation studies have generally supported it, with lower performance when applied by less experienced examiners.",
+      "source": {
+        "org": "The Journal of Urology (Barbosa JA et al.)",
+        "title": "Development and initial validation of a scoring system to diagnose testicular torsion in children",
+        "year": 2013,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Development+and+initial+validation+of+a+scoring+system+to+diagnose+testicular+torsion+in+children",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "uro-acute-scrotum"
+      ],
+      "procedureRefs": [
+        "uro-scrotal-exploration"
+      ]
+    },
+    {
+      "id": "ev.uro-tur-syndrome",
+      "title": "Irrigant absorption and TUR syndrome",
+      "category": "urology",
+      "topics": [
+        "urology",
+        "anaesthesia",
+        "fluid",
+        "TURP"
+      ],
+      "originalSummary": "This review explains how irrigating fluid enters the circulation during endoscopic surgery, mostly through opened venous sinuses and perforations, and how the effects depend on the fluid. With hypotonic, electrolyte-free solutions such as glycine used for monopolar resection, large absorption causes dilutional hyponatraemia, fluid overload and, with glycine, direct neurological and visual effects. Risk rises with longer resection, higher irrigation pressure, and capsular or bladder perforation. The review supports practical measures: low-pressure irrigation, attention to resection time, monitoring of absorption where possible, and early sodium measurement when symptoms appear. Bipolar resection in saline removes the hyponatraemic mechanism, though large-volume absorption can still overload the circulation.",
+      "source": {
+        "org": "British Journal of Anaesthesia (Hahn RG)",
+        "title": "Fluid absorption in endoscopic surgery",
+        "year": 2006,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Hahn+Fluid+absorption+in+endoscopic+surgery+British+Journal+of+Anaesthesia",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [],
+      "procedureRefs": [
+        "uro-turp"
+      ]
+    },
+    {
+      "id": "ev.uro-renal-trauma-nom",
+      "title": "Non-operative management of renal trauma",
+      "category": "trauma",
+      "topics": [
+        "urology",
+        "trauma",
+        "kidney",
+        "angioembolisation"
+      ],
+      "originalSummary": "Contemporary trauma and urology guidance converge on one principle: in a haemodynamically stable patient, renal injury of almost any grade is managed without surgery, with contrast CT including a delayed phase to stage it and angioembolisation for active bleeding, pseudoaneurysm or fistula. The 2018 revision of the organ injury scale added vascular findings on CT to the grading, which aligns the grade more closely with what interventional radiology can treat. Exploration is reserved for physiology that does not respond to resuscitation because of the kidney, or an expanding or pulsatile retroperitoneal haematoma at laparotomy. This approach has substantially reduced nephrectomy rates without worsening outcomes.",
+      "source": {
+        "org": "World Society of Emergency Surgery (WSES) and AAST (Coccolini F et al., World Journal of Emergency Surgery)",
+        "title": "Kidney and uro-trauma: WSES-AAST guidelines",
+        "year": 2019,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Kidney+and+uro-trauma%3A+WSES-AAST+guidelines",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "uro-renal-bladder-trauma"
+      ],
+      "procedureRefs": []
+    },
+    {
+      "id": "ev.uro-nmibc-turbt-quality",
+      "title": "TURBT quality: muscle in the specimen and early instillation",
+      "category": "urology",
+      "topics": [
+        "urology",
+        "oncology",
+        "bladder cancer",
+        "TURBT"
+      ],
+      "originalSummary": "European bladder cancer guidance treats the first resection as the most important staging event in the disease. A complete resection with detrusor muscle in the specimen is needed to tell non-invasive from invasive disease, and its absence is itself an indication for early re-resection in most cases. Recording the number, size and site of tumours, and sending the base separately, improve the information the pathologist can return. A single immediate post-operative chemotherapy instillation reduces recurrence in appropriately selected tumours, but it is withheld when a perforation is suspected or there is significant bleeding. Enhanced cystoscopy improves detection of small and flat lesions where it is available.",
+      "source": {
+        "org": "European Association of Urology (EAU)",
+        "title": "EAU Guidelines on Non-muscle-invasive Bladder Cancer",
+        "year": 2024,
+        "url": "https://uroweb.org/guidelines/non-muscle-invasive-bladder-cancer",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "uro-visible-haematuria"
+      ],
+      "procedureRefs": [
+        "uro-turbt"
+      ]
+    },
+    {
+      "id": "ev.bilious-vomiting",
+      "title": "Why green vomit in a baby is an emergency",
+      "category": "paeds_surgery",
+      "topics": [
+        "paediatric",
+        "malrotation",
+        "volvulus",
+        "imaging"
+      ],
+      "originalSummary": "Malrotation leaves the midgut hanging on a narrow mesenteric pedicle that can twist, cutting off the blood supply to most of the small bowel within hours. Bile-stained vomiting is often the only early sign, and the abdomen may be soft and the baby may look well. The radiology appropriateness criteria place the upper gastrointestinal contrast study as the key test because it shows where the duodenojejunal flexure lies; ultrasound signs can support it but do not replace it when there is doubt. The practical consequence is a low threshold: many negative studies are an acceptable price for not missing a volvulus, and a shocked or peritonitic baby goes to theatre without waiting for imaging.",
+      "source": {
+        "org": "American College of Radiology (ACR)",
+        "title": "ACR Appropriateness Criteria: Vomiting in infants (J Am Coll Radiol 2020;17(11S):S505-S515)",
+        "year": 2020,
+        "url": "https://acsearch.acr.org/list",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "paeds-bilious-vomiting",
+        "paeds-pyloric-stenosis"
+      ]
+    },
+    {
+      "id": "ev.pyloromyotomy-approach",
+      "title": "Open or laparoscopic pyloromyotomy",
+      "category": "paeds_surgery",
+      "topics": [
+        "paediatric",
+        "pyloric stenosis",
+        "laparoscopy"
+      ],
+      "originalSummary": "Randomised trials comparing open and laparoscopic pyloromyotomy are few and small, and pooled analysis gives low-certainty evidence. Neither approach is clearly safer overall. There is a signal, with wide uncertainty, that laparoscopy may slightly increase the chance of an incomplete myotomy or mucosal perforation, while recovery differences are measured in hours. For the surgeon this means the choice is reasonably made on local expertise, and that whichever route is used, a complete myotomy and a deliberate leak test matter more than the access. The bigger safety lever sits before theatre: correcting the alkalosis and dehydration.",
+      "source": {
+        "org": "Cochrane",
+        "title": "Open versus laparoscopic pyloromyotomy for pyloric stenosis (Staerkle et al, CD012827)",
+        "year": 2021,
+        "url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD012827.pub2/full",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "paeds-pyloric-stenosis"
+      ],
+      "procedureRefs": [
+        "pyloromyotomy"
+      ]
+    },
+    {
+      "id": "ev.intussusception",
+      "title": "Getting intussusception reduced without an operation",
+      "category": "paeds_surgery",
+      "topics": [
+        "paediatric",
+        "intussusception",
+        "enema",
+        "laparoscopy"
+      ],
+      "originalSummary": "A systematic review by the American Pediatric Surgical Association looked at how stable children with intussusception are best managed. Its main messages are practical: routine antibiotics before enema reduction do not reduce complications; a second, delayed enema is reasonable when the first only partly reduces the intussusception and the child remains well; many children can be observed briefly and discharged after successful reduction rather than admitted; and when surgery is needed, laparoscopic reduction often succeeds and avoids a laparotomy. The evidence is mostly observational, so these are best read as permission to be less invasive in a stable child, not as a reason to persist with enemas in a sick one.",
+      "source": {
+        "org": "American Pediatric Surgical Association (APSA) Outcomes and Evidence Based Practice Committee",
+        "title": "Management of intussusception in children: a systematic review (J Pediatr Surg 2021;56(3):587-596)",
+        "year": 2021,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33158508/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "paeds-intussusception"
+      ]
+    },
+    {
+      "id": "ev.pecarn",
+      "title": "Which injured child needs a head CT",
+      "category": "paeds_surgery",
+      "topics": [
+        "paediatric",
+        "trauma",
+        "head injury",
+        "radiation"
+      ],
+      "originalSummary": "The PECARN study followed tens of thousands of children with minor head trauma and derived and validated separate rules for children under and over two years of age. The rules are designed to find children at very low risk of a clinically important brain injury, in whom CT can be avoided, and to separate an intermediate group for whom observation is a reasonable alternative to immediate scanning. Their value is in reducing radiation exposure in a population where most head injuries are trivial. They apply only to children with a near-normal conscious level; a child with a reduced score is scanned regardless.",
+      "source": {
+        "org": "Pediatric Emergency Care Applied Research Network (PECARN)",
+        "title": "Identification of children at very low risk of clinically-important brain injuries after head trauma (Lancet 2009;374:1160-70)",
+        "year": 2009,
+        "url": "https://doi.org/10.1016/S0140-6736(09)61558-0",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "paeds-trauma"
+      ]
+    },
+    {
+      "id": "ev.ectopic",
+      "title": "Ectopic pregnancy: who needs surgery and which operation",
+      "category": "obgyn_emergency",
+      "topics": [
+        "gynaecology",
+        "ectopic",
+        "laparoscopy",
+        "anti-D"
+      ],
+      "originalSummary": "The NICE guideline separates women with ectopic pregnancy into those who can be offered methotrexate, those who need surgery, and those for whom either is reasonable, using pain, the size of the mass, the presence of a heartbeat and the hCG level. Rupture with haemodynamic compromise is always surgical. Laparoscopy is preferred, and salpingectomy is the default unless the other tube is damaged, in which case salpingotomy may preserve fertility at the price of closer hCG follow-up for persistent trophoblast. The guideline also asks for anti-D for rhesus-negative women having surgical management, and for proper information and support after a pregnancy loss.",
+      "source": {
+        "org": "National Institute for Health and Care Excellence (NICE)",
+        "title": "Ectopic pregnancy and miscarriage: diagnosis and initial management (NG126)",
+        "year": 2019,
+        "url": "https://www.nice.org.uk/guidance/ng126",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "ruptured-ectopic"
+      ],
+      "procedureRefs": [
+        "lap-salpingectomy"
+      ]
+    },
+    {
+      "id": "ev.pph-ladder",
+      "title": "Climbing the postpartum haemorrhage ladder quickly",
+      "category": "obgyn_emergency",
+      "topics": [
+        "obstetrics",
+        "haemorrhage",
+        "transfusion",
+        "hysterectomy"
+      ],
+      "originalSummary": "The RCOG guidance frames major postpartum haemorrhage as a team emergency with parallel work: communication, resuscitation, monitoring and arresting the bleeding all at once. Uterotonic drugs are used in sequence, and when they fail the guidance favours moving to surgery sooner rather than later. Balloon tamponade is the first surgical step for atony, followed by compression sutures, devascularisation and radiological embolisation where available, and hysterectomy without delay when conservative measures fail, especially with accreta or rupture. Separate trial evidence underpins early tranexamic acid, whose benefit is greatest when given within three hours of birth.",
+      "source": {
+        "org": "Royal College of Obstetricians and Gynaecologists (RCOG)",
+        "title": "Prevention and management of postpartum haemorrhage (Green-top Guideline No. 52)",
+        "year": 2016,
+        "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/prevention-and-management-of-postpartum-haemorrhage-green-top-guideline-no-52/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "pph-surgical"
+      ],
+      "procedureRefs": [
+        "lscs"
+      ]
+    },
+    {
+      "id": "ev.thyroid-haematoma-scoop",
+      "title": "Neck haematoma after thyroid surgery: recognise early, open at the bedside",
+      "category": "endocrine_surgery",
+      "topics": [
+        "thyroidectomy",
+        "airway",
+        "haematoma",
+        "endocrine"
+      ],
+      "originalSummary": "A haematoma after thyroid or parathyroid surgery is uncommon but can obstruct the airway within minutes. The obstruction comes partly from direct pressure and largely from venous and lymphatic congestion causing laryngeal oedema, which is why the airway can remain difficult after the clot is removed. The multidisciplinary consensus from UK airway, endocrine surgical and ENT societies focuses on systems rather than surgical technique: train ward and recovery staff to spot early warning features (summarised as DESATS), keep a kit at the bedside, and teach a simple bedside sequence for opening the wound in layers (SCOOP) that does not wait for theatre. Definitive control of the bleeding then follows in theatre with an experienced anaesthetist. The evidence base is mainly case series and expert consensus, but the logic is strong and the actions are cheap.",
+      "source": {
+        "org": "Difficult Airway Society, British Association of Endocrine and Thyroid Surgeons and ENT UK",
+        "title": "Management of haematoma after thyroid surgery: systematic review and multidisciplinary consensus guidelines (Iliff HA et al., Anaesthesia)",
+        "year": 2022,
+        "url": "https://das.uk.com/guidelines/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "thyroid-neck-haematoma"
+      ],
+      "procedureRefs": [
+        "total-thyroidectomy"
+      ]
+    },
+    {
+      "id": "ev.ionm-staging",
+      "title": "Nerve monitoring and staged thyroidectomy after loss of signal",
+      "category": "endocrine_surgery",
+      "topics": [
+        "thyroidectomy",
+        "recurrent laryngeal nerve",
+        "neuromonitoring"
+      ],
+      "originalSummary": "Intra-operative nerve monitoring does not replace seeing the recurrent laryngeal nerve, but it adds functional information that vision cannot. Its most useful role is the one a surgeon can act on: when the signal is lost on the first side of a planned total thyroidectomy and the loss is confirmed after troubleshooting, the risk of a palsy on that side is high. The international monitoring group recommends considering stopping and completing the second side later, once the cord has been assessed, to avoid bilateral palsy and a possible tracheostomy. This only works if the monitoring was set up and checked properly with baseline vagal and nerve signals before dissection, so the standardised sequence of signals matters as much as the decision itself.",
+      "source": {
+        "org": "International Neural Monitoring Study Group (INMSG)",
+        "title": "International neural monitoring study group guideline 2018 part I: staging bilateral thyroid surgery with monitoring loss of signal (Schneider R et al., Laryngoscope)",
+        "year": 2018,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=International+neural+monitoring+study+group+guideline+2018+part+I+staging+bilateral+thyroid+surgery",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "thyroid-neck-haematoma"
+      ],
+      "procedureRefs": [
+        "total-thyroidectomy"
+      ]
+    },
+    {
+      "id": "ev.isgps-popf",
+      "title": "Grading pancreatic fistula so it means the same thing everywhere",
+      "category": "onco_periop",
+      "topics": [
+        "pancreatic surgery",
+        "complications",
+        "grading",
+        "oncology"
+      ],
+      "originalSummary": "Before a common definition existed, published fistula rates after pancreatic resection varied enormously because units counted different things. The ISGPS definition, updated in 2016, ties the diagnosis to a raised drain amylase from the third day and grades it by its clinical consequence. A raised drain amylase that changes nothing is now called a biochemical leak and is not counted as a fistula. Grade B is defined by a change in management, such as prolonged or additional drainage, an angiographic procedure for bleeding, or infection without organ failure. Grade C means reoperation, organ failure or death. The practical value is twofold: it stops teams over-treating a number, and it lets units compare their results honestly.",
+      "source": {
+        "org": "International Study Group of Pancreatic Surgery (ISGPS)",
+        "title": "The 2016 update of the International Study Group (ISGPS) definition and grading of postoperative pancreatic fistula: 11 years after (Bassi C et al., Surgery)",
+        "year": 2017,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2016+update+International+Study+Group+ISGPS+definition+grading+postoperative+pancreatic+fistula",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "postop-major-cancer-surgery"
+      ]
+    },
+    {
+      "id": "ev.cme-central-ligation",
+      "title": "Complete mesocolic excision and central vascular ligation",
+      "category": "onco_periop",
+      "topics": [
+        "colon cancer",
+        "lymphadenectomy",
+        "colectomy",
+        "oncology"
+      ],
+      "originalSummary": "Complete mesocolic excision applies to the colon the same idea that total mesorectal excision brought to the rectum. The mesocolon is treated as an envelope containing the lymphatic drainage of the tumour, and it is removed intact by sharp dissection in the embryological plane that separates it from the retroperitoneum. Combined with ligation of the supplying vessels at their origin, it removes more mesentery and more lymph nodes than conventional colectomy. The original German series reported low local recurrence and good cancer-related survival, and later comparative studies support better specimen quality and nodal yield. Randomised evidence on survival is still limited, and central dissection around the superior mesenteric vessels carries its own risk, so the technique should be learned under supervision.",
+      "source": {
+        "org": "Colorectal Disease",
+        "title": "Standardized surgery for colonic cancer: complete mesocolic excision and central ligation, technical notes and outcome (Hohenberger W et al.)",
+        "year": 2009,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Hohenberger+standardized+surgery+for+colonic+cancer+complete+mesocolic+excision+central+ligation",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "cancer-operation-principles"
+      ],
+      "procedureRefs": [
+        "right-hemicolectomy"
+      ]
+    },
+    {
+      "id": "ev.mbo-surgery",
+      "title": "Who benefits from surgery for malignant bowel obstruction",
+      "category": "onco_emergencies",
+      "topics": [
+        "malignant bowel obstruction",
+        "palliative surgery",
+        "ovarian cancer",
+        "oncology"
+      ],
+      "originalSummary": "The systematic review of surgery for malignant bowel obstruction in advanced gynaecological and gastrointestinal cancer found no randomised trials and only observational series of variable quality. Across those series, some patients regained the ability to eat and went home, but complications, re-obstruction and death in hospital were common, and outcomes were worst with multiple levels of obstruction, diffuse peritoneal disease, ascites and poor performance status. The review could not define precise selection criteria, which is itself the message: the decision depends on an honest assessment of the individual patient and a conversation about what she values, made alongside medical management and palliative care rather than instead of it.",
+      "source": {
+        "org": "Cochrane",
+        "title": "Surgery for the resolution of symptoms in malignant bowel obstruction in advanced gynaecological and gastrointestinal cancer (Cousins SE, Tempest E, Feuer DJ)",
+        "year": 2016,
+        "url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD002764.pub2/full",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "malignant-bowel-obstruction"
+      ]
+    },
+    {
+      "id": "ev.breast-axilla-z0011",
+      "title": "When a positive sentinel node does not need axillary clearance",
+      "category": "breast",
+      "topics": [
+        "breast cancer",
+        "sentinel node",
+        "axilla",
+        "de-escalation"
+      ],
+      "originalSummary": "The ACOSOG Z0011 trial randomised women with early breast cancer, one or two positive sentinel nodes, breast-conserving surgery and planned whole-breast radiotherapy with systemic therapy, to axillary clearance or no further axillary surgery. At ten years there was no meaningful difference in overall survival or regional recurrence, while clearance added lymphoedema and arm morbidity. The result has changed practice: in this defined group the axilla is often left alone, with the decision made at the MDT. It does not apply to patients having mastectomy without radiotherapy, to those with clinically involved nodes before surgery, or to those after neoadjuvant chemotherapy, which is why the indication for each axillary operation must be stated explicitly.",
+      "source": {
+        "org": "JAMA",
+        "title": "Effect of axillary dissection vs no axillary dissection on 10-year overall survival among women with invasive breast cancer and sentinel node metastasis: the ACOSOG Z0011 (Alliance) randomized clinical trial (Giuliano AE et al.)",
+        "year": 2017,
+        "url": "https://jamanetwork.com/journals/jama/fullarticle/2653735",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "breast-triple-assessment"
+      ],
+      "procedureRefs": [
+        "wle-sentinel-node-biopsy",
+        "modified-radical-mastectomy"
+      ]
+    },
+    {
+      "id": "ev.esvs-aaa-2024",
+      "title": "Ruptured aortic aneurysm: endovascular first, permissive hypotension",
+      "category": "vascular",
+      "topics": [
+        "vascular",
+        "aneurysm",
+        "haemorrhage",
+        "endovascular"
+      ],
+      "originalSummary": "The 2024 European aneurysm guideline moves the default for a ruptured abdominal aortic aneurysm towards endovascular repair when the anatomy allows and the service can deliver it quickly. It supports keeping the blood pressure low while the patient remains conscious, using blood rather than crystalloid, and imaging the patient who responds to resuscitation so that suitability for a stent graft can be judged. The randomised evidence behind this is more nuanced than the recommendation suggests: an endovascular-first strategy did not lower early mortality, but patients went home sooner and quality of life and cost favoured it. Open repair remains essential for anatomy that will not take a graft, and every unit offering rupture repair needs surgeons who can still do it, including damage control and temporary abdominal closure.",
+      "source": {
+        "org": "European Society for Vascular Surgery (ESVS)",
+        "title": "ESVS 2024 Clinical Practice Guidelines on the Management of Abdominal Aorto-Iliac Artery Aneurysms",
+        "year": 2024,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/38307694/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "raaa"
+      ],
+      "procedureRefs": [
+        "open-raaa-repair"
+      ]
+    },
+    {
+      "id": "ev.esvs-ali-2020",
+      "title": "Acute limb ischaemia: classify by neurology, revascularise by the clock",
+      "category": "vascular",
+      "topics": [
+        "vascular",
+        "limb ischaemia",
+        "embolism",
+        "anticoagulation"
+      ],
+      "originalSummary": "The European acute limb ischaemia guideline organises management around the Rutherford acute classes, which rest on sensory loss, motor loss and Doppler signals rather than on the pulse alone. Heparin is given as soon as the diagnosis is made. An immediately threatened limb needs revascularisation without delay, and imaging should not hold it up; a marginally threatened limb can be imaged and planned. Surgical embolectomy, thrombolysis and endovascular thrombectomy are all options, chosen by the cause and how long the limb can wait. The guideline stresses fasciotomy after prolonged ischaemia, completion imaging, and long-term anticoagulation when the source is cardiac. Much of the evidence is observational, which is why the classification and the time to treatment carry so much weight.",
+      "source": {
+        "org": "European Society for Vascular Surgery (ESVS)",
+        "title": "ESVS 2020 Clinical Practice Guidelines on the Management of Acute Limb Ischaemia",
+        "year": 2020,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31899099/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "acute-limb-ischaemia"
+      ],
+      "procedureRefs": [
+        "femoral-embolectomy"
+      ]
+    },
+    {
+      "id": "ev.gvg-clti-2019",
+      "title": "Chronic limb-threatening ischaemia: the PLAN framework",
+      "category": "vascular",
+      "topics": [
+        "vascular",
+        "CLTI",
+        "diabetic foot",
+        "amputation",
+        "WIfI"
+      ],
+      "originalSummary": "The Global Vascular Guidelines replaced the older term critical limb ischaemia with chronic limb-threatening ischaemia, reflecting that wound and infection threaten the limb as much as perfusion does, especially in diabetes. They ask clinicians to stage the limb with the WIfI system, to describe the arterial disease with an anatomical staging system, and to weigh these against the patient's risk and goals before choosing bypass, endovascular treatment or primary amputation. Best medical therapy is expected for everyone. Autologous vein is preferred for bypass. A vascular specialist should see every patient before a major amputation is decided. Later trials comparing bypass with endovascular treatment give different answers in different arterial segments, so the framework matters more than a single preferred method.",
+      "source": {
+        "org": "European Society for Vascular Surgery, Society for Vascular Surgery and World Federation of Vascular Societies",
+        "title": "Global Vascular Guidelines on the Management of Chronic Limb-Threatening Ischemia",
+        "year": 2019,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31182334/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "clti-diabetic-foot"
+      ],
+      "procedureRefs": [
+        "below-knee-amputation"
+      ]
+    },
+    {
+      "id": "ev.esvs-mesenteric-2017",
+      "title": "Acute mesenteric ischaemia: suspicion, CT angiography, flow before resection",
+      "category": "vascular",
+      "topics": [
+        "vascular",
+        "mesenteric ischaemia",
+        "emergency laparotomy"
+      ],
+      "originalSummary": "Acute mesenteric ischaemia is uncommon, lethal and frequently diagnosed late because early examination is unimpressive and lactate rises only once bowel is dying. The European guideline argues for a low threshold to perform CT angiography and for not withholding it because of renal function. Once the diagnosis is made, restoring flow to the superior mesenteric artery comes before any decision about bowel resection, because ischaemic bowel can recover. Open and endovascular revascularisation both have a place, and hybrid approaches combine them. Damage control with planned second-look surgery is the safe default. The emergency surgical guideline from WSES in 2022 takes a similar line and adds detail on organisation of care.",
+      "source": {
+        "org": "European Society for Vascular Surgery (ESVS)",
+        "title": "Management of the Diseases of Mesenteric Arteries and Veins: Clinical Practice Guidelines of the ESVS",
+        "year": 2017,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28359440/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "acute-mesenteric-ischaemia"
+      ]
+    },
+    {
+      "id": "ev.bts-pleural-2023",
+      "title": "Pleural disease and procedures: the 2023 BTS guidance",
+      "category": "thoracic",
+      "topics": [
+        "thoracic",
+        "pneumothorax",
+        "chest drain",
+        "pleural infection"
+      ],
+      "originalSummary": "The 2023 British Thoracic Society guideline and its companion statement on pleural procedures changed two habits. For spontaneous pneumothorax, treatment is decided by symptoms, high-risk features and the patient's priorities rather than by radiological size alone, so conservative care and ambulatory devices are legitimate options for many primary pneumothoraces. For procedures, thoracic ultrasound is expected before any intervention for pleural fluid, the safe triangle is reaffirmed, trocars are rejected, and small-bore drains are the usual first choice. The statement also emphasises consent, checklists, trained operators and good ward management of drains, because many serious incidents arise after insertion rather than during it.",
+      "source": {
+        "org": "British Thoracic Society (BTS)",
+        "title": "British Thoracic Society Guideline for pleural disease",
+        "year": 2023,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37433578/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "chest-drain-management",
+        "pneumothorax"
+      ],
+      "procedureRefs": [
+        "chest-drain-insertion"
+      ]
+    },
+    {
+      "id": "ev.east-edt-2015",
+      "title": "Who benefits from emergency department thoracotomy",
+      "category": "trauma",
+      "topics": [
+        "trauma",
+        "thoracotomy",
+        "cardiac arrest",
+        "haemothorax"
+      ],
+      "originalSummary": "This practice management guideline pooled outcomes after emergency department thoracotomy and graded the recommendation by mechanism, injury location and the presence of signs of life. Survival is best after penetrating chest injury in a patient who still shows signs of life, and this is where the recommendation is strongest. Blunt trauma without signs of life has a very poor outcome, and the guideline advises against the procedure there. The other groups sit between these, with conditional recommendations that leave room for local judgement and resources. The practical lesson is that mechanism and signs of life, recorded honestly, should drive the decision, and that the procedure should be done by a team prepared to act on what it finds.",
+      "source": {
+        "org": "Eastern Association for the Surgery of Trauma (EAST)",
+        "title": "An evidence-based approach to patient selection for emergency department thoracotomy: a practice management guideline",
+        "year": 2015,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26091330/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "massive-haemothorax",
+        "cardiac-tamponade",
+        "chest-trauma"
+      ]
+    },
+    {
+      "id": "ev.revised-atlanta",
+      "title": "Grading acute pancreatitis by organ failure",
+      "category": "abdomen",
+      "topics": [
+        "pancreatitis",
+        "severity",
+        "organ failure",
+        "classification"
+      ],
+      "originalSummary": "The 2012 revision of the Atlanta classification moved severity away from enzyme levels and scoring systems towards a single clinical question: does the patient have organ failure, and does it last beyond 48 hours? Transient organ failure or local complications make an attack moderately severe; persistent organ failure makes it severe, and that group carries most of the mortality. The revision also gave consistent names to the collections that form early and late, separating fluid from necrosis and acute from walled-off. For the surgeon, its value is a shared language: it tells you which patient needs critical care now, and which collection is mature enough to intervene on later.",
+      "source": {
+        "org": "Acute Pancreatitis Classification Working Group",
+        "title": "Classification of acute pancreatitis 2012: revision of the Atlanta classification and definitions by international consensus",
+        "year": 2013,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23100216/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "acute-pancreatitis"
+      ]
+    },
+    {
+      "id": "ev.step-up-necrosis",
+      "title": "The step-up approach to infected pancreatic necrosis",
+      "category": "abdomen",
+      "topics": [
+        "pancreatitis",
+        "necrosis",
+        "drainage",
+        "necrosectomy"
+      ],
+      "originalSummary": "The Dutch PANTER trial compared primary open necrosectomy with a staged approach: percutaneous drainage first, followed by minimally invasive retroperitoneal necrosectomy only if drainage failed. The staged approach reduced the combined burden of major complications and death, mainly through less new-onset organ failure, and about a third of patients needed nothing beyond drainage. Together with the observation that early surgery on non-demarcated necrosis is harmful, it established that infected necrosis is treated by delaying intervention, draining first, and escalating only as needed. Later work extended the same logic to endoscopic transluminal drainage.",
+      "source": {
+        "org": "Dutch Pancreatitis Study Group (New England Journal of Medicine)",
+        "title": "A step-up approach or open necrosectomy for necrotizing pancreatitis",
+        "year": 2010,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20410514/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "acute-pancreatitis"
+      ]
+    },
+    {
+      "id": "ev.bsg-lgib",
+      "title": "Lower GI bleeding: shock index and safe discharge",
+      "category": "abdomen",
+      "topics": [
+        "bleeding",
+        "lower GI",
+        "triage",
+        "interventional radiology"
+      ],
+      "originalSummary": "The British Society of Gastroenterology guideline reorganised lower GI bleeding around one triage question: is the patient unstable, defined simply by a shock index above 1? Unstable patients go to CT angiography and, if positive, to catheter embolisation, with upper endoscopy first when an upper source is suspected. Stable patients are risk-scored with the Oakland score; those with a low score can be discharged for urgent outpatient investigation, and the rest are admitted for colonoscopy. The guideline also emphasised restrictive transfusion, structured management of anticoagulants and antiplatelets, and that laparotomy should follow localisation rather than replace it.",
+      "source": {
+        "org": "British Society of Gastroenterology (BSG)",
+        "title": "Diagnosis and management of acute lower gastrointestinal bleeding: guidelines from the British Society of Gastroenterology",
+        "year": 2019,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30792244/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "lower-gi-bleed"
+      ]
+    },
+    {
+      "id": "ev.who-checklist",
+      "title": "Why the surgical safety checklist works",
+      "category": "perioperative",
+      "topics": [
+        "patient safety",
+        "checklist",
+        "teamwork",
+        "theatre"
+      ],
+      "originalSummary": "In an international study across eight hospitals of very different resources, introducing the WHO Surgical Safety Checklist was followed by marked falls in complications and in-hospital deaths. The checklist itself contains nothing new: identity, site, allergy, airway, blood, antibiotics, counts and specimens were all known requirements. Its effect comes from forcing a short structured conversation at three fixed moments, which catches omissions and gives every team member a recognised point to speak up. Later experience showed that the benefit depends on real engagement; a checklist ticked without the team pausing delivers the paperwork without the protection.",
+      "source": {
+        "org": "Safe Surgery Saves Lives Study Group (New England Journal of Medicine)",
+        "title": "A surgical safety checklist to reduce morbidity and mortality in a global population",
+        "year": 2009,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19144931/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "who-safety-checklist"
+      ]
+    },
+    {
+      "id": "ev.prophylaxis-duration",
+      "title": "Surgical prophylaxis: timing matters, duration does not",
+      "category": "perioperative",
+      "topics": [
+        "antibiotics",
+        "surgical site infection",
+        "stewardship"
+      ],
+      "originalSummary": "WHO's global guidelines on surgical site infection reviewed the evidence on how long prophylactic antibiotics should run and found no benefit from continuing them after the operation, while longer courses add resistance, Clostridioides difficile infection and adverse drug effects. The protective effect depends on adequate tissue levels at the moment of contamination, which is why the dose is given shortly before incision and repeated during long operations. The guideline also supports alcohol-based chlorhexidine skin preparation, clipping rather than shaving, and decolonisation of known Staphylococcus aureus carriers for selected operations. Prolonged post-operative prophylaxis remains common and is one of the most effective stewardship targets.",
+      "source": {
+        "org": "World Health Organization (WHO)",
+        "title": "Global guidelines for the prevention of surgical site infection",
+        "year": 2018,
+        "url": "https://www.who.int/publications/i/item/9789241550475",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "surgical-prophylaxis"
+      ]
+    },
+    {
+      "id": "ev.bridging-pause",
+      "title": "No bridging, short DOAC interruption: BRIDGE and PAUSE",
+      "category": "perioperative",
+      "topics": [
+        "anticoagulation",
+        "bridging",
+        "DOAC",
+        "atrial fibrillation"
+      ],
+      "originalSummary": "Two trials changed peri-operative anticoagulation practice. BRIDGE randomised patients with atrial fibrillation stopping warfarin to low-molecular-weight heparin or placebo bridging: bridging did not reduce arterial thromboembolism and more than doubled major bleeding. PAUSE then tested a simple, standardised DOAC schedule based on the drug, the procedure's bleeding risk and, for dabigatran, renal function, with no bridging and no pre-operative testing; rates of stroke and major bleeding were low. Together they underpin the ACCP 2022 position that most patients with atrial fibrillation need a short planned interruption, not heparin cover.",
+      "source": {
+        "org": "American College of Chest Physicians (ACCP)",
+        "title": "Perioperative management of antithrombotic therapy: an ACCP clinical practice guideline",
+        "year": 2022,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35964704/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "periop-antithrombotic"
+      ]
+    },
+    {
+      "id": "ev.eras-colorectal",
+      "title": "ERAS: a bundle whose effect tracks compliance",
+      "category": "perioperative",
+      "topics": [
+        "enhanced recovery",
+        "colorectal",
+        "perioperative care"
+      ],
+      "originalSummary": "The ERAS Society colorectal recommendations combine more than twenty peri-operative elements, from pre-admission counselling and carbohydrate loading to avoiding drains and nasogastric tubes, balanced fluid therapy, opioid-sparing analgesia, and early feeding and mobilisation. Few elements are dramatic alone. The consistent finding is that outcomes, including complications and length of stay, improve as overall compliance with the bundle increases, which is why audit and a named lead are part of the programme rather than an afterthought. The guideline also clarified that mechanical bowel preparation alone should not be routine for colonic surgery.",
+      "source": {
+        "org": "ERAS Society",
+        "title": "Guidelines for perioperative care in elective colorectal surgery: ERAS Society recommendations 2018",
+        "year": 2019,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30426190/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "eras-bundle"
+      ],
+      "procedureRefs": [
+        "loop-ileostomy"
+      ]
+    },
+    {
+      "id": "ev.epistaxis-cpg",
+      "title": "Epistaxis: a stepwise ladder, not a single treatment",
+      "category": "ent",
+      "topics": [
+        "ent",
+        "epistaxis",
+        "haemorrhage",
+        "anticoagulation"
+      ],
+      "originalSummary": "The American nosebleed guideline organises care as an escalation. Most bleeds stop with properly applied, sustained compression of the soft nose; when they do not, the clinician removes clot, looks for the source, and treats the point that is bleeding rather than the whole septum. Packing follows when cautery fails or nothing is seen, with resorbable materials favoured in patients whose blood does not clot normally. Persistent or recurrent bleeding despite these steps is an indication for arterial ligation or embolisation rather than repeated packing. The guideline is notable for advising against routinely stopping anticoagulants before first-line treatment, because most bleeds are controlled locally and the thrombotic risk of stopping is real. It also emphasises documenting the plan for any pack and identifying hereditary haemorrhagic telangiectasia.",
+      "source": {
+        "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)",
+        "title": "Clinical Practice Guideline: Nosebleed (Epistaxis)",
+        "year": 2020,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31910111/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "ent-epistaxis"
+      ]
+    },
+    {
+      "id": "ev.ntsp-tracheostomy",
+      "title": "Tracheostomy and laryngectomy airway emergencies",
+      "category": "ent",
+      "topics": [
+        "ent",
+        "airway",
+        "tracheostomy",
+        "laryngectomy",
+        "patient safety"
+      ],
+      "originalSummary": "The National Tracheostomy Safety Project produced multidisciplinary algorithms because tracheostomy displacement and blockage kept causing avoidable deaths, often on wards and often at night. The core idea is a fixed sequence that any trained clinician can start: call for help, oxygenate via both the face and the neck, use capnography, remove anything that could block the tube, test patency with a suction catheter, deflate the cuff, and remove a tube that is not working. The algorithms then split on one question: whether the upper airway is connected to the lungs. A laryngectomy patient can only be oxygenated through the stoma. Bedhead signs, spare tubes and equipment at the bedside are part of the intervention, not extras. The evidence is consensus and incident-based, but it has been widely adopted.",
+      "source": {
+        "org": "National Tracheostomy Safety Project (NTSP)",
+        "title": "Multidisciplinary guidelines for the management of tracheostomy and laryngectomy airway emergencies (Anaesthesia 2012)",
+        "year": 2012,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22731935/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "ent-stridor-airway"
+      ],
+      "procedureRefs": [
+        "surgical-tracheostomy"
+      ]
+    },
+    {
+      "id": "ev.sudden-hearing-loss",
+      "title": "Sudden sensorineural hearing loss: separate it early, treat within the window",
+      "category": "ent",
+      "topics": [
+        "ent",
+        "otology",
+        "hearing loss",
+        "corticosteroids"
+      ],
+      "originalSummary": "The updated American guideline treats sudden sensorineural hearing loss as a time-sensitive problem whose first task is to distinguish it from conductive loss, which is far more common and benign. Tuning fork tests and otoscopy at the first visit do this. Audiometry should follow promptly, and retrocochlear causes such as vestibular schwannoma should be sought with MRI or brainstem testing, while routine blood tests and CT head are discouraged. Corticosteroids are offered as an option within two weeks of onset, acknowledging that the evidence is uncertain. Intratympanic steroid is recommended as salvage for incomplete recovery a few weeks later, and hyperbaric oxygen is an option where available. Many popular adjuncts such as antivirals and vasodilators are advised against.",
+      "source": {
+        "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)",
+        "title": "Clinical Practice Guideline: Sudden Hearing Loss (Update)",
+        "year": 2019,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31369359/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "ent-sudden-hearing-loss-facial-palsy"
+      ]
+    },
+    {
+      "id": "ev.bells-palsy",
+      "title": "Bell's palsy: steroids early, protect the eye, exclude the mimics",
+      "category": "ent",
+      "topics": [
+        "ent",
+        "facial nerve",
+        "neurology",
+        "corticosteroids"
+      ],
+      "originalSummary": "The Bell's palsy guideline is built on the idea that the diagnosis is one of exclusion. A careful history and examination, including the ear, the parotid and the other cranial nerves, should find the stroke, tumour, infection or trauma that mimics it. For confirmed Bell's palsy in patients aged 16 and older, oral steroids started within 72 hours improve recovery, and that is the strongest recommendation in the document. Antivirals alone are not recommended, though they may be added to steroids. Eye protection is mandatory when the eye does not close. Routine bloods and imaging are discouraged for typical cases, and patients whose recovery is incomplete at three months, or who develop new signs, should be reassessed or referred to a facial nerve specialist.",
+      "source": {
+        "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)",
+        "title": "Clinical practice guideline: Bell's palsy",
+        "year": 2013,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24189771/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "ent-sudden-hearing-loss-facial-palsy"
+      ]
+    },
+    {
+      "id": "ev.ocular-surface-burns",
+      "title": "Grading ocular chemical injury by the limbus",
+      "category": "ophthalmology",
+      "topics": [
+        "ophthalmology",
+        "chemical injury",
+        "trauma",
+        "limbal stem cells"
+      ],
+      "originalSummary": "Dua and colleagues proposed grading chemical and thermal ocular surface burns by how much of the limbus is involved, measured in clock hours, together with the percentage of conjunctiva affected. The reasoning is that the limbus holds the stem cells that regenerate the corneal surface, so the extent of limbal damage predicts whether the cornea can heal on its own. The classification gives more prognostic separation at the severe end than older systems. For the non-ophthalmologist the practical lesson is that a pale, blanched limbus is a sign of severe ischaemic injury, not a reassuring white eye, and that early irrigation to limit the depth of damage is the intervention that matters most before the patient reaches an ophthalmologist.",
+      "source": {
+        "org": "British Journal of Ophthalmology",
+        "title": "A new classification of ocular surface burns (Dua, King and Joseph)",
+        "year": 2001,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11673310/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "eye-chemical-injury"
+      ]
+    },
+    {
+      "id": "ev.orbital-compartment",
+      "title": "Orbital compartment syndrome and lateral canthotomy",
+      "category": "ophthalmology",
+      "topics": [
+        "ophthalmology",
+        "trauma",
+        "orbit",
+        "retrobulbar haemorrhage"
+      ],
+      "originalSummary": "This review describes orbital compartment syndrome as a closed-space problem: the orbit is bounded by bone and a relatively fixed septum, so blood or swelling behind the eye raises pressure enough to compromise the optic nerve and retinal circulation. Causes include trauma, retrobulbar haemorrhage after orbital, sinus or lid surgery, and infection. The diagnosis is clinical, built on proptosis, a tense orbit, reduced vision, an afferent pupillary defect and restricted movement. The authors stress that treatment is urgent decompression by lateral canthotomy and cantholysis, performed by whoever is present and competent, and that imaging should not delay it. The procedure is simple, has few complications, and can be followed by formal surgery once vision is protected.",
+      "source": {
+        "org": "Survey of Ophthalmology",
+        "title": "Orbital compartment syndrome: the ophthalmic surgical emergency (Lima et al.)",
+        "year": 2009,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19539832/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "eye-open-globe-orbital-trauma"
+      ],
+      "procedureRefs": [
+        "fess"
+      ]
+    },
+    {
+      "id": "ev.boast-open-fractures",
+      "title": "Open fractures: the orthoplastic time standards",
+      "category": "trauma",
+      "topics": [
+        "orthopaedics",
+        "plastics",
+        "trauma",
+        "infection",
+        "open fracture"
+      ],
+      "originalSummary": "The British standard for open fractures of long bones, hindfoot and midfoot rests on one organisational idea: the bone and the soft tissue are one injury, so orthopaedic and plastic surgeons plan and operate together. Around that sit a few clocks. Antibiotics should be given as early as possible, ideally within the first hour. The wound is handled only to photograph it and remove gross contamination before theatre, then covered with a saline-soaked dressing. Debridement is immediate for heavily contaminated wounds or a compromised limb, within half a day for other high-energy injuries and within a day for the rest. Wounds are extended along fasciotomy lines to protect future flap options, internal fixation is used only when cover can follow straight away, and definitive cover should be achieved within three days of injury. The evidence behind the exact hours is largely observational and consensus, but the direction is consistent: early antibiotics, a thorough single-team excision and early cover reduce deep infection.",
+      "source": {
+        "org": "British Orthopaedic Association (BOA)",
+        "title": "BOAST: Open Fractures",
+        "year": 2017,
+        "url": "https://www.boa.ac.uk/resource/boast-4-pdf.html",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "open-fracture",
+        "pulseless-limb-fracture"
+      ],
+      "procedureRefs": [
+        "open-fracture-debridement",
+        "tibial-im-nail"
+      ]
+    },
+    {
+      "id": "ev.boast-compartment",
+      "title": "Acute compartment syndrome: diagnose clinically, decompress at once",
+      "category": "trauma",
+      "topics": [
+        "orthopaedics",
+        "compartment syndrome",
+        "fasciotomy",
+        "trauma"
+      ],
+      "originalSummary": "Compartment syndrome is a clinical diagnosis built on pain that outruns the injury and pain on passively stretching the affected muscles. The current BOAST asks hospitals to train every member of the pathway, record hourly structured observations in at-risk limbs including the analgesia given, and release circumferential dressings promptly when it is suspected. Pressure measurement is reserved for uncertainty or the patient who cannot be assessed; a small gap between diastolic and compartment pressure signals risk, and a high absolute pressure prompts consideration of decompression, with a consultant deciding. Once diagnosed, decompression is immediate, every involved compartment is opened, and in the leg that means two incisions and four compartments. The guideline also sets a plastic surgery discussion within a day and a second look within three days, and recognises that very late presentations may be safer managed without surgery after a two-consultant decision.",
+      "source": {
+        "org": "British Orthopaedic Association (BOA)",
+        "title": "BOAST: Diagnosis and Management of Compartment Syndrome of the Extremities",
+        "year": 2025,
+        "version": "updated July 2025",
+        "url": "https://www.boa.ac.uk/resource/boast-10-pdf.html",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "compartment-syndrome",
+        "open-fracture"
+      ],
+      "procedureRefs": [
+        "leg-fasciotomy",
+        "tibial-im-nail"
+      ]
+    },
+    {
+      "id": "ev.nice-hip-fracture",
+      "title": "Hip fracture care as a pathway, not an operation",
+      "category": "trauma",
+      "topics": [
+        "orthopaedics",
+        "hip fracture",
+        "orthogeriatrics",
+        "older people"
+      ],
+      "originalSummary": "NICE's hip fracture guideline treats the operation as one part of a pathway that starts at the front door. Its emphasis is on immediate and repeatedly reassessed analgesia, including for people with dementia, rapid correction of problems that would otherwise postpone surgery, operating on the day of or after admission, and an operation that lets the patient bear weight fully straight away. Implant choice follows fracture anatomy: arthroplasty for displaced intracapsular fractures, with total hip replacement considered for people who were active and expected to stay independent, a sliding hip screw for most trochanteric fractures, and a nail for subtrochanteric ones. Mobilisation the next day and orthogeriatric care from admission are recommended because outcome in this population is driven as much by delirium, deconditioning and medical complications as by the fixation.",
+      "source": {
+        "org": "National Institute for Health and Care Excellence (NICE)",
+        "title": "Hip fracture: management (CG124)",
+        "year": 2011,
+        "version": "CG124, last updated 2023",
+        "url": "https://www.nice.org.uk/guidance/cg124",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "hip-fracture"
+      ],
+      "procedureRefs": [
+        "dynamic-hip-screw"
+      ]
+    },
+    {
+      "id": "ev.boast-arterial",
+      "title": "Arterial injury with a fracture: no safe ischaemic time",
+      "category": "trauma",
+      "topics": [
+        "orthopaedics",
+        "vascular",
+        "trauma",
+        "limb ischaemia"
+      ],
+      "originalSummary": "The 2026 BOAST on arterial injuries with musculoskeletal trauma drops the idea of a permissible warm ischaemic window and frames revascularisation as an emergency to be started within an hour of arrival. A pulseless deformed limb is realigned and splinted first and then re-examined; if it remains dysvascular, or the pulse simply does not match the other side, an arterial injury is assumed and CT angiography is done alongside any trauma CT. Flow is restored early with a temporary shunt, the skeleton is stabilised immediately afterwards, and the definitive arterial repair follows. Fasciotomy is considered after every revascularisation, and early amputation needs agreement between two consultants from different specialties. The practical lesson is that the sequence and the speed, not the sophistication of the repair, decide whether the limb survives.",
+      "source": {
+        "org": "British Orthopaedic Association (BOA)",
+        "title": "BOAST: Diagnosis and management of arterial injuries associated with musculoskeletal trauma",
+        "year": 2026,
+        "url": "https://www.boa.ac.uk/resource/diagnosis-and-management-of-arterial-injuries-associated-with-musculoskeletal-trauma.html",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "pulseless-limb-fracture",
+        "dislocation-neurovascular",
+        "open-fracture"
+      ]
+    },
+    {
+      "id": "ev.kocher-hip",
+      "title": "Septic hip or transient synovitis: the Kocher criteria",
+      "category": "infection",
+      "topics": [
+        "orthopaedics",
+        "paediatrics",
+        "septic arthritis",
+        "prediction rule"
+      ],
+      "originalSummary": "Kocher and colleagues derived a four-item rule from children with an irritable hip to separate septic arthritis from transient synovitis: inability to weight-bear, fever above 38.5 C, raised ESR and raised white cell count. The predicted probability of infection climbs steeply with each additional criterion. Later validation by the same group confirmed the rule was useful, although its discrimination was lower than in the derivation cohort, and studies from other centres have found it weaker again. The sensible use is as a structured way to decide who needs ultrasound and aspiration, never as a reason to avoid aspirating a child who looks unwell. Surgical drainage of a confirmed septic joint remains time-critical.",
+      "source": {
+        "org": "Kocher MS et al. J Bone Joint Surg Am 81:1662",
+        "title": "Differentiating between septic arthritis and transient synovitis of the hip in children: an evidence-based clinical prediction algorithm",
+        "year": 1999,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10608376/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "septic-arthritis"
+      ]
+    },
+    {
+      "id": "ev.flap-salvage-timing",
+      "title": "Free flap compromise: early recognition decides salvage",
+      "category": "plastics",
+      "topics": [
+        "plastics",
+        "free flap",
+        "microsurgery",
+        "monitoring"
+      ],
+      "originalSummary": "A large single-centre series of free flaps showed that most vascular compromise appears within the first day, and that flaps returned to theatre soon after the first sign of trouble were salvaged far more often than those recognised later. Earlier work had already shown that pedicle thrombosis clusters in the first days after surgery. Together they justify the intensive, structured monitoring of the first 24 to 48 hours, a low threshold for calling the operating surgeon, and a re-exploration culture in which an early negative look is acceptable. Venous problems outnumber arterial ones and tend to evolve more gradually, which is why serial comparison by the same observer is more useful than any single observation.",
+      "source": {
+        "org": "Chen KT et al. Plast Reconstr Surg 120:187",
+        "title": "Timing of presentation of the first signs of vascular compromise dictates the salvage outcome of free flap transfers",
+        "year": 2007,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17572562/",
+        "accessed": "2026-11-04"
+      },
+      "protocolRefs": [
+        "flap-monitoring"
+      ]
     }
   ]
 }

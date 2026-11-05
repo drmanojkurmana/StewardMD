@@ -1,0 +1,216 @@
+{
+  "id": "pelvic-fracture-haemorrhage",
+  "title": "Pelvic fracture with haemorrhage",
+  "subtitle": "Binder, blood, then embolise or pack",
+  "category": "ortho_trauma",
+  "specialty": "orthopaedics",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "boast-pelvis",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: The Management of Patients with Pelvic Fractures",
+      "year": 2018,
+      "url": "https://www.boa.ac.uk/resource/boast-3-pdf.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng39",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Major trauma: assessment and initial management (NG39)",
+      "year": 2016,
+      "version": "NG39",
+      "url": "https://www.nice.org.uk/guidance/ng39",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng37",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Fractures (complex): assessment and management (NG37)",
+      "year": 2016,
+      "version": "NG37",
+      "url": "https://www.nice.org.uk/guidance/ng37",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "wses-pelvis",
+      "org": "World Society of Emergency Surgery (WSES), Coccolini F et al. World J Emerg Surg 12:5",
+      "title": "Pelvic trauma: WSES classification and guidelines",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28115984/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "east-pelvis",
+      "org": "Eastern Association for the Surgery of Trauma (EAST), Cullinane DC et al. J Trauma 71:1850",
+      "title": "Practice management guidelines for hemorrhage in pelvic fracture: update and systematic review",
+      "year": 2011,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22182895/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "atls",
+      "org": "American College of Surgeons Committee on Trauma",
+      "title": "Advanced Trauma Life Support (ATLS) Student Course Manual",
+      "edition": "10th edition",
+      "year": 2018,
+      "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Hypotension or tachycardia after a high-energy mechanism with pelvic or groin pain."
+      },
+      {
+        "text": "Blood at the urethral meatus, perineal or scrotal haematoma, or a high-riding prostate: suspect urethral injury and do not pass a catheter blindly."
+      },
+      {
+        "text": "A wound in the perineum, groin, buttock, vagina or rectum: an open pelvic fracture, with very high mortality."
+      },
+      {
+        "text": "Leg-length discrepancy or rotation without a hip or femoral fracture."
+      },
+      {
+        "text": "An older anticoagulated patient after a low-energy fall can still bleed from the pelvis."
+      },
+      {
+        "text": "A negative CT with a binder on: a well-applied binder can hide a catastrophic ring injury."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "If active bleeding from a pelvic fracture is suspected after blunt high-energy trauma, apply a purpose-made pelvic binder.",
+        "timeCritical": true,
+        "evidenceRef": "nice-ng39"
+      },
+      {
+        "text": "Centre the binder over the greater trochanters, not the iliac crests.",
+        "timeCritical": true,
+        "evidenceRef": "atls"
+      },
+      {
+        "text": "Give intravenous tranexamic acid as soon as possible, ideally within an hour of injury; do not start it more than 3 hours after injury unless there is evidence of hyperfibrinolysis.",
+        "timeCritical": true,
+        "evidenceRef": "nice-ng39"
+      },
+      {
+        "text": "Resuscitate the unstable patient with blood products through the massive transfusion protocol.",
+        "timeCritical": true,
+        "evidenceRef": "boast-pelvis"
+      },
+      {
+        "text": "If received in a trauma unit, resuscitate and transfer immediately to a major trauma centre for definitive control of bleeding.",
+        "timeCritical": true,
+        "evidenceRef": "nice-ng37"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Primary survey with the binder on. Do not spring or rock the pelvis: it adds nothing and dislodges clot."
+      },
+      {
+        "text": "Inspect perineum, and examine rectum and vagina when an open fracture is suspected."
+      },
+      {
+        "text": "Lower limb neurology, for lumbosacral plexus injury."
+      },
+      {
+        "text": "Shock index trend is more useful than a single blood pressure.",
+        "calcs": [
+          "shock_index",
+          "modified_shock_index"
+        ]
+      }
+    ],
+    "investigate": [
+      {
+        "text": "High-energy trauma: contrast CT of head, chest, abdomen and pelvis with a head-to-toe scanogram. A contrast blush means active arterial bleeding."
+      },
+      {
+        "text": "In the non-responder, limit imaging to the minimum needed to direct intervention. A negative FAST does not exclude retroperitoneal haemorrhage."
+      },
+      {
+        "text": "Post-binder pelvic radiograph after resuscitation in every polytrauma patient, even with a 'negative' CT."
+      },
+      {
+        "text": "Suspected urethral injury: retrograde urethrography per the urological trauma BOAST."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Minimise heat loss: warm the patient, the fluids and the room.",
+        "evidenceRef": "nice-ng39"
+      },
+      {
+        "text": "Keep the binder on during any surgery; do not remove it for a post-binder radiograph until the patient is haemodynamically stable.",
+        "evidenceRef": "boast-pelvis"
+      },
+      {
+        "text": "Rapidly reverse anticoagulation in a bleeding patient.",
+        "evidenceRef": "nice-ng39"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Active arterial pelvic haemorrhage: interventional radiology with selective embolisation, unless immediate open surgery is needed for bleeding elsewhere.",
+        "timeCritical": true,
+        "evidenceRef": "nice-ng39"
+      },
+      {
+        "text": "Non-responder to resuscitation: surgical (preperitoneal) packing or angioembolisation, according to the major trauma centre protocol.",
+        "timeCritical": true,
+        "evidenceRef": "boast-pelvis"
+      },
+      {
+        "text": "Preperitoneal packing is usually combined with mechanical stabilisation, such as an anterior external fixator, so the packs have something to press against.",
+        "evidenceRef": "wses-pelvis"
+      },
+      {
+        "text": "Arterial contrast extravasation on CT may need angiography and embolisation even when the patient is currently stable.",
+        "evidenceRef": "east-pelvis"
+      },
+      {
+        "text": "Use external fixation for temporary stabilisation when early definitive surgery is not possible, and consider traction for a displaced vertical shear injury.",
+        "evidenceRef": "boast-pelvis"
+      },
+      {
+        "text": "Remove the binder ideally within 24 hours of injury, under a network protocol; reconstruct the ring within 72 hours of physiological stabilisation if associated injuries allow.",
+        "evidenceRef": "boast-pelvis"
+      },
+      {
+        "text": "Open fractures with perineal or rectal wounds: urgent general or colorectal consultant review, debridement per the open fracture standard, and consider a defunctioning stoma.",
+        "evidenceRef": "boast-pelvis"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Haemodynamic instability with a pelvic fracture is a major trauma centre problem. Transfer early rather than after the CT."
+      },
+      {
+        "text": "Call interventional radiology at the same time as the trauma team, not after the scan is reported."
+      },
+      {
+        "text": "Urology for any suspected bladder or urethral injury before instrumentation."
+      }
+    ]
+  },
+  "notes": [
+    "Most pelvic bleeding is venous and from fracture surfaces, which is why mechanical stability and packing work and why embolisation alone does not stop every bleed.",
+    "The binder is a resuscitation device. It belongs on in the ambulance, stays on through theatre, and comes off under a plan.",
+    "REBOA is used in some centres as a bridge to definitive haemorrhage control; it is a team capability, not an individual one."
+  ],
+  "calcs": [
+    "shock_index",
+    "modified_shock_index",
+    "gcs",
+    "rts"
+  ]
+}

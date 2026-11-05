@@ -1,0 +1,186 @@
+{
+  "id": "trauma-craniotomy-edh",
+  "title": "Trauma craniotomy for extradural haematoma",
+  "subtitle": "With decompressive craniectomy as the bailout",
+  "system": "neurological",
+  "aliases": ["EDH evacuation", "emergency craniotomy", "trauma flap", "decompressive craniectomy"],
+  "estMinutes": 120,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "btf-surg", "org": "Brain Trauma Foundation", "title": "Guidelines for the surgical management of traumatic brain injury (Bullock et al, Neurosurgery 2006;58(3 Suppl):S2-1 to S2-62)", "year": 2006, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Bullock+2006+surgical+management+of+traumatic+brain+injury+Neurosurgery", "accessed": "2026-11-04" },
+    { "id": "btf4", "org": "Brain Trauma Foundation", "title": "Guidelines for the management of severe traumatic brain injury, 4th edition", "edition": "4th edition", "year": 2016, "url": "https://braintrauma.org/guidelines", "accessed": "2026-11-04" },
+    { "id": "rescueicp", "org": "RESCUEicp Trial Collaborators", "title": "Trial of decompressive craniectomy for traumatic intracranial hypertension (Hutchinson et al, N Engl J Med 2016;375:1119-30)", "year": 2016, "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa1605215", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["gcs", "gcs_p", "abc2_ich_volume"],
+  "chapters": {
+    "indications": [
+      "Extradural haematoma over 30 cm3, regardless of GCS.",
+      "Extradural haematoma in a comatose patient with anisocoria, as soon as possible.",
+      "Smaller extradural haematoma with neurological deterioration or a focal deficit.",
+      "Decompressive craniectomy: brain swelling at the end of evacuation that prevents safe bone flap replacement, or, separately, as a last-tier option for refractory raised ICP."
+    ],
+    "contraindications": [
+      "Small extradural haematoma in a GCS above 8 without focal deficit, meeting criteria for observation in a neurosurgical centre.",
+      "Unsurvivable injury, where operating changes nothing; this is a senior, documented decision.",
+      "Uncorrected coagulopathy is a reason to correct urgently in parallel, not to delay a deteriorating patient."
+    ],
+    "preparation": [
+      "Fresh GCS and pupils; most recent CT open in theatre.",
+      "Blood cross-matched; coagulopathy correction started; tranexamic acid and blood products per the trauma protocol.",
+      "Shave and mark the flap before draping; prepare a wide field in case a craniectomy is needed.",
+      "Consent from family where possible, but do not delay an emergency evacuation for it."
+    ],
+    "positioning": [
+      "Supine, shoulder roll on the side of the haematoma, head turned to the opposite side.",
+      "Head on a horseshoe or in pins per the surgeon's choice; pins add time in an emergency.",
+      "Reverse Trendelenburg to reduce venous pressure, maintaining cerebral perfusion pressure."
+    ],
+    "equipment": [
+      "High-speed drill with perforator and craniotome footplate.",
+      "Bipolar diathermy, bone wax, haemostatic agents, dural hitch sutures.",
+      "Dural substitute or pericranium for duraplasty.",
+      "Means to store a bone flap per local policy (bone bank or abdominal subcutaneous pocket)."
+    ],
+    "anatomy": [
+      "Most extradural haematomas are temporal or temporoparietal, from a fracture tearing the middle meningeal artery or its branches.",
+      "The pterion is where the frontal, parietal, temporal and sphenoid bones meet; the anterior branch of the middle meningeal artery runs beneath it.",
+      "The haematoma strips the dura from the inner table. The brain beneath is often normal, which is why the outcome after early surgery is good.",
+      "For a decompressive craniectomy, the flap must reach the floor of the middle cranial fossa, or the temporal lobe still herniates against the tentorium."
+    ],
+    "criticalSafety": [
+      "Confirm the side from the scan in theatre. A unilateral fixed pupil usually, but not always, points to the side of the clot.",
+      "Get to the clot fast: the first burr hole over the thickest part of the haematoma decompresses before the flap is raised.",
+      "Find and control the bleeding source before closing. An uncontrolled middle meningeal artery re-accumulates within hours.",
+      "If the brain swells beyond the bone edge, leave the bone out rather than force it back."
+    ],
+    "structuresAtRisk": [
+      "Middle meningeal artery and foramen spinosum",
+      "Superior sagittal sinus and transverse sinus near flap margins",
+      "Frontal branch of the facial nerve and superficial temporal artery",
+      "Frontal air sinus in an anterior flap"
+    ],
+    "commonErrors": [
+      "A flap that is too small, leaving clot under the bone edge and making bleeding control impossible.",
+      "Not hitching the dura, allowing a fresh extradural to form under the replaced flap.",
+      "Missing a contralateral or subdural haematoma that appears once the tamponade of the first clot is released.",
+      "Replacing the bone over a swelling brain."
+    ],
+    "complications": [
+      "Recurrent extradural or new subdural, intracerebral or contralateral haematoma.",
+      "Brain swelling and raised ICP.",
+      "Seizures, wound infection, CSF leak.",
+      "After craniectomy: hydrocephalus, subdural hygroma, syndrome of the trephined, and the need for a later cranioplasty.",
+      "Death or severe disability, particularly when surgery is delayed."
+    ],
+    "postop": [
+      "Intensive care for intubated patients with ICP monitoring as indicated.",
+      "Post-operative CT per local protocol, and at once for any deterioration.",
+      "Record where the bone flap is stored and label the head wound and notes 'no bone flap' after a craniectomy.",
+      "Plan cranioplasty timing and helmet use after craniectomy."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "In an emergency, document the best-interests decision; do not delay for a signature." },
+    { "ref": "step.neuro.preop-check", "emphasis": "Pupils and motor score immediately before induction, and the scan read aloud for the side." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Shoulder roll and head turned so the haematoma is uppermost; keep the jugular veins free." },
+    { "ref": "step.neuro.cranial-landmarks", "emphasis": "Mark a trauma question-mark incision that can be extended to a full decompressive flap if needed." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.edh.scalp-flap" },
+    { "ref": "step.neuro.burr-hole", "emphasis": "First burr hole over the thickest clot: this alone relieves pressure in a herniating patient." },
+    { "ref": "step.edh.bone-flap" },
+    { "ref": "step.edh.evacuate" },
+    { "ref": "step.neuro.dura-open", "emphasis": "Open the dura only if it is blue, tense, or the scan shows a subdural component." },
+    { "ref": "step.edh.decompressive-craniectomy" },
+    { "ref": "step.neuro.dural-repair", "emphasis": "After a craniectomy, use a loose duraplasty so the swelling brain has room." },
+    { "ref": "step.edh.flap-replace" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.neuro.postop-neuro-obs" },
+    { "ref": "step.core.debrief", "emphasis": "State whether the bone flap is replaced or stored, and where." }
+  ],
+  "steps_local": {
+    "step.edh.scalp-flap": {
+      "id": "step.edh.scalp-flap",
+      "kind": "access",
+      "title": "Scalp flap",
+      "why": "The scalp is very vascular and blood loss from the edges is significant in a coagulopathic trauma patient. A well-planned flap with a broad base also heals reliably.",
+      "how": [
+        "Incise down to bone, staying about 1 cm in front of the tragus to protect the superficial temporal artery and the frontal branch of the facial nerve.",
+        "Control the edges with scalp clips or haemostats as you go.",
+        "Reflect the scalp with or without the temporalis muscle, depending on the exposure needed."
+      ],
+      "structuresAtRisk": ["Superficial temporal artery", "Frontal branch of the facial nerve"],
+      "pitfalls": ["Losing significant blood from the scalp edges before the bone is even opened."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.edh.bone-flap": {
+      "id": "step.edh.bone-flap",
+      "kind": "access",
+      "critical": true,
+      "title": "Raising the bone flap",
+      "why": "The flap must expose the whole clot and its bleeding source. Too small a flap leaves clot under the bone edge and the bleeding vessel out of reach.",
+      "how": [
+        "Connect burr holes with the craniotome footplate, separating the dura from the inner table first.",
+        "Lift the bone flap off carefully; the clot is often adherent to it.",
+        "Rongeur the temporal bone down towards the middle fossa floor if the clot extends there."
+      ],
+      "structuresAtRisk": ["Dura", "Venous sinuses at the flap margins", "Middle meningeal artery"],
+      "pitfalls": ["Crossing a venous sinus with the craniotome."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.edh.evacuate": {
+      "id": "step.edh.evacuate",
+      "kind": "resection",
+      "critical": true,
+      "title": "Evacuating the clot and controlling the source",
+      "why": "Removing the clot relieves compression; finding the bleeding vessel prevents re-accumulation. Both are needed.",
+      "how": [
+        "Remove the clot with suction and irrigation, without pressing on the dura.",
+        "Find the bleeding point: usually a branch of the middle meningeal artery, occasionally a sinus or diploic bleeding.",
+        "Coagulate the artery; if it bleeds from the foramen spinosum, pack it with bone wax or a haemostatic agent.",
+        "Place circumferential dural hitch sutures to the bone edge to close the extradural space."
+      ],
+      "structuresAtRisk": ["Middle meningeal artery", "Venous sinuses", "Dura"],
+      "pitfalls": ["Closing without identifying the source because bleeding has temporarily stopped under a lower blood pressure."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.edh.decompressive-craniectomy": {
+      "id": "step.edh.decompressive-craniectomy",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Bailout: decompressive craniectomy",
+      "why": "If the brain swells beyond the bone edge, replacing the flap converts a decompression into a compression. Leaving the bone out saves life, accepting more survivors with disability.",
+      "how": [
+        "Recognise the indication: brain bulging above the inner table, or a tense dura that does not relax after clot removal.",
+        "Enlarge the bone opening to a large frontotemporoparietal craniectomy, reaching down to the middle fossa floor.",
+        "Open the dura widely and perform a loose duraplasty with pericranium or a substitute.",
+        "Do not replace the bone flap. Store it per local policy and record where it is.",
+        "Tell the anaesthetist and intensive care team this has been done, and discuss the prognosis honestly with the family."
+      ],
+      "structuresAtRisk": ["Superior sagittal sinus", "Temporal lobe herniating through a small defect", "Cortical veins at the bone edge"],
+      "pitfalls": [
+        "A small craniectomy, which allows the brain to herniate through the bone edge and infarct.",
+        "Not recording that the flap is out, so the patient is later turned onto the unprotected side."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.edh.flap-replace": {
+      "id": "step.edh.flap-replace",
+      "kind": "reconstruction",
+      "title": "Replacing the bone flap",
+      "why": "Secure bone fixation restores cranial protection and contour; a central hitch stitch prevents a new extradural forming under the flap.",
+      "how": [
+        "Replace the flap only if the brain is slack and below the inner table.",
+        "Place a central dural hitch through the flap before fixing it.",
+        "Fix with plates and screws or other cranial fixation per local practice."
+      ],
+      "structuresAtRisk": ["Dura and cortex under the fixation points"],
+      "pitfalls": ["Forcing the bone back over a brain that is beginning to swell."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

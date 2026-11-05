@@ -1,0 +1,283 @@
+{
+  "_comment": "SURGX shared bowel steps: stoma siting, formation and maturation, mesenteric and bowel division, anastomosis and leak testing. Used by two or more GI procedures (Hartmann's, loop ileostomy, small bowel resection, perforated duodenal ulcer repair). Procedure-only steps stay in each procedure's steps_local.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.bowel.stoma-siting": {
+      "id": "step.bowel.stoma-siting", "kind": "prep",
+      "title": "Pre-operative stoma siting",
+      "why": "Most stoma leaks, skin problems and appliance failures trace back to where the stoma was put. A site chosen with the patient sitting, standing and dressed avoids creases, scars and the belt line that are invisible on a supine anaesthetised abdomen.",
+      "how": [
+        "Mark the site before theatre whenever time allows, ideally with a stoma specialist nurse, for any operation in which a stoma is possible.",
+        "Examine the patient lying, sitting and standing. Choose a flat area of at least the size of the appliance flange, within the rectus sheath, below the belt line and where the patient can see it.",
+        "Avoid the umbilicus, costal margin, anterior superior iliac spine, existing scars, skin folds and the planned incision.",
+        "Mark both iliac fossae if the type of stoma is uncertain, and record which is which."
+      ],
+      "structuresAtRisk": ["Peristomal skin"],
+      "pitfalls": [
+        "Siting on the supine anaesthetised patient, where a deep crease becomes visible only when the patient sits up on day two.",
+        "Siting lateral to the rectus, which raises the risk of parastomal hernia and prolapse."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.trephine": {
+      "id": "step.bowel.trephine", "kind": "access",
+      "title": "Creating the stoma trephine",
+      "why": "The trephine is a hole in the abdominal wall that must be large enough to keep the stoma perfused and small enough not to become a parastomal hernia. Both errors are made in this one minute.",
+      "how": [
+        "Excise a disc of skin at the marked site, roughly the diameter of the bowel being brought out; do not excise subcutaneous fat, just part it.",
+        "Incise the anterior rectus sheath in a cruciate or vertical line, split the rectus muscle in the line of its fibres, and retract it.",
+        "Identify and protect the inferior epigastric vessels before incising the posterior sheath and peritoneum.",
+        "Keep the skin, sheath and peritoneal openings in line by holding the wound edges in their anatomical position, typically admitting two fingers for an ileostomy."
+      ],
+      "structuresAtRisk": ["Inferior epigastric artery and veins", "Underlying bowel when the peritoneum is opened"],
+      "pitfalls": [
+        "Misaligned layers, which kink the bowel as it passes through and cause outflow obstruction.",
+        "An oversized fascial opening, which is the mechanism of a parastomal hernia.",
+        "An undersized opening that throttles the mesentery and makes the stoma dusky by the evening."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.stoma-mature": {
+      "id": "step.bowel.stoma-mature", "kind": "reconstruction",
+      "title": "Maturing the stoma and checking viability",
+      "why": "Small bowel effluent is caustic. A spouted ileostomy protects the skin for life; a flush ileostomy causes years of leakage. Viability is judged after closure because closure changes the tension and the perfusion.",
+      "how": [
+        "Mature only after the main wound is closed and covered, so faecal contamination does not reach it.",
+        "Ileostomy: evert to a spout of roughly 2 to 3 cm (Brooke technique) using three-point sutures through the bowel edge, the seromuscular layer at the skin level and the dermis.",
+        "Colostomy: suture flush or slightly raised, full-thickness bowel to dermis.",
+        "Inspect the mucosa: pink and bleeding from the cut edge is viable; dusky that does not improve, or black, needs revision now.",
+        "Apply a clear drainable appliance so that colour can be checked on the ward without removing it."
+      ],
+      "structuresAtRisk": ["Marginal vessels at the stoma edge", "Peristomal skin"],
+      "pitfalls": [
+        "Sutures through the dermal surface rather than the dermis, which leave mucosal implants on the skin.",
+        "Accepting a dusky stoma at the end of the operation and hoping it improves overnight.",
+        "Under-spouting an ileostomy because the mesentery is short; mobilise more instead."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.mesentery-division": {
+      "id": "step.bowel.mesentery-division", "kind": "resection",
+      "title": "Dividing the mesentery",
+      "why": "The mesenteric division decides the blood supply of both cut ends. Stay close enough to the bowel to keep the arcades of the retained bowel intact, and far enough from it that the cut ends are not stripped.",
+      "how": [
+        "Transilluminate the mesentery to see the arcades and choose a line that preserves supply to both retained ends.",
+        "Score the peritoneum on both faces, then divide between clips or ties, or with a vessel-sealing device in thin mesentery.",
+        "Ligate larger vessels individually; a thick inflamed mesentery is taken in small bites.",
+        "For a benign resection, divide close to the bowel; for malignancy, take the mesentery to its origin as the oncological plan dictates."
+      ],
+      "structuresAtRisk": ["Arcades supplying the retained bowel", "Superior mesenteric vessels at the root", "Ureter and gonadal vessels behind the sigmoid mesentery"],
+      "pitfalls": [
+        "Tied pedicles slipping in an oedematous mesentery, producing a mesenteric haematoma that compromises the anastomosis.",
+        "Skeletonising more than about 1 cm of bowel wall at the planned division point."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.bowel-division": {
+      "id": "step.bowel.bowel-division", "kind": "resection",
+      "title": "Dividing the bowel",
+      "why": "Division is where contamination of the field happens. A stapled or clamped division keeps contents in, and the state of the cut ends after division is the first real test of their blood supply.",
+      "how": [
+        "Pack off the field with moist swabs before division.",
+        "Divide with a linear cutting stapler, or between non-crushing and crushing clamps, at the point already prepared on the mesenteric border.",
+        "Check the cut ends: pulsatile or bright bleeding from the mesenteric edge is reassuring; dark oozing or no bleeding is not.",
+        "Hand the specimen off the field and change contaminated instruments."
+      ],
+      "structuresAtRisk": ["Mesenteric vessels at the division point"],
+      "pitfalls": [
+        "Including the mesentery in the staple line, which bleeds and devascularises the end.",
+        "Dividing without packing off in an obstructed, loaded bowel."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.anastomosis-stapled": {
+      "id": "step.bowel.anastomosis-stapled", "kind": "reconstruction", "critical": true,
+      "title": "Stapled side-to-side (functional end-to-end) anastomosis",
+      "why": "An anastomosis heals only if it is well perfused, tension-free and made between healthy ends. The stapler gives a reproducible, wide lumen, but it does not compensate for poor blood supply or a patient in shock.",
+      "how": [
+        "Decide first whether an anastomosis is safe at all: haemodynamic instability, vasopressors, gross contamination, malnutrition and doubtful viability favour a stoma or a delayed anastomosis.",
+        "Lay the two limbs side by side along their antimesenteric borders, make enterotomies at the corner, and fire a linear cutting stapler, keeping the mesentery clear.",
+        "Inspect the staple line from inside for bleeding.",
+        "Close the common enterotomy with a further transverse stapler firing or a handsewn layer, staggering the staple lines.",
+        "Place a reinforcing suture at the crotch of the anastomosis, where tension concentrates."
+      ],
+      "structuresAtRisk": ["Mesentery caught in the stapler jaws", "Back wall of the bowel during closure of the enterotomy"],
+      "pitfalls": [
+        "Overlapping staple lines at the crotch without reinforcement.",
+        "Using a stapler cartridge whose staple height is wrong for thick, oedematous bowel."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.anastomosis-handsewn": {
+      "id": "step.bowel.anastomosis-handsewn", "kind": "reconstruction", "critical": true,
+      "title": "Handsewn anastomosis",
+      "why": "A handsewn anastomosis adapts to bowel of mismatched calibre, to thick oedematous wall and to settings without a stapler. Its safety rests on taking the submucosa, the strength layer, in every bite.",
+      "how": [
+        "Confirm both ends bleed and lie together without tension; mobilise further rather than pull.",
+        "Single-layer extramucosal interrupted or continuous technique with a slowly absorbable monofilament suture, end-to-end or end-to-side.",
+        "Include the submucosa in every bite, with even spacing and depth, roughly 5 mm bites placed 5 mm apart as a guide.",
+        "Begin at the mesenteric border, where leaks most often start because the bowel wall is hidden by fat.",
+        "Correct a calibre mismatch with an antimesenteric (Cheatle) slit on the narrower end."
+      ],
+      "structuresAtRisk": ["Mesenteric border of the bowel", "Marginal vessels"],
+      "pitfalls": [
+        "Strangulating the edges by tying too tightly, which causes ischaemia rather than strength.",
+        "Missing the mesenteric corner, the usual site of a leak."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.leak-check": {
+      "id": "step.bowel.leak-check", "kind": "checkpoint", "critical": true,
+      "title": "Checking the repair or anastomosis",
+      "why": "A defect found on the table costs a stitch. The same defect found on day four costs a re-laparotomy. A deliberate check and an inspection of perfusion take less than two minutes.",
+      "how": [
+        "Inspect the whole circumference, including the mesenteric border and the crotch of a stapled anastomosis.",
+        "Confirm the lumen is patent by palpation between finger and thumb.",
+        "Confirm perfusion of both sides; consider an objective perfusion assessment where it is available.",
+        "For a gastroduodenal repair, test with air insufflated via a nasogastric tube under saline, or with dilute methylene blue, and reinforce any leak.",
+        "Record the check and its result in the operative note."
+      ],
+      "structuresAtRisk": ["The repair itself"],
+      "pitfalls": [
+        "A negative air test treated as a guarantee: it excludes a technical hole, not later ischaemic breakdown.",
+        "Skipping the check because the anastomosis 'looks fine'."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.left-medial-to-lateral": {
+      "id": "step.bowel.left-medial-to-lateral",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Medial-to-lateral mobilisation of the left colon and sigmoid, ureter first",
+      "why": "Lifting the sigmoid and descending mesocolon off the retroperitoneum in the embryological plane keeps the lymphatic envelope intact and keeps the left ureter, gonadal vessels and hypogastric nerves behind the plane. Seeing the ureter before any vessel is divided is the single most important safety check in left-sided colorectal surgery.",
+      "how": [
+        "Lift the sigmoid mesentery up and to the left so the inferior mesenteric pedicle tents away from the aorta; incise the peritoneum at the sacral promontory beneath it.",
+        "Enter the areolar plane behind the mesocolon (Toldt's fascia) and sweep the retroperitoneum down, working laterally towards the abdominal wall and cephalad towards the pancreas.",
+        "Identify the left ureter (it peristalses when touched) and the gonadal vessels lying beneath the plane, and confirm this aloud before dividing any vessel.",
+        "Preserve the superior hypogastric plexus on the front of the aorta below the inferior mesenteric artery and the hypogastric nerves as they run down towards the pelvis.",
+        "Complete the release by dividing the lateral peritoneal attachments along the white line of Toldt, joining the medial dissection."
+      ],
+      "structuresAtRisk": [
+        "Left ureter",
+        "Left gonadal vessels",
+        "Superior hypogastric plexus and hypogastric nerves",
+        "Left iliac vessels at the pelvic brim"
+      ],
+      "pitfalls": [
+        "Dissecting too deep, so the ureter and gonadal vessels are lifted up with the mesocolon and later divided with it.",
+        "Starting with the lateral attachments, which loses the lateral traction the medial approach needs.",
+        "Failing to find the ureter and proceeding anyway: if it cannot be seen, approach from lateral, consider stents, or convert, but do not divide the pedicle blind."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.bowel.ima-ligation": {
+      "id": "step.bowel.ima-ligation",
+      "kind": "resection",
+      "critical": true,
+      "title": "Inferior mesenteric artery and vein ligation",
+      "why": "The level of the vascular tie sets the lymph node yield for a cancer, the reach of the colon to the pelvis, and the blood supply of the proximal limb. For benign disease a tie close to the bowel spares the autonomic nerves and the inferior mesenteric artery.",
+      "how": [
+        "Cancer: skeletonise the inferior mesenteric artery near its origin and divide it a short distance from the aorta (high tie), keeping the preaortic nerves on the aorta; alternatively divide it just below the left colic artery with clearance of the apical nodes (low tie), as the unit and MDT plan.",
+        "Divide the inferior mesenteric vein separately at the inferior border of the pancreas, lateral to the duodenojejunal flexure, when length is needed for a low anastomosis.",
+        "Benign disease (diverticular disease): divide the sigmoid branches close to the bowel or within the mesentery, preserving the inferior mesenteric trunk where possible.",
+        "Re-confirm the ureter and the gonadal vessels are below the plane immediately before firing the stapler or applying clips."
+      ],
+      "structuresAtRisk": [
+        "Left ureter",
+        "Superior hypogastric plexus",
+        "Aorta and left common iliac artery",
+        "Marginal artery supplying the proximal limb"
+      ],
+      "pitfalls": [
+        "Taking the preaortic nerve plexus with a high tie, causing sexual and bladder dysfunction.",
+        "A slipped clip or a tie on a bulky pedicle; control the stump before releasing it.",
+        "Dividing the marginal artery near the splenic flexure, which leaves the proximal colon dependent on a doubtful supply."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.bowel.splenic-flexure": {
+      "id": "step.bowel.splenic-flexure",
+      "kind": "dissection",
+      "title": "Splenic flexure mobilisation",
+      "why": "A colorectal anastomosis must lie in the pelvis without tension. Splenic flexure mobilisation gives the length; doing it badly tears the splenic capsule, the commonest cause of an unplanned splenectomy in colorectal surgery.",
+      "how": [
+        "Decide early whether length is needed: routinely for a low anastomosis, selectively for a sigmoid colectomy.",
+        "Combine approaches: medial (continuing the retromesocolic plane up over the pancreas), lateral (along the white line) and from the lesser sac (dividing the gastrocolic omentum to the left of the middle colic vessels).",
+        "Separate the transverse mesocolon from the anterior surface of the pancreas, staying above the pancreas and away from its inferior border.",
+        "Divide the splenocolic attachments under direct vision with no traction on the spleen."
+      ],
+      "structuresAtRisk": [
+        "Splenic capsule",
+        "Tail and body of pancreas",
+        "Middle colic vessels",
+        "Marginal artery"
+      ],
+      "pitfalls": [
+        "Downward traction on the colon that avulses the splenic capsule.",
+        "Entering the plane behind the pancreas, lifting the tail of the pancreas with the mesocolon.",
+        "Skipping mobilisation and accepting an anastomosis under tension."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.bowel.circular-anastomosis": {
+      "id": "step.bowel.circular-anastomosis",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Circular stapled colorectal anastomosis (double-stapled)",
+      "why": "The circular stapler allows an anastomosis deep in the pelvis that cannot be sewn by hand. Its safety depends on a perfused, tension-free proximal limb, correct orientation and a check that nothing else is caught in the staple line.",
+      "how": [
+        "Confirm proximal perfusion at the chosen division point (pulsatile bleeding from the marginal vessel, or an objective perfusion assessment where available), then insert the anvil into the proximal colon and secure it with a purse-string.",
+        "Check that the proximal limb reaches the pelvis without tension and that the mesentery runs straight from the pedicle without a twist.",
+        "Pass the stapler gently through the anus to the closed rectal stump and bring the spike out next to, or through, the transverse staple line, not far in front of or behind it.",
+        "Before firing, confirm the vagina (in a woman), the bladder and adjacent bowel are not caught, and that the colon is not twisted.",
+        "After firing, remove the stapler and inspect both doughnuts: they must be complete circles. Send them with the specimen or separately as the unit requires."
+      ],
+      "structuresAtRisk": [
+        "Posterior vaginal wall",
+        "Proximal colon blood supply",
+        "Small bowel or appendices epiploicae caught between anvil and cartridge"
+      ],
+      "pitfalls": [
+        "Incomplete doughnuts, which mean a gap in the anastomosis: test, repair, and consider defunctioning or redoing it.",
+        "Spike placed so that a 'dog-ear' is left at the corner of the transverse staple line, a common leak site.",
+        "Accepting a dusky proximal limb to avoid further mobilisation."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.bowel.colorectal-bailout": {
+      "id": "step.bowel.colorectal-bailout",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Deciding against an unprotected anastomosis: defunction or end colostomy",
+      "why": "A colorectal anastomotic leak is the complication that kills after this operation. Protecting a high-risk anastomosis with a loop ileostomy reduces the consequences of a leak, and not joining at all (end colostomy) is the right answer when the patient or the bowel is not fit for an anastomosis.",
+      "how": [
+        "Decide deliberately, with the reasons recorded: anastomotic height, prior pelvic radiotherapy, incomplete doughnuts or a positive leak test, doubtful perfusion, contamination, malnutrition, steroids or immunosuppression, and the patient's physiology.",
+        "Defunction: form a loop ileostomy at the pre-marked right iliac fossa site (see the loop ileostomy procedure) after closure of the main wound.",
+        "Do not join: divide and close the rectal stump, bring the colon out as an end colostomy at the pre-marked left iliac fossa site (Hartmann's procedure).",
+        "Laparoscopic difficulty, bleeding in the pelvis or failure to progress safely: convert to open early rather than late, and say so to the team.",
+        "Tell the patient after the operation which option was chosen and why, and what the plan for reversal is."
+      ],
+      "structuresAtRisk": [
+        "Anastomosis",
+        "Ileostomy blood supply",
+        "Rectal stump"
+      ],
+      "pitfalls": [
+        "Defunctioning reduces the harm of a leak but does not prevent a leak: an ischaemic anastomosis still needs to be redone or abandoned.",
+        "Choosing not to defunction to avoid a second operation, in a patient with several risk factors.",
+        "Converting only after a major bleed or an injury, rather than when progress stalls."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

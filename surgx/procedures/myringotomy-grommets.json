@@ -1,0 +1,140 @@
+{
+  "id": "myringotomy-grommets",
+  "title": "Myringotomy and grommet insertion",
+  "subtitle": "Anteroinferior incision, away from the ossicles",
+  "system": "ent",
+  "aliases": ["grommets", "ventilation tubes", "tympanostomy tubes", "myringotomy", "T-tubes"],
+  "estMinutes": 15,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng233", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Otitis media with effusion in under 12s (NG233)", "year": 2023, "url": "https://www.nice.org.uk/guidance/ng233", "accessed": "2026-11-04" },
+    { "id": "aaohns-tubes-2022", "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)", "title": "Clinical Practice Guideline: Tympanostomy Tubes in Children (Update)", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/35138954/", "accessed": "2026-11-04" }
+  ],
+  "calcs": [],
+  "chapters": {
+    "indications": [
+      "Persistent bilateral otitis media with effusion lasting at least three months with documented hearing difficulty, meeting the thresholds in NICE NG233 or the AAO-HNSF guideline.",
+      "Recurrent acute otitis media with middle ear effusion present at the time of assessment. The AAO-HNSF guideline advises against tubes for recurrent acute otitis media without effusion.",
+      "Otitis media with effusion in a child at risk of developmental difficulty, for example with Down syndrome or cleft palate, where the threshold for intervention is lower and individualised.",
+      "Adults with persistent unilateral effusion after the postnasal space has been examined to exclude a nasopharyngeal tumour. Also for barotrauma and as access for intratympanic treatment."
+    ],
+    "contraindications": [
+      "Otitis media with effusion of less than three months duration in a child with no additional risk factors.",
+      "A unilateral effusion in an adult in whom nasopharyngeal carcinoma has not been excluded.",
+      "A suspected vascular middle ear mass (a red or blue drum, pulsatile tinnitus). This needs imaging, not a myringotomy."
+    ],
+    "preparation": [
+      "Recent audiogram and tympanograms confirming the effusion and the hearing level, displayed in theatre.",
+      "In adults, flexible nasendoscopy of the postnasal space before listing for a unilateral effusion.",
+      "Consent covers otorrhoea, persistent perforation after extrusion, tympanosclerosis, early extrusion, the need for repeat surgery, and that hearing benefit is greatest while the tube is in."
+    ],
+    "positioning": [
+      "Supine, head turned away from the operated ear on a head ring.",
+      "Operating microscope positioned before the ear is touched; surgeon seated with arms supported."
+    ],
+    "equipment": [
+      "Operating microscope, aural specula of several sizes, wax hook and Jobson Horne probe.",
+      "Myringotomy knife, fine suction (Zoellner tips), crocodile forceps and a grommet introducer.",
+      "The chosen grommet (short-term or long-term type) and a spare."
+    ],
+    "anatomy": [
+      "The tympanic membrane has a pars tensa and a smaller pars flaccida above the lateral process of the malleus. Grommets go in the pars tensa.",
+      "The handle of the malleus divides the drum into anterior and posterior halves. The posterosuperior quadrant overlies the incus long process, the stapes and the chorda tympani nerve.",
+      "The anteroinferior quadrant is the safest site and is also where the drum is furthest from the ossicles. The jugular bulb can be high and dehiscent in the hypotympanum beneath the inferior drum.",
+      "The ear canal is narrowest at the bony-cartilaginous junction, and its skin is thin and bleeds easily when touched."
+    ],
+    "criticalSafety": [
+      "Confirm the side and the indication against the audiogram and tympanogram before the time-out.",
+      "Incise in the anteroinferior quadrant. Never in the posterosuperior quadrant, where the ossicles and chorda tympani lie.",
+      "Stop and do not incise if the drum looks red or blue or a mass is seen behind it."
+    ],
+    "structuresAtRisk": [
+      "Ossicular chain and chorda tympani in the posterosuperior quadrant",
+      "High jugular bulb in the hypotympanum",
+      "Ear canal skin"
+    ],
+    "commonErrors": [
+      "Using too small a speculum and incising the drum without seeing the whole of it.",
+      "A myringotomy too large, so the grommet falls into the middle ear, or too small, so it will not seat.",
+      "Pushing a grommet that has fallen into the middle ear further in rather than retrieving it under the microscope."
+    ],
+    "complications": [
+      "Otorrhoea, the commonest complication.",
+      "Persistent perforation after the tube extrudes, more common with long-term tubes.",
+      "Tympanosclerosis and atrophic segments of the drum.",
+      "Early extrusion, blockage, or medial displacement of the tube into the middle ear.",
+      "Rarely, cholesteatoma at the myringotomy site."
+    ],
+    "postop": [
+      "Uncomplicated acute tube otorrhoea is treated with topical antibiotic ear drops alone, without oral antibiotics, as the AAO-HNSF guideline recommends.",
+      "The AAO-HNSF guideline advises against routine prophylactic water precautions. Follow local practice for advice given to families.",
+      "Hearing assessment and review within three months of insertion, then periodic review until the tubes extrude and the drums are intact."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.ent.preop-data-check", "emphasis": "The tympanogram and audiogram for each ear. A bilateral listing with a normal tympanogram on one side needs a decision before the anaesthetic." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.ent.airway-share", "emphasis": "Usually a face mask or laryngeal mask. Agree how far the head will be turned for each ear." },
+    { "ref": "step.core.positioning", "emphasis": "Head turned and the microscope set before the first ear is touched." },
+    { "ref": "step.grommet.canal" },
+    { "ref": "step.grommet.myringotomy" },
+    { "ref": "step.grommet.insert" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.ent.airway-handover" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.grommet.canal": {
+      "id": "step.grommet.canal",
+      "kind": "prep",
+      "title": "Clear the canal and inspect the whole drum",
+      "why": "Wax and debris hide the anatomy. The decision about where to incise, and whether to incise at all, depends on seeing the whole tympanic membrane.",
+      "how": [
+        "Insert the largest speculum that fits comfortably and align the canal.",
+        "Remove wax with a wax hook or suction without touching the canal skin.",
+        "Inspect the whole drum: the handle of the malleus, the pars flaccida, and the colour behind the drum. Note any retraction pocket or mass."
+      ],
+      "structuresAtRisk": ["Ear canal skin"],
+      "pitfalls": [
+        "Accepting a partial view of the drum.",
+        "Bleeding from traumatised canal skin that then obscures the field."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.grommet.myringotomy": {
+      "id": "step.grommet.myringotomy",
+      "kind": "access",
+      "critical": true,
+      "title": "Radial myringotomy in the anteroinferior quadrant",
+      "why": "The anteroinferior quadrant is away from the ossicles and the chorda tympani. A radial incision of the right size seats the grommet without it falling through or extruding early.",
+      "how": [
+        "Make a short radial incision in the anteroinferior quadrant, sized to the grommet.",
+        "Aspirate the effusion through the incision with fine suction and note its character: serous, mucoid or purulent.",
+        "If the middle ear mucosa looks abnormal or a mass is seen, stop and reassess before inserting a tube."
+      ],
+      "structuresAtRisk": ["Ossicular chain", "Chorda tympani", "Jugular bulb"],
+      "pitfalls": [
+        "Incising posteriorly because the anterior drum is hard to see. Change the speculum or angle instead."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.grommet.insert": {
+      "id": "step.grommet.insert",
+      "kind": "reconstruction",
+      "title": "Insert and seat the grommet",
+      "why": "A grommet that is not seated across the drum either extrudes early or falls into the middle ear and becomes a foreign body.",
+      "how": [
+        "Hold the grommet with crocodile forceps by the outer flange and engage the inner flange in the incision.",
+        "Rotate or push it into place with a probe until both flanges sit either side of the drum.",
+        "Check the lumen is clear. Instil ear drops per local practice."
+      ],
+      "structuresAtRisk": ["Middle ear"],
+      "pitfalls": [
+        "Pushing hard against the drum, which enlarges the incision and loses the grommet into the middle ear."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

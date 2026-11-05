@@ -1,0 +1,162 @@
+{
+  "id": "lap-ovarian-cystectomy",
+  "title": "Laparoscopic ovarian cystectomy",
+  "subtitle": "Benign cyst out intact, ovary kept, bipolar sparing",
+  "system": "gynaecological",
+  "aliases": ["ovarian cystectomy", "laparoscopic cystectomy", "dermoid cyst removal", "endometrioma excision"],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "rcog-gtg62", "org": "Royal College of Obstetricians and Gynaecologists (RCOG) and British Society for Gynaecological Endoscopy (BSGE)", "title": "Management of suspected ovarian masses in premenopausal women (Green-top Guideline No. 62)", "year": 2011, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/", "accessed": "2026-11-04" },
+    { "id": "acog-pb174", "org": "American College of Obstetricians and Gynecologists (ACOG)", "title": "Evaluation and management of adnexal masses (Practice Bulletin No. 174)", "year": 2016, "url": "https://www.acog.org/clinical/clinical-guidance/practice-bulletin", "accessed": "2026-11-04" },
+    { "id": "telinde", "org": "Wolters Kluwer", "title": "Te Linde's Operative Gynecology: surgery for benign adnexal disease", "edition": "12th edition", "year": 2019, "url": "https://shop.lww.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["caprini", "apfel", "bmi"],
+  "chapters": {
+    "indications": [
+      "Persistent ovarian cyst in a premenopausal woman with benign features on ultrasound that is symptomatic, enlarging, or of a size that RCOG GTG62 advises removing rather than observing.",
+      "Mature cystic teratoma (dermoid cyst).",
+      "Endometrioma, in selected women after discussion of pain, fertility and ovarian reserve.",
+      "A cyst at risk of torsion, or after detorsion where a cyst persists."
+    ],
+    "contraindications": [
+      "Features suggesting malignancy (solid areas, papillary projections, ascites, raised tumour markers, a high risk score): refer to gynaecological oncology rather than perform a benign cystectomy.",
+      "Postmenopausal women: oophorectomy, rather than cystectomy, is usually the operation when surgery is indicated.",
+      "Simple cysts that are likely functional: observe and rescan.",
+      "Contraindications to pneumoperitoneum or steep head-down tilt; pregnancy needs an individual plan and timing."
+    ],
+    "preparation": [
+      "Review the ultrasound yourself and the risk assessment used locally (for example a risk of malignancy index or ultrasound rules), with tumour markers where indicated by guidance.",
+      "Consent for: injury to bowel, bladder or major vessels at entry, conversion to laparotomy, bleeding, oophorectomy if the ovary cannot be preserved, reduced ovarian reserve (particularly with endometrioma), recurrence, cyst rupture and spillage, port-site hernia, venous thromboembolism, and unexpected histology that may need further surgery.",
+      "Pregnancy test on the day; plan for a uterine manipulator if needed."
+    ],
+    "positioning": [
+      "Modified lithotomy (Lloyd-Davies) with legs in supports, arms tucked, and secured for steep head-down tilt.",
+      "Bladder emptied before port insertion."
+    ],
+    "equipment": [
+      "Laparoscopic stack, atraumatic graspers, scissors, bipolar forceps, suction-irrigation.",
+      "Specimen retrieval bag large enough for the cyst; uterine manipulator.",
+      "Haemostatic agents and fine sutures for the ovarian bed; open set available for conversion."
+    ],
+    "anatomy": [
+      "The ovary is suspended by the infundibulopelvic ligament (ovarian vessels) laterally and the utero-ovarian ligament medially, with its hilum on the mesovarium.",
+      "The ureter runs beneath the peritoneum of the ovarian fossa and crosses the pelvic brim close to the infundibulopelvic ligament; an endometrioma is often adherent over it.",
+      "Healthy ovarian cortex, which carries the follicles, is stretched thin over a cyst; it is most densely adherent near the hilum.",
+      "A benign cyst has a cleavage plane between its wall and the ovarian stroma; the absence of a plane is a warning."
+    ],
+    "criticalSafety": [
+      "Do not perform a benign cystectomy on a mass that looks malignant at laparoscopy: stop and stage.",
+      "Know where the ureter is before any energy is used near the side wall or ovarian fossa.",
+      "Minimise bipolar on the ovarian bed: thermal damage destroys follicles.",
+      "Use a retrieval bag for every cyst."
+    ],
+    "structuresAtRisk": [
+      "Ureter in the ovarian fossa and at the pelvic brim",
+      "Ovarian vessels in the infundibulopelvic ligament and hilum",
+      "Remaining ovarian cortex and follicles",
+      "Bowel adherent to an endometrioma",
+      "Inferior epigastric vessels at lateral ports"
+    ],
+    "commonErrors": [
+      "Starting a cystectomy on a mass with surface excrescences.",
+      "Excessive bipolar diathermy on the ovarian bed.",
+      "Rupturing a dermoid and not irrigating thoroughly.",
+      "Draining an endometrioma without excising its wall, leading to early recurrence."
+    ],
+    "complications": [
+      "Bleeding from the ovarian bed or hilum.",
+      "Reduced ovarian reserve, and rarely loss of the ovary.",
+      "Chemical peritonitis after dermoid spillage.",
+      "Bowel, bladder, ureteric or vascular injury.",
+      "Port-site hernia or infection; recurrence of the cyst.",
+      "Unexpected borderline or malignant histology."
+    ],
+    "postop": [
+      "Day case or overnight stay; shoulder-tip pain from the pneumoperitoneum is expected and settles.",
+      "Return for increasing abdominal pain, fever, vomiting or wound problems.",
+      "Review histology; an unexpected borderline or malignant result goes to the gynaecological oncology MDT.",
+      "For endometrioma, discuss medical suppression to reduce recurrence where appropriate."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the side and whether oophorectomy is consented if the ovary cannot be preserved." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.obg.preop-check", "emphasis": "Ultrasound features, risk score and tumour markers support a benign diagnosis; if not, this operation should not be on the list." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Lloyd-Davies, arms tucked and the patient secured before steep head-down tilt." },
+    { "ref": "step.obg.lithotomy-eua", "emphasis": "Catheterise to empty the bladder and place the uterine manipulator." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.lap.access" },
+    { "ref": "step.lap.ports" },
+    { "ref": "step.lap.survey", "emphasis": "Take peritoneal washings before handling the cyst if there is any doubt about its nature. Look at the upper abdomen, peritoneum and omentum." },
+    { "ref": "step.obg.adnexal-check", "emphasis": "Inspect the cyst surface for excrescences, and both ovaries and tubes, before starting." },
+    { "ref": "step.ovc.suspicion" },
+    { "ref": "step.obg.ureter-identification", "emphasis": "Especially with an endometrioma adherent to the ovarian fossa." },
+    { "ref": "step.ovc.incision" },
+    { "ref": "step.ovc.enucleation" },
+    { "ref": "step.ovc.bed-haemostasis" },
+    { "ref": "step.lap.specimen-retrieval", "emphasis": "Bag the cyst before any deliberate drainage; aspirate inside the bag if needed to extract it. After any spillage, irrigate copiously until clear." },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.lap.closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record cyst nature, spillage, ovarian tissue preserved, washings taken, and the contralateral ovary." }
+  ],
+  "steps_local": {
+    "step.ovc.suspicion": {
+      "id": "step.ovc.suspicion", "kind": "bailout", "critical": true,
+      "title": "Unexpected features of malignancy, or an operation that cannot be finished safely",
+      "why": "Rupturing an early ovarian cancer upstages it and can change treatment. The right response to an unexpectedly suspicious ovary is to stop, document and refer, not to complete a benign operation.",
+      "how": [
+        "If you see surface excrescences, solid areas, ascites or peritoneal deposits, do not perform a cystectomy.",
+        "Take washings, photograph the findings, biopsy peritoneal deposits if appropriate, and avoid rupturing the mass.",
+        "Close and refer to the gynaecological oncology MDT, and explain the findings to the woman when she is awake.",
+        "Convert to laparotomy, or call senior help, for bleeding that cannot be controlled laparoscopically or a cyst that cannot be removed intact."
+      ],
+      "structuresAtRisk": ["Integrity of a possibly malignant cyst"],
+      "pitfalls": ["Completing the cystectomy because the list was booked for it.", "Morcellating or draining a suspicious mass inside the abdomen."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ovc.incision": {
+      "id": "step.ovc.incision", "kind": "dissection",
+      "title": "Incising the ovarian cortex",
+      "why": "The right incision, on the antimesenteric side and just through the thin cortex, finds the cleavage plane without entering the cyst and keeps away from the hilar vessels.",
+      "how": [
+        "Stabilise the ovary with an atraumatic grasper on the utero-ovarian ligament.",
+        "Incise the cortex on the antimesenteric surface, away from the hilum, with scissors or a fine monopolar needle, just deep enough to reach the cyst wall.",
+        "Extend the incision enough to deliver the cyst without tearing the cortex."
+      ],
+      "structuresAtRisk": ["Cyst wall", "Hilar vessels"],
+      "pitfalls": ["A deep incision that enters the cyst.", "An incision near the hilum, where bleeding is hardest to control."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ovc.enucleation": {
+      "id": "step.ovc.enucleation", "kind": "resection", "critical": true,
+      "title": "Stripping the cyst from the ovary",
+      "why": "Removing the cyst intact in its plane preserves as much cortex as possible and avoids spillage. Force, rather than traction in the plane, tears off follicle-bearing tissue.",
+      "how": [
+        "Find the plane between the cyst wall and the stroma, then grasp the cyst wall and the ovarian edge with two atraumatic graspers.",
+        "Strip with gentle traction and countertraction, regrasping close to the plane as it advances.",
+        "Near the hilum, where the plane is adherent, use sharp dissection rather than tearing.",
+        "For an endometrioma, excise the wall rather than draining and leaving it."
+      ],
+      "structuresAtRisk": ["Ovarian cortex and follicles", "Hilar vessels"],
+      "pitfalls": ["Tearing the cyst off the hilum, causing brisk bleeding.", "Grasping the cortex repeatedly, so normal ovary comes away with the cyst."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ovc.bed-haemostasis": {
+      "id": "step.ovc.bed-haemostasis", "kind": "reconstruction", "critical": true,
+      "title": "Ovary-sparing haemostasis of the cyst bed",
+      "why": "The ovarian bed oozes, and the instinct to coagulate it widely destroys the follicles the operation was meant to preserve.",
+      "how": [
+        "Irrigate to find specific bleeding points and coagulate only those, briefly, with bipolar.",
+        "For general oozing, use pressure, a haemostatic agent or a fine suture rather than broad diathermy.",
+        "Leave the ovary to close on its own, or approximate the edges loosely with a fine suture if they gape widely."
+      ],
+      "structuresAtRisk": ["Remaining ovarian follicles", "Ureter beneath the ovarian fossa"],
+      "pitfalls": ["Painting the whole ovarian bed with bipolar.", "Coagulating near the ureter at the ovarian fossa."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

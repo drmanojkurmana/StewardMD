@@ -1,0 +1,159 @@
+{
+  "id": "modified-radical-mastectomy",
+  "title": "Modified radical mastectomy",
+  "subtitle": "Total mastectomy with level I and II axillary clearance",
+  "system": "breast",
+  "aliases": ["MRM", "Patey mastectomy", "mastectomy with axillary clearance"],
+  "estMinutes": 150,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng101", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Early and locally advanced breast cancer: diagnosis and management (NG101)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng101", "accessed": "2026-11-04" },
+    { "id": "nccn-breast", "org": "National Comprehensive Cancer Network (NCCN)", "title": "NCCN Clinical Practice Guidelines in Oncology: Breast Cancer", "year": 2025, "url": "https://www.nccn.org/guidelines/category_1", "accessed": "2026-11-04" },
+    { "id": "icmr-breast", "org": "Indian Council of Medical Research (ICMR)", "title": "Consensus document for management of breast cancer", "year": 2016, "url": "https://www.icmr.gov.in/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["npi_breast", "caprini", "apfel", "rcri"],
+  "chapters": {
+    "indications": [
+      "Breast cancer where mastectomy is the MDT and patient choice (for example a large tumour relative to the breast, multicentric disease, contraindication to radiotherapy, or patient preference) and the axilla needs clearance.",
+      "Biopsy-proven axillary nodal disease where axillary lymph node dissection is the planned axillary treatment.",
+      "Locally advanced breast cancer after neoadjuvant systemic therapy, as decided by the MDT.",
+      "In many Indian centres, where patients present with larger tumours and nodal disease, this remains a common primary cancer operation."
+    ],
+    "contraindications": [
+      "Distant metastatic disease, outside a palliative indication such as a fungating tumour agreed by the MDT.",
+      "Inflammatory breast cancer before neoadjuvant systemic therapy.",
+      "A clinically negative axilla, which needs sentinel node biopsy rather than axillary clearance."
+    ],
+    "preparation": [
+      "Complete triple assessment with receptor status, axillary ultrasound and needle biopsy, and staging appropriate to the stage.",
+      "MDT decision, including the plan for radiotherapy and whether immediate or delayed reconstruction is offered.",
+      "Mark the side and the planned incision with the patient upright.",
+      "Consent: seroma, lymphoedema, shoulder stiffness, numbness of the inner arm, flap necrosis, chronic pain, and the cosmetic and psychological impact."
+    ],
+    "positioning": [
+      "Supine with the ipsilateral arm abducted to no more than 90 degrees on an arm board, shoulder at the edge of the table.",
+      "Drape the arm free if the surgeon wants to move it during axillary dissection.",
+      "A small roll under the ipsilateral shoulder for a large breast."
+    ],
+    "equipment": [
+      "Diathermy, skin hooks or flap retractors, and a light retractor for the axilla.",
+      "Ligatures or clips for axillary vessels; a vessel-sealing device if preferred.",
+      "Two closed suction drains (one to the flaps, one to the axilla) where the unit uses drains.",
+      "Orientation sutures or clips agreed with the pathology department."
+    ],
+    "anatomy": [
+      "The breast lies in the superficial fascia; the plane between subcutaneous fat and breast tissue is the mastectomy flap plane. Flap thickness varies between patients and should follow this plane, not a fixed measurement.",
+      "Boundaries of dissection: clavicle superiorly, sternum medially, rectus sheath inferiorly, and latissimus dorsi laterally.",
+      "Axillary levels relate to pectoralis minor: level I lateral, level II behind, level III medial. A modified radical mastectomy clears levels I and II.",
+      "The long thoracic nerve runs on serratus anterior on the medial wall of the axilla; the thoracodorsal bundle runs to latissimus dorsi; the medial pectoral nerve pierces pectoralis minor to supply pectoralis major."
+    ],
+    "criticalSafety": [
+      "Identify and preserve the axillary vein as the superior limit of dissection.",
+      "Identify and preserve the long thoracic and thoracodorsal nerves before dividing tissue on the chest wall or the subscapular region.",
+      "Preserve the medial pectoral nerve; injuring it causes atrophy of pectoralis major.",
+      "Remove the breast with the pectoralis major fascia, keeping the specimen in one piece with the axillary contents."
+    ],
+    "structuresAtRisk": [
+      "Axillary vein",
+      "Long thoracic nerve (winged scapula)",
+      "Thoracodorsal nerve and vessels",
+      "Medial and lateral pectoral nerves",
+      "Intercostobrachial nerve"
+    ],
+    "commonErrors": [
+      "Flaps too thin, causing necrosis, or too thick, leaving breast tissue behind.",
+      "Stripping the adventitia of the axillary vein or dissecting above it, increasing lymphoedema.",
+      "Dividing the long thoracic nerve when it is lifted away from the chest wall with the axillary fat.",
+      "Sending the specimen without orientation, so a close margin cannot be located."
+    ],
+    "complications": [
+      "Seroma, the commonest complication; needs aspiration if symptomatic.",
+      "Flap necrosis and wound infection.",
+      "Lymphoedema of the arm and shoulder stiffness.",
+      "Numbness of the inner upper arm from intercostobrachial nerve division; chronic post-mastectomy pain.",
+      "Winged scapula or weakness of latissimus dorsi from motor nerve injury."
+    ],
+    "postop": [
+      "Drain care and removal per unit protocol; seroma aspiration as needed.",
+      "Early shoulder mobilisation with physiotherapy advice and lymphoedema education.",
+      "Breast care nurse support, prosthesis fitting, and discussion of reconstruction.",
+      "Return histology to the MDT for adjuvant treatment decisions, including radiotherapy to the chest wall and nodes."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.onco.mdt-check", "emphasis": "Confirm that the axilla has proven nodal disease, or a documented reason for clearance; a clinically negative axilla gets a sentinel node biopsy instead." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Arm abducted to no more than 90 degrees, with the shoulder at the table edge; over-abduction stretches the brachial plexus during a long axillary dissection." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.mrm.incision-flaps" },
+    { "ref": "step.mrm.pectoral" },
+    { "ref": "step.onco.tumour-handling" },
+    { "ref": "step.onco.axilla-entry" },
+    { "ref": "step.mrm.axillary-clearance" },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "Mark superior and lateral (axillary tail) with sutures of different lengths per the agreed convention, and label the axillary contents in continuity." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.mrm.drains" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.core.skin-closure", "emphasis": "Avoid dog-ears laterally: they are the commonest reason a patient asks for revision." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.mrm.incision-flaps": {
+      "id": "step.mrm.incision-flaps", "kind": "access", "critical": true,
+      "title": "Elliptical incision and skin flaps in the mastectomy plane",
+      "why": "Flaps in the correct plane are well perfused and leave no breast tissue behind. Both flap necrosis and residual breast tissue are failures of this one step.",
+      "how": [
+        "Plan an ellipse including the nipple-areola complex and any skin involved by tumour or the biopsy site, with enough skin to close without tension.",
+        "Apply firm counter-traction with skin hooks and develop the flaps in the plane between subcutaneous fat and breast tissue.",
+        "Raise flaps to the clavicle, sternum, rectus sheath and latissimus dorsi, checking flap thickness and colour repeatedly."
+      ],
+      "structuresAtRisk": ["Subdermal vascular plexus of the flaps"],
+      "pitfalls": ["Buttonholing the skin.", "Diathermy on high settings close to the dermis, devascularising the flap."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mrm.pectoral": {
+      "id": "step.mrm.pectoral", "kind": "resection",
+      "title": "Removing the breast with the pectoralis major fascia",
+      "why": "The pectoral fascia is the deep margin of the breast. Taking it with the specimen gives the pathologist a deep margin and leaves no breast tissue on the chest wall.",
+      "how": [
+        "Starting medially, lift the breast off pectoralis major with its fascia, from medial to lateral.",
+        "Control the internal mammary perforators near the sternum individually; they retract and bleed if divided carelessly.",
+        "Continue to the lateral border of pectoralis major, keeping the breast in continuity with the axillary tail."
+      ],
+      "structuresAtRisk": ["Internal mammary perforators", "Pectoralis major muscle"],
+      "pitfalls": ["Leaving fascia behind over a deep tumour.", "Dividing the perforators flush with the chest wall so they retract into the intercostal space."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mrm.axillary-clearance": {
+      "id": "step.mrm.axillary-clearance", "kind": "resection", "critical": true,
+      "title": "Level I and II axillary clearance with nerve preservation",
+      "why": "Axillary clearance controls nodal disease and gives the staging that drives adjuvant treatment. Its morbidity comes from the nerves and lymphatics around it, so they are identified before anything is divided.",
+      "how": [
+        "Retract pectoralis minor (or divide it in a Patey-type operation) to expose level II.",
+        "Define the axillary vein along its inferior border and work below it, ligating its tributaries.",
+        "Identify the long thoracic nerve on serratus anterior and the thoracodorsal bundle before sweeping the fat pad laterally.",
+        "Remove the level I and II contents in continuity with the breast; mark level II or the apex separately if the pathologist wants it."
+      ],
+      "structuresAtRisk": ["Axillary vein", "Long thoracic nerve", "Thoracodorsal nerve and vessels", "Medial pectoral nerve"],
+      "pitfalls": ["Dissecting above the vein.", "Taking the long thoracic nerve as it is lifted off the chest wall with the fat pad."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mrm.drains": {
+      "id": "step.mrm.drains", "kind": "closure",
+      "title": "Drainage of the flaps and axilla",
+      "why": "Seroma is the commonest complication of mastectomy. Drains, flap fixation or quilting reduce the dead space that fills with lymph.",
+      "how": [
+        "Place closed suction drains under the flaps and into the axilla through separate stab incisions, or use quilting sutures per unit practice.",
+        "Secure the drains and confirm suction before the drapes come down.",
+        "Document the number and position of drains in the operative note."
+      ],
+      "structuresAtRisk": ["Axillary vein (drain tip placement)"],
+      "pitfalls": ["A drain lying across the axillary vein.", "Drains brought out through the wound, which leak and get infected."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

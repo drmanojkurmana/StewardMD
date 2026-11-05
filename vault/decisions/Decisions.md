@@ -12136,3 +12136,16 @@ one-time speed timing says the phone renders slower than 1.3 times real time, an
 download fails). Open: the real Phonon runtime has not been run by us, so its speed and behaviour in the iOS and Android
 WebViews are unverified. If it proves too slow or fails in the app, the options were KittenTTS nano (24 MB) or native MLX
 on iOS. Reversible: `window.SMD_PREP_VOICE = false`, or drop `prep-voice.js` from the loader list.
+
+## SURGX across every surgical specialty (owner "make it 10/10", 2026-11-04)
+The 2026-11-04 audit scored SURGX 5.5/10: excellent note safety and engineering, but only general and emergency surgery.
+Content now covers ENT, urology, neurosurgery, orthopaedics, plastics, vascular, cardiothoracic, paediatric surgery,
+O&G surgery, eye emergencies, surgical oncology, breast, endocrine, GI/HPB and peri-operative care. Each specialty gets a
+shared step pack, so the 60% step-reuse rule still holds. Every entry carries a `specialty` that the manifest declares.
+The Protocols, Procedures and Cases lists have search and a specialty chip row. The operative note records the WHO
+Surgical Safety Checklist as taps, never AI-filled, and "Not done" is a valid answer: sign in identity, time out and
+sign out are required to finalise. Post-op and discharge notes record a Clavien-Dindo grade. Every procedure has an
+operative note template.
+All new content is `ai_drafted`. A real 10/10 still needs a named consultant reviewer per specialty to flip
+`review.status`: that is the owner's step, not code. Reversible: content is data (revert the manifest entries); the
+WHO section and Clavien field are in `surgx-note-schema.js`; recovery point is the parent of the merge commit.

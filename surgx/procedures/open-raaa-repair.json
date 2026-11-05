@@ -1,0 +1,189 @@
+{
+  "id": "open-raaa-repair",
+  "title": "Open repair of ruptured abdominal aortic aneurysm",
+  "subtitle": "Outline level, with damage control",
+  "system": "vascular",
+  "aliases": ["ruptured AAA", "open AAA repair", "emergency aortic repair", "rAAA"],
+  "estMinutes": 180,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "esvs-aaa-2024", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2024 Clinical Practice Guidelines on the Management of Abdominal Aorto-Iliac Artery Aneurysms", "year": 2024, "url": "https://pubmed.ncbi.nlm.nih.gov/38307694/", "accessed": "2026-11-04" },
+    { "id": "svs-aaa-2018", "org": "Society for Vascular Surgery (SVS)", "title": "The Society for Vascular Surgery practice guidelines on the care of patients with an abdominal aortic aneurysm", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/29268916/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["shock_index", "possum", "p_possum"],
+  "chapters": {
+    "indications": [
+      "Ruptured or symptomatic abdominal aortic aneurysm when anatomy is unsuitable for endovascular repair or an endovascular service is not available in time.",
+      "Failed or complicated endovascular repair needing conversion.",
+      "Rupture with a hostile aortic neck, a juxtarenal aneurysm, or iliac anatomy that will not take a stent graft."
+    ],
+    "contraindications": [
+      "A patient who has declined surgery or in whom repair is judged futile after senior discussion with the patient or family.",
+      "A patient whose anatomy and the local service make emergency EVAR the faster and safer option."
+    ],
+    "preparation": [
+      "Consultant vascular surgeon and consultant anaesthetist present; major haemorrhage protocol active, cell salvage set up, blood in theatre.",
+      "Arterial line and large-bore access placed in theatre, without delaying the start.",
+      "Grafts of several sizes, straight and bifurcated, open and checked before induction.",
+      "Plan for proximal control: supracoeliac clamp, infrarenal clamp, or an aortic occlusion balloon via the femoral or brachial route."
+    ],
+    "positioning": [
+      "Supine, arms out, with a warming blanket below the waist and fluid warmers on every line.",
+      "Urinary catheter and nasogastric tube after induction if not already in place."
+    ],
+    "equipment": [
+      "Major vascular tray with aortic clamps of several angles, iliac clamps and a self-retaining retractor.",
+      "Tube and bifurcated grafts; polypropylene sutures; pledgets.",
+      "Cell salvage, rapid infuser, and an aortic occlusion balloon with a sheath ready.",
+      "Materials for temporary abdominal closure if the abdomen cannot be closed."
+    ],
+    "anatomy": [
+      "The left renal vein crosses anterior to the aorta at the neck and is the landmark for an infrarenal clamp. It may be retro-aortic or circumaortic.",
+      "The inferior mesenteric artery arises from the front of the sac; the lumbar arteries arise from its back and bleed into the open sac.",
+      "The iliac veins lie behind and lateral to the iliac arteries and are easily torn by circumferential dissection.",
+      "The left ureter crosses the left iliac bifurcation; the duodenum lies over the neck of the aneurysm.",
+      "Supracoeliac control is gained through the lesser omentum, by dividing the crura of the diaphragm onto the aorta."
+    ],
+    "criticalSafety": [
+      "Prepare and drape before induction. Induction can drop the pressure catastrophically, and the knife must be ready.",
+      "Proximal control is the operation. Clamp first, dissect later.",
+      "Do not dissect the iliac arteries circumferentially. Clamp from the front or use balloon catheters from inside.",
+      "Measure intra-abdominal pressure after repair and do not force the abdomen closed."
+    ],
+    "structuresAtRisk": [
+      "Left renal vein",
+      "Iliac veins and the inferior vena cava",
+      "Duodenum",
+      "Left ureter",
+      "Inferior mesenteric artery and the left colon",
+      "Superior mesenteric artery and renal arteries with a high clamp"
+    ],
+    "commonErrors": [
+      "Induction before the surgeon is scrubbed and the abdomen draped.",
+      "Searching for an infrarenal neck in a large haematoma instead of clamping above the coeliac axis and moving the clamp down later.",
+      "Tearing the iliac veins during circumferential iliac dissection.",
+      "Closing a tense abdomen and causing abdominal compartment syndrome."
+    ],
+    "complications": [
+      "Death: mortality remains high, and most deaths are from haemorrhage, cardiac events and multi-organ failure.",
+      "Abdominal compartment syndrome.",
+      "Colonic ischaemia, typically of the left colon, presenting with diarrhoea, blood or acidosis.",
+      "Acute kidney injury, particularly after a suprarenal clamp or prolonged hypotension.",
+      "Distal embolism and limb ischaemia.",
+      "Myocardial infarction, respiratory failure and coagulopathy."
+    ],
+    "postop": [
+      "Critical care with monitoring of bladder pressure, lactate, urine output and limb perfusion.",
+      "Low threshold for sigmoidoscopy for suspected colonic ischaemia.",
+      "Correct coagulopathy and hypothermia; plan a return to theatre for a temporary abdominal closure.",
+      "Secondary prevention: antiplatelet therapy, statin and smoking cessation."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Consent is often a brief conversation with a shocked patient or family. Discuss the high risk of death, an open abdomen and critical care, and document it. Respect a decision not to proceed." },
+    { "ref": "step.core.timeout", "emphasis": "Keep it short but do it: blood availability, cell salvage, graft sizes and the proximal control plan are stated before induction." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Supine with arms out and warming beneath the patient. Lines are placed while the surgeon preps, not before." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare and drape from the nipples to the knees, including both groins, BEFORE induction, with the surgeon scrubbed and the knife ready." },
+    { "ref": "step.raaa.induction" },
+    { "ref": "step.abd.midline", "emphasis": "Xiphisternum to pubis, fast. Speed matters more than elegance here." },
+    { "ref": "step.raaa.proximal-control" },
+    { "ref": "step.vasc.vessel-control", "emphasis": "Iliac control from the front, or with balloon catheters from inside the sac. Avoid circumferential iliac dissection." },
+    { "ref": "step.vasc.heparin", "emphasis": "Systemic heparin is commonly reduced or omitted in rupture. Decide explicitly with the anaesthetist." },
+    { "ref": "step.raaa.open-sac" },
+    { "ref": "step.raaa.graft" },
+    { "ref": "step.vasc.flush-backbleed" },
+    { "ref": "step.vasc.restore-flow", "emphasis": "Release one iliac limb at a time after a long clamp, with the anaesthetist ready." },
+    { "ref": "step.vasc.perfusion-check", "emphasis": "Check both legs and the colour of the sigmoid colon before closing." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.raaa.damage-control" },
+    { "ref": "step.core.counts", "emphasis": "Packs left deliberately in an open abdomen are counted and recorded as retained." },
+    { "ref": "step.abd.mass-closure", "emphasis": "Only if it can be done without tension. Otherwise temporary abdominal closure." },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.raaa.induction": {
+      "id": "step.raaa.induction",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Induction with the surgeon scrubbed",
+      "why": "Loss of sympathetic tone and abdominal wall tone at induction can turn a contained rupture into a free one. The surgeon must be able to open and clamp within a minute of induction.",
+      "how": [
+        "Confirm the surgeon is scrubbed, the abdomen prepped and draped, and suction and clamps on the table.",
+        "Anaesthetist induces with blood running and vasopressors ready.",
+        "If the patient collapses at induction, open immediately and gain proximal control by compression or a supracoeliac clamp."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Inducing in the anaesthetic room.", "Waiting for a central line before the abdomen is draped."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.raaa.proximal-control": {
+      "id": "step.raaa.proximal-control",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Proximal aortic control",
+      "why": "Survival depends on how quickly the bleeding stops. Supracoeliac control is fast and safe when the neck is hidden by haematoma; the clamp can be moved below the renals once the neck is found.",
+      "how": [
+        "In free rupture or a massive haematoma, compress the aorta at the hiatus or clamp above the coeliac axis through the lesser omentum after dividing the crura.",
+        "Alternatively, place an aortic occlusion balloon via the femoral or brachial route, or directly through the sac.",
+        "Then open the retroperitoneum to the left of the duodenum, find the left renal vein and place the clamp on the neck just below it.",
+        "Move the clamp down from the supracoeliac position as soon as infrarenal control is secure, and record the suprarenal clamp time."
+      ],
+      "structuresAtRisk": ["Left renal vein", "Oesophagus during supracoeliac clamping", "Duodenum", "Superior mesenteric artery"],
+      "pitfalls": [
+        "Digging blindly into the haematoma looking for the neck.",
+        "Leaving a supracoeliac clamp on longer than needed, causing visceral and renal ischaemia."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.raaa.open-sac": {
+      "id": "step.raaa.open-sac",
+      "kind": "resection",
+      "title": "Opening the sac and controlling back-bleeding",
+      "why": "Lumbar and inferior mesenteric back-bleeding can be heavy and continue after the main clamps are on. Controlling it from inside avoids dissection behind the aneurysm.",
+      "how": [
+        "Open the sac longitudinally to the right of the inferior mesenteric artery, and remove thrombus quickly with cell salvage running.",
+        "Oversew bleeding lumbar arteries from inside the sac with figure-of-eight sutures.",
+        "Control the inferior mesenteric artery from inside, preserving it for reimplantation if back-bleeding is poor and the colon looks at risk.",
+        "Place balloon catheters into the iliac orifices if the iliac clamps are not yet on."
+      ],
+      "structuresAtRisk": ["Inferior mesenteric artery", "Left colon", "Iliac veins behind the iliac orifices"],
+      "pitfalls": ["Opening the sac before proximal control is secure.", "Ligating the inferior mesenteric artery without assessing colonic perfusion."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.raaa.graft": {
+      "id": "step.raaa.graft",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Graft anastomoses",
+      "why": "The proximal anastomosis bears the full arterial pressure and is where most bleeding happens. A tube graft is faster than a bifurcated one and is used whenever the iliacs allow.",
+      "how": [
+        "Choose a tube graft if the iliac arteries are not aneurysmal; a bifurcated graft if they are.",
+        "Perform the proximal anastomosis with a continuous monofilament suture taking full-thickness bites of the neck, with pledgets if the wall is friable.",
+        "Test the proximal anastomosis by moving the clamp onto the graft, then perform the distal anastomosis.",
+        "Close the aneurysm sac over the graft to separate it from the duodenum."
+      ],
+      "structuresAtRisk": ["Left renal vein", "Duodenum", "Iliac veins"],
+      "pitfalls": ["Shallow bites on a thin neck that pull through when flow returns.", "Leaving the graft in contact with the duodenum, risking a later aorto-enteric fistula."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.raaa.damage-control": {
+      "id": "step.raaa.damage-control",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Damage control and temporary abdominal closure",
+      "why": "After rupture, the bowel and retroperitoneum swell and the patient is often cold, acidotic and coagulopathic. Forcing the abdomen closed causes compartment syndrome; packing and leaving it open is often the safer operation.",
+      "how": [
+        "If the patient is coagulopathic, cold or acidotic, pack the areas of diffuse bleeding and stop operating.",
+        "If the fascia cannot be closed without tension, or the airway pressure rises on closure, use a temporary abdominal closure such as negative pressure.",
+        "Return to critical care to warm, correct clotting and resuscitate; plan a return to theatre for pack removal and closure.",
+        "Record the number of packs, the clamp times and the plan in the operation note."
+      ],
+      "structuresAtRisk": ["Bowel under the temporary closure"],
+      "pitfalls": ["Closing the abdomen because it feels like finishing the operation.", "Losing track of retained packs."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "id": "uro-scrotal-exploration",
+  "title": "Scrotal exploration with bilateral orchidopexy",
+  "subtitle": "Untwist, judge viability, fix both sides",
+  "system": "urology",
+  "aliases": ["scrotal exploration", "exploration for torsion", "bilateral fixation", "orchidopexy for torsion"],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-paeds", "org": "European Association of Urology (EAU) and European Society for Paediatric Urology (ESPU)", "title": "EAU Guidelines on Paediatric Urology: acute scrotum in children", "year": 2024, "url": "https://uroweb.org/guidelines/paediatric-urology", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["flacc", "paeds_weight"],
+  "chapters": {
+    "indications": [
+      "Suspected testicular torsion. Exploration is the diagnostic test as well as the treatment.",
+      "Acute scrotum where torsion cannot be excluded clinically or on imaging.",
+      "Intermittent torsion with a typical history: elective bilateral fixation."
+    ],
+    "contraindications": [
+      "None that justify delay in suspected torsion. Anaesthetic risk is managed, not used as a reason to wait.",
+      "Confirmed epididymo-orchitis or torsion of an appendix testis with torsion confidently excluded."
+    ],
+    "preparation": [
+      "Document the time of onset of pain and the time of decision to operate.",
+      "Consent for exploration, detorsion, fixation of both testes, and possible orchidectomy. In a minor, involve the parents and the young person; discuss the possibility of losing the testis honestly.",
+      "Nil by mouth status is not a reason to delay; discuss with the anaesthetist."
+    ],
+    "positioning": [
+      "Supine with the legs slightly abducted; the penis taped up onto the abdomen."
+    ],
+    "equipment": [
+      "Minor general set with fine dissecting instruments; bipolar diathermy.",
+      "Warm saline swabs.",
+      "Sutures for fixation per surgeon preference and for layered closure."
+    ],
+    "anatomy": [
+      "The tunica vaginalis normally attaches to the posterior testis. A high attachment (the bell-clapper deformity) lets the testis rotate inside it, and it is usually bilateral.",
+      "The spermatic cord contains the testicular artery, the pampiniform plexus and the vas deferens; torsion twists all of them.",
+      "The median raphe allows access to both hemiscrota through one incision; transverse incisions over each side are an alternative.",
+      "The appendix testis lies at the upper pole and may twist on its own, mimicking torsion."
+    ],
+    "criticalSafety": [
+      "Do not delay theatre for investigations when torsion is clinically likely.",
+      "Always assess viability after detorsion and warming before deciding on fixation or orchidectomy.",
+      "Always fix the contralateral testis in confirmed torsion: the anatomical predisposition is usually bilateral."
+    ],
+    "structuresAtRisk": [
+      "Testicular artery and pampiniform plexus",
+      "Vas deferens and epididymis",
+      "The contralateral testis (if not fixed)"
+    ],
+    "commonErrors": [
+      "Waiting for an ultrasound or a morning list.",
+      "Removing a dusky testis without allowing time to reperfuse after detorsion and warming.",
+      "Fixing the torted side and forgetting the other.",
+      "Placing fixation sutures through the epididymis or vessels."
+    ],
+    "complications": [
+      "Testicular atrophy despite detorsion, particularly after long ischaemia.",
+      "Orchidectomy and its psychological impact; later prosthesis discussion.",
+      "Scrotal haematoma and wound infection.",
+      "Recurrent torsion if fixation is inadequate."
+    ],
+    "postop": [
+      "Day-case or overnight stay; scrotal support and simple analgesia.",
+      "Explain the findings to the patient and family, including the risk of later atrophy.",
+      "Follow up to examine testicular size; discuss a testicular prosthesis after orchidectomy when appropriate."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Record the time of onset of pain and the consent for bilateral fixation and possible orchidectomy." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotic prophylaxis is not routinely needed for clean scrotal surgery; follow local policy." },
+    { "ref": "step.core.positioning", "emphasis": "Supine, penis taped up. This is a short operation; do not let positioning delay the incision." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.scrot.incision" },
+    { "ref": "step.scrot.detort" },
+    { "ref": "step.scrot.viability" },
+    { "ref": "step.scrot.orchidectomy" },
+    { "ref": "step.scrot.fixation" },
+    { "ref": "step.scrot.contralateral" },
+    { "ref": "step.core.haemostasis", "emphasis": "Scrotal haematoma is the commonest complication. Use bipolar diathermy on the dartos edges." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Only if an orchidectomy or appendix testis excision was performed." },
+    { "ref": "step.core.skin-closure", "emphasis": "Close the dartos and the skin in layers with absorbable sutures." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.scrot.incision": {
+      "id": "step.scrot.incision", "kind": "access",
+      "title": "Scrotal incision and opening the tunica vaginalis",
+      "why": "A midline raphe incision reaches both testes through one wound, which matters because both sides will be fixed.",
+      "how": [
+        "Incise along the median raphe, or transversely over the affected hemiscrotum.",
+        "Divide the dartos and open the tunica vaginalis of the affected side; note the colour of any hydrocele fluid (blood-stained suggests torsion).",
+        "Deliver the testis into the wound."
+      ],
+      "structuresAtRisk": ["Testis and epididymis"],
+      "pitfalls": ["An incision too small to deliver the testis comfortably."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.scrot.detort": {
+      "id": "step.scrot.detort", "kind": "dissection", "critical": true,
+      "title": "Identify torsion and detort",
+      "why": "Restoring flow is the whole purpose of the operation. Every minute counts and nothing else is done until the cord is untwisted.",
+      "how": [
+        "Identify the twist in the cord, count the turns, and note the direction.",
+        "Untwist the cord fully, until the cord lies straight and the epididymis is in its normal posterior position.",
+        "If no torsion is found, look for a twisted appendix testis or other pathology and remove a torted appendage."
+      ],
+      "structuresAtRisk": ["Spermatic cord vessels", "Vas deferens"],
+      "pitfalls": ["Incomplete detorsion because the number of turns was not counted."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.scrot.viability": {
+      "id": "step.scrot.viability", "kind": "checkpoint", "critical": true,
+      "title": "Assess viability after warming",
+      "why": "A testis that looks black on delivery often recovers colour after detorsion. Deciding too early removes testes that could have been saved.",
+      "how": [
+        "Wrap the testis in warm saline swabs and wait several minutes while the other side is explored.",
+        "Reassess colour, and if doubt remains, make a small incision in the tunica albuginea and observe for fresh arterial bleeding.",
+        "Decide with a senior: fix a testis that bleeds and pinks up; remove one that is clearly necrotic."
+      ],
+      "structuresAtRisk": ["Testis"],
+      "pitfalls": ["Orchidectomy on first sight of a dark testis.", "Keeping a frankly necrotic testis out of reluctance to remove it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.scrot.orchidectomy": {
+      "id": "step.scrot.orchidectomy", "kind": "bailout",
+      "title": "Orchidectomy for a non-viable testis",
+      "why": "A dead testis left in place risks infection and prolonged pain. Removing it is the right outcome when viability is clearly lost, not a failure.",
+      "how": [
+        "Transfix and ligate the spermatic cord in two places above the necrotic tissue, separately ligating the vas if preferred.",
+        "Remove the testis and send it for histology.",
+        "Record the decision, the findings and who agreed it in the operative note."
+      ],
+      "structuresAtRisk": ["Spermatic cord vessels (slipped ligature)"],
+      "pitfalls": ["A single ligature on a thick oedematous cord that slips and bleeds into the scrotum."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.scrot.fixation": {
+      "id": "step.scrot.fixation", "kind": "reconstruction", "critical": true,
+      "title": "Fixation of the affected testis",
+      "why": "The bell-clapper anatomy that allowed the torsion is still there after detorsion. Fixation prevents the testis rotating again.",
+      "how": [
+        "Fix the testis to the scrotal wall by sutures through the tunica albuginea at several points, or by placing it in a dartos pouch, per surgeon practice.",
+        "Avoid the epididymis and the vessels; place sutures superficially in the tunica albuginea.",
+        "Check that the cord lies straight and untwisted after fixation."
+      ],
+      "structuresAtRisk": ["Epididymis", "Testicular vessels"],
+      "pitfalls": ["Deep sutures into the testicular parenchyma.", "Fixation that re-twists the cord."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.scrot.contralateral": {
+      "id": "step.scrot.contralateral", "kind": "reconstruction", "critical": true,
+      "title": "Contralateral fixation",
+      "why": "The anatomical predisposition is usually bilateral. A boy who loses one testis to torsion and later loses the other is left anorchic.",
+      "how": [
+        "Open the contralateral tunica vaginalis through the same midline incision or a separate one.",
+        "Fix the contralateral testis by the same method.",
+        "Document the contralateral anatomy (bell-clapper or not) in the note."
+      ],
+      "structuresAtRisk": ["Contralateral epididymis and vessels"],
+      "pitfalls": ["Omitting it because the operation went well on the affected side."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

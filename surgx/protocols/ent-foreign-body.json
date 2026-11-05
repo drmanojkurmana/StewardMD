@@ -1,0 +1,67 @@
+{
+  "id": "ent-foreign-body",
+  "title": "Airway and oesophageal foreign body",
+  "subtitle": "A choking history means bronchoscopy; a button battery means now",
+  "category": "ent_airway",
+  "specialty": "ent",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "erc-bls-2025", "org": "European Resuscitation Council (ERC)", "title": "European Resuscitation Council Guidelines 2025: Adult Basic Life Support", "year": 2025, "url": "https://pubmed.ncbi.nlm.nih.gov/41117574/", "accessed": "2026-11-04" },
+    { "id": "esge-fb-2016", "org": "European Society of Gastrointestinal Endoscopy (ESGE)", "title": "Removal of foreign bodies in the upper gastrointestinal tract in adults: ESGE Clinical Guideline", "year": 2016, "url": "https://pubmed.ncbi.nlm.nih.gov/26862844/", "accessed": "2026-11-04" },
+    { "id": "espghan-battery-2021", "org": "European Society for Paediatric Gastroenterology Hepatology and Nutrition (ESPGHAN)", "title": "Diagnosis, management, and prevention of button battery ingestion in childhood: an ESPGHAN position paper", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/33555169/", "accessed": "2026-11-04" },
+    { "id": "ncpc-battery", "org": "National Capital Poison Center", "title": "Button battery ingestion triage and treatment guideline (living guideline)", "year": 2026, "url": "https://www.poison.org/battery/guideline", "accessed": "2026-11-04" },
+    { "id": "fba-review-2023", "org": "Current Opinion in Anaesthesiology", "title": "Foreign body aspiration in children: being safe and flexible (Keil and Schwerk)", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/36745076/", "accessed": "2026-11-04" },
+    { "id": "fba-ct-2024", "org": "Otolaryngology-Head and Neck Surgery", "title": "CT scan in children suspected of foreign body aspiration: a systematic review and meta-analysis (El Khoury et al.)", "year": 2024, "url": "https://pubmed.ncbi.nlm.nih.gov/37473440/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Choking with an ineffective cough, inability to speak or breathe, or cyanosis: complete airway obstruction." },
+      { "text": "A witnessed choking episode followed by cough, wheeze or reduced air entry on one side, even if the child is now well: an inhaled foreign body until bronchoscopy says otherwise." },
+      { "text": "Suspected button battery ingestion, witnessed or not, in any child with a coin-like object on X-ray, or with unexplained drooling, vomiting, food refusal or haematemesis." },
+      { "text": "Inability to swallow saliva with a food bolus: complete oesophageal obstruction with aspiration risk." },
+      { "text": "Sharp or pointed object in the oesophagus, or multiple magnets anywhere in the gut." },
+      { "text": "Fever, neck or chest pain, subcutaneous emphysema or crepitus after a foreign body: oesophageal perforation." }
+    ],
+    "do_now": [
+      { "text": "Choking adult with an effective cough: encourage coughing. If the cough becomes ineffective, give up to 5 back blows, then up to 5 abdominal thrusts, and repeat; start CPR if the patient becomes unresponsive.", "timeCritical": true, "evidenceRef": "erc-bls-2025" },
+      { "text": "Button battery in the oesophagus is an emergency: arrange endoscopic removal immediately, ideally within two hours of ingestion, without waiting for fasting.", "timeCritical": true, "evidenceRef": "espghan-battery-2021" },
+      { "text": "While arranging removal of a recently ingested battery in a child over one year, honey or sucralfate may reduce injury, if it does not delay removal and there is no suspicion of perforation, per the guideline.", "timeCritical": true, "evidenceRef": "ncpc-battery" },
+      { "text": "Complete oesophageal obstruction, or a sharp object or battery in the oesophagus in an adult: emergency endoscopy, preferably within 2 hours and at the latest within 6 hours.", "timeCritical": true, "evidenceRef": "esge-fb-2016" }
+    ],
+    "assess": [
+      { "text": "Airway foreign body: the history is the most sensitive test. A clear choking episode in a toddler outweighs a normal examination and a normal chest X-ray." },
+      { "text": "Listen for unilateral wheeze or reduced air entry, and look for stridor, which suggests a laryngeal or tracheal object." },
+      { "text": "Oesophageal foreign body: what, when, and how big; drooling, odynophagia, the level of the sensation, and any chest or neck pain." },
+      { "text": "Fish and chicken bones: examine the tonsils and tongue base with a light, then with flexible nasendoscopy. Most bones stuck in the oropharynx are found there." }
+    ],
+    "investigate": [
+      { "text": "Radiograph of the neck, chest and abdomen for any suspected radio-opaque ingestion in a child. A button battery shows a double-ring or halo; it must not be mistaken for a coin." },
+      { "text": "Inspiratory and expiratory chest films, or decubitus films in a young child, may show air trapping. Most inhaled objects are radiolucent, so a normal film does not exclude one." },
+      { "text": "Low-dose chest CT has high sensitivity for inhaled foreign bodies in children and is used in some units to avoid bronchoscopy when the history is equivocal. It must not delay bronchoscopy when the history is clear." },
+      { "text": "CT of the neck and chest when perforation is suspected or a bone is suspected but not seen. ESGE advises against barium swallow because it impairs endoscopy." }
+    ],
+    "resuscitate": [
+      { "text": "Keep a child with a suspected airway foreign body calm, upright, with a parent, and do not attempt to look in the throat or remove an object blindly.", "evidenceRef": "fba-review-2023" },
+      { "text": "Nil by mouth for any suspected oesophageal foreign body other than a battery being treated with honey or sucralfate per guideline.", "evidenceRef": "esge-fb-2016" }
+    ],
+    "definitive": [
+      { "text": "Rigid bronchoscopy under general anaesthesia by an experienced team for any suspected inhaled foreign body with a positive history, with flexible bronchoscopy as a diagnostic adjunct where the diagnosis is uncertain.", "timeCritical": true, "evidenceRef": "fba-review-2023" },
+      { "text": "Flexible endoscopy is first line for most oesophageal foreign bodies in adults. Other oesophageal foreign bodies without complete obstruction are removed urgently, within 24 hours.", "evidenceRef": "esge-fb-2016" },
+      { "text": "Rigid oesophagoscopy under general anaesthesia for objects impacted at the cricopharyngeus or where flexible endoscopy fails.", "evidenceRef": "esge-fb-2016" },
+      { "text": "After removal of a button battery, plan for delayed complications: oesophageal-aortic fistula, tracheo-oesophageal fistula and stricture can develop days to weeks later. Follow the guideline's imaging and observation advice.", "evidenceRef": "espghan-battery-2021" }
+    ],
+    "escalate": [
+      { "text": "Paediatric ENT and paediatric anaesthesia for any suspected inhaled foreign body in a child. Transfer only with a team able to manage complete obstruction en route." },
+      { "text": "Gastroenterology or upper GI surgery for oesophageal foreign bodies in adults; cardiothoracic surgery for perforation." },
+      { "text": "Button battery injury with haematemesis: suspect an aorto-oesophageal fistula and involve cardiothoracic surgery immediately." }
+    ]
+  },
+  "notes": [
+    "Button batteries burn through the oesophageal wall within hours, generating hydroxide at the negative pole. Time to removal is the outcome.",
+    "A normal chest X-ray does not exclude an inhaled foreign body. Missed diagnoses present weeks later as recurrent pneumonia in the same lobe.",
+    "Never send a child home with a 'coin' in the oesophagus until someone has looked closely for the double ring."
+  ],
+  "calcs": []
+}

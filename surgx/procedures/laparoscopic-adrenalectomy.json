@@ -1,0 +1,177 @@
+{
+  "id": "laparoscopic-adrenalectomy",
+  "title": "Laparoscopic adrenalectomy",
+  "subtitle": "Lateral transperitoneal approach, vein control and an intact capsule",
+  "system": "endocrine",
+  "aliases": ["adrenalectomy", "lap adrenalectomy", "laparoscopic transperitoneal adrenalectomy", "phaeochromocytoma excision"],
+  "estMinutes": 150,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "es-pheo", "org": "Endocrine Society", "title": "Pheochromocytoma and paraganglioma: an Endocrine Society clinical practice guideline (Lenders JWM et al., J Clin Endocrinol Metab)", "year": 2014, "url": "https://www.endocrine.org/clinical-practice-guidelines/pheochromocytoma-and-paraganglioma", "accessed": "2026-11-04" },
+    { "id": "ese-incid", "org": "European Society of Endocrinology (ESE) and European Network for the Study of Adrenal Tumors (ENSAT)", "title": "Management of adrenal incidentalomas: European Society of Endocrinology clinical practice guideline (Fassnacht M et al., Eur J Endocrinol)", "year": 2016, "url": "https://www.ese-hormones.org/publications/guidelines/", "accessed": "2026-11-04" },
+    { "id": "ese-acc", "org": "European Society of Endocrinology (ESE) and European Network for the Study of Adrenal Tumors (ENSAT)", "title": "European Society of Endocrinology clinical practice guidelines on the management of adrenocortical carcinoma in adults (Fassnacht M et al., Eur J Endocrinol)", "year": 2018, "url": "https://www.ese-hormones.org/publications/guidelines/", "accessed": "2026-11-04" },
+    { "id": "es-pa", "org": "Endocrine Society", "title": "The management of primary aldosteronism: case detection, diagnosis, and treatment: an Endocrine Society clinical practice guideline (Funder JW et al., J Clin Endocrinol Metab)", "year": 2016, "url": "https://www.endocrine.org/clinical-practice-guidelines/primary-aldosteronism", "accessed": "2026-11-04" },
+    { "id": "aagbi-steroid", "org": "Association of Anaesthetists, Royal College of Physicians and Society for Endocrinology", "title": "Guidelines for the management of glucocorticoids during the peri-operative period for patients with adrenal insufficiency (Woodcock T et al., Anaesthesia)", "year": 2020, "url": "https://anaesthetists.org/Home/Resources-publications/Guidelines", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["steroid_conv", "rcri", "caprini", "bmi"],
+  "chapters": {
+    "indications": [
+      "Phaeochromocytoma, after biochemical confirmation and alpha-adrenergic blockade.",
+      "Unilateral aldosterone-producing adenoma or unilateral hyperplasia, lateralised by adrenal venous sampling where indicated (Endocrine Society).",
+      "Cortisol-secreting adrenal adenoma causing Cushing syndrome, and selected patients with mild autonomous cortisol secretion and related comorbidity, per ESE guidance.",
+      "Adrenal incidentaloma with imaging features that are indeterminate or growing, per the ESE/ENSAT incidentaloma guideline.",
+      "Isolated adrenal metastasis in selected patients, as agreed by the MDT."
+    ],
+    "contraindications": [
+      "Suspected adrenocortical carcinoma with local invasion or venous tumour thrombus: open adrenalectomy by an experienced surgeon is preferred (ESE/ENSAT).",
+      "Phaeochromocytoma without adequate pre-operative alpha-blockade and volume expansion.",
+      "Non-functioning benign-appearing adenoma that meets criteria for no further action.",
+      "Uncorrectable coagulopathy, or cardiopulmonary disease that precludes pneumoperitoneum."
+    ],
+    "preparation": [
+      "Full hormonal work-up for every adrenal mass before surgery: plasma or urine metanephrines, cortisol after dexamethasone suppression, and aldosterone and renin in hypertensive or hypokalaemic patients; sex hormones and steroid precursors if carcinoma is suspected.",
+      "Imaging: adrenal-protocol CT (or MRI) with attenuation and washout characteristics; adrenal venous sampling for primary aldosteronism where indicated.",
+      "Phaeochromocytoma: alpha-blockade for 7 to 14 days before surgery per the Endocrine Society guideline, with a high-sodium diet and fluid intake, and beta-blockade only after adequate alpha-blockade if tachycardia persists.",
+      "Cortisol excess: plan peri-operative glucocorticoid cover and post-operative replacement, because the contralateral adrenal is suppressed; involve the endocrinologist.",
+      "Primary aldosteronism: correct potassium, and plan to stop mineralocorticoid antagonists and potassium supplements after surgery.",
+      "Consent risks: bleeding including from the inferior vena cava or renal vein, conversion to open surgery, injury to liver, spleen, pancreas, kidney, bowel or diaphragm, haemodynamic instability (phaeochromocytoma), adrenal insufficiency needing steroids, persistence of hormone excess, port-site hernia, and venous thromboembolism."
+    ],
+    "positioning": [
+      "Lateral decubitus with the operated side up, the table flexed at the level of the umbilicus or a kidney bridge raised to open the space between the costal margin and the iliac crest.",
+      "Upper arm supported on an arm rest, axillary roll under the dependent chest wall, pillows between the knees, and the patient strapped securely to allow steep tilts.",
+      "Arterial line and large-bore access placed before positioning in phaeochromocytoma or large tumours."
+    ],
+    "equipment": [
+      "30-degree laparoscope, four ports for most cases, liver retractor for the right side.",
+      "Energy sealing device, clip applier with large clips for the adrenal vein, laparoscopic suction-irrigation.",
+      "Specimen retrieval bag.",
+      "Open conversion set and vascular instruments in the room; blood cross-matched per local protocol.",
+      "For phaeochromocytoma: short-acting vasodilators and vasopressors prepared by the anaesthetist."
+    ],
+    "anatomy": [
+      "The right adrenal lies posterior to the inferior vena cava and above the upper pole of the kidney, beneath the bare area of the liver; its vein is short and wide and drains directly into the posterior surface of the vena cava.",
+      "The left adrenal lies anteromedial to the upper pole of the left kidney, behind the pancreatic tail and splenic vessels; its vein is longer and drains into the left renal vein, usually joined by the inferior phrenic vein.",
+      "Arterial supply is by many small branches from the inferior phrenic artery, the aorta and the renal artery, which can be sealed with an energy device.",
+      "The adrenal tissue is friable and yellow-orange; the gland is surrounded by fat that can be used for handling.",
+      "Accessory or multiple adrenal veins occur, and right-sided hepatic veins can be close to the right adrenal vein."
+    ],
+    "criticalSafety": [
+      "Confirm the biochemistry and the preparation before induction; an unprepared phaeochromocytoma can cause a hypertensive crisis on the table.",
+      "Handle the gland by its surrounding fat, never by the gland itself; capsular rupture spills tumour and, in a phaeochromocytoma, releases catecholamines.",
+      "Identify the adrenal vein before dividing it and clip it securely; on the right, the vena cava is the wall you are working against.",
+      "Tell the anaesthetist before manipulating a phaeochromocytoma and before ligating its vein, when hypotension often follows.",
+      "Convert early for bleeding that cannot be controlled, invasion, or failure to progress, rather than late after blood loss."
+    ],
+    "structuresAtRisk": [
+      "Inferior vena cava and right adrenal vein",
+      "Left renal vein and renal artery",
+      "Liver and right hepatic veins",
+      "Spleen, pancreatic tail and splenic vessels",
+      "Diaphragm and pleura",
+      "Upper pole renal vessels"
+    ],
+    "commonErrors": [
+      "Grasping the adrenal gland directly, causing fragmentation or catecholamine surges.",
+      "Insufficient liver mobilisation on the right, so the vena cava cannot be seen clearly.",
+      "Dividing an upper pole renal artery branch mistaken for an adrenal artery.",
+      "Injuring the pancreatic tail on the left by not developing the correct plane.",
+      "Persisting laparoscopically while bleeding obscures the field."
+    ],
+    "complications": [
+      "Haemorrhage from the vena cava, adrenal vein, renal vein or spleen; conversion or transfusion.",
+      "Haemodynamic instability during and after phaeochromocytoma removal, including post-operative hypotension and hypoglycaemia.",
+      "Adrenal insufficiency after removal of a cortisol-secreting tumour; hyperkalaemia after removal of an aldosteronoma.",
+      "Injury to the pancreas (fistula), spleen, liver, bowel, kidney or diaphragm (pneumothorax).",
+      "Persistent hormone excess, tumour spillage and recurrence, port-site hernia, venous thromboembolism."
+    ],
+    "postop": [
+      "Phaeochromocytoma: monitor blood pressure, heart rate and blood glucose closely in a high-dependency setting for the first 24 to 48 hours, per the Endocrine Society guideline; measure metanephrines at follow-up.",
+      "Cortisol excess: glucocorticoid replacement with an explicit taper plan and sick-day rules, until recovery of the axis is confirmed by testing.",
+      "Primary aldosteronism: stop potassium supplements and mineralocorticoid antagonists, check potassium in the first days, and reassess antihypertensive needs.",
+      "Early mobilisation and oral intake; thromboprophylaxis per risk.",
+      "Histology review at the endocrine MDT, including features of malignancy and genetic testing referral for phaeochromocytoma."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side and check it against the imaging and, in aldosteronism, against the adrenal venous sampling result." },
+    { "ref": "step.onco.endocrine-biochem-check", "emphasis": "Metanephrines, cortisol suppression and aldosterone-renin results documented for every case; alpha-blockade complete for a phaeochromocytoma; steroid cover written up for cortisol excess." },
+    { "ref": "step.core.timeout", "emphasis": "For a phaeochromocytoma, the anaesthetist states the vasoactive drugs drawn up, and the team agrees to announce tumour manipulation and vein ligation." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Full lateral decubitus with the table flexed or kidney bridge raised; check the dependent shoulder, axilla and peroneal nerve, and secure the patient for steep tilts." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare widely enough for an open subcostal or flank conversion." },
+    { "ref": "step.lap.access", "emphasis": "Usually below the costal margin in the anterior axillary or mid-clavicular line, with the patient on their side." },
+    { "ref": "step.lap.ports", "emphasis": "Three or four ports along and parallel to the costal margin; on the right one carries the liver retractor." },
+    { "ref": "step.lap.survey", "emphasis": "Look at the liver and peritoneum for unexpected metastatic disease, especially when carcinoma or metastasis is a possibility." },
+    { "ref": "step.adr.mobilise" },
+    { "ref": "step.onco.tumour-handling", "emphasis": "Handle the adrenal only by its surrounding fat; a capsular breach spills tumour and, in a phaeochromocytoma, catecholamines." },
+    { "ref": "step.adr.vein" },
+    { "ref": "step.adr.gland-dissection" },
+    { "ref": "step.adr.conversion" },
+    { "ref": "step.lap.specimen-retrieval", "emphasis": "Always use a bag; never morcellate an adrenal tumour." },
+    { "ref": "step.core.haemostasis", "emphasis": "Lower the pneumoperitoneum and inspect the vein stump, the adrenal bed, the liver or spleen surface and the renal hilum." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.lap.closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Hand over the hormone plan in writing: steroid cover and taper, potassium plan, or phaeochromocytoma monitoring for blood pressure and glucose." }
+  ],
+  "steps_local": {
+    "step.adr.mobilise": {
+      "id": "step.adr.mobilise", "kind": "dissection",
+      "title": "Expose the adrenal: liver mobilisation on the right, medial rotation on the left",
+      "why": "Laparoscopic adrenalectomy is safe when gravity and mobilisation display the gland and its vein. On the right that means freeing the liver to see the vena cava; on the left it means rotating the spleen and pancreatic tail medially so the gland lies exposed on the kidney.",
+      "how": [
+        "Right: divide the right triangular ligament and the peritoneum along the inferior edge of the liver up to the diaphragm, retract the liver medially and upwards, and expose the lateral border of the inferior vena cava.",
+        "Left: mobilise the splenic flexure if needed, divide the splenorenal ligament up to the diaphragm, and let the spleen and pancreatic tail fall medially, developing the plane between the pancreatic tail and the kidney.",
+        "Identify the upper pole of the kidney and the renal vein as the lower landmarks.",
+        "Keep the dissection on the kidney and vena cava side of the gland rather than through the fat around the tumour."
+      ],
+      "structuresAtRisk": ["Liver and right hepatic veins", "Spleen", "Pancreatic tail and splenic vessels", "Colon at the splenic flexure", "Diaphragm"],
+      "pitfalls": ["Too little liver mobilisation, so the vena cava edge is never clearly seen.", "Developing the plane behind the pancreas rather than between the pancreas and the kidney, injuring the pancreatic tail."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.adr.vein": {
+      "id": "step.adr.vein", "kind": "dissection", "critical": true,
+      "title": "Identify, clip and divide the adrenal vein",
+      "why": "The adrenal vein is the one structure in this operation that bleeds dangerously: on the right it is short and enters the vena cava directly, on the left it joins the renal vein. Clear identification and secure clipping prevent the haemorrhage that forces conversion.",
+      "how": [
+        "Right: dissect along the lateral edge of the vena cava upwards until the short adrenal vein is seen entering its posterolateral surface; free it enough for two clips on the caval side.",
+        "Left: follow the left renal vein to the adrenal vein on its upper border, often joined by the inferior phrenic vein; clip and divide it, preserving the renal vein.",
+        "In a phaeochromocytoma, tell the anaesthetist before tumour manipulation and before clipping; hypotension commonly follows vein ligation.",
+        "If the vein tears, apply pressure with a swab or the suction tip, increase pneumoperitoneum briefly if appropriate, and decide early about conversion."
+      ],
+      "structuresAtRisk": ["Inferior vena cava", "Right adrenal vein", "Left renal vein", "Inferior phrenic vein", "Right hepatic veins"],
+      "pitfalls": ["Clipping across the wall of the vena cava.", "Avulsing the short right adrenal vein by traction on the gland.", "Mistaking the left renal vein for the adrenal vein."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.adr.gland-dissection": {
+      "id": "step.adr.gland-dissection", "kind": "resection", "critical": true,
+      "title": "Free the gland in its periadrenal fat with an intact capsule",
+      "why": "The adrenal is friable and its tumours may be malignant or hormonally active. Removing the gland within its fat envelope, with small arterial branches sealed, avoids fragmentation, tumour spill and hormone surges, and reduces local recurrence.",
+      "how": [
+        "Lift the gland by its surrounding fat, not by the gland, and seal the small arteries from the inferior phrenic, aorta and renal artery with the energy device.",
+        "Free the superior attachments from the diaphragm, then the inferior attachments from the upper pole of the kidney, staying out of the renal hilum.",
+        "Watch for an upper pole renal artery branch and preserve it.",
+        "If the tumour is found to be invading adjacent structures, stop and convert or refer: it may be a carcinoma needing an open en bloc resection."
+      ],
+      "structuresAtRisk": ["Adrenal capsule", "Upper pole renal artery", "Diaphragm", "Renal hilum"],
+      "pitfalls": ["Breaching the capsule with a grasper.", "Taking an upper pole renal artery branch in a broad energy bite."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.adr.conversion": {
+      "id": "step.adr.conversion", "kind": "bailout", "critical": true,
+      "title": "Convert to open surgery early when needed",
+      "why": "Conversion is a safety manoeuvre, not a failure. Uncontrolled bleeding, local invasion suggesting carcinoma, or failure to progress through adhesions are reasons to open before the patient has lost a large volume of blood or the tumour has been breached.",
+      "how": [
+        "Decide on conversion for bleeding not controlled within a short period of pressure, for local invasion or venous tumour thrombus, or when the dissection is not progressing safely.",
+        "Maintain pressure on any bleeding point while the team prepares; tell the anaesthetist and call for blood and senior help.",
+        "Convert through a subcostal or flank incision, with the patient repositioned if necessary, and gain proximal and distal control of the vessel.",
+        "Record the reason for conversion in the operative note."
+      ],
+      "structuresAtRisk": ["Inferior vena cava", "Renal vessels", "Spleen"],
+      "pitfalls": ["Persisting laparoscopically while blood loss mounts.", "Converting without telling the anaesthetist or having blood available."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

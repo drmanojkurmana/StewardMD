@@ -1,0 +1,247 @@
+{
+  "id": "above-knee-amputation",
+  "title": "Above-knee amputation",
+  "subtitle": "Transfemoral amputation with equal flaps and adductor myodesis",
+  "system": "vascular",
+  "aliases": ["AKA", "transfemoral amputation", "above knee amputation"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "gvg-2019", "org": "European Society for Vascular Surgery, Society for Vascular Surgery and World Federation of Vascular Societies", "title": "Global Vascular Guidelines on the Management of Chronic Limb-Threatening Ischemia", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31182334/", "accessed": "2026-11-04" },
+    { "id": "vsgbi-amp-2016", "org": "Vascular Society of Great Britain and Ireland (VSGBI)", "title": "A Best Practice Clinical Care Pathway for Major Amputation Surgery", "year": 2016, "url": "https://www.vascularsociety.org.uk/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["caprini", "rcri", "abi"],
+  "chapters": {
+    "indications": [
+      "Non-reconstructable limb ischaemia or sepsis where a below-knee or through-knee stump would not heal because of inadequate perfusion at that level.",
+      "A fixed knee flexion contracture or a non-ambulatory patient, where a below-knee stump offers no benefit and risks breakdown.",
+      "Failed below-knee amputation, or infection or necrosis extending to the knee.",
+      "Irreversible acute limb ischaemia involving the calf; a severely mangled limb not suitable for salvage at a lower level."
+    ],
+    "contraindications": [
+      "A limb in which a lower level (below-knee or through-knee) would heal and serve the patient's mobility better: the energy cost of walking with an above-knee prosthesis is much higher.",
+      "Spreading infection or gas gangrene with systemic sepsis, where a rapid guillotine amputation is safer as a first stage.",
+      "Inadequate perfusion of the thigh itself (for example, common femoral or iliac occlusion with poor profunda), which needs revascularisation or a higher level."
+    ],
+    "preparation": [
+      "Senior vascular decision documenting that revascularisation is not possible or not appropriate and why this level was chosen.",
+      "Multidisciplinary input from physiotherapy, the prosthetic and rehabilitation team and, where time allows, a pre-operative discussion of realistic mobility goals.",
+      "Optimise analgesia, including a perineural catheter on the sciatic nerve or an epidural, to reduce phantom and stump pain.",
+      "Correct anaemia, fluid balance and glucose; treat sepsis with source control and antibiotics; group and save.",
+      "Consent risks to discuss: wound breakdown and infection needing revision; haematoma; phantom limb pain and neuroma; hip flexion contracture; failure to walk with a prosthesis; venous thromboembolism; myocardial infarction and death, which are significant after major amputation; for a guillotine first stage, the need for a second operation."
+    ],
+    "positioning": [
+      "Supine, with a sandbag under the ipsilateral buttock so the thigh can be lifted to reach the posterior flap.",
+      "Protect the contralateral heel and foot, which are often also ischaemic."
+    ],
+    "equipment": [
+      "Amputation set with an oscillating or Gigli saw, bone rasp, periosteal elevator and an amputation knife.",
+      "Heavy absorbable ligatures and transfixion sutures for the femoral vessels.",
+      "A drill for myodesis holes, if myodesis is used.",
+      "A sterile tourniquet if the level allows, and a bag to isolate the foot and leg from the field."
+    ],
+    "anatomy": [
+      "The superficial femoral artery and vein run in the adductor canal deep to sartorius on the medial thigh; the profunda femoris artery and its perforating branches supply the posterior thigh muscles and bleed from the posterior flap.",
+      "The sciatic nerve lies posteriorly between the hamstrings and adductor magnus, accompanied by a small artery (the companion artery of the sciatic nerve) that must be ligated.",
+      "The quadriceps lie anteriorly, the hamstrings posteriorly and the adductors medially; unopposed, the hip abductors and flexors pull a short femur into flexion and abduction, which myodesis of adductor magnus counteracts.",
+      "A longer femoral stump gives a better lever for walking; the bone is usually divided well above the knee so that a prosthetic knee joint can be fitted at the right level."
+    ],
+    "criticalSafety": [
+      "Confirm the side and level with the awake patient and mark it. Wrong-side amputation is a never event.",
+      "Ligate the superficial femoral artery and vein separately and transfix the artery; a slipped tie on the femoral artery is life-threatening on the ward.",
+      "Do not exsanguinate an ischaemic or infected limb before a tourniquet.",
+      "Close without tension over a smooth, adequately covered bone end."
+    ],
+    "structuresAtRisk": [
+      "Superficial femoral artery and vein",
+      "Profunda femoris branches in the posterior flap",
+      "Sciatic nerve and its companion artery",
+      "Flap skin and its blood supply"
+    ],
+    "commonErrors": [
+      "Choosing the above-knee level by default when a below-knee or through-knee stump would heal.",
+      "Flaps too short to cover the bone without tension, or a bone cut too low for the flaps.",
+      "Leaving a sharp femoral edge or bone spikes.",
+      "Mass ligation of the femoral vessels with the saphenous nerve.",
+      "Cutting the sciatic nerve flush with the bone so the neuroma forms in the load-bearing end."
+    ],
+    "complications": [
+      "Wound breakdown and infection, sometimes needing revision.",
+      "Stump haematoma.",
+      "Phantom limb pain and neuroma.",
+      "Hip flexion and abduction contracture.",
+      "Venous thromboembolism, pressure injury to the remaining heel, chest infection and delirium.",
+      "Myocardial infarction and death; major amputation carries significant 30-day mortality in this population."
+    ],
+    "postop": [
+      "Lie the patient prone or flat for periods each day and avoid pillows under the stump to prevent hip flexion contracture.",
+      "Early physiotherapy, stump protection and referral to the prosthetic rehabilitation team.",
+      "Thromboprophylaxis, analgesia including neuropathic agents when needed, secondary prevention for cardiovascular disease.",
+      "Protect the contralateral foot; inspect the stump at the first dressing change and earlier if there is pain, fever or discharge."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side and the level with the awake patient. Record why a lower level is not appropriate." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Cover skin flora and, in a gangrenous or infected limb, the likely or cultured organisms (including anaerobes), per local protocol. Thromboprophylaxis is essential." },
+    { "ref": "step.core.positioning", "emphasis": "Sandbag under the buttock to lift the thigh; pad and protect the other heel." },
+    { "ref": "step.core.prep-drape", "emphasis": "Isolate the foot and leg below the knee in a sealed bag; prepare to the groin and buttock." },
+    { "ref": "step.ortho.tourniquet", "emphasis": "A sterile thigh tourniquet is possible only if the level is low enough to leave room above it. Never exsanguinate an ischaemic or infected limb; many surgeons operate without one." },
+    { "ref": "step.aka.flaps" },
+    { "ref": "step.aka.anterior-medial" },
+    { "ref": "step.aka.femoral-vessels" },
+    { "ref": "step.aka.bone" },
+    { "ref": "step.aka.sciatic" },
+    { "ref": "step.aka.posterior" },
+    { "ref": "step.aka.myodesis" },
+    { "ref": "step.aka.guillotine" },
+    { "ref": "step.core.haemostasis", "emphasis": "Release any tourniquet before closure; the perforating branches of the profunda in the posterior flap bleed most." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Send the limb for histology, and a proximal bone or tissue sample for culture if infection was present." },
+    { "ref": "step.core.skin-closure", "emphasis": "Close fascia and then skin without tension; handle the skin edges without forceps. Interrupted sutures allow a single area to be released." },
+    { "ref": "step.core.debrief", "emphasis": "Record the level, flaps, vessel ligation, nerve handling, myodesis and the anti-contracture and rehabilitation plan." }
+  ],
+  "steps_local": {
+    "step.aka.flaps": {
+      "id": "step.aka.flaps",
+      "kind": "access",
+      "critical": true,
+      "title": "Marking the bone level and flaps",
+      "why": "A stump that cannot be closed without tension will break down. The skin incision must be placed so that the flaps, once the bone is divided, cover its end comfortably.",
+      "how": [
+        "Mark the planned femoral cut, leaving as much length as the tissues and perfusion allow while staying well above the knee.",
+        "Mark equal anterior and posterior fish-mouth flaps, with their apices at the level of the bone cut on the medial and lateral thigh and each flap long enough to reach the other over the bone end.",
+        "Check that the skin at the marked level is warm and healthy; move the level if not."
+      ],
+      "structuresAtRisk": ["Flap blood supply"],
+      "pitfalls": [
+        "Flaps measured from the skin incision rather than from the bone cut, so the bone is left too long for them.",
+        "Marking across mottled or cold skin."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.aka.anterior-medial": {
+      "id": "step.aka.anterior-medial",
+      "kind": "dissection",
+      "title": "Anterior and medial muscle division",
+      "why": "Dividing the anterior and medial muscles first exposes the femoral vessels in the adductor canal so they can be controlled before they are cut.",
+      "how": [
+        "Incise skin and deep fascia along the anterior flap line without undermining the skin.",
+        "Divide quadriceps down to the femur, and sartorius and the medial muscles to expose the adductor canal.",
+        "Identify the superficial femoral artery and vein and the saphenous nerve in the canal."
+      ],
+      "structuresAtRisk": ["Superficial femoral artery and vein", "Saphenous nerve"],
+      "pitfalls": [
+        "Separating skin from fascia, which devascularises the flap.",
+        "Cutting into the femoral vessels before they have been seen."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.aka.femoral-vessels": {
+      "id": "step.aka.femoral-vessels",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Ligation of the femoral vessels",
+      "why": "The superficial femoral artery carries enough flow to exsanguinate a patient from a slipped tie. Separate ligation with transfixion of the artery is the standard because mass ligation slips.",
+      "how": [
+        "Separate the superficial femoral artery from the vein for a short length.",
+        "Doubly ligate the artery and add a transfixion suture distal to the proximal tie before dividing it; ligate the vein separately.",
+        "Inspect the artery: a calcified, non-bleeding vessel at this level is a warning about flap perfusion."
+      ],
+      "structuresAtRisk": ["Superficial femoral artery and vein", "Saphenous nerve if included in the ligature"],
+      "pitfalls": [
+        "Mass ligation of artery, vein and nerve together.",
+        "A single tie on the femoral artery."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.aka.bone": {
+      "id": "step.aka.bone",
+      "kind": "resection",
+      "critical": true,
+      "title": "Division of the femur",
+      "why": "A bone end that is too long for the flaps forces a tight closure, and a sharp edge erodes through the soft tissue or makes the socket painful.",
+      "how": [
+        "Strip the periosteum only minimally at the level of the cut and retract the soft tissues proximally to protect them.",
+        "Divide the femur with the saw at the marked level, cooling with saline.",
+        "Round off the edges with a rasp, and irrigate away bone dust; drill holes for myodesis now if it is planned."
+      ],
+      "structuresAtRisk": ["Sciatic nerve posterior to the femur", "Posterior flap during sawing"],
+      "pitfalls": [
+        "Cutting the bone at the skin incision level instead of above it.",
+        "Leaving sharp edges or bone spurs."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.aka.sciatic": {
+      "id": "step.aka.sciatic",
+      "kind": "dissection",
+      "title": "Handling the sciatic nerve",
+      "why": "The sciatic nerve carries a companion artery that bleeds if the nerve is cut without ligation, and a neuroma at the end of the stump makes a prosthesis intolerable.",
+      "how": [
+        "Identify the sciatic nerve posteriorly between the hamstrings and adductor magnus.",
+        "Draw it down gently, ligate it proximally to control its companion artery, and divide it sharply so that it retracts well above the bone end.",
+        "Avoid crushing or stretching a long segment of nerve."
+      ],
+      "structuresAtRisk": ["Sciatic nerve and its companion artery"],
+      "pitfalls": [
+        "Dividing the nerve without ligation and chasing bleeding in the posterior compartment.",
+        "Excessive traction that avulses the nerve."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.aka.posterior": {
+      "id": "step.aka.posterior",
+      "kind": "resection",
+      "title": "Completing the posterior flap",
+      "why": "The posterior muscles carry the perforating branches of the profunda, which bleed briskly. Completing the flap in one controlled pass, with ties ready, prevents blood loss in a frail patient.",
+      "how": [
+        "Lift the thigh and divide the hamstrings and remaining posterior muscles along the posterior flap line with an amputation knife.",
+        "Ligate the perforating vessels as they are divided.",
+        "Remove the limb and pass it off the field into a bag."
+      ],
+      "structuresAtRisk": ["Profunda perforating branches"],
+      "pitfalls": [
+        "Bevelling the posterior flap so that the skin is longer than the muscle and thin at the edge.",
+        "Uncontrolled bleeding from the perforators while the limb is being removed."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.aka.myodesis": {
+      "id": "step.aka.myodesis",
+      "kind": "reconstruction",
+      "title": "Muscle stabilisation: myodesis and myoplasty",
+      "why": "Without the adductors attached, the short femur drifts into abduction and flexion, which makes the prosthesis hard to fit and walking inefficient. Re-anchoring the muscles centres the bone within the muscle envelope.",
+      "how": [
+        "In a patient expected to walk with a prosthesis, attach adductor magnus to the lateral femur through drill holes with the hip in adduction.",
+        "Bring the quadriceps over the bone end and suture it to the posterior fascia and hamstrings (myoplasty).",
+        "In a frail non-ambulatory patient, a simpler myoplasty that covers the bone end is acceptable; record the choice."
+      ],
+      "structuresAtRisk": ["Muscle viability, when sutures are tied under tension"],
+      "pitfalls": [
+        "Bulky muscle closed under tension, compromising the flaps.",
+        "Omitting stabilisation in a patient who will walk."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.aka.guillotine": {
+      "id": "step.aka.guillotine",
+      "kind": "bailout",
+      "title": "Guillotine first stage for sepsis or instability",
+      "why": "In a septic or unstable patient, a quick circumferential amputation removes the source of sepsis in minutes; a formal stump made through infected or oedematous tissue tends to break down.",
+      "how": [
+        "Divide skin, muscle and bone circumferentially at or just above the level of the infection or necrosis, ligating the main vessels individually.",
+        "Leave the wound open and dressed, without sutures; send tissue for culture.",
+        "Plan the definitive amputation, with flaps, after the sepsis has settled and the patient is stable.",
+        "If the patient deteriorates on the table, stop at the guillotine stage and inform the senior surgeon and anaesthetist."
+      ],
+      "structuresAtRisk": ["Femoral vessels", "Sciatic nerve"],
+      "pitfalls": [
+        "Fashioning definitive flaps through infected tissue to avoid a second operation.",
+        "Taking the guillotine level so low that the definitive stump has no healthy tissue to work with."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

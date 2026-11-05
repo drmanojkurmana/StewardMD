@@ -1,0 +1,295 @@
+{
+  "id": "pilonidal-sinus-excision",
+  "title": "Pilonidal sinus excision",
+  "subtitle": "Excision with open healing or off-midline closure",
+  "system": "skin and soft tissue",
+  "aliases": [
+    "pilonidal sinus surgery",
+    "Karydakis flap",
+    "Bascom cleft lift",
+    "Limberg flap",
+    "pilonidal disease"
+  ],
+  "estMinutes": 50,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "ascrs-pilonidal",
+      "org": "American Society of Colon and Rectal Surgeons (ASCRS)",
+      "title": "Clinical practice guidelines for the management of pilonidal disease",
+      "year": 2019,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=American+Society+of+Colon+and+Rectal+Surgeons+clinical+practice+guidelines+management+of+pilonidal+disease",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "cochrane-pilonidal",
+      "org": "Cochrane Database of Systematic Reviews",
+      "title": "Healing by primary closure versus open healing after surgery for pilonidal sinus",
+      "year": 2010,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Al-Khamis+healing+by+primary+closure+versus+open+healing+after+surgery+for+pilonidal+sinus+Cochrane",
+      "accessed": "2026-11-05"
+    }
+  ],
+  "calcs": [
+    "bmi"
+  ],
+  "chapters": {
+    "indications": [
+      "Symptomatic chronic pilonidal disease with discharging pits or sinuses.",
+      "Recurrent pilonidal disease after previous surgery.",
+      "Recurrent pilonidal abscess, as elective surgery after the acute episode has been drained."
+    ],
+    "contraindications": [
+      "Acute pilonidal abscess: incise and drain off the midline first; definitive surgery later.",
+      "Asymptomatic pits: observation and hair control rather than surgery.",
+      "Primary closure techniques are avoided in the presence of active cellulitis or an undrained collection."
+    ],
+    "preparation": [
+      "Examine the cleft and map pits and lateral openings in clinic.",
+      "Consider hidradenitis suppurativa, perianal fistula or other perineal pathology if the openings are near the anus or atypical.",
+      "Advise hair removal of the area before surgery and explain its role afterwards.",
+      "Consent must include wound infection, wound breakdown, delayed healing, recurrence, the scar and change in shape of the cleft, seroma, flap failure, numbness, and the time off work an open wound needs."
+    ],
+    "positioning": [
+      "Prone jack-knife with the hips flexed.",
+      "Tape the buttocks apart for exposure, and release the tapes before final closure to check tension.",
+      "Pad the face, chest, iliac crests, knees and feet; check the eyes."
+    ],
+    "equipment": [
+      "Minor general set, fine probes, methylene blue if used.",
+      "Diathermy, absorbable sutures for deep layers, and skin sutures for closure.",
+      "Closed suction drain if a flap is used."
+    ],
+    "anatomy": [
+      "The pits lie in the midline of the natal cleft over the sacrum and coccyx, often several in a line.",
+      "Tracts usually run cranially and may emerge laterally as secondary openings.",
+      "The sacrococcygeal fascia covers the sacrum and coccyx and forms the floor of a deep excision.",
+      "The natal cleft is deep, moist and subject to friction; flattening it and moving the scar laterally is the basis of off-midline techniques.",
+      "The anus lies at the lower end of the cleft; an excision extended too far caudally approaches it."
+    ],
+    "criticalSafety": [
+      "Map every pit and lateral opening before incising.",
+      "Excise only diseased tissue.",
+      "Prefer off-midline closure over midline closure when closing primarily.",
+      "Do not close primarily over active infection.",
+      "Check flap tension with the buttock tapes released."
+    ],
+    "structuresAtRisk": [
+      "Sacrococcygeal fascia and periosteum",
+      "Flap blood supply",
+      "Anal margin at the lower end of the wound"
+    ],
+    "commonErrors": [
+      "Midline primary closure.",
+      "Excessively wide excision.",
+      "Missing lateral tracts.",
+      "No plan for hair control after healing."
+    ],
+    "complications": [
+      "Surgical site infection and wound breakdown.",
+      "Delayed healing of open wounds over weeks to months.",
+      "Recurrence, higher after midline closure.",
+      "Seroma or haematoma under a flap.",
+      "Flap necrosis or dehiscence.",
+      "Numbness around the scar."
+    ],
+    "postop": [
+      "Usually a day case.",
+      "Open wounds: regular dressings or packing by the community or district nursing team, with clear instructions on who does it.",
+      "Flap closures: avoid prolonged sitting on the wound in the early period, keep it clean and dry, remove the drain when output is low.",
+      "Hair control in the area until healed, and often beyond; laser hair removal may be considered.",
+      "Review for infection, wound breakdown or recurrence."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Agree the planned wound technique (open or off-midline closure) and the time to heal with the patient beforehand."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Follow local policy; prophylaxis is commonly given for flap closure."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Prone jack-knife, buttocks taped apart, pressure points and eyes checked."
+    },
+    {
+      "ref": "step.core.prep-drape",
+      "emphasis": "Clip hair before preparation, and keep the anus excluded from the field with an adhesive drape."
+    },
+    {
+      "ref": "step.pns.mapping"
+    },
+    {
+      "ref": "step.ano.local-block",
+      "emphasis": "Infiltrate around the marked ellipse, not into the tracts; adrenaline helps a dry field."
+    },
+    {
+      "ref": "step.pns.excision"
+    },
+    {
+      "ref": "step.pns.closure-decision"
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.pns.offmidline"
+    },
+    {
+      "ref": "step.pns.leave-open"
+    },
+    {
+      "ref": "step.abd.drain",
+      "emphasis": "A suction drain under a flap reduces seroma; bring it out away from the suture line."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.specimen",
+      "emphasis": "Send the specimen; malignancy in chronic pilonidal disease is rare but described."
+    },
+    {
+      "ref": "step.core.skin-closure",
+      "emphasis": "Open wound: dress lightly, do not pack tightly. Flap: close skin without tension."
+    },
+    {
+      "ref": "step.ano.wound-care",
+      "emphasis": "Hair control and who changes the dressing are part of the plan, not an afterthought."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.pns.mapping": {
+      "id": "step.pns.mapping",
+      "kind": "checkpoint",
+      "title": "Mapping the pits and tracts",
+      "why": "Recurrence after pilonidal surgery usually comes from a pit or a lateral tract that was not included. Mapping before the first incision lets the excision be as small as possible while still complete.",
+      "how": [
+        "Shave or clip the area if not already done, and identify every midline pit and every lateral opening.",
+        "Pass a fine probe gently along each tract to define its direction and length; most run cranially from the midline pits.",
+        "Some surgeons instil a small volume of methylene blue to stain the tracts; if used, wipe away spill so it does not stain healthy tissue and mislead the excision.",
+        "Mark the planned excision on the skin, including all pits, before the tissues are distorted by infiltration."
+      ],
+      "structuresAtRisk": [
+        "Healthy skin and fat around the tracts"
+      ],
+      "pitfalls": [
+        "Missing a lateral opening hidden in the hair.",
+        "Over-filling the tracts with dye, which spills into normal fat and leads to a wider excision than needed."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pns.excision": {
+      "id": "step.pns.excision",
+      "kind": "resection",
+      "critical": true,
+      "title": "Excising the sinus and its tracts",
+      "why": "The aim is to remove all diseased pits and tracts with as little healthy tissue as possible. Very wide, deep excisions leave large wounds that heal slowly and do not lower recurrence.",
+      "how": [
+        "Incise around the marked pits and tracts with a narrow ellipse, or an asymmetric ellipse when an off-midline closure is planned.",
+        "Excise the tracts with a margin of healthy fat, following the stained or probed tracts, and stop when the tissue is clean.",
+        "Go down to the sacrococcygeal fascia only where the disease or the chosen flap technique requires it, and do not breach the fascia or periosteum.",
+        "Open the specimen to confirm it contains the whole tract and the hair nest."
+      ],
+      "structuresAtRisk": [
+        "Sacrococcygeal fascia and periosteum",
+        "Gluteal fat and skin needed for closure"
+      ],
+      "pitfalls": [
+        "Excising far more tissue than the disease, leaving a wound that will not close.",
+        "Cutting through a tract and leaving its far end behind.",
+        "Damaging the sacrococcygeal periosteum, causing prolonged pain."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pns.closure-decision": {
+      "id": "step.pns.closure-decision",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Choosing how to close: open, midline or off-midline",
+      "why": "The choice of wound management decides healing time and recurrence. Midline primary closure leaves a scar in the moist, hairy natal cleft and has higher recurrence; off-midline closure flattens the cleft and moves the scar away from it.",
+      "how": [
+        "If closing primarily, choose an off-midline technique (for example Karydakis, Bascom cleft lift or a rhomboid Limberg flap) in preference to midline closure; the ASCRS guideline recommends off-midline over midline closure.",
+        "Leave the wound open to heal by secondary intention if there is acute sepsis, gross contamination or when the patient and the unit prefer it; it heals more slowly but avoids a failed closure.",
+        "Minimal techniques such as pit picking or Bascom pit excision suit limited disease with few pits.",
+        "Record the technique and the reason for it, because recurrence and healing depend on it."
+      ],
+      "structuresAtRisk": [
+        "Natal cleft skin"
+      ],
+      "pitfalls": [
+        "Midline primary closure by default.",
+        "Closing primarily over an infected cavity.",
+        "Choosing a flap you have not been trained to do."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pns.offmidline": {
+      "id": "step.pns.offmidline",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Off-midline closure: flattening the cleft",
+      "why": "An off-midline closure works by flattening the natal cleft and placing the scar away from the midline, where friction, moisture and hair drive recurrence. It only works if the flap lies without tension.",
+      "how": [
+        "Karydakis: after an asymmetric elliptical excision, mobilise a flap of skin and fat from the medial edge, advance it across the midline and suture its deep part to the fascia on the opposite side, so the final scar lies lateral to the midline.",
+        "Cleft lift (Bascom): excise the skin of the cleft asymmetrically, raise a thin flap and advance it to obliterate the cleft, so the suture line lies off the midline.",
+        "Rhomboid (Limberg) flap: excise a rhomboid including the sinus and transpose a gluteal rhomboid flap into the defect.",
+        "Close in layers to obliterate dead space without strangulating fat, check that there is no tension with the buttock tapes released, and consider a suction drain."
+      ],
+      "structuresAtRisk": [
+        "Flap blood supply",
+        "Anal margin at the lower end of the wound"
+      ],
+      "pitfalls": [
+        "Releasing the tapes only after closure and finding the flap under tension.",
+        "Bringing the lower end of the scar into the midline near the anus.",
+        "Leaving dead space beneath the flap, which fills with seroma."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.pns.leave-open": {
+      "id": "step.pns.leave-open",
+      "kind": "bailout",
+      "title": "Bailout: abandon primary closure and leave the wound open",
+      "why": "A flap closed under tension, over hidden infection or with doubtful blood supply breaks down, and a failed closure heals more slowly than a wound left open from the start. Abandoning the closure is a legitimate, safe outcome.",
+      "how": [
+        "Abandon closure if the flap will not lie without tension with the tapes released, if unexpected pus or an undrained cavity is found, or if the flap edge looks dusky.",
+        "Remove any sutures already placed, irrigate, and dress the wound lightly to heal by secondary intention.",
+        "Record the reason in the note and tell the patient, because the healing time and dressing plan change.",
+        "Arrange community dressings before discharge."
+      ],
+      "structuresAtRisk": [
+        "Flap blood supply",
+        "Wound edges"
+      ],
+      "pitfalls": [
+        "Persisting with a tight closure because the patient was told they would have one.",
+        "Closing over pus found during the excision."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "educationalOnly": true
+}

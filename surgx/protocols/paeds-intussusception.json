@@ -1,0 +1,62 @@
+{
+  "id": "paeds-intussusception",
+  "title": "Intussusception",
+  "subtitle": "Enema reduction first, theatre when it fails or the child is sick",
+  "category": "paeds_surgery",
+  "specialty": "paediatric",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "apsa-intuss", "org": "American Pediatric Surgical Association (APSA) Outcomes and Evidence Based Practice Committee", "title": "Management of intussusception in children: a systematic review (Kelley-Quon et al, J Pediatr Surg 2021;56(3):587-596)", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/33158508/", "accessed": "2026-11-04" },
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: intussusception", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" },
+    { "id": "nice-ng29", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Intravenous fluid therapy in children and young people in hospital (NG29)", "year": 2015, "version": "NG29, bolus volume updated 2022", "url": "https://www.nice.org.uk/guidance/ng29", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Peritonitis, free air, or shock that does not respond to resuscitation. These children go to theatre, not to the enema." },
+      { "text": "Lethargy or pallor out of proportion to the abdominal signs. Some infants present as an altered conscious level with no classic colic." },
+      { "text": "Redcurrant jelly stool and bilious vomiting are late signs that the bowel is already compromised. Their absence does not exclude the diagnosis." },
+      { "text": "A child outside the usual age range (older than about three years), or with recurrent intussusception: look for a pathological lead point." }
+    ],
+    "do_now": [
+      { "text": "Intravenous access, bloods, and an isotonic crystalloid bolus at the NICE NG29 volume for any child with signs of shock, reassessing after each bolus.", "timeCritical": true, "evidenceRef": "nice-ng29" },
+      { "text": "Nasogastric tube on free drainage if vomiting or distended, and nil by mouth.", "evidenceRef": "holcomb" },
+      { "text": "Inform the paediatric surgeon before the enema starts. The surgeon must be available on site during the reduction in case of perforation.", "timeCritical": true, "evidenceRef": "holcomb" },
+      { "text": "Stable child without peritonitis: proceed promptly to image-guided enema reduction. Delay increases the chance that reduction fails and that bowel becomes ischaemic.", "timeCritical": true, "evidenceRef": "apsa-intuss" }
+    ],
+    "assess": [
+      { "text": "Classic history: episodic inconsolable crying with drawing up of the legs, pallor, and quiet intervals. Ask about a recent viral illness." },
+      { "text": "Examine for a sausage-shaped mass, an empty right iliac fossa, distension and peritonism. Do a careful hydration assessment.", "calcs": ["paeds_weight"] },
+      { "text": "Look for lead-point clues: Henoch-Schonlein purpura, Peutz-Jeghers pigmentation, Meckel history, cystic fibrosis, lymphoma in an older child." }
+    ],
+    "investigate": [
+      { "text": "Ultrasound is the diagnostic test of choice in experienced hands: a target or doughnut sign, usually in the right abdomen." },
+      { "text": "Blood gas with lactate, electrolytes, full blood count, group and save." },
+      { "text": "Plain film only to look for free air or obstruction when perforation is suspected; it cannot exclude intussusception." },
+      { "text": "Small-bowel to small-bowel intussusception found incidentally on ultrasound is often transient. Re-scan rather than reduce if the child is well and it is short." }
+    ],
+    "resuscitate": [
+      { "text": "Restore circulating volume before the enema. A dry child tolerates a perforation far worse than a resuscitated one.", "evidenceRef": "nice-ng29" },
+      { "text": "Adequate analgesia before and during the reduction; sedation per local radiology protocol.", "evidenceRef": "holcomb" },
+      { "text": "Routine antibiotics before enema reduction are not needed in a stable child. Give them per local protocol when perforation or ischaemia is suspected, or before surgery.", "evidenceRef": "apsa-intuss" }
+    ],
+    "definitive": [
+      { "text": "Pneumatic (air) or hydrostatic enema under fluoroscopic or ultrasound guidance is first-line for the stable child without peritonitis.", "evidenceRef": "apsa-intuss" },
+      { "text": "If the first enema achieves partial reduction and the child remains stable, a delayed repeat enema may be attempted rather than proceeding straight to surgery.", "evidenceRef": "apsa-intuss" },
+      { "text": "Operate for failed reduction, perforation during the enema, peritonitis, or persistent instability. Laparoscopic reduction is often successful; convert when the bowel cannot be reduced or is non-viable.", "evidenceRef": "apsa-intuss" },
+      { "text": "At surgery, reduce by squeezing the apex back (milking proximally), never by pulling. Resect irreducible, gangrenous bowel or a pathological lead point.", "evidenceRef": "holcomb" }
+    ],
+    "escalate": [
+      { "text": "Perforation during air enema can cause tension pneumoperitoneum with cardiorespiratory compromise. The team must be ready to decompress with a needle immediately." },
+      { "text": "No paediatric radiology or surgery on site: transfer after resuscitation, with a nasogastric tube and an escort." },
+      { "text": "Recurrence after successful reduction is common in the first days. Parents need clear advice to return early." }
+    ]
+  },
+  "notes": [
+    "Most intussusception in infants is idiopathic and ileocolic. In an older child, think lead point before you think idiopathic.",
+    "The enema is a procedure with a perforation risk, not a scan. It belongs in a setting where a surgeon can operate within minutes.",
+    "After successful enema reduction of an ileocolic intussusception, short observation and discharge is safe in selected children rather than routine admission."
+  ],
+  "calcs": ["paeds_weight", "holliday"]
+}

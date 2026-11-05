@@ -1,0 +1,81 @@
+{
+  "id": "uro-fever-obstructing-stone",
+  "title": "Fever with an obstructing stone",
+  "subtitle": "Renal colic that has become urosepsis",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "uro-obstructed-kidney",
+  "sources": [
+    { "id": "eau-stones", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urolithiasis", "year": 2024, "url": "https://uroweb.org/guidelines/urolithiasis", "accessed": "2026-11-04" },
+    { "id": "nice-ng118", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Renal and ureteric stones: assessment and management (NG118)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng118", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 46-year-old woman with type 2 diabetes presents with two days of right loin pain radiating to the groin. Since the evening she has had rigors. She was seen yesterday in another hospital, given analgesia and discharged with a diagnosis of renal colic. She now feels very unwell.",
+  "vitals": { "Temp": "38.9 C", "HR": "118", "BP": "96/58", "RR": "24", "SpO2": "96% on air", "Urine": "Not passed for 6 hours" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "What do you do first?",
+      "hint": "She meets sepsis criteria. What happens in the first hour?",
+      "options": [
+        { "id": "a", "text": "Start the sepsis pathway: blood cultures and urine culture, lactate, intravenous fluid, and empirical intravenous antibiotics per local protocol, then image urgently", "correct": true, "feedback": "Correct. Antibiotics and resuscitation start now; imaging and decompression follow immediately, not instead." },
+        { "id": "b", "text": "Analgesia and observe; she has renal colic and was seen yesterday", "correct": false, "feedback": "Fever, rigors, tachycardia and hypotension with loin pain is urosepsis behind an obstruction until proven otherwise. Yesterday's diagnosis is not today's." },
+        { "id": "c", "text": "Send her for CT before giving antibiotics so the cultures are not affected", "correct": false, "feedback": "Take cultures first, then give antibiotics without waiting for imaging." },
+        { "id": "d", "text": "Book ureteroscopy on the morning list", "correct": false, "feedback": "Definitive stone treatment in an infected obstructed system risks worsening sepsis, and the morning is too late for decompression." }
+      ],
+      "why": "An obstructed infected kidney is a urological emergency with a recognised mortality. The first hour is sepsis management. The diagnosis of 'renal colic' from yesterday is the anchor that makes this case dangerous.",
+      "missedRedFlags": ["Rigors with loin pain", "Hypotension and oliguria", "Diabetes, which increases the risk of severe infection and emphysematous pyelonephritis"]
+    },
+    {
+      "id": "dp2", "phase": "investigate",
+      "prompt": "Which imaging do you request?",
+      "hint": "You need to know whether there is a stone and whether the kidney is obstructed, today.",
+      "options": [
+        { "id": "a", "text": "Urgent low-dose non-contrast CT of the kidneys, ureters and bladder", "correct": true, "feedback": "Correct. It identifies the stone, its size and position, and the degree of obstruction, and it can be done now." },
+        { "id": "b", "text": "Plain abdominal radiograph only", "correct": false, "feedback": "It misses many stones and cannot show obstruction." },
+        { "id": "c", "text": "Intravenous urogram the next day", "correct": false, "feedback": "Obsolete for this purpose, contrast-dependent, and too slow." },
+        { "id": "d", "text": "No imaging; start antibiotics and see if she improves", "correct": false, "feedback": "Antibiotics do not drain an obstructed kidney. Without imaging you cannot find the source to control." }
+      ],
+      "why": "Non-contrast CT is the standard first-line imaging in adults with suspected ureteric colic, and in the presence of fever it should be immediate. Ultrasound is a reasonable first test if CT is not quickly available, and is first-line in pregnancy.",
+      "alternatives": ["Bedside ultrasound showing hydronephrosis in a septic patient is enough to call urology while CT is arranged."]
+    },
+    {
+      "id": "dp3", "phase": "decide",
+      "prompt": "CT shows a 7 mm stone in the right proximal ureter with moderate hydronephrosis and perinephric stranding. Lactate is 4.1. What is the plan?",
+      "hint": "Source control for pus under pressure.",
+      "options": [
+        { "id": "a", "text": "Urgent decompression of the right kidney tonight by nephrostomy or retrograde stent, with antibiotics continued", "correct": true, "feedback": "Correct. Decompression is the source control. Either route is effective; the right one is whichever is fastest and safest here." },
+        { "id": "b", "text": "Primary ureteroscopy and laser stone fragmentation tonight", "correct": false, "feedback": "Treating the stone in an infected system increases the risk of worsening sepsis. Drain now, treat the stone later." },
+        { "id": "c", "text": "Antibiotics and an alpha-blocker, hoping the stone passes", "correct": false, "feedback": "Medical expulsive therapy is for uncomplicated colic. This kidney is infected and obstructed." },
+        { "id": "d", "text": "Shockwave lithotripsy tomorrow", "correct": false, "feedback": "Wrong timing and wrong patient. Lithotripsy is contraindicated with untreated infection." }
+      ],
+      "why": "The obstructed infected kidney needs drainage as an emergency. Both percutaneous nephrostomy and retrograde stenting decompress effectively; the choice depends on the patient, the available skills and how fast each can happen. Definitive stone treatment waits until the infection has resolved.",
+      "missedRedFlags": ["Attempting definitive stone treatment in an infected obstructed system"]
+    },
+    {
+      "id": "dp4", "phase": "operate",
+      "prompt": "Interventional radiology cannot come in for four hours; the urology theatre can take her within the hour. What do you do?",
+      "hint": "The better route is the faster safe one.",
+      "options": [
+        { "id": "a", "text": "Retrograde stent in theatre within the hour, with minimal manipulation, sending renal pelvis urine for culture", "correct": true, "feedback": "Correct. Speed of decompression matters more than the route. Keep the procedure short and do not touch the stone." },
+        { "id": "b", "text": "Wait four hours for nephrostomy because it avoids anaesthesia", "correct": false, "feedback": "A four-hour delay in a septic patient with a lactate of 4.1 is not justified when a safe alternative is available now." },
+        { "id": "c", "text": "Stent and attempt ureteroscopy at the same time to save a second anaesthetic", "correct": false, "feedback": "Adding stone treatment to drainage in an infected system adds risk for convenience." },
+        { "id": "d", "text": "Treat with antibiotics overnight and stent in the morning if she does not improve", "correct": false, "feedback": "This is delayed source control. Septic patients deteriorate overnight." }
+      ],
+      "why": "In urosepsis, the time to decompression is what matters. A retrograde stent with minimal manipulation and a short anaesthetic, or a nephrostomy under local anaesthesia, are both acceptable; the choice is the one that drains the kidney soonest and most safely. Send the renal pelvis urine for culture because it may differ from bladder urine.",
+      "alternatives": ["A nephrostomy is preferable when retrograde access is likely to fail (impacted stone, distorted anatomy) or the patient is too unstable for anaesthesia."]
+    },
+    {
+      "id": "dp5", "phase": "postop",
+      "prompt": "Two days later she is afebrile and improving. What must happen before discharge?",
+      "hint": "Every stent is a commitment.",
+      "options": [
+        { "id": "a", "text": "Complete the culture-guided antibiotic course, register the stent with a removal date, and schedule definitive stone treatment", "correct": true, "feedback": "Correct. The stent is a bridge, not a treatment, and a forgotten stent encrusts." },
+        { "id": "b", "text": "Discharge with the stent and no plan; she can return if symptoms recur", "correct": false, "feedback": "A stent left without a plan is the classic forgotten stent, with encrustation, infection and loss of renal function." },
+        { "id": "c", "text": "Remove the stent before discharge because she is better", "correct": false, "feedback": "The stone is still there and the kidney will obstruct again." },
+        { "id": "d", "text": "Discharge on lifelong antibiotics instead of stone treatment", "correct": false, "feedback": "Antibiotics do not treat an obstructing stone." }
+      ],
+      "why": "Decompression controlled the sepsis but the stone remains. Definitive treatment is planned once the infection has resolved, and every stent must be logged on a register with a removal or exchange date. Metabolic stone assessment follows the guideline after the acute episode."
+    }
+  ]
+}

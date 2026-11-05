@@ -295,3 +295,28 @@ write gate is open and the request only failed on auth. Probe writes nothing (no
 `ipad-care.css` lays out the hub as a grid and lists in two columns on `html.smd-tablet` at 700 px and wider. In landscape
 (tablet, 1000 px and wider) `surgx-screens.js` `noteSplit()` renders an open note beside the "On this device" list
 (`data-sgx="noteswap"` replaces the route, no deeper stack). It only reads `listNotes()`; no storage code changed.
+
+## Every surgical specialty (2026-11-04)
+After the 2026-11-04 audit (5.5/10, general surgery only), content covers 16 specialties: general/GI/HPB, trauma,
+peri-operative care, ENT, eye emergencies, urology, neurosurgery, orthopaedics, plastics, vascular, cardiothoracic,
+paediatric surgery, O&G, surgical oncology, breast, endocrine. Totals: 97 protocols (84 authored + 13 engine),
+38 procedures, 19 cases, 64 evidence records, 13 step packs. Everything new is `ai_drafted`.
+Round 2 (2026-11-05, operations only): 70 more procedures, so **108 procedures** and 19 step packs
+(new: `hernia`, `anorectal`, `hpb`, `hand`, `thoracic`, `neck`; others appended to, never edited). Each 15 to 22 steps,
+every chapter filled, a bail-out step, a note template; per-set step reuse 71 to 84%.
+- **`specialty`** on every manifest entry; `manifest.specialties[]` and `manifest.categories[]` hold the titles, so a new
+  specialty needs no code. `surgx-content.js` passes `specialty` through `protocolIndex()`.
+- **Browsing:** `surgx-screens.js` `browseBar()` (search + specialty chips), `rowsBySpec()`. One `state.spec` /
+  `state.find` shared by Protocols, Procedures and Cases. A picked specialty groups protocols by category.
+- **Step packs per specialty** (`steps/ent.json`, `urology.json`, `neuro.json`, `ortho.json`, `vascular.json`,
+  `paeds.json`, `obgyn.json`, `onco.json`, `bowel.json`): the 60% reuse rule still holds (each set measured 68 to 86%).
+- **Operative note templates** for every procedure (generated block in `surgx-note-schema.js` between the
+  "specialty templates" markers). A template must never repeat a base field key: the LSCS template once re-declared
+  `ebl` and the note showed blood loss twice (`test/surgx-specialties.test.mjs` now fails on that).
+- **WHO Surgical Safety Checklist** in the operative note: 11 `type:"choice"` fields, all `aiFillable:false` and on the
+  server `NEVER_AI_FILLABLE` list. Identity, time out and sign out are required. "Not done" is recordable on purpose.
+- **Clavien-Dindo** `clavienDindo` choice on post-op and discharge notes, never AI-filled.
+- **`type:"choice"`** renders tap targets (`data-sgx="choice"`); the value is a plain string, so completeness, provenance
+  and `renderNoteText()` are unchanged. A tap sets provenance `clinician`; tapping the selected option clears it.
+- Tests: `test/surgx-specialties.test.mjs` (coverage per specialty, template safety, WHO/Clavien, no em-dash);
+  `test/run-surgx-ui.mjs` WHO and SPEC checks. Reviewer flags per specialty are in the PR #1971 description.

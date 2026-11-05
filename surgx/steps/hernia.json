@@ -1,0 +1,242 @@
+{
+  "_comment": "Shared abdominal wall hernia and hiatal steps: sac handling, mesh, bailouts, liver retraction, hiatal dissection, crural repair, short gastrics and bougie calibration. Used by the groin, ventral, antireflux and sleeve procedures.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.hernia.sac-reduction": {
+      "id": "step.hernia.sac-reduction",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Reducing the sac and judging its contents",
+      "why": "Most hernia complications start with the sac: contents injured during reduction, non-viable bowel returned to the abdomen, or a sac left partly unreduced that becomes the recurrence. The contents are assessed before anything is committed.",
+      "how": [
+        "Define the neck of the sac at the edge of the defect before pulling on anything; traction without a defined neck tears the sac and what lies in it.",
+        "Reduce with gentle counter-traction, sac towards you and tissues away, staying on the sac wall rather than the structures around it.",
+        "If the contents are incarcerated, open the sac away from the neck, hold the contents, then release the constriction, so nothing dusky slips back unseen.",
+        "Assess any bowel for colour, peristalsis, mesenteric pulsation and sheen; re-assess after warm packs and time before deciding to resect.",
+        "Reduce lipomas and preperitoneal fat with the sac: a retained cord lipoma or preperitoneal fat plug presents as an early 'recurrence'."
+      ],
+      "structuresAtRisk": [
+        "Bowel or omentum adherent within the sac",
+        "Bladder in a medial direct, sliding or suprapubic sac",
+        "Sliding viscera forming part of the sac wall: caecum, sigmoid colon, stomach in a hiatal sac"
+      ],
+      "pitfalls": [
+        "Reducing a tight hernia en masse with the constriction still intact.",
+        "Opening a sliding sac through its posterior wall, which is bowel or bladder.",
+        "Leaving a cord lipoma behind and calling the lump a recurrence at review."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hernia.mesh-handling": {
+      "id": "step.hernia.mesh-handling",
+      "kind": "reconstruction",
+      "title": "Choosing, sizing and handling the mesh",
+      "why": "Mesh repair halves recurrence compared with suture alone for most hernias, but only when the mesh is large enough, lies flat in the chosen plane and stays clean. Mesh infection is rare and costly: it often means explanting the mesh.",
+      "how": [
+        "Measure the defect after the sac is reduced and the edges are defined, not from the skin, and size the mesh for the overlap the repair needs.",
+        "Choose the mesh for the plane: a standard synthetic mesh for the extraperitoneal and retromuscular planes; a mesh designed for peritoneal contact only if it will lie against bowel.",
+        "Change gloves before handling the mesh, keep it in its packet until needed, and keep it off the skin.",
+        "Lay it flat with no folds or curled edges; a folded edge shrinks into a hard, painful ridge and leaves the defect uncovered.",
+        "Record the product, size, plane and fixation in the note and the implant register."
+      ],
+      "structuresAtRisk": [
+        "Bowel, if an uncoated mesh comes to lie against it"
+      ],
+      "pitfalls": [
+        "A mesh cut down to fit a small dissection rather than a dissection enlarged to fit the right mesh.",
+        "Mesh dragged across the skin edge during insertion.",
+        "Forgetting that mesh contracts after implantation, so a marginal overlap becomes no overlap."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hernia.contamination-bailout": {
+      "id": "step.hernia.contamination-bailout",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Bailout: enterotomy or contamination in a mesh repair",
+      "why": "A bowel injury or unexpected contamination changes the operation. Placing a permanent synthetic mesh into a contaminated field invites chronic mesh infection, and an enterotomy missed at the end of a hernia repair is one of the more lethal errors in elective general surgery.",
+      "how": [
+        "Stop and say aloud that the bowel has been opened or that contamination is present, so the team changes gear with you.",
+        "Control spillage first, then repair the enterotomy in healthy tissue, transversely, or resect if the segment is damaged; inspect the adjacent loops for a second injury.",
+        "Re-assess the mesh decision with the senior surgeon: options include completing with a suture repair, a mesh suited to the degree of contamination, or a staged repair later. Follow the unit's policy and the hernia guideline your team uses.",
+        "Convert to open if a laparoscopic repair cannot be done securely, and record what was injured, how it was repaired and the mesh decision in the note.",
+        "Change gloves and instruments and wash out before any mesh is placed."
+      ],
+      "structuresAtRisk": [
+        "Small bowel adherent to the sac or the old scar",
+        "Bladder, injured during medial dissection",
+        "Colon in a sliding or large incisional hernia"
+      ],
+      "pitfalls": [
+        "Completing the planned permanent mesh repair 'because the leak was small'.",
+        "Missing a thermal injury from diathermy or an energy device that will perforate on day three.",
+        "Not documenting the injury, so the ward team does not look for a leak."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hernia.convert": {
+      "id": "step.hernia.convert",
+      "kind": "bailout",
+      "title": "Bailout: convert, stop, or call for help",
+      "why": "Conversion is a safe outcome, not a failure. Most serious injuries in laparoscopic abdominal wall and foregut surgery happen after the point at which the surgeon should have converted or asked for help, usually while persisting with an unclear view.",
+      "how": [
+        "Name the trigger before you start: anatomy that cannot be identified, bleeding that obscures the view, suspected perforation, or no progress over a set time.",
+        "When a trigger occurs, stop dissecting, control what you can with pressure or a grasper, and tell the anaesthetist and scrub team.",
+        "Call a senior colleague early; a second pair of experienced eyes is often all that is needed to restore the view.",
+        "Convert to an open approach, or to a lesser operation that is safe (for example abandoning the wrap, or deferring the repair), rather than completing the planned operation unsafely.",
+        "Document the reason for conversion or abandonment and discuss it with the patient afterwards."
+      ],
+      "structuresAtRisk": [
+        "Major vessels in a bleeding field",
+        "Oesophagus and stomach during difficult hiatal dissection",
+        "Bowel and bladder in a hostile groin"
+      ],
+      "pitfalls": [
+        "Converting only after the injury rather than before it.",
+        "Clipping or sealing blindly into a pool of blood.",
+        "Regarding conversion as a personal failure and persisting."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hernia.liver-retraction": {
+      "id": "step.hernia.liver-retraction",
+      "kind": "access",
+      "title": "Retracting the left lobe of the liver",
+      "why": "The hiatus lies behind the left lateral segment of the liver. A stable retractor that lifts the liver without tearing it gives the whole operation its exposure, and a torn or compressed liver bleeds steadily for the rest of the case.",
+      "how": [
+        "Place a liver retractor through a subxiphoid or epigastric port, according to the system the unit uses.",
+        "Lift the left lateral segment upward and forward, resting the retractor on the undersurface, not levering against the capsule.",
+        "Divide the left triangular ligament only if the lobe is large and floppy and is still in the way after retraction.",
+        "Fix the retractor to the table so the exposure does not depend on an assistant's tired arm, and check the liver surface again at the end of the case."
+      ],
+      "structuresAtRisk": [
+        "Liver capsule and parenchyma",
+        "Left hepatic vein near the triangular ligament",
+        "Accessory or replaced left hepatic artery in the lesser omentum"
+      ],
+      "pitfalls": [
+        "Prolonged pressure on a fatty liver producing a capsular tear or ischaemic patch.",
+        "Dividing a large replaced left hepatic artery in the pars flaccida without recognising it.",
+        "A retractor that slips repeatedly, with the operation continued in a poor view."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hernia.hiatal-dissection": {
+      "id": "step.hernia.hiatal-dissection",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Dissecting the hiatus and the crura",
+      "why": "Hiatal dissection is where the vagi, the pleura, the aorta and the oesophagus are injured. Identifying the right crus first and staying on it gives a reliable plane that leads around the oesophagus without entering it.",
+      "how": [
+        "Open the pars flaccida of the lesser omentum to reach the right crus, preserving a replaced or accessory left hepatic artery if one is present.",
+        "Divide the phreno-oesophageal membrane over the front of the oesophagus and dissect along the inner edge of each crus, keeping the crural muscle covered by its fascia.",
+        "Identify the anterior vagus on the oesophageal wall and the posterior vagus behind it, and keep both with the oesophagus.",
+        "Create a retro-oesophageal window from the right side under vision, below and in front of the aorta, and pass a soft sling around the oesophagus and both vagi.",
+        "Watch the anaesthetic monitor for a rise in airway pressure or end-tidal carbon dioxide, which suggests a pleural breach and capnothorax."
+      ],
+      "structuresAtRisk": [
+        "Anterior and posterior vagus nerves",
+        "Oesophageal wall",
+        "Left and right pleura",
+        "Aorta behind the left crus",
+        "Inferior vena cava near the right crus",
+        "Accessory or replaced left hepatic artery"
+      ],
+      "pitfalls": [
+        "Stripping the crural fascia, which leaves crura that will not hold sutures.",
+        "Creating the posterior window blind from the left and tunnelling into the stomach or the aorta.",
+        "Leaving the posterior vagus outside the sling and then including it in the wrap or dividing it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hernia.crural-repair": {
+      "id": "step.hernia.crural-repair",
+      "kind": "reconstruction",
+      "title": "Crural closure",
+      "why": "Recurrent hiatal herniation is the commonest anatomical failure of antireflux and bariatric surgery. Closing the crura behind the oesophagus, snugly but without narrowing it, restores the hiatus as a barrier.",
+      "how": [
+        "Close the crura posteriorly with interrupted non-absorbable sutures, taking good bites of crural muscle with its fascia, from below upwards.",
+        "Keep the aorta in view below the lowest suture and avoid the pleura laterally.",
+        "Judge the final calibre with the oesophagus in place, with a bougie if used: an instrument should pass alongside the oesophagus without force.",
+        "Add an anterior suture if the defect is anterior or posterior closure would angulate the oesophagus. Consider reinforcement only within the unit's policy; the evidence for routine mesh at the hiatus is limited."
+      ],
+      "structuresAtRisk": [
+        "Aorta",
+        "Inferior vena cava",
+        "Pleura",
+        "Oesophagus, if a suture is placed too close or the hiatus closed too tight"
+      ],
+      "pitfalls": [
+        "Closing too tightly, which causes persistent dysphagia.",
+        "Small bites in thin crura that cut out when the patient first retches.",
+        "Under-closing a large hiatus because closure 'looked tight'."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hernia.short-gastrics": {
+      "id": "step.hernia.short-gastrics",
+      "kind": "dissection",
+      "title": "Dividing the short gastric vessels and freeing the fundus",
+      "why": "The fundus has to be free to wrap without tension, and in a sleeve gastrectomy the whole greater curvature must be mobilised so no fundus is left behind. The short gastric vessels near the spleen are where bleeding and splenic injury occur.",
+      "how": [
+        "Enter the lesser sac through the gastrocolic omentum at the mid greater curvature and work upwards, keeping the energy device close to the gastric wall but not on it.",
+        "Divide the short gastric vessels under tension from the assistant's traction, taking the short top vessels carefully because the stomach and spleen lie close together there.",
+        "Free the posterior fundus from the left crus and the retroperitoneum, dividing the posterior gastric attachments, until the angle of His and the left crus are fully seen.",
+        "Check the greater curvature for a thermal injury before moving on."
+      ],
+      "structuresAtRisk": [
+        "Spleen and its upper pole capsule",
+        "Short gastric and gastroepiploic vessels",
+        "Gastric wall, thermal injury from the energy device",
+        "Pancreatic tail behind the stomach"
+      ],
+      "pitfalls": [
+        "Traction on the spleen producing a capsular tear.",
+        "Leaving posterior fundic attachments, which twists the wrap or leaves a fundal pouch in a sleeve.",
+        "Using the energy device right against the gastric wall, causing a delayed thermal perforation."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hernia.bougie": {
+      "id": "step.hernia.bougie",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Passing the calibration bougie safely",
+      "why": "The bougie sets the calibre of the wrap or the sleeve, and its passage is a recognised cause of oesophageal and gastric perforation. It is a joint manoeuvre between the anaesthetist and the surgeon, under laparoscopic vision.",
+      "how": [
+        "Confirm all other tubes, temperature probes and the nasogastric tube are removed before the bougie is passed.",
+        "Ask the anaesthetist to pass it slowly while you watch the gastro-oesophageal junction, straightening the junction with gentle downward traction on the stomach or sling.",
+        "Stop at any resistance. Never push against it; re-angle and try again, or abandon the bougie.",
+        "Confirm its final position aloud, and confirm its removal aloud before the last staple firing or the last suture, so it is not stapled or sutured in."
+      ],
+      "structuresAtRisk": [
+        "Oesophagus at the gastro-oesophageal junction",
+        "Posterior gastric wall"
+      ],
+      "pitfalls": [
+        "Stapling across a bougie or a temperature probe that nobody mentioned.",
+        "Pushing the bougie through resistance.",
+        "Assuming the bougie is out because nobody said otherwise."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

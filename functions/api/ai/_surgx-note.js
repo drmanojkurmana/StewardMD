@@ -38,7 +38,11 @@ export const NEVER_AI_FILLABLE = [
   "side",            // site marking is a physical check
   "cultureSent",     // whether a specimen actually left the room
   "patientRef", "age", "sex", "date", "admitDate", "dischargeDate",   // identifiers and dates
-  "surgeon", "assistants", "anaesthetist", "doctor"                    // attribution
+  "surgeon", "assistants", "anaesthetist", "doctor",                   // attribution
+  // WHO Surgical Safety Checklist: team acts performed in the room
+  "whoSignInIdentity", "whoSignInSite", "whoSignInAnaes", "whoSignInRisk", "whoTimeOutTeam",
+  "whoTimeOut", "whoTimeOutAbx", "whoTimeOutEvents", "whoTimeOutImaging", "whoSignOut", "whoSignOutRecovery",
+  "clavienDindo"                                                       // complication grade is a judgement
 ];
 
 const MAX_FIELD_CHARS = 4000;

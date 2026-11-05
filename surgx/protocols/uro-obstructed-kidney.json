@@ -1,0 +1,64 @@
+{
+  "id": "uro-obstructed-kidney",
+  "title": "Renal colic and the obstructed infected kidney",
+  "subtitle": "Infection behind a stone: decompress first",
+  "category": "uro_emergency",
+  "specialty": "urology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "nice-ng118", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Renal and ureteric stones: assessment and management (NG118)", "year": 2019, "version": "NG118", "url": "https://www.nice.org.uk/guidance/ng118", "accessed": "2026-11-04" },
+    { "id": "eau-stones", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urolithiasis", "year": 2024, "url": "https://uroweb.org/guidelines/urolithiasis", "accessed": "2026-11-04" },
+    { "id": "eau-infections", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urological Infections: urosepsis", "year": 2024, "url": "https://uroweb.org/guidelines/urological-infections", "accessed": "2026-11-04" },
+    { "id": "ssc-2021", "org": "Surviving Sepsis Campaign (SCCM and ESICM)", "title": "Surviving Sepsis Campaign: international guidelines for management of sepsis and septic shock 2021", "year": 2021, "url": "https://www.sccm.org/survivingsepsiscampaign", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Fever, rigors or sepsis with a ureteric stone or hydronephrosis: an obstructed infected kidney. This is a urological emergency." },
+      { "text": "Acute kidney injury, anuria, a solitary or transplanted kidney, or bilateral obstruction." },
+      { "text": "Pain that does not settle with adequate analgesia." },
+      { "text": "Pregnancy with suspected renal colic." },
+      { "text": "An older patient with first-ever 'renal colic': exclude a leaking abdominal aortic aneurysm before accepting the diagnosis." }
+    ],
+    "do_now": [
+      { "text": "Obstruction with infection: arrange urgent decompression of the collecting system by percutaneous nephrostomy or retrograde ureteric stent. Both are effective; choose by local availability and the patient.", "timeCritical": true, "evidenceRef": "eau-stones" },
+      { "text": "Take blood and urine cultures, then start empirical intravenous antibiotics per local protocol without waiting for imaging or theatre.", "timeCritical": true, "evidenceRef": "eau-infections" },
+      { "text": "Defer definitive stone treatment until the infection has resolved. Ureteroscopy or lithotripsy in an infected obstructed system risks overwhelming sepsis.", "timeCritical": true, "evidenceRef": "eau-stones" },
+      { "text": "Analgesia: offer a non-steroidal anti-inflammatory drug by any route as first line; intravenous paracetamol if it is contraindicated; opioids only if both are contraindicated or ineffective.", "evidenceRef": "nice-ng118" }
+    ],
+    "assess": [
+      { "text": "Sepsis screen at the front door and repeated. Rigors, tachycardia and hypotension may appear before the fever.", "calcs": ["qsofa", "news2", "sofa"] },
+      { "text": "Renal function and the presence of a single functioning kidney.", "calcs": ["kdigo_aki", "ckdepi"] },
+      { "text": "A clinical stone score can support the probability of an uncomplicated ureteric stone in a well patient, but it does not replace imaging when the diagnosis or complication is uncertain.", "calcs": ["stone_score"] },
+      { "text": "Pregnancy test in every woman of child-bearing age before imaging." }
+    ],
+    "investigate": [
+      { "text": "Low-dose non-contrast CT of the kidneys, ureters and bladder in adults with suspected colic, within 24 hours of presentation, and immediately when there is a fever, a solitary kidney, or diagnostic uncertainty." },
+      { "text": "Ultrasound first in pregnancy and in children and young people; low-dose CT only if ultrasound does not answer the question." },
+      { "text": "Full blood count, renal function, electrolytes, calcium, C-reactive protein, lactate, urine dipstick and culture, blood cultures if febrile." },
+      { "text": "Send the urine from the renal pelvis at decompression for culture; it often differs from the bladder urine." }
+    ],
+    "resuscitate": [
+      { "text": "Fluid resuscitation and vasopressors for septic shock per sepsis guidance; decompression is part of the resuscitation, not a step that follows it.", "evidenceRef": "ssc-2021" },
+      { "text": "Admit to a level of care that matches the physiology. An obstructed infected kidney can deteriorate quickly after the first hours.", "evidenceRef": "eau-infections" }
+    ],
+    "definitive": [
+      { "text": "Uncomplicated colic with a small distal ureteric stone: consider an alpha-blocker as medical expulsive therapy, with follow-up imaging to confirm passage.", "evidenceRef": "nice-ng118" },
+      { "text": "Stones unlikely to pass, uncontrolled pain, or obstruction with impaired function: ureteroscopy or shockwave lithotripsy, within 48 hours of diagnosis or admission when pain is ongoing and not tolerated, or the stone is unlikely to pass.", "evidenceRef": "nice-ng118" },
+      { "text": "After decompression for infection: complete the antibiotic course, then plan definitive stone clearance electively.", "evidenceRef": "eau-stones" },
+      { "text": "Every stent is registered with a removal date. A forgotten stent encrusts and becomes its own operation.", "evidenceRef": "eau-stones" }
+    ],
+    "escalate": [
+      { "text": "Urology registrar and consultant immediately for an obstructed infected kidney." },
+      { "text": "Interventional radiology for nephrostomy, the same night if the patient is septic and retrograde stenting is not quickly available." },
+      { "text": "Critical care for septic shock. Vascular surgery if an aneurysm has not been excluded." }
+    ]
+  },
+  "notes": [
+    "Pus under pressure in the kidney is an abscess, and the treatment of an abscess is drainage. Antibiotics alone fail because they cannot reach an obstructed collecting system.",
+    "A stent and a nephrostomy are equally good at decompression. The better one is whichever can be done soonest and most safely for this patient tonight.",
+    "The dangerous trap is the well-looking patient with a small stone, a fever and a modest hydronephrosis. Small stones still obstruct, and the sepsis declares itself overnight."
+  ],
+  "calcs": ["qsofa", "news2", "sofa", "kdigo_aki", "ckdepi", "stone_score"]
+}

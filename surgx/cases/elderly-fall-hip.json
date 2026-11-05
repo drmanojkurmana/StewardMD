@@ -1,0 +1,269 @@
+{
+  "id": "elderly-fall-hip",
+  "title": "Fallen and cannot weight-bear",
+  "subtitle": "The hip fracture pathway, from front door to first walk",
+  "simulation": true,
+  "levels": [
+    "student",
+    "intern",
+    "resident",
+    "surgeon"
+  ],
+  "review": {
+    "status": "ai_drafted"
+  },
+  "protocolRef": "hip-fracture",
+  "procedureRef": "dynamic-hip-screw",
+  "sources": [
+    {
+      "id": "nice-cg124",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Hip fracture: management (CG124)",
+      "year": 2011,
+      "version": "CG124, last updated 2023",
+      "url": "https://www.nice.org.uk/guidance/cg124",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "baumgaertner-1995",
+      "org": "Baumgaertner MR et al. J Bone Joint Surg Am 77:1058",
+      "title": "The value of the tip-apex distance in predicting failure of fixation of peritrochanteric fractures of the hip",
+      "year": 1995,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7608228/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "aagbi-hip",
+      "org": "Association of Anaesthetists (Griffiths R et al). Anaesthesia 76:225",
+      "title": "Guideline for the management of hip fractures 2020",
+      "year": 2021,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33289066/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "stem": "An 84-year-old woman who lives alone and walks outdoors with a stick is brought in after being found on her kitchen floor this morning. She thinks she fell last night. Her left leg is shortened and externally rotated. She takes apixaban for atrial fibrillation and is muddled about the date.",
+  "vitals": {
+    "Temp": "35.9 C",
+    "HR": "96 irregular",
+    "BP": "108/64",
+    "RR": "18",
+    "SpO2": "95% on air",
+    "Pain": "8/10 on any movement"
+  },
+  "decisionPoints": [
+    {
+      "id": "dp1",
+      "phase": "triage",
+      "prompt": "What comes first in the emergency department?",
+      "hint": "She is in pain, possibly delirious, and has been on the floor overnight.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Immediate analgesia, with a nerve block by trained staff if paracetamol and opioid are insufficient, plus a delirium screen and long-lie assessment",
+          "correct": true,
+          "feedback": "Correct. Analgesia is offered immediately, including to people with cognitive impairment, and the long lie and confusion change her management today."
+        },
+        {
+          "id": "b",
+          "text": "Withhold analgesia until the orthopaedic team has examined the hip",
+          "correct": false,
+          "feedback": "Analgesia does not mask the diagnosis here, and withholding it is a recognised harm."
+        },
+        {
+          "id": "c",
+          "text": "Ibuprofen and paracetamol, as she has kidneys that should cope",
+          "correct": false,
+          "feedback": "NSAIDs are not recommended in hip fracture: she is old, possibly dehydrated after a long lie, and anticoagulated."
+        },
+        {
+          "id": "d",
+          "text": "Avoid opioids because she is confused",
+          "correct": false,
+          "feedback": "Untreated pain is itself a cause of delirium. Titrate carefully rather than withholding."
+        }
+      ],
+      "why": "NICE asks for immediate analgesia on presentation, including for people with cognitive impairment, with paracetamol, then opioids, then a nerve block if needed. Pain is reassessed within 30 minutes. A long lie raises the possibility of rhabdomyolysis, pressure damage, hypothermia and kidney injury.",
+      "missedRedFlags": [
+        "A temperature of 35.9 C after a night on the floor",
+        "Confusion that may be new delirium rather than baseline"
+      ]
+    },
+    {
+      "id": "dp2",
+      "phase": "assess",
+      "prompt": "Her daughter says she was completely independent and sharp yesterday. What else must be established before theatre?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Why she fell: ECG, a cardiovascular examination and a medication review, while the theatre plan proceeds in parallel",
+          "correct": true,
+          "feedback": "Correct. A collapse changes the anaesthetic and medical plan, but the work-up happens alongside the surgical pathway, not instead of it."
+        },
+        {
+          "id": "b",
+          "text": "Nothing further: it was obviously a mechanical fall",
+          "correct": false,
+          "feedback": "Older people fall for medical reasons. Atrial fibrillation and an unwitnessed night-time fall deserve an answer."
+        },
+        {
+          "id": "c",
+          "text": "Delay surgery for a full falls clinic assessment",
+          "correct": false,
+          "feedback": "That belongs to rehabilitation and secondary prevention, after the operation."
+        },
+        {
+          "id": "d",
+          "text": "Formal cognitive testing only after recovery from surgery",
+          "correct": false,
+          "feedback": "NICE asks for an active search for cognitive impairment at presentation, and her daughter's history suggests delirium now."
+        }
+      ],
+      "why": "The cause of the fall and the presence of delirium both change peri-operative care. Neither is a reason to delay surgery beyond the next day; they are reasons to involve the orthogeriatric team from admission.",
+      "missedRedFlags": [
+        "New confusion in a previously sharp patient: delirium"
+      ]
+    },
+    {
+      "id": "dp3",
+      "phase": "investigate",
+      "prompt": "Radiographs show a two-part intertrochanteric fracture; the lesser trochanter is intact and the lateral wall is preserved. Her last apixaban dose was yesterday evening. Which investigations are needed before surgery?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Full blood count, renal function, electrolytes, creatine kinase, group and save, ECG, with the anticoagulant plan made by the anaesthetist and surgeon today",
+          "correct": true,
+          "feedback": "Correct. These answer the questions that change today's plan, including renal function, which governs apixaban clearance."
+        },
+        {
+          "id": "b",
+          "text": "An echocardiogram and cardiology review before any decision",
+          "correct": false,
+          "feedback": "Tests that will not change the anaesthetic plan should not delay surgery. The anaesthetist decides whether anything else is needed."
+        },
+        {
+          "id": "c",
+          "text": "Reverse the apixaban with a specific agent and operate immediately",
+          "correct": false,
+          "feedback": "Reversal agents are for life-threatening bleeding, not to schedule a hip operation. Timing is planned around the last dose and renal function."
+        },
+        {
+          "id": "d",
+          "text": "An MRI of the hip to characterise the fracture",
+          "correct": false,
+          "feedback": "The fracture is already diagnosed. MRI is for suspected fracture with negative radiographs."
+        }
+      ],
+      "why": "Pre-operative investigations should target correctable problems and the anaesthetic plan. NICE lists anticoagulation among the conditions to identify and treat immediately so that surgery is not delayed. A long lie adds creatine kinase to the list.",
+      "alternatives": [
+        "A chest radiograph is reasonable if there are chest signs or a suspicion of aspiration after a long lie."
+      ]
+    },
+    {
+      "id": "dp4",
+      "phase": "decide",
+      "prompt": "What operation does NICE recommend for this fracture, and when?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sliding hip screw, on the day of or the day after admission, aiming for unrestricted weight-bearing",
+          "correct": true,
+          "feedback": "Correct. A trochanteric fracture above and including the lesser trochanter, not reverse oblique, is fixed with an extramedullary implant."
+        },
+        {
+          "id": "b",
+          "text": "Cemented hemiarthroplasty",
+          "correct": false,
+          "feedback": "Arthroplasty is for displaced intracapsular fractures. This is extracapsular and will heal if fixed."
+        },
+        {
+          "id": "c",
+          "text": "Intramedullary nail",
+          "correct": false,
+          "feedback": "NICE reserves the nail for subtrochanteric and reverse oblique patterns; for this fracture it prefers a sliding hip screw."
+        },
+        {
+          "id": "d",
+          "text": "Non-operative management on traction",
+          "correct": false,
+          "feedback": "Prolonged bed rest in an 84-year-old is associated with pneumonia, pressure injury, thromboembolism and death. Surgery is the analgesic and the route back to walking."
+        }
+      ],
+      "why": "CG124 recommends surgery on the day of or the day after admission, an operation that allows full weight-bearing straight away, and a sliding hip screw in preference to a nail for trochanteric fractures above and including the lesser trochanter other than reverse oblique patterns.",
+      "missedRedFlags": [
+        "Delaying surgery for non-essential tests"
+      ]
+    },
+    {
+      "id": "dp5",
+      "phase": "operate",
+      "levels": [
+        "resident",
+        "surgeon"
+      ],
+      "prompt": "On the image intensifier the guidewire sits in the superior half of the head on the AP view and anterior on the lateral. What do you do?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Re-site the guidewire to a central position on both views, aiming for a small tip-apex distance, before reaming",
+          "correct": true,
+          "feedback": "Correct. A superior or anterior lag screw with a large tip-apex distance is the classic set-up for cut-out."
+        },
+        {
+          "id": "b",
+          "text": "Accept it; the lag screw will compress the fracture regardless",
+          "correct": false,
+          "feedback": "Compression does not prevent a poorly placed screw from cutting out of osteoporotic bone."
+        },
+        {
+          "id": "c",
+          "text": "Ream and use a longer lag screw to compensate",
+          "correct": false,
+          "feedback": "A longer screw in the wrong place is still in the wrong place, and the joint is at risk."
+        },
+        {
+          "id": "d",
+          "text": "Abandon the sliding hip screw and convert to a hemiarthroplasty",
+          "correct": false,
+          "feedback": "The fixation problem is the wire position, which is easily corrected."
+        }
+      ],
+      "why": "Baumgaertner showed that the tip-apex distance, the sum of the distances from the screw tip to the apex of the head on AP and lateral views, predicts cut-out. Central placement on both views is the aim, and correcting a wire is cheap compared with revising a failed fixation.",
+      "stepRef": "step.ortho.guidewire"
+    },
+    {
+      "id": "dp6",
+      "phase": "postop",
+      "prompt": "The operation went well. What should happen tomorrow?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Physiotherapy assessment and mobilisation, full weight-bearing, orthogeriatric review, delirium monitoring, and a bone health and falls plan",
+          "correct": true,
+          "feedback": "Correct. Mobilisation on the day after surgery within an orthogeriatric Hip Fracture Programme is the NICE standard."
+        },
+        {
+          "id": "b",
+          "text": "Bed rest for a week to protect the fixation",
+          "correct": false,
+          "feedback": "The operation was done to allow weight-bearing. Bed rest causes the complications surgery is meant to prevent."
+        },
+        {
+          "id": "c",
+          "text": "Touch weight-bearing for six weeks",
+          "correct": false,
+          "feedback": "Older patients cannot reliably protected-weight-bear, so restriction usually means not walking at all."
+        },
+        {
+          "id": "d",
+          "text": "Transfer to a nursing home as soon as possible",
+          "correct": false,
+          "feedback": "She was independent. Rehabilitation, including early supported discharge where suitable, aims to return her home."
+        }
+      ],
+      "why": "Recovery after hip fracture depends on early mobilisation, orthogeriatric care, prevention and treatment of delirium, and secondary prevention of the next fracture. These are as much part of the treatment as the implant.",
+      "missedRedFlags": [
+        "Post-operative delirium in a patient already confused on arrival"
+      ]
+    }
+  ]
+}

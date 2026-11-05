@@ -1,0 +1,135 @@
+{
+  "id": "left-hemicolectomy-sigmoid",
+  "title": "Left hemicolectomy and sigmoid colectomy",
+  "subtitle": "Ureter first, the right tie, a tension-free colorectal join",
+  "system": "gastrointestinal",
+  "aliases": ["sigmoid colectomy", "left colectomy", "laparoscopic sigmoid colectomy", "elective sigmoid resection", "high anterior resection"],
+  "estMinutes": 180,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "ascrs-colon", "org": "American Society of Colon and Rectal Surgeons (ASCRS)", "title": "The American Society of Colon and Rectal Surgeons Clinical Practice Guidelines for the Management of Colon Cancer (Vogel JD et al., Dis Colon Rectum)", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=American+Society+of+Colon+and+Rectal+Surgeons+Clinical+Practice+Guidelines+Management+of+Colon+Cancer+2022", "accessed": "2026-11-04" },
+    { "id": "ascrs-diverticulitis", "org": "American Society of Colon and Rectal Surgeons (ASCRS)", "title": "The American Society of Colon and Rectal Surgeons Clinical Practice Guidelines for the Management of Left-sided Colonic Diverticulitis (Hall J et al., Dis Colon Rectum)", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=American+Society+of+Colon+and+Rectal+Surgeons+Clinical+Practice+Guidelines+Left-sided+Colonic+Diverticulitis", "accessed": "2026-11-04" },
+    { "id": "nice-ng147", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Diverticular disease: diagnosis and management (NG147)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng147", "accessed": "2026-11-04" },
+    { "id": "nice-ng151", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Colorectal cancer (NG151)", "year": 2020, "url": "https://www.nice.org.uk/guidance/ng151", "accessed": "2026-11-04" },
+    { "id": "eras-crc", "org": "ERAS Society", "title": "Guidelines for perioperative care in elective colorectal surgery: Enhanced Recovery After Surgery (ERAS) Society recommendations: 2018 (Gustafsson UO et al., World J Surg)", "year": 2019, "url": "https://erassociety.org/guidelines/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "rcri", "caprini", "must", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Adenocarcinoma of the sigmoid or descending colon (sigmoid colectomy or left hemicolectomy with oncological lymphadenectomy), as recommended by the MDT.",
+      "Splenic flexure cancer: left hemicolectomy (or extended resection) including the left branch of the middle colic vessels, as the MDT plans.",
+      "Diverticular disease: elective resection for complicated disease (stricture, fistula to bladder or vagina) or for recurrent or persistent symptoms after a shared decision; not routinely after a single uncomplicated episode.",
+      "Sigmoid volvulus after decompression, where the patient is fit; endoscopically unresectable polyps."
+    ],
+    "contraindications": [
+      "Generalised faecal or purulent peritonitis with a physiologically unstable patient: a Hartmann's procedure or damage control is the safer operation (see Hartmann's procedure).",
+      "Acute uncomplicated diverticulitis, which is treated without surgery.",
+      "A frail patient in whom the risks of resection outweigh the symptoms of benign disease.",
+      "Laparoscopy specifically: inability to tolerate pneumoperitoneum or a fixed phlegmonous mass beyond the team's experience."
+    ],
+    "preparation": [
+      "Colonoscopy (or CT colonography) to define the lesion and exclude synchronous cancer; tattoo small lesions. In diverticular disease, exclude cancer within a stricture.",
+      "Cancer: CT chest, abdomen and pelvis, CEA and MDT decision. Fistula: CT or cystoscopy to define the tract.",
+      "Mark a left iliac fossa colostomy site and a right iliac fossa ileostomy site.",
+      "ERAS preparation, anaemia correction, nutritional screening; bowel preparation per unit policy.",
+      "Consider ureteric stents for a large inflammatory mass or a re-operative pelvis, as the unit prefers.",
+      "Consent: anastomotic leak, bleeding, ureteric, bladder, splenic and small bowel injury, conversion to open, defunctioning or end stoma, ileus, wound and port-site hernia, VTE, and a change in bowel habit."
+    ],
+    "positioning": [
+      "Modified Lloyd-Davies with legs in padded stirrups, thighs flat, arms tucked, for transanal stapler access.",
+      "Head down and right side down for the pelvic and medial dissection; head up and right side down for the splenic flexure.",
+      "Secure the patient against sliding before tilting; check the common peroneal nerve at the stirrup."
+    ],
+    "equipment": [
+      "Laparoscopic stack, 30-degree scope, atraumatic graspers, energy device, clips or vascular stapler.",
+      "Linear stapler for distal transection; circular stapler and anvil; sizers.",
+      "Wound protector; air leak test materials.",
+      "Open set immediately available; ureteric stents if planned."
+    ],
+    "anatomy": [
+      "The descending and sigmoid colon are supplied by the inferior mesenteric artery (left colic and sigmoid branches) and the marginal artery; the splenic flexure has a variable supply from the left branch of the middle colic artery.",
+      "The inferior mesenteric vein runs separately, lateral to the duodenojejunal flexure, to join the splenic vein behind the pancreas.",
+      "The left ureter and gonadal vessels lie in the retroperitoneum beneath Toldt's fascia; the ureter crosses the iliac bifurcation at the pelvic brim.",
+      "The rectosigmoid junction is where the taeniae coli splay out to form a continuous longitudinal muscle coat, near the sacral promontory."
+    ],
+    "criticalSafety": [
+      "Identify the left ureter before dividing the vascular pedicle or the mesentery.",
+      "For diverticular disease, make the distal anastomosis on the upper rectum (below the splay of the taeniae), not on residual sigmoid: an anastomosis on the sigmoid is associated with recurrence.",
+      "For cancer, take the mesentery with the lymph nodes to the level the MDT plans and handle the tumour as little as possible.",
+      "Before the anastomosis: perfused, tension-free, untwisted, doughnuts complete, air leak test negative."
+    ],
+    "structuresAtRisk": [
+      "Left ureter and gonadal vessels",
+      "Superior hypogastric plexus",
+      "Spleen and tail of pancreas during flexure mobilisation",
+      "Bladder and vagina in diverticular fistula",
+      "Marginal artery and middle colic vessels"
+    ],
+    "commonErrors": [
+      "Dissecting too deep and lifting the ureter with the mesocolon.",
+      "Anastomosing onto sigmoid colon in diverticular disease.",
+      "Insufficient mobilisation, leaving a tense anastomosis.",
+      "Tearing the splenic capsule by pulling the flexure down.",
+      "In an inflammatory mass, trying to find planes from the inflamed side instead of starting in normal tissue and working towards the mass."
+    ],
+    "complications": [
+      "Anastomotic leak.",
+      "Bleeding.",
+      "Ureteric injury (may present late as urinoma or fistula).",
+      "Splenic injury and unplanned splenectomy.",
+      "Ileus, small bowel obstruction, wound infection, port-site hernia and VTE.",
+      "Recurrent diverticulitis after benign resection."
+    ],
+    "postop": [
+      "ERAS pathway: early diet, mobilisation, opioid-sparing analgesia, early catheter removal.",
+      "Daily leak surveillance: tachycardia, fever, pain out of proportion, ileus, rising CRP; low threshold for CT.",
+      "Flank pain, a rising creatinine or watery drain output suggests a ureteric injury: test drain fluid creatinine and image.",
+      "Cancer: extended thromboprophylaxis per NICE and MDT review of the histology. Fistula: remove the urinary catheter only after the bladder repair has had time to heal per urology advice."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Both stoma sites marked. For benign disease, record that the decision to operate was shared and why." },
+    { "ref": "step.core.timeout", "emphasis": "State the indication (cancer or benign), because it changes the level of the vascular tie and the distal margin." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Modified Lloyd-Davies, arms tucked, secured for steep tilts in two directions." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare the perineum as well as the abdomen; urinary catheter in." },
+    { "ref": "step.lap.access" },
+    { "ref": "step.lap.ports" },
+    { "ref": "step.lap.survey", "emphasis": "For cancer, inspect the liver and peritoneum. For diverticular disease, define the extent of the inflamed segment and any fistula before dissecting." },
+    { "ref": "step.bowel.left-medial-to-lateral", "emphasis": "In an inflammatory mass, start medially in uninflamed tissue at the promontory and find the ureter there, then work towards the mass." },
+    { "ref": "step.bowel.ima-ligation", "emphasis": "Cancer: oncological tie of the inferior mesenteric artery; for a splenic flexure cancer, also divide the left branch of the middle colic vessels. Benign: divide close to the bowel." },
+    { "ref": "step.bowel.splenic-flexure", "emphasis": "Selective for a sigmoid colectomy; mobilise whenever the colon will not reach the rectum without tension." },
+    { "ref": "step.lhc.distal-transection" },
+    { "ref": "step.lap.specimen-retrieval", "emphasis": "Wound protector at the extraction site. Exteriorise the colon and choose the proximal division point." },
+    { "ref": "step.bowel.bowel-division", "emphasis": "Proximal division on soft, pliable, well-perfused colon. In diverticular disease it is not necessary to remove every diverticulum-bearing segment, only the thickened, diseased colon." },
+    { "ref": "step.bowel.circular-anastomosis", "emphasis": "Sigmoid colectomy: colorectal end-to-end or side-to-end circular stapled anastomosis. For a splenic flexure left hemicolectomy with a colocolic join, a stapled side-to-side or handsewn anastomosis is used instead." },
+    { "ref": "step.bowel.leak-check", "emphasis": "Air leak test for every colorectal anastomosis: saline in the pelvis, clamp above, air via the anus." },
+    { "ref": "step.bowel.colorectal-bailout", "emphasis": "In emergency or contaminated surgery, a Hartmann's procedure or an anastomosis with defunctioning are valid outcomes, not failures." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Cancer: mark the high tie for the apical node. Fistula: send the bladder or vaginal margin separately if excised." },
+    { "ref": "step.core.skin-closure", "emphasis": "Close the extraction site fascia and every 10 mm or larger port." },
+    { "ref": "step.core.debrief", "emphasis": "Record ureter seen, level of tie, where the anastomosis lies (rectum or colon), doughnuts and air test, and the stoma decision." }
+  ],
+  "steps_local": {
+    "step.lhc.distal-transection": {
+      "id": "step.lhc.distal-transection", "kind": "resection", "critical": true,
+      "title": "Choosing and dividing the distal resection line",
+      "why": "Where the distal line falls decides whether the operation cures the problem. In diverticular disease, residual sigmoid at the anastomosis is associated with recurrence; in cancer, the margin and the mesentery must clear the tumour.",
+      "how": [
+        "Mobilise into the upper mesorectum just far enough to reach a soft, untethered segment; avoid unnecessary pelvic dissection in benign disease.",
+        "Diverticular disease: divide at the upper rectum, identified where the taeniae coli splay out into a continuous muscle coat.",
+        "Cancer: confirm the tumour position (tattoo, palpation or on-table endoscopy) and divide with the margin planned by the MDT, taking the mesentery at right angles to the bowel.",
+        "Divide the mesorectum or mesentery at the chosen level, then transect with a linear stapler in a single firing where possible, keeping the ureters and the vagina clear."
+      ],
+      "structuresAtRisk": ["Left and right ureters at the pelvic brim", "Hypogastric nerves", "Posterior vaginal wall"],
+      "pitfalls": [
+        "Dividing at the level of the sigmoid in diverticular disease because the pelvis looked difficult.",
+        "Losing the tumour position in a laparoscopic resection because the lesion was not tattooed.",
+        "Multiple stapler firings that leave crossing staple lines."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

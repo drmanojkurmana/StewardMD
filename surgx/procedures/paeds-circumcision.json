@@ -1,0 +1,172 @@
+{
+  "id": "paeds-circumcision",
+  "title": "Paediatric circumcision",
+  "subtitle": "Check the anatomy, protect the glans, bipolar only",
+  "system": "genitourinary",
+  "aliases": ["circumcision", "child circumcision", "sleeve circumcision", "phimosis surgery"],
+  "estMinutes": 30,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-paed", "org": "European Association of Urology (EAU) and European Society for Paediatric Urology (ESPU)", "title": "EAU Guidelines on Paediatric Urology: phimosis", "year": 2024, "url": "https://uroweb.org/guidelines/paediatric-urology", "accessed": "2026-11-04" },
+    { "id": "aap-circ", "org": "American Academy of Pediatrics (AAP) Task Force on Circumcision", "title": "Male circumcision (Technical Report), Pediatrics 2012", "year": 2012, "url": "https://publications.aap.org/pediatrics", "accessed": "2026-11-04" },
+    { "id": "bma-ntmc", "org": "British Medical Association (BMA)", "title": "Non-therapeutic male circumcision (NTMC) of children: practical guidance for doctors", "year": 2019, "url": "https://www.bma.org.uk/", "accessed": "2026-11-04" },
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: disorders of the penis and foreskin", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["paeds_weight", "flacc"],
+  "chapters": {
+    "indications": [
+      "Pathological phimosis, most commonly balanitis xerotica obliterans (lichen sclerosus) with a scarred, non-retractile foreskin.",
+      "Recurrent balanoposthitis, or symptomatic phimosis that has not responded to topical steroid treatment.",
+      "Selected boys with recurrent urinary tract infection and an abnormal urinary tract, as a specialist decision.",
+      "Non-therapeutic circumcision for religious or cultural reasons, only where lawful and in line with national professional guidance, with consent from those with parental responsibility."
+    ],
+    "contraindications": [
+      "Physiological phimosis in a young boy: a non-retractile but healthy foreskin is normal and is not an indication.",
+      "Hypospadias, epispadias, chordee, buried or webbed penis, or megaprepuce: the foreskin may be needed for reconstruction, so refer to a paediatric urologist instead.",
+      "Known or suspected bleeding disorder until assessed and a haematology plan is in place.",
+      "Acute balanoposthitis: treat the infection first.",
+      "An unwell or premature neonate."
+    ],
+    "preparation": [
+      "Examine the penis yourself: meatal position, ventral shaft, penile size and whether the foreskin is normal.",
+      "Ask about family history of bleeding and any personal bleeding history.",
+      "Consent for: bleeding, infection, swelling, meatal stenosis (particularly with lichen sclerosus), cosmetic dissatisfaction (too much or too little skin removed, skin bridges, asymmetry), injury to the glans or urethra, altered sensation, and re-operation.",
+      "For lichen sclerosus, explain that histology will be sent and that follow-up of the meatus is needed."
+    ],
+    "positioning": [
+      "Supine, legs slightly apart, on a warmed mattress for an infant."
+    ],
+    "equipment": [
+      "Fine paediatric set, fine artery forceps, curved fine scissors, blunt probe for adhesiolysis.",
+      "Bipolar diathermy only; monopolar diathermy is not used on the penis.",
+      "Fine absorbable sutures; skin marker."
+    ],
+    "anatomy": [
+      "The prepuce has an outer skin layer and an inner mucosal layer that meet at the preputial ring; in young boys the inner layer is physiologically adherent to the glans.",
+      "The frenulum on the ventral side carries the frenular artery, the commonest source of post-operative bleeding, and lies directly over the urethra.",
+      "The corona marks the base of the glans; the outer skin incision is made at this level with the skin in its natural position, not under traction.",
+      "In lichen sclerosus the scarring may extend to the meatus, causing meatal stenosis."
+    ],
+    "criticalSafety": [
+      "Stop if the anatomy is abnormal: a hooded prepuce or a ventral defect means hypospadias until proven otherwise.",
+      "Bipolar diathermy only. Monopolar current concentrated in the penile shaft can cause catastrophic tissue necrosis.",
+      "Never cut across a clamp without confirming the glans is free of it.",
+      "Local anaesthetic for a penile block must not contain adrenaline."
+    ],
+    "structuresAtRisk": [
+      "Glans penis",
+      "Urethra beneath the frenulum",
+      "Frenular artery",
+      "Dorsal neurovascular bundle of the penis"
+    ],
+    "commonErrors": [
+      "Removing too much shaft skin by cutting with the skin under traction.",
+      "Removing too little inner layer, leaving a redundant collar or a residual phimotic ring.",
+      "Deep frenular sutures that enter the urethra, causing a fistula.",
+      "Relying on the dressing to control bleeding that should have been controlled with bipolar."
+    ],
+    "complications": [
+      "Bleeding, usually from the frenular artery, sometimes needing return to theatre.",
+      "Wound infection and swelling.",
+      "Meatal stenosis, more common with lichen sclerosus.",
+      "Skin bridges, concealed penis or poor cosmetic result.",
+      "Urethral fistula or glans injury, rare but serious."
+    ],
+    "postop": [
+      "Day-case discharge with weight-based simple analgesia; petroleum jelly to the glans and wound to prevent sticking to the nappy or underwear.",
+      "Daily bathing from the next day; swelling and yellow fibrinous exudate on the glans for a week or two are expected.",
+      "Return urgently for bleeding that does not stop with firm pressure for 10 minutes, inability to pass urine, or spreading redness.",
+      "Follow-up of the meatus where lichen sclerosus is confirmed."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the indication, that the consent is from a person with parental responsibility, and for non-therapeutic circumcision that the legal and professional requirements are met." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.paeds.physiology-gate", "emphasis": "Confirm the bleeding history was asked and any haematology plan is in place." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotics are not routinely needed; follow local policy." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.circ.anatomy-check" },
+    { "ref": "step.core.prep-drape", "emphasis": "Aqueous antiseptic on genital skin per local policy; let it dry before any diathermy." },
+    { "ref": "step.paeds.local-anaesthetic", "emphasis": "Dorsal penile or ring block, or a caudal, with plain local anaesthetic only: never with adrenaline." },
+    { "ref": "step.circ.adhesiolysis" },
+    { "ref": "step.circ.marking" },
+    { "ref": "step.circ.excision" },
+    { "ref": "step.circ.frenulum" },
+    { "ref": "step.core.haemostasis", "emphasis": "Bipolar diathermy only, on precisely identified vessels. Check the frenular area last and with the penis in its natural position." },
+    { "ref": "step.core.skin-closure", "emphasis": "Place fine absorbable interrupted sutures at 12, 6, 3 and 9 o'clock to align outer skin to inner mucosa, then fill between, without tension or overlap." },
+    { "ref": "step.core.specimen", "emphasis": "Send the foreskin for histology when lichen sclerosus is suspected, and otherwise per local policy." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.paeds.daycase-discharge" },
+    { "ref": "step.core.debrief", "emphasis": "Record the meatal appearance and any meatal procedure." }
+  ],
+  "steps_local": {
+    "step.circ.anatomy-check": {
+      "id": "step.circ.anatomy-check", "kind": "bailout", "critical": true,
+      "title": "Anatomy check: stop if circumcision is wrong for this penis",
+      "why": "The foreskin is the tissue a hypospadias or buried penis repair depends on. Once removed it cannot be replaced, so an unrecognised anomaly turns a simple operation into a lifelong problem.",
+      "how": [
+        "Before any incision, look at the meatal position, the ventral prepuce and the shaft with the child asleep.",
+        "A hooded prepuce with a deficient ventral foreskin, a ventral meatus, chordee, a buried or webbed penis, or a megaprepuce means stop.",
+        "If an anomaly is found, do not circumcise: close any incision, inform the consultant and the parents, and refer to paediatric urology.",
+        "If the meatus is stenosed by lichen sclerosus, plan a meatal procedure within the consent or document it for follow-up."
+      ],
+      "structuresAtRisk": ["Prepuce needed for reconstruction", "Urethral meatus"],
+      "pitfalls": ["Assuming the clinic examination was complete.", "Proceeding with a partial circumcision on a hooded prepuce."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.adhesiolysis": {
+      "id": "step.circ.adhesiolysis", "kind": "dissection",
+      "title": "Freeing the inner prepuce from the glans",
+      "why": "The inner prepuce is adherent to the glans in young boys. Until it is separated, the glans cannot be seen or protected, and the meatus cannot be assessed.",
+      "how": [
+        "Gently dilate the preputial opening with fine artery forceps.",
+        "Retract the foreskin and separate the inner layer from the glans with a blunt probe, sweeping circumferentially down to the coronal sulcus.",
+        "Clean away smegma and inspect the whole glans and the meatus."
+      ],
+      "structuresAtRisk": ["Glans epithelium", "Urethral meatus"],
+      "pitfalls": ["Forcing a scarred lichen sclerosus ring and tearing it; a dorsal slit first is safer.", "Incomplete separation, so glans tissue is drawn into the excision."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.marking": {
+      "id": "step.circ.marking", "kind": "prep",
+      "title": "Marking the outer and inner incisions",
+      "why": "Most cosmetic complaints and concealed penis follow excessive or uneven skin removal. Marking with the foreskin in its natural position, not under traction, sets the amount removed.",
+      "how": [
+        "With the foreskin lying in its natural position over the glans, mark the outer skin circumferentially at the level of the corona.",
+        "Retract the foreskin and mark the inner layer a short distance proximal to the coronal sulcus, leaving a narrow cuff, following the V of the frenulum ventrally.",
+        "Check the marks for symmetry from all sides before cutting."
+      ],
+      "structuresAtRisk": ["Penile shaft skin"],
+      "pitfalls": ["Marking with the skin stretched forward, which removes too much shaft skin.", "Ignoring the frenular V, producing a ventral skin deficit."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.excision": {
+      "id": "step.circ.excision", "kind": "resection", "critical": true,
+      "title": "Excising the prepuce with the glans protected",
+      "why": "Glans injury and amputation are the catastrophic complications of circumcision, and they happen when the glans is not seen at the moment of cutting.",
+      "how": [
+        "Incise the outer and inner marks superficially, through skin only, and excise the sleeve of prepuce between them with fine scissors, staying superficial to Buck fascia.",
+        "If using a dorsal slit, place the scissor blade under the foreskin only after the glans is freed and the tip is seen to be in the preputial space.",
+        "If any clamp or guide is used, confirm visually and by palpation that the glans lies entirely outside it before cutting.",
+        "Control bleeding vessels with bipolar as they are encountered."
+      ],
+      "structuresAtRisk": ["Glans penis", "Dorsal neurovascular bundle", "Urethra ventrally"],
+      "pitfalls": ["Cutting across a clamp without seeing the glans.", "Deep dissection on the dorsum into the neurovascular bundle."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.frenulum": {
+      "id": "step.circ.frenulum", "kind": "reconstruction", "critical": true,
+      "title": "Securing the frenular artery",
+      "why": "The frenular artery is the usual source of bleeding after circumcision, and it lies over the urethra. Secure control here prevents a return to theatre; too deep a stitch causes a fistula.",
+      "how": [
+        "Identify the frenular artery in the ventral V and coagulate it precisely with bipolar, or ligate it with a fine absorbable suture.",
+        "Place the ventral approximating suture superficially, taking skin and mucosa only.",
+        "Check the area again after the other sutures are placed, with the penis in its natural position."
+      ],
+      "structuresAtRisk": ["Urethra", "Frenular artery"],
+      "pitfalls": ["A deep figure-of-eight suture that catches the urethra.", "Coagulating the frenulum broadly instead of the vessel."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "acute-pancreatitis",
+  "title": "Acute pancreatitis",
+  "subtitle": "Classify by organ failure, resuscitate moderately, delay intervention",
+  "category": "abdomen",
+  "specialty": "general",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "iap-apa-2013", "org": "International Association of Pancreatology (IAP) and American Pancreatic Association (APA)", "title": "IAP/APA evidence-based guidelines for the management of acute pancreatitis", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/24054878/", "accessed": "2026-11-04" },
+    { "id": "atlanta-2012", "org": "Acute Pancreatitis Classification Working Group", "title": "Classification of acute pancreatitis 2012: revision of the Atlanta classification and definitions by international consensus", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/23100216/", "accessed": "2026-11-04" },
+    { "id": "wses-sap-2019", "org": "World Society of Emergency Surgery (WSES)", "title": "2019 WSES guidelines for the management of severe acute pancreatitis", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31210778/", "accessed": "2026-11-04" },
+    { "id": "panter-2010", "org": "Dutch Pancreatitis Study Group (New England Journal of Medicine)", "title": "A step-up approach or open necrosectomy for necrotizing pancreatitis (PANTER trial)", "year": 2010, "url": "https://pubmed.ncbi.nlm.nih.gov/20410514/", "accessed": "2026-11-04" },
+    { "id": "waterfall-2022", "org": "ERICA Consortium (New England Journal of Medicine)", "title": "Aggressive or moderate fluid resuscitation in acute pancreatitis (WATERFALL trial)", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/36103415/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Organ failure: hypotension, hypoxaemia, rising creatinine or falling urine output. Organ failure persisting beyond 48 hours defines severe acute pancreatitis and drives mortality." },
+      { "text": "Persistent systemic inflammatory response beyond 48 hours, which predicts a severe course." },
+      { "text": "Fever with jaundice or deranged liver tests: co-existing cholangitis needs urgent biliary drainage." },
+      { "text": "Rising intra-abdominal pressure with a tense abdomen, falling urine output and rising ventilatory pressures: abdominal compartment syndrome." },
+      { "text": "Clinical deterioration after the first week, especially new fever or new organ failure: suspect infected necrosis." },
+      { "text": "Sudden haemodynamic collapse or a falling haemoglobin: pseudoaneurysm bleed, which needs CT angiography and embolisation." }
+    ],
+    "do_now": [
+      { "text": "Confirm the diagnosis with two of three: typical pain, serum lipase or amylase above three times the upper limit of normal, and characteristic imaging. Do not order an early CT just to stage it.", "evidenceRef": "iap-apa-2013" },
+      { "text": "Start goal-directed intravenous fluid with a balanced crystalloid such as Ringer's lactate, at a moderate rate. Aggressive high-volume resuscitation caused more fluid overload without better outcomes.", "timeCritical": true, "evidenceRef": "waterfall-2022" },
+      { "text": "Reassess fluid response frequently against heart rate, blood pressure, urine output and haematocrit or urea, and slow fluids once targets are met.", "timeCritical": true, "evidenceRef": "iap-apa-2013" },
+      { "text": "Adequate analgesia, oxygen to target saturations, and early referral to high dependency or critical care for organ failure or persistent SIRS.", "timeCritical": true, "evidenceRef": "iap-apa-2013" },
+      { "text": "Do not give prophylactic antibiotics for sterile pancreatitis, whatever the predicted severity.", "evidenceRef": "iap-apa-2013" }
+    ],
+    "assess": [
+      { "text": "Aetiology: ultrasound for gallstones on admission, alcohol history, triglycerides, calcium, drugs, recent ERCP, and family history. Most cases in India and worldwide are biliary or alcohol-related." },
+      { "text": "Predict severity on admission and at 48 hours with a validated score; none is good enough alone, so repeat the assessment.", "calcs": ["bisap", "glasgow_imrie", "ranson", "apache2"] },
+      { "text": "Classify by Revised Atlanta: mild has no organ failure and no complications; moderately severe has transient organ failure under 48 hours or local complications; severe has persistent organ failure over 48 hours.", "calcs": ["sofa"] },
+      { "text": "Measure intra-abdominal pressure via the bladder in ventilated or deteriorating patients with a distended abdomen." }
+    ],
+    "investigate": [
+      { "text": "Bloods: FBC, U&E, LFT, calcium, glucose, triglycerides, CRP, arterial or venous gas with lactate. CRP above 150 mg/L at around 48 hours is a commonly used marker of severity." },
+      { "text": "Ultrasound abdomen on admission to look for gallstones and duct dilatation." },
+      { "text": "Contrast CT is for diagnostic uncertainty early, or for clinical deterioration or failure to improve, ideally at 72 to 96 hours after onset when necrosis is demonstrable." },
+      { "text": "MRCP or endoscopic ultrasound when common bile duct stones are suspected without cholangitis." },
+      { "text": "In deterioration after the first week, repeat contrast CT for necrosis, gas, collections, venous thrombosis and pseudoaneurysm." }
+    ],
+    "resuscitate": [
+      { "text": "Enteral nutrition is preferred to parenteral. Allow oral feeding early in mild disease; in severe disease use nasogastric or nasojejunal feeding.", "evidenceRef": "iap-apa-2013" },
+      { "text": "Urgent ERCP within 24 hours for co-existing cholangitis. Early ERCP is not indicated in predicted severe biliary pancreatitis without cholangitis or persistent obstruction.", "evidenceRef": "iap-apa-2013" },
+      { "text": "Abdominal compartment syndrome: treat medically first with decompression of the gut, drainage of ascites, sedation and fluid restriction; decompressive laparotomy is the last resort.", "evidenceRef": "wses-sap-2019" },
+      { "text": "Suspected infected necrosis: start antibiotics that penetrate pancreatic necrosis, and delay any intervention where the patient allows.", "evidenceRef": "iap-apa-2013" }
+    ],
+    "definitive": [
+      { "text": "Mild biliary pancreatitis: cholecystectomy during the same admission to prevent recurrence.", "evidenceRef": "iap-apa-2013" },
+      { "text": "Biliary pancreatitis with peripancreatic collections: delay cholecystectomy until the collections resolve or for at least six weeks.", "evidenceRef": "iap-apa-2013" },
+      { "text": "Infected necrosis: step-up approach. Percutaneous or endoscopic transluminal drainage first, then minimally invasive necrosectomy only if drainage fails.", "evidenceRef": "panter-2010" },
+      { "text": "Delay intervention for infected necrosis, ideally until the collection is walled off, around four weeks after onset.", "evidenceRef": "iap-apa-2013" },
+      { "text": "Early open surgery is reserved for specific catastrophes: refractory abdominal compartment syndrome, bowel ischaemia or perforation, or bleeding that radiology cannot control.", "evidenceRef": "wses-sap-2019" }
+    ],
+    "escalate": [
+      { "text": "Critical care for organ failure or persistent SIRS; do not wait for the 48-hour classification to ask for help." },
+      { "text": "Transfer severe acute pancreatitis and necrotising pancreatitis to a specialist pancreatic centre with interventional radiology, advanced endoscopy and HPB surgery." },
+      { "text": "Gastroenterology or advanced endoscopy for cholangitis and for transluminal drainage." },
+      { "text": "Interventional radiology immediately for suspected pseudoaneurysm bleeding." }
+    ]
+  },
+  "notes": [
+    "Severity is defined by organ failure and its duration, not by the amylase level. A very high amylase can be mild disease, and a modest one can be fatal.",
+    "In the first two weeks the enemy is organ failure and the treatment is medical. Early necrosectomy in sterile or early necrosis increases mortality; the surgeon's main contribution in this phase is restraint.",
+    "When a patient with necrosis deteriorates, ask three questions in order: is it infection, is it bleeding, is it compartment syndrome?"
+  ],
+  "calcs": ["bisap", "glasgow_imrie", "ranson", "apache2", "sofa"]
+}
