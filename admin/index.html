@@ -1123,7 +1123,8 @@
 
   // ---- Help & Support (one live inbox: bugs, questions, feedback; functions/_support.js + _support_live.js) ----
   var bugFilter="open", DAY=86400000, bgOpenId=null, bgSeq=null, bgPollT=0, bgList=[], bgCur=null, bgCtl=null, bgCtlFast=false, bgFails=0, bgTypUntil=0, bgTypSent=0, bgTypT=0;
-  var KINDL={bug:"Bug",help:"Question",feedback:"Feedback"};
+  var KINDL={bug:"Bug",help:"Question",feedback:"Feedback",image:"Image"};
+  var IMGR={correction:"Something in it is wrong",copyright:"Copyright concern",better:"A better image offered"};
   function kindOf(t){ return KINDL[t&&t.kind]?t.kind:"help"; }
   function bugBadge(n){ var b=$("navBugs"); if(b){ b.textContent=n; b.classList.toggle("on",n>0); } }
   function bugDue(t,now){ now=now||Date.now();
@@ -1196,8 +1197,19 @@
       var ae=document.activeElement, foc=keep&&ae&&ae.id==="bgTx", selA=foc?ae.selectionStart:0, selB=foc?ae.selectionEnd:0;
       if(!bgCur||bgCur.id!==id) bgTypUntil=0;
       bgCur=t;
-      var b=t.bug||{}, e=b.element||{}, open=t.status!=="resolved", isBug=t.kind==="bug";
+      var b=t.bug||{}, e=b.element||{}, open=t.status!=="resolved", isBug=t.kind==="bug", isImg=t.kind==="image", im=t.image||{};
       var thread=bgThreadHtml(t);
+      // Image report (image-zoom.js): the image as the app shows it, and the better image the doctor attached, side by side.
+      var imgInfo=!isImg?'':
+        '<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;margin-bottom:6px">'+
+          '<div style="width:220px"><span class="hint">Reported image</span><br>'+(im.src?'<a href="'+esc(im.src)+'" target="_blank" rel="noopener"><img src="'+esc(im.src)+'" alt="Reported image" style="width:220px;border-radius:12px;border:1px solid var(--line);background:#fff"></a>':'<span class="hint">No address sent.</span>')+'</div>'+
+          '<div style="width:220px"><span class="hint">Image offered</span><br>'+(t.hasShot?'<a id="bgShotA" target="_blank" rel="noopener"><img id="bgShot" alt="Image offered" style="width:220px;border-radius:12px;border:1px solid var(--line)"></a>':'<span class="hint">None attached.</span>')+'</div>'+
+          '<div style="flex:1;min-width:220px;font:600 13px/1.6 var(--f)">'+
+            '<div><span class="hint">Reason</span><br><b>'+esc(IMGR[im.reason]||im.reason||"")+'</b></div>'+
+            '<div style="margin-top:8px"><span class="hint">Image</span><br>'+esc(im.title||"untitled")+'</div>'+
+            '<div style="margin-top:8px"><span class="hint">Seen in</span><br>'+esc(im.where||"")+(im.route?'<br><code>'+esc(im.route)+'</code>':'')+'</div>'+
+            (im.src?'<div style="margin-top:8px"><span class="hint">Address</span><br><code style="word-break:break-all">'+esc(im.src)+'</code></div>':'')+
+          '</div></div>';
       var bugInfo=!isBug?'':
         '<div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;margin-bottom:6px">'+
           (t.hasShot&&open?'<a id="bgShotA" target="_blank" rel="noopener"><img id="bgShot" alt="Screenshot" style="width:220px;border-radius:12px;border:1px solid var(--line)"></a>':'<div class="hint" style="width:220px">'+(t.hasShot?"Screenshot deleted when fixed.":"No screenshot sent.")+'</div>')+
@@ -1210,11 +1222,11 @@
         '<button class="ghost" id="bgBack" style="padding:6px 10px;margin-bottom:10px">← All conversations</button>'+
         '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">'+kindChip(t)+'<b style="font-size:16px;flex:1">'+esc(String(t.subject||"").replace(/^Bug:\s*/,""))+'</b>'+bugPill(t)+'</div>'+
         '<div class="hint" style="margin:4px 0 12px">'+esc(t.id)+' · '+esc(t.email||t.owner||"")+' · '+esc(((t.platform||"")+" "+(t.build||"")).trim())+' · started '+esc(new Date(t.createdAt).toLocaleString())+'</div>'+
-        bugInfo+
+        bugInfo+imgInfo+
         '<div id="bgThread" style="margin-top:10px;max-height:52vh;overflow-y:auto;padding:4px;background:var(--bg);border-radius:12px">'+thread+'</div>'+
         '<textarea id="bgTx" placeholder="Reply to the doctor. It reaches their open chat within seconds, and a push if the app is closed. Ctrl/Cmd+Enter sends." style="min-height:80px;margin-top:8px"></textarea>'+
         '<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">'+
-          (open?(t.status!=="in_progress"?'<button class="ghost" id="bgWorkBtn">Working on it</button>':'')+'<button class="primary" id="bgReplyBtn">Reply</button><button class="approve" id="bgFixBtn" style="border:0;border-radius:10px;padding:9px 14px;font:800 13px var(--f);cursor:pointer">'+(isBug?"Mark fixed &amp; notify":"Mark solved &amp; notify")+'</button>':'<button class="primary" id="bgReplyBtn">Reply</button><button class="ghost" id="bgReopenBtn">Reopen</button>')+
+          (open?(t.status!=="in_progress"?'<button class="ghost" id="bgWorkBtn">Working on it</button>':'')+'<button class="primary" id="bgReplyBtn">Reply</button>'+(isImg?'<button class="approve" id="bgApproveBtn" style="border:0;border-radius:10px;padding:9px 14px;font:800 13px var(--f);cursor:pointer">Approve &amp; notify</button><button class="ghost" id="bgDeclineBtn">Decline &amp; notify</button>':'<button class="approve" id="bgFixBtn" style="border:0;border-radius:10px;padding:9px 14px;font:800 13px var(--f);cursor:pointer">'+(isBug?"Mark fixed &amp; notify":"Mark solved &amp; notify")+'</button>'):'<button class="primary" id="bgReplyBtn">Reply</button><button class="ghost" id="bgReopenBtn">Reopen</button>')+
           (isBug?'<button class="ghost" id="bgCopyBtn">Copy for GitHub</button>':'')+'</div><div class="msg" id="bgTMsg"></div>';
       var th=$("bgThread"); if(th) th.scrollTop=th.scrollHeight;
       if(draft) $("bgTx").value=draft;
@@ -1233,6 +1245,9 @@
       $("bgTx").addEventListener("keydown",function(ev){ if(ev.key==="Enter"&&(ev.metaKey||ev.ctrlKey)){ ev.preventDefault(); $("bgReplyBtn").click(); } });
       var wb=$("bgWorkBtn"); if(wb) wb.onclick=function(){ var v=($("bgTx").value||"").trim(); send(v?{text:v,status:"in_progress"}:{status:"in_progress"},"Marked as working on it."); };
       var fb=$("bgFixBtn"); if(fb) fb.onclick=function(){ var v=($("bgTx").value||"").trim()||(isBug?"Fixed. It will reach your phone with the next app update. Thank you for reporting it.":"Glad we could help. Reply here any time if you need anything else."); send({text:v,resolve:true},(isBug?"Marked fixed.":"Marked solved.")+" The doctor has been notified."); };
+      // Approving records the decision and tells the doctor; the image itself is changed in the content (kb/ or the module's media) by hand.
+      var ab=$("bgApproveBtn"); if(ab) ab.onclick=function(){ var v=($("bgTx").value||"").trim()||"Approved, thank you. The image will be corrected in the next content update."; send({text:v,resolve:true},"Approved. The doctor has been notified."); };
+      var db=$("bgDeclineBtn"); if(db) db.onclick=function(){ var v=($("bgTx").value||"").trim()||"Thank you. We checked this image and are keeping it as it is."; send({text:v,resolve:true},"Declined. The doctor has been notified."); };
       var rb=$("bgReopenBtn"); if(rb) rb.onclick=function(){ send({status:"open"},"Reopened."); };
       var cb=$("bgCopyBtn"); if(cb) cb.onclick=function(){ var txt=bugSummary(t); try{ navigator.clipboard.writeText(txt).then(function(){ say("bgTMsg","ok","Copied."); },function(){ $("bgTx").value=txt; say("bgTMsg","","Copy blocked; the summary is in the box."); }); }catch(ex){ $("bgTx").value=txt; } };
     }).catch(function(){ say("bgMsg","err","Failed."); });

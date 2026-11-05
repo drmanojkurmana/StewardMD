@@ -5,6 +5,9 @@
  *   POST {action:"bug", text, bug:{route,element,screen,ua}, shot?, platform?, build?}
  *                                                              -> bug report (shake to report): a ticket
  *                                                                 of kind "bug", fix promised in 24 h
+ *   POST {action:"image", image:{src,title,where,route,reason}, text?, shot?}
+ *                                                              -> report on one image (correction, copyright, a better
+ *                                                                 image offered as shot); ticket kind "image"
  *   POST {action:"seen", id}                                   -> clear the doctor's unread badge
  *   GET                                                        -> the doctor's own tickets (full threads)
  *   GET ?shot=<id>                                             -> the screenshot of the doctor's OWN bug
@@ -13,7 +16,7 @@
  *                                                                 the chat's fast path; see _support_live.js)
  * Requires a signed-in doctor (so the owner's replies route back in-app). Admin side = /api/ai/admin/support*. */
 import { usageKv, identify } from "../_usage.js";
-import { createTicket, addMessage, getTicket, listMine, markSeen, shotKey, shotResponse, SHOT_MAX, SHOT_TTL } from "../_support.js";
+import { createTicket, addMessage, getTicket, listMine, markSeen, shotKey, shotResponse, SHOT_MAX, SHOT_TTL, cleanImageMeta, IMAGE_REASONS } from "../_support.js";
 import { logEvent, eventsSince, headSeq, waitEvents, recentMsgs, mergeMsgs } from "../_support_live.js";
 
 const json = (o, s) => new Response(JSON.stringify(o), { status: s || 200, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
@@ -22,6 +25,7 @@ function rands() { const a = new Uint32Array(2); crypto.getRandomValues(a); retu
 
 export const BUGS_PER_DAY = 20;   // per account: a stuck shake detector must not flood the owner's queue
 export const NEW_PER_DAY = 20;    // new questions/feedback per account per day (replies are not capped)
+export const IMAGE_REPORTS_PER_DAY = 30;   // image reports per account per day
 
 // KV lags across edge locations by up to 60 s; messages newer than this are folded in from D1.
 export const MERGE_WINDOW_MS = 10 * 60 * 1000;
@@ -85,6 +89,27 @@ export async function onRequestPost(context) {
     if (shot) { try { await store.put(shotKey(t.id), shot, { expirationTtl: SHOT_TTL }); } catch (e) {} }
     try { await store.put(capK, String(n + 1), { expirationTtl: 2 * 86400 }); } catch (e) {}
     await live(env, context, { ticket: t.id, owner: who.id, sender: "user", kind: "new:bug", text, ts: now });
+    return json({ ok: true, ticket: t });
+  }
+  // An image report (image-zoom.js): the image's address, where it was seen, the reason, a note, and optionally a better
+  // image the doctor offers (kept like a bug screenshot: 30 days at most, the owner sees it in the console).
+  if (b.action === "image") {
+    const meta = cleanImageMeta(b.image);
+    if (!meta.src) return json({ error: "no-image" }, 400);
+    const day = new Date(now).toISOString().slice(0, 10), capK = "support:imgcap:" + who.id + ":" + day;
+    let n = 0; try { n = +(await store.get(capK)) || 0; } catch (e) {}
+    if (n >= IMAGE_REPORTS_PER_DAY) return json({ error: "too-many" }, 429);
+    const shot = cleanShot(b.shot);
+    const note = String(b.text || "").trim();
+    const text = IMAGE_REASONS[meta.reason] + ": " + (meta.title || "an image") + (meta.where ? " (" + meta.where + ")" : "") + (note ? "\n" + note : "");
+    let t;
+    try {
+      t = await createTicket(store, who, { kind: "image", subject: "Image: " + IMAGE_REASONS[meta.reason] + " - " + (meta.title || "untitled").slice(0, 80), text,
+        platform: b.platform, build: b.build, image: meta, hasShot: !!shot }, rands(), now);
+    } catch (e) { return json({ error: "empty" }, 400); }
+    if (shot) { try { await store.put(shotKey(t.id), shot, { expirationTtl: SHOT_TTL }); } catch (e) {} }
+    try { await store.put(capK, String(n + 1), { expirationTtl: 2 * 86400 }); } catch (e) {}
+    await live(env, context, { ticket: t.id, owner: who.id, sender: "user", kind: "new:image", text, ts: now });
     return json({ ok: true, ticket: t });
   }
   // create: a question ("help") or feedback / an idea

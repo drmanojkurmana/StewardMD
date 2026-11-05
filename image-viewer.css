@@ -1,0 +1,65 @@
+/* image-viewer.css: the one full-screen image viewer (prep-viewer.js), used by PrepNucleus and, through image-zoom.js,
+   by every other image in the app. Moved here from prep.css 2026-11-05.
+   Always dark (a light-box reads images best on near black, in both themes). It owns every touch on it (touch-action:
+   none; the script keeps the page behind still). Controls are 44 px, inside the safe areas; the bottom bar holds zoom
+   out, the zoom level (tap to fit) and zoom in, for anyone who cannot pinch. */
+.pv { position: fixed; inset: 0; z-index: 2147483000; display: flex; flex-direction: column; color: #f5f3ee; touch-action: none; overscroll-behavior: contain;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+  font-family: var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); }
+.pv:focus { outline: none; }
+.pv-scrim { position: absolute; inset: 0; background: #0e0e1c; }
+.pv-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; touch-action: none; cursor: zoom-in;
+  padding: calc(64px + env(safe-area-inset-top, 0px)) calc(8px + env(safe-area-inset-right, 0px)) calc(88px + env(safe-area-inset-bottom, 0px)) calc(8px + env(safe-area-inset-left, 0px)); }
+.pv.pv-zoomed .pv-stage { cursor: grab; }
+.pv-img { display: block; flex: 0 0 auto; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 6px; background: #fff;
+  transform-origin: 50% 50%; will-change: transform; -webkit-user-drag: none; pointer-events: none; }
+.pv-top, .pv-bot { position: absolute; left: 0; right: 0; z-index: 1; display: flex; align-items: center; gap: 12px; pointer-events: none; transition: opacity 180ms ease-out; }
+.pv-top { top: 0; padding: calc(8px + env(safe-area-inset-top, 0px)) calc(12px + env(safe-area-inset-right, 0px)) 8px calc(16px + env(safe-area-inset-left, 0px));
+  background: linear-gradient(180deg, rgba(14, 14, 28, .85), rgba(14, 14, 28, 0)); }
+.pv-bot { bottom: 0; flex-direction: column; gap: 6px; padding: 8px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(0deg, rgba(14, 14, 28, .85), rgba(14, 14, 28, 0)); }
+.pv-cap { flex: 1 1 auto; min-width: 0; margin: 0; font-size: 13px; line-height: 1.4; color: #c3c8d8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pv-b { pointer-events: auto; flex: 0 0 auto; min-width: 44px; height: 44px; padding: 0 10px; border: 0; border-radius: 22px; background: rgba(255, 255, 255, .14); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; font: inherit; font-size: 14px; font-weight: 650; font-variant-numeric: tabular-nums; cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 120ms cubic-bezier(.23, 1, .32, 1), background-color 120ms ease; }
+.pv-b:active { transform: scale(.92); background: rgba(255, 255, 255, .24); }
+.pv-b:focus-visible { outline: 2px solid #efc07b; outline-offset: 2px; }
+.pv-x { width: 44px; padding: 0; }
+.pv-zb { display: inline-flex; gap: 8px; pointer-events: auto; }
+.pv-pct { min-width: 72px; }
+.pv-hint { margin: 0; font-size: 12px; color: #a9b1c7; text-align: center; }
+.pv.pv-zoomed .pv-hint { opacity: 0; }
+@media (hover: hover) and (pointer: fine) { .pv-b:hover { background: rgba(255, 255, 255, .22); } }
+@media (prefers-reduced-motion: reduce) { .pv-b, .pv-top, .pv-bot { transition: none; } }
+.pv-rep { padding: 0 14px; font-size: 13px; }
+
+/* Report this image (image-zoom.js). A card above everything, light and dark, 44 px targets. */
+.izr { position: fixed; inset: 0; z-index: 2147483001; display: flex; align-items: flex-end; justify-content: center; font-family: var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); }
+.izr-scrim { position: absolute; inset: 0; background: rgba(10, 12, 20, .45); }
+.izr-card { position: relative; box-sizing: border-box; width: min(560px, 100%); max-height: 92vh; overflow-y: auto; margin: 0; padding: 18px max(18px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(18px, env(safe-area-inset-left, 0px));
+  border-radius: 20px 20px 0 0; background: #fff; color: #16161a; box-shadow: 0 -8px 30px rgba(10, 12, 20, .2); }
+@media (min-width: 700px) { .izr { align-items: center; } .izr-card { border-radius: 20px; padding-bottom: 18px; } }
+.izr-card h2 { margin: 0; font-size: 18px; font-weight: 700; }
+.izr-sub { margin: 4px 0 0; font-size: 14px; color: #4a5160; }
+.izr-reasons { margin: 14px 0 0; padding: 0; border: 0; }
+.izr-reasons legend { padding: 0; margin-bottom: 6px; font-size: 13px; font-weight: 650; color: #4a5160; }
+.izr-r { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; margin-top: 6px; border: 1px solid #dfe3ea; border-radius: 12px; font-size: 15px; cursor: pointer; }
+.izr-r:has(input:checked) { border-color: #0f766e; background: #f0faf8; }
+.izr-r input { width: 18px; height: 18px; margin: 0; accent-color: #0f766e; }
+.izr-l { display: block; margin: 14px 0 6px; font-size: 13px; font-weight: 650; color: #4a5160; }
+.izr-card textarea { box-sizing: border-box; width: 100%; min-height: 76px; padding: 10px 12px; border: 1px solid #dfe3ea; border-radius: 12px; font: inherit; font-size: 16px; color: inherit; background: #fff; resize: vertical; }
+.izr-file { display: flex; align-items: center; min-height: 44px; margin-top: 10px; padding: 0 12px; border: 1px dashed #b8c0cc; border-radius: 12px; font-size: 14px; font-weight: 600; color: #0f5f57; cursor: pointer; }
+.izr-file input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.izr-fname { margin: 6px 2px 0; font-size: 13px; color: #4a5160; }
+.izr-note { margin: 10px 2px 0; font-size: 12px; line-height: 1.45; color: #5b6472; }
+.izr-msg { min-height: 18px; margin: 8px 2px 0; font-size: 13px; color: #0f5f57; }
+.izr-acts { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+.izr-b { min-height: 44px; padding: 0 16px; border: 1px solid #c9cfd8; border-radius: 12px; background: transparent; color: inherit; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+.izr-send { border-color: #0f766e; background: #0f766e; color: #fff; }
+.izr-send:disabled { opacity: .55; }
+.izr :focus-visible { outline: 2px solid #0f766e; outline-offset: 2px; }
+body.dark .izr-card { background: #171b22; color: #eef1f5; }
+body.dark :is(.izr-sub, .izr-reasons legend, .izr-l, .izr-fname, .izr-note) { color: #aab3c0; }
+body.dark .izr-r, body.dark .izr-card textarea { border-color: #2e3542; background: #10141a; }
+body.dark .izr-r:has(input:checked) { background: #0f2b28; border-color: #2dd4bf; }
+body.dark .izr-file { color: #7fd1c5; border-color: #3a4352; }
+body.dark .izr-msg { color: #7fd1c5; }

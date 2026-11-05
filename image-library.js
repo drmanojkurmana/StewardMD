@@ -205,7 +205,8 @@
     v.innerHTML = '<div class="igl-vbar"><button type="button" class="igl-vclose" data-igl="vclose" aria-label="Close viewer">‹</button>' +
       '<span class="igl-vpos">' + (S.vi + 1) + " of " + S.list.length.toLocaleString() + '</span>' +
       '<button type="button" class="igl-vnav" data-igl="vprev" aria-label="Previous image">‹ Prev</button>' +
-      '<button type="button" class="igl-vnav" data-igl="vnext" aria-label="Next image">Next ›</button></div>' +
+      '<button type="button" class="igl-vnav" data-igl="vnext" aria-label="Next image">Next ›</button>' +
+      (G.SMD_IMGZOOM ? '<button type="button" class="igl-vnav" data-igl="vreport" aria-label="Report this image">Report</button>' : "") + '</div>' +
       '<div class="igl-vstage"><img class="igl-vimg" src="' + esc(imgUrl(e.s)) + '" alt="' + esc(e.a || e.t) + '" draggable="false"></div>' +
       '<div class="igl-vmeta"><h2>' + esc(e.t) + '</h2><p class="igl-vcap">' + esc(e.c) + "</p>" +
       '<p class="igl-vfrom">From ' + esc(e.f) + (e.rn && e.rn !== e.t ? ": " + esc(e.rn) : "") + " · " + esc(e.k) + "</p>" +
@@ -264,6 +265,8 @@
     if (a === "vprev") { stepViewer(-1); return; }
     if (a === "vnext") { stepViewer(1); return; }
     if (a === "vlink") { openRef(S.list[S.vi]); return; }
+    // Report (image-zoom.js): a correction, a copyright concern or a better image, checked by an admin.
+    if (a === "vreport") { var re = S.list[S.vi]; if (re && G.SMD_IMGZOOM) G.SMD_IMGZOOM.report({ src: /^https:/.test(re.s) ? re.s : String(re.s || ""), title: re.t, where: "Image Library: " + (S.name || "") }); return; }
   }
   function onKey(ev) { if (ev.key === "Escape") back(); }
 
