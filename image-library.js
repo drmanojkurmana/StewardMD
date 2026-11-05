@@ -149,8 +149,8 @@
     r.querySelector(".igl-body").innerHTML =
       (shown.length ? '<div class="igl-grid">' + shown.map(function (e, i) {
         return '<button type="button" class="igl-card" data-igl="open" data-i="' + i + '">' +
-          '<span class="igl-thumb"><img src="' + esc(imgUrl(e.s)) +
-          '" alt="' + esc(e.a || e.t) + '" loading="lazy" decoding="async"></span>' +
+          '<span class="igl-thumb smd-wm-host"><img src="' + esc(imgUrl(e.s)) +
+          '" alt="' + esc(e.a || e.t) + '" loading="lazy" decoding="async">' + (G.SMD_WM ? G.SMD_WM.html(e.s) : "") + '</span>' +
           '<span class="igl-cardt">' + esc(e.t) + '</span><span class="igl-cardf">' + esc(e.f) + " · " + esc(e.k) + "</span></button>";
       }).join("") + "</div>" : '<p class="igl-empty">No images match. Try a shorter search or clear a filter.</p>') +
       (list.length > S.shown ? '<button type="button" class="igl-more" data-igl="more">Show more (' +
@@ -216,6 +216,7 @@
   }
   function bindViewerTouch(v) {
     var stage = v.querySelector(".igl-vstage"), img = v.querySelector(".igl-vimg");
+    if (G.SMD_WM) G.SMD_WM.follow(img);   // the watermark rides the image's zoom
     var x0 = null, y0 = null, d0 = 0, moved = false, lastTap = 0;
     function dist(t) { return Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY); }
     stage.addEventListener("touchstart", function (ev) {

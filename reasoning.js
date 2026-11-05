@@ -4429,7 +4429,7 @@
     var dsrc = String(d.src || "");
     var media = dsrc.charAt(0) === "#"
       ? '<svg class="kbr-media" role="img" aria-label="' + esc(d.title) + '"><use href="' + esc(dsrc) + '"></use></svg>'
-      : '<img class="kbr-media" src="' + esc(dsrc) + '" alt="' + esc(d.title) + '" loading="lazy">';
+      : '<span class="kbr-media-host smd-wm-host"><img class="kbr-media" src="' + esc(dsrc) + '" alt="' + esc(d.title) + '" loading="lazy">' + (window.SMD_WM ? window.SMD_WM.html(dsrc) : "") + '</span>';
     var ann = (d.annotations && d.annotations.length)
       ? '<dl class="kbr-ann">' + d.annotations.map(function (a) { return '<dt>' + esc(a.label) + '</dt><dd>' + esc(a.description) + '</dd>'; }).join("") + '</dl>' : '';
     return '<figure class="kbr-fig"><figcaption class="kbr-cap">' + esc(d.title) + ' <span class="kbr-kind">' + esc(KBR_DTYPES[d.type] || d.type || "") + '</span></figcaption>' +

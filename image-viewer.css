@@ -63,3 +63,20 @@ body.dark .izr-r, body.dark .izr-card textarea { border-color: #2e3542; backgrou
 body.dark .izr-r:has(input:checked) { background: #0f2b28; border-color: #2dd4bf; }
 body.dark .izr-file { color: #7fd1c5; border-color: #3a4352; }
 body.dark .izr-msg { color: #7fd1c5; }
+
+/* StewardMD watermark (image-watermark.js, owner 2026-11-05: variant E with three marks). An overlay on the image's
+   box: three faint diagonal names and a small corner badge with the logo. Sized from the image (container units), so
+   a thumbnail and a full-screen image carry the same share. Never takes a tap. */
+.smd-wm-host { position: relative; }
+.smd-wm { position: absolute; inset: 0; z-index: 1; pointer-events: none; overflow: hidden; container-type: size; border-radius: inherit; -webkit-user-select: none; user-select: none; }
+.smd-wm--follow { inset: auto; transform-origin: 50% 50%; will-change: transform; }
+.smd-wm i { position: absolute; font: 700 normal 7cqw/1 -apple-system, "Segoe UI", Roboto, sans-serif; letter-spacing: .03em; white-space: nowrap;
+  color: rgba(120, 128, 132, .20); text-shadow: 0 0 1px rgba(255, 255, 255, .18); transform: translate(-50%, -50%) rotate(-24deg); }
+.smd-wm i:nth-child(1) { left: 24%; top: 22%; }
+.smd-wm i:nth-child(2) { left: 50%; top: 50%; }
+.smd-wm i:nth-child(3) { left: 76%; top: 78%; }
+.smd-wm-c { position: absolute; right: 2.2cqw; bottom: 2.2cqw; display: flex; align-items: center; gap: .35em; height: clamp(12px, 4.4cqw, 24px); padding: 0 .55em 0 .3em;
+  border-radius: 999px; background: rgba(255, 255, 255, .86); box-shadow: 0 1px 3px rgba(0, 0, 0, .18); color: #0f5f49; font: 700 clamp(7px, 2.3cqw, 12px)/1 -apple-system, "Segoe UI", Roboto, sans-serif; white-space: nowrap; }
+.smd-wm-c::before { content: ""; height: 78%; aspect-ratio: 141 / 160; background: url("/logo.png") center / contain no-repeat; }
+@media print { .smd-wm { display: block; } }
+.kbp-diagram-host, .kbr-media-host { display: block; border-radius: 8px; }

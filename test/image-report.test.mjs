@@ -84,3 +84,21 @@ test("the viewer has the Report button, the admin console approves or declines, 
   assert.match(html, /<link rel="stylesheet" href="\/image-viewer\.css\?v=[^"]+">/);
   assert.match(readFileSync(new URL("../image-viewer.css", import.meta.url), "utf8"), /\.pv-stage/);
 });
+
+test("watermark: three diagonal marks and a corner badge on our images, the corner badge only on Commons images, off by flag", () => {
+  const require = createRequire(import.meta.url);
+  const W = require("../image-watermark.js");
+  const ours = W.html("/api/prep/bank/v1/kb/media/x.webp", true);
+  assert.equal((ours.match(/<i>StewardMD<\/i>/g) || []).length, 3, "exactly three diagonal marks (owner: 'just 3 is enough')");
+  assert.match(ours, /class="smd-wm-c"/);
+  assert.match(ours, /aria-hidden="true"/);
+  const ext = W.html("https://upload.wikimedia.org/wikipedia/commons/a/b/c.jpg", true);
+  assert.equal((ext.match(/<i>/g) || []).length, 0, "no StewardMD marks across an image that is not ours");
+  assert.match(ext, /smd-wm--ext/);
+  assert.equal(W._external("https://thumb.wikimedia.org/x.png"), true);
+  assert.equal(W._external("/logo.png"), false);
+  const css = readFileSync(new URL("../image-viewer.css", import.meta.url), "utf8");
+  assert.match(css, /\.smd-wm \{[^}]*pointer-events: none/, "the watermark never takes a tap");
+  const html = readFileSync(new URL("../index.html", import.meta.url), "utf8");
+  assert.ok(html.indexOf("/image-watermark.js") > 0 && html.indexOf("/image-watermark.js") < html.indexOf("/image-zoom.js"), "loaded with the app");
+});

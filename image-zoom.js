@@ -72,7 +72,7 @@
     if (G.PREP_VIEWER && G.PREP_VIEWER.open) return Promise.resolve(G.PREP_VIEWER);
     if (viewerP) return viewerP;
     viewerP = new Promise(function (res, rej) {
-      var s = D.createElement("script"); s.src = "/prep-viewer.js?v=pv-report1"; s.defer = true;
+      var s = D.createElement("script"); s.src = "/prep-viewer.js?v=pv-wm1"; s.defer = true;
       s.onload = function () { G.PREP_VIEWER ? res(G.PREP_VIEWER) : rej(new Error("no viewer")); };
       s.onerror = function () { viewerP = null; rej(new Error("viewer did not load")); };
       D.head.appendChild(s);

@@ -802,3 +802,5 @@ body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back { color: #b9d0ff
 #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum:focus-visible { outline: 2px solid var(--reader-accent, #5954b2); outline-offset: 2px; }
 body.dark #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { color: #f4f5f7; }
 @media (prefers-reduced-motion: reduce) { #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum .dx-chev { transition: none; } }
+/* the figure image's own box, so the watermark overlay (image-viewer.css .smd-wm) covers the picture and its rounded corners */
+#dxOverlay #dxMgmt.dx-reader .kbr-media-host { display: block; border-radius: 12px; }

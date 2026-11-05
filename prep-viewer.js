@@ -70,6 +70,7 @@
     V = { el: el, stage: el.querySelector(".pv-stage"), img: el.querySelector(".pv-img"), pct: el.querySelector(".pv-pct span"), s: 1, t: { x: 0, y: 0 }, dy: 0, opts: o, from: o.from || D.activeElement, pts: {}, g: null, tap: null };
     if (V.img) { var pvImg = V.img; pvImg.addEventListener("error", function () { if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.resignImg) G.PREP_BANK_CLIENT.resignImg(pvImg); }); }
     bind(V);
+    if (G.SMD_WM && V.img) G.SMD_WM.follow(V.img);   // StewardMD watermark (image-watermark.js), zooms with the image
     // Arrive: a fade with a small scale-up (200 ms, strong ease-out); reduced motion fades only.
     try {
       el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: reduced() ? 120 : 180, easing: "cubic-bezier(.23, 1, .32, 1)" });

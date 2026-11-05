@@ -35,10 +35,22 @@ try {
   await p.waitForSelector("#kbr-patho .kbr-fig img", { timeout: 20000 });
   const img = await p.$("#kbr-patho .kbr-fig img");
   await img.scrollIntoViewIfNeeded(); await p.waitForTimeout(400);
+  // StewardMD watermark (variant E, three marks): on the article figure, over the image's own box
+  const fw = await p.evaluate(() => { const h = document.querySelector("#kbr-patho .kbr-fig .smd-wm-host"), i = h && h.querySelector("img"), w = h && h.querySelector(".smd-wm");
+    if (!w) return null; const a = i.getBoundingClientRect(), b = w.getBoundingClientRect(); return { marks: w.querySelectorAll("i").length, corner: !!w.querySelector(".smd-wm-c"), dx: Math.abs(a.left - b.left) + Math.abs(a.right - b.right), dy: Math.abs(a.top - b.top) + Math.abs(a.bottom - b.bottom), pe: getComputedStyle(w).pointerEvents }; });
+  ok(fw && fw.marks === 3 && fw.corner && fw.dx < 3 && fw.dy < 3 && fw.pe === "none", "article figure carries the watermark (3 marks + corner) on its own box " + JSON.stringify(fw));
+  if (SHOTS) { await p.waitForTimeout(300); await p.screenshot({ path: SHOTS + "/figure-wm.png" }); }
   await img.click(); await p.waitForSelector(".pv", { timeout: 8000 }).catch(() => {});
   ok(!!(await p.$(".pv")), "tapping an article image opens the full-screen viewer");
   ok(!!(await p.$('.pv [data-pv="report"]')), "the viewer has a Report button");
   await p.waitForTimeout(500);
+  const vw = await p.evaluate(() => { const i = document.querySelector(".pv .pv-img"), w = document.querySelector(".pv .smd-wm--follow"); if (!i || !w) return null;
+    const a = i.getBoundingClientRect(), b = w.getBoundingClientRect(); return { d: Math.round(Math.abs(a.left - b.left) + Math.abs(a.top - b.top) + Math.abs(a.width - b.width)), marks: w.querySelectorAll("i").length }; });
+  ok(vw && vw.marks === 3 && vw.d < 4, "the viewer image carries the watermark on the picture " + JSON.stringify(vw));
+  await p.click('.pv [data-pv="in"]'); await p.waitForTimeout(450);
+  const zw = await p.evaluate(() => { const i = document.querySelector(".pv .pv-img"), w = document.querySelector(".pv .smd-wm--follow"); const a = i.getBoundingClientRect(), b = w.getBoundingClientRect(); return Math.round(Math.abs(a.width - b.width) + Math.abs(a.left - b.left)); });
+  ok(zw < 4, "zooming in, the watermark zooms with the image (off by " + zw + " px)");
+  await p.click('.pv [data-pv="fit"]'); await p.waitForTimeout(400);
   if (SHOTS) await p.screenshot({ path: SHOTS + "/viewer.png" });
   await p.click('.pv [data-pv="report"]'); await p.waitForSelector(".izr", { timeout: 4000 }).catch(() => {}); await p.waitForTimeout(500);
   ok(!(await p.$(".pv")) && !!(await p.$(".izr")), "Report closes the viewer and opens the report form");
@@ -62,6 +74,10 @@ try {
   // Image Library viewer: Report reaches the same form.
   await p.evaluate(() => { document.querySelector(".izr")?.remove(); window.SMD_IMGLIB.open({ system: "eye" }); });
   await p.waitForSelector(".igl-card", { timeout: 20000 });
+  const tw = await p.evaluate(() => [...document.querySelectorAll(".igl-thumb")].slice(0, 40).map((t) => { const im = t.querySelector("img"), w = t.querySelector(".smd-wm"); return { ext: /wikimedia/.test(im.src), w: !!w, marks: w ? w.querySelectorAll("i").length : 0 }; }));
+  ok(tw.length && tw.every((t) => t.w), "every Image Library thumbnail carries the watermark");
+  ok(tw.every((t) => (t.ext ? t.marks === 0 : t.marks === 3)), "Commons images get the corner badge only, StewardMD images the three marks");
+  if (SHOTS) await p.screenshot({ path: SHOTS + "/library-wm.png" });
   await p.click(".igl-card"); await p.waitForSelector('[data-igl="vreport"]', { timeout: 5000 }).catch(() => {});
   ok(!!(await p.$('[data-igl="vreport"]')), "the Image Library viewer has Report");
   const barOk = await p.evaluate(() => { const bar = document.querySelector(".igl-vbar"); return bar && bar.scrollWidth <= bar.clientWidth + 1; });
