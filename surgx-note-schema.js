@@ -301,6 +301,18 @@
       }
     },
     /* ── specialty templates (generated from the specialty content authoring, 2026-11-04) ── */
+    "acdf": {
+      base: "operative", title: "Anterior cervical discectomy and fusion",
+      prefill: {"procedure": "Anterior cervical discectomy and fusion"},
+      extra: {
+        "Operative detail": [
+          f("levelImageConfirmed", "Level confirmed on image (levels, side of approach)", {"type": "text", "required": true, "aiFillable": false, "ph": "C5-6, left-sided approach, needle image saved"}),
+          f("decompressionDetail", "Decompression: posterior osteophytes, PLL, foramina", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2}),
+          f("monitoringEvents", "Monitoring events and the response", {"type": "text", "required": false, "aiFillable": true, "ph": "None, or time, change and action"}),
+          f("neckAirwayPlan", "Neck haematoma and airway plan handed over", {"type": "text", "required": true, "aiFillable": false, "ph": "Head up, clip/suture remover at bedside, who to call"})
+        ]
+      }
+    },
     "acl-reconstruction": {
       base: "operative", title: "ACL reconstruction",
       prefill: {"procedure": "Arthroscopic ACL reconstruction with hamstring autograft"},
@@ -382,6 +394,34 @@
           f("guidewireRemoved", "Guidewire removed and seen intact", {"type": "text", "aiFillable": false, "ph": "Yes / not applicable"}),
           f("initialOutput", "Initial drainage (character and volume)", {"type": "text", "aiFillable": false}),
           f("positionConfirmed", "Position confirmed", {"type": "text", "aiFillable": false, "ph": "Swinging, bubbling, chest radiograph"})
+        ]
+      }
+    },
+    "craniotomy-supratentorial-tumour": {
+      base: "operative", title: "Craniotomy for supratentorial tumour",
+      prefill: {"procedure": "Craniotomy for supratentorial tumour"},
+      extra: {
+        "Operative detail": [
+          f("navigationAccuracy", "Navigation registration and accuracy check", {"type": "text", "required": true, "aiFillable": false, "ph": "Method; error on landmarks; re-checked after dural opening"}),
+          f("resectionAdjuncts", "Adjuncts used (5-ALA, ultrasound, monitoring, mapping)", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2}),
+          f("monitoringEvents", "Monitoring or mapping events and the response", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2, "ph": "None, or time, change and action"}),
+          f("extentOfResection", "Surgeon's impression of extent of resection", {"type": "text", "required": true, "aiFillable": true, "ph": "Gross total / subtotal / debulking; reason resection stopped"}),
+          f("frozenSection", "Frozen section or smear result", {"type": "text", "required": false, "aiFillable": false, "ph": "Result as reported, or 'not sent'"}),
+          f("boneFlapDecision", "Bone flap replaced or left out", {"type": "text", "required": true, "aiFillable": false, "ph": "Replaced with plates / left out (brain swelling), stored where"})
+        ]
+      }
+    },
+    "decompressive-craniectomy": {
+      base: "operative", title: "Decompressive craniectomy",
+      prefill: {"procedure": "Decompressive craniectomy"},
+      extra: {
+        "Operative detail": [
+          f("preopGcsPupils", "Pre-op GCS (E V M) and pupils", {"type": "text", "required": true, "aiFillable": false, "ph": "E_ V_ M_, pupils L _ mm R _ mm, reactive?"}),
+          f("decisionBasis", "Indication and criteria met", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Malignant MCA infarction (time from onset, NIHSS, infarct extent) / refractory ICP after TBI"}),
+          f("craniectomySize", "Craniectomy dimensions and middle fossa decompression", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. 13 x 15 cm, flush to middle fossa floor"}),
+          f("duraplasty", "Dural opening and duraplasty", {"type": "text", "required": true, "aiFillable": true, "ph": "Stellate opening, onlay graft (material), not watertight"}),
+          f("boneFlapStorage", "Bone flap storage site and reference", {"type": "text", "required": true, "aiFillable": false, "ph": "Bone bank freezer ref ___ / abdominal pocket left / right"}),
+          f("icpMonitor", "ICP monitor inserted (type, site, opening value)", {"type": "text", "required": false, "aiFillable": false})
         ]
       }
     },
@@ -669,6 +709,19 @@
         ]
       }
     },
+    "lumbar-laminectomy-stenosis": {
+      base: "operative", title: "Lumbar laminectomy for canal stenosis",
+      prefill: {"procedure": "Lumbar laminectomy for canal stenosis"},
+      extra: {
+        "Operative detail": [
+          f("levelsDecompressed", "Levels decompressed and image confirmation", {"type": "text", "required": true, "aiFillable": false, "ph": "L3-4, L4-5; level image saved"}),
+          f("lateralRecessForamina", "Lateral recess and foraminal decompression (sides)", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2}),
+          f("facetParsRemaining", "Facets and pars remaining, stability judgement", {"type": "text", "required": true, "aiFillable": true, "ph": "Facets preserved more than half, pars intact"}),
+          f("durotomyRepair", "Durotomy and repair", {"type": "text", "required": true, "aiFillable": false, "ph": "None / site, size, repair, Valsalva tested"}),
+          f("mobilisationPlan", "Mobilisation instruction", {"type": "text", "required": false, "aiFillable": true, "ph": "Mobilise day 0 / bed rest per durotomy plan"})
+        ]
+      }
+    },
     "modified-radical-mastectomy": {
       base: "operative", title: "Modified radical mastectomy",
       prefill: {"procedure": "Modified radical mastectomy with level I and II axillary clearance"},
@@ -764,6 +817,19 @@
           f("woundTechnique", "Wound technique", {"type": "text", "required": true, "aiFillable": true, "ph": "Laid open / Karydakis / cleft lift / Limberg"}),
           f("flapTension", "Flap tension checked with tapes released", {"type": "text", "required": false, "aiFillable": false, "ph": "Yes, no tension"}),
           f("dressingPlan", "Dressing and hair control plan", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "District nurse dressings alternate days; hair removal advised"})
+        ]
+      }
+    },
+    "posterior-lumbar-fusion-tlif": {
+      base: "operative", title: "Posterior lumbar instrumented fusion (TLIF)",
+      prefill: {"procedure": "Posterior lumbar instrumented fusion (TLIF)"},
+      extra: {
+        "Operative detail": [
+          f("levelsTlifSide", "Fused levels and side of TLIF", {"type": "text", "required": true, "aiFillable": false, "ph": "L4-5, TLIF from the left"}),
+          f("screwChecks", "Pedicle screw checks (feeler, imaging, triggered EMG)", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "help": "Physical checks: the surgeon enters these."}),
+          f("cagePosition", "Cage position on final imaging", {"type": "text", "required": true, "aiFillable": true, "ph": "Recessed from posterior line, central / oblique"}),
+          f("monitoringEvents", "Monitoring events and the response", {"type": "text", "required": false, "aiFillable": true, "ph": "None, or time, change and action"}),
+          f("durotomyRepair", "Durotomy and repair", {"type": "text", "required": true, "aiFillable": false, "ph": "None / site, repair, Valsalva tested"})
         ]
       }
     },
@@ -1101,6 +1167,19 @@
           f("arteriesPreserved", "Testicular arteries identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Number; Doppler and vasodilator used: Yes / No"}),
           f("veinsLigated", "Internal and external spermatic veins ligated", {"type": "text", "required": true, "aiFillable": false, "ph": "Number internal / external; gubernacular veins: Yes / No"}),
           f("lymphaticsVas", "Lymphatics and vas with its vessels preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, detail"})
+        ]
+      }
+    },
+    "vp-shunt-insertion": {
+      base: "operative", title: "Ventriculoperitoneal shunt insertion",
+      prefill: {"procedure": "Ventriculoperitoneal shunt insertion"},
+      extra: {
+        "Operative detail": [
+          f("valveTypeSetting", "Valve make, type and setting", {"type": "text", "required": true, "aiFillable": false, "ph": "Fixed / programmable; setting; anti-siphon or gravitational device", "help": "Read from the packaging and the programmer, not from memory."}),
+          f("ventricularCatheter", "Ventricular entry point, passes and catheter length", {"type": "text", "required": true, "aiFillable": false, "ph": "Right Kocher point, 1 pass, 6 cm at outer table"}),
+          f("csfOpeningSamples", "CSF appearance, opening pressure and samples sent", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Clear / bloodstained / cloudy; cell count, protein, culture sent"}),
+          f("distalFlowPeritoneal", "Distal flow confirmed and peritoneal placement method", {"type": "text", "required": true, "aiFillable": false, "ph": "Spontaneous drip seen; open mini-laparotomy / laparoscopic"}),
+          f("infectionBundle", "Shunt infection bundle followed", {"type": "text", "required": false, "aiFillable": false, "ph": "First on list, glove change, impregnated catheters, limited traffic"})
         ]
       }
     },
