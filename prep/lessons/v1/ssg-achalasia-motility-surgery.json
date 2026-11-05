@@ -1,0 +1,230 @@
+{
+ "checks": {
+  "bank": null,
+  "dropped": 0,
+  "drugs": true,
+  "numbers": true,
+  "redone": 0,
+  "selfCheck": false,
+  "shape": true,
+  "verbatim": true
+ },
+ "gen": "hand",
+ "minutes": 8,
+ "module": "ssg-achalasia-motility-surgery",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22e Ch 83, benign oesophageal disorders",
+  "ACG Achalasia guideline 2023",
+  "Chicago Classification of motility disorders v4 2021"
+ ],
+ "src": [
+  "ss-c-achalasia-ground"
+ ],
+ "steps": [
+  {
+   "say": "Think of achalasia as a sphincter that has forgotten how to open, with food piling up above it. Patients report slow swallowing of solids and liquids together, regurgitation of bland undigested food, chest discomfort and weight loss. Barium swallow shows the dilated gullet tapering to the smooth bird beak narrowing at the cardia.",
+   "tx": "**Achalasia (failure** of the gullet to push food through) presents with progressive dysphagia (swallowing difficulty) to solids and liquids together, bland regurgitation, retrosternal cramping and weight loss. Barium swallow shows a dilated oesophagus tapering to the smooth bird beak narrowing at the gastro-oesophageal junction. Endoscopy excludes pseudoachalasia from cardia tumour, and high-resolution manometry confirms absent peristalsis with impaired sphincter relaxation before any definitive therapy is planned.",
+   "vis": {
+    "alt": "Barium swallow showing a dilated oesophagus tapering smoothly to a bird beak narrowing at the gastro-oesophageal junction, typical of achalasia.",
+    "caption": "Bird beak narrowing on barium swallow in achalasia. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/achalasia-fig1.webp"
+   }
+  },
+  {
+   "say": "Manometry is what stages the disease, by recording pressure waves along the gullet. Absent peristalsis with a non relaxing sphincter defines achalasia, and the pressurisation pattern then decides the subtype. Type 2 with whole gullet pressurisation responds best to myotomy, while spastic type 3 needs a longer cut.",
+   "tx": "High-resolution manometry **defines achalasia as absent** peristalsis (no squeezing waves) with impaired lower sphincter relaxation and raised integrated relaxation pressure. Chicago Classification version 4 (2021) splits disease into type I with no pressurisation, type II with panesophageal pressurisation (pressure along the whole gullet) and type III spastic achalasia. Chicago type II responds best to myotomy, while type III spastic disease needs extended myotomy tailored to the spastic segment.",
+   "vis": {
+    "cols": [
+     "Chicago type",
+     "Manometry pattern",
+     "Best myotomy"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Type I",
+      "Absent peristalsis, no pressurisation",
+      "Heller or POEM"
+     ],
+     [
+      "Type II",
+      "Panesophageal pressurisation",
+      "Myotomy, best response"
+     ],
+     [
+      "Type III",
+      "Spastic contractions",
+      "Extended myotomy or POEM"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The Heller operation cuts the circular muscle six centimetres up the gullet and three centimetres onto the stomach, always adding a loose Dor wrap in front. That anterior partial wrap stops later reflux without rebuilding the blockage you just removed, which is why a full circumferential wrap is avoided here.",
+   "tx": "**Laparoscopic Heller myotomy** (keyhole cutting of the tight muscle) divides circular oesophageal muscle for 6 cm above the junction and 3 cm onto the stomach, always paired with a Dor fundoplication (anterior wrap of stomach fundus) to limit postoperative reflux (acid backflow). The wrap stays loose and anterior so it never recreates the obstruction the myotomy relieved. Dysphagia scores fall sharply and reflux stays controlled in most patients at five years.",
+   "vis": {
+    "alt": "Four panel surgical diagram showing achalasia with balloon dilation and Heller myotomy, Nissen fundoplication wrap, Barrett metaplasia and Ivor Lewis oesophagectomy.",
+    "caption": "Achalasia therapy and related oesophageal operations. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/lessons/media/sur-oesophagus-fig1.webp"
+   }
+  },
+  {
+   "say": "POEM reaches the muscle through a submucosal tunnel made with the endoscope, so there are no abdominal cuts at all. Relief of dysphagia matches Heller, but reflux afterwards is more common and usually needs lifelong acid suppression. Reserve it for spastic type 3, a twisted sigmoid gullet, or redo cases where the abdomen is hostile.",
+   "tx": "**Peroral endoscopic myotomy** (tunnelled cutting through the mouth endoscope) matches Heller myotomy for dysphagia relief but causes more gastro-oesophageal reflux, so it suits type III spastic achalasia, sigmoid oesophagus and redo cases where laparoscopy is hostile from prior surgery. The endoscopist tunnels in the submucosal plane and cuts circular muscle to tailored length without abdominal incisions. Reflux counselling and long-term acid suppression follow every case.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "No abdominal incisions",
+      "Tailored myotomy length",
+      "More postoperative reflux"
+     ],
+     "title": "POEM"
+    },
+    "right": {
+     "points": [
+      "Five keyhole ports",
+      "Fixed 6 cm plus 3 cm cut",
+      "Dor wrap limits reflux"
+     ],
+     "title": "Heller myotomy"
+    }
+   }
+  },
+  {
+   "say": "Balloon dilation tears the sphincter fibres by force rather than cutting them, which is why it suits older or unfit patients best. A graded Rigiflex balloon from thirty to forty millimetres gives durable relief in many, but every patient must understand the perforation risk and the need for immediate surgical backup on the day.",
+   "tx": "**Pneumatic dilation with** a 30 to 40 mm Rigiflex balloon tears sphincter fibres and suits older or unfit patients, but perforation in 2 to 4 percent needs immediate surgical backup. Relief lasts years in roughly half the patients, and repeat graded sessions extend benefit. Fit young patients and type III spastic disease do better with myotomy, so reserve dilation for high operative risk or patient preference against surgery.",
+   "vis": {
+    "edges": [
+     [
+      "fit",
+      "myotomy"
+     ],
+     [
+      "unfit",
+      "dilation"
+     ],
+     [
+      "dilation",
+      "perf"
+     ],
+     [
+      "perf",
+      "surgery"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fit",
+      "label": "Fit, type I or II"
+     },
+     {
+      "id": "myotomy",
+      "label": "Heller or POEM"
+     },
+     {
+      "id": "unfit",
+      "label": "Unfit or elderly"
+     },
+     {
+      "id": "dilation",
+      "label": "Rigiflex 30 to 40 mm"
+     },
+     {
+      "id": "perf",
+      "label": "Perforation 2 to 4%"
+     },
+     {
+      "id": "surgery",
+      "label": "Urgent repair"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Diffuse spasm looks different on imaging, with the corkscrew gullet seen in this figure. Manometry shows simultaneous contractions in over a fifth of swallows while the sphincter itself still relaxes normally. Drugs rarely hold it for long, so a long myotomy or POEM relieves dysphagia when medicines fail.",
+   "tx": "**Diffuse oesophageal spasm shows** simultaneous contractions over 20 percent of swallows with normal sphincter relaxation, producing the corkscrew gullet and severe chest pain that mimics angina. Calcium blockers and nitrates give partial relief at best, and long myotomy or POEM relieves dysphagia when drugs fail. Manometry separates spasm from achalasia and from hypercontractile jackhammer gullet, which matters because the myotomy must cover the whole spastic length.",
+   "vis": {
+    "alt": "Diagram of corkscrew oesophagus in diffuse spasm beside a sliding hiatus hernia with acid reflux and columnar metaplasia.",
+    "caption": "Corkscrew gullet in diffuse spasm with reflux disease. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/esophageal-motility-gerd-and-esophagectomy-fig1.webp"
+   }
+  },
+  {
+   "say": "After years of obstruction the gullet can dilate beyond six centimetres and twist into a sigmoid shape, and no myotomy will empty that. Tortuous megaoesophagus with failed prior myotomies needs resection, with the stomach pulled up as the replacement conduit, and the operation belongs in a high volume oesophageal unit.",
+   "tx": "**End-stage achalasia with** megaoesophagus over 6 cm diameter, sigmoid tortuosity and failed myotomies needs oesophagectomy with gastric conduit reconstruction. Redo myotomy or POEM cannot empty a decompensated twisted gullet, and cancer surveillance matters because chronic stasis raises squamous carcinoma risk. Operative mortality stays low only in high-volume centres, so refer rather than repeat endoscopic therapy indefinitely in this group.",
+   "vis": {
+    "cols": [
+     "Finding",
+     "Threshold",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Gullet diameter",
+      "Over 6 cm",
+      "Consider resection"
+     ],
+     [
+      "Shape",
+      "Sigmoid tortuosity",
+      "Oesophagectomy"
+     ],
+     [
+      "Prior therapy",
+      "Failed myotomies",
+      "Gastric conduit rebuild"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Two traps close the lesson. A cardia tumour can mimic achalasia, so rapid weight loss within six months in anyone over fifty five demands endoscopy with biopsy plus cross sectional imaging. And botulinum injection into the sphincter buys only months of relief for the frail elderly, while repeated jabs scar the plane and complicate any later myotomy.",
+   "tx": "**Pseudoachalasia from cardia** tumours is suspected with rapid weight loss under 6 months in patients over 55 years, confirmed by endoscopy with biopsy and cross-sectional imaging before any myotomy is offered. Botulinum toxin injection into the sphincter gives only months of relief in the frail elderly, and repeated sphincter injection scars the plane and complicate later myotomy. Use toxin as a bridge or a diagnostic trial, never as definitive therapy in a fit patient.",
+   "vis": {
+    "edges": [
+     [
+      "flag",
+      "scope"
+     ],
+     [
+      "scope",
+      "image"
+     ],
+     [
+      "image",
+      "plan"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "flag",
+      "label": "Over 55, loss under 6 months"
+     },
+     {
+      "id": "scope",
+      "label": "Endoscopy plus biopsy"
+     },
+     {
+      "id": "image",
+      "label": "CT for cardia mass"
+     },
+     {
+      "id": "plan",
+      "label": "Cancer pathway, not myotomy"
+     }
+    ]
+   }
+  }
+ ],
+ "subject": "ss-surgical-gastroenterology",
+ "title": "Achalasia and motility surgery: myotomy, POEM, dilation and end-stage disease",
+ "v": 1
+}
