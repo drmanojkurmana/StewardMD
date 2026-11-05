@@ -1,160 +1,179 @@
 {
- "v": 1,
+ "gen": "AI",
+ "minutes": 9,
  "module": "scc-trials-icu",
- "subject": "ss-critical-care",
- "title": "Landmark trials in critical care: trial methodology and key findings",
- "minutes": 6,
+ "quiz": [],
  "steps": [
   {
-   "tx": "Placebo use must be ethically justified. A **placebo** is acceptable when no proven effective treatment exists, or when the placebo does not expose participants to serious or irreversible harm. Participants may also report symptoms such as nausea or dizziness after an inert tablet, which is called the **nocebo effect**. Investigators should record and interpret such symptoms in the context of the control arm.",
-   "say": "Placebo use must be ethically justified. A placebo is acceptable when no proven effective treatment exists, or when it does not expose participants to serious or irreversible harm. Participants may also report symptoms such as nausea or dizziness after taking an inert tablet. This is called the nocebo effect, and investigators should record and interpret such symptoms in the context of the control arm.",
+   "say": "ARDSNet ARMA compared six millilitres per kilogram predicted body weight with twelve, keeping plateau pressure at or below thirty centimetres of water. The lower tidal volume reduced mortality. Use predicted body weight from height and sex, never the weight on the bed, since lungs scale with height. This trial made low tidal volume the default for ARDS, and the benefit came from less stretch injury.",
+   "tx": "**ARDSNet ARMA** compared 6 mL/kg predicted body weight with 12 mL/kg, keeping plateau pressure at or below **30 cmH2O**. The lower tidal volume reduced mortality. Use **predicted body weight** from height and sex, never the weight on the bed, since lungs scale with height. This trial made low tidal volume the default for ARDS, and the benefit came from less stretch injury.",
    "vis": {
-    "kind": "table",
+    "alt": "Normal alveolus beside injured alveolus with hyaline membranes, neutrophils and oedema, plus the Berlin severity bands by oxygenation ratio.",
+    "ar": 1.3405,
+    "caption": "Diffuse alveolar damage with Berlin bands. The tidal volume and pressure limits are in the text, not on the drawing (StewardMD).",
+    "kind": "image",
+    "src": "v1/kb/media/ards-fig2.webp"
+   }
+  },
+  {
+   "say": "PROSEVA gave prone positioning for at least sixteen hours daily when the oxygenation ratio was below one hundred fifty, in units already using low tidal volumes, and mortality fell. Prone positioning was a sustained treatment, not a last minute turn. FLORALI found that high flow nasal oxygen lowered ninety day mortality in acute hypoxaemic respiratory failure, although intubation by day twenty eight was not clearly reduced in the whole cohort.",
+   "tx": "**PROSEVA** gave **prone positioning** for at least 16 hours daily when PaO2/FiO2 was below 150 mmHg, in units already using low tidal volumes, and mortality fell. Prone positioning was a sustained treatment, not a last minute turn. **FLORALI** found that **high-flow nasal oxygen** lowered 90 day mortality in acute hypoxaemic respiratory failure, although intubation by day 28 was not clearly reduced in the whole cohort.",
+   "vis": {
     "cols": [
-     "Clinical situation",
-     "Placebo acceptable?"
+     "Trial",
+     "What to remember"
     ],
+    "kind": "table",
     "rows": [
      [
-      "No proven standard treatment",
-      "Generally acceptable"
+      "PROSEVA",
+      "Prone at least 16 hours when PaO2/FiO2 below 150, mortality fell"
      ],
      [
-      "Effective standard treatment exists",
-      "Only as add-on or if harm is not serious"
-     ],
-     [
-      "Risk of serious irreversible harm",
-      "Not acceptable"
+      "FLORALI",
+      "High-flow oxygen lowered 90 day mortality, intubation by day 28 not clearly cut"
      ]
     ]
    }
   },
   {
-   "tx": "Blinding reduces bias in outcome measurement. In a **triple-blind** study, the participant, investigator, outcome assessor and analyst are all unaware of allocation. **Unblinding** is permitted only for emergencies or serious safety concerns, not because of poor response or convenience. Each unblinding should be documented so that the integrity of the remaining trial is protected.",
-   "say": "Blinding reduces bias in outcome measurement. In a triple-blind study, the participant, investigator, outcome assessor and analyst are all unaware of allocation. Unblinding is permitted only for emergencies or serious safety concerns, not because of poor response or convenience. Each unblinding should be documented to protect the integrity of the remaining trial.",
+   "say": "EOLIA tested venovenous extracorporeal membrane oxygenation, a circuit that oxygenates blood outside the body, in very severe ARDS, with crossover allowed from conventional care. The primary sixty day mortality result was not statistically significant. Enrolment needed the oxygenation ratio below fifty for over three hours or below eighty for over six hours. A non-significant primary result with crossover is neither proof that the circuit is useless nor a licence for every ARDS patient.",
+   "tx": "**EOLIA** tested venovenous **extracorporeal membrane oxygenation** (ECMO, a circuit that oxygenates blood outside the body) in very severe ARDS, with **crossover** allowed from conventional care. The primary **60 day mortality** result was not statistically significant. Enrolment needed PaO2/FiO2 below 50 for over 3 hours or below 80 for over 6 hours. A non-significant primary with crossover neither proves the circuit useless nor licenses it for every ARDS patient.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-trials-icu-fig1.webp",
-    "alt": "Masked participant, investigator, assessor and analyst. Treatment labels on the drawing are not a sequence from A to B.",
-    "caption": "Read the masks, not the treatment labels. Participant, investigator, assessor and analyst are unaware of allocation. The arrows do not mean treatment A becomes treatment B.",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "In a **cluster randomised trial**, whole units such as wards or hospitals are allocated, not individual patients. Patients within one cluster resemble each other, so outcomes are correlated. Analysis must account for this **intra-cluster correlation**, otherwise the sample is overstated and type I errors rise, leading to falsely significant results and adoption of ineffective interventions.",
-   "say": "In a cluster randomised trial, whole units such as wards or hospitals are allocated, not individual patients. Patients within one cluster resemble each other, so their outcomes are correlated. Analysis must account for this intra-cluster correlation. Otherwise the effective sample size is overstated, type I errors rise, and ineffective interventions may be wrongly adopted.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Randomise clusters"
-     },
-     {
-      "id": "b",
-      "label": "Allocate whole wards"
-     },
-     {
-      "id": "c",
-      "label": "Correlated patient outcomes"
-     },
-     {
-      "id": "d",
-      "label": "Adjust for correlation"
-     },
-     {
-      "id": "e",
-      "label": "Valid conclusion"
-     }
+    "cols": [
+     "Feature",
+     "Detail"
     ],
-    "edges": [
+    "kind": "table",
+    "rows": [
      [
-      "a",
-      "b"
+      "Circuit",
+      "Venovenous ECMO with crossover allowed"
      ],
      [
-      "b",
-      "c"
+      "Primary endpoint",
+      "60 day mortality, not statistically significant"
      ],
      [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
+      "Entry oxygenation",
+      "Below 50 over 3 hours, or below 80 over 6 hours"
      ]
     ]
    }
   },
   {
-   "tx": "A **surrogate endpoint**, such as a fall in LDL-cholesterol or blood pressure, is a laboratory or physiological marker standing in for a outcome that matters. A **clinical endpoint** measures what patients feel, survive or suffer. A surrogate change does not guarantee fewer major events, so phase III trials should ideally confirm clinical benefit.",
-   "say": "A surrogate endpoint is a laboratory or physiological marker standing in for an outcome that matters, such as a fall in LDL cholesterol. A clinical endpoint measures what patients feel, survive or suffer. A surrogate change does not guarantee fewer major events, so trials should ideally confirm clinical benefit.",
+   "say": "NICE-SUGAR compared a glucose target of eighty one to one hundred eight with a target of one hundred eighty or below. The tighter arm had higher ninety day mortality, and severe low sugar was more common. Tight control at eighty one to one hundred eight is therefore not the ICU default. A moderate target avoids the lows that injure the brain while accepting sugars above normal.",
+   "tx": "**NICE-SUGAR** compared a glucose target of **81 to 108 mg/dL** with a target of **180 mg/dL or below**. The tighter arm had higher **90 day mortality**, and severe hypoglycaemia was more common. Tight control at 81 to 108 is therefore not the ICU default. A moderate target avoids the lows that injure the brain while accepting sugars above normal.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Surrogate endpoint",
-     "points": [
-      "Lab or physiological marker",
-      "Faster and cheaper to measure",
-      "May not predict hard outcomes"
+    "cols": [
+     "Target",
+     "Result"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Intensive, 81 to 108",
+      "Higher 90 day mortality, more hypoglycaemia"
+     ],
+     [
+      "Conventional, 180 or below",
+      "ICU default"
      ]
-    },
-    "right": {
-     "title": "Clinical endpoint",
-     "points": [
-      "Mortality, events, symptoms",
-      "Directly meaningful to patients",
-      "Needs larger or longer trials"
-     ]
-    }
+    ]
    }
   },
   {
-   "tx": "A **pragmatic trial** tests effectiveness in routine care, with broad eligibility and flexible delivery. An **explanatory trial** tests efficacy under tightly controlled conditions with strict inclusion criteria. Explanatory designs answer whether an intervention can work; pragmatic designs answer whether it does work in real clinical settings.",
-   "say": "A pragmatic trial tests effectiveness in routine care, with broad eligibility and flexible delivery. An explanatory trial tests efficacy under tightly controlled conditions with strict inclusion criteria. Explanatory designs ask whether an intervention can work, while pragmatic designs ask whether it does work in real clinical settings.",
+   "say": "TRICC found that a transfusion threshold of seven grams per decilitre was not worse than ten in stable critically ill adults, and looked better in the less severely ill. SAFE found that four per cent albumin did not change twenty eight day mortality against saline, while albumin was linked with higher mortality in traumatic brain injury. Neither result makes albumin, or a haemoglobin of ten, the routine.",
+   "tx": "**TRICC** found that a transfusion threshold of **7 g/dL** was not worse than 10 g/dL in euvolaemic critically ill adults, and looked better in the less severely ill. **SAFE** found that 4 per cent **albumin** did not change **28 day mortality** against saline, while albumin was linked with higher mortality in traumatic brain injury. Neither result makes albumin, or a haemoglobin of 10, the routine.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Pragmatic trial",
-     "points": [
-      "Real-world setting",
-      "Broad eligibility",
-      "Measures effectiveness"
+    "cols": [
+     "Trial",
+     "What to remember"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "TRICC",
+      "7 versus 10, restrictive threshold not worse"
+     ],
+     [
+      "SAFE",
+      "Albumin versus saline, no 28 day gain, harm signal in brain injury"
      ]
-    },
-    "right": {
-     "title": "Explanatory trial",
-     "points": [
-      "Controlled setting",
-      "Strict eligibility",
-      "Measures efficacy"
+    ]
+   }
+  },
+  {
+   "say": "The 6S trial found that hydroxyethyl starch raised ninety day mortality and dialysis need against Ringer acetate in sepsis, so starch is not an ICU resuscitation fluid. SMART found that balanced crystalloid cut a thirty day composite of death, new dialysis, or persistent kidney dysfunction against saline. CLOVERS found no ninety day mortality gap between restrictive and liberal fluids after initial resuscitation. A balanced fluid is reasonable, but neither trial licenses unlimited volume.",
+   "tx": "The **6S trial** found that **hydroxyethyl starch** raised 90 day mortality and dialysis need against Ringer acetate in sepsis, so starch is not an ICU resuscitation fluid. **SMART** found that **balanced crystalloid** cut a 30 day composite of death, new dialysis, or persistent kidney dysfunction against saline. **CLOVERS** found no 90 day mortality gap between restrictive and liberal fluids after initial resuscitation. A balanced fluid is reasonable, but neither trial licenses unlimited volume.",
+   "vis": {
+    "alt": "Body water compartments with crystalloids against colloids: starch avoided in sepsis and kidney injury, balanced fluids preferred, albumin avoided in brain injury.",
+    "ar": 1.3393,
+    "caption": "Crystalloids against colloids, with starch and albumin cautions. Trial names and numbers are in the text, not on the drawing (StewardMD).",
+    "kind": "image",
+    "src": "v1/lessons/media/scc-fluids-fig1.webp"
+   }
+  },
+  {
+   "say": "ProCESS, ARISE, and ProMISe tested protocolised early goal directed therapy with central lines and fixed targets against usual care. None reduced mortality, because usual care already gave early antibiotics and attention to lactate. The original Rivers protocol with its mandates is therefore not the standard. Early recognition, cultures, antibiotics, fluids, and lactate guided resuscitation remain the core.",
+   "tx": "**ProCESS**, **ARISE**, and **ProMISe** tested protocolised early goal directed therapy with central lines and fixed targets against usual care. None reduced mortality, because usual care already gave early antibiotics and attention to lactate. The original Rivers protocol with its mandates is therefore not the standard. Early recognition, cultures, antibiotics, fluids, and lactate guided resuscitation remain the core.",
+   "vis": {
+    "alt": "Sepsis cytokine storm with leaky vessels, tissue factor expression and microthrombi causing organ dysfunction.",
+    "ar": 1.3405,
+    "caption": "Cytokine storm, leaky vessels and microthrombi in sepsis. Trial names are in the text, not on the drawing (StewardMD).",
+    "kind": "image",
+    "src": "v1/kb/media/sepsis-fig2.webp"
+   }
+  },
+  {
+   "say": "ADRENAL gave hydrocortisone two hundred milligrams per day in septic shock and did not cut ninety day mortality, though shock reversed faster. HYPRESS found steroids did not stop severe sepsis turning into shock. RECOVERY showed dexamethasone six milligrams daily for up to ten days cut twenty eight day mortality in COVID nineteen, but only with oxygen or ventilation. Steroids are for refractory shock and selected hypoxic patients, not for every infection.",
+   "tx": "**ADRENAL** gave hydrocortisone 200 mg per day in septic shock and did not cut 90 day mortality, though shock reversed faster. **HYPRESS** found steroids did not stop severe sepsis turning into shock. **RECOVERY** showed **dexamethasone** 6 mg daily for up to 10 days cut 28 day mortality in COVID-19, but only with oxygen or ventilation. Steroids are for refractory shock and selected hypoxic patients, not for every infection.",
+   "vis": {
+    "cols": [
+     "Trial",
+     "What to remember"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "ADRENAL",
+      "Hydrocortisone 200 mg per day, no 90 day gain, faster shock reversal"
+     ],
+     [
+      "HYPRESS",
+      "Steroids did not stop sepsis turning into shock"
+     ],
+     [
+      "RECOVERY",
+      "Dexamethasone 6 mg to 10 days, 28 day gain only with oxygen or ventilation"
      ]
-    }
+    ]
+   }
+  },
+  {
+   "say": "TTM2 cooled cardiac arrest survivors to thirty three degrees and compared that with active prevention of fever. Cooling did not cut death at six months, and the cooled patients had more haemodynamic instability. The task after resuscitation is to prevent fever, not to chase thirty three degrees in every survivor. Standard post arrest care with temperature control continues regardless.",
+   "tx": "**TTM2** cooled cardiac arrest survivors to **33 C** and compared that with active prevention of fever. Cooling did not cut death at **6 months**, and the cooled patients had more haemodynamic instability. The task after resuscitation is to prevent fever, not to chase 33 C in every survivor. Standard post arrest care with temperature control continues regardless.",
+   "vis": {
+    "alt": "Arrest algorithm from rhythm analysis through defibrillation and reversible causes to return of circulation and post-resuscitation care.",
+    "ar": 1.8349,
+    "caption": "Arrest algorithm ending in post-resuscitation care, where temperature control sits. Trial numbers are in the text, not on the drawing (StewardMD).",
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-arrest-management-fig1.webp"
+   }
+  },
+  {
+   "say": "STARRT-AKI compared accelerated kidney replacement with a standard wait and found no ninety day mortality gain, while more survivors stayed dialysis dependent. Emergency indications with dangerous potassium, severe acidosis, lung water, a dialysable toxin, or uraemic complications are still not a reason to wait. Start with the primary endpoint: a negative primary is not rescued by an unplanned subgroup, and crossover, as in EOLIA, dilutes the control arm.",
+   "tx": "**STARRT-AKI** compared accelerated renal replacement with a standard wait and found no **90 day mortality** gain, while more survivors stayed dialysis dependent. Emergency indications with dangerous potassium, severe acidosis, pulmonary oedema, a dialysable toxin, or uraemic complications are still not a reason to wait. Start with the **primary endpoint**: a negative primary is not rescued by an unplanned subgroup, and **crossover**, as in EOLIA, dilutes the control arm.",
+   "vis": {
+    "alt": "Acute kidney injury from renal hypoperfusion, tubular necrosis with granular casts, and ureteric obstruction.",
+    "ar": 1.3333,
+    "caption": "Prerenal, tubular and obstructive injury in acute kidney injury. Trial numbers are in the text, not on the drawing (StewardMD).",
+    "kind": "image",
+    "src": "v1/kb/media/aki-long-case-fig1.webp"
    }
   }
  ],
- "quiz": [
-  "q_38ca7db4cb02",
-  "q_a914fde7fda4",
-  "q_cc33368f706c"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 27
- }
+ "subject": "ss-critical-care",
+ "title": "Landmark trials in critical care",
+ "v": 1
 }

@@ -1,42 +1,13 @@
 {
  "v": 1,
  "module": "scc-pocus",
- "subject": "ss-critical-care",
- "title": "Point of care ultrasound in critical care: core applications",
- "minutes": 7,
+ "title": "Point of care ultrasound and echocardiography",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "**Point of care ultrasound** (POCUS) is a bedside tool used by the treating clinician to answer focused questions quickly. In critical care, the RUSH protocol (Rapid Ultrasound for Shock and Hypotension) organises the exam into pump, tank and pipes. The **pump** is the heart, the **tank** is the volume status (including the IVC), and the **pipes** are the great vessels and abdominal aorta. Examining in this sequence helps classify shock into its likely causes.",
-   "say": "Point of care ultrasound is a bedside tool that the treating clinician uses to answer focused questions quickly. In critical care, the RUSH protocol, which stands for Rapid Ultrasound for Shock and Hypotension, organises the exam into pump, tank and pipes. The pump is the heart, the tank is the volume status including the inferior vena cava, and the pipes are the great vessels and the abdominal aorta. Examining in this sequence helps classify shock into its likely causes.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Component",
-     "What is assessed",
-     "Shock pattern suggested"
-    ],
-    "rows": [
-     [
-      "Pump",
-      "LV and RV function, pericardium",
-      "Cardiogenic or obstructive"
-     ],
-     [
-      "Tank",
-      "IVC size and collapsibility, lungs",
-      "Hypovolaemic or distributive"
-     ],
-     [
-      "Pipes",
-      "Aorta, abdominal vessels, free fluid",
-      "Vascular or abdominal bleed"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **BLUE protocol** targets acute respiratory failure and uses lung sliding, **B lines** and lung point findings. **Lung sliding** is the shimmering movement of the pleura with respiration and rules out pneumothorax when present. **B lines** are vertical, comet-tail artefacts that indicate interstitial or alveolar fluid, as in pulmonary oedema. A **lung point**, where normal sliding meets absent sliding, is pathognomonic for pneumothorax.",
-   "say": "The BLUE protocol targets acute respiratory failure and uses lung sliding, B lines and lung point findings. Lung sliding is the shimmering movement of the pleura with breathing and, when present, rules out pneumothorax. B lines are vertical comet tail artefacts that indicate interstitial or alveolar fluid, as seen in pulmonary oedema. A lung point, where normal sliding meets absent sliding, is pathognomonic for pneumothorax.",
+   "tx": "The **BLUE protocol** uses lung sliding and artefacts when breathlessness is acute. Bilateral **A lines** with sliding suggest bronchospasm or embolism. Bilateral anterior **B lines** suggest pulmonary oedema. The pattern sorts a likely cause at the bedside. It does not replace the examination, and it does not by itself choose the ventilator settings.",
+   "say": "The BLUE protocol uses lung sliding and artefacts when breathlessness is acute. Bilateral A lines with sliding suggest bronchospasm or embolism. Bilateral anterior B lines suggest pulmonary oedema. The pattern sorts a likely cause at the bedside. It does not replace the examination, and it does not by itself choose the ventilator settings.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/scc-pocus-fig1.webp",
@@ -46,92 +17,172 @@
    }
   },
   {
-   "tx": "The **inferior vena cava** (IVC) is assessed for size and respiratory variation as a surrogate for right atrial pressure. A small, collapsing IVC suggests low preload and fluid responsiveness, while a plethoric, non-collapsing IVC suggests raised venous pressure. The **VExUS score** combines IVC dilatation with hepatic, portal and renal venous Doppler patterns to grade venous congestion before fluid is given. Dilated, non-collapsing IVC favours congestion.",
-   "say": "The inferior vena cava is assessed for size and respiratory variation as a surrogate for right atrial pressure. A small, collapsing vena cava suggests low preload and fluid responsiveness, while a plethoric, non-collapsing one suggests raised venous pressure. The VExUS score combines vena cava dilatation with hepatic, portal and renal venous Doppler patterns to grade venous congestion before fluid is given.",
+   "tx": "**Lung sliding** rules out **pneumothorax** at that interspace only. Absent sliding with A lines is not enough, because a main bronchus plug can look the same. A **lung point**, where sliding reappears beside absent sliding, confirms pneumothorax. No lung point does not exclude a large pneumothorax. Treat a crashing patient on clinical signs.",
+   "say": "Lung sliding rules out pneumothorax at that interspace only. Absent sliding with A lines is not enough, because a main bronchus plug can look the same. A lung point, where sliding reappears beside absent sliding, confirms pneumothorax. No lung point does not exclude a large pneumothorax. Treat a crashing patient on clinical signs.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Fluid responsive",
+     "title": "Sliding present",
      "points": [
-      "IVC small",
-      "Marked respiratory collapse",
-      "Low preload suspected"
+      "No pneumothorax at that rib space",
+      "Look for B lines or A lines",
+      "Does not measure the effusion size"
      ]
     },
     "right": {
-     "title": "Venous congestion",
+     "title": "Lung point seen",
      "points": [
-      "IVC dilated",
-      "Little or no collapse",
-      "Consider before more fluid"
+      "Confirms pneumothorax",
+      "Sliding meets absent sliding",
+      "Still drain a tension picture at once"
      ]
     }
    }
   },
   {
-   "tx": "**LVOT VTI** (left ventricular outflow tract velocity time integral) estimates stroke volume. Stroke volume equals the LVOT cross-sectional area multiplied by the VTI, where area is pi times the square of the radius. Cardiac output is stroke volume multiplied by heart rate. **Tamponade** is suggested by a large effusion with right atrial systolic collapse, right ventricular diastolic collapse and a plethoric IVC. Unstable patients need urgent pericardiocentesis or surgical drainage.",
-   "say": "LVOT VTI, the left ventricular outflow tract velocity time integral, estimates stroke volume. Stroke volume equals the LVOT cross-sectional area multiplied by the VTI, where area is pi times the square of the radius. Cardiac output is stroke volume multiplied by heart rate. Tamponade is suggested by a large effusion with right atrial systolic collapse, right ventricular diastolic collapse and a plethoric vena cava. Unstable patients need urgent pericardiocentesis or surgical drainage.",
+   "tx": "The **RUSH** exam looks at the pump, the tank, and the pipes in shock. The pump is ventricular squeeze and the pericardium. The tank is the **inferior vena cava** and free fluid in the abdomen. The pipes are the aorta and the femoral veins. A single view is not a complete RUSH exam.",
+   "say": "The RUSH exam looks at the pump, the tank, and the pipes in shock. The pump is ventricular squeeze and the pericardium. The tank is the inferior vena cava and free fluid in the abdomen. The pipes are the aorta and the femoral veins. A single view is not a complete RUSH exam.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "LVOT area"
+      "id": "pump",
+      "label": "Pump: squeeze and pericardium"
      },
      {
-      "id": "b",
-      "label": "Stroke volume"
+      "id": "tank",
+      "label": "Tank: IVC and free fluid"
      },
      {
-      "id": "c",
-      "label": "Cardiac output"
+      "id": "pipes",
+      "label": "Pipes: aorta and femoral veins"
      }
     ],
     "edges": [
      [
-      "a",
-      "b",
-      "x VTI"
+      "pump",
+      "tank"
      ],
      [
-      "b",
-      "c",
-      "x HR"
+      "tank",
+      "pipes"
      ]
     ]
    }
   },
   {
-   "tx": "**FAST** and **eFAST** scans look for free fluid in the pericardium, Morison pouch, splenorenal and pelvic spaces, and for pneumothorax. The **diaphragm ultrasound** measures excursion and thickening during breathing to assess respiratory muscle function, useful in weaning. **Ultrasound guided vascular access** reduces cannulation attempts and complications, with real time needle visualisation during insertion into the internal jugular or femoral vein.",
-   "say": "FAST and eFAST scans look for free fluid in the pericardium, Morison pouch, splenorenal and pelvic spaces, and for pneumothorax. Diaphragm ultrasound measures excursion and thickening during breathing to assess respiratory muscle function, which is useful when weaning. Ultrasound guided vascular access reduces cannulation attempts and complications through real time needle visualisation during insertion into the internal jugular or femoral vein.",
-   "vis": null
+   "tx": "In a spontaneously breathing patient, **inferior vena cava collapse** of more than 50% with a sniff suggests low right atrial pressure. That finding does not by itself prove a fluid bolus will raise cardiac output. In fully controlled ventilation, **distensibility** above 18% is the cutoff often used to predict fluid responsiveness. Do not mix the two cutoffs.",
+   "say": "In a spontaneously breathing patient, inferior vena cava collapse of more than 50% with a sniff suggests low right atrial pressure. That finding does not by itself prove a fluid bolus will raise cardiac output. In fully controlled ventilation, distensibility above 18% is the cutoff often used to predict fluid responsiveness. Do not mix the two cutoffs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "IVC sign",
+     "What it supports"
+    ],
+    "rows": [
+     [
+      "Spontaneous breathing",
+      "Collapse over 50% with a sniff",
+      "Low right atrial pressure, not a bolus guarantee"
+     ],
+     [
+      "Fully controlled ventilation",
+      "Distensibility above 18%",
+      "Possible fluid responsiveness"
+     ]
+    ]
+   }
   },
   {
-   "tx": "Point of care echo also detects **RV dilatation** with septal flattening, which suggests acute pulmonary embolism or pressure overload, while a flattened septum in both systole and diastole points to combined loading. **B lines** and **E/e'** above 14 suggest raised left atrial pressure, relevant before weaning from ventilation. Findings are always interpreted alongside the clinical picture, since normal echo does not exclude embolism.",
-   "say": "Point of care echo also detects right ventricular dilatation with septal flattening, which suggests acute pulmonary embolism or pressure overload, while a flattened septum in both systole and diastole points to combined loading. B lines and an E over e prime ratio above 14 suggest raised left atrial pressure, which is relevant before weaning from ventilation. Findings are always interpreted alongside the clinical picture, since a normal echo does not exclude embolism.",
-   "vis": null
+   "tx": "**Tamponade** is a clinical and Doppler diagnosis, not a fluid measurement. **Right atrial systolic collapse**, right ventricular diastolic collapse, and a plethoric inferior vena cava support it. Electrical alternans is a late electrocardiogram clue. The treatment of obstructive shock from tamponade is drainage. Fluid alone does not fix a pressurised pericardium.",
+   "say": "Tamponade is a clinical and Doppler diagnosis, not a fluid measurement. Right atrial systolic collapse, right ventricular diastolic collapse, and a plethoric inferior vena cava support it. Electrical alternans is a late electrocardiogram clue. The treatment of obstructive shock from tamponade is drainage. Fluid alone does not fix a pressurised pericardium.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pericardial-disease-fig2.webp",
+    "alt": "Cardiac tamponade with right heart compression, Beck triad, pulsus paradoxus, electrical alternans, and a drainage needle.",
+    "caption": "Right heart compression, Beck triad, electrical alternans, and drainage. Chamber-collapse timing is in the text. The lung point is on the ultrasound figure, not here (StewardMD)."
+   }
+  },
+  {
+   "tx": "Stroke volume is left ventricular outflow **velocity time integral** times the cross sectional area. An integral around 18 to 22 cm is typical in an adult. A rise of at least 10% after a passive leg raise predicts fluid responsiveness better than a single static number. A low integral has many causes, including obstruction and a failing left ventricle.",
+   "say": "Stroke volume is left ventricular outflow velocity time integral times the cross sectional area. An integral around 18 to 22 cm is typical in an adult. A rise of at least 10% after a passive leg raise predicts fluid responsiveness better than a single static number. A low integral has many causes, including obstruction and a failing left ventricle.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measurement",
+     "Typical or cutoff",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Velocity time integral",
+      "About 18 to 22 cm",
+      "Times area gives stroke volume"
+     ],
+     [
+      "Passive leg raise",
+      "Rise of at least 10%",
+      "Predicts fluid responsiveness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The extended **FAST** exam adds both pleural spaces to the perihepatic, perisplenic, pelvic, and pericardial views. A free fluid stripe in a shocked trauma patient is a reason to go to haemorrhage control. It is not a reason to wait for a CT while the blood pressure is falling. A negative FAST does not exclude retroperitoneal bleeding.",
+   "say": "The extended FAST exam adds both pleural spaces to the perihepatic, perisplenic, pelvic, and pericardial views. A free fluid stripe in a shocked trauma patient is a reason to go to haemorrhage control. It is not a reason to wait for a CT while the blood pressure is falling. A negative FAST does not exclude retroperitoneal bleeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "FAST positive in shock",
+     "points": [
+      "Free fluid in a trauma view",
+      "Go to haemorrhage control",
+      "Do not delay for CT"
+     ]
+    },
+    "right": {
+     "title": "FAST negative",
+     "points": [
+      "Does not rule out bleeding",
+      "Retroperitoneum is a blind spot",
+      "Repeat if the picture changes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Point of care ultrasound answers a **focused question** and is repeated when the question changes. A saved clip is more useful than a memory of a grey image. The same patient can have oedema on the lung views and tamponade on the heart views, so one normal window does not clear the others. Document what you saw and what you did not look at.",
+   "say": "Point of care ultrasound answers a focused question and is repeated when the question changes. A saved clip is more useful than a memory of a grey image. The same patient can have oedema on the lung views and tamponade on the heart views, so one normal window does not clear the others. Document what you saw and what you did not look at.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "Window",
+     "A miss to avoid"
+    ],
+    "rows": [
+     [
+      "Why is this patient breathless?",
+      "Anterior lung, both sides",
+      "Calling absent sliding a pneumothorax without a lung point"
+     ],
+     [
+      "Will a bolus help?",
+      "IVC and outflow integral",
+      "Using the spontaneous cutoff on a paralysed patient"
+     ],
+     [
+      "Is shock obstructive?",
+      "Pericardium and right ventricle",
+      "Measuring effusion size and skipping collapse"
+     ]
+    ]
+   }
   }
  ],
- "quiz": [
-  "q_e31ad8259fe2",
-  "q_47a113f68aa7",
-  "q_5dba94c83ad9"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 74
- }
+ "quiz": [],
+ "refs": [
+  "Washington Manual of Critical Care 4e, Basic Critical Care Ultrasound"
+ ]
 }

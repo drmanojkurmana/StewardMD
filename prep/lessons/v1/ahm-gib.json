@@ -3,7 +3,7 @@
  "module": "ahm-gib",
  "subject": "adult-health-medicine",
  "title": "GI bleeding: grading, resuscitation and restarting antithrombotics",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "Every GI bleed starts with **resuscitation**. Classify the bleed as upper (within reach of a gastroscope), colonic, or small bowel, using haematemesis, melaena, haematochezia or a positive nasogastric aspirate. Severe bleeding means persistent bleeding in the first 24 hours, need for transfusion, a haematocrit fall above 20 percent, or rebleeding after 24 hours of stability. Score upper bleeds with the **Glasgow-Blatchford score**. A score of 0 to 1 allows early outpatient endoscopy.",
@@ -108,6 +108,17 @@
       "if stable"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The scan shows active contrast extravasation marked as an **embolisation** target in an unstable bleed. A **shock index** above 1 after resuscitation means instability and calls for urgent **CT angiography**, then embolisation when positive. Stable cases instead follow the Oakland score toward admission or outpatient colonoscopy. In a shocked patient with haematochezia, always exclude an upper source first.",
+   "say": "The CT shows active bleeding marked as an embolisation target, with a note that the shock index is above 1. The shock index is heart rate divided by systolic pressure, and a value above 1 after resuscitation means an unstable bleed that needs CT angiography and then embolisation when positive. Stable patients are scored with the Oakland score for admission or outpatient care, and an upper source must be excluded in a shocked patient with haematochezia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ahm-gib-gen1.webp",
+    "alt": "Axial abdominal contrast CT with arrows marking a shock index above 1 and active extravasation as an embolisation target.",
+    "caption": "Active bleed on abdominal CT marked for embolisation. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

@@ -3,104 +3,232 @@
  "module": "scc-rrt",
  "subject": "ss-critical-care",
  "title": "Renal replacement therapy in the ICU",
- "minutes": 6,
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Renal replacement therapy (RRT) is indicated for **life-threatening hyperkalaemia**, refractory acidosis, fluid overload, uraemic complications and certain toxins. Timing has been studied in trials such as AKIKI and STARRT-AKI, which showed that a strategy of delaying RRT until a clear mandatory indication arises gives outcomes similar to early initiation, with many patients never needing it. Earlier initiation is not routinely beneficial.",
-   "say": "Renal replacement therapy is indicated for life-threatening hyperkalaemia, refractory acidosis, fluid overload, uraemic complications and certain toxins. Timing has been studied in the AKIKI and STARRT-AKI trials. A strategy of delaying RRT until a clear mandatory indication arises gives outcomes similar to early initiation, and many patients never need it. Earlier initiation is not routinely beneficial.",
-   "vis": null
+   "tx": "Start **renal replacement therapy** for refractory **hyperkalaemia**, refractory acidosis, pulmonary oedema that a diuretic cannot move, a uraemic complication, or a dialysable toxin. Pericarditis, encephalopathy, and bleeding are the uraemic reasons you should not wait on. If none of these is present, waiting is reasonable. The drawing is methanol poisoning. Its treatment panel names haemodialysis as a way to remove the parent alcohol and the acid metabolite. Printed cutoffs on that panel are the drawing, and this step does not teach them.",
+   "say": "Start renal replacement therapy for refractory hyperkalaemia, refractory acidosis, pulmonary oedema that a diuretic cannot move, a uraemic complication, or a dialysable toxin. Pericarditis, encephalopathy, and bleeding are the uraemic reasons you should not wait on. If none of these is present, waiting is reasonable. The drawing is methanol poisoning. Its treatment panel names haemodialysis as a way to remove the parent alcohol and the acid metabolite. Printed cutoffs on that panel are the drawing, and this step does not teach them.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/methanol-poisoning-fig1.webp",
+    "alt": "Diagram of methanol poisoning with liver metabolism, eye and brain injury, acidosis, and a treatment panel that includes haemodialysis.",
+    "caption": "Methanol poisoning. The treatment panel names haemodialysis as removal of the parent alcohol and the acid metabolite. Printed numeric cutoffs and antidote notes are the drawing, not the indication list in this step (StewardMD).",
+    "ar": 1.3405
+   }
   },
   {
-   "tx": "Effluent dose matters. The **RENAL** and **ATN** trials suggest that about **20 to 25 mL/kg/h** of effluent is adequate, and higher doses do not improve survival. **Filter clotting** is a common problem, so keep the **filtration fraction** modest and use **regional citrate anticoagulation** where bleeding risk is high.",
-   "say": "Effluent dose matters. The RENAL and ATN trials suggest that about twenty to twenty five millilitres per kilogram per hour is adequate, and higher doses do not improve survival. Filter clotting is a common problem, so keep the filtration fraction modest and use regional citrate anticoagulation where bleeding risk is high.",
+   "tx": "**STARRT-AKI** compared an accelerated start with a standard strategy. Mortality did not fall, and more survivors remained dependent on dialysis. **AKIKI** supported the same idea, which is to wait when there is no emergency indication. Many patients recover enough kidney function that a machine is never required. A rising creatinine, on its own, is not an order to begin.",
+   "say": "STARRT-AKI compared an accelerated start with a standard strategy. Mortality did not fall, and more survivors remained dependent on dialysis. AKIKI supported the same idea, which is to wait when there is no emergency indication. Many patients recover enough kidney function that a machine is never required. A rising creatinine, on its own, is not an order to begin.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Effluent about 20 to 25 mL/kg/h"
-     },
-     {
-      "id": "b",
-      "label": "Modest filtration fraction"
-     },
-     {
-      "id": "c",
-      "label": "Regional citrate if bleeding risk"
-     },
-     {
-      "id": "d",
-      "label": "Fewer filter clots"
-     }
+    "kind": "compare",
+    "left": {
+     "title": "Accelerated start",
+     "points": [
+      "STARRT-AKI did not cut mortality",
+      "More survivors stayed on dialysis",
+      "AKIKI did not support rushing"
+     ]
+    },
+    "right": {
+     "title": "Standard strategy",
+     "points": [
+      "Wait for an emergency indication",
+      "Many patients never need a machine",
+      "Kidney function can still return"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The delivered **effluent dose** for continuous therapy is 20 to 25 mL/kg/h. The **RENAL** trial compared 25 with 40 and found no survival gain from the higher arm. The **ATN** trial compared about 20 with 35 and also found no benefit. Prescribe with downtime in mind, because the dose that counts is the effluent the patient actually receives. A larger number on the pump does not repair hours lost to clotting.",
+   "say": "The delivered effluent dose for continuous therapy is 20 to 25 mL/kg/h. The RENAL trial compared 25 with 40 and found no survival gain from the higher arm. The ATN trial compared about 20 with 35 and also found no benefit. Prescribe with downtime in mind, because the dose that counts is the effluent the patient actually receives. A larger number on the pump does not repair hours lost to clotting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial",
+     "Comparison",
+     "What it found"
     ],
-    "edges": [
+    "rows": [
      [
-      "a",
-      "b"
+      "RENAL",
+      "25 compared with 40",
+      "No gain from the higher arm"
      ],
      [
-      "b",
-      "c"
+      "ATN",
+      "about 20 compared with 35",
+      "No gain from the higher arm"
      ],
      [
-      "c",
-      "d"
+      "Delivered dose",
+      "20 to 25 mL/kg/h",
+      "Higher is not better"
      ]
     ]
    }
   },
   {
-   "tx": "Drug dosing on CRRT depends on **sieving coefficient** and protein binding. Water-soluble agents such as beta-lactam antibiotics are cleared substantially and may need higher or more frequent dosing, whereas highly protein-bound drugs are cleared poorly. Check the sieving coefficient, which is the ratio of ultrafiltrate to blood concentration, and recheck levels during therapy.",
-   "say": "Drug dosing on CRRT depends on the sieving coefficient and protein binding. Water-soluble agents such as beta-lactam antibiotics are cleared substantially and may need higher or more frequent dosing, whereas highly protein-bound drugs are cleared poorly. The sieving coefficient is the ratio of ultrafiltrate to blood concentration, and levels should be rechecked during therapy.",
-   "vis": null
+   "tx": "**CVVH** is solute clearance by convection. **CVVHD** is clearance by diffusion. **CVVHDF** is both convection and diffusion together. Intermittent haemodialysis is the faster way to remove potassium when the patient is stable enough to tolerate it. **SLED** is a hybrid session for the unit that cannot run continuous therapy. You should match the mode to the problem, and to what the unit can actually deliver.",
+   "say": "CVVH is solute clearance by convection. CVVHD is clearance by diffusion. CVVHDF is both convection and diffusion together. Intermittent haemodialysis is the faster way to remove potassium when the patient is stable enough to tolerate it. SLED is a hybrid session for the unit that cannot run continuous therapy. You should match the mode to the problem, and to what the unit can actually deliver.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mode",
+     "How it clears",
+     "When it fits"
+    ],
+    "rows": [
+     [
+      "CVVH",
+      "Convection",
+      "Continuous solute drag with water"
+     ],
+     [
+      "CVVHD",
+      "Diffusion",
+      "Continuous small solutes"
+     ],
+     [
+      "CVVHDF",
+      "Convection and diffusion",
+      "When you want both"
+     ],
+     [
+      "SLED",
+      "Hybrid session",
+      "Continuous therapy unavailable"
+     ],
+     [
+      "Intermittent",
+      "Faster potassium removal",
+      "Patient stable enough"
+     ]
+    ]
+   }
   },
   {
-   "tx": "Vascular access for CRRT usually uses a **non-tunnelled** dual-lumen catheter, placed under ultrasound guidance. The right internal jugular vein is preferred. Femoral catheters should be at least 24 cm long. Avoid subclavian lines where possible, because stenosis can block future arteriovenous fistula sites. Watch for low arterial pressure alarms, which often mean catheter inflow obstruction.",
-   "say": "Vascular access for CRRT usually uses a non-tunnelled dual-lumen catheter, placed under ultrasound guidance. The right internal jugular vein is preferred. Femoral catheters should be at least twenty four centimetres long. Avoid subclavian lines where possible, because stenosis can block future fistula sites. A low arterial pressure alarm often means catheter inflow obstruction.",
+   "tx": "**Continuous therapy** causes less haemodynamic swing than intermittent dialysis, so you should choose it for an unstable patient. Trials that compared the two, in patients who could tolerate either, did not show a mortality benefit for the continuous mode. Instability is a reason to choose the gentler circuit. It is not proof that the gentler circuit saves more lives. You should not quote a survival advantage that those trials did not find.",
+   "say": "Continuous therapy causes less haemodynamic swing than intermittent dialysis, so you should choose it for an unstable patient. Trials that compared the two, in patients who could tolerate either, did not show a mortality benefit for the continuous mode. Instability is a reason to choose the gentler circuit. It is not proof that the gentler circuit saves more lives. You should not quote a survival advantage that those trials did not find.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continuous therapy",
+     "points": [
+      "Less haemodynamic swing",
+      "Chosen for an unstable patient",
+      "No survival win if either is tolerated"
+     ]
+    },
+    "right": {
+     "title": "Intermittent dialysis",
+     "points": [
+      "Faster potassium removal",
+      "Needs a stable circulation",
+      "Same survival when both are possible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "KDIGO suggests **regional citrate** for continuous therapy when there is no contraindication. Accumulation is a risk in liver failure and in profound shock. The warning pattern is a rising total to ionised calcium ratio, together with a metabolic acidosis. You should stop and reassess when that pattern is present. A normal ionised calcium, on its own, does not prove that the citrate is being cleared.",
+   "say": "KDIGO suggests regional citrate for continuous therapy when there is no contraindication. Accumulation is a risk in liver failure and in profound shock. The warning pattern is a rising total to ionised calcium ratio, together with a metabolic acidosis. You should stop and reassess when that pattern is present. A normal ionised calcium, on its own, does not prove that the citrate is being cleared.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "What it means"
+    ],
+    "rows": [
+     [
+      "No contraindication",
+      "Regional citrate is suggested"
+     ],
+     [
+      "Liver failure or profound shock",
+      "Accumulation is a risk"
+     ],
+     [
+      "Rising calcium ratio plus acidosis",
+      "Stop and reassess"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Filter clotting** is what follows a high **filtration fraction**, slow blood flow, or a kinked catheter. Raising the replacement fluid, while the access problem stays, does not stop the clot. A repeating pressure alarm is a reason to check the catheter and the blood flow before you change the dose. Hours lost to a clot are hours of effluent the patient did not receive.",
+   "say": "Filter clotting is what follows a high filtration fraction, slow blood flow, or a kinked catheter. Raising the replacement fluid, while the access problem stays, does not stop the clot. A repeating pressure alarm is a reason to check the catheter and the blood flow before you change the dose. Hours lost to a clot are hours of effluent the patient did not receive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "What you see",
+     "What does not fix it"
+    ],
+    "rows": [
+     [
+      "High filtration fraction",
+      "Filter pressure rises",
+      "More replacement fluid alone"
+     ],
+     [
+      "Slow blood flow",
+      "Clot in the circuit",
+      "A higher dose target"
+     ],
+     [
+      "Kinked catheter",
+      "Inflow pressure alarm",
+      "Ignoring the line"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug dosing on continuous therapy has to count residual kidney function and the effluent. **Vancomycin** and an aminoglycoside are dosed from a level, because a creatinine from yesterday is the wrong denominator. A water soluble antibiotic can leave the patient faster than a ward chart expects. You should recheck the level after the effluent rate changes. You should not copy yesterday's dose forward without that check.",
+   "say": "Drug dosing on continuous therapy has to count residual kidney function and the effluent. Vancomycin and an aminoglycoside are dosed from a level, because a creatinine from yesterday is the wrong denominator. A water soluble antibiotic can leave the patient faster than a ward chart expects. You should recheck the level after the effluent rate changes. You should not copy yesterday's dose forward without that check.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "What you dose",
+     "How",
+     "Wrong denominator"
+    ],
+    "rows": [
+     [
+      "Vancomycin",
+      "Use a level",
+      "Yesterday creatinine"
+     ],
+     [
+      "Aminoglycoside",
+      "Use a level",
+      "A ward chart"
+     ],
+     [
+      "Water soluble antibiotic",
+      "Count the effluent",
+      "Assume normal clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Access for continuous therapy is usually a non-tunnelled dual lumen catheter, placed with ultrasound. The right **internal jugular** vein is the preferred vein. A femoral catheter in an adult should be at least 24 cm long. You should keep the subclavian vein free when you can, because stenosis there can block a future arteriovenous fistula. The drawing is a chronic forearm fistula on a dialyser, with atrophic kidneys and a pelvic allograft. It is not the acute catheter, and the femoral length is not printed.",
+   "say": "Access for continuous therapy is usually a non-tunnelled dual lumen catheter, placed with ultrasound. The right internal jugular vein is the preferred vein. A femoral catheter in an adult should be at least 24 cm long. You should keep the subclavian vein free when you can, because stenosis there can block a future arteriovenous fistula. The drawing is a chronic forearm fistula on a dialyser, with atrophic kidneys and a pelvic allograft. It is not the acute catheter, and the femoral length is not printed.",
    "vis": {
     "kind": "image",
     "src": "v1/kb/media/ckd-dialysis-transplant-long-case-fig1.webp",
-    "alt": "Atrophic native kidneys, a pelvic renal allograft, and a forearm arteriovenous fistula.",
-    "caption": "The forearm fistula is why a subclavian dialysis catheter is avoided. Atrophic kidneys and a pelvic allograft are chronic kidney disease, not this catheter. A 24 cm femoral line is not drawn. Credit: StewardMD.",
+    "alt": "Body diagram with atrophic kidneys, a pelvic kidney transplant, and a forearm arteriovenous fistula attached to a dialyser.",
+    "caption": "Chronic kidney disease with atrophic native kidneys, a pelvic renal allograft, and a forearm arteriovenous fistula on a dialyser. This is later access, not the acute jugular catheter, and the femoral length is not printed (StewardMD).",
     "ar": 1.3333
-   }
-  },
-  {
-   "tx": "Watch for **complications** during CRRT. **Hypotension** often reflects **ultrafiltration** removing fluid faster than plasma can refill from the tissues. Check **blood chemistry** and **acid-base status** frequently during the early phase, often every six to twelve hours. Monitor the **circuit** for **filter clotting**, which lowers delivered dose. Weaning is guided by **urine output** and recovering **renal function**.",
-   "say": "Watch for complications during CRRT. Hypotension often reflects ultrafiltration removing fluid faster than plasma can refill from the tissues. Check blood chemistry and acid-base status frequently during the early phase, often every six to twelve hours. Monitor the circuit for filter clotting, which lowers delivered dose. Weaning is guided by urine output and recovering renal function.",
-   "vis": {
-    "kind": "table",
-    "cols": ["Problem", "What it means"],
-    "rows": [
-     ["Hypotension", "Ultrafiltration faster than plasma can refill"],
-     ["Filter clotting", "Delivered dose falls"],
-     ["Weaning", "Guided by urine output and recovering function"]
-    ]
    }
   }
  ],
- "quiz": [
-  "q_c8df65345b3c",
-  "q_322d15ed4dfe",
-  "q_440b411f8e95"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "KDIGO Clinical Practice Guideline for Acute Kidney Injury (2012)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 37
- }
+  "KDIGO Clinical Practice Guideline for Acute Kidney Injury, 2012",
+  "Washington Manual of Critical Care 4e, Renal Replacement Therapy"
+ ]
 }
