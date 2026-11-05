@@ -1,0 +1,188 @@
+{
+  "id": "fem-pop-bypass",
+  "title": "Femoro-popliteal bypass (above knee, vein graft)",
+  "subtitle": "Reversed great saphenous vein from the common femoral to the above-knee popliteal artery",
+  "system": "vascular",
+  "aliases": ["fem-pop bypass", "femoropopliteal bypass", "above-knee bypass", "AK fem-pop"],
+  "estMinutes": 180,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "gvg-2019", "org": "European Society for Vascular Surgery, Society for Vascular Surgery and World Federation of Vascular Societies", "title": "Global Vascular Guidelines on the Management of Chronic Limb-Threatening Ischemia", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31182334/", "accessed": "2026-11-04" },
+    { "id": "esvs-pad-2024", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2024 Clinical Practice Guidelines on the Management of Asymptomatic Lower Limb Peripheral Arterial Disease and Intermittent Claudication", "year": 2024, "url": "https://pubmed.ncbi.nlm.nih.gov/37949800/", "accessed": "2026-11-04" },
+    { "id": "nice-cg147", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Peripheral arterial disease: diagnosis and management (CG147)", "year": 2012, "url": "https://www.nice.org.uk/guidance/cg147", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["abi", "rutherford", "fontaine", "rcri"],
+  "chapters": {
+    "indications": [
+      "Chronic limb-threatening ischaemia (rest pain or tissue loss) from superficial femoral artery occlusion with a patent above-knee popliteal target and adequate run-off, in a patient with a usable vein and a reasonable life expectancy (GVG 2019).",
+      "Lesions unsuitable for, or after failure of, endovascular treatment, decided in a vascular multidisciplinary setting.",
+      "Disabling intermittent claudication only after supervised exercise and best medical therapy have failed and the anatomy is favourable; surgery for claudication is selective (ESVS 2024).",
+      "Popliteal aneurysm exclusion and bypass, which uses the same exposures."
+    ],
+    "contraindications": [
+      "No usable target artery or run-off on imaging.",
+      "Non-ambulatory patient, fixed knee flexion contracture or extensive foot necrosis beyond salvage, where primary amputation may serve the patient better.",
+      "Infection in the groin or along the planned graft course.",
+      "Prohibitive cardiorespiratory risk, where an endovascular or non-operative plan is safer."
+    ],
+    "preparation": [
+      "Imaging that shows inflow, the target and the run-off (duplex, CT or MR angiography, or catheter angiography), reviewed by the operating surgeon.",
+      "Duplex vein mapping of both great saphenous veins, and arm veins if the leg veins are poor.",
+      "Best medical therapy: antiplatelet, statin, glycaemic control, smoking cessation; cardiac assessment proportionate to risk.",
+      "Group and save; renal function; plan for on-table angiography or duplex.",
+      "Consent risks to discuss: graft occlusion and the need for further procedures; wound infection and breakdown (especially the groin and the vein harvest wound); lymph leak; leg swelling; saphenous nerve numbness; bleeding; myocardial infarction, stroke and death; amputation if the bypass fails."
+    ],
+    "positioning": [
+      "Supine, the leg slightly externally rotated with the knee flexed on a padded support to open the medial thigh.",
+      "Both legs prepared if the contralateral vein may be needed; radiolucent table for completion imaging."
+    ],
+    "equipment": [
+      "Vascular set, slings, bulldog and angled clamps, fine monofilament sutures.",
+      "Vein cannulas, heparinised solution, skin marker for vein orientation, and a valvulotome if an in-situ technique is used.",
+      "Tunnelling device.",
+      "Prosthetic graft available in case the vein is inadequate.",
+      "Fluoroscopy and contrast, or intra-operative duplex, for completion imaging."
+    ],
+    "anatomy": [
+      "The common femoral artery lies at the mid-inguinal point lateral to the femoral vein; it divides into the superficial femoral and profunda femoris arteries a few centimetres below the inguinal ligament.",
+      "The great saphenous vein joins the common femoral vein at the saphenofemoral junction, inferolateral to the pubic tubercle, and runs along the medial thigh to the knee, accompanied below the knee by the saphenous nerve.",
+      "The above-knee popliteal artery is reached through a medial thigh incision anterior to sartorius; it emerges through the adductor hiatus and lies deep to the popliteal vein, with the tibial nerve further posterior and lateral.",
+      "The subsartorial (anatomical) tunnel runs from the groin, deep to sartorius, along the line of the superficial femoral artery to the popliteal fossa."
+    ],
+    "criticalSafety": [
+      "Choose the inflow and target from imaging before the incision; an anastomosis to a diseased segment fails.",
+      "Treat the vein as the operation's most precious tissue: gentle handling, low-pressure distension, no twist.",
+      "Completion imaging before closure; clinical pulses on the table are unreliable.",
+      "If the vein is inadequate, decide on an alternative conduit before the patient is committed, not halfway through the tunnel."
+    ],
+    "structuresAtRisk": [
+      "Common femoral vein and the saphenofemoral junction",
+      "Femoral nerve and its branches in the groin",
+      "Popliteal vein, intimately applied to the artery",
+      "Saphenous nerve along the harvest and popliteal exposure",
+      "Groin lymphatics"
+    ],
+    "commonErrors": [
+      "Clamping or sewing to a calcified segment, which cracks the plaque.",
+      "Twisting the graft in the tunnel.",
+      "A graft too tight with the knee extended or redundant with it flexed.",
+      "Skipping completion imaging and finding an occluded graft in recovery.",
+      "Closing the groin without attention to lymphatics."
+    ],
+    "complications": [
+      "Early graft thrombosis, usually from a technical error, poor vein or poor run-off.",
+      "Wound infection, breakdown and lymph leak, especially in the groin; graft infection.",
+      "Bleeding and haematoma.",
+      "Leg swelling from reperfusion and lymphatic disruption; occasionally compartment syndrome.",
+      "Saphenous nerve numbness.",
+      "Late vein graft stenosis, detected by duplex surveillance.",
+      "Myocardial infarction, stroke and death."
+    ],
+    "postop": [
+      "Hourly graft and foot checks for the first hours (pulse or Doppler signal, colour, warmth); any loss of signal is an emergency for re-exploration.",
+      "Antiplatelet and statin; anticoagulation only by specific decision.",
+      "Leg elevation for swelling, early mobilisation, wound inspection of the groin and harvest wound.",
+      "Duplex graft surveillance per unit protocol, to find and treat stenoses before the graft occludes."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side. Discuss graft failure, wound complications and the possibility of amputation." },
+    { "ref": "step.core.timeout", "emphasis": "Display the angiogram and the vein map; state the planned inflow, target and back-up conduit." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Prophylaxis covering skin flora is standard for a groin incision and a possible prosthetic graft; agent per local protocol." },
+    { "ref": "step.vasc.vein-mapping", "emphasis": "Map the ipsilateral great saphenous vein from the groin to the knee, and identify a back-up vein in the other leg or the arms." },
+    { "ref": "step.core.positioning", "emphasis": "Knee flexed and leg externally rotated on a padded support; heels padded; the foot visible for perfusion checks." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare the whole leg circumferentially to the toes with the foot in a clear bag, plus the abdomen and the contralateral leg." },
+    { "ref": "step.fp.groin-exposure" },
+    { "ref": "step.fp.popliteal-exposure" },
+    { "ref": "step.vasc.vein-harvest", "emphasis": "Harvest the great saphenous vein from the saphenofemoral junction to the knee; for a reversed graft, label the proximal end clearly." },
+    { "ref": "step.fp.conduit-bailout" },
+    { "ref": "step.fp.tunnel" },
+    { "ref": "step.vasc.heparin" },
+    { "ref": "step.vasc.vessel-control", "emphasis": "Control the common femoral, superficial femoral and profunda at the groin, and the popliteal artery above and below the target with slings or bulldogs." },
+    { "ref": "step.vasc.end-to-side-anastomosis", "emphasis": "Proximal anastomosis first, reversed vein end to the side of the common femoral artery. Check pulsatile flow through the graft, then pass it through the tunnel and perform the distal anastomosis to the above-knee popliteal artery." },
+    { "ref": "step.vasc.flush-backbleed" },
+    { "ref": "step.vasc.restore-flow" },
+    { "ref": "step.vasc.perfusion-check", "emphasis": "Completion angiography or duplex of the graft and run-off; correct any technical defect now." },
+    { "ref": "step.core.haemostasis", "emphasis": "The harvest wound and the vein branch ties bleed most; the patient is still heparinised." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.vasc.groin-closure" },
+    { "ref": "step.core.skin-closure", "emphasis": "Close the harvest and popliteal wounds without tension and without undermining." },
+    { "ref": "step.core.debrief", "emphasis": "Record inflow and target, conduit and orientation, completion imaging findings and the graft surveillance plan." }
+  ],
+  "steps_local": {
+    "step.fp.groin-exposure": {
+      "id": "step.fp.groin-exposure",
+      "kind": "access",
+      "title": "Exposure of the common femoral bifurcation",
+      "why": "The inflow anastomosis must sit on a soft segment with good pressure. Exposing the whole bifurcation lets you choose that segment and keeps the profunda, the limb's collateral lifeline, under control.",
+      "how": [
+        "Make a vertical groin incision over the femoral pulse (or the mid-inguinal point), extending above the inguinal ligament if the common femoral artery is high.",
+        "Ligate the lymphatic tissue as it is divided and keep the dissection on the artery rather than lateral to it.",
+        "Expose the common femoral artery from the inguinal ligament to the bifurcation, and the origins of the superficial femoral and profunda arteries, sparing the profunda's branches.",
+        "Palpate for soft and calcified segments and choose the arteriotomy site."
+      ],
+      "structuresAtRisk": ["Common femoral vein", "Femoral nerve", "Lateral circumflex femoral vein crossing the profunda origin", "Groin lymphatics"],
+      "pitfalls": [
+        "Too low an incision, which finds the superficial femoral artery but not the common femoral.",
+        "Dividing the lateral circumflex vein without control, causing troublesome bleeding behind the profunda."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.fp.popliteal-exposure": {
+      "id": "step.fp.popliteal-exposure",
+      "kind": "access",
+      "critical": true,
+      "title": "Exposure of the above-knee popliteal artery",
+      "why": "The above-knee popliteal artery lies deep to its vein in a confined space. A precise approach anterior to sartorius finds it quickly without tearing the vein or the saphenous nerve.",
+      "how": [
+        "With the knee flexed, make a medial lower-thigh incision along the anterior border of sartorius, avoiding the great saphenous vein.",
+        "Divide the deep fascia, retract sartorius posteriorly, and enter the popliteal fossa through the fat just above the adductor tendon.",
+        "Palpate the artery and confirm on imaging that the chosen segment is soft; free it from the popliteal vein carefully and pass slings above and below.",
+        "Ligate small geniculate branches only when necessary; they are collaterals."
+      ],
+      "structuresAtRisk": ["Popliteal vein and its venae comitantes", "Saphenous nerve", "Tibial nerve", "Geniculate collaterals"],
+      "pitfalls": [
+        "Approaching posterior to sartorius and losing orientation.",
+        "Tearing the popliteal vein during circumferential dissection of the artery."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.fp.conduit-bailout": {
+      "id": "step.fp.conduit-bailout",
+      "kind": "bailout",
+      "title": "When the vein is inadequate",
+      "why": "A small, sclerosed or diseased vein used because it was already harvested is a common cause of early failure. The decision to change conduit is cheapest before the graft is tunnelled.",
+      "how": [
+        "Inspect and distend the harvested vein: look for sclerotic segments, varicosities and small calibre, and judge it against the target.",
+        "If inadequate, use the next-best autologous option already identified: contralateral great saphenous, small saphenous or arm vein, or a spliced composite.",
+        "If no usable vein exists, a prosthetic graft to the above-knee popliteal artery is an accepted alternative; record the reason.",
+        "If the target proves unsuitable on exposure, stop, image on the table and get senior help before committing to a different operation."
+      ],
+      "structuresAtRisk": ["Contralateral leg and arm veins needed for future operations"],
+      "pitfalls": [
+        "Using a poor vein because it is already out.",
+        "Harvesting the contralateral vein without a plan, leaving no conduit for that leg later."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.fp.tunnel": {
+      "id": "step.fp.tunnel",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Tunnelling the graft",
+      "why": "A twisted, kinked or compressed graft thromboses regardless of how good the anastomoses are. The tunnel sets the graft's lie, length and protection for its whole life.",
+      "how": [
+        "Pass the tunneller in the subsartorial plane from the popliteal incision to the groin, keeping deep to sartorius along the line of the femoral vessels.",
+        "Draw the graft through, guided by the line marked along it, so that it is not twisted.",
+        "Check length with the knee both flexed and extended before cutting the graft for the distal anastomosis."
+      ],
+      "structuresAtRisk": ["Femoral vein", "Saphenous nerve", "Graft wall"],
+      "pitfalls": [
+        "Losing the orientation mark and introducing a twist.",
+        "Cutting the graft to length with the knee flexed, so it is tight when the leg straightens."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

@@ -301,6 +301,20 @@
       }
     },
     /* ── specialty templates (generated from the specialty content authoring, 2026-11-04) ── */
+    "above-knee-amputation": {
+      base: "operative", title: "Above-knee amputation",
+      prefill: {"procedure": "Above-knee (transfemoral) amputation"},
+      extra: {
+        "Operative detail": [
+          f("levelReason", "Level chosen and reason a lower level was not used", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2}),
+          f("boneLevel", "Femoral cut level", {"type": "text", "required": true, "aiFillable": false, "ph": "cm above knee joint line"}),
+          f("vesselLigation", "Femoral vessel ligation", {"type": "text", "required": true, "aiFillable": false, "ph": "SFA transfixed, vein ligated separately"}),
+          f("sciaticHandling", "Sciatic nerve handling", {"type": "text", "required": false, "aiFillable": true, "ph": "Ligated and divided under traction"}),
+          f("myodesis", "Myodesis or myoplasty", {"type": "text", "required": false, "aiFillable": true, "ph": "Adductor myodesis / myoplasty / none"}),
+          f("stagedGuillotine", "Guillotine first stage", {"type": "text", "required": false, "aiFillable": false, "ph": "No / yes, plan for definitive"})
+        ]
+      }
+    },
     "acdf": {
       base: "operative", title: "Anterior cervical discectomy and fusion",
       prefill: {"procedure": "Anterior cervical discectomy and fusion"},
@@ -357,6 +371,18 @@
         ]
       }
     },
+    "av-fistula-radiocephalic": {
+      base: "operative", title: "Radiocephalic AV fistula",
+      prefill: {"procedure": "Left / right radiocephalic arteriovenous fistula"},
+      extra: {
+        "Operative detail": [
+          f("vesselSizes", "Artery and vein diameters (mapping or on table)", {"type": "text", "required": true, "aiFillable": false, "ph": "Radial artery mm; cephalic vein mm"}),
+          f("anastomosisConfig", "Anastomosis configuration and arteriotomy length", {"type": "text", "required": true, "aiFillable": true, "ph": "End vein to side artery; length"}),
+          f("thrillAtEnd", "Thrill at end of procedure", {"type": "text", "required": true, "aiFillable": false, "ph": "Continuous thrill / pulse only / none"}),
+          f("handPerfusion", "Hand perfusion at end", {"type": "text", "required": true, "aiFillable": false, "ph": "Colour, capillary refill, palmar Doppler"})
+        ]
+      }
+    },
     "below-knee-amputation": {
       base: "operative", title: "Below-knee amputation",
       prefill: {"procedure": "Below-knee amputation, long posterior flap"},
@@ -380,6 +406,33 @@
           f("fluidCharacter", "Haematoma fluid character and pressure", {"type": "text", "required": false, "aiFillable": true, "ph": "Motor-oil / mixed / clotted; under pressure?"}),
           f("drainDetail", "Drain type, position and plan", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Subdural / subgaleal / none (reason); bag level; removal plan"}),
           f("antithromboticPlan", "Antithrombotic restart plan", {"type": "text", "required": false, "aiFillable": true, "help": "Agreed date and indication, or 'not on antithrombotics'"})
+        ]
+      }
+    },
+    "cabg": {
+      base: "operative", title: "Coronary artery bypass grafting",
+      prefill: {"procedure": "Coronary artery bypass grafting"},
+      extra: {
+        "Operative detail": [
+          f("graftList", "Grafts: conduit to target and flow", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "LIMA to LAD, flow; SVG to OM1, flow"}),
+          f("bypassTimes", "Bypass and cross-clamp times", {"type": "text", "required": true, "aiFillable": false, "ph": "CPB min; cross-clamp min"}),
+          f("aortaAssessment", "Ascending aorta assessment", {"type": "text", "required": false, "aiFillable": true, "ph": "Palpation / epiaortic scan findings"}),
+          f("weaning", "Weaning and support", {"type": "text", "required": true, "aiFillable": false, "ph": "Inotropes, pacing, IABP"}),
+          f("pacingWires", "Pacing wires placed", {"type": "text", "required": true, "aiFillable": false, "ph": "Atrial / ventricular, thresholds"})
+        ]
+      }
+    },
+    "carotid-endarterectomy": {
+      base: "operative", title: "Carotid endarterectomy",
+      prefill: {"procedure": "Carotid endarterectomy with patch angioplasty"},
+      extra: {
+        "Operative detail": [
+          f("symptomStatus", "Symptom status, side and stenosis (NASCET %)", {"type": "text", "required": true, "aiFillable": false, "ph": "Symptomatic / asymptomatic; side; % stenosis; date of last event"}),
+          f("cerebralMonitoring", "Anaesthesia and cerebral monitoring", {"type": "text", "required": true, "aiFillable": true, "ph": "LA awake testing / GA with stump pressure, TCD, NIRS"}),
+          f("shuntUsed", "Shunt used and clamp time", {"type": "text", "required": true, "aiFillable": false, "ph": "No shunt / selective / routine; clamp time min"}),
+          f("distalEndpoint", "Distal endpoint and tacking sutures", {"type": "text", "required": false, "aiFillable": true, "ph": "Clean taper / tacked"}),
+          f("cranialNerves", "Cranial nerves identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Hypoglossal, vagus, marginal mandibular"}),
+          f("neuroOnWaking", "Neurological status on waking", {"type": "text", "required": true, "aiFillable": false, "ph": "No new deficit / deficit and action taken"})
         ]
       }
     },
@@ -487,6 +540,19 @@
         ]
       }
     },
+    "fem-pop-bypass": {
+      base: "operative", title: "Femoro-popliteal bypass",
+      prefill: {"procedure": "Femoro-popliteal (above-knee) bypass with reversed great saphenous vein"},
+      extra: {
+        "Operative detail": [
+          f("inflowTarget", "Inflow and target arteries", {"type": "text", "required": true, "aiFillable": true, "ph": "Common femoral to above-knee popliteal"}),
+          f("conduit", "Conduit, orientation and quality", {"type": "text", "required": true, "aiFillable": false, "ph": "Ipsilateral GSV reversed / in situ / prosthetic; diameter; quality"}),
+          f("tunnelRoute", "Tunnel route", {"type": "text", "required": false, "aiFillable": true, "ph": "Subsartorial / subcutaneous"}),
+          f("completionImaging", "Completion imaging findings", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2}),
+          f("footPerfusion", "Foot perfusion at end", {"type": "text", "required": true, "aiFillable": false, "ph": "Pulses / Doppler signals"})
+        ]
+      }
+    },
     "femoral-embolectomy": {
       base: "operative", title: "Femoral embolectomy",
       prefill: {"procedure": "Femoral balloon catheter embolectomy"},
@@ -538,6 +604,20 @@
           f("gapCheck", "Active or passive gap and gliding check", {"type": "text", "required": true, "aiFillable": false, "ph": "No gap on full active flexion, or how tested", "help": "Observed in theatre."}),
           f("digitalNerves", "Digital nerves: intact or repaired", {"type": "text", "required": true, "aiFillable": true}),
           f("tourniquetTime", "Tourniquet pressure and time (or none)", {"type": "text", "required": true, "aiFillable": false, "ph": "Pressure (mmHg) and minutes, or WALANT, no tourniquet", "help": "Read from the tourniquet machine; a physical record."})
+        ]
+      }
+    },
+    "gsv-ablation-stripping": {
+      base: "operative", title: "Great saphenous vein surgery",
+      prefill: {"procedure": "Great saphenous vein endovenous ablation / high tie and stripping"},
+      extra: {
+        "Operative detail": [
+          f("technique", "Technique and device", {"type": "text", "required": true, "aiFillable": true, "ph": "EVLA / RFA / high tie and strip to knee"}),
+          f("accessSite", "Access site and treated length", {"type": "text", "required": false, "aiFillable": true, "ph": "Cannulated at; length treated cm"}),
+          f("tipDistance", "Tip distance from junction on ultrasound", {"type": "text", "required": false, "aiFillable": false, "ph": "cm from SFJ"}),
+          f("energyDelivered", "Energy delivered", {"type": "text", "required": false, "aiFillable": false, "ph": "Total J / cycles"}),
+          f("deepVeinScan", "End-of-procedure deep vein scan", {"type": "text", "required": true, "aiFillable": false, "ph": "CFV patent, no thrombus"}),
+          f("phlebectomySites", "Phlebectomy sites", {"type": "text", "required": false, "aiFillable": true, "ph": "Thigh / calf, number"})
         ]
       }
     },
@@ -745,6 +825,19 @@
           f("ossicularFistula", "Ossicles, fistula and facial canal", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Incus eroded / intact; stapes present, mobile; fistula yes / no; facial canal dehiscence"}),
           f("facialMonitoringUsed", "Facial nerve monitoring", {"type": "text", "required": false, "aiFillable": false, "ph": "Used, tap test confirmed / not used"}),
           f("postopFacialGrade", "Facial function in recovery", {"type": "text", "required": true, "aiFillable": false, "ph": "House-Brackmann grade, time, examiner", "help": "Examined in recovery by a named clinician."})
+        ]
+      }
+    },
+    "median-sternotomy": {
+      base: "operative", title: "Median sternotomy and closure",
+      prefill: {"procedure": "Median sternotomy and closure"},
+      extra: {
+        "Operative detail": [
+          f("redoEntry", "Primary or redo entry", {"type": "text", "required": true, "aiFillable": false, "ph": "Primary / redo, method of re-entry"}),
+          f("sternalQuality", "Sternal quality and midline", {"type": "text", "required": false, "aiFillable": true, "ph": "Midline, good bone / osteoporotic / paramedian"}),
+          f("wireNumber", "Wires and reinforcement", {"type": "text", "required": true, "aiFillable": false, "ph": "Number of wires, figure-of-eight, plates"}),
+          f("pacingWires", "Pacing wires placed", {"type": "text", "required": true, "aiFillable": false, "ph": "Atrial / ventricular, thresholds"}),
+          f("chestOpen", "Sternum left open", {"type": "text", "required": false, "aiFillable": false, "ph": "No / yes, membrane, packs left"})
         ]
       }
     },
@@ -1258,6 +1351,19 @@
           f("arteriesPreserved", "Testicular arteries identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Number; Doppler and vasodilator used: Yes / No"}),
           f("veinsLigated", "Internal and external spermatic veins ligated", {"type": "text", "required": true, "aiFillable": false, "ph": "Number internal / external; gubernacular veins: Yes / No"}),
           f("lymphaticsVas", "Lymphatics and vas with its vessels preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, detail"})
+        ]
+      }
+    },
+    "vats-bullectomy-pleurodesis": {
+      base: "operative", title: "VATS bullectomy and pleurodesis",
+      prefill: {"procedure": "VATS bullectomy with pleurodesis"},
+      extra: {
+        "Operative detail": [
+          f("lungIsolation", "Lung isolation method", {"type": "text", "required": false, "aiFillable": true, "ph": "DLT / blocker; confirmed on bronchoscopy"}),
+          f("bullaeResected", "Bullae found and resected", {"type": "text", "required": true, "aiFillable": true, "ph": "Site, number, staple loads"}),
+          f("pleurodesisMethod", "Pleurodesis method and extent", {"type": "text", "required": true, "aiFillable": true, "ph": "Abrasion / apical pleurectomy / talc"}),
+          f("leakTest", "Air leak test result", {"type": "text", "required": true, "aiFillable": false, "ph": "No leak / leak repaired"}),
+          f("conversion", "Conversion to thoracotomy", {"type": "text", "required": false, "aiFillable": false, "ph": "No / yes, reason"})
         ]
       }
     },

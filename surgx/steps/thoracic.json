@@ -1,0 +1,121 @@
+{
+  "_comment": "Steps shared by cardiothoracic operations: median sternotomy and its closure, coronary artery bypass grafting and VATS. Authored once, referenced by many. Procedure-only steps stay in each procedure's steps_local.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.thor.sternotomy-open": {
+      "id": "step.thor.sternotomy-open",
+      "kind": "access",
+      "critical": true,
+      "title": "Opening the sternum in the midline",
+      "why": "A sternotomy that wanders off the midline produces a weak, asymmetric closure and is the commonest technical root of sternal dehiscence. The saw also passes millimetres from the innominate vein, the right ventricle and, in a redo, adherent grafts.",
+      "how": [
+        "Mark the midline from the sternal notch to the xiphoid, palpating the intercostal spaces on both sides; incise skin and divide the presternal tissue and periosteum exactly on the mark with diathermy.",
+        "Clear the space behind the manubrium by dividing the interclavicular ligament and sweeping a finger behind the notch, and free the xiphoid so that the retrosternal plane is open at both ends.",
+        "Ask the anaesthetist to stop ventilation and let the lungs fall away immediately before the saw is used; resume as soon as the cut is complete.",
+        "Run the sternal saw in one controlled pass along the marked line, lifting it up against the back of the sternum; in a redo, use an oscillating saw and divide the posterior table under direct vision."
+      ],
+      "structuresAtRisk": ["Innominate (left brachiocephalic) vein behind the manubrium", "Right ventricle and aorta, especially in a redo", "Patent bypass grafts adherent to the back of the sternum in a redo", "Pleura"],
+      "pitfalls": [
+        "A paramedian cut that splits into the costal cartilages.",
+        "Sawing while the lungs are inflated, opening both pleurae.",
+        "A standard sternal saw used in a redo, where the heart and grafts may be stuck to the sternum."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thor.pericardium-open": {
+      "id": "step.thor.pericardium-open",
+      "kind": "access",
+      "title": "Spreading the sternum and opening the pericardium",
+      "why": "Gradual retraction avoids rib fractures and brachial plexus stretch, and a controlled pericardiotomy exposes the heart without injuring the innominate vein, the phrenic nerves or the heart itself.",
+      "how": [
+        "Secure haemostasis of the periosteum and marrow edges with diathermy and minimal bone wax, then open the retractor slowly and only as far as the operation needs, placed low on the sternum.",
+        "Divide the thymic remnant between ties or clips, staying clear of the innominate vein and its thymic branches.",
+        "Open the pericardium in the midline with an inverted T at the diaphragm, keeping well anterior and medial to both phrenic nerves.",
+        "Place pericardial stay sutures to cradle the heart; note any effusion, adhesions or unexpected findings."
+      ],
+      "structuresAtRisk": ["Innominate vein and its thymic tributaries", "Phrenic nerves on the lateral pericardium", "Right ventricle under the pericardiotomy", "Brachial plexus from excessive or high retraction"],
+      "pitfalls": [
+        "Opening the retractor fully and quickly, fracturing the first rib and stretching the brachial plexus.",
+        "Heavy bone wax, which impairs healing and harbours infection."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thor.pacing-wires": {
+      "id": "step.thor.pacing-wires",
+      "kind": "closure",
+      "title": "Temporary epicardial pacing wires",
+      "why": "Conduction and rhythm disturbances are common after cardiac surgery, and a wire placed now is far safer than an emergency transvenous wire later. A wire placed carelessly, or pulled carelessly, can bleed into the pericardium.",
+      "how": [
+        "Decide with the anaesthetist which wires are needed (ventricular, atrial, or both) from the rhythm on and off bypass and the operation done.",
+        "Place the wires superficially in the epicardium away from coronary arteries and grafts, and bring them out through the skin below the incision on the agreed sides.",
+        "Test capture and thresholds before closure, label the wires by chamber, and secure them so they cannot be pulled out."
+      ],
+      "structuresAtRisk": ["Coronary arteries and grafts on the epicardial surface", "Thin right ventricular wall"],
+      "pitfalls": [
+        "Wires placed through a coronary artery or a graft.",
+        "Unlabelled wires, so that the ward paces the wrong chamber.",
+        "Removing wires on the ward without a plan for bleeding and tamponade."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thor.chest-drains": {
+      "id": "step.thor.chest-drains",
+      "kind": "closure",
+      "title": "Placing mediastinal and pleural drains",
+      "why": "A drain that is kinked, blocked or wrongly placed gives false reassurance while blood or air collects, and retained blood after cardiac or thoracic surgery causes tamponade, a trapped lung and empyema.",
+      "how": [
+        "Place drains where fluid and air will collect: an apical and, when needed, a basal pleural drain after lung surgery; mediastinal and any opened pleural space after a sternotomy.",
+        "Bring each drain out through a separate stab incision under direct vision, passing over the upper border of the rib so that the intercostal bundle is spared, and away from the sternal wound.",
+        "Check that no side hole lies outside the chest, connect to an underwater seal or digital system, and confirm swing, bubbling and drainage before the drapes come off.",
+        "Secure each drain and record its position, suction setting and the initial drainage in the note."
+      ],
+      "structuresAtRisk": ["Intercostal neurovascular bundle", "Internal mammary artery or graft pedicle", "Lung, heart and diaphragm at insertion", "Liver or spleen with a low drain"],
+      "pitfalls": [
+        "A drain lying against a graft or across the heart.",
+        "A side hole left in the subcutaneous tissue, causing surgical emphysema and an ineffective seal.",
+        "Drains tied off or clamped for transfer and not reopened."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thor.sternal-closure": {
+      "id": "step.thor.sternal-closure",
+      "kind": "closure",
+      "critical": true,
+      "title": "Sternal closure with wires",
+      "why": "Sternal instability leads to dehiscence and deep sternal wound infection, which carry substantial mortality. A closure with symmetric, well-spaced wires that hold bone rather than cutting through it is the main preventable factor.",
+      "how": [
+        "Before closure, confirm haemostasis of the sternal edges, the internal mammary beds and the wire sites, and that the counts are correct.",
+        "Pass stainless steel wires through the manubrium and around the body of the sternum in the intercostal spaces, close to the sternal edge, keeping clear of the internal mammary vessels and any arterial graft pedicle.",
+        "Approximate the two halves evenly and twist the wires down so that the edges meet without overlap or step, then cut and bury the ends.",
+        "In a high-risk sternum (osteoporosis, obesity, diabetes with bilateral mammary harvest, a paramedian cut), consider reinforcement such as figure-of-eight wires, a weave technique or plate fixation per unit practice."
+      ],
+      "structuresAtRisk": ["Internal mammary artery pedicle and grafts", "Right ventricle and grafts beneath the wires", "Intercostal vessels"],
+      "pitfalls": [
+        "Wires placed through the bone too near the edge, which cut out when the patient coughs.",
+        "Snaring a graft or the right ventricle with a wire.",
+        "Overtightening osteoporotic bone so that the wire saws through it."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thor.emergency-resternotomy": {
+      "id": "step.thor.emergency-resternotomy",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Emergency re-sternotomy for arrest or tamponade",
+      "why": "After cardiac surgery, cardiac arrest is often caused by tamponade or bleeding that only opening the chest can fix, and external compressions can damage grafts and valves. Expert consensus is that if early measures fail, the chest is reopened within about five minutes of arrest, at the bedside if needed.",
+      "how": [
+        "Recognise the setting: sudden hypotension, rising filling pressures, falling or abruptly stopped drain output, or arrest within the first days after surgery. Call the cardiac surgeon and the team immediately.",
+        "Follow the cardiac surgery resuscitation protocol: for a shockable rhythm, early defibrillation; for asystole or severe bradycardia, pace through the epicardial wires; start compressions only if these do not restore output quickly.",
+        "Open the chest using the sterile emergency re-sternotomy set kept at the bedside: one person preps with minimal antiseptic, cuts the skin sutures and the wires, and inserts the retractor.",
+        "Relieve tamponade, suck out clot, find and control bleeding with a finger or pressure, and perform internal cardiac massage or internal defibrillation as needed; then move to theatre for definitive repair when stable."
+      ],
+      "structuresAtRisk": ["Bypass grafts and the heart during wire removal and retractor insertion", "Right ventricle under the sternum"],
+      "pitfalls": [
+        "Prolonged external compressions while the cause is a tamponade that only re-sternotomy will relieve.",
+        "No re-sternotomy set, light or trained person at the bedside when it is needed.",
+        "Waiting for theatre when the patient has already arrested."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

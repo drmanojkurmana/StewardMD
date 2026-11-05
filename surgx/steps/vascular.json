@@ -91,6 +91,102 @@
         "Assuming a poor foot is vasospasm and closing."
       ],
       "review": { "status": "ai_drafted" }
+    },
+    "step.vasc.vein-mapping": {
+      "id": "step.vasc.vein-mapping",
+      "kind": "prep",
+      "title": "Duplex vein assessment and marking",
+      "why": "Vein operations succeed or fail on the vein. A conduit that is too small, sclerosed or absent, or a reflux pattern that was assumed rather than shown, is found far more cheaply on the scan than through an incision.",
+      "how": [
+        "Review the duplex report yourself: diameter, depth, continuity, previous thrombosis, and the course of the vein along its length.",
+        "Mark the vein on the skin with the patient in the position used for the scan (standing or reverse Trendelenburg for leg veins), the evening before or in the anaesthetic room.",
+        "For a venous reflux operation, confirm which segment refluxes and where the junction lies; for a conduit, confirm the length you need and identify a back-up vein.",
+        "Repeat the scan on the table with a sterile probe cover when the marking is uncertain."
+      ],
+      "structuresAtRisk": ["The vein itself, from failed or repeated cannulation", "Adjacent artery mistaken for the vein"],
+      "pitfalls": [
+        "Operating on an old scan when the vein has since thrombosed or been used.",
+        "Marking with the patient supine, when the vein collapses and the mark drifts.",
+        "No back-up conduit identified before the first incision."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vasc.vein-harvest": {
+      "id": "step.vasc.vein-harvest",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Harvesting and preparing a vein conduit",
+      "why": "The long-term patency of a vein graft is largely set during harvest. Stretching, crushing, drying, over-distending or leaving a branch untied injures the endothelium and starts the intimal hyperplasia that later blocks the graft.",
+      "how": [
+        "Expose the vein through continuous or skip incisions directly over the marked course, so that the skin flaps are not undermined.",
+        "Handle the vein by its adventitia or the stumps of its branches only. Ligate or clip each tributary a short distance from the vein wall, neither flush nor long.",
+        "Divide the vein after ligating its ends; mark one surface along its length with a skin marker so that it is not twisted when tunnelled or laid on the heart.",
+        "Distend gently with cold heparinised blood or solution through a cannula at low pressure to find leaks, and repair them with fine sutures. Keep the vein moist.",
+        "For a reversed graft, label the ends clearly so that the valves face the right way."
+      ],
+      "structuresAtRisk": ["Saphenous nerve below the knee", "Skin flaps over the harvest incision", "Lymphatics in the groin and medial thigh", "Endothelium of the vein"],
+      "pitfalls": [
+        "High-pressure distension with a syringe, which tears the intima.",
+        "A tie so close to the vein wall that it narrows the lumen, or a branch stump so long that it fills with thrombus.",
+        "Losing track of orientation, so that a reversed vein is implanted the wrong way or with a twist."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vasc.end-to-side-anastomosis": {
+      "id": "step.vasc.end-to-side-anastomosis",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "End-to-side anastomosis",
+      "why": "Most early graft and fistula failures are technical and sit at an anastomosis: a narrowed heel or toe, a lifted intimal flap, a purse-stringed suture line or a twisted conduit. Each is preventable with a deliberate sequence.",
+      "how": [
+        "Make a clean longitudinal arteriotomy in the softest available segment, and cut the end of the conduit obliquely (spatulated) so that its opening matches the arteriotomy.",
+        "Start at the heel, using a parachute technique where it helps visibility, and keep equal, small bites with the needle passed from inside to outside on the diseased side so that plaque is pinned rather than lifted.",
+        "Take particular care at the toe, where narrowing is most common; place the toe sutures under direct vision, with a probe or dilator in the lumen if needed.",
+        "Keep the suture under even tension without purse-stringing, check the lie of the conduit for twist and kinking before the last bites, then flush before tying."
+      ],
+      "structuresAtRisk": ["Back wall of the artery", "Intima of the recipient artery", "Conduit orientation"],
+      "pitfalls": [
+        "Picking up the back wall in a toe suture.",
+        "An arteriotomy too long or too short for the conduit, which narrows the outflow or kinks the hood.",
+        "Pulling the continuous suture tight in one go and purse-stringing the anastomosis."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vasc.heparin-reversal": {
+      "id": "step.vasc.heparin-reversal",
+      "kind": "checkpoint",
+      "title": "Deciding on, and giving, heparin reversal",
+      "why": "Protamine reduces wound and mediastinal bleeding, but it can cause severe hypotension, pulmonary hypertension or anaphylaxis, and given at the wrong moment it clots the repair or the bypass circuit. The decision must be explicit and shared with the anaesthetist.",
+      "how": [
+        "Decide with the anaesthetist whether to reverse, the dose per local protocol, and the timing, once flow is restored and the repair is satisfactory.",
+        "In cardiac surgery give protamine only after separation from bypass and venous decannulation, and tell the perfusionist so that the pump suckers are switched off before it starts.",
+        "Give it slowly while watching the pressure; ask about previous protamine, protamine-containing insulin, or fish allergy beforehand.",
+        "Confirm the effect with a clotting test (for example ACT) where the unit uses one, and reassess the operative field afterwards."
+      ],
+      "structuresAtRisk": ["Fresh anastomoses and endarterectomised surfaces, which may thrombose if over-reversed"],
+      "pitfalls": [
+        "Protamine running while the cardiotomy suckers are still returning blood to the circuit.",
+        "Rapid bolus injection causing profound hypotension.",
+        "Not stating in the note whether heparin was reversed, leaving the ward unable to interpret bleeding."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vasc.groin-closure": {
+      "id": "step.vasc.groin-closure",
+      "kind": "closure",
+      "title": "Layered closure of a groin incision",
+      "why": "The groin is the commonest site of vascular wound complications: lymph leak, seroma, infection and breakdown over a graft or a vein stump. Closure that obliterates dead space and seals lymphatics reduces all of them.",
+      "how": [
+        "Ligate or seal divided lymphatic tissue rather than leaving it to leak; avoid wide undermining.",
+        "Close the deep fascia and subcutaneous tissue in two or more layers so that no cavity remains over the vessels or graft.",
+        "Close the skin with a technique that keeps the wound edges everted and away from the groin crease moisture, and apply an occlusive dressing."
+      ],
+      "structuresAtRisk": ["Femoral vessels and any graft beneath the closure", "Femoral nerve branches", "Groin lymphatics"],
+      "pitfalls": [
+        "A single-layer skin closure over a dead space that fills with lymph.",
+        "Deep sutures that catch the graft or the femoral vein."
+      ],
+      "review": { "status": "ai_drafted" }
     }
   }
 }

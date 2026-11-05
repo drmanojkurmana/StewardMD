@@ -1,0 +1,234 @@
+{
+  "id": "vats-bullectomy-pleurodesis",
+  "title": "VATS bullectomy with pleurodesis",
+  "subtitle": "Definitive surgery for recurrent or persistent pneumothorax",
+  "system": "thoracic",
+  "aliases": ["VATS for pneumothorax", "video-assisted thoracoscopic surgery", "bullectomy", "pleurectomy", "pleural abrasion", "VATS pleurodesis"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "bts-pleural-2023", "org": "British Thoracic Society (BTS)", "title": "British Thoracic Society Guideline for pleural disease", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37433578/", "accessed": "2026-11-04" },
+    { "id": "ers-psp-2015", "org": "European Respiratory Society (ERS) task force", "title": "ERS task force statement: diagnosis and treatment of primary spontaneous pneumothorax", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/26113675/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["pack_years"],
+  "chapters": {
+    "indications": [
+      "Recurrent spontaneous pneumothorax, ipsilateral or contralateral.",
+      "Persistent air leak or failure of the lung to re-expand despite adequate chest drainage, after discussion with the thoracic surgical team.",
+      "A first pneumothorax in a patient whose occupation or activities make recurrence dangerous (for example pilots and divers), or bilateral or tension presentation, by individual decision.",
+      "Haemopneumothorax with ongoing bleeding."
+    ],
+    "contraindications": [
+      "Inability to tolerate one-lung ventilation or general anaesthesia, where medical pleurodesis or an ambulatory device may be preferred.",
+      "Dense obliterating pleural adhesions from previous surgery or infection, which may require an open approach.",
+      "Secondary pneumothorax in severe lung disease, where the decision is individual and the risk higher; this procedure outline is for primary disease."
+    ],
+    "preparation": [
+      "Chest radiograph and CT where available to identify bullae, the extent of disease and the contralateral lung.",
+      "Smoking cessation advice: smoking increases recurrence.",
+      "An intercostal drain in place before induction if a pneumothorax is present, to prevent tension with positive-pressure ventilation.",
+      "Agree with the anaesthetist on a double-lumen tube or bronchial blocker, and regional analgesia (paravertebral or serratus plane block, or epidural).",
+      "Consent risks to discuss: recurrence (lower after surgical pleurodesis than after medical treatment but not zero); prolonged air leak; bleeding and the need to convert to an open thoracotomy; chronic chest wall pain and numbness; wound infection; for pleurectomy, the difficulty of future thoracic surgery on that side."
+    ],
+    "positioning": [
+      "Lateral decubitus with the operated side up, an axillary roll below the dependent axilla, and the table broken to open the intercostal spaces.",
+      "Arms supported with the upper arm forward and up, pressure points padded, and the patient secured before any tilt."
+    ],
+    "equipment": [
+      "Thoracoscope (usually 30 degree), camera and light, with thoracotomy instruments open and available.",
+      "Endoscopic staplers with appropriate loads, and buttress material if used.",
+      "Pleural abrasion pad or scourer, and instruments for parietal pleurectomy.",
+      "Chest drains and an underwater seal or digital drainage system."
+    ],
+    "anatomy": [
+      "Blebs and bullae in primary spontaneous pneumothorax are most often at the lung apex, and sometimes at the apex of the lower lobe.",
+      "The intercostal neurovascular bundle runs in the groove on the lower border of each rib, so instruments pass over the upper border of the rib below.",
+      "At the apex, the subclavian artery and vein, the sympathetic chain with the stellate ganglion, and the brachial plexus lie just beyond the parietal pleura.",
+      "The phrenic nerve runs on the pericardium anterior to the hilum; the diaphragm rises high in expiration, so low ports can enter the abdomen."
+    ],
+    "criticalSafety": [
+      "Do not induce positive-pressure ventilation with an undrained pneumothorax.",
+      "Confirm lung isolation before the first port; poor isolation makes the operation unsafe.",
+      "Insert the first port under vision or by blunt finger dissection, not by a blind trocar thrust.",
+      "Staple across normal lung beyond the bulla, never through it.",
+      "Keep pleurectomy and abrasion clear of the apex vessels, the sympathetic chain and the phrenic nerve.",
+      "Convert early for bleeding that cannot be controlled thoracoscopically."
+    ],
+    "structuresAtRisk": [
+      "Intercostal neurovascular bundles",
+      "Subclavian vessels at the apex",
+      "Sympathetic chain and stellate ganglion (Horner syndrome)",
+      "Phrenic nerve",
+      "Long thoracic nerve at port sites",
+      "Diaphragm, liver and spleen with a low port"
+    ],
+    "commonErrors": [
+      "Missing a second bleb because the whole lung was not inspected.",
+      "Stapling too close to the bulla, so the staple line tears.",
+      "Abrading or stripping right up to the apex and injuring the stellate ganglion or subclavian vessels.",
+      "Drains placed without an apical drain, leaving an apical space.",
+      "Not repeating the leak test after the final staple line."
+    ],
+    "complications": [
+      "Prolonged air leak.",
+      "Recurrent pneumothorax.",
+      "Haemothorax from intercostal vessels, the pleurectomy bed or adhesions.",
+      "Chronic post-surgical chest wall pain and numbness.",
+      "Horner syndrome, phrenic nerve palsy.",
+      "Wound and pleural infection; re-expansion pulmonary oedema."
+    ],
+    "postop": [
+      "Daily drain review: air leak, drainage volume and radiograph. Suction per surgeon and unit practice.",
+      "Remove the drain when the air leak has stopped and the lung is fully expanded.",
+      "Multimodal analgesia with regional techniques and early mobilisation and chest physiotherapy.",
+      "Advise on smoking cessation, on air travel after full resolution per BTS advice, and on lifelong avoidance of diving unless cleared by a specialist."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm and mark the side against the radiographs. Include conversion to thoracotomy, recurrence and chronic pain." },
+    { "ref": "step.core.timeout", "emphasis": "State that a drain is in place if a pneumothorax is present, and the lung isolation plan." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.vats.lung-isolation" },
+    { "ref": "step.core.positioning", "emphasis": "Lateral decubitus, axillary roll, table broken; recheck tube position after turning." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare widely enough for a thoracotomy and for drain sites, from the spine to the sternum." },
+    { "ref": "step.vats.ports" },
+    { "ref": "step.vats.inspection" },
+    { "ref": "step.vats.bullectomy" },
+    { "ref": "step.vats.pleurodesis" },
+    { "ref": "step.vats.leak-test" },
+    { "ref": "step.vats.conversion" },
+    { "ref": "step.core.haemostasis", "emphasis": "Inspect the staple line, port sites, adhesion beds and any pleurectomy bed under the camera as the lung re-expands." },
+    { "ref": "step.thor.chest-drains", "emphasis": "An apical drain through a port site, positioned under vision; a second basal drain if there was bleeding or the space is large." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Send the resected lung for histology; occasionally it shows an unexpected diagnosis." },
+    { "ref": "step.core.skin-closure", "emphasis": "Close muscle and skin at port sites in layers around the drain." },
+    { "ref": "step.core.debrief", "emphasis": "Record bullae found and resected, the pleurodesis method and its extent, the leak test, drains and suction plan." }
+  ],
+  "steps_local": {
+    "step.vats.lung-isolation": {
+      "id": "step.vats.lung-isolation",
+      "kind": "prep",
+      "critical": true,
+      "title": "Lung isolation and one-lung ventilation",
+      "why": "Thoracoscopy needs a collapsed lung to see and to work. A misplaced tube gives a lung that will not deflate, a poor view, hypoxia, and pressure to work blind.",
+      "how": [
+        "Ensure an intercostal drain is in place if a pneumothorax is present before positive-pressure ventilation begins.",
+        "Agree with the anaesthetist on a double-lumen tube or bronchial blocker; position is confirmed by fibreoptic bronchoscopy.",
+        "Recheck tube position after turning the patient lateral, and confirm isolation and saturation before making the first incision."
+      ],
+      "structuresAtRisk": ["Contralateral lung from barotrauma", "Airway"],
+      "pitfalls": [
+        "Starting the operation with partial lung collapse and hoping it improves.",
+        "Not rechecking the tube after positioning, when it often moves."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vats.ports": {
+      "id": "step.vats.ports",
+      "kind": "access",
+      "critical": true,
+      "title": "Port placement",
+      "why": "The first port enters a chest that may contain adherent lung, and a low port can enter the abdomen. Ports placed to triangulate on the apex make the bullectomy and pleurodesis straightforward.",
+      "how": [
+        "Place the camera port in a lower intercostal space in the mid-axillary line, entering by blunt dissection over the upper border of the rib and confirming with a finger that the lung is free.",
+        "Under vision, place working ports to triangulate on the apex, or use a single utility incision for a uniportal approach.",
+        "Divide any adhesions near the ports first, with attention to bleeding from chest wall adhesions."
+      ],
+      "structuresAtRisk": ["Intercostal neurovascular bundle", "Lung adherent to the chest wall", "Diaphragm, liver and spleen", "Long thoracic nerve"],
+      "pitfalls": [
+        "A sharp trocar pushed blindly through the chest wall.",
+        "Ports placed too close together, which clash at the apex."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vats.inspection": {
+      "id": "step.vats.inspection",
+      "kind": "checkpoint",
+      "title": "Systematic inspection and finding the leak",
+      "why": "Recurrence after surgery often comes from a bleb that was never found. The whole lung surface, not only the obvious apical bulla, must be inspected.",
+      "how": [
+        "Inspect the apex of the upper lobe, the apex of the lower lobe, the fissures and the mediastinal and diaphragmatic surfaces in a fixed order.",
+        "Divide adhesions under vision, sealing vascular ones, to free the apex.",
+        "If no bleb is seen, fill the chest with warm saline and ask for gentle ventilation of the lung to look for bubbles."
+      ],
+      "structuresAtRisk": ["Vascular apical adhesions", "Lung surface"],
+      "pitfalls": [
+        "Stopping at the first bulla found.",
+        "Tearing lung when dividing adhesions bluntly."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vats.bullectomy": {
+      "id": "step.vats.bullectomy",
+      "kind": "resection",
+      "critical": true,
+      "title": "Stapled bullectomy",
+      "why": "Removing the diseased apical lung removes the source of the leak. A staple line through diseased tissue leaks and fails; a staple line across normal lung holds.",
+      "how": [
+        "Grasp the bulla gently, or the lung just beyond it, and position the stapler across normal lung proximal to the bulla.",
+        "Choose a staple load suitable for the lung thickness; use buttress material if the lung is thin and the unit uses it.",
+        "Fire successive loads with overlapping lines and inspect the staple line for gaps and bleeding."
+      ],
+      "structuresAtRisk": ["Lung parenchyma", "Segmental vessels close to the hilum with a deep staple line"],
+      "pitfalls": [
+        "Firing through the bulla.",
+        "Taking too much lung, especially in a patient with secondary lung disease."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vats.pleurodesis": {
+      "id": "step.vats.pleurodesis",
+      "kind": "resection",
+      "critical": true,
+      "title": "Pleurodesis: pleural abrasion or apical pleurectomy",
+      "why": "Bullectomy alone leaves a significant recurrence rate. Creating adhesion between lung and chest wall is what makes the result durable.",
+      "how": [
+        "For mechanical abrasion, rub the parietal pleura with an abrasion pad until it bleeds lightly, over the upper chest wall and apex.",
+        "For apical pleurectomy, raise a flap of parietal pleura along a line through the intercostal spaces and strip it from the upper chest wall, staying clear of the apex vessels.",
+        "Keep away from the sympathetic chain along the vertebral bodies, the subclavian vessels at the apex and the phrenic nerve on the mediastinum.",
+        "Chemical pleurodesis with talc is used by some units as an adjunct; follow local policy, especially in young patients."
+      ],
+      "structuresAtRisk": ["Sympathetic chain and stellate ganglion", "Subclavian artery and vein", "Phrenic nerve", "Intercostal vessels"],
+      "pitfalls": [
+        "Stripping or abrading over the apex dome and the sympathetic chain.",
+        "Bleeding from the pleurectomy bed that is not controlled before closure."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vats.leak-test": {
+      "id": "step.vats.leak-test",
+      "kind": "checkpoint",
+      "title": "Leak test and re-expansion under vision",
+      "why": "An air leak found now can be stapled or sutured in a minute; found after closure it becomes days of drainage or a return to theatre.",
+      "how": [
+        "Fill the chest with warm saline over the staple lines and ask the anaesthetist to ventilate the lung gently at a sustained pressure.",
+        "Look for bubbles from the staple line and the lung surface, and repair significant leaks with staples or sutures.",
+        "Watch the lung re-expand fully under the camera before final closure."
+      ],
+      "structuresAtRisk": ["Staple line"],
+      "pitfalls": [
+        "Over-inflating fragile lung during the test and causing a new leak.",
+        "Accepting incomplete re-expansion because of a trapped segment that was not freed."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vats.conversion": {
+      "id": "step.vats.conversion",
+      "kind": "bailout",
+      "title": "Conversion to thoracotomy",
+      "why": "Conversion is not failure. Bleeding from a major vessel, dense adhesions or a lung that cannot be isolated are safer open, and the decision is best made early, before blood obscures the view.",
+      "how": [
+        "Convert for uncontrolled bleeding, dense adhesions that cannot be divided safely, failure of lung isolation, or a finding that needs a larger resection.",
+        "For major bleeding, apply direct pressure with a sponge stick through a port, tell the anaesthetist, call for senior help and blood, and open through a lateral or anterior thoracotomy incorporating a port.",
+        "Record the reason for conversion in the operative note."
+      ],
+      "structuresAtRisk": ["Subclavian vessels", "Pulmonary vessels"],
+      "pitfalls": [
+        "Persisting thoracoscopically with a poor view and rising blood loss.",
+        "Removing the pressure to look before the team, the blood and the instruments are ready."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

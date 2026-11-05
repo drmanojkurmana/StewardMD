@@ -1126,6 +1126,12 @@
       "file": "steps/hand.json",
       "title": "Shared hand surgery steps",
       "shared": true
+    },
+    {
+      "id": "thoracic",
+      "file": "steps/thoracic.json",
+      "title": "Shared cardiothoracic steps",
+      "shared": true
     }
   ],
   "procedures": [
@@ -2220,6 +2226,120 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 20
+    },
+    {
+      "id": "carotid-endarterectomy",
+      "title": "Carotid endarterectomy",
+      "subtitle": "Plaque removal with patch closure, under local or general anaesthesia",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/carotid-endarterectomy.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "fem-pop-bypass",
+      "title": "Femoro-popliteal bypass (above knee, vein graft)",
+      "subtitle": "Reversed great saphenous vein to the above-knee popliteal artery",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/fem-pop-bypass.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "av-fistula-radiocephalic",
+      "title": "Radiocephalic arteriovenous fistula",
+      "subtitle": "Wrist fistula for haemodialysis access",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/av-fistula-radiocephalic.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "gsv-ablation-stripping",
+      "title": "Great saphenous vein surgery",
+      "subtitle": "Endovenous thermal ablation, and open high tie with stripping",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/gsv-ablation-stripping.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "above-knee-amputation",
+      "title": "Above-knee amputation",
+      "subtitle": "Transfemoral amputation with equal flaps and adductor myodesis",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/above-knee-amputation.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "vats-bullectomy-pleurodesis",
+      "title": "VATS bullectomy with pleurodesis",
+      "subtitle": "Definitive surgery for recurrent or persistent pneumothorax",
+      "system": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "procedures/vats-bullectomy-pleurodesis.json",
+      "stepPacks": [
+        "core",
+        "thoracic"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "median-sternotomy",
+      "title": "Median sternotomy and closure",
+      "subtitle": "Opening, closing, and emergency re-sternotomy",
+      "system": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "procedures/median-sternotomy.json",
+      "stepPacks": [
+        "core",
+        "thoracic",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "cabg",
+      "title": "Coronary artery bypass grafting",
+      "subtitle": "Outline level: conduits, cardiopulmonary bypass, anastomoses, weaning",
+      "system": "cardiac",
+      "specialty": "cardiothoracic",
+      "file": "procedures/cabg.json",
+      "stepPacks": [
+        "core",
+        "thoracic",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 240
     }
   ],
   "cases": [
