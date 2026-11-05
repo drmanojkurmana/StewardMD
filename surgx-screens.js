@@ -105,15 +105,20 @@
     var right = opts.right || "";
     // The eyebrow must not simply repeat the title. "Acute abdomen / Acute abdomen" is what
     // category-as-subtitle produces for a protocol whose name IS its category.
-    if (sub && String(sub).toLowerCase() === String(title).toLowerCase()) sub = "";
+    // Section numbers ("02", "03 · Endocrine") were a kicker above the title: the sequence carries no
+    // information a surgeon needs here (2026-11-05 anti-slop pass). Keep only the words, shown UNDER
+    // the title as a quiet subtitle, never as an eyebrow above it.
+    sub = String(sub || "").replace(/^\s*0\d\s*(·\s*)?/, "").trim();
+    if (sub) sub = sub.charAt(0).toUpperCase() + sub.slice(1);   // content data is often lower case ("endocrine")
+    if (sub && sub.toLowerCase() === String(title).toLowerCase()) sub = "";
     // titleless: the screen below already carries the wordmark. On HOME the hero sits directly under
     // this bar, so printing SURGX in both stacked the same title twice (reported from internal
     // testing: "Remove this....keep it as clinix"). The bar is kept for its close button; the overlay
     // and that button both still name SURGX for screen readers.
     return '<div class="sgx-head' + (opts.titleless ? " sgx-head-bare" : "") + '">' + lead +
       (opts.titleless ? '<div class="sgx-htitle"></div>' :
-      '<div class="sgx-htitle">' + (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") +
-      (opts.rawTitle || esc(title)) + "</div>") +
+      '<div class="sgx-htitle">' + (opts.rawTitle || esc(title)) +
+      (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") + "</div>") +
       right +
       (isHome ? "" : '<button class="sgx-hbtn sgx-close" data-sgx="close" aria-label="Close SURGX">' + ic("close") + "</button>") +
       "</div>";
@@ -248,7 +253,6 @@
         if (notesAccess === "verify_required") locked = '<span class="lock">Verify</span>';
       }
       return '<button class="sgx-sec" data-sgx="go" data-r="' + attr(s.act) + '"' + disabled + '>' +
-        '<span class="n">' + s.n + "</span>" +
         '<span class="tx"><span class="tt">' + esc(s.tt) + '</span><span class="sb">' + esc(s.sb) + "</span></span>" +
         locked +
         '<span class="go">' + ic("chevron_right") + "</span></button>";
@@ -301,9 +305,10 @@
     var cc = C(); if (!cc) return;
     state.catalog = { specialties: [], categories: [] };
     cc.loadCatalog().then(function (cat) {
-      state.catalog = { specialties: (cat && cat.specialties) || [], categories: (cat && cat.categories) || [] };
+      state.catalog = { specialties: (cat && cat.specialties) || [], categories: (cat && cat.categories) || [], raw: cat || {} };
+      var h0 = routeHead(); if (h0 === "evidence") render();
       var h = routeHead();
-      if (h === "protocols" || h === "procedures" || h === "cases") render();
+      if (h === "protocols" || h === "procedures" || h === "cases" || h === "protocol") render();
     });
   }
   function specTitle(id) {
@@ -315,6 +320,15 @@
     var list = (state.catalog && state.catalog.categories) || [];
     for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i].title;
     return CAT_TITLES[id] || id;
+  }
+  // A human title for a protocol or procedure id. Falls back to the id made readable, never a raw slug.
+  function itemTitle(kind, id) {
+    var raw = (state.catalog && state.catalog.raw) || {}, list = raw[kind === "protocol" ? "protocols" : "procedures"] || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id && list[i].title) return list[i].title;
+    (state.protoIndex || []).forEach(function (p) { if (p.id === id && p.title) id = "\u0000" + p.title; });
+    if (id.charAt(0) === "\u0000") return id.slice(1);
+    var t = String(id).replace(/[-_]+/g, " ");
+    return t.charAt(0).toUpperCase() + t.slice(1);
   }
   function specOf(x) { return (x && x.specialty) || "general"; }
   // Order follows manifest.specialties, then anything unlisted, so the chip row is stable.
@@ -392,7 +406,7 @@
       html = rowsBySpec(state.protoIndex, protoRow);
     }
     return head("Protocols", "02") + wrap(
-      '<div class="sgx-banner info">' + ic("bolt") +
+      '<div class="sgx-banner info">' + ic("info") +
       " Red flags and immediate actions are always at the top. Interactive protocols recalculate as you tick findings.</div>" +
       browseBar(state.protoIndex, "protocols") + html);
   }
@@ -478,7 +492,8 @@
       "</div>";
     body += '<div class="sgx-disclaim">' + esc(p.disclaimer) + "</div>";
 
-    return head(p.title, "02 · " + (CAT_TITLES[p.category] || "Protocol")) + wrap(body);
+    ensureCatalog();
+    return head(p.title, "02 · " + (catTitle(p.category) || "Protocol")) + wrap(body);
   }
 
   function bandBody(p, b) {
@@ -644,7 +659,7 @@
     body += sourcesCard(p.sources);
     body += '<div class="sgx-disclaim">' + esc(p.disclaimer) + "</div>";
 
-    return head(p.title, "03 · " + esc(p.system || "Procedure")) + tabBar + wrap(body);
+    return head(p.title, "03 · " + (p.system || "Procedure")) + tabBar + wrap(body);
   }
 
   function renderStep(s) {
@@ -714,14 +729,17 @@
       "</div>" +
       '<div class="own">StewardMD summary · not reproduced guideline text</div></div>';
 
+    ensureCatalog();
     var links = "";
-    (rec.protocolRefs || []).forEach(function (pid) {
-      links += '<button class="sgx-chip" data-sgx="go" data-r="protocol/' + attr(pid) + '">' + ic("emergency") + " " + esc(pid) + "</button>";
-    });
-    (rec.procedureRefs || []).forEach(function (pid) {
-      links += '<button class="sgx-chip" data-sgx="go" data-r="procedure/' + attr(pid) + '">' + ic("content_cut") + " " + esc(pid) + "</button>";
-    });
-    if (links) body += '<div class="sgx-card"><h4>Used by</h4><div class="sgx-chips">' + links + "</div></div>";
+    function linkRow(kind, id) {
+      return '<button class="sgx-row" data-sgx="go" data-r="' + kind + "/" + attr(id) + '">' +
+        '<span class="tx"><span class="tt">' + esc(itemTitle(kind, id)) + '</span><span class="sb">' +
+        (kind === "protocol" ? "Protocol" : "Operation") + "</span></span>" +
+        '<span class="go">' + ic("chevron_right") + "</span></button>";
+    }
+    (rec.protocolRefs || []).forEach(function (pid) { links += linkRow("protocol", pid); });
+    (rec.procedureRefs || []).forEach(function (pid) { links += linkRow("procedure", pid); });
+    if (links) body += '<div class="sgx-seclabel">Used by</div>' + links;
 
     body += '<div class="sgx-card"><h4>Go further</h4>' +
       '<div class="sgx-disclaim" style="border:none;margin:0;padding:0 0 10px">A live literature review uses one of your two ' +
@@ -913,7 +931,7 @@
     if (k.vitals) {
       var vs = "";
       for (var key in k.vitals) if (Object.prototype.hasOwnProperty.call(k.vitals, key)) {
-        vs += '<span class="sgx-vital">' + esc(key) + " " + esc(k.vitals[key]) + "</span>";
+        vs += '<span class="sgx-vital"><span class="k">' + esc(key) + "</span>" + esc(k.vitals[key]) + "</span>";
       }
       if (vs) body += '<div class="sgx-vitals">' + vs + "</div>";
     }
@@ -960,7 +978,8 @@
   }
 
   function renderDecision(d, picked, k) {
-    var h = '<div class="sgx-card"><h4>' + esc(d.phase) + " · question " + d.n + "</h4>" +
+    var ph = String(d.phase || "");
+    var h = '<div class="sgx-card"><h4>' + esc(ph.charAt(0).toUpperCase() + ph.slice(1)) + " · question " + d.n + "</h4>" +
       '<div style="font:650 14.5px/1.5 var(--sgx-sans);margin-bottom:10px">' + esc(d.prompt) + "</div>";
     if (!picked && d.hint) {
       h += '<div class="sgx-banner info" style="margin-bottom:10px">' + ic("lightbulb") + " " + esc(d.hint) + "</div>";
@@ -1542,7 +1561,7 @@
     var h = '<div class="sgx-fld' + cls + '" data-fk="' + attr(f.k) + '">' +
       '<label for="sgxF-' + attr(f.k) + '">' + esc(f.label) +
       (f.required ? ' <span class="req" title="Required">*</span>' : "") +
-      (f.aiFillable === false ? " " + ic("lock") : "") +
+      (f.aiFillable === false && f.type !== "choice" ? " " + ic("lock") : "") +
       (provLabel ? '<span class="sgx-prov ' + pv + '">' + provLabel + "</span>" : "") +
       "</label>";
     if (f.help) h += '<div class="help">' + esc(f.help) + "</div>";
