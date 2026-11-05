@@ -3,7 +3,7 @@
  "module": "sgm-evidence-synthesis",
  "subject": "ss-general-medicine",
  "title": "Evidence synthesis and clinical guidelines: the essentials for NEET-PG",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "Evidence synthesis combines results from several studies on one clinical question. A **systematic review** uses a predefined, reproducible search and appraisal method, while a **meta-analysis** pools the numerical results statistically. A single small observational study should never drive practice alone. Clinicians should first look for systematic reviews and guidelines, because pooling reduces the chance that one flawed study misleads decisions.",
@@ -71,6 +71,17 @@
       "Asymmetry suggests publication bias"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The **forest plot** pools several randomised trials, each drawn as a square with arms spanning its interval, into one diamond of pooled effect favouring intervention. The footer quantifies disagreement with **I-squared** heterogeneity and rates certainty with **GRADE**. Reading the diamond against the no-effect line, plus the heterogeneity behind it, is the core exam skill.",
+   "say": "This forest plot combines several randomised trials of one intervention against control. Each trial adds one row with its own result and interval, and the diamond summarises the pooled effect, which here favours intervention. Below the plot, a heterogeneity statistic describes how much the studies disagree, and a GRADE rating states the certainty of the evidence. Together these elements show how reviewers weigh consistency and certainty before guiding practice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgm-evidence-synthesis-gen1.webp",
+    "alt": "Forest plot of several trials with point estimates, a pooled diamond, heterogeneity and GRADE certainty labels.",
+    "caption": "Forest plot with pooled diamond, heterogeneity and certainty labels, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
