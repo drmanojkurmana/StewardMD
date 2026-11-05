@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "spl-fat-grafting",
+  "subject": "ss-plastic-surgery",
+  "title": "Fat Grafting and Regenerative Surgery",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The standardized **Coleman technique** for autologous fat transfer applies manual syringe suction using 10 mL barrels, controlled processing at 3000 rpm for 3 minutes, and micro-droplet tissue reinjection. Gentle manipulation avoids disruption of fragile adipocytes, maximizing cellular viability and volumetric predictability in soft tissue contour restoration.",
+      "say": "The Coleman technique provides standard low pressure manual aspiration with ten milliliter syringes, centrifugation at 3000 rpm for 3 minutes, and micro-droplet reinjection. This gentle protocol helps protect adipocyte viability.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Manual syringe aspiration under low negative pressure"
+          },
+          {
+            "id": "b",
+            "label": "Centrifugation at 3000 rpm for 3 minutes"
+          },
+          {
+            "id": "c",
+            "label": "Multi-planar micro-droplet reinjection"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following centrifugation, lipoaspirate separates into three distinct layers: an oily top layer containing free lipids from ruptured adipocytes, a middle purified condensed fat graft layer, and a bottom aqueous layer containing lidocaine, blood, and tumescent fluid. The **middle layer** is isolated for grafting.",
+      "say": "Surgeons identify that centrifugation separates the lipoaspirate into three layers: top free lipid oil, middle purified condensed fat graft, and bottom aqueous tumescent fluid. The purified middle layer is used for grafting.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Layer",
+          "Composition",
+          "Surgical Action"
+        ],
+        "rows": [
+          [
+            "Top layer",
+            "Free oil and released lipids",
+            "Decanted and wicked off"
+          ],
+          [
+            "Middle layer",
+            "Intact adipocytes and SVF",
+            "Retained and harvested for transfer"
+          ],
+          [
+            "Bottom layer",
+            "Aqueous tumescent solution and blood",
+            "Drained and discarded"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The stromal vascular fraction contains **adipose-derived stem cells** or ADSCs, which possess multipotent mesodermal differentiation capacity into adipogenic, osteogenic, and chondrogenic lineages. These regenerative cells secrete potent paracrine pro-angiogenic factors including vascular endothelial growth factor VEGF and fibroblast growth factor FGF, reversing radiation-induced tissue fibrosis.",
+      "say": "Surgeons identify that adipose-derived stem cells in the stromal vascular fraction exhibit multipotent regenerative capacity. Surgeons identify that they secrete vascular endothelial growth factor and fibroblast growth factor, improving tissue vascularity and healing.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-tub-closed-suction-drain.webp",
+        "alt": "Closed suction fluid drain in surgical tissue recovery",
+        "caption": "Surgical fluid drainage and tissue beds in regenerative soft tissue transfer. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The Eto and Yoshimura tri-zonal model explains fat graft survival dynamics: an outer **surviving zone** under 300 micrometers nourished by imbibition, an intermediate regenerating zone where host-derived neovascularisation supports adipocyte progenitor differentiation, and a central necrotic zone where ischaemic adipocytes die.",
+      "say": "Surgeons identify that the tri-zonal model describes fat survival: an outer surviving zone under three hundred micrometers, an intermediate regenerating zone, and an inner necrotic core where ischaemic cells die.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Graft Zone",
+          "Depth from Surface",
+          "Cellular Fate"
+        ],
+        "rows": [
+          [
+            "Surviving zone",
+            "Under 300 micrometers",
+            "Direct survival via plasmacytic imbibition"
+          ],
+          [
+            "Regenerating zone",
+            "300 to 1000 micrometers",
+            "Adipocytes die; replaced by progenitor cells"
+          ],
+          [
+            "Necrotic zone",
+            "Over 1000 micrometers",
+            "Ischaemic necrosis and oil cyst formation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "To maximise the recipient surface-to-volume contact area, surgeons deposit autologous fat as **micro-droplets** under 0.1 mL per pass across multiple anatomical tissue planes. Large bolus fat injections exceed diffusion capacity, causing central liquefaction necrosis, chronic inflammation, and unsightly calcifications throughout the graft site.",
+      "say": "Surgeons identify that surgeons identify that surgeons inject fat as micro-droplets under point one milliliters per pass across multiple tissue planes. Micro-droplet deposition provides essential surface contact for vascular ingrowth and survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Micro-droplet Deposition",
+          "points": [
+            "Under 0.1 mL per pass",
+            "Multi-planar distribution",
+            "High surface-to-volume ratio"
+          ]
+        },
+        "right": {
+          "title": "Bolus Injection",
+          "points": [
+            "Large confluent volume",
+            "Exceeds 300 micrometer diffusion",
+            "Leads to central necrosis and cysts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Long-term **volumetric retention** of autologous fat grafts typically ranges between 40% and 70%, with the majority of volume resorption occurring during the initial 3 to 6 months postoperatively. Surgical overcorrection of 20% to 30% is commonly practiced to compensate for expected early volume loss.",
+      "say": "Surgeons identify that autologous fat grafts retain forty to seventy percent of their volume long term, with most resorption occurring in the first three to six months. Surgeons identify that controlled overcorrection compensates for expected volume loss.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Initial fat graft placement"
+          },
+          {
+            "id": "b",
+            "label": "Early inflammatory reabsorption up to 3 to 6 months"
+          },
+          {
+            "id": "c",
+            "label": "Long-term stable volumetric retention at 40% to 70%"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical applications of autologous fat grafting span both reconstructive and aesthetic indications. Reconstructive indications include contour correction after lumpectomy, treatment of **radiation fibrosis**, burn scar contracture remodeling, and Romberg hemifacial atrophy. Aesthetic uses encompass facial rejuvenation, tear trough effacement, and gluteal augmentation.",
+      "say": "Surgeons identify that fat grafting addresses both reconstructive and aesthetic deformities. Surgeons identify that reconstructive uses include post-radiation fibrosis, scar remodeling, and contour defects, alongside facial rejuvenation and aesthetic volume restoration.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+        "alt": "Soft tissue reconstruction and scar debridement",
+        "caption": "Soft tissue plane preparation in contour deformity repair. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Postoperative complications of fat grafting include oil cyst formation, fat necrosis, and benign **microcalcifications** that must be differentiated from breast carcinoma on surveillance mammography. The most catastrophic complication is intravascular fat embolism, prevented by using blunt-tipped injection cannulas and avoiding high-pressure injections.",
+      "say": "Surgeons identify that surgeons identify that complications include oil cysts, fat necrosis, and mammographic microcalcifications. The most severe complication is intravascular fat embolism, avoided by using blunt cannulas and low injection pressure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fat Necrosis Calcifications",
+          "points": [
+            "Eggshell rim-like pattern",
+            "Lucent central lipid core",
+            "Stable on serial mammography"
+          ]
+        },
+        "right": {
+          "title": "Malignant Calcifications",
+          "points": [
+            "Pleomorphic and branching",
+            "Linear ductal distribution",
+            "Progressive interval changes"
+          ]
+        }
+      }
+    }
+  ]
+}

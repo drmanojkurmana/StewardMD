@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "spl-dupuytren-contracture",
+  "subject": "ss-plastic-surgery",
+  "title": "Dupuytren Contracture and Fascial Disorders",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The hallmark **Dupuytren contracture** is a benign, progressive fibroproliferative disorder of the palmar and digital fascia, characterised by pathognomonic conversion of normal fascial bands into diseased, contracting cords. It predominantly affects northern European males over 50 years of age, strongly associated with HLA-DRB1*15 and positive family history.",
+      "say": "Dupuytren disease is a fibroproliferative disorder where normal palmar fascial bands transform into contracting cords. Surgeons identify that surgeons identify that it predominantly affects older males of northern European descent.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Genetic susceptibility and microvascular hypoxia"
+          },
+          {
+            "id": "b",
+            "label": "TGF-beta1 release and fibroblast differentiation into myofibroblasts"
+          },
+          {
+            "id": "c",
+            "label": "Type III collagen deposition and irreversible fascial contracture"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The key cellular mediator driving fascial contracture is the **myofibroblast**, expressing alpha-smooth muscle actin. Cellular proliferation produces an abnormal extracellular matrix characterized by an inverted collagen ratio, where embryonic **type III collagen** increases markedly relative to mature normal type I collagen.",
+      "say": "Surgeons identify that myofibroblasts expressing alpha-smooth muscle actin drive Dupuytren contracture. Surgeons identify that surgeons identify that proliferation shifts the matrix toward embryonic type three collagen relative to normal type one collagen.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Palmar Fascia",
+          "points": [
+            "Predominance of Type I collagen",
+            "Quiescent fibroblastic stroma",
+            "Pliable non-contracted architecture"
+          ]
+        },
+        "right": {
+          "title": "Dupuytren Tissue",
+          "points": [
+            "Abundant active myofibroblasts",
+            "Elevated Type III collagen ratio",
+            "Continuous progressive contraction"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Ectopic fibromatosis manifestations in Dupuytren diathesis include plantar fibromatosis known as **Ledderhose disease**, penile fibromatosis causing chordee curvature known as **Peyronie disease**, and fibrous knuckle pads over the dorsal proximal interphalangeal joints termed Garrod pads that occur frequently in severe clinical phenotypes.",
+      "say": "Dupuytren diathesis features ectopic fibromatosis including Ledderhose disease of the feet, Peyronie disease of the penis, and Garrod knuckle pads over the dorsal finger joints. Surgeons identify that these signs indicate aggressive disease biology.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ectopic Site",
+          "Condition Name",
+          "Clinical Presentation"
+        ],
+        "rows": [
+          [
+            "Plantar fascia",
+            "Ledderhose disease",
+            "Painful medial plantar nodules"
+          ],
+          [
+            "Penile tunica albuginea",
+            "Peyronie disease",
+            "Painful erection and dorsal curvature"
+          ],
+          [
+            "Dorsum of PIP joints",
+            "Garrod pads",
+            "Subcutaneous fibrous knuckle pads"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The anatomy of diseased cords dictates digital deformity patterns. The pretendinous band forms the pretendinous cord causing metacarpophalangeal contracture. The spiral cord, arising from pretendinous band, spiral band, Grayson ligament, and lateral digital sheet, displaces the **neurovascular bundle** midline, superficial, and proximal.",
+      "say": "Surgeons identify that diseased cords determine joint deformities. Surgeons identify that the pretendinous cord flexes the MCP joint, while the spiral cord displaces the neurovascular bundle midline and superficial, creating a major surgical hazard.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Pretendinous band + spiral band + Grayson ligament + lateral sheet"
+          },
+          {
+            "id": "b",
+            "label": "Spiral cord matures and contracts"
+          },
+          {
+            "id": "c",
+            "label": "Neurovascular bundle displaced superficial and toward the midline"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical assessment utilizes the **Hueston tabletop test**: the patient is asked to place their hand flat on a table. Inability to place the palm completely flat confirms fixed flexion contracture. Standard indications for surgical fasciectomy include MCP joint flexion contracture exceeding 30 degrees or any PIP joint flexion contracture.",
+      "say": "Surgeons identify that surgeons identify that the Hueston tabletop test confirms fixed flexion contracture when the palm cannot lie flat. Surgery is indicated for MCP flexion exceeding thirty degrees or any degree of PIP contracture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MCP Joint Contracture",
+          "points": [
+            "Tolerates up to 30 degrees contracture",
+            "Easily corrected surgically",
+            "Low post-release recurrence"
+          ]
+        },
+        "right": {
+          "title": "PIP Joint Contracture",
+          "points": [
+            "Any flexion contracture warrants surgery",
+            "Involves check-rein ligaments and volar plate",
+            "Prone to permanent joint stiffness"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Limited or selective **fasciectomy** is the standard surgical procedure, excising only macroscopic diseased fascial cords while sparing normal fascia. Bruner zig-zag incisions or longitudinal incisions combined with multiple Z-plasties prevent longitudinal linear scar contractures and provide wide exposure of the displaced neurovascular bundles.",
+      "say": "Surgeons identify that limited fasciectomy excises diseased cords while sparing normal tissue. Surgeons identify that bruner zig-zag incisions and Z-plasties prevent longitudinal contracture and protect displaced neurovascular bundles.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-bp-handle-3.webp",
+        "alt": "Fine scalpel for precise Dupuytren cord dissection",
+        "caption": "Precision surgical instruments for dissecting diseased fascial cords. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The **McCash open-palm technique** leaves transverse palmar skin incisions unstitched to heal by secondary intention. This method virtually eliminates postoperative palmar hematoma formation, reduces pain, and allows immediate active finger mobilization, with full epithelialization achieved in 3 to 5 weeks.",
+      "say": "Surgeons identify that surgeons identify that the McCash open-palm technique leaves transverse incisions open to heal by secondary intention. This eliminates palmar hematoma and allows immediate finger movement.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+        "alt": "Open wound dressing for McCash secondary intention healing",
+        "caption": "Secondary intention healing in open-palm Dupuytren fasciectomy. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Non-surgical alternatives include needle fasciotomy and enzymatic cordolysis using **collagenase Clostridium histolyticum**. Collagenase degrades type I and type III collagen, followed by finger extension manipulation 24 to 48 hours later. Complications include skin tears, local hematoma, and rare flexor tendon rupture.",
+      "say": "Surgeons identify that surgeons identify that non-surgical options include enzymatic cordolysis with Clostridium collagenase. Surgeons identify that injecting the enzyme lyses collagen cords, followed by manual extension manipulation twenty-four hours later.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Modality",
+          "Invasiveness",
+          "Recurrence Rate"
+        ],
+        "rows": [
+          [
+            "Needle Fasciotomy",
+            "Percutaneous in office",
+            "High (50% at 3 to 5 years)"
+          ],
+          [
+            "Collagenase Injection",
+            "Enzymatic cordolysis",
+            "Moderate (35% at 5 years)"
+          ],
+          [
+            "Limited Fasciectomy",
+            "Open surgical resection",
+            "Low (10% to 20% at 5 years)"
+          ]
+        ]
+      }
+    }
+  ]
+}

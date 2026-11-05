@@ -1,0 +1,197 @@
+{
+  "v": 1,
+  "module": "spl-chest-abdominal-wall",
+  "subject": "ss-plastic-surgery",
+  "title": "Chest and Abdominal Wall Reconstruction",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Surgical management of complex chest and abdominal wall defects requires restoring structural stability and providing vascularised soft tissue coverage. Reconstruction of extensive full-thickness chest wall defects exceeding 5 cm or 4 ribs mandates rigid skeletal stabilization to prevent **paradoxical respiration** and ventilatory failure.",
+      "say": "Reconstruction of large chest wall defects requires restoring skeletal rigidity and providing vascularised soft tissue coverage. Surgeons identify that sternal or rib defects exceeding four ribs demand stabilization to avoid paradoxical respiration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Full-thickness chest or abdominal wall defect"
+          },
+          {
+            "id": "b",
+            "label": "Rigid skeletal restoration (rib plates, mesh)"
+          },
+          {
+            "id": "c",
+            "label": "Vascularised soft tissue flap coverage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Sternal osteomyelitis and post-sternotomy dehiscence are managed by radical debridement followed by flap reconstruction. The **pectoralis major turnover flap** based on internal mammary perforators or rotation flap based on the thoracoacromial axis provides robust muscle coverage for upper and middle sternal defects.",
+      "say": "Post-sternotomy wound breakdown is treated by radical debridement and muscle flap coverage. Surgeons identify that surgeons identify that the pectoralis major muscle flap represents the primary choice for upper and middle sternal defects.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-mayo-hegar-needle-holder.webp",
+        "alt": "Surgical needle holder for sternal wound closure",
+        "caption": "Surgical suturing instruments for complex sternal and fascial reconstructive closure. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Lower sternal and anterior chest wall defects are reliably covered by the **rectus abdominis flap** based on the superior epigastric artery, or the greater omentum flap based on the gastroepiploic vessels. The omentum conforms intimately to irregular infected mediastinal cavities and accelerates bacterial clearance.",
+      "say": "Lower sternal defects are managed with the superior epigastric rectus abdominis flap or the greater omentum. Surgeons identify that the omentum conforms to irregular infected dead space and controls infection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pectoralis Major Flap",
+          "points": [
+            "Ideal for upper/middle sternum",
+            "Based on thoracoacromial pedicle",
+            "Preserves abdominal wall integrity"
+          ]
+        },
+        "right": {
+          "title": "Greater Omentum Flap",
+          "points": [
+            "Fills deep irregular cavities",
+            "Based on gastroepiploic vessels",
+            "Requires laparotomy entry"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In complex ventral hernia repair and large midline abdominal defects, **component separation** allows medial advancement of the rectus abdominis complexes. Ramirez anterior component separation divides the external oblique aponeurosis lateral to the semilunar line, releasing 8 to 10 cm of advancement per side.",
+      "say": "Surgeons identify that component separation facilitates medial advancement of the rectus muscles in large ventral hernia repair. Surgeons identify that surgeons identify that anterior release divides the external oblique aponeurosis lateral to the semilunar line.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Skin undermining to semilunar line"
+          },
+          {
+            "id": "b",
+            "label": "Longitudinal incision of external oblique aponeurosis"
+          },
+          {
+            "id": "c",
+            "label": "Dissection between external and internal oblique muscles"
+          },
+          {
+            "id": "d",
+            "label": "Medial advancement of rectus complex to midline"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Posterior component separation, known as the **transversus abdominis release** or TAR technique, incises the posterior lamella of the internal oblique aponeurosis and releases the transversus abdominis muscle, creating a vast retro-rectus vascularised space for giant sublay mesh placement without compromising cutaneous perforators.",
+      "say": "Surgeons identify that surgeons identify that posterior component separation releases the transversus abdominis muscle to open a large retro-rectus space. This allows wide sublay mesh placement while preserving abdominal skin perforators.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Technique",
+          "Structure Released",
+          "Key Advantages"
+        ],
+        "rows": [
+          [
+            "Anterior (Ramirez)",
+            "External oblique aponeurosis",
+            "Significant medial movement, open exposure"
+          ],
+          [
+            "Posterior (TAR)",
+            "Transversus abdominis muscle",
+            "Preserves epigastric perforators, sublay space"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Surgical mesh reinforcement in abdominal reconstruction follows standard planar positioning. The **retro-rectus sublay** position, placed behind the rectus muscle and anterior to the posterior sheath, is associated with the lowest recurrence and infection rates compared to onlay or intraperitoneal underlay positions.",
+      "say": "Retro-rectus sublay mesh placement is located behind the rectus muscle and anterior to the posterior sheath. Surgeons identify that surgeons identify that this anatomic plane achieves the lowest recurrence and complication rates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sublay / Retro-rectus",
+          "points": [
+            "Protected between muscle and sheath",
+            "Lowest recurrence rate",
+            "Avoids bowel adhesion"
+          ]
+        },
+        "right": {
+          "title": "Onlay Position",
+          "points": [
+            "Placed on anterior rectus sheath",
+            "Higher seroma and wound breakdown",
+            "Subject to direct skin erosion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Massive full-thickness abdominal wall defects where primary fascial reapproximation is impossible require vascularised regional or distant flap reconstruction. The **anterolateral thigh flap** or tensor fasciae latae flap incorporating a robust sheet of vascularised fascia lata provides composite structural support and durable cutaneous coverage.",
+      "say": "Surgeons identify that massive full-thickness abdominal wall defects require vascularised composite flaps. The tensor fasciae latae or anterolateral thigh flap with fascia lata provides tensile support and skin coverage.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+        "alt": "Abdominal wall surgical debridement and reconstruction",
+        "caption": "Fascial plane dissection and reconstructive debridement in abdominal wall repair. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Loss of domain in giant ventral hernias poses severe risks of postoperative **abdominal compartment syndrome** upon forced reduction. Preoperative preparation using progressive preoperative pneumoperitoneum or ultrasound-guided botulinum toxin A injections into the lateral abdominal wall muscles relaxes lateral tension and increases intra-abdominal capacity.",
+      "say": "Surgeons identify that surgeons identify that loss of domain in giant hernias risks abdominal compartment syndrome upon closure. Surgeons identify that surgeons identify that preoperative botulinum toxin injections or pneumoperitoneum expand abdominal volume and reduce lateral tension.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Preparation Modality",
+          "Mechanism of Action",
+          "Clinical Benefit"
+        ],
+        "rows": [
+          [
+            "Botulinum Toxin A",
+            "Chemical denervation of lateral wall",
+            "Lengthens lateral obliques, eases midline closure"
+          ],
+          [
+            "Preoperative Pneumoperitoneum",
+            "Insufflation expands peritoneal space",
+            "Prevents sudden peak airway pressures"
+          ]
+        ]
+      }
+    }
+  ]
+}

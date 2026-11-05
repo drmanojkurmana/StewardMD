@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "spl-orthognathic-surgery",
+  "subject": "ss-plastic-surgery",
+  "title": "Orthognathic Surgery Principles",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Orthognathic surgery corrects dentofacial skeletal deformities to optimize masticatory function, airway patency, and facial aesthetics. The classic Angle classification categorizes malocclusion: **Class I** represents normal molar relationship with crowded or rotated teeth, **Class II** features mandibular retrognathism, and **Class III** denotes mandibular prognathism or maxillary hypoplasia.",
+      "say": "Surgeons identify that surgeons identify that orthognathic surgery corrects jaw deformities to restore function and facial aesthetics. Surgeons identify that surgeons identify that angle classification describes Class one normal molar relationship, Class two mandibular retrognathia, and Class three mandibular prognathism.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classification",
+          "Skeletal Profile",
+          "Molar Relationship"
+        ],
+        "rows": [
+          [
+            "Class I",
+            "Orthognathic profile",
+            "Mesiobuccal cusp of upper M1 in buccal groove of lower M1"
+          ],
+          [
+            "Class II",
+            "Retrognathic / convex profile",
+            "Lower M1 is positioned distal to upper M1"
+          ],
+          [
+            "Class III",
+            "Prognathic / concave profile",
+            "Lower M1 is positioned mesial to upper M1"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cephalometric analysis evaluates facial skeletal relationships against standardized population norms. Key angular measurements include SNA angle evaluating maxillary anteroposterior position (normal 82 degrees), SNB angle assessing mandibular position (normal 80 degrees), and the **ANB angle** determining the relative sagittal jaw discrepancy (normal 2 degrees).",
+      "say": "Surgeons identify that surgeons identify that cephalometric analysis quantifies facial skeletal relationships. Surgeons identify that surgeons identify that the SNA angle assesses maxillary projection, SNB assesses mandibular position, and ANB reflects sagittal jaw discrepancy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cephalometric Angle",
+          "Normal Value",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "SNA",
+            "82 degrees (+/- 2)",
+            "Maxillary anteroposterior projection"
+          ],
+          [
+            "SNB",
+            "80 degrees (+/- 2)",
+            "Mandibular anteroposterior projection"
+          ],
+          [
+            "ANB",
+            "2 degrees (+/- 2)",
+            "Sagittal jaw discrepancy: high in Class II, negative in Class III"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The workhorse maxillary procedure is the **Le Fort I osteotomy**, which down-fractures the maxilla at a subzygomatic horizontal level through the lateral nasal walls and pterygomaxillary junctions. Vascular perfusion to the mobilized maxilla is maintained entirely via the ascending palatine artery and ascending pharyngeal branch through the posterior soft palate.",
+      "say": "Surgeons identify that surgeons identify that the Le Fort one osteotomy mobilizes the maxilla horizontally above the tooth roots. Surgeons identify that perfusion to the down-fractured maxilla relies on the ascending palatine artery through the palate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Horizontal osteotomy from piriform aperture to pterygoid plates"
+          },
+          {
+            "id": "b",
+            "label": "Pterygomaxillary dysjunction with curved osteotome"
+          },
+          {
+            "id": "c",
+            "label": "Careful down-fracture preserving palatal vascular pedicle"
+          },
+          {
+            "id": "d",
+            "label": "Repositioning and rigid four-plate miniplate fixation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Vascular safety during Le Fort I osteotomy demands precise separation of the pterygoid plates. Blind or high osteotomy at the pterygomaxillary fissure risks catastrophic hemorrhage from the **internal maxillary artery** or descending palatine artery, requiring prompt transoral packing, direct clipping, or interventional radiological embolization.",
+      "say": "Surgeons identify that separating the pterygoid plates carries risk of hemorrhage from the internal maxillary artery. Surgeons identify that surgeons identify that careful inferior osteotome placement avoids vascular injury.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-mayo-dissecting-scissors.webp",
+        "alt": "Mayo dissecting scissors for soft tissue plane release",
+        "caption": "Surgical instruments for controlled subperiosteal exposure in maxillofacial osteotomies. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The standard procedure for mandibular sagittal repositioning is the **bilateral sagittal split osteotomy** or BSSO. The split separates the tooth-bearing distal mandibular segment from the condyle-bearing proximal segments, permitting forward advancement, setback, or rotational leveling while preserving the condylar head position in the glenoid fossa.",
+      "say": "Surgeons identify that bilateral sagittal split osteotomy separates the tooth-bearing segment from the condyles. This allows mandibular advancement or setback while maintaining condylar seating in the glenoid fossa.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Maxillary Le Fort I",
+          "points": [
+            "Down-fractures upper jaw",
+            "Corrects vertical and sagittal excess",
+            "Preserves palatal soft tissue pedicle"
+          ]
+        },
+        "right": {
+          "title": "Mandibular BSSO",
+          "points": [
+            "Splits mandibular ramus and angle",
+            "Advances or sets back the mandible",
+            "Condylar segment remains seated in fossa"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "During bilateral sagittal split osteotomy, the **inferior alveolar nerve** must be carefully visualized and protected within the mandibular canal. The lingual horizontal cortical cut must stay superior to the lingula, and the vertical cut along the lateral cortex must remain anterior, avoiding direct nerve transection or severe crush injury.",
+      "say": "Protecting the inferior alveolar nerve is critical during sagittal split osteotomy. Surgeons identify that surgeons identify that osteotomy cuts must remain above the lingula and anterior on the lateral cortex.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-langenbeck-retractor.webp",
+        "alt": "Langenbeck retractor for mandibular osteotomy visualization",
+        "caption": "Surgical retractors used to protect the neurovascular bundle during bone cuts. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "A **genioplasty** or horizontal sliding osteotomy of the symphysis allows three-dimensional repositioning of the chin independently of occlusion. By advancing, setting back, vertical lengthening, or shortening the lower mandibular border, the surgeon enhances cervicomental aesthetics, lip competence, and expands retroglossal hypopharyngeal airway space.",
+      "say": "Surgeons identify that surgeons identify that genioplasty repositions the chin in three dimensions independently of occlusion. Surgeons identify that surgeons identify that it enhances cervicomental aesthetics and expands retroglossal airway space in retrognathia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Transoral degloving incision preserving mental nerves"
+          },
+          {
+            "id": "b",
+            "label": "Horizontal symphyseal osteotomy 5 mm below tooth roots"
+          },
+          {
+            "id": "c",
+            "label": "Three-dimensional sliding advancement and stepped plate fixation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Orthognathic surgery significantly expands upper airway dimensions in patients suffering from obstructive sleep apnea. **Maxillomandibular advancement** or MMA achieves simultaneous forward advancement of both maxilla and mandible by at least 10 mm, delivering surgical cure rates exceeding 85% by expanding retropalatal and retroglossal airspace.",
+      "say": "Surgeons identify that surgeons identify that maxillomandibular advancement expands upper airway volume for obstructive sleep apnea. Surgeons identify that advancing both jaws by ten millimeters cures sleep apnea in over eighty-five percent of patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pre-advancement Airway",
+          "points": [
+            "Narrow retroglossal space",
+            "Pharyngeal airway collapse",
+            "High apnea-hypopnea index (AHI)"
+          ]
+        },
+        "right": {
+          "title": "Post-MMA Airway",
+          "points": [
+            "10 mm bimaxillary advancement",
+            "Expanded pharyngeal cross-section",
+            "Normalization of airway collapsibility"
+          ]
+        }
+      }
+    }
+  ]
+}
