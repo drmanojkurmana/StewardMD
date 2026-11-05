@@ -21,9 +21,16 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   `prep-imglearn.js` ECG atlas), the Eye and PSM chart atlases (`prep/imglearn/*.json`),
   the specialty learn media (`ophthalmos/learn/media/credits.json`, Tokós, Narkē),
   licence-cleared CliniX skill images (`clinix/media/manifest.json`, cleared only) and
-  the pearl figures (`prep/pearl-figs/credits.json`). It writes
+  the pearl figures (`prep/pearl-figs/credits.json`). Plus openly licensed pathology and histology
+  micrographs from Wikimedia Commons (`kb/imglib/commons-pathology.json`, made by
+  `tools/fetch-commons-pathology.mjs`; owner 2026-11-04): CC BY, CC BY-SA, CC0 or public domain only, JPEG or PNG
+  400 px or wider, and only files whose uploader wrote an English description (that is the caption, markup stripped,
+  never rewritten). Disease tissue sits under its organ system ("Commons pathology", kinds Histopathology, Cytology,
+  Immunohistochemistry, Gross specimen), normal tissue under Anatomy ("Commons histology"). The viewer shows author and
+  licence and its button opens the Commons file page (`lk: "commons"`, `u` = page URL) through the Capacitor Browser,
+  which is the attribution CC BY needs. Re-run the fetch to refresh; it refuses to overwrite with 40% fewer images. It writes
   `kb/dist/imglib/index.json` plus one small file per canonical system (29 systems,
-  about 3.6 MB total, largest file about 524 KB), copied by `scripts/build-www.sh`.
+  about 5.7 MB total with the Commons set, 10,199 images, largest file about 630 KB; Commons images fill each system only up to a 680 KB budget so the in-app images always fit), copied by `scripts/build-www.sh`.
   Images load from their existing URLs (the `/api/prep/bank/` R2 bank, the bundled
   learn media, Wikimedia); the bank stores only src, title, caption, alt, aspect
   ratio, kind, origin, source module, credit and licence. An image with no caption
