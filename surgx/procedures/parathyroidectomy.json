@@ -1,0 +1,189 @@
+{
+  "id": "parathyroidectomy",
+  "title": "Parathyroidectomy",
+  "subtitle": "Focused excision of a localised adenoma, bilateral exploration as the fallback",
+  "system": "endocrine",
+  "aliases": ["focused parathyroidectomy", "minimally invasive parathyroidectomy", "MIP", "bilateral neck exploration", "parathyroid adenoma excision"],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "aaes-2016", "org": "American Association of Endocrine Surgeons (AAES)", "title": "The American Association of Endocrine Surgeons guidelines for definitive management of primary hyperparathyroidism (Wilhelm SM et al., JAMA Surgery)", "year": 2016, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=American+Association+of+Endocrine+Surgeons+guidelines+for+definitive+management+of+primary+hyperparathyroidism", "accessed": "2026-11-04" },
+    { "id": "nice-ng132", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Hyperparathyroidism (primary): diagnosis, assessment and initial management (NG132)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng132", "accessed": "2026-11-04" },
+    { "id": "iopth-criteria", "org": "Surgery (journal)", "title": "Comparison of intraoperative iPTH assay (QPTH) criteria in guiding parathyroidectomy: which criterion is the most accurate? (Carneiro DM et al.)", "year": 2003, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Carneiro+comparison+of+intraoperative+iPTH+assay+criteria+guiding+parathyroidectomy", "accessed": "2026-11-04" },
+    { "id": "das-baets", "org": "Difficult Airway Society (DAS), British Association of Endocrine and Thyroid Surgeons (BAETS) and ENT UK", "title": "Management of haematoma after thyroid surgery: systematic review and multidisciplinary consensus guidelines (Iliff HA et al., Anaesthesia)", "year": 2022, "url": "https://das.uk.com/guidelines/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["corr_ca", "ckdepi", "stopbang", "caprini"],
+  "chapters": {
+    "indications": [
+      "Symptomatic primary hyperparathyroidism: kidney stones, fragility fracture or osteoporosis, symptomatic hypercalcaemia.",
+      "Asymptomatic primary hyperparathyroidism meeting the guideline criteria for surgery (age, degree of hypercalcaemia, bone density, renal function, stones or hypercalciuria), per NICE NG132 and the AAES guideline.",
+      "Asymptomatic disease not meeting the criteria, when the patient prefers surgery and there is no contraindication, as the AAES guideline supports.",
+      "Focused approach: a single adenoma localised concordantly by two imaging modalities (typically ultrasound and sestamibi, or four-dimensional CT or choline PET where available).",
+      "Bilateral exploration: non-localising or discordant imaging, suspected multigland disease, familial or MEN-associated disease, lithium-associated disease, or failure of the focused approach."
+    ],
+    "contraindications": [
+      "Familial hypocalciuric hypercalcaemia (exclude with the urinary calcium to creatinine clearance ratio), which surgery does not cure.",
+      "Diagnosis not biochemically confirmed: localisation imaging is for planning, never for diagnosis.",
+      "Severe hypercalcaemia not yet stabilised medically; resuscitate and lower calcium first.",
+      "Focused approach alone is inappropriate for known multigland or hereditary disease; plan bilateral exploration."
+    ],
+    "preparation": [
+      "Biochemistry: raised or inappropriately normal PTH with raised adjusted calcium, vitamin D level, renal function, and urinary calcium excretion to exclude familial hypocalciuric hypercalcaemia.",
+      "Localisation: neck ultrasound (which also assesses the thyroid) and a second concordant modality before a focused approach.",
+      "Laryngoscopy before surgery where local practice requires it, and always after previous neck surgery or with voice change.",
+      "Correct vitamin D deficiency cautiously per endocrinology advice; review bone density and renal imaging.",
+      "Arrange intra-operative PTH (rapid assay) if the unit uses it, with the laboratory forewarned.",
+      "Consent risks: failure to cure or recurrence, conversion to bilateral exploration, recurrent laryngeal nerve injury and voice change, transient hypocalcaemia and hungry bone syndrome, haematoma with airway risk, scar, and the possibility of further surgery."
+    ],
+    "positioning": [
+      "Supine, shoulder roll, neck extended on a head ring, slight reverse Trendelenburg.",
+      "For a focused approach, the head may be turned slightly away from the side of the adenoma.",
+      "Arms tucked; arterial or venous access for intra-operative PTH sampling agreed with the anaesthetist."
+    ],
+    "equipment": [
+      "Localisation images displayed in theatre, including the ultrasound annotated with the adenoma's relation to the thyroid and carotid.",
+      "Intra-operative PTH sample tubes, timing log and laboratory contact.",
+      "Nerve monitoring tube and stimulator where the unit uses them; fine bipolar diathermy; small self-retaining retractor.",
+      "Frozen section access for tissue confirmation when needed; haematoma kit for the ward."
+    ],
+    "anatomy": [
+      "Most people have four parathyroids; supernumerary glands occur, and a missing gland is commonly ectopic.",
+      "Superior glands derive from the fourth pharyngeal pouch and are relatively constant, posterior to the upper thyroid near the cricothyroid junction, dorsal to the recurrent laryngeal nerve.",
+      "Inferior glands derive from the third pouch with the thymus and are more variable: near the lower pole, in the thyrothymic ligament, in the thymus, or ectopic in the mediastinum or carotid sheath; they lie ventral to the nerve.",
+      "An enlarged superior gland often descends posteriorly into the tracheo-oesophageal groove and can appear lower than an inferior gland, but stays dorsal to the nerve.",
+      "Each gland is usually supplied by a branch of the inferior thyroid artery; adenomas are typically well capsulated with a single feeding vessel."
+    ],
+    "criticalSafety": [
+      "Confirm the biochemical diagnosis before operating; imaging only tells you where to look.",
+      "Keep the adenoma capsule intact: rupture can seed parathyroid tissue (parathyromatosis) and cause persistent disease.",
+      "Use intra-operative PTH or bilateral inspection to judge cure; do not stop because a large gland was found.",
+      "Know where the recurrent laryngeal nerve is before taking the vascular pedicle of a gland in the tracheo-oesophageal groove.",
+      "In bilateral exploration, do not remove normal glands; preserve at least one well-vascularised gland, and in multigland disease plan subtotal resection or cryopreservation per unit protocol."
+    ],
+    "structuresAtRisk": [
+      "Recurrent laryngeal nerve",
+      "Normal parathyroid glands and their blood supply",
+      "Thyroid gland (bleeding, inadvertent injury)",
+      "Carotid sheath contents",
+      "Oesophagus"
+    ],
+    "commonErrors": [
+      "Operating on imaging without confirmed biochemistry, or without excluding familial hypocalciuric hypercalcaemia.",
+      "Taking a lymph node or thyroid nodule as the adenoma; send for frozen section if the tissue is in doubt.",
+      "Grasping and rupturing the adenoma.",
+      "Ending the operation after one enlarged gland without evidence of cure in a patient at risk of multigland disease.",
+      "Biopsying normal glands routinely during bilateral exploration."
+    ],
+    "complications": [
+      "Persistent hyperparathyroidism (failed exploration) from a missed ectopic or second abnormal gland.",
+      "Recurrent laryngeal nerve injury and voice change.",
+      "Transient hypocalcaemia; hungry bone syndrome after long-standing or severe disease, needing high-dose calcium and active vitamin D.",
+      "Permanent hypoparathyroidism, mainly after bilateral exploration or subtotal resection.",
+      "Neck haematoma with airway risk; wound infection; scar."
+    ],
+    "postop": [
+      "Neck observations with a haematoma kit at the bedside; same-day or next-day discharge is common after a focused operation.",
+      "Adjusted calcium (and PTH where local protocol uses it) on the first post-operative day, with symptom advice for tingling and cramps.",
+      "Calcium and active vitamin D for symptomatic hypocalcaemia or suspected hungry bone syndrome per local protocol.",
+      "Check calcium again at follow-up to confirm cure; persistent hypercalcaemia needs re-imaging and review in a specialist unit before any re-exploration.",
+      "Histology review: an unexpectedly atypical or carcinoma report changes follow-up."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side of the localised adenoma, and confirm the patient has consented to bilateral exploration if the focused approach fails." },
+    { "ref": "step.onco.endocrine-biochem-check", "emphasis": "Calcium, PTH, vitamin D and urinary calcium excretion (familial hypocalciuric hypercalcaemia excluded), with the two localisation studies concordant for a focused approach." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "A clean neck operation: routine antibiotic prophylaxis is usually not needed. Follow local policy." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape", "emphasis": "Drape for a full collar incision even when planning a small one, so conversion to bilateral exploration needs no re-preparation." },
+    { "ref": "step.ptx.baseline-pth" },
+    { "ref": "step.neck.collar-access", "emphasis": "For a focused approach use a short incision placed over the localised gland, off-midline if planned, so that it can be extended into a standard collar incision." },
+    { "ref": "step.neck.ionm-setup" },
+    { "ref": "step.ptx.focused-search" },
+    { "ref": "step.neck.rln-identify", "emphasis": "Inferior adenomas lie ventral to the nerve; superior adenomas lie dorsal to it and can descend into the groove. Know which before you clip the pedicle." },
+    { "ref": "step.neck.parathyroid-recognition", "emphasis": "Here the aim is to tell abnormal from normal: an adenoma is larger and darker, a normal gland is small and caramel. Do not biopsy normal glands." },
+    { "ref": "step.ptx.adenoma-excision" },
+    { "ref": "step.ptx.iopth" },
+    { "ref": "step.ptx.bilateral-exploration" },
+    { "ref": "step.neck.ionm-final", "emphasis": "Before crossing to the second side in a bilateral exploration, confirm the first nerve still conducts." },
+    { "ref": "step.core.haemostasis", "emphasis": "Valsalva or a raised pressure; check the pedicle clip and the thyroid surface you retracted." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Weigh the gland where the unit records it, and label each gland removed by its position (right or left, superior or inferior)." },
+    { "ref": "step.neck.closure" },
+    { "ref": "step.neck.haematoma-handover" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.ptx.baseline-pth": {
+      "id": "step.ptx.baseline-pth", "kind": "checkpoint",
+      "title": "Baseline PTH before incision or before excision",
+      "why": "Intra-operative PTH is judged as a fall from a baseline. Without a well-timed baseline the post-excision result cannot be interpreted, and the decision to stop or to explore further becomes guesswork.",
+      "how": [
+        "Agree the sampling protocol with the anaesthetist and the laboratory before starting: sample site, tube type and timing.",
+        "Take the baseline sample before incision, and a pre-excision sample just before the adenoma's vessel is clamped, because handling the gland can raise PTH.",
+        "Record each sample time on a log the whole team can see.",
+        "If the unit does not use intra-operative PTH, the equivalent decision rests on concordant imaging plus inspection of the ipsilateral or all glands; state which strategy is being used."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Taking the baseline after the gland has been mobilised and squeezed, which makes a later fall look larger than it is.", "Samples drawn from a line contaminated by flush fluid."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ptx.focused-search": {
+      "id": "step.ptx.focused-search", "kind": "dissection",
+      "title": "Go straight to the localised site and find the adenoma",
+      "why": "A focused operation is safe only when it goes exactly where the concordant imaging points. Wandering through the neck in a small incision combines the morbidity of a full exploration with poor exposure.",
+      "how": [
+        "Enter between the strap muscles and sternocleidomastoid or through the midline as planned, and retract the thyroid lobe medially.",
+        "Look first where the imaging places the gland, using its relation to the lower pole, the inferior thyroid artery and the carotid as described on the ultrasound.",
+        "Look for the fat lobule that moves with the gland, the tell-tale feeding vessel and a darker brown colour than fat or thyroid.",
+        "If the gland is not where the imaging places it after a reasonable search, extend the incision and move to bilateral exploration rather than enlarging the search through a keyhole."
+      ],
+      "structuresAtRisk": ["Recurrent laryngeal nerve", "Inferior thyroid artery", "Middle thyroid vein"],
+      "pitfalls": ["Tearing the middle thyroid vein through a small incision.", "Persisting with a keyhole search long after the imaging has proved wrong."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ptx.adenoma-excision": {
+      "id": "step.ptx.adenoma-excision", "kind": "resection", "critical": true,
+      "title": "Excise the adenoma with its capsule intact",
+      "why": "A ruptured adenoma can seed parathyroid tissue through the neck and cause persistent or recurrent hyperparathyroidism that is very hard to cure. Controlling the single feeding pedicle close to the gland, with the nerve in view, removes it cleanly and safely.",
+      "how": [
+        "Handle the gland only by its surrounding fat or a fine tie on its pedicle; never grasp the capsule with forceps.",
+        "Dissect around the gland bluntly in its fat envelope and identify its vascular pedicle.",
+        "With the recurrent laryngeal nerve located, clip or ligate the pedicle close to the gland and remove it.",
+        "Inspect the gland: if it looks unlike a parathyroid or the capsule is breached, send for frozen section and record the breach."
+      ],
+      "structuresAtRisk": ["Recurrent laryngeal nerve", "Adenoma capsule"],
+      "pitfalls": ["Grasping the adenoma with toothed forceps and rupturing it.", "Clipping the pedicle where the nerve runs alongside it in the groove."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ptx.iopth": {
+      "id": "step.ptx.iopth", "kind": "checkpoint", "critical": true,
+      "title": "Intra-operative PTH after excision: cure or continue",
+      "why": "PTH has a short half-life, so removing the only hyperfunctioning gland produces a fall within minutes. A fall meeting the agreed criterion supports cure; an inadequate fall means another abnormal gland remains and the operation is not finished.",
+      "how": [
+        "Draw the post-excision sample at the time the agreed criterion specifies; the commonly used Miami criterion is a fall of more than 50 percent from the highest pre-incision or pre-excision value at 10 minutes after excision.",
+        "Keep the wound open and the patient anaesthetised while the result is processed.",
+        "If the criterion is met and imaging was concordant, proceed to closure.",
+        "If the fall is inadequate, repeat the sample once if timing was doubtful, then proceed to bilateral exploration."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Closing because the excised gland looked large, before the result is back.", "Comparing the post-excision value against the wrong baseline."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ptx.bilateral-exploration": {
+      "id": "step.ptx.bilateral-exploration", "kind": "bailout", "critical": true,
+      "title": "Convert to bilateral exploration when the focused approach fails",
+      "why": "When the localised gland is not found, or PTH does not fall, the patient is not cured. A disciplined four-gland exploration, rather than an ever wider unilateral search, is the way to find a second adenoma, hyperplasia or an ectopic gland while protecting the normal glands.",
+      "how": [
+        "Extend to a standard collar incision and explore both sides systematically, identifying each recurrent laryngeal nerve, and aim to see all four glands before removing any further tissue.",
+        "Search the common ectopic sites for a missing gland: the thyrothymic ligament and upper thymus (inferior), the tracheo-oesophageal groove and retro-oesophageal space (superior), the carotid sheath, and within the thyroid.",
+        "For multigland hyperplasia, perform subtotal parathyroidectomy leaving a well-vascularised remnant marked with a clip, or total parathyroidectomy with autotransplantation, per unit protocol; consider cryopreservation where available.",
+        "If a gland cannot be found after a thorough search, stop: do not perform a blind thyroid lobectomy or thymectomy without a reason. Close, re-image, and refer to a high-volume unit if needed."
+      ],
+      "structuresAtRisk": ["Both recurrent laryngeal nerves", "Normal parathyroids", "Thymus and brachiocephalic vein (cervical thymectomy)"],
+      "pitfalls": ["Removing normal glands one by one in the hope that PTH will fall, causing permanent hypoparathyroidism.", "Exploring the second side after a loss of nerve signal on the first."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "id": "ivor-lewis-oesophagectomy",
+  "title": "Oesophagectomy (Ivor Lewis principles)",
+  "subtitle": "Outline: abdominal gastric conduit, right chest resection, intrathoracic anastomosis",
+  "system": "gastrointestinal",
+  "aliases": ["Ivor Lewis", "two-stage oesophagectomy", "transthoracic oesophagectomy", "esophagectomy", "oesophagogastrectomy"],
+  "estMinutes": 360,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng83", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Oesophago-gastric cancer: assessment and management in adults (NG83)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng83", "accessed": "2026-11-04" },
+    { "id": "esmo-oes", "org": "European Society for Medical Oncology (ESMO)", "title": "Oesophageal cancer: ESMO Clinical Practice Guideline for diagnosis, treatment and follow-up (Obermannova R et al., Ann Oncol)", "year": 2022, "url": "https://www.esmo.org/guidelines/esmo-clinical-practice-guideline-oesophageal-cancer", "accessed": "2026-11-04" },
+    { "id": "cross", "org": "New England Journal of Medicine", "title": "Preoperative chemoradiotherapy for esophageal or junctional cancer (CROSS) (van Hagen P et al.)", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=van+Hagen+preoperative+chemoradiotherapy+esophageal+junctional+cancer+NEJM+2012", "accessed": "2026-11-04" },
+    { "id": "eras-oes", "org": "ERAS Society", "title": "Guidelines for perioperative care in esophagectomy: Enhanced Recovery After Surgery (ERAS) Society recommendations (Low DE et al., World J Surg)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Low+guidelines+perioperative+care+esophagectomy+ERAS+Society+recommendations", "accessed": "2026-11-04" },
+    { "id": "eccg", "org": "Annals of Surgery", "title": "International consensus on standardization of data collection for complications associated with esophagectomy: Esophagectomy Complications Consensus Group (ECCG) (Low DE et al.)", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Low+international+consensus+standardization+complications+esophagectomy+ECCG", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "rcri", "caprini", "must", "nrs2002", "ecog", "cfs"],
+  "chapters": {
+    "indications": [
+      "Resectable cancer of the mid or lower oesophagus or the gastro-oesophageal junction, after staging and MDT decision, usually following neoadjuvant chemoradiotherapy (CROSS) or perioperative chemotherapy as the MDT recommends (NICE NG83, ESMO).",
+      "Selected high-grade dysplasia or early cancer not suitable for endoscopic treatment.",
+      "Rarely, benign end-stage disease (refractory stricture, failed treatment of achalasia, caustic injury) in specialist hands.",
+      "This page outlines principles only: oesophagectomy should be done in a high-volume specialist centre by an experienced team."
+    ],
+    "contraindications": [
+      "Distant metastases, or unresectable local disease (invasion of the airway, aorta or vertebral body).",
+      "Tumours of the upper third, where a three-stage (McKeown) approach or definitive chemoradiotherapy is usually preferred to an intrathoracic anastomosis.",
+      "Physiological unfitness for one-lung ventilation and thoracotomy after assessment and prehabilitation.",
+      "A stomach unsuitable as a conduit (previous gastric resection, gastric involvement), which needs colon interposition planning instead."
+    ],
+    "preparation": [
+      "Staging: endoscopy and biopsy, CT of chest, abdomen and pelvis, PET-CT, and endoscopic ultrasound or staging laparoscopy where they change management.",
+      "MDT decision with neoadjuvant treatment completed and restaging after it; the operative interval follows the neoadjuvant protocol.",
+      "Cardiopulmonary exercise testing or equivalent functional assessment, pulmonary function, prehabilitation, smoking cessation and nutritional optimisation within an ERAS pathway.",
+      "Plan for nutrition after surgery (feeding jejunostomy or nasojejunal tube) and for critical care.",
+      "Consent risks: anastomotic leak and conduit necrosis, pneumonia and respiratory failure, atrial fibrillation, chyle leak, recurrent laryngeal nerve palsy, bleeding, venous thromboembolism, prolonged critical care stay, death, reflux and aspiration, delayed conduit emptying, dumping, weight loss and anastomotic stricture, and the possibility of stopping without resection."
+    ],
+    "positioning": [
+      "Abdominal phase: supine with reverse Trendelenburg (open or laparoscopic).",
+      "Thoracic phase: left lateral decubitus (right side up) with lung isolation through a double-lumen tube or bronchial blocker, or semi-prone for a thoracoscopic approach.",
+      "Pressure care for a long operation with a mid-case repositioning: axillary roll, padded dependent limbs, eyes protected, and lines and tube re-checked after turning."
+    ],
+    "equipment": [
+      "Major abdominal and thoracic sets, or laparoscopic and thoracoscopic equipment for a minimally invasive or hybrid approach.",
+      "Rib retractor, linear staplers for conduit formation, circular stapler or suture materials for the anastomosis.",
+      "Energy device and clips for nodal dissection; vascular instruments available.",
+      "Nasogastric tube to be placed across the anastomosis under guidance, feeding jejunostomy kit, chest drains."
+    ],
+    "anatomy": [
+      "The gastric conduit survives on the right gastroepiploic artery and the gastroepiploic arcade along the greater curve, with contributions from the right gastric artery; the left gastric and short gastric vessels are divided.",
+      "The thoracic oesophagus lies in the posterior mediastinum, between the trachea and left main bronchus in front, the aorta to the left, and the azygos vein and thoracic duct to the right and behind.",
+      "The azygos arch crosses over the right main bronchus to the superior vena cava and is divided for access in the right chest.",
+      "The thoracic duct ascends between the aorta and azygos vein on the vertebral bodies and crosses to the left at about the level of the fourth or fifth thoracic vertebra.",
+      "The left recurrent laryngeal nerve loops under the aortic arch and ascends in the left tracheo-oesophageal groove; the right loops under the subclavian artery, above the usual Ivor Lewis field.",
+      "Nodal stations of interest include paraoesophageal, subcarinal, lower mediastinal, paracardial, lesser curve, left gastric and coeliac nodes."
+    ],
+    "criticalSafety": [
+      "Preserve the right gastroepiploic arcade at all times; the conduit's survival depends on it.",
+      "Stop if unexpected metastatic disease is found in the abdomen before committing to the chest.",
+      "Protect the membranous trachea and main bronchi during subcarinal and upper mediastinal dissection.",
+      "Deal with the thoracic duct deliberately (identification or mass ligation per unit protocol) to reduce chyle leak.",
+      "Make the anastomosis tension-free on a well-perfused conduit, without twisting the conduit as it is delivered into the chest."
+    ],
+    "structuresAtRisk": [
+      "Right gastroepiploic artery and conduit blood supply",
+      "Aorta, azygos vein and pulmonary veins",
+      "Trachea, carina and main bronchi",
+      "Thoracic duct",
+      "Recurrent laryngeal nerves",
+      "Spleen and pancreas during gastric mobilisation"
+    ],
+    "commonErrors": [
+      "Injuring the gastroepiploic arcade during greater curve mobilisation, especially near the pylorus.",
+      "Twisting the conduit as it passes through the hiatus.",
+      "A conduit that is too wide and empties poorly, or a hiatus left too narrow or too wide.",
+      "Tracheobronchial injury from energy devices near the membranous airway.",
+      "Unrecognised chyle leak from a thoracic duct injury."
+    ],
+    "complications": [
+      "Anastomotic leak and conduit necrosis, defined and graded by the ECCG system; managed by drainage, endoscopic therapy or reoperation according to severity.",
+      "Pneumonia, respiratory failure and acute lung injury, the commonest causes of morbidity.",
+      "Atrial fibrillation, often an early sign of a leak or sepsis.",
+      "Chylothorax, recurrent laryngeal nerve palsy, tracheobronchial injury, bleeding.",
+      "Late: anastomotic stricture, reflux and aspiration, delayed conduit emptying, dumping, weight loss and diaphragmatic hernia."
+    ],
+    "postop": [
+      "Critical care or high-dependency monitoring, with epidural or paravertebral analgesia and early mobilisation within an ERAS pathway.",
+      "Chest physiotherapy, incentive spirometry and early sitting out to reduce pneumonia.",
+      "Nasogastric decompression and jejunostomy feeding per unit protocol; oral intake reintroduced per protocol, with or without contrast or endoscopic assessment of the anastomosis.",
+      "A new arrhythmia, fever, rising inflammatory markers or a change in chest drain fluid should prompt investigation for leak (CT with oral contrast, endoscopy).",
+      "Histology to the MDT: margins, nodal yield and tumour regression guide adjuvant treatment and surveillance."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Consent covers stopping without resection, feeding jejunostomy, critical care and the realistic risk of a leak." },
+    { "ref": "step.onco.mdt-check", "emphasis": "Confirm neoadjuvant treatment completed, restaging done, tumour level suitable for an intrathoracic anastomosis, and the conduit plan." },
+    { "ref": "step.core.timeout", "emphasis": "Agree the lung isolation plan, the repositioning sequence, blood availability and the critical care bed before starting." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Clean-contaminated surgery spanning two cavities: antibiotic before incision and redosed for duration; mechanical and pharmacological thromboprophylaxis." },
+    { "ref": "step.core.positioning", "emphasis": "Supine first, then left lateral decubitus for the chest. Recheck the tube, lines and every pressure point after turning." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.abd.midline", "emphasis": "Upper midline for an open abdominal phase, or laparoscopic ports for a hybrid or minimally invasive approach." },
+    { "ref": "step.abd.exploration", "emphasis": "Peritoneum, liver and nodes at the coeliac axis before any irreversible step." },
+    { "ref": "step.onco.unresectable-bailout" },
+    { "ref": "step.oes.conduit-mobilisation" },
+    { "ref": "step.onco.left-gastric-pedicle", "emphasis": "Take the left gastric, coeliac and common hepatic nodes with the specimen; the conduit now depends on the right gastroepiploic arcade." },
+    { "ref": "step.onco.feeding-jejunostomy" },
+    { "ref": "step.abd.mass-closure", "emphasis": "Close the abdomen fully before turning the patient for the chest." },
+    { "ref": "step.oes.thoracic-access" },
+    { "ref": "step.oes.thoracic-mobilisation" },
+    { "ref": "step.onco.nodal-clearance", "emphasis": "Mediastinal stations: paraoesophageal, subcarinal and lower mediastinal nodes, taken en bloc with the oesophagus where possible, with the membranous airway and the aorta in view." },
+    { "ref": "step.oes.anastomosis" },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "Mark the proximal oesophageal margin and the gastric end, and label separately sent nodal stations." },
+    { "ref": "step.core.haemostasis", "emphasis": "Inspect the aortic branch stumps, the azygos stumps, the bronchial vessels and the intercostal wound; place chest drains as per unit protocol and re-expand the lung under vision." },
+    { "ref": "step.core.counts", "emphasis": "Count at closure of the abdomen and again at closure of the chest." },
+    { "ref": "step.core.skin-closure", "emphasis": "Close the thoracotomy in layers with rib approximation sutures that avoid the intercostal nerve below." },
+    { "ref": "step.core.debrief", "emphasis": "Hand over to critical care: conduit appearance, anastomosis type and level, nasogastric tube position (not to be repositioned blindly), drain plan, feeding plan, and leak warning signs." }
+  ],
+  "steps_local": {
+    "step.oes.conduit-mobilisation": {
+      "id": "step.oes.conduit-mobilisation", "kind": "dissection", "critical": true,
+      "title": "Mobilise the stomach as a conduit and dissect the hiatus",
+      "why": "The stomach will replace the oesophagus, and it survives on a single vascular arcade along its greater curve. Every step of mobilisation is planned around that arcade. The hiatus is opened so the oesophagus and its surrounding tissue can be taken en bloc and the conduit can later pass into the chest.",
+      "how": [
+        "Divide the greater omentum outside the gastroepiploic arcade, leaving a cuff of omentum along the arcade, and identify the right gastroepiploic artery near the pylorus without skeletonising it.",
+        "Divide the short gastric vessels close to the spleen and mobilise the fundus; free the posterior stomach from the pancreas.",
+        "Open the hiatus, mobilising the lower oesophagus with its surrounding tissue en bloc into the lower mediastinum, and take the paracardial nodes with the specimen.",
+        "Kocherise the duodenum enough for the pylorus to reach the hiatus without tension; perform a pyloric drainage procedure only if that is the unit's practice."
+      ],
+      "structuresAtRisk": ["Right gastroepiploic artery and arcade", "Spleen", "Pancreas", "Pleura at the hiatus", "Aorta behind the hiatus"],
+      "pitfalls": ["Diathermy or clips too close to the arcade.", "Traction on the stomach tearing the spleen.", "Opening the hiatus too widely, inviting later herniation of bowel into the chest."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.oes.thoracic-access": {
+      "id": "step.oes.thoracic-access", "kind": "access",
+      "title": "Reposition and enter the right chest with lung isolation",
+      "why": "The mid and lower thoracic oesophagus is best reached from the right, where the aorta is not in the way. Lung isolation collapses the right lung to give a working space, so the turn and the airway set-up must be checked before the chest is opened.",
+      "how": [
+        "Turn to the left lateral decubitus position, recheck lung isolation with the anaesthetist, and confirm the right lung deflates.",
+        "Enter the chest through a right posterolateral thoracotomy, commonly in the fifth intercostal space, or by thoracoscopy with ports placed as per unit practice.",
+        "Retract the deflated lung forwards and divide the inferior pulmonary ligament up to the inferior pulmonary vein.",
+        "Identify the azygos arch, the oesophagus, the right main bronchus and the pericardium before dissecting."
+      ],
+      "structuresAtRisk": ["Right lung", "Intercostal neurovascular bundle", "Inferior pulmonary vein"],
+      "pitfalls": ["Opening the chest before lung isolation is confirmed.", "Rib fracture from over-zealous retraction, adding to post-operative pain and respiratory complications."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.oes.thoracic-mobilisation": {
+      "id": "step.oes.thoracic-mobilisation", "kind": "resection", "critical": true,
+      "title": "Divide the azygos arch and mobilise the oesophagus en bloc",
+      "why": "The thoracic oesophagus is surrounded by the airway, the aorta and the thoracic duct. Dividing the azygos arch gives access, and mobilising the oesophagus with its surrounding tissue between defined boundaries achieves the circumferential margin while protecting these structures.",
+      "how": [
+        "Divide the azygos arch with a vascular stapler or secure ligatures.",
+        "Open the mediastinal pleura along the oesophagus and mobilise it with its periosophageal tissue, using the pericardium and airway in front and the aorta behind as boundaries; clip the oesophageal branches from the aorta.",
+        "Identify the thoracic duct between the aorta and the azygos vein; ligate it, or ligate the tissue containing it just above the diaphragm, as per unit protocol.",
+        "Divide the oesophagus at the planned level above the tumour, with the vagus nerves divided above the level of the anastomosis."
+      ],
+      "structuresAtRisk": ["Aorta and its oesophageal branches", "Membranous trachea and main bronchi", "Thoracic duct", "Pericardium and pulmonary veins", "Left recurrent laryngeal nerve in the upper mediastinum"],
+      "pitfalls": ["Energy device heat spreading to the membranous airway.", "Avulsing an aortic branch, which retracts and bleeds.", "An unnoticed thoracic duct injury."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.oes.anastomosis": {
+      "id": "step.oes.anastomosis", "kind": "reconstruction", "critical": true,
+      "title": "Form the conduit, deliver it untwisted, and make the anastomosis",
+      "why": "Leak and conduit necrosis are the complications that kill after oesophagectomy. A narrow, well-perfused gastric tube, delivered without twist or tension and joined to healthy oesophagus, gives the anastomosis its best chance.",
+      "how": [
+        "Pull the stomach into the chest through the hiatus with the specimen, keeping the greater curve orientation constant so the conduit does not rotate.",
+        "Create a gastric tube along the greater curve with linear staplers, removing the lesser curve and cardia with the specimen; oversew the staple line if that is unit practice.",
+        "Assess conduit perfusion (and consider an objective perfusion assessment where available), then perform the oesophagogastric anastomosis at or above the azygos level, circular stapled or handsewn, without tension.",
+        "Pass the nasogastric tube across the anastomosis under direct guidance, check the circular stapler doughnuts are complete, and tack the conduit to the hiatus or mediastinal pleura to reduce herniation and tension."
+      ],
+      "structuresAtRisk": ["Conduit tip perfusion", "Anastomosis", "Right gastroepiploic arcade"],
+      "pitfalls": ["A conduit delivered with a twist.", "Anastomosing to an ischaemic conduit tip.", "Incomplete doughnuts that are not acted on.", "A nasogastric tube pushed blindly later by a junior who did not know the anastomosis is there."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

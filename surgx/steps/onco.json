@@ -57,6 +57,104 @@
       "structuresAtRisk": ["Axillary vein", "Intercostobrachial nerve", "Long thoracic nerve", "Thoracodorsal neurovascular bundle"],
       "pitfalls": ["Dissecting too superficially in subcutaneous fat rather than below the fascia.", "Dividing the intercostobrachial nerve routinely when it could be kept."],
       "review": { "status": "ai_drafted" }
+    },
+    "step.onco.nodal-clearance": {
+      "id": "step.onco.nodal-clearance", "kind": "resection", "critical": true,
+      "title": "En bloc nodal clearance by named level or station",
+      "why": "A lymphadenectomy stages the cancer and, in several cancers, controls regional disease. Its value depends on taking every named level or station the plan requires, in continuity, without leaving fragments behind or injuring the nerves and vessels that define the boundaries.",
+      "how": [
+        "Before starting, state which levels or stations are to be cleared, as agreed at the MDT, and which non-lymphatic structures are to be preserved.",
+        "Define the boundary structures first (vessels, nerves, muscles), then sweep the fibrofatty tissue off them towards the specimen, keeping the packet in one piece.",
+        "Ligate or clip lymphatic trunks at the margins of the clearance rather than diathermying across them, to reduce lymph and chyle leaks.",
+        "If a level or station is taken separately, label it immediately with its name so the pathologist can report nodal yield and the involved level."
+      ],
+      "structuresAtRisk": ["Major veins at the boundary of the clearance", "Motor nerves crossing or bounding the field", "Thoracic duct and major lymphatic trunks"],
+      "pitfalls": ["Node picking instead of an en bloc clearance, which lowers yield and leaves disease behind.", "Extending the clearance beyond the agreed levels without a reason, which adds morbidity but no benefit.", "Losing the labels of separately sent stations."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.onco.major-vein-injury": {
+      "id": "step.onco.major-vein-injury", "kind": "bailout", "critical": true,
+      "title": "Major vein injury during a nodal clearance: press, control, repair",
+      "why": "The axillary and internal jugular veins form the boundaries of the commonest nodal clearances. A tear bleeds heavily and can entrain air; panic clamping or blind diathermy turns a repairable hole into a ligation or a nerve injury. A calm, rehearsed sequence prevents both.",
+      "how": [
+        "Press directly on the bleeding point with a finger or a swab on a stick; tell the anaesthetist, and ask for head-down positioning in the neck to reduce the risk of air embolism.",
+        "Call for senior help and suction, improve exposure, and get proximal and distal control with gentle pressure or vascular clamps placed under vision.",
+        "Repair a small side hole with a fine non-absorbable monofilament vascular suture; ask for vascular surgical help for anything larger.",
+        "In the neck, unilateral internal jugular vein ligation is acceptable when repair is not feasible; avoid bilateral ligation without a plan. Record the injury and the repair in the operative note."
+      ],
+      "structuresAtRisk": ["Axillary vein", "Internal jugular vein", "Adjacent nerves (vagus, brachial plexus, thoracodorsal and long thoracic nerves)"],
+      "pitfalls": ["Blind clamping or diathermy into a pool of blood, catching the adjacent nerve.", "Failing to warn the anaesthetist about possible air embolism from a neck vein.", "Narrowing the axillary vein with a crude repair, which causes arm swelling."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.onco.suction-drain": {
+      "id": "step.onco.suction-drain", "kind": "closure",
+      "title": "Closed suction drain for the dead space after a nodal clearance",
+      "why": "A nodal clearance leaves a dead space that fills with serous fluid and lymph. A closed suction drain keeps flaps applied to the bed and gives early warning of bleeding or chyle, which changes management.",
+      "how": [
+        "Place the drain in the dependent part of the dissection bed, away from the major vessels and nerves, and bring it out through a separate stab wound in a site that will not be irradiated or show the scar unnecessarily.",
+        "Secure it, confirm suction holds before the skin is fully closed, and record type, number and site.",
+        "Hand over what output would worry you: fresh blood, a rapidly rising volume, or milky fluid suggesting a chyle leak.",
+        "Agree the removal criterion per local protocol rather than leaving it to habit."
+      ],
+      "structuresAtRisk": ["Major veins in the dissection bed", "Nerves in the bed (marginal mandibular, spinal accessory, thoracodorsal)"],
+      "pitfalls": ["A drain that has lost suction from an air leak at the skin, which gives false reassurance.", "Treating a drain as a substitute for haemostasis."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.onco.unresectable-bailout": {
+      "id": "step.onco.unresectable-bailout", "kind": "bailout", "critical": true,
+      "title": "Unexpected metastatic or unresectable disease: stop and decide",
+      "why": "Peritoneal or liver metastases missed by staging, or a tumour fixed to structures that cannot be resected, mean a major resection will add risk without curing the patient. Recognising this before the irreversible step, and stopping, is a decision of skill, not a failure.",
+      "how": [
+        "Explore before committing: peritoneum, liver surfaces, omentum, pelvis and the tumour's fixity, and take peritoneal washings for cytology if that is local practice.",
+        "Biopsy suspicious deposits and send them for frozen section where it will change the decision.",
+        "If disease is beyond what the MDT plan anticipated, stop the resection, discuss with a senior colleague, and limit the operation to what helps the patient now (biopsy, feeding access, or relief of obstruction or bleeding).",
+        "Document the findings precisely and return the patient to the MDT; tell the patient honestly once they are awake."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Pressing on with a palliative major resection because the patient was told they would have it.", "Not biopsying the deposit, leaving the MDT without tissue proof of metastatic disease."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.onco.left-gastric-pedicle": {
+      "id": "step.onco.left-gastric-pedicle", "kind": "resection", "critical": true,
+      "title": "Left gastric pedicle divided at its origin with its nodes",
+      "why": "The left gastric artery carries the main lymphatic drainage of the lesser curve and the distal oesophagus. Dividing it at its origin from the coeliac trunk, with the nodes along it and around the coeliac axis swept towards the specimen, is central to both gastrectomy and oesophagectomy staging and clearance.",
+      "how": [
+        "Open the lesser sac and lift the stomach to display the left gastric pedicle on the posterior abdominal wall.",
+        "Define the common hepatic and splenic arteries and the coeliac trunk before ligating anything, so you know which vessel you are dividing.",
+        "Clear the nodes along the common hepatic artery, the left gastric artery and around the coeliac axis towards the specimen, then divide the left gastric vein and artery separately at their origins with secure ligatures or clips.",
+        "Before dividing, look for an aberrant (accessory or replaced) left hepatic artery arising from the left gastric in the lesser omentum and decide deliberately about it."
+      ],
+      "structuresAtRisk": ["Common hepatic artery", "Splenic artery", "Coeliac trunk", "Aberrant left hepatic artery", "Pancreas (upper border)"],
+      "pitfalls": ["Ligating the common hepatic artery in mistake for the left gastric.", "Mass ligation of the pedicle with its nodes, which slips and bleeds.", "Pancreatic injury from diathermy along the upper border, causing a pancreatic leak."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.onco.feeding-jejunostomy": {
+      "id": "step.onco.feeding-jejunostomy", "kind": "reconstruction",
+      "title": "Feeding jejunostomy when early enteral access is planned",
+      "why": "After an upper gastrointestinal cancer resection, oral intake may be delayed or stopped by a leak. A feeding jejunostomy placed at the end of the operation gives reliable enteral nutrition without relying on the anastomosis.",
+      "how": [
+        "Decide in advance, per unit protocol and the patient's nutritional risk, whether a jejunostomy is indicated.",
+        "Choose a loop of proximal jejunum distal to any anastomosis that will lie without tension against the left upper abdominal wall.",
+        "Insert the catheter through a short submucosal tunnel or a needle-catheter technique, secure the loop to the abdominal wall around the exit so it cannot twist or leak, and flush to confirm free flow.",
+        "Record the position and the agreed feeding plan; start feeding slowly per the dietetic protocol."
+      ],
+      "structuresAtRisk": ["Jejunum (volvulus around the fixation point, leak)", "Small bowel mesentery"],
+      "pitfalls": ["Fixing the loop so it kinks or twists, causing obstruction.", "Assuming feeding is tolerated without abdominal assessment; intolerance and, rarely, bowel ischaemia occur."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.onco.endocrine-biochem-check": {
+      "id": "step.onco.endocrine-biochem-check", "kind": "checkpoint", "critical": true,
+      "title": "Biochemical diagnosis, localisation and endocrine preparation confirmed",
+      "why": "Endocrine operations treat a biochemical disease. Imaging finds a lump; the blood and urine tests prove it is the cause. Operating on an image without the biochemistry, or without preparing the patient for the hormone excess, removes the wrong thing or provokes a crisis on the table.",
+      "how": [
+        "Confirm the biochemical diagnosis that justifies the operation is documented and current, and that alternative explanations (for example familial hypocalciuric hypercalcaemia, or medication effects) have been excluded.",
+        "Confirm that localisation imaging is available in theatre and that the side and site match the consent and the marking.",
+        "Confirm the hormone-specific preparation is complete: alpha-blockade for phaeochromocytoma, glucocorticoid cover planned for cortisol excess, potassium and blood pressure controlled for aldosterone excess.",
+        "Agree the intra-operative and post-operative hormone plan with the anaesthetist and the endocrinologist before induction."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Operating on an incidental lump that was never shown to be functional or suspicious.", "Inducing anaesthesia in an unprepared phaeochromocytoma patient."],
+      "review": { "status": "ai_drafted" }
     }
   }
 }

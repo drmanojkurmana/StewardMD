@@ -1,0 +1,162 @@
+{
+  "id": "breast-fibroadenoma-excision",
+  "title": "Excision of a benign breast lump (fibroadenoma)",
+  "subtitle": "Concordant diagnosis first, then a small cosmetic excision",
+  "system": "breast",
+  "aliases": ["fibroadenoma excision", "excision of breast lump", "lumpectomy for benign lump", "excision biopsy breast"],
+  "estMinutes": 40,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "abs-diag", "org": "Association of Breast Surgery (ABS)", "title": "Best practice diagnostic guidelines for patients presenting with breast symptoms", "year": 2010, "url": "https://associationofbreastsurgery.org.uk/", "accessed": "2026-11-04" },
+    { "id": "nccn-screen-dx", "org": "National Comprehensive Cancer Network (NCCN)", "title": "NCCN Clinical Practice Guidelines in Oncology: Breast Cancer Screening and Diagnosis", "year": 2025, "url": "https://www.nccn.org/guidelines/category_2", "accessed": "2026-11-04" },
+    { "id": "nice-ng12", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Suspected cancer: recognition and referral (NG12)", "year": 2015, "url": "https://www.nice.org.uk/guidance/ng12", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["bmi", "caprini"],
+  "chapters": {
+    "indications": [
+      "A fibroadenoma, confirmed by concordant triple assessment, that the patient wishes removed after an informed discussion that surgery is optional.",
+      "A fibroadenoma that is large, enlarging on serial imaging or causing symptoms or visible asymmetry.",
+      "A fibroepithelial lesion where core biopsy cannot exclude a phyllodes tumour, or a cellular fibroepithelial lesion the MDT wants excised.",
+      "Discordant triple assessment (clinical, imaging and pathology do not agree) where the MDT recommends diagnostic excision.",
+      "Giant or juvenile fibroadenoma in an adolescent causing breast distortion."
+    ],
+    "contraindications": [
+      "A lump that has not completed triple assessment: excision is not a substitute for diagnosis.",
+      "A core biopsy showing malignancy or a confirmed phyllodes tumour, which needs a planned wide excision with margins rather than an enucleation.",
+      "Lactation or pregnancy without a pressing indication, because of bleeding, milk fistula and changing anatomy; defer if possible.",
+      "A concordant small fibroadenoma in a patient happy to be reassured, where surgery offers nothing but a scar."
+    ],
+    "preparation": [
+      "Triple assessment documented: clinical examination, age-appropriate imaging (ultrasound, with mammography by age per ABS and NCCN practice) and core biopsy, all concordant.",
+      "For an impalpable or deep lesion, image-guided localisation (wire, clip, magnetic seed or radio-opaque marker) on the day or before, per unit practice; vacuum-assisted excision is an alternative for suitable lesions.",
+      "Mark the lump with the patient sitting and supine; note the clock-face position and distance from the nipple.",
+      "Local or general anaesthesia agreed with the patient.",
+      "Consent risks: scar and possible dimple or contour change, haematoma, infection, altered nipple sensation with a periareolar incision, the lump not being found (impalpable lesions), recurrence or a new fibroadenoma elsewhere, and the small chance that histology changes the diagnosis."
+    ],
+    "positioning": [
+      "Supine with the ipsilateral arm abducted to no more than 90 degrees on an arm board.",
+      "A small roll under the shoulder for a lateral lump, so the breast falls medially and flattens over the chest wall.",
+      "The marked lump and the localising device (if any) visible after draping."
+    ],
+    "equipment": [
+      "Minor breast set: skin hooks, Allis or Babcock forceps, fine scissors, monopolar and bipolar diathermy.",
+      "Local anaesthetic with adrenaline per local protocol if the case is done under local.",
+      "Localisation detector or the localisation images for impalpable lesions.",
+      "Absorbable sutures for glandular and subcuticular closure."
+    ],
+    "anatomy": [
+      "The breast lies on pectoralis major fascia, from the second to the sixth rib and from the sternal edge to the mid-axillary line, with an axillary tail.",
+      "Fibroadenomas are well-circumscribed, mobile and usually surrounded by a pseudo-capsule of compressed breast tissue, which provides a natural dissection plane.",
+      "Langer's (skin tension) lines in the breast are roughly circumferential around the nipple, so curvilinear incisions heal best in the upper breast and radial incisions may suit the lower inner breast in some patients.",
+      "The nipple-areola complex is supplied by perforators from the internal thoracic and lateral thoracic arteries and innervated mainly by the fourth intercostal nerve; deep dissection directly beneath the areola risks sensation and duct injury."
+    ],
+    "criticalSafety": [
+      "Do not operate without a concordant triple assessment; a discordant result is a diagnostic excision with margins in mind, not an enucleation.",
+      "Excise the lump you marked: re-examine on the table, and confirm a localised lesion is in the specimen.",
+      "Remove the lump in its pseudo-capsule without taking excess normal breast tissue.",
+      "Send all tissue for histology; a fibroadenoma is never discarded."
+    ],
+    "structuresAtRisk": [
+      "Nipple-areola complex sensation and blood supply",
+      "Major lactiferous ducts",
+      "Skin overlying a superficial lump",
+      "Pectoralis major fascia beneath a deep lump"
+    ],
+    "commonErrors": [
+      "Choosing an incision far from the lump for cosmesis, then tunnelling through the breast and leaving a cavity that bleeds.",
+      "Operating on an impalpable lesion without localisation and removing the wrong tissue.",
+      "Taking a wide margin of normal tissue around a benign lump, causing a visible defect.",
+      "Failing to close the glandular defect when it will leave a dimple."
+    ],
+    "complications": [
+      "Haematoma, the commonest early complication.",
+      "Wound infection.",
+      "Contour deformity or dimpling, more likely with larger lumps in small breasts.",
+      "Altered nipple sensation after a periareolar approach.",
+      "Unexpected phyllodes tumour or carcinoma on histology, needing further surgery.",
+      "New fibroadenomas elsewhere in the breast (not a recurrence of the excised lump)."
+    ],
+    "postop": [
+      "Day-case discharge with a supportive bra worn day and night for the first days.",
+      "Simple analgesia; review for haematoma and infection signs before discharge.",
+      "Histology reviewed at the breast MDT or clinic; benign concordant histology means discharge to self-care, a phyllodes or malignant result means further planned surgery.",
+      "Advice that new lumps should be assessed, as fibroadenomas can be multiple."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the lump and the side with the patient awake, sitting and supine. Confirm they understand surgery for a concordant fibroadenoma is optional." },
+    { "ref": "step.onco.mdt-check", "emphasis": "For a benign lump the equivalent check is triple assessment: examination, imaging and core biopsy all concordant (benign, B2). Any discordance or a phyllodes question changes the operation." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "A clean breast excision: routine antibiotic prophylaxis is usually not needed. Follow local policy." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.fad.incision" },
+    { "ref": "step.fad.delivery" },
+    { "ref": "step.fad.not-found" },
+    { "ref": "step.fad.cavity" },
+    { "ref": "step.core.haemostasis", "emphasis": "Inspect the cavity walls and the skin edges with the retractors released; most breast haematomas come from a small perforator in the cavity wall." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Orientation sutures are not needed for a concordant benign lump; if phyllodes or malignancy is a possibility, orient it as for a cancer specimen." },
+    { "ref": "step.core.skin-closure", "emphasis": "Subcuticular absorbable suture; the scar is the part of this operation the patient keeps." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.fad.incision": {
+      "id": "step.fad.incision", "kind": "access",
+      "title": "Choose an incision that balances access and cosmesis",
+      "why": "The scar is what the patient lives with. A curvilinear incision in the skin tension lines over the lump, or a periareolar incision for a lump close to the areola, gives a good scar without long tunnels through the breast that bleed and distort.",
+      "how": [
+        "For a lump near the areola, use a circumareolar incision at the areolar margin, not extending beyond about half its circumference.",
+        "For a lump further out, place a curvilinear incision along the skin tension lines directly over it; consider an inframammary or axillary approach only when it gives direct access.",
+        "Keep the incision long enough to deliver the lump without tearing the skin, roughly the diameter of the lump.",
+        "Infiltrate local anaesthetic before incising if the case is under local, and incise the skin and subcutaneous fat down to the breast tissue."
+      ],
+      "structuresAtRisk": ["Nipple-areola sensation", "Skin edges"],
+      "pitfalls": ["A periareolar incision used for a lump far from the areola, requiring long tunnelling.", "An incision too short, which tears and heals badly."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.fad.delivery": {
+      "id": "step.fad.delivery", "kind": "resection",
+      "title": "Dissect on the pseudo-capsule and deliver the lump",
+      "why": "A fibroadenoma has a natural plane of compressed tissue around it. Staying in that plane removes the lump completely with minimal normal tissue and bleeding, which gives the smallest cavity and the best cosmetic result.",
+      "how": [
+        "Deepen through the breast tissue to the lump and grasp it with an Allis, Babcock or a holding suture to deliver it towards the wound.",
+        "Dissect around it in the pseudo-capsular plane with scissors or diathermy, keeping close to the lump.",
+        "Divide the deep attachments last, coagulating the small feeding vessels as they appear.",
+        "Inspect the lump: a smooth, rubbery, white whorled cut surface is typical; a fleshy, leaf-like or friable lesion raises the possibility of phyllodes and should be noted on the request."
+      ],
+      "structuresAtRisk": ["Lactiferous ducts", "Pectoralis fascia (deep lumps)", "Overlying skin (superficial lumps)"],
+      "pitfalls": ["Fragmenting the lump by grasping it too firmly, which leaves pieces behind and confuses histology.", "Entering the lump instead of the plane around it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.fad.not-found": {
+      "id": "step.fad.not-found", "kind": "bailout",
+      "title": "Lump not found or not felt on the table: stop, do not go fishing",
+      "why": "A small or deep lump that was palpable in clinic can be hard to feel once the patient is asleep and the breast is flattened. Blind excision of large volumes of breast tissue rarely finds it and leaves a deformity; stopping and localising it properly is the safer course.",
+      "how": [
+        "Re-examine with the breast in different positions and with the retractors removed.",
+        "Use intra-operative ultrasound if available and you are trained to use it.",
+        "If the lump still cannot be found, close the wound, document clearly, and arrange image-guided localisation and a second attempt or vacuum-assisted excision.",
+        "Explain to the patient what happened and the plan."
+      ],
+      "structuresAtRisk": ["Breast contour", "Normal breast tissue"],
+      "pitfalls": ["Removing a large piece of normal breast in the hope it contains the lump.", "Sending normal tissue as 'fibroadenoma' without documenting the uncertainty."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.fad.cavity": {
+      "id": "step.fad.cavity", "kind": "reconstruction",
+      "title": "Close or reshape the glandular defect when it would dimple",
+      "why": "A small cavity fills with seroma and settles well, but a larger defect under thin skin can pull the skin inwards as it heals. Reapproximating the breast tissue without tension prevents the dimple that patients notice.",
+      "how": [
+        "Assess the cavity size and the thickness of the overlying tissue after haemostasis.",
+        "For a larger defect, mobilise the surrounding breast tissue a little off the pectoral fascia or the skin and approximate the glandular edges with a few absorbable sutures.",
+        "Avoid tight sutures that pucker the skin or distort the nipple.",
+        "Leave a small cavity unsutured; a drain is rarely needed."
+      ],
+      "structuresAtRisk": ["Nipple position", "Skin (tethering)"],
+      "pitfalls": ["Closing under tension, which distorts the breast more than the cavity would have.", "Leaving a large dead space under thin skin."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

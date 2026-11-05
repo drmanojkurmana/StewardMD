@@ -383,6 +383,19 @@
         ]
       }
     },
+    "axillary-lymph-node-dissection": {
+      base: "operative", title: "Axillary lymph node dissection note",
+      prefill: {"procedure": "Axillary lymph node dissection"},
+      extra: {
+        "Operative detail": [
+          f("operatedSide", "Side", {"type": "text", "required": true, "aiFillable": false, "ph": "Right or left axilla"}),
+          f("levelsCleared", "Levels cleared", {"type": "text", "required": true, "aiFillable": false, "ph": "I and II; level III only if gross disease"}),
+          f("nervesStatus", "Long thoracic, thoracodorsal and pectoral nerves", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Identified and preserved", "help": "Physical finding."}),
+          f("intercostobrachialNerve", "Intercostobrachial nerve", {"type": "text", "required": false, "aiFillable": false, "ph": "Preserved, or divided because ..."}),
+          f("clippedNodeRetrieved", "Clipped or marked node retrieved", {"type": "text", "required": false, "aiFillable": false, "ph": "Confirmed on specimen imaging, or not applicable"})
+        ]
+      }
+    },
     "below-knee-amputation": {
       base: "operative", title: "Below-knee amputation",
       prefill: {"procedure": "Below-knee amputation, long posterior flap"},
@@ -393,6 +406,18 @@
           f("tissueViability", "Muscle and skin viability at the level", {"type": "textarea", "aiFillable": true, "rows": 2}),
           f("tourniquet", "Tourniquet use and time", {"type": "text", "aiFillable": false, "ph": "Not used / used without exsanguination, minutes"}),
           f("specimenSent", "Limb and bone margin sent", {"type": "text", "aiFillable": false, "ph": "Histology / bone for culture"})
+        ]
+      }
+    },
+    "breast-fibroadenoma-excision": {
+      base: "operative", title: "Excision of a benign breast lump (fibroadenoma) note",
+      prefill: {"procedure": "Excision of a benign breast lump (fibroadenoma)"},
+      extra: {
+        "Operative detail": [
+          f("lesionSite", "Side, clock position and distance from nipple", {"type": "text", "required": true, "aiFillable": false, "ph": "Left breast, 2 o'clock, 4 cm from nipple"}),
+          f("tripleAssessment", "Pre-operative triple assessment", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Clinical P2, ultrasound U2, core biopsy B2: concordant"}),
+          f("localisationMethod", "Localisation method for impalpable lesion", {"type": "text", "required": false, "aiFillable": false, "ph": "Wire, seed, clip, or palpable"}),
+          f("excisionCompleteness", "Lump excised intact and complete", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, in pseudo-capsule; or fragmented, or not found"})
         ]
       }
     },
@@ -473,6 +498,20 @@
           f("extentOfResection", "Surgeon's impression of extent of resection", {"type": "text", "required": true, "aiFillable": true, "ph": "Gross total / subtotal / debulking; reason resection stopped"}),
           f("frozenSection", "Frozen section or smear result", {"type": "text", "required": false, "aiFillable": false, "ph": "Result as reported, or 'not sent'"}),
           f("boneFlapDecision", "Bone flap replaced or left out", {"type": "text", "required": true, "aiFillable": false, "ph": "Replaced with plates / left out (brain swelling), stored where"})
+        ]
+      }
+    },
+    "d2-gastrectomy": {
+      base: "operative", title: "D2 gastrectomy for gastric cancer note",
+      prefill: {"procedure": "D2 gastrectomy for gastric cancer"},
+      extra: {
+        "Operative detail": [
+          f("gastrectomyExtent", "Extent of gastrectomy", {"type": "text", "required": true, "aiFillable": false, "ph": "Subtotal (distal) or total"}),
+          f("stationsCleared", "Nodal stations cleared", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "D2: 1, 3, 4sb, 4d, 5, 6, 7, 8a, 9, 11p, 12a"}),
+          f("proximalMargin", "Proximal margin and frozen section", {"type": "text", "required": true, "aiFillable": false, "ph": "Distance from tumour; frozen section clear or not sent"}),
+          f("reconstructionType", "Reconstruction", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Roux-en-Y oesophagojejunostomy, circular stapled, retrocolic limb; leak test negative"}),
+          f("mesentericDefects", "Mesenteric defects closed", {"type": "text", "required": false, "aiFillable": false, "ph": "Petersen and jejunojejunostomy defects closed"}),
+          f("peritonealFindings", "Peritoneal cytology and staging findings", {"type": "text", "required": false, "aiFillable": true, "ph": "Washings sent; no peritoneal or liver disease"})
         ]
       }
     },
@@ -660,6 +699,19 @@
         ]
       }
     },
+    "hemithyroidectomy": {
+      base: "operative", title: "Hemithyroidectomy (thyroid lobectomy) note",
+      prefill: {"procedure": "Hemithyroidectomy (thyroid lobectomy)"},
+      extra: {
+        "Operative detail": [
+          f("operatedSide", "Side of lobectomy", {"type": "text", "required": true, "aiFillable": false, "ph": "Right or left lobe"}),
+          f("rlnStatus", "Recurrent laryngeal nerve identified and preserved", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Seen, traced to larynx, intact", "help": "Physical finding: record what you saw."}),
+          f("ionmSignals", "Nerve monitoring signals (V1, R1, R2, V2)", {"type": "textarea", "required": false, "aiFillable": false, "rows": 3, "ph": "Amplitudes in microvolts, or 'monitoring not used'"}),
+          f("parathyroidsOperatedSide", "Parathyroids on operated side", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Superior and inferior: seen in situ, autotransplanted, not seen"}),
+          f("isthmusAndPyramidal", "Isthmus division and pyramidal lobe", {"type": "text", "required": false, "aiFillable": true, "ph": "Divided flush with contralateral lobe; pyramidal lobe taken"})
+        ]
+      }
+    },
     "hip-hemiarthroplasty": {
       base: "operative", title: "Hemiarthroplasty of the hip",
       prefill: {"procedure": "Cemented hemiarthroplasty of the hip"},
@@ -672,6 +724,20 @@
         ],
         "Accounting": [
           f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."})
+        ]
+      }
+    },
+    "ivor-lewis-oesophagectomy": {
+      base: "operative", title: "Oesophagectomy (Ivor Lewis principles) note",
+      prefill: {"procedure": "Oesophagectomy (Ivor Lewis principles)"},
+      extra: {
+        "Operative detail": [
+          f("approachPhases", "Approach for each phase", {"type": "text", "required": true, "aiFillable": true, "ph": "Open abdomen, right thoracotomy; or hybrid; or totally minimally invasive"}),
+          f("conduitAssessment", "Conduit perfusion assessment", {"type": "text", "required": true, "aiFillable": false, "ph": "Visual, or objective perfusion method used"}),
+          f("anastomosisDetail", "Anastomosis level and technique", {"type": "text", "required": true, "aiFillable": false, "ph": "At azygos level, circular stapled, doughnuts complete"}),
+          f("thoracicDuct", "Thoracic duct management", {"type": "text", "required": true, "aiFillable": false, "ph": "Identified and ligated, or mass ligation above diaphragm"}),
+          f("ngTubePosition", "Nasogastric tube position", {"type": "text", "required": true, "aiFillable": false, "ph": "Tip across anastomosis in conduit; do not reposition blindly"}),
+          f("feedingAccess", "Feeding access", {"type": "text", "required": false, "aiFillable": false, "ph": "Feeding jejunostomy, nasojejunal tube, or none"})
         ]
       }
     },
@@ -779,6 +845,20 @@
           f("staplerLoads", "Stapler loads and reinforcement", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Antrum: 2 thick loads; body/fundus: 4 medium loads; no reinforcement"}),
           f("hiatusFinding", "Hiatus: hernia found and repaired", {"type": "text", "required": true, "aiFillable": true, "ph": "No hiatal hernia / repaired with 2 posterior sutures"}),
           f("leakTest", "Leak test method and result", {"type": "text", "required": true, "aiFillable": false, "ph": "Methylene blue, negative"})
+        ]
+      }
+    },
+    "laparoscopic-adrenalectomy": {
+      base: "operative", title: "Laparoscopic adrenalectomy note",
+      prefill: {"procedure": "Laparoscopic adrenalectomy"},
+      extra: {
+        "Operative detail": [
+          f("operatedSide", "Side", {"type": "text", "required": true, "aiFillable": false, "ph": "Right or left adrenal"}),
+          f("functionalDiagnosis", "Functional diagnosis", {"type": "text", "required": true, "aiFillable": true, "ph": "Phaeochromocytoma, aldosteronoma, cortisol-secreting adenoma, non-functioning"}),
+          f("adrenalVeinControl", "Adrenal vein control", {"type": "text", "required": true, "aiFillable": false, "ph": "Identified, clipped and divided"}),
+          f("haemodynamicEvents", "Intra-operative haemodynamic events", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2, "ph": "Hypertensive episodes on manipulation; hypotension after vein ligation, treated with ..."}),
+          f("conversion", "Conversion to open and reason", {"type": "text", "required": false, "aiFillable": false, "ph": "Not converted, or converted because ..."}),
+          f("hormonePlan", "Post-operative hormone plan", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Steroid cover and taper, potassium plan, or glucose and BP monitoring"})
         ]
       }
     },
@@ -947,6 +1027,19 @@
         ]
       }
     },
+    "modified-radical-neck-dissection": {
+      base: "operative", title: "Modified radical neck dissection note",
+      prefill: {"procedure": "Modified radical neck dissection"},
+      extra: {
+        "Operative detail": [
+          f("operatedSide", "Side of neck dissection", {"type": "text", "required": true, "aiFillable": false, "ph": "Right or left"}),
+          f("levelsCleared", "Levels cleared", {"type": "text", "required": true, "aiFillable": false, "ph": "I, II (IIa and IIb), III, IV, V"}),
+          f("structuresPreserved", "Non-lymphatic structures preserved or sacrificed", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Accessory nerve, internal jugular vein, sternocleidomastoid"}),
+          f("nervesIdentified", "Nerves identified and status", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Marginal mandibular, hypoglossal, lingual, vagus, phrenic, brachial plexus"}),
+          f("chyleCheck", "Chyle check at base of neck", {"type": "text", "required": true, "aiFillable": false, "ph": "Valsalva: no leak; duct ligated"})
+        ]
+      }
+    },
     "myringotomy-grommets": {
       base: "operative", title: "Myringotomy and grommet insertion",
       prefill: {"procedure": "Myringotomy and grommet insertion"},
@@ -1110,6 +1203,19 @@
           f("glandDuct", "Gland texture and pancreatic duct diameter", {"type": "text", "required": true, "aiFillable": false, "ph": "Soft / firm; duct x mm", "help": "Main predictors of pancreatic fistula"}),
           f("reconstruction", "Reconstruction", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "PJ duct-to-mucosa with stent / PG; HJ end-to-side; antecolic GJ"}),
           f("frozenSection", "Frozen section margins", {"type": "text", "required": false, "aiFillable": false, "ph": "Neck clear, bile duct clear / not sent"})
+        ]
+      }
+    },
+    "parathyroidectomy": {
+      base: "operative", title: "Parathyroidectomy note",
+      prefill: {"procedure": "Parathyroidectomy"},
+      extra: {
+        "Operative detail": [
+          f("approach", "Approach and any conversion", {"type": "text", "required": true, "aiFillable": true, "ph": "Focused right inferior; converted to bilateral exploration because ..."}),
+          f("localisationConcordance", "Pre-operative localisation and concordance", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Ultrasound and sestamibi concordant for right inferior"}),
+          f("glandsIdentified", "Glands identified and removed, by position", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "RS normal in situ, RI adenoma excised, LS/LI not explored", "help": "Physical finding: name each gland by side and position."}),
+          f("iopthValues", "Intra-operative PTH values and times", {"type": "textarea", "required": false, "aiFillable": false, "rows": 3, "ph": "Baseline, pre-excision, 10 minutes post-excision", "help": "Laboratory values: transcribe, do not estimate."}),
+          f("rlnStatus", "Recurrent laryngeal nerve status", {"type": "text", "required": true, "aiFillable": false, "ph": "Identified and preserved on the explored side(s)"})
         ]
       }
     },

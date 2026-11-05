@@ -1138,6 +1138,12 @@
       "file": "steps/hpb.json",
       "title": "Shared hepatopancreatobiliary and spleen steps",
       "shared": true
+    },
+    {
+      "id": "neck",
+      "file": "steps/neck.json",
+      "title": "Shared central neck steps (thyroid, parathyroid, neck dissection)",
+      "shared": true
     }
   ],
   "procedures": [
@@ -2586,6 +2592,124 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 300
+    },
+    {
+      "id": "hemithyroidectomy",
+      "title": "Hemithyroidectomy (thyroid lobectomy)",
+      "subtitle": "One lobe and the isthmus, with the nerve and parathyroids kept",
+      "system": "endocrine",
+      "specialty": "endocrine",
+      "file": "procedures/hemithyroidectomy.json",
+      "stepPacks": [
+        "core",
+        "onco",
+        "neck"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "parathyroidectomy",
+      "title": "Parathyroidectomy",
+      "subtitle": "Focused excision of a localised adenoma, bilateral exploration as the fallback",
+      "system": "endocrine",
+      "specialty": "endocrine",
+      "file": "procedures/parathyroidectomy.json",
+      "stepPacks": [
+        "core",
+        "onco",
+        "neck"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "modified-radical-neck-dissection",
+      "title": "Modified radical neck dissection",
+      "subtitle": "Levels I to V cleared, accessory nerve, jugular vein and sternomastoid kept",
+      "system": "head and neck",
+      "specialty": "oncology",
+      "file": "procedures/modified-radical-neck-dissection.json",
+      "stepPacks": [
+        "core",
+        "onco",
+        "neck"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "axillary-lymph-node-dissection",
+      "title": "Axillary lymph node dissection",
+      "subtitle": "Level I and II clearance with the axillary vein and three nerves defined",
+      "system": "breast",
+      "specialty": "breast",
+      "file": "procedures/axillary-lymph-node-dissection.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "breast-fibroadenoma-excision",
+      "title": "Excision of a benign breast lump (fibroadenoma)",
+      "subtitle": "Concordant diagnosis first, then a small cosmetic excision",
+      "system": "breast",
+      "specialty": "breast",
+      "file": "procedures/breast-fibroadenoma-excision.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "d2-gastrectomy",
+      "title": "D2 gastrectomy for gastric cancer",
+      "subtitle": "Subtotal and total gastrectomy with station-based D2 lymphadenectomy",
+      "system": "gastrointestinal",
+      "specialty": "oncology",
+      "file": "procedures/d2-gastrectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 240
+    },
+    {
+      "id": "laparoscopic-adrenalectomy",
+      "title": "Laparoscopic adrenalectomy",
+      "subtitle": "Lateral transperitoneal approach, vein control and an intact capsule",
+      "system": "endocrine",
+      "specialty": "endocrine",
+      "file": "procedures/laparoscopic-adrenalectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "ivor-lewis-oesophagectomy",
+      "title": "Oesophagectomy (Ivor Lewis principles)",
+      "subtitle": "Outline: abdominal gastric conduit, right chest resection, intrathoracic anastomosis",
+      "system": "gastrointestinal",
+      "specialty": "oncology",
+      "file": "procedures/ivor-lewis-oesophagectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 360
     }
   ],
   "cases": [

@@ -1,0 +1,178 @@
+{
+  "id": "d2-gastrectomy",
+  "title": "D2 gastrectomy for gastric cancer",
+  "subtitle": "Subtotal and total gastrectomy with station-based D2 lymphadenectomy",
+  "system": "gastrointestinal",
+  "aliases": ["radical gastrectomy", "subtotal gastrectomy", "distal gastrectomy", "total gastrectomy", "D2 lymphadenectomy", "gastric cancer resection"],
+  "estMinutes": 240,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "jgca-2021", "org": "Japanese Gastric Cancer Association (JGCA)", "title": "Japanese Gastric Cancer Treatment Guidelines 2021 (6th edition) (Gastric Cancer)", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Japanese+Gastric+Cancer+Treatment+Guidelines+2021+6th+edition", "accessed": "2026-11-04" },
+    { "id": "esmo-gastric", "org": "European Society for Medical Oncology (ESMO)", "title": "Gastric cancer: ESMO Clinical Practice Guideline for diagnosis, treatment and follow-up (Lordick F et al., Ann Oncol)", "year": 2022, "url": "https://www.esmo.org/guidelines/esmo-clinical-practice-guideline-gastric-cancer", "accessed": "2026-11-04" },
+    { "id": "dutch-d1d2", "org": "Lancet Oncology", "title": "Surgical treatment of gastric cancer: 15-year follow-up results of the randomised nationwide Dutch D1D2 trial (Songun I et al.)", "year": 2010, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Songun+15-year+follow-up+Dutch+D1D2+trial+gastric+cancer", "accessed": "2026-11-04" },
+    { "id": "eras-gastrectomy", "org": "ERAS Society", "title": "Consensus guidelines for enhanced recovery after gastrectomy: Enhanced Recovery After Surgery (ERAS) Society recommendations (Mortensen K et al., Br J Surg)", "year": 2014, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Mortensen+consensus+guidelines+enhanced+recovery+after+gastrectomy+ERAS+Society", "accessed": "2026-11-04" },
+    { "id": "flot4", "org": "The Lancet", "title": "Perioperative chemotherapy with fluorouracil plus leucovorin, oxaliplatin, and docetaxel versus fluorouracil or capecitabine plus cisplatin and epirubicin for locally advanced, resectable gastric or gastro-oesophageal junction adenocarcinoma (FLOT4) (Al-Batran SE et al.)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Al-Batran+FLOT4+perioperative+chemotherapy+gastric+Lancet+2019", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "rcri", "caprini", "must", "nrs2002", "ecog"],
+  "chapters": {
+    "indications": [
+      "Resectable gastric adenocarcinoma beyond the criteria for endoscopic resection, after staging and MDT decision, usually following perioperative chemotherapy for locally advanced disease (FLOT4, ESMO).",
+      "Subtotal (distal) gastrectomy when an adequate proximal margin can be achieved for a distal or mid-body tumour, preserving a proximal gastric remnant.",
+      "Total gastrectomy for proximal or body tumours where a safe proximal margin cannot be obtained with a remnant, or diffuse-type disease involving much of the stomach.",
+      "D2 lymphadenectomy as the standard nodal extent for curative resection of cT2 or deeper or node-positive tumours, in units with the experience to do it safely (JGCA, ESMO; Dutch D1D2 long-term data)."
+    ],
+    "contraindications": [
+      "Distant metastases, including positive peritoneal cytology or peritoneal disease, outside a trial or specialist pathway; staging laparoscopy is recommended for locally advanced tumours.",
+      "Unresectable local invasion (for example encasement of the coeliac trunk or the head of the pancreas) without a specialist plan.",
+      "Patient unfit for major upper gastrointestinal surgery after optimisation; consider palliative options.",
+      "Uncorrected severe malnutrition or anaemia, which should be addressed before elective resection."
+    ],
+    "preparation": [
+      "Endoscopy with biopsy, CT of chest, abdomen and pelvis, staging laparoscopy with peritoneal washings for locally advanced tumours, and endoscopic ultrasound or PET-CT where they change management.",
+      "MDT decision documented, including neoadjuvant therapy given and restaging after it.",
+      "Nutritional screening and support (feeding before surgery if malnourished), correction of anaemia, and prehabilitation where possible, as part of an ERAS pathway.",
+      "Cardiopulmonary assessment proportional to the operation; frailty and functional status recorded.",
+      "Consent risks: anastomotic or duodenal stump leak, bleeding, pancreatic fistula, intra-abdominal abscess, chest infection, venous thromboembolism, prolonged ileus, need for reoperation, death, dumping syndrome, weight loss, vitamin B12 deficiency (lifelong replacement after total gastrectomy), bile reflux, the chance of stopping without resection if metastases are found, and the chance of extending to total gastrectomy or adjacent organ resection."
+    ],
+    "positioning": [
+      "Supine, arms out, with a reverse Trendelenburg tilt available; some surgeons use legs apart (French position) for laparoscopic gastrectomy.",
+      "Self-retaining upper abdominal (costal) retractor mount fixed before draping.",
+      "Pressure areas padded for a long operation; warming and calf compression devices in place."
+    ],
+    "equipment": [
+      "Major laparotomy set with costal retractor, or laparoscopic set with energy device for a minimally invasive approach.",
+      "Linear staplers for duodenal and gastric transection, circular stapler with anvil for an oesophagojejunostomy, and fine absorbable sutures.",
+      "Vessel ligation clips and energy device for nodal dissection.",
+      "Nasojejunal or nasogastric tube and feeding jejunostomy kit as per unit protocol.",
+      "Frozen section access for margins and suspicious deposits."
+    ],
+    "anatomy": [
+      "Arterial supply: left gastric (from coeliac trunk) and right gastric (usually from the proper or common hepatic) along the lesser curve; right gastroepiploic (from gastroduodenal) and left gastroepiploic (from splenic) along the greater curve; short gastrics from the splenic artery to the fundus.",
+      "JGCA nodal stations: 1 and 2 right and left paracardial; 3 lesser curve; 4sa short gastric, 4sb left gastroepiploic, 4d right gastroepiploic; 5 suprapyloric; 6 infrapyloric; 7 left gastric artery; 8a common hepatic artery (anterosuperior); 9 coeliac artery; 10 splenic hilum; 11p and 11d proximal and distal splenic artery; 12a hepatoduodenal ligament along the proper hepatic artery.",
+      "D2 for distal gastrectomy, per JGCA: stations 1, 3, 4sb, 4d, 5, 6, 7 (D1) plus 8a, 9, 11p and 12a. D2 for total gastrectomy: stations 1 to 7 (D1) plus 8a, 9, 11p, 11d and 12a. Routine splenectomy for station 10 is no longer recommended for tumours that do not invade the greater curve.",
+      "An aberrant (accessory or replaced) left hepatic artery may arise from the left gastric artery in the lesser omentum.",
+      "The pancreas lies directly under the suprapancreatic nodal stations; the gastrocolic trunk of Henle lies in the infrapyloric region."
+    ],
+    "criticalSafety": [
+      "Explore and stage before any irreversible step; stop if metastatic disease is found.",
+      "Divide vessels only after identifying the common hepatic, splenic and gastroduodenal arteries; know whether a replaced left hepatic artery is present.",
+      "Protect the pancreas during suprapancreatic and infrapyloric dissection; avoid pancreatic capsule injury with energy devices.",
+      "Secure the duodenal stump carefully; a stump blowout is one of the most lethal complications.",
+      "Achieve the margin the tumour type requires (JGCA guidance by depth and growth pattern), with frozen section when in doubt.",
+      "Close mesenteric defects after Roux-en-Y reconstruction to reduce internal hernia."
+    ],
+    "structuresAtRisk": [
+      "Common hepatic, proper hepatic and splenic arteries; portal vein",
+      "Pancreas",
+      "Middle colic vessels and transverse mesocolon",
+      "Spleen",
+      "Common bile duct in the hepatoduodenal ligament",
+      "Oesophagus and vagus nerves at the hiatus"
+    ],
+    "commonErrors": [
+      "Node picking rather than station-based en bloc dissection, giving an inadequate nodal yield for staging.",
+      "Ligating the common hepatic artery instead of the left gastric.",
+      "Pancreatic injury during suprapancreatic clearance, causing a pancreatic fistula.",
+      "Tension or poor blood supply at the anastomosis, or an ischaemic duodenal stump.",
+      "Opening the transverse mesocolon or injuring the middle colic vessels when separating the omentum from the colon.",
+      "Leaving mesenteric defects open after Roux-en-Y."
+    ],
+    "complications": [
+      "Anastomotic leak (oesophagojejunal or gastrojejunal) and duodenal stump leak: sepsis, abscess, and need for drainage, stenting or reoperation.",
+      "Postoperative pancreatic fistula and intra-abdominal abscess.",
+      "Haemorrhage, intraluminal or intra-abdominal.",
+      "Chest infection, venous thromboembolism, ileus, delayed gastric emptying of the remnant.",
+      "Late: dumping syndrome, weight loss, vitamin B12 and iron deficiency, bile reflux, internal hernia, anastomotic stricture."
+    ],
+    "postop": [
+      "ERAS pathway: early mobilisation, multimodal analgesia, early removal of tubes and drains, early oral intake as tolerated per unit protocol.",
+      "Close monitoring for leak: fever, tachycardia, new arrhythmia, abdominal pain, rising inflammatory markers; low threshold for CT with oral contrast.",
+      "Nutrition via jejunostomy or oral sip feeds per dietetic plan; long-term vitamin B12 replacement after total gastrectomy, and monitoring of iron and other nutrients.",
+      "Histology to the MDT: margins, nodal yield and involved stations, and tumour regression guide adjuvant therapy.",
+      "Dietary advice on small frequent meals and dumping symptoms."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Consent covers both subtotal and total gastrectomy if the margin is in doubt, adjacent organ resection, and stopping without resection." },
+    { "ref": "step.onco.mdt-check", "emphasis": "Confirm staging laparoscopy and cytology results, neoadjuvant chemotherapy completed and restaging done, and the planned extent of gastrectomy and lymphadenectomy." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Clean-contaminated upper gastrointestinal surgery: antibiotic within the hour before incision, redosed for a long operation; extended pharmacological thromboprophylaxis after cancer surgery per local policy." },
+    { "ref": "step.core.positioning", "emphasis": "Supine with reverse Trendelenburg available; fix the costal retractor post before draping." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.abd.midline", "emphasis": "Upper midline from the xiphisternum, extended below the umbilicus as needed; excise the xiphoid if it limits access to the hiatus." },
+    { "ref": "step.abd.exploration", "emphasis": "Peritoneum, liver, omentum, pelvis and ovaries in a woman (Krukenberg deposits), then the tumour's fixity to the pancreas and the coeliac axis." },
+    { "ref": "step.onco.unresectable-bailout" },
+    { "ref": "step.gast.omentum-infrapyloric" },
+    { "ref": "step.gast.duodenal-transection" },
+    { "ref": "step.onco.nodal-clearance", "emphasis": "Suprapancreatic clearance: station 8a along the common hepatic artery, 12a along the proper hepatic artery, 9 around the coeliac trunk and 11p along the proximal splenic artery (plus 11d for total gastrectomy), swept upwards towards the specimen." },
+    { "ref": "step.onco.left-gastric-pedicle" },
+    { "ref": "step.gast.proximal-transection" },
+    { "ref": "step.gast.reconstruction" },
+    { "ref": "step.onco.feeding-jejunostomy", "emphasis": "Most often used after total gastrectomy or in a malnourished patient; follow unit protocol." },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "Dissect the nodal stations off the specimen on a back table, or label them as you go, and send each in a named pot so the pathologist can report the yield and involved stations." },
+    { "ref": "step.core.haemostasis", "emphasis": "Inspect the suprapancreatic bed, the duodenal stump, the splenic hilum and the short gastric stumps." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.abd.mass-closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.gast.omentum-infrapyloric": {
+      "id": "step.gast.omentum-infrapyloric", "kind": "dissection", "critical": true,
+      "title": "Greater curve: omentum, left gastroepiploic and infrapyloric stations",
+      "why": "The greater curve nodes (stations 4sb, 4d and 6) drain the distal stomach. Separating the omentum from the transverse colon in the avascular plane, and dividing the gastroepiploic vessels at their roots, removes these stations with the specimen while protecting the middle colic vessels and the pancreas head.",
+      "how": [
+        "Separate the greater omentum from the transverse colon in the avascular plane, removing it with the specimen for advanced tumours as per JGCA guidance; enter the lesser sac.",
+        "Towards the left, divide the left gastroepiploic vessels at their origin from the splenic vessels (station 4sb), preserving the spleen and the short gastrics for a distal gastrectomy.",
+        "Towards the right, free the omentum from the hepatic flexure and identify the gastrocolic trunk, middle colic vessels and the head of the pancreas.",
+        "Clear station 6 and divide the right gastroepiploic vein above its junction with the gastrocolic trunk and the right gastroepiploic artery at its origin from the gastroduodenal artery."
+      ],
+      "structuresAtRisk": ["Middle colic vessels", "Gastrocolic trunk of Henle", "Head of pancreas", "Spleen (capsular tear)", "Transverse colon"],
+      "pitfalls": ["Entering the transverse mesocolon instead of the plane between omentum and colon.", "Tearing the gastrocolic trunk, which bleeds heavily and is hard to control.", "Splenic capsular tear from traction on the omentum."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gast.duodenal-transection": {
+      "id": "step.gast.duodenal-transection", "kind": "resection", "critical": true,
+      "title": "Suprapyloric clearance and duodenal transection",
+      "why": "The suprapyloric and hepatoduodenal nodes (stations 5 and 12a) drain the antrum and pylorus, and the duodenal stump is where a leak is often fatal. Dividing the duodenum beyond the pylorus with a secure, well-perfused stump is the foundation of a safe distal or total gastrectomy.",
+      "how": [
+        "Open the lesser omentum close to the liver, noting any aberrant left hepatic artery, and identify the proper hepatic artery and the gastroduodenal artery.",
+        "Clear station 5 and divide the right gastric artery at its origin; clear station 12a along the proper hepatic artery, keeping the common bile duct and portal vein in view.",
+        "Divide the duodenum about two centimetres beyond the pylorus with a linear stapler, ensuring a clear distal margin for antral tumours.",
+        "Inspect the stump for perfusion and staple line integrity; many surgeons invert or oversew it."
+      ],
+      "structuresAtRisk": ["Proper hepatic and gastroduodenal arteries", "Common bile duct", "Portal vein", "Pancreatic head", "Duodenal stump"],
+      "pitfalls": ["Excessive skeletonisation of the duodenum, leaving an ischaemic stump.", "Dividing too close to the pylorus in an antral tumour, risking a positive distal margin.", "Injuring the common bile duct during station 12a clearance."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gast.proximal-transection": {
+      "id": "step.gast.proximal-transection", "kind": "resection", "critical": true,
+      "title": "Proximal clearance and transection: subtotal remnant or oesophagus",
+      "why": "The proximal margin determines whether the resection is curative, and the tumour's growth pattern sets how much margin is needed. Choosing between a subtotal and a total gastrectomy is made here, with the tumour in hand and frozen section available.",
+      "how": [
+        "Clear stations 1 and 3 along the lesser curve towards the cardia, and for total gastrectomy station 2, the short gastrics (4sa) and station 11d, preserving the spleen.",
+        "Decide the transection line using the JGCA margin guidance for the tumour's depth and growth pattern (wider for infiltrative tumours), measured on the opened or palpated stomach; send the margin for frozen section when in doubt.",
+        "Subtotal: transect the stomach with a linear stapler leaving a well-perfused proximal remnant. Total: open the phreno-oesophageal ligament, divide both vagi, mobilise the distal oesophagus and transect it with a purse-string or stapled technique ready for the anvil.",
+        "If the margin is positive and a further resection is safe, extend it; if not, record it for the MDT."
+      ],
+      "structuresAtRisk": ["Spleen and short gastric vessels", "Oesophagus and mediastinal pleura at the hiatus", "Inferior phrenic vessels", "Gastric remnant blood supply"],
+      "pitfalls": ["A remnant too small or too poorly perfused after division of the short gastrics and left gastric.", "Accepting a close proximal margin in a diffuse-type tumour without frozen section.", "Pleural tear at the hiatus not recognised."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gast.reconstruction": {
+      "id": "step.gast.reconstruction", "kind": "reconstruction", "critical": true,
+      "title": "Reconstruction: Billroth or Roux-en-Y, tension-free and tested",
+      "why": "The reconstruction must carry food without bile reflux, and the anastomosis must heal. A tension-free, well-perfused anastomosis with closed mesenteric defects reduces leak, reflux and internal hernia.",
+      "how": [
+        "Subtotal: choose Billroth I, Billroth II or Roux-en-Y gastrojejunostomy according to the remnant size, tension and unit preference. Total: Roux-en-Y oesophagojejunostomy, usually with a circular stapler, and a jejunojejunostomy far enough downstream to prevent bile reflux.",
+        "Bring the jejunal limb up without tension or twist, through the mesocolon (retrocolic) or in front of the colon (antecolic), checking the limb's colour and mesenteric pulsation.",
+        "Inspect the circular stapler doughnuts for completeness and test the anastomosis with air under saline or dilute methylene blue via the nasogastric tube; repair any leak.",
+        "Close the mesenteric defects (jejunojejunostomy and Petersen's space) with non-absorbable sutures, and position the nasogastric or nasojejunal tube under direct guidance."
+      ],
+      "structuresAtRisk": ["Anastomosis", "Jejunal limb mesentery", "Transverse mesocolon and middle colic vessels"],
+      "pitfalls": ["An oesophagojejunostomy under tension because the Roux limb mesentery was not divided far enough.", "Incomplete doughnuts that are not acted on.", "Leaving Petersen's defect open, with a risk of internal hernia years later."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

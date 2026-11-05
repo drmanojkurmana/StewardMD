@@ -1,0 +1,104 @@
+{
+  "_comment": "Steps shared by central neck operations (hemithyroidectomy, parathyroidectomy) and neck dissection. Authored once, referenced by every neck procedure that needs it.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.neck.collar-access": {
+      "id": "step.neck.collar-access", "kind": "access",
+      "title": "Collar incision, subplatysmal flaps and midline strap separation",
+      "why": "A skin-crease incision heals with a good scar, and the avascular midline between the strap muscles gives bloodless access to the thyroid bed and the parathyroids on either side. Getting the plane right here keeps the anterior jugular veins out of trouble and makes the rest of the operation tidy.",
+      "how": [
+        "Mark the incision in a natural skin crease about two finger-breadths above the sternal notch, ideally with the patient sitting up before positioning; length to suit the gland and the operation.",
+        "Divide platysma and raise flaps in the subplatysmal plane, superficial to the anterior jugular veins, up to the thyroid cartilage and down to the sternal notch.",
+        "Open the investing fascia exactly in the midline raphe between the sternohyoids and separate the sternothyroid from the gland on the side you are working.",
+        "Divide the strap muscles high (towards the larynx, preserving their nerve supply from the ansa cervicalis below) only when a large gland or tumour needs the room."
+      ],
+      "structuresAtRisk": ["Anterior jugular veins", "Ansa cervicalis branches to the strap muscles"],
+      "pitfalls": ["An incision placed too low, which drifts onto the sternum as the scar matures and widens.", "Flaps raised deep to the anterior jugular veins, which bleeds and wastes time.", "Leaving the midline, which takes you into the strap muscle bellies."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neck.ionm-setup": {
+      "id": "step.neck.ionm-setup", "kind": "checkpoint", "critical": true,
+      "title": "Nerve monitoring set-up and baseline vagal signal",
+      "why": "Monitoring only helps if you know it worked at the start. A baseline vagal signal proves the tube electrodes are on the cords and the system conducts; without it, a later absent signal cannot be told apart from equipment failure, and any decision about the second side is made blind.",
+      "how": [
+        "Ask the anaesthetist to confirm tube electrode position after final positioning (neck extension moves the tube) and to avoid long-acting neuromuscular block after intubation.",
+        "Before thyroid or parathyroid dissection, open the carotid sheath on the operated side and stimulate the vagus (V1), recording amplitude and latency.",
+        "If there is no signal, troubleshoot before dissecting: tube depth and rotation, ground and recording electrodes, stimulator current, residual paralysis.",
+        "Record each signal value in the operative note as it is obtained, not from memory afterwards."
+      ],
+      "structuresAtRisk": ["Vagus nerve", "Internal jugular vein", "Common carotid artery"],
+      "pitfalls": ["Starting dissection with an untested system and discovering the fault only when the nerve signal seems lost.", "Treating a good signal as proof of where the nerve is: monitoring confirms function, it does not replace seeing the nerve."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neck.rln-identify": {
+      "id": "step.neck.rln-identify", "kind": "dissection", "critical": true,
+      "title": "Identify and protect the recurrent laryngeal nerve",
+      "why": "Seeing the recurrent laryngeal nerve along its course is the main defence against injuring it. Both the thyroid lobe and the parathyroids lie on it, and the inferior and superior parathyroids are defined by their relation to it, so finding it orients the whole central neck.",
+      "how": [
+        "Rotate the lobe medially with gentle traction and look for the nerve in the tracheo-oesophageal groove, at its crossing with the inferior thyroid artery, or beneath the tubercle of Zuckerkandl.",
+        "Confirm it with the stimulating probe (R1) and follow it upwards towards its entry into the larynx below the inferior constrictor.",
+        "On the right, if no nerve is found in the groove, suspect a non-recurrent nerve running directly from the vagus, especially with a known aberrant right subclavian artery.",
+        "Divide nothing that crosses the expected course of the nerve until the nerve is seen; use fine bipolar or ligatures near it, not monopolar or a wide energy device."
+      ],
+      "structuresAtRisk": ["Recurrent laryngeal nerve and its extralaryngeal branches", "Inferior thyroid artery", "Parathyroid glands"],
+      "pitfalls": ["Traction injury from vigorous medial rotation of the lobe.", "Mistaking an inferior thyroid artery branch for the nerve, or the reverse.", "Thermal spread from an energy device used within a few millimetres of the nerve."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neck.parathyroid-recognition": {
+      "id": "step.neck.parathyroid-recognition", "kind": "dissection", "critical": true,
+      "title": "Recognise each parathyroid and keep it on its blood supply",
+      "why": "Whether the aim is to preserve normal parathyroids during a lobectomy or to find the abnormal one, the surgeon must recognise parathyroid tissue and know where it lives. A normal gland left on its vascular pedicle keeps working; one stripped of its supply does not.",
+      "how": [
+        "Look for the superior gland posteriorly at about the level of the cricothyroid junction, dorsal to the plane of the recurrent laryngeal nerve; look for the inferior gland near the lower pole and thyrothymic ligament, ventral to the nerve.",
+        "Recognise parathyroid by its tan, caramel colour, its fine surface vessels and its tendency to slide in its fat; fat is yellower and lymph nodes greyer and firmer.",
+        "Dissect on the thyroid capsule and ligate inferior thyroid artery branches close to the gland, so each parathyroid stays lateral with its vessel.",
+        "Check the specimen for any gland removed by mistake; if a normal gland is devascularised or removed, confirm it is parathyroid (frozen section of a small fragment if in doubt) and autotransplant it into sternocleidomastoid, marked with a clip or non-absorbable suture."
+      ],
+      "structuresAtRisk": ["Superior and inferior parathyroid glands", "Inferior thyroid artery branches", "Recurrent laryngeal nerve"],
+      "pitfalls": ["Ligating the inferior thyroid artery trunk laterally, which devascularises both glands on that side.", "Biopsying a normal gland to prove it is parathyroid, which can render it non-functional.", "Mistaking a lymph node or a thyroid nodule for a parathyroid adenoma."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neck.ionm-final": {
+      "id": "step.neck.ionm-final", "kind": "checkpoint", "critical": true,
+      "title": "Final nerve signal and the decision about the other side",
+      "why": "A signal recorded after the dissection tells you whether the nerve still conducts. If it has been lost and the plan involves the opposite side, stopping can prevent bilateral vocal cord palsy and an airway emergency.",
+      "how": [
+        "After the dissection on each side, stimulate the recurrent laryngeal nerve proximal to the dissected segment (R2) and the vagus (V2), and record the values.",
+        "If the signal is lost, troubleshoot the equipment and the tube first, then map the nerve to find the segment of injury.",
+        "With a confirmed loss of signal, do not proceed to the contralateral side as planned: discuss stopping and completing later once the cord has been examined and has recovered.",
+        "Document every value and the decision in the operative note, and plan laryngoscopy after surgery."
+      ],
+      "structuresAtRisk": ["Recurrent laryngeal nerves"],
+      "pitfalls": ["Proceeding to the second side after a loss of signal because the patient was told it would be one operation.", "Skipping the final signal because the first one was normal."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neck.closure": {
+      "id": "step.neck.closure", "kind": "closure",
+      "title": "Closing the central neck so a haematoma can decompress",
+      "why": "Blood trapped deep to tightly closed strap muscles compresses the trachea and causes laryngeal venous congestion. A loose midline strap closure lets any bleeding escape into the subcutaneous space, where it shows early and can be released at the bedside.",
+      "how": [
+        "After the haemostasis check with a raised pressure or Valsalva, approximate the strap muscles loosely in the midline, leaving a gap at the lower end.",
+        "Close platysma with interrupted absorbable sutures, then the skin with a subcuticular suture, glue or clips.",
+        "Use a drain only for a specific reason (large dead space, extensive dissection); it does not prevent or treat an expanding haematoma.",
+        "Apply a light dressing that does not hide neck swelling from the ward staff."
+      ],
+      "structuresAtRisk": ["Trachea (compression by haematoma)", "Anterior jugular veins"],
+      "pitfalls": ["Watertight strap closure that converts a small bleed into airway compression.", "A bulky dressing that hides early swelling.", "Trusting a drain to warn of a haematoma: it often clots."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neck.haematoma-handover": {
+      "id": "step.neck.haematoma-handover", "kind": "checkpoint", "critical": true,
+      "title": "Airway and haematoma handover after neck surgery",
+      "why": "A neck haematoma can obstruct the airway within minutes, and the people who see it first are recovery and ward staff, not the surgeon. They need the kit, the warning signs and the authority to open the wound before help arrives.",
+      "how": [
+        "Hand over explicitly to recovery and the ward: the operation, any concern about haemostasis, nerve monitoring results and the voice plan.",
+        "Ensure a haematoma kit (stitch cutter or clip remover, scalpel, gauze) is at the bedside and that staff know the DESATS warning features and the SCOOP bedside release sequence per the DAS, BAETS and ENT UK guidance.",
+        "Set structured neck observations for the first hours with a clear call threshold: increasing swelling, stridor, voice change, dysphagia, pain or pressure, or desaturation.",
+        "Name who to call and make sure they can attend immediately; a neck haematoma is opened first and investigated later."
+      ],
+      "structuresAtRisk": ["Airway"],
+      "pitfalls": ["A handover of 'routine neck obs' without saying what to look for or what to do.", "Waiting for theatre or for imaging before releasing a haematoma in a patient with airway compromise."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}
