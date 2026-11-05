@@ -1,0 +1,61 @@
+{
+  "id": "uro-acute-scrotum",
+  "title": "Testicular torsion and the acute scrotum",
+  "subtitle": "Torsion until the theatre says otherwise",
+  "category": "uro_emergency",
+  "specialty": "urology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "eau-paeds", "org": "European Association of Urology (EAU) and European Society for Paediatric Urology (ESPU)", "title": "EAU Guidelines on Paediatric Urology: acute scrotum in children", "year": 2024, "url": "https://uroweb.org/guidelines/paediatric-urology", "accessed": "2026-11-04" },
+    { "id": "twist", "org": "The Journal of Urology (Barbosa JA et al.)", "title": "Development and initial validation of a scoring system to diagnose testicular torsion in children (TWIST)", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Development+and+initial+validation+of+a+scoring+system+to+diagnose+testicular+torsion+in+children", "accessed": "2026-11-04" },
+    { "id": "eau-infections", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urological Infections: epididymitis and orchitis", "year": 2024, "url": "https://uroweb.org/guidelines/urological-infections", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Sudden severe testicular pain, especially waking from sleep, in a child, adolescent or young man." },
+      { "text": "Nausea and vomiting with scrotal pain. This is far more typical of torsion than of epididymitis." },
+      { "text": "A high-riding testis with a horizontal lie, or an absent cremasteric reflex on the affected side." },
+      { "text": "Abdominal pain in a boy: always examine the scrotum. Torsion often presents as lower abdominal pain, and adolescents may not volunteer the site." },
+      { "text": "An empty hemiscrotum with groin pain: torsion of an undescended testis." },
+      { "text": "Previous episodes of short-lived severe testicular pain that settled: intermittent torsion, which needs fixing electively before the episode that does not settle." }
+    ],
+    "do_now": [
+      { "text": "Treat suspected torsion as a surgical emergency. Inform the operating surgeon and theatre immediately; testicular salvage falls steeply with every hour of ischaemia.", "timeCritical": true, "evidenceRef": "eau-paeds" },
+      { "text": "Do not delay exploration for an ultrasound when clinical suspicion is high. Doppler is operator-dependent and a normal-looking flow does not exclude partial or intermittent torsion.", "timeCritical": true, "evidenceRef": "eau-paeds" },
+      { "text": "Keep the patient nil by mouth, give analgesia, and take consent for exploration, bilateral fixation and possible orchidectomy before the patient reaches theatre.", "timeCritical": true, "evidenceRef": "eau-paeds" },
+      { "text": "Manual detorsion may be attempted as a temporising manoeuvre if theatre is delayed, but it does not replace exploration and fixation.", "evidenceRef": "eau-paeds" }
+    ],
+    "assess": [
+      { "text": "Time of onset to the nearest hour. It is the most important prognostic fact and must be documented." },
+      { "text": "A structured clinical score helps the decision: testicular swelling, hard testis, absent cremasteric reflex, nausea or vomiting, and a high-riding testis. A high score supports going straight to theatre; a low score makes torsion unlikely but does not exclude it." },
+      { "text": "Look for alternatives without letting them become the comfortable explanation: torsion of an appendix testis (the blue dot sign, pain localised to the upper pole), epididymo-orchitis (urinary symptoms, gradual onset, sexual history), trauma, hernia and tumour." },
+      { "text": "In a neonate, a firm painless swollen testis is usually prenatal extravaginal torsion. Discuss with paediatric urology the same day." }
+    ],
+    "investigate": [
+      { "text": "Urine dipstick and culture. A positive dipstick does not exclude torsion." },
+      { "text": "Doppler ultrasound only when suspicion is low or intermediate and it will not delay theatre. It is useful to support an alternative diagnosis, not to rule torsion out." },
+      { "text": "Sexually transmitted infection testing in sexually active patients with suspected epididymitis." }
+    ],
+    "resuscitate": [
+      { "text": "Adequate analgesia before examination and before any attempt at manual detorsion; a distressed adolescent cannot be examined well.", "evidenceRef": "eau-paeds" }
+    ],
+    "definitive": [
+      { "text": "Scrotal exploration: untwist, assess viability after warming, fix the testis if it is viable, and fix the contralateral testis at the same operation.", "evidenceRef": "eau-paeds" },
+      { "text": "Remove a clearly necrotic testis. Leaving a dead testis risks infection, abscess and prolonged pain.", "evidenceRef": "eau-paeds" },
+      { "text": "Torsion of an appendix testis confirmed clinically or on scan can be managed conservatively with analgesia; explore if there is any doubt.", "evidenceRef": "eau-paeds" },
+      { "text": "Epididymo-orchitis is treated with antibiotics chosen by age and sexual risk per guideline, but only once torsion has been excluded with confidence.", "evidenceRef": "eau-infections" }
+    ],
+    "escalate": [
+      { "text": "Senior urologist or paediatric surgeon on call now, not at the morning handover." },
+      { "text": "If the receiving hospital cannot operate within a short time, the nearest surgeon who can explore the scrotum should do it. Transfer for subspecialty care costs testes." },
+      { "text": "Neonatal torsion and torsion of an undescended testis: paediatric urology or paediatric surgery." }
+    ]
+  },
+  "notes": [
+    "The clinical score cuts both ways. A boy with a high score goes to theatre without a scan; a boy with a low score still gets explored if the examining surgeon is worried.",
+    "A negative exploration is a good outcome. A missed torsion is a lost testis and a medicolegal case, and the commonest reason is a reassuring ultrasound.",
+    "Manual detorsion is usually outwards, like opening a book, but torsion can occur in either direction. Relief of pain is the guide; if pain worsens, try the other way."
+  ]
+}

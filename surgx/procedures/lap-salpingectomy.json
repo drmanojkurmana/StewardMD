@@ -1,0 +1,124 @@
+{
+  "id": "lap-salpingectomy",
+  "title": "Laparoscopic salpingectomy for ectopic pregnancy",
+  "subtitle": "Evacuate, identify, remove the tube",
+  "system": "gynaecological",
+  "aliases": ["salpingectomy", "lap salpingectomy", "ectopic surgery"],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng126", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Ectopic pregnancy and miscarriage: diagnosis and initial management (NG126)", "year": 2019, "version": "NG126, updated 2023", "url": "https://www.nice.org.uk/guidance/ng126", "accessed": "2026-11-04" },
+    { "id": "rcog-gtg21", "org": "Royal College of Obstetricians and Gynaecologists (RCOG) and Association of Early Pregnancy Units", "title": "Diagnosis and management of ectopic pregnancy (Green-top Guideline No. 21)", "year": 2016, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/diagnosis-and-management-of-ectopic-pregnancy-green-top-guideline-no-21/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["shock_index"],
+  "chapters": {
+    "indications": [
+      "Tubal ectopic pregnancy requiring surgery under NICE NG126: rupture, significant pain, adnexal mass of 35 mm or more, visible fetal heartbeat, or hCG of 5000 IU/L or more.",
+      "Failed medical management or a woman who chooses surgery.",
+      "Salpingectomy when the contralateral tube is healthy; salpingotomy is considered when there are risk factors for infertility."
+    ],
+    "contraindications": [
+      "Haemodynamic collapse where laparoscopy would delay control and the surgeon is not experienced: perform laparotomy.",
+      "Interstitial, cornual, cervical or caesarean scar pregnancy, which need specialist techniques."
+    ],
+    "preparation": [
+      "Group and crossmatch, full blood count, hCG, rhesus status.",
+      "Consent including conversion to laparotomy, salpingotomy versus salpingectomy, bleeding, injury to bowel, bladder or vessels, and the effect on fertility.",
+      "Ask the woman her wishes about the pregnancy tissue, and offer bereavement support information."
+    ],
+    "positioning": [
+      "Supine or Lloyd-Davies with arms tucked, for Trendelenburg tilt; a uterine manipulator is optional and only if intrauterine pregnancy has been excluded."
+    ],
+    "equipment": [
+      "Laparoscopy set with 10 mm umbilical and two or three 5 mm ports, high-flow suction irrigation, bipolar energy or a sealing device, endoloops, retrieval bag.",
+      "Laparotomy set opened in theatre for the unstable woman."
+    ],
+    "anatomy": [
+      "The tube runs in the upper border of the broad ligament from the cornu to the fimbria, supplied by the mesosalpinx between the uterine and ovarian vessels.",
+      "Most ectopic pregnancies are ampullary; isthmic and interstitial ones bleed more and rupture earlier.",
+      "The ovarian vessels in the infundibulopelvic ligament and the ureter crossing the pelvic brim lie close to the fimbrial end."
+    ],
+    "criticalSafety": [
+      "In the shocked woman the first goal is to control bleeding: clamp or grasp the mesosalpinx before evacuating clot.",
+      "Divide the mesosalpinx close to the tube to preserve ovarian blood supply.",
+      "Use a bag for removal and inspect the specimen for products of conception."
+    ],
+    "structuresAtRisk": [
+      "Ovary and its blood supply",
+      "Ureter at the pelvic brim",
+      "Bowel adherent in the pelvis",
+      "Inferior epigastric vessels at lateral ports"
+    ],
+    "commonErrors": [
+      "Spending time suctioning blood in an unstable woman before controlling the bleeding source.",
+      "Dividing the mesosalpinx too close to the ovary.",
+      "Removing the wrong tube after failing to inspect both sides.",
+      "Not measuring the haemoperitoneum, so the blood loss is under-reported."
+    ],
+    "complications": [
+      "Haemorrhage and need for transfusion or conversion.",
+      "Persistent trophoblast, particularly after salpingotomy, needing hCG follow-up.",
+      "Injury to bowel, bladder, ureter or vessels.",
+      "Port-site hernia and infection.",
+      "Psychological sequelae of pregnancy loss."
+    ],
+    "postop": [
+      "After salpingectomy with a healthy contralateral tube, a urine pregnancy test at three weeks per NICE NG126; after salpingotomy, serial serum hCG.",
+      "Anti-D for rhesus-negative women.",
+      "Advice on future pregnancy: early scan in the next pregnancy to confirm location.",
+      "Bereavement support and follow-up information."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm side from imaging if known, but the side is confirmed at laparoscopy, not marked on the skin." },
+    { "ref": "step.core.timeout", "emphasis": "State the haemodynamic status, blood available and the conversion plan." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Steep Trendelenburg to lift bowel out of the pelvis; confirm the woman is secured before tilting." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.lap.access", "emphasis": "Catheterise first. The anaesthetist should expect a fall in blood pressure as pneumoperitoneum is established in a hypovolaemic woman." },
+    { "ref": "step.lap.ports" },
+    { "ref": "step.lap.survey", "emphasis": "Find the bleeding tube first; a full survey follows once bleeding is controlled." },
+    { "ref": "step.salp.control" },
+    { "ref": "step.salp.excise" },
+    { "ref": "step.obg.adnexal-check", "emphasis": "The contralateral tube determines fertility counselling and is the basis for salpingectomy over salpingotomy." },
+    { "ref": "step.lap.specimen-retrieval", "emphasis": "Bag the tube; trophoblast left in the abdomen can implant and persist." },
+    { "ref": "step.core.haemostasis", "emphasis": "Irrigate the pelvis and inspect the mesosalpinx stump at low pressure." },
+    { "ref": "step.obg.blood-loss", "emphasis": "Count the haemoperitoneum evacuated as blood loss." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Send for histology to confirm trophoblast; record the woman's wishes about the tissue." },
+    { "ref": "step.lap.closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.obg.rhesus", "emphasis": "NICE NG126 advises anti-D for rhesus-negative women having surgical management of an ectopic pregnancy." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.salp.control": {
+      "id": "step.salp.control", "kind": "dissection", "critical": true,
+      "title": "Controlling the bleeding and evacuating haemoperitoneum",
+      "why": "In a ruptured ectopic the bleeding source is small and accessible. Grasping it first stops the haemorrhage; suctioning first only measures it.",
+      "how": [
+        "Identify the affected tube, lift it with an atraumatic grasper and hold it to tamponade the mesosalpinx.",
+        "Then evacuate clot and blood with high-flow suction and irrigation to clear the field.",
+        "Inspect the ectopic site: ampullary, isthmic, fimbrial, or interstitial (which changes the plan)."
+      ],
+      "structuresAtRisk": ["Mesosalpinx vessels", "Ovary", "Bowel"],
+      "pitfalls": ["Suctioning for minutes before grasping the tube in an unstable woman.", "Missing an interstitial ectopic and treating it as ampullary."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.salp.excise": {
+      "id": "step.salp.excise", "kind": "resection", "critical": true,
+      "title": "Salpingectomy",
+      "why": "Removing the tube with its pregnancy is definitive and avoids persistent trophoblast. Staying close to the tube protects the ovarian supply.",
+      "how": [
+        "Starting at the fimbrial end or the isthmus, coagulate and divide the mesosalpinx close to the tube in short steps.",
+        "Divide the tube at the isthmus close to the cornu.",
+        "Alternatively, place sequential endoloops around the tube and mesosalpinx before excision.",
+        "If salpingotomy is chosen instead, make a linear antimesenteric incision over the ectopic, remove it, achieve haemostasis, and arrange serial hCG."
+      ],
+      "structuresAtRisk": ["Ovarian vessels", "Utero-ovarian ligament", "Ureter"],
+      "pitfalls": ["Coagulating into the ovarian hilum.", "Leaving a long tubal stump at the fimbrial end."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

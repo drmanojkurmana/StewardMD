@@ -1,0 +1,62 @@
+{
+  "id": "cauda-equina-syndrome",
+  "title": "Cauda equina syndrome",
+  "subtitle": "Suspect early, scan the same day, decompress",
+  "category": "neuro_spine",
+  "specialty": "neurosurgery",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "girft-ces", "org": "Getting It Right First Time (GIRFT), NHS England", "title": "National suspected cauda equina syndrome (CES) pathway", "year": 2023, "url": "https://gettingitrightfirsttime.co.uk/", "accessed": "2026-11-04" },
+    { "id": "sbns-bass", "org": "Society of British Neurological Surgeons (SBNS) and British Association of Spine Surgeons (BASS)", "title": "Standards of care for investigation and management of cauda equina syndrome", "year": 2018, "url": "https://www.sbns.org.uk/", "accessed": "2026-11-04" },
+    { "id": "todd-2017", "org": "Todd NV, British Journal of Neurosurgery", "title": "Guidelines for cauda equina syndrome. Red flags and white flags. Systematic review and implications for triage (Br J Neurosurg 2017;31:336-339)", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Todd+2017+guidelines+cauda+equina+syndrome+red+flags+white+flags", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "New urinary disturbance with back pain or sciatica: reduced bladder sensation, hesitancy, poor stream, loss of the desire to void, or retention." },
+      { "text": "Altered sensation in the saddle area, perineum or genitals, including on wiping after the toilet." },
+      { "text": "Bilateral sciatica, or sciatica that alternates sides." },
+      { "text": "New sexual dysfunction or new bowel disturbance, including incontinence or loss of rectal sensation." },
+      { "text": "Progressive or severe lower-limb weakness." },
+      { "text": "Painless retention with overflow: this is late, and outcomes are worse than when the bladder still has sensation." }
+    ],
+    "do_now": [
+      { "text": "Treat suspected CES as a surgical emergency at any hour. Do not wait for daylight or for the symptoms to progress.", "timeCritical": true, "evidenceRef": "girft-ces" },
+      { "text": "Arrange emergency MRI of the lumbosacral spine, following the time standard in the national pathway.", "timeCritical": true, "evidenceRef": "girft-ces" },
+      { "text": "Bladder scan for post-void residual volume, and catheterise if in retention.", "evidenceRef": "girft-ces" },
+      { "text": "Contact the on-call spinal surgeon as soon as MRI confirms compression, so theatre can be planned without delay.", "timeCritical": true, "evidenceRef": "sbns-bass" }
+    ],
+    "assess": [
+      { "text": "Document the time of onset of each symptom, especially bladder symptoms. This defines the clinical category and later decisions." },
+      { "text": "Full lower-limb neurological examination, including saddle and perianal sensation to light touch and pin prick, recorded by dermatome." },
+      { "text": "Perianal sensation and anal tone, with a chaperone and with consent; record what was examined and what was found." },
+      { "text": "Classify as suspected, incomplete (CES-I, altered bladder sensation but preserved control) or with retention (CES-R)." }
+    ],
+    "investigate": [
+      { "text": "MRI lumbosacral spine. If MRI is contraindicated, CT myelography per local protocol." },
+      { "text": "Post-void residual volume by bladder scan, interpreted alongside symptoms rather than as a single cut-off." },
+      { "text": "Coagulation screen and group and save before theatre." },
+      { "text": "Consider other causes when MRI does not show compression: conus lesions, tumour, infection, and haematoma." }
+    ],
+    "resuscitate": [
+      { "text": "Analgesia is adequate and does not mask the diagnosis. Repeat the neurological and bladder assessment after it.", "evidenceRef": "sbns-bass" },
+      { "text": "Stop or reverse anticoagulants in preparation for surgery, per local protocol.", "evidenceRef": "sbns-bass" }
+    ],
+    "definitive": [
+      { "text": "Surgical decompression as soon as possible after radiological confirmation, by the most appropriately experienced surgeon available.", "timeCritical": true, "evidenceRef": "sbns-bass" },
+      { "text": "Decompression of a central disc prolapse is by discectomy, with laminectomy if needed for safe access to the thecal sac.", "evidenceRef": "sbns-bass" },
+      { "text": "If MRI does not show compression, give written safety-net advice listing the red flags and how to return.", "evidenceRef": "girft-ces" }
+    ],
+    "escalate": [
+      { "text": "If no MRI is available locally, transfer the same day to a unit with MRI and spinal surgery. Do not admit to wait for the morning list." },
+      { "text": "Communicate the MRI result to the patient promptly, including a normal result with safety-netting." },
+      { "text": "Arrange urology, pelvic floor and psychological follow-up for persisting bladder, bowel or sexual dysfunction." }
+    ]
+  },
+  "notes": [
+    "Cauda equina syndrome is a clinical diagnosis with a radiological confirmation. Most suspected cases have normal scans, and that is the correct cost of not missing one.",
+    "Retention is a late sign. The patient to catch is the one with altered bladder sensation and preserved control.",
+    "Document negatives: saddle sensation, bladder function and anal tone, with the time. This protects the patient and you."
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "id": "acute-abdomen-pregnancy",
+  "title": "The pregnant woman with an acute abdomen",
+  "subtitle": "Two patients, one operation, no delay",
+  "category": "obgyn_emergency",
+  "specialty": "obgyn",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "acog-775", "org": "American College of Obstetricians and Gynecologists (ACOG)", "title": "Nonobstetric surgery during pregnancy (Committee Opinion No. 775)", "year": 2019, "url": "https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2019/04/nonobstetric-surgery-during-pregnancy", "accessed": "2026-11-04" },
+    { "id": "acog-723", "org": "American College of Obstetricians and Gynecologists (ACOG)", "title": "Guidelines for diagnostic imaging during pregnancy and lactation (Committee Opinion No. 723)", "year": 2017, "url": "https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2017/10/guidelines-for-diagnostic-imaging-during-pregnancy-and-lactation", "accessed": "2026-11-04" },
+    { "id": "sages-preg", "org": "Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)", "title": "Guidelines for the use of laparoscopy during pregnancy", "year": 2017, "url": "https://www.sages.org/publications/guidelines/guidelines-for-the-use-of-laparoscopy-during-pregnancy/", "accessed": "2026-11-04" },
+    { "id": "rcog-gtg56", "org": "Royal College of Obstetricians and Gynaecologists (RCOG)", "title": "Maternal collapse in pregnancy and the puerperium (Green-top Guideline No. 56)", "year": 2019, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/", "accessed": "2026-11-04" },
+    { "id": "wses-2020", "org": "World Society of Emergency Surgery (WSES)", "title": "Diagnosis and treatment of acute appendicitis: 2020 update of the WSES Jerusalem guidelines (World J Emerg Surg 2020;15:27)", "year": 2020, "url": "https://wjes.biomedcentral.com/articles/10.1186/s13017-020-00306-3", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Tachycardia, hypotension or a rising lactate. Pregnancy masks shock until late, and maternal hypovolaemia is fetal hypoperfusion." },
+      { "text": "Peritonism in pregnancy is often blunted: the gravid uterus lifts the abdominal wall away from the inflamed organ." },
+      { "text": "Appendicitis pain may be in the right flank or upper quadrant later in pregnancy as the appendix is displaced." },
+      { "text": "Abdominal pain with vaginal bleeding, a hard tender uterus or fetal distress: abruption, which is an obstetric emergency." },
+      { "text": "Epigastric or right upper quadrant pain with hypertension: pre-eclampsia or HELLP syndrome, not gallstones." }
+    ],
+    "do_now": [
+      { "text": "From about 20 weeks, position with left lateral tilt or manual uterine displacement to relieve aortocaval compression, during assessment, transfer and surgery.", "timeCritical": true, "evidenceRef": "rcog-gtg56" },
+      { "text": "Involve the obstetric team at presentation, not after the decision to operate.", "timeCritical": true, "evidenceRef": "acog-775" },
+      { "text": "Do not delay an indicated operation because of the pregnancy. Delay in appendicitis and other surgical emergencies harms both mother and fetus.", "timeCritical": true, "evidenceRef": "acog-775" },
+      { "text": "Resuscitate the mother first. Oxygen, intravenous access, fluids and analgesia are the best fetal treatment.", "timeCritical": true, "evidenceRef": "acog-775" }
+    ],
+    "assess": [
+      { "text": "Gestation by dates or early scan, and fetal heart rate documented before any intervention when the fetus is viable.", "calcs": ["edd"] },
+      { "text": "Use pregnancy-adjusted interpretation of physiology and bloods: white cell count and heart rate are normally higher, blood pressure lower in the second trimester." },
+      { "text": "Consider obstetric causes alongside surgical ones: labour, abruption, pre-eclampsia, fibroid degeneration, torsion, urinary infection." }
+    ],
+    "investigate": [
+      { "text": "Ultrasound first. MRI without gadolinium is the next step when ultrasound is inconclusive." },
+      { "text": "CT is not contraindicated in pregnancy when it is needed to answer an urgent question; the dose from a single diagnostic CT is below the threshold associated with fetal harm." },
+      { "text": "Do not withhold necessary imaging with ionising radiation from a pregnant woman; explain and document the discussion." },
+      { "text": "Urinalysis, full blood count, liver function, urea and electrolytes, and blood pressure with proteinuria where pre-eclampsia is possible." }
+    ],
+    "resuscitate": [
+      { "text": "Maintain maternal oxygenation, normotension and normoglycaemia; avoid maternal hypotension during induction.", "evidenceRef": "acog-775" },
+      { "text": "Venous thromboembolism prophylaxis: pregnancy is a prothrombotic state.", "evidenceRef": "sages-preg" },
+      { "text": "Antenatal corticosteroids for fetal lung maturity when preterm birth is a risk and the gestation falls within the window the obstetric team uses.", "evidenceRef": "acog-775" }
+    ],
+    "definitive": [
+      { "text": "Laparoscopy is safe in any trimester when indicated. Use an open entry or adjust the Veress or optical entry site to the fundal height.", "evidenceRef": "sages-preg" },
+      { "text": "Position in left lateral tilt on the table; use the lowest insufflation pressure that gives adequate view, with capnography monitored.", "evidenceRef": "sages-preg" },
+      { "text": "Appendicectomy for appendicitis in pregnancy; non-operative antibiotic treatment is not the standard in pregnancy because perforation carries a high fetal loss rate.", "evidenceRef": "wses-2020" },
+      { "text": "Fetal heart monitoring before and after surgery for a viable fetus; intra-operative monitoring is individualised and arranged with obstetrics, who must be able to intervene.", "evidenceRef": "acog-775" }
+    ],
+    "escalate": [
+      { "text": "Theatre should be in a hospital with obstetric and neonatal cover when the fetus is viable." },
+      { "text": "Obstetric anaesthetist for the anaesthetic." },
+      { "text": "Post-operatively, monitor for preterm contractions; tocolysis is not given prophylactically and is decided by obstetrics." }
+    ]
+  },
+  "notes": [
+    "The commonest non-obstetric surgical emergency in pregnancy is appendicitis. The commonest error is waiting.",
+    "Ultrasound, then MRI, then CT if needed. The worst imaging choice is none.",
+    "Left lateral tilt is not a detail. Supine hypotension in the third trimester substantially reduces venous return and cardiac output."
+  ],
+  "calcs": ["edd", "shock_index", "alvarado"]
+}

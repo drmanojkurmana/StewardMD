@@ -1,0 +1,169 @@
+{
+  "id": "mcdonald-cerclage",
+  "title": "Transvaginal cervical cerclage (McDonald)",
+  "subtitle": "High purse-string at the cervicovaginal junction, gentle on the membranes",
+  "system": "obstetric",
+  "aliases": ["cervical cerclage", "McDonald suture", "cervical stitch", "rescue cerclage"],
+  "estMinutes": 30,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "rcog-gtg75", "org": "Royal College of Obstetricians and Gynaecologists (RCOG)", "title": "Cervical cerclage (Green-top Guideline No. 75)", "year": 2022, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/", "accessed": "2026-11-04" },
+    { "id": "acog-pb142", "org": "American College of Obstetricians and Gynecologists (ACOG)", "title": "Cerclage for the management of cervical insufficiency (Practice Bulletin No. 142)", "year": 2014, "url": "https://www.acog.org/clinical/clinical-guidance/practice-bulletin", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["edd", "ga_crl"],
+  "chapters": {
+    "indications": [
+      "History-indicated: a history of three or more previous preterm births and/or second-trimester losses, usually placed electively in the late first trimester after the early scans, as RCOG GTG75 describes.",
+      "Ultrasound-indicated: a previous spontaneous preterm birth or second-trimester loss, with a short cervix (25 mm or less) on transvaginal scan before 24 weeks.",
+      "Rescue (emergency) cerclage for painless cervical dilatation with exposed membranes, as an individual senior decision after counselling."
+    ],
+    "contraindications": [
+      "Active preterm labour.",
+      "Clinical evidence of chorioamnionitis.",
+      "Continuing vaginal bleeding.",
+      "Preterm prelabour rupture of membranes.",
+      "Evidence of fetal compromise, a lethal fetal abnormality or fetal death.",
+      "Multiple pregnancy: cerclage is not routinely recommended and any decision is individual and senior."
+    ],
+    "preparation": [
+      "Confirm viability and gestation on scan, and that the screening and any anomaly scan results are known.",
+      "Exclude labour, infection and bleeding clinically; consider a vaginal swab per local protocol.",
+      "Discuss the alternatives (vaginal progesterone, cervical length surveillance) and the evidence for cerclage in her situation.",
+      "Consent for: rupture of membranes, miscarriage or preterm birth, bleeding, infection, cervical trauma, bladder injury (rare), suture displacement or failure, and the need to remove the suture at 36 to 37 weeks, or earlier if labour starts or the membranes rupture, to avoid cervical tearing.",
+      "Plan regional anaesthesia with the anaesthetist where possible."
+    ],
+    "positioning": [
+      "Lithotomy; slight head-down tilt helps when membranes are bulging."
+    ],
+    "equipment": [
+      "Sims or weighted speculum and vaginal wall retractors, sponge-holding or ring forceps for the cervix.",
+      "Non-absorbable suture or tape on a round-bodied needle, as chosen by the operator.",
+      "For rescue cerclage: moist swab on a stick, a urinary catheter for bladder filling, and a balloon catheter if used locally."
+    ],
+    "anatomy": [
+      "The McDonald suture is placed at the junction of the rugose vaginal skin and the smooth cervix, without dissecting the bladder off the cervix; higher placement requires dissection (Shirodkar) and is a different operation.",
+      "The bladder lies immediately anterior to the upper cervix and is closest at the anterior bites.",
+      "The descending cervical branches of the uterine arteries run in the lateral cervix at about the 3 and 9 o'clock positions.",
+      "The membranes lie just inside the internal os; a bite that is too deep enters the canal and can rupture them."
+    ],
+    "criticalSafety": [
+      "Place the bites as high as possible at the cervicovaginal junction, avoiding the bladder anteriorly and the vessels laterally.",
+      "Do not enter the cervical canal with a bite.",
+      "Handle the cervix and membranes gently; no bimanual pressure on bulging membranes.",
+      "Document the knot position and the removal plan in the notes and the pregnancy record."
+    ],
+    "structuresAtRisk": [
+      "Fetal membranes",
+      "Bladder",
+      "Descending cervical branches of the uterine artery",
+      "Cervical tissue in a thin, effaced cervix"
+    ],
+    "commonErrors": [
+      "Placing the suture too low on the cervix, which reduces its effect.",
+      "Toothed instruments tearing a soft, thin cervix.",
+      "Bites through the canal into the membranes.",
+      "Leaving ends too short to find and cut at removal."
+    ],
+    "complications": [
+      "Rupture of membranes, intra-operatively or later.",
+      "Chorioamnionitis.",
+      "Bleeding from the cervical vessels.",
+      "Suture displacement or cutting through the cervix.",
+      "Cervical laceration if labour occurs with the suture in place.",
+      "Miscarriage or preterm birth despite the cerclage."
+    ],
+    "postop": [
+      "Check fetal heart and vaginal loss before discharge, which is usually within a day.",
+      "Advise urgent attendance for contractions, bleeding, leaking fluid, fever or offensive discharge: the suture must come out if labour starts or membranes rupture.",
+      "Book suture removal at 36 to 37 weeks (or at planned caesarean birth), as RCOG GTG75 advises.",
+      "Continue antenatal care with the preterm birth team; record the cerclage prominently in the pregnancy record."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the indication category and that removal at 36 to 37 weeks, or earlier with labour or rupture of membranes, was explained." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.obg.preop-check", "emphasis": "Viable intrauterine pregnancy and gestation confirmed; no labour, bleeding, rupture of membranes or infection." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Routine antibiotics and tocolysis are not established for cerclage; follow local policy." },
+    { "ref": "step.core.positioning", "emphasis": "Lithotomy, with slight head-down tilt for bulging membranes." },
+    { "ref": "step.obg.lithotomy-eua", "emphasis": "Speculum examination only when membranes are exposed: no bimanual examination over bulging membranes." },
+    { "ref": "step.core.prep-drape", "emphasis": "Gentle vaginal preparation; do not swab vigorously over exposed membranes." },
+    { "ref": "step.cerc.expose" },
+    { "ref": "step.cerc.membranes" },
+    { "ref": "step.cerc.bites" },
+    { "ref": "step.cerc.tie" },
+    { "ref": "step.core.haemostasis", "emphasis": "Pressure usually settles needle-hole bleeding; avoid diathermy near the membranes." },
+    { "ref": "step.core.counts", "emphasis": "Every swab placed in the vagina is counted out." },
+    { "ref": "step.cerc.fetal-check" },
+    { "ref": "step.core.debrief", "emphasis": "Record the suture material, number of bites, knot position, membrane status and the removal plan." }
+  ],
+  "steps_local": {
+    "step.cerc.expose": {
+      "id": "step.cerc.expose", "kind": "access",
+      "title": "Exposing and holding the cervix",
+      "why": "The suture can only be placed high if the cervicovaginal junction is seen all the way round, and a soft pregnant cervix tears if it is held with toothed instruments.",
+      "how": [
+        "Expose the cervix with a Sims or weighted speculum and lateral vaginal wall retractors.",
+        "Hold the anterior and posterior lips with sponge-holding or ring forceps, not a toothed tenaculum.",
+        "Identify the junction of the rugose vaginal skin and the smooth cervix around the whole circumference."
+      ],
+      "structuresAtRisk": ["Cervix", "Fetal membranes"],
+      "pitfalls": ["Pulling the cervix down hard, which can open the os.", "Toothed forceps on a thin cervix."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cerc.membranes": {
+      "id": "step.cerc.membranes", "kind": "bailout",
+      "title": "Managing bulging membranes, or abandoning the cerclage",
+      "why": "In rescue cerclage the membranes may prolapse through the os. They must be reduced gently before the suture is tightened, and rupture ends the procedure because cerclage with ruptured membranes increases the risk of infection.",
+      "how": [
+        "Use head-down tilt, and reduce the membranes gently with a moist swab on a stick or by other methods the senior has agreed, such as filling the bladder or a balloon catheter.",
+        "Keep the reduced membranes behind the os while the bites are placed and the suture is tied.",
+        "If the membranes rupture, abandon the cerclage, remove any suture already placed, and counsel the woman with the senior obstetrician.",
+        "If the procedure becomes too difficult to complete safely, stop and call senior help rather than persisting."
+      ],
+      "structuresAtRisk": ["Fetal membranes"],
+      "pitfalls": ["Tying the suture over membranes that are still prolapsed.", "Completing a cerclage after the membranes have ruptured."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cerc.bites": {
+      "id": "step.cerc.bites", "kind": "reconstruction", "critical": true,
+      "title": "Placing the purse-string bites",
+      "why": "A cerclage helps only if it is high on the cervix. The bites must grip cervical stroma deeply enough to hold, without entering the canal, the bladder or the lateral vessels.",
+      "how": [
+        "Start anteriorly and place four to six bites around the cervix at the cervicovaginal junction, as high as can be reached.",
+        "Take each bite deep into the cervical stroma but not into the canal; check the needle path before driving it through.",
+        "Keep the anterior bites below the bladder and avoid the lateral cervix at 3 and 9 o'clock where the descending cervical vessels run.",
+        "Bring the suture out anteriorly next to where it started."
+      ],
+      "structuresAtRisk": ["Bladder", "Descending cervical vessels", "Fetal membranes"],
+      "pitfalls": ["Bites placed low on the cervix because high exposure was difficult.", "A bite entering the canal and puncturing the membranes."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cerc.tie": {
+      "id": "step.cerc.tie", "kind": "closure", "critical": true,
+      "title": "Tying the cerclage and leaving it removable",
+      "why": "The knot must close the os without cutting through the cervix, and the suture must be easy to find and cut in labour or at 36 to 37 weeks. A cerclage that cannot be removed quickly turns a labour into a cervical laceration.",
+      "how": [
+        "Tie the suture firmly enough to close the os to a fingertip, without strangulating the cervix.",
+        "Place the knot anteriorly (or where the operator records) and leave the ends long enough to grasp at removal.",
+        "Check that the suture lies high and that the os is closed by gentle palpation."
+      ],
+      "structuresAtRisk": ["Cervix"],
+      "pitfalls": ["Tying so tight that the suture cuts through soft tissue.", "Cutting the ends short, so removal needs anaesthesia."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cerc.fetal-check": {
+      "id": "step.cerc.fetal-check", "kind": "checkpoint",
+      "title": "Fetal heart and immediate post-procedure check",
+      "why": "The operation is for the pregnancy. Confirming the fetal heart, the absence of bleeding and leaking fluid, and the plan before leaving theatre gives a baseline for every later assessment.",
+      "how": [
+        "Confirm the fetal heart by Doppler or ultrasound in recovery, as appropriate for gestation.",
+        "Check for vaginal bleeding and leaking fluid.",
+        "Confirm the removal date and the instructions for when to attend are written in the notes and given to the woman."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Discharging without documenting the fetal heart after the procedure.", "A removal plan known only to the operator."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

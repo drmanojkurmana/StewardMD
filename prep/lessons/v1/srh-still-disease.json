@@ -1,0 +1,212 @@
+{
+  "v": 1,
+  "module": "srh-still-disease",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Adult onset Still disease",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Adult-onset Still disease** or AOSD is a severe systemic autoinflammatory disorder defined by the Yamaguchi criteria. Major criteria include high spiking **quotidian fever** at or above **39 degrees Celsius** persisting for at least **1 week**, arthralgias or arthritis lasting **2 weeks** or more, a characteristic salmon-pink macular rash, and leukocytosis with **10,000 or more WBC/microL** containing at least **80 percent** granulocytes.",
+      "say": "Adult-onset Still disease is an autoinflammatory syndrome presenting with high spiking fevers. Major Yamaguchi criteria require fever above 39 degrees, evanescent salmon rash, and neutrophilic leukocytosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adult-onset-still-fig1.webp",
+        "alt": "Classic triad: fever spikes, evanescent salmon-pink rash, and arthritis",
+        "caption": "Classic triad of quotidian fever, evanescent rash, and inflammatory arthritis. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Minor criteria under the **Yamaguchi classification** encompass sore throat, lymphadenopathy, splenomegaly, and liver function abnormalities with elevated aminotransferases. Diagnostic criteria mandate negative serology for **antinuclear antibodies** or ANA and **rheumatoid factor**. Diagnosis requires at least **5 criteria** with at least **2 major criteria**, after strictly excluding infectious, malignant, and alternative autoimmune disorders.",
+      "say": "Minor Yamaguchi criteria evaluate sore throat, lymphadenopathy, hepatosplenomegaly, and negative serologies. Classification requires at least 5 criteria with at least 2 major criteria.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Yamaguchi domain",
+          "Components",
+          "Threshold requirement"
+        ],
+        "rows": [
+          [
+            "Major criteria",
+            "Fever >=39 C, rash, arthralgia, leukocytosis",
+            "At least 2 required"
+          ],
+          [
+            "Minor criteria",
+            "Sore throat, adenopathy, liver enzymes, negative ANA/RF",
+            "Combined to meet total 5"
+          ],
+          [
+            "Exclusions",
+            "Infections, hematologic malignancies, vasculitis",
+            "Mandatory rule-out"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Serum **ferritin** is massively elevated in adult-onset Still disease, often exceeding **5-fold** the upper limit of normal with values greater than **1,000 to 10,000 ng/mL**. Even more specific than absolute hyperferritinemia is a marked drop in **glycosylated ferritin** below **20 percent**, providing high diagnostic specificity for AOSD over infection or lymphoma.",
+      "say": "Serum ferritin levels rise massively in active Still disease, often exceeding 1,000 ng per mL. Glycosylated ferritin falling below 20 percent confirms high diagnostic specificity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Still disease flare",
+          "points": [
+            "Ferritin often exceeds 3,000 to 10,000 ng/mL",
+            "Glycosylated ferritin drops below 20 percent",
+            "Marked elevation of interleukin-18",
+            "Quotidian fever spikes with rash"
+          ]
+        },
+        "right": {
+          "title": "Sepsis or infection",
+          "points": [
+            "Modest ferritin rise (typically <1,000 ng/mL)",
+            "Glycosylated ferritin remains above 50 percent",
+            "Procalcitonin markedly elevated",
+            "Persistent sustained fever curve"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The fever pattern in AOSD follows a classic **quotidian** or double quotidian curve, spiking predominantly in late afternoon or evening. The rash is an **evanescent**, salmon-pink, non-pruritic maculopapular eruption that flares synchronously with febrile peaks and rapidly fades as body temperature normalizes. The rash frequently displays the **Koebner phenomenon**, induced by skin friction or pressure.",
+      "say": "Fever follows a quotidian curve with dramatic late afternoon temperature spikes. The evanescent salmon rash flares during fever peaks and displays the Koebner phenomenon.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/familial-mediterranean-fever-and-other-fig1.webp",
+        "alt": "Autoinflammatory pathway and severe systemic cytokine release",
+        "caption": "Systemic autoinflammatory activation mediates rhythmic fever spikes and acute phase response. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Articular involvement in chronic adult-onset Still disease can evolve into a distinctive, progressive, non-erosive **intercarpal ankylosis**. Radiographic imaging shows pericapitate narrowing and bony fusion of carpal and carpometacarpal joints with relative sparing of metacarpophalangeal joints, a pattern highly characteristic of Still disease.",
+      "say": "Articular involvement can progress to distinctive intercarpal ankylosis with wrist bone fusion. Radiographs show pericapitate joint narrowing while sparing the knuckles.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Persistent wrist and carpal synovitis"
+          },
+          {
+            "id": "b",
+            "label": "Pericapitate joint space narrowing"
+          },
+          {
+            "id": "c",
+            "label": "Progressive non-erosive intercarpal ankylosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line remission induction for moderate-to-severe adult-onset Still disease relies on high-dose **prednisone** at **0.5 to 1.0 mg/kg daily**. In steroid-dependent or refractory disease, **methotrexate** at **15 to 25 mg weekly** serves as the initial conventional synthetic steroid-sparing agent, enabling glucocorticoid taper.",
+      "say": "Initial therapy for severe disease requires high-dose prednisone up to 1.0 mg/kg daily. Methotrexate at 15 to 25 mg weekly acts as the primary steroid-sparing agent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment tier",
+          "Medication and dosing",
+          "Clinical role"
+        ],
+        "rows": [
+          [
+            "Induction",
+            "Prednisone 0.5 to 1.0 mg/kg daily",
+            "Rapid control of systemic fever and inflammation"
+          ],
+          [
+            "Steroid-sparing",
+            "Methotrexate 15 to 25 mg weekly",
+            "Maintenance csDMARD for chronic articular flares"
+          ],
+          [
+            "Pulse therapy",
+            "IV methylprednisolone 1,000 mg",
+            "Life-threatening visceral flares or early MAS"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Targeted biologic therapies against **interleukin-1** with **anakinra** or **canakinumab** and **interleukin-6** with **tocilizumab** demonstrate dramatic clinical efficacy. IL-1 blockade rapidly induces complete clinical remission and normalizes acute-phase reactants in over **80 percent** of refractory systemic Still disease cases, preventing progressive organ complications.",
+      "say": "Targeted biologics against interleukin-1 and interleukin-6 control refractory Still disease. Anakinra rapidly resolves fever and normalizes inflammatory markers in over 80 percent of patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Severe systemic cytokine release (IL-1, IL-6, IL-18)"
+          },
+          {
+            "id": "b",
+            "label": "Targeted blockade with anakinra or tocilizumab"
+          },
+          {
+            "id": "c",
+            "label": "Over 80 percent achieve complete clinical remission"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Macrophage activation syndrome** or MAS represents a life-threatening acute complication of adult-onset Still disease. Triggered by severe cytokine storm, MAS features plummeting erythrocyte sedimentation rates despite rising C-reactive protein, caused by severe **hypofibrinogenemia**, alongside thrombocytopenia, hypertriglyceridemia, and bone marrow **hemophagocytosis**. Urgent treatment demands high-dose pulse **methylprednisolone** and intravenous **anakinra**.",
+      "say": "Macrophage activation syndrome is a fatal complication driven by excessive cytokine release. Paradoxical dropping ESR with hypofibrinogenemia and thrombocytopenia mandates urgent pulse steroids and anakinra.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic marker",
+          "Laboratory finding",
+          "Underlying pathophysiology"
+        ],
+        "rows": [
+          [
+            "ESR / CRP paradox",
+            "Plummeting ESR despite high CRP",
+            "Severe consumption of fibrinogen"
+          ],
+          [
+            "Cytopenias",
+            "Thrombocytopenia and leukopenia",
+            "Hemophagocytosis and marrow suppression"
+          ],
+          [
+            "Hepatic / metabolic",
+            "High triglycerides, transaminases",
+            "Macrophage activation and organ infiltration"
+          ],
+          [
+            "Intervention",
+            "Pulse steroids plus anakinra",
+            "Rapid cytokine storm neutralization"
+          ]
+        ]
+      }
+    }
+  ]
+}

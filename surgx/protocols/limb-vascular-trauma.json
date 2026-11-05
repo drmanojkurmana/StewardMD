@@ -1,0 +1,66 @@
+{
+  "id": "limb-vascular-trauma",
+  "title": "Limb vascular trauma and haemorrhage control",
+  "subtitle": "Tourniquet, hard signs, shunt or repair",
+  "category": "vascular",
+  "specialty": "vascular",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "esvs-trauma-2025", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2025 Clinical Practice Guidelines on the Management of Vascular Trauma", "year": 2025, "url": "https://pubmed.ncbi.nlm.nih.gov/39809666/", "accessed": "2026-11-04" },
+    { "id": "east-2012", "org": "Eastern Association for the Surgery of Trauma (EAST)", "title": "Evaluation and management of penetrating lower extremity arterial trauma: an EAST practice management guideline", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/23114487/", "accessed": "2026-11-04" },
+    { "id": "nice-ng39", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Major trauma: assessment and initial management (NG39)", "year": 2016, "url": "https://www.nice.org.uk/guidance/ng39", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Hard signs of arterial injury: pulsatile bleeding, expanding or pulsatile haematoma, palpable thrill or audible bruit, absent distal pulses, or signs of distal ischaemia." },
+      { "text": "Junctional bleeding from the groin or axilla, where a limb tourniquet cannot be applied." },
+      { "text": "Posterior knee dislocation or a displaced supracondylar fracture, even with a pulse: popliteal artery injury." },
+      { "text": "A tense, painful compartment, pain on passive stretch, or increasing analgesic need after injury or revascularisation." },
+      { "text": "A mangled limb in a shocked patient. Life comes before limb." }
+    ],
+    "do_now": [
+      { "text": "Direct firm pressure on the bleeding point, then a tourniquet applied high and tight on the limb for life-threatening haemorrhage that pressure does not control.", "timeCritical": true, "evidenceRef": "nice-ng39" },
+      { "text": "Tighten the tourniquet until bleeding stops and the distal pulse is gone. A loose tourniquet is a venous tourniquet and increases bleeding. Add a second one above the first if needed.", "timeCritical": true, "evidenceRef": "esvs-trauma-2025" },
+      { "text": "Write the time of application on the tourniquet or the patient, and hand it over at every transfer.", "timeCritical": true, "evidenceRef": "esvs-trauma-2025" },
+      { "text": "Give tranexamic acid as soon as possible in major haemorrhage, and activate the major haemorrhage protocol.", "timeCritical": true, "evidenceRef": "nice-ng39" },
+      { "text": "Junctional haemorrhage: deep wound packing with haemostatic dressing and direct pressure, or a junctional device, on the way to theatre.", "timeCritical": true, "evidenceRef": "esvs-trauma-2025" }
+    ],
+    "assess": [
+      { "text": "Run the primary survey first. Limb haemorrhage control sits at the very start of it, before the airway, when bleeding is catastrophic." },
+      { "text": "Look for hard and soft signs. Soft signs are a history of bleeding, a small stable haematoma, a nerve deficit next to a vessel, a diminished pulse, or a wound near a major vessel." },
+      { "text": "Measure the injured extremity index: ankle or wrist pressure of the injured limb divided by the brachial pressure of an uninjured arm.", "calcs": ["abi"] },
+      { "text": "Document neurology, soft tissue loss, fracture and contamination. These decide repair versus primary amputation, not a score alone." }
+    ],
+    "investigate": [
+      { "text": "Hard signs: straight to theatre for exploration. Imaging is optional and only if it does not delay control." },
+      { "text": "Soft signs or an injured extremity index below 0.9: CT angiography." },
+      { "text": "An index of 0.9 or more with no hard signs: arterial injury is unlikely; observe and repeat examination." },
+      { "text": "On-table angiography when the injury level is uncertain or there are several levels." }
+    ],
+    "resuscitate": [
+      { "text": "Haemostatic resuscitation with blood and products in a balanced ratio, limited crystalloid, and correction of hypothermia, acidosis and coagulopathy.", "evidenceRef": "nice-ng39" },
+      { "text": "Keep tourniquet time as short as possible. Convert to direct control in theatre rather than repeatedly loosening it in the emergency department.", "evidenceRef": "esvs-trauma-2025" },
+      { "text": "Temporary intravascular shunt for damage control, or to restore flow before orthopaedic stabilisation, then definitive repair once the patient and the bone are stable.", "evidenceRef": "esvs-trauma-2025" }
+    ],
+    "definitive": [
+      { "text": "Proximal and distal control through healthy tissue, then debride the injured vessel back to normal intima.", "evidenceRef": "esvs-trauma-2025" },
+      { "text": "Repair by direct suture, end-to-end anastomosis, or interposition graft. Autologous vein from the uninjured leg is the preferred conduit in the limb.", "evidenceRef": "east-2012" },
+      { "text": "Low threshold for four-compartment fasciotomy after limb arterial injury, especially with prolonged ischaemia, combined arterial and venous injury, or shock.", "evidenceRef": "east-2012" },
+      { "text": "Ligation of a non-critical artery, or primary amputation of a non-salvageable limb, is correct damage control in an unstable patient.", "evidenceRef": "esvs-trauma-2025" },
+      { "text": "Repair a major vein where the patient's state allows; ligation is acceptable in the unstable patient.", "evidenceRef": "esvs-trauma-2025" }
+    ],
+    "escalate": [
+      { "text": "Trauma team leader and vascular surgeon from the first call; orthopaedic and plastic surgery together for a combined bone and soft tissue injury." },
+      { "text": "Transfer to a major trauma centre with vascular cover. Shunt or tourniquet first if transfer is long." },
+      { "text": "Critical care for reperfusion injury after prolonged ischaemia." }
+    ]
+  },
+  "notes": [
+    "Tourniquets save lives and rarely cost limbs when used properly. The common error is a tourniquet that is too loose, too low, or forgotten.",
+    "A palpable pulse does not exclude an arterial injury. A pulse deficit is never explained by spasm until it is imaged.",
+    "When in doubt about the compartments after revascularisation, open them."
+  ],
+  "calcs": ["shock_index", "abi"]
+}

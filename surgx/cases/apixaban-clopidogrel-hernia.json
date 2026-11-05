@@ -1,0 +1,83 @@
+{
+  "id": "apixaban-clopidogrel-hernia",
+  "title": "Apixaban and clopidogrel before a hernia repair",
+  "subtitle": "Peri-operative antithrombotic planning",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "periop-antithrombotic",
+  "procedureRef": "hernia-repair",
+  "sources": [
+    { "id": "accp-2022", "org": "American College of Chest Physicians (ACCP)", "title": "Perioperative management of antithrombotic therapy: an ACCP clinical practice guideline", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/35964704/", "accessed": "2026-11-04" },
+    { "id": "pause-2019", "org": "PAUSE Investigators (JAMA Internal Medicine)", "title": "Perioperative management of patients with atrial fibrillation receiving a direct oral anticoagulant (PAUSE)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31380891/", "accessed": "2026-11-04" },
+    { "id": "bridge-2015", "org": "BRIDGE Investigators (New England Journal of Medicine)", "title": "Perioperative bridging anticoagulation in patients with atrial fibrillation (BRIDGE)", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/26095867/", "accessed": "2026-11-04" },
+    { "id": "asra-2018", "org": "American Society of Regional Anesthesia and Pain Medicine (ASRA)", "title": "Regional anesthesia in the patient receiving antithrombotic or thrombolytic therapy, fourth edition", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/29561531/", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 72-year-old man is listed for an elective open mesh repair of a symptomatic right inguinal hernia. He has non-valvular atrial fibrillation, hypertension and type 2 diabetes. A drug-eluting coronary stent was placed 18 months ago for stable angina, without any acute coronary syndrome. He takes apixaban 5 mg twice daily and clopidogrel 75 mg daily, metformin and ramipril. He weighs 70 kg and his creatinine gives a Cockcroft-Gault clearance of about 45 mL/min. You see him in the pre-assessment clinic three weeks before surgery.",
+  "vitals": { "HR": "78 irregular", "BP": "138/80", "CHA2DS2-VASc": "4", "CrCl": "about 45 mL/min", "Hb": "131 g/L", "Platelets": "220" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "What is your first action about the clopidogrel?",
+      "hint": "Who decides whether a stent patient's antiplatelet can stop?",
+      "options": [
+        { "id": "a", "text": "Confirm the stent type, date and indication, and agree the plan with his cardiologist before any change", "correct": true, "feedback": "Correct. Eighteen months after an elective stent, stopping clopidogrel for surgery is very likely acceptable, but the decision is the cardiologist's and must be made before the date is fixed." },
+        { "id": "b", "text": "Tell him to stop clopidogrel 5 days before surgery without further discussion", "correct": false, "feedback": "The timing is right, but the decision is not yours alone in a patient with a coronary stent. The safe process is to ask." },
+        { "id": "c", "text": "Stop both apixaban and clopidogrel 10 days before to be safe", "correct": false, "feedback": "Longer is not safer. It exposes him to stroke and stent thrombosis for no reduction in bleeding." },
+        { "id": "d", "text": "Continue clopidogrel and cancel the operation", "correct": false, "feedback": "Cancellation is unnecessary for a symptomatic hernia in a patient whose stent is well established. Plan it instead." }
+      ],
+      "why": "Stopping an antiplatelet in a patient with a coronary stent is a cardiology decision because the risk is stent thrombosis, which is frequently fatal. Beyond the early high-risk period after an elective stent, interruption for non-cardiac surgery is usually acceptable, and in atrial fibrillation with a stent more than a year old, many cardiologists will continue anticoagulant monotherapy alone. Ask, document, and plan with dates.",
+      "missedRedFlags": ["A coronary stent in the history, which must always trigger a question about its date and type"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "Cardiology agrees that clopidogrel may be stopped 5 days before surgery. What is the plan for apixaban?",
+      "hint": "PAUSE used a fixed schedule and no heparin.",
+      "options": [
+        { "id": "a", "text": "Interrupt without bridging: omit for 1 day if the procedure is classed low to moderate bleeding risk or 2 days if high, per the unit's classification, with no pre-operative level", "correct": true, "feedback": "Correct. This is the PAUSE schedule, adopted by ACCP 2022. Most units class an open inguinal mesh repair as low to moderate bleeding risk, but the classification must be agreed and documented." },
+        { "id": "b", "text": "Stop apixaban 5 days before and bridge with treatment-dose low-molecular-weight heparin", "correct": false, "feedback": "This applies warfarin logic to a short-acting drug and adds bridging, which increases bleeding without reducing stroke." },
+        { "id": "c", "text": "Continue apixaban through surgery", "correct": false, "feedback": "Uninterrupted anticoagulation is reserved for minimal bleeding-risk procedures. A mesh repair dissects a vascular field and the haematoma risk matters." },
+        { "id": "d", "text": "Stop apixaban the morning of surgery only", "correct": false, "feedback": "The evening dose the night before leaves substantial anticoagulant effect at incision." }
+      ],
+      "why": "DOACs have short half-lives and predictable offset, so a short fixed interruption is enough and heparin bridging only adds bleeding. PAUSE showed low rates of both stroke and major bleeding with this standard schedule, without routine coagulation testing.",
+      "missedRedFlags": ["Bridging a DOAC, which is a common and harmful error"]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "His creatinine clearance is about 45 mL/min. Does this change the apixaban interruption?",
+      "hint": "Which DOAC's interruption interval depends most on renal clearance in PAUSE?",
+      "options": [
+        { "id": "a", "text": "No: in PAUSE the apixaban schedule did not change with this clearance; a clearance below 50 mL/min lengthens the interruption for dabigatran", "correct": true, "feedback": "Correct. Dabigatran is mainly renally cleared and needs a longer interruption with reduced clearance; apixaban is less dependent on the kidney." },
+        { "id": "b", "text": "Yes: double the interruption to 4 days", "correct": false, "feedback": "This is the dabigatran rule for high bleeding-risk procedures with reduced clearance. It does not apply to apixaban at this clearance." },
+        { "id": "c", "text": "Yes: measure an anti-Xa level the day before to decide", "correct": false, "feedback": "Routine levels were not needed in PAUSE and add delay and cost without changing outcome." },
+        { "id": "d", "text": "Renal function is irrelevant to any DOAC", "correct": false, "feedback": "Renal function matters a great deal for dabigatran and for dose selection of all DOACs." }
+      ],
+      "why": "Interruption intervals are drug-specific. Dabigatran depends heavily on renal excretion, so reduced clearance extends its offset; apixaban relies much less on the kidney. Always calculate Cockcroft-Gault clearance, because it decides both the interruption and the dose on restart."
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "The anaesthetist would like to use a spinal anaesthetic. What changes?",
+      "hint": "Neuraxial safety intervals are not the same as surgical ones.",
+      "options": [
+        { "id": "a", "text": "The apixaban interruption must be extended to meet the neuraxial interval, generally 72 hours per ASRA, or a general or local anaesthetic technique chosen instead", "correct": true, "feedback": "Correct. A spinal haematoma is rare and devastating, and the neuraxial interval is longer than the surgical one." },
+        { "id": "b", "text": "Nothing; the surgical interruption is adequate for a spinal", "correct": false, "feedback": "The surgical interruption may leave residual anticoagulant effect that is acceptable for skin incision but not for a needle near the spinal cord." },
+        { "id": "c", "text": "Give a dose of vitamin K before the spinal", "correct": false, "feedback": "Vitamin K reverses warfarin, not apixaban." },
+        { "id": "d", "text": "Proceed with the spinal but check platelets only", "correct": false, "feedback": "Platelet count says nothing about anti-Xa activity." }
+      ],
+      "why": "The anaesthetic plan changes the antithrombotic plan. Open inguinal hernia repair can also be done under local anaesthesia, which removes the neuraxial question entirely. Agree the anaesthetic technique at pre-assessment so the patient receives one set of correct instructions."
+    },
+    {
+      "id": "dp5", "phase": "postop",
+      "prompt": "The repair is uneventful with good haemostasis under local anaesthesia. When do you restart his drugs?",
+      "hint": "Match the restart to the bleeding-risk category used before surgery.",
+      "options": [
+        { "id": "a", "text": "Restart apixaban about 24 hours after a low to moderate bleeding-risk procedure once haemostasis is secure, and restart or stop clopidogrel according to the cardiology plan", "correct": true, "feedback": "Correct. This matches the PAUSE resumption schedule. The cardiology plan may be to continue apixaban alone, which should be stated clearly in the discharge letter." },
+        { "id": "b", "text": "Restart both drugs at full dose 4 hours after surgery", "correct": false, "feedback": "Too early. Full anticoagulation within hours of mesh dissection risks a groin haematoma and mesh infection." },
+        { "id": "c", "text": "Wait two weeks before restarting apixaban", "correct": false, "feedback": "This leaves a patient with a CHA2DS2-VASc of 4 unprotected from stroke for no surgical benefit." },
+        { "id": "d", "text": "Bridge with heparin until clopidogrel is restarted", "correct": false, "feedback": "Heparin bridging was not indicated before surgery and is not indicated after it." }
+      ],
+      "why": "Resumption is planned with the same care as interruption. The discharge letter must say exactly which drugs restart, on which date and at what dose, because the general practitioner and the patient will follow it literally. Unclear restart plans are a common cause of post-operative stroke and of inadvertent long-term dual therapy.",
+      "missedRedFlags": ["A discharge letter that does not state which antithrombotic restarts and when"]
+    }
+  ]
+}

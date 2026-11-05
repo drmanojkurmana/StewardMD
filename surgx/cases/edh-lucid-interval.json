@@ -1,0 +1,83 @@
+{
+  "id": "edh-lucid-interval",
+  "title": "Talking, then not",
+  "subtitle": "Lucid interval after a blow to the head",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "traumatic-haematoma-surgery",
+  "procedureRef": "trauma-craniotomy-edh",
+  "sources": [
+    { "id": "btf-surg", "org": "Brain Trauma Foundation", "title": "Guidelines for the surgical management of traumatic brain injury (Bullock et al, Neurosurgery 2006)", "year": 2006, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Bullock+2006+surgical+management+of+traumatic+brain+injury+Neurosurgery", "accessed": "2026-11-04" },
+    { "id": "nice-ng232", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Head injury: assessment and early management (NG232)", "year": 2023, "url": "https://www.nice.org.uk/guidance/ng232", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 24-year-old man was struck on the left side of the head by a cricket ball two hours ago. He was knocked out for about a minute, then got up and walked to the pavilion. He now has a worsening headache and has vomited twice. In the emergency department he is GCS 14 (E3 V5 M6). There is a boggy swelling above the left ear.",
+  "vitals": { "GCS": "14 (E3 V5 M6)", "Pupils": "Equal and reactive", "HR": "64", "BP": "142/80", "RR": "16", "SpO2": "98% on air" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "He is talking normally. What is your first decision?",
+      "hint": "Count his high-risk features for head imaging.",
+      "options": [
+        { "id": "a", "text": "CT head within one hour, and repeat neurological observations every 15 minutes while you arrange it", "correct": true, "feedback": "Correct. Loss of consciousness with more than one vomit and a GCS below 15 meets high-risk criteria, and a temporal blow raises the concern of an extradural." },
+        { "id": "b", "text": "Observe for four hours and scan if he deteriorates", "correct": false, "feedback": "Observation in place of imaging is the classic route to missing an extradural during the lucid interval." },
+        { "id": "c", "text": "Skull X-ray to look for a fracture", "correct": false, "feedback": "A skull X-ray neither excludes nor characterises an intracranial haematoma. CT is the test." },
+        { "id": "d", "text": "Discharge with head-injury advice since he is talking", "correct": false, "feedback": "Talking does not exclude an expanding haematoma. A lucid patient can deteriorate within minutes." }
+      ],
+      "why": "A blow to the temporal region with a brief loss of consciousness, a recovery, and then a worsening headache with vomiting is the textbook lucid interval. CT within the hour is the standard; observation instead of scanning is not.",
+      "missedRedFlags": ["Repeated vomiting after a head injury", "A GCS of 14 that is lower than it was at the scene"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "While waiting for CT, his GCS falls to 11 (E2 V4 M5) and the left pupil is now larger and sluggish. What do you do?",
+      "hint": "The scan is still useful. The question is what else happens now.",
+      "options": [
+        { "id": "a", "text": "Call the anaesthetist and neurosurgeon now, secure the airway, and take him to CT with the team, ready to go to theatre", "correct": true, "feedback": "Correct. A unilateral pupil change with a falling GCS is herniation. Airway, neurosurgery and theatre planning happen in parallel." },
+        { "id": "b", "text": "Wait for the CT report before calling anyone", "correct": false, "feedback": "Every minute matters now. Neurosurgery should be called on clinical grounds, not after a report." },
+        { "id": "c", "text": "Give a sedative to keep him still for the scan, without securing the airway", "correct": false, "feedback": "Sedating a herniating patient without airway control risks hypoxia and hypercapnia, which accelerate the herniation." },
+        { "id": "d", "text": "Perform a lumbar puncture to measure pressure", "correct": false, "feedback": "Lumbar puncture in a patient with a mass lesion and herniation can be fatal." }
+      ],
+      "why": "An ipsilateral dilating pupil and a falling motor score indicate uncal herniation. Medical measures buy minutes; the treatment is evacuation. Calling neurosurgery and securing the airway are done at once.",
+      "missedRedFlags": ["A new unilateral pupil change", "Fall in the motor component of the GCS"]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "CT shows a left temporal biconvex hyperdense collection, 45 cm3, with 7 mm midline shift. How do you interpret this?",
+      "hint": "Shape and volume.",
+      "options": [
+        { "id": "a", "text": "Extradural haematoma meeting the threshold for evacuation regardless of GCS", "correct": true, "feedback": "Correct. A biconvex collection limited by sutures is extradural, and a volume over 30 cm3 is an indication to evacuate whatever the GCS." },
+        { "id": "b", "text": "Acute subdural haematoma, observe with repeat CT", "correct": false, "feedback": "The shape is biconvex, not crescentic, and observation is not appropriate with this volume and a deteriorating patient." },
+        { "id": "c", "text": "Contusion, manage medically", "correct": false, "feedback": "This is an extra-axial collection with mass effect, not a contusion." },
+        { "id": "d", "text": "Extradural haematoma suitable for observation because he was lucid", "correct": false, "feedback": "Observation criteria require a small collection and a patient without deficit. This patient has neither." }
+      ],
+      "why": "Extradural haematomas are lens-shaped because the dura is stripped off the inner table and limited at the suture lines. The BTF surgical guideline recommends evacuation of any extradural over 30 cm3 regardless of GCS, and as soon as possible in a comatose patient with anisocoria.",
+      "missedRedFlags": ["Temporal location, which herniates at smaller volumes"]
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "The nearest neurosurgical centre is 40 minutes away and has accepted him. He is now intubated and stable. What next?",
+      "hint": "What determines outcome in an extradural?",
+      "options": [
+        { "id": "a", "text": "Transfer immediately with a doctor who can manage the airway, images sent ahead, and theatre warned", "correct": true, "feedback": "Correct. Time to evacuation determines outcome. The transfer is part of the treatment." },
+        { "id": "b", "text": "Admit to intensive care locally and repeat CT in the morning", "correct": false, "feedback": "This delays definitive treatment for a lesion that kills by expanding." },
+        { "id": "c", "text": "Give repeated doses of mannitol and wait to see if the pupil recovers", "correct": false, "feedback": "Hyperosmolar therapy is a bridge to surgery, not a substitute." },
+        { "id": "d", "text": "Arrange MRI for better definition first", "correct": false, "feedback": "MRI adds nothing to the decision and costs time." }
+      ],
+      "why": "In an extradural haematoma the underlying brain is often normal, so outcomes after rapid evacuation are excellent. Delay, not the haematoma itself, is what produces poor outcomes. Transfer must be fast, with physiology protected on the way.",
+      "levels": ["resident", "surgeon"]
+    },
+    {
+      "id": "dp5", "phase": "operate",
+      "prompt": "At craniotomy the clot is evacuated and bleeding is seen from a branch of the middle meningeal artery. The brain is slack. What is the key step before closure?",
+      "hint": "What stops a new extradural forming?",
+      "options": [
+        { "id": "a", "text": "Coagulate the artery, place dural hitch sutures to the bone edge and a central hitch, then replace the flap", "correct": true, "feedback": "Correct. Controlling the source and closing the extradural space with hitch sutures prevents re-accumulation." },
+        { "id": "b", "text": "Leave the bone flap out routinely", "correct": false, "feedback": "With a slack brain there is no indication for a craniectomy; it adds a second operation and its own complications." },
+        { "id": "c", "text": "Open the dura widely to inspect the brain routinely", "correct": false, "feedback": "Open the dura only if it is tense, blue, or the scan suggests a subdural component." },
+        { "id": "d", "text": "Close without finding the source, since bleeding has stopped", "correct": false, "feedback": "Bleeding often stops temporarily under anaesthesia. An unidentified source re-bleeds." }
+      ],
+      "why": "The craniotomy is complete only when the bleeding source is controlled and the dura is hitched to the bone, closing the potential space. A decompressive craniectomy is reserved for a swollen brain.",
+      "levels": ["surgeon"]
+    }
+  ]
+}

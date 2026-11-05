@@ -1,0 +1,169 @@
+{
+  "id": "compartment-syndrome",
+  "title": "Acute compartment syndrome",
+  "subtitle": "Pain out of proportion is the sign; fasciotomy is the treatment",
+  "category": "ortho_emergency",
+  "specialty": "orthopaedics",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "boast-acs",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Diagnosis and Management of Compartment Syndrome of the Extremities",
+      "year": 2025,
+      "version": "updated July 2025",
+      "url": "https://www.boa.ac.uk/resource/boast-10-pdf.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng37",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Fractures (complex): assessment and management (NG37)",
+      "year": 2016,
+      "version": "NG37",
+      "url": "https://www.nice.org.uk/guidance/ng37",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "mcqueen-1996",
+      "org": "McQueen MM et al. J Bone Joint Surg Br 78:99",
+      "title": "Compartment monitoring in tibial fractures: the pressure threshold for decompression",
+      "year": 1996,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/8898137/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Pain out of proportion to the injury, or a rising analgesia requirement, particularly for opioids."
+      },
+      {
+        "text": "Pain on passive stretch of the muscles in the compartment, such as toe flexion or extension in the leg."
+      },
+      {
+        "text": "A tense, woody compartment on palpation."
+      },
+      {
+        "text": "Altered sensation in the territory of a nerve running through the compartment, for example the first web space in the anterior compartment of the leg."
+      },
+      {
+        "text": "Pulselessness and paralysis are late. A palpable pulse does not exclude compartment syndrome."
+      },
+      {
+        "text": "A patient who cannot report pain: reduced consciousness, sedation, a regional block, or a child who will not cooperate."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Split casts and release all circumferential dressings down to skin, then re-evaluate within 30 minutes.",
+        "timeCritical": true,
+        "evidenceRef": "boast-acs"
+      },
+      {
+        "text": "Get a senior surgical review with decision-making capacity now. This is a clinical diagnosis and the decision cannot wait for the morning.",
+        "timeCritical": true,
+        "evidenceRef": "boast-acs"
+      },
+      {
+        "text": "Assess at-risk patients hourly and document the findings whether present or not, including analgesic doses and the rate given.",
+        "evidenceRef": "boast-acs"
+      },
+      {
+        "text": "Correct hypotension. Perfusion of the compartment depends on the gap between blood pressure and tissue pressure.",
+        "timeCritical": true,
+        "evidenceRef": "mcqueen-1996"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Record time and mechanism of injury, level of consciousness, neurological and vascular status, pain score and response to analgesia."
+      },
+      {
+        "text": "Highest risk: tibial shaft fractures, forearm fractures, crush injury, reperfusion after vascular repair, tight casts, prolonged surgery in lithotomy or other compressive positions, and extravasation injuries."
+      },
+      {
+        "text": "In tibial fractures, maintain awareness for 48 hours after injury or after fixation."
+      },
+      {
+        "text": "Examine every compartment of the segment. In the leg there are four: anterior, lateral (peroneal), superficial posterior and deep posterior."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Measure intracompartmental pressure in all suspect compartments when clinical signs are inconclusive or the patient cannot be assessed, with a simultaneous blood pressure."
+      },
+      {
+        "text": "A difference between diastolic pressure and compartment pressure of less than 30 mmHg indicates increased risk. An absolute pressure above 40 mmHg should prompt consideration of urgent decompression. The decision rests with a consultant orthopaedic surgeon."
+      },
+      {
+        "text": "Do not measure pressures to confirm an obvious clinical diagnosis. The measurement is for uncertainty, not reassurance."
+      },
+      {
+        "text": "Creatine kinase, renal function and urine for myoglobin when muscle necrosis is suspected or presentation is late.",
+        "calcs": [
+          "kdigo_aki"
+        ]
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Maintain normal blood pressure and avoid hypotension; the perfusion gap narrows as diastolic pressure falls.",
+        "evidenceRef": "mcqueen-1996"
+      },
+      {
+        "text": "In late presentation with established necrosis, assess and protect renal function with fluids and monitoring.",
+        "evidenceRef": "boast-acs"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Perform immediate surgical decompression once compartment syndrome is diagnosed (NCEPOD category 1).",
+        "timeCritical": true,
+        "evidenceRef": "boast-acs"
+      },
+      {
+        "text": "Decompress all involved compartments through open fasciotomy and debride non-viable muscle. Document the appearance and viability of each compartment.",
+        "evidenceRef": "boast-acs"
+      },
+      {
+        "text": "In the leg, use a two-incision, four-compartment fasciotomy.",
+        "evidenceRef": "boast-acs"
+      },
+      {
+        "text": "Discuss with a plastic surgeon within 24 hours and re-explore within 72 hours, or earlier if indicated, with a documented plan for soft-tissue closure or cover.",
+        "evidenceRef": "boast-acs"
+      },
+      {
+        "text": "For delayed presentation, involve two consultants. Non-operative management with renal protection is a legitimate option when the muscle is already dead.",
+        "evidenceRef": "boast-acs"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Any suspicion: senior orthopaedic review at once, and theatre informed so the decision and the operation are not separated by a queue."
+      },
+      {
+        "text": "Late presentation or uncertainty: consultant to consultant, documented."
+      },
+      {
+        "text": "Rhabdomyolysis or acute kidney injury: critical care and renal input."
+      }
+    ]
+  },
+  "notes": [
+    "The BOAST advises elevation after releasing dressings; many teachers prefer the limb at about heart level, since high elevation lowers perfusion pressure. Avoid high elevation either way.",
+    "In children, increasing agitation and analgesia requirement often precede the classical signs.",
+    "A regional block in a high-risk limb needs an agreed plan for who monitors for compartment syndrome and how."
+  ],
+  "calcs": [
+    "kdigo_aki",
+    "map"
+  ]
+}

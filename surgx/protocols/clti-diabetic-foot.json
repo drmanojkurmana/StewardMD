@@ -1,0 +1,66 @@
+{
+  "id": "clti-diabetic-foot",
+  "title": "Chronic limb-threatening ischaemia and the ischaemic diabetic foot",
+  "subtitle": "Drain sepsis first, then stage with WIfI and revascularise",
+  "category": "vascular",
+  "specialty": "vascular",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "gvg-2019", "org": "European Society for Vascular Surgery, Society for Vascular Surgery and World Federation of Vascular Societies", "title": "Global Vascular Guidelines on the Management of Chronic Limb-Threatening Ischemia", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31182334/", "accessed": "2026-11-04" },
+    { "id": "wifi-2014", "org": "Society for Vascular Surgery (SVS)", "title": "The SVS Lower Extremity Threatened Limb Classification System: risk stratification based on Wound, Ischemia, and foot Infection (WIfI)", "year": 2014, "url": "https://pubmed.ncbi.nlm.nih.gov/24126108/", "accessed": "2026-11-04" },
+    { "id": "iwgdf-pad-2023", "org": "International Working Group on the Diabetic Foot (IWGDF), ESVS and SVS", "title": "The intersocietal IWGDF, ESVS, SVS guidelines on peripheral artery disease in people with diabetes mellitus and a foot ulcer", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37724985/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A diabetic foot with spreading cellulitis, crepitus, a fluctuant swelling or systemic sepsis. Infection with ischaemia destroys a foot in hours; this is a surgical emergency." },
+      { "text": "Ischaemic rest pain at night relieved by hanging the foot over the bed, or tissue loss that has not healed in two weeks." },
+      { "text": "Dry gangrene that has become wet, or new pain in a previously neuropathic painless foot." },
+      { "text": "A normal or high ankle-brachial index in a diabetic or renal patient with a non-healing wound. Calcified arteries give a falsely reassuring reading." },
+      { "text": "Sudden worsening in a limb with known chronic disease: acute-on-chronic ischaemia, which needs the acute limb pathway." }
+    ],
+    "do_now": [
+      { "text": "Infected ischaemic foot: urgent drainage of abscess and debridement of necrotic infected tissue, together with broad-spectrum antibiotics per local protocol, before revascularisation. Sepsis control comes first.", "timeCritical": true, "evidenceRef": "gvg-2019" },
+      { "text": "Refer every patient with suspected CLTI to a vascular specialist for assessment of revascularisation. Do not plan a major amputation without it.", "timeCritical": true, "evidenceRef": "gvg-2019" },
+      { "text": "In a person with diabetes and a foot ulcer, consider urgent imaging and revascularisation when toe pressure is below 30 mmHg or TcPO2 below 25 mmHg.", "evidenceRef": "iwgdf-pad-2023" },
+      { "text": "Offload the wound and protect the heel today. Pressure on an ischaemic heel makes a new ulcer in a day.", "evidenceRef": "gvg-2019" }
+    ],
+    "assess": [
+      { "text": "Stage the limb with WIfI: Wound, Ischaemia and foot Infection, each graded 0 to 3. The combined stage predicts amputation risk and benefit from revascularisation." },
+      { "text": "Measure ankle and toe pressures. GVG haemodynamic markers of CLTI include ankle pressure below 50 mmHg, ABI below 0.4, toe pressure below 30 mmHg or TcPO2 below 30 mmHg.", "calcs": ["abi"] },
+      { "text": "Grade chronic disease severity for the record and for trend.", "calcs": ["rutherford", "fontaine"] },
+      { "text": "Probe the ulcer to bone and examine the whole foot, including between the toes and the heel. Probe-to-bone positive raises osteomyelitis." },
+      { "text": "Assess patient risk: cardiac, renal and frailty status, life expectancy, and ambulatory function. This is the P of the GVG PLAN framework." }
+    ],
+    "investigate": [
+      { "text": "Arterial duplex as the first anatomical study; CT or MR angiography, or catheter angiography, to plan revascularisation." },
+      { "text": "Plain radiograph of the foot for gas, foreign body and osteomyelitis; MRI where osteomyelitis is uncertain." },
+      { "text": "Deep tissue or bone samples for culture at debridement, not superficial swabs." },
+      { "text": "FBC, CRP, U&E, HbA1c, glucose and lipids. Vein mapping of the great saphenous vein when bypass is an option." }
+    ],
+    "resuscitate": [
+      { "text": "Treat sepsis with fluids, antibiotics per local protocol and glucose control while source control is arranged.", "evidenceRef": "gvg-2019" },
+      { "text": "Start best medical therapy for every patient: antiplatelet therapy, high-intensity statin, blood pressure and glucose control, and smoking cessation.", "evidenceRef": "gvg-2019" },
+      { "text": "Adequate analgesia for rest pain, which often needs opioids until revascularisation.", "evidenceRef": "gvg-2019" }
+    ],
+    "definitive": [
+      { "text": "Revascularise suitable patients with CLTI to relieve pain, heal wounds and save the limb. Choose open bypass or endovascular treatment by the GVG PLAN framework: patient risk, limb stage and anatomical pattern.", "evidenceRef": "gvg-2019" },
+      { "text": "For bypass, autologous vein, ideally the great saphenous vein, is the conduit of choice.", "evidenceRef": "gvg-2019" },
+      { "text": "Aim for in-line pulsatile flow to the foot, and where possible to the angiosome of the wound, especially in the diabetic foot.", "evidenceRef": "iwgdf-pad-2023" },
+      { "text": "Minor amputation and debridement after revascularisation to achieve a healable foot; staged closure is often needed.", "evidenceRef": "gvg-2019" },
+      { "text": "Primary major amputation for a non-salvageable foot, a non-ambulatory patient with a flexion contracture, or overwhelming sepsis. Decide the level by perfusion and function.", "evidenceRef": "gvg-2019" }
+    ],
+    "escalate": [
+      { "text": "Multidisciplinary diabetic foot team: vascular, diabetes, podiatry, orthotics, microbiology and wound care." },
+      { "text": "Urgent same-day vascular review for the infected ischaemic foot; transfer if no vascular service." },
+      { "text": "Senior vascular review before any major amputation, documenting why revascularisation is not possible or not appropriate." }
+    ]
+  },
+  "notes": [
+    "In diabetes the ABI lies. Toe pressures and Doppler waveforms tell the truth about the foot.",
+    "Drain first, revascularise second, reconstruct third. Revascularising pus spreads it.",
+    "A healed foot needs blood, off-loading and infection control together. Any one missing and the wound does not close."
+  ],
+  "calcs": ["abi", "rutherford", "fontaine"]
+}

@@ -1,0 +1,222 @@
+{
+  "id": "open-subtotal-cholecystectomy",
+  "title": "Open and subtotal cholecystectomy",
+  "subtitle": "The bail-out operation for the difficult gallbladder",
+  "system": "hepatobiliary",
+  "aliases": ["open cholecystectomy", "subtotal cholecystectomy", "fenestrating cholecystectomy", "reconstituting cholecystectomy", "conversion to open cholecystectomy", "fundus-first cholecystectomy"],
+  "estMinutes": 120,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "tg18-safe-steps", "org": "Tokyo Guidelines Steering Committee (J Hepatobiliary Pancreat Sci)", "title": "Tokyo Guidelines 2018: surgical management of acute cholecystitis: safe steps in laparoscopic cholecystectomy for acute cholecystitis (Wakabayashi G et al.)", "year": 2018, "version": "TG18", "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Tokyo+Guidelines+2018+safe+steps+in+laparoscopic+cholecystectomy+for+acute+cholecystitis", "accessed": "2026-11-04" },
+    { "id": "strasberg-stc", "org": "Journal of the American College of Surgeons", "title": "Subtotal cholecystectomy: 'fenestrating' vs 'reconstituting' subtypes and the prevention of bile duct injury: definition of the optimal procedure in difficult operative conditions (Strasberg SM, Pucci MJ, Brunt LM, Deziel DJ)", "year": 2016, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Strasberg+subtotal+cholecystectomy+fenestrating+vs+reconstituting", "accessed": "2026-11-04" },
+    { "id": "wses-bdi", "org": "World Society of Emergency Surgery (WSES)", "title": "2020 WSES guidelines for the detection and management of bile duct injury during cholecystectomy (de'Angelis N et al., World J Emerg Surg)", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2020+WSES+guidelines+detection+and+management+of+bile+duct+injury+during+cholecystectomy", "accessed": "2026-11-04" },
+    { "id": "wses-cholecystitis", "org": "World Society of Emergency Surgery (WSES)", "title": "2020 World Society of Emergency Surgery updated guidelines for the diagnosis and treatment of acute calculus cholecystitis (Pisano M et al., World J Emerg Surg)", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2020+World+Society+of+Emergency+Surgery+updated+guidelines+acute+calculus+cholecystitis", "accessed": "2026-11-04" },
+    { "id": "sages-cvs", "org": "Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)", "title": "Safe Cholecystectomy Program: Critical View of Safety and the universal culture of safety", "year": 2018, "url": "https://www.sages.org/safe-cholecystectomy-program/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "rcri", "caprini", "childpugh", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Conversion from laparoscopic cholecystectomy when the Critical View of Safety cannot be achieved safely, for bleeding that cannot be controlled laparoscopically, or for a suspected injury.",
+      "Severe acute cholecystitis, gangrenous or empyematous gallbladder, Mirizzi syndrome or a frozen hepatocystic triangle, where subtotal cholecystectomy avoids dissection in a dangerous field.",
+      "Planned open cholecystectomy where laparoscopy is not available or not tolerated, or during another open upper abdominal operation.",
+      "Cirrhosis with portal hypertension where the gallbladder bed is hazardous to dissect: subtotal cholecystectomy leaves the posterior wall on the liver."
+    ],
+    "contraindications": [
+      "A septic, unstable patient in whom percutaneous cholecystostomy gives source control with less physiological cost.",
+      "Suspected gallbladder carcinoma: avoid a subtotal operation that breaches the tumour; plan an oncological operation or refer.",
+      "A team without the experience to proceed: stopping, draining and referring to a hepatobiliary surgeon is a safe alternative to a hazardous dissection."
+    ],
+    "preparation": [
+      "Review the ultrasound and any MRCP: duct diameter, stones in the duct, a stone impacted in Hartmann's pouch (Mirizzi), and liver disease.",
+      "Correct coagulopathy; check Child-Pugh status in cirrhosis.",
+      "Therapeutic antibiotics for cholecystitis or cholangitis per local protocol, not single-dose prophylaxis.",
+      "Ensure cholangiography is available and that a hepatobiliary surgeon can be contacted if a bile duct injury is suspected.",
+      "Consent: conversion to open (if starting laparoscopically), subtotal cholecystectomy and why it is chosen, bile leak and possible need for ERCP or drainage, retained stones, bile duct injury, bleeding, wound infection and hernia, and the possibility of further surgery (completion cholecystectomy) for recurrent symptoms."
+    ],
+    "positioning": [
+      "Supine, with the right side of the abdomen accessible and arms out on boards abducted no more than 90 degrees.",
+      "Reverse Trendelenburg with a slight left tilt to let the colon and duodenum fall away from the porta.",
+      "A radiolucent table or the ability to bring in fluoroscopy for cholangiography."
+    ],
+    "equipment": [
+      "Open hepatobiliary set with a fixed costal-margin retractor, long instruments and right-angle forceps.",
+      "Suction with a fine tip, diathermy, absorbable sutures for the remnant and cystic duct orifice.",
+      "Cholangiography catheter and fluoroscopy.",
+      "Vascular slings and soft clamps for a Pringle manoeuvre; haemostatic agents for the liver bed.",
+      "Closed suction drain."
+    ],
+    "anatomy": [
+      "The hepatocystic triangle (cystic duct, common hepatic duct, inferior liver edge) contains the cystic artery; in severe inflammation it may be fused and impossible to display.",
+      "The right hepatic artery and the right portal pedicle lie just behind and above the gallbladder neck; fundus-first dissection that strays off the gallbladder wall in an inflamed field can reach them (vasculobiliary injury).",
+      "Rouviere's sulcus marks the level of the right portal pedicle: stay above and anterior to it.",
+      "Hartmann's pouch may adhere to, or erode into, the common hepatic duct in Mirizzi syndrome, so the duct may be part of the wall of the pouch.",
+      "The cystic plate lies between the gallbladder and the liver; in cirrhosis, portal hypertensive veins run in it."
+    ],
+    "criticalSafety": [
+      "If the Critical View of Safety cannot be achieved, do not divide any tubular structure: choose a bail-out.",
+      "Fundus-first dissection must hug the gallbladder wall; if the plane disappears near the neck, stop and convert to a subtotal cholecystectomy.",
+      "Leave a cuff of gallbladder at the neck rather than dissect into a fused triangle.",
+      "Control bleeding with pressure and a Pringle manoeuvre, not with blind clips or deep sutures near the hilum.",
+      "A suspected bile duct injury without hepatobiliary expertise on site: drain and refer, do not repair."
+    ],
+    "structuresAtRisk": [
+      "Common hepatic and common bile duct",
+      "Right hepatic artery and right portal pedicle",
+      "Duodenum and hepatic flexure adherent to the gallbladder",
+      "Liver bed and middle hepatic vein branches",
+      "Cholecystoduodenal or cholecystocolic fistula"
+    ],
+    "commonErrors": [
+      "Converting late, after a prolonged laparoscopic struggle, when the field is already bloody and bile-stained.",
+      "Assuming that open surgery is automatically safer: the same misidentification injuries happen through an incision.",
+      "Dissecting deeply towards the hilum during fundus-first dissection instead of switching to a subtotal operation.",
+      "Leaving stones in the remnant or in Hartmann's pouch after a subtotal cholecystectomy.",
+      "Clipping or diathermising blindly to control bleeding in the triangle."
+    ],
+    "complications": [
+      "Bile leak from the remnant or cystic duct orifice, more common after fenestrating subtotal cholecystectomy; usually managed by the drain and, if persistent, ERCP and stenting.",
+      "Retained stones in the remnant or in the duct; recurrent symptoms from a reconstituted remnant.",
+      "Bile duct injury and vasculobiliary injury.",
+      "Bleeding from the liver bed or cystic artery.",
+      "Subhepatic collection, wound infection and incisional hernia."
+    ],
+    "postop": [
+      "Keep the drain until output is low and not bilious; a persistent bile leak needs imaging and usually ERCP with sphincterotomy or stenting.",
+      "Jaundice, rising bilirubin, cholangitis or a high bilious drain output after a difficult cholecystectomy is a bile duct injury until proven otherwise: image and discuss with a hepatobiliary unit.",
+      "Continue antibiotics for the duration set by the source control achieved and local protocol.",
+      "Tell the patient and the GP that a subtotal cholecystectomy was done, because a remnant can cause recurrent symptoms or stones.",
+      "Review the histology; an unexpected carcinoma needs referral."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "If converting, the consent must already cover open surgery and subtotal cholecystectomy; this is why they belong in every laparoscopic cholecystectomy consent." },
+    { "ref": "step.core.timeout", "emphasis": "On conversion, run a fresh team pause: why we are converting, what instruments are needed, who else should be called." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Usually treatment, not prophylaxis: therapeutic antibiotics for cholecystitis; redose for a long operation." },
+    { "ref": "step.core.positioning", "emphasis": "Reverse Trendelenburg with left tilt; fluoroscopy access for cholangiography." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.hpb.upper-access", "emphasis": "Right subcostal incision, or an extension of the port sites on conversion. A fixed costal retractor makes the open operation safer than the laparoscopic one you abandoned." },
+    { "ref": "step.ochole.exposure" },
+    { "ref": "step.ochole.fundus-first" },
+    { "ref": "step.hpb.cholangiogram", "emphasis": "Use when the anatomy is uncertain or duct stones are suspected; in a fused triangle, contrast can be injected through the gallbladder or Hartmann's pouch." },
+    { "ref": "step.ochole.stop-rule" },
+    { "ref": "step.ochole.cystic-control" },
+    { "ref": "step.ochole.subtotal" },
+    { "ref": "step.hpb.pringle", "emphasis": "For bleeding from the cystic artery stump, the triangle or the liver bed: compress, then Pringle, so the bleeding point can be seen and sutured precisely." },
+    { "ref": "step.ochole.duct-injury" },
+    { "ref": "step.hpb.bile-leak-check", "emphasis": "Check the remnant edges, the cystic duct orifice and the liver bed with a white swab." },
+    { "ref": "step.abd.drain", "emphasis": "A subhepatic drain after every subtotal cholecystectomy, and after any open cholecystectomy with bile staining; record what output would trigger an ERCP." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Send the gallbladder, or the excised walls, for histology every time; open it in theatre to check for an unexpected mass." },
+    { "ref": "step.abd.mass-closure", "emphasis": "Subcostal incision: close in layers (posterior and anterior sheaths) with a slowly absorbable suture." },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record why the operation was converted or subtotal, which subtype, whether all stones were removed, and what the cholangiogram showed." }
+  ],
+  "steps_local": {
+    "step.ochole.exposure": {
+      "id": "step.ochole.exposure", "kind": "dissection",
+      "title": "Open exposure: packs, retraction and landmarks",
+      "why": "In a severely inflamed field the landmarks are hidden. Setting out the duodenum, the hepatoduodenal ligament and Rouviere's sulcus before touching the gallbladder neck gives the dissection a map and a safe boundary.",
+      "how": [
+        "Decompress a tense gallbladder with a trocar and suction, and send the contents for culture.",
+        "Separate omentum, colon and duodenum from the gallbladder with gentle blunt dissection, staying on the gallbladder wall; beware a cholecystoenteric fistula.",
+        "Pack the hepatic flexure and duodenum down and place the fixed retractor so the liver is lifted, not torn.",
+        "Palpate the hepatoduodenal ligament for stones and a pulse, and identify Rouviere's sulcus as the lower limit of safe dissection."
+      ],
+      "structuresAtRisk": ["Duodenum", "Hepatic flexure", "Liver capsule"],
+      "pitfalls": [
+        "Sharp dissection of the duodenum off the gallbladder, causing a duodenal injury that is missed.",
+        "Starting the dissection low on the neck where the inflammation is worst."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ochole.fundus-first": {
+      "id": "step.ochole.fundus-first", "kind": "dissection", "critical": true,
+      "title": "Fundus-first (dome-down) dissection on the gallbladder wall",
+      "why": "Starting at the fundus, away from the inflamed triangle, lets the gallbladder be separated from the liver in a plane that is easier to find. It is safe only if the dissection stays on the gallbladder wall: drifting outside it near the neck leads straight to the right portal pedicle and the bile duct.",
+      "how": [
+        "Incise the peritoneum around the fundus a few millimetres from the liver and develop the plane between the gallbladder and the cystic plate.",
+        "Work down both sides towards the neck, keeping the gallbladder wall in sight at all times and staying anterior to Rouviere's sulcus.",
+        "Ligate the cystic artery on the gallbladder wall where it is met, rather than seeking it in the triangle.",
+        "Stop when the plane becomes fused or indistinct near the neck: that is the point to decide (see the stop rule)."
+      ],
+      "structuresAtRisk": ["Right hepatic artery", "Right portal pedicle", "Common hepatic duct", "Middle hepatic vein branches in the gallbladder bed"],
+      "pitfalls": [
+        "Following the plane deep behind the gallbladder neck into the hilum, producing a combined bile duct and arterial (vasculobiliary) injury.",
+        "Entering the liver parenchyma and the cystic plate veins, which bleed heavily in cirrhosis."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ochole.stop-rule": {
+      "id": "step.ochole.stop-rule", "kind": "checkpoint", "critical": true,
+      "title": "The stop rule: complete, subtotal or abandon",
+      "why": "Bile duct injuries are rarely technical slips; they are decisions to continue when the anatomy is not clear. Making the decision explicit, out loud, with the team, at a defined point, is what prevents them.",
+      "how": [
+        "Ask: can the Critical View of Safety (or, open, an equally unambiguous identification of the cystic duct and artery entering the gallbladder) be achieved without dissecting in a fused, inflamed triangle?",
+        "If yes, proceed to divide the cystic duct and artery.",
+        "If no, choose a subtotal cholecystectomy; in an unstable patient or where even the gallbladder walls cannot be safely defined, drain the gallbladder (cholecystostomy) and stop.",
+        "Call a senior or a second consultant before proceeding if in doubt; state the decision aloud and record it."
+      ],
+      "structuresAtRisk": ["Common bile duct", "Right hepatic artery"],
+      "pitfalls": [
+        "'Just a few more minutes' of dissection in a frozen triangle.",
+        "Treating a subtotal cholecystectomy as a failure rather than as the safe operation."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ochole.cystic-control": {
+      "id": "step.ochole.cystic-control", "kind": "resection", "critical": true,
+      "title": "Dividing the cystic duct and artery (total cholecystectomy)",
+      "why": "Division is irreversible. Once the cystic duct and artery are unambiguously identified entering the gallbladder, secure ligation prevents bile leak and bleeding from the stumps.",
+      "how": [
+        "Only after unambiguous identification: ligate the cystic artery close to the gallbladder with ties or clips.",
+        "Milk any stones in the cystic duct back into the gallbladder; perform a cholangiogram through the duct if indicated.",
+        "Ligate the cystic duct with a transfixion suture or ties, leaving an adequate stump, and divide.",
+        "Inspect the stumps and the common duct before removing the gallbladder."
+      ],
+      "structuresAtRisk": ["Common bile duct", "Right hepatic artery"],
+      "pitfalls": [
+        "Tying a short cystic duct flush with the common duct, narrowing it.",
+        "Leaving a stone in the cystic duct stump, which causes a leak or recurrent symptoms."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ochole.subtotal": {
+      "id": "step.ochole.subtotal", "kind": "bailout", "critical": true,
+      "title": "Subtotal cholecystectomy: fenestrating or reconstituting",
+      "why": "Leaving part of the gallbladder behind avoids the triangle altogether. It is a deliberate safety operation that removes the source of sepsis and the stones while keeping the dissection away from the bile duct and the hilum.",
+      "how": [
+        "Open the gallbladder along its free surface and remove all stones, including those impacted in Hartmann's pouch; flush and inspect the inside of the pouch and the cystic duct orifice.",
+        "Excise the free anterior wall, leaving the posterior wall on the liver where it is fused, and diathermise or scrape the exposed mucosa.",
+        "Fenestrating: leave the remnant open; close the cystic duct orifice from inside with a purse-string suture if it is visible and safe, otherwise leave it and drain.",
+        "Reconstituting: close the lower remnant to form a small gallbladder; this reduces early bile leak but leaves a remnant that can form new stones.",
+        "Do not dissect into the triangle to 'tidy up'. Place a subhepatic drain."
+      ],
+      "structuresAtRisk": ["Common hepatic duct (Mirizzi)", "Duodenum", "Right portal pedicle"],
+      "pitfalls": [
+        "Leaving stones behind in the pouch or cystic duct.",
+        "Suturing the cystic duct orifice deeply in Mirizzi syndrome, catching the common hepatic duct in the suture.",
+        "Leaving a large reconstituted remnant that becomes a new gallbladder with new stones."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ochole.duct-injury": {
+      "id": "step.ochole.duct-injury", "kind": "bailout", "critical": true,
+      "title": "Suspected bile duct injury: stop, define, drain, refer",
+      "why": "The outcome of a bile duct injury depends more on what happens next than on the injury itself. Repair by a non-specialist, especially a primary duct-to-duct repair of a major injury, often converts a reparable injury into a complex one.",
+      "how": [
+        "Suspect an injury when bile is seen from an unexpected opening, a second duct is found, the cholangiogram does not fill the proximal ducts, or a tubular structure was divided before the anatomy was clear.",
+        "Stop dissecting. Do not place more clips or sutures in the hilum.",
+        "If a hepatobiliary surgeon is available on site, call them into theatre now. If not, define the injury only as far as safe, place drains in the subhepatic space, and refer to a hepatobiliary centre the same day.",
+        "Document exactly what was seen and done, and tell the patient after the operation."
+      ],
+      "structuresAtRisk": ["Common bile duct and common hepatic duct", "Right hepatic artery (associated vascular injury)"],
+      "pitfalls": [
+        "Attempting an end-to-end duct repair or a hepaticojejunostomy without the expertise or the right timing.",
+        "Not documenting the injury, or not telling the patient."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

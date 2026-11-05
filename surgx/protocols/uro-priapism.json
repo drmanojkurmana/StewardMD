@@ -1,0 +1,57 @@
+{
+  "id": "uro-priapism",
+  "title": "Priapism",
+  "subtitle": "Ischaemic or not: the corporal gas decides",
+  "category": "uro_emergency",
+  "specialty": "urology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "aua-priapism", "org": "American Urological Association (AUA) and Sexual Medicine Society of North America (SMSNA)", "title": "Diagnosis and Management of Priapism: AUA/SMSNA Guideline", "year": 2022, "url": "https://www.auanet.org/guidelines-and-quality/guidelines/priapism", "accessed": "2026-11-04" },
+    { "id": "eau-srh", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Sexual and Reproductive Health: priapism", "year": 2024, "url": "https://uroweb.org/guidelines/sexual-and-reproductive-health", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A painful, rigid erection with soft glans lasting more than four hours: ischaemic priapism, a compartment syndrome of the penis." },
+      { "text": "Sickle cell disease or trait, haematological malignancy, or recent intracavernosal injection, phosphodiesterase-5 inhibitor, antipsychotic, trazodone or recreational drug use." },
+      { "text": "Duration beyond 24 to 48 hours. The chance of preserving erectile function falls steeply with time, and the patient must be told so." },
+      { "text": "Cardiovascular disease or uncontrolled hypertension in a patient who will need intracavernosal sympathomimetics." }
+    ],
+    "do_now": [
+      { "text": "Take a focused history (duration, pain, trauma, drugs, sickle cell status) and aspirate corporal blood for a blood gas to distinguish ischaemic from non-ischaemic priapism.", "timeCritical": true, "evidenceRef": "aua-priapism" },
+      { "text": "Ischaemic priapism: perform a dorsal penile nerve block, then corporal aspiration with or without saline irrigation and intracavernosal injection of a diluted sympathomimetic (phenylephrine is the agent of choice), repeated as per guideline dosing.", "timeCritical": true, "evidenceRef": "aua-priapism" },
+      { "text": "Monitor blood pressure and heart rate during intracavernosal sympathomimetic treatment, with ECG monitoring in patients with cardiovascular risk.", "timeCritical": true, "evidenceRef": "eau-srh" },
+      { "text": "In sickle cell disease, start the intracavernosal treatment above without delay; systemic sickle cell treatment runs alongside it, not instead of it.", "timeCritical": true, "evidenceRef": "aua-priapism" }
+    ],
+    "assess": [
+      { "text": "Ischaemic: rigid, painful, dark corporal blood. Non-ischaemic (arterial): partially rigid, painless, often after perineal or penile trauma, bright red corporal blood." },
+      { "text": "Stuttering priapism: recurrent self-limiting episodes. Each episode can progress to a full ischaemic event, so the patient needs a prevention plan." },
+      { "text": "Examine the abdomen, perineum and lymph nodes for an infiltrative cause." }
+    ],
+    "investigate": [
+      { "text": "Corporal blood gas. Ischaemic blood is hypoxic, hypercapnic and acidotic (EAU quotes pO2 under 30 mmHg, pCO2 over 60 mmHg, pH under 7.25); non-ischaemic blood resembles arterial blood." },
+      { "text": "Penile colour Doppler ultrasound to support the distinction and to locate an arterial fistula in non-ischaemic priapism, without delaying treatment of an ischaemic one." },
+      { "text": "Full blood count, reticulocytes and haemoglobin electrophoresis where sickle status is unknown; toxicology screen when relevant." }
+    ],
+    "resuscitate": [
+      { "text": "Analgesia and a penile block before aspiration; hydration, oxygen and haematology input for sickle cell crisis.", "evidenceRef": "aua-priapism" }
+    ],
+    "definitive": [
+      { "text": "Ischaemic priapism that does not resolve with repeated aspiration and sympathomimetic injection: surgical corporoglanular (distal) shunt, then a proximal shunt if needed.", "evidenceRef": "aua-priapism" },
+      { "text": "In prolonged ischaemic priapism with likely irreversible smooth muscle necrosis, discuss early penile prosthesis insertion with an experienced prosthetic surgeon.", "evidenceRef": "aua-priapism" },
+      { "text": "Non-ischaemic priapism is not an emergency: initial observation is reasonable, with selective arterial embolisation if it persists and the patient wishes treatment.", "evidenceRef": "eau-srh" },
+      { "text": "Stuttering priapism: plan prevention with the patient and, where relevant, the haematology team.", "evidenceRef": "eau-srh" }
+    ],
+    "escalate": [
+      { "text": "Urology registrar on presentation for any erection lasting four hours or more." },
+      { "text": "Andrology or prosthetic surgery for failed shunts or prolonged ischaemia." },
+      { "text": "Haematology for sickle cell disease or suspected haematological malignancy." }
+    ]
+  },
+  "notes": [
+    "The corporal blood gas answers the question in minutes. Do it before ordering anything that will take longer.",
+    "Ischaemic priapism is a time-critical compartment syndrome. Counsel honestly about erectile dysfunction from the first conversation; it is often the outcome of delay that happened before the patient reached you.",
+    "Do not give intracavernosal sympathomimetics for non-ischaemic priapism. It is not ischaemic, and the treatment adds risk without benefit."
+  ]
+}

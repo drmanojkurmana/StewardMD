@@ -1,0 +1,145 @@
+{
+  "id": "paeds-herniotomy",
+  "title": "Paediatric inguinal herniotomy",
+  "subtitle": "High ligation of the patent processus vaginalis",
+  "system": "abdominal wall",
+  "aliases": ["herniotomy", "child inguinal hernia repair", "PPV ligation"],
+  "estMinutes": 30,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: inguinal hernias and hydroceles", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" },
+    { "id": "aap-2023", "org": "American Academy of Pediatrics (AAP)", "title": "Assessment and management of inguinal hernias in children (Clinical Report, Pediatrics 2023)", "year": 2023, "url": "https://publications.aap.org/pediatrics", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["paeds_weight"],
+  "chapters": {
+    "indications": [
+      "Inguinal hernia in an infant or child, reducible, on an elective list without undue delay.",
+      "Incarcerated hernia after successful reduction, once the oedema has settled.",
+      "Irreducible or strangulated hernia, as an emergency."
+    ],
+    "contraindications": [
+      "A communicating hydrocele in an infant may resolve and is usually observed first.",
+      "Unstable intercurrent illness; ex-premature infants need a plan for post-operative apnoea monitoring rather than a contraindication."
+    ],
+    "preparation": [
+      "Examine and document both sides and the position of both testes.",
+      "Consent including recurrence, testicular atrophy or ascent, injury to the vas, wound infection and the plan for the contralateral side.",
+      "Plan day-case or overnight stay according to gestation, post-menstrual age and comorbidity."
+    ],
+    "positioning": [
+      "Supine with legs slightly apart, on a warmed mattress."
+    ],
+    "equipment": [
+      "Fine paediatric instruments, small self-retaining or hand-held retractors, fine absorbable sutures.",
+      "Magnifying loupes are helpful for small infants."
+    ],
+    "anatomy": [
+      "The hernia sac is the patent processus vaginalis, lying anteromedial to the cord within the cremaster.",
+      "In infants the inguinal canal is short; the internal and external rings almost overlie one another.",
+      "The vas deferens and testicular vessels are tiny and lie posterior to the sac. The vas is easily crushed by forceps.",
+      "The ilioinguinal nerve runs on the cord beneath the external oblique aponeurosis."
+    ],
+    "criticalSafety": [
+      "Never grasp the vas or the vessels with forceps. Handle them only with the sac or by gentle sweeping.",
+      "Ligate the sac at the internal ring, at the level of the extraperitoneal fat.",
+      "Return the testis to the scrotum at the end and confirm its position."
+    ],
+    "structuresAtRisk": [
+      "Vas deferens",
+      "Testicular vessels",
+      "Ilioinguinal nerve",
+      "Bladder in a direct or medial dissection",
+      "Ovary or fallopian tube within the sac in girls"
+    ],
+    "commonErrors": [
+      "Tearing a thin sac in an infant, then losing its proximal end in the internal ring.",
+      "Low ligation that leaves a residual sac and causes recurrence.",
+      "Leaving the testis high in the canal, causing iatrogenic ascent."
+    ],
+    "complications": [
+      "Recurrence, more common after incarceration and in premature infants.",
+      "Testicular atrophy or iatrogenic ascent.",
+      "Injury to the vas deferens, which may affect future fertility without any immediate sign.",
+      "Wound infection, haematoma, post-anaesthetic apnoea in ex-premature infants."
+    ],
+    "postop": [
+      "Feeding as soon as awake; simple analgesia.",
+      "Apnoea monitoring for ex-premature infants per local criteria.",
+      "Advise parents on scrotal swelling, which usually settles, and to return for a new lump or a high testis."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side with the child awake and the parent present. Bilateral hernias are common; confirm what was consented." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.paeds.physiology-gate", "emphasis": "Gestation and post-menstrual age decide the apnoea monitoring plan." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotics are not routinely needed for a clean elective herniotomy; follow local policy." },
+    { "ref": "step.paeds.warming" },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape", "emphasis": "Include the scrotum in the field so the testis can be checked and repositioned." },
+    { "ref": "step.paeds.local-anaesthetic", "emphasis": "Coordinate with any caudal or ilioinguinal block already given." },
+    { "ref": "step.hern.access" },
+    { "ref": "step.hern.sac" },
+    { "ref": "step.hern.ligate" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.hern.testis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure", "emphasis": "Subcuticular absorbable suture or tissue adhesive in a nappy area." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.hern.access": {
+      "id": "step.hern.access", "kind": "access",
+      "title": "Skin crease incision and opening the canal",
+      "why": "In an infant the rings nearly overlie each other, so the sac can often be reached through the external ring without opening the aponeurosis, minimising dissection around the cord.",
+      "how": [
+        "Make a short incision in the lowest inguinal skin crease over the internal ring.",
+        "Divide Scarpa fascia and identify the external oblique aponeurosis and external ring.",
+        "In older children, open the aponeurosis in the line of its fibres, protecting the ilioinguinal nerve."
+      ],
+      "structuresAtRisk": ["Ilioinguinal nerve", "Superficial epigastric vessels"],
+      "pitfalls": ["Making the incision too low, over the external ring in an older child, which hinders high ligation."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hern.sac": {
+      "id": "step.hern.sac", "kind": "dissection", "critical": true,
+      "title": "Separating the sac from the vas and vessels",
+      "why": "This is the step that decides fertility and testicular viability. The structures at risk are millimetres wide and are injured by forceps pressure, not only by cutting.",
+      "how": [
+        "Lift the cremaster and identify the sac on the anteromedial aspect of the cord.",
+        "Gently sweep the vas and vessels off the posterior surface of the sac with fine non-toothed instruments.",
+        "Divide the sac between clips once fully separated, and continue proximally to the internal ring.",
+        "In girls, check the sac for an ovary or tube before ligation."
+      ],
+      "structuresAtRisk": ["Vas deferens", "Testicular vessels", "Ovary or tube in girls"],
+      "pitfalls": ["Grasping the vas with forceps.", "Tearing a thin infant sac and losing its proximal end."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hern.ligate": {
+      "id": "step.hern.ligate", "kind": "reconstruction", "critical": true,
+      "title": "High ligation of the sac",
+      "why": "Recurrence after herniotomy is usually a residual sac. Ligation must be at the internal ring, where the extraperitoneal fat appears.",
+      "how": [
+        "Twist the sac to reduce any contents and confirm it is empty.",
+        "Transfix and ligate the neck at the level of the internal ring with an absorbable suture.",
+        "Excise the redundant sac and allow the stump to retract."
+      ],
+      "structuresAtRisk": ["Bowel or bladder within the sac"],
+      "pitfalls": ["Ligating too low, below the internal ring.", "Including bowel or ovary in the ligature."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hern.testis": {
+      "id": "step.hern.testis", "kind": "checkpoint",
+      "title": "Returning the testis to the scrotum",
+      "why": "Traction during dissection often draws the testis up into the canal. Left there, it becomes an iatrogenic undescended testis.",
+      "how": [
+        "Gently pull the testis down into the scrotum at the end of the procedure.",
+        "Confirm by palpation that it lies in the scrotum before the drapes come off.",
+        "Record the final position in the operation note."
+      ],
+      "structuresAtRisk": ["Testis"],
+      "pitfalls": ["Forgetting to check after a difficult dissection."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

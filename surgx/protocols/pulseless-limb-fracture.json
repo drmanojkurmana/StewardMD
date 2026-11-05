@@ -1,0 +1,185 @@
+{
+  "id": "pulseless-limb-fracture",
+  "title": "The pulseless limb after fracture or dislocation",
+  "subtitle": "Realign, re-examine, revascularise within the hour",
+  "category": "ortho_emergency",
+  "specialty": "orthopaedics",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "boast-arterial",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Diagnosis and management of arterial injuries associated with musculoskeletal trauma",
+      "year": 2026,
+      "url": "https://www.boa.ac.uk/resource/diagnosis-and-management-of-arterial-injuries-associated-with-musculoskeletal-trauma.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng37",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Fractures (complex): assessment and management (NG37)",
+      "year": 2016,
+      "version": "NG37",
+      "url": "https://www.nice.org.uk/guidance/ng37",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "esvs-2025",
+      "org": "European Society for Vascular Surgery (ESVS), Wahlgren CM et al. Eur J Vasc Endovasc Surg 69:179",
+      "title": "ESVS 2025 Clinical Practice Guidelines on the Management of Vascular Trauma",
+      "year": 2025,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39809666/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng39",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Major trauma: assessment and initial management (NG39)",
+      "year": 2016,
+      "version": "NG39",
+      "url": "https://www.nice.org.uk/guidance/ng39",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Hard signs: absent pulse, pulsatile bleeding, expanding or pulsatile haematoma, or a palpable thrill or audible bruit."
+      },
+      {
+        "text": "A pale, cold limb with slow or absent capillary return distal to the injury."
+      },
+      {
+        "text": "Loss of sensation and then movement distal to the injury: advanced ischaemia."
+      },
+      {
+        "text": "Knee dislocation, tibial plateau fracture-dislocation, supracondylar femoral fracture and penetrating injury near a major artery."
+      },
+      {
+        "text": "There is no safe ischaemic time. The clock started at injury, not at arrival."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Control haemorrhage by direct pressure, wound packing or a tourniquet applied as distally as possible. No blind clamping.",
+        "timeCritical": true,
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Realign and splint the pulseless deformed limb urgently, then repeat and document the arterial examination.",
+        "timeCritical": true,
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "If the limb remains dysvascular after realignment: consultant input now, and CT angiography concurrently with any whole-body CT.",
+        "timeCritical": true,
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "If hard signs persist after realignment and reduction, explore surgically at once. Do not delay revascularisation for angiography in complex fractures.",
+        "timeCritical": true,
+        "evidenceRef": "nice-ng37"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Compare with the uninjured side. If the injured pulse does not feel the same, suspect an arterial injury until imaging shows otherwise."
+      },
+      {
+        "text": "Capillary return and a Doppler signal do not exclude an arterial injury."
+      },
+      {
+        "text": "Ankle-brachial index where the limb allows.",
+        "calcs": [
+          "abi"
+        ]
+      },
+      {
+        "text": "Document peripheral nerve function, the time of injury, and the time perfusion was first found to be abnormal."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "CT angiography if the patient is stable enough to scan; on-table angiography if not."
+      },
+      {
+        "text": "Group and crossmatch, coagulation, lactate and creatine kinase."
+      },
+      {
+        "text": "Imaging never takes priority over getting a dysvascular limb to theatre."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Unstable patients with uncontrolled bleeding undergo resuscitation and surgical intervention simultaneously.",
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Intravenous tranexamic acid as soon as possible for active or suspected active bleeding in major trauma.",
+        "evidenceRef": "nice-ng39"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Revascularisation is an emergency procedure (NCEPOD category 1) and should start within one hour of arrival.",
+        "timeCritical": true,
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Restore flow first with a temporary vascular shunt, before skeletal stabilisation and definitive vascular reconstruction.",
+        "timeCritical": true,
+        "evidenceRef": "nice-ng37"
+      },
+      {
+        "text": "Reduce and stabilise the skeleton immediately after reperfusion, before definitive revascularisation.",
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Reconstruct with arterial repair or an interposition graft; reserve bypass for blast or ballistic injury, or when anatomical reconstruction is not feasible.",
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Always consider fasciotomy after revascularisation, and document the name of the senior decision-maker if it is not done.",
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Any decision for early amputation is made by two consultants from different specialties and documented.",
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Children with a supracondylar humeral fracture, no palpable radial pulse but a well-perfused hand: observation rather than immediate vascular intervention may be appropriate.",
+        "evidenceRef": "nice-ng37"
+      },
+      {
+        "text": "Vascular surgical technique, shunt use and the role of endovascular repair are set out in the ESVS vascular trauma guideline.",
+        "evidenceRef": "esvs-2025"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Consultant-led orthopaedic care plus vascular or plastic surgery is mandatory once an arterial injury is confirmed."
+      },
+      {
+        "text": "No vascular service on site: transfer is part of the revascularisation clock, so call before the CT is reported."
+      },
+      {
+        "text": "After repair, nurse where staff can assess a critically injured limb, and consider single antiplatelet therapy after a bleeding-risk assessment."
+      }
+    ]
+  },
+  "notes": [
+    "Order of operations: shunt, then skeleton, then definitive vessel. Fixing the bone first while the limb waits is the classic error.",
+    "Reperfusion causes swelling. A compartment that was soft before the shunt may not be soft an hour after it.",
+    "When cognition allows, tell the patient early that amputation is a possible outcome."
+  ],
+  "calcs": [
+    "abi",
+    "shock_index"
+  ]
+}

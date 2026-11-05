@@ -1,0 +1,67 @@
+{
+  "id": "anastomotic-leak",
+  "title": "Anastomotic leak",
+  "subtitle": "Suspect early, scan early, control the source",
+  "category": "perioperative",
+  "specialty": "general",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "isrec-2010", "org": "International Study Group of Rectal Cancer (ISREC)", "title": "Definition and grading of anastomotic leakage following anterior resection of the rectum", "year": 2010, "url": "https://pubmed.ncbi.nlm.nih.gov/20004450/", "accessed": "2026-11-04" },
+    { "id": "wses-iai-2017", "org": "World Society of Emergency Surgery (WSES)", "title": "The management of intra-abdominal infections from a global perspective: 2017 WSES guidelines", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/28702076/", "accessed": "2026-11-04" },
+    { "id": "ssc-2021", "org": "Surviving Sepsis Campaign (SCCM and ESICM)", "title": "Surviving Sepsis Campaign: international guidelines for management of sepsis and septic shock 2021", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/34605781/", "accessed": "2026-11-04" },
+    { "id": "singh-crp-2014", "org": "British Journal of Surgery", "title": "Systematic review and meta-analysis of use of serum C-reactive protein levels to predict anastomotic leak after colorectal surgery", "year": 2014, "url": "https://pubmed.ncbi.nlm.nih.gov/24311257/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Unexplained tachycardia, tachypnoea or new atrial fibrillation from day two to day seven after an anastomosis." },
+      { "text": "Pain that increases rather than settles, new peritonism, or an ileus that does not resolve." },
+      { "text": "Change in drain character: turbid, bilious, faeculent or enteric content, or gas in the drain." },
+      { "text": "New confusion, oliguria or rising oxygen requirement, which are often attributed to a chest infection or delirium." },
+      { "text": "A C-reactive protein that rises or fails to fall from day three onwards." }
+    ],
+    "do_now": [
+      { "text": "Go and see the patient. Full observations, abdomen, wound, drain and stoma, and a lactate.", "timeCritical": true, "evidenceRef": "wses-iai-2017" },
+      { "text": "If sepsis or septic shock is likely, start broad-spectrum antibiotics covering enteric Gram-negative and anaerobic organisms promptly, within one hour for possible septic shock, after blood cultures where this causes no delay.", "timeCritical": true, "evidenceRef": "ssc-2021" },
+      { "text": "Resuscitate with balanced crystalloid to perfusion targets, and start a vasopressor if hypotension persists.", "timeCritical": true, "evidenceRef": "ssc-2021" },
+      { "text": "Tell the operating surgeon and the consultant now, not at the morning round.", "timeCritical": true, "evidenceRef": "wses-iai-2017" }
+    ],
+    "assess": [
+      { "text": "Track early warning scores and organ dysfunction; deterioration on the trend matters more than any single value.", "calcs": ["news2", "qsofa", "sofa"] },
+      { "text": "A low C-reactive protein on day three has a high negative predictive value for leak after colorectal surgery and supports safe discharge; a high value is a reason to look, not a diagnosis." },
+      { "text": "Exclude parallel diagnoses at the same visit: pulmonary embolism, myocardial injury, pneumonia. Do not let them become the comfortable explanation." },
+      { "text": "Grade the leak once found: ISREC grade A needs no change in management, grade B needs active intervention without re-laparotomy, grade C needs re-laparotomy.", "calcs": ["clavien_dindo"] }
+    ],
+    "investigate": [
+      { "text": "CT abdomen and pelvis with intravenous contrast, and rectal contrast for a low colorectal anastomosis, urgently after resuscitation has started." },
+      { "text": "Free gas alone early after laparotomy is expected; extraluminal contrast, gas around the anastomosis or a perianastomotic collection are what matter." },
+      { "text": "Blood cultures, lactate, FBC, U&E, CRP, and drain fluid for amylase or bilirubin when the type of leak is uncertain." },
+      { "text": "If the patient is too unstable to travel to the scanner, the answer is theatre, not a better scan." }
+    ],
+    "resuscitate": [
+      { "text": "Small contained leak in a stable patient: antibiotics, and percutaneous drainage of any accessible collection.", "evidenceRef": "wses-iai-2017" },
+      { "text": "Low pelvic leak with a defunctioning stoma: drainage, sometimes transanal or endoscopic vacuum therapy in specialist units.", "evidenceRef": "wses-iai-2017" },
+      { "text": "Nil by mouth for an upper GI leak with distal enteral or parenteral nutrition; early nutrition support for every significant leak.", "evidenceRef": "wses-iai-2017" }
+    ],
+    "definitive": [
+      { "text": "Generalised peritonitis or septic shock: urgent re-laparotomy for source control, without delay for further optimisation.", "evidenceRef": "wses-iai-2017" },
+      { "text": "In a vasopressor-dependent patient with faecal contamination, take down the colorectal anastomosis and form an end stoma rather than repairing it.", "evidenceRef": "wses-iai-2017" },
+      { "text": "A small early leak in a stable patient with limited contamination may be managed by washout, drainage and a defunctioning loop ileostomy, preserving the anastomosis.", "evidenceRef": "wses-iai-2017" },
+      { "text": "Small bowel anastomotic leak in an unstable patient: resect and exteriorise, or leave in discontinuity for a planned second look.", "evidenceRef": "wses-iai-2017" },
+      { "text": "Short, defined antibiotic course after adequate source control.", "evidenceRef": "wses-iai-2017" }
+    ],
+    "escalate": [
+      { "text": "Consultant surgeon at the first suspicion, and the operating surgeon whenever possible." },
+      { "text": "Critical care for organ dysfunction or vasopressor requirement." },
+      { "text": "Interventional radiology for drainage of accessible collections." },
+      { "text": "Honest communication with the patient and family, including the likelihood of a stoma and of critical care, before theatre." }
+    ]
+  },
+  "notes": [
+    "The leak that kills is the one that was attributed to something else for 24 hours: chest infection, fast atrial fibrillation, ileus, or anxiety.",
+    "Physiology decides the operation. Repair or re-anastomosis in a septic, vasopressor-dependent abdomen is how the second leak happens.",
+    "A falling drain output is not reassurance; a blocked or displaced drain shows nothing."
+  ],
+  "calcs": ["news2", "qsofa", "sofa", "clavien_dindo"]
+}

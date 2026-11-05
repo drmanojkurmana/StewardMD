@@ -1,0 +1,205 @@
+{
+  "v": 1,
+  "module": "srh-igg4",
+  "subject": "ss-rheumatology-immunology",
+  "title": "IgG4-related disease",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**IgG4-related disease** or IgG4-RD is a chronic fibroinflammatory systemic disorder characterised by mass-forming tumefactive lesions, dense tissue infiltration by IgG4-positive plasma cells, and progressive **storiform fibrosis**. It can involve virtually any organ system, including the pancreas, biliary tree, salivary glands, and retroperitoneum, often mimicking malignancy or granulomatous infection.",
+      "say": "IgG4-related disease is a systemic fibroinflammatory disorder producing mass lesions. It features tissue infiltration by IgG4 plasma cells and progressive fibrosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/igg4-related-disease-fig1.webp",
+        "alt": "Multisystem organ involvement and mass lesions in IgG4-related disease",
+        "caption": "Multisystem fibroinflammatory masses characterize active IgG4-related disease. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The **2019 ACR/EULAR classification criteria** establish a rigorous 3-step validation pathway: mandatory entry criteria requiring characteristic organ involvement, followed by exclusion criteria to rule out malignancy and vasculitis, and a weighted scoring system requiring a cumulative score of **20 or more points**.",
+      "say": "Classification of IgG4-related disease uses a validated three-step system. Meeting entry criteria and accumulating at least 20 weighted points confirms classification.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classification step",
+          "Diagnostic requirement",
+          "Operational rule"
+        ],
+        "rows": [
+          [
+            "Entry criteria",
+            "Characteristic tumefactive organ lesion",
+            "Must be demonstrated clinically or on imaging"
+          ],
+          [
+            "Exclusion criteria",
+            "ANCA vasculitis, malignancy, Castleman disease",
+            "Presence of any exclusion invalidates diagnosis"
+          ],
+          [
+            "Scoring domains",
+            "Histology, immunohistochemistry, serology",
+            "Requires >=20 points across domains"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive histopathologic diagnosis requires the classic triad: dense lymphoplasmacytic infiltrate rich in IgG4 positive plasma cells, whorled cartwheel-like **storiform fibrosis**, and **obliterative phlebitis**. Cellular infiltration of venous lumens causes luminal occlusion with elastic lamina preservation, while true necrosis and granulomas are absent.",
+      "say": "Histopathology reveals a characteristic triad: dense lymphoplasmacytic infiltration, storiform fibrosis, and obliterative phlebitis without granulomas.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histologic feature",
+          "Microscopic appearance",
+          "Pathognomonic significance"
+        ],
+        "rows": [
+          [
+            "Lymphoplasmacytic infiltrate",
+            "Dense sheets of lymphocytes and plasma cells",
+            "Drives local cytokine synthesis"
+          ],
+          [
+            "Storiform fibrosis",
+            "Whorled cartwheel-like collagen bundles",
+            "Confirms chronicity and mass effect"
+          ],
+          [
+            "Obliterative phlebitis",
+            "Venous channels occluded by inflammatory cells",
+            "Distinguishes IgG4-RD from other fibrosing disorders"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immunohistochemical evaluation mandates organ-specific cutoffs for absolute IgG4-positive plasma cell counts, typically exceeding **10 to 50 cells per high-power field**. Crucially, the **ratio of IgG4-positive to total IgG-positive plasma cells must exceed 40 percent**, distinguishing true disease from non-specific reactive inflammation.",
+      "say": "Immunohistochemistry requires elevated absolute IgG4 plasma cells and a ratio of IgG4 to total IgG plasma cells exceeding 40 percent.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Tissue biopsy stained for IgG and IgG4 plasma cells"
+          },
+          {
+            "id": "b",
+            "label": "Absolute count exceeding organ cutoff (>10 to 50/HPF)"
+          },
+          {
+            "id": "c",
+            "label": "IgG4 to total IgG ratio exceeding 40 percent confirms IgG4-RD"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Elevated serum IgG4 concentrations exceeding **135 mg/dL** occur in approximately 60 to 70 percent of active patients. However, elevated serum IgG4 is neither perfectly sensitive nor specific, occurring in chronic allergies and cancer; conversely, entirely **normal serum IgG4** does not exclude biopsy-proven IgG4-RD.",
+      "say": "Serum IgG4 rises above 135 mg per dL in many active cases. However, normal serum IgG4 does not rule out biopsy-proven disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Serum IgG4 utility",
+          "points": [
+            "Cutoff >135 mg/dL in active disease",
+            "Useful biomarker for treatment monitoring",
+            "Multi-organ involvement shows highest levels"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic pitfalls",
+          "points": [
+            "Normal in 30% of biopsy-proven cases",
+            "Mild elevations occur in pancreatic adenocarcinoma",
+            "Tissue biopsy remains gold standard"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prototypic organ involvement includes **Type 1 autoimmune pancreatitis**, presenting with painless obstructive jaundice and diffuse sausage-shaped pancreatic enlargement with a hypoattenuating capsule rim. Other classic presentations include bilateral lacrimal and salivary enlargement known as **Mikulicz disease**, and dense fibrosing **Riedel thyroiditis**.",
+      "say": "Classic manifestations include Type 1 autoimmune pancreatitis with sausage-like swelling, Mikulicz salivary disease, and invasive Riedel thyroiditis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/igg4-aortitis-fig1.webp",
+        "alt": "Aortitis and retroperitoneal involvement in IgG4-related disease",
+        "caption": "IgG4-RD involves vascular walls, retroperitoneum, and exocrine glands. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Retroperitoneal fibrosis** in IgG4-RD manifests as a fibroinflammatory rind encasing the infrarenal abdominal aorta and iliac vessels. Contraction of fibrotic tissue characteristically draws the ureters inward, causing **medial ureteral deviation**, hydronephrosis, and post-renal azotemia, requiring temporary ureteral stenting alongside immunosuppression.",
+      "say": "Retroperitoneal fibrosis encases the abdominal aorta and causes medial deviation of both ureters. Resulting hydronephrosis requires prompt therapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Periaortic fibroinflammatory soft-tissue mantle"
+          },
+          {
+            "id": "b",
+            "label": "Extrinsic entrapment and medial ureteral deviation"
+          },
+          {
+            "id": "c",
+            "label": "Obstructive hydronephrosis and post-renal renal failure"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic glucocorticoids are the standard first-line remission induction therapy, with oral **prednisone at 0.6 to 0.8 mg/kg daily** producing rapid tumefactive regression. In patients with multiorgan disease, steroid contraindications, or disease relapsing during tapering, targeted B cell depletion with **rituximab** achieves profound disease control.",
+      "say": "Systemic prednisone at 0.6 to 0.8 milligrams per kilogram daily induces rapid tumefactive lesion regression, while rituximab provides effective targeted biologic immunosuppression for relapsing disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic phase",
+          "Drug regimen",
+          "Monitoring parameter"
+        ],
+        "rows": [
+          [
+            "Remission induction",
+            "Prednisone 0.6 to 0.8 mg/kg daily for 2 to 4 weeks",
+            "Rapid regression of mass lesions on imaging"
+          ],
+          [
+            "Glucocorticoid taper",
+            "Gradual taper over 3 to 6 months",
+            "Serum IgG4 and repeat ultrasound or CT"
+          ],
+          [
+            "Targeted biologic",
+            "Rituximab 1,000 mg on days 1 and 15",
+            "Preferred agent for steroid-refractory relapses"
+          ]
+        ]
+      }
+    }
+  ]
+}

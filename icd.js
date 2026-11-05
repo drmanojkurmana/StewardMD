@@ -227,7 +227,35 @@
   }
 
   /* ---------------- detail view (stand-alone mode only) ---------------- */
+  // iPad regular width (vault/plans/iPad-Standards.md): a picked code opens in a pane beside the list (.icd-split,
+  // styled in ipad-clinical.css) instead of replacing it. Phones and narrow Split View never take this path.
+  function splitOn() {
+    return document.documentElement.classList.contains("smd-tablet") && window.innerWidth >= 1000;
+  }
+  var dseq = 0;
+  function openDetailSplit(id) {
+    var pane = root.querySelector(".icd-pane");
+    if (!pane) { pane = document.createElement("div"); pane.className = "icd-pane"; pane.setAttribute("aria-live", "polite"); root.appendChild(pane); }
+    root.classList.add("icd-split");
+    root.querySelectorAll(".icd-card").forEach(function (c) { c.classList.toggle("sel", c.getAttribute("data-id") === id); });
+    pane.innerHTML = '<div class="icd-hint">Loading…</div>';
+    var mySeq = ++dseq;
+    ICDAPI.code(id).then(function (d) {
+      if (mySeq !== dseq) return;
+      if (d == null || d.error) { pane.innerHTML = '<div class="icd-err">Could not load this code. Check your connection and try again.</div>'; return; }
+      pane.innerHTML = detailHTML(d);
+    });
+  }
+  function detailHTML(d) {
+    return '<div class="icd-dhead">' +
+        '<div class="icd-dcode">' + esc(g(d, "code")) + '<span class="icd-card-sys">' + esc(g(d, "system")) + '</span></div>' +
+        '<div class="icd-dname">' + esc(g(d, "title")) + '</div>' +
+        (g(d, "chapter") ? '<div class="icd-card-ch">Chapter/category ' + esc(d.chapter) + '</div>' : "") +
+      '</div>' +
+      '<div class="icd-src">Source: WHO ' + esc(g(d, "system")) + ' public reference release. Non-PHI classification reference data.</div>';
+  }
   function openDetail(id) {
+    if (splitOn() && root.querySelector("#icdResults")) { openDetailSplit(id); return; }
     st.view = "detail";
     setTitle("ICD code");
     var b = root.querySelector("#icdBody");
@@ -237,13 +265,7 @@
       if (mySeq !== seq || st.view !== "detail") return;
       if (d == null || d.error) { b.innerHTML = '<div class="icd-err">Could not load this code. Check your connection and try again.</div>'; return; }
       setTitle(g(d, "code") || "ICD code");
-      b.innerHTML =
-        '<div class="icd-dhead">' +
-          '<div class="icd-dcode">' + esc(g(d, "code")) + '<span class="icd-card-sys">' + esc(g(d, "system")) + '</span></div>' +
-          '<div class="icd-dname">' + esc(g(d, "title")) + '</div>' +
-          (g(d, "chapter") ? '<div class="icd-card-ch">Chapter/category ' + esc(d.chapter) + '</div>' : "") +
-        '</div>' +
-        '<div class="icd-src">Source: WHO ' + esc(g(d, "system")) + ' public reference release. Non-PHI classification reference data.</div>';
+      b.innerHTML = detailHTML(d);
     });
   }
 
@@ -252,6 +274,7 @@
     ensureRoot();
     root.classList.add("on");
     document.body.classList.add("icd-lock");
+    root.classList.remove("icd-split"); dseq++;
     st.view = "list"; st.onSelect = onSelect || null;
     renderList();
   }

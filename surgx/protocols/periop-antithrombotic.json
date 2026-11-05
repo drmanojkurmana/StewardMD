@@ -1,0 +1,70 @@
+{
+  "id": "periop-antithrombotic",
+  "title": "Peri-operative anticoagulants and antiplatelets",
+  "subtitle": "When to stop, whether to bridge, when to restart",
+  "category": "perioperative",
+  "specialty": "periop",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "accp-2022", "org": "American College of Chest Physicians (ACCP)", "title": "Perioperative management of antithrombotic therapy: an American College of Chest Physicians clinical practice guideline", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/35964704/", "accessed": "2026-11-04" },
+    { "id": "pause-2019", "org": "PAUSE Investigators (JAMA Internal Medicine)", "title": "Perioperative management of patients with atrial fibrillation receiving a direct oral anticoagulant (PAUSE)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31380891/", "accessed": "2026-11-04" },
+    { "id": "bridge-2015", "org": "BRIDGE Investigators (New England Journal of Medicine)", "title": "Perioperative bridging anticoagulation in patients with atrial fibrillation (BRIDGE)", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/26095867/", "accessed": "2026-11-04" },
+    { "id": "aha-acc-2024", "org": "American Heart Association and American College of Cardiology (AHA/ACC)", "title": "2024 AHA/ACC guideline for perioperative cardiovascular management for noncardiac surgery", "year": 2024, "url": "https://pubmed.ncbi.nlm.nih.gov/39316661/", "accessed": "2026-11-04" },
+    { "id": "acc-ecdp-2017", "org": "American College of Cardiology (ACC)", "title": "2017 ACC expert consensus decision pathway for periprocedural management of anticoagulation in patients with nonvalvular atrial fibrillation", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/28081965/", "accessed": "2026-11-04" },
+    { "id": "asra-2018", "org": "American Society of Regional Anesthesia and Pain Medicine (ASRA)", "title": "Regional anesthesia in the patient receiving antithrombotic or thrombolytic therapy, fourth edition", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/29561531/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A coronary stent placed recently, or an acute coronary syndrome within the past year: stopping antiplatelet therapy risks stent thrombosis, which is frequently fatal." },
+      { "text": "Mechanical heart valve, especially mitral, or a venous thromboembolism within the last three months: high thrombotic risk." },
+      { "text": "Planned neuraxial or deep regional block: the interruption intervals are longer than for surgery alone." },
+      { "text": "Impaired renal function with dabigatran, which prolongs its effect substantially." },
+      { "text": "An emergency operation on a patient who took an anticoagulant today: this is a reversal decision, not an interruption plan." }
+    ],
+    "do_now": [
+      { "text": "Record every antithrombotic, its indication, the dose, the time of the last dose, and the stent type and date, at pre-assessment, not on the morning of surgery.", "evidenceRef": "accp-2022" },
+      { "text": "Classify the procedure's bleeding risk (minimal, low to moderate, or high) and the patient's thrombotic risk before deciding anything.", "evidenceRef": "accp-2022" },
+      { "text": "Do not stop antiplatelet therapy in a patient with a recent coronary stent without discussion with the cardiologist; defer elective surgery instead where possible.", "evidenceRef": "aha-acc-2024" },
+      { "text": "Emergency surgery on an anticoagulant: reverse according to the agent and the local protocol, and involve haematology.", "timeCritical": true, "evidenceRef": "acc-ecdp-2017" }
+    ],
+    "assess": [
+      { "text": "Thrombotic risk: indication for anticoagulation, stroke risk in atrial fibrillation, valve type and position, and timing of any venous thromboembolism.", "calcs": ["chadsvasc"] },
+      { "text": "Bleeding risk of the patient and the procedure. Minimal-risk procedures, such as many dental, skin and cataract procedures, can often proceed without interruption.", "calcs": ["hasbled"] },
+      { "text": "Renal function by Cockcroft-Gault creatinine clearance, which determines DOAC interruption intervals, particularly for dabigatran.", "calcs": ["crcl"] },
+      { "text": "Cardiac risk of the surgery itself.", "calcs": ["rcri"] }
+    ],
+    "investigate": [
+      { "text": "Routine pre-operative coagulation testing is not needed after a standardised DOAC interruption; in PAUSE most patients had minimal residual levels." },
+      { "text": "INR the day before surgery for patients stopping warfarin; a low dose of vitamin K may be given if it remains raised." },
+      { "text": "Renal function and full blood count at pre-assessment." }
+    ],
+    "resuscitate": [
+      { "text": "Apixaban, rivaroxaban, edoxaban: omit for 1 day before a low to moderate bleeding-risk procedure and 2 days before a high bleeding-risk procedure, with no bridging.", "evidenceRef": "pause-2019" },
+      { "text": "Dabigatran with creatinine clearance 50 mL/min or more: omit for 1 day before low to moderate and 2 days before high bleeding-risk procedures. With clearance below 50 mL/min: omit for 2 days and 4 days respectively.", "evidenceRef": "pause-2019" },
+      { "text": "Warfarin: stop 5 days before surgery. Heparin bridging is not recommended for most patients with atrial fibrillation, because it increased bleeding without reducing thromboembolism.", "evidenceRef": "bridge-2015" },
+      { "text": "Consider bridging only for high thrombotic risk on warfarin, such as a mechanical mitral valve, decided with the specialist responsible.", "evidenceRef": "accp-2022" },
+      { "text": "Neuraxial anaesthesia: follow ASRA intervals, which for apixaban, rivaroxaban and edoxaban are generally 72 hours, longer than the surgical interruption.", "evidenceRef": "asra-2018" }
+    ],
+    "definitive": [
+      { "text": "Aspirin: continue in most patients having non-cardiac surgery, particularly for secondary prevention; stop it only for procedures where even minor bleeding is catastrophic, such as some intracranial, spinal or posterior eye surgery.", "evidenceRef": "accp-2022" },
+      { "text": "P2Y12 inhibitors when interruption is agreed: clopidogrel 5 days, ticagrelor 3 to 5 days, prasugrel 7 days before surgery.", "evidenceRef": "accp-2022" },
+      { "text": "Restart DOACs 1 day after a low to moderate bleeding-risk procedure and 2 to 3 days after a high bleeding-risk procedure, once haemostasis is secure.", "evidenceRef": "pause-2019" },
+      { "text": "Restart warfarin within about 24 hours after surgery when haemostasis allows; resume P2Y12 inhibitors within about 24 hours when haemostasis allows, per the cardiology plan.", "evidenceRef": "accp-2022" },
+      { "text": "Give pharmacological VTE prophylaxis between surgery and full-dose resumption when there is a gap, per local protocol.", "evidenceRef": "accp-2022" }
+    ],
+    "escalate": [
+      { "text": "Cardiology for any patient with a coronary stent or recent acute coronary syndrome, before the date of surgery is fixed." },
+      { "text": "Haematology for mechanical valves, recent venous thromboembolism, thrombophilia, or reversal in emergencies." },
+      { "text": "Anaesthesia early when regional or neuraxial anaesthesia is planned." },
+      { "text": "Write the plan with dates in the notes and give it to the patient in writing. Most errors are of execution, not of decision." }
+    ]
+  },
+  "notes": [
+    "Bridging feels safe and is not. In atrial fibrillation it more than doubled major bleeding without reducing arterial thromboembolism.",
+    "DOAC interruption is a matter of days and depends on bleeding risk and, for dabigatran, renal function. A standard schedule makes routine coagulation tests unnecessary.",
+    "The patient on a recent coronary stent is the one in whom a well-meaning surgical team can cause a death by stopping a tablet. Ask the stent date every time."
+  ],
+  "calcs": ["chadsvasc", "hasbled", "crcl", "rcri"]
+}

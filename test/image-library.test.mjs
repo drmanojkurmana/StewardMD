@@ -5,7 +5,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { buildAll, canonicalSystem, captionOf, kindOf, writeIndex } from "../tools/build-image-library.mjs";
+import { buildAll, canonicalSystem, captionOf, commonsSrc, commonsTitle, kindOf, tidyCommonsCaption, writeIndex } from "../tools/build-image-library.mjs";
 
 const require = createRequire(import.meta.url);
 const PURE = require("../image-library.js");
@@ -103,4 +103,44 @@ test("client pure: native image URL prefixing", () => {
   assert.equal(PURE.imgUrl("/api/prep/bank/v1/kb/media/x.webp"), "https://stewardmd.in/api/prep/bank/v1/kb/media/x.webp");
   assert.equal(PURE.imgUrl("https://upload.wikimedia.org/a.jpg"), "https://upload.wikimedia.org/a.jpg");
   delete globalThis.SMD_API_BASE;
+});
+
+/* Commons pathology and histology (tools/fetch-commons-pathology.mjs -> kb/imglib/commons-pathology.json). */
+import { stripHtml, titleFromFile, trimCaption, kindFor, usableCaption } from "../tools/fetch-commons-pathology.mjs";
+
+test("commons import: helpers keep the uploader's text and drop empty captions", () => {
+  assert.equal(stripHtml('<div lang="en">Micrograph of <b>Barrett</b>&nbsp;oesophagus. H&amp;E stain.</div>'), "Micrograph of Barrett oesophagus. H&E stain.");
+  assert.equal(titleFromFile("File:Adenocarcinoma_of_the_colon_--_high_mag.jpg"), "Adenocarcinoma of the colon, high mag");
+  assert.equal(titleFromFile("File:Liver_biopsy_(2).png"), "Liver biopsy");
+  const long = "First sentence about the slide with enough words to pass the cut. ".repeat(12);
+  const t = trimCaption(long);
+  assert.ok(t.length <= 500 && t.endsWith("."), "trimmed at a sentence end");
+  assert.equal(kindFor("Pap stain cervical smear", "Histopathology"), "Cytology");
+  assert.equal(kindFor("Gross pathology of the liver", "Histopathology"), "Gross specimen");
+  assert.equal(kindFor("Normal kidney cortex", "Histology"), "Histology");
+  assert.equal(usableCaption("Own work", "x"), false);
+  assert.equal(usableCaption("Micrograph", "x"), false);
+  assert.equal(usableCaption("Micrograph of a hepatocellular carcinoma. H&E stain.", "Hcc"), true);
+  assert.equal(tidyCommonsCaption("Micrograph of a chondroblastoma . H&E stain . Related images Intermed. mag. Very high mag."), "Micrograph of a chondroblastoma. H&E stain.");
+  assert.equal(commonsSrc("https://upload.wikimedia.org/wikipedia/commons/3/3d/X.jpg?utm_source=commons.wikimedia.org"), "https://upload.wikimedia.org/wikipedia/commons/3/3d/X.jpg");
+  assert.equal(commonsSrc("https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/X.png/960px-X.png"), "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/X.png/960px-X.png");
+  assert.equal(commonsSrc("https://example.com/x.jpg"), "");
+  assert.equal(commonsTitle("Mucinous carcinoma", "x"), "Mucinous carcinoma");
+  assert.equal(commonsTitle("Dsrct1", "Desmoplastic small round cell tumor. H&E stain."), "Desmoplastic small round cell tumor");
+});
+
+test("commons import: every merged image is openly licensed, attributed and linked to its Commons page", () => {
+  const d = data();
+  const all = Object.values(d.bySystem).flat().filter((e) => e.lk === "commons");
+  assert.ok(all.length > 300, "pathology and histology images merged, got " + all.length);
+  for (const e of all) {
+    assert.match(e.s, /^https:\/\/(upload|thumb)\.wikimedia\.org\/[^?]+$/);
+    assert.match(e.u, /^https:\/\/commons\.wikimedia\.org\//);
+    assert.match(e.li, /^(cc[ -]by(-sa)?[ -]\d|cc0|public domain|pd)/i, "open licence: " + e.li);
+    assert.doesNotMatch(e.li, /\bnc\b|\bnd\b/i);
+    assert.equal(e.o, "commons");
+    assert.ok(["Commons pathology", "Commons histology"].includes(e.f));
+  }
+  const sys = new Set(Object.keys(d.bySystem).filter((s) => d.bySystem[s].some((e) => e.lk === "commons")));
+  for (const s of ["gastroenterology", "dermatology", "oncology", "anatomy"]) assert.ok(sys.has(s), "commons images in " + s);
 });

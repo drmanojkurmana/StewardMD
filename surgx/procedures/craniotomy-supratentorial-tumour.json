@@ -1,0 +1,289 @@
+{
+  "id": "craniotomy-supratentorial-tumour",
+  "title": "Craniotomy for supratentorial tumour",
+  "subtitle": "Navigation-guided resection of an intra-axial tumour",
+  "system": "neurological",
+  "aliases": [
+    "tumour craniotomy",
+    "glioma resection",
+    "craniotomy for brain tumour",
+    "image-guided craniotomy",
+    "metastasis resection"
+  ],
+  "estMinutes": 210,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "nice-ng99",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Brain tumours (primary) and brain metastases in over 16s (NG99)",
+      "year": 2018,
+      "url": "https://www.nice.org.uk/guidance/ng99",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "eano-glioma-2021",
+      "org": "European Association of Neuro-Oncology (EANO), Weller M et al. (Nat Rev Clin Oncol)",
+      "title": "EANO guidelines on the diagnosis and treatment of diffuse gliomas of adulthood",
+      "year": 2021,
+      "url": "https://doi.org/10.1038/s41571-020-00447-z",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "stummer-5ala-2006",
+      "org": "Stummer W et al. (Lancet Oncology)",
+      "title": "Fluorescence-guided surgery with 5-aminolevulinic acid for resection of malignant glioma: a randomised controlled multicentre phase III trial",
+      "year": 2006,
+      "url": "https://doi.org/10.1016/S1470-2045(06)70665-9",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "gcs",
+    "mrc_power"
+  ],
+  "chapters": {
+    "indications": [
+      "Suspected glioma where the MDT recommends resection to obtain a histological and molecular diagnosis and to remove as much tumour as can be removed safely.",
+      "A single brain metastasis, or a symptomatic dominant metastasis, where the MDT recommends surgery over radiosurgery.",
+      "Mass effect from tumour causing raised intracranial pressure or neurological deficit.",
+      "Extra-axial supratentorial tumours (for example convexity meningioma) share many of the steps."
+    ],
+    "contraindications": [
+      "Lesion where biopsy alone or no surgery is the MDT plan: diffuse, multifocal or deep tumours, or suspected lymphoma (where steroids before biopsy can mask the diagnosis).",
+      "Poor performance status in which resection does not change outcome, after MDT discussion.",
+      "Uncorrected coagulopathy or antithrombotic therapy that has not been stopped for an elective case.",
+      "Tumour in eloquent cortex without the functional mapping (awake craniotomy, monitoring) that the plan needs."
+    ],
+    "preparation": [
+      "MDT decision recorded, with the goal stated: diagnosis, debulking, or maximal safe resection.",
+      "Navigation MRI with contrast, plus functional MRI and tractography when the tumour is near eloquent cortex or tracts. Check the scan is recent enough to reflect the current tumour.",
+      "Steroids for symptomatic oedema; anticonvulsants for patients who have had seizures, per local protocol.",
+      "For suspected high-grade glioma where all enhancing tumour appears resectable, oral 5-ALA timed before induction as per its licence, with light protection afterwards.",
+      "Group and save; blood availability for large or vascular tumours.",
+      "Consent should include new or worse weakness, speech or visual field deficit, seizures, haemorrhage, infection, CSF leak, wound problems, stroke, incomplete resection, the possibility that histology changes the plan, and risks specific to the tumour location. Discuss awake craniotomy where relevant."
+    ],
+    "positioning": [
+      "Supine, lateral or prone so the tumour is at the highest point of the field and the approach is perpendicular to the scalp.",
+      "Pins in a three-point head clamp, with the head above the heart and the jugular veins free.",
+      "Arms, heels and pressure areas protected for a long operation; urinary catheter and warming."
+    ],
+    "equipment": [
+      "Neuronavigation system with the planned trajectory.",
+      "Operating microscope, with a filter for 5-ALA fluorescence where used.",
+      "Ultrasonic aspirator, bipolar diathermy, suction set, haemostatic agents.",
+      "High-speed drill and craniotome.",
+      "Intra-operative ultrasound; intra-operative MRI where available.",
+      "Neurophysiological monitoring and cortical stimulation for tumours near motor cortex or the corticospinal tract."
+    ],
+    "anatomy": [
+      "The central sulcus separates motor cortex in front from sensory cortex behind; on axial MRI it is identified by the hand knob and the pars marginalis sign.",
+      "Language areas in the dominant hemisphere include the inferior frontal gyrus and the posterior superior temporal gyrus, but their location varies between individuals: mapping is more reliable than anatomy.",
+      "The corticospinal tract runs through the corona radiata and the posterior limb of the internal capsule; deep resection of a frontal or parietal tumour approaches it.",
+      "Draining veins, including the vein of Trolard and the vein of Labbe, must be preserved: venous infarction after sacrificing one is a disaster.",
+      "Gliomas infiltrate beyond the enhancing margin; metastases usually have a gliotic plane that can be followed."
+    ],
+    "criticalSafety": [
+      "Verify navigation accuracy before planning the flap and before every navigation-based decision; assume brain shift after CSF release and debulking.",
+      "Stop and reassess when monitoring changes, when the plane is lost, or when the resection reaches the margin defined by function rather than by tumour.",
+      "Preserve draining veins and en passage arteries; coagulate only vessels that end in the tumour.",
+      "Do not close over a tight brain."
+    ],
+    "structuresAtRisk": [
+      "Eloquent cortex: motor, sensory, language and visual areas",
+      "Corticospinal tract and other subcortical tracts",
+      "Draining cortical veins and the venous sinuses",
+      "Perforating and en passage arteries",
+      "Ventricle (opening it risks blood and tumour cells spreading into the CSF)"
+    ],
+    "commonErrors": [
+      "Planning the flap on unchecked navigation, so the flap misses the tumour edge.",
+      "Following navigation late in the case after brain shift.",
+      "Taking a draining vein to improve exposure.",
+      "Resecting into eloquent tissue in pursuit of complete removal of a tumour that infiltrates it.",
+      "Delayed recognition of a post-operative haematoma attributed to the anaesthetic."
+    ],
+    "complications": [
+      "New neurological deficit, temporary or permanent, from direct injury, retraction, ischaemia or venous infarction.",
+      "Post-operative haematoma in the cavity, subdural or extradural space.",
+      "Cerebral oedema, seizures.",
+      "Infection of the wound or the bone flap, meningitis, CSF leak.",
+      "Hydrocephalus, pneumocephalus.",
+      "Venous thromboembolism; steroid-related hyperglycaemia."
+    ],
+    "postop": [
+      "Neurological observations with a written trigger, in a setting matched to the operation; record the immediate post-operative neurological examination as a baseline.",
+      "Urgent CT for any deterioration.",
+      "Early post-operative MRI to measure the extent of resection, ideally within 72 hours, per local practice and NICE NG99.",
+      "Plan the steroid taper, anticonvulsant continuation, and timing of pharmacological thromboprophylaxis.",
+      "Return the case to the MDT with histology and the post-operative MRI for adjuvant planning.",
+      "Driving advice per the national licensing authority."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Consent states the goal (diagnosis, debulking or maximal safe resection) and the realistic deficit risk for this location."
+    },
+    {
+      "ref": "step.onco.mdt-check",
+      "emphasis": "For an intrinsic brain tumour the operation usually provides the tissue diagnosis. Confirm the MDT recommended resection rather than biopsy, and the goal."
+    },
+    {
+      "ref": "step.neuro.preop-check",
+      "emphasis": "Record limb power, speech and visual fields, steroid and anticonvulsant doses, and timing of 5-ALA if used."
+    },
+    {
+      "ref": "step.core.timeout",
+      "emphasis": "Say the side, the tumour location and the eloquent structures at risk; confirm monitoring and navigation are ready."
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.neuro.head-fixation",
+      "emphasis": "Pins; turn the head so the tumour is uppermost and the approach is perpendicular."
+    },
+    {
+      "ref": "step.neuro.navigation",
+      "emphasis": "Plan the smallest flap that gives access to the whole tumour plus a margin for brain swelling."
+    },
+    {
+      "ref": "step.core.prep-drape",
+      "emphasis": "Prepare beyond the planned incision in case the flap has to be enlarged."
+    },
+    {
+      "ref": "step.neuro.scalp-incision"
+    },
+    {
+      "ref": "step.neuro.craniotomy-flap",
+      "emphasis": "Flap over the navigated tumour margin, with dural hitch sutures before the dura is opened."
+    },
+    {
+      "ref": "step.neuro.dura-open",
+      "emphasis": "Open with the base towards the sinus; identify and protect the draining veins before the flap is reflected."
+    },
+    {
+      "ref": "step.tum.corticectomy"
+    },
+    {
+      "ref": "step.tum.resection"
+    },
+    {
+      "ref": "step.neuro.swollen-brain",
+      "emphasis": "Debulking the tumour is often the remedy, but only if swelling is from the tumour itself."
+    },
+    {
+      "ref": "step.core.specimen",
+      "emphasis": "Send a smear or frozen section early if the diagnosis decides the extent of resection; label fluorescent and non-fluorescent samples if requested."
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Line the cavity with haemostatic material, ask for a Valsalva manoeuvre and a return to normal blood pressure, and wait for clear irrigation."
+    },
+    {
+      "ref": "step.neuro.dural-repair",
+      "emphasis": "Watertight closure, with a pericranial or synthetic graft if needed."
+    },
+    {
+      "ref": "step.tum.flap-fixation"
+    },
+    {
+      "ref": "step.core.counts",
+      "emphasis": "Count the cottonoids as well as swabs; they are easily lost in a resection cavity."
+    },
+    {
+      "ref": "step.neuro.layered-scalp-closure"
+    },
+    {
+      "ref": "step.neuro.postop-neuro-obs",
+      "emphasis": "Baseline includes limb power, speech and visual fields as well as GCS and pupils."
+    },
+    {
+      "ref": "step.core.debrief",
+      "emphasis": "State the extent of resection as seen, monitoring events, and the post-operative MRI plan."
+    }
+  ],
+  "steps_local": {
+    "step.tum.corticectomy": {
+      "id": "step.tum.corticectomy",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Choosing and making the corticectomy",
+      "why": "The cortical entry decides what is damaged on the way to the tumour. The shortest route is not always the safest: the safest goes through non-eloquent cortex or a sulcus, avoids veins, and reaches the tumour where it comes closest to the surface.",
+      "how": [
+        "Inspect the surface: discoloured, expanded gyri or abnormal vessels often mark the tumour. Confirm with navigation and ultrasound.",
+        "If the tumour is near eloquent cortex, map it by direct cortical stimulation before choosing the entry.",
+        "Coagulate the pia over the chosen entry, avoiding cortical veins, and make a small incision; consider a trans-sulcal route for deeper tumours.",
+        "Descend to the tumour along the navigation trajectory, with gentle retraction by cottonoids or a spatula, and release retraction regularly."
+      ],
+      "structuresAtRisk": [
+        "Eloquent cortex",
+        "Cortical veins and arteries crossing the surface"
+      ],
+      "pitfalls": [
+        "A large cortical opening for a small deep tumour.",
+        "Fixed retraction applied for long periods."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tum.resection": {
+      "id": "step.tum.resection",
+      "kind": "resection",
+      "critical": true,
+      "title": "Tumour resection and judging the margin",
+      "why": "Extent of resection matters for outcome in glioma, but a new permanent deficit matters more to the patient. Internal debulking first lets the tumour fold in on itself so its margins can be dissected with little traction on normal brain.",
+      "how": [
+        "Debulk from the inside with the ultrasonic aspirator or suction and bipolar diathermy, keeping within the tumour.",
+        "For a metastasis or well-defined tumour, develop the gliotic plane around it with cottonoids; for a glioma, follow the abnormal tissue and the 5-ALA fluorescence or ultrasound appearance.",
+        "Coagulate feeding arteries only where they end in the tumour; preserve vessels that pass by it.",
+        "Recheck navigation against a fixed landmark, use ultrasound to look for residual tumour, and accept that the image is shifting.",
+        "Stop at the functional limit: monitoring changes, stimulation responses at the margin, or entry into tissue you believe is eloquent."
+      ],
+      "structuresAtRisk": [
+        "Subcortical tracts",
+        "En passage arteries and perforators",
+        "Ventricular wall",
+        "Draining veins"
+      ],
+      "pitfalls": [
+        "Chasing fluorescence or abnormal signal into eloquent tissue.",
+        "Coagulating an en passage artery that supplies normal brain beyond the tumour.",
+        "Opening the ventricle unnecessarily."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tum.flap-fixation": {
+      "id": "step.tum.flap-fixation",
+      "kind": "reconstruction",
+      "title": "Replacing and fixing the bone flap",
+      "why": "A loose bone flap gives a poor cosmetic result and can move. A flap replaced over a swollen brain can cause compression. The decision to replace it is a deliberate one made on the state of the brain.",
+      "how": [
+        "Replace the flap only if the brain lies below the inner table and the dura is closed.",
+        "Fix it with low-profile plates and screws or clamps, filling burr holes with covers if used locally.",
+        "Close the temporalis muscle and fascia if they were divided, to protect contour and reduce jaw pain.",
+        "If the brain is swollen, follow the swollen-brain bailout: leave the flap out and record where it is stored."
+      ],
+      "structuresAtRisk": [
+        "Cortex beneath a tight flap",
+        "Frontal sinus if opened"
+      ],
+      "pitfalls": [
+        "Replacing the flap over a tight brain.",
+        "Screws long enough to penetrate the dura."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

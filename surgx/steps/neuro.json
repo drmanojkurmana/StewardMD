@@ -1,0 +1,549 @@
+{
+  "_comment": "Steps shared by two or more neurosurgical and spinal operations (burr hole, trauma craniotomy, external ventricular drain, lumbar decompression). Author once, reference everywhere.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.neuro.preop-check": {
+      "id": "step.neuro.preop-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Neurological baseline, side and coagulation check",
+      "why": "In neurosurgery the side and the level are read off a scan, not seen on the skin, and the patient often cannot confirm them. A fresh GCS and pupil check tells you whether the plan made an hour ago is still the right plan.",
+      "how": [
+        "Record GCS by component and pupil size and reaction immediately before anaesthesia, with the time.",
+        "Put the most recent scan up in theatre. Read the side (or spinal level) aloud from the images with the team, and match it to the consent and the skin mark.",
+        "Confirm coagulation, platelet count, and that anticoagulant or antiplatelet reversal has been given or deliberately withheld.",
+        "Confirm blood is grouped and saved or cross-matched according to the operation."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Operating on the side written on the request form rather than the side shown on the scan.",
+        "Assuming a coagulopathy has been corrected because reversal was prescribed, without a repeat result.",
+        "Using an old scan when the patient has deteriorated since it was taken."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.cranial-landmarks": {
+      "id": "step.neuro.cranial-landmarks",
+      "kind": "prep",
+      "title": "Marking cranial landmarks and the incision",
+      "why": "Cranial surgery is planned on surface landmarks that predict what lies beneath. A burr hole or flap in the wrong place turns a simple operation into a hunt, and a badly planned incision compromises the scalp blood supply.",
+      "how": [
+        "Mark the midline, the coronal suture, the pinna and the zygoma before draping, while you can still see the whole head.",
+        "Project the lesion from the scan onto the scalp, and plan the burr hole or flap over its thickest part.",
+        "Keep incisions behind the hairline where possible, and keep a flap base broad enough to carry its blood supply.",
+        "For a ventricular catheter, mark Kocher point: about 11 cm behind the nasion and about 3 cm from the midline, in the mid-pupillary line, anterior to the coronal suture."
+      ],
+      "structuresAtRisk": [
+        "Superficial temporal artery",
+        "Frontal branch of the facial nerve",
+        "Superior sagittal sinus near the midline"
+      ],
+      "pitfalls": [
+        "Marking after draping, when the midline is no longer visible.",
+        "Placing a frontal burr hole too close to the midline and onto the sagittal sinus or its bridging veins."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.burr-hole": {
+      "id": "step.neuro.burr-hole",
+      "kind": "access",
+      "critical": true,
+      "title": "Making a burr hole",
+      "why": "The burr hole is the entry point to the cranial cavity. The perforator is designed to stop at the inner table, but that only works if it is held perpendicular to the skull and allowed to do the work.",
+      "how": [
+        "Incise the scalp to bone, reflect the pericranium and place a self-retaining retractor.",
+        "Use the perforator perpendicular to the skull surface with steady pressure and continuous irrigation, until the clutch disengages at the inner table.",
+        "Widen with a burr if needed, and clear the inner table rim with a fine punch or curette.",
+        "Control diploic bleeding with bone wax and dural surface bleeding with bipolar diathermy."
+      ],
+      "structuresAtRisk": [
+        "Dura and underlying cortex",
+        "Venous sinuses and bridging veins",
+        "Middle meningeal artery under the pterion"
+      ],
+      "pitfalls": [
+        "Angling the perforator, so one edge breaks through before the clutch releases and the drill plunges.",
+        "Using a perforator in a thin, child or osteoporotic skull without extra caution."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.dura-open": {
+      "id": "step.neuro.dura-open",
+      "kind": "access",
+      "title": "Opening the dura",
+      "why": "The dura is the last barrier before brain. Opening it in a controlled way, with the cortex protected, prevents cortical injury and avoids tearing veins that are stretched across the subdural space.",
+      "how": [
+        "Coagulate the dural surface with bipolar diathermy before opening it.",
+        "Lift the dura with a hook or fine forceps and open it with a blade, so the cortex falls away rather than being cut.",
+        "Open in a cruciate or curvilinear fashion sized to the task, with the base towards the venous sinus.",
+        "Look for brain swelling as you open. Tense dura and bulging cortex change the plan."
+      ],
+      "structuresAtRisk": [
+        "Cortex",
+        "Bridging veins and cortical veins",
+        "Venous sinuses"
+      ],
+      "pitfalls": [
+        "Opening tense dura widely over a swollen brain, so the brain herniates through the defect.",
+        "Cutting the dura without lifting it off the cortex."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.drain-tunnel": {
+      "id": "step.neuro.drain-tunnel",
+      "kind": "closure",
+      "title": "Tunnelling and securing a cranial drain",
+      "why": "A cranial drain is a direct path from skin to the central nervous system. A long subcutaneous tunnel and a secure fixation reduce infection and accidental removal, both of which carry serious consequences.",
+      "how": [
+        "Tunnel the catheter subcutaneously away from the wound, exiting through a separate stab incision.",
+        "Secure it at the exit site with a purse-string or anchoring suture, and avoid kinking it in the tunnel.",
+        "Connect to a closed sterile drainage system, and confirm free flow before the drapes come down.",
+        "Label the drain clearly, and agree in writing whether it is to be left open, clamped, or levelled to a set height."
+      ],
+      "structuresAtRisk": [
+        "Scalp vessels",
+        "The catheter itself, from kinking or puncture"
+      ],
+      "pitfalls": [
+        "Exiting the drain through the main wound, which raises the risk of wound leak and infection.",
+        "Leaving the drain unlabelled so the ward does not know what it is or how to manage it."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.dural-repair": {
+      "id": "step.neuro.dural-repair",
+      "kind": "reconstruction",
+      "title": "Dural closure or repair",
+      "why": "A watertight dura keeps cerebrospinal fluid in and infection out. An unrepaired breach can cause a CSF leak, a pseudomeningocele, meningitis or intracranial hypotension.",
+      "how": [
+        "Close the dura primarily with a fine non-absorbable suture where the edges come together without tension.",
+        "Use a graft (pericranium, fascia or a licensed substitute) where primary closure would compress the brain or narrow the theca.",
+        "For an incidental spinal durotomy, repair primarily if accessible, reinforce with a patch or sealant per local practice, and test with a Valsalva manoeuvre requested from the anaesthetist.",
+        "Record the breach, the repair and any post-operative instructions on positioning and mobilisation."
+      ],
+      "structuresAtRisk": [
+        "Nerve roots herniating through a spinal durotomy",
+        "Cortex under a tight cranial closure"
+      ],
+      "pitfalls": [
+        "Forcing a tight primary closure over a swollen brain.",
+        "Catching a nerve root in a spinal dural suture.",
+        "Not telling the ward team about a durotomy, so a post-operative headache or wound leak is missed."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.postop-neuro-obs": {
+      "id": "step.neuro.postop-neuro-obs",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Post-operative neurological observation plan",
+      "why": "Post-operative haematoma and swelling present as a change in neurological observations, often hours after surgery. The plan only works if someone knows the baseline and has a written trigger for calling.",
+      "how": [
+        "Write the post-operative GCS, pupils and limb power (or lower-limb and sphincter function after spinal surgery) as a baseline.",
+        "Prescribe the frequency of neurological observations and a specific trigger: a fall in GCS, a new pupil change, new weakness or new retention.",
+        "State in the note who is called and that an urgent CT or MRI follows any trigger.",
+        "Hand over drains, devices and the plan for anticoagulant restart to the receiving team."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Writing 'routine neuro obs' without a baseline or a trigger.",
+        "Attributing a falling GCS to the anaesthetic or to sedation without imaging."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.head-fixation": {
+      "id": "step.neuro.head-fixation",
+      "kind": "prep",
+      "critical": true,
+      "title": "Head position and fixation: pins or horseshoe",
+      "why": "The head position sets the surgical corridor, the venous drainage of the brain and the risk to the neck. A head that is too flexed or rotated raises intracranial pressure through jugular compression, and a pin that slips mid-operation can lacerate the scalp or fracture the skull.",
+      "how": [
+        "Decide pins (three-point fixation) or a horseshoe headrest before positioning. Pins suit long operations and navigation; a horseshoe or ring suits shunts and many emergencies.",
+        "Place pins away from the frontal sinus, the temporal squama, shunt hardware, old craniotomy defects and the planned incision. Warn the anaesthetist before pin insertion: the surge in blood pressure is predictable.",
+        "Keep the head above the heart, avoid tight flexion or rotation that kinks the jugular veins, and keep two fingers' breadth between the chin and the sternum.",
+        "Support the shoulders with a roll if the head is turned, and check the neck is not hyperextended in a patient with cervical spondylosis.",
+        "Lock every joint of the clamp and test it before draping: once draped, nobody can see the pins."
+      ],
+      "structuresAtRisk": [
+        "Skull and dura under the pins",
+        "Superficial temporal artery",
+        "Jugular venous outflow",
+        "Cervical spine and brachial plexus"
+      ],
+      "pitfalls": [
+        "Pins in a thin child skull or over a fracture, so the pin penetrates the skull.",
+        "Rotating the head more than the neck allows, compressing the jugular veins and producing a tight brain.",
+        "Moving the table after fixation without unlocking and supporting the clamp."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.navigation": {
+      "id": "step.neuro.navigation",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Neuronavigation registration and accuracy check",
+      "why": "Navigation shows the surgeon where an instrument is on the pre-operative scan, not in today's brain. It is only as accurate as the registration, and it becomes progressively less accurate as CSF drains and tumour is removed. Every decision based on it must assume that error.",
+      "how": [
+        "Confirm the navigation scan is the correct patient, correct date and the sequence planned, and that its side matches the consent and the mark.",
+        "Fix the reference frame rigidly to the head clamp (or the skull) where it will not be knocked and stays in camera view.",
+        "Register by surface or fiducials, then verify accuracy on at least three independent bony landmarks such as the nasion, tragus and lateral canthus. Record the error the system reports and the error you see.",
+        "Re-check accuracy on a fixed landmark before any critical decision made on navigation, and again after the dura is opened.",
+        "If accuracy is poor and cannot be improved, proceed on anatomical landmarks and say so aloud. Do not trust a number on the screen over what you can see."
+      ],
+      "structuresAtRisk": [
+        "Wrong-side craniotomy",
+        "Eloquent cortex and white matter tracts",
+        "The ventricle or tumour target being missed"
+      ],
+      "pitfalls": [
+        "Accepting a registration verified only on the face, then working at the vertex where the error is greatest.",
+        "Bumping the reference frame after registration and not re-verifying.",
+        "Trusting navigation late in a resection after brain shift."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.scalp-incision": {
+      "id": "step.neuro.scalp-incision",
+      "kind": "access",
+      "title": "Scalp incision and scalp haemostasis",
+      "why": "The scalp is very vascular and can lose a surprising volume of blood in a child or an anaemic adult. A well-planned incision keeps the blood supply of the flap, keeps the wound off implants, and gives the exposure the operation needs without reopening.",
+      "how": [
+        "Infiltrate the incision with local anaesthetic containing adrenaline where not contraindicated, and wait for it to work.",
+        "Incise in segments, with the assistant pressing either side of the wound while the scalp edge is controlled with clips or haemostats.",
+        "Raise the flap in the subgaleal plane, keeping the pericranium intact if it may be needed for a dural graft, and protect the frontal branch of the facial nerve in temporal exposures by staying deep to the superficial fat pad or within the interfascial plane.",
+        "Wrap the reflected flap in a moist swab and retract it without kinking its base."
+      ],
+      "structuresAtRisk": [
+        "Superficial temporal artery",
+        "Frontal branch of the facial nerve",
+        "Supraorbital and supratrochlear nerves",
+        "Underlying bone in a child or at a fracture"
+      ],
+      "pitfalls": [
+        "Incising the whole length at once and then chasing scalp bleeding.",
+        "A narrow-based or kinked flap that necroses over a bone flap or shunt valve.",
+        "Placing the incision directly over a planned implant."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.craniotomy-flap": {
+      "id": "step.neuro.craniotomy-flap",
+      "kind": "access",
+      "critical": true,
+      "title": "Raising a free bone flap",
+      "why": "The craniotome is safe only when its footplate is separated from the dura. Most dural tears, sinus injuries and cortical lacerations at this stage come from cutting before the dura has been stripped off the inner table, or from cutting across a sinus.",
+      "how": [
+        "Make burr holes at the planned corners, avoiding the sinuses, and strip the dura from the inner table of each with a dissector before cutting.",
+        "Cut between burr holes with the footplate on the dura side, keeping the footplate against the inner table, and cut the side nearest a sinus last.",
+        "Lift the flap with dissectors under its edge, separating the dura as it rises; do not lever it up against adherent dura.",
+        "Control bone edge bleeding with wax and epidural bleeding with bipolar diathermy and haemostatic material.",
+        "Place dural hitch sutures to the bone edge around the craniotomy to close the epidural space and prevent an extradural collection."
+      ],
+      "structuresAtRisk": [
+        "Superior sagittal sinus and transverse sinus",
+        "Middle meningeal artery",
+        "Dura and cortex",
+        "Frontal air sinus"
+      ],
+      "pitfalls": [
+        "Running the craniotome across the midline or a sinus.",
+        "Forcing the footplate through adherent dura in an elderly patient instead of adding a burr hole.",
+        "Opening the frontal sinus and not exenterating and sealing it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.swollen-brain": {
+      "id": "step.neuro.swollen-brain",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Bailout: managing a tight or swelling brain",
+      "why": "A brain that swells out of the craniotomy is either obstructed venous drainage, raised carbon dioxide, a new haematoma, or a lesion you have not yet dealt with. Each has a different remedy, and the worst response is to keep working while the cortex herniates over the bone edge.",
+      "how": [
+        "Say it aloud to the anaesthetist and stop retracting. Check head position, jugular compression, airway pressures, end-tidal carbon dioxide, blood pressure and anaesthetic depth.",
+        "Ask for head-up tilt, osmotherapy, brief controlled hyperventilation and deeper anaesthesia, per local protocol.",
+        "Release CSF where you can: a ventricular puncture or opening a basal cistern.",
+        "If swelling continues without an explanation, consider an evolving haematoma elsewhere, including the contralateral side, and arrange immediate imaging after closure.",
+        "Do not close bone over a brain that is above the bone edge: leave the flap out, perform an expansile duraplasty, store the bone, and record the decision."
+      ],
+      "structuresAtRisk": [
+        "Cortex herniating over the bone edge",
+        "Cortical veins",
+        "Contralateral hemisphere (an unseen haematoma)"
+      ],
+      "pitfalls": [
+        "Removing swollen brain to make room without a diagnosis of the cause.",
+        "Replacing the bone flap over a tight brain to avoid a second operation.",
+        "Not imaging after an unexplained intra-operative swelling."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.layered-scalp-closure": {
+      "id": "step.neuro.layered-scalp-closure",
+      "kind": "closure",
+      "title": "Layered scalp closure",
+      "why": "The galea is the strength layer of the scalp. A closure that relies on skin sutures alone leaks CSF, gapes and becomes infected, and over a shunt or bone flap that infection usually means removing the implant.",
+      "how": [
+        "Close the galea with interrupted inverted absorbable sutures, taking the galea and not just subcutaneous fat.",
+        "Close the skin with staples or a non-absorbable suture that everts the edges, without tension.",
+        "Check that no implant (valve, plates, reservoir) lies directly under the suture line.",
+        "Apply a clean dry dressing; write when the sutures or staples come out, which is often later on the scalp after radiotherapy or steroids."
+      ],
+      "structuresAtRisk": [
+        "Implants under the wound",
+        "Superficial temporal artery in the flap base"
+      ],
+      "pitfalls": [
+        "Skin-only closure that leaks CSF.",
+        "Excess tension on a flap that has been irradiated or that sits over a swollen brain."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.spine-level": {
+      "id": "step.neuro.spine-level",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Radiographic level confirmation before incision and before bone removal",
+      "why": "Wrong-level spine surgery is one of the commonest serious errors in the specialty. The surface anatomy is unreliable, and the error is only prevented by counting on an image, twice, with the count done the same way as on the MRI.",
+      "how": [
+        "Before incision, place a marker on the skin or a spinal needle and take a lateral image. Count from a fixed reference: the sacrum in the lumbar spine, and the C2 vertebra or a visible landmark in the cervical spine.",
+        "Compare the count with the MRI and any whole-spine image, looking for transitional or extra lumbar vertebrae, or rib anomalies.",
+        "After exposure and before any bone or disc is removed, re-image with an instrument fixed on the target lamina, pedicle or disc space, and say the level aloud.",
+        "Save the confirming image to the record."
+      ],
+      "structuresAtRisk": [
+        "The wrong segment",
+        "Neighbouring discs (needle injury to a healthy disc in ACDF)"
+      ],
+      "pitfalls": [
+        "Relying on palpation of spinous processes or the iliac crest line.",
+        "Counting from the sacrum on the image but from the C2 on the MRI, or vice versa.",
+        "Marking a healthy cervical disc with a needle then operating at the wrong one."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.prone-position": {
+      "id": "step.neuro.prone-position",
+      "kind": "prep",
+      "critical": true,
+      "title": "Prone positioning on a spinal frame",
+      "why": "The prone position decides blood loss, lordosis and the risk of blindness. A compressed abdomen raises epidural venous pressure and bleeding. Pressure on the eye, together with hypotension and anaemia, is linked to perioperative visual loss, which is permanent.",
+      "how": [
+        "Log-roll from the trolley with the anaesthetist controlling the head and airway; check the tube and lines after turning.",
+        "Use a frame or bolsters that leave the abdomen hanging free.",
+        "Keep the head neutral or slightly above heart level, with the eyes free of any pressure in a foam or pin headrest; check the eyes at intervals and record it.",
+        "For a fusion, set the hips to maintain lumbar lordosis; for a decompression only, slight flexion widens the interlaminar window.",
+        "Pad the knees, breasts, genitals and the lateral cutaneous nerve of the thigh at the bolster; arms abducted no more than 90 degrees with the elbows padded."
+      ],
+      "structuresAtRisk": [
+        "Eyes and optic nerves",
+        "Lateral cutaneous nerve of the thigh",
+        "Brachial plexus and ulnar nerve",
+        "Breasts and genitals"
+      ],
+      "pitfalls": [
+        "Compressing the abdomen, then fighting epidural bleeding for the rest of the case.",
+        "Fusing a lumbar segment in kyphosis because the patient was flexed on the frame.",
+        "Not rechecking the eyes after the head is moved."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.posterior-exposure": {
+      "id": "step.neuro.posterior-exposure",
+      "kind": "access",
+      "title": "Posterior midline exposure of the lumbar spine",
+      "why": "A clean subperiosteal exposure keeps blood loss low and gives a clear view of the bony landmarks that guide decompression and screw entry. Stripping in the wrong plane, or too far, devascularises muscle and damages facet joints at levels that are not being fused.",
+      "how": [
+        "Incise in the midline over the confirmed levels, and divide the thoracolumbar fascia just off the spinous processes.",
+        "Strip the paraspinal muscles subperiosteally off the spinous processes and laminae with a Cobb elevator and diathermy, packing as you go.",
+        "Expose to the lateral edge of the facet joints for a decompression; extend over the facets to the transverse processes only at levels being fused.",
+        "Preserve the facet capsule and the interspinous ligament at the level above the planned fusion or decompression.",
+        "Place self-retaining retractors, releasing them at intervals in long cases."
+      ],
+      "structuresAtRisk": [
+        "Facet capsules at adjacent levels",
+        "Pars interarticularis",
+        "Dura through an interlaminar gap or a previous laminectomy",
+        "Segmental vessels lateral to the pars"
+      ],
+      "pitfalls": [
+        "Plunging an instrument through the interlaminar space, especially in a revision.",
+        "Damaging the facet capsule above the fusion, a cause of adjacent segment degeneration.",
+        "Diathermy dissection lateral to the transverse process with bleeding from segmental vessels."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.central-decompression": {
+      "id": "step.neuro.central-decompression",
+      "kind": "resection",
+      "critical": true,
+      "title": "Central laminectomy and decompression of the thecal sac",
+      "why": "Stenosis is narrowing by bone, hypertrophied ligamentum flavum and disc. The decompression has to remove the ligament and bone that compress the sac without bruising the sac and without destroying the structures that keep the segment stable.",
+      "how": [
+        "Remove the spinous process and lamina of the stenotic level with rongeurs and a burr, thinning the lamina before removing it.",
+        "Detach the ligamentum flavum from the undersurface of the lamina with a curette, and remove it in pieces with Kerrison rongeurs, keeping the footplate between the ligament and the dura.",
+        "Work from normal dura (above or below the stenosis) into the stenotic segment, not the other way round.",
+        "Undercut the medial facet to decompress the lateral recess, preserving the lateral part of the facet and at least a substantial width of the pars.",
+        "Check the sac pulsates and that a probe passes freely up and down and into the lateral recesses."
+      ],
+      "structuresAtRisk": [
+        "Dura and thecal sac",
+        "Traversing nerve roots in the lateral recess",
+        "Pars interarticularis",
+        "Facet joints"
+      ],
+      "pitfalls": [
+        "Using a Kerrison under the lamina where the dura is adherent to the ligament, tearing the dura.",
+        "Removing so much facet or pars that the segment slips or the pars fractures.",
+        "Leaving a lateral recess or foraminal stenosis so leg pain persists."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.ionm": {
+      "id": "step.neuro.ionm",
+      "kind": "checkpoint",
+      "title": "Neurophysiological monitoring baseline and alarm plan",
+      "why": "Monitoring is only useful if a baseline was obtained before the at-risk step, the anaesthetic allows the signals to be read, and the team has agreed in advance what will happen when the signal changes.",
+      "how": [
+        "Agree the modalities with the neurophysiologist: motor evoked potentials, somatosensory evoked potentials, free-running and triggered EMG, as suited to the operation.",
+        "Agree the anaesthetic with the anaesthetist, usually total intravenous anaesthesia with neuromuscular blockade avoided or reversed when motor potentials are needed.",
+        "Obtain and record baselines after positioning and before the critical step, and protect the patient from bite injury with a bite block when transcranial stimulation is used.",
+        "State the alarm criteria and who calls the alert, and agree that an alert stops the operation until it has been worked through."
+      ],
+      "structuresAtRisk": [
+        "Spinal cord and nerve roots",
+        "Tongue and lips (bite injury)"
+      ],
+      "pitfalls": [
+        "No baseline, so a poor signal cannot be interpreted.",
+        "Paralysing agents or high volatile concentrations that abolish motor potentials.",
+        "Treating an alert as a technical problem without checking the patient first."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.ionm-alert": {
+      "id": "step.neuro.ionm-alert",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Bailout: responding to a monitoring alert or new neurological concern",
+      "why": "A significant drop in evoked potentials signals possible cord or root injury that is often reversible if acted on within minutes. The response is a rehearsed checklist, and its order matters more than its speed.",
+      "how": [
+        "Stop the surgical manoeuvre and announce the pause. Ask what was done just before the change.",
+        "Anaesthesia: raise mean arterial pressure towards or above baseline per local protocol, correct anaemia and hypothermia, check anaesthetic depth and that no relaxant has been given.",
+        "Technical: the neurophysiologist checks leads, stimulation and whether the change is global (more likely systemic) or limited to one limb or root (more likely surgical).",
+        "Surgical: reverse the last step. Release retraction or distraction, remove a graft or cage, check a screw that may be breached, look for compressing haematoma or bone, and irrigate warm saline.",
+        "If signals do not recover, consider a wake-up test, call a senior colleague, consider steroids per local protocol, and arrange urgent imaging. Document times, actions and recovery."
+      ],
+      "structuresAtRisk": [
+        "Spinal cord",
+        "Nerve roots"
+      ],
+      "pitfalls": [
+        "Carrying on with the operation while the alarm is investigated.",
+        "Assuming a global loss is anaesthetic without raising the blood pressure.",
+        "Not recording the time of the alert and of each response."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.spine-closure": {
+      "id": "step.neuro.spine-closure",
+      "kind": "closure",
+      "title": "Layered closure of the posterior spinal wound",
+      "why": "The deep fascia is the barrier against CSF fistula and deep infection. A closure that leaves dead space over a decompression, or that does not hold the fascia, invites seroma, haematoma and wound breakdown, all of which can compress the thecal sac again.",
+      "how": [
+        "Irrigate the wound. Look one final time at the dura for a leak, and ask for a Valsalva manoeuvre if a tear was repaired.",
+        "Decide on a drain: helpful over a large decompression or fusion, avoided or left to free drainage (no suction) after a durotomy repair per surgeon preference. Record the decision.",
+        "Close the thoracolumbar fascia with interrupted or running strong absorbable sutures to a watertight layer.",
+        "Close the subcutaneous fat to eliminate dead space, then the skin without tension, and apply a dressing that can stay for 48 hours."
+      ],
+      "structuresAtRisk": [
+        "Dura (suture needle through the fascia)",
+        "Drain catching the dura or a nerve root"
+      ],
+      "pitfalls": [
+        "A loose fascial closure over a durotomy, leading to a CSF fistula.",
+        "Suction drainage after a dural repair."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.discectomy-endplate": {
+      "id": "step.neuro.discectomy-endplate",
+      "kind": "resection",
+      "critical": true,
+      "title": "Complete discectomy and endplate preparation for interbody fusion",
+      "why": "An interbody fusion fuses bone to bone through the disc space. Disc left behind prevents fusion, and an endplate damaged by aggressive curettage lets the cage sink. The posterior and lateral limits of the disc space are where the neural and vascular structures sit.",
+      "how": [
+        "Incise the annulus with a scalpel in a window sized to the cage, and remove nucleus with pituitary rongeurs.",
+        "Use curettes and shavers to strip cartilage from both endplates while preserving the bony endplate.",
+        "Respect the depth: check instruments on the lateral image, and never pass through the anterior annulus.",
+        "Work across the disc space under direct vision so the decompression and the graft bed are complete on the side away from the approach as well.",
+        "Irrigate and inspect the space; remove loose fragments that could migrate backwards."
+      ],
+      "structuresAtRisk": [
+        "Anterior longitudinal ligament and great vessels (lumbar) or oesophagus and vertebral artery (cervical)",
+        "Spinal cord or traversing root posteriorly",
+        "Bony endplates"
+      ],
+      "pitfalls": [
+        "Breaching the endplate with an aggressive curette, causing subsidence.",
+        "Instruments through the anterior annulus into the great vessels.",
+        "Leaving nucleus on the far side of the disc space."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.neuro.interbody-cage": {
+      "id": "step.neuro.interbody-cage",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Sizing and inserting the interbody cage or graft",
+      "why": "The cage restores disc height and indirectly decompresses the foramen, then carries the graft that will fuse. Too large a cage cracks the endplate or overdistracts and stretches the roots; too small a cage migrates. Its final position must be seen, not assumed.",
+      "how": [
+        "Trial sizes sequentially under imaging. Choose the size that sits snug without forcing, and match the lordosis to the segment.",
+        "Pack the cage with autograft or the agreed graft material, and place graft in the disc space ahead of it as appropriate.",
+        "Insert along the trajectory of the trial, with any neural structure protected by a retractor and under direct vision.",
+        "Confirm position in both planes: recessed from the posterior vertebral line, centred, and not protruding.",
+        "Run the implant check before opening, and record make, size and lot."
+      ],
+      "structuresAtRisk": [
+        "Nerve roots and dura during insertion",
+        "Spinal cord in the cervical spine",
+        "Vertebral endplates"
+      ],
+      "pitfalls": [
+        "Over-distraction that causes a new root deficit.",
+        "Cage left proud of the posterior vertebral line.",
+        "Impacting a cage against an inadequately prepared endplate."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

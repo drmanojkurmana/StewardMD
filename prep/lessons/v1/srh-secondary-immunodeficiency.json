@@ -1,0 +1,213 @@
+{
+  "v": 1,
+  "module": "srh-secondary-immunodeficiency",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Acquired immunodeficiency and immune dysregulation",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Infection with **human immunodeficiency virus** or HIV triggers paradoxical autoimmune and inflammatory rheumatologic manifestations. Patients may develop **reactive arthritis**, severe psoriatic arthritis, or HIV-associated enthesopathy despite falling CD4 counts. Initiation of effective **antiretroviral therapy** controls viral replication, restores helper T cell populations, and usually leads to prompt improvement in autoimmune articular symptoms.",
+      "say": "Human immunodeficiency virus infection triggers paradoxical autoimmune manifestations like reactive arthritis. Antiretroviral therapy controls viral replication and improves these inflammatory symptoms.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Rheumatic feature",
+          "CD4 status",
+          "Pathology",
+          "Management"
+        ],
+        "rows": [
+          [
+            "Reactive arthritis",
+            "Any CD4 level",
+            "HLA-B27 association",
+            "ART plus NSAIDs"
+          ],
+          [
+            "Psoriatic flare",
+            "Low CD4 counts",
+            "Severe cutaneous disease",
+            "ART, avoid methotrexate"
+          ],
+          [
+            "HIV enthesopathy",
+            "Variable",
+            "Axial and heel pain",
+            "Symptomatic treatment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **diffuse infiltrative lymphocytosis syndrome** or DILS arises in HIV-positive patients carrying HLA-DR5 or HLA-DR6. Clinically, DILS mimics Sjogren syndrome with bilateral painless **parotid gland enlargement** and persistent keratoconjunctivitis sicca. Unlike true Sjogren syndrome, labial salivary gland biopsy demonstrates massive infiltration by **CD8 positive T cells**, and autoantibodies anti-Ro and anti-La are consistently negative.",
+      "say": "Diffuse infiltrative lymphocytosis syndrome causes massive parotid swelling in HIV infection. Biopsy demonstrates CD8 positive T cell infiltration, while anti-Ro and anti-La antibodies remain negative.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/complement-c3-deficiency-fig1.webp",
+        "alt": "Secondary immune dysregulation and lymphocyte infiltration",
+        "caption": "Diffuse infiltrative lymphocytosis syndrome produces intense CD8 lymphocytic glandular swelling. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The **immune reconstitution inflammatory syndrome** or IRIS represents an exaggerated inflammatory reaction occurring within weeks to months following antiretroviral therapy initiation. Rapid expansion of functional **CD4 positive T cells** unmasks or worsens subclinical opportunistic infections, notably tuberculosis, cryptococcosis, and cytomegalovirus. Severe inflammatory IRIS flares require continuation of antiretroviral drugs alongside adjunctive systemic glucocorticoids.",
+      "say": "Immune reconstitution inflammatory syndrome follows rapid CD4 recovery after antiretroviral therapy. Expansion of functional helper T cells unmasks dormant infections, requiring glucocorticoid coverage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Antiretroviral therapy started"
+          },
+          {
+            "id": "b",
+            "label": "Rapid CD4 T cell recovery"
+          },
+          {
+            "id": "c",
+            "label": "Intense inflammatory flare against pathogens"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Secondary hypogammaglobulinemia develops in **10 percent to 30 percent** of patients receiving B cell depletion with **rituximab**. Risk factors include low baseline IgG levels, concomitant cyclophosphamide therapy, and repeated maintenance infusion cycles. Recurrent sinopulmonary bacterial infections with serum **IgG below 400 mg/dL** warrant monthly **intravenous immunoglobulin** replacement therapy.",
+      "say": "Rituximab therapy induces secondary hypogammaglobulinemia in 10 to 30 percent of patients. Recurrent bacterial infections with IgG below 400 warrant intravenous immunoglobulin replacement.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Threshold / finding",
+          "Clinical significance"
+        ],
+        "rows": [
+          [
+            "Incidence",
+            "10 to 30 percent",
+            "Common after repeated rituximab"
+          ],
+          [
+            "Serum IgG level",
+            "Below 400 mg/dL",
+            "Critical threshold for infection"
+          ],
+          [
+            "Intervention",
+            "Monthly IVIG replacement",
+            "Reduces sinopulmonary infections"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Anatomic or functional **asplenia** impairs clearance of unopsonized encapsulated bacteria from peripheral blood. Patients carry lifelong vulnerability to **overwhelming postsplenectomy infection**, predominantly caused by **Streptococcus pneumoniae**, Neisseria meningitidis, and Haemophilus influenzae type b. Prevention mandates comprehensive conjugated vaccinations, patient education, and prompt empiric broad-spectrum antibiotics for any unexplained fever.",
+      "say": "Asplenia impairs clearance of encapsulated bacterial pathogens from the bloodstream. Lifelong risk of overwhelming postsplenectomy infection mandates conjugated vaccination against pneumococcus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Loss of splenic macrophage filtration"
+          },
+          {
+            "id": "b",
+            "label": "Impaired opsonized capsule clearance"
+          },
+          {
+            "id": "c",
+            "label": "Fulminant sepsis from Streptococcus pneumoniae"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Severe non-immune protein-losing disorders cause profound secondary hypogammaglobulinemia. **Nephrotic syndrome** with heavy proteinuria and **protein-losing enteropathy** deplete low-molecular-weight serum proteins, particularly albumin and **IgG**, while sparing high-molecular-weight **IgM**. Diagnosis is confirmed by demonstrating elevated 24-hour urine protein excretion or elevated fecal **alpha-1-antitrypsin clearance** exceeding **27 mL/24h**.",
+      "say": "Nephrotic syndrome and protein-losing enteropathy selectively deplete serum IgG while sparing larger IgM molecules. Fecal alpha-1-antitrypsin clearance exceeding 27 confirms intestinal protein loss.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Protein loss",
+          "points": [
+            "Profound drop in serum IgG",
+            "Relative preservation of serum IgM",
+            "Heavy proteinuria or bowel loss",
+            "High fecal alpha-1-antitrypsin"
+          ]
+        },
+        "right": {
+          "title": "Bone marrow failure",
+          "points": [
+            "Pan-hypogammaglobulinemia (IgG, IgA, IgM)",
+            "Reduced circulating B cells",
+            "Normal urine protein excretion",
+            "Impaired vaccine antibody titers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Good syndrome** represents the rare adult-onset association of **thymoma** with marked hypogammaglobulinemia and profound peripheral B cell lymphopenia. Patients typically present in their fifth to seventh decades with recurrent sinopulmonary bacterial infections, chronic diarrhea, and opportunistic viral or fungal pathogens like cytomegalovirus. Thymectomy removes the tumor but fails to reverse the immune deficiency, mandating lifelong **intravenous immunoglobulin** therapy.",
+      "say": "Good syndrome combines thymoma with adult-onset hypogammaglobulinemia and B cell lymphopenia. Thymectomy removes the neoplasm but does not reverse immunodeficiency, requiring lifelong immunoglobulin.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-glomerulonephritis-child-fig1.webp",
+        "alt": "Pathology and immune complex deposition in secondary immunodeficiency",
+        "caption": "Good syndrome produces systemic immunodeficiency and opportunistic infection risk. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Calcineurin inhibitors selectively block **nuclear factor of activated T cells** or NFAT dephosphorylation, shutting down interleukin-2 transcription. Long-term therapy with **cyclosporine** or **tacrolimus** induces severe secondary T cell immunodeficiency. Patients develop elevated risk for opportunistic infections including **Pneumocystis jirovecii**, alongside Epstein-Barr virus-driven **post-transplant lymphoproliferative disorder**.",
+      "say": "Calcineurin inhibitors suppress T cell activation by blocking interleukin-2 transcription. Long-term use elevates risks of Pneumocystis jirovecii pneumonia and post-transplant lymphoproliferative disorder.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Calcineurin inhibition by cyclosporine"
+          },
+          {
+            "id": "b",
+            "label": "Interleukin-2 transcription blocked"
+          },
+          {
+            "id": "c",
+            "label": "T cell immunodeficiency and PJP risk"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

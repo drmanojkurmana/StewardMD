@@ -1,0 +1,143 @@
+{
+  "_comment": "Shared hand surgery steps. Used by carpal tunnel release, trigger finger release and zone II flexor tendon repair.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.hand.anaesthesia": {
+      "id": "step.hand.anaesthesia",
+      "kind": "prep",
+      "title": "Hand anaesthesia: wide-awake local or regional with tourniquet",
+      "why": "The anaesthetic choice shapes the operation. Wide-awake local anaesthesia without tourniquet (WALANT) lets the patient move the finger during surgery, which shows whether a release is complete or a repair gaps, and avoids general anaesthesia and the arm tourniquet.",
+      "how": [
+        "Agree the technique with the patient and the anaesthetist: WALANT, regional block with an arm tourniquet, or general anaesthesia.",
+        "For WALANT, inject local anaesthetic with adrenaline slowly through a fine needle, proximal to distal, and wait for vasoconstriction before incising; calculate the maximum safe dose by weight and record it.",
+        "Have the reversal agent for adrenaline vasoconstriction available per local protocol in case a digit stays pale.",
+        "Explain to the awake patient what they will feel and that you will ask them to move their fingers."
+      ],
+      "structuresAtRisk": [
+        "Digital perfusion",
+        "Nerves (intraneural injection)"
+      ],
+      "pitfalls": [
+        "Incising before the adrenaline has had time to work, so the field bleeds.",
+        "Exceeding the weight-based maximum local anaesthetic dose in a bilateral or multiple-digit case."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hand.incision": {
+      "id": "step.hand.incision",
+      "kind": "access",
+      "title": "Hand incision placed on the creases and safe lines",
+      "why": "Incisions that cross flexion creases at a right angle contract and limit movement. Incisions planned on the creases, the mid-lateral line or as Brunner zigzags heal flat and can be extended safely.",
+      "how": [
+        "Mark the incision before infiltration, relating it to the creases and to the structure you need to reach.",
+        "Use Brunner zigzags or mid-lateral incisions in the digit; never cross a flexion crease at a right angle.",
+        "Incise skin only, then spread in the subcutaneous fat in the line of the nerves before dividing any deeper tissue."
+      ],
+      "structuresAtRisk": [
+        "Digital nerves and arteries",
+        "Palmar cutaneous branches"
+      ],
+      "pitfalls": [
+        "A straight longitudinal incision across a digital crease.",
+        "Cutting deeply in one pass in the palm or digit."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hand.nerve-protection": {
+      "id": "step.hand.nerve-protection",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Identify and protect the nerves before dividing anything",
+      "why": "In the hand the nerves lie close to every structure that is released or repaired, and their position varies. Seeing the nerve before cutting is the only reliable protection.",
+      "how": [
+        "Know where the nerve is expected for this operation and look for it before dividing fascia, pulley or ligament.",
+        "Retract nerves gently with blunt retractors; never hold them with toothed forceps.",
+        "If a nerve is found divided or partially divided, record it and repair it under magnification with fine sutures, or arrange repair with the appropriate surgeon."
+      ],
+      "structuresAtRisk": [
+        "Digital nerves",
+        "Median nerve and its recurrent motor and palmar cutaneous branches",
+        "Superficial palmar arch"
+      ],
+      "pitfalls": [
+        "Assuming textbook anatomy when variants are common.",
+        "Dividing tissue that has not been seen on both sides."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hand.active-check": {
+      "id": "step.hand.active-check",
+      "kind": "checkpoint",
+      "title": "Active movement check before closure",
+      "why": "In a wide-awake patient, full active movement shows what no passive test can: whether triggering has gone, or whether a repair gaps or catches on a pulley. Correcting it now avoids a second operation.",
+      "how": [
+        "Ask the patient to make a full fist and fully extend the digit several times.",
+        "Watch the tendon: it should glide smoothly without triggering, catching or gapping.",
+        "If movement is incomplete, find the cause (residual pulley, tight repair, bulky knot) and correct it, then repeat the check.",
+        "Under general or regional anaesthesia, use passive movement and the tenodesis effect, and record that an active check was not possible."
+      ],
+      "structuresAtRisk": [
+        "Flexor tendons and remaining pulleys"
+      ],
+      "pitfalls": [
+        "Closing because the release 'looked complete'.",
+        "Testing only passive movement when the patient could have moved actively."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hand.unexpected-findings": {
+      "id": "step.hand.unexpected-findings",
+      "kind": "bailout",
+      "title": "Unexpected findings in the hand: stop and get help",
+      "why": "Hand operations booked as routine can reveal a tumour, a nerve variant, tenosynovitis, infection or a tendon gap that cannot be closed primarily. The wrong response is to improvise a reconstruction the patient did not consent to.",
+      "how": [
+        "Stop and reassess the anatomy and the diagnosis before going further.",
+        "Send tissue for histology or culture if it looks abnormal.",
+        "If the planned operation cannot be completed safely (for example a tendon that cannot be repaired primarily), do the minimum safe procedure, close or cover, and plan a further operation with the patient's consent.",
+        "Call a senior hand surgeon when the finding is outside your experience, and record what was found and why the plan changed."
+      ],
+      "structuresAtRisk": [
+        "Nerves and tendons in an unfamiliar anatomy",
+        "Patient consent and expectations"
+      ],
+      "pitfalls": [
+        "Extending the operation into a reconstruction without consent.",
+        "Discarding abnormal tissue without sending it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hand.dressing-therapy": {
+      "id": "step.hand.dressing-therapy",
+      "kind": "closure",
+      "title": "Hand dressing, elevation, splint and therapy plan",
+      "why": "Hand outcome depends on what happens after theatre: swelling and stiffness cause more poor results than technique does. The dressing, the position and the therapy plan are part of the operation.",
+      "how": [
+        "Apply a dressing that does not constrict and leaves the fingertips visible for perfusion checks.",
+        "Splint in the position the operation needs, or leave the hand free to move if early motion is the plan.",
+        "Elevate the hand and start finger movement as instructed. Give written instructions on wound care, warning signs and suture removal.",
+        "Arrange hand therapy where the operation needs it, with the referral made before the patient leaves."
+      ],
+      "structuresAtRisk": [
+        "Digital perfusion (tight dressing)",
+        "Repair or release (wrong splint position)"
+      ],
+      "pitfalls": [
+        "A circumferential dressing that tightens as the hand swells.",
+        "No therapy referral after a tendon repair."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

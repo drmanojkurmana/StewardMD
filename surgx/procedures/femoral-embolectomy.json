@@ -1,0 +1,179 @@
+{
+  "id": "femoral-embolectomy",
+  "title": "Femoral embolectomy",
+  "subtitle": "Balloon catheter embolectomy for acute limb ischaemia",
+  "system": "vascular",
+  "aliases": ["Fogarty embolectomy", "femoral thromboembolectomy", "groin embolectomy"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "esvs-ali-2020", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2020 Clinical Practice Guidelines on the Management of Acute Limb Ischaemia", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/31899099/", "accessed": "2026-11-04" },
+    { "id": "fogarty-1963", "org": "Fogarty TJ et al., Surgery, Gynecology and Obstetrics", "title": "A method for extraction of arterial emboli and thrombi", "year": 1963, "url": "https://pubmed.ncbi.nlm.nih.gov/13945714/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["chadsvasc", "hasbled"],
+  "chapters": {
+    "indications": [
+      "Acute embolic occlusion of the common femoral, iliac or femoropopliteal arteries with a threatened limb (Rutherford IIa or IIb).",
+      "Saddle embolus of the aortic bifurcation, through bilateral groin incisions.",
+      "Thrombosis where an initial embolectomy will be combined with on-table angiography and further revascularisation."
+    ],
+    "contraindications": [
+      "Irreversible ischaemia (Rutherford III), where revascularisation risks fatal reperfusion injury.",
+      "A limb that can wait and has thrombosis on extensive chronic disease, which may be better served by imaging and a planned procedure."
+    ],
+    "preparation": [
+      "Heparin given at diagnosis; potassium, CK, renal function and group and save checked.",
+      "Local anaesthesia with anaesthetic monitoring is suitable for many patients; general anaesthesia for an uncooperative patient or when a bypass or fasciotomy is likely.",
+      "Fluoroscopy and contrast available for on-table angiography.",
+      "Consent for fasciotomy, further bypass and, rarely, amputation."
+    ],
+    "positioning": [
+      "Supine, with the whole affected leg prepped and free, and the other groin prepped for access or vein harvest.",
+      "Radiolucent table for on-table angiography."
+    ],
+    "equipment": [
+      "Balloon embolectomy catheters in several sizes, typically 3 to 5 French for the leg.",
+      "Vascular tray, slings, bulldog clamps and fine monofilament sutures; patch material.",
+      "Heparinised saline, fluoroscopy and contrast."
+    ],
+    "anatomy": [
+      "The common femoral artery lies at the mid-inguinal point, midway between the anterior superior iliac spine and the pubic symphysis, lateral to the femoral vein.",
+      "It divides into the superficial femoral and profunda femoris arteries a few centimetres below the inguinal ligament; the bifurcation is where emboli lodge.",
+      "The femoral nerve lies lateral to the artery, outside the femoral sheath.",
+      "The circumflex iliac and inferior epigastric vessels arise near the inguinal ligament and bleed if not controlled."
+    ],
+    "criticalSafety": [
+      "Inflate the balloon only enough to feel gentle contact with the wall as it is withdrawn. Over-inflation causes intimal injury, dissection and rupture.",
+      "Pass the catheter into the profunda as well as the superficial femoral artery; the profunda may save the limb.",
+      "Completion imaging before closing. Clinical signs on the table are unreliable.",
+      "Decide on fasciotomy before leaving theatre."
+    ],
+    "structuresAtRisk": [
+      "Femoral vein",
+      "Femoral nerve",
+      "Lymphatics of the groin",
+      "Popliteal and tibial arteries during catheter passage"
+    ],
+    "commonErrors": [
+      "Delaying theatre for CT in a IIb limb with a clear embolic history.",
+      "Accepting poor back-bleeding without on-table angiography.",
+      "Over-inflating the balloon and creating a dissection.",
+      "Closing a longitudinal arteriotomy primarily in a small artery, narrowing it."
+    ],
+    "complications": [
+      "Reperfusion injury: hyperkalaemia, acidosis, myoglobinuria and renal failure.",
+      "Compartment syndrome.",
+      "Re-embolism or re-thrombosis.",
+      "Arterial injury from the catheter: dissection, perforation, arteriovenous fistula.",
+      "Groin haematoma, lymphocele and wound infection.",
+      "Death, reflecting the patient's cardiac disease."
+    ],
+    "postop": [
+      "Hourly limb observations, compartment checks and urine output for the first day.",
+      "Potassium and CK after reperfusion.",
+      "Continue heparin and convert to long-term anticoagulation for an embolic source unless contraindicated.",
+      "Echocardiography and cardiology review for the source; send the embolus for histology."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Include fasciotomy, bypass, amputation and death. These are frail patients with cardiac disease." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "The whole limb must be visible and accessible, so that the foot can be examined under the drapes." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare the whole affected leg circumferentially to the toes, in a clear bag, and the contralateral groin and leg for vein or access." },
+    { "ref": "step.emb.groin-exposure" },
+    { "ref": "step.vasc.vessel-control", "emphasis": "Sling the common femoral, superficial femoral and profunda femoris arteries separately." },
+    { "ref": "step.vasc.heparin", "emphasis": "Usually already given at diagnosis. Top it up per local protocol before clamping." },
+    { "ref": "step.emb.arteriotomy" },
+    { "ref": "step.emb.catheter-passes" },
+    { "ref": "step.vasc.flush-backbleed" },
+    { "ref": "step.emb.arteriotomy-closure" },
+    { "ref": "step.vasc.restore-flow" },
+    { "ref": "step.vasc.perfusion-check", "emphasis": "On-table angiography is routine after embolectomy, not an optional extra." },
+    { "ref": "step.emb.fasciotomy-decision" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Send the embolus for histology: an atrial myxoma or tumour embolus changes the whole management." },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.emb.groin-exposure": {
+      "id": "step.emb.groin-exposure",
+      "kind": "access",
+      "title": "Exposure of the femoral bifurcation",
+      "why": "The common femoral bifurcation gives access to the iliac, superficial femoral and profunda arteries through one incision, and is where emboli most often lodge.",
+      "how": [
+        "Make a vertical incision over the femoral artery, from just above the inguinal ligament downwards, centred on the mid-inguinal point.",
+        "Divide the femoral sheath over the artery, ligating lymphatics to reduce lymphocele.",
+        "Expose the common femoral artery and its bifurcation, identifying the profunda origin posterolaterally."
+      ],
+      "structuresAtRisk": ["Femoral vein", "Femoral nerve", "Groin lymphatics"],
+      "pitfalls": ["An incision too low, which finds the superficial femoral artery and misses the profunda.", "Dividing lymphatics without ligation."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.emb.arteriotomy": {
+      "id": "step.emb.arteriotomy",
+      "kind": "access",
+      "title": "Arteriotomy",
+      "why": "The site and direction of the arteriotomy decide how easily the catheter enters each branch and whether the artery can be closed without narrowing.",
+      "how": [
+        "A transverse arteriotomy in the common femoral artery just above the bifurcation in a soft, healthy artery: it closes primarily without narrowing.",
+        "A longitudinal arteriotomy if the artery is diseased and an endarterectomy, patch or bypass may follow.",
+        "Remove any embolus visible at the arteriotomy before passing catheters."
+      ],
+      "structuresAtRisk": ["Back wall of the artery"],
+      "pitfalls": ["Cutting the back wall with the knife.", "A transverse arteriotomy in a heavily diseased artery that then cannot be extended."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.emb.catheter-passes": {
+      "id": "step.emb.catheter-passes",
+      "kind": "resection",
+      "critical": true,
+      "title": "Balloon catheter passes",
+      "why": "The balloon catheter extracts clot from vessels that cannot be reached directly. The technique is simple; the harm comes from force and from stopping before the job is done.",
+      "how": [
+        "Pass an appropriately sized catheter proximally into the iliac system until inflow is pulsatile and strong.",
+        "Pass catheters distally into the superficial femoral and profunda arteries, as far as they go, inflating the balloon gently while withdrawing, with the operator feeling the wall.",
+        "Repeat until two consecutive passes return no clot and back-bleeding is brisk.",
+        "If catheters will not pass beyond the knee or back-bleeding stays poor, proceed to on-table angiography and consider a separate below-knee popliteal exploration."
+      ],
+      "structuresAtRisk": ["Intima of the superficial femoral and popliteal arteries", "Tibial arteries"],
+      "pitfalls": [
+        "Over-inflating the balloon, causing intimal damage that later thromboses.",
+        "Stopping after one clean pass."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.emb.arteriotomy-closure": {
+      "id": "step.emb.arteriotomy-closure",
+      "kind": "closure",
+      "title": "Closure of the arteriotomy",
+      "why": "A closure that narrows the artery creates the stenosis that will thrombose the repair.",
+      "how": [
+        "Close a transverse arteriotomy primarily with interrupted or continuous fine monofilament sutures.",
+        "Close a longitudinal arteriotomy with a patch (vein or prosthetic) unless the artery is large.",
+        "Flush and back-bleed before tying the final suture."
+      ],
+      "structuresAtRisk": ["Intima of the femoral artery"],
+      "pitfalls": ["Primary closure of a longitudinal arteriotomy in a small artery.", "Raising an intimal flap with the needle on the distal edge."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.emb.fasciotomy-decision": {
+      "id": "step.emb.fasciotomy-decision",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Fasciotomy decision",
+      "why": "Reperfusion swelling causes compartment syndrome hours later, often at night, when nerve and muscle loss are then irreversible. The decision is cheapest in theatre.",
+      "how": [
+        "Consider four-compartment fasciotomy after prolonged ischaemia, after a IIb limb, or when the calf is already tense.",
+        "Use two incisions, lateral and medial, decompressing all four compartments.",
+        "If not done, document the reasoning and arrange regular compartment checks."
+      ],
+      "structuresAtRisk": ["Superficial peroneal nerve", "Saphenous vein and nerve"],
+      "pitfalls": ["Deferring the decision to the ward team overnight.", "A single incision that misses the deep posterior compartment."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

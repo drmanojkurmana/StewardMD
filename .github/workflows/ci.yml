@@ -92,7 +92,8 @@ jobs:
 
   security-scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # 20, not 10: actions/checkout of this large repo hit the 10-min cap and cancelled merges (2026-11-04)
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

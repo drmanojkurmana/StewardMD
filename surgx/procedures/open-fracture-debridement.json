@@ -1,0 +1,285 @@
+{
+  "id": "open-fracture-debridement",
+  "title": "Debridement of an open fracture with external fixation",
+  "subtitle": "Orthoplastic wound excision, lavage and spanning frame",
+  "system": "musculoskeletal",
+  "aliases": [
+    "wound excision",
+    "open fracture debridement",
+    "ex-fix",
+    "external fixator"
+  ],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "boast-open",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Open Fractures",
+      "year": 2017,
+      "url": "https://www.boa.ac.uk/resource/boast-4-pdf.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng37",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Fractures (complex): assessment and management (NG37)",
+      "year": 2016,
+      "version": "NG37",
+      "url": "https://www.nice.org.uk/guidance/ng37",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "flow-2015",
+      "org": "FLOW Investigators. N Engl J Med 373:2629",
+      "title": "A trial of wound irrigation in the initial management of open fracture wounds",
+      "year": 2015,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26448371/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "gustilo-1976",
+      "org": "Gustilo RB, Anderson JT. J Bone Joint Surg Am 58:453",
+      "title": "Prevention of infection in the treatment of one thousand and twenty-five open fractures of long bones",
+      "year": 1976,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/773941/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "gustilo-1984",
+      "org": "Gustilo RB et al. J Trauma 24:742",
+      "title": "Problems in the management of type III (severe) open fractures: a new classification of type III open fractures",
+      "year": 1984,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/6471139/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "abi"
+  ],
+  "chapters": {
+    "indications": [
+      "Every open long-bone, hindfoot or midfoot fracture, within the time standards: immediately when highly contaminated or with vascular compromise, within 12 hours for high-energy fractures and within 24 hours for the rest.",
+      "External fixation when definitive internal fixation cannot be followed immediately by definitive soft-tissue cover."
+    ],
+    "contraindications": [
+      "None to debridement itself. Physiological instability changes the scale and timing of the operation, not the need for it.",
+      "Internal fixation is contraindicated if definitive soft-tissue cover cannot follow at the same sitting."
+    ],
+    "preparation": [
+      "Joint orthopaedic and plastic surgery consultant plan for debridement, stabilisation and cover.",
+      "Antibiotics already given; wound photographs on the record; neurovascular status documented.",
+      "Consent covers further debridement, flap surgery, infection, non-union and the possibility of amputation."
+    ],
+    "positioning": [
+      "Supine on a radiolucent table with the limb free and supported.",
+      "Tourniquet applied but not routinely inflated.",
+      "C-arm access to the whole segment and the joints at either end."
+    ],
+    "equipment": [
+      "Debridement set, curettes, rongeurs and bone nibblers.",
+      "Large-volume saline for low-pressure irrigation.",
+      "External fixator set with half-pins, clamps and bars.",
+      "A second clean set of instruments, gowns and drapes for after debridement."
+    ],
+    "anatomy": [
+      "Perforators from the posterior tibial artery emerge along the medial border of the tibia and supply local fasciocutaneous flaps; incisions must spare them.",
+      "The anteromedial surface of the tibia is the safe corridor for half-pins.",
+      "Four compartments in the leg, each with its own neurovascular content."
+    ],
+    "criticalSafety": [
+      "Debride systematically, layer by layer, from the outside in, to healthy bleeding tissue.",
+      "Extend the wound along fasciotomy lines so later flap options are preserved.",
+      "Treat everything after debridement as clean surgery: re-prepare, re-drape and use fresh instruments.",
+      "Place pins outside the zone of injury and away from where the plastic surgeon will need to work."
+    ],
+    "structuresAtRisk": [
+      "Posterior tibial perforators",
+      "Neurovascular bundles at the depth of the wound",
+      "Neurovascular structures in the path of half-pins"
+    ],
+    "commonErrors": [
+      "Debriding to a cosmetic margin rather than a viable one.",
+      "Leaving loose cortical fragments without soft-tissue attachment.",
+      "Pins placed through the future flap or fixation zone.",
+      "Closing a contaminated wound under tension."
+    ],
+    "complications": [
+      "Deep infection and fracture-related infection.",
+      "Further tissue necrosis requiring repeat debridement.",
+      "Pin-site infection and loosening.",
+      "Non-union, malunion and amputation."
+    ],
+    "postop": [
+      "Neurovascular and compartment observations.",
+      "Antibiotics per the network guideline.",
+      "Return for definitive fixation and soft-tissue cover within 72 hours of injury if not done at this sitting.",
+      "Pin-site care per local protocol."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Limb free on a radiolucent table with the C-arm able to see the joints at both ends of the segment."
+    },
+    {
+      "ref": "step.ortho.tourniquet",
+      "emphasis": "Apply but do not inflate unless bleeding obscures the field. Bleeding is how viable tissue identifies itself."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.ortho.wound-photos"
+    },
+    {
+      "ref": "step.ortho.leg-incisions",
+      "emphasis": "Extend the wound along the fasciotomy lines. The medial incision alone is often enough for debridement and spares the perforators."
+    },
+    {
+      "ref": "step.st.debride",
+      "emphasis": "Layer by layer: skin, fat, fascia, muscle, then bone. Excise to bleeding, healthy tissue."
+    },
+    {
+      "ref": "step.ortho.muscle-viability"
+    },
+    {
+      "ref": "step.oex.bone"
+    },
+    {
+      "ref": "step.oex.lavage"
+    },
+    {
+      "ref": "step.oex.reprep"
+    },
+    {
+      "ref": "step.ortho.image-intensifier"
+    },
+    {
+      "ref": "step.ortho.reduction-check"
+    },
+    {
+      "ref": "step.ortho.implant-check"
+    },
+    {
+      "ref": "step.oex.frame"
+    },
+    {
+      "ref": "step.ortho.final-imaging"
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.ortho.temp-cover"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.ortho.nv-check"
+    },
+    {
+      "ref": "step.core.debrief",
+      "emphasis": "Record the Gustilo-Anderson grade now, after debridement, along with the plan and date for definitive cover."
+    }
+  ],
+  "steps_local": {
+    "step.oex.bone": {
+      "id": "step.oex.bone",
+      "kind": "resection",
+      "critical": true,
+      "title": "Bone end debridement",
+      "why": "Devitalised bone is a sequestrum in waiting. Cortical fragments without soft-tissue attachment are dead and will become the focus of infection.",
+      "how": [
+        "Deliver each bone end into the wound by flexing or angulating the limb gently.",
+        "Remove loose cortical fragments with no soft-tissue attachment; curette contaminated cancellous bone and the canal ends.",
+        "Keep large articular fragments that are needed for joint reconstruction, after cleaning them."
+      ],
+      "structuresAtRisk": [
+        "Neurovascular bundle adjacent to the fracture"
+      ],
+      "pitfalls": [
+        "Keeping a fragment because it fits.",
+        "Stripping more periosteum than the injury already has."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.oex.lavage": {
+      "id": "step.oex.lavage",
+      "kind": "resection",
+      "title": "Low-pressure irrigation",
+      "why": "Irrigation dilutes what debridement cannot pick out. The FLOW trial supported low-pressure delivery and found more reoperations with soap than with saline.",
+      "how": [
+        "Irrigate with large volumes of saline at low pressure after excision is complete.",
+        "Irrigate the canal ends and every recess of the wound.",
+        "Do not use irrigation as a substitute for excision."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "High-pressure pulsed lavage that drives contamination into tissue planes.",
+        "Washing before excising."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.oex.reprep": {
+      "id": "step.oex.reprep",
+      "kind": "prep",
+      "title": "Re-preparation and fresh instruments",
+      "why": "Once debridement is complete, anything implanted or reconstructed at the same sitting should be done as clean surgery, not with the instruments that handled the contamination.",
+      "how": [
+        "Remove the dirty drapes and instruments; the team changes gloves and gowns.",
+        "Re-prepare the skin and re-drape.",
+        "Bring a fresh set of instruments for stabilisation."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Continuing to fixation with the debridement set."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.oex.frame": {
+      "id": "step.oex.frame",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Spanning external fixator",
+      "why": "A frame holds length and alignment while the soft tissues declare themselves, without placing metal in a contaminated wound.",
+      "how": [
+        "Plan pin sites with the plastic surgeon: outside the zone of injury and away from future flaps and definitive fixation.",
+        "Insert two bicortical half-pins in each main fragment through safe corridors, the anteromedial tibia in the leg.",
+        "Connect with clamps and bars close to the skin, restore length and alignment under image control, then tighten."
+      ],
+      "structuresAtRisk": [
+        "Neurovascular structures in the path of pins",
+        "Future flap territory"
+      ],
+      "pitfalls": [
+        "Pins through the wound or the zone of injury.",
+        "Bars too far from the bone, producing an unstable frame."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

@@ -134,6 +134,7 @@
             id: entry.id, kind: "engine", title: syn.name,
             subtitle: entry.subtitle || o.subtitle || "",
             category: entry.category || o.category || "surgical_emergency",
+            specialty: entry.specialty || "general",
             shared: !!syn.shared,
             review: o.review ? M.reviewStatus(o) : "published",
             sourced: !!(o.sources && o.sources.length)
@@ -142,6 +143,7 @@
           out.push({
             id: entry.id, kind: "authored", title: entry.title,
             subtitle: entry.subtitle || "", category: entry.category || "surgical_emergency",
+            specialty: entry.specialty || "general",
             review: entry.review || "draft",
             sourced: true,
             // Only a deprecated protocol is withheld from the index; review status never hides one.

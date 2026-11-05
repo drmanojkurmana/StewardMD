@@ -1,0 +1,63 @@
+{
+  "id": "ent-epistaxis",
+  "title": "Epistaxis",
+  "subtitle": "The ladder: pressure, cautery, pack, ligate or embolise",
+  "category": "ent_emergency",
+  "specialty": "ent",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "aaohns-epistaxis", "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)", "title": "Clinical Practice Guideline: Nosebleed (Epistaxis)", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/31910111/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Haemodynamic compromise: tachycardia, hypotension, syncope, or a falling haemoglobin. Older patients on anticoagulants decompensate quietly." },
+      { "text": "Bleeding from both nostrils or down the throat with no anterior source seen: a posterior bleed, which will not stop with anterior measures." },
+      { "text": "Bleeding that continues despite correctly applied compression and a well-placed anterior pack." },
+      { "text": "Recurrent unilateral epistaxis with nasal obstruction in an adolescent boy: juvenile nasopharyngeal angiofibroma until imaged. Do not biopsy." },
+      { "text": "Unilateral epistaxis with obstruction, facial swelling, numbness or a neck mass in an adult: sinonasal or nasopharyngeal malignancy." },
+      { "text": "Massive bleeding after head and neck trauma, surgery or radiotherapy: consider carotid injury or pseudoaneurysm." }
+    ],
+    "do_now": [
+      { "text": "Sit the patient up and leaning forward, spitting blood out rather than swallowing it. Assess airway, breathing and circulation first.", "timeCritical": true, "evidenceRef": "aaohns-epistaxis" },
+      { "text": "Firm sustained compression of the soft lower third of the nose for at least 5 minutes, timed by the clock, without releasing to check.", "timeCritical": true, "evidenceRef": "aaohns-epistaxis" },
+      { "text": "Intravenous access with full blood count, and coagulation tests when the patient is anticoagulated or a bleeding disorder is suspected. Group and save if bleeding is heavy.", "timeCritical": true, "evidenceRef": "aaohns-epistaxis" },
+      { "text": "Topical vasoconstrictor and local anaesthetic on a cotton pledget to slow the bleeding and allow examination.", "evidenceRef": "aaohns-epistaxis" }
+    ],
+    "assess": [
+      { "text": "Clear the clot by suction or nose blowing, then perform anterior rhinoscopy with a headlight. Most bleeds arise from Little's area on the anterior septum." },
+      { "text": "Nasal endoscopy when the site cannot be seen anteriorly, to look for a posterior source or a lesion." },
+      { "text": "History: duration, side, previous episodes, anticoagulant and antiplatelet use, bleeding history, family history of telangiectasia, trauma, recent nasal surgery, intranasal drug use." },
+      { "text": "Record pulse, blood pressure and an early warning score, and estimate loss. Treat hypertension only as part of overall care: it is common and usually reflects distress.", "calcs": ["news2", "shock_index"] },
+      { "text": "Look for telangiectasia on lips, tongue and fingers. Hereditary haemorrhagic telangiectasia changes the treatment: avoid repeated cautery and non-resorbable packing where possible." }
+    ],
+    "investigate": [
+      { "text": "Full blood count and, for patients on warfarin, an INR. Routine coagulation screening is not needed in a patient with no risk factors." },
+      { "text": "Crossmatch when the patient is shocked or the bleeding is ongoing." },
+      { "text": "CT angiography if embolisation is being considered, or contrast-enhanced imaging and MRI for a suspected tumour." }
+    ],
+    "resuscitate": [
+      { "text": "Fluids and blood products for haemodynamic instability, as for any haemorrhage, while bleeding control proceeds.", "evidenceRef": "aaohns-epistaxis" },
+      { "text": "Do not routinely stop anticoagulants or antiplatelets before first-line treatment. Reverse or withhold them only for life-threatening bleeding, in discussion with the prescribing team.", "evidenceRef": "aaohns-epistaxis" }
+    ],
+    "definitive": [
+      { "text": "Rung 1: when a bleeding point is seen, cauterise it under topical anaesthesia, restricting cautery to the active or suspected site. Avoid bilateral simultaneous septal cautery, which risks septal perforation.", "evidenceRef": "aaohns-epistaxis" },
+      { "text": "Rung 2: if bleeding continues or no point is seen, place an anterior nasal pack. Use a resorbable pack when the patient is anticoagulated or has a bleeding disorder.", "timeCritical": true, "evidenceRef": "aaohns-epistaxis" },
+      { "text": "Rung 3: for a posterior bleed, place a posterior pack or balloon device and admit to a monitored setting. Posterior packs can cause hypoxia and airway compromise.", "timeCritical": true, "evidenceRef": "aaohns-epistaxis" },
+      { "text": "Rung 4: persistent or recurrent bleeding despite packing or cautery needs endoscopic sphenopalatine artery ligation or endovascular embolisation.", "evidenceRef": "aaohns-epistaxis" },
+      { "text": "Explain the type of pack, the plan for its removal, and what to do if bleeding recurs, and document it.", "evidenceRef": "aaohns-epistaxis" }
+    ],
+    "escalate": [
+      { "text": "Call ENT for any patient who needs packing, a posterior bleed, or a bleed that does not settle with first aid and cautery." },
+      { "text": "Involve interventional radiology early for bleeding that defeats packing, especially in a patient unfit for anaesthesia." },
+      { "text": "Discuss anticoagulant reversal with haematology for life-threatening bleeding, and arrange follow-up for suspected hereditary haemorrhagic telangiectasia." }
+    ]
+  },
+  "notes": [
+    "Five minutes means five minutes by the clock. Most failed first aid is compression that was released every 30 seconds to check, or pressure on the nasal bones instead of the soft nose.",
+    "A patient with an anterior pack who keeps swallowing has a posterior bleed. Look in the mouth.",
+    "Packing is a bridge, not a cure. Every packed patient needs a plan for what comes after the pack."
+  ],
+  "calcs": ["news2", "shock_index"]
+}

@@ -1,0 +1,65 @@
+{
+  "id": "aneurysmal-sah",
+  "title": "Aneurysmal subarachnoid haemorrhage",
+  "subtitle": "Diagnose, grade, secure the aneurysm",
+  "category": "neuro_cranial",
+  "specialty": "neurosurgery",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "nice-ng228", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Subarachnoid haemorrhage caused by a ruptured aneurysm: diagnosis and management (NG228)", "year": 2022, "version": "NG228", "url": "https://www.nice.org.uk/guidance/ng228", "accessed": "2026-11-04" },
+    { "id": "aha-2023", "org": "American Heart Association / American Stroke Association", "title": "2023 Guideline for the management of patients with aneurysmal subarachnoid hemorrhage (Hoh et al, Stroke 2023;54:e314-e370)", "year": 2023, "url": "https://www.ahajournals.org/doi/10.1161/STR.0000000000000436", "accessed": "2026-11-04" },
+    { "id": "isat", "org": "International Subarachnoid Aneurysm Trial (ISAT) Collaborative Group", "title": "International Subarachnoid Aneurysm Trial of neurosurgical clipping versus endovascular coiling in 2143 patients with ruptured intracranial aneurysms (Molyneux et al, Lancet 2002;360:1267-74)", "year": 2002, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Molyneux+2002+International+Subarachnoid+Aneurysm+Trial+Lancet", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Thunderclap headache: sudden, severe, reaching maximum intensity within minutes." },
+      { "text": "Headache with collapse, seizure, neck stiffness, vomiting or a reduced conscious level." },
+      { "text": "A third nerve palsy with a dilated pupil: a posterior communicating artery aneurysm until proven otherwise." },
+      { "text": "Sudden further deterioration after admission: rebleeding, acute hydrocephalus, or seizure." },
+      { "text": "New focal deficit or falling GCS between days 3 and 14: delayed cerebral ischaemia." }
+    ],
+    "do_now": [
+      { "text": "Airway, breathing and circulation. Intubate a patient who cannot protect the airway.", "timeCritical": true, "evidenceRef": "aha-2023" },
+      { "text": "Non-contrast CT head as soon as possible. Within 6 hours of headache onset a normal CT reported by a competent reader makes SAH unlikely.", "timeCritical": true, "evidenceRef": "nice-ng228" },
+      { "text": "If CT more than 6 hours after onset is normal, consider lumbar puncture at least 12 hours after onset for xanthochromia.", "evidenceRef": "nice-ng228" },
+      { "text": "Refer to the regional neurosurgical centre as soon as SAH is confirmed.", "timeCritical": true, "evidenceRef": "nice-ng228" }
+    ],
+    "assess": [
+      { "text": "Grade the clinical state at presentation and after resuscitation. The post-resuscitation grade predicts outcome better.", "calcs": ["wfns", "hunt_hess", "gcs"] },
+      { "text": "Grade the blood load on CT, which predicts the risk of vasospasm and delayed cerebral ischaemia.", "calcs": ["modified_fisher", "fisher"] },
+      { "text": "Look for hydrocephalus, intraparenchymal haematoma and intraventricular blood on the first scan." },
+      { "text": "Ask about anticoagulants, hypertension, smoking, family history and polycystic kidney disease." }
+    ],
+    "investigate": [
+      { "text": "CT angiography to identify the aneurysm, with catheter angiography when CTA is negative or unclear." },
+      { "text": "Sodium twice daily or more often: hyponatraemia is common and is not treated by fluid restriction in SAH." },
+      { "text": "ECG and troponin. Neurogenic stunned myocardium can cause ECG changes and heart failure." },
+      { "text": "Repeat CT for any deterioration, before deciding the cause." }
+    ],
+    "resuscitate": [
+      { "text": "Oral or nasogastric nimodipine 60 mg every 4 hours for 21 days to reduce delayed cerebral ischaemia.", "evidenceRef": "nice-ng228" },
+      { "text": "Control severe hypertension before the aneurysm is secured, avoiding hypotension. Agree the target with the neurovascular team.", "evidenceRef": "aha-2023" },
+      { "text": "Maintain euvolaemia. Do not use prophylactic hypervolaemia or induced hypertension.", "evidenceRef": "aha-2023" },
+      { "text": "Reverse anticoagulation urgently, per local protocol.", "evidenceRef": "aha-2023" },
+      { "text": "External ventricular drainage for acute hydrocephalus with a reduced conscious level.", "evidenceRef": "aha-2023" }
+    ],
+    "definitive": [
+      { "text": "Secure the ruptured aneurysm as early as feasible. AHA advises early treatment, preferably within 24 hours of onset, to reduce rebleeding.", "timeCritical": true, "evidenceRef": "aha-2023" },
+      { "text": "Choose coiling or clipping in a multidisciplinary decision. Where both are suitable, endovascular coiling had better 1-year independent survival in ISAT.", "evidenceRef": "isat" },
+      { "text": "Evacuate a large intracerebral haematoma with mass effect, usually with clipping at the same operation.", "evidenceRef": "aha-2023" }
+    ],
+    "escalate": [
+      { "text": "All confirmed SAH goes to a neurosurgical centre with neurovascular and interventional neuroradiology services." },
+      { "text": "Intensive care for poor-grade patients, an EVD, or any airway concern." },
+      { "text": "Sudden deterioration on the ward: call the neurosurgical team and get a CT at once. Rebleed and hydrocephalus are both treatable if found quickly." }
+    ]
+  },
+  "notes": [
+    "The sentinel headache is the missed diagnosis. A sudden worst headache needs a CT, even if the patient now looks well.",
+    "Hyponatraemia after SAH is often salt wasting. Fluid restriction makes the patient hypovolaemic and worsens ischaemia.",
+    "Nimodipine works by neuroprotection rather than by preventing angiographic spasm. Give it even when the angiogram looks clean."
+  ],
+  "calcs": ["wfns", "hunt_hess", "modified_fisher", "fisher", "gcs"]
+}

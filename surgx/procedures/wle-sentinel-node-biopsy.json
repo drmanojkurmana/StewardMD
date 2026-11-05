@@ -1,0 +1,161 @@
+{
+  "id": "wle-sentinel-node-biopsy",
+  "title": "Wide local excision with sentinel node biopsy",
+  "subtitle": "Breast-conserving surgery and axillary staging",
+  "system": "breast",
+  "aliases": ["WLE", "lumpectomy", "breast-conserving surgery", "SLNB", "sentinel lymph node biopsy"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng101", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Early and locally advanced breast cancer: diagnosis and management (NG101)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng101", "accessed": "2026-11-04" },
+    { "id": "sso-astro", "org": "Society of Surgical Oncology (SSO) and American Society for Radiation Oncology (ASTRO)", "title": "Consensus guideline on margins for breast-conserving surgery with whole-breast irradiation in stages I and II invasive breast cancer (Moran MS et al.)", "year": 2014, "url": "https://www.astro.org/patient-care-and-research/clinical-practice-statements/clinical-practice-guidelines", "accessed": "2026-11-04" },
+    { "id": "sso-astro-asco-dcis", "org": "Society of Surgical Oncology (SSO), American Society for Radiation Oncology (ASTRO) and American Society of Clinical Oncology (ASCO)", "title": "Consensus guideline on margins for breast-conserving surgery with whole-breast irradiation in ductal carcinoma in situ (Morrow M et al.)", "year": 2016, "url": "https://www.astro.org/patient-care-and-research/clinical-practice-statements/clinical-practice-guidelines", "accessed": "2026-11-04" },
+    { "id": "asco-slnb", "org": "American Society of Clinical Oncology (ASCO)", "title": "Sentinel lymph node biopsy for patients with early-stage breast cancer: ASCO clinical practice guideline update (Lyman GH et al., J Clin Oncol)", "year": 2017, "url": "https://society.asco.org/practice-patients/guidelines", "accessed": "2026-11-04" },
+    { "id": "z0011", "org": "JAMA", "title": "Effect of axillary dissection vs no axillary dissection on 10-year overall survival among women with invasive breast cancer and sentinel node metastasis: the ACOSOG Z0011 (Alliance) randomized clinical trial (Giuliano AE et al.)", "year": 2017, "url": "https://jamanetwork.com/journals/jama/fullarticle/2653735", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["npi_breast", "caprini", "apfel"],
+  "chapters": {
+    "indications": [
+      "Unifocal early breast cancer that can be excised with clear margins and an acceptable cosmetic result, in a patient able to receive radiotherapy.",
+      "Clinically and radiologically node-negative axilla: sentinel node biopsy for axillary staging.",
+      "Selected patients after neoadjuvant systemic therapy with a good response, as decided by the MDT."
+    ],
+    "contraindications": [
+      "Contraindication to radiotherapy (for example previous chest wall irradiation or certain connective tissue diseases), unless the MDT agrees otherwise.",
+      "Multicentric disease or diffuse malignant calcification that cannot be excised with clear margins and a reasonable cosmetic result.",
+      "Inflammatory breast cancer.",
+      "Biopsy-proven axillary nodal disease before treatment, where sentinel node biopsy alone is not the planned axillary treatment."
+    ],
+    "preparation": [
+      "Triple assessment with receptor status, axillary ultrasound, and MDT decision on breast and axillary surgery.",
+      "Localisation of an impalpable lesion (wire, magnetic seed, radioactive seed or radar reflector) and confirmation imaging available in theatre.",
+      "Sentinel node tracer: radioisotope injected before surgery per nuclear medicine protocol, with blue dye or a magnetic tracer in theatre for a dual technique.",
+      "Consent: re-excision for involved margins, conversion to axillary clearance or further axillary treatment, blue dye allergy and skin staining, seroma, numbness, and lymphoedema risk."
+    ],
+    "positioning": [
+      "Supine with the ipsilateral arm abducted to no more than 90 degrees on an arm board.",
+      "Slight lateral tilt for an outer quadrant lesion.",
+      "Gamma probe and screen positioned so the surgeon can read the count while dissecting."
+    ],
+    "equipment": [
+      "Gamma probe or magnetometer for the sentinel node; blue dye where used.",
+      "Specimen radiography (cabinet or theatre) for impalpable lesions and calcifications.",
+      "Radio-opaque clips for marking the cavity for radiotherapy planning.",
+      "Orientation sutures or clips agreed with pathology."
+    ],
+    "anatomy": [
+      "Lymph from the breast drains predominantly to the axilla, and the sentinel node is usually in level I, low in the axilla behind the lateral border of pectoralis major.",
+      "The intercostobrachial nerve crosses the axilla near the usual site of the sentinel node.",
+      "Breast lesions are described by clock face position and distance from the nipple; the incision is planned along Langer's lines or circumareolar for central lesions.",
+      "The axillary vein and the long thoracic and thoracodorsal nerves lie deeper and above the usual sentinel node position and are not normally exposed."
+    ],
+    "criticalSafety": [
+      "Confirm the localisation device and the side before incision, and confirm on specimen radiograph that the lesion and the device are in the specimen.",
+      "Remove every node that is radioactive, blue or magnetic, and any palpably suspicious node, then check the residual count in the axilla.",
+      "Orient the specimen before it leaves the field: an unoriented close margin means re-excising the whole cavity.",
+      "Aim for no ink on tumour for invasive cancer, and a 2 mm margin for DCIS treated with whole-breast radiotherapy."
+    ],
+    "structuresAtRisk": [
+      "Intercostobrachial nerve",
+      "Axillary vein (in a deep or difficult sentinel node search)",
+      "Skin of the breast (blue dye staining, flap compromise in thin breasts)",
+      "Pectoralis major fascia and chest wall in a deep lesion"
+    ],
+    "commonErrors": [
+      "Removing a large volume of normal breast in place of a well-planned excision, worsening the cosmetic result without improving margins.",
+      "Stopping the sentinel node search after the first hot node despite a high residual count.",
+      "Not marking the cavity with clips, so the radiotherapy boost cannot be accurately targeted.",
+      "Closing the deep cavity under tension, causing a dimple when the seroma resolves."
+    ],
+    "complications": [
+      "Involved or close margins needing re-excision or mastectomy.",
+      "Seroma and haematoma in the cavity or axilla.",
+      "Wound infection; altered breast shape and asymmetry.",
+      "Allergic reaction to blue dye, ranging from urticaria to anaphylaxis; skin staining.",
+      "Arm numbness and, less commonly than after clearance, lymphoedema."
+    ],
+    "postop": [
+      "Day-case or overnight stay in most patients.",
+      "Review histology at the MDT: margin status and sentinel node result decide re-excision and further axillary treatment.",
+      "Patients with one or two sentinel node macrometastases who are having breast-conserving surgery, whole-breast radiotherapy and systemic therapy may not need further axillary treatment, per MDT discussion.",
+      "Shoulder exercises and wound care advice; breast care nurse follow-up."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.onco.mdt-check", "emphasis": "Confirm the axilla is clinically and radiologically negative, or the MDT has agreed sentinel node biopsy after neoadjuvant treatment." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Arm out to no more than 90 degrees, so breast and axilla are both accessible without re-draping." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.wle.tracer" },
+    { "ref": "step.onco.axilla-entry", "emphasis": "Use the gamma probe or magnetometer to place a short incision directly over the hottest point, low in the axilla." },
+    { "ref": "step.wle.sentinel" },
+    { "ref": "step.onco.tumour-handling" },
+    { "ref": "step.wle.excision" },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "Orient before the specimen radiograph, then confirm the lesion and the localisation device are both within the specimen." },
+    { "ref": "step.wle.cavity" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.wle.tracer": {
+      "id": "step.wle.tracer", "kind": "prep",
+      "title": "Sentinel node tracer: confirm and inject",
+      "why": "A dual technique (radioisotope with blue dye, or a magnetic tracer) maximises the identification rate and lowers the false-negative rate of sentinel node biopsy.",
+      "how": [
+        "Confirm the radioisotope was injected within the window in the nuclear medicine protocol, and check the injection record.",
+        "Inject blue dye or magnetic tracer in the subareolar or peritumoural tissue per local protocol, and massage the breast for a few minutes.",
+        "Warn the anaesthetist when blue dye is given: anaphylaxis can occur, and blue dye lowers pulse oximetry readings."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Injecting blue dye intradermally close to the skin of a planned conservation, leaving lasting staining."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.wle.sentinel": {
+      "id": "step.wle.sentinel", "kind": "resection", "critical": true,
+      "title": "Identifying and removing the sentinel nodes",
+      "why": "The sentinel node is the first node draining the tumour. Its status predicts the rest of the axilla, so the staging is only as good as the completeness of the search.",
+      "how": [
+        "Follow the blue lymphatic or the probe signal to the node; record each node's ex-vivo count.",
+        "Remove every node that is hot, blue or magnetic, and any palpably abnormal node.",
+        "Check the axillary bed afterwards: continue searching while nodes remain above the threshold set by local protocol (commonly a fraction of the hottest node).",
+        "Label each node separately for the pathologist."
+      ],
+      "structuresAtRisk": ["Intercostobrachial nerve", "Lateral thoracic vessels"],
+      "pitfalls": ["Shine-through from the injection site when the probe points towards the breast in an upper outer lesion."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.wle.excision": {
+      "id": "step.wle.excision", "kind": "resection", "critical": true,
+      "title": "Wide local excision with a planned margin",
+      "why": "The goal is clear margins with the best possible cosmetic result. Excising in a deliberate shape around the lesion, from skin to pectoral fascia where needed, does both.",
+      "how": [
+        "Plan the incision over the lesion, along Langer's lines or circumareolar, considering an oncoplastic approach for larger excisions.",
+        "Excise the lesion with a rim of normal tissue in one piece, down to the pectoral fascia for deep tumours; do not shell out the tumour.",
+        "Confirm the localisation device is in the specimen and send the specimen radiograph image to the pathologist where possible.",
+        "Take additional shaved cavity margins, each oriented, if a margin is close on imaging or palpation."
+      ],
+      "structuresAtRisk": ["Overlying skin", "Pectoralis major fascia"],
+      "pitfalls": ["Dissecting through the tumour to find a wire tip.", "Fragmenting the specimen, which makes margin assessment impossible."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.wle.cavity": {
+      "id": "step.wle.cavity", "kind": "reconstruction",
+      "title": "Marking the cavity and restoring the breast shape",
+      "why": "Clips mark the tumour bed for the radiotherapy boost. Closing the glandular defect thoughtfully prevents the indentation that patients notice for the rest of their lives.",
+      "how": [
+        "Place radio-opaque clips at the cavity walls (superior, inferior, medial, lateral, deep) per radiotherapy protocol.",
+        "Mobilise and appose the glandular tissue to fill the defect where this is possible without distorting the breast.",
+        "Do not tightly close the cavity under tension or pull the skin down to the chest wall."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Omitting cavity clips, so the boost volume is larger or misplaced."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

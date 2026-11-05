@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "scc-ards-management",
+ "title": "ARDS management",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**PROSEVA** used **prone** positioning for at least 16 hours a day in ARDS with PaO2/FiO2 below 150. It reduced mortality. Proning is started early, not after days of refractory hypoxia. The units in that trial were already using a low tidal volume. Prone position is a treatment. It is not a last turn before the family meeting.",
+   "say": "PROSEVA used prone positioning for at least 16 hours a day in ARDS with PaO2/FiO2 below 150. It reduced mortality. Proning is started early, not after days of refractory hypoxia. The units in that trial were already using a low tidal volume. Prone position is a treatment. It is not a last turn before the family meeting.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ards-fig2.webp",
+    "alt": "Injured alveolus with hyaline membranes beside a normal alveolus, and a Berlin summary panel.",
+    "caption": "Diffuse alveolar damage, which is the lung prone positioning is used for. Prone hours and the ratio of 150 are not drawn. The Berlin panel is a definition, not the PROSEVA result (StewardMD)."
+   }
+  },
+  {
+   "tx": "**ACURASYS** found that 48 hours of **cisatracurium** in severe ARDS reduced mortality in an era of deep sedation. The **ROSE** trial, with lighter sedation, did not reproduce that benefit. Paralysis is reserved for ventilator dyssynchrony. It is not given to every patient with a low ratio. Deep sedation for days without a breathing trial is not the PROSEVA method.",
+   "say": "ACURASYS found that 48 hours of cisatracurium in severe ARDS reduced mortality in an era of deep sedation. The ROSE trial, with lighter sedation, did not reproduce that benefit. Paralysis is reserved for ventilator dyssynchrony. It is not given to every patient with a low ratio. Deep sedation for days without a breathing trial is not the PROSEVA method.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ACURASYS",
+     "points": [
+      "48 hours of cisatracurium",
+      "Deep sedation was the era",
+      "Mortality fell in that trial"
+     ]
+    },
+    "right": {
+     "title": "ROSE",
+     "points": [
+      "Lighter sedation",
+      "The benefit was not reproduced",
+      "Paralysis is not routine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**FACTT** compared a **conservative fluid** strategy with a liberal strategy after shock had resolved. The conservative arm increased ventilator free days and did not change mortality. Fluid is not pushed once perfusion is restored. A wet lung is slower to leave the ventilator. Shock that is still present is not the moment for that restriction.",
+   "say": "FACTT compared a conservative fluid strategy with a liberal strategy after shock had resolved. The conservative arm increased ventilator free days and did not change mortality. Fluid is not pushed once perfusion is restored. A wet lung is slower to leave the ventilator. Shock that is still present is not the moment for that restriction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timing",
+     "FACTT finding",
+     "What you do"
+    ],
+    "rows": [
+     [
+      "After shock has resolved",
+      "More ventilator free days, same mortality",
+      "Keep fluid conservative"
+     ],
+     [
+      "Shock still present",
+      "The trial was not this moment",
+      "Restore perfusion first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **DEXA-ARDS** trial of **dexamethasone** in moderate to severe ARDS, before COVID-19, reduced ventilator time and mortality. It is not a licence for steroid in every mild postoperative hypoxaemia. The patient in the trial had real ARDS. A small oxygen need after a laparotomy is not that disease. You should name the severity before you copy the drug.",
+   "say": "The DEXA-ARDS trial of dexamethasone in moderate to severe ARDS, before COVID-19, reduced ventilator time and mortality. It is not a licence for steroid in every mild postoperative hypoxaemia. The patient in the trial had real ARDS. A small oxygen need after a laparotomy is not that disease. You should name the severity before you copy the drug.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ards",
+      "label": "Moderate or severe ARDS"
+     },
+     {
+      "id": "dex",
+      "label": "DEXA-ARDS: dexamethasone helped"
+     },
+     {
+      "id": "not",
+      "label": "Not for mild postoperative hypoxaemia"
+     }
+    ],
+    "edges": [
+     [
+      "ards",
+      "dex"
+     ],
+     [
+      "dex",
+      "not"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inhaled **nitric oxide** raises PaO2 for a time and does not reduce mortality. It is a bridge toward proning or extracorporeal support, not a standard ARDS drug. The rise in oxygen can fade. You should not delay prone positioning because the saturation looked better for an hour. A bridge is not a destination.",
+   "say": "Inhaled nitric oxide raises PaO2 for a time and does not reduce mortality. It is a bridge toward proning or extracorporeal support, not a standard ARDS drug. The rise in oxygen can fade. You should not delay prone positioning because the saturation looked better for an hour. A bridge is not a destination.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ards-fig1.webp",
+    "alt": "Three alveoli labelled exudative, proliferative, and fibrotic phases of diffuse alveolar damage.",
+    "caption": "Exudative, proliferative, and fibrotic phases. This drawing is the injured lung, not a nitric oxide response and not the PROSEVA result (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Higher PEEP** is considered when the PaO2/FiO2 is very low and the right ventricle tolerates it. A recruitment manoeuvre as used in the **ART** trial is not routine because mortality rose. You should watch the blood pressure if PEEP goes up. A better saturation with a failing right ventricle is not an improvement. Plateau pressure still has a ceiling.",
+   "say": "Higher PEEP is considered when the PaO2/FiO2 is very low and the right ventricle tolerates it. A recruitment manoeuvre as used in the ART trial is not routine because mortality rose. You should watch the blood pressure if PEEP goes up. A better saturation with a failing right ventricle is not an improvement. Plateau pressure still has a ceiling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Choice",
+     "When",
+     "Stop if"
+    ],
+    "rows": [
+     [
+      "Higher PEEP",
+      "Very low ratio, right ventricle coping",
+      "Plateau or blood pressure worsens"
+     ],
+     [
+      "ART-style recruitment",
+      "Not routine",
+      "That trial increased mortality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Refractory hypoxaemia is managed in order. You should check the tube and the circuit, optimise PEEP and volume, prone, treat the driver, and refer for **VV-ECMO** if criteria are met. The tidal volume is not raised to chase saturation. A displaced tube is fixed before a referral. ECMO is for the patient who has had the simple steps.",
+   "say": "Refractory hypoxaemia is managed in order. You should check the tube and the circuit, optimise PEEP and volume, prone, treat the driver, and refer for VV-ECMO if criteria are met. The tidal volume is not raised to chase saturation. A displaced tube is fixed before a referral. ECMO is for the patient who has had the simple steps.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tube",
+      "label": "Check tube and circuit"
+     },
+     {
+      "id": "vent",
+      "label": "Optimise PEEP and volume"
+     },
+     {
+      "id": "prone",
+      "label": "Prone and treat the driver"
+     },
+     {
+      "id": "ecmo",
+      "label": "Refer for VV-ECMO if criteria are met"
+     }
+    ],
+    "edges": [
+     [
+      "tube",
+      "vent"
+     ],
+     [
+      "vent",
+      "prone"
+     ],
+     [
+      "prone",
+      "ecmo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sedation for **proning** is enough to stop the patient pulling out tubes. Deep sedation and paralysis for days, without a breathing trial, causes weakness and is not the PROSEVA protocol. You should lighten sedation when the turn is stable. A still patient is not the aim. A safe prone patient who can be assessed is the aim.",
+   "say": "Sedation for proning is enough to stop the patient pulling out tubes. Deep sedation and paralysis for days, without a breathing trial, causes weakness and is not the PROSEVA protocol. You should lighten sedation when the turn is stable. A still patient is not the aim. A safe prone patient who can be assessed is the aim.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Enough sedation",
+     "points": [
+      "Tubes stay in",
+      "The turn is safe",
+      "You can still assess the patient"
+     ]
+    },
+    "right": {
+     "title": "Too much sedation",
+     "points": [
+      "Days of paralysis without a trial",
+      "Weakness follows",
+      "This is not the PROSEVA protocol"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Marino ICU Book 5e Ch. 24 Acute Respiratory Distress Syndrome"
+ ]
+}

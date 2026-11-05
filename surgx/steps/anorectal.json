@@ -1,0 +1,150 @@
+{
+  "_comment": "Shared anorectal and perianal steps: local block, examination under anaesthesia, sphincter identification, the stop decision, final inspection and wound plan. Used by haemorrhoidectomy, sphincterotomy, fistula surgery and pilonidal surgery.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.ano.local-block": {
+      "id": "step.ano.local-block",
+      "kind": "prep",
+      "title": "Local anaesthetic infiltration for perianal and sacrococcygeal surgery",
+      "why": "Local infiltration with a vasoconstrictor reduces bleeding, opens tissue planes and lowers early post-operative pain and opioid use, and it allows many anorectal operations to be done as day cases with less urinary retention.",
+      "how": [
+        "Calculate the maximum safe dose for the patient's weight before drawing up, and agree with the anaesthetist what has already been given.",
+        "Infiltrate perianal skin and the intersphincteric and ischioanal spaces circumferentially for anal procedures, or around the tracts and pits for pilonidal surgery, aspirating before each injection.",
+        "Use a solution with adrenaline where it is appropriate, and wait a few minutes for vasoconstriction before incising.",
+        "Avoid injecting into the fissure, abscess cavity or tract itself, where it works poorly and distorts the anatomy."
+      ],
+      "structuresAtRisk": [
+        "Inferior rectal vessels",
+        "Pudendal nerve branches",
+        "Rectal mucosa if the needle passes too deep"
+      ],
+      "pitfalls": [
+        "Exceeding the weight-based maximum dose by adding several syringes without counting.",
+        "Injecting a large volume that balloons the tissues and hides the anatomy you need to see."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ano.eua": {
+      "id": "step.ano.eua",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Examination under anaesthesia: confirm the diagnosis before the operation",
+      "why": "The pre-operative diagnosis in anorectal surgery is often made in an awake patient in pain. Under anaesthesia the surgeon must confirm it, and look for what changes the operation: a second pathology, an abscess, Crohn's disease, a tumour or a different fistula anatomy.",
+      "how": [
+        "Inspect the perianal skin, then perform a careful digital rectal examination, assessing sphincter tone, any induration and any mass.",
+        "Perform proctoscopy around the full circumference and rigid or flexible sigmoidoscopy as indicated, looking for proctitis, polyps and tumour.",
+        "Record the findings by anatomical position (anterior, posterior, left lateral, right lateral) rather than by clock face, because the clock changes with the position of the patient.",
+        "Biopsy anything atypical: an ulcer off the midline, a mass, unexplained induration, granular mucosa."
+      ],
+      "structuresAtRisk": [
+        "Anal canal and rectal mucosa during instrumentation"
+      ],
+      "pitfalls": [
+        "Proceeding with the planned operation on a lesion that looks wrong.",
+        "Recording findings as clock positions without stating whether the patient was in lithotomy or prone.",
+        "Missing a low rectal cancer behind prolapsing haemorrhoids."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ano.sphincter-identify": {
+      "id": "step.ano.sphincter-identify",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Identifying the internal and external sphincters",
+      "why": "Faecal incontinence is the injury of anorectal surgery and it is usually permanent. Every cut near the anal canal is made knowing which muscle is being divided, preserved or protected.",
+      "how": [
+        "Place a bivalve anal retractor gently; over-stretching the anus is itself a cause of sphincter injury.",
+        "Palpate the intersphincteric groove between the lower edge of the internal sphincter and the subcutaneous external sphincter.",
+        "Recognise the internal sphincter as pale, smooth, circular fibres continuous with the rectal muscle, and the external sphincter as darker, striated muscle that contracts with stimulation.",
+        "Identify the dentate line and the anorectal ring by palpation, and keep them as reference points for every later decision."
+      ],
+      "structuresAtRisk": [
+        "Internal anal sphincter",
+        "External anal sphincter",
+        "Puborectalis and the anorectal ring"
+      ],
+      "pitfalls": [
+        "Using a self-retaining retractor opened forcibly, stretching the sphincters.",
+        "Mistaking the internal sphincter for submucosa or the external sphincter for fat, and dividing it.",
+        "Losing orientation once the tissues are oedematous and bleeding."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ano.when-to-stop": {
+      "id": "step.ano.when-to-stop",
+      "kind": "bailout",
+      "title": "Bailout: stop, change the plan, or come back another day",
+      "why": "Anorectal operations are elective and the sphincter does not regrow. When the anatomy under anaesthesia is different from the plan, a lesser operation done safely is better than the planned operation done at the cost of continence.",
+      "how": [
+        "Stop if the examination shows something that changes the diagnosis: suspected tumour, Crohn's disease, an atypical ulcer, sepsis not yet drained or a fistula higher than expected.",
+        "Take biopsies, drain any sepsis and place a loose seton where a fistula tract is uncertain or complex, and plan definitive surgery after imaging and discussion.",
+        "Do not divide sphincter muscle that you cannot clearly identify.",
+        "Explain the change of plan in the operative note and to the patient, including what imaging or review is now needed."
+      ],
+      "structuresAtRisk": [
+        "Internal and external anal sphincters",
+        "Puborectalis"
+      ],
+      "pitfalls": [
+        "Completing a fistulotomy on a tract that crosses most of the external sphincter because the patient was consented for it.",
+        "Performing a haemorrhoidectomy or sphincterotomy in a patient with unrecognised Crohn's disease.",
+        "Not biopsying an atypical lesion before treating it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ano.final-inspection": {
+      "id": "step.ano.final-inspection",
+      "kind": "checkpoint",
+      "title": "Final inspection of the anal canal",
+      "why": "Bleeding, an over-tight canal and a missed second lesion are all visible at the end of the operation and invisible once the patient is awake and the swelling starts.",
+      "how": [
+        "Re-insert the anal retractor gently and inspect every wound and pedicle for bleeding, including the internal apex of each wound.",
+        "Check the anal calibre with a finger or a standard dilator size the unit uses: the canal should admit an anal retractor without tension.",
+        "Confirm the skin bridges, the remaining sphincter and the wound edges are as intended, and that no swab or packing is left within the canal unless it is deliberate and recorded.",
+        "Record the final findings and any deliberate packing in the operative note, with instructions for its removal."
+      ],
+      "structuresAtRisk": [
+        "Anal canal mucosa and skin bridges"
+      ],
+      "pitfalls": [
+        "Leaving a forgotten swab or pack in the rectum.",
+        "Accepting oozing from the apex of a pedicle because the patient is nearly finished.",
+        "Not checking calibre after multiple excisions."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ano.wound-care": {
+      "id": "step.ano.wound-care",
+      "kind": "closure",
+      "title": "Dressing, bowel regimen and the plan for the open wound",
+      "why": "Most anorectal and pilonidal wounds are left open or are under tension during defaecation. Comfortable passage of soft stool, a simple wound plan and early warning of retention or bleeding decide how the patient recovers.",
+      "how": [
+        "Apply a light dressing; avoid tight packing of the anal canal, which increases pain and urinary retention.",
+        "Prescribe a stool softener and fibre from the day of surgery, with regular simple analgesia and minimal opioid.",
+        "Advise warm water soaks or showering after each bowel action, and explain how the open wound is cleaned.",
+        "Tell the patient the warning signs: heavy bleeding, inability to pass urine, fever or increasing pain, and who to call."
+      ],
+      "structuresAtRisk": [
+        "Urethra and bladder: retention after anorectal surgery and spinal anaesthesia"
+      ],
+      "pitfalls": [
+        "Discharging a patient on opioids without a laxative.",
+        "Tight anal packing left overnight.",
+        "No written plan for who manages the open wound after discharge."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

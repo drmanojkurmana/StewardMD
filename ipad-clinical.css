@@ -1,0 +1,191 @@
+/* ipad-clinical.css: iPad regular-width layouts for the clinical module group (vault/plans/iPad-Standards.md).
+ * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched. */
+
+/* ---------- Dx My Patient (reasoning.js + reasoning-workspace.css) ----------
+   Phone shape on iPad: reasoning-workspace.css forces .dx-body to display:block and max-width:800px, and reasoning.js sets
+   margin:0 at 700 px, so the consult sat in a 760 px column hugging the left edge with the right half empty, and the
+   differential was a separate tab. iPad: the scroller spans the screen, the content is centred, and from 1000 px the
+   findings and the live differential sit side by side (both panes shown, so the tab strip is not needed). */
+@media (min-width: 700px) {
+  html.smd-tablet #dxOverlay .dx-body { max-width: none !important; margin: 0 !important; width: auto !important;
+    padding-left: max(24px, env(safe-area-inset-left, 0px), calc((100vw - 880px) / 2)) !important;
+    padding-right: max(24px, env(safe-area-inset-right, 0px), calc((100vw - 880px) / 2)) !important; }
+  html.smd-tablet #dxOverlay .dx-work-nav { padding-inline: max(20px, calc((100vw - 880px) / 2)); }
+  html.smd-tablet #dxOverlay .dx-work-nav button { flex: 0 1 280px; }
+  html.smd-tablet #dxOverlay .dx-work-nav { justify-content: center; }
+  /* Review pane: the card actions ran 590 to 700 px. */
+  html.smd-tablet #dxOverlay .dx-review .dx-top-open, html.smd-tablet #dxOverlay .dx-review .dx-select { width: fit-content; min-width: 260px; max-width: 420px; padding-left: 24px; padding-right: 24px; }
+  /* Speak and See-what-it-could-be ran the full 772 px column in portrait. */
+  html.smd-tablet #dxOverlay .dx-intake .dx-speak, html.smd-tablet #dxOverlay .dx-intake #dxGoBtn { width: fit-content; min-width: 280px; max-width: 420px; padding-left: 28px; padding-right: 28px; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #dxOverlay .dx-body { display: grid !important; grid-template-columns: minmax(380px, 0.85fr) minmax(0, 1.15fr); gap: 32px; align-items: start;
+    padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 1320px) / 2)) !important;
+    padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 1320px) / 2)) !important; }
+  html.smd-tablet #dxOverlay .dx-body > section.dx-intake[hidden] { display: flex !important; }
+  html.smd-tablet #dxOverlay .dx-body > section.dx-review[hidden] { display: block !important; }
+  html.smd-tablet #dxOverlay .dx-body > section.dx-review { padding-top: 0 !important; }
+  html.smd-tablet #dxOverlay:not(.dx-reference-mode) > .dx-work-nav { display: none; }
+  /* "See what it could be" only switches to the differential tab, which is already on screen beside it. */
+  html.smd-tablet #dxOverlay .dx-intake #dxGoBtn { display: none; }
+}
+
+/* ---------- Antibiogram (antibiogram.js) ----------
+   The matrix already uses the width. The search field ran 1,287 px and the Spectrum / Resistance / My hospital segmented
+   control 1,333 px; the organism, drug and cell sheets were 760 px slabs glued to the bottom edge. */
+@media (min-width: 700px) {
+  html.smd-tablet #abgOverlay .abg-tabs { width: min(600px, calc(100% - 32px)); box-sizing: border-box; margin-left: auto; margin-right: auto; align-self: center; }
+  html.smd-tablet #abgOverlay .abg-search-box { max-width: 720px; }
+  /* My hospital: an import form, a 640 px form inside cards that ran 1,333 px with the right half empty. */
+  html.smd-tablet #abgOverlay .v2:has([data-v2="template"]) { max-width: 880px; margin-left: auto; margin-right: auto; }
+  html.smd-tablet #abgOverlay .abg-modal-sheet { justify-content: center; align-items: center; padding: 24px; }
+  html.smd-tablet #abgOverlay .abg-modal-sheet :is(.abg-picker-card, .abg-dossier-card, .abg-cell-action-card) {
+    width: min(720px, 100%); margin: 0 auto; max-height: min(86vh, 900px); border-radius: 20px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, .28), 0 2px 8px rgba(15, 23, 42, .12);
+    transform: translateY(24px); padding-bottom: 20px; }
+  html.smd-tablet #abgOverlay .abg-modal-sheet.on :is(.abg-picker-card, .abg-dossier-card, .abg-cell-action-card) { transform: none; }
+  html.smd-tablet #abgOverlay .abg-modal-sheet .abg-sheet-grabber { display: none; }
+}
+
+/* ---------- Dose calculator (dose-calc.js) ----------
+   A 720 px column in the middle of the screen, the drug picker and the result below the patient form. iPad: the scroller
+   spans the screen; from 1000 px the patient sits in a left column (sticky) and the drug search or the result on the right. */
+@media (min-width: 700px) {
+  html.smd-tablet #doseCalc .dc-body { max-width: none; margin: 0; width: auto;
+    padding-left: max(24px, calc((100% - 760px) / 2)); padding-right: max(24px, calc((100% - 760px) / 2)); }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #doseCalc .dc-body { display: grid; grid-template-columns: minmax(380px, 440px) minmax(0, 1fr); column-gap: 20px; row-gap: 14px;
+    align-content: start; align-items: start;
+    padding-left: max(28px, calc((100% - 1240px) / 2)); padding-right: max(28px, calc((100% - 1240px) / 2)); }
+  html.smd-tablet #doseCalc .dc-body > * { grid-column: 2; min-width: 0; }
+  html.smd-tablet #doseCalc .dc-body > section.dc-card:first-child { grid-column: 1; grid-row: 1 / span 2; position: sticky; top: 0; }
+  html.smd-tablet #doseCalc .dc-body > section.dc-card:first-child .dc-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Clinical Calculators (calculators.js, MEDCALC) ----------
+   The list was two 544 px columns under a 1,100 px search field; an open calculator spans the grid and its Calculate
+   button ran the full 1,100 px. The star was a 21 px target. */
+@media (min-width: 700px) {
+  html.smd-tablet #mcOverlay .mc-search { max-width: 720px; display: block; }
+  html.smd-tablet #mcOverlay .mc-card > button[data-fav] { top: 0 !important; right: 0 !important; padding: 12px !important; }
+  html.smd-tablet #mcOverlay .mc-card-head { min-height: 58px; padding-right: 48px !important; }
+  html.smd-tablet #mcOverlay .mc-card.open .mc-calc-btn { width: auto; min-width: 220px; max-width: 360px; padding: 12px 28px; min-height: 44px; }
+  html.smd-tablet #mcOverlay .mc-card.open .mc-af-btn { width: auto; min-width: 260px; max-width: 420px; min-height: 44px; }
+  html.smd-tablet #mcOverlay .mc-card.open .mc-af-search { max-width: 720px; }
+  html.smd-tablet #mcOverlay .mc-card.open .mc-panel { padding: 6px 20px 20px; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #mcOverlay .mc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  html.smd-tablet #mcOverlay .mc-card.open .mc-inputs { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------- Adult Normal Values (adult-ref.js) ----------
+   A 728 px column whose scroller stopped short of the screen edges, one analyte per line. iPad: the scroller spans the
+   screen and each group lays its analytes out across the width (two columns in portrait, three or four in landscape). */
+@media (min-width: 700px) {
+  html.smd-tablet #adultRef .nh-body { max-width: none; margin: 0; width: auto;
+    padding-left: max(24px, calc((100% - 1240px) / 2)); padding-right: max(24px, calc((100% - 1240px) / 2)); }
+  html.smd-tablet #adultRef .nh-card:has(> .nh-row) { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); column-gap: 24px; row-gap: 12px; align-items: start; }
+  html.smd-tablet #adultRef .nh-card:has(> .nh-row) > h3 { grid-column: 1 / -1; }
+  html.smd-tablet #adultRef .nh-card > .nh-row { border-top: 1px solid var(--nh-line); padding-top: 10px; }
+  html.smd-tablet #adultRef input[type=search] { max-width: 720px; }
+  html.smd-tablet #adultRef .nh-note, html.smd-tablet #adultRef .nh-foot { max-width: 960px; }
+  html.smd-tablet #adultRef .nh-src summary { min-height: 44px; }
+}
+
+/* ---------- Drug Interactions / Scan Meds (medlist.js) ----------
+   Already a two-column workspace. The sticky Check button ran 964 px wide; on iPad it is a normal-size primary button at
+   the right of the bar with its hint beside it. */
+@media (min-width: 700px) {
+  html.smd-tablet .ml-root .ml-footer .ml-footer-inner { display: flex; align-items: center; justify-content: flex-end; gap: 16px; }
+  html.smd-tablet .ml-root .ml-footer .ml-check-btn { width: auto; min-width: 240px; max-width: 360px; padding: 14px 28px; }
+  html.smd-tablet .ml-root .ml-footer .ml-footer-hint { order: -1; margin-top: 0; text-align: right; }
+}
+@media (min-width: 1000px) {
+  /* Results: the four severity counts in one row instead of a 2 x 2 block. */
+  html.smd-tablet .ml-root .mlr-summary-panel .mlr-chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  html.smd-tablet .ml-root .mlr-summary-panel .mlr-chips > * { width: auto; max-width: none; min-width: 0; }
+}
+
+/* ---------- ICD search (icd.css) and Scheme Search (govschemes.css) ----------
+   Top bars: Back sat inset with the 960 px content column, not at the screen edge. Search fields ran 960 px and the
+   Both / ICD-10 / ICD-11 and Browse / Search segmented controls stretched across the column. From 1000 px a picked code
+   or package opens beside the list (icd.js / govschemes.js add .icd-split / .gs-split; phones never do). */
+@media (min-width: 700px) {
+  html.smd-tablet #icdOverlay .icd-top, html.smd-tablet #gsOverlay .gs-top {
+    padding-left: max(20px, env(safe-area-inset-left, 0px)) !important; padding-right: max(20px, env(safe-area-inset-right, 0px)) !important; }
+  html.smd-tablet #icdOverlay .icd-back, html.smd-tablet #gsOverlay .gs-back { height: 44px; }
+  html.smd-tablet #icdOverlay .icd-searchbar, html.smd-tablet #gsOverlay .gs-searchbar { max-width: 720px; }
+  html.smd-tablet #icdOverlay .icd-row2 { max-width: 420px; }
+  html.smd-tablet #icdOverlay .icd-sys { min-height: 44px; }
+  html.smd-tablet #gsOverlay .gs-tabs { max-width: 420px; margin-left: auto; margin-right: auto; }
+  html.smd-tablet #icdOverlay .icd-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 10px; }
+  html.smd-tablet #icdOverlay .icd-results > :is(.icd-hint, .icd-empty, .icd-err) { grid-column: 1 / -1; }
+  html.smd-tablet #icdOverlay .icd-body:has(.icd-dhead), html.smd-tablet #gsOverlay .gs-body:has(.gs-dhead) {
+    padding-left: max(24px, calc((100vw - 760px) / 2)); padding-right: max(24px, calc((100vw - 760px) / 2)); }
+  html.smd-tablet #icdOverlay .icd-pane, html.smd-tablet #gsOverlay .gs-pane { display: none; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #icdOverlay.icd-split.on, html.smd-tablet #gsOverlay.gs-split.on {
+    display: grid; grid-template-columns: minmax(340px, 400px) minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  html.smd-tablet #icdOverlay.icd-split > .icd-top, html.smd-tablet #gsOverlay.gs-split > .gs-top { grid-column: 1 / -1; }
+  html.smd-tablet #icdOverlay.icd-split > .icd-body, html.smd-tablet #gsOverlay.gs-split > .gs-body {
+    grid-column: 1; min-height: 0; max-width: none; padding-left: 16px !important; padding-right: 16px !important; border-right: 1px solid var(--line, #e5e5e0); }
+  html.smd-tablet #icdOverlay.icd-split > .icd-pane, html.smd-tablet #gsOverlay.gs-split > .gs-pane {
+    display: block; grid-column: 2; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; box-sizing: border-box;
+    padding: 18px max(28px, calc((100% - 820px) / 2)) calc(40px + env(safe-area-inset-bottom, 0px)); }
+  html.smd-tablet #icdOverlay.icd-split .icd-results { display: block; }
+  html.smd-tablet #icdOverlay.icd-split .icd-row2, html.smd-tablet #gsOverlay.gs-split .gs-tabs { max-width: none; }
+  html.smd-tablet #icdOverlay.icd-split .icd-card.sel, html.smd-tablet #gsOverlay.gs-split .gs-card.sel {
+    border-color: var(--teal, #0a9396); box-shadow: inset 3px 0 0 var(--teal, #0a9396); background: var(--teal-soft, #e0f2f1); }
+  html.smd-tablet #gsOverlay.gs-split .gs-cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- Electrolyte Correction Engine (electrolytes.js) ----------
+   Every section sat in a 760 px column with a 760 px Analyze bar. iPad landscape: patient details and risk factors on
+   the left, the lab panel on the right, the results full width below with the correction cards two across. */
+@media (min-width: 700px) {
+  html.smd-tablet #eceOverlay .ece-go { width: auto; min-width: 320px; max-width: 440px; padding: 10px 32px; }
+  html.smd-tablet #eceOverlay .ece-top { padding-left: max(20px, env(safe-area-inset-left, 0px)); }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #eceOverlay .ece-scroll { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 28px; align-content: start;
+    padding-left: max(28px, calc((100% - 1240px) / 2)); padding-right: max(28px, calc((100% - 1240px) / 2)); }
+  html.smd-tablet #eceOverlay .ece-scroll > * { max-width: none; margin-left: 0; margin-right: 0; min-width: 0; grid-column: 1 / -1; }
+  html.smd-tablet #eceOverlay .ece-scroll > .ece-patient { grid-column: 1; grid-row: 2; }
+  html.smd-tablet #eceOverlay .ece-scroll > .ece-risks { grid-column: 1; grid-row: 3; align-self: start; }
+  html.smd-tablet #eceOverlay .ece-scroll > .ece-measurements { grid-column: 2; grid-row: 2 / span 2; align-self: start; }
+  html.smd-tablet #eceOverlay #eceResults .ece-engine { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }
+  html.smd-tablet #eceOverlay #eceResults .ece-engine > h3 { grid-column: 1 / -1; margin-bottom: 2px; }
+  html.smd-tablet #eceOverlay #eceResults .ece-engine > .ece-card { margin: 0; }
+  /* Clinical summary: each value sat 1,100 px from its name. Two columns of short rows instead. */
+  html.smd-tablet #eceOverlay #eceResults .ece-chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 40px; }
+  html.smd-tablet #eceOverlay #eceResults .ece-plan-link { width: auto; }
+}
+
+/* ---------- Renal dose (renal-dose.js) and RxChoice (rxchoice-ui.js) ----------
+   Both already open as centred form sheets. On iPad they take the form-sheet width (580 and 720 px) and their close
+   buttons get a 44 px target (they were 22 px glyphs). */
+@media (min-width: 700px) {
+  html.smd-tablet body .rd-scrim .rd-sheet { max-width: 580px; padding-left: 22px; padding-right: 22px; }
+  html.smd-tablet body .rd-scrim .rd-x { min-width: 44px; min-height: 44px; margin: -8px -10px -8px 0; }
+  html.smd-tablet body .rxc-sheet { width: min(720px, calc(100vw - 48px)); }
+  html.smd-tablet body .rxc-sheet .rxc-x { min-width: 44px; min-height: 44px; }
+}
+
+/* ---------- Start Case wizard (abx-wizard.js / abx-wizard.css) ----------
+   Already laid out for a 1,180 px column (chip rows, system grid, step bar). The finding search ran 1,148 px, and the
+   glass top bar stopped at the 1,180 px column on iPad Pro, floating with page content showing beside it. It now
+   bleeds to both screen edges while its contents stay on the column. */
+@media (min-width: 700px) {
+  html.smd-tablet.abx-ui #abxWizard .abxw-find-input { max-width: 720px; }
+  /* Differential: two ranked columns instead of 1,148 px rows with 1,060 px score bars (rank reads left to right). */
+  /* Plan step: the Save Case button ran 620 px. */
+  html.smd-tablet #abxWizard #scpSaveBtn.scp-save-btn { flex: 0 0 auto; width: auto; min-width: 220px; max-width: 360px; }
+  html.smd-tablet.abx-ui #abxWizard .abxw-difflist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  html.smd-tablet.abx-ui[class] #abxWizard:not(#_) .abxw-head {
+    margin-left: calc(-16px - (100vw - min(100vw, 1180px)) / 2); margin-right: calc(-16px - (100vw - min(100vw, 1180px)) / 2);
+    padding-left: calc(16px + (100vw - min(100vw, 1180px)) / 2 + env(safe-area-inset-left, 0px));
+    padding-right: calc(16px + (100vw - min(100vw, 1180px)) / 2 + env(safe-area-inset-right, 0px)); }
+}

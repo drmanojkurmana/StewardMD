@@ -1,0 +1,556 @@
+{
+  "_comment": "Shared orthopaedic and limb steps. Used by dynamic hip screw, tibial nailing, open fracture debridement, leg fasciotomy and split-thickness skin graft.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.ortho.tourniquet": {
+      "id": "step.ortho.tourniquet",
+      "kind": "prep",
+      "title": "Tourniquet: decide, apply, record",
+      "why": "A tourniquet gives a bloodless field but adds ischaemia to injured tissue and hides bleeding that tells you what is alive. Whether to inflate it is a decision, not a habit.",
+      "how": [
+        "Apply a padded pneumatic cuff as proximal as practical, protected from skin preparation fluid.",
+        "Decide aloud whether it will be inflated. In debridement, inflate only if bleeding obscures the field; in compartment syndrome, leave it deflated.",
+        "Record inflation time and pressure with the theatre team, and announce elapsed time at agreed intervals.",
+        "Deflate before closure or dressing to check haemostasis and perfusion."
+      ],
+      "structuresAtRisk": [
+        "Underlying nerves at the cuff site",
+        "Skin under a poorly padded cuff"
+      ],
+      "pitfalls": [
+        "Inflating on a limb with suspected compartment syndrome or arterial injury.",
+        "Prep solution pooling under the cuff, causing a chemical burn."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.image-intensifier": {
+      "id": "step.ortho.image-intensifier",
+      "kind": "prep",
+      "title": "Image intensifier set-up and radiation safety",
+      "why": "Fixation is only as good as the images it is judged by, and every second of screening is dose to the patient and the team.",
+      "how": [
+        "Position the C-arm and confirm that true anteroposterior and lateral views can be obtained before preparing the skin.",
+        "Lead protection and dosimeters for all staff; thyroid shields; the radiographer briefed on the views needed.",
+        "Use short pulses, collimate, keep hands out of the beam, and save key images."
+      ],
+      "structuresAtRisk": [
+        "Operator and staff (radiation dose)"
+      ],
+      "pitfalls": [
+        "Discovering after draping that a true lateral cannot be obtained.",
+        "Continuous screening while thinking."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.reduction-check": {
+      "id": "step.ortho.reduction-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Reduction confirmed in two planes",
+      "why": "Fixing a malreduced fracture fixes the malreduction. Length, alignment and rotation are judged before an implant commits you.",
+      "how": [
+        "Reduce by traction and the manoeuvre the fracture needs, then screen in two orthogonal planes.",
+        "Check length, angulation in both planes and rotation against landmarks or the other limb.",
+        "If closed reduction fails, use percutaneous reduction tools or open the fracture rather than accepting it."
+      ],
+      "structuresAtRisk": [
+        "Neurovascular structures near the fracture during reduction manoeuvres"
+      ],
+      "pitfalls": [
+        "Accepting a single good view.",
+        "Ignoring rotation because it is not visible on plain images."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.guidewire": {
+      "id": "step.ortho.guidewire",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Guidewire position confirmed before committing",
+      "why": "Reamers, screws and nails follow the guidewire. A wire in the wrong place is cheap to move; an implant in the wrong place is not.",
+      "how": [
+        "Advance the guidewire under image control.",
+        "Confirm its position on both anteroposterior and lateral views before measuring, drilling or reaming.",
+        "If it is wrong, take it out and start again rather than accepting 'close enough'."
+      ],
+      "structuresAtRisk": [
+        "Joint surface",
+        "Pelvic vessels or soft tissues beyond the far cortex"
+      ],
+      "pitfalls": [
+        "Checking one view only.",
+        "Advancing the wire with the drill or reamer, so it penetrates the joint or pelvis."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.implant-check": {
+      "id": "step.ortho.implant-check",
+      "kind": "checkpoint",
+      "title": "Implant selection, check and register",
+      "why": "The wrong size, side or type cannot be undone after insertion, and an implant that is not registered cannot be traced if it is recalled.",
+      "how": [
+        "Confirm implant type, size, length and side against the plan and the measurements aloud before opening.",
+        "Check packaging integrity and expiry.",
+        "Record make, size and lot or serial number in the implant register and operation note before the patient leaves theatre."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Opening an implant before the measurement is confirmed.",
+        "Leaving the register to be completed later from memory."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.final-imaging": {
+      "id": "step.ortho.final-imaging",
+      "kind": "checkpoint",
+      "title": "Final images saved in two planes",
+      "why": "The final images are the evidence of what was achieved. They will be compared with every future radiograph.",
+      "how": [
+        "Screen the whole construct in two planes, including the ends of the implant and the joints at either end.",
+        "Confirm reduction, implant position and screw lengths; look specifically for joint penetration.",
+        "Save the images to the record and note screening time and dose."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Saving only the best-looking view.",
+        "Not imaging the far end of a long implant."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.leg-incisions": {
+      "id": "step.ortho.leg-incisions",
+      "kind": "access",
+      "critical": true,
+      "title": "Leg incisions on the fasciotomy lines",
+      "why": "Incisions placed on the fasciotomy lines decompress the compartments and preserve the perforators on which later local flaps depend.",
+      "how": [
+        "Mark the subcutaneous border of the tibia, the fibula, and the course of the perforators before incising.",
+        "Medial incision a short distance behind the posteromedial border of the tibia; lateral incision anterior to the fibula over the septum between the anterior and lateral compartments.",
+        "When extending a wound for debridement, use these lines rather than following the wound wherever it goes.",
+        "Make the incisions long enough: a short skin incision can itself constrict swollen muscle."
+      ],
+      "structuresAtRisk": [
+        "Saphenous vein and nerve (medial)",
+        "Superficial peroneal nerve (lateral)",
+        "Posterior tibial artery perforators"
+      ],
+      "pitfalls": [
+        "Incising directly over the subcutaneous tibia, leaving bone exposed.",
+        "Damaging medial perforators that would have supported a local flap."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.muscle-viability": {
+      "id": "step.ortho.muscle-viability",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Muscle viability assessed in every compartment",
+      "why": "Dead muscle left behind becomes infection and drives rhabdomyolysis; healthy muscle removed is function lost. Each compartment is judged and recorded.",
+      "how": [
+        "Assess colour, consistency, contractility to gentle stimulation, and capacity to bleed.",
+        "Examine each compartment in turn and record the finding for each one.",
+        "Excise clearly dead muscle; leave doubtful muscle for the planned second look."
+      ],
+      "structuresAtRisk": [
+        "Neurovascular bundles within each compartment"
+      ],
+      "pitfalls": [
+        "Judging viability by colour alone.",
+        "Not recording compartment-by-compartment findings."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.wound-photos": {
+      "id": "step.ortho.wound-photos",
+      "kind": "checkpoint",
+      "title": "Wound photographs at key stages",
+      "why": "Photographs let the next surgeon see the wound without taking the dressing down, and they document the injury and what was done to it.",
+      "how": [
+        "Photograph at first exposure in theatre, after debridement, and at closure or cover, per the governance policy for clinical images.",
+        "Include a scale and a reference point so the extent is clear.",
+        "Store the images in the clinical record, never on a personal device only."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Photographs kept only on a personal phone.",
+        "No photograph after debridement, so the next team has to undress the wound."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.temp-cover": {
+      "id": "step.ortho.temp-cover",
+      "kind": "closure",
+      "title": "Temporary wound cover and plan for definitive cover",
+      "why": "A wound that dries out or is repeatedly undressed loses tissue and gains bacteria. Temporary cover protects it until definitive closure or flap.",
+      "how": [
+        "Use a dressing that prevents desiccation and minimises dressing changes, such as a sealed or negative-pressure dressing.",
+        "Cover exposed bone, tendon and neurovascular structures.",
+        "Document the plan: return date, who will close or cover the wound, and by when."
+      ],
+      "structuresAtRisk": [
+        "Exposed tendon, bone and neurovascular structures"
+      ],
+      "pitfalls": [
+        "Daily dressing changes on the ward.",
+        "No documented date for closure or cover."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.nv-check": {
+      "id": "step.ortho.nv-check",
+      "kind": "checkpoint",
+      "title": "Neurovascular and compartment check before leaving theatre",
+      "why": "Deficits and compartment syndrome that are found early are treatable. A post-operative deficit without a pre-operative record cannot be interpreted.",
+      "how": [
+        "Before the patient leaves theatre, check pulses, capillary return and the compartments.",
+        "Document distal neurovascular status in the operation note and the recovery handover.",
+        "Hand over the compartment syndrome risk and the observation plan explicitly, particularly after a regional block."
+      ],
+      "structuresAtRisk": [
+        "Distal nerves and vessels"
+      ],
+      "pitfalls": [
+        "Assuming the limb is fine because it was fine before.",
+        "A regional block with no compartment monitoring plan."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.arthroplasty-asepsis": {
+      "id": "step.ortho.arthroplasty-asepsis",
+      "kind": "prep",
+      "title": "Arthroplasty theatre discipline and asepsis",
+      "why": "A deep infection around a joint replacement usually means further major surgery. Most of the prevention is behaviour in theatre before and during the case, not the antibiotic alone.",
+      "how": [
+        "Use an ultraclean air (laminar flow) theatre where available, keep the doors shut and keep traffic to the people who need to be there.",
+        "Open implants only when the size is decided and keep trays covered until needed.",
+        "Many surgeons double glove and change the outer gloves after draping and before handling the implants; follow the local arthroplasty protocol.",
+        "Confirm skin integrity over the joint: an open wound, active infection or ulcer elsewhere is a reason to postpone an elective replacement."
+      ],
+      "structuresAtRisk": [
+        "Deep periprosthetic tissues",
+        "Implants exposed to airborne contamination"
+      ],
+      "pitfalls": [
+        "Opening every implant size 'to be ready'.",
+        "Staff moving in and out of the theatre during implantation."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.posterior-hip-approach": {
+      "id": "step.ortho.posterior-hip-approach",
+      "kind": "access",
+      "critical": true,
+      "title": "Posterior (Southern) approach to the hip",
+      "why": "The posterior approach gives wide access to the femur and acetabulum through the gluteus maximus split and the short external rotators. The sciatic nerve lies directly behind the rotators, so every layer is identified before it is cut.",
+      "how": [
+        "Centre a curved incision on the posterior third of the greater trochanter, running proximally towards the posterior superior iliac spine and distally along the femoral shaft.",
+        "Divide fascia lata in line with the incision and split gluteus maximus bluntly in the line of its fibres; coagulate the vessels in the split.",
+        "Internally rotate the hip to put the short external rotators on stretch. Palpate the sciatic nerve on the posterior surface of the rotators and keep retractors off it.",
+        "Detach piriformis and the conjoint tendon (obturator internus and gemelli) close to the trochanter, tag them with stay sutures for the later repair, and reflect them over the nerve as a cushion.",
+        "Open the posterior capsule as a tagged flap; coagulate the branch of the medial femoral circumflex artery near quadratus femoris."
+      ],
+      "structuresAtRisk": [
+        "Sciatic nerve",
+        "Medial femoral circumflex artery branches near quadratus femoris",
+        "Inferior gluteal vessels in the gluteus maximus split",
+        "Short external rotators needed for the repair"
+      ],
+      "pitfalls": [
+        "Retractor placed blindly behind the rotators, compressing the sciatic nerve.",
+        "Detaching the rotators without stay sutures, so the posterior repair cannot be done.",
+        "Excessive internal rotation and flexion while the leg is not controlled, stretching the nerve."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.neck-osteotomy": {
+      "id": "step.ortho.neck-osteotomy",
+      "kind": "resection",
+      "critical": true,
+      "title": "Dislocation and femoral neck osteotomy",
+      "why": "The level and angle of the neck cut set the starting point for leg length and offset. A cut made too low cannot be put back.",
+      "how": [
+        "Dislocate the hip posteriorly with gentle flexion, adduction and internal rotation; if it does not come out easily, release more capsule or remove osteophytes rather than force it, especially in osteoporotic bone.",
+        "Mark the neck cut from the templated distance above the lesser trochanter, checked against the trial stem or the cutting guide.",
+        "Cut with an oscillating saw while protecting the soft tissues, and complete the cut at the trochanteric junction without notching the greater trochanter.",
+        "Remove the head; in a fracture, keep it for sizing and send it for histology if the fracture may be pathological."
+      ],
+      "structuresAtRisk": [
+        "Greater trochanter",
+        "Sciatic nerve during dislocation",
+        "Femoral shaft (spiral fracture from forced rotation)"
+      ],
+      "pitfalls": [
+        "Levering the leg into internal rotation against a hip that will not dislocate, causing a femoral shaft fracture.",
+        "Cutting the neck freehand without measuring from the lesser trochanter."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.femoral-canal-prep": {
+      "id": "step.ortho.femoral-canal-prep",
+      "kind": "resection",
+      "critical": true,
+      "title": "Femoral canal preparation and broaching",
+      "why": "The broach shapes the canal for the stem. Its alignment and version decide stem position, and a broach driven in varus or through the cortex is the commonest cause of an intra-operative femoral fracture.",
+      "how": [
+        "Expose the cut neck by flexing, adducting and internally rotating the hip, with the tibia vertical so it shows the version of the femur.",
+        "Open the canal laterally in the piriform fossa with a box chisel so the stem goes down the axis, not into varus.",
+        "Broach sequentially in the planned anteversion, with controlled taps, and stop at the size that is rotationally stable and matches the template.",
+        "Listen and feel at every size: a change in pitch or a sudden advance may mean a crack. Look at the calcar after each broach."
+      ],
+      "structuresAtRisk": [
+        "Femoral calcar and shaft (fracture or perforation)",
+        "Greater trochanter",
+        "Sciatic nerve if the leg is levered posteriorly"
+      ],
+      "pitfalls": [
+        "Starting medially so the broach and stem end in varus.",
+        "Hitting harder to seat a broach that has stopped, instead of reassessing size and alignment."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.trial-reduction": {
+      "id": "step.ortho.trial-reduction",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Trial components: stability, length and range",
+      "why": "Trials are the last cheap moment to change size, offset, version or balance. Once the definitive implants are in, every problem found later is a revision.",
+      "how": [
+        "Reduce with the trial components and move the joint through the full range the patient will use.",
+        "Test for impingement and instability in the positions that dislocate the joint or cause it to lift off, as described for the specific joint.",
+        "Check length and offset or balance against the preoperative template and the intra-operative references, not by eye alone.",
+        "If the trial is unstable or tight, find the reason (component position, soft tissue, impingement) and correct it before choosing the definitive implants."
+      ],
+      "structuresAtRisk": [
+        "Sciatic and common peroneal nerves (stretch from lengthening)",
+        "Soft tissues and bone during forced reduction"
+      ],
+      "pitfalls": [
+        "Accepting instability and hoping the soft-tissue repair will hold it.",
+        "Lengthening the leg to gain stability without recognising the nerve risk."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.cement-implant": {
+      "id": "step.ortho.cement-implant",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Cementing and implanting with a cement safety pause",
+      "why": "Cement gives immediate fixation in poor bone, but pressurisation can drive marrow and fat into the circulation. Bone cement implantation syndrome can cause sudden hypotension, hypoxia or cardiac arrest, so the whole team prepares for it before the cement goes in.",
+      "how": [
+        "Announce aloud that cement is about to be inserted. The anaesthetist confirms they are ready, with invasive monitoring where planned and vasopressors drawn up.",
+        "Prepare the bone bed: lavage (pulsatile where used), suction and dry it; insert a cement restrictor in the femoral canal where the technique calls for one.",
+        "Mix cement per the manufacturer's timing, deliver it retrograde with a cement gun, and pressurise to the degree that suits the patient's risk.",
+        "Insert the component in the planned alignment, hold it still until the cement is set, and remove extruded cement before it hardens.",
+        "If there is a sudden fall in blood pressure or oxygen saturation, stop and tell the anaesthetist immediately; the team treats it as a cardiovascular emergency."
+      ],
+      "structuresAtRisk": [
+        "Cardiovascular system (bone cement implantation syndrome)",
+        "Soft tissues and nerves from extruded cement",
+        "Component alignment as cement cures"
+      ],
+      "pitfalls": [
+        "Cementing without warning the anaesthetist.",
+        "Moving the component while the cement cures, leaving a loose mantle.",
+        "Leaving cement extruded posteriorly or into the joint."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.hip-final-reduction": {
+      "id": "step.ortho.hip-final-reduction",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Definitive reduction and stability check of the hip",
+      "why": "The definitive implants can behave differently from the trials. Stability, length and sciatic nerve safety are confirmed once more before the posterior repair closes the door.",
+      "how": [
+        "Clean the taper, impact the definitive head and reduce with longitudinal traction and gentle rotation, keeping soft tissue out of the joint.",
+        "Repeat the stability tests done with the trials: flexion with internal rotation for posterior stability, and extension with external rotation for anterior stability.",
+        "Compare leg length with the reference used at the trial stage; recheck that the sciatic nerve is slack and not tethered over the implant."
+      ],
+      "structuresAtRisk": [
+        "Sciatic nerve",
+        "Taper junction (debris on the trunnion)",
+        "Femoral shaft during forced reduction"
+      ],
+      "pitfalls": [
+        "Impacting a head onto a wet or contaminated taper.",
+        "Forcing reduction against a tight hip instead of reconsidering neck length."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.posterior-repair": {
+      "id": "step.ortho.posterior-repair",
+      "kind": "closure",
+      "title": "Posterior capsule and short external rotator repair",
+      "why": "Repairing the posterior capsule and rotators reduces the risk of dislocation after a posterior approach. It is quick, and it is easily forgotten at the end of a long case.",
+      "how": [
+        "Pass the capsular and rotator stay sutures through drill holes in the greater trochanter, or through the gluteus medius tendon insertion, with the hip in slight abduction and external rotation.",
+        "Tie them with the hip in extension and slight external rotation so the repair is not under tension.",
+        "Close fascia lata securely; it is the main layer that holds the wound together over the trochanter."
+      ],
+      "structuresAtRisk": [
+        "Sciatic nerve (sutures passed around it)",
+        "Greater trochanter during drilling"
+      ],
+      "pitfalls": [
+        "Tying the repair with the hip internally rotated, so it fails on the first movement.",
+        "Including the sciatic nerve in a suture or tying it under tension against the trochanter."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.periprosthetic-fracture": {
+      "id": "step.ortho.periprosthetic-fracture",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Intra-operative periprosthetic fracture: stop and reassess",
+      "why": "Fractures around a component happen during preparation, impaction or reduction, especially in osteoporotic bone. One that is recognised and fixed in theatre has a far better outcome than one found on the first postoperative radiograph.",
+      "how": [
+        "Stop impacting when the feel or sound changes. Expose the bone and look for the full extent of any crack.",
+        "Image the bone with the image intensifier or a radiograph in theatre if the extent is not clear.",
+        "A stable crack may need only a cerclage wire or cable and a different component; a displaced or extensive fracture may need a longer stem, a plate or a staged plan.",
+        "Call a senior or arthroplasty colleague early if the fracture changes the plan, and record the finding and fixation in the operative note and the postoperative weight-bearing instructions."
+      ],
+      "structuresAtRisk": [
+        "Femoral calcar and shaft",
+        "Acetabular walls and columns",
+        "Femoral or tibial condyles in knee replacement"
+      ],
+      "pitfalls": [
+        "Continuing to impact a component after a change in feel.",
+        "Not imaging, so the fracture is discovered after the patient has mobilised."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.fracture-exposure": {
+      "id": "step.ortho.fracture-exposure",
+      "kind": "dissection",
+      "title": "Exposing and cleaning the fracture",
+      "why": "A fracture cannot be reduced accurately while clot, periosteum and soft tissue sit between the fragments. Exposure should be enough to see the fracture lines, with as little stripping as possible so the fragments keep their blood supply.",
+      "how": [
+        "Expose only the fracture edges you need to read and reduce. Keep soft tissue attached to small fragments.",
+        "Irrigate and clear haematoma and interposed periosteum from the fracture lines with a curette and small elevator.",
+        "Read the fracture pattern: the main fracture line, comminution, impaction and any articular fragments. This decides the order of reduction."
+      ],
+      "structuresAtRisk": [
+        "Fragment blood supply (periosteal stripping)",
+        "Nerves and vessels close to the fracture"
+      ],
+      "pitfalls": [
+        "Wide circumferential stripping to 'see better'.",
+        "Leaving interposed periosteum or soft tissue, which blocks reduction."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.provisional-fixation": {
+      "id": "step.ortho.provisional-fixation",
+      "kind": "reconstruction",
+      "title": "Provisional fixation with clamps and K-wires",
+      "why": "Provisional fixation holds the reduction while it is checked in two planes and while the plate is applied. It must not block the definitive implant.",
+      "how": [
+        "Hold the reduction with pointed reduction clamps applied with modest force.",
+        "Add K-wires placed where they will not obstruct the plate or the planned screws.",
+        "Screen in two planes before committing to definitive fixation."
+      ],
+      "structuresAtRisk": [
+        "Small fragments (comminution from over-tight clamps)",
+        "Joint surface (K-wire penetration)"
+      ],
+      "pitfalls": [
+        "K-wires placed exactly where the plate needs to sit.",
+        "Clamp force that crushes or displaces small fragments."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.plate-fixation": {
+      "id": "step.ortho.plate-fixation",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Plate application and screw insertion",
+      "why": "The plate provides the stability that lets the fracture heal and the joint move. Its position, length and screw configuration matter as much as the reduction beneath it.",
+      "how": [
+        "Choose plate length to give the planned number of screws on each side of the fracture; contour it if the system is not pre-contoured.",
+        "Position the plate on the surface the plan requires, check its position on screening before the first screw, and use the first screw to hold position, not to pull the bone to a badly placed plate.",
+        "Drill with a guide, measure each hole, and choose screw length to engage the far cortex without protruding into soft tissue or the joint.",
+        "Use locking or compression screws as the construct requires, and know which one you are inserting before you insert it."
+      ],
+      "structuresAtRisk": [
+        "Joint surface (intra-articular screws)",
+        "Tendons and nerves beyond the far cortex",
+        "Fracture reduction (lost while tightening)"
+      ],
+      "pitfalls": [
+        "Screws that are too long, irritating tendons or entering the joint.",
+        "Losing the reduction while tightening a compression screw.",
+        "A plate that is too short for the fracture."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ortho.fixation-bailout": {
+      "id": "step.ortho.fixation-bailout",
+      "kind": "bailout",
+      "title": "Bail-out when definitive fixation is not safe",
+      "why": "Sometimes the soft tissue or the bone will not tolerate the planned fixation. Temporary stabilisation that protects the limb is better than a definitive construct that fails, gets infected or breaks down the skin.",
+      "how": [
+        "Recognise the situation early: blistered or swollen skin, comminution beyond what the implant can hold, or a reduction that cannot be maintained.",
+        "Stabilise with a spanning external fixator, a bridging plate or K-wires, as appropriate to the injury.",
+        "Call a senior colleague; record the reason for changing plan, the plan for definitive fixation and its timing, and explain it to the patient after surgery."
+      ],
+      "structuresAtRisk": [
+        "Skin and soft tissue envelope",
+        "Neurovascular structures near external fixator pins"
+      ],
+      "pitfalls": [
+        "Proceeding through compromised skin because the list is booked.",
+        "Pins placed in the future surgical field or through the zone of injury."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

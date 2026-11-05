@@ -1,0 +1,151 @@
+{
+  "id": "post-thyroidectomy-hypocalcaemia",
+  "title": "Hypocalcaemia after thyroidectomy",
+  "subtitle": "Predict with PTH, treat symptoms with IV calcium",
+  "category": "endocrine_surgery",
+  "specialty": "endocrine",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "ata-hypopara",
+      "org": "American Thyroid Association (ATA)",
+      "title": "American Thyroid Association statement on postoperative hypoparathyroidism: diagnosis, prevention, and management in adults (Orloff LA et al., Thyroid)",
+      "year": 2018,
+      "url": "https://www.thyroid.org/professionals/ata-professional-guidelines/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "sfe-hypoca",
+      "org": "Society for Endocrinology",
+      "title": "Society for Endocrinology Endocrine Emergency Guidance: emergency management of acute hypocalcaemia in adult patients (Turner J, Gittoes N, Selby P, Endocr Connect)",
+      "year": 2016,
+      "url": "https://www.endocrinology.org/clinical-practice/clinical-guidelines/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "ese-hypopara",
+      "org": "European Society of Endocrinology (ESE)",
+      "title": "European Society of Endocrinology Clinical Guideline: treatment of chronic hypoparathyroidism in adults (Bollerslev J et al., Eur J Endocrinol)",
+      "year": 2015,
+      "url": "https://www.ese-hormones.org/publications/guidelines/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Carpopedal spasm, tetany, seizures, laryngospasm or bronchospasm: severe acute hypocalcaemia."
+      },
+      {
+        "text": "Prolonged QT interval or arrhythmia."
+      },
+      {
+        "text": "Adjusted calcium below 1.9 mmol/L, even without symptoms."
+      },
+      {
+        "text": "Perioral tingling or paraesthesia of the fingers in the first days after total or completion thyroidectomy or central neck dissection."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Severe symptoms or adjusted calcium below 1.9 mmol/L: 10 to 20 mL of 10% calcium gluconate in 50 to 100 mL of 5% glucose IV over 10 minutes, with ECG monitoring.",
+        "timeCritical": true,
+        "evidenceRef": "sfe-hypoca"
+      },
+      {
+        "text": "Follow the bolus with a calcium gluconate infusion per the Society for Endocrinology regimen, titrated to calcium checked frequently at first.",
+        "timeCritical": true,
+        "evidenceRef": "sfe-hypoca"
+      },
+      {
+        "text": "Check and correct magnesium: hypocalcaemia does not correct while magnesium is low.",
+        "evidenceRef": "sfe-hypoca"
+      },
+      {
+        "text": "Mild symptoms or a modest fall: oral calcium, with active vitamin D (calcitriol or alfacalcidol) when PTH is low.",
+        "evidenceRef": "ata-hypopara"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Ask specifically about tingling around the mouth and in the fingers; examine for Chvostek and Trousseau signs."
+      },
+      {
+        "text": "Adjusted calcium, phosphate, magnesium and PTH.",
+        "calcs": [
+          "corr_ca"
+        ]
+      },
+      {
+        "text": "ECG for QT prolongation.",
+        "calcs": [
+          "qtc"
+        ]
+      },
+      {
+        "text": "Operative note: how many parathyroids were seen, whether any were autotransplanted, and whether a central neck dissection was done."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Post-operative PTH within hours of surgery predicts hypocalcaemia and guides early supplementation. Thresholds depend on the assay and units used locally."
+      },
+      {
+        "text": "Serial adjusted calcium: the nadir commonly falls on the first or second day after surgery."
+      },
+      {
+        "text": "Vitamin D level, ideally checked before surgery so deficiency can be corrected in advance."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Do not give IV calcium through a small peripheral vein if avoidable: extravasation causes tissue necrosis. Use a large vein and dilute as per protocol.",
+        "evidenceRef": "sfe-hypoca"
+      },
+      {
+        "text": "Avoid mixing calcium with bicarbonate or phosphate-containing solutions.",
+        "evidenceRef": "sfe-hypoca"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Low post-operative PTH: start oral calcium and active vitamin D early, before symptoms, per local protocol, and wean as parathyroid function recovers.",
+        "evidenceRef": "ata-hypopara"
+      },
+      {
+        "text": "Discharge with written advice about symptoms, a calcium check within days, and a clear weaning plan.",
+        "evidenceRef": "ata-hypopara"
+      },
+      {
+        "text": "Persisting hypoparathyroidism needs endocrine follow-up, aiming for low-normal calcium without symptoms and avoiding hypercalciuria.",
+        "evidenceRef": "ese-hypopara"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Senior review and cardiac monitoring for tetany, seizures, laryngospasm, arrhythmia or calcium below 1.9 mmol/L."
+      },
+      {
+        "text": "Endocrinology for refractory hypocalcaemia or for hypoparathyroidism that persists beyond the early weeks."
+      },
+      {
+        "text": "Feed back hypoparathyroidism rates to the surgeon: it is an audited outcome of thyroid surgery."
+      }
+    ]
+  },
+  "notes": [
+    "Hypocalcaemia is a parathyroid problem created at operation. Seeing and preserving the glands on their blood supply prevents most of it.",
+    "Most early post-thyroidectomy hypoparathyroidism is temporary; plan the weaning, or patients stay on calcitriol for years unnecessarily.",
+    "Magnesium is the forgotten electrolyte. Check it in every patient who does not respond to calcium."
+  ],
+  "calcs": [
+    "corr_ca",
+    "qtc"
+  ]
+}

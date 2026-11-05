@@ -1,0 +1,202 @@
+{
+  "id": "oncological-surgical-emergencies",
+  "title": "Oncological surgical emergencies",
+  "subtitle": "Neutropenic enterocolitis, tumour perforation, tumour bleeding",
+  "category": "onco_emergencies",
+  "specialty": "oncology",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "nice-cg151",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Neutropenic sepsis: prevention and management in people with cancer (CG151)",
+      "year": 2012,
+      "url": "https://www.nice.org.uk/guidance/cg151",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "esmo-fn",
+      "org": "European Society for Medical Oncology (ESMO)",
+      "title": "Management of febrile neutropaenia: ESMO Clinical Practice Guidelines (Klastersky J et al., Ann Oncol)",
+      "year": 2016,
+      "url": "https://www.esmo.org/guidelines/guidelines-by-topic/supportive-and-palliative-care/febrile-neutropenia",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nesher-ne",
+      "org": "Clinical Infectious Diseases",
+      "title": "Neutropenic enterocolitis, a growing concern in the era of widespread use of aggressive chemotherapy (Nesher L, Rolston KV)",
+      "year": 2013,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Nesher+Rolston+neutropenic+enterocolitis+growing+concern",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "wses-crc",
+      "org": "World Society of Emergency Surgery (WSES)",
+      "title": "2017 WSES guidelines on colon and rectal cancer emergencies: obstruction and perforation (Pisano M et al., World J Emerg Surg)",
+      "year": 2018,
+      "url": "https://wjes.biomedcentral.com/articles/10.1186/s13017-018-0192-3",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "bsh-plt",
+      "org": "British Society for Haematology (BSH)",
+      "title": "Guidelines for the use of platelet transfusions (Estcourt LJ et al., Br J Haematol)",
+      "year": 2017,
+      "url": "https://b-s-h.org.uk/guidelines",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Fever and abdominal pain, often right iliac fossa, within weeks of chemotherapy: neutropenic enterocolitis until proven otherwise."
+      },
+      {
+        "text": "Peritonism, free gas or a rising lactate in a neutropenic patient: perforation. Neutropenia blunts the signs, so a soft-looking abdomen does not reassure."
+      },
+      {
+        "text": "Haematemesis, melaena or rectal bleeding from a known tumour with tachycardia or a falling haemoglobin."
+      },
+      {
+        "text": "Thrombocytopenia or coagulopathy from chemotherapy or marrow infiltration in any bleeding patient."
+      },
+      {
+        "text": "Steroid therapy masking peritonitis and fever."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Suspected neutropenic sepsis: treat as an emergency and give empiric broad-spectrum IV antibiotics immediately, without waiting for the neutrophil count.",
+        "timeCritical": true,
+        "evidenceRef": "nice-cg151"
+      },
+      {
+        "text": "Neutropenic enterocolitis: choose an empiric regimen that also covers anaerobes, per local febrile neutropenia protocol.",
+        "timeCritical": true,
+        "evidenceRef": "nesher-ne"
+      },
+      {
+        "text": "Sepsis resuscitation: IV access, cultures, lactate, fluids, and early critical care review for hypotension.",
+        "timeCritical": true,
+        "evidenceRef": "esmo-fn"
+      },
+      {
+        "text": "Bleeding tumour: two large-bore cannulae, crossmatch, major haemorrhage protocol if shocked, and stop or reverse anticoagulants.",
+        "timeCritical": true,
+        "evidenceRef": "bsh-plt"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Neutrophil count and its expected trajectory: the date of the last chemotherapy and whether count recovery is days or weeks away.",
+        "calcs": [
+          "anc"
+        ]
+      },
+      {
+        "text": "Risk-stratify febrile neutropenia; a surgical abdomen is never low risk whatever the score.",
+        "calcs": [
+          "mascc"
+        ]
+      },
+      {
+        "text": "Severity of sepsis and organ dysfunction.",
+        "calcs": [
+          "qsofa",
+          "sofa",
+          "news2"
+        ]
+      },
+      {
+        "text": "Cancer status and prognosis: curative or palliative intent, and what the oncologist plans next. This shapes the extent of any operation."
+      },
+      {
+        "text": "Bleeding source: luminal tumour (stomach, colon), intraperitoneal tumour rupture (liver), or a fistula into a vessel.",
+        "calcs": [
+          "shock_index"
+        ]
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Blood cultures before antibiotics where this causes no delay, FBC with differential, coagulation, U&E, LFT, lactate, crossmatch."
+      },
+      {
+        "text": "CT abdomen and pelvis with IV contrast: bowel wall thickening (typically caecal), pneumatosis, free gas, collection, or an active blush."
+      },
+      {
+        "text": "CT angiography for active bleeding to localise the source for radiology or endoscopy."
+      },
+      {
+        "text": "Stool testing for Clostridioides difficile in any neutropenic patient with diarrhoea."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Neutropenic enterocolitis without perforation: bowel rest, IV fluids, nasogastric decompression if distended, and antibiotics. Most settle without an operation.",
+        "evidenceRef": "nesher-ne"
+      },
+      {
+        "text": "Consider granulocyte colony-stimulating factor with the oncologist for a patient with febrile neutropenia and a severe infection.",
+        "evidenceRef": "esmo-fn"
+      },
+      {
+        "text": "Correct thrombocytopenia and coagulopathy before and during an operation; a platelet count of at least 50 x 10^9/L is the usual threshold for major surgery.",
+        "evidenceRef": "bsh-plt"
+      },
+      {
+        "text": "Transfuse to restrictive targets unless bleeding is massive, using blood components early in haemorrhage.",
+        "evidenceRef": "bsh-plt"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Operate on neutropenic enterocolitis for free perforation, persistent bleeding after correction of coagulopathy and thrombocytopenia, or deterioration despite full medical treatment. Resect all necrotic bowel and favour a stoma over an anastomosis.",
+        "evidenceRef": "nesher-ne"
+      },
+      {
+        "text": "Perforation at a colonic tumour: resection with oncological principles where possible; with diastatic caecal perforation proximal to an obstructing tumour, a subtotal colectomy.",
+        "evidenceRef": "wses-crc"
+      },
+      {
+        "text": "In a septic, unstable patient, damage control: resect, control contamination, leave in discontinuity or form a stoma, and return.",
+        "evidenceRef": "wses-crc"
+      },
+      {
+        "text": "Bleeding tumour: endoscopic haemostasis for luminal lesions, angiographic embolisation where available, and surgery when these fail or are unavailable. Palliative radiotherapy controls slower tumour bleeding.",
+        "evidenceRef": "bsh-plt"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Consultant surgeon, oncologist or haematologist, and critical care together. Neutropenic patients deteriorate faster than the observations suggest."
+      },
+      {
+        "text": "Interventional radiology early for a bleeding tumour or a drainable collection."
+      },
+      {
+        "text": "Palliative care where the cancer is advanced and the operation would not change the outcome that matters to the patient."
+      }
+    ]
+  },
+  "notes": [
+    "The neutropenic abdomen lies: no pus, little guarding, and a near-normal white count. CT findings and the trend in the patient carry the diagnosis.",
+    "Neutropenic enterocolitis is mainly a medical disease with a few clearly defined surgical indications. Knowing those indications is the surgical skill.",
+    "An emergency cancer operation is still a cancer operation. Where the patient is stable enough, a proper oncological resection now avoids a second operation later."
+  ],
+  "calcs": [
+    "anc",
+    "mascc",
+    "qsofa",
+    "sofa",
+    "news2",
+    "shock_index"
+  ]
+}

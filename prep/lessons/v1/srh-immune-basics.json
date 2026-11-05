@@ -1,0 +1,211 @@
+{
+  "v": 1,
+  "module": "srh-immune-basics",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Innate and adaptive immunity in rheumatic disease",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Sensors of innate immunity identify danger signals through pattern recognition receptors. Surface **Toll-like receptor 4** or TLR4 recognises bacterial endotoxin and host endogenous alarmins such as HMGB1. Endosomal sensors **TLR7** and **TLR9** detect microbial and self nucleic acids including single-stranded RNA and unmethylated CpG DNA. Engagement of endosomal TLR pathways stimulates rapid **type I interferon** production, driving autoimmune pathogenesis in systemic lupus erythematosus.",
+      "say": "Pattern recognition receptors identify microbial and danger signals. Surface TLR4 identifies bacterial endotoxin and host alarmins. Endosomal TLR7 and TLR9 stimulate type one interferon production in systemic lupus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/complement-c3-deficiency-fig1.webp",
+        "alt": "Innate immune pattern recognition and complement activation pathways",
+        "caption": "Innate immune receptors and complement activation pathways in rheumatic autoimmunity. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Inflammatory caspases regulate acute crystal-mediated joint attacks through the **NLRP3 inflammasome**. Cytosolic assembly unites sensor NLRP3, adapter protein ASC, and **procaspase-1**. Autoproteolytic cleavage generates active enzyme **caspase-1**, which cleaves precursor peptides into mature secretable **IL-1beta** and **IL-18**. Uncontrolled inflammasome activation triggers intense neutrophil influx during acute flares of gout, pseudogout, and cryopyrin-associated periodic syndromes.",
+      "say": "The NLRP3 inflammasome regulates acute crystal inflammation. Sensor assembly generates active caspase-1 to cleave precursor peptides into interleukin-1 beta and interleukin-18. This pathway stimulates intense inflammation during acute flares.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sensor NLRP3 and ASC bind procaspase-1"
+          },
+          {
+            "id": "b",
+            "label": "Active caspase-1 generated"
+          },
+          {
+            "id": "c",
+            "label": "IL-1beta and IL-18 secreted"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lineage-determining cytokines guide naive CD4 positive T cell differentiation into functional helper subsets. Interleukin-12 and interferon-gamma direct **Th1** commitment via master regulator **T-bet**. Interleukin-4 promotes **Th2** differentiation through **GATA3**. Transforming growth factor-beta and interleukin-6 induce **Th17** differentiation through transcription factor **ROR-gamma-t**. Effector cytokines **IL-17A**, **IL-17F**, and **IL-22** stimulate tissue fibroblasts and recruit neutrophils in spondyloarthritis.",
+      "say": "Lineage cytokines direct naive helper T cell commitment. Interleukin-12 guides Th1 development, while interleukin-6 and TGF-beta induce Th17 cells through ROR-gamma-t. Th17 cytokines recruit neutrophils in spondyloarthritis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subset",
+          "Master factor",
+          "Primary cytokines",
+          "Disease role"
+        ],
+        "rows": [
+          [
+            "Th1",
+            "T-bet",
+            "IFN-gamma",
+            "Rheumatoid synovitis"
+          ],
+          [
+            "Th2",
+            "GATA3",
+            "IL-4",
+            "Allergic immunity"
+          ],
+          [
+            "Th17",
+            "ROR-gamma-t",
+            "IL-17A, IL-17F, IL-22",
+            "Spondyloarthritis, PsA"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Peripheral self-tolerance relies on **regulatory T cells** that express surface CD4, CD25, and nuclear master factor **FOXP3**. Inactivating mutations of the FOXP3 gene cause fatal systemic **IPEX syndrome**, characterised by immune dysregulation, polyendocrinopathy, enteropathy, and X-linked inheritance. Circulating regulatory T cells suppress self-reactive effector lymphocytes through inhibitory cytokines **IL-10** and **TGF-beta**, alongside contact-dependent co-inhibitory receptor **CTLA-4** signaling.",
+      "say": "Regulatory T cells express CD4, CD25, and nuclear factor FOXP3. Genetic deficiency of FOXP3 causes the fatal IPEX syndrome. Regulatory T cells suppress autoreactive lymphocytes through IL-10, TGF-beta, and CTLA-4.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-glomerulonephritis-child-fig1.webp",
+        "alt": "Endothelial immune complex deposition and immune regulation",
+        "caption": "Regulatory mechanisms prevent immune complex deposition and tissue damage. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Central B cell tolerance eliminates self-reactive immature lymphocytes within bone marrow. High-avidity engagement with self-antigen triggers **clonal deletion** or light chain **receptor editing**. Developing lymphocytes escaping into secondary lymphoid organs undergo **clonal anergy** or suppression by regulatory B cells. Autoreactive B cell longevity depends heavily on cytokine **BAFF**, whose pathological excess sustains autoantibody-producing clones in systemic lupus erythematosus.",
+      "say": "Central tolerance in bone marrow removes self-reactive immature B cells by clonal deletion or receptor editing. Excess BAFF promotes peripheral autoreactive B cell survival in lupus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Central B tolerance",
+          "points": [
+            "Occurs in bone marrow",
+            "Clonal deletion of reactive clones",
+            "Receptor editing of light chains",
+            "Apoptosis of self-reactive cells"
+          ]
+        },
+        "right": {
+          "title": "Peripheral B tolerance",
+          "points": [
+            "Secondary lymphoid tissues",
+            "Induction of clonal anergy",
+            "Suppression by regulatory B cells",
+            "BAFF-dependent survival checkpoints"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Proinflammatory cytokines orchestrate progressive articular erosion and destructive changes. Synovial macrophage-derived **TNF-alpha** and **IL-6** stimulate osteoclast differentiation by inducing mesenchymal **RANKL** expression. Concurrently, interleukin-23 promotes clonal survival of pathogenic Th17 cells. The resulting **IL-23/IL-17 axis** establishes persistent enthesitis, cartilage breakdown, and pathological new bone formation across axial and peripheral spondyloarthropathies.",
+      "say": "Tumor necrosis factor and interleukin-6 induce RANKL to drive osteoclast bone erosion. The interleukin-23 and interleukin-17 axis mediates enthesitis and new bone formation in spondyloarthritis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "IL-23 stabilizes Th17 lymphocytes"
+          },
+          {
+            "id": "b",
+            "label": "IL-17, TNF-alpha, and IL-6 released"
+          },
+          {
+            "id": "c",
+            "label": "RANKL induces osteoclast erosion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Major histocompatibility complex polymorphisms convey major disease susceptibility in clinical rheumatology. The class I allele **HLA-B27** confers a relative risk exceeding **40** for ankylosing spondylitis through peptide presentation, heavy-chain homodimers, or endoplasmic reticulum stress. Conversely, the **shared epitope** encodes conserved pentapeptides **QKRAA** or **QRRAA** in **HLA-DRB1**, strongly predisposing to anti-cyclic citrullinated peptide antibody-positive rheumatoid arthritis.",
+      "say": "Major histocompatibility alleles confer strong disease susceptibility. HLA-B27 raises the relative risk of ankylosing spondylitis above 40. The HLA-DRB1 shared epitope strongly predisposes to anti-CCP positive rheumatoid arthritis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "HLA allele",
+          "Sequence or mechanism",
+          "Risk feature"
+        ],
+        "rows": [
+          [
+            "Ankylosing spondylitis",
+            "HLA-B27",
+            "Heavy-chain homodimers",
+            "Relative risk over 40"
+          ],
+          [
+            "Rheumatoid arthritis",
+            "HLA-DRB1",
+            "Shared epitope QKRAA or QRRAA",
+            "Strong anti-CCP link"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autoimmune tissue injury frequently arises through **molecular mimicry** when pathogen antigens share structural homology with host self-peptides. In acute rheumatic fever, group A streptococcal **M protein** evokes cross-reactive antibody and cellular responses against cardiac **myosin** and basal ganglia. This structural mimicry produces carditis, Sydenham chorea, subcutaneous nodules, and migratory polyarthritis following untreated streptococcal pharyngitis.",
+      "say": "Molecular mimicry occurs when microbial antigens share structure with host proteins. Group A streptococcal M protein evokes cross-reactive immunity targeting cardiac myosin in acute rheumatic fever.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Group A streptococcal M protein exposure"
+          },
+          {
+            "id": "b",
+            "label": "Cross-reactive antibody and T cell response"
+          },
+          {
+            "id": "c",
+            "label": "Cardiac myosin damage and carditis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

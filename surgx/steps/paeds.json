@@ -1,0 +1,133 @@
+{
+  "_comment": "Shared paediatric surgical steps, used by two or more paediatric procedures (pyloromyotomy, herniotomy). Procedure-only steps live in each procedure's steps_local.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.paeds.physiology-gate": {
+      "id": "step.paeds.physiology-gate", "kind": "checkpoint", "critical": true,
+      "title": "Paediatric physiology check before anaesthesia",
+      "why": "Infants decompensate quickly and tolerate an uncorrected metabolic, glucose or temperature problem badly. In infant surgery the decision to start is often more important than the operation itself.",
+      "how": [
+        "Confirm today's weight and that drug and fluid doses on the chart are calculated from it.",
+        "Review the latest electrolytes, gas and glucose against the agreed criteria for this operation.",
+        "Record gestation at birth and post-menstrual age, and agree the post-operative apnoea monitoring plan with the anaesthetist.",
+        "Confirm fasting status, intravenous fluids running, and that the parents have been consented and know where the baby will recover."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Proceeding because the list is booked when the bloods do not meet the agreed criteria.",
+        "Using a birth weight from weeks ago instead of today's weight."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.paeds.warming": {
+      "id": "step.paeds.warming", "kind": "prep",
+      "title": "Thermal care for the infant",
+      "why": "Infants have a large surface area for their mass and little subcutaneous fat. Hypothermia increases oxygen consumption, worsens coagulation and delays emergence and feeding.",
+      "how": [
+        "Warm the theatre before the infant arrives, and use a forced-air warmer or warming mattress.",
+        "Cover the head and limbs and expose only the operative field.",
+        "Use warmed preparation and irrigation fluids, and monitor core temperature throughout."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Prolonged exposure during positioning and draping while the team waits.", "Pooled cold skin preparation under the infant."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.paeds.local-anaesthetic": {
+      "id": "step.paeds.local-anaesthetic", "kind": "prep",
+      "title": "Weight-based local anaesthetic infiltration",
+      "why": "Wound infiltration or a regional block reduces opioid need, and opioids increase the risk of post-operative apnoea in infants. The margin between a useful and a toxic local anaesthetic dose is narrow at this size.",
+      "how": [
+        "Agree the agent, concentration and maximum dose by weight with the anaesthetist before infiltration, and record it.",
+        "Aspirate before injecting and infiltrate slowly.",
+        "Count every local anaesthetic given by the surgeon and the anaesthetist together against the single maximum dose."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["The anaesthetist gives a caudal block and the surgeon infiltrates a further full dose without either knowing."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.paeds.daycase-discharge": {
+      "id": "step.paeds.daycase-discharge", "kind": "checkpoint",
+      "title": "Day-case discharge criteria and parent instructions",
+      "why": "Most complications of day-case genital surgery in children, such as bleeding, urinary retention and wound infection, declare themselves after the family has gone home. Parents can only act on warning signs they were told about in plain words.",
+      "how": [
+        "Confirm the child is awake, drinking, comfortable on a weight-based analgesia plan, and that the wound is dry before discharge.",
+        "Confirm the child has passed urine, or that the family knows exactly what to do if the child has not passed urine within the time agreed locally.",
+        "Give written instructions: analgesia doses and timing, bathing and wound care, when any dressing comes off, activity restrictions, and the signs that need urgent review (bleeding that does not stop with firm pressure, inability to pass urine, fever, spreading redness or swelling).",
+        "Give a named contact number and the follow-up arrangement, and record that this was done."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Instructions given only verbally to a tired parent at the end of the day.",
+        "No plan for a child who has not passed urine by evening after a penile block or caudal."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.paeds.infant-laparotomy-prep": {
+      "id": "step.paeds.infant-laparotomy-prep", "kind": "prep", "critical": true,
+      "title": "Resuscitation, decompression and lines before a paediatric laparotomy",
+      "why": "Children with intussusception or midgut volvulus are often more dehydrated and acidotic than they look, and they decompensate abruptly at induction. A child brought to theatre resuscitated, decompressed and with blood available tolerates the operation; one who is not may not tolerate the induction.",
+      "how": [
+        "Confirm that weight-based isotonic fluid boluses have restored perfusion: heart rate, capillary refill, urine output and lactate or base deficit moving in the right direction.",
+        "Pass a nasogastric tube on free drainage and aspirate it before induction to reduce the aspiration risk.",
+        "Secure reliable intravenous access; send a blood gas, electrolytes, glucose, and group and crossmatch, with blood available in theatre in case a resection is needed.",
+        "Insert a urinary catheter in a sick child, and agree with the anaesthetist on arterial access and the post-operative destination (ward, HDU, PICU or NICU)."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Delaying a child with suspected volvulus for full correction of every number: resuscitate in parallel and go, because the bowel is dying while you wait.",
+        "Discovering that no blood is available at the moment a resection becomes necessary."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.paeds.transverse-laparotomy": {
+      "id": "step.paeds.transverse-laparotomy", "kind": "access",
+      "title": "Transverse laparotomy in an infant or child",
+      "why": "In infants and young children the abdomen is wider than it is long. A transverse incision gives access to the whole midgut, heals strongly, and is less prone to dehiscence than a midline incision at this age.",
+      "how": [
+        "Make a transverse incision in the right upper quadrant above the umbilicus for malrotation, or on the right side over the palpable mass for intussusception, extending across the midline as needed.",
+        "Divide the rectus muscle with diathermy, controlling the superior epigastric vessels, and divide or split the lateral muscles in layers.",
+        "In a neonate, divide the umbilical vein remnant between ligatures when the incision crosses the midline.",
+        "Open the peritoneum with care because distended bowel lies immediately beneath. Note the character of any fluid (clear, bloodstained, turbid, faeculent or chylous) and send a sample for culture."
+      ],
+      "structuresAtRisk": ["Distended or ischaemic bowel beneath the peritoneum", "Superior epigastric vessels", "Liver edge in a neonate"],
+      "pitfalls": [
+        "An incision too small, so ischaemic bowel is delivered through a tight wound.",
+        "Opening the peritoneum with a blade onto distended bowel."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.paeds.incidental-appendicectomy": {
+      "id": "step.paeds.incidental-appendicectomy", "kind": "resection",
+      "title": "Appendicectomy at laparotomy for malrotation or intussusception",
+      "why": "After a Ladd procedure the caecum lies in the left upper abdomen, so later appendicitis presents in the wrong place. After operative reduction of an ileocolic intussusception the appendix is often oedematous or bruised and there is now a right-sided scar. Removing it when it is safe removes a future diagnostic trap.",
+      "how": [
+        "Confirm that appendicectomy was included in the consent discussion.",
+        "Divide the mesoappendix between ligatures, ligate the base with absorbable suture and remove the appendix; manage the stump per the surgeon's usual practice.",
+        "Do not remove it if the caecal wall at the base is oedematous or ischaemic, or if the child is unstable: a stump leak is a worse outcome than a later atypical appendicitis.",
+        "Record clearly in the operation note and the discharge letter that the appendix has been removed, and tell the parents."
+      ],
+      "structuresAtRisk": ["Caecal wall at the appendix base", "Appendicular artery"],
+      "pitfalls": [
+        "Ligating the base across an oedematous caecum after a difficult reduction.",
+        "Not recording the appendicectomy, so a later clinician still considers appendicitis."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.paeds.transverse-closure": {
+      "id": "step.paeds.transverse-closure", "kind": "closure", "critical": true,
+      "title": "Closing a transverse paediatric laparotomy",
+      "why": "Dehiscence after a paediatric laparotomy is usually a technical failure, made more likely by distension, sepsis and poor nutrition. A secure fascial closure without tension prevents a burst abdomen, and recognising when the abdomen should not be closed prevents abdominal compartment syndrome.",
+      "how": [
+        "Return the bowel to the abdomen. If closure would raise ventilation pressures markedly, discuss a temporary abdominal closure with the anaesthetist rather than forcing it.",
+        "Close in one or two layers (posterior sheath with peritoneum, then the anterior sheath and muscle) with absorbable sutures sized for the child.",
+        "Keep the bowel protected under an instrument or finger for every bite."
+      ],
+      "structuresAtRisk": ["Bowel caught in a fascial bite"],
+      "pitfalls": [
+        "Forcing closure over distended bowel, causing respiratory compromise and abdominal compartment syndrome.",
+        "Bites too close to the edge in thin infant fascia, which cut out."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

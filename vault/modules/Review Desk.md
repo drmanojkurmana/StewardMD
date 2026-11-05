@@ -52,3 +52,7 @@ signing desk for [[Clinical Bulletins]] and, unlike the tabs above, reads and wr
 Key files: `review-desk.js`, `clinical-docs.css` (styles), `scripts/apply-reviews.mjs`,
 `scripts/check-guideline-updates.mjs`, tests in `test/kit-tools-docs.test.mjs` and
 `test/run-specialty-kits-ui.mjs`.
+
+## iPad (2026-11-04)
+On a tablet at 1000 px and wider `review-desk.js` `splitOn()` keeps the list on the left and opens the chosen item beside
+it (`.rv-split`, styled in `ipad-care.css`). Phones and Split View keep list, then item.

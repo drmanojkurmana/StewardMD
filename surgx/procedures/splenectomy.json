@@ -1,0 +1,199 @@
+{
+  "id": "splenectomy",
+  "title": "Splenectomy: trauma and elective",
+  "subtitle": "Mobilise, control the hilum, protect the pancreatic tail, vaccinate",
+  "system": "upper gastrointestinal",
+  "aliases": ["open splenectomy", "trauma splenectomy", "laparoscopic splenectomy", "emergency splenectomy"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "wses-spleen", "org": "World Society of Emergency Surgery (WSES)", "title": "Splenic trauma: WSES classification and guidelines for adult and pediatric patients (Coccolini F et al., World J Emerg Surg)", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Coccolini+splenic+trauma+WSES+classification+and+guidelines+2017", "accessed": "2026-11-04" },
+    { "id": "east-spleen", "org": "Eastern Association for the Surgery of Trauma (EAST)", "title": "Nonoperative management of blunt splenic injury: an Eastern Association for the Surgery of Trauma practice management guideline (Stassen NA et al., J Trauma Acute Care Surg)", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Stassen+nonoperative+management+of+blunt+splenic+injury+EAST+practice+management+guideline", "accessed": "2026-11-04" },
+    { "id": "bcsh-asplenia", "org": "British Committee for Standards in Haematology (BCSH)", "title": "Review of guidelines for the prevention and treatment of infection in patients with an absent or dysfunctional spleen (Davies JM et al., Br J Haematol)", "year": 2011, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Davies+prevention+and+treatment+of+infection+in+patients+with+an+absent+or+dysfunctional+spleen+2011", "accessed": "2026-11-04" },
+    { "id": "green-book-ch7", "org": "UK Health Security Agency", "title": "Immunisation against infectious disease (the Green Book), chapter 7: immunisation of individuals with underlying medical conditions", "year": 2020, "url": "https://www.gov.uk/government/publications/immunisation-of-individuals-with-underlying-medical-conditions-the-green-book-chapter-7", "accessed": "2026-11-04" },
+    { "id": "eaes-lap-spleen", "org": "European Association for Endoscopic Surgery (EAES)", "title": "Laparoscopic splenectomy: the clinical practice guidelines of the European Association for Endoscopic Surgery (Habermalz B et al., Surg Endosc)", "year": 2008, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Habermalz+laparoscopic+splenectomy+clinical+practice+guidelines+European+Association+for+Endoscopic+Surgery", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["shock_index", "rts", "gcs", "caprini", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Trauma: splenic injury with haemodynamic instability not responding to resuscitation, or failure of non-operative management (ongoing bleeding or transfusion need) where angioembolisation is not appropriate or not available.",
+      "Trauma with another indication for laparotomy and a splenic injury that cannot be safely repaired.",
+      "Elective haematological indications as agreed with haematology: refractory immune thrombocytopenia, hereditary spherocytosis and other haemolytic anaemias in selected patients, and some lymphoproliferative disorders.",
+      "Splenic abscess, cyst, tumour or splenic artery aneurysm where a splenectomy is the chosen treatment; en bloc with other organs in some cancer resections."
+    ],
+    "contraindications": [
+      "A haemodynamically stable patient with blunt splenic injury and no other indication for laparotomy: non-operative management with or without angioembolisation is the standard, in a unit able to monitor and operate.",
+      "Elective splenectomy without completed immunisation where it can be delayed.",
+      "Laparoscopy specifically: haemodynamic instability, massive splenomegaly beyond the team's experience, or uncorrected portal hypertension."
+    ],
+    "preparation": [
+      "Trauma: ATLS primary survey, haemorrhage control resuscitation, blood products via the major haemorrhage protocol, and theatre without delay for the unstable patient.",
+      "Elective: immunise against pneumococcus, Haemophilus influenzae type b and meningococcus (ACWY and B) at least two weeks before surgery, with seasonal influenza vaccine, per national schedule.",
+      "Emergency splenectomy: give the same vaccines once the patient has recovered, typically from two weeks after surgery, before discharge if follow-up is uncertain.",
+      "Immune thrombocytopenia: optimise the platelet count with haematology; have platelets available and give them after the splenic artery is controlled.",
+      "Cross-match per the indication; imaging of spleen size and any accessory spleens for elective cases.",
+      "Consent: bleeding, injury to the pancreatic tail (pancreatic fistula), stomach and colon, left subphrenic collection, thrombocytosis and venous thrombosis (including portal vein thrombosis), lifelong risk of overwhelming post-splenectomy infection, the need for vaccination and antibiotic prophylaxis, and conversion to open for laparoscopic cases."
+    ],
+    "positioning": [
+      "Trauma: supine, arms out, prepared from nipples to knees for a full trauma laparotomy.",
+      "Elective open: supine with a sandbag or bolster under the left side.",
+      "Elective laparoscopic: right lateral decubitus (left side up) or semi-lateral, with the table broken to open the space between the costal margin and the iliac crest; secure well before tilting."
+    ],
+    "equipment": [
+      "Laparotomy set with a fixed retractor, large packs, long instruments, vascular clamps and ties.",
+      "Energy device, vascular stapler for the hilum (useful in both open and laparoscopic surgery).",
+      "Cell saver for trauma or large spleens where appropriate.",
+      "Laparoscopic: 30-degree scope, energy device, vascular stapler, strong retrieval bag, morcellation within the bag for benign disease."
+    ],
+    "anatomy": [
+      "The spleen lies in the left upper quadrant behind ribs 9 to 11, held by the splenorenal (lienorenal) ligament containing the splenic vessels and the tail of the pancreas, the gastrosplenic ligament containing the short gastric vessels, and the splenocolic and splenophrenic attachments.",
+      "The splenic artery runs a tortuous course along the upper border of the pancreas; the splenic vein runs behind the pancreas. At the hilum they divide into segmental branches.",
+      "The tail of the pancreas reaches the splenic hilum in many patients and is injured by mass ligation of the hilum.",
+      "Accessory spleens are common, most often near the hilum, in the gastrosplenic ligament or near the tail of the pancreas; missing them in immune thrombocytopenia causes relapse."
+    ],
+    "criticalSafety": [
+      "Mobilise the spleen fully (divide its lateral and posterior attachments) and bring it forwards into the wound before attempting to control the hilum.",
+      "Control the hilum by compression first; then ligate vessels close to the spleen, away from the tail of the pancreas.",
+      "Divide the short gastric vessels close to the spleen, without including the gastric wall.",
+      "In elective splenectomy for immune thrombocytopenia, search for and remove accessory spleens.",
+      "Before leaving theatre, plan vaccination and antibiotic prophylaxis and document asplenia."
+    ],
+    "structuresAtRisk": [
+      "Tail of the pancreas",
+      "Greater curve of the stomach (short gastrics)",
+      "Splenic flexure of the colon",
+      "Left diaphragm and left adrenal",
+      "Splenic vein and its confluence"
+    ],
+    "commonErrors": [
+      "Trying to clamp the hilum through a small incision before the spleen is mobilised, tearing the splenic vein.",
+      "Mass ligation of the hilum that includes the pancreatic tail.",
+      "Short gastric ties that include the stomach wall, causing gastric necrosis or fistula.",
+      "Persisting with complex splenic repair in an unstable trauma patient.",
+      "Forgetting vaccinations and prophylaxis after an emergency splenectomy."
+    ],
+    "complications": [
+      "Bleeding (short gastrics, hilum, diaphragm).",
+      "Pancreatic fistula and left subphrenic collection.",
+      "Gastric injury, colonic injury, left lower lobe atelectasis and pleural effusion.",
+      "Thrombocytosis and venous thrombosis, including portal and splenic vein thrombosis.",
+      "Overwhelming post-splenectomy infection, lifelong, most often pneumococcal."
+    ],
+    "postop": [
+      "Monitor the platelet count; venous thromboembolism prophylaxis per risk, recognising that thrombocytosis is common.",
+      "Drain amylase if a drain was placed near the pancreatic tail; a persistent amylase-rich output is a pancreatic fistula.",
+      "Vaccinate per national guidance (emergency patients from about two weeks after surgery); give annual influenza vaccine.",
+      "Antibiotic prophylaxis and a supply of emergency standby antibiotics per national guidance, an asplenia card or alert, and advice to seek urgent care for any fever.",
+      "Travel advice, including malaria precautions."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Elective: confirm the vaccines were given at least two weeks ago. Trauma: consent may be brief, but record lifelong infection risk for later discussion." },
+    { "ref": "step.core.timeout", "emphasis": "State blood availability, cell saver, and the plan if the spleen cannot be salvaged. In trauma, keep it short but do it." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Trauma: supine, arms out. Elective laparoscopic: right lateral decubitus, table broken, well secured." },
+    { "ref": "step.core.prep-drape", "emphasis": "Trauma: nipples to knees." },
+    { "ref": "step.abd.midline", "emphasis": "Trauma: midline, always. A left subcostal incision is an option for elective open splenectomy." },
+    { "ref": "step.abd.exploration", "emphasis": "Trauma: evacuate clot, pack all four quadrants with the left upper quadrant packed firmly, let the anaesthetist catch up, then explore systematically for other injuries." },
+    { "ref": "step.spl.mobilise" },
+    { "ref": "step.spl.salvage-decision" },
+    { "ref": "step.spl.short-gastrics" },
+    { "ref": "step.spl.hilum" },
+    { "ref": "step.hpb.major-bleed", "emphasis": "Splenic bleeding: compress the hilum between finger and thumb, or pack the bed, while the hilum is clamped and ligated; complete the splenectomy rather than attempt salvage in a deteriorating patient." },
+    { "ref": "step.spl.accessory" },
+    { "ref": "step.core.haemostasis", "emphasis": "Inspect the splenic bed, the diaphragm, the short gastric ties, the hilum and the tail of the pancreas." },
+    { "ref": "step.abd.drain", "emphasis": "Selective: when the pancreatic tail was injured or is doubtful. Send drain amylase." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Weigh the spleen if haematology wants it; send it intact for histology when a lymphoma or tumour is possible." },
+    { "ref": "step.abd.mass-closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record asplenia, the vaccination plan, antibiotic prophylaxis, accessory spleens found, and the pancreatic tail status." }
+  ],
+  "steps_local": {
+    "step.spl.mobilise": {
+      "id": "step.spl.mobilise", "kind": "dissection", "critical": true,
+      "title": "Mobilising the spleen forwards into the wound",
+      "why": "The splenic hilum is deep and posterior. Dividing the lateral and posterior attachments lets the spleen, with the tail of the pancreas, be rotated forwards and medially into the wound, where the hilum can be compressed and controlled under vision.",
+      "how": [
+        "With the left hand, draw the spleen gently medially; divide the splenophrenic and splenorenal (lienorenal) peritoneal reflections lateral to the spleen with scissors.",
+        "Develop the avascular plane behind the spleen and the tail of the pancreas with blunt finger dissection, lifting both forwards together.",
+        "Place packs in the splenic bed behind the mobilised spleen to hold it forwards and tamponade the bed.",
+        "Divide the splenocolic attachments and push the splenic flexure down."
+      ],
+      "structuresAtRisk": ["Splenic capsule", "Left kidney and adrenal (if the plane is too deep)", "Splenic flexure", "Diaphragm"],
+      "pitfalls": [
+        "Pulling on the spleen before its attachments are divided, which tears the capsule and increases bleeding.",
+        "Developing the plane behind the kidney instead of behind the pancreas."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spl.salvage-decision": {
+      "id": "step.spl.salvage-decision", "kind": "checkpoint", "critical": true,
+      "title": "Salvage or remove: the trauma decision",
+      "why": "Preserving the spleen avoids lifelong infection risk, but a repair that bleeds again in an unstable patient is lethal. The decision depends more on the patient's physiology and associated injuries than on the injury grade alone.",
+      "how": [
+        "Inspect the injury once the spleen is mobilised: capsular tears, parenchymal lacerations, hilar injury and fragmentation.",
+        "Consider salvage (topical haemostats, suture splenorrhaphy, mesh wrap, partial splenectomy) only for a stable patient with an isolated, limited injury and no hilar involvement.",
+        "Choose splenectomy for haemodynamic instability, coagulopathy, multiple injuries, hilar or shattered spleen, or failure of a first attempt at salvage.",
+        "State the decision aloud and record it."
+      ],
+      "structuresAtRisk": ["Splenic hilum", "Patient physiology"],
+      "pitfalls": [
+        "Time spent on a complex repair while the patient becomes cold and coagulopathic.",
+        "Salvage in a patient with other major injuries who cannot afford a re-bleed."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spl.short-gastrics": {
+      "id": "step.spl.short-gastrics", "kind": "dissection",
+      "title": "Dividing the short gastric vessels",
+      "why": "The short gastrics tether the spleen to the greater curve. They are short and close to the stomach at the upper pole, so ties placed carelessly either slip and bleed or include the gastric wall and cause necrosis.",
+      "how": [
+        "Open the gastrosplenic ligament in its lower, more accessible part and work upwards.",
+        "Divide each vessel between ties or clips close to the spleen, or with an energy device, keeping the stomach wall out of the tie.",
+        "At the upper pole, where the stomach is very close, take small bites under direct vision."
+      ],
+      "structuresAtRisk": ["Greater curve of the stomach", "Upper pole short gastric vessels"],
+      "pitfalls": [
+        "Including the gastric wall in the tie, which causes gastric necrosis or a fistula days later.",
+        "Tearing the upper short gastrics by traction, with bleeding that retracts behind the stomach."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spl.hilum": {
+      "id": "step.spl.hilum", "kind": "resection", "critical": true,
+      "title": "Controlling and dividing the splenic hilum",
+      "why": "The hilum carries the splenic artery and vein and lies against the tail of the pancreas. Controlled ligation close to the spleen removes the organ without bleeding or a pancreatic fistula.",
+      "how": [
+        "Compress the hilum between finger and thumb if bleeding, and identify the tail of the pancreas, separating it from the hilum.",
+        "Ligate the artery before the vein where they can be separated, which allows the spleen to auto-transfuse; in elective immune thrombocytopenia, this is when platelets are given.",
+        "Divide the hilar vessels close to the spleen with ties, suture ligatures or a vascular stapler, avoiding mass ligation that includes the pancreas.",
+        "Inspect the stumps and the pancreatic tail after removal."
+      ],
+      "structuresAtRisk": ["Tail of the pancreas", "Splenic vein", "Splenic artery stump"],
+      "pitfalls": [
+        "A mass clamp across the hilum that includes the pancreatic tail.",
+        "A single tie on a large hilar pedicle that slips; use suture ligatures or transfixion."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spl.accessory": {
+      "id": "step.spl.accessory", "kind": "checkpoint",
+      "title": "Searching for accessory spleens",
+      "why": "An accessory spleen left behind after splenectomy for immune thrombocytopenia or haemolysis can enlarge and cause relapse. They are easiest to find while the field is open and the splenic bed is clear.",
+      "how": [
+        "Inspect the hilum, the gastrosplenic and splenocolic ligaments, the greater omentum and the area of the tail of the pancreas.",
+        "Remove any accessory spleens in elective haematological cases.",
+        "In trauma, leave accessory splenic tissue: it may retain some function.",
+        "Record what was found."
+      ],
+      "structuresAtRisk": ["Tail of the pancreas", "Splenic flexure"],
+      "pitfalls": [
+        "Omitting the search in an elective case for immune thrombocytopenia.",
+        "Mistaking a lymph node or a pancreatic lobule for an accessory spleen."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

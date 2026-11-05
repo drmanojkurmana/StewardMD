@@ -1,0 +1,65 @@
+{
+  "id": "uro-renal-bladder-trauma",
+  "title": "Renal and bladder trauma",
+  "subtitle": "Grade it, keep the kidney, find the rupture",
+  "category": "uro_trauma",
+  "specialty": "urology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "eau-trauma", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urological Trauma", "year": 2024, "url": "https://uroweb.org/guidelines/urological-trauma", "accessed": "2026-11-04" },
+    { "id": "aua-urotrauma", "org": "American Urological Association (AUA)", "title": "Urotrauma: AUA Guideline", "year": 2020, "url": "https://www.auanet.org/guidelines-and-quality/guidelines/urotrauma-guideline", "accessed": "2026-11-04" },
+    { "id": "aast-2018", "org": "American Association for the Surgery of Trauma (AAST) (Kozar RA et al., Journal of Trauma and Acute Care Surgery)", "title": "Organ injury scaling 2018 update: spleen, liver, and kidney", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Organ+injury+scaling+2018+update%3A+spleen%2C+liver%2C+and+kidney", "accessed": "2026-11-04" },
+    { "id": "wses-aast-uro", "org": "World Society of Emergency Surgery (WSES) and AAST (Coccolini F et al., World Journal of Emergency Surgery)", "title": "Kidney and uro-trauma: WSES-AAST guidelines", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Kidney+and+uro-trauma%3A+WSES-AAST+guidelines", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Haemodynamic instability with a flank injury, flank haematoma or visible haematuria." },
+      { "text": "Rapid deceleration injury (fall from height, high-speed collision) even without haematuria: renal pedicle injury may not bleed into the urine." },
+      { "text": "Penetrating injury to the flank, back or lower chest." },
+      { "text": "Pelvic fracture with visible haematuria: bladder injury until a cystogram says otherwise." },
+      { "text": "Inability to void, suprapubic pain, rising creatinine or urinary ascites after lower abdominal trauma: an intraperitoneal bladder rupture can be missed for days." }
+    ],
+    "do_now": [
+      { "text": "Primary survey and haemorrhage control first. The kidney is rarely the reason a trauma patient dies; the bleeding elsewhere often is.", "timeCritical": true, "evidenceRef": "wses-aast-uro" },
+      { "text": "In a stable patient with suspected renal injury (visible haematuria, non-visible haematuria with hypotension, or a significant deceleration or penetrating mechanism), obtain contrast-enhanced CT with an early and a delayed excretory phase.", "timeCritical": true, "evidenceRef": "eau-trauma" },
+      { "text": "Pelvic fracture with visible haematuria: CT or conventional cystography with active retrograde filling of the bladder. Passive filling by clamping the catheter misses ruptures.", "timeCritical": true, "evidenceRef": "aua-urotrauma" },
+      { "text": "Check the urethra before passing a catheter in pelvic trauma; suspected urethral injury needs a urethrogram or suprapubic diversion.", "timeCritical": true, "evidenceRef": "eau-trauma" }
+    ],
+    "assess": [
+      { "text": "Mechanism, haemodynamics and response to resuscitation decide the pathway more than the grade does.", "calcs": ["shock_index", "gcs", "rts"] },
+      { "text": "Grade the renal injury on CT using the 2018 AAST scale: it incorporates active bleeding, pseudoaneurysm and arteriovenous fistula, and guides embolisation and follow-up." },
+      { "text": "Pre-existing renal disease, a solitary kidney, and the function of the contralateral kidney." },
+      { "text": "Renal function at baseline and on follow-up.", "calcs": ["kdigo_aki", "ckdepi"] }
+    ],
+    "investigate": [
+      { "text": "Contrast CT with delayed excretory images for renal injury; the delayed phase shows collecting system and ureteric injury." },
+      { "text": "Retrograde cystography (CT or fluoroscopic) with adequate distension for suspected bladder injury." },
+      { "text": "Unstable patient taken straight to laparotomy: a single-shot intravenous urogram on the table can confirm a functioning contralateral kidney before any nephrectomy." },
+      { "text": "Repeat imaging for high-grade injuries, fever, worsening flank pain, falling haemoglobin or persistent leak." }
+    ],
+    "resuscitate": [
+      { "text": "Damage control resuscitation with blood products for haemorrhagic shock per the trauma protocol.", "evidenceRef": "wses-aast-uro" },
+      { "text": "Angioembolisation for active renal bleeding, pseudoaneurysm or arteriovenous fistula in a patient who responds to resuscitation.", "evidenceRef": "eau-trauma" }
+    ],
+    "definitive": [
+      { "text": "Non-operative management for haemodynamically stable patients with renal injury of any grade, with bed rest, serial haemoglobin and observation in a monitored setting.", "evidenceRef": "aua-urotrauma" },
+      { "text": "Renal exploration for persistent haemodynamic instability attributable to the kidney, or an expanding or pulsatile retroperitoneal haematoma at laparotomy; attempt reconstruction where the patient's condition allows.", "evidenceRef": "eau-trauma" },
+      { "text": "Persistent urinary extravasation or urinoma: ureteric stent, with or without a percutaneous drain.", "evidenceRef": "aua-urotrauma" },
+      { "text": "Intraperitoneal bladder rupture: surgical repair.", "evidenceRef": "eau-trauma" },
+      { "text": "Uncomplicated extraperitoneal bladder rupture: catheter drainage. Repair it surgically if the bladder neck is involved, bone fragments are in the bladder wall, there is a rectal or vaginal injury, or the patient is undergoing open pelvic fixation.", "evidenceRef": "aua-urotrauma" }
+    ],
+    "escalate": [
+      { "text": "Trauma team leader owns the patient; urology advises on the genitourinary injury." },
+      { "text": "Interventional radiology early for active renal bleeding in a responder." },
+      { "text": "Urology in theatre for any renal exploration: reconstruction is often possible in experienced hands." }
+    ]
+  },
+  "notes": [
+    "Most renal injuries, including many high-grade ones, heal without surgery. The skill is selecting the few that need intervention, and that selection is driven by physiology.",
+    "If you open Gerota's fascia in a bleeding patient without vascular control, you will usually lose the kidney. Explore only for the indications, and know there is a second kidney first.",
+    "Intraperitoneal bladder rupture presents late as urinary ascites and a rising creatinine from peritoneal reabsorption. It is not acute kidney injury; it is a hole."
+  ],
+  "calcs": ["shock_index", "gcs", "rts", "kdigo_aki", "ckdepi"]
+}

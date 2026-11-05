@@ -1,0 +1,64 @@
+{
+  "id": "av-access-complications",
+  "title": "Dialysis access complications",
+  "subtitle": "Bleeding, thrombosis and steal in AV fistulas and grafts",
+  "category": "vascular",
+  "specialty": "vascular",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "esvs-access-2018", "org": "European Society for Vascular Surgery (ESVS)", "title": "Vascular Access: 2018 Clinical Practice Guidelines of the ESVS", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/29730128/", "accessed": "2026-11-04" },
+    { "id": "kdoqi-2019", "org": "National Kidney Foundation KDOQI", "title": "KDOQI Clinical Practice Guideline for Vascular Access: 2019 Update", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/32778223/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Active bleeding from a fistula or graft. High-flow access can exsanguinate a patient in minutes, including at home overnight." },
+      { "text": "Thin, shiny or ulcerated skin over an aneurysmal fistula, a scab that keeps recurring, or a small bleed: warning signs of imminent rupture." },
+      { "text": "A cold, painful, weak or numb hand on the access side, especially rest pain, tissue loss or a motor deficit: severe access-related hand ischaemia (steal)." },
+      { "text": "Pain, weakness and numbness in the hand immediately after access creation with a warm hand and a radial pulse: ischaemic monomelic neuropathy." },
+      { "text": "Loss of thrill and bruit, or a missed dialysis session. Check the potassium before anything else." },
+      { "text": "Erythema, pus or exposed graft over a prosthetic access: graft infection with risk of anastomotic blow-out." }
+    ],
+    "do_now": [
+      { "text": "Bleeding access: firm digital pressure exactly on the bleeding point, arm elevated, without occluding the whole access for long. A tourniquet proximal to the bleed for life-threatening haemorrhage that pressure does not control.", "timeCritical": true, "evidenceRef": "kdoqi-2019" },
+      { "text": "Skin breakdown or bleeding over an access aneurysm: urgent surgical review and do not cannulate that segment.", "timeCritical": true, "evidenceRef": "kdoqi-2019" },
+      { "text": "Thrombosed access: check potassium and fluid status first, dialyse through a temporary catheter if needed, and refer for declotting promptly to avoid losing the access.", "timeCritical": true, "evidenceRef": "esvs-access-2018" },
+      { "text": "Suspected ischaemic monomelic neuropathy: immediate vascular surgical review. Urgent ligation of the access is usually needed to save nerve function.", "timeCritical": true, "evidenceRef": "esvs-access-2018" }
+    ],
+    "assess": [
+      { "text": "Look, feel, listen: aneurysm, skin, thrill along the length, pulsatility (a hyperpulsatile access suggests outflow stenosis), and bruit." },
+      { "text": "Arm elevation test: a fistula that does not collapse on elevation has an outflow stenosis." },
+      { "text": "Hand: colour, temperature, capillary refill, radial pulse with and without access compression, sensation and grip." },
+      { "text": "Grade hand ischaemia by severity: mild coldness and numbness only during dialysis differs from rest pain, tissue loss or motor deficit." },
+      { "text": "Dialysis history: recent flow problems, prolonged bleeding after needle removal, rising venous pressures." }
+    ],
+    "investigate": [
+      { "text": "Potassium, FBC and coagulation before any procedure on a thrombosed access or a patient who has missed dialysis." },
+      { "text": "Duplex ultrasound for stenosis, thrombus extent, aneurysm wall and access flow volume." },
+      { "text": "Fistulography or central venography for suspected central venous stenosis (arm swelling, collateral veins)." },
+      { "text": "Digital pressures and access flow measurement to plan treatment for steal." }
+    ],
+    "resuscitate": [
+      { "text": "Major haemorrhage protocol for a shocked patient with an access bleed; reverse anticoagulation per local protocol.", "evidenceRef": "kdoqi-2019" },
+      { "text": "Treat hyperkalaemia before taking a patient with a thrombosed access to theatre.", "evidenceRef": "esvs-access-2018" },
+      { "text": "Never take blood pressure, place cannulae or apply a tourniquet routinely on the access arm.", "evidenceRef": "esvs-access-2018" }
+    ],
+    "definitive": [
+      { "text": "Thrombosis: surgical thrombectomy or endovascular thrombectomy, always with treatment of the underlying stenosis, or the access will thrombose again.", "evidenceRef": "esvs-access-2018" },
+      { "text": "Aneurysm with skin threat: surgical revision, resection with interposition, or ligation, as an urgent procedure.", "evidenceRef": "kdoqi-2019" },
+      { "text": "Severe steal: flow reduction (banding) for high-flow access, or distal revascularisation with interval ligation, revision using distal inflow, or proximalisation of the arterial inflow. Ligation sacrifices the access and is the last option.", "evidenceRef": "esvs-access-2018" },
+      { "text": "Infected prosthetic graft: excision of the infected graft, usually total, with antibiotics per local protocol.", "evidenceRef": "esvs-access-2018" }
+    ],
+    "escalate": [
+      { "text": "Vascular access surgeon and interventional radiology together; renal team for dialysis planning." },
+      { "text": "Patients and carers should know how to apply pressure to a bleeding access and to call emergency services. Check that they do." },
+      { "text": "Transfer to the access centre for complex revision; do not let an unfamiliar team ligate a salvageable access." }
+    ]
+  },
+  "notes": [
+    "A fistula is a lifeline. Every decision should ask how to save it, unless saving it threatens the hand or the patient.",
+    "Fistula haemorrhage deaths are preventable: they are preceded by skin warning signs that someone saw.",
+    "Fix the stenosis, not just the clot. A declot without treating the cause buys days, not months."
+  ]
+}

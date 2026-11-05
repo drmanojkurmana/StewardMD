@@ -1,0 +1,187 @@
+{
+  "id": "hip-fracture",
+  "title": "Hip fracture pathway",
+  "subtitle": "Analgesia now, theatre within a day, walk the next",
+  "category": "ortho_trauma",
+  "specialty": "orthopaedics",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "nice-cg124",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Hip fracture: management (CG124)",
+      "year": 2011,
+      "version": "CG124, last updated 2023",
+      "url": "https://www.nice.org.uk/guidance/cg124",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "aagbi-hip",
+      "org": "Association of Anaesthetists (Griffiths R et al). Anaesthesia 76:225",
+      "title": "Guideline for the management of hip fractures 2020",
+      "year": 2021,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33289066/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "baumgaertner-1995",
+      "org": "Baumgaertner MR et al. J Bone Joint Surg Am 77:1058",
+      "title": "The value of the tip-apex distance in predicting failure of fixation of peritrochanteric fractures of the hip",
+      "year": 1995,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7608228/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "A collapse rather than a trip: syncope, arrhythmia, stroke or sepsis may have caused the fall."
+      },
+      {
+        "text": "A long lie: rhabdomyolysis, pressure injury, hypothermia and acute kidney injury."
+      },
+      {
+        "text": "New confusion. Delirium is common, worsens outcome and is often missed when it is quiet."
+      },
+      {
+        "text": "Anticoagulant or antiplatelet treatment: plan reversal or timing now, not on the morning of surgery."
+      },
+      {
+        "text": "Pain before the fall, a low-energy fracture in a non-osteoporotic patient, or known cancer: suspect a pathological fracture."
+      },
+      {
+        "text": "Normal radiographs in a patient who still cannot weight-bear: an occult fracture until imaging says otherwise."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Give immediate analgesia on arrival, including to people with cognitive impairment: regular paracetamol, opioids if needed, and a nerve block by trained staff if those are insufficient.",
+        "timeCritical": true,
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "Assess pain on arrival, within 30 minutes of the first analgesia, and hourly until settled.",
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "Identify and treat correctable problems immediately so they do not delay surgery: anaemia, anticoagulation, volume depletion, electrolytes, diabetes, heart failure, arrhythmia or ischaemia, and chest infection.",
+        "timeCritical": true,
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "Look actively for cognitive impairment and delirium at presentation.",
+        "evidenceRef": "nice-cg124"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Shortened, externally rotated leg; skin and pressure areas; distal neurovascular status."
+      },
+      {
+        "text": "Screen for delirium and cognition, and record pre-fracture mobility, residence and frailty.",
+        "calcs": [
+          "4at",
+          "amts",
+          "cfs"
+        ]
+      },
+      {
+        "text": "Establish why she fell: ECG, lying and standing blood pressure when possible, and a medication review."
+      },
+      {
+        "text": "Anticoagulant: which agent, the last dose and renal function. This sets the earliest safe time for theatre."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Anteroposterior pelvis and lateral hip radiographs."
+      },
+      {
+        "text": "If radiographs are negative but suspicion persists, MRI; if MRI is not available within 24 hours or is contraindicated, consider CT."
+      },
+      {
+        "text": "Full blood count, renal function, electrolytes, group and save, ECG; creatine kinase after a long lie; coagulation when anticoagulated."
+      },
+      {
+        "text": "Do not let a test that will not change the anaesthetic plan delay surgery."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Correct volume depletion and electrolyte disturbance with intravenous fluids while awaiting theatre.",
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "Avoid NSAIDs in this group.",
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "Offer a choice of spinal or general anaesthesia after discussion, and consider an intra-operative nerve block.",
+        "evidenceRef": "nice-cg124"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Operate on the day of, or the day after, admission, on a planned trauma list with senior supervision.",
+        "timeCritical": true,
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "Operate so the patient can fully weight-bear without restriction immediately afterwards.",
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "Displaced intracapsular fracture: replacement arthroplasty with cemented implants. Consider total hip replacement for those who walked outdoors with no more than a stick, are fit for it, and are expected to remain independent beyond 2 years.",
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "Trochanteric fracture above and including the lesser trochanter, other than reverse oblique: sliding hip screw in preference to a nail.",
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "Subtrochanteric fracture: intramedullary nail.",
+        "evidenceRef": "nice-cg124"
+      },
+      {
+        "text": "With a sliding hip screw, place the lag screw centrally in the head with a small tip-apex distance; a large distance predicts cut-out.",
+        "evidenceRef": "baumgaertner-1995"
+      },
+      {
+        "text": "Physiotherapy assessment and mobilisation on the day after surgery, within an orthogeriatric Hip Fracture Programme that starts at admission.",
+        "evidenceRef": "nice-cg124"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Orthogeriatric review from admission, not after the operation."
+      },
+      {
+        "text": "If the fracture complicates a terminal illness, surgery may still be the best palliation for pain. Make that decision with the patient and family."
+      },
+      {
+        "text": "Suspected pathological fracture: hold, image the whole bone, and discuss with the metastatic bone disease service before fixing."
+      },
+      {
+        "text": "Any delay beyond the next day: escalate the reason and who is resolving it."
+      }
+    ]
+  },
+  "notes": [
+    "The Nottingham Hip Fracture Score is not in the calculator library. Use the frailty, cognition and delirium tools here and document the conversation about expected outcome.",
+    "Cemented hemiarthroplasty carries a risk of bone cement implantation syndrome. The team brief should name the high-risk patient and the plan before cement is mixed.",
+    "Undisplaced intracapsular fractures are usually fixed; in a frail patient some units prefer arthroplasty. Follow local policy and record the reasoning."
+  ],
+  "calcs": [
+    "4at",
+    "amts",
+    "cfs",
+    "rcri",
+    "caprini"
+  ]
+}

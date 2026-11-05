@@ -149,7 +149,7 @@
     r.querySelector(".igl-body").innerHTML =
       (shown.length ? '<div class="igl-grid">' + shown.map(function (e, i) {
         return '<button type="button" class="igl-card" data-igl="open" data-i="' + i + '">' +
-          '<span class="igl-thumb"' + (e.ar ? ' style="aspect-ratio:' + e.ar + '"' : "") + '><img src="' + esc(imgUrl(e.s)) +
+          '<span class="igl-thumb"><img src="' + esc(imgUrl(e.s)) +
           '" alt="' + esc(e.a || e.t) + '" loading="lazy" decoding="async"></span>' +
           '<span class="igl-cardt">' + esc(e.t) + '</span><span class="igl-cardf">' + esc(e.f) + " · " + esc(e.k) + "</span></button>";
       }).join("") + "</div>" : '<p class="igl-empty">No images match. Try a shorter search or clear a filter.</p>') +
@@ -176,7 +176,14 @@
   }
 
   var LINK_LABEL = { kb: "Read the article", lesson: "Open the lesson", ecg: "Open in KardiqX", eye: "Open in Ophthalmós",
-    ophthalmos: "Open in Ophthalmós", prep: "Open in PrepNucleus", clinix: "Open in CliniX", tokos: "Open in Tokós", narke: "Open in Narkē" };
+    ophthalmos: "Open in Ophthalmós", prep: "Open in PrepNucleus", clinix: "Open in CliniX", tokos: "Open in Tokós", narke: "Open in Narkē",
+    commons: "Open on Wikimedia Commons" };
+  /* A Commons file page opens outside the app (Capacitor Browser in the app, a new window in the test harness). */
+  function openExternal(url) {
+    try { var P = G.Capacitor && G.Capacitor.Plugins; if (P && P.Browser && P.Browser.open) { P.Browser.open({ url: url }); return true; } } catch (x) {}
+    try { if (G.open && G.open(url, "_blank")) return true; } catch (x) {}
+    return false;
+  }
   function openRef(e) {
     try {
       if (e.lk === "kb" && G.SMD_KB && G.SMD_KB.open) { close(); G.SMD_KB.open(e.ri); return; }
@@ -184,6 +191,7 @@
       if ((e.lk === "eye" || e.lk === "ophthalmos") && G.OPHTHALMOS && G.OPHTHALMOS.open) { close(); G.OPHTHALMOS.open(); return; }
       if ((e.lk === "lesson" || e.lk === "prep") && G.PREP && G.PREP.open) { close(); G.PREP.open({}); return; }
       if (e.lk === "clinix" && G.CLINIX && G.CLINIX.open) { close(); G.CLINIX.open(); return; }
+      if (e.lk === "commons" && /^https:\/\/commons\.wikimedia\.org\//.test(String(e.u || "")) && openExternal(e.u)) return;
     } catch (x) {}
     try { if (G.toast) G.toast("Open it from " + (e.f || "its module") + ": " + (e.rn || e.t)); } catch (x) {}
   }

@@ -1,0 +1,173 @@
+{
+  "id": "axillary-lymph-node-dissection",
+  "title": "Axillary lymph node dissection",
+  "subtitle": "Level I and II clearance with the axillary vein and three nerves defined",
+  "system": "breast",
+  "aliases": ["ALND", "axillary clearance", "axillary node clearance", "ANC"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng101", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Early and locally advanced breast cancer: diagnosis and management (NG101)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng101", "accessed": "2026-11-04" },
+    { "id": "asco-slnb-2017", "org": "American Society of Clinical Oncology (ASCO)", "title": "Sentinel lymph node biopsy for patients with early-stage breast cancer: American Society of Clinical Oncology clinical practice guideline update (Lyman GH et al., J Clin Oncol)", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Lyman+sentinel+lymph+node+biopsy+early-stage+breast+cancer+ASCO+guideline+update+2017", "accessed": "2026-11-04" },
+    { "id": "z0011", "org": "JAMA", "title": "Effect of axillary dissection vs no axillary dissection on 10-year overall survival among women with invasive breast cancer and sentinel node metastasis: the ACOSOG Z0011 (Alliance) randomized clinical trial (Giuliano AE et al.)", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Giuliano+ACOSOG+Z0011+10-year+overall+survival+axillary+dissection", "accessed": "2026-11-04" },
+    { "id": "amaros", "org": "Lancet Oncology", "title": "Radiotherapy or surgery of the axilla after a positive sentinel node in breast cancer (EORTC 10981-22023 AMAROS): a randomised, multicentre, open-label, phase 3 non-inferiority trial (Donker M et al.)", "year": 2014, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Donker+AMAROS+radiotherapy+or+surgery+of+the+axilla+positive+sentinel+node", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["npi_breast", "caprini", "apfel", "bmi"],
+  "chapters": {
+    "indications": [
+      "Biopsy-proven axillary nodal metastasis at presentation, where the MDT recommends surgical clearance rather than axillary radiotherapy.",
+      "Residual nodal disease after neoadjuvant systemic therapy in a patient who presented node-positive, per MDT.",
+      "Positive sentinel node biopsy where the patient does not meet the criteria for omitting further axillary treatment, and surgery rather than axillary radiotherapy is chosen (the Z0011 and AMAROS trials define who can safely avoid clearance).",
+      "Axillary recurrence after previous breast cancer treatment.",
+      "Failed sentinel node mapping in selected cases where the MDT requires axillary staging."
+    ],
+    "contraindications": [
+      "Clinically node-negative disease suitable for sentinel node biopsy: clearance adds morbidity without benefit.",
+      "Low-volume sentinel node disease meeting the criteria for no further axillary surgery after breast-conserving surgery with whole-breast radiotherapy.",
+      "Distant metastatic disease, except for symptomatic local control agreed by the MDT.",
+      "Active infection or ipsilateral arm lymphoedema needing assessment first."
+    ],
+    "preparation": [
+      "Documented MDT decision, staging appropriate to the nodal burden, and the axillary ultrasound and biopsy report available.",
+      "If neoadjuvant therapy was given, confirm the response assessment and whether a clipped node needs targeted removal and specimen imaging.",
+      "Baseline arm circumference or volume measurement and shoulder range of movement, per the unit's lymphoedema pathway.",
+      "Consent risks: lymphoedema of the arm, seroma, numbness of the inner upper arm (intercostobrachial nerve), shoulder stiffness, haematoma, infection, winged scapula (long thoracic nerve), latissimus weakness (thoracodorsal nerve), axillary vein injury (rare), and chronic pain."
+    ],
+    "positioning": [
+      "Supine with the arm on an arm board abducted to no more than 90 degrees, shoulder at the edge of the table.",
+      "Drape the arm free in a stockinette so the assistant can move it to relax pectoralis major during level II dissection.",
+      "A small roll under the scapula can bring the axilla forwards in a larger patient."
+    ],
+    "equipment": [
+      "Breast and axilla set, Langenbeck and Deaver retractors, fine dissecting scissors, monopolar and bipolar diathermy, ligaclips.",
+      "Nerve stimulator to confirm motor nerves where there is doubt.",
+      "Closed suction drain.",
+      "Specimen imaging access if a clipped node must be confirmed in the specimen."
+    ],
+    "anatomy": [
+      "Levels are defined by pectoralis minor: level I lateral to its lateral border, level II behind it, level III medial to it up to the apex below the clavicle.",
+      "The axillary vein forms the superior limit of a standard clearance; the specimen is taken from below it.",
+      "The long thoracic nerve runs vertically on the medial wall of the axilla on serratus anterior, in a fascial layer, close to the chest wall.",
+      "The thoracodorsal neurovascular bundle runs down the posterior wall on subscapularis to enter latissimus dorsi; the subscapular vessels lead to it.",
+      "The intercostobrachial nerve crosses the axilla transversely from the second intercostal space to the inner arm.",
+      "The medial pectoral nerve passes through or around pectoralis minor to supply both pectoral muscles; dividing it causes pectoralis major atrophy."
+    ],
+    "criticalSafety": [
+      "Define the axillary vein early and work below it; do not strip the vein adventitia or dissect above it in a standard clearance.",
+      "Identify and preserve the long thoracic and thoracodorsal nerves before dividing tissue on the medial and posterior walls.",
+      "Preserve the medial pectoral nerve when retracting pectoralis minor for level II.",
+      "Clear level III only for gross disease at that level, as the MDT directed; it adds lymphoedema risk.",
+      "Keep diathermy off the vein and away from the nerves; ligate or clip lymphatic tissue near the vein."
+    ],
+    "structuresAtRisk": [
+      "Axillary vein and artery",
+      "Long thoracic nerve",
+      "Thoracodorsal nerve and vessels",
+      "Medial and lateral pectoral nerves",
+      "Intercostobrachial nerve",
+      "Brachial plexus (above the vein)"
+    ],
+    "commonErrors": [
+      "Dissecting above the axillary vein, risking the brachial plexus and increasing lymphoedema.",
+      "Dividing the thoracodorsal bundle when it is pulled into the specimen by traction.",
+      "Taking the long thoracic nerve with the medial wall fat when it has been lifted off serratus.",
+      "Routine division of the intercostobrachial nerve without considering whether it can be kept.",
+      "Node picking in place of an en bloc clearance."
+    ],
+    "complications": [
+      "Seroma, the commonest problem, managed by aspiration if symptomatic.",
+      "Lymphoedema of the arm, more frequent after clearance than after sentinel node biopsy and more so with axillary radiotherapy.",
+      "Numbness and paraesthesia of the inner arm from intercostobrachial nerve division.",
+      "Winged scapula from long thoracic nerve injury; weakness of internal rotation and adduction from thoracodorsal injury.",
+      "Haematoma, infection, shoulder stiffness and axillary web syndrome (cording).",
+      "Axillary vein injury or thrombosis (rare)."
+    ],
+    "postop": [
+      "Early arm and shoulder exercises per the breast unit protocol, with physiotherapy referral when range is limited.",
+      "Drain care and removal per local protocol; seroma aspiration if symptomatic after drain removal.",
+      "Lymphoedema education: skin care, signs to report, and access to the lymphoedema service.",
+      "Histology to the breast MDT: number of nodes removed and involved, size of metastases, extranodal extension, and response to neoadjuvant therapy guide radiotherapy and systemic treatment."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side. Discuss lymphoedema plainly; it is the complication patients most regret not hearing about." },
+    { "ref": "step.onco.mdt-check", "emphasis": "Confirm why clearance rather than no further treatment or axillary radiotherapy, and whether level III is to be cleared. After neoadjuvant therapy, confirm whether a clipped node must be retrieved." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Arm abducted to no more than 90 degrees on a board, then draped free; over-abduction stretches the brachial plexus." },
+    { "ref": "step.core.prep-drape", "emphasis": "Include the arm to the elbow in the preparation and use a stockinette so it can be moved during the case." },
+    { "ref": "step.alnd.incision" },
+    { "ref": "step.onco.axilla-entry" },
+    { "ref": "step.alnd.vein-definition" },
+    { "ref": "step.alnd.nerves" },
+    { "ref": "step.alnd.level-ii" },
+    { "ref": "step.onco.nodal-clearance", "emphasis": "Deliver levels I and II as one packet from the vein above, the chest wall medially and latissimus laterally, between the two preserved nerves." },
+    { "ref": "step.onco.major-vein-injury", "emphasis": "The axillary vein: press, call for help and repair with fine monofilament; narrowing it causes a swollen arm." },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "Mark the apex (highest node at level II, or level III if cleared) with a suture. If a clipped node was targeted, confirm it is in the specimen by imaging." },
+    { "ref": "step.core.haemostasis", "emphasis": "Check the vein tributaries you ligated and the lateral thoracic vessels with the arm returned to the side." },
+    { "ref": "step.onco.suction-drain", "emphasis": "Bring the drain out below the incision in the mid-axillary line, away from the scar and from a future radiotherapy field where possible." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.alnd.incision": {
+      "id": "step.alnd.incision", "kind": "access",
+      "title": "Axillary incision below the hairline",
+      "why": "A transverse or gently curved incision just below the hair-bearing skin, between pectoralis major and latissimus dorsi, gives access to all levels with a scar that is hidden by the arm and does not contract across the axilla.",
+      "how": [
+        "Mark a transverse or lazy-S incision below the hairline, from the lateral border of pectoralis major to the anterior border of latissimus dorsi.",
+        "If combined with a mastectomy, use the lateral end of the mastectomy incision instead.",
+        "Raise skin flaps in the plane just beneath the subcutaneous fat, anteriorly to pectoralis major and posteriorly to latissimus dorsi.",
+        "Identify the lateral border of pectoralis major and the anterior border of latissimus as the two walls of the dissection."
+      ],
+      "structuresAtRisk": ["Skin flap circulation", "Intercostobrachial nerve branches"],
+      "pitfalls": ["A vertical incision crossing the axillary skin crease, which contracts.", "Flaps raised in the wrong plane, leaving nodal fat on the skin."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.alnd.vein-definition": {
+      "id": "step.alnd.vein-definition", "kind": "dissection", "critical": true,
+      "title": "Define the axillary vein as the upper limit",
+      "why": "The axillary vein is the roof of a standard clearance. Seeing it early tells you where to stop, keeps the brachial plexus out of reach above it, and lets you ligate the tributaries that drain the specimen safely.",
+      "how": [
+        "Open the clavipectoral fascia along the lateral border of pectoralis major and follow it up to the axillary vein, which appears blue and compressible beneath a thin fascial layer.",
+        "Clear the fat from the anterior and inferior surfaces of the vein only, without stripping its adventitia or going above it.",
+        "Ligate or clip each tributary passing down into the specimen, leaving the thoracodorsal vein and subscapular trunk until they are identified.",
+        "Keep the vein in view for the rest of the dissection."
+      ],
+      "structuresAtRisk": ["Axillary vein", "Axillary artery", "Brachial plexus", "Thoracodorsal vein"],
+      "pitfalls": ["Mistaking a large tributary for the vein itself.", "Diathermy on the vein wall."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.alnd.nerves": {
+      "id": "step.alnd.nerves", "kind": "dissection", "critical": true,
+      "title": "Identify the long thoracic and thoracodorsal nerves before clearing the walls",
+      "why": "The long thoracic nerve stabilises the scapula and the thoracodorsal nerve powers latissimus dorsi. Both run vertically through the field, and both can be pulled into the specimen by traction. Seeing them first converts the rest of the clearance into a sweep between two protected lines.",
+      "how": [
+        "Find the thoracodorsal bundle on subscapularis by following the subscapular vessels down from the vein, and trace it to latissimus dorsi; confirm the nerve with stimulation if in doubt.",
+        "Find the long thoracic nerve on the medial wall over serratus anterior, at the level of the vein, by gently sweeping the fat forwards; it lies close to the chest wall in its own fascia.",
+        "Keep both nerves in view and sweep the fat between them towards the specimen.",
+        "Preserve the intercostobrachial nerve where it is not involved, dividing it only if it runs through matted nodes."
+      ],
+      "structuresAtRisk": ["Long thoracic nerve", "Thoracodorsal nerve and vessels", "Intercostobrachial nerve"],
+      "pitfalls": ["Lifting the long thoracic nerve off serratus with the medial fat and dividing it with the specimen.", "Ligating the thoracodorsal bundle in mistake for a vein tributary."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.alnd.level-ii": {
+      "id": "step.alnd.level-ii", "kind": "dissection", "critical": true,
+      "title": "Level II behind pectoralis minor, medial pectoral nerve kept",
+      "why": "Level II nodes lie behind pectoralis minor and are part of a standard clearance. Gaining access by retraction rather than division keeps the pectoral muscles innervated; dividing the medial pectoral nerve causes visible wasting of pectoralis major.",
+      "how": [
+        "Ask the assistant to flex and adduct the arm slightly over the chest to relax pectoralis major and minor.",
+        "Retract pectoralis minor medially and upwards with a narrow retractor; identify the medial pectoral nerve and vessels emerging around its lateral border and preserve them.",
+        "Clear the nodal fat behind the muscle up to the vein and down into the level I packet.",
+        "Proceed medial to pectoralis minor (level III) only when the MDT has asked for it or there is gross disease there."
+      ],
+      "structuresAtRisk": ["Medial pectoral nerve", "Lateral pectoral nerve", "Axillary vein"],
+      "pitfalls": ["Dividing the medial pectoral nerve to improve exposure.", "Clearing level III routinely, which adds lymphoedema risk without benefit."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

@@ -126,6 +126,10 @@ CAM (`cam`, Neurology, Inouye 1990), which needs a patient who can be interviewe
 reachable from `MEDCALC.find`. Test: `test/camicu.test.mjs`.
 
 ## Gotchas
+- **iPad unit board is a grid (2026-11-04, `ipad-hospital.css`).** On `html.smd-tablet` at 700 px and wider the board's
+  `.icu-v2-swipe` rows are grid items (2 columns portrait, 3 from 1100 px); every other child of `.icu-v2-board` spans the
+  row. A new board child that should be full width needs nothing; one that should sit in the grid must be a `.icu-v2-swipe`.
+  The patient workspace stays full screen (it is a task with its own tabs; Overview layout C is its two-pane iPad form).
 - **Background repaints never run under a focused text field (2026-10-29).** `paint()` rebuilds `#icuRoot`, which
   replaces the field being typed in, so iOS closed the keyboard after one letter (and the round-note composer lost the
   text). Anything not caused by a tap goes through `paintPassive()`: the state subscriber, `paintLive`, the scroll

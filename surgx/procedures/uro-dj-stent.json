@@ -1,0 +1,158 @@
+{
+  "id": "uro-dj-stent",
+  "title": "Retrograde double-J ureteric stent insertion",
+  "subtitle": "Decompress the kidney, prove both coils, book the removal",
+  "system": "urology",
+  "aliases": ["JJ stent", "DJ stent", "ureteric stent", "retrograde stenting", "cystoscopy and stent"],
+  "estMinutes": 25,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-stones", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urolithiasis", "year": 2024, "url": "https://uroweb.org/guidelines/urolithiasis", "accessed": "2026-11-04" },
+    { "id": "eau-infections", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urological Infections", "year": 2024, "url": "https://uroweb.org/guidelines/urological-infections", "accessed": "2026-11-04" },
+    { "id": "nice-ng118", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Renal and ureteric stones: assessment and management (NG118)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng118", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["qsofa", "news2", "sofa", "ckdepi"],
+  "chapters": {
+    "indications": [
+      "Obstructed kidney with infection (urosepsis or infected hydronephrosis): urgent decompression, by stent or percutaneous nephrostomy.",
+      "Obstruction with acute kidney injury, a solitary kidney, or bilateral obstruction.",
+      "Uncontrolled pain from an obstructing ureteric stone where definitive treatment is not immediately possible.",
+      "After ureteroscopy with ureteric injury, residual fragments or oedema; before ureteroscopy to dilate a tight ureter passively.",
+      "Extrinsic ureteric compression from malignancy or retroperitoneal disease, and recognised ureteric injury at other surgery."
+    ],
+    "contraindications": [
+      "Retrograde access impossible or unsafe (inaccessible orifice, urethral stricture, complete ureteric obstruction): percutaneous nephrostomy instead.",
+      "A septic, unstable patient may be better served by nephrostomy under local anaesthetic than by a general anaesthetic; agree the route with the anaesthetist and radiologist.",
+      "Uncorrected coagulopathy is relative; retrograde stenting is generally preferred to nephrostomy when coagulation cannot be corrected."
+    ],
+    "preparation": [
+      "Imaging that shows the obstruction, usually non-contrast CT; a contrast CT or ultrasound in other settings.",
+      "Blood and urine cultures before antibiotics where possible, then antibiotics without delay in suspected sepsis, per local policy.",
+      "Renal function, potassium and coagulation; resuscitation in a septic patient before transfer to theatre, without letting it delay decompression.",
+      "Consent: bleeding and haematuria, infection and sepsis (including worsening after instrumentation), ureteric injury, failure to pass the stent and need for nephrostomy, stent symptoms, stent migration or encrustation, and the absolute need for the stent to be removed or changed.",
+      "Pregnancy test where relevant; check for contrast allergy."
+    ],
+    "positioning": [
+      "Lithotomy with padded supports; a flexible cystoscope in the supine patient is an alternative in some units.",
+      "C-arm able to screen from bladder to kidney before draping."
+    ],
+    "equipment": [
+      "Rigid or flexible cystoscope, light, camera and irrigation.",
+      "Hydrophilic-tip and stiff guidewires, open-ended ureteric catheter (graduated if measuring ureteric length), dilute contrast.",
+      "Double-J stents in a range of diameters and lengths with pusher.",
+      "Specimen pots for pelvic urine; a nephrostomy service available as a fallback."
+    ],
+    "anatomy": [
+      "The ureteric orifices lie at the lateral corners of the trigone, joined by the interureteric bar; oedema or a stone at the orifice can hide it.",
+      "The intramural ureter runs obliquely through the bladder wall, so the wire must follow the course of the ureter rather than be pushed straight back.",
+      "A stent's proximal coil should lie in the renal pelvis or an upper calyx; its distal coil in the bladder, not across the midline or in the urethra.",
+      "In a duplex system the orifices are paired and the upper moiety ureter usually opens lower and more medially; the pyelogram shows which moiety is cannulated."
+    ],
+    "criticalSafety": [
+      "In an infected obstructed system the aim is drainage, nothing more. Minimal contrast, minimal pressure, no stone manipulation.",
+      "Never push a stent against resistance. If it will not go, stop, image and change plan.",
+      "Confirm both coils on a saved image before leaving theatre.",
+      "Every stent goes on the register with a removal or change date."
+    ],
+    "structuresAtRisk": [
+      "Ureter (perforation, false passage)",
+      "Renal parenchyma (proximal end or wire pushed through)",
+      "Ureteric orifice",
+      "Urethra (traumatic instrumentation)",
+      "The patient (urosepsis after instrumentation)"
+    ],
+    "commonErrors": [
+      "Over-distending an infected collecting system with contrast during the pyelogram.",
+      "Choosing a stent length without estimating the ureteric length.",
+      "Withdrawing the guidewire before the proximal coil has formed in the pelvis.",
+      "No removal plan, leading to a forgotten stent."
+    ],
+    "complications": [
+      "Sepsis and septic shock after decompression of an infected kidney, which may need critical care.",
+      "Haematuria.",
+      "Stent symptoms: frequency, urgency, suprapubic and flank discomfort, flank pain on voiding.",
+      "Stent malposition, migration up the ureter or down into the urethra.",
+      "Ureteric perforation.",
+      "Encrustation and obstruction of a stent left too long."
+    ],
+    "postop": [
+      "In sepsis, observe closely after drainage; deterioration is common in the first hours and may need escalation to critical care.",
+      "A urethral catheter for the first days after decompressing an infected kidney prevents reflux up the stent and allows accurate output monitoring.",
+      "Watch for post-obstructive diuresis after relief of bilateral or solitary kidney obstruction; monitor output, electrolytes and fluid balance.",
+      "Complete antibiotics against cultures; plan definitive treatment of the cause once infection has settled.",
+      "Removal or exchange on the registered date; for long-term malignant obstruction, regular exchanges are booked."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "In a septic patient with impaired capacity, act in the patient's best interests and document it; do not delay drainage for a signature." },
+    { "ref": "step.core.timeout", "emphasis": "State the fallback: who will do a nephrostomy if retrograde access fails." },
+    { "ref": "step.core.prophylaxis", "emphasis": "In suspected sepsis this is treatment, not prophylaxis: it should already be running." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.uro.fluoro-setup" },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.uro.cystoscopy", "emphasis": "Send bladder urine for culture before irrigating. Find the orifice; a stone may be visible in it." },
+    { "ref": "step.uro.retrograde-pyelogram", "emphasis": "In an infected system, a few mL of contrast to show the obstruction is enough." },
+    { "ref": "step.uro.safety-guidewire", "emphasis": "Here the guidewire is also the stent's track: the stent is only as well placed as the wire." },
+    { "ref": "step.uro.infected-system-bailout", "emphasis": "This is often the reason for the operation. Pass an open-ended catheter over the wire into the pelvis and aspirate urine for culture before placing the stent." },
+    { "ref": "step.djs.length" },
+    { "ref": "step.uro.dj-stent" },
+    { "ref": "step.djs.failed-access" },
+    { "ref": "step.djs.bladder-drainage" },
+    { "ref": "step.uro.stent-register" },
+    { "ref": "step.core.specimen", "emphasis": "Bladder urine and renal pelvis urine, labelled separately and sent for culture." },
+    { "ref": "step.core.counts", "emphasis": "Account for every wire and catheter." },
+    { "ref": "step.core.debrief", "emphasis": "Hand over sepsis status, urine appearance from the kidney, stent details and the escalation plan." }
+  ],
+  "steps_local": {
+    "step.djs.length": {
+      "id": "step.djs.length", "kind": "checkpoint",
+      "title": "Choosing stent length and diameter",
+      "why": "Too short and the proximal coil drops into the ureter or the distal coil is pulled up; too long and the distal coil irritates the trigone and causes most of the stent symptoms patients complain of.",
+      "how": [
+        "Estimate the length from the patient's height, using the unit's chart, or measure the ureter from the pelviureteric junction to the orifice with a graduated ureteric catheter under fluoroscopy.",
+        "Choose the diameter to suit the indication: a larger diameter for drainage of thick or infected urine or extrinsic compression; a standard diameter for most stone work.",
+        "Check the stent packet with the scrub practitioner and read out the size and length for the record."
+      ],
+      "structuresAtRisk": ["Trigone and bladder neck (overlong stent)"],
+      "pitfalls": [
+        "Choosing a standard length by habit for every patient.",
+        "Not recording the stent size, so the next surgeon has to guess at exchange."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.djs.failed-access": {
+      "id": "step.djs.failed-access", "kind": "bailout",
+      "title": "Failed retrograde stenting: stop and arrange nephrostomy",
+      "why": "A wire that will not pass an impacted stone, an orifice that cannot be found, or a stent that will not advance all mean the same thing: further force risks perforation and sepsis, and the kidney still needs draining.",
+      "how": [
+        "Try once with a different wire, an angled catheter or a semirigid ureteroscope to see the obstruction, if the patient is stable and the urine is not frankly purulent.",
+        "If the stent still will not pass, stop. Do not leave a wire or catheter in a perforated ureter without a plan.",
+        "Arrange percutaneous nephrostomy the same day, and tell the anaesthetist and the radiologist in theatre or by phone.",
+        "Record exactly what was tried and why it failed."
+      ],
+      "structuresAtRisk": ["Ureter (perforation)", "Patient (untreated obstructed infected kidney)"],
+      "pitfalls": [
+        "Repeated attempts in a septic patient while the anaesthetist manages falling blood pressure.",
+        "Returning the patient to the ward undrained without a nephrostomy booked."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.djs.bladder-drainage": {
+      "id": "step.djs.bladder-drainage", "kind": "closure",
+      "title": "Bladder drainage and output monitoring",
+      "why": "A double-J stent allows urine to reflux from the bladder up to the kidney. In an infected system, and after relief of obstruction, a catheter keeps the bladder empty and lets the ward measure the diuresis that may follow.",
+      "how": [
+        "Pass a urethral catheter after stenting an infected system, or where output monitoring is needed.",
+        "Confirm drainage and record catheter type and balloon volume.",
+        "Hand over an hourly urine output target and the threshold for calling, and request electrolytes if obstruction was bilateral or the kidney is solitary."
+      ],
+      "structuresAtRisk": ["Urethra (catheter trauma)"],
+      "pitfalls": [
+        "No output chart after relieving a solitary kidney, missing a large post-obstructive diuresis."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

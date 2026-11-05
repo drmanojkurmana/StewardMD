@@ -1,0 +1,157 @@
+{
+  "id": "paeds-intussusception-reduction",
+  "title": "Operative reduction of intussusception",
+  "subtitle": "Squeeze, do not pull; resect when it will not reduce or is not viable",
+  "system": "gastrointestinal",
+  "aliases": ["intussusception surgery", "manual reduction of intussusception", "ileocolic intussusception", "laparotomy for intussusception"],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: intussusception", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" },
+    { "id": "spitz-coran", "org": "CRC Press", "title": "Operative Pediatric Surgery (Spitz L, Coran AG, editors): intussusception", "edition": "7th edition", "year": 2013, "url": "https://www.routledge.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["paeds_weight", "holliday", "pews", "allowable_blood_loss"],
+  "chapters": {
+    "indications": [
+      "Failed or incomplete radiological (air or hydrostatic) enema reduction, after any repeat attempt the radiologist and surgeon agree is safe.",
+      "Peritonitis, perforation, or shock that does not respond to resuscitation, in which enema reduction is contraindicated.",
+      "A pathological lead point seen on imaging or suspected because of age or recurrence.",
+      "Persistent, symptomatic small bowel to small bowel intussusception that does not resolve."
+    ],
+    "contraindications": [
+      "Transient small bowel intussusception found on ultrasound in a well child: usually resolves and is observed.",
+      "An unresuscitated child: resuscitation comes first, but it is a reason to optimise, not to delay indefinitely.",
+      "A laparoscopic approach may be used by experienced surgeons in a stable child without peritonitis; convert to open when reduction fails."
+    ],
+    "preparation": [
+      "Review the enema report: number of attempts, how far reduction progressed, and any perforation.",
+      "Fluid resuscitation, nasogastric tube, bloods with group and crossmatch, and antibiotics if perforation or peritonitis is suspected.",
+      "Consent the parents for: bowel resection with anastomosis, a stoma (rare), wound infection, adhesive obstruction later, recurrence, anastomotic leak, and appendicectomy at the same operation."
+    ],
+    "positioning": [
+      "Supine on a warmed mattress, with the abdomen fully exposed and a roll under the lower chest if needed."
+    ],
+    "equipment": [
+      "Paediatric laparotomy set, warm moist packs, bipolar diathermy.",
+      "Fine absorbable monofilament sutures for a handsewn anastomosis.",
+      "Laparoscopic set if that approach is chosen."
+    ],
+    "anatomy": [
+      "Most childhood intussusceptions are ileocolic: the terminal ileum (intussusceptum) telescopes into the colon (intussuscipiens), drawing its mesentery with it.",
+      "The mesentery is compressed within the intussusception, producing venous congestion, oedema, then arterial ischaemia of the intussusceptum.",
+      "The apex may reach anywhere along the colon, occasionally to the rectum.",
+      "Hypertrophied Peyer patches in the terminal ileum are the usual lead point in idiopathic cases and feel like a mass after reduction; they are not an indication for resection.",
+      "Pathological lead points include Meckel diverticulum, polyps, duplication cysts, lymphoma and submucosal haematoma in IgA vasculitis."
+    ],
+    "criticalSafety": [
+      "Reduce by squeezing the apex back from distal to proximal; never pull the proximal bowel out of the intussuscipiens.",
+      "Assess viability after reduction with warm packs and time, not in the first minute.",
+      "Feel for a pathological lead point after every reduction."
+    ],
+    "structuresAtRisk": [
+      "Oedematous bowel wall, which splits under traction",
+      "Ileocolic vessels in the mesentery",
+      "Caecal wall at the appendix base"
+    ],
+    "commonErrors": [
+      "Pulling on the ileum to reduce the last part, causing a serosal tear or perforation.",
+      "Abandoning reduction too early at the ileocaecal valve, where the final part is always slowest.",
+      "Resecting a thickened Peyer patch mistaken for a tumour.",
+      "Missing a Meckel diverticulum lead point because the bowel was not run after reduction."
+    ],
+    "complications": [
+      "Wound infection.",
+      "Recurrent intussusception, less common after operative reduction than after enema reduction.",
+      "Anastomotic leak after resection.",
+      "Adhesive small bowel obstruction later in life.",
+      "Prolonged ileus."
+    ],
+    "postop": [
+      "Intravenous fluids and nasogastric drainage until the ileus settles, then feeding as tolerated.",
+      "Weight-based analgesia; continue antibiotics only where there was perforation or resection, per local policy.",
+      "Chase histology for any resected specimen, and explain to the parents what was found and the small risk of recurrence."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Consent covers resection, stoma and appendicectomy, so no decision in theatre needs a second conversation." },
+    { "ref": "step.core.timeout", "emphasis": "State the enema result, whether perforation occurred, and blood availability." },
+    { "ref": "step.paeds.physiology-gate" },
+    { "ref": "step.paeds.infant-laparotomy-prep" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Treat as contaminated surgery if perforation is suspected; agent per local policy." },
+    { "ref": "step.paeds.warming" },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare the whole abdomen: the apex may be in the left colon." },
+    { "ref": "step.paeds.transverse-laparotomy", "emphasis": "Right-sided transverse incision, placed over the mass felt under anaesthesia." },
+    { "ref": "step.intus.deliver" },
+    { "ref": "step.intus.reduce" },
+    { "ref": "step.abd.bowel-handling", "emphasis": "Wrap the reduced bowel in warm moist packs and wait several minutes. Look for colour, peristalsis and mesenteric pulsation; multiple or deep serosal splits count against viability." },
+    { "ref": "step.intus.lead-point" },
+    { "ref": "step.intus.resect" },
+    { "ref": "step.bowel.anastomosis-handsewn", "emphasis": "Only after resection: single-layer extramucosal ileocolic anastomosis with fine monofilament, correcting the calibre mismatch on the ileal side." },
+    { "ref": "step.paeds.incidental-appendicectomy" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.specimen", "emphasis": "Any resected segment goes for histology with the question of a lead point stated." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.paeds.transverse-closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record how far the intussusception reached, whether manual reduction was complete, viability, any lead point and whether the appendix was removed." }
+  ],
+  "steps_local": {
+    "step.intus.deliver": {
+      "id": "step.intus.deliver", "kind": "dissection",
+      "title": "Finding and delivering the intussusception",
+      "why": "Reduction is safest when it is done under direct vision with the bowel outside the wound. Bowel reduced by blind pressure inside the abdomen cannot be watched for splitting.",
+      "how": [
+        "Follow the colon from the caecal area to find the apex of the mass, which may lie anywhere from the right colon to the pelvis.",
+        "Deliver the mass and the adjacent bowel into the wound, mobilising the right colon if needed to bring it up without traction.",
+        "Note any free fluid, perforation or obviously gangrenous bowel before handling it further."
+      ],
+      "structuresAtRisk": ["Oedematous intussuscipiens", "Mesentery drawn into the intussusception"],
+      "pitfalls": ["Lifting the mass out by pulling on the ileum.", "Forcing a large mass through a small incision instead of extending it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.intus.reduce": {
+      "id": "step.intus.reduce", "kind": "dissection", "critical": true,
+      "title": "Manual reduction by retrograde squeezing",
+      "why": "Pushing the apex back from below spreads force over the whole wall. Pulling on the proximal bowel concentrates it at the neck, where the oedematous wall splits and perforates.",
+      "how": [
+        "Hold the colon just distal to the apex and squeeze the apex gently backwards towards the caecum, like expressing a tube from its far end.",
+        "Keep steady, patient pressure; the last part through the ileocaecal valve is always the slowest and oedema yields with time.",
+        "Use warm moist packs and gentle sustained compression of the oedematous ileum to reduce swelling before continuing.",
+        "Stop if the serosa begins to split in several places or the bowel will not move after patient effort: proceed to resection."
+      ],
+      "structuresAtRisk": ["Intussuscipiens wall", "Terminal ileum"],
+      "pitfalls": ["A final tug on the ileum to finish the reduction.", "Repeated forceful attempts on an obviously gangrenous segment."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.intus.lead-point": {
+      "id": "step.intus.lead-point", "kind": "checkpoint",
+      "title": "Searching for a pathological lead point",
+      "why": "A missed lead point means recurrence or a missed diagnosis such as lymphoma. Lead points are more likely outside the usual age range for idiopathic intussusception and in recurrent cases.",
+      "how": [
+        "After reduction, palpate the terminal ileum, caecum and colon for a discrete intraluminal mass.",
+        "Distinguish the soft, thickened Peyer patch of idiopathic intussusception from a firm discrete lesion.",
+        "Run the small bowel from the duodenojejunal flexure to the ileocaecal valve, specifically looking for a Meckel diverticulum or a duplication.",
+        "If a lead point is found, resect it with the involved segment."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Resecting a Peyer patch as a tumour.", "Not running the small bowel because the obvious problem has been reduced."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.intus.resect": {
+      "id": "step.intus.resect", "kind": "bailout",
+      "title": "Resection when reduction fails or the bowel is not viable",
+      "why": "An irreducible, perforated or gangrenous intussusception, or one with a lead point, needs resection. A limited resection with primary anastomosis is usually safe in a resuscitated child; a stoma is the choice when the child or the field is not.",
+      "how": [
+        "Resect the involved segment, usually as a limited ileocolic resection, dividing the mesentery close to the bowel since this is a benign resection unless a tumour is suspected.",
+        "Restore continuity with a primary handsewn anastomosis when the child is stable and the ends are healthy.",
+        "Bring out a stoma instead when the child is unstable, contamination is gross, or perfusion of the ends is doubtful, and inform the consultant.",
+        "Send the specimen for histology."
+      ],
+      "structuresAtRisk": ["Ileocolic vessels", "Mesentery of the retained ileum and colon"],
+      "pitfalls": ["An anastomosis on ends of doubtful perfusion in a septic child.", "An extended oncological resection for what is a Peyer patch."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

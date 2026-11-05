@@ -247,8 +247,16 @@
 
     // RESULTS FIRST (owner directive): the differential leads; the concise finding line follows; generic
     // caveats live in the small footer at the very bottom.
+    // iPad landscape only (vault/plans/iPad-Standards.md): the analysed photo beside the findings, so the reader can
+    // check each condition against the image without scrolling. Display only; phones never get it.
+    var photoHtml = "";
+    try {
+      if (state.previewUrl && document.documentElement.classList.contains("smd-tablet") && window.innerWidth >= 1000) {
+        photoHtml = '<figure class="sknx-result-photo"><img src="' + esc(state.previewUrl) + '" alt="The photo that was analysed"><figcaption>The photo these findings are about.</figcaption></figure>';
+      }
+    } catch (e) { photoHtml = ""; }
     var body =
-      '<div class="sknx-result-body">' +
+      '<div class="sknx-result-body">' + photoHtml +
         '<div class="sknx-section-heading"><h2>Possible conditions</h2><span>Image findings</span></div>' +
         dxHtml +
         '<div class="sknx-rerank-host" id="sknxRerankHost" aria-live="polite"></div>' +
@@ -267,6 +275,8 @@
       "</div>";
 
     host.innerHTML = head + body;
+    var rp = host.querySelector(".sknx-result-photo img");
+    if (rp) rp.onerror = function () { var f = rp.parentNode; if (f && f.parentNode) f.parentNode.removeChild(f); };
     mountReport(a);
     mountRerank(a);
   }

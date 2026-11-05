@@ -1,0 +1,175 @@
+{
+  "id": "adrenal-crisis-phaeo-periop",
+  "title": "Adrenal crisis and phaeochromocytoma surgery",
+  "subtitle": "Hydrocortisone now; alpha-block before the knife",
+  "category": "endocrine_surgery",
+  "specialty": "endocrine",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "sfe-crisis",
+      "org": "Society for Endocrinology",
+      "title": "Society for Endocrinology Endocrine Emergency Guidance: emergency management of acute adrenal insufficiency (adrenal crisis) in adult patients (Arlt W, Endocr Connect)",
+      "year": 2016,
+      "url": "https://www.endocrinology.org/clinical-practice/clinical-guidelines/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "aagbi-steroid",
+      "org": "Association of Anaesthetists, Royal College of Physicians and Society for Endocrinology",
+      "title": "Guidelines for the management of glucocorticoids during the peri-operative period for patients with adrenal insufficiency (Woodcock T et al., Anaesthesia)",
+      "year": 2020,
+      "url": "https://anaesthetists.org/Home/Resources-publications/Guidelines",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "es-pheo",
+      "org": "Endocrine Society",
+      "title": "Pheochromocytoma and paraganglioma: an Endocrine Society clinical practice guideline (Lenders JWM et al., J Clin Endocrinol Metab)",
+      "year": 2014,
+      "url": "https://www.endocrine.org/clinical-practice-guidelines/pheochromocytoma-and-paraganglioma",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "ese-incid",
+      "org": "European Society of Endocrinology (ESE) and European Network for the Study of Adrenal Tumors (ENSAT)",
+      "title": "Management of adrenal incidentalomas: European Society of Endocrinology clinical practice guideline (Fassnacht M et al., Eur J Endocrinol)",
+      "year": 2016,
+      "url": "https://www.ese-hormones.org/publications/guidelines/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Hypotension unresponsive to fluids or vasopressors in a patient on long-term steroids, or after adrenalectomy: adrenal crisis."
+      },
+      {
+        "text": "Vomiting, abdominal pain, confusion, hyponatraemia or hyperkalaemia in a patient with known adrenal insufficiency."
+      },
+      {
+        "text": "Paroxysmal headache, sweating, palpitations and hypertension, or hypertension provoked by induction or abdominal palpation: undiagnosed phaeochromocytoma."
+      },
+      {
+        "text": "Any adrenal mass about to be biopsied or removed without biochemical exclusion of phaeochromocytoma."
+      },
+      {
+        "text": "Hypotension and hypoglycaemia in the hours after phaeochromocytoma removal."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Suspected adrenal crisis: hydrocortisone 100 mg IV or IM immediately, followed by 200 mg over 24 hours by continuous infusion (or 50 mg IV or IM every six hours).",
+        "timeCritical": true,
+        "evidenceRef": "sfe-crisis"
+      },
+      {
+        "text": "Rapid rehydration with 1 litre of 0.9% saline over the first hour, then guided by the patient's response, with cardiac monitoring.",
+        "timeCritical": true,
+        "evidenceRef": "sfe-crisis"
+      },
+      {
+        "text": "Do not delay hydrocortisone for tests. Take blood for cortisol and ACTH if it can be done without delay.",
+        "timeCritical": true,
+        "evidenceRef": "sfe-crisis"
+      },
+      {
+        "text": "Surgery in a patient with adrenal insufficiency or on long-term glucocorticoids: hydrocortisone 100 mg IV at induction, then 200 mg over 24 hours by infusion or 50 mg every six hours, while nil by mouth.",
+        "evidenceRef": "aagbi-steroid"
+      },
+      {
+        "text": "Never biopsy or operate on an adrenal mass until phaeochromocytoma has been excluded with plasma free or urinary fractionated metanephrines.",
+        "evidenceRef": "ese-incid"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Steroid history: dose, duration and route, including inhaled, topical and intra-articular steroids, which can all suppress the axis.",
+        "calcs": [
+          "steroid_conv"
+        ]
+      },
+      {
+        "text": "Sodium, potassium, glucose and renal function; hyponatraemia and hyperkalaemia support adrenal insufficiency."
+      },
+      {
+        "text": "Phaeochromocytoma preparation: seated and standing blood pressure and heart rate, symptoms, and evidence of catecholamine cardiomyopathy.",
+        "calcs": [
+          "map"
+        ]
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Plasma free metanephrines or urinary fractionated metanephrines for any suspected phaeochromocytoma or any adrenal incidentaloma."
+      },
+      {
+        "text": "Cross-sectional imaging after biochemical confirmation, not before; functional imaging when metastatic or multifocal disease is suspected."
+      },
+      {
+        "text": "Genetic testing should be considered for all patients with phaeochromocytoma or paraganglioma."
+      },
+      {
+        "text": "Echocardiography in long-standing or severe catecholamine excess."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Phaeochromocytoma: alpha-adrenergic blockade for 7 to 14 days before surgery, with a high-sodium diet and generous fluid intake to restore intravascular volume.",
+        "evidenceRef": "es-pheo"
+      },
+      {
+        "text": "Add a beta-blocker for tachycardia only after adequate alpha-blockade. Beta-blockade first risks a hypertensive crisis from unopposed alpha stimulation.",
+        "evidenceRef": "es-pheo"
+      },
+      {
+        "text": "Target before surgery: blood pressure below 130/80 mmHg seated, with systolic above 90 mmHg standing, and heart rate around 60 to 70 seated and 70 to 80 standing.",
+        "evidenceRef": "es-pheo"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Adrenalectomy for phaeochromocytoma by an experienced endocrine surgeon and anaesthetist, usually laparoscopic, with invasive arterial monitoring and vasoactive drugs ready for surges during tumour handling.",
+        "evidenceRef": "es-pheo"
+      },
+      {
+        "text": "After removal, monitor blood pressure, heart rate and blood glucose for 24 to 48 hours: hypotension and rebound hypoglycaemia are expected risks.",
+        "evidenceRef": "es-pheo"
+      },
+      {
+        "text": "After unilateral adrenalectomy for cortisol excess, or bilateral adrenalectomy, give glucocorticoid replacement and plan a supervised wean or lifelong replacement.",
+        "evidenceRef": "aagbi-steroid"
+      },
+      {
+        "text": "After recovery from adrenal crisis, convert to oral double-dose replacement then taper, and educate on sick-day rules and an emergency injection kit.",
+        "evidenceRef": "sfe-crisis"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Endocrinology and critical care for adrenal crisis that does not respond quickly."
+      },
+      {
+        "text": "Phaeochromocytoma surgery belongs in a unit with experienced endocrine surgeons and anaesthetists; transfer rather than operate occasionally."
+      },
+      {
+        "text": "Stop the operation and treat if an unexpected hypertensive crisis occurs during handling of an undiagnosed adrenal or retroperitoneal mass."
+      }
+    ]
+  },
+  "notes": [
+    "In adrenal crisis the drug is cheap and safe and the delay is lethal. Give hydrocortisone on suspicion.",
+    "Alpha first, beta second. The order matters more than the choice of drug.",
+    "Every adrenal incidentaloma is a phaeochromocytoma until the metanephrines say otherwise. A needle in an untreated phaeochromocytoma can kill."
+  ],
+  "calcs": [
+    "steroid_conv",
+    "map"
+  ]
+}

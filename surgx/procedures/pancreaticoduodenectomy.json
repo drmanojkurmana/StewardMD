@@ -1,0 +1,209 @@
+{
+  "id": "pancreaticoduodenectomy",
+  "title": "Pancreaticoduodenectomy (Whipple)",
+  "subtitle": "Outline: resectability, point of no return, three anastomoses, the bail-out",
+  "system": "hepatobiliary",
+  "aliases": ["Whipple", "Whipple's operation", "PD", "pylorus-preserving pancreaticoduodenectomy", "PPPD", "Kausch-Whipple"],
+  "estMinutes": 420,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nccn-pancreas", "org": "National Comprehensive Cancer Network (NCCN)", "title": "NCCN Clinical Practice Guidelines in Oncology: Pancreatic Adenocarcinoma", "year": 2025, "url": "https://www.nccn.org/guidelines/guidelines-detail?category=1&id=1455", "accessed": "2026-11-04" },
+    { "id": "nice-ng85", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Pancreatic cancer in adults: diagnosis and management (NG85)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng85", "accessed": "2026-11-04" },
+    { "id": "isgps-popf", "org": "International Study Group of Pancreatic Surgery (ISGPS)", "title": "The 2016 update of the International Study Group (ISGPS) definition and grading of postoperative pancreatic fistula: 11 years after (Bassi C et al., Surgery)", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2016+update+International+Study+Group+ISGPS+definition+grading+postoperative+pancreatic+fistula", "accessed": "2026-11-04" },
+    { "id": "isgps-brpc", "org": "International Study Group of Pancreatic Surgery (ISGPS)", "title": "Borderline resectable pancreatic cancer: a consensus statement by the International Study Group of Pancreatic Surgery (Bockhorn M et al., Surgery)", "year": 2014, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Bockhorn+borderline+resectable+pancreatic+cancer+consensus+statement+International+Study+Group+of+Pancreatic+Surgery", "accessed": "2026-11-04" },
+    { "id": "eras-pd", "org": "ERAS Society", "title": "Guidelines for perioperative care for pancreatoduodenectomy: Enhanced Recovery After Surgery (ERAS) recommendations 2019 (Melloul E et al., World J Surg)", "year": 2020, "url": "https://erassociety.org/guidelines/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "ecog", "must", "nrs2002", "caprini", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Resectable adenocarcinoma of the head of the pancreas, distal bile duct, ampulla or duodenum, as recommended by a specialist pancreatic MDT; borderline resectable disease usually after neoadjuvant therapy.",
+      "Pancreatic head neuroendocrine tumours and cystic neoplasms (for example intraductal papillary mucinous neoplasm) meeting resection criteria.",
+      "Selected benign disease: chronic pancreatitis with an inflammatory head mass, duodenal polyposis, or trauma to the pancreatic head and duodenum beyond repair (rarely, and usually staged).",
+      "This is a specialist operation, done in high-volume centres; this outline is for orientation and assisting, not for independent practice."
+    ],
+    "contraindications": [
+      "Metastatic disease (liver, peritoneum, distant nodes) found on imaging or at operation.",
+      "Locally advanced unresectable disease: arterial encasement of the superior mesenteric artery or coeliac axis, or unreconstructable superior mesenteric or portal vein involvement, per NCCN resectability criteria.",
+      "Performance status or comorbidity that makes the operation's risk unacceptable.",
+      "Uncontrolled cholangitis or severe malnutrition not yet corrected, which should be treated first."
+    ],
+    "preparation": [
+      "Pancreatic-protocol contrast CT (and MRI or endoscopic ultrasound where needed) to define resectability; tissue diagnosis where required by the MDT, particularly before neoadjuvant therapy.",
+      "CA 19-9 (interpreted after relief of jaundice), staging CT chest; consider staging laparoscopy in high-risk features.",
+      "Pre-operative biliary drainage is not routine; reserve it for cholangitis, a planned delay (for example neoadjuvant therapy) or severe jaundice, per unit policy.",
+      "Nutrition assessment and support, prehabilitation, glucose control; vitamin K if jaundiced.",
+      "If stented, use bile culture results to guide antibiotic prophylaxis per local protocol.",
+      "Consent: pancreatic fistula, delayed gastric emptying, bile leak, post-pancreatectomy haemorrhage (including late), intra-abdominal collection and need for drainage or re-operation, diabetes and exocrine insufficiency, possibility of a non-resectional bypass if found unresectable, vascular resection, and a mortality risk that should be quoted from the unit's own figures."
+    ],
+    "positioning": [
+      "Supine, arms out, with a thoracic epidural or alternative analgesia per the anaesthetic plan.",
+      "Arterial line, central venous access, urinary catheter, warming and calf compression for a long operation.",
+      "Slight reverse Trendelenburg; prepare from nipples to pubis."
+    ],
+    "equipment": [
+      "Major laparotomy set with a fixed retractor, vascular instruments and slings, fine vascular sutures.",
+      "Intra-operative ultrasound.",
+      "Energy device, linear staplers for the stomach and jejunum.",
+      "Fine monofilament sutures for the pancreatic and biliary anastomoses; pancreatic duct stents and magnification per surgeon preference.",
+      "Frozen section availability for the bile duct and pancreatic neck margins; cell saver."
+    ],
+    "anatomy": [
+      "The head and uncinate process of the pancreas lie in the C-loop of the duodenum, wrapped around the superior mesenteric vein and to the right of the superior mesenteric artery.",
+      "The neck of the pancreas lies in front of the superior mesenteric vein and portal vein confluence; the plane between them is usually free of branches at the front, and its division is the point of no return.",
+      "The gastroduodenal artery arises from the common hepatic artery and runs behind the first part of the duodenum; a replaced or accessory right hepatic artery from the superior mesenteric artery runs behind the pancreatic head and bile duct.",
+      "The uncinate process is attached to the right side of the superior mesenteric artery by the mesopancreas, which carries the inferior pancreaticoduodenal vessels and the nerve plexus: this is the commonest positive margin.",
+      "The first jejunal vein often passes behind the superior mesenteric artery and is easily torn during uncinate dissection."
+    ],
+    "criticalSafety": [
+      "Establish resectability (liver, peritoneum, vessels) before any irreversible step.",
+      "Before dividing the gastroduodenal artery, test-clamp it and confirm a hepatic artery pulse (coeliac stenosis may make the liver depend on it).",
+      "Identify a replaced right hepatic artery before dividing tissue behind the bile duct.",
+      "Divide the pancreatic neck only after the tunnel over the superior mesenteric and portal veins is complete and resectability is confirmed.",
+      "Dissect the uncinate along the right side of the superior mesenteric artery under vision; control the inferior pancreaticoduodenal vessels individually."
+    ],
+    "structuresAtRisk": [
+      "Superior mesenteric vein, portal vein and the first jejunal vein",
+      "Superior mesenteric artery",
+      "Common hepatic artery and a replaced right hepatic artery",
+      "Middle colic vessels",
+      "Inferior vena cava and left renal vein"
+    ],
+    "commonErrors": [
+      "Committing to resection (dividing the stomach, bile duct or pancreatic neck) before resectability is established.",
+      "Dividing the gastroduodenal artery without a test clamp.",
+      "Traction on the superior mesenteric vein tributaries (gastrocolic trunk, first jejunal vein) causing tears that are hard to control.",
+      "Leaving uncinate tissue on the superior mesenteric artery, producing an R1 margin.",
+      "Ignoring a sentinel bleed after operation."
+    ],
+    "complications": [
+      "Postoperative pancreatic fistula, graded by the ISGPS definition.",
+      "Delayed gastric emptying.",
+      "Post-pancreatectomy haemorrhage, early or late (often heralded by a sentinel bleed from a pseudoaneurysm).",
+      "Bile leak, intra-abdominal collection, chyle leak.",
+      "Diabetes, pancreatic exocrine insufficiency, marginal ulcer; mortality and the need for re-intervention."
+    ],
+    "postop": [
+      "Level 2 care initially; ERAS for pancreatoduodenectomy where appropriate.",
+      "Drain amylase per unit protocol; ISGPS defines a fistula as drain amylase above three times the upper limit of normal serum amylase with clinical relevance; remove drains early when the amylase is low.",
+      "Any bleeding from a drain, nasogastric tube or stoma, or a haemoglobin drop, is a sentinel bleed: urgent CT angiography and interventional radiology.",
+      "Pancreatic enzyme replacement therapy, glucose monitoring, proton pump inhibitor, nutrition support for delayed gastric emptying.",
+      "MDT review of histology (margins including the superior mesenteric artery margin) for adjuvant chemotherapy."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Consent covers a bypass instead of resection, vascular resection and the unit's own outcome figures." },
+    { "ref": "step.onco.mdt-check", "emphasis": "Pancreatic-protocol CT on screen, resectability status recorded, neoadjuvant therapy completed and re-staged, biliary stent status and bile culture known." },
+    { "ref": "step.core.timeout", "emphasis": "Anticipated critical events: venous resection, blood loss, frozen sections, expected duration." },
+    { "ref": "step.core.prophylaxis", "emphasis": "If stented, use the bile culture to guide the antibiotic choice per local protocol; redose during a long operation." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.hpb.upper-access", "emphasis": "Bilateral subcostal (rooftop) or upper midline, with a fixed costal-margin retractor." },
+    { "ref": "step.abd.exploration", "emphasis": "First question: is there metastatic disease? Inspect the liver, peritoneum, omentum, root of the mesentery and nodes beyond the resection field; biopsy anything suspicious for frozen section before going further." },
+    { "ref": "step.hpb.ious" },
+    { "ref": "step.whip.kocher" },
+    { "ref": "step.hpb.hepatoduodenal", "emphasis": "Cholecystectomy, then expose the common hepatic duct, the common hepatic artery and the portal vein. Test-clamp the gastroduodenal artery and confirm a hepatic artery pulse before dividing it." },
+    { "ref": "step.whip.neck-tunnel" },
+    { "ref": "step.whip.bailout" },
+    { "ref": "step.whip.resection" },
+    { "ref": "step.whip.reconstruction" },
+    { "ref": "step.hpb.bile-leak-check", "emphasis": "Check the hepaticojejunostomy and the pancreatic anastomosis; look at the superior mesenteric artery bed and the venous margin for bleeding at the same time." },
+    { "ref": "step.hpb.major-bleed", "emphasis": "Portal or superior mesenteric vein tears: digital pressure, proximal and distal control, then repair with fine monofilament. Call a vascular-capable colleague early." },
+    { "ref": "step.abd.drain", "emphasis": "Drains near the pancreatic and biliary anastomoses per unit policy; record the drain amylase plan." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "Mark the superior mesenteric artery margin, the venous groove, the pancreatic neck and the bile duct margins per the pathology protocol; send frozen sections of the neck and bile duct margins if the unit uses them." },
+    { "ref": "step.abd.mass-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record resectability findings, vessel anatomy and any variant, venous resection, gland texture and duct size (fistula risk), anastomosis type, drains, and the drain amylase and bleeding plan." }
+  ],
+  "steps_local": {
+    "step.whip.kocher": {
+      "id": "step.whip.kocher", "kind": "dissection",
+      "title": "Kocher manoeuvre and assessment of the head",
+      "why": "Mobilising the duodenum and pancreatic head off the inferior vena cava lets the surgeon feel the tumour between the fingers and judge its relationship to the superior mesenteric artery, and gives the posterior plane of the specimen.",
+      "how": [
+        "Incise the peritoneum lateral to the second part of the duodenum and reflect the duodenum and pancreatic head medially, exposing the inferior vena cava and the left renal vein.",
+        "Continue to the left until the aorta and the origin of the superior mesenteric artery can be palpated behind the head.",
+        "Release the hepatic flexure of the colon downwards to complete the exposure of the third part of the duodenum.",
+        "Palpate the head and uncinate between finger and thumb to assess the tumour's relationship to the superior mesenteric artery."
+      ],
+      "structuresAtRisk": ["Inferior vena cava", "Left renal vein", "Gonadal vein", "Middle colic vessels and the gastrocolic trunk"],
+      "pitfalls": [
+        "Dissecting into the pancreatic head instead of behind it.",
+        "Tearing the gastrocolic trunk while releasing the hepatic flexure."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.whip.neck-tunnel": {
+      "id": "step.whip.neck-tunnel", "kind": "dissection", "critical": true,
+      "title": "Tunnel behind the pancreatic neck: the resectability gate",
+      "why": "Separating the pancreatic neck from the front of the superior mesenteric and portal veins shows whether the tumour invades them. Until the neck is divided the operation can still stop; this tunnel is the last look before that point.",
+      "how": [
+        "Below the pancreas, identify the superior mesenteric vein (follow the middle colic or gastrocolic trunk to it) and dissect upwards on its anterior surface.",
+        "Above the pancreas, after dividing the gastroduodenal artery, identify the portal vein and dissect downwards behind the neck.",
+        "Join the two dissections with gentle blunt dissection along the front of the vein, which usually has no anterior branches; pass a sling.",
+        "If the vein is involved, decide now, with the team, between venous resection (if planned and feasible) and the bail-out."
+      ],
+      "structuresAtRisk": ["Superior mesenteric vein and portal vein", "Gastrocolic trunk", "Common hepatic artery"],
+      "pitfalls": [
+        "Forcing the tunnel through tumour, tearing the vein.",
+        "Dividing the neck to 'see better' before resectability is clear."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.whip.bailout": {
+      "id": "step.whip.bailout", "kind": "bailout", "critical": true,
+      "title": "Unresectable at operation: stop, biopsy, bypass",
+      "why": "Finding metastases or arterial encasement after the incision is common. A non-resectional operation that prevents later jaundice and gastric outlet obstruction serves the patient better than an incomplete resection.",
+      "how": [
+        "Stop before the point of no return if there are metastases, superior mesenteric artery or coeliac involvement, or unreconstructable venous involvement.",
+        "Obtain tissue for diagnosis if it is not already available.",
+        "Consider a biliary bypass (Roux-en-Y hepaticojejunostomy, after cholecystectomy) and a gastrojejunostomy for present or likely gastric outlet obstruction, per MDT plan and the patient's condition; an endoscopically stented patient may need no bypass.",
+        "If an unexpected tumour involvement appears after the neck has been divided, complete the resection with experienced help (including venous resection) rather than leave a divided pancreas."
+      ],
+      "structuresAtRisk": ["Common hepatic duct (bypass)", "Superior mesenteric vein"],
+      "pitfalls": [
+        "Committing to resection in the hope that it will turn out resectable.",
+        "Leaving an unresectable patient with no plan for biliary and gastric drainage."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.whip.resection": {
+      "id": "step.whip.resection", "kind": "resection", "critical": true,
+      "title": "Division and resection: stomach, bile duct, jejunum, neck, uncinate",
+      "why": "The specimen is freed in a set order so that the last attachment, the uncinate process on the superior mesenteric artery, is dissected under full vision. The superior mesenteric artery margin is the margin most often positive and the dissection most likely to tear the mesenteric veins.",
+      "how": [
+        "Divide the stomach (classic) or the first part of the duodenum beyond the pylorus (pylorus-preserving) with a stapler.",
+        "Divide the common hepatic duct above the cystic duct junction; send a margin for frozen section if the unit does; place a bulldog clamp on the proximal duct.",
+        "Divide the jejunum beyond the duodenojejunal flexure and pass it behind the mesenteric vessels to the right.",
+        "Divide the pancreatic neck with a knife or energy over the sling, controlling the transverse pancreatic arteries; identify the pancreatic duct on the remnant.",
+        "Retract the vein to the left and dissect the uncinate off the right side of the superior mesenteric artery, ligating the inferior pancreaticoduodenal vessels and the first jejunal vein branches individually."
+      ],
+      "structuresAtRisk": ["Superior mesenteric artery", "Superior mesenteric vein, portal vein and first jejunal vein", "Replaced right hepatic artery", "Remnant pancreatic duct"],
+      "pitfalls": [
+        "Mass clamping the uncinate, which leaves tissue on the artery and risks bleeding.",
+        "Tearing the first jejunal vein by traction.",
+        "Dividing the bile duct too low, leaving tumour, or too high, making the anastomosis difficult."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.whip.reconstruction": {
+      "id": "step.whip.reconstruction", "kind": "reconstruction", "critical": true,
+      "title": "Reconstruction: pancreatic, biliary and gastric anastomoses",
+      "why": "The pancreatic anastomosis is the source of most serious complications. Placing the anastomoses in order along a single jejunal limb, pancreas then bile duct then stomach, keeps bile and pancreatic juice upstream of the gastric outlet and the limb free of tension.",
+      "how": [
+        "Bring the jejunal limb up through the mesocolon (or retromesenteric route).",
+        "Pancreatic anastomosis: pancreaticojejunostomy (duct-to-mucosa or invagination) or pancreaticogastrostomy, according to surgeon preference, gland texture and duct size; consider a duct stent.",
+        "Hepaticojejunostomy downstream: end-to-side, single layer, fine absorbable sutures, mucosa to mucosa, without tension.",
+        "Gastrojejunostomy or duodenojejunostomy further downstream, usually antecolic.",
+        "Record gland texture and duct diameter: they are the main predictors of fistula risk."
+      ],
+      "structuresAtRisk": ["Remnant pancreas and duct", "Hepatic duct blood supply", "Jejunal limb mesentery"],
+      "pitfalls": [
+        "Tension on the pancreatic anastomosis from a short limb.",
+        "Bites that tear a soft pancreas; use fewer, careful sutures and avoid tying too tight.",
+        "Twisting the jejunal limb when bringing it up."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

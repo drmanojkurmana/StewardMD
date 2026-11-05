@@ -95,85 +95,99 @@ export function gatherLessonText(lesson) {
   return parts.join("\n");
 }
 
+/* normFact(fact) -> object fact: blueprint topics may list mustKnow facts as plain strings
+ * (newer flat blueprints) or as { fact, terms, numbers, drugs } objects. Strings gain their numbers. */
+export function normFact(fact) {
+  if (typeof fact === "string") return { fact, numbers: extractNumbers(fact) };
+  return fact || {};
+}
+
+function checkTopic(topicId, topicTitle, mustKnow, lessonsDir, topicsReport, counts) {
+  const facts = (mustKnow || []).map(normFact);
+  counts.total += facts.length;
+
+  const lessonFile = path.join(lessonsDir, `${topicId}.json`);
+  let lesson = null;
+  if (fs.existsSync(lessonFile)) {
+    try {
+      lesson = JSON.parse(fs.readFileSync(lessonFile, "utf8"));
+    } catch {
+      lesson = null;
+    }
+  }
+
+  if (!lesson) {
+    topicsReport.push({
+      id: topicId,
+      title: topicTitle,
+      lessonPresent: false,
+      totalFacts: facts.length,
+      coveredFacts: 0,
+      coveragePct: 0,
+      missing: facts.map((f) => ({
+        fact: f.fact || JSON.stringify(f),
+        missing: ["lesson file missing"],
+      })),
+    });
+    return;
+  }
+
+  const lessonText = gatherLessonText(lesson);
+  const missingFacts = [];
+  let topicCovered = 0;
+
+  for (const fact of facts) {
+    const res = checkFactCoverage(fact, lessonText);
+    if (res.covered) {
+      topicCovered++;
+      counts.covered++;
+    } else {
+      missingFacts.push({
+        fact: fact.fact || JSON.stringify(fact),
+        missing: res.missing,
+      });
+    }
+  }
+
+  const coveragePct = facts.length ? Math.round((topicCovered / facts.length) * 100) : 100;
+  topicsReport.push({
+    id: topicId,
+    title: topicTitle,
+    lessonPresent: true,
+    totalFacts: facts.length,
+    coveredFacts: topicCovered,
+    coveragePct,
+    missing: missingFacts,
+  });
+}
+
 /* verifySubjectCoverage(blueprint, lessonsDir) -> SubjectCoverageReport */
 export function verifySubjectCoverage(blueprint, lessonsDir = path.join(ROOT, "prep/lessons/v1")) {
   const subject = blueprint.subject || blueprint.id;
   const topicsReport = [];
-  let totalFacts = 0;
-  let coveredFacts = 0;
+  const counts = { total: 0, covered: 0 };
 
   for (const section of blueprint.sections || []) {
     for (const module of section.modules || []) {
       for (const topic of module.topics || [module]) {
-        const topicId = topic.id || module.id;
-        const topicTitle = topic.title || module.name || topicId;
-        const mustKnow = topic.mustKnow || [];
-        totalFacts += mustKnow.length;
-
-        const lessonFile = path.join(lessonsDir, `${topicId}.json`);
-        let lesson = null;
-        if (fs.existsSync(lessonFile)) {
-          try {
-            lesson = JSON.parse(fs.readFileSync(lessonFile, "utf8"));
-          } catch {
-            lesson = null;
-          }
-        }
-
-        if (!lesson) {
-          topicsReport.push({
-            id: topicId,
-            title: topicTitle,
-            lessonPresent: false,
-            totalFacts: mustKnow.length,
-            coveredFacts: 0,
-            coveragePct: 0,
-            missing: mustKnow.map((f) => ({
-              fact: f.fact || JSON.stringify(f),
-              missing: ["lesson file missing"],
-            })),
-          });
-          continue;
-        }
-
-        const lessonText = gatherLessonText(lesson);
-        const missingFacts = [];
-        let topicCovered = 0;
-
-        for (const fact of mustKnow) {
-          const res = checkFactCoverage(fact, lessonText);
-          if (res.covered) {
-            topicCovered++;
-            coveredFacts++;
-          } else {
-            missingFacts.push({
-              fact: fact.fact || JSON.stringify(fact),
-              missing: res.missing,
-            });
-          }
-        }
-
-        const coveragePct = mustKnow.length ? Math.round((topicCovered / mustKnow.length) * 100) : 100;
-        topicsReport.push({
-          id: topicId,
-          title: topicTitle,
-          lessonPresent: true,
-          totalFacts: mustKnow.length,
-          coveredFacts: topicCovered,
-          coveragePct,
-          missing: missingFacts,
-        });
+        checkTopic(topic.id || module.id, topic.title || module.name || topic.id || module.id,
+          topic.mustKnow, lessonsDir, topicsReport, counts);
       }
     }
   }
 
-  const overallPct = totalFacts ? Math.round((coveredFacts / totalFacts) * 100) : 100;
+  // Flat blueprints list topics at the top level: { subject, title, topics: [{ id, title, mustKnow }] }.
+  for (const topic of blueprint.topics || []) {
+    checkTopic(topic.id, topic.title || topic.id, topic.mustKnow, lessonsDir, topicsReport, counts);
+  }
+
+  const overallPct = counts.total ? Math.round((counts.covered / counts.total) * 100) : 100;
   return {
     subject,
     title: blueprint.title || subject,
     totalTopics: topicsReport.length,
-    totalFacts,
-    coveredFacts,
+    totalFacts: counts.total,
+    coveredFacts: counts.covered,
     coveragePct: overallPct,
     topics: topicsReport,
   };

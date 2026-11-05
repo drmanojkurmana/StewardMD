@@ -1,7 +1,10 @@
 // test/prep-lesson-coverage.test.mjs — Unit test for Gate 2: Blueprint mustKnow fact coverage verifier
 import test from "node:test";
 import assert from "node:assert/strict";
-import { checkFactCoverage, gatherLessonText, verifySubjectCoverage } from "../tools/prep-lesson-coverage.mjs";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { checkFactCoverage, gatherLessonText, normFact, verifySubjectCoverage } from "../tools/prep-lesson-coverage.mjs";
 
 test("checkFactCoverage: matches terms, numbers and drugs in lesson text", () => {
   const lessonText = "Type III collagen is synthesised early in granulation tissue, later replaced by Type I collagen to establish an adult ratio of 4:1. Cefazolin provides surgical antibiotic prophylaxis.";
@@ -122,4 +125,38 @@ test("verifySubjectCoverage: computes coverage from blueprint", () => {
   assert.equal(report.totalFacts, 2);
   assert.equal(report.coveredFacts, 2);
   assert.equal(report.coveragePct, 100);
+});
+
+test("normFact: plain string facts gain their numbers", () => {
+  assert.deepEqual(normFact("Titre of 1:160 or higher is significant in 2019 criteria."),
+    { fact: "Titre of 1:160 or higher is significant in 2019 criteria.", numbers: ["1:160", "2019"] });
+  assert.deepEqual(normFact({ fact: "x", terms: ["x"] }), { fact: "x", terms: ["x"] });
+});
+
+test("verifySubjectCoverage: supports flat blueprints with string facts", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "cov-"));
+  fs.writeFileSync(path.join(dir, "srh-flat-demo.json"), JSON.stringify({
+    v: 1, module: "srh-flat-demo", subject: "ss-x", title: "Flat demo", minutes: 5, gen: "AI", quiz: [],
+    steps: [
+      { tx: "Antinuclear antibody testing by indirect immunofluorescence is the screening test with a titre of **1:160** or higher counting as significant in criteria from 2019.", say: "Screening uses immunofluorescence with a cutoff that indicates disease.", vis: { kind: "table", cols: ["A", "B"], rows: [["x", "y"], ["z", "w"]] } },
+      { tx: "A second step with enough words to satisfy the shape gate is present here for the test.", say: "This narration is present.", vis: { kind: "table", cols: ["A", "B"], rows: [["x", "y"], ["z", "w"]] } },
+      { tx: "A third step with enough words to satisfy the shape gate is present here for the test.", say: "This narration is present.", vis: { kind: "table", cols: ["A", "B"], rows: [["x", "y"], ["z", "w"]] } },
+      { tx: "A fourth step with enough words to satisfy the shape gate is present here for the test.", say: "This narration is present.", vis: { kind: "table", cols: ["A", "B"], rows: [["x", "y"], ["z", "w"]] } },
+    ],
+  }));
+  const blueprint = {
+    subject: "ss-x",
+    title: "Flat Specialty",
+    topics: [
+      { id: "srh-flat-demo", title: "Flat demo", mustKnow: ["Antinuclear antibody testing by indirect immunofluorescence with titre 1:160 significant in 2019 criteria."] },
+      { id: "srh-flat-missing", title: "Missing", mustKnow: ["Some fact that has no lesson file."] },
+    ],
+  };
+  const report = verifySubjectCoverage(blueprint, dir);
+  assert.equal(report.totalTopics, 2);
+  assert.equal(report.totalFacts, 2);
+  assert.equal(report.coveredFacts, 1);
+  assert.equal(report.topics[0].coveragePct, 100);
+  assert.equal(report.topics[1].lessonPresent, false);
+  fs.rmSync(dir, { recursive: true, force: true });
 });

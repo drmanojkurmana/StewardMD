@@ -1,0 +1,387 @@
+{
+  "id": "acl-reconstruction",
+  "title": "Arthroscopic ACL reconstruction (hamstring graft)",
+  "subtitle": "Anatomical single-bundle reconstruction with semitendinosus and gracilis autograft",
+  "system": "musculoskeletal",
+  "aliases": [
+    "ACL reconstruction",
+    "ACLR",
+    "anterior cruciate ligament reconstruction",
+    "hamstring ACL",
+    "STG graft"
+  ],
+  "estMinutes": 100,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "aaos-acl-2022",
+      "org": "American Academy of Orthopaedic Surgeons (AAOS)",
+      "title": "Management of Anterior Cruciate Ligament Injuries: Evidence-Based Clinical Practice Guideline",
+      "year": 2022,
+      "url": "https://www.orthoguidelines.org",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "frobell-2010",
+      "org": "Frobell RB et al. N Engl J Med 363:331",
+      "title": "A randomized trial of treatment for acute anterior cruciate ligament tears",
+      "year": 2010,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Frobell+randomized+trial+of+treatment+for+acute+anterior+cruciate+ligament+tears",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "lysholm",
+    "ottawa_knee"
+  ],
+  "chapters": {
+    "indications": [
+      "Symptomatic instability (giving way) from an ACL tear despite rehabilitation.",
+      "Patients who want to return to pivoting sport or work, after a shared decision; structured rehabilitation with optional delayed reconstruction is a reasonable alternative for many active adults (Frobell 2010).",
+      "ACL tear with a repairable meniscal tear, where stability protects the repair.",
+      "Combined ligament injuries, as part of a planned multiligament reconstruction."
+    ],
+    "contraindications": [
+      "A stiff, swollen knee without full extension: regain range and quieten the knee first.",
+      "Unwillingness or inability to undertake the long rehabilitation.",
+      "Advanced osteoarthritis where instability is not the main problem.",
+      "Open growth plates: needs physeal-respecting techniques and a paediatric specialist."
+    ],
+    "preparation": [
+      "MRI to confirm the tear and assess the menisci, cartilage and other ligaments; radiographs to exclude fractures (Segond, tibial spine) and arthritis.",
+      "Prehabilitation to regain full extension and quadriceps control.",
+      "Consent risks to discuss: infection (including septic arthritis), graft failure and re-rupture, stiffness, anterior knee pain, numbness around the harvest site, hamstring weakness, venous thromboembolism, neurovascular injury, tunnel problems, meniscal re-tear, later arthritis, and the possible need for an alternative graft."
+    ],
+    "positioning": [
+      "Supine with a lateral post or leg holder, allowing hyperflexion beyond 120 degrees for the femoral tunnel.",
+      "Thigh tourniquet; foot rest to hold the knee at 90 degrees."
+    ],
+    "equipment": [
+      "Arthroscopy stack, 30 degree arthroscope, shaver and radiofrequency device, probe.",
+      "Tendon strippers, graft preparation board and sizing block.",
+      "Femoral and tibial guides, reamers, guide pins, femoral suspensory fixation and tibial fixation (interference screw or cortical)."
+    ],
+    "anatomy": [
+      "The ACL runs from the posteromedial aspect of the lateral femoral condyle to the tibia in front of and lateral to the medial tibial spine.",
+      "The lateral intercondylar ridge marks the anterior border of the femoral footprint.",
+      "The popliteal artery lies close behind the posterior tibia and capsule.",
+      "The infrapatellar branch of the saphenous nerve crosses the anteromedial knee and is often injured by harvest and portal incisions."
+    ],
+    "criticalSafety": [
+      "Release every hamstring accessory band before stripping.",
+      "Watch the tibial guide pin while reaming so it cannot advance posteriorly.",
+      "Confirm femoral fixation before tensioning the graft."
+    ],
+    "structuresAtRisk": [
+      "Popliteal artery and tibial nerve",
+      "Common peroneal nerve (femoral pin exit, lateral structures)",
+      "Saphenous nerve and its infrapatellar branch",
+      "Medial collateral ligament",
+      "Menisci and articular cartilage"
+    ],
+    "commonErrors": [
+      "Non-anatomical femoral tunnel, high and anterior.",
+      "Premature hamstring amputation.",
+      "Small-diameter graft accepted without considering augmentation.",
+      "Missing associated posterolateral or collateral laxity."
+    ],
+    "complications": [
+      "Graft failure and re-rupture; contralateral ACL injury.",
+      "Septic arthritis, which needs urgent arthroscopic washout.",
+      "Stiffness and loss of extension (cyclops lesion).",
+      "Saphenous nerve numbness, hamstring weakness, tunnel widening.",
+      "Venous thromboembolism, rarely neurovascular injury.",
+      "Later osteoarthritis."
+    ],
+    "postop": [
+      "Weight bearing as tolerated, with the brace only if the local protocol or a meniscal repair requires it.",
+      "Physiotherapy-led rehabilitation from the first days: full extension early, quadriceps activation, staged return to running and sport by criteria rather than time alone.",
+      "Wound checks and advice to return urgently with a hot, swollen, painful knee or fever.",
+      "Thromboprophylaxis assessment per local policy."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Include consent for an alternative graft source in case of hamstring amputation, and for meniscal repair or resection."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.acl.eua"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Leg holder or lateral post; confirm the knee hyperflexes freely for the femoral tunnel."
+    },
+    {
+      "ref": "step.ortho.tourniquet"
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.acl.portals-diagnostic"
+    },
+    {
+      "ref": "step.acl.graft-harvest"
+    },
+    {
+      "ref": "step.acl.graft-prep"
+    },
+    {
+      "ref": "step.acl.femoral-tunnel"
+    },
+    {
+      "ref": "step.acl.tibial-tunnel"
+    },
+    {
+      "ref": "step.ortho.implant-check",
+      "emphasis": "Fixation devices sized to the measured graft and tunnel lengths before opening."
+    },
+    {
+      "ref": "step.acl.pass-fix"
+    },
+    {
+      "ref": "step.acl.final-check"
+    },
+    {
+      "ref": "step.acl.bailout"
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Check the harvest site, which is the usual source of a postoperative haematoma."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure"
+    },
+    {
+      "ref": "step.ortho.nv-check"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.acl.eua": {
+      "id": "step.acl.eua",
+      "kind": "checkpoint",
+      "title": "Examination under anaesthesia",
+      "why": "Under anaesthesia, without guarding, the Lachman and pivot shift tests confirm the diagnosis and reveal associated laxity (collateral or posterolateral) that would change the operation.",
+      "how": [
+        "Compare both knees: range of movement, Lachman, anterior drawer, pivot shift.",
+        "Test varus and valgus at 0 and 30 degrees, posterior drawer and dial test for associated ligament injuries.",
+        "Record the findings before the arthroscope goes in."
+      ],
+      "structuresAtRisk": [
+        "Associated ligament injuries (missed)"
+      ],
+      "pitfalls": [
+        "Skipping the examination because the MRI showed the tear.",
+        "Missing posterolateral corner laxity, which leads to graft failure."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.acl.graft-harvest": {
+      "id": "step.acl.graft-harvest",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Hamstring graft harvest (semitendinosus and gracilis)",
+      "why": "The graft is the reconstruction. Premature amputation of a tendon by the stripper, usually because a band to the medial gastrocnemius was not released, leaves a short graft and forces a change of plan.",
+      "how": [
+        "Make an incision over the pes anserinus on the anteromedial tibia, below and medial to the tibial tubercle.",
+        "Incise the sartorius fascia in line with the tendons, identify gracilis (proximal) and semitendinosus (distal) from the deep side, and tag each tendon.",
+        "Free each tendon with finger dissection and divide all accessory bands, especially the semitendinosus band to the medial head of gastrocnemius, before using the stripper.",
+        "Advance the open stripper slowly in line with the tendon with the knee flexed; if resistance is felt, stop and look for another band."
+      ],
+      "structuresAtRisk": [
+        "Infrapatellar and sartorial branches of the saphenous nerve",
+        "Superficial medial collateral ligament (deep to the pes)",
+        "Semitendinosus (premature amputation)"
+      ],
+      "pitfalls": [
+        "Using the stripper before the accessory bands are released.",
+        "Mistaking the superficial MCL for a hamstring tendon."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.acl.graft-prep": {
+      "id": "step.acl.graft-prep",
+      "kind": "reconstruction",
+      "title": "Graft preparation and sizing",
+      "why": "The graft's diameter and length decide the tunnel size and fixation. Small-diameter hamstring grafts have higher failure rates in cohort and registry studies, so the size is measured, not assumed.",
+      "how": [
+        "Strip muscle from the tendons on the back table, keeping the graft moist and covered.",
+        "Fold the tendons to make the planned multi-strand graft and whipstitch the ends.",
+        "Measure the diameter in the sizing block and the length against the planned tunnels and fixation.",
+        "If the graft is small, consider adding strands (for example a tripled semitendinosus) or another graft source per the consent."
+      ],
+      "structuresAtRisk": [
+        "Graft (contamination or drying)"
+      ],
+      "pitfalls": [
+        "Dropping the graft on the floor without a plan: know the local protocol for decontamination or an alternative graft.",
+        "Not measuring the diameter before drilling the tunnels."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.acl.portals-diagnostic": {
+      "id": "step.acl.portals-diagnostic",
+      "kind": "access",
+      "title": "Arthroscopic portals and diagnostic arthroscopy",
+      "why": "Well-placed portals make every later step easier, and a systematic inspection finds the meniscal and chondral injuries that commonly accompany an ACL tear and change both the operation and the prognosis.",
+      "how": [
+        "Create the anterolateral portal high and close to the patellar tendon; place the anteromedial portal under direct vision using a spinal needle, so it reaches the femoral footprint.",
+        "Inspect systematically: suprapatellar pouch, patellofemoral joint, gutters, medial compartment, notch, lateral compartment.",
+        "Probe both menisci; repair tears that are repairable rather than excising them, and record chondral damage."
+      ],
+      "structuresAtRisk": [
+        "Medial and lateral menisci",
+        "Articular cartilage (iatrogenic scuffing)",
+        "Infrapatellar branch of the saphenous nerve (anteromedial portal)"
+      ],
+      "pitfalls": [
+        "A low anteromedial portal that cannot reach the femoral footprint.",
+        "Excising a repairable meniscal tear."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.acl.femoral-tunnel": {
+      "id": "step.acl.femoral-tunnel",
+      "kind": "resection",
+      "critical": true,
+      "title": "Notch preparation and anatomical femoral tunnel",
+      "why": "A non-anatomical femoral tunnel, usually too high or too anterior, is a common technical cause of failure. Placing it within the native footprint on the lateral wall restores rotational control.",
+      "how": [
+        "Debride the ACL stump with a shaver, preserving enough of the footprint to see where it was; perform a notchplasty only if the graft will impinge.",
+        "Identify the footprint on the medial wall of the lateral femoral condyle, behind the lateral intercondylar ridge, using the ridge and the posterior cartilage margin as landmarks.",
+        "Through the anteromedial portal, with the knee hyperflexed, pass the guide pin at the footprint centre, then drill to the graft diameter while keeping a posterior wall of bone.",
+        "Check the tunnel and the back wall with the arthroscope before passing anything."
+      ],
+      "structuresAtRisk": [
+        "Posterior femoral cortex (blow-out)",
+        "Common peroneal nerve and lateral structures (guide pin exit)",
+        "Articular cartilage of the medial femoral condyle (reamer passage)"
+      ],
+      "pitfalls": [
+        "Drilling with the knee insufficiently flexed, giving a short tunnel or a posterior wall blow-out.",
+        "Placing the tunnel high in the notch (the 'over the top' position) because the lateral wall was not cleared."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.acl.tibial-tunnel": {
+      "id": "step.acl.tibial-tunnel",
+      "kind": "resection",
+      "critical": true,
+      "title": "Anatomical tibial tunnel",
+      "why": "The tibial tunnel decides where the graft emerges in the joint. Too anterior and the graft impinges on the roof of the notch in extension; too posterior and it is vertical and does not control rotation.",
+      "how": [
+        "Set the tibial guide through the anteromedial portal on the centre of the tibial footprint, in front of the PCL and in line with the posterior edge of the anterior horn of the lateral meniscus.",
+        "Start the external entry medial to the tibial tubercle above the pes insertion, and advance the guide pin under vision into the joint, protecting the femoral condyle with a curette.",
+        "Ream to the graft diameter while holding the pin so it does not advance posteriorly; clear debris from the tunnel edge."
+      ],
+      "structuresAtRisk": [
+        "Popliteal vessels (guide pin advanced posteriorly)",
+        "Anterior horn of the lateral meniscus root",
+        "PCL"
+      ],
+      "pitfalls": [
+        "Guide pin advancing with the reamer into the back of the knee.",
+        "Tunnel through the lateral meniscus anterior root."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.acl.pass-fix": {
+      "id": "step.acl.pass-fix",
+      "kind": "reconstruction",
+      "title": "Graft passage, tensioning and fixation",
+      "why": "Fixation holds the graft until it incorporates. A femoral suspensory button that has not flipped, or a graft fixed slack or over-tensioned, fails early.",
+      "how": [
+        "Pass the graft from tibia to femur with the leading sutures, under arthroscopic vision.",
+        "Deploy femoral fixation and confirm it: feel the button flip and lock, and confirm on vision or fluoroscopy that it sits on the cortex with no soft tissue between.",
+        "Cycle the knee repeatedly with tension on the graft to remove creep.",
+        "Fix the tibial end with the knee in the position recommended for the technique, with manual tension, using an interference screw or cortical fixation."
+      ],
+      "structuresAtRisk": [
+        "Graft (laceration by screw threads)",
+        "Posterior tunnel walls",
+        "Lateral thigh soft tissue (button lodged in vastus lateralis)"
+      ],
+      "pitfalls": [
+        "Assuming the button has flipped without checking.",
+        "Fixing the tibial end with the knee flexed and the graft slack."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.acl.final-check": {
+      "id": "step.acl.final-check",
+      "kind": "checkpoint",
+      "title": "Final graft check: impingement, tension and stability",
+      "why": "The last look shows whether the graft impinges in extension, whether it is taut and whether the knee is now stable. Problems found now are correctable; found in clinic, they are failures.",
+      "how": [
+        "Fully extend the knee under vision: the graft should not impinge on the roof of the notch.",
+        "Probe the graft for tension and inspect the tunnel apertures.",
+        "Repeat Lachman and pivot shift and record the result."
+      ],
+      "structuresAtRisk": [
+        "Graft (roof impingement)"
+      ],
+      "pitfalls": [
+        "Missing an extension deficit caused by roof impingement or a cyclops lesion.",
+        "Not recording post-reconstruction stability."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.acl.bailout": {
+      "id": "step.acl.bailout",
+      "kind": "bailout",
+      "title": "Graft or tunnel problems: change the plan safely",
+      "why": "A short or amputated graft, a posterior wall blow-out or a tunnel in the wrong place each has a standard rescue. Knowing it in advance turns a crisis into a change of plan.",
+      "how": [
+        "Short or small graft: add strands, change configuration, or take a different autograft (contralateral hamstrings, bone-patellar tendon-bone or quadriceps) only if consented; allograft per local availability.",
+        "Posterior wall blow-out: switch to suspensory cortical fixation, or redirect the tunnel; do not rely on an interference screw without a back wall.",
+        "Malpositioned tunnel: re-drill in the correct position if there is enough bone bridge; otherwise consider staged surgery.",
+        "Call a senior colleague early and record what happened and why."
+      ],
+      "structuresAtRisk": [
+        "Graft fixation",
+        "Femoral cortex"
+      ],
+      "pitfalls": [
+        "Persisting with a tunnel or graft that will fail.",
+        "Taking a graft not covered by the consent."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

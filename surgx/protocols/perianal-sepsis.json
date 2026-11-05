@@ -1,0 +1,191 @@
+{
+  "id": "perianal-sepsis",
+  "title": "Perianal sepsis and acute anorectal conditions",
+  "subtitle": "Abscess, thrombosed haemorrhoid, fissure, pilonidal",
+  "category": "abdomen",
+  "specialty": "general",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "ascrs-abscess-2022",
+      "org": "American Society of Colon and Rectal Surgeons (ASCRS)",
+      "title": "Clinical Practice Guidelines for the Management of Anorectal Abscess, Fistula-in-Ano, and Rectovaginal Fistula",
+      "year": 2022,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35732009/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "ascrs-haemorrhoids-2018",
+      "org": "American Society of Colon and Rectal Surgeons (ASCRS)",
+      "title": "Clinical Practice Guidelines for the Management of Hemorrhoids",
+      "year": 2018,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/29420423/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "ascrs-fissure-2017",
+      "org": "American Society of Colon and Rectal Surgeons (ASCRS)",
+      "title": "Clinical Practice Guideline for the Management of Anal Fissures",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27926552/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "ascrs-pilonidal-2019",
+      "org": "American Society of Colon and Rectal Surgeons (ASCRS)",
+      "title": "Clinical Practice Guidelines for the Management of Pilonidal Disease",
+      "year": 2019,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30640830/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "wses-ssti-2018",
+      "org": "World Society of Emergency Surgery (WSES) and Surgical Infection Society Europe (SIS-E)",
+      "title": "2018 WSES/SIS-E consensus conference: recommendations for the management of skin and soft-tissue infections",
+      "year": 2018,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30564282/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Pain out of proportion, spreading erythema or crepitus over the perineum, scrotum or labia, skin necrosis, or systemic toxicity: Fournier's gangrene, which needs theatre within hours."
+      },
+      {
+        "text": "Diabetes, immunosuppression, neutropenia or HIV with perianal pain: sepsis spreads faster and signs are blunted."
+      },
+      {
+        "text": "Deep rectal pain with fever but little to see externally: intersphincteric or supralevator abscess, which needs an examination under anaesthesia or imaging."
+      },
+      {
+        "text": "Urinary retention with perianal sepsis."
+      },
+      {
+        "text": "Atypical fissure (lateral, multiple, painless or large) or recurrent complex sepsis: think Crohn's disease, tuberculosis, HIV, sexually transmitted infection or malignancy."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Perianal abscess: prompt incision and drainage. Do not wait for fluctuance and do not treat with antibiotics alone.",
+        "timeCritical": true,
+        "evidenceRef": "ascrs-abscess-2022"
+      },
+      {
+        "text": "Add antibiotics only for surrounding cellulitis, systemic signs of infection, or immunosuppression, and in patients with relevant prosthetic or valvular risk per local protocol.",
+        "evidenceRef": "ascrs-abscess-2022"
+      },
+      {
+        "text": "Suspected Fournier's gangrene: resuscitate, broad-spectrum antibiotics per local protocol and emergency surgical debridement.",
+        "timeCritical": true,
+        "evidenceRef": "wses-ssti-2018"
+      },
+      {
+        "text": "Thrombosed external haemorrhoid presenting early, within about 72 hours of onset: consider excision of the thrombosed haemorrhoid under local anaesthetic rather than incision of the clot.",
+        "evidenceRef": "ascrs-haemorrhoids-2018"
+      },
+      {
+        "text": "Acute pilonidal abscess: incision and drainage, with definitive treatment of the sinus planned later once the acute sepsis has settled.",
+        "evidenceRef": "ascrs-pilonidal-2019"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Inspect and palpate the perineum, buttocks and genitalia; check for tenderness above the dentate line on rectal examination."
+      },
+      {
+        "text": "Screen for systemic sepsis and necrotising infection.",
+        "calcs": [
+          "qsofa",
+          "lrinec"
+        ]
+      },
+      {
+        "text": "Check capillary glucose: new or poorly controlled diabetes is common in perianal sepsis and in Fournier's gangrene.",
+        "calcs": [
+          "hba1c"
+        ]
+      },
+      {
+        "text": "History of bowel habit, previous abscesses, weight loss and family history of inflammatory bowel disease."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Bloods for systemic infection, glucose and HbA1c."
+      },
+      {
+        "text": "Pelvic MRI or endoanal ultrasound for recurrent, complex, deep or Crohn's-related sepsis."
+      },
+      {
+        "text": "CT for suspected Fournier's gangrene only if it does not delay theatre."
+      },
+      {
+        "text": "Biopsy and further work-up of an atypical fissure or chronic non-healing wound."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Thrombosed external haemorrhoid beyond the early window: non-operative care with analgesia, stool softeners and topical agents; the pain usually settles within days.",
+        "evidenceRef": "ascrs-haemorrhoids-2018"
+      },
+      {
+        "text": "Acute anal fissure: fibre, fluids, sitz baths and topical analgesia first.",
+        "evidenceRef": "ascrs-fissure-2017"
+      },
+      {
+        "text": "Chronic fissure: topical calcium channel blocker or nitrate as first-line medical therapy; calcium channel blockers have fewer headaches.",
+        "evidenceRef": "ascrs-fissure-2017"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Drain the abscess through an incision close to the anal verge to keep any fistula tract short; avoid aggressive probing for an internal opening in acute inflamed tissue.",
+        "evidenceRef": "ascrs-abscess-2022"
+      },
+      {
+        "text": "If a simple low fistula is obvious at drainage, an experienced surgeon may lay it open; otherwise place a loose seton or defer and reassess.",
+        "evidenceRef": "ascrs-abscess-2022"
+      },
+      {
+        "text": "Chronic fissure refractory to medical therapy: botulinum toxin, or lateral internal sphincterotomy after discussing the risk to continence.",
+        "evidenceRef": "ascrs-fissure-2017"
+      },
+      {
+        "text": "Pilonidal disease after the acute phase: definitive excision or a minimally invasive technique; off-midline closure is preferred when closing primarily.",
+        "evidenceRef": "ascrs-pilonidal-2019"
+      },
+      {
+        "text": "Fournier's gangrene: radical debridement of all non-viable tissue with planned re-look within 24 to 48 hours; diversion only when faecal soiling makes wound care impossible.",
+        "evidenceRef": "wses-ssti-2018"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Senior surgeon and critical care immediately for suspected Fournier's gangrene; urology for scrotal involvement."
+      },
+      {
+        "text": "Colorectal surgeon for recurrent, complex, high or Crohn's-related fistula and for any sepsis in a patient with inflammatory bowel disease."
+      },
+      {
+        "text": "Gastroenterology for suspected Crohn's disease; infectious diseases for suspected tuberculosis or HIV."
+      }
+    ]
+  },
+  "notes": [
+    "Perianal sepsis is a pus problem, not an antibiotic problem. The commonest error is a course of oral antibiotics that lets the abscess track deeper.",
+    "A substantial minority of anorectal abscesses, often quoted as about a third, go on to a fistula. Warn the patient at drainage, and do not create a fistula by probing.",
+    "The perineum of a diabetic patient can look unremarkable while the infection spreads beneath it. Feel for crepitus and do not trust a quiet skin."
+  ],
+  "calcs": [
+    "qsofa",
+    "lrinec",
+    "hba1c"
+  ]
+}

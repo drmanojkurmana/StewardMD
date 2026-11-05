@@ -1,0 +1,178 @@
+{
+  "id": "malignant-bowel-obstruction",
+  "title": "Malignant bowel obstruction",
+  "subtitle": "Decompress, define the level, decide the goal",
+  "category": "onco_emergencies",
+  "specialty": "oncology",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "mascc-mbo",
+      "org": "Multinational Association of Supportive Care in Cancer (MASCC)",
+      "title": "Medical management of malignant bowel obstruction in patients with advanced cancer: 2021 MASCC guideline update (Davis M et al., Support Care Cancer)",
+      "year": 2021,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Medical+management+of+malignant+bowel+obstruction+2021+MASCC+guideline+update",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "wses-crc",
+      "org": "World Society of Emergency Surgery (WSES)",
+      "title": "2017 WSES guidelines on colon and rectal cancer emergencies: obstruction and perforation (Pisano M et al., World J Emerg Surg)",
+      "year": 2018,
+      "url": "https://wjes.biomedcentral.com/articles/10.1186/s13017-018-0192-3",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "cochrane-mbo",
+      "org": "Cochrane",
+      "title": "Surgery for the resolution of symptoms in malignant bowel obstruction in advanced gynaecological and gastrointestinal cancer (Cousins SE, Tempest E, Feuer DJ)",
+      "year": 2016,
+      "url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD002764.pub2/full",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Peritonism, fever, tachycardia or a rising lactate: strangulation or perforation, which is a surgical emergency whatever the cancer stage."
+      },
+      {
+        "text": "A closed-loop obstruction on CT, or a competent ileocaecal valve with a grossly dilated caecum: perforation is imminent."
+      },
+      {
+        "text": "Faeculent vomiting with a reduced conscious level: aspiration risk, decompress now."
+      },
+      {
+        "text": "New neutropenia or recent chemotherapy: abdominal pain may be neutropenic enterocolitis, not obstruction."
+      },
+      {
+        "text": "No documented conversation about prognosis and goals of care. Without it every decision that follows is guesswork."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Nasogastric tube for a vomiting, distended patient, as a short-term measure to decompress and protect the airway.",
+        "timeCritical": true,
+        "evidenceRef": "mascc-mbo"
+      },
+      {
+        "text": "IV access, fluids and electrolyte correction, analgesia and an antiemetic. Avoid prokinetic antiemetics when the obstruction is complete and colicky.",
+        "evidenceRef": "mascc-mbo"
+      },
+      {
+        "text": "Urgent senior surgical review if any red flag is present: strangulation and perforation are treated as for any emergency laparotomy in a patient who wants active treatment.",
+        "timeCritical": true,
+        "evidenceRef": "wses-crc"
+      },
+      {
+        "text": "Start the goals-of-care conversation early, with the patient, the oncologist and palliative care, not after the CT.",
+        "evidenceRef": "cochrane-mbo"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Performance status, weight loss and nutritional state. Poor performance status predicts poor surgical outcome and short survival.",
+        "calcs": [
+          "ecog",
+          "karnofsky",
+          "must"
+        ]
+      },
+      {
+        "text": "Clinical markers that make surgery unlikely to help: ascites, palpable diffuse intra-abdominal disease, multiple levels of obstruction, previous abdominal radiotherapy, and low albumin."
+      },
+      {
+        "text": "Cancer history: primary site, stage, last treatment, response, and what further systemic therapy is realistically available."
+      },
+      {
+        "text": "Frailty and operative risk, so the benefit of an operation can be weighed honestly.",
+        "calcs": [
+          "cfs",
+          "p_possum"
+        ]
+      },
+      {
+        "text": "Remember benign causes. Adhesions, a hernia or a radiation stricture cause a real minority of obstructions in patients with known cancer, and those are often very treatable."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "CT abdomen and pelvis with IV contrast: level and number of transition points, closed loop, peritoneal disease, ascites, and the extent of metastatic disease."
+      },
+      {
+        "text": "FBC, U&E, magnesium, calcium, LFT, albumin, lactate, and group and save."
+      },
+      {
+        "text": "Water-soluble contrast follow-through may help when adhesions are the likely cause and there is no strangulation."
+      },
+      {
+        "text": "Endoscopy to assess gastric outlet or single-level colonic obstruction when stenting is being considered."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Antisecretory treatment to reduce vomiting and colic: an anticholinergic such as hyoscine butylbromide, or a somatostatin analogue, per palliative care protocol.",
+        "evidenceRef": "mascc-mbo"
+      },
+      {
+        "text": "Consider a corticosteroid trial for partial obstruction, with a defined review point and stop date.",
+        "evidenceRef": "mascc-mbo"
+      },
+      {
+        "text": "Correct dehydration and electrolytes; decide on parenteral nutrition only in the context of expected survival and further oncological treatment.",
+        "evidenceRef": "mascc-mbo"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Surgery (resection, bypass or stoma) for a selected patient: single level of obstruction, reasonable performance status and prognosis, and an informed wish for an operation.",
+        "evidenceRef": "cochrane-mbo"
+      },
+      {
+        "text": "Endoscopic self-expanding metal stent for a single-level left-sided colonic or gastric outlet obstruction as palliation, avoiding a laparotomy and a stoma.",
+        "evidenceRef": "wses-crc"
+      },
+      {
+        "text": "Venting gastrostomy for refractory vomiting in a patient not suitable for surgery, allowing removal of the nasogastric tube and some oral intake for comfort.",
+        "evidenceRef": "mascc-mbo"
+      },
+      {
+        "text": "Emergency laparotomy for perforation or strangulation in a patient who wants active treatment, with a damage-control mindset.",
+        "evidenceRef": "wses-crc"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Consultant surgeon and the treating oncologist the same day: the decision depends on what cancer treatment remains."
+      },
+      {
+        "text": "Palliative care early, for symptom control and for the conversation, not only for end-of-life care."
+      },
+      {
+        "text": "Gastroenterology or interventional radiology for stenting or venting gastrostomy."
+      },
+      {
+        "text": "Critical care only after the goals-of-care discussion has established that organ support is wanted and is likely to help."
+      }
+    ]
+  },
+  "notes": [
+    "The surgical question in malignant bowel obstruction is rarely 'can I operate?' and nearly always 'will an operation give this patient time at home that they want?'",
+    "Multiple transition points with ascites predict a futile laparotomy, a high chance of an enterocutaneous fistula and death in hospital.",
+    "A patient with a known cancer can still have a hernia or a band adhesion. Do not let the oncology history make the CT report for you."
+  ],
+  "calcs": [
+    "ecog",
+    "karnofsky",
+    "must",
+    "cfs",
+    "p_possum",
+    "news2"
+  ]
+}

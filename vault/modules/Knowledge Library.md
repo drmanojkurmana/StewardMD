@@ -138,3 +138,14 @@ The reading text sits on one raised white sheet (solid fill, 1px border, contact
 ## Image Library (2026-11-04)
 
 The Library home carries an "Image Library" entry opening the shared central image bank ([[Image Library]], flag `smd_imglib` default ON): every captioned image in the app by system, including the Library figures. Built by `tools/build-image-library.mjs` into `kb/dist/imglib/`.
+
+## iPad (2026-11-04, vault/plans/iPad-Standards.md)
+- All iPad rules live in `ipad-knowledge.css` (scoped `html.smd-tablet` + `min-width: 700px`); module CSS untouched.
+- `#sbrefBody` is a size container (`container: kblib`), so the library grids (disease index 2/3 across, guidelines and
+  protocol rows 2/3 across, iLearn 3 across) follow the column width, not the viewport.
+- Landscape (1,000 px and wider): a disease opened from Syndromes opens beside the library. The library shrinks to a
+  380 px list column (phone layout via the container queries) and `#dxOverlay` / `#dxMgmt` start at 380 px. The open
+  row gets `aria-current` from `kbOpen` (tablet only). Back ("Library") closes the reader.
+- Protocol reader at 1,000 px container width and wider: the section list is a sticky left column.
+- `SMD_KB.open()` with no id now opens the Syndromes tab instead of an empty reader (that empty card was what the
+  `kb-library` screen of `test/run-ipad-layout-ui.mjs` measured).

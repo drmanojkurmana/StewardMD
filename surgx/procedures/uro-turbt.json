@@ -1,0 +1,155 @@
+{
+  "id": "uro-turbt",
+  "title": "Transurethral resection of bladder tumour (TURBT)",
+  "subtitle": "Complete resection with detrusor muscle in the specimen",
+  "system": "urology",
+  "aliases": ["TURBT", "TUR-BT", "bladder tumour resection"],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-nmibc", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Non-muscle-invasive Bladder Cancer", "year": 2024, "url": "https://uroweb.org/guidelines/non-muscle-invasive-bladder-cancer", "accessed": "2026-11-04" },
+    { "id": "nice-ng2", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Bladder cancer: diagnosis and management (NG2)", "year": 2015, "url": "https://www.nice.org.uk/guidance/ng2", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["rcri", "caprini", "clavien_dindo", "corr_na"],
+  "chapters": {
+    "indications": [
+      "Any bladder tumour seen at cystoscopy or on imaging: TURBT is both the diagnostic and, for non-muscle-invasive disease, the primary treatment.",
+      "Re-resection (second TURBT) after incomplete initial resection, for T1 tumours, or when no detrusor muscle was in the first specimen, as the guideline specifies.",
+      "Palliation of bleeding from a bladder tumour."
+    ],
+    "contraindications": [
+      "Active untreated urinary infection.",
+      "Uncorrected coagulopathy.",
+      "A patient unfit for anaesthesia, where outpatient fulguration or biopsy may be the better choice for small low-grade recurrences."
+    ],
+    "preparation": [
+      "Review the flexible cystoscopy findings and imaging; CT urography to assess the upper tracts.",
+      "Urine cytology where it will inform management.",
+      "Plan anticoagulant and antiplatelet management.",
+      "Consent covers bleeding, infection, bladder perforation and its management, the possibility of further resections, intravesical treatment, and the possible diagnosis of invasive cancer.",
+      "Check that the immediate post-operative chemotherapy instillation is available if it is planned."
+    ],
+    "positioning": [
+      "Lithotomy with padded stirrups.",
+      "For lateral wall tumours, plan with the anaesthetist: general anaesthesia with neuromuscular blockade or an obturator nerve block reduces the obturator reflex."
+    ],
+    "equipment": [
+      "Rigid cystoscope with 30 and 70 degree lenses; resectoscope with monopolar or bipolar loops; cold-cup biopsy forceps.",
+      "Ellik evacuator; three-way catheter and irrigation.",
+      "Enhanced cystoscopy (blue light or narrow-band imaging) where available, which improves detection of small papillary tumours and carcinoma in situ."
+    ],
+    "anatomy": [
+      "The bladder wall is thin, particularly at the dome and in an elderly, distended bladder. Lateral wall resection lies close to the obturator nerve.",
+      "The dome and posterior wall are covered by peritoneum: perforation here can be intraperitoneal. The anterior and lateral walls and the bladder neck are extraperitoneal.",
+      "Ureteric orifices lie at the lateral corners of the trigone; tumours near them may involve them.",
+      "The detrusor muscle layer must be in the specimen to stage the tumour; its absence leaves stage unknown."
+    ],
+    "criticalSafety": [
+      "Map every tumour (number, size, site, appearance) before the first cut, and record it as a bladder diagram.",
+      "Resect completely, including the base, and send the base as a separate specimen containing detrusor muscle.",
+      "Anticipate the obturator jerk on the lateral wall. Reduce bladder filling, use low current or bipolar energy, and ask for paralysis or an obturator nerve block.",
+      "Do not give an immediate post-operative chemotherapy instillation if a perforation is suspected or there is bleeding requiring irrigation."
+    ],
+    "structuresAtRisk": [
+      "Bladder wall and peritoneum (perforation)",
+      "Obturator nerve (lateral wall tumours)",
+      "Ureteric orifices",
+      "Bowel adjacent to an intraperitoneal perforation"
+    ],
+    "commonErrors": [
+      "A superficial resection without muscle, making the specimen unstageable.",
+      "Diathermy artefact from excessive coagulation that destroys the tissue the pathologist needs.",
+      "Overfilling the bladder, which thins the wall and increases perforation risk.",
+      "Missing small satellite tumours or carcinoma in situ by not inspecting the whole bladder.",
+      "Forgetting to plan the second resection or the instillation."
+    ],
+    "complications": [
+      "Bleeding and clot retention.",
+      "Bladder perforation: most are extraperitoneal and managed with catheter drainage; intraperitoneal perforations may need laparoscopic or open repair.",
+      "Urinary infection.",
+      "Ureteric orifice injury and later obstruction.",
+      "Under-staging and early recurrence after incomplete resection."
+    ],
+    "postop": [
+      "Irrigation until clear; catheter duration depends on the size of the resection and any perforation.",
+      "Immediate single post-operative intravesical chemotherapy instillation for appropriate tumours, within the window the guideline sets, when there is no perforation or significant bleeding.",
+      "Histology discussed at the multidisciplinary meeting, with risk stratification, second resection, intravesical therapy and surveillance planned from it.",
+      "Muscle-invasive disease needs staging and a radical treatment discussion."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout", "emphasis": "Confirm the instillation plan at the time-out, and whether the tumour is on a lateral wall." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Lithotomy with padded stirrups; discuss neuromuscular blockade or an obturator block now if a lateral wall tumour is expected." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.uro.cystoscopy", "emphasis": "Draw the bladder diagram: number, size, site and appearance of every tumour, and suspicious flat areas." },
+    { "ref": "step.turbt.bimanual" },
+    { "ref": "step.uro.resectoscope" },
+    { "ref": "step.turbt.resect" },
+    { "ref": "step.turbt.base" },
+    { "ref": "step.uro.chip-evacuation", "emphasis": "Keep the exophytic tumour and the base in separate labelled pots." },
+    { "ref": "step.core.haemostasis", "emphasis": "Coagulate the resection edges and base at low bladder volume, sparingly, to avoid thermal injury through a thin wall." },
+    { "ref": "step.uro.perforation-check", "emphasis": "A suspected perforation cancels the immediate chemotherapy instillation. Say so aloud and write it down." },
+    { "ref": "step.uro.three-way-catheter" },
+    { "ref": "step.turbt.instillation" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.turbt.bimanual": {
+      "id": "step.turbt.bimanual", "kind": "checkpoint",
+      "title": "Bimanual examination under anaesthesia",
+      "why": "A palpable or fixed mass suggests muscle-invasive or locally advanced disease, and this is the only moment it can be felt with the abdomen relaxed.",
+      "how": [
+        "With the bladder empty, perform a bimanual examination before resection, and repeat it after resection.",
+        "Record whether a mass is palpable, mobile or fixed to the pelvic side wall."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Skipping it because the CT has been done; the two give complementary information."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.turbt.resect": {
+      "id": "step.turbt.resect", "kind": "resection", "critical": true,
+      "title": "Resection of the exophytic tumour",
+      "why": "Removing the bulk first exposes the base and the stalk, and gives the pathologist the grade. Fractional or en bloc resection both aim for complete removal with orientation preserved.",
+      "how": [
+        "Keep the bladder only partially filled so the wall is thicker and the tumour is close to the loop.",
+        "Resect the exophytic part in controlled strokes, or en bloc for suitable small tumours, using cutting current and minimal coagulation.",
+        "For lateral wall tumours, use short strokes and low energy, and stop if the obturator reflex appears."
+      ],
+      "structuresAtRisk": ["Bladder wall", "Obturator nerve", "Ureteric orifices"],
+      "pitfalls": ["Resecting into an overdistended dome.", "Coagulating the tumour before resecting it, destroying the histology."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.turbt.base": {
+      "id": "step.turbt.base", "kind": "resection", "critical": true,
+      "title": "Base resection with detrusor muscle",
+      "why": "Stage depends on whether the tumour invades the detrusor. A specimen without muscle cannot answer the question that decides between surveillance, intravesical therapy and cystectomy.",
+      "how": [
+        "Resect the base of the tumour into the underlying muscle and send it as a separate specimen.",
+        "Biopsy the edges where the margin is unclear, and any suspicious flat red areas with cold-cup forceps.",
+        "Stop at muscle fibres; fat seen in the base means perforation."
+      ],
+      "structuresAtRisk": ["Bladder wall and peritoneum", "Ureteric orifice"],
+      "pitfalls": ["A superficial base that misses muscle.", "Mixing the base with the bulk tumour in one pot."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.turbt.instillation": {
+      "id": "step.turbt.instillation", "kind": "checkpoint",
+      "title": "Immediate single post-operative chemotherapy instillation decision",
+      "why": "A single early instillation reduces recurrence in appropriately selected tumours, but in a perforated or bleeding bladder it can cause serious extravesical toxicity.",
+      "how": [
+        "Decide in theatre whether the patient meets the criteria in the current bladder cancer guideline.",
+        "Do not instil if a perforation is suspected or if continuous irrigation is needed for bleeding.",
+        "Prescribe it clearly with the time window, and hand over the clamping and drainage instructions to the ward nurses."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Instilling into a bladder with an unrecognised perforation.", "The instillation being forgotten because nobody prescribed it in theatre."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

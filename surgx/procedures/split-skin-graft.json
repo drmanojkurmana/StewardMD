@@ -1,0 +1,251 @@
+{
+  "id": "split-skin-graft",
+  "title": "Split-thickness skin graft",
+  "subtitle": "Harvest, mesh, inset and protect",
+  "system": "skin and soft tissue",
+  "aliases": [
+    "STSG",
+    "SSG",
+    "skin graft",
+    "split skin graft"
+  ],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "asuku-2021",
+      "org": "Asuku M et al. Burns 47:1525",
+      "title": "Split-thickness skin graft donor-site morbidity: a systematic literature review",
+      "year": 2021,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33781633/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "brown-2018",
+      "org": "Brown JE et al. Int Wound J 15:1000",
+      "title": "An evidence-based review of split-thickness skin graft donor site dressings",
+      "year": 2018,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30117716/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [],
+  "chapters": {
+    "indications": [
+      "Wounds with a vascular bed that cannot be closed directly: granulating wounds, fasciotomy wounds, debrided burns and areas of skin loss.",
+      "Temporary or definitive cover where a flap is not required."
+    ],
+    "contraindications": [
+      "A bed without blood supply: bare cortical bone without periosteum, tendon without paratenon, cartilage without perichondrium, or exposed metalwork. These need a flap.",
+      "Active infection of the bed, particularly beta-haemolytic streptococci, which destroy grafts.",
+      "Heavily irradiated beds, relatively."
+    ],
+    "preparation": [
+      "A clean, granulating or freshly debrided bed with controlled bioburden.",
+      "Choose the donor site with the patient: the thigh is common; consider colour match for the face and visibility of the scar.",
+      "Consent covers graft loss, donor site pain and healing, scarring, pigment change and contracture."
+    ],
+    "positioning": [
+      "Positioned so both donor and recipient sites are accessible, with pressure areas protected."
+    ],
+    "equipment": [
+      "Powered or hand dermatome, mesher and carriers.",
+      "Staples, absorbable sutures or tissue glue for fixation.",
+      "Bolster or negative-pressure dressing; donor site dressing."
+    ],
+    "anatomy": [
+      "A split-thickness graft carries epidermis and part of the dermis; the donor heals from adnexal remnants in the remaining dermis.",
+      "Thinner grafts take more reliably and the donor heals faster; thicker grafts contract less and look better.",
+      "Graft take proceeds through plasmatic imbibition, then inosculation and revascularisation, so intimate contact with the bed is essential."
+    ],
+    "criticalSafety": [
+      "Prepare the bed before harvesting the graft: a perfect graft on a poor bed fails.",
+      "Dermis side down. A graft placed upside down will not take.",
+      "Prevent shear, haematoma and seroma: these, with infection, account for most graft loss."
+    ],
+    "structuresAtRisk": [
+      "Donor site (excess depth produces a full-thickness wound)",
+      "Exposed tendon, bone or vessels in the recipient bed"
+    ],
+    "commonErrors": [
+      "Harvesting too deep, converting the donor into a slow-healing wound.",
+      "Inadequate haemostasis under the graft.",
+      "Poor immobilisation over a joint, so the graft shears."
+    ],
+    "complications": [
+      "Partial or complete graft loss from haematoma, seroma, shear or infection.",
+      "Donor site pain, delayed healing, hypertrophic scarring and pigment change.",
+      "Contracture across joints."
+    ],
+    "postop": [
+      "Immobilise and elevate the grafted area; splint across joints.",
+      "First graft inspection at a planned interval set by the surgeon, earlier if there is pain, odour or discharge.",
+      "Moist wound healing dressings on the donor site, left undisturbed unless they leak or the wound looks infected.",
+      "Moisturise and protect the healed graft from sun."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Both donor and recipient sites accessible without repositioning. Protect heels and sacrum in a long case."
+    },
+    {
+      "ref": "step.ortho.tourniquet",
+      "emphasis": "On a limb recipient site, inflate only for bed preparation and deflate for haemostasis before the graft goes on."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.st.debride",
+      "emphasis": "Excise granulation tissue and slough to a flat, bleeding, healthy bed."
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Haemostasis of the bed is graft survival. Any haematoma lifts the graft off its blood supply."
+    },
+    {
+      "ref": "step.stsg.harvest"
+    },
+    {
+      "ref": "step.stsg.mesh"
+    },
+    {
+      "ref": "step.stsg.inset"
+    },
+    {
+      "ref": "step.ortho.wound-photos"
+    },
+    {
+      "ref": "step.stsg.dressing"
+    },
+    {
+      "ref": "step.stsg.donor"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.debrief",
+      "emphasis": "Document graft source, size, meshing ratio, fixation and the date of first inspection."
+    }
+  ],
+  "steps_local": {
+    "step.stsg.harvest": {
+      "id": "step.stsg.harvest",
+      "kind": "resection",
+      "title": "Graft harvest",
+      "why": "The depth of harvest decides both whether the graft takes and how well the donor heals. A uniform, thin graft serves both.",
+      "how": [
+        "Mark the area required; lubricate the donor and keep the skin under tension.",
+        "Set the dermatome depth and width, and check them before cutting.",
+        "Harvest with steady pressure at a constant angle. Fine, dense punctate bleeding in the donor indicates a thin split graft; sparse larger points mean a deeper cut."
+      ],
+      "structuresAtRisk": [
+        "Donor site dermis"
+      ],
+      "pitfalls": [
+        "An uneven graft from inconsistent pressure.",
+        "Harvesting too deep."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.stsg.mesh": {
+      "id": "step.stsg.mesh",
+      "kind": "reconstruction",
+      "title": "Meshing or fenestration",
+      "why": "Meshing lets blood and serum escape and expands the graft. It also leaves a pattern, so it is a decision about appearance as well as take.",
+      "how": [
+        "Mesh at the ratio the wound needs, or fenestrate with a blade for sheet grafts.",
+        "Use unmeshed sheet graft on the face and hands where appearance and contracture matter most.",
+        "Keep the graft moist and identify the dermal side before transfer."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Over-expanding a mesh so that interstices heal slowly.",
+        "Losing track of which side is dermis."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.stsg.inset": {
+      "id": "step.stsg.inset",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Graft inset and fixation",
+      "why": "A graft takes only where it touches a vascular bed and stays still. Inset is about contact and immobility.",
+      "how": [
+        "Lay the graft dermal side down on the bed with slight tension, avoiding folds.",
+        "Fix the edges with staples, sutures or glue, trimming the excess.",
+        "Express blood or serum from beneath before dressing."
+      ],
+      "structuresAtRisk": [
+        "Exposed structures in the bed"
+      ],
+      "pitfalls": [
+        "Graft placed upside down.",
+        "Folds or tenting over concavities."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.stsg.dressing": {
+      "id": "step.stsg.dressing",
+      "kind": "closure",
+      "title": "Graft dressing and immobilisation",
+      "why": "Shear and fluid collections are the commonest preventable causes of graft loss; the dressing exists to stop both.",
+      "how": [
+        "Use a non-adherent contact layer then a bolster tie-over or a negative-pressure dressing.",
+        "Splint across any joint the graft crosses.",
+        "Record the planned date of first inspection."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "A bulky dressing without even pressure.",
+        "No splint across a joint."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.stsg.donor": {
+      "id": "step.stsg.donor",
+      "kind": "closure",
+      "title": "Donor site dressing",
+      "why": "Donor site pain often troubles patients more than the recipient site. Dressing choice changes pain and healing time.",
+      "how": [
+        "Apply a moist wound-healing dressing per local formulary; evidence favours moist dressings over dry gauze for pain and healing.",
+        "Consider local anaesthetic infiltration or topical agents for donor pain.",
+        "Leave the dressing undisturbed unless it leaks or the site looks infected."
+      ],
+      "structuresAtRisk": [
+        "Donor site epithelium"
+      ],
+      "pitfalls": [
+        "Dry gauze adhering to the healing donor.",
+        "Frequent changes that strip new epithelium."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

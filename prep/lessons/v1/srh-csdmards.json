@@ -1,124 +1,213 @@
 {
- "v": 1,
- "module": "srh-csdmards",
- "subject": "ss-rheumatology-immunology",
- "title": "Conventional synthetic DMARDs and their toxicity",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "**Conventional synthetic DMARDs** such as methotrexate, leflunomide, sulfasalazine and hydroxychloroquine form the first line of disease-modifying therapy in rheumatoid arthritis. **Methotrexate** is the anchor drug. Folic acid supplementation, usually 5 mg weekly on a day other than the methotrexate dose, reduces mucosal and hepatic toxicity without loss of efficacy. Methotrexate is a known teratogen and should be stopped one to three months before conception.",
-   "say": "Conventional synthetic DMARDs such as methotrexate, leflunomide, sulfasalazine and hydroxychloroquine form the first line of disease-modifying therapy in rheumatoid arthritis. Methotrexate is the anchor drug. Folic acid supplementation, usually 5 mg weekly on a day other than the methotrexate dose, reduces mucosal and hepatic toxicity without loss of efficacy. Methotrexate is a known teratogen and should be stopped one to three months before conception.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Drug",
-     "Key toxicity to remember",
-     "Practical monitoring"
-    ],
-    "rows": [
-     [
-      "Methotrexate",
-      "Pneumonitis, hepatotoxicity, marrow suppression",
-      "Blood counts, liver function, chest symptoms"
-     ],
-     [
-      "Leflunomide",
-      "Hepatotoxicity, teratogenicity",
-      "Liver enzymes; cholestyramine washout before conception"
-     ],
-     [
-      "Sulfasalazine",
-      "Reversible oligospermia, rash",
-      "Full blood count and liver function"
-     ],
-     [
-      "Hydroxychloroquine",
-      "Retinopathy",
-      "Baseline eye check, annual review after five years"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Methotrexate pneumonitis** is a dreaded, dose-independent reaction that can appear at any time. Presentation is dry cough, dyspnoea and fever, and it demands stopping the drug at once. Co-prescription with **trimethoprim** or co-trimoxazole raises the risk of severe marrow suppression, so this combination should be avoided or closely monitored. Hepatotoxicity is assessed through regular liver function tests.",
-   "say": "Methotrexate pneumonitis is a dreaded reaction that can appear at any time and is not simply dose related. Presentation is dry cough, dyspnoea and fever, and it demands stopping the drug at once. Co-prescription with trimethoprim or co-trimoxazole raises the risk of severe marrow suppression, so this combination should be avoided or closely monitored. Hepatotoxicity is assessed through regular liver function tests.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Cough, dyspnoea, fever"
-     },
-     {
-      "id": "b",
-      "label": "Stop methotrexate"
-     },
-     {
-      "id": "c",
-      "label": "Chest imaging and specialist review"
-     },
-     {
-      "id": "d",
-      "label": "Avoid co-trimoxazole combination"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d",
-      "Prevent recurrence"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Leflunomide** carries a long half-life and a teratogenic active metabolite. Before conception, a **cholestyramine** washout is used to accelerate its elimination, given as 8 g three times daily for 11 days, followed by a blood test confirming low plasma levels. Sulfasalazine commonly causes reversible oligospermia in men, which resolves after stopping. Hydroxychloroquine needs baseline and annual retinal screening after five years of use.",
-   "say": "Leflunomide carries a long half-life and a teratogenic active metabolite. Before conception, a cholestyramine washout is used to accelerate its elimination, given as 8 g three times daily for 11 days, followed by a blood test confirming low plasma levels. Sulfasalazine commonly causes reversible oligospermia in men, which resolves after stopping. Hydroxychloroquine needs baseline and annual retinal screening after five years of use.",
-   "vis": null
-  },
-  {
-   "tx": "**Monitoring** ties the whole chapter together. Full blood count, renal and liver function should be checked regularly for every conventional DMARD, with more frequent checks in the first few months. Before any biologic, screen for latent **tuberculosis** and hepatitis B. Live vaccines are avoided during immunosuppression, while inactivated influenza vaccine remains safe. Remember that TNF inhibitors are contraindicated in NYHA class III or IV heart failure.",
-   "say": "Monitoring ties the whole chapter together. Full blood count, renal and liver function should be checked regularly for every conventional DMARD, with more frequent checks in the first few months. Before any biologic, screen for latent tuberculosis and hepatitis B. Live vaccines are avoided during immunosuppression, while inactivated influenza vaccine remains safe. Remember that TNF inhibitors are contraindicated in NYHA class III or IV heart failure.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srh-csdmards-fig1.webp",
-    "alt": "Flowchart summarizing essential monitoring for conventional synthetic DMARDs, including lab tests, pre-biologic screening, and vaccination advice.",
-    "caption": "Essential monitoring for conventional synthetic DMARDs",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "q_ec8ebb8345cb",
-  "q_c1d4a7410f63",
-  "q_0cac70baa54f"
- ],
- "src": [],
- "refs": [
-  "EULAR recommendations for the management of rheumatoid arthritis",
-  "ACR/EULAR guideline for the management of rheumatoid arthritis"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 46
- }
+  "v": 1,
+  "module": "srh-csdmards",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Conventional synthetic DMARDs and toxicity",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Methotrexate** acts through intracellular polyglutamylation and competitive inhibition of aminoimidazolecarboxamide ribonucleotide transformylase, known as **AICAR transformylase**. This enzymatic blockade elevates intracellular AICAR, inhibiting adenosine deaminase and releasing **adenosine** into the extracellular space. Extracellular adenosine binds leukocyte **A2A receptors**, suppressing macrophage cytokine release and calming synovial inflammation.",
+      "say": "Methotrexate undergoes intracellular polyglutamylation to inhibit AICAR transformylase. The resulting accumulation of extracellular adenosine binds A2A receptors to suppress inflammatory cytokines.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/srh-csdmards-fig1.webp",
+        "alt": "Conventional synthetic DMARD mechanisms and monitoring pathways",
+        "caption": "Methotrexate polyglutamylation and adenosine release represent primary anti-inflammatory pathways. Credit: StewardMD.",
+        "ar": 1.77
+      }
+    },
+    {
+      "tx": "Methotrexate-induced pneumonitis represents an unpredictable hypersensitivity reaction occurring in **1 percent to 2 percent** of treated patients. Clinical features include fever, non-productive cough, and progressive dyspnea. High-resolution computed tomography shows diffuse bilateral ground-glass opacities, and bronchoalveolar lavage demonstrates marked **lymphocytosis**. Immediate drug cessation and prompt high-dose systemic **glucocorticoids** are mandatory.",
+      "say": "Methotrexate pneumonitis is an idiosyncratic reaction presenting with fever and cough. Imaging demonstrates bilateral ground-glass opacities, mandating immediate drug withdrawal and glucocorticoids.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute cough, fever, and dyspnea"
+          },
+          {
+            "id": "b",
+            "label": "CT reveals bilateral ground-glass opacities"
+          },
+          {
+            "id": "c",
+            "label": "Stop methotrexate and give steroids"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Leflunomide** is an oral isoxazole prodrug rapidly converted during intestinal absorption to its active metabolite **teriflunomide**, also known as **A77 1726**. Teriflunomide selectively inhibits mitochondrial **dihydroorotate dehydrogenase** or DHODH. This blockade shuts down de novo pyrimidine synthesis in activated, rapidly proliferating lymphocytes, halting cell division and causing **G1 cell cycle arrest**.",
+      "say": "Leflunomide converts to teriflunomide, which selectively inhibits dihydroorotate dehydrogenase. Blocking pyrimidine synthesis causes G1 cell cycle arrest in proliferating lymphocytes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/metabolic-bone-osteoporosis-paget-long-case-fig1.webp",
+        "alt": "Cellular pathways and therapeutic targets in inflammatory joint disease",
+        "caption": "Leflunomide metabolite teriflunomide arrests lymphocyte proliferation via DHODH blockade. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Extensive enterohepatic recirculation gives leflunomide an elimination half-life of **2 weeks**, requiring up to **2 years** for complete drug clearance. Rapid elimination washout using oral **cholestyramine** at **8 g three times daily for 11 days** or activated charcoal at **50 g 4 times daily** is mandatory prior to planned pregnancy or in severe toxicity, ensuring plasma levels drop below **0.02 mg/L**.",
+      "say": "Leflunomide undergoes enterohepatic circulation with a two-week elimination half-life. Rapid washout with cholestyramine for 11 days lowers plasma levels below 0.02 mg/L.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Washout protocol",
+          "Regimen",
+          "Duration",
+          "Target plasma level"
+        ],
+        "rows": [
+          [
+            "Cholestyramine",
+            "8 g three times daily",
+            "11 days",
+            "Below 0.02 mg/L"
+          ],
+          [
+            "Activated charcoal",
+            "50 g four times daily",
+            "11 days",
+            "Below 0.02 mg/L"
+          ],
+          [
+            "Verification",
+            "Two tests 14 days apart",
+            "Prior to conception",
+            "Both under 0.02 mg/L"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Sulfasalazine** is cleaved by colonic bacterial azoreductases into 5-aminosalicylic acid and **sulfapyridine**. The sulfapyridine moiety is absorbed systemically and exerts therapeutic efficacy in peripheral inflammatory arthritis. Common adverse effects include nausea, headache, reversible oligospermia in men, and rare early bone marrow suppression. Patients with **G6PD deficiency** are vulnerable to acute hemolytic anemia.",
+      "say": "Sulfasalazine is cleaved by bacterial enzymes into sulfapyridine, which treats peripheral arthritis. Adverse effects include reversible male infertility and acute hemolysis in G6PD deficiency.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Bacterial colonic azoreductase cleavage"
+          },
+          {
+            "id": "b",
+            "label": "Systemic absorption of sulfapyridine"
+          },
+          {
+            "id": "c",
+            "label": "Peripheral joint anti-inflammatory efficacy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Hydroxychloroquine** accumulates within acidic lysosomes, raising intracellular pH and inhibiting antigen presentation and Toll-like receptor signaling. The American Academy of Ophthalmology recommends maintaining daily dosages at or below **5.0 mg/kg** actual body weight to prevent bull's-eye retinopathy. Screening guidelines recommend baseline fundus examination, followed by annual spectral-domain OCT and automated visual field testing after **5 years** of therapy.",
+      "say": "Hydroxychloroquine concentrates in lysosomes and modulates innate immunity. Maintaining daily dosing at or below 5.0 mg/kg actual body weight prevents long-term retinal toxicity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Recommendation",
+          "Rationale"
+        ],
+        "rows": [
+          [
+            "Maximum daily dose",
+            "5.0 mg/kg actual body weight",
+            "Minimizes cumulative retinal toxicity risk"
+          ],
+          [
+            "Baseline screening",
+            "Fundus exam, OCT, visual fields",
+            "Detects preexisting maculopathy"
+          ],
+          [
+            "Annual surveillance",
+            "After 5 years of treatment",
+            "Monitors for early parafoveal photoreceptor loss"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Azathioprine** is a prodrug metabolized to 6-mercaptopurine and active immunosuppressive thioguanine nucleotides. Patients harboring genetic polymorphisms in **thiopurine S-methyltransferase** or TPMT, or **NUDT15** (prevalent in Asian populations), fail to metabolize intermediate metabolites normally. The resulting toxic accumulation of **6-thioguanine** causes severe life-threatening bone marrow aplasia, requiring enzymatic or genetic screening prior to drug initiation.",
+      "say": "Azathioprine metabolism depends on enzymes TPMT and NUDT15. Genetic deficiency causes toxic accumulation of 6-thioguanine nucleotides, resulting in life-threatening bone marrow failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal TPMT / NUDT15",
+          "points": [
+            "Normal enzymatic inactivation of thiopurines",
+            "Controlled generation of 6-thioguanine",
+            "Low risk of sudden myelosuppression",
+            "Standard therapeutic dosing tolerated"
+          ]
+        },
+        "right": {
+          "title": "Enzyme deficiency",
+          "points": [
+            "Absent or low enzymatic clearance",
+            "Massive accumulation of active 6-TGN",
+            "Life-threatening bone marrow aplasia",
+            "Dose reduction by 90% or avoid drug"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mycophenolate mofetil** reversibly inhibits **inosine monophosphate dehydrogenase** or IMPDH, selectively depleting guanosine nucleotides in B and T lymphocytes dependent on de novo purine synthesis. Mycophenolate is potent in lupus nephritis but carries severe teratogenicity, causing microtia, cleft lip, and cardiac malformations. Effective contraception is mandatory, and treatment must cease at least **6 weeks** before planned conception.",
+      "say": "Mycophenolate mofetil inhibits inosine monophosphate dehydrogenase to deplete purines in lymphocytes. Due to major teratogenicity, it requires discontinuation at least 6 weeks before conception.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Selective IMPDH inhibition"
+          },
+          {
+            "id": "b",
+            "label": "De novo purine synthesis depleted in lymphocytes"
+          },
+          {
+            "id": "c",
+            "label": "Requires cessation 6 weeks prior to pregnancy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
 }

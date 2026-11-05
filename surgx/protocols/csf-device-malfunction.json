@@ -1,0 +1,65 @@
+{
+  "id": "csf-device-malfunction",
+  "title": "EVD and shunt malfunction or infection",
+  "subtitle": "Blocked, overdraining or infected CSF devices",
+  "category": "neuro_cranial",
+  "specialty": "neurosurgery",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "ncs-evd", "org": "Neurocritical Care Society", "title": "The insertion and management of external ventricular drains: an evidence-based consensus statement (Fried et al, Neurocrit Care 2016;24:61-81)", "year": 2016, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Fried+2016+insertion+and+management+of+external+ventricular+drains+consensus", "accessed": "2026-11-04" },
+    { "id": "idsa-2017", "org": "Infectious Diseases Society of America (IDSA)", "title": "2017 Clinical practice guidelines for healthcare-associated ventriculitis and meningitis (Tunkel et al, Clin Infect Dis 2017;64:e34-e65)", "year": 2017, "url": "https://www.idsociety.org/practice-guideline/healthcare-associated-ventriculitis-and-meningitis/", "accessed": "2026-11-04" },
+    { "id": "nice-ng232", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Head injury: assessment and early management (NG232)", "year": 2023, "version": "NG232", "url": "https://www.nice.org.uk/guidance/ng232", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Shunted patient with headache, vomiting and drowsiness: shunt failure until proven otherwise, even with a normal-looking scan." },
+      { "text": "Falling GCS, upward gaze palsy or bradycardia in a patient with a shunt or EVD." },
+      { "text": "EVD that has stopped draining, or a CSF column that no longer swings with pulse and respiration." },
+      { "text": "Sudden large volume of CSF from an EVD after moving or sitting the patient up: overdrainage, with a risk of subdural or remote haemorrhage." },
+      { "text": "Fever, wound erythema, CSF leak, or cloudy CSF in a patient with a device." },
+      { "text": "Abdominal pain, peritonitis or a pseudocyst in a patient with a ventriculoperitoneal shunt." }
+    ],
+    "do_now": [
+      { "text": "Airway, breathing and circulation. A patient with acute shunt failure can deteriorate within hours to herniation.", "timeCritical": true, "evidenceRef": "nice-ng232" },
+      { "text": "Call neurosurgery immediately. Only the neurosurgical team taps a shunt or manipulates an EVD.", "timeCritical": true, "evidenceRef": "ncs-evd" },
+      { "text": "EVD: check it is open, levelled to the prescribed reference point, unkinked, and the drip chamber at the prescribed height.", "timeCritical": true, "evidenceRef": "ncs-evd" },
+      { "text": "Clamp the EVD before moving, sitting up or transferring the patient, and reopen and re-level afterwards.", "evidenceRef": "ncs-evd" }
+    ],
+    "assess": [
+      { "text": "GCS, pupils and eye movements, compared with the documented baseline.", "calcs": ["gcs"] },
+      { "text": "Shunt: palpate along the tract for swelling, tenderness, erythema or a fluid collection. Note the valve type and any programmable setting." },
+      { "text": "EVD: record hourly output, CSF colour, the column swing, the zero reference and the drain height." },
+      { "text": "Ask about recent shunt surgery, previous failures and how this episode compares; parents and patients often recognise their own pattern." }
+    ],
+    "investigate": [
+      { "text": "CT head compared with the previous baseline scan: ventricular size, catheter position, haemorrhage, subdural collections." },
+      { "text": "Shunt series X-ray for disconnection, fracture or migration of the tubing." },
+      { "text": "CSF from the EVD or a neurosurgical shunt tap for cell count, glucose, protein, Gram stain and culture before antibiotics where it does not delay treatment." },
+      { "text": "Blood cultures, inflammatory markers, and abdominal imaging for peritoneal complications of a VP shunt." }
+    ],
+    "resuscitate": [
+      { "text": "Suspected device infection: send cultures, then start empirical intravenous antibiotics: a glycopeptide plus an anti-pseudomonal beta-lactam, per IDSA and local microbiology.", "evidenceRef": "idsa-2017" },
+      { "text": "Treat raised ICP while awaiting surgery; a neurosurgeon may tap the shunt reservoir as a temporising measure.", "evidenceRef": "ncs-evd" },
+      { "text": "Correct coagulopathy before any device revision or new insertion, per local protocol.", "evidenceRef": "ncs-evd" }
+    ],
+    "definitive": [
+      { "text": "Mechanical shunt failure: urgent shunt revision, or a temporary EVD in the deteriorating patient.", "timeCritical": true, "evidenceRef": "ncs-evd" },
+      { "text": "Infected shunt: remove the infected hardware, place an external drain, treat with antibiotics, and re-implant when CSF cultures are clear.", "evidenceRef": "idsa-2017" },
+      { "text": "Blocked EVD: neurosurgical assessment, with aseptic flushing or replacement per local policy.", "evidenceRef": "ncs-evd" },
+      { "text": "EVD-associated ventriculitis: replace or remove the drain where possible, and tailor antibiotics to culture.", "evidenceRef": "idsa-2017" }
+    ],
+    "escalate": [
+      { "text": "A shunted patient with symptoms belongs in a neurosurgical centre. If transfer is needed, it is an emergency transfer." },
+      { "text": "Paediatric shunt patients: involve the paediatric neurosurgical team early; deterioration can be abrupt." },
+      { "text": "Microbiology input for every device infection, including duration of therapy and timing of re-implantation." }
+    ]
+  },
+  "notes": [
+    "Ventricles in a long-standing shunt can stay small even when the shunt has failed. Treat the patient, not the scan.",
+    "An EVD is a pressure-controlled drain. If the reference point or the chamber height is wrong, the drainage is wrong.",
+    "Most shunt infections declare within months of the last operation and come from skin organisms at the time of surgery."
+  ],
+  "calcs": ["gcs"]
+}

@@ -60,3 +60,7 @@ tokens, because consistency with the rest of the app outranks a standalone-prett
 ## Gotchas
 - Fixed a live portal crash: Motion `spring()` in `pop()` escaped try/catch → "Connection problem" for unconfirmed non-English patients.
 Deps: [[Infra]] (R2, WhatsApp) · [[Decisions]] (retention).
+
+## iPad (2026-11-04)
+On a tablet at 1000 px and wider `followcare.js` `splitBoard()` shows the last-loaded board beside the open patient
+(no extra request). `followcare.html` carries the `smd-tablet` boot snippet and links `ipad-care.css`.
