@@ -4413,8 +4413,12 @@
       '<div class="kbr-scroll" tabindex="0" role="region" aria-label="' + esc(t.title || "Table") + ', scrolls sideways"><table class="kbr-tbl"' + ((t.headers || []).length >= 4 ? ' style="min-width:' + ((t.headers || []).length * 130) + 'px"' : '') + '><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table></div>' +
       (t.caption ? '<p class="kbr-note">' + esc(t.caption) + '</p>' : '') + '</figure>';
   }
+  // A step pathway is long: it folds shut under its title and opens on a tap (owner 2026-11-05: "make this pathway collapsable").
   function kbrAlgo(a) {
-    return '<figure class="kbr-fig"><figcaption class="kbr-cap">' + esc(a.title || "") + '</figcaption><ol class="kbr-steps">' +
+    return '<details class="kbr-fold"><summary class="kbr-fold-sum"><span>' + esc(a.title || "Pathway") + '</span>' + DX_CHEV + '</summary>' + kbrAlgoBody(a) + '</details>';
+  }
+  function kbrAlgoBody(a) {
+    return '<figure class="kbr-fig"><ol class="kbr-steps">' +
       (a.steps || []).map(function (st) {
         return '<li class="kbr-step' + (st.critical ? " kbr-step--crit" : "") + '"><b>' + esc(st.step) + '</b>' +
           (st.branch ? ' <span class="kbr-branch">' + esc(st.branch) + '</span>' : '') + '<span class="kbr-act">' + esc(st.action) + '</span></li>';
@@ -4571,10 +4575,11 @@
     // [key, text the record holds, the full section with v2 slots placed after the text]
     var secs = [
       ["causes", o.causes || "", o.causes || ""],
-      ["patho", pathoRest + put.patho, pathoRest + put.patho],
-      ["dx", dxText + put.dx + legacyTbl.dx + imaging, dxText + v2("diagnostic") + v2("flowchart-dx") + put.dx + legacyTbl.dx + imaging + v2("figures")],
+      // illustrations go to the section they show (kb-v2-loader.js figHome): a mechanism under Pathophysiology, a scan under Diagnosis
+      ["patho", pathoRest + put.patho, pathoRest + put.patho + v2("figures-patho")],
+      ["dx", dxText + put.dx + legacyTbl.dx + imaging, dxText + v2("diagnostic") + v2("flowchart-dx") + put.dx + legacyTbl.dx + imaging + v2("figures-dx")],
       ["ddx", ddxText + legacyTbl.ddx, ddxText + v2("ddx") + legacyTbl.ddx],
-      ["mgmt", (o.mgmt || "") + calcTx + put.mgmt + legacyTbl.mgmt + other, (o.mgmt || "") + calcTx + v2("treatment") + v2("flowchart") + put.mgmt + legacyTbl.mgmt + other],
+      ["mgmt", (o.mgmt || "") + calcTx + put.mgmt + legacyTbl.mgmt + other, (o.mgmt || "") + calcTx + v2("treatment") + v2("flowchart") + put.mgmt + legacyTbl.mgmt + other + v2("figures-mgmt")],
       ["protocols", protoHtml, protoHtml],
       ["prog", prog, prog],
       ["pearls", pearlsHtml, pearlsHtml],

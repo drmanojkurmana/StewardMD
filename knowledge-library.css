@@ -671,7 +671,9 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
 }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-jump {
   position: sticky;
-  top: calc(var(--kbr-gap-t) + 4px);
+  /* pinned to the scroller's top edge: an inset here left a strip where text scrolled visibly above the chips
+     (owner screenshots 2026-11-05) */
+  top: 0;
   z-index: 3;
   margin: 2px 0 12px;
   padding: 6px 0 8px;
@@ -788,3 +790,15 @@ body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back { color: #b9d0ff
   #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-mgmt-body { margin-bottom: 0; }
   #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-read { padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* A step pathway folds shut under its title (reasoning.js kbrAlgo, owner 2026-11-05). One hairline row with a chevron,
+   44 px tall; open, the steps show as before. */
+#dxOverlay #dxMgmt.dx-reader .kbr-fold { margin: 14px 0; border-top: 1px solid var(--kbr-line, var(--rd-line, #e3e6ee)); border-bottom: 1px solid var(--kbr-line, var(--rd-line, #e3e6ee)); }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 6px 0; list-style: none; cursor: pointer; font: 650 16px/1.3 var(--sans, system-ui); color: var(--kbr-ink, var(--rd-ink, #16161a)); }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold-sum::-webkit-details-marker { display: none; }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold-sum .dx-chev { flex: none; color: var(--rd-mut, #5b6472); transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold[open] > .kbr-fold-sum .dx-chev { transform: rotate(90deg); }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold > .kbr-fig { margin: 4px 0 14px; }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold-sum:focus-visible { outline: 2px solid var(--reader-accent, #5954b2); outline-offset: 2px; }
+body.dark #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { color: #f4f5f7; }
+@media (prefers-reduced-motion: reduce) { #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum .dx-chev { transition: none; } }
