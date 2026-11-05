@@ -1,116 +1,179 @@
 {
  "v": 1,
  "module": "scc-infections-icu",
- "subject": "ss-critical-care",
  "title": "Infections and antimicrobials in the ICU",
- "minutes": 6,
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Ventilator-associated pneumonia (**VAP**) is pneumonia arising more than 48 hours after starting mechanical ventilation. Its pathogenesis follows a sequence: oropharyngeal colonisation by potential pathogens, aspiration of colonised secretions, and compromise of host defences. Antibiotic exposure is the dominant driver of replacement of commensal flora by resistant organisms. Endotracheal tube **biofilm** shelters bacteria from both antibiotics and immune cells, which explains recurrence with the same strain.",
-   "say": "Ventilator-associated pneumonia, or VAP, is pneumonia arising more than 48 hours after starting mechanical ventilation. Its pathogenesis follows a sequence: oropharyngeal colonisation by potential pathogens, aspiration of colonised secretions, and compromise of host defences. Antibiotic exposure is the dominant driver of replacement of commensal flora by resistant organisms. Endotracheal tube biofilm shelters bacteria from both antibiotics and immune cells, which explains recurrence with the same strain.",
+   "tx": "When **extended spectrum beta lactamase** organisms are likely, septic shock from a urinary or abdominal source is started on a carbapenem or on piperacillin tazobactam. You should narrow the drug once the culture has returned. A broad start is a bridge, not a month of the same agent. Do not keep the carbapenem because the first day was frightening. Source control still has to happen. The culture, not habit, chooses the final agent.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n1",
-      "label": "Oropharyngeal colonisation"
-     },
-     {
-      "id": "n2",
-      "label": "Aspiration of secretions"
-     },
-     {
-      "id": "n3",
-      "label": "Host defences compromised"
-     },
-     {
-      "id": "n4",
-      "label": "VAP after 48 h ventilation"
-     }
+    "kind": "table",
+    "cols": [
+     "Source in shock",
+     "Empiric choice",
+     "Next move"
     ],
-    "edges": [
+    "rows": [
      [
-      "n1",
-      "n2"
+      "Urine or abdomen, ESBL likely",
+      "Carbapenem or piperacillin tazobactam",
+      "Narrow on the culture"
      ],
      [
-      "n2",
-      "n3"
+      "Culture is back",
+      "One active agent",
+      "Stop the unnecessary drug"
      ],
      [
-      "n3",
-      "n4"
+      "Collection or obstruction",
+      "The drug is not enough",
+      "Source control the same day"
      ]
     ]
-   }
+   },
+   "say": "When extended spectrum beta lactamase organisms are likely, septic shock from a urinary or abdominal source is started on a carbapenem or on piperacillin tazobactam. You should narrow the drug once the culture has returned. A broad start is a bridge, not a month of the same agent. Do not keep the carbapenem because the first day was frightening. Source control still has to happen. The culture, not habit, chooses the final agent."
   },
   {
-   "tx": "Carbapenem-resistant **Acinetobacter baumannii** is a major ICU pathogen, with crude mortality reaching up to 70 percent in bacteraemia. Resistance is mostly mediated by Ambler class D oxacillinases. The abaI quorum-sensing gene drives biofilm on devices. For carbapenem-resistant isolates, combination therapy with a polymyxin and a sulbactam-containing agent is favoured. Empirical choice is unreliable without local susceptibility data.",
-   "say": "Carbapenem-resistant Acinetobacter baumannii is a major ICU pathogen, with crude mortality reaching up to 70 percent in bacteraemia. Resistance is mostly mediated by Ambler class D oxacillinases. The abaI quorum-sensing gene drives biofilm on devices. For carbapenem-resistant isolates, combination therapy with a polymyxin and a sulbactam-containing agent is favoured. Empirical choice is unreliable without local susceptibility data.",
+   "tx": "**Carbapenem resistant Enterobacterales** are treated with a drug the isolate is susceptible to. Ceftazidime avibactam is one choice when the mechanism matches that drug. Dual carbapenem therapy is not a default. Two carbapenems do not invent a new enzyme inhibitor. Read the report, then pick one active agent. A second drug needs a reason you can name. Anxiety is not that reason.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Mechanism",
+     "title": "What to do",
      "points": [
-      "Class D oxacillinases",
-      "Porin loss and efflux",
-      "Biofilm via abaI"
+      "Use a drug the isolate is susceptible to",
+      "Ceftazidime avibactam when the mechanism matches",
+      "One active agent is the start"
      ]
     },
     "right": {
-     "title": "Treatment",
+     "title": "What not to do",
      "points": [
-      "Polymyxin combination",
-      "Sulbactam-containing agent",
-      "Local antibiogram guides choice"
+      "Dual carbapenem therapy as a default",
+      "Ignore the susceptibility report",
+      "Add a second drug from anxiety"
      ]
     }
-   }
+   },
+   "say": "Carbapenem resistant Enterobacterales are treated with a drug the isolate is susceptible to. Ceftazidime avibactam is one choice when the mechanism matches that drug. Dual carbapenem therapy is not a default. Two carbapenems do not invent a new enzyme inhibitor. Read the report, then pick one active agent. A second drug needs a reason you can name. Anxiety is not that reason."
   },
   {
-   "tx": "Carbapenem-resistant **Enterobacterales** most often resist carbapenems through carbapenemase enzymes, which hydrolyse carbapenems. Polymyxins are reserved for confirmed carbapenem-resistant organisms rather than used empirically. Colistin and polymyxin B cause dose-limiting **nephrotoxicity** and neurotoxicity, so renal function and drug levels need monitoring. Aminoglycosides must not be the sole anti-pseudomonal agent in pneumonia.",
-   "say": "Carbapenem-resistant Enterobacterales most often resist carbapenems through carbapenemase enzymes, which hydrolyse carbapenems. Polymyxins are reserved for confirmed carbapenem-resistant organisms rather than used empirically. Colistin and polymyxin B cause dose-limiting nephrotoxicity and neurotoxicity, so renal function and drug levels need monitoring. Aminoglycosides must not be the sole anti-pseudomonal agent in pneumonia.",
-   "vis": null
+   "tx": "**Acinetobacter** treatment follows the susceptibility report. Colistin is a last resort, because it injures the kidney and it reaches the lung poorly. Source control of an infected line or a collection matters more than adding a third drug. The drawing is ventilator associated pneumonia, a common site for this organism. Do not add a drug to a report you have not read. A dead collection will not improve because the prescription got longer.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vap-fig1.webp",
+    "alt": "Intubated airway with subglottic secretions, cuff microaspiration, luminal biofilm, purulent bronchitis and alveolar consolidation.",
+    "caption": "Cuff microaspiration, luminal biofilm and alveolar consolidation. This is the lung site. Colistin levels and the susceptibility report are not drawn (StewardMD).",
+    "ar": 1.3405
+   },
+   "say": "Acinetobacter treatment follows the susceptibility report. Colistin is a last resort, because it injures the kidney and it reaches the lung poorly. Source control of an infected line or a collection matters more than adding a third drug. The drawing is ventilator associated pneumonia, a common site for this organism. Do not add a drug to a report you have not read. A dead collection will not improve because the prescription got longer."
   },
   {
-   "tx": "Reassess **empirical antibiotics** at 48 to 72 hours. Clinical improvement and negative cultures allow **de-escalation** to a narrower agent. A falling **procalcitonin** can support early stopping, but it must never override treatment of a clinically suspected pneumonia. For pneumonia with a good response, a seven day course is standard. For MRSA ventilator associated pneumonia, older practice aimed for a **vancomycin trough** of 15 to 20 mg/L, whereas **AUC guided dosing** is increasingly preferred.",
-   "say": "Reassess empirical antibiotics at 48 to 72 hours. Clinical improvement and negative cultures allow de-escalation to a narrower agent. A falling procalcitonin can support early stopping, but it must never override treatment of a clinically suspected pneumonia. For pneumonia with a good response, a seven day course is standard. For MRSA ventilator associated pneumonia, older practice aimed for a vancomycin trough of 15 to 20 mg/L, whereas AUC guided dosing is increasingly preferred.",
+   "tx": "**Invasive candidiasis** is suspected in a septic patient who has risk factors and does not improve on antibacterial drugs. An echinocandin is the empiric start. Fluconazole is for a susceptible isolate in a patient who is stable. Do not open with fluconazole while the patient is in shock. A yeast in the sputum of a ventilated patient is often colonisation. Blood cultures and the bedside picture decide whether you treat.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Drug",
+     "Do not"
+    ],
+    "rows": [
+     [
+      "Septic, not better on antibacterials",
+      "Echinocandin",
+      "Wait for a perfect culture"
+     ],
+     [
+      "Stable, isolate susceptible",
+      "Fluconazole",
+      "Use it as the shock regimen"
+     ],
+     [
+      "Yeast in sputum only",
+      "Often colonisation",
+      "Treat every airway yeast"
+     ]
+    ]
+   },
+   "say": "Invasive candidiasis is suspected in a septic patient who has risk factors and does not improve on antibacterial drugs. An echinocandin is the empiric start. Fluconazole is for a susceptible isolate in a patient who is stable. Do not open with fluconazole while the patient is in shock. A yeast in the sputum of a ventilated patient is often colonisation. Blood cultures and the bedside picture decide whether you treat."
+  },
+  {
+   "tx": "A **central line associated bloodstream infection** is prevented by a checklist. Use a sterile insertion, chlorhexidine on the skin, and a daily review of whether the line is still needed. Remove the line when it is the source. The drawing shows erythema and purulence at the insertion site, with paired blood cultures. A new line placed through the same infected tract is not source control. The checklist fails if nobody asks, today, whether the line can come out.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/catheter-related-bloodstream-fig1.webp",
+    "alt": "Central line with erythema and purulence at the insertion site, and paired catheter and peripheral blood cultures.",
+    "caption": "Insertion-site infection and paired blood cultures. The sterile checklist and the chlorhexidine step are not drawn (StewardMD)."
+   },
+   "say": "A central line associated bloodstream infection is prevented by a checklist. Use a sterile insertion, chlorhexidine on the skin, and a daily review of whether the line is still needed. Remove the line when it is the source. The drawing shows erythema and purulence at the insertion site, with paired blood cultures. A new line placed through the same infected tract is not source control. The checklist fails if nobody asks, today, whether the line can come out."
+  },
+  {
+   "tx": "**Catheter associated urinary** infection is avoided by taking the urinary catheter out. A positive culture without symptoms is colonisation, and it is not treated, except in pregnancy or before a urological procedure. Do not answer an old catheter with an antibiotic. If a catheter must stay, change it and send a fresh specimen. Treating colonisation breeds resistance. The culture is a result. It is not an instruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treat",
+     "points": [
+      "Symptoms plus a urine culture",
+      "Pregnancy",
+      "Before a urological procedure"
+     ]
+    },
+    "right": {
+     "title": "Do not treat",
+     "points": [
+      "A positive culture and no symptoms",
+      "An old catheter by itself",
+      "Colonisation, which is not infection"
+     ]
+    }
+   },
+   "say": "Catheter associated urinary infection is avoided by taking the urinary catheter out. A positive culture without symptoms is colonisation, and it is not treated, except in pregnancy or before a urological procedure. Do not answer an old catheter with an antibiotic. If a catheter must stay, change it and send a fresh specimen. Treating colonisation breeds resistance. The culture is a result. It is not an instruction."
+  },
+  {
+   "tx": "**Procalcitonin** can support a decision to stop antibiotics when the clinical course is already good. It does not start antibiotics, and it does not overrule a concerning examination. Use it as one more piece of a recovery you can already see. A falling number in a patient who is worse is not permission to stop. The poster agrees that the test never overrides the clinical picture. Look at the patient before you look at the assay.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/scc-infections-icu-fig1.webp",
-    "alt": "Flowchart showing the process of reassessing empirical antibiotics in the ICU, including de-escalation and duration.",
-    "caption": "Reassessment and de-escalation of empirical antibiotics in ICU",
+    "alt": "Flowchart of ICU antibiotic reassessment, de-escalation when cultures are negative, and escalation when treatment fails.",
+    "caption": "Reassessment, de-escalation, and a note that procalcitonin never overrides the examination. The poster also prints a 7 day pneumonia course and an older vancomycin trough of 15 to 20. Those boxes are the drawing, not a dosing order (StewardMD).",
     "ar": 1.7921
-   }
+   },
+   "say": "Procalcitonin can support a decision to stop antibiotics when the clinical course is already good. It does not start antibiotics, and it does not overrule a concerning examination. Use it as one more piece of a recovery you can already see. A falling number in a patient who is worse is not permission to stop. The poster agrees that the test never overrides the clinical picture. Look at the patient before you look at the assay."
   },
   {
-   "tx": "Invasive candidiasis and **Clostridioides difficile** complicate ICU care. Central line associated bloodstream infection (**CLABSI**) and catheter associated urinary tract infection (CAUTI) are device-related infections needing line removal and culture-guided therapy. Indian practice under ICMR and NMC frameworks emphasises local antibiogram use, while US IDSA guidance is similar on reassessment. Augmented renal clearance may need higher beta-lactam doses, and therapeutic drug monitoring guides aminoglycosides and vancomycin.",
-   "say": "Invasive candidiasis and Clostridioides difficile complicate ICU care. Central line associated bloodstream infection, or CLABSI, and catheter associated urinary tract infection, or CAUTI, are device-related infections needing line removal and culture-guided therapy. Indian practice under ICMR and NMC frameworks emphasises local antibiogram use, while US IDSA guidance is similar on reassessment. Augmented renal clearance may need higher beta-lactam doses, and therapeutic drug monitoring guides aminoglycosides and vancomycin.",
-   "vis": null
+   "tx": "**Augmented renal clearance** is a creatinine clearance above about 130 mL per minute, often in a young trauma or neurosurgical patient. Renally cleared antibiotics are then underdosed. Raise the dose, or measure a level. A normal creatinine does not mean a normal clearance. A kidney that is clearing fast hides inside a tidy lab number. Check the clearance. Do not trust the creatinine line on its own.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "What it does",
+     "What you change"
+    ],
+    "rows": [
+     [
+      "Clearance above about 130",
+      "Underdoses renally cleared antibiotics",
+      "Increase the dose or measure a level"
+     ],
+     [
+      "Young trauma or neurosurgery",
+      "The usual setting",
+      "Do not assume a standard dose"
+     ],
+     [
+      "Normal creatinine",
+      "Can still hide a fast clearance",
+      "Do not use creatinine as the clearance"
+     ]
+    ]
+   },
+   "say": "Augmented renal clearance is a creatinine clearance above about 130 mL per minute, often in a young trauma or neurosurgical patient. Renally cleared antibiotics are then underdosed. Raise the dose, or measure a level. A normal creatinine does not mean a normal clearance. A kidney that is clearing fast hides inside a tidy lab number. Check the clearance. Do not trust the creatinine line on its own."
   }
  ],
- "quiz": [
-  "q_7d47c46ef2f7",
-  "q_cc3a79ee6a0c",
-  "q_fc58c02f9802"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "Kalil AC et al. Management of Adults With Hospital-Acquired and Ventilator-Associated Pneumonia, IDSA/ATS Clinical Practice Guidelines (2016)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 54
- }
+  "Washington Manual of Critical Care 4e, infectious diseases section",
+  "Marino ICU Book 5e, chapter on infection in the ICU"
+ ]
 }
