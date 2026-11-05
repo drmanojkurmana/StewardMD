@@ -3,7 +3,7 @@
  "module": "mbsci-micro",
  "subject": "mrcp-basic-science",
  "title": "Microbiology principles and resistance",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "Bacteria are sorted first by Gram stain. **Gram-positive** organisms have a thick peptidoglycan layer that retains the crystal violet-iodine complex after alcohol decolourisation, so they stay purple. **Gram-negative** organisms have a thin peptidoglycan layer inside an outer membrane, lose the dye, and take up the safranin counterstain. The outer membrane is also a permeability barrier that excludes large molecules such as vancomycin.",
@@ -96,6 +96,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "At this membrane the mecA gene product keeps the wall growing despite drug: **MRSA** owes beta lactam resistance to **mecA**, which encodes **PBP2a**, a penicillin binding protein with low affinity for beta lactams. While native proteins stay blocked, PBP2a keeps cross linking peptidoglycan, so resistance covers flucloxacillin and most beta lactams, with cefoxitin screening unmasking it.",
+   "say": "Picture the blue surface protein sitting in the yellow membrane and joining wall strands while small drug molecules float nearby unable to grip it. That protein is PBP2a from the mecA gene, and its weak hold on beta lactam drugs lets wall building continue when normal targets are blocked. This is why MRSA resists flucloxacillin and most beta lactams, with cefoxitin testing used to detect it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mbsci-micro-gen1.webp",
+    "alt": "Molecular view of a blue membrane protein crosslinking wall strands above a yellow lipid bilayer with the mecA resistance label.",
+    "caption": "PBP2a from mecA continuing wall crosslinking despite beta lactam drugs. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
