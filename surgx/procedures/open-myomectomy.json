@@ -1,0 +1,178 @@
+{
+  "id": "open-myomectomy",
+  "title": "Open (abdominal) myomectomy",
+  "subtitle": "Plan the incisions, control the blood supply, close the dead space",
+  "system": "gynaecological",
+  "aliases": ["myomectomy", "abdominal myomectomy", "fibroid removal", "laparotomy myomectomy"],
+  "estMinutes": 150,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng88", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Heavy menstrual bleeding: assessment and management (NG88)", "year": 2018, "version": "NG88, updated 2021", "url": "https://www.nice.org.uk/guidance/ng88", "accessed": "2026-11-04" },
+    { "id": "acog-pb228", "org": "American College of Obstetricians and Gynecologists (ACOG)", "title": "Management of symptomatic uterine leiomyomas (Practice Bulletin No. 228)", "year": 2021, "url": "https://www.acog.org/clinical/clinical-guidance/practice-bulletin", "accessed": "2026-11-04" },
+    { "id": "telinde", "org": "Wolters Kluwer", "title": "Te Linde's Operative Gynecology: myomectomy", "edition": "12th edition", "year": 2019, "url": "https://shop.lww.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["allowable_blood_loss", "ebv", "caprini", "bmi"],
+  "chapters": {
+    "indications": [
+      "Symptomatic fibroids (heavy menstrual bleeding, pressure symptoms, pain) in a woman who wishes to keep her uterus, after discussion of medical treatment, uterine artery embolisation and hysterectomy.",
+      "Fibroids thought to contribute to subfertility or pregnancy loss, particularly those distorting the cavity, as a specialist decision.",
+      "The open route is used for large, numerous or deep intramural fibroids where laparoscopic myomectomy is not suitable; submucous fibroids are usually removed hysteroscopically instead."
+    ],
+    "contraindications": [
+      "Pregnancy.",
+      "Features suggesting uterine sarcoma (for example rapid growth after the menopause or suspicious MRI findings): needs gynaecological oncology assessment.",
+      "Uncorrected anaemia before elective surgery.",
+      "A woman with no wish to keep her uterus who would be better served by another option after discussion."
+    ],
+    "preparation": [
+      "Map the fibroids with ultrasound or MRI: number, size, site and relation to the cavity.",
+      "Correct anaemia beforehand (iron, and pre-operative hormonal treatment where the team uses it, recognising it can blur the cleavage plane).",
+      "Group and crossmatch per local protocol; cell salvage set up for large or multiple fibroids.",
+      "Consent for: heavy bleeding and transfusion, the small risk of hysterectomy to control bleeding, entry into the cavity, adhesions that may affect fertility, recurrence of fibroids, injury to bladder or bowel, infection, venous thromboembolism, unexpected histology, and the implications for future pregnancy, including advice on mode of birth.",
+      "Pregnancy test on the day."
+    ],
+    "positioning": [
+      "Supine, arms out, urinary catheter after vaginal preparation; slight head-down tilt once the abdomen is open."
+    ],
+    "equipment": [
+      "Major gynaecology set, self-retaining retractor, myoma screw or tenaculum, long needle holders.",
+      "Vasoconstrictor prepared to the local protocol, and a uterine tourniquet (for example a soft catheter).",
+      "Delayed-absorbable sutures for the myometrium; cell salvage."
+    ],
+    "anatomy": [
+      "Fibroids are classified by their position relative to the cavity and serosa (submucous, intramural, subserosal, pedunculated), commonly by the FIGO system.",
+      "Each fibroid has a pseudocapsule of compressed myometrium; vessels cross it from the surrounding myometrium and are largest at the base.",
+      "The uterine arteries enter at the level of the internal os; the ovarian arteries anastomose with them at the cornua.",
+      "The cornua carry the interstitial tubes; incisions and deep sutures here can block the tube.",
+      "Broad ligament and cervical fibroids distort the course of the ureter and uterine vessels."
+    ],
+    "criticalSafety": [
+      "Warn the anaesthetist before any vasoconstrictor is injected, and aspirate before injecting.",
+      "Plan the fewest incisions that reach all the fibroids, preferably anterior and in the midline.",
+      "Close all dead space in layers: a haematoma in the wall weakens it for a future pregnancy.",
+      "Measure blood loss as you go and act on it early."
+    ],
+    "structuresAtRisk": [
+      "Uterine and ovarian vessels",
+      "Endometrial cavity",
+      "Interstitial portion of the fallopian tubes at the cornua",
+      "Bladder with anterior lower fibroids",
+      "Ureter with broad ligament or cervical fibroids"
+    ],
+    "commonErrors": [
+      "Multiple scattered incisions, especially on the posterior wall, increasing adhesions.",
+      "Leaving dead space in a deep defect.",
+      "Missing smaller fibroids that were not palpated before closure.",
+      "Delayed escalation of bleeding until the woman is unstable."
+    ],
+    "complications": [
+      "Haemorrhage and transfusion.",
+      "Hysterectomy to control bleeding (uncommon).",
+      "Adhesions, with pain or reduced fertility.",
+      "Fever and infection, or an intramural haematoma.",
+      "Uterine rupture in a later pregnancy.",
+      "Recurrence of fibroids."
+    ],
+    "postop": [
+      "Enhanced recovery pathway; monitor haemoglobin and vital signs for concealed bleeding.",
+      "Thromboprophylaxis per risk assessment.",
+      "Advise on the interval before trying to conceive and on mode of birth in a future pregnancy, based on the extent of the myometrial repair and cavity entry recorded in the note.",
+      "Review histology."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm she understands the small risk of hysterectomy and what it means for her." },
+    { "ref": "step.core.timeout", "emphasis": "State the fibroid map, blood availability, cell salvage and the vasoconstrictor plan." },
+    { "ref": "step.obg.preop-check", "emphasis": "Haemoglobin corrected, imaging map reviewed, no features of sarcoma." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Catheterise after vaginal preparation." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.obg.pfannenstiel", "emphasis": "A midline incision when the uterus reaches well above the pelvis." },
+    { "ref": "step.abd.exploration", "emphasis": "Palpate and map every fibroid against the imaging before choosing incisions." },
+    { "ref": "step.obg.adnexal-check" },
+    { "ref": "step.myo.vasoconstrict" },
+    { "ref": "step.myo.incision" },
+    { "ref": "step.myo.enucleate" },
+    { "ref": "step.myo.repair" },
+    { "ref": "step.obg.blood-loss" },
+    { "ref": "step.myo.bailout" },
+    { "ref": "step.core.haemostasis", "emphasis": "Release the tourniquet and check the suture lines and any needle holes before closing." },
+    { "ref": "step.core.specimen", "emphasis": "All fibroids, counted, for histology." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.obg.transverse-closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record the number, size and site of fibroids, whether the cavity was entered, depth of myometrial repair, and the advice for future pregnancy." }
+  ],
+  "steps_local": {
+    "step.myo.vasoconstrict": {
+      "id": "step.myo.vasoconstrict", "kind": "prep", "critical": true,
+      "title": "Reducing blood loss: vasoconstrictor and tourniquet",
+      "why": "Myomectomy can bleed heavily and quickly. A dilute vasoconstrictor and a tourniquet on the uterine vessels reduce blood loss, but intravascular vasoconstrictor can cause severe cardiovascular reactions, so the anaesthetist must know.",
+      "how": [
+        "Tell the anaesthetist before injection; prepare the vasoconstrictor at the dilution and maximum dose set by local protocol.",
+        "Aspirate before injecting and infiltrate into the myometrium around the fibroid, beneath the serosa, until it blanches.",
+        "Consider a tourniquet around the lower uterus at the level of the internal os, passed through windows in the broad ligaments away from the uterine vessels, and record the time it is applied.",
+        "Release it and check haemostasis before closure."
+      ],
+      "structuresAtRisk": ["Uterine vessels", "Ureter when making broad ligament windows", "Bladder"],
+      "pitfalls": ["Injecting without aspiration.", "Exceeding the dose limit with repeated injections over a long operation."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.myo.incision": {
+      "id": "step.myo.incision", "kind": "access",
+      "title": "Planning and making the uterine incisions",
+      "why": "Every uterine incision is a source of adhesions and a scar for a future pregnancy. One well-placed anterior incision through which several fibroids can be reached is better than one incision per fibroid.",
+      "how": [
+        "Choose the fewest incisions that reach all the fibroids, preferably on the anterior wall and in the midline.",
+        "Keep away from the cornua and the interstitial tubes.",
+        "Incise through the serosa and myometrium onto the fibroid until its pale whorled surface and the pseudocapsule plane are seen."
+      ],
+      "structuresAtRisk": ["Cornua and interstitial tubes", "Uterine vessels laterally"],
+      "pitfalls": ["Separate posterior incisions when an anterior approach would reach.", "An incision that stops short of the fibroid, so the plane is not found."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.myo.enucleate": {
+      "id": "step.myo.enucleate", "kind": "resection", "critical": true,
+      "title": "Enucleating the fibroids in the pseudocapsule plane",
+      "why": "Staying in the pseudocapsule plane separates the fibroid from the myometrium with the least bleeding and keeps the remaining muscle intact. Vessels are largest at the base, so the base is controlled last.",
+      "how": [
+        "Grasp the fibroid with a myoma screw or tenaculum and apply firm traction.",
+        "Develop the plane with scissors, a blunt dissector or diathermy, pushing the myometrium away from the fibroid rather than cutting into it.",
+        "Control the vessels at the base as you reach them.",
+        "Reach adjacent fibroids through the same cavity where possible, and record whether the endometrial cavity is entered."
+      ],
+      "structuresAtRisk": ["Endometrial cavity", "Uterine vessels", "Myometrium"],
+      "pitfalls": ["Dissecting inside the fibroid, causing bleeding and a ragged bed.", "Not noticing that the cavity has been opened."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.myo.repair": {
+      "id": "step.myo.repair", "kind": "reconstruction", "critical": true,
+      "title": "Closing the myometrium in layers",
+      "why": "A well-closed myometrium without dead space stops bleeding, prevents an intramural haematoma, and gives the strongest possible scar for a future pregnancy.",
+      "how": [
+        "If the cavity has been entered, close the endometrium separately with a fine absorbable suture.",
+        "Close the myometrium in one or more layers with delayed-absorbable sutures, placing each layer so that the whole depth is apposed and no cavity remains.",
+        "Close the serosa with a fine continuous or subserosal suture to reduce adhesion formation.",
+        "Palpate the uterus again for any fibroid missed before closing the abdomen."
+      ],
+      "structuresAtRisk": ["Endometrial cavity", "Interstitial tubes near the cornua"],
+      "pitfalls": ["A single superficial layer over a deep defect, leaving dead space.", "Exposed suture knots on the serosa that seed adhesions."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.myo.bailout": {
+      "id": "step.myo.bailout", "kind": "bailout",
+      "title": "Bleeding that will not stop",
+      "why": "Myomectomy bleeding can escalate faster than expected. Each escalation step, applied early and in order, makes hysterectomy less likely; hysterectomy is the last resort, consented in advance, not a first reaction.",
+      "how": [
+        "Apply direct pressure and close the defect quickly; apply or tighten the tourniquet if not already in place.",
+        "Tell the anaesthetist, state the measured blood loss, give cell-salvaged blood, and activate the major haemorrhage protocol at the local threshold.",
+        "Call senior help early; consider uterine artery ligation, with the ureter identified, when bleeding persists.",
+        "Proceed to hysterectomy only when other measures have failed and the woman's life is at risk, with a consultant involved."
+      ],
+      "structuresAtRisk": ["Uterine vessels", "Ureter during uterine artery ligation"],
+      "pitfalls": ["Waiting to call for help until the woman is shocked.", "Uterine artery ligation without identifying the ureter."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

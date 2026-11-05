@@ -1,0 +1,158 @@
+{
+  "id": "evacuation-rpoc",
+  "title": "Surgical management of miscarriage: manual or electric vacuum aspiration",
+  "subtitle": "Know the axis, gentle dilatation, suction not sharp curettage",
+  "system": "gynaecological",
+  "aliases": ["ERPC", "evacuation of retained products of conception", "SMM", "MVA", "manual vacuum aspiration", "suction evacuation", "D and E"],
+  "estMinutes": 20,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng126", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Ectopic pregnancy and miscarriage: diagnosis and initial management (NG126)", "year": 2019, "version": "NG126, updated 2023", "url": "https://www.nice.org.uk/guidance/ng126", "accessed": "2026-11-04" },
+    { "id": "who-abortion", "org": "World Health Organization (WHO)", "title": "Abortion care guideline", "year": 2022, "url": "https://www.who.int/publications/i/item/9789240039483", "accessed": "2026-11-04" },
+    { "id": "telinde", "org": "Wolters Kluwer", "title": "Te Linde's Operative Gynecology: surgery for early pregnancy loss", "edition": "12th edition", "year": 2019, "url": "https://shop.lww.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["ga_crl", "shock_index", "meows"],
+  "chapters": {
+    "indications": [
+      "Missed or incomplete miscarriage when the woman chooses surgical management after discussion of expectant, medical and surgical options, as NICE NG126 sets out.",
+      "Persistent or heavy bleeding, or failed expectant or medical management.",
+      "Retained pregnancy tissue with infection, once antibiotics are started.",
+      "Suspected molar pregnancy, where suction evacuation is the method of choice.",
+      "Induced abortion, only within the national legal framework (in India the Medical Termination of Pregnancy Act)."
+    ],
+    "contraindications": [
+      "Pregnancy of unknown location or suspected ectopic pregnancy: an intrauterine pregnancy must be confirmed first.",
+      "Haemodynamic instability is a reason to resuscitate in parallel and go to theatre urgently, not to delay.",
+      "Retained tissue after a later or postpartum pregnancy needs a senior plan: the uterus is soft and larger, and perforation is more likely."
+    ],
+    "preparation": [
+      "Confirm the diagnosis from the scan report and the images: intrauterine, gestation, and size of retained tissue.",
+      "Haemoglobin and blood group with antibody screen; crossmatch if bleeding heavily.",
+      "Cervical priming, for example with misoprostol, per local protocol and timing.",
+      "Consent for: bleeding, infection, retained tissue needing a repeat procedure, uterine perforation with possible laparoscopy or laparotomy and injury to bowel, bladder or vessels, cervical injury, intrauterine adhesions, and the woman's choices about histology and sensitive disposal of the pregnancy tissue.",
+      "Offer the option of manual vacuum aspiration under local anaesthesia in an outpatient setting where available, as NICE NG126 describes."
+    ],
+    "positioning": [
+      "Lithotomy with legs in supports, buttocks at the edge of the table."
+    ],
+    "equipment": [
+      "Speculum or Sims speculum, vulsellum or tenaculum, graduated cervical dilators.",
+      "Manual vacuum aspiration syringe with cannulas of a range of sizes, or electric suction with curettes.",
+      "Uterotonics prepared per local protocol; sponge-holding forceps; saline for tissue inspection."
+    ],
+    "anatomy": [
+      "The uterus may be anteverted or retroverted; the cervical canal and uterine cavity are often angled, and traction on the cervix straightens them.",
+      "In early pregnancy the uterine wall is soft, particularly at the fundus and the cornua, and is easily perforated by a sound, dilator or cannula.",
+      "The uterine vessels run lateral to the cervix at the level of the internal os; lateral perforation here can cause major bleeding into the broad ligament.",
+      "Bowel and omentum lie directly above the fundus."
+    ],
+    "criticalSafety": [
+      "Know the size and direction of the uterus from the bimanual examination before any instrument is passed.",
+      "Never apply suction if perforation is suspected.",
+      "Do not use routine sharp curettage after aspiration.",
+      "Confirm pregnancy tissue was obtained, or think again about ectopic pregnancy."
+    ],
+    "structuresAtRisk": [
+      "Uterine wall at fundus and cornua",
+      "Cervix (laceration from the vulsellum or forced dilatation)",
+      "Uterine vessels at the internal os",
+      "Bowel and omentum above a perforation"
+    ],
+    "commonErrors": [
+      "Passing a sound or dilator against the axis of a retroverted uterus.",
+      "Forcing dilatation of an unprimed cervix.",
+      "Continuing suction after the cannula passes further than expected.",
+      "Vigorous sharp curettage, causing intrauterine adhesions."
+    ],
+    "complications": [
+      "Haemorrhage.",
+      "Uterine perforation, with or without injury to bowel, bladder or vessels.",
+      "Retained tissue needing repeat management.",
+      "Infection and endometritis.",
+      "Cervical laceration.",
+      "Intrauterine adhesions (Asherman syndrome) and later subfertility."
+    ],
+    "postop": [
+      "Observation of bleeding and vital signs before discharge; anti-D where indicated.",
+      "Advice to return for heavy bleeding, fever, offensive discharge or worsening pain.",
+      "Follow up histology; a molar result needs registration and follow-up per national arrangements.",
+      "Offer bereavement support and information on what to expect, and a pregnancy test at the interval in local guidance."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Record the woman's choices about histology and the sensitive disposal of the pregnancy tissue." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.obg.preop-check", "emphasis": "An intrauterine pregnancy confirmed on scan, the gestation, and the blood group result." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotic prophylaxis and screening for infection per local policy." },
+    { "ref": "step.core.positioning", "emphasis": "Lithotomy with the buttocks at the edge of the table." },
+    { "ref": "step.obg.lithotomy-eua", "emphasis": "The bimanual examination sets the size and axis of the uterus for every instrument that follows." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.erpc.dilate" },
+    { "ref": "step.erpc.evacuate" },
+    { "ref": "step.erpc.completeness" },
+    { "ref": "step.erpc.perforation" },
+    { "ref": "step.obg.blood-loss", "emphasis": "If bleeding continues after the cavity is empty, give a uterotonic per local protocol, then reassess for retained tissue, cervical laceration or perforation." },
+    { "ref": "step.core.specimen", "emphasis": "Send the tissue for histology to confirm pregnancy and exclude molar pregnancy, handled with the sensitivity the woman chose." },
+    { "ref": "step.obg.rhesus" },
+    { "ref": "step.core.counts", "emphasis": "Include every vaginal swab and the speculum." },
+    { "ref": "step.core.debrief", "emphasis": "Record uterine size and axis, cannula size, whether pregnancy tissue was seen, and that perforation was excluded." }
+  ],
+  "steps_local": {
+    "step.erpc.dilate": {
+      "id": "step.erpc.dilate", "kind": "access", "critical": true,
+      "title": "Cervical traction and gentle dilatation",
+      "why": "Traction on the cervix straightens the canal and the cavity, and most perforations happen during sounding or dilatation of an unstraightened, unprimed cervix.",
+      "how": [
+        "Grasp the anterior lip of the cervix with a vulsellum or tenaculum and apply steady traction to straighten the uterine axis.",
+        "Avoid routine sounding; if used, pass the sound gently along the axis found on examination.",
+        "Dilate with graduated dilators, held lightly and passed just through the internal os, to a size matching the cannula chosen for the gestation and uterine size."
+      ],
+      "structuresAtRisk": ["Cervix", "Uterine wall at the fundus", "Uterine vessels at the internal os"],
+      "pitfalls": ["Pushing a dilator with force against resistance.", "Passing dilators to the fundus rather than just through the internal os."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.erpc.evacuate": {
+      "id": "step.erpc.evacuate", "kind": "resection", "critical": true,
+      "title": "Vacuum aspiration of the uterine cavity",
+      "why": "Suction removes tissue with less blood loss, fewer adhesions and less perforation risk than sharp curettage. The cannula does the work; force does not.",
+      "how": [
+        "Insert the cannula gently through the os until it meets slight resistance short of the fundus, then withdraw it slightly.",
+        "Apply vacuum (release the valves of the charged manual syringe, or start the electric suction).",
+        "Move the cannula gently in and out within the cavity while rotating it, without withdrawing the opening past the os while vacuum is applied.",
+        "Replace or empty the syringe as it fills, and repeat until the end-points are reached."
+      ],
+      "structuresAtRisk": ["Uterine wall, especially the fundus and cornua"],
+      "pitfalls": ["Advancing the cannula forcibly against the fundus.", "Losing the vacuum repeatedly by pulling the cannula through the os."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.erpc.completeness": {
+      "id": "step.erpc.completeness", "kind": "checkpoint",
+      "title": "Confirming the cavity is empty and tissue was obtained",
+      "why": "Retained tissue means a repeat procedure, and an evacuation that yields no pregnancy tissue may mean the pregnancy was never in the uterus.",
+      "how": [
+        "Recognise the end-points: a gritty feel as the cannula passes over the wall, red or pink foam and no further tissue in the cannula, and the uterus contracting around the cannula.",
+        "Inspect the aspirate, rinsed and floated in saline in a clear dish, for chorionic villi or the gestational sac.",
+        "If no pregnancy tissue is identified, record this, inform the senior and plan to exclude an ectopic pregnancy.",
+        "Avoid routine sharp curettage to check completeness."
+      ],
+      "structuresAtRisk": ["Endometrium"],
+      "pitfalls": ["Sending tissue without looking at it.", "Scraping the cavity with a sharp curette as a routine final check."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.erpc.perforation": {
+      "id": "step.erpc.perforation", "kind": "bailout",
+      "title": "Suspected uterine perforation",
+      "why": "A perforation by a sound or small dilator with no suction applied is often harmless. Suction through a perforation can draw bowel into the cannula. Recognising it early decides which of these you are dealing with.",
+      "how": [
+        "Suspect perforation when an instrument passes further than the expected uterine size, resistance is suddenly lost, fat or bowel appears in the aspirate, or bleeding or haemodynamics change abruptly.",
+        "Stop immediately and do not apply or continue suction.",
+        "Call senior help. If suction or a large cannula was used, bowel or fat was seen, or the woman is unstable, proceed to laparoscopy (or laparotomy) to assess and complete evacuation under vision.",
+        "If perforation was by a sound or small dilator only and the woman is stable, a senior may choose observation; record the decision and the observation plan."
+      ],
+      "structuresAtRisk": ["Bowel and omentum", "Uterine and broad ligament vessels", "Bladder"],
+      "pitfalls": ["Continuing suction to finish the evacuation after perforation.", "Not telling the woman or recording the event."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

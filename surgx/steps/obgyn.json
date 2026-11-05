@@ -40,6 +40,91 @@
       "structuresAtRisk": [],
       "pitfalls": ["Assuming the ward will remember after discharge from theatre.", "Not checking the result of a group sent at admission."],
       "review": { "status": "ai_drafted" }
+    },
+    "step.obg.preop-check": {
+      "id": "step.obg.preop-check", "kind": "checkpoint", "critical": true,
+      "title": "Confirm the indication, pregnancy status and pre-operative work-up",
+      "why": "Gynaecological and obstetric operations rest on a scan, a test result and a plan agreed in clinic. Operating on an unrecognised pregnancy, an uncorrected anaemia, or a mass that is in fact malignant changes the operation that should have been done.",
+      "how": [
+        "Confirm pregnancy status on the day: a negative test before elective gynaecological surgery, or a confirmed intrauterine pregnancy and gestation before an obstetric procedure.",
+        "Look at the imaging that justifies the operation yourself, and confirm it matches the side and the plan on the consent form.",
+        "Check the haemoglobin, blood group and antibody screen; confirm anaemia was corrected before elective surgery, and arrange crossmatch where heavy bleeding is anticipated.",
+        "If any feature suggests malignancy (imaging, tumour markers, age, risk scoring), confirm the case was discussed with gynaecological oncology before a benign operation proceeds."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Proceeding on a report without looking at the images.",
+        "Omitting the pregnancy test because the woman is sure she is not pregnant."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.obg.lithotomy-eua": {
+      "id": "step.obg.lithotomy-eua", "kind": "prep",
+      "title": "Lithotomy, bladder and examination under anaesthesia",
+      "why": "The size, position and mobility of the uterus and the state of the cervix under anaesthesia decide the direction of every instrument that follows. Most uterine perforations follow a misjudged axis, and most lithotomy nerve injuries follow careless leg positioning.",
+      "how": [
+        "Lift and lower both legs together into the supports, avoid extreme hip flexion and abduction, and pad the lateral knee over the common peroneal nerve.",
+        "Empty the bladder with an in-and-out catheter, or leave a catheter, as the procedure plan requires.",
+        "Perform a bimanual examination: uterine size, version (anteverted or retroverted), mobility, cervical state and any adnexal mass, and record it.",
+        "Insert the speculum and see the cervix before any instrument is passed."
+      ],
+      "structuresAtRisk": ["Common peroneal nerve at the fibular head", "Femoral and lateral femoral cutaneous nerves with hip hyperflexion", "Pregnant uterus and membranes during examination"],
+      "pitfalls": [
+        "Instrumenting a retroverted uterus as if it were anteverted.",
+        "Prolonged lithotomy without rechecking the legs, risking nerve injury or compartment syndrome."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.obg.pfannenstiel": {
+      "id": "step.obg.pfannenstiel", "kind": "access",
+      "title": "Transverse lower abdominal (Pfannenstiel) entry",
+      "why": "A transverse suprapubic incision gives good access to a pelvic organ of moderate size, with less pain and a lower risk of incisional hernia than a midline incision. Its limits are fixed: if the pathology reaches well above the pelvis or malignancy is suspected, a midline incision is the safer choice.",
+      "how": [
+        "Choose the incision before you start: transverse for a uterus or mass confined to the pelvis, midline for a very large uterus, upper abdominal pathology or suspected malignancy.",
+        "Incise the skin about two fingerbreadths above the symphysis and divide the anterior rectus sheath transversely.",
+        "Separate the sheath from the rectus muscles above and below, coagulating the perforating vessels, then separate the recti in the midline.",
+        "Open the peritoneum high, away from the bladder, after confirming by palpation or transillumination that no bowel or bladder lies beneath."
+      ],
+      "structuresAtRisk": ["Bladder at the lower peritoneal opening, especially after previous caesarean", "Inferior epigastric vessels at the lateral ends", "Ilioinguinal and iliohypogastric nerves at the lateral ends", "Bowel adherent to the peritoneum"],
+      "pitfalls": [
+        "Persisting with a transverse incision that does not give access to a large uterus.",
+        "Opening the peritoneum low over a bladder drawn up by previous surgery."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.obg.ureter-identification": {
+      "id": "step.obg.ureter-identification", "kind": "checkpoint", "critical": true,
+      "title": "Identify the ureter before dividing pelvic pedicles",
+      "why": "The ureter crosses the pelvic brim beside the infundibulopelvic ligament and passes beneath the uterine artery close to the side of the cervix. Ureteric injury in benign gynaecology is uncommon, is often unrecognised at the time, and almost always happens at those points.",
+      "how": [
+        "Before clamping or sealing the infundibulopelvic ligament or working near the ovarian fossa, see the ureter peristalse where it crosses the iliac vessels at the brim.",
+        "Trace it down the pelvic side wall towards where it passes under the uterine artery.",
+        "When the anatomy is distorted by endometriosis, fibroids or previous surgery, open the retroperitoneum and find it rather than relying on a view through the peritoneum.",
+        "If an injury is suspected, stop and get urological help in theatre; never clamp or diathermy blindly near the ureter to control bleeding."
+      ],
+      "structuresAtRisk": ["Ureter at the pelvic brim", "Ureter beneath the uterine artery", "Ureter at the vaginal angle", "Ureter in the ovarian fossa"],
+      "pitfalls": [
+        "Assuming a structure seen once at the brim is safe all the way down.",
+        "Diathermy close to the ureter during ovarian or side-wall haemostasis, causing a delayed thermal injury."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.obg.transverse-closure": {
+      "id": "step.obg.transverse-closure", "kind": "closure",
+      "title": "Closing a transverse lower abdominal incision",
+      "why": "The rectus sheath is what holds the abdomen. It fails at the lateral angles, which is also where nerves get caught and cause chronic pain.",
+      "how": [
+        "Close the rectus sheath with a continuous delayed-absorbable suture, starting just beyond each angle so the corners are included.",
+        "Keep the lateral bites superficial to avoid catching the ilioinguinal and iliohypogastric nerves.",
+        "Closure of the parietal peritoneum is not required.",
+        "Close the subcutaneous fat only where it is thick, per local practice."
+      ],
+      "structuresAtRisk": ["Ilioinguinal and iliohypogastric nerves at the angles", "Bladder at the lower edge"],
+      "pitfalls": [
+        "Missing the lateral angle of the sheath.",
+        "Tight bites that strangulate the sheath and cause pain."
+      ],
+      "review": { "status": "ai_drafted" }
     }
   }
 }

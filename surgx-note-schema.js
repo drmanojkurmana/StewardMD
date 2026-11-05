@@ -526,6 +526,20 @@
         ]
       }
     },
+    "evacuation-rpoc": {
+      base: "operative", title: "Surgical management of miscarriage",
+      prefill: {"procedure": "Surgical management of miscarriage (vacuum aspiration)"},
+      extra: {
+        "Operative detail": [
+          f("gestationAndIndication", "Gestation, scan findings and indication", {"type": "text", "required": true, "aiFillable": true, "ph": "Missed miscarriage at 9 weeks by CRL, intrauterine"}),
+          f("uterusSizeAxis", "Uterine size and axis on examination", {"type": "text", "required": true, "aiFillable": false, "ph": "Anteverted, 8 week size"}),
+          f("aspirationMethod", "Cervical priming, dilatation and cannula size, method", {"type": "text", "required": false, "aiFillable": true, "ph": "Misoprostol priming; dilated to 8; 8 mm cannula; MVA / electric"}),
+          f("tissueIdentified", "Pregnancy tissue identified macroscopically", {"type": "text", "required": true, "aiFillable": false, "ph": "Villi seen / not seen (ectopic plan)"}),
+          f("perforationExcluded", "Perforation suspected or excluded", {"type": "text", "required": true, "aiFillable": false}),
+          f("antiDStatus", "Rhesus status and anti-D", {"type": "text", "required": true, "aiFillable": false, "ph": "Rh positive / Rh negative, anti-D given"})
+        ]
+      }
+    },
     "evd-insertion": {
       base: "operative", title: "External ventricular drain insertion",
       prefill: {"procedure": "External ventricular drain insertion"},
@@ -687,6 +701,19 @@
         ]
       }
     },
+    "lap-ovarian-cystectomy": {
+      base: "operative", title: "Laparoscopic ovarian cystectomy",
+      prefill: {"procedure": "Laparoscopic ovarian cystectomy"},
+      extra: {
+        "Operative detail": [
+          f("cystDescription", "Cyst side, size, nature and surface", {"type": "text", "required": true, "aiFillable": true, "ph": "Right 6 cm dermoid, smooth surface, no excrescences"}),
+          f("spillageAndIrrigation", "Cyst rupture or spillage and irrigation", {"type": "text", "required": true, "aiFillable": false, "ph": "Removed intact in bag / ruptured, irrigated until clear"}),
+          f("ovarianPreservation", "Ovarian tissue preserved and haemostasis method", {"type": "text", "required": false, "aiFillable": true, "ph": "Ovary preserved; pressure and haemostatic agent, minimal bipolar"}),
+          f("washingsTaken", "Peritoneal washings taken", {"type": "text", "required": false, "aiFillable": false, "ph": "Yes / no"}),
+          f("contralateralAdnexa", "Contralateral ovary and tube", {"type": "text", "required": false, "aiFillable": true, "ph": "Normal / findings"})
+        ]
+      }
+    },
     "lap-perforated-duodenal-ulcer": {
       base: "operative", title: "Laparoscopic repair of perforated duodenal ulcer",
       prefill: {"procedure": "Laparoscopic omental patch repair of perforated duodenal ulcer and peritoneal lavage", "anaesthesia": "GA with ETT"},
@@ -828,6 +855,19 @@
         ]
       }
     },
+    "mcdonald-cerclage": {
+      base: "operative", title: "Cervical cerclage (McDonald)",
+      prefill: {"procedure": "Transvaginal cervical cerclage (McDonald)"},
+      extra: {
+        "Operative detail": [
+          f("cerclageIndication", "Indication category and gestation", {"type": "text", "required": true, "aiFillable": true, "ph": "History / ultrasound (cervical length) / rescue; gestation"}),
+          f("sutureAndKnot", "Suture material, number of bites and knot position", {"type": "text", "required": true, "aiFillable": false, "ph": "Material; 5 bites; knot anterior, ends long"}),
+          f("membranesAtEnd", "Membrane status at the end of the procedure", {"type": "text", "required": true, "aiFillable": false, "ph": "Intact, behind the os"}),
+          f("fetalHeartCheck", "Fetal heart confirmed after the procedure", {"type": "text", "required": true, "aiFillable": false}),
+          f("removalPlan", "Removal plan", {"type": "text", "required": true, "aiFillable": true, "ph": "Removal at 36 to 37 weeks, or earlier with labour or ruptured membranes"})
+        ]
+      }
+    },
     "median-sternotomy": {
       base: "operative", title: "Median sternotomy and closure",
       prefill: {"procedure": "Median sternotomy and closure"},
@@ -900,6 +940,19 @@
         ]
       }
     },
+    "open-myomectomy": {
+      base: "operative", title: "Open myomectomy",
+      prefill: {"procedure": "Open (abdominal) myomectomy"},
+      extra: {
+        "Operative detail": [
+          f("fibroidsRemoved", "Fibroids removed: number, sites, sizes", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Number; FIGO type and location; largest size"}),
+          f("cavityEntered", "Endometrial cavity entered", {"type": "text", "required": true, "aiFillable": false, "ph": "No / yes, closed separately"}),
+          f("bloodLossMeasures", "Vasoconstrictor (agent, total dose) and tourniquet time", {"type": "text", "required": true, "aiFillable": false}),
+          f("myometrialRepair", "Myometrial repair: depth and layers", {"type": "text", "required": false, "aiFillable": true, "ph": "Deepest defect; layers; dead space closed"}),
+          f("futurePregnancyAdvice", "Advice for future pregnancy", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2, "ph": "Interval before conception; mode of birth advice"})
+        ]
+      }
+    },
     "open-raaa-repair": {
       base: "operative", title: "Open repair of ruptured AAA",
       prefill: {"procedure": "Open repair of ruptured abdominal aortic aneurysm", "incision": "Midline laparotomy"},
@@ -927,6 +980,19 @@
         ]
       }
     },
+    "paeds-circumcision": {
+      base: "operative", title: "Paediatric circumcision",
+      prefill: {"procedure": "Circumcision"},
+      extra: {
+        "Operative detail": [
+          f("circIndication", "Indication", {"type": "text", "required": true, "aiFillable": true, "ph": "Lichen sclerosus / recurrent balanoposthitis / non-therapeutic (legal and consent requirements met)"}),
+          f("anatomyCheck", "Anatomy check: meatus normal, hypospadias and buried penis excluded", {"type": "text", "required": true, "aiFillable": false}),
+          f("meatusFindings", "Meatal findings and any meatal procedure", {"type": "text", "required": false, "aiFillable": true, "ph": "Normal / stenosed, meatotomy performed"}),
+          f("frenularHaemostasis", "Frenular artery control", {"type": "text", "required": true, "aiFillable": false, "ph": "Bipolar / ligated; bipolar only used"}),
+          f("localAnaesthetic", "Local anaesthetic agent and total dose (no adrenaline)", {"type": "text", "required": true, "aiFillable": false, "help": "Combined surgeon and anaesthetist total, mg/kg"})
+        ]
+      }
+    },
     "paeds-herniotomy": {
       base: "operative", title: "Paediatric herniotomy",
       prefill: {"procedure": "Inguinal herniotomy"},
@@ -937,6 +1003,45 @@
           f("vasVessels", "Vas and testicular vessels identified and preserved", {"type": "text", "required": true, "aiFillable": false}),
           f("testisPosition", "Testis position at end of procedure", {"type": "text", "required": true, "aiFillable": false, "ph": "In scrotum, confirmed by palpation"}),
           f("apnoeaPlan", "Post-operative apnoea monitoring plan", {"type": "text", "aiFillable": true})
+        ]
+      }
+    },
+    "paeds-intussusception-reduction": {
+      base: "operative", title: "Operative reduction of intussusception",
+      prefill: {"procedure": "Laparotomy and operative reduction of intussusception"},
+      extra: {
+        "Operative detail": [
+          f("enemaHistory", "Pre-operative enema attempts and result", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Air / hydrostatic; number of attempts; how far reduced; perforation"}),
+          f("intussusceptionExtent", "Type and extent of intussusception", {"type": "text", "required": false, "aiFillable": true, "ph": "Ileocolic, apex at hepatic flexure"}),
+          f("reductionOutcome", "Manual reduction outcome", {"type": "text", "required": true, "aiFillable": true, "ph": "Complete / incomplete, resection required"}),
+          f("bowelViabilityAssessment", "Bowel viability after warm packs", {"type": "text", "required": true, "aiFillable": false, "ph": "Viable / serosal splits / non-viable, resected"}),
+          f("leadPointAndAppendix", "Lead point found, small bowel run, appendix removed", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2, "ph": "No pathological lead point; Peyer patch; appendix removed"})
+        ]
+      }
+    },
+    "paeds-ladd-procedure": {
+      base: "operative", title: "Ladd procedure",
+      prefill: {"procedure": "Laparotomy for malrotation (Ladd procedure)"},
+      extra: {
+        "Operative detail": [
+          f("volvulusFindings", "Volvulus: present or absent, direction and number of turns", {"type": "text", "required": true, "aiFillable": true, "ph": "Clockwise volvulus, 2 turns, derotated anticlockwise"}),
+          f("midgutViability", "Midgut viability after derotation and length resected or remaining", {"type": "text", "required": true, "aiFillable": false, "ph": "All viable / segments resected (length) / doubtful, second look"}),
+          f("laddStepsCompleted", "Ladd bands divided, mesentery widened, bowel placed in non-rotation", {"type": "text", "required": true, "aiFillable": true, "ph": "Bands divided; base widened; caecum left upper quadrant"}),
+          f("duodenalPatency", "Duodenal patency confirmed", {"type": "text", "required": true, "aiFillable": false, "ph": "Nasogastric tube passed into jejunum"}),
+          f("secondLookPlan", "Second-look laparotomy plan", {"type": "text", "required": false, "aiFillable": true, "ph": "Not required / planned within agreed window"})
+        ]
+      }
+    },
+    "paeds-orchidopexy": {
+      base: "operative", title: "Inguinal orchidopexy",
+      prefill: {"procedure": "Inguinal orchidopexy with subdartos pouch"},
+      extra: {
+        "Operative detail": [
+          f("euaPosition", "Testis position on examination under anaesthesia (side, lowest point reached)", {"type": "text", "required": true, "aiFillable": false, "ph": "Left / right; superficial inguinal pouch / canal / suprascrotal"}),
+          f("testisAppearance", "Testis size and appearance, epididymis", {"type": "text", "required": false, "aiFillable": true, "ph": "Size compared with the other side; epididymal anomalies"}),
+          f("processusLigated", "Patent processus vaginalis separated and ligated", {"type": "text", "required": true, "aiFillable": false, "ph": "Present and ligated at internal ring / not patent"}),
+          f("finalTestisPosition", "Final testis position and cord orientation checked", {"type": "text", "required": true, "aiFillable": false, "ph": "Bottom of scrotum, no tension, cord not twisted"}),
+          f("stagingPlan", "Second-stage or nubbin plan, if any", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2, "ph": "None / staged, second stage planned / nubbin excised for histology"})
         ]
       }
     },
@@ -1109,6 +1214,19 @@
           f("fossaeCheckedGagRelease", "Fossae checked after gag release", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No", "help": "A physical check by the operating surgeon."}),
           f("throatPackRemoved", "Throat pack and swabs removed, postnasal space cleared", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, counted out / No pack used"}),
           f("dexamethasoneGiven", "Intra-operative dexamethasone", {"type": "text", "required": false, "aiFillable": false, "ph": "Given / not given (reason)"})
+        ]
+      }
+    },
+    "total-abdominal-hysterectomy": {
+      base: "operative", title: "Total abdominal hysterectomy",
+      prefill: {"procedure": "Total abdominal hysterectomy"},
+      extra: {
+        "Operative detail": [
+          f("hysterectomyExtent", "Extent: total or subtotal; ovaries conserved or removed", {"type": "text", "required": true, "aiFillable": true, "ph": "TAH, bilateral salpingectomy, ovaries conserved / TAH BSO"}),
+          f("uretersIdentified", "Ureters identified before pedicle division", {"type": "text", "required": true, "aiFillable": false, "ph": "Both seen at pelvic brim and traced"}),
+          f("bladderIntegrity", "Bladder integrity and urine colour at end", {"type": "text", "required": true, "aiFillable": false, "ph": "Bladder intact, clear urine"}),
+          f("cervixComplete", "Cervix confirmed completely removed", {"type": "text", "required": true, "aiFillable": false}),
+          f("vaultSupport", "Vault closure and support", {"type": "text", "required": false, "aiFillable": true, "ph": "Angle sutures incorporating cardinal and uterosacral pedicles"})
         ]
       }
     },
