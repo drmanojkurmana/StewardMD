@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "scc-scoring",
+ "title": "Severity scores and ICU outcomes",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**APACHE II** is built from the worst physiological values in the first 24 hours, plus age and chronic health. It estimates mortality for a group of patients. It is not a reason to withdraw treatment from one person, because the score was built for audit and research. A high number is a description of risk. It is not a description of what this patient wants.",
+   "say": "APACHE II is built from the worst physiological values in the first 24 hours, plus age and chronic health. It estimates mortality for a group of patients. It is not a reason to withdraw treatment from one person, because the score was built for audit and research. A high number is a description of risk. It is not a description of what this patient wants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "What APACHE II uses",
+     "What it estimates",
+     "What it must not do"
+    ],
+    "rows": [
+     [
+      "Worst values in 24 hours, age, chronic health",
+      "Group mortality",
+      "Withdraw care from one patient"
+     ],
+     [
+      "A single admission snapshot",
+      "Case mix for comparison",
+      "Replace a family discussion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **SOFA** score gives 0 to 4 points in six organ systems. Sepsis-3 defines sepsis as suspected infection plus an acute rise in SOFA of at least 2 points. The rise is what matters, not a high baseline that was already there. A score without an infection is organ failure, not sepsis.",
+   "say": "The SOFA score gives 0 to 4 points in six organ systems. Sepsis-3 defines sepsis as suspected infection plus an acute rise in SOFA of at least 2 points. The rise is what matters, not a high baseline that was already there. A score without an infection is organ failure, not sepsis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ systems",
+     "Points each",
+     "Sepsis-3 use"
+    ],
+    "rows": [
+     [
+      "Six systems, scored 0 to 4",
+      "Higher means worse function",
+      "Acute rise of at least 2 with infection"
+     ],
+     [
+      "Baseline plus the new insult",
+      "Use the change",
+      "Do not call chronic failure new sepsis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**qSOFA** counts a respiratory rate of at least 22, a systolic pressure of at most 100 mmHg, and altered mentation. Two or more is a prompt to look for sepsis outside the ICU. It is not the definition of sepsis, and its sensitivity is poor. A negative qSOFA does not send a sick patient back to the ward.",
+   "say": "qSOFA counts a respiratory rate of at least 22, a systolic pressure of at most 100 mmHg, and altered mentation. Two or more is a prompt to look for sepsis outside the ICU. It is not the definition of sepsis, and its sensitivity is poor. A negative qSOFA does not send a sick patient back to the ward.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "qSOFA, two or more",
+     "points": [
+      "Rate at least 22",
+      "Systolic pressure at most 100",
+      "Look harder for infection"
+     ]
+    },
+    "right": {
+     "title": "Not qSOFA",
+     "points": [
+      "Not the definition of sepsis",
+      "Sensitivity is poor",
+      "SOFA is the Sepsis-3 score"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **Glasgow coma scale** is the sum of eye, verbal, and motor responses, to a maximum of 15. The motor score carries the most prognostic information. A score of 8 or less is a prompt to protect the airway, not an absolute intubation law. A chart that prints intubate below 8 is stating a habit. The decision is still about the whole patient.",
+   "say": "The Glasgow coma scale is the sum of eye, verbal, and motor responses, to a maximum of 15. The motor score carries the most prognostic information. A score of 8 or less is a prompt to protect the airway, not an absolute intubation law. A chart that prints intubate below 8 is stating a habit. The decision is still about the whole patient.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-gcs.webp",
+    "alt": "Adult Glasgow coma scale chart with eye, verbal, and motor responses, total 3 to 15.",
+    "caption": "Eye, verbal, and motor scores to a maximum of 15. The red box says intubate below 8. Treat that as a prompt to protect the airway, not a law (StewardMD)."
+   }
+  },
+  {
+   "tx": "**RASS** runs from minus 5, unrousable, to plus 4, combative. Zero is alert and calm. A sedation target of 0 to minus 2 is light sedation. Deep sedation is reserved for a reason such as ventilation the patient is fighting, not as the default for the night. Record the number you aimed at and the number you reached.",
+   "say": "RASS runs from minus 5, unrousable, to plus 4, combative. Zero is alert and calm. A sedation target of 0 to minus 2 is light sedation. Deep sedation is reserved for a reason such as ventilation the patient is fighting, not as the default for the night. Record the number you aimed at and the number you reached.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "RASS",
+     "Meaning",
+     "Usual target"
+    ],
+    "rows": [
+     [
+      "Plus 4",
+      "Combative",
+      "Too awake and unsafe"
+     ],
+     [
+      "0 to minus 2",
+      "Alert and calm, down to light sedation",
+      "The usual ICU target"
+     ],
+     [
+      "Minus 5",
+      "Unrousable",
+      "Not a default overnight"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CAM-ICU** is positive when the onset is acute or fluctuating, attention fails, and there is either disorganised thinking or an altered level of consciousness. All of that pattern is required. Agitation alone is not delirium, and a quiet patient can still be delirious. Treat the cause, including drugs, pain, and withdrawal, before adding a sedative.",
+   "say": "CAM-ICU is positive when the onset is acute or fluctuating, attention fails, and there is either disorganised thinking or an altered level of consciousness. All of that pattern is required. Agitation alone is not delirium, and a quiet patient can still be delirious. Treat the cause, including drugs, pain, and withdrawal, before adding a sedative.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/delirium-fig1.webp",
+    "alt": "Delirium subtypes from an acute fluctuating course, with a misspelt dementia box and an antipsychotic box.",
+    "caption": "Acute fluctuating course, with hyperactive, hypoactive, and mixed pictures. The side box misspells delirium. Failed attention, which CAM-ICU requires, is not drawn. Antipsychotics are not the test (StewardMD)."
+   }
+  },
+  {
+   "tx": "The **standardised mortality ratio** is observed deaths divided by deaths predicted by the model. A model can discriminate well, separating high risk from low risk, and still be poorly calibrated, so the predicted percentage is wrong. A unit with a ratio above 1 needs a look at case mix and care. The ratio is not a verdict on one clinician.",
+   "say": "The standardised mortality ratio is observed deaths divided by deaths predicted by the model. A model can discriminate well, separating high risk from low risk, and still be poorly calibrated, so the predicted percentage is wrong. A unit with a ratio above 1 needs a look at case mix and care. The ratio is not a verdict on one clinician.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Discrimination",
+     "points": [
+      "Ranks who is higher risk",
+      "Can look good on its own",
+      "Does not check the percentage"
+     ]
+    },
+    "right": {
+     "title": "Calibration",
+     "points": [
+      "Checks predicted against observed",
+      "Can fail while ranking works",
+      "Matters for the mortality ratio"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lead time bias** appears when treatment starts before the ICU, so the first ICU score looks better than the real insult. Comparing ICUs by raw scores without calibration is misleading. A unit that admits earlier will look sicker, and a unit that admits after the ward has already resuscitated will look better. You should adjust for that before you rank units.",
+   "say": "Lead time bias appears when treatment starts before the ICU, so the first ICU score looks better than the real insult. Comparing ICUs by raw scores without calibration is misleading. A unit that admits earlier will look sicker, and a unit that admits after the ward has already resuscitated will look better. You should adjust for that before you rank units.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ward",
+      "label": "Treatment starts before ICU"
+     },
+     {
+      "id": "score",
+      "label": "First ICU score looks better"
+     },
+     {
+      "id": "bias",
+      "label": "Lead time bias if you do not adjust"
+     }
+    ],
+    "edges": [
+     [
+      "ward",
+      "score"
+     ],
+     [
+      "score",
+      "bias"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Washington Manual of Critical Care 4e, Common Equations and Rules of Thumb",
+  "Sepsis-3 definitions, JAMA 2016",
+  "PADIS guidelines, 2018"
+ ]
+}
