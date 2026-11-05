@@ -1,0 +1,198 @@
+{
+ "gen": "AI",
+ "minutes": 8,
+ "module": "spl-pressure-ulcers",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Staging is describing depth, and each stage is carrying a fixed definition. Stage one is intact skin with redness that refuses to blanch. Stage two is a shallow break with dermis showing. Stage three is passing through the full dermis into the fat below.",
+   "tx": "**NPUAP** staging (the pressure injury scale from the advisory panels) defines **Stage 1** as intact skin with non-blanchable **erythema** (redness that stays white-finger pressure fails to empty it), **Stage 2** as partial-thickness skin loss with exposed **dermis** (the deeper skin layer visible in the base), and **Stage 3** as full-thickness skin loss reaching subcutaneous fat without deeper exposure.",
+   "vis": {
+    "cols": [
+     "Stage",
+     "What you see"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Stage 1",
+      "Intact skin with non-blanchable erythema"
+     ],
+     [
+      "Stage 2",
+      "Partial loss with exposed dermis"
+     ],
+     [
+      "Stage 3",
+      "Full loss into fat without deeper exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Any exposed deep structure is declaring stage four at once. Visible or palpable fascia, muscle, tendon, ligament, cartilage, or bone is putting the ulcer in the deepest category whatever its size. Probing the base is revealing what the surface is hiding.",
+   "tx": "**Stage 4** pressure injury (the deepest category with structural exposure) shows full-thickness skin and tissue loss with directly exposed or palpable **fascia** (fibrous sheets around muscle), muscle, tendon, ligament, cartilage, or exposed bone. Any one of these structures in the base sets Stage 4 immediately, whatever the ulcer diameter.",
+   "vis": {
+    "cols": [
+     "Finding",
+     "Stage it sets"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Exposed fascia or muscle",
+      "Stage 4 at once"
+     ],
+     [
+      "Exposed tendon or bone",
+      "Stage 4 whatever the size"
+     ],
+     [
+      "Probe the base",
+      "Surface hides the depth"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Slough is hiding the true depth, so no stage is being assigned until the bed is cleared. An ulcer masked by slough or eschar is staying unstageable. Deep red, maroon, or purple skin that refuses to blanch is warning of deep tissue injury even when the surface looks intact.",
+   "tx": "**Unstageable** pressure injury (depth hidden from inspection) is obscured by **slough** (yellow fibrinous debris) or **eschar** (black leathery dead tissue), as in this heel ulcer, and cannot be graded until sharp debridement reveals the base. Deep tissue pressure injury (**DTPI**, damage starting in deep layers) presents as persistent non-blanchable deep red, maroon, or purple discoloration that often breaks down within days.",
+   "vis": {
+    "alt": "Heel ulcer with adherent slough obscuring the wound bed, needing sharp debridement.",
+    "caption": "Slough-hidden heel ulcer: unstageable until debrided, then graded by the deepest tissue seen. Credit: Bobjgalindo.",
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp"
+   }
+  },
+  {
+   "say": "Thirty two millimetres of mercury is closing the capillaries, and the clock is running from there. Pressure above that line is starving the skin, and necrosis is following within two hours over bone. Turning schedules and pressure-mapping mattresses are breaking this chain.",
+   "tx": "External pressure above the normal capillary closing pressure of **32 mmHg** (the millimetre-mercury threshold where microvessels collapse) causes **microvascular occlusion** (capillary shutdown with downstream ischaemia), tissue **ischemia**, and necrosis within **2 hours** over a bony prominence. Prevention means scheduled relief before the threshold-time product injures skin.",
+   "vis": {
+    "cols": [
+     "Number",
+     "Meaning"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "32 mmHg",
+      "Capillaries collapse above this line"
+     ],
+     [
+      "2 hours",
+      "Necrosis over bone within this time"
+     ],
+     [
+      "Prevention",
+      "Scheduled relief breaks the chain"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The sacrum is receiving the strongest cover available. A superior gluteal artery perforator flap or a gluteus maximus V-Y advancement is filling the dead space with vascularised tissue. Muscle and perforator skin are resisting pressure far better than a skin graft.",
+   "tx": "**Sacral ulcer** defects (midline pressure sores over the tailbone in immobile patients) are most reliably reconstructed with a superior gluteal artery perforator **SGAP flap** (skin and fat on sacral perforators) or a **gluteus maximus** (the large buttock muscle) V-Y advancement flap. Both import blood-rich tissue that fills dead space and resists recurrent pressure.",
+   "vis": {
+    "cols": [
+     "Ulcer site",
+     "Flap of choice"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Sacral defect",
+      "SGAP perforator flap"
+     ],
+     [
+      "Sacral alternative",
+      "Gluteus maximus V-Y advancement"
+     ],
+     [
+      "Why muscle cover",
+      "Fills dead space and resists pressure"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The sitting bone is needing padded cover that tolerates shear. An inferior gluteal artery perforator flap, a gluteus maximus rotation, or a hamstring advancement is providing that cushion. Thin grafts are failing here because shear is stripping them.",
+   "tx": "**Ischial ulcer** defects (pressure sores over the sitting bone in wheelchair users) are reconstructed with an inferior gluteal artery perforator **IGAP flap** (perforator skin from the lower buttock), gluteus maximus rotation, or a **hamstring** advancement flap (posterior thigh muscle slid upward). The sitting surface needs durable shear-resistant padding, not thin cover.",
+   "vis": {
+    "cols": [
+     "Ulcer site",
+     "Flap of choice"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Ischial defect",
+      "IGAP perforator flap"
+     ],
+     [
+      "Other options",
+      "Gluteus rotation or hamstring advancement"
+     ],
+     [
+      "Why padded cover",
+      "Sitting shear needs durability"
+     ]
+    ]
+   }
+  },
+  {
+   "left": {
+    "points": [
+     "TFL myofascial rotation flap",
+     "Brings fascia lata strength",
+     "Fills lateral dead space"
+    ],
+    "title": "Trochanteric flap"
+   },
+   "right": {
+    "points": [
+     "Only clean granulating beds",
+     "Never over bare bone or tendon",
+     "Shown here taking on a leg"
+    ],
+    "title": "Split graft limits"
+   },
+   "tx": "**Trochanteric** pressure ulcers (lateral hip defects over the greater trochanter) are reconstructed with a **tensor fasciae latae** (the lateral thigh muscle-fascia unit) **TFL flap** (myofascial tissue rotated or advanced into the defect), which brings fascia strength and a robust pedicle. Split grafts, shown here taking on a clean leg bed, only suit shallow granulating beds and fail over bare bone or tendon, so trochanteric defects with dead space need the flap.",
+   "say": "The outer hip defect is needing fascia-strong cover. A tensor fasciae latae myofascial flap is rotating into the trochanteric wound and is filling the dead space. Split grafts are suiting only clean shallow beds, as shown here, and are failing over bare bone, so deep trochanteric ulcers are receiving flaps.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-split-thickness-skin-grafting.webp",
+    "alt": "Meshed split thickness graft taking on a clean granulating leg wound bed.",
+    "caption": "Split graft taking on a clean leg bed; trochanteric ulcers with dead space need a TFL flap instead. Credit: Wikipedia Medical (Skin grafting).",
+    "ar": 1.33
+   }
+  },
+  {
+   "say": "Low albumin and anaemia are predicting wound breakdown, so both are being corrected before any flap. Albumin under three grams per decilitre and haemoglobin under ten grams per decilitre are correlating with dehiscence and recurrence. Nutrition, spasm control, and pressure relief are preceding the operation.",
+   "tx": "Preoperative serum **albumin** (the liver protein marking nutrition) under **3.0** g per dL and **hemoglobin** (the oxygen-carrying blood pigment) under **10** g per dL correlate strongly with postoperative wound **dehiscence** (surgical wound splitting open) and recurrent ulceration. Optimise protein, iron, spasms, and seating before committing a flap to a starved bed.",
+   "vis": {
+    "cols": [
+     "Marker",
+     "Action threshold"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Albumin under 3.0",
+      "Delay the flap and feed first"
+     ],
+     [
+      "Haemoglobin under 10",
+      "Correct anaemia first"
+     ],
+     [
+      "Both optimized",
+      "Then commit the flap"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-plastic-surgery",
+ "title": "Pressure Injury Staging, Debridement and Flap Reconstruction",
+ "v": 1
+}

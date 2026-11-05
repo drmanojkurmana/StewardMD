@@ -43,7 +43,6 @@
       "ss-surgical-oncology",
       "ss-ctvs",
       "ss-paediatric-surgery",
-      "ss-plastic-surgery",
       "ss-vascular-surgery"
      ]
     },
