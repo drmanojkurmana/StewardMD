@@ -36,6 +36,7 @@
      "includes": "Urology, Neurosurgery, Surgical Oncology and 5 more",
      "subjects": [
       "ss-biostatistics",
+      "ss-plastic-surgery",
       "ss-general-surgery",
       "ss-urology",
       "ss-neurosurgery",
