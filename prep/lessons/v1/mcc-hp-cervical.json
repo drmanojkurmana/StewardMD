@@ -3,7 +3,7 @@
  "module": "mcc-hp-cervical",
  "subject": "mcc-health-promotion",
  "title": "Cervical cancer screening: key decisions in primary care",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "A woman with **HPV 16** needs direct evaluation even when cytology is normal. HPV 16 is strongly linked to high-grade lesions. Viral oncoproteins E6 and E7 inactivate p53 and Rb, driving progressive dysplasia. Cytology samples surface cells and can miss lesions, so a normal smear does not exclude CIN2 or CIN3. Colposcopy with biopsy is the appropriate next step.",
@@ -42,6 +42,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The graphic explains why **HPV 16** with normal cytology still needs evaluation. Viral **E6** inactivates p53 while **E7** releases E2F from Rb, pushing persistent infection toward CIN progression. Surface sampling can miss deeper dysplasia, so a normal smear never excludes high grade disease. Colposcopy with biopsy is therefore the next step.",
+   "say": "Persistent HPV 16 infection matters even when cytology looks normal. The viral E6 protein cripples p53 and E7 frees E2F from Rb, driving the cell toward progressive dysplasia and CIN. Because a smear only samples surface cells it can miss disease below, a normal result never excludes high grade lesions. That is why colposcopy with biopsy comes next.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mcc-hp-cervical-gen1.webp",
+    "alt": "Cellular illustration showing HPV 16 E6 binding p53 and E7 releasing E2F from Rb during persistent infection.",
+    "caption": "HPV oncoproteins E6 and E7 disrupting p53 and Rb toward CIN progression. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
