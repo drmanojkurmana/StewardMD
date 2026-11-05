@@ -1,202 +1,95 @@
 {
-  "v": 1,
-  "module": "spl-reconstructive",
-  "subject": "ss-plastic-surgery",
-  "title": "Principles of Flap Physiology and Classifications",
-  "minutes": 8,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "The **reconstructive ladder** establishes the classical hierarchical framework in reconstructive surgery, progressing methodically from primary wound closure and healing by secondary intention to skin grafts, local flaps, regional flaps, and microvascular free tissue transfer. Modern reconstructive surgery frequently adopts the reconstructive elevator, selecting the optimal functional reconstruction immediately.",
-      "say": "The reconstructive ladder establishes a progression from primary wound closure to complex free tissue transfer, which helps clinicians manage wounds. Surgeons note that the reconstructive elevator helps select the optimal functional match directly.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Primary closure or healing by secondary intention"
-          },
-          {
-            "id": "b",
-            "label": "Skin graft: split or full thickness"
-          },
-          {
-            "id": "c",
-            "label": "Local and regional flap transposition"
-          },
-          {
-            "id": "d",
-            "label": "Microvascular free tissue transfer"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Cutaneous **random pattern flaps** derive their entire arterial inflow and venous drainage through the interconnected dermal and subdermal vascular plexus without a distinct named feeding vessel. Due to perfusion pressure drop across the microcirculation, cutaneous random flaps are traditionally designed with length dimensions rarely exceeding a two-to-one ratio relative to width on trunk tissues.",
-      "say": "Surgeons identify that cutaneous random pattern flaps depend completely on the subdermal plexus without a named feeding artery. Surgeons identify that surgeons identify that perfusion constraints mean surgeons keep the flap length within a two to one ratio on trunk tissues.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/practicals/surg-prc-split-thickness-skin-grafting.webp",
-        "alt": "Split thickness skin grafting and dermal vascular plexus bed",
-        "caption": "Cutaneous vascular plexus and dermal perfusion in skin resurfacing. Credit: StewardMD.",
-        "ar": 1.33
-      }
-    },
-    {
-      "tx": "In contrast, an **axial pattern flap** receives robust vascular supply from an anatomically defined arteriovenous vessel running along the longitudinal flap axis. This dedicated axial vessel ensures high perfusion pressure and reliable venous return, permitting surgeons to harvest significantly longer flap dimensions without conforming to arbitrary length-to-width restrictions.",
-      "say": "Surgeons identify that an axial pattern flap receives blood from an anatomically defined named vessel along its axis. This predictable vascular inflow allows surgeons to design longer flaps without fixed dimensional ratios.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Random Pattern Flap",
-          "points": [
-            "Subdermal plexus dependent",
-            "No named feeding pedicle",
-            "Ratio restricted to 2:1 on trunk"
-          ]
-        },
-        "right": {
-          "title": "Axial Pattern Flap",
-          "points": [
-            "Dedicated axial arteriovenous axis",
-            "Named vascular pedicle",
-            "Independent of fixed ratios"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The **Mathes and Nahai classification** categorises muscle and musculocutaneous flaps into five distinct vascular patterns. **Type I** muscle flaps receive blood supply from an isolated solitary vascular pedicle, as observed in the tensor fasciae latae nourished by the lateral circumflex femoral artery and the gastrocnemius muscle nourished by the sural system.",
-      "say": "Surgeons identify that surgeons identify that the Mathes and Nahai classification system classifies muscle flaps into five categories. Type one muscle flaps are supplied by an isolated vascular pedicle, including the tensor fasciae latae and gastrocnemius muscles.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Classification",
-          "Pedicle Pattern",
-          "Representative Muscles"
-        ],
-        "rows": [
-          [
-            "Type I",
-            "Single vascular pedicle",
-            "Tensor fasciae latae, gastrocnemius"
-          ],
-          [
-            "Type II",
-            "Dominant pedicle plus minor pedicles",
-            "Gracilis, trapezius, soleus"
-          ],
-          [
-            "Type III",
-            "Two dominant vascular pedicles",
-            "Gluteus maximus, rectus abdominis"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Muscle flaps with **Type II** vascular anatomy feature a dominant pedicle sustaining muscle viability and minor secondary pedicles that are divided during elevation, such as the gracilis, trapezius, and soleus muscles. **Type III** muscle flaps possess two dominant pedicles of equal caliber, exemplified by the gluteus maximus and rectus abdominis.",
-      "say": "Surgeons identify that type two muscle flaps feature a dominant pedicle along with minor secondary pedicles, represented by the gracilis and soleus. Surgeons identify that type three flaps possess two dominant pedicles, including the gluteus maximus and rectus abdominis.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/practicals/surg-prc-full-thickness-skin-grafting.webp",
-        "alt": "Surgical soft tissue harvest and vascularised flap transfer",
-        "caption": "Reconstructive tissue transfer and recipient bed preparation. Credit: StewardMD.",
-        "ar": 1.33
-      }
-    },
-    {
-      "tx": "Under the Mathes and Nahai system, **Type IV** flaps possess segmental pedicles along the muscle length without any dominant pedicle, exemplified by the sartorius and tibialis anterior. Division of more than two segmental branches compromises perfusion. **Type V** flaps have one dominant pedicle and secondary segmental pedicles, notably the latissimus dorsi.",
-      "say": "Surgeons identify that surgeons identify that type four flaps rely on segmental vascular pedicles along the muscle belly without a dominant artery. Surgeons identify that surgeons identify that type five flaps provide one dominant pedicle along with secondary segmental pedicles, such as the latissimus dorsi.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Type",
-          "Vascular Pattern",
-          "Clinical Muscle Examples"
-        ],
-        "rows": [
-          [
-            "Type IV",
-            "Segmental pedicles only",
-            "Sartorius, tibialis anterior"
-          ],
-          [
-            "Type V",
-            "One dominant plus segmental pedicles",
-            "Latissimus dorsi, pectoralis major"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The physiological **surgical delay phenomenon** enhances flap survival by converting borderline ischaemia into enhanced collateralisation. Performing partial incisional incisions or staged elevation 10 to 14 days prior to definitive transfer induces ischaemic stress that permanently dilates choke vessels between adjacent angiosomes, increasing flap survival length by 60% to 100%.",
-      "say": "The surgical delay phenomenon improves flap survival through staged incisions performed ten to fourteen days prior to transfer. This staged ischaemia dilates choke vessels between vascular territories and improves survival length.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Initial surgical delay incision"
-          },
-          {
-            "id": "b",
-            "label": "Transient ischaemic stress and choke vessel dilation"
-          },
-          {
-            "id": "c",
-            "label": "Definitive flap transfer at 10 to 14 days"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Postoperative flap monitoring assesses microvascular perfusion using clinical evaluation of skin color, surface capillary refill, tissue turgor, and needle prick bleeding. **Venous thrombosis** presents acutely with cyanotic dusky congestion, rapid capillary refill under 1 second, tissue swelling, and brisk dark-purple venous bleeding on pinprick, mandating immediate surgical re-exploration.",
-      "say": "Surgeons identify that clinical flap monitoring relies on color, capillary refill, and pinprick bleeding. Venous thrombosis causes rapid dark bleeding, purple congestion, and rapid capillary refill, requiring urgent exploration.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Arterial Occlusion",
-          "points": [
-            "Pallor and cool temperature",
-            "Delayed capillary refill over 2 seconds",
-            "Absence of bleeding on pinprick"
-          ]
-        },
-        "right": {
-          "title": "Venous Occlusion",
-          "points": [
-            "Bluish purple congestion",
-            "Brisk capillary refill under 1 second",
-            "Rapid dark purple pinprick bleeding"
-          ]
-        }
-      }
-    }
-  ]
+ "v": 1,
+ "module": "spl-reconstructive",
+ "subject": "surgery",
+ "title": "Reconstructive ladder, grafts and free flaps",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Ladder** (**direct closure**, **secondary intention**, **skin graft**, **local flap**, **regional**, **distant**, **free flap**; **replace like with like**, **simplest that works**, **aesthetic units**) with **grafts** (**STSG** thin takes fast contracts, **FTSG** thick face hands no contract, **donor** thigh buttock, **take** imbibition inosculation revascularisation, **shear haematoma** kills) climbs; **dermal** (Integra staged, **negative pressure** bolsters) substitutes. Ladders climb simple.",
+   "say": "Holes close graft flap near far free simplest alike is ladder: thin takes fast contracts thick faces spare. Shear bleeds kill takes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/spl-reconstructive-fig1.webp",
+    "alt": "A diagram showing the reconstructive ladder from direct closure to free flaps, with illustrations of split-thickness and full-thickness skin grafts.",
+    "caption": "The reconstructive ladder: ascending complexity from simple closure to free flaps",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Local** (**random** length breadth 2 to 1, **axial** named vessel, **rotation** pivot defects, **transposition** Z-plasty lengthens, **advancement** V-Y, **bilobed** nose, **rhomboid** Limberg) with **regional** (**pectoralis** chest wall, **latissimus** breast, **TRAM DIEP** abdomen breast, **ALT** thigh workhorse, **radial forearm** thin pliable) rotates near; **delay** (precondition) trains. Pivots lengthen.",
+   "say": "Near pivots named vessels rotate transpose lengthen advance is local: chests backs bellies thighs forearms reach regional. Delays train.",
+   "vis": null
+  },
+  {
+   "tx": "**Free** (**anastomosis** artery vein 9-0, **perforator** DIEP ALT spares muscle, **ischemia** 4 hours, **no reflow** fails, **monitor** Doppler implantable clinical hourly, **leech** venous congestion, **re-explore** 6 hours salvage) with **donor** (fibula mandible, **scapula** shoulder, **iliac crest** maxilla, **toe** thumb) transfers composite; **supercharge** (extra venous) drains. Microscopes join.",
+   "say": "Cut joined Doppler watched leeches suck reopens hours is free: legs shoulders hips toes rebuild jaws thumbs. Ischaemias clock.",
+   "vis": null
+  },
+  {
+   "tx": "**Wounds** (**debride** necrosis, **Gustilo** open fractures antibiotics, **exposed** tendon bone flap cover, **pressure sores** offload, **diabetic foot** revascularise, **necrotising** debride ICU) with **expansion** (**tissue expander** serial fills, **breast** reconstruction, **alopecia** scalp) and **lymphedema** (decongestive, **lymphovenous** bypass, **node transfer**) closes; **scars** (silicone pressure, **steroid** keloids) mature. Beds prepare.",
+   "say": "Dead cuts fractures grades bones tendons cover sugars revascularise flesh eats wide is wounds: expanders fill lymphedemas bypass nodes transfer. Scars press.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Recon",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Ladder",
+      "Simple alike",
+      "Take"
+     ],
+     [
+      "Local",
+      "Pivot lengthen",
+      "Regional"
+     ],
+     [
+      "Free",
+      "Join monitor",
+      "Re-explore"
+     ],
+     [
+      "Wounds",
+      "Debride cover",
+      "Expand"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pla-001",
+  "bk2-pla-002",
+  "bk2-pla-003",
+  "bk2-pla-004",
+  "bk2-pla-005",
+  "bk2-pla-006",
+  "bk2-pla-007",
+  "bk2-pla-008",
+  "bk2-pla-009",
+  "bk2-pla-010"
+ ],
+ "src": [],
+ "refs": [
+  "Plastic Surgery 5th Edition 2024 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-plas1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
