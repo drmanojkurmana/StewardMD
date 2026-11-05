@@ -37,8 +37,8 @@
      "subjects": [
       "ss-biostatistics",
       "ss-plastic-surgery",
-      "ss-general-surgery",
       "ss-urology",
+      "ss-general-surgery",
       "ss-neurosurgery",
       "ss-surgical-oncology",
       "ss-ctvs",
