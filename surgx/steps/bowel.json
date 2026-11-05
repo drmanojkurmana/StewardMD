@@ -143,6 +143,141 @@
         "Skipping the check because the anastomosis 'looks fine'."
       ],
       "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.left-medial-to-lateral": {
+      "id": "step.bowel.left-medial-to-lateral",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Medial-to-lateral mobilisation of the left colon and sigmoid, ureter first",
+      "why": "Lifting the sigmoid and descending mesocolon off the retroperitoneum in the embryological plane keeps the lymphatic envelope intact and keeps the left ureter, gonadal vessels and hypogastric nerves behind the plane. Seeing the ureter before any vessel is divided is the single most important safety check in left-sided colorectal surgery.",
+      "how": [
+        "Lift the sigmoid mesentery up and to the left so the inferior mesenteric pedicle tents away from the aorta; incise the peritoneum at the sacral promontory beneath it.",
+        "Enter the areolar plane behind the mesocolon (Toldt's fascia) and sweep the retroperitoneum down, working laterally towards the abdominal wall and cephalad towards the pancreas.",
+        "Identify the left ureter (it peristalses when touched) and the gonadal vessels lying beneath the plane, and confirm this aloud before dividing any vessel.",
+        "Preserve the superior hypogastric plexus on the front of the aorta below the inferior mesenteric artery and the hypogastric nerves as they run down towards the pelvis.",
+        "Complete the release by dividing the lateral peritoneal attachments along the white line of Toldt, joining the medial dissection."
+      ],
+      "structuresAtRisk": [
+        "Left ureter",
+        "Left gonadal vessels",
+        "Superior hypogastric plexus and hypogastric nerves",
+        "Left iliac vessels at the pelvic brim"
+      ],
+      "pitfalls": [
+        "Dissecting too deep, so the ureter and gonadal vessels are lifted up with the mesocolon and later divided with it.",
+        "Starting with the lateral attachments, which loses the lateral traction the medial approach needs.",
+        "Failing to find the ureter and proceeding anyway: if it cannot be seen, approach from lateral, consider stents, or convert, but do not divide the pedicle blind."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.bowel.ima-ligation": {
+      "id": "step.bowel.ima-ligation",
+      "kind": "resection",
+      "critical": true,
+      "title": "Inferior mesenteric artery and vein ligation",
+      "why": "The level of the vascular tie sets the lymph node yield for a cancer, the reach of the colon to the pelvis, and the blood supply of the proximal limb. For benign disease a tie close to the bowel spares the autonomic nerves and the inferior mesenteric artery.",
+      "how": [
+        "Cancer: skeletonise the inferior mesenteric artery near its origin and divide it a short distance from the aorta (high tie), keeping the preaortic nerves on the aorta; alternatively divide it just below the left colic artery with clearance of the apical nodes (low tie), as the unit and MDT plan.",
+        "Divide the inferior mesenteric vein separately at the inferior border of the pancreas, lateral to the duodenojejunal flexure, when length is needed for a low anastomosis.",
+        "Benign disease (diverticular disease): divide the sigmoid branches close to the bowel or within the mesentery, preserving the inferior mesenteric trunk where possible.",
+        "Re-confirm the ureter and the gonadal vessels are below the plane immediately before firing the stapler or applying clips."
+      ],
+      "structuresAtRisk": [
+        "Left ureter",
+        "Superior hypogastric plexus",
+        "Aorta and left common iliac artery",
+        "Marginal artery supplying the proximal limb"
+      ],
+      "pitfalls": [
+        "Taking the preaortic nerve plexus with a high tie, causing sexual and bladder dysfunction.",
+        "A slipped clip or a tie on a bulky pedicle; control the stump before releasing it.",
+        "Dividing the marginal artery near the splenic flexure, which leaves the proximal colon dependent on a doubtful supply."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.bowel.splenic-flexure": {
+      "id": "step.bowel.splenic-flexure",
+      "kind": "dissection",
+      "title": "Splenic flexure mobilisation",
+      "why": "A colorectal anastomosis must lie in the pelvis without tension. Splenic flexure mobilisation gives the length; doing it badly tears the splenic capsule, the commonest cause of an unplanned splenectomy in colorectal surgery.",
+      "how": [
+        "Decide early whether length is needed: routinely for a low anastomosis, selectively for a sigmoid colectomy.",
+        "Combine approaches: medial (continuing the retromesocolic plane up over the pancreas), lateral (along the white line) and from the lesser sac (dividing the gastrocolic omentum to the left of the middle colic vessels).",
+        "Separate the transverse mesocolon from the anterior surface of the pancreas, staying above the pancreas and away from its inferior border.",
+        "Divide the splenocolic attachments under direct vision with no traction on the spleen."
+      ],
+      "structuresAtRisk": [
+        "Splenic capsule",
+        "Tail and body of pancreas",
+        "Middle colic vessels",
+        "Marginal artery"
+      ],
+      "pitfalls": [
+        "Downward traction on the colon that avulses the splenic capsule.",
+        "Entering the plane behind the pancreas, lifting the tail of the pancreas with the mesocolon.",
+        "Skipping mobilisation and accepting an anastomosis under tension."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.bowel.circular-anastomosis": {
+      "id": "step.bowel.circular-anastomosis",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Circular stapled colorectal anastomosis (double-stapled)",
+      "why": "The circular stapler allows an anastomosis deep in the pelvis that cannot be sewn by hand. Its safety depends on a perfused, tension-free proximal limb, correct orientation and a check that nothing else is caught in the staple line.",
+      "how": [
+        "Confirm proximal perfusion at the chosen division point (pulsatile bleeding from the marginal vessel, or an objective perfusion assessment where available), then insert the anvil into the proximal colon and secure it with a purse-string.",
+        "Check that the proximal limb reaches the pelvis without tension and that the mesentery runs straight from the pedicle without a twist.",
+        "Pass the stapler gently through the anus to the closed rectal stump and bring the spike out next to, or through, the transverse staple line, not far in front of or behind it.",
+        "Before firing, confirm the vagina (in a woman), the bladder and adjacent bowel are not caught, and that the colon is not twisted.",
+        "After firing, remove the stapler and inspect both doughnuts: they must be complete circles. Send them with the specimen or separately as the unit requires."
+      ],
+      "structuresAtRisk": [
+        "Posterior vaginal wall",
+        "Proximal colon blood supply",
+        "Small bowel or appendices epiploicae caught between anvil and cartridge"
+      ],
+      "pitfalls": [
+        "Incomplete doughnuts, which mean a gap in the anastomosis: test, repair, and consider defunctioning or redoing it.",
+        "Spike placed so that a 'dog-ear' is left at the corner of the transverse staple line, a common leak site.",
+        "Accepting a dusky proximal limb to avoid further mobilisation."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.bowel.colorectal-bailout": {
+      "id": "step.bowel.colorectal-bailout",
+      "kind": "bailout",
+      "critical": true,
+      "title": "Deciding against an unprotected anastomosis: defunction or end colostomy",
+      "why": "A colorectal anastomotic leak is the complication that kills after this operation. Protecting a high-risk anastomosis with a loop ileostomy reduces the consequences of a leak, and not joining at all (end colostomy) is the right answer when the patient or the bowel is not fit for an anastomosis.",
+      "how": [
+        "Decide deliberately, with the reasons recorded: anastomotic height, prior pelvic radiotherapy, incomplete doughnuts or a positive leak test, doubtful perfusion, contamination, malnutrition, steroids or immunosuppression, and the patient's physiology.",
+        "Defunction: form a loop ileostomy at the pre-marked right iliac fossa site (see the loop ileostomy procedure) after closure of the main wound.",
+        "Do not join: divide and close the rectal stump, bring the colon out as an end colostomy at the pre-marked left iliac fossa site (Hartmann's procedure).",
+        "Laparoscopic difficulty, bleeding in the pelvis or failure to progress safely: convert to open early rather than late, and say so to the team.",
+        "Tell the patient after the operation which option was chosen and why, and what the plan for reversal is."
+      ],
+      "structuresAtRisk": [
+        "Anastomosis",
+        "Ileostomy blood supply",
+        "Rectal stump"
+      ],
+      "pitfalls": [
+        "Defunctioning reduces the harm of a leak but does not prevent a leak: an ischaemic anastomosis still needs to be redone or abandoned.",
+        "Choosing not to defunction to avoid a second operation, in a patient with several risk factors.",
+        "Converting only after a major bleed or an injury, rather than when progress stalls."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

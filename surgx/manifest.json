@@ -1132,6 +1132,12 @@
       "file": "steps/thoracic.json",
       "title": "Shared cardiothoracic steps",
       "shared": true
+    },
+    {
+      "id": "hpb",
+      "file": "steps/hpb.json",
+      "title": "Shared hepatopancreatobiliary and spleen steps",
+      "shared": true
     }
   ],
   "procedures": [
@@ -2472,6 +2478,114 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 150
+    },
+    {
+      "id": "lap-anterior-resection-tme",
+      "title": "Laparoscopic anterior resection with total mesorectal excision",
+      "subtitle": "Holy plane, nerve preservation, safe low anastomosis",
+      "system": "gastrointestinal",
+      "specialty": "oncology",
+      "file": "procedures/lap-anterior-resection-tme.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 240
+    },
+    {
+      "id": "left-hemicolectomy-sigmoid",
+      "title": "Left hemicolectomy and sigmoid colectomy",
+      "subtitle": "Ureter first, the right tie, a tension-free colorectal join",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/left-hemicolectomy-sigmoid.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "open-subtotal-cholecystectomy",
+      "title": "Open and subtotal cholecystectomy",
+      "subtitle": "The bail-out operation for the difficult gallbladder",
+      "system": "hepatobiliary",
+      "specialty": "general",
+      "file": "procedures/open-subtotal-cholecystectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "lap-cbd-exploration",
+      "title": "Laparoscopic common bile duct exploration",
+      "subtitle": "Transcystic or choledochotomy, single-stage stone clearance",
+      "system": "hepatobiliary",
+      "specialty": "general",
+      "file": "procedures/lap-cbd-exploration.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "abdomen",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "splenectomy",
+      "title": "Splenectomy: trauma and elective",
+      "subtitle": "Mobilise, control the hilum, protect the pancreatic tail, vaccinate",
+      "system": "upper gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/splenectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "pancreaticoduodenectomy",
+      "title": "Pancreaticoduodenectomy (Whipple)",
+      "subtitle": "Outline: resectability, point of no return, three anastomoses, the bail-out",
+      "system": "hepatobiliary",
+      "specialty": "oncology",
+      "file": "procedures/pancreaticoduodenectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "onco",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 420
+    },
+    {
+      "id": "right-hepatectomy",
+      "title": "Right hepatectomy",
+      "subtitle": "Principles of liver resection: inflow, outflow, transection, Pringle",
+      "system": "hepatobiliary",
+      "specialty": "oncology",
+      "file": "procedures/right-hepatectomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "onco",
+        "hpb"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 300
     }
   ],
   "cases": [

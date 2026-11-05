@@ -675,6 +675,33 @@
         ]
       }
     },
+    "lap-anterior-resection-tme": {
+      base: "operative", title: "Anterior resection with TME",
+      prefill: {"procedure": "Laparoscopic anterior resection with total mesorectal excision"},
+      extra: {
+        "Operative detail": [
+          f("tumourHeight", "Tumour height from anal verge and distal margin", {"type": "text", "required": true, "aiFillable": false, "ph": "cm from verge on rigid sigmoidoscopy; distal margin confirmed by DRE/endoscopy"}),
+          f("vascularTie", "IMA tie level, IMV, ureter identified, splenic flexure", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "High / low tie; IMV at pancreas; left ureter seen before division; flexure mobilised yes/no"}),
+          f("tmeQuality", "TME plane quality (surgeon's grade)", {"type": "text", "required": true, "aiFillable": false, "ph": "Complete / nearly complete / incomplete", "help": "Grade on the specimen before it leaves theatre"}),
+          f("anastomosisCheck", "Anastomosis: height, doughnuts, air leak test", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Stapled colorectal at x cm; doughnuts complete; air test negative", "help": "Physical checks: record what was seen"}),
+          f("nervesPreserved", "Hypogastric and pelvic nerves preserved", {"type": "text", "required": false, "aiFillable": false, "ph": "Yes / no / not identified"}),
+          f("defunctionDecision", "Defunctioning or end stoma decision and reasons", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Loop ileostomy RIF because low anastomosis after chemoradiotherapy"})
+        ]
+      }
+    },
+    "lap-cbd-exploration": {
+      base: "operative", title: "Laparoscopic CBD exploration",
+      prefill: {"procedure": "Laparoscopic cholecystectomy and common bile duct exploration"},
+      extra: {
+        "Operative detail": [
+          f("cholangiogram", "Cholangiogram: stones, size, duct diameter", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "3 stones up to 6 mm, CBD 10 mm, free flow / no flow to duodenum"}),
+          f("cbdeRoute", "Route and reason", {"type": "text", "required": true, "aiFillable": true, "ph": "Transcystic / choledochotomy, because..."}),
+          f("ductCleared", "Duct clearance confirmed and how", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, choledochoscopy to ampulla and both hepatic ducts / completion cholangiogram / not cleared"}),
+          f("ductClosure", "Duct closure", {"type": "text", "required": true, "aiFillable": true, "ph": "Cystic duct endoloop / primary closure / T-tube / antegrade stent"}),
+          f("ercpPlan", "ERCP plan if not cleared", {"type": "text", "required": false, "aiFillable": true, "ph": "Not needed / arranged with gastroenterology"})
+        ]
+      }
+    },
     "lap-inguinal-hernia-repair": {
       base: "operative", title: "Laparoscopic inguinal hernia repair",
       prefill: {"procedure": "Laparoscopic inguinal hernia repair (TEP / TAPP)"},
@@ -764,6 +791,20 @@
           f("sphincterotomySide", "Side and technique (open or closed)", {"type": "text", "required": true, "aiFillable": true, "ph": "Left lateral, closed"}),
           f("divisionLength", "Extent of internal sphincter division", {"type": "text", "required": true, "aiFillable": false, "ph": "To apex of fissure, below dentate line"}),
           f("baselineContinence", "Baseline continence (score) recorded pre-op", {"type": "text", "required": true, "aiFillable": false, "ph": "Wexner 0"})
+        ]
+      }
+    },
+    "left-hemicolectomy-sigmoid": {
+      base: "operative", title: "Left hemicolectomy / sigmoid colectomy",
+      prefill: {"procedure": "Laparoscopic sigmoid colectomy / left hemicolectomy"},
+      extra: {
+        "Operative detail": [
+          f("indicationType", "Indication type", {"type": "text", "required": true, "aiFillable": true, "ph": "Cancer / diverticular (complicated, recurrent) / volvulus / polyp"}),
+          f("leftUreter", "Left ureter identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, before pedicle division / stents used"}),
+          f("vascularTie", "Vascular division level", {"type": "text", "required": true, "aiFillable": true, "ph": "High IMA tie / low tie / close to bowel (benign)"}),
+          f("distalLevel", "Distal division level", {"type": "text", "required": true, "aiFillable": true, "ph": "Upper rectum below taenial splay / margin from tumour"}),
+          f("anastomosisCheck", "Anastomosis: type, doughnuts, air leak test", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Circular stapled colorectal; doughnuts complete; air test negative"}),
+          f("stomaDecision", "Stoma decision and reasons", {"type": "text", "required": false, "aiFillable": true, "ph": "None / loop ileostomy / end colostomy (Hartmann's), because..."})
         ]
       }
     },
@@ -967,6 +1008,20 @@
         ]
       }
     },
+    "open-subtotal-cholecystectomy": {
+      base: "operative", title: "Open / subtotal cholecystectomy",
+      prefill: {"procedure": "Open cholecystectomy / subtotal cholecystectomy", "incision": "Right subcostal"},
+      extra: {
+        "Operative detail": [
+          f("conversionReason", "Reason for open or bail-out operation", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "CVS not achievable: fused hepatocystic triangle, gangrenous gallbladder"}),
+          f("operationType", "Operation performed", {"type": "text", "required": true, "aiFillable": true, "ph": "Total / subtotal fenestrating / subtotal reconstituting / cholecystostomy"}),
+          f("cysticDuctManagement", "Cystic duct and artery management", {"type": "text", "required": true, "aiFillable": false, "ph": "Ligated / orifice closed from inside / left open and drained"}),
+          f("stonesCleared", "All stones removed from remnant and pouch", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / no (where)"}),
+          f("cholangiogram", "Cholangiogram result", {"type": "text", "required": false, "aiFillable": true, "ph": "Not done / normal / filling defect / anatomy"}),
+          f("ductInjury", "Bile duct injury suspected and action", {"type": "text", "required": true, "aiFillable": false, "ph": "None / suspected: drained, HPB referral (name, time)"})
+        ]
+      }
+    },
     "open-ventral-hernia-repair": {
       base: "operative", title: "Open umbilical or incisional hernia repair",
       prefill: {"procedure": "Open ventral hernia repair with mesh"},
@@ -1045,6 +1100,19 @@
         ]
       }
     },
+    "pancreaticoduodenectomy": {
+      base: "operative", title: "Pancreaticoduodenectomy",
+      prefill: {"procedure": "Pancreaticoduodenectomy (Whipple)"},
+      extra: {
+        "Operative detail": [
+          f("resectability", "Resectability findings", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "No metastases; SMV/PV free / venous resection; SMA free"}),
+          f("arterialAnatomy", "Arterial anatomy and GDA test clamp", {"type": "text", "required": true, "aiFillable": false, "ph": "Standard / replaced RHA; hepatic pulse present on GDA clamp"}),
+          f("glandDuct", "Gland texture and pancreatic duct diameter", {"type": "text", "required": true, "aiFillable": false, "ph": "Soft / firm; duct x mm", "help": "Main predictors of pancreatic fistula"}),
+          f("reconstruction", "Reconstruction", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "PJ duct-to-mucosa with stent / PG; HJ end-to-side; antecolic GJ"}),
+          f("frozenSection", "Frozen section margins", {"type": "text", "required": false, "aiFillable": false, "ph": "Neck clear, bile duct clear / not sent"})
+        ]
+      }
+    },
     "pilonidal-sinus-excision": {
       base: "operative", title: "Pilonidal sinus excision",
       prefill: {"procedure": "Excision of pilonidal sinus"},
@@ -1109,6 +1177,19 @@
         ]
       }
     },
+    "right-hepatectomy": {
+      base: "operative", title: "Right hepatectomy",
+      prefill: {"procedure": "Right hepatectomy (segments 5 to 8)"},
+      extra: {
+        "Operative detail": [
+          f("iousFindings", "Intra-operative ultrasound findings", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Lesions mapped; no new lesions in remnant; MHV relation"}),
+          f("inflowOutflow", "Inflow and outflow control", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "RHA ligated after test clamp; RPV stapled; RHV stapled extrahepatically / intrahepatically"}),
+          f("pringleTime", "Pringle: cycles and total ischaemic time", {"type": "text", "required": true, "aiFillable": false, "ph": "x cycles, total y min"}),
+          f("transectionMethod", "Transection technique and CVP", {"type": "text", "required": false, "aiFillable": true, "ph": "CUSA / clamp-crush; low CVP maintained"}),
+          f("bileLeakTest", "Bile leak test result", {"type": "text", "required": true, "aiFillable": false, "ph": "White test negative / leaks sutured"})
+        ]
+      }
+    },
     "septoplasty": {
       base: "operative", title: "Septoplasty",
       prefill: {"procedure": "Septoplasty"},
@@ -1133,6 +1214,19 @@
           f("residualLength", "Residual small bowel length and ICV status", {"type": "text", "required": true, "aiFillable": false, "ph": "Measured length in cm; ileocaecal valve present / absent", "help": "Measured, not estimated"}),
           f("mesentericDefect", "Mesenteric defect closed", {"type": "text", "required": false, "aiFillable": true, "ph": "Yes / No"}),
           f("secondLook", "Second look planned", {"type": "text", "required": false, "aiFillable": true, "ph": "or 'No'"})
+        ]
+      }
+    },
+    "splenectomy": {
+      base: "operative", title: "Splenectomy",
+      prefill: {"procedure": "Splenectomy"},
+      extra: {
+        "Operative detail": [
+          f("indicationType", "Indication and approach", {"type": "text", "required": true, "aiFillable": true, "ph": "Trauma (open) / ITP (laparoscopic) / other"}),
+          f("salvageDecision", "Splenic salvage considered and why not", {"type": "text", "required": false, "aiFillable": true, "ph": "Trauma: unstable, hilar injury"}),
+          f("pancreaticTail", "Pancreatic tail status", {"type": "text", "required": true, "aiFillable": false, "ph": "Seen and intact / injured, drained"}),
+          f("accessorySpleens", "Accessory spleens", {"type": "text", "required": false, "aiFillable": false, "ph": "None found / removed (number, site) / left (trauma)"}),
+          f("vaccinationPlan", "Vaccination and antibiotic prophylaxis plan", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Elective: given (date). Emergency: due from 2 weeks post-op. Prophylaxis per national guidance; asplenia alert."})
         ]
       }
     },
