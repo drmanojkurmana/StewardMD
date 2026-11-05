@@ -3,7 +3,7 @@
  "module": "sid-ast-resistance",
  "subject": "ss-infectious-diseases",
  "title": "Antimicrobial susceptibility testing and resistance mechanisms",
- "minutes": 6,
+ "minutes": 8,
  "steps": [
   {
    "tx": "**Minimum inhibitory concentration** (MIC) is the lowest concentration of an antibiotic that stops visible growth of an organism after overnight incubation. In broth microdilution, the endpoint is the well that is clear or shows only slight haze. Susceptibility testing needs a standardised inoculum, and the **0.5 McFarland** standard is the usual turbidity target for disk diffusion and MIC preparation. Suspension should be diluted within 15 minutes of preparation.",
@@ -105,6 +105,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The split panel shows MRSA on one side, where the **mecA** gene builds an altered **PBP2a** enzyme that keeps stitching the wall while beta-lactam drugs fail. On the other side, enterococci use the **vanA** cluster to swap wall tips to D-Ala-D-Lac, so vancomycin cannot grip its target. The lesson pairs these two gene driven escapes, so one picture teaches wall building that ignores drugs and a target that changed shape.",
+   "say": "This two sided molecular view contrasts MRSA with vancomycin resistant enterococci. On the left, the SCCmec cassette carries mecA, which makes PBP2a, an altered wall building enzyme with low affinity for beta-lactams, so cross linking continues while those drugs fail. On the right, the vanA operon switches wall precursors from D-Ala-D-Ala to D-Ala-D-Lac, so vancomycin loses its grip. One side shows a replacement builder, the other a replaced target. Remember mecA with PBP2a for MRSA, and vanA with the D-Lac switch for VRE.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sid-ast-resistance-gen1.webp",
+    "alt": "Split view shows MRSA wall building by PBP2a beside VRE target switch blocking vancomycin.",
+    "caption": "MRSA replacement builder beside VRE switched target, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

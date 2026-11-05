@@ -3,7 +3,7 @@
  "module": "phm-high-alert-drugs",
  "subject": "pharmacology",
  "title": "High alert medicines: engineer the error out",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
    "tx": "A **high alert** medicine harms gravely when one slip occurs. Insulin, anticoagulants, concentrated electrolytes, opioids and chemotherapy share this property across wards and homes. Safety therefore lives in systems: standard concentrations, restricted stock, clear charts and targeted double checks. Blaming careful people after a trap fires leaves the trap armed for the next shift.",
@@ -55,6 +55,17 @@
       "Tall man lettering"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The ward photo contrasts a hanging premixed potassium infusion with an inset of concentrated ampoules marked as fatal selection error. Arrows stress concentrated ampoules removed and locked under **pharmacy control**. It shows the lesson fix of replacing risky stock with **premixed infusions** plus **restricted storage**. System design removes the fatal step entirely.",
+   "say": "Read the image as a system fix for concentrated potassium. Keep only premixed infusions on the ward and remove concentrated ampoules to pharmacy control in a locked box. A fatal selection error in haste is then impossible. In the exam, choose the option that deletes the risky step rather than one that relies on extra care.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-high-alert-drugs-gen1.webp",
+    "alt": "The photo shows a premixed potassium infusion bag beside removed ampoules and a locked pharmacy box.",
+    "caption": "Photo of a premixed potassium infusion beside removed ampoules and a locked pharmacy box, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
