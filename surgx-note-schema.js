@@ -402,6 +402,32 @@
         ]
       }
     },
+    "fistula-in-ano-surgery": {
+      base: "operative", title: "Fistula-in-ano surgery",
+      prefill: {"procedure": "Examination under anaesthesia, fistula-in-ano"},
+      extra: {
+        "Operative detail": [
+          f("patientPositionAnal", "Patient position (for clock-face reference)", {"type": "text", "required": true, "aiFillable": true, "ph": "Lithotomy / prone jack-knife"}),
+          f("openings", "External and internal openings", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "External: left posterolateral 3 cm from verge. Internal: posterior midline at dentate line"}),
+          f("parksType", "Tract type (Parks) and sphincter involvement", {"type": "text", "required": true, "aiFillable": true, "ph": "Low trans-sphincteric, small proportion of external sphincter"}),
+          f("fistulaTreatment", "Treatment: fistulotomy or loose seton", {"type": "text", "required": true, "aiFillable": false, "ph": "Loose silicone seton"}),
+          f("tbSent", "Tissue sent for TB studies", {"type": "text", "required": false, "aiFillable": false, "ph": "Yes, culture and PCR / not indicated"})
+        ]
+      }
+    },
+    "haemorrhoidectomy": {
+      base: "operative", title: "Haemorrhoidectomy",
+      prefill: {"procedure": "Milligan-Morgan haemorrhoidectomy"},
+      extra: {
+        "Operative detail": [
+          f("patientPositionAnal", "Patient position (for clock-face reference)", {"type": "text", "required": true, "aiFillable": true, "ph": "Lithotomy / prone jack-knife"}),
+          f("pilesExcised", "Haemorrhoids excised, by anatomical position", {"type": "text", "required": true, "aiFillable": true, "ph": "Left lateral, right posterior, right anterior"}),
+          f("skinBridges", "Mucocutaneous bridges preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Three adequate bridges"}),
+          f("analCalibre", "Anal calibre at end of procedure", {"type": "text", "required": true, "aiFillable": false, "ph": "Admits retractor without tension"}),
+          f("rectalFindings", "Proctoscopy and sigmoidoscopy findings", {"type": "text", "required": false, "aiFillable": true, "ph": "No mass, no proctitis"})
+        ]
+      }
+    },
     "hartmanns-procedure": {
       base: "operative", title: "Hartmann's procedure",
       prefill: {"procedure": "Hartmann's procedure (sigmoid colectomy, end colostomy, closure of rectal stump)", "incision": "Midline laparotomy"},
@@ -411,6 +437,32 @@
           f("leftUreter", "Left ureter identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, and where"}),
           f("rectalStump", "Rectal stump: level, closure, marking", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Rectosigmoid junction, stapled, marked with long non-absorbable sutures"}),
           f("stomaDetail", "Stoma: type, site, height, viability", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "End colostomy, LIF, flush, pink and healthy", "help": "Viability is a physical check at the end of the operation"})
+        ]
+      }
+    },
+    "lap-inguinal-hernia-repair": {
+      base: "operative", title: "Laparoscopic inguinal hernia repair",
+      prefill: {"procedure": "Laparoscopic inguinal hernia repair (TEP / TAPP)"},
+      extra: {
+        "Operative detail": [
+          f("approach", "Approach: TEP or TAPP, side(s)", {"type": "text", "required": true, "aiFillable": true, "ph": "TEP, right / TAPP, bilateral"}),
+          f("defectTypes", "Defects found on each side", {"type": "text", "required": true, "aiFillable": true, "ph": "Right: indirect (EHS L2), no femoral; Left: none", "help": "Direct, indirect, femoral and obturator spaces on each side"}),
+          f("cordLipoma", "Cord lipoma looked for and reduced", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, reduced / none found"}),
+          f("meshPosition", "Mesh size, coverage and fixation zones", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "15 x 10 cm, covers myopectoral orifice, tacked to Cooper's ligament only", "help": "Confirm no fixation in the triangles of doom or pain"}),
+          f("peritonealClosure", "Peritoneal integrity or flap closure", {"type": "text", "required": true, "aiFillable": false, "ph": "TAPP flap closed with running suture, no mesh exposed"})
+        ]
+      }
+    },
+    "lap-nissen-fundoplication": {
+      base: "operative", title: "Laparoscopic Nissen fundoplication",
+      prefill: {"procedure": "Laparoscopic Nissen fundoplication"},
+      extra: {
+        "Operative detail": [
+          f("vagiPreserved", "Anterior and posterior vagi identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Both seen and preserved"}),
+          f("intraAbdoOesophagus", "Intra-abdominal oesophageal length", {"type": "text", "required": true, "aiFillable": true, "ph": "About 3 cm, tension free"}),
+          f("cruralRepair", "Crural repair", {"type": "text", "required": true, "aiFillable": true, "ph": "Posterior, 3 interrupted non-absorbable sutures"}),
+          f("wrapDetail", "Wrap type, length and calibration", {"type": "text", "required": true, "aiFillable": true, "ph": "360 degree floppy, 2 cm, over 56 Fr bougie"}),
+          f("pleuralBreach", "Pleural breach", {"type": "text", "required": false, "aiFillable": false, "ph": "None / left pleura opened, anaesthetist informed"})
         ]
       }
     },
@@ -439,6 +491,31 @@
           f("procedureChoice", "Salpingectomy or salpingotomy, and reason", {"type": "text", "aiFillable": true}),
           f("antiD", "Rhesus status and anti-D", {"type": "text", "required": true, "aiFillable": false, "ph": "Rh positive / Rh negative: anti-D given"}),
           f("followUp", "Follow-up plan", {"type": "text", "aiFillable": true, "ph": "UPT at 3 weeks / serial hCG"})
+        ]
+      }
+    },
+    "lap-sleeve-gastrectomy": {
+      base: "operative", title: "Laparoscopic sleeve gastrectomy",
+      prefill: {"procedure": "Laparoscopic sleeve gastrectomy"},
+      extra: {
+        "Operative detail": [
+          f("startDistance", "Distance of first firing from pylorus", {"type": "text", "required": true, "aiFillable": true, "ph": "4 cm"}),
+          f("bougieSize", "Bougie size", {"type": "text", "required": true, "aiFillable": true, "ph": "36 Fr"}),
+          f("staplerLoads", "Stapler loads and reinforcement", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Antrum: 2 thick loads; body/fundus: 4 medium loads; no reinforcement"}),
+          f("hiatusFinding", "Hiatus: hernia found and repaired", {"type": "text", "required": true, "aiFillable": true, "ph": "No hiatal hernia / repaired with 2 posterior sutures"}),
+          f("leakTest", "Leak test method and result", {"type": "text", "required": true, "aiFillable": false, "ph": "Methylene blue, negative"})
+        ]
+      }
+    },
+    "lateral-internal-sphincterotomy": {
+      base: "operative", title: "Lateral internal sphincterotomy",
+      prefill: {"procedure": "Lateral internal sphincterotomy"},
+      extra: {
+        "Operative detail": [
+          f("fissureSite", "Fissure site and features", {"type": "text", "required": true, "aiFillable": true, "ph": "Posterior midline, sentinel tag, typical"}),
+          f("sphincterotomySide", "Side and technique (open or closed)", {"type": "text", "required": true, "aiFillable": true, "ph": "Left lateral, closed"}),
+          f("divisionLength", "Extent of internal sphincter division", {"type": "text", "required": true, "aiFillable": false, "ph": "To apex of fissure, below dentate line"}),
+          f("baselineContinence", "Baseline continence (score) recorded pre-op", {"type": "text", "required": true, "aiFillable": false, "ph": "Wexner 0"})
         ]
       }
     },
@@ -563,6 +640,19 @@
         ]
       }
     },
+    "open-ventral-hernia-repair": {
+      base: "operative", title: "Open umbilical or incisional hernia repair",
+      prefill: {"procedure": "Open ventral hernia repair with mesh"},
+      extra: {
+        "Operative detail": [
+          f("herniaClass", "Hernia type and EHS classification", {"type": "text", "required": true, "aiFillable": true, "ph": "Incisional, midline M3, W2"}),
+          f("defectSize", "Defect width x length and number of defects", {"type": "text", "required": true, "aiFillable": true, "ph": "6 x 8 cm, single defect"}),
+          f("meshPlane", "Mesh plane and overlap", {"type": "text", "required": true, "aiFillable": true, "ph": "Retromuscular, 5 cm overlap all directions"}),
+          f("posteriorLayerIntact", "Posterior layer closed with no exposed mesh", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, two buttonholes repaired"}),
+          f("contaminationDecision", "Contamination or enterotomy, and mesh decision", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2, "ph": "None / enterotomy repaired, mesh plan changed to ..."})
+        ]
+      }
+    },
     "paeds-herniotomy": {
       base: "operative", title: "Paediatric herniotomy",
       prefill: {"procedure": "Inguinal herniotomy"},
@@ -573,6 +663,18 @@
           f("vasVessels", "Vas and testicular vessels identified and preserved", {"type": "text", "required": true, "aiFillable": false}),
           f("testisPosition", "Testis position at end of procedure", {"type": "text", "required": true, "aiFillable": false, "ph": "In scrotum, confirmed by palpation"}),
           f("apnoeaPlan", "Post-operative apnoea monitoring plan", {"type": "text", "aiFillable": true})
+        ]
+      }
+    },
+    "pilonidal-sinus-excision": {
+      base: "operative", title: "Pilonidal sinus excision",
+      prefill: {"procedure": "Excision of pilonidal sinus"},
+      extra: {
+        "Operative detail": [
+          f("pitsTracts", "Pits and lateral tracts found", {"type": "text", "required": true, "aiFillable": true, "ph": "4 midline pits, 1 lateral opening left side"}),
+          f("woundTechnique", "Wound technique", {"type": "text", "required": true, "aiFillable": true, "ph": "Laid open / Karydakis / cleft lift / Limberg"}),
+          f("flapTension", "Flap tension checked with tapes released", {"type": "text", "required": false, "aiFillable": false, "ph": "Yes, no tension"}),
+          f("dressingPlan", "Dressing and hair control plan", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "District nurse dressings alternate days; hair removal advised"})
         ]
       }
     },

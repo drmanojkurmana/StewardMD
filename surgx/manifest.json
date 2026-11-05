@@ -1108,6 +1108,18 @@
       "file": "steps/ortho.json",
       "title": "Shared orthopaedic and limb steps",
       "shared": true
+    },
+    {
+      "id": "hernia",
+      "file": "steps/hernia.json",
+      "title": "Shared hernia and hiatal steps",
+      "shared": true
+    },
+    {
+      "id": "anorectal",
+      "file": "steps/anorectal.json",
+      "title": "Shared anorectal and perianal steps",
+      "shared": true
     }
   ],
   "procedures": [
@@ -1652,6 +1664,124 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 60
+    },
+    {
+      "id": "lap-inguinal-hernia-repair",
+      "title": "Laparoscopic inguinal hernia repair",
+      "subtitle": "TEP and TAPP preperitoneal mesh repair",
+      "system": "abdominal wall",
+      "specialty": "general",
+      "file": "procedures/lap-inguinal-hernia-repair.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "hernia"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "open-ventral-hernia-repair",
+      "title": "Open umbilical and incisional hernia repair with mesh",
+      "subtitle": "Sublay (retromuscular) and preperitoneal mesh",
+      "system": "abdominal wall",
+      "specialty": "general",
+      "file": "procedures/open-ventral-hernia-repair.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "hernia"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "haemorrhoidectomy",
+      "title": "Excisional haemorrhoidectomy",
+      "subtitle": "Milligan-Morgan open technique",
+      "system": "anorectal",
+      "specialty": "general",
+      "file": "procedures/haemorrhoidectomy.json",
+      "stepPacks": [
+        "core",
+        "anorectal"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "lateral-internal-sphincterotomy",
+      "title": "Lateral internal sphincterotomy",
+      "subtitle": "Chronic anal fissure, tailored division",
+      "system": "anorectal",
+      "specialty": "general",
+      "file": "procedures/lateral-internal-sphincterotomy.json",
+      "stepPacks": [
+        "core",
+        "anorectal"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25
+    },
+    {
+      "id": "fistula-in-ano-surgery",
+      "title": "Fistula-in-ano: fistulotomy and seton",
+      "subtitle": "Find the internal opening, protect the sphincter",
+      "system": "anorectal",
+      "specialty": "general",
+      "file": "procedures/fistula-in-ano-surgery.json",
+      "stepPacks": [
+        "core",
+        "anorectal"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "pilonidal-sinus-excision",
+      "title": "Pilonidal sinus excision",
+      "subtitle": "Excision with open healing or off-midline closure",
+      "system": "skin and soft tissue",
+      "specialty": "general",
+      "file": "procedures/pilonidal-sinus-excision.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "anorectal"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 50
+    },
+    {
+      "id": "lap-nissen-fundoplication",
+      "title": "Laparoscopic Nissen fundoplication",
+      "subtitle": "Hiatal repair and 360 degree floppy wrap",
+      "system": "upper gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/lap-nissen-fundoplication.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "hernia"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "lap-sleeve-gastrectomy",
+      "title": "Laparoscopic sleeve gastrectomy",
+      "subtitle": "Bougie-calibrated vertical gastrectomy",
+      "system": "upper gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/lap-sleeve-gastrectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "hernia",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
     }
   ],
   "cases": [

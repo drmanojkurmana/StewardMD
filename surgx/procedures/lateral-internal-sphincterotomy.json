@@ -1,0 +1,248 @@
+{
+  "id": "lateral-internal-sphincterotomy",
+  "title": "Lateral internal sphincterotomy",
+  "subtitle": "Chronic anal fissure, tailored division",
+  "system": "anorectal",
+  "aliases": [
+    "LIS",
+    "sphincterotomy",
+    "fissure in ano surgery",
+    "anal fissure surgery"
+  ],
+  "estMinutes": 25,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "ascrs-fissure",
+      "org": "American Society of Colon and Rectal Surgeons (ASCRS)",
+      "title": "Clinical practice guideline for the management of anal fissures",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=American+Society+of+Colon+and+Rectal+Surgeons+clinical+practice+guideline+management+of+anal+fissures+Stewart+2017",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "cochrane-fissure-op",
+      "org": "Cochrane Database of Systematic Reviews",
+      "title": "Operative procedures for fissure in ano",
+      "year": 2011,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Nelson+operative+procedures+for+fissure+in+ano+Cochrane",
+      "accessed": "2026-11-05"
+    }
+  ],
+  "calcs": [
+    "wexner"
+  ],
+  "chapters": {
+    "indications": [
+      "Chronic anal fissure that has failed an adequate trial of medical treatment, such as topical nitrates or calcium channel blockers, with or without botulinum toxin.",
+      "Patients who prefer surgery after counselling about the higher healing rate and the risk to continence.",
+      "Recurrent fissure after healing with medical treatment."
+    ],
+    "contraindications": [
+      "Pre-existing faecal incontinence or significant sphincter injury: consider botulinum toxin or a sphincter-preserving procedure such as fissurectomy or advancement flap.",
+      "Atypical fissures (lateral, multiple, painless, very large): suspect Crohn's disease, tuberculosis, HIV, syphilis or malignancy, and investigate first.",
+      "Low-pressure fissures, for example postpartum, where hypertonia is absent.",
+      "Women with obstetric sphincter injury are at higher risk and need careful assessment, often with endoanal ultrasound."
+    ],
+    "preparation": [
+      "Confirm a typical chronic fissure: posterior or anterior midline, with chronic features such as a sentinel tag, hypertrophied papilla or visible sphincter fibres.",
+      "Document continence (for example a Wexner score), obstetric history and previous anal surgery.",
+      "Consider endoanal ultrasound or anorectal physiology in women with obstetric history or reduced continence.",
+      "Consent must include incontinence to flatus, mucus or stool (usually minor, occasionally persistent), bleeding and haematoma, perianal abscess or fistula, and failure to heal or recurrence."
+    ],
+    "positioning": [
+      "Lithotomy or prone jack-knife; record which.",
+      "Either general or regional anaesthesia, or local anaesthesia in selected patients."
+    ],
+    "equipment": [
+      "Anal retractor (for example Eisenhammer), proctoscope.",
+      "Scalpel with a narrow blade for the closed technique, fine scissors and diathermy for the open technique.",
+      "Local anaesthetic with adrenaline."
+    ],
+    "anatomy": [
+      "The internal anal sphincter is smooth muscle, the continuation of the circular muscle of the rectum, and provides most of resting anal pressure.",
+      "Its lower edge lies just above the anal verge and is palpable as the intersphincteric groove, with the subcutaneous external sphincter below and lateral to it.",
+      "The dentate line marks the upper limit of the anoderm and the usual upper limit of a fissure.",
+      "Most fissures lie in the posterior midline; anterior fissures are more common in women."
+    ],
+    "criticalSafety": [
+      "Make the sphincterotomy lateral, never in the posterior midline.",
+      "Divide only internal sphincter, and only to the tailored length.",
+      "Biopsy any atypical fissure before treating it as idiopathic.",
+      "Be conservative in women and in anyone with reduced continence."
+    ],
+    "structuresAtRisk": [
+      "Internal anal sphincter, excessive division",
+      "External anal sphincter",
+      "Anoderm",
+      "Inferior rectal vessels"
+    ],
+    "commonErrors": [
+      "Over-division of the internal sphincter.",
+      "Operating on an atypical fissure without biopsy.",
+      "Midline sphincterotomy through the fissure.",
+      "Failing to counsel about incontinence before surgery."
+    ],
+    "complications": [
+      "Incontinence to flatus, mucus or stool, most often minor.",
+      "Bleeding and intersphincteric haematoma.",
+      "Perianal abscess or fistula at the sphincterotomy site.",
+      "Non-healing or recurrence of the fissure."
+    ],
+    "postop": [
+      "Day case; check micturition before discharge.",
+      "Stool softeners and fibre, simple analgesia.",
+      "Warm water soaks for comfort.",
+      "Review in clinic for healing and continence; persistent or new soiling needs assessment."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Confirm the patient has had the incontinence risk explained in their own terms, and the baseline continence is recorded."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Routine antibiotic prophylaxis is not standard; follow local policy."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Lithotomy or prone jack-knife; record which."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.ano.local-block",
+      "emphasis": "Infiltrate lateral to the canal at the sphincterotomy site; avoid injecting into the fissure."
+    },
+    {
+      "ref": "step.ano.eua",
+      "emphasis": "Confirm the fissure is typical. A lateral, multiple, painless or large fissure needs biopsy and investigation."
+    },
+    {
+      "ref": "step.ano.sphincter-identify",
+      "emphasis": "Palpate the intersphincteric groove on the chosen lateral side and the hypertonic lower edge of the internal sphincter."
+    },
+    {
+      "ref": "step.ano.when-to-stop",
+      "emphasis": "An atypical fissure, unexpected sepsis or a thin sphincter: biopsy and choose a sphincter-preserving alternative."
+    },
+    {
+      "ref": "step.lis.approach"
+    },
+    {
+      "ref": "step.lis.division"
+    },
+    {
+      "ref": "step.lis.check"
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Direct pressure for a few minutes; an intersphincteric haematoma is the commonest early problem."
+    },
+    {
+      "ref": "step.ano.final-inspection"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.specimen",
+      "emphasis": "Send any fissure biopsy, sentinel tag or papilla labelled by position, or record that none was sent."
+    },
+    {
+      "ref": "step.core.skin-closure",
+      "emphasis": "Open technique: leave the small wound open or close it loosely with absorbable sutures. Closed technique: no closure needed."
+    },
+    {
+      "ref": "step.ano.wound-care"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.lis.approach": {
+      "id": "step.lis.approach",
+      "kind": "access",
+      "title": "Approach to the lateral internal sphincter: open or closed",
+      "why": "The sphincterotomy is placed laterally, away from the fissure, because a posterior midline division leaves a keyhole deformity and soiling. Open and closed techniques give similar healing; the choice is the surgeon's, but the plane must be seen or felt clearly.",
+      "how": [
+        "Choose the left or right lateral position, away from the fissure and away from any previous anal scar.",
+        "Open technique: make a short radial or circumferential incision over the intersphincteric groove and display the lower edge of the internal sphincter.",
+        "Closed technique: insert a narrow blade in the intersphincteric groove, parallel to the canal, with a finger in the canal to feel its tip, then turn the blade towards the internal sphincter.",
+        "Keep the anoderm intact over the internal sphincter in both techniques."
+      ],
+      "structuresAtRisk": [
+        "Anoderm, which may be buttonholed",
+        "External sphincter, if the plane is lateral to the groove"
+      ],
+      "pitfalls": [
+        "Posterior midline sphincterotomy.",
+        "Entering the external sphincter because the groove was not palpated first.",
+        "Perforating the anoderm with the blade in the closed technique."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.lis.division": {
+      "id": "step.lis.division",
+      "kind": "resection",
+      "critical": true,
+      "title": "Dividing the internal sphincter to a tailored length",
+      "why": "Healing depends on relieving the hypertonia, and continence depends on not dividing too much. Dividing the internal sphincter only to the length of the fissure or to the dentate line, whichever is shorter, balances the two.",
+      "how": [
+        "Divide the internal sphincter from its lower edge upwards, under vision or against the finger in the canal.",
+        "Limit the division to the length of the fissure or to the dentate line, whichever is shorter.",
+        "Divide only the internal sphincter; the external sphincter must remain intact.",
+        "Be more conservative in women, especially after vaginal delivery, and in anyone with reduced continence or a short anal canal."
+      ],
+      "structuresAtRisk": [
+        "Internal anal sphincter beyond the planned length",
+        "External anal sphincter",
+        "Inferior rectal vessels at the incision"
+      ],
+      "pitfalls": [
+        "Dividing to the dentate line routinely regardless of fissure length.",
+        "Dividing a bundle of external sphincter mistaken for internal sphincter.",
+        "Performing a standard sphincterotomy in a woman with an unassessed obstetric sphincter injury."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.lis.check": {
+      "id": "step.lis.check",
+      "kind": "checkpoint",
+      "title": "Confirming the division and dealing with the fissure",
+      "why": "A palpable gap confirms the hypertonic band is released. The fissure itself is then dealt with only as needed: a sentinel tag or hypertrophied papilla may be excised, but the fissure is not widened.",
+      "how": [
+        "Palpate the site: a gap in the internal sphincter should be felt where the tight band was.",
+        "Apply pressure for a few minutes to prevent an intersphincteric haematoma, particularly after a closed sphincterotomy.",
+        "Excise a large sentinel tag or hypertrophied anal papilla if present and symptomatic, conservatively.",
+        "Biopsy the fissure edge if it is atypical, chronic in an unusual site, or the patient is at risk of Crohn's disease, tuberculosis, HIV-related ulcer or malignancy."
+      ],
+      "structuresAtRisk": [
+        "Anoderm at the fissure"
+      ],
+      "pitfalls": [
+        "Not checking the division and leaving the hypertonia unaltered.",
+        "Excising the fissure widely, creating a larger wound.",
+        "Treating an atypical lateral or painless fissure without biopsy."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "educationalOnly": true
+}
