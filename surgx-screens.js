@@ -105,15 +105,20 @@
     var right = opts.right || "";
     // The eyebrow must not simply repeat the title. "Acute abdomen / Acute abdomen" is what
     // category-as-subtitle produces for a protocol whose name IS its category.
-    if (sub && String(sub).toLowerCase() === String(title).toLowerCase()) sub = "";
+    // Section numbers ("02", "03 · Endocrine") were a kicker above the title: the sequence carries no
+    // information a surgeon needs here (2026-11-05 anti-slop pass). Keep only the words, shown UNDER
+    // the title as a quiet subtitle, never as an eyebrow above it.
+    sub = String(sub || "").replace(/^\s*0\d\s*(·\s*)?/, "").trim();
+    if (sub) sub = sub.charAt(0).toUpperCase() + sub.slice(1);   // content data is often lower case ("endocrine")
+    if (sub && sub.toLowerCase() === String(title).toLowerCase()) sub = "";
     // titleless: the screen below already carries the wordmark. On HOME the hero sits directly under
     // this bar, so printing SURGX in both stacked the same title twice (reported from internal
     // testing: "Remove this....keep it as clinix"). The bar is kept for its close button; the overlay
     // and that button both still name SURGX for screen readers.
     return '<div class="sgx-head' + (opts.titleless ? " sgx-head-bare" : "") + '">' + lead +
       (opts.titleless ? '<div class="sgx-htitle"></div>' :
-      '<div class="sgx-htitle">' + (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") +
-      (opts.rawTitle || esc(title)) + "</div>") +
+      '<div class="sgx-htitle">' + (opts.rawTitle || esc(title)) +
+      (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") + "</div>") +
       right +
       (isHome ? "" : '<button class="sgx-hbtn sgx-close" data-sgx="close" aria-label="Close SURGX">' + ic("close") + "</button>") +
       "</div>";
@@ -248,7 +253,6 @@
         if (notesAccess === "verify_required") locked = '<span class="lock">Verify</span>';
       }
       return '<button class="sgx-sec" data-sgx="go" data-r="' + attr(s.act) + '"' + disabled + '>' +
-        '<span class="n">' + s.n + "</span>" +
         '<span class="tx"><span class="tt">' + esc(s.tt) + '</span><span class="sb">' + esc(s.sb) + "</span></span>" +
         locked +
         '<span class="go">' + ic("chevron_right") + "</span></button>";
@@ -303,7 +307,7 @@
     cc.loadCatalog().then(function (cat) {
       state.catalog = { specialties: (cat && cat.specialties) || [], categories: (cat && cat.categories) || [] };
       var h = routeHead();
-      if (h === "protocols" || h === "procedures" || h === "cases") render();
+      if (h === "protocols" || h === "procedures" || h === "cases" || h === "protocol") render();
     });
   }
   function specTitle(id) {
@@ -392,7 +396,7 @@
       html = rowsBySpec(state.protoIndex, protoRow);
     }
     return head("Protocols", "02") + wrap(
-      '<div class="sgx-banner info">' + ic("bolt") +
+      '<div class="sgx-banner info">' + ic("info") +
       " Red flags and immediate actions are always at the top. Interactive protocols recalculate as you tick findings.</div>" +
       browseBar(state.protoIndex, "protocols") + html);
   }
@@ -478,7 +482,8 @@
       "</div>";
     body += '<div class="sgx-disclaim">' + esc(p.disclaimer) + "</div>";
 
-    return head(p.title, "02 · " + (CAT_TITLES[p.category] || "Protocol")) + wrap(body);
+    ensureCatalog();
+    return head(p.title, "02 · " + (catTitle(p.category) || "Protocol")) + wrap(body);
   }
 
   function bandBody(p, b) {
@@ -644,7 +649,7 @@
     body += sourcesCard(p.sources);
     body += '<div class="sgx-disclaim">' + esc(p.disclaimer) + "</div>";
 
-    return head(p.title, "03 · " + esc(p.system || "Procedure")) + tabBar + wrap(body);
+    return head(p.title, "03 · " + (p.system || "Procedure")) + tabBar + wrap(body);
   }
 
   function renderStep(s) {

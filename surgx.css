@@ -9,7 +9,8 @@
  * applies. The CSS scope IS part of the feature gate.
  *
  * DESIGN INTENT: a surgical workspace, not a learning app and not a chatbot. That means one
- * domain hue (steel), hairline separation instead of shadow, a numbered vertical rail for the
+ * domain hue (theatre green: the scrub and drape green operating theatres use because it is the
+ * complement of blood red and rests the eye between glances at the field), hairline separation instead of shadow, a numbered vertical rail for the
  * protocol spine so the eye can jump straight to a band, and RED USED FOR EXACTLY ONE THING —
  * time-critical. Nothing bounces, nothing celebrates, there are no badges to collect.
  */
@@ -17,8 +18,17 @@
 #surgxRoot {
   /* Aliases with literal fallbacks so the module still renders if the design system is absent. */
   --sgx-primary: var(--rds-primary, #0F766E);
-  --sgx-steel: #1F4E5F;                       /* SURGX's domain hue: instrument steel */
-  --sgx-steel-soft: #ECF3F6;
+  /* Domain hue: theatre green (scrubs and drapes), the complement of blood red. Token keeps its
+     old name, --sgx-steel, so no rule had to change to adopt it. */
+  --sgx-steel: #0F5E55;
+  --sgx-steel-soft: #E3EFEB;
+  /* The room: a drape-green wash at the top of the screen fading to the sterile neutral the
+     content sits on. One gradient, behind everything, never on cards or text. */
+  --sgx-room-top: #D7E9E3;
+  --sgx-room-mid: #EAF3F0;
+  --sgx-room-end: var(--rds-bg, #F5F8F7);
+  --sgx-hero-a: #10625A;
+  --sgx-hero-b: #0A3F3A;
   --sgx-bg: var(--rds-bg, #F5F8F9);
   --sgx-surface: var(--rds-surface, #FFFFFF);
   --sgx-surface-2: var(--rds-surface-2, #EEF3F5);
@@ -45,11 +55,17 @@
   /* see the .mc-overlay lift rule at the end of this file - SURGX outranks the
      Calculators overlay, so a deep-linked calculator must be raised above it. */
   flex-direction: column;
-  background: var(--sgx-bg);
+  background: var(--sgx-room-end) linear-gradient(180deg, var(--sgx-room-top) 0, var(--sgx-room-mid) 220px, var(--sgx-room-end) 520px) no-repeat;
   color: var(--sgx-ink);
   font-family: var(--sgx-sans);
   -webkit-font-smoothing: antialiased;
+  caret-color: var(--sgx-steel);
+  accent-color: var(--sgx-steel);
 }
+/* Browser surfaces drawn from the palette, not left at the WebView's blue defaults. */
+#surgxRoot ::selection { background: rgba(15,94,85,.22); color: inherit; }
+#surgxRoot :focus-visible { outline: 2px solid var(--sgx-steel); outline-offset: 2px; }
+#surgxRoot .sgx-scroll { scrollbar-width: thin; scrollbar-color: rgba(15,94,85,.35) transparent; }
 #surgxRoot.sgx-open { display: flex; }
 html.sgx-lock, html.sgx-lock body { overflow: hidden; }
 
@@ -73,8 +89,8 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
   position: sticky; top: 0; z-index: 6;
   display: flex; align-items: center; gap: 8px;
   padding: calc(env(safe-area-inset-top, 0px) + 10px) 10px 10px;
-  background: var(--sgx-surface);
-  border-bottom: 1px solid var(--sgx-line);
+  background: var(--sgx-room-top);
+  border-bottom: 1px solid rgba(15,94,85,.14);
 }
 #surgxRoot .sgx-hbtn {
   flex: 0 0 auto; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
@@ -87,21 +103,21 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 #surgxRoot .sgx-hsub {
-  display: block; font: 600 11px/1.3 var(--sgx-sans); color: var(--sgx-faint);
-  letter-spacing: .04em; text-transform: uppercase;
+  display: block; margin-top: 1px; font: 500 12.5px/1.3 var(--sgx-sans); color: var(--sgx-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: 0;
 }
 
 /* ── hero (home only) ─────────────────────────────────────────────────────── */
 
 #surgxRoot .sgx-hero {
   padding: 22px 18px 20px;
-  background: linear-gradient(160deg, #17414F 0%, #0E2C36 100%);
+  background: linear-gradient(165deg, var(--sgx-hero-a) 0%, var(--sgx-hero-b) 100%);
   color: #fff;
 }
 #surgxRoot .sgx-hero-logo {
   display: block; width: 46px; height: auto; margin: 0 0 14px;
   /* The source PNG is black + alpha-masked, so this forces it white on the hero gradient. */
-  filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, .3));
+  filter: brightness(0) invert(1);
 }
 #surgxRoot .sgx-hero-mark { font: 800 30px/1 var(--sgx-sans); letter-spacing: -.02em; }
 #surgxRoot .sgx-hero-mark sup { font-size: .56em; font-weight: 700; top: -.55em; position: relative; margin-left: 1px; }
@@ -112,26 +128,23 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
 
 #surgxRoot .sgx-wrap { padding: 14px 14px 0; max-width: 780px; margin: 0 auto; width: 100%; box-sizing: border-box; }
 #surgxRoot .sgx-seclabel {
-  font: 700 10.5px/1.2 var(--sgx-sans); letter-spacing: .1em; text-transform: uppercase;
-  color: var(--sgx-faint); margin: 18px 2px 8px;
+  font: 650 13px/1.3 var(--sgx-sans); letter-spacing: 0;
+  color: var(--sgx-muted); margin: 22px 4px 8px;
 }
 #surgxRoot .sgx-sec {
   display: flex; align-items: center; gap: 13px; width: 100%; box-sizing: border-box;
   padding: 15px 15px; margin-bottom: 9px; text-align: left; cursor: pointer;
   background: var(--sgx-surface); border: 1px solid var(--sgx-line); border-radius: var(--sgx-r);
   color: var(--sgx-ink); font-family: inherit;
-  transition: border-color .16s var(--sgx-ease), transform .12s var(--sgx-ease);
+  transition: background-color .12s var(--sgx-ease);
 }
-#surgxRoot .sgx-sec:active { transform: scale(.995); border-color: var(--sgx-steel); }
-#surgxRoot .sgx-sec .n {
-  flex: 0 0 auto; width: 30px; font: 700 11px/1 var(--sgx-mono); color: var(--sgx-steel); letter-spacing: .06em;
-}
+#surgxRoot .sgx-sec:active { background: var(--sgx-surface-2); }
 #surgxRoot .sgx-sec .tx { flex: 1 1 auto; min-width: 0; }
 #surgxRoot .sgx-sec .tt { display: block; font: 700 15.5px/1.25 var(--sgx-sans); }
 #surgxRoot .sgx-sec .sb { display: block; margin-top: 3px; font: 500 12.5px/1.4 var(--sgx-sans); color: var(--sgx-muted); }
 #surgxRoot .sgx-sec .go { flex: 0 0 auto; color: var(--sgx-faint); }
 #surgxRoot .sgx-sec[disabled] { opacity: .55; cursor: default; }
-#surgxRoot .sgx-sec .lock { flex: 0 0 auto; font: 700 9.5px/1 var(--sgx-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--sgx-warn); background: var(--sgx-warn-bg); padding: 4px 7px; border-radius: 999px; }
+#surgxRoot .sgx-sec .lock { flex: 0 0 auto; font: 650 12.5px/1 var(--sgx-sans); letter-spacing: 0; color: var(--sgx-warn); background: var(--sgx-warn-bg); padding: 4px 7px; border-radius: 999px; }
 
 /* ── generic card / row ───────────────────────────────────────────────────── */
 
@@ -140,8 +153,8 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
   border-radius: var(--sgx-r); padding: 14px 15px; margin-bottom: 10px;
 }
 #surgxRoot .sgx-card h4 {
-  margin: 0 0 9px; font: 700 10.5px/1.2 var(--sgx-sans); letter-spacing: .09em;
-  text-transform: uppercase; color: var(--sgx-steel);
+  margin: 0 0 9px; font: 650 13px/1.3 var(--sgx-sans); letter-spacing: 0;
+  color: var(--sgx-steel);
 }
 #surgxRoot .sgx-row {
   display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box;
@@ -149,7 +162,16 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
   background: var(--sgx-surface); border: 1px solid var(--sgx-line); border-radius: var(--sgx-r-ctl);
   color: var(--sgx-ink); font-family: inherit;
 }
-#surgxRoot .sgx-row:active { border-color: var(--sgx-steel); }
+#surgxRoot .sgx-row:active { background: var(--sgx-surface-2); }
+/* Consecutive rows join into one grouped list with hairline separators, the iOS grouped-table
+   pattern, instead of a stack of floating cards. A WebView without :has() keeps separate cards. */
+#surgxRoot .sgx-row:has(+ .sgx-row), #surgxRoot .sgx-sec:has(+ .sgx-sec) {
+  margin-bottom: 0; border-bottom-color: transparent;
+  border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+}
+#surgxRoot .sgx-row + .sgx-row, #surgxRoot .sgx-sec + .sgx-sec {
+  border-top-left-radius: 0; border-top-right-radius: 0; border-top-color: var(--sgx-line);
+}
 #surgxRoot .sgx-row .tx { flex: 1 1 auto; min-width: 0; }
 #surgxRoot .sgx-row .tt { display: block; font: 650 14.5px/1.3 var(--sgx-sans); }
 #surgxRoot .sgx-row .sb { display: block; margin-top: 2px; font: 500 12px/1.4 var(--sgx-sans); color: var(--sgx-muted); }
@@ -166,7 +188,7 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
 #surgxRoot .sgx-chip.on { background: var(--sgx-steel); border-color: var(--sgx-steel); color: #fff; }
 #surgxRoot .sgx-chip.danger { border-color: rgba(180,35,50,.35); background: var(--sgx-bad-bg); color: var(--sgx-bad); }
 #surgxRoot .sgx-chip.danger.on { background: var(--sgx-bad); border-color: var(--sgx-bad); color: #fff; }
-#surgxRoot .sgx-chip.calc { border-color: rgba(31,78,95,.4); background: var(--sgx-steel-soft); color: var(--sgx-steel); }
+#surgxRoot .sgx-chip.calc { border-color: rgba(15,94,85,.4); background: var(--sgx-steel-soft); color: var(--sgx-steel); }
 #surgxRoot .sgx-chip[disabled] { opacity: .5; cursor: default; }
 /* Choice fields (WHO checklist, Clavien-Dindo): 44 px tap targets, wrap on a narrow phone. */
 #surgxRoot .sgx-choice { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 4px; }
@@ -181,8 +203,8 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
 /* ── the protocol spine ───────────────────────────────────────────────────── */
 
 #surgxRoot .sgx-headline {
-  border-left: 4px solid var(--sgx-steel); padding: 12px 14px; margin-bottom: 12px;
-  background: var(--sgx-surface); border-radius: 0 var(--sgx-r-ctl) var(--sgx-r-ctl) 0;
+  border: 1px solid rgba(15,94,85,.22); padding: 12px 14px; margin-bottom: 12px;
+  background: var(--sgx-steel-soft); border-radius: var(--sgx-r-ctl);
   font: 700 15px/1.4 var(--sgx-sans);
 }
 #surgxRoot .sgx-headline.emerg { border-left-color: var(--sgx-bad); background: var(--sgx-bad-bg); color: var(--sgx-bad); }
@@ -199,7 +221,7 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
 #surgxRoot .sgx-band.filled > .dot { border-color: var(--sgx-steel); background: var(--sgx-steel); }
 #surgxRoot .sgx-band.crit > .dot { border-color: var(--sgx-bad); background: var(--sgx-bad); }
 #surgxRoot .sgx-band > .bt {
-  font: 700 11px/1.2 var(--sgx-sans); letter-spacing: .1em; text-transform: uppercase;
+  font: 650 12.5px/1.2 var(--sgx-sans); letter-spacing: 0;
   color: var(--sgx-ink); padding-top: 4px;
 }
 #surgxRoot .sgx-band.crit > .bt { color: var(--sgx-bad); }
@@ -229,7 +251,7 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 
 /* antibiotic block inside RESUSCITATE */
 #surgxRoot .sgx-abx { margin-top: 8px; border-top: 1px dashed var(--sgx-line); padding-top: 8px; }
-#surgxRoot .sgx-abx .k { font: 700 11px/1.2 var(--sgx-sans); letter-spacing: .05em; text-transform: uppercase; color: var(--sgx-muted); margin: 8px 0 4px; }
+#surgxRoot .sgx-abx .k { font: 650 12.5px/1.2 var(--sgx-sans); letter-spacing: 0; color: var(--sgx-muted); margin: 8px 0 4px; }
 #surgxRoot .sgx-abx ul { margin: 0; padding-left: 17px; }
 #surgxRoot .sgx-abx li { font: 500 13px/1.5 var(--sgx-sans); margin: 3px 0; }
 #surgxRoot .sgx-abx li b { font-weight: 700; }
@@ -241,7 +263,7 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 #surgxRoot .sgx-ladder .r { display: flex; align-items: center; gap: 9px; font: 500 12.5px/1.35 var(--sgx-sans); color: var(--sgx-muted); }
 #surgxRoot .sgx-ladder .r .d { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; background: var(--sgx-line); }
 #surgxRoot .sgx-ladder .r.on { font-weight: 700; color: var(--sgx-ink); }
-#surgxRoot .sgx-ladder .r.on .d { background: var(--sgx-steel); box-shadow: 0 0 0 3px rgba(31,78,95,.16); }
+#surgxRoot .sgx-ladder .r.on .d { background: var(--sgx-steel); box-shadow: 0 0 0 3px rgba(15,94,85,.16); }
 
 /* ── banners ──────────────────────────────────────────────────────────────── */
 
@@ -249,10 +271,10 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
   font: 600 12px/1.5 var(--sgx-sans); border-radius: var(--sgx-r-ctl);
   padding: 10px 12px; margin-bottom: 12px; border: 1px solid transparent;
 }
-#surgxRoot .sgx-banner.info { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(31,78,95,.22); }
+#surgxRoot .sgx-banner.info { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(15,94,85,.22); }
 #surgxRoot .sgx-banner.warn { color: var(--sgx-warn); background: var(--sgx-warn-bg); border-color: rgba(146,98,10,.28); }
 #surgxRoot .sgx-banner.bad { color: var(--sgx-bad); background: var(--sgx-bad-bg); border-color: rgba(180,35,50,.3); }
-#surgxRoot .sgx-banner.sim { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(31,78,95,.22); letter-spacing: .04em; text-transform: uppercase; font-size: 10.5px; font-weight: 700; }
+#surgxRoot .sgx-banner.sim { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(15,94,85,.22); letter-spacing: 0; font-size: 12.5px; font-weight: 600; }
 
 /* The compressed meta strip: draft state, source currency and framing as small pills, so three
    full-width banners never push RED FLAGS below the fold on a 390px phone. */
@@ -264,7 +286,7 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 }
 #surgxRoot .sgx-pill .material-symbols-rounded { font-size: 14px; }
 #surgxRoot .sgx-pill.warn { color: var(--sgx-warn); background: var(--sgx-warn-bg); border-color: rgba(146,98,10,.32); }
-#surgxRoot .sgx-pill.live { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(31,78,95,.3); }
+#surgxRoot .sgx-pill.live { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(15,94,85,.3); }
 
 #surgxRoot .sgx-disclaim {
   font: 500 11.5px/1.6 var(--sgx-sans); color: var(--sgx-faint);
@@ -323,7 +345,7 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 /* PROVENANCE. The whole point of the Notes design: a clinician can see at a glance which words
    are theirs. Colour is doubled by a text label, never colour alone. */
 #surgxRoot .sgx-prov {
-  font: 700 9.5px/1 var(--sgx-sans); letter-spacing: .07em; text-transform: uppercase;
+  font: 650 12.5px/1 var(--sgx-sans); letter-spacing: 0;
   padding: 3px 6px; border-radius: 5px; margin-left: auto;
 }
 #surgxRoot .sgx-prov.clinician { color: var(--sgx-ok); background: var(--sgx-ok-bg); }
@@ -341,7 +363,7 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 
 #surgxRoot .sgx-notesec { margin-bottom: 6px; }
 #surgxRoot .sgx-notesec > .h {
-  font: 700 11px/1.2 var(--sgx-sans); letter-spacing: .1em; text-transform: uppercase;
+  font: 650 12.5px/1.2 var(--sgx-sans); letter-spacing: 0;
   color: var(--sgx-steel); margin: 18px 2px 10px; display: flex; align-items: center; gap: 8px;
 }
 #surgxRoot .sgx-notesec > .n { font: 500 11.5px/1.5 var(--sgx-sans); color: var(--sgx-faint); margin: -4px 2px 10px; }
@@ -402,8 +424,8 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 /* ── cases ────────────────────────────────────────────────────────────────── */
 
 #surgxRoot .sgx-stem {
-  background: var(--sgx-surface); border: 1px solid var(--sgx-line); border-left: 4px solid var(--sgx-steel);
-  border-radius: 0 var(--sgx-r) var(--sgx-r) 0; padding: 14px 15px; margin-bottom: 12px;
+  background: var(--sgx-surface); border: 1px solid var(--sgx-line);
+  border-radius: var(--sgx-r); padding: 14px 15px; margin-bottom: 12px;
   font: 500 14px/1.6 var(--sgx-sans);
 }
 #surgxRoot .sgx-vitals { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
@@ -427,7 +449,7 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
   background: var(--sgx-surface-2); border: 1px solid var(--sgx-line);
   font: 500 13px/1.6 var(--sgx-sans);
 }
-#surgxRoot .sgx-why .h { font: 700 10.5px/1.2 var(--sgx-sans); letter-spacing: .09em; text-transform: uppercase; color: var(--sgx-steel); margin-bottom: 6px; }
+#surgxRoot .sgx-why .h { font: 650 12.5px/1.2 var(--sgx-sans); letter-spacing: 0; color: var(--sgx-steel); margin-bottom: 6px; }
 #surgxRoot .sgx-why .miss { margin-top: 9px; color: var(--sgx-bad); font-weight: 600; }
 #surgxRoot .sgx-why .alt { margin-top: 9px; color: var(--sgx-muted); }
 #surgxRoot .sgx-progress { display: flex; gap: 4px; margin-bottom: 12px; }
@@ -441,7 +463,7 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 #surgxRoot .sgx-ev .s { margin-top: 6px; font: 500 13px/1.6 var(--sgx-sans); color: var(--sgx-muted); }
 #surgxRoot .sgx-ev .src { margin-top: 9px; font: 500 11.5px/1.5 var(--sgx-sans); color: var(--sgx-faint); }
 #surgxRoot .sgx-ev .src a { color: var(--sgx-steel); }
-#surgxRoot .sgx-ev .own { margin-top: 8px; font: 600 10px/1.3 var(--sgx-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--sgx-faint); }
+#surgxRoot .sgx-ev .own { margin-top: 8px; font: 600 12px/1.35 var(--sgx-sans); letter-spacing: 0; color: var(--sgx-faint); }
 
 #surgxRoot .sgx-search {
   width: 100%; box-sizing: border-box; border: 1px solid var(--sgx-line); border-radius: var(--sgx-r-ctl);
@@ -453,14 +475,18 @@ body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { co
 /* ── dark mode: the tokens already flip; only the hero needs a hand ───────── */
 
 body.dark #surgxRoot, body.v3-dark #surgxRoot {
-  --sgx-steel: #6FB4CC;
-  --sgx-steel-soft: rgba(111,180,204,.14);
+  --sgx-steel: #6CC3B3;
+  --sgx-steel-soft: rgba(108,195,179,.14);
+  --sgx-room-top: #0E2724;
+  --sgx-room-mid: #0B1A19;
+  --sgx-room-end: var(--rds-bg, #0A1012);
+  --sgx-hero-a: #0F4842;
+  --sgx-hero-b: #082A27;
 }
-body.dark #surgxRoot .sgx-hero, body.v3-dark #surgxRoot .sgx-hero {
-  background: linear-gradient(160deg, #12333E 0%, #0A1E26 100%);
-}
+body.dark #surgxRoot .sgx-head, body.v3-dark #surgxRoot .sgx-head { border-bottom-color: rgba(108,195,179,.16); }
+body.dark #surgxRoot ::selection, body.v3-dark #surgxRoot ::selection { background: rgba(108,195,179,.3); }
 body.dark #surgxRoot .sgx-tab.on, body.v3-dark #surgxRoot .sgx-tab.on {
-  background: var(--sgx-steel); border-color: var(--sgx-steel); color: #06222B;
+  background: var(--sgx-steel); border-color: var(--sgx-steel); color: #06231F;
 }
 
 /* ── responsive + accessibility ───────────────────────────────────────────── */
@@ -513,7 +539,7 @@ html.sgx-lock .abg { z-index: 1300; }
 #surgxRoot .sgx-bk-msg:not(:empty) { margin-top: 10px; font: 600 12.5px/1.45 var(--sgx-font, system-ui); }
 
 #surgxRoot .sgx-bk-form { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-#surgxRoot .sgx-bk-l { font: 700 11.5px/1 var(--sgx-font, system-ui); letter-spacing: .04em; text-transform: uppercase; opacity: .7; }
+#surgxRoot .sgx-bk-l { font: 650 12.5px/1 var(--sgx-font, system-ui); letter-spacing: 0; opacity: .7; }
 #surgxRoot .sgx-bk-in { width: 100%; box-sizing: border-box; min-height: 46px; padding: 11px 12px; border-radius: 10px;
   border: 1px solid var(--sgx-line, #d7dee3); background: var(--sgx-surface, #fff); color: var(--sgx-ink, #14202b);
   font: 600 14px var(--sgx-font, system-ui); }
@@ -536,7 +562,7 @@ html.sgx-lock .abg { z-index: 1300; }
 #surgxRoot .sgx-md p { margin: 0 0 9px; }
 #surgxRoot .sgx-md strong { font-weight: 700; color: var(--sgx-ink); }
 #surgxRoot .sgx-md-h {
-  font: 700 12px var(--sgx-sans); letter-spacing: .04em; text-transform: uppercase;
+  font: 650 13px var(--sgx-sans); letter-spacing: 0;
   color: var(--sgx-steel); margin: 14px 0 6px;
 }
 #surgxRoot .sgx-md-ul { margin: 0 0 9px; padding-left: 18px; }
@@ -546,7 +572,7 @@ html.sgx-lock .abg { z-index: 1300; }
   transition: border-color var(--sgx-dur, .2s) var(--sgx-ease, ease), box-shadow var(--sgx-dur, .2s) var(--sgx-ease, ease);
 }
 #surgxRoot .sgx-fld input:focus, #surgxRoot .sgx-fld textarea:focus {
-  outline: none; border-color: var(--sgx-steel); box-shadow: 0 0 0 3px rgba(31,78,95,.25);
+  outline: none; border-color: var(--sgx-steel); box-shadow: 0 0 0 3px rgba(15,94,85,.25);
 }
 
 /* iPad pass (2026-10-16): the "Ask the senior surgeon" box had no styling (171 px, monospace, browser border). */
