@@ -329,6 +329,18 @@
         ]
       }
     },
+    "adenoidectomy": {
+      base: "operative", title: "Adenoidectomy",
+      prefill: {"procedure": "Adenoidectomy"},
+      extra: {
+        "Operative detail": [
+          f("palatePalpated", "Palate palpated, no submucous cleft", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, palate normal / suspected cleft (action)", "help": "A physical check before removal."}),
+          f("adenoidTechnique", "Technique and view", {"type": "text", "required": true, "aiFillable": true, "ph": "Suction diathermy / coblation / curettage; mirror / endoscope"}),
+          f("inferiorFringe", "Tori and inferior fringe", {"type": "text", "required": false, "aiFillable": true, "ph": "Tori preserved; inferior fringe left / removed"}),
+          f("postnasalPackOut", "Postnasal pack and swabs removed, nasopharynx clear", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, counted out"})
+        ]
+      }
+    },
     "ankle-orif": {
       base: "operative", title: "Ankle ORIF",
       prefill: {"procedure": "Open reduction and internal fixation of ankle fracture"},
@@ -722,6 +734,33 @@
         ]
       }
     },
+    "mastoidectomy": {
+      base: "operative", title: "Mastoidectomy",
+      prefill: {"procedure": "Cortical mastoidectomy / modified radical (canal wall down) mastoidectomy"},
+      extra: {
+        "Operative detail": [
+          f("mastoidType", "Operation performed", {"type": "text", "required": true, "aiFillable": true, "ph": "Cortical (canal wall up) / modified radical (canal wall down); meatoplasty"}),
+          f("landmarksIdentified", "Landmarks identified", {"type": "text", "required": true, "aiFillable": false, "ph": "Tegmen, sigmoid sinus, antrum, lateral semicircular canal, facial nerve"}),
+          f("cholesteatomaExtent", "Disease extent and clearance", {"type": "textarea", "required": false, "aiFillable": true, "rows": 3, "ph": "Sites involved; residual left (where and why)"}),
+          f("ossicularFistula", "Ossicles, fistula and facial canal", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Incus eroded / intact; stapes present, mobile; fistula yes / no; facial canal dehiscence"}),
+          f("facialMonitoringUsed", "Facial nerve monitoring", {"type": "text", "required": false, "aiFillable": false, "ph": "Used, tap test confirmed / not used"}),
+          f("postopFacialGrade", "Facial function in recovery", {"type": "text", "required": true, "aiFillable": false, "ph": "House-Brackmann grade, time, examiner", "help": "Examined in recovery by a named clinician."})
+        ]
+      }
+    },
+    "microlaryngoscopy-biopsy": {
+      base: "operative", title: "Microlaryngoscopy and biopsy",
+      prefill: {"procedure": "Direct laryngoscopy and microlaryngoscopy with biopsy"},
+      extra: {
+        "Operative detail": [
+          f("ventilationTechnique", "Ventilation technique", {"type": "text", "required": true, "aiFillable": true, "ph": "Microlaryngoscopy tube size / jet / tubeless; laser precautions"}),
+          f("exposureNote", "Exposure and laryngoscope used", {"type": "text", "required": true, "aiFillable": true, "ph": "Easy / difficult; which laryngoscope; external pressure needed"}),
+          f("lesionMap", "Lesion map by subsite", {"type": "textarea", "required": true, "aiFillable": true, "rows": 3, "ph": "Supraglottis, glottis, anterior commissure, subglottis, hypopharynx; photographs taken"}),
+          f("dentitionAfter", "Dentition checked at end", {"type": "text", "required": true, "aiFillable": false, "ph": "Unchanged / injury (detail and patient informed)"}),
+          f("airwayDisposition", "Airway disposition", {"type": "text", "required": true, "aiFillable": false, "ph": "Extubated / kept intubated / tracheostomy; level of care"})
+        ]
+      }
+    },
     "modified-radical-mastectomy": {
       base: "operative", title: "Modified radical mastectomy",
       prefill: {"procedure": "Modified radical mastectomy with level I and II axillary clearance"},
@@ -846,6 +885,19 @@
         ]
       }
     },
+    "quinsy-drainage": {
+      base: "operative", title: "Quinsy drainage",
+      prefill: {"procedure": "Peritonsillar abscess aspiration and drainage under local anaesthetic"},
+      extra: {
+        "Operative detail": [
+          f("quinsySide", "Side and puncture sites", {"type": "text", "required": true, "aiFillable": true, "ph": "Left / right; superior pole; second site if used"}),
+          f("aspirationResult", "Aspiration result", {"type": "text", "required": true, "aiFillable": false, "ph": "Volume and character of pus / dry tap"}),
+          f("incisionMade", "Incision and drainage", {"type": "text", "required": true, "aiFillable": true, "ph": "Aspiration only / guarded incision and forceps drainage"}),
+          f("localAnaestheticUsed", "Local anaesthetic agent and dose", {"type": "text", "required": true, "aiFillable": false, "ph": "Agent, concentration, volume, with or without adrenaline"}),
+          f("trismusAfter", "Trismus and swallowing after drainage", {"type": "text", "required": false, "aiFillable": true, "ph": "Improved / unchanged; tolerating saliva"})
+        ]
+      }
+    },
     "right-hemicolectomy": {
       base: "operative", title: "Right hemicolectomy",
       prefill: {"procedure": "Laparoscopic / open right hemicolectomy"},
@@ -856,6 +908,19 @@
           f("mesocolicPlane", "Mesocolic plane and specimen integrity", {"type": "text", "aiFillable": false, "ph": "Intact mesocolic envelope / defects"}),
           f("anastomosis", "Anastomosis type", {"type": "text", "required": true, "aiFillable": false, "ph": "Stapled side-to-side / handsewn; intra- or extracorporeal; perfusion checked"}),
           f("extractionSite", "Extraction site and wound protection", {"type": "text", "aiFillable": false, "ph": "Site; wound protector used"})
+        ]
+      }
+    },
+    "septoplasty": {
+      base: "operative", title: "Septoplasty",
+      prefill: {"procedure": "Septoplasty"},
+      extra: {
+        "Operative detail": [
+          f("septalApproach", "Incision and approach", {"type": "text", "required": true, "aiFillable": true, "ph": "Killian / hemitransfixion, left / right; endoscopic or headlight"}),
+          f("resectionExtent", "Cartilage and bone resected", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Quadrilateral cartilage, perpendicular plate, vomer, maxillary crest spur"}),
+          f("lStrutPreserved", "Dorsal and caudal L-strut preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, about 1 cm dorsal and caudal / No (detail)", "help": "A physical judgement by the operating surgeon."}),
+          f("flapTears", "Flap tears and repair", {"type": "text", "required": true, "aiFillable": false, "ph": "None / unilateral / opposing tears repaired with cartilage interposition"}),
+          f("splintsPacksPlan", "Splints, packs or quilting, and removal plan", {"type": "text", "required": true, "aiFillable": false, "ph": "Quilting suture; silicone splints, remove day 7; no packs"})
         ]
       }
     },
@@ -890,6 +955,19 @@
         "Plan": [
           f("firstInspection", "Date of first graft inspection", {"type": "text", "required": true, "aiFillable": true}),
           f("nvStatusPostop", "Neurovascular status post-op", {"type": "textarea", "required": false, "aiFillable": false, "rows": 2, "ph": "Pulses, capillary refill, motor and sensory function distal to the operation", "help": "A physical examination you performed. Not dictated."})
+        ]
+      }
+    },
+    "superficial-parotidectomy": {
+      base: "operative", title: "Superficial parotidectomy",
+      prefill: {"procedure": "Superficial parotidectomy with facial nerve identification"},
+      extra: {
+        "Operative detail": [
+          f("facialTrunkIdentification", "Facial nerve trunk identification", {"type": "text", "required": true, "aiFillable": false, "ph": "Antegrade, landmarks used (tragal pointer, tympanomastoid suture, digastric); or retrograde from which branch"}),
+          f("nerveStimulation", "Stimulation at end", {"type": "text", "required": true, "aiFillable": false, "ph": "Trunk stimulated, all branches responded / which did not"}),
+          f("capsuleIntegrity", "Tumour capsule", {"type": "text", "required": true, "aiFillable": false, "ph": "Intact / breached with spillage (irrigated, reported)"}),
+          f("greatAuricularNerve", "Great auricular nerve", {"type": "text", "required": false, "aiFillable": true, "ph": "Posterior branch preserved / divided"}),
+          f("postopFacialGrade", "Facial function in recovery", {"type": "text", "required": true, "aiFillable": false, "ph": "House-Brackmann grade per branch, time, examiner"})
         ]
       }
     },
@@ -1009,6 +1087,19 @@
           f("pulleyFindings", "A1 pulley and tendon findings", {"type": "text", "required": true, "aiFillable": true, "ph": "Thickened A1, nodule, A2 preserved"}),
           f("activeCheckResult", "Active movement check", {"type": "text", "required": true, "aiFillable": false, "ph": "Full fist and extension without triggering, or not possible (anaesthesia)", "help": "Observed in theatre."}),
           f("tourniquetTime", "Tourniquet pressure and time (or none)", {"type": "text", "required": true, "aiFillable": false, "ph": "Pressure (mmHg) and minutes, or WALANT, no tourniquet", "help": "Read from the tourniquet machine; a physical record."})
+        ]
+      }
+    },
+    "tympanoplasty-underlay": {
+      base: "operative", title: "Tympanoplasty type 1 (underlay)",
+      prefill: {"procedure": "Tympanoplasty type 1 (underlay)"},
+      extra: {
+        "Operative detail": [
+          f("perforationDetail", "Perforation size and site", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. 40 percent, anteroinferior, margins visible after canalplasty"}),
+          f("ossicularChainStatus", "Ossicular chain", {"type": "text", "required": true, "aiFillable": false, "ph": "Intact and mobile, round window reflex present", "help": "A physical test by the surgeon."}),
+          f("graftDetail", "Graft material and position", {"type": "text", "required": true, "aiFillable": true, "ph": "Temporalis fascia, underlay, medial to malleus handle"}),
+          f("chordaTympani", "Chorda tympani", {"type": "text", "required": true, "aiFillable": false, "ph": "Preserved / stretched / divided"}),
+          f("postopFacialGrade", "Facial function in recovery", {"type": "text", "required": true, "aiFillable": false, "ph": "House-Brackmann grade, time, examiner"})
         ]
       }
     },
