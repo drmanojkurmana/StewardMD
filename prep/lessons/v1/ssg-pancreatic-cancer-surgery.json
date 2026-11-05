@@ -1,1 +1,201 @@
-{"gen":"AI","minutes":8,"module":"ssg-pancreatic-cancer-surgery","quiz":[],"steps":[{"say":"Whether a pancreatic cancer can be removed is decided by angles on the scan, not by size alone. Clean arteries with limited vein touching mean go, a little arterial hugging means maybe after chemotherapy, and a wrapped coeliac or superior mesenteric artery means never. Irregular vessel walls are counted as invasion even without full encasement.","tx":"**Borderline resectable** (tumour touching but not encasing vessels) keeps arteries clean with vein involvement under **180** degrees and smooth walls, while limited **arterial abutment** (tumour hugging the artery) under **180** degrees still allows resection after chemotherapy. Encasement over **180** degrees of celiac or superior mesenteric artery is unresectable.","vis":{"cols":["Vessel contact","Verdict"],"kind":"table","rows":[["No arterial contact, vein under 180","Resectable"],["Limited arterial hug under 180","Borderline: chemo first"],["Encasement over 180","Unresectable"]]}},{"say":"The Whipple removes the head of the pancreas together with everything stuck to it, the duodenum, the end of the bile duct and the first loop of jejunum. Reconstruction follows the Child order of joins. When the disease is benign, the stomach outlet is spared to keep emptying normal, while cancers classically lose the antrum too.","tx":"**Pancreaticoduodenectomy** (Whipple: removing pancreatic head with duodenum, bile duct end and first jejunal loop) uses **Child reconstruction** (pancreas joined first, then bile duct, then stomach in sequence), and the pylorus-preserving variant suits benign and premalignant disease best. Classic antrectomy suits cancers needing wider nodal clearance.","vis":{"alt":"Double duct sign from pancreatic head mass with Whipple procedure diagram.","caption":"Double duct sign marks head tumours suited to pancreaticoduodenectomy. Credit: StewardMD.","kind":"image","src":"v1/kb/media/gallbladder-biliary-pancreatitis-pancreatic-tumours-fig1.webp"}},{"say":"Cancers of the body and tail are removed from left to right with the spleen, sweeping the fatty envelope behind the kidney. Taking Gerota fascia with the specimen clears the posterior margin where these tumours love to linger. Node harvest around the coeliac trunk is the completion of the cancer operation. Adrenal involvement is the signal to switch the plane forward.","tx":"**RAMPS** (radical antegrade modular pancreatosplenectomy: dissecting left to right through body-tail tumours) removes **Gerota fascia** (renal envelope behind the pancreas) en bloc with **N1** nodes for body-tail cancers, securing posterior margin clearance. Anterior RAMPS fits tumours standing clear of the adrenal gland.","vis":{"cols":["Feature","RAMPS detail"],"kind":"table","rows":[["Direction","Antegrade, left to right"],["Envelope taken","Gerota fascia plus N1 nodes"],["Margin gained","Posterior clearance"]]}},{"say":"Chemotherapy around surgery has transformed results, and six months of modified FOLFIRINOX after resection is now the standard for fit patients. Borderline tumours get the same drugs first, with falling CA 19-9 marking conversion to operability. Frail patients who cannot tolerate four drugs are given gemcitabine with capecitabine instead.","tx":"Modified **FOLFIRINOX** (four-drug combination) given for **6** months stands as the **adjuvant** (postoperative chemotherapy) benchmark after resection following PRODIGE 24, with preoperative FOLFIRINOX converting borderline disease as falling CA 19-9 marks operability. Gemcitabine-capecitabine fits patients too frail for four drugs.","vis":{"cols":["Setting","Regimen"],"kind":"table","rows":[["Adjuvant, fit patient","Modified FOLFIRINOX for 6 months"],["Borderline disease","Neoadjuvant FOLFIRINOX, watch CA 19-9"],["Unfit patient","Gemcitabine plus capecitabine"]]}},{"say":"A leak of pancreatic juice is defined by numbers, not by looking at the drain. Amylase more than three times blood levels from the third day onwards means a fistula, graded from harmless biochemical leaks to leaks with organ failure. Most settle with drainage and antibiotics with somatostatin analogues, while persistent ones need the duct stented from inside.","tx":"Postoperative **pancreatic fistula** (leaking pancreatic juice) means **drain amylase** (drain fluid enzyme level) above **3** times serum beyond day **3**, staged ISGPS A biochemical through C with organ failure, and managed by drainage, antibiotics and somatostatin analogues. Persistent fistula needs endoscopic duct stenting.","vis":{"edges":[["s","g"],["g","a"],["g","b"],["g","c"]],"kind":"flow","nodes":[{"id":"s","label":"Amylase over 3 times serum from day 3"},{"id":"g","label":"Grade A, B or C"},{"id":"a","label":"A: biochemical, feeds early"},{"id":"b","label":"B: drains plus antibiotics"},{"id":"c","label":"C: organ failure, stent"}]}},{"say":"A stomach that will not wake up after a Whipple is graded just like a leak. Needing the nose tube past day three, or having it put back before two weeks, marks delayed emptying. Prokinetics coax it along while the join swelling settles. Reoperations preserve the pylorus whenever possible to prevent recurrence.","tx":"**Delayed gastric emptying** (stomach failing to wake after resection) with a nose tube still needed past day **3** or put back before day **14** earns ISGPS grade A to C and is managed with **prokinetics** (motility drugs) with pyloric preservation techniques at reoperation. Erythromycin bridging covers the interim weeks.","vis":{"cols":["Tube course","Grade and plan"],"kind":"table","rows":[["Tube past day 3","Delayed emptying: prokinetics"],["Reinsertion by day 14","Higher grade, longer wait"],["Pylorus handling","Preserve at reoperation"]]}},{"say":"Every pancreatic cancer now gets its genes read, because the letters change the drugs. BRCA one, two and PALB faults are predictive of platinum response with olaparib maintenance afterwards. KRAS, mismatch repair and NTRK testing of the tumour guides trials and immunotherapy. Positive inherited results send the whole family for counselling.","tx":"Germline **BRCA** (inherited repair-gene faults including BRCA1, BRCA2 and PALB2) testing guides platinum sensitivity and **olaparib** (PARP inhibitor) maintenance per POLO, and all patients get somatic **KRAS** (common driver mutation), mismatch repair and NTRK profiling. Cascade testing follows positive germline results.","vis":{"kind":"compare","left":{"points":["BRCA or PALB2 fault","Platinum sensitive, olaparib maintenance","Family cascade testing"],"title":"Germline positive"},"right":{"points":["KRAS driver found","Trial matching by profile","Immunotherapy when MMR lost"],"title":"Somatic profile"}}},{"say":"When the tumour cannot be removed, the surgeon's job turns to keeping bile, food and comfort flowing. A metal stent through the blockage is open for six to ten months, far longer than plastic. Burning the coeliac nerves eases the gnawing back pain, while a blocked duodenum is stented or bypassed. Early palliative care runs alongside.","tx":"Inoperable head tumours receive endoscopic metal biliary stenting lasting **6 to 10** months plus **celiac plexus neurolysis** (nerve-block injection for back pain), while **duodenal stenting** (enteral metal stent) or gastrojejunostomy relieves outlet blockage. Early palliative care improves both comfort and survival.","vis":{"alt":"Torso diagram showing classic and late-stage clinical signs of pancreatic cancer.","caption":"Late signs mark unresectable disease needing stenting and pain control. Credit: StewardMD.","kind":"image","src":"v1/kb/media/pancreatic-cancer-fig1.webp"}}],"subject":"ss-surgical-gastroenterology","title":"Pancreatic Cancer Surgery","v":1}
+{
+  "gen": "AI",
+  "minutes": 8,
+  "module": "ssg-pancreatic-cancer-surgery",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Whether a pancreatic cancer can be removed is decided by angles on the scan, not by size alone. Clean arteries with limited vein touching mean go, a little arterial hugging means maybe after chemotherapy, and a wrapped coeliac or superior mesenteric artery means never. Irregular vessel walls are counted as invasion even without full encasement.",
+      "tx": "**Borderline resectable** (tumour touching but not encasing vessels) means limited **arterial abutment** (tumour hugging the artery) under **180** degrees or vein involvement over **180** degrees with irregular walls, still allowing resection after chemotherapy, while clean arteries with vein contact under **180** degrees and smooth walls are resectable upfront. Encasement over **180** degrees of celiac or superior mesenteric artery is unresectable.",
+      "vis": {
+        "cols": [
+          "Vessel contact",
+          "Verdict"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "No arterial contact, vein under 180",
+            "Resectable"
+          ],
+          [
+            "Limited arterial hug under 180",
+            "Borderline: chemo first"
+          ],
+          [
+            "Encasement over 180",
+            "Unresectable"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Whipple removes the head of the pancreas together with everything stuck to it, the duodenum, the end of the bile duct and the first loop of jejunum. Reconstruction follows the Child order of joins. When the disease is benign, the stomach outlet is spared to keep emptying normal, while cancers classically lose the antrum too.",
+      "tx": "**Pancreaticoduodenectomy** (Whipple: removing pancreatic head with duodenum, bile duct end and first jejunal loop) uses **Child reconstruction** (pancreas joined first, then bile duct, then stomach in sequence), and the pylorus-preserving variant suits benign and premalignant disease best. Classic antrectomy suits cancers needing wider nodal clearance.",
+      "vis": {
+        "alt": "Double duct sign from pancreatic head mass with Whipple procedure diagram.",
+        "caption": "Double duct sign marks head tumours suited to pancreaticoduodenectomy. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/gallbladder-biliary-pancreatitis-pancreatic-tumours-fig1.webp"
+      }
+    },
+    {
+      "say": "Cancers of the body and tail are removed from left to right with the spleen, sweeping the fatty envelope behind the kidney. Taking Gerota fascia with the specimen clears the posterior margin where these tumours love to linger. Node harvest around the coeliac trunk is the completion of the cancer operation. Adrenal or posterior involvement is the signal to switch to the posterior plane, taking the adrenal.",
+      "tx": "**RAMPS** (radical antegrade modular pancreatosplenectomy: dissecting left to right through body-tail tumours) removes **Gerota fascia** (renal envelope behind the pancreas) en bloc with **N1** nodes for body-tail cancers, securing posterior margin clearance. Anterior RAMPS fits tumours standing clear of the adrenal gland.",
+      "vis": {
+        "cols": [
+          "Feature",
+          "RAMPS detail"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Direction",
+            "Antegrade, left to right"
+          ],
+          [
+            "Envelope taken",
+            "Gerota fascia plus N1 nodes"
+          ],
+          [
+            "Margin gained",
+            "Posterior clearance"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Chemotherapy around surgery has transformed results, and six months of modified FOLFIRINOX after resection is now the standard for fit patients. Borderline tumours get the same drugs first, with falling CA 19-9 marking conversion to operability. Frail patients who cannot tolerate four drugs are given gemcitabine with capecitabine instead.",
+      "tx": "Modified **FOLFIRINOX** (four-drug combination) given for **6** months stands as the **adjuvant** (postoperative chemotherapy) benchmark after resection following PRODIGE 24, with preoperative FOLFIRINOX converting borderline disease as falling CA 19-9 marks operability. Gemcitabine-capecitabine fits patients too frail for four drugs.",
+      "vis": {
+        "cols": [
+          "Setting",
+          "Regimen"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Adjuvant, fit patient",
+            "Modified FOLFIRINOX for 6 months"
+          ],
+          [
+            "Borderline disease",
+            "Neoadjuvant FOLFIRINOX, watch CA 19-9"
+          ],
+          [
+            "Unfit patient",
+            "Gemcitabine plus capecitabine"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A leak of pancreatic juice is defined by numbers, not by looking at the drain. Amylase more than three times blood levels from the third day onwards means a fistula, graded from harmless biochemical leaks to leaks with organ failure. Most settle with drainage and antibiotics with somatostatin analogues, while persistent ones need the duct stented from inside.",
+      "tx": "Postoperative **pancreatic fistula** (leaking pancreatic juice) means **drain amylase** (drain fluid enzyme level) above **3** times serum beyond day **3**, staged ISGPS A biochemical through C with organ failure, and managed by drainage, antibiotics and somatostatin analogues. Persistent fistula needs endoscopic duct stenting.",
+      "vis": {
+        "edges": [
+          [
+            "s",
+            "g"
+          ],
+          [
+            "g",
+            "a"
+          ],
+          [
+            "g",
+            "b"
+          ],
+          [
+            "g",
+            "c"
+          ]
+        ],
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s",
+            "label": "Amylase over 3 times serum from day 3"
+          },
+          {
+            "id": "g",
+            "label": "Grade A, B or C"
+          },
+          {
+            "id": "a",
+            "label": "A: biochemical, feeds early"
+          },
+          {
+            "id": "b",
+            "label": "B: drains plus antibiotics"
+          },
+          {
+            "id": "c",
+            "label": "C: organ failure, stent"
+          }
+        ]
+      }
+    },
+    {
+      "say": "A stomach that will not wake up after a Whipple is graded just like a leak. Needing the nose tube past day three, or having it put back before two weeks, marks delayed emptying. Prokinetics coax it along while the join swelling settles. Reoperations preserve the pylorus whenever possible to prevent recurrence.",
+      "tx": "**Delayed gastric emptying** (stomach failing to wake after resection) with a nose tube still needed past day **3** or put back before day **14** earns ISGPS grade A to C and is managed with **prokinetics** (motility drugs) with pyloric preservation techniques at reoperation. Erythromycin bridging covers the interim weeks.",
+      "vis": {
+        "cols": [
+          "Tube course",
+          "Grade and plan"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Tube past day 3",
+            "Delayed emptying: prokinetics"
+          ],
+          [
+            "Reinsertion by day 14",
+            "Higher grade, longer wait"
+          ],
+          [
+            "Pylorus handling",
+            "Preserve at reoperation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Every pancreatic cancer now gets its genes read, because the letters change the drugs. BRCA one, two and PALB faults are predictive of platinum response with olaparib maintenance afterwards. KRAS, mismatch repair and NTRK testing of the tumour guides trials and immunotherapy. Positive inherited results send the whole family for counselling.",
+      "tx": "Germline **BRCA** (inherited repair-gene faults including BRCA1, BRCA2 and PALB2) testing guides platinum sensitivity and **olaparib** (PARP inhibitor) maintenance per POLO, and all patients get somatic **KRAS** (common driver mutation), mismatch repair and NTRK profiling. Cascade testing follows positive germline results.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "BRCA or PALB2 fault",
+            "Platinum sensitive, olaparib maintenance",
+            "Family cascade testing"
+          ],
+          "title": "Germline positive"
+        },
+        "right": {
+          "points": [
+            "KRAS driver found",
+            "Trial matching by profile",
+            "Immunotherapy when MMR lost"
+          ],
+          "title": "Somatic profile"
+        }
+      }
+    },
+    {
+      "say": "When the tumour cannot be removed, the surgeon's job turns to keeping bile, food and comfort flowing. A metal stent through the blockage is open for six to ten months, far longer than plastic. Burning the coeliac nerves eases the gnawing back pain, while a blocked duodenum is stented or bypassed. Early palliative care runs alongside.",
+      "tx": "Inoperable head tumours receive endoscopic metal biliary stenting lasting **6 to 10** months plus **celiac plexus neurolysis** (nerve-block injection for back pain), while **duodenal stenting** (enteral metal stent) or gastrojejunostomy relieves outlet blockage. Early palliative care improves both comfort and survival.",
+      "vis": {
+        "alt": "Torso diagram showing classic and late-stage clinical signs of pancreatic cancer.",
+        "caption": "Late signs mark unresectable disease needing stenting and pain control. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/pancreatic-cancer-fig1.webp"
+      }
+    }
+  ],
+  "subject": "ss-surgical-gastroenterology",
+  "title": "Pancreatic Cancer Surgery",
+  "v": 1
+}
