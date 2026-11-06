@@ -3,7 +3,7 @@
  "module": "med-diabetes-complications",
  "subject": "medicine",
  "title": "Management of Diabetic Ketoacidosis",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "Diabetic ketoacidosis requires three criteria for diagnosis: hyperglycaemia or known diabetes, positive blood **beta-hydroxybutyrate** or urine ketones, and metabolic acidosis with low pH or **bicarbonate**. Clinical features include polyuria, vomiting, and Kussmaul breathing. Always investigate for common precipitants like infection, missed insulin, or recent SGLT2 inhibitor use.",
@@ -160,6 +160,17 @@
       "High risk of delay"
      ]
     }
+   }
+  },
+  {
+   "tx": "The diagram traces how **SGLT2 inhibitors** cause ketoacidosis despite near normal glucose. Blockade in the proximal tubule spills glucose into urine, so blood sugar looks reassuring. The resulting fall in insulin relative to glucagon drives **lipolysis** in fat, releasing fatty acids that the liver turns into ketones through **ketogenesis**. The exam trap is **euglycaemic DKA**: always check ketones in any unwell patient taking these drugs, even when glucose is normal.",
+   "say": "This image shows why SGLT2 inhibitors can cause ketoacidosis with normal glucose. The drug makes the kidney spill glucose into urine, so blood sugar looks fine. Low insulin relative to glucagon then drives fat breakdown, and the liver converts the released fatty acids into ketones. Because glucose is normal, the diagnosis is easy to miss. Always test for ketones in any unwell patient taking these drugs, and remember that insulin plus dextrose treatment is needed to clear the acidosis without causing low blood sugar.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-diabetes-complications-gen1.webp",
+    "alt": "A three panel diagram links kidney glucose loss, fat breakdown and liver ketone production leading to ketoacidosis with near normal glucose.",
+    "caption": "SGLT2 driven ketoacidosis from glucose loss to ketone buildup, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],
