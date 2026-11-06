@@ -3,7 +3,7 @@
  "module": "phm-absorption-routes",
  "subject": "pharmacology",
  "title": "Routes of administration and drug absorption",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "Routes of administration decide how fast and how completely a drug reaches the circulation. **Bioavailability** is the fraction of the administered dose that reaches the systemic circulation unchanged. An intravenous dose has a bioavailability of one, because it skips absorption entirely. Oral drugs may fall short for two reasons: incomplete absorption across the gut wall, and **first-pass metabolism** in the intestinal wall and liver.",
@@ -99,6 +99,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The diagram follows **unionised aspirin** as it leaves the acidic lumen and diffuses through the cell membrane, then splits into charged particles inside the cell. The resulting **ionised aspirin** cannot cross back, so it stays trapped and accumulates, adding **mucosal injury** to the known gastric toxicity. This one way shift, called **ion trapping**, also parks acidic drugs in alkaline spaces and basic drugs in acidic ones.",
+   "say": "Unionised aspirin diffuses from the acidic stomach lumen through the cell membrane, then ionises inside the mucosal cell. The ionised form cannot diffuse back, so it stays trapped and injures the mucosa. This ion trapping also explains why acidic drugs collect in alkaline spaces and basic drugs in acidic ones.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-absorption-routes-gen1.webp",
+    "alt": "Diagram of aspirin diffusing through the mucosal membrane then ionising and staying trapped inside the cell.",
+    "caption": "Diagram of aspirin ion trapping inside the gastric mucosal cell, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

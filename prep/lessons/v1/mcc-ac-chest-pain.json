@@ -3,7 +3,7 @@
  "module": "mcc-ac-chest-pain",
  "subject": "mcc-acute-care",
  "title": "Chest pain assessment: a structured approach in acute care",
- "minutes": 8,
+ "minutes": 9,
  "steps": [
   {
    "tx": "Chest pain has many causes, and the first task is to separate life-threatening conditions from benign ones. Ask about the **character**, **site**, **radiation**, **timing** and **exertional pattern** of the pain. Check vital signs in both arms, examine the heart and lungs, and record a 12-lead ECG within ten minutes. A normal ECG does not exclude acute coronary syndrome, so serial testing matters.",
@@ -107,6 +107,17 @@
       "Antiplatelet and reperfusion"
      ]
     }
+   }
+  },
+  {
+   "tx": "The ECG shows diffuse concave **ST elevation** with **PR depression** and reciprocal PR elevation in lead aVR. This pattern favours pericarditis over infarction, especially with sharp pleuritic pain that eases leaning forward and a pericardial friction rub. A normal **troponin** supports pure pericarditis, while a raised value suggests muscle involvement. First line care is an NSAID with colchicine to lower recurrence.",
+   "say": "Read the ECG from limb to chest leads. The ST segments rise in a broad concave pattern across many territories while the PR segments dip, with lead aVR showing the mirror image. That combination points to inflammation of the pericardium rather than a blocked coronary artery. Check troponin to confirm the muscle is spared, listen for a friction rub, and treat with an anti inflammatory plus colchicine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mcc-ac-chest-pain-gen1.webp",
+    "alt": "Twelve lead ECG showing diffuse concave ST elevation with PR depression and reciprocal change in lead aVR.",
+    "caption": "ECG of acute pericarditis showing diffuse ST elevation with PR depression, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

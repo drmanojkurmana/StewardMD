@@ -3,7 +3,7 @@
  "module": "ped-dose-calculation",
  "subject": "paediatrics",
  "title": "Paediatric dose calculation: weigh, match, cap, verify",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
    "tx": "Every calculation starts with a **measured weight** in kilograms, recorded with its unit and date. Guessed weights and adult habits misdose the smallest patients most. Age only dosing survives only where the formulary explicitly allows it. The scale, not the eye, opens paediatric prescribing, and a changed weight reopens every standing dose at review.",
@@ -87,6 +87,17 @@
       "Units abbreviated"
      ]
     }
+   }
+  },
+  {
+   "tx": "The photo shows gloved hands holding a labelled **oral syringe** with the plunger exactly aligned to the mark, modelling careful measurement. The label uses a **leading zero** before the decimal point and states **full volume units** in full, the safe writing habit that prevents tenfold error. Small volumes demand an oral syringe, never a spoon, plus a visible calculation and **teach back** with parents before leaving.",
+   "say": "Check the labelled oral syringe with the plunger exactly on the mark, the leading zero before the decimal point, and the volume units written in full. Measure small volumes with an oral syringe, keep the calculation visible, and confirm parent understanding with teach back before they leave.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-dose-calculation-gen1.webp",
+    "alt": "Photograph of gloved hands holding a labelled oral syringe with the plunger aligned to the mark.",
+    "caption": "Photo of an oral syringe showing safe labelling with leading zero and full units, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

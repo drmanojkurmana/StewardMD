@@ -2,7 +2,7 @@
  "module": "bio-enzymes-kinetics",
  "subject": "biochemistry",
  "title": "Enzyme kinetics: Michaelis-Menten mechanics, Lineweaver-Burk analysis and reversible inhibition",
- "minutes": 6,
+ "minutes": 5,
  "refs": [
   "Harper's Illustrated Biochemistry 32nd ed",
   "Medical Biochemistry 5th ed"
@@ -70,6 +70,17 @@
       "Sequestered in nucleus by regulatory protein"
      ]
     }
+   }
+  },
+  {
+   "tx": "The graph plots velocity against glucose with a steep muscle curve and a gradual liver curve. Muscle **hexokinase** shows low **Km** and traps glucose even when fasting levels run low, but its product slows it by feedback. Liver **glucokinase** shows high Km and stays quiet until meals raise glucose, then clears the load without product block. The split matches tissue roles in scarcity versus plenty.",
+   "say": "Read the blue muscle curve as high affinity trapping that saturates early, so fasting glucose still gets phosphorylated, with product feedback acting as a brake. Read the green liver curve as a low affinity sensor that wakes after meals and lacks that product brake. Assign muscle trapping to supply security and liver sensing to meal handling.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-enzymes-kinetics-gen1.webp",
+    "alt": "A velocity graph contrasts steep low Km muscle hexokinase with gradual high Km liver glucokinase beside cell art.",
+    "caption": "Muscle trapping versus liver sensing across rising glucose Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

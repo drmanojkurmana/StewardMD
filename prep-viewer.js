@@ -1,7 +1,8 @@
 /* PrepNucleus image viewer: ONE full-screen viewer for every enlarged image (question and explanation images, lesson
    figures, deck images). window.PREP_VIEWER. ES5.
    API (kept small on purpose):
-     PREP_VIEWER.open({ src, alt, caption, from, onClose }) -> true. from: the element to give focus back to on close.
+     PREP_VIEWER.open({ src, alt, caption, from, onClose, onReport }) -> true. from: the element to give focus back to on close.
+       onReport: when given, a "Report" button sits in the top bar; a tap closes the viewer and calls it (image-zoom.js).
        onClose: called once after it closes (any way: button, Escape, back, swipe down).
      PREP_VIEWER.close() -> true when a viewer was open (prep.js back() calls it first, so Escape and Android back close it).
      PREP_VIEWER.isOpen() -> boolean.
@@ -60,13 +61,16 @@
     el.className = "pv"; el.tabIndex = -1; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", o.caption ? "Image: " + o.caption : "Image viewer");
     el.innerHTML = '<div class="pv-scrim" aria-hidden="true"></div>' +
       '<div class="pv-stage"><img class="pv-img" src="' + esc(o.src) + '" alt="' + esc(o.alt || o.caption || "Image") + '" draggable="false" decoding="async"></div>' +
-      '<div class="pv-top"><p class="pv-cap">' + esc(o.caption || "") + '</p><button type="button" class="pv-b pv-x" data-pv="close" aria-label="Close image">' + svg("close") + "</button></div>" +
+      '<div class="pv-top"><p class="pv-cap">' + esc(o.caption || "") + '</p>' +
+        (typeof o.onReport === "function" ? '<button type="button" class="pv-b pv-rep" data-pv="report" aria-label="Report this image">Report</button>' : "") +
+        '<button type="button" class="pv-b pv-x" data-pv="close" aria-label="Close image">' + svg("close") + "</button></div>" +
       '<div class="pv-bot"><div class="pv-zb" role="group" aria-label="Zoom"><button type="button" class="pv-b" data-pv="out" aria-label="Zoom out">' + svg("minus") + '</button><button type="button" class="pv-b pv-pct" data-pv="fit" aria-label="Zoom 100%. Fit to screen"><span>100%</span></button><button type="button" class="pv-b" data-pv="in" aria-label="Zoom in">' + svg("plus") + "</button></div>" +
       '<p class="pv-hint">Pinch or double tap to zoom. Swipe down to close.</p></div>';
     host.appendChild(el);
     V = { el: el, stage: el.querySelector(".pv-stage"), img: el.querySelector(".pv-img"), pct: el.querySelector(".pv-pct span"), s: 1, t: { x: 0, y: 0 }, dy: 0, opts: o, from: o.from || D.activeElement, pts: {}, g: null, tap: null };
     if (V.img) { var pvImg = V.img; pvImg.addEventListener("error", function () { if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.resignImg) G.PREP_BANK_CLIENT.resignImg(pvImg); }); }
     bind(V);
+    if (G.SMD_WM && V.img) G.SMD_WM.follow(V.img);   // StewardMD watermark (image-watermark.js), zooms with the image
     // Arrive: a fade with a small scale-up (200 ms, strong ease-out); reduced motion fades only.
     try {
       el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: reduced() ? 120 : 180, easing: "cubic-bezier(.23, 1, .32, 1)" });
@@ -214,6 +218,8 @@
       if (!b) return;
       var a = b.getAttribute("data-pv");
       if (a === "close") return close();
+      // Report (image-zoom.js): the viewer closes and the report form opens for the same image.
+      if (a === "report") { var rep = v.opts.onReport; close(); try { rep(); } catch (x) {} return; }
       if (a === "in") return zoomTo(v, v.s >= MAX ? MAX : Math.min(MAX, v.s * 1.6), null, null, true);
       if (a === "out") return zoomTo(v, Math.max(MIN, v.s / 1.6), null, null, true);
       if (a === "fit") return zoomTo(v, 1, null, null, true);

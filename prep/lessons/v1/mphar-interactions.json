@@ -3,7 +3,7 @@
  "module": "mphar-interactions",
  "subject": "mrcp-pharmacology",
  "title": "Drug interactions: enzyme, additive and absorption traps",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
    "tx": "**Interactions** harm by three broad routes: one drug changing another's **metabolism** (enzyme induction lowering levels, inhibition raising them), **additive effects** (bleeding, sedation, potassium, QT prolongation) and **absorption or excretion** changes. The clinical question is always consequence: loss of effect can mean pregnancy, transplant rejection or stroke, while excess can mean bleeding, falls or arrhythmia. Check every new prescription against the full list, including over-the-counter and herbal products (BNF interactions).",
@@ -55,6 +55,17 @@
       "Failure from lowered levels"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The hepatocyte diagram contrasts the two enzyme traps. On the left, an inhibitor tablet blocks **CYP450**, so substrate molecules pile up and the level curve climbs into the **toxicity zone**. On the right, **St John's Wort** triggers extra enzyme synthesis, so rapid metabolism drags levels into the subtherapeutic zone and treatment fails. The lesson pairs these pictures with one habit: **anticipate, substitute, adjust and monitor** whenever a drug is started, stopped or changed.",
+   "say": "This hepatocyte diagram contrasts enzyme inhibition with induction. An inhibitor tablet blocks CYP450, so drug levels climb into the toxicity zone. St John's Wort does the opposite by triggering extra enzyme synthesis, so rapid metabolism drags levels down and treatment fails. Anticipate classic high stakes pairs, substitute or adjust as directed, and recheck whenever any drug is started, stopped or changed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mphar-interactions-gen1.webp",
+    "alt": "A hepatocyte diagram contrasts CYP450 inhibition raising drug levels with induction by St John's Wort lowering them.",
+    "caption": "Enzyme inhibition versus induction and resulting drug levels, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

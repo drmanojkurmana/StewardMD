@@ -1176,37 +1176,8 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-missed .pn-rv-ok small { color: var(--pn-ok); }
 .pn-root .pn-missed .pn-rv-no small { color: var(--pn-bad); }
 
-/* ---- Image viewer (prep-viewer.js): one full-screen viewer for every enlarged image ----
-   Always dark (a light-box reads images best on near black, in both themes). It owns every touch on it (touch-action:
-   none; the script keeps the page behind still). Controls are 44 px, inside the safe areas; the bottom bar holds zoom
-   out, the zoom level (tap to fit) and zoom in, for anyone who cannot pinch. */
-.pv { position: fixed; inset: 0; z-index: 2147483000; display: flex; flex-direction: column; color: #f5f3ee; touch-action: none; overscroll-behavior: contain;
-  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
-  font-family: var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); }
-.pv:focus { outline: none; }
-.pv-scrim { position: absolute; inset: 0; background: #0e0e1c; }
-.pv-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; touch-action: none; cursor: zoom-in;
-  padding: calc(64px + env(safe-area-inset-top, 0px)) calc(8px + env(safe-area-inset-right, 0px)) calc(88px + env(safe-area-inset-bottom, 0px)) calc(8px + env(safe-area-inset-left, 0px)); }
-.pv.pv-zoomed .pv-stage { cursor: grab; }
-.pv-img { display: block; flex: 0 0 auto; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 6px; background: #fff;
-  transform-origin: 50% 50%; will-change: transform; -webkit-user-drag: none; pointer-events: none; }
-.pv-top, .pv-bot { position: absolute; left: 0; right: 0; z-index: 1; display: flex; align-items: center; gap: 12px; pointer-events: none; transition: opacity 180ms ease-out; }
-.pv-top { top: 0; padding: calc(8px + env(safe-area-inset-top, 0px)) calc(12px + env(safe-area-inset-right, 0px)) 8px calc(16px + env(safe-area-inset-left, 0px));
-  background: linear-gradient(180deg, rgba(14, 14, 28, .85), rgba(14, 14, 28, 0)); }
-.pv-bot { bottom: 0; flex-direction: column; gap: 6px; padding: 8px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(0deg, rgba(14, 14, 28, .85), rgba(14, 14, 28, 0)); }
-.pv-cap { flex: 1 1 auto; min-width: 0; margin: 0; font-size: 13px; line-height: 1.4; color: #c3c8d8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.pv-b { pointer-events: auto; flex: 0 0 auto; min-width: 44px; height: 44px; padding: 0 10px; border: 0; border-radius: 22px; background: rgba(255, 255, 255, .14); color: #fff;
-  display: inline-flex; align-items: center; justify-content: center; font: inherit; font-size: 14px; font-weight: 650; font-variant-numeric: tabular-nums; cursor: pointer;
-  touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 120ms cubic-bezier(.23, 1, .32, 1), background-color 120ms ease; }
-.pv-b:active { transform: scale(.92); background: rgba(255, 255, 255, .24); }
-.pv-b:focus-visible { outline: 2px solid #efc07b; outline-offset: 2px; }
-.pv-x { width: 44px; padding: 0; }
-.pv-zb { display: inline-flex; gap: 8px; pointer-events: auto; }
-.pv-pct { min-width: 72px; }
-.pv-hint { margin: 0; font-size: 12px; color: #a9b1c7; text-align: center; }
-.pv.pv-zoomed .pv-hint { opacity: 0; }
-@media (hover: hover) and (pointer: fine) { .pv-b:hover { background: rgba(255, 255, 255, .22); } }
-@media (prefers-reduced-motion: reduce) { .pv-b, .pv-top, .pv-bot { transition: none; } }
+/* The image viewer's styles (.pv*) moved to image-viewer.css (2026-11-05): every image in the app opens in it now
+   (image-zoom.js), so they load with the app, not with PrepNucleus. */
 
 /* ---- App shell (mobile-native pass, 2026-10-09) ----
    The overlay is the app: it never moves, nothing behind it scrolls, only the screen body (.pn-body) scrolls, and only

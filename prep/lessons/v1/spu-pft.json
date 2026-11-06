@@ -3,7 +3,7 @@
  "module": "spu-pft",
  "subject": "ss-pulmonology",
  "title": "Pulmonary function tests: spirometry, lung volumes, DLCO and bronchoprovocation",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "**Spirometry** measures how much air a person can forcibly exhale in a single effort. The central ratio is **FEV1/FVC**, the forced expiratory volume in the first second divided by forced vital capacity. If the ratio stays below the **lower limit of normal** after a bronchodilator, persistent airflow limitation is confirmed, which is the core criterion for **COPD**. Because expiratory flow levels off once small airways collapse, harder effort no longer raises flow past a certain point, which defines the effort-independent part of the curve.",
@@ -37,6 +37,17 @@
       "Simpler equipment"
      ]
     }
+   }
+  },
+  {
+   "tx": "The image shows a patient seated in a sealed glass cabin breathing through a mouthpiece, beside a lung map of **total lung capacity** and **residual volume** with shaded **trapped air**. This is **body plethysmography**, which captures all thoracic gas including poorly ventilated zones. It matters because gas dilution misses trapped air and underreads volumes in obstruction.",
+   "say": "This picture shows body plethysmography, with the patient sitting inside an airtight glass box and breathing through a tube. The sealed cabin lets the machine measure every bit of air in the chest, even air trapped behind narrowed airways. Simpler gas methods miss that trapped air, so this box gives the true volumes in obstructive disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/spu-pft-gen1.webp",
+    "alt": "Woman seated in a sealed glass cabin breathes through a mouthpiece beside a lung diagram of trapped air volumes.",
+    "caption": "Sealed cabin testing captures total thoracic gas including trapped air. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

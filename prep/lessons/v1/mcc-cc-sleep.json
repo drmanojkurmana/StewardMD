@@ -3,7 +3,7 @@
  "module": "mcc-cc-sleep",
  "subject": "mcc-chronic-care",
  "title": "Sleep apnoea and sleep disorders: a practical approach",
- "minutes": 6,
+ "minutes": 8,
  "steps": [
   {
    "tx": "Suspect **obstructive sleep apnoea** in patients with loud snoring, witnessed breathing pauses, morning headaches and excessive daytime sleepiness, especially with obesity or hypertension. Ask about driving, because untreated sleepiness causes crashes. Examine the upper airway, neck size and BMI. Children present differently, with mouth breathing, restless sleep and enlarged tonsils. Sleepiness is measured with the Epworth scale, but it does not confirm the diagnosis.",
@@ -71,6 +71,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The overnight tracing records sleep stages, nasal airflow, chest effort and oxygen together. Airflow halts while effort continues during **obstructive apnoea**, then a smaller **hypopnoea** phase ends in arousal with repeated oxygen dips. The **apnoea hypopnoea index** counts such events per hour to grade severity. Seeing the full pattern on **polysomnography** explains why daytime sleepiness follows broken night breathing.",
+   "say": "The four stacked traces tell the story of one night. The top trace maps shifting sleep stages while the next shows airflow stopping and then weakening. Chest effort keeps going through the pause, proving the obstruction sits in the airway, and oxygen falls with each event before arousal restores flow. Counting these events per hour grades severity and guides treatment choice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mcc-cc-sleep-gen1.webp",
+    "alt": "Overnight tracing showing sleep stages with halted airflow continuing effort arousals and repeated oxygen dips.",
+    "caption": "Polysomnography tracing of apnoea hypopnoea arousals and oxygen dips, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

@@ -3,7 +3,7 @@
  "module": "mstat-ebm",
  "subject": "mrcp-statistics",
  "title": "Systematic reviews, meta-analysis and critical appraisal",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "A **systematic review** collects all studies answering a focused question using a pre-specified, reproducible search and appraisal. A **meta-analysis** is the statistical pooling of those studies into a single estimate. Pooling is only sensible when studies are similar enough in population, intervention and outcome. Reporting should follow the PRISMA guideline, which includes a flow diagram of records identified, screened, excluded and included.",
@@ -111,6 +111,17 @@
    "tx": "Critical appraisal also covers bias in individual studies. **Lead-time bias** occurs when screening advances diagnosis without delaying death, so survival from diagnosis looks longer. Mortality rates are the right outcome to judge screening. Measures of effect such as the **number needed to treat** equal one divided by the absolute risk reduction, the difference between control and treated event rates.",
    "say": "Critical appraisal also covers bias in individual studies. Lead-time bias occurs when screening advances diagnosis without delaying death, so survival from diagnosis looks longer. Mortality rates are the right outcome to judge screening. The number needed to treat equals one divided by the absolute risk reduction, the difference between control and treated event rates.",
    "vis": null
+  },
+  {
+   "tx": "The diagram compares unscreened and screened paths that end in death at the same age. Earlier detection by **screening** adds lead time, so survival counted from diagnosis looks longer even with no extra life gained. This illusion is **lead time bias**. Judge screening by **mortality rates** in the whole group offered testing, not by survival measured from the date of diagnosis.",
+   "say": "Follow the two timelines from left to right. Both lives begin with disease at the same point and end at the same point, yet the lower screened path counts survival from an earlier found date and so looks years longer. That extra counted time is lead time, not extra life. To judge whether screening truly helps, compare death rates between all people offered testing and all those not offered it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mstat-ebm-gen1.webp",
+    "alt": "Two timelines showing earlier found disease counting longer survival while the final date of death stays the same.",
+    "caption": "Timeline diagram showing earlier found disease inflating counted survival without changing lifespan, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   }
  ],
  "quiz": [],
