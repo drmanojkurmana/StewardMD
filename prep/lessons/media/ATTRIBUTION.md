@@ -5455,3 +5455,4 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | med-ich-gen1.webp (R2) | Brain section showing haematoma compression with raised pressure warning signs, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | srh-axspa-treatment-gen1.webp (R2) | Active sacroiliitis with marrow oedema prompts biologic escalation. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | srh-pregnancy-gen1.webp (R2) | Maternal antibodies injuring the fetal heart conduction system, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| fmt-virginity-pregnancy-gen1-r1.webp (R2) | Consent counseling visit mapping doctor approvals by gestation (labels repainted to the MTP (Amendment) Act 2021 limits) | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
