@@ -7,6 +7,13 @@
 - **Current Subject in Queue**: Neurosurgery (`ss-neurosurgery`) [Subject #13 in SS-QUEUE.md; subjects 1-12 DONE]
 - **Current Stage**: Stage 1 (blueprint todo: Lane A has not drafted it yet; Lane C audits existing lessons only)
 
+## 2026-11-06 run 12 (writer muse-spark-1.3, local main baa8d2e5e; origin/main aa63b4b5a = #1984 merged, fetched): ss-neurosurgery stage-1 closeout
+- Queue re-read: ss-neurosurgery still `blueprint: todo` (line 16), all lanes todo; no lane-A neurosurgery branch on remote, so no stage-2 topics, no lessons written, no blind fact-check owed, no FLAGS rows (lead 05:3x checker-first note is agy-runs only).
+- Audit re-verified: checkLesson `[]` x5 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus, sur-neck, sur-neck-face-trauma); `git diff baa8d2e5e..aa63b4b5a` empty for all 5 files so prior looks carry over; R2 200 x8 byte-identical sizes, all 8 KEEP. No removals/swaps/needs, so no audit PR owed.
+- FLAGS latest-per-key re-parse: 372 keys, 0 UNCHECKED.
+- Lane-C PRs #1981 OPEN/MERGEABLE/UNSTABLE + #1988 OPEN/MERGEABLE/CLEAN (gh API); no rebase needed, left for lead.
+- Safekeeping: 6 paediatric blueprints on this branch, untouched. This commit carries the branch copy of SS-LESSONS-C-NEUROSURGERY-AUDIT.md (synced from main checkout, purely additive) and this STATE.md. No PR opened. Queue line 13 untouched.
+
 ## 2026-11-06 run 8 (writer muse-spark-1.3, main e99c84fe7 = origin/main): ss-neurosurgery stage-1 closeout
 - Queue re-read: ss-neurosurgery still `blueprint: todo`, lane C `todo`; no stage-2 topics, no lessons written, no blind fact-check owed, no FLAGS rows.
 - Audit re-verified on main: checkLesson `[]` x3 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus); R2 200 x4 byte-identical; --check fails all pre-existing and logged (head-injury steps 4-6 + hydrocephalus step-5 narration in LESSONS-GARBLED.md lines 1224/1226; hydrocephalus step-4 numbers 40/50; brain-tumours verbatim/drug-grounding for stage-2). No removals/swaps/needs, so no audit PR owed.

@@ -531,3 +531,12 @@ for stage-2. No PR with lesson edits; this audit report is the deliverable."
 - Queue re-read: ss-neurosurgery still `blueprint: todo` (line 16); all lanes todo; no lane-A neurosurgery branch on remote, so no stage-2 work for lane C. Paediatric blueprints confirmed safe on origin/ss-lessons-C (6 files, tip 08a475adc). Main tracked tree clean; nothing to commit/push per keep-earlier-work rule (already pushed).
 - PRs #1981 (OPEN/MERGEABLE/UNSTABLE) and #1988 (OPEN/MERGEABLE/CLEAN) re-checked via gh. No rebase needed, no action (lead merges). Lead 05:3x checker-first note applies to agy runs only; this muse-writer run wrote no lessons, so no new UNCHECKED FLAGS rows.
 - No lesson edits, no commits, no PR, nothing pushed to main. No UI touched.
+
+## 2026-11-06 Lane C run (muse-spark-1.3, local main baa8d2e5e; origin/main aa63b4b5a = #1984 merged, fetched this run)
+- `git diff baa8d2e5e..aa63b4b5a` is 0 bytes for all 5 audit files (only ssg taxonomy/packs changed), so prior looks carry over to the new tip.
+- checkLesson (gate 0, re-run, observed): `[]` x5 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus, sur-neck, sur-neck-face-trauma).
+- R2 existence re-checked (curl, observed): 200 x8, byte-identical sizes (128482 / 125350 / 103142 / 117634 / 122724 / 91162 / 77094 / 32892 B). All 8 KEEP; nothing for SS-LESSONS-IMAGES-REMOVED.md or SS-LESSONS-IMAGE-NEEDS.md.
+- Queue re-read: ss-neurosurgery still `blueprint: todo` (line 16); all lanes todo; no lane-A neurosurgery branch on remote, so no stage-2 work for lane C. Paediatric blueprints confirmed safe on origin/ss-lessons-C (6 ss-paediatric-*.json files listed this run).
+- FLAGS latest-per-key re-parse: 372 keys, 0 UNCHECKED (lead 05:3x checker-first note applies to agy runs only; this muse-writer run wrote no lessons, so no new rows).
+- PRs #1981 (OPEN/MERGEABLE/UNSTABLE) and #1988 (OPEN/MERGEABLE/CLEAN) re-checked via gh: both unmerged, left for lead. No rebase needed, no action.
+- No lesson edits, no commits, no PR, nothing pushed to main. No UI touched.
