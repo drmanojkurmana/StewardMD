@@ -3,7 +3,7 @@
  "module": "mcc-ac-dka",
  "subject": "mcc-acute-care",
  "title": "DKA and HHS: Recognition and Initial Management",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "**Diabetic ketoacidosis** (DKA) is defined by hyperglycaemia, ketosis and metabolic acidosis, usually in type 1 diabetes. **Hyperosmolar hyperglycaemic state** (HHS) shows marked hyperglycaemia and high effective osmolality with little or no ketoacidosis, typically in older type 2 patients. Both are emergencies driven by relative insulin deficiency with raised counter-regulatory hormones. Recognising which one you face decides the fluids and insulin plan.",
@@ -81,6 +81,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The tracing shows the electrical signature of low **potassium**: flattened T waves, prominent **U waves** and a prolonged QU interval. In DKA total body potassium is depleted even when the first reading looks normal, so **serum potassium** must be checked before insulin starts. Insulin drives potassium into cells, and missing this check risks a dangerous fall.",
+   "say": "This twelve lead tracing teaches the heart signs of low potassium. The T waves flatten, extra U waves pop up behind them, and the QU stretch lengthens. People with DKA often carry this hidden shortage because acid and insulin lack leave the body short of potassium despite a normal looking number. That is why potassium is checked before insulin begins, since starting insulin first can drop the level into danger.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mcc-ac-dka-gen1.webp",
+    "alt": "Twelve lead ECG tracing shows flat T waves with prominent U waves and a prolonged QU interval.",
+    "caption": "ECG signature of low potassium with U waves and long QU Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
