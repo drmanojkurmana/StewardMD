@@ -46,7 +46,23 @@
   - pyqss-2024-s2-200 urine uric acid ratio above 1.0
 - Gates: checkLesson [], narration 0 fails (fixed exploit/mark/arrives sentences), coverage 12/12, ss-subject-check missing 0, index union 1980+8->1989.
 - Progress total: 47 of 113 topics.
-- Next: hypercalcaemia/SVCO cluster (s1-17, s3-108, s2-213, s2-230, s1-184, s2-210, s2-211, s2-272, s2-236) then chemo leftovers.
+- Next: hypercalcaemia/SVCO cluster (s1-17, s3-108, s2-213, s2-230, s1-184, s2-210, s2-211, s3-272, s2-236) then chemo leftovers.
+
+## Done (next run, 2026-11-07)
+- Lesson son-hypercalcemia-lymphoma (4 steps, 2 reused KB real images HTTP 200, table/compare elsewhere):
+  - pyqss-2025-s1-17 saline first, zoledronate 48h/nadir 4-7d, calcitonin bridge, no routine furosemide, denosumab renal
+  - pyqss-2025-s3-108 improving Ca at 48h means hydrate + monitor, redose at 7d or later, no denosumab stacking
+  - pyqss-2024-s2-213 lymphoma CYP27B1 calcitriol mechanism, PTHrP 80 / osteolysis 20 / calcitriol 1 / ectopic PTH <1
+  - pyqss-2024-s2-230 steroids prednisone 40-60 / hydrocortisone 200-400, treat underlying malignancy definitive
+- Lesson son-svco-mscc (5 steps, 3 reused KB real images HTTP 200, tables elsewhere):
+  - pyqss-2024-s1-184 azygos dilation collateral, malignancy 60-85, NSCLC/SCLC/NHL shares, catheters top non-malignant
+  - pyqss-2024-s2-211 lung + NHL over 85 percent, breast top metastatic, thymic/mesothelioma least likely
+  - pyqss-2024-s2-210 stable disease needs core-cut biopsy first, RT/steroids obscure 40-50 percent
+  - pyqss-2024-s3-272 severe disease needs endovascular stenting 24-72h at 90-95 percent (id corrected s2-272 to s3-272)
+  - pyqss-2024-s3-236 MSCC collapse needs surgery plus postop RT, SINS 13-18, Patchell trial
+- Gates: checkLesson [] both, narration 0 fails both (fixed contrast/switch/sit/restores/translate/love sentences), coverage 8/8 + 9/9, ss-subject-check missing 0, index union 1980+9->1991.
+- Progress total: 56 of 113 topics.
+- Next: chemo leftovers (pyqss-2024-s1-192 cisplatin cardiac, s1-193 gemcitabine, s2-215 antitumor antibiotics, s2-218 infertility alkylators, s3-273 cabozantinib excretion, s3-274 cell cycle phases, s3-278 DPD, s3-279 oxaliplatin coasting) then genetics/gynae/GI/sarcoma/peds/dx areas.
 
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
