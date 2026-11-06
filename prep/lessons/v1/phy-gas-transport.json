@@ -3,7 +3,7 @@
  "module": "phy-gas-transport",
  "subject": "physiology",
  "title": "Oxygen and carbon dioxide transport",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "Oxygen travels in blood in two ways. Almost all of it, roughly 97 to 99 percent, rides on **haemoglobin**. The rest is dissolved in plasma. Each haemoglobin molecule has four haem groups, so it can carry four oxygen molecules. Dissolved oxygen follows Henry's law, so its amount rises in direct proportion to its partial pressure. Because dissolved oxygen is a small fraction, haemoglobin governs most of what the tissues receive.",
@@ -130,6 +130,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "This render walks through the **chloride shift** inside a red cell. Carbon dioxide meets water under **carbonic anhydrase** to form carbonic acid, which splits into hydrogen and **bicarbonate** ions. The bicarbonate then leaves through band 3 while chloride enters, which is how plasma ends up carrying most carbon dioxide in this form.",
+   "say": "This image shows carbon dioxide entering a red cell and joining water to form carbonic acid, which then splits into hydrogen and bicarbonate ions. A membrane exchanger called band 3 pushes bicarbonate out into plasma while pulling chloride in. That swap is the chloride shift, and it explains why most carbon dioxide travels as plasma bicarbonate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phy-gas-transport-gen1.webp",
+    "alt": "The render shows carbon dioxide entering a red cell and bicarbonate leaving as chloride enters.",
+    "caption": "Render of a red cell converting carbon dioxide to bicarbonate with chloride exchange, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

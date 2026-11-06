@@ -3,7 +3,7 @@
  "module": "mcc-ac-headinjury",
  "subject": "mcc-acute-care",
  "title": "Head injury: acute management",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "Severity of a **traumatic brain injury** is graded with the **Glasgow Coma Scale** after resuscitation. Mild is 13 to 15, moderate 9 to 12, and severe 3 to 8. Record eye, verbal and motor scores separately, because the motor score carries the most weight. A falling trend matters more than a single reading.",
@@ -38,6 +38,17 @@
    "tx": "Order a **non-contrast CT head** within 1 hour when the **GCS is 12 or less** on first assessment, when GCS is below 15 at 2 hours, or with suspected skull fracture or basal skull signs. Use NICE 2023 criteria, derived from the Canadian CT Head Rule. Assume a cervical spine injury until cleared, and check CT cervical spine when indicated.",
    "say": "Order a non-contrast CT head within 1 hour when the GCS is 12 or less on first assessment, when GCS is below 15 at 2 hours, or with suspected skull fracture or basal skull signs. These criteria come from NICE 2023, derived from the Canadian CT Head Rule. Assume a cervical spine injury until cleared, and check CT cervical spine when indicated.",
    "vis": null
+  },
+  {
+   "tx": "The scan shows a crescentic hyperdense acute **subdural haematoma** hugging the inner skull. Blood plus swelling creates **mass effect** with **midline shift** toward the opposite side and effaced sulci with a compressed ventricle. This is exactly the kind of lesion urgent non contrast CT head is meant to catch. Discuss every surgically significant abnormality with neurosurgery without delay.",
+   "say": "Study the head scan. A bright crescent of fresh blood spreads along the inner skull surface, pushing the brain across the midline and squeezing the fluid spaces shut. That shift with flattened grooves and a compressed ventricle signals dangerous pressure. Such a lesion needs an urgent scan soon after injury and an immediate call to neurosurgery to judge whether surgery can save brain.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mcc-ac-headinjury-gen1.webp",
+    "alt": "Axial head CT with crescentic hyperdense subdural blood, midline shift and compressed ventricle.",
+    "caption": "CT of acute subdural haematoma showing crescentic blood with mass effect, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "tx": "Prevent **secondary brain injury** by avoiding **hypoxia** and **hypotension**. Keep SpO2 above 90 percent and systolic pressure at 100 mmHg or more for those aged 50 to 69, or 110 mmHg or more for those aged 15 to 49 or over 70, per BTF 4th edition. Use 0.9 percent sodium chloride, and in bleeding severe injury keep MAP at 80 mmHg or more.",
