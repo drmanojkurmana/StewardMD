@@ -2,6 +2,15 @@
 
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
+## Done (run 4, 2026-11-07)
+- Lesson son-myeloma-risk-renal (5 steps, 2 reused KB real images, both HTTP 200 verified):
+  - pyqss-2025-s3-132 standard-risk cytogenetics (also covers pyqss-2024-s2-231 t(11;14) + venetoclax)
+  - pyqss-2025-s3-153 VCD in myeloma kidney + hypercalcaemia
+  - pyqss-2024-s3-264 pomalidomide potency + safety
+- Gates: checkLesson [], narration 0 fails, coverage 8/8.
+- Progress total: 24 of 113 topics.
+- Remaining Tier-1 clusters: DLBCL Hans (s3-105), MALT (s3-109), HLH-2004 (s2-199), GVHD triad (s2-224), lymphoma hypercalcaemia (s2-213, s2-230), polycythemia (s3-260), Lugano (s3-247), CLL fertility/GVHD misc.
+
 ## Done (run 3 continued, 2026-11-07)
 - Lesson son-apml-atra (5 steps, 2 reused KB real images, both HTTP 200 verified):
   - pyqss-2025-s1-9 + pyqss-2025-s3-115 adult ATRA 45 mg/m2, child 25 mg/m2, arsenic 0.15 mg/kg
