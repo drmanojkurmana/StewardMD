@@ -80,6 +80,21 @@
 - Progress total: 64 of 113 topics.
 - Next: genetics cluster (13 topics: MEN1 x2, NF1 x2, LFS x2, DICER1 x2, CDH1 x2, NF2, VHL, Lynch) then gynae/GI/sarcoma/peds/dx areas.
 
+## Done (next run 3, 2026-11-07)
+- Lesson son-hereditary-men-nf (4 steps, 4 reused KB real images HTTP 200):
+  - pyqss-2025-s1-1 + s3-144 MEN1 3Ps, screening ages 8/5, RET/MEN4 distractors
+  - pyqss-2025-s1-20 + s3-97 NF1 California spots, Crowe, Lisch, MPNST, GNAS Maine distractor
+  - pyqss-2025-s3-142 NF2 merlin, bilateral schwannomas, MISME
+  - pyqss-2025-s3-160 VHL MRI from 15 + pyqss-2024-s3-276 Lynch CRC/endometrial ranking
+- Lesson son-hereditary-lfs-dicer (4 steps, 4 reused KB real images HTTP 200):
+  - pyqss-2025-s1-31 LFS Chompret testing rules, penetrance
+  - pyqss-2025-s2-73 LFS SBLA spectrum, Toronto protocol, RT avoidance
+  - pyqss-2025-s1-36 + s3-116 DICER1 spectrum, thyroid differentials
+  - pyqss-2025-s1-19 + s3-83 CDH1 HDGC, gastrectomy timing, lobular breast
+- Gates: checkLesson [] both, narration 0 fails both (fixed ranks/orders, shines/plus/iris/nodules chain), coverage 8/8 + 8/8, total 868/868, ss-subject-check missing 0, index union 1980+13->1995.
+- Progress total: 77 of 113 topics.
+- Next: gynae cluster (11 topics: cervix s1-15 IIB/Peters + s3-235 IB2 surgery; endometrium POLE s1-25 + s3-168 observation; ovary OCP s2-42 + s3-136, ROMA/RMI s2-50 + s3-92, PAOLA s3-78, platinum s2-226; vulvar s3-240 nodes) then GI/sarcoma/peds/dx areas.
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
