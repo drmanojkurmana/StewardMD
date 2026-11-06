@@ -122,6 +122,17 @@
 - Progress total: 94 of 113 topics.
 - Next: sarcoma cluster (5 topics: s2-51 STS biopsy, s3-118 Doege-Potter, s3-177 SFT NAB2-STAT6, s3-180 osteosarcoma MAP, s3-238 Ewing EWSR1) then peds/dx/cutaneous areas (19 remaining).
 
+## Done (next run 6, 2026-11-07)
+- Lesson son-sarcoma-gap (5 steps, 4 reused KB real images HTTP 200, table on Doege-Potter step):
+  - pyqss-2025-s2-51 longitudinal core biopsy, FNCLCC grade, ESRCA nodes
+  - pyqss-2025-s3-118 Doege-Potter big IGF-2, low panel, ratio >10
+  - pyqss-2025-s3-177 SFT NAB2-STAT6, STAT6 IHC, staghorn/CD34
+  - pyqss-2025-s3-180 osteosarcoma MAP sandwich, Huvos 90 percent
+  - pyqss-2024-s3-238 Ewing EWSR1 break-apart, FLI1 85 / ERG 10
+- Gates: checkLesson [], narration 0 fails (fixed treat sentence), coverage 7/7, total 900/900, ss-subject-check missing 0, index union 1980+18->1999.
+- Progress total: 99 of 113 topics.
+- Next: peds cluster (9 topics: marrow rosettes s1-12, hepatoblastoma PRETEXT s1-24, neuroblastoma MYCN/MS s1-41, RB1 bilateral s2-49, Wilms triphasic s2-64, RMS fusion s3-100, TAM/GATA1 s3-128, Hutchinson s3-141, Wilms SIOP s3-148) then dx (s1-10 biopsy vs FNAC, s2-207 AI, s3-281 KM curve) + cutaneous (s3-179 post-transplant cSCC, s3-239 BRAF melanoma).
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
