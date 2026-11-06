@@ -15,8 +15,13 @@
   (1 typo repaint row); added 3 cleared KB figures (viewed, R2 200);
   NEEDS row for descending-TEVAR figure; FLAGS UNCHECKED (muse writer) row
   (no different-family checker reachable in sandbox).
-- **Next**: PR #2008 open, ss-image-gate.py silent, CI in progress at
-  16:0x IST (early checks green). After CI: if green, lane B stage-1 audit
-  for ss-ctvs is done; wait for lane A blueprint before stage-2 topics.
-  Blind-check hold: FLAGS UNCHECKED (muse writer) row must be cleared by a
-  different-family run before merge.
+- **Next**: PR #2008 terminal GREEN (9/9 checks success incl. unit-tests,
+  verified 2026-11-06 ~16:35 IST), ss-image-gate.py silent, MERGEABLE.
+  Lane B stage-1 audit for ss-ctvs is done; ss-ctvs stays OPEN pending the
+  lane-A blueprint before any stage-2 writing. Blind-check hold: FLAGS
+  UNCHECKED (muse writer) rows must be cleared by a different-family run
+  before merge (all 3 checker routes re-probed blocked this run: agy bind
+  denied, grok FS denied, claude 5h-limited to 6:50pm IST).
+- Tracking files saved on branch ss-lessons-B-ctvs-reports (pushed, no PR):
+  STATE.md, SS-QUEUE.md, SS-LESSONS-B-CTVS-AUDIT.md,
+  SS-LESSONS-IMAGE-NEEDS.md, SS-LESSONS-FLAGS.md.
