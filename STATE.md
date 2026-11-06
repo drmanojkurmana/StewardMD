@@ -1,5 +1,19 @@
 # PYQ-gap muse lane STATE (branch pyq-gap-muse, worktree /tmp/wt-pyq-gap-muse)
 
+## Done (run 5, 2026-11-07)
+- Lesson son-heme-dx-standards (6 steps, 6 reused KB real images, all HTTP 200 verified, all StewardMD CC BY 4.0):
+  - pyqss-2025-s3-105 Hans CD10/BCL6/MUM1 non-GCB ABC + Pola-R-CHP POLARIX
+  - pyqss-2025-s3-109 gastric MALT H pylori eradication, t(11;18) resistance, ISRT/rituximab, no gastrectomy
+  - pyqss-2024-s3-247 Lugano spleen lymphatic, IIIBS, X abolished, A/B Hodgkin only
+  - pyqss-2024-s2-199 HLH-2004 5/8, fibrinogen low, ferritin/TG/sCD25 high
+  - pyqss-2024-s2-224 chronic GVHD triad + ruxolitinib/ibrutinib/belumosudil + TBI ALL pearl
+  - pyqss-2024-s3-260 polycythaemia red cell mass vs plasma volume, JAK2, EPO
+- Gates: checkLesson [], narration 0 fails, coverage 11/11, ss-subject-check missing 0, index union 1980+5->1986.
+- NOTE: tools/prep-lessons.mjs --check FAILs identically on all hand-written lessons incl. prior committed ones (grounding kb 0 words, no fill pack); accepted gates per prior runs are checkLesson + narration + coverage.
+- FIXED: blueprint edit initially merged new module into son-hsct object via duplicate keys (silent overwrite); repaired object boundary, verified no DUP KEY and both modules present.
+- Progress total: 30 of 113 topics. Tier-1 Heme area complete (30/30).
+- Next: Tier-2 anthracycline cardiotoxicity cluster (pyqss-2024-s2-201, s2-204, s2-232, s2-249, s2-263).
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
