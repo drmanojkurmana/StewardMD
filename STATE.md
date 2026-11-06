@@ -7,6 +7,13 @@
 - **Current Subject in Queue**: Neurosurgery (`ss-neurosurgery`) [Subject #13 in SS-QUEUE.md; subjects 1-12 DONE]
 - **Current Stage**: Stage 1 (blueprint todo: Lane A has not drafted it yet; Lane C audits existing lessons only)
 
+## 2026-11-06 run 14 (writer muse-spark-1.3; origin/main 64ba76ddb = #1976 + #1984, fetched): ss-neurosurgery stage-1 closeout
+- Queue re-read at start and end: ss-neurosurgery still `blueprint: todo` (line 16), all lanes todo; no lane-A neurosurgery branch on remote, so no stage-2 topics, no lessons written, no blind fact-check owed, no FLAGS rows (lead 05:3x checker-first note is agy-runs only; checker CLIs not probed).
+- Audit re-verified on origin/main file bytes (extracted to /tmp): checkLesson `[]` x5 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus, sur-neck, sur-neck-face-trauma); `git diff aa63b4b5a..64ba76ddb` empty for all 5 files so prior looks carry over; R2 200 x8 byte-identical sizes, all valid WebP VP8, all 8 KEEP. `node tools/prep-lessons.mjs --check` same pre-existing fails only (all already in LESSONS-GARBLED.md, for stage-2). No removals/swaps/needs, so no audit PR owed.
+- FLAGS re-parse: 0 real-lesson latest-UNCHECKED (naive 27 ssg-* hits spot-checked, all latest-Checked by claude; remainder superseded per runs 97-107).
+- Lane-C PR #1988 OPEN/MERGEABLE/CLEAN (gh API); left for lead.
+- Safekeeping: 6 paediatric blueprints on this branch, untouched. This commit carries the branch copy of SS-LESSONS-C-NEUROSURGERY-AUDIT.md (synced from main checkout, purely additive) and this STATE.md. No PR opened. Queue item 13 untouched.
+
 ## 2026-11-06 run 12 (writer muse-spark-1.3, local main baa8d2e5e; origin/main aa63b4b5a = #1984 merged, fetched): ss-neurosurgery stage-1 closeout
 - Queue re-read: ss-neurosurgery still `blueprint: todo` (line 16), all lanes todo; no lane-A neurosurgery branch on remote, so no stage-2 topics, no lessons written, no blind fact-check owed, no FLAGS rows (lead 05:3x checker-first note is agy-runs only).
 - Audit re-verified: checkLesson `[]` x5 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus, sur-neck, sur-neck-face-trauma); `git diff baa8d2e5e..aa63b4b5a` empty for all 5 files so prior looks carry over; R2 200 x8 byte-identical sizes, all 8 KEEP. No removals/swaps/needs, so no audit PR owed.
