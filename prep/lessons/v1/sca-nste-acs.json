@@ -3,7 +3,7 @@
  "module": "sca-nste-acs",
  "subject": "ss-cardiology",
  "title": "Non-ST elevation acute coronary syndromes",
- "minutes": 9,
+ "minutes": 10,
  "steps": [
   {
    "tx": "The Fourth **Universal Definition** of Myocardial Infarction defines acute myocardial necrosis as a rise and fall of cardiac troponin with at least one value exceeding the **99th percentile** upper reference limit. Clinical evidence of acute ischemia must accompany biomarker elevation, including ischemic symptoms, dynamic electrocardiographic changes, or imaging proof of new regional wall motion abnormalities.",
@@ -304,6 +304,17 @@
       "exclude myocarditis"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The panels pair heart images with vessel images across three cases. One shows a bright rim scar under the inner wall. Another shows patchy swelling in the wall. The third shows a ballooned tip with no scar. All three vessel images show open arteries. This pattern supports **MINOCA** and shows why **cardiac magnetic resonance** helps separate infarction from **myocarditis** and takotsubo when arteries look open.",
+   "say": "These panels show three hearts with open arteries but different muscle pictures. One has a bright scar along the inner wall, one has swelling in the wall, and one has a ballooned tip with no scar. When vessel pictures look open yet injury is present, tissue pictures help tell true infarction from inflammation or takotsubo and guide the final diagnosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sca-nste-acs-gen2.webp",
+    "alt": "The image shows three paired heart and vessel panels with scar, swelling or ballooning beside open arteries.",
+    "caption": "Open arteries with differing muscle injury patterns Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

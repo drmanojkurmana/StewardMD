@@ -3,7 +3,7 @@
  "module": "mstat-accuracy",
  "subject": "mrcp-statistics",
  "title": "Sensitivity, specificity and screening",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "**Sensitivity** is the proportion of people with the disease who test positive. **Specificity** is the proportion without the disease who test negative. Both are properties of the test itself and do not change with how common the disease is. A highly sensitive test has few false negatives, so a negative result helps rule disease out, summarised by SnNout. A highly specific test has few false positives, so a positive result helps rule disease in, summarised by SpPIn.",
@@ -38,6 +38,17 @@
       "True negatives (most)"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The photo shows a clinician using a pictograph where only a few figures are truly affected while many healthy figures test positive. It reminds you that **positive predictive value** depends on **prevalence** as well as test performance. When disease is uncommon, **false positives** from the large healthy group can outnumber true positives. Drawing a cohort grid makes this easy to check.",
+   "say": "The picture shows a grid of people with only a few real cases and several misleading positive marks. Even a good test produces many false alarms when the disease is rare, so a positive result may still mean a low chance of disease. Sketching the whole group helps you see why predictive value falls.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mstat-accuracy-gen1.webp",
+    "alt": "Clinician showing a patient a pictograph marking prevalence, affected cases, true positives and false positives.",
+    "caption": "Pictograph showing why rare disease lowers predictive value. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

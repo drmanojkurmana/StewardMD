@@ -3,7 +3,7 @@
  "module": "mcc-hp-otherscreen",
  "subject": "mcc-health-promotion",
  "title": "Lung and prostate screening decisions",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "Screening aims to find disease early in people without symptoms. For **lung cancer**, low-dose CT is offered to adults with a high smoking burden who are still fit for curative treatment. Eligibility is judged by pack-years and time since quitting, and the decision must be shared with the patient.",
@@ -69,6 +69,17 @@
    "tx": "Where a PSA is persistently raised but the examination is normal, the next step is shared decision-making about the benefits and harms of further tests. **Multiparametric MRI** can identify suspicious lesions and guide a targeted biopsy, reducing unnecessary procedures. Treatment such as surgery or finasteride should not start before evaluation.",
    "say": "Where a PSA is persistently raised but the examination is normal, the next step is shared decision-making about the benefits and harms of further tests. Multiparametric MRI can identify suspicious lesions and guide a targeted biopsy, reducing unnecessary procedures. Treatment should not start before evaluation.",
    "vis": null
+  },
+  {
+   "tx": "The image pairs T2W and diffusion MRI of the **prostate** with a **peripheral zone** lesion marked as the target. On T2W the focus is dark, while on **DWI** it shines bright as a **PI-RADS** target. The dashed line shows the planned biopsy needle path into that focus. Targeting the suspicious area raises the yield and reduces unnecessary sampling. Do not start treatment before this evaluation is complete.",
+   "say": "This image pairs two prostate MRI views. On the T2W view a dark focus sits in the peripheral zone. On the diffusion view the same focus shines bright and is marked as the PI RADS target. The dashed line shows the planned biopsy needle path into that focus. Targeting the suspicious area raises the yield of biopsy and reduces unnecessary sampling. No surgery or drug treatment should start before this evaluation is complete.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mcc-hp-otherscreen-gen1.webp",
+    "alt": "The scan pair shows T2W and diffusion MRI of the prostate with a marked peripheral lesion and planned biopsy path.",
+    "caption": "Prostate MRI marking a peripheral target for biopsy, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   }
  ],
  "quiz": [],

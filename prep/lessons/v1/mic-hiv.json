@@ -3,7 +3,7 @@
  "module": "mic-hiv",
  "subject": "microbiology",
  "title": "HIV and retroviruses: structure, entry, diagnosis and the NACO approach",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "HIV is a **retrovirus** whose genome is diploid, made of two identical single stranded positive sense RNA copies. It carries a **reverse transcriptase** enzyme, which copies viral RNA into DNA. The gag gene encodes the core proteins, while the pol gene encodes reverse transcriptase, protease and integrase. HIV was first isolated in 1983 and shown to cause AIDS in 1984.",
@@ -43,6 +43,17 @@
       "Both cell types"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The render freezes HIV entry at the host membrane. The **gp120** spike grips the **CD4** receptor while a second spike engages the **CCR5** coreceptor on the cell surface. Engagement then lets the **gp41** helices harpoon the membrane and drive fusion. Strains using CCR5 favour macrophages and T cells, and people lacking this coreceptor resist infection.",
+   "say": "HIV enters cells in two binding steps shown here. The gp120 spike first attaches to the CD4 receptor on helper T cells. A coreceptor such as CCR5 then binds, and the gp41 protein unfolds to fuse the membranes. Macrophage tropic strains use CCR5, while T cell tropic strains use a different coreceptor. Without this second handshake, fusion cannot proceed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mic-hiv-gen1.webp",
+    "alt": "A 3D render shows HIV gp120 bound to CD4 and CCR5 with gp41 fusion helices at the cell membrane.",
+    "caption": "HIV entry through gp120 CD4 binding and gp41 fusion, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
