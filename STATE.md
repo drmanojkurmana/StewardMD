@@ -42,7 +42,7 @@
   - pyqss-2024-s3-241 four lab cutoffs, child phosphate, 25 percent rule, minus-3 to plus-7 window
   - pyqss-2024-s3-242 three clinical events, respiratory failure distractor
   - pyqss-2024-s3-245 1-5 day timing vs 7-14 day neutropenia nadir
-  - pyqss-2024-s2-185 allopurinol/febuxostat/rasburicase, G6PD ban, steroids EXCEPT
+  - pyqss-2024-s1-185 allopurinol/febuxostat/rasburicase, G6PD ban, steroids EXCEPT
   - pyqss-2024-s2-200 urine uric acid ratio above 1.0
 - Gates: checkLesson [], narration 0 fails (fixed exploit/mark/arrives sentences), coverage 12/12, ss-subject-check missing 0, index union 1980+8->1989.
 - Progress total: 47 of 113 topics.
