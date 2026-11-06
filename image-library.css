@@ -63,7 +63,7 @@ body.dark .igl-empty,body.dark .igl-loading{color:#c3cad2}
 .igl-vbar{display:flex;align-items:center;gap:8px;min-height:56px;padding:calc(6px + env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) 6px max(10px,env(safe-area-inset-left))}
 .igl-vpos{flex:1;font-size:13px;color:#c9c9c4}
 .igl-vnav{min-height:44px;padding:8px 12px;border:1px solid #4a4a44;border-radius:10px;background:transparent;color:inherit;font-size:14px;cursor:pointer}
-.igl-vstage{flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;background:#000}
+.igl-vstage{position:relative;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none;background:#000}
 .igl-vimg{max-width:100%;max-height:100%;object-fit:contain;transition:transform 160ms ease-out}
 .igl-vmeta{padding:12px 14px calc(14px + env(safe-area-inset-bottom));background:#17171a;overflow-y:auto;max-height:42%}
 .igl-vmeta h2{font-size:17px;margin:0 0 6px;line-height:1.35}
