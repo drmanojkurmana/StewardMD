@@ -2,6 +2,17 @@
 
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
+## Done (run 3, 2026-11-07)
+- Lesson son-chronic-leuk (6 steps, 2 reused KB real images, both HTTP 200 verified):
+  - pyqss-2025-s3-106 asymptomatic early CLL watchful waiting
+  - pyqss-2024-s2-197 iwCLL indications + hypogammaglobulinemia exclusion + Coombs/marrow split
+  - pyqss-2025-s3-107 del17p/TP53 first line
+  - pyqss-2025-s3-112 BCR::ABL1 transcripts p210/p190/p230
+  - pyqss-2025-s3-157 CML blast phase + WHO 5th accelerated phase abolished
+- Gates: checkLesson [], narration 0 fails, coverage 8/8.
+- Checker note: coverage number matching is literal (100000 vs 100,000); keep blueprint numbers identical to lesson text.
+- Progress total: 16 of 113 topics.
+
 ## Done (run 2, 2026-11-07)
 - Lesson son-hodgkin-survivor (6 steps, 2 reused KB real images, both HTTP 200 verified):
   - pyqss-2025-s2-53 second primaries No.1 late death + latencies + screening (also covers pyqss-2025-s3-172 same fact)
