@@ -51,3 +51,9 @@
 - Audit re-verified: checkLesson `[]` x5 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus, sur-neck, sur-neck-face-trauma); R2 200 x8 byte-identical sizes (last download valid WebP), all 8 KEEP per the earlier look; `node tools/prep-lessons.mjs --check` only the 2 pre-existing sur-brain-tumours fails (step-3 verbatim, step-5 aminolevulinic-acid grounding) for stage-2. No removals/swaps/needs, so no audit PR owed.
 - Lane-C PRs #1981 OPEN/MERGEABLE/UNSTABLE + #1988 OPEN/MERGEABLE/CLEAN (gh API); no rebase needed, left for lead.
 - Safekeeping: 6 paediatric blueprints on this branch, untouched. This commit carries the branch copy of SS-LESSONS-C-NEUROSURGERY-AUDIT.md (synced from main checkout, purely additive) and this STATE.md. No PR opened. Queue line 16 untouched.
+
+## 2026-11-06 run 13 (writer muse-spark-1.3; origin/main b249cde48 = #1981 merged, fetched): ss-neurosurgery stage-1 closeout
+- Queue re-read: ss-neurosurgery still `blueprint: todo` (queue item 13, file line 16), all lanes todo; no lane-A neurosurgery branch on remote, so no stage-2 topics, no lessons written, no blind fact-check owed, no FLAGS rows (lead 05:3x checker-first note is agy-runs only; checker CLIs not re-probed this run).
+- Audit re-verified on origin/main file versions: checkLesson `[]` x5; R2 200 x8 byte-identical sizes, all valid WebP VP8, all 8 KEEP. --check same pre-existing fails only (logged for stage-2 / in LESSONS-GARBLED.md). No removals/swaps/needs, so no audit PR owed.
+- Lane-C figure duties confirmed landed on main (#1978 VKH swap present; 4 scc lessons at 2 images each, no bad srcs). PR #1988 OPEN/MERGEABLE (gh); left for lead.
+- Safekeeping: 6 paediatric blueprints on this branch, untouched. This commit carries the branch copy of SS-LESSONS-C-NEUROSURGERY-AUDIT.md and this STATE.md. No PR opened. Queue item 13 untouched.
