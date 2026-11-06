@@ -13,6 +13,12 @@
 - Lane-C PRs #1978/#1981/#1988 all MERGEABLE (gh API; #1988 UNSTABLE = pending checks only); no rebase needed.
 - Safekeeping: 6 paediatric blueprints on this branch, untouched. Closeout commit carries the branch copies of SS-LESSONS-C-PROGRESS.md + SS-LESSONS-C-NEUROSURGERY-AUDIT.md (synced from main checkout) and this STATE.md. No PR opened. Queue line 13 untouched.
 
+## 2026-11-06 run 9 (writer muse-spark-1.3, origin/main aa63b4b5a fetched; local main baa8d2e5e, diff empty for all 5 audit files + surgery taxonomy): ss-neurosurgery stage-1 closeout
+- Queue re-read: ss-neurosurgery still `blueprint: todo`, lane C `todo`; no lane-A neurosurgery branch on remote, so no stage-2 topics, no lessons written, no blind fact-check owed, no FLAGS rows (lead 05:3x checker-first note is agy-runs only).
+- Audit re-verified: checkLesson `[]` x5 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus, sur-neck, sur-neck-face-trauma); R2 200 x8 byte-identical sizes (last download valid WebP VP8), all 8 KEEP per the earlier look; `node tools/prep-lessons.mjs --check` same pre-existing fails only (brain-tumours verbatim + aminolevulinic-acid grounding; head-injury/hydrocephalus/neck/neck-face-trauma narration verb FAILs, all already in LESSONS-GARBLED.md lines 1224/1226/1231/1232). No removals/swaps/needs, so no audit PR owed.
+- Lane-C PRs #1981 OPEN/MERGEABLE/UNSTABLE + #1988 OPEN/MERGEABLE/CLEAN (gh API); no rebase needed, left for lead.
+- Safekeeping: 6 paediatric blueprints on this branch, untouched. This commit carries the branch copy of SS-LESSONS-C-NEUROSURGERY-AUDIT.md (synced from main checkout, purely additive) and this STATE.md. No PR opened. Queue line 13 untouched.
+
 ---
 
 ## Lane C Tasks & Status
