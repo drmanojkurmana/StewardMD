@@ -1,0 +1,215 @@
+{
+ "checks": {
+  "bank": null,
+  "dropped": 0,
+  "drugs": true,
+  "numbers": true,
+  "redone": 0,
+  "selfCheck": false,
+  "shape": true,
+  "verbatim": true
+ },
+ "gen": "hand",
+ "minutes": 8,
+ "module": "ssg-spleen-surgery",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22e Ch 72, spleen",
+  "WSES Spleen Trauma guideline 2023",
+  "ASH ITP guideline 2023",
+  "SVS Visceral Aneurysm guideline 2020"
+ ],
+ "src": [
+  "ss-c-spleen-ground"
+ ],
+ "steps": [
+  {
+   "say": "AAST grades splenic injury one to five from capsular tear to shattered spleen. Stable grades one to three without blush get nonoperative care with ninety percent success. Grade, blush and physiology together write the plan.",
+   "tx": "**AAST** grades splenic injury **I** to **V** from capsular tear to shattered spleen, and stable grades **I** to **III** without blush get **nonoperative care** with **90** percent success. Contrast blush, falling haemoglobin and peritonitis escalate grades clinically, and repeat CT catches delayed rupture. Bed rest with serial examination and transfusion thresholds holds stable low-grade injuries safely.",
+   "vis": {
+    "alt": "AAST splenic injury grades with management algorithm and post-splenectomy OPSI prophylaxis panel.",
+    "caption": "Splenic injury grades and OPSI prevention. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/lessons/media/sur-spleen-fig1.webp"
+   }
+  },
+  {
+   "say": "Contrast blush in a stable patient goes to splenic artery embolisation, while instability, hypotension with peritonitis or transfusion over four units mandates splenectomy. Embolisation saves spleens that would otherwise come out. Operating through instability still beats radiology.",
+   "tx": "Contrast blush in a stable patient goes to **splenic embolisation**, while instability, hypotension with peritonitis or transfusion over **4** units mandates **splenectomy**. Proximal coil embolisation drops perfusion pressure while collaterals keep the spleen alive, and distal embolisation targets focal bleeders. Failed embolisation with ongoing transfusion converts to splenectomy without shame, since life outranks organ.",
+   "vis": {
+    "alt": "Splenic parenchymal laceration with subcapsular haematoma, haemoperitoneum and splenic artery on CT schematic.",
+    "caption": "Splenic laceration with haemoperitoneum. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/splenic-trauma-and-post-splenectomy-sepsis-fig1.webp"
+   }
+  },
+  {
+   "say": "Immune thrombocytopenia failing steroids and IVIG with platelets under thirty gets laparoscopic splenectomy with eighty percent response, durable in about two thirds. Vaccinate against pneumococcus, meningococcus and Haemophilus two weeks prior. Platelet response usually declares itself within days.",
+   "tx": "**Immune thrombocytopenia** failing steroids and IVIG with platelets under **30** gets laparoscopic splenectomy with **80** percent response, durable in about two thirds, after pneumococcal, meningococcal and Haemophilus **presplenectomy vaccines** **2** weeks prior. Accessory spleens explain some failures, so hunt the hilum, omentum and pancreatic tail at operation. Rituximab and thrombopoietin agents precede surgery in modern algorithms, reserving the knife for refractory cases.",
+   "vis": {
+    "cols": [
+     "Step",
+     "Trigger",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "First line fails",
+      "Steroids plus IVIG",
+      "Rituximab or TPO"
+     ],
+     [
+      "Platelets under 30",
+      "Bleeding risk",
+      "Laparoscopic splenectomy"
+     ],
+     [
+      "Vaccines",
+      "2 weeks prior",
+      "Pneumo, meningo, Hib"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Overwhelming postsplenectomy infection from encapsulated organisms carries fifty percent mortality. Lifelong penicillin in children and early fever antibiotics in all ages prevent disaster. Howell-Jolly bodies on film mark the asplenic state.",
+   "tx": "**Overwhelming postsplenectomy infection** from **encapsulated organisms** carries **50** percent mortality, prevented by lifelong penicillin in children and early fever antibiotics. Pneumococcus, meningococcus and Haemophilus strike fastest, with fulminant DIC within hours of fever. Educate every splenectomised patient to take standby amoxicillin and seek care the same hour, and re-vaccinate on schedule lifelong.",
+   "vis": {
+    "alt": "Blood film showing Howell-Jolly bodies as dense nuclear remnants in red cells after splenectomy.",
+    "caption": "Howell-Jolly bodies mark hyposplenism. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/hyposplenism-fig1.webp"
+   }
+  },
+  {
+   "say": "Splenic artery aneurysm over two centimetres, symptomatic or in pregnancy needs embolisation or resection. Rupture mortality is about twenty five percent overall but about seventy percent maternal in pregnancy, so treat electively. Watch small calcified aneurysms in low risk patients.",
+   "tx": "**Splenic artery aneurysm** over **2** cm, symptomatic or in pregnancy needs embolisation or resection because **rupture** carries about **25** percent mortality overall, rising toward **70** percent maternal mortality in pregnancy with fetal loss above **75** percent. Multiparity, portal hypertension and fibromuscular dysplasia weaken the wall, and double-rupture into the lesser sac warns before free catastrophe. Coil or stent-graft suitable anatomy, and resect with splenectomy when hilar branches tangle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Under 2 cm, quiet",
+      "Calcified wall",
+      "Surveillance"
+     ],
+     "title": "Observe"
+    },
+    "right": {
+     "points": [
+      "Over 2 cm or pregnant",
+      "Symptomatic",
+      "Embolise or resect"
+     ],
+     "title": "Treat"
+    }
+   }
+  },
+  {
+   "say": "Epidermoid splenic cysts over five centimetres with septations need partial splenectomy or decapsulation with omental packing rather than total splenectomy. Preserve immunity while removing the cyst. Total splenectomy wastes defence for benign disease.",
+   "tx": "**Epidermoid cyst** over **5** cm with septations needs **partial splenectomy** or decapsulation with omental packing rather than total splenectomy to preserve immunity. True epithelial lining distinguishes epidermoid from post-traumatic pseudocysts, and mural nodules demand frozen section. Hilar location may force total removal, but polar cysts shell out cleanly with splenic salvage.",
+   "vis": {
+    "edges": [
+     [
+      "small",
+      "watch"
+     ],
+     [
+      "big",
+      "spare"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "small",
+      "label": "Small, thin wall"
+     },
+     {
+      "id": "watch",
+      "label": "Observe"
+     },
+     {
+      "id": "big",
+      "label": "Over 5 cm, septated"
+     },
+     {
+      "id": "spare",
+      "label": "Partial splenectomy"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Hereditary spherocytosis with gallstones gets combined splenectomy with cholecystectomy after age five. Partial splenectomy suits children to preserve immunity. Pigment stones form from chronic haemolysis, so image the gallbladder in every case.",
+   "tx": "**Hereditary spherocytosis** with gallstones gets **combined splenectomy** with cholecystectomy after age **5**, with partial splenectomy preferred in children. Osmotic fragility and spectrin defects confirm the diagnosis, and cholecystectomy joins the operation since pigment stones recur otherwise. Delay elective splenectomy past age five wherever safe to bank maximum immunity first.",
+   "vis": {
+    "cols": [
+     "Age",
+     "Operation",
+     "Reason"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Under 5 years",
+      "Defer if safe",
+      "Bank immunity"
+     ],
+     [
+      "After 5, with stones",
+      "Spleen plus gallbladder",
+      "Pigment stones recur"
+     ],
+     [
+      "Child needing op",
+      "Partial splenectomy",
+      "Preserve defence"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Wandering spleen with torsion and infarct on whorled pedicle CT needs splenopexy when viable and splenectomy when infarcted. The whirl sign marks twisted vessels. Fix viable wandering spleens before they twist.",
+   "tx": "**Wandering spleen** with torsion and infarct on whorled pedicle CT needs **splenopexy** when viable and splenectomy when infarcted. Ligamentous laxity lets the spleen migrate to pelvis or flank, and intermittent torsion causes recurrent pain before final infarction. Laparoscopic splenopexy in a mesh pouch anchors viable spleens, while dead infarcted organs come out with vaccination after.",
+   "vis": {
+    "edges": [
+     [
+      "twist",
+      "scan"
+     ],
+     [
+      "scan",
+      "pexy"
+     ],
+     [
+      "scan",
+      "dead"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "twist",
+      "label": "Mobile spleen pain"
+     },
+     {
+      "id": "scan",
+      "label": "Whirl sign on CT"
+     },
+     {
+      "id": "pexy",
+      "label": "Viable: splenopexy"
+     },
+     {
+      "id": "dead",
+      "label": "Infarcted: splenectomy"
+     }
+    ]
+   }
+  }
+ ],
+ "subject": "ss-surgical-gastroenterology",
+ "title": "Spleen surgery: trauma, ITP, OPSI and cysts",
+ "v": 1
+}

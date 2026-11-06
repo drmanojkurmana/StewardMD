@@ -1,0 +1,204 @@
+{
+ "checks": {
+  "bank": null,
+  "dropped": 0,
+  "drugs": true,
+  "numbers": true,
+  "redone": 0,
+  "selfCheck": false,
+  "shape": true,
+  "verbatim": true
+ },
+ "gen": "hand",
+ "minutes": 8,
+ "module": "ssg-pancreatic-cystic-neoplasms",
+ "quiz": [],
+ "refs": [
+  "Blumgart Surgery of the Liver 6e Ch 60 and 66",
+  "Fukuoka IPMN guideline 2017"
+ ],
+ "src": [
+  "ss-c-pancreatic-cystic-ground"
+ ],
+ "steps": [
+  {
+   "say": "Small branch duct IPMN without nodules or symptoms enters size-stratified surveillance starting with six monthly MRI. Main duct dilation of ten millimetres or more is high risk stigmata needing resection. Duct diameter writes the first branch of the decision tree.",
+   "tx": "**Branch-duct IPMN** under **3** cm without nodules or symptoms enters size-stratified surveillance starting with **6**-monthly MRI, while **main-duct dilation** of **10** mm or more is high-risk stigmata needing resection. Branch cysts communicating with a normal-calibre main duct behave indolently for years, while main duct involvement marches toward malignancy. Measure the main duct on MRCP at every visit, since reaching the 10 mm line ends surveillance.",
+   "vis": {
+    "alt": "Branch duct cysts with papillary projections, mucin extrusion at the ampulla and a dilated main pancreatic duct in IPMN.",
+    "caption": "Branch cysts with mucin extrusion in IPMN. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/ipmn-fig1.webp"
+   }
+  },
+  {
+   "say": "Worrisome features upgrade surveillance to endoscopic ultrasound with needle aspiration. Cysts over three centimetres, thickened enhancing walls, a five to nine millimetre duct, abrupt calibre change with distal atrophy, nodes and rising CA 19-9 each count. Any of these lowers the threshold to act.",
+   "tx": "**Worrisome features** of cyst over **3** cm, thickened enhancing walls, main duct **5** to **9** mm, **abrupt calibre change** with distal atrophy, lymphadenopathy and CA **19**-9 rise need EUS with fine-needle aspiration. Cytology with cyst fluid CEA and amylase stratifies mucinous against non-mucinous and flags duct communication, and mural nodules of 5 mm or more push straight to resection. Re-image at short intervals when EUS stays negative but features persist.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Cutoff",
+     "Upgrade"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Cyst size",
+      "Over 3 cm",
+      "EUS plus FNA"
+     ],
+     [
+      "Main duct",
+      "5 to 9 mm",
+      "EUS plus FNA"
+     ],
+     [
+      "Mural nodule",
+      "5 mm or more",
+      "Resect"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Mucinous cystic neoplasm in middle aged women with ovarian type stroma and no duct communication needs resection in fit patients. Malignant potential never sleeps in these tumours. Do not watch any size in a fit patient.",
+   "tx": "**Mucinous cystic neoplasm** in middle-aged women with **ovarian-type stroma** and no duct communication needs resection in fit patients because of malignant potential. Thick-walled macrocysts in the body or tail with peripheral calcification mark the typical case, and complete resection cures benign and borderline disease. Formal distal pancreatectomy with splenic preservation remains the standard for noninvasive disease, with splenectomy and nodal clearance when invasion is suspected.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Ovarian stroma present",
+      "No duct communication",
+      "Resect all sizes"
+     ],
+     "title": "Mucinous cystic"
+    },
+    "right": {
+     "points": [
+      "Glycogen-rich, no stroma",
+      "No duct communication",
+      "Observe if quiet"
+     ],
+     "title": "Serous cystadenoma"
+    }
+   }
+  },
+  {
+   "say": "Serous cystadenoma with central scar and spoke wheel enhancement is benign and observed. Honeycomb microcysts with sunburst calcification support it on CT. Resect only for symptoms or diagnostic doubt pressing on neighbours.",
+   "tx": "**Serous cystadenoma** with central scar and **spoke-wheel** enhancement is benign and observed, resected only for symptoms or diagnostic doubt. Von Hippel-Lindau disease grows multiple serous lesions that still behave benignly, and absent duct communication with microcystic shape separates serous disease from IPMN. Gastric outlet pressure or biliary compression from giant lesions forces resection despite benign histology.",
+   "vis": {
+    "alt": "Honeycomb microcystic serous cystadenoma with central stellate scar, sunburst calcification, intact main duct and PAS positive histology.",
+    "caption": "Serous honeycomb cyst with stellate scar. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/serous-cystadenoma-pancreas-fig1.webp"
+   }
+  },
+  {
+   "say": "Solid pseudopapillary neoplasm in young women with haemorrhagic degeneration needs parenchyma sparing resection with ninety five percent cure. Low grade behaviour rewards limited surgery. Preserve every millimetre of normal pancreas in the young.",
+   "tx": "**Solid pseudopapillary** neoplasm in young women with haemorrhagic degeneration needs **parenchyma-sparing** resection with **95** percent cure because of low-grade behaviour. Large mixed solid-cystic masses with a fibrous capsule displace rather than invade, and even metastatic deposits resect well. Enucleation or middle pancreatectomy suits small lesions away from the duct, keeping endocrine and exocrine function for decades.",
+   "vis": {
+    "edges": [
+     [
+      "young",
+      "image"
+     ],
+     [
+      "image",
+      "spare"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "young",
+      "label": "Young woman, mass"
+     },
+     {
+      "id": "image",
+      "label": "Solid-cystic, capsule"
+     },
+     {
+      "id": "spare",
+      "label": "Parenchyma-sparing op"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Cyst fluid chemistry separates mucinous from non mucinous disease. CEA over one ninety two marks mucinous lesions while amylase over two fifty marks duct communication, deciding IPMN against mucinous cystic neoplasm. Aspirate at EUS and let the numbers classify.",
+   "tx": "**Cyst fluid CEA** over **192** ng per mL marks mucinous lesions while cyst **amylase** over **250** units per L marks duct communication, deciding IPMN against MCN. High CEA with low amylase fits mucinous cystic neoplasm off the duct, while high amylase fits branch-duct IPMN on it. Glucose under 50 adds a mucinous vote, though CEA cannot grade malignancy, and cytology catches the malignant minority chemistry misses.",
+   "vis": {
+    "cols": [
+     "Fluid test",
+     "Cutoff",
+     "Means"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "CEA",
+      "Over 192 ng per mL",
+      "Mucinous lesion"
+     ],
+     [
+      "Amylase",
+      "Over 250 units per L",
+      "Duct communication"
+     ],
+     [
+      "Glucose",
+      "Under 50 mg per dL",
+      "Mucinous vote"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Resection does not end the story, because the remnant pancreas carries five to ten percent metachronous cancer risk. Post resection IPMN surveillance continues lifelong with annual imaging. Generally discharge no one with a pancreatic remnant.",
+   "tx": "Post-resection IPMN needs **lifelong surveillance** with annual imaging because remnant pancreas carries **metachronous cancer** risk of **5** to **10** percent. Family history and margin dysplasia intensify the schedule, while new cysts or duct growth retrigger the worrisome-features workup. MRI alternates with EUS for high-risk remnants, keeping lifetime radiation near zero.",
+   "vis": {
+    "edges": [
+     [
+      "resect",
+      "annual"
+     ],
+     [
+      "annual",
+      "new"
+     ],
+     [
+      "new",
+      "workup"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resect",
+      "label": "IPMN resected"
+     },
+     {
+      "id": "annual",
+      "label": "Annual MRI lifelong"
+     },
+     {
+      "id": "new",
+      "label": "New cyst or growth"
+     },
+     {
+      "id": "workup",
+      "label": "Full re-staging"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Enucleation suits small benign lesions away from the main duct but fails near it. Duct proximity under three millimetres risks fistula and favours formal resection. Measure twice on MRCP before shelling out.",
+   "tx": "**Enucleation** suits small benign lesions away from the main duct, but **main duct proximity** under **3** mm risks fistula and favours formal resection. Intraoperative ultrasound maps the duct in real time, and a manageable fistula after enucleation beats formal resection for truly peripheral benign lesions. Central lesions abutting the duct go to middle pancreatectomy or Whipple rather than risky shelling.",
+   "vis": null
+  }
+ ],
+ "subject": "ss-surgical-gastroenterology",
+ "title": "Pancreatic cysts: IPMN, mucinous, serous and pseudopapillary rules",
+ "v": 1
+}

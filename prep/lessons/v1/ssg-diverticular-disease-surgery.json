@@ -1,0 +1,223 @@
+{
+ "checks": {
+  "bank": null,
+  "dropped": 0,
+  "drugs": true,
+  "numbers": true,
+  "redone": 0,
+  "selfCheck": false,
+  "shape": true,
+  "verbatim": true
+ },
+ "gen": "hand",
+ "minutes": 8,
+ "module": "ssg-diverticular-disease-surgery",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22e Ch 95, colon",
+  "WSES Diverticulitis guideline 2024",
+  "ASCRS Diverticulitis guideline 2023",
+  "ACG Lower GI Bleed 2023"
+ ],
+ "src": [
+  "ss-c-diverticular-ground"
+ ],
+ "steps": [
+  {
+   "say": "The Hinchey scale grades perforated diverticulitis from a small pericolic abscess through pelvic and distant collections to generalised pus and finally faecal soilage. Each stage up the scale pushes management from antibiotics toward drainage, lavage and resection. Learn the four stages in order, since exams love the sequence.",
+   "tx": "**Hinchey** stages perforated diverticulitis from pericolic abscess through pelvic, **purulent peritonitis** and faecal peritonitis, deciding between antibiotics, drainage, lavage and Hartmann resection. Stage I and II contained leaks suit antibiotics with or without drain, while stage III purulent and stage IV faecal peritonitis need operation. CT with rectal contrast maps the stage preoperatively and finds the segment to resect.",
+   "vis": {
+    "alt": "Pseudodiverticulum wall layers beside a CT diagram of sigmoid diverticula with the four Hinchey stages of perforation.",
+    "caption": "Diverticulum wall defect with Hinchey stages. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/diverticular-disease-fig1.webp"
+   }
+  },
+  {
+   "say": "Uncomplicated diverticulitis without systemic features settles without routine antibiotics. Small abscesses between three and five centimetres get antibiotics alone, while anything bigger needs a drain. Size on CT therefore writes the prescription.",
+   "tx": "**Uncomplicated diverticulitis** without systemic features needs no routine antibiotics, while abscesses **3** to **5** cm get antibiotics and over **5** cm need **percutaneous drainage**. Outpatient care with clear fluids suits afebrile low-risk patients, and C-reactive protein trends decide admission. Failure to improve in 48 to 72 hours or a growing collection upgrades care to drainage or resection.",
+   "vis": {
+    "alt": "Sigmoid colon diagram showing high pressure zones forming a diverticulum outpouching through the muscular wall.",
+    "caption": "High pressure pulsion diverticulum formation. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/lessons/media/sur-colon-benign-fig1.webp"
+   }
+  },
+  {
+   "say": "Faecal peritonitis and unstable physiology mean Hartmann resection with end colostomy. Stable patients with purulent peritonitis can have primary anastomosis with or without a diverting loop. Match the operation to the physiology, not just the contamination.",
+   "tx": "**Hartmann** with end colostomy remains the choice for faecal peritonitis and unstable patients, while stable purulent peritonitis suits **primary anastomosis** with or without diversion. Hartmann trades continuity for safety in shocked acidotic patients, and reversal follows months later after nutrition recovers. Diverting loop ileostomy protects a primary anastomosis in borderline cases and closes later with far less morbidity than a Hartmann reversal.",
+   "vis": {
+    "edges": [
+     [
+      "stable",
+      "primary"
+     ],
+     [
+      "unstable",
+      "hartmann"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stable",
+      "label": "Stable, purulent only"
+     },
+     {
+      "id": "primary",
+      "label": "Primary anastomosis"
+     },
+     {
+      "id": "unstable",
+      "label": "Unstable or faecal"
+     },
+     {
+      "id": "hartmann",
+      "label": "Hartmann resection"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Elective resection follows complicated attacks or smouldering disease that never fully settles. About thirty percent recur after a complicated episode, so weigh that against operative risk with the patient rather than counting episodes. Smouldering pain with raised markers between attacks pushes toward surgery.",
+   "tx": "**Elective sigmoidectomy** follows complicated or **smouldering** diverticulitis, and shared decision-making weighs the **30** percent recurrence against operative risk rather than counting episodes. Persistent segmental thickening, stricture or fistula after recovery all favour resection, while a single uncomplicated attack does not. Laparoscopic sigmoid colectomy with splenic flexure mobilisation gives durable cure with low leak rates in experienced hands.",
+   "vis": {
+    "cols": [
+     "Indication",
+     "Recurrence logic",
+     "Plan"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Single uncomplicated",
+      "Low risk",
+      "No surgery"
+     ],
+     [
+      "Complicated attack",
+      "30% recur",
+      "Elective resection"
+     ],
+     [
+      "Smouldering disease",
+      "Never settles",
+      "Elective resection"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Pneumaturia with faecaluria in a diverticular patient means the colon has joined the bladder. CT shows a saw tooth bladder wall next to thickened sigmoid. Treat with sigmoid resection and bladder curettage, since cystectomy is never needed for this benign fistula.",
+   "tx": "**Colovesical fistula** shows pneumaturia and **faecaluria** with a saw-tooth bladder on CT, treated by sigmoid resection with bladder curettage, not cystectomy. Recurrent polymicrobial urinary infections in an older man with diverticulosis should trigger the search, and poppy-seed or charcoal tests confirm the tract. Small bladder defects close over a catheter, while large ones need two-layer bladder repair with omental interposition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Pneumaturia, faecaluria",
+      "Saw-tooth bladder CT",
+      "Resect sigmoid"
+     ],
+     "title": "Colovesical fistula"
+    },
+    "right": {
+     "points": [
+      "Vaginal flatus, stool",
+      "Contrast enema tract",
+      "Resect with repair"
+     ],
+     "title": "Colovaginal fistula"
+    }
+   }
+  },
+  {
+   "say": "Most diverticular bleeding stops on its own, so resuscitate and watch first. Localise active bleeding above three tenths of a millilitre per minute with CT angiography, then embolise before ever considering segmental colectomy. Blind colectomy without localisation bleeds again from the remaining colon.",
+   "tx": "Diverticular bleeding stops spontaneously in **80** percent and localises by **CT angiography** at bleeding rates over **0.3** mL per minute, with **embolisation** before segmental colectomy. Superselective coils target the vasa recta while preserving collaterals, and ischaemia risk rises if embolisation goes too proximal. Tagged red-cell scans find slower intermittent bleeds that CT misses, guiding delayed segmental resection only when localised.",
+   "vis": {
+    "edges": [
+     [
+      "bleed",
+      "cta"
+     ],
+     [
+      "cta",
+      "embolise"
+     ],
+     [
+      "embolise",
+      "resect"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bleed",
+      "label": "Diverticular bleed"
+     },
+     {
+      "id": "cta",
+      "label": "CT angio over 0.3 mL/min"
+     },
+     {
+      "id": "embolise",
+      "label": "Superselective coils"
+     },
+     {
+      "id": "resect",
+      "label": "Localised resection only"
+     }
+    ]
+   }
+  },
+  {
+   "say": "A giant diverticulum over four centimetres is a different disease from small pulsion pockets. Perforation risk is high, and the barium balloon sign can hide a coexistent cancer. Resect the segment rather than watching it.",
+   "tx": "**Giant diverticulum** over **4** cm risks perforation and needs **segmental resection** because barium enema balloon sign can mask coexistent cancer. These thin-walled gas cysts reach alarming size in the sigmoid and twist or rupture without warning. Resection with primary anastomosis cures both the mechanical risk and the diagnostic doubt, since colonoscopy cannot reliably exclude malignancy around the ballooned segment.",
+   "vis": {
+    "cols": [
+     "Size",
+     "Risk",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Under 4 cm",
+      "Standard diverticula",
+      "Usual Hinchey rules"
+     ],
+     [
+      "Over 4 cm",
+      "Perforation, hidden cancer",
+      "Segmental resection"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Right sided diverticulitis in a young patient copies appendicitis almost perfectly. Uncomplicated cases resolve with conservative care, so do not remove a normal appendix by reflex. CT showing caecal diverticula with a normal appendix settles the dilemma.",
+   "tx": "**Right-sided diverticulitis** mimics appendicitis in young patients, and uncomplicated cases resolve with **conservative care** avoiding unnecessary appendectomy. Pain sits lower and more lateral than classic McBurney tenderness, and CT shows inflamed caecal diverticula around a normal appendix. Antibiotics with bowel rest settle most cases, reserving resection for recurrent, complicated or diagnostically uncertain disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "McBurney tenderness",
+      "Noncompressible appendix",
+      "Appendectomy"
+     ],
+     "title": "Appendicitis"
+    },
+    "right": {
+     "points": [
+      "Lateral caecal pain",
+      "Normal appendix on CT",
+      "Conservative care"
+     ],
+     "title": "Right-sided diverticulitis"
+    }
+   }
+  }
+ ],
+ "subject": "ss-surgical-gastroenterology",
+ "title": "Diverticular disease: Hinchey staging, fistulae, bleeding and mimics",
+ "v": 1
+}
