@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "spl-abdominoplasty-body-contouring",
+  "subject": "ss-plastic-surgery",
+  "title": "Abdominoplasty and Body Contouring",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Surgical abdominoplasty restores contour by addressing the structural triad of lower abdominal skin redundancy, subcutaneous adipose excess, and **rectus abdominis diastasis**. Patient selection carefully evaluates whether tissue laxity is predominantly supraumbilical, infraumbilical, or circumferential following massive bariatric weight loss and pregnancy changes.",
+      "say": "An abdominoplasty restores the waistline by tackling three problems together: loose lower abdominal skin, excess fat under the skin, and separation of the rectus muscles down the midline, which surgeons call diastasis. Before operating, examine where the looseness sits, because laxity above the navel, below it, or all around the trunk after pregnancy or massive weight loss each points to a different operation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Structural evaluation: skin excess, fat distribution, fascial laxity"
+          },
+          {
+            "id": "b",
+            "label": "Incision planning and selective epigastric tunnel undermining"
+          },
+          {
+            "id": "c",
+            "label": "Two-layer rectus plication, quilting sutures, and umbilical inset"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In full abdominoplasty, the abdominal flap is elevated off the rectus sheath up to the costal margins, while preserving lateral blood supply. Midline **rectus diastasis plication** is executed using two layers of interrupted and continuous permanent monofilament or braided sutures to re-establish an athletic abdominal wall profile.",
+      "say": "In a full abdominoplasty the surgeon lifts the abdominal skin and fat off the rectus sheath all the way up to the rib margins, taking care to preserve the blood supply entering from the sides. The separated rectus muscles are then stitched back together in the midline with two layers of permanent suture, which rebuilds a flat and athletic abdominal wall.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-mayo-hegar-needle-holder.webp",
+        "alt": "Surgical needle holder for rectus sheath fascial plication",
+        "caption": "Surgical suturing instruments for two-layer rectus fascial plication. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Surgical variants depend on tissue laxity distribution. **Mini-abdominoplasty** involves limited infraumbilical skin excision and infraumbilical plication without transposing the umbilicus. **Fleur-de-lis abdominoplasty** combines standard low transverse excision with a vertical midline resection, ideal for massive weight loss patients with pronounced horizontal skin excess.",
+      "say": "Choose the variant from the pattern of looseness. A mini abdominoplasty suits laxity confined below the navel, using a short low excision with plication beneath the umbilicus while the navel itself stays exactly where it is. After massive weight loss with severe sideways excess, add a vertical midline resection to the usual low transverse excision, which is the fleur-de-lis pattern, trading a vertical scar for a much tighter waist.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mini-Abdominoplasty",
+          "points": [
+            "Isolated infraumbilical skin excess",
+            "No umbilical transposition",
+            "Limited recovery period"
+          ]
+        },
+        "right": {
+          "title": "Fleur-de-lis Abdominoplasty",
+          "points": [
+            "Combined transverse and vertical resections",
+            "Addresses severe horizontal laxity",
+            "Produces vertical midline scar"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In high-superior tension abdominoplasty described by Lockwood, substantial closure tension is transferred to the **superficial fascial system** or SFS anchored firmly to the deep iliac fascia. This mechanical suspension prevents cranial scar migration, maintains low suprapubic scar placement, and avoids mons pubis elevation.",
+      "say": "Lockwood taught us to close under high tension carried by the deep tissues rather than the skin. Strong sutures hitch the superficial fascial system down to the firm fascia over the iliac bones, so the pull is carried on that anchor instead of the wound edge. That keeps the scar sitting low above the pubis, stops it drifting upward over time, and prevents the mons from being dragged up.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Flap advancement under high superior traction"
+          },
+          {
+            "id": "b",
+            "label": "Deep suture anchoring of SFS to iliac fascia"
+          },
+          {
+            "id": "c",
+            "label": "Tension-free cutaneous dermal approximation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Baroudi and Ferreira introduced **progressive tension sutures** (quilting sutures) placed between the advancing abdominal flap and the underlying rectus fascia. These interrupted absorbable sutures incrementally advance the flap downward, completely obliterate subcutaneous dead space, and reduce seroma formation rates to under 2%.",
+      "say": "Quilting sutures, introduced by Baroudi and Ferreira, tack the advancing flap down to the rectus fascia row by row as it is pulled downward. Each stitch wipes out a pocket of dead space where fluid would otherwise collect, and with the whole underside quilted the seroma rate falls below two percent, often allowing the operation to finish without any drains at all.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Traditional Drains Alone",
+          "points": [
+            "Persistent subflap shear forces",
+            "Higher seroma rates (10% to 15%)",
+            "Prolonged drain discomfort"
+          ]
+        },
+        "right": {
+          "title": "Progressive Tension Sutures",
+          "points": [
+            "Direct dead space obliteration",
+            "Seroma rates under 2%",
+            "Permits drainless abdominoplasty"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A **circumferential body lift** or belt lipectomy extends the low transverse excision 360 degrees around the torso, indicated for massive weight loss patients. It synchronizes abdominoplasty with lateral thigh lifting and gluteal suspension, performed in prone and supine stages during a single operative session.",
+      "say": "After massive weight loss the looseness runs right around the trunk, so the excision must too. A circumferential body lift, also called a belt lipectomy, carries the low incision a full three hundred and sixty degrees, combining the tummy tuck with a lift of the outer thighs and buttocks. The back is done with the patient face down, then the team turns the patient over to complete the front in the same sitting.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Stage",
+          "Patient Position",
+          "Anatomical Target"
+        ],
+        "rows": [
+          [
+            "Posterior stage",
+            "Prone position",
+            "Lower back excision, buttock elevation and suspension"
+          ],
+          [
+            "Anterior stage",
+            "Supine position",
+            "Abdominoplasty, rectus plication, and mons reduction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Deep venous thrombosis and **pulmonary embolism** are the leading causes of mortality in major abdominoplasty procedures. Routine prophylactic protocols mandate Caprini score assessment, intraoperative pneumatic calf compression devices, early aggressive ambulation, and chemical thromboprophylaxis with low-molecular-weight heparin in high-risk patients.",
+      "say": "The complication to fear most after a large abdominoplasty is a blood clot travelling to the lungs, which remains the leading cause of death for this operation. Score every patient with the Caprini tool, squeeze the calves with pneumatic boots during surgery, get the patient walking early, and add low molecular weight heparin injections for anyone at high risk.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+        "alt": "Surgical safety and post-operative tissue management",
+        "caption": "Surgical principles in body contouring and thromboprophylaxis care. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Skin flap necrosis occurs predominantly in the central supra-incisional region, corresponding to Huger Zone I. Risk factors include wide lateral subflap undermining dividing intercostal perforators, concurrent aggressive liposuction, smoking, and prior scars such as subcostal Kocher incisions compromising collateral **perforator circulation**.",
+      "say": "When the abdominal flap loses its blood supply, the skin dies first in the centre just above the incision, the strip called Huger zone one, because its deep inferior epigastric perforators were divided during lifting. Wide undermining out toward the flanks destroys the surviving intercostal perforators, and smoking, forceful simultaneous liposuction, or an old Kocher scar under the ribs each push that same central skin closer to necrosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Huger Zone",
+          "Anatomical Region",
+          "Primary Vascular Supply"
+        ],
+        "rows": [
+          [
+            "Zone I",
+            "Mid-abdomen (between costal margins and pubis)",
+            "Deep inferior epigastric perforators (divided)"
+          ],
+          [
+            "Zone II",
+            "Lower abdomen / suprapubic",
+            "External pudendal and superficial epigastric vessels"
+          ],
+          [
+            "Zone III",
+            "Flanks and lateral abdomen",
+            "Intercostal, subcostal, and lumbar perforators (preserved)"
+          ]
+        ]
+      }
+    }
+  ]
+}
