@@ -17,7 +17,20 @@ const TTL = 180 * 86400;                        // 180d while OPEN, refreshed on
 export const RESOLVED_TTL = 30 * 86400;
 export function ttlFor(t) { return t && t.status === "resolved" ? RESOLVED_TTL : TTL; }
 // Kinds: "bug" (shake to report, 24 h promise), "help" (a question), "feedback" (an idea / opinion).
-export const KINDS = ["bug", "help", "feedback"];
+// "image" (2026-11-05): a report on one image in the app (a correction, a copyright concern, or a better image
+// offered), with the image's address and where it was seen. The owner approves or declines it in the admin console.
+export const KINDS = ["bug", "help", "feedback", "image"];
+export const IMAGE_REASONS = { correction: "Something in it is wrong", copyright: "Copyright concern", better: "A better image" };
+// Only what the console shows, clipped. The image address must be one the app loads (same site or https).
+export function cleanImageMeta(m) {
+  m = m || {};
+  const src = clean(m.src, 600);
+  return {
+    reason: Object.prototype.hasOwnProperty.call(IMAGE_REASONS, m.reason) ? m.reason : "correction",
+    src: /^(https:\/\/|\/(?!\/))/.test(src) ? src : "",
+    title: clean(m.title, 200), where: clean(m.where, 200), route: clean(m.route, 200),
+  };
+}
 function preview(m) { return m && m.text ? { from: m.from, text: String(m.text).slice(0, 140), ts: m.ts } : null; }
 const SUBJECT_MAX = 200, TEXT_MAX = 4000, MSGS_MAX = 200;
 // Bug reports (shake to report, 2026-09-26) are tickets of kind "bug" with where-it-happened details
@@ -83,7 +96,9 @@ export async function createTicket(store, who, body, rands, now) {
   };
   if (body && body.kind === "bug") {
     ticket.kind = "bug"; ticket.dueAt = now + BUG_SLA_MS; ticket.bug = cleanBugMeta(body.bug); ticket.hasShot = !!body.hasShot;
-  } else ticket.kind = body && KINDS.indexOf(body.kind) > -1 ? body.kind : "help";
+  } else if (body && body.kind === "image") {
+    ticket.kind = "image"; ticket.image = cleanImageMeta(body.image); ticket.hasShot = !!body.hasShot;
+  } else ticket.kind = body && KINDS.indexOf(body.kind) > -1 && body.kind !== "image" ? body.kind : "help";
   await store.put(tKey(id), JSON.stringify(ticket), { expirationTtl: ttlFor(ticket) });
   idx.unshift({ id, owner: ticket.owner, email: ticket.email, subject: ticket.subject, status: "open", unread: true, createdAt: now, updatedAt: now,
     kind: ticket.kind, last: preview(ticket.messages[0]), ...(ticket.kind === "bug" ? { dueAt: ticket.dueAt } : {}) });

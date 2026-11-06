@@ -82,8 +82,20 @@
    * page's own kbr-fig figure (the same shape as kbrDiagram in reasoning.js); anything
    * KBFigure.isImage rejects renders nothing. Image files ride /api/prep/bank/ like lesson
    * media, immutable and cached. */
-  function figuresHTML(figs) {
-    return ((figs || []).map(function (f) {
+  /* Which reader section an illustration belongs to, from its title and caption: a scan, film, smear or tracing is
+   * diagnostic; a mechanism or pathogenesis drawing is Pathophysiology; a treatment drawing is Management; anything
+   * unclear stays in Diagnosis (where every figure used to go). Owner 2026-11-05: "pathophysio image should place in
+   * pathophysio column and mri image in investigations part". */
+  function figHome(f) {
+    var t = (String((f && f.title) || "") + " " + String((f && f.caption) || "")).toLowerCase();
+    if (/\bmri\b|\bct\b|x-?ray|radiograph|ultraso|sonograph|echocardio|\bscan\b|\becg\b|\beeg\b|smear|biops|histolog|micrograph|endoscop|fundus|angiogra|\bpet\b|imaging/.test(t)) return "dx";
+    if (/patho(?:physiolog|genesis)|mechanism|pathway of (?:injury|disease)|life ?cycle|aetiolog|etiolog/.test(t)) return "patho";
+    if (/\btreat|manag|therap|\bdos(?:e|ing)\b|regimen|surgical|procedure/.test(t)) return "mgmt";
+    return "dx";
+  }
+  window.SMD_KBV2_FIGHOME = figHome;   // read by the reader UI test
+  function figuresHTML(figs, home) {
+    return ((figs || []).filter(function (f) { return !home || figHome(f) === home; }).map(function (f) {
       if (f && f.type === "svg-spec" && window.KBFigure) {
         return '<section class="kbv2-sec"><h4 class="kbv2-h">' + esc(f.title || f.id || "Figure") + "</h4>" +
           window.KBFigure.render(f) + (f.caption ? '<p class="kbv2-foot">' + hy(f.caption) + "</p>" : "") + "</section>";
@@ -105,6 +117,7 @@
     var fcs = x.flowcharts || [], vts = x.valueTables || [];
     if (kind === "foot") return (fcs.length || vts.length) ? NOTE : "";
     if (kind === "figures") return figuresHTML(x.figures);
+    if (kind.indexOf("figures-") === 0) return figuresHTML(x.figures, kind.slice(8));
     var html = "";
     fcs.forEach(function (fc) {
       if (!window.KBFlowchart) return;

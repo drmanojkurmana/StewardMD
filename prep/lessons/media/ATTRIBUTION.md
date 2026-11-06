@@ -5125,3 +5125,133 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | mcc-pb-rural-gen1.webp (R2) | Emergency care under implied consent with statutory surrogate order. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | mcc-pb-team-gen1.webp (R2) | Ward nurses escalating a sepsis signal from the monitor. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | mderm-hair-nail-gen1.webp (R2) | Alopecia areata scalp patch with broken regrowing hairs. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-stomach-fig1-r1.webp (R2) | Anterior duodenal ulcers perforate; posterior ulcers erode into gastroduodenal artery (label 'Peritoneum' repainted) | StewardMD (original, AI-generated with Vertex Gemini image) | CC BY 4.0 (StewardMD original) |
+| ahm-antimicrobial-gen1.webp (R2) | Yellow plaques over reddened colon lining seen on endoscopy, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ahm-chest-pain-gen1.webp (R2) | Raised ST segments in the chest leads with reciprocal depression elsewhere, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ahm-liver-gen1.webp (R2) | Contrast filled bile duct with a dark stone seen during ERCP, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ahs-anorectal-gen1.webp (R2) | Swollen anal cushions above the dentate line seen on endoscopy, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ahs-breast-gen1.webp (R2) | Dense breast mass with radiating spicules near the nipple, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ahs-lower-limb-gen1.webp (R2) | Left femoral neck fracture with marrow oedema on coronal MRI, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ahs-postop-gen1.webp (R2) | Irregular rhythm without P waves seen on a postoperative rhythm strip, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ahs-upper-limb-gen1.webp (R2) | Red swollen finger held in flexion suggesting sheath infection, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ana-connective-cartilage-bone-gen1.webp (R2) | Osteon with concentric lamellae around a Haversian canal, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ana-germ-layers-gen1.webp (R2) | Neural plate folding into a groove then a closed tube, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ana-nervous-senses-gen1.webp (R2) | Embryonic optic cup with lens vesicle and optic stalk, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ana-twinning-teratology-gen1.webp (R2) | Embryo with HOX bands setting limb bud positions, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ans-inhalational-gen1.webp (R2) | Nitrous oxide flux into the alveolus diluting oxygen, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ans-oxygen-respiratory-gen1.webp (R2) | High flow nasal cannula system with heated humidifier, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ans-preop-gen1.webp (R2) | Mallampati classes by visible mouth structures, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-acid-base-balance-gen1.webp (R2) | Envelope shaped oxalate crystals in urine sediment, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-carbohydrate-chemistry-gen1.webp (R2) | Chondrocytes in lacunae within blue stained cartilage matrix, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-collagen-ecm-gen1.webp (R2) | Blue grey sclera with labeled ocular landmarks, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-endocrine-biochemistry-gen1.webp (R2) | Medullary thyroid tumor nests with amyloid and calcitonin inset, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-fatty-acid-oxidation-gen1.webp (R2) | Carnitine shuttle ferrying fats into mitochondria, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-gene-regulation-gen1.webp (R2) | Chromosome 15 deletion shown by FISH with ideogram map, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-glycolysis-tca-gen1.webp (R2) | Succinate dehydrogenase feeding electrons to ubiquinone, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-intro-principles-gen1.webp (R2) | Mitochondrion ultrastructure with energy membranes labeled, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-membrane-transport-gen1.webp (R2) | Obstructed airway with mucus plug and gland changes, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-neurotransmitters-gen1.webp (R2) | Paraganglioma nests with neuroendocrine stain inset, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-omics-diagnostics-gen1.webp (R2) | Parallel sequencing chemistry on a flow cell, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-protein-structure-gen1.webp (R2) | Helix and sheet folds joined by hydrogen bonds, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-signal-transduction-gen1.webp (R2) | Growth receptor signaling through Ras to ERK, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-transcription-gen1.webp (R2) | Knockdown blot with preserved loading control, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| bio-water-soluble-vitamins-gen1.webp (R2) | Megaloblastic smear with oversized cells labeled, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ch-cardiac-gen1.webp (R2) | Echo with shunt jet across septal defect, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ch-immunisation-gen1.webp (R2) | Thigh muscle adrenaline rescue with oxygen support, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ch-safeguarding-gen1.webp (R2) | Immersion versus splash scald patterns compared, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-behavioural-gen1.webp (R2) | Three household forms with members labeled, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-cancer-gen1.webp (R2) | Koilocytes stand out among normal cervical cells Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-committees-policies-gen1.webp (R2) | Home visit brings primary care to the family doorstep Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-disinfection-gen1.webp (R2) | Steam chamber sterilises wrapped linen packs under gauge control Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-foods-toxins-gen1.webp (R2) | Leg swelling points to adulterated mustard oil Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-healthcare-delivery-gen1.webp (R2) | ANM records blood pressure during a sub centre clinic Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-injuries-gen1.webp (R2) | Hip swelling reveals a closed shearing injury Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-maternal-gen1.webp (R2) | Day three visit checks mother and newborn together Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-nhm-schemes-gen1.webp (R2) | ASHA referral slip links home to the PHC Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-planning-management-gen1.webp (R2) | Balance weighs care costs against health gains Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-school-adolescent-gen1.webp (R2) | Classroom layout meets school health norms Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-uip-gen1.webp (R2) | Intradermal bleb confirms correct BCG placement Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| cm-water-gen1.webp (R2) | Cutaway shows slow sand filter layers at work Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| der-connective-tissue-gen1.webp (R2) | Knuckle papules mark dermatomyositis skin disease Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| der-eczema-gen1.webp (R2) | Gaiter area shows venous stasis skin change Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| der-leprosy-gen1.webp (R2) | Microscopy shows heavy lepromatous bacillary load Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| der-pigmentary-gen1.webp (R2) | Wood lamp makes vitiligo glow chalk white Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| der-structure-lesions-gen1.webp (R2) | Blister base smear separates herpes from pemphigus Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ent-instruments-radiology-gen1.webp (R2) | Coronal CT of sinus polyp disease with labeled anatomy Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ent-vestibular-tests-gen1.webp (R2) | Caloric irrigation of the lateral canal with timed eye responses Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| fmt-early-changes-gen1.webp (R2) | Fundus vessel fragmentation marking the earliest minutes after death Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| fmt-infanticide-gen1.webp (R2) | Lung floatation test comparing respired and unrespired lung buoyancy Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| fmt-mixed-gen1.webp (R2) | Mees lines across nails signaling arsenic exposure Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| fmt-virginity-pregnancy-gen1.webp (R2) | Consent counseling visit mapping doctor approvals by gestation Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mbsci-biochem-gen1.webp (R2) | PFK 1 tetramer balancing activators against inhibitors Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mbsci-pathology-gen1.webp (R2) | Caseating granuloma with necrotic centre and giant cell rim Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-ac-asthma-gen1.webp (R2) | Normal bronchus beside constricted mucus plugged asthmatic bronchus Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-ac-dka-gen1.webp (R2) | ECG signature of low potassium with U waves and long QU Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-ac-ent-gen1.webp (R2) | Thumbprint epiglottis with fold swelling on neck radiograph Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-ac-headache-gen1.webp (R2) | Reversible beaded cerebral arteries mapped on paired angiograms Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-ac-paediatric-gen1.webp (R2) | Paediatric supraventricular tachycardia with absent P waves Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-ac-spine-gen1.webp (R2) | Rim enhancing spinal collection pressing on the cord Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-cc-anticoag-gen1.webp (R2) | Catheter delivered occluder sealing the left atrial appendage Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-cc-diabetescare-gen1.webp (R2) | Probe testing of a plantar ulcer for bone contact Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-cc-lung-gen1.webp (R2) | Basal honeycomb fibrosis with traction airway widening on chest CT Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-cc-palliative-gen1.webp (R2) | Faecal loading without obstruction managed with laxatives rather than surgery, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-cc-skin-gen1.webp (R2) | Linear basement membrane deposits of IgG and C3 marking bullous pemphigoid, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-adolescent-gen1.webp (R2) | Iron deficiency blood film with pencil cells and varied red cell shapes, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-childimm-gen1.webp (R2) | Functional asplenia leaving a child open to encapsulated bacterial infection, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-diabetes-screen-gen1.webp (R2) | Diabetic retinopathy changes seen on dilated retinal examination, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-indigenous-gen1.webp (R2) | Long remote journey showing structural barriers to clinic follow up, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-occupational-gen1.webp (R2) | Blue gingival Burton line marking chronic lead exposure, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-sti-gen1.webp (R2) | PrEP blocking HIV reverse transcriptase inside a CD4 cell, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-weight-gen1.webp (R2) | Normal sinus rhythm ECG clearing moderate activity in a sedentary adult, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-pb-boundaries-gen1.webp (R2) | Supervision discussion modelling the response to countertransference, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-pb-consent-gen1.webp (R2) | Triangle seating with a qualified interpreter for valid consent, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-pb-driving-gen1.webp (R2) | AV block with dropped beats and sinus pause behind driving syncope, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-pb-interpreters-gen1.webp (R2) | Interpreter assisted teach back confirming medicine understanding, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-pb-organ-gen1.webp (R2) | Hollow skull CTA showing absent intracranial flow in brain death, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-pb-safety-gen1.webp (R2) | Two identifier wristband check against the prescription chart, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-pb-transfusion-gen1.webp (R2) | Cell salvage circuit recapturing shed blood for reinfusion, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mderm-vasculitis-gen1.webp (R2) | Leukocytoclastic vasculitis histology with neutrophils and fibrinoid necrosis, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-diabetes-complications-gen1.webp (R2) | SGLT2 driven ketoacidosis from glucose loss to ketone buildup, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-envenomation-gen1.webp (R2) | Splinted bitten limb held at heart level during rapid transfer, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-onc-principles-gen1.webp (R2) | Immune colitis with erythema and ulceration seen on endoscopy, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mgas-bleed-gen1.webp (R2) | Bleeding varices treated with bands and glue injection, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mh-aboriginal-gen1.webp (R2) | Locked firearm safe and secured pesticide store limiting ready access, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mh-legal-gen1.webp (R2) | Four abilities tested when assessing capacity to decide, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mh-rural-gen1.webp (R2) | Frontal mass with swelling mimicking depressive illness, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mhaem-lymphoma-gen1.webp (R2) | Reed Sternberg cell with confirmatory CD15 and CD30 staining, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mic-antibodies-complement-gen1.webp (R2) | Three complement pathways converging on microbial lysis, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mic-general-virology-gen1.webp (R2) | Measles cell fusion with plaque assay counting plate, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mic-other-dna-viruses-gen1.webp (R2) | Koilocytes and CIN grade zones in cervical epithelium, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| minf-uti-gen1.webp (R2) | Obstructed kidney with stone and drainage options shown, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mneph-transplant-gen1.webp (R2) | Tacrolimus blocking calcineurin to silence IL 2 production, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mopht-acute-loss-gen1.webp (R2) | Vein occlusion with disc swelling and retinal haemorrhages shown, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mphar-analgesia-gen1.webp (R2) | Baseline and rescue morphine packs with starter laxative shown, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mphar-interactions-gen1.webp (R2) | Enzyme inhibition versus induction and resulting drug levels, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mresp-pneumonia-gen1.webp (R2) | Diplococci with neutrophils and culture inset in pneumonia, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mrheu-myositis-gen1.webp (R2) | Classic dermatomyositis skin signs in a labelled clinical photo, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mrheu-spa-gen1.webp (R2) | STIR MRI showing early active sacroiliitis around both sacroiliac joints, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mstat-design-gen1.webp (R2) | Diagram of a confounder distorting the link between exposure and outcome, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-amniotic-fluid-gen1.webp (R2) | Ultrasound showing oligohydramnios with low DVP and AFI measurements, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-benign-ovarian-gen1.webp (R2) | Ultrasound showing classic dermoid cyst features of an ovarian teratoma, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-fetal-growth-surveillance-gen1.webp (R2) | CTG showing a sinusoidal fetal heart pattern of severe anemia, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-induction-gen1.webp (R2) | Pelvic diagram showing Foley balloon and prostaglandin gel ripening, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-maternal-physiology-gen1.webp (R2) | Diagram of Virchow triad driving thrombosis risk in pregnancy, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-prenatal-screening-gen1.webp (R2) | Ultrasound showing first trimester nuchal translucency screening markers, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| oph-physiology-gen1.webp (R2) | Ishihara plate screening for red green colour vision defects, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| oph-systemic-gen1.webp (R2) | Fundus photo showing CMV retinitis with exudates and haemorrhages, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-amputation-gait-gen1.webp (R2) | Cutaway photo contrasting SACH and Jaipur prosthetic foot designs, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-benign-wbc-lymph-node-gen1.webp (R2) | Blood smear showing mature neutrophilia with toxic granulation changes, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| spu-nodule-lung-cancer-gen1.webp (R2) | Staging workup images showing EBUS biopsy with airway and PET CT views, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-arterial-gen1.webp (R2) | Abrupt femoral cutoff treated by balloon embolectomy after heparin, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-breast-benign-gen1.webp (R2) | Lactational abscess collection needing image guided drainage, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-chest-trauma-gen1.webp (R2) | Tamponade effusion with right atrial collapse on bedside echo, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-infections-gen1.webp (R2) | Necrotising leg infection with bullae demanding urgent debridement, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-mixed-gen1.webp (R2) | Parkland resuscitation with crystalloid guided by urine output, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-onc-principles-gen1.webp (R2) | Limb sparing sarcoma excision with margins and radiotherapy, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-paed-uro-gen1.webp (R2) | Wilms tumour CT with claw sign and one sided mass, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-portal-hypertension-gen1.webp (R2) | Balloon tamponade bridging refractory variceal bleeding to TIPS, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-skin-gen1.webp (R2) | Nodular basal cell carcinoma with pearly papule and vessels, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-testis-gen1.webp (R2) | Marker decay curves staging disease after orchiectomy, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sva-arterial-gen1.webp (R2) | Infrarenal aneurysm at repair threshold with two repair options, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| wh-gyn-cancer-gen1.webp (R2) | Thickened endometrium with bleeding prompting tissue sampling, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| wh-menstrual-gen1.webp (R2) | Amenorrhoea workup bench with pregnancy, hormone and checklist tests, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
