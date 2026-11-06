@@ -25,3 +25,15 @@
 - Tracking files saved on branch ss-lessons-B-ctvs-reports (pushed, no PR):
   STATE.md, SS-QUEUE.md, SS-LESSONS-B-CTVS-AUDIT.md,
   SS-LESSONS-IMAGE-NEEDS.md, SS-LESSONS-FLAGS.md.
+- **Run 2026-11-06 ~16:05 IST (muse writer)**: re-verified PR #2008 still
+  MERGEABLE/CLEAN on origin/main 9664b1731, CI 9/9 SUCCESS on head
+  e93989f15; checkLesson [] x3 + ss-image-gate.py silent re-run clean.
+  B-vs-C audit merge-tree test: zero conflict markers (#2008 touches
+  coronary steps 2/8 + thoracic step 1; #2009 touches aorta 1/5, thoracic
+  2/3/6, coronary 6, sur-cardiac 2). No new lesson edits (nothing to write
+  until lane-A blueprint lands). Checker re-probe: agy bind-denied,
+  grok FS-denied, claude 5h-limited to 6:50pm IST — blind hold stands.
+  Lead side-jobs checked: 6 stub lessons now 4-5 steps and checkLesson []
+  x6 (already fixed, no action); lane-B CC figure re-apply merged via
+  #1979, lane-C rheum via #1978 (no action). FLAGS.md 2-line diff in
+  worktree belongs to a lane-A check-only run — left uncommitted.
