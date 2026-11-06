@@ -3,7 +3,7 @@
  "module": "sid-pk-pd",
  "subject": "ss-infectious-diseases",
  "title": "Antimicrobial Pharmacokinetics and Pharmacodynamics: Matching Dosing to Killing",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "Antibiotic effect depends on how drug levels relate to the **MIC**, the minimum inhibitory concentration of the target organism. Agents fall into three killing patterns. **Time-dependent** agents, such as beta-lactams, work best when levels stay above the MIC for most of the dosing interval, so the key index is **T above MIC**. **Concentration-dependent** agents, such as aminoglycosides, kill faster as peak levels rise, judged by **Cmax/MIC**. Glycopeptides such as vancomycin are guided by the **AUC/MIC** ratio, the total exposure over time relative to the MIC.",
@@ -55,6 +55,17 @@
       "Same daily dose, better time above MIC"
      ]
     }
+   }
+  },
+  {
+   "tx": "The left panel shows an infected air sac with bacteria beside a vessel labeled for **extended infusion**, while the graph keeps free drug above the **MIC** threshold before **augmented clearance** drags it down. This matters because beta lactam killing in the lesson depends on time above MIC, which standard bolus dosing often misses in critical illness.",
+   "say": "The image pairs an infected air sac full of bacteria with a drug level curve that stays above the inhibitory threshold for a time and then falls with faster kidney clearance. It reinforces the lesson goal of keeping free drug above the threshold for much of the interval and the use of prolonged infusion to extend that time without raising the daily dose.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sid-pk-pd-gen1.webp",
+    "alt": "An infected air sac with bacteria sits beside a drug level curve above a threshold line.",
+    "caption": "Infected air sac beside a drug level curve above threshold Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
