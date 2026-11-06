@@ -25,6 +25,17 @@
 - Step 5 tx trimmed 94 to 90 words to pass shape gate.
 - Progress total: 35 of 113 topics.
 
+## Done (run 5 continued part 2, 2026-11-07)
+- Lesson son-bleomycin-infusion (5 steps, 2 reused KB real images HTTP 200, compare/table visuals elsewhere):
+  - pyqss-2025-s1-11 + pyqss-2025-s3-151 flagellate dermatitis, hydrolase deficiency, bleomycin-free AVD doublets
+  - pyqss-2024-s3-284 bleomycin lung above 400 units, DLCO, cofactors, steroids
+  - pyqss-2024-s3-285 liposomal CARPA + hand foot syndrome, 1 mg/min start
+  - pyqss-2024-s3-288 paclitaxel Cremophor HSR, epinephrine, nab switch or 12-step desensitisation
+  - pyqss-2024-s2-203 paclitaxel sinus bradycardia 30 percent, EXCEPT trap
+- Gates: checkLesson [], narration 0 fails (fixed limits/recurs/show sentences), coverage 12/12, ss-subject-check missing 0, index union 1980+7->1988.
+- Progress total: 41 of 113 topics.
+- Next: Tier-2 TLS cluster (s1-6, s2-210 Cairo lab/clinical, s3-241, s3-242, s3-245, s2-200 uric acid ratio, s2-185 pharma) then hypercalcaemia/SVCO cluster.
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
