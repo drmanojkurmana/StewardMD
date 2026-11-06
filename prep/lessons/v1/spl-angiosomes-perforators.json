@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "spl-angiosomes-perforators",
+  "subject": "ss-plastic-surgery",
+  "title": "Angiosomes and Perforator Flap Anatomy",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Ian Taylor and Palmer originally formulated the **angiosome concept** to describe an anatomical three-dimensional block of human tissue supplied by an individual source artery with its companion paired veins. The body encompasses roughly 40 distinct angiosomes spanning skin, subcutaneous fat, deep fascia, muscle, and underlying skeleton.",
+      "say": "Taylor and Palmer mapped the body into about forty angiosomes, each a three-dimensional block of skin, fat, fascia, muscle and even bone fed by one source artery with its paired veins. Think of the angiosome as the full territory one artery claims, which explains why a flap raised on that artery survives while tissue beyond its boundary may not.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+        "alt": "Anatomical angiosome boundaries and tissue plane dissection",
+        "caption": "Angiosome boundaries and fascial planes in reconstructive surgery. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Adjacent angiosomes communicate across boundary territories through two types of anastomotic vessels: **true anastomoses** without luminal caliber reduction, and **choke vessels** that exhibit narrowing and increased resistance. Flap survival across multiple angiosomes relies on the opening and dilation of these critical choke vessel interconnections.",
+      "say": "Where two angiosomes meet, their vessels are joined in two ways. True anastomoses keep their full width and carry blood freely in either direction, while choke vessels narrow down and resist flow. A flap that crosses into neighbouring territory lives only if those choke vessels open up and widen, which is exactly what a surgical delay trains them to do.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "True Anastomoses",
+          "points": [
+            "No caliber reduction",
+            "Immediate bidirectional flow",
+            "Low vascular resistance"
+          ]
+        },
+        "right": {
+          "title": "Choke Vessels",
+          "points": [
+            "Luminal caliber narrowing",
+            "Higher vascular resistance",
+            "Dilate following ischaemic delay"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Modern **perforator flaps** isolate cutaneous and subcutaneous tissues nourished by individual perforating vessels arising from deep source vascular axes. Unlike traditional musculocutaneous flaps, perforator flaps spare the underlying source muscle entirely, significantly reducing donor site functional impairment, postoperative pain, and herniation risks.",
+      "say": "A perforator flap takes only the skin and fat supplied by a single small vessel piercing up from a deep artery, leaving the source muscle completely intact. Because no muscle is sacrificed, the donor site keeps its strength, and the patient avoids the pain, weakness and hernia risk that came with the older muscle-carrying flaps.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-bp-handle-3.webp",
+        "alt": "Surgical dissection scalpel for perforator isolation",
+        "caption": "Precision dissection instruments for intramuscular perforator isolation. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Perforator anatomy categorises vessels based on their anatomical course through tissue planes. A **musculocutaneous perforator** traverses through muscle bellies before penetrating the deep fascia, whereas a **septocutaneous perforator** travels entirely within intermuscular fascial septa, allowing faster harvest with no intramuscular dissection.",
+      "say": "Perforators are named for the path they travel. A musculocutaneous perforator bores straight through the belly of a muscle before piercing the deep fascia, so freeing it means carefully splitting muscle fibres apart. A septocutaneous perforator instead runs up the flat septum between two muscles, which makes dissection far quicker and less traumatic.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Perforator Class",
+          "Anatomical Course",
+          "Dissection Complexity"
+        ],
+        "rows": [
+          [
+            "Musculocutaneous",
+            "Traverses muscle bellies and fibres",
+            "Requires intramuscular unroofing"
+          ],
+          [
+            "Septocutaneous",
+            "Travels within intermuscular septa",
+            "Spares muscle, faster harvest"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **anterolateral thigh flap** or ALT serves as a premier versatile perforator flap in reconstructive surgery, based on skin vessels arising from the descending branch of the lateral circumflex femoral system. It provides supple pliable skin, substantial pedicle length, and large dimensions with minimal donor site morbidity.",
+      "say": "The anterolateral thigh flap has become the workhorse of modern reconstruction. Its perforators rise from the descending branch of the lateral circumflex femoral artery to supply a large paddle of thin and pliable thigh skin on a long pedicle, and the thigh donor site usually closes directly with little complaint from the patient.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Profunda femoris source"
+          },
+          {
+            "id": "b",
+            "label": "Lateral circumflex femoral artery descending branch"
+          },
+          {
+            "id": "c",
+            "label": "Septocutaneous or musculocutaneous perforator to thigh skin"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **deep inferior epigastric perforator** or DIEP flap is the premier choice for autologous breast reconstruction, based on periumbilical perforators piercing the anterior rectus abdominis sheath. By carefully dissecting perforators through the rectus abdominis without harvesting the muscle, abdominal wall integrity and rectus function remain preserved.",
+      "say": "For rebuilding a breast from the patient's own tissue, the DIEP flap is now the gold standard. It uses the same periumbilical perforators as the older TRAM flap but threads them out through the rectus muscle instead of removing the muscle with the flap. Sparing the rectus preserves abdominal wall strength and keeps hernia and bulge rates low.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "TRAM Flap",
+          "points": [
+            "Sacrifices rectus abdominis muscle",
+            "High abdominal wall weakness",
+            "Elevated hernia and bulge rates"
+          ]
+        },
+        "right": {
+          "title": "DIEP Flap",
+          "points": [
+            "Preserves rectus abdominis muscle intact",
+            "Isolates intramuscular perforators",
+            "Low donor site hernia risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Preoperative **perforator mapping** optimizes surgical flap design and reduces operative time significantly. Modalities include handheld acoustic Doppler, high-resolution computed tomography angiography CTA, and magnetic resonance angiography MRA. Intraoperative indocyanine green fluorescence angiography visualises real-time capillary perfusion and boundary demarcation across the cutaneous territory.",
+      "say": "Finding the best perforator before the incision saves hours in theatre. A handheld Doppler gives a quick bedside signal, CT angiography draws the vessel's exact course and width through the muscle in three dimensions, and once the flap is raised, indocyanine green fluorescence lights up the skin that is truly perfused so doubtful edges can be trimmed with confidence.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Modality",
+          "Role",
+          "Key Advantage"
+        ],
+        "rows": [
+          [
+            "Handheld Doppler",
+            "Acoustic detection of flow",
+            "Bedside convenience, low cost"
+          ],
+          [
+            "CT Angiography",
+            "Caliber and intramuscular path",
+            "Precise 3D anatomical trajectory"
+          ],
+          [
+            "ICG Angiography",
+            "Intraoperative skin perfusion",
+            "Assesses real-time microvascular fill"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Perforator flaps can also be harvested as **propeller flaps**, rotated on a single eccentric perforator axis up to 180 degrees to reconstruct adjacent soft tissue defects with healthy matched skin. Ensuring meticulous circumferential skeletonization of enough pedicle length for tension-free rotation prevents mechanical torsion, kinking, and critical venous outflow obstruction during inset into complex regional wounds.",
+      "say": "A propeller flap spins like a propeller blade around one carefully cleaned perforator, rotating up to one hundred and eighty degrees to cover a defect next door with perfectly matched skin. The pedicle must be skeletonized enough that the twist spreads along its length, because a short twisted pedicle kinks the thin-walled vein first and the flap congests.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Perforator identification and skeletonization"
+          },
+          {
+            "id": "b",
+            "label": "Flap elevation and 90 to 180 degree rotation"
+          },
+          {
+            "id": "c",
+            "label": "Defect inset and tension-free microvascular monitoring"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "v": 1,
+  "module": "spl-mandible-fractures",
+  "subject": "ss-plastic-surgery",
+  "title": "Mandibular Fractures and Fixation",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Mandibular fractures are common facial skeletal injuries, with the **condyle and condylar neck** being the most frequent anatomical site (25% to 35%), followed by the mandibular angle (20% to 25%), parasymphysis, and body. Favourable fractures resist displacement due to masticatory muscle vector forces, while unfavourable fractures displace easily under muscle pull.",
+      "say": "The lower jaw breaks most often at its weakest points. The condylar neck leads at a quarter to a third of cases, then the angle, then the parasymphysis and body. Whether muscles hold the pieces together or drag them apart decides the fracture's temperament: favourable stays put, unfavourable displaces.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical Site",
+          "Incidence",
+          "Key Anatomic Feature"
+        ],
+        "rows": [
+          [
+            "Condyle / Neck",
+            "25% to 35%",
+            "Weakest subcondylar bone; intracapsular vs extracapsular"
+          ],
+          [
+            "Angle",
+            "20% to 25%",
+            "Vulnerable near third molar; pterygomasseteric sling"
+          ],
+          [
+            "Parasymphysis",
+            "15% to 20%",
+            "Between mental foramen and symphysis; mental nerve"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Champy ideal lines of osteosynthesis describe biomechanical stress distribution along the mandible during mastication. Tension develops along the superior alveolar border, while compression forces predominate along the inferior basilar border. The **Champy technique** places a single monocortical miniplate along the external oblique ridge for non-comminuted angle fractures.",
+      "say": "Champy mapped where the jaw pulls apart and where it squeezes together during chewing. Tension runs along the upper tooth-bearing border and compression along the lower edge, so a single small monocortical plate laid along the external oblique ridge, the tension band, suffices for a simple angle fracture.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Masticatory bite forces apply stress across fracture"
+          },
+          {
+            "id": "b",
+            "label": "Tension concentrates along upper alveolar border"
+          },
+          {
+            "id": "c",
+            "label": "Monocortical miniplate along external oblique ridge neutralises tension"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rigid internal fixation principles define load-bearing versus load-sharing osteosynthesis. **Load-bearing fixation** utilizes heavy reconstruction locking plates capable of withstanding 100% of masticatory bite loads without bony sharing, mandatory in comminuted fractures, bone defect fractures, and atrophic edentulous mandibles under 10 mm in vertical height.",
+      "say": "When the bone cannot share any load, the plate must carry it all. Thick locking reconstruction plates that withstand the full bite force are mandatory for shattered bone, missing segments, and paper-thin edentulous mandibles under ten millimetres tall, where anything smaller would fail.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Load-bearing Fixation",
+          "points": [
+            "Plate bears 100% of mechanical load",
+            "Rigid reconstruction plates (2.4 mm)",
+            "Essential for comminution and atrophic bone"
+          ]
+        },
+        "right": {
+          "title": "Load-sharing Fixation",
+          "points": [
+            "Hardware shares load with bone",
+            "Miniplates (1.5 to 2.0 mm monocortical)",
+            "Requires stable buttressing bone contact"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Mandibular symphysis and parasymphysis fractures experience intense torsional and rotational twisting forces in addition to bending. Biomechanical stabilization mandates **two miniplates** placed at least 4 to 5 mm apart: a superior tension band miniplate below the tooth roots and an inferior plate along the basilar border.",
+      "say": "The chin twists as well as bends, so one plate is never enough at the symphysis. Place two miniplates four to five millimetres apart: a tension band just below the tooth roots and a second plate down on the lower border to defeat the torsional forces.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-mayo-hegar-needle-holder.webp",
+        "alt": "Surgical instruments for maxillofacial hardware placement",
+        "caption": "Rigid fixation instruments utilized in facial bone osteosynthesis. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Surgical approaches to the mandible depend on fracture location and nerve anatomy. Symphysis and angle fractures are accessed transorally, while submandibular Risdon approach accesses the angle and lower ramus. When elevating the submandibular flap, the **marginal mandibular nerve** must be protected, lying deep to the platysma.",
+      "say": "The surgeon must reach the fracture by the route that spares the nerves. The chin and angle open nicely through the mouth, while the low angle and ramus need a Risdon cut under the jaw, lifting the flap above the platysma because the marginal mandibular nerve runs just beneath it and a drooping lip corner is the price of carelessness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Skin incision 2 cm below inferior mandibular border"
+          },
+          {
+            "id": "b",
+            "label": "Incision of platysma and identification of facial vessels"
+          },
+          {
+            "id": "c",
+            "label": "Ligation of facial artery/vein with cephalad retraction of marginal mandibular nerve"
+          },
+          {
+            "id": "d",
+            "label": "Subperiosteal exposure of fracture"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Management of teeth in the mandibular fracture line requires balanced surgical judgment. An intact, non-mobile tooth that aids in anatomical reduction should be preserved. Indications for tooth extraction include severe mobility, root fracture, deep longitudinal root split, active periapical pathology, or interference with **anatomical fracture reduction**.",
+      "say": "A sound tooth sitting in the fracture line is a friend: it splints the reduction, so keep it. Extract only the tooth that is hopelessly loose, split through its root, infected at its apex, or physically blocking the bone ends from meeting.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Decision",
+          "Clinical Scenario",
+          "Management"
+        ],
+        "rows": [
+          [
+            "Preserve tooth",
+            "Firmly seated, non-infected, assists reduction",
+            "Clean and retain; monitor vitality"
+          ],
+          [
+            "Extract tooth",
+            "Displaced root fracture, extensive periodontal loss",
+            "Extraction before rigid plate fixation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Absolute indications for open reduction and internal fixation of mandibular condyle fractures include displacement into the middle cranial fossa, inability to obtain dental occlusion with closed treatment, lateral extracapsular condylar dislocation, and foreign bodies. **Condylar neck fractures** causing severe shortening over 5 mm may need operative management.",
+      "say": "Most condyles heal without opening the joint, but some demand surgery. Operate when the condyle is driven up into the skull base, dislocated sideways out of its capsule, or blocking a normal bite; shortening over five millimetres at the neck may also need an operation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Closed Management (MMF)",
+          "points": [
+            "Non-displaced condylar fractures",
+            "Intracapsular condylar head fractures",
+            "Children under 12 years (remodeling potential)"
+          ]
+        },
+        "right": {
+          "title": "Open Reduction (ORIF)",
+          "points": [
+            "Middle cranial fossa intrusion",
+            "Severe shortening over 5 mm",
+            "Loss of dental occlusion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Postoperative complications of mandibular fracture repair include malocclusion, nonunion, hardware infection, and **inferior alveolar nerve** sensory paresthesia. Malocclusion detected after plate placement mandates immediate release of hardware and re-establishment of premorbid dental intercuspation under intermaxillary fixation before replating the osteosynthesis site.",
+      "say": "After plating, the bite is the verdict. If the teeth no longer meet as they did before, take the plates off at once and rebuild the occlusion under jaw wiring before replating. Beyond malocclusion, watch for nonunion, infected hardware, and a numb lower lip from the inferior alveolar nerve.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-kocher-haemostatic-forceps.webp",
+        "alt": "Surgical reduction forceps for facial bone fragments",
+        "caption": "Bone reduction and stabilization instruments in craniofacial trauma. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    }
+  ]
+}
