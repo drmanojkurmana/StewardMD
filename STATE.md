@@ -2,6 +2,16 @@
 
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
+## Done (run 2, 2026-11-07)
+- Lesson son-hodgkin-survivor (6 steps, 2 reused KB real images, both HTTP 200 verified):
+  - pyqss-2025-s2-53 second primaries No.1 late death + latencies + screening (also covers pyqss-2025-s3-172 same fact)
+  - pyqss-2025-s3-150 ABVD toxicity matching + Echo/DLCO baselines
+  - pyqss-2025-s3-147 relapsed HL salvage to PET-negative + BEAM ASCT
+  - pyqss-2024-s2-198 ABVD fertility + upfront sperm banking for BEACOPP risk
+- Gates: checkLesson [], narration 0 fails, coverage 10/10.
+- Narration checker notes: sentenceHasVerb needs a word in NARR_VERBS (e.g. needs) or length>5 -ing/-ed ending; imperatives like "order/arrange/echo first" fail. Prefer "needs/requires/measured/started" style verbs.
+- Progress total: 11 of 113 topics.
+
 ## Done (run 1, 2026-11-07)
 - Lesson son-all-mrd-relapse (8 steps, 2 reused KB real images, both HTTP 200 verified):
   - pyqss-2025-s1-21 ETV6::RUNX1 t(12;21) ~25 percent, cryptic, favorable
