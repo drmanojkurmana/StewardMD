@@ -3,7 +3,7 @@
  "module": "cm-bias-causation",
  "subject": "community-medicine",
  "title": "Bias, Confounding, and Association and Causation",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "An **association** exists when two variables occur together more often than chance predicts. Associations are either **spurious**, meaning not real, or real. Real associations are direct (one to one causal, or multifactorial) or indirect, where a third factor links both. Descriptive studies suggest hypotheses; analytic and experimental studies test them.",
@@ -66,6 +66,17 @@
       "Statistically adjusts for confounders"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The neon graphic separates true causation from distortion by a third factor. Exposure and outcome connect through a direct path, but a **confounder** touches both sides and can fake or hide the link. The right half shows the remedy as **matching**, with exposed and unexposed groups balanced on age and gender around a scale. Blocking the confounding path lets the true associational path stand out. The lesson ranks matching first and **randomisation** second for removing confounding.",
+   "say": "Follow the triangle on the left. A confounder links to both exposure and outcome, so it can mimic a causal path that is not real. The fix on the right is matching, where each exposed person is paired with an unexposed person of same age and gender, balancing the scale. Matching distributes known confounders evenly. Randomisation is the next best method and forms the basis of trials.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/cm-bias-causation-gen1.webp",
+    "alt": "Neon triangle links exposure outcome and confounder beside balanced groups on a scale showing matching.",
+    "caption": "Triangle plus scale show confounding blocked by matching Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

@@ -3,7 +3,7 @@
  "module": "cm-screening",
  "subject": "community-medicine",
  "title": "Screening and Evaluation of Diagnostic Tests",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "A **screening test** is applied to apparently healthy people to find unrecognised disease. It is different from case finding, where tests are used in people who attend for another reason. Screening aims to find disease early, before symptoms, so that treatment can change the course. Examples include serological testing of blood donors and neonatal screening.",
@@ -129,6 +129,17 @@
    "tx": "Screening outcomes can mislead. **Lead time** is the gap between early detection by screening and the time of usual clinical diagnosis. **Lead time bias** makes survival look longer without any real benefit. **Length bias** arises because slowly progressing disease is more likely to be caught on screening, so screen-detected cases look better. Both biases must be considered before crediting a programme with success.",
    "say": "Screening outcomes can mislead. Lead time is the gap between detection by screening and usual clinical diagnosis. Lead time bias makes survival look longer even when nothing has truly improved. Length bias arises because slowly progressing disease is more likely to be picked up by screening, so these cases look more favourable. Both biases must be considered before judging a programme as successful.",
    "vis": null
+  },
+  {
+   "tx": "The image contrasts a slow growing lung nodule with a fast growing mass using paired lung diagrams and timelines. The upper panel shows long preclinical phase, screening magnifier and **lead time** that can falsely extend measured survival. The lower panel shows short preclinical phase with rapid **interval cancer**. Slow indolent cases are easier to catch, which explains **length bias** in screening results.",
+   "say": "This diagram compares screening bias with lungs and timelines. A slow indolent nodule has a long preclinical phase, so screening finds it early and lead time adds apparent survival. A fast mass has a short preclinical phase and presents rapidly between screens as interval cancer. Because slow disease is easier to catch, screen detected cases look better, which is length bias.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/cm-screening-gen1.webp",
+    "alt": "Paired lung diagrams compare a slow indolent nodule with long lead time against a fast mass that presents as interval cancer.",
+    "caption": "Lung diagram explaining screening biases Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   }
  ],
  "quiz": [
