@@ -1,0 +1,106 @@
+{
+ "checks": {
+  "dashes": true,
+  "drugs": true,
+  "numbers": true,
+  "shape": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "gen": "AI",
+ "minutes": 9,
+ "model": "muse-spark",
+ "module": "son-chemo-classes",
+ "quiz": [],
+ "refs": [
+  "DeVita 12e Ch. 23 (Pharmacology of Cancer Therapeutics)",
+  "NCCN Guidelines"
+ ],
+ "run": "ss-lessons-pyq-gap-muse",
+ "src": [],
+ "steps": [
+  {
+   "say": "One bacterial genus supplies this entire drug family, which is why the exam groups them. The rubicin ending identifies anthracyclines instantly among options. Mitoxantrone breaks the naming pattern as the anthracenedione cousin. Bleomycin and mitomycin remain with dactinomycin among the mycins.",
+   "tx": "Antitumour antibiotics (cancer killing microbe products) are Streptomyces derived natural products and analogues that intercalate DNA (wedge between base pairs), generate free radicals and poison topoisomerase II. The family spans all **anthracyclines** (the rubicins: doxorubicin, daunorubicin, epirubicin, idarubicin), the anthracenedione **mitoxantrone**, and the mycins: **bleomycin**, mitomycin C and dactinomycin (actinomycin D). Shared origin explains shared DNA centred killing with divergent organ toxicities per member.",
+   "vis": {
+    "cols": [
+     "Subgroup",
+     "Members",
+     "Memory hook"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Anthracyclines",
+      "Doxorubicin, daunorubicin, epirubicin, idarubicin",
+      "Rubicin ending"
+     ],
+     [
+      "Anthracenedione",
+      "Mitoxantrone",
+      "Blue, cardiac like"
+     ],
+     [
+      "Mycins",
+      "Bleomycin, mitomycin C, dactinomycin",
+      "Mycin ending"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Resting cells usually resist chemotherapy, but alkylators crosslink them regardless. Dormant follicles and stem sperm remain exposed to phase independent crosslinks. The eighty percent figure requires banking before the first dose. Methotrexate and vincristine protect fertility by comparison, remaining near ten percent.",
+   "tx": "Alkylating agents (cyclophosphamide, ifosfamide, busulfan, melphalan, chlorambucil, procarbazine) crosslink DNA independent of cell cycle phase, destroying resting primordial follicles (dormant egg sacs) and spermatogonial stem cells (sperm precursors) with over **80 percent** permanent amenorrhoea (lost periods) and azoospermia (zero sperm). Cisplatin and doxorubicin carry intermediate risk, while methotrexate, 5 fluorouracil and vincristine stay below 10 percent. Sperm or embryo banking precedes gonadotoxic therapy in young patients.",
+   "vis": {
+    "alt": "Male pelvic and scrotal anatomy relevant to sperm production.",
+    "ar": 1.5815,
+    "caption": "Male reproductive anatomy framing spermatogonial injury and azoospermia. Image: BruceBlaus, CC BY-SA 4.0.",
+    "kind": "image",
+    "src": "v1/kb/media/andrology-ed-varicocele-azoospermia-fig1.webp"
+   }
+  },
+  {
+   "say": "Liver metabolism characterises this drug class, which is why kidney numbers stay modest. Faecal loss leads urinary loss, directly opposing the ninety percent option. Interacting azoles and anticonvulsants require dose changes through the same enzyme. Differentiate this profile from truly renally cleared agents.",
+   "tx": "Oral multikinase inhibitors such as **cabozantinib** (with sorafenib and sunitinib) undergo hepatic CYP3A4 metabolism (liver enzyme breakdown) with mixed elimination of about 54 percent in faeces and 27 percent in urine, so 90 percent unchanged urinary excretion is the false EXCEPT claim. Strong CYP3A4 inhibitors and inducers reshape exposure and demand dose adjustment. Renal failure alters handling far less than with renally cleared drugs.",
+   "vis": {
+    "cols": [
+     "Route",
+     "Share",
+     "Exam point"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Faecal",
+      "About 54 percent",
+      "Dominant route"
+     ],
+     [
+      "Urinary",
+      "About 27 percent",
+      "Minor, not 90 percent"
+     ],
+     [
+      "CYP3A4 interactions",
+      "Inhibitors raise, inducers lower",
+      "Adjust dose"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Each modality holds a favourite cell cycle window, and the exam pairs them deliberately. Drugs that copy or tangle DNA need active synthesis to bite. Radiation breaks mitotic chromosomes best while late S repairs fastest. Resting cells pass through chemotherapy largely unharmed.",
+   "tx": "Phase specific cytotoxics strike mainly in **S phase** (DNA synthesis), where antimetabolites (5 fluorouracil, cytarabine, gemcitabine, methotrexate, pemetrexed) and topoisomerase inhibitors act. **G2 slash M** (the mitotic gateway) is the most radiosensitive phase and the taxane and vinca target, while late S resists radiation through upregulated homologous recombination enzymes and G0 (resting state) resists chemotherapy most. The paired question tests chemo S against radio G2 slash M.",
+   "vis": {
+    "alt": "Apoptosis cascades with cell cycle checkpoints.",
+    "ar": 1.3405,
+    "caption": "Death pathways with cycle checkpoints framing phase specific action. Credit: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/apoptosis-pathways-and-caspases-fig1.webp"
+   }
+  }
+ ],
+ "subject": "ss-medical-oncology",
+ "title": "Antitumour antibiotics, fertility risk, TKI excretion and cell cycle phases",
+ "v": 1
+}

@@ -64,6 +64,22 @@
 - Progress total: 56 of 113 topics.
 - Next: chemo leftovers (pyqss-2024-s1-192 cisplatin cardiac, s1-193 gemcitabine, s2-215 antitumor antibiotics, s2-218 infertility alkylators, s3-273 cabozantinib excretion, s3-274 cell cycle phases, s3-278 DPD, s3-279 oxaliplatin coasting) then genetics/gynae/GI/sarcoma/peds/dx areas.
 
+## Done (next run 2, 2026-11-07)
+- Lesson son-chemo-organ-tox (4 steps, 3 reused KB real images HTTP 200, table on DPD step):
+  - pyqss-2024-s1-192 cisplatin acute arrhythmias/QT + Mg/K wasting; late HTN 30-50 percent + ischaemia
+  - pyqss-2024-s1-193 gemcitabine DLT myelosuppression, neutropenia 63/25 over platelets 24/5, recall + TMA
+  - pyqss-2024-s3-278 DPD 80-85 percent catabolism, uridine triacetate 10 g q6h x 20 within 96 h
+  - pyqss-2024-s3-279 oxaliplatin cold allodynia, DRG adducts beyond 780-850, coasting 2-3 mo
+- Lesson son-chemo-classes (4 steps, 2 reused KB real images HTTP 200, tables elsewhere):
+  - pyqss-2024-s2-215 antitumour antibiotic classes (rubicins, mitoxantrone, mycins)
+  - pyqss-2024-s2-218 alkylator infertility over 80 percent, banking; MTX/vincristine under 10 percent
+  - pyqss-2024-s3-273 cabozantinib CYP3A4, faeces 54 / urine 27, never 90 percent renal
+  - pyqss-2024-s3-274 S phase chemo, G2/M radiosensitive, late S radioresistant, G0 chemoresistant
+- ID COLLISION FIX: first draft reused son-chemo-principles and overwrote Lane B's lesson + index entry; restored Lane B file (git checkout HEAD, verified title) and renamed mine to son-chemo-classes in lesson/taxonomy/blueprint; index re-merged, entries verified correct.
+- Gates: checkLesson [] both, narration 0 fails both (fixed splits sentence), coverage 9/9 + 8/8, pre-existing principles topic 8/8 intact, total 852/852, ss-subject-check missing 0, index union 1980+11->1993.
+- Progress total: 64 of 113 topics.
+- Next: genetics cluster (13 topics: MEN1 x2, NF1 x2, LFS x2, DICER1 x2, CDH1 x2, NF2, VHL, Lynch) then gynae/GI/sarcoma/peds/dx areas.
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
