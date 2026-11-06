@@ -38,3 +38,9 @@
    - **Waiting on Lane A Blueprint**:
      - Once Lane A completes blueprint and sets `blueprint: A-done` in `SS-QUEUE.md`, Lane C will partition topics: index `i % 3 === 2`
      - Lane C will then author its assigned topic lessons (8-12 steps, all gates, fact-checked).
+
+## 2026-11-06 run 11 (writer muse-spark-1.3, local main baa8d2e5e; origin/main aa63b4b5a = #1984 merged, fetched): ss-neurosurgery stage-1 closeout
+- Queue re-read: ss-neurosurgery still `blueprint: todo` (line 16), all lanes todo; no lane-A neurosurgery branch on remote, so no stage-2 topics, no lessons written, no blind fact-check owed, no FLAGS rows (lead 05:3x checker-first note is agy-runs only).
+- Audit re-verified: checkLesson `[]` x5 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus, sur-neck, sur-neck-face-trauma); R2 200 x8 byte-identical sizes (last download valid WebP), all 8 KEEP per the earlier look; `node tools/prep-lessons.mjs --check` only the 2 pre-existing sur-brain-tumours fails (step-3 verbatim, step-5 aminolevulinic-acid grounding) for stage-2. No removals/swaps/needs, so no audit PR owed.
+- Lane-C PRs #1981 OPEN/MERGEABLE/UNSTABLE + #1988 OPEN/MERGEABLE/CLEAN (gh API); no rebase needed, left for lead.
+- Safekeeping: 6 paediatric blueprints on this branch, untouched. This commit carries the branch copy of SS-LESSONS-C-NEUROSURGERY-AUDIT.md (synced from main checkout, purely additive) and this STATE.md. No PR opened. Queue line 16 untouched.
