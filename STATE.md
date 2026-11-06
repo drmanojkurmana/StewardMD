@@ -37,3 +37,14 @@
   x6 (already fixed, no action); lane-B CC figure re-apply merged via
   #1979, lane-C rheum via #1978 (no action). FLAGS.md 2-line diff in
   worktree belongs to a lane-A check-only run — left uncommitted.
+- **Follow-up 2026-11-06 16:08 IST**: blind-check still unobtainable (agy
+  bind-denied, grok FS-denied, claude 5h-limited to 6:50pm IST). Prepared
+  /tmp/pr2008-blind-check-packet.md (session-temporary; recreate from
+  `git diff origin/main...origin/ss-lessons-B-ctvs-audit` + the 3 R2 URLs,
+  all HTTP 200: sct-coronary-valve-cpb-mcs-fig1 27958 B,
+  cardiac-surgery-cabg-valvular-repair-and-cardiopulmonary-bypass-fig1
+  45962 B, sct-thoracic-lung-trauma-fig1 71716 B). Next checker-capable
+  run: paste packet to a different-family checker, fix/drop on FAIL, push
+  to ss-lessons-B-ctvs-audit, append Checked rows. Queue re-checked:
+  ss-ctvs blueprint still todo — no stage-2 writing. PR #2008 preserved
+  (open, green, mergeable); unrelated FLAGS diff untouched.
