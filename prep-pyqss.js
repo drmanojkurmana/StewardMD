@@ -15,7 +15,51 @@
   function byIds(items, ids) { var m = {}; (ids || []).forEach(function (i) { m[i] = 1; }); return items.filter(function (it) { return m[it.id]; }); }
   function inDomain(items, name) { return items.filter(function (it) { return it.dom === name; }); }
   function mustItems(items, an) { var ids = []; an.mustDo.forEach(function (t) { ids = ids.concat(t.ids); }); return byIds(items, ids); }
-  var PURE = { paperTitle: paperTitle, byIds: byIds, inDomain: inDomain, mustItems: mustItems };
+  /* ---- 30-day plan: every topic asked, most important first. Days 1-27 learn (a topic area's days follow its share of the
+     questions, at least one), day 28 revises the Tier 1 must-do topics, day 29 the Tier 2-3 ones, day 30 is a timed test of
+     all must-do questions. Worked out once when the student starts and kept in the store, so it never shifts. ---- */
+  var DAYS = 30, LEARN = 27;
+  function allot(doms) {
+    var tot = doms.reduce(function (a, d) { return a + d.n; }, 0), a = doms.map(function (d) { var x = d.n / tot * LEARN; return { b: Math.max(1, Math.floor(x)), f: x - Math.floor(x) }; });
+    var sum = function () { return a.reduce(function (t, x) { return t + x.b; }, 0); }, i, best;
+    while (sum() < LEARN) { best = 0; for (i = 1; i < a.length; i++) if (a[i].f > a[best].f) best = i; a[best].b++; a[best].f = -1; }
+    while (sum() > LEARN) { best = -1; for (i = 0; i < a.length; i++) if (a[i].b > 1 && (best < 0 || a[i].f < a[best].f)) best = i; if (best < 0) break; a[best].b--; a[best].f = 2; }
+    return a.map(function (x) { return x.b; });
+  }
+  function makePlan(an) {
+    var doms = an.domains.slice().sort(function (x, y) { return x.tier - y.tier || y.n - x.n; }), k = allot(doms), days = [];
+    doms.forEach(function (d, i) {
+      var left = d.topics.slice(), rest = d.n, parts = k[i];
+      for (var p = 0; p < parts; p++) {
+        var want = rest / (parts - p), take = [], q = 0;
+        while (left.length > parts - p - 1 && (!take.length || q < want)) { var t = left.shift(); take.push(t.name); q += t.n; }
+        rest -= q; days.push({ n: days.length + 1, k: "learn", dom: d.name, tp: take, q: q });
+      }
+    });
+    var tierOf = {}; an.domains.forEach(function (d) { tierOf[d.name] = d.tier; });
+    var m1 = an.mustDo.filter(function (t) { return tierOf[t.dom] === 1; }), m2 = an.mustDo.filter(function (t) { return tierOf[t.dom] !== 1; }), cnt = function (l) { return l.reduce(function (a, t) { return a + t.n; }, 0); };
+    days.push({ n: 28, k: "rev", dom: "Revise Tier 1 must-do topics", tier: 1, tp: m1.map(function (t) { return t.name; }), q: cnt(m1) });
+    days.push({ n: 29, k: "rev", dom: "Revise Tier 2 and 3 must-do topics", tier: 2, tp: m2.map(function (t) { return t.name; }), q: cnt(m2) });
+    days.push({ n: 30, k: "test", dom: "Timed test: all must-do questions", tp: [], q: cnt(an.mustDo) });
+    return days;
+  }
+  // The day's questions. A learn day is its area's questions on its topics; revision days come from the must-do list.
+  function itemsOfDay(items, an, day) {
+    if (day.k === "learn") { var m = {}; day.tp.forEach(function (t) { m[t] = 1; }); return items.filter(function (it) { return it.dom === day.dom && m[it.topic]; }); }
+    var tierOf = {}; an.domains.forEach(function (d) { tierOf[d.name] = d.tier; });
+    var ids = []; an.mustDo.forEach(function (t) { if (day.k === "test" || (day.tier === 1) === (tierOf[t.dom] === 1)) ids = ids.concat(t.ids); });
+    return byIds(items, ids);
+  }
+  function short(n) { return String(n).split(/ [—(&] ?|, /)[0].replace(/\s+$/, ""); }
+  // The day's reminder line, true on the day: what to read and how many questions.
+  function noticeOf(plan, n) {
+    var d = plan && plan[n - 1]; if (!d) return null;
+    if (d.k === "test") return { k: "rev", title: "Day 30: timed test", body: "Take the timed test of all must-do questions (" + d.q + " questions)." };
+    var names = d.tp.slice(0, 3).map(function (t) { t = short(t); return t.length > 42 ? t.slice(0, 40).replace(/\s+\S*$/, "") + "..." : t; }).join(", ") + (d.tp.length > 3 ? " and " + (d.tp.length - 3) + " more" : "");
+    return { k: d.k === "rev" ? "rev" : "learn", title: "Day " + d.n + (d.k === "learn" ? ": " + short(d.dom).slice(0, 40) : ": revision"), body: (d.k === "learn" ? "Read " : "Revise ") + names + ". Then practise " + d.q + " questions." };
+  }
+  function dayOf(ys, today) { return ys && ys.start != null ? today - ys.start + 1 : 0; }
+  var PURE = { paperTitle: paperTitle, byIds: byIds, inDomain: inDomain, mustItems: mustItems, makePlan: makePlan, itemsOfDay: itemsOfDay, noticeOf: noticeOf, dayOf: dayOf, short: short };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -31,7 +75,9 @@
   function warm(host) { load(host).then(null, function () {}); }
   function homeRow(host) {
     warm(host);
-    return host.row("ys-home", host.ico("play"), "Medical Oncology PYQs", "NEET-SS recall papers, every question with its explanation") +
+    var ys = host.store().ys, n = dayOf(ys, host.today()), d = ys && ys.days && ys.days[n - 1];
+    return host.row("ys-plan", host.ico("clock"), "30-day Medical Oncology plan", d ? "Day " + n + ": " + host.esc(short(d.dom)) : ys && n > DAYS ? "Plan finished. Open to restart" : "Every topic asked, most important first, one day at a time") +
+      host.row("ys-home", host.ico("play"), "Medical Oncology PYQs", "NEET-SS recall papers, every question with its explanation") +
       host.row("ys-an", host.ico("next"), "PYQ analysis", "Topics asked, how often, and which to do first");
   }
   function failed(host) {
@@ -104,6 +150,48 @@
         return '<div class="pn-row"><span class="pn-rb"><b>' + e(t.name) + "</b><small>" + e(t.dom) + " · asked " + t.n + "× (2025: " + t.y2025 + ", 2024: " + t.y2024 + ")" + (t.kp ? "<br>" + e(t.kp) : "") + "</small></span></div>";
       }).join("") + "</div></div>");
   }
+  /* ---- the 30-day plan screens (state: store.ys = { start: day number, days, done: { day: 1 } }) ---- */
+  function planOf(host) { var ys = host.store().ys; return ys && ys.days && ys.days.length === DAYS ? ys : null; }
+  function stat(ys, n, td) { var c = dayOf(ys, td); return ys.done && ys.done[n] ? "done" : n === c ? "today" : n < c ? "missed" : "next"; }
+  var STAT = { done: "Done", today: "Today", missed: "Missed", next: "" };
+  function renderPlan(host) {
+    var e = host.esc, ys = planOf(host);
+    shell(host, "30-day plan", "Medical Oncology · NEET-SS", '<p class="pn-load" role="status">Loading…</p>');
+    load(host).then(function () {
+      var b = box(host); if (!b) return;
+      if (!ys) {
+        b.innerHTML = '<section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">All ' + host.fmt(S.items.length) + ' questions in 30 days</p><p class="pn-mut">Days 1 to 27 cover every topic asked, most important first (about ' + Math.round(S.items.length / 27) + ' questions a day). Days 28 and 29 revise the must-do topics and day 30 is a timed test. The app reminds you each morning with the topic of the day (turn on Smart nudges in Settings).</p>' +
+          '<button type="button" class="pn-btn pri" data-act="ys-pstart">' + host.ico("play") + " Start today</button></section>";
+        return;
+      }
+      var td = host.today(), c = dayOf(ys, td), missed = ys.days.filter(function (d) { return stat(ys, d.n, td) === "missed"; }), done = Object.keys(ys.done || {}).length;
+      b.innerHTML = '<section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">' + (c > DAYS ? "Plan finished" : "Day " + Math.max(c, 1) + " of 30") + '</p><p class="pn-mut">' + done + " days done" + (missed.length ? " · " + missed.length + " missed" : "") + "</p>" +
+        (c >= 1 && c <= DAYS ? '<button type="button" class="pn-btn pri" data-act="ys-pday" data-v="' + c + '">' + host.ico("play") + " Open today: " + e(short(ys.days[c - 1].dom)) + "</button>" : "") +
+        (missed.length ? '<button type="button" class="pn-btn" data-act="ys-pday" data-v="' + missed[0].n + '">Catch up on the first missed day</button>' : "") + "</section>" +
+        '<h2 class="pn-sec">All 30 days</h2><div class="pn-group">' + ys.days.map(function (d) {
+          return '<button type="button" class="pn-row" data-act="ys-pday" data-v="' + d.n + '"><span class="pn-rb"><b>Day ' + d.n + " · " + e(d.dom) + "</b><small>" + (d.k === "test" ? d.q + " questions, timed" : d.tp.length + " topics · " + d.q + " questions") + '</small></span><span class="pn-yq-kind">' + STAT[stat(ys, d.n, td)] + "</span>" + host.ico("chev") + "</button>";
+        }).join("") + '</div><button type="button" class="pn-btn" data-act="ys-prestart">Restart from today</button>';
+    }, function () { failed(host); });
+  }
+  function renderDay(host, n) {
+    var e = host.esc, ys = planOf(host), d = ys && ys.days[n - 1]; if (!d) return;
+    var list = itemsOfDay(S.items, S.ix.analysis, d), isDone = ys.done && ys.done[n];
+    host.paint(host.bar("Day " + n, e(d.dom), "back") + '<div class="pn-body"><section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">' + list.length + ' questions</p><p class="pn-mut">' + (d.k === "test" ? "A timed test of every must-do question." : "Read the key points below, then practise.") + "</p>" +
+      '<button type="button" class="pn-btn pri" data-act="ys-pgo" data-v="' + n + '" data-k="' + (d.k === "test" ? "exam" : "study") + '">' + host.ico(d.k === "test" ? "clock" : "play") + (d.k === "test" ? " Start the timed test" : " Practise today's questions") + "</button>" +
+      (d.k === "test" ? "" : '<button type="button" class="pn-btn" data-act="ys-pgo" data-v="' + n + '" data-k="exam">' + host.ico("clock") + " Timed test of these</button>") +
+      '<button type="button" class="pn-btn" data-act="ys-pdone" data-v="' + n + '">' + (isDone ? "Done. Tap to undo" : "Mark day done") + "</button></section>" +
+      (d.tp.length ? '<h2 class="pn-sec">Topics and key points</h2><div class="pn-group">' + d.tp.map(function (t) {
+        var it = list.filter(function (x) { return x.topic === t; })[0];
+        return '<div class="pn-row"><span class="pn-rb"><b>' + e(t) + "</b>" + (it && it.kp ? "<small>" + e(it.kp) + "</small>" : "") + "</span></div>";
+      }).join("") + "</div>" : "") + "</div>");
+  }
+  function startPlan(host) { host.store().ys = { start: host.today(), days: makePlan(S.ix.analysis), done: {} }; host.save(); if (G.PREP_NATIVE) G.PREP_NATIVE.changed(); host.toast("Plan started. Day 1 is today."); }
+  // For prep-plan.js: [today, tomorrow] reminder lines, same shape as the ReWise notice; none when no plan, a done day or outside 1-30.
+  function notice(host, k) {
+    var ys = planOf(host); if (!ys) return null;
+    var n = dayOf(ys, host.today()) + (k || 0); if (n < 1 || n > DAYS || (!k && ys.done && ys.done[n])) return null;
+    return noticeOf(ys.days, n);
+  }
   function act(a, b, host) {
     var v = b.getAttribute("data-v"), k = b.getAttribute("data-k");
     if (a === "ys-home") return host.push(function () { renderHome(host); });
@@ -116,6 +204,12 @@
     if (a === "ys-start") return need(function () { var p = S.ix.papers.filter(function (x) { return x.id === v; })[0]; runList(host, byIds(S.items, p.items), k, paperTitle(p) + " (recall)"); });
     if (a === "ys-pdom") return need(function () { runList(host, inDomain(S.items, v), k, v); });
     if (a === "ys-pmust") return need(function () { runList(host, mustItems(S.items, S.ix.analysis), k, "Must-do topics"); });
+    if (a === "ys-plan") return need(function () { host.push(function () { renderPlan(host); }); });
+    if (a === "ys-pstart") return need(function () { startPlan(host); renderPlan(host); });
+    if (a === "ys-prestart") { if (G.confirm && !G.confirm("Restart the 30-day plan from today? Your ticks will be cleared.")) return; return need(function () { startPlan(host); renderPlan(host); }); }
+    if (a === "ys-pday") return need(function () { host.push(function () { renderDay(host, +v); }); });
+    if (a === "ys-pdone") { var y = planOf(host); if (!y) return; y.done = y.done || {}; if (y.done[v]) delete y.done[v]; else y.done[v] = 1; host.save(); if (G.PREP_NATIVE) G.PREP_NATIVE.changed(); return need(function () { renderDay(host, +v); }); }
+    if (a === "ys-pgo") return need(function () { var y = planOf(host), d = y && y.days[+v - 1]; if (d) runList(host, itemsOfDay(S.items, S.ix.analysis, d), k, "Day " + v + " · " + d.dom); });
   }
-  G.PREP_PYQSS = { homeRow: homeRow, warm: warm, act: act, _pure: PURE };
+  G.PREP_PYQSS = { homeRow: homeRow, warm: warm, act: act, notice: notice, _pure: PURE };
 })(typeof window !== "undefined" ? window : this);
