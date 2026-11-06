@@ -133,6 +133,25 @@
 - Progress total: 99 of 113 topics.
 - Next: peds cluster (9 topics: marrow rosettes s1-12, hepatoblastoma PRETEXT s1-24, neuroblastoma MYCN/MS s1-41, RB1 bilateral s2-49, Wilms triphasic s2-64, RMS fusion s3-100, TAM/GATA1 s3-128, Hutchinson s3-141, Wilms SIOP s3-148) then dx (s1-10 biopsy vs FNAC, s2-207 AI, s3-281 KM curve) + cutaneous (s3-179 post-transplant cSCC, s3-239 BRAF melanoma).
 
+## Done (next run 7, 2026-11-07) — GAP CLOSED 113/113
+- Lesson son-peds-gap (8 steps, 5 reused KB real images HTTP 200, 3 tables):
+  - pyqss-2025-s1-12 Homer Wright vs Flexner-Wintersteiner; marrow + VMA/HVA diagnosis
+  - pyqss-2025-s1-24 PRETEXT I-IV sections; IV to neoadjuvant + transplant; pure fetal best
+  - pyqss-2025-s1-41 MYCN/age/segmental high-risk ladder; MS spontaneous regression; ALK/PHOX2B
+  - pyqss-2025-s2-49 RB1 13q14 bilateral hereditary; CEV + focal; EBRT avoided; trilateral watch
+  - pyqss-2025-s2-64 + s3-148 Wilms BSE triphasic; blastemal/anaplasia high; necrotic/CPDN low
+  - pyqss-2025-s3-100 RMS PAX3/PAX7 FOXO1 fusion-positive poor vs embryonal favourable
+  - pyqss-2025-s3-128 GATA1 TAM 70-80 percent remit; 20-30 percent to AML-M7
+  - pyqss-2025-s3-141 Hutchinson/Pepper/Kinsbourne/Kerner-Morrison eponyms
+- Lesson son-dx-cutaneous-gap (5 steps, 2 reused KB real images HTTP 200, table + compare):
+  - pyqss-2025-s1-10 FNAC 22-25G cytology vs core 14-18G architecture; VAB microcalcs
+  - pyqss-2024-s2-207 AI assistive radiomics/pathology/genomics; never replaces
+  - pyqss-2024-s3-281 KM steps/ticks; log-rank comparison; Cox HR
+  - pyqss-2025-s3-179 transplant cSCC 65-100x; sirolimus switch HR 0.56 TUMORAPA
+  - pyqss-2024-s3-239 BRAF V600E 40-50 percent; NRAS/NF1/KIT; VE1 vs CD117 sequencing
+- Gates: checkLesson [] both, narration 0 fails both (3 rounds of verb-set fixes), coverage 12/12 + 7/7, total 919/919, ss-subject-check missing 0, index union 1980+19->2001. Fixed blueprint term-order miss (CEV chemoreduction to chemoreduction).
+- Progress total: 113 of 113 topics. ALL muse-lane gap topics CLOSED.
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
