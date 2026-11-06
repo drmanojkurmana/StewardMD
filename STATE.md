@@ -2,6 +2,14 @@
 
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
+## Done (run 3 continued, 2026-11-07)
+- Lesson son-apml-atra (5 steps, 2 reused KB real images, both HTTP 200 verified):
+  - pyqss-2025-s1-9 + pyqss-2025-s3-115 adult ATRA 45 mg/m2, child 25 mg/m2, arsenic 0.15 mg/kg
+  - pyqss-2025-s2-66 t(8;21) favourable + RUNX1 fusion-vs-mutation trap
+  - pyqss-2025-s3-111 allo-HSCT CR1 indications
+- Gates: checkLesson [], narration 0 fails, coverage 8/8.
+- Progress total: 20 of 113 topics.
+
 ## Done (run 3, 2026-11-07)
 - Lesson son-chronic-leuk (6 steps, 2 reused KB real images, both HTTP 200 verified):
   - pyqss-2025-s3-106 asymptomatic early CLL watchful waiting

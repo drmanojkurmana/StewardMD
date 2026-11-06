@@ -1,0 +1,100 @@
+{
+  "v": 1,
+  "module": "son-apml-atra",
+  "subject": "ss-medical-oncology",
+  "title": "Acute promyelocytic leukaemia ATRA dosing and favourable risk AML with transplant decisions",
+  "minutes": 9,
+  "steps": [
+    {
+      "tx": "Acute promyelocytic leukaemia (a marrow cancer of abnormal promyelocytes) carries **t(15;17)** fusing **PML** with **RARA** (retinoic acid receptor alpha), which freezes white cell maturation and triggers DIC (disseminated intravascular coagulation, body wide clotting and bleeding). **ATRA** (all trans retinoic acid, a vitamin A derivative) unblocks the receptor and forces the blasts to mature into working neutrophils instead of killing them outright.",
+      "say": "Promyelocytic leukaemia looks terrifying at presentation, with bleeding from every puncture site, but its genetics point to an elegant cure. The swapped chromosomes jam the vitamin A receptor so young white cells cannot grow up. ATRA, a concentrated vitamin A cousin, releases that jam and orders the leukemic cells to finish maturing into harmless neutrophils. That is why this leukaemia melts away without the usual cell killing drugs.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-myeloid-leukemia-fig2.webp",
+        "alt": "Illustration of myeloblasts with Auer rods and faggot cells, the t(15;17) PML RARA fusion, and ATRA therapy effect.",
+        "caption": "Faggot cells and PML::RARA behind ATRA driven maturation. Credit: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "Adults receive oral ATRA (generic tretinoin) **45 mg per square metre per day** in two divided doses every 12 hours until complete remission, paired with intravenous arsenic trioxide **0.15 mg per kg per day** in low and intermediate risk disease (white cells 10,000 or less), which cures without chemotherapy in the APL0406 protocol. Children and adolescents under 20 years receive a reduced **25 mg per square metre per day** to lower pseudotumour cerebri (a dangerous rise in brain pressure mimicking a tumour).",
+      "say": "The ATRA dose is a favourite exam number, so fix it firmly. Adults take forty five milligrams per square metre daily, split morning and evening, continuing until the marrow clears, alongside daily arsenic drips for lower risk disease. Young patients take nearly half that dose, twenty five per square metre, because full doses swell their brains with pressure that mimics a tumour. Arsenic dosing runs by body weight, not surface area.",
+      "vis": {
+        "kind": "table",
+        "cols": ["APML drug", "Dose", "Exam anchor"],
+        "rows": [
+          ["ATRA adults", "45 mg per square metre daily, two doses", "Until complete remission"],
+          ["ATRA under 20 years", "25 mg per square metre daily", "Avoids pseudotumour cerebri"],
+          ["Arsenic trioxide", "0.15 mg per kg daily IV", "With ATRA in low risk APL0406"]
+        ]
+      }
+    },
+    {
+      "tx": "AML with **t(8;21)** fusing **RUNX1** with **RUNX1T1** (core binding factor leukaemia with M2 morphology) shows slender Auer rods (needle like granules), salmon pink granules and aberrant CD19 or CD56 markers, yet carries **favourable** risk with about 90% remission. Consolidation uses high dose cytarabine (HiDAC) plus gemtuzumab ozogamicin, with no upfront transplant. Never confuse this fusion with a RUNX1 point mutation, which is adverse risk.",
+      "say": "This translocation is tested as a classic exam trap. Under the microscope it looks aggressive, with needle shaped Auer rods and odd lymphoid markers, yet genetically it belongs to the kindest risk group, curing about nine in ten patients with chemotherapy alone. High dose cytarabine finishes the job, and transplant waits in reserve. The trap is the similar name: a RUNX1 fusion means good news while a RUNX1 mutation means bad news.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-myeloid-leukemia-fig1.webp",
+        "alt": "Stained blood smear showing a myeloblast packed with needle like Auer rods.",
+        "caption": "Auer rods of the kind seen in favourable t(8;21) AML. Image: Ed Uthman, CC BY 2.0, via Wikimedia Commons.",
+        "ar": 1.2665
+      }
+    },
+    {
+      "tx": "The second core binding factor leukaemia, **inv(16)** fusing **CBFB** with **MYH11** (M4 with abnormal eosinophils), shares the favourable outlook and HiDAC consolidation. Both core binding subtypes gain extra benefit from **gemtuzumab ozogamicin** (an antibody delivering toxin to CD33 positive blasts). A high burden **KIT mutation** (a growth receptor gene) or lingering MRD (measurable residual disease) erases the advantage and pushes the patient toward transplant.",
+      "say": "Pair the two core binding leukaemias together in memory. The chromosome sixteen inversion shows its own giveaway, abnormal eosinophils alongside blasts, and enjoys the same excellent cure rate with high dose cytarabine. Both types welcome the CD33 targeted antibody gemtuzumab. But two red flags cancel the good news: a heavy KIT mutation burden or hidden disease surviving chemotherapy, either of which redirects the patient to transplant.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Favourable AML", "Hallmark", "Consolidation"],
+        "rows": [
+          ["t(8;21) RUNX1::RUNX1T1", "M2, Auer rods, CD19/CD56", "HiDAC plus gemtuzumab; no upfront transplant"],
+          ["inv(16) CBFB::MYH11", "M4 with abnormal eosinophils", "HiDAC plus gemtuzumab; no upfront transplant"],
+          ["Either with KIT or MRD+", "High KIT burden or MRD persists", "Allogeneic transplant in first remission"]
+        ]
+      }
+    },
+    {
+      "tx": "**Allogeneic transplant** (marrow from a donor) in first remission is standard for **intermediate** and **adverse** risk AML under ELN 2022 (European LeukemiaNet guidance), because chemotherapy alone relapses too often. **Favourable** risk AML skips upfront transplant and takes chemotherapy consolidation, except when persistent MRD (measurable disease staying positive) or a high KIT burden appears, which upgrade the patient to the transplant pathway.",
+      "say": "Transplant timing follows risk like a rulebook. Middle and bad risk leukaemias proceed to donor transplant during their first remission without debate, since drugs alone cannot hold them. Good risk leukaemias skip that ordeal and finish with chemotherapy, unless follow up testing finds surviving disease or a dangerous KIT mutation. Those two findings promote a good risk patient into the transplant queue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transplant in First Remission",
+          "points": [
+            "Intermediate risk AML always",
+            "Adverse risk AML always",
+            "Favourable risk only if MRD positive",
+            "Favourable risk only if high KIT burden"
+          ]
+        },
+        "right": {
+          "title": "Chemotherapy Consolidation Only",
+          "points": [
+            "Favourable risk with clean MRD",
+            "Core binding factor without KIT",
+            "Isolated NPM1 without high risk genes",
+            "HiDAC based consolidation"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "NCCN Acute Myeloid Leukemia Guidelines 2024",
+    "ELN 2022 Recommendations for Acute Myeloid Leukemia",
+    "WHO Classification of Haematolymphoid Tumours 5th Edition"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-pyq-gap-muse",
+  "model": "muse-spark",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
