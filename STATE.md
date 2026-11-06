@@ -14,6 +14,17 @@
 - Progress total: 30 of 113 topics. Tier-1 Heme area complete (30/30).
 - Next: Tier-2 anthracycline cardiotoxicity cluster (pyqss-2024-s2-201, s2-204, s2-232, s2-249, s2-263).
 
+## Done (run 5 continued, 2026-11-07)
+- Lesson son-anthracycline-heart (5 steps, 2 reused KB real images HTTP 200, tables/compare on other steps):
+  - pyqss-2024-s2-201 lifetime ceilings epi 900, dauno 550-600, doxo 450-550, idarubicin 150, mitoxantrone 140
+  - pyqss-2024-s2-204 Adria cells vacuolar LM + myofibrillar loss EM, Billingham scale
+  - pyqss-2024-s3-232 onset within 1 year, 400/500-550/600+ rate ladder, Top2 alpha vs beta split
+  - pyqss-2024-s3-249 ROS + Top2B mechanism, dexrazoxane, TOP2A/HER2 17q co-amplification 35-40 percent
+  - pyqss-2024-s3-263 dexrazoxane/liposomal/infusion protection, ivabradine EXCEPT, ESC CTRCD cutoffs
+- Gates: checkLesson [], narration 0 fails, coverage 11/11, ss-subject-check missing 0, index union 1980+6->1987.
+- Step 5 tx trimmed 94 to 90 words to pass shape gate.
+- Progress total: 35 of 113 topics.
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
