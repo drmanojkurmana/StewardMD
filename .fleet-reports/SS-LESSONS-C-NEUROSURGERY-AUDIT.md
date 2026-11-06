@@ -505,3 +505,11 @@ for stage-2. No PR with lesson edits; this audit report is the deliverable."
 - Queue re-read: ss-neurosurgery still `blueprint: todo` (line 16); all lanes todo; no lane-A neurosurgery branch on remote, so no stage-2 work for lane C. Paediatric blueprints confirmed safe on origin/ss-lessons-C (6 files, tip 25cd46340).
 - PRs #1981 (OPEN/MERGEABLE/UNSTABLE) and #1988 (OPEN/MERGEABLE/CLEAN) re-checked via gh; both unmerged, no rebase needed, no action (lead merges). Lead 05:3x checker-first note applies to agy runs only; this muse-writer run wrote no lessons, so no new UNCHECKED FLAGS rows.
 - No lesson edits, no commits, no PR, nothing pushed to main. No UI touched.
+
+## Re-verification 2026-11-06 (third Lane C run, run 10, current main baa8d2e5e)
+- Queue re-read: ss-neurosurgery still line 16 `blueprint: todo`, all lanes todo; no ss-neurosurgery blueprint on any branch, no remote neurosurgery branch. No stage-2 topics for lane C.
+- `checkLesson` (gate 0, re-run, observed): `[]` x5 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus, sur-neck, sur-neck-face-trauma).
+- `node tools/prep-lessons.mjs --check` (observed): identical pre-existing fail set, all already logged for stage-2: sur-brain-tumours steps 3 (12+ word copy) and 5 (aminolevulinic acid); sur-head-injury steps 4-6 narration (no-verb opens); sur-hydrocephalus step 4 (40/50 tap-test volumes) and step 5 narration. Narration rows already in LESSONS-GARBLED.md lines 1224/1226; no new rows.
+- R2 existence re-checked (curl, observed): 200 x8, byte-identical to run 9 (128482 / 125350 / 103142 / 117634 / 122724 / 91162 / 77094 / 32892 B). All KEEP; nothing for SS-LESSONS-IMAGES-REMOVED.md or SS-LESSONS-IMAGE-NEEDS.md.
+- Checkers: agy gemini-3.8-flash-low and claude-sonnet-4-6 both fail in this sandbox (localhost bind blocked), grok fails (FS_PERMISSION_DENIED). Nothing written this run, so no new UNCHECKED FLAGS rows.
+- Paediatric blueprints confirmed safe on origin/ss-lessons-C (6 files). Queue line 16 untouched. No lesson edits, no PR, nothing pushed to main. No UI touched.
