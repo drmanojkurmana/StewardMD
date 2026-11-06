@@ -6,7 +6,7 @@
  "minutes": 8,
  "steps": [
   {
-   "tx": "The skull is a rigid box, so bleeding, swelling or obstruction inside it raises **intracranial pressure** and threatens brain perfusion. Warning signs are falling consciousness, severe or worsening headache, vomiting, unequal or unreactive pupils, posturing and the late Cushing response of rising pressure with slowing pulse. Any of these after stroke, bleeding or head injury is a **neurosurgical and critical-care emergency** (NICE NG236; NICE head injury guidance).",
+   "tx": "The skull is a rigid box, so bleeding, swelling or obstruction inside it raises **intracranial pressure** and threatens brain perfusion. Warning signs are falling consciousness, severe or worsening headache, vomiting, unequal or unreactive pupils, posturing and the late Cushing response of rising pressure with slowing pulse. Any of these after stroke, bleeding or head injury is a **neurosurgical and critical-care emergency** (NICE head injury guidance).",
    "say": "Falling consciousness, worsening headache, vomiting or pupil change means raised pressure until proved otherwise, needing neurosurgical and critical-care help.",
    "vis": {
     "kind": "flow",
@@ -49,12 +49,16 @@
      [
       "Oxygen, pressure, image, refer",
       "Masking sedation without senior advice"
+     ],
+     [
+      "Chart consciousness and pupils",
+      "Delay imaging for routine observations"
      ]
     ]
    }
   },
   {
-   "tx": "In intracerebral haemorrhage, control blood pressure as guided, reverse anticoagulation and correct clotting while neurosurgical advice is sought. Reassess consciousness and pupils on a charted schedule; a one-point fall is escalation, not a footnote. Families need honest, early communication about severity and uncertainty.",
+   "tx": "In intracerebral haemorrhage, control blood **pressure** as guided, reverse anticoagulation and correct clotting while neurosurgical advice is sought. Reassess consciousness and pupils on a charted schedule; a one-point fall is escalation, not a footnote. Families need honest, early communication about severity and uncertainty.",
    "say": "In brain bleeding, control pressure as guided, reverse anticoagulation, chart consciousness and pupils, and communicate honestly and early.",
    "vis": {
     "kind": "image",
@@ -63,6 +67,37 @@
     "caption": "Intracerebral hemorrhage management: imaging, BP, coagulation, and neurosurgical consultation. Image: Glitzy queen00 at English Wikipedia, CC0/PD, Wikimedia Commons.",
     "ar": 0.8088
    }
+  },
+  {
+   "tx": "Keep a charted watch after the first plan. Record the **Glasgow Coma Scale** with pupil size and reaction on a fixed schedule, because a small fall can be the first sign of rising pressure. Never perform a lumbar puncture when raised pressure is suspected; draining fluid below a pressure gradient can precipitate herniation. Neurosurgery may place a drain, remove a clot or open the skull, and each choice follows imaging and senior judgement, not a fixed rule.",
+   "say": "Chart consciousness and pupils on a fixed schedule, since a small fall can warn of rising pressure. Never do a lumbar puncture when raised pressure is suspected. A drain, clot removal or opening the skull are neurosurgical decisions guided by imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Monitor",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Glasgow Coma Scale plus pupils on schedule",
+      "A small fall is the earliest warning"
+     ],
+     [
+      "Lumbar puncture when pressure is suspected",
+      "Never: it can precipitate herniation"
+     ],
+     [
+      "Drain, clot removal or skull opening",
+      "Neurosurgical choice from imaging"
+     ]
+    ]
+   }
   }
- ]
+ ],
+ "quiz": [
+  "mk-gap791",
+  "mk-gap793",
+  "mk-gap795"
+ ],
+ "gen": "hand"
 }

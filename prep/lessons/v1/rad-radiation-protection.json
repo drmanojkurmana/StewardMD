@@ -3,7 +3,7 @@
  "module": "rad-radiation-protection",
  "subject": "radiology",
  "title": "Radiation units, biological effects and protection",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "Radiation quantities have SI units you must know. **Becquerel** measures radioactivity, meaning disintegrations per second. The old unit was the curie, where one curie equals 3.7 x 10 to the power 10 becquerels. **Gray** measures absorbed dose, the energy deposited per kilogram of tissue. One gray equals 100 rad. **Sievert** measures dose equivalent and effective dose, and one sievert equals 100 rem.",
@@ -99,6 +99,17 @@
       "Example: cancer, heritable mutation"
      ]
     }
+   }
+  },
+  {
+   "tx": "The diagram shows an X-ray photon ejecting a fast electron that strikes DNA to cause a **direct break**, alongside water splitting into **hydroxyl radicals** that attack DNA from a distance. This second route is the **predominant indirect action** and causes most molecular change, producing single and double strand breaks. Linking both paths explains why dilute cellular water still permits major genetic injury.",
+   "say": "Look at the two labeled paths. On the left, the ejected electron hits DNA and snaps it directly. On the right, the same electron splits water into hydroxyl radicals, and those radicals drift to DNA and break one or both strands. The indirect path does most of the damage. Remember this picture when a question asks why water-rich tissue still suffers DNA breaks from radiation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-radiation-protection-gen1.webp",
+    "alt": "Diagram shows an X-ray photon ejecting an electron that breaks DNA directly while hydroxyl radicals from split water cause further strand breaks.",
+    "caption": "Diagram of direct DNA breakage and hydroxyl radical injury in irradiated tissue, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

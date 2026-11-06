@@ -1,0 +1,204 @@
+{
+  "v": 1,
+  "module": "spl-cleft-lip",
+  "subject": "ss-plastic-surgery",
+  "title": "Cleft Lip Reconstruction",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Congenital unilateral cleft lip arises from embryological failure of anatomical fusion between the lateral **maxillary prominence** and the medial nasal prominence during gestational weeks 4 to 7. In complete cleft lip, the orbicularis oris muscle fibres fail to cross the midline, orienting abnormally parallel to the cleft margin.",
+      "say": "A cleft lip forms when the maxillary prominence fails to fuse with the medial nasal prominence between the fourth and seventh week of pregnancy. The muscle that should ring the mouth instead runs upward and anchors along the cleft edge, which is why the lip cannot move symmetrically.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "4 to 7 weeks gestation: facial prominences develop"
+          },
+          {
+            "id": "b",
+            "label": "Failure of maxillary and medial nasal fusion"
+          },
+          {
+            "id": "c",
+            "label": "Cleft defect with misdirected orbicularis oris insertion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The classical Wilhelmsen and Musgrave **rule of tens** defines standard safety guidelines before elective infant cleft lip repair: age of at least 10 weeks, body weight of at least 10 pounds (4.5 kg), hemoglobin level of at least 10 g/dL, and white blood cell count under 10,000 per mm3.",
+      "say": "Nobody repairs a cleft lip on a fragile newborn. The rule of tens sets the safety bar: wait until ten weeks of age, ten pounds of weight, ten grams of haemoglobin, and a white count below ten thousand, so the baby withstands anaesthesia and heals cleanly.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Target Value",
+          "Clinical Rationale"
+        ],
+        "rows": [
+          [
+            "Age",
+            "At least 10 weeks",
+            "Decreased anaesthetic and airway risk"
+          ],
+          [
+            "Weight",
+            "At least 10 pounds (4.5 kg)",
+            "Adequate physiological and nutritional reserve"
+          ],
+          [
+            "Hemoglobin",
+            "At least 10 g/dL",
+            "Safe oxygen-carrying capacity during surgery"
+          ],
+          [
+            "White blood count",
+            "Under 10,000 / mm3",
+            "Absence of active systemic infection"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The Millard **rotation-advancement technique** remains the most widely practiced repair for unilateral cleft lip. A downward curving rotation incision releases the shortened medial lip element and drops Cupid bow into normal horizontal alignment, while a lateral lip flap is advanced into the resulting upper subnasal gap.",
+      "say": "Millard's rotation-advancement remains the commonest repair worldwide. A curved cut frees the short medial lip and rotates it downward to level Cupid's bow, while a flap advanced from the lateral side fills the gap left high under the nose.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-metzenbaum-scissors.webp",
+        "alt": "Delicate Metzenbaum scissors for cleft lip muscle dissection",
+        "caption": "Fine surgical dissecting scissors for facial muscle mobilization in cleft lip repair. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The geometric **Fisher anatomic subunit repair** designs incisions strictly along natural aesthetic subunit boundaries, placing the primary vertical scar along the neo-philtral column and executing a small horizontal back-cut above the white roll, avoiding the visible curvilinear scar of the Millard rotation in the upper philtrum.",
+      "say": "Fisher's repair hides every scar along the natural borders of the lip's aesthetic subunits, dropping the main vertical scar onto the future philtral column. Keeping incisions on subunit lines avoids the curved upper scar that betrays a Millard repair.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Millard Repair",
+          "points": [
+            "Cut-as-you-go flexibility",
+            "Curvilinear subalar rotation scar",
+            "Prone to philtral scar contraction"
+          ]
+        },
+        "right": {
+          "title": "Fisher Subunit Repair",
+          "points": [
+            "Strict geometric subunit alignment",
+            "Straight scar along philtral ridge",
+            "Superior preservation of philtral height"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Re-establishing the continuous **orbicularis oris muscle** ring is the cornerstone of functional cleft lip repair. The abnormal attachments to the anterior nasal spine, columella base, and alar base must be completely detached and reoriented transversely, suturing the marginal and pars peripheralis muscle bands across the midline.",
+      "say": "Closing skin without rebuilding muscle leaves a lip that looks repaired but cannot move. Detach the orbicularis fibres from their wrong anchor points on the nasal spine and alar bases, then suture them edge to edge across the midline to restore a living muscular ring.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-toothed-dissecting-forceps.webp",
+        "alt": "Toothed dissecting forceps for delicate muscle handling",
+        "caption": "Precision forceps used in dissecting and aligning orbicularis oris muscle fibers. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Primary **cleft rhinoplasty** performed concurrently with lip repair corrects the slumped lower lateral cartilage on the cleft side. Surgical manoeuvres include mobilizing the cleft lower lateral cartilage from the overlying skin and underlying mucosa, securing transcartilaginous suspension sutures to the contralateral normal dome, and repositioning the slumped alar base.",
+      "say": "Fix the nose at the same sitting, because the lower lateral cartilage on the cleft side is slumped and splayed. Freeing that cartilage and stitching it up into a symmetric dome during the lip repair gives a straighter nose and often avoids a second rhinoplasty later.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Dissection of cleft lower lateral cartilage from skin envelope"
+          },
+          {
+            "id": "b",
+            "label": "Tajima suspension or interdomal mattress sutures"
+          },
+          {
+            "id": "c",
+            "label": "Medialization and symmetrical repositioning of alar base"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In bilateral complete cleft lip, the protruding **premaxilla** presents a major reconstructive challenge in infants. Preoperative infant orthopaedics using nasoalveolar molding NAM retracts the prominent premaxilla, elongates the deficient columella, and aligns alveolar segments, facilitating tension-free synchronous bilateral lip repair without requiring preliminary lip adhesion.",
+      "say": "In a complete bilateral cleft the central premaxilla juts forward, making direct closure impossible. Nasoalveolar molding worn before surgery gradually pushes the premaxilla back and stretches the short columella, so the surgeon can close both sides without tension.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nasoalveolar Molding (NAM)",
+          "points": [
+            "Active orthopedic molding",
+            "Expands deficient columella",
+            "Enables single-stage bilateral repair"
+          ]
+        },
+        "right": {
+          "title": "Without Presurgical Molding",
+          "points": [
+            "Severe premaxillary protrusion",
+            "High tension closure",
+            "Frequent need for lip adhesion staging"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Long-term secondary cleft lip deformities include **whistle deformity** (vermilion notch deficiency), philtral height deficiency, flattened alar dome, and displaced alar base. Correction utilizes mucosal V-Y advancement, Abbe cross-lip flap for severe central prolabial tightness, or secondary rhinoplasty with septal cartilage grafting to restore facial harmony.",
+      "say": "Years later some children show a notch in the red lip called a whistle deformity, a short philtrum, or a flattened nostril. Small mucosal advancements fill a vermilion notch, while larger gaps borrow full-thickness lip from the opposite side as an Abbe flap, with cartilage grafts rebuilding the nasal framework.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Deformity",
+          "Underlying Pathology",
+          "Surgical Correction"
+        ],
+        "rows": [
+          [
+            "Whistle deformity",
+            "Central vermilion deficiency",
+            "V-Y mucosal advancement flap or fat graft"
+          ],
+          [
+            "Tight prolabium",
+            "Deficient central tissue in bilateral cleft",
+            "Abbe arterial cross-lip flap from lower lip"
+          ],
+          [
+            "Alar depression",
+            "Deformed lower lateral cartilage",
+            "Open rhinoplasty with costal/septal strut"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,212 @@
+{
+  "v": 1,
+  "module": "spl-peripheral-nerve-repair",
+  "subject": "ss-plastic-surgery",
+  "title": "Peripheral Nerve Injury and Repair",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Peripheral nerve trauma classification follows the classical Seddon and Sunderland schemes. **Neurapraxia** is physiological conduction block without axonal disruption; **axonotmesis** involves axonal disruption with preserved endoneurial tubes; **neurotmesis** is complete anatomical nerve transection that never regenerates without timely microsurgical coaptation intervention.",
+      "say": "Seddon gave us three words for a damaged nerve and Sunderland split them finer. Neurapraxia is a bruised nerve that stops conducting but keeps every fibre intact, axonotmesis cuts the axons while the tubes survive to guide regrowth, and neurotmesis severs the whole nerve, which never heals without a surgeon sewing it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Seddon",
+          "Sunderland",
+          "Pathology",
+          "Recovery Prognosis"
+        ],
+        "rows": [
+          [
+            "Neurapraxia",
+            "Grade I",
+            "Local myelin damage, intact axon",
+            "Complete recovery in weeks"
+          ],
+          [
+            "Axonotmesis",
+            "Grade II",
+            "Axon transected, endoneurium intact",
+            "Regeneration at 1 mm/day"
+          ],
+          [
+            "Axonotmesis",
+            "Grade III/IV",
+            "Endoneurium (III) / perineurium (IV) disrupted, epineurium intact",
+            "Incomplete, surgical release needed"
+          ],
+          [
+            "Neurotmesis",
+            "Grade V",
+            "Complete nerve division",
+            "No recovery without surgical repair"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following nerve transection, **Wallerian degeneration** occurs in the distal nerve stump over 24 to 48 hours. Axons and myelin sheaths fragment, while Schwann cells proliferate to form continuous bands of Bungner. Axonal regrowth proceeds from the proximal stump at an average rate of 1 mm per day or 1 inch per month.",
+      "say": "Cut off from its cell body, the far stump dissolves within a day or two, axons and myelin crumbling in Wallerian degeneration. Schwann cells then line up into living rails called bands of Bungner, and new axons crawl down them from the near end at about a millimetre a day, an inch a month.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Axonal transection and calcium influx"
+          },
+          {
+            "id": "b",
+            "label": "Wallerian degeneration and macrophage clearance (24 to 48 hours)"
+          },
+          {
+            "id": "c",
+            "label": "Schwann cell bands of Bungner formation"
+          },
+          {
+            "id": "d",
+            "label": "Axonal sprout regeneration at 1 mm per day"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary **epineurial repair** using 8-0 to 10-0 monofilament nylon sutures under operative magnification represents the gold standard for acute, clean nerve transections. Aligning longitudinal epineurial surface vessels and fascicular patterns ensures precise matching, while tension-free approximation is paramount to avoid intraneural ischemia.",
+      "say": "A clean fresh cut deserves a primary epineurial repair under the microscope with eight-zero to ten-zero nylon. Match the tiny surface vessels and the fascicle pattern so motor and sensory bundles line up, and sew with zero tension, because a stretched repair strangles its own blood supply.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-toothed-dissecting-forceps.webp",
+        "alt": "Micro-forceps for peripheral nerve handling",
+        "caption": "Microsurgical instruments utilized in tension-free epineurial neurorrhaphy. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "When nerve retraction or segment loss creates a gap where primary suturing requires joint flexion or exceeds physiological tension, autologous **nerve grafting** is mandatory. The sural nerve is the premier donor nerve, yielding up to 30 to 40 cm of graft material with minimal donor morbidity.",
+      "say": "When a gap means the ends only meet under stretch, bridging with graft is mandatory. The sural nerve from the calf is the favourite donor, giving thirty to forty centimetres of cable with nothing lost but a strip of numbness along the outer foot.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Neurorrhaphy",
+          "points": [
+            "Single coaptation line",
+            "Used for acute clean lacerations",
+            "Must be strictly tension-free"
+          ]
+        },
+        "right": {
+          "title": "Nerve Grafting",
+          "points": [
+            "Bridges segmental nerve gaps",
+            "Sural nerve cable graft workhorse",
+            "Crosses two coaptation sites"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Motor endplates undergo irreversible atrophy and fibrosis if reinnervation fails to occur within 12 to 18 months of denervation. In high nerve injuries where the distance to target muscles exceeds axonal regeneration limits, **distal nerve transfers** place donor axons millimeters from the target motor point.",
+      "say": "Muscle has a deadline: motor endplates scar over permanently if no nerve arrives within twelve to eighteen months. For a high injury the regrowing axons can never win that race, so steal a nearby expendable nerve and plug it in millimetres from the target, which is the distal nerve transfer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Proximal high-level nerve injury (brachial plexus / high radial)"
+          },
+          {
+            "id": "b",
+            "label": "Distance exceeds 12 to 18 month motor endplate survival window"
+          },
+          {
+            "id": "c",
+            "label": "Distal nerve transfer close to target motor point"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Classical nerve transfers include the Oberlin transfer for elbow flexion recovery in upper brachial plexus palsy, redirecting redundant motor fascicles from the **ulnar nerve** to the biceps branch of the musculocutaneous nerve, and median nerve fascicles to the brachialis branch without creating donor hand weakness.",
+      "say": "The classic is Oberlin's: in an upper plexus palsy with a dead elbow, borrow spare fascicles from the ulnar nerve for the biceps branch and from the median nerve for brachialis. Elbow flexion is back within months and the hand never notices the loan.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-metzenbaum-scissors.webp",
+        "alt": "Metzenbaum dissecting scissors for intraneural fascicular neurolysis",
+        "caption": "Precision dissection scissors for intraneural fascicle separation in nerve transfers. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Advancement of nerve regeneration is monitored clinically using the **Tinel sign**, elicited by lightly percussing along the nerve path. A tingling sensation radiating into the distal sensory distribution marks the furthest point of regenerating unmyelinated axonal tips, advancing distally at 1 mm per day.",
+      "say": "Follow recovery with the Tinel sign. Tapping along the nerve's course sends tingling into its territory wherever the naked growing tips currently sit, and month by month that tingling point should march toward the fingertips at a millimetre a day.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Advancing Tinel Sign",
+          "points": [
+            "Progression distally at 1 mm/day",
+            "Indicates active axonal sprout growth",
+            "Favorable regenerative sign"
+          ]
+        },
+        "right": {
+          "title": "Stationary Tinel Sign",
+          "points": [
+            "Arrests at repair or injury site",
+            "Indicates neuroma in continuity or block",
+            "Requires surgical exploration and revision"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Postoperative nerve complications include symptomatic neuroma formation and chronic neuropathic pain. Painful terminal neuromas are managed by surgical neuroma excision and translocating the freshly divided nerve end deep into **vascularised muscle** or bone, away from mechanical joint motion and superficial pressure points.",
+      "say": "A nerve with nowhere to go grows a painful knot called a neuroma. Cut it back to healthy fascicles and bury the fresh end deep in vascularised muscle or bone, far from joints and pressure, so the escaping axons find a quiet home instead of a scar.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Neuroma Category",
+          "Pathology",
+          "Management Strategy"
+        ],
+        "rows": [
+          [
+            "Terminal neuroma",
+            "Disorganised sprout tangle at cut stump",
+            "Resection and muscle transposition"
+          ],
+          [
+            "Neuroma-in-continuity",
+            "Partial injury with fibrosis and blocked conduction",
+            "Intraneural neurolysis vs resection and graft"
+          ]
+        ]
+      }
+    }
+  ]
+}
