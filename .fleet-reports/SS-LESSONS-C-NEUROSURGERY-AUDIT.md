@@ -995,3 +995,53 @@ for stage-2. No PR with lesson edits; this audit report is the deliverable."
   B MTP fix) left to lane B; lead 05:3x/10:xx notes apply to agy runs only.
 - No lessons written, so no blind fact-check rows needed. No lesson edits, no
   commits to main, nothing pushed to main. No UI touched.
+
+## 2026-11-06 Lane C run (muse-spark-1.3, main 1a2a46c25 = origin/main, fetched this run)
+- Paediatric safekeeping verified first: all 6 ss-paediatric-*.json blueprints
+  listed on origin/ss-lessons-C; nothing committable under standing rules
+  (STATE.md + .fleet-reports/* never go on branches). Nothing pushed.
+- Queue re-read at start and end: current subject still ss-neurosurgery
+  (subject 13), `blueprint: todo`, all lanes todo; no lane-A neurosurgery
+  branch on remote, so no stage-2 work for lane C.
+- checkLesson (gate 0, re-run, observed): `[]` for sur-brain-tumours,
+  sur-head-injury, sur-hydrocephalus.
+- `node tools/prep-lessons.mjs --check` (observed, per-file): brain-tumours
+  x2 pre-existing (step-3 verbatim 12+ words; step-5 aminolevulinic-acid
+  grounding); head-injury x3 narration (steps 4-6, matches LESSONS-GARBLED.md
+  line 1224); hydrocephalus step-4 numbers 40/50 + step-5 narration (line
+  1226). All for stage-2; no lesson files touched, no new garbled rows.
+- R2 existence re-checked (curl, observed): 200 for all four srcs,
+  byte-identical sizes (128482 / 125350 / 103142 / 117634 B; last download
+  valid WebP VP8 1200x896). All 4 KEEP per the earlier look; nothing for
+  SS-LESSONS-IMAGES-REMOVED.md or SS-LESSONS-IMAGE-NEEDS.md.
+- FLAGS backlog: lane-A check-only runs 106-110 (same day) each independently
+  re-parse to 0 real-lesson latest-UNCHECKED; no lessons written this run, so
+  no blind fact-check rows needed (lead 05:3x checker-first + 10:xx MTP notes
+  apply to agy runs only).
+- PR watch via gh: #1988 (lane-C ssg) and #1987 (lane-B ssg) OPEN/MERGEABLE/
+  UNSTABLE (CI running, 0 failed); #1994 (lane-B MTP fix) OPEN/MERGEABLE/CLEAN.
+  No rebase needed, no action (lead merges). #1981 merged.
+- No lesson edits, no commits, no PR, nothing pushed to main. No UI touched.
+
+## 2026-11-06 Lane C run (muse-spark-1.3, main 1a2a46c25 = origin/main, fetched this run)
+- Queue re-read at start: ss-neurosurgery still `blueprint: todo` (line 16);
+  all lanes todo; no lane-A neurosurgery blueprint branch on remote (only the
+  merged lane-B audit branch), so no stage-2 work for lane C.
+- Keep-earlier-work rule: lane-C worktree (ss-lessons-C-critical-care) clean
+  except untracked STATE.md (kept untracked per lead rule); 6 paediatric
+  blueprints confirmed present on origin/ss-lessons-C
+  (ss-paediatric-{cardiology,endocrinology,gastroenterology,nephrology,
+  neurology,radiology}.json). Nothing to commit beyond this log entry.
+- checkLesson (gate 0, re-run, observed): `[]` for sur-brain-tumours,
+  sur-head-injury, sur-hydrocephalus.
+- R2 existence re-checked (curl, observed): 200 for all four srcs,
+  byte-identical sizes (128482 / 125350 / 103142 / 117634 B; download valid
+  WebP VP8 1200x896). All 4 KEEP per the earlier look; nothing for
+  SS-LESSONS-IMAGES-REMOVED.md or SS-LESSONS-IMAGE-NEEDS.md.
+- FLAGS re-parse (991 logical rows, 509 keys, observed): 0 real-lesson
+  latest-UNCHECKED (all 105 UNCHECKED hits are spaced run-log/meta rows, no
+  lesson-id keys). No lessons written, so no new UNCHECKED rows and no blind
+  pass owed (lead 05:3x checker-first + 10:xx MTP notes apply to agy runs only).
+- PR watch via gh: #1988 OPEN/MERGEABLE/UNSTABLE (8 checks pass, gaps pending,
+  0 failed). No rebase needed, no action (lead merges).
+- No lesson edits, no PR, nothing pushed to main. No UI touched.
