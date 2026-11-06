@@ -3,7 +3,7 @@
  "module": "sgm-bias-trials",
  "subject": "ss-general-medicine",
  "title": "Bias, confounding and clinical trial interpretation",
- "minutes": 8,
+ "minutes": 9,
  "steps": [
   {
    "tx": "**Bias** is a systematic error that pushes results away from the truth. It is present to some degree in all studies, so the goal is to recognise and minimise it rather than pretend it can be eliminated. Random error, by contrast, scatters results without a consistent direction and is reduced by larger samples. **Confounding** is a distortion caused by a third variable linked to both exposure and outcome, such as smoking in a coffee and lung cancer study.",
@@ -60,6 +60,17 @@
       "Interpret survival with caution"
      ]
     }
+   }
+  },
+  {
+   "tx": "The upper panel shows **lead-time bias**: screening advances diagnosis without moving death, so survival looks longer by artefact. The lower panel shows **length-time bias**, where periodic screens over-detect slow indolent tumours while rapid fatal ones surface between rounds. Both panels warn that **screening** comparisons need intention-to-screen analysis and like-with-like **survival** interpretation.",
+   "say": "This figure contrasts two screening artefacts. Lead-time bias advances the date of diagnosis into the pre-clinical phase while the date of death stays fixed, creating an artificial survival gain. Length-time bias arises because periodic screening preferentially catches slow growing indolent tumours and misses rapidly fatal ones that appear between screens. Both remind readers to interpret survival differences with caution and to use intention-to-screen analysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgm-bias-trials-gen1.webp",
+    "alt": "Two timeline diagrams contrasting lead-time bias with length-time bias in cancer screening.",
+    "caption": "Diagrams of lead-time and length-time bias in screening timelines, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
