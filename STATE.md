@@ -111,6 +111,17 @@
 - Progress total: 88 of 113 topics.
 - Next: GI cluster (6 topics: s1-4+s3-84 ESCC smoking/alcohol vs GERD, s2-46 pseudomyxoma CRS+HIPEC, s3-81 T-DXd HER2 IHC3+, s3-159 PS3-4 BSC, s3-286 anal canal BCC exclusion) then sarcoma/peds/dx areas.
 
+## Done (next run 5, 2026-11-07)
+- Lesson son-gi-gap-facts (5 steps, 2 reused KB real images HTTP 200, table/compare elsewhere):
+  - pyqss-2025-s1-4 + s3-84 ESCC smoking/alcohol synergy; GERD/Barrett/obesity = adeno
+  - pyqss-2025-s2-46 pseudomyxoma CRS+HIPEC; benign myxoma excision alone
+  - pyqss-2025-s3-81 T-DXd IHC 3+ agnostic; HER2-low breast-only
+  - pyqss-2025-s3-159 PS 3-4 BSC alone regardless of stage
+  - pyqss-2024-s3-286 anal canal SCC/Nigro; BCC margin-only EXCEPT
+- Gates: checkLesson [], narration 0 fails (fixed drive/defines/overrules/hides/outrank/mean), coverage 8/8, total 893/893, ss-subject-check missing 0, index union 1980+17->1998.
+- Progress total: 94 of 113 topics.
+- Next: sarcoma cluster (5 topics: s2-51 STS biopsy, s3-118 Doege-Potter, s3-177 SFT NAB2-STAT6, s3-180 osteosarcoma MAP, s3-238 Ewing EWSR1) then peds/dx/cutaneous areas (19 remaining).
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
