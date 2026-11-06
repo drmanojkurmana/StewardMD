@@ -36,6 +36,18 @@
 - Progress total: 41 of 113 topics.
 - Next: Tier-2 TLS cluster (s1-6, s2-210 Cairo lab/clinical, s3-241, s3-242, s3-245, s2-200 uric acid ratio, s2-185 pharma) then hypercalcaemia/SVCO cluster.
 
+## Done (run 5 continued part 3, 2026-11-07)
+- Lesson son-tls-cairo (6 steps, 2 reused KB real images HTTP 200, table/compare visuals elsewhere):
+  - pyqss-2025-s1-6 lab vs clinical split, creatinine trap, hypercalcaemia EXCEPT
+  - pyqss-2024-s3-241 four lab cutoffs, child phosphate, 25 percent rule, minus-3 to plus-7 window
+  - pyqss-2024-s3-242 three clinical events, respiratory failure distractor
+  - pyqss-2024-s3-245 1-5 day timing vs 7-14 day neutropenia nadir
+  - pyqss-2024-s2-185 allopurinol/febuxostat/rasburicase, G6PD ban, steroids EXCEPT
+  - pyqss-2024-s2-200 urine uric acid ratio above 1.0
+- Gates: checkLesson [], narration 0 fails (fixed exploit/mark/arrives sentences), coverage 12/12, ss-subject-check missing 0, index union 1980+8->1989.
+- Progress total: 47 of 113 topics.
+- Next: hypercalcaemia/SVCO cluster (s1-17, s3-108, s2-213, s2-230, s1-184, s2-210, s2-211, s2-272, s2-236) then chemo leftovers.
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
