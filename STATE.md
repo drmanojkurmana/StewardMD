@@ -95,6 +95,22 @@
 - Progress total: 77 of 113 topics.
 - Next: gynae cluster (11 topics: cervix s1-15 IIB/Peters + s3-235 IB2 surgery; endometrium POLE s1-25 + s3-168 observation; ovary OCP s2-42 + s3-136, ROMA/RMI s2-50 + s3-92, PAOLA s3-78, platinum s2-226; vulvar s3-240 nodes) then GI/sarcoma/peds/dx areas.
 
+## Done (next run 4, 2026-11-07)
+- Lesson son-gynae-cervix-endo (5 steps, 3 reused KB real images HTTP 200, table + compare elsewhere):
+  - pyqss-2025-s1-15 IIB definitive CCRT + INTERLACE/KEYNOTE-A18; Peters 3Ps vs Sedlis RT-alone
+  - pyqss-2024-s3-235 IB1/IB2 radical hysterectomy + nodes; IB3/CCRT from IB3; no upfront dual modality
+  - pyqss-2024-s3-240 vulvar nodes #1 prognostic, 1 mm IB rule, grade EXCEPT
+  - pyqss-2025-s1-25 + s3-168 POLE ultramutated IAm observation; p53ab worst
+- Lesson son-ovary-risk-relapse (4 steps, 2 reused KB real images HTTP 200, table + compare elsewhere):
+  - pyqss-2025-s2-42 + s3-136 OCP ladder 10-12/20/50 percent, breast RR 1.2-1.3
+  - pyqss-2025-s2-50 + s3-92 ROMA vs RMI cutoffs, no percutaneous biopsy (IA to IC)
+  - pyqss-2025-s3-78 PAOLA-1 HRD+/BRCA-wt vs SOLO-1 BRCA; MDS/AML 1-2 percent
+  - pyqss-2024-s2-226 platinum sensitivity intervals, doublet + PARPi; withdrawn mono
+- ID COLLISION FIX (2nd): first draft overwrote existing son-ovary.json (Epithelial ovarian cancer); restored via git checkout HEAD (verified title) and renamed mine to son-ovary-risk-relapse across lesson/taxonomy/blueprint before commit.
+- Gates: checkLesson [] both, narration 0 fails both (fixed draws/treats/triggers, mixes/blends/hide, marks/sit, mix, convert, compare, excludes/stops, clocks/restores), coverage 9/9 + 8/8, total 885/885, ss-subject-check missing 0, index union 1980+15->1997. Lane son-ovary lesson + index entry verified intact.
+- Progress total: 88 of 113 topics.
+- Next: GI cluster (6 topics: s1-4+s3-84 ESCC smoking/alcohol vs GERD, s2-46 pseudomyxoma CRS+HIPEC, s3-81 T-DXd HER2 IHC3+, s3-159 PS3-4 BSC, s3-286 anal canal BCC exclusion) then sarcoma/peds/dx areas.
+
 SSD path in brief was sandbox-blocked (Operation not permitted); worktree lives at /tmp/wt-pyq-gap-muse on branch pyq-gap-muse tracking origin/main.
 
 ## Done (run 4, 2026-11-07)
