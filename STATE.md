@@ -4,8 +4,18 @@
 - **Active Worktree**: `/Volumes/WD BLACK SN7100 1TB Media/stewardmd/wt/ss-lessons-C`
 - **Branch**: `ss-lessons-C`
 - **Current Mode**: Sequential Mode across lanes A, B, C
-- **Current Subject in Queue**: Neurosurgery (`ss-neurosurgery`) [Subject #13 in SS-QUEUE.md; subjects 1-12 DONE]
+- **Current Subject in Queue**: CTVS (`ss-ctvs`) [Subject #15 in SS-QUEUE.md; subjects 1-14 DONE]
 - **Current Stage**: Stage 1 (blueprint todo: Lane A has not drafted it yet; Lane C audits existing lessons only)
+
+## 2026-11-06 run 18 (writer muse-spark-1.3; origin/main 9664b1731, fetched): ss-ctvs stage-1 audit
+- Queue re-read at start: ss-ctvs still `blueprint: todo` (line 15), all lanes todo; no lane-A ctvs branch on remote, so no stage-2 topics, no lessons written.
+- Paediatric blueprints: all 6 present on this branch, untouched. Lane-C worktrees clean (no tracked modifications). Nothing else to preserve.
+- Audit on origin/main file bytes: 5 existing CTVS lessons (sct-aorta-congenital, sct-coronary-valve, sct-thoracic, sur-cardiac, sur-thoracic). checkLesson `[]` x5. All 5 existing R2 srcs HTTP 200, viewed, all KEEP (no removals; sct-thoracic-fig1 'Thym.oma' typo covered by lane-B repaint row, kept per IMAGE TYPO RULE).
+- Lane-B overlap: lane B's audit commit (ss-lessons-B-ctvs-audit: coronary steps 2+8, thoracic step 1) landed while this run was inspecting; lane C took only different steps. Lane B's branch HEAD (pushed) also carries this run's 8 NEEDS rows + FLAGS UNCHECKED row (swept from the shared main-checkout copies).
+- Lane-C edits (branch ss-lessons-C-ctvs-audit, PR #2009 OPEN, 9/9 green): aorta steps 1+5 (aortic-dissection-fig1, congenital-heart-disease-fig1), thoracic steps 2+3+6 (pneumothorax-fig2, pleural-empyema-fig1, thoracic-trauma-tension-pneumothorax-and-tamponade-fig1), coronary step 6 (ie-fig2), sur-cardiac step 2 say/caption alignment + StewardMD credit. checkLesson [] x4, ss-image-gate.py silent. No new GARBLED rows (only pre-existing verb-dictionary false positives).
+- Blind check: writer muse; agy fails at sandbox startup (localhost bind/log denied), grok -p FS_PERMISSION_DENIED (both probed fresh). Logged UNCHECKED (muse writer) in SS-LESSONS-FLAGS.md; PR held for the blind pass before merge.
+- Next: wait for ss-ctvs blueprint (lane A) + blind checker; then stage-2 lane-C topics. Do NOT start stage 2 or next subject while blueprint is todo.
+- This commit carries the branch copy of SS-LESSONS-C-CTVS-AUDIT.md (synced from main checkout) and this STATE.md. No PR opened. Queue untouched.
 
 ## 2026-11-06 run 15 (writer muse-spark-1.3; origin/main 1a2a46c25 = image bulk #1995, fetched): ss-neurosurgery stage-1 closeout
 - Queue re-read at start and end: ss-neurosurgery still `blueprint: todo` (line 16), all lanes todo; no lane-A neurosurgery branch on remote, so no stage-2 topics, no lessons written, no blind fact-check owed, no new FLAGS rows (lead 05:3x checker-first + 10:xx MTP notes are agy-runs only; FLAGS tail shows #1988 lessons already Checked by claude).
