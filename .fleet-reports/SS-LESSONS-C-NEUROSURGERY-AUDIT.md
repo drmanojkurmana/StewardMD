@@ -1045,3 +1045,16 @@ for stage-2. No PR with lesson edits; this audit report is the deliverable."
 - PR watch via gh: #1988 OPEN/MERGEABLE/UNSTABLE (8 checks pass, gaps pending,
   0 failed). No rebase needed, no action (lead merges).
 - No lesson edits, no PR, nothing pushed to main. No UI touched.
+
+## 2026-11-06 Lane C run 17 (muse-spark-1.3, main 1a2a46c25 = origin/main, fetched this run)
+- Queue re-read: ss-neurosurgery still `blueprint: todo`, all lanes todo; no
+  neurosurgery blueprint file, no lane-A neurosurgery branch on remote. No
+  stage-2 work for lane C; not starting any later subject.
+- Run-16 entry preserved on origin/ss-lessons-C (tip 2208e7d14 verified this
+  run); 6 paediatric blueprints intact there.
+- checkLesson (gate 0, re-run, observed): `[]` x3. R2 re-checked (curl,
+  observed): 200 x4, byte-identical sizes (128482 / 125350 / 103142 / 117634 B).
+  All 4 KEEP; nothing for SS-LESSONS-IMAGES-REMOVED.md or IMAGE-NEEDS.md.
+- PR watch via gh: #1988 now OPEN/MERGEABLE/CLEAN (gaps finished since run 16).
+  No action (lead merges). No lessons written, no FLAGS rows owed.
+- No lesson edits, no PR, nothing pushed to main. No UI touched.
