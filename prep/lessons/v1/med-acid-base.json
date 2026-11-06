@@ -3,7 +3,7 @@
  "module": "med-acid-base",
  "subject": "medicine",
  "title": "Approach to Metabolic Acidosis and Renal Tubular Acidosis",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "Metabolic acidosis is classified by the **anion gap**. A normal anion gap, or hyperchloraemic acidosis, often points to renal tubular disorders or gastrointestinal losses. In contrast, a high anion gap acidosis is typical of advanced renal failure, lactic acidosis, or ketoacidosis. Distinguishing between these is essential for accurate diagnosis.",
@@ -34,12 +34,12 @@
    "tx": "The **urine anion gap** serves as a vital bedside tool. A positive value during acidosis suggests impaired renal ammonium excretion, characteristic of renal tubular acidosis, whereas a negative value points towards gastrointestinal bicarbonate loss. This simple calculation helps clinicians localise the site of the acid-base disturbance.",
    "say": "The urine anion gap serves as a vital bedside tool. A positive value during acidosis suggests impaired renal ammonium excretion, characteristic of renal tubular acidosis, whereas a negative value points towards gastrointestinal bicarbonate loss. This simple calculation helps clinicians localise the site of the acid-base disturbance.",
    "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/med-gap-delta.svg",
-        "alt": "Gap math: normal gap points to RTA, diarrhoea, saline or ureteral diversion; high gap points to renal failure, lactic, DKA or toxic ingestion; positive urine gap means kidney, negative means gut.",
-        "caption": "The gap sorts the acidosis.",
-        "ar": 1.5385
-      }
+    "kind": "image",
+    "src": "prep/lessons/media/med-gap-delta.svg",
+    "alt": "Gap math: normal gap points to RTA, diarrhoea, saline or ureteral diversion; high gap points to renal failure, lactic, DKA or toxic ingestion; positive urine gap means kidney, negative means gut.",
+    "caption": "The gap sorts the acidosis.",
+    "ar": 1.5385
+   }
   },
   {
    "tx": "Renal tubular acidosis subtypes are defined by site and electrolyte patterns. **Type 1 (distal)** RTA results from failure to secrete hydrogen ions, leading to alkaline urine and hypokalaemia. **Type 2 (proximal)** RTA involves impaired bicarbonate reabsorption, often associated with Fanconi syndrome. **Type 4** RTA is linked to aldosterone deficiency and presents with hyperkalaemia.",
@@ -72,6 +72,17 @@
       "<5.5"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The diagram contrasts **Type 1** distal failure of hydrogen secretion with **Type 2** proximal failure of bicarbonate reabsorption. Both sides show alkaline urine, while the proximal cell also loses glucose, amino acids and phosphate in **Fanconi syndrome**. Failed secretion explains persistent alkaline urine and guides alkali and potassium replacement with watch for stones.",
+   "say": "The diagram contrasts distal failure of hydrogen secretion with proximal failure of bicarbonate reabsorption. Both sides show alkaline urine, while the proximal cell also loses glucose, amino acids and phosphate in Fanconi syndrome. The site of the defect explains the urine findings and guides alkali and potassium replacement with watch for stones.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-acid-base-gen1.webp",
+    "alt": "The diagram shows two kidney tubule cells contrasting proximal bicarbonate loss with distal hydrogen secretion failure.",
+    "caption": "Cell diagram contrasting proximal and distal tubule defects behind alkaline urine, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
