@@ -2033,6 +2033,7 @@
       (G.PREP_PLAN ? row("weak", ico("target"), "Weak areas", "Mistakes and modules under 60%") : "") +
       // Previous year papers (prep-pyq.js): NEET-PG recall papers only, so the row shows on that tab.
       (G.PREP_PYQ && s.exam === "neet-pg" ? G.PREP_PYQ.homeRow(HOST) : "") +
+      (G.PREP_PYQSS && s.exam === "neet-ss" ? G.PREP_PYQSS.homeRow(HOST) : "") +
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
@@ -3457,7 +3458,7 @@
         '<div class="pn-group">' + row("p-settings", ico("gear"), "Change exam", "Exam: " + esc(planExamLabel())) + "</div>";
       else {
       // The previous year papers row (NEET-PG) sits on top.
-      var pyq = G.PREP_PYQ && s.exam === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(HOST) + "</div>" : "";
+      var pyq = G.PREP_PYQ && s.exam === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(HOST) + "</div>" : G.PREP_PYQSS && s.exam === "neet-ss" ? '<div class="pn-group">' + G.PREP_PYQSS.homeRow(HOST) + "</div>" : "";
       body = '<div class="pn-banner pn-art-mock" aria-hidden="true"></div>' + pyq + list.map(function (m) {
         var mini = Math.min(50, m.n), part = m.parts ? m.n / m.parts : 0;
         return '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(m.label) + '</p><p class="pn-mut">' + m.n + " questions" + (part ? " in " + m.parts + " parts of " + part + ", " + fmtMin(m.min / m.parts) + " each" : ", " + fmtMin(m.min)) + ". Right +" + fmtMark(m.plus) + (m.minus ? ", wrong minus " + fmtMark(m.minus) : ", no negative marking") + ", unanswered 0." + (m.pass ? " Pass mark " + m.pass + " of " + m.n * m.plus + "." : "") + "</p>" +
@@ -4527,6 +4528,8 @@
     if (a.indexOf("il-") === 0 && G.PREP_IMGLEARN) return G.PREP_IMGLEARN.act(a, b, HOST);
     // Previous year papers (prep-pyq.js) own every data-act starting "y-".
     if (a.indexOf("y-") === 0 && G.PREP_PYQ) return G.PREP_PYQ.act(a, b, HOST);
+    // NEET-SS Medical Oncology previous-year questions + analysis (prep-pyqss.js) own every data-act starting "ys-".
+    if (a.indexOf("ys-") === 0 && G.PREP_PYQSS) return G.PREP_PYQSS.act(a, b, HOST);
     // Radiology image series (prep-rad.js) own every data-act starting "rd-".
     if (a.indexOf("rd-") === 0 && G.PREP_RAD) return G.PREP_RAD.act(a, b, HOST);
     // Onboarding, readiness and today's plan (prep-plan.js) own every data-act starting "p-".
