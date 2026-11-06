@@ -1,0 +1,218 @@
+{
+ "checks": {
+  "bank": null,
+  "dropped": 0,
+  "drugs": true,
+  "numbers": true,
+  "redone": 0,
+  "selfCheck": false,
+  "shape": true,
+  "verbatim": true
+ },
+ "gen": "hand",
+ "minutes": 8,
+ "module": "ssg-liver-abscess",
+ "quiz": [],
+ "refs": [
+  "Blumgart Surgery of the Liver 6e Ch 72-73",
+  "Sabiston Surgery 22e Ch 89, liver",
+  "WSES Intra-abdominal Infections 2024",
+  "Tokyo Guidelines 2018"
+ ],
+ "src": [
+  "ss-c-liver-abscess-ground"
+ ],
+ "steps": [
+  {
+   "say": "Pyogenic abscess starts from biliary sepsis, portal pyaemia or hypervirulent Klebsiella spread. Fever with right upper pain, white cells and rim enhancing lesions on contrast CT make the diagnosis. Multiple small lesions point toward cholangitis as the source.",
+   "tx": "Pyogenic abscess from biliary sepsis, portal pyaemia or **Klebsiella** hypervirulent strains shows fever with right upper pain, leukocytosis and **rim-enhancing** lesions on contrast CT. Biliary obstruction seeds multiple bilateral abscesses, while **portal pyaemia** from appendicitis or diverticulitis seeds predominantly the right lobe through laminar streaming. Blood cultures plus biliary imaging run together, since the source decides between stenting, drainage and resection.",
+   "vis": {
+    "alt": "Five bacterial seeding routes into the liver with gram stain, CT cluster sign and Klebsiella invasive syndrome management.",
+    "caption": "Pyogenic abscess routes and Klebsiella syndrome. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/liver-abscess-fig1.webp"
+   }
+  },
+  {
+   "say": "Amoebic abscess gives the classic anchovy sauce aspirate with negative bacterial culture and positive serology. Metronidazole seven fifty thrice daily for seven to ten days cures most cases. Add a luminal agent afterward to clear gut cysts.",
+   "tx": "Amoebic abscess from **Entamoeba histolytica** gives **anchovy sauce** aspirate with negative bacterial culture and positive serology, resolving with **metronidazole** **750** mg thrice daily for **7** to **10** days. Flask-shaped colonic ulcers seed the portal vein to the right lobe, and serology may stay positive for years after cure. Follow the tissue course with diloxanide or paromomycin to kill luminal cysts and stop relapse.",
+   "vis": {
+    "alt": "Amoeba lifecycle through portal vein to a solitary anchovy paste cavity with trophozoite microscopy, CT ring enhancement and IgG treatment panel.",
+    "caption": "Amoebic abscess portal pathogenesis and cure. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/amoebic-liver-abscess-fig1.webp"
+   }
+  },
+  {
+   "say": "Drainage decisions follow size, site and response. Abscesses over five centimetres, left lobe lesions threatening rupture, or failure after forty eight hours of antibiotics need pigtail drainage. Eight to twelve French catheters with saline flushes keep the cavity empty.",
+   "tx": "Abscesses over **5** cm, left-lobe location threatening rupture, or failed **48**-hour antibiotic trial need **percutaneous** **pigtail drainage** with **8** to **12** French catheters. Ultrasound or CT guides the safest transhepatic window avoiding pleura and colon, and daily output charts mark progress. Remove the drain when output dries and imaging shows cavity collapse, not by fixed calendar days.",
+   "vis": {
+    "cols": [
+     "Finding",
+     "Threshold",
+     "Action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Size",
+      "Over 5 cm",
+      "Pigtail drain"
+     ],
+     [
+      "Left lobe",
+      "Rupture risk",
+      "Urgent drain"
+     ],
+     [
+      "No better at 48 h",
+      "Failed antibiotics",
+      "Drain now"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "A burst amoebic abscess into the belly or chest is a surgical emergency. Urgent drainage with washout plus metronidazole saves these patients, while contained leaks respond to catheter drainage alone. Never watch spreading peritonitis from a ruptured cavity.",
+   "tx": "**Ruptured abscess** of amoebic origin into peritoneum or thorax needs urgent drainage with **washout** plus metronidazole, while contained leaks respond to catheter drainage alone. Thoracic rupture through the diaphragm causes empyema needing chest drain alongside abdominal control, and free peritoneal rupture needs lavage with wide drainage. Start metronidazole before theatre and continue the full course after source control.",
+   "vis": {
+    "edges": [
+     [
+      "burst",
+      "wash"
+     ],
+     [
+      "leak",
+      "cath"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "burst",
+      "label": "Free rupture"
+     },
+     {
+      "id": "wash",
+      "label": "Washout plus drug"
+     },
+     {
+      "id": "leak",
+      "label": "Contained leak"
+     },
+     {
+      "id": "cath",
+      "label": "Catheter alone"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Klebsiella liver abscess with eye or brain spread marks metastatic hypervirulent K1 disease. Dilated eye examination and prolonged ceftriaxone follow every such case. Diabetes makes this disseminated pattern more likely, so control sugars aggressively.",
+   "tx": "**Klebsiella** liver abscess with **endophthalmitis** or meningitis marks metastatic **hypervirulent Klebsiella** **K1** disease needing dilated eye examination and prolonged ceftriaxone. Monomicrobial abscess in a diabetic with blurred vision or neck stiffness triggers the full metastatic hunt including brain imaging. Treat for weeks not days, since endophthalmitis blinds quickly and meningitis kills if undertreated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Polymicrobial, biliary source",
+      "Drain plus short antibiotics",
+      "Localised disease"
+     ],
+     "title": "Usual pyogenic"
+    },
+    "right": {
+     "points": [
+      "K1 Klebsiella, diabetic",
+      "Eye exam, long ceftriaxone",
+      "Metastatic hunt"
+     ],
+     "title": "Hypervirulent"
+    }
+   }
+  },
+  {
+   "say": "Tiny miliary abscesses from ascending cholangitis behave differently from big single cavities. Under three centimetres they resolve with biliary stenting plus antibiotics, with surgery reserved for the underlying stricture. Drain the bile, not each micro abscess.",
+   "tx": "Multiple small miliary abscesses under **3** cm from **ascending cholangitis** resolve with biliary stenting plus antibiotics, and surgery is reserved for the underlying biliary stricture. Charcot fever with jaundice points to the duct as the true disease, and ERCP clearance with a stent reverses the septic drive. Stricture repair or hepaticojejunostomy follows for fixed benign strictures after sepsis settles.",
+   "vis": {
+    "cols": [
+     "Pattern",
+     "Size",
+     "Strategy"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Solitary large",
+      "Over 5 cm",
+      "Pigtail drainage"
+     ],
+     [
+      "Miliary small",
+      "Under 3 cm",
+      "Stent plus antibiotics"
+     ],
+     [
+      "Stricture behind",
+      "Fixed narrowing",
+      "Later biliary surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The caudate lobe sits against the vena cava, so open surgery there risks catastrophic bleeding. Drain caudate abscesses percutaneously under CT guidance instead. The needle path avoids the cava while reaching the cavity.",
+   "tx": "**Caudate lobe** abscess abutting the vena cava is drained percutaneously under CT guidance rather than surgically because open access risks **caval injury**. The deep central position between the cava and the porta makes retraction dangerous, while a posterior or transhepatic needle track stays safer. Even large caudate collections usually shrink with catheter drainage, so reserve resection for failed drainage with mass effect.",
+   "vis": null
+  },
+  {
+   "say": "Follow every abscess to imaging resolution, not just symptom relief. Ultrasound at two weeks should show cavity collapse, and thick walled cavities persisting beyond six weeks need re-aspiration with tuberculosis and fungal cultures. Non collapse means wrong bug or wrong diagnosis.",
+   "tx": "Follow-up ultrasound at **2** weeks checks **cavity collapse**, though large cavities often take weeks longer to flatten, and persistent thick-walled cavities beyond **6** weeks need **re-aspiration** with tuberculosis and fungal cultures. Inadequate drainage, an undrained biliary source, endemic hydatid or fungi can explain non-resolution, and repeat cytology excludes cystic tumour mimics. Document complete resolution before stopping surveillance, since premature discharge invites silent recurrence.",
+   "vis": {
+    "edges": [
+     [
+      "week2",
+      "shrink"
+     ],
+     [
+      "week2",
+      "persist"
+     ],
+     [
+      "shrink",
+      "stop"
+     ],
+     [
+      "persist",
+      "reculture"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "week2",
+      "label": "US at 2 weeks"
+     },
+     {
+      "id": "shrink",
+      "label": "Cavity collapsing"
+     },
+     {
+      "id": "stop",
+      "label": "Stop, document cure"
+     },
+     {
+      "id": "persist",
+      "label": "Beyond 6 weeks"
+     },
+     {
+      "id": "reculture",
+      "label": "Re-aspirate, TB/fungal"
+     }
+    ]
+   }
+  }
+ ],
+ "subject": "ss-surgical-gastroenterology",
+ "title": "Liver abscess: pyogenic, amoebic and Klebsiella drainage rules",
+ "v": 1
+}

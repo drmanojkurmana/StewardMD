@@ -1,0 +1,211 @@
+{
+ "checks": {
+  "bank": null,
+  "dropped": 0,
+  "drugs": true,
+  "numbers": true,
+  "redone": 0,
+  "selfCheck": false,
+  "shape": true,
+  "verbatim": true
+ },
+ "gen": "hand",
+ "minutes": 8,
+ "module": "ssg-appendicitis-appendiceal-tumours",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22e Ch 94, appendix",
+  "WSES Appendicitis guideline 2024",
+  "ENETS Appendiceal NET guideline 2023",
+  "PSOGI Pseudomyxoma guideline 2022"
+ ],
+ "src": [
+  "ss-c-appendicitis-ground"
+ ],
+ "steps": [
+  {
+   "say": "The Alvarado score turns the bedside story into a number, adding migratory pain, anorexia, nausea, right sided tenderness, rebound, fever and white cell counts. Seven or more predicts appendicitis needing surgery. Rovsing, psoas and obturator signs each add localising weight to the decision.",
+   "tx": "**Alvarado score** combines **migratory pain**, anorexia, nausea, right iliac fossa tenderness, rebound, fever, leukocytosis and neutrophilia, with **7** or more predicting appendicitis needing surgery. Pain starts periumbilical then settles at McBurney point as the parietal peritoneum inflames, and Rovsing, psoas and obturator signs localise the irritated appendix. Low scores suit observation with rescanning, while high scores go straight to theatre.",
+   "vis": {
+    "alt": "McBurney point with migratory pain path plus Rovsing, psoas stretch and obturator manoeuvres localising appendicitis.",
+    "caption": "Localising signs of acute appendicitis. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/acute-appendicitis-fig1.webp"
+   }
+  },
+  {
+   "say": "Uncomplicated appendicitis gets keyhole surgery within twenty four hours in most centres. Antibiotics first suits selected patients who accept a thirty percent one year recurrence risk. Shared decision making should quote that recurrence figure plainly before choosing.",
+   "tx": "Uncomplicated appendicitis gets **laparoscopic appendectomy** within **24** hours, while **antibiotics-first** suits selected cases but carries **30** percent one-year recurrence. Laparoscopy means less wound infection, quicker discharge and a full abdominal look for mimics such as Meckel or ovarian pathology. Faecolith on imaging, appendicolith obstruction or immunocompromise push the same patient back toward early operation instead.",
+   "vis": {
+    "alt": "Laparoscopic appendicectomy showing mesoappendix, appendicular artery, appendiceal base and endoloop ligation with graspers.",
+    "caption": "Laparoscopic appendicectomy anatomy. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/lessons/media/sur-appendix-s3.webp"
+   }
+  },
+  {
+   "say": "A walled off phlegmon or a drainable abscess changes the plan from resection to control. Drain collections over three centimetres percutaneously and book interval appendectomy at six to eight weeks. Immediate surgery through phlegmon risks bowel injury and stoma.",
+   "tx": "Complicated appendicitis with **phlegmon** or abscess over **3** cm gets percutaneous drainage with **interval appendectomy** at **6** to **8** weeks because immediate surgery risks bowel injury. The cool-down period lets oedema settle and nutrition recover, and colonoscopy in over-40s excludes a caecal cancer masquerading as phlegmon. Failed drainage with ongoing sepsis still needs limited resection, accepting possible ileocaecal resection.",
+   "vis": {
+    "cols": [
+     "Finding",
+     "Size or state",
+     "Plan"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Phlegmon, stable",
+      "No drainable pus",
+      "Antibiotics, interval op"
+     ],
+     [
+      "Abscess",
+      "Over 3 cm",
+      "Percutaneous drain"
+     ],
+     [
+      "Ongoing sepsis",
+      "Failed drainage",
+      "Limited resection"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "A faecolith inside the appendix is a warning flag for antibiotics alone. Appendicolith with non perforated appendicitis raises medical failure to forty percent, so favour early appendectomy here. The stone keeps the lumen blocked while antibiotics only calm the wall.",
+   "tx": "**Appendicolith** with nonperforated appendicitis raises failure of antibiotics alone to **40** percent, favouring early appendectomy in **faecolith** cases. The impacted stone maintains luminal obstruction and bacterial load despite systemic drugs, and perforation follows quickly behind missed faecoliths. CT reporting must always state faecolith presence explicitly, because that single word flips the consent discussion from tablets to theatre.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "No faecolith seen",
+      "Antibiotics may hold",
+      "30% one-year return"
+     ],
+     "title": "Antibiotics-first"
+    },
+    "right": {
+     "points": [
+      "Faecolith present",
+      "40% medical failure",
+      "Early appendectomy"
+     ],
+     "title": "Operate early"
+    }
+   }
+  },
+  {
+   "say": "Appendix carcinoids follow strict size rules. Under one centimetre at the tip needs appendectomy alone, one to two centimetres with mesoappendiceal invasion needs right hemicolectomy, and anything over two centimetres always needs colectomy. Size plus invasion depth together drive the operation.",
+   "tx": "**Carcinoid** under **1** cm at the tip needs appendectomy alone, **1** to **2** cm tumours need right hemicolectomy with **mesoappendiceal invasion**, and over **2** cm always needs colectomy. Grade, lymphovascular invasion and positive margins escalate borderline cases toward colectomy even at smaller sizes. All specimens need chromogranin and Ki-67 grading, with serotonin and 5-HIAA workup when carcinoid syndrome flushes appear.",
+   "vis": {
+    "cols": [
+     "Tumour size",
+     "Invasion",
+     "Operation"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Under 1 cm tip",
+      "None",
+      "Appendectomy"
+     ],
+     [
+      "1 to 2 cm",
+      "Mesoappendiceal",
+      "Right hemicolectomy"
+     ],
+     [
+      "Over 2 cm",
+      "Any",
+      "Always colectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "A ruptured mucinous tumour fills the belly with jelly rather than pus, and simple appendectomy cannot fix that. Low grade mucinous neoplasm with pseudomyxoma needs complete cytoreduction with heated chemotherapy at a peritoneal centre. Refer before operating, because the first operation decides the cure.",
+   "tx": "Low-grade appendiceal mucinous neoplasm with **pseudomyxoma peritonei** needs **cytoreductive surgery** with HIPEC at a peritoneal centre, not appendectomy alone. Acellular mucin on the peritoneum still counts as spread and needs complete stripping, while positive cytology alone changes surveillance intensity. Mucocele over 2 cm with mural nodules warns of neoplasm preoperatively, so handle the appendix gently and avoid rupture at laparoscopy.",
+   "vis": {
+    "alt": "Distended mucin filled appendix with peritoneal mucin deposits and histology showing mucinous epithelium with extracellular mucin.",
+    "caption": "Appendiceal mucinous neoplasm with pseudomyxoma. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/appendiceal-mucinous-neoplasm-fig1.webp"
+   }
+  },
+  {
+   "say": "Pain returning months after appendectomy can still be the appendix. A residual stump over five millimetres on CT marks stump appendicitis, treated by completion appendectomy with stump inversion. Leaving a long stump at the first operation invites this entirely preventable encore.",
+   "tx": "**Stump appendicitis** months after appendectomy shows a residual stump over **5** mm on CT and needs **completion appendectomy** with stump inversion. Faecolith retained in the stump or a flush appendix missed at laparoscopy explains most recurrences. Keep the primary stump under 5 mm and invert or ligate it securely, since a long stump behaves like a second appendix waiting to inflame.",
+   "vis": {
+    "edges": [
+     [
+      "pain",
+      "scan"
+     ],
+     [
+      "scan",
+      "complete"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pain",
+      "label": "RLQ pain post appendectomy"
+     },
+     {
+      "id": "scan",
+      "label": "CT: stump over 5 mm"
+     },
+     {
+      "id": "complete",
+      "label": "Completion appendectomy"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Pregnancy pushes the appendix upward after the first trimester, so the pain moves with it. Graded compression ultrasound first and MRI second avoid ionising radiation, and laparoscopy stays safe in all trimesters. Never delay surgery for fetal concerns when the mother is peritonitic.",
+   "tx": "**Pregnancy** shifts the appendix upward after the first trimester, so **graded compression** ultrasound first and MRI second avoid ionising radiation, with laparoscopy safe in all trimesters. Leukocytosis misleads in pregnancy, so rely on migratory pain, tenderness migration and imaging rather than white counts. Perforation raises fetal loss sharply, which makes timely operation the most fetal-protective choice in true appendicitis.",
+   "vis": {
+    "edges": [
+     [
+      "rlq",
+      "us"
+     ],
+     [
+      "us",
+      "mri"
+     ],
+     [
+      "mri",
+      "scope"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rlq",
+      "label": "Pregnant RLQ pain"
+     },
+     {
+      "id": "us",
+      "label": "Graded compression US"
+     },
+     {
+      "id": "mri",
+      "label": "MRI if inconclusive"
+     },
+     {
+      "id": "scope",
+      "label": "Laparoscopy any trimester"
+     }
+    ]
+   }
+  }
+ ],
+ "subject": "ss-surgical-gastroenterology",
+ "title": "Appendicitis and appendiceal tumours: scores, surgery and size rules",
+ "v": 1
+}
