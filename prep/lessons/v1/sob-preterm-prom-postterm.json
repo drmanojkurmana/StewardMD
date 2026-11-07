@@ -1,0 +1,248 @@
+{
+  "v": 1,
+  "module": "sob-preterm-prom-postterm",
+  "title": "Preterm Labour, Tocolytics, Antenatal Corticosteroids, PROM, and Post-Term Pregnancy",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 42 (Preterm Labor), Ch 43 (Postterm Pregnancy)",
+    "Ten Teachers Gynaecology 21e",
+    "ACOG Practice Bulletins on Preterm Labor and Prelabor Rupture of Membranes"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Preterm labour is defined as regular painful uterine contractions with progressive cervical effacement or dilatation occurring between twenty and thirty six weeks and six days of gestation. Clinical evaluation requires transvaginal sonographic assessment of the cervix. When contractions occur alongside measurable cervical changes before thirty seven weeks, therapeutic interventions are immediately mobilized to delay delivery.",
+      "tx": "**Preterm labour** is defined clinically by regular uterine contractions accompanied by progressive **cervical effacement** or dilatation between **20 and 36 weeks 6 days** of gestation. Detecting true cervical change differentiates active labor from benign Braxton Hicks contractions, allowing clinicians to mobilize tocolysis and corticosteroid therapy before 37 weeks.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-prc-cervical-cerclage-mcdonald.webp",
+        "ar": 1.3333,
+        "caption": "McDonald cervical cerclage placement for regular contractions and incompetence. Credit: StewardMD.",
+        "alt": "Surgical technique for McDonald cervical cerclage placement in cervical insufficiency."
+      }
+    },
+    {
+      "say": "Assessment of cervical length on transvaginal sonography and testing for cervicovaginal fetal fibronectin provide powerful predictive value. A cervical length under twenty five millimetres between sixteen and twenty four weeks or a negative fetal fibronectin below fifty nanograms per millilitre provides a negative predictive value exceeding ninety five percent for delivery within seven to fourteen days.",
+      "tx": "Transvaginal measurement of **cervical length** under 25 mm between 16 and 24 weeks identifies high risk for preterm birth. Conversely, negative **fetal fibronectin** below 50 ng/mL in cervicovaginal secretions provides a **negative predictive value exceeding 95%** for delivery within 7 to 14 days, preventing unnecessary hospital admissions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Assess symptomatic patient between 22 and 34 weeks gestation"
+          },
+          {
+            "id": "b",
+            "label": "Transvaginal ultrasound demonstrates cervical length <25 mm"
+          },
+          {
+            "id": "c",
+            "label": "Sample cervicovaginal secretions for quantitative fetal fibronectin"
+          },
+          {
+            "id": "d",
+            "label": "fFN <50 ng/mL confirms >95% probability of not delivering in 7-14 days"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Antenatal corticosteroids accelerate fetal lung maturation and stimulate alveolar surfactant production. Intramuscular betamethasone, twelve milligrams given in two doses twenty four hours apart, or dexamethasone, six milligrams given in four doses twelve hours apart between twenty four and thirty four weeks, significantly reduces neonatal respiratory distress syndrome, intraventricular hemorrhage, and neonatal mortality.",
+      "tx": "**Antenatal corticosteroids** promote pulmonary maturity and surfactant synthesis. Regimens consisting of intramuscular **betamethasone** (12 mg in 2 doses 24 hours apart) or **dexamethasone** (6 mg in 4 doses 12 hours apart) administered between 24 and 34 weeks significantly reduce **neonatal respiratory distress syndrome**, intraventricular hemorrhage, and neonatal death.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/preterm-labour-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Preterm labour management pathway and corticosteroid benefits. Credit: StewardMD.",
+        "alt": "Algorithm for preterm labour evaluation, tocolysis window, and corticosteroid dosing."
+      }
+    },
+    {
+      "say": "Intravenous magnesium sulphate provides vital fetal neuroprotection when preterm delivery is imminent before thirty two weeks gestation. A four gram loading dose is infused over thirty minutes followed by a maintenance infusion of one gram per hour until delivery or for up to twenty four hours. Clinical trials demonstrate a significant reduction in cerebral palsy and gross motor dysfunction in surviving infants.",
+      "tx": "Intravenous **magnesium sulphate** administered before 32 weeks of gestation provides proven fetal **neuroprotection**. Initiated when preterm delivery is imminent, magnesium infusion stabilizes neuronal membranes and significantly reduces the relative incidence of **cerebral palsy** and gross motor dysfunction in surviving preterm infants.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Magnesium Sulphate Neuroprotection",
+          "points": [
+            "Indicated before 32 weeks if delivery imminent",
+            "4 g intravenous bolus over 20-30 minutes",
+            "1 g/h continuous infusion for up to 24 hours",
+            "Significantly reduces cerebral palsy risk"
+          ]
+        },
+        "right": {
+          "title": "Tocolytic Therapy Window",
+          "points": [
+            "Indicated between 24 and 34 weeks gestation",
+            "Administered for 48 hours only",
+            "Permits steroid benefit and tertiary transfer",
+            "Does not prolong pregnancy to term"
+          ]
+        }
+      }
+    },
+    {
+      "say": "First line tocolytic medications are administered for up to forty eight hours to delay delivery, enabling complete antenatal corticosteroid administration and maternal transport. Oral nifedipine, a calcium channel blocker, or atosiban, an oxytocin receptor antagonist, represents first line tocolysis. Beta agonists like ritodrine have been largely abandoned due to maternal pulmonary oedema and cardiac risks.",
+      "tx": "First-line **tocolysis** utilizes oral **nifedipine** or the oxytocin receptor antagonist **atosiban** for up to 48 hours. This therapeutic window allows for the completion of antenatal corticosteroids and maternal transfer to a tertiary neonatal intensive care facility, while avoiding older beta-agonists that carry severe cardiopulmonary risks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tocolytic Class",
+          "Mechanism of Action",
+          "Key Maternal Adverse Effects"
+        ],
+        "rows": [
+          [
+            "Nifedipine (CCB)",
+            "Blocks voltage-dependent L-type calcium channels",
+            "Hypotension, flushing, reflex tachycardia, headache"
+          ],
+          [
+            "Atosiban",
+            "Competitive oxytocin receptor antagonist",
+            "Injection site reaction, mild nausea; excellent safety"
+          ],
+          [
+            "Indomethacin (NSAID)",
+            "Non-selective cyclooxygenase (COX) inhibitor",
+            "Oligohydramnios and premature ductus arteriosus closure"
+          ],
+          [
+            "Ritodrine / Salbutamol",
+            "Beta-2 adrenergic receptor agonist",
+            "Pulmonary oedema, maternal tachycardia, hypokalemia, hyperglycemia"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Preterm premature rupture of membranes is confirmed clinically by sterile speculum examination demonstrating pooling of amniotic fluid in the posterior fornix. The alkaline fluid turns yellow nitrazine paper blue at a pH above six point five, while microscopic examination of dried fluid shows an arborization ferning pattern. Digital vaginal examinations are avoided to prevent ascending infection.",
+      "tx": "**Preterm premature rupture of membranes (PPROM)** is confirmed on sterile speculum examination by clear fluid pooling in the posterior fornix. Diagnostic testing demonstrates a positive **nitrazine test** wherein amniotic fluid with pH >6.5 turns yellow paper blue, alongside a microscopic **ferning pattern** on air-dried glass slides.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Patient presents with watery vaginal discharge before 37 weeks"
+          },
+          {
+            "id": "b",
+            "label": "Perform sterile speculum examination; avoid digital examinations"
+          },
+          {
+            "id": "c",
+            "label": "Positive nitrazine paper test: pH >6.5 produces blue discoloration"
+          },
+          {
+            "id": "d",
+            "label": "Microscopic ferning arborization pattern confirms rupture of membranes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In women with preterm prelabour rupture of membranes remote from term before thirty four weeks, expectant management with latency antibiotics is standard care. The latency antibiotic regimen combines intravenous ampicillin and erythromycin for forty eight hours, followed by oral amoxicillin and erythromycin for five days. This regimen significantly prolongs pregnancy latency and reduces neonatal sepsis.",
+      "tx": "Management of PPROM remote from term (<34 weeks) incorporates **latency antibiotics** to prolong pregnancy and decrease neonatal morbidity. The standard protocol combines **intravenous ampicillin and erythromycin for 48 hours**, followed by oral amoxicillin and erythromycin for 5 days, significantly extending latency and suppressing ascending chorioamnionitis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Expectant Care (24 to 34 Weeks)",
+          "points": [
+            "Seven-day course of latency antibiotics",
+            "Antenatal corticosteroids for lung maturity",
+            "Serial monitoring for chorioamnionitis signs",
+            "Magnesium sulphate if delivery imminent <32w"
+          ]
+        },
+        "right": {
+          "title": "Immediate Delivery Indications",
+          "points": [
+            "Gestational age reaches 34 completed weeks",
+            "Clinical chorioamnionitis (maternal fever, foul lochia)",
+            "Non-reassuring fetal heart rate tracing",
+            "Significant placental abruption or severe bleeding"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Post-term pregnancy extends to or beyond forty two weeks and zero days of gestation. Placental senescence causes progressive oligohydramnios, meconium aspiration syndrome, fetal macrosomia, and dysmaturity syndrome. Elective labour induction between forty one and forty two weeks significantly reduces perinatal mortality without increasing caesarean delivery rates.",
+      "tx": "A **post-term pregnancy** extends to or beyond **42 weeks 0 days**, carrying elevated perinatal risks of **meconium aspiration syndrome**, fetal macrosomia, and neonatal dysmaturity syndrome. Systematic guidelines recommend **routine induction** between 41 and 42 weeks to eliminate late stillbirths without increasing the rate of caesarean section.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Pregnancy extends past 41 weeks without spontaneous labour"
+          },
+          {
+            "id": "b",
+            "label": "Surveillance for oligohydramnios and placental senescence"
+          },
+          {
+            "id": "c",
+            "label": "Offer routine induction between 41 and 42 completed weeks"
+          },
+          {
+            "id": "d",
+            "label": "Prevent meconium aspiration, fetal dysmaturity, and stillbirth"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

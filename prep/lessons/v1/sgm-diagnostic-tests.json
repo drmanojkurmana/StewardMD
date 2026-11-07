@@ -3,7 +3,7 @@
  "module": "sgm-diagnostic-tests",
  "subject": "ss-general-medicine",
  "title": "Evaluation of Diagnostic Tests",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "A **diagnostic test** is judged by how well it separates people with a disease from those without it. Its core properties are **sensitivity**, the proportion of diseased people who test positive, and **specificity**, the proportion of healthy people who test negative. A sensitive test is useful for ruling out disease when negative, while a specific test is useful for ruling in disease when positive. Both are intrinsic to the test and do not change with the population tested.",
@@ -124,6 +124,17 @@
       "convert back to probability"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The image shows a Fagan nomogram with three vertical scales for pretest probability, likelihood ratio and posttest probability joined by a straight red line. It demonstrates **Bayes theorem** in graphical form, converting **pretest probability** to odds, multiplying by the **likelihood ratio**, then reading the revised posttest probability. The tool makes test updating visual and exam friendly.",
+   "say": "The picture shows three upright scales for pretest probability, likelihood ratio and posttest probability with one straight line crossing them. It shows how the Fagan nomogram applies Bayes thinking without calculation. Read from the starting probability through the test strength to find the updated probability after the result.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgm-diagnostic-tests-gen1.webp",
+    "alt": "Three vertical nomogram scales for pretest probability likelihood ratio and posttest probability joined by a line shown.",
+    "caption": "Fagan nomogram linking pretest and posttest probability visually Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
