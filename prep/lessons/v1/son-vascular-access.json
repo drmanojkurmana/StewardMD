@@ -6,8 +6,8 @@
   "minutes": 10,
   "steps": [
     {
-      "tx": "An **implanted port** (a small reservoir placed under the skin and joined to a large central vein) gives long-term central access. A surgically placed port, often called a mediport, is reasonable for continuous central access, but only once blood cultures clearly show the bloodstream infection has cleared. Central lines also spare repeated venipuncture for blood draws during prolonged myelosuppression.",
-      "say": "An implanted port is a small reservoir placed under the skin and joined to a large central vein. It gives long-term central access. A surgically placed port, often called a mediport, is reasonable for continuous central access, but only after blood cultures clearly show that the bloodstream infection has gone. Central lines also spare repeated needle sticks for blood draws during prolonged periods of low blood cell production.",
+      "tx": "An **implanted port** (a small reservoir placed under the skin and joined to a large central vein) gives long-term central access. A surgically placed port, often called a mediport, is reasonable only once blood cultures clearly show that the bloodstream infection has cleared. While central access is still needed during an infection, a **peripherally inserted central catheter** (PICC, a line placed without surgery) is the reasonable choice. Central lines also spare repeated venipuncture for blood draws during prolonged **myelosuppression** (low blood cell production caused by treatment).",
+      "say": "An implanted port is a small reservoir placed under the skin and joined to a large central vein. It gives long-term central access. A surgically placed port, often called a mediport, is reasonable only once blood cultures clearly show that the bloodstream infection has cleared. While central access is still needed during an infection, a peripherally inserted central catheter, a line placed without surgery, is the reasonable choice. Central lines also spare repeated needle sticks for blood draws during prolonged myelosuppression, which means low blood cell production caused by treatment.",
       "vis": {
         "kind": "table",
         "cols": [
@@ -19,38 +19,38 @@
           [
             "Implanted port (mediport)",
             "Surgically, under the skin",
-            "Reasonable for continuous central access once blood cultures clear"
+            "Reasonable once blood cultures clear"
           ],
           [
             "Peripherally inserted central catheter (PICC)",
-            "Without surgery, through an arm vein",
-            "Preferred first when continuous central access is needed during infection"
+            "Without surgery",
+            "Reasonable while central access is still needed during infection"
           ],
           [
             "Multi-lumen central venous catheter",
             "Placed into a central vein",
-            "Avoids repeated venipuncture during prolonged myelosuppression"
+            "Used for blood draws instead of venipuncture during prolonged myelosuppression"
           ]
         ]
       }
     },
     {
-      "tx": "**Catheter-related bloodstream infection** (an infection carried into the blood along an indwelling line) is prevented from the start. Prevention begins at insertion, with **aseptic technique** (methods that keep germs out of a sterile field) built into a checklist of evidence-based steps. Every staff contact with the catheter is a possible contamination event. These infections triple a patient's risk of in-hospital death. Daily full-body cleansing with 2% **chlorhexidine gluconate** is effective and is standard care in intensive care units (ICUs).",
-      "say": "Catheter-related bloodstream infection means germs carried into the blood along a line that stays in the body. Prevention begins at insertion, where aseptic technique keeps germs out of the sterile field. Teams follow a checklist of steps that have good evidence behind them. Each time staff handle the catheter, there is a possible route for contamination. These infections triple a patient's risk of dying in hospital. Daily full-body washing with 2 percent chlorhexidine gluconate is effective and is standard in intensive care units.",
+      "tx": "**Catheter-related bloodstream infection** (an infection that travels into the blood along an indwelling line) is a major target for prevention. Prevention begins at insertion, with **aseptic technique** (methods that keep germs out of a sterile field) built into a bundle, or checklist, of evidence-based steps. Every staff contact with the catheter is a possible contamination event. These infections triple a patient's risk of in-hospital death. Daily full-body cleansing with 2% **chlorhexidine gluconate** is effective and is standard care in intensive care units (ICUs).",
+      "say": "Catheter-related bloodstream infection means germs travel into the blood along a line that stays in the body. It is a major target for prevention. Prevention begins at insertion, where aseptic technique keeps germs out of the sterile field. Teams follow a checklist of steps that have good evidence behind them. Each time staff touch the catheter, germs could get in. These infections triple a patient's risk of dying in hospital. Daily full-body washing with 2 percent chlorhexidine gluconate is effective, and it is standard care in intensive care units.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
             "id": "a",
-            "label": "Aseptic insertion bundle (checklist)"
+            "label": "Aseptic insertion checklist"
           },
           {
             "id": "b",
-            "label": "Aseptic handling at every catheter access"
+            "label": "Aseptic handling at every catheter contact"
           },
           {
             "id": "c",
-            "label": "Daily 2% chlorhexidine gluconate bathing"
+            "label": "Daily 2% chlorhexidine gluconate bathing (ICU)"
           },
           {
             "id": "d",
@@ -77,16 +77,16 @@
       }
     },
     {
-      "tx": "An **infusion pump** delivers a drug at a programmed rate over a set period. Continuous infusions are described as an amount per hour, such as **midazolam** at 1 to 5 milligrams per hour. **Programmable pumps** can also add a patient-controlled dose, with a lockout interval (a fixed wait between doses). A **smart pump** is set for each medication and dose, and it warns staff when a dose that is too high is about to be given.",
-      "say": "An infusion pump pushes a drug out at a programmed rate over a fixed period. Continuous infusions are usually described as an amount per hour. Midazolam, a sedative, may run at one to five milligrams per hour. Programmable pumps can also deliver a patient-controlled dose, with a lockout interval set between doses. Smart pumps warn staff before a dose that is too high is given.",
+      "tx": "An **infusion pump** gives a drug at a programmed rate, and battery-operated pumps of this kind are described as accurate to within 2.5 to 6%. **Midazolam**, a sedative, may run at 1 to 5 milligrams per hour. **Programmable pumps** can also add a patient-triggered dose with a **lockout interval** (the fixed wait between doses). A **smart pump** is set for each medication and dose, and it warns staff when a dose that is too high is about to be given.",
+      "say": "An infusion pump gives a drug at a programmed rate. Battery-operated pumps of this kind are described as accurate to within two and a half to six percent. Midazolam, a sedative, may run at one to five milligrams per hour. Programmable pumps can also give a patient-triggered dose, with a lockout interval set between doses. A smart pump is set for each medication and dose. It warns staff when a dose that is too high is about to be given.",
       "vis": {
         "kind": "compare",
         "left": {
           "title": "Programmable infusion pump",
           "points": [
-            "Delivers a set rate over a set time",
+            "Delivers a programmed rate",
             "Continuous infusions written as amount per hour",
-            "Optional patient-controlled dose with lockout interval"
+            "Optional patient-triggered dose with lockout interval"
           ]
         },
         "right": {
@@ -100,26 +100,120 @@
       }
     },
     {
-      "tx": "**Extravasation** (leak of a drug out of the vein into the surrounding tissue) calls for stopping the infusion first, with the cannula left in place. Staff then attempt to aspirate residual drug from the tissue. Only after that does the team choose a measure, and that choice depends on the drug class that has leaked.",
-      "say": "When a drug leaks from the vein into nearby tissue, the first move is to stop the infusion, and the cannula stays in place at first. Staff then try to draw back any drug still sitting in the tissue. Only after that does the team choose a treatment, because the right choice depends on which drug has escaped.",
+      "tx": "A **vesicant** (a drug that injures tissue when it leaks out of a vein) can cause serious harm if it escapes, and that leak is called **extravasation**. **Doxorubicin** is a potent vesicant from the anthracycline group. Severe skin necrosis (tissue death) can follow a leak. It may need surgical **debridement** (cutting away dead tissue) and skin grafts. Necrosis can appear 4 to 7 days after the leak, and infusions through a central venous catheter are recommended.",
+      "say": "A vesicant is a drug that injures tissue when it leaks out of a vein. A leak like that is called extravasation. Doxorubicin is a potent vesicant from the anthracycline group. Severe skin necrosis, meaning tissue death, can follow a leak. It may need surgical removal of dead tissue and skin grafts. Necrosis can appear four to seven days after the leak. Infusions through a central venous catheter are recommended.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Effect of a leak",
+          "Point to remember"
+        ],
+        "rows": [
+          [
+            "Doxorubicin",
+            "Potent vesicant with severe skin necrosis",
+            "Necrosis can appear 4 to 7 days later"
+          ],
+          [
+            "Dactinomycin",
+            "Can cause severe tissue necrosis",
+            "Similar concern to doxorubicin"
+          ],
+          [
+            "Vincristine",
+            "Potent vesicant",
+            "Local heat and hyaluronidase infiltration"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dexrazoxane**, an **intracellular chelating agent** (a drug that binds metal ions inside cells), can mitigate a doxorubicin leak. The first dose should start as soon as possible, within 6 hours of the leak. It is then given once daily for 3 days, at 1000 mg/m2 on day 1, 1000 mg/m2 on day 2 and 500 mg/m2 on day 3. Each infusion runs over 1 to 2 hours into a large vein away from the leak.",
+      "say": "Dexrazoxane is an intracellular chelating agent, meaning it binds metal ions inside cells. It can mitigate a doxorubicin leak. The first dose should start as soon as possible, within 6 hours of the leak. It is then given once a day for three days, at 1000 milligrams per square metre on day one and day two, and 500 on day three. Each infusion runs over one to two hours into a large vein away from the leak.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
             "id": "a",
-            "label": "Stop the infusion"
+            "label": "First dose within 6 hours"
           },
           {
             "id": "b",
-            "label": "Aspirate residual drug from the tissue"
+            "label": "Day 1: 1000 mg/m2"
           },
           {
             "id": "c",
-            "label": "Choose treatment by drug class"
+            "label": "Day 2: 1000 mg/m2"
           },
           {
             "id": "d",
-            "label": "Surgical consultation if tissue is damaged"
+            "label": "Day 3: 500 mg/m2"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "then"
+          ],
+          [
+            "b",
+            "c",
+            "next day"
+          ],
+          [
+            "c",
+            "d",
+            "next day"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For an anthracycline leak, a **cold compress** (a cold pack held on the area) narrows local blood flow and limits how far the drug spreads. It must come off at least 15 minutes before dexrazoxane starts. If dexrazoxane is not available or is contraindicated, topical **dimethyl sulfoxide** (DMSO, a skin solvent) is the alternative, applied every 8 hours for 7 days. DMSO must not be combined with dexrazoxane.",
+      "say": "For an anthracycline leak, a cold compress is placed on the area. It narrows local blood flow and limits how far the drug spreads. The cold must come off at least 15 minutes before dexrazoxane starts. If dexrazoxane is not available or is contraindicated, a topical solvent called dimethyl sulfoxide is the alternative. It is applied every 8 hours for 7 days. It must never be combined with dexrazoxane.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cold compress for anthracycline leaks",
+          "points": [
+            "Narrows local blood flow",
+            "Limits how far the drug spreads",
+            "Removed at least 15 minutes before dexrazoxane"
+          ]
+        },
+        "right": {
+          "title": "Topical DMSO (alternative)",
+          "points": [
+            "Used if dexrazoxane is unavailable or contraindicated",
+            "Applied every 8 hours for 7 days",
+            "Not combined with dexrazoxane"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Vinca alkaloids** are potent vesicants too. If a leak is suspected, treatment stops and staff try to aspirate (draw out with a syringe) any drug left in the tissue. **Heat**, not ice, is then applied promptly, for one hour at a time, four times each day, for three to five days, to limit tissue damage. The vein should also be flushed after treatment to lower the risk of **phlebitis** (inflammation of the vein).",
+      "say": "Vinca alkaloids are potent vesicants too. If a leak is suspected, treatment stops, and staff try to draw out any drug left in the tissue. Heat, not ice, is then applied promptly, for one hour at a time, four times each day, for three to five days, to limit tissue damage. The vein should also be flushed after treatment to lower the risk of inflammation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stop treatment"
+          },
+          {
+            "id": "b",
+            "label": "Aspirate residual drug"
+          },
+          {
+            "id": "c",
+            "label": "Heat, not ice: 1 hour, four times daily for 3 to 5 days"
+          },
+          {
+            "id": "d",
+            "label": "Flush the vein after treatment"
           }
         ],
         "edges": [
@@ -134,71 +228,40 @@
             "then"
           ],
           [
-            "c",
+            "b",
             "d",
-            "if damage"
+            "also"
           ]
         ]
       }
     },
     {
-      "tx": "**Anthracyclines** such as doxorubicin are potent **vesicants** (drugs that injure tissue when they leak). Extravasation can cause severe skin necrosis (tissue death), and treatment may mean surgical **debridement** (cutting away dead tissue) with skin grafts. Necrosis can appear 4 to 7 days after the leak. **Dexrazoxane**, an intracellular chelating agent, can mitigate doxorubicin extravasation. Where it is unavailable, topical **dimethyl sulfoxide** (DMSO) is the alternative, and cold compresses are also recommended.",
-      "say": "Doxorubicin belongs to the anthracyclines, and it is a potent vesicant, meaning it injures tissue when it leaks. Severe skin necrosis can follow, sometimes needing surgical removal of dead tissue and skin grafts. Tissue damage may take 4 to 7 days to show. For that reason, doxorubicin goes through a central venous catheter or a rapidly flowing line. Dexrazoxane is an intracellular chelating agent that can help mitigate a doxorubicin leak. If dexrazoxane is not available, topical dimethyl sulfoxide is the alternative, and cold compresses are also recommended.",
+      "tx": "**Hyaluronidase**, an enzyme that loosens tissue, is injected under the skin around the vinca leak site. Six small injections go in a clockwise circle, using a 25-gauge needle that is changed for each one. The dose is 150 to 1500 units. This may ease discomfort and latent cellulitis (hidden infection of the tissue). A surgical consultation to consider early debridement is also recommended.",
+      "say": "Hyaluronidase, an enzyme that loosens tissue, is injected under the skin around the vinca leak site. Six small injections go in a clockwise circle, using a 25-gauge needle that is changed for each one. The dose is 150 to 1500 units. This may ease discomfort and hidden tissue infection. A surgical consultation to consider early debridement is also recommended.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Agent",
-          "Effect of a leak",
-          "Point to remember"
+          "Injection detail",
+          "Setting"
         ],
         "rows": [
           [
-            "Doxorubicin",
-            "Potent vesicant with severe necrosis",
-            "Necrosis can appear 4 to 7 days later"
+            "Number of injections",
+            "Six, in a clockwise circle"
           ],
           [
-            "Dactinomycin",
-            "Can cause severe tissue necrosis",
-            "Similar concern to doxorubicin"
+            "Needle",
+            "25-gauge, changed for each injection"
           ],
           [
-            "Dexrazoxane",
-            "Mitigates doxorubicin extravasation",
-            "Intracellular chelating agent"
+            "Dose",
+            "150 to 1500 units under the skin"
           ],
           [
-            "Topical dimethyl sulfoxide (DMSO)",
-            "Alternative when dexrazoxane is unavailable",
-            "Cold compresses also recommended for anthracyclines"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Vinca alkaloids** are potent vesicants, so a leak calls for stopping treatment and aspirating residual drug. Once treatment ends, the vein should be flushed to lower the risk of **phlebitis** (inflammation of the vein). **Heat**, not ice, is applied for one hour at a time, four times each day, over three to five days, to limit tissue damage. Injecting **hyaluronidase** (an enzyme that loosens tissue) under the skin may reduce discomfort and latent cellulitis (hidden infection of the tissue).",
-      "say": "Vinca alkaloids are potent vesicants, so a leak means stopping treatment and drawing off any drug left in the tissue. Once treatment ends, the vein should be flushed to lower the chance of inflammation. Heat, not ice, goes on the area for one hour, four times a day, for three to five days. Hyaluronidase, an enzyme that loosens tissue, is then injected under the skin around the site, which may ease discomfort and hidden tissue infection.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Vinca alkaloid leak",
-          "points": [
-            "Potent vesicants",
-            "Stop treatment, then aspirate residual drug",
-            "Flush the vein after treatment",
-            "Heat, not ice, for 1 hour",
-            "Repeat four times daily for 3 to 5 days"
-          ]
-        },
-        "right": {
-          "title": "Hyaluronidase injection",
-          "points": [
-            "150 to 1500 units under the skin",
-            "Six injections in a clockwise circle",
-            "25-gauge needle, changed for each injection",
+            "Aim",
             "May ease discomfort and latent cellulitis"
           ]
-        }
+        ]
       }
     }
   ],
@@ -206,7 +269,8 @@
   "refs": [
     "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
     "Harrison's Principles of Internal Medicine, 22nd edition",
-    "ONS/ASCO guideline on management of antineoplastic extravasation, 2025"
+    "ONS/ASCO guideline on the management of antineoplastic extravasation, 2025 (Clin J Oncol Nurs, https://pmc.ncbi.nlm.nih.gov/articles/PMC12463152/)",
+    "Savene (dexrazoxane) summary of product characteristics, European Medicines Agency, renewal 2011 (https://www.ema.europa.eu/en/documents/product-information/savene-epar-product-information_en.pdf)"
   ],
   "gen": "AI"
 }
