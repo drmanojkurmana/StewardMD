@@ -1,0 +1,227 @@
+{
+  "v": 1,
+  "module": "son-hn-oral-larynx-cup",
+  "subject": "ss-medical-oncology",
+  "title": "Oral Cavity, Laryngeal Staging, Carotid Invasion and Unknown Primary Workup",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "Functional **T3 laryngeal carcinoma** (tumour limited to larynx with vocal cord fixation or pre-epiglottic space invasion) is treated with organ-preserving concurrent **chemoradiotherapy** using high-dose cisplatin (100 mg/m2 every three weeks), validated by RTOG 91-11. Preserving a functioning larynx maintains speech and swallowing. If cartilage is completely destroyed or laryngeal function is lost with aspiration, primary chemoradiation fails and salvage surgery becomes necessary.",
+      "say": "When assessing locally advanced laryngeal cancer, vocal cord mobility and cartilage integrity guide your first decision. For a patient with a functional larynx and T3 disease, concurrent high-dose cisplatin and radiotherapy achieves excellent local control while preserving the voice. Primary total laryngectomy is reserved for cases where cartilage is destroyed or baseline aspiration makes speech preservation futile.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/laryngeal-framework-and-vocal-cords-fig1.webp",
+        "alt": "Anatomical schematic of laryngeal cartilages and vocal cords showing endolaryngeal compartments.",
+        "caption": "Laryngeal cartilaginous framework and glottic apparatus. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Tumour invasion extending through the outer cortex of the **thyroid cartilage** or into strap muscles classifies disease as **T4a laryngeal cancer**. Organ preservation protocols fail in this setting because macroscopic cartilage necrosis and persistent chondroradionecrosis lead to chronic airway breakdown. Upfront **total laryngectomy** with bilateral neck dissection followed by adjuvant risk-adapted radiotherapy provides definitive local control and avoids catastrophic post-radiation laryngeal necrosis.",
+      "say": "Remember that extensive cartilage destruction completely changes your therapeutic pathway. Once tumour penetrates through the outer cortex of the thyroid cartilage, organ-preservation radiotherapy carries a high failure rate and risks devastating cartilage necrosis. You must recommend upfront total laryngectomy with neck dissection, followed by postoperative radiation based on pathological risk factors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "T3 Larynx (Endolaryngeal)",
+          "points": [
+            "Vocal cord fixation",
+            "Inner cartilage cortex erosion",
+            "Organ preservation with CCRT",
+            "Cisplatin 100 mg/m2 q3w"
+          ]
+        },
+        "right": {
+          "title": "T4a Larynx (Extralaryngeal)",
+          "points": [
+            "Through outer cortex erosion",
+            "Extension into strap muscles",
+            "Upfront total laryngectomy",
+            "Adjuvant radiation/CCRT"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The AJCC 8th edition incorporates **depth of invasion** (DOI, the vertical distance from the reconstructed normal mucosal basement membrane to the deepest invasive cell) into oral cavity staging. A primary tumour measuring two centimetres or less is staged as T1 if DOI is five millimetres or less, but upstages to **T2 tumour** if DOI exceeds five millimetres up to ten millimetres, and **T3 tumour** if DOI exceeds ten millimetres.",
+      "say": "Pathological depth of invasion is one of the most important prognostic metrics in oral cancer. Even a small ulcer measuring under two centimetres will jump from T1 to T2 if the invasion depth exceeds five millimetres. Because deep tumours frequently seed occult lymph nodes, elective neck dissection is strongly indicated whenever depth of invasion surpasses three to four millimetres.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "T Category",
+          "Surface Size",
+          "Depth of Invasion (DOI)",
+          "Clinical Impact"
+        ],
+        "rows": [
+          [
+            "T1",
+            "<= 2 cm",
+            "<= 5 mm",
+            "Low occult nodal risk"
+          ],
+          [
+            "T2",
+            "<= 2 cm or >2-4 cm",
+            ">5 mm to 10 mm",
+            "Elective neck dissection indicated"
+          ],
+          [
+            "T3",
+            ">2-4 cm or >4 cm",
+            ">10 mm",
+            "High occult nodal risk, adjuvant CCRT considered"
+          ],
+          [
+            "T4a",
+            "Any size",
+            "Deep invasion (cortical bone, tongue, skin)",
+            "Upfront radical resection"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary treatment for resectable oral cavity carcinoma requires upfront surgical resection with at least five millimetres of **clear surgical margin** on permanent histology. The presence of positive surgical margins or **extranodal extension** (ENE, tumour breaking through the nodal capsule into fibroadipose tissue) demands postoperative concurrent chemoradiotherapy with cisplatin. For locally advanced resectable disease, neoadjuvant **pembrolizumab** followed by resection and adjuvant pembrolizumab demonstrates significant event-free survival benefits in trial KEYNOTE-689.",
+      "say": "Surgical margins and extranodal extension dictate postoperative therapy in oral cavity cancer. Achieving at least five millimetres of clear tissue around the tumour is mandatory. If the pathologist finds microscopic tumour at the inked margin or detects extranodal extension in dissected nodes, adjuvant radiotherapy alone is inadequate and concurrent high-dose cisplatin must be administered.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "Upfront Resection"
+          },
+          {
+            "id": "s2",
+            "label": "Margin / ENE Check"
+          },
+          {
+            "id": "s3",
+            "label": "Clear / Negative"
+          },
+          {
+            "id": "s4",
+            "label": "Positive or ENE"
+          },
+          {
+            "id": "s5",
+            "label": "Adjuvant CCRT"
+          }
+        ],
+        "edges": [
+          ["s1", "s2"],
+          ["s2", "s3"],
+          ["s2", "s4"],
+          ["s4", "s5"]
+        ]
+      }
+    },
+    {
+      "tx": "Preoperative computed tomography or magnetic resonance imaging evaluates metastatic cervical lymphadenopathy for **carotid artery invasion**. Circumferential tumour contact of more than 180 degrees, and especially exceeding **270 degrees encasement**, indicates non-resectable arterial invasion. Additional signs include obliteration of the intervening **perivascular fat plane** and deformation or narrowing of the arterial lumen. When 270-degree encasement is confirmed, attempting surgical peel risks fatal stroke, and definitive chemoradiation is preferred.",
+      "say": "Cross-sectional imaging must be scrutinized carefully before taking advanced neck disease to the operating theatre. When a necrotic nodal mass wraps more than 270 degrees around the internal or common carotid artery and obliterates the surrounding fat stripe, true arterial wall infiltration is virtually certain. In that situation, aggressive surgical stripping risks arterial rupture and major cerebrovascular infarction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Encasement Arc",
+          "Fat Plane Status",
+          "Lumen Contour",
+          "Resectability Status"
+        ],
+        "rows": [
+          [
+            "< 180 degrees",
+            "Preserved fat plane",
+            "Normal circular contour",
+            "Resectable, plane peelable"
+          ],
+          [
+            "180 to 270 degrees",
+            "Partial obliteration",
+            "Mild compression",
+            "Borderline, high invasion risk"
+          ],
+          [
+            "> 270 degrees",
+            "Complete obliteration",
+            "Deformed / narrowed lumen",
+            "Unresectable carotid invasion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When a patient presents with an isolated metastatic cervical lymph node containing squamous cell carcinoma without an obvious mucosal lesion, the primary evaluation requires fine-needle aspiration cytology with **p16 immunohistochemistry** and **Epstein-Barr virus** testing. The next mandatory step is whole-body **FDG-PET/CT** to detect occult primary sites or distant metastases. If imaging is negative, the surgeon performs examination under anaesthesia with directed bilateral palatine and lingual tonsillectomies to locate the microscopic primary.",
+      "say": "An isolated metastatic neck node with no obvious mucosal primary requires a systematic, stepped diagnostic workup. Start with fine-needle aspiration, ensuring the sample is tested for both p16 and Epstein-Barr virus. A whole-body PET-CT scan is mandatory before taking the patient to the operating theatre, where directed bilateral palatine tonsillectomies and lingual mucosectomy uncover the vast majority of hidden primaries.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "d1",
+            "label": "Node FNAC"
+          },
+          {
+            "id": "d2",
+            "label": "p16 and EBV"
+          },
+          {
+            "id": "d3",
+            "label": "FDG-PET/CT"
+          },
+          {
+            "id": "d4",
+            "label": "Direct Scope"
+          },
+          {
+            "id": "d5",
+            "label": "Tonsillectomy"
+          }
+        ],
+        "edges": [
+          ["d1", "d2"],
+          ["d2", "d3"],
+          ["d3", "d4"],
+          ["d4", "d5"]
+        ]
+      }
+    },
+    {
+      "tx": "True **cervical unknown primary** carcinoma (confirmed after negative PET-CT, pan-endoscopy, and tonsillectomies) is managed definitively with **concurrent chemoradiotherapy** covering bilateral neck nodal basins and mucosal sites at risk, including the nasopharynx, oropharynx, and hypopharynx. For patients undergoing upfront comprehensive neck dissection for isolated pN1 disease without extranodal spread, postoperative radiation alone may suffice. However, presence of pN2 or pN3 nodal disease, or **extranodal spread**, mandates adjuvant cisplatin chemoradiation.",
+      "say": "When comprehensive diagnostic investigations fail to uncover a primary source, treatment must address both the involved neck and putative mucosal sites. Definitive concurrent chemoradiotherapy encompassing the bilateral neck and the pharyngeal axis yields high regional control rates. If primary neck dissection was performed and reveals multi-station nodal involvement or extranodal extension, postoperative cisplatin chemoradiotherapy is mandatory.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oral-cavity-and-salivary-glands-fig1.webp",
+        "alt": "Anatomical schematic of oral cavity and pharyngeal mucosal boundaries.",
+        "caption": "Mucosal surfaces of the oral cavity and oropharynx. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Decision-making in locally advanced head and neck malignancies hinges on organ function, anatomical boundaries, and high-risk pathological features. **Surgical clearance** with adequate tissue margins remains central in oral cavity cancer, whereas functional **larynx preservation** prioritises chemoradiotherapy unless destructive cartilage necrosis intervenes. Postoperatively, the absolute indications for adding concurrent cisplatin to radiotherapy across all head and neck sites remain microscopically positive surgical margins and pathologically confirmed extranodal extension.",
+      "say": "To synthesize your approach, remember that oral cavity cancers demand upfront surgery with wide clear margins, whereas pharyngeal and laryngeal tumours often prioritize organ-preserving chemoradiation. Whenever you review post-resection pathology, positive surgical margins and extranodal extension stand out as the two non-negotiable triggers that require adding concurrent cisplatin to your postoperative radiotherapy plan.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Surgery Favoured",
+          "points": [
+            "Oral cavity squamous cell carcinoma",
+            "T4a laryngeal cartilage invasion",
+            "Salivary gland malignancies",
+            "Accessible resectable tumours"
+          ]
+        },
+        "right": {
+          "title": "Definitive CCRT Favoured",
+          "points": [
+            "Functional T3 laryngeal carcinoma",
+            "Nasopharyngeal carcinoma (all stages)",
+            "Oropharyngeal p16-positive disease",
+            "Unresectable nodal encasement"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    "q_5e06cff87f8d",
+    "q_044716894c86",
+    "q_cbc54e092d22"
+  ],
+  "gen": "AI"
+}
