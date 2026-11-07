@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "id": "pcd-tof-spells-repair",
+  "title": "Hypercyanotic Spells and Surgical Repair of TOF",
+  "module": "Cyanotic Heart Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Hypercyanotic episodes represent paroxysmal surges in right ventricular outflow tract resistance that divert deoxygenated blood across the ventricular defect.",
+      "tx": "Identifying the specific **Tet spell trigger** allows prompt recognition. Hypercyanotic or Tet spells are triggered by crying, feeding, or defecation causing sympathetic surge, infundibular spasm, and a drop in systemic vascular resistance that acutely worsens right-to-left shunting through the VSD. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sct-aorta-congenital-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Tetralogy of Fallot anatomy demonstrating subpulmonary infundibular narrowing, ventricular defect, and right ventricular hypertrophy. Illustration: StewardMD original.",
+        "alt": "Diagram illustrating the anatomical components of Tetralogy of Fallot."
+      }
+    },
+    {
+      "say": "Immediate physical posturing constitutes the first and most critical bedside maneuver to break the cycle of hypoxemia.",
+      "tx": "Physical therapy prioritizes the **knee-chest position**. Placing the infant in the knee-chest position (or squatting in older children) abruptly kinks the femoral vessels to increase systemic vascular resistance, thereby forcing deoxygenated right ventricular blood across the stenotic infundibulum into the pulmonary circulation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Supine / Unpositioned State",
+          "points": [
+            "Low systemic vascular resistance relative to contracted infundibulum",
+            "Deoxygenated blood shunts preferentially across VSD into the aorta",
+            "Profound systemic arterial hypoxemia, tissue acidosis, and cerebral irritability"
+          ]
+        },
+        "right": {
+          "title": "Knee-Chest / Squatting Position",
+          "points": [
+            "Mechanical kinking of femoral vessels abruptly elevates systemic resistance",
+            "Forces right ventricular stroke volume across the stenotic outflow tract into lungs",
+            "Reduces deoxygenated venous return from pooled lower limb capillary beds"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Oxygen therapy and central sedation interrupt the cycle of agitation and hyperpnea that perpetuates catecholaminergic infundibular spasm.",
+      "tx": "Pharmacological sedation requires **morphine for Tet spell**. Subcutaneous or intravenous **morphine** sulphate at **0.1-0.2 mg/kg** suppresses the hyperpneic respiratory drive and calms central sympathetic agitation, breaking the self-perpetuating vicious cycle of catecholamines and infundibular spasm. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Agitation, feeding, or pain triggers intense endogenous sympathetic discharge"
+          },
+          {
+            "id": "b",
+            "label": "Tachycardia and catecholamines provoke dynamic subpulmonary infundibular spasm"
+          },
+          {
+            "id": "c",
+            "label": "Acute elevation in RVOT resistance forces right-to-left shunting through VSD"
+          },
+          {
+            "id": "d",
+            "label": "Profound arterial hypoxemia incites hyperpnea, worsening acidosis and agitation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Targeted beta-blockade relaxes the contracted subpulmonic infundibular myocardium and slows heart rate to prolong diastolic filling.",
+      "tx": "Interrupting spasm requires a **beta-blocker in spells**. Intravenous **propranolol (0.01-0.1 mg/kg)** or **esmolol** relieves dynamic right ventricular outflow tract infundibular spasm, slows heart rate to augment diastolic filling, and restores forward pulmonary arterial perfusion. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Medication",
+          "Dosage & Route",
+          "Primary Mechanism"
+        ],
+        "rows": [
+          [
+            "Morphine Sulphate",
+            "0.1-0.2 mg/kg SC / IV",
+            "Suppresses hyperpneic respiratory drive and blunts sympathetic tone"
+          ],
+          [
+            "Propranolol / Esmolol",
+            "0.01-0.1 mg/kg IV slow",
+            "Relaxes infundibular spasm and slows heart rate"
+          ],
+          [
+            "Phenylephrine",
+            "5-20 mcg/kg IV bolus",
+            "Selective alpha-1 agonist elevating systemic vascular resistance"
+          ],
+          [
+            "Sodium Bicarbonate",
+            "1-2 mEq/kg IV",
+            "Corrects metabolic acidosis to alleviate secondary pulmonary vasoconstriction"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When initial measures fail, pure alpha-1 adrenergic vasoconstriction elevates systemic resistance to force blood across the pulmonary outflow tract.",
+      "tx": "Refractory spells require **phenylephrine**. Intravenous **phenylephrine (5-20 mcg/kg)** increases systemic vascular resistance via pure alpha-1 adrenergic vasoconstriction to reverse right-to-left shunting across the ventricular defect without unwanted beta-agonist chronotropy, redirecting blood across the stenotic outflow tract. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phenylephrine Mechanism",
+          "points": [
+            "Selective vascular alpha-1 adrenergic receptor stimulation",
+            "Induces intense systemic arterial and arteriolar vasoconstriction",
+            "Raises systemic vascular resistance significantly above RVOT resistance"
+          ]
+        },
+        "right": {
+          "title": "Hemodynamic Consequence",
+          "points": [
+            "Eliminates the favorable gradient for right-to-left shunting across VSD",
+            "Forces right ventricular stroke volume across the stenotic outflow tract into lungs",
+            "Lacks beta-1 inotropic and chronotropic properties, avoiding infundibular spasm"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Palliative surgical shunting bridges severely cyanotic neonates who possess hypoplastic branch pulmonary arteries.",
+      "tx": "Surgical palliation utilizes the **modified Blalock-Taussig shunt**. The modified Blalock-Taussig shunt connects a systemic artery (subclavian artery) to the ipsilateral branch pulmonary artery using a **Gore-Tex interposition graft** to augment pulmonary blood flow in symptomatic small infants prior to repair. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modified Blalock-Taussig Shunt",
+          "points": [
+            "Gore-Tex interposition tube graft between subclavian and pulmonary artery",
+            "Augments pulmonary blood flow to promote branch pulmonary arterial caliber growth",
+            "Preserves subclavian artery integrity without sacrificing arm perfusion"
+          ]
+        },
+        "right": {
+          "title": "Classic Blalock-Taussig Shunt (Historical)",
+          "points": [
+            "Direct end-to-side anastomosis of divided subclavian artery to pulmonary artery",
+            "Risk of ipsilateral upper extremity ischemia and gangrene",
+            "Rarely performed in modern congenital heart surgical practice"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Corrective repair involves closing the ventricular septal defect and relieving right ventricular outflow obstruction within the first year of life.",
+      "tx": "Surgical planning establishes **complete primary repair timing**. Elective complete primary repair (VSD closure and RVOT reconstruction) is ideally performed between **3 and 6 months** of age in developed centres to avoid prolonged cyanosis, spell recurrence, and right ventricular myocardial hypertrophy. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Elective Complete Repair (3-6 Months)",
+          "points": [
+            "Definitive single-stage correction via median sternotomy",
+            "VSD patch closure directs left ventricular blood exclusively into aorta",
+            "Relief of RVOT obstruction via infundibulectomy and pulmonary valvotomy"
+          ]
+        },
+        "right": {
+          "title": "Neonatal Palliative Shunt (Selected Cases)",
+          "points": [
+            "Indicated for severe neonatal cyanosis with hypoplastic pulmonary arteries",
+            "Modified Blalock-Thomas-Taussig shunt (Gore-Tex tube from subclavian to PA)",
+            "Augments pulmonary blood flow to promote branch pulmonary arterial growth"
+          ]
+        }
+      }
+    },
+    {
+      "say": "While transannular patch enlargement relieves critical outflow stenosis, the resultant valve disruption produces long-term hemodynamic sequelae.",
+      "tx": "Long-term follow-up monitors for **late pulmonary regurgitation**. Transannular patch repair carries a long-term risk of free pulmonary valve regurgitation, progressive right ventricular dilation, and malignant ventricular arrhythmias, frequently necessitating pulmonary valve replacement in adolescence or early adult life. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-cyanotic-adult-chd-gen1.webp",
+        "ar": 1.3393,
+        "caption": "Cardiac MRI in repaired Tetralogy of Fallot demonstrating severe right ventricular enlargement from chronic pulmonary regurgitation. Illustration: StewardMD original.",
+        "alt": "MRI scan illustrating dilated right ventricle in repaired tetralogy."
+      }
+    }
+  ]
+}
