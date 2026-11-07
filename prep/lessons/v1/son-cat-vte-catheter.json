@@ -1,0 +1,247 @@
+{
+  "v": 1,
+  "module": "son-cat-vte-catheter",
+  "subject": "ss-medical-oncology",
+  "title": "Cancer VTE: Khorana score, treatment and catheter occlusion",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "Cancer raises the chance of venous thromboembolism (VTE, a blood clot in a vein or the lung). The **Khorana risk score** (a points total that estimates this risk in outpatients starting chemotherapy) begins with the tumour type. Stomach and pancreatic cancers each add 2 points, so those patients start at 2 before any blood test is counted. Lung, lymphoma, gynaecologic, and genitourinary cancers, other than prostate, each add 1 point.",
+      "say": "Cancer raises the chance of venous thromboembolism, which means a blood clot in a vein or the lung. The Khorana risk score is a points total that estimates this risk in outpatients who are starting chemotherapy. Its first part is built from the tumour type. Stomach and pancreatic cancers each add two points, so those patients start at two before any blood test is counted. Lung, lymphoma, gynaecologic, and genitourinary cancers, other than prostate, each add one point.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Primary cancer site",
+          "Khorana points"
+        ],
+        "rows": [
+          [
+            "Stomach or pancreas",
+            "2"
+          ],
+          [
+            "Lung, lymphoma, gynaecologic",
+            "1"
+          ],
+          [
+            "Genitourinary, excluding prostate",
+            "1"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Four measurements taken before chemotherapy starts add one point each when abnormal. A platelet count of 350,000 per microlitre or more scores. So does a **haemoglobin** below 10 g/dL, or use of red cell growth factors such as erythropoiesis-stimulating agents (drugs that raise red cell counts). A leukocyte count above 11,000 per microlitre scores, and a body mass index (BMI) of 35 kg/m2 or more adds the final point.",
+      "say": "Four more measurements each add one point when they are abnormal before chemotherapy starts. A platelet count of 350,000 per microlitre or more scores one point. So does a haemoglobin below 10 grams per decilitre, or use of red cell growth factors such as erythropoiesis-stimulating agents. A leukocyte count above 11,000 per microlitre scores, and a body mass index of 35 kilograms per square metre or more adds the final point.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Variable",
+          "Cut-off before chemotherapy",
+          "Points"
+        ],
+        "rows": [
+          [
+            "Platelets",
+            "350,000 per microlitre or more",
+            "1"
+          ],
+          [
+            "Haemoglobin",
+            "Below 10 g/dL, or red cell growth factor use",
+            "1"
+          ],
+          [
+            "Leukocytes",
+            "Above 11,000 per microlitre",
+            "1"
+          ],
+          [
+            "Body mass index",
+            "35 kg/m2 or more",
+            "1"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adding the points gives a total that falls into one of three groups. Zero points is **low risk**, with symptomatic VTE (sVTE, a clot that causes signs or symptoms) in roughly 0.3 to 0.8 percent of patients. One or two points is **intermediate risk**, with rates of 1.8 to 2.0 percent. Three or more points is **high risk**, where symptomatic VTE occurs in 6.7 to 7.1 percent.",
+      "say": "Adding the points places the patient in one of three groups. A total of zero is low risk, with symptomatic VTE in roughly zero point three to zero point eight percent of patients. A total of one or two is intermediate risk, and the rate rises to one point eight to two point zero percent. A total of three or more is high risk, where symptomatic VTE occurs in six point seven to seven point one percent. Symptomatic means the clot causes signs or symptoms.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Total points",
+          "Risk group",
+          "Symptomatic VTE rate"
+        ],
+        "rows": [
+          [
+            "0",
+            "Low",
+            "0.3 to 0.8 percent"
+          ],
+          [
+            "1 or 2",
+            "Intermediate",
+            "1.8 to 2.0 percent"
+          ],
+          [
+            "3 or more",
+            "High",
+            "6.7 to 7.1 percent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Thromboprophylaxis** (preventive anticoagulant given before any clot forms) is the question for high-scoring outpatients. In studies of the high-risk Khorana group, rivaroxaban and apixaban cut clotting by about 50 percent, with bleeding near 5 percent. The American Society of Clinical Oncology (ASCO) 2019 guideline says patients with a Khorana score of 2 or more may be offered apixaban, rivaroxaban, or low molecular weight heparin. Standard references still call routine prophylaxis controversial.",
+      "say": "Thromboprophylaxis means preventive anticoagulant treatment given before any clot forms. In studies of the high-risk Khorana group, rivaroxaban and apixaban reduced clotting by about 50 percent, with bleeding near 5 percent. The American Society of Clinical Oncology issued a 2019 guideline saying that patients with a Khorana score of 2 or more may be offered apixaban, rivaroxaban, or low molecular weight heparin. Standard references say routine prophylaxis is controversial.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prophylaxis in the high-risk group",
+          "points": [
+            "Rivaroxaban or apixaban studied",
+            "About 50 percent fewer clots in trials",
+            "Bleeding near 5 percent",
+            "ASCO 2019: may be offered at a score of 2 or more"
+          ]
+        },
+        "right": {
+          "title": "Routine use during chemotherapy",
+          "points": [
+            "Remains controversial in standard references",
+            "Risk depends on tumour type, treatment, blood counts, and BMI"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For cancer-associated clots, **low molecular weight heparin (LMWH)**, an injected heparin fragment, or a **direct oral anticoagulant (DOAC)**, a tablet given at a fixed dose, is used for at least six months. Apixaban, given as 10 mg twice daily for 7 days and then 5 mg twice daily, was not inferior to dalteparin. Treatment continues until the patient is declared cancer-free.",
+      "say": "For cancer-associated clots, low molecular weight heparin, or LMWH, is an injected heparin fragment. A direct oral anticoagulant, or DOAC, is a tablet given at a fixed dose without routine blood tests. Treatment is continued for at least six months. Apixaban, given as 10 milligrams twice daily for seven days and then 5 milligrams twice daily, was not inferior to dalteparin. Treatment continues until the patient is declared cancer-free.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cancer-associated VTE needing anticoagulation"
+          },
+          {
+            "id": "b",
+            "label": "Gastrointestinal cancer present?"
+          },
+          {
+            "id": "c",
+            "label": "LMWH alone"
+          },
+          {
+            "id": "d",
+            "label": "LMWH or a DOAC such as apixaban or edoxaban"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c",
+            "Yes"
+          ],
+          [
+            "b",
+            "d",
+            "No"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Thrombocytopenia** (a low platelet count) changes which clot prevention is safe. Standard references list a platelet count under 50,000 per microlitre as one reason to withhold prophylaxis in medically ill patients with cancer. The International Society on Thrombosis and Haemostasis (ISTH) 2018 guidance supports full-dose anticoagulation at 50,000 per microlitre or more. Below that, the dose is reduced or platelets are transfused to hold the count at 50,000.",
+      "say": "Thrombocytopenia means a low platelet count, and it changes which clot prevention is safe. Standard references note that a platelet count under 50,000 per microlitre is one reason to withhold prophylaxis in medically ill patients with cancer. The International Society on Thrombosis and Haemostasis issued 2018 guidance supporting full-dose anticoagulation at 50,000 per microlitre or more. Below that level, the dose is reduced or platelets are transfused to hold the count at 50,000.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Platelets 50,000 per microlitre or more",
+          "points": [
+            "Bleeding from a low count alone is rare",
+            "Full-dose anticoagulation supported (ISTH 2018)",
+            "Prophylaxis can be considered when other criteria are met"
+          ]
+        },
+        "right": {
+          "title": "Platelets under 50,000 per microlitre",
+          "points": [
+            "Listed as a reason to withhold prophylaxis",
+            "Dose reduced or platelets transfused (ISTH 2018)",
+            "Bleeding usually begins below 10,000 to 20,000"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pulmonary embolism (PE)**, a clot lodged in the lung arteries, is first treated with anticoagulation when the patient is haemodynamically stable. Massive PE means low blood pressure with extensive clot, and it occurs in roughly 5 to 10 percent of cases. For massive PE, **fibrinolysis** (clot dissolution with drugs such as alteplase) is standard. For submassive PE, with right ventricular dysfunction but normal pressure, it remains controversial.",
+      "say": "Pulmonary embolism, or PE, is a clot lodged in the lung arteries. When the patient is haemodynamically stable, treatment starts with anticoagulation. Massive PE means low blood pressure with extensive clot, and it occurs in roughly 5 to 10 percent of cases. Fibrinolysis, which dissolves clot with drugs such as alteplase, is standard for massive PE. For submassive PE, with right ventricular dysfunction but normal pressure, it remains controversial.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Massive PE",
+          "points": [
+            "Systemic hypotension",
+            "Extensive clot in at least half the pulmonary vessels",
+            "About 5 to 10 percent of cases",
+            "Fibrinolysis is standard treatment"
+          ]
+        },
+        "right": {
+          "title": "Submassive PE",
+          "points": [
+            "Normal systemic blood pressure",
+            "Right ventricular dysfunction",
+            "About 20 to 25 percent of cases",
+            "Fibrinolysis controversial, considered if the patient deteriorates"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A long-term **central venous catheter (CVC)**, a tube placed in a large vein, can clot, and major vessel thrombosis may follow. Standard advice is to remove the catheter and add anticoagulation, which prevents embolism. If **superior vena cava syndrome (SVCS)** is found early, fibrinolytic therapy can clear it without losing the catheter. For a blocked lumen, Infusion Nurses Society standards advise instilling alteplase. A pleural drainage catheter may need occasional thrombolysis to keep its **patency** (openness).",
+      "say": "A long-term central venous catheter, or CVC, is a tube placed in a large vein. It can clot, and major vessel thrombosis may follow. The standard advice is to remove the catheter and add anticoagulation, which prevents embolism. If superior vena cava syndrome, or SVCS, is found early, fibrinolytic therapy can clear it without losing the catheter. For a blocked lumen, the Infusion Nurses Society standards of 2021 advise instilling alteplase into it. A pleural drainage catheter may need occasional thrombolysis to stay open.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Situation",
+          "Management described"
+        ],
+        "rows": [
+          [
+            "Major vessel thrombosis with a CVC",
+            "Remove catheter and give anticoagulation"
+          ],
+          [
+            "Early SVCS with a CVC",
+            "Fibrinolytic therapy, catheter kept"
+          ],
+          [
+            "Indwelling pleural catheter dysfunction",
+            "Intermittent thrombolysis to keep it open"
+          ],
+          [
+            "Blocked CVC lumen",
+            "Instil alteplase into the lumen (INS 2021)"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "refs": [
+    "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
+    "Harrison's Principles of Internal Medicine, 22nd edition",
+    "American Society of Clinical Oncology VTE guideline update, 2019",
+    "ISTH SSC guidance on cancer-associated thrombosis with thrombocytopenia, 2018",
+    "Infusion Nurses Society Infusion Therapy Standards of Practice, 2021"
+  ],
+  "gen": "AI"
+}
