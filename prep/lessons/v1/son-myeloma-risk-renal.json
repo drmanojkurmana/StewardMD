@@ -1,0 +1,136 @@
+{
+  "v": 1,
+  "module": "son-myeloma-risk-renal",
+  "subject": "ss-medical-oncology",
+  "title": "Myeloma cytogenetic risk, renal failure induction and IMiD potency with safety",
+  "minutes": 9,
+  "steps": [
+    {
+      "tx": "Multiple myeloma (a cancer of plasma cells) splits by chromosomes into two camps. **Standard risk** means hyperdiploidy (extra copies of odd numbered chromosomes, sometimes called triploidy), **t(11;14)** or t(6;14). **High risk** means t(4;14), t(14;16), t(14;20), del(17p) (loss of the short arm of chromosome 17) or gain of 1q21 (an extra piece of chromosome 1). The group decides intensity of therapy and transplant planning.",
+      "say": "Every new myeloma patient needs a FISH test on the marrow, because the chromosomes found there decide the whole strategy. Extra odd chromosomes or the eleven fourteen swap are grouped in the standard camp with a gentler course. Swaps involving chromosomes four, sixteen or twenty, loss of seventeen p, or extra chromosome one material place the patient in the high risk camp that needs the most aggressive plan available.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard Risk FISH",
+          "points": [
+            "Hyperdiploidy or trisomies",
+            "t(11;14) and t(6;14)",
+            "Gentler course, longer survival",
+            "Standard induction and transplant plan"
+          ]
+        },
+        "right": {
+          "title": "High Risk FISH",
+          "points": [
+            "t(4;14), t(14;16), t(14;20)",
+            "del(17p) and gain of 1q21",
+            "Early relapse, shorter survival",
+            "Aggressive triplet or quadruplet plan"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The t(11;14) swap overproduces **cyclin D1** (a cell cycle accelerator encoded by CCND1) and makes the cell addicted to **BCL2** (a survival protein), which is why the BCL2 blocker **venetoclax** works strikingly in t(11;14) myeloma after other options fail. High risk swaps instead activate growth drivers such as FGFR3 with MMSET in t(4;14) and MAF in t(14;16), which venetoclax cannot touch.",
+      "say": "The eleven fourteen swap is the friendly face of myeloma genetics for a second reason beyond good prognosis: it creates a drug target. These cells lean heavily on the survival protein BCL2, so blocking BCL2 with venetoclax kills them even late in the disease. The dangerous swaps work through completely different growth drivers, which is why venetoclax is reserved for the eleven fourteen group.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Translocation",
+          "Key gene",
+          "Bedside meaning"
+        ],
+        "rows": [
+          [
+            "t(11;14)",
+            "CCND1 cyclin D1, BCL2 addicted",
+            "Standard risk; venetoclax sensitive"
+          ],
+          [
+            "t(4;14)",
+            "FGFR3 and MMSET activated",
+            "High risk; needs aggressive therapy"
+          ],
+          [
+            "t(14;16)",
+            "MAF activated",
+            "High risk; needs aggressive therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Myeloma presenting with acute kidney injury (**myeloma kidney** from light chain casts blocking tubules) plus hypercalcaemia (high blood calcium) needs immediate **VCD** (bortezomib, cyclophosphamide and dexamethasone, also called CyBorD), with daratumumab added where available, alongside vigorous saline hydration. Bortezomib and cyclophosphamide clear hepatically (through the liver) so they need no renal dose cut, while full dose **lenalidomide** (renally cleared by the kidneys) would cause crushing marrow suppression and must be avoided.",
+      "say": "A myeloma patient presenting with renal failure and severe hypercalcemia is an urgent clinical emergency, because obstructive light chain casts destroy nephrons rapidly. Immediate initiation of bortezomib based therapy is paramount, since both bortezomib and cyclophosphamide are cleared by the liver without requiring renal dose adjustments. Avoid standard dose lenalidomide in this acute setting, because impaired renal clearance leads to toxic accumulation and profound myelosuppression.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myeloma-fig1.webp",
+        "alt": "Illustration of marrow plasmacytosis causing lytic bone lesions, high calcium, rouleaux and cast nephropathy.",
+        "caption": "Cast nephropathy and high calcium demanding urgent VCD induction. Credit: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "**IMiDs** (immunomodulatory drugs) grip cereblon (a protein switch) and destroy the transcription factors Ikaros and Aiolos (IKZF1 and IKZF3, controllers of myeloma growth). Potency climbs across generations: thalidomide, then lenalidomide, then **pomalidomide** at roughly 10 times lenalidomide and 100 times thalidomide. Pomalidomide breaks lenalidomide resistance and is processed by liver CYP enzymes (drug metabolising proteins), so it stays safe and full dose in kidney failure.",
+      "say": "All three immunomodulatory agents share an elegant mechanism: they recruit the cereblon ubiquitin ligase to degrade two transcription factors essential for myeloma survival. Successive generations bind with increasing affinity, making pomalidomide exceptionally potent in lenalidomide-refractory disease. Furthermore, pomalidomide undergoes extensive hepatic metabolism, permitting full-dose administration in severe renal impairment where lenalidomide requires substantial dose reduction.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/plasma-cell-disorders-fig2.webp",
+        "alt": "Illustration of marrow plasmacytosis with CRAB features and IMiD, proteasome and CD38 drug mechanisms.",
+        "caption": "IMiD action through cereblon among plasma cell drug mechanisms. Credit: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "Every IMiD prescription needs clot cover, because all three raise venous thrombosis (vein clot) risk and demand **thromboprophylaxis** (aspirin or heparin type blood thinners). Neutropenia (low neutrophils) dominates pomalidomide and lenalidomide, needing count checks and dose holds, while painful neuropathy (nerve damage) belongs chiefly to thalidomide. Pomalidomide runs 4 mg on days 1 to 21 of each 28 day cycle.",
+      "say": "Prescribing these drugs safely means managing three toxicities by name. Clots threaten with every member of the family, so blood thinners start alongside the myeloma drug. Falling neutrophils plague the two newer siblings, so counts are watched and doses paused on schedule. Nerve pain is mostly the oldest sibling's fault, which is why thalidomide has faded from modern induction while pomalidomide leads at relapse.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "IMiD safety point",
+          "Detail",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Clot prevention",
+            "All IMiDs raise VTE risk",
+            "Aspirin or anticoagulant with every cycle"
+          ],
+          [
+            "Low neutrophils",
+            "Pomalidomide and lenalidomide",
+            "Count checks; hold or cut dose"
+          ],
+          [
+            "Nerve damage",
+            "Thalidomide chiefly",
+            "Prefer newer IMiDs; stop if painful"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "mk-c5e0b6281b53",
+    "mk-9d434f621fc0",
+    "mk-f463daf5b6af"
+  ],
+  "src": [],
+  "refs": [
+    "IMWG Criteria for Multiple Myeloma",
+    "NCCN Multiple Myeloma Guidelines 2024",
+    "mSMART Myeloma Risk Stratification"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-pyq-gap-muse",
+  "model": "muse-spark",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

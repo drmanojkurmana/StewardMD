@@ -1,0 +1,106 @@
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 8,
+  "model": "muse-spark",
+  "module": "son-hypercalcemia-lymphoma",
+  "quiz": [
+    "mk-bd93366c3149",
+    "mk-b12bc5997436",
+    "mk-ca3858393e7e"
+  ],
+  "refs": [
+    "NCCN Guidelines",
+    "Endocrine Society Hypercalcemia Guidance"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "Aggressive intravenous saline resuscitation must precede all other interventions in hypercalcaemia of malignancy. Zoledronic acid achieves its nadir over four to seven days, making short-term calcitonin bridging necessary for acute symptomatic stabilization. Administering loop diuretics before full volume repletion worsens intravascular dehydration. Reserve corticosteroid therapy specifically for calcitriol-producing lymphoproliferative disorders.",
+      "tx": "Hypercalcaemia of malignancy (cancer driven high calcium) always starts with aggressive isotonic saline (salt water) volume expansion, because calcium induces nephrogenic diabetes insipidus (kidney water loss) with dehydration. **Zoledronic acid** 4 mg intravenously (a nitrogen bisphosphonate blocking osteoclast bone resorption) follows, acting at 48 hours with its nadir (lowest calcium point) at 4 to 7 days, or denosumab in renal failure. Calcitonin bridges severe cases within 4 to 6 hours but fades by 48 hours, while loop diuretics worsen volume loss and steroids help only calcitriol driven lymphomas.",
+      "vis": {
+        "alt": "Bone targeted pharmacology with osteoclast coupling.",
+        "ar": 1.3405,
+        "caption": "Osteoclast coupling with bisphosphonate and denosumab targets. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/bone-calcium-bisphosphonates-hypercalcaemia-fig1.webp"
+      }
+    },
+    {
+      "say": "Half treated hypercalcaemia looks alarming halfway through the course, which tempts premature redosing. Patience wins because the nadir arrives days after the first signs of improvement. Adding denosumab on top of a working bisphosphonate overshoots into dangerous hypocalcaemia. Watchful hydration carries the patient to the nadir safely.",
+      "tx": "A falling calcium at 48 hours after zoledronic acid means the drug is working toward its 4 to 7 day nadir, so management is continued **hydration** (saline maintenance) with calcium monitoring and no repeat bisphosphonate or added denosumab. Redosing waits at least 7 days, and stacking denosumab now invites severe hypocalcaemia (low calcium) with renal injury. Improving symptoms confirm the bridge is holding, not that therapy failed.",
+      "vis": {
+        "cols": [
+          "Finding at 48 hours",
+          "Meaning",
+          "Action"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Calcium falling",
+            "Drug working toward day 4 to 7 nadir",
+            "Hydrate and monitor"
+          ],
+          [
+            "Calcium stable high",
+            "Await nadir before judging failure",
+            "No repeat before day 7"
+          ],
+          [
+            "Calcium rebounding late",
+            "Disease outrunning one dose",
+            "Redose or switch agent"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Parathyroid hormone-related protein drives eighty percent of cancer hypercalcaemia, leaving lymphoma as a distinct mechanism. Malignant lymphocytes and surrounding macrophages express ectopic alpha-hydroxylase, synthesizing active calcitriol outside physiological renal feedback. This pathway drives enhanced intestinal calcium absorption, providing the biological foundation for its unique responsiveness to corticosteroids.",
+      "tx": "Lymphoma hypercalcaemia runs through extrarenal 1 alpha hydroxylase (**CYP27B1**, a vitamin D activating enzyme) in malignant lymphocytes and macrophages, overproducing 1,25 dihydroxyvitamin D (**calcitriol**, active vitamin D) that raises gut calcium absorption. Across all cancers, humoral PTHrP (parathyroid hormone related protein) drives 80 percent (squamous, renal, breast), local osteolysis 20 percent, calcitriol about 1 percent and ectopic intact PTH under 1 percent. Calcitonin style physiology explains the steroid response covered next.",
+      "vis": {
+        "alt": "PTH calcitriol axis across bone kidney and gut.",
+        "ar": 1.3405,
+        "caption": "PTH and calcitriol control of calcium across bone, kidney and gut. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/parathyroid-calcium-disorders-fig2.webp"
+      }
+    },
+    {
+      "say": "Corticosteroids are exceptionally effective when calcitriol drives the hypercalcaemic crisis. Standard doses of prednisone or hydrocortisone directly suppress the aberrant alpha-hydroxylase enzyme and reduce intestinal calcium uptake within days. Because medical bridging provides temporary control, initiating definitive antineoplastic therapy remains essential to achieve durable remission.",
+      "tx": "Calcitriol driven hypercalcaemia answers specifically to **corticosteroids** (prednisone 40 to 60 mg daily or hydrocortisone 200 to 400 mg intravenously daily), which suppress tumour 1 alpha hydroxylase and intestinal absorption. Yet every acute measure from saline to denosumab only bridges, and definitive long term control demands treating the underlying malignancy itself. Steroids fail PTHrP tumours, where bisphosphonates and denosumab lead instead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Calcitriol mechanism in lymphoma",
+            "Prednisone or hydrocortisone",
+            "Blocks 1 alpha hydroxylase",
+            "Bridge plus cancer therapy"
+          ],
+          "title": "Steroid Responsive"
+        },
+        "right": {
+          "points": [
+            "PTHrP mechanism in solid tumours",
+            "Zoledronate or denosumab",
+            "Blocks osteoclast resorption",
+            "Bridge plus cancer therapy"
+          ],
+          "title": "Bisphosphonate Led"
+        }
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Hypercalcaemia of malignancy: saline and zoledronate first, steroids for lymphoma",
+  "v": 1
+}
