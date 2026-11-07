@@ -1,0 +1,190 @@
+{
+  "v": 1,
+  "module": "son-chronic-leuk",
+  "subject": "ss-medical-oncology",
+  "title": "Chronic leukemias: CLL watchful waiting and del17p therapy, CML transcripts and blast phase",
+  "minutes": 9,
+  "steps": [
+    {
+      "tx": "Chronic lymphocytic leukaemia (a cancer of mature B lymphocytes) found incidentally at an early stage needs no treatment while the patient feels well. **Watchful waiting** (active surveillance with regular counts and examination) is the standard, because treating asymptomatic early CLL has never improved survival, even with high risk genetics such as del(17p) (loss of the short arm of chromosome 17). Therapy starts only when **iwCLL** (International Workshop on CLL) active disease criteria appear.",
+      "say": "New trainees always feel tempted to treat the numbers, but early CLL rewards patience. A comfortable patient with incidentally found disease gains nothing from early chemotherapy or targeted drugs, even when the genetics look frightening. The right plan is scheduled watching with blood counts and node checks, and treatment begins the day the disease declares itself through the formal iwCLL criteria.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-lymphocytic-leukemia-fig1.webp",
+        "alt": "Blood smear showing small mature lymphocytes and fragile smudge cells typical of chronic lymphocytic leukaemia.",
+        "caption": "Smudge cells of CLL, the disease safely watched without therapy while asymptomatic. Image: Dr Graham Beards, CC BY-SA 3.0.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "The iwCLL triggers for treatment are marrow failure (haemoglobin under 10 or platelets under 100,000 per microlitre), massive nodes (10 cm or more) or spleen (6 cm or more below the ribs), doubling of lymphocytes in under 6 months, B symptoms (drenching sweats, weight loss, fever), and autoimmune cytopenias (anaemia or low platelets from autoantibodies) that resist steroids. Low **hypogammaglobulinemia** (low antibody levels) alone never starts CLL therapy; repeated infections with it need IVIG (donor antibody infusions) instead.",
+      "say": "Memorise the treatment triggers as numbers plus suffering. Counts below ten and one lakh, lumps above ten centimetres, a spleen six centimetres out, doubling in under six months, drenching B symptoms, or immune cytopenias that steroids cannot control. Notice what is missing: low antibodies alone never justify CLL drugs, and those patients receive replacement antibody infusions when infections recur.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "iwCLL trigger",
+          "Cutoff",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Marrow failure",
+            "Hb under 10, platelets under 100,000",
+            "Start CLL therapy"
+          ],
+          [
+            "Bulky disease",
+            "Nodes 10 cm+, spleen 6 cm+",
+            "Start CLL therapy"
+          ],
+          [
+            "Rapid doubling",
+            "Lymphocyte doubling under 6 months",
+            "Start CLL therapy"
+          ],
+          [
+            "B symptoms, refractory autoimmunity",
+            "Sweats, loss, fever; steroids failed",
+            "Start CLL therapy"
+          ],
+          [
+            "Low antibodies alone",
+            "Hypogammaglobulinemia without above",
+            "IVIG if infections, never CLL drugs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Falling counts in CLL have two opposite causes, so always send a **Coombs test** (a check for antibodies coating red cells) and examine the marrow. Autoimmune destruction gets steroids first, with CLL therapy reserved for steroid failure, while marrow packed with lymphocytes (Rai stage 3 or 4) needs CLL therapy at once. Treating autoimmune anaemia with chemotherapy by mistake wastes the best option.",
+      "say": "A falling haemoglobin in a patient with CLL presents a critical diagnostic branch point. When autoimmune hemolysis is destroying erythrocytes, corticosteroid therapy restores counts while antileukemic treatment is held in reserve. Conversely, extensive marrow leukemic infiltration demands immediate disease-directed therapy. Performing a direct Coombs test and bone marrow examination reliably differentiates immune cytopenias from advancing marrow failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Autoimmune Cytopenia",
+          "points": [
+            "Coombs test positive",
+            "Marrow free of heavy infiltration",
+            "Steroids first line",
+            "CLL drugs only if steroids fail"
+          ]
+        },
+        "right": {
+          "title": "Marrow Infiltration (Rai 3/4)",
+          "points": [
+            "Coombs test negative",
+            "Marrow packed with lymphocytes",
+            "CLL therapy starts at once",
+            "Steroids alone waste time"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "CLL with **del(17p)** or **TP53 mutation** (loss of the genome guardian gene) resists chemotherapy, so FCR and bendamustine rituximab are banned. First line uses a second generation BTK blocker (a Bruton kinase inhibitor), **zanubrutinib** or **acalabrutinib**, or the BCL2 blocker **venetoclax** with obinutuzumab. First generation ibrutinib is avoided upfront because it causes more atrial fibrillation (a chaotic heart rhythm), hypertension and bleeding.",
+      "say": "Deletion 17p changes everything about CLL treatment. Standard chemoimmunotherapy fails these patients, so guidelines forbid it outright. Modern care uses the newer kinase blockers zanubrutinib or acalabrutinib, or venetoclax paired with obinutuzumab. The older ibrutinib still works but harms the heart and clotting more often, which is why it lost its first line place.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "del17p/TP53 option",
+          "Class",
+          "Clinical feature"
+        ],
+        "rows": [
+          [
+            "Zanubrutinib, acalabrutinib",
+            "Second generation BTK blockers",
+            "Preferred; less cardiac harm than ibrutinib"
+          ],
+          [
+            "Venetoclax plus obinutuzumab",
+            "BCL2 blocker plus antibody",
+            "Preferred fixed duration choice"
+          ],
+          [
+            "FCR, bendamustine rituximab",
+            "Chemoimmunotherapy",
+            "Higher cardiovascular toxicity including atrial fibrillation and hypertension"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **BCR::ABL1** fusion (a joined gene driving CML) comes in three weights. Major breakpoint transcripts **e13a2** and **e14a2** make p210 protein (the classic chronic myeloid leukaemia of adults). Minor breakpoint **e1a2** makes p190 (Philadelphia positive ALL and rare monocytic CML). Micro breakpoint **e19a2** makes p230 (neutrophilic CML with high neutrophils and platelets). The number after p is the protein weight in kilodaltons.",
+      "say": "Clinicians should recognize all three BCR-ABL fusion protein sizes and their specific disease associations. Classic adult chronic myeloid leukaemia expresses the standard p210 oncoprotein formed from e13a2 or e14a2 junctions. Philadelphia chromosome-positive ALL typically produces the smaller p190 variant from e1a2. The rare neutrophilic variant of CML carries the large p230 protein from e19a2. Aligning oncoprotein weight with phenotype guides precision diagnostics.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-myeloid-leukemia-fig1.webp",
+        "alt": "Diagram showing Philadelphia chromosome t(9;22) forming the BCR ABL1 fusion that drives chronic myeloid leukaemia.",
+        "caption": "The Philadelphia translocation behind BCR::ABL1 transcript testing. Credit: StewardMD.",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "CML with 20% or more blasts (immature cells) in blood or marrow, or a myeloid lump outside the marrow (**myeloid sarcoma**), has entered **blast phase** (blast crisis), behaving like acute leukaemia and needing ALL or AML style therapy plus transplant. The **WHO 5th edition** (World Health Organization classification) abolished **accelerated phase**, leaving only chronic phase and blast phase to reflect modern molecular risk and clinical management.",
+      "say": "A blast count reaching twenty percent is an unequivocal threshold in chronic myeloid leukaemia. Twenty percent blasts, or an extramedullary mass of myeloid blasts anywhere outside the marrow, defines blast phase outright. Therapy immediately switches to intensive acute leukaemia regimens combined with allogeneic transplant planning. Note that current international classifications retired accelerated phase entirely, categorizing patients into chronic phase or blast phase.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cp",
+            "label": "Chronic Phase CML",
+            "level": 1
+          },
+          {
+            "id": "twenty",
+            "label": "Blasts Reach 20 Percent",
+            "level": 2
+          },
+          {
+            "id": "bp",
+            "label": "Blast Phase Declared",
+            "level": 3
+          },
+          {
+            "id": "rx",
+            "label": "Acute Leukaemia Therapy Plus Transplant",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cp",
+            "twenty"
+          ],
+          [
+            "twenty",
+            "bp"
+          ],
+          [
+            "bp",
+            "rx"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "mk-71d92cdd8d6a",
+    "mk-fee8782362f8",
+    "mk-f68c3d33bdf4"
+  ],
+  "src": [],
+  "refs": [
+    "iwCLL Guidelines for Chronic Lymphocytic Leukemia",
+    "NCCN Chronic Lymphocytic Leukemia Guidelines 2024",
+    "NCCN Chronic Myeloid Leukemia Guidelines 2024",
+    "WHO Classification of Haematolymphoid Tumours 5th Edition"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-pyq-gap-muse",
+  "model": "muse-spark",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

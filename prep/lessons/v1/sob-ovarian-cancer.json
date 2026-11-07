@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sob-ovarian-cancer",
+  "title": "Ovarian Malignancies: Epithelial, Germ Cell, Sex Cord-Stromal Tumours, Cytoreduction, and Chemotherapy",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Ten Teachers Gynaecology 21e Ch 16 (Premalignant and malignant disease)",
+    "Williams Gynecology 4e Ch 35 (Epithelial Ovarian Cancer), Ch 36 (Germ Cell and Sex Cord-Stromal Ovarian Tumors)",
+    "FIGO Cancer Report 2021: Cancer of the Ovary, Fallopian Tube, and Peritoneum"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "High-grade serous ovarian carcinoma represents seventy percent of epithelial ovarian cancers, with the vast majority originating from serous tubal intraepithelial carcinoma lesions in the distal fimbriated fallopian tube. Near universal TP53 mutations drive genomic instability in virtually all cases.",
+      "tx": "**High-grade serous carcinoma** accounts for 70 percent of epithelial ovarian cancers. Modern molecular pathology proves that most arise from **STIC lesions** located in the fimbriated ends of the fallopian tubes, rather than the ovarian surface epithelium, characterized by near **universal TP53 gene mutations**.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-ovary.webp",
+        "ar": 1.3333,
+        "caption": "High-grade serous carcinoma STIC lesions confirming fallopian tube origin. Credit: StewardMD.",
+        "alt": "FIGO anatomical staging matrix for ovarian and fallopian tube carcinomas."
+      }
+    },
+    {
+      "say": "Germline mutations in BRCA1 and BRCA2 confer lifetime ovarian cancer risks of forty to sixty percent and fifteen to twenty five percent respectively. Risk-reducing bilateral salpingo-oophorectomy performed by age thirty five to forty for BRCA1 or forty to forty five for BRCA2 reduces ovarian cancer mortality by over ninety percent.",
+      "tx": "Germline **BRCA1 and BRCA2** mutations confer **40 to 60 percent** and **15 to 25 percent** **lifetime risk** of epithelial ovarian cancer respectively. **Risk-reducing salpingo-oophorectomy** performed between ages 35 and 40 for BRCA1 or 40 and 45 for BRCA2 dramatically decreases ovarian and peritoneal cancer mortality.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "BRCA1 Mutation Carriers",
+          "points": [
+            "Lifetime ovarian cancer risk 40 to 60 percent",
+            "Earlier age of onset (median age 50 years)",
+            "Salpingo-oophorectomy recommended at age 35 to 40",
+            "Breast cancer risk exceeds 70 percent"
+          ]
+        },
+        "right": {
+          "title": "BRCA2 Mutation Carriers",
+          "points": [
+            "Lifetime ovarian cancer risk 15 to 25 percent",
+            "Later onset of disease (median age 55-60 years)",
+            "Salpingo-oophorectomy recommended at age 40 to 45",
+            "Associated with male breast and pancreatic cancer"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Ovarian cancer is staged surgically according to FIGO criteria. Stage one is confined to the ovaries; Stage two extends into the pelvis below the pelvic brim; Stage three presents with peritoneal implants outside the pelvis or retroperitoneal lymph node metastases; and Stage four represents distant metastases including malignant pleural effusion.",
+      "tx": "Surgical **FIGO staging** categorizes ovarian cancer: Stage I confined to ovaries, Stage II with pelvic extension, **Stage III peritoneal** implants beyond the pelvis or positive retroperitoneal lymph nodes, and **Stage IV distant** metastases (malignant pleural effusion or parenchymal liver or splenic metastases).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FIGO 2021 Stage",
+          "Anatomical Disease Distribution",
+          "Surgical and Systemic Implications"
+        ],
+        "rows": [
+          [
+            "Stage I (IA, IB, IC)",
+            "Confined strictly to ovaries/fallopian tubes; capsule intact or ruptured",
+            "Eligible for fertility-sparing surgery in IA/IC1 grade 1"
+          ],
+          [
+            "Stage II (IIA, IIB)",
+            "Pelvic extension into uterus, tubes, bladder, or sigmoid colon",
+            "Comprehensive surgical cytoreduction with total hysterectomy"
+          ],
+          [
+            "Stage III (IIIA, IIIB, IIIC)",
+            "Peritoneal metastases beyond pelvis or retroperitoneal lymph nodes",
+            "Aggressive cytoreduction; paclitaxel plus carboplatin chemotherapy"
+          ],
+          [
+            "Stage IV (IVA, IVB)",
+            "Malignant pleural effusion (IVA) or parenchymal liver/splenic metastases (IVB)",
+            "Neoadjuvant chemotherapy followed by interval debulking surgery"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Primary cytoreductive surgery aims for complete cytoreduction with zero residual macroscopic disease, known as an R0 resection. Achieving zero residual disease is the single most significant independent modifiable prognostic determinant of survival in advanced ovarian carcinoma.",
+      "tx": "Primary **cytoreductive surgery** in advanced epithelial ovarian carcinoma aims for **complete cytoreduction** with **zero residual disease** (**0** macroscopic residual tumor, R0). Eliminating visible peritoneal deposits serves as the single most critical independent modifiable prognostic determinant of progression-free and overall survival.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Midline laparotomy and comprehensive abdominal cavity exploration"
+          },
+          {
+            "id": "b",
+            "label": "Total abdominal hysterectomy, bilateral salpingo-oophorectomy, and infragastric omentectomy"
+          },
+          {
+            "id": "c",
+            "label": "Radical peritonectomy, bowel resection, and diaphragmatic stripping if required"
+          },
+          {
+            "id": "d",
+            "label": "Attainment of complete cytoreduction (R0) with zero macroscopic residual tumor"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Neoadjuvant chemotherapy with three cycles of carboplatin and paclitaxel followed by interval debulking surgery is non-inferior to primary surgery in patients with advanced stage three or four disease who have extensive non-resectable peritoneal carcinomatosis, significantly reducing perioperative morbidity.",
+      "tx": "Administration of **neoadjuvant chemotherapy** with **3** cycles of **carboplatin-paclitaxel** followed by **interval debulking surgery** is non-inferior to primary debulking laparotomy in advanced Stage III/IV ovarian cancer with extensive non-resectable peritoneal carcinomatosis, significantly lowering surgical blood loss, bowel resections, and perioperative complications.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Cytoreductive Surgery",
+          "points": [
+            "Upfront radical laparotomy with multivisceral resection",
+            "Preferred when R0 complete cytoreduction is achievable",
+            "Direct histological tissue diagnosis before chemotherapy",
+            "Higher perioperative morbidity in compromised patients"
+          ]
+        },
+        "right": {
+          "title": "Neoadjuvant Chemotherapy + Interval Surgery",
+          "points": [
+            "3 cycles of paclitaxel/carboplatin prior to surgery",
+            "Recommended for non-resectable disease or high surgical risk",
+            "Downstages tumor burden and clarifies resection planes",
+            "Significantly fewer intensive care admissions and stomas"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Poly ADP-ribose polymerase inhibitors, such as olaparib and niraparib, provide major progression-free survival benefit as maintenance therapy in women with advanced epithelial ovarian cancer demonstrating BRCA mutations or homologous recombination deficiency who achieve response to platinum chemotherapy.",
+      "tx": "Oral **PARP inhibitors** such as **olaparib** or niraparib provide major progression-free survival benefit as **maintenance therapy** in women with platinum-responsive advanced ovarian cancer harboring **BRCA mutations or homologous recombination deficiency**, successfully inducing lethal double-strand DNA damage through synthetic lethality mechanisms.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Tumor tissue testing confirms germline/somatic BRCA1/2 mutation or HRD"
+          },
+          {
+            "id": "b",
+            "label": "Patient achieves complete or partial response to 6 cycles platinum chemotherapy"
+          },
+          {
+            "id": "c",
+            "label": "Initiate maintenance oral PARP inhibitor therapy (olaparib 300 mg BID)"
+          },
+          {
+            "id": "d",
+            "label": "Synthetic lethality induces collapse of replication forks and tumor apoptosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Malignant germ cell tumours predominantly affect adolescents and young women in their second and third decades. Because over ninety percent are unilateral, management consists of fertility-sparing unilateral salpingo-oophorectomy and surgical staging, followed by combination chemotherapy with bleomycin, etoposide, and cisplatin.",
+      "tx": "Malignant ovarian **germ cell tumors** typically present as unilateral pelvic masses in adolescents and young women. Management emphasizes **fertility-sparing surgery** with unilateral salpingo-oophorectomy, followed by curative **BEP chemotherapy** (bleomycin, etoposide, and cisplatin), achieving cure rates exceeding 95 percent in early and advanced disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ovarian-cancer-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Malignant ovarian tumor histology and tumor marker expression. Credit: StewardMD.",
+        "alt": "Microscopic architecture and diagnostic serum biomarkers for ovarian malignancies."
+      }
+    },
+    {
+      "say": "Granulosa cell tumour is a sex cord-stromal neoplasm characterized histologically by Call-Exner bodies and elevated serum inhibin B. Estrogen secretion frequently causes endometrial hyperplasia or carcinoma. Marked by indolent growth, granulosa cell tumours are notable for late recurrences developing beyond ten to twenty years.",
+      "tx": "The **granulosa cell tumor** is a malignant sex cord-stromal neoplasm characterized by **Call-Exner bodies**, coffee-bean grooved nuclei, and elevated serum **inhibin-B**. Hyperestrogenism induces postmenopausal bleeding and endometrial pathology, with this low-grade malignancy notable for indolent growth and **late recurrences beyond 10 to 20 years**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ovarian Neoplasm Category",
+          "Diagnostic Tumor Markers",
+          "Classic Microscopic / Clinical Feature"
+        ],
+        "rows": [
+          [
+            "High-grade serous carcinoma",
+            "CA-125; HE4",
+            "Psammoma bodies; STIC origin; universal TP53 mutations"
+          ],
+          [
+            "Dysgerminoma",
+            "LDH; beta-hCG (syncytiotrophoblasts)",
+            "Fried-egg cells with prominent lymphocytic stroma; radiocurable"
+          ],
+          [
+            "Endodermal sinus (Yolk sac)",
+            "Alpha-fetoprotein (AFP)",
+            "Schiller-Duval bodies (glomeruloid); highly aggressive"
+          ],
+          [
+            "Adult Granulosa cell tumor",
+            "Inhibin-B; Anti-Mullerian hormone",
+            "Call-Exner bodies; hyperestrogenism; late recurrence >10-20 years"
+          ]
+        ]
+      }
+    }
+  ]
+}

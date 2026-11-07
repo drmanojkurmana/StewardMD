@@ -1,0 +1,275 @@
+{
+  "v": 1,
+  "module": "sct-thoracoabdominal-aortic-aneurysm",
+  "title": "Thoracoabdominal aortic aneurysms: Crawford classification, spinal protection and branch reconstruction",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 113 (Thoracoabdominal Aortic Aneurysms)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 18 (Thoracoabdominal Aneurysm)",
+    "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Thoracoabdominal aortic aneurysms span both the thoracic and abdominal cavities, posing tremendous surgical challenges. The Crawford classification categorizes them into five anatomical extents. Crawford extent two is the most surgically demanding, extending from the subclavian artery all the way to the aortic bifurcation.",
+      "tx": "The **Crawford classification** defines five anatomical extents of thoracoabdominal aneurysms. **Extent II** is the most complex and hazardous, extending from the left subclavian takeoff down to the aortoiliac bifurcation, carrying the highest baseline risks of **spinal cord ischemia** and renal failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Crawford Extent",
+          "Proximal Origin",
+          "Distal Termination"
+        ],
+        "rows": [
+          [
+            "Extent I",
+            "Proximal descending thoracic aorta",
+            "Suprarenal abdominal aorta above celiac axis"
+          ],
+          [
+            "Extent II",
+            "Proximal descending thoracic aorta",
+            "Infrarenal aorta down to aortic bifurcation"
+          ],
+          [
+            "Extent III",
+            "Distal descending thoracic aorta (below 6th rib)",
+            "Infrarenal aorta down to aortic bifurcation"
+          ],
+          [
+            "Extent IV",
+            "Begins at diaphragmatic hiatus",
+            "Involves total visceral aorta to bifurcation"
+          ],
+          [
+            "Extent V",
+            "Distal thoracic aorta (below 6th rib)",
+            "Suprarenal abdominal aorta (above renal origins)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Spinal cord ischemia and paraplegia are the most dreaded complications of thoracoabdominal repair. Sacrificing critical intercostal and lumbar arteries deprives the anterior spinal artery of blood flow. The artery of Adamkiewicz, typically arising between thoracic eight and lumbar one, is critical for cord perfusion.",
+      "tx": "Ischemic injury to the spinal cord produces catastrophic **paraplegia** in up to 10 percent of extensive repairs. Spinal infarction stems from sacrificing essential radicular feeders to the **anterior spinal artery**, most notably the major radicular **artery of Adamkiewicz** between T8 and L1.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Aortic cross-clamping and division of intercostal arteries"
+          },
+          {
+            "id": "b",
+            "label": "Acute reduction in anterior spinal artery perfusion pressure"
+          },
+          {
+            "id": "c",
+            "label": "Spinal cord ischemia exacerbated by elevated CSF pressure"
+          },
+          {
+            "id": "d",
+            "label": "Irreversible anterior horn motor neuron necrosis and paraplegia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A multimodal spinal cord protection protocol significantly reduces paraplegia rates. Cerebrospinal fluid drainage lowers intrathecal pressure below ten millimeters of mercury, improving spinal cord perfusion. Perfusionists also keep mean arterial pressure above eighty and utilize mild systemic hypothermia.",
+      "tx": "Modern surgical protocols employ a **multimodal spinal protection** bundle. Inserting a preoperative **cerebrospinal fluid drain** maintains intrathecal pressure strictly below 10 mmHg. Surgeons combine this with permissive mild hypothermia and actively target a **mean arterial pressure > 80 mmHg** to drive collateral cord blood flow.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Protective Modality",
+          "Operating Parameter",
+          "Physiological Mechanism"
+        ],
+        "rows": [
+          [
+            "Cerebrospinal fluid drainage",
+            "Target CSF pressure <= 10 mmHg",
+            "Augments spinal cord perfusion gradient (MAP minus CSFP)"
+          ],
+          [
+            "Systemic perfusion pressure",
+            "Target MAP >= 80 to 90 mmHg",
+            "Drives collateral flow through vertebral and hypogastric beds"
+          ],
+          [
+            "Moderate hypothermia",
+            "Passive systemic cool to 32 to 34 C",
+            "Suppresses neuronal metabolic rate and oxygen consumption"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Distal aortic perfusion maintains oxygenated blood flow to the lower body during cross-clamping. Surgeons establish left heart bypass from the left atrium to the common femoral artery using a centrifugal pump. This maintains mesenteric, renal, and spinal collateral perfusion while the proximal anastomosis is sewn.",
+      "tx": "Employing **left heart bypass** from the left atrium or left pulmonary vein to the common femoral artery ensures continuous **distal aortic perfusion**. This circuit delivers oxygenated blood to the spinal collateral network and kidneys, mitigating severe **visceral ischemic injury** during proximal aortic clamping.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cannulate left atrium and left common femoral artery"
+          },
+          {
+            "id": "b",
+            "label": "Deploy centrifugal pump without systemic heparinization"
+          },
+          {
+            "id": "c",
+            "label": "Cross-clamp thoracic aorta to begin proximal repair"
+          },
+          {
+            "id": "d",
+            "label": "Maintain distal perfusion pressure > 60 mmHg to viscera"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Neurophysiological monitoring detects intraoperative spinal cord ischemia in real time. Motor-evoked potentials monitor the integrity of the anterior corticospinal motor tracts. A loss of motor amplitudes indicates that the surgical team must reimplant critical intercostal vessels immediately.",
+      "tx": "Intraoperative neurophysiological surveillance utilizing **motor-evoked potentials** provides real-time monitoring of anterior spinal motor tract perfusion. A greater than 50 percent drop in amplitude signals impending **spinal ischemia**, prompting immediate **intercostal reimplantation** and mean arterial pressure elevation to reverse motor pathway injury.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Motor-Evoked Potentials (MEPs)",
+          "points": [
+            "Assesses anterior corticospinal tract and anterior horn cells",
+            "Highly sensitive to acute anterior spinal artery ischemia",
+            "Instantaneous feedback during cross-clamping and vessel division"
+          ]
+        },
+        "right": {
+          "title": "Somatosensory-Evoked Potentials (SSEPs)",
+          "points": [
+            "Assesses posterior columns fed by dual posterior spinal arteries",
+            "Lacks sensitivity for isolated anterior motor pathway infarction",
+            "Exhibits a substantial latency delay of 15 to 30 minutes"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Protecting renal function requires active cold preservation during visceral ischemia. Teams infuse cold crystalloid preservation solutions with mannitol or methylprednisolone into both renal artery ostia through catheter perfusion. Cold perfusion drops parenchymal temperature to fifteen degrees, protecting nephrons.",
+      "tx": "To prevent acute kidney injury during visceral clamping, surgeons initiate selective **cold renal perfusion**. Catheters deliver 4 degrees Celsius crystalloid flush containing **mannitol** and corticosteroids directly into both renal ostia, providing robust **hypothermic renal protection** throughout the ischemic period. Rapidly lowering parenchymal temperature suppresses tubular cell metabolic breakdown and preserves glomerular architecture throughout the visceral cross-clamp phase.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Renal Perfusion Modality",
+          "Agent Administered",
+          "Clinical Protective Mechanism"
+        ],
+        "rows": [
+          [
+            "Cold renal flush",
+            "Crystalloid flush at 4 degrees C",
+            "Induces rapid parenchymal hypothermia, halting ATP breakdown"
+          ],
+          [
+            "Osmotic diuretic",
+            "Mannitol infusion",
+            "Reduces endothelial swelling and scavenges free oxygen radicals"
+          ],
+          [
+            "Normothermic blood pump",
+            "Continuous blood perfusion via 9 Fr lines",
+            "Active metabolic maintenance during extended branch reconstruction"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Visceral branch reconstruction will connect the celiac axis, superior mesenteric artery, and both renal arteries. In the Carrel patch technique, branches are reimplanted as a single composite aortic island into the Dacron graft. Alternatively, separate branched Dacron grafts allow individual bypass to each visceral artery.",
+      "tx": "Reconstruction of visceral vessels employs an inclusion **Carrel patch** incorporating the celiac axis, superior mesenteric, and right renal arteries into a common aortic cuff. When aortic tissue is diseased or ectatic, surgeons select **branched Dacron grafts** with individual bypass limbs to achieve **visceral revascularization**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inclusion Carrel Patch",
+          "points": [
+            "Reimplants celiac, SMA, and right renal as single island",
+            "Rapid completion time minimizes visceral clamp duration",
+            "Prone to late patch aneurysmal degeneration in connective disorders"
+          ]
+        },
+        "right": {
+          "title": "Multi-Branched Graft (Coselli / Individual)",
+          "points": [
+            "Separate 8 to 10 mm prosthetic limbs sewn to each visceral branch",
+            "Completely eliminates all native diseased aortic tissue",
+            "Technically demanding with longer cumulative ischemic times"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Advanced endovascular options have revolutionized management in high-risk patients. Fenestrated and branched endovascular repair deploys custom-manufactured stent grafts with dedicated visceral branches. This closed approach avoids thoracophrenolaparotomy and reduces operative blood loss.",
+      "tx": "For elderly or physiologically frail patients, **fenestrated-branched TEVAR** offers an advanced endovascular alternative to open thoracophrenolaparotomy. Custom stent grafts with reinforced fenestrations maintain visceral branch patency, achieving significantly lower early **perioperative mortality** in **high-risk surgical patients** with favorable landing zones.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Approach",
+          "Surgical Invasiveness",
+          "Key Trade-offs"
+        ],
+        "rows": [
+          [
+            "Open Crawford repair",
+            "Extensive thoracophrenolaparotomy incision",
+            "Definitive cure; high early morbidity and pulmonary stress"
+          ],
+          [
+            "Fenestrated / branched TEVAR",
+            "Percutaneous femoral and axillary delivery",
+            "Minimally invasive; requires lifelong surveillance for endoleaks"
+          ],
+          [
+            "Hybrid debranching repair",
+            "Visceral bypasses followed by stent graft",
+            "Avoids aortic cross-clamping; still requires laparotomy"
+          ]
+        ]
+      }
+    }
+  ]
+}

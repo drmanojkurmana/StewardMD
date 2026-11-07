@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "module": "sob-menstrual-physiology",
+ "title": "Neuroendocrine Regulation of Menstrual Cycle and Steroidogenesis",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Ten Teachers Gynaecology 21e Ch 3 (The Menstrual Cycle)",
+  "Williams Obstetrics 25e",
+  "Yen & Jaffe's Reproductive Endocrinology 8e"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The hypothalamic-pituitary-ovarian (HPO) axis is governed by pulsatile **gonadotropin-releasing hormone** (GnRH) secretion from the arcuate nucleus. In the early follicular phase, GnRH pulse frequency is **every 90 to 120 minutes** (favouring FSH secretion), accelerating to **every 60 minutes** in the late follicular phase to drive the pre-ovulatory LH surge. Clinically, key parameters encompass pulsatile GnRH.",
+   "say": "Pulsatile release of gonadotropin-releasing hormone from hypothalamic arcuate neurons orchestrates the ovarian cycle. Continuous non-pulsatile GnRH exposure causes profound receptor downregulation and hypogonadotropic hypogonadism. In the early follicular stage, low pulse frequencies every ninety to one hundred and twenty minutes favor FSH release, whereas high frequencies every sixty minutes stimulate LH output.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-menstrual-physiology-fig1.webp",
+    "ar": 1.7778,
+    "caption": "Endocrine hormone profiles and endometrial phases of the menstrual cycle. Credit: StewardMD.",
+    "alt": "Diagrammatic graph illustrating cyclic fluctuations of GnRH, FSH, LH, estradiol, and progesterone across follicular, ovulatory, and luteal phases."
+   }
+  },
+  {
+   "tx": "The **two-cell, two-gonadotropin hypothesis** governs ovarian follicular steroidogenesis: **LH stimulates theca interna cells** via cyclic AMP to synthesize androgens (androstenedione and testosterone) from cholesterol; these androgens diffuse across the basement membrane into **granulosa cells, where FSH stimulates aromatase** (CYP19A1) to convert them into estrogens (estrone and estradiol). Clinically, key parameters encompass two-cell two-gonadotropin, theca cells, 2.",
+   "say": "Follicular steroid synthesis requires compartmentalized cooperation between two distinct cell lineages under two separate gonadotropins. Luteinizing hormone acts on theca interna cells, promoting cholesterol desmolase and seventeen-alpha-hydroxylase to generate androgens. These diffuse across the basal lamina into granulosa cells, where follicle-stimulating hormone induces aromatase to synthesize estradiol.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "LH binds GPCR on theca interna cells, activating protein kinase A"
+     },
+     {
+      "id": "b",
+      "label": "Theca cells synthesize androstenedione and testosterone from cholesterol"
+     },
+     {
+      "id": "c",
+      "label": "Androgens diffuse across follicular basement membrane to granulosa"
+     },
+     {
+      "id": "d",
+      "label": "FSH stimulates CYP19A1 aromatase, converting androgens to estradiol"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the early follicular phase, low estradiol exerts **negative feedback** on pituitary gonadotropin release. In the late follicular phase, sustained high levels of **estradiol (>200 pg/mL for at least 48 to 50 hours)** trigger a critical neuroendocrine switch to **positive feedback**, inducing the pre-ovulatory LH surge. Clinically, key parameters encompass follicular recruitment, dominant follicle.",
+   "say": "Steroid feedback transitions dynamically during the follicular phase. Moderate estrogen concentrations maintain negative feedback inhibition over pituitary gonadotropes. However, as the dominant follicle matures and maintains serum estradiol above two hundred picograms per millilitre for at least forty-eight to fifty hours, it triggers positive feedback, generating the dramatic pre-ovulatory LH surge.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Follicular Negative Feedback",
+     "points": [
+      "Serum estradiol < 150 pg/mL",
+      "Suppresses pituitary LH and FSH pulse amplitude",
+      "Prevents premature recruitment of secondary cohorts"
+     ]
+    },
+    "right": {
+     "title": "Late Pre-Ovulatory Positive Feedback",
+     "points": [
+      "Serum estradiol > 200 pg/mL sustained for >= 48 hours",
+      "Triggers massive hypothalamic GnRH and pituitary LH surge",
+      "Initiates oocyte meiosis resumption and follicular rupture"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **pre-ovulatory LH surge** triggers three cardinal ovulatory events: resumption of **oocyte meiosis I** with extrusion of the first polar body, luteinization of granulosa cells, and activation of follicular proteases and prostaglandins (PGF2-alpha), culminating in **follicular rupture 34 to 36 hours** after the onset of the LH surge (10 to 12 hours after the LH peak). Clinically, key parameters encompass positive feedback, estradiol threshold, 200, 48.",
+   "say": "The luteinizing hormone surge is the master trigger for ovulation. It breaks meiotic arrest in the primary oocyte, driving progression to metaphase of meiosis two with extrusion of the first polar body. Concurrently, progesterone and prostaglandins activate collagenases that digest the follicular apex, culminating in ovulatory rupture thirty-four to thirty-six hours following surge onset.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surge Landmark",
+     "Temporal Interval to Ovulation",
+     "Biological Event"
+    ],
+    "rows": [
+     [
+      "Onset of LH surge",
+      "34 to 36 hours prior to rupture",
+      "Resumption of meiotic division in dictyotene primary oocyte"
+     ],
+     [
+      "Peak of LH surge",
+      "10 to 12 hours prior to rupture",
+      "Maximal granulosa luteinization and prostaglandin synthesis"
+     ],
+     [
+      "Follicular rupture",
+      "Hour 0 (Ovulation)",
+      "Extrusion of cumulus-oocyte complex into peritoneal cavity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Selection of the **dominant Graafian follicle** occurs between days 5 and 7 of the menstrual cycle. The chosen follicle expresses the highest density of **FSH receptors** on granulosa cells and local intra-ovarian IGF-1, enabling it to thrive and produce copious estradiol despite falling systemic FSH levels driven by **inhibin-B** negative feedback. Clinically, key parameters encompass ovulation timing, LH surge onset, LH peak, 34, 36, 10, 12.",
+   "say": "During days five to seven of the cycle, a single follicle is selected for dominance while remaining cohort members undergo atresia. The dominant follicle features the highest density of granulosa cell FSH receptors and elevated local insulin-like growth factors. Consequently, it flourishes even as circulating FSH drops under the negative feedback influence of granulosa inhibin-B.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cohort recruitment during luteal-follicular transition under FSH"
+     },
+     {
+      "id": "b",
+      "label": "Follicle with greatest FSH receptor density synthesizes high estradiol"
+     },
+     {
+      "id": "c",
+      "label": "Rising estradiol and inhibin-B suppress systemic pituitary FSH release"
+     },
+     {
+      "id": "d",
+      "label": "Dominant follicle thrives while lower-receptor cohort undergoes atresia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The lifespan of the **corpus luteum** in a non-conception cycle is precisely fixed at **14 days (+/- 1 to 2 days)**. Synthesizing high amounts of **progesterone** and estradiol, the corpus luteum undergoes programmatic luteolysis mediated by local endothelin-1 and reactive oxygen species in the absence of embryonic hCG rescue, causing withdrawal bleeding. Clinically, key parameters encompass luteal phase, fixed lifespan.",
+   "say": "Unlike the variable follicular phase, the normal luteal phase has an invariant duration of fourteen days. The corpus luteum secretes abundant progesterone and estrogen to transform the endometrium into a receptive secretory state. Unless rescued by trophoblastic hCG, autonomous luteolysis ensues, withdrawing steroid support and provoking menstrual shedding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Follicular Phase Physiology",
+     "points": [
+      "Duration highly variable (typically 10 to 21 days)",
+      "Governed by follicular recruitment and estradiol secretion",
+      "Drives proliferative endometrial glandular reconstruction"
+     ]
+    },
+    "right": {
+     "title": "Luteal Phase Physiology",
+     "points": [
+      "Fixed physiological lifespan of precisely 14 days",
+      "Dominated by corpus luteum progesterone production",
+      "Drives secretory endometrial maturation and decidualization"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Endometrial histology mirrors ovarian steroidogenesis: the **proliferative phase** (under estrogen) exhibits straight tubular glands and mitotic pseudostratified columnar epithelium, while the **secretory phase** (under progesterone) features prominent **subnuclear glycogen vacuoles** on day 16 to 17, progressing to tortuous saw-tooth glands and stromal decidualization. Clinically, key parameters encompass subnuclear vacuoles, progesterone action, 36, 48.",
+   "say": "Endometrial morphology directly reflects circulating ovarian steroids. Under estrogenic stimulation, the proliferative endometrium displays dense mitotic activity and straight tubular glands. Post-ovulatory progesterone halts mitosis, inducing hallmark subnuclear glycogen vacuoles within forty-eight to seventy-two hours. Glands become intensely coiled and saw-toothed, culminating in prominent predecidual stromal transformation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endometrial Phase",
+     "Dominant Ovarian Steroid",
+     "Histological Hallmark Landmark"
+    ],
+    "rows": [
+     [
+      "Early proliferative",
+      "Estradiol (developing follicles)",
+      "Thin mucosa; straight, narrow glands; non-vacuolated cells"
+     ],
+     [
+      "Late proliferative",
+      "High estradiol (pre-ovulatory)",
+      "Pseudostratified glandular columnar cells with frequent mitoses"
+     ],
+     [
+      "Early secretory (Day 16-17)",
+      "Progesterone (corpus luteum)",
+      "Orderly basal subnuclear glycogen-filled vacuoles"
+     ],
+     [
+      "Late secretory (Day 24-27)",
+      "Progesterone + estradiol",
+      "Exhausted saw-tooth serrated glands and compact decidual stroma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Menstrual shedding is initiated by **progesterone withdrawal**, triggering intense vasoconstriction and **spasm of endometrial spiral arterioles**. Lysosomal enzymes, matrix metalloproteinases (MMPs), and **prostaglandin F2-alpha** (PGF2-alpha) cause focal ischemic necrosis, extravasation, and desquamation of the stratum functionalis, leaving the basal layer intact. Clinically, key parameters encompass luteolysis, spiral arteriolar spasm, menstruation.",
+   "say": "Luteal regression deprives the mature secretory endometrium of hormonal support. Progesterone withdrawal precipitates rhythmic vasospasm of coiled spiral arterioles, producing local ischemic hypoxia. Activation of matrix metalloproteinases and intense synthesis of vasoconstrictive prostaglandin F2-alpha cause enzymatic dissolution and shedding of the functional layer while preserving the basalis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Luteolysis and precipitous drop in circulating progesterone"
+     },
+     {
+      "id": "b",
+      "label": "Sustained vasospasm of coiled endometrial spiral arterioles"
+     },
+     {
+      "id": "c",
+      "label": "Ischemic hypoxia triggers lysosomal matrix metalloproteinase release"
+     },
+     {
+      "id": "d",
+      "label": "Enzymatic cleavage and desquamation of stratum functionalis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ]
+}

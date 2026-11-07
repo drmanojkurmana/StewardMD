@@ -1,0 +1,257 @@
+{
+  "v": 1,
+  "module": "sob-gtd",
+  "title": "Hydatidiform Mole, Gestational Trophoblastic Neoplasia, FIGO Staging and Scoring, and Chemotherapy",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 20 (Gestational Trophoblastic Disease)",
+    "Ten Teachers Gynaecology 21e Ch 17",
+    "FIGO Committee on Gynecologic Oncology GTD Guidelines"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Complete hydatidiform mole arises from the fertilization of an enucleated ovum by a single sperm that duplicates its genome, yielding a forty six XX diploid karyotype in ninety percent of cases. Because it lacks maternal chromosomal material, no fetal development occurs. Histopathology shows diffuse hydropic swelling of all chorionic villi with circumferential trophoblastic hyperplasia.",
+      "tx": "A **complete hydatidiform mole** results from fertilization of an empty, enucleated ovum by a single haploid sperm that duplicates, producing a **46,XX** androgenetic diploid karyotype in 90 percent of cases. Lacking maternal genetic material, it exhibits **diffuse hydropic swelling** of all chorionic villi with circumferential trophoblastic proliferation and no embryonic tissue.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hydatidiform-mole-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Hydatidiform mole with vesicular hydropic villi. Credit: StewardMD.",
+        "alt": "Gross and microscopic vesicular architecture of hydatidiform mole."
+      }
+    },
+    {
+      "say": "Partial hydatidiform mole develops from the dispermic fertilization of a normal haploid ovum by two sperm, creating a triploid karyotype such as sixty nine XXY or sixty nine XXX. In contrast to complete moles, partial moles exhibit identifiable fetal or embryonic tissue, focal rather than diffuse villous swelling, scalloped chorionic villi, and prominent trophoblastic stromal inclusions.",
+      "tx": "A **partial hydatidiform mole** arises through dispermic fertilization of a normal haploid ovum by two sperm, generating a **triploid karyotype** (69,XXY or 69,XXX). Unlike complete moles, partial moles feature identifiable **fetal tissue**, focal hydropic villi with scalloped margins, and prominent trophoblastic pseudoinclusions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complete Hydatidiform Mole",
+          "points": [
+            "Diploid (46,XX in 90%); androgenetic origin",
+            "No fetal tissue or embryonic red blood cells",
+            "Diffuse hydropic villous swelling and hyperplasia",
+            "15 to 20 percent risk of persistent GTN"
+          ]
+        },
+        "right": {
+          "title": "Partial Hydatidiform Mole",
+          "points": [
+            "Triploid (69,XXY or 69,XXX); biparental origin",
+            "Identifiable fetal parts and nucleated red cells",
+            "Focal villous hydrops and scalloped outlines",
+            "Less than 5 percent risk of persistent GTN"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Pelvic ultrasound of a complete hydatidiform mole classically reveals a diffuse intra-uterine echogenic mass with innumerable tiny sonolucent spaces, known as a snowstorm or bunch of grapes appearance. Hyperstimulation from massive hCG concentrations frequently causes bilateral theca lutein ovarian cysts, which spontaneously regress following molar evacuation.",
+      "tx": "Pelvic ultrasonography of a complete mole demonstrates a distinctive intrauterine **snowstorm appearance** with multiple cystic sonolucencies devoid of fetal anatomy. Extremely elevated hCG levels frequently stimulate bilateral multilocular **theca lutein cysts**, which resolve spontaneously over several months following **uterine evacuation**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Massive syncytiotrophoblastic proliferation generates high hCG"
+          },
+          {
+            "id": "b",
+            "label": "Intrauterine ultrasound shows snowstorm or bunch-of-grapes pattern"
+          },
+          {
+            "id": "c",
+            "label": "Cross-activation of ovarian LH receptors by abundant hCG"
+          },
+          {
+            "id": "d",
+            "label": "Bilateral theca lutein cysts enlarge and resolve post-evacuation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Suction curettage under real-time ultrasound guidance is the gold standard method for evacuating a hydatidiform mole, regardless of uterine size. Clinicians avoid medical induction with oxytocin or prostaglandins prior to mechanical evacuation because intense myometrial contractions significantly increase the hazard of trophoblastic embolization to the maternal pulmonary vasculature.",
+      "tx": "**Suction curettage** under real-time ultrasound visualization represents the definitive management for molar evacuation regardless of gestational size. Medical pre-treatment with prostaglandins or oxytocin is strictly contraindicated before cervical evacuation to eliminate the risk of massive **trophoblastic pulmonary embolization** driven by uterine contractions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Recommended Evacuation Method",
+          "points": [
+            "Suction evacuation using large-bore cannula",
+            "Real-time intraoperative ultrasound guidance",
+            "Avoid oxytocin infusion before aspiration to prevent emboli",
+            "Send all evacuated tissue for histopathology"
+          ]
+        },
+        "right": {
+          "title": "Contraindicated Interventions",
+          "points": [
+            "Prostaglandin or oxytocin induction before evacuation",
+            "Aggressive sharp curettage risking perforation",
+            "Routine prophylactic systemic chemotherapy",
+            "Delayed evacuation allowing tumor progression"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Following molar evacuation, weekly serum beta hCG measurements are monitored until levels normalize, followed by monthly surveillance for six months. Gestational trophoblastic neoplasia is diagnosed when hCG levels plateau across four measurements over three weeks, rise by more than ten percent across three values over two weeks, or remain elevated beyond six months.",
+      "tx": "Post-evacuation surveillance requires weekly serum **beta-hCG monitoring** until levels normalize, followed by monthly assays for 6 months. Post-molar **gestational trophoblastic neoplasia** is diagnosed if hCG values **plateau across 4 measurements** over 3 weeks, rise by more than 10 percent across 3 measurements over 2 weeks, or persist past 6 months.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Weekly serum quantitative beta-hCG post-evacuation"
+          },
+          {
+            "id": "b",
+            "label": "Evaluate beta-hCG plateau across 4 measurements over 3 weeks"
+          },
+          {
+            "id": "c",
+            "label": "Evaluate rise: 3 consecutive values rise >10% over 2 weeks"
+          },
+          {
+            "id": "d",
+            "label": "Diagnose post-molar GTN using standardized diagnostic criteria"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ],
+        "left": {
+          "title": "Post-Molar GTN Diagnostic Criteria",
+          "points": [
+            "Serum beta-hCG plateau across 4 values over 3 weeks",
+            "Serum hCG rise >10% across 3 values over 2 weeks",
+            "Persistent elevated hCG beyond 6 months",
+            "Histological diagnosis of choriocarcinoma"
+          ]
+        },
+        "right": {
+          "title": "Post-Evacuation Monitoring",
+          "points": [
+            "Weekly quantitative hCG until normal for 3 weeks",
+            "Monthly hCG assays for 6 consecutive months",
+            "Strict contraception throughout surveillance",
+            "Pelvic examination for theca lutein cysts"
+          ]
+        },
+        "caption": "Post-molar GTN diagnostic criteria including beta-hCG plateau. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Gestational trophoblastic neoplasia is scored using the FIGO modified World Health Organization prognostic scoring system. Patients with a score of zero to six have low risk disease, whereas a score of seven or greater defines high risk neoplasia. High risk status demands multiagent combination chemotherapy to achieve durable remission.",
+      "tx": "The **FIGO modified WHO prognostic scoring** system stratifies gestational trophoblastic neoplasia into **low-risk disease** (score 0 to 6) and **high-risk disease** (score 7 or greater). Risk stratification incorporates maternal age, antecedent pregnancy type, interval from index pregnancy, pre-treatment hCG, tumor size, and site and number of metastases.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-gtn.webp",
+        "ar": 1.3333,
+        "caption": "FIGO anatomical staging and FIGO-WHO score matrix for GTN. Credit: StewardMD.",
+        "alt": "FIGO staging and WHO prognostic scoring matrix for gestational trophoblastic neoplasia."
+      }
+    },
+    {
+      "say": "Low risk gestational trophoblastic neoplasia achieves a nearly one hundred percent cure rate using single agent chemotherapy. Intramuscular methotrexate with folinic acid rescue or pulsed intravenous dactinomycin serves as first line therapy. Single agent treatment continues until hCG normalizes, followed by two to three consolidation cycles to eliminate residual microscopic disease.",
+      "tx": "Patients with low-risk GTN (FIGO score 0 to 6) achieve near 100 percent cure using **single-agent chemotherapy**. First-line regimens employ intramuscular **methotrexate with folinic acid** rescue (eight-day regimen) or pulsed **dactinomycin**. Chemotherapy continues until serum hCG normalizes, followed by 2 to 3 consolidation cycles to prevent relapse.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low-Risk GTN Regimen (Score 0-6)",
+          "points": [
+            "Single-agent methotrexate with folinic acid",
+            "Alternative: pulsed intravenous dactinomycin",
+            "Primary cure rate exceeds 90 percent",
+            "Consolidate with 2 to 3 cycles post-normalization"
+          ]
+        },
+        "right": {
+          "title": "High-Risk GTN Regimen (Score >=7)",
+          "points": [
+            "Multi-agent EMA-CO combination chemotherapy",
+            "Etoposide, methotrexate, dactinomycin, cyclophosphamide, vincristine",
+            "Overall survival exceeds 85 to 90 percent",
+            "Consolidate with 3 to 4 cycles past zero hCG"
+          ]
+        }
+      }
+    },
+    {
+      "say": "High risk gestational trophoblastic neoplasia requires multiagent chemotherapy using the EMA-CO regimen. This protocol combines etoposide, methotrexate, and dactinomycin on day one and two, followed by cyclophosphamide and vincristine on day eight. Treatment achieves over eighty five percent long term survival in high risk metastatic choriocarcinoma.",
+      "tx": "High-risk GTN (FIGO score 7 or greater) mandates multi-agent chemotherapy with the **EMA-CO regimen**, combining **etoposide, methotrexate, and dactinomycin** on days 1 and 2 with **cyclophosphamide and vincristine** on day 8. This intensive protocol achieves sustained remission in over 85 to 90 percent of patients with metastatic choriocarcinoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Chemotherapy Agent",
+          "Dosing Schedule in EMA-CO",
+          "Mechanism and Role"
+        ],
+        "rows": [
+          [
+            "Etoposide (VP-16)",
+            "Day 1 and Day 2",
+            "Topoisomerase II inhibitor; highly active against trophoblasts"
+          ],
+          [
+            "Methotrexate + Folinic acid",
+            "Day 1 (infusion) + Day 2 (rescue)",
+            "Antifolate antimetabolite with systemic leukovorin rescue"
+          ],
+          [
+            "Dactinomycin (Actinomycin D)",
+            "Day 1 and Day 2",
+            "DNA intercalating agent; synergistic with methotrexate"
+          ],
+          [
+            "Cyclophosphamide + Vincristine",
+            "Day 8 alternating cycle",
+            "Alkylating agent and mitotic tubulin inhibitor"
+          ]
+        ]
+      }
+    }
+  ]
+}

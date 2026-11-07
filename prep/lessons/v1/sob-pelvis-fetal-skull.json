@@ -1,0 +1,281 @@
+{
+  "v": 1,
+  "module": "sob-pelvis-fetal-skull",
+  "title": "Pelvic Anatomy, Pelvimetry, Fetal Skull Diameters, Fontanelles, and Moulding",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 2 (Maternal Anatomy), Ch 13 (The Normal Newborn)",
+    "Ten Teachers Gynaecology 21e",
+    "ACOG Practice Bulletin on Dystocia and Pelvimetry"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The pelvic inlet represents the superior boundary of the true pelvis through which the fetal presenting part must engage. The obstetric conjugate is the shortest anteroposterior diameter, measuring ten point five centimetres between the sacral promontory and the closest posterior point of the pubic symphysis. Clinicians estimate it by subtracting one point five to two centimetres from the manually measured diagonal conjugate.",
+      "tx": "The **obstetric conjugate** is the critical anteroposterior diameter of the pelvic inlet, measuring 10.5 cm from the sacral promontory to the closest posterior point of the pubic symphysis. Because it cannot be palpated directly, examiners calculate it by measuring the **diagonal conjugate** clinically and subtracting **1.5 to 2.0 cm**.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-mod-maternal-pelvis.webp",
+        "ar": 1.3333,
+        "caption": "Maternal bony pelvis model displaying inlet planes and spines. Credit: StewardMD.",
+        "alt": "Anatomical model of the maternal pelvis showing inlet conjugate and midpelvis."
+      }
+    },
+    {
+      "say": "The midpelvis is bounded anteriorly by the lower symphysis pubis and posteriorly by the sacrum at the level of the ischial spines. The transverse interspinous diameter measures ten to ten point five centimetres, forming the narrowest plane of the birth canal. Fetal station zero is clinically designated when the leading bony point reaches this interspinous level.",
+      "tx": "The transverse **interspinous diameter** between the ischial spines measures 10.0 to 10.5 cm, demarcating the narrowest plane of the pelvic canal within the midpelvis. The plane of the ischial spines defines **station zero**, confirming that the widest presenting fetal diameter has successfully navigated the **pelvic inlet**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Fetal presenting part descends through pelvic inlet"
+          },
+          {
+            "id": "b",
+            "label": "Leading bony vertex reaches level of ischial spines"
+          },
+          {
+            "id": "c",
+            "label": "Engagement confirmed at narrowest midpelvic transverse plane"
+          },
+          {
+            "id": "d",
+            "label": "Station zero documented with 10.0 to 10.5 cm clearance"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Caldwell-Moloy classification categorizes the female bony pelvis into four distinct morphological types based on inlet architecture. The gynecoid pelvis is round and found in fifty percent of women, offering optimal obstetric dimensions. The android pelvis is heart-shaped and occurs in twenty five percent, anthropoid is anteroposteriorly oval in twenty percent, and platypelloid is transversely flattened in five percent.",
+      "tx": "The **Caldwell-Moloy classification** delineates four basic pelvic architectures. The classic **gynecoid pelvis** is rounded and present in 50 percent of women, providing the most favorable mechanics. The **android pelvis** is heart-shaped in 25 percent, anthropoid is anteroposteriorly oval in 20 percent, and platypelloid is transversely flattened in 5 percent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pelvic Type",
+          "Prevalence and Shape",
+          "Obstetric Significance"
+        ],
+        "rows": [
+          [
+            "Gynecoid",
+            "50 percent; round inlet with wide pubic arch",
+            "Ideal pelvic architecture for spontaneous vaginal delivery"
+          ],
+          [
+            "Android",
+            "25 percent; heart-shaped inlet with narrow subpubic angle",
+            "Funnel pelvis; favors occiput posterior and deep transverse arrest"
+          ],
+          [
+            "Anthropoid",
+            "20 percent; long oval AP diameter with narrow transverse",
+            "Favors direct occiput posterior or occiput anterior engagement"
+          ],
+          [
+            "Platypelloid",
+            "5 percent; flat transverse oval with shortened AP",
+            "Favors transverse engagement; high rate of inlet obstruction"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The suboccipitobregmatic diameter is the presenting anteroposterior dimension when the fetal head is fully flexed in vertex presentation. Measuring nine point five centimetres from beneath the occipital protuberance to the centre of the anterior fontanelle, it presents the smallest possible head circumference to the maternal birth canal.",
+      "tx": "The **suboccipitobregmatic diameter** measures 9.5 cm from the undersurface of the occiput to the center of the anterior fontanelle, or bregma. Presenting in a **fully flexed vertex** position, this favorable dimension presents the minimal possible cross-sectional circumference of **32 cm** to traverse the maternal birth canal.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-mod-fetal-skull.webp",
+        "ar": 1.3333,
+        "caption": "Fetal skull model showing cranial sutures and fontanelles. Credit: StewardMD.",
+        "alt": "Anatomical fetal skull model detailing presenting diameters and suture lines."
+      }
+    },
+    {
+      "say": "Deflexion of the fetal head alters the presenting diameter and increases mechanical resistance in labour. In a deflexed military vertex presentation, the head neither flexes nor extends, presenting the occipitofrontal diameter. This dimension measures eleven point five centimetres from the glabella to the external occipital protuberance.",
+      "tx": "In a deflexed or military vertex presentation, incomplete flexion forces the **occipitofrontal diameter** into the pelvic brim. Measuring 11.5 cm from the glabella above the nasal root to the external **occipital protuberance**, this enlarged diameter presents an increased circumference of 34 cm, frequently slowing cervical **dilatation and descent**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fully Flexed Vertex Presentation",
+          "points": [
+            "Presents suboccipitobregmatic diameter",
+            "Diameter measures 9.5 cm",
+            "Circumference measures 32 cm",
+            "Navigates midpelvis with minimal resistance"
+          ]
+        },
+        "right": {
+          "title": "Deflexed Military Vertex",
+          "points": [
+            "Presents occipitofrontal diameter in military attitude",
+            "Diameter measures 11.5 cm",
+            "Circumference measures 34 cm",
+            "Causes prolonged active phase of labour"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Brow presentation occurs when the fetal head is midway between complete flexion and full extension. It presents the mentovertical diameter, measuring thirteen point five centimetres from the chin to the highest point of the vertex. Because this exceeds normal pelvic inlet diameters, vaginal delivery of a term fetus is mechanically impossible unless spontaneous conversion occurs.",
+      "tx": "The **mentovertical diameter** extends 13.5 cm from the midpoint of the chin to the highest point on the sagittal suture. As the largest anteroposterior dimension of the fetal head, it presents in **brow presentation** and exceeds normal inlet diameters, making vaginal delivery of a living term fetus **mechanically impossible**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Partial extension of fetal head midway toward face"
+          },
+          {
+            "id": "b",
+            "label": "Mentovertical diameter of 13.5 cm presents at pelvic inlet as the largest diameter"
+          },
+          {
+            "id": "c",
+            "label": "Diameter exceeds available obstetric conjugate (10.5 cm)"
+          },
+          {
+            "id": "d",
+            "label": "Complete arrest of descent requiring caesarean delivery"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ],
+        "left": {
+          "title": "Brow Presentation Diameters",
+          "points": [
+            "Mentovertical diameter presents as largest diameter (13.5 cm)",
+            "Extends from chin to highest vertex point",
+            "Circumference measures 36 cm",
+            "Mechanically impossible to deliver vaginally"
+          ]
+        },
+        "right": {
+          "title": "Delivery Management",
+          "points": [
+            "Spontaneous conversion to vertex or face is rare",
+            "Attempted manual conversion contraindicated",
+            "Arrests descent at pelvic inlet",
+            "Mandates immediate caesarean section"
+          ]
+        },
+        "caption": "Brow presentation with mentovertical diameter as the largest diameter. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Complete hyperextension of the fetal head produces a face presentation, placing the fetal occiput against the dorsal spine. The presenting diameter is the submentobregmatic diameter, which measures nine point five centimetres from the junction of the chin and neck to the anterior fontanelle. Spontaneous vaginal delivery can occur only if the chin rotates anteriorly.",
+      "tx": "Full cephalic extension produces a **face presentation**, presenting the **submentobregmatic diameter** measuring 9.5 cm from the submental neck junction to the anterior fontanelle. Although equivalent in length to the suboccipitobregmatic, successful vaginal delivery occurs only when the fetal chin rotates into a **mentoanterior position**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cephalic Attitude",
+          "Presenting Diameter",
+          "Length",
+          "Delivery Prognosis"
+        ],
+        "rows": [
+          [
+            "Complete flexion",
+            "Suboccipitobregmatic",
+            "9.5 cm",
+            "Optimal; normal spontaneous vaginal delivery"
+          ],
+          [
+            "Mild deflexion",
+            "Occipitofrontal",
+            "11.5 cm",
+            "Slow progress; often flexes spontaneously with descent"
+          ],
+          [
+            "Partial extension",
+            "Mentovertical",
+            "13.5 cm",
+            "Brow presentation; absolute dystocia requiring caesarean"
+          ],
+          [
+            "Full hyperextension",
+            "Submentobregmatic",
+            "9.5 cm",
+            "Face presentation; vaginal delivery possible only if mentoanterior"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The biparietal diameter represents the greatest transverse diameter of the fetal skull, measuring nine point five centimetres between the two parietal eminences at term. During labour, cranial moulding allows the parietal bones to overlap the frontal and occipital bones, reducing presenting dimensions to facilitate pelvic transit without intracranial injury.",
+      "tx": "The **biparietal diameter** measures 9.5 cm at term between the lateral parietal eminences, serving as the maximal transverse dimension of the fetal head. During descent, mechanical compression produces physiological **cranial moulding**, wherein the parietal bones overlap adjacent cranial bones along unossified **suture lines** to reduce presenting head dimensions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Biparietal diameter (9.5 cm) engages transverse pelvic plane"
+          },
+          {
+            "id": "b",
+            "label": "External compressive forces exerted by birth canal walls"
+          },
+          {
+            "id": "c",
+            "label": "Parietal bones slide under occipital and frontal bones"
+          },
+          {
+            "id": "d",
+            "label": "Controlled head diameter reduction enables safe pelvic passage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

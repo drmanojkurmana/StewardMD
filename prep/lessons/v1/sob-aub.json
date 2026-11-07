@@ -1,0 +1,258 @@
+{
+ "v": 1,
+ "module": "sob-aub",
+ "title": "Abnormal Uterine Bleeding: FIGO PALM-COEIN Classification and Management",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Ten Teachers Gynaecology 21e Ch 4 (Abnormal Uterine Bleeding)",
+  "Williams Obstetrics 25e",
+  "FIGO System 1 and System 2 (PALM-COEIN) for AUB (Munro et al.)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The standardized **FIGO PALM-COEIN classification system** systematically categorizes abnormal uterine bleeding (AUB) in non-gravid reproductive-aged women into **structural causes (PALM)**\u2014Polyp (AUB-P), Adenomyosis (AUB-A), Leiomyoma (AUB-L), and Malignancy/hyperplasia (AUB-M)\u2014and **non-structural causes (COEIN)**: Coagulopathy, Ovulatory dysfunction, Endometrial, Iatrogenic, and Not otherwise classified.",
+   "say": "The International Federation of Gynecology and Obstetrics developed the PALM-COEIN classification to replace ambiguous historical terms like menorrhagia and metrorrhagia. Structural pathologies that can be evaluated on imaging or tissue histology comprise the PALM group: polyp, adenomyosis, leiomyoma, and malignancy. Non-structural disorders form the COEIN group: coagulopathy, ovulatory dysfunction, endometrial disorders, iatrogenic causes, and unclassified.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-aub-fig1.webp",
+    "ar": 1.7778,
+    "caption": "FIGO PALM-COEIN classification system for abnormal uterine bleeding. Credit: StewardMD.",
+    "alt": "Structured diagram summarizing the nine categories of the FIGO PALM-COEIN classification for abnormal uterine bleeding in non-pregnant women."
+   }
+  },
+  {
+   "tx": "Under **FIGO System 1**, normal menstrual parameters define regularity, frequency, duration, and volume: frequency is **24 to 38 days** (absent if amenorrhoea); duration is **<=8 days** (prolonged if >8 days); and regularity cycle variation is **<=7 to 9 days**. The confusing term 'dysfunctional uterine bleeding' (DUB) has been completely abolished from clinical practice. Clinically, key parameters encompass cycle frequency, normal duration.",
+   "say": "FIGO System One establishes clear clinical nomenclature for menstrual parameters, eliminating antiquated and confusing terminology. Normal cycles occur every twenty-four to thirty-eight days, last eight days or fewer, and exhibit cycle-to-cycle variation under nine days. Heavy menstrual bleeding is defined clinically as excessive menstrual blood loss that interferes with a woman's physical, emotional, and social quality of life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Menstrual Parameter",
+     "Normal Clinical Range",
+     "Abnormal Clinical Designation"
+    ],
+    "rows": [
+     [
+      "Cycle frequency",
+      "24 to 38 days",
+      "Frequent (< 24 days) or Infrequent (> 38 days)"
+     ],
+     [
+      "Cycle regularity",
+      "Variation <= 7 to 9 days",
+      "Irregular menstrual cycle (variation >= 10 days)"
+     ],
+     [
+      "Bleeding duration",
+      "Under or equal to 8 days",
+      "Prolonged menstrual bleeding (> 8 days)"
+     ],
+     [
+      "Blood loss volume",
+      "Does not impair quality of life",
+      "Heavy Menstrual Bleeding (AUB/HMB)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screening for underlying **coagulopathies (AUB-C)**, particularly **von Willebrand disease** (present in up to 20 percent of adolescent girls presenting with heavy menstrual bleeding), uses a structured clinical questionnaire: heavy menses since menarche, history of postpartum haemorrhage, surgery-related bleeding, or bleeding associated with dental work. Clinically, key parameters encompass endometrial biopsy, age threshold, endometrial cancer risk, 45.",
+   "say": "Systematic screening for coagulopathy is vital, especially in adolescents presenting with severe heavy menses since menarche. Up to twenty percent of these young women have an inherited bleeding diathesis, most commonly type one von Willebrand disease. A positive structured clinical history warrants comprehensive testing with complete blood count, prothrombin time, APTT, and von Willebrand factor antigen and activity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Screen: HMB since menarche, PPH, surgical bleeding, epistaxis, or dental bleeding"
+     },
+     {
+      "id": "b",
+      "label": "Positive screening history warrants hematological evaluation"
+     },
+     {
+      "id": "c",
+      "label": "Laboratory panel: PT, APTT, von Willebrand factor antigen and activity"
+     },
+     {
+      "id": "d",
+      "label": "Confirm diagnosis: von Willebrand disease, platelet dysfunction, or hemophilia carrier"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Endometrial sampling** (Pipelle aspiration biopsy or hysteroscopy with targeted biopsy) is mandatory to rule out endometrial hyperplasia and carcinoma in all women **aged >=45 years** presenting with AUB, and in women **aged <45 years with risk factors**: obesity (BMI >=30), chronic anovulation (PCOS), diabetes, nulliparity, or Lynch syndrome. Clinically, key parameters encompass sonohysterography, diagnostic hysteroscopy, intracavitary lesions.",
+   "say": "Histological evaluation of the endometrium is an absolute requirement to exclude malignancy in any woman aged forty-five and older presenting with abnormal bleeding. In younger patients under forty-five, sampling is indicated if risk factors for hyperestrogenism exist, particularly morbid obesity, polycystic ovary syndrome, chronic anovulatory cycles, tamoxifen therapy, or a family history of Lynch syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mandatory Sampling (Age >= 45)",
+     "points": [
+      "All women aged >= 45 years with AUB",
+      "Persistent intermenstrual or irregular bleeding",
+      "Postmenopausal bleeding (endometrial stripe > 4 mm)"
+     ]
+    },
+    "right": {
+     "title": "Selective Sampling (Age < 45)",
+     "points": [
+      "Severe obesity (BMI >= 30 kg/m2) and chronic anovulation",
+      "Polycystic ovary syndrome and prolonged amenorrhoea",
+      "Failure of first-line medical therapy or tamoxifen use",
+      "Hereditary non-polyposis colorectal cancer (Lynch)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **levonorgestrel-releasing intrauterine system** (**LNG-IUS 52 mg**, Mirena) is the most effective first-line medical therapy for heavy menstrual bleeding without structural abnormalities, reducing menstrual blood loss by **70 to 90 percent** through intense local endometrial glandular atrophy and stromal decidualization. Clinically, key parameters encompass blood loss reduction, first-line therapy.",
+   "say": "The fifty-two milligram levonorgestrel intrauterine system represents the gold standard medical therapy for heavy menstrual bleeding. By releasing twenty micrograms of levonorgestrel directly into the uterine cavity daily, it induces profound local endometrial glandular suppression without inhibiting systemic ovulation. It reduces objective menstrual blood loss by seventy to ninety percent, outperforming oral alternatives.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Modality",
+     "Reduction in Menstrual Loss",
+     "Key Non-Contraceptive Benefit"
+    ],
+    "rows": [
+     [
+      "LNG-IUS (52 mg Mirena)",
+      "70 to 90% reduction in blood loss",
+      "Provides 8 years of premier reversible contraception"
+     ],
+     [
+      "Oral Tranexamic Acid",
+      "40 to 50% reduction in blood loss",
+      "Taken non-hormonally only during heavy flow days"
+     ],
+     [
+      "Combined Oral Contraceptives",
+      "35 to 45% reduction in blood loss",
+      "Regulates cycle predictability and reduces dysmenorrhoea"
+     ],
+     [
+      "Oral Progestins (luteal phase)",
+      "Minimal (< 15%) reduction in loss",
+      "Ineffective for heavy bleeding; regulates cycle only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-hormonal medical options taken during menses comprise antifibrinolytics (**tranexamic acid**, 1 g to 1.5 g orally three times daily during heavy flow days, reducing blood loss by 40-50% without increasing thrombotic events) and **NSAIDs** (mefenamic acid, reducing blood loss by 20-30% by inhibiting endometrial prostaglandin synthesis). Clinically, key parameters encompass non-hormonal therapy, 3.",
+   "say": "For women desiring non-hormonal treatment or attempting conception, antifibrinolytic therapy with oral tranexamic acid is highly effective. Taken at one gram three times daily only during heavy flow days, it competitively blocks plasminogen activation, reducing blood loss by nearly half without increasing venous thrombosis. Non-steroidal anti-inflammatory drugs like mefenamic acid reduce prostaglandin-mediated hyperaemia and relieve dysmenorrhoea.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Excessive endometrial tissue plasminogen activator (tPA) during menses"
+     },
+     {
+      "id": "b",
+      "label": "Oral tranexamic acid competitively binds plasminogen lysine sites"
+     },
+     {
+      "id": "c",
+      "label": "Inhibition of fibrin clot breakdown and stabilization of hemostatic plugs"
+     },
+     {
+      "id": "d",
+      "label": "40 to 50 percent objective reduction in menstrual blood volume"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute severe abnormal uterine bleeding requires rapid medical stabilization: high-dose **intravenous conjugated equine estrogen** (25 mg IV every 4 to 6 hours for up to 24 hours, inducing rapid endothelial regrowth over denuded capillaries) or high-dose oral progestins (**medroxyprogesterone acetate** 20 mg three times daily or tranexamic acid 1 g IV). Clinically, key parameters encompass acute AUB, conjugated estrogens, Foley tamponade.",
+   "say": "Acute catastrophic uterine haemorrhage requires aggressive haemostatic intervention. Intravenous conjugated estrogen given at twenty-five milligrams every four to six hours promotes rapid vasospasm and stimulates immediate re-epithelialisation over bare capillaries. Alternatively, high-dose oral progestin tapers or intravenous tranexamic acid rapidly arrest acute haemorrhage while volume resuscitation proceeds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intravenous Conjugated Estrogen",
+     "points": [
+      "Dose: 25 mg IV every 4 to 6 hours (max 24 hours)",
+      "Rapid capillary endothelial proliferation and platelet aggregation",
+      "Follow immediately with oral progestin to prevent re-bleeding"
+     ]
+    },
+    "right": {
+     "title": "High-Dose Oral Progestin Taper",
+     "points": [
+      "Medroxyprogesterone 20 mg TID or Norethisterone 5 mg TID",
+      "Halts bleeding within 24 to 48 hours by stabilizing stroma",
+      "Taper slowly over 10 to 14 days, anticipating withdrawal bleed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For women with AUB-E or AUB-O who have completed childbearing and failed medical therapy, **second-generation endometrial ablation** (bipolar radiofrequency Novasure, thermal balloon, or cryoablation) destroys the basalis layer, achieving amenorrhoea or light menses in over 85 percent, with lower operative morbidity than **hysterectomy**. Clinically, key parameters encompass hysterectomy alternative.",
+   "say": "Second-generation non-resectoscopic endometrial ablation provides a superb minimally invasive alternative to hysterectomy for women who have completed their families. Technologies such as radiofrequency bipolar ablation or heated fluid balloons completely destroy the endometrial basalis layer. Over eighty-five percent of women achieve complete amenorrhoea or satisfactory hypomenorrhoea with day-case recovery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Procedure",
+     "Clinical Indication",
+     "Key Procedural Requirement"
+    ],
+    "rows": [
+     [
+      "Endometrial ablation (Novasure)",
+      "Failed medical therapy; completed family; normal cavity",
+      "Pre-procedure biopsy must exclude hyperplasia/cancer; contraception required"
+     ],
+     [
+      "Hysteroscopic polypectomy/myomectomy",
+      "AUB-P (polyps) or AUB-L (submucous fibroids)",
+      "Direct visual resectoscopic excision preserves native uterus"
+     ],
+     [
+      "Total laparoscopic hysterectomy",
+      "Refractory AUB; adenomyosis; completed childbearing",
+      "Definitive cure; eliminates risk of cervical and uterine malignancy"
+     ]
+    ]
+   }
+  }
+ ]
+}

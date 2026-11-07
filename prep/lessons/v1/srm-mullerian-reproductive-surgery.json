@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "srm-mullerian-reproductive-surgery",
+  "title": "Mullerian Anomalies and Reproductive Surgery",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Gynecology by Ten Teachers 21e Ch 6",
+    "ASRM Mullerian Anomalies Classification 2021",
+    "ASRM Committee Opinion on Uterine Fibroids and Reproductive Outcomes"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The American Society for Reproductive Medicine updated its Mullerian anomalies classification system in 2021. The revised framework categorizes congenital malformations into Mullerian agenesis, cervical agenesis, unicornuate, didelphys, bicornuate, septate, and arcuate variants.",
+      "tx": "The landmark **ASRM 2021 classification** updates congenital reproductive taxonomy, organizing complex **Mullerian anomalies** based on embryological arrest, fusion, and resorption defects. The classification categorizes variants into agenesis, unicornuate uterus, uterine didelphys, bicornuate morphology, **septate uterus**, and arcuate contours to standardize diagnostic and surgical pathways.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/ana-urogenital-s3.webp",
+        "ar": 1.3333,
+        "caption": "Embryological development of paramesonephric Mullerian duct derivatives. Credit: StewardMD.",
+        "alt": "Anatomical schematic showing Mullerian duct fusion and canalization."
+      }
+    },
+    {
+      "say": "Mayer-Rokitansky-Kuster-Hauser syndrome represents congenital Mullerian agenesis in genetic 46,XX females. Patients present with primary amenorrhea due to congenital absence of the uterus and upper two-thirds of the vagina, while preserving normal ovarian function and breast development.",
+      "tx": "The clinical condition known as **MRKH syndrome** arises from complete **Mullerian agenesis** in individuals with a normal **46,XX** karyotype. Patients present with congenital absence of the uterus and the upper 2 thirds of the vagina, whereas intact follicular steroidogenesis ensures normal secondary sexual characteristics, female body habitus, and regular ovulatory function.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MRKH Syndrome (Mullerian Agenesis)",
+          "points": [
+            "Karyotype: 46,XX with normal female testosterone levels",
+            "Ovaries: completely normal histology, steroidogenesis, and ovulation",
+            "Anatomy: absent uterus and upper two-thirds of vagina; normal pubic hair"
+          ]
+        },
+        "right": {
+          "title": "Complete Androgen Insensitivity (CAIS)",
+          "points": [
+            "Karyotype: 46,XY with elevated male testosterone levels",
+            "Gonads: cryptorchid or intra-abdominal testes; absent ovaries",
+            "Anatomy: absent uterus, blind vagina, absent or sparse pubic and axillary hair"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Differentiating between a septate and a bicornuate uterus is crucial because their clinical management is entirely different. An external fundal notch deeper than one centimeter on three-dimensional ultrasound or MRI defines a bicornuate uterus, whereas a flat or shallow notch confirms a septum.",
+      "tx": "Accurate differential diagnosis between **septate vs bicornuate** anatomy relies on assessing the external **fundal contour** using **3D ultrasound** or MRI. An external fundal indentation exceeding 1 cm confirms fusion failure in a bicornuate uterus, whereas a flat, convex, or minimal cleft under 1 cm confirms an internal resorption defect in a septate uterus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Imaging / Anatomical Feature",
+          "Septate Uterus",
+          "Bicornuate Uterus"
+        ],
+        "rows": [
+          [
+            "External Fundal Contour",
+            "Flat, convex, or shallow notch (< 1 cm)",
+            "Deep fundal cleft / indentation (> 1 cm)"
+          ],
+          [
+            "Myometrial Horn Separation",
+            "Single muscular fundal envelope",
+            "Two distinct divergent muscular fundal horns"
+          ],
+          [
+            "Intercornual Angle",
+            "Narrow acute angle (< 75 degrees)",
+            "Wide divergent angle (> 105 degrees)"
+          ],
+          [
+            "Primary Surgical Approach",
+            "Hysteroscopic metroplasty (transcervical)",
+            "Strassman metroplasty (reserved for loss)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Hysteroscopic metroplasty represents the minimally invasive surgical procedure of choice for a symptomatic uterine septum. Dividing the midline partition with cold scissors or a miniature needle electrode avoids incision into vascular myometrium, successfully enlarging the functional cavity.",
+      "tx": "Transcervical **hysteroscopic metroplasty** is the surgical standard of care for a symptomatic uterine septum causing recurrent miscarriages. Utilizing miniature **cold scissors** or needle electrodes achieves precise **septum resection** along the avascular midline, avoiding dangerous myometrial incisions and eliminating the need for transabdominal laparotomy or prolonged recovery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Insert operative resectoscope or micro-scissors transcervically under direct vision"
+          },
+          {
+            "id": "b",
+            "label": "Divide central avascular fibrous septum horizontally midway between tubal ostia"
+          },
+          {
+            "id": "c",
+            "label": "Halt incision once vascularized myometrial tissue boundary is reached"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Abdominal Strassman metroplasty entails unification of separate uterine horns via a transfundal wedge resection. This major reconstructive operation is reserved strictly for symptomatic bicornuate uteri causing recurrent mid-trimester miscarriages, and is never indicated for a septate uterus.",
+      "tx": "The historic transabdominal **Strassman metroplasty** involves bivalving and unifying separate uterine horns across a transverse fundal incision. This extensive reconstructive surgery is indicated exclusively for a **bicornuate uterus** complicated by repetitive mid-trimester **fetal loss**, and must never be applied to a septate uterus amenable to hysteroscopy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hysteroscopic Metroplasty",
+          "points": [
+            "Standard surgical procedure for septate uterus",
+            "Endoscopic incision of avascular midline fibrous partition",
+            "Outpatient day care; allows conception after 2 to 3 months"
+          ]
+        },
+        "right": {
+          "title": "Strassman Metroplasty",
+          "points": [
+            "Indicated strictly for refractory bicornuate uterus with recurrent loss",
+            "Open transabdominal fundal unification and wedge reconstruction",
+            "Mandates subsequent delivery strictly by elective caesarean section"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Surgical management of severe Asherman syndrome requires delicate hysteroscopic adhesiolysis to re-establish cavity symmetry. Postoperative placement of an intrauterine stent and thirty days of high-dose estradiol promotes rapid mucosal re-epithelialization, preventing recurrence of synechiae.",
+      "tx": "Treatment of **Asherman syndrome** begins with meticulous **hysteroscopic adhesiolysis** under fluoroscopic or laparoscopic guidance to clear dense fibrous bands. Following surgery, a temporary **postoperative stent** (such as a pediatric Foley catheter) is placed alongside high-dose oral estradiol (4 to 6 mg daily for 30 days) to drive regenerative endometrial proliferation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Fluoroscopic-guided hysteroscopic division of dense central and marginal synechiae"
+          },
+          {
+            "id": "b",
+            "label": "Insert pediatric Foley catheter or triangular silicone stent into cavity for 7 days"
+          },
+          {
+            "id": "c",
+            "label": "Prescribe oral estradiol 4 to 6 mg daily for 30 days followed by progestin withdrawal"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Uterine leiomyomas compromising the endometrial lining significantly impair blastocyst implantation and elevate miscarriage risks. Surgical myomectomy is indicated prior to assisted reproduction for completely intracavitary FIGO type 0, type 1, and cavity-distorting type 2 fibroids.",
+      "tx": "Uterine leiomyomas compromising cavity geometry drastically reduce implantation and live birth rates in assisted reproduction. According to reproductive guidelines, any **submucosal fibroid** classified as **FIGO Type 0** (completely intracavitary) or Type 1, as well as intramural lesions impinging on the cavity (FIGO Type 2), warrant **myomectomy prior to ART**.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-fibroid-fig1.webp",
+        "ar": 1.3333,
+        "caption": "FIGO classification and surgical mapping of uterine leiomyomas. Credit: StewardMD.",
+        "alt": "Classification of uterine fibroids showing submucosal and intramural types."
+      }
+    },
+    {
+      "say": "Microsurgical tubal reanastomosis provides an effective reconstructive alternative to in vitro fertilization in selected young women following tubal sterilization. Women under thirty-five years with at least four centimeters of healthy residual fallopian tube achieve pregnancy rates of sixty-five to seventy-five percent.",
+      "tx": "Laparoscopic or open **tubal reanastomosis** provides excellent reproductive outcomes following previous **tubal ligation reversal**. Highly selected candidates aged under 35 years with more than 4 cm of healthy **residual tubal length** achieve cumulative spontaneous pregnancy rates of 65 to 75 percent following meticulous two-layer microsurgical reconstruction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Parameter",
+          "Favorable Candidate",
+          "Unfavorable / Recommend IVF"
+        ],
+        "rows": [
+          [
+            "Maternal Age",
+            "< 35 years with normal ovarian reserve",
+            "> 38 to 40 years or diminished reserve"
+          ],
+          [
+            "Residual Tubal Length",
+            "> 4 cm of healthy functional tube",
+            "< 3 cm residual length or extensive coagulation"
+          ],
+          [
+            "Sterilization Site",
+            "Isthmic-isthmic or ampullary-isthmic",
+            "Fimbriectomy or distal ampullary destruction"
+          ],
+          [
+            "Male Factor Parameters",
+            "Normal semen analysis parameters",
+            "Moderate to severe oligoasthenoteratozoospermia"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "v": 1,
+  "module": "sct-tracheal-stenosis-resection",
+  "title": "Tracheal stenosis: post-intubation injury, tracheal resection and laryngeal release",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 110 (Trachea: Post-Intubation Stenosis and Tracheal Resection)",
+    "Shields' General Thoracic Surgery 8e Ch 69 (Tracheal Stenosis)",
+    "Pearson's Thoracic and Esophageal Surgery 3e Ch 24"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Post-intubation tracheal stenosis is an iatrogenic ischemic complication of mechanical ventilation. High endotracheal tube cuff pressures exceed mucosal capillary perfusion pressure, typically twenty to thirty millimeters of mercury. This causes circumferential mucosal ischemia, cartilage necrosis, and dense scarring.",
+      "tx": "The pathophysiology of **post-intubation stenosis** begins when high **cuff pressure** exceeds normal tracheal mucosal capillary perfusion pressure of 20 to 30 mmHg. Sustained circumferential compression induces progressive **mucosal ischemia**, chondritis, necrosis of cartilaginous rings, and dense circumferential cicatrization with severe airway narrowing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Endotracheal or tracheostomy cuff overinflation (> 30 mmHg)"
+          },
+          {
+            "id": "b",
+            "label": "Capillary perfusion arrest causing mucosal necrosis"
+          },
+          {
+            "id": "c",
+            "label": "Ulceration, chondritis, and structural cartilage destruction"
+          },
+          {
+            "id": "d",
+            "label": "Dense fibroblastic cicatrization and luminal stenosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Patients develop exertional dyspnea and stridor several weeks to months following extubation. Clinical symptoms typically appear when the internal tracheal lumen narrows below five to six millimeters. Symptoms are frequently misdiagnosed as adult-onset asthma until flow-volume loops reveal fixed obstruction.",
+      "tx": "Patients present with progressive exertional dyspnea and biphasic **stridor** weeks after extubation. Symptoms manifest once the internal **tracheal diameter** falls below 5 to 6 mm, representing greater than a **luminal reduction** of 50 percent, often misdiagnosed as refractory adult-onset bronchial asthma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tracheal Stenosis Presentation",
+          "points": [
+            "Biphasic inspiratory and expiratory stridor",
+            "Fixed upper airway obstruction on flow-volume loop",
+            "History of endotracheal intubation or tracheostomy weeks earlier"
+          ]
+        },
+        "right": {
+          "title": "Bronchial Asthma Presentation",
+          "points": [
+            "Exclusively expiratory wheezing with diurnal variation",
+            "Variable intrathoracic obstruction reversible with bronchodilators",
+            "No prior history of mechanical invasive airway instrumentation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Comprehensive preoperative evaluation combines imaging with endoscopic visualization. Dynamic high-resolution computed tomography defines stenotic length and cartilaginous architecture. Rigid bronchoscopy confirms mucosal health, evaluates vocal cord mobility, and measures the distance from cricoid to carina.",
+      "tx": "Preoperative assessment combines **dynamic CT airway** imaging with flexible and **rigid bronchoscopy**. This evaluation determines precise **stenotic length**, mucosal viability, vocal cord function, and exact anatomical margins measured from both the cricoid cartilage and the carina before planning surgical reconstruction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Evaluation Modality",
+          "Key Anatomical Metric",
+          "Surgical Relevance"
+        ],
+        "rows": [
+          [
+            "Dynamic CT with 3D reconstruction",
+            "Stricture length and extraluminal cartilage status",
+            "Determines feasibility of primary resection"
+          ],
+          [
+            "Rigid bronchoscopy",
+            "Precise measurement of distance to vocal cords",
+            "Direct caliber sizing and gentle mechanical dilatation"
+          ],
+          [
+            "Flexible fiberoptic laryngoscopy",
+            "Vocal cord mobility during phonation",
+            "Rules out pre-existing recurrent laryngeal nerve injury"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Circumferential tracheal resection with end-to-end anastomosis provides definitive cure. The safe resection limit is up to four to five centimeters, representing five to seven tracheal rings. Resecting beyond this length produces excessive anastomotic tension, predisposing to catastrophic dehiscence.",
+      "tx": "The definitive surgical cure is primary tracheal resection with direct reconstruction. The established **safe resection limit** is 4 to 5 cm (approximately 5 to 7 **tracheal rings**), permitting tension-free primary **end-to-end anastomosis** without jeopardizing blood supply or causing late restenosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Resection within Safe Limits (<= 4 to 5 cm)",
+          "points": [
+            "5 to 7 tracheal rings excised en bloc",
+            "Tension-free end-to-end reconstruction achieved",
+            "Low incidence of anastomotic breakdown (< 3%)"
+          ]
+        },
+        "right": {
+          "title": "Excessive Length Resection (> 5 cm)",
+          "points": [
+            "Generates extreme longitudinal anastomotic tension",
+            "Requires mandatory extensive anatomical release maneuvers",
+            "Elevated risk of ischemic dehiscence, mediastinitis, and death"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Laryngeal release maneuvers provide additional proximal airway mobility to relieve anastomotic tension. The suprahyoid Montgomery release divides muscles attaching to the superior surface of the hyoid bone. This maneuver drops the larynx by one to two centimeters without impairing swallowing.",
+      "tx": "To alleviate anastomotic tension during long-segment resections, surgeons perform a **suprahyoid release** (Montgomery maneuver). Dividing the suprahyoid musculature drops the larynx inferiorly, delivering 1 to 2 cm of additional **tracheal mobility** while safeguarding normal deglutition and vocal cord motor function.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify excessive anastomotic tension during neck flexion"
+          },
+          {
+            "id": "b",
+            "label": "Perform horizontal incision over hyoid bone"
+          },
+          {
+            "id": "c",
+            "label": "Divide mylohyoid, geniohyoid, and stylohyoid muscle insertions"
+          },
+          {
+            "id": "d",
+            "label": "Gain 1 to 2 cm of downward laryngeal mobility"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Distal mobilization techniques provide upward tracheal excursion from within the chest. Dividing the inferior pulmonary ligament and performing an intrapericardial release around the right pulmonary veins mobilizes the right hilum. This thoracic maneuver provides two to three centimeters of carinal mobility.",
+      "tx": "Distal release relies on **hilar mobilization** through a right thoracotomy or transpericardial approach. Dividing the **inferior pulmonary ligament** alongside **intrapericardial release** of the pulmonary veins yields 2 to 3 cm of upward carinal mobilization to relieve tension across the airway suture line.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Release Maneuver",
+          "Anatomical Plane",
+          "Added Length Gained"
+        ],
+        "rows": [
+          [
+            "Cervical flexion",
+            "Postural positioning of head and neck",
+            "Up to 2 to 3 cm of total length"
+          ],
+          [
+            "Suprahyoid release (Montgomery)",
+            "Dividing suprahyoid musculature off hyoid bone",
+            "1 to 2 cm of proximal downward excursion"
+          ],
+          [
+            "Right hilar and ligament release",
+            "Dividing inferior pulmonary ligament and pericardium",
+            "2 to 3 cm of upward carinal mobilization"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Anastomotic reconstruction requires interrupted absorbable sutures with knots tied externally. Surgeons insert a guardian chin-to-chest suture to ensure strict cervical flexion for seven days postoperatively. Maintaining neck flexion protects the fragile airway anastomosis against sudden extension.",
+      "tx": "The anastomosis is sewn using interrupted 4-0 **absorbable sutures** with knots tied externally. Postoperatively, the patient maintains continuous neck flexion enforced by a **guardian chin stitch** secured from the submental crease to the pre-sternal skin for 7 days to eliminate **cervical flexion** strain.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Place interrupted 4-0 Vicryl/PDS sutures 2 to 3 mm apart"
+          },
+          {
+            "id": "b",
+            "label": "Flex patient neck to approximate tracheal cartilage ends"
+          },
+          {
+            "id": "c",
+            "label": "Tie all anastomotic sutures sequentially on external airway surface"
+          },
+          {
+            "id": "d",
+            "label": "Place heavy guardian stitch from chin to chest wall for 7 days"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Primary tracheal neoplasms are rare but require oncological distinction. Adenoid cystic carcinoma is slow-growing with extensive microscopic submucosal and perineural spread. Squamous cell carcinoma presents as an ulcerating, smoking-related mass prone to early regional lymph node metastasis.",
+      "tx": "Primary tracheal neoplasms predominantly comprise **adenoid cystic carcinoma**, characterized by indolent growth, marked **perineural invasion**, and high radiosensitivity, and **squamous cell carcinoma**, which presents as an exophytic ulcerating mass strongly linked with smoking and early lymph node spread. Accurate histopathological distinction guides appropriate surgical margins, regional lymph node dissection, and postoperative adjuvant radiotherapy protocols.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adenoid Cystic Carcinoma",
+          "points": [
+            "Equal gender distribution, not linked with tobacco use",
+            "Slow, creeping growth with extensive microscopic submucosal spread",
+            "Highly radiosensitive; favorable long-term survival even with margins"
+          ]
+        },
+        "right": {
+          "title": "Squamous Cell Carcinoma",
+          "points": [
+            "Strongly associated with cigarette smoking and male predominance",
+            "Exophytic, friable ulcerating mass causing early hemoptysis",
+            "High rate of regional paratracheal lymph node metastases"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,285 @@
+{
+  "v": 1,
+  "module": "sct-ebstein-anomaly-cone-repair",
+  "title": "Ebstein anomaly: pathology, Carpentier classification and cone reconstruction",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 117 (Congenital Heart Disease: Ebstein Anomaly)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 33 (Ebstein Anomaly)",
+    "AHA/ACC Guidelines for the Management of Adults With Congenital Heart Disease"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Ebstein anomaly is a complex congenital malformation of the tricuspid valve and right ventricle. It is characterized by failure of leaflet delamination from the underlying ventricular myocardium. The septal and posterior leaflets are displaced downward toward the right ventricular apex.",
+      "tx": "**Ebstein anomaly** is characterized by failed embryonic delamination of the tricuspid leaflets from the underlying myocardium. This produces apical **inferior leaflet displacement** of the septal and posterior leaflets away from the true atrioventricular junction, leaving the anterior leaflet sail-like and creating severe **tricuspid regurgitation**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Tricuspid Valve",
+          "points": [
+            "Leaflets insert at true fibrous atrioventricular junction",
+            "Septal leaflet displaced < 8 mm/m2 from mitral insertion",
+            "True right ventricle fully dedicated to pumping output"
+          ]
+        },
+        "right": {
+          "title": "Ebstein Anomaly Architecture",
+          "points": [
+            "Septal and posterior leaflets displaced toward apex",
+            "Displacement exceeds 8 mm/m2 from anterior mitral leaflet",
+            "Large atrialized right ventricle robs pumping capacity"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Apical displacement separates the right ventricle into two distinct chambers. The thin-walled proximal portion above the displaced leaflets becomes incorporated into the right atrium. This atrialized right ventricle balloons during ventricular systole, diminishing the output of the functional right ventricle.",
+      "tx": "Downstream displacement of the tricuspid hinge line divides the right heart into two chambers: a dilated, thin-walled **atrialized right ventricle** that balloons paradoxically during systole, and a severely diminutive **functional right ventricle** struggling to generate forward pulmonary flow across high pulmonary vascular resistance. This severe mechanical volume loss severely compromises forward right heart stroke volume and worsens cyanosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Apical migration of septal and posterior tricuspid hinge lines"
+          },
+          {
+            "id": "b",
+            "label": "Sequestration of proximal ventricular wall into atrial chamber"
+          },
+          {
+            "id": "c",
+            "label": "Paradoxical systolic expansion of atrialized right ventricle"
+          },
+          {
+            "id": "d",
+            "label": "Severe reduction in stroke volume from functional right ventricle"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Anatomical examination reveals marked asymmetry between the tricuspid leaflets. The anterior leaflet is characteristically sail-like and redundant, remaining attached at the true annulus. In contrast, the septal and posterior leaflets are severely hypoplastic, tethered, or completely displaced into the ventricle.",
+      "tx": "Pathological examination demonstrates that the **sail-like anterior leaflet** is characteristically redundant, retaining its primary attachment at the **true annulus**. In sharp contrast, the septal and posterior **tethered leaflets** are severely diminutive, hypoplastic, or tightly fused to the right ventricular myocardium.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Carpentier Type",
+          "Atrialized Ventricle Extent",
+          "Anterior Leaflet Mobility"
+        ],
+        "rows": [
+          [
+            "Type A",
+            "Small atrialized right ventricle",
+            "Normal, fully mobile anterior leaflet"
+          ],
+          [
+            "Type B",
+            "Moderate atrialized right ventricle",
+            "Mobile anterior leaflet with minimal tethering"
+          ],
+          [
+            "Type C",
+            "Large atrialized right ventricle",
+            "Severely restricted anterior leaflet with short cords"
+          ],
+          [
+            "Type D",
+            "Complete atrialization of ventricle",
+            "Sac-like infundibular tricuspid pouch with extreme tethering"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Echocardiography provides diagnostic confirmation and prognostic grading. An apical displacement of the septal leaflet exceeding eight millimeters per square meter of body surface area is diagnostic. The Great Ormond Street score calculates the ratio of right atrial and atrialized ventricular area to functional chambers.",
+      "tx": "Diagnostic echocardiography establishes Ebstein anomaly when apical displacement of the septal tricuspid leaflet exceeds 8 mm/m2. In neonates, the **Great Ormond Street echocardiographic score** (celerio score) quantifies the ratio of right atrium and atrialized ventricle to the functional chambers, predicting **neonatal mortality**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "GOSH Score Grade",
+          "Area Ratio (RA + aRV) / (fRV + LA + LV)",
+          "Predicted Neonatal Outcome"
+        ],
+        "rows": [
+          [
+            "Grade 1",
+            "Ratio < 0.5",
+            "Excellent prognosis; low operative mortality (< 10%)"
+          ],
+          [
+            "Grade 2",
+            "Ratio 0.5 to 0.99",
+            "Intermediate severity; symptomatic in early childhood"
+          ],
+          [
+            "Grade 3",
+            "Ratio 1.0 to 1.49",
+            "High neonatal mortality; severe cyanosis and heart failure"
+          ],
+          [
+            "Grade 4",
+            "Ratio >= 1.5",
+            "Extreme risk (> 70% mortality); circular shunt and shock"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Ebstein anomaly is frequently complicated by accessory conduction pathways. Up to thirty percent of patients have Wolff-Parkinson-White syndrome with right-sided accessory bundles crossing the abnormal atrioventricular junction. Electrophysiological testing and surgical arrhythmia ablation are performed during valve repair.",
+      "tx": "Up to 30 percent of patients exhibit **Wolff-Parkinson-White syndrome** secondary to right-sided **accessory pathways** crossing the dilated, fibrofatty atrioventricular groove. Patients suffer recurrent **supraventricular tachycardia**, which warrants intraoperative electrophysiological mapping and surgical cryoablation during valve reconstruction to eliminate sudden death. Electrophysiological consultation and precise mapping during surgery protect against recurrent refractory postoperative supraventricular tachycardias.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Defective fibrous annularity at right atrioventricular groove"
+          },
+          {
+            "id": "b",
+            "label": "Persistence of single or multiple right-sided accessory pathways"
+          },
+          {
+            "id": "c",
+            "label": "Rapid atrioventricular reentrant tachycardia (WPW syndrome)"
+          },
+          {
+            "id": "d",
+            "label": "Concomitant surgical cryoablation or catheter radiofrequency ablation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The cone reconstruction remains the modern surgical standard of care. Developed by da Silva, it achieves anatomical tricuspid restoration. The surgeon completely mobilizes all leaflets from the ventricular myocardium, rotating them circumferentially to construct a three hundred and sixty degree leaflet cone.",
+      "tx": "The modern gold standard surgical repair is the **da Silva cone reconstruction**. The surgeon completely delaminates and mobilizes all leaflet tissue from the right ventricular wall, rotating the leaflets circumferentially to create a **360-degree leaflet cone** anchored to the true anatomical tricuspid annulus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Full 360-degree surgical delamination of all tricuspid leaflet tissue"
+          },
+          {
+            "id": "b",
+            "label": "Division of tethering muscular bands down to ventricular myocardium"
+          },
+          {
+            "id": "c",
+            "label": "Circumferential rotation and side-to-side leaflet reapproximation"
+          },
+          {
+            "id": "d",
+            "label": "Reattachment of cone apex to true anatomical atrioventricular annulus"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Plication of the atrialized right ventricle restores normal right heart geometry. The surgeon folds the thin, non-contractile atrialized segment longitudinally or horizontally. Annuloplasty ring support stabilizes the reconstructed annulus while avoiding injury to the conduction system.",
+      "tx": "Alongside cone construction, the surgeon performs **longitudinal plication** of the dilated atrialized chamber to reduce chamber volume and eliminate paradoxical motion. A tailored **annuloplasty ring** stabilizes the reconstructed annulus, taking special care to avoid the **atrioventricular node** in the triangle of Koch.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cone Repair with Ventricular Plication",
+          "points": [
+            "Near-anatomical reconstruction of central coaptation",
+            "Eliminates paradoxical systolic bulge of atrialized ventricle",
+            "Preserves long-term right ventricular pumping performance"
+          ]
+        },
+        "right": {
+          "title": "Prosthetic Tricuspid Replacement",
+          "points": [
+            "Complete excision of tricuspid leaflets",
+            "High lifetime incidence of bioprosthetic degeneration",
+            "High thrombogenicity on low-flow right side of heart"
+          ]
+        }
+      }
+    },
+    {
+      "say": "In patients with severe right ventricular dysfunction, a one and a half ventricle repair provides hemodynamic relief. The surgeon adds a bidirectional Glenn shunt to the tricuspid valve repair. Diverting upper body venous return directly to the lungs unloads the borderline right ventricle.",
+      "tx": "When severe right ventricular hypoplasia prevents adequate cardiac output following repair, a **one-and-a-half ventricle repair** is implemented. Adding a **bidirectional Glenn shunt** diverts superior vena caval return away from the right heart, successfully achieving **right ventricular unloading** and lowering central venous pressure. This combined cavopulmonary connection maintains adequate systemic forward flow while shielding the diminutive right ventricle from fatal volume overload.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Strategy",
+          "Right Ventricular Function",
+          "Operative Elements"
+        ],
+        "rows": [
+          [
+            "Biventricular cone repair",
+            "Adequate functional RV size and contractility",
+            "Isolated cone reconstruction and atrialized plication"
+          ],
+          [
+            "1.5 ventricle repair",
+            "Borderline functional RV (subpulmonary strain)",
+            "Cone repair combined with bidirectional Glenn cavopulmonary shunt"
+          ],
+          [
+            "Single-ventricle palliation",
+            "Severely dysplastic, diminutive functional RV",
+            "Tricuspid closure, atrial septectomy, Staged Fontan path"
+          ]
+        ]
+      }
+    }
+  ]
+}

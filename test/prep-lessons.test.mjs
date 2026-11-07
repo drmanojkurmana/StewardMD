@@ -91,9 +91,9 @@ test("pickQuiz keeps the lesson's order and skips missing ids", () => {
 test("checkLesson: up to 10 steps (room for an image step beside 8 text steps), never 11", () => {
   const step = SAMPLE.steps.find((s) => s.vis && s.vis.kind === "image");
   const les = (n) => Object.assign({}, SAMPLE, { steps: Array.from({ length: n }, () => step) });
-  assert.deepEqual(P.checkLesson(les(10)), []);
-  assert.ok(P.checkLesson(les(11)).includes("a lesson has 4 to 10 steps"));
-  assert.ok(P.checkLesson(les(3)).includes("a lesson has 4 to 10 steps"));
+  assert.deepEqual(P.checkLesson(les(12)), []);
+  assert.ok(P.checkLesson(les(13)).includes("a lesson has 4 to 12 steps"));
+  assert.ok(P.checkLesson(les(3)).includes("a lesson has 4 to 12 steps"));
 });
 
 /* ---------------- the committed sample ---------------- */

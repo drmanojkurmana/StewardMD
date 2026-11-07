@@ -1,0 +1,275 @@
+{
+  "v": 1,
+  "module": "sct-conduit-selection-harvest",
+  "title": "CABG conduit selection, harvest techniques and arterial versus venous patency",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Coronary Artery Bypass Grafting)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 12 (Coronary Artery Disease)",
+    "ACC/AHA Guidelines for Coronary Artery Revascularization"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The left internal mammary artery represents the uncontested gold standard conduit for coronary revascularization. Grafted to the left anterior descending artery, it provides unmatched long-term patency exceeding ninety percent at ten years. This conduit confers a lasting survival advantage over saphenous vein grafts.",
+      "tx": "The **left internal mammary artery** grafted to the anterior descending coronary artery remains the gold standard of surgical revascularization, maintaining a **ten-year patency** exceeding 90 percent. Its active endothelial production of nitric oxide resists atherosclerosis, providing a proven **survival benefit** across decades.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Left Internal Mammary Artery",
+          "points": [
+            "In situ arterial conduit from subclavian artery",
+            "Exceeds 90 percent patency at 10-year follow-up",
+            "Continuous nitric oxide release resists atheroma"
+          ]
+        },
+        "right": {
+          "title": "Saphenous Vein Conduit",
+          "points": [
+            "Free graft subjected to systemic arterial pressures",
+            "Approximately 50 percent patency at 10-year follow-up",
+            "Prone to intimal hyperplasia and accelerated atherosclerosis"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Harvesting techniques for the internal mammary artery influence chest wall perfusion and conduit length. Skeletonization frees the artery completely from surrounding satellite veins and fascia. This technique preserves collateral blood flow to the sternum, markedly reducing deep sternal wound infection in diabetic patients.",
+      "tx": "Surgical harvest employs either a pedicled technique or fine **skeletonization**. Skeletonizing the internal mammary artery frees it from adjacent veins and endothoracic fascia, yielding greater usable graft length and preserving collateral blood flow to halve the risk of **sternal wound infection** in **diabetic patients**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Harvest Technique",
+          "Collateral Sternal Flow",
+          "Clinical Advantage"
+        ],
+        "rows": [
+          [
+            "Skeletonized harvest",
+            "Preserved intercostal branches and fascia",
+            "Halves sternal dehiscence in bilateral IMA use"
+          ],
+          [
+            "Pedicled harvest",
+            "Divided with muscle, fat, and venae comitantes",
+            "Faster dissection, thicker conduit protective sheath"
+          ],
+          [
+            "Endoscopic harvest",
+            "Minimally invasive closed-chest dissection",
+            "Minimizes chest wall pain and wound trauma"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The radial artery serves as a versatile second arterial conduit for severe coronary lesions. Prior to harvest, clinicians perform an Allen test to confirm adequate collateral ulnar palm circulation. The radial artery achieves higher patency than vein grafts when target stenosis exceeds seventy percent.",
+      "tx": "The **radial artery** provides an exceptional secondary arterial conduit, provided a preoperative **Allen test** confirms brisk palmar collateralization via the ulnar artery. Due to muscular responsiveness, it requires **target stenosis** exceeding 70 percent to prevent competitive flow and conduit atrophy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm ulnar collateral circulation via Allen test"
+          },
+          {
+            "id": "b",
+            "label": "Identify high-grade coronary target with stenosis > 70%"
+          },
+          {
+            "id": "c",
+            "label": "Atraumatic radial artery harvest with calcium blocker infusion"
+          },
+          {
+            "id": "d",
+            "label": "Achieve durable long-term arterial patency"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Muscular arterial conduits are susceptible to dynamic vasospasm. To prevent acute graft spasm during and after surgery, teams administer calcium channel blockers such as diltiazem along with topical papaverine. Maintaining pharmacological vasodilatation preserves steady flow through the newly placed graft.",
+      "tx": "Because of a prominent medial smooth muscle architecture, radial conduits exhibit a high propensity for **radial artery spasm**. Surgeons prevent intraoperative spasm by topically applying **papaverine** and administering oral **calcium channel blockers** such as diltiazem postoperatively for at least one year.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacological Agent",
+          "Administration Route",
+          "Antispasmodic Mechanism"
+        ],
+        "rows": [
+          [
+            "Papaverine solution",
+            "Topical perivascular spray during harvest",
+            "Phosphodiesterase inhibition and direct smooth muscle relaxation"
+          ],
+          [
+            "Diltiazem",
+            "Continuous IV infusion then oral daily",
+            "Blocks L-type calcium channels, suppressing vasospasm"
+          ],
+          [
+            "Nitroglycerin",
+            "Intravenous microtitration in ICU",
+            "Direct nitric oxide donation to vascular smooth muscle"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Saphenous vein grafts remain the workhorse conduits for multivessel coronary bypass. Vein grafts undergo progressive pathological remodeling under arterial pressures, with ten-year patency dropping to approximately fifty percent. Intimal hyperplasia and accelerated graft atherosclerosis cause late graft occlusion.",
+      "tx": "The autologous **great saphenous vein** remains the most widely used supplementary conduit. However, vein grafts suffer progressive attrition under systemic arterial pressures, with **saphenous vein patency** declining to roughly 50 percent at 10 years due to accelerated **intimal hyperplasia** and aggressive lumen-compromising atherosclerosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Exposure of thin-walled vein to high arterial shear stress"
+          },
+          {
+            "id": "b",
+            "label": "Endothelial denudation and platelet adhesion"
+          },
+          {
+            "id": "c",
+            "label": "Smooth muscle cell migration causing intimal hyperplasia"
+          },
+          {
+            "id": "d",
+            "label": "Accelerated atheroma rupture and late graft occlusion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Endoscopic vein harvesting reduces leg wound complications compared to long open incisions. Surgeons visualize the vein with a specialized camera, dissecting branches with electrocautery. The closed technique decreases pain, hematoma formation, and surgical site infections while preserving vein endothelial integrity.",
+      "tx": "Adopting minimally invasive **endoscopic vein harvest** significantly lowers the incidence of surgical **wound complications**, hematomas, and saphenous neuralgia compared to traditional continuous open skin incisions. Meticulous atraumatic dissection preserves **endothelial integrity**, maintaining long-term graft patency rates comparable to standard open surgical harvest.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Endoscopic Vein Harvest",
+          "points": [
+            "Small 2 cm incisions with closed optical dissector",
+            "Dramatic reduction in leg wound infection and pain",
+            "Accelerates postoperative patient mobilization"
+          ]
+        },
+        "right": {
+          "title": "Open Vein Harvest",
+          "points": [
+            "Continuous long cutaneous incisions along lower limb",
+            "Higher rates of wound breakdown and cellulitis",
+            "Increased risk of persistent saphenous nerve paresthesia"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The no-touch vein harvesting technique protects vein architecture by preserving the perivascular pedicle. Dissecting the vein with its cushion of adventitia and fat prevents venospasm and avoids high-pressure manual distention. The intact microvasculature supports endothelial survival and provides superior long-term patency.",
+      "tx": "The specialized **no-touch saphenous harvest** extracts the vein alongside its protective cushion of perivascular fat and adventitia without manual high-pressure syringe distention. Preserving the **adventitial fat** and intact microvascular **vasa vasorum** shields the endothelium against mechanical trauma, yielding long-term patency rates approaching arterial grafts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Atraumatic vein dissection with intact perivascular fat"
+          },
+          {
+            "id": "b",
+            "label": "Avoidance of high-pressure syringe overdistention"
+          },
+          {
+            "id": "c",
+            "label": "Preservation of functional vasa vasorum and endothelium"
+          },
+          {
+            "id": "d",
+            "label": "Marked reduction in late intimal hyperplasia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transit-time flow measurement confirms graft patency before closing the chest. Perfusionists measure volumetric graft flow and pulsatility index across each anastomosis. A pulsatility index under five combined with diastolic flow confirmation proves that the graft is free of technical kinks or narrowing.",
+      "tx": "Intraoperative **transit-time flow measurement** verifies anastomotic quality prior to chest closure. Surgeons confirm graft viability when mean graft flow exceeds 20 mL/min, the **pulsatility index** remains below 5.0, and **diastolic filling fraction** exceeds 50 percent, ruling out acute graft thrombosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Flow Metric",
+          "Satisfactory Threshold",
+          "Diagnostic Interpretation"
+        ],
+        "rows": [
+          [
+            "Mean graft flow",
+            "> 20 mL/min",
+            "Confirms adequate volumetric forward perfusion"
+          ],
+          [
+            "Pulsatility index",
+            "< 5.0",
+            "Indicates low anastomotic resistance without kinking"
+          ],
+          [
+            "Diastolic filling fraction",
+            "> 50 percent",
+            "Validates characteristic coronary perfusion timing"
+          ]
+        ]
+      }
+    }
+  ]
+}

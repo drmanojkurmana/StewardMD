@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sob-normal-labour",
+ "title": "Physiology and Mechanisms of Normal Labour, Partograph and Third Stage Management",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Williams Obstetrics 25e Ch 21 (Labor Physiology), Ch 22 (Normal Labor)",
+  "Ten Teachers Gynaecology 21e",
+  "WHO Labour Care Guide (2020)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The physiological **mechanisms of normal labour** represent the sequence of passive positional adjustments undertaken by the fetal vertex as it traverses the birth canal: **engagement**, **descent**, **flexion**, **internal rotation**, **extension**, **restitution**, **external rotation**, and lateral expulsion of the fetal trunk and body. Clinically, key parameters encompass phases of parturition, uterine quiescence, oxytocin receptors, 1, 2, 3, 4, 100.",
+   "say": "Normal vertex delivery follows a precise sequence of cardinal pelvic movements governed by bony and soft tissue resistance. The fetal head first achieves engagement and progressive descent. Resistance from the pelvic floor promotes suboccipitobregmatic flexion, followed by internal rotation of the occiput, extension at the vulva, restitution, external rotation of the head, and expulsion of the shoulders.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/obg-labour-curve.svg",
+    "ar": 1.5385,
+    "caption": "Friedman and Zhang cervical dilatation labour curves. Credit: StewardMD.",
+    "alt": "Labour curves comparing traditional Friedman progression against contemporary Zhang active phase dilatation trajectories."
+   }
+  },
+  {
+   "tx": "**Engagement** occurs when the greatest transverse diameter of the fetal head\u2014the biparietal diameter measuring 9.5 cm\u2014has fully passed through the **pelvic inlet**, clinically corresponding to the leading bony edge reaching the plane of the maternal **ischial spines (station 0)** on formal digital vaginal examination. Clinically, key parameters encompass active phase, cervical dilatation, first stage, 6.",
+   "say": "Engagement signifies that the widest transverse diameter of the fetal skull has successfully traversed the pelvic brim. In vertex presentation, this corresponds to the biparietal diameter passing the pelvic inlet. Clinically on vaginal palpation, the presenting vertex has descended to the level of the maternal ischial spines, designated as station zero.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fetal Head Station",
+     "Pelvic Landmark Plane",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Station -3 to -1",
+      "Above ischial spine plane",
+      "Head is non-engaged and high; floating presenting part"
+     ],
+     [
+      "Station 0",
+      "Plane of maternal ischial spines",
+      "Fetal head is engaged; biparietal diameter traversed inlet"
+     ],
+     [
+      "Station +1 to +3",
+      "Below ischial spine plane",
+      "Deep pelvic descent approaching pelvic floor musculature"
+     ],
+     [
+      "Station +4 to +5",
+      "Introitus / perineal plane",
+      "Crowning; delivery of fetal vertex is imminent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Internal rotation** turns the fetal occiput anteriorly from an occipitotransverse or oblique position toward the maternal **pubic symphysis** by 45 to 90 degrees. This crucial rotation is driven by the gutter-like slope of the **levator ani** muscles, aligning the long anteroposterior diameter of the head with the pelvic outlet. Clinically, key parameters encompass cardinal movements, restitution.",
+   "say": "As the well-flexed fetal vertex meets the sloping gutter of the levator ani diaphragm, the occiput rotates anteriorly towards the symphysis pubis. In occipitolateral presentations, this entails a forty-five to ninety-degree rotation. This crucial movement aligns the longest anteroposterior axis of the fetal skull with the widest anteroposterior dimension of the pelvic outlet.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Descent of vertex onto sloping muscular gutter of levator ani"
+     },
+     {
+      "id": "b",
+      "label": "Coccygeus and pubococcygeus guide leading occiput forward"
+     },
+     {
+      "id": "c",
+      "label": "45 to 90 degree internal rotation toward pubic symphysis"
+     },
+     {
+      "id": "d",
+      "label": "Occiput lodges directly beneath subpubic arch as fulcrum"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The contemporary **active phase of first stage labour** begins at **5 cm cervical dilatation** (WHO and ACOG criteria, modifying the historical 4 cm Friedman cutoff). Modern labour progression demonstrates that cervical dilatation accelerates significantly only beyond 5 to 6 cm, avoiding premature interventions for slow latent phases. Clinically, key parameters encompass engagement, biparietal diameter, station zero.",
+   "say": "Contemporary obstetric guidelines define the commencement of the active first stage of labour at five centimetres of cervical dilatation, superseding older Friedman criteria. Extensive multiracial population data demonstrate that normal labour progresses much more slowly prior to six centimetres, after which dilatation accelerates rapidly without adverse maternal or neonatal outcomes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Historical Friedman Labour Model",
+     "points": [
+      "Active phase defined starting at 3 to 4 cm dilatation",
+      "Linear progress expected at >= 1.2 cm/hr in nulliparas",
+      "High rate of unnecessary early caesarean sections"
+     ]
+    },
+    "right": {
+     "title": "Contemporary WHO & Zhang Evidence",
+     "points": [
+      "Active phase formally commences at 5 cm dilatation",
+      "Slow normal progress up to 6 cm accepted without alarm",
+      "Active phase arrest defined after 4-6 hours without change"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "On the traditional WHO **partograph**, the **alert line** represents a cervical dilatation rate of **1 cm/hour**. Crossing to the right of the alert line signals abnormally slow labour. The parallel **action line** is situated **4 hours to the right**, at which point active obstetric intervention (amniotomy, oxytocin augmentation, or operative delivery) is mandated. Clinically, key parameters encompass WHO modified partograph.",
+   "say": "The composite WHO partograph serves as a vital graphical early-warning tool. The alert line slopes upward at a rate of one centimetre per hour from four centimetres dilatation. If cervical progress crosses to the right of the alert line, labour is protracted. Reaching the action line four hours later demands definitive medical or surgical intervention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Partograph Landmark",
+     "Graphical Trajectory",
+     "Mandated Clinical Decision"
+    ],
+    "rows": [
+     [
+      "Alert line",
+      "Straight slope of 1 cm/hr from 4 cm",
+      "Transfer to referral facility; optimize maternal hydration and support"
+     ],
+     [
+      "Action line",
+      "Parallel line 4 hours to right of alert",
+      "Definitive management: artificial rupture of membranes, oxytocin, or LSCS"
+     ],
+     [
+      "Maternal pulse & BP",
+      "Recorded every 30 to 60 minutes",
+      "Detect dehydration, chorioamnionitis, or preeclamptic spikes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Active management of the third stage of labour** (AMTSL) reduces postpartum haemorrhage by over 60 percent, comprising three routine components: administration of a prophylactic uterotonic drug (**oxytocin 10 IU intramuscularly** upon delivery of the anterior shoulder), controlled cord traction, and delayed cord clamping for 1 to 3 minutes. Clinically, key parameters encompass Action line, cephalopelvic disproportion, arrested labour.",
+   "say": "Active management of the third stage is one of the most effective interventions in obstetrics, decreasing the incidence of postpartum haemorrhage by more than sixty percent. Its three core elements are routine administration of ten international units of intramuscular oxytocin, controlled cord traction using the Brandt-Andrews technique, and delayed umbilical cord clamping.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Delivery of anterior shoulder / neonate"
+     },
+     {
+      "id": "b",
+      "label": "Administer prophylactic oxytocin (10 IU IM or slow IV infusion)"
+     },
+     {
+      "id": "c",
+      "label": "Delayed umbilical cord clamping (1 to 3 minutes post-birth)"
+     },
+     {
+      "id": "d",
+      "label": "Controlled cord traction (Brandt-Andrews) with counter-traction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Delayed cord clamping for **1 to 3 minutes post-birth** is recommended by WHO in all vigorous term and preterm infants. This enhances neonatal **placental transfusion**, expanding infant blood volume by 30 percent, preventing neonatal **iron-deficiency anaemia**, and reducing intraventricular haemorrhage and necrotizing enterocolitis in premature infants. Clinically, key parameters encompass AMTSL, oxytocin, controlled cord traction, 60, 10.",
+   "say": "Postponing umbilical cord clamping for one to three minutes after delivery allows physiological placental transfusion. This autotransfuses approximately twenty to thirty millilitres per kilogram of blood into the newborn, improving neonatal haematocrit, preventing early childhood iron deficiency, and substantially reducing the incidence of intraventricular haemorrhage in preterm births.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Delayed Cord Clamping (1-3 min)",
+     "points": [
+      "Transfuses 80 to 100 mL of placental blood volume",
+      "Improves infant ferritin levels for up to 6 months",
+      "Lowers necrotizing enterocolitis and IVH in preterms"
+     ]
+    },
+    "right": {
+     "title": "Immediate Cord Clamping (< 30 sec)",
+     "points": [
+      "Indicated strictly for depressed neonates needing resuscitation",
+      "Deprives newborn of physiological red cell volume",
+      "Slightly lower phototherapy requirement for jaundice"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Controlled cord traction** (Brandt-Andrews technique) involves placing the left hand suprapubically to apply firm upward and backward counter-traction on the uterine corpus while the right hand maintains steady, gentle downward traction on the clamped umbilical cord during an active uterine contraction, preventing **uterine inversion**. Clinically, key parameters encompass delayed cord clamping, iron stores, intraventricular hemorrhage, 1, 3.",
+   "say": "Controlled cord traction must always be performed in the presence of strong uterine contraction with simultaneous suprapubic counter-traction. The abdominal hand stabilizes the lower uterine segment pushing the uterine body upwards, while the operator exerts continuous gentle traction on the cord, preventing catastrophic uterine inversion while delivering the detached placenta.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/obg-bishop.svg",
+    "ar": 1.5385,
+    "caption": "Modified Bishop scoring components and cervical favourability. Credit: StewardMD.",
+    "alt": "Graphic chart illustrating the five Bishop score components including dilatation, effacement, station, consistency, and cervical position."
+   }
+  }
+ ]
+}

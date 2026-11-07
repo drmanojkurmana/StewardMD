@@ -1,0 +1,240 @@
+{
+  "id": "srm-ivf-icsi-techniques",
+  "module": "srm-ivf-icsi-techniques",
+  "title": "IVF vs ICSI and Gamete Micromanipulation",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Gardner's Textbook of Assisted Reproductive Technologies 5e Ch 12 & 14",
+    "ESHRE Guideline on Good Practice in IVF Laboratories"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Assisted reproduction offers distinct methods for uniting male and female gametes. Standard insemination allows natural cellular selection across the cumulus mass. Micromanipulation bypasses all biological barriers.",
+      "tx": "In **conventional IVF**, an **insemination concentration** of 50000 to 100000 progressively motile morphologically normal spermatozoa is co-incubated per oocyte in microdrops. Conversely, intracytoplasmic sperm injection microinjects a single spermatozoon, with evidence-based **ICSI indications** restricted to severe male factor subfertility. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Conventional IVF Insemination",
+          "points": [
+            "50,000 to 100,000 motile sperm per drop",
+            "Intact cumulus-corona complexes",
+            "Natural zona pellucida penetration",
+            "Non-male factor and tubal infertility"
+          ]
+        },
+        "right": {
+          "title": "Intracytoplasmic Sperm Injection",
+          "points": [
+            "Single microinjected spermatozoon",
+            "Enzymatically denuded oocyte",
+            "Mechanical breach of oolemma",
+            "Severe oligoasthenoteratozoospermia"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Microinjection requires clear visualization of gamete maturation. Surrounding cumulus cells must be stripped away cleanly. Enzymatic digestion precedes mechanical pipetting.",
+      "tx": "Prior to microinjection, **cumulus denudation** is performed using hyaluronidase (80 IU/mL) for under 120 seconds combined with mechanical pipetting. Stripping the surrounding cumulus-corona radiata confirms an extruded first polar body, identifying mature metaphase II oocytes. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/infertility-evaluation-and-assisted-reproduction-fig1.webp",
+        "caption": "Assisted reproductive laboratory procedures and gamete micromanipulation. Credit: StewardMD.",
+        "alt": "Assisted reproductive laboratory procedures and gamete micromanipulation"
+      }
+    },
+    {
+      "say": "Precise mechanical positioning prevents irreversible injury to maternal chromosomes. The second meiotic spindle lies directly adjacent to the extruded polar body. The microinjection needle must enter along an orthogonal axis.",
+      "tx": "During ICSI alignment, **polar body alignment** places the first polar body at 12 or 6 o'clock while the holding pipette secures the oocyte. The microinjection needle enters at the 3 o'clock **injection position**, safely avoiding disruption of the meiotic spindle apparatus. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clock Position",
+          "Oocyte Structure",
+          "Micromanipulator Tool",
+          "Procedural Safety Rationale"
+        ],
+        "rows": [
+          [
+            "9 o'clock",
+            "Zona pellucida margin",
+            "Holding pipette (suction)",
+            "Avascular stable immobilization"
+          ],
+          [
+            "12 or 6 o'clock",
+            "First polar body",
+            "Optical crosshair alignment",
+            "Marks meiotic spindle position"
+          ],
+          [
+            "3 o'clock",
+            "Equatorial oolemma",
+            "ICSI injection micropipette",
+            "Orthogonal puncture site away from spindle"
+          ],
+          [
+            "Central ooplasm",
+            "Deep cytoplasm",
+            "Sperm deposition locus",
+            "Aspiration verifies membrane breach"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sperm selection precedes aspiration into the injection needle. Immobilization ruptures the plasma membrane to initiate activation. Polyvinylpyrrolidone slows motility for precise handling.",
+      "tx": "Sperm selection occurs in viscous **polyvinylpyrrolidone**, where the embryologist performs flagellar **tail immobilization** with the pipette tip. Cracking the membrane induces **sperm immobilization**, permitting permeabilization and release of cytosolic factors required to initiate oocyte activation. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/ana-gametogenesis-gen1.webp",
+        "caption": "Gamete interaction, microinjection alignment, and polar body orientation. Credit: StewardMD.",
+        "alt": "Gamete interaction, microinjection alignment, and polar body orientation"
+      }
+    },
+    {
+      "say": "Puncturing the egg membrane demands delicate tactile confirmation. The injection needle pushes the elastic surface until it yields. Aspiration of cytoplasm verifies True internal entry.",
+      "tx": "Advancement of the injection pipette through the zona pellucida produces prominent invagination of the oolemma. The embryologist applies gentle negative pressure to accomplish **oolemma aspiration**, verifying cytosolic breach via **membrane breakage** before depositing the spermatozoon. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Elastic Invagination",
+          "points": [
+            "Needle indents flexible oolemma",
+            "Membrane remains intact",
+            "No cytoplasmic flow into needle",
+            "Premature release causes failure"
+          ]
+        },
+        "right": {
+          "title": "Membrane Rupture",
+          "points": [
+            "Sudden yield under suction",
+            "Cytoplasm enters pipette lumen",
+            "Confirmed intracellular entry",
+            "Safe sperm deposition"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Egg activation depends upon a specialized sperm enzyme. Introductions of the male gamete release an active phospholipase into the egg. Intracellular calcium waves trigger resumption of meiosis.",
+      "tx": "Following microinjection, successful **oocyte activation** is triggered by the sperm-specific factor **phospholipase C zeta**. PLC-zeta hydrolyzes phosphatidylinositol 4,5-bisphosphate to generate IP3, instigating oscillatory **calcium oscillations** that prompt cortical granule exocytosis and meiotic resumption. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "z1",
+            "label": "Sperm deposits PLC-zeta into ooplasm"
+          },
+          {
+            "id": "z2",
+            "label": "Generation of IP3 via PIP2 hydrolysis"
+          },
+          {
+            "id": "z3",
+            "label": "Endoplasmic reticulum calcium oscillations"
+          },
+          {
+            "id": "z4",
+            "label": "Cortical granule exocytosis and meiotic completion"
+          }
+        ],
+        "edges": [
+          [
+            "z1",
+            "z2",
+            "Enzyme activity"
+          ],
+          [
+            "z2",
+            "z3",
+            "Second messenger"
+          ],
+          [
+            "z3",
+            "z4",
+            "Egg activation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Fertilization assessment occurs at a fixed time point following microinjection. Normal fertilization is marked by two distinct pronuclei and two polar bodies. Atypical numbers signal genetic abnormalities.",
+      "tx": "At 16 to 18 hours post-insemination, normal fertilization is confirmed by the presence of **two pronuclei** and two polar bodies (**2PN 2PB**). Monopronuclear or multipronuclear zygotes reflect abnormal fertilization and are excluded from clinical culture. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pronuclear Morphology",
+          "Genetic Composition",
+          "Biological Mechanism",
+          "Clinical Management"
+        ],
+        "rows": [
+          [
+            "2PN with 2PB",
+            "Diploid biparental zygote",
+            "Normal fertilization",
+            "Retain for embryo culture"
+          ],
+          [
+            "1PN with 1PB or 2PB",
+            "Haploid / parthenogenetic",
+            "Failed sperm decondensation",
+            "Exclude from clinical transfer"
+          ],
+          [
+            "3PN in conventional IVF",
+            "Triploid (69 chromosomes)",
+            "Polyspermic fertilization",
+            "Discard; triploid risk"
+          ],
+          [
+            "3PN in ICSI",
+            "Triploid (69 chromosomes)",
+            "Failure of second polar body extrusion",
+            "Discard; abnormal ploidy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Total fertilization failure requires specialized rescue interventions in subsequent cycles. Lack of calcium release can be bypassed with artificial ionophores. Piezo assisted technology reduces physical deformation in fragile eggs.",
+      "tx": "Advanced micromanipulation techniques include **PICSI**, which utilizes **hyaluronic acid binding** to select mature spermatozoa with completed spermiogenesis. Furthermore, **IMSI** utilizes **high magnification** (over 6000x) to screen for subtle sperm **head vacuoles** before microinjection. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Artificial Oocyte Activation (AOA)",
+          "points": [
+            "Calcium ionophore A23187 or ionomycin",
+            "Permeabilizes membrane to external calcium",
+            "Bypasses deficient sperm PLC-zeta",
+            "Indicated in globozoospermia"
+          ]
+        },
+        "right": {
+          "title": "Piezo-ICSI Technology",
+          "points": [
+            "Ultra-rapid piezoelectric micro-pulses",
+            "Blunt needle cleanly pierces oolemma",
+            "Minimizes cytoplasmic shear stress",
+            "Decreases lysis in fragile oocytes"
+          ]
+        }
+      }
+    }
+  ],
+  "v": 1
+}

@@ -2132,12 +2132,41 @@
   /* ---------- menu (prep50) ----------
      Everything PrepNucleus has outside the daily path, in one list from the home bar: the course (exam) and plan,
      Pro, downloads, stats, friends. Rows appear only for features that are loaded. */
+  /* The You card: the account's name and photo (window.SMD_ACCOUNT), the course and level. Tapping it opens the app's
+     Profile page (window.SMD_openProfile: name from sign-in, role, registration, hospital, speciality, city), raised above
+     PrepNucleus while it is open. Without an account layer it falls back to the PrepNucleus mark and is not a button. */
+  function meProfile() { try { var A = G.SMD_ACCOUNT; return (A && A.profile && A.profile()) || null; } catch (e) { return null; } }
+  function meCard(exLabel, lv, rank) {
+    var P = meProfile(), nm = P && P.signedIn ? String(P.name || "").trim() : "", pic = P && P.signedIn ? P.picture : "";
+    var who = nm ? nm.replace(/^(dr|prof)\.?\s+/i, "") : "", ini = (who.charAt(0) || "").toUpperCase();
+    var av = pic ? '<img src="' + esc(pic) + '" alt="" width="52" height="52" referrerpolicy="no-referrer" class="pn-me-pic">'
+      : ini ? '<span class="pn-me-ini">' + esc(ini) + "</span>"
+      : '<img src="/prep/art/logo-mark-prussian-96.webp" alt="" width="28" height="28" class="pn-lg-l"><img src="/prep/art/logo-mark-amber-96.webp" alt="" width="28" height="28" class="pn-lg-d">';
+    var title = nm ? esc(nm) : P && !P.signedIn ? "Guest" : esc(exLabel), sub = (nm || (P && !P.signedIn) ? esc(exLabel) + " · " : "") + "Level " + lv + " · " + esc(rank);
+    var inner = '<span class="pn-me-av" aria-hidden="true">' + av + '</span><span class="pn-tb"><b>' + title + "</b><small>" + sub + "</small></span>";
+    if (typeof G.SMD_openProfile !== "function") return '<section class="pn-me">' + inner + "</section>";
+    return '<button type="button" class="pn-me pn-me-btn" data-act="me-edit" aria-label="' + (P && !P.signedIn ? "Sign in or set up your profile" : "Edit profile") + '">' + inner +
+      '<span class="pn-me-ed">' + (P && !P.signedIn ? "Sign in" : "Edit") + "</span></button>";
+  }
+  /* The app's Profile sheet sits below this overlay (z-index 640 under 885); body.pn-over-sheet lifts it above while it is
+     open, and is dropped (and the menu redrawn with any new name) when it closes. */
+  function openProfile() {
+    var B = D.body; B.classList.add("pn-over-sheet");
+    try { G.SMD_openProfile(); } catch (e) { B.classList.remove("pn-over-sheet"); return; }
+    var sh = D.getElementById("hvSheet");
+    if (!sh || !G.MutationObserver) return;
+    var mo = new G.MutationObserver(function () {
+      if (sh.classList.contains("on")) return;
+      mo.disconnect(); B.classList.remove("pn-over-sheet");
+      if (root && root.querySelector(".pn-body.pn-menu")) rerender();
+    });
+    mo.observe(sh, { attributes: true, attributeFilter: ["class"] });
+  }
   function renderMenu() {
     var s = load(), ex = examOf(s.exam), plan = !!G.PREP_PLAN, choice = plan && s.pl && s.pl.exam && G.PREP_PLAN._pure.choiceOf(s.pl.exam), exLabel = choice && choice.tab === ex.id ? choice.label : ex.label;
     var lv = levelN(xpOfStore(s)), rank = rankOf(lv);
     paint(bar("Menu", "", "back") + '<div class="pn-body pn-menu">' +
-      '<section class="pn-me"><span class="pn-me-av" aria-hidden="true"><img src="/prep/art/logo-mark-prussian-96.webp" alt="" width="28" height="28" class="pn-lg-l"><img src="/prep/art/logo-mark-amber-96.webp" alt="" width="28" height="28" class="pn-lg-d"></span>' +
-      '<span class="pn-tb"><b>' + esc(exLabel) + "</b><small>Level " + lv + " · " + esc(rank) + "</small></span></section>" +
+      meCard(exLabel, lv, rank) +
       '<h2 class="pn-sec">Your course</h2><div class="pn-group">' +
       (plan ? row("p-settings", ico("gear"), "Exam and plan", "Exam: " + esc(exLabel) + " · daily goal and reminder") : "") +
       (G.PrepPro ? row("pro-open", ico("star"), "PrepNucleus Pro", "Your plan and what it includes") : "") +
@@ -2269,7 +2298,9 @@
       // Learn (prep-lessons.js, only when a module of this subject has a lesson), then "Start with last settings".
       var go = setupOn() && q ? '<button type="button" class="pn-btn pri pn-subgo" data-act="su-subject" data-s="' + esc(sid) + '">' + ico("play") + " Practise " + tx(sb.name) + "</button>" : "";
       var acts = go + lastBtn("subject", sid, ' data-s="' + esc(sid) + '"');
-      if (box) patchHtml(box, head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + (html || '<p class="pn-empty">Nothing in this filter yet.</p>'));
+      // NEET-SS Medical Oncology papers, analysis and 30-day plan (prep-pyqss.js) live inside the subject (owner 2026-11-07).
+      var ys = G.PREP_PYQSS && sid === "ss-medical-oncology" ? '<h2 class="pn-sec">Previous year questions</h2><div class="pn-group">' + G.PREP_PYQSS.homeRow(HOST) + "</div>" : "";
+      if (box) patchHtml(box, head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + ys + (html || '<p class="pn-empty">Nothing in this filter yet.</p>'));
       if (G.PREP_LESSONS && G.PREP_LESSONS.subjectButton) G.PREP_LESSONS.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
       if (G.PREP_IMGLEARN && G.PREP_IMGLEARN.subjectButton) G.PREP_IMGLEARN.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
     });
@@ -2350,7 +2381,7 @@
       if (!list.length) { toast("Nothing to practise here right now."); return rerender(); }
       runQuestions(list, kind === "exam" ? "exam" : "study", tx(topicOf(sid, mid).title));
     }, function () {
-      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">Questions need a connection. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
+      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">' + (G.PREP_BANK_MSG || String)("Questions need a connection. Check the connection and try again.") + '</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
       st.cur = { s: sid, m: mid };
     });
   }
@@ -2740,7 +2771,7 @@
     // Bookmark, the most used, stays in the bar; share, note and report fold into one "More" button (a menu under it).
     if ((acts.match(/<button/g) || []).length > 1) {
       acts = '<span class="pn-more"><button type="button" class="pn-ib" data-act="actsmenu" aria-haspopup="true" aria-expanded="false" aria-label="More actions">' + ico("dots") + "</button>" +
-        '<div class="pn-menu" role="group" aria-label="Question actions" hidden>' + acts + "</div></span>";
+        '<div class="pn-qmenu" role="group" aria-label="Question actions" hidden>' + acts + "</div></span>";
     }
     acts = bmBtn + acts;
     var right = r.mode === "exam" ? clk : acts || clk ? '<span class="pn-acts">' + clk + acts + "</span>" : "";
@@ -4285,14 +4316,14 @@
   function onClick(e) {
     var b = e.target.closest ? e.target.closest("[data-act]") : null;
     // The question-actions menu closes on any tap outside it, or on the button that opened it.
-    var om = root && root.querySelector(".pn-menu:not([hidden])");
+    var om = root && root.querySelector(".pn-qmenu:not([hidden])");
     if (om && !(e.target.closest && e.target.closest(".pn-more")) || (om && b && b.getAttribute("data-act") === "actsmenu")) {
       om.hidden = true; var ob = om.parentNode.querySelector("[data-act=actsmenu]"); if (ob) ob.setAttribute("aria-expanded", "false");
       if (b && b.getAttribute("data-act") === "actsmenu") return;
     }
     if (!b || !root.contains(b) || b.getAttribute("aria-disabled") === "true" || b.disabled) return;
     if (b.getAttribute("data-act") === "actsmenu") {
-      var mn = b.parentNode.querySelector(".pn-menu");
+      var mn = b.parentNode.querySelector(".pn-qmenu");
       if (mn) { mn.hidden = false; b.setAttribute("aria-expanded", "true"); }
       return;
     }
@@ -4491,6 +4522,7 @@
     if (a === "downloads") return push(renderDownloads);
     if (a === "menu") return push(renderMenu);
     if (a === "img-credits") return push(renderImageCredits);
+    if (a === "me-edit") return openProfile();
     if (a === "credit-close") return closeCreditSheet();
     if (a === "img-credit") {
       var cid = b.getAttribute("data-id");
@@ -4527,6 +4559,8 @@
     if (a.indexOf("il-") === 0 && G.PREP_IMGLEARN) return G.PREP_IMGLEARN.act(a, b, HOST);
     // Previous year papers (prep-pyq.js) own every data-act starting "y-".
     if (a.indexOf("y-") === 0 && G.PREP_PYQ) return G.PREP_PYQ.act(a, b, HOST);
+    // NEET-SS Medical Oncology previous-year questions + analysis (prep-pyqss.js) own every data-act starting "ys-".
+    if (a.indexOf("ys-") === 0 && G.PREP_PYQSS) return G.PREP_PYQSS.act(a, b, HOST);
     // Radiology image series (prep-rad.js) own every data-act starting "rd-".
     if (a.indexOf("rd-") === 0 && G.PREP_RAD) return G.PREP_RAD.act(a, b, HOST);
     // Onboarding, readiness and today's plan (prep-plan.js) own every data-act starting "p-".
