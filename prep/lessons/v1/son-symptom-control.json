@@ -1,0 +1,265 @@
+{
+  "v": 1,
+  "module": "son-symptom-control",
+  "subject": "ss-medical-oncology",
+  "title": "Cancer pain ladder, constipation, dyspnoea and emesis risk",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "**Chronic cancer pain** is best controlled with an opioid given on a fixed schedule, **around the clock**, rather than only when the patient asks for it. **Breakthrough pain**, a sudden spike on top of controlled background pain, is covered by **rescue doses** that usually equal 5 to 15 percent of the total daily dose. Persistent pain on the schedule calls for a dose increase.",
+      "say": "Chronic cancer pain is best controlled with an opioid given on a fixed schedule, around the clock, rather than only when the patient asks for it. Breakthrough pain is a sudden spike on top of controlled background pain. Rescue doses cover those spikes, and they usually equal 5 to 15 percent of the total daily dose. When pain persists on the schedule, the scheduled dose itself is increased.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Element",
+          "Purpose",
+          "Typical size"
+        ],
+        "rows": [
+          [
+            "Fixed-schedule opioid",
+            "Background pain control",
+            "Titrated until pain is controlled"
+          ],
+          [
+            "Rescue dose",
+            "Breakthrough pain",
+            "5 to 15 percent of the daily total"
+          ],
+          [
+            "Scheduled dose increase",
+            "Pain that persists on the schedule",
+            "30 to 100 percent of the prior 24 hour total"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **analgesic ladder** has three drug tiers: a nonopioid for mild pain, a weak opioid for moderate pain, and a strong opioid for severe pain. Patients whose pain stays **difficult to control** despite optimal opioid therapy move to a fourth tier of **interventional pain management**. A pain specialist may offer **nerve blocks** or **intrathecal** (delivered into the fluid around the spinal cord) opioid infusions.",
+      "say": "The analgesic ladder has three drug tiers. The first tier is a nonopioid for mild pain. The second tier is a weak opioid for moderate pain. The third tier is a strong opioid for severe pain. When pain stays difficult to control despite optimal opioid therapy, the patient moves to a fourth tier, interventional pain management. A pain specialist may offer nerve blocks, or intrathecal opioid infusions delivered into the fluid around the spinal cord.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mild",
+            "label": "Mild pain: nonopioid"
+          },
+          {
+            "id": "mod",
+            "label": "Moderate pain: weak opioid"
+          },
+          {
+            "id": "sev",
+            "label": "Severe pain: strong opioid"
+          },
+          {
+            "id": "hard",
+            "label": "Difficult to control: specialist procedures"
+          }
+        ],
+        "edges": [
+          [
+            "mild",
+            "mod",
+            "pain persists"
+          ],
+          [
+            "mod",
+            "sev",
+            "pain persists"
+          ],
+          [
+            "sev",
+            "hard",
+            "optimal opioids fail"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Opioid-induced constipation** (OIC, constipation caused by slowed gut movement from opioids) is among the most frequent opioid effects, and many patients never develop tolerance to it. Every patient starting an opioid should receive a regular bowel regimen. The preferred plan begins with a **stimulant laxative** such as **senna** or **bisacodyl**, often paired with the **osmotic laxative** **polyethylene glycol**.",
+      "say": "Opioid-induced constipation, or OIC, is one of the most common effects of opioid therapy. Many patients never develop tolerance to it, so the problem does not wear off with time. Every patient starting an opioid should receive a regular bowel regimen from the outset. The preferred plan begins with a stimulant laxative such as senna or bisacodyl. An osmotic laxative such as polyethylene glycol is often paired with it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Laxative class",
+          "Agents",
+          "Role in opioid constipation"
+        ],
+        "rows": [
+          [
+            "Stimulant",
+            "senna, bisacodyl",
+            "First line, stimulates peristalsis (gut contraction)"
+          ],
+          [
+            "Osmotic",
+            "polyethylene glycol",
+            "Paired with a stimulant for prevention"
+          ],
+          [
+            "Peripherally acting antagonist",
+            "methylnaltrexone",
+            "Reserved for laxative-refractory cases"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Methylnaltrexone** is a **peripherally acting** opioid antagonist, which blocks opioid receptors in the gut without reversing pain relief in the brain. It is given by injection under the skin for **laxative-refractory** constipation, meaning constipation that persists despite standard laxatives. It is contraindicated after recent bowel surgery and whenever a bowel obstruction is present.",
+      "say": "Methylnaltrexone is a peripherally acting opioid antagonist. It blocks opioid receptors in the gut while leaving pain relief in the brain intact. Clinicians give it by injection under the skin to patients whose constipation persists despite standard laxatives. In placebo-controlled trials it produced bowel movements within 24 hours. It must not be used when a bowel obstruction is present.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stimulant laxatives",
+          "points": [
+            "Given by mouth, and bisacodyl also rectally",
+            "First line, used for prevention",
+            "Act on the bowel muscle directly"
+          ]
+        },
+        "right": {
+          "title": "Methylnaltrexone",
+          "points": [
+            "Given by injection under the skin",
+            "Acts only on gut opioid receptors",
+            "Reserved for laxative-refractory cases",
+            "Contraindicated with bowel obstruction or recent bowel surgery"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Myofascial pain** arises from muscle and the connective tissue around it. Palpable nodules housed inside taut muscle bands are called **trigger points**, and they are regarded as a hallmark of this pain. A **trigger point injection** may relieve spasm by improving local blood flow, though no particular injectate has been shown to be superior. In cancer, the evidence for these injections remains limited.",
+      "say": "Myofascial pain comes from muscle and the connective tissue wrapped around it. Clinicians feel for palpable nodules sitting inside taut muscle bands, which are regarded as a hallmark of this pain. A trigger point injection targets those nodules. The injection may relieve spasm by improving local blood flow. No particular injectate has been shown to be superior. In cancer patients, the evidence for these injections remains limited.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "What it means"
+        ],
+        "rows": [
+          [
+            "Trigger point",
+            "Palpable nodule inside a taut muscle band"
+          ],
+          [
+            "Proposed effect",
+            "Local vasodilation and better blood flow"
+          ],
+          [
+            "Choice of injectate",
+            "No specific agent proven superior"
+          ],
+          [
+            "Evidence in cancer",
+            "Limited"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dyspnoea** (breathlessness, the sense of difficult breathing) is best treated first with **opioids**. In patients not already taking opioids, small doses of **morphine** relieve the sensation, and patients on a baseline opioid usually have that dose raised by 25 percent. **Benzodiazepines** serve as an add-on for the anxiety that often accompanies breathlessness, not as first-line therapy.",
+      "say": "Dyspnoea, the sense of breathlessness, is best treated first with opioids. In patients who are not already taking opioids, small doses of morphine relieve the sensation. Patients on a baseline opioid usually have that dose raised by 25 percent. Benzodiazepines serve as an add-on for the anxiety that often accompanies breathlessness. They are not a first-line treatment for the breathlessness itself.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Breathlessness persists"
+          },
+          {
+            "id": "b",
+            "label": "Low-dose morphine"
+          },
+          {
+            "id": "c",
+            "label": "Anxiety still present"
+          },
+          {
+            "id": "d",
+            "label": "Benzodiazepine as add-on"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "start here"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d",
+            "add-on only"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Bupropion** is an antidepressant also used for **smoking cessation** (quitting tobacco). The starting dose is 75 milligrams, with a usual range of 150 to 300 milligrams per 24 hours. It inhibits **cytochrome P450 2D6** (CYP2D6, an enzyme that activates some drugs), so it can blunt the conversion of **tamoxifen** into its active form, **endoxifen**. It also carries a **seizure** risk, and reports on fatigue disagree.",
+      "say": "Bupropion is an antidepressant that also helps people stop smoking. The starting dose is 75 milligrams, with a usual range of 150 to 300 milligrams per 24 hours. Bupropion inhibits cytochrome P450 2D6, an enzyme that helps activate tamoxifen into endoxifen, so the two drugs need careful review together. The drug also carries a risk of seizures. Reports on its value for fatigue disagree, so the evidence should be weighed carefully.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fatigue: systematic review finding",
+          "points": [
+            "Six of seven studies reported less fatigue",
+            "Minimal side effects were reported"
+          ]
+        },
+        "right": {
+          "title": "Fatigue: guidance on use",
+          "points": [
+            "Antidepressants have been studied for fatigue",
+            "Not recommended specifically to lessen fatigue",
+            "No benefit over placebo in patients without depression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cisplatin** is **highly emetogenic** (strongly causes vomiting, with more than a 90 percent chance of emesis without prophylaxis), and this classification holds at any dose. An **anthracycline** given with **cyclophosphamide** also belongs to the high group. Cyclophosphamide is high risk only above 1500 milligrams per square metre. **Carboplatin** is moderate risk, but an area under the curve (AUC) of 4 or more adds a neurokinin-1 antagonist to prophylaxis.",
+      "say": "Cisplatin is highly emetogenic, which means that more than 90 percent of patients vomit without preventive medicine, and this holds at any dose. An anthracycline given with cyclophosphamide also belongs in the high group. Cyclophosphamide is high risk only above 1500 milligrams per square metre. Carboplatin is moderate risk. Clinicians add a neurokinin-1 antagonist to the preventive regimen when its area under the curve is 4 or more.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Emetic risk",
+          "Dose condition"
+        ],
+        "rows": [
+          [
+            "Cisplatin",
+            "High",
+            "Any dose"
+          ],
+          [
+            "Anthracycline plus cyclophosphamide",
+            "High",
+            "Combination regimen"
+          ],
+          [
+            "Cyclophosphamide",
+            "High above 1500 milligrams per square metre",
+            "Below that, moderate"
+          ],
+          [
+            "Carboplatin",
+            "Moderate",
+            "Area under the curve (AUC) of 4 or more adds a neurokinin-1 antagonist"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "refs": [
+    "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
+    "Harrison's Principles of Internal Medicine, 22nd edition"
+  ],
+  "gen": "AI"
+}
