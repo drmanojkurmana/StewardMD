@@ -1,0 +1,148 @@
+{
+  "v": 1,
+  "module": "son-breast-risk-screening-dcis",
+  "subject": "ss-medical-oncology",
+  "title": "Breast Cancer Risk Factors, Screening MRI, BI-RADS 2 and DCIS Surgical Rules",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "Endogenous oestrogen exposure represents the central biological driver of **breast cancer risk**. Key risk factors include **early menarche** (before age 12), **late menopause** (after age 55), nulliparity, dense fibroglandular tissue, and prior mantle chest irradiation between ages 10 and 30 years. In contrast, **lobular carcinoma in situ** functions as a bilateral non-invasive risk indicator rather than an obligate direct precursor. Daily chemoprevention with **tamoxifen** reduces invasive breast cancer incidence by approximately 50% in high-risk premenopausal individuals.",
+      "say": "A solid understanding of breast oncogenesis begins with identifying estrogen-driven and architectural risk factors. Early menarche, late menopause, and nulliparity lengthen lifetime hormonal stimulation. Meanwhile, lobular carcinoma in situ serves as a generalized marker of heightened bilateral risk rather than an immediate localized malignancy. In suitable high-risk candidates, five years of tamoxifen chemoprevention cuts subsequent invasive cancer incidence in half.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-spc-fibroadenoma-breast.webp",
+        "alt": "Macroscopic pathology cross-section of breast tissue demonstrating lobulated stromal proliferation.",
+        "caption": "Fibroglandular breast parenchymal architecture. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "The American Cancer Society guidelines recommend annual supplemental **breast magnetic resonance imaging** combined with screening mammography for women at high risk. Accepted indications require a calculated lifetime breast cancer risk of 20% to 25% or greater using validated genetics-based models (such as Tyrer-Cuzick or BRCAPRO), a known pathogenic **BRCA1 or BRCA2 mutation**, having an untested first-degree relative of a BRCA carrier, prior mantle **chest radiation therapy** received between ages 10 and 30 years, or Li-Fraumeni and Cowden syndromes.",
+      "say": "Standard screening mammography is insufficient for women carrying extreme biological susceptibility to breast cancer. Magnetic resonance imaging offers superior sensitivity in dense fibroglandular tissue, detecting non-calcified invasive tumours at early stages. Annual screening MRI is officially indicated when a genetics model predicts a lifetime risk of twenty to twenty-five percent or higher, in confirmed BRCA carriers, in women with prior adolescent mantle irradiation, and in syndromic conditions like Li-Fraumeni.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk Category",
+          "Specific Clinical Indication",
+          "Lifetime Risk Level",
+          "Recommended Screening Modality"
+        ],
+        "rows": [
+          [
+            "High-Penetrance Mutation",
+            "Confirmed BRCA1 or BRCA2 mutation",
+            "45% to 85% lifetime risk",
+            "Annual MRI + Mammography (from age 25-30)"
+          ],
+          [
+            "Untested First-Degree Relative",
+            "Parent, sibling, or child of BRCA carrier",
+            "Up to 50% carrier probability",
+            "Annual MRI + Mammography"
+          ],
+          [
+            "Prior Thoracic Irradiation",
+            "Mantle field RT for Hodgkin (age 10-30)",
+            "Substantial lifetime risk",
+            "Annual MRI + Mammography (8-10y post-RT)"
+          ],
+          [
+            "Validated Model Risk",
+            "Tyrer-Cuzick / BRCAPRO / Claus calculation",
+            ">= 20% to 25% lifetime risk",
+            "Annual MRI + Mammography"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The Breast Imaging Reporting and Data System (**BI-RADS category 2**) classifies findings as definitely benign with zero percent probability of malignancy. Classical category 2 lesions include simple unilocular cysts, involuting fibroadenomas with coarse **popcorn calcifications**, secretory plasma cell mastitis rod-like calcifications, milk-of-calcium sedimentation in microcysts, and radiolucent lipid-filled oil cysts. Because malignancy is excluded, category 2 findings require neither biopsy nor short-interval follow-up; clinicians recommend standard age-appropriate **routine annual screening**.",
+      "say": "Correct interpretation of the BI-RADS lexicon avoids unnecessary patient anxiety and invasive procedures. When a radiologist assigns a BI-RADS category two, the finding is unequivocally benign, carrying an absolute zero percent risk of cancer. Classic examples include mature fibroadenomas showing popcorn calcification and coarse secretory rods. You can confidently reassure the patient that no biopsy is warranted, and recommend routine age-appropriate screening.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "BI-RADS 2 (Definitely Benign)",
+          "points": [
+            "0% probability of malignancy",
+            "Coarse popcorn calcifications",
+            "Secretory rod-like calcifications",
+            "Simple cysts and oil cysts",
+            "Routine age-appropriate screening"
+          ]
+        },
+        "right": {
+          "title": "BI-RADS 3 (Probably Benign)",
+          "points": [
+            "< 2% probability of malignancy",
+            "Circumscribed non-calcified solid mass",
+            "Punctate clustered microcalcifications",
+            "Short-interval 6-month surveillance",
+            "Biopsy if progression observed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Diagnosis of **ductal carcinoma in situ** (DCIS) on percutaneous core needle biopsy carries a 15% to 25% risk of upgrading to invasive carcinoma upon definitive surgical resection, driven by undetected microinvasion. The **comedo subtype**, characterized by high nuclear grade, linear branching microcalcifications, and extensive central **comedonecrosis**, confers the highest risk of occult invasion and local recurrence. **Sentinel lymph node biopsy** is contraindicated in routine lumpectomy for pure DCIS, but becomes mandatory if the patient undergoes total mastectomy.",
+      "say": "Percutaneous needle biopsy of ductal carcinoma in situ samples only a fraction of the lesion, meaning one in five patients is upstaged to invasive disease on final excision. High-grade comedo necrosis carries the greatest risk of harboring an invasive clone. When planning surgery, remember this critical rule: never perform a sentinel node biopsy for a routine wide local excision of DCIS. However, if the patient requires a total mastectomy, sentinel node mapping must be performed upfront because subsequent anatomical disruption prevents later mapping if invasion is discovered.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-fig1.webp",
+        "alt": "Microscopic view of ductal carcinoma in situ with central comedonecrosis filling mammary duct lumen.",
+        "caption": "Mammary duct filled with comedo-type ductal carcinoma in situ. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Premenopausal women with hormone receptor-positive early breast cancer exhibiting high-risk clinical features (such as young age under 35, positive axillary nodes, or high histologic grade requiring adjuvant chemotherapy) derive significant disease-free and overall survival benefits from **ovarian function suppression** (OFS). Landmark randomized clinical trials **SOFT and TEXT** demonstrated that adding monthly gonadotropin-releasing hormone agonists (such as triptorelin or goserelin) or bilateral oophorectomy to the oral aromatase inhibitor **exemestane** significantly reduces recurrence compared to tamoxifen alone.",
+      "say": "Endocrine therapy in young premenopausal women with hormone-receptor-positive breast cancer changed dramatically with the SOFT and TEXT trials. For women with low-risk features, five years of tamoxifen monotherapy remains acceptable. But in higher-risk patients who require adjuvant chemotherapy or present with involved lymph nodes, suppressing ovarian estrogen production with a monthly GnRH agonist and pairing it with exemestane provides superior protection against distant metastatic recurrence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "b1",
+            "label": "Premenopausal HR+ Breast Cancer"
+          },
+          {
+            "id": "b2",
+            "label": "High-Risk: Node+ / Young / Chemo"
+          },
+          {
+            "id": "b3",
+            "label": "Ovarian Function Suppression"
+          },
+          {
+            "id": "b4",
+            "label": "Aromatase Inhibitor (Exemestane)"
+          },
+          {
+            "id": "b5",
+            "label": "Superior DFS & OS (SOFT/TEXT)"
+          }
+        ],
+        "edges": [
+          [
+            "b1",
+            "b2"
+          ],
+          [
+            "b2",
+            "b3"
+          ],
+          [
+            "b3",
+            "b4"
+          ],
+          [
+            "b4",
+            "b5"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "18335b72-0fba-40c1-874a-e00d860259cb",
+    "1e3726d0-8064-4ef9-bcc6-5f5cc1dd79db",
+    "01c8482d-ecef-4ea7-b604-066666a5ed15"
+  ],
+  "gen": "AI"
+}

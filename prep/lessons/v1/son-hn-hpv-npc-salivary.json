@@ -1,0 +1,181 @@
+{
+  "v": 1,
+  "module": "son-hn-hpv-npc-salivary",
+  "subject": "ss-medical-oncology",
+  "title": "Nasopharyngeal Carcinoma, HPV Oropharyngeal Biology and Salivary Malignancies",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "Epstein-Barr virus (EBV) is etiologically linked to endemic **nasopharyngeal carcinoma**, specifically non-keratinizing differentiated (WHO Type II) and undifferentiated (WHO Type III) variants. In contrast, WHO Type I keratinizing squamous cell carcinoma is linked to tobacco and alcohol, not EBV. Viral oncogenesis is driven by **latent membrane protein 1** (LMP1), which mimics active CD40 signalling to activate downstream **NF-kB** and MAPK pathways, promoting sustained clonal proliferation and preventing cellular apoptosis.",
+      "say": "When evaluating nasopharyngeal carcinoma, remember that Epstein-Barr virus is tied almost exclusively to non-keratinizing and undifferentiated histologies, classified as WHO types two and three. The primary viral oncoprotein is LMP1, which functions as a constitutively active receptor mimicking CD40. By driving constant NF-kB signalling, it shields epithelial cells from programmed cell death and fuels aggressive neoplastic proliferation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nasopharyngeal-carcinoma-fig1.webp",
+        "alt": "Endoscopic view of the nasopharynx showing mucosal tumour mass adjacent to the fossa of Rosenmuller.",
+        "caption": "Nasopharyngeal carcinoma arising in the fossa of Rosenmuller. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Circulating cell-free **plasma EBV DNA** quantified by real-time PCR serves as a dynamic liquid biopsy biomarker in non-keratinizing nasopharyngeal carcinoma. Elevated baseline copy numbers correlate with advanced clinical stage and distant metastatic burden. Achieving undetectable plasma EBV DNA at the completion of definitive concurrent **chemoradiotherapy** signifies a profound molecular response. Conversely, persistently detectable or rising post-treatment EBV DNA strongly heralds subclinical locoregional recurrence or distant metastatic relapse.",
+      "say": "Plasma EBV DNA gives us an invaluable real-time window into tumour kinetics. A high copy number at diagnosis warns you of extensive tumour volume, but the post-treatment level carries even greater prognostic power. Patients who clear viral DNA from their bloodstream by the end of chemoradiation have excellent long-term survival, whereas persistent copy elevation reliably signals occult residual disease or impending distant metastases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Undetectable Post-CCRT EBV DNA",
+          "points": [
+            "Deep molecular response",
+            "Favourable progression-free survival",
+            "Low risk of distant relapse",
+            "Routine clinical surveillance"
+          ]
+        },
+        "right": {
+          "title": "Detectable Post-CCRT EBV DNA",
+          "points": [
+            "High risk of subclinical recurrence",
+            "Early distant metastasis herald",
+            "Metastatic workup required",
+            "Adjuvant capecitabine considered"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In Stage III nasopharyngeal carcinoma treated with definitive concurrent chemoradiotherapy, evaluation at eight to twelve weeks post-treatment uses clinical nasopharyngoscopy, plasma EBV DNA, and **FDG-PET/CT imaging**. When a 12-week post-treatment scan confirms complete metabolic resolution with negative PET findings and undetectable viral DNA, routine planned **neck dissection** is contraindicated. The standard of care is regular clinical surveillance with serial fibreoptic endoscopy, magnetic resonance imaging, and plasma EBV DNA quantification.",
+      "say": "Historically, clinicians often performed routine neck dissections after radiotherapy for advanced nodal disease, but modern imaging has rendered that approach obsolete. If your patient achieves complete metabolic resolution on a twelve-week post-treatment PET-CT alongside undetectable plasma EBV DNA, surgical exploration offers no survival advantage. Active surveillance with regular endoscopy and serial viral testing protects the patient from surgical morbidity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Stage III NPC CCRT"
+          },
+          {
+            "id": "n2",
+            "label": "12-Wk PET-CT & EBV"
+          },
+          {
+            "id": "n3",
+            "label": "Complete Response"
+          },
+          {
+            "id": "n4",
+            "label": "Active Surveillance"
+          }
+        ],
+        "edges": [
+          ["n1", "n2"],
+          ["n2", "n3"],
+          ["n3", "n4"]
+        ]
+      }
+    },
+    {
+      "tx": "High-risk human papillomavirus drives an increasing proportion of **oropharyngeal squamous cell carcinoma**, most commonly arising in the lingual and palatine tonsillar crypts. **HPV serotype 16** accounts for approximately 90% to 95% of all HPV-attributable oropharyngeal malignancies. The viral oncoprotein E7 binds and degrades retinoblastoma tumour suppressor protein, releasing E2F transcription factors and triggering compensatory overexpression of **cyclin-dependent kinase inhibitor p16**, which serves as a robust immunohistochemical surrogate marker.",
+      "say": "The molecular biology of HPV-driven oropharyngeal cancer centers on two critical viral oncoproteins. HPV type 16 is responsible for over ninety percent of these tumours. Viral E7 promotes rapid destruction of the retinoblastoma protein, unleashing cellular proliferation while driving massive compensatory accumulation of p16. Demonstrating strong, diffuse nuclear and cytoplasmic p16 staining on immunohistochemistry remains the universal clinical surrogate for active HPV-mediated oncogenesis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Viral Marker",
+          "Mechanism of Action",
+          "Target Protein",
+          "Diagnostic Application"
+        ],
+        "rows": [
+          [
+            "HPV E6 oncoprotein",
+            "Ubiquitin-mediated degradation",
+            "p53 tumour suppressor",
+            "Prevents DNA damage arrest"
+          ],
+          [
+            "HPV E7 oncoprotein",
+            "Targeted proteasomal destruction",
+            "Retinoblastoma protein (Rb)",
+            "Drives uncontrolled G1-S phase entry"
+          ],
+          [
+            "p16 (INK4a)",
+            "Compensatory overexpression",
+            "CDK4 / CDK6 complex",
+            "Surrogate diagnostic IHC biomarker"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Patients with **p16-positive oropharyngeal carcinoma** exhibit superior overall survival and locoregional control compared to HPV-negative counterparts. Recognizing this distinct biological behaviour, the AJCC 8th edition created a dedicated staging system using a single **six-centimetre nodal cutoff** for clinical nodal classification. Clinical category cN1 denotes one or more ipsilateral lymph nodes measuring six centimetres or less, cN2 denotes bilateral or contralateral nodes measuring six centimetres or less, and **category cN3** requires nodal size exceeding six centimetres.",
+      "say": "You must never use the traditional nodal classification for HPV-related oropharyngeal tumours. Because cystic, bulky neck adenopathy in HPV-positive disease does not portend the same grave outlook as HPV-negative disease, the eighth edition collapsed nodal categories around a six-centimetre ceiling. Single or multiple ipsilateral nodes measuring six centimetres or less remain cN1, bilateral nodes under six centimetres are cN2, and only nodes exceeding six centimetres become cN3.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical N Category",
+          "Nodal Laterality",
+          "Size Dimension Threshold",
+          "Prognostic Stage Group"
+        ],
+        "rows": [
+          [
+            "cN1",
+            "One or more ipsilateral nodes",
+            "All nodes <= 6 cm",
+            "Stage I (if T1-T2)"
+          ],
+          [
+            "cN2",
+            "Bilateral or contralateral nodes",
+            "All nodes <= 6 cm",
+            "Stage II (if T1-T2)"
+          ],
+          [
+            "cN3",
+            "Any nodal station",
+            "Tumour size > 6 cm",
+            "Stage III"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microscopic examination of HPV-associated oropharyngeal tumours characteristically reveals **non-keratinizing squamous cell carcinoma** arranged in expanding lobules with pushing borders, prominent mitotic figures, and absent keratin pearls. Despite their exquisitely chemosensitive and radiosensitive nature, attempts to de-escalate treatment by substituting cetuximab for cisplatin proved dangerous. Landmark randomized phase three trials **RTOG 1016** and **De-ESCALATE** demonstrated that cetuximab concurrent with radiotherapy resulted in significantly inferior overall survival and higher locoregional failure rates compared to standard cisplatin chemoradiotherapy.",
+      "say": "HPV-positive tumours feature distinct non-keratinizing sheets with smooth borders and high mitotic activity. Because these patients have favourable survival, researchers investigated whether substituting cetuximab for cisplatin could spare them long-term chemotherapy toxicities. However, both RTOG 1016 and the De-ESCALATE trial delivered a decisive verdict. Cetuximab led to significantly worse tumour control and inferior overall survival, establishing high-dose cisplatin as the irreplaceable standard.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard Cisplatin CCRT",
+          "points": [
+            "High-dose cisplatin (100 mg/m2 q3w)",
+            "Superior overall survival",
+            "Lower locoregional failure rate",
+            "Proven gold standard in RTOG 1016"
+          ]
+        },
+        "right": {
+          "title": "Cetuximab Substitution (Failed)",
+          "points": [
+            "EGFR monoclonal antibody",
+            "Inferior overall survival",
+            "Increased cancer recurrence risk",
+            "De-escalation abandoned in clinic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Arising from salivary ductal epithelium, **mucoepidermoid carcinoma** is the most common malignant salivary gland neoplasm, frequently driven by the chromosomal translocation t(11;19) generating a **CRTC1::MAML2 fusion**. When surgical resection yields microscopically positive margins, **surgical re-resection** to achieve negative margins is the primary recommendation whenever anatomically feasible without unacceptable neurovascular sacrifice. Postoperative adjuvant radiotherapy is reserved for high-grade histology, deeply infiltrative tumours with bone or perineural invasion, or cases where clear surgical margins cannot be obtained.",
+      "say": "Mucoepidermoid carcinoma is the most common primary cancer of the salivary glands, and its management depends heavily on margin status and histologic grade. If a resection margin returns microscopically positive for tumour cells, your first step should always be surgical re-excision to secure clear margins, provided it spares essential branches of the facial nerve. Postoperative radiation is added when re-excision is impossible, or when high-grade features and perineural invasion are present.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oncocytoma-salivary-fig1.webp",
+        "alt": "Histopathologic section of a salivary gland neoplasm demonstrating glandular lobules and ductal architecture.",
+        "caption": "Salivary gland parenchymal architecture and ductal structures. Credit: StewardMD."
+      }
+    }
+  ],
+  "quiz": [
+    "11f6efda-fdbe-424b-9657-5c090a22a3a6",
+    "12a8e10a-9eb6-4298-a3fb-2146acf2c99f",
+    "1b8d9028-391f-4160-93e1-3d31dfc835e7"
+  ],
+  "gen": "AI"
+}

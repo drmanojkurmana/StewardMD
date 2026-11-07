@@ -1,0 +1,118 @@
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 10,
+  "model": "muse-spark",
+  "module": "son-gynae-cervix-endo",
+  "quiz": [
+    "mk-a22a91ca776e",
+    "mk-f3d2fbf3989c",
+    "mk-fa8b72a1da8b"
+  ],
+  "refs": [
+    "NCCN Cervical Cancer 2024",
+    "NCCN Uterine Neoplasms 2024",
+    "ESGO-ESTRO-ESP Endometrial Guidelines"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "Parametrial invasion is the line where the surgeon steps back. Radiation plus weekly cisplatin controls disease without an operation at this stage. Induction chemotherapy or immunotherapy now build on that backbone in trials. Postoperative discovery of IIB requires the same concurrent treatment.",
+      "tx": "Stage IIB cervical cancer (parametrial invasion beyond the cervix) is always treated with definitive concurrent **chemoradiation** (pelvic external beam radiotherapy with weekly cisplatin 40 mg/m2 plus brachytherapy, internal radiation), since surgery is contraindicated once parametria are involved. Modern options add 6 weeks of weekly induction paclitaxel plus carboplatin first (INTERLACE) or pembrolizumab with chemoradiation (KEYNOTE A18). The same chemoradiation applies when IIB is discovered postoperatively on hysterectomy pathology.",
+      "vis": {
+        "alt": "Cervical carcinoma with parametrial extension and therapy map.",
+        "ar": 1.3333,
+        "caption": "Parametrial extension staging with definitive chemoradiation. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/ss-gyn-cervix-endometrium-staging-therapy-fig1.webp"
+      }
+    },
+    {
+      "say": "Two established pathological scoring systems govern postoperative management after radical hysterectomy. The Peters high-risk criteria, summarized as the three Ps, mandate concurrent chemoradiation. Intermediate risk by Sedlis criteria requires adjuvant pelvic radiotherapy alone. Combining multimodal treatments outside these validated criteria increases pelvic morbidity without improving survival.",
+      "tx": "Peters high risk criteria (**GOG 109**, the 3 Ps: positive nodes, positive margins, parametrial invasion) mandate adjuvant concurrent chemoradiation after radical hysterectomy, while Sedlis intermediate risk criteria (**GOG 92**: tumour over 4 cm, lymphovascular space invasion, deep stromal invasion) require adjuvant radiotherapy alone. Dual modality surgery plus radiation upfront is avoided for excess morbidity, so accurate preoperative staging decides the single definitive therapy. Pathology upgrades treatment only when these lists are met.",
+      "vis": {
+        "cols": [
+          "Criteria",
+          "Features",
+          "Adjuvant therapy"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Peters high risk GOG 109",
+            "Positive nodes, margins, parametria",
+            "Concurrent chemoradiation"
+          ],
+          [
+            "Sedlis intermediate GOG 92",
+            "Size over 4 cm, LVSI, deep invasion",
+            "Radiotherapy alone"
+          ],
+          [
+            "Neither list met",
+            "Clear margins and nodes",
+            "Observe"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Size cutoffs send small tumours to the surgeon and large ones to radiation. Two centimetres and four centimetres form the IB1, IB2 and IB3 borders. Operating then radiating everyone doubles harm without doubling cure. Pathology after surgery guides rather than repeats the plan.",
+      "tx": "FIGO stage IB1 (2 cm or less) and IB2 (over 2 up to 4 cm) cervical cancers in surgical candidates are treated upfront with radical **hysterectomy** (Type C womb removal) plus bilateral pelvic lymphadenectomy (node dissection), reserving adjuvant therapy for Peters or Sedlis indications on pathology. Stage IB3 (over 4 cm) and IIB onward require primary concurrent chemoradiation instead. Routine upfront dual modality surgery plus radiation is avoided for severe combined morbidity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "IB1 up to 2 cm and IB2 up to 4 cm",
+            "Radical hysterectomy plus nodes",
+            "Adjuvant only if Peters or Sedlis",
+            "Single modality cure"
+          ],
+          "title": "Surgery IB1 and IB2"
+        },
+        "right": {
+          "points": [
+            "IB3 over 4 cm and IIB onward",
+            "EBRT plus cisplatin plus brachytherapy",
+            "INTERLACE or pembrolizumab options",
+            "No upfront surgery"
+          ],
+          "title": "Chemoradiation IB3 plus"
+        }
+      }
+    },
+    {
+      "say": "Inguinofemoral lymph node status is the single most powerful determinant of survival in vulvar cancer. Stromal invasion depth exceeding one millimetre mandates comprehensive groin nodal staging. While tumour dimensions and lymphovascular invasion strongly correlate with nodal spread, tumour grade alone lacks independent prognostic value once nodal status is defined.",
+      "tx": "In vulvar squamous cell carcinoma, **inguinofemoral node status** (groin lymph node spread) is the single most powerful survival determinant, ahead of size and grade. Stromal invasion over **1 mm** (measured depth) separates stage IA (no groin staging) from IB and mandates inguinofemoral nodal assessment with lymphovascular invasion and size predicting metastasis. Histologic grade (differentiation level) is not an independent predictor of overall survival on multivariable analysis.",
+      "vis": {
+        "alt": "Labial tumour with inguinal lymphatic drainage.",
+        "ar": 1.3333,
+        "caption": "Vulvar tumour with groin drainage deciding prognosis. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/vulvar-cancer-fig1.webp"
+      }
+    },
+    {
+      "say": "Molecular biology decides over the microscope in this endometrial story. A proofreading defect produces mutations that activate killer T cells. Near total cure follows even ugly histology, so adjuvant therapy causes harm. p53 abnormal cases need the opposite maximal approach.",
+      "tx": "Pathogenic POLE exonuclease domain mutation (faulty DNA proofreading) creates an ultramutated phenotype (over 100 mutations per megabase) with rich neoantigens and vigorous T cell infiltration, giving over **98 percent** recurrence free survival even in high grade or serous histology. FIGO 2023 downstages any stage I to II pathogenic POLE cancer to **IAm POLE** (low risk molecular stage), managed with observation alone and no adjuvant therapy. p53 abnormal tumours sit at the opposite pole with the worst prognosis and full adjuvant therapy.",
+      "vis": {
+        "alt": "Bokhman Type I versus Type II endometrial cancers.",
+        "ar": 1.8349,
+        "caption": "Endometrial types with molecular POLE override of histology. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/endometrial-carcinoma-and-uterine-sarcomas-fig1.webp"
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Cervical cancer staging and vulvar nodes with POLE endometrium",
+  "v": 1
+}
