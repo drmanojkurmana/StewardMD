@@ -1324,6 +1324,14 @@ keyboard; conversation and box hidden under the keyboard, the page showing throu
   counts and "finished", plus up to 3 lessons in progress; rows use the existing `l-subject` / `l-open` actions; left out
   when prep-lessons.js is missing), Tests (renderMocks), You (renderMenu). The home bar's Menu button is hidden
   (`visibility`) while the bar shows.
+- You card (`meCard` in prep.js): the account's name and photo from `SMD_ACCOUNT.profile()` (initial when no photo,
+  Guest when signed out), the course and level, and an Edit (or Sign in) pill. Tapping it opens the app's Profile page
+  (`SMD_openProfile`, home.js: role, registration, hospital, degree, speciality, city, phone); that sheet (`.hv-sheet`,
+  z-index 640) would sit under `#smdPrep` (885), so `body.pn-over-sheet` lifts it to 892 while it is open and a
+  MutationObserver drops the class and redraws You when it closes. Gotcha (2026-11-06): the You screen body is
+  `.pn-body.pn-menu` (prep-nav.js matches it), so the question screen's More popup is `.pn-qmenu`; when both used
+  `pn-menu` the popup's absolute, max-content styles blanked the You screen on the phone. `run-prep-nav-ui.mjs`
+  (ENGINES=chromium runs without WebKit) asserts You shows its rows full width and the profile card opens Profile.
 - Navigation: a tab sets the stack to `[home]` or `[home, root]` (Android back from a tab goes home), cross-fade (nav 0).
   Current tab = nearest tab root down the stack. Tapping the current tab pops to its root (back slide); at the root it
   scrolls to the top. Each tab root keeps its scroll (`tabY`). Focus returns to the pressed tab after a keyboard switch.
