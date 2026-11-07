@@ -3,7 +3,7 @@
  "module": "med-heart-failure",
  "subject": "medicine",
  "title": "Management of Chronic Heart Failure with Reduced Ejection Fraction",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "Heart failure is classified by **LVEF** on echocardiography. HFrEF is defined as an LVEF of 40% or below. HFmrEF ranges from 41% to 49%, while HFpEF is 50% or above. The foundational treatment for HFrEF is the early initiation of the four pillars, which are vital to reduce mortality and hospitalisation.",
@@ -68,15 +68,26 @@
    }
   },
   {
+   "tx": "The image shows a failing left ventricle with arrows to heart, lungs and kidneys where the **four pillars** act. **Beta blocker** calms sympathetic drive while **ARNI** blockade steadies lung and vessel strain. Kidney insets show the remaining two pillar targets. Starting all four early lowers death and hospital stay, so learn each target site for exam questions.",
+   "say": "Look at the failing left ventricle in the centre. One arrow shows beta blocker treatment calming sympathetic drive to the heart. Another shows ARNI or ACE treatment blocking strain signals around the lungs and vessels. The kidney insets show where the other two pillars act. The label stresses early initiation because starting all four promptly lowers death and hospital admission.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-heart-failure-gen1.webp",
+    "alt": "The image shows a cross section of a failing left ventricle with labelled arrows to heart, lung and kidney insets marking four drug targets.",
+    "caption": "Failing ventricle with four early drug targets. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "tx": "Diuretics are used only for congestion and do not improve survival. In acute decompensation, patients often require twice their usual oral dose as an IV bolus or infusion. **Diuretic resistance** is suggested if urine sodium does not rise above 90 mEq/L despite high daily doses of loop diuretics for 3 days.",
    "say": "Diuretics are strictly for managing congestion and do not change survival rates. During acute episodes, double the oral dose for intravenous administration. If the urine sodium remains low despite high doses of furosemide, it indicates diuretic resistance, requiring alternative strategies like adding thiazides or acetazolamide.",
    "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/med-hf-diuretics.svg",
-        "alt": "Diuretic ladder: twice the home oral dose as IV bolus or infusion for congestion; resistance means urine sodium 90 or less after 3 days of high-dose loops; diuretics add no survival.",
-        "caption": "Dry the congestion, treat the failure.",
-        "ar": 1.5385
-      }
+    "kind": "image",
+    "src": "prep/lessons/media/med-hf-diuretics.svg",
+    "alt": "Diuretic ladder: twice the home oral dose as IV bolus or infusion for congestion; resistance means urine sodium 90 or less after 3 days of high-dose loops; diuretics add no survival.",
+    "caption": "Dry the congestion, treat the failure.",
+    "ar": 1.5385
+   }
   },
   {
    "tx": "Monitoring renal function and potassium is essential. A creatinine increase of up to 50% from baseline is acceptable when initiating or titrating **RAAS blockers**. If potassium levels exceed 5.5 mEq/L, reduce or stop the **MRA** and review therapy. For hypotension, prioritize withdrawing non-essential agents like **NSAIDs** or extra vasodilators rather than reducing foundational **heart failure** medications.",

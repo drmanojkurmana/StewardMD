@@ -3,7 +3,7 @@
  "module": "med-lab-interpretation",
  "subject": "medicine",
  "title": "Lab interpretation: count, chemistry, gas in context",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
    "tx": "The **full blood count** is read as one instrument. Haemoglobin with MCV and red cell numbers separates iron deficiency from thalassaemia trait and chronic disease, while white cells, platelets and film add marrow and systemic truth. Macrocytosis warns of B12, folate, alcohol, thyroid and drug causes before anaemia or neurology declares itself. Artefact, especially false low platelets, is excluded before alarm.",
@@ -87,6 +87,17 @@
       "Kidneys compensate slowly"
      ]
     }
+   }
+  },
+  {
+   "tx": "The printout shows acid blood with low pH plus low carbon dioxide and low **bicarbonate**. Beside it a **Gamblegram** stacks cations against anions to reveal a raised **anion gap** with lactate. Low bicarbonate with breathing compensation fits metabolic acidosis. Read pH first, then assign origin, then check compensation and gap before naming the cause.",
+   "say": "The left side shows a blood gas printout with low pH, low carbon dioxide and low bicarbonate, plus raised lactate. The right side shows a Gamblegram with cations on one bar and anions on the other, leaving a raised anion gap. The pattern fits metabolic acidosis with breathing compensation. Solve gases in order by reading pH, assigning the primary disorder, checking compensation and then using the gap and clinical cause.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-lab-interpretation-gen1.webp",
+    "alt": "The image shows an acid blood gas printout beside a cation and anion Gamblegram with a raised gap.",
+    "caption": "Acid gas with raised anion gap pattern. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
