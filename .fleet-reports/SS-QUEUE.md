@@ -15,7 +15,7 @@
 12. ss-surgical-gastroenterology (NEW) | blueprint: A-done (PR #1986) | A: done (PR #1986, 16/16 lane-A lessons, gates green, UNCHECKED muse-writer hold) | B: done (PR #1987 + 4 follow-up commits, 16/16 lane-B lessons, all gates green, UNCHECKED muse-writer hold) | C: done (PR #1988, 16/16 complete, 9/9 green) | subject: DONE
 13. ss-neurosurgery | blueprint: A-done (PR #1996) | A: done (PR #1999, 14/14 complete, 9/9 green, verified 2026-11-06: checkLesson [] x14, narration pass, coverage 8/8 x14, image-gate silent, all 14 Checked claude-Sonnet different-family) | B: done (PR #1997, 13/13 complete, 9/9 green) | C: done (PR #1998, 13/13 complete, 9/9 green) | subject: DONE
 14. ss-paediatric-surgery | blueprint: A-done (PR #2003) | A: done (PR #2006) | B: done (PR #2004, 14/14 complete, 9/9 green, UNCHECKED muse-writer hold in FLAGS) | C: done (PR #2007, 14/14 complete, 9/9 green, UNCHECKED muse-writer hold in FLAGS) | subject: DONE (lane B 2026-11-06: ss-subject-check missing 0; lesson PRs #2004/#2006/#2007 green; blueprint PR #2003 has 2 red checks unit-tests+Pages for lead/lane A)
-15. ss-ctvs | blueprint: todo | A: todo | B: audit PR #2008 open (3 sct lessons audited, +3 KB figures, UNCHECKED muse-writer hold) | C: todo | subject: open
+15. ss-ctvs | blueprint: A-done (PR #2016) | A: todo | B: audit PR #2008 open (3 sct lessons audited, +3 KB figures, UNCHECKED muse-writer hold) | C: todo | subject: open
 16. ss-obg (NEW, OBG/Gynae SS) | blueprint: todo | A: todo | B: todo | C: todo | subject: open
 17. ss-reproductive-medicine | blueprint: todo | A: todo | B: todo | C: todo | subject: open
 18. ss-gynaecological-oncology | blueprint: todo | A: todo | B: todo | C: todo | subject: open
