@@ -14,11 +14,11 @@
 
   var L10N = {
     en: {
-      backHub: "Back to Anesthetica", caseOf: "Case {i} of {n}", askCapno: "Which capnogram is this?", askMon: "What is the most likely problem?",
+      backHub: "Back to Anaesthetica", caseOf: "Case {i} of {n}", askCapno: "Which capnogram is this?", askMon: "What is the most likely problem?",
       teaching: "Teaching signal, not patient data", right: "Correct", wrong: "Not this one", answer: "Answer", yours: "Yours",
       see: "What the trace shows", points: "Teaching points", sources: "Sources", nextReview: "Next review in", day: "day", days: "days",
       next: "Next case", capAria: "Capnograph screen, synthetic teaching signal", monAria: "Monitor screen, synthetic teaching signal",
-      noModel: "The teaching signals did not load. Close Anesthetica, check your connection and open it again.", close: "Close Anesthetica",
+      noModel: "The teaching signals did not load. Close Anaesthetica, check your connection and open it again.", close: "Close Anaesthetica",
       notConn: "Not connected", trend: "EtCO2, last 15 min", co2: "CO2 mmHg", ecg: "ECG II", pleth: "Pleth", nibp: "NIBP", hr: "HR",
       spo2: "SpO2 %", etco2: "EtCO2", rr: "RR", sweepFast: "8 s", sweepSlow: "24 s", keys: "Keys 1 to 4 choose an answer.",
       maikCap: "I am learning to read capnograms. This synthetic teaching trace shows: {t}. I chose: {m}. Explain the features that identify it and how to tell it from my choice.",

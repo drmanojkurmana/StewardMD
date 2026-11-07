@@ -1123,7 +1123,7 @@
     narke: function () {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "narke"; })[0];
       if (!t || !homeToolEligible(t)) return;
-      if (window.NARKE && NARKE.open) NARKE.open(); else toast("Anesthetica loading…");
+      if (window.NARKE && NARKE.open) NARKE.open(); else toast("Anaesthetica loading…");
     },
     // Kardia (Echo and ECG learning on the specialty engine), the same quiet no-op as Tokós/Narkē
     // when its flag is off: the Home tile hides and every entry refuses silently.
@@ -1911,6 +1911,28 @@
       ".rnav-grid.reordering .rnav-tile.addtool{opacity:.35;pointer-events:none}",
       "#rnavToolsGrid .rnav-tile.dragging{opacity:.18!important;transform:none!important;animation:none!important}#rnavToolsGrid .rnav-tile{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}.rnav-drag-ghost{will-change:transform;filter:drop-shadow(0 14px 18px #0004)}#rnavReorderHint{font-size:12px;color:var(--slate);margin:0 0 14px}",
       "@keyframes rnavJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}",
+      /* Home tabs (owner 2026-11-07) */
+      "#homeV2 .rnav-htabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:2px -2px 14px;padding:2px;-webkit-overflow-scrolling:touch}#homeV2 .rnav-htabs::-webkit-scrollbar{display:none}",
+      "#homeV2 .rnav-htab{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:0;height:44px;min-height:44px;box-sizing:border-box;padding:0 11px;border-radius:999px;border:1px solid var(--rds-line,#e3eaee);background:var(--rds-surface,#fff);color:var(--rds-ink,#0d1b24);font:700 13.5px var(--rds-font,system-ui);cursor:pointer;white-space:nowrap}",
+      "#homeV2 .rnav-htab .rds-icon{font-size:18px;margin:0 -4px 0 1px}",
+      /* When the row is wider than the phone, fade its right edge so the hidden tab reads as "scroll for more". */
+      "#homeV2 .rnav-htabs.more{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}",
+      "#homeV2 .rnav-htab.on{background:var(--rds-primary,#0f766e);border-color:var(--rds-primary,#0f766e);color:#fff}",
+      "#homeV2 .rnav-htab:focus-visible,#homeV2 .rnav-try button:focus-visible,#homeV2 .rnav-tab-pick:focus-visible,#homeV2 .rnav-tab-link:focus-visible{outline:2px solid var(--rds-primary,#0f766e);outline-offset:2px}",
+      "#homeV2 .rnav-tab-sub{margin:0 0 14px;font:500 13.5px/1.45 var(--rds-font,system-ui);color:var(--rds-muted,#5b7083)}",
+      "#homeV2 .rnav-tab-link{border:0;background:none;padding:6px 4px;margin:-6px 0;color:var(--rds-primary,#0f766e);font:700 13.5px var(--rds-font,system-ui);cursor:pointer;text-decoration:underline}",
+      "#homeV2 .rnav-tab-empty{text-align:center;padding:18px 12px 8px;font:500 14px/1.5 var(--rds-font,system-ui);color:var(--rds-muted,#5b7083)}#homeV2 .rnav-tab-empty p{margin:0 0 12px}",
+      "#homeV2 .rnav-tab-pick{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;border:0;border-radius:12px;background:var(--rds-primary,#0f766e);color:#fff;font:700 14px var(--rds-font,system-ui);cursor:pointer}",
+      "#homeV2 .rnav-tile-new{position:absolute;top:6px;left:6px;z-index:2;font:800 9px/1 var(--rds-font,system-ui);letter-spacing:.06em;text-transform:uppercase;padding:3px 6px;border-radius:999px;color:#fff;background:var(--rds-primary,#0f766e)}",
+      "#homeV2 .rnav-try{display:flex;align-items:center;gap:12px;margin:0 0 16px;padding:12px 14px;border:1px solid var(--rds-line,#e3eaee);border-radius:16px;background:var(--rds-surface,#fff)}",
+      "#homeV2 .rnav-try .hv-tbadge{flex:0 0 auto}#homeV2 .rnav-try-bd{flex:1;min-width:0}",
+      "#homeV2 .rnav-try-k{font:800 11px var(--rds-font,system-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--rds-primary,#0f766e)}",
+      "#homeV2 .rnav-try-t{font:800 15px/1.3 var(--rds-font,system-ui);color:var(--rds-ink,#0d1b24);margin-top:2px}",
+      "#homeV2 .rnav-try-d{font:500 13px/1.4 var(--rds-font,system-ui);color:var(--rds-muted,#5b7083);margin-top:2px}",
+      "#homeV2 .rnav-try-ac{display:flex;flex-direction:column;gap:6px;flex:0 0 auto}",
+      "#homeV2 .rnav-try-go{min-height:40px;padding:0 16px;border:0;border-radius:10px;background:var(--rds-primary,#0f766e);color:#fff;font:700 14px var(--rds-font,system-ui);cursor:pointer}",
+      "#homeV2 .rnav-try-no{min-height:36px;padding:0 10px;border:0;background:none;color:var(--rds-muted,#5b7083);font:600 13px var(--rds-font,system-ui);cursor:pointer}",
+      ".rnav-bpick{display:flex;flex-direction:column;gap:2px;margin-top:8px}.rnav-bpick-row{width:100%;text-align:left;border:0;background:none;cursor:pointer;min-height:52px}.rnav-bpick-row.on{background:var(--hbg,rgba(15,118,110,.08))}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
@@ -2123,115 +2145,115 @@
     try { var q = (location.search.match(/[?&]neo=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_neo") !== "0"; } catch (e) { return true; }
   }
   var HOME_TOOLS = [
-    { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "Retinal scan", feat: true, beta: true, anim: "eye",
+    { act: "retinalscan", ic: "visibility", tt: "FundX AI", sub: "AI reads a retina photo", feat: true, beta: true, anim: "eye",
       eligible: function () { return expTileOn("smd_fundx", "fundx", null); } },
     // Kardia (WP8) replaces the KardiQ X tile while smd_kardia is on; with the flag off the
     // KardiQ X tile reads exactly as before (kardiaOn() is false, so this changes nothing).
-    { act: "kardia", ic: "cardiology", tt: "Kardia", sub: "Echo and ECG learning", feat: true,
+    { act: "kardia", ic: "cardiology", tt: "Kardia", sub: "Learn echo and ECG", feat: true,
       eligible: function () { return kardiaOn(); } },
-    { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "ECG", feat: true, beta: true, anim: "ecg",
+    { act: "kardiox", ic: "cardiology", tt: "KardiQ X AI", sub: "AI reads an ECG", feat: true, beta: true, anim: "ecg",
       eligible: function () { return expTileOn("smd_kardiox", "kardiox", "KARDIOX") && !kardiaOn(); } },
-    { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "Chest X-ray", feat: true, beta: true, anim: "cxr",
+    { act: "thorex", ic: "pulmonology", tt: "ThoreX AI", sub: "AI reads a chest X-ray", feat: true, beta: true, anim: "cxr",
       eligible: function () { return expTileOn("smd_thorex", "thorex", "THOREX"); } },
-    { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, beta: true, anim: "derm",
+    { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "AI checks a skin lesion", feat: true, beta: true, anim: "derm",
       eligible: function () { return expTileOn("smd_sknx", "sknx", "SKNX"); } },
     // Learn ECG (KardiQ X atlas + quiz, no AI). Open to every user without the AI access code (audit
     // finding 11, owner decision 2026-09-26). eligible() reads the kill switch directly because
     // home.js loads before kardiox-flags.js: ?kxlearn=0 or localStorage smd_kardiox_learn=0 hides it.
-    { act: "kxlearn", ic: "ecg_heart", tt: "Learn ECG", sub: "ECG atlas & quiz",
+    { act: "kxlearn", ic: "ecg_heart", tt: "Learn ECG", sub: "Read ECGs, then quiz",
       eligible: function () { try { var q = (location.search.match(/[?&]kxlearn=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_kardiox_learn") !== "0"; } catch (e) { return true; } } },
-    { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Clinical learning", feat: true,
+    { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Exam skills, step by step", feat: true,
       eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") !== "0"); } catch (e) { return true; } } },
     // SURGX (SURGˣ) — Surgical Intelligence. eligible() reads localStorage DIRECTLY rather than
     // SMD_SURGX_FLAGS, because home.js loads at index.html:1587, BEFORE the SURGX block: the flag
     // object does not exist yet at tile-render time. Same fallback pattern as ThoreX/CliniX above.
-    { act: "surgx", ic: "content_cut", tt: "SURG\u02E3", sub: "Surgical intelligence", feat: true, anim: "surgx",
+    { act: "surgx", ic: "content_cut", tt: "SURG\u02E3", sub: "Surgery notes and checklists", feat: true, anim: "surgx",
       eligible: function () { try { var q = (location.search.match(/[?&]surgx=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_surgx") !== "0"; } catch (e) { return true; } } },
     // NMC Logbook - PG digital logbook. eligible() reads localStorage DIRECTLY rather than
     // SMD_PGLOG_FLAGS, because home.js loads BEFORE the pglog block in index.html: the flag object
     // does not exist yet at tile-render time. Same fallback pattern as SURGX/ThoreX/CliniX above.
-    { act: "pglog", ic: "history_edu", tt: "NMC eLOGBook", sub: "Residency logbook & portfolio", feat: true,
+    { act: "pglog", ic: "history_edu", tt: "NMC eLOGBook", sub: "Log cases, get them signed", feat: true,
       eligible: pglogOn },
-    { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
+    { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Follow up after discharge",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
-    { act: "maitri", ic: "support_agent", tt: "MAiTRI", sub: "Recovery", feat: true, anim: "maitri",
+    { act: "maitri", ic: "support_agent", tt: "MAiTRI", sub: "Recovery help for patients", feat: true, anim: "maitri",
       eligible: function () { try { if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
-    { act: "queue", ic: "groups", tt: "OPD Queue", sub: "Patient flow",
+    { act: "queue", ic: "groups", tt: "OPD Queue", sub: "Manage your OPD patients",
       eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") === "1"; } catch (e) { return false; } } },
     // One oncology tool on the home grid (owner 2026-10-30: "Single tool please"). ONCQIS already opens
     // OncoTree and Cancer Staging from inside, so their own tiles only appear when ONCQIS is switched off.
-    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "OncoTree, staging, protocols", anim: "oncqis",
+    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "Cancer staging and treatment", anim: "oncqis",
       eligible: oncqisOn },
-    { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer pathway navigator", feat: true, anim: "oncotree",
+    { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer workup, step by step", feat: true, anim: "oncotree",
       eligible: function () { if (oncqisOn()) return false; try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
-    { act: "staging", ic: "stairs", tt: "Cancer Staging", sub: "AJCC/TNM 32 Sites", feat: true, defOn: true,
+    { act: "staging", ic: "stairs", tt: "Cancer Staging", sub: "TNM stage for 32 cancers", feat: true, defOn: true,
       eligible: function () { return !oncqisOn(); } },
     // Specialty kits (specialty-kits.js): O&G, Paediatrics, Orthopaedics, Ophthalmology, ENT, Dermatology,
     // Psychiatry, Dental. eligible() reads the flag directly: home.js loads before specialty-kits-flags.js,
     // so SMD_KITS_FLAGS may not exist yet at tile-render time. Same resolution: ?kits= then localStorage.
-    { act: "speckit", ic: "medical_services", tt: "Specialty Kits", sub: "O&G · Paeds · Eye · ENT · more", defOn: true,
+    { act: "speckit", ic: "medical_services", tt: "Specialty Kits", sub: "Tools for your specialty", defOn: true,
       eligible: function () { try { var q = (location.search.match(/[?&]kits=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_specialty_kits") !== "0"; } catch (e) { return true; } } },
     // Clinical documents (clinical-docs.js): certificates, consent forms, handouts, MLC, MCCD draft.
-    { act: "docs", ic: "description", tt: "Documents", sub: "Certificates · consent · handouts", defOn: true,
+    { act: "docs", ic: "description", tt: "Documents", sub: "Certificates and consent forms", defOn: true,
       eligible: function () { try { var q = (location.search.match(/[?&]docs=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_clinical_docs") !== "0"; } catch (e) { return true; } } },
     // Clinical review desk (review-desk.js): approve or comment on AI-drafted content. Off by default on
     // Home (reviewers add it from Add Tool); flag smd_review_desk / ?review=0 hides it entirely.
-    { act: "review", ic: "rate_review", tt: "Review content", sub: "Approve protocols and kits", defOn: false,
+    { act: "review", ic: "rate_review", tt: "Review content", sub: "Approve AI-drafted content", defOn: false,
       eligible: function () { try { var q = (location.search.match(/[?&]review=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_review_desk") !== "0"; } catch (e) { return true; } } },
     // Colleagues (kits-share.js, wave 2): referrals, handovers and case rooms. Only when smd_kits_share is on.
-    { act: "kxinbox", ic: "groups", tt: "Colleagues", sub: "Referrals, handovers, cases", defOn: true,
+    { act: "kxinbox", ic: "groups", tt: "Colleagues", sub: "Refer and hand over patients", defOn: true,
       eligible: function () { try { var q = (location.search.match(/[?&]share=([^&]+)/) || [])[1]; if (q === "1" || q === "true") return true; if (q === "0" || q === "false") return false; return localStorage.getItem("smd_kits_share") !== "0"; } catch (e) { return true; } } },
-    { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
-    { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
-    { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
-    { act: "atlas", ic: "body_system", tt: "RadioAnatome", sub: "Anatomy",
+    { act: "dictate", ic: "mic", tt: "Dictate", sub: "Speak, get a written note" },
+    { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Check medicines by photo" },
+    { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Treatment protocols to read" },
+    { act: "atlas", ic: "body_system", tt: "RadioAnatome", sub: "Anatomy on CT and MRI",
       eligible: function () { try { var q = (location.search.match(/[?&]atlas=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_atlas") !== "0"; } catch (e) { return true; } } },
     // Ophthalmós (ophthalmos.js): eye-imaging clinic trainer. ON for all (owner decision 2026-09-27);
     // kill switch smd_ophthalmos="0" or ?ophthalmos=0. Images load from R2 (ophthalmos-img.stewardmd.in);
     // content is ai_drafted, so every screen carries a "To be verified · draft" mark until sign-off.
-    { act: "ophthalmos", ic: "eye", anim: "ophthalmos", tt: "Ophthalmós", sub: "Eye imaging clinic",
+    { act: "ophthalmos", ic: "eye", anim: "ophthalmos", tt: "Ophthalmós", sub: "Learn eye scans and images",
       eligible: function () { try { var q = (location.search.match(/[?&]ophthalmos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_ophthalmos") !== "0"; } catch (e) { return true; } } },
     // Tokós (tokos.js on the specialty engine, loaded on first open by tokos-loader.js): Obstetrics and Gynaecology
     // learning (Learn, CTG clinic, questions, drills, calculators). ON for all while the app is in testing (owner decision
     // 2026-09-29); kill switch smd_tokos="0" or ?tokos=0. Labels stay "rule-based, pending review" until an
     // obstetrician approves each case in the Review Desk.
-    { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "Obstetrics and gynae",
+    { act: "tokos", ic: "monitor_heart", tt: "Tokós", sub: "Learn O&G and CTG",
       eligible: function () { try { var q = (location.search.match(/[?&]tokos=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_tokos") !== "0"; } catch (e) { return true; } } },
     // PrepNucleus (prep.js, loaded on first open by prep-loader.js): the NEET-PG, INI-CET, NEET-SS and USMLE question
     // bank (vault/plans/PrepNucleus.md). ON for all (owner 2026-10-06); smd_prep="0" or ?prep=0 hides it.
-    { act: "prep", ic: "quiz", anim: "prep", tt: "PrepNucleus", sub: "Exam question bank",
+    { act: "prep", ic: "quiz", anim: "prep", tt: "PrepNucleus", sub: "NEET-PG and exam questions",
       eligible: function () { try { var q = (location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_prep") !== "0"; } catch (e) { return true; } } },
     // Narkē (narke.js on the specialty engine, loaded on first open by narke-loader.js): Anaesthesia learning. ON for all
     // (owner 2026-10-06); kill switch smd_narke="0" or ?narke=0. Content stays "draft" until an anaesthesiologist approves it.
-    { act: "narke", ic: "masks", tt: "Anesthetica", sub: "Anaesthesia",
+    { act: "narke", ic: "masks", tt: "Anaesthetica", sub: "Learn anaesthesia",
       eligible: function () { try { var q = (location.search.match(/[?&]narke=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_narke") !== "0"; } catch (e) { return true; } } },
-    { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
+    { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "Correct sodium, potassium", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
-    { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },
-    { act: "govschemes", ic: "local_hospital", tt: "Scheme Search", sub: "Package codes and rates", defOn: true,
+    { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "Your OPD, ICU and ward", defOn: false },
+    { act: "govschemes", ic: "local_hospital", tt: "Scheme Search", sub: "Scheme package codes, rates", defOn: true,
       eligible: function () { return govschemesOn(); } },
-    { act: "icdsearch", ic: "search", tt: "Search ICD", sub: "ICD-10 / ICD-11 diagnosis codes", defOn: true },
-    { act: "icu", ic: "monitor_heart", tt: "ICU & Ward", sub: "Critical care", defOn: false },
-    { act: "codeblue", ic: "monitor_heart", tt: "Code Blue", sub: "Resuscitation timer", defOn: false },
-    { act: "ward", ic: "bed", tt: "Ward Sync", sub: "Inpatient GHIS", defOn: false },
-    { act: "agentconnect", ic: "hub", tt: "AgentConnect", sub: "Connect your hospital's EMR", defOn: true },
-    { act: "startcase", ic: "stethoscope", tt: "Start Case", sub: "Assessment", defOn: false },
-    { act: "reasoning", ic: "neurology", tt: "Dx Patient", sub: "Differential", defOn: false },
-    { act: "askai", ic: "auto_awesome", anim: "maikai", tt: "Ask MaiK", sub: "AI assistant", defOn: false },
-    { act: "drugmenu", ic: "medication", tt: "Drugs", sub: "Database · interactions", defOn: false },
-    { act: "calculators", ic: "calculate", tt: "Calculators", sub: "Scores · doses", defOn: false },
+    { act: "icdsearch", ic: "search", tt: "Search ICD", sub: "Find a diagnosis code", defOn: true },
+    { act: "icu", ic: "monitor_heart", tt: "ICU & Ward", sub: "Critical care tools", defOn: false },
+    { act: "codeblue", ic: "monitor_heart", tt: "Code Blue", sub: "Cardiac arrest timer", defOn: false },
+    { act: "ward", ic: "bed", tt: "Ward Sync", sub: "Your inpatient list", defOn: false },
+    { act: "agentconnect", ic: "hub", tt: "AgentConnect", sub: "Link your hospital EMR", defOn: true },
+    { act: "startcase", ic: "stethoscope", tt: "Start Case", sub: "Assess a new patient", defOn: false },
+    { act: "reasoning", ic: "neurology", tt: "Dx Patient", sub: "Find the likely diagnosis", defOn: false },
+    { act: "askai", ic: "auto_awesome", anim: "maikai", tt: "Ask MaiK", sub: "Ask any clinical question", defOn: false },
+    { act: "drugmenu", ic: "medication", tt: "Drugs", sub: "Look up any medicine", defOn: false },
+    { act: "calculators", ic: "calculate", tt: "Calculators", sub: "Clinical scores", defOn: false },
     // Dose calculator (dose-calc.js). Flag smd_dose_calc, DEFAULT ON (owner 2026-09-28); "0" hides it.
     // Read directly: home.js loads before dose-calc.js.
-    { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for a patient", defOn: false,
+    { act: "dosecalc", ic: "medication", tt: "Dose calculator", sub: "Dose for one patient", defOn: false,
       eligible: function () { return doseCalcOn(); } },
     // Neonatal hub: dosing, preparation, infusions, fluids, growth, bilirubin, scores, reference values,
     // procedures, drug levels. Shown on Home by default once the flag is on.
-    { act: "neo", ic: "child_care", tt: "Neonatal", sub: "NICU tools", defOn: true, beta: true,
+    { act: "neo", ic: "child_care", tt: "Neonatal", sub: "Newborn and NICU care", defOn: true, beta: true,
       eligible: function () { return neoOn(); } },
-    { act: "dosing", ic: "vaccines", tt: "Bedside dosing", sub: "Insulin · electrolytes", defOn: false },
-    { act: "insulin", ic: "water_drop", tt: "Insulin", sub: "Dose · convert", defOn: false },
-    { act: "syndromes", ic: "coronavirus", tt: "Syndromes", sub: "Reference", defOn: false },
-    { act: "antibiogram", ic: "biotech", tt: "Antibiogram", sub: "Local resistance", defOn: false },
+    { act: "dosing", ic: "vaccines", tt: "Bedside dosing", sub: "Insulin and electrolyte doses", defOn: false },
+    { act: "insulin", ic: "water_drop", tt: "Insulin", sub: "Insulin dose and switch", defOn: false },
+    { act: "syndromes", ic: "coronavirus", tt: "Syndromes", sub: "Which antibiotic to start", defOn: false },
+    { act: "antibiogram", ic: "biotech", tt: "Antibiogram", sub: "Your local resistance", defOn: false },
   ];
   function homeToolByAct(a) {
     if (a === "connect") a = "agentconnect";
@@ -2370,7 +2392,10 @@
     if (st) HOME_TOOLS.forEach(function (t) { p[t.act] = homeToolVisible(t, st); });
     return p;
   }
-  function noteToolOpened(a) { try { var g = toolGroups(); if (g && homeToolByAct(a)) g.pushRecent(homeToolByAct(a).act); } catch (e) {} }
+  function noteToolOpened(a) {
+    try { var g = toolGroups(); if (g && homeToolByAct(a)) g.pushRecent(homeToolByAct(a).act); } catch (e) {}
+    try { var T = homeTabsApi(); if (T && homeToolByAct(a)) T.markSeen(homeToolByAct(a).act); } catch (e) {}
+  }
   function homeToolEligible(t) { if (!t.eligible) return true; try { return !!t.eligible(); } catch (e) { return false; } }
   // Live animated icons for the AI tiles (dark badge). CSS in redesign-system.css animates these
   // (eye blink · ECG sweep · lesion pulse · X-ray beam); reduced-motion disables the motion.
@@ -2485,14 +2510,15 @@
     var inner = locked ? '<span class="rds-icon">lock</span>' : ((t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : '<span class="rds-icon">' + t.ic + '</span>');
     return '<span class="hv-tbadge' + (locked ? ' locked' : '') + '" data-tb="' + t.act + '" aria-hidden="true">' + inner + '</span>';
   }
-  function homeToolTile(t, locked) {
+  function homeToolTile(t, locked, fresh) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : (locked ? ric(t.ic) : liveIcon(t));
     // A1: the Specialty Kits tile names the doctor's own kit once one is known (profile or chosen).
     if (t.act === "speckit") { var mk = ""; try { mk = (window.SMD_KITS && SMD_KITS.myLabel) ? SMD_KITS.myLabel() : ""; } catch (e) {} if (mk) t = { act: t.act, ic: t.ic, tt: t.tt, sub: "My kit: " + mk, defOn: t.defOn, feat: t.feat }; }
     // BETA chip: these models are clinically unvalidated, so the label rides the tile on EVERY path
     // that renders it (access code, tester flag, Physician Pro early access). Not dismissible.
-    return '<button class="rnav-tile' + (t.feat && !locked ? ' feat' : '') + (locked ? ' role-locked' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + (t.beta ? ', beta' : '') + (locked ? ', locked for your role' : '') + '"' + (locked ? ' style="opacity:.5;filter:grayscale(1)"' : '') + '>' +
+    return '<button class="rnav-tile' + (t.feat && !locked ? ' feat' : '') + (locked ? ' role-locked' : '') + '" data-act="' + t.act + '" aria-label="' + t.tt + (t.beta ? ', beta' : '') + (fresh && !locked ? ', new to you' : '') + (locked ? ', locked for your role' : '') + '"' + (locked ? ' style="opacity:.5;filter:grayscale(1)"' : '') + '>' +
       '<span class="rnav-badge">' + icon + '</span>' +
+      (fresh && !locked ? '<span class="rnav-tile-new" aria-hidden="true">New</span>' : '') +
       (t.beta ? '<span class="rnav-tile-beta">BETA</span>' : '') +
       (locked ? '<span class="rnav-tile-lock" aria-hidden="true" style="position:absolute;top:6px;right:6px;display:inline-flex">' + ric("lock") + '</span>' : '') +
       '<span class="rnav-tile-tt">' + (t.act === "askai" && window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label(t.tt) : t.tt) + '</span><span class="rnav-tile-sub">' + t.sub + '</span></button>';
@@ -2502,7 +2528,7 @@
     var lockedHtml = "";
     for (var i = 0; i < TOOLS.length; i++) {
       var t = TOOLS[i]; if (!(homeToolEligible(t) && homeToolVisible(t, st))) continue;
-      if (roleLocked(t.act)) lockedHtml += homeToolTile(t, true); else html += homeToolTile(t);
+      if (roleLocked(t.act)) lockedHtml += homeToolTile(t, true); else html += homeToolTile(t, false, toolIsNew(t.act));
     }
     html += lockedHtml;
     // Tester (owner, 2026-09-28): "I only want 3 tools on my home screen, but at times I need the
@@ -2512,6 +2538,139 @@
       '<span class="rnav-badge">' + ric("apps") + '</span><span class="rnav-tile-tt">All tools</span><span class="rnav-tile-sub">Open any tool</span></button>';
     return html;
   }
+
+  /* ---- Home tabs (owner 2026-11-07): [For you] [Learn] [Bedside] [Practice] [<branch> v] -----------------------
+   * tool-groups.js holds the data (TASKS, BRANCHES, the problem keywords, the seen list). "For you" is the grid as it
+   * always was (pinned or starter tools, touch and hold to rearrange, All tools last), with one "Try something new"
+   * card above it. Learn, Bedside and Practice show EVERY tool of that kind, pinned or not, so a doctor can find a
+   * tool without knowing its name. The last tab is one specialty, named after the user's kit; its arrow opens the
+   * branch picker. Tools never opened carry a "New" chip. Flag smd_home_tabs (default on, "0" or ?hometabs=0 off). */
+  function homeTabsApi() { try { var g = window.SMD_TOOL_GROUPS; return g && g.tabsOn && g.tabsOn() ? g : null; } catch (e) { return null; } }
+  function toolIsNew(a) { var T = homeTabsApi(); try { return !!(T && T.isNew(a)); } catch (e) { return false; } }
+  function homeTabUsable(a) { var t = homeToolByAct(a); return !!(t && homeToolEligible(t)); }
+  // Tiles for a list of acts: eligible ones, open first, role-locked after (they explain themselves on tap).
+  function homeTabTiles(acts) {
+    var open = "", locked = "", seen = {};
+    acts.forEach(function (a) {
+      if (seen[a] || !homeTabUsable(a)) return; seen[a] = 1;
+      var t = homeToolByAct(a);
+      if (roleLocked(a)) locked += homeToolTile(t, true); else open += homeToolTile(t, false, toolIsNew(a));
+    });
+    return open + locked;
+  }
+  function homeTabLabel(T, id) {
+    if (id === "foryou") return "For you";
+    if (id === "branch") { var b = T.branch(); return (b ? smdEsc(b.tt) : "Specialty") + ric("expand_more"); }
+    var k = T.task(id); return k ? smdEsc(k.tt) : id;
+  }
+  function homeTabPanel(T, id) {
+    if (id === "foryou") return "";
+    if (id === "branch") {
+      var b = T.branch();
+      if (!b) return '<div class="rnav-tab-empty"><p>Pick your specialty to see its tools here.</p><button type="button" class="rnav-tab-pick" data-hometab-pick="1">' + ric("tune") + ' Choose specialty</button></div>';
+      return '<p class="rnav-tab-sub">' + smdEsc(b.tt) + ' tools, and its specialty kit. <button type="button" class="rnav-tab-link" data-hometab-pick="1">Change</button></p>' +
+        '<div class="rnav-grid rnav-tabgrid">' + homeTabTiles(b.acts.concat(["speckit"])) + '</div>';
+    }
+    var k = T.task(id); if (!k) return "";
+    return '<p class="rnav-tab-sub">' + smdEsc(k.sub) + '</p><div class="rnav-grid rnav-tabgrid">' + homeTabTiles(k.acts) + '</div>';
+  }
+  // The "Try something new" card: one tool never opened, a different one each week; "Not now" hides it for the week.
+  function homeTryCard(T) {
+    var pool = HOME_TOOLS.filter(function (t) { return homeToolEligible(t) && !roleLocked(t.act); }).map(function (t) { return t.act; });
+    var a = ""; try { a = T.tryNext(pool); } catch (e) {}
+    var t = a && homeToolByAct(a); if (!t) return "";
+    var d = (T.desc && T.desc(a)) || t.sub;
+    return '<div class="rnav-try" role="region" aria-label="Try something new">' + listIcon(t, false) +
+      '<div class="rnav-try-bd"><div class="rnav-try-k">Try something new</div><div class="rnav-try-t">' + smdEsc(t.tt) + '</div><div class="rnav-try-d">' + smdEsc(d) + '</div></div>' +
+      '<div class="rnav-try-ac"><button type="button" class="rnav-try-go" data-act="' + t.act + '">Open</button><button type="button" class="rnav-try-no" data-try-hide="1">Not now</button></div></div>';
+  }
+  function homeToolsSectionMarkup() {
+    var T = homeTabsApi();
+    var grid = '<p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p><div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div>';
+    if (!T) return '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' + grid;
+    // First run with tabs: what the user already has on Home is not "new" to them.
+    try { var st = homeStarter(); T.seedSeen(HOME_TOOLS.filter(function (t) { return homeToolEligible(t) && homeToolVisible(t, st); }).map(function (t) { return t.act; })); } catch (e) {}
+    var cur = T.tab();
+    var tabs = T.TAB_IDS.map(function (id) {
+      var on = id === cur;
+      return '<button type="button" role="tab" class="rnav-htab' + (on ? ' on' : '') + '" id="rnavHtab-' + id + '" data-hometab="' + id + '" aria-selected="' + on + '" aria-controls="rnavHpanel-' + id + '" tabindex="' + (on ? 0 : -1) + '">' + homeTabLabel(T, id) + '</button>';
+    }).join("");
+    return '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' +
+      '<div class="rnav-htabs" role="tablist" aria-label="Tool groups">' + tabs + '</div>' +
+      '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-foryou" aria-labelledby="rnavHtab-foryou"' + (cur === "foryou" ? '' : ' hidden') + '><div id="rnavTry">' + homeTryCard(T) + '</div>' + grid + '</div>' +
+      T.TAB_IDS.filter(function (id) { return id !== "foryou"; }).map(function (id) {
+        return '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-' + id + '" aria-labelledby="rnavHtab-' + id + '"' + (cur === id ? '' : ' hidden') + '>' + (cur === id ? homeTabPanel(T, id) : '') + '</div>';
+      }).join("");
+  }
+  // Re-render the open tab's tiles (role, tier or kit changed) without touching the For you grid's state.
+  function refreshHomeTabs() {
+    var T = homeTabsApi(); if (!T) return;
+    var tabsEl = document.querySelector("#homeV2 .rnav-htabs"); if (!tabsEl) return;
+    T.TAB_IDS.forEach(function (id) {
+      var b = document.getElementById("rnavHtab-" + id); if (b) b.innerHTML = homeTabLabel(T, id);
+      var p = document.getElementById("rnavHpanel-" + id); if (p && id !== "foryou" && !p.hidden) p.innerHTML = homeTabPanel(T, id);
+    });
+    var tr = document.getElementById("rnavTry"); if (tr) tr.innerHTML = homeTryCard(T);
+  }
+  function showHomeTab(id, focus) {
+    var T = homeTabsApi(); if (!T || T.TAB_IDS.indexOf(id) < 0) return;
+    T.setTab(id);
+    T.TAB_IDS.forEach(function (x) {
+      var b = document.getElementById("rnavHtab-" + x), p = document.getElementById("rnavHpanel-" + x), on = x === id;
+      if (b) { b.classList.toggle("on", on); b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); }
+      if (p) { if (on && x !== "foryou") p.innerHTML = homeTabPanel(T, x); p.hidden = !on; }
+    });
+    if (homeEditing()) homeEditMode(false);
+    var b = document.getElementById("rnavHtab-" + id); if (b && b.scrollIntoView) try { b.scrollIntoView({ block: "nearest", inline: "nearest" }); } catch (e) {}
+    markTabOverflow();
+  }
+  function homeEditing() { return _reorderMode; }
+  function markTabOverflow() {
+    var el = document.querySelector("#homeV2 .rnav-htabs"); if (!el) return;
+    el.classList.toggle("more", el.scrollWidth > el.clientWidth + 2 && el.scrollLeft + el.clientWidth < el.scrollWidth - 2);
+    if (!el.__mo) { el.__mo = 1; el.addEventListener("scroll", markTabOverflow, { passive: true }); }
+  }
+  function openBranchPicker() {
+    var T = homeTabsApi(); if (!T) return;
+    var cur = T.branch(), mine = T.branchForKit(T.specialty());
+    openSheet('<div class="hv-sh-t">Choose a specialty</div><div class="hv-sub2">The last tab on Home shows this specialty\'s tools. You can change it any time.</div>' +
+      '<div class="rnav-bpick">' + T.BRANCHES.map(function (b) {
+        var n = b.acts.filter(homeTabUsable).length;
+        return '<button type="button" class="hv-mi rnav-bpick-row' + (cur && cur.id === b.id ? ' on' : '') + '" data-branch="' + b.id + '"' + (cur && cur.id === b.id ? ' aria-current="true"' : '') + '>' +
+          '<div class="ml">' + smdEsc(b.tt) + (mine && mine.id === b.id ? ' <span class="hv-at-you">Your specialty</span>' : '') + '<div class="mc">' + (n ? n + (n === 1 ? ' tool' : ' tools') + ' and its kit' : 'Its specialty kit') + '</div></div>' +
+          (cur && cur.id === b.id ? ric("check") : '') + '</button>';
+      }).join("") + '</div>');
+    sheetEl().querySelectorAll("[data-branch]").forEach(function (btn) {
+      btn.addEventListener("click", function () { T.setBranch(btn.getAttribute("data-branch")); closeSheet(); refreshHomeTabs(); showHomeTab("branch", true); });
+    });
+  }
+  function wireHomeTabs(root) {
+    setTimeout(markTabOverflow, 0); try { window.addEventListener("resize", markTabOverflow); } catch (e) {}
+    root.addEventListener("click", function (e) {
+      if (!e.target || !e.target.closest) return;
+      var T = homeTabsApi(); if (!T) return;
+      var tb = e.target.closest("[data-hometab]");
+      if (tb) {
+        var id = tb.getAttribute("data-hometab");
+        // The specialty tab: first tap opens it, a tap while open (or with no specialty yet) opens the picker.
+        if (id === "branch" && (tb.classList.contains("on") || !T.branch())) { if (!tb.classList.contains("on")) showHomeTab("branch"); openBranchPicker(); return; }
+        showHomeTab(id); return;
+      }
+      if (e.target.closest("[data-hometab-pick]")) { openBranchPicker(); return; }
+      if (e.target.closest(".rnav-try-go")) { setTimeout(function () { var tr = document.getElementById("rnavTry"), T2 = homeTabsApi(); if (tr && T2) tr.innerHTML = homeTryCard(T2); }, 500); return; }
+      if (e.target.closest("[data-try-hide]")) { try { T.hideTry(); } catch (x) {} var tr = document.getElementById("rnavTry"); if (tr) tr.innerHTML = ""; toast("We will suggest another tool next week"); return; }
+    });
+    root.addEventListener("keydown", function (e) {
+      var tb = e.target && e.target.closest && e.target.closest("[data-hometab]"); if (!tb) return;
+      var T = homeTabsApi(); if (!T) return;
+      var ids = T.TAB_IDS, at = ids.indexOf(tb.getAttribute("data-hometab")), nx = -1;
+      if (e.key === "ArrowRight") nx = (at + 1) % ids.length; else if (e.key === "ArrowLeft") nx = (at - 1 + ids.length) % ids.length;
+      else if (e.key === "Home") nx = 0; else if (e.key === "End") nx = ids.length - 1;
+      if (nx < 0) return; e.preventDefault(); showHomeTab(ids[nx], true);
+    });
+  }
+  try { window.addEventListener("smd:tier", refreshHomeTabs); document.addEventListener("smd:role-changed", refreshHomeTabs); } catch (e) {}
+  try { window.SMD_HOME_TABS = { show: showHomeTab, refresh: refreshHomeTabs, pickBranch: openBranchPicker }; } catch (e) {}
   // The tier verdict arrives from /api/billing/status after first paint, so a Physician Pro on a
   // fresh device would otherwise not see the early-access tiles until the next launch.
   try { window.addEventListener("smd:tier", function () { var g = document.getElementById("rnavToolsGrid"); if (g) g.innerHTML = renderHomeToolsGrid(); }); } catch (e) {}
@@ -2545,8 +2704,8 @@
   function openAllTools() {
     var TOOLS = orderedHomeTools().filter(homeToolEligible), g = toolGroups(), st = homeStarter();
     function row(t, extra) {
-      var locked = roleLocked(t.act), on = homeToolVisible(t, st), d = g ? g.desc(t.act) : "";
-      return '<div class="hv-mi hv-at-row"' + (extra || "") + ' data-at="' + t.act + '" data-q="' + smdEsc((t.tt + " " + t.sub + " " + d).toLowerCase()) + '">' +
+      var locked = roleLocked(t.act), on = homeToolVisible(t, st), d = g ? g.desc(t.act) : "", kw = (g && g.keywords) ? g.keywords(t.act) : "";
+      return '<div class="hv-mi hv-at-row"' + (extra || "") + ' data-at="' + t.act + '" data-q="' + smdEsc((t.tt + " " + t.sub + " " + d + " " + kw).toLowerCase()) + '">' +
         '<button type="button" class="hv-at-open" data-at-open="' + t.act + '"' + (locked ? ' aria-label="' + smdEsc(t.tt) + ', locked for your role"' : '') + '>' + listIcon(t, locked) +
           '<div class="ml">' + smdEsc(t.tt) + '<div class="mc">' + smdEsc(d || t.sub) + '</div></div></button>' +
         '<button type="button" class="hv-at-pin' + (on ? " on" : "") + '" data-at-pin="' + t.act + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove " + smdEsc(t.tt) + " from Home" : "Add " + smdEsc(t.tt) + " to Home") + '" title="' + (on ? "On Home" : "Add to Home") + '">' + ric("push_pin") + '</button></div>';
@@ -2646,8 +2805,7 @@
           '<button class="rnav-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + ric("medication") + '<span>Dosing</span></button>' +
           '<button class="rnav-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + ric("local_hospital") + '<span>Hospital+</span></button>' +
         '</div>' +
-        '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div><p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p>' +
-        '<div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div>' +
+        homeToolsSectionMarkup() +
         '<div id="rnavRecent"></div>' +
         '<div class="v4-foot rnav-foot"><div class="disc">Only for qualified clinicians</div>' +
           '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.png" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.png" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
@@ -2899,6 +3057,7 @@
     // straight to document.body as a SIBLING of root, not a descendant, so a listener scoped to
     // root alone never sees drags starting on its .hv-drag handles.
     wireHomeDragReorder(document);
+    wireHomeTabs(root);
     root.addEventListener("click", function (e) {
       var b = e.target.closest("[data-act]"); if (!b) return;
       var a = b.getAttribute("data-act");
