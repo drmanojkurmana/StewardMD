@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-adrenal",
- "subject": "medicine",
- "title": "Addison's disease, Cushing's syndrome and adrenal crisis",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**weakness** months emaciation fatigue, **pigment** creases scars gums vitiligo, **pressure** postural dizzy faint salt craving, **Cushing** weight striae bruises pressure sugar, **crisis** vomiting pain collapse steroids stopped, **TB** HIV bleed meningococcal past, **steroid** years inhalers creams) with **viva** (**Addisonian** pigmented hypotensive, **cushingoid** moon plethoric) profiles; **weight** (loss Addison, gain Cushing) contrasts. Glands fail.",
-   "say": "Weaknesses pigments pressures Cushings is history: crises collapse TBs scar steroids blunt weights contrast Addisons darken cushings round salts crave sugars rise. Faces pigment.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**pigment** palmar knuckles scars areolae, **vitiligo** autoimmune patches, **postural** lying standing drops, **moon** facies plethora acne hirsute, **striae** purple wide bruises thin, **buffalo** hump supraclavicular pads, **crisis** shocked tachycardic rigid belly, **proximal** myopathy rises) with **bedside** (**sodium** low potassium high glucose, **cortisol** random synacthen, **BP** crisis fluids) measures; **hair** (pubic axillary lost) looks. Bodies signal.",
-   "say": "Pigments vitiligos posturals moons is exam: striae tear buffalos hump crises shock myopathies weaken sodiums dip cortisols plunge pressures fill hairs shed replacements start. Skins darken.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-adrenal-fig1.webp",
-    "alt": "A composite image contrasting the physical examination findings of Addison's disease (hyperpigmentation, vitiligo) and Cushing's syndrome (moon facies, striae, buffalo hump).",
-    "caption": "Clinical signs of Addison's disease and Cushing's syndrome",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Investigations** (**cortisol** low ACTH high primary proves, **synacthen** short long fails, **dexamethasone** suppress Cushing sorts, **midnight** salivary loss rhythm, **ACTH** ectopic high pituitary, **CT** adrenals TB bleed adenoma, **electrolytes** 3S crisis) with **differentials** (**Addison** pigmented ACTH high, **Cushing** moon suppress fails, **ectopic** small-cell rapid, **steroid** withdrawal iatrogenic) sorts; **endocrine** (pituitary adrenal decides) meets. Steroids stray.",
-   "say": "Cortisols synacthens dexamethasones midnights is Ix: ACTHs soar CTs show electrolytes warn Addisons bronze Cushings moon ectopics race withdrawals blunt endocrines meet scans image surgeons cut. Numbers confess.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**crisis** saline glucose hydrocortisone 100 stat, **replace** hydrocortisone fludrocortisone doubles sick, **Cushing** transsphenoidal adrenalectomy ketoconazole, **steroid** taper sick rules card, **precipitants** infection operates treats, **pregnancy** replaces monitors) with **traps** (**thyroxine** before steroid kills, **stop** abrupt collapses, **surgery** cover doubles) closes; **follow** (electrolytes weight crisis card) tracks. Glands supported.",
-   "say": "Crises replaces Cushings tapers is Rx: precipitants treat pregnancies guard thyroxines wait stops collapse surgeries cover follows track cards carry wishes respect. Steroids steady.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-421",
-  "bk2-med-422",
-  "bk2-med-423",
-  "bk2-med-424",
-  "bk2-med-425",
-  "bk2-med-426",
-  "bk2-med-427",
-  "bk2-med-428",
-  "bk2-med-429",
-  "bk2-med-430"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon5",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-adrenal",
+  "quiz": [
+    "bk2-med-421",
+    "bk2-med-422",
+    "bk2-med-423",
+    "bk2-med-424",
+    "bk2-med-425",
+    "bk2-med-426",
+    "bk2-med-427",
+    "bk2-med-428",
+    "bk2-med-429",
+    "bk2-med-430"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon5",
+  "src": [],
+  "steps": [
+    {
+      "say": "Take a history of gradual weakness, weight change, dizziness on standing and salt craving over several months. Ask about darkening of skin creases and gums, and about weight gain, stretch marks and bruising that suggest cortisol excess. Record every form of steroid exposure, including inhalers and skin creams. Enquire about vomiting, abdominal pain or collapse after stopping steroids, because these herald an adrenal crisis.",
+      "tx": "Addison disease builds over months with **weakness**, weight loss, dizziness on standing and craving for salt. Look for darkening of creases, scars and gums, sometimes with vitiligo. **Cushing syndrome** instead brings weight gain, purple striae, bruising, raised pressure and sugar. Ask about long steroid use through tablets, inhalers or creams, and about vomiting, pain or collapse when steroids stop, which warns of **adrenal crisis**.",
+      "vis": null
+    },
+    {
+      "say": "Inspect the skin for darkening of knuckles, creases, scars and gums, and note any vitiligo patches. Measure blood pressure lying and standing to detect a postural fall. Look for moon face, acne, wide purple stretch marks, buffalo hump and easy bruising in cortisol excess. Test the strength of shoulder and hip muscles, examine body hair, and resuscitate promptly when crisis causes shock.",
+      "tx": "Examine the skin for **hyperpigmentation** of knuckles, creases, scars and gums, plus vitiligo patches in autoimmune disease. Measure lying and standing pressure for a postural drop. In Cushing syndrome, identify moon face, plethora, acne, hirsutism, wide purple **striae**, buffalo hump and thin skin with bruises. Test proximal muscle strength, check for lost axillary and **pubic hair**, and resuscitate the shocked tachycardic patient in crisis.",
+      "vis": {
+        "alt": "A composite image contrasting the physical examination findings of Addison's disease (hyperpigmentation, vitiligo) and Cushing's syndrome (moon facies, striae, buffalo hump).",
+        "ar": 1.8349,
+        "caption": "Clinical signs of Addison's disease and Cushing's syndrome",
+        "kind": "image",
+        "src": "v1/lessons/media/med-adrenal-fig1.webp"
+      }
+    },
+    {
+      "say": "Confirm primary adrenal failure with a low cortisol paired with a raised ACTH level, and use the synacthen stimulation test to demonstrate poor adrenal reserve. Investigate suspected Cushing syndrome with dexamethasone suppression testing and midnight salivary cortisol measurement. Image the adrenals with CT to look for tuberculosis, bleeding or adenoma. Recheck electrolytes and glucose frequently while the patient remains unstable.",
+      "tx": "A low morning cortisol with high **ACTH** confirms primary adrenal failure, and the **short synacthen** test shows a flat response. For suspected Cushing syndrome, failure to suppress on **dexamethasone** testing with loss of midnight salivary rhythm supports the diagnosis. Localise with CT of the adrenals, which can show tuberculosis, bleeding or adenoma, and track sodium, potassium and glucose during crisis.",
+      "vis": null
+    },
+    {
+      "say": "Look at this CT slice and find the large mass arising from the right adrenal gland while the left gland appears thin and normal. A lump in this position can pour out cortisol or adrenaline type hormones and drive hypertension. Correlate the scan with hormone results before deciding treatment, and remember that a one sided adenoma may be cured by surgery.",
+      "tx": "The new scan shows a large right **adrenal mass** on axial CT beside a thin normal left adrenal gland. Such a lump can secrete cortisol or catecholamines and explains resistant hypertension or Cushing features. In the exam, link the image to biochemical results and use it to plan referral, because size, shape and the normal opposite gland guide the choice between **surgical removal** and drug therapy.",
+      "vis": {
+        "alt": "Axial abdominal CT through kidneys showing large right adrenal mass and thin normal left adrenal.",
+        "ar": 1.3393,
+        "caption": "Axial CT shows enlarged adrenal mass and normal contralateral gland. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-adrenal-gen1.webp"
+      }
+    },
+    {
+      "say": "Resuscitate adrenal crisis with intravenous saline and glucose, and inject hydrocortisone immediately without waiting for test results. Continue lifelong replacement with hydrocortisone and fludrocortisone, and teach the patient to double the dose during fever, vomiting or surgery. Refer Cushing syndrome for pituitary or adrenal surgery, control cortisol with ketoconazole while waiting, and never start thyroxine before steroids.",
+      "tx": "An adrenal crisis needs rapid saline and glucose with **hydrocortisone** given at once, then regular replacement with hydrocortisone plus **fludrocortisone**. Cushing disease is treated by transsphenoidal surgery, while adrenal tumours need **laparoscopic adrenalectomy** with ketoconazole cover when surgery waits. Double the dose during illness or surgery, carry a steroid card, and never give thyroxine before steroids.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Addison's disease, Cushing's syndrome and adrenal crisis",
+  "v": 1
 }

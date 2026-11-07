@@ -5918,3 +5918,30 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | son-thyroid-lymphoma-niftp-rair-gen2.webp (R2) | Thyroid lymphoma histology with a kappa restricted B cell flow plot. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | son-thyroid-genetics-followup-gen1.webp (R2) | Ultrasound comparing malignant node features with normal nodal hilum. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | son-thyroid-genetics-followup-gen2.webp (R2) | Histology showing spindle cells, giant cell, atypical mitosis and necrosis. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ans-cpr-gen1.webp (R2) | Operating room team performing CPR with monitoring. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-adrenal-gen1.webp (R2) | Axial CT shows enlarged adrenal mass and normal contralateral gland. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-aldo-pheo-gen1.webp (R2) | Surgical illustration of laparoscopic adrenal adenoma with clipped vein. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-bone-gen1.webp (R2) | Radiographs show femoral Looser zone and codfish vertebrae. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-cardiomyopathy-gen1.webp (R2) | Parasternal long-axis echocardiogram in systole showing thickened interventricular septum. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-ckd-gen1.webp (R2) | Forearm mature fistula with arterialised cephalic vein. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-diabetes-gen1.webp (R2) | Diabetic foot with neuropathic ulcer and Charcot deformity. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-endocarditis-gen1.webp (R2) | Transesophageal echo of mitral valve vegetation with perivalvular abscess. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-enteric-rickettsial-gen1.webp (R2) | Blood cultures, Widal agglutination, scrub IgM, marrow culture and leucopenia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-environmental-gen1.webp (R2) | Illustrated heatstroke, hypothermia and altitude illness management panels. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-epilepsy-gen1.webp (R2) | Lateral tongue bite laceration with ulcer suggesting epileptic seizure | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-fatty-liver-gen1.webp (R2) | Photo of velvety neck plaque marking insulin resistance. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-fungal-gen1.webp (R2) | Chest CT comparing aspergillosis halo and mucormycosis reversed halo. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-glomerulonephritis-gen1.webp (R2) | Crescentic glomerulonephritis and IgA nephropathy histology | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-gonadal-cah-gen1.webp (R2) | CAH steroid profile, XX karyotype, and blocked steroidogenesis causing androgen excess. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-haemoglobinopathies-gen1.webp (R2) | Microscopy of sickle cells, target cells, Howell Jolly body. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-haemolytic-gen1.webp (R2) | Coombs tubes and DAT card showing RBC agglutination. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-headache-gen1.webp (R2) | Fundus photograph showing swollen disc, blurred margins and peripapillary hemorrhages. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-hiv-gen1.webp (R2) | Axial brain MRI with ring enhancing basal ganglia lesions. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-hypertension-gen1.webp (R2) | Fundus photo showing hypertensive retinopathy grades one to four. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-hyperthyroidism-gen1.webp (R2) | Thyroid scintigraphy comparing diffuse, focal hot, and low uptake patterns | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-hypothyroidism-gen1.webp (R2) | Bradycardic low voltage ECG with effusion in severe primary hypothyroidism. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-ibd-gen1.webp (R2) | Photo of tender red nodules across both anterior shins. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-ild-gen1.webp (R2) | Finger clubbing with lost Lovibond angle | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-inborn-errors-gen1.webp (R2) | Hyperammonemia, high gap acidosis, Guthrie card, spectrometry and organic acids. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-inheritance-gen1.webp (R2) | Photo of bilateral enlarged calves from fibrofatty replacement. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| med-shock-gen1.webp (R2) | Bedside ultrasound of IVC, cardiac strain, and pleural fluid | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
