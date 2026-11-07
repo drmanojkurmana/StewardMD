@@ -52,3 +52,9 @@ list; `home.js` `homeToolsSectionMarkup` renders the tabs.
 - **Subtitles:** rewritten in plain words (max 30 chars, unit test); titles unchanged; Narke tile is "Anaesthetica".
 - **Flag:** `smd_home_tabs` default on; "0" or `?hometabs=0` = the single grid.
 - Tests: `test/home-tabs.test.mjs`, `test/run-home-tabs-ui.mjs` (390 px and iPad, light and dark, kill switch).
+- **Design pass (owner, same day: "not AI slop, best fonts"):** Home type is **Atkinson Hyperlegible Next** (Braille
+  Institute, OFL, self-hosted `assets/fonts/atkinson-next-latin*.woff2`, preloaded), scoped by overriding `--rds-font`
+  on `#homeV2.rnav`; the rest of the app keeps Inter. Tabs are underline tabs (not pills), the specialty selector sits
+  at the row's end, and **All tools** is a text button beside the "Clinical tools" heading (on iPad directly above the
+  selector). The Try card has no eyebrow label: its heading is the action ("Try Insulin", button "Open Insulin").
+  The "New" tag is a small square-cornered label. At 390 px the five tabs fit; longer branch names scroll with a fade.

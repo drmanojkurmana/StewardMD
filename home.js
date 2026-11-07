@@ -1911,28 +1911,36 @@
       ".rnav-grid.reordering .rnav-tile.addtool{opacity:.35;pointer-events:none}",
       "#rnavToolsGrid .rnav-tile.dragging{opacity:.18!important;transform:none!important;animation:none!important}#rnavToolsGrid .rnav-tile{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}.rnav-drag-ghost{will-change:transform;filter:drop-shadow(0 14px 18px #0004)}#rnavReorderHint{font-size:12px;color:var(--slate);margin:0 0 14px}",
       "@keyframes rnavJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}",
-      /* Home tabs (owner 2026-11-07) */
-      "#homeV2 .rnav-htabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:2px -2px 14px;padding:2px;-webkit-overflow-scrolling:touch}#homeV2 .rnav-htabs::-webkit-scrollbar{display:none}",
-      "#homeV2 .rnav-htab{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:0;height:44px;min-height:44px;box-sizing:border-box;padding:0 11px;border-radius:999px;border:1px solid var(--rds-line,#e3eaee);background:var(--rds-surface,#fff);color:var(--rds-ink,#0d1b24);font:700 13.5px var(--rds-font,system-ui);cursor:pointer;white-space:nowrap}",
-      "#homeV2 .rnav-htab .rds-icon{font-size:18px;margin:0 -4px 0 1px}",
-      /* When the row is wider than the phone, fade its right edge so the hidden tab reads as "scroll for more". */
-      "#homeV2 .rnav-htabs.more{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}",
-      "#homeV2 .rnav-htab.on{background:var(--rds-primary,#0f766e);border-color:var(--rds-primary,#0f766e);color:#fff}",
-      "#homeV2 .rnav-htab:focus-visible,#homeV2 .rnav-try button:focus-visible,#homeV2 .rnav-tab-pick:focus-visible,#homeV2 .rnav-tab-link:focus-visible{outline:2px solid var(--rds-primary,#0f766e);outline-offset:2px}",
-      "#homeV2 .rnav-tab-sub{margin:0 0 14px;font:500 13.5px/1.45 var(--rds-font,system-ui);color:var(--rds-muted,#5b7083)}",
-      "#homeV2 .rnav-tab-link{border:0;background:none;padding:6px 4px;margin:-6px 0;color:var(--rds-primary,#0f766e);font:700 13.5px var(--rds-font,system-ui);cursor:pointer;text-decoration:underline}",
-      "#homeV2 .rnav-tab-empty{text-align:center;padding:18px 12px 8px;font:500 14px/1.5 var(--rds-font,system-ui);color:var(--rds-muted,#5b7083)}#homeV2 .rnav-tab-empty p{margin:0 0 12px}",
-      "#homeV2 .rnav-tab-pick{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;border:0;border-radius:12px;background:var(--rds-primary,#0f766e);color:#fff;font:700 14px var(--rds-font,system-ui);cursor:pointer}",
-      "#homeV2 .rnav-tile-new{position:absolute;top:6px;left:6px;z-index:2;font:800 9px/1 var(--rds-font,system-ui);letter-spacing:.06em;text-transform:uppercase;padding:3px 6px;border-radius:999px;color:#fff;background:var(--rds-primary,#0f766e)}",
-      "#homeV2 .rnav-try{display:flex;align-items:center;gap:12px;margin:0 0 16px;padding:12px 14px;border:1px solid var(--rds-line,#e3eaee);border-radius:16px;background:var(--rds-surface,#fff)}",
-      "#homeV2 .rnav-try .hv-tbadge{flex:0 0 auto}#homeV2 .rnav-try-bd{flex:1;min-width:0}",
-      "#homeV2 .rnav-try-k{font:800 11px var(--rds-font,system-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--rds-primary,#0f766e)}",
-      "#homeV2 .rnav-try-t{font:800 15px/1.3 var(--rds-font,system-ui);color:var(--rds-ink,#0d1b24);margin-top:2px}",
-      "#homeV2 .rnav-try-d{font:500 13px/1.4 var(--rds-font,system-ui);color:var(--rds-muted,#5b7083);margin-top:2px}",
-      "#homeV2 .rnav-try-ac{display:flex;flex-direction:column;gap:6px;flex:0 0 auto}",
-      "#homeV2 .rnav-try-go{min-height:40px;padding:0 16px;border:0;border-radius:10px;background:var(--rds-primary,#0f766e);color:#fff;font:700 14px var(--rds-font,system-ui);cursor:pointer}",
-      "#homeV2 .rnav-try-no{min-height:36px;padding:0 10px;border:0;background:none;color:var(--rds-muted,#5b7083);font:600 13px var(--rds-font,system-ui);cursor:pointer}",
-      ".rnav-bpick{display:flex;flex-direction:column;gap:2px;margin-top:8px}.rnav-bpick-row{width:100%;text-align:left;border:0;background:none;cursor:pointer;min-height:52px}.rnav-bpick-row.on{background:var(--hbg,rgba(15,118,110,.08))}",
+      /* Home tabs (owner 2026-11-07). Operate surface: underline tabs (the native pattern for switching views), not
+       * a row of pills; one teal accent marks the open tab and the primary action; flat 1px borders, no glow. */
+      "#homeV2 .rnav-tools-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:28px 0 4px}",
+      "#homeV2 .rnav-tools-h{margin:0;font:700 20px/1.25 var(--rds-font,system-ui);letter-spacing:-.01em;color:var(--rds-ink,#0d1b24);text-wrap:balance}",
+      "#homeV2 .rnav-alltools{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 4px 0 10px;border:0;background:none;color:var(--rds-primary,#0f766e);font:700 15px var(--rds-font,system-ui);cursor:pointer;touch-action:manipulation;border-radius:10px}",
+      "#homeV2 .rnav-alltools .rds-icon{font-size:20px}",
+      "#homeV2 .rnav-htabs{position:relative;display:flex;gap:0;overflow-x:auto;scrollbar-width:none;margin:0 0 18px;padding:0;border-bottom:1px solid var(--rds-line,#e3eaee);-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}#homeV2 .rnav-htabs::-webkit-scrollbar{display:none}",
+      "#homeV2 .rnav-htab{position:relative;flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;height:48px;box-sizing:border-box;padding:0 8px;border:0;border-radius:10px 10px 0 0;background:none;color:var(--rds-muted,#5b7083);font:600 15px var(--rds-font,system-ui);cursor:pointer;white-space:nowrap;touch-action:manipulation;transition:color .15s ease-out}",
+      "#homeV2 .rnav-htab::after{content:'';position:absolute;left:6px;right:6px;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:var(--rds-primary,#0f766e);transform:scaleX(0);transition:transform .2s cubic-bezier(.2,.8,.2,1)}",
+      "#homeV2 .rnav-htab.on{color:var(--rds-ink,#0d1b24);font-weight:700}#homeV2 .rnav-htab.on::after{transform:scaleX(1)}",
+      "#homeV2 .rnav-htab[data-hometab=branch]{margin-left:auto;color:var(--rds-primary,#0f766e)}#homeV2 .rnav-htab[data-hometab=branch].on{color:var(--rds-ink,#0d1b24)}",
+      "#homeV2 .rnav-htab .rds-icon{font-size:18px;margin:1px -2px 0 2px}",
+      "@media (hover:hover){#homeV2 .rnav-htab:hover{color:var(--rds-ink,#0d1b24)}#homeV2 .rnav-alltools:hover,#homeV2 .rnav-tab-link:hover{text-decoration:underline;text-underline-offset:3px}#homeV2 .rnav-try-go:hover{filter:brightness(1.08)}}",
+      "#homeV2 .rnav-htab:focus-visible,#homeV2 .rnav-alltools:focus-visible,#homeV2 .rnav-try button:focus-visible,#homeV2 .rnav-tab-pick:focus-visible,#homeV2 .rnav-tab-link:focus-visible{outline:2px solid var(--rds-primary,#0f766e);outline-offset:2px}",
+      "#homeV2 .rnav-htabs.more{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}",
+      "#homeV2 .rnav-tab-sub{margin:0 0 16px;font:400 15px/1.45 var(--rds-font,system-ui);color:var(--rds-muted,#5b7083);text-wrap:pretty}",
+      "#homeV2 .rnav-tab-link{border:0;background:none;padding:10px 4px;margin:-10px 0;color:var(--rds-primary,#0f766e);font:700 15px var(--rds-font,system-ui);cursor:pointer;text-decoration:underline;text-underline-offset:3px;touch-action:manipulation}",
+      "#homeV2 .rnav-tab-empty{padding:20px 4px 8px;font:400 15px/1.5 var(--rds-font,system-ui);color:var(--rds-muted,#5b7083)}#homeV2 .rnav-tab-empty p{margin:0 0 12px}",
+      "#homeV2 .rnav-tab-pick{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;border:0;border-radius:10px;background:var(--rds-primary,#0f766e);color:#fff;font:700 15px var(--rds-font,system-ui);cursor:pointer;touch-action:manipulation}",
+      /* "New" marks a real state (never opened), so it earns a label; a small square-cornered tag, sentence case. */
+      "#homeV2 .rnav-tile-new{position:absolute;top:4px;left:50%;margin-left:-46px;z-index:2;font:700 11px/1 var(--rds-font,system-ui);padding:3px 6px 4px;border-radius:5px;color:#fff;background:var(--rds-primary,#0f766e);box-shadow:0 0 0 2px var(--rds-bg,#f4f7f8)}",
+      "#homeV2 .rnav-try{display:flex;align-items:flex-start;gap:14px;margin:0 0 22px;padding:14px 16px;border:1px solid var(--rds-line,#e3eaee);border-radius:14px;background:var(--rds-surface,#fff)}",
+      "#homeV2 .rnav-try .hv-tbadge{flex:0 0 auto;margin-top:2px}#homeV2 .rnav-try-bd{flex:1;min-width:0}",
+      "#homeV2 .rnav-try-t{margin:0;font:700 17px/1.3 var(--rds-font,system-ui);color:var(--rds-ink,#0d1b24);text-wrap:balance}",
+      "#homeV2 .rnav-try-d{margin:3px 0 0;font:400 15px/1.45 var(--rds-font,system-ui);color:var(--rds-muted,#5b7083);text-wrap:pretty}",
+      "#homeV2 .rnav-try-ac{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-top:12px}",
+      "#homeV2 .rnav-try-go{min-height:44px;padding:0 18px;border:0;border-radius:10px;background:var(--rds-primary,#0f766e);color:#fff;font:700 15px var(--rds-font,system-ui);cursor:pointer;touch-action:manipulation}",
+      "#homeV2 .rnav-try-no{min-height:44px;padding:0 6px;border:0;background:none;color:var(--rds-muted,#5b7083);font:600 15px var(--rds-font,system-ui);cursor:pointer;touch-action:manipulation}",
+      "@media (prefers-reduced-motion:reduce){#homeV2 .rnav-htab,#homeV2 .rnav-htab::after{transition:none}}",
+      ".rnav-bpick{display:flex;flex-direction:column;gap:2px;margin-top:8px;font-family:'Atkinson Hyperlegible Next','Inter Variable',system-ui,sans-serif}.rnav-bpick-row{width:100%;text-align:left;border:0;background:none;cursor:pointer;min-height:52px;touch-action:manipulation}.rnav-bpick-row.on{background:var(--hbg,rgba(15,118,110,.08))}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
@@ -2580,9 +2588,9 @@
     var a = ""; try { a = T.tryNext(pool); } catch (e) {}
     var t = a && homeToolByAct(a); if (!t) return "";
     var d = (T.desc && T.desc(a)) || t.sub;
-    return '<div class="rnav-try" role="region" aria-label="Try something new">' + listIcon(t, false) +
-      '<div class="rnav-try-bd"><div class="rnav-try-k">Try something new</div><div class="rnav-try-t">' + smdEsc(t.tt) + '</div><div class="rnav-try-d">' + smdEsc(d) + '</div></div>' +
-      '<div class="rnav-try-ac"><button type="button" class="rnav-try-go" data-act="' + t.act + '">Open</button><button type="button" class="rnav-try-no" data-try-hide="1">Not now</button></div></div>';
+    return '<section class="rnav-try" aria-labelledby="rnavTryT">' + listIcon(t, false) +
+      '<div class="rnav-try-bd"><h3 class="rnav-try-t" id="rnavTryT">Try ' + smdEsc(t.tt) + '</h3><p class="rnav-try-d">' + smdEsc(d) + '</p>' +
+      '<div class="rnav-try-ac"><button type="button" class="rnav-try-go" data-act="' + t.act + '">Open ' + smdEsc(t.tt) + '</button><button type="button" class="rnav-try-no" data-try-hide="1">Not now</button></div></div></section>';
   }
   function homeToolsSectionMarkup() {
     var T = homeTabsApi();
@@ -2595,8 +2603,9 @@
       var on = id === cur;
       return '<button type="button" role="tab" class="rnav-htab' + (on ? ' on' : '') + '" id="rnavHtab-' + id + '" data-hometab="' + id + '" aria-selected="' + on + '" aria-controls="rnavHpanel-' + id + '" tabindex="' + (on ? 0 : -1) + '">' + homeTabLabel(T, id) + '</button>';
     }).join("");
-    return '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' +
-      '<div class="rnav-htabs" role="tablist" aria-label="Tool groups">' + tabs + '</div>' +
+    return '<div class="rnav-tools-head"><h2 class="rnav-tools-h" id="rnavToolsH">Clinical tools</h2>' +
+        '<button type="button" class="rnav-alltools" data-act="alltools">' + ric("apps") + '<span>All tools</span></button></div>' +
+      '<div class="rnav-htabs" role="tablist" aria-labelledby="rnavToolsH">' + tabs + '</div>' +
       '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-foryou" aria-labelledby="rnavHtab-foryou"' + (cur === "foryou" ? '' : ' hidden') + '><div id="rnavTry">' + homeTryCard(T) + '</div>' + grid + '</div>' +
       T.TAB_IDS.filter(function (id) { return id !== "foryou"; }).map(function (id) {
         return '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-' + id + '" aria-labelledby="rnavHtab-' + id + '"' + (cur === id ? '' : ' hidden') + '>' + (cur === id ? homeTabPanel(T, id) : '') + '</div>';
