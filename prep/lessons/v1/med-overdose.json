@@ -3,7 +3,7 @@
  "module": "med-overdose",
  "subject": "medicine",
  "title": "Paracetamol poisoning: time, levels, antidote by toxicology advice",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
    "tx": "**Paracetamol** in overdose silently injures the liver, so the patient may look well while damage begins. Record the **exact time and amount ingested**, other drugs and alcohol taken, and whether the dose was staggered over days, because staggered overdoses carry risk at lower apparent doses. Involve **toxicology advice (NPIS TOXBASE in the UK)** early; management is protocol-driven, never guessed.",
@@ -55,6 +55,17 @@
       "Staggered pattern missed"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The image places paracetamol toxicity inside a liver cell. An enzyme pathway converts paracetamol into **NAPQI**, a toxic product that is normally cleared by binding **glutathione** into a harmless conjugate. In overdose the glutathione store runs out, shown as depletion, and free NAPQI causes oxidative liver cell injury. **Acetylcysteine** rescues the cell by replenishing glutathione, which is why timely antidote treatment guided by levels and toxicology advice matters.",
+   "say": "Picture paracetamol toxicity inside a single liver cell. Paracetamol is converted into NAPQI, a toxic product. Normally glutathione binds NAPQI into a harmless conjugate that the cell removes. In overdose the glutathione store is depleted, so free NAPQI attacks the cell and causes oxidative liver injury. Acetylcysteine works by replenishing glutathione. That is why timed blood levels and early toxicology advice matter, so the antidote is given before injury is established.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-overdose-gen1.webp",
+    "alt": "Liver cell diagram shows paracetamol converted to NAPQI with glutathione depletion causing injury and acetylcysteine replenishing protection.",
+    "caption": "Paracetamol converted to toxic product with antidote rescue, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

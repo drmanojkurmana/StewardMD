@@ -3,7 +3,7 @@
  "module": "sbs-diagnostic-tests",
  "subject": "ss-biostatistics",
  "title": "Diagnostic test evaluation: accuracy, predictive values, likelihood ratios and screening bias",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "Every test is judged against a reference standard, which produces a 2x2 table of true positives, false positives, false negatives and true negatives. **Sensitivity** is the share of diseased people who test positive, and **specificity** is the share of healthy people who test negative. Both are intrinsic properties of the test and do not change with how common the disease is in the population studied.",
@@ -151,6 +151,17 @@
       "Slow cases are over-sampled by screening"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The illustration contrasts a slow growing nodule caught by the screening magnifier with an aggressive **interval** mass appearing between screens. Screening oversamples **indolent disease**, because slow cases stay detectable longer, while fast tumours surface as **symptomatic** cases outside the programme. This **length time bias** makes screen detected survival look better without any real mortality gain. Randomised trials are needed to exclude it.",
+   "say": "Length time bias means screening picks up a skewed sample of disease. Slow growing nodules linger in a detectable phase, so the screening magnifier finds them easily. Aggressive cancers grow and cause symptoms between rounds, so they are missed by screening. Survival among screen detected cases then looks better even if screening changes nothing. Only randomised trials can remove this distortion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sbs-diagnostic-tests-gen1.webp",
+    "alt": "Lungs show a slow nodule caught under a screening magnifier beside an aggressive mass missed between screens.",
+    "caption": "Length bias oversampling slow nodules while fast masses escape screening, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

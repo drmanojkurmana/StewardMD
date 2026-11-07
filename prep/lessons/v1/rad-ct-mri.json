@@ -3,7 +3,7 @@
  "module": "rad-ct-mri",
  "subject": "radiology",
  "title": "CT and MRI principles",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "**Computed tomography** (CT) measures how much an X-ray beam is attenuated as it passes through tissue. Attenuation is expressed in **Hounsfield units** (HU). Water is defined as 0 HU and air as -1000 HU. Fat is about -50 to -100 HU, cerebrospinal fluid about 15 HU, and kidney about 30 HU. A change of one HU is a 0.1 percent change in the attenuation of water.",
@@ -76,6 +76,17 @@
    "tx": "**Diffusion-weighted imaging** (DWI) detects restricted movement of water, which is seen early in acute ischaemic stroke. **Gadolinium** is a paramagnetic contrast agent that shortens T1 and brightens enhancing lesions, and it is the usual contrast for brain tumours and meningeal disease. **MR angiography** can use the **time of flight** technique, which shows flowing blood without contrast. MRI is non-ionising, so it avoids the radiation dose of CT.",
    "say": "Diffusion weighted imaging shows restricted water movement, which appears early in acute stroke. Gadolinium brightens enhancing lesions such as brain tumours. Time of flight angiography shows flowing blood without contrast. MRI uses no ionising radiation.",
    "vis": null
+  },
+  {
+   "tx": "The left panels show a bright **DWI** signal in the middle cerebral artery territory with a dark **ADC** match, the classic pair for acute infarct. The small right panel shows bright **gadolinium** enhancement on T1. Seeing restricted diffusion beside contrast enhancement helps separate early stroke from an enhancing lesion and shows why these sequences are paired.",
+   "say": "Look at the two large brain panels first. The left is bright and the middle is dark in the same spot, which marks an acute infarct in middle cerebral artery territory. Then look at the small upper panel where contrast makes tissue glow. That brightness means enhancement, as seen with tumours. Comparing the diffusion pair with the contrast view teaches when to favor stroke and when to favor an enhancing mass.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ct-mri-gen1.webp",
+    "alt": "Three brain MRI panels show bright DWI signal with dark ADC match for acute infarct plus a small contrast enhanced view.",
+    "caption": "Diffusion pair marks acute infarct beside contrast view Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "tx": "For radiation exposure, **CT** delivers far more dose than plain radiographs. The **CT dose index** (CTDI) and **dose-length product** (DLP) are standard measures of CT output. Radiation units include the gray and the rad, while the tesla measures magnetic field strength. For suspected renal or ureteric stones, non-contrast helical CT is the investigation of choice, being around 95 to 100 percent sensitive.",

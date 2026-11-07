@@ -3,7 +3,7 @@
  "module": "bio-translation",
  "subject": "biochemistry",
  "title": "Genetic code, translation and protein targeting",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "The **genetic code** is read in triplets called **codons**. Each codon is a three-base word in mRNA. There are 64 codons. Three of them are stop codons, and the remaining 61 code for 20 amino acids. Because there are more codons than amino acids, the code is **degenerate**. One amino acid can therefore be specified by more than one codon. Methionine and tryptophan are the only amino acids with a single codon.",
@@ -76,6 +76,17 @@
       "t"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The image shows the **ribosome** with mRNA running across the **small subunit** from the 5 prime to the 3 prime end. The AUG start codon lies near the P site, where one tRNA holds the growing chain. A second tRNA enters the **A site**, the large subunit forms the peptide bond, and a nearby release factor will free the protein at a stop codon.",
+   "say": "Look at the ribosome in the image. Messenger RNA runs across the small subunit, with the AUG start codon marked near the P site. One transfer RNA sits in the P site and another enters the A site. The large subunit forms the peptide bond and the growing chain leaves from the top. A release factor waits nearby to free the finished protein when a stop codon arrives.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-translation-gen1.webp",
+    "alt": "A large ribosome holds mRNA with tRNAs in the A and P sites while a new peptide exits and a release factor waits nearby.",
+    "caption": "Ribosome complex showing tRNA sites and peptide growth Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
