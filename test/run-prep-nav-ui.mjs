@@ -27,6 +27,7 @@ import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import fs from "node:fs";
+import { createRequire } from "node:module";
 import os from "node:os";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -46,6 +47,8 @@ async function loadPW() {
     const pw = await import(pathToFileURL(join(p, "index.mjs")).href);
     try { const exe = pw.webkit.executablePath(); if (exe && fs.existsSync(exe)) return pw; } catch {}
   }
+  // Chromium only (ENGINES=chromium): the machine's own playwright is enough.
+  if (!ENGINES.includes("webkit")) { try { return createRequire(import.meta.url)("playwright"); } catch {} }
   return null;
 }
 const pw = await loadPW();
@@ -170,6 +173,17 @@ async function assertions(engine) {
     // ---- You, back
     await tab(page, "you");
     ok(await until(page, () => !!document.querySelector("#smdPrep > .pn-body.pn-menu"), 5000) && (await navState(page)).cur === "you", E + "You opens the menu and is current");
+    // The menu is a screen, not the question screen's popup (both once used the class pn-menu; the popup's absolute,
+    // max-content styles left You blank on the phone).
+    const mv = await page.evaluate(() => { const m = document.querySelector("#smdPrep > .pn-body.pn-menu"), r = m.getBoundingClientRect(), g = m.querySelector(".pn-group"); return { pos: getComputedStyle(m).position, w: r.width, vw: innerWidth, rows: m.querySelectorAll(".pn-row").length, gh: g ? g.getBoundingClientRect().height : 0 }; });
+    ok(mv.pos !== "absolute" && mv.w >= mv.vw - 2 && mv.rows >= 4 && mv.gh > 100, E + "You shows its rows full width (" + mv.rows + " rows, " + Math.round(mv.w) + " px)");
+    const me = await page.evaluate(() => { const b = document.querySelector("#smdPrep .pn-me-btn[data-act=me-edit]"); return b ? { t: b.textContent, h: b.getBoundingClientRect().height } : null; });
+    ok(!!me && /Edit|Sign in/.test(me.t) && me.h >= 44, E + "the profile card is a button (" + (me && me.t) + ")");
+    await page.evaluate(() => document.querySelector("#smdPrep .pn-me-btn").click());
+    const ps = await until(page, () => { const sh = document.getElementById("hvSheet"); return !!(sh && sh.classList.contains("on") && +getComputedStyle(sh).zIndex > +getComputedStyle(document.getElementById("smdPrep")).zIndex && document.body.classList.contains("pn-over-sheet")); }, 5000);
+    ok(ps, E + "tapping it opens the app's Profile page above PrepNucleus");
+    await page.evaluate(() => { const sc = document.getElementById("hvScrim"); if (sc) sc.click(); });
+    ok(await until(page, () => !document.getElementById("hvSheet").classList.contains("on") && !document.body.classList.contains("pn-over-sheet"), 5000), E + "closing Profile drops the lift");
     c = await clearOfBar(page);
     ok(c.ok, E + "You scrolled to the bottom ends above the bar (" + c.lb + " <= " + c.nt + ")");
     await page.evaluate(() => PREP.back());
