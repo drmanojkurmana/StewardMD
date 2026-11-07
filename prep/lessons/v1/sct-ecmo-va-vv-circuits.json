@@ -1,0 +1,279 @@
+{
+  "v": 1,
+  "module": "sct-ecmo-va-vv-circuits",
+  "title": "Extracorporeal membrane oxygenation: VA and VV circuits, cannulation and management",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 116 (Extracorporeal Membrane Oxygenation)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 6 (Mechanical Circulatory Support)",
+    "ELSO Guidelines for Adult Extracorporeal Membrane Oxygenation"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Extracorporeal membrane oxygenation offers life-saving support for acute cardiopulmonary collapse. Venoarterial circuits withdraw blood from the central veins and pump oxygenated blood into the arterial system. This configuration unloads failing ventricles while providing complete biventricular circulatory and gas exchange support.",
+      "tx": "Peripheral or central **venoarterial ECMO** extracts deoxygenated venous return and pumps gas-equilibrated blood directly into the systemic arterial tree. This dual configuration delivers full **hemodynamic support** alongside complete **gas exchange**, sustaining vital organs during refractory cardiogenic shock or cardiac arrest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Venous drainage via multistage cannula"
+          },
+          {
+            "id": "b",
+            "label": "Centrifugal pump and membrane oxygenation"
+          },
+          {
+            "id": "c",
+            "label": "Arterial reinfusion into femoral or subclavian artery"
+          },
+          {
+            "id": "d",
+            "label": "Biventricular circulatory unloading and perfusion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In patients with severe isolated lung failure, venovenous oxygenation avoids unnecessary arterial cannulation. The circuit draws blood from the inferior vena cava and returns oxygenated blood into the right atrium. Because cardiac pump function is preserved, native ventricles distribute oxygenated blood throughout the body.",
+      "tx": "For acute **respiratory failure** with intact ventricular contractility, **venovenous ECMO** withdraws desaturated venous blood and returns oxygenated blood into the right atrium. By delivering **isolated gas exchange**, it avoids arterial injury and allows lung-protective mechanical ventilation without altering systemic afterload.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Venoarterial (VA) ECMO",
+          "points": [
+            "Venous drainage with arterial reinfusion",
+            "Provides full hemodynamic and respiratory support",
+            "Indicated in cardiogenic shock and cardiac arrest"
+          ]
+        },
+        "right": {
+          "title": "Venovenous (VV) ECMO",
+          "points": [
+            "Purely venous drainage and venous reinfusion",
+            "Provides isolated respiratory support only",
+            "Indicated in refractory ARDS with preserved heart function"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Femoral cannulation can disrupt ventricular hemodynamics significantly. Retrograde arterial flow travels up the descending aorta against closing aortic leaflets. This abrupt increase in afterload can lead to left ventricular distention, acute pulmonary edema, and intracardiac thrombus formation.",
+      "tx": "During **peripheral VA ECMO**, retrograde arterial jetting up the thoracic aorta markedly increases left ventricular afterload. In a poorly contracting ventricle, this high **retrograde flow** prevents aortic valve opening, precipitating severe **left ventricular distention**, intraventricular thrombosis, and fulminant pulmonary edema.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Retrograde femoral arterial flow into aorta"
+          },
+          {
+            "id": "b",
+            "label": "Elevated end-systolic ventricular afterload"
+          },
+          {
+            "id": "c",
+            "label": "Failure of aortic valve opening and intracavity stasis"
+          },
+          {
+            "id": "d",
+            "label": "Left ventricular distention and acute pulmonary edema"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Differential hypoxemia is a unique hazard of peripheral venoarterial support. When pulmonary function is severely compromised, the recovering left ventricle pumps desaturated blood into the aortic root. This leads to profound cerebral and upper body hypoxia, an emergency known as Harlequin syndrome.",
+      "tx": "The phenomenon of **Harlequin syndrome**, also recognized as **North-South syndrome**, arises during femoral venoarterial ECMO when hypoxic native stroke volume perfuses the brachiocephalic vessels while retrograde circuit flow oxygenates the lower body, causing profound **differential hypoxemia** in the brain. This severe discrepancy mandates moving arterial reinfusion centrally or adding a right axillary cannula to ensure adequate cerebral oxygenation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Upper Body Perfusion (Harlequin)",
+          "points": [
+            "Derived from native left ventricular ejection",
+            "Severely hypoxic blood due to lung injury",
+            "Risks cerebral, myocardial, and right arm ischemia"
+          ]
+        },
+        "right": {
+          "title": "Lower Body Perfusion",
+          "points": [
+            "Derived from retrograde femoral ECMO cannula",
+            "Fully oxygenated and decarboxylated blood",
+            "Provides normal abdominal and lower limb perfusion"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Cannulating the common femoral artery risks acute distal leg ischemia. The large cannula can occlude downstream flow into the superficial femoral artery. Surgical teams routinely place a dedicated six to eight French distal perfusion catheter to deliver antegrade blood flow into the lower limb.",
+      "tx": "To safeguard the ipsilateral extremity against ischemic necrosis during femoral cannulation, surgeons insert an antegrade **distal perfusion cannula** sized 6 to 8 French into the **superficial femoral artery**. This establishes robust antegrade flow, preventing compartment syndrome and limb loss. Monitoring distal limb perfusion pressures and bedside Doppler signals verifies uninterrupted microvascular flow throughout the entire duration of femoral support.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vascular Element",
+          "Cannula Selection",
+          "Primary Clinical Purpose"
+        ],
+        "rows": [
+          [
+            "Main arterial access",
+            "15 to 19 French cannula",
+            "Retrograde systemic arterial perfusion"
+          ],
+          [
+            "Superficial femoral artery",
+            "6 to 8 French antegrade line",
+            "Distal lower extremity limb preservation"
+          ],
+          [
+            "Common femoral vein",
+            "21 to 25 French multistage",
+            "Maximal venous deoxygenated drainage"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Acute left ventricular overload demands prompt mechanical decompression. Teams employ an intra-aortic balloon pump, an Impella microaxial pump, or surgical left ventricular venting. Relieving chamber pressure reduces wall stress, prevents pulmonary hemorrhage, and accelerates myocardial recovery.",
+      "tx": "When severe ventricular stasis and distention occur on peripheral venoarterial support, active **left ventricular unloading** is achieved via an **intra-aortic balloon pump**, a transvalvular microaxial **Impella** device, or direct surgical venting. Rapidly decompressing the chamber lowers wall tension, prevents fatal pulmonary hemorrhage, and preserves microvascular perfusion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Unloading Modality",
+          "Mechanism of Action",
+          "Key Procedural Characteristic"
+        ],
+        "rows": [
+          [
+            "Intra-aortic balloon pump",
+            "Rhythmic counterpulsation reduces afterload",
+            "Minimally invasive, simple bedside placement"
+          ],
+          [
+            "Impella microaxial device",
+            "Active transvalvular left ventricular aspiration",
+            "Direct chamber decompression into ascending aorta"
+          ],
+          [
+            "Transeptal surgical venting",
+            "Left atrial drainage via balloon septostomy",
+            "Eliminates left atrial hypertension completely"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Systemic anticoagulation prevents catastrophic clot formation across the extracorporeal circuit. Clinicians infuse unfractionated heparin, titrating to an anti-factor Xa level between point three and point seven units per milliliter. Alternatively, an activated partial thromboplastin time between fifty and seventy seconds is maintained.",
+      "tx": "Circuit **anticoagulation** on extracorporeal membrane oxygenation relies on continuous unfractionated heparin infusions. Clinicians monitor therapeutic efficacy targeting an **anti-factor Xa** level of 0.3 to 0.7 units/mL or an **activated partial thromboplastin time** of 50 to 70 seconds to prevent oxygenator membrane thrombosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Monitoring Parameter",
+          "Target Therapeutic Range",
+          "Clinical Rationale"
+        ],
+        "rows": [
+          [
+            "Anti-factor Xa level",
+            "0.3 to 0.7 units/mL",
+            "Direct measurement of heparin-mediated factor Xa inhibition"
+          ],
+          [
+            "Activated PTT",
+            "50 to 70 seconds",
+            "Standard laboratory measure of intrinsic pathway anticoagulation"
+          ],
+          [
+            "Activated clotting time",
+            "180 to 220 seconds",
+            "Point-of-care whole blood monitoring for bedside titration"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Weaning assessments confirm that native organs have recovered sufficiently. For venoarterial support, teams turn down circuit flow while monitoring echocardiographic ejection fraction and tissue perfusion. For venovenous support, clinicians turn off the sweep gas completely, checking whether the lungs can maintain normal gas exchange.",
+      "tx": "Confirming clinical readiness for decannulation requires systematic **weaning trials**. Venoarterial weaning lowers circuit flow to 1.5 L/min under continuous echocardiographic guidance. Venovenous weaning halts the **sweep gas challenge** completely for several hours, confirming adequate native **pulmonary recovery** before safely removing the large vascular cannulas.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify clinical and radiological organ recovery"
+          },
+          {
+            "id": "b",
+            "label": "VA ECMO: reduce pump flow to 1.5 L/min under echo"
+          },
+          {
+            "id": "c",
+            "label": "VV ECMO: turn sweep gas to 0 L/min on rest ventilator"
+          },
+          {
+            "id": "d",
+            "label": "Verify stable hemodynamics and blood gas before decannulation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

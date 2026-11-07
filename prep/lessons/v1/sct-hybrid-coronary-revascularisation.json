@@ -1,0 +1,259 @@
+{
+  "v": 1,
+  "module": "sct-hybrid-coronary-revascularisation",
+  "title": "Hybrid coronary revascularisation: MIDCAB, robotic LIMA-LAD and staged PCI",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Minimally Invasive Coronary Artery Bypass)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 12 (Coronary Artery Bypass Grafting)",
+    "2021 ACC/AHA/SCAI Guideline for Coronary Artery Revascularization"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Hybrid coronary revascularization combines the proven longevity of an arterial bypass with the convenience of percutaneous stenting. Surgeons place an internal mammary artery graft to the anterior descending artery through a small thoracotomy. Interventional cardiologists then stent remaining non-LAD lesions with drug-eluting stents.",
+      "tx": "Modern **hybrid revascularization** combines a surgical **LIMA-LAD bypass** with catheter-based **drug-eluting stenting** of non-LAD coronary vessels. This strategic synergy capitalizes on proven surgical survival advantages while completely eliminating large median sternotomy incisions, lengthy intensive care stays, and protracted postoperative recovery periods.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Surgical Component (LIMA-LAD)",
+          "points": [
+            "Minimally invasive or robotic mammary harvest",
+            "Anastomosis to left anterior descending artery",
+            "Exceeds 90 percent 10-year conduit patency"
+          ]
+        },
+        "right": {
+          "title": "Percutaneous Component (PCI)",
+          "points": [
+            "Drug-eluting stents placed in circumflex or RCA",
+            "Avoids saphenous vein harvest and sternotomy",
+            "Rapid recovery with reduced wound morbidity"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Minimally invasive direct coronary artery bypass achieves anterior revascularization without opening the sternum. Surgeons enter the fourth left intercostal space through an anterior minithoracotomy. Specialized vacuum suction stabilizers immobilize the beating coronary artery, allowing precise hand-sewn suturing on the beating heart.",
+      "tx": "In **MIDCAB surgery**, the operative team accesses the chest via a small **left anterior minithoracotomy** in the fourth intercostal space. Utilizing a mechanical **suction stabilizer** on the epicardium, the surgeon sews the mammary anastomosis directly onto the beating heart without cardiopulmonary bypass.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Small 4th intercostal left anterior minithoracotomy"
+          },
+          {
+            "id": "b",
+            "label": "Direct or video-assisted LIMA mobilization"
+          },
+          {
+            "id": "c",
+            "label": "Application of vacuum epicardial suction stabilizer"
+          },
+          {
+            "id": "d",
+            "label": "Hand-sewn LIMA to LAD anastomosis on beating heart"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Robotic assistance elevates minimally invasive revascularization to fully endoscopic levels. The console surgeon harvests the mammary artery with wrist-articulated instruments through port incisions. Totally endoscopic bypass closes the entire thoracic cavity, performing the vascular connection through eight-millimeter ports.",
+      "tx": "Advancing beyond minithoracotomy, **robotic-assisted CABG** permits full internal mammary harvest through three tiny chest ports. In **totally endoscopic coronary bypass**, both internal mammary harvesting and microscopic LAD anastomosis are performed entirely inside the closed chest using the **robotic surgical console**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Technique",
+          "Incision Architecture",
+          "CPB Requirement"
+        ],
+        "rows": [
+          [
+            "MIDCAB",
+            "4 to 6 cm left anterior minithoracotomy",
+            "Off-pump (beating heart)"
+          ],
+          [
+            "Robotic-assisted MIDCAB",
+            "Port-access harvest + minithoracotomy anastomosis",
+            "Off-pump (beating heart)"
+          ],
+          [
+            "TECAB",
+            "Three to four 8 mm thoracic ports only",
+            "Off-pump or arrest with endoaortic clamp"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Optimal staging balances surgical hemostasis against stent thrombosis risks. Staged procedures perform the surgical bypass first, followed by catheter intervention hours to days later. Performing surgery first allows verification of graft patency during catheterization while avoiding clopidogrel-induced surgical bleeding.",
+      "tx": "In a **staged hybrid approach**, performing **surgery-first staging** is widely preferred. The surgeon places the mammary graft off antiplatelet agents. Subsequent coronary angiography provides immediate **angiographic graft confirmation** before deploying drug-eluting stents under full dual antiplatelet coverage without increasing surgical bleeding.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Surgery First Approach",
+          "points": [
+            "Minimizes perioperative surgical bleeding risks",
+            "Diagnostic angiography confirms LIMA patency",
+            "Immediate backup PCI if graft exhibits spasm"
+          ]
+        },
+        "right": {
+          "title": "PCI First Approach",
+          "points": [
+            "Stabilizes culprit non-LAD lesions upfront",
+            "Mandates operating while on dual antiplatelet therapy",
+            "Carries higher risk of chest tube output and transfusion"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Simultaneous hybrid procedures take place in specialized hybrid operating suites. Surgeons and interventionalists perform the procedures in the same room on the same day. Completing bypass and stenting in one setting provides single-stage revascularization and immediate quality control for both conduits and stents.",
+      "tx": "Executing a simultaneous hybrid procedure requires an advanced **hybrid operating suite** equipped with fixed high-resolution fluoroscopy. This setting enables **concomitant revascularization**, allowing instant completion angiography and PCI in a **single-stage procedure** without transferring an unstable patient between cardiac catheterization and operating suites.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Transfer patient to dedicated hybrid operating room"
+          },
+          {
+            "id": "b",
+            "label": "Perform off-pump robotic or MIDCAB LIMA to LAD"
+          },
+          {
+            "id": "c",
+            "label": "On-table completion angiography validates graft flow"
+          },
+          {
+            "id": "d",
+            "label": "Immediate percutaneous stenting of non-LAD lesions"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Managing antiplatelet therapy during hybrid procedures requires strict coordination. Dual antiplatelet therapy prevents acute stent thrombosis but increases surgical bleeding. Staging bypass first allows uninterrupted aspirin, while clopidogrel or ticagrelor loading begins immediately after verifying surgical hemostasis.",
+      "tx": "Antiplatelet management requires disciplined timing: **dual antiplatelet therapy** with aspirin and a P2Y12 inhibitor such as **clopidogrel** is vital to prevent **stent thrombosis**. In surgery-first protocols, the P2Y12 loading dose is administered immediately after chest closure once hemostasis is verified.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antiplatelet Agent",
+          "Timing in Surgery-First",
+          "Target Thrombotic Mechanism"
+        ],
+        "rows": [
+          [
+            "Aspirin 81 to 100 mg",
+            "Continued uninterrupted throughout surgery",
+            "Irreversible cyclooxygenase-1 thromboxane inhibition"
+          ],
+          [
+            "Clopidogrel 300 to 600 mg load",
+            "Initiated 2 to 4 hours post-MIDCAB hemostasis",
+            "P2Y12 platelet adenosine diphosphate receptor blockade"
+          ],
+          [
+            "Ticagrelor 180 mg load",
+            "Alternative potent P2Y12 inhibitor for acute ACS",
+            "Reversible direct P2Y12 receptor antagonist"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Intraoperative flow verification confirms anastomotic patency before chest closure. Surgeons utilize transit-time flow measurement to evaluate the newly placed mammary graft. A pulsatility index under five and a mean graft flow exceeding fifteen to twenty milliliters per minute confirm excellent technical quality.",
+      "tx": "Intraoperative **transit-time flow measurement** is mandatory during minimally invasive bypass to ensure anastomotic adequacy. Perfusionists confirm graft success when the **pulsatility index** remains below 5.0 and **mean graft flow** exceeds 15 to 20 mL/min, validating high-quality forward coronary perfusion before transferring the patient to recovery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Flow Variable",
+          "Acceptable Criterion",
+          "Significance"
+        ],
+        "rows": [
+          [
+            "Mean graft flow",
+            "> 15 to 20 mL/min",
+            "Confirms adequate volumetric forward coronary perfusion"
+          ],
+          [
+            "Pulsatility index",
+            "< 5.0",
+            "Indicates low anastomotic vascular resistance without kinking"
+          ],
+          [
+            "Diastolic flow filling",
+            "> 50 percent",
+            "Validates characteristic diastolic coronary perfusion timing"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Strict patient selection is essential to avoid intraoperative complications. Specific surgical exclusion criteria prevent minimally invasive revascularization. Patients with dense pleural obliteration from prior thoracotomy, severe morbid obesity, or an intramyocardial target vessel are unsuitable for closed-chest grafting.",
+      "tx": "Rigorous **exclusion criteria** prevent procedural failure in minimally invasive revascularization. Prior left thoracotomy with dense **pleural obliteration**, severe morbid obesity, and a small calcified **intramyocardial LAD** vessel represent contraindications, directing surgical teams toward conventional median sternotomy bypass to ensure patient safety.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eligible Hybrid Candidates",
+          "points": [
+            "Virgin left pleural space without previous thoracic surgery",
+            "Superficial large-caliber (> 1.5 mm) target LAD coronary artery",
+            "Normal chest wall anatomy suitable for anterior minithoracotomy"
+          ]
+        },
+        "right": {
+          "title": "Exclusion Criteria (Unsuitable)",
+          "points": [
+            "Pleural obliteration or extensive intrapleural adhesions",
+            "Small, calcified or deeply intramyocardial LAD coronary artery",
+            "Morbid obesity and severe peripheral vascular disease"
+          ]
+        }
+      }
+    }
+  ]
+}

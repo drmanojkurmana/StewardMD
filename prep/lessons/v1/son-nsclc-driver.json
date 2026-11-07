@@ -3,7 +3,7 @@
   "module": "son-nsclc-driver",
   "subject": "ss-medical-oncology",
   "title": "Oncogene addicted NSCLC: molecular drivers and targeted therapies",
-  "minutes": 9,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Sensitising mutations in the epidermal growth factor receptor drive distinct subsets of lung adenocarcinoma. Classical activating alterations include **EGFR exon 19** in-frame deletions and exon 21 **L858R** point substitutions. Together, these two alterations form approximately 85% of all EGFR-mutant non-small cell lung cancers. Identifying these driver alterations dictates front-line treatment choice, because tumours harbouring sensitising mutations demonstrate high initial sensitivity to specific tyrosine kinase inhibitors.",
@@ -189,6 +189,17 @@
             "gdp"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The surface model traps a pink drug inside the **Switch II pocket** of **KRAS G12C**, pinned by a covalent link that locks the protein in its **GDP bound off state**. With the switch frozen, RAF MEK ERK flow falls silent, which is why this once undruggable driver now answers to selective oral inhibitors in previously treated lung cancer.",
+      "say": "The KRAS protein surface holds a small inhibitor locked into a side pocket by a bond to the mutant cysteine, freezing the protein with GDP attached. In that inactive shape it cannot pass growth signals down the MAPK chain to the nucleus. The lesson presents this locking trick as the basis for approved G12C drugs that give durable responses after prior therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-nsclc-driver-gen2.webp",
+        "alt": "A KRAS protein surface shows an inhibitor locked in a side pocket with downstream growth signaling switched off.",
+        "caption": "KRAS inhibitor locked in Switch II pocket blocking signals, Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
