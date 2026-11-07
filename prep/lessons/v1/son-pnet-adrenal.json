@@ -13,7 +13,7 @@
         "cols": [
           "Tumor type",
           "Typical presentation",
-          "Malignant potential"
+          "Malignant potential or spread"
         ],
         "rows": [
           [
@@ -24,43 +24,43 @@
           [
             "Gastrinoma",
             "Zollinger-Ellison syndrome: ulcers and diarrhea",
-            "Malignant in most cases"
+            "More than 60 percent malignant"
           ],
           [
             "Glucagonoma",
             "Skin rash, weight loss, high blood sugar",
-            "Malignant in most cases"
+            "50 to 80 percent spread at diagnosis"
           ],
           [
             "VIPoma",
             "Watery diarrhea and low potassium",
-            "Malignant in most cases"
+            "More than 50 percent spread at diagnosis"
           ],
           [
             "Somatostatinoma",
             "Diabetes, gallstones, fatty stools",
-            "Often spread at diagnosis"
+            "More than 60 percent malignant"
           ]
         ]
       }
     },
     {
-      "tx": "**Insulinoma** reveals itself through the **Whipple triad** (three findings that together establish low blood sugar: symptoms, a low measured glucose, and relief once glucose rises). Confirmation rests on a high fasting insulin level together with high proinsulin and **C-peptide** (a fragment released alongside the body's own insulin). Most insulinomas measure under 2 cm, so **endoscopic ultrasound** (EUS) is the preferred local test.",
-      "say": "Insulinoma is recognized through the Whipple triad. That triad has three parts: symptoms of low blood sugar, a low glucose reading taken accurately, and relief of symptoms once glucose rises. Doctors then measure fasting insulin, which is high, along with proinsulin and C-peptide, which are also high. Most insulinomas are smaller than 2 centimeters, so endoscopic ultrasound is the preferred local test.",
+      "tx": "**Insulinoma** reveals itself through the **Whipple triad** (three findings that together establish low blood sugar: symptoms, a low measured glucose, and relief once glucose rises). Observed fasting that shows insulin over 3 microunits per milliliter, often over 6, while glucose sits below 40 to 45 milligrams per deciliter confirms the diagnosis. Proinsulin and **C-peptide** (a fragment released alongside the body's own insulin) rise with it. Most insulinomas measure under 2 cm, so **endoscopic ultrasound** (EUS) is the best local test.",
+      "say": "Insulinoma is recognized through the Whipple triad. That triad has three parts: symptoms of low blood sugar, a low glucose reading taken accurately, and relief of symptoms once glucose rises. Observed fasting that shows insulin over 3 microunits per milliliter, often over 6, while glucose sits below 40 to 45 milligrams per deciliter confirms the diagnosis. Proinsulin and C-peptide, a fragment released alongside insulin, rise with it. Most insulinomas measure under 2 centimeters, so endoscopic ultrasound is the best local test.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
             "id": "a",
-            "label": "Whipple triad confirms low glucose"
+            "label": "Whipple triad and low glucose"
           },
           {
             "id": "b",
-            "label": "Fasting insulin high"
+            "label": "Insulin above 3 in supervised fast"
           },
           {
             "id": "c",
-            "label": "Proinsulin and C-peptide high"
+            "label": "Proinsulin and C-peptide rise"
           },
           {
             "id": "d",
@@ -71,7 +71,7 @@
           [
             "a",
             "b",
-            "sample during the episode"
+            "confirm during fast"
           ],
           [
             "b",
@@ -87,8 +87,8 @@
       }
     },
     {
-      "tx": "**Gastrinoma** drives **Zollinger-Ellison syndrome**, in which excess gastrin (the hormone that tells stomach acid cells to work) floods the stomach with acid, causing ulcers and diarrhea. A fasting gastrin above 600 picograms per milliliter is typical, and 1,000 pg/mL or more with a gastric pH of 2 or less settles the diagnosis. **Proton pump inhibitors** (PPIs, acid-suppressing drugs) can raise gastrin and mislead the test.",
-      "say": "Gastrinoma causes Zollinger-Ellison syndrome. Gastrin is the hormone that tells the stomach's acid-making cells to work. Too much of it floods the stomach with acid, causing ulcers and diarrhea. A fasting gastrin above 600 picograms per milliliter is typical. A value of 1,000 or more, with a stomach pH of 2 or less, makes the diagnosis secure. Acid-lowering drugs can also raise gastrin, so their timing matters.",
+      "tx": "**Gastrinoma** drives **Zollinger-Ellison syndrome** (ZES, excess stomach acid caused by too much gastrin, the hormone that tells acid-making cells to work). The result is ulcers and diarrhea. A fasting gastrin above 600 picograms per milliliter is typical, and virtually all patients exceed 100. A gastrin level of 1,000 or more, paired with a gastric pH of 2 or less, secures the diagnosis. **Proton pump inhibitors** (PPIs, acid-suppressing drugs) can raise gastrin and mislead the test.",
+      "say": "Gastrinoma drives Zollinger-Ellison syndrome, which means excess stomach acid caused by too much gastrin, the hormone that tells acid-making cells to work. The result is ulcers and diarrhea. A fasting gastrin above 600 picograms per milliliter is typical, and virtually all patients exceed 100. A gastrin level of 1,000 or more, paired with a gastric pH of 2 or less, secures the diagnosis. Proton pump inhibitors, which are acid-suppressing drugs, can raise gastrin and mislead the test.",
       "vis": {
         "kind": "table",
         "cols": [
@@ -109,15 +109,15 @@
           ],
           [
             "Tumor location",
-            "Duodenum in 50 to 90 percent",
-            "Usually small and hard to find"
+            "Duodenum is the most common site",
+            "Duodenal tumors often under 1 cm"
           ]
         ]
       }
     },
     {
-      "tx": "**Glucagonoma** most often shows **necrolytic migratory erythema**, a rash in skin folds such as the groin that waxes and wanes, plus glucose intolerance and weight loss. Plasma glucagon generally above 1,000 pg/mL supports the diagnosis. **VIPoma**, a tumor secreting vasoactive intestinal peptide (VIP), causes watery diarrhea, low potassium, and low stomach acid (achlorhydria), a combination called Verner-Morrison syndrome.",
-      "say": "Glucagonoma usually shows itself with necrolytic migratory erythema, a rash that appears in skin folds such as the groin and comes and goes. Glucose intolerance and weight loss are often present too. A plasma glucagon level generally above 1,000 picograms per milliliter supports the diagnosis. VIPomas secrete vasoactive intestinal peptide, causing watery diarrhea, low potassium, and low stomach acid. That pattern is called Verner-Morrison syndrome.",
+      "tx": "**Glucagonoma** most often shows **necrolytic migratory erythema** (a painful rash in skin folds such as the groin that waxes and wanes), with glucose intolerance and weight loss. Plasma glucagon generally above 1,000 picograms per milliliter supports the diagnosis. **VIPoma**, a tumor secreting vasoactive intestinal peptide (VIP), causes watery diarrhea, low potassium, and low stomach acid (achlorhydria). That combination is called Verner-Morrison syndrome.",
+      "say": "Patients with glucagonoma usually develop necrolytic migratory erythema, a painful rash in skin folds such as the groin that waxes and wanes. Glucose intolerance and weight loss usually come with it. Plasma glucagon generally above 1,000 picograms per milliliter supports the diagnosis. VIPoma is a tumor that secretes vasoactive intestinal peptide, causing watery diarrhea, low potassium, and low stomach acid. That combination is called Verner-Morrison syndrome.",
       "vis": {
         "kind": "compare",
         "left": {
@@ -132,7 +132,7 @@
         "right": {
           "title": "VIPoma",
           "points": [
-            "Watery diarrhea",
+            "Watery diarrhea, often over 20 stools a day",
             "Low potassium",
             "Low stomach acid (achlorhydria)",
             "Most arise in the pancreas in adults"
@@ -183,11 +183,20 @@
       }
     },
     {
-      "tx": "Overall, **most pNETs are malignant**, and insulinoma is the exception, being benign in 95 percent of patients. **Gastrinoma**, like glucagonoma and VIPoma, is usually malignant, with more than 60 percent of gastrinomas judged malignant by local invasion or metastasis. A nonmetastatic insulinoma, unlike other pNETs that often reach regional lymph nodes, generally needs no nodal dissection.",
-      "say": "Overall, most pNETs are malignant, and insulinoma is the exception. Insulinoma is benign in 95 percent of patients. Gastrinoma, like glucagonoma and VIPoma, is usually malignant. More than 60 percent of gastrinomas are judged malignant, based on local invasion or spread to other organs. A nonmetastatic insulinoma, unlike other pNETs that often reach regional lymph nodes, generally needs no nodal dissection.",
+      "tx": "Overall, **most pNETs are malignant**, and insulinoma is the exception, benign in 95 percent of patients. **Gastrinoma** is the functional type with the clearest high malignant share: more than 60 percent are judged malignant. A recent review adds that more than half of VIPomas have spread at diagnosis, that 50 to 80 percent of glucagonomas have spread by then, and that more than 60 percent of somatostatinomas are malignant.",
+      "say": "Overall, most pNETs are malignant, and insulinoma is the exception. Insulinoma is benign in 95 percent of patients. Gastrinoma is the functional type with the clearest high malignant share, because more than 60 percent are judged malignant. A recent review adds that more than half of VIPomas have spread at diagnosis, that 50 to 80 percent of glucagonomas have spread by then, and that more than 60 percent of somatostatinomas are malignant.",
       "vis": {
         "kind": "compare",
         "left": {
+          "title": "Gastrinoma",
+          "points": [
+            "More than 60 percent judged malignant",
+            "Malignant by local invasion or spread",
+            "Regional lymph node removal is important",
+            "Duodenal tumors usually small"
+          ]
+        },
+        "right": {
           "title": "Insulinoma",
           "points": [
             "Benign in 95 percent of patients",
@@ -195,21 +204,12 @@
             "Enucleation is the usual operation",
             "No lymph node dissection if nonmetastatic"
           ]
-        },
-        "right": {
-          "title": "Gastrinoma, glucagonoma, VIPoma",
-          "points": [
-            "Usually malignant",
-            "More than 60 percent of gastrinomas judged malignant",
-            "Often reach regional lymph nodes",
-            "Somatostatinomas often spread at diagnosis"
-          ]
         }
       }
     },
     {
-      "tx": "**Primary aldosteronism** means the adrenal glands make aldosterone on their own, which keeps renin suppressed. Among people with hypertension in systematic screening, it turns up in roughly 5 to 12 percent. The usual screen is the **aldosterone-to-renin ratio** (ARR, a comparison of two blood hormones). A ratio above 750 in the standard units, with aldosterone high normal or raised, is a positive screen.",
-      "say": "Primary aldosteronism means the adrenal glands make aldosterone on their own, keeping renin suppressed. In systematic screening of hypertensive patients, it turns up in five to twelve percent. The usual screen is the aldosterone-to-renin ratio, a comparison of two blood hormones. A value above 750 in the standard units, with aldosterone high normal or raised, counts as a positive screen.",
+      "tx": "**Primary aldosteronism** means the adrenal glands make aldosterone on their own, keeping renin suppressed. It appears in 5 to 12 percent of people with hypertension in systematic screening. The usual screen is the **aldosterone-to-renin ratio** (ARR, a comparison of two blood hormones) taken after stopping **spironolactone** for 4 to 6 weeks. A ratio above 20 becomes suggestive when renin is low or suppressed and aldosterone climbs past 12 ng/dL.",
+      "say": "Primary aldosteronism means the adrenal glands make aldosterone on their own, keeping renin suppressed. It appears in 5 to 12 percent of people with hypertension in systematic screening. The usual screen is the aldosterone-to-renin ratio, a comparison of two blood hormones, taken after stopping spironolactone for 4 to 6 weeks. A ratio above 20 becomes suggestive when renin is low or suppressed and aldosterone climbs past 12 ng/dL.",
       "vis": {
         "kind": "table",
         "cols": [
@@ -221,7 +221,7 @@
           [
             "Screen",
             "Aldosterone-to-renin ratio on current drugs",
-            "Above 750 is positive"
+            "Above 20 with renin suppressed"
           ],
           [
             "Prepare",
@@ -236,14 +236,14 @@
           [
             "Image",
             "Fine-cut CT of the adrenal glands",
-            "Most adenomas under 2 cm"
+            "Often under 1 cm; CT can miss lesions under 5 mm"
           ]
         ]
       }
     },
     {
-      "tx": "If the screen is positive, a **saline infusion test** (2 liters over 4 hours) checks whether aldosterone is switched off. Aldosterone that stays above 170 pmol/L when the patient sits up indicates autonomous secretion. Fine-cut CT then shows the adrenal anatomy. Endocrine-inactive adenomas are the most common adrenal mass, so a small nodule alone cannot reveal which gland is the source.",
-      "say": "After a positive screen, doctors often run a saline infusion test, giving two liters over four hours. If aldosterone stays above 170 picomoles per liter with the patient seated, the excess is autonomous. Fine-cut CT then shows the adrenal anatomy. Endocrine-inactive adenomas are the most common adrenal mass, so a small nodule alone cannot reveal which gland is the source.",
+      "tx": "If the screen is positive, a **saline infusion test** (2 liters over 4 hours) checks whether aldosterone is switched off. Aldosterone that stays above 170 pmol/L when the patient sits up indicates autonomous secretion. Fine-cut CT then shows the adrenal anatomy. **Endocrine-inactive adenomas** are the most common adrenal mass, at 40 to 70 percent of unilateral lesions, so a nodule on CT alone cannot show which gland is the source.",
+      "say": "If the screen is positive, a saline infusion test, with 2 liters given over 4 hours, checks whether aldosterone is switched off. Aldosterone that stays above 170 picomoles per liter with the patient seated indicates autonomous secretion. Fine-cut CT then shows the adrenal anatomy. Endocrine-inactive adenomas are the most common adrenal mass, at 40 to 70 percent of unilateral lesions, so a nodule on CT alone cannot show which gland is the source.",
       "vis": {
         "kind": "flow",
         "nodes": [
@@ -293,8 +293,8 @@
       }
     },
     {
-      "tx": "**Adrenal venous sampling** (AVS, catheters placed in each adrenal vein) compares aldosterone between the two sides, and cortisol measurements confirm correct catheter placement. Lateralization requires an aldosterone-to-cortisol ratio at least twofold higher on one side. Younger adults, under 35, with a single lesion on one side and no clinical hint of a familial form can proceed straight to surgery, while patients over 35 need AVS first.",
-      "say": "Adrenal venous sampling, or AVS, places catheters in each adrenal vein. Doctors compare aldosterone levels from the two sides, and cortisol readings confirm the catheters sit correctly. One side must show an aldosterone to cortisol ratio at least twice as high as the other. Younger patients under 35 with a single lesion and no sign of a familial form can usually go straight to surgery. Patients over 35 generally need the sampling first.",
+      "tx": "**Adrenal venous sampling** (AVS, catheters placed in each adrenal vein) compares aldosterone between the two sides, and cortisol readings confirm the catheters sit correctly. Lateralization requires an aldosterone-to-cortisol ratio at least twofold higher on one side. Patients under 35 with a unilateral lesion and no suspicion of a familial form can go straight to surgery. Patients over 35, or those with no obvious lesion on CT, need AVS first.",
+      "say": "Adrenal venous sampling, or AVS, places catheters in each adrenal vein. Doctors compare aldosterone levels from the two sides, and cortisol readings confirm the catheters sit correctly. One side must show an aldosterone to cortisol ratio at least twice as high as the other. Patients under 35 with a unilateral lesion and no sign of a familial form can usually go straight to surgery. Patients over 35, or those with no obvious lesion on CT, need the sampling first.",
       "vis": {
         "kind": "compare",
         "left": {
@@ -307,11 +307,11 @@
           ]
         },
         "right": {
-          "title": "Over 35",
+          "title": "Over 35 or no obvious lesion",
           "points": [
             "Confirmed primary aldosteronism",
-            "Unilateral lesion on CT",
-            "Higher chance of an incidental adenoma",
+            "Unilateral lesion at age over 35, or no lesion on CT",
+            "Coincidental adenoma more likely over 35",
             "AVS shows which side secretes"
           ]
         }
@@ -323,5 +323,198 @@
     "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
     "Harrison's Principles of Internal Medicine, 22nd edition"
   ],
-  "gen": "AI"
+  "gen": "AI",
+  "mustKnow": [
+    {
+      "fact": "Insulinoma is benign in 95 percent of patients, and most pNETs are malignant.",
+      "terms": [
+        "benign in 95 percent",
+        "most pNETs are malignant"
+      ],
+      "numbers": [
+        "95"
+      ],
+      "drugs": [],
+      "source": "DeVita, Chapter 57 Pancreatic Neuroendocrine Neoplasms (Surgical Treatment)"
+    },
+    {
+      "fact": "Gastrinoma is the functional type with the clearest high malignant share: more than 60 percent are judged malignant.",
+      "terms": [
+        "more than 60 percent are judged malignant",
+        "clearest high malignant share"
+      ],
+      "numbers": [
+        "60"
+      ],
+      "drugs": [],
+      "source": "Harrison, Chapter 335 Peptic Ulcer Disease and Related Disorders (gastrinoma)"
+    },
+    {
+      "fact": "A recent review reports that 50 to 80 percent of glucagonomas and more than half of VIPomas have spread at diagnosis.",
+      "terms": [
+        "50 to 80 percent of glucagonomas",
+        "more than half of VIPomas"
+      ],
+      "numbers": [
+        "50",
+        "80"
+      ],
+      "drugs": [],
+      "source": "Konstantakou P et al, Endocrine Oncology 2026, PMC13695398"
+    },
+    {
+      "fact": "The Whipple triad and an observed fast with insulin over 3 microunits per milliliter and glucose under 40 to 45 milligrams per deciliter confirm insulinoma.",
+      "terms": [
+        "Whipple triad",
+        "Observed fasting that shows insulin"
+      ],
+      "numbers": [
+        "3",
+        "6",
+        "40",
+        "45"
+      ],
+      "drugs": [],
+      "source": "Harrison, Chapter 418 Hypoglycemia; DeVita, Chapter 57 Pancreatic Neuroendocrine Neoplasms"
+    },
+    {
+      "fact": "In Zollinger-Ellison syndrome a fasting gastrin above 600 is typical and a gastrin of 1,000 or more with gastric pH of 2 or less secures the diagnosis.",
+      "terms": [
+        "fasting gastrin above 600",
+        "gastric pH of 2 or less"
+      ],
+      "numbers": [
+        "600",
+        "1,000",
+        "2",
+        "100"
+      ],
+      "drugs": [],
+      "source": "DeVita, Chapter 57 Pancreatic Neuroendocrine Neoplasms (gastrinoma)"
+    },
+    {
+      "fact": "Proton pump inhibitors can raise gastrin and mislead the diagnosis of gastrinoma.",
+      "terms": [
+        "Proton pump inhibitors",
+        "can raise gastrin"
+      ],
+      "numbers": [],
+      "drugs": [],
+      "source": "DeVita, Chapter 57 Pancreatic Neuroendocrine Neoplasms (gastrinoma)"
+    },
+    {
+      "fact": "Up to 25 percent of Zollinger-Ellison patients have multiple endocrine neoplasia type 1, and MEN 1 gastrinomas are small and multiple.",
+      "terms": [
+        "Up to 25 percent",
+        "multiple endocrine neoplasia type 1"
+      ],
+      "numbers": [
+        "25"
+      ],
+      "drugs": [],
+      "source": "Harrison, Chapter 89 Gastrointestinal Neuroendocrine Tumors"
+    },
+    {
+      "fact": "Glucagonoma presents with necrolytic migratory erythema and plasma glucagon is generally above 1,000 pg/mL.",
+      "terms": [
+        "necrolytic migratory erythema",
+        "Plasma glucagon generally above"
+      ],
+      "numbers": [
+        "1,000"
+      ],
+      "drugs": [],
+      "source": "Harrison, Chapter 89 Gastrointestinal Neuroendocrine Tumors"
+    },
+    {
+      "fact": "VIPoma causes watery diarrhea, low potassium and low stomach acid, the Verner-Morrison syndrome.",
+      "terms": [
+        "Verner-Morrison syndrome",
+        "vasoactive intestinal peptide"
+      ],
+      "numbers": [],
+      "drugs": [],
+      "source": "DeVita, Chapter 57 Pancreatic Neuroendocrine Neoplasms"
+    },
+    {
+      "fact": "Primary aldosteronism is found in 5 to 12 percent of hypertensive patients on systematic screening.",
+      "terms": [
+        "5 to 12 percent",
+        "aldosterone-to-renin ratio"
+      ],
+      "numbers": [
+        "5",
+        "12"
+      ],
+      "drugs": [],
+      "source": "Harrison, Chapter 398 Disorders of the Adrenal Cortex"
+    },
+    {
+      "fact": "An aldosterone to renin ratio above 20 with suppressed renin and aldosterone above 12 ng/dL is suggestive of autonomous aldosterone.",
+      "terms": [
+        "A ratio above 20",
+        "aldosterone climbs past 12 ng/dL"
+      ],
+      "numbers": [
+        "20",
+        "12"
+      ],
+      "drugs": [],
+      "source": "DeVita, Chapter 56 Adrenal Tumors"
+    },
+    {
+      "fact": "Spironolactone is stopped for 4 to 6 weeks before the aldosterone-to-renin ratio screen.",
+      "terms": [
+        "after stopping spironolactone",
+        "4 to 6 weeks"
+      ],
+      "numbers": [
+        "4",
+        "6"
+      ],
+      "drugs": [
+        "spironolactone"
+      ],
+      "source": "Harrison, Chapter 398 Disorders of the Adrenal Cortex"
+    },
+    {
+      "fact": "A saline infusion test of 2 liters over 4 hours shows autonomous aldosterone when aldosterone stays above 170 pmol/L seated.",
+      "terms": [
+        "saline infusion test",
+        "170 pmol/L"
+      ],
+      "numbers": [
+        "2",
+        "4",
+        "170"
+      ],
+      "drugs": [],
+      "source": "Harrison, Chapter 398 Disorders of the Adrenal Cortex"
+    },
+    {
+      "fact": "Endocrine-inactive adenomas are the most common adrenal mass, at 40 to 70 percent of unilateral lesions.",
+      "terms": [
+        "Endocrine-inactive adenomas",
+        "40 to 70 percent of unilateral lesions"
+      ],
+      "numbers": [
+        "40",
+        "70"
+      ],
+      "drugs": [],
+      "source": "Harrison, Chapter 398 Disorders of the Adrenal Cortex (Table 398-5)"
+    },
+    {
+      "fact": "Adrenal venous sampling is skipped for patients under 35 with a unilateral lesion, and needed for patients over 35 or with no obvious CT lesion.",
+      "terms": [
+        "Adrenal venous sampling",
+        "Patients under 35"
+      ],
+      "numbers": [
+        "35"
+      ],
+      "drugs": [],
+      "source": "Harrison, Chapter 398 Disorders of the Adrenal Cortex"
+    }
+  ]
 }
