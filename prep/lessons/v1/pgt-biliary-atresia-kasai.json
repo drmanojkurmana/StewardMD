@@ -1,0 +1,277 @@
+{
+  "gen": "AI",
+  "id": "pgt-biliary-atresia-kasai",
+  "module": "Pancreatitis, Cystic Fibrosis and Biliary Atresia",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Biliary atresia is a progressive inflammatory destruction of the extrahepatic bile ducts that strikes young infants. Presenting with pale acholic stools, dark urine, and jaundice beyond two weeks of life, it leads relentlessly to biliary cirrhosis and death if left untreated.",
+      "tx": "Define **obliterative cholangiopathy** in biliary atresia. Biliary atresia is a progressive idiopathic fibro-obliterative destruction of all or part of the extrahepatic biliary tree occurring in 1 in 10,000 to 18,000 live births. It manifests in young infants with persistent direct (conjugated) hyperbilirubinemia, pale acholic clay-colored stools, and hepatomegaly, progressing to biliary cirrhosis within months without intervention. Incidence ranges from 1 in 10,000 to 15,000 live births.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Progressive perinatal fibro-obliterative inflammation"
+          },
+          {
+            "id": "b",
+            "label": "Complete luminal obliteration of extrahepatic ducts"
+          },
+          {
+            "id": "c",
+            "label": "Bile stasis, direct hyperbilirubinemia, acholic stools"
+          },
+          {
+            "id": "d",
+            "label": "Secondary biliary cirrhosis and portal hypertension"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "High resolution ultrasound can detect the pathognomonic triangular cord sign. This triangular or tubular echogenic fibrous band thicker than four millimetres anterior to the portal vein represents the scarred remnant of the obliterated common bile duct.",
+      "tx": "Detect the **triangular cord sign** on high-resolution ultrasound. Visualizing an echogenic, triangular or tubular fibrous band anterior to the bifurcation of the portal vein (with a thickness > 4 mm on longitudinal scanning) represents the obliterated extrahepatic bile duct remnant, providing a diagnostic sensitivity and specificity > 90% for biliary atresia. The triangular cord sign demonstrates over 95% specificity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ultrasound Finding",
+          "Diagnostic Measurement",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Triangular cord sign",
+            "Fibrous thickness > 4 mm",
+            "Pathognomonic obliterated duct remnant"
+          ],
+          [
+            "Gallbladder ghost triad",
+            "Length < 1.5 cm, irregular wall, absent mucosal lining",
+            "Suggests absent or atretic cystic duct/gallbladder"
+          ],
+          [
+            "Hepatic artery diameter",
+            "Enlarged compensatory caliber (> 1.5 mm)",
+            "Reflects hepatic hypervascularity"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prepare the baby with oral phenobarbital for five days before performing a HIDA hepatobiliary scan. Phenobarbital stimulates hepatic enzyme clearance. If radioisotope concentrates in the liver but zero tracer reaches the bowel at twenty four hours, biliary atresia is highly suspected.",
+      "tx": "Conduct **HIDA scan 24-hour non-excretion** scintigraphy. Hepatobiliary iminodiacetic acid (HIDA or Tc-99m mebrofenin) scintigraphy is performed following 5 days of oral phenobarbital priming (5 mg/kg/day) to induce hepatic microsomal excretion. Prompt hepatic radiotracer uptake coupled with the total absence of intestinal radiotracer excretion at 24 hours strongly supports biliary atresia, although severe neonatal hepatitis can yield a similar picture.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Phenobarbital priming (5 mg/kg/day x 5 days)"
+          },
+          {
+            "id": "b",
+            "label": "IV Tc-99m mebrofenin injection"
+          },
+          {
+            "id": "c",
+            "label": "Adequate hepatic uptake of radiotracer"
+          },
+          {
+            "id": "d",
+            "label": "Total absence of bowel activity at 24 hours"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Time is everything in biliary atresia. Performing the Kasai hepatoportoenterostomy before sixty days of life restores bile drainage in over seventy to eighty percent of infants. Waiting past ninety days drops drainage rates below twenty percent because irreversible cirrhosis has already set in.",
+      "tx": "Maximize the **Kasai portoenterostomy window**. Kasai hepatoportoenterostomy\u2014transecting the fibrous portal plate at the liver hilum and anastomosing a Roux-en-Y jejunal loop\u2014achieves excellent bile drainage (> 70-80%) when performed before 60 days of life. Clearance of jaundice drops steeply to < 20-25% when surgery is delayed beyond 90 days due to established microvascular sclerosis and irreversible cirrhosis. The procedure yields optimal bile drainage if done before 45-60 days.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Age at Kasai Surgery",
+          "Bile Drainage Restoration Rate",
+          "Long-Term Prognosis"
+        ],
+        "rows": [
+          [
+            "< 60 days of life",
+            "> 70-80% successful clearance",
+            "Best native liver survival"
+          ],
+          [
+            "60 to 90 days of life",
+            "40-50% successful clearance",
+            "Moderate native liver survival"
+          ],
+          [
+            "> 90 days of life",
+            "< 20-25% successful clearance",
+            "Rapid progression to liver transplant need"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Ascending bacterial cholangitis is the most frequent post operative complication after a Kasai procedure. Protect the baby by prescribing prophylactic antibiotics like cotrimoxazole alongside ursodeoxycholic acid to stimulate bile flow and keep the reconstructed conduits open.",
+      "tx": "Institute **post-Kasai cholangitis prophylaxis**. Bacterial ascending cholangitis develops in 40-60% of infants following portoenterostomy, presenting with recurrent fever, jaundice, and pale stools. Long-term oral prophylaxis with trimethoprim-sulfamethoxazole or neomycin, combined with ursodeoxycholic acid (15-20 mg/kg/day) to enhance choleresis and short courses of postoperative steroids, reduces cholangitis episodes and preserves native liver function.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Prophylactic Strategy",
+          "Medication Regimen",
+          "Clinical Objective"
+        ],
+        "rows": [
+          [
+            "Antimicrobial prophylaxis",
+            "Trimethoprim-sulfamethoxazole daily",
+            "Prevents enteric bacterial ascent up Roux limb"
+          ],
+          [
+            "Choleretic therapy",
+            "Ursodeoxycholic acid (15-20 mg/kg/day)",
+            "Stimulates hydrophilic bile secretion"
+          ],
+          [
+            "Anti-inflammatory therapy",
+            "Tapering oral corticosteroid course",
+            "Reduces fibrous scarring at hepatohilar plate"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Classify choledochal cysts using Todani's system. Type one cysts with fusiform dilation of the common bile duct are the most common, accounting for over eighty percent of cases. Type four presents with multiple intra and extrahepatic cysts, while type five represents Caroli disease.",
+      "tx": "Categorize via **choledochal cyst Todani classification**. The Todani system divides congenital bile duct dilatations into five categories: Type I (fusiform or saccular dilation of the extrahepatic common bile duct, comprising 80-85% of cases), Type II (isolated extrahepatic diverticulum), Type III (choledochocele inside the duodenal wall), Type IV (multiple cysts: IVa intra- and extrahepatic, IVb extrahepatic only), and Type V (intrahepatic cysts only, known as Caroli disease).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Todani Type",
+          "Anatomical Morphology",
+          "Relative Frequency"
+        ],
+        "rows": [
+          [
+            "Type I",
+            "Fusiform or cystic dilation of extrahepatic common bile duct",
+            "80-85% (most common)"
+          ],
+          [
+            "Type II",
+            "Diverticulum arising from extrahepatic duct",
+            "2-3%"
+          ],
+          [
+            "Type III",
+            "Choledochocele protruding into duodenal lumen",
+            "1-5%"
+          ],
+          [
+            "Type IV",
+            "Multiple cysts (IVa intra- and extrahepatic; IVb extrahepatic only)",
+            "15-20%"
+          ],
+          [
+            "Type V",
+            "Caroli disease: multiple dilatations confined to intrahepatic ducts",
+            "< 1%"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Anomalous pancreaticobiliary junction is the underlying cause for most choledochal cysts. The pancreatic and common bile ducts join outside the duodenal wall, creating a long common channel over five millimetres that lets pancreatic enzymes reflux into the bile duct and weaken its wall.",
+      "tx": "Understand the role of **anomalous pancreaticobiliary junction** (APBJ). APBJ features an abnormal junction of the pancreatic duct and common bile duct outside the duodenal wall, creating an abnormally long common channel (> 5-15 mm) beyond sphincter of Oddi influence. Because resting pancreatic intraductal pressure exceeds biliary pressure, continuous reflux of activated pancreatic juice into the biliary tree produces chronic inflammation, duct wall elastolysis, and cyst dilation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Long common channel (> 5 mm) outside duodenal wall"
+          },
+          {
+            "id": "b",
+            "label": "Higher pancreatic pressure drives enzyme reflux into bile duct"
+          },
+          {
+            "id": "c",
+            "label": "Chronic biliary mucosal inflammation and elastolysis"
+          },
+          {
+            "id": "d",
+            "label": "Cystic dilation and progressive malignant transformation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Never simply drain a choledochal cyst because retained cyst tissue carries a thirty percent lifetime risk of cholangiocarcinoma. The definitive cure is complete surgical excision of the entire cyst with a Roux en Y hepaticojejunostomy reconstruction.",
+      "tx": "Emphasize **malignancy risk and complete excision** for choledochal cysts. Long-standing chronic inflammation and mutagenic bile-pancreatic juice stasis confer a lifetime risk of biliary malignancy (cholangiocarcinoma) ranging from 10-30%. Consequently, internal drainage procedures (cystenterostomy) are obsolete; definitive treatment mandates complete extrahepatic cyst excision down to the pancreatic junction with Roux-en-Y hepaticojejunostomy reconstruction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complete Cyst Excision + Roux-en-Y",
+          "points": [
+            "Current standard of care surgical cure",
+            "Completely removes premalignant biliary epithelium",
+            "Eliminates stricture and cholangiocarcinoma risk"
+          ]
+        },
+        "right": {
+          "title": "Obsolete Internal Drainage (Cystenterostomy)",
+          "points": [
+            "Leaves premalignant duct tissue in situ",
+            "High rate of recurrent cholangitis and stones",
+            "Up to 30% lifetime risk of cholangiocarcinoma"
+          ]
+        }
+      }
+    }
+  ],
+  "subject": "ss-paediatric-gastroenterology",
+  "title": "Biliary Atresia and Choledochal Malformations",
+  "v": 1
+}

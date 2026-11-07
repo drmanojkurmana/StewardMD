@@ -1,0 +1,243 @@
+{
+  "gen": "AI",
+  "id": "pgt-caustic-ingestion-foreign-body",
+  "module": "Esophageal and Gastric Pathology",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "An esophageal button battery is one of the truest emergencies in pediatric practice. Within just two hours, the battery discharges an electrical current that hydrolyses tissue fluids, generates caustic hydroxide ions, and causes deep liquefactive necrosis that can erode into the aorta with fatal hemorrhage.",
+      "tx": "Recognise the **button battery emergency** in the esophagus. Impacted button batteries generate an electrical current that hydrolyzes tissue fluid, producing concentrated sodium hydroxide at the negative pole (anode). Liquefactive necrosis begins within 15 minutes, with full-thickness esophageal perforation and catastrophic aorto-esophageal fistula formation occurring within 2 hours. Grade 2b lesions carry a stricture risk of approximately 70%.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Battery lodges in esophageal lumen"
+          },
+          {
+            "id": "b",
+            "label": "Hydroxide generation at anode pole"
+          },
+          {
+            "id": "c",
+            "label": "Liquefactive necrosis within 2 hours"
+          },
+          {
+            "id": "d",
+            "label": "Aorto-esophageal fistula risk (fatal)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Give honey or sucralfate right away while rushing the child to the hospital. Ten millilitres of honey every ten minutes coats the mucosa and buffers the alkaline battery discharge, significantly reducing burn depth. Never give honey to infants under twelve months due to infant botulism risk.",
+      "tx": "Provide **honey administration mitigation** as immediate pre-hospital first aid for battery ingestion in children older than 1 year. Administering 10 mL of commercial honey (or sucralfate suspension) every 10 minutes for up to 6 doses buffers the local alkaline environment and coats mucosal tissue, dramatically limiting deep mural necrosis before urgent endoscopic retrieval.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Intervention",
+          "Dosing Protocol",
+          "Mechanism and Caveat"
+        ],
+        "rows": [
+          [
+            "Honey (age > 1 yr)",
+            "10 mL every 10 minutes (up to 6 doses)",
+            "Buffers alkali discharge; avoid in < 12 months"
+          ],
+          [
+            "Sucralfate suspension",
+            "10 mL every 10 minutes",
+            "Protective mucosal coating if honey unavailable"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "You should arrange diagnostic endoscopy between twelve and twenty four hours after caustic ingestion. Scoping too early before twelve hours misses the full extent of tissue injury, while waiting beyond forty eight hours risks perforating the necrotic, weakened esophageal wall.",
+      "tx": "Adhere to the **timing of endoscopy in caustic injury**. Diagnostic upper endoscopy should be performed between 12 to 24 hours post-ingestion. Scoping within the first 12 hours underestimates injury depth as tissue demarcation is incomplete, whereas endoscopy beyond 48 hours is hazardous because mucosal sloughing leaves a thin, friable esophageal wall vulnerable to iatrogenic perforation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Endoscopy Window",
+          "Clinical Rationale"
+        ],
+        "rows": [
+          [
+            "< 12 hours",
+            "Too early; tissue necrosis and demarcation not yet mature"
+          ],
+          [
+            "12 to 24 hours",
+            "Optimal diagnostic window to assess and grade mucosal injury"
+          ],
+          [
+            "> 48 hours",
+            "High perforation risk due to friable, sloughing wall"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Grade the mucosal damage on endoscopy using the Zargar classification. Grade one shows simple redness, and grade two a shows superficial ulcers without stricture risk. But deep circumferential ulcers in grade two b and black necrotic mucosa in grade three lead to strictures in up to one hundred percent of survivors.",
+      "tx": "Apply the **Zargar endoscopic grading** system to forecast esophageal stricture development. Grade 1 features edema and erythema, while Grade 2a displays superficial non-circumferential ulcerations, both healing without strictures. In contrast, Grade 2b (deep or circumferential ulcers) carries a 70-100% stricture risk, and Grade 3 (transmural necrosis with black or grey-brown slough) carries near 100% stricture rates and high perforation risk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Zargar Grade",
+          "Endoscopic Appearance",
+          "Stricture Sequelae Risk"
+        ],
+        "rows": [
+          [
+            "Grade 1",
+            "Edema and mucosal erythema",
+            "0% stricture risk"
+          ],
+          [
+            "Grade 2a",
+            "Superficial non-circumferential ulcers",
+            "< 5% stricture risk"
+          ],
+          [
+            "Grade 2b",
+            "Deep, discrete or circumferential ulcers",
+            "70-100% stricture formation"
+          ],
+          [
+            "Grade 3",
+            "Extensive transmural necrosis and black slough",
+            "Approaching 100% stricture risk"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Do not give systemic steroids to prevent esophageal strictures after caustic ingestion. High quality randomized trials prove that steroids fail to prevent cicatricial stricture formation and only increase infectious complications. Reserve steroids solely for relieving acute upper airway edema.",
+      "tx": "Recognise the **steroid contraindication in caustic burns**. Systemic corticosteroids do not prevent esophageal stricture formation following accidental caustic ingestion. Multiple clinical trials confirm that steroid administration offers no cicatricial benefit while significantly increasing the danger of bacterial mediastinitis, sepsis, and occult perforation. Steroids are indicated strictly for accompanying laryngeal or airway compromise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Evidence-Based Management",
+          "points": [
+            "Supportive IV hydration and analgesia",
+            "Acid suppression with PPI",
+            "Endoscopic dilation of mature strictures"
+          ]
+        },
+        "right": {
+          "title": "Ineffective or Harmful Practices",
+          "points": [
+            "Routine systemic steroids (no stricture prevention)",
+            "Gastric lavage or induced emesis (re-exposure burn)",
+            "Blind chemical neutralization (thermal injury)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Swallowing more than one magnet requires immediate surgical or endoscopic intervention. When two magnets or a magnet and metal attract across different bowel loops, the trapped intestinal wall suffers pressure necrosis, leading to internal fistulas, perforation, and acute peritonitis.",
+      "tx": "Treat **multiple magnet ingestion** as an acute abdominal emergency. When multiple magnets, or a single magnet ingested alongside a ferromagnetic metal object, pass beyond the stomach, magnetic attraction across adjacent intestinal loops compresses the intervening bowel wall. This produces ischemic necrosis, intestinal perforation, enterocutaneous or enteroenteric fistulae, and acute peritonitis requiring urgent retrieval.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Ingestion of multiple high-powered magnets"
+          },
+          {
+            "id": "b",
+            "label": "Magnets attract across adjacent bowel loops"
+          },
+          {
+            "id": "c",
+            "label": "Ischemic pressure necrosis of trapped wall"
+          },
+          {
+            "id": "d",
+            "label": "Transmural perforation and fistula formation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "If a healthy child swallows a smooth coin that gets stuck in the upper oesophagus, you can observe for twelve to twenty four hours if there are no symptoms. Many coins pass spontaneously into the stomach, avoiding an invasive endoscopic extraction under general anesthesia.",
+      "tx": "Execute prudent **coin management in esophagus**. In an asymptomatic child with an unwitnessed or recent coin ingestion located in the upper or mid-esophagus, watchful waiting for 12-24 hours is safe and appropriate. Up to 30% of such coins traverse the lower esophageal sphincter spontaneously into the stomach, sparing the patient invasive endoscopic or Foley catheter extraction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Presentation",
+          "Management Strategy"
+        ],
+        "rows": [
+          [
+            "Asymptomatic child, smooth coin",
+            "Observe for 12-24 hours; repeat radiograph prior to any intervention"
+          ],
+          [
+            "Symptomatic child (stridor, drooling)",
+            "Immediate urgent endoscopic extraction"
+          ],
+          [
+            "Button battery on radiograph (halo sign)",
+            "Immediate emergent endoscopy without observation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When an older child presents with progressive difficulty swallowing solids and liquids, think of achalasia. High resolution manometry confirms the diagnosis by showing absent peristalsis in the body and failed relaxation of the lower sphincter, with barium swallow revealing the classic birds beak sign.",
+      "tx": "Identify the **pediatric achalasia hallmark** through motor testing. Achalasia is a neurodegenerative disorder of the myenteric plexus resulting in impaired lower esophageal sphincter (LES) relaxation and aperistalsis of the esophageal body. High-resolution manometry is the gold standard showing integrated relaxation pressure (IRP) elevation, while barium esophagogram demonstrates distal tapering known as the bird's beak sign.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High-Resolution Manometry",
+          "points": [
+            "Incomplete LES relaxation (elevated IRP)",
+            "Complete aperistalsis across esophageal body",
+            "Classification into Chicago Types I, II, or III"
+          ]
+        },
+        "right": {
+          "title": "Barium Esophagogram",
+          "points": [
+            "Dilated, tortuous proximal esophageal body",
+            "Smooth symmetric distal tapering",
+            "Classic bird's beak narrowing at GE junction"
+          ]
+        }
+      }
+    }
+  ],
+  "subject": "ss-paediatric-gastroenterology",
+  "title": "Caustic Ingestion and Esophageal Foreign Bodies",
+  "v": 1
+}

@@ -1,0 +1,272 @@
+{
+  "gen": "AI",
+  "id": "pgt-hirschsprung-disease",
+  "module": "Colonic, Motility and Functional Gastrointestinal Disorders",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Healthy full term newborns pass meconium promptly. In Hirschsprung disease, over ninety percent fail to pass meconium in the first twenty four hours of life. Any term baby who fails to stool within forty eight hours must be evaluated for an aganglionic bowel segment.",
+      "tx": "Recognise **Delayed meconium passage** as the cardinal neonate presentation. Over 90% of full-term neonates with Hirschsprung disease fail to pass meconium within the first 24 hours of life (and virtually all fail by 48 hours), contrasting sharply with healthy neonates of whom 98% pass stool within 24 hours. Abdominal distension and bilious vomiting follow rapidly.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Parameter",
+          "Healthy Full-Term Neonates",
+          "Hirschsprung Disease"
+        ],
+        "rows": [
+          [
+            "Meconium within 24 hours",
+            "> 98% pass spontaneously",
+            "Fewer than 10% pass"
+          ],
+          [
+            "Meconium delayed > 48 hours",
+            "Extremely rare (< 1%)",
+            "Cardinal presenting hallmark in over 90%"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Hirschsprung disease results from an embryological arrest where neural crest cells fail to migrate all the way down the gastrointestinal tract. This leaves both the submucosal Meissner and myenteric Auerbach plexuses empty of ganglion cells in the affected distal bowel.",
+      "tx": "Understand the **Pathology of aganglionosis** underlying Hirschsprung disease. The condition arises from failure of craniocaudal neural crest cell migration along the bowel between the 5th and 12th weeks of gestation. This failure of enteric nervous system development leaves both the submucosal (Meissner) and myenteric (Auerbach) nerve plexuses completely devoid of ganglion cells from the internal anal sphincter extending proximally for a variable distance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Vagal neural crest cells migrate craniocaudally (wk 5-12)"
+          },
+          {
+            "id": "b",
+            "label": "Premature arrest of neural crest migration"
+          },
+          {
+            "id": "c",
+            "label": "Distal bowel lacks Meissner and Auerbach plexuses"
+          },
+          {
+            "id": "d",
+            "label": "Tonic contraction and functional distal bowel obstruction"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Short segment disease is the most common variety, accounting for eighty percent of cases. Aganglionosis is confined to the rectum and rectosigmoid colon, with a strong male preponderance of four boys to every girl.",
+      "tx": "Delineate **Anatomical distribution**. Short-segment disease accounts for approximately 80% of all Hirschsprung cases, where aganglionosis is restricted to the rectum and distal sigmoid colon, demonstrating a marked male predilection (male to female ratio 4:1). Long-segment disease involves aganglionosis extending proximal to the sigmoid, while total colonic aganglionosis (Zuelzer syndrome) occurs in 5-10% with equal gender distribution. Short-segment disease accounts for 75-80%, while long-segment accounts for 15-20%.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomic Variety",
+          "Bowel Extent Involved",
+          "Proportion of Cases",
+          "Sex Ratio"
+        ],
+        "rows": [
+          [
+            "Short-segment",
+            "Rectum and rectosigmoid colon",
+            "75-80%",
+            "4:1 (M:F)"
+          ],
+          [
+            "Long-segment",
+            "Extends proximal to sigmoid colon",
+            "15-20%",
+            "2:1 (M:F)"
+          ],
+          [
+            "Total colonic (Zuelzer)",
+            "Entire colon and variable terminal ileum",
+            "5-10%",
+            "1:1 (M:F)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Look for the RET proto-oncogene, which is the major predisposing gene in Hirschsprung disease. Down syndrome is the most common associated chromosomal abnormality, occurring in up to ten percent of children with aganglionosis.",
+      "tx": "Identify **RET proto-oncogene and Down syndrome association**. Inactivating mutations in the RET receptor tyrosine kinase proto-oncogene (chromosome 10q11.2) account for 50% of familial and 15-35% of sporadic cases. Trisomy 21 (Down syndrome) is the single most common chromosomal disorder linked with Hirschsprung disease, present in up to 10% of affected patients. Calretinin immunohistochemistry demonstrates sensitivity and specificity exceeding 99%. **Calretinin immunohistochemistry** demonstrates sensitivity and specificity exceeding 99%.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genetic Element",
+          "Biological Role",
+          "Prevalence in Hirschsprung"
+        ],
+        "rows": [
+          [
+            "RET proto-oncogene",
+            "Receptor tyrosine kinase for neural crest migration",
+            "50% familial, up to 35% sporadic"
+          ],
+          [
+            "Trisomy 21 (Down syndrome)",
+            "Complex gene-dosage modulation",
+            "Found in 2-10% of Hirschsprung patients"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Rectal suction biopsy is the definitive gold standard test to confirm Hirschsprung disease. You must take the tissue from the posterior rectal wall at least two centimetres above the dentate line. The pathologist looks for absent ganglion cells, hypertrophied nerve trunks, and dark positive staining with acetylcholinesterase.",
+      "tx": "Perform **Rectal suction biopsy gold standard** to establish the diagnosis. Mucosal-submucosal biopsies must be obtained from the posterior rectal wall at least 2 cm above the pectinate (dentate) line to avoid the physiological hypoganglionic transition zone. Histopathologic hallmarks are the total absence of ganglion cells, hypertrophic nerve bundles (> 40 mcm diameter), and intense acetylcholinesterase (AChE) staining or absent calretinin immunohistochemistry.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histopathologic Marker",
+          "Normal Rectal Biopsy",
+          "Hirschsprung Biopsy"
+        ],
+        "rows": [
+          [
+            "Ganglion cells",
+            "Present in submucosal plexus",
+            "Completely absent"
+          ],
+          [
+            "Nerve bundle diameter",
+            "Fine, delicate fibers (< 40 mcm)",
+            "Hypertrophied, thick trunks (> 40 mcm)"
+          ],
+          [
+            "Calretinin staining",
+            "Positive granular enterocyte staining",
+            "Completely absent / negative"
+          ],
+          [
+            "Acetylcholinesterase (AChE)",
+            "Low baseline activity",
+            "Intense dark brown fibrillar staining"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "On an unprepared contrast enema, look for the transitional zone where the narrow aganglionic rectum suddenly flares into dilated normal colon. When the rectum is narrower than the sigmoid, creating a rectosigmoid index under one, suspect Hirschsprung disease.",
+      "tx": "Evaluate the **Barium enema transition zone**. An unprepared barium enema demonstrates the transition zone where the narrowed, spastic aganglionic segment joins the funnel-shaped dilated, normal ganglionic bowel. A rectosigmoid ratio < 1 (normal rectum being wider than the sigmoid) on lateral pelvic views is strongly diagnostic of Hirschsprung disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Narrowed distal aganglionic segment in tonic spasm"
+          },
+          {
+            "id": "b",
+            "label": "Cone-shaped transitional zone"
+          },
+          {
+            "id": "c",
+            "label": "Proximal hypertrophied, dilated ganglionic colon"
+          },
+          {
+            "id": "d",
+            "label": "Rectosigmoid ratio inverted (< 1)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Hirschsprung associated enterocolitis is a life threatening complication that can strike before or after surgery. Stasis triggers massive bacterial proliferation, causing foul explosive diarrhea, fever, and shock. You must manage this condition immediately with rectal washouts and intravenous broad spectrum antibiotics.",
+      "tx": "Manage **Hirschsprung-associated enterocolitis**. Hirschsprung-associated enterocolitis (HAEC) is the major cause of mortality, presenting with explosive fetid diarrhea, high fever, abdominal distension, and rapid progression to toxic megacolon, sepsis, and perforation. Emergency management requires aggressive fluid resuscitation, immediate decompressive rectal washouts (irrigation with warm saline via wide-bore catheter), and broad-spectrum IV antibiotics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Distal functional obstruction and mucosal stasis"
+          },
+          {
+            "id": "b",
+            "label": "Bacterial overgrowth and mucosal barrier breakdown"
+          },
+          {
+            "id": "c",
+            "label": "Explosive foul diarrhea, fever, and leukocytosis"
+          },
+          {
+            "id": "d",
+            "label": "Emergency warm saline rectal washouts and IV antibiotics"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgical treatment aims to resect the aganglionic segment and pull healthy innervated colon down to the anus. Surgeons perform modern single stage transanal pull through techniques like the de la Torre procedure, or classic operations like the Soave endorectal and Duhamel retrorectal pull through.",
+      "tx": "Execute **Surgical pull-through techniques**. Curative surgery resects the aganglionic segment and anastomoses normally innervated bowel to the distal anus just above the dentate line. Common techniques include the transanal endorectal pull-through (TERPT / de la Torre procedure), laparoscopic-assisted pull-through, Soave endorectal pull-through, and Duhamel retrorectal transanal pull-through.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Procedure Name",
+          "Surgical Technique",
+          "Key Advantage"
+        ],
+        "rows": [
+          [
+            "TERPT (de la Torre)",
+            "Entirely transanal submucosal dissection and pull-through",
+            "Avoids laparotomy scars; minimal pain"
+          ],
+          [
+            "Soave procedure",
+            "Endorectal mucosal mucosectomy leaving muscular cuff",
+            "Protects pelvic autonomic nerves"
+          ],
+          [
+            "Duhamel procedure",
+            "Retrorectal pull-through creating side-to-side pouch",
+            "Safe in difficult or re-do anatomy"
+          ]
+        ]
+      }
+    }
+  ],
+  "subject": "ss-paediatric-gastroenterology",
+  "title": "Hirschsprung Disease: Diagnosis and Management",
+  "v": 1
+}

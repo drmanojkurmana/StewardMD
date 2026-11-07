@@ -1,0 +1,258 @@
+{
+  "gen": "AI",
+  "id": "pgt-clostridioides-chronic-diarrhea",
+  "module": "Colonic, Motility and Functional Gastrointestinal Disorders",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Never test healthy babies under one year for Clostridioides difficile toxins. Up to seventy percent of normal infants harbor the organism and its toxins harmlessly in their intestines because their gut lack the mature toxin receptors needed to trigger disease.",
+      "tx": "Recognise **asymptomatic colonization under 1 year** in healthy infants. Clostridioides difficile colonization rates reach 30-70% in neonates and infants under 12 months without producing clinical disease, attributed to an absence of mature mucosal toxin A/B enterocyte receptors. Consequently, routine C. difficile testing is strictly discouraged under 1 year, and positive tests in this age cohort represent benign colonization.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Age Group",
+          "C. difficile Colonization Rate",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "< 12 months of age",
+            "30-70% asymptomatic carriage",
+            "Incidental colonization; do not test or treat"
+          ],
+          [
+            "> 2 years of age",
+            "Low (~1-5%, similar to adults)",
+            "True pathogenic infection if symptomatic"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Broad spectrum antibiotics that disrupt the protective intestinal flora are the primary trigger for C difficile infection. High risk offenders include clindamycin, third generation cephalosporins, and fluoroquinolones, with proton pump inhibitors further increasing susceptibility.",
+      "tx": "Identify **antibiotic risk factors** triggering Clostridioides difficile infection (CDI) in pediatric practice. Exposure to broad-spectrum antimicrobial agents, notably clindamycin, third-generation cephalosporins, fluoroquinolones, and amoxicillin-clavulanate, decimates the commensal gut microbiota and eliminates natural colonization resistance. Furthermore, concomitant gastric acid suppression with proton pump inhibitors elevates CDI susceptibility by reducing protective gastric acidity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk Factor Category",
+          "Specific High-Risk Agents"
+        ],
+        "rows": [
+          [
+            "High-risk antimicrobials",
+            "Clindamycin, 3rd generation cephalosporins, fluoroquinolones"
+          ],
+          [
+            "Moderate-risk antimicrobials",
+            "Amoxicillin-clavulanate, macrolides, piperacillin-tazobactam"
+          ],
+          [
+            "Host / Drug co-factors",
+            "Gastric acid suppression (PPI), immunosuppression, underlying IBD"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Use a two step algorithm to test unformed stool accurately. First screen with the rapid glutamate dehydrogenase antigen test. If positive, confirm with a sensitive nucleic acid amplification test or a specific toxin A and B enzyme immunoassay.",
+      "tx": "Execute the **two-step laboratory testing** algorithm for diagnostic precision. Guidelines mandate stool testing only on unformed (liquid or mushy) stools from symptomatic children older than 1 year. The recommended algorithm pairs a highly sensitive initial screen using glutamate dehydrogenase (GDH) antigen with a highly specific confirmatory toxin A/B enzyme immunoassay (EIA) or nucleic acid amplification test (NAAT / PCR).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Symptomatic child > 1 yr with unformed stool"
+          },
+          {
+            "id": "b",
+            "label": "Screen with Glutamate Dehydrogenase (GDH)"
+          },
+          {
+            "id": "c",
+            "label": "GDH positive: Confirm with Toxin A/B EIA or PCR"
+          },
+          {
+            "id": "d",
+            "label": "Positive toxin confirms active CDI; initiate therapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Treat active pediatric C difficile infection with oral vancomycin at forty milligrams per kilogram daily divided into four doses. Oral fidaxomicin is an excellent alternative for children aged six months and older, achieving high cure rates with fewer recurrences.",
+      "tx": "Prescribe **first-line oral therapy** with oral vancomycin or fidaxomicin. The recommended regimen is oral vancomycin at 40 mg/kg/day divided into 4 doses (maximum 500 mg/day) for 10 days, or oral fidaxomicin suspension (for children aged >= 6 months) dosed by weight BID for 10 days. Metronidazole is relegated to mild disease when vancomycin is unavailable due to inferior clinical cure rates.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Agent",
+          "Pediatric Dosage Regimen",
+          "Clinical Status"
+        ],
+        "rows": [
+          [
+            "Oral vancomycin",
+            "40 mg/kg/day divided QID (max 500 mg/day) x 10 days",
+            "First-line primary therapy"
+          ],
+          [
+            "Oral fidaxomicin",
+            "Weight-tiered dosing BID x 10 days (>= 6 months)",
+            "First-line primary therapy with lower recurrence"
+          ],
+          [
+            "Oral metronidazole",
+            "30 mg/kg/day divided TID x 10 days",
+            "Alternative only if first-line agents unavailable"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In severe colitis, lower endoscopy demonstrates classic pseudomembranes on inspection. You will see raised, discrete, yellowish white mucosal plaques made of fibrin, dead epithelial cells, and inflammatory neutrophils scattered across intensely inflamed colonic mucosa.",
+      "tx": "Recognise **pseudomembranous colitis endoscopy** findings during sigmoidoscopy or colonoscopy. Severe CDI produces pathognomonic raised, discrete, yellowish-white mucosal plaques (pseudomembranes) ranging from 2 to 10 mm in diameter, adherent to an intensely erythematous, edematous colonic mucosal backdrop. Biopsy reveals mucosal necrosis with exploding 'volcano' lesions erupting fibrin and neutrophils.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Toxin A and B disrupt enterocyte actin cytoskeleton"
+          },
+          {
+            "id": "b",
+            "label": "Mucosal epithelial apoptosis and microvascular thrombosis"
+          },
+          {
+            "id": "c",
+            "label": "Eruption of fibrin, mucus, and neutrophils ('volcano' lesions)"
+          },
+          {
+            "id": "d",
+            "label": "Confluent yellowish-white pseudomembranous plaques"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When C difficile infections keep returning despite optimal antibiotics, fecal microbiota transplantation is the treatment of choice. Infusing screened donor stool restores a healthy diverse microbiome, eliminating recurrences in over ninety percent of affected children.",
+      "tx": "Recommend **fecal microbiota transplantation** (FMT) for recurrent or refractory CDI. In pediatric patients experiencing multiple recurrent CDI episodes (>= 2 recurrences following vancomycin tapers) or refractory severe colitis, FMT delivered via colonoscopy, nasogastric tube, or oral lyophilized capsules restores microbial phyla diversity, achieving cure rates exceeding 90%. FMT achieves cure rates of 85-90% for recurrent infection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Recurrent Antibiotic Cycles",
+          "points": [
+            "Continues disruption of commensal bacteroidetes",
+            "High recurrence rates (30-50% after second episode)",
+            "Promotes antimicrobial resistance over time"
+          ]
+        },
+        "right": {
+          "title": "Fecal Microbiota Transplantation",
+          "points": [
+            "Re-establishes normal gut microbial ecosystem",
+            "Restores bile acid 7-alpha-dehydroxylation",
+            "Achieves > 90% permanent clinical cure"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Giardiasis is a classic non viral cause of chronic greasy diarrhea in toddlers. Flagellated Giardia trophozoites attach to the duodenal brush border with their suction discs, causing blunting, gas, and secondary lactase deficiency that causes lactose intolerance.",
+      "tx": "Evaluate **Giardia lamblia chronic enteritis** in toddlers presenting with persistent foul, pale, floating diarrhea, abdominal distension, and weight loss. Giardia duodenalis trophozoites adhere to duodenal and jejunal enterocytes via ventral sucking discs, damaging microvilli and causing brush-border enzyme loss. This induces secondary lactose intolerance and fat malabsorption without mucosal invasion. Treatment is oral metronidazole at 15-30 mg/kg/day for 5-7 days, or single-dose **tinidazole**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Clinical Detail"
+        ],
+        "rows": [
+          [
+            "Mechanism of injury",
+            "Ventral suction disc attachment causing microvillous blunting"
+          ],
+          [
+            "Stool characteristics",
+            "Pale, foul-smelling, fatty floating stools without blood or pus"
+          ],
+          [
+            "Secondary complication",
+            "Transient disaccharidase deficiency (lactose intolerance)"
+          ],
+          [
+            "Preferred treatment",
+            "Metronidazole (15-30 mg/kg/day x 5-7 days) or single-dose tinidazole (50 mg/kg)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In children with compromised immune systems, Cryptosporidium causes devastating watery diarrhea that can last for months. Diagnose it by finding acid fast oocysts on modified Kinyoun staining of the stool, and treat with nitazoxanide alongside restoring immune function.",
+      "tx": "Identify **cryptosporidiosis in immunocompromise** as a dangerous opportunistic protozoal enteritis. Cryptosporidium parvum and hominis trigger severe, voluminous watery diarrhea and dehydration in children with severe combined immunodeficiency, HIV, or solid organ transplants. Diagnosis is established by identifying 4-6 mcm round oocysts on modified acid-fast (Kinyoun) stool staining or stool antigen testing; treatment combines nitazoxanide with immune restoration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Ingestion of chlorine-resistant Cryptosporidium oocysts"
+          },
+          {
+            "id": "b",
+            "label": "Sporozoites invade apical intracellular, extracytoplasmic niche"
+          },
+          {
+            "id": "c",
+            "label": "Villous blunting and severe secretory watery diarrhea"
+          },
+          {
+            "id": "d",
+            "label": "Diagnosis via modified acid-fast stain (bright red round oocysts)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "subject": "ss-paediatric-gastroenterology",
+  "title": "Clostridioides difficile, Pseudomembranous Colitis and Chronic Infectious Diarrhea",
+  "v": 1
+}

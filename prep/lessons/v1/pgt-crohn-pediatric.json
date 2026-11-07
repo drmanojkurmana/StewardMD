@@ -1,0 +1,258 @@
+{
+  "gen": "AI",
+  "id": "pgt-crohn-pediatric",
+  "module": "Pediatric Inflammatory Bowel Disease and VEO-IBD",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Classify pediatric Crohn disease using the Paris classification age cutoffs. We classify onset as A1a for children diagnosed before age ten, and A1b for adolescents between ten and seventeen years. This age of onset will affect disease biology, genetics, and clinical course.",
+      "tx": "Apply the **Paris classification age groups** for pediatric Crohn disease staging. The Paris consensus divides pediatric onset into A1a (diagnosed under 10 years of age) and A1b (diagnosed between 10 and 17 years), refining the adult Montreal system to account for distinct genetic susceptibilities, greater ileocolonic and upper gastrointestinal involvement, and growth impairment. The Paris classification defines age of onset as A1a (< 10 yr), A1b (10-17 years), and A2 (17-40 yr).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Paris Age Class",
+          "Age Range",
+          "Clinical Features"
+        ],
+        "rows": [
+          [
+            "A1a",
+            "< 10 years",
+            "Higher monogenic/VEO overlap, colonic predominance, severe phenotype"
+          ],
+          [
+            "A1b",
+            "10 to 17 years",
+            "Classic adolescent Crohn presentation, ileocolonic involvement, growth failure"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Growth failure is a signature hallmark of pediatric Crohn disease that often shows up months or years before any abdominal pain or diarrhea. Cytokines like interleukin six and tumor necrosis factor suppress bone growth plates while anorexia and gut loss cause chronic malnutrition.",
+      "tx": "Recognise **growth failure as hallmark** in pediatric Crohn disease. A deceleration in linear height velocity and delayed puberty often precede classic gastrointestinal symptoms by 6 to 24 months in up to 40% of children. Elevated circulating pro-inflammatory cytokines (IL-6, TNF-alpha) blunt hepatic IGF-1 synthesis and induce peripheral growth hormone resistance alongside nutritional deficits. Growth failure precedes GI symptoms in 25-30% of pediatric patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Active mucosal inflammation and cytokine release (TNF, IL-6)"
+          },
+          {
+            "id": "b",
+            "label": "Anorexia and enteric protein-calorie malabsorption"
+          },
+          {
+            "id": "c",
+            "label": "Hepatic IGF-1 suppression and GH receptor resistance"
+          },
+          {
+            "id": "d",
+            "label": "Linear growth arrest preceding GI symptoms by up to 2 years"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Track gut inflammation non invasively using fecal calprotectin. A concentration over two hundred and fifty micrograms per gram indicates active mucosal ulceration, while dropping below one hundred micrograms confirms true mucosal healing and successful disease control.",
+      "tx": "Utilize **fecal calprotectin monitoring** as the premier non-invasive surrogate biomarker of mucosal inflammation. Levels exceeding 250 mcg/g strongly correlate with active endoscopic ulceration and disease flare, whereas values declining below 100-250 mcg/g signal deep endoscopic mucosal healing, allowing therapy escalation or de-escalation without mandatory colonoscopy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fecal Calprotectin Level",
+          "Clinical Interpretation",
+          "Therapeutic Action"
+        ],
+        "rows": [
+          [
+            "> 250 mcg/g",
+            "Active mucosal ulceration and active inflammation",
+            "Escalate medical therapy or reassess drug troughs"
+          ],
+          [
+            "100 - 250 mcg/g",
+            "Borderline / mild subclinical inflammation",
+            "Close serial monitoring of inflammatory trend"
+          ],
+          [
+            "< 100 mcg/g",
+            "Complete mucosal healing and endoscopic remission",
+            "Maintain successful maintenance regimen"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Exclusive enteral nutrition is the preferred first line therapy to induce remission in pediatric Crohn disease. Drinking only specialized polymeric formula for six to eight weeks matches systemic steroids in healing symptoms, while providing superior mucosal healing and promoting catch up growth without steroid side effects.",
+      "tx": "Prescribe **exclusive enteral nutrition induction** (EEN) as the first-line therapy of choice to induce remission in pediatric luminal Crohn disease. Administering an exclusive liquid diet (100% of caloric needs via polymeric or elemental oral formula) for 6 to 8 weeks achieves clinical remission rates of 80-85%, matching corticosteroids while uniquely restoring linear growth and inducing superior endoscopic mucosal healing. EEN induces mucosal healing in up to 80% of children.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exclusive Enteral Nutrition (EEN)",
+          "points": [
+            "First-line recommendation under ECCO/ESPGHAN",
+            "Superior endoscopic mucosal healing (up to 75%)",
+            "Promotes positive nitrogen balance and catch-up growth",
+            "Zero steroid side effects or growth suppression"
+          ]
+        },
+        "right": {
+          "title": "Systemic Corticosteroids",
+          "points": [
+            "Similar clinical remission rate (~80%)",
+            "Inferior mucosal healing rates (around 30%)",
+            "Inhibits linear growth and bone mineral density",
+            "Risk of cushingoid features, acne, and mood changes"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Start infliximab early for children with aggressive disease, deep ulcers, or perianal fistulas. We give infliximab at five milligrams per kilogram at weeks zero, two, and six, followed by regular infusions every eight weeks to maintain lasting remission.",
+      "tx": "Initiate **infliximab biologic therapy** early for moderate-to-severe, fistulizing, or growth-impaired pediatric Crohn disease. Infliximab (chimeric anti-TNF-alpha monoclonal antibody) is dosed at 5 mg/kg IV at weeks 0, 2, and 6 for induction, followed by 5 mg/kg every 8 weeks for maintenance. Pediatric patients frequently require dose escalation to 10 mg/kg or interval shortening to every 4-6 weeks. Infliximab induction dosing is administered at 0, 2, and 6 weeks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Moderate-to-severe or fistulizing Crohn disease"
+          },
+          {
+            "id": "b",
+            "label": "Induction: Infliximab 5 mg/kg at 0, 2, and 6 weeks"
+          },
+          {
+            "id": "c",
+            "label": "Assess clinical and biochemical response at week 10-14"
+          },
+          {
+            "id": "d",
+            "label": "Maintenance: 5-10 mg/kg every 6 to 8 weeks"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Measure blood trough concentrations of infliximab to make sure the child is getting enough drug. Keep maintenance trough levels between five and ten micrograms per millilitre. If antibodies against infliximab appear, they accelerate drug clearance and cause treatment failure.",
+      "tx": "Execute **therapeutic drug monitoring** (TDM) during anti-TNF maintenance. Infliximab trough levels should be maintained between 5 and 10 mcg/mL during maintenance (and > 10 mcg/mL for fistulizing perianal disease) to secure endoscopic mucosal healing. Measuring trough concentrations alongside anti-drug antibodies guides proactive dose optimization before clinical flare occurs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Infliximab Trough Level",
+          "Anti-Drug Antibodies",
+          "Recommended Action"
+        ],
+        "rows": [
+          [
+            "Trough < 5 mcg/mL",
+            "Negative or low titer",
+            "Escalate dose (up to 10 mg/kg) or shorten interval"
+          ],
+          [
+            "Trough < 5 mcg/mL",
+            "High titer anti-infliximab antibodies",
+            "Switch to second biologic (e.g. adalimumab or ustekinumab)"
+          ],
+          [
+            "Trough 5-10 mcg/mL",
+            "Negative",
+            "Therapeutic target achieved; maintain current dosing"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Always check TPMT and NUDT fifteen genetics before starting azathioprine. Children with enzyme deficiencies accumulate toxic thioguanine nucleotides and develop life threatening bone marrow failure. Test genetics or enzyme activity first to keep the child safe.",
+      "tx": "Mandate **azathioprine maintenance and TPMT** / NUDT15 testing prior to thiopurine administration. Genetic polymorphisms or enzyme deficiency in thiopurine S-methyltransferase (TPMT) or NUDT15 lead to toxic accumulation of 6-thioguanine nucleotides (6-TGN), triggering lethal myelosuppression. Testing identifies intermediate or poor metabolizers, allowing safe dose reduction or drug avoidance. Target maintenance azathioprine dose is 2-2.5 mg/kg/day.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Candidate for azathioprine maintenance"
+          },
+          {
+            "id": "b",
+            "label": "Test TPMT and NUDT15 genotype/phenotype"
+          },
+          {
+            "id": "c",
+            "label": "Normal activity: Standard dose (2-2.5 mg/kg/day)"
+          },
+          {
+            "id": "d",
+            "label": "Deficient: Avoid drug or reduce dose by 80-90%"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Finding non caseating granulomas on mucosal biopsy clinches the diagnosis of Crohn disease. They appear in up to sixty percent of pediatric biopsies and must be differentiated from tuberculosis, which produces necrotic caseating granulomas.",
+      "tx": "Identify **non-caseating granulomas** on endoscopic biopsy. Epithelioid non-caseating granulomas remote from ruptured crypts are the definitive histopathologic hallmark of Crohn disease, detected in 40-60% of pediatric patients. They must be rigorously distinguished from caseating necrotic granulomas with acid-fast bacilli that define intestinal tuberculosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Crohn Disease Granuloma",
+          "points": [
+            "Non-caseating, loose epithelioid granuloma",
+            "Located in lamina propria or submucosa",
+            "Negative Ziehl-Neelsen stain for mycobacteria"
+          ]
+        },
+        "right": {
+          "title": "Intestinal Tuberculosis Granuloma",
+          "points": [
+            "Confluent caseating necrosis with central breakdown",
+            "Langhans multinucleated giant cells prominent",
+            "Positive AFB stain or positive TB-PCR"
+          ]
+        }
+      }
+    }
+  ],
+  "subject": "ss-paediatric-gastroenterology",
+  "title": "Pediatric Crohn Disease: Paris Classification and Mucosal Healing",
+  "v": 1
+}

@@ -1,0 +1,252 @@
+{
+  "gen": "AI",
+  "id": "pgt-protein-losing-enteropathy",
+  "module": "Celiac Disease and Small Bowel Enteropathies",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "When a child develops unexplained generalized swelling with low serum albumin, measure twenty four hour fecal alpha one antitrypsin clearance. Alpha one antitrypsin resists breakdown by digestive proteases, so a clearance over twenty seven millilitres a day proves direct intestinal protein leakage.",
+      "tx": "Use the **diagnostic biomarker** fecal alpha-1-antitrypsin clearance to establish protein-losing enteropathy (PLE). Because alpha-1-antitrypsin is an endogenous serum glycoprotein that resists degradation by intestinal proteases, an elevated 24-hour clearance exceeding 27 mL/24 hr (or spot stool concentration > 54 mg/dL) definitively confirms enteric protein loss in the presence of hypoproteinemia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Laboratory Marker",
+          "Diagnostic Cutoff",
+          "Pathophysiological Principle"
+        ],
+        "rows": [
+          [
+            "24-hr fecal alpha-1-antitrypsin",
+            "> 27 mL/24 hr clearance",
+            "Resists luminal proteolysis; quantifies enteric leak"
+          ],
+          [
+            "Spot fecal alpha-1-antitrypsin",
+            "> 54 mg/dL",
+            "Convenient spot screening cutoff for intestinal protein loss"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Waldmann disease is the primary congenital form of intestinal lymphangiectasia. Malformed lymphatic channels in the intestinal lamina propria dilate and rupture, spilling protein, fat, and infection-fighting lymphocytes directly into the gut lumen. Histology shows snowflake like mucosal spots and dilated lacteals on examination.",
+      "tx": "Recognise **primary intestinal lymphangiectasia** (Waldmann disease) as a congenital disorder characterized by hypoplastic or ectatic intestinal mucosal lymphatics. Lymphatic rupture leads to massive enteric loss of serum proteins (hypoalbuminemia), fat-soluble vitamins, chylomicrons, and naive CD4 T-lymphocytes, creating systemic lymphedema, hypogammaglobulinemia, and lymphopenia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Congenital lymphatic ectasia in gut mucosa"
+          },
+          {
+            "id": "b",
+            "label": "Lymphatic vessel rupture into bowel lumen"
+          },
+          {
+            "id": "c",
+            "label": "Luminal loss of albumin, fat, and lymphocytes"
+          },
+          {
+            "id": "d",
+            "label": "Anasarca, chylous ascites, and lymphopenia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Treat intestinal lymphangiectasia with a strict low fat diet enriched with medium chain triglycerides. Long chain fats enter intestinal lacteals and drive up lymphatic pressures, whereas medium chain fatty acids bypass the lymphatics completely and absorb directly into the portal vein.",
+      "tx": "Enforce **dietary fat management in lymphangiectasia** with strict low-fat nutrition supplemented with Medium-Chain Triglycerides (MCT). Long-chain triglycerides (LCTs) require chylomicron packaging entering the lacteals, exacerbating lymphatic engorgement and rupture. In contrast, MCTs (C6 to C12) absorb directly through enterocytes into the portal venous circulation, preventing lymphatic hypertension.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Long-Chain Triglycerides (LCT)",
+          "points": [
+            "Packaged into chylomicrons in enterocytes",
+            "Travel via intestinal lacteals and thoracic duct",
+            "Increases lymphatic pressure and triggers leakage"
+          ]
+        },
+        "right": {
+          "title": "Medium-Chain Triglycerides (MCT)",
+          "points": [
+            "Direct absorption across brush border",
+            "Travel directly via mesenteric-portal vein blood",
+            "Bypasses lymphatics, preventing lacteal rupture"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Between three and ten percent of children with single ventricle physiology develop protein losing enteropathy after a Fontan operation. High central venous pressure and low cardiac output trigger intestinal inflammation, lymphatic dilation, and relentless albumin wasting that resists ordinary diuretics.",
+      "tx": "Manage **secondary PLE in Fontan patients** occurring in 3-10% of children following single-ventricle palliation. Markedly elevated systemic venous pressures transmitted to the thoracic duct and mesenteric capillary bed, combined with low cardiac output and chronic inflammation, induce lymphatic hypertension and intestinal protein leakage associated with high long-term mortality. Pharmacotherapy with oral **budesonide** or **sildenafil** reduces mesenteric lymphatic pressures.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Fontan single-ventricle palliation"
+          },
+          {
+            "id": "b",
+            "label": "High central venous pressure (15-20 mmHg)"
+          },
+          {
+            "id": "c",
+            "label": "Impaired thoracic duct and lymphatic drainage"
+          },
+          {
+            "id": "d",
+            "label": "Protein-losing enteropathy (3-10% incidence)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Congenital chloride diarrhea develops from a mutation in the SLC26A3 chloride bicarbonate exchanger. It starts before birth with polyhydramnios and dilated fluid filled bowel loops. After birth, profuse watery diarrhea rich in chloride causes hypokalemic hypochloremic metabolic alkalosis.",
+      "tx": "Identify **congenital chloride diarrhea** caused by autosomal recessive mutations in the SLC26A3 apical chloride-bicarbonate exchanger. Fetal presentation includes polyhydramnios and dilated fluid-filled fetal loops mimicking bowel obstruction. Postnatally, lifelong profuse secretory diarrhea with high fecal chloride (> 90 mmol/L, exceeding fecal sodium plus potassium) triggers severe hypochloremic hypokalemic metabolic alkalosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Congenital Chloride Diarrhea",
+          "Congenital Sodium Diarrhea"
+        ],
+        "rows": [
+          [
+            "Gene mutation",
+            "SLC26A3 (Cl-/HCO3- exchanger)",
+            "NHE3 / SLC9A3 or SPINT2"
+          ],
+          [
+            "Fecal electrolyte hallmark",
+            "Fecal Cl > 90 mmol/L (exceeds Na + K)",
+            "Fecal Na > 100 mmol/L"
+          ],
+          [
+            "Systemic acid-base status",
+            "Hypochloremic metabolic alkalosis",
+            "Metabolic acidosis with bicarbonate loss"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In congenital sodium diarrhea, defects in the sodium hydrogen exchanger cause massive watery stools full of sodium. Unlike chloride diarrhea, these infants lose huge amounts of bicarbonate and present with hypernatremic dehydration and profound metabolic acidosis.",
+      "tx": "Diagnose **congenital sodium diarrhea** resulting from mutations in NHE3 (SLC9A3) or SPINT2. Defective sodium-hydrogen exchange produces intractable watery secretory diarrhea with extraordinarily high stool sodium concentrations (typically > 100 mmol/L). The profound enteric loss of bicarbonate and sodium produces severe hyponatremic or hypernatremic dehydration and metabolic acidosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Mutation in NHE3 (SLC9A3) or SPINT2"
+          },
+          {
+            "id": "b",
+            "label": "Failure of apical Na+/H+ exchange"
+          },
+          {
+            "id": "c",
+            "label": "Massive luminal sodium and bicarbonate loss"
+          },
+          {
+            "id": "d",
+            "label": "Refractory secretory diarrhea and severe acidosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Microvillus inclusion disease causes intractable watery diarrhea from the first days of life due to mutations in MYO5B. Under the electron microscope, you will see brush border microvilli internalized into intracellular vesicles, leaving the enterocytes unable to absorb nutrients.",
+      "tx": "Recognise **microvillus inclusion disease** caused by autosomal recessive mutations in the MYO5B gene (encoding myosin Vb). Enterocytes fail to transport apical brush-border proteins, leading to microvillus atrophy. Diagnostic electron microscopy reveals pathognomonic intra-enterocyte microvillus inclusions alongside CD10 and apical periodic acid-Schiff (PAS) brush-border depletion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Modality",
+          "Pathological Finding in MYO5B Defect"
+        ],
+        "rows": [
+          [
+            "Light microscopy",
+            "Villous blunting without crypt hyperplasia; pale apical cytoplasm"
+          ],
+          [
+            "CD10 / PAS staining",
+            "Absence of normal continuous apical brush-border line"
+          ],
+          [
+            "Electron microscopy",
+            "Internalized microvillus inclusions within apical enterocytes"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Tufting enteropathy develops from mutations in the epithelial cell adhesion molecule gene, EPCAM. Biopsy shows teardrop shaped epithelial tufts where enterocytes crowd and pinch off from the villous surface, producing lifelong intestinal failure that requires parenteral nutrition.",
+      "tx": "Define **tufting enteropathy** (intestinal epithelial dysplasia) triggered by mutations in EPCAM (epithelial cell adhesion molecule). Histology demonstrates characteristic crowding and rounded protrusion of apical enterocytes forming teardrop-shaped epithelial tufts on the villous surface without prominent inflammation, creating permanent malabsorptive diarrhea requiring home total parenteral nutrition.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Microvillus Inclusion Disease",
+          "points": [
+            "MYO5B gene defect (vesicle trafficking)",
+            "Intracytoplasmic microvilli inclusions on EM",
+            "Total absence of apical brush border"
+          ]
+        },
+        "right": {
+          "title": "Tufting Enteropathy",
+          "points": [
+            "EPCAM gene defect (cell-cell adhesion)",
+            "Teardrop epithelial tufts on villous tips",
+            "Enterocyte desquamation into intestinal lumen"
+          ]
+        }
+      }
+    }
+  ],
+  "subject": "ss-paediatric-gastroenterology",
+  "title": "Protein-Losing Enteropathy and Congenital Diarrheal Disorders",
+  "v": 1
+}
