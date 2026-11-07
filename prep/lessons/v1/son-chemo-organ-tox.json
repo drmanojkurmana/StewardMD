@@ -1,0 +1,93 @@
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 9,
+  "model": "muse-spark",
+  "module": "son-chemo-organ-tox",
+  "quiz": [
+    "mk-acca23264c9a",
+    "mk-bfd19813cd4a",
+    "mk-b224d5237693"
+  ],
+  "refs": [
+    "NCCN Guidelines",
+    "DeVita 12e Ch. 23 (Pharmacology of Cancer Therapeutics)",
+    "ESC Cardio-Oncology Guidelines 2022"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "Cisplatin cardiotoxicity falls into an early electrical storm and a late vascular grind. Magnesium and potassium wasting explains why the QT stretches and torsades threatens. Decades later the same drug injures vessels and increases blood pressure in cured young men. Follow electrolytes during therapy and blood pressure for life.",
+      "tx": "Cisplatin (a platinum crosslinker curing testicular cancer) injures the heart twice: acutely through sinoatrial oxidative damage plus renal tubular wasting of magnesium and potassium, producing silent or symptomatic **arrhythmias** (rhythm disorders: supraventricular tachycardia, atrial fibrillation, sinus bradycardia, atrioventricular block and QTc prolongation) in 18 to 38 percent on Holter monitoring (continuous ECG recording). Chronically the metal persists in tissues for decades, driving endothelial dysfunction (vessel lining failure) with systemic hypertension in 30 to 50 percent of long term testicular survivors plus coronary ischaemia (heart muscle starvation).",
+      "vis": {
+        "alt": "Torsades and ventricular fibrillation ECG patterns.",
+        "ar": 1.3405,
+        "caption": "Torsades and fibrillation ECGs framing QT and rhythm surveillance. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/polymorphic-ventricular-tachycardia-and-ve-fig1.webp"
+      }
+    },
+    {
+      "say": "Neutrophils decline most significantly during gemcitabine therapy, establishing neutropenia as the primary dose-limiting hematologic toxicity. Although transient day eight platelet drops occur, overall incidence and severe grades are dominated by neutropenia. Peripheral edema and flu-like symptoms represent capillary leak rather than true sepsis. Radiation recall and thrombotic microangiopathy represent critical secondary toxicities.",
+      "tx": "Gemcitabine (difluorodeoxycytidine, a pyrimidine antimetabolite) inhibits ribonucleotide reductase (the DNA building block enzyme) and terminates DNA chains in S phase, with **myelosuppression** (marrow failure) as its dose limiting toxicity. All grade neutropenia (low neutrophils) reaches about 63 percent with grade 3 to 4 at 25 percent, exceeding thrombocytopenia (low platelets) at 24 percent with severe grades at 5 percent. Flu like syndrome, peripheral oedema with capillary leak (vessel seepage), potent radiation recall (old radiation sites flaring) and rare thrombotic microangiopathy with haemolytic uraemic syndrome complete the profile.",
+      "vis": {
+        "alt": "Myelosuppression with barrier injury and empiric antibiotics.",
+        "ar": 1.3405,
+        "caption": "Marrow suppression with barrier injury guiding count surveillance. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/febrile-neutropenia-fig1.webp"
+      }
+    },
+    {
+      "say": "Most fluorouracil never acts because DPD destroys it first, which is why deficiency turns a standard dose lethal. Gut, marrow and nerves fail together within days of exposure. Uridine rescue helps only inside a tight four day window. Test DPYD before dosing whenever the lab allows it.",
+      "tx": "Dihydropyrimidine dehydrogenase (**DPD**, encoded by DPYD, the rate limiting catabolic enzyme) inactivates over 80 to 85 percent of administered 5 fluorouracil and capecitabine. Deficiency unleashes severe grade 4 diarrhoea, mucositis (mouth and gut sores), neutropenia, neurotoxicity (nerve damage) and hand foot syndrome. The emergency antidote within 96 hours is oral **uridine triacetate** 10 g every 6 hours for 20 doses, which outcompetes fluorinated nucleotides.",
+      "vis": {
+        "cols": [
+          "Feature",
+          "DPD normal",
+          "DPD deficient"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "5-FU fate",
+            "Over 80 percent inactivated",
+            "Lethal overdose effect"
+          ],
+          [
+            "Toxicity",
+            "Manageable mucositis",
+            "Grade 4 gut, marrow, nerves"
+          ],
+          [
+            "Rescue",
+            "Rarely needed",
+            "Uridine triacetate within 96 hours"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Cold triggered throat and hand symptoms on oxaliplatin indicate lasting nerve damage ahead. Severity of the acute storm reflects the chronic toll with unusual reliability. Ganglion platinum explains why stopping the drug fails to stop the decline. Identify the delayed worsening as coasting on sight.",
+      "tx": "Oxaliplatin chelates calcium and magnesium through its oxalate leaving group, exciting axonal voltage gated sodium channels into acute cold induced **allodynia** (pain from cold touch) with pharyngolaryngeal dysaesthesia (throat tightness), whose severity predicts chronic cumulative sensory neuropathy. Platinum DNA adducts accumulate in dorsal root ganglia (sensory cell bodies beside the cord) beyond 780 to 850 mg/m2. Worsening for 2 to 3 months after stopping platinum is termed **coasting** (delayed downhill course).",
+      "vis": {
+        "alt": "Patterns of peripheral neuropathy across body regions.",
+        "ar": 1.8349,
+        "caption": "Neuropathy distribution patterns framing ganglionopathy assessment. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/peripheral-neuropathy-fig1.webp"
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Cisplatin, gemcitabine, DPD and oxaliplatin organ toxicities",
+  "v": 1
+}

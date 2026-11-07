@@ -1,0 +1,170 @@
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 10,
+  "model": "muse-spark",
+  "module": "son-tls-cairo",
+  "quiz": [
+    "mk-c90b02ad27c8",
+    "mk-98435d90b7e4",
+    "mk-fee8782362f8"
+  ],
+  "refs": [
+    "Cairo-Bishop Criteria",
+    "NCCN Acute Lymphoblastic Leukemia 2024",
+    "British Committee for Standards in Haematology TLS Guidance"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "Understanding the Cairo-Bishop classification requires distinguishing pure biochemical abnormalities from functional organ injury. Although serum creatinine is measured in the laboratory, the classification defines creatinine elevation as an end-organ clinical manifestation. Furthermore, serum calcium declines precipitously as phosphate precipitates, so hypercalcemia never occurs in this syndrome. Recognizing numbers versus organ damage establishes the diagnosis accurately.",
+      "tx": "Cairo Bishop sorting splits **laboratory TLS** (blood chemistry numbers: uric acid at least 8.0 mg/dL, potassium at least 6.0 mEq/L, phosphate at least 4.5 mg/dL in adults, calcium at most 7.0 mg/dL) from **clinical TLS** (organ damage: creatinine at least 1.5 times the upper limit of normal, cardiac arrhythmia or sudden death, seizures). Serum creatinine looks like a lab value but counts as clinical, and hypercalcaemia never qualifies since calcium only falls. Two lab abnormalities within 3 days before to 7 days after therapy start define laboratory TLS.",
+      "vis": {
+        "alt": "Lymphoblast lysis with Cairo Bishop derangements and therapy.",
+        "ar": 1.3405,
+        "caption": "Cell lysis with Cairo Bishop chemistry shifts and urgent therapy. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/oncologic-emergencies-fig2.webp"
+      }
+    },
+    {
+      "say": "Four specific biochemical criteria define laboratory tumor lysis syndrome. Uric acid, potassium, and phosphate increase markedly, whereas corrected calcium declines due to calcium phosphate binding. Note that pediatric patients have higher baseline physiological phosphate levels, raising their diagnostic threshold to six point five milligrams per deciliter. A twenty-five percent change from baseline confirms the diagnosis even when absolute cutoffs are not yet breached.",
+      "tx": "Laboratory TLS needs two of four cutoffs inside the window from 3 days before to 7 days after therapy: uric acid **8.0 mg/dL** or above, potassium **6.0 mEq/L** or above, phosphate **4.5 mg/dL** or above in adults (6.5 in children), or corrected calcium **7.0 mg/dL** or below, or a 25 percent shift from baseline in any of them. Calcium is the lone value that falls, driven by phosphate binding into tissue deposits. Hyperkalaemia threatens the heart first, hyperphosphataemia the kidneys.",
+      "vis": {
+        "cols": [
+          "Analyte",
+          "Cutoff",
+          "Direction"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Uric acid",
+            "8.0 mg/dL or 25 percent rise",
+            "Rises"
+          ],
+          [
+            "Potassium",
+            "6.0 mEq/L or 25 percent rise",
+            "Rises"
+          ],
+          [
+            "Phosphate adult",
+            "4.5 mg/dL, child 6.5",
+            "Rises"
+          ],
+          [
+            "Calcium",
+            "7.0 mg/dL or 25 percent fall",
+            "Falls"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Clinical tumor lysis syndrome requires evidence of true end-organ dysfunction beyond biochemical derangements alone. Markedly elevated creatinine, cardiac dysrhythmias, and hypocalcemic seizures represent the three validated diagnostic endpoints. While pulmonary edema can develop secondary to fluid overload, respiratory failure itself is not a diagnostic criterion. Focus bedside evaluation strictly on renal, cardiac, and neurological compromise.",
+      "tx": "Clinical TLS equals laboratory TLS plus at least one of three end organ events: creatinine **1.5 times** the upper limit of normal or above, cardiac arrhythmia or sudden death, or seizures with neuromuscular irritability (twitching and cramps from low calcium). Acute respiratory failure is not a defining criterion of clinical tumor lysis syndrome. Each clinical event converts a chemistry problem into an intensive care emergency.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Creatinine 1.5 times normal or above",
+            "Arrhythmia or sudden death",
+            "Seizures and neuromuscular irritability",
+            "Intensive care emergency"
+          ],
+          "title": "Clinical TLS Events"
+        },
+        "right": {
+          "points": [
+            "Respiratory failure excluded",
+            "Hypercalcaemia excluded",
+            "Isolated lab shifts excluded",
+            "Chemistry monitoring only"
+          ],
+          "title": "Not Clinical TLS"
+        }
+      }
+    },
+    {
+      "say": "Carefully differentiate the two distinct temporal curves following cytotoxic therapy. Tumor lysis manifests rapidly within one to five days as malignant cells lyse and release intracellular ions. In contrast, bone marrow suppression develops gradually, reaching its neutropenic nadir between seven and fourteen days post-chemotherapy. Tracking both timelines prevents misattributing acute renal failure to delayed marrow nadirs.",
+      "tx": "Tumour lysis strikes **1 to 5 days** (the first working week) after starting cytotoxic therapy, peaking at 24 to 72 hours as massive cell kill floods the blood with potassium, phosphate and nucleic acids. The formal Cairo Bishop window stretches from 3 days before to 7 days after therapy. The 7 to 14 day window instead marks the expected chemotherapy induced neutropenia nadir (lowest white cell point).",
+      "vis": {
+        "cols": [
+          "Window",
+          "Event",
+          "Management focus"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "3 days before to 7 after",
+            "Cairo Bishop formal window",
+            "Defines laboratory TLS criteria window"
+          ],
+          [
+            "1 to 5 days after chemo",
+            "Classic lysis peak 24 to 72 hours",
+            "Aggressive diuresis and urate monitoring"
+          ],
+          [
+            "7 to 14 days after chemo",
+            "Neutropenia nadir",
+            "Marrow suppression nadir, distinct from acute lysis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pharmacotherapy in tumor lysis syndrome depends on distinct drug mechanisms. Allopurinol prevents new uric acid synthesis while rasburicase rapidly accelerates enzymatic degradation of preexisting uric acid into soluble allantoin. Febuxostat provides hepatic clearance without requiring dose adjustment in renal impairment. Systemic corticosteroids lack hypouricaemic properties and can exacerbate lysis in steroid-sensitive lymphoma.",
+      "tx": "Steroids have no hypouricaemic (uric acid lowering) role in TLS and can even trigger lysis in sensitive disease. **Allopurinol** (a purine xanthine oxidase blocker) stops new uric acid synthesis but needs renal dose cuts, while **febuxostat** (a non purine blocker cleared hepatically) needs none in mild to moderate renal failure. **Rasburicase** (recombinant urate oxidase) converts existing uric acid into highly soluble allantoin within hours but is banned in glucose 6 phosphate dehydrogenase deficiency (G6PD, an enzyme defect causing haemolysis).",
+      "vis": {
+        "alt": "Uric acid synthesis with renal handling and drug targets.",
+        "ar": 1.3405,
+        "caption": "Purine breakdown with xanthine oxidase and urate oxidase drug targets. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/gout-fig2.webp"
+      }
+    },
+    {
+      "say": "When acute kidney injury coincides with marked hyperuricaemia, the urinary uric acid-to-creatinine ratio differentiates the underlying pathophysiology. A ratio greater than one point zero confirms massive intratubular uric acid precipitation from tumor lysis. Ratios between zero point six and zero point seven reflect acute tubular necrosis with secondary urate retention, guiding immediate fluid and alkalinization decisions.",
+      "tx": "A spot urinary uric acid to creatinine ratio above **1.0** (milligram per milligram) diagnoses acute uric acid nephropathy (crystal blocked tubules from tumour lysis), while other acute kidney injuries with secondary hyperuricaemia (raised blood uric acid from low filtration) stay below 1.0 at around 0.6 to 0.7. Massive purine catabolism (nucleic acid breakdown) spills uricosuria that precipitates intratubular crystals. The ratio separates overload production from underexcretion in one bedside sample.",
+      "vis": {
+        "cols": [
+          "Ratio",
+          "Meaning",
+          "Action"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Above 1.0",
+            "Uric acid nephropathy from lysis",
+            "Rasburicase, fluids, urology watch"
+          ],
+          [
+            "Below 1.0",
+            "Other kidney injury with retention",
+            "Treat underlying cause"
+          ],
+          [
+            "0.6 to 0.7 band",
+            "Typical non lysis injury",
+            "No lysis protocol"
+          ]
+        ]
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Tumour lysis syndrome: Cairo Bishop criteria, timing and urate therapy",
+  "v": 1
+}

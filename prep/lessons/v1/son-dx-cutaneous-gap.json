@@ -1,0 +1,140 @@
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 9,
+  "model": "muse-spark",
+  "module": "son-dx-cutaneous-gap",
+  "quiz": [
+    "mk-d6a1d571d01c",
+    "mk-e8fe03e57e74",
+    "mk-a22a91ca776e"
+  ],
+  "refs": [
+    "NCCN Melanoma 2024",
+    "TUMORAPA Trial (Euvrard et al., NEJM 2012)"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "Needle gauge decides whether architecture survives the sampling. Thin needles yield scattered cells while thick needles keep tissue cores. Invasion status hides from cytology alone and needs stroma. Microcalcifications need vacuum help through one skin prick.",
+      "tx": "Fine needle aspiration (**FNAC**, 22 to 25 gauge thin needle) aspirates disaggregated cells for cytology only and cannot distinguish in situ from invasive carcinoma, since the basement membrane interface is lost. **Core needle biopsy** (14 to 18 gauge) preserves histological architecture for invasion, ER, PR and HER2 testing, while vacuum assisted biopsy harvests multiple large cores through one prick for non palpable microcalcifications. Incisional biopsy removes a tissue wedge when cores cannot reach.",
+      "vis": {
+        "cols": [
+          "Technique",
+          "Needle and sample",
+          "Diagnostic capability"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "FNAC",
+            "22 to 25 gauge, cells only",
+            "Cytology, never invasion"
+          ],
+          [
+            "Core needle",
+            "14 to 18 gauge, tissue cores",
+            "Invasion plus ER PR HER2"
+          ],
+          [
+            "Vacuum assisted",
+            "Multiple large cores, one prick",
+            "Microcalcifications"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Artificial intelligence refines diagnostic accuracy but cannot assume clinical accountability. Complex imaging patterns, digital histology slides, and genomic data feed decision-support algorithms. Final management decisions require human clinical judgment, ethical synthesis, and patient-centered communication. AI functions as an assistive instrument rather than an autonomous medical practitioner.",
+      "tx": "Artificial intelligence in oncology is an **assistive tool** (decision support software) for radiomics (imaging pattern quantification), digital pathology (slide image analysis) and genomic profiling, plus workflow optimisation. It augments but never replaces the medical oncologist, since accountability, context and patient values sit outside any model. Claims of complete clinician replacement contradict regulatory standards and patient safety requirements.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Radiomics and image patterns",
+            "Digital pathology slides",
+            "Genomic profile analysis",
+            "Workflow optimisation"
+          ],
+          "title": "AI Assists With"
+        },
+        "right": {
+          "points": [
+            "Clinical accountability",
+            "Context and values",
+            "Physical examination",
+            "Shared decision making"
+          ],
+          "title": "AI Never Replaces"
+        }
+      }
+    },
+    {
+      "say": "Steps down indicate events while flat lines indicate survival between them. Ticks flag patients who leave observation uncensored by death. Comparing two curves needs the log rank test, not eyeballing. Hazard ratios come from Cox models built on the same data.",
+      "tx": "A **Kaplan-Meier curve** (survival probability estimator) steps downward at each event with horizontal segments between events and tick marks for right censored patients (lost or event free at last contact). It estimates overall or progression free survival over time. Two curves are compared with the **log rank test**, and hazard ratios derive from Cox proportional hazards regression.",
+      "vis": {
+        "cols": [
+          "Element",
+          "Appearance",
+          "Meaning"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Vertical drop",
+            "Step down",
+            "One or more events"
+          ],
+          [
+            "Horizontal segment",
+            "Flat line",
+            "Survival between events"
+          ],
+          [
+            "Tick mark",
+            "Small cross",
+            "Censored patient"
+          ],
+          [
+            "Comparison",
+            "Log rank test",
+            "Significant separation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transplant skin flips the usual cancer ranking upside down. Sixty fold risk makes rare squamous tumours common. Switching drug classes cuts new cancers nearly in half. Sun protection still helps but cannot match the switch.",
+      "tx": "Solid organ transplant recipients carry 65 to 100 times the cutaneous **squamous cell carcinoma** risk, reversing the normal ratio so SCC exceeds basal cell carcinoma. Per the randomised **TUMORAPA trial**, switching immunosuppression from calcineurin inhibitors to the mTOR inhibitor **sirolimus** (or everolimus) significantly cuts new SCCs with a hazard ratio of 0.56 through anti angiogenic and anti neoplastic effects. Calcineurin drugs promote tumours while mTOR blockade restrains them.",
+      "vis": {
+        "alt": "Basal cell, squamous cell and melanoma skin comparison.",
+        "ar": 1.3333,
+        "caption": "Skin cancer types with transplant SCC predominance. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/cutaneous-malignancies-melanoma-and-non-melanoma-fig1.webp"
+      }
+    },
+    {
+      "say": "One mutation dominates cutaneous melanoma genetics above all others. V600E leads within BRAF while V600K trails behind. NRAS and BRAF never occur in the same tumour. Acral and mucosal sites point to KIT instead.",
+      "tx": "Activating **BRAF mutation** (chiefly V600E) drives 40 to 50 percent of cutaneous melanomas, with V600E comprising 70 to 80 percent and V600K 10 to 20 percent of BRAF mutations, followed by mutually exclusive **NRAS** at 15 to 20 percent and NF1 at 10 to 15 percent. **KIT mutation** (10 to 15 percent) enriches in acral lentiginous and mucosal melanomas. Rapid VE1 immunohistochemistry screens V600E, while KIT needs DNA sequencing since CD117 staining never predicts mutation.",
+      "vis": {
+        "alt": "Asymmetric pigmented lesion with ABCDE features.",
+        "ar": 1.4371,
+        "caption": "Melanoma ABCDE features prompting BRAF testing. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/melanoma-fig1.webp"
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Biopsy, AI, survival curves, transplant skin cancer and BRAF melanoma",
+  "v": 1
+}
