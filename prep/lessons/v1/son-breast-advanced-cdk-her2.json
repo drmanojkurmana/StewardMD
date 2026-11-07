@@ -1,0 +1,130 @@
+{
+  "v": 1,
+  "module": "son-breast-advanced-cdk-her2",
+  "subject": "ss-medical-oncology",
+  "title": "Aromatase Pharmacology, CDK4/6 Inactivation, IBD Safety and HER2 Relapse",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "Endocrine therapy in postmenopausal breast cancer exploits two distinct classes of aromatase inhibitors. Anastrozole and letrozole are Type II non-steroidal agents that bind reversibly to the cytochrome P450 haem prosthetic group of the aromatase enzyme (CYP19A1). In contrast, **exemestane** is a **Type I steroidal inactivator**, structurally mimicking androstenedione. It binds covalently and irreversibly to the substrate catalytic pocket as a **suicide inhibitor**, permanently destroying catalytic activity and eliminating pharmacokinetic cross-resistance with non-steroidal inhibitors.",
+      "say": "Understanding the distinction between aromatase inhibitors is critical when sequencing endocrine therapies. While anastrozole and letrozole are non-steroidal competitive blockers that bind reversibly to the enzyme haem moiety, exemestane works through an entirely different chemical mechanism. Because it is a steroidal analogue of androstenedione, exemestane forms a permanent covalent bond with the catalytic site, permanently inactivating the enzyme. This suicide inhibition explains why patients progressing on non-steroidal agents can still respond to exemestane.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-fig1.webp",
+        "alt": "Histopathologic section of invasive breast carcinoma displaying cords of malignant epithelial cells.",
+        "caption": "Invasive mammary carcinoma with stromal desmoplasia. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Cyclin-dependent kinase 4 and 6 (**CDK4/6 inhibitors**, including palbociclib, ribociclib, and abemaciclib) target the fundamental engine of cellular proliferation. In hormone receptor-positive cells, cyclin D binds CDK4/6 to phosphorylate the **retinoblastoma tumour suppressor** protein (Rb). Phosphorylated Rb releases **E2F transcription factors**, triggering progression from the **G1 phase to S phase**. CDK4/6 inhibitors prevent Rb phosphorylation, enforcing persistent G1 cell cycle arrest. Because their antineoplastic mechanism depends entirely on intact Rb, they are completely inactive in **Rb-deficient triple-negative** cancers.",
+      "say": "The molecular target of CDK4/6 inhibitors is not the cancer cell as a whole, but specifically the retinoblastoma pathway. In estrogen receptor-positive disease, cyclin D pairs with CDK4 and CDK6 to phosphorylate Rb, releasing E2F so the cell can copy its DNA. By blocking this phosphorylation event, drugs like ribociclib trap cancer cells in the G1 phase. However, if a triple-negative tumor has already deleted the RB1 gene, E2F is permanently free, rendering CDK4/6 inhibition completely ineffective.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HR+ Breast Cancer (Intact Rb)",
+          "points": [
+            "Cyclin D-CDK4/6 phosphorylates Rb",
+            "CDK4/6 inhibitors block phosphorylation",
+            "E2F transcription factors locked",
+            "Profound G1-phase arrest achieved",
+            "Marked PFS and OS clinical gains"
+          ]
+        },
+        "right": {
+          "title": "TNBC (Rb-Deficient Biology)",
+          "points": [
+            "Frequent RB1 gene loss or mutation",
+            "E2F constitutively disinhibited",
+            "Independent of CDK4/6 kinase activity",
+            "Refractory to palbociclib / ribociclib",
+            "Requires DNA-damaging cytotoxics"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When selecting a CDK4/6 inhibitor for a patient with comorbid **inflammatory bowel disease** (Crohn disease or ulcerative colitis), pharmacologic profiles dictate choice. **Abemaciclib** exerts off-target inhibitory potency against CDK9 and CDK1 in intestinal enterocytes, inducing secretory **enterotoxicity and diarrhea** in over 80% of treated patients (grade 3 in 10% to 15%), making it contraindicated in active IBD. Conversely, **palbociclib and ribociclib** are highly selective for CDK4/6 with negligible gastrointestinal toxicity, causing bone marrow suppression and QTc prolongation that are safely monitored.",
+      "say": "Although all three CDK4/6 inhibitors improve survival in metastatic hormone receptor-positive disease, their off-target toxicities differ markedly. Abemaciclib inhibits intestinal kinases including CDK9, producing severe secretory diarrhea that can trigger a catastrophic disease flare in patients with underlying Crohn disease or ulcerative colitis. In contrast, palbociclib and ribociclib cause transient bone marrow suppression without significant bowel toxicity, making them the clear agents of choice in patients with inflammatory bowel disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CDK4/6 Inhibitor",
+          "Kinase Selectivity Profile",
+          "Primary Dose-Limiting Toxicity",
+          "Suitability in Active IBD"
+        ],
+        "rows": [
+          [
+            "Abemaciclib",
+            "Inhibits CDK4/6 plus CDK9/CDK1",
+            "Secretory diarrhea (up to 85%)",
+            "Contraindicated; provokes severe colitis flare"
+          ],
+          [
+            "Palbociclib",
+            "Selective CDK4 and CDK6 inhibitor",
+            "Neutropenia (reversible)",
+            "Safe; monitor complete blood counts"
+          ],
+          [
+            "Ribociclib",
+            "Selective CDK4 and CDK6 inhibitor",
+            "Neutropenia, QTc interval prolongation",
+            "Safe; monitor serial ECG and liver enzymes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Frontline systemic management for advanced breast cancer is strictly guided by subtype and molecular predictive biomarkers. In metastatic **triple-negative breast cancer**, the KEYNOTE-355 trial established that tumours expressing programmed death-ligand 1 with a **combined positive score** of 10 or greater (PD-L1 CPS >= 10) achieve significant overall survival improvement from frontline **pembrolizumab** combined with chemotherapy (nab-paclitaxel, paclitaxel, or gemcitabine-carboplatin). For metastatic **hormone receptor-positive HER2-negative** disease, frontline gold standard is a CDK4/6 inhibitor paired with an aromatase inhibitor.",
+      "say": "Frontline treatment of metastatic breast cancer diverges completely based on receptor status and immune biomarkers. In triple-negative disease, you must immediately order PD-L1 testing using the combined positive score. If the score is ten or higher, adding the checkpoint inhibitor pembrolizumab to cytotoxic chemotherapy yields substantial gains in progression-free and overall survival. Meanwhile, for hormone receptor-positive disease, chemotherapy is deferred in favor of a CDK4/6 inhibitor paired with an aromatase inhibitor.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-spc-fibroadenoma-breast.webp",
+        "alt": "Gross and microscopic breast specimen demonstrating epithelial-stromal tissue boundaries.",
+        "caption": "Histopathologic appraisal of breast neoplasia. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "In HER2-positive metastatic breast cancer progressing after frontline taxane and trastuzumab, the phase three **DESTINY-Breast03 trial** transformed second-line therapy. **Trastuzumab deruxtecan** (T-DXd), an antibody-drug conjugate armed with a topoisomerase I inhibitor exatecan payload at an exceptionally high drug-to-antibody ratio of 8:1 and a cleavable linker, demonstrated dramatic progression-free survival superiority over trastuzumab emtansine (T-DM1), achieving a hazard ratio of 0.28. Active clinical surveillance for drug-induced **interstitial lung disease** and pneumonitis is mandatory.",
+      "say": "The treatment of trastuzumab-resistant HER2-positive metastatic breast cancer was redefined by the DESTINY-Breast03 trial. Trastuzumab deruxtecan carries eight molecules of an active topoisomerase inhibitor on every antibody, linked by a cleavable peptide that permits membrane bystander killing of neighboring tumor cells. Compared to the older conjugate T-DM1, it slashed the risk of progression or death by seventy-two percent. However, you must monitor patients closely with cross-sectional imaging, because drug-related interstitial lung disease requires prompt corticosteroid therapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "HER2+ Progression on Taxane + Trastuzumab"
+          },
+          {
+            "id": "t2",
+            "label": "Second-Line: DESTINY-Breast03"
+          },
+          {
+            "id": "t3",
+            "label": "Trastuzumab Deruxtecan (T-DXd)"
+          },
+          {
+            "id": "t4",
+            "label": "PFS Hazard Ratio 0.28 vs T-DM1"
+          },
+          {
+            "id": "t5",
+            "label": "CT Monitoring for Pneumonitis"
+          }
+        ],
+        "edges": [
+          ["t1", "t2"],
+          ["t2", "t3"],
+          ["t3", "t4"],
+          ["t3", "t5"]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3ce215d7ef9e",
+    "q_536b5b3ad3f6",
+    "q_95974ea24591"
+  ],
+  "gen": "AI"
+}
