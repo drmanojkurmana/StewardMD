@@ -1,0 +1,286 @@
+{
+  "id": "srm-art-lab-qc-air-quality",
+  "module": "srm-art-lab-qc-air-quality",
+  "title": "IVF Laboratory Quality Control and Air Quality",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Gardner's Textbook of Assisted Reproductive Technologies 5e Ch 2",
+    "ESHRE Revised Guidelines for Good Practice in IVF Laboratories",
+    "The Cairo Consensus on IVF Laboratory Environment"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Gametes and developing embryos lack protective physiological barriers in vitro. Ambient laboratory air contains gaseous toxins that impair cleavage and development. Sophisticated multi stage air handling systems protect the working environment.",
+      "tx": "Extracorporeal gametes and embryos are exquisitely vulnerable to airborne toxins. The IVF laboratory HVAC requires positive pressure airflow equipped with **HEPA filters** and carbon permanganate filters to eliminate **volatile organic compounds** and airborne particulate matter. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "h1",
+            "label": "Intake air through pre-filters"
+          },
+          {
+            "id": "h2",
+            "label": "Activated carbon and potassium permanganate (VOC scrub)"
+          },
+          {
+            "id": "h3",
+            "label": "HEPA filtration (removes 99.97% particles >=0.3 um)"
+          },
+          {
+            "id": "h4",
+            "label": "Positive pressure plenum into cleanroom lab"
+          }
+        ],
+        "edges": [
+          [
+            "h1",
+            "h2",
+            "Coarse particle removal"
+          ],
+          [
+            "h2",
+            "h3",
+            "Chemical purification"
+          ],
+          [
+            "h3",
+            "h4",
+            "Sterile positive gradient"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "International cleanroom standards define cleanroom classification levels. Cleanrooms maintain strict limits on airborne particulate counts. Workstations maintain highest sterility while background suites maintain intermediate cleanliness.",
+      "tx": "**Cleanroom design** dictates that the main embryology suite complies with ISO Class 7 (Class 10000) air cleanliness with over 15 to 20 room air changes hourly. Local laminar flow manipulation benches must achieve ISO Class 5 to safeguard gamete handling from contamination.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/infertility-evaluation-and-assisted-reproduction-fig1.webp",
+        "caption": "Cleanroom air quality filtration and positive pressure incubation suites. Credit: StewardMD.",
+        "alt": "Cleanroom air quality filtration and positive pressure incubation suites"
+      }
+    },
+    {
+      "say": "Maintaining physiological temperature prevents disastrous spindle disassembly. Even transient room air cooling destabilizes delicate microtubule structures. All stages of handling must utilize heated stages.",
+      "tx": "Strict **temperature control** requires continuous calibration to 37.0 degrees Celsius (tolerance plus or minus 0.2 degrees) across all incubators, microscope stages, and warming plates. Transient chilling below 35 degrees Celsius induces rapid **meiotic spindle depolymerization** in metaphase II oocytes, triggering aneuploidy. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Precise Thermal Control (37.0\u00b0C)",
+          "points": [
+            "Birefringent meiotic spindle intact",
+            "Normal chromosomal alignment",
+            "Optimal mitochondrial respiration",
+            "High blastocyst formation rate"
+          ]
+        },
+        "right": {
+          "title": "Thermal Deviation (<35.0\u00b0C)",
+          "points": [
+            "Microtubule depolymerization in 2 min",
+            "Dispersed maternal chromatids",
+            "Spindle recovery abnormal or delayed",
+            "Increased embryonic aneuploidy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Extracellular pH dictates intracellular enzymatic function in culture. Dissolved carbon dioxide equilibrates with medium bicarbonate buffers. Accurate gas calibration preserves homeostatic neutrality.",
+      "tx": "Extracellular **culture media pH** must be maintained within a tight **physiological pH** range of 7.25 to 7.35. This requires precise **CO2 equilibrium** (typically 5 to 7 percent CO2) verified using external blood gas analyzers or calibrated pH sensors. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Incubator set to 5.0 to 7.0% CO2"
+          },
+          {
+            "id": "p2",
+            "label": "Equilibration with medium bicarbonate buffer"
+          },
+          {
+            "id": "p3",
+            "label": "Target extracellular pH: 7.20 to 7.40"
+          },
+          {
+            "id": "p4",
+            "label": "Intracellular homeostatic enzyme maintenance"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2",
+            "Dissolution"
+          ],
+          [
+            "p2",
+            "p3",
+            "Buffering equilibrium"
+          ],
+          [
+            "p3",
+            "p4",
+            "Physiological homeostasis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In vivo tubal and uterine environments feature low oxygen tension. Standard atmospheric oxygen exposure generates harmful reactive oxygen species. Culturing under reduced oxygen improves blastocyst development.",
+      "tx": "Modern **trigas incubator** systems utilize physiological **low oxygen culture** with 5 percent O2, 6 percent CO2, and 89 percent N2. Culturing under 5 percent O2 reduces reactive oxygen species generation, significantly improving blastocyst conversion and live birth rates. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Physiological Low Oxygen (5% O2)",
+          "points": [
+            "Mimics fallopian tube and uterus",
+            "Reduced oxidative stress and ROS",
+            "Preserves embryonic gene expression",
+            "Higher blastocyst conversion and live births"
+          ]
+        },
+        "right": {
+          "title": "Atmospheric Oxygen (20% O2)",
+          "points": [
+            "Supraphysiological hyperoxic stress",
+            "Increased mitochondrial ROS production",
+            "Lipid peroxidation and DNA breaks",
+            "Impaired cleavage and embryonic arrest"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Standardized quality control requires bioassay screening before clinical adoption. Batch testing identifies potential embryotoxicity in plastics and reagents. Two cell mouse assays verify biocompatibility.",
+      "tx": "Embryo culture media osmolality must be tightly controlled between 270 and 290 mOsm/kg. Applying a protective **mineral oil overlay** provides essential **evaporation control**, preventing hyperosmolality and solute shifts during culture. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-infertility-fig1.webp",
+        "caption": "Incubator environmental calibration, gas equilibrium, and telemetry monitoring. Credit: StewardMD.",
+        "alt": "Incubator environmental calibration, gas equilibrium, and telemetry monitoring"
+      }
+    },
+    {
+      "say": "Modern culture platforms eliminate the need to remove embryos for microscopy. Automated optics capture images at regular short intervals. Stable closed environments protect metabolic continuity.",
+      "tx": "Modern **time-lapse incubators** combine continuous automated microscopy with built-in incubator chambers. By capturing high-resolution images every 5 to 15 minutes, time-lapse monitoring allows detailed **morphokinetic algorithms** (t2, t3, cc2, s2, t5, tB) without disturbing stable temperature or gas equilibria. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Individual microwell closed incubation"
+          },
+          {
+            "id": "t2",
+            "label": "Automated microscopy every 5 to 15 minutes"
+          },
+          {
+            "id": "t3",
+            "label": "Morphokinetic parameter logging (t2, t3, t5, tB)"
+          },
+          {
+            "id": "t4",
+            "label": "AI algorithmic ranking for single embryo transfer"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2",
+            "Undisturbed environment"
+          ],
+          [
+            "t2",
+            "t3",
+            "Continuous imaging"
+          ],
+          [
+            "t3",
+            "t4",
+            "Annotation and selection"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Preventing sample mix ups is the foremost ethical responsibility of the laboratory. Two person verification must confirm identities at every transfer step. Automated electronic systems offer continuous digital surveillance.",
+      "tx": "A comprehensive electronic **witnessing system** utilizing **RFID tracking** or barcodes ensures foolproof **gamete identification** at every critical manipulation step, completely eliminating mix-ups during oocyte retrieval, denudation, ICSI, and embryo transfer. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Critical Witnessing Checkpoint",
+          "Primary Identification Verification",
+          "Witnessing Modality",
+          "Safety Barrier Action"
+        ],
+        "rows": [
+          [
+            "Oocyte pick-up",
+            "Patient ID, partner ID, dish labels",
+            "Dual manual witness + RFID",
+            "Confirms tube and collection dish match"
+          ],
+          [
+            "Sperm preparation and ICSI",
+            "Semen tube, ICSI injection dish",
+            "Electronic reader lock",
+            "System locks micromanipulator on mismatch"
+          ],
+          [
+            "Dish-to-dish transfer",
+            "Culture microdrops and new dish",
+            "Barcode scan of both vessels",
+            "Prevents cross-patient dish placement"
+          ],
+          [
+            "Embryo transfer into uterus",
+            "Catheter label, patient identity",
+            "Dual call-out + bed barcode",
+            "Catheter loaded only after identity match"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Cryogenic storage integrity requires uninterrupted low temperatures below minus one hundred and ninety degrees. Vacuum failure in liquid nitrogen vessels leads to catastrophic warming. Automated electronic monitoring provides early warning.",
+      "tx": "Every **liquid nitrogen tank** housing cryopreserved gametes and embryos requires **continuous telemetry** and level alarms. This protects specimens from catastrophic **vacuum failure** and thermal warming, ensuring liquid nitrogen vapor stays below critical glass transition temperatures. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Cryostorage Tank",
+          "points": [
+            "Vacuum insulation jacket intact",
+            "Liquid nitrogen level monitored daily",
+            "Temperature stable below -190\u00b0C",
+            "Continuous automated telemetry"
+          ]
+        },
+        "right": {
+          "title": "Vacuum Insulation Failure",
+          "points": [
+            "Rapid outer tank sweating and frosting",
+            "Accelerated liquid nitrogen boil-off",
+            "Temperature rises above -130\u00b0C",
+            "Immediate emergency tank transfer"
+          ]
+        }
+      }
+    }
+  ],
+  "v": 1
+}
