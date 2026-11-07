@@ -1,0 +1,244 @@
+{
+  "gen": "AI",
+  "id": "pgt-autoimmune-hepatitis-peds",
+  "module": "Neonatal Cholestasis, Metabolic Liver Disease and Cirrhosis",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Type one autoimmune hepatitis is the classic variety that usually presents in older children and adolescents. It is defined by positive antinuclear antibodies, anti smooth muscle antibodies with actin specificity, and elevated blood immunoglobulin G levels.",
+      "tx": "Identify **AIH Type 1 serological markers** in pediatric practice. Type 1 autoimmune hepatitis (AIH) accounts for roughly two-thirds of pediatric cases, typically presenting in older children and adolescents with positive Antinuclear Antibodies (ANA) and/or Anti-Smooth Muscle Antibodies (ASMA, specifically F-actin directed), alongside marked polyclonal hypergammaglobulinemia (elevated IgG).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "AIH Subtype",
+          "Characteristic Serology",
+          "Typical Demographic"
+        ],
+        "rows": [
+          [
+            "Type 1 AIH",
+            "Positive ANA and/or Anti-Smooth Muscle (ASMA / F-actin)",
+            "Older children / adolescents (female 3:1)"
+          ],
+          [
+            "Type 2 AIH",
+            "Positive Anti-LKM1 and/or Anti-LC1 antibodies",
+            "Infants / young children (female 9:1)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Type two autoimmune hepatitis affects much younger children and infants with a more aggressive, acute course. Look for anti liver kidney microsomal type one antibodies or anti liver cytosol one antibodies, which target cytochrome P four fifty two D six.",
+      "tx": "Delineate **AIH Type 2 serological markers**. Type 2 AIH affects younger children (often infants and toddlers), presenting acutely with rapid progression toward fulminant hepatic failure. It is defined serologically by antibodies to liver-kidney microsomal antigen type 1 (anti-LKM1, directed against cytochrome P450 2D6) and/or anti-liver cytosol type 1 (anti-LC1).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type 1 Autoimmune Hepatitis",
+          "points": [
+            "ANA and anti-SMA (F-actin) positive",
+            "Older children and adolescents",
+            "Milder or indolent presentation",
+            "Good response to therapy with lower relapse rate"
+          ]
+        },
+        "right": {
+          "title": "Type 2 Autoimmune Hepatitis",
+          "points": [
+            "Anti-LKM1 and anti-LC1 positive",
+            "Infants and young children",
+            "Acute or fulminant liver failure presentation",
+            "High relapse rate; lifelong therapy often required"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Use the simplified diagnostic criteria to score suspected cases. In children, an autoantibody titre of one in forty is already clinically significant. Add points for high IgG, typical biopsy features, and the absence of viral hepatitis to secure the diagnosis.",
+      "tx": "Apply the **simplified scoring system** developed by the International Autoimmune Hepatitis Group (IAIHG). The score allocates points for autoantibody titers (in children, ANA or ASMA >= 1:40 scores 1 point, >= 1:80 or anti-LKM1 >= 1:20 scores 2 points), elevated serum IgG above upper limit of normal (1-2 points), compatible or typical liver histology (1-2 points), and exclusion of viral hepatitis (2 points). A score >= 6 indicates probable AIH; >= 7 indicates definite AIH.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Criteria in Children",
+          "Points Awarded"
+        ],
+        "rows": [
+          [
+            "Autoantibodies",
+            "ANA/ASMA >= 1:40 (1 pt) or >= 1:80 / LKM1 >= 1:20",
+            "1 to 2 points"
+          ],
+          [
+            "Serum IgG level",
+            "> Normal (1 pt) or > 1.1 times ULN (2 pts)",
+            "1 to 2 points"
+          ],
+          [
+            "Liver histology",
+            "Compatible (1 pt) or Typical interface hepatitis (2 pts)",
+            "1 to 2 points"
+          ],
+          [
+            "Viral hepatitis markers",
+            "Absence of active viral hepatitis A, B, C, E",
+            "2 points"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Liver biopsy is essential before starting immunosuppression. The pathognomonic hallmark is interface hepatitis, where dense infiltration of lymphocytes and plasma cells spills across the limiting plate into the hepatic lobule, causing rosetting of hepatocytes.",
+      "tx": "Verify the **interface hepatitis hallmark** on histopathological examination. Liver biopsy is mandatory to confirm AIH and exclude other etiologies. Microscopic hallmarks include interface hepatitis (lymphoplasmacytic infiltration crossing the portal tract limiting plate and destroying adjacent periportal hepatocytes), hepatic rosette formation, emperipolesis (intracellular lymphocytes within hepatocytes), and variable portal fibrosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Dense portal lymphoplasmacytic infiltration"
+          },
+          {
+            "id": "b",
+            "label": "Erosion of limiting plate into lobule (interface hepatitis)"
+          },
+          {
+            "id": "c",
+            "label": "Apoptosis and degeneration of periportal hepatocytes"
+          },
+          {
+            "id": "d",
+            "label": "Hepatocyte regeneration in cords (liver cell rosetting)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Induce remission rapidly with high dose corticosteroids. Start prednisolone at one point five to two milligrams per kilogram daily, up to a maximum of sixty milligrams a day, tapering down over four to eight weeks as transaminases fall toward normal.",
+      "tx": "Initiate the **induction corticosteroid regimen** immediately upon confirmation. Oral prednisolone or prednisone is administered at 1.5 to 2 mg/kg/day (maximum 60 mg/day). Once clinical response and transaminase decline are documented (typically within 2-4 weeks), corticosteroids are systematically tapered over 4 to 8 weeks down to a low maintenance dose (typically 2.5-5 mg/day) to avert steroid-related growth retardation and osteopenia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm AIH with serology, IgG, and biopsy"
+          },
+          {
+            "id": "b",
+            "label": "Prednisolone 1.5-2 mg/kg/day (max 60 mg/day)"
+          },
+          {
+            "id": "c",
+            "label": "Document biochemical response (falling ALT/AST)"
+          },
+          {
+            "id": "d",
+            "label": "Taper systematically over 4-8 weeks to low dose"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Add azathioprine at one to two milligrams per kilogram daily after two to four weeks as a steroid sparing agent. This allows you to wean prednisolone down to low doses while maintaining long term biochemical remission and protecting the child from steroid toxicity.",
+      "tx": "Implement **azathioprine steroid-sparing maintenance**. Azathioprine at 1 to 2 mg/kg/day is introduced 2 to 4 weeks after starting steroids (or once transaminases drop below twice normal) to serve as a steroid-sparing maintenance agent. Azathioprine allows complete corticosteroid withdrawal or reduction to minimal physiological levels, sustaining biochemical remission while preserving growth velocity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Maintenance Drug",
+          "Pediatric Target Dose",
+          "Monitoring Parameters"
+        ],
+        "rows": [
+          [
+            "Azathioprine",
+            "1 to 2 mg/kg/day orally",
+            "Complete blood counts (leukopenia) and 6-TGN levels"
+          ],
+          [
+            "Prednisolone wean",
+            "Taper to <= 0.1-0.2 mg/kg/day or stop",
+            "Monitor ALT, AST, and IgG every 4-8 weeks"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Up to half of children with autoimmune hepatitis also have autoimmune sclerosing cholangitis. Always evaluate the biliary tree with magnetic resonance cholangiopancreatography, which reveals telltale intrahepatic and extrahepatic bile duct beading and stricturing.",
+      "tx": "Investigate **autoimmune sclerosing cholangitis overlap** in pediatric patients. Autoimmune sclerosing cholangitis (ASC) coexists in up to 50% of pediatric AIH cases. Children present with classical AIH features but magnetic resonance cholangiopancreatography (MRCP) reveals irregular intrahepatic and extrahepatic bile duct strictures, dilatation, and pruning. Adding ursodeoxycholic acid (15 mg/kg/day) to immunosuppression is standard in ASC.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Isolated Pediatric AIH",
+          "points": [
+            "Normal cholangiography (MRCP)",
+            "Strictly parenchymal interface hepatitis",
+            "Rapid complete response to immunosuppression"
+          ]
+        },
+        "right": {
+          "title": "Autoimmune Sclerosing Cholangitis (ASC)",
+          "points": [
+            "Bile duct beading and pruning on MRCP",
+            "High association with inflammatory bowel disease",
+            "Requires UDCA addition; slower resolution"
+          ]
+        }
+      }
+    },
+    {
+      "say": "You should never discontinue immunosuppression early in these children. Therapy must continue for at least two to three years of normal transaminases and IgG before considering a trial withdrawal, and a repeat liver biopsy should prove that interface hepatitis has completely cleared.",
+      "tx": "Observe the **duration of therapy before withdrawal** guidelines. Immunosuppressive therapy must be maintained for a minimum of 2 to 3 years of sustained normal transaminases and normal serum IgG. Before attempting withdrawal, a surveillance liver biopsy is strongly recommended to demonstrate complete histopathological resolution of interface hepatitis, as premature cessation triggers disease relapse in over 70% of pediatric patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Criteria for Withdrawal Trial",
+          "Clinical Threshold"
+        ],
+        "rows": [
+          [
+            "Biochemical stability",
+            "Normal transaminases (ALT/AST) and normal IgG for >= 2-3 years"
+          ],
+          [
+            "Histopathological clearance",
+            "Repeat liver biopsy showing zero interface hepatitis (inflammatory score 0)"
+          ],
+          [
+            "Surveillance post-withdrawal",
+            "Frequent liver chemistries every 4-6 weeks for the first year"
+          ]
+        ]
+      }
+    }
+  ],
+  "subject": "ss-paediatric-gastroenterology",
+  "title": "Pediatric Autoimmune Hepatitis and Sclerosing Cholangitis",
+  "v": 1
+}
