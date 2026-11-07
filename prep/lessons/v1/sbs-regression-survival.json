@@ -3,7 +3,7 @@
  "module": "sbs-regression-survival",
  "subject": "ss-biostatistics",
  "title": "Correlation, regression and survival analysis: high-yield essentials",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "**Pearson correlation** measures the strength and direction of a linear relationship between two continuous variables, such as test scores. The coefficient r ranges from minus 1 to plus 1. Values near zero mean little linear association. **Spearman rank correlation** is the choice when data are ordinal or ranked, such as treatments ordered by effectiveness, because it works on ranks rather than raw values. Correlation describes association only and never proves cause.",
@@ -38,6 +38,17 @@
    "tx": "Multivariable regression models quantify how several predictors relate to an outcome at once. For a **continuous outcome**, such as blood pressure, multivariable linear regression is used. For a **binary outcome**, logistic regression is used and its effect size is the **adjusted odds ratio**, which accounts for other covariates. An odds ratio above 1 signals higher odds of the outcome, and below 1 signals lower odds.",
    "say": "Multivariable regression models quantify how several predictors relate to an outcome at once. For a continuous outcome, such as blood pressure, multivariable linear regression is used. For a binary outcome, logistic regression is used and its effect size is the adjusted odds ratio, which accounts for other covariates. An odds ratio above 1 signals higher odds of the outcome, and below 1 signals lower odds.",
    "vis": null
+  },
+  {
+   "tx": "The left plot fits a tilted plane to points for a **linear regression** of a continuous outcome like blood pressure on age and smoking. The right plot fits an S shaped curve for **logistic regression** of a binary outcome like disease risk. Its forest inset shows the **adjusted odds ratio** for each covariate against a null line, so values away from one signal higher or lower odds.",
+   "say": "On the left, many dots cluster around a flat tilted surface that predicts a continuous value such as blood pressure from age and smoking. On the right, dots sit at top or bottom while a smooth S curve gives risk between zero and one. Beside it, small squares with bars show adjusted odds ratios. If a bar sits clear of one, that factor shifts odds after accounting for the others.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sbs-regression-survival-gen1.webp",
+    "alt": "Paired 3D plots contrast a tilted linear plane with a curved logistic surface plus an odds ratio forest inset.",
+    "caption": "Plane for continuous values beside curve for binary risk Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "tx": "Survival data include **censored** observations, patients who are lost to follow-up or still event-free when the study ends. They are kept in the analysis up to their last contact, not excluded and not counted as events. The **Kaplan-Meier** method estimates survival step by step at each event time and needs no pre-fixed intervals, unlike actuarial life tables. Its median survival is most reliable when most patients have reached the endpoint.",

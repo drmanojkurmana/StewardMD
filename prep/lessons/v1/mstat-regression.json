@@ -126,6 +126,17 @@
    "vis": null
   },
   {
+   "tx": "The monitor shows a very high first pressure followed by a much lower repeat reading near the population line. This illustrates **regression to the mean**: extreme first measurements drift back toward the **population average** on retesting because part of the first value was random error. Uncontrolled before and after studies can mistake this drift for treatment benefit. A **control group** or repeated baselines guards against the artefact.",
+   "say": "The display shows an extreme first blood pressure with a far lower repeat value closer to the average line. Very high readings often fall on their own when measured again, even without treatment. Without a comparison group, this natural fall can look like the treatment worked, so repeat baselines or controls are needed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mstat-regression-gen1.webp",
+    "alt": "Blood pressure monitor showing a very high first reading with a lower repeat reading near average.",
+    "caption": "Extreme first reading falling toward average on repeat. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "tx": "**Immortal time bias** arises when follow-up before treatment starts is counted as exposed time, so treated patients appear to survive longer. **Lead-time bias** arises when earlier detection lengthens survival measured from diagnosis without delaying death. Analyse exposure as time-varying, and use mortality rather than survival from diagnosis to judge screening.",
    "say": "Immortal time bias arises when follow-up before treatment starts is counted as exposed time, so treated patients appear to survive longer. Lead-time bias arises when earlier detection lengthens survival measured from diagnosis without delaying death. Analyse exposure as time-varying, and use mortality rather than survival from diagnosis to judge screening.",
    "vis": {
