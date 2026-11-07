@@ -1,0 +1,204 @@
+{
+  "v": 1,
+  "id": "pcd-vsd-management",
+  "title": "Ventricular Septal Defect: Anatomy and Haemodynamics",
+  "module": "Acyanotic Congenital Heart Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Ventricular septal defects represent the commonest congenital cardiac malformation, with membranous defects constituting the vast majority.",
+      "tx": "The commonest anatomical variant is **perimembranous VSD**. Perimembranous VSD accounts for **70-80%** of all defects, located in the membranous septum adjacent to the septal leaflet of the tricuspid valve, where conduction tissue courses along its posteroinferior margin. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/congenital-heart-disease-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Congenital septal defects including membranous ventricular septal defect with left-to-right shunting. Illustration: StewardMD original.",
+        "alt": "Diagram of ventricular septal defect showing left-to-right shunt and ventricular anatomy."
+      }
+    },
+    {
+      "say": "Defects located within the muscular septum exhibit a remarkable propensity for spontaneous closure during early infancy as the myocardium hypertrophies.",
+      "tx": "Isolated myocardial openings represent **muscular VSD**. Muscular VSDs account for **5-20%** and have the highest spontaneous closure rate of up to **80%** during infancy, as muscular trabeculae hypertrophy and approximate the defect margins during early cardiac growth. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Perimembranous Defect (70-80%)",
+          "points": [
+            "Located in membranous septum adjacent to tricuspid septal leaflet",
+            "Bundle of His courses along posteroinferior margin of the defect",
+            "Spontaneous closure occurs via tricuspid pouch or aneurysm formation"
+          ]
+        },
+        "right": {
+          "title": "Muscular Defect (5-20%)",
+          "points": [
+            "Entirely surrounded by muscular trabeculae across the septum",
+            "High rate of spontaneous closure reaching up to 80% during infancy",
+            "Rarely compromises aortic valve competence or conduction bundles"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Subpulmonic or infundibular defects present a unique anatomic jeopardy to the aortic valve that demands prompt operative correction regardless of shunt magnitude.",
+      "tx": "Subpulmonic defects constitute **infundibular VSD**. Infundibular (subpulmonic / doubly committed) VSD carries a high risk of aortic regurgitation due to right coronary cusp prolapse, warranting early surgical closure regardless of shunt size to prevent irreversible structural damage to the aortic valve. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anatomical Vulnerability",
+          "points": [
+            "Defect located immediately below pulmonary and aortic valve annuli",
+            "Absence of intervening muscular tissue beneath the semilunar valves",
+            "Venturi effect creates high-velocity suction during systolic ejection"
+          ]
+        },
+        "right": {
+          "title": "Surgical Implications",
+          "points": [
+            "Right coronary cusp prolapses into defect causing aortic regurgitation",
+            "Aortic valve competence deteriorates even with minimal shunt volume",
+            "Mandatory prompt operative patch closure regardless of Qp:Qs ratio"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The classic auscultatory finding reflects high-velocity turbulent blood flow driven by the left-to-right systolic pressure gradient across the ventricular septum.",
+      "tx": "Physical examination characteristically detects a **pansystolic murmur**. A harsh holosystolic or pansystolic murmur is heard best at the lower left sternal border; smaller defects produce louder murmurs (**maladie de Roger**), reflecting high-velocity systolic jet turbulence across restrictive defects. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Defect Size",
+          "Murmur Characteristics",
+          "P2 Component of S2",
+          "Clinical Status"
+        ],
+        "rows": [
+          [
+            "Small (Roger)",
+            "Grade 4-5/6 harsh holosystolic, loud",
+            "Normal splitting and intensity",
+            "Asymptomatic, normal growth"
+          ],
+          [
+            "Moderate",
+            "Grade 3-4/6 holosystolic, apical diastolic rumble",
+            "Normal to mildly accentuated",
+            "Mild tachypnea, diaphoresis on feeds"
+          ],
+          [
+            "Large (Unrestrictive)",
+            "Grade 2-3/6 early systolic or decrescendo",
+            "Single, loud, accentuated P2",
+            "Severe failure to thrive, tachypnea"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Quantification of the shunt volume directs decision-making regarding medical decongestion versus transcatheter or operative closure.",
+      "tx": "Quantifying the **shunt fraction Qp:Qs** defines hemodynamic significance. A pulmonary to systemic flow ratio (Qp:Qs) exceeding **1.5** indicates a hemodynamically significant left-to-right shunt capable of inducing pulmonary overcirculation, left atrial and left ventricular dilation, and failure to thrive. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Large interventricular communications permit unrestrictive systolic shunting"
+          },
+          {
+            "id": "b",
+            "label": "Pulmonary to systemic blood flow ratio Qp:Qs exceeds critical threshold of 1.5"
+          },
+          {
+            "id": "c",
+            "label": "Massive pulmonary venous return causes left atrial and left ventricular chamber dilation"
+          },
+          {
+            "id": "d",
+            "label": "Congestive heart failure develops with pulmonary vascular endothelial remodeling"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Initial pharmacological management in symptomatic infants focuses on reducing volume overload and unloading the failing left ventricle.",
+      "tx": "Symptomatic infants require **medical anti-failure therapy**. Initial medical management of congestive heart failure in large VSD combines loop diuretics such as **furosemide 1-2 mg/kg/day** with an ACE inhibitor such as **captopril** to promote diuresis and reduce systemic afterload, thereby attenuating left-to-right shunting.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug Class",
+          "Representative Agent",
+          "Mechanism and Hemodynamic Goal"
+        ],
+        "rows": [
+          [
+            "Loop Diuretic",
+            "Furosemide (1-2 mg/kg/day)",
+            "Decreases pulmonary capillary hydrostatic pressure and interstitial edema"
+          ],
+          [
+            "ACE Inhibitor",
+            "Captopril (0.5-2 mg/kg/day)",
+            "Lowers systemic vascular resistance, decreasing left-to-right shunt volume"
+          ],
+          [
+            "Aldosterone Antagonist",
+            "Spironolactone",
+            "Potassium-sparing diuresis and prevention of myocardial remodeling"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prolonged exposure of the pulmonary bed to high systemic pressures induces irreversible vascular remodeling and the dreaded reversal of shunt flow.",
+      "tx": "Longstanding untreated defects culminate in **Eisenmenger syndrome onset**. Irreversible pulmonary vascular obstructive disease with shunt reversal from left-to-right to right-to-left usually develops after **12-24 months** of age in untreated large defects, causing progressive cyanosis, polycythemia, and absolute inoperability. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reversible High-Flow Phase (<12 Months)",
+          "points": [
+            "Elevated pulmonary blood flow with preserved pulmonary vascular reactivity",
+            "Low to moderate pulmonary vascular resistance (PVRI < 4 Wood units)",
+            "Complete hemodynamic normalization achieved following patch repair"
+          ]
+        },
+        "right": {
+          "title": "Eisenmenger Syndrome (>12-24 Months)",
+          "points": [
+            "Severe plexogenic arteriopathy and irreversible intimal fibrosis",
+            "Pulmonary vascular resistance exceeds systemic resistance (PVRI > 8 Wood units)",
+            "Reversal of shunt to right-to-left with cyanosis; surgical closure contraindicated"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Definitive surgical patch closure is timed to prevent irreversible pulmonary hypertension while ensuring optimal somatic growth and infant survival.",
+      "tx": "Meeting the **surgical indication in infants** avoids permanent vascular injury. Surgical patch closure is indicated before **6-12 months** of age in infants with failure to thrive, intractable heart failure, or pulmonary hypertension, achieving excellent complete repair with <1% procedural mortality. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-acyanotic-chd-gen1.webp",
+        "ar": 1.3393,
+        "caption": "Echocardiogram demonstrating left-to-right shunt flow across an interventricular defect with ventricular volume load. Illustration: StewardMD original.",
+        "alt": "Echocardiographic Doppler showing turbulent shunt flow through a ventricular septal defect."
+      }
+    }
+  ]
+}

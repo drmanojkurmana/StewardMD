@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "id": "pcd-neonatal-transition-failure",
+  "title": "Persistent Pulmonary Hypertension of the Newborn (PPHN)",
+  "module": "Neonatal Haemodynamics and Transition",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "At birth, lung expansion and alveolar oxygenation trigger a swift decline in pulmonary vascular resistance, which is disrupted in persistent pulmonary hypertension of the newborn.",
+      "tx": "Understanding **PPHN pathophysiology** is essential for neonatal intensive care. Persistent pulmonary hypertension of the newborn results from failure of normal postnatal drop in pulmonary vascular resistance, causing right-to-left extrapulmonary shunting across the patent ductus arteriosus and foramen ovale, precipitating refractory cyanosis. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/rad-cardiovascular-s4.webp",
+        "ar": 1.3333,
+        "caption": "Severe pulmonary arterial hypertension with marked central trunk dilatation and elevated vascular resistance. Illustration: StewardMD original.",
+        "alt": "Schematic demonstrating elevated pulmonary arterial pressures and peripheral pruning."
+      }
+    },
+    {
+      "say": "Clinicians confirm ductal-level right-to-left shunting by simultaneously comparing pre-ductal and post-ductal pulse oximetry or arterial blood gas tensions.",
+      "tx": "Establishing the **pre- and post-ductal saturation gradient** confirms clinical suspicion. A right radial (pre-ductal) to lower limb (post-ductal) arterial oxygen saturation difference greater than **10%** confirms ductal right-to-left shunting, documenting extrapulmonary diversion of deoxygenated blood into the descending thoracic aorta. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Measurement Site",
+          "Sampling Vessel",
+          "Physiological Significance in PPHN"
+        ],
+        "rows": [
+          [
+            "Pre-ductal",
+            "Right radial artery",
+            "Reflects blood perfusing the brain before ductal mixing"
+          ],
+          [
+            "Post-ductal",
+            "Lower extremity / Umbilical",
+            "Demonstrates deoxygenation from ductal right-to-left shunt"
+          ],
+          [
+            "Gradient >10%",
+            "Differential saturation",
+            "Diagnostic confirmation of ductal right-to-left extrapulmonary shunting"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Differentiating cyanotic structural congenital heart defects from parenchymal lung pathology or PPHN relies on the standardised hyperoxia challenge.",
+      "tx": "The **hyperoxia test** differentiates cardiac from pulmonary pathology. In the hyperoxia test with **100%** inspired oxygen, PaO2 remaining below **100 mmHg** suggests cyanotic congenital heart disease rather than parenchymal lung disease, necessitating emergent echocardiographic evaluation to rule out transposition or total anomalous connections.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Parenchymal Pulmonary Disease",
+          "points": [
+            "PaO2 typically rises above 150 mmHg on 100% inspired oxygen",
+            "Alveolar recruitment improves gas exchange across alveolar capillary barrier",
+            "Responsive to continuous positive airway pressure or surfactant replacement"
+          ]
+        },
+        "right": {
+          "title": "Cyanotic CHD or Severe PPHN",
+          "points": [
+            "PaO2 remains persistently below 100 mmHg despite 100% inspired oxygen",
+            "Extrapulmonary or intracardiac right-to-left shunting bypasses ventilated lungs",
+            "Mandates urgent bedside echocardiography to delineate structural defects"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Inhaled nitric oxide serves as the selective first-line pulmonary vasodilator by diffusing directly into vascular smooth muscle to activate soluble guanylyl cyclase.",
+      "tx": "Therapy with **inhaled nitric oxide** provides targeted selective relief. Inhaled nitric oxide at **20 ppm** is the specific first-line pulmonary vasodilator for term and late preterm neonates with refractory hypoxemia and **oxygenation index** exceeding **25**, relaxing pulmonary arterioles without compromising systemic arterial vascular resistance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Inhaled nitric oxide (20 ppm) delivered via mechanical ventilator circuit"
+          },
+          {
+            "id": "b",
+            "label": "Diffuses selectively across ventilated alveolar-capillary membranes into smooth muscle"
+          },
+          {
+            "id": "c",
+            "label": "Stimulates soluble guanylyl cyclase to produce cyclic GMP"
+          },
+          {
+            "id": "d",
+            "label": "Promotes selective pulmonary vasodilation without causing systemic arterial hypotension"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The oxygenation index quantitatively grades the severity of hypoxic respiratory failure and directs escalation to pulmonary vasodilators or mechanical circulatory support.",
+      "tx": "Calculating the **oxygenation index** guides therapeutic escalation in neonatal respiratory failure. Oxygenation index is calculated as Mean Airway Pressure multiplied by FiO2 multiplied by **100** divided by post-ductal PaO2. Values exceeding 25 mandate pulmonary vasodilators, while sustained elevations herald life-threatening refractory hypoxemia requiring urgent consideration of advanced rescue modalities.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Targeted Agent",
+          "Primary Mechanism of Action",
+          "Clinical Role in Neonates"
+        ],
+        "rows": [
+          [
+            "Inhaled Nitric Oxide",
+            "Selective cGMP stimulation via guanylyl cyclase",
+            "First-line therapy at 20 ppm for oxygenation index >25"
+          ],
+          [
+            "Sildenafil",
+            "Phosphodiesterase-5 (PDE-5) inhibitor",
+            "Augments and sustains cGMP-mediated pulmonary vasodilation"
+          ],
+          [
+            "Milrinone",
+            "Phosphodiesterase-3 (PDE-3) inhibitor",
+            "Inodilator improving RV contractility and lowering pulmonary afterload"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When inhaled nitric oxide is unavailable or produces an incomplete response, targeted inhibition of cyclic nucleotide breakdown provides vital adjuvant vasodilation.",
+      "tx": "Administering **sildenafil in neonates** provides vital adjuvant vasodilation in difficult-to-treat situations. Oral or intravenous **sildenafil** selectively inhibits phosphodiesterase-5 to augment cyclic GMP-mediated pulmonary vasodilation in PPHN, facilitating successful weaning from inhaled nitric oxide and preventing rebound pulmonary vasoconstriction in critically ill newborns managed in neonatal intensive care units.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sildenafil Mechanism",
+          "points": [
+            "Phosphodiesterase-5 (PDE-5) selective enzymatic inhibition",
+            "Prevents enzymatic breakdown of intracellular cyclic GMP",
+            "Sustains nitric oxide-mediated pulmonary vascular relaxation"
+          ]
+        },
+        "right": {
+          "title": "Clinical Application in PPHN",
+          "points": [
+            "Available in both oral and intravenous formulations for neonates",
+            "Facilitates weaning from inhaled nitric oxide therapy",
+            "Provides crucial first-line therapy when nitric oxide is unavailable"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Intravenous milrinone uniquely provides inotropic support to the overloaded right ventricle while simultaneously lowering pulmonary vascular resistance.",
+      "tx": "The inodilator **milrinone** addresses right ventricular strain and afterload elevation. Intravenous **milrinone** provides phosphodiesterase-3 inhibition to improve right ventricular function and reduce pulmonary arterial afterload, augmenting stroke volume and lusitropy while requiring adequate intravascular volume resuscitation to prevent systemic arterial hypotension during continuous infusions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Milrinone Hemodynamic Benefits",
+          "points": [
+            "Phosphodiesterase-3 inhibition augments myocardial cyclic AMP",
+            "Improves right ventricular contractility and diastolic lusitropy",
+            "Reduces pulmonary vascular impedance to alleviate ventricular strain"
+          ]
+        },
+        "right": {
+          "title": "Clinical Cautions & Requirements",
+          "points": [
+            "Causes systemic vasodilation that may precipitate arterial hypotension",
+            "Mandates adequate intravascular volume loading before initiation",
+            "Avoid rapid loading boluses in hemodynamically unstable neonates"
+          ]
+        }
+      }
+    },
+    {
+      "say": "When maximal medical pharmacotherapy and high-frequency ventilation fail to arrest progressive hypoxemic decompensation, extracorporeal life support offers a life-saving rescue.",
+      "tx": "Fulfilling neonatal **ECMO criteria** triggers mechanical circulatory rescue. Extracorporeal membrane oxygenation is indicated when **oxygenation index** exceeds **40** despite maximal medical therapy including inhaled nitric oxide, high-frequency oscillatory ventilation, and inotropes, achieving survival rates above 70-80% in reversible pulmonary vascular disease. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-arterial-hypertension-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Severe pulmonary arterial hypertension with right heart strain and elevated vascular resistance. Illustration: StewardMD original.",
+        "alt": "Hemodynamic tracing and cardiac representation of severe pulmonary hypertension."
+      }
+    }
+  ]
+}
