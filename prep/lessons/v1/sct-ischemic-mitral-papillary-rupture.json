@@ -1,0 +1,280 @@
+{
+  "v": 1,
+  "module": "sct-ischemic-mitral-papillary-rupture",
+  "title": "Ischemic mitral regurgitation, papillary muscle rupture and surgical repair",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Complications of Myocardial Infarction)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 13 (Ischemic Mitral Regurgitation)",
+    "ACC/AHA Guidelines for the Management of Patients With Valvular Heart Disease"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Acute papillary muscle rupture is a catastrophic mechanical complication of myocardial infarction. It typically occurs two to seven days after acute injury. Sudden transection of the muscular head leads to massive flail leaflet regurgitation, precipitating fulminant pulmonary edema and cardiogenic shock.",
+      "tx": "Acute **papillary muscle rupture** represents a life-threatening mechanical disaster occurring 2 to 7 days after transmural infarction. Rupture precipitates acute severe **mitral regurgitation**, torrential left atrial volume overload, and immediate **cardiogenic shock** accompanied by refractory pulmonary edema and rapid cardiovascular collapse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute transmural myocardial infarction"
+          },
+          {
+            "id": "b",
+            "label": "Coagulative necrosis weakens papillary muscle base"
+          },
+          {
+            "id": "c",
+            "label": "Complete or partial papillary muscle rupture"
+          },
+          {
+            "id": "d",
+            "label": "Massive flail mitral leaflet and acute cardiogenic shock"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Anatomy explains why papillary muscles rupture with unequal frequency. The posteromedial papillary muscle receives a solitary blood supply from either the posterior descending artery or circumflex branch. In contrast, the anterolateral papillary muscle receives a robust dual blood supply from both anterior descending and diagonal systems.",
+      "tx": "The **posteromedial papillary muscle** ruptures six to twelve times more frequently than its counterpart due to a solitary blood supply from the **posterior descending artery**. Conversely, the anterolateral head resists ischemia because of a **dual blood supply** from both the left anterior descending and circumflex systems.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Posteromedial Papillary Muscle",
+          "points": [
+            "Solitary blood supply via posterior descending artery",
+            "Vulnerable to inferior or posterior infarction",
+            "Accounts for over 85 percent of clinical ruptures"
+          ]
+        },
+        "right": {
+          "title": "Anterolateral Papillary Muscle",
+          "points": [
+            "Dual blood supply from LAD and diagonal branches",
+            "Substantial collateral perfusion protects muscle architecture",
+            "Rarely undergoes complete ischemic transection"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Transthoracic and transesophageal echocardiography confirm the diagnosis at the bedside. Imaging reveals a flail leaflet prolapsing into the left atrium with an attached mobile muscular head. Color flow Doppler demonstrates an eccentric regurgitant jet entering a non-compliant left atrium with tall venous waves.",
+      "tx": "Bedside **transesophageal echocardiography** provides definitive anatomical diagnosis by demonstrating a **flail leaflet** with an attached mobile, hyperdynamic papillary muscle head. Color Doppler identifies an eccentric, torrential regurgitant jet with giant left atrial **systolic v waves** on hemodynamic pulmonary capillary wedge pressure tracings.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Echocardiographic Finding",
+          "Diagnostic Sign",
+          "Hemodynamic Significance"
+        ],
+        "rows": [
+          [
+            "Leaflet coaptation",
+            "Flail posterior or anterior leaflet",
+            "Complete loss of mechanical coaptation surface"
+          ],
+          [
+            "Papillary head mobility",
+            "Mobile muscular mass prolapsing into LA",
+            "Confirms structural muscular transection"
+          ],
+          [
+            "Pulmonary venous flow",
+            "Systolic flow reversal into pulmonary veins",
+            "Validates acute severe left atrial hypertension"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Preoperative medical stabilization provides precious time before emergency surgery. Clinicians place an intra-aortic balloon pump to reduce left ventricular afterload and augment coronary perfusion. Vasodilators and inotropes reduce mitral regurgitant fraction while avoiding hypotension.",
+      "tx": "Emergency stabilization requires immediate placement of an **intra-aortic balloon pump** to accomplish **afterload reduction** and enhance diastolic coronary perfusion. Judicious administration of **intravenous nitroprusside** lowers systemic resistance and reduces regurgitant volume before urgent transfer to the cardiac operating room for surgical repair.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify acute papillary rupture on echocardiogram"
+          },
+          {
+            "id": "b",
+            "label": "Emergent bedside intra-aortic balloon pump insertion"
+          },
+          {
+            "id": "c",
+            "label": "Inotropic and vasodilator stabilization in ICU"
+          },
+          {
+            "id": "d",
+            "label": "Immediate transfer to operating room for emergency surgery"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In the setting of acute necrosis, valve replacement is generally safer than repair. Surgeons perform urgent mitral valve replacement with chordal preservation to maintain ventricular geometry. The friable necrotic papillary muscle bed holds sutures poorly, making complex reconstruction prone to early dehiscence.",
+      "tx": "For complete rupture in necrotic myocardium, emergency **mitral valve replacement** is the standard procedure. Surgeons prioritize **subvalvular preservation** of the posterior chordal apparatus to maintain left ventricular geometry, avoiding prolonged complex repair attempts in friable **necrotic myocardium** that hold sutures poorly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Emergency Valve Replacement",
+          "points": [
+            "Predictable, rapid technical execution in unstable shock",
+            "Preserves posterior subvalvular chordal attachments",
+            "Eliminates risk of suture tear-out in necrotic muscle"
+          ]
+        },
+        "right": {
+          "title": "Complex Leaflet Repair",
+          "points": [
+            "Technically demanding in friable ischemic tissue",
+            "Prolonged myocardial ischemic cross-clamp time",
+            "Higher incidence of acute recurrent regurgitation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Chronic ischemic mitral regurgitation is a disease of the left ventricle rather than primary valve leaflets. Progressive ventricular remodeling displaces papillary muscles outward and downward. This displacement exerts chordal tethering on structurally normal leaflets, producing Carpentier type three b systolic restriction.",
+      "tx": "Unlike acute rupture, **chronic ischemic mitral regurgitation** stems from adverse left ventricular remodeling. Apical and lateral displacement of the papillary muscles induces severe **chordal tethering** on structurally normal leaflets, creating asymmetric tenting and characteristic **Carpentier type IIIb** systolic restriction with coaptation failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Carpentier Class",
+          "Leaflet Motion Pattern",
+          "Common Clinical Etiology"
+        ],
+        "rows": [
+          [
+            "Type I",
+            "Normal leaflet motion",
+            "Annular dilatation or leaflet perforation"
+          ],
+          [
+            "Type II",
+            "Excessive leaflet motion (prolapse)",
+            "Papillary rupture, chordal elongation or rupture"
+          ],
+          [
+            "Type IIIa",
+            "Restricted motion in systole and diastole",
+            "Rheumatic fibrosis, commissural fusion"
+          ],
+          [
+            "Type IIIb",
+            "Restricted motion in systole only",
+            "Ischemic ventricular tethering, dilated cardiomyopathy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgical correction of chronic ischemic regurgitation requires an undersized complete rigid annuloplasty ring. Undersizing brings the anterior and posterior leaflets into apposition, compensating for deep ventricular tenting. Concomitant coronary artery bypass revascularizes viable ischemic myocardium to promote reverse remodeling.",
+      "tx": "Surgical management of chronic ischemic regurgitation involves a **restrictive annuloplasty** using a complete rigid ring downsized by two sizes. Concomitant **coronary artery bypass grafting** restores blood flow to hibernating myocardium, promoting **reverse ventricular remodeling** and preventing recurrent late regurgitation across long-term follow-up.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify ischemic tethering and annular dilation"
+          },
+          {
+            "id": "b",
+            "label": "Select complete rigid undersized annuloplasty ring"
+          },
+          {
+            "id": "c",
+            "label": "Implant ring to restore adequate leaflet coaptation"
+          },
+          {
+            "id": "d",
+            "label": "Perform CABG to revascularize ischemic myocardial beds"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Severe leaflet tethering limits the durability of annuloplasty alone. When the tenting height exceeds one centimeter or the tenting area exceeds two point five square centimeters, annuloplasty carries a high rate of recurrence. In these patients, chordal-sparing mitral valve replacement provides superior freedom from heart failure.",
+      "tx": "When preoperative echocardiography reveals severe tethering with **tenting height** exceeding 10 mm or tenting area over 2.5 cm2, repair durability declines. In such cases, chordal-sparing **mitral valve replacement** delivers superior freedom from **recurrent regurgitation** compared to annuloplasty alone, ensuring durable hemodynamic recovery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Echocardiographic Marker",
+          "Severe Cutoff",
+          "Surgical Implication"
+        ],
+        "rows": [
+          [
+            "Tenting height (coaptation distance)",
+            "> 10 mm (1.0 cm)",
+            "High annuloplasty failure risk; consider MVR"
+          ],
+          [
+            "Systolic tenting area",
+            "> 2.5 cm2",
+            "Marked papillary displacement favoring replacement"
+          ],
+          [
+            "Posterior leaflet angle",
+            "> 45 degrees",
+            "Severe asymmetric tethering; needs subvalvular repair"
+          ]
+        ]
+      }
+    }
+  ]
+}

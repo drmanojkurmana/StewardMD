@@ -1,0 +1,275 @@
+{
+  "v": 1,
+  "module": "sct-cpb-principles-cannulation",
+  "title": "Cardiopulmonary bypass principles and cannulation techniques",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Extracorporeal Circulation and Cardiopulmonary Bypass)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 2 (Cardiopulmonary Bypass)",
+    "STS/SCA Practice Guidelines on Cardiopulmonary Bypass"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Extracorporeal circulation temporarily takes over cardiopulmonary function during open heart procedures. Systemic deoxygenated blood drains into an artificial oxygenator through venous cannulas. A mechanical arterial pump reinfuses freshly oxygenated blood into the aorta under physiological pressure.",
+      "tx": "Cardiopulmonary bypass diverts deoxygenated venous return from the right atrium or venae cavae into an artificial **membrane oxygenator** for gas exchange. A calibrated mechanical pump continuously returns fully saturated blood into the **ascending aorta**, sustaining systemic arterial perfusion while the heart is arrested.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Venous drainage via right atrium or cavae"
+          },
+          {
+            "id": "b",
+            "label": "Cardiotomy reservoir and gas exchange in oxygenator"
+          },
+          {
+            "id": "c",
+            "label": "Mechanical pump generation of arterial head"
+          },
+          {
+            "id": "d",
+            "label": "Arterial reinfusion into distal ascending aorta"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Safe initiation of bypass requires robust systemic anticoagulation. Clinicians administer intravenous unfractionated heparin before cannulation to prevent catastrophic thrombotic occlusion across artificial surfaces. Surgical teams verify an activated clotting time exceeding four hundred and eighty seconds before running the pump.",
+      "tx": "Systemic anticoagulation requires **unfractionated heparin** administered at an initial loading dose of 300 to 400 units per kilogram. Surgeons confirm that the **activated clotting time** exceeds 480 seconds before opening venous lines, ensuring complete platelet and thrombin inhibition during extracorporeal contact.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Target Value",
+          "Clinical Objective"
+        ],
+        "rows": [
+          [
+            "Initial heparin loading dose",
+            "300 to 400 units/kg",
+            "Rapid systemic anticoagulation"
+          ],
+          [
+            "Baseline ACT threshold",
+            "100 to 140 seconds",
+            "Pre-heparin reference value"
+          ],
+          [
+            "Target bypass ACT",
+            "> 480 seconds",
+            "Safe initiation of extracorporeal circuit"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Once the cardiac repair finishes and the patient separates from bypass, heparin reversal restores hemostasis. The team slowly infuses protamine sulfate based on initial heparin units. Protamine binds negatively charged heparin molecules into an inert salt, returning clotting times to baseline.",
+      "tx": "Following decannulation from bypass, **protamine sulfate** rapidly neutralizes circulating heparin at a standard ratio of 1 to 1.3 mg per 100 units of administered heparin. The anesthesiologist titrates this slow infusion to return the **activated clotting time** to baseline while watching for pulmonary vasoconstriction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Heparin Anticoagulation",
+          "points": [
+            "Potentiates antithrombin III activity",
+            "Targets ACT exceeding 480 seconds",
+            "Prevents clotting on plastic circuit tubing"
+          ]
+        },
+        "right": {
+          "title": "Protamine Reversal",
+          "points": [
+            "Forms stable inactive salt complex",
+            "Dosed at 1 to 1.3 mg per 100 heparin units",
+            "Restores native coagulation parameters"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Specific clinical scenarios prevent conventional heparin administration. In patients with active heparin-induced thrombocytopenia, bivalirudin serves as a direct thrombin inhibitor during bypass. Patients who have true antithrombin deficiency require fresh frozen plasma or antithrombin concentrate to restore heparin sensitivity.",
+      "tx": "Patients diagnosed with **heparin-induced thrombocytopenia** require specialized non-heparin anticoagulation during urgent bypass procedures, making **bivalirudin** the preferred direct thrombin inhibitor. Conversely, individuals exhibiting severe heparin resistance due to inherited or acquired **antithrombin III deficiency** receive donor fresh frozen plasma or purified antithrombin concentrate before cannulation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Coagulation Challenge",
+          "Underlying Mechanism",
+          "Management Strategy"
+        ],
+        "rows": [
+          [
+            "Heparin-induced thrombocytopenia",
+            "PF4 autoantibodies activate platelets",
+            "Direct thrombin inhibitor bivalirudin"
+          ],
+          [
+            "Antithrombin III deficiency",
+            "Inadequate cofactor for heparin action",
+            "Infusion of FFP or antithrombin concentrate"
+          ],
+          [
+            "Protamine allergy risk",
+            "Fish hypersensitivity or NPH insulin exposure",
+            "Slow titration and antihistamine prophylaxis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Arterial cannulation delivers oxygenated blood directly into the patient arterial tree. Surgeons insert the primary arterial cannula into the distal ascending aorta just proximal to the innominate takeoff. In cases of extensive aortic pathology, the right axillary or common femoral artery provides reliable peripheral inflow.",
+      "tx": "Primary **arterial cannulation** enters the distal **ascending aorta** immediately proximal to the innominate takeoff, avoiding atherosclerotic plaques and fragile calcified tissue. When ascending aortic dissection or extensive circumferential calcification precludes central access, surgical teams select peripheral cannulation through the right **axillary artery** or the common femoral vessel.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Central Aortic Cannulation",
+          "points": [
+            "Distal ascending aorta insertion site",
+            "Antegrade flow mimics physiological hemodynamics",
+            "Avoids peripheral vascular injury or groin cutdown"
+          ]
+        },
+        "right": {
+          "title": "Peripheral Cannulation",
+          "points": [
+            "Axillary or femoral artery cannulation site",
+            "Essential for acute dissection and reoperations",
+            "Carries potential risks of retrograde malperfusion"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Venous drainage depends on the planned intracardiac exposure. Routine coronary bypass uses a single two-stage venous cannula positioned through the right atrial appendage into the inferior vena cava. Operations requiring open right heart chambers necessitate bicaval cannulation with snug caval tourniquets.",
+      "tx": "Coronary revascularization utilizes a **two-stage cannula** placed through the right atrium into the inferior vena cava. Conversely, procedures requiring right atrium or septum opening demand **bicaval cannulation** with **caval snaring** to prevent air aspiration and eliminate venous return into the operative field.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify surgical field requirements"
+          },
+          {
+            "id": "b",
+            "label": "Coronary bypass without open chambers: two-stage cannula"
+          },
+          {
+            "id": "c",
+            "label": "Tricuspid or transseptal exposure: individual bicaval cannulae"
+          },
+          {
+            "id": "d",
+            "label": "Caval snaring to achieve bloodless intracardiac field"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Left heart decompression prevents dangerous cavity overdistention during aortic cross-clamping. Surgeons place a vent cannula into the left ventricle through the right superior pulmonary vein. Decompression protects the myocardium against elevated wall stress, subendocardial ischemia, and pulmonary capillary congestion.",
+      "tx": "Inserting a dedicated **left ventricular vent** through the **right superior pulmonary vein** provides continuous left heart cavity decompression. By actively venting bronchial collateral venous return and subtle aortic regurgitation, this maneuver eliminates ventricular distention, halts progressive **subendocardial ischemia**, and prevents retrograde pulmonary venous hypertension throughout the cross-clamp period.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Aortic cross-clamp isolates coronary bed"
+          },
+          {
+            "id": "b",
+            "label": "Accumulation of bronchial and Thebesian venous return"
+          },
+          {
+            "id": "c",
+            "label": "Active aspiration via right superior pulmonary vein vent"
+          },
+          {
+            "id": "d",
+            "label": "Prevention of left ventricular wall stretch and ischemia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Maintaining systemic hemodynamics preserves end-organ function while on cardiopulmonary bypass. Perfusionists target a cardiac index between two point two and two point four liters per minute per square meter under mild hypothermia. Mean arterial pressure is maintained between fifty and eighty millimeters of mercury.",
+      "tx": "Systemic perfusion during bypass maintains a target **cardiac index** of 2.2 to 2.4 L/min/m2 alongside a **mean arterial pressure** of 50 to 80 mmHg. This controlled flow rate guarantees adequate **systemic perfusion**, shielding cerebral, renal, and splanchnic microvascular beds from hypoperfusion injury.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Perfusion Variable",
+          "Target Operating Range",
+          "Physiological Rationale"
+        ],
+        "rows": [
+          [
+            "Pump flow cardiac index",
+            "2.2 to 2.4 L/min/m2",
+            "Guarantees adequate global tissue oxygen delivery"
+          ],
+          [
+            "Mean arterial pressure",
+            "50 to 80 mmHg",
+            "Preserves cerebral and renal autoregulatory thresholds"
+          ],
+          [
+            "Systemic venous saturation",
+            "> 70 percent",
+            "Confirms global balance of oxygen supply and uptake"
+          ]
+        ]
+      }
+    }
+  ]
+}
