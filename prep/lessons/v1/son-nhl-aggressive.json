@@ -3,7 +3,7 @@
  "module": "son-nhl-aggressive",
  "subject": "ss-medical-oncology",
  "title": "Aggressive B cell lymphomas",
- "minutes": 9,
+ "minutes": 10,
  "steps": [
   {
    "tx": "**Diffuse large B-cell** lymphoma DLBCL is the most common non-Hodgkin lymphoma, divided by cell of origin into germinal centre B-cell-like GCB and activated B-cell-like ABC phenotypes. The Hans immunohistochemistry algorithm classifies cases using CD10, BCL6, and MUM1 expression. ABC or non-GCB subtype demonstrates constitutive NF-kappa-B pathway activation and historically poorer outcomes with standard anthracycline-based chemoimmunotherapy.",
@@ -45,6 +45,17 @@
       "NF-kB dependent, Pola-R-CHP benefit"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The panel pairs brown **CD10**, **BCL6**, and MUM1 stains with a stepwise flowchart that sorts **diffuse large B cell lymphoma** into germinal centre or activated B cell origin. Reading CD10 first, then BCL6, then MUM1 assigns prognosis and therapy, since activated biology leans on a distinct growth pathway and fares worse with standard chemoimmunotherapy.",
+   "say": "The left side shows three stains lighting up different lymphoma proteins in brown, while the right side arranges them into the Hans decision tree. A positive CD10 points to germinal centre origin, while negative results move to BCL6 and then MUM1 to separate germinal centre from activated disease. The lesson uses this split because cell of origin predicts outcome and shapes front line choices.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/son-nhl-aggressive-gen2.webp",
+    "alt": "Lymphoma stains for three markers sit beside a flowchart sorting diffuse large B cell lymphoma by cell of origin.",
+    "caption": "Stains and flowchart assign lymphoma cell of origin, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

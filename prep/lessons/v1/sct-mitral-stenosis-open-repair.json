@@ -1,0 +1,280 @@
+{
+  "v": 1,
+  "module": "sct-mitral-stenosis-open-repair",
+  "title": "Mitral stenosis: Wilkins echo score, closed vs open commissurotomy and MVR",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 112 (Rheumatic Mitral Stenosis)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 11 (Mitral Valve Disease)",
+    "2020 ACC/AHA Guidelines for the Management of Patients With Valvular Heart Disease"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Rheumatic carditis is the overwhelmingly predominant etiology of mitral stenosis. Repeated immune-mediated inflammatory attacks cause fibrous leaflet thickening and fusion of the commissures. Shortening and fusion of chordae tendineae create a rigid, funnel-shaped stenotic orifice.",
+      "tx": "**Rheumatic heart disease** remains the leading cause of mitral stenosis. Chronic post-streptococcal valvulitis triggers progressive **commissural fusion**, marked leaflet thickening, and chordal cicatrization, transforming the pliable bicuspid valve into an immobile, stenotic **fish-mouth orifice** with marked diastolic inflow restriction. These chronic inflammatory alterations progressively contract the mitral valve apparatus, generating severe transmitral diastolic pressure gradients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rheumatic Mitral Stenosis",
+          "points": [
+            "Fusion of anterolateral and posteromedial commissures",
+            "Severe thickening and fusion of subvalvular chordae",
+            "Immobility produces classic fish-mouth or funnel valve"
+          ]
+        },
+        "right": {
+          "title": "Degenerative Mitral Stenosis",
+          "points": [
+            "Severe calcification of the posterior mitral annulus",
+            "Leaflet tips remain thin without commissural fusion",
+            "Common in elderly patients with chronic kidney disease"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Echocardiographic morphology determines whether a patient can undergo percutaneous balloon dilation. The Wilkins echocardiographic score evaluates leaflet mobility, thickening, calcification, and subvalvular thickening on a scale up to sixteen. A score of eight or lower indicates excellent balloon commissurotomy outcomes.",
+      "tx": "The **Wilkins echocardiographic score** grades mitral morphology across four anatomical components: leaflet mobility, thickening, calcification, and subvalvular disease, scoring up to 16 points. A **Wilkins score <= 8** confirms favorable pliability, predicting successful **percutaneous balloon commissurotomy** with low procedural complication rates.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Wilkins Component",
+          "Grade 1 (Favorable)",
+          "Grade 4 (Unfavorable)"
+        ],
+        "rows": [
+          [
+            "Leaflet mobility",
+            "Highly mobile, restriction only at leaflet tips",
+            "No or minimal forward leaflet motion in diastole"
+          ],
+          [
+            "Valvular thickening",
+            "Near normal leaflet thickness (4 to 5 mm)",
+            "Marked thickening of entire leaflet (> 8 to 10 mm)"
+          ],
+          [
+            "Subvalvular thickening",
+            "Minimal thickening just beneath leaflet margin",
+            "Extensive chordal shortening down to papillary heads"
+          ],
+          [
+            "Valvular calcification",
+            "Single isolated bright echo focus",
+            "Extensive bright calcification throughout leaflets"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Certain clinical features directly prevent catheter balloon commissurotomy. Moderate or severe mitral regurgitation worsens drastically if commissures are split by a balloon. The presence of a left atrial thrombus also precludes percutaneous intervention due to the high risk of embolic stroke.",
+      "tx": "Percutaneous balloon mitral commissurotomy is strictly contraindicated when transesophageal echocardiography reveals an active **left atrial thrombus** or concomitant moderate-to-severe **mitral regurgitation**. In these settings, balloon inflation risks catastrophic systemic **cerebral embolization** or acute catastrophic valve destruction requiring salvage surgery. Performing emergency surgical commissurotomy or valve replacement completely avoids these devastating embolic and hemodynamic catheter complications.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Candidate for mitral commissurotomy"
+          },
+          {
+            "id": "b",
+            "label": "Perform transesophageal echocardiography"
+          },
+          {
+            "id": "c",
+            "label": "Presence of LA thrombus or MR > Grade 2"
+          },
+          {
+            "id": "d",
+            "label": "Mandate open surgical intervention on bypass"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Open mitral commissurotomy under cardiopulmonary bypass allows direct visual reconstruction. The surgeon incises fused commissures under direct vision out to the fibrous annulus. Debriding calcium, opening fused chordae, and removing left atrial appendage thrombus restore pliable leaflet motion.",
+      "tx": "**Open mitral commissurotomy** performed under cardiopulmonary bypass enables direct sharp incisional release of fused commissures. The surgeon performs precise **chordal fenestration**, unroofs fused secondary cords, meticulously debrides valvular calcium, and clears any organized **atrial appendage thrombus** under clear operative visualization.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Arrest heart on bypass and open left atrium"
+          },
+          {
+            "id": "b",
+            "label": "Direct sharp incisional split of fused commissures"
+          },
+          {
+            "id": "c",
+            "label": "Chordal fenestration and subvalvular papillary split"
+          },
+          {
+            "id": "d",
+            "label": "Cavity de-airing and left atrial appendage obliteration"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Severely calcified and rigid valves require valve replacement rather than repair. An immobile Wilkins score above eleven or extensive subvalvular fusion prevents durable commissurotomy. Mitral valve replacement completely excises the diseased tissue, restoring an unobstructed orifice.",
+      "tx": "When severe subvalvular fusion and heavy calcification produce an unfavorable Wilkins score exceeding 11, commissurotomy fails. In this scenario, **mitral valve replacement** is mandatory, successfully eliminating **valvular calcification**, establishing a wide orifice area, and preventing early **postoperative restenosis**. Complete mechanical relief of calcific obstruction restores forward cardiac output and immediately unloads the hypertensive pulmonary circulation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Open Commissurotomy",
+          "points": [
+            "Indicated for Wilkins score <= 8 to 10",
+            "Sharp incision of commissures and chordae",
+            "Avoids lifelong anticoagulation if sinus rhythm"
+          ]
+        },
+        "right": {
+          "title": "Valve Replacement (MVR)",
+          "points": [
+            "Mandatory for rigid, heavily calcified valves",
+            "Indicated when subvalvular fusion is severe",
+            "Requires prosthetic valve selection and management"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Preserving chordal attachments during valve replacement maintains left ventricular geometry. The surgeon retains posterior chordopapillary continuity, securing the leaflet into the prosthetic sewing ring. Preserving the continuity between annulus and papillary muscle prevents posterior wall rupture and improves systolic performance.",
+      "tx": "During mitral valve replacement, meticulous **chordopapillary preservation** of the posterior leaflet apparatus maintains left ventricular geometry. Retaining annuloventricular continuity prevents fatal **posterior wall rupture** (blowout) and significantly improves long-term postoperative left ventricular **systolic performance**, preserving chamber ejection fraction across extended follow-up.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Excision of diseased anterior mitral leaflet"
+          },
+          {
+            "id": "b",
+            "label": "Retention of intact posterior leaflet and subvalvular chordae"
+          },
+          {
+            "id": "c",
+            "label": "Placement of pledgeted annular sutures through retained leaflet"
+          },
+          {
+            "id": "d",
+            "label": "Seating prosthesis preserving annuloventricular continuity"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The left atrial appendage is the source of over ninety percent of left atrial thrombi in mitral stenosis. Surgeons systematically exclude or excise the appendage during open surgery. Surgical occlusion with an external clip or internal suturing provides lasting protection against stroke.",
+      "tx": "Because atrial fibrillation and stasis in mitral stenosis promote thromboembolism, **left atrial appendage occlusion** is routinely performed during surgery. Complete **epicardial clip exclusion** or endocardial suture closure eliminates the primary source of thromboemboli, lowering late **thromboembolic stroke** risk in high-risk patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Occlusion Technique",
+          "Mechanism of Exclusion",
+          "Key Procedural Benefit"
+        ],
+        "rows": [
+          [
+            "Epicardial clip exclusion",
+            "External nitinol clip across appendage base",
+            "Guarantees complete electrical and mechanical closure"
+          ],
+          [
+            "Internal running suture",
+            "Double-layer continuous polypropylene closure",
+            "Performed directly from within open left atrium"
+          ],
+          [
+            "Surgical stapler excision",
+            "Endosurgical stapler transection with knife",
+            "Complete physical removal of trabeculated tissue"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Severe longstanding mitral stenosis causes severe reactive pulmonary hypertension. Longstanding left atrial pressure elevation induces pulmonary arteriolar remodeling. Following successful surgery, pulmonary pressures drop substantially, but patients require close postoperative monitoring for right ventricular strain.",
+      "tx": "Chronic left atrial hypertension in mitral stenosis triggers reactive precapillary vasoconstriction and remodeling, causing **pulmonary hypertension**. Successful surgical relief of mitral obstruction leads to significant **postoperative pressure reduction**, promoting favorable **right ventricular remodeling** and sustained functional class improvement. Monitoring pulmonary hemodynamics post-bypass guides inotropic support and targeted pulmonary vasodilator therapy during early intensive care recovery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hemodynamic Variable",
+          "Preoperative State",
+          "Postoperative Trajectory"
+        ],
+        "rows": [
+          [
+            "Mean pulmonary artery pressure",
+            "Often > 50 to 60 mmHg",
+            "Drops acutely, gradual normalization over months"
+          ],
+          [
+            "Pulmonary vascular resistance",
+            "Significantly elevated (> 4 to 6 WU)",
+            "Refractory component regresses as remodeling reverses"
+          ],
+          [
+            "Right ventricular function",
+            "Dilated, tricuspid regurgitation",
+            "Reverse remodeling improves ejection fraction"
+          ]
+        ]
+      }
+    }
+  ]
+}
