@@ -6,64 +6,30 @@
   "minutes": 12,
   "steps": [
     {
-      "tx": "**Chemotherapy-induced neutropenia** (a low count of **neutrophils**, the white blood cells that fight bacteria, caused by treatment) is mainly a failure of production. Most cytotoxic drugs act on rapidly dividing cells, so they reduce the supply of new cells from the blood-forming tissue. They also damage dividing neutrophil precursors, which die by **apoptosis** (programmed cell death). Agents that hit early progenitors, such as nitrosoureas and mitomycin C, cause later, prolonged and cumulative neutropenia.",
-      "say": "Chemotherapy-induced neutropenia is a low neutrophil count caused by treatment. Neutrophils are the white blood cells that fight bacteria. Mainly, it is a failure of production. Most cytotoxic drugs act on rapidly dividing cells, so they reduce the supply of new cells from the blood-forming tissue. They also damage dividing neutrophil precursors, which die through apoptosis, a programmed form of cell death. Agents that hit early progenitors, such as nitrosoureas and mitomycin C, cause later, prolonged and cumulative neutropenia.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Cytotoxic drug given"
-          },
-          {
-            "id": "b",
-            "label": "Rapidly dividing progenitor cells slowed or killed"
-          },
-          {
-            "id": "c",
-            "label": "Fewer new neutrophils released"
-          },
-          {
-            "id": "d",
-            "label": "Neutrophil count falls"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "acts on dividing cells"
-          ],
-          [
-            "b",
-            "c",
-            "less output"
-          ],
-          [
-            "c",
-            "d",
-            "count drops"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Neutrophil kinetics** (the rate at which these cells are made and lost) sets the course of neutropenia. Mature neutrophils survive about 12 hours in blood and about 3 days in tissue. A reserve of mature granulocytes (white cells with granules) in the blood-forming tissue lasts about 7 days. Progenitors need 10 to 14 days to mature, so the **nadir** (lowest point of the count) falls near day 10 and recovery completes by day 21.",
-      "say": "Neutrophil kinetics, meaning how quickly these cells are made and lost, sets the course of neutropenia. Mature neutrophils have a working life of roughly 12 hours in blood and about 3 days in tissue. A reserve of mature granulocytes can last about 7 days. Progenitor cells need 10 to 14 days to mature, so the count usually bottoms out near day 10. Recovery is complete by day 21.",
+      "tx": "**Neutrophil kinetics** (the rate at which these cells are made and lost) sets the course of neutropenia (a low neutrophil count). Mature neutrophils survive about 12 hours in blood and about 3 days in tissue. A reserve of mature granulocytes (white cells with granules) in the blood-forming tissue lasts about 7 days. Progenitors need 10 to 14 days to mature, so the **nadir** (lowest point of the count) falls near day 10 and recovery completes by day 21. **Chemotherapy-induced neutropenia** is mainly a failure of production.",
+      "say": "Neutrophils are white blood cells that fight bacteria. Neutrophil kinetics sets the course of neutropenia. Mature neutrophils have a working life of about 12 hours in blood and about 3 days in tissue. A reserve of mature granulocytes can last about 7 days. Progenitors need 10 to 14 days to mature, so the count bottoms out near day 10. Recovery is complete by day 21. Chemotherapy-induced neutropenia is mainly a failure of production. Most cytotoxic drugs act on rapidly dividing cells, cutting new supply from the blood-forming tissue. They also damage dividing neutrophil precursors, which die by apoptosis, or programmed cell death. Agents that hit early progenitors, such as nitrosoureas and mitomycin C, cause later, prolonged and cumulative neutropenia.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Stage",
-          "Typical timing"
+          "Stage or cause",
+          "Typical timing or effect"
         ],
         "rows": [
           [
-            "Mature neutrophil survival in blood",
-            "About 12 hours"
+            "Main cause",
+            "Failure of production, because most cytotoxic drugs act on rapidly dividing cells"
           ],
           [
-            "Mature neutrophil survival in tissue",
-            "About 3 days"
+            "Dividing neutrophil precursors",
+            "Die by apoptosis (programmed cell death)"
+          ],
+          [
+            "Nitrosoureas and mitomycin C",
+            "Later, prolonged and cumulative neutropenia"
+          ],
+          [
+            "Mature neutrophil survival",
+            "About 12 hours in blood, about 3 days in tissue"
           ],
           [
             "Reserve of mature granulocytes",
@@ -251,49 +217,42 @@
       }
     },
     {
-      "tx": "The **galactomannan** test, most useful on bronchoalveolar lavage (BAL) fluid (a sample washed from the lungs), helps diagnose aspergillosis. False negatives are common in patients on antifungal prophylaxis (preventive drugs). False positives can occur with other fungal infections, and piperacillin-tazobactam has been linked to false positives in patients with blood cancers.",
-      "say": "Galactomannan is a fungal marker, and it works best on lavage fluid taken from the lungs when aspergillosis is suspected. Results can be falsely negative in patients taking preventive antifungal drugs. Other fungal infections can give false positives. Piperacillin-tazobactam has also been linked to false positives in patients with blood cancers.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Galactomannan",
-          "points": [
-            "Most useful on lavage fluid for aspergillosis",
-            "False negatives common with antifungal prophylaxis",
-            "False positives can occur with other fungal infections",
-            "False positives linked to piperacillin-tazobactam"
-          ]
-        },
-        "right": {
-          "title": "Reading a result",
-          "points": [
-            "A positive result needs other evidence",
-            "A negative result on prophylaxis does not exclude aspergillosis"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The **beta-D-glucan** (BDG) test has a high negative predictive value for invasive candidiasis, meaning a negative result makes that infection unlikely, yet it lacks specificity. Mucormycosis gives negative biomarker results, so these tests cannot be used to diagnose it. Diagnosis of mucormycosis therefore rests on tissue histology showing ribbon-like hyphae, together with culture.",
-      "say": "The beta-D-glucan test has a high negative predictive value for invasive candidiasis. A negative result makes that infection unlikely. However, the test lacks specificity, so a positive result does not pin down the organism. Biomarkers come back negative in mucormycosis, so these tests cannot be used to diagnose it. Doctors instead look at tissue under the microscope and culture it, because mucormycosis shows ribbon-like hyphae on histology.",
+      "tx": "The **galactomannan** test, most useful on bronchoalveolar lavage (BAL) fluid (a sample washed from the lungs), helps diagnose aspergillosis. False negatives are common in patients on antifungal prophylaxis (preventive drugs). False positives can occur with other fungal infections, and piperacillin-tazobactam has been linked to false positives. The **beta-D-glucan** (BDG) test has a high negative predictive value for invasive candidiasis, yet it lacks specificity. Mucormycosis gives negative biomarker results, so these tests cannot be used to diagnose it.",
+      "say": "Galactomannan is a fungal marker, most useful on lavage fluid taken from the lungs when aspergillosis is suspected. A positive result needs other evidence. False negatives are common in patients on antifungal prophylaxis, the preventive drugs. Other fungal infections can cause false positives, and piperacillin-tazobactam has been linked to false positives in patients with blood cancers. The beta-D-glucan test has a high negative predictive value for invasive candidiasis, yet it lacks specificity. Mucormycosis gives negative biomarker results, so these tests cannot be used to diagnose it. Diagnosis instead rests on tissue histology showing ribbon-like hyphae, together with culture.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Infection",
-          "Biomarker finding"
+          "Test or infection",
+          "Key point"
         ],
         "rows": [
           [
-            "Invasive candidiasis",
-            "BDG has a high negative predictive value"
+            "Galactomannan, aspergillosis",
+            "Best on BAL fluid; a positive result needs other evidence"
           ],
           [
-            "Any positive BDG result",
+            "Galactomannan with antifungal prophylaxis",
+            "False negatives are common; a negative result does not exclude aspergillosis"
+          ],
+          [
+            "Other fungal infections",
+            "Can cause false positives"
+          ],
+          [
+            "Piperacillin-tazobactam",
+            "Linked to false positives in patients with blood cancers"
+          ],
+          [
+            "Beta-D-glucan, invasive candidiasis",
+            "High negative predictive value"
+          ],
+          [
+            "Beta-D-glucan, any positive result",
             "Lacks specificity"
           ],
           [
             "Mucormycosis",
-            "Biomarkers are negative"
+            "Biomarkers are negative; diagnose with tissue histology (ribbon-like hyphae) and culture"
           ]
         ]
       }
