@@ -327,6 +327,13 @@
     return urlOrPath + sep + query;
   }
 
+  /* Sign-in lost (owner 2026-11-07): the saved account still shows "signed in" but Firebase has no user, so no token
+   * goes out and every gated file answers 401. Screens used to say "need a connection"; PREP_BANK_MSG(fallback) gives
+   * them the real cause and the fix while such a refusal is recent, else their own fallback text. */
+  var SIGNIN_MSG = "Your sign-in has expired, so questions cannot load. Sign out of StewardMD, sign in again, then come back here.";
+  var _authFailAt = 0;
+  G.PREP_BANK_MSG = function (fallback) { return Date.now() - _authFailAt < 120000 ? SIGNIN_MSG : fallback; };
+
   function fetchBankJSON(url, retryCount) {
     var p = extractBankPath(url);
     if (!isGatedPath(p)) {
@@ -338,9 +345,17 @@
 
     // Fail open while the server is in shadow mode: if no session can be minted (no token yet, session route down),
     // ask without proof. Once PREP_BANK_ENFORCE is on the server answers 401 and that error surfaces below.
+    var signed = false;
     return signRequestHeaders(p).then(function (headers) { return headers; }, function () { return null; }).then(function (headers) {
+      signed = !!headers;
       return G.fetch(url, headers ? { method: "GET", headers: headers, cache: "no-store" } : { method: "GET", cache: "no-store" });
     }).then(function (r) {
+      if (r.status === 401 && !signed) {
+        _authFailAt = Date.now();
+        var se = new Error(SIGNIN_MSG); se.status = 401; se.code = "signin-expired";
+        throw se;
+      }
+      if (r.ok) _authFailAt = 0;
       if (r.status === 401 && (!retryCount || retryCount < 1)) {
         return r.json().catch(function () { return {}; }).then(function (j) {
           if (j && (j.code === "invalid-session" || j.code === "session-user-mismatch" || j.code === "missing-proof" || j.code === "stale-timestamp")) {

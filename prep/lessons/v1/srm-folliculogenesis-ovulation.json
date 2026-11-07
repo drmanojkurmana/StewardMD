@@ -1,0 +1,292 @@
+{
+  "id": "srm-folliculogenesis-ovulation",
+  "module": "srm-folliculogenesis-ovulation",
+  "title": "Folliculogenesis and Oocyte Maturation: Recruitment, Meiotic Arrest and Ovulation",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Speroff's Clinical Gynecologic Endocrinology and Infertility 9e Ch 3",
+    "Yen & Jaffe's Reproductive Endocrinology 9e Ch 6",
+    "ESHRE Guideline on Ovarian Stimulation"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Folliculogenesis begins months prior to the cycle in which ovulation occurs. The full transition from primordial follicle to preovulatory state takes between 120 and 180 days. Local ovarian paracrine signals govern the opening 85 days entirely without gonadotropins.",
+      "tx": "The transition from a dormant **primordial follicle** into an ovulatory antral structure spans roughly 120 to 180 days. The initial 85 days proceed as a **gonadotropin-independent** phase directed strictly by intraovarian growth factors rather than circulating pituitary hormones according to the classic **folliculogenesis timeline**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Primordial follicle activation"
+          },
+          {
+            "id": "p2",
+            "label": "Primary and preantral growth (85 days)"
+          },
+          {
+            "id": "p3",
+            "label": "Antral recruitment (120 to 180 days)"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2",
+            "Paracrine"
+          ],
+          [
+            "p2",
+            "p3",
+            "FSH-driven"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Anti-Mullerian hormone serves as a critical intraovarian gatekeeper. It is secreted by granulosa cells in follicles measuring under 8 mm. Its primary physiological duty is checking excessive initial recruitment from the resting pool.",
+      "tx": "Synthesized by the **granulosa cells** of primary, preantral, and small antral cohorts under 8 mm, **Anti-Mullerian hormone** acts as an internal regulator. AMH prevents premature exhaustion of the ovarian reserve by curbing excessive **primordial recruitment** and attenuating FSH sensitivity in growing follicles.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Primordial",
+            "<0.03 mm",
+            "Absent",
+            "Resting non-growing pool"
+          ],
+          [
+            "Preantral",
+            "0.05 to 0.2 mm",
+            "High",
+            "Inhibits initial recruitment"
+          ],
+          [
+            "Small Antral",
+            "<8 mm",
+            "Peak",
+            "Modulates FSH threshold"
+          ],
+          [
+            "Dominant",
+            ">10 mm",
+            "Minimal",
+            "Aromatase and E2 synthesis"
+          ]
+        ],
+        "cols": [
+          "Follicle Stage",
+          "Size",
+          "AMH Secretion",
+          "Physiological Action"
+        ]
+      }
+    },
+    {
+      "say": "Selection of the single dominant follicle occurs early in the regular cycle. Between cycle days 5 and 7, the chosen follicle emerges by displaying the greatest density of FSH receptors and generating peak estradiol levels.",
+      "tx": "Cycle days 5 to 7 mark the critical window of **follicle selection**. The emerging **dominant follicle** expresses the highest density of **FSH receptors**, enabling it to thrive and secrete abundant estradiol even as rising inhibin B and steroid negative feedback suppress serum FSH concentrations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Selected Dominant Follicle",
+          "points": [
+            "Highest receptor concentration",
+            "High intrafollicular E2",
+            "Robust CYP19A1 expression",
+            "Continues rapid growth"
+          ]
+        },
+        "right": {
+          "title": "Subordinate Cohort Follicles",
+          "points": [
+            "Lower receptor density",
+            "Diminishing estradiol levels",
+            "Inadequate aromatase induction",
+            "Undergoes atresia"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Primary oocytes remain suspended in meiotic arrest for decades. Entering diplotene of prophase I during fetal development, they stay dormant in dictyate until the midcycle luteinizing hormone surge rescues them.",
+      "tx": "Every primary oocyte undergoes **meiotic arrest** during female fetal life, entering the extended **dictyate** stage of **prophase I**. The gamete remains metabolically quiescent within its follicle until the preovulatory LH surge signals resumption of chromosomal division decades later. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Fetal germ cell mitosis"
+          },
+          {
+            "id": "m2",
+            "label": "Prophase I entry and arrest in dictyate"
+          },
+          {
+            "id": "m3",
+            "label": "LH surge resumes meiosis"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2",
+            "Prenatal"
+          ],
+          [
+            "m2",
+            "m3",
+            "Pubertal surge"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The luteinizing hormone surge breaks the meiotic block. The oocyte completes meiosis I and extrudes its first polar body, halting once more at metaphase II where it awaits fertilization.",
+      "tx": "Surging LH activates maturation-promoting kinases, driving **meiotic resumption** past the diplotene block. As the oocyte completes meiosis 1, it expels the **first polar body** containing half its chromosomes, subsequently arresting at **metaphase II** as a fertilizable gamete. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Dictyate Arrest",
+            "Germinal vesicle intact",
+            "None",
+            "Diploid 4C"
+          ],
+          [
+            "Resumption",
+            "Germinal vesicle breakdown",
+            "Extrusion imminent",
+            "Diploid 4C"
+          ],
+          [
+            "Meiosis I End",
+            "First polar body expelled",
+            "1 extruded",
+            "Haploid 2C"
+          ],
+          [
+            "Metaphase II",
+            "Second arrest until sperm",
+            "1 visible in perivitelline space",
+            "Haploid 2C"
+          ]
+        ],
+        "cols": [
+          "Meiotic Step",
+          "Nuclear Status",
+          "Polar Body",
+          "Ploidy / Chromatids"
+        ]
+      }
+    },
+    {
+      "say": "Clinical tracking of the LH peak allows accurate anticipation of follicular rupture. Follicular rupture happens between 34 and 36 hours after surge onset, or 10 to 12 hours after the peak concentration.",
+      "tx": "Accurate **ovulation timing** is essential for timed intercourse, intrauterine insemination, and oocyte retrieval. Rupture of the mature follicle transpires roughly 34 to 36 hours following the initial **LH surge onset**, corresponding to 10 to 12 hours after reaching the absolute **LH peak**.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "LH Surge Onset",
+            "34 to 36 hours",
+            "Serum LH elevation >14 IU/L",
+            "Timing window start"
+          ],
+          [
+            "LH Serum Peak",
+            "10 to 12 hours",
+            "Urinary dipstick peak band",
+            "Final maturation trigger"
+          ],
+          [
+            "hCG Injection",
+            "36 hours",
+            "Recombinant hCG trigger",
+            "Oocyte retrieval at 35-36 h"
+          ],
+          [
+            "GnRH Agonist Trigger",
+            "36 hours",
+            "Endogenous LH surge induction",
+            "OHSS-free retrieval"
+          ]
+        ],
+        "cols": [
+          "Endocrine Milestone",
+          "Elapsed Hours to Rupture",
+          "Clinical Marker",
+          "ART Significance"
+        ]
+      }
+    },
+    {
+      "say": "Coordinated cumulus expansion is mandatory for oocyte release and fertilizability. Granulosa cells produce a hyaluronan matrix via HAS2, stimulated by oocyte-derived paracrine factors GDF9 and BMP15.",
+      "tx": "Proper **cumulus expansion** requires active crosstalk between the gamete and surrounding somatic cells. Oocyte-derived growth differentiation factor 9 and bone morphogenetic protein 15 induce expression of hyaluronan synthase 2, generating a viscoelastic matrix essential for follicle extrusion: **GDF9**, **BMP15**, and **HAS2**. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "Oocyte secretes GDF9 and BMP15"
+          },
+          {
+            "id": "c2",
+            "label": "Granulosa induction of HAS2 enzyme"
+          },
+          {
+            "id": "c3",
+            "label": "Hyaluronan matrix expansion"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2",
+            "Paracrine signaling"
+          ],
+          [
+            "c2",
+            "c3",
+            "Synthesis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Following ovulation, the collapsed follicle transitions into the corpus luteum. In a cycle without pregnancy, this endocrine gland functions for roughly 14 days before local luteolytic agents cause its regression.",
+      "tx": "The physiological **corpus luteum lifespan** is tightly constrained to 14 plus or minus 2 days. In the absence of embryonic chorionic gonadotropin rescue, spontaneous **luteolysis** is triggered by local vasoconstriction and autocrine release of endothelin-1 and **PGF2-alpha**, terminating progesterone synthesis. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non-Pregnant Menstrual Cycle",
+          "points": [
+            "14 plus or minus 2 days",
+            "Pulsatile pituitary LH",
+            "Progesterone and estradiol",
+            "Luteolysis via PGF2-alpha"
+          ]
+        },
+        "right": {
+          "title": "Conception Cycle Rescue",
+          "points": [
+            "Extended through first trimester",
+            "Embryonic syncytiotrophoblast hCG",
+            "Sustained high progesterone",
+            "Luteal-placental shift at 7-9 weeks"
+          ]
+        }
+      }
+    }
+  ],
+  "v": 1
+}
