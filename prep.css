@@ -1609,6 +1609,20 @@ body.dark .pn-root .pn-self-c .ln { stroke: var(--pn-c-amber); } body.dark .pn-r
 .pn-root .pn-me-av .pn-lg-d, body.dark .pn-root .pn-me-av .pn-lg-l { display: none; }
 body.dark .pn-root .pn-me-av .pn-lg-d { display: block; }
 .pn-root .pn-me .pn-tb b { font-family: var(--pn-disp); font-size: 20px; letter-spacing: -.025em; }
+/* The You card is a button to the app's Profile page when the account layer is there. */
+.pn-root .pn-me-btn { width: 100%; border: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform var(--pn-d-press, 120ms) ease; }
+.pn-root .pn-me-btn:active { transform: scale(.985); }
+.pn-root .pn-me-btn:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+.pn-root .pn-me .pn-tb { flex: 1 1 auto; min-width: 0; }
+.pn-root .pn-me .pn-tb b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pn-root .pn-me-av { overflow: hidden; }
+.pn-root .pn-me-pic { width: 100%; height: 100%; object-fit: cover; }
+.pn-root .pn-me-ini { font-family: var(--pn-disp); font-size: 22px; font-weight: 750; color: var(--pn-tile-ink, var(--pn-pri)); }
+.pn-root .pn-me-ed { flex: 0 0 auto; min-height: 32px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: var(--pn-r-pill); background: var(--pn-pri-soft); color: var(--pn-pri); font-size: 13px; font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-me-btn { transition: none; } }
+/* The app's Profile sheet (home.js #hvSheet, z-index 640) opened from PrepNucleus (z-index 885): lifted above while open. */
+body.pn-over-sheet .hv-sheet { z-index: 892; }
+body.pn-over-sheet .hv-scrim { z-index: 891; }
 
 /* ---- Pressables: a specular sheen crosses a primary button on press (React Bits ShinyText / SpecularButton, as one
    CSS sweep started by prep-tide.js on pointerdown), and a soft light follows the finger or pointer on cards
@@ -1662,12 +1676,12 @@ body.dark .pn-root :is(.pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext) { ba
 .pn-root .pn-figchip > span { flex: 0 0 auto; }
 /* Question-actions menu: one "More" button in the bar, the four actions as labelled rows under it. */
 .pn-root .pn-more { position: relative; flex: 0 0 auto; }
-.pn-root .pn-menu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 30; width: max-content; min-width: 220px; max-width: calc(100vw - 24px); display: flex; flex-direction: column; gap: 2px; padding: 6px; border-radius: 16px; background: var(--pn-card); box-shadow: var(--pn-elev, 0 8px 28px rgba(0, 0, 0, .18)); border: 1px solid var(--pn-edge); }
-.pn-root .pn-menu[hidden] { display: none; }
-.pn-root .pn-menu .pn-ib, .pn-root.pn-tided > .pn-bar .pn-menu .pn-ib, body.dark .pn-root.pn-tided > .pn-bar .pn-menu .pn-ib { box-sizing: border-box; width: 100%; height: 48px; flex: 0 0 auto; border-radius: 12px; justify-content: flex-start; gap: 12px; padding: 0 12px; box-shadow: none; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
-.pn-root .pn-menu .pn-ib svg { flex: 0 0 auto; }
-.pn-root .pn-menu .pn-ib::after { content: attr(aria-label); font-size: 15px; font-weight: 600; color: var(--pn-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-.pn-root .pn-menu .pn-ib:active { background: var(--pn-s1); }
+.pn-root .pn-qmenu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 30; width: max-content; min-width: 220px; max-width: calc(100vw - 24px); display: flex; flex-direction: column; gap: 2px; padding: 6px; border-radius: 16px; background: var(--pn-card); box-shadow: var(--pn-elev, 0 8px 28px rgba(0, 0, 0, .18)); border: 1px solid var(--pn-edge); }
+.pn-root .pn-qmenu[hidden] { display: none; }
+.pn-root .pn-qmenu .pn-ib, .pn-root.pn-tided > .pn-bar .pn-qmenu .pn-ib, body.dark .pn-root.pn-tided > .pn-bar .pn-qmenu .pn-ib { box-sizing: border-box; width: 100%; height: 48px; flex: 0 0 auto; border-radius: 12px; justify-content: flex-start; gap: 12px; padding: 0 12px; box-shadow: none; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.pn-root .pn-qmenu .pn-ib svg { flex: 0 0 auto; }
+.pn-root .pn-qmenu .pn-ib::after { content: attr(aria-label); font-size: 15px; font-weight: 600; color: var(--pn-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.pn-root .pn-qmenu .pn-ib:active { background: var(--pn-s1); }
 /* Interactive figure card (prep-lessons.js figureHtml); the full-screen page is fig-viewer.js. */
 .pn-root .pn-figgo { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 12px 14px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-lg); background: var(--pn-card); color: var(--pn-text); font: inherit; text-align: left; cursor: pointer; }
 .pn-root .pn-figgo-i { flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--pn-pri); color: var(--pn-text); }
@@ -1880,12 +1894,12 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 /* More menu: opens from the button's corner, rows rise in one after another. */
 @keyframes pn-menu-in { from { opacity: 0; transform: translateY(-6px) scale(.88); } to { opacity: 1; transform: none; } }
 @keyframes pn-menu-row { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
-.pn-root .pn-menu { transform-origin: top right; animation: pn-menu-in 180ms var(--pn-ease, ease-out) both; }
-.pn-root .pn-menu .pn-ib { animation: pn-menu-row 220ms var(--pn-ease, ease-out) both; }
-.pn-root .pn-menu .pn-ib:nth-child(2) { animation-delay: 40ms; }
-.pn-root .pn-menu .pn-ib:nth-child(3) { animation-delay: 80ms; }
-.pn-root .pn-menu .pn-ib:nth-child(4) { animation-delay: 120ms; }
-@media (prefers-reduced-motion: reduce) { .pn-root .pn-menu, .pn-root .pn-menu .pn-ib { animation: none; } }
+.pn-root .pn-qmenu { transform-origin: top right; animation: pn-menu-in 180ms var(--pn-ease, ease-out) both; }
+.pn-root .pn-qmenu .pn-ib { animation: pn-menu-row 220ms var(--pn-ease, ease-out) both; }
+.pn-root .pn-qmenu .pn-ib:nth-child(2) { animation-delay: 40ms; }
+.pn-root .pn-qmenu .pn-ib:nth-child(3) { animation-delay: 80ms; }
+.pn-root .pn-qmenu .pn-ib:nth-child(4) { animation-delay: 120ms; }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-qmenu, .pn-root .pn-qmenu .pn-ib { animation: none; } }
 
 /* Tables: tightened to fit when they nearly do; otherwise they scroll, fade the edge that has more, and nudge once. */
 .pn-root :is(.pn-vtbl, .pn-xt, .pn-pearl-tablewrap).pn-ovf { --pn-fl: 0px; --pn-fr: 0px; -webkit-mask-image: linear-gradient(90deg, transparent 0, black var(--pn-fl), black calc(100% - var(--pn-fr)), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, black var(--pn-fl), black calc(100% - var(--pn-fr)), transparent 100%); }

@@ -201,6 +201,8 @@ data/dose-rules-report.json
 # PrepNucleus PYQ (tools/prep-pyq.mjs): recall question text, options and images never enter the public repo; they
 # go to R2 (prep-bank/v2/pyq/) and the private GCS bucket. Only the synthetic test fixture is committed.
 /prep/pyq/
+# NEET-SS Medical Oncology PYQs (tools/pyq-ss-build.mjs): question text never enters the public repo; it goes to R2 (v5/pyq-ss/).
+/prep/pyq-ss/
 # PrepNucleus explanations (tools/prep-explain.mjs): prompts carry source-pack text; results go to R2 with the bank.
 /prep/explain/
 /prep/lessons/work-all/

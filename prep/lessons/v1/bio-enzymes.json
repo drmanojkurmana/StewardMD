@@ -3,7 +3,7 @@
  "module": "bio-enzymes",
  "subject": "biochemistry",
  "title": "Enzymes and clinical enzymology",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "Enzymes are biological catalysts that speed up reactions without being consumed. Most are **proteins**, and many need a non-protein helper called a **coenzyme** or a metal ion as a prosthetic group. Enzymes are classified into six main classes: oxidoreductases, transferases, hydrolases, lyases, isomerases and ligases. Digestive enzymes are hydrolases, and synthetases are ligases that use ATP to join two molecules.",
@@ -83,6 +83,17 @@
       "Not overcome by substrate"
      ]
     }
+   }
+  },
+  {
+   "tx": "The image pairs surface models with velocity and reciprocal plots: malonate competes with succinate at the active site on the left, while a remote binder reshapes the enzyme on the right. In **competitive inhibition** Km rises but Vmax stays unchanged, since extra substrate overcomes the block. In **noncompetitive inhibition** the distant site lowers **Vmax** while Km stays the same, so added substrate cannot rescue the rate.",
+   "say": "Malonate competes with succinate for the active site, so Km rises while Vmax is unchanged and extra substrate overcomes the block. A remote site binder instead lowers Vmax with Km unchanged, so adding substrate cannot restore the rate. The plots below each model show these signature pattern differences.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-enzymes-gen1.webp",
+    "alt": "Paired surface models and kinetic plots contrast active site competition with remote site binding effects on Km and Vmax.",
+    "caption": "Competitive and noncompetitive inhibition models with kinetic plots, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

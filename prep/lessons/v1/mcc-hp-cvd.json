@@ -3,7 +3,7 @@
  "module": "mcc-hp-cvd",
  "subject": "mcc-health-promotion",
  "title": "Cardiovascular risk and statins",
- "minutes": 5,
+ "minutes": 7,
  "steps": [
   {
    "tx": "Statins are the **first-line** lipid-lowering drugs. They inhibit **HMG-CoA reductase**, the rate-limiting enzyme of hepatic cholesterol synthesis. Lower intracellular cholesterol upregulates LDL receptors, so more LDL is cleared from blood. Their main value is reducing atherosclerotic events, both in secondary prevention after myocardial infarction and in primary prevention when absolute risk is high.",
@@ -125,6 +125,17 @@
       "Stop statin, admit, fluids"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The diagram traces **rhabdomyolysis** from injured muscle to kidney failure. Broken fibres release **myoglobin** and **creatine kinase** into blood, which then clog and injure the renal tubules. The urine pot turns dark brown from myoglobin in urine. Unlike simple muscle ache with normal enzymes, this pattern with kidney injury needs the statin stopped, urgent fluids and admission.",
+   "say": "This picture connects muscle breakdown to kidney injury. Damaged fibres spill myoglobin and creatine kinase into the bloodstream, and myoglobin then blocks and harms the kidney tubules while the urine turns dark. Ordinary statin related aches keep normal enzymes, but this combination with kidney injury means stop the statin, give fluids and admit for care.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mcc-hp-cvd-gen1.webp",
+    "alt": "Diagram of broken muscle fibres releasing myoglobin into blood and injuring kidney tubules with dark urine.",
+    "caption": "Muscle breakdown injuring kidneys with dark urine, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

@@ -440,6 +440,12 @@
       if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     });
   }
+  // Reminder lines [today, tomorrow]: ReWise when the student has one, else the NEET-SS Medical Oncology 30-day plan (prep-pyqss.js).
+  function rwLines() {
+    var r = G.PREP_TT && G.PREP_TT.notice ? [G.PREP_TT.notice(H, 0), G.PREP_TT.notice(H, 1)] : null;
+    if (r && (r[0] || r[1])) return r;
+    return G.PREP_PYQSS && G.PREP_PYQSS.notice && H.exam().id === "neet-ss" ? [G.PREP_PYQSS.notice(H, 0), G.PREP_PYQSS.notice(H, 1)] : r;
+  }
   /* For prep-native.js and prep-nudges.js: { score, exam, examId, daysLeft, items: [{ label, done, k, x, of, min }],
      planDay "YYYY-MM-DD" | null, weak: { id, name, score } | null }. items = today's plan when it is made for today,
      else []. weak = the weakest blueprint subject the student has answered 5+ questions in. */
@@ -451,7 +457,7 @@
       items: pt ? pt.items.map(function (it) { var p = itemProgress(it, s, td, dayOf); return { label: itemTitle(it), done: p.done, k: it.k, x: p.x, of: p.of, min: it.min }; }) : [],
       planDay: pt ? d.toISOString().slice(0, 10) : null,
       weak: sb ? { id: w.id, name: String(sb.name && typeof sb.name === "object" ? sb.name.en || "" : sb.name || ""), score: w.score } : null,
-      rw: G.PREP_TT && G.PREP_TT.notice ? [G.PREP_TT.notice(H, 0), G.PREP_TT.notice(H, 1)] : null };
+      rw: rwLines() };
   }
 
   /* ---------- starting an item ---------- */

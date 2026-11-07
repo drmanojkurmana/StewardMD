@@ -1,0 +1,97 @@
+{
+  "v": 1,
+  "module": "son-thoracic-nsclc-driver-effusion",
+  "subject": "ss-medical-oncology",
+  "title": "ALK Biology, Uncommon EGFR Mutations, Pemetrexed Toxicity and Malignant Effusions",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Somatic chromosomal inversions on the short arm of chromosome 2 fuse the echinoderm microtubule-associated protein-like 4 gene with the anaplastic lymphoma kinase gene (**EML4::ALK rearrangement**). Occurring in 4% to 7% of advanced non-small cell lung carcinomas, ALK fusions are strongly enriched in young never-smokers and adenocarcinoma with **signet-ring cell histology**. Second- and third-generation ALK tyrosine kinase inhibitors (such as **alectinib and lorlatinib**) achieve superior central nervous system penetration, yielding median progression-free survival exceeding thirty-four months.",
+      "say": "Identifying an ALK rearrangement transforms the trajectory of metastatic lung adenocarcinoma. This oncogenic driver occurs almost exclusively in young non-smokers and is characterized by solid or signet-ring architecture on biopsy. Because brain metastases are exceedingly common in ALK-positive disease, second-generation inhibitors like alectinib and third-generation agents like lorlatinib were designed with exceptional blood-brain barrier permeability, providing durable intracranial disease control and multi-year survival.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pleural-effusion-fig1.webp",
+        "alt": "Chest radiograph and thoracic computed tomography cross-section demonstrating a large unilateral pleural fluid accumulation.",
+        "caption": "Malignant pleural effusion displaying dense fluid attenuation. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Therapeutic sensitivity in epidermal growth factor receptor (**EGFR-mutated NSCLC**) depends strictly on exact exon alterations. While classical sensitizing mutations (exon 19 in-frame deletions and exon 21 L858R substitution) respond best to osimertinib, uncommon non-classical mutations (G719X, L861Q, and S768I) exhibit superior clinical response to the irreversible second-generation ErbB family blocker **afatinib**. Conversely, **EGFR exon 20 insertions** create steric hindrance that confers primary resistance to conventional kinase inhibitors, necessitating targeted bispecific antibodies such as **amivantamab** or mobocertinib.",
+      "say": "You must never treat all EGFR mutations as a uniform biological entity. While third-generation osimertinib dominates classic exon nineteen deletions, afatinib maintains the highest activity against uncommon major mutations including G719X and L861Q. In sharp contrast, exon twenty insertion mutations push the kinase domain into an active conformation while physically blocking inhibitor binding, rendering standard tyrosine kinase inhibitors completely ineffective and requiring targeted bispecific antibodies like amivantamab.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Uncommon Major Mutations",
+          "points": [
+            "G719X in exon 18",
+            "L861Q in exon 21",
+            "S768I in exon 20",
+            "High clinical response to afatinib",
+            "Irreversible pan-ErbB blockade"
+          ]
+        },
+        "right": {
+          "title": "Exon 20 Insertions",
+          "points": [
+            "Insertions / duplications in exon 20",
+            "Steric hindrance in kinase pocket",
+            "Primary resistance to osimertinib / afatinib",
+            "Requires amivantamab bispecific antibody",
+            "Distinct structural biology"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The multi-targeted antifolate **pemetrexed** inhibits thymidylate synthase, dihydrofolate reductase, and glycinamide ribonucleotide formyltransferase in non-squamous non-small cell lung cancer. Unsupplemented administration triggers lethal bone marrow suppression, severe **pemetrexed-induced anaemia**, and mucosal sloughing. Routine co-administration of oral **folic acid** (350 to 1000 micrograms daily) and intramuscular **vitamin B12** (1000 micrograms every nine weeks) is mandatory to minimize toxicity. Furthermore, because pemetrexed is eliminated unchanged by glomerular filtration, it is strictly avoided when **creatinine clearance** falls below 45 mL/min.",
+      "say": "Pemetrexed is a cornerstone of non-squamous lung cancer therapy, but its safety hinges entirely on vitamin co-factor supplementation and renal function. Without daily oral folic acid and regular intramuscular vitamin B12 injections, cellular folate pools deplete, precipitating life-threatening neutropenia and severe anemia. Always calculate the patient's creatinine clearance before prescribing pemetrexed; if clearance falls below forty-five milliliters per minute, delayed renal clearance will lead to fatal systemic accumulation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "f1",
+            "label": "Pemetrexed Antifolate"
+          },
+          {
+            "id": "f2",
+            "label": "TS / DHFR Blockade"
+          },
+          {
+            "id": "f3",
+            "label": "Folic Acid & B12 Given"
+          },
+          {
+            "id": "f4",
+            "label": "Check CrCl >= 45"
+          },
+          {
+            "id": "f5",
+            "label": "Safe Chemotherapy"
+          }
+        ],
+        "edges": [
+          ["f1", "f2"],
+          ["f2", "f3"],
+          ["f3", "f4"],
+          ["f4", "f5"]
+        ]
+      }
+    },
+    {
+      "tx": "In advanced thoracic malignancies, tumour seeding of the pleural space creates a **malignant pleural effusion**. Pleural fluid analysis demonstrates an exudate by Light criteria. A markedly **low pleural fluid pH** (below 7.20 or 7.30) accompanied by low pleural glucose reflects extensive tumour metabolic burden and thickened pleura. Low pH strongly correlates with shortened survival and reduced success of chemical pleurodesis. For symptomatic patients with trapped lung or low pH, an **indwelling pleural catheter** is the preferred palliative intervention over talc slurry.",
+      "say": "When evaluating a massive malignant pleural effusion, analyzing fluid pH and glucose gives you crucial prognostic and therapeutic direction. A pleural fluid pH below seven point two reflects heavy tumor load and extensive pleural fibrosis, which heralds a high failure rate if you attempt chemical talc pleurodesis. For these patients, especially when the underlying lung cannot fully re-expand, placing an indwelling tunneled pleural catheter provides superior symptom relief and allows safe outpatient drainage.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-xray-pleural-effusion-empyema.webp",
+        "alt": "Erect thoracic radiograph demonstrating blunting of the costophrenic angle and mediastinal shift.",
+        "caption": "Thoracic imaging demonstrating fluid layering in malignant effusion. Credit: StewardMD."
+      }
+    }
+  ],
+  "quiz": [
+    "q_8fd11340471d",
+    "q_109478f30136",
+    "q_64fae37a3b6d"
+  ],
+  "gen": "AI"
+}
