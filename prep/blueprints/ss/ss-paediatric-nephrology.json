@@ -1,0 +1,2095 @@
+{
+  "v": 1,
+  "subject": "ss-paediatric-nephrology",
+  "title": "Paediatric Nephrology",
+  "code": "pnp",
+  "branch": "ss-paediatrics",
+  "examPattern": "NEET-SS / INI-SS Paediatric Nephrology",
+  "books": [
+    "Nelson Textbook of Pediatrics 22e (Chapters 538-560: The Urinary System)",
+    "IPNA Clinical Practice Guidelines (Nephrotic Syndrome, AKI, CAKUT)",
+    "KDIGO Clinical Practice Guidelines (Glomerular Diseases 2021, AKI 2012, CKD 2024)",
+    "AAP Clinical Practice Guideline for Screening and Management of High Blood Pressure in Children and Adolescents (2017)"
+  ],
+  "sections": [
+    {
+      "id": "pnp-glomerular-sec",
+      "title": "Glomerular and Proteinuric Diseases",
+      "modules": [
+        {
+          "id": "pnp-glomerular",
+          "title": "Glomerular Diseases, Nephrotic Syndrome and Nephritis",
+          "lessonTopics": [
+            {
+              "id": "pnp-steroid-sensitive-nephrotic-syndrome",
+              "title": "Steroid-Sensitive Nephrotic Syndrome: First Episode, Relapses and Steroid-Sparing Agents",
+              "bookChapter": "Nelson 22e Chapter 543",
+              "mustKnow": [
+                {
+                  "term": "Diagnostic nephrotic triad and criteria",
+                  "fact": "Nephrotic syndrome is defined by heavy proteinuria (> 40 mg/m²/hr or urine protein-to-creatinine ratio > 2.0 mg/mg or 3+ on dipstick), hypoalbuminemia (< 2.5 g/dL), and generalized edema.",
+                  "numbers": [
+                    "40 mg/m²/hr",
+                    "2.0 mg/mg",
+                    "2.5 g/dL"
+                  ],
+                  "source": "IPNA / KDIGO 2021 Guidelines"
+                },
+                {
+                  "term": "IPNA/KDIGO initial steroid regimen",
+                  "fact": "Initial therapy for first episode of SSNS is oral prednisolone at 60 mg/m²/day (or 2 mg/kg/day, maximum 60 mg) daily for 4-6 weeks, followed by 40 mg/m² (1.5 mg/kg) on alternate days for 4-6 weeks.",
+                  "numbers": [
+                    "60 mg/m²/day",
+                    "2 mg/kg/day",
+                    "60 mg",
+                    "4-6 weeks",
+                    "40 mg/m²",
+                    "1.5 mg/kg"
+                  ],
+                  "drugs": [
+                    "prednisolone"
+                  ],
+                  "source": "IPNA 2020 / KDIGO 2021"
+                },
+                {
+                  "term": "Definitions of remission and relapse",
+                  "fact": "Complete remission is defined as dipstick trace or zero protein (or UPCR < 0.2 mg/mg) for 3 consecutive days; relapse is defined as dipstick >= 3+ protein (or UPCR > 2.0 mg/mg) for 3 consecutive days.",
+                  "numbers": [
+                    "0.2 mg/mg",
+                    "3 consecutive days",
+                    "2.0 mg/mg"
+                  ],
+                  "source": "IPNA Guidelines"
+                },
+                {
+                  "term": "Frequent relapser and steroid-dependent criteria",
+                  "fact": "Frequently relapsing nephrotic syndrome (FRNS) is >= 2 relapses within 6 months of initial response or >= 4 relapses in any 12-month period; steroid dependence (SDNS) is 2 consecutive relapses during steroid taper or within 14 days of cessation.",
+                  "numbers": [
+                    "2",
+                    "6 months",
+                    "4",
+                    "12-month period",
+                    "14 days"
+                  ],
+                  "source": "KDIGO 2021"
+                },
+                {
+                  "term": "Steroid-sparing agents for FRNS/SDNS",
+                  "fact": "First-line steroid-sparing therapies include oral levamisole (2.5 mg/kg alternate days), cyclophosphamide (2 mg/kg/day for 8-12 weeks, cumulative limit 168-200 mg/kg), and mycophenolate mofetil (MMF 1200 mg/m²/day).",
+                  "numbers": [
+                    "2.5 mg/kg",
+                    "2 mg/kg/day",
+                    "8-12 weeks",
+                    "168-200 mg/kg",
+                    "1200 mg/m²/day"
+                  ],
+                  "drugs": [
+                    "levamisole",
+                    "cyclophosphamide",
+                    "mycophenolate mofetil"
+                  ],
+                  "source": "IPNA Consensus Guidelines"
+                },
+                {
+                  "term": "Rituximab in refractory SDNS",
+                  "fact": "Rituximab (anti-CD20 monoclonal antibody, 375 mg/m² IV 1-2 doses) targets B-cell depletion (CD19 < 1%) and maintains long-term remission in refractory steroid-dependent nephrotic syndrome.",
+                  "numbers": [
+                    "375 mg/m²",
+                    "1%"
+                  ],
+                  "drugs": [
+                    "rituximab"
+                  ],
+                  "source": "KDIGO 2021"
+                },
+                {
+                  "term": "Thromboembolism prophylaxis and triggers",
+                  "fact": "Severe hypoalbuminemia (serum albumin < 2.0 g/dL), elevated fibrinogen, and urinary loss of antithrombin III create high thromboembolic risk, warranting avoidance of femoral venipuncture and prompt hydration.",
+                  "numbers": [
+                    "2.0 g/dL"
+                  ],
+                  "drugs": [
+                    "low molecular weight heparin"
+                  ],
+                  "source": "Nelson 22e Chapter 543"
+                },
+                {
+                  "term": "Peritonitis and encapsulated bacteria",
+                  "fact": "Spontaneous bacterial peritonitis in nephrotic ascites is predominantly caused by Streptococcus pneumoniae and E. coli, requiring pneumococcal conjugate vaccination and immediate empiric cefotaxime or ceftriaxone.",
+                  "drugs": [
+                    "cefotaxime",
+                    "ceftriaxone"
+                  ],
+                  "source": "Nelson 22e Chapter 543"
+                }
+              ]
+            },
+            {
+              "id": "pnp-steroid-resistant-nephrotic-syndrome",
+              "title": "Steroid-Resistant Nephrotic Syndrome: Genetics, CNI Therapy and Transplant Recurrence",
+              "bookChapter": "Nelson 22e Chapter 543",
+              "mustKnow": [
+                {
+                  "term": "Steroid resistance operational definition",
+                  "fact": "Steroid resistance (SRNS) is failure to achieve complete remission after 4-6 weeks of daily oral prednisolone at 60 mg/m²/day; late resistance occurs in children who previously responded.",
+                  "numbers": [
+                    "4-6 weeks",
+                    "60 mg/m²/day"
+                  ],
+                  "drugs": [
+                    "prednisolone"
+                  ],
+                  "source": "IPNA SRNS Consensus"
+                },
+                {
+                  "term": "Renal biopsy indications in children",
+                  "fact": "Renal biopsy is indicated before treatment in children presenting < 1 year or > 12 years of age, macroscopic hematuria, persistent hypertension, low C3 complement, renal failure, or documented steroid resistance.",
+                  "numbers": [
+                    "1 year",
+                    "12 years"
+                  ],
+                  "source": "IPNA / KDIGO 2021"
+                },
+                {
+                  "term": "Monogenic SRNS podocyte genes",
+                  "fact": "Up to 30% of pediatric SRNS is monogenic, caused by podocyte and slit diaphragm gene mutations: NPHS1 (nephrin), NPHS2 (podocin), WT1 (Denys-Drash / Frasier), PLCE1, LAMB2, and INF2.",
+                  "numbers": [
+                    "30%"
+                  ],
+                  "source": "IPNA SRNS Consensus"
+                },
+                {
+                  "term": "Genetic SRNS immunosuppression resistance",
+                  "fact": "Children with confirmed monogenic genetic podocytopathies do not respond to immunosuppressive therapy; steroids and calcineurin inhibitors should be rapidly tapered to avoid toxicity.",
+                  "source": "IPNA SRNS Consensus"
+                },
+                {
+                  "term": "Calcineurin inhibitors (tacrolimus and cyclosporine)",
+                  "fact": "In non-genetic SRNS, calcineurin inhibitors (tacrolimus 0.1-0.15 mg/kg/day targeting trough 5-8 ng/mL, or cyclosporine targeting trough 100-150 ng/mL) induce complete or partial remission in 70-80% of patients.",
+                  "numbers": [
+                    "0.1-0.15 mg/kg/day",
+                    "5-8 ng/mL",
+                    "100-150 ng/mL",
+                    "70-80%"
+                  ],
+                  "drugs": [
+                    "tacrolimus",
+                    "cyclosporine"
+                  ],
+                  "source": "KDIGO 2021"
+                },
+                {
+                  "term": "FSGS histopathological variants (Columbia classification)",
+                  "fact": "Focal segmental glomerulosclerosis is classified into 5 variants: tip (best prognosis, steroid responsive), cellular, perihilar, collapsing (worst prognosis, rapid progression to ESRD), and not-otherwise-specified (NOS).",
+                  "numbers": [
+                    "5"
+                  ],
+                  "source": "Columbia FSGS Classification"
+                },
+                {
+                  "term": "Circulating permeability factor and recurrence post-transplant",
+                  "fact": "Idiopathic non-genetic FSGS recurs in 30-50% of renal allografts within 48 hours post-transplant due to circulating permeability factor (suPAR / anti-UCHL1), treated with urgent plasma exchange and rituximab.",
+                  "numbers": [
+                    "30-50%",
+                    "48 hours"
+                  ],
+                  "drugs": [
+                    "rituximab"
+                  ],
+                  "source": "IPNA Transplant Guidelines"
+                },
+                {
+                  "term": "RAAS blockade in persistent proteinuria",
+                  "fact": "ACE inhibitors (enalapril) or ARBs (losartan) reduce intraglomerular capillary pressure and proteinuria by 30-50% in SRNS, while monitoring for hyperkalemia and acute drops in eGFR.",
+                  "numbers": [
+                    "30-50%"
+                  ],
+                  "drugs": [
+                    "enalapril",
+                    "losartan"
+                  ],
+                  "source": "KDIGO 2021"
+                }
+              ]
+            },
+            {
+              "id": "pnp-congenital-nephrotic-syndrome-finnish",
+              "title": "Congenital Nephrotic Syndrome: Finnish Type, Denys-Drash and Early Management",
+              "bookChapter": "Nelson 22e Chapter 543",
+              "mustKnow": [
+                {
+                  "term": "Timing definition of congenital and infantile NS",
+                  "fact": "Congenital nephrotic syndrome (CNS) presents within the first 3 months of life (0-90 days); infantile nephrotic syndrome presents between 3 and 12 months of life.",
+                  "numbers": [
+                    "3 months",
+                    "0-90 days",
+                    "12 months"
+                  ],
+                  "source": "IPNA CNS Clinical Practice Recommendations"
+                },
+                {
+                  "term": "Finnish type CNS (CNF) NPHS1 genetics",
+                  "fact": "Finnish type CNS is an autosomal recessive mutation in NPHS1 (19q13.1) encoding nephrin, presenting with massive intrauterine proteinuria, elevated maternal alpha-fetoprotein (AFP > 10 MoM), and enlarged placenta (> 25% infant birth weight).",
+                  "numbers": [
+                    "19q13.1",
+                    "10 MoM",
+                    "25%"
+                  ],
+                  "source": "Nelson 22e Chapter 543"
+                },
+                {
+                  "term": "NPHS2 podocin mutations and age of onset",
+                  "fact": "NPHS2 mutations (1q25-q31) encoding podocin cause autosomal recessive steroid-resistant nephrotic syndrome presenting from early infancy up to adolescence, refractory to steroids.",
+                  "numbers": [
+                    "1q25-q31"
+                  ],
+                  "source": "IPNA CNS Recommendations"
+                },
+                {
+                  "term": "Denys-Drash syndrome triad and WT1 mutations",
+                  "fact": "Denys-Drash syndrome is caused by missense WT1 mutations (11p13 exon 8/9), featuring triad of early-onset diffuse mesangial sclerosis (DMS), 46,XY disorder of sex development, and > 90% risk of Wilms tumor.",
+                  "numbers": [
+                    "11p13",
+                    "90%"
+                  ],
+                  "source": "Nelson 22e Chapter 543"
+                },
+                {
+                  "term": "Frasier syndrome WT1 donor splice site",
+                  "fact": "Frasier syndrome results from WT1 intron 9 splice-site mutations, presenting with adolescent FSGS, 46,XY female sex reversal, streak gonads, and high risk of gonadoblastoma.",
+                  "source": "Nelson 22e Chapter 543"
+                },
+                {
+                  "term": "Aggressive supportive therapy protocol",
+                  "fact": "Management of Finnish CNS requires daily IV 20% albumin infusions (3-4 g/kg/day), ACE inhibitors, indomethacin to reduce GFR and urinary protein loss, and thyroxine repletion due to urinary thyroglobulin loss.",
+                  "numbers": [
+                    "20%",
+                    "3-4 g/kg/day"
+                  ],
+                  "drugs": [
+                    "albumin",
+                    "indomethacin",
+                    "levothyroxine",
+                    "enalapril"
+                  ],
+                  "source": "IPNA CNS Guidelines"
+                },
+                {
+                  "term": "Unilateral vs bilateral nephrectomy timing",
+                  "fact": "Bilateral nephrectomy with peritoneal dialysis is performed when the infant reaches 7-9 kg weight to halt life-threatening protein loss and prepare for renal transplantation at 10-12 kg.",
+                  "numbers": [
+                    "7-9 kg",
+                    "10-12 kg"
+                  ],
+                  "source": "IPNA CNS Guidelines"
+                },
+                {
+                  "term": "Infectious CNS etiologies",
+                  "fact": "Non-genetic congenital nephrotic syndrome can be caused by congenital syphilis, cytomegalovirus (CMV), toxoplasmosis, and congenital rubella, where proteinuria resolves upon antimicrobial eradication.",
+                  "drugs": [
+                    "penicillin g",
+                    "ganciclovir"
+                  ],
+                  "source": "Nelson 22e Chapter 543"
+                }
+              ]
+            },
+            {
+              "id": "pnp-post-streptococcal-gn-apscn",
+              "title": "Acute Post-Streptococcal Glomerulonephritis: APSGN Latency, Complement and Course",
+              "bookChapter": "Nelson 22e Chapter 540",
+              "mustKnow": [
+                {
+                  "term": "Nephritogenic streptococcal antigens and latency",
+                  "fact": "APSGN is triggered by Group A Streptococcus (speB and NAPlr antigens) after a latent period of 1-2 weeks following pharyngitis or 3-6 weeks following streptococcal pyoderma (impetigo).",
+                  "numbers": [
+                    "1-2 weeks",
+                    "3-6 weeks"
+                  ],
+                  "source": "Nelson 22e Chapter 540"
+                },
+                {
+                  "term": "Classic acute nephritic syndrome triad",
+                  "fact": "Clinical presentation features the nephritic triad: gross hematuria (tea-colored or cola-colored smoky urine), edema (periorbital and pretibial), and hypertension with oliguria.",
+                  "source": "Nelson 22e Chapter 540"
+                },
+                {
+                  "term": "Complement C3 depression kinetics",
+                  "fact": "Serum complement C3 and CH50 are depressed in > 90% of APSGN cases via alternative complement activation, and must normalize within 6-8 weeks; persistence beyond 8 weeks mandates renal biopsy for MPGN/C3G.",
+                  "numbers": [
+                    "90%",
+                    "6-8 weeks",
+                    "8 weeks"
+                  ],
+                  "source": "Nelson 22e Chapter 540"
+                },
+                {
+                  "term": "Serological evidence of streptococcal infection",
+                  "fact": "Elevated or rising anti-streptolysin O (ASO) titer is positive in 80% following pharyngitis, whereas anti-DNase B is superior (> 90% positive) for post-pyoderma impetigo nephritis.",
+                  "numbers": [
+                    "80%",
+                    "90%"
+                  ],
+                  "source": "Nelson 22e Chapter 540"
+                },
+                {
+                  "term": "Light and electron microscopy subepithelial humps",
+                  "fact": "Renal biopsy reveals diffuse endocapillary proliferative GN with neutrophil infiltration; electron microscopy classically demonstrates discrete dome-shaped subepithelial electron-dense humps.",
+                  "source": "Nelson 22e Chapter 540"
+                },
+                {
+                  "term": "Immunofluorescence starry sky pattern",
+                  "fact": "Immunofluorescence demonstrates coarse granular deposition of C3 and IgG along the glomerular capillary loops and mesangium, described as starry sky or garland appearance.",
+                  "source": "Nelson 22e Chapter 540"
+                },
+                {
+                  "term": "Hypertensive encephalopathy and loop diuretics",
+                  "fact": "Management of hypertensive emergencies in APSGN requires fluid and sodium restriction, intravenous furosemide (1-2 mg/kg), and calcium channel blockers (amlodipine, nicardipine, or labetalol).",
+                  "numbers": [
+                    "1-2 mg/kg"
+                  ],
+                  "drugs": [
+                    "furosemide",
+                    "amlodipine",
+                    "nicardipine",
+                    "labetalol"
+                  ],
+                  "source": "Nelson 22e Chapter 540"
+                },
+                {
+                  "term": "Natural history and long-term resolution",
+                  "fact": "Diuresis ensues in 1-2 weeks; gross hematuria resolves in 2-4 weeks; hypertension normalizes in 2-3 weeks; microhematuria may persist harmlessly for up to 1-2 years.",
+                  "numbers": [
+                    "1-2 weeks",
+                    "2-4 weeks",
+                    "2-3 weeks",
+                    "1-2 years"
+                  ],
+                  "source": "Nelson 22e Chapter 540"
+                }
+              ]
+            },
+            {
+              "id": "pnp-iga-nephropathy-and-vasculitis",
+              "title": "IgA Nephropathy and IgA Vasculitis HSP Nephritis: Oxford Classification and Care",
+              "bookChapter": "Nelson 22e Chapter 541",
+              "mustKnow": [
+                {
+                  "term": "Synpharyngitic macrohematuria hallmark",
+                  "fact": "IgA nephropathy typically presents with recurrent episodes of gross macroscopic hematuria developing concurrently (within 24-48 hours) with an upper respiratory tract infection (synpharyngitic hematuria).",
+                  "numbers": [
+                    "24-48 hours"
+                  ],
+                  "source": "KDIGO Glomerular Diseases 2021"
+                },
+                {
+                  "term": "Galactose-deficient IgA1 multi-hit hypothesis",
+                  "fact": "Pathogenesis involves elevated circulatory galactose-deficient IgA1 (Hit 1), anti-glycan autoantibodies (Hit 2), immune complex formation (Hit 3), and mesangial deposition triggering inflammation (Hit 4).",
+                  "numbers": [
+                    "4"
+                  ],
+                  "source": "Nelson 22e Chapter 541"
+                },
+                {
+                  "term": "Oxford MEST-C histopathological scoring",
+                  "fact": "The revised Oxford classification scores M (mesangial hypercellularity > 50%), E (endocapillary hypercellularity), S (segmental glomerulosclerosis), T (tubular atrophy / interstitial fibrosis > 25%), and C (crescents > 0%).",
+                  "numbers": [
+                    "50%",
+                    "25%"
+                  ],
+                  "source": "International IgA Nephropathy Network / KDIGO"
+                },
+                {
+                  "term": "First-line supportive RAAS inhibition",
+                  "fact": "For persistent proteinuria > 0.5-1.0 g/day/1.73m², maximum tolerated ACE inhibitor or ARB therapy is recommended for at least 90 days prior to considering immunosuppression.",
+                  "numbers": [
+                    "0.5-1.0 g/day/1.73m²",
+                    "90 days"
+                  ],
+                  "drugs": [
+                    "enalapril",
+                    "losartan"
+                  ],
+                  "source": "KDIGO 2021"
+                },
+                {
+                  "term": "Targeted-release oral budesonide (Nefecon)",
+                  "fact": "Targeted-release oral budesonide (16 mg daily designed to deliver drug to distal ileum Peyer patches) significantly reduces proteinuria and slows eGFR loss in high-risk IgA nephropathy.",
+                  "numbers": [
+                    "16 mg"
+                  ],
+                  "drugs": [
+                    "budesonide"
+                  ],
+                  "source": "NefIgArd Trial / FDA Approval"
+                },
+                {
+                  "term": "IgA vasculitis (Henoch-Schonlein purpura) tetrad",
+                  "fact": "IgA vasculitis presents with the classic tetrad of non-thrombocytopenic palpable purpura (dependent lower limbs/buttocks), arthralgia/arthritis, colicky abdominal pain (intussusception risk), and glomerulonephritis.",
+                  "numbers": [
+                    "4"
+                  ],
+                  "source": "EULAR/PRINTO/PRES Consensus"
+                },
+                {
+                  "term": "Crescentic HSP nephritis intervention",
+                  "fact": "Renal biopsy showing crescents in > 50% of glomeruli in IgA vasculitis nephritis warrants aggressive therapy with intravenous pulsed methylprednisolone (30 mg/kg/dose, max 1000 mg) and cyclophosphamide.",
+                  "numbers": [
+                    "50%",
+                    "30 mg/kg/dose",
+                    "1000 mg"
+                  ],
+                  "drugs": [
+                    "methylprednisolone",
+                    "cyclophosphamide"
+                  ],
+                  "source": "SHARE Guidelines on IgA Vasculitis"
+                },
+                {
+                  "term": "Urine screening surveillance in HSP",
+                  "fact": "All children diagnosed with IgA vasculitis require serial blood pressure and urinalysis screening weekly for the first month, then every 2-4 weeks for at least 6 months to detect late-onset nephritis.",
+                  "numbers": [
+                    "1 month",
+                    "2-4 weeks",
+                    "6 months"
+                  ],
+                  "source": "Nelson 22e Chapter 541"
+                }
+              ]
+            },
+            {
+              "id": "pnp-lupus-nephritis-pediatric",
+              "title": "Pediatric Lupus Nephritis: ISN/RPS Classes, Induction and Targeted Therapies",
+              "bookChapter": "Nelson 22e Chapter 542",
+              "mustKnow": [
+                {
+                  "term": "Pediatric SLE renal involvement frequency",
+                  "fact": "Renal involvement occurs in 50-80% of children with systemic lupus erythematosus, carrying greater severity and requiring more aggressive therapy than adult-onset SLE.",
+                  "numbers": [
+                    "50-80%"
+                  ],
+                  "source": "SHARE / EULAR Pediatric SLE Guidelines"
+                },
+                {
+                  "term": "ISN/RPS pathological classification classes",
+                  "fact": "Classification comprises Class I (minimal mesangial), Class II (mesangial proliferative), Class III (focal proliferative < 50% glomeruli), Class IV (diffuse proliferative >= 50%), Class V (membranous), and Class VI (advanced sclerosing >= 90%).",
+                  "numbers": [
+                    "50%",
+                    "90%"
+                  ],
+                  "source": "ISN/RPS Consensus"
+                },
+                {
+                  "term": "Class III/IV proliferative induction protocols",
+                  "fact": "Induction for proliferative lupus nephritis consists of high-dose corticosteroids plus either mycophenolate mofetil (1200 mg/m²/day) or intravenous pulsed cyclophosphamide (Euro-Lupus or NIH low-dose regimen).",
+                  "numbers": [
+                    "1200 mg/m²/day"
+                  ],
+                  "drugs": [
+                    "mycophenolate mofetil",
+                    "cyclophosphamide",
+                    "methylprednisolone"
+                  ],
+                  "source": "KDIGO 2021 / ACR Guidelines"
+                },
+                {
+                  "term": "Belimumab add-on therapy",
+                  "fact": "Belimumab (anti-BAFF/BLyS monoclonal antibody) is approved for active lupus nephritis in children >= 5 years, improving renal response rates and reducing corticosteroid exposure.",
+                  "numbers": [
+                    "5 years"
+                  ],
+                  "drugs": [
+                    "belimumab"
+                  ],
+                  "source": "FDA Approval / BLISS-LN Trial"
+                },
+                {
+                  "term": "Full house immunofluorescence signature",
+                  "fact": "Diagnostic renal immunofluorescence in lupus nephritis reveals intense granular full house staining positive for IgG, IgA, IgM, C3, and C1q along capillary walls and mesangium.",
+                  "source": "Nelson 22e Chapter 542"
+                },
+                {
+                  "term": "Anti-dsDNA and complement monitoring",
+                  "fact": "Active proliferative lupus flares correlate tightly with rising anti-dsDNA antibody titers and consumption of serum complement C3 and C4.",
+                  "source": "SHARE Guidelines"
+                },
+                {
+                  "term": "Hydroxychloroquine baseline protection",
+                  "fact": "All pediatric lupus nephritis patients should receive hydroxychloroquine (3-5 mg/kg/day, max 200-400 mg) unless contraindicated, reducing flares, thrombotic events, and renal damage.",
+                  "numbers": [
+                    "3-5 mg/kg/day",
+                    "200-400 mg"
+                  ],
+                  "drugs": [
+                    "hydroxychloroquine"
+                  ],
+                  "source": "EULAR/ACR Guidelines"
+                },
+                {
+                  "term": "Maintenance immunosuppression duration",
+                  "fact": "Maintenance therapy with oral mycophenolate mofetil (or azathioprine) combined with low-dose prednisone must be sustained for at least 3-5 years before contemplating gradual withdrawal.",
+                  "numbers": [
+                    "3-5 years"
+                  ],
+                  "drugs": [
+                    "mycophenolate mofetil",
+                    "azathioprine",
+                    "prednisone"
+                  ],
+                  "source": "KDIGO 2021"
+                }
+              ]
+            },
+            {
+              "id": "pnp-alport-syndrome-thin-basement-membrane",
+              "title": "Alport Syndrome and Thin Basement Membrane Disease: Type IV Collagen Genetics",
+              "bookChapter": "Nelson 22e Chapter 544",
+              "mustKnow": [
+                {
+                  "term": "COL4A5 X-linked inheritance dominance",
+                  "fact": "X-linked Alport syndrome accounts for 85% of cases and is caused by pathogenic variants in COL4A5 on chromosome Xq22.3 encoding the alpha-5 chain of type IV collagen.",
+                  "numbers": [
+                    "85%",
+                    "Xq22.3"
+                  ],
+                  "source": "Nelson 22e Chapter 544"
+                },
+                {
+                  "term": "Autosomal recessive and dominant COL4A3/COL4A4",
+                  "fact": "Autosomal recessive Alport syndrome (15% of cases) results from homozygous or compound heterozygous mutations in COL4A3 or COL4A4 (chromosome 2q36.3), causing early ESRD in both sexes equally.",
+                  "numbers": [
+                    "15%",
+                    "2q36.3"
+                  ],
+                  "source": "Alport Syndrome Consensus Guidelines"
+                },
+                {
+                  "term": "Electron microscopy basket-weave splitting",
+                  "fact": "Diagnostic electron microscopy reveals irregular thickening, thinning, and characteristic splitting/lamellation of the glomerular basement membrane lamina densa (basket-weave pattern).",
+                  "source": "Nelson 22e Chapter 544"
+                },
+                {
+                  "term": "Sensorineural hearing loss characteristics",
+                  "fact": "High-frequency bilateral sensorineural hearing loss emerges during late childhood or early adolescence (never present in neonates) in up to 80-90% of affected males with X-linked Alport.",
+                  "numbers": [
+                    "80-90%"
+                  ],
+                  "source": "Nelson 22e Chapter 544"
+                },
+                {
+                  "term": "Ocular manifestations and pathognomonic signs",
+                  "fact": "Anterior lenticonus (conical protrusion of the anterior lens capsule into the anterior chamber) and perimacular fleck retinopathy are pathognomonic ocular hallmarks of Alport syndrome.",
+                  "source": "Nelson 22e Chapter 544"
+                },
+                {
+                  "term": "Early ACE-inhibitor intervention (EARLY PRO-TECT trial)",
+                  "fact": "Initiating ramipril or enalapril at early microalbuminuria stage delays onset of end-stage renal disease by decades compared to untreated historical cohorts.",
+                  "drugs": [
+                    "ramipril",
+                    "enalapril"
+                  ],
+                  "source": "EARLY PRO-TECT Trial (Kidney Int 2020)"
+                },
+                {
+                  "term": "Anti-GBM nephritis post-transplant risk",
+                  "fact": "Approximately 3-5% of transplanted male Alport patients develop de novo anti-GBM crescentic nephritis because their immune system recognizes normal allograft collagen IV alpha-5 chains as foreign.",
+                  "numbers": [
+                    "3-5%"
+                  ],
+                  "source": "Nelson 22e Chapter 544"
+                },
+                {
+                  "term": "Thin basement membrane nephropathy",
+                  "fact": "Heterozygous mutations in COL4A3 or COL4A4 cause thin basement membrane nephropathy (benign familial hematuria), featuring diffuse uniform thinning of GBM (< 200-250 nm) with normal renal function.",
+                  "numbers": [
+                    "200-250 nm"
+                  ],
+                  "source": "Nelson 22e Chapter 544"
+                }
+              ]
+            },
+            {
+              "id": "pnp-membranoproliferative-c3-glomerulopathy",
+              "title": "C3 Glomerulopathy and MPGN: Alternative Complement Dysregulation and Management",
+              "bookChapter": "Nelson 22e Chapter 542",
+              "mustKnow": [
+                {
+                  "term": "Immunofluorescence reclassification of MPGN",
+                  "fact": "MPGN is modernly categorized by immunofluorescence into immune complex-mediated MPGN (Ig-positive with complement, driven by infections/autoimmunity) and complement-mediated C3 glomerulopathy (C3-dominant with absent/scant Igs).",
+                  "source": "KDIGO Complement Glomerulopathies 2021"
+                },
+                {
+                  "term": "C3 glomerulonephritis vs Dense Deposit Disease (DDD)",
+                  "fact": "C3G is subdivided on electron microscopy into Dense Deposit Disease (extremely osmophilic, ribbon-like serpentine electron-dense intramembranous deposits) and C3GN (mesangial and subendothelial/subepithelial deposits).",
+                  "source": "Nelson 22e Chapter 542"
+                },
+                {
+                  "term": "C3 Nephritic Factor (C3NeF) autoantibodies",
+                  "fact": "C3NeF is an IgG autoantibody that stabilizes the alternative pathway C3 convertase (C3bBb), extending its half-life and causing relentless fluid-phase C3 consumption and profound hypocomplementemia.",
+                  "source": "KDIGO 2021"
+                },
+                {
+                  "term": "Acquired partial lipodystrophy association",
+                  "fact": "Dense deposit disease is strongly associated with acquired partial lipodystrophy (Barraquer-Simons syndrome, progressive loss of subcutaneous fat from head down) and ocular drusen of the retinal pigment epithelium.",
+                  "source": "Nelson 22e Chapter 542"
+                },
+                {
+                  "term": "Light microscopy tram-track appearance",
+                  "fact": "Both MPGN and C3G show lobular glomerular accentuation, endocapillary proliferation, and mesangial interposition splitting the capillary basement membrane into a double contour (tram-track sign).",
+                  "source": "Nelson 22e Chapter 542"
+                },
+                {
+                  "term": "Complement genetic testing panel",
+                  "fact": "Evaluation requires testing for CFH, CFI, CD46 (MCP), CFHR1-5 hybrid genes, anti-factor H autoantibodies, and alternative pathway components (Bb, sC5b-9).",
+                  "source": "IPNA Consensus"
+                },
+                {
+                  "term": "Mycophenolate mofetil and steroid efficacy",
+                  "fact": "First-line immunosuppressive therapy for progressive proteinuria in C3G consists of mycophenolate mofetil (1200 mg/m²/day) plus oral glucocorticoids, achieving stabilization in 50% of patients.",
+                  "numbers": [
+                    "1200 mg/m²/day",
+                    "50%"
+                  ],
+                  "drugs": [
+                    "mycophenolate mofetil",
+                    "prednisone"
+                  ],
+                  "source": "KDIGO 2021"
+                },
+                {
+                  "term": "Pegcetacoplan and Factor B inhibitor therapies",
+                  "fact": "Novel proximal complement inhibitors targeting C3 (pegcetacoplan) or Factor B (iptacopan) demonstrate significant reduction in glomerular C3 deposition and proteinuria in clinical trials.",
+                  "drugs": [
+                    "pegcetacoplan",
+                    "iptacopan"
+                  ],
+                  "source": "VALIANT / APPEAR-C3G Trials"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pnp-aki-renal-replacement-sec",
+      "title": "Acute Kidney Injury and Renal Replacement Therapy",
+      "modules": [
+        {
+          "id": "pnp-aki-ckd",
+          "title": "Pediatric AKI, Dialysis and Chronic Kidney Disease",
+          "lessonTopics": [
+            {
+              "id": "pnp-pediatric-aki-staging-kdigo",
+              "title": "Pediatric AKI: KDIGO & pRIFLE Staging, Biomarkers and Fluid Overload",
+              "bookChapter": "Nelson 22e Chapter 546",
+              "mustKnow": [
+                {
+                  "term": "KDIGO pediatric AKI staging criteria",
+                  "fact": "KDIGO defines AKI Stage 1 as serum creatinine increase >= 0.3 mg/dL within 48h or 1.5-1.9x baseline; Stage 2 as 2.0-2.9x baseline; Stage 3 as >= 3.0x baseline or SCr >= 4.0 mg/dL or initiation of RRT or eGFR < 35 mL/min/1.73m² in children < 18 years.",
+                  "numbers": [
+                    "0.3 mg/dL",
+                    "48h",
+                    "1.5-1.9x",
+                    "2.0-2.9x",
+                    "3.0x",
+                    "4.0 mg/dL",
+                    "35 mL/min/1.73m²",
+                    "18 years"
+                  ],
+                  "source": "KDIGO AKI Guidelines"
+                },
+                {
+                  "term": "Urine output thresholds per stage",
+                  "fact": "Oliguria staging requires: Stage 1 (< 0.5 mL/kg/hr for 6-12 hours), Stage 2 (< 0.5 mL/kg/hr for >= 12 hours), and Stage 3 (< 0.3 mL/kg/hr for >= 24 hours or anuria for >= 12 hours).",
+                  "numbers": [
+                    "0.5 mL/kg/hr",
+                    "6-12 hours",
+                    "12 hours",
+                    "0.3 mL/kg/hr",
+                    "24 hours"
+                  ],
+                  "source": "KDIGO Guidelines"
+                },
+                {
+                  "term": "Fluid overload percentage calculation",
+                  "fact": "Percent fluid overload (%FO) is calculated as [(Fluid In - Fluid Out) / Admission Weight] x 100%; fluid overload > 10-15% in critically ill children is independently associated with a 3-fold increase in mortality.",
+                  "numbers": [
+                    "10-15%",
+                    "3-fold"
+                  ],
+                  "source": "AWARE Study (NEJM 2017)"
+                },
+                {
+                  "term": "Novel renal tubular injury biomarkers",
+                  "fact": "Urinary and serum Neutrophil Gelatinase-Associated Lipocalin (NGAL > 150 ng/mL) and Kidney Injury Molecule-1 (KIM-1) rise within 2-4 hours of ischemic/toxic insult, preceding serum creatinine rise by 24-48 hours.",
+                  "numbers": [
+                    "150 ng/mL",
+                    "2-4 hours",
+                    "24-48 hours"
+                  ],
+                  "source": "Nelson 22e Chapter 546"
+                },
+                {
+                  "term": "Furosemide stress test (FST) in children",
+                  "fact": "FST evaluates tubular integrity by administering IV furosemide (1.0 mg/kg in loop-diuretic naive, 1.5 mg/kg if previously exposed); urine output < 2 mL/kg over 2 hours predicts progression to severe AKI.",
+                  "numbers": [
+                    "1.0 mg/kg",
+                    "1.5 mg/kg",
+                    "2 mL/kg",
+                    "2 hours"
+                  ],
+                  "drugs": [
+                    "furosemide"
+                  ],
+                  "source": "Pediatric Critical Care Medicine"
+                },
+                {
+                  "term": "Renal angina index (RAI) stratification",
+                  "fact": "The pediatric Renal Angina Index multiplies risk factors (ICU admission, solid organ transplant) by injury score (creatinine rise or fluid overload); RAI >= 8 identifies patients needing biomarker testing.",
+                  "numbers": [
+                    "8"
+                  ],
+                  "source": "Lancet / Pediatric Nephrology"
+                },
+                {
+                  "term": "Fractional excretion of sodium (FeNa) utility",
+                  "fact": "FeNa = [(Urine Na x Serum Cr) / (Serum Na x Urine Cr)] x 100%; FeNa < 1% (< 2.5% in neonates) suggests prerenal azotemia, while FeNa > 2% indicates intrinsic acute tubular necrosis (ATN).",
+                  "numbers": [
+                    "1%",
+                    "2.5%",
+                    "2%"
+                  ],
+                  "source": "Nelson 22e Chapter 546"
+                },
+                {
+                  "term": "Nephrotoxic medication stewardship",
+                  "fact": "The NINJA initiative showed that systematic screening for exposure to >= 3 nephrotoxins simultaneously or >= 3 days of aminoglycosides reduces hospital-acquired AKI rates by 38%.",
+                  "numbers": [
+                    "3",
+                    "3 days",
+                    "38%"
+                  ],
+                  "drugs": [
+                    "gentamicin",
+                    "tobramycin",
+                    "vancomycin"
+                  ],
+                  "source": "NINJA Collaborative (Pediatrics 2020)"
+                }
+              ]
+            },
+            {
+              "id": "pnp-pediatric-rrt-crrt-and-pd",
+              "title": "Pediatric Renal Replacement Therapy: CRRT, Peritoneal Dialysis and Hemodialysis",
+              "bookChapter": "Nelson 22e Chapter 547",
+              "mustKnow": [
+                {
+                  "term": "Absolute indications for acute pediatric RRT",
+                  "fact": "Indications for acute RRT include refractory hyperkalemia (K > 6.5-7.0 mEq/L with ECG changes), refractory metabolic acidosis (pH < 7.15), symptomatic uremia (encephalopathy, pericarditis), and fluid overload > 10-15%.",
+                  "numbers": [
+                    "6.5-7.0 mEq/L",
+                    "7.15",
+                    "10-15%"
+                  ],
+                  "source": "Nelson 22e Chapter 547"
+                },
+                {
+                  "term": "Peritoneal dialysis catheter insertion and fill volume",
+                  "fact": "Acute PD is preferred in neonates and hemodynamically unstable infants; initial dwell volume starts at 10-20 mL/kg with gradual escalation to 30-40 mL/kg as tolerated without respiratory compromise.",
+                  "numbers": [
+                    "10-20 mL/kg",
+                    "30-40 mL/kg"
+                  ],
+                  "source": "ISPD Pediatric PD Guidelines"
+                },
+                {
+                  "term": "CRRT modality selection (CVVH vs CVVHD vs CVVHDF)",
+                  "fact": "Continuous Veno-Venous Hemodiafiltration (CVVHDF) combines convective solute removal of middle/large molecules with diffusive clearance of small molecules, ideal for sepsis with multi-organ dysfunction.",
+                  "source": "ADQI Pediatric Consensus"
+                },
+                {
+                  "term": "Vascular access sizing in pediatric CRRT",
+                  "fact": "Double-lumen catheter sizes depend on patient weight: 6.5 Fr for neonates (< 3 kg), 7-8 Fr for infants (3-10 kg), 8-9 Fr for children (10-30 kg), and 11-13.5 Fr for adolescents (> 30 kg).",
+                  "numbers": [
+                    "6.5 Fr",
+                    "3 kg",
+                    "7-8 Fr",
+                    "3-10 kg",
+                    "8-9 Fr",
+                    "10-30 kg",
+                    "11-13.5 Fr",
+                    "30 kg"
+                  ],
+                  "source": "Pediatric Critical Care Medicine"
+                },
+                {
+                  "term": "Regional citrate anticoagulation (RCA) monitoring",
+                  "fact": "RCA is superior to systemic heparin for pediatric CRRT filter survival; pre-filter citrate binds calcium, while IV calcium chloride is infused systemically to maintain patient ionized calcium between 1.1-1.3 mmol/L.",
+                  "numbers": [
+                    "1.1-1.3 mmol/L"
+                  ],
+                  "drugs": [
+                    "sodium citrate",
+                    "calcium chloride",
+                    "heparin"
+                  ],
+                  "source": "KDIGO AKI / PCRRT"
+                },
+                {
+                  "term": "Citrate toxicity (citrate lock) ratio",
+                  "fact": "Citrate accumulation manifests as high anion-gap metabolic acidosis and total-to-ionized calcium ratio > 2.5 (Ca_tot / Ca_ion), requiring reduction of citrate infusion or temporary switch to saline flushes.",
+                  "numbers": [
+                    "2.5"
+                  ],
+                  "source": "PCRRT Guidelines"
+                },
+                {
+                  "term": "Neonatal miniature CRRT machines (CARPEDIEM / NIDUS)",
+                  "fact": "Dedicated miniature platforms (CARPEDIEM and NIDUS) reduce extracorporeal circuit volume to < 10-15 mL (< 10% of neonate blood volume), eliminating the need for blood priming in low birth weight infants.",
+                  "numbers": [
+                    "10-15 mL",
+                    "10%"
+                  ],
+                  "source": "Lancet / Pediatric Nephrology"
+                },
+                {
+                  "term": "Target effluent dose in pediatric CRRT",
+                  "fact": "The recommended delivered effluent clearance dose in pediatric CRRT is 20-25 mL/kg/hr; higher doses do not improve survival and exacerbate electrolyte and micronutrient depletion.",
+                  "numbers": [
+                    "20-25 mL/kg/hr"
+                  ],
+                  "source": "KDIGO Guidelines"
+                }
+              ]
+            },
+            {
+              "id": "pnp-pediatric-ckd-staging-progression",
+              "title": "Pediatric CKD: Etiology, Schwartz Formula, Staging and Progression Retardation",
+              "bookChapter": "Nelson 22e Chapter 548",
+              "mustKnow": [
+                {
+                  "term": "Pediatric CKD etiology vs adult CKD",
+                  "fact": "Unlike adults where diabetes and hypertension dominate, pediatric CKD is primarily caused by congenital anomalies of the kidney and urinary tract (CAKUT, 50%) and hereditary nephropathies (20%).",
+                  "numbers": [
+                    "50%",
+                    "20%"
+                  ],
+                  "source": "CKiD Cohort Study / Nelson 22e"
+                },
+                {
+                  "term": "Bedside Schwartz formula for pediatric eGFR",
+                  "fact": "Bedside Schwartz equation is: eGFR (mL/min/1.73m²) = 0.413 x Height (cm) / Serum Creatinine (mg/dL), validated for children aged 1 to 16 years.",
+                  "numbers": [
+                    "0.413",
+                    "1 to 16 years"
+                  ],
+                  "source": "Schwartz et al. (JASN 2009)"
+                },
+                {
+                  "term": "CKD staging thresholds (KDIGO)",
+                  "fact": "CKD is staged by GFR: Stage 1 (>= 90 with kidney damage), Stage 2 (60-89), Stage 3a (45-59), Stage 3b (30-44), Stage 4 (15-29, severe reduction), and Stage 5 (< 15 mL/min/1.73m², kidney failure).",
+                  "numbers": [
+                    "90",
+                    "60-89",
+                    "45-59",
+                    "30-44",
+                    "15-29",
+                    "15 mL/min/1.73m²"
+                  ],
+                  "source": "KDIGO CKD 2024 Guidelines"
+                },
+                {
+                  "term": "Blood pressure target to retard progression",
+                  "fact": "The ESCAPE trial established that strict ambulatory blood pressure control to < 50th percentile using ACE inhibitors significantly slows CKD progression and reduces risk of ESRD by 35%.",
+                  "numbers": [
+                    "50th percentile",
+                    "35%"
+                  ],
+                  "drugs": [
+                    "ramipril"
+                  ],
+                  "source": "ESCAPE Trial (NEJM 2009)"
+                },
+                {
+                  "term": "Growth failure and recombinant human GH",
+                  "fact": "Persistent height velocity < 25th percentile or height SDS < -2.0 despite optimal nutrition and metabolic acidosis correction warrants recombinant human growth hormone (rhGH 0.045-0.05 mg/kg/day).",
+                  "numbers": [
+                    "25th percentile",
+                    "-2.0",
+                    "0.045-0.05 mg/kg/day"
+                  ],
+                  "drugs": [
+                    "somatropin"
+                  ],
+                  "source": "IPNA Growth Guidelines"
+                },
+                {
+                  "term": "Correction of metabolic acidosis threshold",
+                  "fact": "Serum bicarbonate must be maintained >= 22 mEq/L using oral sodium bicarbonate (1-3 mEq/kg/day) to prevent bone mineral dissolution, muscle wasting, and accelerated CKD decline.",
+                  "numbers": [
+                    "22 mEq/L",
+                    "1-3 mEq/kg/day"
+                  ],
+                  "drugs": [
+                    "sodium bicarbonate"
+                  ],
+                  "source": "KDOQI / KDIGO Guidelines"
+                },
+                {
+                  "term": "SGLT2 inhibitors in pediatric CKD",
+                  "fact": "SGLT2 inhibitors (empagliflozin, dapagliflozin) reduce intraglomerular hyperfiltration and albuminuria in adolescents with proteinuric CKD, expanding from adult nephroprotection trials.",
+                  "drugs": [
+                    "dapagliflozin",
+                    "empagliflozin"
+                  ],
+                  "source": "EMPA-KIDNEY Pediatric Sub-analyses"
+                },
+                {
+                  "term": "Pre-emptive kidney transplantation goal",
+                  "fact": "Pre-emptive living donor kidney transplantation (before starting maintenance dialysis) is the gold standard for pediatric CKD stage 5 (eGFR < 15 mL/min/1.73m²), maximizing neurocognitive and linear growth outcomes.",
+                  "numbers": [
+                    "15 mL/min/1.73m²"
+                  ],
+                  "source": "IPNA Transplant Guidelines"
+                }
+              ]
+            },
+            {
+              "id": "pnp-renal-osteodystrophy-ckd-mbd",
+              "title": "CKD-Mineral and Bone Disorder: Phosphate Binders, Vitamin D and FGF-23 Axis",
+              "bookChapter": "Nelson 22e Chapter 548",
+              "mustKnow": [
+                {
+                  "term": "Pathophysiological cascade of CKD-MBD",
+                  "fact": "Declining GFR causes phosphate retention, triggering osteocyte secretion of FGF-23 and downregulating renal 1-alpha-hydroxylase (CYP27B1), leading to 1,25(OH)2D deficiency, hypocalcemia, and secondary hyperparathyroidism.",
+                  "source": "Nelson 22e Chapter 548"
+                },
+                {
+                  "term": "Stage-based serum PTH target ranges",
+                  "fact": "KDIGO recommends maintaining intact PTH at 1.5-3x upper normal limit in CKD Stage 4 (70-150 pg/mL) and 2-9x upper normal limit in CKD Stage 5 / dialysis (150-300 pg/mL) to avoid adynamic bone disease.",
+                  "numbers": [
+                    "1.5-3x",
+                    "70-150 pg/mL",
+                    "2-9x",
+                    "150-300 pg/mL"
+                  ],
+                  "source": "KDIGO CKD-MBD Guidelines"
+                },
+                {
+                  "term": "Phosphate binder selection in children",
+                  "fact": "Calcium-based binders (calcium carbonate, calcium acetate) are taken with meals; non-calcium binders (sevelamer carbonate 50-100 mg/kg/day) are preferred if hypercalcemia or vascular calcification develops.",
+                  "numbers": [
+                    "50-100 mg/kg/day"
+                  ],
+                  "drugs": [
+                    "calcium acetate",
+                    "sevelamer carbonate"
+                  ],
+                  "source": "KDIGO / KDOQI Guidelines"
+                },
+                {
+                  "term": "Active vitamin D analog dosing",
+                  "fact": "Active vitamin D sterols (calcitriol 0.25-1 mcg/day or alfacalcidol) suppress parathyroid PTH gene expression; therapy must be paused if serum calcium x phosphate product exceeds 55-65 mg²/dL².",
+                  "numbers": [
+                    "0.25-1 mcg/day",
+                    "55-65 mg²/dL²"
+                  ],
+                  "drugs": [
+                    "calcitriol",
+                    "alfacalcidol"
+                  ],
+                  "source": "Nelson 22e Chapter 548"
+                },
+                {
+                  "term": "Calcimimetic agents in pediatric dialysis",
+                  "fact": "Cinacalcet (oral allosteric modulator of calcium-sensing receptor) or etelcalcetide is utilized in adolescents on hemodialysis with severe secondary hyperparathyroidism refractory to active vitamin D.",
+                  "drugs": [
+                    "cinacalcet",
+                    "etelcalcetide"
+                  ],
+                  "source": "FDA Pediatric Labeling"
+                },
+                {
+                  "term": "Adynamic bone disease risks",
+                  "fact": "Over-suppression of PTH (intact PTH < 100 pg/mL) leads to adynamic bone disease characterized by absent bone turnover, osteomalacia, inability to buffer calcium, and severe metastatic arterial calcification.",
+                  "numbers": [
+                    "100 pg/mL"
+                  ],
+                  "source": "Nelson 22e Chapter 548"
+                },
+                {
+                  "term": "Skeletal deformities in growing children",
+                  "fact": "Renal osteodystrophy in pediatric patients uniquely produces slipped capital femoral epiphysis (SCFE), genu valgum (knock-knees), metaphyseal cupping, and rachitic rosary.",
+                  "source": "Nelson 22e Chapter 548"
+                },
+                {
+                  "term": "Dietary phosphorus restriction guidelines",
+                  "fact": "Dietary phosphate restriction to 100% of Dietary Reference Intake (DRI) for age is initiated as soon as PTH rises above normal, avoiding processed foods rich in inorganic phosphate additives.",
+                  "numbers": [
+                    "100%"
+                  ],
+                  "source": "KDOQI Pediatric Nutrition Guidelines"
+                }
+              ]
+            },
+            {
+              "id": "pnp-anemia-of-ckd-pediatric",
+              "title": "Pediatric Anemia of CKD: Iron Repletion, ESA Targets and Resistance",
+              "bookChapter": "Nelson 22e Chapter 548",
+              "mustKnow": [
+                {
+                  "term": "Pathogenesis of renal anemia",
+                  "fact": "Anemia of CKD is primarily driven by peritubular interstitial cell erythropoietin deficiency, compounded by hepcidin-mediated iron sequestration, shortened erythrocyte survival, and chronic inflammation.",
+                  "source": "Nelson 22e Chapter 548"
+                },
+                {
+                  "term": "Target hemoglobin range in pediatric CKD",
+                  "fact": "KDIGO recommends targeting hemoglobin between 10.0 and 12.0 g/dL; targeting normal hemoglobin (> 13 g/dL) is strictly avoided due to increased risks of hypertension, stroke, and vascular thrombosis.",
+                  "numbers": [
+                    "10.0",
+                    "12.0 g/dL",
+                    "13 g/dL"
+                  ],
+                  "source": "KDIGO Anemia Guidelines"
+                },
+                {
+                  "term": "Iron repletion thresholds prior to ESA",
+                  "fact": "Iron status must be optimized before starting ESA therapy: target transferrin saturation (TSAT) > 20% and serum ferritin > 100 ng/mL in non-dialysis CKD (> 200 ng/mL in hemodialysis).",
+                  "numbers": [
+                    "20%",
+                    "100 ng/mL",
+                    "200 ng/mL"
+                  ],
+                  "drugs": [
+                    "iron sucrose",
+                    "ferric carboxymaltose"
+                  ],
+                  "source": "KDIGO Guidelines"
+                },
+                {
+                  "term": "Erythropoiesis-stimulating agents (ESA) dosing",
+                  "fact": "Epoetin alfa is started at 50-100 U/kg/dose subcutaneously or IV 1-3 times weekly, or darbepoetin alfa at 0.45 mcg/kg once weekly or every 2 weeks.",
+                  "numbers": [
+                    "50-100 U/kg/dose",
+                    "0.45 mcg/kg"
+                  ],
+                  "drugs": [
+                    "epoetin alfa",
+                    "darbepoetin alfa"
+                  ],
+                  "source": "Nelson 22e Chapter 548"
+                },
+                {
+                  "term": "Intravenous iron dosing in children",
+                  "fact": "For hemodialysis patients or severe oral iron intolerance, IV iron sucrose (1-2 mg/kg per dose, max 100 mg) is administered weekly up to a cumulative replacement dose calculated by the Ganzoni equation.",
+                  "numbers": [
+                    "1-2 mg/kg",
+                    "100 mg"
+                  ],
+                  "drugs": [
+                    "iron sucrose"
+                  ],
+                  "source": "KDOQI Anemia Guidelines"
+                },
+                {
+                  "term": "ESA hyporesponsiveness definition and causes",
+                  "fact": "ESA hyporesponsiveness is failure to achieve target Hb despite high ESA doses (> 300 U/kg/week epoetin); primary causes are absolute iron deficiency, occult infection, hyperparathyroidism, and aluminum toxicity.",
+                  "numbers": [
+                    "300 U/kg/week"
+                  ],
+                  "source": "KDIGO Guidelines"
+                },
+                {
+                  "term": "Pure red cell aplasia (PRCA) screening",
+                  "fact": "Development of sudden refractory anemia with reticulocytopenia (< 10,000/mm³) after ESA treatment suggests anti-erythropoietin neutralizing antibodies, requiring immediate ESA cessation and bone marrow biopsy.",
+                  "numbers": [
+                    "10,000/mm³"
+                  ],
+                  "source": "Nelson 22e Chapter 548"
+                },
+                {
+                  "term": "HIF-PH inhibitors (roxadustat) status",
+                  "fact": "Hypoxia-inducible factor prolyl hydroxylase (HIF-PH) inhibitors promote endogenous erythropoietin transcription and improve iron bioavailability, under pediatric clinical trial evaluation.",
+                  "drugs": [
+                    "roxadustat"
+                  ],
+                  "source": "Pediatric Nephrology Review"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pnp-thrombotic-microangiopathy-sec",
+      "title": "Thrombotic Microangiopathies and Endothelial Injury",
+      "modules": [
+        {
+          "id": "pnp-hus-tma",
+          "title": "Hemolytic Uremic Syndrome and Microangiopathies",
+          "lessonTopics": [
+            {
+              "id": "pnp-shiga-toxin-d-plus-hus",
+              "title": "STEC D+ Hemolytic Uremic Syndrome: Shiga Toxin, Microangiopathy and Supportive Care",
+              "bookChapter": "Nelson 22e Chapter 545",
+              "mustKnow": [
+                {
+                  "term": "STEC D+ HUS classic triad",
+                  "fact": "Hemolytic uremic syndrome is defined by the clinical triad of microangiopathic hemolytic anemia (Coombs-negative, schistocytes), thrombocytopenia (< 150,000/mm³), and acute kidney injury.",
+                  "numbers": [
+                    "150,000/mm³"
+                  ],
+                  "source": "Nelson 22e Chapter 545"
+                },
+                {
+                  "term": "Shiga toxin pathogenesis and Gb3 receptors",
+                  "fact": "Enterohemorrhagic E. coli (O157:H7, O26, O104) produces Shiga toxin (Stx1 and Stx2), which binds globotriaosylceramide (Gb3) receptors on glomerular endothelial cells, halting protein synthesis and causing microvascular thrombosis.",
+                  "source": "Nelson 22e Chapter 545"
+                },
+                {
+                  "term": "Antibiotic hazard in STEC colitis",
+                  "fact": "Antibiotics (ciprofloxacin, trimethoprim-sulfamethoxazole) and antimotility agents (loperamide) administered during the prodromal diarrheal phase increase Shiga toxin release and elevate risk of HUS by up to 17-fold.",
+                  "numbers": [
+                    "17-fold"
+                  ],
+                  "drugs": [
+                    "ciprofloxacin",
+                    "loperamide"
+                  ],
+                  "source": "CDC / NEJM"
+                },
+                {
+                  "term": "Early volume expansion renal protection",
+                  "fact": "Early intravenous volume expansion with isotonic saline (10-15 mL/kg/hr initially) during the diarrheal prodrome preserves renal microvascular perfusion and halves the requirement for acute dialysis.",
+                  "numbers": [
+                    "10-15 mL/kg/hr"
+                  ],
+                  "source": "Lancet / Nelson 22e"
+                },
+                {
+                  "term": "Platelet transfusion restriction rule",
+                  "fact": "Platelet transfusions are strictly contraindicated in HUS because transfused platelets fuel microvascular thrombosis, and are reserved exclusively for life-threatening intracranial or active surgical hemorrhage.",
+                  "source": "British Committee for Standards in Haematology"
+                },
+                {
+                  "term": "Stx stool PCR and sorbitol-MacConkey agar",
+                  "fact": "Diagnosis is confirmed by stool culture on Sorbitol-MacConkey agar (O157 strains are sorbitol non-fermenting, appearing colorless) or enzyme immunoassay / PCR for Stx1 and Stx2 genes.",
+                  "source": "CDC Guidelines"
+                },
+                {
+                  "term": "Indications for acute dialysis in D+ HUS",
+                  "fact": "Acute peritoneal dialysis or hemodialysis is required in over 50% of children with D+ HUS due to anuria, severe fluid overload, symptomatic uremia, or intractable hyperkalemia.",
+                  "numbers": [
+                    "50%"
+                  ],
+                  "source": "Nelson 22e Chapter 545"
+                },
+                {
+                  "term": "Long-term renal sequelae surveillance",
+                  "fact": "Up to 30% of children surviving D+ HUS develop hypertension, proteinuria, or chronic kidney disease years later due to hyperfiltration in surviving nephrons, necessitating annual BP and UPCR follow-up.",
+                  "numbers": [
+                    "30%"
+                  ],
+                  "source": "Nelson 22e Chapter 545"
+                }
+              ]
+            },
+            {
+              "id": "pnp-atypical-hus-complement-blockade",
+              "title": "Atypical HUS: Alternative Complement Gene Variants and Terminal C5 Inhibition",
+              "bookChapter": "Nelson 22e Chapter 545",
+              "mustKnow": [
+                {
+                  "term": "Atypical HUS genetic landscape",
+                  "fact": "Atypical HUS (aHUS) represents uncontrolled alternative complement activation on endothelial surfaces, driven by loss-of-function mutations in regulatory proteins (CFH, CFI, CD46/MCP) or gain-of-function mutations in C3 and CFB.",
+                  "source": "KDIGO TMA Consensus 2024"
+                },
+                {
+                  "term": "Complement Factor H (CFH) variant frequency",
+                  "fact": "Mutations in CFH (chromosome 1q31.3) account for 25-30% of aHUS cases, carrying a 70% risk of progressing to end-stage renal disease or death within one year if untreated.",
+                  "numbers": [
+                    "25-30%",
+                    "70%",
+                    "1 year"
+                  ],
+                  "source": "IPNA / KDIGO"
+                },
+                {
+                  "term": "Anti-factor H autoantibody HUS and CFHR1-3 deletion",
+                  "fact": "Anti-CFH autoantibodies cause 10-15% of pediatric aHUS (predominant in India), strongly linked to homozygous deletion of CFHR1-CFHR3, requiring plasma exchange plus corticosteroids and rituximab.",
+                  "numbers": [
+                    "10-15%"
+                  ],
+                  "drugs": [
+                    "rituximab",
+                    "prednisolone"
+                  ],
+                  "source": "Nelson 22e Chapter 545"
+                },
+                {
+                  "term": "Eculizumab terminal C5 blockade protocol",
+                  "fact": "Eculizumab (recombinant humanized anti-C5 monoclonal antibody) halts terminal membrane attack complex (C5b-9) assembly, inducing hematologic remission and renal recovery in > 80% of aHUS patients.",
+                  "numbers": [
+                    "80%"
+                  ],
+                  "drugs": [
+                    "eculizumab"
+                  ],
+                  "source": "NEJM 2013 / FDA Approval"
+                },
+                {
+                  "term": "Meningococcal prophylaxis requirement",
+                  "fact": "Terminal complement blockade increases susceptibility to Neisseria meningitidis by 2000-fold; mandatory meningococcal vaccination (MenACWY and MenB) and daily oral prophylactic penicillin/erythromycin must be initiated.",
+                  "numbers": [
+                    "2000-fold"
+                  ],
+                  "drugs": [
+                    "penicillin",
+                    "erythromycin"
+                  ],
+                  "source": "CDC Advisory Committee on Immunization Practices"
+                },
+                {
+                  "term": "Ravulizumab extended-interval C5 inhibitor",
+                  "fact": "Ravulizumab is an engineered long-acting C5 inhibitor with extended terminal half-life requiring IV maintenance infusions only once every 8 weeks in children >= 20 kg (every 4 weeks if < 20 kg).",
+                  "numbers": [
+                    "8 weeks",
+                    "20 kg",
+                    "4 weeks"
+                  ],
+                  "drugs": [
+                    "ravulizumab"
+                  ],
+                  "source": "FDA Approval / Pediatric Nephrology"
+                },
+                {
+                  "term": "CD46 / MCP mutation transplant outcomes",
+                  "fact": "Isolated membrane cofactor protein (CD46/MCP) mutations carry a low risk of post-transplant recurrence (< 20%) because the normal donor kidney expresses wild-type CD46 on graft endothelium.",
+                  "numbers": [
+                    "20%"
+                  ],
+                  "source": "IPNA TMA Consensus"
+                },
+                {
+                  "term": "DGKE non-complement atypical HUS",
+                  "fact": "Mutations in diacylglycerol kinase epsilon (DGKE) cause an infantile recessively inherited TMA without complement activation, manifesting before age 1 with relapsing nephrotic-range proteinuria and microangiopathy refractory to eculizumab.",
+                  "numbers": [
+                    "1"
+                  ],
+                  "source": "Nature Genetics / Nelson 22e"
+                }
+              ]
+            },
+            {
+              "id": "pnp-thrombotic-thrombocytopenic-purpura-pediatric",
+              "title": "Pediatric TTP: Congenital Upshaw-Schulman Syndrome vs Immune ADAMTS13 Deficiency",
+              "bookChapter": "Nelson 22e Chapter 545",
+              "mustKnow": [
+                {
+                  "term": "ADAMTS13 severe deficiency threshold",
+                  "fact": "TTP is defined pathologically by severe deficiency of the von Willebrand factor cleaving protease ADAMTS13 activity to < 10% of normal, leading to ultra-large vWF multimer accumulation.",
+                  "numbers": [
+                    "10%"
+                  ],
+                  "source": "ISTH Guidelines on TTP 2020"
+                },
+                {
+                  "term": "Upshaw-Schulman syndrome congenital TTP",
+                  "fact": "Congenital TTP (Upshaw-Schulman syndrome) is an autosomal recessive mutation in ADAMTS13 (9q34.2), presenting in neonates with severe Coombs-negative hemolytic anemia, hyperbilirubinemia, and thrombocytopenia.",
+                  "numbers": [
+                    "9q34.2"
+                  ],
+                  "source": "Nelson 22e Chapter 545"
+                },
+                {
+                  "term": "PLASMIC score validation in pediatrics",
+                  "fact": "The PLASMIC score stratifies probability of severe ADAMTS13 deficiency based on platelets < 30k, hemolysis, no active cancer, no transplant, MCV < 90, INR < 1.5, and creatinine < 2.0 mg/dL; score 6-7 indicates high probability.",
+                  "numbers": [
+                    "30k",
+                    "90",
+                    "1.5",
+                    "2.0 mg/dL",
+                    "6-7"
+                  ],
+                  "source": "Blood / ISTH Guidelines"
+                },
+                {
+                  "term": "Therapeutic plasma exchange (TPE) urgency",
+                  "fact": "Acquired immune TTP requires immediate daily therapeutic plasma exchange (1.0-1.5 plasma volumes, 40-60 mL/kg) with fresh frozen plasma replacement and systemic corticosteroids until platelet count normalizes (> 150k for 2 days).",
+                  "numbers": [
+                    "1.0-1.5 plasma volumes",
+                    "40-60 mL/kg",
+                    "150k",
+                    "2 days"
+                  ],
+                  "drugs": [
+                    "methylprednisolone"
+                  ],
+                  "source": "ISTH Guidelines"
+                },
+                {
+                  "term": "Caplacizumab anti-vWF nanobody",
+                  "fact": "Caplacizumab (bivalent anti-vWF nanobody targeting the A1 domain, 10 mg daily) blocks platelet adhesion to ultra-large vWF multimers, significantly accelerating platelet count recovery and reducing ischemic complications.",
+                  "numbers": [
+                    "10 mg"
+                  ],
+                  "drugs": [
+                    "caplacizumab"
+                  ],
+                  "source": "HERCULES Trial (NEJM 2019)"
+                },
+                {
+                  "term": "Prophylactic plasma infusions in congenital TTP",
+                  "fact": "Patients with congenital Upshaw-Schulman syndrome do not develop antibodies and are managed with regular prophylactic fresh frozen plasma infusions (10-15 mL/kg every 2-3 weeks).",
+                  "numbers": [
+                    "10-15 mL/kg",
+                    "2-3 weeks"
+                  ],
+                  "source": "ISTH Guidelines"
+                },
+                {
+                  "term": "Recombinant ADAMTS13 (rADAMTS13) therapy",
+                  "fact": "Recombinant human ADAMTS13 (40 IU/kg IV) provides targeted enzyme replacement without the volume and allergic risks of plasma transfusion in congenital TTP.",
+                  "numbers": [
+                    "40 IU/kg"
+                  ],
+                  "drugs": [
+                    "recombinant adamts13"
+                  ],
+                  "source": "FDA Approval 2023"
+                },
+                {
+                  "term": "Rituximab role in immune TTP",
+                  "fact": "In immune-mediated TTP, rituximab (375 mg/m² weekly for 4 doses) eliminates ADAMTS13 autoantibody-producing B-cell clones, substantially lowering the 1-year relapse rate from 40% to < 10%.",
+                  "numbers": [
+                    "375 mg/m²",
+                    "4 doses",
+                    "1-year",
+                    "40%",
+                    "10%"
+                  ],
+                  "drugs": [
+                    "rituximab"
+                  ],
+                  "source": "ISTH Guidelines"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pnp-tubular-and-cystic-sec",
+      "title": "Tubular Disorders, Electrolytes and Cystic Kidney Diseases",
+      "modules": [
+        {
+          "id": "pnp-tubular-cystic",
+          "title": "Tubulopathies, Polycystic Kidney Disease and Ciliopathies",
+          "lessonTopics": [
+            {
+              "id": "pnp-bartter-and-gitelman-syndromes",
+              "title": "Bartter vs Gitelman Syndromes: Loop vs DCT Transporters and Urinary Calcium",
+              "bookChapter": "Nelson 22e Chapter 551",
+              "mustKnow": [
+                {
+                  "term": "Metabolic alkalosis and blood pressure phenotype",
+                  "fact": "Both Bartter and Gitelman syndromes feature hypokalemic, hypochloremic metabolic alkalosis with normal or low blood pressure despite marked hyperreninemic hyperaldosteronism.",
+                  "source": "Nelson 22e Chapter 551"
+                },
+                {
+                  "term": "Bartter syndrome molecular classification (Types I-V)",
+                  "fact": "Bartter syndrome impairs thick ascending limb sodium chloride reabsorption: Type I (SLC12A1 / NKCC2), Type II (KCNJ1 / ROMK), Type III (CLCNKB / ClC-Kb), Type IV (BSND / Barttin with sensorineural deafness), and Type V (CASR gain-of-function).",
+                  "source": "Nelson 22e Chapter 551"
+                },
+                {
+                  "term": "Antenatal Bartter syndrome presentation",
+                  "fact": "Antenatal Bartter (Types I and II) presents with maternal polyhydramnios, extreme preterm delivery, life-threatening neonatal salt wasting, isosthenuria, and early nephrocalcinosis.",
+                  "source": "Nelson 22e Chapter 551"
+                },
+                {
+                  "term": "Gitelman syndrome SLC12A3 and NCCT defect",
+                  "fact": "Gitelman syndrome is an autosomal recessive mutation in SLC12A3 encoding the thiazide-sensitive NaCl cotransporter (NCCT) in the distal convoluted tubule, typically manifesting in school-age or adolescence.",
+                  "source": "Nelson 22e Chapter 551"
+                },
+                {
+                  "term": "Urinary calcium-to-creatinine differentiation",
+                  "fact": "Urinary calcium excretion cleanly differentiates the two: Bartter syndrome causes hypercalciuria (urine Ca/Cr ratio > 0.2 mg/mg) and nephrocalcinosis, whereas Gitelman syndrome causes hypocalciuria (urine Ca/Cr < 0.1 mg/mg).",
+                  "numbers": [
+                    "0.2 mg/mg",
+                    "0.1 mg/mg"
+                  ],
+                  "source": "IPNA / KDIGO Tubulopathy Consensus"
+                },
+                {
+                  "term": "Hypomagnesemia in Gitelman syndrome",
+                  "fact": "Severe persistent hypomagnesemia (serum Mg < 1.7 mg/dL) due to down-regulation of TRPM6 channels in the DCT is a hallmark of Gitelman syndrome, leading to chondrocalcinosis and tetany.",
+                  "numbers": [
+                    "1.7 mg/dL"
+                  ],
+                  "source": "Nelson 22e Chapter 551"
+                },
+                {
+                  "term": "Indomethacin therapy in Bartter syndrome",
+                  "fact": "High renal prostaglandin E2 (PGE2) drives polyuria in Bartter; cyclooxygenase inhibitors (indomethacin 1.5-3.0 mg/kg/day or celecoxib) close loop signaling, restoring GFR and electrolyte balance.",
+                  "numbers": [
+                    "1.5-3.0 mg/kg/day"
+                  ],
+                  "drugs": [
+                    "indomethacin",
+                    "celecoxib"
+                  ],
+                  "source": "Nelson 22e Chapter 551"
+                },
+                {
+                  "term": "Potassium-sparing diuretics add-on",
+                  "fact": "High-dose oral potassium chloride repletion is supplemented with potassium-sparing diuretics (spironolactone 2-4 mg/kg/day, amiloride, or eplerenone) to counteract secondary hyperaldosteronism.",
+                  "numbers": [
+                    "2-4 mg/kg/day"
+                  ],
+                  "drugs": [
+                    "potassium chloride",
+                    "spironolactone",
+                    "amiloride"
+                  ],
+                  "source": "IPNA Tubulopathy Guidelines"
+                }
+              ]
+            },
+            {
+              "id": "pnp-renal-tubular-acidosis-types",
+              "title": "Renal Tubular Acidosis: Distal Type 1, Proximal Type 2, Fanconi and Type 4",
+              "bookChapter": "Nelson 22e Chapter 550",
+              "mustKnow": [
+                {
+                  "term": "Shared hallmark of normal anion gap acidosis",
+                  "fact": "All forms of renal tubular acidosis present with normal serum anion gap (hyperchloremic) metabolic acidosis: Anion Gap = Na - (Cl + HCO3) between 8 and 12 mEq/L.",
+                  "numbers": [
+                    "8",
+                    "12 mEq/L"
+                  ],
+                  "source": "Nelson 22e Chapter 550"
+                },
+                {
+                  "term": "Distal RTA Type 1 alpha-intercalated defect",
+                  "fact": "Type 1 (distal) RTA is caused by failure of alpha-intercalated cells to excrete H+ ions (SLC4A1 / AE1, ATP6V1B1 / ATP6V0A4 with deafness), resulting in inability to acidify urine below pH 5.5 despite severe systemic acidemia.",
+                  "numbers": [
+                    "5.5"
+                  ],
+                  "source": "Nelson 22e Chapter 550"
+                },
+                {
+                  "term": "Positive urine anion gap in distal RTA",
+                  "fact": "Urine Anion Gap [U_Na + U_K - U_Cl] is positive in distal RTA (indicating impaired urinary ammonium NH4+ excretion), whereas it is strongly negative in gastrointestinal bicarbonate loss (diarrhea).",
+                  "source": "Nelson 22e Chapter 550"
+                },
+                {
+                  "term": "Nephrocalcinosis and hypocitraturia in Type 1",
+                  "fact": "Systemic acidosis enhances proximal tubular citrate reabsorption, causing severe hypocitraturia and hypercalciuria; alkaline urine precipitates calcium phosphate, leading to medullary nephrocalcinosis and rickets.",
+                  "source": "Nelson 22e Chapter 550"
+                },
+                {
+                  "term": "Proximal RTA Type 2 and Fanconi syndrome",
+                  "fact": "Type 2 (proximal) RTA reflects defective proximal bicarbonate threshold reabsorption (< 15-18 mEq/L) via SLC4A4 (NBCe1), frequently part of generalized Fanconi syndrome (cystinosis, Lowe syndrome, galactosemia, tyrosinemia).",
+                  "numbers": [
+                    "15-18 mEq/L"
+                  ],
+                  "source": "Nelson 22e Chapter 550"
+                },
+                {
+                  "term": "Fractional excretion of bicarbonate in Type 2",
+                  "fact": "When serum bicarbonate is normalized to 24 mEq/L via IV bicarbonate infusion, proximal RTA shows fractional excretion of bicarbonate (FE_HCO3) > 15-20%, whereas in distal RTA it remains < 5%.",
+                  "numbers": [
+                    "24 mEq/L",
+                    "15-20%",
+                    "5%"
+                  ],
+                  "source": "Nelson 22e Chapter 550"
+                },
+                {
+                  "term": "Cystinosis and cysteamine therapy",
+                  "fact": "Infantile nephropathic cystinosis (CTNS gene encoding cystinosin) is the most common genetic cause of Fanconi syndrome; oral cysteamine (1.3 g/m²/day) and cysteamine eye drops deplete intralysosomal cystine crystals.",
+                  "numbers": [
+                    "1.3 g/m²/day"
+                  ],
+                  "drugs": [
+                    "cysteamine"
+                  ],
+                  "source": "Nelson 22e Chapter 550"
+                },
+                {
+                  "term": "Type 4 RTA hyperkalemic presentation",
+                  "fact": "Type 4 RTA is characterized by hyperkalemia due to aldosterone deficiency or aldosterone resistance (PHA Type 1: SCNN1A/B/G or NR3C2), treated with fludrocortisone, dietary potassium restriction, and sodium polystyrene sulfonate.",
+                  "drugs": [
+                    "fludrocortisone",
+                    "sodium polystyrene sulfonate"
+                  ],
+                  "source": "Nelson 22e Chapter 550"
+                }
+              ]
+            },
+            {
+              "id": "pnp-nephrogenic-diabetes-insipidus",
+              "title": "Congenital Nephrogenic Diabetes Insipidus: AVPR2, AQP2 and Pharmacotherapy",
+              "bookChapter": "Nelson 22e Chapter 552",
+              "mustKnow": [
+                {
+                  "term": "X-linked recessive AVPR2 predominance",
+                  "fact": "Over 90% of congenital nephrogenic diabetes insipidus cases are X-linked recessive mutations in AVPR2 (Xq28) encoding the vasopressin V2 receptor on collecting duct principal cells.",
+                  "numbers": [
+                    "90%",
+                    "Xq28"
+                  ],
+                  "source": "Nelson 22e Chapter 552"
+                },
+                {
+                  "term": "Autosomal recessive/dominant AQP2 variants",
+                  "fact": "Mutations in AQP2 (chromosome 12q13.12) encoding the apical aquaporin-2 water channel account for 10% of cases, inherited in autosomal recessive or dominant patterns.",
+                  "numbers": [
+                    "10%",
+                    "12q13.12"
+                  ],
+                  "source": "Nelson 22e Chapter 552"
+                },
+                {
+                  "term": "Neonatal presentation and hypernatremic dehydration",
+                  "fact": "Infants present in the first weeks of life with severe irritability, unexplained fevers, poor feeding, failure to thrive, and life-threatening hypernatremic dehydration (serum Na > 160-170 mEq/L).",
+                  "numbers": [
+                    "160-170 mEq/L"
+                  ],
+                  "source": "Nelson 22e Chapter 552"
+                },
+                {
+                  "term": "Water deprivation and DDAVP test",
+                  "fact": "Administration of 1-desamino-8-D-arginine vasopressin (DDAVP 1-2 mcg SC or IV) fails to increase urine osmolality above 300 mOsm/kg or decrease urine volume in nephrogenic DI, distinguishing it from central DI.",
+                  "numbers": [
+                    "1-2 mcg",
+                    "300 mOsm/kg"
+                  ],
+                  "drugs": [
+                    "desmopressin"
+                  ],
+                  "source": "Nelson 22e Chapter 552"
+                },
+                {
+                  "term": "Free water intake management",
+                  "fact": "Unrestricted access to free water is life-saving; infants require enteral tube feeding with low-solute formula to keep daily osmotic load < 15 mOsm/kg and replace urine losses exceeding 5-10 L/m²/day.",
+                  "numbers": [
+                    "15 mOsm/kg",
+                    "5-10 L/m²/day"
+                  ],
+                  "source": "Nelson 22e Chapter 552"
+                },
+                {
+                  "term": "Paradoxical antidiuretic thiazide mechanism",
+                  "fact": "Hydrochlorothiazide (2-4 mg/kg/day) induces mild volume contraction, triggering compensatory proximal tubular sodium and water reabsorption and reducing distal delivery to collecting ducts by 30-50%.",
+                  "numbers": [
+                    "2-4 mg/kg/day",
+                    "30-50%"
+                  ],
+                  "drugs": [
+                    "hydrochlorothiazide"
+                  ],
+                  "source": "Nelson 22e Chapter 552"
+                },
+                {
+                  "term": "Amiloride and indomethacin synergistic therapy",
+                  "fact": "Combining hydrochlorothiazide with amiloride (0.3-0.5 mg/kg/day) prevents hypokalemia and blocks ENaC channels; adding indomethacin (1-2 mg/kg/day) inhibits medullary prostaglandins and further reduces urine output.",
+                  "numbers": [
+                    "0.3-0.5 mg/kg/day",
+                    "1-2 mg/kg/day"
+                  ],
+                  "drugs": [
+                    "amiloride",
+                    "indomethacin"
+                  ],
+                  "source": "Nelson 22e Chapter 552"
+                },
+                {
+                  "term": "Megacystis and non-obstructive hydronephrosis",
+                  "fact": "Massive chronic high-volume polyuria produces severe non-obstructive bilateral hydroureteronephrosis and a distended myogenic bladder (megacystis-megaureter complex) requiring timed double voiding.",
+                  "source": "Nelson 22e Chapter 552"
+                }
+              ]
+            },
+            {
+              "id": "pnp-autosomal-recessive-polycystic-kidney",
+              "title": "Autosomal Recessive Polycystic Kidney Disease: PKHD1, Fibrocystin and Portal Hypertension",
+              "bookChapter": "Nelson 22e Chapter 553",
+              "mustKnow": [
+                {
+                  "term": "PKHD1 fibrocystin genetics",
+                  "fact": "ARPKD is caused by autosomal recessive mutations in PKHD1 (6p12.3-p12.2) encoding fibrocystin/polyductin, localized to the primary cilium and basal body of renal collecting duct and biliary epithelia.",
+                  "numbers": [
+                    "6p12.3-p12.2"
+                  ],
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Potter sequence and pulmonary hypoplasia",
+                  "fact": "Severe antenatal presentation features massive bilateral nephromegaly, severe oligohydramnios, Potter facies (compressed flat nose, low-set ears), pulmonary hypoplasia, and a 30% neonatal mortality rate from respiratory failure.",
+                  "numbers": [
+                    "30%"
+                  ],
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Ultrasound spoke-wheel appearance",
+                  "fact": "Renal ultrasonography demonstrates massively enlarged, symmetric, highly echogenic kidneys with poor corticomedullary differentiation and radial acoustic shadowing from millions of microscopic dilated collecting ducts.",
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Congenital hepatic fibrosis (CHF) pairing",
+                  "fact": "All patients with ARPKD have congenital hepatic fibrosis (ductal plate malformation); children who survive the neonatal renal period present in childhood with portal hypertension, hypersplenism, and esophageal varices.",
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Caroli disease and bacterial cholangitis",
+                  "fact": "Non-obstructive cystic dilatation of the intrahepatic bile ducts (Caroli disease) predisposes to recurrent ascending bacterial cholangitis requiring prophylactic co-trimoxazole or cephalosporins.",
+                  "drugs": [
+                    "co-trimoxazole"
+                  ],
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Severe early-onset systemic hypertension",
+                  "fact": "Over 80% of children with ARPKD develop severe hypertension in the first months of life due to intrarenal ischemia and hyper-reninemia, requiring aggressive multi-drug therapy with ACE inhibitors and ARBs.",
+                  "numbers": [
+                    "80%"
+                  ],
+                  "drugs": [
+                    "enalapril",
+                    "amlodipine"
+                  ],
+                  "source": "IPNA / KDIGO ARPKD Consensus"
+                },
+                {
+                  "term": "Preserved liver synthetic function hallmark",
+                  "fact": "Despite severe portal hypertension and massive splenomegaly, hepatic synthetic function (serum albumin, bilirubin, and prothrombin time / INR) remains completely normal in uncomplicated CHF.",
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Combined liver-kidney transplantation criteria",
+                  "fact": "Dual organ liver-kidney transplantation is indicated in patients reaching ESRD who have concomitant recurrent life-threatening cholangitis, intractable variceal bleeding, or severe hypersplenism.",
+                  "source": "IPNA Consensus on ARPKD"
+                }
+              ]
+            },
+            {
+              "id": "pnp-adpkd-and-nephronophthisis",
+              "title": "ADPKD in Children vs Nephronophthisis: Corticomedullary Cysts and Ciliopathy Overlap",
+              "bookChapter": "Nelson 22e Chapter 553",
+              "mustKnow": [
+                {
+                  "term": "ADPKD PKD1 vs PKD2 genes",
+                  "fact": "Autosomal dominant polycystic kidney disease results from PKD1 (16p13.3, 85%, polycystin-1, ESRD median age 54) or PKD2 (4q21, 15%, polycystin-2, ESRD median age 74) mutations.",
+                  "numbers": [
+                    "16p13.3",
+                    "85%",
+                    "54",
+                    "4q21",
+                    "15%",
+                    "74"
+                  ],
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Pediatric ADPKD ultrasound diagnostic criteria",
+                  "fact": "In children < 15 years with an affected first-degree relative, the presence of >= 1 renal cyst of any size in either kidney has a positive predictive value > 95% for ADPKD.",
+                  "numbers": [
+                    "15 years",
+                    "1",
+                    "95%"
+                  ],
+                  "source": "Pei-Ravine Revised Ultrasound Criteria"
+                },
+                {
+                  "term": "Tolvaptan V2 receptor antagonist approval",
+                  "fact": "Tolvaptan (oral selective V2 antagonist) slows total kidney volume (TKV) expansion and eGFR decline by inhibiting intracellular cAMP, approved in adolescents with rapidly progressive ADPKD.",
+                  "drugs": [
+                    "tolvaptan"
+                  ],
+                  "source": "TEMPO 3:4 / REPRISE Trials"
+                },
+                {
+                  "term": "Nephronophthisis (NPHP) genetics and ESRD timeline",
+                  "fact": "Nephronophthisis is an autosomal recessive ciliopathy and the most common monogenic cause of pediatric ESRD; NPHP1 deletions (2q13) account for 20-25% of juvenile cases, reaching ESRD at median age 13 years.",
+                  "numbers": [
+                    "2q13",
+                    "20-25%",
+                    "13 years"
+                  ],
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Nephronophthisis ultrasound tri-hallmark",
+                  "fact": "Ultrasonography reveals normal or small-sized kidneys with increased parenchymal echogenicity, loss of corticomedullary differentiation, and characteristic cysts localized exclusively to the corticomedullary junction.",
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Polyuria, polydipsia and anemia out of proportion",
+                  "fact": "Children present with impaired urinary concentrating ability (polyuria, polydipsia, enuresis), salt wasting, and normocytic anemia disproportionately severe for their level of early renal dysfunction.",
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Senior-Loken syndrome ciliopathy association",
+                  "fact": "Senior-Loken syndrome pairs nephronophthisis with tapetoretinal degeneration (retinitis pigmentosa or Leber congenital amaurosis), diagnosed by electroretinography.",
+                  "source": "Nelson 22e Chapter 553"
+                },
+                {
+                  "term": "Joubert syndrome molar tooth sign",
+                  "fact": "Joubert syndrome associates NPHP with cerebellar vermis hypoplasia (molar tooth sign on axial brain MRI), neonatal episodic tachypnea/apnea, and developmental delay.",
+                  "source": "Nelson 22e Chapter 553"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pnp-hypertension-and-cakut-sec",
+      "title": "Pediatric Hypertension, CAKUT and Urolithiasis",
+      "modules": [
+        {
+          "id": "pnp-hypertension-cakut",
+          "title": "Hypertension, CAKUT and Nephrolithiasis",
+          "lessonTopics": [
+            {
+              "id": "pnp-pediatric-hypertension-aap-guidelines",
+              "title": "Pediatric Hypertension: AAP 2017 Blood Pressure Percentiles, Staging and Therapy",
+              "bookChapter": "Nelson 22e Chapter 465",
+              "mustKnow": [
+                {
+                  "term": "AAP 2017 normative BP staging (ages 1-13)",
+                  "fact": "For children aged 1-13 years, BP is classified by age, sex, and height percentiles: Normal (< 90th percentile), Elevated (>= 90th to < 95th or 120/80 mmHg), Stage 1 (>= 95th to < 95th + 12 mmHg), and Stage 2 (>= 95th + 12 mmHg or >= 140/90 mmHg).",
+                  "numbers": [
+                    "1-13 years",
+                    "90th percentile",
+                    "95th",
+                    "120/80 mmHg",
+                    "12 mmHg",
+                    "140/90 mmHg"
+                  ],
+                  "source": "AAP 2017 Pediatric Hypertension Guidelines"
+                },
+                {
+                  "term": "Adolescent BP classification (age >= 13 years)",
+                  "fact": "For adolescents >= 13 years, staging aligns directly with adult AHA/ACC cutoffs: Normal (< 120/< 80 mmHg), Elevated (120-129/< 80), Stage 1 (130-139/80-89), and Stage 2 (>= 140/>= 90 mmHg).",
+                  "numbers": [
+                    "13 years",
+                    "120/< 80 mmHg",
+                    "120-129/< 80",
+                    "130-139/80-89",
+                    "140/>= 90 mmHg"
+                  ],
+                  "source": "AAP 2017 Guidelines"
+                },
+                {
+                  "term": "Ambulatory blood pressure monitoring (ABPM) gold standard",
+                  "fact": "ABPM is mandatory to confirm hypertension and identify white-coat hypertension (elevated clinic BP, normal ABPM) or masked hypertension (normal clinic BP, elevated wake/sleep ABPM > 95th percentile).",
+                  "numbers": [
+                    "95th percentile"
+                  ],
+                  "source": "AHA Pediatric ABPM Statement"
+                },
+                {
+                  "term": "Etiology age stratification (secondary vs primary)",
+                  "fact": "In children < 6 years of age, hypertension is almost universally secondary (> 85%), with renal parenchymal disease (CAKUT, GN) and renovascular coarctation accounting for the vast majority.",
+                  "numbers": [
+                    "6 years",
+                    "85%"
+                  ],
+                  "source": "Nelson 22e Chapter 465"
+                },
+                {
+                  "term": "Left ventricular hypertrophy screening",
+                  "fact": "Echocardiography to screen for left ventricular hypertrophy (LVH, defined as LV mass index >= 38.6 g/m^2.7 for children or > 51 g/m^2.7 for adolescent boys) is indicated at diagnosis of persistent hypertension.",
+                  "numbers": [
+                    "38.6 g/m^2.7",
+                    "51 g/m^2.7"
+                  ],
+                  "source": "AAP 2017 Guidelines"
+                },
+                {
+                  "term": "First-line antihypertensive drug classes",
+                  "fact": "First-line monotherapy classes in children are ACE inhibitors (enalapril, lisinopril), ARBs (losartan), and calcium channel blockers (amlodipine 0.1-0.6 mg/kg/day); thiazide diuretics are added as step two.",
+                  "numbers": [
+                    "0.1-0.6 mg/kg/day"
+                  ],
+                  "drugs": [
+                    "enalapril",
+                    "lisinopril",
+                    "losartan",
+                    "amlodipine",
+                    "hydrochlorothiazide"
+                  ],
+                  "source": "AAP 2017 Guidelines"
+                },
+                {
+                  "term": "Hypertensive emergency vs urgency definition",
+                  "fact": "Hypertensive emergency features severe Stage 2 BP (> 30 mmHg above 95th percentile) with acute end-organ damage (encephalopathy, seizures, heart failure, retinopathy), requiring continuous IV nicardipine or labetalol.",
+                  "numbers": [
+                    "30 mmHg",
+                    "95th percentile"
+                  ],
+                  "drugs": [
+                    "nicardipine",
+                    "labetalol",
+                    "sodium nitroprusside"
+                  ],
+                  "source": "AAP 2017 / Nelson 22e"
+                },
+                {
+                  "term": "Rate of BP reduction in emergency",
+                  "fact": "To prevent ischemic cerebral infarction, BP should be lowered by no more than 25% of the planned reduction in the first 8 hours, and normalized gradually over the subsequent 24-48 hours.",
+                  "numbers": [
+                    "25%",
+                    "8 hours",
+                    "24-48 hours"
+                  ],
+                  "source": "Nelson 22e Chapter 465"
+                }
+              ]
+            },
+            {
+              "id": "pnp-renovascular-hypertension-pediatric",
+              "title": "Renovascular Hypertension in Children: Fibromuscular Dysplasia, Takayasu and Angioplasty",
+              "bookChapter": "Nelson 22e Chapter 465",
+              "mustKnow": [
+                {
+                  "term": "Renovascular proportion of secondary hypertension",
+                  "fact": "Renovascular hypertension accounts for 10-15% of all secondary pediatric hypertension, caused by fibromuscular dysplasia (FMD, 60-70%), Takayasu arteritis, neurofibromatosis type 1, or middle aortic syndrome.",
+                  "numbers": [
+                    "10-15%",
+                    "60-70%"
+                  ],
+                  "source": "Nelson 22e Chapter 465"
+                },
+                {
+                  "term": "Intimal and medial FMD pathology",
+                  "fact": "Unlike adults where medial fibroplasia (string-of-beads) dominates, pediatric renal FMD frequently exhibits intimal fibroplasia or perimedial fibroplasia with tubular or ostial narrowing.",
+                  "source": "Nelson 22e Chapter 465"
+                },
+                {
+                  "term": "Catheter digital subtraction angiography gold standard",
+                  "fact": "Conventional catheter digital subtraction angiography (DSA) remains the definitive diagnostic gold standard in children, detecting distal branch and intrarenal stenosis missed by CTA or MRA.",
+                  "source": "Nelson 22e Chapter 465"
+                },
+                {
+                  "term": "Percutaneous transluminal renal angioplasty (PTRA)",
+                  "fact": "Balloon angioplasty without stenting is the primary intervention for pediatric non-ostial FMD, achieving clinical cure or marked improvement in > 70-80% of children.",
+                  "numbers": [
+                    "70-80%"
+                  ],
+                  "source": "CIRSE / SIR Interventional Guidelines"
+                },
+                {
+                  "term": "ACE inhibitor contraindication in bilateral stenosis",
+                  "fact": "ACE inhibitors and ARBs are strictly contraindicated in bilateral renal artery stenosis or solitary functioning kidney stenosis because they ablate efferent arteriolar vasoconstriction, causing sudden precipitous decline in GFR.",
+                  "drugs": [
+                    "enalapril",
+                    "losartan"
+                  ],
+                  "source": "Nelson 22e Chapter 465"
+                },
+                {
+                  "term": "Takayasu arteritis active inflammation phase",
+                  "fact": "Takayasu arteritis presents with asymmetric limb pulses, bruits, and elevated inflammatory markers (ESR, CRP); revascularization must be delayed until corticosteroid / biologic therapy induces complete disease quiescence.",
+                  "drugs": [
+                    "prednisone",
+                    "tocilizumab",
+                    "infliximab"
+                  ],
+                  "source": "EULAR / SHARE Guidelines"
+                },
+                {
+                  "term": "Renal vein renin ratio (RVRR) lateralization",
+                  "fact": "A selective renal vein renin ratio (affected kidney to contralateral normal kidney) > 1.5 indicates significant hemodynamic lateralization predicting successful surgical or angioplasty cure.",
+                  "numbers": [
+                    "1.5"
+                  ],
+                  "source": "Nelson 22e Chapter 465"
+                },
+                {
+                  "term": "Surgical autotransplantation indication",
+                  "fact": "Ex-vivo microvascular bench reconstruction with renal autotransplantation into the iliac fossa is indicated for complex intrarenal branch stenosis or when balloon angioplasty fails.",
+                  "source": "Nelson 22e Chapter 465"
+                }
+              ]
+            },
+            {
+              "id": "pnp-congenital-urinary-anomalies-cakut",
+              "title": "CAKUT Spectrum: PUJO, Posterior Urethral Valves and Vesicoureteral Reflux",
+              "bookChapter": "Nelson 22e Chapter 555",
+              "mustKnow": [
+                {
+                  "term": "Antenatal hydronephrosis grading (AP renal pelvic diameter)",
+                  "fact": "Antenatal hydronephrosis on ultrasound is graded by anteroposterior renal pelvic diameter (APRPD): >= 4-7 mm in second trimester and >= 7-10 mm in third trimester warrants postnatal surveillance.",
+                  "numbers": [
+                    "4-7 mm",
+                    "7-10 mm"
+                  ],
+                  "source": "Society for Fetal Urology (SFU) Guidelines"
+                },
+                {
+                  "term": "Postnatal ultrasound timing protocol",
+                  "fact": "Initial postnatal renal ultrasound is performed at 48-72 hours of life to avoid false-negative underestimation due to transient neonatal physiological oliguria, unless PUV is suspected.",
+                  "numbers": [
+                    "48-72 hours"
+                  ],
+                  "source": "AAP Section on Urology"
+                },
+                {
+                  "term": "Posterior urethral valves (PUV) keyhole sign",
+                  "fact": "PUV occurs exclusively in males, caused by congenital obstructing folds of the verumontanum (Type 1 Young classification), displaying a thick-walled trabeculated bladder and dilated posterior urethra (keyhole sign) on ultrasound.",
+                  "source": "Nelson 22e Chapter 555"
+                },
+                {
+                  "term": "Urgent neonatal PUV decompression",
+                  "fact": "Immediate neonatal management of PUV requires transurethral bladder catheterization (5-8 Fr feeding tube) followed by cystoscopic primary valve ablation; vesicostomy is performed if the urethra is too small.",
+                  "numbers": [
+                    "5-8 Fr"
+                  ],
+                  "source": "EAU / ESPU Pediatric Urology Guidelines"
+                },
+                {
+                  "term": "Pelviureteric junction obstruction (PUJO) diuretic renography",
+                  "fact": "PUJO is the most common cause of significant pediatric hydronephrosis; confirmed by 99mTc-MAG3 renography demonstrating prolonged washout half-time (T1/2 > 20 minutes) after furosemide (1 mg/kg).",
+                  "numbers": [
+                    "20 minutes",
+                    "1 mg/kg"
+                  ],
+                  "drugs": [
+                    "furosemide"
+                  ],
+                  "source": "SNMMI / EANM Guidelines"
+                },
+                {
+                  "term": "Anderson-Hynes dismembered pyeloplasty criteria",
+                  "fact": "Surgical pyeloplasty is indicated for differential renal function < 40%, a fall of > 10% on serial scans, worsening hydronephrosis, or recurrent febrile urinary tract infections.",
+                  "numbers": [
+                    "40%",
+                    "10%"
+                  ],
+                  "source": "EAU/ESPU Guidelines"
+                },
+                {
+                  "term": "International VUR classification grades (I-V)",
+                  "fact": "Micturating cystourethrogram (MCUG) grades vesicoureteral reflux from Grade I (reflux into non-dilated ureter) to Grade V (massive reflux, severe tortuosity, and complete loss of papillary impressions).",
+                  "numbers": [
+                    "5"
+                  ],
+                  "source": "International Reflux Study in Children"
+                },
+                {
+                  "term": "Continuous antibiotic prophylaxis (CAP) trials (RIVUR study)",
+                  "fact": "The RIVUR trial demonstrated that daily co-trimoxazole or nitrofurantoin prophylaxis in children with Grades II-IV VUR reduces recurrent febrile UTIs by 50% without altering renal scarring.",
+                  "numbers": [
+                    "50%"
+                  ],
+                  "drugs": [
+                    "co-trimoxazole",
+                    "nitrofurantoin"
+                  ],
+                  "source": "RIVUR Trial (NEJM 2014)"
+                }
+              ]
+            },
+            {
+              "id": "pnp-pediatric-urolithiasis-and-nephrocalcinosis",
+              "title": "Pediatric Nephrolithiasis: Cystinuria, Primary Hyperoxaluria and Citrate Management",
+              "bookChapter": "Nelson 22e Chapter 557",
+              "mustKnow": [
+                {
+                  "term": "Metabolic etiology dominance in children",
+                  "fact": "Unlike adults where diet and lifestyle predominate, over 75-80% of children with nephrolithiasis have an underlying identifiable metabolic abnormality, with idiopathic hypercalciuria being the most common (40-50%).",
+                  "numbers": [
+                    "75-80%",
+                    "40-50%"
+                  ],
+                  "source": "Nelson 22e Chapter 557"
+                },
+                {
+                  "term": "24-hour urine collection diagnostic benchmarks",
+                  "fact": "Metabolic workup defines hypercalciuria (> 4 mg/kg/day), hyperoxaluria (> 0.5 mmol/1.73m²/day), hypocitraturia (< 320 mg/1.73m²/day), and hyperuricosuria (> 10 mg/kg/day).",
+                  "numbers": [
+                    "4 mg/kg/day",
+                    "0.5 mmol/1.73m²/day",
+                    "320 mg/1.73m²/day",
+                    "10 mg/kg/day"
+                  ],
+                  "source": "AUA / ESPU Pediatric Stone Guidelines"
+                },
+                {
+                  "term": "Primary hyperoxaluria type 1 (PH1) AGXT defect",
+                  "fact": "PH1 is an autosomal recessive deficiency of hepatic alanine:glyoxylate aminotransferase (AGXT, 2q37.3), presenting in infancy with nephrocalcinosis, recurrent calcium oxalate monohydrate stones, and systemic oxalosis.",
+                  "numbers": [
+                    "2q37.3"
+                  ],
+                  "source": "Nelson 22e Chapter 557"
+                },
+                {
+                  "term": "Lumasiran and nedosiran RNAi breakthrough",
+                  "fact": "Lumasiran (subcutaneous RNA interference targeting glycolate oxidase / HAO1) depletes glyoxylate production, drastically reducing urinary oxalate excretion by > 65% in pediatric PH1.",
+                  "numbers": [
+                    "65%"
+                  ],
+                  "drugs": [
+                    "lumasiran",
+                    "nedosiran"
+                  ],
+                  "source": "ILLUMINATE Trials / FDA Approval"
+                },
+                {
+                  "term": "Cystinuria SLC3A1/SLC7A9 transporter defect",
+                  "fact": "Cystinuria impairs the dibasic amino acid transporter (COLA: cystine, ornithine, lysine, arginine), forming radiopaque hexagonal flat crystals in acidic urine (cyanide-nitroprusside test positive).",
+                  "source": "Nelson 22e Chapter 557"
+                },
+                {
+                  "term": "Urinary alkalinization and tiopronin in cystinuria",
+                  "fact": "Cystine stone dissolution requires vigorous hydration (> 3 L/m²/day), potassium citrate to achieve urine pH >= 7.5, and thiol chelation drugs (tiopronin or D-penicillamine) to convert cystine to soluble mixed disulfides.",
+                  "numbers": [
+                    "3 L/m²/day",
+                    "7.5"
+                  ],
+                  "drugs": [
+                    "potassium citrate",
+                    "tiopronin",
+                    "penicillamine"
+                  ],
+                  "source": "EAU / AUA Guidelines"
+                },
+                {
+                  "term": "Hypocitraturia and potassium citrate dosing",
+                  "fact": "Citrate is a potent natural inhibitor of calcium stone crystallization; potassium citrate (1-2 mEq/kg/day divided TID) alkalinizes urine and restores urinary citrate excretion.",
+                  "numbers": [
+                    "1-2 mEq/kg/day"
+                  ],
+                  "drugs": [
+                    "potassium citrate"
+                  ],
+                  "source": "Nelson 22e Chapter 557"
+                },
+                {
+                  "term": "Nephrocalcinosis in preterm infants on furosemide",
+                  "fact": "Chronic loop diuretic (furosemide) administration in premature neonates causes massive hypercalciuria and medullary nephrocalcinosis in up to 60%, reversible upon transitioning to chlorothiazide.",
+                  "numbers": [
+                    "60%"
+                  ],
+                  "drugs": [
+                    "furosemide",
+                    "chlorothiazide"
+                  ],
+                  "source": "Nelson 22e Chapter 557"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

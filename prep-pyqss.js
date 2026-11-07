@@ -82,7 +82,7 @@
   }
   function failed(host) {
     var b = host.root() && host.root().querySelector("#pnYs"); if (!b) return;
-    b.innerHTML = '<p class="pn-err" role="alert">These papers need a connection the first time.</p><button type="button" class="pn-btn" data-act="ys-home">Try again</button>';
+    b.innerHTML = '<p class="pn-err" role="alert">' + (G.PREP_BANK_MSG || String)("These papers need a connection the first time.") + '</p><button type="button" class="pn-btn" data-act="ys-home">Try again</button>';
   }
   function shell(host, title, sub, body) { host.paint(host.bar(title, sub, "back") + '<div class="pn-body" id="pnYs">' + body + "</div>"); }
   function box(host) { return host.root() && host.root().querySelector("#pnYs"); }
@@ -205,7 +205,7 @@
     var v = b.getAttribute("data-v"), k = b.getAttribute("data-k");
     if (a === "ys-home") return host.push(function () { renderHome(host); });
     if (a === "ys-an") return host.push(function () { renderAnalysis(host); });
-    var need = function (fn) { return load(host).then(fn, function () { host.toast("The questions did not load. Check the connection and try again."); }); };
+    var need = function (fn) { return load(host).then(fn, function () { host.toast((G.PREP_BANK_MSG || String)("The questions did not load. Check the connection and try again.")); }); };
     if (a === "ys-paper") return need(function () { host.push(function () { renderPaper(host, v); }); });
     if (a === "ys-dom") return need(function () { host.push(function () { renderDomain(host, v); }); });
     if (a === "ys-must") return need(function () { host.push(function () { renderMust(host); }); });

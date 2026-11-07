@@ -1,0 +1,280 @@
+{
+  "id": "srm-pcos-poi-management",
+  "module": "srm-pcos-poi-management",
+  "title": "PCOS Phenotypes, Diagnostic Criteria (2023 Guidelines) and Premature Ovarian Insufficiency Management",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "International Evidence-Based Guideline for the Assessment and Management of PCOS (2023)",
+    "ESHRE Guideline on Premature Ovarian Insufficiency",
+    "Speroff's Clinical Gynecologic Endocrinology and Infertility 9e Ch 12 & 17"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Diagnosing polycystic ovary syndrome requires fulfilling Rotterdam consensus criteria after excluding mimic conditions. Diagnosis demands at least 2 of 3 features across anovulation, androgen excess, and polycystic morphology.",
+      "tx": "According to the **PCOS Guideline 2023** and **Rotterdam criteria**, diagnosing polycystic ovary syndrome requires meeting at least 2 of 3 features: clinical or biochemical **hyperandrogenism**, ovulatory dysfunction, and polycystic ovarian morphology, following rigorous exclusion of thyroid disease, hyperprolactinemia, and non-classical congenital adrenal hyperplasia.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Hyperandrogenism",
+            "Hirsutism (mFG >=4 to 6), acne, alopecia",
+            "Free testosterone, FAI, LC-MS assay",
+            "CAH (17-OHP), Cushing, androgen tumour"
+          ],
+          [
+            "Ovulatory Dysfunction",
+            "Oligo- or amenorrhea, cycle >35 days",
+            "Low mid-luteal progesterone",
+            "Hypothalamic amenorrhea, hyperprolactinemia"
+          ],
+          [
+            "Polycystic Morphology",
+            "Enlarged multicystic ovaries",
+            "FNPO >=20 or volume >=10 mL",
+            "Normal adolescent multicystic ovaries"
+          ]
+        ],
+        "cols": [
+          "Rotterdam Feature",
+          "Clinical Manifestation",
+          "Laboratory Criteria",
+          "Exclusion Mimics"
+        ]
+      }
+    },
+    {
+      "say": "Updated ultrasound thresholds reflect higher resolution modern transvaginal transducers. Current criteria require at least 20 follicles per ovary or ovarian volume reaching 10 mL.",
+      "tx": "Updated international sonographic **PCOM criteria** require a **follicle number per ovary** of at least 20 follicles measuring 2 to 9 mm in either ovary using high-frequency transducers (>=8 MHz), or an increased **ovarian volume** of at least 10 mL in the absence of corpora lutea.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Follicle Number Per Ovary (FNPO)",
+          "points": [
+            ">=12 follicles per ovary",
+            ">=20 follicles per ovary (>=8 MHz probe)",
+            "Do not use in adolescents <8 years post-menarche",
+            "Count all 2 to 9 mm follicles"
+          ]
+        },
+        "right": {
+          "title": "Ovarian Volume Cutoff",
+          "points": [
+            ">=10 mL",
+            ">=10 mL in either ovary",
+            "Reliable indicator if transabdominal scan used",
+            "Valid in adult reproductive years"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Serum anti-Mullerian hormone now provides a recognized diagnostic substitute for ultrasound. In adults, elevated AMH can define polycystic morphology without transvaginal scanning.",
+      "tx": "The 2023 international guidelines formally endorse serum AMH as an accurate **substitute for ultrasound** to define polycystic morphology in adult women. Utilizing **AMH for PCOM** as a validated **PCOS diagnostic biomarker** streamlines assessment, particularly in patients where transvaginal ultrasonography is impractical or declined: **PCOS biomarker 2023**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a1",
+            "label": "Adult female presenting with suspected PCOS"
+          },
+          {
+            "id": "a2",
+            "label": "Assessment of ovulatory function and androgen levels"
+          },
+          {
+            "id": "a3",
+            "label": "Serum AMH test substitutes for pelvic ultrasound"
+          }
+        ],
+        "edges": [
+          [
+            "a1",
+            "a2",
+            "Clinical evaluation"
+          ],
+          [
+            "a2",
+            "a3",
+            "Ultrasound substitute"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Premature ovarian insufficiency represents early loss of ovarian activity before age 40. Diagnostic criteria demand at least 4 months of oligomenorrhea alongside elevated gonadotropins.",
+      "tx": "Establishing a diagnosis of **premature ovarian insufficiency** requires oligo- or amenorrhea for at least 4 months before **age 40**, confirmed by documented **FSH >25 IU/L** on two independent occasions drawn at least 4 to 6 weeks apart. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Patient Age",
+            "<40 years at presentation",
+            "Chronological documentation",
+            "Physiological natural menopause"
+          ],
+          [
+            "Menstrual Disturbance",
+            "Oligo- or amenorrhea >=4 months",
+            "Persistent menstrual irregularity",
+            "Pregnancy or iatrogenic ablation"
+          ],
+          [
+            "Serum FSH Concentration",
+            "FSH >25 IU/L (two samples)",
+            "Sampled 4 to 6 weeks apart",
+            "Single transient surge"
+          ],
+          [
+            "Serum Estradiol",
+            "Hypoestrogenism (<50 pg/mL)",
+            "Corroborative finding",
+            "Active oral contraceptive use"
+          ]
+        ],
+        "cols": [
+          "Diagnostic Element",
+          "Mandatory Criterion",
+          "Verification Requirement",
+          "Exclusion Condition"
+        ]
+      }
+    },
+    {
+      "say": "Genetic causes account for up to 20 percent of premature ovarian failure cases. Clinical workup mandates peripheral blood karyotyping and fragile X premutation testing.",
+      "tx": "A verified genetic etiology underlies 10 to 20 percent of cases, requiring baseline cytogenetic karyotyping to detect **Turner mosaicism 45,X** or structural X rearrangements. Molecular testing for **FMR1 premutation** (55 to 200 CGG trinucleotide repeats) is mandatory to rule out **Fragile X**-associated tremor/ataxia syndrome risk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "g1",
+            "label": "POI confirmed by repeat FSH >25 IU/L"
+          },
+          {
+            "id": "g2",
+            "label": "Peripheral blood karyotype (Detects 45,X / mosaicism)"
+          },
+          {
+            "id": "g3",
+            "label": "FMR1 triplet repeat sizing (55 to 200 CGG repeats)"
+          }
+        ],
+        "edges": [
+          [
+            "g1",
+            "g2",
+            "Cytogenetics"
+          ],
+          [
+            "g1",
+            "g3",
+            "Molecular genetics"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Autoimmune destruction of steroidogenic tissue requires targeted laboratory screening. Testing for 21-hydroxylase antibodies identifies women at risk for polyglandular Addisonian failure.",
+      "tx": "Diagnosing **autoimmune POI** requires screening for adrenal cortex autoantibodies or **anti-21-hydroxylase** antibodies (anti-21OH). Positive serology flags subclinical autoimmune adrenalitis, necessitating endocrine surveillance for autoimmune **polyglandular syndrome** alongside testing for thyroid peroxidase autoantibodies. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Anti-21-Hydroxylase (21OH)",
+            "Adrenal cortex",
+            "Addison disease / APS Type 1 and 2",
+            "Annual ACTH stimulation test / electrolytes"
+          ],
+          [
+            "Anti-Thyroid Peroxidase (TPO)",
+            "Thyroid gland",
+            "Hashimoto autoimmune thyroiditis",
+            "Annual TSH and free T4"
+          ],
+          [
+            "Anti-Steroid Producing Cells",
+            "Theca / Leydig cells",
+            "Autoimmune oophoritis",
+            "Confirm autoimmune POI etiology"
+          ]
+        ],
+        "cols": [
+          "Autoantibody Marker",
+          "Target Organ",
+          "Associated Clinical Syndrome",
+          "Surveillance Protocol"
+        ]
+      }
+    },
+    {
+      "say": "Patients with premature ovarian failure should be counseled that conception remains possible. Between 5 and 10 percent of women experience spontaneous pregnancy from intermittent follicular activity.",
+      "tx": "Patients diagnosed with POI must be reassured that ovarian function can fluctuate unpredictably. Spontaneous ovulation occurs in up to 20 percent of women with **idiopathic POI**, culminating in **spontaneous conception in POI** in 5 to 10 percent of patients through **intermittent ovulation**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spontaneous Resumption of Menses",
+          "points": [
+            "Occurs in up to 20 percent",
+            "Fluctuating, unpredictable follicular growth",
+            "Biomarkers (AMH/FSH) cannot forecast event",
+            "Does not guarantee long-term fertility"
+          ]
+        },
+        "right": {
+          "title": "Spontaneous Clinical Conception",
+          "points": [
+            "Occurs in 5 to 10 percent of idiopathic cases",
+            "Higher in early post-diagnosis years",
+            "Barrier contraception advised if pregnancy unwanted",
+            "Oocyte donation remains definitive ART choice"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Continuous hormone replacement therapy is vital to prevent cardiovascular and skeletal morbidity. Transdermal estradiol combined with cyclic progesterone must continue until natural menopause age.",
+      "tx": "Immediate **hormone replacement therapy** is mandatory to prevent premature osteoporosis and ischemic heart disease. First-line therapy uses **transdermal estradiol** (100 mcg patch) paired with micronized oral progesterone for 12 to 14 days monthly, continued until the **natural menopause age** of roughly 50 to 52 years: **17-beta estradiol**.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Estrogen",
+            "Transdermal 17-beta estradiol 100 mcg patch",
+            "Avoids first-pass hepatic metabolism, neutral VTE risk",
+            "Continue to age 50 to 52"
+          ],
+          [
+            "Progesterone",
+            "Oral micronized progesterone 200 mg x 14 days",
+            "Endometrial protection, neutral breast risk",
+            "Cyclic administration monthly"
+          ],
+          [
+            "Bone Protection",
+            "Adequate calcium (1000 mg) and Vitamin D",
+            "Prevents accelerated bone mineral loss",
+            "Baseline DEXA monitoring every 2-3 years"
+          ]
+        ],
+        "cols": [
+          "HRT Component",
+          "Preferred Formulation & Dose",
+          "Physiological Advantage",
+          "Target Duration"
+        ]
+      }
+    }
+  ],
+  "v": 1
+}
