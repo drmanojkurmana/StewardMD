@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "srm-recurrent-art-complications",
+  "title": "Complications in Assisted Reproduction: Clinical and Perinatal Outcomes",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Speroff Clinical Gynecologic Endocrinology 9e Ch 32",
+    "Gardner Textbook of Assisted Reproductive Technologies 5e Ch 24",
+    "ASRM Practice Committee Opinion on Elective Single Embryo Transfer"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "A dramatic escalation in heterotopic pregnancy represents a hallmark complication of assisted conception. While naturally occurring in only 1 in 30,000 spontaneous pregnancies, the incidence surges to 1 in 100 to 1 in 500 clinical conceptions following multi-embryo in vitro fertilization transfer.",
+      "tx": "The occurrence of a **heterotopic pregnancy** (simultaneous coexistent intrauterine and ectopic gestational sacs) demonstrates a steep rise following assisted conception. From a rare baseline **spontaneous conception rate** of 1 in 30000 pregnancies, the documented **ART incidence** climbs dramatically to 1 in 100 to 1 in 500 cycles due to multi-embryo transfer and high-volume transcervical catheters.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/mcc-ac-ectopic-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Tubal ectopic and heterotopic pregnancy pathology. Credit: StewardMD.",
+        "alt": "Ultrasound showing ectopic pregnancy sac and pelvic fluid accumulation."
+      }
+    },
+    {
+      "say": "Despite direct intrauterine embryo placement, ectopic pregnancy complicates 1.5 to 3 percent of all clinical in vitro fertilization pregnancies. Reflux of transferred embryos or underlying tubal cilia dysfunction frequently directs implantation into the ampulla or the dangerous interstitial cornual segment.",
+      "tx": "Clinical data reveal that **ectopic pregnancy in IVF** occurs with an **incidence rate** of 1.5 to 3 percent of clinical conceptions. Retrograde flushing of transfer media and pre-existing tubal inflammation predispose blastocysts to migrate laterally, resulting in tubal ampullary or hazardous **interstitial ectopic** implantations prone to catastrophic late myometrial rupture.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ectopic Implantation Site",
+          "Incidence in ART",
+          "Clinical Manifestations & Risks"
+        ],
+        "rows": [
+          [
+            "Tubal Ampulla",
+            "> 80 percent of ectopics",
+            "Classic triad: pelvic pain, amenorrhea, vaginal bleeding"
+          ],
+          [
+            "Interstitial / Cornual",
+            "5 to 8 percent of ectopics",
+            "Myometrial expansion; massive hemorrhage upon rupture at 8-12 weeks"
+          ],
+          [
+            "Cervical / Cesarean Scar",
+            "2 to 4 percent of ectopics",
+            "Implantation on prior uterine hysterotomy scar; risk of accreta"
+          ],
+          [
+            "Ovarian or Peritoneal",
+            "< 1 percent of ectopics",
+            "Unusual implantation directly on surface serosa or ovarian stroma"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transvaginal oocyte pickup is generally safe but carries well-recognized procedural hazards. Potential complications include pelvic infection in about 0.5 percent, bowel or ureteral puncture, and severe hemoperitoneum from iliac or ovarian vessel laceration in 0.1 percent.",
+      "tx": "Transvaginal **oocyte pickup complications** arise from ultrasound-guided needle puncture across the vaginal fornices. While transient bleeding is common, severe intra-abdominal **hemoperitoneum** occurs in 0.1 percent from iliac or ovarian vessel injury, while **pelvic infection** or pelvic abscess complicates approximately 0.5 percent of procedures, requiring prophylactic asepsis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Transvaginal needle aspiration of mature follicles under ultrasound guidance"
+          },
+          {
+            "id": "b",
+            "label": "Careful Doppler mapping avoids internal iliac and uterine vascular branches"
+          },
+          {
+            "id": "c",
+            "label": "Prompt recognition and surgical intervention if post-procedure hemoperitoneum develops"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adopting elective single embryo transfer has revolutionized modern assisted reproductive technology. Routine single blastocyst transfer slashes multiple pregnancy rates from greater than twenty-five percent to less than two percent, completely preserving cumulative live birth outcomes across subsequent frozen cycles.",
+      "tx": "The widespread adoption of **elective single embryo transfer** (eSET) serves as the primary tool for **multiple pregnancy reduction** in assisted reproduction. Replacing historic multi-cleavage transfers with eSET reduces multiple gestations from >25 percent to <2 percent while fully preserving the **cumulative live birth** rate when surplus embryos are vitrified.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Elective Single Embryo Transfer (eSET)",
+          "points": [
+            "Single top-quality blastocyst transferred into uterine cavity",
+            "Drastic reduction in twin and triplet multiple pregnancies (<2%)",
+            "Virtually eliminates maternal pre-eclampsia, preterm birth, and NICU admissions"
+          ]
+        },
+        "right": {
+          "title": "Double / Multiple Embryo Transfer",
+          "points": [
+            "Transfer of 2 or more embryos in fresh or frozen cycles",
+            "High rate of multiple pregnancy (>25%) with elevated obstetric risks",
+            "Marginal gain in single-cycle pregnancy but substantial neonatal morbidity"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Frozen embryo transfer is associated with distinctive perinatal outcomes compared to fresh transfers. While frozen cycles reduce low birth weight and preterm delivery, they demonstrate an increased incidence of large-for-gestational-age infants and maternal hypertensive disorders of pregnancy.",
+      "tx": "Evaluating **FET perinatal outcomes** demonstrates key differences compared with fresh IVF. Children conceived from frozen embryo transfers experience reduced rates of small-for-gestational-age and low birth weight, but show an elevated frequency of **large for gestational age** (macrosomia) and an increased maternal **pre-eclampsia risk**, particularly in artificial programmed cycles lacking a functional corpus luteum.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Perinatal Parameter",
+          "Fresh Embryo Transfer",
+          "Frozen Embryo Transfer (FET)"
+        ],
+        "rows": [
+          [
+            "Preterm birth (< 37 weeks)",
+            "Elevated relative risk",
+            "Lower risk (approaches spontaneous levels)"
+          ],
+          [
+            "Low birth weight (< 2500 g)",
+            "Increased incidence",
+            "Significantly lower incidence"
+          ],
+          [
+            "Large for gestational age (LGA)",
+            "Standard baseline risk",
+            "Elevated risk (macrosomia predisposition)"
+          ],
+          [
+            "Hypertensive disorders / PE",
+            "Standard baseline risk",
+            "Higher pre-eclampsia risk in programmed cycles"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Monozygotic twinning occurs significantly more often following blastocyst transfer than after cleavage-stage transfer. Splitting of the inner cell mass during prolonged in vitro culture or following zona pellucida micromanipulation elevates the monozygotic twin rate to 1.5 to 2.5 percent.",
+      "tx": "Spontaneous **monozygotic twinning** occurs in 1.5 to 2.5 percent of conceptions following **blastocyst transfer**, representing a 2 to 3-fold elevation over cleavage-stage transfers. Mechanical zona pellucida disruption during ICSI or laser hatching and **inner cell mass splitting** during prolonged extended in vitro culture drive this distinct twin phenomenon.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Extended day 5 culture or laser assisted hatching alters zona architecture"
+          },
+          {
+            "id": "b",
+            "label": "Herniating blastocyst experiences mechanical pinching or inner cell mass splitting"
+          },
+          {
+            "id": "c",
+            "label": "Results in monozygotic monochorionic twinning in 1.5 to 2.5 percent of transfers"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Extensive international epidemiological registries provide robust reassurance regarding the long-term safety of ovarian stimulation. Multi-decade follow-up studies confirm that fertility medications and in vitro fertilization do not increase the invasive risks of ovarian, breast, or endometrial cancers.",
+      "tx": "Reassuring evidence from comprehensive **epidemiological follow-up** studies confirms long-term **ovulation induction safety**. Rigorous multi-center cohort analyses confirm that repeated gonadotropin stimulation and IVF cycles do not elevate lifetime invasive **cancer risks** for ovarian, breast, or endometrial carcinomas compared with nulliparous, age-matched infertile controls.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-ectopic-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Anatomical sites of ectopic implantation and surveillance in assisted reproduction. Credit: StewardMD.",
+        "alt": "Diagram illustrating ectopic pregnancy locations."
+      }
+    },
+    {
+      "say": "Children conceived through assisted reproduction show a small relative increase in rare epigenetic disorders. Conditions such as Beckwith-Wiedemann and Angelman syndromes are linked to subtle alterations in DNA methylation established during gamete manipulation or in vitro embryo culture.",
+      "tx": "Long-term pediatric surveillance identifies a slight relative increase in rare **genomic imprinting disorders** among ART offspring. Epigenetic abnormalities, including **Beckwith-Wiedemann** syndrome, Angelman syndrome, and Silver-Russell syndrome, alter fundamental **epigenetics** and DNA methylation, reflecting subtle vulnerabilities during gamete micromanipulation or in vitro embryonic culture stages.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Beckwith-Wiedemann Syndrome",
+          "points": [
+            "Overgrowth syndrome with macroglossia, omphalocele, and hemihypertrophy",
+            "Loss of maternal methylation at KCNQ1OT1 (KvDMR1) locus on 11p15",
+            "Elevated risk of pediatric embryonal tumors (Wilms tumor, hepatoblastoma)"
+          ]
+        },
+        "right": {
+          "title": "Angelman Syndrome",
+          "points": [
+            "Severe neurodevelopmental disorder with ataxia, microcephaly, and paroxysms",
+            "Loss of maternal expression of UBE3A gene on chromosome 15q11-q13",
+            "Higher proportion of imprinting defects observed in ART-conceived cases"
+          ]
+        }
+      }
+    }
+  ]
+}

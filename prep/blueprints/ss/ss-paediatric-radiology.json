@@ -1,0 +1,475 @@
+{
+  "v": 1,
+  "subject": "ss-paediatric-radiology",
+  "title": "Paediatric Radiology",
+  "code": "prd",
+  "branch": "ss-paediatrics",
+  "examPattern": "NBEMS NEET-SS Radio-diagnosis Group. 150 questions (100 questions in 2024+ format). Feeder: MD/DNB Radiodiagnosis. High-yield specialization coverage for Paediatric Imaging: neurosonography, neonatal chest, GI emergencies, abdominal neoplasms, pediatric GU, and non-accidental skeletal trauma.",
+  "books": [
+    "Crack the Core (CTC) Exam Prep (Pediatric Section, ctc.pdf)",
+    "Radiology Diagnostic Notes RDN11 (Pediatric Imaging, RDN11.pdf)",
+    "Rad-notes 2 (rad-notes-2.pdf)",
+    "Nelson Textbook of Pediatrics 22e (Selected Imaging Diagnostics)"
+  ],
+  "sections": [
+    {
+      "id": "prd-physics-safety-sec",
+      "title": "Radiation Protection, Contrast Safety and Physics",
+      "modules": [
+        {
+          "id": "prd-alara-principles",
+          "title": "Pediatric Radiation Protection, ALARA and Contrast Media",
+          "lessonTopics": [
+            {
+              "id": "prd-image-gently-protocols",
+              "title": "Image Gently Campaign: ALARA Principles and Pediatric CT Optimization",
+              "bookChapter": "Crack the Core: Pediatric Physics & RDN11",
+              "mustKnow": [
+                { "term": "Image Gently campaign", "fact": "The Image Gently campaign promotes child-sizing of radiation exposure by tailoring CT scan parameters (kVp, mAs, pitch) strictly to patient weight and diameter.", "source": "Image Gently / Alliance for Radiation Safety" },
+                { "term": "Size-specific dose estimate", "fact": "Size-Specific Dose Estimate (SSDE) adjusts volume CT dose index (CTDIvol) based on the patient's effective cross-sectional diameter, providing accurate organ dose estimation in children.", "source": "AAPM Report 204" },
+                { "term": "Elimination of multiphase pediatric CT", "fact": "Routine unenhanced (non-contrast) or multiphase scanning is eliminated in pediatric body CT, reducing lifetime attributable cancer risk by 50-70%.", "numbers": ["50-70%"], "source": "ACR Appropriateness Criteria" },
+                { "term": "Low kVp optimization", "fact": "Reducing tube potential from 120 kVp to 70-80 kVp in infants increases photoelectric absorption of iodine, dramatically improving contrast conspicuity at substantially reduced radiation.", "numbers": ["120 kVp", "70-80 kVp"], "source": "Crack the Core: Pediatric CT" },
+                { "term": "Iterative reconstruction algorithms", "fact": "Model-based and deep-learning iterative reconstruction software allows 40-60% reduction in radiation dose while maintaining diagnostic signal-to-noise ratio.", "numbers": ["40-60%"], "source": "SPR Physics Guidelines" },
+                { "term": "Ultrasound as primary initial modality", "fact": "Ultrasound is the mandatory first-line imaging modality for pediatric abdominal pain, palpable mass, suspected appendicitis, intussusception, and neonatal head imaging, with zero ionizing radiation.", "source": "ACR Appropriateness Criteria" },
+                { "term": "Fluoroscopy pulsed frame rates", "fact": "Pediatric fluoroscopic examinations (voiding cystourethrogram, upper GI series) utilize low pulsed rates (3-7.5 pulses per second) and grid removal in infants under 10 kg.", "numbers": ["3-7.5 pulses per second", "10 kg"], "source": "Image Gently Fluoroscopy Guidelines" },
+                { "term": "Radiation sensitivity in pediatric tissue", "fact": "Pediatric tissues exhibit a 3 to 10-fold higher lifetime radiation sensitivity compared to adults due to rapid cellular mitotic proliferation and longer life expectancy.", "numbers": ["3 to 10-fold"], "source": "BEIR VII Report / Image Gently" }
+              ]
+            },
+            {
+              "id": "prd-contrast-media-safety",
+              "title": "Pediatric Intravenous Contrast Agents and Sedation Protocols",
+              "bookChapter": "Crack the Core: Pediatric Contrast & RDN11",
+              "mustKnow": [
+                { "term": "Low-osmolar non-ionic iodinated contrast", "fact": "Low-osmolar non-ionic monomers (iohexol, iopamidol) are standard for pediatric IV contrast, administered at 1.5 to 2.0 mL/kg (maximum 3.0 mL/kg or 100 mL total).", "numbers": ["1.5 to 2.0 mL/kg", "3.0 mL/kg", "100 mL"], "drugs": ["iohexol", "iopamidol"], "source": "ACR Manual on Contrast Media" },
+                { "term": "Macrocyclic gadolinium preference", "fact": "Macrocyclic gadolinium-based contrast agents (gadobutrol, gadoterate) with high thermodynamic stability are preferred in children to eliminate risk of intracranial and bone gadolinium retention.", "drugs": ["gadobutrol", "gadoterate"], "source": "FDA Drug Safety Communication / EMA" },
+                { "term": "Linear GBCA restriction", "fact": "Linear gadolinium contrast agents are suspended or severely restricted in pediatric patients due to documented long-term deposition in the dentate nucleus and globus pallidus.", "source": "EMA Committee for Medicinal Products" },
+                { "term": "Pediatric eGFR calculation", "fact": "Renal function in children is calculated using the updated Bedside Schwartz formula: eGFR = 0.413 x Height (cm) / Serum Creatinine (mg/dL).", "numbers": ["0.413"], "source": "National Kidney Foundation / ACR" },
+                { "term": "Nephrogenic systemic fibrosis risk", "fact": "NSF is virtually eliminated when eGFR exceeds 30 mL/min/1.73m2 and macrocyclic agents are employed at standard dose (0.1 mmol/kg / 0.2 mL/kg).", "numbers": ["30 mL/min/1.73m2", "0.1 mmol/kg", "0.2 mL/kg"], "source": "ACR Manual on Contrast Media" },
+                { "term": "Enteral contrast dilution in infants", "fact": "Water-soluble iodinated contrast (Gastrografin / meglumine diatrizoate) is hyperosmolar (1900 mOsm/L) and must be diluted 1:4 to 1:5 in neonates to prevent fluid shift, hypovolemia, and enterocolitis.", "numbers": ["1900 mOsm/L", "1:4 to 1:5"], "drugs": ["meglumine diatrizoate"], "source": "RDN11: GI Contrast" },
+                { "term": "Feed and swaddle MRI technique", "fact": "The feed and swaddle immobilization technique achieves diagnostic quality brain and spine MRI in infants under 3-4 months of age without general anesthesia in over 85-90% of scans.", "numbers": ["3-4 months", "85-90%"], "source": "SPR Clinical Practice Guidelines" },
+                { "term": "Contrast extravasation management", "fact": "Peripheral IV contrast extravasation in neonates requires immediate catheter removal, extremity elevation, cold compress application, and plastic surgery consult if volume exceeds 5-10 mL.", "numbers": ["5-10 mL"], "source": "ACR Manual on Contrast Media" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prd-neuro-sec",
+      "title": "Neonatal and Pediatric Neuroimaging",
+      "modules": [
+        {
+          "id": "prd-neonatal-neurosonography",
+          "title": "Neonatal Cranial Ultrasound and Periventricular Injury",
+          "lessonTopics": [
+            {
+              "id": "prd-gmh-ultrasound",
+              "title": "Germinal Matrix Hemorrhage: Papile Classification and Complications",
+              "bookChapter": "Crack the Core: Pediatric Neuro & RDN11",
+              "mustKnow": [
+                { "term": "Germinal matrix vulnerability", "fact": "The subependymal germinal matrix at the caudothalamic groove is a highly cellular, fragile, vascularized layer that regresses by 32-34 weeks gestation, predisposing premature infants to hemorrhage.", "numbers": ["32-34 weeks"], "source": "RDN11: Neurosonography" },
+                { "term": "Papile Grade I GMH", "fact": "Grade I hemorrhage is confined entirely to the subependymal germinal matrix at the caudothalamic notch without ventricular extension.", "source": "Papile GMH Classification" },
+                { "term": "Papile Grade II GMH", "fact": "Grade II hemorrhage extends into the lateral ventricle filling less than 50% of the ventricular lumen without causing ventricular dilatation.", "numbers": ["50%"], "source": "Papile GMH Classification" },
+                { "term": "Papile Grade III GMH", "fact": "Grade III hemorrhage fills more than 50% of the lateral ventricle and is associated with acute ventricular dilatation.", "numbers": ["50%"], "source": "Papile GMH Classification" },
+                { "term": "Grade IV venous hemorrhagic infarction", "fact": "Grade IV (periventricular venous hemorrhagic infarction) is not a true extension but a secondary hemorrhagic venous infarction caused by obstruction of the terminal medullary veins.", "source": "Volpe Neurology of the Newborn" },
+                { "term": "Cranial ultrasound screening timing", "fact": "Routine screening cranial ultrasound in very low birth weight infants (< 1500 g or < 30 weeks) is performed between day 3 and 7 of life, with over 90% of GMH occurring by day 3.", "numbers": ["1500 g", "30 weeks", "3 and 7", "90%", "3"], "source": "AAP Neuroimaging Guidelines" },
+                { "term": "Post-hemorrhagic hydrocephalus", "fact": "Ventricular enlargement occurs from obliterative arachnoiditis or blood clots obstructing the aqueduct of Sylvius, tracked by ventricular index (Levene curve).", "source": "RDN11: Neurosonography" },
+                { "term": "Mastoid fontanelle acoustic window", "fact": "The mastoid (posterolateral) fontanelle view allows high-resolution acoustic visualization of fourth ventricular hemorrhage, cerebellar hemispheres, and cisterna magna.", "source": "SPR Pediatric Ultrasound Guidelines" }
+              ]
+            },
+            {
+              "id": "prd-pvl-hie-mri",
+              "title": "Periventricular Leukomalacia (PVL) and Neonatal HIE Imaging",
+              "bookChapter": "Crack the Core: Pediatric Neuro & RDN11",
+              "mustKnow": [
+                { "term": "PVL arterial watershed territory", "fact": "Periventricular leukomalacia affects the periventricular white matter adjacent to the trigone of lateral ventricles and frontal horns (watershed of deep penetrating arteries).", "source": "RDN11: Neurosonography" },
+                { "term": "Ultrasound stages of PVL", "fact": "Acute phase (days 1-7) shows increased echogenicity brighter than the choroid plexus; cystic degeneration (cystic PVL) emerges at 2 to 4 weeks post-insult.", "numbers": ["1-7", "2 to 4 weeks"], "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Spastic diplegia correlation", "fact": "PVL selectively injures descending corticospinal motor tracts supplying the lower extremities, resulting in spastic diplegia or quadriplegia.", "source": "Nelson 22e Ch. 628" },
+                { "term": "Term HIE profound asphyxia pattern", "fact": "Acute profound asphyxia in term neonates selectively damages metabolically active deep gray nuclei: ventrolateral thalami and posterior putamina in a symmetrical distribution.", "source": "Barkovich Pediatric Neuroimaging" },
+                { "term": "Absent PLIC sign on T1 MRI", "fact": "Loss of the normal hyperintense T1 myelin signal in the posterior limb of the internal capsule (PLIC sign) in term infants predicts adverse motor outcome and cerebral palsy with > 90% sensitivity.", "numbers": ["90%"], "source": "Rutherford MRI Criteria" },
+                { "term": "DWI timing in neonatal HIE", "fact": "Diffusion-weighted imaging (DWI) demonstrates cytotoxic edema with restricted diffusion (low ADC) that peaks between days 3 and 5 of life, followed by pseudonormalization by day 7-10.", "numbers": ["3 and 5", "7-10"], "source": "Barkovich Pediatric Neuroimaging" },
+                { "term": "Parasagittal watershed pattern", "fact": "Partial prolonged asphyxia in term neonates injures the cortical and subcortical watershed border zones between anterior, middle, and posterior cerebral arteries.", "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Therapeutic hypothermia effect", "fact": "Therapeutic whole-body hypothermia (33.5 degrees C for 72 hours) alters the timeline of MRI signal changes, making day 4-7 the optimal neuroimaging window.", "numbers": ["33.5 degrees C", "72 hours", "4-7"], "source": "AAP / NICHD Guidelines" }
+              ]
+            },
+            {
+              "id": "prd-craniosynostosis-skull",
+              "title": "Craniosynostosis and Skull Sutural Pathology",
+              "bookChapter": "Crack the Core: Pediatric Neuro & RDN11",
+              "mustKnow": [
+                { "term": "Sagittal synostosis frequency", "fact": "Premature fusion of the sagittal suture (scaphocephaly / dolichocephaly) is the most common craniosynostosis (50-60%), resulting in an elongated, boat-shaped calvarium.", "numbers": ["50-60%"], "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Coronal synostosis and Harlequin eye", "fact": "Unilateral coronal synostosis (plagiocephaly) elevates the ipsilateral sphenoid ridge and superior orbital rim, producing the pathognomonic Harlequin eye sign.", "source": "RDN11: Neuro" },
+                { "term": "Metopic synostosis trigonocephaly", "fact": "Premature closure of the metopic suture creates trigonocephaly, characterized by a pointed triangular forehead, hypotelorism, and prominent midline frontal keel.", "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Deformational plagiocephaly vs lambdoid", "fact": "Positional non-synostotic plagiocephaly produces a parallelogram skull shape with ipsilateral frontal bossing, whereas true lambdoid synostosis creates a trapezoid skull with ipsilateral ear displacement downward and backward.", "source": "Nelson 22e Ch. 617" },
+                { "term": "Cloverleaf skull deformity", "fact": "Kleeblattschadel (cloverleaf skull) results from pan-synostosis of coronal, lambdoid, and sagittal sutures, classically associated with Thanatophoric dysplasia Type 2 and Pfeiffer syndrome.", "numbers": ["2"], "source": "RDN11: Neuro" },
+                { "term": "Copper beaten skull appearance", "fact": "Diffuse inner calvarial table convolutional indentations (beaten brass / copper-beaten skull) reflect chronically elevated intracranial pressure in multi-suture synostosis.", "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Low-dose 3D CT reconstructions", "fact": "Volumetric 3D surface-rendered low-dose CT provides the definitive preoperative roadmap for skull vault remodeling, assessing suture patency and intracranial volume.", "source": "ACR Appropriateness Criteria" },
+                { "term": "Syndromic craniosynostoses FGFR", "fact": "Apert, Crouzon, and Pfeiffer syndromes are autosomal dominant conditions driven by gain-of-function mutations in FGFR2 or FGFR3, featuring midface hypoplasia and complex synostosis.", "source": "Nelson 22e Ch. 617" }
+              ]
+            },
+            {
+              "id": "prd-spinal-dysraphism-tethered-cord",
+              "title": "Spinal Dysraphism and Tethered Cord Syndrome",
+              "bookChapter": "Crack the Core: Pediatric Spine & RDN11",
+              "mustKnow": [
+                { "term": "Normal conus medullaris termination", "fact": "The normal conus medullaris tip terminates above the lower border of L2 in term neonates (at L1-L2 by 3 months); termination at L3 or lower defines a low-lying/tethered cord.", "numbers": ["L2", "L1-L2", "3 months", "L3"], "source": "Crack the Core: Pediatric Spine" },
+                { "term": "Thickened filum terminale criteria", "fact": "A filum terminale diameter exceeding 2.0 mm measured on axial T1 MRI at the L5-S1 level defines abnormal thickening in tethered cord syndrome.", "numbers": ["2.0 mm"], "source": "RDN11: Pediatric Spine" },
+                { "term": "Open vs closed dysraphism", "fact": "Open spinal dysraphism (myelomeningocele) lacks cutaneous coverage, exposes neural placode, and is universally associated with Chiari II malformation and elevated maternal AFP.", "source": "Barkovich Pediatric Neuroimaging" },
+                { "term": "Lipomyelocele and lipomyelomeningocele", "fact": "Closed spinal dysraphism with a subcutaneous mass: lipomyelomeningocele extends through a posterior vertebral defect, with the neural-lipoma junction lying outside the spinal canal.", "source": "RDN11: Pediatric Spine" },
+                { "term": "Diastematomyelia and bony spur", "fact": "Split cord malformation (diastematomyelia) features sagittal division of the spinal cord into two hemicords; Type I has separate dural sacs divided by an osseous or cartilaginous spur.", "numbers": ["1"], "source": "Crack the Core: Pediatric Spine" },
+                { "term": "Dorsal dermal sinus tract", "fact": "A dermal sinus tract is an epithelium-lined tube extending from a cutaneous midline pit above the gluteal crease inward to the thecal sac, posing high risk of recurrent meningitis.", "source": "Nelson 22e Ch. 616" },
+                { "term": "Neonatal spine ultrasound window", "fact": "Spinal ultrasonography is the primary screening modality for sacral dimples in infants under 3-4 months before posterior vertebral arches fully ossify.", "numbers": ["3-4 months"], "source": "ACR Appropriateness Criteria" },
+                { "term": "Caudal regression syndrome", "fact": "Maternal gestational diabetes is the primary risk factor for caudal regression syndrome, featuring sacral agenesis, clubfeet, and a blunt wedge-shaped conus ending high at T11-T12.", "numbers": ["T11-T12"], "source": "Crack the Core: Pediatric Spine" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "prd-pediatric-cns-malformations",
+          "title": "Posterior Fossa Anomalies, Dysraphism and Brain Tumors",
+          "lessonTopics": [
+            {
+              "id": "prd-posterior-fossa-malformations",
+              "title": "Dandy-Walker, Joubert, Chiari and Posterior Fossa Malformations",
+              "bookChapter": "Crack the Core: Pediatric Neuro & RDN11",
+              "mustKnow": [
+                { "term": "Dandy-Walker malformation triad", "fact": "Dandy-Walker malformation classical triad: agenesis/hypoplasia of cerebellar vermis, cystic dilation of fourth ventricle filling posterior fossa, and high confluence of sinuses (torcular-lambdoid inversion).", "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Blake pouch cyst differentiation", "fact": "Blake pouch cyst features an enlarged retrocerebellar fluid space from failed fenestration of the foramen of Magendie, with a completely normal vermis and non-enlarged posterior fossa.", "source": "RDN11: Neuro" },
+                { "term": "Mega cisterna magna criteria", "fact": "Mega cisterna magna is defined by retrocerebellar CSF space > 10 mm on midline sagittal imaging with intact cerebellar vermis, normal fourth ventricle, and no hydrocephalus.", "numbers": ["10 mm"], "source": "Barkovich Pediatric Neuroimaging" },
+                { "term": "Chiari II malformation hallmark", "fact": "Chiari II features a small posterior fossa, downward herniation of inferior vermis and medulla through foramen magnum, beaked tectum, and 100% association with lumbar myelomeningocele.", "numbers": ["100%"], "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Molar tooth sign in Joubert", "fact": "Joubert syndrome pathognomonic MRI sign is the molar tooth sign, caused by cerebellar vermis hypoplasia, deepened interpeduncular fossa, and elongated, thickened, non-decussating superior cerebellar peduncles.", "source": "Nelson 22e Ch. 615" },
+                { "term": "Rhombencephalosynapsis", "fact": "Rhombencephalosynapsis is characterized by complete or partial absence of the cerebellar vermis with fusion of the cerebellar hemispheres across the midline and a keyhole-shaped fourth ventricle.", "source": "RDN11: Neuro" },
+                { "term": "Holoprosencephaly spectrum", "fact": "Alobar holoprosencephaly features complete non-separation of cerebral hemispheres with a monoventricle and fused thalami, strongly associated with facial anomalies and Sonic Hedgehog (SHH) mutations.", "source": "Barkovich Pediatric Neuroimaging" },
+                { "term": "Lissencephaly / agyria-pachygyria", "fact": "Type 1 lissencephaly (LIS1 gene, Miller-Dieker syndrome) shows a smooth brain surface with thickened 4-layered cortex and figure-of-8 hour-glass configuration on axial imaging.", "numbers": ["1", "4"], "source": "Nelson 22e Ch. 615" }
+              ]
+            },
+            {
+              "id": "prd-pediatric-brain-tumors",
+              "title": "Pediatric Brain Tumors: Infratentorial and Supratentorial Neoplasms",
+              "bookChapter": "Crack the Core: Pediatric Neuro & RDN11",
+              "mustKnow": [
+                { "term": "Infratentorial predominance", "fact": "In children aged 1 to 10 years, over 60-70% of primary intracranial tumors are infratentorial (posterior fossa), flipping to supratentorial in neonates and adolescents.", "numbers": ["1 to 10 years", "60-70%"], "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Medulloblastoma imaging features", "fact": "Medulloblastoma (WHO grade 4) arises from the cerebellar vermis roof of the 4th ventricle, shows high cellularity with hyperdensity on CT, and marked diffusion restriction (low ADC) on DWI.", "numbers": ["4"], "source": "RDN11: Neuro" },
+                { "term": "CSI spine staging", "fact": "All medulloblastoma patients require whole-neuroaxis contrast-enhanced spine MRI before surgery to detect leptomeningeal drop metastases (present in up to 30%).", "numbers": ["30%"], "source": "WHO CNS Classification" },
+                { "term": "Pilocytic astrocytoma", "fact": "Pilocytic astrocytoma (WHO grade 1) is characteristically a cystic lesion with an intensely enhancing mural nodule located in the cerebellar hemisphere, demonstrating low cellularity and high ADC.", "numbers": ["1"], "source": "RDN11: Neuro" },
+                { "term": "Ependymoma plasticity", "fact": "Infratentorial ependymoma (WHO grade 2-3) arises from the floor of the 4th ventricle, extends through the foramina of Luschka and Magendie (plastic / squeeze tumor), and calcifies in > 50%.", "numbers": ["2-3", "50%"], "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "DIPG / Diffuse Midline Glioma", "fact": "Diffuse intrinsic pontine glioma (H3 K27M-mutant) expands the pons, engulfs the basilar artery posteriorly, displays T2 hyperintensity, and typically lacks prominent enhancement on presentation.", "source": "WHO CNS Classification" },
+                { "term": "Craniopharyngioma 90% rule", "fact": "Adamantinomatous craniopharyngioma follows the 90% rule: 90% cystic, 90% calcified, and 90% enhancing, presenting as a suprasellar lobulated mass.", "numbers": ["90%"], "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "ATRT distinction from medulloblastoma", "fact": "Atypical teratoid/rhabdoid tumor (ATRT) occurs in children under 3 years with SMARCB1/INI1 loss, exhibiting more necrosis, hemorrhage, and off-midline cerebellopontine angle location.", "numbers": ["3 years"], "source": "Barkovich Pediatric Neuroimaging" }
+              ]
+            },
+            {
+              "id": "prd-phakomatoses-neurocutaneous",
+              "title": "Neurocutaneous Syndromes: NF1, Tuberous Sclerosis and Sturge-Weber",
+              "bookChapter": "Crack the Core: Pediatric Neuro & RDN11",
+              "mustKnow": [
+                { "term": "NF1 diagnostic imaging features", "fact": "Neurofibromatosis type 1 (NF1 / von Recklinghausen) features optic pathway gliomas (15-20%), focal areas of signal intensity (FASI / unidentified bright objects on T2), sphenoid wing dysplasia, and plexiform neurofibromas.", "numbers": ["15-20%"], "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Tuberous sclerosis intracranial lesions", "fact": "Tuberous sclerosis complex (TSC1/TSC2) demonstrates subependymal nodules (candle guttering calcifying along lateral ventricles), cortical/subcortical tubers, and subependymal giant cell astrocytomas (SEGA).", "source": "RDN11: Neuro" },
+                { "term": "SEGA foramen of Monro location", "fact": "SEGA arises near the foramen of Monro, showing serial growth and intense contrast enhancement, causing obstructive hydrocephalus; treated with surgical resection or mTOR inhibitors (everolimus).", "drugs": ["everolimus"], "source": "International TSC Consensus" },
+                { "term": "Sturge-Weber tram-track calcification", "fact": "Sturge-Weber syndrome (encephalotrigeminal angiomatosis) displays unilateral leptomeningeal angiomatosis, ipsilateral choroid plexus enlargement, and tram-track gyriform cortical calcifications on CT.", "source": "Barkovich Pediatric Neuroimaging" },
+                { "term": "NF2 vestibular schwannomas", "fact": "Neurofibromatosis type 2 (NF2 / MISME syndrome) is defined by bilateral vestibular schwannomas (acoustic neuromas), multiple intracranial meningiomas, and spinal ependymomas.", "numbers": ["2"], "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Von Hippel-Lindau CNS hemangioblastomas", "fact": "VHL syndrome features cerebellar and spinal cord hemangioblastomas (cystic mass with intensely enhancing mural nodule abutting pial surface) associated with retinal angiomas and clear cell RCC.", "source": "RDN11: Neuro" },
+                { "term": "Ataxia telangiectasia imaging", "fact": "ATM gene mutation causes progressive cerebellar vermian and hemisphere atrophy, recurrent sinopulmonary infections, and systemic telangiectasias, with heightened radiosensitivity.", "source": "Nelson 22e Ch. 631" },
+                { "term": "Gorlin syndrome bifid ribs", "fact": "Nevoid basal cell carcinoma syndrome (PTCH1 mutation) features odontogenic keratocysts of the jaw, falx cerebri calcification, bifid ribs, and medulloblastoma.", "source": "Crack the Core: Pediatric MSK" }
+              ]
+            },
+            {
+              "id": "prd-torch-infections-brain",
+              "title": "Congenital TORCH Infections and Neonatal Brain Calcifications",
+              "bookChapter": "Crack the Core: Pediatric Neuro & RDN11",
+              "mustKnow": [
+                { "term": "CMV periventricular calcifications", "fact": "Congenital Cytomegalovirus (CMV) is the most common intrauterine viral infection, classically showing extensive periventricular calcifications, polymicrogyria, white matter T2 hyperintensity, and sensorineural deafness.", "source": "Barkovich Pediatric Neuroimaging" },
+                { "term": "Toxoplasmosis diffuse parenchymal calcifications", "fact": "Congenital toxoplasmosis produces randomly scattered diffuse nodular parenchymal calcifications throughout the cortex, basal ganglia, and subcortical white matter, alongside hydrocephalus and chorioretinitis.", "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Neonatal HSV-2 temporal lobe necrosis", "fact": "Neonatal Herpes Simplex Virus type 2 (HSV-2) causes diffuse, catastrophic multicystic encephalomalacia with prominent temporal and frontal lobe predilection and cortical diffusion restriction.", "numbers": ["2"], "source": "RDN11: Neuro" },
+                { "term": "Congenital rubella vascular calcifications", "fact": "Congenital rubella syndrome features subependymal cysts, basal ganglia vasculopathy (branching striatocerebral calcifications), microcephaly, and cataracts.", "source": "Nelson 22e Ch. 279" },
+                { "term": "Congenital Zika syndrome pattern", "fact": "Congenital Zika virus infection produces severe fetal brain disruption sequence: extreme microcephaly, redundant scalp rugae, thin cerebral cortex with subcortical band calcifications at gray-white junction, and ventriculomegaly.", "source": "CDC / WHO Neuroimaging Criteria" },
+                { "term": "Lenticulostriate vasculopathy", "fact": "Echogenic branching streaks in the basal ganglia on neonatal cranial ultrasound (lenticulostriate vasculopathy) reflect mineralizing microangiopathy from TORCH infection, trisomy 21, or hypoxic insult.", "source": "RDN11: Neurosonography" },
+                { "term": "Connatal cysts vs subependymal cysts", "fact": "Connatal cysts are normal developmental variants at the superolateral angle of the frontal horns; true subependymal cysts are post-hemorrhagic or post-infectious lesions located posterior to the caudothalamic groove.", "source": "Crack the Core: Pediatric Neuro" },
+                { "term": "Intrauterine cerebral ischemia / hydranencephaly", "fact": "Hydranencephaly results from bilateral internal carotid artery occlusion in utero, sparing the posterior fossa, thalami, and brainstem (supplied by intact posterior circulation / basilar artery).", "source": "Barkovich Pediatric Neuroimaging" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prd-chest-sec",
+      "title": "Neonatal and Pediatric Chest Imaging",
+      "modules": [
+        {
+          "id": "prd-neonatal-respiratory-imaging",
+          "title": "Neonatal Respiratory Distress and Congenital Thoracic Pathology",
+          "lessonTopics": [
+            {
+              "id": "prd-neonatal-respiratory-cxr",
+              "title": "Neonatal Respiratory Distress: RDS, TTN, MAS and Air Leak",
+              "bookChapter": "Crack the Core: Pediatric Chest & RDN11",
+              "mustKnow": [
+                { "term": "RDS reticulogranular ground-glass", "fact": "Respiratory distress syndrome (surfactant deficiency in preterm < 32 weeks) shows low lung volume (bell-shaped thorax), diffuse symmetrical reticulogranular opacities, and air bronchograms.", "numbers": ["32 weeks"], "source": "RDN11: Pediatric Chest" },
+                { "term": "TTN fluid in fissures", "fact": "Transient tachypnea of the newborn in near-term/Cesarean deliveries displays normal to hyperinflated lung volumes, perihilar streaky interstitial markings, and fluid in the horizontal minor fissure.", "source": "Crack the Core: Pediatric Chest" },
+                { "term": "MAS coarse ropy infiltrates", "fact": "Meconium aspiration syndrome in term/post-term neonates presents with asymmetric coarse ropy infiltrates, hyperinflation with flattened diaphragms, and pneumothorax in 20-30%.", "numbers": ["20-30%"], "source": "RDN11: Pediatric Chest" },
+                { "term": "Spinnaker-sail sign", "fact": "Pneumomediastinum elevates and displaces the thymic lobes laterally, creating the pathognomonic angel wing or spinnaker-sail sign on neonatal AP chest radiograph.", "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Deep sulcus sign in supine neonate", "fact": "In a supine neonate, pneumothorax manifests as deepening and lucency of the ipsilateral costophrenic sulcus (deep sulcus sign) or sharp delineation of the hemidiaphragm and cardiac border.", "source": "RDN11: Pediatric Chest" },
+                { "term": "Pulmonary interstitial emphysema", "fact": "PIE in ventilated premature infants appears as linear and small cystic branching radiolucencies tracking along bronchovascular bundles, caused by alveolar rupture into the interstitium.", "source": "Nelson 22e Ch. 122" },
+                { "term": "Endotracheal tube tip position", "fact": "Ideal tip position of the endotracheal tube on neonatal radiograph is at the mid-trachea between vertebral levels T1 and T2, at least 1 cm above the carina.", "numbers": ["1 cm"], "source": "AAP Neonatal Guidelines" },
+                { "term": "Umbilical catheter positions", "fact": "Umbilical arterial catheter (UAC) high line tip rests at T6-T8 (above celiac axis) and low line at L3-L5; umbilical venous catheter (UVC) traverses ductus venosus to rest at IVC-RA junction (T8-T9).", "source": "RDN11: Lines and Tubes" }
+              ]
+            },
+            {
+              "id": "prd-congenital-thoracic-lesions",
+              "title": "Congenital Diaphragmatic Hernia, CPAM and Sequestration",
+              "bookChapter": "Crack the Core: Pediatric Chest & RDN11",
+              "mustKnow": [
+                { "term": "Bochdalek hernia anatomy", "fact": "Bochdalek diaphragmatic hernia is located posterolaterally (85-90% of CDH), occurs on the left side in 80-85%, and presents with mediastinal shift, intrathoracic bowel loops, and scaphoid abdomen.", "numbers": ["85-90%", "80-85%"], "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Morgagni hernia location", "fact": "Morgagni hernia is retrosternal/anterior (5-10% of CDH), predominantly right-sided, frequently containing liver or omentum with low respiratory morbidity.", "numbers": ["5-10%"], "source": "RDN11: Pediatric Chest" },
+                { "term": "CPAM Stocker classification", "fact": "Congenital Pulmonary Airway Malformation: Type 1 has single or multiple large cysts (2-10 cm); Type 2 has multiple small cysts (< 2 cm, associated with other anomalies); Type 3 is microcystic/solid.", "numbers": ["1", "2-10 cm", "2", "2 cm", "3"], "source": "Stocker CPAM Classification" },
+                { "term": "Extralobar sequestration features", "fact": "Extralobar bronchopulmonary sequestration has its own distinct visceral pleural envelope, systemic arterial supply from aorta, and systemic venous drainage to azygos/IVC; 80% left-sided.", "numbers": ["80%"], "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Intralobar sequestration features", "fact": "Intralobar sequestration shares the visceral pleura of the adjacent normal lung, receives systemic arterial supply from aorta, but drains via normal pulmonary veins (95% lower lobes).", "numbers": ["95%"], "source": "RDN11: Pediatric Chest" },
+                { "term": "Congenital lobar emphysema", "fact": "CLE involves progressive bronchial cartilage hypoplasia causing dynamic ball-valve hyperinflation of a single pulmonary lobe (left upper lobe 42%, middle lobe 35%), compressing adjacent lung.", "numbers": ["42%", "35%"], "source": "Nelson 22e Ch. 423" },
+                { "term": "Bronchogenic cyst location", "fact": "Bronchogenic cysts are foregut duplication anomalies most commonly located in the subcarinal or middle mediastinal space, presenting as smooth, well-marginated non-enhancing fluid masses.", "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Pleuropulmonary blastoma risk", "fact": "DICER1 gene mutations predispose to Type 1 cystic pleuropulmonary blastoma (PPB), which mimics Type 1 CPAM on imaging and requires surgical resection.", "numbers": ["1"], "source": "Nelson 22e Ch. 524" }
+              ]
+            },
+            {
+              "id": "prd-pediatric-airway-emergencies",
+              "title": "Pediatric Upper Airway Emergencies: Croup, Epiglottitis and Stridor",
+              "bookChapter": "Crack the Core: Pediatric Chest & RDN11",
+              "mustKnow": [
+                { "term": "Steeple sign of croup", "fact": "Viral croup (laryngotracheobronchitis) demonstrates the steeple sign (pencil-point subglottic narrowing) on AP neck radiograph due to symmetrical subglottic mucosal edema.", "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Thumbprint sign of epiglottitis", "fact": "Acute epiglottitis features the thumbprint sign on lateral soft-tissue neck radiograph, characterized by thickening and rounded swelling of the epiglottis with obliteration of the vallecula.", "source": "RDN11: Pediatric Chest" },
+                { "term": "Retropharyngeal space normal thickness", "fact": "Normal prevertebral soft tissue thickness on lateral neck radiograph (in true extension on inspiration) should not exceed 100% of the adjacent vertebral body at C2 or the width of a vertebral body at C6.", "numbers": ["100%"], "source": "RDN11: Pediatric Chest" },
+                { "term": "Bacterial tracheitis membrane sign", "fact": "Bacterial tracheitis (Staphylococcus aureus) displays subglottic narrowing with irregular, ragged tracheal mucosal contours and detached pseudomembranous intraluminal filling defects.", "source": "Nelson 22e Ch. 412" },
+                { "term": "Double aortic arch vascular ring", "fact": "Double aortic arch is the most common symptomatic vascular ring, compressing both trachea and esophagus, producing bilateral indentations on AP and posterior indentation on lateral barium swallow.", "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Pulmonary artery sling anatomy", "fact": "In pulmonary artery sling, the aberrant left pulmonary artery arises from the right PA and courses between the trachea and esophagus, causing anterior esophageal indentation.", "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Inhaled radiolucent foreign body", "fact": "Organic foreign body aspiration produces dynamic air trapping (hyperlucency and hyperinflation on expiration) with mediastinal shift away from the affected side on decubitus views.", "source": "Nelson 22e Ch. 415" },
+                { "term": "Laryngomalacia dynamic collapse", "fact": "Laryngomalacia is the leading cause of congenital stridor (60-70%), diagnosed definitively by flexible laryngoscopy showing omega-shaped epiglottis and inspiratory inward collapse of arytenoids.", "numbers": ["60-70%"], "source": "Nelson 22e Ch. 411" }
+              ]
+            },
+            {
+              "id": "prd-mediastinal-masses-pediatric",
+              "title": "Pediatric Mediastinal Compartment Masses and Thymic Pathology",
+              "bookChapter": "Crack the Core: Pediatric Chest & RDN11",
+              "mustKnow": [
+                { "term": "Normal thymic wave and sail sign", "fact": "The normal pediatric thymus creates the sail sign (triangular, sharp lateral margin) and wave sign (scalloped lateral border from anterior rib indentations) without compressing airways.", "source": "RDN11: Pediatric Chest" },
+                { "term": "Anterior mediastinal 4Ts in children", "fact": "Anterior mediastinal mass differential: T-cell lymphoblastic lymphoma (most common), Teratoma/germ cell tumor, Thymoma/thymic carcinoma (rare in children), and Thyroid ectopic mass.", "source": "Crack the Core: Pediatric Chest" },
+                { "term": "T-lymphoblastic lymphoma mass", "fact": "T-cell lymphoma presents as a rapidly expanding anterior mediastinal mass causing severe tracheobronchial compression, superior vena cava syndrome, and pleural effusion.", "source": "Nelson 22e Ch. 520" },
+                { "term": "Mediastinal mature teratoma", "fact": "Mature cystic teratoma is a well-encapsulated anterior mass containing fat, fluid, and coarse calcifications (bone or tooth fragments) in over 50% of cases.", "numbers": ["50%"], "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Posterior mediastinum neurogenic tumors", "fact": "Over 90% of posterior mediastinal masses in children are neurogenic tumors arising from sympathetic chain (neuroblastoma, ganglioneuroblastoma, ganglioneuroma) or nerve sheath (schwannoma).", "numbers": ["90%"], "source": "RDN11: Pediatric Chest" },
+                { "term": "Dumbbell tumor neuroaxis invasion", "fact": "Neurogenic tumors can extend through the intervertebral neural foramen into the spinal canal (dumbbell / hourglass lesion), mandating contrast MRI of the spine before surgical resection.", "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Middle mediastinal adenopathy and cysts", "fact": "Middle mediastinal lesions encompass lymphoma, tuberculous lymphadenopathy, bronchogenic cysts, and enteric duplication cysts.", "source": "RDN11: Pediatric Chest" },
+                { "term": "Thymic rebound hyperplasia", "fact": "Marked thymic enlargement (rebound hyperplasia) occurs within 2 to 9 months following cessation of chemotherapy or severe burn recovery, demonstrating smooth drop-out on chemical shift MRI.", "numbers": ["2 to 9 months"], "source": "Crack the Core: Pediatric Chest" }
+              ]
+            },
+            {
+              "id": "prd-pediatric-pneumonia-complications",
+              "title": "Pediatric Pneumonia, Round Pneumonia and Parapneumonic Empyema",
+              "bookChapter": "Crack the Core: Pediatric Chest & RDN11",
+              "mustKnow": [
+                { "term": "Round pneumonia in young children", "fact": "Round pneumonia presents as a well-circumscribed solitary spherical mass mimicking a tumor on chest radiograph, occurring almost exclusively in children under 8 years due to underdeveloped canals of Lambert and pores of Kohn.", "numbers": ["8 years"], "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Streptococcus pneumoniae etiology", "fact": "Streptococcus pneumoniae is the single most common causative organism of round pneumonia and lobar consolidations in healthy immunocompetent children.", "source": "Nelson 22e Ch. 426" },
+                { "term": "Ultrasound for parapneumonic effusion", "fact": "Chest ultrasonography is superior to CT for characterizing pleural effusions, accurately detecting internal fibrin stranding, loculations, and septations without ionizing radiation.", "source": "BTS Pleural Infection Guidelines" },
+                { "term": "Empyema fibrinolysis criteria", "fact": "Loculated complex parapneumonic effusion or frank empyema with thickened pleural peel is treated with intrapleural fibrinolytics (alteplase / dornase alfa) or thoracoscopic debridement (VATS).", "drugs": ["alteplase", "dornase alfa"], "source": "BTS Guidelines 2020" },
+                { "term": "Necrotizing pneumonia CT hallmarks", "fact": "Necrotizing pneumonia (Staphylococcus aureus, Streptococcus pneumoniae serotype 19A/3) demonstrates loss of normal parenchymal enhancement with multiple small thin-walled non-enhancing liquefactive cavities without true epithelial lining.", "numbers": ["19A/3"], "source": "RDN11: Pediatric Chest" },
+                { "term": "Pneumatocele spontaneous resolution", "fact": "Post-infectious pneumatoceles are thin-walled, air-filled cystic spaces that develop following staphylococcal or pneumococcal pneumonia; benign lesions that resolve spontaneously over weeks to months.", "source": "Crack the Core: Pediatric Chest" },
+                { "term": "Swyer-James-Macleod syndrome", "fact": "Swyer-James-Macleod syndrome is a post-infectious obliterative bronchiolitis following childhood adenovirus or mycoplasma pneumonia, manifesting as a unilaterally hyperlucent lung with small pulmonary artery and air trapping.", "source": "RDN11: Pediatric Chest" },
+                { "term": "Right middle lobe syndrome", "fact": "Right middle lobe atelectasis occurs recurrently due to acute angulation of the long narrow RML bronchus surrounded by a complete ring of lymphatic nodes susceptible to extrinsic compression.", "source": "Nelson 22e Ch. 427" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prd-abdomen-gi-sec",
+      "title": "Pediatric Abdominal and Gastrointestinal Imaging",
+      "modules": [
+        {
+          "id": "prd-neonatal-intestinal-obstruction",
+          "title": "Neonatal GI Obstruction and Volvulus",
+          "lessonTopics": [
+            {
+              "id": "prd-neonatal-bowel-obstruction-rad",
+              "title": "Duodenal Atresia, Malrotation and Midgut Volvulus",
+              "bookChapter": "Crack the Core: Pediatric GI & RDN11",
+              "mustKnow": [
+                { "term": "Double-bubble sign", "fact": "Duodenal atresia produces the classic double-bubble sign on plain radiograph (gas in stomach and first duodenal bulb) with complete absence of distal bowel gas; 30% have Down syndrome.", "numbers": ["30%"], "source": "Crack the Core: Pediatric GI" },
+                { "term": "Normal DJ flexure anatomical position", "fact": "On upper GI fluoroscopy, the normal duodenojejunal (DJ) flexure lies to the left of the left pedicle of the vertebral column at or above the level of the duodenal bulb.", "source": "RDN11: Pediatric GI" },
+                { "term": "Corkscrew sign of volvulus", "fact": "Midgut volvulus displays the pathognomonic corkscrew sign on upper GI series as the small bowel twists around the narrow mesentery, causing complete obstruction.", "source": "Crack the Core: Pediatric GI" },
+                { "term": "Ultrasound whirlpool sign", "fact": "Color Doppler ultrasound demonstrates the whirlpool sign: clockwise spiraling of the superior mesenteric vein (SMV) and mesentery around the superior mesenteric artery (SMA).", "source": "RDN11: Pediatric GI" },
+                { "term": "Reversed SMA-SMV relationship", "fact": "Normal anatomy has the SMV to the right of the SMA; reversal with SMV located to the left or directly anterior to the SMA strongly indicates intestinal malrotation.", "source": "Crack the Core: Pediatric GI" },
+                { "term": "Ladd bands pathology", "fact": "Congenital peritoneal fibrous bands (Ladd bands) fix the abnormally positioned cecum to the right posterior abdominal wall, crossing and compressing the descending duodenum.", "source": "Nelson 22e Ch. 361" },
+                { "term": "Duodenal web windsock sign", "fact": "Incomplete duodenal recanalization produces an intraluminal duodenal web with the windsock sign: a thin mucosal membrane stretching distally into the third duodenum on contrast series.", "source": "RDN11: Pediatric GI" },
+                { "term": "Jejunal and ileal atresia triples", "fact": "Triple bubble sign indicates jejunal atresia caused by intrauterine vascular mesenteric accident; distal ileal atresia shows multiple dilated loops with air-fluid levels and microcolon.", "source": "Nelson 22e Ch. 361" }
+              ]
+            },
+            {
+              "id": "prd-pyloric-stenosis-intussusception-rad",
+              "title": "Hypertrophic Pyloric Stenosis and Intussusception Imaging",
+              "bookChapter": "Crack the Core: Pediatric GI & RDN11",
+              "mustKnow": [
+                { "term": "Pyloric ultrasound 3-14 criteria", "fact": "Hypertrophic pyloric stenosis diagnostic ultrasound criteria: pyloric muscle wall thickness >= 3.0 mm (in transverse plane) and pyloric channel length >= 14-15 mm (mnemonic: pi = 3.14).", "numbers": ["3.0 mm", "14-15 mm"], "source": "Crack the Core: Pediatric GI" },
+                { "term": "Pyloric cervix sign", "fact": "The elongated, thickened pylorus projecting into the fluid-filled gastric antrum mimics the uterine cervix (cervix sign / doughnut sign).", "source": "RDN11: Pediatric GI" },
+                { "term": "Fluoroscopic signs of HPS", "fact": "Barium upper GI demonstrates the string sign (elongated narrow pyloric canal), double-track sign (parallel mucosal streaks), and shoulder sign (muscle bulging into antrum).", "source": "RDN11: Pediatric GI" },
+                { "term": "Intussusception target sign", "fact": "Transverse abdominal ultrasound shows a multilayered concentric target or doughnut sign (diameter 3-5 cm), with alternating echogenic mucosa and hypoechoic edematous muscle walls.", "numbers": ["3-5 cm"], "source": "Crack the Core: Pediatric GI" },
+                { "term": "Pseudokidney sign", "fact": "Longitudinal ultrasound views of the intussusceptum telescoping into the intussuscipiens create the pseudokidney or sandwich sign.", "source": "RDN11: Pediatric GI" },
+                { "term": "Air enema pneumatic reduction criteria", "fact": "Pneumatic reduction uses maximum safe pressure of 120 mmHg in infants, with success confirmed by free reflux of air into multiple small bowel loops.", "numbers": ["120 mmHg"], "source": "AAP Pediatric Imaging Guidelines" },
+                { "term": "Enema contraindication pneumoperitoneum", "fact": "Plain radiograph prior to reduction must exclude free intraperitoneal air (Rigler sign, falciform ligament sign) and clinical signs of peritonitis.", "source": "RDN11: Pediatric GI" },
+                { "term": "Lead point detection by ultrasound", "fact": "Ultrasound identifies pathological lead points (Meckel diverticulum, duplication cyst, inverted appendiceal stump, lymphoma) as focal cystic or solid masses within the intussusception head.", "source": "Crack the Core: Pediatric GI" }
+              ]
+            },
+            {
+              "id": "prd-nec-imaging",
+              "title": "Necrotizing Enterocolitis (NEC) and Neonatal Perforation",
+              "bookChapter": "Crack the Core: Pediatric GI & RDN11",
+              "mustKnow": [
+                { "term": "Pneumatosis intestinalis hallmark", "fact": "Pneumatosis intestinalis (intramural gas appearing as linear or bubbly radiolucencies in bowel wall) is the diagnostic hallmark of NEC (Bell stage IIA).", "source": "Bell NEC Staging / RDN11" },
+                { "term": "Portal venous gas pattern", "fact": "Portal venous gas manifests as branching, branching linear lucencies extending into the peripheral hepatic parenchyma on radiograph, differentiating from central biliary gas.", "source": "Crack the Core: Pediatric GI" },
+                { "term": "Persistent fixed bowel loop", "fact": "A fixed, unchanging, dilated bowel loop identified on sequential radiographs over 24-36 hours indicates full-thickness ischemia or impending perforation.", "numbers": ["24-36 hours"], "source": "Nelson 22e Ch. 125" },
+                { "term": "Cross-table lateral / left decubitus utility", "fact": "Left lateral decubitus or cross-table lateral views are essential to detect free peritoneal air collecting over the anterior or non-dependent liver surface.", "source": "RDN11: Pediatric GI" },
+                { "term": "Football sign and Rigler sign", "fact": "Pneumoperitoneum produces the football sign (massive oval peritoneal air lucency outlined by parietal peritoneum) and Rigler sign (double-wall visualization of bowel).", "source": "Crack the Core: Pediatric GI" },
+                { "term": "Color Doppler of ischemic bowel", "fact": "High-frequency ultrasound demonstrates absent bowel wall blood flow by color Doppler (Y-sign / ring-down artifacts), predicting transmural bowel infarction.", "source": "SPR Pediatric GI Guidelines" },
+                { "term": "Meconium ileus vs meconium plug", "fact": "Meconium ileus shows Neuhauser soap-bubble sign in the right iliac fossa with microcolon on contrast enema; meconium plug syndrome displays transient rectosigmoid cast relieved by contrast.", "source": "Crack the Core: Pediatric GI" },
+                { "term": "Post-NEC strictures", "fact": "Ischemic post-NEC colonic strictures develop in 15-30% of surviving infants, located predominantly in the left colon (splenic flexure and sigmoid) requiring contrast enema evaluation prior to re-feeding.", "numbers": ["15-30%"], "source": "Nelson 22e Ch. 125" }
+              ]
+            },
+            {
+              "id": "prd-anorectal-malformations-imaging",
+              "title": "Anorectal Malformations and VACTERL Association",
+              "bookChapter": "Crack the Core: Pediatric GI & RDN11",
+              "mustKnow": [
+                { "term": "Krickenbeck international classification", "fact": "Krickenbeck classification categorizes anorectal malformations (ARM) by fistula presence: perineal, rectourethral (bulbar/prostatic), rectovesical, vestibular, and persistent cloaca.", "source": "Krickenbeck Consensus" },
+                { "term": "Cross-table prone lateral radiograph timing", "fact": "Prone cross-table lateral (or invertogram) radiograph is performed at 18-24 hours of life to allow swallowed gas to reach the distal rectal pouch through meconium.", "numbers": ["18-24 hours"], "source": "RDN11: Pediatric GI" },
+                { "term": "PC line and I-point landmarks", "fact": "On lateral pelvic radiography, the pubococcygeal (PC) line connects the superior pubic bone to the sacrococcygeal junction; rectal gas ending below the ischial spine indicates a low malformation.", "source": "Crack the Core: Pediatric GI" },
+                { "term": "Perineal ultrasound pouch distance", "fact": "High-frequency perineal ultrasound accurately measures the distance from the blind rectal pouch to the perineal skin (pouch-perineum distance < 10 mm indicates low ARM amenable to primary repair).", "numbers": ["10 mm"], "source": "SPR Guidelines" },
+                { "term": "VACTERL association screening", "fact": "Every infant with ARM mandates complete VACTERL screening: Vertebral anomalies (70%), Anal atresia, Cardiac defects (30-40%), Tracheoesophageal fistula (20%), Renal anomalies (50%), and Limb anomalies (radial ray).", "numbers": ["70%", "30-40%", "20%", "50%"], "source": "Nelson 22e Ch. 368" },
+                { "term": "Persistent cloaca anatomy", "fact": "Persistent cloaca in females features confluence of the urethra, vagina, and rectum into a single common perineal channel, requiring genitography and 3D pelvic MRI.", "source": "Crack the Core: Pediatric GI" },
+                { "term": "Tethered cord screening in ARM", "fact": "Spinal MRI or neonatal neurosonography is mandatory in all high/intermediate ARMs due to a 30-45% coexistence of occult spinal dysraphism and tethered cord.", "numbers": ["30-45%"], "source": "AAP / SPR Consensus" },
+                { "term": "Sacral ratio prognostic significance", "fact": "The sacral ratio measured on lateral pelvic radiograph (< 0.74 normal, < 0.4 severely hypoplastic) correlates with sacral nerve root innervation and predicts long-term fecal continence.", "numbers": ["0.74", "0.4"], "source": "Nelson 22e Ch. 368" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "prd-pediatric-abdominal-masses",
+          "title": "Pediatric Solid Abdominal Tumors: Neuroblastoma and Wilms Tumor",
+          "lessonTopics": [
+            {
+              "id": "prd-neuroblastoma-wilms-rad",
+              "title": "Imaging Differentiation of Neuroblastoma and Wilms Tumor",
+              "bookChapter": "Crack the Core: Pediatric Abdomen & RDN11",
+              "mustKnow": [
+                { "term": "Neuroblastoma vascular encasement", "fact": "Neuroblastoma encases, drapes, and surrounds retroperitoneal great vessels (aorta, celiac, SMA) without vascular occlusion, extending across the midline behind the aorta.", "source": "Crack the Core: Pediatric Abdomen" },
+                { "term": "Neuroblastoma calcification rate", "fact": "Coarse, amorphous calcification is detected by CT in 80-90% and ultrasound in 50% of neuroblastomas, originating from adrenal medulla or sympathetic chain.", "numbers": ["80-90%", "50%"], "source": "RDN11: Pediatric Abdomen" },
+                { "term": "INRGSS imaging-defined risk factors", "fact": "International Neuroblastoma Risk Group Staging System (INRGSS) stages L1 (localized without IDRFs), L2 (locoregional with one or more IDRFs), M (distant metastases), and MS (infants < 18 months).", "numbers": ["1", "2", "18 months"], "source": "INRG Staging Guidelines" },
+                { "term": "Wilms tumor claw sign", "fact": "Wilms tumor (nephroblastoma) originates from the renal parenchyma, displacing normal parenchyma peripherally to create the classic claw sign (beak of parenchyma wrapping the tumor).", "source": "Crack the Core: Pediatric Abdomen" },
+                { "term": "Wilms vascular displacement", "fact": "Wilms tumor displaces adjacent vessels rather than encasing them; calcification is rare (< 10-15%); high propensity for renal vein and IVC tumor thrombus extension (5-10%).", "numbers": ["10-15%", "5-10%"], "source": "RDN11: Pediatric Abdomen" },
+                { "term": "Nephroblastomatosis precursor", "fact": "Nephroblastomatosis manifests as diffuse, subcapsular, wedge-shaped peripheral cortical nephrogenic rests with low T1 signal and minimal contrast enhancement compared to normal renal parenchyma.", "source": "Crack the Core: Pediatric Abdomen" },
+                { "term": "Hepatoblastoma imaging", "fact": "Hepatoblastoma is the most common primary malignant liver tumor in infants < 3 years, presenting as a solitary large, heterogeneous vascular mass with calcifications in 50% and marked AFP elevation.", "numbers": ["3 years", "50%"], "source": "RDN11: Pediatric Abdomen" },
+                { "term": "Mesoblastic nephroma age distinction", "fact": "Congenital mesoblastic nephroma is the most common renal neoplasm in neonates (< 3 months); cellular subtype harbors ETV6-NTRK3 gene fusion, indistinguishable from Wilms by imaging alone.", "numbers": ["3 months"], "source": "Crack the Core: Pediatric Abdomen" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prd-gu-sec",
+      "title": "Pediatric Genitourinary Imaging",
+      "modules": [
+        {
+          "id": "prd-pediatric-renal-urinary",
+          "title": "Congenital Hydronephrosis, VUR and Posterior Urethral Valves",
+          "lessonTopics": [
+            {
+              "id": "prd-hydronephrosis-vur-vcug",
+              "title": "Antenatal Hydronephrosis, VCUG Grading and Posterior Urethral Valves",
+              "bookChapter": "Crack the Core: Pediatric GU & RDN11",
+              "mustKnow": [
+                { "term": "UTD classification system", "fact": "The multidisciplinary Urinary Tract Dilation (UTD) classification grades postnatal hydronephrosis into UTD P1 (low risk), P2 (intermediate risk), and P3 (high risk with parenchymal thinning).", "numbers": ["1", "2", "3"], "source": "UTD Consensus Guidelines" },
+                { "term": "Postnatal ultrasound timing", "fact": "Initial postnatal renal ultrasound for antenatal hydronephrosis is scheduled after 48-72 hours of life to avoid underestimating severity due to transient neonatal oliguria.", "numbers": ["48-72 hours"], "source": "ACR Appropriateness Criteria" },
+                { "term": "VCUG reflux grading I to V", "fact": "International Reflux Study grading: Grade I (ureter only), Grade II (pelvis without dilatation), Grade III (mild dilatation/blunting), Grade IV (moderate tortuosity), Grade V (gross hydroureteronephrosis and tortuosity).", "numbers": ["1", "2", "3", "4", "5"], "source": "International Reflux Study / RDN11" },
+                { "term": "Posterior urethral valves keyhole sign", "fact": "Antenatal ultrasound displays the keyhole sign: a distended thick-walled urinary bladder with dilated posterior urethra; oligohydramnios and bilateral hydroureteronephrosis.", "source": "Crack the Core: Pediatric GU" },
+                { "term": "VCUG in PUV", "fact": "VCUG demonstrates abrupt caliber change with dilated, elongated posterior urethra and prominent hypertrophied bladder neck with trabeculated bladder wall during voiding.", "source": "RDN11: Pediatric GU" },
+                { "term": "Ureteropelvic junction obstruction", "fact": "UPJ obstruction is the most common cause of congenital hydronephrosis, showing marked renal pelvicalyceal dilatation with an abrupt transition to a normal non-dilated ureter.", "source": "Nelson 22e Ch. 556" },
+                { "term": "MAG3 Lasix renogram wash-out", "fact": "Technetium-99m MAG3 diuretic renogram assesses functional obstruction: clearance half-time (T1/2) < 10 min is non-obstructed, 10-20 min indeterminate, and > 20 min indicates significant mechanical obstruction.", "numbers": ["10 min", "10-20 min", "20 min"], "drugs": ["furosemide"], "source": "SNMMI Pediatric Guidelines" },
+                { "term": "Multicystic dysplastic kidney", "fact": "MCDK features multiple non-communicating cysts of varying sizes separated by echogenic dysplastic stroma, absence of normal renal parenchyma, and atretic non-visualized ureter; contralateral VUR in 20-30%.", "numbers": ["20-30%"], "source": "RDN11: Pediatric GU" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "prd-msk-sec",
+      "title": "Pediatric Musculoskeletal Imaging and Skeletal Dysplasias",
+      "modules": [
+        {
+          "id": "prd-pediatric-fractures-nat",
+          "title": "Non-Accidental Trauma, Salter-Harris Fractures and Bone Infections",
+          "lessonTopics": [
+            {
+              "id": "prd-nat-child-abuse-imaging",
+              "title": "Non-Accidental Trauma (NAT): High-Specificity Skeletal Lesions",
+              "bookChapter": "Crack the Core: Pediatric MSK & RDN11",
+              "mustKnow": [
+                { "term": "Classic metaphyseal lesion specificity", "fact": "Classic metaphyseal lesions (CML / corner fracture / bucket-handle fracture) have highest specificity for physical abuse in infants, caused by planar shearing forces during violent shaking or flailing.", "source": "ACR Appropriateness Criteria for Child Abuse" },
+                { "term": "Posterior rib fractures", "fact": "Posterior rib fractures located adjacent to the costovertebral articulation result from forceful anteroposterior thoracic compression during manual squeezing of an infant.", "source": "RDN11: Pediatric MSK" },
+                { "term": "Skeletal survey 21 views", "fact": "Full radiographic skeletal survey (minimum 21 dedicated high-detail views) is mandatory for any child under 2 years with suspected physical abuse.", "numbers": ["21", "2 years"], "source": "ACR / SPR Guidelines 2021" },
+                { "term": "Follow-up skeletal survey at 2 weeks", "fact": "Repeat skeletal survey at 10-14 days detects subtle occult fractures that become visible through subperiosteal new bone formation and callus remodeling.", "numbers": ["10-14 days"], "source": "ACR / SPR Guidelines 2021" },
+                { "term": "Salter-Harris classification SALTR", "fact": "Salter-Harris: Type I (Slipped physis), Type II (Above physis into metaphysis, 75% most common, Thurston Holland fragment), Type III (Lower into epiphysis), Type IV (Through metaphysis and epiphysis), Type V (Rammed / crush).", "numbers": ["1", "2", "75%", "3", "4", "5"], "source": "Crack the Core: Pediatric MSK" },
+                { "term": "Toddler fracture", "fact": "Toddler fracture is an accidental, non-displaced spiral or oblique fracture of the distal tibial shaft in ambulatory children aged 9 months to 3 years, presenting with refusal to bear weight.", "numbers": ["9 months to 3 years"], "source": "RDN11: Pediatric MSK" },
+                { "term": "Acute osteomyelitis MRI sensitivity", "fact": "MRI is the most sensitive imaging modality for pediatric osteomyelitis (> 95%), demonstrating replacement of normal fatty marrow with low T1 signal, high T2/STIR edema, and subperiosteal abscess.", "numbers": ["95%"], "source": "ACR Appropriateness Criteria" },
+                { "term": "Septic arthritis ultrasound", "fact": "Hip ultrasonography detects joint effusion as capsular distension > 2 mm compared to asymptomatic contralateral hip; ultrasound-guided joint aspiration confirms infection.", "numbers": ["2 mm"], "source": "Nelson 22e Ch. 711" }
+              ]
+            },
+            {
+              "id": "prd-skeletal-dysplasias-ddh",
+              "title": "Developmental Dysplasia of the Hip and Common Skeletal Dysplasias",
+              "bookChapter": "Crack the Core: Pediatric MSK & RDN11",
+              "mustKnow": [
+                { "term": "Graf ultrasound alpha angle", "fact": "Graf ultrasound method: alpha angle (bone acetabular roof) >= 60 degrees indicates mature Type 1 hip; beta angle (cartilage roof) < 55 degrees; alpha < 50 degrees indicates significant dysplasia.", "numbers": ["60 degrees", "1", "55 degrees", "50 degrees"], "source": "Graf Ultrasound Classification" },
+                { "term": "Femoral head coverage", "fact": "Normal static ultrasound demonstrates at least 50% of the cartilaginous femoral head seated within the bony acetabular fossa.", "numbers": ["50%"], "source": "ACR Appropriateness Criteria" },
+                { "term": "Hilgenreiner and Perkin reference lines", "fact": "On pelvic radiographs after 4-6 months: normal femoral head ossification center lies in the inferomedial quadrant formed by horizontal Hilgenreiner and vertical Perkin lines.", "numbers": ["4-6 months"], "source": "Crack the Core: Pediatric MSK" },
+                { "term": "Acetabular angle cut-offs", "fact": "Acetabular index angle should normally measure < 30 degrees at birth and declines to < 20 degrees by 2 years; angles > 30 degrees indicate acetabular dysplasia.", "numbers": ["30 degrees", "20 degrees", "2 years"], "source": "RDN11: Pediatric MSK" },
+                { "term": "Achondroplasia radiographic hallmarks", "fact": "Achondroplasia (FGFR3 mutation) features progressive narrowing of interpediculate distances caudally in lumbar spine, tombstone iliac wings, horizontal flat acetabular roofs, and trident hands.", "source": "Crack the Core: Pediatric MSK" },
+                { "term": "Thanatophoric dysplasia", "fact": "Thanatophoric dysplasia (lethal FGFR3 mutation) displays telephone receiver-curved femurs (Type 1) or cloverleaf skull / kleeblattschadel with straighter femurs (Type 2), with severe platyspondyly.", "numbers": ["1", "2"], "source": "RDN11: Pediatric MSK" },
+                { "term": "Osteogenesis imperfecta Type II", "fact": "Type II perinatal lethal osteogenesis imperfecta (COL1A1/COL1A2) features accordion-pleated crumpling of long bones, innumerable rib fractures with beading, and defective calvarial ossification (wormian bones).", "numbers": ["2"], "source": "Nelson 22e Ch. 721" },
+                { "term": "Rickets radiographic signs", "fact": "Nutritional and metabolic rickets produces cupping, fraying, splaying, and widening of the radiolucent physeal zone at rapidly growing metaphyses (wrist and knee).", "source": "RDN11: Pediatric MSK" }
+              ]
+            },
+            {
+              "id": "prd-pediatric-bone-tumors",
+              "title": "Pediatric Bone Tumors: Osteosarcoma, Ewing Sarcoma and LCH",
+              "bookChapter": "Crack the Core: Pediatric MSK & RDN11",
+              "mustKnow": [
+                { "term": "Osteosarcoma metaphyseal location", "fact": "Conventional osteosarcoma is the most common primary malignant bone tumor in children/adolescents (peak age 10-20 years), located in the metaphysis of long bones (distal femur 45%, proximal tibia 20%).", "numbers": ["10-20 years", "45%", "20%"], "source": "Crack the Core: Pediatric MSK" },
+                { "term": "Osteoid matrix and Codman triangle", "fact": "Classic radiograph shows cloud-like or cumulus osteoid matrix calcification, cortical destruction, sunburst periosteal reaction, and Codman triangle.", "source": "RDN11: Pediatric MSK" },
+                { "term": "Ewing sarcoma diaphyseal permeative", "fact": "Ewing sarcoma (EWSR1-FLI1 translocation, t(11;22)) characteristically affects the diaphysis or metadiaphysis of long bones and pelvis, showing permeative 'moth-eaten' bone destruction.", "numbers": ["11;22"], "source": "Crack the Core: Pediatric MSK" },
+                { "term": "Onion-skin periostitis", "fact": "Multilayered concentric lamellated subperiosteal new bone formation (onion-skin appearance) accompanied by a massive disproportionate soft-tissue mass is classic for Ewing sarcoma.", "source": "RDN11: Pediatric MSK" },
+                { "term": "Langerhans cell histiocytosis punched-out", "fact": "LCH / eosinophilic granuloma of bone causes punched-out osteolytic lesions without sclerotic margins in the skull (beveled-edge sign) and vertebra plana (pancake vertebra) in the spine.", "source": "Nelson 22e Ch. 528" },
+                { "term": "Aneurysmal bone cyst fluid levels", "fact": "ABC is an expansile, eccentric lytic metaphyseal lesion with internal bony septations, demonstrating pathognomonic multiple fluid-fluid levels on T2-weighted MRI.", "source": "Crack the Core: Pediatric MSK" },
+                { "term": "Non-ossifying fibroma cortical origin", "fact": "NOF (fibrous cortical defect when < 2 cm) is a benign, eccentric, multilocular lytic lesion with a scalloped, sclerotic border in the posterior distal femoral or proximal tibial metaphysis.", "numbers": ["2 cm"], "source": "RDN11: Pediatric MSK" },
+                { "term": "Osteochondroma marrow continuity", "fact": "Osteochondroma (exostosis) demonstrates absolute pathognomonic continuity of its cortical and medullary cavity with that of the underlying parent bone, pointing away from the nearest joint.", "source": "Crack the Core: Pediatric MSK" }
+              ]
+            },
+            {
+              "id": "prd-perthes-scfe-hip",
+              "title": "Pediatric Hip Pathology: SCFE, Legg-Calve-Perthes and Synovitis",
+              "bookChapter": "Crack the Core: Pediatric MSK & RDN11",
+              "mustKnow": [
+                { "term": "SCFE age and demographics", "fact": "Slipped Capital Femoral Epiphysis (SCFE) is a Type I Salter-Harris physeal fracture occurring in overweight adolescents (males 12-14 years, females 10-12 years), presenting with knee/thigh pain.", "numbers": ["1", "12-14 years", "10-12 years"], "source": "Nelson 22e Ch. 714" },
+                { "term": "Klein line criteria", "fact": "On AP frog-leg lateral pelvic radiograph, Klein line drawn along the superior border of the femoral neck normally intersects the lateral epiphysis; failure to intersect defines Trethowan sign of SCFE.", "source": "Crack the Core: Pediatric MSK" },
+                { "term": "Posteromedial slip direction", "fact": "The femoral neck displaces anterosuperiorly while the capital femoral epiphysis slips posteromedially into the acetabulum (ice cream falling off the cone appearance).", "source": "RDN11: Pediatric MSK" },
+                { "term": "Bilateral involvement in SCFE", "fact": "Bilateral SCFE occurs in 20-40% of patients (up to 50% in underlying endocrinopathy: hypothyroidism, growth hormone deficiency), mandating prophylactic pinning of the contralateral hip.", "numbers": ["20-40%", "50%"], "source": "POSNA Clinical Guidelines" },
+                { "term": "Legg-Calve-Perthes disease peak age", "fact": "LCPD is idiopathic avascular necrosis of the capital femoral epiphysis occurring in active boys aged 4 to 8 years (4:1 male ratio), presenting with an unprovoked, painless limp.", "numbers": ["4 to 8 years", "4:1"], "source": "Nelson 22e Ch. 715" },
+                { "term": "Waldenstrom radiographic stages", "fact": "Perthes disease progresses through four radiographic stages: Stage 1 Initial (crescent sign / subchondral fracture), Stage 2 Fragmentation, Stage 3 Reossification, and Stage 4 Remodeling/healed.", "numbers": ["1", "2", "3", "4"], "source": "Waldenstrom Classification / RDN11" },
+                { "term": "Catterall and Herring classifications", "fact": "Herring lateral pillar classification on AP pelvis: Group A (100% lateral pillar height maintained), Group B (> 50% height), and Group C (< 50% height, poor long-term prognosis).", "numbers": ["100%", "50%"], "source": "Herring Lateral Pillar Staging" },
+                { "term": "Transient synovitis ultrasound", "fact": "Transient synovitis (toxic synovitis) is a benign, self-limiting post-viral inflammatory hip effusion in children aged 3-8 years; normal radiograph, effusion resolves spontaneously within 7-10 days.", "numbers": ["3-8 years", "7-10 days"], "source": "Nelson 22e Ch. 712" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

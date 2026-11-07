@@ -1,17 +1,20 @@
-/* image-watermark.js: the StewardMD watermark on content images (owner 2026-11-05, preview variant E: "E but not so
- * many watermarks just 3 is enough"). Three faint diagonal "StewardMD" marks across the image plus a small corner badge
- * with the logo. Drawn OVER the image (an overlay span), never burned into the file, so originals stay clean.
+/* image-watermark.js: the brand watermark on content images.
+ * Owner 2026-11-05 chose variant E ("just 3"); owner 2026-11-07 found three marks irritating and asked for the style of
+ * a textbook figure: ONE large, very faint PrepNucleus mark and name across the middle, and a small "PrepNucleus ·
+ * Powered by StewardMD" line at the bottom, the same lockup as the PrepNucleus home header (prep-plan.js wmHtml).
+ * Drawn OVER the image (an overlay span), never burned into the file, so originals stay clean.
  *
- * Images from Wikimedia Commons are not ours: they get the corner badge only (no diagonal marks) and keep their author
- * and licence credit wherever the app shows it.
+ * Images from Wikimedia Commons are not ours: they get the bottom line only (no big mark across them) and keep their
+ * author and licence credit wherever the app shows it.
  *
  * window.SMD_WM = {
  *   on()            true unless switched off (localStorage smd_watermark = "0" or ?wm=0; ?wm=1 turns it back on)
  *   html(src)       the overlay markup for an image (empty when off); put it inside a .smd-wm-host that wraps the image
  *   follow(img)     for a viewer image that zooms by transform: keeps an overlay on the image's box and copies its transform
  * }
- * Styles: image-viewer.css (.smd-wm*). Used by kb-figure.js and reasoning.js (disease reader figures), image-library.js
- * (thumbnails and its viewer) and prep-viewer.js (the full-screen viewer every tapped image opens in). ES5. */
+ * Styles: image-viewer.css (.smd-wm*); marks are CSS masks of prepnucleus-wm.png and stewardmd-glyph.png. Used by
+ * kb-figure.js and reasoning.js (disease reader figures), image-library.js (thumbnails and its viewer) and prep-viewer.js
+ * (the full-screen viewer every tapped image opens in). ES5. */
 (function (G) {
   "use strict";
   function on() {
@@ -28,7 +31,9 @@
     if (!force && !on()) return "";
     var ext = external(src);
     return '<span class="smd-wm' + (ext ? " smd-wm--ext" : "") + '" aria-hidden="true">' +
-      (ext ? "" : "<i>StewardMD</i><i>StewardMD</i><i>StewardMD</i>") + '<b class="smd-wm-c">StewardMD</b></span>';
+      (ext ? "" : '<span class="smd-wm-big"><i class="smd-wm-pn"></i><span>PrepNucleus</span></span>') +
+      '<span class="smd-wm-by"><i class="smd-wm-pn"></i><span class="smd-wm-pt">PrepNucleus</span><i class="smd-wm-sep"></i>' +
+      '<span class="smd-wm-pb">Powered by</span><i class="smd-wm-gl"></i><span class="smd-wm-wd">Steward<b>MD</b></span></span></span>';
   }
   /* A viewer image is laid out in its stage and zoomed with a CSS transform on the image. The overlay sits on the
    * image's layout box (offsetLeft/Top/Width/Height ignore transforms) in the same stage and copies the transform, so

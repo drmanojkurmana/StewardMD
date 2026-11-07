@@ -382,7 +382,7 @@
       else H.run(list, "study", title);
     }, function () {
       H.stack().pop();
-      H.paint(H.bar(escH(NUCLEUS360.name), escH(topic.title), "back") + '<div class="pn-body"><p class="pn-err" role="alert">Questions need a connection. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="back">Back</button></div>');
+      H.paint(H.bar(escH(NUCLEUS360.name), escH(topic.title), "back") + '<div class="pn-body"><p class="pn-err" role="alert">' + (G.PREP_BANK_MSG || String)("Questions need a connection. Check the connection and try again.") + '</p><button type="button" class="pn-btn" data-act="back">Back</button></div>');
     });
   }
   function openOutline(topic) {
