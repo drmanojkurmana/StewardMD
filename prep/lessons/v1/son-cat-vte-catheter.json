@@ -94,31 +94,54 @@
       }
     },
     {
-      "tx": "**Thromboprophylaxis** (preventive anticoagulant given before any clot forms) is the question for high-scoring outpatients. In studies of the high-risk Khorana group, rivaroxaban and apixaban cut clotting by about 50 percent, with bleeding near 5 percent. The American Society of Clinical Oncology (ASCO) 2019 guideline says patients with a Khorana score of 2 or more may be offered apixaban, rivaroxaban, or low molecular weight heparin. Standard references still call routine prophylaxis controversial.",
-      "say": "Thromboprophylaxis means preventive anticoagulant treatment given before any clot forms. In studies of the high-risk Khorana group, rivaroxaban and apixaban reduced clotting by about 50 percent, with bleeding near 5 percent. The American Society of Clinical Oncology issued a 2019 guideline saying that patients with a Khorana score of 2 or more may be offered apixaban, rivaroxaban, or low molecular weight heparin. Standard references say routine prophylaxis is controversial.",
+      "tx": "**Thromboprophylaxis** (preventive anticoagulant given before any clot forms) is not routine for every outpatient with cancer. Standard references say the American Society of Clinical Oncology (ASCO) does not routinely recommend it. For outpatients with a Khorana score of 2 or more before a new regimen, ASCO's 2023 update says apixaban, rivaroxaban, or LMWH may be offered, if bleeding risk is low and no drug interactions apply. Stomach and pancreatic cancers reach 2 points from the site alone.",
+      "say": "Thromboprophylaxis means preventive anticoagulant treatment given before any clot forms. It is not routine for every outpatient with cancer. Standard references say the American Society of Clinical Oncology does not routinely recommend it. For outpatients with a Khorana score of two or more before a new regimen, the 2023 ASCO update says apixaban, rivaroxaban, or low molecular weight heparin may be offered. That applies when bleeding risk is low and no drug interactions apply. Stomach and pancreatic cancers reach two points from the site alone.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Prophylaxis in the high-risk group",
+          "title": "Khorana score 2 or more, new regimen",
           "points": [
-            "Rivaroxaban or apixaban studied",
-            "About 50 percent fewer clots in trials",
-            "Bleeding near 5 percent",
-            "ASCO 2019: may be offered at a score of 2 or more"
+            "Apixaban, rivaroxaban, or LMWH may be offered (ASCO 2023)",
+            "Only if bleeding risk is low",
+            "No significant drug interactions"
           ]
         },
         "right": {
-          "title": "Routine use during chemotherapy",
+          "title": "All outpatients with cancer",
           "points": [
-            "Remains controversial in standard references",
-            "Risk depends on tumour type, treatment, blood counts, and BMI"
+            "Routine prophylaxis not recommended for everyone",
+            "Stomach and pancreas: 2 points by site alone"
           ]
         }
       }
     },
     {
-      "tx": "For cancer-associated clots, **low molecular weight heparin (LMWH)**, an injected heparin fragment, or a **direct oral anticoagulant (DOAC)**, a tablet given at a fixed dose, is used for at least six months. Apixaban, given as 10 mg twice daily for 7 days and then 5 mg twice daily, was not inferior to dalteparin. Treatment continues until the patient is declared cancer-free.",
-      "say": "For cancer-associated clots, low molecular weight heparin, or LMWH, is an injected heparin fragment. A direct oral anticoagulant, or DOAC, is a tablet given at a fixed dose without routine blood tests. Treatment is continued for at least six months. Apixaban, given as 10 milligrams twice daily for seven days and then 5 milligrams twice daily, was not inferior to dalteparin. Treatment continues until the patient is declared cancer-free.",
+      "tx": "**Thrombocytopenia** (a low platelet count) changes which clot treatment is safe. Standard references withhold prophylaxis in medically ill patients with cancer when platelets are under 50,000 per microlitre. Bleeding from a low count alone is rare above that level and usually starts below 10,000 to 20,000. For treatment, ISTH guidance from 2018, as summarised in a 2022 review, supports full-dose anticoagulation above 50,000 and a reduced dose from 25,000 to 50,000.",
+      "say": "Thrombocytopenia means a low platelet count, and it changes which clot treatment is safe. Standard references withhold prophylaxis in medically ill patients with cancer when platelets are under 50,000 per microlitre. Bleeding from a low count alone is rare above that level, and it usually starts below 10,000 to 20,000. For treatment, guidance from the International Society on Thrombosis and Haemostasis in 2018 supports full-dose anticoagulation above 50,000. A reduced dose is used from 25,000 to 50,000.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Platelets 50,000 per microlitre or more",
+          "points": [
+            "Full-dose anticoagulation supported (ISTH 2018)",
+            "Bleeding from a low count alone is rare",
+            "Prophylaxis not withheld for platelets alone"
+          ]
+        },
+        "right": {
+          "title": "Platelets under 50,000 per microlitre",
+          "points": [
+            "Prophylaxis withheld in medically ill patients with cancer",
+            "Reduced dose from 25,000 to 50,000 (ISTH 2018)",
+            "Anticoagulation held below 25,000 (ISTH 2018)",
+            "Bleeding usually begins below 10,000 to 20,000"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For cancer-associated clots, **low molecular weight heparin (LMWH)**, an injected heparin fragment, or a **direct oral anticoagulant (DOAC)**, a tablet given at a fixed dose, is used. Standard references prefer LMWH alone when the cancer is gastrointestinal, and they continue treatment until the patient is declared cancer-free. Apixaban, given as 10 mg twice daily for 7 days and then 5 mg twice daily, was not inferior to dalteparin.",
+      "say": "For cancer-associated clots, low molecular weight heparin, or LMWH, is an injected heparin fragment. A direct oral anticoagulant, or DOAC, is a tablet given at a fixed dose. Standard references prefer LMWH alone when the cancer is gastrointestinal. Treatment continues until the patient is declared cancer-free. Apixaban, given as 10 milligrams twice daily for seven days and then 5 milligrams twice daily, was not inferior to dalteparin.",
       "vis": {
         "kind": "flow",
         "nodes": [
@@ -158,38 +181,15 @@
       }
     },
     {
-      "tx": "**Thrombocytopenia** (a low platelet count) changes which clot prevention is safe. Standard references list a platelet count under 50,000 per microlitre as one reason to withhold prophylaxis in medically ill patients with cancer. The International Society on Thrombosis and Haemostasis (ISTH) 2018 guidance supports full-dose anticoagulation at 50,000 per microlitre or more. Below that, the dose is reduced or platelets are transfused to hold the count at 50,000.",
-      "say": "Thrombocytopenia means a low platelet count, and it changes which clot prevention is safe. Standard references note that a platelet count under 50,000 per microlitre is one reason to withhold prophylaxis in medically ill patients with cancer. The International Society on Thrombosis and Haemostasis issued 2018 guidance supporting full-dose anticoagulation at 50,000 per microlitre or more. Below that level, the dose is reduced or platelets are transfused to hold the count at 50,000.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Platelets 50,000 per microlitre or more",
-          "points": [
-            "Bleeding from a low count alone is rare",
-            "Full-dose anticoagulation supported (ISTH 2018)",
-            "Prophylaxis can be considered when other criteria are met"
-          ]
-        },
-        "right": {
-          "title": "Platelets under 50,000 per microlitre",
-          "points": [
-            "Listed as a reason to withhold prophylaxis",
-            "Dose reduced or platelets transfused (ISTH 2018)",
-            "Bleeding usually begins below 10,000 to 20,000"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "**Pulmonary embolism (PE)**, a clot lodged in the lung arteries, is first treated with anticoagulation when the patient is haemodynamically stable. Massive PE means low blood pressure with extensive clot, and it occurs in roughly 5 to 10 percent of cases. For massive PE, **fibrinolysis** (clot dissolution with drugs such as alteplase) is standard. For submassive PE, with right ventricular dysfunction but normal pressure, it remains controversial.",
-      "say": "Pulmonary embolism, or PE, is a clot lodged in the lung arteries. When the patient is haemodynamically stable, treatment starts with anticoagulation. Massive PE means low blood pressure with extensive clot, and it occurs in roughly 5 to 10 percent of cases. Fibrinolysis, which dissolves clot with drugs such as alteplase, is standard for massive PE. For submassive PE, with right ventricular dysfunction but normal pressure, it remains controversial.",
+      "tx": "**Pulmonary embolism (PE)**, a clot lodged in the lung arteries, is grouped by blood pressure and heart strain. Massive PE, with low blood pressure and clot in at least half the pulmonary vessels, occurs in roughly 5 to 10 percent of cases. For massive PE, **fibrinolysis** (clot dissolution with drugs such as alteplase) is standard. Submassive PE has normal pressure with right ventricular dysfunction, and fibrinolysis for it remains controversial.",
+      "say": "Pulmonary embolism, or PE, is a clot lodged in the lung arteries. It is grouped by blood pressure and heart strain. Massive PE has low blood pressure and clot in at least half the pulmonary vessels. It occurs in roughly five to ten percent of cases. For massive PE, fibrinolysis, which dissolves clot with drugs such as alteplase, is standard. Submassive PE has normal pressure with right ventricular dysfunction, and fibrinolysis for it remains controversial.",
       "vis": {
         "kind": "compare",
         "left": {
           "title": "Massive PE",
           "points": [
             "Systemic hypotension",
-            "Extensive clot in at least half the pulmonary vessels",
+            "Clot in at least half the pulmonary vessels",
             "About 5 to 10 percent of cases",
             "Fibrinolysis is standard treatment"
           ]
@@ -206,8 +206,29 @@
       }
     },
     {
-      "tx": "A long-term **central venous catheter (CVC)**, a tube placed in a large vein, can clot, and major vessel thrombosis may follow. Standard advice is to remove the catheter and add anticoagulation, which prevents embolism. If **superior vena cava syndrome (SVCS)** is found early, fibrinolytic therapy can clear it without losing the catheter. For a blocked lumen, Infusion Nurses Society standards advise instilling alteplase. A pleural drainage catheter may need occasional thrombolysis to keep its **patency** (openness).",
-      "say": "A long-term central venous catheter, or CVC, is a tube placed in a large vein. It can clot, and major vessel thrombosis may follow. The standard advice is to remove the catheter and add anticoagulation, which prevents embolism. If superior vena cava syndrome, or SVCS, is found early, fibrinolytic therapy can clear it without losing the catheter. For a blocked lumen, the Infusion Nurses Society standards of 2021 advise instilling alteplase into it. A pleural drainage catheter may need occasional thrombolysis to stay open.",
+      "tx": "Low blood oxygen, or **hypoxaemia** (too little oxygen in the blood), is a separate issue from clot size. Most patients with minor PE are not hypoxaemic and need no oxygen. The British Thoracic Society (BTS) guideline of 2017 sets an oxygen saturation target of 94 to 98 percent in PE, for patients not at risk of hypercapnic failure. For patients at risk of hypercapnic failure, a build-up of carbon dioxide, it suggests 88 to 92 percent. Hypoxia is not among the high-risk markers in standard references.",
+      "say": "Low blood oxygen, or hypoxaemia, which means too little oxygen in the blood, is a separate issue from clot size. Most patients with minor PE are not hypoxaemic, so they need no oxygen. The British Thoracic Society guideline of 2017 sets an oxygen saturation target of 94 to 98 percent in PE, in patients not at risk of hypercapnic failure. For patients at risk of hypercapnic failure, a build-up of carbon dioxide, it suggests 88 to 92 percent. Hypoxia is not among the high-risk markers in standard references.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient group",
+          "Oxygen saturation target"
+        ],
+        "rows": [
+          [
+            "PE, not at risk of hypercapnic failure",
+            "94 to 98 percent"
+          ],
+          [
+            "PE, at risk of hypercapnic failure",
+            "88 to 92 percent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A long-term **central venous catheter (CVC)**, a tube placed in a large vein, can clot, and major vessel thrombosis may follow. Standard references say the catheter should be removed with anticoagulation to prevent embolization. If superior vena cava syndrome (SVCS, blocked venous return from the head and arms) is found early, fibrinolytic therapy can clear it without losing the catheter. A pleural drainage catheter may need occasional thrombolysis to keep its **patency** (openness).",
+      "say": "A long-term central venous catheter, or CVC, is a tube placed in a large vein. It can clot, and major vessel thrombosis may follow. Standard references say the catheter should be removed together with anticoagulation, to prevent embolization. If superior vena cava syndrome is found early, fibrinolytic therapy can clear it without losing the catheter. A pleural drainage catheter may need occasional thrombolysis to stay open.",
       "vis": {
         "kind": "table",
         "cols": [
@@ -226,10 +247,31 @@
           [
             "Indwelling pleural catheter dysfunction",
             "Intermittent thrombolysis to keep it open"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Catheter occlusion, a blocked lumen, has more than one cause. A **fibrin sheath** (a fibrin coating around the tip) forms on most central lines within two weeks, but it usually does not block flow. An intraluminal clot inside the line causes complete obstruction and accounts for 5 to 25 percent of occlusions. Alteplase instilled into the lumen cleared 52 percent of blocked catheters within 30 minutes in a 2012 review.",
+      "say": "Catheter occlusion, a blocked lumen, has more than one cause. A fibrin sheath, which is a fibrin coating around the tip, forms on most central lines within two weeks. It usually does not block flow. An intraluminal clot inside the line causes complete obstruction, and it accounts for five to 25 percent of occlusions. Alteplase instilled into the lumen cleared 52 percent of blocked catheters within 30 minutes in a 2012 review.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Finding",
+          "Detail"
+        ],
+        "rows": [
+          [
+            "Fibrin sheath",
+            "Forms on most catheters, usually no block"
           ],
           [
-            "Blocked CVC lumen",
-            "Instil alteplase into the lumen (INS 2021)"
+            "Intraluminal clot",
+            "Complete block, 5 to 25 percent of occlusions"
+          ],
+          [
+            "Alteplase instilled",
+            "52 percent cleared at 30 minutes, 86 percent overall"
           ]
         ]
       }
@@ -239,9 +281,10 @@
   "refs": [
     "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
     "Harrison's Principles of Internal Medicine, 22nd edition",
-    "American Society of Clinical Oncology VTE guideline update, 2019",
-    "ISTH SSC guidance on cancer-associated thrombosis with thrombocytopenia, 2018",
-    "Infusion Nurses Society Infusion Therapy Standards of Practice, 2021"
+    "American Society of Clinical Oncology VTE guideline update, 2023 (Key et al., J Clin Oncol 2023;41:3063-3071), as quoted in Thrombosis and Haemostasis 2025 consensus on VTE in special situations (PMC12457007)",
+    "ISTH SSC guidance on cancer-associated thrombosis with thrombocytopenia, 2018 (Samuelson Bannow et al., J Thromb Haemost 2018;16:1246-1249), as summarised by Held et al., Res Pract Thromb Haemost 2022;6:e12726",
+    "British Thoracic Society guideline for oxygen use in adults in healthcare and emergency settings, 2017 (O'Driscoll et al., BMJ Open Respir Res 2017;4:e000170)",
+    "Baskin et al., Thrombolytic therapy for central venous catheter occlusion, Haematologica 2012;97:641-650"
   ],
   "gen": "AI"
 }
