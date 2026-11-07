@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sct-on-pump-vs-off-pump-cabg",
+  "title": "On-Pump vs Off-Pump CABG: Techniques, Hemodynamics, Trials and Outcomes",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Technique of Myocardial Revascularization: Off-Pump CABG)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 7 (Ischemic Heart Disease)",
+    "ROOBY and CORONARY Randomized Clinical Trials"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Off-pump coronary artery bypass grafting accomplishes complete revascularization without cardiopulmonary bypass. The operation avoids extracorporeal circulation and global ischemic arrest by operating directly on the beating heart. Mechanical tissue stabilizers and temporary intracoronary shunts enable precise microvascular anastomoses, which is recognized by surgical teams.",
+      "tx": "Operating on the beating heart, **off-pump CABG** avoids cardiopulmonary bypass and global cardioplegic arrest. Surgeons maintain systemic perfusion while using a specialized mechanical **tissue stabilizer** to immobilize the target epicardial vessel. A silastic **intracoronary shunt** is inserted into the arteriotomy to maintain regional downstream perfusion during grafting.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sct-coronary-valve-cpb-mcs-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Coronary artery bypass grafting anatomy and conduits. Credit: StewardMD.",
+        "alt": "Coronary artery bypass grafting anatomy and revascularization conduits."
+      }
+    },
+    {
+      "say": "Modern mechanical stabilizers use vacuum suction pods placed on either side of the coronary artery. The suction captures the epicardium and eliminates local myocardial motion. Concurrently, an intracoronary shunt maintains active distal blood flow, preventing acute ischemia and keeping the arteriotomy bloodless for suturing.",
+      "tx": "The mechanical **suction stabilizer** employs vacuum pods positioned parallel to the target coronary artery, abolishing local mechanical motion. Concurrently, placing an **intracoronary shunt** maintains continuous **distal perfusion** while preventing backbleeding from coronary collateral channels, establishing a pristine bloodless field for delicate 7-0 or 8-0 polypropylene anastomosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Apply suction stabilizer pods across target coronary segment"
+          },
+          {
+            "id": "b",
+            "label": "Perform longitudinal arteriotomy with micro-blade and Potts scissors"
+          },
+          {
+            "id": "c",
+            "label": "Insert appropriately sized intracoronary shunt (1.0 to 2.0 mm)"
+          },
+          {
+            "id": "d",
+            "label": "Construct end-to-side microvascular anastomosis with running suture"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Exposing circumflex and right coronary branches requires verticalizing the heart using deep pericardial retraction sutures. Displacing the cardiac apex anteriorly compresses the right ventricle and distorts the atrioventricular valves. These positional changes reduce systemic venous return and can cause transient arterial hypotension.",
+      "tx": "Revascularizing circumflex or posterior descending vessels necessitates **heart verticalization** using deep **pericardial stay sutures** or apical suction positioners. Tilting the ventricular mass anteriorly causes acute **right ventricular compression** and geometric distortion of the tricuspid valve annulus, precipitating a sudden drop in systemic venous return and systemic blood pressure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anterior LAD Exposure",
+          "points": [
+            "Minimal cardiac displacement required",
+            "Hemodynamics remain stable and preserved",
+            "Standard horizontal patient positioning",
+            "Low risk of right-sided chamber compression"
+          ]
+        },
+        "right": {
+          "title": "Posterior Circumflex Exposure",
+          "points": [
+            "Requires apex verticalization and deep traction",
+            "Severe right ventricular outflow and inflow distortion",
+            "Marked decline in stroke volume and cardiac index",
+            "Demands Trendelenburg tilting and vasopressor support"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Anesthesiologists counteract verticalization-induced hypotension with patient positioning and pharmacological support. Placing the patient in the steep Trendelenburg position enhances venous return from the lower extremities. Opening the right pleura creates space for the verticalized heart and maintains cardiac output.",
+      "tx": "To counteract positional hemodynamic compromise during **obtuse marginal** artery exposure, the team tilts the operating table into steep **Trendelenburg position** to augment preload. Opening the right pleural space provides anatomical space for the verticalized heart, while judicious norepinephrine boluses preserve mean arterial pressure and maintain forward **cardiac output**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Physiological Challenge",
+          "Compensatory Intervention",
+          "Clinical Endpoint"
+        ],
+        "rows": [
+          [
+            "Impaired venous return",
+            "Steep Trendelenburg tilt",
+            "Augments central venous filling and preload"
+          ],
+          [
+            "Right chamber compression",
+            "Right pleurotomy creation",
+            "Decompresses mediastinum and accommodates verticalized apex"
+          ],
+          [
+            "Systemic hypotension",
+            "Targeted alpha-1 vasopressor titration",
+            "Maintains coronary graft perfusion pressure (>65 mmHg)"
+          ],
+          [
+            "Transient bradycardia",
+            "Temporary atrial pacing or pacing wires",
+            "Preserves heart rate and forward stroke volume"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The anaortic or no-touch off-pump technique completely avoids manipulation of the ascending aorta. Surgeons use in situ arterial grafts like the bilateral internal thoracic arteries and the gastroepiploic artery. Eliminating side-biting aortic clamps significantly reduces the incidence of perioperative atheroembolic stroke.",
+      "tx": "The **anaortic technique**, also known as the **no-touch technique**, completely avoids ascending aortic cannulation, cross-clamping, or partial-occlusion side-biting clamps. Utilizing in situ bilateral internal thoracic arteries and composite Y-grafts virtually eliminates particulate atheroembolism, conferring a dramatic reduction in **perioperative stroke** among patients with heavily calcified aortas.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cardiac-surgery-cabg-valvular-repair-and-cardiopulmonary-bypass-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Bypass cannulation and stabilization setup. Credit: StewardMD.",
+        "alt": "Cardiopulmonary bypass and aortic cannulation instrumentation."
+      }
+    },
+    {
+      "say": "Large multicenter randomized trials have rigorously compared off-pump and on-pump bypass surgery. The ROOBY and CORONARY trials demonstrated comparable thirty-day survival between the two surgical approaches. However, off-pump surgery had fewer completed bypass grafts and higher rates of repeat revascularization at one year.",
+      "tx": "The landmark **ROOBY trial** and international **CORONARY trial** demonstrated no significant difference in 30-day mortality between off-pump and conventional on-pump revascularization. However, off-pump patients experienced lower overall **graft patency**, fewer completed grafts, and an increased requirement for repeat catheter revascularization at 1 year follow-up.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Off-Pump Surgery (ROOBY / CORONARY)",
+          "points": [
+            "Equivalent 30-day survival and mortality",
+            "Reduced systemic inflammatory response and bleeding",
+            "Fewer distal anastomoses constructed per patient",
+            "Higher rate of 1-year repeat target revascularization"
+          ]
+        },
+        "right": {
+          "title": "Conventional On-Pump Surgery",
+          "points": [
+            "Quiet, motionless surgical field for anastomoses",
+            "Higher long-term angiographic graft patency rates",
+            "More complete anatomical revascularization",
+            "Increased transfusion requirement and bypass inflammation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Off-pump surgery offers significant advantages in specific high-risk patient subgroups, which is recognized by surgical teams. Patients with heavily calcified porcelain aortas avoid lethal stroke caused by cross-clamping. Patients with chronic kidney disease, severe liver dysfunction, or coagulopathies benefit from avoiding bypass-induced inflammation and hemodilution.",
+      "tx": "Off-pump grafting provides profound clinical protection in patients presenting with an extensively calcified **porcelain aorta**, where aortic cross-clamping triggers devastating stroke. The technique is similarly superior in patients with advanced **chronic kidney disease** vulnerable to bypass-mediated ischemic tubular necrosis, as well as cirrhotic patients with **high bleeding risk** and baseline coagulopathies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient Risk Category",
+          "Primary Bypass Risk Avoided",
+          "Off-Pump Clinical Benefit"
+        ],
+        "rows": [
+          [
+            "Porcelain aorta",
+            "Macroembolization from clamp trauma",
+            "Abolishes stroke risk via anaortic no-touch grafting"
+          ],
+          [
+            "Renal insufficiency (CKD)",
+            "Hemodilution, low MAP, and CPB hemolysis",
+            "Preserves baseline renal function and avoids dialysis"
+          ],
+          [
+            "Cirrhosis and coagulopathy",
+            "Extracorporeal consumption of clotting factors",
+            "Reduces blood loss and requirements for blood components"
+          ],
+          [
+            "Severe COPD / Frailty",
+            "Prolonged ventilator dependence and ARDS",
+            "Facilitates rapid ultra-fast-track extubation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Emergency conversion to cardiopulmonary bypass occurs in two to five percent of off-pump operations. Refractory ventricular arrhythmias, profound myocardial ischemia, or hemodynamic collapse dictate immediate conversion, which is recognized by surgical teams. Teams must maintain primed bypass circuits and perfusionists on standby throughout every off-pump case.",
+      "tx": "Unplanned **emergency conversion** to on-pump bypass occurs in 2 to 5 percent of beating-heart cases due to **intractable arrhythmia**, sudden ischemic mitral regurgitation, or severe hemodynamic collapse. Operating rooms must maintain a primed pump and cannulas immediately ready for **emergent cannulation** to prevent catastrophic hypoxic brain damage and cardiac arrest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sudden refractory hypotension (MAP <50 mmHg) or VF during grafting"
+          },
+          {
+            "id": "b",
+            "label": "Immediate release of cardiac positioner and suction stabilizers"
+          },
+          {
+            "id": "c",
+            "label": "Administer full dose systemic heparin (300 to 400 units/kg)"
+          },
+          {
+            "id": "d",
+            "label": "Perform emergent central cannulation and establish full CPB support"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
