@@ -1,0 +1,105 @@
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 9,
+  "model": "muse-spark",
+  "module": "son-ovary-risk-relapse",
+  "quiz": [
+    "mk-27f9f034d34b",
+    "mk-adbd3b4cff73",
+    "mk-e1d9ac76968e"
+  ],
+  "refs": [
+    "NCCN Ovarian Cancer 2024"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "Each year on the pill builds future ovarian protection in measurable amounts. Five year blocks lead toward halving the lifetime risk. Breast risk rises modestly during current use and falls after stopping. Counselling measures womb and bowel gains against breast cost.",
+      "tx": "Combined oestrogen progestin pills suppress gonadotropins and incessant ovulation, cutting epithelial **ovarian cancer** (surface origin malignancy) risk by 10 to 12 percent after 1 year, about 20 percent per 5 years of use and up to 50 percent after 10 to 15 years, while also lowering endometrial and colorectal cancer risk. Current or recent use mildly raises breast cancer relative risk to 1.2 to 1.3 and cervical cancer risk. Low dose oestrogen formulations preserve ovarian protection with slightly lower breast risk.",
+      "vis": {
+        "cols": [
+          "Exposure",
+          "Ovarian risk",
+          "Other cancers"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "1 year of pills",
+            "Down 10 to 12 percent",
+            "Protection starts"
+          ],
+          [
+            "5 years of use",
+            "Down about 20 percent",
+            "Endometrial and bowel fall"
+          ],
+          [
+            "10 to 15 years",
+            "Down up to 50 percent",
+            "Breast 1.2 to 1.3 during use"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Two validated algorithms evaluate malignancy risk in women presenting with an adnexal mass. The ROMA algorithm integrates dual serum biomarkers with menopausal status, using distinct premenopausal and postmenopausal thresholds. The Risk of Malignancy Index combines ultrasound findings, menopausal status, and CA125 around a threshold of two hundred. Percutaneous needle biopsy of an intact mass is strictly avoided to prevent malignant peritoneal seeding.",
+      "tx": "The **ROMA score** (risk of ovarian malignancy algorithm) combines CA125 (sensitive) with HE4 (human epididymis protein 4, specific) stratified by menopausal status, with high risk cutoffs above 13 percent premenopausal and 27 percent postmenopausal. The **RMI** (risk of malignancy index) multiplies ultrasound score (multilocularity, solid areas, bilaterality, ascites, metastases) by menopausal status (1 or 3) by CA125, with 200 marking high risk. Never biopsy a resectable isolated adnexal mass percutaneously, since capsular spill upstages IA to IC disease.",
+      "vis": {
+        "alt": "Pelvic mass with ascites and peritoneal spread.",
+        "ar": 1.8349,
+        "caption": "Adnexal mass workup without percutaneous biopsy. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/ovarian-cancer-fig1.webp"
+      }
+    },
+    {
+      "say": "Maintenance choice follows the biomarker ladder rung by rung. BRCA mutation takes single agent olaparib alone at the top. HRD positivity without BRCA needs a PARP plus bevacizumab or a single agent alternative. Biomarker negative disease remains without PARP maintenance.",
+      "tx": "BRCA wild type but homologous recombination deficient (HRD, GIS 42 or above) advanced ovarian cancer responding to frontline chemo plus bevacizumab continues olaparib plus bevacizumab (**PAOLA-1**) with survival gain, while single agent niraparib (PRIMA) or rucaparib (ATHENA MONO) suits bevacizumab free cases. First line single agent olaparib stays restricted to BRCA mutated disease (**SOLO-1**). Signature toxicities are fatigue, anaemia and nausea, with rare myelodysplasia or leukaemia at 1 to 2 percent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "BRCA mutated",
+            "Olaparib alone SOLO-1",
+            "Strongest PARP benefit",
+            "Watch MDS and AML 1 to 2 percent"
+          ],
+          "title": "BRCA Mutated"
+        },
+        "right": {
+          "points": [
+            "BRCA wild type HRD positive",
+            "Olaparib plus bevacizumab PAOLA-1",
+            "Or niraparib or rucaparib alone",
+            "Fatigue anaemia nausea common"
+          ],
+          "title": "HRD Positive"
+        }
+      }
+    },
+    {
+      "say": "The platinum free interval guides every relapse decision from the last dose. Over six months keeps platinum as the backbone doublet. Under six months removes platinum in favour of single agent non platinum drugs. Rising markers alone without scans allow watching, while visible disease requires treatment.",
+      "tx": "Radiological relapse over 6 months after platinum defines **platinum sensitivity** (6 to 12 months partial, over 12 months full), treated with a platinum doublet (carboplatin plus paclitaxel, gemcitabine or liposomal doxorubicin, with or without bevacizumab) followed by PARP inhibitor maintenance in response. Platinum refractory means during therapy or within 4 weeks, and resistant means under 6 months. Isolated CA125 rise without imaging may watch, but visible relapse never observes and upfront single agent PARP monotherapy was withdrawn for survival harm.",
+      "vis": {
+        "alt": "FIGO ovarian stages with surgical cytoreduction.",
+        "ar": 1.3333,
+        "caption": "Ovarian stages with cytoreduction framing relapse therapy. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/ovarian-cancer-staging-and-cytoreduction-fig1.webp"
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Ovarian cancer: OCP protection, ROMA, PARP maintenance and relapse",
+  "v": 1
+}
