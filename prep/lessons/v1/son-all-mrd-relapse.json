@@ -21,11 +21,27 @@
       "say": "A child can look completely cured under the microscope yet still harbour hidden leukaemia. That hidden burden is called measurable residual disease, and its level after induction beats every other factor for predicting relapse. Standard flow cytometry and PCR find one blast in ten thousand cells. Sequencing based tests go a hundred times deeper, finding one cell in a million, which makes them the most sensitive option.",
       "vis": {
         "kind": "table",
-        "cols": ["MRD assay", "Sensitivity", "Exam point"],
+        "cols": [
+          "MRD assay",
+          "Sensitivity",
+          "Clinical role"
+        ],
         "rows": [
-          ["Multiparameter flow cytometry", "10 to the power minus 4 (0.01%)", "Widely available, needs fresh marrow"],
-          ["PCR of receptor rearrangements", "10 to the power minus 4 to minus 5", "Needs patient specific primers"],
-          ["NGS (clonoSEQ)", "10 to the power minus 6", "Most sensitive MRD method"]
+          [
+            "Multiparameter flow cytometry",
+            "10 to the power minus 4 (0.01%)",
+            "Widely available, needs fresh marrow"
+          ],
+          [
+            "PCR of receptor rearrangements",
+            "10 to the power minus 4 to minus 5",
+            "Needs patient specific primers"
+          ],
+          [
+            "NGS (clonoSEQ)",
+            "10 to the power minus 6",
+            "Most sensitive MRD method"
+          ]
         ]
       }
     },
@@ -35,12 +51,41 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "mrdpos", "label": "MRD Positive After Consolidation", "level": 1},
-          {"id": "blina", "label": "Blinatumomab CD19 x CD3", "level": 2},
-          {"id": "mrdneg", "label": "MRD Negative Conversion", "level": 3},
-          {"id": "txplan", "label": "Transplant or Continued Therapy", "level": 4}
+          {
+            "id": "mrdpos",
+            "label": "MRD Positive After Consolidation",
+            "level": 1
+          },
+          {
+            "id": "blina",
+            "label": "Blinatumomab CD19 x CD3",
+            "level": 2
+          },
+          {
+            "id": "mrdneg",
+            "label": "MRD Negative Conversion",
+            "level": 3
+          },
+          {
+            "id": "txplan",
+            "label": "Transplant or Continued Therapy",
+            "level": 4
+          }
         ],
-        "edges": [["mrdpos", "blina"], ["blina", "mrdneg"], ["mrdneg", "txplan"]]
+        "edges": [
+          [
+            "mrdpos",
+            "blina"
+          ],
+          [
+            "blina",
+            "mrdneg"
+          ],
+          [
+            "mrdneg",
+            "txplan"
+          ]
+        ]
       }
     },
     {
@@ -48,10 +93,22 @@
       "say": "Myeloma specialists track the same hidden disease, but they follow their own strict rulebook. The International Myeloma Working Group says a patient counts as MRD negative only when a highly standardised flow test called EuroFlow, or a sequencing test, finds fewer than one myeloma cell in a hundred thousand marrow cells. Blood tests alone are not enough, because myeloma grows in patches that blood sampling can miss.",
       "vis": {
         "kind": "table",
-        "cols": ["IMWG MRD method", "Required sensitivity", "Sample"],
+        "cols": [
+          "IMWG MRD method",
+          "Required sensitivity",
+          "Sample"
+        ],
         "rows": [
-          ["EuroFlow next generation flow", "10 to the power minus 5 or deeper", "Bone marrow aspirate"],
-          ["NGS of receptor genes", "10 to the power minus 5 or deeper", "Bone marrow aspirate"]
+          [
+            "EuroFlow next generation flow",
+            "10 to the power minus 5 or deeper",
+            "Bone marrow aspirate"
+          ],
+          [
+            "NGS of receptor genes",
+            "10 to the power minus 5 or deeper",
+            "Bone marrow aspirate"
+          ]
         ]
       }
     },
@@ -86,12 +143,41 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "plt", "label": "Platelets Below 50000", "level": 1},
-          {"id": "transf", "label": "Transfuse Platelets First", "level": 2},
-          {"id": "lp", "label": "Lumbar Puncture or Intrathecal Drug", "level": 3},
-          {"id": "safe", "label": "No Haematoma, No Blast Seeding", "level": 4}
+          {
+            "id": "plt",
+            "label": "Platelets Below 50000",
+            "level": 1
+          },
+          {
+            "id": "transf",
+            "label": "Transfuse Platelets First",
+            "level": 2
+          },
+          {
+            "id": "lp",
+            "label": "Lumbar Puncture or Intrathecal Drug",
+            "level": 3
+          },
+          {
+            "id": "safe",
+            "label": "No Haematoma, No Blast Seeding",
+            "level": 4
+          }
         ],
-        "edges": [["plt", "transf"], ["transf", "lp"], ["lp", "safe"]]
+        "edges": [
+          [
+            "plt",
+            "transf"
+          ],
+          [
+            "transf",
+            "lp"
+          ],
+          [
+            "lp",
+            "safe"
+          ]
+        ]
       }
     },
     {
@@ -99,11 +185,27 @@
       "say": "Asparaginase takes advantage of a metabolic weakness in the blasts. Healthy cells manufacture their own asparagine, but leukemic blasts cannot, so the drug starves them by destroying the supply in the blood. The same drug also chews up glutamine, and that off target effect explains its two dreaded toxicities. Pancreas inflammation means the drug is banned for life in that child. Liver shutdown of natural anticoagulants means clots, classically in the brain's draining veins.",
       "vis": {
         "kind": "table",
-        "cols": ["Asparaginase effect", "Chemistry", "Bedside rule"],
+        "cols": [
+          "Asparaginase effect",
+          "Chemistry",
+          "Bedside rule"
+        ],
         "rows": [
-          ["Tumour kill", "Splits asparagine to aspartate plus ammonia", "Blasts lack asparagine synthetase"],
-          ["Pancreatitis", "Glutamine depletion injures acinar cells", "Clinical attack bans all rechallenge"],
-          ["Venous thrombosis", "Liver stops making antithrombin, protein C and S", "Suspect sinus thrombosis with headache or seizure"]
+          [
+            "Tumour kill",
+            "Splits asparagine to aspartate plus ammonia",
+            "Blasts lack asparagine synthetase"
+          ],
+          [
+            "Pancreatitis",
+            "Glutamine depletion injures acinar cells",
+            "Clinical attack bans all rechallenge"
+          ],
+          [
+            "Venous thrombosis",
+            "Liver stops making antithrombin, protein C and S",
+            "Suspect sinus thrombosis with headache or seizure"
+          ]
         ]
       }
     },
@@ -119,7 +221,11 @@
       }
     }
   ],
-  "quiz": [],
+  "quiz": [
+    "mk-d308161f6bd3",
+    "mk-5c6991ab7eb2",
+    "mk-fe8498cb5f8e"
+  ],
   "src": [],
   "refs": [
     "NCCN Acute Lymphoblastic Leukemia Guidelines 2024",

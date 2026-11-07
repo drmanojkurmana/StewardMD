@@ -18,20 +18,36 @@
     },
     {
       "tx": "Adults receive oral ATRA (generic tretinoin) **45 mg per square metre per day** in two divided doses every 12 hours until complete remission, paired with intravenous arsenic trioxide **0.15 mg per kg per day** in low and intermediate risk disease (white cells 10,000 or less), which cures without chemotherapy in the APL0406 protocol. Children and adolescents under 20 years receive a reduced **25 mg per square metre per day** to lower pseudotumour cerebri (a dangerous rise in brain pressure mimicking a tumour).",
-      "say": "The ATRA dose is a favourite exam number, so fix it firmly. Adults take forty five milligrams per square metre daily, split morning and evening, continuing until the marrow clears, alongside daily arsenic drips for lower risk disease. Young patients take nearly half that dose, twenty five per square metre, because full doses swell their brains with pressure that mimics a tumour. Arsenic dosing runs by body weight, not surface area.",
+      "say": "The dosing schedule for ATRA requires careful age-adjusted precision. Adults take forty five milligrams per square metre daily, split morning and evening, continuing until complete bone marrow remission, alongside daily arsenic infusions for lower risk disease. Pediatric patients under twenty receive twenty five milligrams per square metre, because standard adult doses cause intracranial hypertension. Arsenic dosing is calculated by body weight rather than surface area.",
       "vis": {
         "kind": "table",
-        "cols": ["APML drug", "Dose", "Exam anchor"],
+        "cols": [
+          "APML drug",
+          "Dose",
+          "Clinical feature"
+        ],
         "rows": [
-          ["ATRA adults", "45 mg per square metre daily, two doses", "Until complete remission"],
-          ["ATRA under 20 years", "25 mg per square metre daily", "Avoids pseudotumour cerebri"],
-          ["Arsenic trioxide", "0.15 mg per kg daily IV", "With ATRA in low risk APL0406"]
+          [
+            "ATRA adults",
+            "45 mg per square metre daily, two doses",
+            "Until complete remission"
+          ],
+          [
+            "ATRA under 20 years",
+            "25 mg per square metre daily",
+            "Avoids pseudotumour cerebri"
+          ],
+          [
+            "Arsenic trioxide",
+            "0.15 mg per kg daily IV",
+            "With ATRA in low risk APL0406"
+          ]
         ]
       }
     },
     {
       "tx": "AML with **t(8;21)** fusing **RUNX1** with **RUNX1T1** (core binding factor leukaemia with M2 morphology) shows slender Auer rods (needle like granules), salmon pink granules and aberrant CD19 or CD56 markers, yet carries **favourable** risk with about 90% remission. Consolidation uses high dose cytarabine (HiDAC) plus gemtuzumab ozogamicin, with no upfront transplant. Never confuse this fusion with a RUNX1 point mutation, which is adverse risk.",
-      "say": "This translocation is tested as a classic exam trap. Under the microscope it looks aggressive, with needle shaped Auer rods and odd lymphoid markers, yet genetically it belongs to the kindest risk group, curing about nine in ten patients with chemotherapy alone. High dose cytarabine finishes the job, and transplant waits in reserve. The trap is the similar name: a RUNX1 fusion means good news while a RUNX1 mutation means bad news.",
+      "say": "This translocation presents a striking clinical contrast between morphology and prognosis. Under the microscope it appears aggressive, displaying prominent Auer rods and aberrant lymphoid markers, yet genetically it belongs to the most favourable risk category, curing approximately nine in ten patients with chemotherapy alone. High dose cytarabine provides definitive consolidation without upfront transplant. Crucially, distinguish this favourable fusion from an isolated RUNX1 point mutation, which confers adverse risk.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/acute-myeloid-leukemia-fig1.webp",
@@ -45,11 +61,27 @@
       "say": "Pair the two core binding leukaemias together in memory. The chromosome sixteen inversion shows its own giveaway, abnormal eosinophils alongside blasts, and enjoys the same excellent cure rate with high dose cytarabine. Both types welcome the CD33 targeted antibody gemtuzumab. But two red flags cancel the good news: a heavy KIT mutation burden or hidden disease surviving chemotherapy, either of which redirects the patient to transplant.",
       "vis": {
         "kind": "table",
-        "cols": ["Favourable AML", "Hallmark", "Consolidation"],
+        "cols": [
+          "Favourable AML",
+          "Hallmark",
+          "Consolidation"
+        ],
         "rows": [
-          ["t(8;21) RUNX1::RUNX1T1", "M2, Auer rods, CD19/CD56", "HiDAC plus gemtuzumab; no upfront transplant"],
-          ["inv(16) CBFB::MYH11", "M4 with abnormal eosinophils", "HiDAC plus gemtuzumab; no upfront transplant"],
-          ["Either with KIT or MRD+", "High KIT burden or MRD persists", "Allogeneic transplant in first remission"]
+          [
+            "t(8;21) RUNX1::RUNX1T1",
+            "M2, Auer rods, CD19/CD56",
+            "HiDAC plus gemtuzumab; no upfront transplant"
+          ],
+          [
+            "inv(16) CBFB::MYH11",
+            "M4 with abnormal eosinophils",
+            "HiDAC plus gemtuzumab; no upfront transplant"
+          ],
+          [
+            "Either with KIT or MRD+",
+            "High KIT burden or MRD persists",
+            "Allogeneic transplant in first remission"
+          ]
         ]
       }
     },
@@ -79,7 +111,11 @@
       }
     }
   ],
-  "quiz": [],
+  "quiz": [
+    "mk-d308161f6bd3",
+    "mk-5c6991ab7eb2",
+    "mk-71d92cdd8d6a"
+  ],
   "src": [],
   "refs": [
     "NCCN Acute Myeloid Leukemia Guidelines 2024",

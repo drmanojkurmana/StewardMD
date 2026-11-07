@@ -1,1 +1,103 @@
-{"checks": {"dashes": true, "drugs": true, "numbers": true, "shape": true, "verbatim": true, "verify": true}, "gen": "AI", "minutes": 9, "model": "muse-spark", "module": "son-sarcoma-gap", "quiz": [], "refs": ["NCCN Soft Tissue Sarcoma 2024", "NCCN Bone Cancer 2024"], "run": "ss-lessons-pyq-gap-muse", "src": [], "steps": [{"say": "The biopsy direction decides as much as the biopsy itself in limb sarcoma. A transverse scar spreads tumour through compartments the surgeon must then remove. Grade reflects fate more than size, though both guide the tumour stage. Nodes remain quiet except in the remembered five.", "tx": "Extremity soft tissue sarcoma demands longitudinal **core needle biopsy** (a cylinder sample along the future limb salvage resection axis) so the entire tract is excised en bloc at definitive surgery. **FNCLCC histologic grade** (French differentiation, mitosis and necrosis score) is the most important prognostic factor, with size staging T1 to T4 by size. High grade tumours over 5 cm need limb sparing wide excision plus perioperative radiotherapy, with anthracycline plus ifosfamide chemotherapy for high risk disease. Nodal spread stays under 5 percent except epithelioid, synovial, rhabdomyosarcoma, clear cell and angiosarcoma.", "vis": {"alt": "Sarcoma mass with pseudocapsule and wide excision plane.", "ar": 1.3333, "caption": "Sarcoma pseudocapsule with wide excision plane and tract removal. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/surgical-oncology-principles-margins-and-sarcomas-fig1.webp"}}, {"say": "Low everything with low sugar points away from insulinoma toward this paraneoplastic pattern. Insulin and C peptide fall together while growth hormone follows them down. The ratio above ten confirms the diagnosis against a normal three. Removing the tumour cures what dextrose only postpones.", "tx": "Doege Potter syndrome (non islet cell tumour hypoglycaemia) comes from large mesenchymal tumours, classically solitary fibrous tumour, secreting unprocessed high molecular weight **big IGF-2** (oversized insulin like growth factor), which drives peripheral glucose uptake while suppressing pituitary growth hormone. Labs show hypoglycaemia with LOW insulin, LOW C peptide, LOW growth hormone and LOW IGF-1, plus an IGF-2 to IGF-1 ratio above 10 to 1 against a normal 3 to 1. Definitive cure is complete surgical resection, with glucocorticoids suppressing big IGF-2 as a medical bridge alongside dextrose.", "vis": {"cols": ["Test", "Doege-Potter result", "Insulinoma contrast"], "kind": "table", "rows": [["Insulin and C peptide", "LOW both", "HIGH both"], ["IGF-1 and growth hormone", "LOW both", "Normal"], ["IGF-2 to IGF-1 ratio", "Above 10 to 1", "Normal near 3 to 1"]]}} , {"say": "One inversion explains two old names under a single modern diagnosis. Nuclear STAT6 staining remains near perfect as a diagnostic test. Staghorn vessels and CD34 support the call under the microscope. Kinase inhibitors and chemo combinations control unresectable disease.", "tx": "Hemangiopericytoma and solitary fibrous tumour form one entity defined by the chromosome 12q13 paracentric inversion creating the **NAB2 STAT6 fusion** (a chimeric transcription factor), diagnosed above 98 percent sensitivity and specificity by strong diffuse nuclear **STAT6 immunohistochemistry** (brown nuclear staining) with staghorn vessels (branching antler vessels) and CD34 positivity. Systemic options are pazopanib or sunitinib, or temozolomide plus bevacizumab. Doege Potter hypoglycaemia complicates large pleural and pelvic tumours.", "vis": {"alt": "Pleural mass with nuclear STAT6 expression.", "ar": 1.8349, "caption": "Solitary fibrous tumour with diagnostic nuclear STAT6. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/fibrous-tumor-pleura-fig1.webp"}}, {"say": "Chemo first tests the tumour and its biology before the knife. Ninety percent dead at resection indicates cure and lightens later therapy. The sandwich order decides more than any single drug dose. Salvage keeps the limb whenever margins allow resection.", "tx": "Localised high grade osteosarcoma follows the sandwich sequence of neoadjuvant **MAP chemotherapy** (high dose methotrexate, doxorubicin, cisplatin), then wide limb salvage resection, then adjuvant MAP. The resected specimen is scored by **Huvos necrosis** (dead tumour percentage), where 90 percent or more necrosis marks a good responder and guides postoperative intensity. Limb salvage has replaced amputation wherever clear margins allow it.", "vis": {"alt": "X-ray appearances of common bone tumours.", "ar": 1.8349, "caption": "Bone tumour X-ray patterns guiding biopsy and resection. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/bone-tumours-osteosarcoma-ewing-paget-fig1.webp"}}, {"say": "One gene remains constant while its partners rotate, which dictates the test design. Break apart probes identify every fusion because they target the fixed side. FISH surpasses PCR here since the partner list keeps growing. Small blue cells with CD99 point the microscope first.", "tx": "Ewing sarcoma carries EWSR1 on 22q12 as the constant 5 prime partner, fused to variable ETS transcription factors: FLI1 on 11q24 in t(11;22) at 85 percent, ERG on 21q22 in t(21;22) at 10 percent, plus ETV1, ETV4 or FEV. Since only EWSR1 stays fixed, an **EWSR1 break apart FISH probe** (a split signal test separating when EWSR1 rearranges with any partner) is the preferred diagnostic screening assay. Small round blue cell histology with membranous CD99 completes the picture.", "vis": {"alt": "Onion-skin periostitis with small round blue cells.", "ar": 1.8349, "caption": "Ewing onion-skin bone reaction with CD99 positive cells. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/ewing-sarcoma-fig1.webp"}}], "subject": "ss-medical-oncology", "title": "Sarcoma biopsy, solitary fibrous tumour, osteosarcoma and Ewing diagnosis", "v": 1}
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 9,
+  "model": "muse-spark",
+  "module": "son-sarcoma-gap",
+  "quiz": [
+    "mk-df962632bac5",
+    "mk-8f8302dd289e",
+    "mk-628684028a22"
+  ],
+  "refs": [
+    "NCCN Soft Tissue Sarcoma 2024",
+    "NCCN Bone Cancer 2024"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "The biopsy direction decides as much as the biopsy itself in limb sarcoma. A transverse scar spreads tumour through compartments the surgeon must then remove. Grade reflects fate more than size, though both guide the tumour stage. Nodes remain quiet except in the remembered five.",
+      "tx": "Extremity soft tissue sarcoma demands longitudinal **core needle biopsy** (a cylinder sample along the future limb salvage resection axis) so the entire tract is excised en bloc at definitive surgery. **FNCLCC histologic grade** (French differentiation, mitosis and necrosis score) is the most important prognostic factor, with size staging T1 to T4 by size. High grade tumours over 5 cm need limb sparing wide excision plus perioperative radiotherapy, with anthracycline plus ifosfamide chemotherapy for high risk disease. Nodal spread stays under 5 percent except epithelioid, synovial, rhabdomyosarcoma, clear cell and angiosarcoma.",
+      "vis": {
+        "alt": "Sarcoma mass with pseudocapsule and wide excision plane.",
+        "ar": 1.3333,
+        "caption": "Sarcoma pseudocapsule with wide excision plane and tract removal. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/surgical-oncology-principles-margins-and-sarcomas-fig1.webp"
+      }
+    },
+    {
+      "say": "Low everything with low sugar points away from insulinoma toward this paraneoplastic pattern. Insulin and C peptide fall together while growth hormone follows them down. The ratio above ten confirms the diagnosis against a normal three. Removing the tumour cures what dextrose only postpones.",
+      "tx": "Doege Potter syndrome (non islet cell tumour hypoglycaemia) comes from large mesenchymal tumours, classically solitary fibrous tumour, secreting unprocessed high molecular weight **big IGF-2** (oversized insulin like growth factor), which drives peripheral glucose uptake while suppressing pituitary growth hormone. Labs show hypoglycaemia with LOW insulin, LOW C peptide, LOW growth hormone and LOW IGF-1, plus an IGF-2 to IGF-1 ratio above 10 to 1 against a normal 3 to 1. Definitive cure is complete surgical resection, with glucocorticoids suppressing big IGF-2 as a medical bridge alongside dextrose.",
+      "vis": {
+        "cols": [
+          "Test",
+          "Doege-Potter result",
+          "Insulinoma contrast"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Insulin and C peptide",
+            "LOW both",
+            "HIGH both"
+          ],
+          [
+            "IGF-1 and growth hormone",
+            "LOW both",
+            "Normal"
+          ],
+          [
+            "IGF-2 to IGF-1 ratio",
+            "Above 10 to 1",
+            "Normal near 3 to 1"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "One inversion explains two old names under a single modern diagnosis. Nuclear STAT6 staining remains near perfect as a diagnostic test. Staghorn vessels and CD34 support the call under the microscope. Kinase inhibitors and chemo combinations control unresectable disease.",
+      "tx": "Hemangiopericytoma and solitary fibrous tumour form one entity defined by the chromosome 12q13 paracentric inversion creating the **NAB2 STAT6 fusion** (a chimeric transcription factor), diagnosed above 98 percent sensitivity and specificity by strong diffuse nuclear **STAT6 immunohistochemistry** (brown nuclear staining) with staghorn vessels (branching antler vessels) and CD34 positivity. Systemic options are pazopanib or sunitinib, or temozolomide plus bevacizumab. Doege Potter hypoglycaemia complicates large pleural and pelvic tumours.",
+      "vis": {
+        "alt": "Pleural mass with nuclear STAT6 expression.",
+        "ar": 1.8349,
+        "caption": "Solitary fibrous tumour with diagnostic nuclear STAT6. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/fibrous-tumor-pleura-fig1.webp"
+      }
+    },
+    {
+      "say": "Chemo first tests the tumour and its biology before the knife. Ninety percent dead at resection indicates cure and lightens later therapy. The sandwich order decides more than any single drug dose. Salvage keeps the limb whenever margins allow resection.",
+      "tx": "Localised high grade osteosarcoma follows the sandwich sequence of neoadjuvant **MAP chemotherapy** (high dose methotrexate, doxorubicin, cisplatin), then wide limb salvage resection, then adjuvant MAP. The resected specimen is scored by **Huvos necrosis** (dead tumour percentage), where 90 percent or more necrosis marks a good responder and guides postoperative intensity. Limb salvage has replaced amputation wherever clear margins allow it.",
+      "vis": {
+        "alt": "X-ray appearances of common bone tumours.",
+        "ar": 1.8349,
+        "caption": "Bone tumour X-ray patterns guiding biopsy and resection. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/bone-tumours-osteosarcoma-ewing-paget-fig1.webp"
+      }
+    },
+    {
+      "say": "One gene remains constant while its partners rotate, which dictates the test design. Break apart probes identify every fusion because they target the fixed side. FISH surpasses PCR here since the partner list keeps growing. Small blue cells with CD99 point the microscope first.",
+      "tx": "Ewing sarcoma carries EWSR1 on 22q12 as the constant 5 prime partner, fused to variable ETS transcription factors: FLI1 on 11q24 in t(11;22) at 85 percent, ERG on 21q22 in t(21;22) at 10 percent, plus ETV1, ETV4 or FEV. Since only EWSR1 stays fixed, an **EWSR1 break apart FISH probe** (a split signal test separating when EWSR1 rearranges with any partner) is the preferred diagnostic screening assay. Small round blue cell histology with membranous CD99 completes the picture.",
+      "vis": {
+        "alt": "Onion-skin periostitis with small round blue cells.",
+        "ar": 1.8349,
+        "caption": "Ewing onion-skin bone reaction with CD99 positive cells. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/ewing-sarcoma-fig1.webp"
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Sarcoma biopsy, solitary fibrous tumour, osteosarcoma and Ewing diagnosis",
+  "v": 1
+}

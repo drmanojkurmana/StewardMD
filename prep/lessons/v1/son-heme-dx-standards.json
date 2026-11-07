@@ -1,1 +1,100 @@
-{"v": 1, "checks": {"dashes": true, "drugs": true, "numbers": true, "shape": true, "verbatim": true, "verify": true}, "gen": "AI", "minutes": 10, "model": "muse-spark", "module": "son-heme-dx-standards", "quiz": [], "refs": ["NCCN Diffuse Large B-Cell Lymphoma Guidelines 2024", "NCCN Gastric MALT Lymphoma Guidance", "HLH-2004 Diagnostic Criteria", "Lugano Classification 2014", "WHO 5th Classification of Haematolymphoid Tumours", "NCCN Myeloproliferative Neoplasms Guidelines 2024"], "run": "ss-lessons-pyq-gap-muse", "src": [], "steps": [{"say": "Pathologists run these three stains in a fixed order, so the exam tests the branch points rather than the stain colours. The tree is easy to remember with CD10 first, because a positive CD10 confirms germinal centre type. The non germinal centre answer needs either a double negative start or a positive MUM1 finish. Clinically the split matters because the activated type responds less well to standard R-CHOP and was the group driving the POLARIX result for polatuzumab based therapy.", "tx": "Diffuse large B cell lymphoma (DLBCL, a fast growing nodal cancer) splits by **cell of origin** (the normal B cell stage it resembles) using the Hans immunohistochemistry (IHC, protein staining) sequence of CD10, then BCL6, then MUM1. CD10 positive means germinal centre (GCB) type. If CD10 is negative with BCL6 negative, or CD10 negative with BCL6 positive and MUM1 positive, the case is non-GCB or activated B cell (ABC) type, which fares worse with R-CHOP and gains most from polatuzumab based Pola-R-CHP.", "vis": {"alt": "Lymph node map of indolent and aggressive B cell lymphomas by translocation.", "ar": 1.3405, "caption": "Aggressive B cell lymphomas by translocation, framing cell of origin subtyping. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/non-hodgkin-lymphoma-fig2.webp"}}, {"say": "The stomach lymphoma lives on bacterial signalling, so removing the bacteria removes the tumour in most early cases. Examiners love the translocation that breaks this rule, because t eleven eighteen keeps the lymphoma growing after the bacteria are gone. Those resistant cases still avoid the surgeon entirely and are cured with focused radiation or rituximab. Any option offering gastrectomy is the distractor the question wants you to reject.", "tx": "Gastric MALT lymphoma (a slow growing stomach lymphoma fed by chronic Helicobacter pylori infection) starts with **H pylori eradication** (antibiotic cure of the bacteria), which alone gives complete remission (full disappearance) in 75 to 80 percent of stage one and two cases. The t(11;18) swap creating BIRC3 with MALT1 predicts antibiotic failure, as does deep invasion, so these cases move to involved site radiotherapy (focused radiation) or rituximab (anti CD20 antibody). Radical gastrectomy (stomach removal) is obsolete and never the answer.", "vis": {"alt": "Gastric mucosa with Helicobacter colonisation and lymphoepithelial lesions of MALT lymphoma.", "ar": 1.3333, "caption": "Helicobacter driven gastric MALT lymphoma with diagnostic lymphoepithelial lesions. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/malt-lymphoma-fig1.webp"}}, {"say": "Students lose this mark by calling any spleen involvement stage four, which misunderstands what the spleen is in this system. Think of the spleen as one giant lymph node sitting in the abdomen, so disease there stays within the nodal stages. The bulky X letter vanished from modern staging, and examiners still plant it as a trap. Remember that only Hodgkin reports keep the A and B letters today.", "tx": "Ann Arbor staging with Lugano modification (the lymphoma map updated in 2014) treats the **spleen** (the abdominal blood filter) as a lymphatic organ, not an extranodal site. Nodes on both sides of the diaphragm (the breathing muscle) plus spleen plus B symptoms (fever, drenching sweats or weight loss) is stage three B with spleen, written **IIIBS**, and never stage four. Lugano abolished the X suffix for bulky disease (bulk is recorded as a diameter), and keeps A and B suffixes only for Hodgkin lymphoma.", "vis": {"alt": "Reed Sternberg cells with Ann Arbor stage diagrams.", "ar": 1.3405, "caption": "Ann Arbor stages with nodal and splenic disease mapping for Lugano staging. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/hodgkin-lymphoma-reed-sternberg-and-staging-fig1.webp"}}, {"say": "The exam usually gives one laboratory value and asks whether it fits, so learn the direction of each arrow first. Ferritin, triglycerides and soluble CD25 rise steeply while fibrinogen and the blood counts fall. That single contrast answers the common hyperfibrinogenemia distractor, because low fibrinogen is the true criterion. Five of eight makes the diagnosis, and treatment follows the etoposide and dexamethasone protocol.", "tx": "Haemophagocytic lymphohistiocytosis (HLH, a runaway immune activation syndrome) needs at least five of eight **HLH-2004 criteria** (the international diagnostic list): fever, spleen enlargement, low counts in two or more lineages, high triglycerides (at least 265 mg/dL) or low fibrinogen (1.5 g/L or below), tissue haemophagocytosis (macrophages eating blood cells), weak or absent natural killer activity, ferritin (iron storage protein) at least 500 ng/mL, and soluble CD25 (immune activation marker) at least 2400 U/mL. Only fibrinogen, killer activity and blood counts fall while the rest rise.", "vis": {"alt": "Cytokine storm and hemophagocytosis diagram of HLH immune activation.", "ar": 1.8349, "caption": "Uncontrolled immune activation with cytokine storm and hemophagocytosis in HLH. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/hlh-fig1.webp"}}, {"say": "Chronic graft versus host disease looks like scleroderma or Sjogren disease because the same fibrotic machinery is running. Thymic injury lets self reactive cells escape, missing regulatory cells fail to stop them, and rogue B cells pour out antibodies that scar skin, mouth and lungs. Each approved drug maps to one arm of that triad, which is why JAK and BTK blockade work. Keep total body irradiation with acute lymphoblastic leukaemia conditioning, where it sterilises the brain and testes sanctuaries.", "tx": "Chronic graft versus host disease (chronic GVHD, donor immune attack after allogeneic transplant) copies autoimmune fibrosis through a **pathophysiology triad** (three part mechanism) of thymic damage (loss of self tolerance schooling), regulatory T cell deficiency (loss of immune brakes) and aberrant B cell autoantibody production driving transforming growth factor beta fibrosis (scarring signal). This biology explains ruxolitinib (JAK inhibitor), ibrutinib (BTK inhibitor) and belumosudil (ROCK2 inhibitor) in steroid refractory disease. Total body irradiation belongs to acute lymphoblastic leukaemia conditioning for sanctuary sites, not to myeloid conditioning.", "vis": {"alt": "Donor lymphocytes attacking skin, liver and intestine in graft versus host disease.", "ar": 1.3405, "caption": "Donor immune attack on skin, liver and gut, the organs scarred in chronic graft disease. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/acute-graft-versus-host-disease-fig1.webp"}}, {"say": "Faced with a high haemoglobin, the examiner wants the one test that splits true excess from concentrated blood. Red cell mass measurement gives that answer directly, with plasma volume telling the other half of the story. Suppressed erythropoietin plus a JAK2 mutation then seals polycythaemia vera. Relative polycythaemia needs fluids and cause hunting rather than venesection.", "tx": "True polycythaemia (abnormally high red cells) shows raised **red cell mass** (total red cell volume) with normal or expanded plasma volume (liquid part of blood), normal oxygen saturation, suppressed erythropoietin (EPO, the kidney hormone driving red cell production) and usually JAK2 V617F mutation (over 95 percent, with exon 12 in about 3 percent). Apparent or relative polycythaemia keeps a normal red cell mass with shrunken plasma volume from dehydration or diuretics. The exam pair is simple since measured mass separates the two.", "vis": {"alt": "JAK2 driven marrow overproduction with clinical features of polycythaemia vera.", "ar": 1.3405, "caption": "JAK2 driven overproduction with plethora, clots and venesection treatment. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/polycythaemia-vera-fig1.webp"}}], "subject": "ss-medical-oncology", "title": "NHL subtyping and staging, HLH, chronic GVHD and polycythaemia diagnosis"}
+{
+  "v": 1,
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 10,
+  "model": "muse-spark",
+  "module": "son-heme-dx-standards",
+  "quiz": [
+    "mk-ebf3f87a514a",
+    "mk-f68c3d33bdf4",
+    "mk-ed81a843385c"
+  ],
+  "refs": [
+    "NCCN Diffuse Large B-Cell Lymphoma Guidelines 2024",
+    "NCCN Gastric MALT Lymphoma Guidance",
+    "HLH-2004 Diagnostic Criteria",
+    "Lugano Classification 2014",
+    "WHO 5th Classification of Haematolymphoid Tumours",
+    "NCCN Myeloproliferative Neoplasms Guidelines 2024"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "Pathologists apply these immunohistochemical stains in a strict algorithmic sequence. The Hans algorithm evaluates CD10 first, where membrane positivity confirms germinal centre origin. Non-germinal centre classification requires either initial negativity for both CD10 and BCL6, or positive MUM1 expression following an isolated BCL6 signal. This biological distinction matters therapeutically because activated B-cell tumours respond less favourably to standard R-CHOP and derive greater benefit from polatuzumab-based therapy.",
+      "tx": "Diffuse large B cell lymphoma (DLBCL, a fast growing nodal cancer) splits by **cell of origin** (the normal B cell stage it resembles) using the Hans immunohistochemistry (IHC, protein staining) sequence of CD10, then BCL6, then MUM1. CD10 positive means germinal centre (GCB) type. If CD10 is negative with BCL6 negative, or CD10 negative with BCL6 positive and MUM1 positive, the case is non-GCB or activated B cell (ABC) type, which fares worse with R-CHOP and gains most from polatuzumab based Pola-R-CHP.",
+      "vis": {
+        "alt": "Lymph node map of indolent and aggressive B cell lymphomas by translocation.",
+        "ar": 1.3405,
+        "caption": "Aggressive B cell lymphomas by translocation, framing cell of origin subtyping. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/non-hodgkin-lymphoma-fig2.webp"
+      }
+    },
+    {
+      "say": "Gastric MALT lymphoma relies on chronic antigenic stimulation from Helicobacter pylori, so targeted antibiotic eradication induces complete remission in most early cases. The critical exception is translocation eleven eighteen, which drives autonomous lymphoma growth independent of bacterial presence. These antibiotic-refractory cases still bypass surgical intervention, achieving high cure rates with involved-site radiation therapy or rituximab, while radical gastrectomy is entirely obsolete.",
+      "tx": "Gastric MALT lymphoma (a slow growing stomach lymphoma fed by chronic Helicobacter pylori infection) starts with **H pylori eradication** (antibiotic cure of the bacteria), which alone gives complete remission (full disappearance) in 75 to 80 percent of stage one and two cases. The t(11;18) swap creating BIRC3 with MALT1 predicts antibiotic failure, as does deep invasion, so these cases move to involved site radiotherapy (focused radiation) or rituximab (anti CD20 antibody). Radical gastrectomy (stomach removal) is obsolete and has no role in modern primary management.",
+      "vis": {
+        "alt": "Gastric mucosa with Helicobacter colonisation and lymphoepithelial lesions of MALT lymphoma.",
+        "ar": 1.3333,
+        "caption": "Helicobacter driven gastric MALT lymphoma with diagnostic lymphoepithelial lesions. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/malt-lymphoma-fig1.webp"
+      }
+    },
+    {
+      "say": "Avoid misclassifying splenic disease as stage four extranodal dissemination. Within the Lugano classification, the spleen functions as a primary lymphatic organ, keeping disease classified within nodal stages. The historical X designation for bulky disease was retired, replaced by exact perpendicular measurements on imaging. Note also that systemic constitutional A and B designations are retained exclusively for Hodgkin lymphoma.",
+      "tx": "Ann Arbor staging with Lugano modification (the lymphoma map updated in 2014) treats the **spleen** (the abdominal blood filter) as a lymphatic organ, not an extranodal site. Nodes on both sides of the diaphragm (the breathing muscle) plus spleen plus B symptoms (fever, drenching sweats or weight loss) is stage three B with spleen, written **IIIBS**, and never stage four. Lugano abolished the X suffix for bulky disease (bulk is recorded as a diameter), and keeps A and B suffixes only for Hodgkin lymphoma.",
+      "vis": {
+        "alt": "Reed Sternberg cells with Ann Arbor stage diagrams.",
+        "ar": 1.3405,
+        "caption": "Ann Arbor stages with nodal and splenic disease mapping for Lugano staging. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/hodgkin-lymphoma-reed-sternberg-and-staging-fig1.webp"
+      }
+    },
+    {
+      "say": "Diagnosing haemophagocytic lymphohistiocytosis requires recognizing the characteristic directional shifts of diagnostic biomarkers. Serum ferritin, triglycerides, and soluble CD25 rise markedly, whereas circulating fibrinogen and peripheral blood cell counts fall precipitously. Consumptive hypofibrinogenemia contrasts sharply with typical inflammatory states where fibrinogen elevates as an acute-phase reactant. Meeting five of eight criteria prompts rapid initiation of etoposide and dexamethasone therapy.",
+      "tx": "Haemophagocytic lymphohistiocytosis (HLH, a runaway immune activation syndrome) needs at least five of eight **HLH-2004 criteria** (the international diagnostic list): fever, spleen enlargement, low counts in two or more lineages, high triglycerides (at least 265 mg/dL) or low fibrinogen (1.5 g/L or below), tissue haemophagocytosis (macrophages eating blood cells), weak or absent natural killer activity, ferritin (iron storage protein) at least 500 ng/mL, and soluble CD25 (immune activation marker) at least 2400 U/mL. Only fibrinogen, killer activity and blood counts fall while the rest rise.",
+      "vis": {
+        "alt": "Cytokine storm and hemophagocytosis diagram of HLH immune activation.",
+        "ar": 1.8349,
+        "caption": "Uncontrolled immune activation with cytokine storm and hemophagocytosis in HLH. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/hlh-fig1.webp"
+      }
+    },
+    {
+      "say": "Chronic graft versus host disease looks like scleroderma or Sjogren disease because the same fibrotic machinery is running. Thymic injury lets self reactive cells escape, missing regulatory cells fail to stop them, and rogue B cells pour out antibodies that scar skin, mouth and lungs. Each approved drug maps to one arm of that triad, which is why JAK and BTK blockade work. Keep total body irradiation with acute lymphoblastic leukaemia conditioning, where it sterilises the brain and testes sanctuaries.",
+      "tx": "Chronic graft versus host disease (chronic GVHD, donor immune attack after allogeneic transplant) copies autoimmune fibrosis through a **pathophysiology triad** (three part mechanism) of thymic damage (loss of self tolerance schooling), regulatory T cell deficiency (loss of immune brakes) and aberrant B cell autoantibody production driving transforming growth factor beta fibrosis (scarring signal). This biology explains ruxolitinib (JAK inhibitor), ibrutinib (BTK inhibitor) and belumosudil (ROCK2 inhibitor) in steroid refractory disease. Total body irradiation belongs to acute lymphoblastic leukaemia conditioning for sanctuary sites, not to myeloid conditioning.",
+      "vis": {
+        "alt": "Donor lymphocytes attacking skin, liver and intestine in graft versus host disease.",
+        "ar": 1.3405,
+        "caption": "Donor immune attack on skin, liver and gut, the organs scarred in chronic graft disease. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/acute-graft-versus-host-disease-fig1.webp"
+      }
+    },
+    {
+      "say": "When evaluating marked erythrocytosis, direct measurement of red cell mass definitively differentiates genuine clonal proliferation from hemoconcentration. Measuring plasma volume concurrently clarifies circulating fluid deficits. Suppressed serum erythropoietin combined with a JAK2 mutation confirms polycythaemia vera. In contrast, relative polycythaemia warrants rehydration and removal of secondary causes rather than therapeutic phlebotomy.",
+      "tx": "True polycythaemia (abnormally high red cells) shows raised **red cell mass** (total red cell volume) with normal or expanded plasma volume (liquid part of blood), normal oxygen saturation, suppressed erythropoietin (EPO, the kidney hormone driving red cell production) and usually JAK2 V617F mutation (over 95 percent, with exon 12 in about 3 percent). Apparent or relative polycythaemia keeps a normal red cell mass with shrunken plasma volume from dehydration or diuretics. Direct quantification of red cell mass definitively separates true from relative polycythaemia.",
+      "vis": {
+        "alt": "JAK2 driven marrow overproduction with clinical features of polycythaemia vera.",
+        "ar": 1.3405,
+        "caption": "JAK2 driven overproduction with plethora, clots and venesection treatment. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/polycythaemia-vera-fig1.webp"
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "NHL subtyping and staging, HLH, chronic GVHD and polycythaemia diagnosis"
+}

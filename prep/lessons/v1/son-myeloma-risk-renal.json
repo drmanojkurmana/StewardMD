@@ -35,17 +35,33 @@
       "say": "The eleven fourteen swap is the friendly face of myeloma genetics for a second reason beyond good prognosis: it creates a drug target. These cells lean heavily on the survival protein BCL2, so blocking BCL2 with venetoclax kills them even late in the disease. The dangerous swaps work through completely different growth drivers, which is why venetoclax is reserved for the eleven fourteen group.",
       "vis": {
         "kind": "table",
-        "cols": ["Translocation", "Key gene", "Bedside meaning"],
+        "cols": [
+          "Translocation",
+          "Key gene",
+          "Bedside meaning"
+        ],
         "rows": [
-          ["t(11;14)", "CCND1 cyclin D1, BCL2 addicted", "Standard risk; venetoclax sensitive"],
-          ["t(4;14)", "FGFR3 and MMSET activated", "High risk; needs aggressive therapy"],
-          ["t(14;16)", "MAF activated", "High risk; needs aggressive therapy"]
+          [
+            "t(11;14)",
+            "CCND1 cyclin D1, BCL2 addicted",
+            "Standard risk; venetoclax sensitive"
+          ],
+          [
+            "t(4;14)",
+            "FGFR3 and MMSET activated",
+            "High risk; needs aggressive therapy"
+          ],
+          [
+            "t(14;16)",
+            "MAF activated",
+            "High risk; needs aggressive therapy"
+          ]
         ]
       }
     },
     {
       "tx": "Myeloma presenting with acute kidney injury (**myeloma kidney** from light chain casts blocking tubules) plus hypercalcaemia (high blood calcium) needs immediate **VCD** (bortezomib, cyclophosphamide and dexamethasone, also called CyBorD), with daratumumab added where available, alongside vigorous saline hydration. Bortezomib and cyclophosphamide clear hepatically (through the liver) so they need no renal dose cut, while full dose **lenalidomide** (renally cleared by the kidneys) would cause crushing marrow suppression and must be avoided.",
-      "say": "A myeloma patient arriving with failing kidneys and high calcium is an emergency measured in hours, because every day of clogged tubules kills nephrons permanently. The answer is bortezomib based treatment started at once, since both bortezomib and cyclophosphamide bypass the kidneys during clearance. Lenalidomide is the trap here: normal doses in renal failure accumulate and wipe out the blood counts, so it stays out of the regimen.",
+      "say": "A myeloma patient presenting with renal failure and severe hypercalcemia is an urgent clinical emergency, because obstructive light chain casts destroy nephrons rapidly. Immediate initiation of bortezomib based therapy is paramount, since both bortezomib and cyclophosphamide are cleared by the liver without requiring renal dose adjustments. Avoid standard dose lenalidomide in this acute setting, because impaired renal clearance leads to toxic accumulation and profound myelosuppression.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/myeloma-fig1.webp",
@@ -56,7 +72,7 @@
     },
     {
       "tx": "**IMiDs** (immunomodulatory drugs) grip cereblon (a protein switch) and destroy the transcription factors Ikaros and Aiolos (IKZF1 and IKZF3, controllers of myeloma growth). Potency climbs across generations: thalidomide, then lenalidomide, then **pomalidomide** at roughly 10 times lenalidomide and 100 times thalidomide. Pomalidomide breaks lenalidomide resistance and is processed by liver CYP enzymes (drug metabolising proteins), so it stays safe and full dose in kidney failure.",
-      "say": "All three sibling drugs share one clever mechanism: they reprogram the cell's own waste disposal to shred two proteins myeloma cannot live without. Each generation grips that machinery tighter, with pomalidomide the strongest by far, rescuing patients whose disease outgrew lenalidomide. Its liver based breakdown is the practical pearl: when kidneys fail, pomalidomide keeps working at full strength while lenalidomide needs cutting.",
+      "say": "All three immunomodulatory agents share an elegant mechanism: they recruit the cereblon ubiquitin ligase to degrade two transcription factors essential for myeloma survival. Successive generations bind with increasing affinity, making pomalidomide exceptionally potent in lenalidomide-refractory disease. Furthermore, pomalidomide undergoes extensive hepatic metabolism, permitting full-dose administration in severe renal impairment where lenalidomide requires substantial dose reduction.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/plasma-cell-disorders-fig2.webp",
@@ -70,16 +86,36 @@
       "say": "Prescribing these drugs safely means managing three toxicities by name. Clots threaten with every member of the family, so blood thinners start alongside the myeloma drug. Falling neutrophils plague the two newer siblings, so counts are watched and doses paused on schedule. Nerve pain is mostly the oldest sibling's fault, which is why thalidomide has faded from modern induction while pomalidomide leads at relapse.",
       "vis": {
         "kind": "table",
-        "cols": ["IMiD safety point", "Detail", "Action"],
+        "cols": [
+          "IMiD safety point",
+          "Detail",
+          "Action"
+        ],
         "rows": [
-          ["Clot prevention", "All IMiDs raise VTE risk", "Aspirin or anticoagulant with every cycle"],
-          ["Low neutrophils", "Pomalidomide and lenalidomide", "Count checks; hold or cut dose"],
-          ["Nerve damage", "Thalidomide chiefly", "Prefer newer IMiDs; stop if painful"]
+          [
+            "Clot prevention",
+            "All IMiDs raise VTE risk",
+            "Aspirin or anticoagulant with every cycle"
+          ],
+          [
+            "Low neutrophils",
+            "Pomalidomide and lenalidomide",
+            "Count checks; hold or cut dose"
+          ],
+          [
+            "Nerve damage",
+            "Thalidomide chiefly",
+            "Prefer newer IMiDs; stop if painful"
+          ]
         ]
       }
     }
   ],
-  "quiz": [],
+  "quiz": [
+    "mk-c5e0b6281b53",
+    "mk-9d434f621fc0",
+    "mk-f463daf5b6af"
+  ],
   "src": [],
   "refs": [
     "IMWG Criteria for Multiple Myeloma",

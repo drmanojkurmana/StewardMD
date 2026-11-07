@@ -1,1 +1,122 @@
-{"checks": {"dashes": true, "drugs": true, "numbers": true, "shape": true, "verbatim": true, "verify": true}, "gen": "AI", "minutes": 9, "model": "muse-spark", "module": "son-svco-mscc", "quiz": [], "refs": ["DeVita Principles and Practice of Oncology", "NCCN Small Cell Lung Cancer 2024", "NCCN Central Nervous System Cancers 2024"], "run": "ss-lessons-pyq-gap-muse", "src": [], "steps": [{"say": "The dilated azygos vein on imaging tells chronicity at a glance, separating slow collaterals from acute thrombosis. Lung cancer dominates simply by numbers, while small cell punches above its weight by biology. Catheters now rival tumours as the bedside cause in device heavy wards. Hoarseness in this setting reflects recurrent laryngeal stretch, not cord disease.", "tx": "Chronic superior vena cava obstruction (blockage of the great vein draining the head and arms) reroutes blood through the **azygos system** (the paired chest wall veins joining superior and inferior cava), whose compensatory dilation marks longstanding disease alongside internal mammary and intercostal collaterals. Malignancy causes 60 to 85 percent overall, with lung cancer dominant by volume (non small cell 50 percent, small cell 25 percent with the highest intrinsic propensity) plus non Hodgkin lymphoma at 10 to 15 percent. Intravascular catheters and pacemakers lead non malignant causes.", "vis": {"alt": "Tumour compressing superior vena cava with collateral engorgement.", "ar": 1.3405, "caption": "SVC compression with facial plethora and collateral veins. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/svc-obstruction-fig1.webp"}}, {"say": "Volume decides the common causes, so lung and lymphoma dwarf everything else. Breast reaches the mediastinum by spread, which keeps it atop the metastatic list. Thymic primaries remain in the same anatomic neighbourhood yet almost never obstruct. That anatomic irony recurs in exams.", "tx": "Over 85 percent of malignant superior vena cava syndrome comes from lung cancer and non Hodgkin lymphoma (chiefly diffuse large B cell and lymphoblastic types, since Hodgkin rarely compresses despite bulky mediastinum). Breast cancer stands as the **most common metastatic** (spread from elsewhere) cause, while primary thymic carcinoma and mesothelioma sit among the least likely. DeVita names this hierarchy explicitly, making the rare primary the planted answer.", "vis": {"cols": ["Cause group", "Share", "Exam note"], "kind": "table", "rows": [["Lung plus NHL", "Over 85 percent of malignant", "SCLC highest propensity"], ["Breast metastasis", "Top metastatic cause", "Spread, not primary"], ["Thymic and mesothelioma", "Least likely", "Planted rare answer"]]}} , {"say": "Stability buys the time a biopsy needs, so haste harms more than waiting. Steroids reduce lymphoma within hours and erase the diagnosis with it. Small cell, lymphoma and germ cell tumours need drugs first, while non small cell needs local control. Treatment without tissue fails the patient with the wrong modality.", "tx": "Haemodynamically stable superior vena cava syndrome without stridor (noisy obstructed breathing) or cerebral oedema (brain swelling) demands core needle **tissue diagnosis** (a biopsy cylinder preserving architecture) before any therapy. Upfront radiation or steroids obscure lymphoma and germ cell histology in 40 to 50 percent, destroying the treatment fork between chemosensitive small cell, lymphoma and germ cell tumours versus radiotherapy or stenting led non small cell disease. Histology dictates cure.", "vis": {"cols": ["Histology", "First therapy", "Why"], "kind": "table", "rows": [["Small cell and NHL", "Systemic chemotherapy", "Highly chemosensitive"], ["Germ cell tumour", "Systemic chemotherapy", "Curable with drugs"], ["Non small cell", "Radiation or stent", "Local control first"]]}} , {"say": "Grading decides between patience and metal in this emergency. Grades three and four mean the airway or brain suffers now, not next week. A stent gives flow before drugs even act at steady state. Biopsy afterwards remains pristine because metal never alters histology.", "tx": "Severe superior vena cava syndrome with respiratory compromise or cerebral oedema needs percutaneous **endovascular stenting** (a metal scaffold reopening the vein), relieving obstruction within 24 to 72 hours in over 90 to 95 percent without obscuring later biopsy. Radiotherapy and chemotherapy need 7 to 21 days for equivalent relief. Speed plus tissue preservation makes stenting the grade 3 to 4 answer.", "vis": {"alt": "SVC stenosis recanalised with a stent.", "ar": 1.8349, "caption": "Endovascular stent reopening an obstructed superior vena cava. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/svc-syndrome-recanalisation-fig1.webp"}}, {"say": "Bone crushing the cord needs steel before beams in this scenario. Instability scores guide the scan into a surgical decision without guesswork. Radiation still follows surgery to sterilise microscopic residue. Keep in mind that soft tissue compression without collapse plays by different rules.", "tx": "Malignant cord compression from vertebral body collapse with mechanical instability (a broken spinal column under load) demands urgent decompressive **surgical stabilisation** (removing bone and fixing the spine) followed by postoperative radiotherapy, since radiation alone cannot lift retropulsed fragments or restore alignment. The spinal instability neoplastic score counts over 50 percent collapse as 3 points, with 13 to 18 meaning unstable. The Patchell trial proved surgery plus radiotherapy beats radiotherapy alone here.", "vis": {"alt": "Cord compression with MRI red flags and emergency management.", "ar": 1.3405, "caption": "Malignant cord compression with red flags and emergency surgery pathway. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/malignant-spinal-cord-compression-fig1.webp"}}], "subject": "ss-medical-oncology", "title": "Superior vena cava syndrome and malignant cord compression: biopsy, stent, surgery", "v": 1}
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 9,
+  "model": "muse-spark",
+  "module": "son-svco-mscc",
+  "quiz": [
+    "mk-9939ad734ad4",
+    "mk-96d9c5426344",
+    "mk-daa53b8ea689"
+  ],
+  "refs": [
+    "DeVita Principles and Practice of Oncology",
+    "NCCN Small Cell Lung Cancer 2024",
+    "NCCN Central Nervous System Cancers 2024"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "The dilated azygos vein on imaging tells chronicity at a glance, separating slow collaterals from acute thrombosis. Lung cancer dominates simply by numbers, while small cell punches above its weight by biology. Catheters now rival tumours as the bedside cause in device heavy wards. Hoarseness in this setting reflects recurrent laryngeal stretch, not cord disease.",
+      "tx": "Chronic superior vena cava obstruction (blockage of the great vein draining the head and arms) reroutes blood through the **azygos system** (the paired chest wall veins joining superior and inferior cava), whose compensatory dilation marks longstanding disease alongside internal mammary and intercostal collaterals. Malignancy causes 60 to 85 percent overall, with lung cancer dominant by volume (non small cell 50 percent, small cell 25 percent with the highest intrinsic propensity) plus non Hodgkin lymphoma at 10 to 15 percent. Intravascular catheters and pacemakers lead non malignant causes.",
+      "vis": {
+        "alt": "Tumour compressing superior vena cava with collateral engorgement.",
+        "ar": 1.3405,
+        "caption": "SVC compression with facial plethora and collateral veins. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/svc-obstruction-fig1.webp"
+      }
+    },
+    {
+      "say": "Primary intrathoracic malignancies account for the vast majority of cases, with bronchogenic carcinoma and non-Hodgkin lymphoma leading overall. Metastatic disease reaches the mediastinum most commonly from primary breast carcinoma. Although thymic tumors and mesothelioma arise nearby, they rarely cause luminal obstruction, highlighting the distinct invasive patterns of different mediastinal tumors.",
+      "tx": "Over 85 percent of malignant superior vena cava syndrome comes from lung cancer and non Hodgkin lymphoma (chiefly diffuse large B cell and lymphoblastic types, since Hodgkin rarely compresses despite bulky mediastinum). Breast cancer stands as the **most common metastatic** (spread from elsewhere) cause, while primary thymic carcinoma and malignant pleural mesothelioma compress the great veins far less frequently than metastatic disease.",
+      "vis": {
+        "cols": [
+          "Cause group",
+          "Share",
+          "Clinical context"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Lung plus NHL",
+            "Over 85 percent of malignant",
+            "SCLC highest propensity"
+          ],
+          [
+            "Breast metastasis",
+            "Top metastatic cause",
+            "Spread, not primary"
+          ],
+          [
+            "Thymic and mesothelioma",
+            "Least likely",
+            "Rare cause of acute obstruction despite mediastinal location"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Stability buys the time a biopsy needs, so haste harms more than waiting. Steroids reduce lymphoma within hours and erase the diagnosis with it. Small cell, lymphoma and germ cell tumours need drugs first, while non small cell needs local control. Treatment without tissue fails the patient with the wrong modality.",
+      "tx": "Haemodynamically stable superior vena cava syndrome without stridor (noisy obstructed breathing) or cerebral oedema (brain swelling) demands core needle **tissue diagnosis** (a biopsy cylinder preserving architecture) before any therapy. Upfront radiation or steroids obscure lymphoma and germ cell histology in 40 to 50 percent, destroying the treatment fork between chemosensitive small cell, lymphoma and germ cell tumours versus radiotherapy or stenting led non small cell disease. Histology dictates cure.",
+      "vis": {
+        "cols": [
+          "Histology",
+          "First therapy",
+          "Why"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Small cell and NHL",
+            "Systemic chemotherapy",
+            "Highly chemosensitive"
+          ],
+          [
+            "Germ cell tumour",
+            "Systemic chemotherapy",
+            "Curable with drugs"
+          ],
+          [
+            "Non small cell",
+            "Radiation or stent",
+            "Local control first"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Grading decides between patience and metal in this emergency. Grades three and four mean the airway or brain suffers now, not next week. A stent gives flow before drugs even act at steady state. Biopsy afterwards remains pristine because metal never alters histology.",
+      "tx": "Severe superior vena cava syndrome with respiratory compromise or cerebral oedema needs percutaneous **endovascular stenting** (a metal scaffold reopening the vein), relieving obstruction within 24 to 72 hours in over 90 to 95 percent without obscuring later biopsy. Radiotherapy and chemotherapy need 7 to 21 days for equivalent relief. Speed plus tissue preservation makes emergency stenting the therapy of choice in grade 3 to 4 obstruction.",
+      "vis": {
+        "alt": "SVC stenosis recanalised with a stent.",
+        "ar": 1.8349,
+        "caption": "Endovascular stent reopening an obstructed superior vena cava. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/svc-syndrome-recanalisation-fig1.webp"
+      }
+    },
+    {
+      "say": "Bone crushing the cord needs steel before beams in this scenario. Instability scores guide the scan into a surgical decision without guesswork. Radiation still follows surgery to sterilise microscopic residue. Keep in mind that soft tissue compression without collapse plays by different rules.",
+      "tx": "Malignant cord compression from vertebral body collapse with mechanical instability (a broken spinal column under load) demands urgent decompressive **surgical stabilisation** (removing bone and fixing the spine) followed by postoperative radiotherapy, since radiation alone cannot lift retropulsed fragments or restore alignment. The spinal instability neoplastic score counts over 50 percent collapse as 3 points, with 13 to 18 meaning unstable. The Patchell trial proved surgery plus radiotherapy beats radiotherapy alone here.",
+      "vis": {
+        "alt": "Cord compression with MRI red flags and emergency management.",
+        "ar": 1.3405,
+        "caption": "Malignant cord compression with red flags and emergency surgery pathway. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/malignant-spinal-cord-compression-fig1.webp"
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Superior vena cava syndrome and malignant cord compression: biopsy, stent, surgery",
+  "v": 1
+}

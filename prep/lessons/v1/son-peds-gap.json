@@ -1,1 +1,201 @@
-{"checks": {"dashes": true, "drugs": true, "numbers": true, "shape": true, "verbatim": true, "verify": true}, "gen": "AI", "minutes": 12, "model": "muse-spark", "module": "son-peds-gap", "quiz": [], "refs": ["INRG Neuroblastoma Guidelines", "SIOP Wilms Tumour Protocols", "COG Renal Tumour Guidelines"], "run": "ss-lessons-pyq-gap-muse", "src": [], "steps": [{"say": "Rosette architecture identifies the tumour before stains return. Fibrillary centres indicate neuroblastoma while true lumens indicate retinoblastoma. Marrow disease plus catecholamines closes the diagnosis without touching the primary. Lung seekers skip the marrow, which keeps the field narrow.", "tx": "Bone marrow packed with small round blue cells forming **Homer Wright pseudorosettes** (tumour rings around central eosinophilic neuropil, nerve fibre feltwork) is pathognomonic for metastatic **neuroblastoma** (the most common extracranial solid tumour of childhood). Flexner-Wintersteiner rosettes (rings around a true empty lumen) instead mark retinoblastoma. Unequivocal marrow neuroblasts plus elevated urinary or serum catecholamines (VMA and HVA, adrenaline breakdown products) establish neuroblastoma without primary tumour biopsy.", "vis": {"alt": "Neuroblastoma encasing aorta with rosettes and orbital signs.", "ar": 1.3333, "caption": "Neuroblastoma anatomy with Homer Wright rosettes. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/neuroblastoma-fig1.webp"}}, {"say": "Counting clean liver sections stages this tumour before any cut. Four sections give four possible PRETEXT numbers. Total involvement forces transplant listing after Shrinking chemotherapy. Pure fetal histology carries the best outlook of all variants.", "tx": "Paediatric hepatoblastoma (liver cancer with AFP raised in over 90 percent, linked to Beckwith Wiedemann syndrome, familial adenomatous polyposis and trisomy 18) is staged by **PRETEXT** (pre treatment extent) I to IV counting contiguous tumour free sections among four (left lateral, left medial, right anterior, right posterior). **PRETEXT IV** (zero free sections) or major vascular involvement needs neoadjuvant cisplatin based chemotherapy then orthotopic liver transplantation, since partial hepatectomy cannot clear it. Pure well differentiated fetal histology has the best prognosis.", "vis": {"cols": ["PRETEXT", "Free sections", "Plan"], "kind": "table", "rows": [["I to III", "One or more contiguous", "Resect, chemo as indicated"], ["IV", "Zero free sections", "Neoadjuvant chemo plus transplant"], ["V+ or P+", "Vascular involvement", "Unresectable, transplant path"]]}} , {"say": "Age and genes separate curable babies from intensive high risk disease. Eighteen months forms the great divide in every neuroblastoma trial. MYCN copies plus segmental losses require the full multimodal ladder. Infant skin and liver spread often melts away untreated.", "tx": "**MYCN amplification** (2p24, extra oncogene copies), age 18 months or older, diploidy and segmental aberrations (1p or 11q deletion, 17q gain) define **high risk neuroblastoma**, treated by induction chemotherapy, surgery, tandem high dose chemo with autologous stem cell rescue, local radiotherapy, then anti GD2 dinutuximab plus isotretinoin maintenance. **Stage MS** (under 18 months with spread limited to skin, liver and under 10 percent marrow without MYCN amplification) often regresses spontaneously. Germline ALK and PHOX2B mark familial cases.", "vis": {"cols": ["Feature", "High risk", "Stage MS"], "kind": "table", "rows": [["Age", "18 months or older", "Under 18 months"], ["MYCN", "Amplified", "Non amplified"], ["Spread", "Bone and marrow heavy", "Skin, liver, under 10 percent marrow"], ["Course", "Intensive multimodal ladder", "Often regresses spontaneously"]]}} , {"say": "Both eyes affected always means inherited disease in this tumour. Ninety percent penetrance turns one mutation into family screening. Saving the globe needs drugs plus laser rather than radiation. Skipping radiotherapy prevents second bone cancers decades later.", "tx": "Bilateral retinoblastoma is always hereditary from a germline **RB1 mutation** on 13q14 (two hit tumour suppressor loss, autosomal dominant with about 90 percent penetrance). Treatment is systemic chemoreduction (**CEV**: carboplatin, etoposide, vincristine) plus focal consolidation (laser, cryotherapy, thermotherapy) to save globe and vision, reserving enucleation (eye removal) for advanced Group E eyes. External beam radiotherapy is avoided for massive secondary **osteosarcoma** risk, and pineoblastoma surveillance covers trilateral disease.", "vis": {"alt": "Calcified eye mass with leukocoria and rosettes.", "ar": 1.3405, "caption": "Retinoblastoma with leukocoria and Flexner-Wintersteiner rosettes. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/retinoblastoma-fig1.webp"}}, {"say": "Three tissues recapitulate the developing kidney in one mass. Blastemal leftovers after chemotherapy indicate resistant disease. Anaplasia confirms TP53 and the worst outlook. Complete necrosis or cystic variants need no further therapy at stage one.", "tx": "Classic Wilms tumour (nephroblastoma) is **triphasic** (three part: blastemal small round cells, stromal spindle cells, epithelial abortive tubules, mnemonic BSE) arising from nephrogenic rests (persistent embryonic kidney tissue). Persistent blastemal predominance after preoperative SIOP chemotherapy and TP53 mutated diffuse anaplasia (giant bizarre nuclei) define high risk unfavourable histology. Completely necrotic, cystic partially differentiated nephroblastoma and mesoblastic nephroma are low risk, with stage I needing no adjuvant therapy.", "vis": {"alt": "Wilms triad with aniridia and genital anomalies.", "ar": 1.3333, "caption": "Wilms predisposition syndromes guiding surveillance. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/wagr-syndrome-fig1.webp"}}, {"say": "Fusion status decides prognosis more than the microscope alone. PAX3 partners fail more often than PAX7 partners. Alveolar architecture without fusion acts like embryonal disease. Testing every case sorts aggressive from favourable biology.", "tx": "Alveolar rhabdomyosarcoma is defined by **PAX3 FOXO1** fusion at t(2;13)(q35;q14) or **PAX7 FOXO1** at t(1;13)(p36;q14), with PAX3 more common and worse, while embryonal rhabdomyosarcoma is fusion negative with favourable prognosis. Fusion positive disease carries aggressive behaviour regardless of lookalike histology. Molecular testing separates fusion positive alveolar from fusion negative embryonal for risk adapted therapy.", "vis": {"alt": "Botryoid cambium layer and alveolar architecture.", "ar": 1.3405, "caption": "Rhabdomyosarcoma variants with fusion testing. Credit: StewardMD.", "kind": "image", "src": "v1/kb/media/rhabdomyosarcoma-fig1.webp"}}, {"say": "Leukaemia in a newborn with Down syndrome usually passes on its own. Three months of watchful waiting resolves most cases without chemotherapy. One fifth later recurs as megakaryoblastic disease before age four. GATA1 explains both chapters of the story.", "tx": "Down syndrome neonates develop transient abnormal myelopoiesis (**TAM**, clonal megakaryoblast excess) from somatic truncating **GATA1 mutation** on Xp11.23, with 70 to 80 percent remitting spontaneously within 3 months. About 20 to 30 percent acquire further mutations and progress to highly chemosensitive acute megakaryoblastic leukaemia (**AML-M7**) before age 4. TAM needs observation while AML-M7 needs full leukaemia therapy.", "vis": {"cols": ["Entity", "Course", "Action"], "kind": "table", "rows": [["TAM neonate", "70 to 80 percent remit under 3 months", "Observe"], ["TAM persistent", "Blasts beyond 3 months", "Treat as leukaemia"], ["AML-M7", "20 to 30 percent before age 4", "Full chemo, chemosensitive"]]}} , {"say": "Eponyms map neuroblastoma spread and paraneoplasia into memorable pictures. Raccoon eyes mean skull disease while huge infant liver means Pepper spread. Dancing eyes signal a paraneoplastic syndrome with good tumour outlook. Watery diarrhoea reflects VIP secretion.", "tx": "Named neuroblastoma syndromes are **Hutchinson** (skull and orbital bone metastases with proptosis and raccoon eyes periorbital ecchymosis), **Pepper** (massive liver metastasis in infants under 18 months, stage 4S or MS, often regressing), **Kinsbourne** opsoclonus myoclonus ataxia (paraneoplastic dancing eyes in 2 to 3 percent with good tumour survival) and **Kerner-Morrison** (VIP secreting watery diarrhoea). Each eponym points to a distinct site or paraneoplastic mechanism.", "vis": {"cols": ["Eponym", "Finding", "Meaning"], "kind": "table", "rows": [["Hutchinson", "Raccoon eyes, proptosis", "Skull and orbital mets"], ["Pepper", "Massive infant hepatomegaly", "Stage 4S or MS liver spread"], ["Kinsbourne", "Opsoclonus myoclonus ataxia", "Paraneoplastic, good outlook"], ["Kerner-Morrison", "VIP watery diarrhoea", "Hormone secreting tumour"]]}} ], "subject": "ss-medical-oncology", "title": "Paediatric solid tumours: rosettes, staging, risk and syndromes", "v": 1}
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 12,
+  "model": "muse-spark",
+  "module": "son-peds-gap",
+  "quiz": [
+    "mk-ce92a56d966e",
+    "mk-c5e0b6281b53",
+    "mk-bbe60fbb3695"
+  ],
+  "refs": [
+    "INRG Neuroblastoma Guidelines",
+    "SIOP Wilms Tumour Protocols",
+    "COG Renal Tumour Guidelines"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "Rosette architecture identifies the tumour before stains return. Fibrillary centres indicate neuroblastoma while true lumens indicate retinoblastoma. Marrow disease plus catecholamines closes the diagnosis without touching the primary. Lung seekers skip the marrow, which keeps the field narrow.",
+      "tx": "Bone marrow packed with small round blue cells forming **Homer Wright pseudorosettes** (tumour rings around central eosinophilic neuropil, nerve fibre feltwork) is pathognomonic for metastatic **neuroblastoma** (the most common extracranial solid tumour of childhood). Flexner-Wintersteiner rosettes (rings around a true empty lumen) instead mark retinoblastoma. Unequivocal marrow neuroblasts plus elevated urinary or serum catecholamines (VMA and HVA, adrenaline breakdown products) establish neuroblastoma without primary tumour biopsy.",
+      "vis": {
+        "alt": "Neuroblastoma encasing aorta with rosettes and orbital signs.",
+        "ar": 1.3333,
+        "caption": "Neuroblastoma anatomy with Homer Wright rosettes. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/neuroblastoma-fig1.webp"
+      }
+    },
+    {
+      "say": "Counting clean liver sections stages this tumour before any cut. Four sections give four possible PRETEXT numbers. Total involvement forces transplant listing after Shrinking chemotherapy. Pure fetal histology carries the best outlook of all variants.",
+      "tx": "Paediatric hepatoblastoma (liver cancer with AFP raised in over 90 percent, linked to Beckwith Wiedemann syndrome, familial adenomatous polyposis and trisomy 18) is staged by **PRETEXT** (pre treatment extent) I to IV counting contiguous tumour free sections among four (left lateral, left medial, right anterior, right posterior). **PRETEXT IV** (zero free sections) or major vascular involvement needs neoadjuvant cisplatin based chemotherapy then orthotopic liver transplantation, since partial hepatectomy cannot clear it. Pure well differentiated fetal histology has the best prognosis.",
+      "vis": {
+        "cols": [
+          "PRETEXT",
+          "Free sections",
+          "Plan"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "I to III",
+            "One or more contiguous",
+            "Resect, chemo as indicated"
+          ],
+          [
+            "IV",
+            "Zero free sections",
+            "Neoadjuvant chemo plus transplant"
+          ],
+          [
+            "V+ or P+",
+            "Vascular involvement",
+            "Unresectable, transplant path"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Age and genes separate curable babies from intensive high risk disease. Eighteen months forms the great divide in every neuroblastoma trial. MYCN copies plus segmental losses require the full multimodal ladder. Infant skin and liver spread often melts away untreated.",
+      "tx": "**MYCN amplification** (2p24, extra oncogene copies), age 18 months or older, diploidy and segmental aberrations (1p or 11q deletion, 17q gain) define **high risk neuroblastoma**, treated by induction chemotherapy, surgery, tandem high dose chemo with autologous stem cell rescue, local radiotherapy, then anti GD2 dinutuximab plus isotretinoin maintenance. **Stage MS** (under 18 months with spread limited to skin, liver and under 10 percent marrow without MYCN amplification) often regresses spontaneously. Germline ALK and PHOX2B mark familial cases.",
+      "vis": {
+        "cols": [
+          "Feature",
+          "High risk",
+          "Stage MS"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Age",
+            "18 months or older",
+            "Under 18 months"
+          ],
+          [
+            "MYCN",
+            "Amplified",
+            "Non amplified"
+          ],
+          [
+            "Spread",
+            "Bone and marrow heavy",
+            "Skin, liver, under 10 percent marrow"
+          ],
+          [
+            "Course",
+            "Intensive multimodal ladder",
+            "Often regresses spontaneously"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Both eyes affected always means inherited disease in this tumour. Ninety percent penetrance turns one mutation into family screening. Saving the globe needs drugs plus laser rather than radiation. Skipping radiotherapy prevents second bone cancers decades later.",
+      "tx": "Bilateral retinoblastoma is always hereditary from a germline **RB1 mutation** on 13q14 (two hit tumour suppressor loss, autosomal dominant with about 90 percent penetrance). Treatment is systemic chemoreduction (**CEV**: carboplatin, etoposide, vincristine) plus focal consolidation (laser, cryotherapy, thermotherapy) to save globe and vision, reserving enucleation (eye removal) for advanced Group E eyes. External beam radiotherapy is avoided for massive secondary **osteosarcoma** risk, and pineoblastoma surveillance covers trilateral disease.",
+      "vis": {
+        "alt": "Calcified eye mass with leukocoria and rosettes.",
+        "ar": 1.3405,
+        "caption": "Retinoblastoma with leukocoria and Flexner-Wintersteiner rosettes. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/retinoblastoma-fig1.webp"
+      }
+    },
+    {
+      "say": "Three tissues recapitulate the developing kidney in one mass. Blastemal leftovers after chemotherapy indicate resistant disease. Anaplasia confirms TP53 and the worst outlook. Complete necrosis or cystic variants need no further therapy at stage one.",
+      "tx": "Classic Wilms tumour (nephroblastoma) is **triphasic** (three part: blastemal small round cells, stromal spindle cells, epithelial abortive tubules, mnemonic BSE) arising from nephrogenic rests (persistent embryonic kidney tissue). Persistent blastemal predominance after preoperative SIOP chemotherapy and TP53 mutated diffuse anaplasia (giant bizarre nuclei) define high risk unfavourable histology. Completely necrotic, cystic partially differentiated nephroblastoma and mesoblastic nephroma are low risk, with stage I needing no adjuvant therapy.",
+      "vis": {
+        "alt": "Wilms triad with aniridia and genital anomalies.",
+        "ar": 1.3333,
+        "caption": "Wilms predisposition syndromes guiding surveillance. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/wagr-syndrome-fig1.webp"
+      }
+    },
+    {
+      "say": "Fusion status decides prognosis more than the microscope alone. PAX3 partners fail more often than PAX7 partners. Alveolar architecture without fusion acts like embryonal disease. Testing every case sorts aggressive from favourable biology.",
+      "tx": "Alveolar rhabdomyosarcoma is defined by **PAX3 FOXO1** fusion at t(2;13)(q35;q14) or **PAX7 FOXO1** at t(1;13)(p36;q14), with PAX3 more common and worse, while embryonal rhabdomyosarcoma is fusion negative with favourable prognosis. Fusion positive disease carries aggressive behaviour regardless of lookalike histology. Molecular testing separates fusion positive alveolar from fusion negative embryonal for risk adapted therapy.",
+      "vis": {
+        "alt": "Botryoid cambium layer and alveolar architecture.",
+        "ar": 1.3405,
+        "caption": "Rhabdomyosarcoma variants with fusion testing. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/rhabdomyosarcoma-fig1.webp"
+      }
+    },
+    {
+      "say": "Leukaemia in a newborn with Down syndrome usually passes on its own. Three months of watchful waiting resolves most cases without chemotherapy. One fifth later recurs as megakaryoblastic disease before age four. GATA1 explains both chapters of the story.",
+      "tx": "Down syndrome neonates develop transient abnormal myelopoiesis (**TAM**, clonal megakaryoblast excess) from somatic truncating **GATA1 mutation** on Xp11.23, with 70 to 80 percent remitting spontaneously within 3 months. About 20 to 30 percent acquire further mutations and progress to highly chemosensitive acute megakaryoblastic leukaemia (**AML-M7**) before age 4. TAM needs observation while AML-M7 needs full leukaemia therapy.",
+      "vis": {
+        "cols": [
+          "Entity",
+          "Course",
+          "Action"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "TAM neonate",
+            "70 to 80 percent remit under 3 months",
+            "Observe"
+          ],
+          [
+            "TAM persistent",
+            "Blasts beyond 3 months",
+            "Treat as leukaemia"
+          ],
+          [
+            "AML-M7",
+            "20 to 30 percent before age 4",
+            "Full chemo, chemosensitive"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Eponyms map neuroblastoma spread and paraneoplasia into memorable pictures. Raccoon eyes mean skull disease while huge infant liver means Pepper spread. Dancing eyes signal a paraneoplastic syndrome with good tumour outlook. Watery diarrhoea reflects VIP secretion.",
+      "tx": "Named neuroblastoma syndromes are **Hutchinson** (skull and orbital bone metastases with proptosis and raccoon eyes periorbital ecchymosis), **Pepper** (massive liver metastasis in infants under 18 months, stage 4S or MS, often regressing), **Kinsbourne** opsoclonus myoclonus ataxia (paraneoplastic dancing eyes in 2 to 3 percent with good tumour survival) and **Kerner-Morrison** (VIP secreting watery diarrhoea). Each eponym points to a distinct site or paraneoplastic mechanism.",
+      "vis": {
+        "cols": [
+          "Eponym",
+          "Finding",
+          "Meaning"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Hutchinson",
+            "Raccoon eyes, proptosis",
+            "Skull and orbital mets"
+          ],
+          [
+            "Pepper",
+            "Massive infant hepatomegaly",
+            "Stage 4S or MS liver spread"
+          ],
+          [
+            "Kinsbourne",
+            "Opsoclonus myoclonus ataxia",
+            "Paraneoplastic, good outlook"
+          ],
+          [
+            "Kerner-Morrison",
+            "VIP watery diarrhoea",
+            "Hormone secreting tumour"
+          ]
+        ]
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Paediatric solid tumours: rosettes, staging, risk and syndromes",
+  "v": 1
+}

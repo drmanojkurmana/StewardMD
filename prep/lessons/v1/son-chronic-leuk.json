@@ -21,19 +21,43 @@
       "say": "Memorise the treatment triggers as numbers plus suffering. Counts below ten and one lakh, lumps above ten centimetres, a spleen six centimetres out, doubling in under six months, drenching B symptoms, or immune cytopenias that steroids cannot control. Notice what is missing: low antibodies alone never justify CLL drugs, and those patients receive replacement antibody infusions when infections recur.",
       "vis": {
         "kind": "table",
-        "cols": ["iwCLL trigger", "Cutoff", "Action"],
+        "cols": [
+          "iwCLL trigger",
+          "Cutoff",
+          "Action"
+        ],
         "rows": [
-          ["Marrow failure", "Hb under 10, platelets under 100,000", "Start CLL therapy"],
-          ["Bulky disease", "Nodes 10 cm+, spleen 6 cm+", "Start CLL therapy"],
-          ["Rapid doubling", "Lymphocyte doubling under 6 months", "Start CLL therapy"],
-          ["B symptoms, refractory autoimmunity", "Sweats, loss, fever; steroids failed", "Start CLL therapy"],
-          ["Low antibodies alone", "Hypogammaglobulinemia without above", "IVIG if infections, never CLL drugs"]
+          [
+            "Marrow failure",
+            "Hb under 10, platelets under 100,000",
+            "Start CLL therapy"
+          ],
+          [
+            "Bulky disease",
+            "Nodes 10 cm+, spleen 6 cm+",
+            "Start CLL therapy"
+          ],
+          [
+            "Rapid doubling",
+            "Lymphocyte doubling under 6 months",
+            "Start CLL therapy"
+          ],
+          [
+            "B symptoms, refractory autoimmunity",
+            "Sweats, loss, fever; steroids failed",
+            "Start CLL therapy"
+          ],
+          [
+            "Low antibodies alone",
+            "Hypogammaglobulinemia without above",
+            "IVIG if infections, never CLL drugs"
+          ]
         ]
       }
     },
     {
       "tx": "Falling counts in CLL have two opposite causes, so always send a **Coombs test** (a check for antibodies coating red cells) and examine the marrow. Autoimmune destruction gets steroids first, with CLL therapy reserved for steroid failure, while marrow packed with lymphocytes (Rai stage 3 or 4) needs CLL therapy at once. Treating autoimmune anaemia with chemotherapy by mistake wastes the best option.",
-      "say": "A dropping haemoglobin in a CLL patient poses a fork in the road that students must get right. If the immune system is destroying blood cells, steroids rescue the counts and CLL drugs wait. If the marrow is stuffed with leukaemia, CLL drugs start immediately. The Coombs test plus a marrow look separates the two paths, so order both before choosing.",
+      "say": "A falling haemoglobin in a patient with CLL presents a critical diagnostic branch point. When autoimmune hemolysis is destroying erythrocytes, corticosteroid therapy restores counts while antileukemic treatment is held in reserve. Conversely, extensive marrow leukemic infiltration demands immediate disease-directed therapy. Performing a direct Coombs test and bone marrow examination reliably differentiates immune cytopenias from advancing marrow failure.",
       "vis": {
         "kind": "compare",
         "left": {
@@ -61,17 +85,33 @@
       "say": "Deletion 17p changes everything about CLL treatment. Standard chemoimmunotherapy fails these patients, so guidelines forbid it outright. Modern care uses the newer kinase blockers zanubrutinib or acalabrutinib, or venetoclax paired with obinutuzumab. The older ibrutinib still works but harms the heart and clotting more often, which is why it lost its first line place.",
       "vis": {
         "kind": "table",
-        "cols": ["del17p/TP53 option", "Class", "Exam point"],
+        "cols": [
+          "del17p/TP53 option",
+          "Class",
+          "Clinical feature"
+        ],
         "rows": [
-          ["Zanubrutinib, acalabrutinib", "Second generation BTK blockers", "Preferred; less cardiac harm than ibrutinib"],
-          ["Venetoclax plus obinutuzumab", "BCL2 blocker plus antibody", "Preferred fixed duration choice"],
-          ["FCR, bendamustine rituximab", "Chemoimmunotherapy", "Contraindicated; chemoresistant disease"]
+          [
+            "Zanubrutinib, acalabrutinib",
+            "Second generation BTK blockers",
+            "Preferred; less cardiac harm than ibrutinib"
+          ],
+          [
+            "Venetoclax plus obinutuzumab",
+            "BCL2 blocker plus antibody",
+            "Preferred fixed duration choice"
+          ],
+          [
+            "FCR, bendamustine rituximab",
+            "Chemoimmunotherapy",
+            "Higher cardiovascular toxicity including atrial fibrillation and hypertension"
+          ]
         ]
       }
     },
     {
       "tx": "The **BCR::ABL1** fusion (a joined gene driving CML) comes in three weights. Major breakpoint transcripts **e13a2** and **e14a2** make p210 protein (the classic chronic myeloid leukaemia of adults). Minor breakpoint **e1a2** makes p190 (Philadelphia positive ALL and rare monocytic CML). Micro breakpoint **e19a2** makes p230 (neutrophilic CML with high neutrophils and platelets). The number after p is the protein weight in kilodaltons.",
-      "say": "Students remember one fusion but the exam tests all three sizes. The classic adult CML carries the big p210 version built from e13a2 or e14a2 pieces. The childhood style Philadelphia ALL carries the small p190 version from e1a2. The rare neutrophil heavy CML carries the giant p230 version from e19a2. Link each weight to its disease and the question answers itself.",
+      "say": "Clinicians should recognize all three BCR-ABL fusion protein sizes and their specific disease associations. Classic adult chronic myeloid leukaemia expresses the standard p210 oncoprotein formed from e13a2 or e14a2 junctions. Philadelphia chromosome-positive ALL typically produces the smaller p190 variant from e1a2. The rare neutrophilic variant of CML carries the large p230 protein from e19a2. Aligning oncoprotein weight with phenotype guides precision diagnostics.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/chronic-myeloid-leukemia-fig1.webp",
@@ -81,21 +121,54 @@
       }
     },
     {
-      "tx": "CML with 20% or more blasts (immature cells) in blood or marrow, or a myeloid lump outside the marrow (**myeloid sarcoma**), has entered **blast phase** (blast crisis), behaving like acute leukaemia and needing ALL or AML style therapy plus transplant. The **WHO 5th edition** (World Health Organization classification) abolished **accelerated phase**, leaving only chronic phase and blast phase, so any answer choice offering accelerated phase is outdated.",
-      "say": "Thirty percent blasts in a CML patient is not a grey zone anymore. Twenty percent blasts, or a solid lump of myeloid blasts anywhere outside the marrow, defines blast phase outright, and management switches to acute leukaemia protocols with transplant planning. Remember the classification change too: the newest WHO book deleted accelerated phase entirely, leaving just two phases.",
+      "tx": "CML with 20% or more blasts (immature cells) in blood or marrow, or a myeloid lump outside the marrow (**myeloid sarcoma**), has entered **blast phase** (blast crisis), behaving like acute leukaemia and needing ALL or AML style therapy plus transplant. The **WHO 5th edition** (World Health Organization classification) abolished **accelerated phase**, leaving only chronic phase and blast phase to reflect modern molecular risk and clinical management.",
+      "say": "A blast count reaching twenty percent is an unequivocal threshold in chronic myeloid leukaemia. Twenty percent blasts, or an extramedullary mass of myeloid blasts anywhere outside the marrow, defines blast phase outright. Therapy immediately switches to intensive acute leukaemia regimens combined with allogeneic transplant planning. Note that current international classifications retired accelerated phase entirely, categorizing patients into chronic phase or blast phase.",
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "cp", "label": "Chronic Phase CML", "level": 1},
-          {"id": "twenty", "label": "Blasts Reach 20 Percent", "level": 2},
-          {"id": "bp", "label": "Blast Phase Declared", "level": 3},
-          {"id": "rx", "label": "Acute Leukaemia Therapy Plus Transplant", "level": 4}
+          {
+            "id": "cp",
+            "label": "Chronic Phase CML",
+            "level": 1
+          },
+          {
+            "id": "twenty",
+            "label": "Blasts Reach 20 Percent",
+            "level": 2
+          },
+          {
+            "id": "bp",
+            "label": "Blast Phase Declared",
+            "level": 3
+          },
+          {
+            "id": "rx",
+            "label": "Acute Leukaemia Therapy Plus Transplant",
+            "level": 4
+          }
         ],
-        "edges": [["cp", "twenty"], ["twenty", "bp"], ["bp", "rx"]]
+        "edges": [
+          [
+            "cp",
+            "twenty"
+          ],
+          [
+            "twenty",
+            "bp"
+          ],
+          [
+            "bp",
+            "rx"
+          ]
+        ]
       }
     }
   ],
-  "quiz": [],
+  "quiz": [
+    "mk-71d92cdd8d6a",
+    "mk-fee8782362f8",
+    "mk-f68c3d33bdf4"
+  ],
   "src": [],
   "refs": [
     "iwCLL Guidelines for Chronic Lymphocytic Leukemia",
