@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "id": "pcd-coarctation-aorta",
+  "title": "Coarctation of the Aorta: Neonatal and Childhood Forms",
+  "module": "Obstructive Left Heart Lesions",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Aortic coarctation represents a focal narrowing of the proximal thoracic descending aorta with characteristic anatomical relationships to embryonic arch structures.",
+      "tx": "The anatomical hallmark is **juxtaductal coarctation**. Coarctation is most frequently located just distal to the left subclavian artery opposite the ductus arteriosus insertion (juxtaductal), where shelf-like infolding of aortic media causes localized obstruction to antegrade blood flow. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-acyanotic-chd-gen2.webp",
+        "ar": 1.3393,
+        "caption": "Aortic coarctation demonstrating narrowing distal to arch vessels with collateral intercostal circulation. Illustration: StewardMD original.",
+        "alt": "Medical illustration of thoracic aorta coarctation with collateral vessels."
+      }
+    },
+    {
+      "say": "Physical examination in older children relies on accurate blood pressure determination across upper and lower extremities to detect hemodynamic obstruction.",
+      "tx": "Establishing the **blood pressure gradient** is pathognomonic. A systolic blood pressure gradient exceeding **20 mmHg** between the upper right arm and lower extremities establishes the diagnosis of significant coarctation, accompanied by upper extremity hypertension and attenuated lower limb pressures. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Hemodynamic Finding",
+          "Underlying Mechanism"
+        ],
+        "rows": [
+          [
+            "Right Arm",
+            "Elevated systolic pressure (hypertension)",
+            "Proximal mechanical obstruction and renin-angiotensin activation"
+          ],
+          [
+            "Lower Extremities",
+            "Attenuated systolic pressure (hypotension)",
+            "Damped pulse wave contour distal to the aortic shelf"
+          ],
+          [
+            "Gradient >20 mmHg",
+            "Diagnostic cuff differential",
+            "Confirms hemodynamically significant aortic lumen stenosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Simultaneous bilateral pulse examination provides a rapid and sensitive bedside clinical clue to aortic arch obstruction.",
+      "tx": "Clinical examination demonstrates pronounced **radiofemoral pulse delay**. Simultaneous palpation of radial and femoral pulses reveals marked diminution and delay of the femoral pulse, reflecting delay in arterial wave propagation through collateral channels distal to the aortic shelf. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Radial Arterial Pulse",
+          "points": [
+            "Brisk upstroke with robust pulse volume and bounding character",
+            "Reflects proximal hypertension upstream from the coarctation shelf",
+            "Arises from right subclavian artery unhindered by arch obstruction"
+          ]
+        },
+        "right": {
+          "title": "Femoral Arterial Pulse",
+          "points": [
+            "Significantly delayed relative to simultaneous radial pulsation",
+            "Markedly attenuated amplitude and slow ascending systolic rate",
+            "Arises downstream from mechanical narrowing via collateral networks"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Chronic collateral blood flow through dilated intercostal arteries carves out characteristic radiographic erosions on the inferior rib borders.",
+      "tx": "Characteristic chest radiography reveals the **Roesler sign**. Inferior rib notching (Roesler sign) affects the **3rd to 8th** ribs due to dilated collateral intercostal arteries, rarely seen in children under **5 years** of age because collaterals require years to erode bone. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Roesler Sign (Rib Notching)",
+          "points": [
+            "Bilateral erosion of the inferior margins of ribs 3 through 8",
+            "Produced by dilated, tortuous intercostal collateral arteries",
+            "Classic radiographic finding in older children, adolescents, and adults"
+          ]
+        },
+        "right": {
+          "title": "Age Distribution (<5 Years)",
+          "points": [
+            "Collateral vessels require years of high-pressure pulsation to indent bone",
+            "Rib notching is typically absent in neonates and young infants with coarctation",
+            "First and second ribs spared because intercostals arise from costocervical trunk"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Contrast barium swallow and chest radiography reveal diagnostic contours mirroring the pre-stenotic and post-stenotic aortic configurations.",
+      "tx": "Radiological contours include the **figure of 3 sign**. CXR demonstrates a figure of 3 contour on the left upper mediastinal border, matched by the reversed E sign on barium swallow, produced by pre-stenotic aortic dilatation, localized coarctation indentation, and post-stenotic descending dilatation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Upper arc formed by dilated left subclavian artery and pre-stenotic aortic arch"
+          },
+          {
+            "id": "b",
+            "label": "Central indentation corresponds to the focal coarctation shelf and ligamentum"
+          },
+          {
+            "id": "c",
+            "label": "Lower arc formed by post-stenotic aneurysmal dilation of proximal descending aorta"
+          },
+          {
+            "id": "d",
+            "label": "Left mediastinal border displays radiographic figure of 3 contour (reversed E on barium)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Coarctation frequently clusters with other developmental defects of the left ventricular outflow tract and aortic arch.",
+      "tx": "Cardiovascular evaluation identifies **bicuspid aortic valve association**. Bicuspid aortic valve coexists with coarctation of the aorta in **50-85%** of cases, carrying lifelong risks of progressive aortic stenosis, aortic regurgitation, infective endocarditis, and ascending aortic aneurysm formation. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Associated Condition",
+          "Prevalence in Coarctation",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Bicuspid Aortic Valve",
+            "50-85% of cases",
+            "Risk of valvular stenosis, regurgitation, and aortic root dilation"
+          ],
+          [
+            "Turner Syndrome (45,X)",
+            "15-20% of Turner patients",
+            "Mandates screening echocardiography and cardiac MRI"
+          ],
+          [
+            "Shone Complex",
+            "Multilevel left heart obstruction",
+            "Mitral ring, parachute mitral valve, subaortic stenosis, coarctation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Genetic conditions involving sex chromosome monosomy exhibit a remarkably elevated incidence of left heart obstructive lesions.",
+      "tx": "Phenotypic screening evaluates for **Turner syndrome**. Coarctation of the aorta occurs in up to **15-20%** of females with Turner syndrome (45,X karyotype), mandating comprehensive baseline cardiovascular imaging with echocardiography or cardiac MRI in all girls diagnosed with sex chromosome abnormalities. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Turner Syndrome Genetics",
+          "points": [
+            "Complete or partial absence of second sex chromosome (45,X monosomy)",
+            "High predisposition to left-sided obstructive cardiovascular malformations",
+            "Webbed neck, short stature, primary amenorrhea, and broad shield chest"
+          ]
+        },
+        "right": {
+          "title": "Cardiovascular Surveillance",
+          "points": [
+            "Coarctation of aorta encountered in approximately 15-20% of patients",
+            "Bicuspid aortic valve encountered in approximately 30% of patients",
+            "Mandatory baseline echocardiography or MRI at diagnosis and during follow-up"
+          ]
+        }
+      }
+    },
+    {
+      "say": "In the newborn, acute closure of the ductus arteriosus precipitates rapid cardiovascular collapse when lower body perfusion depends on ductal patency.",
+      "tx": "Critical presentations arise from **neonatal ductal dependence**. Critical neonatal coarctation presents with cardiogenic shock and anuria upon ductal closure, requiring immediate prostaglandin E1 (**alprostadil**) infusion to restore systemic lower body perfusion and reverse metabolic lactic acidosis. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ana-fetal-remnants.svg",
+        "ar": 1.9048,
+        "caption": "Fetal vascular connections including the ductus arteriosus that maintain systemic perfusion. Illustration: StewardMD original.",
+        "alt": "Diagram of fetal vascular shunts including ductus arteriosus."
+      }
+    }
+  ]
+}
