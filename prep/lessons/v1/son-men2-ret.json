@@ -39,6 +39,17 @@
       }
     },
     {
+      "tx": "This drawing places the **RET** receptor across the cell membrane, with its **cysteine-rich** region outside the cell and its **tyrosine kinase** domain inside. Codons are coloured by risk tier. Codon 918 in the kinase domain carries the highest risk, codons 634 and 883 are high risk, and the remaining codons, including 609 to 620, are moderate risk.",
+      "say": "This drawing places the RET receptor across the cell membrane. Its cysteine-rich region is outside the cell, and its tyrosine kinase domain is inside. The codons are coloured by risk. Codon 918, in the kinase domain, carries the highest risk. Codons 634 and 883 are high risk. The remaining codons, including 609 to 620, are moderate risk.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-men2-ret-gen2.webp",
+        "alt": "RET receptor spanning phospholipid bilayer with cysteine rich and tyrosine kinase domains marked by codon risk levels",
+        "caption": "RET receptor domains with MEN2 codons by MTC risk. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "**Multiple endocrine neoplasia type 2B** (MEN 2B, also called MEN 3) is driven by the **M918T** change, which swaps methionine for threonine at codon 918. This variant sits in the highest tier, and more than 95 percent of MEN 2B cases carry it. Medullary thyroid carcinoma develops in every carrier and spreads early. The cancer can appear in infancy, so surgery is planned as soon as possible, and no later than the first birthday.",
       "say": "Multiple endocrine neoplasia type 2B is also called MEN 3. Its driving change is M918T, which swaps methionine for threonine at codon 918. This variant sits in the highest tier, and more than 95 percent of these cases carry it. Medullary thyroid carcinoma develops in every carrier and spreads early. Surgery is therefore planned as soon as possible, and no later than the first birthday, while the ATA says the first months of life may be ideal."
     },
@@ -48,15 +59,61 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "RET mutation found on genetic testing"},
-          {"id": "b", "label": "Highest tier: codon 918"},
-          {"id": "c", "label": "High tier: codon 634 or 883"},
-          {"id": "d", "label": "Moderate tier: other codons"},
-          {"id": "e", "label": "Surgery as soon as possible, within the first year"},
-          {"id": "f", "label": "Surgery by age 5, earlier if calcitonin rises"},
-          {"id": "g", "label": "Timing set by calcitonin, usually age 5 to 6"}
+          {
+            "id": "a",
+            "label": "RET mutation found on genetic testing"
+          },
+          {
+            "id": "b",
+            "label": "Highest tier: codon 918"
+          },
+          {
+            "id": "c",
+            "label": "High tier: codon 634 or 883"
+          },
+          {
+            "id": "d",
+            "label": "Moderate tier: other codons"
+          },
+          {
+            "id": "e",
+            "label": "Surgery as soon as possible, within the first year"
+          },
+          {
+            "id": "f",
+            "label": "Surgery by age 5, earlier if calcitonin rises"
+          },
+          {
+            "id": "g",
+            "label": "Timing set by calcitonin, usually age 5 to 6"
+          }
         ],
-        "edges": [["a", "b"], ["a", "c"], ["a", "d"], ["b", "e"], ["c", "f"], ["d", "g"]]
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "c"
+          ],
+          [
+            "a",
+            "d"
+          ],
+          [
+            "b",
+            "e"
+          ],
+          [
+            "c",
+            "f"
+          ],
+          [
+            "d",
+            "g"
+          ]
+        ]
       }
     },
     {
@@ -87,14 +144,40 @@
       }
     },
     {
+      "tx": "The diagram contrasts **MEN 2A** and **MEN 2B**. Both share **medullary thyroid carcinoma** and pheochromocytoma in the overlap. MEN 2A adds **primary hyperparathyroidism**. MEN 2B adds nerve growths such as mucosal neuromas and a tall, thin build, and it does not cause hyperparathyroidism, which is the quickest way to tell the two apart.",
+      "say": "Here MEN 2A and MEN 2B are compared. In the overlap, both have medullary thyroid carcinoma and pheochromocytoma. MEN 2A also has primary hyperparathyroidism. MEN 2B adds nerve growths, such as mucosal neuromas, and a tall, thin build, but it does not cause hyperparathyroidism. That difference is the quickest way to tell the two apart.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-men2-ret-gen1.webp",
+        "alt": "Venn diagram contrasting MEN 2A and MEN 2B features around shared medullary carcinoma and pheochromocytoma",
+        "caption": "MEN 2A versus 2B features around shared thyroid tumors. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "Before any thyroid operation in a RET carrier, **pheochromocytoma** must be ruled out, because an unrecognized tumor can cause sudden death during surgery. Screening for it starts at age 11 in the highest and high tiers, and at age 16 in the moderate tier. **Hyperparathyroidism** is screened from age 11 in the high tier and from age 16 in the moderate tier, but codon 918 carriers need no such screen.",
       "say": "Before any thyroid operation in a RET carrier, pheochromocytoma must be ruled out, because an unrecognized tumor can cause sudden death during surgery. Screening for it starts at age 11 in the highest and high tiers, and at age 16 in the moderate tier. Hyperparathyroidism is screened from age 11 in the high tier and from age 16 in the moderate tier. Carriers of codon 918 need no hyperparathyroidism screen at all.",
       "vis": {
         "kind": "table",
-        "cols": ["Test", "Highest tier", "High tier", "Moderate tier"],
+        "cols": [
+          "Test",
+          "Highest tier",
+          "High tier",
+          "Moderate tier"
+        ],
         "rows": [
-          ["Pheochromocytoma screen", "From age 11", "From age 11", "From age 16"],
-          ["Hyperparathyroidism screen", "Not required", "From age 11", "From age 16"]
+          [
+            "Pheochromocytoma screen",
+            "From age 11",
+            "From age 11",
+            "From age 16"
+          ],
+          [
+            "Hyperparathyroidism screen",
+            "Not required",
+            "From age 11",
+            "From age 16"
+          ]
         ]
       }
     },
@@ -128,11 +211,27 @@
       "say": "Calcitonin and carcinoembryonic antigen, a second tumor marker, are measured three to six months after surgery. If both are undetectable, recurrence is unlikely. A doubling time shorter than six months, meaning how quickly the marker level doubles, marks the highest risk of persistent or recurrent disease. While the neck stays clear on imaging, physical checks, both markers and neck ultrasound repeat every six months.",
       "vis": {
         "kind": "table",
-        "cols": ["Check", "When", "What it shows"],
+        "cols": [
+          "Check",
+          "When",
+          "What it shows"
+        ],
         "rows": [
-          ["Calcitonin and CEA", "3 to 6 months after surgery", "Both undetectable means recurrence is unlikely"],
-          ["Neck ultrasound and physical check", "Every 6 months while the neck stays clear", "Tracks disease while the neck stays clear"],
-          ["Calcitonin doubling time", "Calculated from repeat values", "Under 6 months means highest risk"]
+          [
+            "Calcitonin and CEA",
+            "3 to 6 months after surgery",
+            "Both undetectable means recurrence is unlikely"
+          ],
+          [
+            "Neck ultrasound and physical check",
+            "Every 6 months while the neck stays clear",
+            "Tracks disease while the neck stays clear"
+          ],
+          [
+            "Calcitonin doubling time",
+            "Calculated from repeat values",
+            "Under 6 months means highest risk"
+          ]
         ]
       }
     },
@@ -142,14 +241,55 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "a", "label": "Calcitonin rises after surgery"},
-          {"id": "b", "label": "Neck and body imaging"},
-          {"id": "c", "label": "Disease seen on imaging"},
-          {"id": "d", "label": "No disease seen on imaging"},
-          {"id": "e", "label": "Local treatment first, systemic drug if progressive"},
-          {"id": "f", "label": "Observe with markers and ultrasound every 6 months"}
+          {
+            "id": "a",
+            "label": "Calcitonin rises after surgery"
+          },
+          {
+            "id": "b",
+            "label": "Neck and body imaging"
+          },
+          {
+            "id": "c",
+            "label": "Disease seen on imaging"
+          },
+          {
+            "id": "d",
+            "label": "No disease seen on imaging"
+          },
+          {
+            "id": "e",
+            "label": "Local treatment first, systemic drug if progressive"
+          },
+          {
+            "id": "f",
+            "label": "Observe with markers and ultrasound every 6 months"
+          }
         ],
-        "edges": [["a", "b"], ["b", "c", "disease seen"], ["b", "d", "no disease seen"], ["c", "e"], ["d", "f"]]
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c",
+            "disease seen"
+          ],
+          [
+            "b",
+            "d",
+            "no disease seen"
+          ],
+          [
+            "c",
+            "e"
+          ],
+          [
+            "d",
+            "f"
+          ]
+        ]
       }
     }
   ],
