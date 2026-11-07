@@ -3,7 +3,7 @@
  "module": "med-pft-abg",
  "subject": "medicine",
  "title": "Pulmonary function tests and arterial blood gases",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "A **normal** FEV1/FVC ratio does not exclude obstruction. When residual volume rises, FVC falls and the ratio can look normal, an artefact. Lung volumes should scale together, roughly 85 to 115 percent predicted in health. Diffusion (DLCO) helps localise the cause. It is low in fibrosis, emphysema, pulmonary vascular disease and anaemia. It is normal or raised in asthma, polycythaemia and pulmonary haemorrhage.",
@@ -52,6 +52,17 @@
       "Persists"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The left panel shows an alveolus where added oxygen raises alveolar oxygen and blood leaving the lung turns red, marking **V/Q mismatch** in **COPD**. The right panel shows a fluid filled unit with no ventilation where blood stays blue despite oxygen, marking true **shunt**. Corrects with oxygen means mismatch. Persists despite oxygen means shunt.",
+   "say": "On the left, oxygen reaches a poorly ventilated alveolus in COPD, alveolar oxygen rises and blood leaving the unit becomes oxygenated, so hypoxaemia corrects. On the right, the alveolus has no ventilation because it is fluid filled or collapsed, so blood passes through unchanged and hypoxaemia persists. Correction with oxygen points to mismatch while persistence points to true shunt.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-pft-abg-gen1.webp",
+    "alt": "The image compares an alveolus where oxygen corrects low blood oxygen with a non ventilated alveolus where it persists.",
+    "caption": "Mismatch corrects with oxygen while shunt persists. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

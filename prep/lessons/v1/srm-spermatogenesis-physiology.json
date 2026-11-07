@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "srm-spermatogenesis-physiology",
+  "title": "Spermatogenesis, Testicular Physiology, Capacitation, and Acrosome Reaction",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Campbell-Walsh-Wein Urology 12e Ch 66 (Male Infertility)",
+    "Yen and Jaffe Reproductive Endocrinology 9e Ch 12"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Human spermatogenesis represents a tightly regulated continuous developmental sequence within the seminiferous epithelium. Transformation of a diploid spermatogonial stem cell into mature haploid spermatozoa requires roughly 64 to 74 days, followed by 10 to 14 days of epididymal transit.",
+      "tx": "The complete human **spermatogenesis cycle** spans approximately 64 to 74 days within the seminiferous epithelium. Developing male germ cells initiate as diploid **spermatogonial stem cell** precursors, undergo successive mitotic and meiotic divisions, and require an additional 10 to 14 days of **epididymal transit** to acquire functional motility.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Spermatogenic Stage",
+          "Duration & Cellular Characteristics",
+          "Functional Transformation"
+        ],
+        "rows": [
+          [
+            "Spermatogonia (Type A to B)",
+            "Mitotic expansion phase (16 days)",
+            "Stem cell renewal and differentiation"
+          ],
+          [
+            "Primary Spermatocytes",
+            "Prolonged meiotic prophase I (24 days)",
+            "Homologous pairing and genetic crossing-over"
+          ],
+          [
+            "Secondary to Round Spermatid",
+            "Rapid meiosis II completion (hours)",
+            "Formation of haploid 1N round spermatids"
+          ],
+          [
+            "Spermiogenesis & Epididymal transit",
+            "Nuclear condensation, 10 to 14 days transit",
+            "Acrosome formation and progressive motility acquisition"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sertoli cells provide physical and nutritional support across the seminiferous tubules while establishing the blood-testis barrier. Specialized tight junctions formed by claudin-11 isolate meiotic and post-meiotic germ cells from the systemic immune system.",
+      "tx": "Specialized somatic **Sertoli cells** physically support germ cells and establish the essential **blood-testis barrier** through basolateral tight junctions dominated by **claudin-11**. This anatomical seal separates basal mitotic spermatogonia from luminal meiotic and haploid spermatids, preventing autoimmune clearance of novel germline antigens.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/male-infertility-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Testicular microarchitecture illustrating the blood-testis barrier, Sertoli cells, and Leydig cells. Credit: StewardMD.",
+        "alt": "Diagram of testicular histology and spermatogenesis compartments."
+      }
+    },
+    {
+      "say": "Leydig cells situated within the vascular interstitial space synthesize the vast majority of circulating androgens. Direct pulsatile stimulation by luteinizing hormone on G-protein coupled receptors promotes cholesterol transport and enzymatic testosterone production.",
+      "tx": "Located in the testicular **interstitium**, Leydig cells synthesize approximately 95 percent of circulating **testosterone** in response to pulsatile **luteinizing hormone** (LH) stimulation. LH engagement triggers cyclic AMP second-messenger cascades that upregulate steroidogenic acute regulatory protein (StAR), facilitating mitochondrial cholesterol translocation for downstream enzymatic androgen biosynthesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Pulsatile pituitary LH secretion stimulates Leydig cell surface LH receptors"
+          },
+          {
+            "id": "b",
+            "label": "Intracellular cAMP activates StAR protein to transport cholesterol into mitochondria"
+          },
+          {
+            "id": "c",
+            "label": "Sequential enzymatic steroidogenesis yields 95 percent of circulating testosterone"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Maintenance of robust spermatogenesis necessitates immense local androgen levels inside the testis. Secretion of androgen-binding protein by Sertoli cells concentrates intratesticular testosterone fifty to one hundred times higher than peripheral serum concentrations.",
+      "tx": "Effective spermatogenesis demands an **intratesticular testosterone** concentration 50 to 100-fold higher than systemic circulation. Somatic Sertoli cells synthesize **androgen-binding protein** (ABP) under follicle-stimulating hormone (FSH) control, buffering high luminal androgen levels essential for maintaining meiotic integrity and preventing germ cell apoptosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intratesticular Compartment",
+          "points": [
+            "Testosterone concentration: 50 to 100-fold higher than serum",
+            "Buffered by androgen-binding protein (ABP) secreted by Sertoli cells",
+            "Absolute prerequisite for progressing past meiotic prophase"
+          ]
+        },
+        "right": {
+          "title": "Systemic Circulation",
+          "points": [
+            "Testosterone concentration: 300 to 1000 ng/dL (normal male range)",
+            "Bound predominantly to sex hormone-binding globulin and albumin",
+            "Regulates secondary male sexual characteristics and pituitary feedback"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Inhibin B and anti-Mullerian hormone serve as dependable circulating biomarkers of Sertoli cell function and seminiferous tubular integrity. Inhibin B exerts selective negative feedback at the anterior pituitary to control follicle-stimulating hormone secretion.",
+      "tx": "Circulating **inhibin B** and anti-Mullerian hormone (AMH) act as clinical **Sertoli cell markers** reflecting functional seminiferous tubular reserve. Inhibin B provides essential **FSH negative feedback** on anterior pituitary release; low serum levels correlate with severe spermatogenic arrest or Sertoli-cell-only syndrome.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "FSH stimulates Sertoli cells to support spermatogenesis and produce inhibin B"
+          },
+          {
+            "id": "b",
+            "label": "Circulating inhibin B crosses to the anterior pituitary gland"
+          },
+          {
+            "id": "c",
+            "label": "Selective suppression of FSH beta-subunit transcription maintains homeostatic balance"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Ejaculated spermatozoa lack immediate fertilizing capability and must undergo physiological capacitation within the female tract. Removal of membrane cholesterol promotes calcium entry through CatSper channels, inducing extensive protein tyrosine phosphorylation.",
+      "tx": "Physiological **capacitation** occurs as spermatozoa ascend through the female reproductive tract, preparing the cell for oocyte interaction. The multifaceted process involves membrane **cholesterol efflux**, bicarbonate-driven adenylyl cyclase activation, and calcium entry through specialized **CatSper channels**, generating massive protein tyrosine phosphorylation across flagellar regulatory proteins.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Capacitation Event",
+          "Molecular Mechanism",
+          "Functional Consequence"
+        ],
+        "rows": [
+          [
+            "Cholesterol Efflux",
+            "Albumin-mediated lipid removal",
+            "Increases sperm plasma membrane fluidity"
+          ],
+          [
+            "Calcium Influx",
+            "Activation of sperm-specific CatSper channels",
+            "Raises intracellular free calcium concentration"
+          ],
+          [
+            "Protein Phosphorylation",
+            "cAMP and protein kinase A activation",
+            "Enables acrosomal responsiveness and hyperactivation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Capacitation culminates in a distinctive motility transformation termed hyperactivation. This energetic whiplash-like flagellar motion generates the high mechanical thrust required to traverse oviductal mucus and penetrate the outer investments of the oocyte.",
+      "tx": "Consequent to capacitation, spermatozoa develop **hyperactivation**, displaying vigorous **whiplash motility** characterized by wide-amplitude lateral head displacement. This robust **flagellar pattern** provides the necessary mechanical driving force to break through the dense viscoelastic cumulus oophorus matrix and penetrate the outer zona pellucida.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/ana-gametogenesis-gen1.webp",
+        "ar": 1.3333,
+        "caption": "Sperm penetration of the outer oocyte vestments following capacitation and motility activation. Credit: StewardMD.",
+        "alt": "Spermatozoon engaging the zona pellucida during fertilization."
+      }
+    },
+    {
+      "say": "Contact with the zona pellucida triggers exocytosis of the acrosomal vesicle. Fusion of outer acrosomal and plasma membranes releases digestive enzymes including acrosin and hyaluronidase, allowing the fertilizing sperm to reach the oolemma.",
+      "tx": "Binding of sperm to zona pellucida glycoprotein 3 triggers the **acrosome reaction**. Regulated exocytotic fusion of the outer acrosomal membrane releases lytic enzymes, specifically **acrosin** and **hyaluronidase**, creating a focal proteolytic path through the zona matrix to the oocyte membrane.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Capacitated sperm binds to ZP3 glycoproteins on the outer zona pellucida"
+          },
+          {
+            "id": "b",
+            "label": "Exocytotic fusion releases acrosin and hyaluronidase enzymes"
+          },
+          {
+            "id": "c",
+            "label": "Digestion of zona matrix allows sperm fusion with the vitelline membrane"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

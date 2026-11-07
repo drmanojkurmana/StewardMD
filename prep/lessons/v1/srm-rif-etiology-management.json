@@ -1,0 +1,286 @@
+{
+  "v": 1,
+  "id": "srm-rif-etiology-management",
+  "module": "srm-rif-etiology-management",
+  "title": "Recurrent Implantation Failure: Definition, Diagnostic Workup and Evidence-Based Care",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "ESHRE Working Group Consensus on Recurrent Implantation Failure",
+    "Yen & Jaffe's Reproductive Endocrinology 9e Ch 24",
+    "ASRM Practice Committee Opinion on Implantation Failure"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Recurrent implantation failure requires a precise, evidence-based clinical definition. The international ESHRE consensus specifies failure after transferring at least 3 euploid blastocysts or 4 cleavage embryos.",
+      "tx": "The contemporary **ESHRE definition** classifies **recurrent implantation failure** as the failure to achieve clinical intrauterine pregnancy after transferring at least 3 confirmed **euploid blastocysts** or >=4 good-quality cleavage embryos. Requiring euploid transfers eliminates embryo aneuploidy as the principal confounding explanation for failed attachment.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classification Schema",
+          "Embryo Criteria",
+          "Ploidy Evaluation",
+          "Clinical Specificity"
+        ],
+        "rows": [
+          [
+            "ESHRE Consensus 2023",
+            ">=3 blastocysts or >=4 cleavage embryos",
+            "Euploid screening preferred",
+            "High (Isolates maternal-uterine factors)"
+          ],
+          [
+            "Historic UK / European",
+            ">=3 failed fresh cleavage cycles",
+            "Untested aneuploidy",
+            "Low (Confounded by maternal age aneuploidy)"
+          ],
+          [
+            "Workup Threshold",
+            ">=2 failed high-grade transfers",
+            "Any verified morphology",
+            "Practical trigger for diagnostic testing"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Chronic endometritis represents a common, underdiagnosed cause of implantation failure. Diagnosing this condition requires identifying CD138-positive syndecan-1 plasma cells on endometrial biopsy.",
+      "tx": "Present in 15 to 30 percent of affected women, subclinical **chronic endometritis** creates persistent mucosal inflammation. Definitive diagnosis requires immunohistochemical staining for **syndecan-1** or **CD138** on endometrial stromal biopsy, identifying infiltrated plasma cells that disrupt normal decidualization. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "e1",
+            "label": "Luteal phase endometrial biopsy sampling"
+          },
+          {
+            "id": "e2",
+            "label": "Immunohistochemical CD138 syndecan-1 staining"
+          },
+          {
+            "id": "e3",
+            "label": "Identification of stromal plasma cells confirms diagnosis"
+          }
+        ],
+        "edges": [
+          [
+            "e1",
+            "e2",
+            "Tissue processing"
+          ],
+          [
+            "e2",
+            "e3",
+            "Microscopic review"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Oral antibiotic therapy achieves high cure rates for chronic endometritis. First-line management with oral doxycycline at 100 mg twice daily for 14 days delivers over 80 percent histological resolution.",
+      "tx": "First-line **chronic endometritis treatment** utilizes oral **Doxycycline** administered at 100 mg twice daily for 14 days. This targeted regimen achieves a mucosal **cure rate** exceeding 80 percent, restoring endometrial receptivity and normalizing subsequent pregnancy rates in prospective trials. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Line",
+          "Antibiotic Regimen",
+          "Dose & Duration",
+          "Anticipated Resolution"
+        ],
+        "rows": [
+          [
+            "First-Line Therapy",
+            "Doxycycline monotherapy",
+            "100 mg PO BID for 14 days",
+            ">80 percent cure rate"
+          ],
+          [
+            "Second-Line Therapy",
+            "Metronidazole + Ciprofloxacin",
+            "500 mg PO BID each for 14 days",
+            "Additional 70 to 80 percent cure"
+          ],
+          [
+            "Persistent Refractory",
+            "Rifampicin or Moxifloxacin",
+            "400 mg PO daily for 10-14 days",
+            "Requires repeat biopsy verification"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Routine endometrial scratch injury has been disproven by large randomized trials. Performing this procedure in the preceding cycle provides no benefit in live birth rates.",
+      "tx": "Although widely performed historically, mechanical **endometrial scratch** injury in the preceding luteal phase confers no demonstrable benefit on clinical **live birth rate**. Rigorous multicenter **randomized trial** evidence confirms that routine endometrial injury does not enhance implantation in unselected patients. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Proposed Scratch Theory",
+          "points": [
+            "Induction of inflammatory cytokines",
+            "Enhanced decidualization response",
+            "Accelerated stromal vascularization",
+            "Purported receptivity boost"
+          ]
+        },
+        "right": {
+          "title": "Randomized Trial Evidence",
+          "points": [
+            "No difference in live birth rates",
+            "No reduction in miscarriage risk",
+            "Incurs patient procedural discomfort",
+            "Guidelines recommend against routine use"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Receptive window displacement explains a subset of implantation failures. Transcriptomic profiling identifies window shifts to guide personalized embryo transfer timing.",
+      "tx": "A displaced implantation window affects 20 to 25 percent of women with unexplained failure. Employing **transcriptomic profiling** identifies precise **window displacement**, enabling timed **personalized embryo transfer** adjusted by individual progesterone exposure hours to restore optimal synchrony. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "w1",
+            "label": "Endometrial biopsy at standard P+5 in HRT cycle"
+          },
+          {
+            "id": "w2",
+            "label": "RNA transcriptomic profiling of receptivity genes"
+          },
+          {
+            "id": "w3",
+            "label": "Personalized embryo transfer shifted by 12 to 24 hours"
+          }
+        ],
+        "edges": [
+          [
+            "w1",
+            "w2",
+            "Diagnostic phase"
+          ],
+          [
+            "w2",
+            "w3",
+            "Window adjustment"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Refractory thin endometrium poses a difficult clinical challenge. Intrauterine infusions of G-CSF or platelet-rich plasma are used experimentally when lining thickness remains under 7 mm.",
+      "tx": "When the endometrial stripe fails to reach 7 mm despite high-dose estrogen, clinicians encounter **refractory thin endometrium**. Experimental interventions such as intrauterine infusion of **G-CSF** (300 mcg) or autologous **platelet-rich plasma** aim to stimulate neoangiogenesis and cellular regeneration. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Investigational Agent",
+          "Dosage & Protocol",
+          "Proposed Biological Mechanism",
+          "Current Evidence Level"
+        ],
+        "rows": [
+          [
+            "G-CSF Infusion",
+            "300 mcg intrauterine wash",
+            "Mobilizes stem cells, endothelial growth",
+            "Moderate / Mixed trials"
+          ],
+          [
+            "Platelet-Rich Plasma (PRP)",
+            "0.5 to 1.0 mL autologous PRP",
+            "Releases PDGF, VEGF, TGF-beta",
+            "Preliminary / Pilot studies"
+          ],
+          [
+            "Sildenafil Vaginal",
+            "25 mg vaginally QID",
+            "PDE-5 inhibition, uterine vasodilatation",
+            "Limited clinical benefit"
+          ],
+          [
+            "Extended Estrogen HRT",
+            "Oral + transdermal estradiol",
+            "Prolonged receptor stimulation",
+            "Standard conservative step"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A subclinical hydrosalpinx missed on routine scans impairs blastocyst attachment. Detecting and clipping or removing the diseased tube rectifies the mechanical and toxic implantation defect.",
+      "tx": "Undetected on routine 2D ultrasound, a **subclinical hydrosalpinx** impairs IVF outcomes through mechanical flushing and embryotoxic reflux. Identifying tubal distension via HSG and performing laparoscopic salpingectomy or proximal **tubal clipping** reverses this profound **implantation defect**. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Untreated Hydrosalpinx",
+          "points": [
+            "Retrograde embryotoxic fluid reflux",
+            "50 percent reduction in implantation",
+            "Doubled rate of early pregnancy loss",
+            "Disrupts endometrial integrin expression"
+          ]
+        },
+        "right": {
+          "title": "Post-Salpingectomy / Clipping",
+          "points": [
+            "Complete elimination of fluid reflux",
+            "Restoration of baseline IVF success",
+            "Normalization of miscarriage rates",
+            "Gold standard surgical intervention"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Popular immunological add-on therapies lack robust scientific backing. Randomized trials provide no proof that intralipid, steroids, or intravenous immunoglobulin improve birth rates.",
+      "tx": "Clinicians must counsel patients that empirical **immunotherapy add-ons** lack solid scientific validation. High-quality trials evaluating intravenous **intralipid**, prednisolone, and IVIG fail to demonstrate improved live birth rates, with guidelines concluding that **IVIG evidence** does not support routine clinical adoption. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Immunological Add-On",
+          "Proposed Target",
+          "Clinical Evidence Base",
+          "Guideline Position"
+        ],
+        "rows": [
+          [
+            "Intravenous Intralipid",
+            "Uterine NK cell activity",
+            "Conflicting small trials",
+            "Not recommended outside trials"
+          ],
+          [
+            "Low-Dose Prednisolone",
+            "Endometrial inflammation",
+            "No improvement in euploid transfers",
+            "Avoid indiscriminate use"
+          ],
+          [
+            "Intravenous Immunoglobulin",
+            "Maternal autoantibodies",
+            "Negative randomized evidence",
+            "Strongly discouraged routinely"
+          ],
+          [
+            "Subcutaneous Heparin / ASA",
+            "Microvascular thrombosis",
+            "Beneficial only in verified APS",
+            "Not indicated for unexplained RIF"
+          ]
+        ]
+      }
+    }
+  ]
+}

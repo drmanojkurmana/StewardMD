@@ -1,0 +1,290 @@
+{
+  "id": "srm-ovarian-reserve-testing",
+  "module": "srm-ovarian-reserve-testing",
+  "title": "Ovarian Reserve Biomarkers: AMH, AFC, Dynamic Testing and Stratification Systems",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Speroff's Clinical Gynecologic Endocrinology and Infertility 9e Ch 27",
+    "ASRM Committee Opinion on Ovarian Reserve Testing",
+    "ESHRE Guideline on Ovarian Stimulation for IVF/ICSI"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Anti-Mullerian hormone is the most dependable serum biomarker of functional ovarian reserve. Because preantral follicle secretion remains consistent across all cycle phases, it shows minimal intra-cycle variation.",
+      "tx": "Serum **Anti-Mullerian hormone** demonstrates negligible fluctuations across consecutive menses, exhibiting negligible **intra-cycle variation**. This stability establishes AMH as the preeminent **ovarian reserve marker**, reflecting the quantity of responsive preantral and small antral follicles without requiring specific cycle-day scheduling. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "AMH",
+            "Any cycle day",
+            "Minimal",
+            "Oocyte yield and stimulation response"
+          ],
+          [
+            "AFC",
+            "Days 2 to 4 of cycle",
+            "Mild",
+            "Direct visual follicle quantification"
+          ],
+          [
+            "Basal FSH",
+            "Days 2 to 3 only",
+            "Moderate to high",
+            "Pituitary feedback sensitivity"
+          ],
+          [
+            "Estradiol",
+            "Days 2 to 3 only",
+            "High",
+            "FSH feedback interpretation"
+          ]
+        ],
+        "cols": [
+          "Biomarker",
+          "Menstrual Cycle Timing",
+          "Cycle Variation",
+          "Primary Predictive Role"
+        ]
+      }
+    },
+    {
+      "say": "Serum AMH cutoffs guide stimulation protocol choice and alert clinicians to excessive response. Levels under 1.1 ng/mL signal reduced reserve, whereas levels over 3.5 ng/mL flag elevated hyperstimulation risk.",
+      "tx": "Stratification by **AMH thresholds** shapes clinical management. A concentration below 1.1 ng/mL indicates **diminished ovarian reserve** with anticipated poor oocyte yield, while an AMH reading above 3.5 ng/mL conveys significant **OHSS risk**, mandating GnRH antagonist protocols and agonist trigger strategies. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low AMH (<1.1 ng/mL)",
+          "points": [
+            "Below 1.1 ng/mL",
+            "Diminished ovarian reserve",
+            "Expected <=3 oocytes",
+            "Avoid cycle cancellation"
+          ]
+        },
+        "right": {
+          "title": "High AMH (>3.5 ng/mL)",
+          "points": [
+            "Above 3.5 ng/mL",
+            "High ovarian response / PCOM",
+            "Expected >=15 to 20 oocytes",
+            "Prevent hyperstimulation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Sonographic antral follicle count provides immediate visual validation of the resting follicular pool. Examining the ovaries on days 2 to 4 to count follicles between 2 and 10 mm defines reserve accurately.",
+      "tx": "Assessing **antral follicle count** via **transvaginal ultrasound** on cycle days 2 to 4 quantifies growing follicles. Counting all structures with a **follicle diameter** of 2 to 10 mm across both ovaries establishes reserve, with a total AFC under 5 to 7 identifying depleted ovarian capacity.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "<5 to 7",
+            "Low Reserve",
+            "Poor response (1 to 4 oocytes)",
+            "High-dose gonadotropins (300 IU)"
+          ],
+          [
+            "8 to 15",
+            "Normal Reserve",
+            "Optimal yield (8 to 14 oocytes)",
+            "Standard starting dose (150-225 IU)"
+          ],
+          [
+            ">16 to 20",
+            "High Reserve",
+            "Hyper-response (>15 oocytes)",
+            "Conservative dose (100-150 IU)"
+          ],
+          [
+            ">24",
+            "Polycystic Appearance",
+            "Extreme OHSS danger",
+            "GnRH agonist trigger mandatory"
+          ]
+        ],
+        "cols": [
+          "AFC Range",
+          "Ovarian Reserve Category",
+          "Anticipated IVF Response",
+          "Protocol Selection"
+        ]
+      }
+    },
+    {
+      "say": "Measuring follicle stimulating hormone early in the cycle evaluates pituitary feedback restraint. Serum FSH above 10 IU/L on days 2 or 3 suggests dwindling follicles, while levels above 20 predict poor stimulation.",
+      "tx": "Evaluating **basal FSH** on **cycle day 3** reveals loss of negative feedback inhibition from reduced inhibin B and estradiol. Values exceeding 10 IU/L suggest diminishing functional **ovarian reserve**, while concentrations surpassing 20 IU/L predict poor oocyte retrieval and high cancellation rates. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "f1",
+            "label": "Depleted resting follicular cohort"
+          },
+          {
+            "id": "f2",
+            "label": "Reduced granulosa inhibin B secretion"
+          },
+          {
+            "id": "f3",
+            "label": "Unchecked pituitary basal FSH >10 IU/L"
+          }
+        ],
+        "edges": [
+          [
+            "f1",
+            "f2",
+            "Ovarian depletion"
+          ],
+          [
+            "f2",
+            "f3",
+            "Loss of feedback"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Always pair early FSH testing with a matching estradiol measurement. When day 3 estradiol climbs over 60 to 80 pg/mL, advanced recruitment suppresses FSH into misleadingly normal laboratory ranges.",
+      "tx": "Solitary FSH testing risks misinterpretation without simultaneous **basal estradiol** evaluation on day 3. Accelerated **early recruitment** produces premature estrogen elevation above 60 to 80 pg/mL, which downregulates pituitary output and creates a **false normal FSH** reading despite profound reserve compromise. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "True Normal Reserve",
+          "points": [
+            "FSH <8 IU/L",
+            "Estradiol <50 pg/mL",
+            "Intact ovarian reserve",
+            "Reliable baseline reading"
+          ]
+        },
+        "right": {
+          "title": "Masked Diminished Reserve",
+          "points": [
+            "FSH 6 to 8 IU/L (falsely low)",
+            "Estradiol >60 to 80 pg/mL",
+            "Diminished reserve present",
+            "Premature luteal recruitment"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Standardized poor ovarian response definitions originated with the Bologna consensus. Fulfilling the Bologna criteria requires two of three distinct clinical markers, including age, prior yield, or biomarkers.",
+      "tx": "The international **Bologna criteria** identify **poor ovarian response** when at least 2 of 3 features exist: maternal age >=40 years, prior poor response yielding <=3 oocytes with conventional protocols, or abnormal biomarkers (AFC <5 to 7 or AMH <0.5 to 1.1 ng/mL): **oocyte yield**.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Advanced Age",
+            ">=40 years",
+            "Other DOR risk factor",
+            "1 of 3"
+          ],
+          [
+            "Prior Response",
+            "<=3 oocytes retrieved",
+            "Conventional stimulation",
+            "1 of 3"
+          ],
+          [
+            "Abnormal Reserve",
+            "AFC <5 to 7",
+            "AMH <0.5 to 1.1 ng/mL",
+            "1 of 3"
+          ],
+          [
+            "Special Clause",
+            "2 prior maximal poor responses",
+            "Sufficient alone",
+            "Independent"
+          ]
+        ],
+        "cols": [
+          "Bologna Criterion",
+          "Clinical Threshold",
+          "Alternative Equivalent",
+          "Points Required"
+        ]
+      }
+    },
+    {
+      "say": "Addressing heterogeneity among low responders led to the POSEIDON classification. Patients are stratified into four distinct prognostic groups by integrating age, reserve markers, and actual stimulation response.",
+      "tx": "The **POSEIDON criteria** refine management of **low prognosis** patients undergoing ART by establishing 4 distinct groups. This system separates expected poor responders from the **unexpected poor responder** who possesses adequate pre-stimulation biomarkers yet produces an inadequate oocyte cohort. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Group 1",
+            "<35 years",
+            "Normal (AFC >=5, AMH >=1.2)",
+            "Unexpected poor (<4) or subopt (4-9)"
+          ],
+          [
+            "Group 2",
+            ">=35 years",
+            "Normal (AFC >=5, AMH >=1.2)",
+            "Unexpected poor (<4) or subopt (4-9)"
+          ],
+          [
+            "Group 3",
+            "<35 years",
+            "Poor (AFC <5, AMH <1.2 ng/mL)",
+            "Expected poor responder"
+          ],
+          [
+            "Group 4",
+            ">=35 years",
+            "Poor (AFC <5, AMH <1.2 ng/mL)",
+            "Expected poor responder"
+          ]
+        ],
+        "cols": [
+          "POSEIDON Group",
+          "Age",
+          "Ovarian Biomarkers (AFC / AMH)",
+          "Ovarian Response"
+        ]
+      }
+    },
+    {
+      "say": "Clinicians must educate patients regarding the boundaries of reserve tests. These tests forecast egg quantity during ovarian stimulation, but they do not predict unassisted spontaneous conception in normal cycles.",
+      "tx": "Patients must recognize that an **ovarian reserve test** acts solely as a **quantitative biomarker**, projecting stimulated gonadotropin response and harvested egg count. Its clinical **predictive value** fails to assess oocyte quality and does not predict **spontaneous pregnancy** in fertile women attempting natural conception.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stimulation Response Prediction",
+          "points": [
+            "Predicts oocyte count accurately",
+            "Guides starting gonadotropin dose",
+            "Identifies OHSS vulnerability",
+            "Tailors IVF protocol selection"
+          ]
+        },
+        "right": {
+          "title": "Natural Conception Prediction",
+          "points": [
+            "Fails to predict monthly fecundity",
+            "Normal pregnancy rates with low AMH",
+            "Age remains single best quality predictor",
+            "Avoid panic over low values in non-IVF"
+          ]
+        }
+      }
+    }
+  ],
+  "v": 1
+}

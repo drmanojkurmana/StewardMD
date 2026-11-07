@@ -169,7 +169,7 @@ export function verifySubjectCoverage(blueprint, lessonsDir = path.join(ROOT, "p
 
   for (const section of blueprint.sections || []) {
     for (const module of section.modules || []) {
-      for (const topic of module.topics || [module]) {
+      for (const topic of module.topics || module.lessonTopics || [module]) {
         checkTopic(topic.id || module.id, topic.title || module.name || topic.id || module.id,
           topic.mustKnow, lessonsDir, topicsReport, counts);
       }
