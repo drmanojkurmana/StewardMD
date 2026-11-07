@@ -1,0 +1,257 @@
+{
+  "id": "srm-implantation-endometrium",
+  "module": "srm-implantation-endometrium",
+  "title": "Endometrial Receptivity and Window of Implantation",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Speroff's Clinical Gynecologic Endocrinology and Infertility 9e Ch 4",
+    "Yen & Jaffe's Reproductive Endocrinology 9e Ch 7"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Successful blastocyst attachment requires a finely coordinated temporal opening. The human endometrium remains non receptive across the vast majority of the menstrual cycle. Receptivity is confined to a circumscribed period.",
+      "tx": "The functional **window of implantation** represents an ephemeral receptive interval between cycle days 20 and 24 in a 28-day cycle. This period of **endometrial receptivity** occurs 6 to 10 days post-ovulation, strictly corresponding to **LH+7** to LH+9 when structural and biochemical adaptations permit trophoblast attachment.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "w1",
+            "label": "LH surge trigger (Day 14)"
+          },
+          {
+            "id": "w2",
+            "label": "Progesterone priming (Days 15 to 19)"
+          },
+          {
+            "id": "w3",
+            "label": "Receptive window (Days 20 to 24 / LH+7)"
+          },
+          {
+            "id": "w4",
+            "label": "Refractory closure (Day 25 onward)"
+          }
+        ],
+        "edges": [
+          [
+            "w1",
+            "w2",
+            "Corpus luteum rescue"
+          ],
+          [
+            "w2",
+            "w3",
+            "Secretory transformation"
+          ],
+          [
+            "w3",
+            "w4",
+            "Loss of receptivity"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Continuous exposure to luteal progesterone transforms the endometrial stroma. Fibroblast cells undergo extensive morphological and functional remodeling. Specialized secretory products mark complete phenotypic differentiation.",
+      "tx": "Endometrial stromal cells undergo **decidualization** under the continuous influence of luteal progesterone and elevated **cyclic AMP**. This transformation shifts fibroblastic spindle cells into plump epithelioid secretors expressing characteristic biomarkers including **IGFBP-1** and decidual prolactin. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/female-infertility-fig1.webp",
+        "caption": "Endometrial receptivity and structural transformation across the menstrual cycle. Credit: StewardMD.",
+        "alt": "Endometrial receptivity and structural transformation across the menstrual cycle"
+      }
+    },
+    {
+      "say": "Ultrastructural modifications of the luminal surface mark maximum receptivity. Scanning electron microscopy reveals protruding apical membrane blebs. These cellular specializations absorb uterine luminal fluid.",
+      "tx": "During the **mid-luteal** phase, apical membranes of luminal epithelial cells develop mushroom-like projections termed **pinopodes** or **uterodomes**. By expressing adhesion molecules and pinocytosing fluid to bring the opposing walls into proximity, fully developed pinopodes indicate optimal receptivity. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Developmental Phase",
+          "Cycle Days",
+          "Morphological Appearance",
+          "Functional Receptivity"
+        ],
+        "rows": [
+          [
+            "Early developing",
+            "Days 18 to 19",
+            "Small smooth apical bulges",
+            "Pre-receptive state"
+          ],
+          [
+            "Fully mature",
+            "Days 20 to 22 (LH+7 to +8)",
+            "Prominent folded uterodomes",
+            "Peak window of implantation"
+          ],
+          [
+            "Regressing",
+            "Days 23 to 24",
+            "Collapsing wrinkled membranes",
+            "Receptivity closure"
+          ],
+          [
+            "Absent",
+            "Days 25 to 28",
+            "Flattened ciliated microvilli",
+            "Refractory endometrium"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surface glycoproteins undergo dynamic changes during the transition to receptivity. Anti adhesion barriers clear away over the implantation site. Specialized cell adhesion molecules concentrate on the apical membrane.",
+      "tx": "The transition to a **receptive endometrium** demands dynamic surface remodeling. Cleavage of the anti-adhesive glycoprotein **MUC1** unmasks apical docking platforms, facilitating dense clustering of **alpha-v-beta-3 integrin** and osteopontin to tether blastocyst trophectoderm. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/wh-fertility-fig1.webp",
+        "caption": "Ultrastructural features of receptive endometrium and blastocyst implantation. Credit: StewardMD.",
+        "alt": "Ultrastructural features of receptive endometrium and blastocyst implantation"
+      }
+    },
+    {
+      "say": "A specialized leukocyte population populates the luteal endometrium. These unique lymphocytes modulate vascular invasion rather than killing foreign tissue. They establish maternal fetal immune tolerance.",
+      "tx": "In early pregnancy decidua, **uterine natural killer cells** expand dramatically to comprise 70 percent of resident leukocytes. Exhibiting a distinct non-cytotoxic **CD56-bright** and **CD16-negative** phenotype, these cells secrete VEGF-C and interferon-gamma to orchestrate maternal spiral artery remodeling. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cell Feature",
+          "Uterine NK (uNK) Cells",
+          "Peripheral Blood NK Cells"
+        ],
+        "rows": [
+          [
+            "Surface phenotype",
+            "CD56-bright / CD16-negative",
+            "CD56-dim / CD16-positive"
+          ],
+          [
+            "Relative abundance",
+            "70 percent of decidual leukocytes",
+            "10 to 15 percent of lymphocytes"
+          ],
+          [
+            "Cytotoxic capacity",
+            "Negligible killing activity",
+            "High natural cytotoxicity"
+          ],
+          [
+            "Primary function",
+            "Spiral artery remodeling and VEGF-C",
+            "Target cell lysis and defense"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Advances in molecular diagnostic tools allow objective assessment of the receptive state. Gene expression arrays evaluate tissue readiness before embryo transfer. Identifying displaced windows prevents repeated failure.",
+      "tx": "The clinical **Endometrial Receptivity Analysis** platform employs **transcriptomic profiling** across 238 distinct genes to objectively classify endometrial biopsies. By pinpointing the personalized **receptive window**, ERA identifies displaced receptive timing in roughly 25 percent of patients with recurrent failure. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "ERA Classification",
+          "Transcriptomic Signature",
+          "Progesterone Timing",
+          "Clinical Action"
+        ],
+        "rows": [
+          [
+            "Receptive",
+            "Concordant 238-gene panel",
+            "Standard P+5 (120 hours)",
+            "Transfer on schedule"
+          ],
+          [
+            "Pre-receptive",
+            "Early secretory profile",
+            "Requires +24 to +48 h P",
+            "Increase progesterone exposure"
+          ],
+          [
+            "Post-receptive",
+            "Late luteal profile",
+            "Advanced by 24 hours",
+            "Shorten progesterone timing"
+          ],
+          [
+            "Non-receptive",
+            "Disordered/proliferative",
+            "Atypical transcriptomics",
+            "Repeat cycle workup"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The physical process of blastocyst integration follows three orderly milestones. The embryo first establishes orientation against the microvilli. Firm adherence is followed by active penetration.",
+      "tx": "Endometrial embedding advances through 3 distinct mechanical steps: initial loose **apposition** of the blastocyst inner cell mass pole, stable **adhesion** mediated by integrins and cadherins, and active **invasion** where the syncytiotrophoblast breaches the basement membrane into the maternal decidua. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Apposition: loose microvillar orientation"
+          },
+          {
+            "id": "p2",
+            "label": "Adhesion: firm integrin-ligand binding"
+          },
+          {
+            "id": "p3",
+            "label": "Invasion: syncytiotrophoblast stromal penetration"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2",
+            "Pinopode contact"
+          ],
+          [
+            "p2",
+            "p3",
+            "Metalloproteinase release"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The semi allogeneic conceptus must bypass maternal cytotoxic surveillance. Invasive trophoblast cells avoid expressing classic transplantation antigens. Instead they present atypical histocompatibility molecules.",
+      "tx": "To ensure **immune evasion**, invasive extravillous trophoblasts extinguish polymorphic HLA-A and HLA-B, expressing non-classical **HLA-G**, **HLA-E**, and HLA-C. Surface HLA-G interacts directly with inhibitory receptors ILT2 and KIR2DL4 on decidual immune cells, protecting the semi-allograft from maternal alloreactive rejection. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic HLA Molecules (A and B)",
+          "points": [
+            "Highly polymorphic peptides",
+            "Present antigens to CD8+ T cells",
+            "Completely absent on trophoblast",
+            "Avoids maternal T-cell activation"
+          ]
+        },
+        "right": {
+          "title": "Non-Classical HLA (HLA-G and E)",
+          "points": [
+            "Monomorphic expression",
+            "Binds inhibitory KIR2DL4/ILT2",
+            "Abundantly expressed on EVT",
+            "Drives allograft tolerance"
+          ]
+        }
+      }
+    }
+  ],
+  "v": 1
+}

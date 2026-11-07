@@ -1,0 +1,251 @@
+{
+  "id": "srm-semen-analysis-who2021",
+  "module": "srm-semen-analysis-who2021",
+  "title": "Semen Analysis (WHO 2021) and Sperm Function Tests",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "WHO Laboratory Manual for the Examination and Processing of Human Semen 6th Edition (2021)",
+    "Campbell-Walsh-Wein Urology 12e Ch 66"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Diagnostic andrology begins with meticulous pre analytical specimen collection. Standardized conditions ensure reproducibility across laboratories. Deviations in delivery timing distort liquefaction and motility readings.",
+      "tx": "Per **WHO 2021** sixth edition criteria, a valid **abstinence period** spans strictly 2 to 7 days. The specimen must be produced via masturbation without cytotoxic lubricants, maintained near 37 degrees Celsius, and assessed within 60 minutes of collection following complete enzymatic **liquefaction**. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "Abstinence: 2 to 7 days"
+          },
+          {
+            "id": "s2",
+            "label": "Ejaculation into sterile container"
+          },
+          {
+            "id": "s3",
+            "label": "Incubation at 37\u00b0C for liquefaction"
+          },
+          {
+            "id": "s4",
+            "label": "Analysis completed within 60 min"
+          }
+        ],
+        "edges": [
+          [
+            "s1",
+            "s2",
+            "Standard protocol"
+          ],
+          [
+            "s2",
+            "s3",
+            "Enzymatic breakdown"
+          ],
+          [
+            "s3",
+            "s4",
+            "Microscopic assessment"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The sixth edition manual revised global lower reference limits based on fertile populations. Five key quantitative parameters govern standard macroscopic and microscopic evaluation. Values falling beneath the fifth percentile define clinical subfertility.",
+      "tx": "The **WHO 2021 reference limits** define the lower fifth percentile thresholds for fertile couples: **semen volume** 1.4 mL, **total sperm count** 39 million per ejaculate, and **sperm concentration** 16 million/mL. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/male-infertility-fig1.webp",
+        "caption": "Semen analysis parameters and cellular morphology in male fertility evaluation. Credit: StewardMD.",
+        "alt": "Semen analysis parameters and cellular morphology in male fertility evaluation"
+      }
+    },
+    {
+      "say": "Strict morphological criteria separate fertile populations from dysmorphic cohorts. Kruger scoring requires assessing head, neck, and tail structures under oil immersion. Borderline features are counted as abnormal.",
+      "tx": "Assessment of **motility limits** per WHO 2021 establishes **total motility** at 42 percent and **progressive motility** at 30 percent. Under **Kruger strict criteria** for **sperm morphology**, a cutoff of 4 percent **normal forms** separates normal samples from teratozoospermia, guiding fertility decisions. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Strict Normal Spermatozoon",
+          "points": [
+            "Smooth, regular oval head contour",
+            "Acrosome occupies 40 to 70% of head",
+            "Well-defined slender midpiece",
+            "Uniform tail measuring 45 micrometers"
+          ]
+        },
+        "right": {
+          "title": "Teratozoospermic Defects",
+          "points": [
+            "Amorphous, round, or tapered heads",
+            "Large cytoplasmic droplets >1/3 head",
+            "Bent, duplicated, or missing midpiece",
+            "Coiled, truncated, or multiple flagella"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Low sample volume requires differential analysis to uncover anatomical or neurogenic obstacles. Absence of seminal vesicle secretions produces acidic anejaculation or low volume samples. Fructose testing confirms glandular contribution.",
+      "tx": "An ejaculate volume under 1.4 mL accompanied by an **acidic pH** (<7.0) and azoospermia constitutes severe dysfunction. Complete absence of **seminal fructose** confirms **CBAVD** (congenital bilateral absence of the vas deferens) or complete ejaculatory duct obstruction from absent seminal vesicle fluid. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/ana-gametogenesis-gen1.webp",
+        "caption": "Sperm structural morphology, acrosomal architecture, and flagellar integrity. Credit: StewardMD.",
+        "alt": "Sperm structural morphology, acrosomal architecture, and flagellar integrity"
+      }
+    },
+    {
+      "say": "High round cell counts in the ejaculate mandate immediate differentiation. Polymorphonuclear leukocytes must not be confused with immature spermatogenic cells. The peroxidase test provides decisive chemical differentiation.",
+      "tx": "The presence of **leukocytospermia** (or **pyospermia threshold**) is defined by **peroxidase-positive** white blood cells exceeding 1.0 million/mL. Using peroxidase staining to separate leukocytes from immature germ cells, counts over 1.0 million/mL indicate significant genital tract inflammation. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Peroxidase-Positive Leukocytes",
+          "points": [
+            "Dark brown catalytic staining",
+            "Active cellular myeloperoxidase",
+            ">1 million/mL = infection",
+            "Requires antimicrobial therapy"
+          ]
+        },
+        "right": {
+          "title": "Immature Germ Cells",
+          "points": [
+            "Peroxidase-negative clear cytoplasm",
+            "Spermatocytes and round spermatids",
+            "Reflects seminiferous tubular stress",
+            "No indication for antibiotics"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Standard semen parameters often fail to capture genomic integrity. Double and single strand DNA breaks impair embryonic cleavage and blastocyst development. Specialized chromatin tests quantify fragmentation.",
+      "tx": "A **sperm DNA fragmentation index** over **30 percent** on TUNEL, SCSA, or Halo assay reflects impaired chromatin integrity. Elevated **DFI threshold** correlates with reduced natural fecundity, recurrent embryonic arrest, and early pregnancy loss, guiding the transition from intrauterine insemination to ICSI. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fragmentation Assay",
+          "Methodological Basis",
+          "Normal Range",
+          "Clinical Cutoff for ICSI"
+        ],
+        "rows": [
+          [
+            "TUNEL assay",
+            "Enzymatic labeling of free 3-OH ends",
+            "<15 percent",
+            ">20 to 30 percent"
+          ],
+          [
+            "SCSA",
+            "Acridine orange metachromatic dye",
+            "<15 percent",
+            ">30 percent DFI"
+          ],
+          [
+            "SCD (Halo test)",
+            "Absence of halo around damaged DNA",
+            "<20 percent",
+            ">30 percent DFI"
+          ],
+          [
+            "Comet assay",
+            "Single-cell gel electrophoretic tail",
+            "<25 percent",
+            ">30 percent tail DNA"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Compromised blood testis barriers allow systemic immune exposure to sperm autoantigens. Circulating antibodies attach directly to the outer surface of moving cells. Agglutination hinders cervical mucus penetration.",
+      "tx": "Clinical **antisperm antibodies** are confirmed by the **direct Immunobead test** or MAR test. When **50 percent** or more of motile sperm demonstrate bead binding, significant immunological subfertility is present, prompting sperm processing with intrauterine insemination or ICSI to bypass the hostile barrier. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antibody Isotype",
+          "Anatomical Binding Region",
+          "Pathophysiological Impact",
+          "Recommended Treatment"
+        ],
+        "rows": [
+          [
+            "IgA",
+            "Head and midpiece",
+            "Blocks zona binding and mucus transit",
+            "IUI with washed sperm / ICSI"
+          ],
+          [
+            "IgG",
+            "Tail and flagellar shaft",
+            "Induces tail-to-tail agglutination",
+            "Standard ICSI"
+          ],
+          [
+            "IgM",
+            "Large pentameric complexes",
+            "Rare in semen due to size exclusion",
+            "Systemic investigation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Vitality assays become essential when spermatozoa show complete immobility. Differentiating dead cells from live paralyzed cells dictates whether assisted fertilization is feasible. Dye exclusion methods provide instant discrimination.",
+      "tx": "Assessing **sperm viability** separates necrozoospermia from living immotile sperm with ciliary dyskinesia. A viability threshold of 54 percent live spermatozoa is established using **eosin-nigrosin** dye exclusion or the **hypo-osmotic swelling** test, identifying membrane-intact viable sperm for ICSI. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Total motility <10% or immotile"
+          },
+          {
+            "id": "m2",
+            "label": "Eosin-nigrosin or HOS test"
+          },
+          {
+            "id": "m3",
+            "label": "Viable: membrane excludes dye / tail curls"
+          },
+          {
+            "id": "m4",
+            "label": "Non-viable: dye penetration and straight tail"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2",
+            "Diagnostic assessment"
+          ],
+          [
+            "m2",
+            "m3",
+            "Proceed to ICSI"
+          ],
+          [
+            "m2",
+            "m4",
+            "Necrozoospermia workup"
+          ]
+        ]
+      }
+    }
+  ],
+  "v": 1
+}
