@@ -1,0 +1,244 @@
+{
+  "v": 1,
+  "module": "sgo-ovarian-cancer-etiology-brca",
+  "title": "Ovarian Cancer Etiology, BRCA1/2, STIC & Risk-Reducing Surgery",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 15",
+    "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11e Ch 85",
+    "NCCN Clinical Practice Guidelines in Oncology: Genetic/Familial High-Risk Assessment (2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The traditional view that high grade serous ovarian carcinomas arise directly from the ovarian surface epithelium has been overturned. Precursor lesions originate in the distal fimbriated extremity of the fallopian tube.",
+      "tx": "Pathological and genomic evidence confirms that the vast majority of high-grade serous ovarian cancers originate from **STIC** (serous tubal intraepithelial carcinoma) in the fimbriated fallopian tube. This **fimbrial precursor** lesion drives **HGSOC pathogenesis** in **70** to **80** percent of cases, characterized by clonal p**53** mutation (**p53 signature**).",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-ovary.webp",
+        "ar": 1.3333,
+        "caption": "High-grade serous carcinoma STIC lesions confirming fallopian tube origin. Credit: StewardMD.",
+        "alt": "Fallopian tube STIC lesion anatomy and ovarian dissemination"
+      }
+    },
+    {
+      "say": "Germline mutations in DNA homologous recombination repair genes represent the most potent hereditary drivers of pelvic serous carcinoma. BRCA1 carriers face an earlier and higher cumulative disease risk.",
+      "tx": "Pathogenic germline variants in BRCA confer significant lifetime risk: **BRCA1 lifetime risk 40-50%** (**40** to **50** percent) and **BRCA2 lifetime risk 15-25%** (**15** to **25** percent) for **1** and **2** alleles. These tumors exhibit profound **HRD** (**homologous recombination deficiency**), rendering them exquisitely sensitive to platinum agents and targeted PARP inhibition.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genetic Aberration",
+          "Cumulative Lifetime Ovarian Risk",
+          "Peak Age of Penetrance",
+          "Recommended RRSO Age Window"
+        ],
+        "rows": [
+          [
+            "BRCA1 pathogenic variant",
+            "40% to 50%",
+            "40 to 50 years",
+            "Age 35 to 40 years (after childbearing)"
+          ],
+          [
+            "BRCA2 pathogenic variant",
+            "15% to 25%",
+            "50 to 60 years",
+            "Age 40 to 45 years"
+          ],
+          [
+            "BRIP1 / RAD51C / RAD51D",
+            "5% to 15%",
+            "50 to 65 years",
+            "Age 45 to 50 years"
+          ],
+          [
+            "Lynch Syndrome (MLH1/MSH2)",
+            "10% to 12%",
+            "45 to 55 years",
+            "Age 35 to 40 years (with hysterectomy)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prophylactic bilateral salpingo-oophorectomy provides definitive risk reduction against pelvic serous malignancies. The timing of surgery is tailored to the specific mutant gene and childbearing goals.",
+      "tx": "Prophylactic **RRSO** is recommended at **BRCA1 age 35-40** (**35** to **40** years) and **BRCA2 age 40-45** (**40** to **45** years) for carriers of mutations in BRCA **1** and **2**. This intervention achieves an **80-90% risk reduction** (**80** to **90** percent) in ovarian and peritoneal cancer mortality, and reduces breast cancer risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "BRCA1 Surgical Strategy (Age 35-40)",
+          "points": [
+            "Risk of ovarian malignancy increases sharply after age 35",
+            "Mandates RRSO by age 40 to achieve maximum survival benefit",
+            "Surgical menopause managed with short-term estrogen if no breast cancer"
+          ]
+        },
+        "right": {
+          "title": "BRCA2 Surgical Strategy (Age 40-45)",
+          "points": [
+            "Ovarian cancer typically manifests 8 to 10 years later than BRCA1",
+            "Safely defer RRSO until age 40 to 45 years",
+            "Permits natural completion of planned reproductive childbearing"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Pathological processing of prophylactic salpingo-oophorectomy specimens requires specialized protocol sectioning to detect occult microscopic malignancies. Occult lesions are identified in up to eight percent of patients.",
+      "tx": "Processing of RRSO specimens mandates the **SEE-FIM protocol** with **2 mm transverse blocking** (**2** mm intervals) through the entire fimbria and tube with p53 and Ki-67 immunostaining. This standardized protocol identifies unsuspected **occult carcinoma 3-7%** (**3** to **7** percent) that would be missed on conventional non-protocol sectioning.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Perform laparoscopic bilateral salpingo-oophorectomy with pelvic washings"
+          },
+          {
+            "id": "b",
+            "label": "Gross specimen without incising; preserve intact fimbrial architecture"
+          },
+          {
+            "id": "c",
+            "label": "Apply SEE-FIM protocol: slice fimbria and tube transversely at 2 mm intervals"
+          },
+          {
+            "id": "d",
+            "label": "Review serial H&E sections with reflex p53 and Ki-67 immunostaining"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Universal genetic evaluation is standard practice for all newly diagnosed epithelial ovarian carcinomas. Both germline and somatic tumor sequencing guide maintenance poly ADP ribose polymerase inhibitor therapy.",
+      "tx": "Guidelines dictate **universal genetic testing** for **all epithelial ovarian cancers**, evaluating both **germline/somatic BRCA** (BRCA**1** and BRCA**2**) pathogenic variants along with tumor **HRD testing**. These molecular results identify hereditary cancer families and establish predictive eligibility for first-line maintenance PARP inhibitor therapy with olaparib or niraparib.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diagnose non-mucinous epithelial ovarian carcinoma"
+          },
+          {
+            "id": "b",
+            "label": "Perform concurrent germline DNA and somatic tumor NGS panel"
+          },
+          {
+            "id": "c",
+            "label": "Assess tumor Genomic Instability Score (GIS >=42 or loss of heterozygosity)"
+          },
+          {
+            "id": "d",
+            "label": "Allocate first-line maintenance PARP inhibitor therapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Epidemiological factors that suppress continuous follicular rupture exert a profound protective effect against ovarian carcinogenesis. Multiparity, breastfeeding, and hormonal contraceptives markedly decrease risk.",
+      "tx": "Using **oral contraceptives chemoprevention** confers a **20% risk reduction per 5 years** (**20** percent for every **5** years of continuous use) in BRCA mutation carriers. This potent protective effect provides over **30-year durable protection** (**30** years) after pill cessation by suppressing continuous follicular rupture and gonadotropin-mediated ovarian surface trauma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Reproductive & Pharmacological Factor",
+          "Impact on Ovarian Cancer Risk",
+          "Biological Mechanism"
+        ],
+        "rows": [
+          [
+            "Combined Oral Contraceptives (>=5 years)",
+            "50% risk reduction",
+            "Inhibition of ovulation and gonadotropin suppression"
+          ],
+          [
+            "Multiparity (>=3 full-term deliveries)",
+            "40% to 50% risk reduction",
+            "Prolonged anovulation during pregnancy"
+          ],
+          [
+            "Lactation / Breastfeeding (>12 months)",
+            "20% to 30% risk reduction",
+            "Lactational amenorrhea and suppression of LH/FSH"
+          ],
+          [
+            "Bilateral Tubal Ligation",
+            "25% to 35% risk reduction",
+            "Blocks retrograde menstruation and fimbrial shedding"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgical removal of the fallopian tubes during benign pelvic operations offers populational level cancer risk reduction. The ovaries are retained to preserve physiological endocrine activity.",
+      "tx": "Performing **opportunistic salpingectomy** during benign pelvic surgery provides a **40-50% risk reduction** (**40** to **50** percent) for ovarian cancer while preserving **ovarian conservation**. Complete bilateral fimbriectomy removes the primary anatomical niche of STIC without compromising ovarian steroidogenesis or accelerating cardiovascular disease risk in premenopausal women.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Opportunistic Salpingectomy with Ovarian Retention",
+          "points": [
+            "Performed during benign hysterectomy or sterilization",
+            "Removes fimbrial STIC precursor niche (reduces risk ~50%)",
+            "Preserves natural ovarian hormone production and prevents surgical menopause"
+          ]
+        },
+        "right": {
+          "title": "Prophylactic Salpingo-Oophorectomy (RRSO)",
+          "points": [
+            "Mandatory for high-risk germline BRCA1/2 carriers",
+            "Removes both ovaries and fallopian tubes completely (>95% risk reduction)",
+            "Induces immediate surgical menopause requiring bone/cardiac risk counseling"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Hereditary nonpolyposis colorectal cancer carries an elevated lifetime risk of epithelial ovarian neoplasms. Endometrioid and clear cell histological subtypes predominate in this cohort.",
+      "tx": "**Lynch ovarian risk 10-12%** (**10** to **12** percent lifetime risk) is characterized by distinctive **endometrioid/clear cell subtypes** rather than serous histology, presenting at a **young onset age 42-45** (**42** to **45** years). Risk-reducing hysterectomy with bilateral salpingo-oophorectomy after childbearing eliminates this gynecologic cancer mortality completely.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ovarian-cancer-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Malignant ovarian tumor histology and tumor marker expression. Credit: StewardMD.",
+        "alt": "Malignant ovarian histological subtypes and tumor markers"
+      }
+    }
+  ]
+}

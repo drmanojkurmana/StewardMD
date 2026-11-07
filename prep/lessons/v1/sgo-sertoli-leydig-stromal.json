@@ -1,0 +1,250 @@
+{
+  "v": 1,
+  "module": "sgo-sertoli-leydig-stromal",
+  "title": "Sertoli-Leydig Cell Tumors, Gynandroblastoma & DICER1 Mutations",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 18",
+    "WHO Classification of Female Genital Tumours 5e",
+    "NCCN Clinical Practice Guidelines in Oncology: Ovarian Cancer (2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Sertoli Leydig cell tumors represent uncommon sex cord stromal neoplasms characterized by androgen production. Clinical presentation features progressive defeminization followed by frank virilization.",
+      "tx": "**Sertoli-Leydig cell tumor** (**androblastoma**) represents <**0.5** percent of ovarian neoplasms, presenting with **progressive virilization** in young women (**median age 25** years, age **25** to **30**s). Striking clinical features include severe **clitoromegaly**, voice deepening, and hirsutism presenting in **30** to **50** percent of patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ovarian-cancer-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Malignant ovarian tumor histology and tumor marker expression. Credit: StewardMD.",
+        "alt": "Sertoli-Leydig cell tumor macroscopic and microscopic appearance"
+      }
+    },
+    {
+      "say": "Molecular discovery has linked the pathogenesis of Sertoli Leydig tumors to specific microRNA processing machinery defects. Somatic mutations cluster in the endoribonuclease domain of DICER1.",
+      "tx": "Pathognomonic **DICER1 mutation** in the **RNase IIIb domain** (codons E**1705**, D**1709**, G**1809**, or D**1810** in the **1**800 region) creates a severe **microRNA processing defect** in **>60% frequency** (**60** percent) of moderately and poorly differentiated SLCTs, disrupting oncogene silencing and driving dysregulated stromal cellular growth.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acquire somatic hotspot mutation in DICER1 RNase IIIb domain"
+          },
+          {
+            "id": "b",
+            "label": "Impair cleavage of 5p-strand microRNAs from precursor hairpins"
+          },
+          {
+            "id": "c",
+            "label": "Downregulate oncogene suppression pathways"
+          },
+          {
+            "id": "d",
+            "label": "Promote dedifferentiation and sarcomatoid / heterologous SLCT growth"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Inherited germline variants in the DICER1 gene produce a broad pleiotropic hereditary cancer predisposition syndrome. Patients require screening for multi organ tumors throughout life.",
+      "tx": "Germline DICER**1** mutations cause the familial **DICER1 syndrome**, an autosomal dominant cancer syndrome predisposing to pediatric **pleuropulmonary blastoma**, **cystic nephroma**, differentiated thyroid carcinoma, and **pituitary blastoma**, requiring comprehensive multi-organ surveillance across the lifespan of affected patients and their families to detect tumors early.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumor Type",
+          "Age of Onset",
+          "Clinical Manifestation & Surveillance"
+        ],
+        "rows": [
+          [
+            "Pleuropulmonary Blastoma (PPB)",
+            "Infancy to early childhood (<5 years)",
+            "Chest CT; high risk of malignant lung sarcoma"
+          ],
+          [
+            "Sertoli-Leydig Cell Tumor",
+            "Adolescence and early adulthood",
+            "Pelvic ultrasound; androgenic virilizing signs"
+          ],
+          [
+            "Cystic Nephroma",
+            "Childhood",
+            "Renal ultrasound; benign multilocular cystic mass"
+          ],
+          [
+            "Multinodular Goiter & Differentiated Thyroid Cancer",
+            "Adolescence through adulthood",
+            "Thyroid palpation and annual ultrasound surveillance"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Biochemical evaluation of virilizing syndromes requires precise discrimination between adrenal and ovarian androgen sources. Markedly elevated testosterone in the presence of normal dehydroepiandrosterone confirms an ovarian lesion.",
+      "tx": "Marked **serum testosterone >200 ng/dL** (>**200** ng/dL, or >**7** nmol/L) paired with **normal DHEAS** provides crucial diagnostic discrimination for **ovarian vs adrenal virilization**, definitively establishing an androgen-secreting ovarian tumor rather than an adrenal cortical neoplasm or severe polycystic ovarian syndrome.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ovarian Virilizing SLCT",
+          "points": [
+            "Markedly elevated serum total testosterone (>200 ng/dL)",
+            "Normal adrenal androgens (normal DHEA-S)",
+            "Unilateral solid ovarian mass on high-resolution pelvic ultrasound"
+          ]
+        },
+        "right": {
+          "title": "Adrenal Androgen-Secreting Neoplasm",
+          "points": [
+            "Massively elevated serum DHEA-S (>700-800 mcg/dL)",
+            "Variable or modest elevation of serum testosterone",
+            "Adrenal mass on contrast-enhanced abdominal CT / MRI"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Histological differentiation dictates clinical behavior and guides adjuvant therapeutic decision making. Well differentiated tumors follow an indolent benign course while poorly differentiated tumors behave aggressively.",
+      "tx": "The **Meyer classification** stratifies SLCT into well, intermediate, and poorly differentiated forms. Adverse histopathologic features include **retiform architecture** mimicking rete testis and presence of **heterologous elements** (such as gastrointestinal mucinous glands, cartilage, or aggressive **rhabdomyosarcoma stroma**), which herald higher metastatic recurrence risks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Meyer Histological Grade",
+          "Cellular & Architectural Features",
+          "Malignancy Potential & Clinical Behavior"
+        ],
+        "rows": [
+          [
+            "Well-Differentiated SLCT",
+            "Hollow tubules lined by uniform Sertoli cells; interstitial Leydig cells",
+            "Benign clinical behavior (<1% recurrence); surgery curative"
+          ],
+          [
+            "Moderately Differentiated",
+            "Lobular masses, primitive tubules, variable Leydig cell stroma",
+            "Intermediate malignant potential (~10-15% recurrence)"
+          ],
+          [
+            "Poorly Differentiated",
+            "Sheets of sarcomatoid spindle cells; rudimentary cords",
+            "Aggressive behavior (~60% recurrence); requires adjuvant BEP"
+          ],
+          [
+            "With Heterologous / Retiform",
+            "Mucinous glands, rhabdomyosarcoma, or anastomosing slit-like channels",
+            "Higher recurrence rate and resistance to standard chemotherapy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgical resection restricted to the involved ovary cures encapsulated well differentiated tumors in young women. Systemic chemotherapy is indicated for high grade or advanced disease.",
+      "tx": "Encapsulated **stage IA well-differentiated USO** (unilateral salpingo-oophorectomy) is curative alone in young women. Conversely, **poorly differentiated BEP chemo** (bleomycin, etoposide, cisplatin) or Stage **1**, **2**, or **4** disease with **heterologous elements adjuvant therapy** is mandatory to prevent rapid intra-abdominal recurrence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Perform unilateral salpingo-oophorectomy with preservation of uterus and opposite ovary"
+          },
+          {
+            "id": "b",
+            "label": "Review histological grade, presence of heterologous elements, and capsular rupture"
+          },
+          {
+            "id": "c",
+            "label": "Stage IA well-differentiated: observation only (excellent prognosis)"
+          },
+          {
+            "id": "d",
+            "label": "Moderately/poorly differentiated or Stage IC+: administer 3-4 cycles of BEP"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Gynandroblastoma is an exceedingly rare sex cord stromal neoplasm displaying mixed cellular lineages. Both male and female phenotypes are intimately admixed within the tumor.",
+      "tx": "Rare **gynandroblastoma** represents a distinctive **biphasic sex cord** neoplasm displaying **coexisting granulosa and Sertoli-Leydig** elements (each component comprising at least 10 percent of the tumor mass), manifesting clinically with alternating estrogenic endometrial bleeding and progressive hyperandrogenic virilizing symptoms in reproductive-age females.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-ovary.webp",
+        "ar": 1.3333,
+        "caption": "High-grade serous carcinoma STIC lesions confirming fallopian tube origin. Credit: StewardMD.",
+        "alt": "Ovarian sex cord stromal histopathology"
+      }
+    },
+    {
+      "say": "Steroid cell tumors not otherwise specified represent pure androgen producing ovarian neoplasms. Tumor cells are packed with abundant intracytoplasmic lipid droplets.",
+      "tx": "**Steroid cell tumor NOS** represents a pure virilizing sex cord neoplasm. Key **malignancy predictors** on histological assessment include tumor **diameter >7 cm** (**7** cm), presence of necrosis, and high mitotic rate of **>=2-3 mitoses per 10 HPF** (**2** to **3** mitoses per **10** high-power fields), which predict malignant metastatic behavior.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathological Feature",
+          "Low-Risk / Benign Threshold",
+          "High-Risk Malignant Predictor"
+        ],
+        "rows": [
+          [
+            "Tumor Diameter",
+            "<7 cm maximum dimension",
+            ">7 cm diameter (strong predictor of malignancy)"
+          ],
+          [
+            "Mitotic Activity",
+            "<2 mitoses per 10 HPF",
+            ">=2 to 3 mitoses per 10 high-power fields"
+          ],
+          [
+            "Microscopic Hemorrhage / Necrosis",
+            "Absent",
+            "Present (confluent tumor necrosis)"
+          ],
+          [
+            "Nuclear Pleomorphism",
+            "Mild or uniform cytology",
+            "Grade 2 to 3 marked nuclear atypia"
+          ]
+        ]
+      }
+    }
+  ]
+}
