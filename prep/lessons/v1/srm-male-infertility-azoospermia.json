@@ -1,0 +1,292 @@
+{
+  "v": 1,
+  "id": "srm-male-infertility-azoospermia",
+  "module": "srm-male-infertility-azoospermia",
+  "title": "Male Factor Infertility and Azoospermia: Obstructive vs Non-Obstructive Algorithms",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Campbell-Walsh-Wein Urology 12e Ch 67",
+    "EAU Guidelines on Male Infertility",
+    "ASRM Practice Committee Opinion on Azoospermia"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Azoospermia requires rigorous laboratory verification before assigning a definitive diagnosis. Examining two consecutive semen specimens centrifuged at 3000g for 15 minutes must show zero spermatozoa in the pellet.",
+      "tx": "Establishing a formal **azoospermia definition** requires strict laboratory **verification** on at least 2 separate ejaculates. Thorough microscopic inspection of the **centrifuged pellet** following centrifugation at 3000g for 15 minutes must reveal zero spermatozoa before diagnosing complete absence of ejaculated gametes. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Initial semen analysis shows zero sperm"
+          },
+          {
+            "id": "m2",
+            "label": "Centrifugation at 3000g for 15 minutes"
+          },
+          {
+            "id": "m3",
+            "label": "Examination of pellet confirms azoospermia"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2",
+            "Repeat specimen"
+          ],
+          [
+            "m2",
+            "m3",
+            "Pellet analysis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Non-obstructive azoospermia stems from intrinsic testicular failure. Patients present with small testicular volume under 15 mL, elevated serum FSH, and underlying germ cell arrest.",
+      "tx": "Intrinsic testicular failure defines **non-obstructive azoospermia**, manifesting with bilaterally reduced **testicular volume** under 15 mL. Loss of negative feedback from depleted germinal epithelium drives markedly **elevated FSH**, reflecting primary spermatogenic arrest, hypospermatogenesis, or Sertoli-cell-only syndrome. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Testicular Failure (NOA)",
+          "points": [
+            "Testicular volume <15 mL",
+            "Markedly elevated serum FSH",
+            "Impaired spermatogenesis",
+            "Flat non-distended epididymis"
+          ]
+        },
+        "right": {
+          "title": "Normal Spermatogenesis",
+          "points": [
+            "Testicular volume 18 to 25 mL",
+            "Normal serum FSH (1.5 to 8 IU/L)",
+            "Intact full-spectrum germ cells",
+            "Normal testicular architecture"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Obstructive azoospermia features normal hormone production alongside a physical block. The testes retain normal size, serum FSH remains normal, and physical examination reveals epididymal distension.",
+      "tx": "Preserved spermatogenesis characterizes **obstructive azoospermia**, where bilateral testicular volume exceeds 18 mL alongside completely **normal FSH**. Physical examination detects tense, indurated **epididymal distension** caused by fluid backpressure from a mechanical obstruction spanning from the rete testis to ejaculatory ducts. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Parameter",
+          "Obstructive Azoospermia",
+          "Non-Obstructive Azoospermia",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "Testicular Volume",
+            "Normal (>=18 mL)",
+            "Reduced (<15 mL)",
+            "Assesses primary germ cell mass"
+          ],
+          [
+            "Serum FSH",
+            "Normal (1.5 to 8 IU/L)",
+            "Elevated (>7.6 to 10 IU/L)",
+            "Evaluates pituitary feedback"
+          ],
+          [
+            "Epididymal Exam",
+            "Tense, dilated, indurated",
+            "Soft, flat, collapsed",
+            "Identifies ductal engorgement"
+          ],
+          [
+            "Sperm Retrieval",
+            "Near 100 percent (PESA/MESA)",
+            "40 to 60 percent (micro-TESE)",
+            "Dictates surgical intervention"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Microdissection testicular sperm extraction represents the surgical gold standard for non-obstructive cases. High operating microscope magnification yields sperm retrieval rates between 40 and 60 percent.",
+      "tx": "Executing optical **micro-TESE** under 15x to 25x magnification is the definitive technique for non-obstructive azoospermia, achieving a **sperm retrieval rate** of 40 to 60 percent. The microsurgeon selectively identifies and biopsies opaque, dilated **seminiferous tubules** that harbor active focal spermatogenesis. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Equatorial testicular bisection under microscope"
+          },
+          {
+            "id": "t2",
+            "label": "Selective harvest of dilated seminiferous tubules"
+          },
+          {
+            "id": "t3",
+            "label": "Immediate embryological processing for ICSI"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2",
+            "15x to 25x magnification"
+          ],
+          [
+            "t2",
+            "t3",
+            "Tubule mincing"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Klinefelter syndrome is the most prevalent genetic cause of non-obstructive azoospermia. Patients with a 47,XXY karyotype exhibit firm micro-testes under 4 mL and hypergonadotropic hypogonadism.",
+      "tx": "The commonest genetic cause of testicular failure is **Klinefelter syndrome**, characterized by a **47,XXY** karyotype. Men present with small firm testes under 4 mL, tall eunuchoid proportions, azoospermia, and profound **hypergonadotropic hypogonadism** resulting from progressive testicular hyalinization and tubular sclerosis. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Endocrine / Genetic Element",
+          "Klinefelter Findings",
+          "Normal Male Reference",
+          "Clinical Implication"
+        ],
+        "rows": [
+          [
+            "Karyotype",
+            "47,XXY (Classic) / Mosaic",
+            "46,XY",
+            "Mandatory pre-TESE cytogenetics"
+          ],
+          [
+            "Testicular Size",
+            "Micro-testes (<4 mL)",
+            "18 to 25 mL",
+            "Extensive Leydig hyperplasia"
+          ],
+          [
+            "Serum FSH / LH",
+            "Elevated (FSH >20 IU/L)",
+            "FSH 1.5 to 8, LH 1.5 to 9",
+            "Primary hypergonadotropic failure"
+          ],
+          [
+            "Micro-TESE Yield",
+            "45 to 50 percent",
+            "Not applicable",
+            "Permits biological fatherhood via ICSI"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Complete deletions of AZFa or AZFb indicate complete absence of sperm. Because germ cells are entirely missing, these deletions represent absolute contraindications to micro-TESE.",
+      "tx": "Genetic screening of the azoospermia factor region detects microdeletions of **AZFa** and **AZFb**. Complete deletions in these loci cause total germ cell aplasia or complete meiotic maturation arrest, establishing an absolute **micro-TESE contraindication** because sperm recovery probability is zero. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complete AZFa or AZFb Deletions",
+          "points": [
+            "Loss of USP9Y, DDX3Y, or RBMY",
+            "Sertoli-cell-only or early arrest",
+            "Zero sperm retrieval on biopsy",
+            "Contraindicates surgical exploration"
+          ]
+        },
+        "right": {
+          "title": "Intact AZF Regions",
+          "points": [
+            "Normal Yq microdeletion PCR panel",
+            "Preserved genetic spermatogenic potential",
+            "Micro-TESE retrieval 40 to 60 percent",
+            "Supports surgical retrieval attempt"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Isolated AZFc deletions retain favorable surgical prognosis. Microdissection yields sperm in 50 to 70 percent of men, though male offspring inherit the deletion unconditionally.",
+      "tx": "Men with an **AZFc deletion** involving **DAZ gene** clusters maintain islands of preserved spermatogenesis, permitting successful micro-TESE retrieval in 50 to 70 percent of cases. Couples must receive formal genetic counseling regarding obligatory **male offspring transmission**, as all sons inherit the identical deletion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "AZFc microdeletion confirmed on Yq PCR panel"
+          },
+          {
+            "id": "c2",
+            "label": "Micro-TESE retrieves sperm in 50 to 70 percent"
+          },
+          {
+            "id": "c3",
+            "label": "ICSI transmits deletion to 100% of male offspring"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2",
+            "Surgical harvest"
+          ],
+          [
+            "c2",
+            "c3",
+            "Paternal transmission"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Congenital bilateral absence of the vas deferens is tied to cystic fibrosis mutations in up to 80 percent of men. Genetic carrier screening of both partners is mandatory before proceeding.",
+      "tx": "Physical absence of the vas deferens in **CBAVD** strongly reflects underlying **CFTR mutations**, identified in 70 to 80 percent of patients. Comprehensive **carrier screening** of the female partner is mandatory prior to ART to calculate transmission risk and guide preimplantation genetic testing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Partner Carrier Status",
+          "CFTR Genetics",
+          "Offspring CF Risk",
+          "Recommended Clinical Pathway"
+        ],
+        "rows": [
+          [
+            "Male CBAVD + Female Negative",
+            "Compound heterozygous + Normal",
+            "Zero affected, 100% carriers",
+            "Proceed with MESA and ICSI"
+          ],
+          [
+            "Male CBAVD + Female Carrier",
+            "Compound heterozygous + Heterozygous",
+            "50 percent affected cystic fibrosis",
+            "Mandatory PGT-M for CFTR"
+          ],
+          [
+            "Male CBAVD Alone",
+            "Common F508del / 5T allele",
+            "Carried on chromosome 7q31.2",
+            "Baseline sweat chloride test"
+          ],
+          [
+            "Sperm Quality in CBAVD",
+            "Normal spermatogenesis intact",
+            "Obstructive azoospermia only",
+            "Excellent fertilization with PESA"
+          ]
+        ]
+      }
+    }
+  ]
+}
