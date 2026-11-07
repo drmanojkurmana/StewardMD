@@ -1,0 +1,286 @@
+{
+  "v": 1,
+  "module": "sct-lung-transplantation-indications-technique",
+  "title": "Lung transplantation: indications, donor selection and surgical technique",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 115 (Lung Transplantation)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 44 (Lung Transplantation)",
+    "ISHLT Consensus Guidelines for the Selection of Lung Transplant Candidates"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "End-stage respiratory failure warrants consideration for lung transplantation when medical therapy is exhausted. Idiopathic pulmonary fibrosis carries a rapid trajectory, prompting referral when diffusion capacity drops below forty percent. Chronic obstructive pulmonary disease and cystic fibrosis serve as additional primary indications for replacement.",
+      "tx": "Clinical indications for transplantation encompass severe **idiopathic pulmonary fibrosis** with a **diffusing capacity** for carbon monoxide falling below 40 percent, progressive **chronic obstructive pulmonary disease** unresponsive to maximal therapy, and suppurative cystic fibrosis presenting with recurrent life-threatening exacerbations and hypercapnic respiratory failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Underlying Pathology",
+          "Key Listing Trigger",
+          "Recommended Procedure"
+        ],
+        "rows": [
+          [
+            "Idiopathic pulmonary fibrosis",
+            "DLCO < 40% or 10% FVC decline over 6 months",
+            "Bilateral sequential lung transplant"
+          ],
+          [
+            "Cystic fibrosis / Bronchiectasis",
+            "FEV1 < 30% or severe secondary pulmonary hypertension",
+            "Mandatory bilateral transplant to clear infection"
+          ],
+          [
+            "Chronic obstructive pulmonary disease",
+            "BODE index >= 7 or refractory hypercapnic exacerbations",
+            "Single or bilateral lung transplantation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Rigorous donor screening ensures that harvested lungs function reliably in the recipient. Acceptable donor criteria include a ratio of arterial oxygen tension to inspired oxygen fraction above three hundred on five centimeters of positive end-expiratory pressure. Clear chest radiographs and bronchoscopy confirm clean allografts.",
+      "tx": "Ideal donor criteria mandate a **donor PaO2/FiO2 ratio** exceeding 300 mmHg on 100 percent oxygen and 5 cmH2O positive end-expiratory pressure. Procurement protocols also require a **clear chest radiograph**, absence of purulent secretions on **bronchoscopy**, and minimal smoking history. Strict adherence to these stringent physiological donor criteria protects against early severe graft failure and optimizes post-transplant recipient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Donor Criteria Domain",
+          "Standard Ideal Threshold",
+          "Assessment Modality"
+        ],
+        "rows": [
+          [
+            "Oxygenation capacity",
+            "PaO2/FiO2 ratio > 300 mmHg",
+            "Serial arterial blood gas on 5 PEEP"
+          ],
+          [
+            "Airway cleanliness",
+            "Absence of purulent secretions or aspiration",
+            "Direct flexible fiberoptic bronchoscopy"
+          ],
+          [
+            "Radiographic appearance",
+            "Clear lung fields without focal infiltrates",
+            "Serial portable chest radiographs"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Donor lung preservation relies on rapid hypothermic arrest. Surgical teams infuse cold intracellular or extracellular preservation solutions through the pulmonary artery along with systemic prostaglandin E1. Topical hypothermia and cold static storage at four degrees Celsius safeguard ischemic graft tissue.",
+      "tx": "Allograft protection involves antegrade flush via the pulmonary artery using **cold crystalloid flush** solution (Perfadex) supplemented with intravenous prostaglandin E1. Following retrieval, the organ undergoes **static cold storage** at 4 degrees Celsius, maintaining a safe **ischemic time** ceiling under 6 to 8 hours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Intravenous prostaglandin E1 injection into PA"
+          },
+          {
+            "id": "b",
+            "label": "Cold low-potassium dextran flush through pulmonary trunk"
+          },
+          {
+            "id": "c",
+            "label": "Retrograde flush via pulmonary veins"
+          },
+          {
+            "id": "d",
+            "label": "Inflation to 50% tidal volume and cold storage at 4 degrees C"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Bilateral sequential transplantation provides excellent exposure through a bilateral anterior thoracotomy or clamshell incision. The surgeon can open the pleura through the fourth or fifth intercostal space. This wide operative approach permits sequential resection and implantation without compromising hilar visibility.",
+      "tx": "The standard surgical approach for bilateral replacement utilizes a **bilateral clamshell incision** or sequential anterolateral thoracotomies through the fourth or fifth interspace. This approach grants unrestricted **surgical exposure** to both pulmonary hila, allowing unhurried **sequential lung implantation** with excellent visualization of critical hilar vessels.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bilateral Clamshell Incision",
+          "points": [
+            "Transverse sternotomy with bilateral thoracotomies",
+            "Provides panoramic exposure of both hila and mediastinum",
+            "Permits rapid central cannulation for cardiopulmonary bypass"
+          ]
+        },
+        "right": {
+          "title": "Anterolateral Thoracotomy",
+          "points": [
+            "Avoids sternal transection, preserving chest wall stability",
+            "Performed sequentially for isolated or bilateral implants",
+            "Lower incidence of sternal wound dehiscence"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Implantation follows a precise sequence of three anatomical anastomoses. The bronchial connection comes first, keeping the donor bronchus short to preserve blood supply. The pulmonary arterial connection follows, and the left atrial cuff anastomosis completes the reconstruction.",
+      "tx": "Reconstruction follows a disciplined order: first, a running end-to-end **bronchial anastomosis** kept within one ring of the carina to preserve microvascular flow; second, the end-to-end **pulmonary artery anastomosis**; and third, the **left atrial cuff anastomosis** incorporating donor pulmonary veins. Meticulous microvascular technique during cuff fashioning prevents postoperative pulmonary venous obstruction and catastrophic anastomotic dehiscence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Bronchial anastomosis with short donor stump"
+          },
+          {
+            "id": "b",
+            "label": "End-to-end pulmonary arterial connection"
+          },
+          {
+            "id": "c",
+            "label": "Atrial cuff anastomosis with running nonabsorbable suture"
+          },
+          {
+            "id": "d",
+            "label": "Controlled de-airing and graft reperfusion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Primary graft dysfunction is the leading cause of early mortality after transplantation. Characterized by acute non-cardiogenic pulmonary edema, it reflects ischemia-reperfusion injury within the first seventy-two hours. Severe grade three dysfunction is marked by a PaO2/FiO2 ratio under two hundred with bilateral infiltrates.",
+      "tx": "The principal early hazard following lung transplantation is **primary graft dysfunction**, an acute ischemia-reperfusion injury culminating in non-cardiogenic alveolar edema. Clinicians classify grade 3 severity when the **PaO2/FiO2 ratio** falls below 200 accompanied by diffuse **radiographic infiltrates** within 72 hours of graft reperfusion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "PGD Grade",
+          "PaO2/FiO2 Ratio",
+          "Chest Radiographic Infiltrates"
+        ],
+        "rows": [
+          [
+            "Grade 0",
+            "> 300 mmHg",
+            "Clear lung fields, no infiltrates"
+          ],
+          [
+            "Grade 1",
+            "> 300 mmHg",
+            "Diffuse allograft infiltrates present"
+          ],
+          [
+            "Grade 2",
+            "200 to 300 mmHg",
+            "Diffuse allograft infiltrates present"
+          ],
+          [
+            "Grade 3",
+            "< 200 mmHg",
+            "Severe diffuse allograft alveolar infiltrates"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Lifelong immunosuppression prevents graft rejection but requires careful therapeutic balancing. A standard three-drug regimen must include tacrolimus, mycophenolate mofetil, and oral corticosteroids. Surveillance bronchoscopy and transbronchial lung biopsy identify asymptomatic cellular and humoral rejection episodes.",
+      "tx": "Maintenance post-transplant **triple immunosuppression** combines the potent calcineurin inhibitor **tacrolimus**, the purine antimetabolite **mycophenolate mofetil**, and oral prednisone. Routine surveillance bronchoscopy with serial transbronchial biopsy monitors for histopathologic perivascular mononuclear infiltrates indicative of acute allograft rejection, guiding prompt corticosteroid pulse rescue therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug Class",
+          "Representative Agent",
+          "Mechanism and Monitoring"
+        ],
+        "rows": [
+          [
+            "Calcineurin inhibitor",
+            "Tacrolimus",
+            "Inhibits interleukin-2 transcription; target trough 8 to 12 ng/mL"
+          ],
+          [
+            "Antimetabolite",
+            "Mycophenolate mofetil",
+            "Inhibits inosine monophosphate dehydrogenase and lymphocyte growth"
+          ],
+          [
+            "Corticosteroid",
+            "Prednisone",
+            "Broad genomic suppression of inflammatory cytokines; tapered slowly"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Chronic allograft dysfunction remains the primary barrier to long-term survival. Most commonly presenting as bronchiolitis obliterans syndrome, it produces irreversible progressive airflow obstruction. The diagnostic criterion is a persistent drop in forced expiratory volume in one second below eighty percent of baseline.",
+      "tx": "Late allograft attrition stems from **bronchiolitis obliterans syndrome**, the obstructive phenotype of chronic rejection. Diagnosed by a permanent decline in **FEV1 decline** below 80 percent of post-transplant baseline, it is driven by chronic **fibroproliferative cicatrization** of small terminal bronchioles. Progressive obliterative luminal narrowing causes unremitting dyspnea and insidious respiratory failure refractory to standard inhaled or systemic therapies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Repetitive alloimmune and non-alloimmune airway insults"
+          },
+          {
+            "id": "b",
+            "label": "Lymphocytic inflammation of terminal bronchioles"
+          },
+          {
+            "id": "c",
+            "label": "Fibroproliferative scarring and luminal obliteration"
+          },
+          {
+            "id": "d",
+            "label": "Permanent drop in FEV1 below 80% baseline value"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
