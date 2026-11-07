@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "sob-endometrial-cancer",
+ "title": "Endometrial Carcinoma: Bokhman Dual Pathways, FIGO Staging and Molecular ProMisE Classification",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Ten Teachers Gynaecology 21e Ch 15 (Malignant Disease of the Uterus)",
+  "Williams Obstetrics 25e",
+  "FIGO 2023 Staging of Endometrial Cancer (Berek et al.)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The **Bokhman dual model** stratifies endometrial carcinoma: **Type I** (80%, estrogen-dependent endometrioid adenocarcinoma arising from atypical endometrial hyperplasia, driven by **PTEN**, KRAS, and microsatellite instability, good prognosis) and **Type II** (20%, non-estrogen serous and clear cell carcinoma arising in atrophic endometrium with **TP53 mutations**, aggressive clinical course). Clinically, key parameters encompass Bokhman model, Type I endometrioid, Type II serous, 1, 2.",
+   "say": "Bokhman originally established the dual clinical and pathological framework for endometrial carcinoma. Type one tumours represent eighty percent of cases, presenting in perimenopausal obese women under unopposed estrogen stimulation. These are low-grade endometrioid adenocarcinomas characterized by PTEN loss and favorable prognosis. Type two tumours, predominantly serous carcinomas, arise in elderly atrophic endometrium, harbour TP53 mutations, and behave aggressively.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-endometrial-cancer-gen1.webp",
+    "ar": 1.7778,
+    "caption": "Histopathological and molecular pathways of Bokhman Type I and Type II endometrial cancer. Credit: StewardMD.",
+    "alt": "Pathological diagram contrasting estrogen-driven endometrioid carcinoma with PTEN mutation against serous carcinoma with TP53 mutation."
+   }
+  },
+  {
+   "tx": "**Postmenopausal bleeding (PMB)** carries a 10 percent underlying risk of endometrial carcinoma, mandating urgent diagnostic evaluation. On transvaginal sonography, an **endometrial thickness <=4 mm** has a **negative predictive value >99 percent** for endometrial cancer, permitting clinical reassurance unless bleeding recurs, while thickness >4 mm mandates histological endometrial sampling.",
+   "say": "Postmenopausal bleeding must always be treated as a cardinal red flag for uterine cancer, with approximately ten percent of cases harbouring an underlying malignancy. Transvaginal sonography provides the initial triage: an endometrial double-wall thickness of four millimetres or less carries a negative predictive value exceeding ninety-nine percent, effectively ruling out cancer. Any measurement over four millimetres requires outpatient Pipelle biopsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endometrial Thickness on TVS",
+     "Malignancy Risk",
+     "Mandated Clinical Decision"
+    ],
+    "rows": [
+     [
+      "Thickness <= 4 mm (single/double)",
+      "Less than 1% cancer risk",
+      "Clinical reassurance; instruct patient to report any recurrent bleeding"
+     ],
+     [
+      "Thickness > 4 mm in PMB",
+      "Approximately 10 to 15% cancer risk",
+      "Mandatory outpatient Pipelle aspiration endometrial biopsy"
+     ],
+     [
+      "Fluid in cavity with thin lining",
+      "Low cancer risk",
+      "Measure anterior-posterior myometrial lining excluding fluid thickness"
+     ],
+     [
+      "Focal polypoid thickening / heterogenous",
+      "High risk of polyp or hyperplasia",
+      "Direct hysteroscopy and targeted guided resectoscopic biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lynch syndrome** (hereditary non-polyposis colorectal cancer, HNPCC) is an autosomal dominant cancer syndrome caused by germline mutations in DNA mismatch repair (MMR) genes: **MLH1, MSH2, MSH6, and PMS2**. Women with Lynch syndrome have a **40 to 60 percent lifetime risk of endometrial cancer** (often preceding colorectal cancer), warranting annual endometrial screening from age 30 to 35. Clinically, key parameters encompass mismatch repair genes, 1, 2, 6.",
+   "say": "Lynch syndrome represents the predominant hereditary driver of endometrial cancer, caused by germline mutations in mismatch repair genes MLH1, MSH2, MSH6, or PMS2. Female mutation carriers face a lifetime risk of endometrial cancer between forty and sixty percent, which frequently presents as their sentinel cancer before colorectal tumors. Prophylactic total hysterectomy and bilateral salpingo-oophorectomy is recommended once childbearing is complete.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Germline mutation in MMR genes (MLH1, MSH2, MSH6, or PMS2)"
+     },
+     {
+      "id": "b",
+      "label": "Microsatellite instability and accumulation of frame-shift mutations"
+     },
+     {
+      "id": "c",
+      "label": "40 to 60% cumulative lifetime risk of endometrial carcinoma"
+     },
+     {
+      "id": "d",
+      "label": "Annual screening from 30-35 yrs; risk-reducing surgery at age 40-45"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **FIGO 2023 staging** incorporates molecular classification into four distinct prognostic subgroups (The Cancer Genome Atlas / ProMisE): **POLE ultramutated** (favorable prognosis even in high-grade tumours); **MMR-deficient (MMRd)** (intermediate prognosis, responsive to immunotherapy); **p53-abnormal (p53abn)** (poor prognosis, aggressive); and **no specific molecular profile (NSMP)**. Clinically, key parameters encompass p53 abnormal.",
+   "say": "The landmark 2023 FIGO staging integrates the four molecular subgroups established by the Cancer Genome Atlas into clinical staging. POLE exonuclease domain mutations identify tumors with an exceptionally favorable prognosis regardless of histologic grade. Mismatch repair deficient tumors carry an intermediate prognosis and respond remarkably well to checkpoint inhibitors. The p53-abnormal subgroup confers the poorest survival, mandating aggressive adjuvant therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Molecular Subgroup",
+     "Diagnostic Biomarker",
+     "Prognostic Significance & Treatment"
+    ],
+    "rows": [
+     [
+      "POLE ultramutated",
+      "POLE exonuclease pathogenic mutation",
+      "Exceptional survival; permits safe adjuvant de-escalation"
+     ],
+     [
+      "MMR-deficient (MMRd)",
+      "Loss of MLH1, MSH2, MSH6, or PMS2",
+      "Intermediate outcome; highly sensitive to pembrolizumab immunotherapy"
+     ],
+     [
+      "No specific profile (NSMP)",
+      "Normal p53, intact MMR, wild-type POLE",
+      "Intermediate outcome; guided by traditional hormonal and ER/PR markers"
+     ],
+     [
+      "p53 abnormal (p53abn)",
+      "Mutant p53 immunohistochemistry pattern",
+      "Aggressive biology, poor survival; mandates systemic chemoradiotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Under anatomical FIGO staging, **Stage I** is tumor confined to the uterine corpus: **Stage IA** involves <50% myometrial invasion, and **Stage IB** involves >=50% myometrial invasion. Under FIGO 2023, Stage I-II tumors that are **POLE ultramutated are downstaged to Stage IAm (POLEmut)**, whereas non-aggressive Stage I-II tumors that are **p53-abnormal are upstaged to Stage IIC (p53abn)**. Clinically, key parameters encompass 1.",
+   "say": "FIGO anatomical staging classifies tumors confined to the uterine body as stage one. Stage one A indicates less than fifty percent myometrial invasion, while stage one B denotes invasion of fifty percent or deeper. In FIGO 2023, molecular markers dynamically reclassify stage: presence of a POLE mutation downstages stage one and two tumors to stage one A-m, whereas p53 mutation upstages them to stage two C.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stage I Anatomical Invasion",
+     "points": [
+      "Stage IA: Confined to endometrium or < 50% myometrial invasion",
+      "Stage IB: Invasion >= 50% of the myometrial thickness",
+      "Stage II: Invasion into cervical stromal connective tissue",
+      "LVSI status strongly modifies real-world recurrence risk"
+     ]
+    },
+    "right": {
+     "title": "FIGO 2023 Molecular Modifiers",
+     "points": [
+      "Stage I-II POLEmut: Downstaged to Stage IAm (POLEmut)",
+      "Stage I-II p53abn with invasion: Upstaged to Stage IIC (p53abn)",
+      "MMRd & NSMP: Retain their baseline anatomical staging tier",
+      "Dictates adjuvant brachytherapy versus systemic chemo"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Standard primary surgical management for apparent early-stage endometrial cancer is **total laparoscopic hysterectomy with bilateral salpingo-oophorectomy (TLH/BSO)** and surgical staging. Minimally invasive laparoscopy demonstrates equivalent oncological disease-free and overall survival to laparotomy, with significantly reduced blood loss, operative complications, and hospital stay (LACE and LAP2 trials). Clinically, key parameters encompass total hysterectomy, sentinel lymph node.",
+   "say": "Total laparoscopic hysterectomy with bilateral salpingo-oophorectomy represents the undisputed surgical standard for apparent early endometrial cancer. Major prospective randomized clinical trials have conclusively proven that minimally invasive laparoscopic staging provides equivalent oncological recurrence-free and overall survival compared to open laparotomy, while dramatically reducing postoperative wound complications and hospital duration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Peritoneal cytology washing upon initial abdominal laparoscopic entry"
+     },
+     {
+      "id": "b",
+      "label": "Thorough peritoneal exploration of liver, omentum, and diaphragm"
+     },
+     {
+      "id": "c",
+      "label": "Sentinel lymph node mapping with cervical indocyanine green (ICG)"
+     },
+     {
+      "id": "d",
+      "label": "Total laparoscopic hysterectomy and bilateral salpingo-oophorectomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sentinel lymph node (SLN) mapping** using dual superficial and deep cervical stromal injection of **indocyanine green (ICG)** followed by near-infrared fluorescence imaging accurately detects pelvic nodal metastasis (sensitivity >95%, negative predictive value >99%), avoiding the severe lower-extremity lymphedema associated with complete systematic pelvic and para-aortic lymphadenectomy.",
+   "say": "Sentinel lymph node mapping has revolutionized the surgical staging of endometrial carcinoma. Intracervical stromal injection of indocyanine green tracks lymphatic channels directly to the first filtering sentinel nodes. Near-infrared fluorescence identifies sentinel nodes in the obturator, external, and internal iliac basins with greater than ninety-nine percent negative predictive accuracy, sparing patients the debilitating morbidity of complete lymphadenectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sentinel Lymph Node Mapping (ICG)",
+     "points": [
+      "Cervical injection of 1 mg/mL indocyanine green",
+      "Pathological ultrastaging with cytokeratin IHC detects micrometastases",
+      "Sensitivity > 95% with negative predictive value > 99%",
+      "Lymphedema rate reduced from 20% to under 2%"
+     ]
+    },
+    "right": {
+     "title": "Full Systematic Lymphadenectomy",
+     "points": [
+      "Complete skeletonization of external, internal, and common iliac vessels",
+      "Includes extensive para-aortic nodal dissection up to renal veins",
+      "High rate of vascular injury, lymphocele, and nerve palsy",
+      "Provides no therapeutic survival benefit in early-stage disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Adjuvant therapy is risk-stratified: low-risk Stage IA (grade 1-2, no LVSI) requires **no adjuvant therapy**; intermediate-risk Stage I (age >=60, deep invasion, grade 3, or substantial LVSI) receives **vaginal cuff brachytherapy (VBT)** to reduce local vault recurrence; while high-risk Stage III or p53-abnormal disease receives **external beam radiation therapy (EBRT)** combined with **carboplatin and paclitaxel** chemotherapy. Clinically, key parameters encompass vaginal brachytherapy, carboplatin-paclitaxel.",
+   "say": "Adjuvant management balances local vaginal control against distant systemic recurrence. Low-risk stage one A tumors require observation alone without radiation. For intermediate-risk tumors with deep invasion or lymphovascular space involvement, high-dose-rate vaginal brachytherapy provides excellent local cuff control with negligible bowel or bladder toxicity. Advanced stage three or p53-mutant cancers receive combined pelvic external beam radiotherapy and platinum-taxane chemotherapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-endometrial-cancer-fig1.webp",
+    "ar": 1.7778,
+    "caption": "FIGO 2023 anatomical staging and molecular risk stratification in endometrial cancer. Credit: StewardMD.",
+    "alt": "Comprehensive infographic displaying FIGO 2023 staging criteria, sentinel node algorithm, and adjuvant radiotherapy protocols."
+   }
+  }
+ ]
+}

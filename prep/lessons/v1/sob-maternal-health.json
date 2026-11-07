@@ -1,0 +1,264 @@
+{
+ "v": 1,
+ "module": "sob-maternal-health",
+ "title": "Maternal Mortality Ratio, Near-Miss Obstetric Events and Safe Motherhood Initiatives",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Williams Obstetrics 25e Ch 1 (Overview of Obstetrics)",
+  "Ten Teachers Gynaecology 21e",
+  "WHO Trends in Maternal Mortality and Evaluating Quality of Care (MNM Approach)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Maternal mortality ratio** (MMR) is defined as the number of maternal deaths during pregnancy or within 42 days of termination, from any cause related to or aggravated by pregnancy or its management (excluding accidental or incidental causes), expressed **per 100,000 live births**. Maternal mortality rate, by contrast, is calculated per 1000 women of reproductive age. Clinically, key parameters encompass 100000.",
+   "say": "Maternal mortality ratio is the premier epidemiological index of maternal health and obstetric care quality. It measures maternal deaths occurring during pregnancy, labour, or within forty-two days postpartum from direct or indirect obstetric causes, expressed per one hundred thousand live births. In contrast, maternal mortality rate measures deaths per one thousand women of reproductive age.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-maternal-health-fig1.webp",
+    "ar": 1.6393,
+    "caption": "Maternal mortality ratio calculations and epidemiological definitions. Credit: StewardMD.",
+    "alt": "Epidemiological chart illustrating maternal mortality definitions, time windows (42 days vs late maternal deaths), and ratio denominators."
+   }
+  },
+  {
+   "tx": "Globally and in India, the leading direct causes of maternal mortality are **obstetric haemorrhage** (primarily postpartum haemorrhage, accounting for 27 percent of global deaths), **hypertensive disorders of pregnancy** (preeclampsia and eclampsia, 14 percent), maternal sepsis (11 percent), unsafe abortion (8 percent), and obstructed labour with uterine rupture. Clinically, key parameters encompass direct obstetric deaths, obstetric complications, global proportion, 70, 75.",
+   "say": "Postpartum haemorrhage remains the single most common cause of maternal death globally, responsible for over a quarter of all maternal fatalities. Hypertensive disorders of pregnancy, notably severe preeclampsia and eclampsia, represent the second leading cause. Maternal sepsis, unsafe abortion complications, and obstructed labour constitute the remaining major direct contributors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Obstetric Cause of Death",
+     "Global Proportion of MMR",
+     "Primary Preventative Strategy"
+    ],
+    "rows": [
+     [
+      "Obstetric haemorrhage (PPH)",
+      "27 percent of maternal deaths",
+      "Active management of third stage of labour; tranexamic acid"
+     ],
+     [
+      "Hypertensive disorders / eclampsia",
+      "14 percent of maternal deaths",
+      "Routine antenatal BP screening; magnesium sulphate protocols"
+     ],
+     [
+      "Puerperal sepsis & infection",
+      "11 percent of maternal deaths",
+      "Aseptic delivery protocols; prophylactic perioperative antibiotics"
+     ],
+     [
+      "Unsafe abortion complications",
+      "8 percent of maternal deaths",
+      "Accessible comprehensive abortion care and post-abortion contraception"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Sustainable Development Goal (SDG) 3.1** targets a global maternal mortality ratio reduction to **less than 70 per 100,000 live births** by 2030, with no country having an MMR exceeding 140. India achieved significant progress under the National Health Mission, reducing MMR from 130 (2014-2016) to 97 per 100,000 live births (2018-2020). Clinically, key parameters encompass indirect obstetric deaths, pre-existing disease, cardiac disease.",
+   "say": "Sustainable Development Goal target three point one establishes an ambitious global commitment to decrease maternal mortality to under seventy deaths per one hundred thousand live births by the year twenty-thirty. India has made dramatic strides, successfully reducing its national ratio below one hundred per hundred thousand through institutional delivery drives and emergency obstetric networks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Baseline global MMR exceeding 220 per 100,000 live births"
+     },
+     {
+      "id": "b",
+      "label": "Implementation of Universal Health Coverage & skilled birth attendance"
+     },
+     {
+      "id": "c",
+      "label": "India achieves MMR of 97 per 100,000 live births (SRS 2018-20)"
+     },
+     {
+      "id": "d",
+      "label": "Global SDG 3.1 target: MMR < 70 per 100,000 live births by 2030"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **maternal near-miss** (MNM) event is defined by WHO as a woman who nearly died but survived a life-threatening complication during pregnancy, childbirth, or within 42 days of termination. Evaluating near-miss cases provides larger sample sizes than maternal deaths and directly identifies health system and critical care gaps without the stigma of mortality audits. Clinically, key parameters encompass organ dysfunction criteria, life-threatening condition.",
+   "say": "A maternal near miss represents a woman who survived a catastrophic life-threatening complication during pregnancy, delivery, or the puerperium. Because near-miss survivors share the exact same clinical pathways as deceased women, auditing near-miss cases yields rich critical care insights. Furthermore, near-miss events occur four times more often than maternal deaths, providing robust clinical audit data.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Maternal Near-Miss (MNM)",
+     "points": [
+      "Patient survives acute organ-system dysfunction",
+      "Patient can be interviewed regarding care delays",
+      "Occurs in 5 to 10 per 1000 deliveries",
+      "Identifies positive clinical rescue factors"
+     ]
+    },
+    "right": {
+     "title": "Maternal Death (MD)",
+     "points": [
+      "Fatal endpoint of severe obstetric complication",
+      "Subject to under-reporting and administrative blame",
+      "Rare event in tertiary centres, limiting sample size",
+      "Reflects total failure of the clinical rescue chain"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The WHO near-miss criteria mandate objective evidence of **organ system dysfunction**, stratified into cardiovascular (continuous vasoactive inotropic support, severe shock), respiratory (intubation, PaO2/FiO2 <200), renal (dialysis, oliguria <400 mL/day), hepatic (jaundice in preeclampsia), neurological (coma), and haematological (platelets <50,000/microL or transfusion >=5 PRBC units). Clinically, key parameters encompass Three Delays model, seeking care, facility care, 1, 2, 3.",
+   "say": "The World Health Organization near-miss tool utilizes standardized organ-system dysfunction markers rather than subjective disease names. Criteria include cardiovascular collapse requiring vasoactive inotropes, respiratory arrest requiring mechanical ventilation, acute renal failure requiring dialysis, severe thrombocytopenia below fifty thousand, or transfusion of five or more units of red cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System Category",
+     "WHO Near-Miss Dysfunction Marker",
+     "Clinical Indicator"
+    ],
+    "rows": [
+     [
+      "Cardiovascular system",
+      "Shock; continuous inotropes/vasopressors; CPR",
+      "Lactate > 5 mmol/L, severe acidosis pH < 7.1"
+     ],
+     [
+      "Respiratory system",
+      "Invasive mechanical ventilation; PaO2/FiO2 < 200",
+      "Acute pulmonary edema; cyanosis; severe tachypnoea"
+     ],
+     [
+      "Renal system",
+      "Acute dialysis for renal failure; oliguria < 400 mL/24h",
+      "Serum creatinine > 3.5 mg/dL (300 micromol/L)"
+     ],
+     [
+      "Haematological system",
+      "Platelets < 50,000 / microL; massive transfusion",
+      "Transfusion of >= 5 units packed red blood cells"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Three Delays Model** (Thaddeus and Maine) conceptualizes systemic barriers: **First Delay** (delay in deciding to seek care due to low health literacy, socioeconomic status, and gender dynamics); **Second Delay** (delay in reaching an appropriate health facility due to poor transport and geographical barriers); and **Third Delay** (delay in receiving prompt, quality emergency obstetric care at the facility). Clinically, key parameters encompass Janani Suraksha Yojana, JSSK, cash transfer.",
+   "say": "Thaddeus and Maine formulated the seminal Three Delays framework to explain the fatal pathway leading to maternal death. The first delay occurs in the home and community when the family hesitates to seek medical help. The second delay involves geographical distance, lack of roads, and ambulance deficits. The third delay occurs within the hospital doors, characterized by lack of drugs, blood products, or surgical staff.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "First Delay: Decision to seek healthcare at family/community level"
+     },
+     {
+      "id": "b",
+      "label": "Second Delay: Transportation and transit time to reach medical facility"
+     },
+     {
+      "id": "c",
+      "label": "Third Delay: Receiving adequate emergency obstetric care at the hospital"
+     },
+     {
+      "id": "d",
+      "label": "Preventable maternal death or irreversible organ system failure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Key Indian national health initiatives targeting maternal mortality include **Janani Suraksha Yojana** (JSY, conditional cash transfer promoting institutional delivery), **Janani Shishu Suraksha Karyakram** (JSSK, guaranteeing zero-expense delivery, caesarean sections, drugs, diagnostics, blood, and transport), and **SUMAN** (Surakshit Matritva Aashwasan, zero-tolerance for service denial). Clinically, key parameters encompass LaQshya, quality of care, labor room certification.",
+   "say": "India has transformed maternal health through comprehensive institutional frameworks. Janani Suraksha Yojana pioneered direct conditional cash transfers to eliminate financial barriers to institutional birth. Janani Shishu Suraksha Karyakram went further by guaranteeing entirely cost-free drugs, diagnostics, food, blood transfusions, and transport. SUMAN enforces zero tolerance for service denial across facilities.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Janani Suraksha Yojana (JSY)",
+     "points": [
+      "Conditional cash transfer under National Health Mission",
+      "Incentivizes institutional delivery among rural mothers",
+      "Accredited Social Health Activist (ASHA) linkage"
+     ]
+    },
+    "right": {
+     "title": "Janani Shishu Suraksha (JSSK)",
+     "points": [
+      "Guarantees completely free hospital delivery and LSCS",
+      "Free drugs, laboratory diagnostics, and blood products",
+      "Free food during stay and free bilateral ambulance transport"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **LaQshya initiative** (Labour Room Quality Improvement Initiative) certifies and standardizes public health labour rooms and maternity operation theatres. Through fast-track triage, respect for maternal autonomy (presence of a birth companion), respectful maternity care, adherence to **evidence-based clinical bundles**, and structural audits, LaQshya minimizes intrapartum and immediate postpartum complications. Clinically, key parameters encompass Sustainable Development Goal 3.1, target MMR, global goal, 3.1, 70, 100000, 2030.",
+   "say": "The LaQshya programme targets the quality of intrapartum care within delivery suites and obstetric theatres. Facilities undergo rigorous certification assessing infrastructure, clinical bundles, and respectful maternity care. Crucially, LaQshya mandates the presence of a chosen birth companion, immediate skin-to-skin contact, respectful non-abusive care, and rapid resuscitation triage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "LaQshya Focus Area",
+     "Clinical Standard Metric",
+     "Targeted Quality Outcome"
+    ],
+    "rows": [
+     [
+      "Triage & fast-tracking",
+      "Triaging within 5 minutes of arrival",
+      "Zero delay in managing acute eclampsia or haemorrhage"
+     ],
+     [
+      "Respectful maternity care",
+      "Birth companion of choice permitted",
+      "Reduces maternal anxiety, pain, and unnecessary interventions"
+     ],
+     [
+      "Clinical bundles",
+      "Adherence to AMTSL and partograph use",
+      "Reduces postpartum haemorrhage and prolonged labour trauma"
+     ],
+     [
+      "Infection control",
+      "Standardised sterilization and waste disposal",
+      "Dramatically decreases puerperal and neonatal sepsis rates"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "sob-fibroid",
+ "title": "Uterine Leiomyomas: FIGO Classification, Medical Therapy, Myomectomy and Uterine Artery Embolisation",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Ten Teachers Gynaecology 21e Ch 5 (Benign Diseases of the Uterus)",
+  "Williams Obstetrics 25e",
+  "FIGO Leiomyoma Subclassification System"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The **FIGO leiomyoma subclassification system** categorizes fibroids from Type 0 to Type 8: **Submucosal fibroids** comprise Type 0 (100% intracavitary pedunculated), Type 1 (<50% intramural extension), and Type 2 (>=50% intramural); **Other fibroids** comprise Type 3 (100% intramural abutting endometrium), Type 4 (purely intramural), Type 5 (subserosal >=50% intramural), Type 6 (subserosal <50% intramural), Type 7 (subserosal pedunculated), and Type 8 (other/cervical/parasitic). Clinically, key parameters encompass FIGO classification, Type 0 to 8.",
+   "say": "FIGO developed an objective eight-tier classification system for uterine fibroids based on their spatial relationship to the endometrium and serosa. Submucosal myomas encompass types zero, one, and two, which distort the uterine cavity and provoke heavy menstrual bleeding. Purely intramural myomas are type four. Subserosal myomas include types five, six, and seven, while type eight encompasses cervical and parasitic locations.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-fibroid-s1.webp",
+    "ar": 1.3333,
+    "caption": "FIGO subclassification of uterine leiomyomas from Type 0 to Type 8. Credit: StewardMD.",
+    "alt": "Anatomical cross-section of the uterus illustrating the nine FIGO leiomyoma locations relative to endometrial cavity and serosal surface."
+   }
+  },
+  {
+   "tx": "Fibroids are monoclonal smooth muscle tumours dependent on ovarian **estrogen and progesterone**. Somatic mutations in the **MED12 gene** (mediator complex subunit 12) occur in approximately 70 percent of uterine leiomyomas, driving abnormal extracellular matrix synthesis, collagen deposition, and localized vascular dysregulation. Clinically, key parameters encompass MED12 mutation, estrogen-dependent, monoclonal neoplasm.",
+   "say": "Uterine leiomyomas are benign monoclonal tumours arising from individual myometrial smooth muscle progenitor cells. Somatic mutations in the mediator complex subunit twelve gene, MED12, are identified in up to seventy percent of tumours. Both estrogen and progesterone stimulate fibroid growth, with progesterone and its receptors playing an indispensable role in promoting proliferation and cellular survival.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Molecular / Hormonal Driver",
+     "Biological Function",
+     "Targeted Therapeutic Approach"
+    ],
+    "rows": [
+     [
+      "MED12 somatic mutation",
+      "Present in 70% of leiomyomas; drives cellular clonal proliferation",
+      "Under investigation for gene-targeted therapy"
+     ],
+     [
+      "Estrogen & ER-alpha",
+      "Upregulates progesterone receptors and local growth factors (EGF, IGF)",
+      "Aromatase inhibitors and GnRH receptor antagonists"
+     ],
+     [
+      "Progesterone & PR-A/PR-B",
+      "Promotes cell proliferation and downregulates apoptotic proteins",
+      "Selective progesterone receptor modulators (SPRMs)"
+     ],
+     [
+      "Extracellular matrix (ECM)",
+      "Excessive collagen deposition creates dense fibroid pseudocapsule",
+      "Collagenase injections under trial; surgical enucleation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Red degeneration (carneous degeneration)** is an acute aseptic necrobiosis complicating 2 to 5 percent of fibroids during the **second trimester of pregnancy**, caused by rapid tumor expansion outgrowing blood supply with subsequent **venous thrombosis and hemorrhagic infarction**, presenting with focal pain, low-grade fever, and leukocytosis, managed conservatively. Clinically, key parameters encompass pregnancy complication.",
+   "say": "Red or carneous degeneration is a classic obstetric complication occurring most frequently in the second trimester of pregnancy. As pregnancy hormones drive rapid fibroid expansion, the tumor outgrows its vascular supply. Venous thrombosis precipitates acute hemorrhagic infarction, manifesting as severe localized uterine tenderness, fever, and leukocytosis. Treatment is strictly conservative with analgesia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Red (Carneous) Degeneration",
+     "points": [
+      "Occurs in second trimester of pregnancy and puerperium",
+      "Venous thrombosis and acute hemorrhagic tissue infarction",
+      "Presents with severe focal pain, localized tenderness, mild fever",
+      "Self-limiting within 48 to 72 hours; managed with analgesics"
+     ]
+    },
+    "right": {
+     "title": "Hyaline & Cystic Degeneration",
+     "points": [
+      "Most common chronic degeneration (> 60% of cases)",
+      "Homogeneous ground-glass acellular hyaline connective tissue",
+      "Slow, chronic, asymptomatic process without acute pain",
+      "Diagnosed as incidental finding on sonography or pathology"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Preoperative medical therapy to reduce fibroid volume (by 40-50%) and induce amenorrhoea includes **GnRH agonists** (depot leuprolide 3.75 mg monthly, inducing profound hypoestrogenism) and modern oral **GnRH antagonists with add-back therapy** (**relugolix** 40 mg, estradiol 1 mg, norethindrone 0.5 mg daily), avoiding bone mineral density loss.",
+   "say": "Medical therapies provide rapid symptom control and reduce fibroid volume prior to surgical myomectomy. Monthly depot GnRH agonists like leuprolide induce temporary medical menopause, shrinking tumor volume by half and allowing preoperative correction of anaemia. Modern oral once-daily GnRH antagonists co-formulated with low-dose estrogen and progestin add-back therapy maintain bone health while effectively suppressing bleeding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Medical Agent",
+     "Mechanism of Action",
+     "Key Clinical Advantage / Precaution"
+    ],
+    "rows": [
+     [
+      "GnRH agonist (Leuprolide)",
+      "Downregulates pituitary GnRH receptors, suppressing LH/FSH",
+      "Causes initial flare; limit to 3-6 months due to bone loss"
+     ],
+     [
+      "Oral GnRH antagonist (Relugolix)",
+      "Immediate competitive blockade of pituitary GnRH receptors",
+      "Combined with add-back therapy to preserve bone mineral density"
+     ],
+     [
+      "Ulipristal acetate (SPRM)",
+      "Selective progesterone receptor modulator (5-10 mg daily)",
+      "Rapid amenorrhoea and fibroid shrinkage; requires liver monitoring"
+     ],
+     [
+      "LNG-IUS 52 mg",
+      "Local endometrial decidualization and glandular atrophy",
+      "Reduces bleeding significantly; does not reduce fibroid size"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hysteroscopic myomectomy** is the definitive minimally invasive procedure of choice for symptomatic **FIGO Type 0 and Type 1 submucosal fibroids** measuring up to 4 to 5 cm in diameter. Utilizing a resectoscope with loop electrosurgical electrode under continuous normal saline distension, the intracavitary component is resected into chips. Clinically, key parameters encompass Type 0 and 1.",
+   "say": "Hysteroscopic myomectomy provides definitive fertility-preserving excision for intracavitary myomas. Ideal candidates are women with symptomatic type zero or type one submucosal fibroids measuring up to four or five centimetres. Working through a rigid operative resectoscope under continuous isotonic saline distension, the surgeon systematically slices the myoma flush with the surrounding myometrial wall.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Preoperative assessment of cavity depth and mural extension on TVS/MRI"
+     },
+     {
+      "id": "b",
+      "label": "Cervical priming with misoprostol; rigid hysteroscopic insertion"
+     },
+     {
+      "id": "c",
+      "label": "Continuous bipolar saline distension with automated deficit tracking"
+     },
+     {
+      "id": "d",
+      "label": "Resectoscopic loop shaving of Type 0-1 fibroid flush to myometrium"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Laparoscopic or abdominal **myomectomy** requires meticulous enucleation of the fibroid from its pseudocapsule, followed by **multilayer closure of the myometrial defect** using absorbable sutures. Complete obliteration of dead space and avoidance of electrocautery tissue necrosis are paramount to minimize **uterine rupture risk in subsequent pregnancies**.",
+   "say": "Surgical myomectomy enucleates fibroids while reconstructing uterine anatomy for future fertility. The surgeon incises over the most prominent bulge, identifying the surgical plane between the fibroid and its surrounding pseudocapsule. The deep myometrial defect must be closed in multiple anatomical layers with robust absorbable sutures to prevent hematoma formation and minimize the risk of uterine rupture in subsequent labour.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myomectomy Surgical Technique",
+     "points": [
+      "Infiltration of vasopressin (20 IU in 100 mL saline) reduces blood loss",
+      "Dissection strictly within avascular fibroid pseudocapsule plane",
+      "Meticulous multilayer closure of deep myometrial defect",
+      "Barbed absorbable sutures maintain continuous baseline tension"
+     ]
+    },
+    "right": {
+     "title": "Subsequent Obstetric Implications",
+     "points": [
+      "Post-myomectomy uterine rupture risk is approximately 0.5 to 1.0%",
+      "If uterine cavity was breached, elective caesarean section is mandated",
+      "Recommend postponing conception for 3 to 6 months postoperatively",
+      "Close fetal and scar surveillance in the third trimester"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Uterine artery embolisation** (UAE) involves bilateral femoral catheterization and embolisation of uterine arteries using **polyvinyl alcohol (PVA) particles (500-700 micrometers)**. UAE achieves a **50 to 60 percent fibroid volume reduction** and relieves heavy bleeding in 85 to 90 percent, but carries risks of **post-embolisation syndrome** (pain, fever, leukocytosis) and ovarian failure.",
+   "say": "Uterine artery embolisation provides a minimally invasive catheter-based alternative for women wishing to avoid hysterectomy. Interventional radiologists selectively inject polyvinyl alcohol particles into bilateral uterine vessels, causing ischemic necrosis and fifty percent volume shrinkage of fibroids. Patients must be counselled regarding post-embolisation syndrome and an increased risk of premature ovarian insufficiency.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Common femoral arterial access and pelvic angiographic roadmap"
+     },
+     {
+      "id": "b",
+      "label": "Selective catheterization of bilateral uterine arteries"
+     },
+     {
+      "id": "c",
+      "label": "Slow injection of 500-700 micron polyvinyl alcohol particles to stasis"
+     },
+     {
+      "id": "d",
+      "label": "Ischemic infarction and hyaline shrinkage of fibroid nodules"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Uterine leiomyosarcoma** is a rare malignant differential (<0.5 percent of presumed fibroids) that does not arise from malignant degeneration of benign leiomyomas. Diagnostic histology requires the Stanford criteria: **marked cytologic atypia**, diffuse **tumor cell necrosis**, and high mitotic activity (**>=10 mitoses per 10 high-power fields**). Clinically, key parameters encompass mitotic index.",
+   "say": "Uterine leiomyosarcoma is an aggressive smooth muscle malignancy that arises de novo rather than transforming from pre-existing benign fibroids. It occurs in fewer than one in five hundred women undergoing surgery for presumed benign myomas. Histopathological diagnosis rests on the Stanford criteria: marked cytologic atypia, coagulative tumor cell necrosis, and a mitotic index of ten or more mitoses per ten high-power fields.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-fibroid-fig1.webp",
+    "ar": 1.7778,
+    "caption": "Diagnostic imaging and anatomical planes of uterine fibroids. Credit: StewardMD.",
+    "alt": "Ultrasound and MRI images displaying intramural, subserosal, and submucosal uterine leiomyomas and their distinguishing features."
+   }
+  }
+ ]
+}
