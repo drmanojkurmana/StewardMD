@@ -6,26 +6,26 @@
   "minutes": 10,
   "steps": [
     {
-      "tx": "Gonadal toxicity (damage to the testes or ovaries) from several drugs given together is **additive**, so each agent adds its own share of damage. The **cumulative dose** of each drug matters more than its dose rate. Combination regimens show no evidence of **synergy**, so the risk can be estimated by adding up the individual doses.",
-      "say": "Gonadal toxicity, meaning damage to the testes or ovaries, from several drugs given together is additive. Each agent has its own share of damage. The cumulative dose of each drug matters more than its dose rate. Combination regimens show no evidence of synergy, so the risk can be estimated by adding up the individual doses."
-    },
-    {
-      "tx": "**Cyclophosphamide** alone needs 19 grams per square metre (g/m2) to cause lasting sterility in half of men. With a median **doxorubicin** dose of 450 milligrams per square metre, that falls to 15 grams per square metre. Clinicians also use a cyclophosphamide equivalent dose (CED), a single total that converts each alkylating agent into cyclophosphamide units. Azoospermia (no sperm in the semen) is uncommon when that total stays below 4000 mg/m2.",
-      "say": "Cyclophosphamide alone needs about nineteen grams per square metre to cause lasting sterility in half of men. With a median doxorubicin dose of four hundred and fifty milligrams per square metre, that falls to fifteen grams per square metre. Clinicians also use a cyclophosphamide equivalent dose, a single total that converts each alkylating agent into cyclophosphamide units. Azoospermia is uncommon when that total stays below four thousand milligrams per square metre.",
+      "tx": "Gonadal toxicity (damage to the testes or ovaries) from several drugs given together is **additive**, so each agent is responsible for its own share of damage. The **cumulative dose** of each drug matters more than its dose rate. Combination regimens show no evidence of **synergy**, so their risk can be estimated by adding individual doses. **Cyclophosphamide** alone needs 19 grams per square metre (g/m2) for lasting sterility in half of men. A median **doxorubicin** dose of 450 milligrams per square metre lowers that to 15 grams per square metre.",
+      "say": "Gonadal toxicity, meaning damage to the testes or ovaries, from several drugs given together is additive. Each agent is responsible for its own share of the damage. The cumulative dose of each drug matters more than its dose rate. Combination regimens show no evidence of synergy, so the risk can be estimated by adding individual doses. Cyclophosphamide alone needs about nineteen grams per square metre to cause lasting sterility in half of men. With a median doxorubicin dose of four hundred and fifty milligrams per square metre, that falls to fifteen grams per square metre.",
       "vis": {
         "kind": "table",
         "cols": [
           "Setting",
-          "Cyclophosphamide dose for lasting sterility in half of men"
+          "Result"
         ],
         "rows": [
           [
             "Cyclophosphamide alone",
-            "19 grams per square metre"
+            "19 grams per square metre for lasting sterility in half of men"
           ],
           [
             "With median doxorubicin 450 milligrams per square metre",
             "15 grams per square metre"
+          ],
+          [
+            "Cyclophosphamide equivalent dose (CED), a single total converting each alkylating agent into cyclophosphamide units",
+            "Azoospermia (no sperm in the semen) is uncommon below 4000 milligrams per square metre"
           ]
         ]
       }
@@ -86,8 +86,8 @@
       }
     },
     {
-      "tx": "**Spermatogonia**, the dividing stem cells of sperm production, are destroyed by many cytotoxic drugs (cell-killing cancer drugs), which can leave the semen without sperm. **Leydig cells**, which make testosterone, are largely spared by most chemotherapy regimens, so puberty timing and testosterone levels usually stay normal.",
-      "say": "Spermatogonia are the dividing stem cells of sperm production, and many cytotoxic drugs, meaning cell-killing cancer drugs, destroy them. Losing them can leave the semen without sperm. Leydig cells make testosterone, and most chemotherapy regimens largely spare them. Puberty timing and testosterone levels therefore usually stay normal.",
+      "tx": "**Spermatogonia**, the dividing stem cells of sperm production, are destroyed by many cytotoxic drugs (cell-killing cancer drugs), which can leave the semen without sperm. **Leydig cells**, which make testosterone, are largely spared by most chemotherapy regimens, so puberty timing and testosterone levels usually stay normal. The exception is **busulfan** plus **cyclophosphamide** before a stem cell transplant, which delays puberty in about 30% of boys. Radiation has to exceed 18 grays (Gy) before testicular androgen output is affected, and major damage needs more than 30 Gy.",
+      "say": "Spermatogonia are the dividing stem cells of sperm production, and many cytotoxic drugs, meaning cell-killing cancer drugs, destroy them. Losing them can leave the semen without sperm. Leydig cells make testosterone, and most chemotherapy regimens largely spare them. Puberty timing and testosterone levels therefore usually stay normal. The exception is busulfan plus cyclophosphamide given before a stem cell transplant, which delays puberty in about thirty percent of boys. Radiation has to exceed eighteen grays before testicular androgen output is affected. Major damage needs more than thirty grays.",
       "vis": {
         "kind": "flow",
         "nodes": [
@@ -132,31 +132,6 @@
             "c",
             "e",
             "pituitary compensates"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The exception is **busulfan** plus **cyclophosphamide** given before a stem cell transplant, which delays puberty in about 30% of boys. Radiation has to exceed 18 grays (Gy) before testicular androgen output is affected, and major damage needs more than 30 Gy.",
-      "say": "The exception is busulfan plus cyclophosphamide given before a stem cell transplant, which delays puberty in about thirty percent of boys. Radiation has to exceed eighteen grays before testicular androgen output is affected. Major damage needs more than thirty grays.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Exposure",
-          "Threshold"
-        ],
-        "rows": [
-          [
-            "Testicular radiation affecting androgen output",
-            "More than 18 Gy"
-          ],
-          [
-            "Major damage to testicular androgen output",
-            "More than 30 Gy"
-          ],
-          [
-            "Busulfan plus cyclophosphamide before transplant",
-            "Puberty delayed in about 30% of boys"
           ]
         ]
       }
