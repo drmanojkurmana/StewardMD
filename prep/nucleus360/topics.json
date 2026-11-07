@@ -123,7 +123,8 @@
   "ss-clinical-pharmacology": "Clinical Pharmacology",
   "ss-geriatric-mental-health": "Geriatric Mental Health",
   "ss-child-adolescent-psychiatry": "Child and Adolescent Psychiatry",
-  "ss-surgical-gastroenterology": "Surgical Gastroenterology"
+  "ss-surgical-gastroenterology": "Surgical Gastroenterology",
+  "ss-obg": "Obstetrics and Gynaecology (SS)"
  },
  "topics": [
   {
@@ -3626,7 +3627,8 @@
    "title": "Reproductive endocrinology",
    "subject": "obstetrics-gynaecology",
    "subjects": [
-    "obstetrics-gynaecology"
+    "obstetrics-gynaecology",
+    "ss-obg"
    ],
    "modules": [
     [
@@ -3644,6 +3646,22 @@
     [
      "obstetrics-gynaecology",
      "obg-puberty-menopause"
+    ],
+    [
+     "ss-obg",
+     "sob-obstetrics-fetal"
+    ],
+    [
+     "ss-obg",
+     "sob-labour-delivery"
+    ],
+    [
+     "ss-obg",
+     "sob-gyn-endocrinology-fertility"
+    ],
+    [
+     "ss-obg",
+     "sob-benign-gyn-oncology"
     ]
    ],
    "score": 26.44,
@@ -251393,6 +251411,2430 @@
      "title": "Images",
      "tier": "extra",
      "source": "kb:ischemic_stroke#diagrams"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "extra"
+  },
+  {
+   "id": "placenta-fetal-development-and-fetal-circulation",
+   "title": "Placenta, Fetal Development and Fetal Circulation",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-placenta-fetus"
+    ],
+    [
+     "ss-obg",
+     "sob-maternal-physiology"
+    ],
+    [
+     "ss-obg",
+     "sob-diagnosis-antenatal-care"
+    ],
+    [
+     "ss-obg",
+     "sob-prenatal-screening"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-diagnosis-antenatal-care",
+    "title": "Diagnosis of pregnancy and antenatal care schedules"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-diagnosis-antenatal-care"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-diagnosis-antenatal-care"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-diagnosis-antenatal-care"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "core"
+  },
+  {
+   "id": "miscarriage-medical-termination-of-pregnancy-and-mtp-act-202",
+   "title": "Miscarriage, Medical Termination of Pregnancy and MTP Act 2021",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-abortion"
+    ],
+    [
+     "ss-obg",
+     "sob-ectopic"
+    ],
+    [
+     "ss-obg",
+     "sob-gtd"
+    ],
+    [
+     "ss-obg",
+     "sob-hypertensive-disorders"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-gtd",
+    "title": "Gestational trophoblastic disease: hydatidiform mole, choriocarcinoma and WHO scoring"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-gtd"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-gtd"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-gtd"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "core"
+  },
+  {
+   "id": "medical-disorders-in-pregnancy-thyroid-liver-aflp-icp-renal-",
+   "title": "Medical Disorders in Pregnancy: Thyroid, Liver (AFLP, ICP), Renal and Epilepsy",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-other-medical"
+    ],
+    [
+     "ss-obg",
+     "sob-normal-labour"
+    ],
+    [
+     "ss-obg",
+     "sob-abnormal-labour"
+    ],
+    [
+     "ss-obg",
+     "sob-induction"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-normal-labour",
+    "title": "Normal labour: stages, partograph and third stage"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-normal-labour"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-normal-labour"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-normal-labour"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "core"
+  },
+  {
+   "id": "obstetrics-and-gynaecology-high-yield-mixed-review",
+   "title": "Obstetrics and Gynaecology High-Yield Mixed Review",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-mixed"
+    ],
+    [
+     "ss-obg",
+     "sob-anatomy-development"
+    ],
+    [
+     "ss-obg",
+     "sob-menstrual-physiology"
+    ],
+    [
+     "ss-obg",
+     "sob-amenorrhoea"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "ana-mixed",
+    "title": "Mixed practice anatomy: high-yield rapid review"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:ana-mixed"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:ana-mixed"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:ana-mixed"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "polycystic-ovary-syndrome-rotterdam-criteria-hyperandrogenis",
+   "title": "Polycystic Ovary Syndrome: Rotterdam Criteria, Hyperandrogenism and Metabolic Management",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-pcos-hirsutism"
+    ],
+    [
+     "ss-obg",
+     "sob-aub"
+    ],
+    [
+     "ss-obg",
+     "sob-puberty-menopause"
+    ],
+    [
+     "ss-obg",
+     "sob-infertility"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-aub",
+    "title": "Abnormal uterine bleeding: FIGO PALM-COEIN classification and management"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-aub"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-aub"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-aub"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "contraceptive-modalities-mec-criteria-hormonal-iucd-emergenc",
+   "title": "Contraceptive Modalities: MEC Criteria, Hormonal, IUCD, Emergency and Surgical Sterilisation",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-contraception"
+    ],
+    [
+     "ss-obg",
+     "sob-vaginitis-sti"
+    ],
+    [
+     "ss-obg",
+     "sob-pid-genital-tb"
+    ],
+    [
+     "ss-obg",
+     "sob-fibroid"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-fibroid",
+    "title": "Uterine leiomyomas: FIGO classification, medical management, myomectomy and adenomyosis"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-fibroid"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-fibroid"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-fibroid"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "endometriosis-and-adenomyosis-pathogenesis-deep-infiltrating",
+   "title": "Endometriosis and Adenomyosis: Pathogenesis, Deep Infiltrating Endometriosis and Stepped Care",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-endometriosis-adenomyosis"
+    ],
+    [
+     "ss-obg",
+     "sob-benign-ovarian"
+    ],
+    [
+     "ss-obg",
+     "sob-prolapse-urogynaecology"
+    ],
+    [
+     "ss-obg",
+     "sob-gyn-procedures"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-benign-ovarian",
+    "title": "Benign ovarian masses, mature cystic teratoma and adnexal torsion emergency"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-benign-ovarian"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-benign-ovarian"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-benign-ovarian"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "cervical-cancer-screening-colposcopy-bethesda-system-figo-st",
+   "title": "Cervical Cancer Screening, Colposcopy, Bethesda System, FIGO Staging and Radical Hysterectomy",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-cervical-cancer"
+    ],
+    [
+     "ss-obg",
+     "sob-endometrial-cancer"
+    ],
+    [
+     "ss-obg",
+     "sob-ovarian-cancer"
+    ],
+    [
+     "ss-obg",
+     "sob-vulval-vaginal"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "pat-ovary",
+    "title": "Ovarian tumours: surface epithelial, germ cell and sex cord"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:pat-ovary"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:pat-ovary"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:pat-ovary"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "obstetric-pelvis-diameters-planes-and-fetal-skull-landmarks",
+   "title": "Obstetric Pelvis, Diameters, Planes and Fetal Skull Landmarks",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-pelvis-fetal-skull"
+    ],
+    [
+     "ss-obg",
+     "sob-amniotic-fluid"
+    ],
+    [
+     "ss-obg",
+     "sob-teratogens"
+    ],
+    [
+     "ss-obg",
+     "sob-rh-isoimmunisation"
+    ]
+   ],
+   "score": 6.75,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-amniotic-fluid",
+    "title": "Disorders of amniotic fluid: oligo, polyhydramnios and amnioinfusion"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-amniotic-fluid"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-amniotic-fluid"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-amniotic-fluid"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "extra"
+  },
+  {
+   "id": "antepartum-haemorrhage-placenta-praevia-abruptio-placentae-a",
+   "title": "Antepartum Haemorrhage: Placenta Praevia, Abruptio Placentae and Vasa Praevia",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-aph"
+    ],
+    [
+     "ss-obg",
+     "sob-preterm-prom-postterm"
+    ],
+    [
+     "ss-obg",
+     "sob-fetal-growth-surveillance"
+    ],
+    [
+     "ss-obg",
+     "sob-multiple-pregnancy"
+    ]
+   ],
+   "score": 6.75,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-aph",
+    "title": "Antepartum haemorrhage: placenta previa, abruptio placentae and vasa previa"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-aph"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-aph"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-aph"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "extra"
+  },
+  {
+   "id": "anaemia-in-pregnancy-iron-deficiency-megaloblastic-and-haemo",
+   "title": "Anaemia in Pregnancy: Iron Deficiency, Megaloblastic and Haemoglobinopathies",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-anaemia-pregnancy"
+    ],
+    [
+     "ss-obg",
+     "sob-diabetes-pregnancy"
+    ],
+    [
+     "ss-obg",
+     "sob-heart-disease-pregnancy"
+    ],
+    [
+     "ss-obg",
+     "sob-infections-pregnancy"
+    ]
+   ],
+   "score": 6.75,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-infections-pregnancy",
+    "title": "Infections in pregnancy: TORCH, UTI, HIV, hepatitis and malaria"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-infections-pregnancy"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-infections-pregnancy"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-infections-pregnancy"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "extra"
+  },
+  {
+   "id": "postpartum-haemorrhage-atony-balloon-tamponade-compression-s",
+   "title": "Postpartum Haemorrhage: Atony, Balloon Tamponade, Compression Sutures, Embolisation and Transfusion",
+   "subject": "ss-obg",
+   "subjects": [
+    "ss-obg"
+   ],
+   "modules": [
+    [
+     "ss-obg",
+     "sob-pph"
+    ],
+    [
+     "ss-obg",
+     "sob-operative-obstetrics"
+    ],
+    [
+     "ss-obg",
+     "sob-puerperium"
+    ],
+    [
+     "ss-obg",
+     "sob-maternal-health"
+    ]
+   ],
+   "score": 6.75,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "obg-maternal-health",
+    "title": "Maternal mortality and safe motherhood programmes"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:obg-maternal-health"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:obg-maternal-health"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:obg-maternal-health"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
     }
    ],
    "match": {
