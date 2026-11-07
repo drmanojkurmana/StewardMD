@@ -1,0 +1,287 @@
+{
+  "v": 1,
+  "module": "sgo-vaginal-cancer-vain",
+  "title": "Vaginal Intraepithelial Neoplasia & Primary Vaginal Cancer",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 10 (Vaginal Cancer)",
+    "FIGO Cancer Report: Cancer of the vagina (2018/2021 update)",
+    "NCCN Clinical Practice Guidelines in Oncology: Vaginal Cancer (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Primary vaginal carcinoma is the rarest malignant neoplasm of the female reproductive tract, representing only one to two percent of gynecologic malignancies. Strict diagnostic criteria require the primary epicenter to be within the vagina without involvement of the cervix or vulva.",
+      "tx": "Primary **vaginal carcinoma** represents only 1% to 2% of gynecologic malignancies. By strict FIGO definition, a malignancy is classified as primary vaginal cancer only if the **cervix is uninvolved** (otherwise staged as cervical cancer) and the **vulva is uninvolved** (otherwise staged as vulvar cancer).  Evidence-based practice integrates primary vaginal cancer rare 1-2%, FIGO classification rule, cervical extension is cervical cancer, vulvar extension is vulvar cancer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "biop",
+            "label": "Document invasive carcinoma on vaginal biopsy"
+          },
+          {
+            "id": "cx_check",
+            "label": "Examine cervix: if involved, stage as cervical cancer"
+          },
+          {
+            "id": "vx_check",
+            "label": "Examine vulva: if involved, stage as vulvar cancer"
+          },
+          {
+            "id": "hist_hx",
+            "label": "Verify patient has no cervical cancer history within 5 years"
+          },
+          {
+            "id": "vagina_stg",
+            "label": "Confirm primary vaginal carcinoma and assign FIGO stage"
+          }
+        ],
+        "edges": [
+          [
+            "biop",
+            "cx_check"
+          ],
+          [
+            "cx_check",
+            "vx_check"
+          ],
+          [
+            "vx_check",
+            "hist_hx"
+          ],
+          [
+            "hist_hx",
+            "vagina_stg"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Squamous cell carcinoma accounts for eighty to ninety percent of primary vaginal malignancies and is strongly linked to persistent infection with high-risk human papillomavirus genotypes. Neoplasms most commonly arise in the upper third of the posterior vaginal wall.",
+      "tx": "**Squamous cell carcinoma** constitutes 80% to 90% of primary vaginal cancers, strongly driven by persistent **high-risk HPV** (predominantly HPV 16). The most common anatomical location is the **upper third of the posterior vaginal wall**, presenting with postmenopausal bleeding or watery vaginal discharge.  Evidence-based practice integrates VaIN 3, post-hysterectomy vaginal vault, cervical neoplasia history. Key numerical parameters include 3, 70.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Squamous Cell Carcinoma",
+          "points": [
+            "Represents 80% to 90% of all vaginal cancers",
+            "Driven by high-risk HPV persistent infection",
+            "Predominantly affects upper posterior vaginal wall"
+          ]
+        },
+        "right": {
+          "title": "Clear Cell Adenocarcinoma",
+          "points": [
+            "Historically associated with in utero DES exposure",
+            "Peaks in young women (median age 19 years)",
+            "Predominantly arises in anterior vaginal wall adenosis"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Vaginal intraepithelial neoplasia represents the premalignant precursor of invasive squamous vaginal cancer. High-grade VaIN 2 and 3 exhibit full-thickness epithelial cellular atypia, elevated p16INK4a expression, and require directed excisional or ablative intervention to prevent invasion.",
+      "tx": "**Vaginal intraepithelial neoplasia** (VaIN) is staged histologically: VaIN 1 involves the lower basal third, while **high-grade VaIN** (VaIN 2 and 3) involves the upper two-thirds or full epithelial thickness, exhibiting diffuse **p16INK4a** immunohistochemical positivity and requiring definitive treatment.  Evidence-based practice integrates topical imiquimod 5%, topical 5-FU, CO2 laser ablation >=1 mm depth.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "VaIN Grade",
+          "Epithelial Thickness Involved",
+          "p16INK4a Expression",
+          "Recommended Clinical Management"
+        ],
+        "rows": [
+          [
+            "VaIN 1",
+            "Lower one-third of epithelial thickness",
+            "Patchy or focal basal positivity",
+            "Expectant observation with colposcopy at 12 months"
+          ],
+          [
+            "VaIN 2",
+            "Lower two-thirds of epithelium",
+            "Diffuse strong block positivity",
+            "Topical imiquimod, 5-FU, or laser ablation"
+          ],
+          [
+            "VaIN 3",
+            "Full-thickness dysplasia (in situ)",
+            "Diffuse strong block positivity",
+            "Surgical excision, CO2 laser ablation, or vaginectomy"
+          ],
+          [
+            "Vaginal cuff VaIN 3",
+            "Involvement of vaginal surgical apex",
+            "Diffuse strong block positivity",
+            "Partial upper vaginectomy to rule out occult invasion"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Management options for high-grade VaIN encompass topical pharmacotherapy and surgical techniques tailored to disease distribution. Topical imiquimod or fluorouracil cream is favored for multifocal lesions, whereas carbon dioxide laser ablation or partial vaginectomy manages focal unifocal disease.",
+      "tx": "Therapy for high-grade VaIN is individualized: **topical 5-fluorouracil** (5-FU) or **imiquimod 5% cream** is utilized for multifocal flat lesions, whereas **CO2 laser ablation** (depth 1 to 1.5 mm) or **partial vaginectomy** is preferred for focal disease or vaginal apex involvement post-hysterectomy.  Evidence-based practice integrates Stage I limited to vaginal wall, Stage II subvaginal, Stage III pelvic sidewall, Stage IVA bladder/rectum, Stage IVB distant. Key numerical parameters include 4.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Modality",
+          "Mechanism / Technique",
+          "Clinical Setting",
+          "Potential Complications"
+        ],
+        "rows": [
+          [
+            "Topical imiquimod 5%",
+            "Toll-like receptor 7 agonist / immune activator",
+            "Multifocal non-cuff VaIN 2/3",
+            "Severe local burning, vulvar inflammation"
+          ],
+          [
+            "Topical 5-fluorouracil",
+            "Antimetabolite thymidylate synthase inhibitor",
+            "Multifocal high-grade VaIN",
+            "Vaginal mucosal ulceration, stenosis"
+          ],
+          [
+            "CO2 laser vaporization",
+            "Photo-thermal ablation to 1.5 mm depth",
+            "Focal disease after excluding invasion",
+            "Bleeding, vaginal scarring and synechiae"
+          ],
+          [
+            "Upper partial vaginectomy",
+            "Surgical resection of apex / cuff scars",
+            "Vaginal vault post-hysterectomy",
+            "Bladder injury, shortened vagina"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The FIGO staging system for primary vaginal cancer is based on anatomical depth and spread. Stage one is strictly limited to the vaginal mucosa, stage two infiltrates paravaginal tissues sparing the pelvic sidewall, stage three extends to the sidewall, and stage four invades adjacent viscera.",
+      "tx": "**FIGO staging of vaginal cancer** defines **Stage I** as tumor confined strictly to the vaginal wall; **Stage II** involves subvaginal **paravaginal tissue invasion** without reaching the pelvic sidewall; **Stage III** extends to the pelvic sidewall; and **Stage IV** invades bladder/rectal mucosa or metastasizes distally.  Evidence-based practice integrates definitive radiotherapy, EBRT plus brachytherapy, EQD2 75-80 Gy, curative standard Stages II-IVA. Key numerical parameters include 45, 50, 2, 80, 4.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage I Disease",
+          "points": [
+            "Tumor strictly confined to vaginal wall",
+            "No paravaginal soft tissue induration",
+            "5-year overall survival approximately 75%"
+          ]
+        },
+        "right": {
+          "title": "Stage II Disease",
+          "points": [
+            "Involves paravaginal connective tissues",
+            "Does not extend to bony pelvic sidewall",
+            "5-year overall survival approximately 55%"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Definitive radiotherapy combining external beam radiation with interstitial or intracavitary brachytherapy represents the standard treatment for the vast majority of vaginal cancers. Concomitant weekly cisplatin chemotherapy improves local control and long-term pelvic cure rates.",
+      "tx": "Definitive **chemoradiotherapy** is the primary treatment modality for the majority of vaginal cancers. It combines external beam radiotherapy (45 to 50 Gy) with concurrent weekly **cisplatin** (40 mg/m2) and customized **interstitial brachytherapy** or intracavitary brachytherapy boosts to achieve total doses >=75 to 80 Gy EQD2.  Evidence-based practice integrates lymphatic drainage, upper 2/3 iliac nodes, lower 1/3 inguinofemoral nodes. Key numerical parameters include 3, 1.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "eval_stage",
+            "label": "Stage vaginal cancer (MRI pelvis and PET-CT scan)"
+          },
+          {
+            "id": "ebrt_chem",
+            "label": "Deliver external beam pelvic radiotherapy with weekly cisplatin"
+          },
+          {
+            "id": "brachy_implant",
+            "label": "Perform interstitial template brachytherapy (Syed-Neblett) implant"
+          },
+          {
+            "id": "dose_boost",
+            "label": "Deliver high-dose-rate brachytherapy to complete total curative dose"
+          }
+        ],
+        "edges": [
+          [
+            "eval_stage",
+            "ebrt_chem"
+          ],
+          [
+            "ebrt_chem",
+            "brachy_implant"
+          ],
+          [
+            "brachy_implant",
+            "dose_boost"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Lymphatic drainage from the vagina follows distinct anatomical pathways based on tumor location. Tumors located in the upper two-thirds of the vagina drain primarily to pelvic lymph nodes, whereas lesions in the lower third drain to inguinofemoral lymph node basins.",
+      "tx": "Lymphatic drainage pathways dictate radiation nodal field borders: tumors in the **upper two-thirds of the vagina** drain into pelvic nodal chains (obturator, internal and external iliac nodes), whereas tumors involving the **lower third of the vagina** drain primarily to the **inguinofemoral lymph nodes**.  Evidence-based practice integrates clear cell adenocarcinoma, diethylstilbestrol (DES) exposure, vaginal adenosis, anterior upper vagina. Key numerical parameters include 1971.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vaginal Tumor Level",
+          "Primary Lymphatic Drainage Basins",
+          "Radiation Field Requirement"
+        ],
+        "rows": [
+          [
+            "Upper two-thirds vagina",
+            "Obturator, external and internal iliac nodes",
+            "Pelvic radiation portal encompassing iliac basins"
+          ],
+          [
+            "Lower one-third vagina",
+            "Superficial and deep inguinofemoral nodes",
+            "Extended radiation field covering bilateral inguinofemoral groins"
+          ],
+          [
+            "Whole vaginal involvement",
+            "Pelvic plus bilateral inguinofemoral basins",
+            "Total pelvic and bilateral groin radiation portals"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Clear cell adenocarcinoma of the vagina historically arose in daughters of women who ingested diethylstilbestrol during pregnancy. Embryologically emerging from vaginal adenosis, these rare tumors typically develop in the anterior vaginal wall of adolescent girls and young women.",
+      "tx": "**Clear cell adenocarcinoma** of the vagina peaked historically in daughters exposed in utero to **diethylstilbestrol** (DES). These neoplasms arise within antecedent **vaginal adenosis** (glandular Mullerian remnants in the upper anterior vagina), characteristically presenting with vaginal bleeding in females aged 15 to 25 years.  Evidence-based practice integrates sarcoma botryoides, grape-like gelatinous masses, cambium layer, desmin/myogenin positive, age <2-3. Key numerical parameters include 3.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "DES-Associated Clear Cell Cancer",
+          "points": [
+            "In utero maternal exposure to diethylstilbestrol",
+            "Associated with vaginal adenosis and cervical cockscomb",
+            "Median age at presentation 19 years"
+          ]
+        },
+        "right": {
+          "title": "Sporadic Clear Cell Cancer",
+          "points": [
+            "No documented maternal history of DES ingestion",
+            "Typically occurs in older postmenopausal women",
+            "Frequently associated with pelvic endometriosis"
+          ]
+        }
+      }
+    }
+  ]
+}

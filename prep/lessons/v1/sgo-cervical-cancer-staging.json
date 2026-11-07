@@ -1,0 +1,302 @@
+{
+  "v": 1,
+  "module": "sgo-cervical-cancer-staging",
+  "title": "Cervical Cancer FIGO 2018 Staging & Diagnostic Workup",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 9 (Cervical Cancer)",
+    "FIGO Cancer Report: Cancer of the cervix uteri (2018/2021 update)",
+    "NCCN Clinical Practice Guidelines in Oncology: Cervical Cancer (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The revised FIGO 2018 staging system for cervical cancer fundamentally changed clinical oncology practice by allowing cross-sectional imaging and pathological evaluation to allocate final stage. This modern framework integrates pelvic magnetic resonance imaging, computed tomography, and positron emission tomography alongside operative surgical pathology.",
+      "tx": "The updated **FIGO 2018 staging** system for cervical cancer formally integrates **cross-sectional imaging** modalities such as MRI, CT, and PET-CT and surgical pathological findings alongside clinical examination to assign definitive clinical and pathological stage groupings across early and advanced neoplasms.  Evidence-based practice integrates imaging incorporation, pathological staging.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hist",
+            "label": "Document invasive cervical cancer on biopsy"
+          },
+          {
+            "id": "clin",
+            "label": "Perform clinical exam and colposcopy"
+          },
+          {
+            "id": "mri",
+            "label": "Acquire pelvic MRI for local tumor dimension"
+          },
+          {
+            "id": "pet",
+            "label": "Perform whole-body PET-CT for nodal spread"
+          },
+          {
+            "id": "stg",
+            "label": "Assign final FIGO 2018 clinical stage"
+          }
+        ],
+        "edges": [
+          [
+            "hist",
+            "clin"
+          ],
+          [
+            "clin",
+            "mri"
+          ],
+          [
+            "mri",
+            "pet"
+          ],
+          [
+            "pet",
+            "stg"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Microinvasive cervical carcinoma is designated as Stage IA and is diagnosed exclusively through microscopic examination of an excisional cone biopsy. The maximum depth of stromal invasion is five millimeters or less, and horizontal surface dimension has been eliminated from the staging definition.",
+      "tx": "**Stage IA** microinvasive carcinoma is diagnosed exclusively by microscopic tissue assessment of excisional specimens. **Stage IA1** denotes measured stromal invasion <=3 mm, while **Stage IA2** denotes stromal invasion >3 mm and <=5 mm, with lateral dimension criteria omitted from the current classification schema.  Evidence-based practice integrates stromal invasion >3 to <=5 mm. Key numerical parameters include 2018.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage IA1 Carcinoma",
+          "points": [
+            "Stromal invasion depth <=3 mm",
+            "Nodal metastasis risk <1%",
+            "Conization alone with clear margins curative"
+          ]
+        },
+        "right": {
+          "title": "Stage IA2 Carcinoma",
+          "points": [
+            "Stromal invasion >3 mm and <=5 mm",
+            "Nodal metastasis risk reaches 3% to 5%",
+            "Requires modified radical hysterectomy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Stage IB comprises invasive carcinoma strictly confined to the cervix with stromal invasion depth exceeding five millimeters. FIGO 2018 subdivided this stage into three discrete categories based on maximum clinical tumor dimension measured on imaging or gross examination.",
+      "tx": "**Stage IB** denotes clinically visible or invasive lesion >5 mm stromal depth confined to the uterine cervix: **Stage IB1** measures >=5 mm depth and <2 cm dimension; **Stage IB2** measures >=2 cm and <4 cm; and **Stage IB3** measures >=4 cm largest dimension.  Evidence-based practice integrates 2 cm cutoff, 4 cm cutoff.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FIGO Stage",
+          "Stromal Invasion Depth",
+          "Maximum Tumor Dimension",
+          "Primary Therapy"
+        ],
+        "rows": [
+          [
+            "Stage IB1",
+            ">5 mm invasion",
+            "<2 cm diameter",
+            "Radical hysterectomy or fertility-sparing trachelectomy"
+          ],
+          [
+            "Stage IB2",
+            "Invasive to stroma",
+            ">=2 cm to <4 cm diameter",
+            "Type C radical hysterectomy with lymphadenectomy"
+          ],
+          [
+            "Stage IB3",
+            "Invasive to stroma",
+            ">=4 cm diameter (bulky)",
+            "Definitive concurrent chemoradiation therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Stage II tumor extends directly beyond the uterus into adjacent soft tissues but without extending to the pelvic sidewall or lower third of the vagina. Substage IIA involves the upper two-thirds of the vagina, while substage IIB demonstrates parametrial infiltration.",
+      "tx": "**Stage II** cervical cancer extends beyond the cervix: **Stage IIA1** involves upper two-thirds of vagina <4 cm; **Stage IIA2** involves upper vagina >=4 cm without parametrial invasion; and **Stage IIB** exhibits distinct **parametrial invasion** sparing the pelvic sidewall and lower vaginal third completely.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage IIA Disease",
+          "points": [
+            "Upper two-thirds vaginal involvement",
+            "No parametrial infiltration detected",
+            "IIA1 <4 cm operable; IIA2 >=4 cm CCRT"
+          ]
+        },
+        "right": {
+          "title": "Stage IIB Disease",
+          "points": [
+            "Parametrial infiltration present",
+            "Does not reach bony pelvic sidewall",
+            "Standard therapy is definitive CCRT"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A signature innovation of the 2018 system is the creation of Stage IIIC for lymph node metastases confirmed by either radiological imaging or pathological dissection. Pelvic nodal involvement designates IIIC1, whereas para-aortic nodal metastasis designates IIIC2.",
+      "tx": "**Stage IIIC** explicitly reflects nodal spread confirmed radiologically (designated r) or pathologically (designated p). **Stage IIIC1** identifies pelvic lymph node metastasis only, whereas **Stage IIIC2** identifies **para-aortic lymph node** metastasis irrespective of primary cervical tumor size or local pelvic extent.  Evidence-based practice integrates pelvic lymph nodes. Key numerical parameters include 3.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ln_eval",
+            "label": "Evaluate retroperitoneal lymph nodes on imaging/pathology"
+          },
+          {
+            "id": "pelv_pos",
+            "label": "Pelvic nodes positive, para-aortic negative"
+          },
+          {
+            "id": "pa_pos",
+            "label": "Para-aortic lymph nodes positive"
+          },
+          {
+            "id": "stg_c1",
+            "label": "Assign Stage IIIC1 (pelvic nodal disease)"
+          },
+          {
+            "id": "stg_c2",
+            "label": "Assign Stage IIIC2 (para-aortic nodal disease)"
+          }
+        ],
+        "edges": [
+          [
+            "ln_eval",
+            "pelv_pos"
+          ],
+          [
+            "ln_eval",
+            "pa_pos"
+          ],
+          [
+            "pelv_pos",
+            "stg_c1"
+          ],
+          [
+            "pa_pos",
+            "stg_c2"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "High-resolution pelvic magnetic resonance imaging serves as the premier diagnostic imaging modality for assessing primary cervical tumors. T2-weighted MRI provides diagnostic accuracy exceeding ninety percent for cervical stromal invasion depth and parametrial infiltration.",
+      "tx": "Pelvic **magnetic resonance imaging** is the gold-standard imaging modality for local tumor assessment. High-resolution T2-weighted MRI delivers >90% accuracy for measuring **stromal invasion depth**, endocervical canal extent, **parametrial infiltration**, and subtle vaginal fornix extension prior to definitive therapy planning.  Evidence-based practice integrates pelvic MRI, parametrial infiltration accuracy, local tumor staging.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical Landmark",
+          "MRI T2-Weighted Appearance",
+          "Clinical Staging Impact"
+        ],
+        "rows": [
+          [
+            "Intact cervical stroma",
+            "Hypointense low-signal stromal ring",
+            "Disease strictly confined to cervix"
+          ],
+          [
+            "Stromal ring disruption",
+            "Hyperintense tumor breaching dark ring",
+            "Indicates deep stromal infiltration"
+          ],
+          [
+            "Parametrial fat invasion",
+            "Spiculated soft tissue in parametrial fat",
+            "Establishes Stage IIB inoperable disease"
+          ],
+          [
+            "Vaginal fornix breach",
+            "Loss of hypointense vaginal wall stripe",
+            "Establishes Stage IIA vaginal extension"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Whole-body FDG PET-CT offers superior diagnostic sensitivity and specificity for identifying occult pelvic and distant retroperitoneal nodal metastases. PET-CT staging is strongly recommended for all tumors measuring two centimeters or larger to guide radiation portal design.",
+      "tx": "Whole-body **18F-FDG PET-CT** demonstrates 85% to 90% sensitivity and >95% specificity for detecting pelvic and retroperitoneal **nodal metastases**. Routine PET-CT evaluation is strongly recommended in tumors >=IB2 to avoid missing occult para-aortic metastasis that alters the radiotherapy field.  Evidence-based practice integrates para-aortic nodal sensitivity, distant metastases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pelvic MRI Utility",
+          "points": [
+            "Superior soft-tissue contrast resolution",
+            "Accurate local measurement of tumor size",
+            "Optimal for parametrial and vaginal invasion"
+          ]
+        },
+        "right": {
+          "title": "Whole-Body PET-CT Utility",
+          "points": [
+            "Superior metabolic sensitivity for nodes",
+            "Detects occult distant metastatic disease",
+            "Guides extended-field radiation treatment planning"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Stage IV represents advanced dissemination beyond the true pelvis or into adjacent mucosal organs. Biopsy-proven invasion into the mucosal lining of the bladder or rectum defines Stage IVA, whereas distant haematogenous or extrapelvic lymphatic spread defines Stage IVB.",
+      "tx": "**Stage IVA** requires biopsy-proven invasion through the mucosal lining of bladder or rectum; bullous edema alone does not qualify. **Stage IVB** identifies **distant metastasis** or hematogenous dissemination to lungs, liver, peritoneal cavity, or distant supraclavicular lymph node basins.  Evidence-based practice integrates mucosal invasion bladder rectum, bullous edema insufficient. Key numerical parameters include 4.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "susp",
+            "label": "Suspicion of adjacent organ or distant invasion"
+          },
+          {
+            "id": "cysto",
+            "label": "Cystoscopy and proctoscopy with mucosal biopsy"
+          },
+          {
+            "id": "iva",
+            "label": "Mucosal biopsy positive: assign Stage IVA"
+          },
+          {
+            "id": "pet_dist",
+            "label": "PET-CT shows lung, liver, or distant nodal spread"
+          },
+          {
+            "id": "ivb",
+            "label": "Distant metastases confirmed: assign Stage IVB"
+          }
+        ],
+        "edges": [
+          [
+            "susp",
+            "cysto"
+          ],
+          [
+            "cysto",
+            "iva"
+          ],
+          [
+            "susp",
+            "pet_dist"
+          ],
+          [
+            "pet_dist",
+            "ivb"
+          ]
+        ]
+      }
+    }
+  ]
+}
