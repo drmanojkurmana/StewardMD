@@ -1,0 +1,248 @@
+{
+  "v": 1,
+  "module": "sob-vaginitis-sti",
+  "title": "Vaginitis and STIs: Bacterial Vaginosis, Candidiasis, Trichomoniasis, HSV, Syphilis, and Chancroid",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Ten Teachers Gynaecology 21e Ch 10 (Infections of the genital tract)",
+    "Williams Gynecology 4e Ch 3 (Gynecologic Infection)",
+    "CDC Sexually Transmitted Infections Treatment Guidelines 2021"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Bacterial vaginosis is a polymicrobial dysbiosis characterized by the depletion of hydrogen peroxide-producing lactobacilli and an overgrowth of anaerobic organisms including Gardnerella vaginalis and Atopobium vaginae. Amsel clinical criteria require three of four features: homogeneous thin discharge, vaginal pH above four point five, positive amine whiff test with ten percent KOH, and clue cells exceeding twenty percent on saline wet mount.",
+      "tx": "**Bacterial vaginosis** represents a polymicrobial dysbiosis characterized by the loss of protective lactobacilli. Diagnosis requires **3 of 4** **Amsel criteria**: thin discharge, **vaginal pH >4.5**, fishy amine odour on adding **10% KOH**, and **clue cells** exceeding **20%** of vaginal epithelial cells on saline wet mount.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Lactobacilli depleted; overgrowth of Gardnerella, Atopobium, Prevotella"
+          },
+          {
+            "id": "b",
+            "label": "Examine vaginal secretions: Measure vaginal pH (>4.5 confirms loss of acidity)"
+          },
+          {
+            "id": "c",
+            "label": "Perform Whiff test: Fishy amine odour on adding 10% KOH"
+          },
+          {
+            "id": "d",
+            "label": "Saline wet mount demonstrates clue cells exceeding 20 percent"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Nugent score is the laboratory gold standard for diagnosing bacterial vaginosis, calculated by Gram staining vaginal secretions and evaluating three bacterial morphotypes under oil immersion. Scores range from zero to ten based on the loss of Lactobacillus and replacement by Gardnerella vaginalis and curved Mobiluncus rods. A score of seven to ten confirms bacterial vaginosis.",
+      "tx": "The **Nugent score** provides the laboratory gold standard for bacterial vaginosis diagnosis via standardized Gram stain microscopy. Scoring evaluates the abundance of large gram-positive rods (**Lactobacillus**) versus small gram-variable coccobacilli (**Gardnerella vaginalis**). A **Nugent score** from **0 to 10** establishes normal flora (0 to 3) or bacterial vaginosis (7 to 10).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Nugent Score Tier",
+          "Microscopic Morphotypes Present",
+          "Diagnostic Interpretation"
+        ],
+        "rows": [
+          [
+            "Score 0 to 3",
+            "Predominance of large gram-positive rods (Lactobacillus)",
+            "Normal healthy vaginal microbiome"
+          ],
+          [
+            "Score 4 to 6",
+            "Mixed morphotypes; reduced lactobacilli with coccobacilli",
+            "Intermediate vaginal flora; assess clinically"
+          ],
+          [
+            "Score 7 to 10",
+            "Marked Gardnerella/Bacteroides with absence of lactobacilli",
+            "Definitive diagnosis of bacterial vaginosis"
+          ],
+          [
+            "Amsel comparison",
+            "Requires 3 of 4 clinical bed-side criteria",
+            "Clinical diagnostic method; high specificity"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Trichomoniasis is caused by the flagellated protozoan Trichomonas vaginalis, presenting with copious, frothy, yellow-green vaginal discharge and severe vulvar irritation. Colposcopic examination reveals punctate cervical petechiae, termed colpitis macularis or strawberry cervix. Saline wet mount microscopy demonstrates motile trichomonads with characteristic jerky motility.",
+      "tx": "Infection with the flagellated protozoan **Trichomonas vaginalis** produces profuse, frothy yellow-green malodorous discharge. Speculum inspection classically demonstrates punctate cervical petechial haemorrhages, termed a **strawberry cervix** (colpitis macularis). Saline wet preparation confirms the diagnosis by visualizing **motile trichomonads** with flagellar beating.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/trichomoniasis-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Trichomonas protozoa and colposcopic strawberry cervix. Credit: StewardMD.",
+        "alt": "Motile trichomonads under microscopy and colpitis macularis punctate cervicitis."
+      }
+    },
+    {
+      "say": "Oral metronidazole is the primary therapy for both bacterial vaginosis and trichomoniasis. In women with trichomoniasis, oral metronidazole five hundred milligrams twice daily for seven days is standard care. Simultaneous treatment of sexual partners is mandatory for trichomoniasis to prevent reciprocal reinfection, accompanied by sexual abstinence until therapy is complete.",
+      "tx": "First-line therapy for both bacterial vaginosis and trichomoniasis utilizes oral **metronidazole**. In women with **trichomoniasis**, guidelines mandate oral metronidazole 500 mg twice daily for 7 days accompanied by **mandatory partner treatment** and sexual abstinence until both partners complete therapy to eliminate the cycle of reinfection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bacterial Vaginosis Therapy",
+          "points": [
+            "Oral metronidazole 500 mg twice daily x 7 days",
+            "Alternative: Intravaginal metronidazole 0.75% gel",
+            "Alternative: Oral clindamycin 300 mg twice daily",
+            "Partner treatment does not reduce recurrence"
+          ]
+        },
+        "right": {
+          "title": "Trichomoniasis Therapy",
+          "points": [
+            "Oral metronidazole 500 mg twice daily x 7 days",
+            "Topical gels are ineffective for trichomonas",
+            "Simultaneous partner treatment is mandatory",
+            "Abstain from intercourse until therapy completes"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Vulvovaginal candidiasis, primarily caused by Candida albicans, presents with intense vulvar pruritus, burning, erythema, and thick white curd-like cottage cheese discharge. The vaginal pH remains characteristically normal at less than four point five. Potassium hydroxide ten percent wet mount microscopy reveals diagnostic budding pseudohyphae and spores.",
+      "tx": "**Vulvovaginal candidiasis** presents with intense pruritus, erythema, and thick white **cottage cheese discharge**. In sharp contrast to bacterial vaginosis and trichomoniasis, **vaginal pH is under 4.5** (normal acidity). Diagnosis is confirmed on **10%** potassium hydroxide preparation by demonstrating **pseudohyphae** and budding yeast spores.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/vulvovaginal-candidiasis-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Vulvovaginal candidiasis with curdy white discharge. Credit: StewardMD.",
+        "alt": "Clinical and microscopic presentation of acute vulvovaginal candidiasis."
+      }
+    },
+    {
+      "say": "Genital herpes simplex virus, caused predominantly by HSV type two, presents with painful grouped vesicles on an erythematous base that rapidly unroof into shallow ulcers with tender inguinal lymphadenopathy. Viral detection via polymerase chain reaction is the diagnostic gold standard, and prompt treatment with oral acyclovir or valacyclovir accelerates healing.",
+      "tx": "Genital herpes is caused predominantly by **HSV-2**, presenting with painful grouped **vesicles and ulcers** on an erythematous base with tender bilateral inguinal lymphadenopathy. Prompt oral antiviral therapy with acyclovir or valacyclovir accelerates lesion healing, shortens viral shedding, and reduces the frequency of future recurrent symptomatic outbreaks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sexual transmission of HSV-2 across breached mucosal barrier"
+          },
+          {
+            "id": "b",
+            "label": "Grouped painful vesicles unroof into shallow tender erosions"
+          },
+          {
+            "id": "c",
+            "label": "Confirm diagnosis via type-specific viral DNA PCR swab"
+          },
+          {
+            "id": "d",
+            "label": "Initiate oral valacyclovir 1 g BID or acyclovir 400 mg TID for 7-10 days"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Primary syphilis caused by Treponema pallidum presents with a single painless indurated ulcer, known as a hard chancre, accompanied by non-tender rubbery regional lymphadenopathy. Serological screening utilizes non-treponemal tests such as VDRL or RPR, followed by confirmatory treponemal assays such as TPHA or fluorescent treponemal antibody absorption.",
+      "tx": "Primary infection by **Treponema pallidum** manifests as a single, painless, deeply indurated ulcer termed a **hard chancre**, accompanied by painless rubbery regional lymphadenopathy. Serologic screening begins with non-treponemal assays (**VDRL** or RPR) and is confirmed by treponemal-specific tests (TPHA or FTA-ABS).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genital Ulcer Disease",
+          "Pathogen",
+          "Ulcer Pain and Characteristics",
+          "Diagnostic Confirmation"
+        ],
+        "rows": [
+          [
+            "Primary syphilis",
+            "Treponema pallidum",
+            "Painless hard chancre with indurated base",
+            "Darkfield microscopy; VDRL/RPR confirmed by TPHA"
+          ],
+          [
+            "Chancroid",
+            "Haemophilus ducreyi",
+            "Painful soft ulcer with ragged edges and bubo",
+            "Gram stain showing school-of-fish; culture on enriched chocolate agar"
+          ],
+          [
+            "Genital herpes",
+            "Herpes simplex virus (HSV-2)",
+            "Multiple painful grouped shallow erosions",
+            "Viral DNA polymerase chain reaction (PCR)"
+          ],
+          [
+            "Lymphogranuloma venereum",
+            "Chlamydia trachomatis (L1-L3)",
+            "Transient painless papule followed by groove sign bubo",
+            "NAAT for Chlamydia trachomatis serovars L1-L3"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Chancroid is a sexually transmitted infection caused by the fastidious gram-negative coccobacillus Haemophilus ducreyi. It presents with one or more extremely painful, non-indurated soft ulcers with ragged undermined edges and a purulent necrotic base. Suppurative unilateral inguinal lymphadenitis, known as a bubo, develops in over fifty percent of untreated patients.",
+      "tx": "**Chancroid** is caused by the fastidious gram-negative bacterium **Haemophilus ducreyi**. Unlike syphilis, chancroid produces one or more exquisitely **painful soft ulcer** lesions with ragged, undermined margins and a dirty necrotic base, frequently complicated by fluctuant, suppurative unilateral inguinal bubo formation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chancroid (Haemophilus ducreyi)",
+          "points": [
+            "Painful, soft ulcer without induration",
+            "Ragged, undermined erythematous edges",
+            "Painful, fluctuant suppurative inguinal bubo",
+            "Treated with single-dose oral azithromycin 1 g"
+          ]
+        },
+        "right": {
+          "title": "Syphilitic Chancre (T. pallidum)",
+          "points": [
+            "Painless, solitary ulcer with cartilaginous hard base",
+            "Clean granular base with sharp demarcated borders",
+            "Painless, rubbery, non-suppurative lymph nodes",
+            "Treated with intramuscular benzathine penicillin G"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "v": 1,
+  "module": "sob-amenorrhoea",
+  "title": "Amenorrhoea: Primary and Secondary, Workup, Progestin Challenge, Turner, and Asherman",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Ten Teachers Gynaecology 21e Ch 6 (Amenorrhoea and oligomenorrhoea)",
+    "Williams Gynecology 4e Ch 16 (Amenorrhea)",
+    "ASRM Practice Committee Opinion on Current Evaluation of Amenorrhea"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Primary amenorrhoea is defined as the failure to establish menarche by age thirteen in the absence of secondary sexual characteristics, or by age fifteen in the presence of normal secondary sexual development. In contrast, secondary amenorrhoea is defined as the cessation of menses for three consecutive months in a woman with previously regular cycles, or six months in a woman with oligomenorrhoea.",
+      "tx": "Clinical guidelines define **primary amenorrhoea** as the absence of menarche by **age 13 without secondary sexual characteristics**, or by **age 15 in the presence of normal secondary sexual characteristics**. **Secondary amenorrhoea** is defined as the cessation of menses for 3 months in previously regular cycles, or for 6 months in women with oligomenorrhoea.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Diagnostic algorithm for primary and secondary amenorrhoea. Credit: StewardMD.",
+        "alt": "Flowchart outlining primary and secondary amenorrhoea clinical and endocrine evaluation."
+      }
+    },
+    {
+      "say": "Pregnancy is the most common cause of secondary amenorrhoea worldwide and must be systematically excluded in all patients before initiating an extensive endocrine workup. The initial screening evaluation requires a quantitative urine or serum beta hCG assay, followed by serum prolactin, thyroid stimulating hormone, and follicle stimulating hormone measurements.",
+      "tx": "Excluding **pregnancy** via urine or serum **human chorionic gonadotropin** is the mandatory first step in evaluating any secondary amenorrhoea. Initial laboratory assessment evaluates serum **prolactin**, thyroid-stimulating hormone (TSH), and **follicle-stimulating hormone** (FSH) to categorize disorders into outflow tract, ovarian, pituitary, or hypothalamic etiologies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Patient presents with secondary amenorrhoea meeting diagnostic time criteria (>3 months)"
+          },
+          {
+            "id": "b",
+            "label": "Mandatory pregnancy exclusion: Serum or urine beta-hCG testing"
+          },
+          {
+            "id": "c",
+            "label": "Initial endocrine panel: Serum TSH, prolactin, and FSH"
+          },
+          {
+            "id": "d",
+            "label": "Direct further targeted testing based on endocrine profile"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ],
+        "caption": "Secondary amenorrhoea time criteria and mandatory pregnancy exclusion workup. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "The progestin withdrawal challenge evaluates whether the endometrium is primed with endogenous estrogen and possesses an intact patent outflow tract. Oral medroxyprogesterone acetate is administered at ten milligrams daily for ten days. Withdrawal vaginal bleeding occurring within two to seven days confirms an anovulatory state with an intact uterus and sufficient endogenous estrogen production.",
+      "tx": "The **progestin challenge test** administers oral medroxyprogesterone acetate (10 mg daily for 10 days). Positive **withdrawal bleeding** within 2 to 7 days confirms an **intact outflow tract** and adequate endogenous estrogen priming of the endometrium, establishing **anovulation** (such as in polycystic ovary syndrome) as the underlying cause.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Positive Progesterone Challenge",
+          "points": [
+            "Bleeding within 2-7 days of progesterone challenge test",
+            "Confirms adequate endogenous estrogen production",
+            "Demonstrates intact, responsive endometrium",
+            "Diagnoses anovulation / PCOS / follicular dysfunction"
+          ]
+        },
+        "right": {
+          "title": "Negative Progestin Challenge",
+          "points": [
+            "No bleeding following progestin completion",
+            "Indicates severe hypoestrogenism OR outflow tract defect",
+            "Mandates combined estrogen-progestin challenge test",
+            "Points toward Asherman syndrome or ovarian failure"
+          ]
+        },
+        "caption": "Progesterone challenge test protocol and withdrawal bleeding evaluation. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "When the progestin challenge fails to produce bleeding, a combined estrogen and progestin challenge is administered using oral conjugated equine estrogen for twenty one days followed by a progestin for the final seven days. Failure of withdrawal bleeding after combined hormonal stimulation proves an anatomical outflow tract obstruction or severe endometrial destruction, such as Asherman syndrome.",
+      "tx": "Failure of withdrawal bleeding following a progestin challenge mandates an **estrogen-progestin challenge** (21 days of oral estrogen followed by 7 days of progestin). Failure of withdrawal bleeding after combined therapy confirms an **anatomical outflow tract defect** or complete endometrial obliteration, such as **Asherman syndrome** or cervical stenosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Negative progestin challenge (no withdrawal bleeding)"
+          },
+          {
+            "id": "b",
+            "label": "Administer 21 days oral estrogen followed by 7 days oral progestin"
+          },
+          {
+            "id": "c",
+            "label": "Bleeding occurs: Outflow tract intact; patient is severely hypoestrogenic"
+          },
+          {
+            "id": "d",
+            "label": "No bleeding occurs: Confirms uterine outflow tract obstruction (Asherman)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Turner syndrome, characterized by a forty five X karyotype in fifty percent of cases, is the leading cause of hypergonadotropic hypogonadism and primary amenorrhoea. Patients present with accelerated ovarian follicular atresia resulting in fibrous streak gonads, hypergonadotropic hypogonadism with markedly elevated FSH, short stature, webbed neck, cubitus valgus, and coarctation of the aorta.",
+      "tx": "**Turner syndrome** (45,X karyotype in 50 percent) represents the most common cause of primary ovarian insufficiency, producing **hypergonadotropic hypogonadism**. Accelerated prenatal follicular atresia replaces ovarian tissue with fibrous **streak gonads**, characterized by markedly elevated serum **FSH exceeding 40 IU/L**, short stature, webbed neck, and aortic coarctation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organ System",
+          "Turner Syndrome Manifestation",
+          "Clinical Management"
+        ],
+        "rows": [
+          [
+            "Reproductive axis",
+            "Turner syndrome 45,XO streak gonads with hypergonadotropic hypogonadism",
+            "Estrogen replacement at age 12 to induce secondary sex characteristics"
+          ],
+          [
+            "Stature and bone",
+            "Short stature (SHOX gene haploinsufficiency)",
+            "Recombinant human growth hormone therapy in childhood"
+          ],
+          [
+            "Cardiovascular system",
+            "Bicuspid aortic valve (30%) and coarctation of aorta (10%)",
+            "Echocardiography and cardiac MRI surveillance for aortic dissection"
+          ],
+          [
+            "Renal system",
+            "Horseshoe kidney or duplicated collecting systems",
+            "Renal ultrasound evaluation at baseline"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Mayer-Rokitansky-Kuster-Hauser syndrome, or MRKH syndrome, presents with primary amenorrhoea and normal female thelarche, with congenital absence of the uterus and a blind-ending vagina. Patients have functional ovaries, normal female testosterone levels, and a forty six XX karyotype, differentiating them from androgen insensitivity syndrome. Renal ultrasound must be performed to screen for concurrent renal tract anomalies.",
+      "tx": "**MRKH syndrome** (Mayer-Rokitansky-K\u00fcster-Hauser) presents with primary amenorrhoea and **normal thelarche** in patients with an intact **46,XX** karyotype. Congenital aplasia of the paramesonephric ducts produces an absent uterus and **blind vagina**, with functional ovaries yielding normal female circulating testosterone levels and normal pubic hair development.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mayer-Rokitansky-K\u00fcster-Hauser (MRKH)",
+          "points": [
+            "Karyotype 46,XX (genetic female)",
+            "Functional ovaries with normal female serum testosterone",
+            "Normal pubic and axillary hair development",
+            "Absent uterus and upper two-thirds of vagina"
+          ]
+        },
+        "right": {
+          "title": "Complete Androgen Insensitivity (CAIS)",
+          "points": [
+            "Karyotype 46,XY (genetic male)",
+            "Cryptorchid testes retained in abdomen or inguinal canals",
+            "Male-range serum testosterone with androgen insensitivity",
+            "Scant or absent pubic and axillary hair; blind vaginal pouch"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Kallmann syndrome is a genetic cause of hypogonadotropic hypogonadism resulting from defective migration of gonadotrophin-releasing hormone neurons and olfactory axons from the embryonic olfactory placode to the hypothalamus. Patients present with delayed puberty or primary amenorrhoea, prepubertal gonadotrophin levels, and pathognomonic anosmia or hyposmia.",
+      "tx": "**Kallmann syndrome** is a congenital form of **hypogonadotropic hypogonadism** caused by failed embryonic GnRH neuronal migration from the olfactory placode to the forebrain. Clinically, patients present with delayed puberty, prepubertal serum gonadotropins, and pathognomonic **anosmia** or hyposmia due to olfactory bulb hypoplasia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Defective KAL1 or FGFR1 gene disrupts embryonic olfactory tract formation"
+          },
+          {
+            "id": "b",
+            "label": "GnRH neuroendocrine cells fail to migrate from olfactory placode into hypothalamus"
+          },
+          {
+            "id": "c",
+            "label": "Low pulsatile GnRH release produces prepubertal LH and FSH levels"
+          },
+          {
+            "id": "d",
+            "label": "Clinical presentation with delayed puberty, primary amenorrhoea, and anosmia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Asherman syndrome consists of intrauterine adhesions and partial or complete obliteration of the uterine cavity, most commonly resulting from vigorous postpartum or post-abortion curettage of infected gravid endometrium. Hysteroscopy serves as both the diagnostic gold standard and the therapeutic modality. Surgical adhesiolysis is followed by postoperative high-dose estrogen and intrauterine barrier placement to prevent reformations.",
+      "tx": "**Asherman syndrome** arises from traumatization and destruction of the endometrial basal layer, typically following vigorous **postpartum or post-abortion curettage**. Diagnostic hysteroscopy reveals dense **intrauterine synechiae**. Management combines **hysteroscopic adhesiolysis**, an intrauterine stent or Foley balloon, and high-dose postoperative oral estrogen to promote mucosal regeneration.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asherman-syndrome-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Hysteroscopic appearance of intrauterine synechiae. Credit: StewardMD.",
+        "alt": "Endoscopic visual of intrauterine synechiae and fibrous bands in Asherman syndrome."
+      }
+    }
+  ]
+}

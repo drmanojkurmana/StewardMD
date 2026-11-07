@@ -1,0 +1,259 @@
+{
+  "v": 1,
+  "module": "sct-coarctation-aorta-interrupted-arch",
+  "title": "Coarctation of the aorta and interrupted aortic arch: anatomy, repair and recoarctation",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 117 (Congenital Heart Disease: Aortic Arch Anomalies)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 40 (Coarctation of the Aorta and Interrupted Aortic Arch)",
+    "AHA/ACC Guidelines for the Management of Adults With Congenital Heart Disease"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Coarctation of the aorta is a localized narrowing of the aortic lumen. The lesion is typically located in the aortic isthmus, immediately adjacent to the ductus arteriosus or ligamentum arteriosum. Ectopic ductal tissue encircling the aorta contracts after birth, causing severe narrowing.",
+      "tx": "Aortic coarctation presents as a discrete narrowing of the aortic lumen, characteristically positioned at the **aortic isthmus** adjacent to the ductus arteriosus. The underlying embryology involves migration of **ductal tissue constriction** into the aortic media, closing the lumen as the ductus contracts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Juxtaductal Coarctation",
+          "points": [
+            "Discrete shelflike posterior infolding at the isthmus",
+            "Adjacent to ductus arteriosus / ligamentum arteriosum",
+            "Overwhelmingly common anatomical presentation in older children and adults"
+          ]
+        },
+        "right": {
+          "title": "Tubular Hypoplasia of the Arch",
+          "points": [
+            "Long-segment diffuse narrowing of distal transverse arch",
+            "Frequently associated with ventricular septal defect",
+            "Prevalent in neonates presenting with cardiogenic collapse"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Physical examination reveals and confirms classic hemodynamic hallmarks. Patients demonstrate significant upper extremity hypertension accompanied by diminished or absent femoral pulses. A radiofemoral pulse delay and a blood pressure gradient exceeding twenty millimeters of mercury confirm the diagnosis.",
+      "tx": "Clinical diagnosis rests on finding **upper extremity hypertension** paired with diminished, delayed femoral pulses. The presence of a notable **radiofemoral delay** and a systolic **blood pressure gradient** exceeding 20 mmHg between the right arm and lower extremities establishes hemodynamically significant coarctation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Physical Examination Domain",
+          "Clinical Sign",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "Upper vs lower extremity BP",
+            "Systolic gradient > 20 mmHg",
+            "Indicates severe flow restriction across the isthmus"
+          ],
+          [
+            "Femoral arterial pulse",
+            "Delayed and diminished vs radial",
+            "Reflects delayed wave reflection through collateral networks"
+          ],
+          [
+            "Cardiac auscultation",
+            "Continuous systolic/diastolic murmur",
+            "Turbulent high-velocity flow over isthmus and chest collateral beds"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Aortic coarctation frequently occurs with other cardiovascular malformations. Up to eighty percent of patients have a congenital bicuspid aortic valve. In addition, patients frequently develop intracranial saccular aneurysms in the circle of Willis, carrying a life-threatening risk of subarachnoid hemorrhage.",
+      "tx": "Coarctation exhibits powerful anatomical associations: over 50 to 80 percent of patients harbor a **bicuspid aortic valve**. Furthermore, patients exhibit an elevated risk of **berry aneurysms** in the circle of Willis, predisposing to catastrophic **intracranial hemorrhage** even after successful coarctation repair.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Associated Pathology",
+          "Prevalence in Coarctation",
+          "Long-term Clinical Implication"
+        ],
+        "rows": [
+          [
+            "Bicuspid aortic valve",
+            "50 to 80 percent",
+            "Accelerated aortic stenosis, regurgitation, and root aortopathy"
+          ],
+          [
+            "Circle of Willis berry aneurysm",
+            "5 to 10 percent",
+            "Life-threatening subarachnoid hemorrhage; warrants MRA screening"
+          ],
+          [
+            "Ventricular septal defect",
+            "20 to 30 percent in infants",
+            "Massive left-to-right shunt and early congestive heart failure"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Chronic aortic obstruction prompts extensive collateral vascular remodeling. Intercostal arteries, internal thoracic arteries, and scapular vessels dilate to carry blood around the obstruction. Pulsatile enlarged intercostal arteries erode the inferior rib margins, producing classic rib notching on chest radiographs.",
+      "tx": "Longstanding severe coarctation promotes extensive compensatory collateral vessels through internal mammary and intercostal arteries. Enlarged, tortuous intercostal vessels erode the inferior cortex of the third to eighth ribs, producing characteristic **rib notching** (Roesler sign) and the aortic **figure-of-3 sign**. Recognizing these pathognomonic collateral signs on routine imaging alerts clinicians to severe hemodynamically significant aortic narrowing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Severe mechanical obstruction at aortic isthmus"
+          },
+          {
+            "id": "b",
+            "label": "Flow diversion into internal mammary and subclavian arteries"
+          },
+          {
+            "id": "c",
+            "label": "Massive tortuous dilatation of posterior intercostal vessels"
+          },
+          {
+            "id": "d",
+            "label": "Inferior rib cortical bone erosion producing visible rib notching"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In critical neonatal coarctation, systemic lower body perfusion depends on ductal patency. When the ductus arteriosus constricts, neonates present with severe metabolic acidosis, anuria, and cardiogenic shock. An immediate continuous prostaglandin E1 infusion reopens the ductus, restoring lower body perfusion.",
+      "tx": "In ductal-dependent neonatal coarctation, ductal closure precipitates sudden cardiogenic shock, profound oliguria, and worsening metabolic acidosis. Emergency medical stabilization requires immediate intravenous **prostaglandin E1** (alprostadil) infusion. Prostaglandin rapidly reopens the constricted **ductus arteriosus**, restoring systemic **lower body perfusion** before definitive surgical repair.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Neonatal presentation with shock, absent pulses, and acidosis"
+          },
+          {
+            "id": "b",
+            "label": "Start prostaglandin E1 infusion (0.01 to 0.05 mcg/kg/min)"
+          },
+          {
+            "id": "c",
+            "label": "Reopen ductus arteriosus to establish right-to-left lower perfusion"
+          },
+          {
+            "id": "d",
+            "label": "Correct acidosis and transfer to OR for surgical reconstruction"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgical repair aims to establish an unobstructed aortic lumen with native tissue. Resection with extended end-to-end anastomosis is the preferred operation for neonates and infants. The surgeon completely excises all ductal tissue and creates a wide spatulated connection onto the underside of the arch.",
+      "tx": "The gold standard surgical repair is **extended end-to-end anastomosis**. The surgeon excises the coarctation shelf and all ductal tissue, spatulating the distal descending aorta onto the undersurface of the transverse arch to achieve **complete ductal excision** and eliminate **recoarctation risk**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Extended End-to-End Anastomosis",
+          "points": [
+            "Completely resects all ectopic ductal tissue",
+            "Enlarges undersurface of transverse aortic arch",
+            "Lowest lifetime incidence of late aortic aneurysm formation"
+          ]
+        },
+        "right": {
+          "title": "Subclavian Flap Angioplasty (Waldhausen)",
+          "points": [
+            "Divides and turns down left subclavian artery as patch",
+            "Sacrifices left subclavian artery flow to left upper limb",
+            "Potential for reduced left arm growth and claudication"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Interrupted aortic arch is an extreme congenital catastrophe characterized by complete luminal discontinuity. The Celoria and Patton classification classifies it into three types based on the interruption site. Type B, where the gap lies between the left carotid and subclavian arteries, is most common and strongly linked with DiGeorge syndrome.",
+      "tx": "Interrupted aortic arch exhibits complete anatomical discontinuity between arch segments. The **Celoria-Patton classification** identifies three subtypes: **Type B interruption**, occurring between the left common carotid and subclavian arteries, is most common and strongly associated with **DiGeorge syndrome** and 22q11.2 deletion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Interruption Type",
+          "Anatomical Discontinuity Location",
+          "Clinical Features"
+        ],
+        "rows": [
+          [
+            "Type A",
+            "Distal to left subclavian artery (at isthmus)",
+            "30 to 40 percent of cases; similar to severe coarctation"
+          ],
+          [
+            "Type B",
+            "Between left common carotid and left subclavian",
+            "50 to 60 percent of cases; 22q11.2 DiGeorge deletion association"
+          ],
+          [
+            "Type C",
+            "Between innominate and left common carotid",
+            "Rare (< 5 percent); interruption of proximal transverse arch"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Following surgical repair, patients can develop paradoxical postoperative hypertension and mesenteric arteritis. This condition, termed postcoarctectomy syndrome, stems from acute baroreceptor resetting and sympathetic hyperactivation. Aggressive treatment with intravenous nitroprusside or beta-blockers prevents bowel necrosis.",
+      "tx": "Postoperatively, acute baroreceptor resetting and sympathetic surges trigger severe **paradoxical hypertension** and necrotizing **mesenteric arteritis**, known as **postcoarctectomy syndrome**. Clinicians manage this hypertensive emergency aggressively using intravenous sodium nitroprusside or beta-blockers to prevent intestinal infarction, bowel necrosis, and prolonged paralytic ileus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Postcoarctectomy Pathophysiology",
+          "points": [
+            "Sudden exposure of mesenteric bed to high pulsatile pressure",
+            "Reflex sympathetic hyperactivation and baroreceptor resetting",
+            "Severe abdominal pain, distension, vomiting, and leukocytosis"
+          ]
+        },
+        "right": {
+          "title": "Therapeutic Management Bundle",
+          "points": [
+            "Immediate continuous intravenous sodium nitroprusside infusion",
+            "Aggressive oral or IV beta-blocker sympathetic suppression",
+            "Nasogastric decompression and bowel rest until symptoms resolve"
+          ]
+        }
+      }
+    }
+  ]
+}

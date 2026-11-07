@@ -1,0 +1,259 @@
+{
+  "v": 1,
+  "module": "sct-prosthetic-valves-selection-anticoagulation",
+  "title": "Prosthetic heart valves: mechanical vs bioprosthetic selection, INR targets and anticoagulation",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 112 (Valvular Heart Disease)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 14 (Prosthetic Valves)",
+    "2020 ACC/AHA Guidelines for the Management of Patients With Valvular Heart Disease"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Choosing between mechanical and bioprosthetic heart valves balances thromboembolism against structural deterioration. Mechanical valves provide exceptional lifelong mechanical durability but require strict daily oral anticoagulation. Bioprosthetic tissue valves prevent lifelong anticoagulation but develop progressive structural calcification.",
+      "tx": "Prosthetic valve selection represents a critical trade-off between the lifelong durability of **mechanical valves** and the freedom from chronic anticoagulation offered by **bioprosthetic valves**. Mechanical devices require lifelong warfarin, whereas bioprostheses carry an inherent risk of **structural valve deterioration**. Selecting the optimal prosthesis requires thorough shared decision-making balancing lifelong anticoagulation risks against future reoperative hazards.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mechanical Prostheses",
+          "points": [
+            "Pyrolytic carbon bileaflet construction",
+            "Exceptional mechanical durability exceeding 30 years",
+            "Mandates lifelong oral vitamin K antagonist anticoagulation"
+          ]
+        },
+        "right": {
+          "title": "Bioprosthetic Prostheses",
+          "points": [
+            "Glutaraldehyde-preserved bovine pericardium or porcine",
+            "Low thrombogenicity; no lifelong warfarin in sinus rhythm",
+            "Susceptible to progressive calcification and reoperation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Patient age serves as a primary guide for prosthetic valve selection. Guidelines recommend mechanical valves in patients under fifty years of age because tissue valves fail rapidly in young individuals. In patients older than sixty-five, bioprosthetic valves are preferred because life expectancy aligns with valve longevity.",
+      "tx": "Guideline consensus utilizes **patient age** to steer valve selection. Mechanical prostheses are favored in patients younger than 50 years to prevent reoperation, while bioprostheses are strongly recommended in patients older than 65 years where **structural deterioration rates** are significantly lower.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient Age Bracket",
+          "Recommended Valve Type",
+          "Clinical Rationale"
+        ],
+        "rows": [
+          [
+            "Age < 50 years",
+            "Mechanical prosthesis favored",
+            "Avoids high likelihood of multiple lifetime reoperations"
+          ],
+          [
+            "Age 50 to 65 years",
+            "Shared decision-making",
+            "Individualized balance of bleeding risk versus reoperation"
+          ],
+          [
+            "Age > 65 years",
+            "Bioprosthetic valve favored",
+            "Valve longevity exceeds patient actuarial life expectancy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Vitamin K antagonist therapy with warfarin remains the only approved oral anticoagulant for mechanical valves. Modern direct oral anticoagulants such as dabigatran are strictly contraindicated. The RE-ALIGN trial proved that novel oral anticoagulants cause excessive thromboembolism and major bleeding in mechanical valve recipients.",
+      "tx": "Oral anticoagulation with the vitamin K antagonist **warfarin** remains the mandatory standard of care. **Direct oral anticoagulants** are contraindicated with mechanical prostheses because the landmark **RE-ALIGN trial** proved that dabigatran causes unacceptably high rates of mechanical thrombosis, arterial embolism, and excess major bleeding.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Warfarin (Vitamin K Antagonist)",
+          "points": [
+            "Inhibits factors II, VII, IX, and X carboxylation",
+            "Monitored via International Normalized Ratio (INR)",
+            "Proven safety and efficacy across mechanical valves"
+          ]
+        },
+        "right": {
+          "title": "DOACs (Direct Thrombin / Xa Inhibitors)",
+          "points": [
+            "Dabigatran, apixaban, and rivaroxaban contraindicated",
+            "RE-ALIGN trial demonstrated excess stroke and bleeding",
+            "Inadequate thrombin suppression on pyrolytic carbon"
+          ]
+        }
+      }
+    },
+    {
+      "say": "International normalized ratio targets vary according to the anatomical valve position. The mitral position carries lower flow velocities, predisposing to thrombosis and requiring a target ratio of three point zero. An aortic mechanical prosthesis in a low-risk patient requires a lower target ratio of two point five.",
+      "tx": "Target anticoagulation levels depend on anatomical location. A mechanical **aortic valve target INR** is 2.5 in patients without thromboembolic risk factors. Conversely, a mechanical **mitral valve target INR** is 3.0 because lower velocity flow across the mitral orifice increases the hazard of **valve thrombosis**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Prosthesis Position",
+          "Patient Risk Profile",
+          "Target INR (Range)"
+        ],
+        "rows": [
+          [
+            "Aortic mechanical",
+            "No additional thromboembolic risk factors",
+            "2.5 (range 2.0 to 3.0)"
+          ],
+          [
+            "Aortic mechanical",
+            "AF, prior stroke, LV dysfunction, hypercoagulable",
+            "3.0 (range 2.5 to 3.5)"
+          ],
+          [
+            "Mitral mechanical",
+            "All patients (higher baseline thrombogenicity)",
+            "3.0 (range 2.5 to 3.5)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Bioprosthetic valves undergo progressive calcific degeneration over ten to twenty years. Macrophage infiltration and mineral deposition stiffen the glutaraldehyde-fixed leaflets, causing stenosis or tear-induced regurgitation. Modern valves incorporate specialized anti-calcification treatments to retard deterioration.",
+      "tx": "Tissue valves undergo inevitable **structural valve deterioration** within 10 to 20 years. Circulating calcium binds residual glutaraldehyde residues, leading to **calcific leaflet degeneration**, tissue stiffening, and tears culminating in symptomatic **prosthetic stenosis** or regurgitation that eventually requires surgical or transcatheter reintervention.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Implantation of glutaraldehyde-treated tissue valve"
+          },
+          {
+            "id": "b",
+            "label": "Phospholipid binding and calcium phosphate nucleation"
+          },
+          {
+            "id": "c",
+            "label": "Progressive leaflet stiffening, tears, and microcalcification"
+          },
+          {
+            "id": "d",
+            "label": "Late hemodynamic failure requiring valve intervention"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Catheter-based valve-in-valve procedures provide an alternative to high-risk repeat open surgery. Interventional teams deploy a transcatheter balloon-expandable valve inside the failed surgical bioprosthesis. This minimally invasive technique prevents repeat sternotomy in elderly and frail patients.",
+      "tx": "When a surgical bioprosthesis fails, a **transcatheter valve-in-valve** procedure provides a less invasive alternative to repeat sternotomy. The operator deploys a balloon-expandable transcatheter device directly within the **surgical sewing ring**, offering an effective alternative for **high-risk reoperations** with accelerated patient functional recovery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transcatheter Valve-in-Valve",
+          "points": [
+            "Femoral transcatheter access avoids reoperative sternotomy",
+            "Dramatic reduction in hospital stay and perioperative recovery",
+            "Risks coronary ostial obstruction and elevated residual gradient"
+          ]
+        },
+        "right": {
+          "title": "Redo Surgical Replacement",
+          "points": [
+            "Complete explantation of old calcified prosthetic ring",
+            "Permits implantation of larger true orifice area",
+            "Carries higher operative morbidity and stroke risk"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Emergency management of mechanical valve thrombosis depends on hemodynamic stability and clot burden. Obstructive thrombosis causing shock mandates emergency surgical re-replacement or ultra-slow-dose intravenous thrombolysis. Cinefluoroscopy and transesophageal echocardiography assess leaflet motion and thrombus size.",
+      "tx": "Suspected obstructive **mechanical valve thrombosis** requires urgent evaluation with cinefluoroscopy and transesophageal echocardiography. Hemodynamically unstable patients in shock undergo emergency **surgical thrombectomy** or replacement, whereas select stable patients receive **slow-infusion thrombolysis** with tissue plasminogen activator under close continuous intensive monitoring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Suspected prosthetic thrombosis: echo and cinefluoroscopy"
+          },
+          {
+            "id": "b",
+            "label": "Assess hemodynamic stability and NYHA functional class"
+          },
+          {
+            "id": "c",
+            "label": "Unstable/shock: emergency surgery or slow tPA infusion"
+          },
+          {
+            "id": "d",
+            "label": "Stable/non-obstructive: intravenous heparin optimization"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pannus ingrowth represents a non-thrombotic cause of prosthetic valve obstruction. Dense perivalvular fibrous tissue proliferates from the annular sewing ring into the orifice. Unlike acute thrombus, chronic pannus produces slowly progressive gradients and requires surgical debridement or re-replacement.",
+      "tx": "Prosthetic obstruction can also result from **pannus formation**, a dense fibrous fibroelastic proliferation originating from the healing host annular bed. Distinguishing chronic, highly echogenic pannus from acute soft thrombus is vital, as pannus fails thrombolysis and requires **surgical re-replacement**. Differentiating pannus from thrombus dictates whether immediate operating room transfer for redo surgery is required or medical lysis should be attempted.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Prosthetic Valve Thrombosis",
+          "Periannular Pannus Formation"
+        ],
+        "rows": [
+          [
+            "Onset of symptoms",
+            "Acute, sudden over hours to days",
+            "Slowly progressive over months to years"
+          ],
+          [
+            "Echocardiographic density",
+            "Soft, mobile mass with low acoustic impedance",
+            "Dense, highly reflective immobile fibrous tissue"
+          ],
+          [
+            "Response to thrombolysis",
+            "Rapid lysis and hemodynamic resolution",
+            "Completely refractory; surgical revision needed"
+          ]
+        ]
+      }
+    }
+  ]
+}

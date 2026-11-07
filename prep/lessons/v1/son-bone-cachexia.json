@@ -1,0 +1,284 @@
+{
+  "v": 1,
+  "module": "son-bone-cachexia",
+  "subject": "ss-medical-oncology",
+  "title": "Bone-modifying agents and cancer cachexia",
+  "minutes": 11,
+  "steps": [
+    {
+      "tx": "**Nitrogen-containing bisphosphonates** bind avidly to exposed bone mineral, which is largely **hydroxyapatite** (a calcium phosphate crystal). During resorption, an **osteoclast** (the cell that breaks down bone) takes up the drug. Inside the cell, the drug blocks **farnesyl pyrophosphate (FPP) synthase**, an enzyme in the **mevalonate pathway** (a chain of reactions that makes cholesterol and lipid anchors). This stops **protein prenylation** (attaching lipid anchors to proteins), disrupts protein trafficking, and may push the osteoclast into **apoptosis** (programmed cell death).",
+      "say": "Nitrogen containing bisphosphonates attach strongly to exposed bone mineral, which is largely a calcium phosphate crystal called hydroxyapatite. During bone resorption, an osteoclast, the cell that breaks bone down, takes the drug up. Inside the cell, the drug blocks farnesyl pyrophosphate synthase, an enzyme in the mevalonate pathway. That block disrupts protein trafficking and may push the osteoclast into apoptosis, which is programmed cell death.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Binds exposed bone mineral"
+          },
+          {
+            "id": "b",
+            "label": "Taken up by resorbing osteoclast"
+          },
+          {
+            "id": "c",
+            "label": "FPP synthase blocked"
+          },
+          {
+            "id": "d",
+            "label": "Protein prenylation disrupted"
+          },
+          {
+            "id": "e",
+            "label": "Osteoclast apoptosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "during resorption"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ],
+          [
+            "d",
+            "e"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The figure follows a **nitrogen-containing bisphosphonate** from bone to cell. The drug sits on exposed bone mineral beneath a resorbing **osteoclast**, which takes it up through its ruffled border. Inside, it blocks **farnesyl pyrophosphate synthase** in the mevalonate pathway. Proteins can no longer receive their lipid anchors, resorption stops, and the osteoclast may die by **apoptosis**.",
+      "say": "Follow the drug from bone into the cell. A nitrogen-containing bisphosphonate binds exposed bone mineral beneath an osteoclast. As the osteoclast resorbs bone through its ruffled border, it takes up the drug. Inside the cell, the drug blocks farnesyl pyrophosphate synthase in the mevalonate pathway. Proteins can no longer receive their lipid anchors, resorption stops, and the osteoclast may die by apoptosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-bone-cachexia-gen2.webp",
+        "alt": "Osteoclast with ruffled border on bone mineral, bisphosphonate molecules nearby, inset showing blocked mevalonate pathway cascade causing apoptosis",
+        "caption": "Osteoclast on bone mineral with bisphosphonate blocking mevalonate pathway. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "A **skeletal-related event (SRE)** includes bone pain needing opioids, radiotherapy or surgery to bone, **hypercalcemia** (high blood calcium), pathological fracture, and **spinal cord compression**. In randomized trials of men with **castration-resistant prostate cancer**, intravenous **zoledronic acid**, dosed every 3 to 4 weeks, cut SREs by 25%. These drugs lower skeletal events but do not improve overall survival. Guidelines advise starting bone-targeted therapy at diagnosis of bone metastases and continuing it alongside systemic treatment.",
+      "say": "The term skeletal related event covers much more than broken bones. It includes bone pain that needs opioids, radiotherapy or surgery to bone, high blood calcium, fractures through weakened bone, and pressure on the spinal cord. In randomized trials of men with castration resistant prostate cancer, intravenous zoledronic acid given every 3 to 4 weeks reduced these events by 25 percent. Bone targeted drugs did not change overall survival, so they protect the bone without changing survival. Treatment should begin at diagnosis of bone metastases and continue alongside cancer therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "SRE component",
+          "What it means"
+        ],
+        "rows": [
+          [
+            "Bone pain needing opioids",
+            "Pain that needs strong analgesia"
+          ],
+          [
+            "Radiotherapy or surgery to bone",
+            "Local treatment of a painful or weakened bone"
+          ],
+          [
+            "Hypercalcemia",
+            "Excess calcium released from resorbing bone"
+          ],
+          [
+            "Pathological fracture",
+            "A break through bone weakened by tumor"
+          ],
+          [
+            "Spinal cord compression",
+            "Tumor pressing on the spinal cord"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Kidney function decides whether an **intravenous aminobisphosphonate** can be given. These drugs are **contraindicated** (must not be given) when **glomerular filtration rate (GFR)** (a measure of how well the kidneys filter blood) falls below 35 milliliters per minute per 1.73 square meters. Above that level, doses still need adjusting to **renal function**. **Zoledronic acid** and **pamidronate** share this class, so the same limit applies to both. For hypercalcemia, **pamidronate** is given as 60 to 90 milligrams over 2 to 4 hours.",
+      "say": "Kidney function decides whether an intravenous aminobisphosphonate can be given. When the glomerular filtration rate, which measures how well the kidneys filter blood, falls below 35 milliliters per minute per 1.73 square meters, these drugs should not be given. Above that level, doses still need adjusting to kidney function. Zoledronic acid and pamidronate are in this class, so the same limit applies to both. For hypercalcemia, pamidronate is given as 60 to 90 milligrams over 2 to 4 hours.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Kidney situation",
+          "Bisphosphonate rule"
+        ],
+        "rows": [
+          [
+            "GFR below 35 mL/min per 1.73 m2",
+            "Intravenous aminobisphosphonates contraindicated"
+          ],
+          [
+            "GFR 35 or above",
+            "Doses still adjusted to renal function"
+          ],
+          [
+            "Zoledronic acid or pamidronate",
+            "Same class, same limit"
+          ],
+          [
+            "Advanced kidney disease",
+            "Denosumab is the alternative, see next step"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Denosumab** is a fully human **monoclonal antibody** that binds **RANKL**, a signal that drives osteoclast formation and activity. It is not a bisphosphonate. The **reticuloendothelial system** (immune cells that clear material from blood) removes it, so kidney function does not limit it, and it does not adversely affect renal function. The trade-off is calcium: grade 3 or higher **hypocalcemia** (low blood calcium) occurred in 5% on denosumab versus 1% on zoledronic acid.",
+      "say": "Denosumab takes a different route altogether. It is a monoclonal antibody that blocks RANKL, so it is not a bisphosphonate at all. The reticuloendothelial system clears it rather than the kidneys, and it does not harm kidney function, which makes it the preferred option when renal impairment is significant. The trade-off is calcium. In the phase 3 trial, grade 3 or higher hypocalcemia occurred in 5 percent of denosumab patients, compared with 1 percent on zoledronic acid. Vitamin D deficiency, low calcium intake, and advanced kidney disease raise that risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Denosumab",
+          "points": [
+            "Monoclonal antibody against RANKL",
+            "Not a bisphosphonate",
+            "Cleared by the reticuloendothelial system",
+            "Grade 3 or higher hypocalcemia in 5%"
+          ]
+        },
+        "right": {
+          "title": "Zoledronic acid (bisphosphonate)",
+          "points": [
+            "Binds bone mineral and enters osteoclasts",
+            "Kidney function limits its use",
+            "Grade 3 or higher hypocalcemia in 1%",
+            "Dose adjusted to renal function"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cancer cachexia syndrome (CCS)** (a wasting syndrome with loss of appetite, weight loss and muscle loss) may develop in as many as 80% of people with advanced cancer. Clinically important **unintentional weight loss** is more than 5% of body weight over 6 to 12 months. CCS is staged as **pre-cachexia**, **cachexia**, or **refractory cachexia**. The earliest stage is the best time for preventive care, while refractory cachexia carries a life expectancy under 3 months.",
+      "say": "Cancer cachexia is a wasting syndrome marked by loss of appetite, weight loss, and loss of muscle. It can appear in as many as 80 percent of people with advanced cancer. Doctors look for weight loss of more than 5 percent over 6 to 12 months. The syndrome is staged in three steps. The earliest stage, pre-cachexia, is the best time for preventive measures, while refractory cachexia is the end stage, with a life expectancy of under 3 months.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Key features"
+        ],
+        "rows": [
+          [
+            "Pre-cachexia",
+            "Weight loss up to 5%, anorexia, glucose intolerance"
+          ],
+          [
+            "Cachexia",
+            "Weight loss over 5%, or low body mass index (under 20) with over 2% loss, plus inflammation and reduced intake"
+          ],
+          [
+            "Refractory cachexia",
+            "Cancer resistant to therapy, poor performance status, life expectancy under 3 months"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cachexia is driven by **cytokines** (signaling proteins that promote inflammation), although reduced eating also contributes. **Tumor necrosis factor alpha (TNF-alpha)** raises fat breakdown and muscle breakdown, though most of that evidence comes from animal models. **Interferon gamma** potentiates fat breakdown and lowers protein synthesis. **Interleukin 1 (IL-1)** induces anorexia and triggers release of **interleukin 6 (IL-6)**, which causes severe wasting and is easy to measure in serum.",
+      "say": "Cachexia is driven by cytokines, which are signaling proteins that promote inflammation, although reduced eating also plays a role. Tumor necrosis factor alpha raises fat breakdown and muscle breakdown, but most of that evidence comes from animal models. Interferon gamma speeds up fat breakdown and reduces protein synthesis. Interleukin 1 suppresses appetite and triggers the release of interleukin 6. Interleukin 6 causes severe wasting, and unlike tumor necrosis factor, it is easily found in the blood serum of patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mediator",
+          "Main effect in cachexia"
+        ],
+        "rows": [
+          [
+            "TNF-alpha",
+            "Fat breakdown, muscle breakdown, higher glucose turnover"
+          ],
+          [
+            "Interferon gamma",
+            "Faster fat breakdown, less protein synthesis"
+          ],
+          [
+            "IL-1",
+            "Anorexia, early satiety, release of IL-6"
+          ],
+          [
+            "IL-6",
+            "Severe wasting, found easily in serum"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "This figure links the tumour to the wasting of **cancer cachexia**. The tumour releases **cytokines**, including tumour necrosis factor alpha, interferon gamma, interleukin 1 and interleukin 6, into the blood. In fat they drive **lipolysis** (breakdown of stored fat), and in skeletal muscle they drive **protein breakdown**, so fat and muscle are lost even when some food is still eaten.",
+      "say": "Here the tumour and its cytokines are linked to the wasting of cachexia. Tumour necrosis factor alpha, interferon gamma, interleukin 1 and interleukin 6 pass into the blood. In fat tissue they drive lipolysis, the breakdown of stored fat. In skeletal muscle, protein is broken down. Fat and muscle are therefore lost even when some food is still eaten.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-bone-cachexia-gen1.webp",
+        "alt": "Vascularized tumour releasing TNF-alpha, interferon gamma, IL-1 and IL-6 into bloodstream driving fat lipolysis and muscle protein breakdown",
+        "caption": "Tumour cytokines driving fat lipolysis and muscle protein breakdown. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "**Leptin** is a hormone made by fat cells (adipocytes) that reduces appetite and increases **resting energy expenditure (REE)**, the energy the body burns at rest. It acts through signals in the hypothalamus of the brain. In cachectic patients, leptin levels stay persistently low. This pattern suggests that tumors can mimic leptin, keeping appetite suppressed and sustaining weight loss.",
+      "say": "Leptin is a hormone made by fat cells, and it normally lowers appetite while raising resting energy use. Its effect runs through signals in the hypothalamus of the brain. In cachectic patients, its levels are persistently low. This pattern indicates that tumors can mimic leptin's signal, which sustains anorexia and weight loss. Leptin is therefore a separate piece of the picture from the inflammatory cytokines.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pro-inflammatory cytokines",
+          "points": [
+            "TNF-alpha, IL-1, IL-6, interferon gamma",
+            "Drive fat and muscle breakdown",
+            "IL-1 induces anorexia",
+            "IL-6 causes severe wasting"
+          ]
+        },
+        "right": {
+          "title": "Leptin",
+          "points": [
+            "Hormone made by fat cells",
+            "Lowers appetite, raises resting energy expenditure",
+            "Persistently low in cachectic patients",
+            "Low levels suggest tumor mimicry"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anabolic steroids** act through the **androgen receptor (AR)**, a **ligand-activated transcription factor** (a protein that switches genes on or off once a hormone binds it). Testosterone acting on this receptor increases **satellite cells** (muscle progenitor cells) and enlarges muscle fibers. In men with **human immunodeficiency virus (HIV)** and weight loss, testosterone raised lean body mass and muscle strength. **Oxandrolone**, an oral androgen, carries a risk of **hepatotoxicity** (liver injury). In cancer, anabolic steroids have no proven nutrition benefit, and testosterone is contraindicated in men with prostate or breast cancer.",
+      "say": "Anabolic steroids act through the androgen receptor, a receptor that switches genes on or off once a hormone binds it. Testosterone acting on this receptor increases satellite cells, which are muscle progenitor cells, and enlarges muscle fibers. In men with HIV and weight loss, testosterone raised lean body mass and muscle strength. Oxandrolone, an oral androgen, can injure the liver. In cancer, anabolic steroids show no proven benefit for nutrition status, and testosterone is contraindicated in men with prostate or breast cancer.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Point",
+          "Detail"
+        ],
+        "rows": [
+          [
+            "Receptor",
+            "Androgen receptor, a ligand-activated transcription factor"
+          ],
+          [
+            "Muscle effect",
+            "Fiber enlargement and more satellite cells"
+          ],
+          [
+            "HIV with weight loss",
+            "Testosterone raised lean mass and strength"
+          ],
+          [
+            "Oral agent",
+            "Oxandrolone, with a hepatotoxicity risk"
+          ],
+          [
+            "Cancer",
+            "No proven nutrition benefit; testosterone contraindicated in prostate or breast cancer"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "refs": [
+    "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
+    "Harrison's Principles of Internal Medicine, 22nd edition"
+  ],
+  "gen": "AI"
+}

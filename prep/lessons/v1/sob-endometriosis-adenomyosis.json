@@ -1,0 +1,246 @@
+{
+  "v": 1,
+  "module": "sob-endometriosis-adenomyosis",
+  "title": "Endometriosis and Adenomyosis: Pathogenesis, Classification, Medical and Surgical Management",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Ten Teachers Gynaecology 21e Ch 15 (Endometriosis and adenomyosis)",
+    "ESHRE Guideline on Endometriosis 2022",
+    "Williams Gynecology 4e Ch 10 (Endometriosis)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Endometriosis is defined by the presence of viable endometrial glands and stroma outside the uterine cavity, most commonly within the dependent pelvic peritoneum, ovaries, and uterosacral ligaments. Sampson retrograde menstruation hypothesis posits that viable shed endometrial cells pass backwards through the fallopian tubes into the peritoneal cavity, where local immune dysregulation permits ectopic implantation and invasion.",
+      "tx": "**Endometriosis** is defined as the ectopic implantation of functional **endometrial glands and stroma** outside the uterine cavity. **Sampson's retrograde menstruation theory** proposes that shed viable endometrial fragments traverse the fallopian tubes during menses into the pelvic cavity, where defective **peritoneal immune clearance** and local angiogenesis enable ectopic cellular survival and deep invasion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/endometriosis-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Endometriosis implants and Sampson theory of retrograde menstruation. Credit: StewardMD.",
+        "alt": "Anatomical schematic of pelvic endometriosis implants and chocolate cyst development."
+      }
+    },
+    {
+      "say": "The classic symptom complex of endometriosis features secondary dysmenorrhoea, deep dyspareunia, dyschezia during menstruation, chronic pelvic pain, and subfertility. Crucially, the severity of a patient's pain correlates very poorly with the surgical stage of disease under the revised American Society for Reproductive Medicine classification system.",
+      "tx": "The classic clinical pentad of endometriosis comprises **secondary dysmenorrhoea, deep dyspareunia, dyschezia, dysuria, and subfertility**. Crucially, the intensity of patient pain exhibits **poor correlation with revised ASRM surgical staging**, as small, highly active peritoneal implants frequently generate far more neurogenic inflammation than extensive, quiescent adhesions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cardinal Clinical Symptom",
+          "Pathophysiological Mechanism",
+          "Clinical Characteristics"
+        ],
+        "rows": [
+          [
+            "Secondary dysmenorrhoea",
+            "Local prostaglandin release and cyclic bleeding in implants",
+            "Progressive cramping commencing 24-48 hrs before menses"
+          ],
+          [
+            "Deep dyspareunia",
+            "Involvement of uterosacral ligaments and pouch of Douglas",
+            "Pain on deep penile thrusting; fixed retroverted uterus"
+          ],
+          [
+            "Dyschezia",
+            "Deep infiltrating rectovaginal septum and bowel implants",
+            "Painful defecation occurring exclusively during menstruation"
+          ],
+          [
+            "Subfertility",
+            "Pelvic distortion, tubal blockage, and toxic peritoneal fluid",
+            "Anovulation, impaired sperm motility, defective oocyte uptake"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "An ovarian endometrioma, or chocolate cyst, arises from invagination and cyclic hemorrhage of the ovarian cortex. It contains altered thick, dark brown, hemolyzed blood. On transvaginal ultrasound, an endometrioma characteristically presents as a cystic unilocular mass with diffuse, low-level, homogeneous ground-glass internal echoes, devoid of internal vascularity.",
+      "tx": "An ovarian **endometrioma** (chocolate cyst) results from repetitive cyclic bleeding into ectopic endometrial cortex implants. Transvaginal pelvic ultrasonography characteristically demonstrates a round, thick-walled unilocular cyst containing **homogeneous low-level ground-glass echoes** without papillary projections or **internal vascular flow** on colour Doppler interrogation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cyclic bleeding of ectopic cortex implants accumulates hemolyzed blood"
+          },
+          {
+            "id": "b",
+            "label": "Formation of pseudocyst wall composed of fibrotic ovarian stroma"
+          },
+          {
+            "id": "c",
+            "label": "Transvaginal ultrasound reveals homogeneous ground-glass echogenicity"
+          },
+          {
+            "id": "d",
+            "label": "Absence of internal vascularity differentiates from solid ovarian neoplasms"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Laparoscopic cystectomy with complete excision of the endometrioma pseudocapsule is significantly superior to simple drainage, fenestration, or ablation. Stripping the cyst wall provides superior pain relief, lower cyst recurrence rates, and higher subsequent spontaneous pregnancy rates. However, meticulous surgical technique using bipolar energy is essential to preserve surrounding healthy ovarian reserve.",
+      "tx": "Laparoscopic **ovarian cystectomy** with complete stripping of the endometrioma pseudocapsule is significantly superior to drainage and electroablation. Cystectomy achieves superior **long-term pain relief**, reduces cyst recurrence, and improves spontaneous pregnancy rates. Surgeons must employ meticulous **hemostasis with minimal thermal coagulation** to safeguard the adjacent primordial follicular pool.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Laparoscopic Cystectomy (Stripping)",
+          "points": [
+            "Complete pseudocapsule excision of the cyst wall",
+            "Significantly lower cyst recurrence rates (10%)",
+            "Superior relief from chronic dysmenorrhoea",
+            "Higher spontaneous post-op conception rates"
+          ]
+        },
+        "right": {
+          "title": "Ablation / Fenestration Alone",
+          "points": [
+            "Simple drainage and thermal coagulation of wall",
+            "High recurrence rate exceeding 40 to 50 percent",
+            "Frequent persistence of residual active endometrium",
+            "Less trauma to ovarian reserve in low-reserve women"
+          ]
+        },
+        "caption": "Laparoscopic cystectomy with pseudocapsule excision protecting ovarian reserve. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Deep infiltrating endometriosis is defined anatomically as endometriosis lesions that penetrate more than five millimetres beneath the peritoneal surface. These lesions commonly infiltrate the uterosacral ligaments, posterior vaginal fornix, rectovaginal septum, and muscular wall of the rectosigmoid colon or bladder, frequently requiring complex multidisciplinary surgical excision.",
+      "tx": "**Deep infiltrating endometriosis** is defined anatomically as implants penetrating **more than 5 mm beneath the peritoneum**. These fibrotic, deeply invasive lesions commonly involve the **uterosacral ligaments**, pouch of Douglas, rectovaginal septum, and anterior bowel muscularis, causing severe dyspareunia and dyschezia requiring complex **radical excision**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical Site",
+          "Clinical Presentation",
+          "Diagnostic and Surgical Approach"
+        ],
+        "rows": [
+          [
+            "Uterosacral ligaments",
+            "Implants penetrate beyond 5 mm depth beneath the peritoneal surface",
+            "Laparoscopic resection with ureterolysis to avoid ureteral injury"
+          ],
+          [
+            "Rectovaginal septum",
+            "Severe deep dyspareunia, painful defecation",
+            "Transvaginal/laparoscopic excision; mobilization of rectum"
+          ],
+          [
+            "Rectosigmoid colon",
+            "Cyclic rectal bleeding (hematochezia), bowel stenosis",
+            "Shaving technique, disc resection, or segmental bowel resection"
+          ],
+          [
+            "Bladder detrusor",
+            "Cyclic dysuria and hematuria (catamenial)",
+            "Partial cystectomy with primary layered bladder repair"
+          ]
+        ],
+        "caption": "Deep infiltrating endometriosis penetrating beyond 5 mm depth beneath peritoneum. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "First line medical therapy for endometriosis-associated pelvic pain includes continuous combined oral contraceptives, high-dose progestins such as dienogest at two milligrams daily, or the levonorgestrel-releasing intrauterine system. These agents induce decidualization and subsequent atrophy of both eutopic and ectopic endometrium, effectively suppressing ovulation and cyclic dysmenorrhoea.",
+      "tx": "First-line medical treatment for endometriosis-associated pain utilizes continuous combined oral contraceptives, the **levonorgestrel-releasing intrauterine system** (LNG-IUS), or targeted progestins such as **oral dienogest 2 mg daily**. Dienogest achieves marked hypoestrogenic **decidualization and atrophy of endometriotic implants**, significantly reducing chronic pelvic pain and dysmenorrhoea.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Prescribe oral dienogest 2 mg daily or insert 52 mg LNG-IUS"
+          },
+          {
+            "id": "b",
+            "label": "Suppression of pituitary gonadotropins and ovarian steroidogenesis"
+          },
+          {
+            "id": "c",
+            "label": "Local decidualization followed by progressive atrophy of implants"
+          },
+          {
+            "id": "d",
+            "label": "Prostaglandin downregulation provides sustained non-surgical pain relief"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adenomyosis is defined as the benign invasion of functional endometrial glands and stroma deep into the myometrium, situated at least two point five millimetres beneath the endometrial-myometrial junction, accompanied by surrounding smooth muscle hyperplasia. Patients classically present with progressive heavy menstrual bleeding and severe secondary dysmenorrhoea in multiparous women in their late thirties and forties.",
+      "tx": "**Adenomyosis** is defined histopathologically by the presence of heterotopic **endometrial glands and stroma >=2.5 mm within the myometrium**, surrounded by reactive smooth muscle hyperplasia. Clinically, it presents with a triad of **heavy menstrual bleeding**, severe secondary dysmenorrhoea, and a globally enlarged, tender, globular uterus in women in their forties.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adenomyosis-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Adenomyosis histopathology showing ectopic glands and myometrial hypertrophy. Credit: StewardMD.",
+        "alt": "Pathology and imaging features of adenomyosis demonstrating myometrial invasion."
+      }
+    },
+    {
+      "say": "Magnetic resonance imaging is the definitive non-invasive imaging modality for diagnosing adenomyosis, demonstrating asymmetric thickening of the endometrial-myometrial junctional zone exceeding twelve millimetres on T2-weighted sequences. A junctional zone thickness below eight millimetres reliably excludes the condition, while eight to twelve millimetres represents an equivocal zone requiring assessment of punctate high-signal myometrial cysts.",
+      "tx": "Pelvic magnetic resonance imaging is the reference standard for non-invasive diagnosis, identifying an **asymmetric thickening of the junctional zone exceeding 12 mm** on T2-weighted MRI sequences. A junctional zone thickness below 8 mm reliably excludes adenomyosis, while diagnostic confidence is further strengthened by detecting **punctate high-signal myometrial cysts** representing ectopic glandular hemorrhage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diagnostic MRI Findings",
+          "points": [
+            "Junctional zone thickening exceeding 12 mm diagnostic threshold",
+            "Asymmetric myometrial wall thickening",
+            "Punctate high T2-signal endometrial islands",
+            "Globular uterine enlargement without discrete capsules"
+          ]
+        },
+        "right": {
+          "title": "Differentiating Uterine Fibroids (Leiomyomas)",
+          "points": [
+            "Sharply circumscribed round pseudo-capsule",
+            "Hypointense homogeneous T2 signal",
+            "Displaces rather than thickens junctional zone",
+            "Easily enucleated during surgical myomectomy"
+          ]
+        },
+        "caption": "Pelvic MRI demonstrating junctional zone thickening exceeding 12 mm diagnostic threshold. Credit: StewardMD."
+      }
+    }
+  ]
+}

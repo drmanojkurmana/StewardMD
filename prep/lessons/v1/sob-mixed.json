@@ -1,0 +1,257 @@
+{
+  "v": 1,
+  "module": "sob-mixed",
+  "title": "Maternal-Fetal High-Yield Topics: HRT, Lung Maturity, Folic Acid, GDM, Inversion, and Neoplasia",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 1, Ch 21, Ch 27",
+    "Ten Teachers Gynaecology 21e Ch 19, Ch 16",
+    "ACOG Practice Bulletins on Hormone Therapy, GDM, and Fetal Lung Maturity"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Menopausal hormone replacement therapy with systemic estrogen preserves bone mineral density and significantly reduces osteoporotic hip and vertebral fractures. However, combined estrogen-progestin therapy continued beyond five years is associated with increased risks of invasive breast cancer, coronary heart disease, and venous thromboembolic events.",
+      "tx": "Systemic **hormone replacement therapy** with estrogen preserves **bone mineral density** and significantly reduces osteoporotic hip and vertebral fractures. However, combined continuous estrogen-progestin regimens administered beyond **5 years** carry an elevated relative **breast cancer risk**, stroke hazard, and venous thromboembolic disease.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-obg-speculum_insert.webp",
+        "ar": 1.3333,
+        "caption": "Clinical speculum examination and postmenopausal mucosal inspection. Credit: StewardMD.",
+        "alt": "Clinical speculum insertion technique for assessing genital mucosal health."
+      }
+    },
+    {
+      "say": "Amniotic fluid analysis for fetal lung maturity utilizes the lecithin to sphingomyelin ratio. Type two alveolar pneumocytes synthesize increasing concentrations of lecithin as gestation advances, while sphingomyelin levels remain relatively constant. An L to S ratio exceeding two point zero indicates mature fetal surfactant production and minimal risk of respiratory distress syndrome.",
+      "tx": "In amniocentesis fluid analysis, an elevated **lecithin-sphingomyelin ratio** exceeding **2.0** reflects mature alveolar **surfactant** synthesis by fetal type II pneumocytes. This biochemical threshold confirms **fetal lung maturity** and predicts an exceptionally low probability of neonatal respiratory distress syndrome following delivery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Amniocentesis samples amniotic fluid for fetal surfactant analysis"
+          },
+          {
+            "id": "b",
+            "label": "Quantify concentrations of surfactant lecithin and stable sphingomyelin"
+          },
+          {
+            "id": "c",
+            "label": "Lecithin-to-sphingomyelin (L/S) ratio surpasses 2.0"
+          },
+          {
+            "id": "d",
+            "label": "Confirms mature lung profile with low risk of respiratory distress"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Periconceptional folic acid supplementation is essential for preventing fetal neural tube defects like anencephaly and spina bifida. For primary prevention in low-risk women, the recommended dose is four hundred micrograms daily. For secondary prevention in women with a prior pregnancy affected by a neural tube defect, the dose is four thousand micrograms, or four milligrams, daily starting one month prior to conception.",
+      "tx": "Standard **folic acid dosing** requires **400 mcg daily** for **primary prevention** of neural tube defects in low-risk women. For **secondary prevention** in women with a prior affected child, the therapeutic dose increases to **4000 mcg (4 mg) daily** initiated **1 month** prior to conception and continued throughout the first trimester.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Prevention Category",
+          "Target Population",
+          "Recommended Daily Folic Acid Dose"
+        ],
+        "rows": [
+          [
+            "Primary prevention",
+            "All reproductive-aged women planning pregnancy",
+            "400 mcg (0.4 mg) daily from 1 month pre-pregnancy"
+          ],
+          [
+            "Secondary prevention",
+            "History of neural tube defect in prior pregnancy",
+            "4000 mcg (4.0 mg) daily from 1 month pre-pregnancy"
+          ],
+          [
+            "High-risk medical",
+            "Maternal pregestational diabetes or antiepileptic therapy",
+            "4000 mcg (4.0 mg) daily throughout early organogenesis"
+          ],
+          [
+            "Duration of therapy",
+            "Preconception through end of first trimester",
+            "Covers critical neural tube closure window (day 28 post-conception)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Gestational diabetes screening commonly employs the two-step approach. A fifty gram one-hour oral glucose challenge test is administered between twenty four and twenty eight weeks without regard to time of day or meals. A plasma glucose level exceeding one hundred and forty milligrams per decilitre identifies women requiring definitive diagnostic testing with a seventy five or one hundred gram oral glucose tolerance test.",
+      "tx": "The two-step **gestational diabetes** screening protocol utilizes a **50 g 1-hour glucose challenge test** between 24 and 28 weeks. A plasma venous glucose exceeding the **140 mg/dL** **screening threshold** identifies women who require definitive diagnostic testing with a formal 3-hour **100 g or 75 g oral glucose tolerance test**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Administer non-fasting 50 g oral glucose load at 24 to 28 weeks"
+          },
+          {
+            "id": "b",
+            "label": "Measure venous plasma glucose precisely 1 hour post-load"
+          },
+          {
+            "id": "c",
+            "label": "Glucose >=140 mg/dL identifies high-risk screen-positive status"
+          },
+          {
+            "id": "d",
+            "label": "Perform diagnostic fasting 100 g or 75 g 3-hour oral glucose tolerance test"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Congenital toxoplasmosis presents with a characteristic triad of signs in the affected neonate. Primary maternal infection with Toxoplasma gondii transmits tachyzoites across the placenta, producing chorioretinitis, hydrocephalus, and diffuse intracranial calcifications throughout the brain parenchyma. Maternal spiramycin prevents transmission, while pyrimethamine and sulfadiazine treat active fetal disease.",
+      "tx": "Maternal acquisition of **congenital toxoplasmosis** classically produces the classic neonatal triad of **chorioretinitis, hydrocephalus, and intracranial calcifications**. In sharp contrast to cytomegalovirus which lines the periventricular zone, toxoplasma calcifications are scattered diffusely throughout the cerebral cortex and deep basal ganglia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Congenital Toxoplasmosis Triad",
+          "points": [
+            "Bilateral focal chorioretinitis",
+            "Obstructive hydrocephalus",
+            "Diffuse cerebral parenchymal calcifications",
+            "Treated with pyrimethamine and sulfadiazine"
+          ]
+        },
+        "right": {
+          "title": "Congenital Cytomegalovirus",
+          "points": [
+            "Periventricular calcification pattern",
+            "Sensorineural hearing loss and microcephaly",
+            "Petechial blueberry muffin skin lesions",
+            "Treated with intravenous ganciclovir"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Acute uterine inversion during the third stage of labour presents with sudden postpartum hemorrhage and profound neurogenic shock out of proportion to visible blood loss, caused by traction on the peritoneal infundibulopelvic ligaments. Immediate manual replacement using the Johnson maneuver before removing the placenta is lifesaving, assisted by uterine relaxation with halogenated anaesthetics or nitroglycerin.",
+      "tx": "Acute **uterine inversion** produces severe **neurogenic shock** and hemorrhage caused by traction on peritoneal ligaments. Management demands immediate manual uterine replacement via the **Johnson maneuver** (grasping the fundus in the palm and elevating it toward the umbilicus) before attempting placental removal, aided by **nitroglycerin** or halogenated volatile anaesthetics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Fundus inverts into vagina; acute neurogenic shock and hemorrhage"
+          },
+          {
+            "id": "b",
+            "label": "Do not remove adherent placenta to prevent catastrophic exsanguination"
+          },
+          {
+            "id": "c",
+            "label": "Administer nitroglycerin or halogenated anaesthetic for myometrial relaxation"
+          },
+          {
+            "id": "d",
+            "label": "Perform Johnson maneuver: apply steady upward pressure toward umbilicus"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "High-risk human papillomavirus genotypes sixteen and eighteen cause over seventy percent of all invasive cervical carcinomas worldwide. The virus integrates into the host human genome, expressing viral oncoproteins E6 and E7. Oncoprotein E6 binds and degrades the p53 tumour suppressor protein, while oncoprotein E7 binds and inactivates the retinoblastoma protein, causing uncontrolled cellular replication.",
+      "tx": "Genotypes **HPV 16 and 18** cause over **70 percent** of invasive cervical carcinomas. The viral oncoproteins **E6 and E7** drive malignant transformation by binding and inactivating the host **p53 and pRb** tumor suppressor proteins respectively, abolishing critical cell cycle checkpoints and permitting unchecked genomic instability.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-ins-various-resectoscopes.webp",
+        "ar": 1.3333,
+        "caption": "Diagnostic instruments and cervical excisional equipment. Credit: StewardMD.",
+        "alt": "Specialized operative and endoscopic instruments with documentation standards."
+      }
+    },
+    {
+      "say": "Mature cystic teratoma, or dermoid cyst, is the most frequent benign ovarian germ cell neoplasm in women of reproductive age. Derived from at least two of the three germ layers, it characteristically contains sebaceous material, hair, teeth, and thyroid tissue. In one to two percent of cases, malignant transformation occurs, predominantly developing into squamous cell carcinoma.",
+      "tx": "A **mature cystic teratoma**, or **dermoid cyst**, is the most common benign ovarian germ cell tumor in young women. Composed of mature ectodermal, mesodermal, and endodermal tissues, approximately **1 to 2 percent** undergo malignant transformation, predominantly into **squamous cell carcinoma** arising from ectodermal elements.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ovarian Neoplasm",
+          "Tissue Composition",
+          "Malignant Transformation Risk"
+        ],
+        "rows": [
+          [
+            "Mature cystic teratoma (Dermoid)",
+            "Mature tissues from all 3 germ layers",
+            "1 to 2 percent transform into squamous cell carcinoma"
+          ],
+          [
+            "Immature teratoma",
+            "Immature neuroectodermal elements",
+            "Inherently malignant; graded by amount of neuroepithelium"
+          ],
+          [
+            "Struma ovarii",
+            "Monodermal teratoma composed of thyroid tissue",
+            "Can cause hyperthyroidism; rare malignant transformation"
+          ],
+          [
+            "Carcinoid tumor of ovary",
+            "Neuroendocrine argentaffin cells in teratoma",
+            "Can trigger carcinoid syndrome without liver metastases"
+          ]
+        ]
+      }
+    }
+  ]
+}

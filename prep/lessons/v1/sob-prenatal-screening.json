@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "module": "sob-prenatal-screening",
+ "title": "Prenatal Aneuploidy Screening and Invasive Diagnostic Procedures",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Williams Obstetrics 25e Ch 13 (Genetics), Ch 14 (Prenatal Diagnosis)",
+  "Ten Teachers Gynaecology 21e",
+  "ACOG Practice Bulletin No. 226 (Screening for Fetal Chromosomal Abnormalities)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The **first trimester combined screening** performed between 11 and 13 weeks 6 days integrates sonographic **nuchal translucency** (NT) measurement with maternal serum analytes: free **beta-hCG** and pregnancy-associated plasma protein A (**PAPP-A**). In Down syndrome gestations, beta-hCG is elevated while PAPP-A is depressed, achieving an 85 percent detection rate. Clinically, key parameters encompass 21.",
+   "say": "First trimester combined screening provides early aneuploidy risk stratification between eleven weeks and thirteen weeks six days. It couples exact sonographic measurement of fetal nuchal translucency with maternal biochemical analytes, specifically free beta-hCG and pregnancy-associated plasma protein A. Down syndrome typically displays high beta-hCG and low PAPP-A, identifying eighty-five percent of affected fetuses.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-prenatal-screening-gen1.webp",
+    "ar": 1.7778,
+    "caption": "First-trimester ultrasound measuring fetal nuchal translucency thickness. Credit: StewardMD.",
+    "alt": "Mid-sagittal ultrasound view of a first-trimester fetus illustrating the calliper placement for measuring nuchal translucency thickness."
+   }
+  },
+  {
+   "tx": "Pathological **increased nuchal translucency** exceeding 3.5 mm or the 99th percentile represents a critical sonographic flag. Beyond classical aneuploidies like **Down syndrome** and **Turner syndrome** (45,X), marked fluid accumulation in the fetal posterior neck strongly correlates with major structural **congenital cardiac anomalies**, diaphragmatic hernia, and genetic syndromes like Noonan. Clinically, key parameters encompass 99.",
+   "say": "A nuchal translucency measurement exceeding three point five millimetres or surpassing the ninety-ninth percentile demands immediate diagnostic attention. Even with completely normal karyotype and chromosomal microarray, severe nuchal thickening is an established marker for major congenital heart defects, diaphragmatic hernias, skeletal dysplasias, and monogenic syndromes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "NT Thickness Tier",
+     "Down Syndrome Risk",
+     "Clinical Evaluation Protocol"
+    ],
+    "rows": [
+     [
+      "Normal (< 95th percentile)",
+      "Population baseline risk",
+      "Proceed with standard second-trimester structural anomaly anatomy scan"
+     ],
+     [
+      "Borderline (95th to 99th percentile)",
+      "Moderately increased risk",
+      "Offer cell-free DNA or diagnostic amniocentesis with detailed scan"
+     ],
+     [
+      "Marked (>= 3.5 mm or > 99th)",
+      "High risk (aneuploidy & structural)",
+      "Immediate microarray amniocentesis, Noonan gene panel, fetal echocardiography"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cell-free fetal DNA (**cfDNA**) non-invasive prenatal testing utilizes circulating placental trophoblastic fragments extracted from maternal plasma from 10 weeks onward. For **trisomy 21**, cfDNA demonstrates unprecedented clinical performance with a **detection rate exceeding 99 percent** and a false-positive rate under 0.1 percent, though it remains a screening tool.",
+   "say": "Non-invasive prenatal testing analyzes cell-free trophoblastic DNA fragments circulating in maternal blood starting at ten weeks gestation. For trisomy twenty-one, cell-free testing achieves a sensitivity over ninety-nine percent with an extremely low false-positive rate below zero point one percent. However, patients must understand it is a screening modality requiring invasive diagnostic confirmation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Maternal blood draw at >= 10 weeks gestation"
+     },
+     {
+      "id": "b",
+      "label": "Extraction and quantification of circulating cfDNA fetal fraction"
+     },
+     {
+      "id": "c",
+      "label": "Next-generation sequencing or targeted microarray counting"
+     },
+     {
+      "id": "d",
+      "label": "Risk calculation: >99% detection rate for trisomy 21"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The second trimester **quadruple marker screen** is offered between 15 and 20 weeks of gestation, measuring maternal alpha-fetoprotein (AFP), hCG, **unconjugated estriol** (uE3), and **inhibin-A**. In Down syndrome pregnancies, both hCG and inhibin-A levels are significantly elevated, whereas maternal serum **AFP and uE3 are depressed**. Clinically, key parameters encompass 21.",
+   "say": "When patients present beyond the first trimester window, the second trimester quadruple marker screen provides risk assessment between fifteen and twenty weeks. The four analytes comprise alpha-fetoprotein, human chorionic gonadotropin, unconjugated estriol, and dimeric inhibin-A. Down syndrome exhibits elevated hCG and inhibin-A with decreased AFP and estriol, detecting roughly eighty percent of cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Down Syndrome (Trisomy 21)",
+     "points": [
+      "Serum hCG: Markedly elevated (> 2.0 MoM)",
+      "Dimeric Inhibin-A: Markedly elevated (> 2.0 MoM)",
+      "MSAFP & unconjugated estriol (uE3): Depressed (< 0.7 MoM)"
+     ]
+    },
+    "right": {
+     "title": "Edwards Syndrome (Trisomy 18)",
+     "points": [
+      "Serum hCG: Markedly decreased (< 0.5 MoM)",
+      "Dimeric Inhibin-A: Normal or decreased",
+      "MSAFP & unconjugated estriol: Uniformly depressed (triple low)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Elevated **maternal serum alpha-fetoprotein** (MSAFP) exceeding 2.5 multiples of the median (MoM) alerts the clinician to open fetal defects. Fetal serum AFP leaks directly into amniotic fluid and maternal circulation in **open neural tube defects** (anencephaly, spina bifida), ventral **abdominal wall defects** (gastroschisis, omphalocele), and unrecognized multiple gestations.",
+   "say": "Maternal serum alpha-fetoprotein normally rises through the second trimester as fetal synthesis increases. When MSAFP exceeds two point five multiples of the median, sonographic evaluation is mandatory to rule out dating errors, multiple gestations, and fetal demise. The primary structural pathologies causing major elevations are open neural tube defects, gastroschisis, and omphalocele.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MSAFP Level",
+     "Etiological Differential",
+     "Diagnostic Confirmation Steps"
+    ],
+    "rows": [
+     [
+      "> 2.5 MoM (Elevated)",
+      "Open spina bifida, anencephaly, gastroschisis",
+      "Targeted anatomy scan; amniotic fluid AFP and acetylcholinesterase"
+     ],
+     [
+      "< 0.5 MoM (Low)",
+      "Trisomy 21, Trisomy 18, fetal demise, over-dating",
+      "Comprehensive aneuploidy review and second-trimester quadruple calculation"
+     ],
+     [
+      "Markedly elevated (> 5.0 MoM)",
+      "Congenital nephrotic syndrome, cloacal exstrophy",
+      "Amniocentesis, fetal renal sonography, placental histology review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chorionic villus sampling** (CVS) is an invasive diagnostic procedure performed between 10 and 13 weeks 6 days gestation via transcervical or transabdominal routes under ultrasound guidance. CVS provides rapid access to rapidly dividing cytotrophoblasts for **fetal karyotyping**, carrying a **procedure-related pregnancy loss rate** of 0.2 to 0.5 percent. Clinically, key parameters encompass limb reduction.",
+   "say": "Chorionic villus sampling offers first trimester definitive diagnostic genetic testing between ten and thirteen weeks. Biopsy of actively dividing trophoblastic villi permits rapid direct karyotyping and high-resolution chromosomal microarray. Procedure-related pregnancy loss remains low at roughly zero point two to zero point five percent in expert hands.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Continuous real-time transabdominal ultrasound guidance"
+     },
+     {
+      "id": "b",
+      "label": "Aspiration of chorionic villi from placental bed (10-13+6 wks)"
+     },
+     {
+      "id": "c",
+      "label": "Cytotrophoblast short-term culture & mesenchymal long-term culture"
+     },
+     {
+      "id": "d",
+      "label": "Chromosomal microarray & karyotype reporting within 7-10 days"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Amniocentesis** is performed from 15 weeks onward by introducing a 20- to 22-gauge needle under continuous real-time ultrasound guidance into a clear amniotic fluid pocket. Fluid analysis enables definitive fetal karyotyping, **chromosomal microarray**, viral PCR for congenital infections, and biochemical enzyme assays with a procedural loss risk below 0.3 percent.",
+   "say": "Second trimester amniocentesis remains the gold standard invasive diagnostic procedure from fifteen weeks onward. Under continuous ultrasound visualization, amniocytes shed from fetal skin and mucosal surfaces are aspirated. It carries a procedural pregnancy loss rate below zero point three percent and allows complete karyotype, microarray, and viral PCR evaluation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chorionic Villus Sampling (CVS)",
+     "points": [
+      "Timing: 10 to 13 weeks 6 days of gestation",
+      "Tissue: Placental trophoblast villi",
+      "Advantage: Early diagnostic answer in first trimester"
+     ]
+    },
+    "right": {
+     "title": "Genetic Amniocentesis",
+     "points": [
+      "Timing: 15 weeks onward until late pregnancy",
+      "Tissue: Sloughed fetal epithelial amniocytes",
+      "Advantage: Zero risk of confined placental mosaicism"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Confined placental mosaicism** (CPM) accounts for 1 to 2 percent of abnormal CVS karyotypes, wherein a chromosomal discrepancy exists between placental villous tissue and true fetal lineage. When CVS detects trisomy 13, 18, or sex chromosome mosaicism, follow-up **amniocentesis is mandatory** to confirm or refute fetal involvement before clinical decision-making. Clinically, key parameters encompass chorionic villus sampling.",
+   "say": "In one to two percent of chorionic villus samples, genetic discordance arises between the placenta and the fetus, known as confined placental mosaicism. Because CVS samples outer trophoblast or mesenchyme, an abnormal result may represent a mutation confined strictly to the placenta. Clinicians must perform follow-up amniocentesis to analyze true embryonic amniocyte lineages.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-prenatal-screening-fig1.webp",
+    "ar": 1.4884,
+    "caption": "Quadruple screen markers and invasive testing protocols. Credit: StewardMD.",
+    "alt": "Summary diagram displaying maternal serum quadruple screening patterns and ultrasound-guided invasive amniocentesis technique."
+   }
+  }
+ ]
+}
