@@ -6,8 +6,8 @@
   "minutes": 10,
   "steps": [
     {
-      "tx": "Driver mutations differ by subtype, so the tumor type points toward the genetic change. **Papillary** carcinoma (a cancer with finger-like projections) is driven mainly by **BRAF V600E** or **RET/PTC** fusions, while **follicular** carcinoma (arising from follicle cells) is driven by **RAS** point mutations or a **PAX8::PPARG** fusion. **Medullary** carcinoma (arising from calcitonin-making C cells) is driven by a **RET** mutation. **Anaplastic** carcinoma (poorly differentiated, fast-growing) shows **TP53** loss and **TERT promoter** mutations. **Oncocytic** tumors (cells packed with mitochondria) carry changes in **mitochondrial genes**, mostly electron transport chain enzymes.",
-      "say": "The tumor type is a clue to what drives it. Papillary, follicular, medullary and anaplastic cancers each carry a signature change that clinicians learn to recognize. Oncocytic tumors take their own route, with changes in the genes carried by mitochondria, the cell's power plants. The table on screen gives the main driver for every subtype at a glance.",
+      "tx": "Driver mutations differ by subtype. **Papillary** carcinoma (a cancer with finger-like projections) is driven mostly by MAPK pathway changes (a chain of growth signals), including **BRAF V600E** and **RET/PTC** fusions. **Follicular** carcinoma (arising from follicle cells) relies on **RAS** point mutations or a **PAX8::PPARG** fusion. **Medullary** carcinoma (arising from calcitonin-making C cells) is driven by a **RET** mutation. **Anaplastic** carcinoma (poorly differentiated and fast-growing) shows **TP53** loss and **TERT** promoter mutations. **Oncocytic** tumors (cells packed with mitochondria) carry changes in **mitochondrial genes**.",
+      "say": "The tumor type is a useful clue to what drives it. Papillary, follicular, medullary and anaplastic cancers each tend to carry a recognizable genetic change. Oncocytic tumors follow their own route, with changes in the genes carried by mitochondria, the cell's energy-producing structures. The table on screen gives the main driver for each subtype at a glance.",
       "vis": {
         "kind": "table",
         "cols": [
@@ -29,12 +29,12 @@
           [
             "Medullary",
             "RET mutation",
-            "Inherited in MEN 2 syndromes"
+            "Inherited in multiple endocrine neoplasia type 2 (MEN 2)"
           ],
           [
             "Anaplastic",
             "TP53 loss and TERT promoter mutation",
-            "Shares BRAF or RAS changes with differentiated tumors"
+            "Shares early BRAF V600E or RAS changes"
           ],
           [
             "Oncocytic",
@@ -45,8 +45,8 @@
       }
     },
     {
-      "tx": "In **papillary** carcinoma, the **BRAF V600E** point mutation (a single amino acid swap in the BRAF kinase gene) acts as the initiating trigger in up to 50% of tumors, and it may predict a worse course when lymph nodes are involved. Separately, **RET/PTC** rearrangements (fusions of the RET kinase gene with a partner gene) appear in about 40% of sporadic adult cases and in 80% of cases linked to external radiation.",
-      "say": "Papillary carcinoma often turns on a single amino acid swap in the BRAF kinase gene, written V600E, which can start the cancer's growth. Researchers find this change in up to half of tumors, and it may signal a worse course once lymph nodes are involved. A second route, rearrangements of the RET gene, is seen in about 40 percent of sporadic adult cases. Among tumors linked to external radiation, that share climbs to around 80 percent.",
+      "tx": "In **papillary** carcinoma, the **BRAF V600E** point mutation (a single amino acid swap in the BRAF kinase gene) is the initiating trigger in up to 50% of tumors, and it may predict a worse course when lymph nodes are involved. Separately, **RET/PTC** rearrangements (fusions of the RET kinase gene with a partner gene) appear in about 40% of sporadic adult cases, about 60% of cases in children, and about 80% of cases linked to external radiation.",
+      "say": "Papillary carcinoma often turns on a single amino acid swap in the BRAF kinase gene, written V600E. That change starts the tumor's growth in up to half of cases, and it may signal a worse course once lymph nodes are involved. A second route is rearrangement of the RET gene, seen in about 40 percent of sporadic adult cases. The share rises in children and reaches around 80 percent after external radiation.",
       "vis": {
         "kind": "compare",
         "left": {
@@ -60,7 +60,7 @@
         "right": {
           "title": "RET/PTC rearrangement",
           "points": [
-            "Fusion of the RET kinase gene with a partner",
+            "Fusion of the RET kinase gene with a partner gene",
             "About 40% of sporadic adult cases",
             "About 60% of cases in children",
             "About 80% after external radiation"
@@ -69,7 +69,7 @@
       }
     },
     {
-      "tx": "Adding a **TERT promoter mutation** changes the picture. The **TERT** gene encodes telomerase reverse transcriptase, the enzyme that maintains chromosome ends. When these promoter mutations coexist with BRAF V600E in papillary tumors, the two changes produce a **synergistic** effect (the combined impact exceeds the sum of each alone) on aggressiveness, including higher rates of recurrence and patient mortality.",
+      "tx": "Adding a **TERT promoter mutation** (a change in the gene's on-switch region) changes the picture. The **TERT** gene encodes telomerase reverse transcriptase, the enzyme that maintains chromosome ends. When these promoter mutations coexist with BRAF V600E in papillary tumors, the two changes have a **synergistic** effect (the combined impact is stronger than either change alone) on aggressiveness, including higher rates of recurrence and patient mortality.",
       "say": "Now a second change is added to the first. A promoter mutation in the TERT gene, which carries the instructions for telomerase, sometimes appears alongside BRAF V600E. The two changes work together, so their combined effect on aggressiveness is stronger than either alone. That pairing is linked with recurrence and with higher patient mortality.",
       "vis": {
         "kind": "flow",
@@ -111,8 +111,8 @@
       }
     },
     {
-      "tx": "**Follicular** carcinoma is rarely driven by BRAF or RET changes. Its main drivers are **RAS** point mutations (a family of growth-signal genes, with NRAS the most frequent member), found in 30% to 50% of cases, and a **PAX8::PPARG** fusion (a joined PAX8 transcription factor and PPARG nuclear receptor gene), found in 26% to 56%. Only 3% of tumors carry both changes.",
-      "say": "Follicular cancers follow a different script from papillary ones. RAS point mutations turn up in between 30 and 50 percent of cases, and NRAS is the member most often involved. PAX8 joined to PPARG appears in between 26 and 56 percent. The two rarely overlap, so finding one usually means the other is absent.",
+      "tx": "**Follicular** carcinoma is rarely driven by BRAF or RET changes. Its main drivers are **RAS** point mutations (changes in a family of growth-signal genes, with NRAS the most common member), found in 30% to 50% of cases, and a **PAX8::PPARG** fusion (a joined PAX8 transcription factor, a gene switch, and PPARG nuclear receptor gene), found in 26% to 56%. Only 3% of tumors carry both changes, so the two are largely mutually exclusive.",
+      "say": "Follicular cancers follow a different script from papillary ones. RAS point mutations turn up in somewhere between 30 and 50 percent of cases, and NRAS is the member most often involved. A fusion of PAX8 with PPARG appears in between 26 and 56 percent. The two changes rarely overlap, so finding one usually means the other is absent.",
       "vis": {
         "kind": "compare",
         "left": {
@@ -120,8 +120,8 @@
           "points": [
             "NRAS more common than HRAS or KRAS",
             "Found in 30% to 50% of follicular tumors",
-            "Linked to more aggressive behavior",
-            "Associated with higher mortality"
+            "Associated with more aggressive behavior",
+            "Associated with higher patient mortality"
           ]
         },
         "right": {
@@ -130,14 +130,14 @@
             "Joins a thyroid transcription factor to a nuclear receptor",
             "Found in 26% to 56% of follicular tumors",
             "Largely independent of RAS mutations",
-            "Rarely co-occurs with RAS changes"
+            "Both changes together in only 3%"
           ]
         }
       }
     },
     {
-      "tx": "**Anaplastic** carcinoma shares early **BRAF V600E** and RAS changes with differentiated tumors. Its own hallmarks include loss of **TP53** (a tumor suppressor that guards the cell cycle and DNA repair), found in about 48% of samples, and **TERT promoter** mutations in about 43%. **CTNNB1** mutations, which encode beta-catenin, reach up to 66% and are absent from papillary and follicular tumors.",
-      "say": "Anaplastic carcinoma is at the far end of the spectrum. It inherits some early changes from well-differentiated cancers, such as BRAF and RAS alterations. Its distinctive changes include TP53 loss, found in roughly half of cases, and TERT promoter mutations in about 43 percent. Beta-catenin changes are another layer absent from papillary and follicular tumors.",
+      "tx": "**Anaplastic** carcinoma shares early **BRAF V600E** and **RAS** changes with differentiated tumors. Its own hallmarks include loss of **TP53** (a tumor suppressor that guards the cell cycle and DNA repair), found in about 48% of samples, and **TERT promoter** mutations in about 43%. **CTNNB1** mutations, which affect beta-catenin (a signaling protein), reach up to 66% and are absent from papillary and follicular tumors.",
+      "say": "Anaplastic carcinoma is at the far end of the spectrum. It inherits some early changes from well-differentiated cancers, such as BRAF and RAS alterations. Its distinctive changes are loss of TP53 in roughly half of cases and TERT promoter mutations in about 43 percent. Beta-catenin gene changes are another layer, and they are absent from papillary and follicular tumors.",
       "vis": {
         "kind": "table",
         "cols": [
@@ -158,12 +158,12 @@
           ],
           [
             "BRAF V600E",
-            "26%",
+            "About 26%",
             "Shared with differentiated tumors"
           ],
           [
             "RAS mutation",
-            "22%",
+            "About 22%",
             "Shared with differentiated tumors"
           ],
           [
@@ -175,8 +175,8 @@
       }
     },
     {
-      "tx": "After treatment, the **thyroid-stimulating hormone** (TSH) target depends on the chance of recurrence, measured in milli-international units per litre (mIU/L). For **low-risk** disease, the aim is the lower half of the normal range, 0.5 to 2.0 mIU/L. For **intermediate-risk** disease the target is 0.1 to 0.5 mIU/L, and for **high-risk** disease, or known metastases, it drops below 0.1 mIU/L. **Levothyroxine** (LT4, a synthetic thyroid hormone) holds TSH at these levels.",
-      "say": "Once treatment is complete, the goal for TSH depends on how likely the cancer is to return. Low-risk patients are kept in the lower half of the normal range, which runs from zero point five to two point zero milli-international units per litre. Intermediate-risk patients are held between zero point one and zero point five, while high-risk patients, or those with known spread, are kept below zero point one. Clinicians must always weigh suppression against the added risks to the heart and bones. Levothyroxine is the medicine that makes these targets achievable.",
+      "tx": "After treatment, the target for **thyroid-stimulating hormone** (TSH, the pituitary signal to the thyroid) depends on the chance of recurrence, measured in milli-international units per litre (mIU/L). For **low-risk** disease, TSH is kept in the lower half of the normal range, 0.5 to 2.0 mIU/L. For **intermediate-risk** disease the target is 0.1 to 0.5 mIU/L, and for **high-risk** disease it is 0.1 mIU/L or lower. **Levothyroxine** (LT4, a synthetic thyroid hormone) is the drug used to hold TSH at these levels.",
+      "say": "After treatment, the goal for TSH depends on how likely the cancer is to return, and clinicians set the target with that risk in mind. Low-risk patients are kept in the lower half of the normal range, which runs from 0.5 to 2.0 mIU/L. Intermediate-risk patients are held between 0.1 and 0.5, while high-risk patients are kept at 0.1 or lower. Clinicians must weigh that suppression against added risks to the heart and bones. Levothyroxine is the medicine that makes these targets achievable.",
       "vis": {
         "kind": "table",
         "cols": [
@@ -197,14 +197,71 @@
           ],
           [
             "High risk",
+            "0.1 mIU/L or lower",
+            "Weigh against heart and bone risk"
+          ],
+          [
+            "Known metastatic disease",
             "Below 0.1 mIU/L",
-            "Also used for known metastatic disease"
+            "Target applies to known metastases"
           ]
         ]
       }
     },
     {
-      "tx": "Long-term follow-up rests on three checks. **Serum thyroglobulin** (Tg, a protein made by thyroid cells, including cancer cells) is the sensitive marker of residual or recurrent disease. **Anti-thyroglobulin antibodies** (TgAb) occur in about 25% of patients with thyroid cancer and can falsely lower the measured Tg, so they are checked alongside it. A **neck ultrasound** completes the set, usually at 6 and 12 months after surgery, because most recurrences appear in cervical lymph nodes.",
+      "tx": "**Medullary** carcinoma is the exception to TSH suppression. Surgery is the main treatment. Afterward, thyroid hormone replacement aims to keep thyroid function normal (euthyroidism) rather than suppress TSH. Radioactive iodine is not used, because the calcitonin-making C cells do not take up iodine. Follow-up relies on serum calcitonin and carcinoembryonic antigen (CEA, a tumor marker).",
+      "say": "Medullary cancer does not follow the same TSH rule. After surgery, clinicians give hormone replacement that aims for normal thyroid function rather than suppression. Radioactive iodine is not useful, because the C cells that make calcitonin do not take up iodine. Clinicians track calcitonin and carcinoembryonic antigen in the blood to watch for return of disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Differentiated cancer",
+          "points": [
+            "TSH held down with levothyroxine",
+            "Radioiodine used for remnant or metastases",
+            "Thyroglobulin is the main marker"
+          ]
+        },
+        "right": {
+          "title": "Medullary cancer",
+          "points": [
+            "Replacement aims for normal thyroid function",
+            "Radioiodine not used, C cells do not take up iodine",
+            "Calcitonin and CEA track disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Oncocytic** tumors, also called Hürthle cell tumors, are packed with mitochondria. Most carry **mitochondrial DNA** mutations, in about 71% of tumors in one large cohort, mainly in enzymes of the electron transport chain (the protein chain that makes cellular energy). **TERT promoter** mutations appear in about 22% of these tumors, and **TP53** changes are uncommon.",
+      "say": "Oncocytic tumors, sometimes called Hürthle cell tumors, follow their own route. Their cells are crowded with mitochondria, and most of these tumors carry changes in mitochondrial DNA. A smaller share carries a TERT promoter mutation, while TP53 changes are uncommon. Recognizing this pattern helps when reading a genetic report.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Alteration",
+          "Frequency",
+          "Comment"
+        ],
+        "rows": [
+          [
+            "Mitochondrial DNA mutation",
+            "About 71%",
+            "Mainly electron transport chain enzymes"
+          ],
+          [
+            "TERT promoter mutation",
+            "About 22%",
+            "Lower than in anaplastic cancer"
+          ],
+          [
+            "TP53 change",
+            "Uncommon",
+            "Rare compared with anaplastic cancer"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Long-term follow-up rests on three checks. **Serum thyroglobulin** (Tg, a protein made by thyroid cells, including cancer cells) is the sensitive marker of residual or recurrent disease. **Anti-thyroglobulin antibodies** (TgAb, present in about 25% of patients with thyroid cancer) can falsely lower the measured Tg, so they are checked with it. A **neck ultrasound** completes the set, done at 6 and 12 months after surgery, because most recurrences appear in cervical lymph nodes.",
       "say": "Follow-up after thyroid cancer treatment relies on three checks used together. Thyroglobulin is a protein made by thyroid cells, so a rising level hints that tissue remains or has returned. Antibodies against thyroglobulin appear in about 25 percent of patients and can mask the true level, so clinicians measure them alongside it. A neck ultrasound then looks at the lymph nodes, where most recurrences occur.",
       "vis": {
         "kind": "table",
@@ -237,7 +294,7 @@
   "refs": [
     "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
     "Harrison's Principles of Internal Medicine, 22nd edition",
-    "American Thyroid Association differentiated thyroid cancer guideline, 2015"
+    "Ganly I, et al. Integrated genomic analysis of Hurthle cell cancer, Cancer Cell, 2018"
   ],
   "gen": "AI"
 }
