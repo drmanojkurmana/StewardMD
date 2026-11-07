@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "sgo-fertility-sparing-cervix",
+ "title": "Fertility-Sparing Surgery in Cervical Cancer (Trachelectomy): Patient Selection, SHAPE Trial and Obstetric Outcomes",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 10",
+  "NCCN Clinical Practice Guidelines in Oncology: Cervical Cancer (Version 1.2024)",
+  "Plante M et al. Simple Hysterectomy or Conization in Low-Risk Early-Stage Cervical Cancer (SHAPE). NEJM 2024"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Radical trachelectomy is an established surgical technique that allows young women with early-stage invasive cervical carcinoma to preserve reproductive potential without compromising long-term oncological survival.",
+   "tx": "In young women desiring **fertility sparing**, **radical trachelectomy**, whether performed via **vaginal trachelectomy (Dargent)** or abdominal approach, achieves **uterine corpus preservation** by resecting the cervix, upper 1 to 2 cm of vagina, and medial parametrium while conserving the corpus, fundus, and ovaries.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/gyn-cervix-endometrium-fig1.webp",
+    "ar": 1.8349,
+    "caption": "FIGO 2018 cervical cancer staging: anatomical spread. Credit: StewardMD.",
+    "alt": "Diagram illustrating anatomical spread of cervical cancer and preservation boundaries."
+   }
+  },
+  {
+   "say": "Candidate selection for radical trachelectomy requires rigorous pre-operative clinical and radiological evaluation to ensure the primary tumor is strictly confined to the ectocervix.",
+   "tx": "Strict oncological **eligibility criteria** mandate Stage IA1 with LVSI, Stage IA2, or Stage IB1 lesions, **tumor diameter <=2 cm**, squamous or typical HPV-associated adenocarcinoma histology, unequivocal **absence of upper canal involvement**, and radiologically or pathologically confirmed **negative nodes** without extrauterine disease spread.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Criterion",
+     "Permitted Finding",
+     "Disqualifying Finding"
+    ],
+    "rows": [
+     [
+      "FIGO Stage",
+      "IA1 with LVSI, IA2, IB1",
+      "Stage IB2, IB3, IIA or higher"
+     ],
+     [
+      "Tumor Dimension",
+      "Maximum diameter <= 2 cm",
+      "Tumor diameter exceeding 2 cm"
+     ],
+     [
+      "Histology",
+      "Squamous cell or typical HPV adenocarcinoma",
+      "Neuroendocrine, gastric-type, clear cell"
+     ],
+     [
+      "Endocervical Margin",
+      "Free canal >= 8-10 mm to internal os",
+      "Involvement of upper third or internal os"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Certain histopathological variants exhibit high propensities for early haematogenous dissemination and occult nodal metastases, rendering conservative fertility preservation inappropriate.",
+   "tx": "Major oncological surgical **contraindications** include aggressive tumor biologies such as small cell **neuroendocrine carcinoma**, **gastric-type adenocarcinoma**, adenoma malignum, deep cervical stromal invasion, pelvic nodal metastases, and **tumor >2 cm** in diameter, all of which mandate standard radical hysterectomy or primary chemoradiotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Permitted Favorable Histologies",
+     "points": [
+      "Squamous cell carcinoma (keratinizing or non-keratinizing)",
+      "Usual type endocervical adenocarcinoma (HPV-associated)",
+      "Minimal stromal invasion with low risk of occult metastasis"
+     ]
+    },
+    "right": {
+     "title": "Absolute Contraindications",
+     "points": [
+      "Small cell neuroendocrine carcinoma and large cell neuroendocrine",
+      "Gastric-type mucinous adenocarcinoma (HPV-independent)",
+      "Presence of lymph node metastasis or tumor > 2 cm"
+     ]
+    }
+   }
+  },
+  {
+   "say": "The most critical intraoperative milestone during radical trachelectomy is histopathological confirmation that the superior surgical margin is completely clear of malignancy.",
+   "tx": "Intraoperative **frozen section endocervical margin** assessment is mandatory before proceeding to uterine reconstruction. Surgeons must confirm **internal os clearance** with a histological tumor-free **8 to 10 mm margin**; any positive margin on frozen section necessitates immediate conversion to complete radical hysterectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Perform pelvic lymph node dissection to exclude occult nodal spread"
+     },
+     {
+      "id": "b",
+      "label": "Transect cervix 5 mm below internal os and amputate specimen"
+     },
+     {
+      "id": "c",
+      "label": "Send upper endocervical ring for rapid intraoperative frozen section"
+     },
+     {
+      "id": "d",
+      "label": "Confirm minimum 8 to 10 mm margin clear before performing uterovaginal anastomosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The landmark prospective SHAPE randomized trial published in 2024 has reshaped surgical management in women with low-risk early-stage cervical cancer.",
+   "tx": "The prospective randomized **SHAPE trial** by **Plante 2024** demonstrated that **simple hysterectomy/conization** is oncologically non-inferior to radical hysterectomy in **low-risk cervical cancer** (tumors <=2 cm with <50% stromal invasion and negative nodes), demonstrating a 3-year pelvic recurrence rate below 3% with substantially reduced surgical morbidity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SHAPE Trial: Conservative Arm",
+     "points": [
+      "Simple hysterectomy or cone biopsy with lymph node staging",
+      "3-year pelvic recurrence rate: 2.52%",
+      "Significantly lower intraoperative urinary and bladder complications"
+     ]
+    },
+    "right": {
+     "title": "SHAPE Trial: Radical Arm",
+     "points": [
+      "Type B/C radical hysterectomy with parametrial resection",
+      "3-year pelvic recurrence rate: 2.17% (non-inferiority met)",
+      "Higher rate of long-term bladder dysfunction and lymphedema"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Because excision of the cervix removes the mechanical barrier supporting the pregnant uterus, placing a permanent cervical cerclage is an integral step of the trachelectomy procedure.",
+   "tx": "Placement of an intraoperative **prophylactic cerclage** using non-absorbable braided **Mersilene tape** or polypropylene suture is performed at the level of the anatomical internal os. This **isthmic cerclage** provides mechanical reinforcement for **cervical incompetence prevention**, significantly reducing mid-trimester spontaneous pregnancy loss in future gestations.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Complete radical resection of cervix and upper vaginal cuff"
+     },
+     {
+      "id": "b",
+      "label": "Pass Mersilene polyester tape circumferentially around uterine isthmus"
+     },
+     {
+      "id": "c",
+      "label": "Secure knot anteriorly or posteriorly to avoid erosion into bladder"
+     },
+     {
+      "id": "d",
+      "label": "Anastomose lower uterine segment to vaginal cuff with absorbable sutures"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Pregnancies conceived after radical trachelectomy are categorized as high-risk and require specialized maternal-fetal surveillance throughout gestation.",
+   "tx": "Following radical trachelectomy, all viable pregnancies mandate delivery via planned **elective cesarean delivery** at **37-38 weeks** gestation. Vaginal delivery is strictly contraindicated due to cervical absence and the presence of the permanent stitch; careful **cerclage preservation** during hysterotomy enables future pregnancies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Obstetric Management Rules",
+     "points": [
+      "High-risk maternal-fetal medicine surveillance throughout gestation",
+      "Serial transvaginal ultrasound monitoring of isthmic residual length",
+      "Mandatory planned elective cesarean section at 37 to 38 weeks"
+     ]
+    },
+    "right": {
+     "title": "Prohibited Interventions",
+     "points": [
+      "Trial of labor and vaginal delivery are strictly prohibited",
+      "Avoid routine removal of Mersilene cerclage band during cesarean",
+      "Low-transverse uterine incision placed above cerclage site"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Long-term data from international registries indicate that radical trachelectomy offers oncological outcomes indistinguishable from standard radical hysterectomy in carefully selected patients.",
+   "tx": "Large international cohorts demonstrate definitive **oncological equivalence** between radical trachelectomy and radical hysterectomy in tumors <=2 cm, reporting an exceptional local **recurrence rate 3-5%** and excellent reproductive success with a cumulative **live birth rate >65-70%** among women attempting conception. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-cervical-cancer-fig1.webp",
+    "ar": 1.8349,
+    "caption": "Pelvic lymph drainage and Wertheim radical hysterectomy extent. Credit: StewardMD.",
+    "alt": "Illustration of pelvic lymphatic basins and radical resection limits in cervical oncology."
+   }
+  }
+ ]
+}
