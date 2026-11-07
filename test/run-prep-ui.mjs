@@ -141,6 +141,9 @@ try {
       ok(await keyRun("b") === true && await until(`return !!document.querySelector("#smdPrep .pn-fb") && document.querySelector("#smdPrep .pn-opt[data-k='1']").getAttribute("aria-pressed")==="true";`, 2000), "key B answers option B");
       ok(await ev(`return !document.querySelector("#smdPrep .pn-fb.pn-new");`) === true, "a key answer skips the reveal motion");
       ok(await ev(`var b=document.querySelector("#smdPrep .pn-bar [data-act=report]"); return !!b && b.getAttribute("aria-label")==="Report this question" && !!document.querySelector("#smdPrep .pn-bar [data-act=bookmark][aria-label]");`) === true, "bookmark and report are labelled icon buttons in the bar");
+      // More (share, note, report) opens as a popup under its button and closes on a tap outside (class pn-qmenu, not pn-menu: that is the You screen).
+      ok(await ev(`var b=document.querySelector("#smdPrep .pn-bar [data-act=actsmenu]"), m=document.querySelector("#smdPrep .pn-bar .pn-qmenu"); if(!b||!m) return "none"; b.click(); var cs=getComputedStyle(m); return !m.hidden && cs.position==="absolute" && !!m.querySelector("[data-act=report]");`) === true, "More opens the question-actions popup with Report");
+      ok(await ev(`document.querySelector("#smdPrep .pn-body").click(); return document.querySelector("#smdPrep .pn-bar .pn-qmenu").hidden;`) === true, "a tap outside closes it");
       ok(await ev(`var i=document.querySelectorAll("#smdPrep .pn-qseg i"); return (i[0].classList.contains("ok")||i[0].classList.contains("no")) && i[1].classList.contains("cur");`) === true, "the strip marks question 1 right or wrong and lights question 2");
       await swipeRun(-160);
       ok(await until(`return /Question 3 of/.test(document.querySelector("#smdPrep .pn-t p").textContent) && !!document.querySelector("#smdPrep .pn-qw.in-r");`, 2000), "a swipe left past the line moves to the next question, arriving from the right");

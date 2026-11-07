@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { compute, fromRepo } from "../tools/prep-accuracy.mjs";
 
 function fixture() {
@@ -54,7 +55,7 @@ test("no source, no number: reports and fix time are null", () => {
 });
 
 test("the committed prep/accuracy.json is what the script makes from the repo (date aside)", () => {
-  const root = path.join(path.dirname(new URL(import.meta.url).pathname), "..");
+  const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
   const committed = JSON.parse(fs.readFileSync(path.join(root, "prep/accuracy.json"), "utf8"));
   assert.deepEqual(fromRepo(root, committed.generated), committed, "prep/accuracy.json is stale: run node tools/prep-accuracy.mjs");
 });
