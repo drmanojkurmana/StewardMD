@@ -1,0 +1,250 @@
+{
+  "v": 1,
+  "module": "sob-puberty-menopause",
+  "title": "Puberty Disorders, Precocious Puberty, Menopause, Hormone Replacement Therapy, and Osteoporosis",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Ten Teachers Gynaecology 21e Ch 4 (Puberty and menstrual disorders), Ch 19 (The Menopause and Post-Reproductive Health)",
+    "Williams Gynecology 4e Ch 14 (Puberty), Ch 21 (Menopausal Transition)",
+    "Endocrine Society Guidelines on Precocious Puberty and Menopausal Hormone Therapy"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Precocious puberty is defined as the development of secondary sexual characteristics before age eight in girls. Central precocious puberty is gonadotrophin-dependent, triggered by premature pulsatile activation of the hypothalamic-pituitary-gonadal axis, and is characterized by pubertal LH and FSH levels and advanced bone age. Contrastingly, peripheral precocious puberty is gonadotrophin-independent, driven by autonomous steroid secretion.",
+      "tx": "**Precocious puberty** is diagnosed when secondary sexual characteristics develop before **age 8 in girls**. **Central precocious puberty** is gonadotropin-dependent, characterized by premature hypothalamic pulsatile GnRH release, pubertal **luteinizing hormone concentrations**, and advanced skeletal bone age. **Peripheral precocious puberty** is gonadotropin-independent, caused by autonomous ovarian or adrenal steroid production.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-smr-puberty-timing-boneage.webp",
+        "ar": 1.3333,
+        "caption": "Tanner staging matrix and precocious puberty age threshold evaluation. Credit: StewardMD.",
+        "alt": "Tanner staging matrix for female puberty and skeletal bone age progression."
+      }
+    },
+    {
+      "say": "McCune-Albright syndrome is a classic cause of peripheral precocious puberty caused by postzygotic somatic activating mutations in the GNAS gene. The condition manifests as the classic clinical triad of autonomous recurrent ovarian follicular cysts causing precocious vaginal bleeding, polyostotic fibrous dysplasia, and irregular caf\u00e9-au-lait skin macules with jagged coast of Maine borders.",
+      "tx": "**McCune-Albright syndrome** is a genetic cause of peripheral precocious puberty arising from postzygotic **GNAS mutation**. Patients present with the classic triad of autonomous estrogen-secreting ovarian cysts, polyostotic fibrous dysplasia of bone, and characteristic **caf\u00e9-au-lait spots** with jagged, irregular borders resembling the coast of Maine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Postzygotic activating mutation of GNAS1 gene encoding Gs-alpha subunit"
+          },
+          {
+            "id": "b",
+            "label": "Constitutive adenylyl cyclase activation and elevated intracellular cAMP"
+          },
+          {
+            "id": "c",
+            "label": "Autonomous ovarian steroidogenesis triggers precocious vaginal bleeding"
+          },
+          {
+            "id": "d",
+            "label": "Triad: Ovarian cysts, polyostotic fibrous dysplasia, caf\u00e9-au-lait macules"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Delayed puberty is clinically diagnosed by the absence of breast development by age thirteen, or the absence of menarche by age fifteen. Diagnostic evaluation requires wrist radiography for bone age estimation, measurement of basal gonadotrophins, and karyotyping to exclude gonadal dysgenesis such as Turner syndrome.",
+      "tx": "Clinical guidelines define **delayed puberty** as **thelarche absence** of breast budding by **age 13**, or **menarche absence** by **age 15**. Initial diagnostic workup incorporates **bone age radiography**, serum gonadotropins (LH and FSH), and **karyotyping** to differentiate constitutional delay from hypergonadotropic gonadal dysgenesis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Endocrine Category",
+          "Gonadotropin Levels",
+          "Etiologies",
+          "Associated Physical Features"
+        ],
+        "rows": [
+          [
+            "Hypergonadotropic hypogonadism",
+            "Markedly elevated FSH (>40 IU/L)",
+            "Turner syndrome (45,X), 46,XX gonadal dysgenesis",
+            "Short stature, webbed neck, streak gonads"
+          ],
+          [
+            "Hypogonadotropic hypogonadism",
+            "Low or undetectable LH and FSH",
+            "Kallmann syndrome, functional hypothalamic arrest",
+            "Anosmia or hyposmia, low BMI, high athletic training"
+          ],
+          [
+            "Eugonadotropic delayed menarche",
+            "Normal gonadotropins and estradiol",
+            "Outflow tract obstruction (imperforate hymen)",
+            "Cyclic pelvic pain, hematocolpos, intact breasts"
+          ],
+          [
+            "Constitutional delay",
+            "Low-normal gonadotropins",
+            "Familial developmental delay pattern",
+            "Delayed bone age matching height age; normal eventual puberty"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Premature ovarian insufficiency is defined as the loss of ovarian follicular activity before forty years of age, characterized by amenorrhoea or oligomenorrhoea for four or more months. The diagnosis is confirmed by an elevated serum follicle stimulating hormone threshold exceeding twenty five to forty international units per litre documented on two separate occasions at least four weeks apart.",
+      "tx": "**Premature ovarian insufficiency** is defined as loss of ovarian function before **age 40**, manifested by amenorrhoea for **4 or more months**. Confirmation requires an elevated **FSH threshold** exceeding **25** to 40 IU/L measured on two separate occasions at least 4 weeks apart, mandating hormone replacement until natural menopause.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Criteria",
+          "Threshold Value",
+          "Clinical Implication"
+        ],
+        "rows": [
+          [
+            "Age of onset",
+            "Before 40 years of age",
+            "Distinguishes POI from normal physiological menopause"
+          ],
+          [
+            "Menstrual pattern",
+            "Amenorrhoea >=4 months",
+            "Persistent cessation of ovarian follicular recruitment"
+          ],
+          [
+            "FSH concentration",
+            "Exceeds 25 to 40 IU/L",
+            "Two elevated measurements documented 4 weeks apart"
+          ],
+          [
+            "Hormone replacement",
+            "Continue until age 51",
+            "Protects bone mineral density and cardiovascular health"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Women diagnosed with premature ovarian insufficiency require physiological hormone replacement therapy continued at least until the average age of natural menopause, which is fifty one years. Prolonged replacement preserves bone mineral density, reduces osteoporotic fracture rates, and lowers premature cardiovascular mortality without increasing breast cancer risk above the baseline of normally cycling peers.",
+      "tx": "Women diagnosed with POI require **hormone replacement therapy** continued at least until the **average age of natural menopause (age 51)**. Prolonged physiological estrogen replacement preserves **bone mineral density** and significantly reduces long-term **cardiovascular mortality** without elevating baseline breast cancer risk beyond normal age-matched peers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hormone Replacement in POI",
+          "points": [
+            "Continued until average age menopause (51 years)",
+            "Higher estradiol doses matching youthful physiology",
+            "Prevents early cardiovascular and osteoporotic death",
+            "No elevated breast cancer risk compared to peers"
+          ]
+        },
+        "right": {
+          "title": "Postmenopausal Hormone Therapy (MHT)",
+          "points": [
+            "Initiated near or after natural menopause (age 51+)",
+            "Lowest effective dose for vasomotor symptom relief",
+            "Reassessed annually for risk-benefit balance",
+            "Small increase in breast cancer risk after 5 years"
+          ]
+        },
+        "caption": "Hormone replacement in POI continued until average age menopause at 51. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Systemic menopausal hormone therapy represents the most effective treatment for moderate to severe menopausal vasomotor symptoms and the genitourinary syndrome of menopause. In women with an intact uterus, systemic estrogen must always be combined with an opposed progestogen for at least twelve to fourteen days per month to prevent unopposed endometrial hyperplasia and adenocarcinoma.",
+      "tx": "Systemic **menopausal hormone therapy** with estrogen provides unmatched relief for vasomotor hot flashes and genitourinary atrophy. In women with an intact uterus, systemic estrogen mandates **opposed progestogen** co-administration for at least 12 to 14 days per month to prevent **unopposed endometrial hyperplasia** and adenocarcinoma.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/female-cycle-ovarian-hormones-menopause-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Menopausal hormone therapy and progestogen endometrial protection. Credit: StewardMD.",
+        "alt": "Endocrine graphs displaying follicular depletion, falling estradiol, and surging FSH."
+      }
+    },
+    {
+      "say": "The timing hypothesis and window of opportunity dictate that menopausal hormone therapy confers maximal cardiovascular and bone benefits with minimal risks when initiated within ten years of menopause onset, or before age sixty. Initiating therapy long after sixty years of age, when atherosclerotic plaques are already established, fails to provide cardioprotection and increases coronary and thrombotic events.",
+      "tx": "The **window of opportunity** concept demonstrates that initiating menopausal hormone therapy **within 10 years of menopause** or **prior to age 60** maximizes cardiovascular benefits and reduces overall mortality with minimal adverse risk. Conversely, initiating therapy in women older than 60 with established vascular disease fails to offer cardioprotection and increases thromboembolic hazards.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Woman presents with symptomatic vasomotor symptoms"
+          },
+          {
+            "id": "b",
+            "label": "Evaluate timing: Age <60 years AND within 10 years of menopause onset"
+          },
+          {
+            "id": "c",
+            "label": "Screen contraindications: Prior breast cancer, active VTE, stroke, liver disease"
+          },
+          {
+            "id": "d",
+            "label": "Initiate lowest effective dose hormone therapy to prevent osteoporosis and fractures"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ],
+        "caption": "Window of opportunity in hormone therapy to slow osteoporosis and bone loss. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Transdermal estradiol patches and gels bypass hepatic first-pass metabolism, avoiding the stimulation of prothrombotic clotting factors and sex hormone-binding globulin. Consequently, transdermal regimens confer significantly lower risks of venous thromboembolism and stroke compared to oral estrogens, making them strongly preferred in obese women, smokers, or those with underlying cardiovascular risk factors.",
+      "tx": "**Transdermal estradiol** bypasses **hepatic first-pass metabolism**, preventing hepatic synthesis of prothrombotic coagulation factors and angiotensinogen. This pharmacokinetic profile confers **significantly lower risks of venous thromboembolism and stroke** compared with oral estrogen regimens, making transdermal administration strongly favored in obese women or those with **thrombotic risk factors**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transdermal Estradiol (Patch/Gel)",
+          "points": [
+            "Bypasses hepatic portal circulation entirely",
+            "No induction of clotting factors or CRP",
+            "Significantly lower venous thromboembolism risk",
+            "Preferred in obese, hypertensive, or smoking women"
+          ]
+        },
+        "right": {
+          "title": "Oral Estrogen Regimens",
+          "points": [
+            "Undergoes extensive hepatic first-pass metabolism",
+            "Elevates prothrombin fragment 1+2 and coagulation factors",
+            "Increases relative risk of DVT and ischemic stroke",
+            "Elevates triglycerides and sex hormone-binding globulin"
+          ]
+        }
+      }
+    }
+  ]
+}

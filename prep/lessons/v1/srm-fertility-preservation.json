@@ -1,0 +1,235 @@
+{
+  "id": "srm-fertility-preservation",
+  "module": "srm-fertility-preservation",
+  "title": "Female and Male Fertility Preservation",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "ASRM Practice Committee Opinions on Fertility Preservation",
+    "Yen & Jaffe's Reproductive Endocrinology 9e Ch 26"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Oocyte vitrification represents the clinical gold standard for postpubertal females facing gonadotoxic therapy. High velocity cooling avoids damaging ice crystals. Survival and pregnancy rates match fresh IVF cycles.",
+      "tx": "Mature metaphase II **oocyte vitrification** is an established, **non-experimental** standard for female **fertility preservation**. Utilizing ultra-rapid cooling rates (>15,000 to 20,000 degrees C/min) in high-concentration cryoprotectants prevents ice crystallisation, achieving oocyte survival rates exceeding 90 percent. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ultra-Rapid Vitrification",
+          "points": [
+            "Cooling speed >20,000\u00b0C/min",
+            "Transition directly to glass-like state",
+            "Zero intracellular ice crystals",
+            "Oocyte survival rate 90 to 95 percent"
+          ]
+        },
+        "right": {
+          "title": "Historic Slow Freezing",
+          "points": [
+            "Controlled rate cooling (0.3 to 1\u00b0C/min)",
+            "Ice seeding in extracellular medium",
+            "Risk of intracellular crystallization",
+            "Oocyte survival rate only 50 to 60 percent"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Oncology regimens rarely permit waiting for a natural menstrual cycle. Multiple follicular waves arise across the ovarian cycle. Ovarian stimulation can start immediately regardless of cycle phase.",
+      "tx": "To avoid chemotherapy delays across the **cancer treatment timeline**, **random-start stimulation** protocols initiate gonadotropins during the late follicular or **luteal phase start** without awaiting menses, harvesting mature oocytes within 10 to 14 days. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/female-infertility-fig1.webp",
+        "caption": "Female fertility preservation protocols and oocyte vitrification workflow. Credit: StewardMD.",
+        "alt": "Female fertility preservation protocols and oocyte vitrification workflow"
+      }
+    },
+    {
+      "say": "Estrogen receptor positive malignancies require special precautions during stimulation. Aromatase inhibitors prevent supraphysiological estradiol spikes. Concomitant letrozole protects breast tissue without reducing egg yield.",
+      "tx": "In women with hormone receptor-positive **breast cancer**, daily **letrozole co-administration** (5 mg daily) during ovarian stimulation safely suppresses circulating **estradiol suppression** to near-normal levels without compromising the number or developmental quality of retrieved oocytes. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stimulation Parameter",
+          "Standard Antagonist Protocol",
+          "Letrozole-FSH Protocol"
+        ],
+        "rows": [
+          [
+            "Peak serum estradiol",
+            "1,500 to 3,500 pg/mL",
+            "300 to 800 pg/mL (significantly suppressed)"
+          ],
+          [
+            "Aromatase inhibitor dose",
+            "None",
+            "Letrozole 5 mg orally daily from stimulation day 2"
+          ],
+          [
+            "Duration of letrozole",
+            "None",
+            "Continued until trigger, then 3 to 7 days post-OPU"
+          ],
+          [
+            "Oocyte and embryo yield",
+            "Standard yield",
+            "Equivalent mature MII yield and fertilization rates"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prepubertal girls and patients requiring immediate marrow ablation cannot undergo hormonal stimulation. Laparoscopic excision of the ovarian cortex provides an alternative. Strips containing primordial follicles are cryopreserved.",
+      "tx": "For **prepubertal girls** and women facing immediate chemotherapy, **ovarian tissue cryopreservation** represents the only viable option. The procedure entails laparoscopic partial or total oophorectomy, followed by dissection of **cortical strips** containing dense primordial pools for slow freezing or vitrification. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "o1",
+            "label": "Laparoscopic oophorectomy or cortical biopsy"
+          },
+          {
+            "id": "o2",
+            "label": "Laboratory preparation: thinning cortex to 1 to 2 mm"
+          },
+          {
+            "id": "o3",
+            "label": "Sectioning into 10x5 mm cortical strips"
+          },
+          {
+            "id": "o4",
+            "label": "Controlled-rate freezing and liquid nitrogen storage"
+          }
+        ],
+        "edges": [
+          [
+            "o1",
+            "o2",
+            "Transport on ice"
+          ],
+          [
+            "o2",
+            "o3",
+            "Cold dissection"
+          ],
+          [
+            "o3",
+            "o4",
+            "Cryoprotectant equilibration"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Following completion of curative cancer therapy, banked ovarian tissue can be autotransplanted. Grafting onto the pelvic sidewall or remaining ovary restores cyclicity. The majority of grafts regain spontaneous endocrine function.",
+      "tx": "Following cancer remission, **orthotopic transplantation** of thawed cortical strips onto the remaining ovary or peritoneal pelvic sidewall restores **endocrine restoration** in over **90 percent** of cases within 4 to 5 months, resulting in hundreds of recorded natural and IVF pregnancies. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Orthotopic Autotransplantation",
+          "points": [
+            "Transplanted into pelvic ovarian bed or broad ligament",
+            "Permits spontaneous conception and natural pregnancy",
+            "Restores endogenous ovarian steroidogenesis (>90%)",
+            "Graft functional lifespan spans 2 to 7 years"
+          ]
+        },
+        "right": {
+          "title": "Heterotopic Autotransplantation",
+          "points": [
+            "Grafted into forearm or anterior abdominal wall",
+            "Cannot achieve natural spontaneous pregnancy",
+            "Facilitates easy percutaneous oocyte aspiration",
+            "Used when severe pelvic radiation fibrosis precludes bed"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Pelvic radiation threatens permanent gonadal failure even when chemotherapy is spared. Surgical relocation displaces the ovaries out of the radiation treatment field. Gonadal function is preserved in most patients.",
+      "tx": "Prior to **pelvic radiotherapy** for cervical or colorectal malignancies, laparoscopic **ovarian transposition** (also termed **oophoropexy**) translocates ovaries laterally and cranially above the pelvic brim, preserving long-term ovarian endocrine function in over **80 percent** of patients. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/male-infertility-fig1.webp",
+        "caption": "Sperm cryopreservation and gonadal tissue banking strategies. Credit: StewardMD.",
+        "alt": "Sperm cryopreservation and gonadal tissue banking strategies"
+      }
+    },
+    {
+      "say": "Adolescent and adult males facing gonadotoxic therapy have an established non invasive option. Ejaculated sperm banking prior to the first chemotherapy cycle is safe and effective. Surgical retrieval rescues samples in adolescents with failure.",
+      "tx": "For adolescent and adult males, **sperm cryopreservation** represents the foremost established **male fertility preservation** strategy. Procuring multiple semen samples **pre-chemotherapy** ensures adequate gametes for future assisted reproduction before exposure to alkylating agents. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Scenario",
+          "Collection Technique",
+          "Pre-Treatment Requirements",
+          "Downstream ART Option"
+        ],
+        "rows": [
+          [
+            "Adolescent / adult male",
+            "Masturbatory ejaculation (2-3 samples)",
+            "Abstinence 2 to 5 days, infectious screen",
+            "IUI or ICSI depending on count"
+          ],
+          [
+            "Ajaculation / severe illness",
+            "Penile vibratory stimulation / EEJ",
+            "Urology consult, urine exam for retrograde",
+            "Sperm wash and cryopreservation"
+          ],
+          [
+            "Azoospermia pre-chemo",
+            "Micro-TESE or testicular biopsy",
+            "Local/general anesthesia, cryo-suspension",
+            "Mandatory ICSI"
+          ],
+          [
+            "Prepubertal boy",
+            "Testicular tissue freezing (experimental)",
+            "Institutional IRB protocol, stem cell banking",
+            "Experimental in vitro spermatogenesis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Medical co treatments offer adjuvant ovarian protection during systemic chemotherapy. Down regulating the pituitary creates a dormant follicular state. Clinical trials show reduced risk of premature failure.",
+      "tx": "Concurrent **GnRH agonist co-treatment** during chemotherapy (as validated in the landmark **POEMS trial**) provides **cyclophosphamide protection** by maintaining gonadotroph quiescence and lowering premature ovarian insufficiency rates in young women with premenopausal breast cancer. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "GnRHa Co-Treatment (POEMS / PROMISE)",
+          "points": [
+            "Zoladex or leuprolide monthly during chemotherapy",
+            "Suppresses FSH to down-regulate primordial follicles",
+            "Significantly decreases post-chemo POI rate",
+            "Higher post-treatment pregnancy rates in breast cancer"
+          ]
+        },
+        "right": {
+          "title": "Chemotherapy Alone (Control)",
+          "points": [
+            "Alkylator-induced follicle apoptosis (cyclophosphamide)",
+            "Recruitment burnout via elevated FSH drive",
+            "Significantly higher incidence of permanent amenorrhea",
+            "Premature ovarian insufficiency risk up to 40 to 60%"
+          ]
+        }
+      }
+    }
+  ],
+  "v": 1
+}
