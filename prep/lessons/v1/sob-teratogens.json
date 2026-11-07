@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sob-teratogens",
+ "title": "Teratology, Teratogens, Fetotoxic Drugs and Radiation Exposure",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Williams Obstetrics 25e Ch 12 (Teratology, Teratogens, and Fetotoxic Agents)",
+  "Ten Teachers Gynaecology 21e",
+  "ACOG Committee Opinion No. 723 (Guidelines for Diagnostic Imaging During Pregnancy)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The classic embryonic period of **organogenesis** spans 3 to 8 post-conception weeks (gestational weeks 5 to 10), representing the window of peak susceptibility to major structural **teratogen-induced malformations**. Prior to week 3, insult follows an **all-or-none phenomenon**, resulting either in blastocyst resorption or intact embryonic survival. Clinically, key parameters encompass structural malformations.",
+   "say": "Embryonic organogenesis between five and ten weeks of amenorrhoea constitutes the period of greatest vulnerability to structural teratogens. Before five weeks of gestation, cellular pluripotency produces an all-or-none response where damage either terminates the pregnancy or undergoes complete repair. After ten weeks, exposures predominantly cause functional deficits or growth restriction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-teratogens-fig1.webp",
+    "ar": 1.7778,
+    "caption": "Key drug-induced congenital malformations and embryopathies. Credit: StewardMD.",
+    "alt": "Clinical and radiographic composite illustrating classic drug embryopathies including limb reductions and skeletal dysplasia."
+   }
+  },
+  {
+   "tx": "Historical exposure to **thalidomide** demonstrates strict temporal vulnerability between gestational days 34 and 50. Ingestion during this sensitive organogenic window induces catastrophic bilateral **phocomelia**, amelia, radial ray aplasia, anotia, and severe congenital cardiovascular defects, driven by cereblon binding and downstream anti-angiogenic transcription factor degradation.",
+   "say": "Thalidomide represents the archetype of gestational timing in human teratology. Maternal ingestion specifically between days thirty-four and fifty post-conception reliably induces severe intercalary limb deficiencies, including bilateral phocomelia and radial ray hypoplasia. The molecular mechanism involves cereblon binding, causing ubiquitin-dependent proteasomal degradation of crucial neo-substrate transcription factors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exposure Timing (Gestational Days)",
+     "Primary Malformation Target",
+     "Pathophysiological Mechanism"
+    ],
+    "rows": [
+     [
+      "Days 35 to 37",
+      "Anotia, microtia, facial nerve palsy",
+      "Disruption of first and second branchial arch morphogenesis"
+     ],
+     [
+      "Days 38 to 41",
+      "Upper limb phocomelia, radial ray absence",
+      "Arrest of upper extremity limb bud mesenchymal proliferation"
+     ],
+     [
+      "Days 42 to 45",
+      "Lower limb amelia, tibial hypoplasia",
+      "Disruption of hindlimb bud vascularization and apical ectodermal ridge"
+     ],
+     [
+      "Days 46 to 50",
+      "Cardiac septal defects, duodenal atresia",
+      "Altered neural crest migration and endocardial cushion development"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Isotretinoin embryopathy** results from systemic 13-cis-retinoic acid exposure during early first-trimester cephalic neural crest cell migration. Malformations encompass bilateral **microtia or anotia**, external auditory canal stenosis, micrognathia, cleft palate, conotruncal heart anomalies (transposition, truncus), **thymic hypoplasia**, and central hydrocephalus, mandating strict contraceptive prevention programs. Clinically, key parameters encompass conotruncal heart defects.",
+   "say": "Isotretinoin is one of the most potent human teratogens known. Exposure during the first trimester induces severe disruption of cranial neural crest cell migration. The resulting embryopathy combines anotia or microtia with auditory canal atresia, micrognathia, conotruncal cardiac malformations, and thymic hypoplasia, necessitating mandatory pregnancy prevention protocols.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Oral isotretinoin exposure during first 4-8 weeks"
+     },
+     {
+      "id": "b",
+      "label": "Cranial neural crest cell apoptosis and migration arrest"
+     },
+     {
+      "id": "c",
+      "label": "Branchial arch and outflow tract dysmorphogenesis"
+     },
+     {
+      "id": "d",
+      "label": "Ear microtia, micrognathia, thymic aplasia, cardiac defects"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ACE inhibitors** and angiotensin receptor blockers (ARBs) administered during second and third trimesters produce a severe **fetopathy** rather than early structural teratogenesis. Blockade of fetal angiotensin II impairs intrarenal blood flow, leading to **renal tubular dysgenesis**, profound neonatal anuria, secondary **oligohydramnios**, pulmonary hypoplasia, and calvarial hypocalcification.",
+   "say": "Antihypertensive treatment with ACE inhibitors or ARBs is strictly contraindicated in the second and third trimesters. Angiotensin blockade impairs fetal renal perfusion and glomerular filtration, triggering renal tubular dysgenesis and neonatal anuria. The resulting profound anhydramnios leads to fetal compression deformities, pulmonary hypoplasia, and calvarial bone ossification failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First Trimester ACE-i Exposure",
+     "points": [
+      "Modest cardiovascular malformation risk (~2-fold)",
+      "Renal functional architecture largely preserved",
+      "Immediate medication discontinuation recommended"
+     ]
+    },
+    "right": {
+     "title": "Second/Third Trimester Fetopathy",
+     "points": [
+      "Renal tubular dysgenesis and fetal anuria",
+      "Severe oligohydramnios / Potter sequence",
+      "Pulmonary hypoplasia, neonatal renal failure, skull defects"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Fetal warfarin syndrome** occurs following oral anticoagulant exposure between 6 and 9 weeks gestation. Inhibition of vitamin K-dependent post-translational carboxylation of osteocalcin leads to severe **nasal hypoplasia** with flattened bridge, **stippled epiphyses** (chondrodysplasia punctata), optic atrophy, and microcephaly, prompting substitution with low-molecular-weight heparin during early pregnancy. Clinically, key parameters encompass warfarin embryopathy.",
+   "say": "Warfarin readily crosses the placenta and impairs osteocalcin carboxylation in fetal bone and cartilage. Ingestion between six and nine weeks produces fetal warfarin embryopathy, hallmarked by profound nasal hypoplasia and radiographically visible punctate stippling of the epiphyses. Later gestational exposure carries risks of fetal intracranial haemorrhage and microcephaly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gestational Period",
+     "Warfarin Pathology",
+     "Preferred Anticoagulation Strategy"
+    ],
+    "rows": [
+     [
+      "6 to 9 weeks gestation",
+      "Nasal hypoplasia, chondrodysplasia punctata",
+      "Switch to therapeutic LMWH prior to 6 weeks amenorrhoea"
+     ],
+     [
+      "Second & third trimesters",
+      "Intracranial hemorrhage, microcephaly, eye atrophy",
+      "LMWH or dose-adjusted warfarin (< 5 mg/d in mechanical valves)"
+     ],
+     [
+      ">= 36 weeks gestation",
+      "Severe neonatal intracranial hemorrhage in labour",
+      "Mandatory conversion to therapeutic subcutaneous LMWH or IV heparin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sodium valproate** confers a 1 to 2 percent risk of lumbar **open neural tube defects** (spina bifida aperta), characteristic trigonocephaly, facial dysmorphism, cardiac septal defects, and limb deficiencies. Beyond structural malformations, intrauterine valproate exposure carries dose-dependent risks of permanent **neurocognitive impairment** and autism spectrum disorders.",
+   "say": "Sodium valproate is the most teratogenic anti-seizure medication in obstetric practice. It increases the incidence of open spina bifida by ten to twenty times compared to the general population. In addition to craniofacial dysmorphism and cardiovascular anomalies, up to thirty to forty percent of exposed children suffer long-term cognitive delays and autism spectrum disorders.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Valproate crosses placenta and inhibits histone deacetylase"
+     },
+     {
+      "id": "b",
+      "label": "Disruption of folic acid metabolism and neural tube closure"
+     },
+     {
+      "id": "c",
+      "label": "1 to 2 percent incidence of open lumbar spina bifida"
+     },
+     {
+      "id": "d",
+      "label": "Dose-dependent reduction in long-term childhood verbal IQ"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fetal alcohol syndrome** (FAS) is characterized by a diagnostic triad: prenatal and postnatal growth restriction, microcephaly with central nervous system dysfunction, and cardinal facial features including **smooth philtrum**, **thin vermilion border** of the upper lip, and short palpebral fissures, representing the leading non-genetic preventable cause of intellectual disability.",
+   "say": "Maternal alcohol ingestion can trigger the full spectrum of fetal alcohol disorders. Full fetal alcohol syndrome requires prenatal or postnatal growth restriction, central nervous system structural or neurobehavioral impairment, and three facial landmarks: smooth elongated philtrum, thin vermilion border of the upper lip, and shortened palpebral fissures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cardinal Facial Phenotype (FAS)",
+     "points": [
+      "Smooth, flattened philtrum with absent ridge",
+      "Thin upper lip vermilion border (Rank 4-5)",
+      "Short palpebral fissures (< 10th percentile)"
+     ]
+    },
+    "right": {
+     "title": "Neurological & Somatic Features",
+     "points": [
+      "Microcephaly (< 10th percentile head circumference)",
+      "Structural brain dysgenesis (corpus callosum hypoplasia)",
+      "Severe executive dysfunction and intellectual impairment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnostic fetal **radiation exposure** below 50 mGy (5 rad) is not associated with increased risks of fetal anomalies, growth restriction, or pregnancy loss. Deterministic risks of **microcephaly and intellectual disability** occur only with high cumulative doses exceeding 100 to 200 mGy during the sensitive 8-to-15-week neurogenic window. Clinically, key parameters encompass ionizing radiation, threshold dose.",
+   "say": "Patients frequently experience intense anxiety regarding diagnostic radiographs and computed tomography. Fetal radiation doses below fifty milligray produce no measurable increase in miscarriage, structural malformations, or growth restriction. Major deterministic hazards like severe intellectual disability require massive cumulative exposures exceeding one to two hundred milligray during peak forebrain development.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-teratogens-gen1.webp",
+    "ar": 1.7778,
+    "caption": "Diagnostic imaging radiation dosimetry and fetal safety thresholds. Credit: StewardMD.",
+    "alt": "Infographic illustrating estimated fetal radiation absorption across chest radiographs, abdominal CT, and pelvic scans relative to safety thresholds."
+   }
+  }
+ ]
+}
