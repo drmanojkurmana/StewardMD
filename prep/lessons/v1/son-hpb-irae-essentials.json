@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "son-hpb-irae-essentials",
+  "subject": "ss-medical-oncology",
+  "title": "BCLC Stage D Liver Cancer, Hepatic Adenoma, Biliary NGS and Severe irAE Management",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "The Barcelona Clinic Liver Cancer (BCLC) staging algorithm integrates tumor burden, hepatic functional reserve, and performance status. Patients presenting with end-stage cirrhosis (**Child-Pugh Class C**, score 10 to 15) or severe debilitating cancer-related disability (ECOG Performance Status 3 to 4) are classified as **BCLC Stage D** (Terminal Stage). In this setting, systemic therapies (including atezolizumab-bevacizumab or tyrosine kinase inhibitors) and locoregional therapies precipitate rapid, fatal hepatic decompensation. The only evidence-based standard of care is **best supportive care**, optimizing palliative symptom management.",
+      "say": "When you evaluate hepatocellular carcinoma, hepatic functional reserve dictates survival far more than tumor dimensions. Under the Barcelona Clinic algorithm, any patient who reaches Child-Pugh class C cirrhosis or an ECOG performance status of three to four falls into stage D terminal disease. Systemic immunotherapy or targeted anti-angiogenic agents will precipitate catastrophic liver failure in this fragile population. The only compassionate and evidence-based recommendation is comprehensive best supportive care focused on palliative symptom relief.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatocellular-carcinoma-fig1.webp",
+        "alt": "Macroscopic cross-section of cirrhotic liver parenchyma replaced by an expanding variegated hepatocellular carcinoma.",
+        "caption": "Hepatocellular carcinoma arising within multinodular cirrhosis. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Differentiating benign solid liver lesions is critical to avoid unnecessary hepatic surgery while mitigating oncologic risk. **Cavernous hemangiomas** and **focal nodular hyperplasia** (FNH) possess zero malignant potential and do not require resection unless mechanically symptomatic. In sharp contrast, **hepatic adenoma** (hepatocellular adenoma) carries a well-documented 5% to 10% risk of **malignant transformation** to hepatocellular carcinoma, particularly in tumours exceeding five centimetres, male patients, or beta-catenin-mutated subtypes. Additionally, adenomas carry a substantial risk of spontaneous life-threatening intraperitoneal hemorrhage, warranting surgical resection when high-risk.",
+      "say": "Not all benign hepatic neoplasms behave indolently. While cavernous hemangiomas and focal nodular hyperplasia never turn into cancer and should simply be observed, hepatic adenomas harbor dangerous malignant potential. Up to ten percent of hepatic adenomas transform into true hepatocellular carcinoma, with the highest risk observed in men, lesions exceeding five centimeters, and beta-catenin activated variants. Because adenomas also risk catastrophic spontaneous intraperitoneal rupture, surgical resection is indicated for all high-risk presentations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hepatic Adenoma (High Risk)",
+          "points": [
+            "5% to 10% risk of transformation to HCC",
+            "High risk in males and beta-catenin mutants",
+            "Spontaneous rupture and bleeding risk",
+            "Exceeding 5 cm warrants resection",
+            "Oral contraceptive discontinuation indicated"
+          ]
+        },
+        "right": {
+          "title": "Focal Nodular Hyperplasia (FNH)",
+          "points": [
+            "Zero malignant transformation potential",
+            "Polyclonal hyperplastic vascular response",
+            "Central stellate scar with radiating septa",
+            "Spontaneous hemorrhage is extraordinarily rare",
+            "Conservative non-operative observation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Following disease progression on frontline gemcitabine, cisplatin, and durvalumab in advanced biliary tract cancer, comprehensive **next-generation sequencing** (NGS) is mandatory to identify actionable genomic alterations. Intrahepatic cholangiocarcinoma exhibits high frequencies of targetable oncogenic drivers: **IDH1 mutations** (occurring in 10% to 15%, targeted with the oral mutant IDH1 inhibitor **ivosidenib** based on the ClarIDHy trial), **FGFR2 gene fusions** or rearrangements (10% to 15%, targeted with pemigatinib or futibatinib), HER2 amplifications (targeted with trastuzumab combinations), and BRAF V600E mutations.",
+      "say": "Second-line therapy for advanced biliary tract cancer has been revolutionized by precision oncology. When a patient progresses after frontline chemo-immunotherapy, ordering broad-panel next-generation sequencing is essential. Intrahepatic tumors harbor a remarkable concentration of targetable alterations, including IDH1 mutations that respond to ivosidenib, and FGFR2 rearrangements that respond to pemigatinib. Matching these specific genetic drivers to targeted inhibitors yields significant survival gains compared to unselected cytotoxic chemotherapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Actionable Biomarker",
+          "Frequency in Cholangiocarcinoma",
+          "Targeted Systemic Agent",
+          "Key Registration Clinical Trial"
+        ],
+        "rows": [
+          [
+            "IDH1 mutation (R132)",
+            "10% to 15% (intrahepatic)",
+            "Ivosidenib (oral IDH1 inhibitor)",
+            "ClarIDHy Phase III Trial (improved OS)"
+          ],
+          [
+            "FGFR2 gene fusion",
+            "10% to 15% (intrahepatic)",
+            "Pemigatinib / Futibatinib (FGFR TKI)",
+            "FIGHT-202 & FOENIX-CCA2 Trials"
+          ],
+          [
+            "HER2 (ERBB2) amplification",
+            "5% to 10% (extrahepatic / gallbladder)",
+            "Trastuzumab + Pertuzumab / T-DXd",
+            "MyPathway & DESTINY-PanTumor02"
+          ],
+          [
+            "BRAF V600E mutation",
+            "1% to 3% (biliary tract)",
+            "Dabrafenib plus Trametinib",
+            "ROAR Phase II Basket Trial"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Neoplasms arising within two centimetres of the major duodenal papilla (**periampullary carcinomas**) encompass ampullary, distal bile duct, duodenal, and pancreatic head adenocarcinomas. Patients classically present with painless obstructive jaundice and a palpable, non-tender gallbladder (**Courvoisier sign**, distinguishing malignant obstruction from calculous biliary disease). Diagnostic evaluation requires serum quantification of both **CA 19-9 and CEA** alongside cross-sectional pancreatic-protocol imaging. Definitive treatment requires pancreaticoduodenectomy (Whipple procedure), with histological stratification into **intestinal subtype** (favourable prognosis, treated with CAPOX) versus **pancreatobiliary subtype** (aggressive, treated with modified FOLFIRINOX).",
+      "say": "The classic presentation of painless progressive jaundice with a palpable, smooth, non-tender gallbladder exemplifies Courvoisier sign, pointing directly to a malignant periampullary obstruction rather than gallstone disease. When evaluating these patients, measure both CEA and CA 19-9 prior to pancreaticoduodenectomy. On final surgical pathology, separating tumors into intestinal versus pancreatobiliary morphology dictates postoperative management, because intestinal tumors behave like colorectal cancer, whereas pancreatobiliary histology demands aggressive multi-agent regimens like modified FOLFIRINOX.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Painless Jaundice & Courvoisier Sign"
+          },
+          {
+            "id": "p2",
+            "label": "Serum CA 19-9 & CEA Quantification"
+          },
+          {
+            "id": "p3",
+            "label": "Pancreaticoduodenectomy (Whipple)"
+          },
+          {
+            "id": "p4",
+            "label": "Intestinal Subtype (CDX2+): CAPOX"
+          },
+          {
+            "id": "p5",
+            "label": "Pancreatobiliary (MUC1+): FOLFIRINOX"
+          }
+        ],
+        "edges": [
+          ["p1", "p2"],
+          ["p2", "p3"],
+          ["p3", "p4"],
+          ["p3", "p5"]
+        ]
+      }
+    },
+    {
+      "tx": "Immune checkpoint inhibitor therapy targeting cytotoxic T-lymphocyte antigen 4 (**CTLA-4 inhibitors**, such as ipilimumab or tremelimumab) provokes a substantially higher incidence of severe, life-threatening **autoimmune enterocolitis** than PD-1 inhibitors. CTLA-4 blockade causes profound mucosal T-cell disinhibition and mucosal **regulatory T-cell depletion** in gut-associated lymphoid tissue. Management requires immediate checkpoint cessation and high-dose intravenous **methylprednisolone** (1 to 2 mg/kg daily). If symptoms fail to improve within 48 to 72 hours (steroid-refractory colitis), immediate biological therapy with **infliximab or vedolizumab** is mandatory, alongside sigmoidoscopy to exclude cytomegalovirus superinfection.",
+      "say": "Checkpoint-induced colitis is a true medical emergency, particularly with CTLA-4 inhibitors like ipilimumab. By wiping out regulatory T-cells in the gut mucosa, anti-CTLA-4 therapy unleashes cytotoxic T-cells against the intestinal lining, risking transmural necrosis and bowel perforation. Do not delay therapy while waiting for stool cultures. If high-dose intravenous methylprednisolone does not produce clear improvement within forty-eight to seventy-two hours, promptly initiate infliximab or vedolizumab, and perform flexible sigmoidoscopy to rule out secondary cytomegalovirus infection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Severity Tier",
+          "Diarrheal Stool Frequency",
+          "First-Line Therapeutic Step",
+          "Steroid-Refractory Escalation"
+        ],
+        "rows": [
+          [
+            "Grade 1 Enterocolitis",
+            "< 4 stools/day over baseline",
+            "Symptomatic loperamide, hydration",
+            "Withhold ipilimumab if persistent"
+          ],
+          [
+            "Grade 2 Enterocolitis",
+            "4 to 6 stools/day over baseline",
+            "Oral prednisone (1 mg/kg daily)",
+            "Escalate to IV methylprednisolone"
+          ],
+          [
+            "Grade 3-4 Enterocolitis",
+            ">= 7 stools/day, fever, peritoneal signs",
+            "IV methylprednisolone (1-2 mg/kg/day)",
+            "Infliximab (5 mg/kg) or Vedolizumab within 48h"
+          ],
+          [
+            "Perforation Risk Check",
+            "Severe abdominal pain, toxic megacolon",
+            "Urgent CT abdomen, flexible sigmoidoscopy",
+            "Rule out CMV superinfection; emergency surgery"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immune checkpoint inhibitor-induced **autoimmune myocarditis** carries an alarming case fatality rate of 30% to 50%, manifesting as acute cardiac troponin elevation, high-grade heart block, malignant arrhythmias, or cardiogenic shock. Immediate management demands checkpoint discontinuation, continuous cardiac telemetry, and pulse intravenous **methylprednisolone** (1000 mg daily for three days). When myocarditis proves refractory to high-dose corticosteroids within 24 to 48 hours, guidelines recommend immediately adding targeted T-cell immunosuppressants: the CD28 co-stimulation blocker **abatacept**, the lymphocyte-depleting anti-CD52 monoclonal antibody **alemtuzumab**, or **mycophenolate mofetil** (MMF).",
+      "say": "Although immune checkpoint inhibitor myocarditis occurs in less than one percent of patients, its high mortality demands rapid, decisive intervention. Any acute troponin rise or new conduction block in an immunotherapy patient warrants immediate hospital admission and three days of pulse intravenous methylprednisolone at one gram daily. If hemodynamic instability, severe ventricular arrhythmias, or rising troponins persist beyond twenty-four to forty-eight hours, you must immediately escalate to targeted second-line immunosuppression with abatacept or alemtuzumab to halt lymphocyte-mediated myocardial destruction.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myocarditis-cardiomyopathy-pericardial-disease-fig1.webp",
+        "alt": "Microscopic view of lymphocytic myocardial infiltration with myocyte necrosis and interstitial edema.",
+        "caption": "Lymphocytic inflammatory infiltrate invading cardiac myocardium. Credit: StewardMD."
+      }
+    }
+  ],
+  "quiz": [
+    "q_66a33e368c73",
+    "q_77af332dcc7e",
+    "q_c04bc156b16e"
+  ],
+  "gen": "AI"
+}

@@ -1,0 +1,170 @@
+{
+  "v": 1,
+  "module": "son-gu-rcc-bladder-prostate",
+  "subject": "ss-medical-oncology",
+  "title": "Renal Cell Risk Staging, Bladder Chemo-Immunotherapy and Prostate Endocrine Pathways",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "The International Metastatic Renal Cell Carcinoma Database Consortium (**IMDC criteria**, or Heng model) stratifies patients receiving targeted therapy into three prognostic tiers using six objective clinical factors: Karnofsky performance status below 80%, time from initial diagnosis to systemic therapy under one year, **haemoglobin level** below the lower limit of normal, corrected **serum calcium** above the upper limit of normal, absolute **neutrophil count** above normal, and **platelet count** exceeding the upper limit of normal.",
+      "say": "When assessing metastatic renal cell carcinoma, the IMDC criteria provide the definitive prognostic roadmap for selecting upfront systemic therapy. You evaluate six clinical variables including performance status, timing of treatment, anaemia, hypercalcaemia, neutrophilia, and thrombocytosis. Patients with zero adverse risk factors fall into the favourable group, one to two factors indicate intermediate risk, and three or more denote poor-risk disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rcc-wilms-urothelial-paraneoplastic-fig1.webp",
+        "alt": "Gross and microscopic cross-section of a renal cell carcinoma displaying characteristic clear cell vascular architecture.",
+        "caption": "Renal parenchymal neoplasm with clear cell histology. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Clinicians must distinguish the modern **IMDC risk model** from the historical Memorial Sloan Kettering Cancer Center (**MSKCC Motzer score**). The older MSKCC model included serum lactate dehydrogenase (LDH greater than 1.5 times upper limit), low haemoglobin, high calcium, poor performance status, and prior nephrectomy absence. Dr Heng demonstrated that **serum lactate dehydrogenase** lost independent prognostic power in the VEGF-targeted therapy era and replaced it with inflammatory markers: absolute neutrophil count and platelet count.",
+      "say": "It is essential to recognize how the transition from cytokine immunotherapy to targeted anti-angiogenic therapy altered our prognostic tools. In the original MSKCC Motzer score, elevated lactate dehydrogenase was a core variable. However, when the international consortium validated the IMDC model for modern tyrosine kinase inhibitors and immunotherapy, lactate dehydrogenase was intentionally dropped and replaced by elevated platelets and neutrophils reflecting systemic inflammation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MSKCC (Motzer) Score",
+          "points": [
+            "Lactate dehydrogenase (LDH > 1.5x ULN)",
+            "Low haemoglobin (< LLN)",
+            "High corrected serum calcium (> ULN)",
+            "KPS < 80%",
+            "Time from diagnosis to tx < 1 year"
+          ]
+        },
+        "right": {
+          "title": "IMDC (Heng) Criteria",
+          "points": [
+            "LDH explicitly excluded",
+            "Low haemoglobin (< LLN)",
+            "High corrected calcium (> ULN)",
+            "KPS < 80%",
+            "Time to tx < 1 year",
+            "High neutrophils and platelets (> ULN)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sunitinib, an oral multi-targeted receptor tyrosine kinase inhibitor targeting VEGFR and PDGFR, commonly provokes **palmar-plantar erythrodysesthesia** (hand-foot skin reaction), arterial **hypertension**, fatigue, and primary **hypothyroidism**. Standard four-weeks-on and two-weeks-off scheduling often leads to severe cumulative grade 3 toxicities. Managing intolerance involves transitioning to an alternative **two-weeks-on and one-week-off schedule** (schedule 2/1), applying topical 10% urea cream, administering antihypertensive therapy (preferring ACE inhibitors or ARBs), and prompt step-wise dose reduction from 50 mg to 37.5 mg daily.",
+      "say": "Sunitinib toxicity frequently challenges treatment adherence, but proactive supportive measures prevent premature drug discontinuation. Painful hyperkeratotic blisters on pressure points of the hands and feet respond well to keratolytic urea creams and schedule adjustments. Switching from the traditional four-two cycle to a two-weeks-on, one-week-off regimen markedly dampens toxicity while maintaining identical drug exposure, and early dose reductions from fifty to thirty-seven point five milligrams preserve clinical efficacy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Toxicity",
+          "Incidence & Grading",
+          "Mechanistic Etiology",
+          "Clinical Management Protocol"
+        ],
+        "rows": [
+          [
+            "Hand-Foot Skin Reaction",
+            "Tender hyperkeratotic blisters",
+            "VEGFR-2 / PDGFR inhibition",
+            "10% urea cream, schedule 2/1 switch"
+          ],
+          [
+            "Arterial Hypertension",
+            "Grade 2-3 BP elevation",
+            "Endothelial nitric oxide loss",
+            "Initiate ACE-i / ARB, titrate amlodipine"
+          ],
+          [
+            "Fatigue & Asthenia",
+            "Cumulative fatigue during cycle",
+            "Mitochondrial / thyroid toxicity",
+            "Schedule 2/1 switch, dose reduce to 37.5 mg"
+          ],
+          [
+            "Primary Hypothyroidism",
+            "Elevated TSH, low free T4",
+            "Thyroid capillary regression",
+            "Levothyroxine replacement, monitor TSH"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Standard care for cisplatin-eligible **muscle-invasive bladder cancer** historically consisted of neoadjuvant cisplatin-based chemotherapy followed by radical cystectomy. The landmark phase three **NIAGARA trial** demonstrated that adding perioperative **durvalumab** (anti-PD-L1 antibody) to four cycles of neoadjuvant gemcitabine-cisplatin, followed by radical cystectomy and eight cycles of adjuvant durvalumab monotherapy, significantly improved event-free survival and overall survival (hazard ratio 0.75) with manageable toxicity and no delay to curative surgery.",
+      "say": "Neoadjuvant therapy for muscle-invasive bladder cancer has entered the immunotherapy era. In the phase three NIAGARA study, incorporating the PD-L1 inhibitor durvalumab with standard gemcitabine and cisplatin before radical surgery, followed by adjuvant durvalumab maintenance, produced unprecedented gains in overall survival. Importantly, the combination did not increase surgical complications or postpone cystectomy, making perioperative chemo-immunotherapy the new benchmark for cisplatin-eligible disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bladder-cancer-fig1.webp",
+        "alt": "Cystoscopic view of urothelial papillary carcinoma displaying delicate fronds protruding into bladder lumen.",
+        "caption": "Muscle-invasive urothelial malignancy of the urinary bladder. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "In metastatic **castration-resistant prostate cancer**, abiraterone acetate irreversibly inhibits **cytochrome P450 17A1** (CYP17A1), an enzyme possessing both 17alpha-hydroxylase and 17,20-lyase activities required for androgen biosynthesis in the testes, adrenal glands, and prostate tumour microenvironment. Blocking CYP17A1 shunts steroid precursors into the mineralocorticoid pathway. Co-administration of **prednisolone** (5 mg twice daily) is mandatory to suppress hypothalamic-pituitary **adrenocorticotropic hormone** (ACTH) feedback, thereby preventing severe hypokalaemia, hypertension, and fluid retention.",
+      "say": "Understanding the steroidogenesis pathway explains why abiraterone acetate must always be paired with low-dose steroids. By knocking out CYP17A1, abiraterone shuts off androgen production across the testes and adrenals. However, the resulting fall in serum cortisol triggers an unchecked surge in pituitary ACTH, driving massive upstream mineralocorticoid synthesis. Administering low-dose prednisolone provides physiologic feedback that shuts down excess ACTH and protects the patient from refractory hypokalemia and hypertension.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Cholesterol Precursor"
+          },
+          {
+            "id": "p2",
+            "label": "CYP17A1 Inhibition"
+          },
+          {
+            "id": "p3",
+            "label": "Androgen Depletion"
+          },
+          {
+            "id": "p4",
+            "label": "Compensatory ACTH Rise"
+          },
+          {
+            "id": "p5",
+            "label": "Prednisolone Suppression"
+          }
+        ],
+        "edges": [
+          ["p1", "p2"],
+          ["p2", "p3"],
+          ["p2", "p4"],
+          ["p4", "p5"]
+        ]
+      }
+    },
+    {
+      "tx": "Initiating androgen deprivation therapy with luteinizing hormone-releasing hormone (**LHRH agonists**, such as leuprolide or goserelin) triggers an initial surge of pituitary LH and FSH release. This temporary stimulation provokes a transient **testosterone flare** during the first one to two weeks, which can precipitate catastrophic spinal cord compression in vertebral metastases or acute bladder outlet obstruction. To prevent flare, an oral **first-generation antiandrogen** (such as bicalutamide 50 mg daily) must be initiated seven to fourteen days before the first LHRH agonist injection.",
+      "say": "When you start an LHRH agonist like leuprolide, you must remember that pituitary receptor downregulation is not immediate. The initial surge of gonadotropins releases a burst of testosterone that can cause metastatic prostate cancer to flare aggressively. In a patient with vertebral lesions, that flare can trigger permanent paralysis from spinal cord compression. You must always pre-treat with an oral antiandrogen like bicalutamide for at least a week before the injection to block peripheral androgen receptors.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Phase",
+          "Endocrine Mechanism",
+          "Serum Testosterone Impact",
+          "Clinical Risk & Mitigation"
+        ],
+        "rows": [
+          [
+            "Days 1 to 14 of LHRH Agonist",
+            "Pituitary receptor hyperstimulation",
+            "Transient testosterone surge (flare)",
+            "Spinal cord compression risk; blocked by bicalutamide"
+          ],
+          [
+            "Days 14 to 28 Onward",
+            "GnRH receptor downregulation & desensitisation",
+            "Profound castrate drop (< 50 ng/dL)",
+            "Established medical castration; discontinue antiandrogen"
+          ],
+          [
+            "GnRH Antagonists (Degarelix / Relugolix)",
+            "Immediate competitive receptor blockade",
+            "Rapid testosterone drop without flare",
+            "No antiandrogen co-administration needed"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_bf0065874c84",
+    "q_e8fa2798417c",
+    "q_566fea73c374"
+  ],
+  "gen": "AI"
+}
