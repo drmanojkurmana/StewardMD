@@ -1,0 +1,247 @@
+{
+  "v": 1,
+  "module": "son-all-mrd-relapse",
+  "subject": "ss-medical-oncology",
+  "title": "Childhood ALL genetics, measurable residual disease science, lumbar puncture safety, asparaginase biology and CNS relapse",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "Childhood B cell acute lymphoblastic leukaemia (a cancer of immature B lymphocytes) most often carries the translocation **t(12;21)** fusing the genes **ETV6** and **RUNX1** (once called TEL-AML1). It occurs in about 25% of cases, peaks between ages 2 and 9 years, hides from routine chromosome banding so detection needs FISH (fluorescence in situ hybridisation) or PCR (polymerase chain reaction), and predicts cure above 90% in childhood B-ALL.",
+      "say": "When parents ask why their young child with B ALL has such a good outlook, this translocation is often the reason. About one in four childhood cases carries a fusion of ETV6 with RUNX1. Routine chromosome banding misses it because the swapped segments look identical under the microscope, so the laboratory must use FISH or PCR. Children with this fusion have an excellent prognosis with modern therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-lymphoid-leukemia-fig1.webp",
+        "alt": "Diagram of acute lymphoblastic leukaemia showing marrow packed with lymphoblasts, a mediastinal mass and an enlarged spleen.",
+        "caption": "Lymphoblasts crowd the marrow in acute lymphoblastic leukaemia. Credit: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "**Measurable residual disease** (MRD, leukaemia cells hidden below the microscope limit) is the strongest single predictor of relapse in ALL. Flow cytometry (cell sorting by surface markers) and PCR detect 1 blast in 10,000 cells (10 to the power minus 4, or 0.01%). NGS (next generation sequencing of immune receptor genes) reaches 1 in 1,000,000 (10 to the power minus 6) and is the most sensitive assay available.",
+      "say": "A child can look completely cured under the microscope yet still harbour hidden leukaemia. That hidden burden is called measurable residual disease, and its level after induction beats every other factor for predicting relapse. Standard flow cytometry and PCR find one blast in ten thousand cells. Sequencing based tests go a hundred times deeper, finding one cell in a million, which makes them the most sensitive option.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "MRD assay",
+          "Sensitivity",
+          "Clinical role"
+        ],
+        "rows": [
+          [
+            "Multiparameter flow cytometry",
+            "10 to the power minus 4 (0.01%)",
+            "Widely available, needs fresh marrow"
+          ],
+          [
+            "PCR of receptor rearrangements",
+            "10 to the power minus 4 to minus 5",
+            "Needs patient specific primers"
+          ],
+          [
+            "NGS (clonoSEQ)",
+            "10 to the power minus 6",
+            "Most sensitive MRD method"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Leukaemia that stays MRD positive after induction or consolidation (treatment phases that aim to clear hidden disease) must be escalated, and the drug of choice is **blinatumomab**, a bispecific T cell engager binding **CD19** on blasts and **CD3** on killer T cells. In the BLAST study it converted about 4 in 5 MRD positive patients to MRD negative. Watch for cytokine release syndrome (a storm of inflammatory molecules) and neurotoxicity.",
+      "say": "Persistent hidden disease after the first phases of treatment means the current plan is failing, so we escalate rather than wait for a visible relapse. Blinatumomab is the preferred rescue. It physically links the patient's own T cells to CD19 on the leukemic blasts, and the BLAST trial showed it wipes out residual disease in roughly four out of five such patients. Families should know about fever from cytokine release and the risk of confusion or tremor.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mrdpos",
+            "label": "MRD Positive After Consolidation",
+            "level": 1
+          },
+          {
+            "id": "blina",
+            "label": "Blinatumomab CD19 x CD3",
+            "level": 2
+          },
+          {
+            "id": "mrdneg",
+            "label": "MRD Negative Conversion",
+            "level": 3
+          },
+          {
+            "id": "txplan",
+            "label": "Transplant or Continued Therapy",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "mrdpos",
+            "blina"
+          ],
+          [
+            "blina",
+            "mrdneg"
+          ],
+          [
+            "mrdneg",
+            "txplan"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In multiple myeloma (a cancer of plasma cells), MRD negativity is defined by the **IMWG** (International Myeloma Working Group) as fewer than 1 tumour cell in 100,000 (10 to the power minus 5) by either **EuroFlow** next generation flow or NGS. Either method qualifies, and negativity must be confirmed in the marrow because blood testing alone misses patchy disease.",
+      "say": "Myeloma specialists track the same hidden disease, but they follow their own strict rulebook. The International Myeloma Working Group says a patient counts as MRD negative only when a highly standardised flow test called EuroFlow, or a sequencing test, finds fewer than one myeloma cell in a hundred thousand marrow cells. Blood tests alone are not enough, because myeloma grows in patches that blood sampling can miss.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "IMWG MRD method",
+          "Required sensitivity",
+          "Sample"
+        ],
+        "rows": [
+          [
+            "EuroFlow next generation flow",
+            "10 to the power minus 5 or deeper",
+            "Bone marrow aspirate"
+          ],
+          [
+            "NGS of receptor genes",
+            "10 to the power minus 5 or deeper",
+            "Bone marrow aspirate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In acute myeloid leukaemia (a cancer of immature myeloid cells), molecular MRD tracks **NPM1**, **RUNX1-RUNX1T1**, **CBFB-MYH11** and **PML-RARA** transcripts. Mutations of **DNMT3A**, **TET2** and **ASXL1** (the DTA trio of age related clonal blood formation) are never used as MRD markers because they persist in healthy survivors and would falsely label cured patients as positive.",
+      "say": "Not every mutation found at diagnosis is useful for tracking hidden myeloid leukaemia. Fusions and NPM1 faithfully mark the leukemic clone, so they are the approved targets. The DTA genes are different. They accumulate with normal ageing in people who never develop leukaemia, and they linger after cure. Tracking them would brand healthy survivors as still diseased, which is why guidelines explicitly exclude them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Track as AML MRD",
+          "points": [
+            "NPM1 mutation transcripts",
+            "RUNX1-RUNX1T1 and CBFB-MYH11 fusions",
+            "PML-RARA in promyelocytic leukaemia",
+            "Markers clear with true cure"
+          ]
+        },
+        "right": {
+          "title": "Never Track (DTA Trio)",
+          "points": [
+            "DNMT3A, TET2 and ASXL1 mutations",
+            "Age related clonal blood formation",
+            "Persist lifelong after cure",
+            "Tracking them gives false positives"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Never perform a lumbar puncture (spinal fluid sampling) or inject intrathecal chemotherapy (drugs given into the spinal fluid) when platelets (clotting cell fragments) are below **50,000 per microlitre**. Transfuse platelets first. A bloody traumatic tap can seed circulating blasts into the spinal fluid, and an epidural haematoma (a blood clot pressing on the cord) can paralyse the child.",
+      "say": "This number saves children from catastrophe on the day shift. Fifty thousand platelets is the hard floor before any needle enters the spinal canal in a leukaemia patient. When the count is lower, transfuse platelets first and wait for the recheck. Two disasters follow a rushed tap: blood in the sample can carry leukemic blasts into the nervous system, and bleeding around the cord can cause permanent paralysis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "plt",
+            "label": "Platelets Below 50000",
+            "level": 1
+          },
+          {
+            "id": "transf",
+            "label": "Transfuse Platelets First",
+            "level": 2
+          },
+          {
+            "id": "lp",
+            "label": "Lumbar Puncture or Intrathecal Drug",
+            "level": 3
+          },
+          {
+            "id": "safe",
+            "label": "No Haematoma, No Blast Seeding",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "plt",
+            "transf"
+          ],
+          [
+            "transf",
+            "lp"
+          ],
+          [
+            "lp",
+            "safe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**L-asparaginase** (an enzyme drug) kills ALL blasts because they lack **asparagine synthetase** (the enzyme that makes the amino acid asparagine) and starve when blood asparagine is split into aspartate and ammonia. Its second activity against glutamine (glutaminase action) injures the pancreas and liver, causing **pancreatitis** (pancreas inflammation, never rechallenge after an attack) and clots from lost **antithrombin** (a natural blood thinner), classically sinus vein thrombosis in the brain.",
+      "say": "Asparaginase takes advantage of a metabolic weakness in the blasts. Healthy cells manufacture their own asparagine, but leukemic blasts cannot, so the drug starves them by destroying the supply in the blood. The same drug also chews up glutamine, and that off target effect explains its two dreaded toxicities. Pancreas inflammation means the drug is banned for life in that child. Liver shutdown of natural anticoagulants means clots, classically in the brain's draining veins.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Asparaginase effect",
+          "Chemistry",
+          "Bedside rule"
+        ],
+        "rows": [
+          [
+            "Tumour kill",
+            "Splits asparagine to aspartate plus ammonia",
+            "Blasts lack asparagine synthetase"
+          ],
+          [
+            "Pancreatitis",
+            "Glutamine depletion injures acinar cells",
+            "Clinical attack bans all rechallenge"
+          ],
+          [
+            "Venous thrombosis",
+            "Liver stops making antithrombin, protein C and S",
+            "Suspect sinus thrombosis with headache or seizure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "New headache with a cranial nerve palsy (nerve weakness causing double vision) in a treated ALL child means **CNS relapse** (leukaemia return to the leptomeningeal membranes around the brain and cord) until proven otherwise, because the nervous system is a sanctuary (a site shielded from most drugs). Confirm urgently with lumbar puncture cytology and flow cytometry of spinal fluid plus a marrow biopsy, since marrow relapse often travels with it.",
+      "say": "Picture a child who finished ALL treatment and now returns with a persistent headache and a new squint. Do not blame spectacles or migraine first. The membranes around the brain shelter leukaemia from most chemotherapy, so relapse there is common and announces itself exactly this way. The workup is urgent: sample the spinal fluid for leukemic cells and recheck the marrow the same week, because the two relapses often arrive together.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-leukaemia-all-aml-emergencies-long-case-fig1.webp",
+        "alt": "Bone marrow smear illustration with lymphoblasts and myeloblasts with Auer rods used to judge remission and relapse.",
+        "caption": "Recheck marrow alongside spinal fluid when CNS relapse is suspected. Credit: StewardMD.",
+        "ar": 1.3405
+      }
+    }
+  ],
+  "quiz": [
+    "mk-d308161f6bd3",
+    "mk-5c6991ab7eb2",
+    "mk-fe8498cb5f8e"
+  ],
+  "src": [],
+  "refs": [
+    "NCCN Acute Lymphoblastic Leukemia Guidelines 2024",
+    "WHO Classification of Haematolymphoid Tumours 5th Edition",
+    "ELN 2022 Recommendations for Acute Myeloid Leukemia",
+    "IMWG Criteria for Minimal Residual Disease in Multiple Myeloma"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-pyq-gap-muse",
+  "model": "muse-spark",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
