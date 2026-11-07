@@ -31,14 +31,14 @@
       }
     },
     {
-      "tx": "Four measurements taken before chemotherapy starts add one point each when abnormal. A platelet count of 350,000 per microlitre or more scores. So does a **haemoglobin** below 10 g/dL, or use of red cell growth factors such as erythropoiesis-stimulating agents (drugs that raise red cell counts). A leukocyte count above 11,000 per microlitre scores, and a body mass index (BMI) of 35 kg/m2 or more adds the final point.",
-      "say": "Four more measurements each add one point when they are abnormal before chemotherapy starts. A platelet count of 350,000 per microlitre or more scores one point. So does a haemoglobin below 10 grams per decilitre, or use of red cell growth factors such as erythropoiesis-stimulating agents. A leukocyte count above 11,000 per microlitre scores, and a body mass index of 35 kilograms per square metre or more adds the final point.",
+      "tx": "Four measurements taken before chemotherapy starts add one point each when abnormal. A platelet count of 350,000 per microlitre or more scores. So does a **haemoglobin** below 10 g/dL, or use of red cell growth factors such as erythropoiesis-stimulating agents (drugs that raise red cell counts). A leukocyte count above 11,000 per microlitre scores, and a body mass index (BMI) of 35 kg/m2 or more adds the final point. Adding the points gives one of three **risk groups**. The table gives the symptomatic VTE rate for each group.",
+      "say": "Four measurements taken before chemotherapy starts each add one point when they are abnormal. A platelet count of 350,000 per microlitre or more scores one point. So does a haemoglobin below 10 grams per decilitre, or use of red cell growth factors such as erythropoiesis-stimulating agents. A leukocyte count above 11,000 per microlitre scores, and a body mass index of 35 kilograms per square metre or more adds the final point. Adding the points places the patient in one of three risk groups. The table gives the rate of symptomatic VTE, meaning a clot that causes signs or symptoms, for each group.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Variable",
-          "Cut-off before chemotherapy",
-          "Points"
+          "Measure or total",
+          "Cut-off or risk group",
+          "Points or symptomatic VTE rate"
         ],
         "rows": [
           [
@@ -60,41 +60,27 @@
             "Body mass index",
             "35 kg/m2 or more",
             "1"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Adding the points gives a total that falls into one of three groups. Zero points is **low risk**, with symptomatic VTE (sVTE, a clot that causes signs or symptoms) in roughly 0.3 to 0.8 percent of patients. One or two points is **intermediate risk**, with rates of 1.8 to 2.0 percent. Three or more points is **high risk**, where symptomatic VTE occurs in 6.7 to 7.1 percent.",
-      "say": "Adding the points places the patient in one of three groups. A total of zero is low risk, with symptomatic VTE in roughly zero point three to zero point eight percent of patients. A total of one or two is intermediate risk, and the rate rises to one point eight to two point zero percent. A total of three or more is high risk, where symptomatic VTE occurs in six point seven to seven point one percent. Symptomatic means the clot causes signs or symptoms.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Total points",
-          "Risk group",
-          "Symptomatic VTE rate"
-        ],
-        "rows": [
+          ],
           [
-            "0",
-            "Low",
+            "Total of 0",
+            "Low risk",
             "0.3 to 0.8 percent"
           ],
           [
-            "1 or 2",
-            "Intermediate",
+            "Total of 1 or 2",
+            "Intermediate risk",
             "1.8 to 2.0 percent"
           ],
           [
-            "3 or more",
-            "High",
+            "Total of 3 or more",
+            "High risk",
             "6.7 to 7.1 percent"
           ]
         ]
       }
     },
     {
-      "tx": "**Thromboprophylaxis** (preventive anticoagulant given before any clot forms) is not routine for every outpatient with cancer. Standard references say the American Society of Clinical Oncology (ASCO) does not routinely recommend it. For outpatients with a Khorana score of 2 or more before a new regimen, ASCO's 2023 update says apixaban, rivaroxaban, or LMWH may be offered, if bleeding risk is low and no drug interactions apply. Stomach and pancreatic cancers reach 2 points from the site alone.",
+      "tx": "**Thromboprophylaxis** (preventive anticoagulant given before any clot forms) is not routine for every outpatient with cancer. Standard references say the American Society of Clinical Oncology (ASCO) does not routinely recommend it. For outpatients with a Khorana score of 2 or more before a new regimen, ASCO's 2023 update says apixaban, rivaroxaban, or low molecular weight heparin (LMWH) may be offered, if bleeding risk is low and no drug interactions apply. Stomach and pancreatic cancers reach 2 points from the site alone.",
       "say": "Thromboprophylaxis means preventive anticoagulant treatment given before any clot forms. It is not routine for every outpatient with cancer. Standard references say the American Society of Clinical Oncology does not routinely recommend it. For outpatients with a Khorana score of two or more before a new regimen, the 2023 ASCO update says apixaban, rivaroxaban, or low molecular weight heparin may be offered. That applies when bleeding risk is low and no drug interactions apply. Stomach and pancreatic cancers reach two points from the site alone.",
       "vis": {
         "kind": "compare",
@@ -181,47 +167,40 @@
       }
     },
     {
-      "tx": "**Pulmonary embolism (PE)**, a clot lodged in the lung arteries, is grouped by blood pressure and heart strain. Massive PE, with low blood pressure and clot in at least half the pulmonary vessels, occurs in roughly 5 to 10 percent of cases. For massive PE, **fibrinolysis** (clot dissolution with drugs such as alteplase) is standard. Submassive PE has normal pressure with right ventricular dysfunction, and fibrinolysis for it remains controversial.",
-      "say": "Pulmonary embolism, or PE, is a clot lodged in the lung arteries. It is grouped by blood pressure and heart strain. Massive PE has low blood pressure and clot in at least half the pulmonary vessels. It occurs in roughly five to ten percent of cases. For massive PE, fibrinolysis, which dissolves clot with drugs such as alteplase, is standard. Submassive PE has normal pressure with right ventricular dysfunction, and fibrinolysis for it remains controversial.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Massive PE",
-          "points": [
-            "Systemic hypotension",
-            "Clot in at least half the pulmonary vessels",
-            "About 5 to 10 percent of cases",
-            "Fibrinolysis is standard treatment"
-          ]
-        },
-        "right": {
-          "title": "Submassive PE",
-          "points": [
-            "Normal systemic blood pressure",
-            "Right ventricular dysfunction",
-            "About 20 to 25 percent of cases",
-            "Fibrinolysis controversial, considered if the patient deteriorates"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Low blood oxygen, or **hypoxaemia** (too little oxygen in the blood), is a separate issue from clot size. Most patients with minor PE are not hypoxaemic and need no oxygen. The British Thoracic Society (BTS) guideline of 2017 sets an oxygen saturation target of 94 to 98 percent in PE, for patients not at risk of hypercapnic failure. For patients at risk of hypercapnic failure, a build-up of carbon dioxide, it suggests 88 to 92 percent. Hypoxia is not among the high-risk markers in standard references.",
-      "say": "Low blood oxygen, or hypoxaemia, which means too little oxygen in the blood, is a separate issue from clot size. Most patients with minor PE are not hypoxaemic, so they need no oxygen. The British Thoracic Society guideline of 2017 sets an oxygen saturation target of 94 to 98 percent in PE, in patients not at risk of hypercapnic failure. For patients at risk of hypercapnic failure, a build-up of carbon dioxide, it suggests 88 to 92 percent. Hypoxia is not among the high-risk markers in standard references.",
+      "tx": "**Pulmonary embolism (PE)**, a clot lodged in the lung arteries, is grouped by blood pressure and heart strain. Massive PE, with low blood pressure, occurs in roughly 5 to 10 percent of cases. For massive PE, **fibrinolysis** (clot dissolution with drugs such as alteplase) is standard. Submassive PE has normal pressure, and fibrinolysis for it remains controversial. Most patients with minor PE are not hypoxaemic (short of oxygen in the blood), so they need no oxygen. Guidance sets an oxygen saturation target of 94 to 98 percent in PE.",
+      "say": "Pulmonary embolism, or PE, is a clot lodged in the lung arteries. It is grouped by blood pressure and heart strain. Massive PE, with low blood pressure, occurs in roughly five to ten percent of cases. For massive PE, fibrinolysis, which dissolves clot with drugs such as alteplase, is standard. Submassive PE has normal pressure, and fibrinolysis for it remains controversial. Most patients with minor PE are not hypoxaemic, which means short of oxygen in the blood, so they need no oxygen. Guidance sets an oxygen saturation target of 94 to 98 percent in PE. The table gives the other targets and details.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Patient group",
-          "Oxygen saturation target"
+          "Group",
+          "Detail",
+          "Management or target"
         ],
         "rows": [
           [
-            "PE, not at risk of hypercapnic failure",
-            "94 to 98 percent"
+            "Massive PE",
+            "Systemic hypotension; clot in at least half the pulmonary vessels; about 5 to 10 percent of cases",
+            "Fibrinolysis is standard"
           ],
           [
-            "PE, at risk of hypercapnic failure",
-            "88 to 92 percent"
+            "Submassive PE",
+            "Normal systemic blood pressure; right ventricular dysfunction; about 20 to 25 percent of cases",
+            "Fibrinolysis controversial, considered if the patient deteriorates"
+          ],
+          [
+            "Hypoxaemia",
+            "A separate issue from clot size; not a high-risk marker in standard references",
+            "Most minor PE patients need no oxygen"
+          ],
+          [
+            "PE, not at risk of hypercapnic failure",
+            "British Thoracic Society (BTS) guideline, 2017",
+            "94 to 98 percent saturation"
+          ],
+          [
+            "PE, at risk of hypercapnic failure (a build-up of carbon dioxide)",
+            "Same BTS guideline, 2017",
+            "88 to 92 percent saturation"
           ]
         ]
       }

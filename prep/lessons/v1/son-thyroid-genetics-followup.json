@@ -45,67 +45,30 @@
       }
     },
     {
-      "tx": "In **papillary** carcinoma, the **BRAF V600E** point mutation (a single amino acid swap in the BRAF kinase gene) is the initiating trigger in up to 50% of tumors, and it may predict a worse course when lymph nodes are involved. Separately, **RET/PTC** rearrangements (fusions of the RET kinase gene with a partner gene) appear in about 40% of sporadic adult cases, about 60% of cases in children, and about 80% of cases linked to external radiation.",
-      "say": "Papillary carcinoma often turns on a single amino acid swap in the BRAF kinase gene, written V600E. That change starts the tumor's growth in up to half of cases, and it may signal a worse course once lymph nodes are involved. A second route is rearrangement of the RET gene, seen in about 40 percent of sporadic adult cases. The share rises in children and reaches around 80 percent after external radiation.",
+      "tx": "In **papillary** carcinoma, the **BRAF V600E** point mutation (a single amino acid swap in the BRAF kinase gene) is the initiating trigger in up to 50% of tumors. **RET/PTC** rearrangements appear in about 40% of sporadic adult cases, 60% of children and 80% after external radiation. Adding a **TERT promoter mutation** (a change in the gene's on-switch region) changes the picture. When it coexists with BRAF V600E, the two have a **synergistic effect** (combined impact exceeds either change alone) on aggressiveness, raising recurrence and patient mortality.",
+      "say": "In papillary carcinoma, the BRAF V600E point mutation is a single amino acid swap in the BRAF gene. It is the initiating trigger in up to half of tumors, and it may predict a worse course once lymph nodes are involved. A second route, rearrangement of the RET gene, appears in about 40 percent of sporadic adult cases, 60 percent of children and 80 percent after external radiation. Adding a TERT promoter mutation changes the picture. When it coexists with BRAF V600E, the two changes have a synergistic effect on aggressiveness, raising recurrence and patient mortality.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "BRAF V600E point mutation",
-          "points": [
-            "Single amino acid swap in the BRAF gene",
-            "Initiating trigger in up to 50% of tumors",
-            "May predict worse course with nodal spread"
-          ]
-        },
-        "right": {
-          "title": "RET/PTC rearrangement",
-          "points": [
-            "Fusion of the RET kinase gene with a partner gene",
-            "About 40% of sporadic adult cases",
-            "About 60% of cases in children",
-            "About 80% after external radiation"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Adding a **TERT promoter mutation** (a change in the gene's on-switch region) changes the picture. The **TERT** gene encodes telomerase reverse transcriptase, the enzyme that maintains chromosome ends. When these promoter mutations coexist with BRAF V600E in papillary tumors, the two changes have a **synergistic** effect (the combined impact is stronger than either change alone) on aggressiveness, including higher rates of recurrence and patient mortality.",
-      "say": "Now a second change is added to the first. A promoter mutation in the TERT gene, which carries the instructions for telomerase, sometimes appears alongside BRAF V600E. The two changes work together, so their combined effect on aggressiveness is stronger than either alone. That pairing is linked with recurrence and with higher patient mortality.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "BRAF V600E alone"
-          },
-          {
-            "id": "b",
-            "label": "TERT promoter mutation added"
-          },
-          {
-            "id": "c",
-            "label": "Synergistic effect on aggressiveness"
-          },
-          {
-            "id": "d",
-            "label": "Higher recurrence and patient mortality"
-          }
+        "kind": "table",
+        "cols": [
+          "Change",
+          "What it is",
+          "Frequency or effect"
         ],
-        "edges": [
+        "rows": [
           [
-            "a",
-            "b",
-            "coexist in papillary tumors"
+            "BRAF V600E point mutation",
+            "Single amino acid swap in the BRAF kinase gene",
+            "Initiating trigger in up to 50% of tumors; may predict worse course with nodal spread"
           ],
           [
-            "b",
-            "c",
-            "combined effect"
+            "RET/PTC rearrangement",
+            "Fusion of the RET kinase gene with a partner gene",
+            "About 40% of sporadic adult cases, 60% of children, 80% after external radiation"
           ],
           [
-            "c",
-            "d",
-            "worse outcome"
+            "TERT promoter mutation",
+            "Change in the TERT on-switch region; TERT encodes telomerase reverse transcriptase, which maintains chromosome ends",
+            "With BRAF V600E: synergistic effect, higher recurrence and patient mortality"
           ]
         ]
       }
