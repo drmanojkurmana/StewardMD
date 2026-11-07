@@ -54,10 +54,10 @@ test('branch: the picked one wins, else the kit, else none', () => {
   TG.setBranch('nonsense'); assert.equal(TG.branch().id, 'cardiology');
 });
 
-test('tab: remembered, For you by default, students start on Learn', () => {
+test('tab: remembered, For you by default for every role', () => {
   assert.equal(load({}).TG.tab(), 'foryou');
   assert.equal(load({ smd_role: 'doctor' }).TG.tab(), 'foryou');
-  assert.equal(load({ smd_role: 'student' }).TG.tab(), 'learn');
+  assert.equal(load({ smd_role: 'student' }).TG.tab(), 'foryou', 'a hidden For you grid would leave a hidden duplicate of every tile');
   const { TG } = load({ smd_role: 'student' }); TG.setTab('practice'); assert.equal(TG.tab(), 'practice');
   TG.setTab('bogus'); assert.equal(TG.tab(), 'practice');
 });

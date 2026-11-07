@@ -210,11 +210,10 @@
   // The branch the specialty tab shows: the one the user last picked there, else the one their kit maps to, else none.
   function branch() { return branchById(ls(BRANCH_KEY) || "") || branchForKit(specialty()); }
   function setBranch(id) { if (branchById(id)) ls(BRANCH_KEY, id); }
-  // The tab Home opens on: the last one used, else by role (students Learn, consultants Practice, the rest For you).
+  // The tab Home opens on: the last one used, else For you (the grid the user already knows, with every tile in the DOM once).
   var TAB_IDS = ["foryou", "learn", "bedside", "practice", "branch"];
   function tab() {
-    var t = ls(TAB_KEY); if (TAB_IDS.indexOf(t) >= 0) return t;
-    var r = role(); return r === "student" ? "learn" : "foryou";
+    var t = ls(TAB_KEY); return TAB_IDS.indexOf(t) >= 0 ? t : "foryou";
   }
   function setTab(t) { if (TAB_IDS.indexOf(t) >= 0) ls(TAB_KEY, t); }
 

@@ -42,7 +42,7 @@ Owner: tools should be easy for any doctor to find. `tool-groups.js` adds `TASKS
 list; `home.js` `homeToolsSectionMarkup` renders the tabs.
 - **Tabs:** For you (the grid as before, with `#rnavToolsGrid`, drag, All tools) | Learn | Bedside | Practice | branch.
   Task tabs show every eligible tool of that kind (locked ones after); each Home tool not in `ON_HOME_ALREADY` is in
-  exactly one task (unit test). Tab remembered in `smd_home_tab` (students default to Learn); branch pick in
+  exactly one task (unit test). Tab remembered in `smd_home_tab` (default For you for every role: a student default of Learn hid the For you grid and left hidden duplicate tiles, which broke focus return in run-tokos-app-ui); branch pick in
   `smd_home_branch`. Tapping the open branch tab (or with no kit) opens the picker. Row scrolls on phones, with a fade.
 - **Discovery:** `smd_tools_seen` (tool ids) is seeded on first render with what is on Home plus Recently used; tools
   never opened get a "New" chip; `#rnavTry` offers one unseen tool per week (`tryNext`), "Not now" hides it for the
