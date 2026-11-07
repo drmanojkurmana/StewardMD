@@ -113941,7 +113941,8 @@
    "title": "Extracorporeal life support",
    "subject": "ss-critical-care",
    "subjects": [
-    "ss-critical-care"
+    "ss-critical-care",
+    "ss-paediatric-surgery"
    ],
    "modules": [
     [
@@ -113955,6 +113956,18 @@
     [
      "ss-critical-care",
      "scc-ecmo"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-ecmo-ecls"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-cdh"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-cpam"
     ]
    ],
    "score": 9,
@@ -245680,6 +245693,2580 @@
     ]
    },
    "yieldTier": "core"
+  },
+  {
+   "id": "neonatal-cardiopulmonary-transition-and-thermal-care",
+   "title": "Neonatal cardiopulmonary transition and thermal care",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-neonatal-physiology"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-neonatal-fluids-electrolytes"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-neonatal-nutrition-tpn"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-neonatal-fluids-electrolytes",
+    "title": "Neonatal fluids and electrolytes: losses, maintenance and sepsis cover"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-neonatal-fluids-electrolytes"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-neonatal-fluids-electrolytes"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-neonatal-fluids-electrolytes"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "core"
+  },
+  {
+   "id": "paediatric-testicular-tumours",
+   "title": "Paediatric testicular tumours",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-testicular-tumours"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-obstructive-uropathy"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-hypospadias-exstrophy"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-obstructive-uropathy",
+    "title": "UPJ obstruction, posterior urethral valves and VUR"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-obstructive-uropathy"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-obstructive-uropathy"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-obstructive-uropathy"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "core"
+  },
+  {
+   "id": "hepatoblastoma-and-paediatric-liver-tumours",
+   "title": "Hepatoblastoma and paediatric liver tumours",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-liver-tumours"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-sct-ovarian"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-paediatric-trauma"
+    ]
+   ],
+   "score": 7,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-sct-ovarian",
+    "title": "Sacrococcygeal teratoma and ovarian tumours: midline germ cells"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-sct-ovarian"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-sct-ovarian"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-sct-ovarian"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "core"
+  },
+  {
+   "id": "thyroglossal-duct-cyst-and-midline-neck-lesions",
+   "title": "Thyroglossal duct cyst and midline neck lesions",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-thyroglossal-midline-neck"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-branchial-lateral-neck"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-lymphatic-malformation"
+    ]
+   ],
+   "score": 6.67,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-branchial-lateral-neck",
+    "title": "Branchial remnants and lateral neck lumps: cysts, fistulas and nodes"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-branchial-lateral-neck"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-branchial-lateral-neck"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-branchial-lateral-neck"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "gastro-oesophageal-reflux-and-fundoplication",
+   "title": "Gastro-oesophageal reflux and fundoplication",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-long-gap-ea"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-ger-fundoplication"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-pyloric-stenosis"
+    ]
+   ],
+   "score": 6.67,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-ger-fundoplication",
+    "title": "Gastro-oesophageal reflux and fundoplication: from posseting to wraps"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-ger-fundoplication"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-ger-fundoplication"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-ger-fundoplication"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "short-bowel-syndrome-and-lengthening",
+   "title": "Short bowel syndrome and lengthening",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-short-bowel"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-meconium"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-hirschsprung"
+    ]
+   ],
+   "score": 6.67,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-meconium",
+    "title": "Meconium ileus and plug syndrome: sticky start, different endings"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-meconium"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-meconium"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-meconium"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "biliary-atresia-and-kasai-portoenterostomy",
+   "title": "Biliary atresia and Kasai portoenterostomy",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-biliary-atresia"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-choledochal-cyst"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-omphalocele"
+    ]
+   ],
+   "score": 6.67,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "shp-paediatric-systemic-liver",
+    "title": "Paediatric hepatology: biliary atresia, choledochal cyst and systemic liver disease"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:shp-paediatric-systemic-liver"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:shp-paediatric-systemic-liver"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:shp-paediatric-systemic-liver"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "hereditary-pancreatitis-pancreas-divisum-and-biliary-dyskine",
+   "title": "Hereditary pancreatitis, pancreas divisum and biliary dyskinesia",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-pectus"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-pancreas-biliary"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-undescended-torsion"
+    ]
+   ],
+   "score": 6.67,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-pancreas-biliary",
+    "title": "Hereditary pancreatitis, pancreas divisum and biliary dyskinesia"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-pancreas-biliary"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-pancreas-biliary"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-pancreas-biliary"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "high"
+  },
+  {
+   "id": "eventration-lobar-emphysema-and-bronchogenic-cyst",
+   "title": "Eventration, lobar emphysema and bronchogenic cyst",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-sequestration"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-airway-lesions"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-ea-tef"
+    ]
+   ],
+   "score": 6.33,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-airway-lesions",
+    "title": "Eventration, lobar emphysema and bronchogenic cysts"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-airway-lesions"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-airway-lesions"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-airway-lesions"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "extra"
+  },
+  {
+   "id": "intestinal-malrotation-and-midgut-volvulus",
+   "title": "Intestinal malrotation and midgut volvulus",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-intestinal-atresia"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-malrotation-volvulus"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-nec"
+    ]
+   ],
+   "score": 6.33,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-malrotation-volvulus",
+    "title": "Intestinal malrotation and midgut volvulus: green vomit means go"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-malrotation-volvulus"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-malrotation-volvulus"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-malrotation-volvulus"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "extra"
+  },
+  {
+   "id": "intussusception-and-meckel-diverticulum",
+   "title": "Intussusception and Meckel diverticulum",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-arm"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-intussusception"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-appendicitis"
+    ]
+   ],
+   "score": 6.33,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-intussusception",
+    "title": "Intussusception and Meckel diverticulum: telescope and remnant"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-intussusception"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-intussusception"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-intussusception"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "extra"
+  },
+  {
+   "id": "paediatric-inguinal-hernia-and-hydrocele",
+   "title": "Paediatric inguinal hernia and hydrocele",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-gastroschisis"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-inguinal-hernia"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-umbilical-hernia"
+    ]
+   ],
+   "score": 6.33,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "sps-inguinal-hernia",
+    "title": "Paediatric inguinal hernia and hydrocele: the open tunnel"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:sps-inguinal-hernia"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:sps-inguinal-hernia"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:sps-inguinal-hernia"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "extra"
+  },
+  {
+   "id": "wilms-tumour",
+   "title": "Wilms tumour",
+   "subject": "ss-paediatric-surgery",
+   "subjects": [
+    "ss-paediatric-surgery"
+   ],
+   "modules": [
+    [
+     "ss-paediatric-surgery",
+     "sps-neuroblastoma"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-wilms"
+    ],
+    [
+     "ss-paediatric-surgery",
+     "sps-rhabdomyosarcoma"
+    ]
+   ],
+   "score": 6.33,
+   "kb": null,
+   "kbTitle": null,
+   "lesson": {
+    "id": "pon-solid-tumours",
+    "title": "Solid and CNS tumours: Wilms, neuroblastoma and brain tumours"
+   },
+   "n": 0,
+   "type": "disease",
+   "outline": [
+    {
+     "id": "def-epi",
+     "title": "Definition and epidemiology",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "aet",
+     "title": "Aetiology and risk factors",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "path",
+     "title": "Pathogenesis and pathology (incl. genetics)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "clin",
+     "title": "Clinical features and variants",
+     "tier": "core",
+     "source": "lesson:pon-solid-tumours"
+    },
+    {
+     "id": "comp",
+     "title": "Complications",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "inv",
+     "title": "Investigations (labs, imaging, histology, markers)",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "dx",
+     "title": "Diagnosis and staging",
+     "tier": "core",
+     "source": "template:disease"
+    },
+    {
+     "id": "ddx",
+     "title": "Differential diagnosis",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "rx",
+     "title": "Management (medical, surgical, guideline-based)",
+     "tier": "core",
+     "source": "lesson:pon-solid-tumours"
+    },
+    {
+     "id": "prog",
+     "title": "Prognosis and follow-up",
+     "tier": "high",
+     "source": "template:disease"
+    },
+    {
+     "id": "prev",
+     "title": "Prevention and screening",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "guide",
+     "title": "Recent guideline changes",
+     "tier": "extra",
+     "source": "template:disease"
+    },
+    {
+     "id": "pearl",
+     "title": "Exam pearls and classic one-liners",
+     "tier": "high",
+     "source": "lesson:pon-solid-tumours"
+    },
+    {
+     "id": "img",
+     "title": "Images",
+     "tier": "extra",
+     "source": "template:disease"
+    }
+   ],
+   "match": {
+    "def-epi": {
+     "n": 0,
+     "items": []
+    },
+    "aet": {
+     "n": 0,
+     "items": []
+    },
+    "path": {
+     "n": 0,
+     "items": []
+    },
+    "clin": {
+     "n": 0,
+     "items": []
+    },
+    "comp": {
+     "n": 0,
+     "items": []
+    },
+    "inv": {
+     "n": 0,
+     "items": []
+    },
+    "dx": {
+     "n": 0,
+     "items": []
+    },
+    "ddx": {
+     "n": 0,
+     "items": []
+    },
+    "rx": {
+     "n": 0,
+     "items": []
+    },
+    "prog": {
+     "n": 0,
+     "items": []
+    },
+    "prev": {
+     "n": 0,
+     "items": []
+    },
+    "guide": {
+     "n": 0,
+     "items": []
+    },
+    "pearl": {
+     "n": 0,
+     "items": []
+    },
+    "img": {
+     "n": 0,
+     "items": []
+    }
+   },
+   "unassigned": 0,
+   "fetched": 0,
+   "coverage": {
+    "total": 14,
+    "covered": 0,
+    "gaps": [
+     "def-epi",
+     "aet",
+     "path",
+     "clin",
+     "comp",
+     "inv",
+     "dx",
+     "ddx",
+     "rx",
+     "prog",
+     "prev",
+     "guide",
+     "pearl",
+     "img"
+    ]
+   },
+   "yieldTier": "extra"
   }
  ]
 }
