@@ -1,0 +1,226 @@
+{
+  "gen": "AI",
+  "id": "pgt-gerd-infants",
+  "module": "Esophageal and Gastric Pathology",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Healthy babies spit up frequently because their lower oesophageal sphincter is still maturing. Spitting up reaches its highest peak at four months of age, when over half of all infants regurgitate daily. You can tell the family that it clears up by twelve to fourteen months without any medication.",
+      "tx": "Observe **physiologic gastroesophageal regurgitation peak** at 4 months of age, affecting over 50% of healthy thriving infants. This effortless regurgitation represents normal physiological development and spontaneously resolves by 12-14 months of age as sphincter tone matures, solid feeds begin, and the child maintains an upright posture.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Timeline",
+          "Clinical Status"
+        ],
+        "rows": [
+          [
+            "Peak at 4 months",
+            "Over 50% spit up daily; happy spitter with normal growth"
+          ],
+          [
+            "Resolution at 12-14 months",
+            "Spontaneous resolution in vast majority; no therapy needed"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Draw a firm line between effortless spitting up and true reflux disease. We only diagnose gastroesophageal reflux disease when reflux causes distressing complications like failure to thrive, hematemesis, food refusal, or aspiration. The happy spitter who gains weight steadily needs reassurance, not acid suppression.",
+      "tx": "Maintain the **GER vs GERD distinction** strictly under ESPGHAN/NASPGHAN guidelines. Gastroesophageal reflux disease (GERD) is diagnosed only when reflux of gastric contents leads to troublesome symptoms or objective complications such as failure to thrive, erosive esophagitis, stricture, or chronic respiratory morbidity. Uncomplicated regurgitation in a thriving child requires no drug intervention.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Physiologic GER (Happy Spitter)",
+          "points": [
+            "Normal weight gain along centiles",
+            "Painless regurgitation after feeds",
+            "Reassurance and conservative feeding only"
+          ]
+        },
+        "right": {
+          "title": "Pathologic GERD",
+          "points": [
+            "Failure to thrive and poor weight gain",
+            "Erosive esophagitis or hematemesis",
+            "Apnea, aspiration, or Sandifer syndrome"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Start with non drug measures before reaching for any prescription pad. Thicken formula feeds using carob or cereal, reduce meal volume while feeding more often, and keep the baby upright for half an hour after feeding. Remember that prone sleeping carries a fatal cot death risk and is strictly forbidden.",
+      "tx": "Implement **conservative first-line measures** before initiating pharmacotherapy. Recommended adjustments include thickened feeds (using cereal or commercial thickening agents), smaller frequent feedings, and holding the infant upright for 20-30 minutes postprandially. Prone sleeping is strictly contraindicated due to the well-documented risk of sudden infant death syndrome (SIDS).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Infant with troublesome regurgitation"
+          },
+          {
+            "id": "b",
+            "label": "Thicken feeds and reduce meal volume"
+          },
+          {
+            "id": "c",
+            "label": "Upright holding post-feed (20-30 min)"
+          },
+          {
+            "id": "d",
+            "label": "Strict supine sleep to prevent SIDS"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Spitting up with fussiness often stems from cow milk allergy rather than simple acid reflux. In breastfed infants, eliminate dairy from the mother's diet for two to four weeks. In formula fed babies, switch to an extensively hydrolysed formula for the same trial period before considering acid blocking drugs.",
+      "tx": "Prescribe a **cow milk protein exclusion trial** for 2 to 4 weeks before initiating acid suppression. Maternal elimination of dairy proteins in breastfed infants, or switching formula-fed infants to an extensively hydrolyzed formula, resolves symptoms in up to a third of infants whose presentation mimics severe gastroesophageal reflux disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feeding Mode",
+          "Exclusion Strategy (2 to 4 week trial)"
+        ],
+        "rows": [
+          [
+            "Breastfed infant",
+            "Strict maternal dairy exclusion trial"
+          ],
+          [
+            "Formula-fed infant",
+            "Switch to extensively hydrolyzed formula (eHF)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Watch for sudden bizarre neck arching and head turning that occurs during or right after feeding. This is Sandifer syndrome, where the infant stretches the neck to clear acid from the lower oesophagus. It looks exactly like an epileptic seizure, but an electroencephalogram will be completely normal.",
+      "tx": "Recognise **Sandifer syndrome** as paroxysmal dystonic neck extension and head cocking occurring in temporal association with feeding. This neurobehavioral posturing relieves lower esophageal discomfort by stretching the esophagus and clearing acid, but is frequently misdiagnosed as infantile spasms or focal seizures despite a normal ictal EEG.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acid reflux triggers esophageal irritation"
+          },
+          {
+            "id": "b",
+            "label": "Paroxysmal neck arching and head cocking"
+          },
+          {
+            "id": "c",
+            "label": "Posturing clears refluxate from distal lumen"
+          },
+          {
+            "id": "d",
+            "label": "Distinguish from seizures (normal EEG)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When endoscopy confirms mucosal breaks or erosive esophagitis, give a proton pump inhibitor such as omeprazole or esomeprazole at one milligram per kilogram daily. You should keep this course to four to eight weeks, then taper carefully because long term acid suppression invites enteric infections and pneumonia.",
+      "tx": "Adhere to the **proton pump inhibitor trial duration** guidelines. For endoscopic erosive esophagitis or severe documented reflux disease, administer omeprazole or esomeprazole at 1 mg/kg/day (divided once or twice daily) for a definite course of 4 to 8 weeks. Discontinue or wean therapy thereafter, as prolonged unmonitored use increases vulnerability to gastroenteritis and respiratory infections.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Recommendation"
+        ],
+        "rows": [
+          [
+            "Indicated drugs",
+            "Omeprazole or esomeprazole"
+          ],
+          [
+            "Target dosage",
+            "1 mg/kg/day divided daily or BID"
+          ],
+          [
+            "Treatment duration",
+            "4 to 8 week course with scheduled taper"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When symptoms persist despite medical therapy, dual impedance and acidity monitoring gives the complete physiological picture. A slender catheter records electrical impedance across multiple rings to detect bolus transit alongside hydrogen ion changes, catching non acidic reflux that classic pH probes miss completely.",
+      "tx": "Select **combined pH-impedance monitoring** as the gold standard investigation. Multichannel intraluminal impedance with pH monitoring (MII-pH) detects both acidic (refluxate with pH < 4) and weakly acidic or non-acidic episodes, correlating symptom index and symptom association probability directly with bolus movement along the esophageal body.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic pH Monitoring Alone",
+          "points": [
+            "Detects only acidic events where pH < 4",
+            "Misses postprandial milk-buffered reflux",
+            "Cannot measure physical fluid bolus height"
+          ]
+        },
+        "right": {
+          "title": "Combined MII-pH Study",
+          "points": [
+            "Detects all refluxate regardless of pH",
+            "Quantifies bolus height and clearance time",
+            "Gold standard for symptom association"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Resist the urge to prescribe prokinetic drugs for childhood reflux. Metoclopramide causes irreversible movement disorders and extrapyramidal reactions, while domperidone can prolong the QT interval and cause fatal arrhythmias. Their safety risks clearly outweigh any minor benefit on gastric emptying.",
+      "tx": "Avoid routine prokinetics due to **prokinetic drug risks**. Neither metoclopramide nor domperidone is recommended for routine pediatric reflux management. Metoclopramide crosses the blood-brain barrier triggering oculogyric crises and extrapyramidal reactions, while domperidone carries significant cardiac QT prolongation risks without showing reliable mucosal healing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug Class",
+          "Specific Toxicity Risk",
+          "Guideline Verdict"
+        ],
+        "rows": [
+          [
+            "Metoclopramide",
+            "Extrapyramidal spasms and tardive dyskinesia",
+            "Not recommended"
+          ],
+          [
+            "Domperidone",
+            "Cardiac QT interval prolongation and arrhythmia",
+            "Not recommended"
+          ]
+        ]
+      }
+    }
+  ],
+  "subject": "ss-paediatric-gastroenterology",
+  "title": "Gastroesophageal Reflux and Reflux Disease in Infants and Children",
+  "v": 1
+}
