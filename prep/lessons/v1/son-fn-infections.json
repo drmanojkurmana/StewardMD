@@ -1,0 +1,356 @@
+{
+  "v": 1,
+  "module": "son-fn-infections",
+  "subject": "ss-medical-oncology",
+  "title": "Febrile neutropenia, fungal markers and catheter infection",
+  "minutes": 12,
+  "steps": [
+    {
+      "tx": "**Chemotherapy-induced neutropenia** (a low count of **neutrophils**, the white blood cells that fight bacteria, caused by treatment) is mainly a failure of production. Most cytotoxic drugs act on rapidly dividing cells, so they reduce the supply of new cells from the blood-forming tissue. They also damage dividing neutrophil precursors, which die by **apoptosis** (programmed cell death). Agents that hit early progenitors, such as nitrosoureas and mitomycin C, cause later, prolonged and cumulative neutropenia.",
+      "say": "Chemotherapy-induced neutropenia is a low neutrophil count caused by treatment. Neutrophils are the white blood cells that fight bacteria. Mainly, it is a failure of production. Most cytotoxic drugs act on rapidly dividing cells, so they reduce the supply of new cells from the blood-forming tissue. They also damage dividing neutrophil precursors, which die through apoptosis, a programmed form of cell death. Agents that hit early progenitors, such as nitrosoureas and mitomycin C, cause later, prolonged and cumulative neutropenia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cytotoxic drug given"
+          },
+          {
+            "id": "b",
+            "label": "Rapidly dividing progenitor cells slowed or killed"
+          },
+          {
+            "id": "c",
+            "label": "Fewer new neutrophils released"
+          },
+          {
+            "id": "d",
+            "label": "Neutrophil count falls"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "acts on dividing cells"
+          ],
+          [
+            "b",
+            "c",
+            "less output"
+          ],
+          [
+            "c",
+            "d",
+            "count drops"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Neutrophil kinetics** (the rate at which these cells are made and lost) sets the course of neutropenia. Mature neutrophils survive about 12 hours in blood and about 3 days in tissue. A reserve of mature granulocytes (white cells with granules) in the blood-forming tissue lasts about 7 days. Progenitors need 10 to 14 days to mature, so the **nadir** (lowest point of the count) falls near day 10 and recovery completes by day 21.",
+      "say": "Neutrophil kinetics, meaning how quickly these cells are made and lost, sets the course of neutropenia. Mature neutrophils have a working life of roughly 12 hours in blood and about 3 days in tissue. A reserve of mature granulocytes can last about 7 days. Progenitor cells need 10 to 14 days to mature, so the count usually bottoms out near day 10. Recovery is complete by day 21.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Typical timing"
+        ],
+        "rows": [
+          [
+            "Mature neutrophil survival in blood",
+            "About 12 hours"
+          ],
+          [
+            "Mature neutrophil survival in tissue",
+            "About 3 days"
+          ],
+          [
+            "Reserve of mature granulocytes",
+            "About 7 days"
+          ],
+          [
+            "Progenitor to mature cell",
+            "10 to 14 days"
+          ],
+          [
+            "Count nadir after treatment",
+            "Near day 10"
+          ],
+          [
+            "Full recovery",
+            "By day 21"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hematopoietic growth factors (signals that drive blood cell production) include **filgrastim**, a recombinant (genetically engineered) granulocyte colony-stimulating factor (G-CSF) that prolongs neutrophil survival. **Sargramostim** is the only recombinant granulocyte-macrophage colony-stimulating factor (GM-CSF) approved in the United States. **Oprelvekin**, recombinant interleukin-11 (IL-11), was withdrawn after approval for low platelets, for weak effect and substantial toxicity.",
+      "say": "Several hematopoietic growth factors stimulate blood cell production. Filgrastim is a genetically engineered form of granulocyte colony-stimulating factor, and it helps neutrophils survive longer. Sargramostim is the only engineered granulocyte-macrophage colony-stimulating factor approved in the United States. Oprelvekin once eased low platelet counts, but it was withdrawn because it worked poorly and caused significant toxicity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Main target",
+          "Status"
+        ],
+        "rows": [
+          [
+            "Filgrastim (G-CSF)",
+            "Neutrophils",
+            "Prevents chemotherapy-induced neutropenia and its infections"
+          ],
+          [
+            "Sargramostim (GM-CSF)",
+            "Myeloid precursors, neutrophils, monocytes",
+            "Only approved recombinant GM-CSF in the United States"
+          ],
+          [
+            "Oprelvekin (IL-11)",
+            "Platelet count",
+            "Withdrawn; can cause fluid retention and atrial arrhythmias"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **Multinational Association for Supportive Cancer Care (MASCC)** risk index sorts patients into high and low risk groups by adding points. Having no hypotension earns 5 points, having no chronic obstructive pulmonary disease (a long-term lung disease) earns 4, outpatient status earns 3, and an age under 60 years earns 2. A total of 21 or higher is low risk, while a total below 21 is high risk.",
+      "say": "The Multinational Association for Supportive Cancer Care risk index, usually called MASCC, places each patient into a high or low risk group. Points are added for several features. No low blood pressure earns 5 points, and no chronic obstructive pulmonary disease earns 4. Being an outpatient earns 3, and being under 60 years old earns 2. A total of 21 or higher is low risk, while a total below 21 is high risk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Points or result"
+        ],
+        "rows": [
+          [
+            "No hypotension",
+            "5 points"
+          ],
+          [
+            "No chronic obstructive pulmonary disease",
+            "4 points"
+          ],
+          [
+            "Outpatient status",
+            "3 points"
+          ],
+          [
+            "Age under 60 years",
+            "2 points"
+          ],
+          [
+            "Total of 21 or higher",
+            "Low risk"
+          ],
+          [
+            "Total below 21",
+            "High risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Febrile neutropenia** (fever with a low neutrophil count) starts with a single oral reading of 38.3 degrees Celsius, or 38.0 degrees sustained for 1 hour. Neutrophils under 1,000 per microlitre mean the fever is treated as neutropenic infection. **Empirical** antibiotics (picked before any germ is identified) ideally begin within 1 hour of onset. Hypotension or signs of organ injury mark clinical instability and call for a broader regimen, and high-risk patients need admission for intravenous antibiotics.",
+      "say": "Febrile neutropenia is fever occurring with a low neutrophil count. One oral reading of 38.3 degrees Celsius counts, as does 38.0 degrees held for an hour. When the neutrophil count is below 1,000 per microlitre, the fever is treated as a neutropenic infection. Antibiotics chosen before any germ is identified should start within an hour. Low blood pressure or signs of organ injury need a broader regimen, and high-risk patients need admission for intravenous antibiotics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Fever with neutrophils below 1,000 per microlitre"
+          },
+          {
+            "id": "b",
+            "label": "Stable and low risk: oral outpatient therapy may be considered"
+          },
+          {
+            "id": "c",
+            "label": "Hypotension or organ injury: admit, broader regimen"
+          },
+          {
+            "id": "d",
+            "label": "Intravenous antibiotic within 1 hour of onset"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "stable and low risk"
+          ],
+          [
+            "a",
+            "c",
+            "unstable or high risk"
+          ],
+          [
+            "c",
+            "d",
+            "start at once"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pseudomonas aeruginosa** (a gram-negative bacterium) must be covered by empirical therapy. Bacteremia (bacteria in the blood) during neutropenic fever carries much higher mortality, particularly gram-negative bacteremia. The best-studied single agents for this purpose are **piperacillin-tazobactam**, **cefepime**, **ceftazidime**, **imipenem** and **meropenem**. **Ceftriaxone** is absent from that list.",
+      "say": "Pseudomonas aeruginosa is a gram-negative bacterium that the first antibiotic needs to cover. Bloodstream infections during neutropenic fever carry high mortality, especially those caused by gram-negative organisms. The best-studied single agents include piperacillin-tazobactam, cefepime, ceftazidime, imipenem, and meropenem. Ceftriaxone does not appear on that list of options.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Why Pseudomonas matters",
+          "points": [
+            "Gram-negative bacterium that empirical therapy must cover",
+            "Gram-negative bacteremia carries particularly high mortality",
+            "Empirical regimen needs broad-spectrum activity"
+          ]
+        },
+        "right": {
+          "title": "Single agents studied as monotherapy",
+          "points": [
+            "Cefepime",
+            "Ceftazidime",
+            "Piperacillin-tazobactam",
+            "Imipenem",
+            "Meropenem"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Routine **vancomycin** is not part of the starting regimen, because adding it routinely brings more nephrotoxicity (kidney injury) without better outcomes. Gram-positive cover is added for specific reasons: sepsis, clinically evident soft tissue infection, suspected catheter exit site infection, pneumonia, severe mucositis when ceftazidime is the starting agent, or known carriage of methicillin-resistant Staphylococcus aureus (MRSA) or penicillin-resistant pneumococcus.",
+      "say": "Vancomycin is not added routinely to the first antibiotic plan. Routine use has not improved outcomes, and it does add kidney toxicity. It is used only in particular situations. Those include sepsis, a clear soft tissue infection, a suspected catheter exit site infection, and pneumonia. Severe mucositis qualifies only when ceftazidime is the starting agent. Known carriage of methicillin-resistant Staphylococcus aureus or penicillin-resistant pneumococcus also qualifies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Situation",
+          "Vancomycin role"
+        ],
+        "rows": [
+          [
+            "Sepsis or clinically evident soft tissue infection",
+            "Add gram-positive cover"
+          ],
+          [
+            "Suspected catheter exit site infection",
+            "Add gram-positive cover"
+          ],
+          [
+            "Pneumonia",
+            "Add gram-positive cover"
+          ],
+          [
+            "Severe mucositis",
+            "Add only if ceftazidime is the starting agent"
+          ],
+          [
+            "Known MRSA or penicillin-resistant pneumococcus carriage",
+            "Add gram-positive cover"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **galactomannan** test, most useful on bronchoalveolar lavage (BAL) fluid (a sample washed from the lungs), helps diagnose aspergillosis. False negatives are common in patients on antifungal prophylaxis (preventive drugs). False positives can occur with other fungal infections, and piperacillin-tazobactam has been linked to false positives in patients with blood cancers.",
+      "say": "Galactomannan is a fungal marker, and it works best on lavage fluid taken from the lungs when aspergillosis is suspected. Results can be falsely negative in patients taking preventive antifungal drugs. Other fungal infections can give false positives. Piperacillin-tazobactam has also been linked to false positives in patients with blood cancers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Galactomannan",
+          "points": [
+            "Most useful on lavage fluid for aspergillosis",
+            "False negatives common with antifungal prophylaxis",
+            "False positives can occur with other fungal infections",
+            "False positives linked to piperacillin-tazobactam"
+          ]
+        },
+        "right": {
+          "title": "Reading a result",
+          "points": [
+            "A positive result needs other evidence",
+            "A negative result on prophylaxis does not exclude aspergillosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **beta-D-glucan** (BDG) test has a high negative predictive value for invasive candidiasis, meaning a negative result makes that infection unlikely, yet it lacks specificity. Mucormycosis gives negative biomarker results, so these tests cannot be used to diagnose it. Diagnosis of mucormycosis therefore rests on tissue histology showing ribbon-like hyphae, together with culture.",
+      "say": "The beta-D-glucan test has a high negative predictive value for invasive candidiasis. A negative result makes that infection unlikely. However, the test lacks specificity, so a positive result does not pin down the organism. Biomarkers come back negative in mucormycosis, so these tests cannot be used to diagnose it. Doctors instead look at tissue under the microscope and culture it, because mucormycosis shows ribbon-like hyphae on histology.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Infection",
+          "Biomarker finding"
+        ],
+        "rows": [
+          [
+            "Invasive candidiasis",
+            "BDG has a high negative predictive value"
+          ],
+          [
+            "Any positive BDG result",
+            "Lacks specificity"
+          ],
+          [
+            "Mucormycosis",
+            "Biomarkers are negative"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Catheter-related bacteremia** (blood infection tied to an indwelling line) is supported when the same organism grows from a central line culture and a peripheral vein culture. The **differential time to positivity** (the gap before each culture flags growth) points to the catheter when the central culture turns positive at least 2 hours earlier. If confirmed, the preferred step is removing the catheter.",
+      "say": "Catheter-related bacteremia means germs in the blood traced back to an indwelling line. Doctors confirm it when the same organism grows from both a central line culture and a peripheral vein culture. The timing helps as well. If the central culture turns positive at least 2 hours earlier, the catheter is the likely source. Once confirmed, the preferred step is to remove the catheter.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Same organism grows from central line and peripheral vein"
+          },
+          {
+            "id": "b",
+            "label": "Central culture turns positive at least 2 hours earlier"
+          },
+          {
+            "id": "c",
+            "label": "Catheter-related bacteremia confirmed"
+          },
+          {
+            "id": "d",
+            "label": "Preferred step: remove the catheter"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "differential time to positivity"
+          ],
+          [
+            "b",
+            "c",
+            "points to catheter source"
+          ],
+          [
+            "c",
+            "d",
+            "treatment"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "refs": [
+    "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
+    "Harrison's Principles of Internal Medicine, 22nd edition",
+    "Freifeld AG et al. Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer: 2010 Update by the IDSA. Clin Infect Dis. 2011;52(4):e56-e93",
+    "Maertens J et al. Letter: piperacillin-tazobactam and false-positive galactomannan. Clin Infect Dis. 2004;39(2):289-290",
+    "Neumega (oprelvekin) US prescribing information, Wyeth, revised 2012, as reproduced at rxlist.com/neumega-drug.htm",
+    "Neutropenic events associated with new anticancer treatments, from pathophysiology to practice: a scoping review (NEW Group). Support Care Cancer. 2025, doi:10.1007/s00520-025-10141-4",
+    "Evaluating the causes associated with false positive Galactomannan assay in suspected cases of respiratory fungal infections. J Family Med Prim Care. 2025, doi:10.4103/jfmpc.jfmpc_1496_24 (PMC11922347)",
+    "Clinical practice guidelines for the diagnosis and management of intravascular catheter-related infection: 2009 update by the IDSA (Mermel LA et al). Clin Infect Dis. 2009;49(1):1-45 (PMC4039170); read for the catheter-related sections, no change to the lesson"
+  ],
+  "gen": "AI"
+}

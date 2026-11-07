@@ -1,0 +1,163 @@
+{
+  "v": 1,
+  "module": "son-men2-ret",
+  "subject": "ss-medical-oncology",
+  "title": "MEN2 and RET: prophylactic thyroidectomy and medullary thyroid cancer",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "**RET** (a gene that codes for a growth signal receptor, short for rearranged during transfection) mutations are sorted by codon into three risk tiers. The **American Thyroid Association** (ATA) sets those tiers. Each tier estimates how early and how aggressively **medullary thyroid carcinoma** (MTC, a cancer of the C cells, which make the hormone calcitonin) will develop. That estimate decides when the thyroid should come out, before any tumor appears. The table lists the codons in each tier.",
+      "say": "RET stands for rearranged during transfection. Mutations in this gene are sorted by codon into three risk tiers, and the American Thyroid Association sets those tiers. Each tier estimates how early and how aggressively medullary thyroid carcinoma will develop. That estimate decides when the thyroid should come out, before any tumor appears. The table lists the codons that fall into each tier.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tier",
+          "RET codons (exon)",
+          "Pheochromocytoma screen from age",
+          "Thyroidectomy timing"
+        ],
+        "rows": [
+          [
+            "Highest",
+            "918, M918T (exon 16)",
+            "11",
+            "As soon as possible, and within the first year of life"
+          ],
+          [
+            "High",
+            "634 (exon 11), 883 A883F (exon 15)",
+            "11",
+            "By age 5, or earlier if calcitonin rises"
+          ],
+          [
+            "Moderate",
+            "609, 611, 618, 620 (exon 10) and others",
+            "16",
+            "Timed by calcitonin, usually around age 5 to 6"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Multiple endocrine neoplasia type 2B** (MEN 2B, also called MEN 3) is driven by the **M918T** change, which swaps methionine for threonine at codon 918. This variant sits in the highest tier, and more than 95 percent of MEN 2B cases carry it. Medullary thyroid carcinoma develops in every carrier and spreads early. The cancer can appear in infancy, so surgery is planned as soon as possible, and no later than the first birthday.",
+      "say": "Multiple endocrine neoplasia type 2B is also called MEN 3. Its driving change is M918T, which swaps methionine for threonine at codon 918. This variant sits in the highest tier, and more than 95 percent of these cases carry it. Medullary thyroid carcinoma develops in every carrier and spreads early. Surgery is therefore planned as soon as possible, and no later than the first birthday, while the ATA says the first months of life may be ideal."
+    },
+    {
+      "tx": "Once a RET mutation is found, its codon sets the deadline for **prophylactic thyroidectomy** (surgery to remove the thyroid before cancer appears). Codon 918 carries the earliest deadline. Codons 634 and 883 sit in the high tier, with surgery by age 5. Moderate-tier codons are timed by **calcitonin**, a hormone made by **C cells**, together with a joint decision by the family and the surgeon.",
+      "say": "Once a RET mutation is found, its codon sets the deadline for prophylactic thyroidectomy, which means surgery to remove the thyroid before cancer appears. Codon 918 carries the earliest deadline. Codons 634 and 883 sit in the high tier, and surgery is due by age 5. Moderate-tier codons are timed by calcitonin levels, and experts advise erring toward surgery when calcitonin is raised but below 30 pg/mL.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "RET mutation found on genetic testing"},
+          {"id": "b", "label": "Highest tier: codon 918"},
+          {"id": "c", "label": "High tier: codon 634 or 883"},
+          {"id": "d", "label": "Moderate tier: other codons"},
+          {"id": "e", "label": "Surgery as soon as possible, within the first year"},
+          {"id": "f", "label": "Surgery by age 5, earlier if calcitonin rises"},
+          {"id": "g", "label": "Timing set by calcitonin, usually age 5 to 6"}
+        ],
+        "edges": [["a", "b"], ["a", "c"], ["a", "d"], ["b", "e"], ["c", "f"], ["d", "g"]]
+      }
+    },
+    {
+      "tx": "**Multiple endocrine neoplasia type 2A** (MEN 2A) and type 2B (MEN 2B) both carry RET mutations, and both raise the risk of **pheochromocytoma** (an adrenal tumor that releases stress hormones). MEN 2A adds **primary hyperparathyroidism** (overactive parathyroid glands that raise blood calcium) in 20 to 30 percent of patients. MEN 2B adds nerve growths and a tall, thin build, but it does not cause hyperparathyroidism.",
+      "say": "Multiple endocrine neoplasia type 2A and type 2B both carry RET mutations, and both raise the risk of pheochromocytoma, an adrenal tumor that releases stress hormones. Type 2A adds parathyroid tumors that cause primary hyperparathyroidism in 20 to 30 percent of patients. Type 2B brings nerve growths and a tall, thin build, but hyperparathyroidism is not a feature of this variant.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MEN 2A (codon 634 in most cases)",
+          "points": [
+            "Medullary thyroid carcinoma in 100 percent of carriers",
+            "Pheochromocytoma in about half of patients",
+            "Primary hyperparathyroidism in 20 to 30 percent",
+            "Cutaneous lichen amyloidosis and Hirschsprung disease can occur"
+          ]
+        },
+        "right": {
+          "title": "MEN 2B (codon 918 in more than 95 percent)",
+          "points": [
+            "Medullary thyroid carcinoma in 100 percent of carriers",
+            "Pheochromocytoma in nearly all patients",
+            "Mucosal neuromas, usually on the tip of the tongue",
+            "Marfanoid build, corneal nerve changes and megacolon",
+            "Intestinal ganglioneuromatosis (nerve overgrowth in the gut)",
+            "No primary hyperparathyroidism"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Before any thyroid operation in a RET carrier, **pheochromocytoma** must be ruled out, because an unrecognized tumor can cause sudden death during surgery. Screening for it starts at age 11 in the highest and high tiers, and at age 16 in the moderate tier. **Hyperparathyroidism** is screened from age 11 in the high tier and from age 16 in the moderate tier, but codon 918 carriers need no such screen.",
+      "say": "Before any thyroid operation in a RET carrier, pheochromocytoma must be ruled out, because an unrecognized tumor can cause sudden death during surgery. Screening for it starts at age 11 in the highest and high tiers, and at age 16 in the moderate tier. Hyperparathyroidism is screened from age 11 in the high tier and from age 16 in the moderate tier. Carriers of codon 918 need no hyperparathyroidism screen at all.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Test", "Highest tier", "High tier", "Moderate tier"],
+        "rows": [
+          ["Pheochromocytoma screen", "From age 11", "From age 11", "From age 16"],
+          ["Hyperparathyroidism screen", "Not required", "From age 11", "From age 16"]
+        ]
+      }
+    },
+    {
+      "tx": "After thyroidectomy for **medullary thyroid carcinoma**, **levothyroxine** (a synthetic thyroid hormone) replaces the lost hormone for life. The aim is to keep thyroid function normal, not to suppress **thyroid-stimulating hormone** (TSH). The ATA sees no reason to suppress TSH, because MTC is not a follicular tumor. Medullary cancer arises from **C cells**, which do not take up iodine, so **radioactive iodine** adds nothing.",
+      "say": "After the thyroid is removed for medullary cancer, levothyroxine replaces the hormone the body no longer makes, and it continues for life. The aim is to keep thyroid function normal, not to suppress thyroid-stimulating hormone. The ATA sees no reason to suppress it, because medullary cancer does not come from follicular cells. These C cells do not take up iodine, so radioactive iodine adds nothing to the plan.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Differentiated thyroid cancer",
+          "points": [
+            "Arises from follicular cells",
+            "Many tumors express TSH receptors",
+            "Levothyroxine is used to suppress TSH",
+            "Radioactive iodine can treat residual tissue"
+          ]
+        },
+        "right": {
+          "title": "Medullary thyroid carcinoma",
+          "points": [
+            "Arises from C cells",
+            "Does not take up iodine",
+            "Radioactive iodine gives no benefit",
+            "Levothyroxine keeps thyroid function normal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Calcitonin** and **carcinoembryonic antigen** (CEA, a second tumor marker) are measured 3 to 6 months after surgery. If both are undetectable, recurrence is unlikely. A **doubling time** (how fast a marker level doubles) under 6 months marks the highest risk of persistent or recurrent disease. While neck imaging stays clear, physical checks, both markers and neck ultrasound repeat every 6 months.",
+      "say": "Calcitonin and carcinoembryonic antigen, a second tumor marker, are measured three to six months after surgery. If both are undetectable, recurrence is unlikely. A doubling time shorter than six months, meaning how quickly the marker level doubles, marks the highest risk of persistent or recurrent disease. While the neck stays clear on imaging, physical checks, both markers and neck ultrasound repeat every six months.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Check", "When", "What it shows"],
+        "rows": [
+          ["Calcitonin and CEA", "3 to 6 months after surgery", "Both undetectable means recurrence is unlikely"],
+          ["Neck ultrasound and physical check", "Every 6 months while the neck stays clear", "Tracks disease while the neck stays clear"],
+          ["Calcitonin doubling time", "Calculated from repeat values", "Under 6 months means highest risk"]
+        ]
+      }
+    },
+    {
+      "tx": "A rising **calcitonin** with negative imaging does not, on its own, justify a **tyrosine kinase inhibitor** (TKI, a targeted drug that blocks growth signals). **Vandetanib**, **cabozantinib**, **selpercatinib** and **pralsetinib** carry real toxicity, so they are reserved for disease that is rapidly progressing or causing symptoms. The ATA advises against systemic therapy when markers rise without documented metastases. Observation with periodic imaging and marker checks is the usual path.",
+      "say": "A rising calcitonin with negative imaging is not, on its own, a reason to start a kinase inhibitor. Drugs such as vandetanib, cabozantinib, selpercatinib and pralsetinib have real toxicity. They are kept for disease that is growing fast or causing symptoms. The ATA also advises against systemic therapy when markers rise without documented metastases. Doctors usually watch the markers and repeat imaging instead.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Calcitonin rises after surgery"},
+          {"id": "b", "label": "Neck and body imaging"},
+          {"id": "c", "label": "Disease seen on imaging"},
+          {"id": "d", "label": "No disease seen on imaging"},
+          {"id": "e", "label": "Local treatment first, systemic drug if progressive"},
+          {"id": "f", "label": "Observe with markers and ultrasound every 6 months"}
+        ],
+        "edges": [["a", "b"], ["b", "c", "disease seen"], ["b", "d", "no disease seen"], ["c", "e"], ["d", "f"]]
+      }
+    }
+  ],
+  "quiz": [],
+  "refs": [
+    "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
+    "Harrison's Principles of Internal Medicine, 22nd edition",
+    "American Thyroid Association guidelines for medullary thyroid carcinoma, 2015"
+  ],
+  "gen": "AI"
+}

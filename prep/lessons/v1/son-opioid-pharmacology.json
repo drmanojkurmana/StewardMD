@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "son-opioid-pharmacology",
+  "subject": "ss-medical-oncology",
+  "title": "Opioid receptors, ceiling effect, fentanyl patch and rescue dosing",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "Opioid-induced **respiratory depression** is the most serious side effect of these drugs. Most opioid analgesics act at the **mu opioid receptor**. Activating mu receptors in the brainstem breathing centers slows and shallows each breath, and the effect depends on the dose. Sedation usually appears first and gives an early warning. A breathing rate below 10 breaths per minute is a danger sign.",
+      "say": "Opioid-induced respiratory depression is the most serious side effect of these drugs. Most opioid analgesics act at the mu opioid receptor. Activating mu receptors in the brainstem breathing centers slows and shallows each breath, and the effect depends on the dose. Sedation usually appears first and gives an early warning. A breathing rate below 10 breaths per minute is a danger sign.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Opioid activates mu receptors"
+          },
+          {
+            "id": "b",
+            "label": "Brainstem breathing centers depressed"
+          },
+          {
+            "id": "c",
+            "label": "Slow, shallow breathing; rate falls below 10 per minute"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "dose dependent"
+          ],
+          [
+            "b",
+            "c",
+            "leads to"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Naloxone** is a **pure antagonist** at the mu receptor, so it reverses opioid effects, including depressed breathing. In an unstable patient, clinicians give it intravenously in **titrated** doses. They dilute 0.4 milligrams (mg) in 10 milliliters (mL) of saline. Then they give 1 to 2 mL every 30 to 60 seconds until breathing improves.",
+      "say": "Naloxone is a pure antagonist at the mu receptor, so it reverses opioid effects, including depressed breathing. In an unstable patient, clinicians give it intravenously in titrated doses. They dilute zero point four milligrams of naloxone in 10 milliliters of saline. Then they give 1 to 2 milliliters every 30 to 60 seconds until breathing improves.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical situation",
+          "Naloxone approach"
+        ],
+        "rows": [
+          [
+            "Unstable patient with suspected opioid toxicity",
+            "Titrated intravenous doses, starting with 0.4 milligrams in 10 milliliters of saline"
+          ],
+          [
+            "Each further dose",
+            "1 to 2 milliliters every 30 to 60 seconds until improvement"
+          ],
+          [
+            "Long-acting opioid or slow clearance",
+            "Continuous infusion titrated with a standard dosing chart"
+          ],
+          [
+            "Stable patient with mild breathing depression",
+            "Hold the opioid and support breathing with noninvasive ventilation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Full agonists** such as morphine, fentanyl, oxycodone, hydromorphone and methadone have **no ceiling effect** on pain relief. The right dose is therefore the one that controls the pain. The **partial agonist** buprenorphine behaves differently, with a **ceiling effect** on analgesia. Beyond a certain dose, extra buprenorphine adds no pain relief.",
+      "say": "Full agonists, such as morphine, fentanyl, oxycodone, hydromorphone and methadone, have no ceiling effect on pain relief. The right dose is therefore the one that controls the pain. The partial agonist buprenorphine behaves differently, with a ceiling effect on analgesia. Beyond a certain dose, extra buprenorphine adds no pain relief.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Full agonists",
+          "points": [
+            "Morphine, fentanyl, oxycodone, hydromorphone, methadone",
+            "No ceiling effect on pain relief",
+            "Dose set by pain relief and side effects"
+          ]
+        },
+        "right": {
+          "title": "Partial agonist (buprenorphine)",
+          "points": [
+            "Ceiling effect on analgesia",
+            "Lower potential for abuse than full agonists",
+            "Useful for postacute pain",
+            "Not for chronic pain at the end of life"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mixed agonist-antagonists** such as butorphanol can cause **withdrawal** in a patient who is already physically dependent on a pure opioid. Pentazocine, butorphanol and nalbuphine also reach an **analgesic ceiling**, so extra drug above a plateau dose adds little pain relief. Nalbuphine is also used for persistent itching caused by opioids.",
+      "say": "Mixed agonist-antagonists such as butorphanol can cause withdrawal in a patient who is already physically dependent on a pure opioid. Pentazocine, butorphanol and nalbuphine also reach an analgesic ceiling, so extra drug above a plateau dose adds little pain relief. Nalbuphine is also used for persistent itching caused by opioids.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug",
+          "Key point"
+        ],
+        "rows": [
+          [
+            "Pentazocine",
+            "Mixed agonist-antagonist with an analgesic ceiling"
+          ],
+          [
+            "Butorphanol",
+            "Mixed agonist-antagonist with an analgesic ceiling; can cause withdrawal in dependent patients"
+          ],
+          [
+            "Buprenorphine",
+            "Partial agonist with high receptor affinity and low activity; mainly for opioid-naive patients"
+          ],
+          [
+            "Nalbuphine",
+            "Mixed agonist-antagonist with an analgesic ceiling; used for persistent opioid-related itch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A **transdermal fentanyl patch** is typically replaced every **72 hours**, and it delivers steady drug levels. Pain relief starts late, with an **onset delay** of about 12 to 15 hours after placement. Levels then need a further 24 to 72 hours to reach steady state. A **short-acting rescue** opioid covers that gap, and dose changes should not be made sooner than every 72 hours.",
+      "say": "A transdermal fentanyl patch is typically replaced every 72 hours, and it delivers steady drug levels. Pain relief starts late, with an onset delay of about 12 to 15 hours after placement. Levels then need a further 24 to 72 hours to reach steady state. A short-acting rescue opioid covers that gap, and dose changes should not be made sooner than every 72 hours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p",
+            "label": "Patch applied"
+          },
+          {
+            "id": "o",
+            "label": "12 to 15 hours: analgesia begins"
+          },
+          {
+            "id": "e",
+            "label": "24 to 72 hours: steady levels reached"
+          },
+          {
+            "id": "r",
+            "label": "Every 72 hours: replace patch"
+          }
+        ],
+        "edges": [
+          [
+            "p",
+            "o",
+            "onset delay"
+          ],
+          [
+            "o",
+            "e",
+            "equilibration"
+          ],
+          [
+            "e",
+            "r",
+            "routine change"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fentanyl suits patients who cannot take oral medicines. Some studies show that it causes **less constipation** than oral morphine. The liver clears it without **active metabolites**, so it is a promising option when **renal insufficiency** (reduced kidney function) is present. Patients with **cachexia** (severe wasting) have little **adipose tissue** (body fat), so absorption from the patch may fall short.",
+      "say": "Fentanyl suits patients who cannot take oral medicines. Some studies show that it causes less constipation than oral morphine. The liver clears it without producing active metabolites, so it is a promising option when kidney function is reduced. Patients with cachexia, which means severe wasting, have little body fat, so absorption from the patch may fall short.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Advantages",
+          "points": [
+            "Less constipation than oral morphine in some studies",
+            "No active metabolites from liver breakdown",
+            "Promising when kidney function is reduced",
+            "Useful when oral intake is not possible"
+          ]
+        },
+        "right": {
+          "title": "Cautions",
+          "points": [
+            "Little adipose tissue, as in cachexia, lowers absorption",
+            "Patches with metal need removal before magnetic resonance imaging",
+            "Heat over the patch increases absorption",
+            "Dose changes no sooner than every 72 hours"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Breakthrough pain** is severe acute pain on top of chronic pain that is otherwise controlled. It needs a short-acting **rescue dose**. On a fixed schedule, the rescue dose is typically **5 to 15 percent** of the total 24-hour opioid requirement. For a patient on 300 milligrams of oral morphine a day, that means roughly 15 to 45 milligrams per rescue dose.",
+      "say": "Breakthrough pain is severe acute pain on top of chronic pain that is otherwise controlled. It needs a short-acting rescue dose. On a fixed schedule, the rescue dose is typically 5 to 15 percent of the total 24-hour opioid requirement. For a patient on 300 milligrams of oral morphine a day, that means roughly 15 to 45 milligrams per rescue dose.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Situation",
+          "Dose described"
+        ],
+        "rows": [
+          [
+            "Breakthrough dose on a fixed schedule",
+            "5 to 15 percent of the 24-hour requirement"
+          ],
+          [
+            "Opioid-tolerant patient admitted with acute pain",
+            "Starting dose of 10 to 20 percent of prior 24-hour oral morphine equivalent"
+          ],
+          [
+            "Worked case: 300 milligrams oral morphine per day",
+            "15 to 45 milligrams per rescue dose"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A **fentanyl patch** is meant only for **opioid-tolerant** patients with **chronic pain**. Heat over the patch, from a fever or a heating pad, speeds absorption and can cause **respiratory depression**. Dose increases should wait for steady state, which usually takes 3 to 6 days with a patch. Keep a rescue opioid ready during the early gap.",
+      "say": "A fentanyl patch is meant only for opioid-tolerant patients with chronic pain. Heat over the patch, from a fever or a heating pad, speeds absorption and can cause respiratory depression. Dose increases should wait for steady state, which usually takes 3 to 6 days with a patch. Keep a rescue opioid ready during the early gap.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phase",
+          "Practical step"
+        ],
+        "rows": [
+          [
+            "Day of placement",
+            "Keep a short-acting rescue opioid available"
+          ],
+          [
+            "First 12 to 15 hours",
+            "Analgesia is not yet established"
+          ],
+          [
+            "3 to 6 days",
+            "Steady state usually reached, so dose increases can follow"
+          ],
+          [
+            "Every 72 hours",
+            "Replace the patch and reassess pain"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "refs": [
+    "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
+    "Harrison's Principles of Internal Medicine, 22nd edition",
+    "Opioid receptor agonist-antagonists in pain management, Frontiers in Pain Research, 2026",
+    "Effects of opioids and stimulants on the respiratory system, European Respiratory Review, 2026"
+  ],
+  "gen": "AI"
+}
