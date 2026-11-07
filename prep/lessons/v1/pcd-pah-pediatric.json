@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "id": "pcd-pah-pediatric",
+  "title": "Pediatric Pulmonary Arterial Hypertension: Classification and Targeted Therapies",
+  "module": "Pulmonary Vascular and Pulmonary Hypertension",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Pulmonary arterial hypertension is defined through standardized right heart cardiac catheterisation measurements.",
+      "tx": "Hemodynamic criteria establish the **hemodynamic definition of PAH**. Updated World Symposium definition of pulmonary arterial hypertension: mean pulmonary arterial pressure (mPAP) > **20 mmHg**, pulmonary capillary wedge pressure <= **15 mmHg**, and pulmonary vascular resistance index (PVRI) >= **3 Wood units.m2**. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-arterial-hypertension-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Right heart catheterisation tracing and diagnostic criteria defining pulmonary arterial hypertension. Illustration: StewardMD original.",
+        "alt": "Diagram showing pulmonary capillary wedge and pulmonary arterial pressure criteria."
+      }
+    },
+    {
+      "say": "Catheter-directed acute vasoreactivity testing identifies the select subset of children who will benefit from oral calcium channel blocker therapy.",
+      "tx": "Catheterisation protocols conduct **vasoreactivity testing**. Acute vasoreactivity testing during cardiac catheterisation with inhaled **nitric oxide** (**20-40 ppm**): positive response is a drop in mPAP >= **10 mmHg** to an absolute mPAP <= **40 mmHg** with preserved or increased cardiac output. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Challenge Agent",
+          "Hemodynamic Diagnostic Criteria",
+          "Clinical Implication"
+        ],
+        "rows": [
+          [
+            "Inhaled Nitric Oxide (20-40 ppm)",
+            "Drop in mPAP >=10 mmHg to absolute mPAP <=40 mmHg",
+            "Identifies acute vasoreactive responders (10-15% of cases)"
+          ],
+          [
+            "Cardiac Output Requirement",
+            "Stable, unchanged, or increased cardiac index",
+            "Ensures pressure drop reflects vasodilation, not RV failure"
+          ],
+          [
+            "Therapeutic Consequence",
+            "Eligibility for high-dose oral calcium channel blockers",
+            "Non-responders must NOT receive calcium channel blockers"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Only verified acute vasoreactive responders are eligible to receive high-dose oral calcium channel blocker treatment.",
+      "tx": "Pharmacological triage restricts **calcium channel blockers in responders**. Only acute vasoreactive responders (approx **10-15%** of pediatric idiopathic PAH) are candidates for high-dose oral calcium channel blocker therapy (**nifedipine, diltiazem**), as non-responders face fatal right ventricular negative inotropic collapse. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vasoreactive Responders (~10-15%)",
+          "points": [
+            "Fulfill strict acute catheter criteria under inhaled nitric oxide challenge",
+            "Eligible for treatment with high-dose oral calcium channel blockers",
+            "Demonstrate prolonged survival and marked improvement in functional class"
+          ]
+        },
+        "right": {
+          "title": "Non-Responders (~85-90%)",
+          "points": [
+            "Fail to achieve both >=10 mmHg drop and absolute mPAP <=40 mmHg",
+            "Calcium channel blockers strictly contraindicated due to lethal negative inotropy",
+            "Require upfront targeted dual or triple oral/parenteral combination therapy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Targeting the nitric oxide-cyclic GMP pathway with phosphodiesterase-5 inhibitors achieves effective and well-tolerated oral pulmonary vasodilation.",
+      "tx": "Targeted oral vasodilators utilize **phosphodiesterase-5 inhibitors**. Oral **sildenafil** (**0.5-1 mg/kg** three times daily) or **tadalafil** acts via nitric oxide-cGMP pathway to selectively relax pulmonary arterial vascular smooth muscle and inhibit maladaptive vascular remodeling. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Endogenous or inhaled nitric oxide stimulates soluble guanylyl cyclase"
+          },
+          {
+            "id": "b",
+            "label": "Elevates intracellular cyclic GMP in pulmonary vascular smooth muscle cells"
+          },
+          {
+            "id": "c",
+            "label": "Sildenafil and tadalafil selectively block phosphodiesterase-5 breakdown of cGMP"
+          },
+          {
+            "id": "d",
+            "label": "Sustained smooth muscle relaxation and inhibition of pulmonary arterial remodeling"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Blocking the endothelin pathway counteracts potent vasoconstriction and vascular remodeling in the pulmonary bed.",
+      "tx": "Endothelin receptor antagonism employs **endothelin receptor antagonists**. **Bosentan** (dual ETA/ETB antagonist) and **ambrisentan** (selective ETA antagonist) block endothelin-mediated vasoconstriction and vascular remodeling; require monthly liver function monitoring to screen for hepatic transaminitis. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug Class",
+          "Representative Agents",
+          "Mechanism and Monitoring"
+        ],
+        "rows": [
+          [
+            "PDE-5 Inhibitors",
+            "Sildenafil (0.5-1 mg/kg tid), Tadalafil",
+            "Inhibits cGMP breakdown; headache, flushing, dyspepsia"
+          ],
+          [
+            "Dual Endothelin Antagonist",
+            "Bosentan",
+            "Blocks ETA and ETB receptors; requires monthly LFT monitoring"
+          ],
+          [
+            "Selective ETA Antagonist",
+            "Ambrisentan",
+            "Selective ETA receptor blockade; once daily, lower hepatic risk"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Severe, progressive, or functional class IV pulmonary hypertension requires parenteral prostacyclin pathway agonism.",
+      "tx": "Advanced functional class warrants **prostacyclin pathway agonists**. Intravenous **epoprostenol**, subcutaneous or IV **treprostinil**, or inhaled **iloprost** are indicated for high-risk, severe, or WHO functional class IV pediatric PAH, providing potent prostacyclin receptor vasodilation and anti-platelet effects. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Parenteral Prostacyclins (Epoprostenol, Treprostinil)",
+          "points": [
+            "Continuous IV or subcutaneous infusion via dedicated central venous catheter",
+            "Potent direct pulmonary vasodilation and anti-platelet antiproliferative effects",
+            "Gold standard life-saving therapy in WHO functional class IV and high-risk PAH"
+          ]
+        },
+        "right": {
+          "title": "Inhaled & Oral Prostacyclins (Iloprost, Selexipag)",
+          "points": [
+            "Frequent nebulized doses (6-9 times daily) or oral prostacyclin receptor agonist",
+            "Provides selective pulmonary vasodilation without line-related bloodstream infections",
+            "Suitable for intermediate-risk pediatric patients or maintenance regimens"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Surgical and interventional decompression shunts protect the failing right ventricle from acute overload during hypertensive crises.",
+      "tx": "Refractory right heart failure considers **Pott shunt and atrial septostomy**. Surgical Potts shunt (side-to-side anastomosis between left pulmonary artery and descending aorta) or balloon atrial septostomy decompresses the failing right ventricle, acting as a bridge to lung transplant. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Potts Shunt (LPA to Descending Aorta)",
+          "points": [
+            "Side-to-side anastomosis between left pulmonary artery and descending aorta",
+            "Decompresses right ventricle into descending circulation during suprasystemic spikes",
+            "Preserves fully oxygenated cerebral and coronary perfusion while preventing RV arrest"
+          ]
+        },
+        "right": {
+          "title": "Atrial Septostomy (ASD Pop-Off)",
+          "points": [
+            "Interventional catheter creation of an unrestrictive interatrial communication",
+            "Unloads the failing right atrium and maintains left ventricular stroke volume",
+            "Accepts mild generalised systemic desaturation to prevent fatal low cardiac output"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Once advanced pulmonary vascular remodeling elevates resistance beyond systemic levels, closing congenital cardiac shunts is strictly prohibited.",
+      "tx": "Irreversible vascular disease establishes **Eisenmenger contraindication**. Corrective closure of congenital cardiac shunts is strictly contraindicated once irreversible pulmonary vascular resistance index exceeds **8 Wood units.m2** with right-to-left shunting, as closing the shunt induces fatal acute right ventricular failure. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/rad-cardiovascular-s4.webp",
+        "ar": 1.3333,
+        "caption": "Severe irreversible pulmonary arterial hypertension with peripheral pruning and central vascular dilatation. Illustration: StewardMD original.",
+        "alt": "Diagram demonstrating pulmonary vascular pruning and irreversible arteriopathy."
+      }
+    }
+  ]
+}

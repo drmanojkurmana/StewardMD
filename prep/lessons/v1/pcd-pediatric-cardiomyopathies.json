@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "id": "pcd-pediatric-cardiomyopathies",
+  "title": "Dilated, Hypertrophic and Restrictive Cardiomyopathies",
+  "module": "Myocardial and Pericardial Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Dilated cardiomyopathy represents the commonest primary myocardial disease in children, manifesting as impaired systolic function and ventricular dilation.",
+      "tx": "Clinical investigation explores **dilated cardiomyopathy etiology**. DCM is the most common pediatric cardiomyopathy (**50-60%**), caused by genetic mutations (cytoskeletal, sarcomeric), viral myocarditis, inborn errors of metabolism, or anthracyclines, presenting with systolic dysfunction and ventricular dilation. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-dilated-restrictive-cardiomyopathy-gen2.webp",
+        "ar": 1.3393,
+        "caption": "Marked biventricular dilation with severely depressed systolic contractility. Illustration: StewardMD original.",
+        "alt": "Echocardiogram view of dilated cardiomyopathy with enlarged ventricular cavity."
+      }
+    },
+    {
+      "say": "Hypertrophic cardiomyopathy features asymmetric myocardial thickening that frequently produces dynamic left ventricular outflow tract obstruction.",
+      "tx": "Molecular biology elucidates **HCM genetic basis**. Hypertrophic cardiomyopathy is predominantly autosomal dominant and caused by mutations in sarcomeric genes (**MYH7, MYBPC3**, TNNT2) in approximately **60%** of familial cases, featuring asymmetrical septal hypertrophy and myofibrillar disarray. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-hypertrophic-cardiomyopathy-gen1.webp",
+        "ar": 1.3393,
+        "caption": "Cardiac MRI in hypertrophic cardiomyopathy displaying asymmetrical septal hypertrophy and outflow tract narrowing. Illustration: StewardMD original.",
+        "alt": "MRI image demonstrating pronounced asymmetric septal hypertrophy."
+      }
+    },
+    {
+      "say": "Maternal diabetes exposes the developing fetal heart to hyperinsulinism, inducing transient myocardial hypertrophy that regresses after delivery.",
+      "tx": "Neonatal screening evaluates **infant of diabetic mother HCM**. Transient asymmetric septal hypertrophy occurs in **10-20%** of infants of diabetic mothers due to fetal hyperinsulinism; it is typically self-limiting and regresses spontaneously within **6-12 months** of age with conservative management. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Infant of Diabetic Mother HCM",
+          "points": [
+            "Fetal hyperinsulinism acts as an anabolic growth hormone on cardiac myocytes",
+            "Induces disproportionate interventricular septal hypertrophy in 10-20% of infants",
+            "Self-limiting physiological phenomenon; completely regresses within 6 to 12 months"
+          ]
+        },
+        "right": {
+          "title": "Familial Genetic HCM",
+          "points": [
+            "Autosomal dominant mutations in sarcomeric genes (MYH7, MYBPC3)",
+            "Histological hallmark is progressive myofibrillar disarray and interstitial fibrosis",
+            "Permanent and progressive pathology carrying lifelong sudden death risk"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Identifying children with hypertrophic cardiomyopathy who are at elevated risk for sudden cardiac death dictates life-saving defibrillator implantation.",
+      "tx": "Stratifying **HCM sudden death risk factors** guides ICD placement. Pediatric HCM sudden cardiac death risk factors: extreme LV hypertrophy (**septal thickness >= 30 mm** or z-score >= +6), unexplained syncope, non-sustained VT, and family history of SCD warranting implantable defibrillator evaluation. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Predictor",
+          "Threshold / Diagnostic Criteria",
+          "Clinical Impact"
+        ],
+        "rows": [
+          [
+            "Massive LV Hypertrophy",
+            "Interventricular septum >=30 mm (or z-score >=+6)",
+            "Strong independent risk factor for ventricular arrhythmias"
+          ],
+          [
+            "Unexplained Syncope",
+            "Recent episodes not attributable to neurocardiogenic syncope",
+            "Signifies transient ventricular tachyarrhythmia or outflow shutoff"
+          ],
+          [
+            "Ventricular Tachycardia",
+            "Non-sustained VT on ambulatory Holter monitoring",
+            "Marker of myocardial electrical instability and scar"
+          ],
+          [
+            "Family History of SCD",
+            "Sudden cardiac death in first-degree relative <40 years",
+            "Reflects malignant sarcomeric gene mutation phenotype"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In patients with obstructive hypertrophic cardiomyopathy, positive inotropes and vasodilators worsen dynamic obstruction and must be avoided.",
+      "tx": "Pharmacological precautions mandate **inotropic contraindication in HCM**. Digoxin, positive inotropes, and vasodilators are contraindicated in obstructive HCM because they increase the dynamic left ventricular outflow tract gradient by augmenting contractility and decreasing ventricular end-systolic dimensions. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Contraindicated Inotropes (Digoxin, Milrinone)",
+          "points": [
+            "Augments ventricular myocardial contractility and ejection velocity",
+            "Shrinks end-systolic cavity volume, narrowing the subaortic outflow tract",
+            "Exacerbates systolic anterior motion (SAM) and increases gradient"
+          ]
+        },
+        "right": {
+          "title": "Contraindicated Vasodilators (Nitrates, ACEi)",
+          "points": [
+            "Decreases systemic arterial vascular resistance and ventricular afterload",
+            "Reduces ventricular end-diastolic chamber filling and preload",
+            "Dramatically worsens dynamic subaortic obstruction, provoking syncope"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Restrictive cardiomyopathy is an uncommon pediatric disorder characterized by severe diastolic dysfunction despite preserved ventricular cavity dimensions.",
+      "tx": "Prognostication recognizes **restrictive cardiomyopathy prognosis**. RCM is the rarest pediatric cardiomyopathy (**< 5%**) with the poorest prognosis (**50%** mortality at **2 years**), characterized by marked biatrial enlargement and normal ventricular dimensions, mandating early consideration of heart transplantation. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Restrictive Cardiomyopathy (RCM)",
+          "points": [
+            "Severe diastolic stiffness with normal ventricular wall thickness",
+            "Massive biatrial enlargement with normal or small ventricular cavities",
+            "Rapid progression of pulmonary vascular disease; early transplant listing needed"
+          ]
+        },
+        "right": {
+          "title": "Constrictive Pericarditis",
+          "points": [
+            "Rigid, calcified pericardium restricting end-diastolic filling",
+            "Prominent respiratory ventricular interdependence on Doppler echocardiography",
+            "Surgically curable with total pericardiectomy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Failure of myocardial compaction during embryogenesis leads to a sponge-like ventricular wall with prominent trabeculations and deep intertrabecular recesses.",
+      "tx": "Diagnostic criteria confirm **left ventricular non-compaction**. LVNC is characterized by prominent myocardial trabeculations and deep intertrabecular recesses, with non-compacted to compacted ratio **> 2.0:1** in end-systole (**Jenni criteria**) on echocardiography, causing heart failure and thromboembolic risk. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Intrauterine arrest of physiological endomyocardial compaction during gestation"
+          },
+          {
+            "id": "b",
+            "label": "Formation of extensive deep intertrabecular recesses communicating with cavity"
+          },
+          {
+            "id": "c",
+            "label": "Development of two-layered myocardium with thin compacted outer epicardial layer"
+          },
+          {
+            "id": "d",
+            "label": "Jenni echocardiographic criteria: non-compacted to compacted ratio >2.0:1 in end-systole"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Comprehensive neurohormonal antagonism forms the medical foundation to arrest remodeling and improve survival in pediatric dilated cardiomyopathy.",
+      "tx": "Standard management applies **heart failure guideline therapy**. First-line neurohormonal blockade in pediatric dilated cardiomyopathy combines ACE inhibitors (**enalapril**), beta-blockers (**carvedilol**), and mineralocorticoid receptor antagonists (**spironolactone**) to slow progressive remodeling and reduce mortality. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Agent",
+          "Starting Dose",
+          "Target Dose",
+          "Mechanism and Benefit"
+        ],
+        "rows": [
+          [
+            "Enalapril",
+            "0.05-0.1 mg/kg/day",
+            "0.2-0.4 mg/kg/day",
+            "Reduces afterload and inhibits angiotensin-mediated myocardial fibrosis"
+          ],
+          [
+            "Carvedilol",
+            "0.05 mg/kg bid",
+            "0.4-0.8 mg/kg bid",
+            "Non-selective beta and alpha-1 blockade, anti-apoptotic, improves LVEF"
+          ],
+          [
+            "Spironolactone",
+            "0.5-1.0 mg/kg/day",
+            "1.0-2.0 mg/kg/day",
+            "Blocks aldosterone-induced cardiac collagen synthesis and retains potassium"
+          ]
+        ]
+      }
+    }
+  ]
+}
