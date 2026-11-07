@@ -242,79 +242,52 @@
       }
     },
     {
-      "tx": "If the screen is positive, a **saline infusion test** (2 liters over 4 hours) checks whether aldosterone is switched off. Aldosterone that stays above 170 pmol/L when the patient sits up indicates autonomous secretion. Fine-cut CT then shows the adrenal anatomy. **Endocrine-inactive adenomas** are the most common adrenal mass, at 40 to 70 percent of unilateral lesions, so a nodule on CT alone cannot show which gland is the source.",
-      "say": "If the screen is positive, a saline infusion test, with 2 liters given over 4 hours, checks whether aldosterone is switched off. Aldosterone that stays above 170 picomoles per liter with the patient seated indicates autonomous secretion. Fine-cut CT then shows the adrenal anatomy. Endocrine-inactive adenomas are the most common adrenal mass, at 40 to 70 percent of unilateral lesions, so a nodule on CT alone cannot show which gland is the source.",
+      "tx": "**Adrenal venous sampling** (AVS, catheters in each adrenal vein) compares aldosterone between the two sides, and cortisol confirms catheter placement. Patients under 35 with a unilateral lesion and no suspicion of a familial form can go straight to surgery. Patients over 35, or those with no obvious lesion on CT, need AVS first. A **saline infusion test** (2 liters over 4 hours) checks if aldosterone stays above 170 pmol/L while seated. A fine-cut CT shows adrenal anatomy and any unilateral adenoma, but **endocrine-inactive adenomas** are the most common adrenal mass.",
+      "say": "Adrenal venous sampling, or AVS, places catheters in each adrenal vein. It compares aldosterone levels between the two sides, and cortisol confirms the catheter placement. Patients under 35 with a unilateral lesion and no suspicion of a familial form can go straight to surgery. Patients over 35, or those with no obvious lesion on CT, need AVS first. A saline infusion test, with 2 liters given over 4 hours, checks if aldosterone stays above 170 picomoles per liter while seated. A fine-cut CT shows adrenal anatomy and any unilateral adenoma, but endocrine-inactive adenomas are the most common adrenal mass.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Confirmed primary aldosteronism"
-          },
-          {
-            "id": "b",
-            "label": "Fine-cut CT of adrenal glands"
-          },
-          {
-            "id": "c",
-            "label": "Unilateral adenoma"
-          },
-          {
-            "id": "d",
-            "label": "Normal, micronodular or bilateral"
-          },
-          {
-            "id": "e",
-            "label": "Medical therapy with spironolactone or eplerenone"
-          }
+        "kind": "table",
+        "cols": [
+          "Test or group",
+          "What it shows",
+          "Key number or plan"
         ],
-        "edges": [
+        "rows": [
           [
-            "a",
-            "b",
-            "adrenal imaging"
+            "Saline infusion test",
+            "Aldosterone above 170 pmol/L while seated means autonomous secretion",
+            "2 liters over 4 hours"
           ],
           [
-            "b",
-            "c",
-            "single mass"
+            "Fine-cut CT",
+            "Shows adrenal anatomy and any unilateral adenoma; a nodule alone cannot show the source gland",
+            "Aldosterone-producing adenomas often under 1 cm; CT can miss lesions under 5 mm"
           ],
           [
-            "b",
-            "d",
-            "other patterns"
+            "Endocrine-inactive adenomas",
+            "Most common adrenal mass",
+            "40 to 70 percent of unilateral lesions"
           ],
           [
-            "d",
-            "e",
-            "mineralocorticoid receptor blocker"
+            "Lateralization on AVS",
+            "Aldosterone-to-cortisol ratio on one side",
+            "At least twofold higher"
+          ],
+          [
+            "Confirmed primary aldosteronism, under 35, unilateral, no familial suspicion",
+            "Surgery can proceed without AVS",
+            "Unilateral lesion on CT"
+          ],
+          [
+            "Over 35, or no obvious lesion on CT",
+            "AVS shows which side secretes",
+            "Coincidental adenoma more likely over 35"
+          ],
+          [
+            "Normal, micronodular or bilateral CT",
+            "Medical therapy with spironolactone or eplerenone",
+            "Mineralocorticoid receptor blocker"
           ]
         ]
-      }
-    },
-    {
-      "tx": "**Adrenal venous sampling** (AVS, catheters placed in each adrenal vein) compares aldosterone between the two sides, and cortisol readings confirm the catheters sit correctly. Lateralization requires an aldosterone-to-cortisol ratio at least twofold higher on one side. Patients under 35 with a unilateral lesion and no suspicion of a familial form can go straight to surgery. Patients over 35, or those with no obvious lesion on CT, need AVS first.",
-      "say": "Adrenal venous sampling, or AVS, places catheters in each adrenal vein. Doctors compare aldosterone levels from the two sides, and cortisol readings confirm the catheters sit correctly. One side must show an aldosterone to cortisol ratio at least twice as high as the other. Patients under 35 with a unilateral lesion and no sign of a familial form can usually go straight to surgery. Patients over 35, or those with no obvious lesion on CT, need the sampling first.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Under 35",
-          "points": [
-            "Confirmed primary aldosteronism",
-            "Unilateral lesion on CT",
-            "No suspicion of familial forms",
-            "Surgery can proceed without AVS"
-          ]
-        },
-        "right": {
-          "title": "Over 35 or no obvious lesion",
-          "points": [
-            "Confirmed primary aldosteronism",
-            "Unilateral lesion at age over 35, or no lesion on CT",
-            "Coincidental adenoma more likely over 35",
-            "AVS shows which side secretes"
-          ]
-        }
       }
     }
   ],
