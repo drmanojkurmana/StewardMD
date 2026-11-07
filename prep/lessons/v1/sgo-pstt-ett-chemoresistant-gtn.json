@@ -1,0 +1,277 @@
+{
+  "v": 1,
+  "module": "sgo-pstt-ett-chemoresistant-gtn",
+  "title": "Placental Site Trophoblastic Tumor & Epithelioid Trophoblastic Tumor",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 18 (Gestational Trophoblastic Disease)",
+    "FIGO Cancer Report: Gestational trophoblastic disease (2018/2021 update)",
+    "NCCN Clinical Practice Guidelines in Oncology: Gestational Trophoblastic Neoplasia (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Placental site trophoblastic tumor and epithelioid trophoblastic tumor represent rare, distinctive non-villous gestational trophoblastic neoplasms. Derived from intermediate trophoblast lineages, these tumors display innate chemoresistance and characteristically low serum beta hCG secretion.",
+      "tx": "**Placental site trophoblastic tumor** (PSTT) and **epithelioid trophoblastic tumor** (ETT) are rare gestational trophoblastic neoplasms derived from **intermediate trophoblasts**. Unlike choriocarcinoma, they produce relatively low serum beta-hCG levels and are innately resistant to standard single-agent and multi-agent chemotherapy regimens.  Evidence-based practice integrates extravillous intermediate trophoblast, placental bed origin, monomorphic infiltration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PSTT and ETT Features",
+          "points": [
+            "Derived from intermediate trophoblast cells",
+            "Produce low circulating beta-hCG (<1,000 mIU/mL)",
+            "Innate chemoresistance; surgery is primary cure"
+          ]
+        },
+        "right": {
+          "title": "Choriocarcinoma Features",
+          "points": [
+            "Biphasic syncytiotrophoblast and cytotrophoblast",
+            "Massive serum beta-hCG elevation (>100,000 mIU/mL)",
+            "Exquisitely chemosensitive to methotrexate/EMA-CO"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Pathologists distinguish the intermediate trophoblast lineages by their anatomical origin and specific immunohistochemical staining patterns. Implantation site intermediate trophoblasts give rise to PSTT, expressing human placental lactogen, while chorionic-type trophoblasts give rise to ETT, expressing p63.",
+      "tx": "PSTT arises from **implantation site intermediate trophoblasts**, strongly expressing **human placental lactogen** (hPL) and CD146 with focal beta-hCG. Conversely, ETT arises from **chorionic-type intermediate trophoblasts**, strongly expressing **p63** and GATA3 with absence of hPL, mimicking cervical squamous carcinoma.  Evidence-based practice integrates geographic nodular growth, hyaline matrix, mimics squamous carcinoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumor Entity",
+          "Trophoblast Lineage",
+          "Primary Immunohistochemical Markers",
+          "Serum Biomarker"
+        ],
+        "rows": [
+          [
+            "PSTT",
+            "Implantation-site intermediate trophoblast",
+            "hPL (diffuse strong), CD146 (Mel-CAM), GATA3",
+            "Human placental lactogen and low beta-hCG"
+          ],
+          [
+            "ETT",
+            "Chorionic-type intermediate trophoblast",
+            "p63 (diffuse strong), cytokeratin 18, GATA3",
+            "Low beta-hCG (typically <500 mIU/mL)"
+          ],
+          [
+            "Choriocarcinoma",
+            "Biphasic: syncytio- and cytotrophoblasts",
+            "beta-hCG (diffuse 3+), inhibin-alpha",
+            "Massive serum beta-hCG levels"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Microscopic examination of placental site trophoblastic tumor reveals monomorphic intermediate trophoblastic cells infiltrating between myometrial smooth muscle bundles without destroying background architecture. Vascular invasion is characteristic, where neoplastic cells dissect and replace endothelial vessel walls.",
+      "tx": "Microscopic examination of PSTT reveals large polygonal cells infiltrating individually or in cords between **myometrial smooth muscle fibers** without extensive tissue necrosis. A diagnostic hallmark is **vascular invasion** with replacement of vascular walls by fibrinoid material and infiltrating trophoblastic cells.  Evidence-based practice integrates low serum hCG <1000 mIU/mL, elevated hPL in PSTT, disproportionate tumor burden. Key numerical parameters include 1000.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cell",
+            "label": "Pleomorphic intermediate trophoblasts proliferate in myometrium"
+          },
+          {
+            "id": "infiltr",
+            "label": "Cells dissect smoothly between intact myometrial muscle bundles"
+          },
+          {
+            "id": "vasc",
+            "label": "Infiltrate vessel walls and replace endothelium with fibrinoid material"
+          },
+          {
+            "id": "ihc",
+            "label": "Demonstrate strong cytoplasmic immunoreactivity for hPL and CD146"
+          }
+        ],
+        "edges": [
+          [
+            "cell",
+            "infiltr"
+          ],
+          [
+            "infiltr",
+            "vasc"
+          ],
+          [
+            "vasc",
+            "ihc"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Epithelioid trophoblastic tumor typically presents as a well-circumscribed nodular lesion located in the lower uterine segment or endocervix. Surrounded by hyaline necrotic material, ETT is frequently misdiagnosed as cervical squamous cell carcinoma or high-grade adenocarcinoma.",
+      "tx": "**Epithelioid trophoblastic tumor** characteristically forms well-circumscribed nodular lesions in the lower uterine segment or cervix. Cells grow in nests surrounded by extensive **hyalinized extracellular matrix** mimicking keratin pearls, leading to frequent diagnostic confusion with **squamous cell carcinoma of the cervix**.  Evidence-based practice integrates IHC profiling, PSTT hPL positive CD146 positive HLA-G positive, ETT p63 diffuse positive GATA3 positive. Key numerical parameters include 146.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Epithelioid Trophoblastic Tumor",
+          "points": [
+            "Intermediate trophoblast origin with hyaline matrix",
+            "p63 and GATA3 positive; p16 negative or patchy",
+            "Inhibin-alpha positive; serum beta-hCG elevated"
+          ]
+        },
+        "right": {
+          "title": "Cervical Squamous Cell Carcinoma",
+          "points": [
+            "Squamous epithelial origin with dyskeratosis",
+            "Diffuse strong p16INK4a positivity (HPV-driven)",
+            "Inhibin-alpha negative; normal beta-hCG levels"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Because these tumors are inherently chemoresistant, total abdominal hysterectomy with pelvic lymph node dissection serves as the primary curative treatment for non-metastatic disease. In young premenopausal women with PSTT, ovarian preservation is safe due to negligible ovarian metastasis rates.",
+      "tx": "Because intermediate trophoblastic tumors are chemoresistant, **total abdominal hysterectomy** represents the definitive primary treatment for localized disease. In premenopausal patients, **ovarian preservation** is safe given the very low incidence of occult ovarian metastases, but retroperitoneal lymphadenectomy is indicated for pelvic nodal staging.  Evidence-based practice integrates intrinsic chemoresistance, total hysterectomy with lymphadenectomy, curative surgical modality.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diag_pstt",
+            "label": "Confirm PSTT or ETT on uterine curettage biopsy"
+          },
+          {
+            "id": "stage_scan",
+            "label": "Perform chest CT, pelvic MRI, and whole-body staging"
+          },
+          {
+            "id": "surg_tah",
+            "label": "Total abdominal hysterectomy with bilateral pelvic lymphadenectomy"
+          },
+          {
+            "id": "ovary_dec",
+            "label": "Preserve normal ovaries in young women with stage I disease"
+          }
+        ],
+        "edges": [
+          [
+            "diag_pstt",
+            "stage_scan"
+          ],
+          [
+            "stage_scan",
+            "surg_tah"
+          ],
+          [
+            "surg_tah",
+            "ovary_dec"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The interval from the antecedent pregnancy to the diagnosis of PSTT or ETT represents the single most powerful prognostic factor for survival. An interval of forty-eight months or longer is associated with profound chemoresistance and dismal overall survival.",
+      "tx": "The **interval from antecedent pregnancy** to diagnosis is the paramount prognostic determinant: an interval **>=48 months** (4 years) is associated with aggressive chemoresistant behavior and high mortality, whereas an interval <48 months carries a favorable prognosis when resected cleanly.  Evidence-based practice integrates interval >=48 months (4 years), poor prognostic indicator, survival <30%. Key numerical parameters include 30.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Interval <48 Months",
+          "points": [
+            "Favorable prognostic cohort",
+            "High cure rates with primary surgery",
+            "Responsive to platinum-etoposide adjuvant chemotherapy"
+          ]
+        },
+        "right": {
+          "title": "Interval >=48 Months",
+          "points": [
+            "Poor prognostic cohort with aggressive biology",
+            "Profound chemoresistance to standard regimens",
+            "High rate of distant metastatic recurrence and death"
+          ]
+        }
+      }
+    },
+    {
+      "say": "For patients with metastatic disease or poor prognostic factors, multi-agent platinum-based chemotherapy is mandatory. The EP-EMA regimen, alternating etoposide and cisplatin with etoposide, methotrexate, and dactinomycin, represents the international standard regimen.",
+      "tx": "For metastatic or high-risk PSTT/ETT, the intensive **EP-EMA regimen** (etoposide and cisplatin on day 1 alternating weekly with etoposide, methotrexate, and dactinomycin) or **TE/TP** (paclitaxel-etoposide / paclitaxel-cisplatin) is required, as standard EMA-CO yields inferior survival in intermediate trophoblastic disease.  Evidence-based practice integrates pelvic lymphadenectomy indicated, lymph node metastasis 10-15%, distinct from choriocarcinoma. Key numerical parameters include 10, 15.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Chemotherapy Regimen",
+          "Drug Components",
+          "Cycle Schedule",
+          "Clinical Application"
+        ],
+        "rows": [
+          [
+            "EP-EMA",
+            "Etoposide, Cisplatin, Methotrexate, Dactinomycin",
+            "Day 1 EP, Day 8 EMA; q2w",
+            "Gold-standard frontline for high-risk/metastatic PSTT"
+          ],
+          [
+            "TE/TP",
+            "Paclitaxel, Etoposide, Cisplatin",
+            "Alternating weekly cycles",
+            "Effective salvage for platinum-resistant trophoblastic tumors"
+          ],
+          [
+            "EMA-CO",
+            "Etoposide, Methotrexate, Dactinomycin, Cyclophosphamide, Vincristine",
+            "Every 2 weeks",
+            "Standard for choriocarcinoma; subtherapeutic for PSTT"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Remarkably, trophoblastic tumors express high levels of programmed death ligand one on tumor cells and intermediate trophoblasts. Immune checkpoint inhibitors like pembrolizumab produce dramatic and durable clinical remissions in patients with chemoresistant gestational trophoblastic neoplasms.",
+      "tx": "Intermediate trophoblastic neoplasms exhibit strong expression of **PD-L1** (100% positivity in PSTT and choriocarcinoma). Immune checkpoint inhibition with **pembrolizumab** or **avelumab** produces dramatic, durable complete remissions in patients with multi-drug resistant gestational trophoblastic disease.  Evidence-based practice integrates EP-EMA regimen, TP/TE regimen, anti-PD-1 pembrolizumab, universal PD-L1 expression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resis",
+            "label": "Document multi-agent chemotherapy resistance in metastatic GTN"
+          },
+          {
+            "id": "pdl1",
+            "label": "Confirm high PD-L1 expression on trophoblastic tumor tissue"
+          },
+          {
+            "id": "pembro",
+            "label": "Initiate pembrolizumab anti-PD-1 immunotherapy every 3 weeks"
+          },
+          {
+            "id": "remis",
+            "label": "Document normalization of serum beta-hCG and metabolic remission"
+          }
+        ],
+        "edges": [
+          [
+            "resis",
+            "pdl1"
+          ],
+          [
+            "pdl1",
+            "pembro"
+          ],
+          [
+            "pembro",
+            "remis"
+          ]
+        ]
+      }
+    }
+  ]
+}
