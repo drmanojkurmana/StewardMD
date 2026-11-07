@@ -113,6 +113,31 @@ export function analyse(items) {
   return { total, y2025: items.filter((i) => i.year === 2025).length, y2024: items.filter((i) => i.year === 2024).length, domains, concepts, mustDo };
 }
 
+/* Topic -> the Learn lesson that teaches it (owner 2026-11-07: tapping a topic must open its lesson). TF-IDF cosine of the
+ * topic's name, key point, questions and explanations against each lesson's title and step text; best lesson wins.
+ * lessons: [{ id, text }]. Returns { id, score } or null. shortcut: lexical match, upgrade to a curated map if a link is wrong. */
+const tokens = (s) => String(s || "").toLowerCase().replace(/<[^>]+>/g, " ").match(/[a-z0-9]{3,}/g) || [];
+export function lessonIndex(lessons) {
+  const df = {}, docs = lessons.map((l) => { const tf = {}; tokens(l.text).forEach((w) => { tf[w] = (tf[w] || 0) + 1; }); Object.keys(tf).forEach((w) => { df[w] = (df[w] || 0) + 1; }); return { id: l.id, tf }; });
+  const idf = (w) => Math.log((lessons.length + 1) / ((df[w] || 0) + 1));
+  const vec = (tf) => { const v = {}; let n = 0; for (const w in tf) { v[w] = (1 + Math.log(tf[w])) * idf(w); n += v[w] * v[w]; } return { v, n: Math.sqrt(n) || 1 }; };
+  const L = docs.map((d) => ({ id: d.id, ...vec(d.tf) }));
+  return (text) => {
+    const tf = {}; tokens(text).forEach((w) => { tf[w] = (tf[w] || 0) + 1; });
+    const q = vec(tf); let best = null;
+    for (const l of L) { let dot = 0; for (const w in q.v) if (l.v[w]) dot += q.v[w] * l.v[w]; const s = dot / (q.n * l.n); if (!best || s > best.score) best = { id: l.id, score: +s.toFixed(3) }; }
+    return best;
+  };
+}
+export function attachLessons(analysis, items, lessons) {
+  const find = lessonIndex(lessons), byId = Object.fromEntries(items.map((i) => [i.id, i]));
+  const textOf = (t) => [t.name, t.name, t.kp].concat((t.ids || []).map((id) => byId[id] && [byId[id].q, byId[id].exp].join(" "))).join(" ");
+  const seen = {};
+  analysis.domains.forEach((d) => d.topics.forEach((t) => { const b = find(textOf(t)); if (b) { t.les = b.id; seen[d.name + "|" + t.name] = b.id; } }));
+  analysis.mustDo.forEach((t) => { const id = seen[t.dom + "|" + t.name]; if (id) t.les = id; });
+  return analysis;
+}
+
 export function assertClean(obj) {
   const s = JSON.stringify(obj), m = BANNED.exec(s);
   if (m) throw new Error("source name survived the scrub: " + s.slice(Math.max(0, m.index - 60), m.index + 60));
@@ -122,7 +147,11 @@ if (process.argv[1] && process.argv[1].endsWith("pyq-ss-build.mjs")) {
   const [csv, out = "prep/pyq-ss/out"] = process.argv.slice(2);
   if (!csv) { console.error("usage: node tools/pyq-ss-build.mjs <csv> [outDir]"); process.exit(1); }
   const items = buildItems(parseCsv(fs.readFileSync(csv, "utf8")));
-  const papers = papersOf(items), analysis = analyse(items);
+  const LD = "prep/lessons/v1", lessons = fs.readdirSync(LD).filter((f) => /^son-.*\.json$/.test(f)).map((f) => {
+    const l = JSON.parse(fs.readFileSync(path.join(LD, f), "utf8"));
+    return { id: f.replace(/\.json$/, ""), text: [l.title, l.title].concat((l.steps || []).map((s) => s.tx)).join(" ") };
+  });
+  const papers = papersOf(items), analysis = attachLessons(analyse(items), items, lessons);
   const body = JSON.stringify({ v: 1, items }), h8 = crypto.createHash("sha1").update(body).digest("hex").slice(0, 8), file = "items-" + h8 + ".json";
   const index = { v: 1, papers, file, analysis };
   assertClean(index); assertClean(items);

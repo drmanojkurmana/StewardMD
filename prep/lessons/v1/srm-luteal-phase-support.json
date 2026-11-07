@@ -1,0 +1,218 @@
+{
+  "v": 1,
+  "module": "srm-luteal-phase-support",
+  "title": "Luteal Phase Support in Assisted Reproduction",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Gardner Textbook of Assisted Reproductive Technologies 5e Ch 6",
+    "ESHRE Guideline on Number of Embryos to Transfer and Luteal Phase Support",
+    "Lotus I and II Trials (Tournaye et al. 2017)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "An iatrogenic luteal phase defect occurs universally in all stimulated in vitro fertilization cycles. Supraphysiological estradiol and progesterone levels generate intense central negative feedback, while follicular aspiration removes thousands of steroidogenic granulosa cells.",
+      "tx": "A severe iatrogenic **luteal phase defect** develops universally following ovarian stimulation. Supraphysiological multi-follicular steroidogenesis exerts profound central **LH suppression**, while mechanical **granulosa cell aspiration** during transvaginal oocyte retrieval disrupts follicular integrity, crippling the nascent corpus luteum and necessitating exogenous endocrine replacement.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/infertility-evaluation-and-assisted-reproduction-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Endocrine pathways and assisted reproductive management. Credit: StewardMD.",
+        "alt": "Endocrine schema of stimulated IVF cycles and luteal deficit."
+      }
+    },
+    {
+      "say": "Timing of luteal supplementation is strictly standardized in assisted conception protocols. Therapy begins between the evening of egg retrieval and cycle day 3, continuing until the luteoplacental shift takes over endogenous hormone synthesis at 8 to 10 weeks of gestation.",
+      "tx": "Clinical guidelines dictate **luteal support initiation** between the evening of oocyte pickup and cycle day 3. Exogenous therapy must continue until complete **gestational cessation** at **8 to 10 weeks** of pregnancy, coinciding with the physiological **luteoplacental shift** when syncytiotrophoblast autonomous steroidogenesis safely sustains intrauterine development.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Initiate exogenous progesterone support between evening of retrieval and day 3"
+          },
+          {
+            "id": "b",
+            "label": "Maintain luteal therapy through positive beta-hCG confirmation and early viability scans"
+          },
+          {
+            "id": "c",
+            "label": "Confirm autonomous luteoplacental shift at 8 to 10 weeks gestation before cessation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Micronized vaginal progesterone remains the global cornerstone formulation for luteal phase support. Transvaginal delivery induces a direct first uterine pass effect, delivering high local endometrial concentrations while sparing patients unpleasant systemic side effects.",
+      "tx": "Formulated **micronized progesterone** administered as **vaginal progesterone** capsules (400 mg twice daily) or 8 percent gel (90 mg daily) represents standard frontline practice. Direct transmucosal diffusion produces the **first uterine pass effect**, delivering exceptionally high local myometrial and endometrial tissue levels while minimizing systemic somnolence and hepatic clearance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Administration Route",
+          "Dosing Regimen",
+          "Pharmacokinetic Features"
+        ],
+        "rows": [
+          [
+            "Vaginal micronized capsules",
+            "400 mg twice daily",
+            "First uterine pass effect; high local endometrial concentration"
+          ],
+          [
+            "Vaginal 8 percent gel",
+            "90 mg once daily",
+            "Sustained local release with minimal systemic side effects"
+          ],
+          [
+            "Oral dydrogesterone",
+            "10 mg two to three times daily",
+            "High oral bioavailability; excellent patient compliance and tolerability"
+          ],
+          [
+            "Intramuscular progesterone",
+            "50 to 100 mg daily in oil",
+            "High systemic serum levels; painful injections and sterile abscess risk"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Oral dydrogesterone offers an effective and patient-friendly alternative to messy vaginal suppositories. Large prospective phase three randomized trials proved that oral dydrogesterone achieves complete live birth equivalence compared to vaginal progesterone.",
+      "tx": "The retroprogesterone **Dydrogesterone** administered at 10 mg orally two to three times daily demonstrates proven therapeutic efficacy. The landmark phase three **Lotus trial** program (Lotus I and II) established complete **live birth equivalence** and comparable ongoing pregnancy rates compared with micronized vaginal capsules, accompanied by superior patient satisfaction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral Dydrogesterone (Lotus Trials)",
+          "points": [
+            "Convenient oral tablet administration (10 mg BID or TID)",
+            "High oral bioavailability with selective PR-A and PR-B binding",
+            "Significantly higher patient acceptability, comfort, and compliance"
+          ]
+        },
+        "right": {
+          "title": "Vaginal Micronized Progesterone",
+          "points": [
+            "Capsules or gel inserted deep transvaginally into posterior fornix",
+            "Extensive first uterine pass effect directly to subepithelial stroma",
+            "Common patient complaints of vaginal discharge, irritation, and leakage"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Artificial or programmed frozen embryo transfer cycles completely lack a functioning corpus luteum. In these scenarios, daily intramuscular progesterone or augmented combined regimens are mandatory to achieve robust circulating serum concentrations above 10 to 12 nanograms per milliliter.",
+      "tx": "In **programmed FET** cycles utilizing exogenous estradiol preparation, there is complete **absence of corpus luteum** development. To compensate, **intramuscular progesterone** (50 to 100 mg daily) or intensified combined routes are required to guarantee target circulating serum concentrations exceeding **10 to 12 ng/mL**, preventing premature decidual breakdown.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Programmed artificial FET: endometrial priming with oral or transdermal estradiol"
+          },
+          {
+            "id": "b",
+            "label": "Absent corpus luteum requires mandatory exogenous intramuscular progesterone (50-100 mg)"
+          },
+          {
+            "id": "c",
+            "label": "Maintain steady circulating serum concentrations above 10 to 12 ng/mL through transfer"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Serum progesterone concentration on the day of embryo transfer provides vital prognostic intelligence. Circulating levels dropping below 8.8 to 10 nanograms per milliliter compromise ongoing pregnancy, indicating an urgent need for individualized dose escalation.",
+      "tx": "Measuring the **serum progesterone threshold** on the specific **transfer day** reveals a critical therapeutic window in artificial cycles. Serum concentrations dropping below **8.8 to 10 ng/mL** correlate with significant drops in implantation and excess pregnancy loss, justifying emergency **pregnancy rescue** via supplemental subcutaneous or intramuscular progesterone.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Transfer Day Serum P4 Level",
+          "Clinical Reproductive Outcome",
+          "Recommended Intervention"
+        ],
+        "rows": [
+          [
+            "< 8.8 to 10 ng/mL",
+            "Suboptimal implantation; elevated early miscarriage risk",
+            "Immediate rescue with supplemental injectable progesterone"
+          ],
+          [
+            "10 to 25 ng/mL",
+            "Optimal receptive endometrial decidualization",
+            "Continue current maintenance luteal dosing regimen"
+          ],
+          [
+            "> 35 ng/mL",
+            "Saturated receptor binding with adequate support",
+            "Maintain protocol without further dose escalation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Administering human chorionic gonadotropin for luteal support has largely been abandoned in assisted reproduction. While hCG effectively stimulates the corpus luteum, it markedly elevates the risk of severe ovarian hyperstimulation syndrome without improving live birth rates over progesterone.",
+      "tx": "Routine administration of **luteal hCG** has fallen out of clinical favor due to dramatic **OHSS elevation**. Multiple meta-analyses prove that repeating hCG booster injections fails to improve live birth rates compared with exogenous progesterone, confirming clear **progesterone superiority** regarding safety and maternal well-being in stimulated IVF.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/female-infertility-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Endometrial receptivity and luteal hormonal balance in subfertility management. Credit: StewardMD.",
+        "alt": "Flowchart comparing luteal hormonal therapies and OHSS avoidance."
+      }
+    },
+    {
+      "say": "Following a GnRH agonist trigger in fresh transfer cycles, intensive luteal support is required to rescue the luteal phase. Protocols incorporate either low-dose hCG rescue at 1500 international units or high-dose progesterone combined with estradiol.",
+      "tx": "When a GnRH agonist trigger replaces hCG to prevent hyperstimulation in fresh cycles, premature luteolysis requires **intensive luteal support**. Clinicians implement a modified **dual trigger** or administer low-dose **hCG rescue** (1500 IU at oocyte retrieval) combined with high-dose steroids, successfully salvaging endometrial receptivity while preventing clinical hyperstimulation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low-Dose hCG Rescue",
+          "points": [
+            "Single bolus of 1500 IU hCG given at oocyte retrieval",
+            "Sustains endogenous corpus luteum progesterone and estradiol production",
+            "Maintains low OHSS risk while supporting fresh embryo transfer"
+          ]
+        },
+        "right": {
+          "title": "Intensive Steroid Replacement",
+          "points": [
+            "High-dose micronized or intramuscular progesterone plus oral estradiol",
+            "Completely replaces absent endogenous corpus luteum steroidogenesis",
+            "Zero OHSS risk; alternative approach is freeze-all elective transfer"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -389,7 +389,7 @@
       S.loading = false; draw_(true);
     }, function () {
       if (S !== mine) return;
-      S.loading = false; S.err = "Questions need a connection. Check the connection and try again."; draw_(true);
+      S.loading = false; S.err = (G.PREP_BANK_MSG || String)("Questions need a connection. Check the connection and try again."); draw_(true);
     });
     return true;
   }
@@ -527,7 +527,7 @@
       if (!list.length) return open(scope, host);
       writeMap(remember(readMap(), scope.kind, scope.id, sel));
       scope.start(list, sel.mode, runOpts(sel, list.length), sel);
-    }, function () { host.toast("Questions need a connection. Check the connection and try again."); });
+    }, function () { host.toast((G.PREP_BANK_MSG || String)("Questions need a connection. Check the connection and try again.")); });
   }
   function last(kind, id) { var m = readMap(); return hasLast(m, kind, id) ? summary(recall(m, kind, id)) : ""; }
   /* The control under the finger stays under the finger: a row above it can change height (the count note under the
