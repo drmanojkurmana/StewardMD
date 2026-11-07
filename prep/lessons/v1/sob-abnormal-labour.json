@@ -1,0 +1,259 @@
+{
+  "v": 1,
+  "module": "sob-abnormal-labour",
+  "title": "Dystocia, Malpresentations, Breech Delivery, Face Presentation, and Shoulder Dystocia",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 23 (Abnormal Labor), Ch 24 (Chorioamnionitis and Labor Complications)",
+    "WHO Labour Care Guide User Manual",
+    "ACOG Practice Bulletin on Shoulder Dystocia and Breech Delivery"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Breech presentation divides into three anatomical varieties: frank breech with flexed hips and extended knees, complete breech with flexed hips and flexed knees, and footling or incomplete breech with one or both feet prolapsed below the breech. Frank breech is the most common variety, accounting for sixty five percent of cases, complete breech accounts for twenty five percent, and footling breech accounts for ten percent.",
+      "tx": "Breech presentations divide into **frank breech** (hips flexed, knees extended, 65 percent), **complete breech** (hips and knees flexed, 25 percent), and incomplete or **footling breech** (one or both feet prolapsed, 10 percent). Frank breech offers the most stable mechanical wedge for cervical dilatation, whereas footling breech carries high cord prolapse risk.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-ctg-baseline-heart-rate.webp",
+        "ar": 1.3333,
+        "caption": "Cardiotocography baseline heart rate tracing during active labour. Credit: StewardMD.",
+        "alt": "Electronic fetal monitoring strip displaying baseline fetal heart rate in active labour."
+      }
+    },
+    {
+      "say": "External cephalic version is offered from thirty six to thirty seven weeks in uncomplicated singleton breech presentation to reduce the rate of caesarean section. The procedure achieves overall success rates of fifty to sixty percent. Tocolysis with subcutaneous terbutaline relaxes the myometrium, significantly enhancing version success without compromising maternal or fetal safety.",
+      "tx": "**External cephalic version** is offered from **36 to 37 weeks** in uncomplicated singleton **breech presentation**, achieving overall **success rates of 50 to 60 percent**. Version performed near term minimizes preterm delivery if emergent intervention is required, while spontaneous reversion back to breech is uncommon.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm singleton breech presentation at 36-37 weeks by ultrasound"
+          },
+          {
+            "id": "b",
+            "label": "Rule out contraindications: placenta praevia, oligohydramnios, prior scar"
+          },
+          {
+            "id": "c",
+            "label": "Administer subcutaneous terbutaline 0.25 mg for uterine relaxation"
+          },
+          {
+            "id": "d",
+            "label": "Gentle manual manipulation rolls fetus forward into cephalic presentation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Assisted vaginal breech delivery requires specific manual maneuvers to deliver the extended limbs and aftercoming head. Pinard maneuver delivers the lower extremities in footling or extended breech. Lovset maneuver rotates the fetal trunk to deliver extended arms beneath the pubic arch. The Mauriceau-Smellie-Veit maneuver or specialized Piper forceps flexes and delivers the aftercoming head.",
+      "tx": "Assisted vaginal breech delivery employs standardized maneuvers: Pinard maneuver for the lower limbs, the **Lovset maneuver** (rotating the fetal trunk 180 degrees) to deliver extended arms, and the **Mauriceau-Smellie-Veit maneuver** or specialized **Piper forceps** to maintain flexion and safely extract the aftercoming fetal head.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Breech Extraction Step",
+          "Named Obstetric Maneuver",
+          "Mechanical Objective"
+        ],
+        "rows": [
+          [
+            "Delivery of lower limbs",
+            "Pinard maneuver",
+            "Flexes knee and abducts thigh to bring foot down"
+          ],
+          [
+            "Delivery of extended arms",
+            "Lovset maneuver",
+            "180-degree trunk rotation converts posterior arm to anterior beneath symphysis"
+          ],
+          [
+            "Aftercoming head delivery",
+            "Mauriceau-Smellie-Veit",
+            "Fingers on malar bones flex head while traction delivers occiput"
+          ],
+          [
+            "Instrumental head delivery",
+            "Piper forceps",
+            "Blades applied directly beneath maternal body to extract aftercoming head"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Face presentation occurs when the fetal head is fully hyperextended, presenting the submentobregmatic diameter. In a mento-anterior position, spontaneous vaginal delivery is feasible as the chin escapes under the pubic symphysis. However, a persistent mento-posterior position cannot deliver vaginally because the fetal brow impacts against the maternal pubic symphysis, requiring prompt caesarean delivery.",
+      "tx": "In **face presentation**, vaginal delivery is mechanically possible only when the chin rotates anteriorly. A persistent **mento-posterior** position cannot deliver vaginally because the fetal brow impacts behind the maternal pubic symphysis. Unless spontaneous rotation to **mento-anterior** occurs, prompt **caesarean delivery** is mandatory.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mento-Anterior Face Presentation",
+          "points": [
+            "Fetal chin points toward pubic symphysis",
+            "Submentobregmatic diameter (9.5 cm) presents",
+            "Chin escapes under symphysis; head flexes",
+            "Spontaneous vaginal delivery can occur"
+          ]
+        },
+        "right": {
+          "title": "Mento-Posterior Face Presentation",
+          "points": [
+            "Fetal chin points toward maternal sacrum",
+            "Fetal brow impacts tightly behind pubic bone",
+            "Vaginal delivery is mechanically impossible",
+            "Mandatory indication for caesarean delivery"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Shoulder dystocia is an acute obstetric emergency where the anterior fetal shoulder impacts behind the maternal pubic symphysis after delivery of the head. It is diagnosed by the turtle sign, where the fetal head retracts tightly against the maternal perineum. Immediate assistance must be called, and routine downward traction on the fetal head must be avoided to prevent permanent brachial plexus injury.",
+      "tx": "**Shoulder dystocia** represents an acute obstetric emergency where the anterior fetal shoulder impacts behind the maternal **pubic symphysis**. It is clinically recognized by the pathognomonic **turtle sign**, wherein the delivered fetal head retracts tightly against the perineum, demanding immediate cessation of downward traction to prevent brachial plexus palsy.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-ctg-fhr-feature-classification.webp",
+        "ar": 1.3333,
+        "caption": "Intrapartum fetal monitoring and dystocia management. Credit: StewardMD.",
+        "alt": "Electronic fetal monitoring classification scheme for reassuring and pathological patterns."
+      }
+    },
+    {
+      "say": "Primary maneuvers for resolving shoulder dystocia are the McRoberts maneuver and concurrent suprapubic pressure, also known as the Rubin one maneuver. The McRoberts maneuver involves hyperflexion and abduction of maternal thighs against the abdomen, flattening the sacral promontory. Combined with downward and lateral suprapubic pressure, it successfully resolves over fifty percent of shoulder dystocia cases.",
+      "tx": "Primary resolution of shoulder dystocia utilizes the **McRoberts maneuver** (maternal thigh hyperflexion and abduction) paired with direct **suprapubic pressure** (Rubin I). This combination flattens the sacral promontory and rotates the anterior shoulder into an oblique diameter, successfully resolving **over 50 percent** of impactions without fetal morbidity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diagnose shoulder dystocia via turtle sign; announce emergency"
+          },
+          {
+            "id": "b",
+            "label": "Immediately perform McRoberts maneuver: hyperflex maternal thighs"
+          },
+          {
+            "id": "c",
+            "label": "Assistant applies suprapubic pressure and perform Rubin maneuver"
+          },
+          {
+            "id": "d",
+            "label": "Encourage gentle maternal pushing; avoid fundal pressure completely"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ],
+        "caption": "McRoberts maneuver and suprapubic Rubin maneuver for shoulder dystocia. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "When primary maneuvers fail, secondary maneuvers are initiated immediately. These include internal rotational maneuvers, such as the Woods screw maneuver and Rubin two maneuver, and delivery of the posterior arm. In desperate cases refractory to all maneuvers, the Zavanelli maneuver replaces the fetal head into the pelvis for emergency caesarean section.",
+      "tx": "Secondary interventions for refractory shoulder dystocia include internal rotational techniques such as the **Woods screw maneuver** and Rubin II, followed by **delivery of the posterior arm**. If all internal maneuvers fail, the **Zavanelli maneuver** (cephalic replacement followed by emergent caesarean section) serves as a desperate last resort.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Maneuver Category",
+          "Specific Named Technique",
+          "Mechanism of Action"
+        ],
+        "rows": [
+          [
+            "Internal rotation",
+            "Rubin II maneuver",
+            "Two fingers on posterior aspect of anterior shoulder push toward fetal chest"
+          ],
+          [
+            "Internal screw rotation",
+            "Woods screw maneuver",
+            "Rotates posterior shoulder 180 degrees to release impacted anterior shoulder"
+          ],
+          [
+            "Posterior extremity",
+            "Delivery of posterior arm",
+            "Reaches into sacral hollow, flexes elbow, sweeps forearm across chest"
+          ],
+          [
+            "Emergency replacement",
+            "Zavanelli maneuver",
+            "Rotates head back to OA, flexes head, pushes into vagina for emergent Caesarean"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Umbilical cord prolapse presents with a palpable pulsating cord loop in the vagina or at the introitus after rupture of membranes. Management requires immediate manual digital elevation of the presenting part to relieve cord compression, placing the mother in steep Trendelenburg or knee-chest position, filling the bladder with five hundred millilitres of saline, and performing immediate emergency caesarean section.",
+      "tx": "**Cord prolapse** presents with a palpable pulsating cord loop in the vagina following membrane rupture. Immediate therapy mandates continuous digital **elevation of the presenting part** off the umbilical cord, maternal placement in steep **Trendelenburg position** or knee-chest posture, rapid bladder filling with 500 mL saline, and **immediate emergency caesarean delivery**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Palpate pulsating cord in vagina; call immediate obstetric emergency code"
+          },
+          {
+            "id": "b",
+            "label": "Perform manual elevation of presenting part to relieve umbilical cord compression"
+          },
+          {
+            "id": "c",
+            "label": "Place patient in steep Trendelenburg position; infuse 500 mL saline into bladder"
+          },
+          {
+            "id": "d",
+            "label": "Transfer rapidly to operating theatre for emergency caesarean delivery"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ],
+        "caption": "Umbilical cord prolapse emergency management with manual elevation of presenting part. Credit: StewardMD."
+      }
+    }
+  ]
+}
