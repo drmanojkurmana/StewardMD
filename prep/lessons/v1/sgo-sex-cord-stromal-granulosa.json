@@ -1,0 +1,284 @@
+{
+  "v": 1,
+  "module": "sgo-sex-cord-stromal-granulosa",
+  "title": "Granulosa Cell Tumors: Adult vs Juvenile, Inhibin & FOXL2",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 16 (Sex Cord-Stromal Tumors)",
+    "DeVita, Hellman, and Rosenberg's Cancer 11th Edition Ch 85 (Ovarian Neoplasms)",
+    "NCCN Clinical Practice Guidelines in Oncology: Ovarian Cancer (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Adult granulosa cell tumors account for ninety-five percent of all ovarian granulosa cell neoplasms, characteristically presenting in perimenopausal or postmenopausal women. Due to unopposed hyperestrogenism, patients frequently present with abnormal uterine bleeding, endometrial hyperplasia, or endometrial cancer.",
+      "tx": "**Adult granulosa cell tumors** (AGCT) represent 95% of granulosa neoplasms, presenting in perimenopausal or postmenopausal women with **hyperestrogenism** manifestations including postmenopausal bleeding, endometrial hyperplasia, and concurrent **endometrial adenocarcinoma** in 5% to 10% of cases.  Evidence-based practice integrates adult granulosa cell tumor (AGCT), Call-Exner bodies, coffee bean nuclear grooves, median age 50-55. Key numerical parameters include 50, 55.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "estrogen",
+            "label": "Neoplastic granulosa cells synthesize excessive estradiol"
+          },
+          {
+            "id": "endo",
+            "label": "Endometrium undergoes prolonged unopposed estrogen stimulation"
+          },
+          {
+            "id": "hyper",
+            "label": "Development of endometrial hyperplasia or well-differentiated cancer"
+          },
+          {
+            "id": "bleed",
+            "label": "Presents clinically with postmenopausal or abnormal uterine bleeding"
+          }
+        ],
+        "edges": [
+          [
+            "estrogen",
+            "endo"
+          ],
+          [
+            "endo",
+            "hyper"
+          ],
+          [
+            "hyper",
+            "bleed"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Virtually all adult granulosa cell tumors harbor a specific somatic missense mutation in the forkhead box L2 gene. The FOXL2 c.402C to G point mutation results in a p.C134W amino acid substitution, serving as a highly sensitive and pathognomonic diagnostic molecular marker.",
+      "tx": "Over 97% of adult granulosa cell tumors harbor the pathognomonic somatic **FOXL2 mutation** (c.402C>G; p.C134W). This mutation is absent in juvenile granulosa tumors and other ovarian neoplasms, providing an invaluable molecular diagnostic tool to confirm AGCT in challenging histologic specimens.  Evidence-based practice integrates p.C134W missense, pathognomonic biomarker, 97% frequency.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adult Granulosa Cell Tumor",
+          "points": [
+            "FOXL2 c.402C>G mutation present in >97%",
+            "Coffee-bean grooved nuclei and Call-Exner bodies",
+            "Presents in older perimenopausal women (median 50-54y)"
+          ]
+        },
+        "right": {
+          "title": "Juvenile Granulosa Cell Tumor",
+          "points": [
+            "FOXL2 mutation characteristically absent",
+            "Lacks nuclear grooves; hyperchromatic round nuclei",
+            "Presents in young girls with precocious puberty"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Classic microscopic examination reveals pale, uniform tumor cells with coffee-bean grooved nuclei arranged in microfollicular patterns surrounding eosinophilic fluid. These distinctive microfollicles are named Call-Exner bodies and represent diagnostic hallmarks of adult granulosa cell neoplasms.",
+      "tx": "Microscopic hallmarks of AGCT include grooved **coffee-bean nuclei** (longitudinal nuclear clefts) and microfollicular arrangements termed **Call-Exner bodies**, composed of rosettes of granulosa cells encircling eosinophilic proteinaceous fluid and degenerated nuclear debris.  Evidence-based practice integrates hyperestrogenism, estradiol secretion, endometrial hyperplasia 25-50%, concurrent endometrial cancer 5-10%. Key numerical parameters include 17, 25, 50.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Microscopic Feature",
+          "Histological Description",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "Call-Exner bodies",
+            "Microfollicles with central eosinophilic fluid",
+            "Pathognomonic rosette-like microfollicular pattern"
+          ],
+          [
+            "Coffee-bean nuclei",
+            "Pale, uniform nuclei with longitudinal grooves",
+            "Distinguishes AGCT from poorly differentiated carcinomas"
+          ],
+          [
+            "Growth patterns",
+            "Microfollicular, macrofollicular, trabecular, insular",
+            "Diverse architecture; identical indolent biology"
+          ],
+          [
+            "Mitotic activity",
+            "Typically low (<3-5 mitoses per 10 HPF)",
+            "High mitoses associate with earlier recurrence"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Juvenile granulosa cell tumors account for five percent of cases and develop in young girls and women under thirty years of age. Patients characteristically present with isosexual precocious puberty, macrofollicular histology, hyperchromatic round nuclei lacking grooves, and absent FOXL2 mutations.",
+      "tx": "**Juvenile granulosa cell tumors** (JGCT) present in premenarchal girls and young women with **isosexual precocious puberty** or acute abdomen from rupture. Histology demonstrates macrofollicles, luteinized cells with abundant eosinophilic cytoplasm, hyperchromatic round nuclei lacking grooves, and absence of the FOXL2 mutation.  Evidence-based practice integrates endometrial biopsy mandatory, rule out concurrent adenocarcinoma, fertility preservation workup.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical Presentation of JGCT",
+          "points": [
+            "Presents before age 30; ~80% in premenarchal girls",
+            "Isosexual pseudoprecocity: breast budding, pubic hair, menses",
+            "Higher propensity for acute presentation via tumor rupture"
+          ]
+        },
+        "right": {
+          "title": "Microscopic Differences",
+          "points": [
+            "Prominent macrofollicles variable in size and shape",
+            "Absence of longitudinal nuclear grooves",
+            "Marked luteinization with lipid-rich cytoplasm"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Serum inhibin B is the most sensitive and reliable circulating tumor marker for monitoring disease activity and detecting recurrence in granulosa cell tumors. Serum levels correlate closely with tumor burden and frequently rise months before clinical or radiological evidence of relapse appears.",
+      "tx": "**Inhibin B** is the premier circulating tumor marker for granulosa cell neoplasms, demonstrating superior sensitivity compared with inhibin A or estradiol. Circulating levels correlate directly with tumor burden, often elevating up to 12 months prior to radiological recurrence.  Evidence-based practice integrates superior tumor marker, early recurrence detection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "preop",
+            "label": "Obtain baseline serum inhibin B, AMH, and estradiol levels"
+          },
+          {
+            "id": "resect",
+            "label": "Perform definitive surgical resection of tumor mass"
+          },
+          {
+            "id": "nadir",
+            "label": "Document post-operative serological normalization (nadir)"
+          },
+          {
+            "id": "surv",
+            "label": "Monitor serial inhibin B every 3 to 6 months for life"
+          }
+        ],
+        "edges": [
+          [
+            "preop",
+            "resect"
+          ],
+          [
+            "resect",
+            "nadir"
+          ],
+          [
+            "nadir",
+            "surv"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adult granulosa cell tumors exhibit an indolent natural history characterized by very late recurrences occurring ten, twenty, or even thirty years after initial resection. Lifelong surveillance with clinical pelvic examination and serial serum inhibin B monitoring is mandatory.",
+      "tx": "AGCT displays a notoriously indolent biology with a pronounced propensity for **late recurrence**, with over 50% of relapses emerging >5 years and often up to 20 to 30 years post-resection, mandating **lifelong clinical surveillance** with regular pelvic imaging and serum inhibin B.  Evidence-based practice integrates juvenile GCT (JGCT), AKT1 mutation, isosexual precocious puberty, Ollier disease, Maffucci syndrome. Key numerical parameters include 1.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Recurrence Characteristics",
+          "points": [
+            "Median time to first recurrence: 4 to 6 years",
+            "Documented relapses occurring at 20 to 30 years",
+            "Predominantly intra-abdominal and pelvic peritoneal recurrence"
+          ]
+        },
+        "right": {
+          "title": "Surveillance Protocol",
+          "points": [
+            "Lifelong follow-up mandatory for all patients",
+            "Serum inhibin B and pelvic ultrasound/CT every 6 months",
+            "Secondary surgical cytoreduction indicated for resectable relapse"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Surgical management for postmenopausal women requires total abdominal hysterectomy, bilateral salpingo-oophorectomy, and complete surgical staging. In reproductive-aged women with Stage one A disease desiring fertility preservation, unilateral salpingo-oophorectomy with endometrial curettage is safe.",
+      "tx": "Standard surgical therapy is total abdominal hysterectomy, bilateral salpingo-oophorectomy, and staging. In reproductive-age patients with Stage IA disease desiring childbearing, **fertility-sparing unilateral salpingo-oophorectomy** is safe provided mandatory **endometrial sampling** rules out occult synchronous endometrial neoplasia.  Evidence-based practice integrates late indolent recurrence, recurrence >5-10 years, lifelong surveillance. Key numerical parameters include 50, 5, 10, 30.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "assess",
+            "label": "Stage IA granulosa tumor in reproductive-age patient"
+          },
+          {
+            "id": "curett",
+            "label": "Perform endometrial biopsy to exclude concurrent hyperplasia/cancer"
+          },
+          {
+            "id": "uso",
+            "label": "Perform unilateral salpingo-oophorectomy with staging biopsies"
+          },
+          {
+            "id": "compl",
+            "label": "Recommend completion surgery after childbearing is completed"
+          }
+        ],
+        "edges": [
+          [
+            "assess",
+            "curett"
+          ],
+          [
+            "curett",
+            "uso"
+          ],
+          [
+            "uso",
+            "compl"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "For advanced stage or recurrent granulosa cell tumors, systemic combination chemotherapy with bleomycin, etoposide, and cisplatin remains the most active first-line cytotoxic regimen. In slow-growing or recurrent disease, hormonal therapies like aromatase inhibitors provide prolonged disease stabilization.",
+      "tx": "For advanced (stage II-IV) or unresectable recurrent disease, platinum-based chemotherapy with **BEP chemotherapy** (bleomycin, etoposide, cisplatin) or carboplatin-paclitaxel yields overall response rates of 60% to 80%. Alternatively, **endocrine therapy** utilizing aromatase inhibitors (letrozole) provides durable disease stabilization.  Evidence-based practice integrates omission of lymphadenectomy, nodal metastasis <1-2%, Stage I AGCT. Key numerical parameters include 1.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Modality",
+          "Specific Regimen / Agent",
+          "Clinical Indication",
+          "Efficacy / Safety Considerations"
+        ],
+        "rows": [
+          [
+            "Combination chemotherapy",
+            "BEP (Bleomycin, Etoposide, Cisplatin)",
+            "Bulky or symptomatic advanced/recurrent disease",
+            "Response rate 60-80%; monitor pulmonary status for bleomycin"
+          ],
+          [
+            "Alternative chemotherapy",
+            "Carboplatin + Paclitaxel",
+            "Frail patients / avoid bleomycin pulmonary risk",
+            "Favorable toxicity profile with comparable response rates"
+          ],
+          [
+            "Aromatase inhibitors",
+            "Letrozole 2.5 mg daily",
+            "Slowly progressive or ER/PR positive recurrent disease",
+            "Prolonged disease control with excellent quality of life"
+          ],
+          [
+            "GnRH agonists",
+            "Leuprolide depot monthly",
+            "Recurrent granulosa tumors post-chemotherapy",
+            "Suppresses gonadotropins driving tumor growth"
+          ]
+        ]
+      }
+    }
+  ]
+}

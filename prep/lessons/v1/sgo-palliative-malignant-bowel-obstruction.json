@@ -1,0 +1,289 @@
+{
+  "v": 1,
+  "module": "sgo-palliative-malignant-bowel-obstruction",
+  "title": "Malignant Bowel Obstruction, Ascites & Palliative Care in Gynae-Oncology",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 26 (Palliative Care)",
+    "DeVita, Hellman, and Rosenberg's Cancer 11th Edition Ch 105 (Palliative Oncology)",
+    "NCCN Clinical Practice Guidelines in Oncology: Palliative Care (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Malignant bowel obstruction represents one of the most distressing complications in advanced gynecologic oncology, developing in up to fifty percent of terminal ovarian cancer patients. Diffuse peritoneal carcinomatosis causes multifocal small bowel encasement, mesenteric foreshortening, and tumor infiltration of myenteric neural plexuses.",
+      "tx": "**Malignant bowel obstruction** (MBO) develops in 25% to 50% of advanced epithelial ovarian cancer patients, resulting from diffuse **peritoneal carcinomatosis**, mesenteric foreshortening, extensive serosal encasement, and neoplastic infiltration of the **myenteric autonomic plexus** causing dynamic intestinal hypomotility.  Evidence-based practice integrates malignant bowel obstruction (MBO), 25-50% terminal ovarian cancer, multi-segmental encasement.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "shed",
+            "label": "Peritoneal carcinomatosis spreads along small bowel serosa"
+          },
+          {
+            "id": "encase",
+            "label": "Tumor plaque encasement causes mesenteric retraction and kinking"
+          },
+          {
+            "id": "plexus",
+            "label": "Direct invasion into myenteric plexus suppresses peristalsis"
+          },
+          {
+            "id": "obstruct",
+            "label": "Multifocal functional and mechanical bowel obstruction ensues"
+          }
+        ],
+        "edges": [
+          [
+            "shed",
+            "encase"
+          ],
+          [
+            "encase",
+            "plexus"
+          ],
+          [
+            "plexus",
+            "obstruct"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Computed tomography of the abdomen and pelvis with intravenous contrast serves as the definitive diagnostic imaging modality. CT imaging distinguishes a single-site focal mechanical blockage that might be surgically bypassable from diffuse, multifocal carcinomatosis where surgery is futile and contraindicated.",
+      "tx": "Contrast-enhanced **computed tomography** of the abdomen and pelvis is the gold standard imaging investigation for MBO, essential for differentiating a focal, isolated **mechanical obstruction** (potentially amenable to surgical resection or enterostomy) from multifocal, inoperable **peritoneal carcinomatosis**.  Evidence-based practice integrates CT imaging for MBO, single-site vs multifocal, inoperable carcinomatosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Operable Focal Obstruction",
+          "points": [
+            "Single discrete transition point on CT scan",
+            "No massive ascites or diffuse peritoneal carcinomatosis",
+            "Good functional baseline (ECOG 0-2)"
+          ]
+        },
+        "right": {
+          "title": "Inoperable Diffuse Carcinomatosis",
+          "points": [
+            "Multifocal transition points and bowel wall thickening",
+            "Massive refractory malignant ascites and mesenteric cake",
+            "Severe cachexia and poor performance status (ECOG 3-4)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Medical management represents the primary treatment for inoperable malignant bowel obstruction. A continuous subcutaneous or intravenous infusion combining the somatostatin analogue octreotide, haloperidol, and dexamethasone effectively controls nausea, pain, and gastrointestinal hypersecretion.",
+      "tx": "First-line medical therapy for inoperable MBO utilizes a continuous infusion combining **octreotide** (300 to 600 mcg/day, reducing gastrointestinal secretomotor activity and luminal distension), **haloperidol** (antiemetic targeting the chemoreceptor trigger zone), and **dexamethasone** (6 to 8 mg/day to reduce peritumoral edema).  Evidence-based practice integrates octreotide 300-600 mcg/day, dexamethasone anti-edema.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacological Agent",
+          "Primary Mechanism of Action",
+          "Target Symptom",
+          "Standard Daily Dosage"
+        ],
+        "rows": [
+          [
+            "Octreotide",
+            "Somatostatin analogue; inhibits GI fluid secretion",
+            "Reduces luminal vomiting and colic",
+            "300 to 600 mcg/day SC/IV continuous"
+          ],
+          [
+            "Haloperidol",
+            "D2-dopamine receptor antagonist at CTZ",
+            "Centrally mediated nausea and vomiting",
+            "2.5 to 5 mg/day SC/IV"
+          ],
+          [
+            "Dexamethasone",
+            "Glucocorticoid; resolves peritumoral bowel edema",
+            "Anti-inflammatory and antiemetic effect",
+            "6 to 8 mg/day IV/SC"
+          ],
+          [
+            "Hyoscine butylbromide",
+            "Anticholinergic antispasmodic agent",
+            "Relieves intestinal smooth muscle cramping",
+            "60 to 120 mg/day continuous infusion"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prokinetic agents such as metoclopramide are strictly contraindicated in patients with complete mechanical bowel obstruction. Stimulating intestinal motility against an impassable physical blockage generates excruciating colicky pain, escalates intraluminal pressure, and risks bowel perforation.",
+      "tx": "Prokinetic medications such as **metoclopramide** are **strictly contraindicated** in complete mechanical bowel obstruction, as prokinetic stimulation of peristalsis against a closed obstruction produces excruciating colic, severe abdominal pain, and substantially elevates the catastrophic risk of **bowel perforation**.  Evidence-based practice integrates contraindication to metoclopramide, complete obstruction, bowel perforation risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Metoclopramide Contraindicated",
+          "points": [
+            "Contraindicated in complete mechanical blockage",
+            "Accelerates propulsive peristalsis against obstruction",
+            "Induces severe pain, distension, and transmural bowel perforation"
+          ]
+        },
+        "right": {
+          "title": "Metoclopramide Indicated",
+          "points": [
+            "Indicated in partial functional hypomotility without blockage",
+            "Useful in gastroparesis and opioid-induced bowel inertia",
+            "Promotes coordinated upper gastrointestinal emptying"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Percutaneous endoscopic gastrostomy placement serves as an outstanding minimally invasive decompression procedure for patients with refractory inoperable malignant bowel obstruction. Venting gastrostomy eliminates relentless feculent vomiting and permits discontinuation of painful nasogastric tubes.",
+      "tx": "A **venting gastrostomy** or **percutaneous endoscopic gastrostomy** (PEG) tube provides highly effective palliation for refractory inoperable MBO, decompressing accumulated gastric secretions, eliminating feculent vomiting, and permitting removal of uncomfortable nasogastric tubes in >90% of terminal patients.  Evidence-based practice integrates venting gastrostomy (PEG), vomiting relief >90%, elimination of nasogastric tube.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "refract",
+            "label": "Document refractory vomiting in inoperable MBO despite medical therapy"
+          },
+          {
+            "id": "nasog",
+            "label": "Temporarily decompress stomach with fine-bore nasogastric tube"
+          },
+          {
+            "id": "peg",
+            "label": "Perform percutaneous endoscopic gastrostomy (PEG) under mild sedation"
+          },
+          {
+            "id": "vent",
+            "label": "Open tube to passive gravity drainage; allow patient pleasure sips"
+          }
+        ],
+        "edges": [
+          [
+            "refract",
+            "nasog"
+          ],
+          [
+            "nasog",
+            "peg"
+          ],
+          [
+            "peg",
+            "vent"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Recurrent symptomatic malignant ascites causes distressing abdominal distension, anorexia, and dyspnea in advanced ovarian carcinoma. Indwelling tunneled peritoneal drainage catheters permit safe, intermittent, home-based drainage, avoiding repeated hospital visits for large-volume paracentesis.",
+      "tx": "Recurrent **malignant ascites** is safely palliated with **indwelling tunneled peritoneal catheters** (such as PleurX), which enable patient-directed, intermittent home drainage of peritoneal fluid (typically 1 to 1.5 liters per session), effectively eliminating the need for frequent, stressful hospital paracentesis visits.  Evidence-based practice integrates tunneled peritoneal catheter (PleurX).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tunneled Peritoneal Catheter",
+          "points": [
+            "Subcutaneous polyester cuff prevents bacterial migration",
+            "Enables safe home drainage by family/caregivers",
+            "Prevents severe ascites reaccumulation and dyspnea"
+          ]
+        },
+        "right": {
+          "title": "Repeated Serial Paracentesis",
+          "points": [
+            "Requires recurrent outpatient or emergency admissions",
+            "Repeated abdominal wall punctures risk bowel puncture",
+            "Causes rapid fluid shifts and hemodynamic instability"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Catumaxomab is a bispecific trifunctional antibody targeting epithelial cell adhesion molecule and cluster of differentiation three. Administered via intraperitoneal infusion, catumaxomab binds tumor cells and cytotoxic T lymphocytes, destroying intraperitoneal tumor cells and extending puncture-free survival.",
+      "tx": "**Catumaxomab** is a bispecific trifunctional monoclonal antibody targeting **EpCAM** on ovarian cancer cells and **CD3** on T lymphocytes, while recruiting Fc-gamma-receptor accessory immune cells to eliminate intraperitoneal tumor seeding and significantly prolong **puncture-free survival** in malignant ascites.  Evidence-based practice integrates bispecific antibody (anti-EpCAM x anti-CD3).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Binding Domain",
+          "Molecular Target",
+          "Biological Action",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Fab arm 1",
+            "EpCAM (epithelial cell adhesion molecule)",
+            "Binds surface of malignant ovarian cancer cells",
+            "Directs antibody specifically to cancer cells"
+          ],
+          [
+            "Fab arm 2",
+            "CD3 receptor on mature T cells",
+            "Crosslinks and activates cytotoxic T lymphocytes",
+            "Triggers direct T-cell mediated cytolysis"
+          ],
+          [
+            "Fc region",
+            "Fc-gamma receptor I/IIa/III on macrophages/NK cells",
+            "Recruits natural killer cells and macrophages",
+            "Induces antibody-dependent cellular cytotoxicity"
+          ],
+          [
+            "Clinical effect",
+            "Intraperitoneal destruction of tumor spheroids",
+            "Eliminates recurrent fluid accumulation",
+            "Significant extension of paracentesis-free interval"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Severe neuropathic pelvic pain from neoplastic invasion of the lumbosacral plexus requires multimodal analgesic therapy with scheduled opioid titration and adjuvant neuromodulators. For refractory visceral pain, image-guided superior hypogastric plexus neurolysis provides effective and durable pain relief.",
+      "tx": "Severe **neuropathic pelvic pain** from neoplastic lumbosacral plexus infiltration requires multimodal therapy combining scheduled opioids with adjuvant neuromodulators (**gabapentin**, pregabalin, duloxetine); percutaneous **superior hypogastric plexus block** achieves substantial neurolytic visceral pelvic pain relief.  Evidence-based practice integrates gabapentinoids and opioids. Comprehensive multidisciplinary review ensures optimal patient survival outcomes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pain",
+            "label": "Identify intractable neuropathic or visceral pelvic pain"
+          },
+          {
+            "id": "opioid",
+            "label": "Titrate scheduled long-acting opioids with breakthrough doses"
+          },
+          {
+            "id": "adjuvant",
+            "label": "Add adjuvant neuromodulator (gabapentin or duloxetine)"
+          },
+          {
+            "id": "neurolysis",
+            "label": "Perform fluoroscopy-guided superior hypogastric plexus block"
+          }
+        ],
+        "edges": [
+          [
+            "pain",
+            "opioid"
+          ],
+          [
+            "opioid",
+            "adjuvant"
+          ],
+          [
+            "adjuvant",
+            "neurolysis"
+          ]
+        ]
+      }
+    }
+  ]
+}

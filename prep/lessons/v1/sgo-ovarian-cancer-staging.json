@@ -1,0 +1,313 @@
+{
+  "v": 1,
+  "module": "sgo-ovarian-cancer-staging",
+  "title": "Epithelial Ovarian Cancer FIGO 2014 Staging & Histopathology",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 12 (Ovarian Cancer)",
+    "FIGO Cancer Report: Cancer of the ovary, fallopian tube, and peritoneum (2018/2021 update)",
+    "NCCN Clinical Practice Guidelines in Oncology: Ovarian Cancer (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The unified FIGO 2014 staging system applies identically to primary epithelial malignancies arising from the ovaries, fallopian tubes, and peritoneum. Formal surgical staging encompasses exploratory laparotomy, peritoneal washings, total abdominal hysterectomy, bilateral salpingo-oophorectomy, and infracolic omentectomy.",
+      "tx": "The unified **FIGO 2014 staging** system classifies neoplasms of the ovaries, fallopian tubes, and primary peritoneum together. Definitive **surgical staging** requires peritoneal cytology washings, total abdominal hysterectomy, bilateral salpingo-oophorectomy, infracolic omentectomy, peritoneal biopsies, and retroperitoneal nodal evaluation.  Evidence-based practice integrates operative staging, fallopian tube primary, peritoneal primary.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inci",
+            "label": "Perform vertical midline laparotomy and aspirate ascites/washings"
+          },
+          {
+            "id": "tah",
+            "label": "Perform total abdominal hysterectomy and bilateral salpingo-oophorectomy"
+          },
+          {
+            "id": "omen",
+            "label": "Complete systematic infracolic omentectomy"
+          },
+          {
+            "id": "peri",
+            "label": "Harvest peritoneal surface biopsies (diaphragm, paracolic, pelvis)"
+          },
+          {
+            "id": "lnd",
+            "label": "Dissect pelvic and para-aortic lymph nodes up to renal veins"
+          }
+        ],
+        "edges": [
+          [
+            "inci",
+            "tah"
+          ],
+          [
+            "tah",
+            "omen"
+          ],
+          [
+            "omen",
+            "peri"
+          ],
+          [
+            "peri",
+            "lnd"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Stage one ovarian carcinoma remains strictly confined to the ovaries or fallopian tubes. Stage one A involves a single intact ovary, stage one B involves both ovaries with intact capsules, and stage one C represents capsular rupture or malignant cells in peritoneal cytology.",
+      "tx": "**Stage I** disease is limited to the ovaries or fallopian tubes: **Stage IA** involves one ovary with capsule intact; **Stage IB** involves both ovaries with intact capsules; and **Stage IC** denotes **capsular rupture** (IC1 intraoperative, IC2 pre-operative) or malignant cells in peritoneal washings (IC3).  Evidence-based practice integrates Stage IC1 intraoperative rupture, Stage IC2 surface tumor, Stage IC3 positive washings.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FIGO Stage",
+          "Ovarian Involvement",
+          "Capsule / Surface Status",
+          "Peritoneal Cytology"
+        ],
+        "rows": [
+          [
+            "Stage IA",
+            "Limited to one ovary",
+            "Capsule intact, no tumor on surface",
+            "Negative peritoneal washings"
+          ],
+          [
+            "Stage IB",
+            "Limited to both ovaries",
+            "Capsules intact, no surface tumor",
+            "Negative peritoneal washings"
+          ],
+          [
+            "Stage IC1",
+            "One or both ovaries",
+            "Surgical capsule rupture intraoperatively",
+            "Negative peritoneal washings"
+          ],
+          [
+            "Stage IC2",
+            "One or both ovaries",
+            "Capsule ruptured prior to surgery / surface tumor",
+            "Negative peritoneal washings"
+          ],
+          [
+            "Stage IC3",
+            "One or both ovaries",
+            "Capsule intact or ruptured",
+            "Positive washings with malignant cells"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Stage two designates tumor extension below the pelvic brim or direct involvement of pelvic peritoneal surfaces. Substage two A involves the uterus or fallopian tubes, while substage two B extends to other pelvic intraperitoneal tissues such as the bladder peritoneum, pouch of Douglas, or sigmoid colon.",
+      "tx": "**Stage II** designates tumor extending beyond the ovaries with pelvic extension below the pelvic brim: **Stage IIA** reflects extension or implants on the **uterus or fallopian tubes**, while **Stage IIB** reflects extension to other pelvic intraperitoneal tissues including rectum, bladder, and pelvic peritoneum.  Evidence-based practice integrates Stage IIA pelvic extension, Stage IIB pelvic intraperitoneal tissues. Key numerical parameters include 2.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage IIA Disease",
+          "points": [
+            "Direct extension or implants on uterus",
+            "Involvement of ipsilateral or contralateral fallopian tube",
+            "Confined strictly to genital internal pelvic viscera"
+          ]
+        },
+        "right": {
+          "title": "Stage IIB Disease",
+          "points": [
+            "Involvement of pelvic peritoneal surfaces",
+            "Direct spread to pouch of Douglas, bladder wall, or sigmoid",
+            "Still confined entirely below the true pelvic brim"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Stage three involves confirmed peritoneal metastases outside the pelvis or retroperitoneal lymph node spread. Substage three A one identifies isolated retroperitoneal nodal metastasis, divided by size into subcentimeter or exceeding ten millimeters.",
+      "tx": "**Stage IIIA1** designates retroperitoneal **lymph node metastasis** confirmed pathologically with microscopic or absent extrapelvic peritoneal spread: **Stage IIIA1(i)** defines metastasis <=10 mm largest dimension, whereas **Stage IIIA1(ii)** defines nodal metastasis >10 mm dimension.  Evidence-based practice integrates Stage IIIA1 retroperitoneal nodes, cutoff 10 mm (i vs ii), Stage IIIA2 microscopic extrapelvic. Key numerical parameters include 3, 2.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "eval_nodes",
+            "label": "Pathological dissection of pelvic and para-aortic nodes"
+          },
+          {
+            "id": "check_size",
+            "label": "Measure maximum diameter of metastatic nodal deposit"
+          },
+          {
+            "id": "i_small",
+            "label": "Metastasis <=10 mm: Stage IIIA1(i)"
+          },
+          {
+            "id": "ii_large",
+            "label": "Metastasis >10 mm: Stage IIIA1(ii)"
+          }
+        ],
+        "edges": [
+          [
+            "eval_nodes",
+            "check_size"
+          ],
+          [
+            "check_size",
+            "i_small"
+          ],
+          [
+            "check_size",
+            "ii_large"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Macroscopic peritoneal carcinomatosis outside the pelvic brim stratifies Stage three B and Stage three C disease based on physical deposit size. Deposits up to two centimeters designate three B, while deposits exceeding two centimeters designate Stage three C.",
+      "tx": "Extrapelvic peritoneal metastases establish **Stage IIIA2** (microscopic peritoneal spread), **Stage IIIB** (macroscopic peritoneal metastasis <=2 cm largest diameter), and **Stage IIIC** (macroscopic **peritoneal metastasis** >2 cm, including tumor extension to liver or spleen capsule without parenchymal invasion).  Evidence-based practice integrates Stage IIIB <=2 cm peritoneal, Stage IIIC >2 cm peritoneal, liver/spleen surface capsule. Key numerical parameters include 3.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FIGO Stage",
+          "Peritoneal Metastasis Dimension",
+          "Liver / Spleen Involvement",
+          "Retroperitoneal Nodes"
+        ],
+        "rows": [
+          [
+            "Stage IIIA2",
+            "Microscopic extrapelvic metastasis only",
+            "None",
+            "May be positive or negative"
+          ],
+          [
+            "Stage IIIB",
+            "Macroscopic implants <=2 cm diameter",
+            "Capsular surface <=2 cm",
+            "May be positive or negative"
+          ],
+          [
+            "Stage IIIC",
+            "Macroscopic implants >2 cm diameter",
+            "Capsular surface >2 cm",
+            "Positive or negative nodes"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Stage four reflects distant dissemination beyond the peritoneal cavity. Pleural effusion with cytologically proven malignant cells designates Stage four A, while parenchymal metastases to liver or spleen or extra-abdominal organ involvement defines Stage four B.",
+      "tx": "**Stage IVA** requires cytologically proven **malignant pleural effusion**. **Stage IVB** identifies distant dissemination including parenchymal liver or spleen metastases, transmural intestinal invasion, inguinal lymph node metastasis, or distant hematogenous extra-abdominal visceral spread.  Evidence-based practice integrates Stage IVA pleural effusion cytology, Stage IVB parenchymal metastases, extra-abdominal nodes. Key numerical parameters include 4.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage IVA Dissemination",
+          "points": [
+            "Requires positive pleural fluid cytology",
+            "Benign reactive pleural effusions do not qualify",
+            "Thoracentesis mandatory before assigning stage"
+          ]
+        },
+        "right": {
+          "title": "Stage IVB Dissemination",
+          "points": [
+            "Parenchymal liver or splenic metastases",
+            "Extra-abdominal nodal spread (supraclavicular, inguinal)",
+            "Transmural invasion of bowel mucosa"
+          ]
+        }
+      }
+    },
+    {
+      "say": "High-grade serous carcinoma accounts for seventy percent of epithelial ovarian cancers and universally harbors TP53 mutations. Emerging from serous tubal intraepithelial carcinoma in the fimbriated fallopian tube, these tumors are characterized by profound homologous recombination deficiency.",
+      "tx": "**High-grade serous carcinoma** (HGSC) accounts for ~70% of cases, arising from **serous tubal intraepithelial carcinoma** (STIC) in the fallopian tube fimbria. HGSC universally harbors **TP53 mutations** (96%), demonstrates profound chromosomal instability, and exhibits homologous recombination deficiency in 50% of tumors.  Evidence-based practice integrates Type I tumors, stepwise progression, KRAS BRAF PTEN ARID1A, low-grade indolent. Key numerical parameters include 1, 2.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stic",
+            "label": "Precursor STIC lesion arises in fallopian tube fimbrial epithelium"
+          },
+          {
+            "id": "p53",
+            "label": "Acquisition of early pathogenic TP53 mutation (p53 signature)"
+          },
+          {
+            "id": "shed",
+            "label": "Malignant fimbrial cells shed onto ovarian cortical surface"
+          },
+          {
+            "id": "hgsc",
+            "label": "Rapid intra-abdominal carcinomatosis with high chromosomal instability"
+          }
+        ],
+        "edges": [
+          [
+            "stic",
+            "p53"
+          ],
+          [
+            "p53",
+            "shed"
+          ],
+          [
+            "shed",
+            "hgsc"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Endometrioid and clear cell carcinomas frequently arise from pre-existing ovarian endometriosis and display distinctive molecular aberrations. Clear cell tumors harbor ARID1A mutations, whereas low-grade serous tumors arise from serous borderline precursors and carry KRAS mutations.",
+      "tx": "Non-HGSC subtypes display distinct biology: **clear cell carcinoma** (hobnail cells, ARID1A and PIK3CA mutations, platinum chemoresistance, thromboembolism risk); **endometrioid carcinoma** (arises in endometriosis, PTEN and beta-catenin mutations); and **low-grade serous carcinoma** (KRAS/BRAF mutations, indolent biology).  Evidence-based practice integrates Type II tumors, TP53 >95%, chromosomal instability, HRD pathway.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histological Subtype",
+          "Putative Precursor Lesion",
+          "Key Driver Mutations",
+          "Clinical Behavior / Chemoresponse"
+        ],
+        "rows": [
+          [
+            "High-grade serous",
+            "STIC in fallopian tube fimbria",
+            "TP53 (>95%), BRCA1/2, HRD",
+            "Highly chemosensitive, rapid dissemination"
+          ],
+          [
+            "Low-grade serous",
+            "Serous borderline tumor",
+            "KRAS, BRAF, NRAS",
+            "Indolent course, relative chemoresistance"
+          ],
+          [
+            "Clear cell carcinoma",
+            "Ovarian endometriosis",
+            "ARID1A, PIK3CA, HNF-1beta",
+            "Marked chemoresistance, high DVT/PE risk"
+          ],
+          [
+            "Mucinous carcinoma",
+            "Mucinous cystadenoma/borderline",
+            "KRAS, HER2 amplification",
+            "Often stage I; poor response to platinum"
+          ]
+        ]
+      }
+    }
+  ]
+}
