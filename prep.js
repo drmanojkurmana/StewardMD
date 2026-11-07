@@ -2380,7 +2380,7 @@
       if (!list.length) { toast("Nothing to practise here right now."); return rerender(); }
       runQuestions(list, kind === "exam" ? "exam" : "study", tx(topicOf(sid, mid).title));
     }, function () {
-      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">Questions need a connection. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
+      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">' + (G.PREP_BANK_MSG || String)("Questions need a connection. Check the connection and try again.") + '</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
       st.cur = { s: sid, m: mid };
     });
   }
