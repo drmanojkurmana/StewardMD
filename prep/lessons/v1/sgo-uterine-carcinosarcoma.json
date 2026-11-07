@@ -1,0 +1,315 @@
+{
+  "v": 1,
+  "module": "sgo-uterine-carcinosarcoma",
+  "title": "Uterine Carcinosarcoma (MMMT) & Rare Uterine Malignancies",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 14 (Uterine Sarcomas)",
+    "DeVita, Hellman, and Rosenberg's Cancer 11th Edition Ch 84 (Gynecologic Cancers)",
+    "NCCN Clinical Practice Guidelines in Oncology: Uterine Neoplasms (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Uterine carcinosarcoma, historically known as malignant mixed Mullerian tumor, is now recognized as a true metaplastic epithelial carcinoma rather than a genuine sarcoma. Clonal genomic sequencing has proven that both epithelial and mesenchymal components share identical molecular driver mutations.",
+      "tx": "**Uterine carcinosarcoma** is a biphasic metaplastic **epithelial carcinoma** rather than a primary sarcoma. Clonal molecular analyses confirm that the **sarcomatous component** represents dedifferentiation from an aggressive epithelial carcinoma driver clone, sharing identical TP53 mutations.  Evidence-based practice integrates MMMT, metaplastic carcinoma, epithelial dedifferentiation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stem",
+            "label": "Epithelial progenitor stem cell acquires driver TP53 mutation"
+          },
+          {
+            "id": "carc",
+            "label": "Proliferation of aggressive high-grade carcinomatous clone"
+          },
+          {
+            "id": "emt",
+            "label": "Epithelial-to-mesenchymal transition (EMT) occurs"
+          },
+          {
+            "id": "sarc",
+            "label": "Dedifferentiation produces sarcomatous stromal components"
+          },
+          {
+            "id": "biph",
+            "label": "Manifests clinically as aggressive biphasic carcinosarcoma"
+          }
+        ],
+        "edges": [
+          [
+            "stem",
+            "carc"
+          ],
+          [
+            "carc",
+            "emt"
+          ],
+          [
+            "emt",
+            "sarc"
+          ],
+          [
+            "sarc",
+            "biph"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pathologists classify the sarcomatous mesenchymal element into homologous or heterologous differentiation types. Homologous elements consist of native uterine tissues like fibrosarcoma or leiomyosarcoma, while heterologous elements comprise foreign tissues like rhabdomyosarcoma or chondrosarcoma.",
+      "tx": "The mesenchymal component is classified as **homologous** when composed of tissues native to the uterus such as leiomyosarcoma, or **heterologous** when containing non-uterine mesenchymal elements such as **rhabdomyosarcoma** (with strap-shaped rhabdomyoblasts) or **chondrosarcoma**. Careful clinical surveillance and individualized management remain essential for high-quality oncologic care.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mesenchymal Subtype",
+          "Tissue Lineage Origin",
+          "Diagnostic Microscopic Features",
+          "Immunohistochemical Profile"
+        ],
+        "rows": [
+          [
+            "Homologous sarcomatous",
+            "Native uterine mesenchyme",
+            "Spindle cells resembling fibrosarcoma/leiomyosarcoma",
+            "SMA, desmin positive; myogenin negative"
+          ],
+          [
+            "Heterologous rhabdomyosarcoma",
+            "Skeletal muscle lineage",
+            "Cross-striations, strap cells with abundant eosinophilic cytoplasm",
+            "Desmin, myogenin, MyoD1 positive"
+          ],
+          [
+            "Heterologous chondrosarcoma",
+            "Cartilaginous lineage",
+            "Atypical chondrocytes in lacunae with myxoid matrix",
+            "S100 protein positive"
+          ],
+          [
+            "Heterologous osteosarcoma",
+            "Bone-forming lineage",
+            "Direct production of malignant osteoid by tumor cells",
+            "SATB2 positive; osteocalcin positive"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgical staging for uterine carcinosarcoma mirrors high-risk endometrial adenocarcinoma and requires total abdominal hysterectomy, bilateral salpingo-oophorectomy, and retroperitoneal lymphadenectomy. Pelvic and para-aortic lymph node metastases occur in up to thirty percent of patients.",
+      "tx": "Definitive surgical management demands **surgical staging** via total abdominal hysterectomy, bilateral salpingo-oophorectomy, peritoneal washings, omental biopsy, and systematic **pelvic and para-aortic lymphadenectomy**, as occult retroperitoneal nodal metastases occur in 20% to 30% of clinically confined cases.  Evidence-based practice integrates TP53 mutation, p53 overexpression, copy-number high phenotype, 90% frequency. Key numerical parameters include 90, 53.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lap",
+            "label": "Perform exploratory laparotomy and peritoneal fluid cytology"
+          },
+          {
+            "id": "tah",
+            "label": "Total abdominal hysterectomy and bilateral salpingo-oophorectomy"
+          },
+          {
+            "id": "lnd",
+            "label": "Systematic pelvic and para-aortic lymph node dissection"
+          },
+          {
+            "id": "omg",
+            "label": "Infracolic omentectomy and multiple peritoneal biopsies"
+          },
+          {
+            "id": "stg",
+            "label": "Assign surgical stage by FIGO endometrial cancer criteria"
+          }
+        ],
+        "edges": [
+          [
+            "lap",
+            "tah"
+          ],
+          [
+            "tah",
+            "lnd"
+          ],
+          [
+            "lnd",
+            "omg"
+          ],
+          [
+            "omg",
+            "stg"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The landmark GOG-261 randomized trial established carboplatin plus paclitaxel as the international standard frontline chemotherapy regimen for uterine carcinosarcoma. The taxane-platinum combination demonstrated equivalent overall survival and significantly reduced toxicity compared to ifosfamide-paclitaxel.",
+      "tx": "The randomized phase III **GOG-261 trial** proved that **carboplatin and paclitaxel** is non-inferior in overall survival to ifosfamide plus paclitaxel while causing far less toxicity, establishing the doublet as the standard frontline systemic regimen for advanced or recurrent **uterine carcinosarcoma**.  Evidence-based practice integrates surgical staging, pelvic/para-aortic lymphadenectomy, omentectomy, 30-40% extrauterine spread. Key numerical parameters include 30, 40.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carboplatin + Paclitaxel (GOG-261)",
+          "points": [
+            "Carboplatin AUC 5-6 plus Paclitaxel 175 mg/m2",
+            "Median overall survival 37 months in primary disease",
+            "Significantly lower neurotoxicity and hematologic toxicity"
+          ]
+        },
+        "right": {
+          "title": "Ifosfamide + Paclitaxel (Historical)",
+          "points": [
+            "Ifosfamide requires mesna uroprotection",
+            "High rates of severe encephalopathy and myelosuppression",
+            "Inferior tolerability profile with identical oncologic efficacy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Approximately twenty-five to thirty percent of uterine carcinosarcomas overexpress human epidermal growth factor receptor two, predominantly localized within the high-grade epithelial component. HER2 immunohistochemistry and fluorescence in situ hybridization identify candidates for trastuzumab therapy.",
+      "tx": "**HER2 overexpression** (3+ by immunohistochemistry or amplified by FISH) is detected in 25% to 30% of uterine carcinosarcomas, predominantly within the serous carcinomatous component, providing an actionable target for directed therapy with the monoclonal antibody **trastuzumab**.  Evidence-based practice integrates GOG-261, carboplatin paclitaxel, ifosfamide comparison, first-line standard. Key numerical parameters include 261.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "biop",
+            "label": "Carcinosarcoma specimen sent for biomarker evaluation"
+          },
+          {
+            "id": "ihc",
+            "label": "Perform HER2 immunohistochemical analysis (ASCO/CAP)"
+          },
+          {
+            "id": "fish",
+            "label": "Reflex equivocal (2+) cases to HER2 FISH gene testing"
+          },
+          {
+            "id": "trast",
+            "label": "Add trastuzumab to carboplatin-paclitaxel chemotherapy"
+          }
+        ],
+        "edges": [
+          [
+            "biop",
+            "ihc"
+          ],
+          [
+            "ihc",
+            "fish"
+          ],
+          [
+            "fish",
+            "trast"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Uterine adenosarcoma represents an uncommon mixed epithelial-mesenchymal neoplasm characterized by benign epithelial glands embedded in a malignant sarcomatous stroma. When the sarcomatous element overgrows more than twenty-five percent of the tumor, it is termed sarcomatous overgrowth.",
+      "tx": "**Uterine adenosarcoma** consists of benign glandular epithelium intimately intermingled with a low-grade malignant sarcomatous stroma displaying periglandular cuffing. Development of **sarcomatous overgrowth** (sarcoma exceeding 25% of tumor volume) shifts behavior to a highly aggressive malignant course with early hematogenous spread.  Evidence-based practice integrates epithelial-driven metastasis, carcinomatous spread, lymphatic dissemination >80%.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic Adenosarcoma",
+          "points": [
+            "Benign glands with malignant periglandular stromal cuffs",
+            "Sarcomatous component constitutes <25% of tumor volume",
+            "Indolent clinical course; 5-year survival >80%"
+          ]
+        },
+        "right": {
+          "title": "Sarcomatous Overgrowth (>25%)",
+          "points": [
+            "Pure high-grade sarcoma overgrows >25% of specimen",
+            "Frequent loss of periglandular architecture and CD10",
+            "Aggressive course; high rates of deep invasion and distant relapse"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Endometrial stromal sarcomas are classified into low-grade and high-grade malignancies based on morphological characteristics and underlying molecular fusion genes. Low-grade tumors harbor JAZF1-SUZ12 fusions, whereas high-grade tumors harbor YWHAE-NUTM2 gene rearrangements.",
+      "tx": "**Endometrial stromal sarcomas** diverge pathologically into **low-grade ESS**, driven by the **JAZF1-SUZ12 fusion** and exhibiting hormone sensitivity, and **high-grade ESS**, driven by **YWHAE-NUTM2** gene translocations, displaying aggressive behavior and requiring systemic combination chemotherapy.  Evidence-based practice integrates adenosarcoma, periglandular cuffing, sarcomatous overgrowth >25%. Key numerical parameters include 25.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumor Classification",
+          "Recurrent Cytogenetic Fusion",
+          "Hormone Receptor Status",
+          "Standard Adjuvant Therapy"
+        ],
+        "rows": [
+          [
+            "Low-grade ESS",
+            "t(7;17)(p15;q21) JAZF1-SUZ12",
+            "Strongly ER positive and PR positive",
+            "Endocrine therapy (megestrol, letrozole); omit chemo"
+          ],
+          [
+            "High-grade ESS",
+            "t(10;17)(q22;p13) YWHAE-NUTM2",
+            "Typically ER and PR negative",
+            "Anthracycline/platinum combination chemotherapy"
+          ],
+          [
+            "Undifferentiated uterine sarcoma",
+            "Complex aneuploid karyotype",
+            "Negative for steroid hormone receptors",
+            "Chemotherapy / clinical trials; poor prognosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "PEComas of the uterus are mesenchymal tumors composed of histologically distinctive perivascular epithelioid cells that exhibit dual melanocytic and smooth muscle differentiation. Harboring inactivating mutations in TSC1 or TSC2 genes, malignant uterine PEComas respond to mTOR inhibitors.",
+      "tx": "Uterine **perivascular epithelioid cell tumors** (PEComas) co-express melanocytic markers (HMB-45, Melan-A) and smooth muscle markers (SMA). Driven by **TSC1 or TSC2** inactivating mutations with hyperactivation of the mTOR cascade, malignant variants exhibit therapeutic sensitivity to **mTOR inhibitors** like nab-sirolimus.  Evidence-based practice integrates TSC1/TSC2 mutation, mTOR hyperactivation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cell",
+            "label": "Identify perivascular epithelioid tumor cells"
+          },
+          {
+            "id": "ihc",
+            "label": "Document co-expression of HMB-45 and smooth muscle actin"
+          },
+          {
+            "id": "gene",
+            "label": "Identify underlying loss of TSC1 or TSC2 tumor suppressor"
+          },
+          {
+            "id": "mtor",
+            "label": "Initiate targeted mTOR inhibitor therapy (nab-sirolimus)"
+          }
+        ],
+        "edges": [
+          [
+            "cell",
+            "ihc"
+          ],
+          [
+            "ihc",
+            "gene"
+          ],
+          [
+            "gene",
+            "mtor"
+          ]
+        ]
+      }
+    }
+  ]
+}
