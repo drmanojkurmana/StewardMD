@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "id": "pcd-svt-management",
+  "title": "Supraventricular Tachycardia in Infants and Children",
+  "module": "Pediatric Arrhythmias and Electrophysiology",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Supraventricular tachycardia in pediatric patients exhibits exceptionally rapid, regular heart rates that reflect re-entrant electrophysiological circuits.",
+      "tx": "Tachyarrhythmia evaluation identifies the **most common pediatric arrhythmia**. Supraventricular tachycardia (SVT) is the most common sustained symptomatic pathological arrhythmia in infants and children, with heart rates typically **220-300 bpm** in infants and 180-240 bpm in older children. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/mcc-ac-paediatric-gen1.webp",
+        "ar": 1.3393,
+        "caption": "Pediatric supraventricular tachycardia demonstrating narrow QRS tachycardia with absent visible P waves. Illustration: StewardMD original.",
+        "alt": "Twelve-lead ECG tracing showing rapid regular narrow-complex tachycardia."
+      }
+    },
+    {
+      "say": "The majority of pediatric supraventricular tachycardias arise from accessory pathways that provide an abnormal retrograde limb for atrioventricular re-entry.",
+      "tx": "Electrophysiological mechanisms demonstrate **AVRT predominance**. Atrioventricular reentrant tachycardia (AVRT) mediated by an accessory pathway (manifest Wolff-Parkinson-White or concealed) accounts for **70-80%** of SVT in infants, while AVNRT becomes more prevalent in older children. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "AVRT via Accessory Pathway (70-80%)",
+          "points": [
+            "Dominates in infants and young children under one year of age",
+            "Circuit utilizes AV node antegradely and accessory pathway retrogradely",
+            "Manifests with delta wave on baseline sinus rhythm if overt WPW"
+          ]
+        },
+        "right": {
+          "title": "AVNRT via Dual Nodal Pathways",
+          "points": [
+            "Circuit localized entirely within dual functional AV nodal pathways",
+            "Involves antegrade conduction down slow pathway and retrograde up fast pathway",
+            "Progressively increases in frequency during older childhood and teenage years"
+          ]
+        }
+      }
+    },
+    {
+      "say": "In hemodynamically stable infants, triggering the mammalian diving reflex with ice to the face constitutes the most effective vagal termination technique.",
+      "tx": "Bedside management initiates **vagal maneuvers in infants**. Application of an ice bag to the upper face for **10-15 seconds** triggers the diving reflex and is the most effective vagal maneuver in infants; ocular compression is contraindicated due to risk of retinal detachment.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ice Bag to Face (Diving Reflex)",
+          "points": [
+            "Crushed ice and water slurry placed over forehead, nose, and midface",
+            "Applied firmly for 10-15 seconds; strict avoidance of eyeball compression",
+            "Stimulates trigeminal-vagal arc to produce intense parasympathetic AV block"
+          ]
+        },
+        "right": {
+          "title": "Older Child Vagal Maneuvers",
+          "points": [
+            "Modified Valsalva maneuver blowing into 10 mL syringe with leg elevation",
+            "Carotid sinus massage performed unilaterally in older children",
+            "Cold water immersion of face or deep breath holding"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Adenosine produces transient, ultra-short AV nodal conduction block, terminating re-entrant circuits involving the atrioventricular node.",
+      "tx": "Frontline pharmacotherapy establishes **intravenous adenosine dose**. Adenosine **0.1 mg/kg** rapid IV push via a proximal vein followed by a saline flush is the first-line drug for stable narrow-complex SVT; the dose can be doubled to **0.2 mg/kg** (maximum 12 mg) if unsuccessful.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Secure proximal large-bore intravenous access in antecubital fossa"
+          },
+          {
+            "id": "b",
+            "label": "Administer rapid intravenous bolus of adenosine (initial dose 0.1 mg/kg)"
+          },
+          {
+            "id": "c",
+            "label": "Follow immediately with forceful 5 to 10 mL normal saline flush"
+          },
+          {
+            "id": "d",
+            "label": "Induces transient complete AV block to terminate nodal re-entry"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When supraventricular tachycardia induces shock, altered consciousness, or severe hypotension, emergent electrical cardioversion takes precedence.",
+      "tx": "Hemodynamically unstable presentations mandate **synchronized cardioversion**. Synchronized electrical cardioversion at **0.5-1 J/kg** (increasing to **2 J/kg** if needed) is indicated immediately for hemodynamically unstable SVT with hypotension, heart failure, or altered mental status. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Step",
+          "Energy Level",
+          "Clinical Directive"
+        ],
+        "rows": [
+          [
+            "Initial Synchronised Shock",
+            "0.5 to 1.0 J/kg",
+            "Synchronise defibrillator with R wave; administer sedation if conscious"
+          ],
+          [
+            "Subsequent Shock (if refractory)",
+            "2.0 J/kg",
+            "Re-verify synchronisation mode and paddle skin contact"
+          ],
+          [
+            "Post-Cardioversion",
+            "12-lead ECG",
+            "Inspect baseline tracing for pre-excitation delta waves (WPW)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In infants under one year of age, intravenous verapamil is strictly avoided due to the danger of irreversible electromechanical dissociation.",
+      "tx": "Strict precautions enforce **contraindication to verapamil**. Intravenous verapamil is strictly contraindicated in infants under **1 year** of age due to risk of profound hypotension, electromechanical dissociation, and cardiovascular collapse secondary to immature myocardial sarcoplasmic reticulum. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immature Myocardial Physiology",
+          "points": [
+            "Sarcoplasmic reticulum is underdeveloped and calcium storage is limited",
+            "Myocardial excitation-contraction coupling relies directly on sarcolemmal influx",
+            "Extreme susceptibility to pharmacological L-type calcium channel blockade"
+          ]
+        },
+        "right": {
+          "title": "Verapamil Danger in Infancy",
+          "points": [
+            "Causes abrupt and profound negative inotropic myocardial collapse",
+            "Induces refractory arterial hypotension and electromechanical dissociation",
+            "Strictly contraindicated in children under 12 months of age"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Following acute termination, infants require maintenance pharmacotherapy to suppress recurrent accessory pathway conduction and maintain sinus rhythm.",
+      "tx": "Long-term recurrence prevention utilizes **maintenance antiarrhythmic therapy**. Propranolol (**2-4 mg/kg/day**) or flecainide (**50-100 mg/m2/day**) is used for chronic maintenance therapy to prevent recurrences in infants during the first year of life. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug",
+          "Class",
+          "Dosing & Indication"
+        ],
+        "rows": [
+          [
+            "Propranolol",
+            "Beta-blocker (Class II)",
+            "2-4 mg/kg/day; safe first-line prophylaxis in infancy"
+          ],
+          [
+            "Flecainide",
+            "Class IC sodium channel blocker",
+            "50-100 mg/m2/day; potent accessory pathway suppression in structurally normal hearts"
+          ],
+          [
+            "Sotalol",
+            "Class III / Non-selective beta-blocker",
+            "2-4 mg/kg/day; monitors QTc interval for proarrhythmia"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Catheter ablation provides definitive curative therapy for accessory pathways and re-entrant nodal circuits in growing children.",
+      "tx": "Definitive electrophysiology defines **catheter ablation timing**. Radiofrequency or cryoablation of accessory pathways is definitive therapy, generally reserved for children weighing **> 15 kg** or older than **4-5 years**, unless medically refractory with life-threatening tachyarrhythmias. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-svt-preexcitation-gen1.webp",
+        "ar": 1.3393,
+        "caption": "Twelve-lead ECG showing short PR interval and delta wave characteristic of Wolff-Parkinson-White pre-excitation. Illustration: StewardMD original.",
+        "alt": "ECG tracing with classic delta wave and pre-excitation."
+      }
+    }
+  ]
+}
