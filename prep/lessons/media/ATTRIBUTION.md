@@ -5847,3 +5847,53 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | sur-renal-trauma-management-gen2.webp (R2) | Clamp first with sac still closed, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | sur-ureteropelvic-junction-obstruction-gen1.webp (R2) | Washout curves grading true blockage, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | sur-urethral-stricture-anterior-reconstruction-gen1.webp (R2) | Short bulbar pinch suited to rejoining, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-brachytherapy-gen1.webp (R2) | Tandem and ovoid applicators treating a cervical tumour, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-brachytherapy-gen2.webp (R2) | Permanent seeds grouped in the prostate bed, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-gi-gen1.webp (R2) | Dilated oesophagus with smooth distal tapering, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-gi-gen2.webp (R2) | Free abdominal air with outlined bowel walls, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sgm-genomic-testing-gen1.webp (R2) | Counselling review of an uncertain genomic result, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sgm-genomic-testing-gen2.webp (R2) | Liver targeted silencing with messenger cleavage, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sgm-special-populations-gen1.webp (R2) | Nodular liver with surrounding ascitic fluid, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sgm-special-populations-gen2.webp (R2) | Antenatal review of medicine safety, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sne-nerve-conduction-emg-gen1.webp (R2) | Normal and demyelinating motor responses compared, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| srd-physics-gen1.webp (R2) | Raised urticarial wheals after contrast exposure, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-lymphatic-gen1.webp (R2) | Normal and obstructed lymphatic drainage compared, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-lymphatic-gen2.webp (R2) | Microsurgical joining of lymphatic and vein, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-parathyroid-adrenal-gen1.webp (R2) | Retained tracer focus marking parathyroid adenoma, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-parathyroid-adrenal-gen2.webp (R2) | Heterogeneous right adrenal mass on CT, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-peritoneum-gen1.webp (R2) | Perforation signs with gas and fluid on CT, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-peritoneum-gen2.webp (R2) | Vacuum dressing of the open abdomen, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-plastic-gen1.webp (R2) | Shallow and deep skin graft levels compared, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-plastic-gen2.webp (R2) | Tense infected fingertip pulp swelling, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-thoracic-gen1.webp (R2) | Right pneumothorax with visible pleural edge, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-thoracic-gen2.webp (R2) | Loculated collection with split pleural layers, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-urethra-penis-gen1.webp (R2) | Bulbar narrowing with proximal dilation shown, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-urethra-penis-gen2.webp (R2) | Invasive nests with keratin whorls seen, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-uro-congenital-gen1.webp (R2) | Severe hydronephrosis with thinned cortex, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-uro-congenital-gen2.webp (R2) | Massively enlarged cystic kidneys with liver cysts, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ahm-calcium-gen1.webp (R2) | ECG shows prolonged QT with perioral tingling and Chvostek sign. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| der-hair-nail-gen1.webp (R2) | Clubbed nail from shunting beside spoon nail from iron deficiency. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ent-hearing-tests-gen1.webp (R2) | Infant BERA electrodes with waves one through six plotted. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| fmt-late-changes-gen1.webp (R2) | Adipocere in wet mud beside mummification in dry heat. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-ac-ortho-gen1.webp (R2) | Dislocated hip on pelvic film with threatened head blood supply. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-development-gen1.webp (R2) | Child with dry skin and macroglossia with raised TSH. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| mendo-gonadal-gen1.webp (R2) | Karyotype showing 47,XXY with a circled extra X. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| minf-antimicrobial-gen1.webp (R2) | Bedside cultures before antibiotics with later stewardship review. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-aub-gen1.webp (R2) | Uterus with polyp, adenomyosis and leiomyoma mapped to PALM. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-diabetes-pregnancy-gen1.webp (R2) | Macrosomic fetus with polyhydramnios from maternal hyperglycaemia. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-heart-disease-pregnancy-gen1.webp (R2) | Echo of mechanical mitral valve with acoustic shadowing. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-maternal-health-gen1.webp (R2) | Atonic uterus with retained placenta causing heavy bleeding. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-multiple-pregnancy-gen1.webp (R2) | Dichorionic lambda sign beside monochorionic T sign. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| obg-puberty-menopause-gen1.webp (R2) | Narrowed thermostat driving flushes, sweats and broken sleep. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| oph-pharmacology-gen1.webp (R2) | Amiodarone corneal verticillata seen on slit lamp. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| oph-refraction-gen1.webp (R2) | Myopic fundus with atrophy, lacquer cracks and bleeding. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-neuromuscular-gen1.webp (R2) | Gowers climb with calf pseudohypertrophy in Duchenne dystrophy. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-adaptations-accumulations-gen1.webp (R2) | Cardiac lipofuscin granules with atrophic vacuolated fibres. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-cell-injury-necrosis-gen1.webp (R2) | Reversible hydropic swelling with vacuolated kidney tubules. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-infectious-pathology-gen1.webp (R2) | CMV owl eye inclusion beside HSV ground glass nuclei. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-mediators-gen1.webp (R2) | Arachidonic acid split into prostaglandin and leukotriene paths. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-mixed-gen1.webp (R2) | Factor eight defect with mixing study correction shown. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-oedema-haemorrhage-gen1.webp (R2) | Heart failure cells in oedema confirmed by iron stain. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-pulmonary-infections-gen1.webp (R2) | Red hepatisation with fibrin and neutrophils in pneumonia. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-tumour-diagnosis-gen1.webp (R2) | Hilar tumour driving ACTH cortisol and ADH sodium effects. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-tissue-repair-gen2.webp (R2) | Growing capillary sprout with nearby collagen formation, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
