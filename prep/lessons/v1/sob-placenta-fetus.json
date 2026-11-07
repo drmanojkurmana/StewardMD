@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sob-placenta-fetus",
+ "title": "Placenta, Fetal Development and Fetal Circulation",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Williams Obstetrics 25e Ch 5 (Implantation and Placental Development), Ch 7 (Embryogenesis and Fetal Development)",
+  "Ten Teachers Gynaecology 21e",
+  "FIGO Guidelines on Fetal Monitoring"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Following initial blastocyst apposition, the **trophoblast** differentiates by day 6 to 7 post-fertilization into inner mitotic cytotrophoblast and outer multinucleated invasive **syncytiotrophoblast**. Extravillous endovascular trophoblasts invade maternal decidual **spiral arterioles**, replacing muscular and elastic lamina to convert them into wide, low-resistance uteroplacental channels.",
+   "say": "Blastocyst implantation begins as the trophoblast splits into inner cytotrophoblast and outer multinucleated syncytiotrophoblast by day six to seven. Extravillous endovascular trophoblasts migrate deep into the decidua and inner myometrium, invading maternal spiral arterioles and replacing muscular elastic media with fibrinoid material to guarantee low resistance placental perfusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-placenta-fetus-s3.webp",
+    "ar": 1.3333,
+    "caption": "Fetal circulation showing umbilical vessels, ductus venosus, foramen ovale, and ductus arteriosus. Credit: StewardMD.",
+    "alt": "Fetal circulation diagram illustrating oxygenated blood in the umbilical vein and the three fetal shunts: ductus venosus, foramen ovale, and ductus arteriosus."
+   }
+  },
+  {
+   "tx": "In the specialized **fetal circulation**, well-oxygenated blood returns from the placenta via the single **umbilical vein**. Half of this stream bypasses hepatic sinusoids through the **ductus venosus** directly into the inferior vena cava, where the crista dividens preferentially channels high-velocity stream across the **foramen ovale** into the left atrium.",
+   "say": "Placental gas exchange delivers oxygenated blood along the umbilical vein toward the fetal abdomen. Roughly half of this venous return traverses the ductus venosus directly into the inferior vena cava, avoiding hepatic capillary resistance. At the right atrium, the eustachian valve directs this streaming blood across the foramen ovale into the systemic circulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fetal Shunt",
+     "Vascular Connection",
+     "Physiological Function"
+    ],
+    "rows": [
+     [
+      "Ductus venosus",
+      "Umbilical vein to inferior vena cava",
+      "Bypasses hepatic microcirculation for direct central venous delivery"
+     ],
+     [
+      "Foramen ovale",
+      "Right atrium to left atrium",
+      "Directs high-oxygen inferior vena caval blood into left heart"
+     ],
+     [
+      "Ductus arteriosus",
+      "Pulmonary trunk to descending aorta",
+      "Diverts high-resistance right ventricular output away from fluid lungs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The muscular **ductus arteriosus** shunts deoxygenated blood exiting the right ventricle via the **pulmonary artery** directly into the descending aorta. This right-to-left bypass maintains high **pulmonary vascular resistance** in utero, sparing collapsed fetal lungs while returning low-saturation blood via internal iliac and umbilical arteries to the placenta.",
+   "say": "Right ventricular ejection encounters elevated pulmonary arterial resistance because fetal alveolar units remain unexpanded. The muscular ductus arteriosus shunts over ninety percent of pulmonary trunk flow into the proximal descending aorta, distal to the left subclavian take-off. Consequently, cerebral and coronary vascular beds receive privileged higher oxygen tensions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pulmonary trunk receives right ventricular output"
+     },
+     {
+      "id": "b",
+      "label": "Elevated pulmonary vascular resistance impedes lung flow"
+     },
+     {
+      "id": "c",
+      "label": "Ductus arteriosus diverts stream to descending aorta"
+     },
+     {
+      "id": "d",
+      "label": "Deoxygenated blood returns to placenta via umbilical arteries"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maternal serum **human chorionic gonadotropin** (hCG) peaks between 8 and 10 weeks of gestation at approximately 100,000 mIU/mL. Synthesized by the villous **syncytiotrophoblast**, this heterodimeric glycoprotein signals through LH/CG receptors to maintain luteal viability and sustain **corpus luteum** progesterone production until the luteoplacental shift. Clinically, key parameters encompass 100000.",
+   "say": "Syncytiotrophoblast synthesizes human chorionic gonadotropin rapidly following implantation. Circulating levels double every forty-eight hours, reaching a zenith of roughly one hundred thousand milli-units per millilitre between eight and ten weeks. Its primary hormonal duty is rescue of the corpus luteum, guaranteeing unbroken progesterone output until the placenta takes over synthesis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early First Trimester (hCG Dominant)",
+     "points": [
+      "Exponential rise doubling every 48 hours",
+      "Peak concentration at 8 to 10 weeks gestation",
+      "Essential for corpus luteum progesterone support"
+     ]
+    },
+    "right": {
+     "title": "Post-Peak Plateau (Placental Shift)",
+     "points": [
+      "Declines to steady plateau at 18 to 20 weeks",
+      "Luteoplacental shift complete by 7 to 9 weeks",
+      "Trophoblast synthesizes progesterone autonomously"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Placental steroidogenesis operates as a coordinated **fetoplacental unit** because the placenta lacks **17-alpha-hydroxylase** and 17,20-desmolase enzymes. The fetal adrenal cortex supplies large quantities of **DHEA-S**, which is 16-alpha-hydroxylated in fetal liver tissue and subsequently cleaved by placental sulfatase and aromatase into unconjugated **estriol**.",
+   "say": "Placental tissue cannot independently synthesize estrogens from cholesterol because it lacks seventeen-alpha-hydroxylase and seventeen-twenty desmolase. Instead, fetal adrenal zones produce abundant dehydroepiandrosterone sulfate. Following sixteen-alpha-hydroxylation in fetal liver, placental sulfatase and aromatase convert this intermediate into estriol, making maternal estriol an indicator of fetal-placental integrity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzymatic Step",
+     "Anatomical Site",
+     "Steroid Pathway Function"
+    ],
+    "rows": [
+     [
+      "DHEA-S synthesis",
+      "Fetal adrenal fetal zone",
+      "Provides essential 19-carbon precursor molecules"
+     ],
+     [
+      "16-alpha-hydroxylation",
+      "Fetal hepatocytes",
+      "Creates intermediate metabolite for estriol synthesis"
+     ],
+     [
+      "Placental sulfatase",
+      "Syncytiotrophoblast microsomes",
+      "Cleaves sulfate moiety prior to terminal aromatization"
+     ],
+     [
+      "Aromatase conversion",
+      "Syncytiotrophoblast",
+      "Aromatizes ring A generating unconjugated estriol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Human placental lactogen** (hPL), also designated human somatomammotropin, acts as a potent maternal **anti-insulin** counter-regulatory hormone. By stimulating maternal lipolysis and elevating maternal free fatty acids, hPL diminishes peripheral insulin sensitivity, sparing circulating maternal glucose and amino acids for facilitated **transplacental transport**.",
+   "say": "Human placental lactogen rises in direct proportion to functional placental mass across gestation. As a maternal metabolic modifier, somatomammotropin suppresses maternal peripheral glucose uptake and promotes adipose lipolysis. The resulting maternal insulin resistance guarantees a continuous maternal-to-fetal concentration gradient for glucose and ketone delivery across the syncytiotrophoblast.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Syncytiotrophoblast secretes hPL into maternal blood"
+     },
+     {
+      "id": "b",
+      "label": "Maternal adipocyte lipolysis generates free fatty acids"
+     },
+     {
+      "id": "c",
+      "label": "Peripheral insulin receptor sensitivity downregulates"
+     },
+     {
+      "id": "d",
+      "label": "Maternal hyperglycemia facilitates glucose transfer"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fetal hemoglobin** (HbF) comprises two alpha and two gamma globin subunits (alpha-2 gamma-2). Because gamma chains exhibit poor 2,3-bisphosphoglycerate binding, HbF maintains higher **oxygen affinity** than maternal HbA. This left-shifted **dissociation curve** drives efficient transplacental oxygen uptake even at low umbilical venous PO2.",
+   "say": "Fetal red blood cells contain fetal hemoglobin composed of two alpha and two gamma chains. Gamma chains lack the positively charged binding site for two-three-bisphosphoglycerate, producing marked resistance to allosteric inhibition. The resulting leftward shift of the oxygen dissociation curve permits fetal blood to extract oxygen efficiently across the intervillous space.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fetal Hemoglobin (HbF)",
+     "points": [
+      "Subunit globin structure: alpha-2 gamma-2",
+      "Low 2,3-BPG binding affinity with high oxygen avidity",
+      "P50 roughly 19 mmHg; left-shifted dissociation curve"
+     ]
+    },
+    "right": {
+     "title": "Adult Maternal Hemoglobin (HbA)",
+     "points": [
+      "Subunit globin structure: alpha-2 beta-2",
+      "Strong 2,3-BPG binding facilitates tissue unloading",
+      "P50 roughly 26 mmHg; unloads oxygen in intervillous space"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **single umbilical artery** occurs in 0.5 to 1 percent of singleton gestations and up to 5 percent of twin pregnancies. Secondary to primary agenesis or secondary thrombotic atrophy of one artery, it is frequently associated with **chromosomal aneuploidy** (trisomy 18) and occult **renal-cardiac malformations**, warranting comprehensive fetal echocardiography. Clinically, key parameters encompass congenital anomalies.",
+   "say": "Evaluation of the three-vessel cord cross-section is essential during routine anatomy scanning. A single umbilical artery occurs in nearly one percent of singletons due to either primary aplasia or early vascular atrophy. Detecting an isolated two-vessel cord mandates targeted anatomical search for associated cardiac and renal anomalies, as well as third-trimester fetal growth tracking.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-placenta-fetus-fig1.webp",
+    "ar": 1.8349,
+    "caption": "Post-natal circulatory changes and single umbilical artery. Credit: StewardMD.",
+    "alt": "Diagram showing the closure of fetal shunts (foramen ovale, ductus arteriosus) and umbilical vessels after birth, with an inset of a single umbilical artery."
+   }
+  }
+ ]
+}
