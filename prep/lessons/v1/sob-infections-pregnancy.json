@@ -1,0 +1,244 @@
+{
+  "v": 1,
+  "module": "sob-infections-pregnancy",
+  "title": "Perinatal Infections: TORCH Infections, GBS, Hepatitis B, HIV, Syphilis, and Malaria",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 64 (Infectious Diseases), Ch 65 (Sexually Transmitted Infections)",
+    "CDC STI Treatment Guidelines 2021",
+    "WHO Guidelines on Malaria in Pregnancy"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Congenital toxoplasmosis results from primary maternal infection with Toxoplasma gondii, acquired through undercooked meat or contact with feline feces. The classic clinical triad in the neonate consists of chorioretinitis, hydrocephalus, and diffuse intracranial calcifications. Maternal spiramycin prevents transmission, while confirmed fetal infection requires pyrimethamine, sulfadiazine, and folinic acid.",
+      "tx": "Congenital toxoplasmosis arises from primary maternal acquisition of **Toxoplasma gondii** through unwashed produce, raw meat, or cat feces. The classical diagnostic triad comprises **chorioretinitis, hydrocephalus, and diffuse intracranial calcifications**. Oral **spiramycin** reduces transplacental transmission, whereas confirmed fetal infection requires pyrimethamine, sulfadiazine, and folinic acid rescue.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-misc-storch.webp",
+        "ar": 1.3333,
+        "caption": "TORCH infection spectrum and Sabin triad manifestations. Credit: StewardMD.",
+        "alt": "Diagnostic features of congenital TORCH infections including toxoplasmosis and CMV."
+      }
+    },
+    {
+      "say": "Congenital rubella syndrome results from primary maternal rubella infection during the first ten weeks of gestation, where the risk of fetal infection approaches ninety percent. The hallmark Gregg triad consists of sensorineural deafness, cataracts, and congenital heart defects like patent ductus arteriosus. Because the vaccine is live attenuated, vaccination is contraindicated during pregnancy.",
+      "tx": "**Congenital Rubella** syndrome results from primary maternal viremia in the first 10 weeks of gestation (up to 90% risk). It manifests the classic **Gregg triad** of **sensorineural deafness**, ocular cataracts, and cardiac malformations like **patent ductus arteriosus**. Because the rubella vaccine is live-attenuated, immunization is strictly contraindicated during pregnancy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rubella-german-measles-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Congenital rubella syndrome triad and teratogenic timeline. Credit: StewardMD.",
+        "alt": "Clinical and teratogenic manifestations of congenital rubella infection."
+      }
+    },
+    {
+      "say": "Cytomegalovirus is the most frequent congenital viral infection and leading non-genetic cause of sensorineural hearing loss. Characteristic sonographic findings include periventricular intracranial calcifications, microcephaly, ventriculomegaly, and echogenic bowel. Confirmatory diagnosis of fetal infection requires detecting viral DNA via polymerase chain reaction in amniotic fluid.",
+      "tx": "**Cytomegalovirus** is the commonest congenital viral pathogen worldwide. Antenatal sonography characteristically identifies **periventricular calcifications**, microcephaly, ventriculomegaly, and echogenic bowel. Gold-standard confirmatory testing requires **amniotic fluid CMV PCR** performed after 21 weeks gestation and at least 6 weeks following maternal seroconversion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cytomegalovirus Calcifications",
+          "points": [
+            "Periventricular lining distribution",
+            "High risk of sensorineural hearing loss",
+            "Severe microcephaly and ventriculomegaly",
+            "Amniotic fluid PCR is gold standard"
+          ]
+        },
+        "right": {
+          "title": "Toxoplasmosis Calcifications",
+          "points": [
+            "Diffuse, scattered parenchymal calcifications",
+            "Classic chorioretinitis and hydrocephalus",
+            "Ring-enhancing lesions on imaging",
+            "Treated with pyrimethamine and sulfadiazine"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Neonatal transmission of herpes simplex virus occurs primarily during vaginal delivery from shedding in the maternal genital tract, with transmission approaching thirty to fifty percent during primary outbreaks. Elective caesarean delivery is indicated when active genital herpetic lesions or prodromal symptoms are present at the onset of labour.",
+      "tx": "Vertical transmission of **herpes simplex virus** occurs during passage through the birth canal, with transmission approaching 30 to 50 percent during **primary genital herpes** versus under 3 percent in recurrent episodes. **Caesarean delivery** is indicated when active herpetic vesicles, ulcers, or prodromal symptoms are present at the onset of labour.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "History of recurrent HSV: Start suppressive oral acyclovir at 36 weeks"
+          },
+          {
+            "id": "b",
+            "label": "Assess perineum and vulva carefully at onset of active labour"
+          },
+          {
+            "id": "c",
+            "label": "If active herpetic lesions or prodromal burning: Proceed to Caesarean"
+          },
+          {
+            "id": "d",
+            "label": "If no active lesions or symptoms: Safe for planned vaginal delivery"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Screening for Group B Streptococcus carriage is performed between thirty six and thirty seven weeks of gestation using a combined lower vaginal and rectal swab. Intrapartum antibiotic prophylaxis with intravenous crystalline penicillin or ampicillin is administered during active labour to eliminate colonization and prevent early-onset neonatal sepsis.",
+      "tx": "Antenatal screening for **Group B Streptococcus** utilizes combined lower vaginal and rectal swabs obtained between 36 and 37 weeks gestation. Colonized women receive **intrapartum intravenous penicillin G** (5 million units loading, then 2.5 to 3.0 million units every 4 hours until delivery) or ampicillin to eradicate maternal colonization and eliminate early-onset **neonatal sepsis**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "GBS Prophylaxis Category",
+          "Clinical Presentation",
+          "Intrapartum Antibiotic Management"
+        ],
+        "rows": [
+          [
+            "Positive 36-37w swab",
+            "HBeAg positive carrier status elevates vertical transmission to 90%",
+            "Intravenous penicillin G or ampicillin in active labour"
+          ],
+          [
+            "Prior affected infant",
+            "Previous infant with early-onset GBS disease",
+            "Universal intrapartum prophylaxis; swab not required"
+          ],
+          [
+            "Documented bacteriuria",
+            "GBS bacteriuria during current pregnancy",
+            "Treat acutely and give intrapartum prophylaxis"
+          ],
+          [
+            "Penicillin allergy (low-risk)",
+            "Non-severe rash without anaphylaxis",
+            "Intravenous cefazolin (2 g loading, then 1 g q8h)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Universal antenatal screening for Hepatitis B surface antigen identifies mothers at risk of transmitting infection. Infants born to positive mothers receive Hepatitis B vaccine and Hepatitis B immune globulin within twelve hours of birth, reducing vertical transmission by ninety percent. In women with high viral loads exceeding two hundred thousand international units per millilitre, oral tenofovir is initiated at twenty eight weeks.",
+      "tx": "Screening for **Hepatitis B surface antigen** identifies carriers. Neonates born to positive mothers receive both the **hepatitis B vaccine** and **hepatitis B immune globulin** within 12 hours of delivery. In women with high maternal viral loads exceeding 200,000 IU/mL, maternal oral **tenofovir** starting at 28 weeks suppresses viral replication.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Antenatal screening identifies maternal HBsAg; initiate hepatitis B prophylaxis planning"
+          },
+          {
+            "id": "b",
+            "label": "Quantify maternal HBV DNA between 28 and 32 weeks gestation"
+          },
+          {
+            "id": "c",
+            "label": "If HBV DNA >200000 IU/mL: Initiate oral tenofovir from 28 to 32 weeks"
+          },
+          {
+            "id": "d",
+            "label": "Administer HBIG and HBV vaccine within 12 hours of birth to infant"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ],
+        "caption": "Hepatitis B prophylaxis and tenofovir therapy from 28 to 32 weeks for viral loads >200000 IU/mL. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Parenteral Benzathine penicillin G is the only proven therapy for syphilis that treats the mother and cures the fetus. Mother to child transmission of HIV is reduced below one to two percent with combination antiretroviral therapy, whereas a viral load threshold above one thousand copies per millilitre near term mandates elective caesarean delivery.",
+      "tx": "Maternal syphilis causes fetal loss and congenital disease, treated with intramuscular **benzathine penicillin G**. Furthermore, **HIV transmission** is reduced below **1 to 2** percent with **combination antiretroviral therapy**; an elevated **viral load threshold** exceeding **1000** copies/mL warrants planned caesarean delivery at 38 weeks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syphilis Stage",
+          "Recommended Penicillin Regimen",
+          "Clinical Follow-Up"
+        ],
+        "rows": [
+          [
+            "Primary, secondary, early latent",
+            "Benzathine penicillin G 2.4 million units IM single dose",
+            "Congenital syphilis manifests Hutchinson teeth, snuffles, and saber shins"
+          ],
+          [
+            "Late latent or unknown duration",
+            "Benzathine penicillin G 2.4 million units IM weekly for 3 doses",
+            "Evaluate CSF if neurological or ophthalmologic signs"
+          ],
+          [
+            "Documented penicillin allergy",
+            "Inpatient oral or intravenous penicillin desensitization",
+            "Immediately administer benzathine penicillin post-desensitization"
+          ],
+          [
+            "Jarisch-Herxheimer reaction",
+            "Febrile reaction within 24 hours of first penicillin dose",
+            "Supportive care; monitor for transient fetal heart decelerations"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Plasmodium falciparum malaria in pregnancy sequesters within the placental intervillous spaces by binding chondroitin sulphate A. This sequestration produces severe maternal anaemia, low birth weight, and preterm birth. In endemic areas, intermittent preventive treatment with sulfadoxine-pyrimethamine starting in the second trimester provides effective prophylaxis.",
+      "tx": "Maternal **falciparum malaria** infection involves intense **placental sequestration** of parasitized erythrocytes within the maternal intervillous space, causing severe maternal anaemia and low birth weight. In endemic zones, **intermittent preventive treatment in pregnancy (IPTp)** with **sulfadoxine-pyrimethamine** given at each routine antenatal visit from the second trimester significantly reduces maternal and neonatal morbidity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Placental Sequestration Pathology",
+          "points": [
+            "Parasitized RBCs bind syncytiotrophoblast CSA",
+            "Severe intervillous inflammatory infiltration",
+            "Compromised nutrient and oxygen exchange",
+            "Major cause of fetal growth restriction and death"
+          ]
+        },
+        "right": {
+          "title": "Intermittent Preventive Treatment (IPTp)",
+          "points": [
+            "Sulfadoxine-pyrimethamine fixed-dose combination",
+            "Initiated at start of second trimester (>=13 weeks)",
+            "Administered at least 1 month apart until delivery",
+            "Highly effective in preventing maternal malaria and anemia"
+          ]
+        }
+      }
+    }
+  ]
+}

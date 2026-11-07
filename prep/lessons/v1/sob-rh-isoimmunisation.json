@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sob-rh-isoimmunisation",
+  "title": "Rhesus Alloimmunisation, Kell Incompatibility, MCA Doppler, Fetal Hydrops, and In Utero Transfusion",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 15 (Fetal Disorders)",
+    "Ten Teachers Gynaecology 21e",
+    "ACOG Practice Bulletin on Rh Alloimmunization"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Rhesus D alloimmunisation develops when an RhD negative woman carries an RhD positive fetus and experiences fetomaternal hemorrhage. Maternal exposure to fetal red cell D antigen stimulates primary IgM synthesis followed by class switching to anti D IgG antibodies. These IgG antibodies cross the placenta via syncytiotrophoblast Fc receptors and destroy fetal red cells.",
+      "tx": "Rhesus D alloimmunisation arises when an RhD-negative woman carries an RhD-positive fetus and experiences **fetomaternal hemorrhage**. Maternal immune recognition of the D surface antigen triggers the production of **anti-D IgG antibodies**. These maternal antibodies actively cross the syncytiotrophoblast into the fetal circulation, mediating **erythrocyte destruction** in the fetal reticuloendothelial system.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rh-isoimmunization-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Rhesus D sensitization and transplacental antibody transfer. Credit: StewardMD.",
+        "alt": "Pathophysiological mechanism of Rh D alloimmunisation and transplacental hemolysis."
+      }
+    },
+    {
+      "say": "In a sensitized pregnancy, maternal anti D antibody titers are quantified serially using the indirect antiglobulin test. The critical titer is conventionally defined as one in sixteen or one in thirty two. Once antibody concentration reaches this critical threshold, titers are no longer prognostic, and serial middle cerebral artery peak systolic velocity Doppler ultrasound must be initiated.",
+      "tx": "In alloimmunised women, the **critical anti-D antibody titer** is conventionally established at 1:16 or 1:32 by indirect antiglobulin testing. Once maternal antibodies surpass this critical threshold, titer magnitude no longer correlates with disease severity, mandating immediate transition to serial **middle cerebral artery Doppler** surveillance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Serial maternal indirect Coombs antibody titers"
+          },
+          {
+            "id": "b",
+            "label": "Critical titer threshold reached at 1:16 to 1:32"
+          },
+          {
+            "id": "c",
+            "label": "Discontinue maternal antibody titer measurements"
+          },
+          {
+            "id": "d",
+            "label": "Initiate serial fetal middle cerebral artery Doppler monitoring"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Non-invasive assessment of fetal anaemia relies on colour Doppler interrogation of the middle cerebral artery. As fetal hemoglobin drops, blood viscosity decreases and cardiac output rises, accelerating cerebral blood velocity. A peak systolic velocity exceeding one point five multiples of the median predicts moderate to severe fetal anaemia with over ninety five percent sensitivity.",
+      "tx": "Fetal anaemia increases cardiac output and lowers blood viscosity, accelerating cerebral blood velocity. Doppler measurement of the **middle cerebral artery peak systolic velocity** exceeding **1.5 multiples of the median** (MoM) for gestational age predicts moderate-to-severe fetal anaemia with **sensitivity exceeding 95 percent**, superseding invasive amniocentesis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "MCA-PSV Velocity",
+          "Multiples of Median (MoM)",
+          "Clinical Interpretation and Action"
+        ],
+        "rows": [
+          [
+            "Normal velocity",
+            "Below 1.29 MoM",
+            "Mild or absent fetal anaemia; repeat Doppler in 1 to 2 weeks"
+          ],
+          [
+            "Borderline acceleration",
+            "1.30 to 1.49 MoM",
+            "Mild anaemia developing; schedule repeat Doppler in 7 days"
+          ],
+          [
+            "Critical threshold",
+            "Exceeds 1.50 MoM",
+            "Moderate-to-severe fetal anaemia; prepare for urgent cordocentesis"
+          ],
+          [
+            "Severe hydrops velocity",
+            "Well above 1.55 MoM",
+            "Profound tissue hypoxia; emergent intrauterine blood transfusion"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Unlike Rhesus antibodies which cause extravascular reticuloendothelial hemolysis, anti-Kell antibodies target erythroid progenitor cells in the fetal bone marrow. Maternal anti-Kell alloimmunisation suppresses fetal erythropoiesis while producing relatively mild hyperbilirubinemia. Consequently, severe fetal anaemia can develop rapidly even at very low maternal antibody titers.",
+      "tx": "Maternal **anti-Kell antibodies** induce profound fetal anaemia primarily through direct **bone marrow suppression** of erythroid progenitor cells, rather than solely by peripheral hemolysis. Because erythropoiesis is arrested with little bilirubin liberation, lethal fetal anaemia can develop rapidly even with **low antibody titers** of 1:4.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "RhD Alloimmunisation",
+          "points": [
+            "Targets mature RhD-positive erythrocytes",
+            "Peripheral reticuloendothelial hemolysis",
+            "Elevated bilirubin with amniotic fluid delta OD450",
+            "Critical maternal titer threshold 1:16"
+          ]
+        },
+        "right": {
+          "title": "Kell Incompatibility",
+          "points": [
+            "Targets KEL1 erythroid progenitor cells",
+            "Suppresses bone marrow erythropoiesis via erythroid suppression",
+            "Minimal hyperbilirubinemia with severe anaemia",
+            "Dangerous fetal anaemia at low titers (1:4)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Fetal hydrops represents the end stage of severe uncompensated fetal anaemia and hypoxemic capillary leak. It is defined sonographically by pathological fluid accumulation in two or more fetal compartments, such as ascites, pleural effusion, pericardial effusion, or skin oedema. Alternatively, fluid in one compartment accompanied by polyhydramnios also meets diagnostic criteria.",
+      "tx": "Sonographic criteria define **fetal hydrops** as pathologic serous fluid accumulation within two or more fetal compartments, including **ascites**, pleural effusion, pericardial effusion, or diffuse **skin oedema**. Alternatively, isolated single-cavity effusion accompanied by maternal polyhydramnios or placental thickening satisfies the clinical diagnosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rh-isoimmunization-and-fetal-hydrops-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Fetal hydrops with pathologic fluid accumulation. Credit: StewardMD.",
+        "alt": "Ultrasound features of immune fetal hydrops demonstrating ascites and fluid pooling."
+      }
+    },
+    {
+      "say": "Intrauterine blood transfusion is the definitive therapy for severe fetal anaemia before thirty four weeks gestation. Under real-time ultrasound guidance, a spinal needle enters the umbilical vein at the placental cord insertion. Clinicians infuse type O negative, cytomegalovirus negative, irradiated, leukoreduced packed red blood cells crossmatched against maternal serum.",
+      "tx": "Definitive correction of fetal anaemia utilizes ultrasound-guided **intrauterine blood transfusion** via cordocentesis into the **umbilical vein**. Transfused units must be fresh O-negative, **irradiated**, leukoreduced, cytomegalovirus-negative packed red cells, meticulously cross-matched against maternal serum and concentrated to a hematocrit of 75 to 80 percent.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Ultrasound identifies severe fetal anaemia requiring intrauterine transfusion"
+          },
+          {
+            "id": "b",
+            "label": "Cordocentesis samples fetal blood to measure baseline hematocrit"
+          },
+          {
+            "id": "c",
+            "label": "Administer vecuronium for temporary fetal muscular paralysis"
+          },
+          {
+            "id": "d",
+            "label": "Infuse cross-matched packed red cells to target hematocrit of 40-45%"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Assessing the volume of fetomaternal hemorrhage is critical for calculating postpartum immunoglobulin prophylaxis. The qualitative rosette test detects fetal bleeds exceeding ten millilitres. If positive, the quantitative Kleihauer-Betke acid elution test is performed, which exploits the acid resistance of fetal hemoglobin to enumerate fetal cells in the maternal circulation.",
+      "tx": "The qualitative **rosette test** screens maternal blood for fetomaternal hemorrhage exceeding 10 mL. When positive, clinicians perform the quantitative **Kleihauer-Betke test**, wherein adult maternal hemoglobin elutes in acid buffer while **fetal hemoglobin** resists elution, allowing precise enumeration of fetal erythrocytes under light microscopy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rosette Screening Test",
+          "points": [
+            "Qualitative agglutination assay",
+            "Detects fetomaternal hemorrhage >10 mL",
+            "Rapid turnaround in blood bank",
+            "Identifies candidates for quantitative testing"
+          ]
+        },
+        "right": {
+          "title": "Kleihauer-Betke Acid Elution",
+          "points": [
+            "Quantitative enumeration of fetal cells",
+            "HbF resists acid elution; stains dark pink",
+            "Adult red cells become empty ghosts",
+            "Calculates required doses of anti-D Ig"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A standard dose of three hundred micrograms, or fifteen hundred international units, of anti D immune globulin is administered routinely at twenty eight weeks and within seventy two hours of delivery to non-sensitized RhD negative mothers. This standard vial protects against up to thirty millilitres of fetal whole blood or fifteen millilitres of packed red cells.",
+      "tx": "A standard vial of **300 micrograms** (1500 IU) of **anti-D immune globulin** neutralizes a fetomaternal hemorrhage of up to **30 mL of fetal whole blood**, equivalent to 15 mL of packed red cells. Additional vials are administered when quantitative Kleihauer-Betke testing reveals hemorrhage exceeding this standard volume.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Indication",
+          "Standard Anti-D Dose",
+          "Fetal Blood Volume Covered"
+        ],
+        "rows": [
+          [
+            "Routine 28-week prophylaxis",
+            "300 micrograms (1500 IU)",
+            "Covers up to 30 mL whole blood"
+          ],
+          [
+            "Postpartum delivery (Rh+ infant)",
+            "300 micrograms within 72 hours",
+            "Covers up to 30 mL whole blood"
+          ],
+          [
+            "First trimester sensitizing event",
+            "50 or 120 micrograms",
+            "Covers up to 5 mL whole blood"
+          ],
+          [
+            "Large fetomaternal hemorrhage",
+            "Dose calculated by Kleihauer-Betke",
+            "1 vial per 30 mL whole blood detected"
+          ]
+        ]
+      }
+    }
+  ]
+}
