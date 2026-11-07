@@ -1,0 +1,331 @@
+{
+  "v": 1,
+  "module": "son-thyroid-lymphoma-niftp-rair",
+  "subject": "ss-medical-oncology",
+  "title": "Thyroid lymphoma, NIFTP and radioiodine-refractory disease",
+  "minutes": 12,
+  "steps": [
+    {
+      "tx": "**Primary thyroid lymphoma**, a lymphoma that starts inside the gland, makes up about 1% to 5% of thyroid malignancies. **Hashimoto thyroiditis** (a chronic autoimmune inflammation of the thyroid) is the only known risk factor, and about 55% of patients already have it. Reviews put the lymphoma risk in Hashimoto patients at roughly 40 to 80 times that of people without it. Typically the gland becomes a **rapidly enlarging goitre** (a swollen thyroid), with a neck mass, trouble swallowing and hoarseness.",
+      "say": "Primary thyroid lymphoma is a lymphoma that starts inside the gland. It makes up about one to five percent of thyroid malignancies. Hashimoto thyroiditis, a chronic autoimmune inflammation of the thyroid, is the only known risk factor, and about fifty-five percent of patients already have it. Reviews put the lymphoma risk in Hashimoto patients at roughly forty to eighty times that of people without the condition. Typically the gland becomes rapidly enlarging, causing a neck mass, trouble swallowing, and hoarseness.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Typical finding"
+        ],
+        "rows": [
+          [
+            "Share of thyroid malignancies",
+            "About 1% to 5%"
+          ],
+          [
+            "Background",
+            "Hashimoto thyroiditis in about 55%"
+          ],
+          [
+            "Lymphoma risk with Hashimoto",
+            "Roughly 40 to 80 times higher"
+          ],
+          [
+            "Growth",
+            "Rapidly enlarging goitre"
+          ],
+          [
+            "Symptoms",
+            "Neck mass, trouble swallowing, hoarseness"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diagnosis rests on tissue. When suspicion is high, a **core biopsy** (a wide needle sample of the gland) goes to **flow cytometry** (a test that sorts cells by surface markers) and to **immunohistochemistry** (staining of tissue with antibodies). **B symptoms** (fever, weight loss and night sweats) occur in about 11% of patients. The most common type is **diffuse large B-cell lymphoma (DLBCL)**. A less common type is **MALT lymphoma**, a marginal zone lymphoma of mucosa-associated lymphoid tissue, which forms a larger share in some Asian series.",
+      "say": "Diagnosis rests on tissue. When suspicion is high, clinicians take a core biopsy, which is a wide needle sample of the gland. The sample then goes to flow cytometry, a test that sorts cells by their surface markers, and to immunohistochemistry, which stains tissue with antibodies. About eleven percent of patients have B symptoms, meaning fever, weight loss, or night sweats. The most common type is diffuse large B-cell lymphoma. A less common type is MALT lymphoma, a marginal zone lymphoma that forms a larger share in some Asian series.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Rapidly enlarging thyroid mass"
+          },
+          {
+            "id": "b",
+            "label": "Core biopsy of the gland"
+          },
+          {
+            "id": "c",
+            "label": "Flow cytometry and immunohistochemistry"
+          },
+          {
+            "id": "d",
+            "label": "B-cell lymphoma subtype: DLBCL or MALT lymphoma"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "suspicion is high"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The core biopsy shows sheets of **large lymphoid cells** replacing the thyroid, with a remnant follicle at the edge, the picture of **diffuse large B-cell lymphoma**. Beside it, a **flow cytometry** plot of the B cells shows restriction to the kappa light chain, which marks the cells as a single clone and supports lymphoma over thyroiditis.",
+      "say": "The core biopsy shows sheets of large lymphoid cells replacing the thyroid, with a remnant follicle at the edge. That is the picture of diffuse large B-cell lymphoma. Beside it, a flow cytometry plot of the B cells shows they all carry the kappa light chain. That restriction marks a single clone, which supports lymphoma over thyroiditis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-thyroid-lymphoma-niftp-rair-gen2.webp",
+        "alt": "Histology of large lymphoid cells beside a residual follicle, with a kappa restricted B cell flow cytometry plot",
+        "caption": "Thyroid lymphoma histology with a kappa restricted B cell flow plot. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Surgery is **mainly diagnostic** here, not a first treatment. In **stage IE** disease (lymphoma confined to the thyroid, seen in about half of cases), surgery helps show whether the tumour stays inside the gland. If it does, surgery plus radiation alone may be appropriate. If the tumour extends outside the thyroid, **combination chemotherapy** is required. Localised low-grade lymphoma can be treated with radiation alone unless systemic disease is present.",
+      "say": "Surgery is mainly used to make the diagnosis here, not as first treatment. In stage IE disease, which means lymphoma confined to the thyroid, surgery helps show whether the tumour stays inside the gland. About half of patients have this stage. If the tumour stays inside the gland, surgery plus radiation alone may be appropriate. If it extends outside the thyroid, combination chemotherapy is required. Localised low-grade lymphoma can be treated with radiation alone, unless systemic disease is present.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Biopsy-proven thyroid lymphoma"
+          },
+          {
+            "id": "b",
+            "label": "Stage IE: confined to the thyroid?"
+          },
+          {
+            "id": "c",
+            "label": "Yes: surgery and radiation alone may be appropriate"
+          },
+          {
+            "id": "d",
+            "label": "No: combination chemotherapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c",
+            "yes"
+          ],
+          [
+            "b",
+            "d",
+            "no"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Iodine supply shapes which thyroid cancers appear. **Follicular thyroid carcinoma (FTC)** is more common in **iodine-deficient regions**. Its nuclei look like those of a follicular adenoma, so the diagnosis depends on **capsular or vascular invasion** seen in tissue. When invasion is only capsular, the risk of spread is very low and lobectomy alone is generally enough.",
+      "say": "Iodine supply shapes which thyroid cancers appear. Follicular thyroid carcinoma is more common in regions where iodine is scarce. Its nuclei look much like those of a follicular adenoma, so the pathologist needs tissue to decide. The key finding is invasion of the capsule or the blood vessels. When invasion is only capsular, the risk of spread is very low, and removing one lobe alone is generally enough.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Follicular thyroid carcinoma (FTC)",
+          "points": [
+            "More common in iodine-deficient regions",
+            "Diagnosed by capsular or vascular invasion",
+            "Nuclear features match follicular adenoma",
+            "Needs tissue, not cytology alone"
+          ]
+        },
+        "right": {
+          "title": "Follicular adenoma",
+          "points": [
+            "No capsular or vascular invasion",
+            "Nuclear features match carcinoma",
+            "Classed as benign"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Noninvasive follicular thyroid neoplasm with papillary-like nuclear features (NIFTP)** is the newer name for an **encapsulated** (enclosed in a capsule) follicular variant of papillary cancer. It has no capsular or vascular invasion. Current teaching no longer treats it as malignant, although it is described as behaving like a premalignant condition. The World Health Organization classifies it among the **low-risk neoplasms**, not the malignant group.",
+      "say": "Noninvasive follicular thyroid neoplasm with papillary-like nuclear features, or NIFTP, is the newer name for an encapsulated follicular variant of papillary cancer. The tumour has no capsular or vascular invasion. Current teaching no longer treats it as malignant, although it behaves like a premalignant condition. The World Health Organization classifies it among the low-risk neoplasms rather than the malignant group.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "NIFTP",
+          "points": [
+            "Encapsulated follicular growth",
+            "Papillary-like nuclei",
+            "No capsular or vascular invasion",
+            "Not considered malignant"
+          ]
+        },
+        "right": {
+          "title": "Higher-risk features that justify radioactive iodine",
+          "points": [
+            "Vascular invasion",
+            "Extrathyroidal invasion",
+            "Large-volume lymph node metastases",
+            "Larger tumours or aggressive papillary variants"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "These two encapsulated follicular tumours look alike inside. On one side, **NIFTP** has papillary-like nuclei but an intact capsule with no invasion. On the other, **follicular carcinoma** breaks through its capsule, and tumour cells sit within a vessel, showing **vascular invasion**. Only invasion, judged at the edge of the tumour, separates the low-risk lesion from cancer.",
+      "say": "These two encapsulated follicular tumours look alike inside. One is NIFTP, with papillary-like nuclei but an intact capsule and no invasion. The other is follicular carcinoma, which breaks through its capsule, with tumour cells inside a vessel. Only invasion, judged at the edge of the tumour, separates the low-risk lesion from cancer.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-thyroid-lymphoma-niftp-rair-gen1.webp",
+        "alt": "Paired histology comparing NIFTP with intact capsule against carcinoma with capsular and vascular invasion",
+        "caption": "Histology contrasting NIFTP without invasion and invasive follicular carcinoma. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "When NIFTP is found after a **lobectomy** (removal of one thyroid lobe), that operation may be the whole treatment. **Completion thyroidectomy** (removal of the remaining lobe) and **radioactive iodine (RAI)** are not indicated, because RAI and completion surgery are reserved for higher-risk features such as vascular invasion. The 2015 **ATA guidelines** state that lobectomy alone may be sufficient for low-risk tumours, and recurrence is very low for this lesion.",
+      "say": "When NIFTP is found after a lobectomy, removing one lobe may be the whole treatment. Completion thyroidectomy, which removes the remaining lobe, is not indicated. Radioactive iodine, abbreviated RAI, is also not indicated, because it is kept for higher-risk features such as vascular invasion. The 2015 American Thyroid Association guidelines state that lobectomy alone may be sufficient for low-risk tumours, and recurrence is very low for this type of lesion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Step after lobectomy",
+          "Indicated for NIFTP?"
+        ],
+        "rows": [
+          [
+            "Completion thyroidectomy",
+            "No, unless high-risk features"
+          ],
+          [
+            "Radioactive iodine",
+            "No, unless high-risk features"
+          ],
+          [
+            "Lobectomy alone",
+            "Often sufficient for low-risk tumours"
+          ],
+          [
+            "Recurrence risk",
+            "Very low, even with lobectomy alone"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "About **25% to 50%** of people with advanced, metastatic differentiated thyroid cancer become **radioiodine-refractory (RAI-R)**, meaning the cancer no longer takes up enough iodine to be treated. The American Thyroid Association describes four patterns: no uptake from the start, uptake lost over time, uptake in only some lesions, and progression despite significant uptake. For symptomatic, rapidly progressive or high-burden disease, a **tyrosine kinase inhibitor (TKI)**, an oral drug that blocks growth signals, is considered.",
+      "say": "About a quarter to a half of people with advanced, metastatic differentiated thyroid cancer become radioiodine refractory. Radioactive iodine is no longer effective enough against the cancer. The American Thyroid Association describes four patterns: no uptake from the start, uptake lost over time, uptake in only some lesions, and progression despite significant uptake. For symptomatic, rapidly progressive, or high-burden disease, a tyrosine kinase inhibitor is considered, which is an oral drug that blocks growth signals.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Detail"
+        ],
+        "rows": [
+          [
+            "Frequency",
+            "About 25% to 50% of advanced metastatic cases"
+          ],
+          [
+            "First pattern",
+            "Never takes up iodine"
+          ],
+          [
+            "Second pattern",
+            "Uptake lost over time"
+          ],
+          [
+            "Third pattern",
+            "Uptake in some lesions only"
+          ],
+          [
+            "Fourth pattern",
+            "Progresses despite significant uptake"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Sorafenib in the **DECISION trial** and lenvatinib in the **SELECT trial** each improved **progression-free survival (PFS)**, the time before the disease grows, compared with placebo in progressive RAI-R disease. Sorafenib was approved in November 2013 and lenvatinib in 2015, and neither is preferred over the other. **Cabozantinib** was tested in the **COSMIC-311 trial** in patients whose disease had progressed on earlier lenvatinib or sorafenib.",
+      "say": "Sorafenib, tested in the DECISION trial, and lenvatinib, tested in the SELECT trial, each improved progression-free survival compared with placebo. Progression-free survival is the time before the disease grows. Sorafenib was approved in November 2013, and lenvatinib was approved in 2015. Neither drug is preferred over the other. Cabozantinib was tested in the COSMIC-311 trial, in patients whose disease had progressed on earlier lenvatinib or sorafenib.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug",
+          "Trial",
+          "Comparison"
+        ],
+        "rows": [
+          [
+            "Sorafenib",
+            "DECISION",
+            "Versus placebo in progressive RAI-R disease"
+          ],
+          [
+            "Lenvatinib",
+            "SELECT",
+            "Versus placebo in progressive RAI-R disease"
+          ],
+          [
+            "Cabozantinib",
+            "COSMIC-311",
+            "Versus placebo after earlier lenvatinib or sorafenib"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Genetic testing can guide treatment. In nonresectable **anaplastic thyroid cancer** with a **BRAF V600E** mutation, **dabrafenib** plus **trametinib** is an option. In metastatic BRAF V600E-mutant RAI-R papillary cancer, dabrafenib stimulated radioiodine uptake in about 60% of patients. **RET fusions** (rearranged RET genes) are treated with **selpercatinib** or **pralsetinib**, and **NTRK fusions** (rearranged NTRK genes) with **larotrectinib** or **entrectinib**, which apply across solid tumours of any type.",
+      "say": "Genetic testing can guide treatment. In nonresectable anaplastic thyroid cancer with a BRAF V600E mutation, dabrafenib plus trametinib is an option. In metastatic, BRAF V600E-mutant papillary cancer that has become radioiodine refractory, dabrafenib stimulated radioiodine uptake in about sixty percent of patients. RET fusions are treated with selpercatinib or pralsetinib, and NTRK fusions are treated with larotrectinib or entrectinib, which apply across solid tumours of any type.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genetic change",
+          "Cancer context",
+          "Drugs"
+        ],
+        "rows": [
+          [
+            "BRAF V600E",
+            "Nonresectable anaplastic thyroid cancer",
+            "Dabrafenib with trametinib"
+          ],
+          [
+            "BRAF V600E",
+            "Metastatic RAI-R papillary cancer",
+            "Dabrafenib, stimulates uptake in about 60%"
+          ],
+          [
+            "RET fusion",
+            "Thyroid cancer",
+            "Selpercatinib or pralsetinib"
+          ],
+          [
+            "NTRK fusion",
+            "Solid tumours of any type",
+            "Larotrectinib or entrectinib"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "refs": [
+    "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
+    "Harrison's Principles of Internal Medicine, 22nd edition",
+    "Haugen BR et al. 2015 American Thyroid Association management guidelines for adult patients with thyroid nodules and differentiated thyroid cancer, Thyroid, 2016",
+    "Nakra T et al. Thyroid lymphoproliferative lesions in Asia, Gland Surgery, 2020",
+    "Alaggio R et al. The 5th edition of the World Health Organization Classification of Haematolymphoid Tumours: Lymphoid Neoplasms, Leukemia, 2022",
+    "Schlumberger M et al. Lenvatinib versus placebo in radioiodine-refractory thyroid cancer, New England Journal of Medicine, 2015",
+    "Brose MS et al. Sorafenib in radioactive iodine-refractory, locally advanced or metastatic differentiated thyroid cancer (DECISION), Lancet, 2014",
+    "Brose MS et al. Cabozantinib for radioiodine-refractory differentiated thyroid cancer (COSMIC-311), Lancet Oncology, 2021"
+  ],
+  "gen": "AI"
+}
