@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "id": "pcd-hlhs-pathway",
+  "title": "Hypoplastic Left Heart Syndrome: Anatomy and Norwood Staging",
+  "module": "Cyanotic Heart Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "In the most severe single ventricle lesion the entire left side of the heart is a miniature that can neither receive nor eject blood.",
+      "tx": "Anatomy defines **hypoplastic left heart syndrome (HLHS core defects)**. Hypoplastic left heart syndrome encompasses aortic atresia or stenosis, mitral atresia or stenosis, a hypoplastic diminutive left ventricle, and severe hypoplasia of the ascending aorta, leaving the right ventricle as the sole functional pumping chamber.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/congenital-heart-disease-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Congenital septal defects including membranous ventricular septal defect with left-to-right shunting. Illustration: StewardMD original.",
+        "alt": "Diagram of ventricular septal defect showing left-to-right shunt and ventricular anatomy."
+      }
+    },
+    {
+      "say": "With no forward flow through the aorta, the brain and coronaries drink backwards through the ductus, which is why closure is instantly fatal.",
+      "tx": "Perfusion is **duct-dependent systemic flow (retrograde)**. Systemic circulation is entirely ductus dependent, with right ventricular blood traversing the patent ductus retrograde into the aortic arch to perfuse the coronaries and cerebral vessels, so prostaglandin infusion is life support until stage one surgery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Right ventricle ejects combined output into the pulmonary trunk"
+          },
+          {
+            "id": "b",
+            "label": "Ductus arteriosus carries flow retrograde up the tiny ascending aorta"
+          },
+          {
+            "id": "c",
+            "label": "Coronary and brachiocephalic vessels fill backwards from arch"
+          },
+          {
+            "id": "d",
+            "label": "Ductal closure stops cerebral and coronary perfusion abruptly"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The first operation, done in the opening days of life, rebuilds a brand new aorta out of the pulmonary trunk.",
+      "tx": "Palliation starts with **Norwood Stage 1**. Norwood Stage 1, performed in the first week, creates an unobstructed neo aorta using the pulmonary trunk with atrial septectomy (removal of the atrial septum for unobstructed pulmonary venous return) and a systemic to pulmonary shunt, either a modified Blalock Taussig shunt or a Sano right ventricle to pulmonary artery conduit.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage One Component",
+          "Surgical Detail",
+          "Physiological Goal"
+        ],
+        "rows": [
+          [
+            "Neo aortic reconstruction",
+            "Pulmonary trunk anastomosed to tiny ascending aorta",
+            "Unobstructed systemic outflow from single ventricle"
+          ],
+          [
+            "Atrial septectomy",
+            "Complete excision of atrial septum",
+            "Unimpeded pulmonary venous return to the heart"
+          ],
+          [
+            "Systemic to pulmonary shunt",
+            "Modified BT shunt or Sano conduit",
+            "Controlled pulmonary blood flow for oxygenation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "One shunt variant takes blood straight from the ventricle through a small tube, which protects the coronaries from being robbed in diastole.",
+      "tx": "The conduit option is the **Sano modification (Sano vs BT shunt)**. The Sano modification uses a non valved PTFE (polytetrafluoroethylene synthetic) conduit from the right ventricle to the pulmonary artery bifurcation, eliminating systemic diastolic steal and preserving coronary perfusion at the cost of a right ventriculotomy scar.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modified BT Shunt",
+          "points": [
+            "Gore-Tex tube from subclavian artery to pulmonary artery",
+            "Continuous run off lowers diastolic pressure and coronary filling",
+            "No ventricular incision with simpler shunt takedown later"
+          ]
+        },
+        "right": {
+          "title": "Sano RV to PA Conduit",
+          "points": [
+            "Non valved PTFE conduit from ventricle to pulmonary bifurcation",
+            "Diastolic pressure preserved so coronaries fill normally",
+            "Ventriculotomy scar may impair later ventricular function"
+          ]
+        }
+      }
+    },
+    {
+      "say": "At a few months old the upper body veins are plumbed directly into the lungs, letting the single ventricle offload half its work.",
+      "tx": "Stage two is the **bidirectional Glenn (Glenn Stage 2)**. Bidirectional cavopulmonary shunt (the Glenn procedure) anastomoses the superior vena cava directly to the right pulmonary artery at **4-6 months** of age, so upper body venous return flows passively into both lungs without ventricular pumping.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Superior vena cava divided from the right atrium at 4 to 6 months"
+          },
+          {
+            "id": "b",
+            "label": "Caval end anastomosed to the superior aspect of right pulmonary artery"
+          },
+          {
+            "id": "c",
+            "label": "Upper body venous blood flows passively to both lungs"
+          },
+          {
+            "id": "d",
+            "label": "Single ventricle now handles only lower body and coronary return"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "By preschool age the lower body veins join the same passive circuit, completing a circulation with no pump behind the lungs at all.",
+      "tx": "Completion is the **extracardiac Fontan (Fontan Stage 3)**. Extracardiac conduit total cavopulmonary connection (the Fontan) routes inferior vena cava blood to the pulmonary arteries at **2-4 years**, completing passive single ventricle venous return in which systemic venous pressure alone drives pulmonary blood flow.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Staged Milestone",
+          "Age Window",
+          "Circulatory Achievement"
+        ],
+        "rows": [
+          [
+            "Norwood stage one",
+            "First week of life",
+            "Secure systemic outflow with controlled pulmonary flow"
+          ],
+          [
+            "Bidirectional Glenn",
+            "4 to 6 months of age",
+            "Passive upper body pulmonary perfusion"
+          ],
+          [
+            "Extracardiac Fontan",
+            "2 to 4 years of age",
+            "Complete passive venous return to the lungs"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgeons deliberately leave a tiny escape hole in the Fontan circuit, trading a trace of blueness for a safer cardiac output.",
+      "tx": "Circuit safety uses a **Fontan fenestration of 4-5 mm**. A **4-5 mm** fenestration between the Fontan conduit and the atrium acts as a pop off valve to maintain systemic cardiac output at the cost of mild cyanosis, decompressing the high pressure venous circuit during exertion or pulmonary hypertensive crises.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Benefits of Fenestration",
+          "points": [
+            "Maintains ventricular preload and cardiac output under stress",
+            "Shortens pleural drainage time after Fontan completion",
+            "Rescue pathway during pulmonary hypertensive episodes"
+          ]
+        },
+        "right": {
+          "title": "Costs of Fenestration",
+          "points": [
+            "Persistent right to left shunt with resting saturations of 85 to 90 percent",
+            "Paradoxical embolus risk requiring long term anticoagulation",
+            "May need device closure years later once pressures settle"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Years later the price of a pump less lung circuit appears in the gut and the airways, where high venous pressure weeps protein and casts.",
+      "tx": "Late failure brings **protein losing enteropathy**. Protein losing enteropathy and plastic bronchitis (rubbery airway casts) are severe late complications of chronically elevated central venous pressure in failing Fontan physiology, presenting with oedema, diarrhoea, hypoalbuminaemia, and recurrent cast expectoration needing transplant evaluation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/ped-congenital-heart-fig1.webp",
+        "ar": 1.8349,
+        "caption": "Cyanotic congenital cardiac anomalies and classic pulmonary vascular patterns on radiography. Image: Dong Soo Kim.",
+        "alt": "Radiological and anatomical comparison of cyanotic heart defects."
+      }
+    }
+  ]
+}

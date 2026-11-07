@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "id": "pcd-tof-anatomy",
+  "title": "Tetralogy of Fallot: Anatomy and Pathophysiology",
+  "module": "Cyanotic Heart Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "All four defects of this tetralogy trace back to one developmental error: the outlet septum drifts forward and crowds the right ventricular outflow.",
+      "tx": "Embryology centres on **infundibular septal deviation (tetralogy four components)**. The four classic components of Tetralogy of Fallot result from anterocephalad (forward and upward) deviation of the infundibular septum: large subaortic ventricular septal defect, overriding aorta, right ventricular outflow tract obstruction, and right ventricular hypertrophy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/pcd-congenital-fig1.webp",
+        "ar": 1.4752,
+        "caption": "Key cyanotic congenital heart defects: Tetralogy of Fallot and Transposition of the Great Arteries. Image: National Heart Lung and Blood Institute (NIH), CC0/PD, Wikimedia Commons.",
+        "alt": "Anatomical diagrams of Tetralogy of Fallot (TOF) showing four defects and D-Transposition of the Great Arteries (TGA) with transposed vessels."
+      }
+    },
+    {
+      "say": "The same diagnosis can look pink or deeply blue, because one variable, the tightness of the outflow obstruction, sets the whole physiology.",
+      "tx": "Physiology follows **RVOT obstruction severity, the determinant of cyanosis**. The severity of subpulmonic and valvular right ventricular outflow obstruction determines the magnitude of right to left shunt and degree of cyanosis, so mild obstruction presents as a pink Fallot while severe obstruction produces profound desaturation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Obstruction Severity",
+          "Shunt Direction",
+          "Clinical Appearance"
+        ],
+        "rows": [
+          [
+            "Mild outflow narrowing",
+            "Net left to right across the defect",
+            "Pink Fallot with systolic murmur only"
+          ],
+          [
+            "Moderate dynamic obstruction",
+            "Bidirectional shunt worsening with crying",
+            "Intermittent cyanosis and squatting"
+          ],
+          [
+            "Severe fixed atresia spectrum",
+            "Obligatory right to left shunting",
+            "Deep cyanosis dependent on ductal flow"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The chest film in this condition is so distinctive that generations of students have learned it as a wooden shoe.",
+      "tx": "Radiography shows the **boot shaped heart**. Chest radiograph classically shows a boot shaped heart (coeur en sabot, French for wooden shoe) with an upturned apex due to right ventricular hypertrophy and a concave pulmonary bay from the small underfilled pulmonary trunk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Boot Shape Components",
+          "points": [
+            "Upturned cardiac apex lifted by hypertrophied right ventricle",
+            "Concave main pulmonary artery segment with oligemic lung fields",
+            "Right aortic arch visible in one quarter of patients"
+          ]
+        },
+        "right": {
+          "title": "Bedside Correlation",
+          "points": [
+            "Cyanosis severity parallels the degree of outflow obstruction",
+            "Single second sound reflects inaudible pulmonary closure",
+            "Right ventricular heave palpable at the left sternal edge"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A quarter of these children carry their aortic arch on the opposite side, a clue that changes how you read the film and plan surgery.",
+      "tx": "Arch sidedness matters as a **right aortic arch**. A right sided aortic arch is present in approximately **25 percent** of patients with Tetralogy of Fallot, alerting the surgeon to mirror image branching and an aberrant left subclavian course before repair or shunt surgery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Note absent left sided aortic knuckle with right paratracheal density"
+          },
+          {
+            "id": "b",
+            "label": "Confirm arch sidedness and branching with echocardiography"
+          },
+          {
+            "id": "c",
+            "label": "Define coronary origins since anomalous coronaries alter the repair"
+          },
+          {
+            "id": "d",
+            "label": "Map arch anatomy on CT before sternotomy or shunt placement"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Behind some cases sits a tiny missing piece of chromosome 22, and its likelihood jumps sharply when the pulmonary valve is absent or atretic.",
+      "tx": "Genetics involves **chromosome 22q11 deletion (22q11.2 microdeletion)**. Microdeletion of 22q11.2 (DiGeorge or velocardiofacial syndrome) occurs in **15%** of isolated Tetralogy of Fallot and up to **40-50%** of Fallot with pulmonary atresia or absent pulmonary valve, warranting fluorescence testing and calcium and immune screening.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fallot Subgroup",
+          "22q11.2 Deletion Frequency",
+          "Associated Screening"
+        ],
+        "rows": [
+          [
+            "Isolated Tetralogy of Fallot",
+            "15 percent of cases",
+            "Serum calcium, T cell counts, palate review"
+          ],
+          [
+            "Fallot with pulmonary atresia",
+            "40 to 50 percent of cases",
+            "Full DiGeorge workup with renal ultrasound"
+          ],
+          [
+            "Fallot with absent pulmonary valve",
+            "40 to 50 percent of cases",
+            "Airway assessment for bronchomalacia"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Watch an older unrepaired child at play and you will see them instinctively crouch down, a posture that cleverly replumbs their circulation.",
+      "tx": "Posture exploits the **squatting posture**. Children with Tetralogy of Fallot learn to squat during exertion to increase systemic vascular resistance, thereby decreasing right to left shunting and promoting pulmonary blood flow, which relieves breathlessness faster than rest alone, and this simple posture often aborts early desaturation before any medicine is needed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Effect of Squatting",
+          "points": [
+            "Kinking femoral arteries raises systemic vascular resistance",
+            "Higher aortic pressure opposes right to left shunting",
+            "More right ventricular blood reaches the lungs for oxygenation"
+          ]
+        },
+        "right": {
+          "title": "Effect of Crying or Exertion",
+          "points": [
+            "Falling systemic resistance and rising catecholamines worsen obstruction",
+            "Right to left shunt increases with deepening cyanosis",
+            "May precipitate a hypercyanotic spell needing knee chest positioning"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Here is a classic examination trap: the loud murmur comes from the narrow outflow, while the large hole itself makes no sound at all.",
+      "tx": "Auscultation reflects an **RVOT stenosis murmur (auscultation in TOF)**. The murmur in Tetralogy of Fallot is caused solely by right ventricular outflow tract stenosis, a systolic ejection murmur at the mid to upper left sternal border, while the ventricular septal defect is large and non restrictive (silent) with equal ventricular pressures.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Equal biventricular pressures render the large VSD silent"
+          },
+          {
+            "id": "b",
+            "label": "Turbulent ejection across the stenotic outflow generates the murmur"
+          },
+          {
+            "id": "c",
+            "label": "Softer murmur with deeper cyanosis signals tighter obstruction"
+          },
+          {
+            "id": "d",
+            "label": "Absent murmur with profound cyanosis suggests outflow atresia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Finally, listen to the second sound: in this lesion it loses its normal split and arrives as a single snap.",
+      "tx": "Heart sounds show a **single second sound (single S2)**. The second heart sound is typically single because the pulmonary component (P2) is markedly delayed and inaudible, leaving only aortic closure, a finding that complements the ejection murmur and boot shaped silhouette in clinching the bedside diagnosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-cyanotic-adult-chd-gen1.webp",
+        "ar": 1.3393,
+        "caption": "Cardiac MRI in repaired Tetralogy of Fallot demonstrating severe right ventricular enlargement from chronic pulmonary regurgitation. Illustration: StewardMD original.",
+        "alt": "MRI scan illustrating dilated right ventricle in repaired tetralogy."
+      }
+    }
+  ]
+}

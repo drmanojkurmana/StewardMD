@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "id": "pcd-heart-block-pacemakers",
+  "title": "Congenital Complete Heart Block and Bradyarrhythmias",
+  "module": "Pediatric Arrhythmias and Electrophysiology",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Most babies born with complete heart block caught it from their mother, not as infection but as antibodies that crossed the placenta.",
+      "tx": "Aetiology is **maternal Ro/SSA antibodies**. Congenital complete atrioventricular block strongly correlates with transplacental passage of maternal anti Ro/SSA and anti La/SSB autoantibodies (immune proteins against fetal cardiac conduction tissue), which inflame and scar the developing atrioventricular node during the vulnerable window between eighteen and twenty six weeks of gestation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-ecg-gen1.webp",
+        "ar": 1.3333,
+        "caption": "Anterior T wave inversion resembling the benign juvenile pattern of childhood. Illustration: StewardMD original.",
+        "alt": "Twelve lead electrocardiogram showing deep symmetric T wave inversion in the anterior chest leads with preserved R waves."
+      }
+    },
+    {
+      "say": "A mother with lupus faces a small risk in her first pregnancy, but once one child is affected the odds for the next climb steeply.",
+      "tx": "Risk is quantified by **maternal lupus association and recurrence rates**. Maternal systemic lupus erythematosus or Sjogren syndrome carries a **2%** risk of neonatal heart block in the first pregnancy, rising to **15-20%** in subsequent pregnancies after an affected child, mandating serial fetal echocardiographic surveillance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pregnancy History",
+          "Heart Block Risk",
+          "Surveillance Plan"
+        ],
+        "rows": [
+          [
+            "Antibody positive, no affected child",
+            "2 percent of pregnancies",
+            "Fetal echo weekly from 16 to 28 weeks gestation"
+          ],
+          [
+            "One previously affected child",
+            "15 to 20 percent recurrence",
+            "Weekly rhythm surveillance with home Doppler monitoring"
+          ],
+          [
+            "Hydrops or rate below 55 bpm",
+            "High intrauterine demise risk",
+            "Tertiary referral for early delivery planning"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "On fetal monitoring two red flags warn that the baby may not survive to delivery without intervention.",
+      "tx": "Fetal danger is marked by a **fetal bradycardia threshold**. Sustained fetal ventricular heart rate below **50-55 bpm** (beats per min) or hydrops fetalis (abnormal fluid collections from cardiac failure) indicates high risk of intrauterine demise and may prompt transplacental therapy or preterm delivery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High Risk Fetal Features",
+          "points": [
+            "Sustained ventricular rate below 50 to 55 bpm on monitoring",
+            "Hydrops with effusions, ascites, and skin oedema",
+            "Poor ventricular function with cardiothoracic ratio above 0.6"
+          ]
+        },
+        "right": {
+          "title": "Reassuring Fetal Features",
+          "points": [
+            "Ventricular rate above 55 bpm with 1 to 1 atrial tracking absent",
+            "Normal growth without effusions or organomegaly",
+            "Preserved biventricular function on fetal echocardiography"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Steroids given to the mother can sometimes freeze the disease halfway, but once the block is complete no medicine can undo it.",
+      "tx": "Therapy uses **in utero maternal steroid therapy (fluorinated corticosteroids)**. Maternal administration of fluorinated corticosteroids (dexamethasone **4 mg/day**) may arrest progression in incomplete or second degree block but does not reverse complete block, because the atrioventricular node is already replaced by irreversible fibrosis, and pacing after birth becomes the only durable solution for the child.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Detect first or second degree block on serial fetal echo"
+          },
+          {
+            "id": "b",
+            "label": "Start maternal dexamethasone 4 mg per day with glucose monitoring"
+          },
+          {
+            "id": "c",
+            "label": "Incomplete block may stabilize without progressing further"
+          },
+          {
+            "id": "d",
+            "label": "Complete block never reverts and needs postnatal pacing"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pacemaker decisions in these children rest on three hard criteria, and meeting any one of them seals the indication.",
+      "tx": "Implantation follows **class one infant permanent pacing indications**. Class I (must do) indication for permanent pacemaker implantation in congenital complete block includes symptomatic bradycardia, ventricular escape under **50-55 bpm**, or wide QRS (broad ventricular complexes signalling a low unstable escape focus).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pacing Criterion",
+          "Threshold Value",
+          "Physiological Reason"
+        ],
+        "rows": [
+          [
+            "Symptomatic bradycardia",
+            "Syncope, heart failure, or poor growth",
+            "Output inadequate for metabolic demand"
+          ],
+          [
+            "Slow ventricular escape",
+            "Under 50 to 55 bpm at rest",
+            "No chronotropic reserve for stress"
+          ],
+          [
+            "Wide QRS escape rhythm",
+            "Broad bizarre complexes",
+            "Unstable infranodal focus prone to asystole"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Tiny veins cannot safely carry pacing wires, so the smallest infants get their systems sewn onto the outside of the heart instead.",
+      "tx": "Technique is **epicardial pacing in infants**. Epicardial pacing systems (leads sewn onto the heart surface with abdominal generators) are placed in infants weighing under **10-15 kg** to avoid venous occlusion and lead stretching with somatic growth that transvenous systems would suffer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Epicardial System (<15 kg)",
+          "points": [
+            "Steroid eluting leads sutured to ventricular epicardium",
+            "Generator buried in the rectus sheath of the abdomen",
+            "No intravascular hardware to obstruct small veins"
+          ]
+        },
+        "right": {
+          "title": "Transvenous System (Older Child)",
+          "points": [
+            "Leads threaded via subclavian vein to endocardium",
+            "Pectoral generator pocket like adult practice",
+            "Requires adequate venous calibre and body size"
+          ]
+        }
+      }
+    },
+    {
+      "say": "After open heart surgery the conduction system is often merely stunned, so surgeons watch for a defined postoperative surgical AV block window before committing to a device.",
+      "tx": "Postoperative block needs a **7-10 day rule**. Postoperative complete atrioventricular block resolving within **7-10 days** can be monitored with temporary pacing, while persistence beyond **7-10 days** mandates permanent pacemaker implantation before hospital discharge because late recovery is unlikely, and temporary wires are removed at the same sitting.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Complete block after septal or valve surgery with temporary wires placed"
+          },
+          {
+            "id": "b",
+            "label": "Observe with temporary pacing for 7 to 10 days postoperatively"
+          },
+          {
+            "id": "c",
+            "label": "Return of conduction allows wire removal and discharge"
+          },
+          {
+            "id": "d",
+            "label": "Persistent block beyond 10 days receives permanent system"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In the school age child a treadmill can unmask what rest conceals: a ventricle that cannot accelerate with effort needs pacing support.",
+      "tx": "Exercise testing reveals **chronotropic incompetence**. Failure of ventricular rate to increase appropriately during exercise testing in older children with congenital block indicates need for pacing, because an adequate rate response is essential for activity, growth, and long term ventricular function.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-heart-conduction-cycle.webp",
+        "ar": 1.3333,
+        "caption": "Potassium currents IKs and IKr that fail in LQT1 and LQT2. Diagram from the in-app physiology reference.",
+        "alt": "Cardiac ventricular and pacemaker action potentials"
+      }
+    }
+  ]
+}

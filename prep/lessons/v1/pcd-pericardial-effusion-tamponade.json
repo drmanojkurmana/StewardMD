@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "id": "pcd-pericardial-effusion-tamponade",
+  "title": "Pericarditis, Pericardial Effusion and Cardiac Tamponade",
+  "module": "Myocardial and Pericardial Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "When fluid strangles the heart, three bedside findings appear together, and recognising the trio can save a life.",
+      "tx": "Clinical diagnosis rests on **Beck triad**. Beck triad of cardiac tamponade comprises systemic hypotension (low blood pressure), muffled or distant heart sounds, and elevated jugular venous distension, reflecting a pericardium so tense that diastolic filling of every chamber is choked.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myocarditis-cardiomyopathy-pericardial-disease-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Lymphocytic infiltrate with myocyte necrosis meeting Dallas criteria. Credit: StewardMD.",
+        "alt": "Microscopic view of lymphocytic myocardial infiltration with myocyte necrosis and interstitial edema."
+      }
+    },
+    {
+      "say": "Ask the child to breathe normally while you watch the pressure trace: an exaggerated dip with each breath is the hallmark of tamponade.",
+      "tx": "Examination detects **pulsus paradoxus**. Pulsus paradoxus is defined as an exaggerated inspiratory decrease in systolic arterial blood pressure exceeding **10 mmHg** during normal breathing, caused by ventricular interdependence inside a fixed pericardial volume, and it is measured precisely with a blood pressure cuff during quiet respiration.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Respiratory Phase",
+          "Normal Physiology",
+          "Tamponade Exaggeration"
+        ],
+        "rows": [
+          [
+            "Quiet inspiration",
+            "Systolic pressure dips under 10 mmHg",
+            "Systolic pressure falls over 10 mmHg"
+          ],
+          [
+            "Septal mechanics",
+            "Mild leftward septal shift",
+            "Marked septal bounce with underfilled left ventricle"
+          ],
+          [
+            "Radial pulse feel",
+            "Steady volume through respiration",
+            "Pulse fades or vanishes on inspiration"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Ultrasound shows the chambers buckling under pressure, with right sided walls collapsing at precise moments of the cardiac cycle.",
+      "tx": "Imaging confirms **echocardiographic tamponade signs**. Key echocardiographic indicators of tamponade include early diastolic collapse of the right ventricle, late diastolic collapse of the right atrium, and reciprocal respiratory inflow variations across valves exceeding **25-40%**, with a plethoric non collapsing inferior vena cava.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Right Sided Collapse Signs",
+          "points": [
+            "Early diastolic buckling of the right ventricular free wall",
+            "Late diastolic inversion of the right atrial wall",
+            "Dilated inferior vena cava without inspiratory collapse"
+          ]
+        },
+        "right": {
+          "title": "Doppler Respiratory Variation",
+          "points": [
+            "Mitral inflow velocity varies over 25 percent with breathing",
+            "Tricuspid inflow velocity varies over 40 percent reciprocally",
+            "Exaggerated flow shifts proving ventricular interdependence"
+          ]
+        }
+      }
+    },
+    {
+      "say": "On the ECG the complexes seem to dance, alternating tall and small as the heart swings to and fro inside a lake of fluid.",
+      "tx": "Electrical clue is **electrical alternans**. Beat to beat alternation of QRS complex amplitude and axis on ECG (electrical alternans) reflects swinging of the heart within a large pericardial effusion, and it often accompanies sinus tachycardia with low voltage complexes, so new alternans in a breathless child should trigger immediate echocardiography.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Large effusion suspends the heart freely within the pericardial sac"
+          },
+          {
+            "id": "b",
+            "label": "Heart oscillates toward and away from chest electrodes each beat"
+          },
+          {
+            "id": "c",
+            "label": "QRS amplitude and axis alternate on consecutive complexes"
+          },
+          {
+            "id": "d",
+            "label": "Alternans with tachycardia prompts urgent tamponade assessment"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The chest film only turns flask shaped once a teacupful of fluid has gathered, so a normal film never rules out tamponade.",
+      "tx": "Radiography needs volume for the **water-bottle heart (water bottle sign)**. A symmetrical, globular, water bottle appearance on chest radiograph requires at least **200-250 mL** of pericardial fluid to manifest in older children, and echocardiography remains mandatory because haemodynamic collapse precedes radiographic change.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fluid Volume",
+          "Radiographic Appearance",
+          "Clinical Interpretation"
+        ],
+        "rows": [
+          [
+            "Under 200 mL",
+            "Normal cardiac silhouette possible",
+            "Tamponade still possible by echo criteria"
+          ],
+          [
+            "200 to 250 mL or more",
+            "Globular water bottle configuration",
+            "Large effusion with clear radiographic flag"
+          ],
+          [
+            "Rapid accumulation",
+            "Normal sized heart with shock",
+            "Small volume tamponade after trauma or procedure"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Draining the sac is done through a needle slipped beneath the breastbone, watched every millimetre by ultrasound and the ECG.",
+      "tx": "Rescue is **emergency pericardiocentesis (echo guided)**. Pericardiocentesis via the subxiphoid approach (beneath the xiphisternum angled toward the left shoulder) under continuous echocardiographic and ECG monitoring is life saving in cardiac tamponade, with ST elevation on the needle ECG warning of myocardial contact.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Subxiphoid Technique",
+          "points": [
+            "Needle enters left of xiphisternum at 30 degrees to the skin",
+            "Aimed toward the left shoulder under continuous echo vision",
+            "ECG limb lead attached to needle detects epicardial touch"
+          ]
+        },
+        "right": {
+          "title": "Monitoring During Drainage",
+          "points": [
+            "Blood pressure and heart rate recover as fluid is aspirated",
+            "Agitated saline confirms intrapericardial needle position",
+            "Pigtail catheter left for slow or recurrent collections"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The ECG of acute pericarditis evolves through stages, and stage one has a signature every student must recognise on sight.",
+      "tx": "Early changes define **stage one acute pericarditis ECG stages**. Stage one ECG in acute pericarditis shows diffuse concave ST elevation with PR depression across limb and precordial leads, except aVR and V1 which show PR elevation, a pattern distinguishing pericarditis from territorial ST elevation infarction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diffuse concave ST elevation across most leads with PR segment depression"
+          },
+          {
+            "id": "b",
+            "label": "Leads aVR and V1 paradoxically show PR elevation instead"
+          },
+          {
+            "id": "c",
+            "label": "ST segments normalize over days then T waves invert diffusely"
+          },
+          {
+            "id": "d",
+            "label": "No pathological Q waves or reciprocal changes unlike infarction"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Most children recover fully on anti inflammatory medicines alone, with a second drug added specifically to stop the illness coming back.",
+      "tx": "Treatment is **medical therapy for acute pericarditis**. First line medical treatment of acute idiopathic or viral pericarditis combines NSAIDs (ibuprofen) with weight adjusted colchicine for **3 months** to prevent recurrences, adding exercise restriction and proton protection until inflammation markers and echo normalize.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-myocarditis-gen1.webp",
+        "ar": 1.3333,
+        "caption": "Lateral wall edema with non ischaemic outer wall injury of myocarditis. Illustration: StewardMD original.",
+        "alt": "Short axis cardiac MRI pairs T2 weighted oedema images with contrast images showing subepicardial enhancement sparing the subendocardium."
+      }
+    }
+  ]
+}

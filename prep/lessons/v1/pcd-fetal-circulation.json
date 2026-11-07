@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "id": "pcd-fetal-circulation",
+  "title": "Fetal Circulation and Physiological Shunts",
+  "module": "Neonatal Haemodynamics and Transition",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The fetus survives on placental oxygen, so most umbilical venous blood bypasses the liver through a dedicated shunt called the ductus venosus.",
+      "tx": "Oxygenated placental return travels via the **ductus venosus**. The ductus venosus shunts **50-60%** of oxygenated umbilical venous blood directly into the inferior vena cava, bypassing the hepatic microcirculation so that the most oxygen rich blood reaches the fetal heart and brain without delay.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ana-fetal-remnants.svg",
+        "ar": 1.9048,
+        "caption": "Fetal vascular connections including the ductus venosus that channel oxygenated blood toward the heart. Illustration: StewardMD original.",
+        "alt": "Diagram of fetal vascular shunts including ductus venosus."
+      }
+    },
+    {
+      "say": "Inside the right atrium a small muscular ridge acts like a traffic policeman, steering the richest blood toward the left side of the heart.",
+      "tx": "Streaming is directed by the **crista dividens**. The crista dividens is a muscular ridge in the right atrium that directs high oxygen blood arriving from the inferior vena cava preferentially through the foramen ovale (the opening between the atria) into the left atrium and onward to the coronary and cerebral circulations.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Atrial Stream",
+          "Source and Oxygen Content",
+          "Destination"
+        ],
+        "rows": [
+          [
+            "Inferior vena cava stream",
+            "Placental blood via ductus venosus, highest saturation",
+            "Across foramen ovale to left atrium"
+          ],
+          [
+            "Superior vena cava stream",
+            "Deoxygenated blood from brain and upper body",
+            "Through tricuspid valve to right ventricle"
+          ],
+          [
+            "Coronary sinus stream",
+            "Deoxygenated myocardial venous return",
+            "Joins right ventricular pathway to lungs and ductus"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Because the fluid filled fetal lungs need almost no blood flow, a second shunt carries nearly the entire right ventricular output into the aorta.",
+      "tx": "Pulmonary bypass occurs through the **ductus arteriosus**. The ductus arteriosus diverts approximately **90 percent** of right ventricular output away from the high resistance fetal lungs, from the pulmonary artery into the descending aorta, so that only a small fraction reaches the pulmonary bed for growth and development.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Right ventricle ejects combined volume into the pulmonary trunk against high fetal pulmonary resistance"
+          },
+          {
+            "id": "b",
+            "label": "Ductus arteriosus carries about 90 percent of this output into the descending aorta"
+          },
+          {
+            "id": "c",
+            "label": "Residual 10 percent perfuses the developing lungs for nutrition and growth"
+          },
+          {
+            "id": "d",
+            "label": "Descending aortic flow supplies the lower body before returning to the placenta"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The ductus stays open before birth because of a local hormone and the low oxygen environment, and losing either signal is what closes it after delivery.",
+      "tx": "Patency depends on **prostaglandin E2**. Endogenous prostaglandin E2 (a local vessel relaxing hormone) together with low fetal oxygen tension maintains patency of the ductus arteriosus in utero, which is why prostaglandin blockers can close it and prostaglandin infusions can reopen it after birth.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Factors Keeping Ductus Open",
+          "points": [
+            "Prostaglandin E2 produced by placenta and ductal wall relaxes smooth muscle",
+            "Low fetal arterial oxygen tension of 20 to 30 mmHg favors relaxation",
+            "Prostaglandin infusion reopens the ductus in duct dependent lesions"
+          ]
+        },
+        "right": {
+          "title": "Factors Closing Ductus After Birth",
+          "points": [
+            "Rising arterial oxygen tension with the first breaths constricts muscle",
+            "Falling prostaglandin levels after placental separation remove relaxation",
+            "Prostaglandin blocking drugs such as indomethacin promote closure"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The first cry is a circulatory switch: air entry and oxygenation collapse lung resistance within minutes and flood the pulmonary bed with blood.",
+      "tx": "Transition begins with the **first breath**. The first breath produces lung expansion and oxygenation, dropping pulmonary vascular resistance by **80 percent** within the first postnatal minutes, which reverses flow across the ductus and foramen ovale and establishes the lungs as the site of gas exchange.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Circulatory Change",
+          "Trigger at Birth",
+          "Physiological Result"
+        ],
+        "rows": [
+          [
+            "Pulmonary vascular resistance falls 80 percent",
+            "Lung expansion and rising oxygen tension",
+            "Pulmonary blood flow surges eight to ten fold"
+          ],
+          [
+            "Foramen ovale closes functionally",
+            "Left atrial pressure exceeds right atrial pressure",
+            "Septum primum presses against septum secundum"
+          ],
+          [
+            "Ductus arteriosus flow reverses",
+            "Pulmonary pressure falls below systemic pressure",
+            "Left to right shunt precedes muscular constriction"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Within hours of a normal term delivery the ductus does not vanish, it simply squeezes shut as a muscle, and that timing matters when closure is delayed.",
+      "tx": "Early closure is **functional closure of ductus arteriosus**. Functional closure of the ductus arteriosus occurs within **10-15 hours** after birth in healthy term neonates through smooth muscle constriction of the vessel media, a reversible stage during which hypoxia or prostaglandins can still reopen the channel.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Functional Closure (Hours)",
+          "points": [
+            "Smooth muscle constriction narrows the lumen within 10 to 15 hours",
+            "Endothelial cushions and intimal thickening assist sealing",
+            "Reversible with hypoxia, acidosis, or prostaglandin exposure"
+          ]
+        },
+        "right": {
+          "title": "Anatomical Closure (Weeks)",
+          "points": [
+            "Fibrosis and cell death convert muscle to connective tissue",
+            "Completed by 2 to 3 weeks forming the ligamentum arteriosum",
+            "Permanent and no longer responsive to prostaglandins"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Over the next fortnight the closed ductus is remodelled into a fibrous cord, and knowing this endpoint helps you date murmurs and plan follow up.",
+      "tx": "Permanent sealing forms the **ligamentum arteriosum**. Anatomical closure of the ductus arteriosus is completed by **2-3 weeks** of life, when the constricted vessel is replaced by fibrous tissue called the ligamentum arteriosum, an avascular cord tethering the pulmonary artery to the aortic arch, completing anatomical closure by 2-3 weeks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sustained constriction produces luminal hypoxia of the ductal wall"
+          },
+          {
+            "id": "b",
+            "label": "Endothelial proliferation and smooth muscle cell death fill the lumen"
+          },
+          {
+            "id": "c",
+            "label": "Fibroblasts deposit collagen over 2 to 3 weeks after birth"
+          },
+          {
+            "id": "d",
+            "label": "Ligamentum arteriosum remains as the fibrous adult remnant"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When a newborn has a heart defect that cannot survive without the ductus, we hold it open with a prostaglandin drip until surgery is possible.",
+      "tx": "Duct dependent lesions need **alprostadil infusion**. Alprostadil (prostaglandin E1) infusion at **0.05-0.1 mcg/kg/min** maintains ductal patency in duct dependent congenital cardiac lesions, buying time for balloon septostomy or surgery while watching for apnoea, hypotension, and fever as dose related adverse effects.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/congenital-heart-disease-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Congenital septal defects including membranous ventricular septal defect with left-to-right shunting. Illustration: StewardMD original.",
+        "alt": "Diagram of ventricular septal defect showing left-to-right shunt and ventricular anatomy."
+      }
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "v": 1,
+  "id": "pcd-cardiac-catheterisation-diagnostics",
+  "title": "Diagnostic and Interventional Pediatric Cardiac Catheterisation",
+  "module": "Neonatal Haemodynamics and Transition",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "In the catheter laboratory we measure output without any flow probe, using oxygen consumption and the oxygen gap across the circulation instead.",
+      "tx": "Output is calculated by the **Fick principle**. Cardiac output equals oxygen consumption (VO2 in mL per min) divided by the arteriovenous oxygen difference (arterial oxygen content minus venous oxygen content), so a wide oxygen gap with normal consumption indicates a low output state requiring urgent support.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/rad-cardiovascular-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Severe pulmonary venous hypertension and marked vascular congestion on chest radiography. Illustration: StewardMD original.",
+        "alt": "Chest radiograph showing severe pulmonary vascular congestion."
+      }
+    },
+    {
+      "say": "Comparing saturations from four sampling sites tells you how much blood is short circuiting through a septal defect, expressed as a single ratio.",
+      "tx": "Shunt size is expressed as a **shunt calculation formula (Qp to Qs ratio)**. Pulmonary flow (Qp) divided by systemic flow (Qs) equals systemic arterial saturation minus mixed venous saturation, divided by pulmonary venous saturation minus pulmonary arterial saturation, with a ratio above 1.5 generally considered haemodynamically significant and worth closing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sampling Site",
+          "What It Represents",
+          "Role in the Ratio"
+        ],
+        "rows": [
+          [
+            "Systemic arterial saturation",
+            "Mixed blood actually reaching the body",
+            "Numerator start point"
+          ],
+          [
+            "Mixed venous saturation",
+            "SVC and IVC average return",
+            "Numerator subtraction term"
+          ],
+          [
+            "Pulmonary venous and arterial saturations",
+            "Oxygenated return and mixed pulmonary flow",
+            "Denominator defining pulmonary circuit"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A sudden jump in oxygen saturation as the catheter advances from one chamber to the next pinpoints exactly where the hole sits.",
+      "tx": "Location is identified by the **oximetric step up**. A saturation increase of **7-8% or more** between the right atrium and right ventricle confirms a left to right ventricular shunt, while a **9-10%** rise from the caval veins to the right atrium confirms an atrial level shunt.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Atrial Level Shunt",
+          "points": [
+            "Step up of 9 to 10 percent from SVC or IVC to right atrium",
+            "Oxygenated left atrial blood enters at the atrial level",
+            "Seen in atrial septal defects and partial anomalous drainage"
+          ]
+        },
+        "right": {
+          "title": "Ventricular Level Shunt",
+          "points": [
+            "Step up of 7 to 8 percent from right atrium to right ventricle",
+            "Oxygenated blood enters at the ventricular level",
+            "Seen in ventricular septal defects and aortopulmonary window"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The smallest patients face a specific vascular risk from arterial access, so every infant case ends with a careful limb perfusion check.",
+      "tx": "Access carries a risk of **femoral artery thrombosis (vascular access complications)**. Femoral artery thrombosis occurs in up to **3-5%** of infants undergoing arterial catheterisation, presenting with a pale pulseless limb that is treated with systemic heparinization (blood thinning) or recombinant tissue plasminogen activator (tPA) to dissolve the clot.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Preventive Measure",
+          "Technique",
+          "Clinical Benefit"
+        ],
+        "rows": [
+          [
+            "Ultrasound guided puncture",
+            "Single anterior wall stick with micropuncture set",
+            "Fewer passes and less intimal injury"
+          ],
+          [
+            "Weight based heparin dosing",
+            "Activated clotting time monitoring during the case",
+            "Prevents catheter related thrombus formation"
+          ],
+          [
+            "Smallest feasible sheath",
+            "Shortest length that reaches the target",
+            "Preserves distal perfusion in tiny vessels"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Children are far more sensitive to radiation than adults, so the laboratory follows strict dose sparing habits on every case.",
+      "tx": "Exposure is limited by **pulsed fluoroscopy**. Pediatric catheterization radiation mitigation uses pulsed fluoroscopy at **3-7.5 pulses/second** under **radiation dose reduction (ALARA)**, low dose detector settings, and strict collimation (narrowing the beam to the region of interest), with stored last image hold replacing repeat screening runs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Collimate tightly to the cardiac silhouette before any pedal press"
+          },
+          {
+            "id": "b",
+            "label": "Use pulsed fluoroscopy at 3-7.5 pulses/second with low dose mode"
+          },
+          {
+            "id": "c",
+            "label": "Review last image hold instead of re screening the same view"
+          },
+          {
+            "id": "d",
+            "label": "Record dose area product and audit outliers monthly"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Device closure of the ductus looks tempting, but three specific situations make it unsafe and each has a clear physiological reason.",
+      "tx": "Closure has defined **transcatheter PDA closure contraindications**. Ductal occlusion using Amplatzer duct occluders is contraindicated in neonates with active sepsis, severe pulmonary hypertension with right to left shunt, or duct dependent systemic lesions, because closing the ductus in these settings removes the only pathway sustaining life.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "When Closure Is Unsafe",
+          "points": [
+            "Active sepsis with bacteraemia risks seeding the device with infection",
+            "Severe pulmonary hypertension with right to left shunt needs pop off",
+            "Duct dependent systemic circulation collapses without ductal flow"
+          ]
+        },
+        "right": {
+          "title": "When Closure Is Appropriate",
+          "points": [
+            "Haemodynamically significant ductus with left heart volume overload",
+            "Child beyond the prostaglandin dependent window and infection free",
+            "Pulmonary pressures low enough to tolerate loss of the shunt"
+          ]
+        }
+      }
+    },
+    {
+      "say": "For a narrowed aorta the catheter laboratory now offers a definitive fix, and the choice between balloon and stent depends mainly on the size of the child.",
+      "tx": "Obstruction is treated by **balloon coarctation angioplasty**. Balloon angioplasty is the intervention of choice for native coarctation in older children and for recoarctation after surgery, while covered stenting (a fabric lined scaffold) is preferred in adolescents above **35 kg** whose near adult aortic size accepts a stent safely.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient Group",
+          "Preferred Catheter Therapy",
+          "Reason for Selection"
+        ],
+        "rows": [
+          [
+            "Older child with native coarctation",
+            "Balloon angioplasty of the shelf",
+            "Avoids surgery and grows with the child"
+          ],
+          [
+            "Recoarctation after surgical repair",
+            "Balloon angioplasty as first line",
+            "Scarred reoperative field makes redo surgery hazardous"
+          ],
+          [
+            "Adolescent above 35 kg",
+            "Covered stent implantation",
+            "Adult sized aorta holds the scaffold with wall protection"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The final numbers from the catheter tell you how stiff and overloaded the left ventricle is, and there are clear cut offs to remember.",
+      "tx": "Filling pressures are judged by **left ventricular end diastolic pressure**. Normal resting left ventricular end diastolic pressure in children is **6-12 mmHg**, while values above **15-18 mmHg** indicate elevated left sided filling pressures from volume overload, diastolic dysfunction, or obstructive left heart disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/rad-cardiovascular-s4.webp",
+        "ar": 1.3333,
+        "caption": "Severe pulmonary arterial hypertension with marked central trunk dilatation and elevated vascular resistance. Illustration: StewardMD original.",
+        "alt": "Schematic demonstrating elevated pulmonary arterial pressures and peripheral pruning."
+      }
+    }
+  ]
+}

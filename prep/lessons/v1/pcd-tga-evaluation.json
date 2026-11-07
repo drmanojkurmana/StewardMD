@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "id": "pcd-tga-evaluation",
+  "title": "D-Transposition of the Great Arteries (D-TGA)",
+  "module": "Cyanotic Heart Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "In this lesion the two great arteries leave the wrong ventricles, so oxygenated and deoxygenated blood run on separate loops that never meet.",
+      "tx": "Connections show **ventriculoarterial discordance with parallel circulation**. D transposition features ventriculoarterial discordance where the aorta arises from the right ventricle and the pulmonary artery from the left ventricle, creating two parallel, independent circulations that cannot sustain life without mixing between them, and the infant depends entirely on prompt prostaglandin support after delivery.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/ped-congenital-heart-fig1.webp",
+        "ar": 1.8349,
+        "caption": "Cyanotic congenital cardiac anomalies and classic pulmonary vascular patterns on radiography. Image: Dong Soo Kim.",
+        "alt": "Radiological and anatomical comparison of cyanotic heart defects."
+      }
+    },
+    {
+      "say": "A baby with this anatomy survives only through holes that let the two circuits trade blood, which is why the ductus must never be allowed to close.",
+      "tx": "Survival requires **intercirculatory mixing at an obligatory mixing site**. Survival requires communication between the circuits via a patent ductus arteriosus, atrial septal defect, or ventricular septal defect, so prostaglandin infusion is started immediately and oxygen alone is never relied upon to improve saturation, because supplemental oxygen cannot bridge two circuits that never meet.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mixing Site",
+          "Level of Communication",
+          "Clinical Note"
+        ],
+        "rows": [
+          [
+            "Patent ductus arteriosus",
+            "Great artery level mixing",
+            "Maintain with alprostadil until septostomy"
+          ],
+          [
+            "Atrial septal defect",
+            "Atrial level streaming exchange",
+            "Enlarged by Rashkind balloon septostomy"
+          ],
+          [
+            "Ventricular septal defect",
+            "Ventricular level bidirectional flow",
+            "Improves mixing and delays LV regression"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The chest film shows an egg balanced on a string, a silhouette produced by the abnormally stacked great vessels.",
+      "tx": "Radiography demonstrates the **egg-on-a-string appearance (egg on a string sign)**. Chest radiograph classically demonstrates an egg on a string cardiac silhouette due to a narrow superior mediastinal shadow from anteroposterior great vessel alignment and thymic involution, with increased pulmonary vascular markings from torrential pulmonary flow.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Egg (Cardiac Shadow)",
+          "points": [
+            "Ovoid enlarged heart from volume loaded ventricles",
+            "Pulmonary plethora with engorged vascular markings",
+            "Right heart border formed by the right sided left atrium"
+          ]
+        },
+        "right": {
+          "title": "String (Mediastinum)",
+          "points": [
+            "Narrow pedicle from anteroposterior vessel stacking",
+            "Absent thymic shadow from stress involution",
+            "Missing normal pulmonary bay contour"
+          ]
+        }
+      }
+    },
+    {
+      "say": "At the bedside, often under echo guidance alone, a balloon catheter can tear a generous hole in the atrial septum within minutes.",
+      "tx": "Stabilization uses the **Rashkind septostomy**. Balloon atrial septostomy (the Rashkind procedure) is performed percutaneously or at the bedside under echocardiographic guidance to create a large unrestrictive interatrial communication, rapidly improving mixing and saturation in a crashing neonate, and the torn septum stays open reliably until the arterial switch is performed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Umbilical or femoral venous access with balloon catheter to right atrium"
+          },
+          {
+            "id": "b",
+            "label": "Balloon advanced across foramen ovale into the left atrium"
+          },
+          {
+            "id": "c",
+            "label": "Inflated balloon jerked back to tear the septum primum"
+          },
+          {
+            "id": "d",
+            "label": "Confirm unrestrictive atrial shunt with saturation rise on echo"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The modern cure physically swaps the arteries back to their correct ventricles, carrying the tiny coronary buttons along with them.",
+      "tx": "Correction is the **arterial switch operation**. The arterial switch operation (the Jatene procedure) is the definitive anatomical correction of choice, transecting and switching the great vessels with coronary artery reimplantation, which restores the left ventricle as the systemic pump, and long term outcomes now rival those of simpler arterial repairs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Operative Step",
+          "Technical Detail",
+          "Purpose"
+        ],
+        "rows": [
+          [
+            "Transect both great vessels",
+            "Aorta and pulmonary artery divided above sinuses",
+            "Mobilize roots for swapping"
+          ],
+          [
+            "Transfer coronary buttons",
+            "Excised cuffs reimplanted into neo aorta",
+            "Preserve myocardial perfusion"
+          ],
+          [
+            "LeCompte manoeuvre",
+            "Pulmonary bifurcation draped anterior to aorta",
+            "Avoids compression of the translocated vessels"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Timing is everything: leave the left ventricle pumping to low resistance lungs for a month and it becomes too weak to face the body.",
+      "tx": "Timing follows the **Jatene procedure window (left ventricular preparedness)**. The arterial switch operation must be performed within the first **2-3 weeks** of life in intact ventricular septum cases, before left ventricular mass regresses from pumping against low pulmonary resistance, after which the ventricle cannot sustain systemic afterload.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early Switch (<3 Weeks)",
+          "points": [
+            "Left ventricle still thick from fetal systemic workload",
+            "Single stage anatomical correction with excellent survival",
+            "Standard pathway for intact septum transposition"
+          ]
+        },
+        "right": {
+          "title": "Late Presentation",
+          "points": [
+            "Regressed left ventricle fails against sudden systemic load",
+            "Needs rapid two stage retraining with pulmonary banding",
+            "Ventricular septal defect cases stay prepared longer"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A rarer cousin flips both the atria and the arteries, leaving the right ventricle to do the heavy lifelong work for the body.",
+      "tx": "The related entity is **congenitally corrected transposition**. Congenitally corrected transposition (L-TGA, ccTGA) features both atrioventricular and ventriculoarterial discordance, where the systemic ventricle is the morphologic right ventricle, an arrangement that stays compensated for decades before systemic ventricular failure appears in adult life.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Right atrium connects through mitral valve to left ventricle"
+          },
+          {
+            "id": "b",
+            "label": "Left ventricle ejects into the pulmonary artery normally"
+          },
+          {
+            "id": "c",
+            "label": "Left atrium connects through tricuspid valve to right ventricle"
+          },
+          {
+            "id": "d",
+            "label": "Morphologic right ventricle sustains the systemic circulation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Even without surgery, this corrected form carries a slow electrical price: the conduction bundle fails a little more with every passing year.",
+      "tx": "Follow up anticipates **progressive heart block in L-TGA**. Spontaneous complete atrioventricular block develops at a rate of approximately **2 percent per year** throughout life in congenitally corrected transposition due to an elongated, abnormal conduction bundle, mandating lifelong Holter surveillance and a low threshold for pacing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sct-aorta-congenital-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Tetralogy of Fallot anatomy demonstrating subpulmonary infundibular narrowing, ventricular defect, and right ventricular hypertrophy. Illustration: StewardMD original.",
+        "alt": "Diagram illustrating the anatomical components of Tetralogy of Fallot."
+      }
+    }
+  ]
+}

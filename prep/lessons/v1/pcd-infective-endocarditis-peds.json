@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "id": "pcd-infective-endocarditis-peds",
+  "title": "Pediatric Infective Endocarditis and SBE Prophylaxis",
+  "module": "Acquired Pediatric Heart Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Diagnosing infected valves uses a points system where scans and blood cultures carry the most weight, and the arithmetic is worth memorising.",
+      "tx": "Diagnosis applies the **modified Duke criteria**. Definitive clinical diagnosis requires 2 major criteria, 1 major plus 3 minor, or 5 minor criteria, with echocardiography showing vegetations and persistently positive blood cultures counting as the two major criteria in children with congenital heart disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/pcd-congenital-fig1.webp",
+        "ar": 1.4752,
+        "caption": "Key cyanotic congenital heart defects: Tetralogy of Fallot and Transposition of the Great Arteries. Image: National Heart Lung and Blood Institute (NIH), CC0/PD, Wikimedia Commons.",
+        "alt": "Anatomical diagrams of Tetralogy of Fallot (TOF) showing four defects and D-Transposition of the Great Arteries (TGA) with transposed vessels."
+      }
+    },
+    {
+      "say": "Two families of bacteria cause the great majority of childhood valve infections, one from the mouth and one from the skin.",
+      "tx": "Microbiology centres on **bacterial pathogens in CHD (viridans streptococci and aureus)**. Viridans group streptococci (Streptococcus mitis, oralis from dental plaque) and Staphylococcus aureus (from skin and catheters) are the two predominant pathogens causing infective endocarditis in children with congenital heart disease, and prior dental or skin procedures often provide the bacteraemic trigger.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathogen Group",
+          "Typical Source",
+          "Clinical Pattern"
+        ],
+        "rows": [
+          [
+            "Viridans streptococci (mitis, oralis)",
+            "Gingival bleeding and dental procedures",
+            "Subacute course with prolonged low grade fever"
+          ],
+          [
+            "Staphylococcus aureus",
+            "Skin sepsis and central venous catheters",
+            "Acute destructive disease with rapid valve damage"
+          ],
+          [
+            "Culture negative cases",
+            "Prior antibiotics or Coxiella and Bartonella",
+            "Serology and valve PCR guide therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Routine antibiotics before dental work are gone for most heart patients; only a short list of high risk conditions still qualifies.",
+      "tx": "Prophylaxis is restricted to **high-risk cardiac lesions**. Antibiotic prophylaxis is restricted only to high risk lesions: prosthetic cardiac valves or material, previous infective endocarditis, unrepaired cyanotic congenital heart disease, repaired disease with residual defects, or within **6 months** of repair before endothelialisation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prophylaxis Indicated",
+          "points": [
+            "Prosthetic valves, rings, or implanted conduits and devices",
+            "Previous episode of infective endocarditis",
+            "Unrepaired cyanotic defects or repair within 6 months"
+          ]
+        },
+        "right": {
+          "title": "Prophylaxis Not Needed",
+          "points": [
+            "Isolated atrial septal defect or fully repaired septal defects",
+            "Physiological murmurs with structurally normal hearts",
+            "Coronary stents or device closure beyond 6 months without leak"
+          ]
+        }
+      }
+    },
+    {
+      "say": "For the children who do qualify, a single measured spoonful of amoxicillin an hour before the dentist is the entire prescription.",
+      "tx": "Regimen is a **dental prophylaxis regimen (single dose amoxicillin)**. A single oral dose of amoxicillin **50 mg/kg** (maximum **2 g**) administered **30-60 minutes** prior to invasive dental procedures manipulating gingival tissue protects high risk children during transient bacteraemia, and good oral hygiene every day matters more than any single dose.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm high risk lesion on the cardiology problem list"
+          },
+          {
+            "id": "b",
+            "label": "Weigh the child and calculate 50 mg per kg up to 2 g maximum"
+          },
+          {
+            "id": "c",
+            "label": "Give the single dose 30 to 60 minutes before gingival manipulation"
+          },
+          {
+            "id": "d",
+            "label": "Document administration and reinforce twice yearly dental review"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Children with severe penicillin allergy are not left unprotected; three weight based alternatives cover the same dental bacteraemia.",
+      "tx": "Allergy switches to **penicillin allergy alternatives (macrolide or cephalosporin cover)**. For patients with severe immediate type penicillin allergy, cephalexin (**50 mg/kg**), azithromycin (**15 mg/kg**), or clarithromycin (**15 mg/kg**) is recommended as a single pre procedure dose with the same timing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Alternative Drug",
+          "Single Dose",
+          "Caution"
+        ],
+        "rows": [
+          [
+            "Cephalexin",
+            "50 mg per kg orally",
+            "Avoid if history of penicillin anaphylaxis with cross reactivity"
+          ],
+          [
+            "Azithromycin",
+            "15 mg per kg orally",
+            "Check QT interval with interacting cardiac drugs"
+          ],
+          [
+            "Clarithromycin",
+            "15 mg per kg orally",
+            "Bitter taste affects adherence in small children"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "While cultures incubate, treatment starts blind with a combination that covers both mouth streptococci and resistant skin staphylococci.",
+      "tx": "Empiric therapy combines **empiric antimicrobial therapy (beta lactam with gentamicin)**. Initial empiric therapy for native valve endocarditis in children combines ampicillin (**200 mg/kg/day**) or ceftriaxone with gentamicin (**3 mg/kg/day**), adding vancomycin if methicillin resistant Staphylococcus aureus is suspected, with drug levels and renal function monitored throughout therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard Empiric Cover",
+          "points": [
+            "Ampicillin 200 mg per kg per day covers streptococci and enterococci",
+            "Gentamicin 3 mg per kg per day adds bactericidal synergy",
+            "Ceftriaxone substitutes where outpatient once daily dosing helps"
+          ]
+        },
+        "right": {
+          "title": "Escalation for Resistance",
+          "points": [
+            "Add vancomycin for hospital acquired or MRSA suspected disease",
+            "Monitor drug levels, hearing, and renal function on therapy",
+            "Narrow to targeted therapy once sensitivities return"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Medicines cannot fix every valve: large infected clots with emboli, destroyed valves in failure, and abscesses all demand the surgeon.",
+      "tx": "Surgery follows **vegetation size indications for surgery (valvular destruction criteria)**. Surgical valve repair or replacement is indicated for persistent vegetation above **10 mm** with embolic events, severe valvular regurgitation with refractory heart failure, or perivalvular abscess (infected pocket around the valve ring) threatening conduction tissue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Measure vegetation size and mobility on transoesophageal echo"
+          },
+          {
+            "id": "b",
+            "label": "Vegetation over 10 mm with embolus meets operative threshold"
+          },
+          {
+            "id": "c",
+            "label": "Refractory failure or abscess mandates urgent valve surgery"
+          },
+          {
+            "id": "d",
+            "label": "Excise infected tissue fully and reconstruct with patch or prosthesis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The textbook skin and eye signs make memorable examination questions, but in real children they are the exception rather than the rule.",
+      "tx": "Peripheral signs show **peripheral stigmata rarity in children**. Classic immunological and vascular stigmata (Osler nodes, Janeway lesions, Roth spots, splinter haemorrhages) are present in under **10-15%** of children with infective endocarditis, so persistent fever with a new murmur in congenital heart disease should trigger cultures regardless.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/phe-screening-fig1.webp",
+        "ar": 1.8349,
+        "caption": "Pathogenesis of acute rheumatic fever and rheumatic heart disease with autoimmune valve damage. Image: StewardMD original.",
+        "alt": "Diagram illustrating streptococcal pharyngeal infection progressing to autoimmune carditis."
+      }
+    }
+  ]
+}

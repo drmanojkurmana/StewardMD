@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "id": "pcd-pda-hemodynamics",
+  "title": "Patent Ductus Arteriosus: Preterm and Term Presentations",
+  "module": "Acyanotic Congenital Heart Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The ductus murmur never pauses for diastole, it rumbles on through the second sound like distant machinery, and its location gives it away.",
+      "tx": "Auscultation reveals a **continuous machinery murmur**. The classic Gibson murmur of patent ductus arteriosus is a continuous, rough, machinery like murmur peaking around the second heart sound (S2), best heard at the left infraclavicular area and the second left intercostal space near the sternal edge.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-acyanotic-chd-gen2.webp",
+        "ar": 1.3393,
+        "caption": "Aortic coarctation demonstrating narrowing distal to arch vessels with collateral intercostal circulation. Illustration: StewardMD original.",
+        "alt": "Medical illustration of thoracic aorta coarctation with collateral vessels."
+      }
+    },
+    {
+      "say": "Because blood escapes the aorta into the lungs all through diastole, diastolic pressure collapses and the pulse feels like a hammer blow.",
+      "tx": "Run off produces **bounding peripheral pulses** with a wide pulse pressure. Rapid diastolic run off from the high pressure aorta into the low pressure pulmonary circulation causes wide pulse pressure with bounding water hammer pulses (abrupt striking pulse with rapid collapse) palpable in the carotids and peripheral arteries.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Bedside Sign",
+          "Mechanism",
+          "What It Indicates"
+        ],
+        "rows": [
+          [
+            "Bounding water hammer pulse",
+            "High stroke volume with rapid diastolic collapse",
+            "Large run off through a sizeable ductus"
+          ],
+          [
+            "Wide pulse pressure over 40 mmHg",
+            "Low diastolic pressure from pulmonary steal",
+            "Haemodynamically significant left to right shunt"
+          ],
+          [
+            "Hyperdynamic precordium",
+            "Left ventricular volume overload",
+            "Chronic large shunt needing closure"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In the tiniest premature babies the ductus stays open more often than not, so the neonatal unit screens for it as a matter of routine.",
+      "tx": "Prematurity drives **preterm PDA incidence**. In extremely low birth weight infants weighing under **1000 g**, haemodynamically significant patent ductus arteriosus occurs in over **50-70%** of neonates, because immature ductal muscle responds poorly to oxygen and prostaglandin withdrawal is incomplete, so screening echocardiography is routine in this group.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Preterm Ductus (<1000 g)",
+          "points": [
+            "Significant ductus in 50 to 70 percent of extremely low birth weight infants",
+            "Immature vessel wall with poor oxygen sensing and closure",
+            "Presents with ventilator dependence, apnoea, and renal compromise"
+          ]
+        },
+        "right": {
+          "title": "Term Ductus",
+          "points": [
+            "Functional closure expected within 10 to 15 hours of birth",
+            "Persistent patency beyond 3 months is considered pathological",
+            "Presents later with murmur, recurrent chest infections, or failure to thrive"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Before reaching for a device or a surgeon, neonatologists try medicines that block prostaglandins, and each drug has a standard weight based dose.",
+      "tx": "Closure uses **pharmacological closure drugs (cyclooxygenase inhibitors)**. Cyclooxygenase inhibitors including indomethacin (**0.2 mg/kg**), ibuprofen (**10 mg/kg** initial followed by **5 mg/kg**), or paracetamol (**15 mg/kg** every 6 hours) achieve ductal closure in preterm infants by removing the prostaglandin signal holding the vessel open.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm haemodynamic significance with echo: large ductus with left heart dilation"
+          },
+          {
+            "id": "b",
+            "label": "Check platelets, creatinine, urine output, and cranial ultrasound before therapy"
+          },
+          {
+            "id": "c",
+            "label": "Give weight based cyclooxygenase inhibitor course per protocol"
+          },
+          {
+            "id": "d",
+            "label": "Repeat echo; refer for ligation or device if ductus remains significant"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When kidneys are fragile or the gut is threatened, one of these medicines is clearly kinder than the other while working just as well.",
+      "tx": "Choice favours an **ibuprofen safety profile**. Ibuprofen demonstrates equal efficacy to indomethacin with significantly lower risk of necrotizing enterocolitis (severe intestinal injury of prematurity) and renal impairment, making it the preferred first agent when mesenteric or renal perfusion is already marginal, and this advantage persists across repeated courses in very low birth weight care.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug Comparison",
+          "Closure Efficacy",
+          "Adverse Effect Profile"
+        ],
+        "rows": [
+          [
+            "Indomethacin 0.2 mg per kg",
+            "Equivalent ductal closure rates",
+            "Higher mesenteric vasoconstriction and oliguria risk"
+          ],
+          [
+            "Ibuprofen 10 then 5 mg per kg",
+            "Equal efficacy in trials",
+            "Lower necrotizing enterocolitis and renal impairment"
+          ],
+          [
+            "Paracetamol 15 mg per kg",
+            "Useful alternative option",
+            "Hepatic monitoring needed with prolonged courses"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A mother who caught German measles in early pregnancy can leave her baby with a very specific pair of cardiac scars.",
+      "tx": "Aetiology includes **maternal rubella**. Maternal first trimester rubella infection is classically associated with persistent patent ductus arteriosus and peripheral pulmonary artery stenosis (narrowing of the branch lung arteries), part of the congenital rubella syndrome triad with cataracts and sensorineural deafness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cardiac Lesions of Rubella",
+          "points": [
+            "Persistent patent ductus arteriosus from disrupted vessel remodelling",
+            "Peripheral pulmonary artery stenosis with ejection systolic murmur",
+            "Occasional ventricular septal defect in severe infection"
+          ]
+        },
+        "right": {
+          "title": "Non Cardiac Clues",
+          "points": [
+            "Cataracts or salt and pepper retinopathy of the eyes",
+            "Sensorineural hearing loss from cochlear damage",
+            "Microcephaly with developmental delay in severe cases"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Once the child is big enough, the cardiologist can plug the ductus through a leg vessel and send the patient home the next day.",
+      "tx": "Definitive therapy is **transcatheter coil and occluder closure**. Percutaneous transcatheter closure using coils or duct occluders is the standard treatment for term infants and older children weighing above **5-6 kg**, with device selection guided by ductal size and shape on lateral angiography.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Femoral venous access with catheter course across right heart to pulmonary artery"
+          },
+          {
+            "id": "b",
+            "label": "Lateral aortogram profiles ductal type, length, and narrowest diameter"
+          },
+          {
+            "id": "c",
+            "label": "Coil or occluder deployed with aortic retention skirt seated"
+          },
+          {
+            "id": "d",
+            "label": "Confirm abolition of shunt and unobstructed arch and pulmonary flow"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "If lung pressures climb above systemic levels the shunt flips direction, and the feet turn blue while the face stays pink.",
+      "tx": "Reversal produces **differential cyanosis**. When severe pulmonary hypertension reverses the ductal shunt right to left, differential cyanosis appears with cyanosis of the lower limbs but pink normal upper extremities, because deoxygenated blood enters the aorta distal to the left subclavian origin.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/congenital-heart-disease-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Congenital septal defects including membranous ventricular septal defect with left-to-right shunting. Illustration: StewardMD original.",
+        "alt": "Diagram of ventricular septal defect showing left-to-right shunt and ventricular anatomy."
+      }
+    }
+  ]
+}
