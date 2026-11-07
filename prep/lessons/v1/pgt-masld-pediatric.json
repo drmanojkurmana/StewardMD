@@ -1,0 +1,244 @@
+{
+  "gen": "AI",
+  "id": "pgt-masld-pediatric",
+  "module": "Neonatal Cholestasis, Metabolic Liver Disease and Cirrhosis",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Metabolic dysfunction associated steatotic liver disease is now the commonest chronic liver condition in pediatrics. It affects over thirty five to forty percent of children with obesity, driven by excess calorie intake, insulin resistance, and physical inactivity.",
+      "tx": "Recognise the **MASLD prevalence in pediatric obesity**. Metabolic dysfunction-associated steatotic liver disease (MASLD, formerly NAFLD) has emerged as the most prevalent chronic liver disease in children, affecting 35-40% of children with obesity and 8-10% of the general pediatric population, driven by systemic insulin resistance and dyslipidemia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient Population",
+          "Estimated MASLD Prevalence"
+        ],
+        "rows": [
+          [
+            "General pediatric population",
+            "8% to 10%"
+          ],
+          [
+            "Children and adolescents with obesity",
+            "35% to 40% (up to 70% in severe obesity)"
+          ],
+          [
+            "Youth with type 2 diabetes mellitus",
+            "> 50%"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Screen every child with obesity starting between ages nine and eleven using serum alanine aminotransferase. Do not use adult cutoffs. The upper limit of normal in children is much stricter: twenty six units per litre in boys and twenty two units per litre in girls.",
+      "tx": "Apply **screening ALT thresholds** in pediatrics. ESPGHAN guidelines recommend screening all children with obesity (BMI >= 95th percentile) or overweight with metabolic risk factors beginning at age 9-11 using serum ALT. The pediatric abnormal thresholds are strictly > 26 U/L in boys and > 22 U/L in girls, representing nearly half the adult laboratory reference limits.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Gender",
+          "Upper Limit of Normal ALT (Pediatric)",
+          "Adult Reference Comparison"
+        ],
+        "rows": [
+          [
+            "Boys (age >= 9-11)",
+            "> 26 U/L is abnormal",
+            "Adult cutoff often 45-50 U/L (misses pediatric disease)"
+          ],
+          [
+            "Girls (age >= 9-11)",
+            "> 22 U/L is abnormal",
+            "Adult cutoff often 35-40 U/L (misses pediatric disease)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Under the microscope, pediatric liver injury looks remarkably different from adult disease. Children typically develop Type two NASH with panacinar fat accumulation and periportal fibrosis, usually lacking the ballooning hepatocytes and Mallory bodies seen in adults.",
+      "tx": "Differentiate the **histopathology difference from adults**. Pediatric MASLD uniquely manifests as 'Type 2 NASH', characterized by diffuse panacinar steatosis, prominent periportal inflammation, and early periportal fibrosis without the centrilobular ballooning degeneration or Mallory-Denk bodies characteristic of adult Type 1 NASH.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adult Type 1 NASH",
+          "points": [
+            "Centrilobular zone 3 steatosis",
+            "Prominent hepatocyte ballooning degeneration",
+            "Abundant Mallory-Denk inclusion bodies",
+            "Perisinusoidal chicken-wire fibrosis"
+          ]
+        },
+        "right": {
+          "title": "Pediatric Type 2 NASH",
+          "points": [
+            "Diffuse panacinar steatosis across all zones",
+            "Periportal inflammation and portal-periportal fibrosis",
+            "Infrequent ballooning degeneration",
+            "Absence of classic Mallory-Denk bodies"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A genetic variation in the PNPLA3 gene will cause severe fatty liver and fibrosis in youth. The I one forty eight M polymorphism alters hepatic lipid breakdown, leading to marked triglyceride accumulation in hepatocytes, especially in Hispanic and Asian children.",
+      "tx": "Identify the **PNPLA3 gene polymorphism** risk. The isoleucine-to-methionine substitution at residue 148 (I148M variant) in the patatin-like phospholipase domain-containing 3 (PNPLA3) gene impairs hepatocellular lipolysis. Homozygosity strongly predisposes to marked hepatic steatosis, rapid metabolic dysfunction-associated steatohepatitis (MASH) progression, and early fibrosis, particularly in Hispanic and South Asian children.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "PNPLA3 I148M genetic variant"
+          },
+          {
+            "id": "b",
+            "label": "Impaired triglyceride hydrolysis at lipid droplet surface"
+          },
+          {
+            "id": "c",
+            "label": "Massive hepatocyte triglyceride accumulation"
+          },
+          {
+            "id": "d",
+            "label": "Accelerated steatohepatitis and periportal fibrosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Lifestyle change is the true cornerstone of treatment. Cut out sugar sweetened drinks and free fructose, aim for at least sixty minutes of vigorous exercise every day, and achieve a five to ten percent reduction in body weight to reverse hepatic steatosis.",
+      "tx": "Prescribe **lifestyle modification cornerstone** interventions as primary therapy. Complete elimination of sugar-sweetened beverages and high-fructose corn syrup, combined with >= 60 minutes/day of moderate-to-vigorous physical activity and achieving 5-10% weight loss, reverses hepatic steatosis, normalizes transaminases, and improves histological necroinflammation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Intervention Category",
+          "Specific Target",
+          "Histological Impact"
+        ],
+        "rows": [
+          [
+            "Dietary restriction",
+            "Eliminate sugar-sweetened beverages and excess free fructose",
+            "Reduces de novo lipogenesis"
+          ],
+          [
+            "Physical exercise",
+            ">= 60 minutes/day moderate-to-vigorous aerobic activity",
+            "Improves peripheral and hepatic insulin sensitivity"
+          ],
+          [
+            "Target weight loss",
+            "5-10% sustained reduction in baseline body weight",
+            "Induces resolution of steatohepatitis and fibrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Natural vitamin E at four hundred to eight hundred international units daily is effective for biopsy proven steatohepatitis in non diabetic children. In the TONIC trial, vitamin E significantly improved hepatocyte ballooning and reduced steatosis.",
+      "tx": "Evaluate **vitamin E in pediatric MASH** pharmacotherapy systematically. Oral natural vitamin E (RRR-alpha-tocopherol at 400-800 IU/day) significantly reduces hepatocyte ballooning, lobular inflammation, and steatosis in non-diabetic children with biopsy-proven steatohepatitis. This efficacy was conclusively demonstrated in the landmark multicenter TONIC clinical trial, establishing vitamin E as the primary evidence-based medical therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vitamin E (400-800 IU/day)",
+          "points": [
+            "Potent lipid-soluble antioxidant",
+            "Significant histological improvement in TONIC trial",
+            "Recommended for non-diabetic biopsy-proven MASH"
+          ]
+        },
+        "right": {
+          "title": "Metformin",
+          "points": [
+            "Improves peripheral insulin sensitivity",
+            "Failed to improve liver histology in TONIC trial",
+            "Not recommended as specific MASH therapy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Use vibration controlled transient elastography to monitor liver stiffness without a biopsy. A stiffness measurement between seven and nine kilopascals indicates significant hepatic fibrosis that requires intensive specialist management.",
+      "tx": "Monitor via **transient elastography / FibroScan**. Vibration-controlled transient elastography (VCTE) non-invasively quantifies liver stiffness in kilopascals (kPa) alongside Controlled Attenuation Parameter (CAP in dB/m) for steatosis. Liver stiffness values > 7-9 kPa indicate significant fibrosis (stage >= F2), identifying children requiring hepatology referral and potential histological staging.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "VCTE Liver Stiffness (kPa)",
+          "Fibrosis Stage Correlation",
+          "Clinical Management"
+        ],
+        "rows": [
+          [
+            "< 7.0 kPa",
+            "Stage F0-F1 (None or mild)",
+            "Routine lifestyle reinforcement and annual monitoring"
+          ],
+          [
+            "7.0 to 9.0 kPa",
+            "Stage F2 (Significant fibrosis)",
+            "Specialist pediatric hepatology evaluation"
+          ],
+          [
+            "> 9.0 kPa",
+            "Stage F3-F4 (Advanced fibrosis / cirrhosis)",
+            "Intensive therapy, portal hypertension screening, staging biopsy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pediatric steatohepatitis is not benign. Without intervention, aggressive fibrosis can advance to cryptogenic cirrhosis and portal hypertension in early adulthood, making MASLD an increasingly common indication for liver transplantation in young adults.",
+      "tx": "Prevent **cirrhosis and early transplant need**. Pediatric MASH is a progressive condition that can culminate in early-onset cryptogenic cirrhosis, hepatic decompensation, and end-stage liver disease during young adult life, now recognized as an accelerating indication for adult liver transplantation requiring vigorous childhood intervention.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Childhood obesity, insulin resistance, and steatosis"
+          },
+          {
+            "id": "b",
+            "label": "Progressive periportal fibrogenesis (Type 2 MASH)"
+          },
+          {
+            "id": "c",
+            "label": "Bridging fibrosis and cryptogenic cirrhosis in early adulthood"
+          },
+          {
+            "id": "d",
+            "label": "End-stage liver failure and liver transplantation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "subject": "ss-paediatric-gastroenterology",
+  "title": "Pediatric Metabolic Dysfunction-Associated Steatotic Liver Disease (MASLD)",
+  "v": 1
+}
