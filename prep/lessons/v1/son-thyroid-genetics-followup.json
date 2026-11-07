@@ -3,7 +3,7 @@
   "module": "son-thyroid-genetics-followup",
   "subject": "ss-medical-oncology",
   "title": "Thyroid cancer genetics, TSH suppression and surveillance",
-  "minutes": 10,
+  "minutes": 11,
   "steps": [
     {
       "tx": "Driver mutations differ by subtype. **Papillary** carcinoma (a cancer with finger-like projections) is driven mostly by MAPK pathway changes (a chain of growth signals), including **BRAF V600E** and **RET/PTC** fusions. **Follicular** carcinoma (arising from follicle cells) relies on **RAS** point mutations or a **PAX8::PPARG** fusion. **Medullary** carcinoma (arising from calcitonin-making C cells) is driven by a **RET** mutation. **Anaplastic** carcinoma (poorly differentiated and fast-growing) shows **TP53** loss and **TERT** promoter mutations. **Oncocytic** tumors (cells packed with mitochondria) carry changes in **mitochondrial genes**.",
@@ -175,6 +175,17 @@
       }
     },
     {
+      "tx": "This section of **anaplastic thyroid carcinoma** shows how far the tumour has moved from normal thyroid. Pleomorphic **spindle cells** and bizarre **giant cells** replace the follicles, with atypical mitoses and areas of necrosis. This loss of differentiation fits the TP53 and TERT changes described above and the very rapid growth of this cancer.",
+      "say": "This section of anaplastic thyroid carcinoma shows how far the tumour has moved from normal thyroid. Pleomorphic spindle cells and bizarre giant cells have taken the place of the follicles, and there are atypical mitoses and areas of necrosis. This loss of differentiation fits the TP53 and TERT changes just described, and the very rapid growth of this cancer.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-thyroid-genetics-followup-gen2.webp",
+        "alt": "H and E stained section showing spindle cells, giant cell, atypical mitosis and necrosis",
+        "caption": "Histology showing spindle cells, giant cell, atypical mitosis and necrosis. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "After treatment, the target for **thyroid-stimulating hormone** (TSH, the pituitary signal to the thyroid) depends on the chance of recurrence, measured in milli-international units per litre (mIU/L). For **low-risk** disease, TSH is kept in the lower half of the normal range, 0.5 to 2.0 mIU/L. For **intermediate-risk** disease the target is 0.1 to 0.5 mIU/L, and for **high-risk** disease it is 0.1 mIU/L or lower. **Levothyroxine** (LT4, a synthetic thyroid hormone) is the drug used to hold TSH at these levels.",
       "say": "After treatment, the goal for TSH depends on how likely the cancer is to return, and clinicians set the target with that risk in mind. Low-risk patients are kept in the lower half of the normal range, which runs from 0.5 to 2.0 mIU/L. Intermediate-risk patients are held between 0.1 and 0.5, while high-risk patients are kept at 0.1 or lower. Clinicians must weigh that suppression against added risks to the heart and bones. Levothyroxine is the medicine that makes these targets achievable.",
       "vis": {
@@ -287,6 +298,17 @@
             "Finds nodal recurrence"
           ]
         ]
+      }
+    },
+    {
+      "tx": "Neck **ultrasound** compares two cervical lymph nodes. The normal node is oval with a bright, fatty **hilum** at its centre. The suspicious node is rounder and has lost its hilum, a feature of **nodal recurrence** after papillary cancer. A node like this is sampled with a fine needle to confirm the diagnosis before any further treatment.",
+      "say": "In this neck ultrasound, two cervical lymph nodes are compared. The normal node is oval, with a bright, fatty hilum at its centre. The suspicious node is rounder and has lost its hilum, a feature of nodal recurrence after papillary cancer. A node like this is sampled with a fine needle to confirm the diagnosis before any further treatment.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-thyroid-genetics-followup-gen1.webp",
+        "alt": "Paired thyroid ultrasound comparing malignant node with lost hilum and normal node with hilum",
+        "caption": "Ultrasound comparing malignant node features with normal nodal hilum. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     }
   ],
