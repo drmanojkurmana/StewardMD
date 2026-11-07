@@ -132,6 +132,15 @@
       b.innerHTML = html;
     }, function () { failed(host); });
   }
+  /* A topic row (owner 2026-11-07): a tick box that remembers the topic is done (store.ys.tick, synced with ys), and the
+   * topic itself opens the Learn lesson that teaches it (t.les, from tools/pyq-ss-build.mjs). */
+  function ticks(host) { var s = host.store(); s.ys = s.ys || {}; return (s.ys.tick = s.ys.tick || {}); }
+  function topicRow(host, t, meta) {
+    var e = host.esc, k = (t.dom || "") + "|" + t.name, on = !!ticks(host)[k];
+    var body = "<b>" + e(t.name) + "</b><small>" + meta + (t.kp ? "<br>" + e(t.kp) : "") + "</small>";
+    return '<div class="pn-row pn-yq-trow' + (on ? " on" : "") + '"><button type="button" class="pn-yq-tick" data-act="ys-tick" data-v="' + e(k) + '" aria-pressed="' + on + '" aria-label="Mark ' + e(t.name) + ' done">' + host.ico("check") + "</button>" +
+      (t.les ? '<button type="button" class="pn-rb pn-yq-tgo" data-act="l-open" data-s="' + SUBJECT + '" data-m="' + e(t.les) + '">' + body + '<span class="pn-st">Lesson ' + host.ico("chev") + "</span></button>" : '<span class="pn-rb">' + body + "</span>") + "</div>";
+  }
   function renderDomain(host, name) {
     var e = host.esc, d = null; S.ix.analysis.domains.forEach(function (x) { if (x.name === name) d = x; });
     if (!d) return;
@@ -139,15 +148,15 @@
       '<button type="button" class="pn-btn pri" data-act="ys-pdom" data-v="' + e(d.name) + '" data-k="study">' + host.ico("play") + " Practise this topic</button>" +
       '<button type="button" class="pn-btn" data-act="ys-pdom" data-v="' + e(d.name) + '" data-k="exam">' + host.ico("clock") + " Timed test</button></section>" +
       '<h2 class="pn-sec">Subtopics</h2><div class="pn-group">' + d.topics.map(function (t) {
-        return '<div class="pn-row"><span class="pn-rb"><b>' + e(t.name) + "</b><small>" + (t.must ? "Must do · " : "") + "asked " + t.n + (t.n > 1 ? " times" : " time") + " (2025: " + t.y[2025] + ", 2024: " + t.y[2024] + ")" + (t.kp ? "<br>" + e(t.kp) : "") + "</small></span></div>";
+        return topicRow(host, { dom: d.name, name: t.name, kp: t.kp, les: t.les }, (t.must ? "Must do · " : "") + "asked " + t.n + (t.n > 1 ? " times" : " time") + " (2025: " + t.y[2025] + ", 2024: " + t.y[2024] + ")");
       }).join("") + "</div></div>");
   }
   function renderMust(host) {
-    var e = host.esc, an = S.ix.analysis;
-    host.paint(host.bar("Must-do topics", "Asked 2+ times, in both years, or repeated", "back") + '<div class="pn-body"><section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">' + an.mustDo.length + ' topics</p>' +
+    var e = host.esc, an = S.ix.analysis, tk = ticks(host), nd = an.mustDo.filter(function (t) { return tk[t.dom + "|" + t.name]; }).length;
+    host.paint(host.bar("Must-do topics", "Asked 2+ times, in both years, or repeated", "back") + '<div class="pn-body"><section class="pn-panel pn-modp" style="--h:262"><p class="pn-big">' + nd + " of " + an.mustDo.length + ' done</p><p class="pn-mut">Tap a topic to open its lesson. Tick it when you have read it.</p>' +
       '<button type="button" class="pn-btn pri" data-act="ys-pmust" data-k="study">' + host.ico("play") + " Practise their questions</button></section>" +
       '<div class="pn-group">' + an.mustDo.map(function (t) {
-        return '<div class="pn-row"><span class="pn-rb"><b>' + e(t.name) + "</b><small>" + e(t.dom) + " · asked " + t.n + "× (2025: " + t.y2025 + ", 2024: " + t.y2024 + ")" + (t.kp ? "<br>" + e(t.kp) : "") + "</small></span></div>";
+        return topicRow(host, t, e(t.dom) + " · asked " + t.n + "× (2025: " + t.y2025 + ", 2024: " + t.y2024 + ")");
       }).join("") + "</div></div>");
   }
   /* ---- the 30-day plan screens (state: store.ys = { start: day number, days, done: { day: 1 } }) ---- */
@@ -185,7 +194,7 @@
         return '<div class="pn-row"><span class="pn-rb"><b>' + e(t) + "</b>" + (it && it.kp ? "<small>" + e(it.kp) + "</small>" : "") + "</span></div>";
       }).join("") + "</div>" : "") + "</div>");
   }
-  function startPlan(host) { host.store().ys = { start: host.today(), days: makePlan(S.ix.analysis), done: {} }; host.save(); if (G.PREP_NATIVE) G.PREP_NATIVE.changed(); host.toast("Plan started. Day 1 is today."); }
+  function startPlan(host) { var old = host.store().ys; host.store().ys = { start: host.today(), days: makePlan(S.ix.analysis), done: {}, tick: (old && old.tick) || {} }; host.save(); if (G.PREP_NATIVE) G.PREP_NATIVE.changed(); host.toast("Plan started. Day 1 is today."); }
   // For prep-plan.js: [today, tomorrow] reminder lines, same shape as the ReWise notice; none when no plan, a done day or outside 1-30.
   function notice(host, k) {
     var ys = planOf(host); if (!ys) return null;
@@ -208,6 +217,7 @@
     if (a === "ys-pstart") return need(function () { startPlan(host); renderPlan(host); });
     if (a === "ys-prestart") { if (G.confirm && !G.confirm("Restart the 30-day plan from today? Your ticks will be cleared.")) return; return need(function () { startPlan(host); renderPlan(host); }); }
     if (a === "ys-pday") return need(function () { host.push(function () { renderDay(host, +v); }); });
+    if (a === "ys-tick") { var tk = ticks(host); if (tk[v]) delete tk[v]; else tk[v] = 1; host.save(); var row = b.closest && b.closest(".pn-yq-trow"); if (row) { row.classList.toggle("on", !!tk[v]); b.setAttribute("aria-pressed", String(!!tk[v])); } var big = host.root() && host.root().querySelector(".pn-big"); if (big && S.ix && /done$/.test(big.textContent)) big.textContent = S.ix.analysis.mustDo.filter(function (t) { return tk[t.dom + "|" + t.name]; }).length + " of " + S.ix.analysis.mustDo.length + " done"; return; }
     if (a === "ys-pdone") { var y = planOf(host); if (!y) return; y.done = y.done || {}; if (y.done[v]) delete y.done[v]; else y.done[v] = 1; host.save(); if (G.PREP_NATIVE) G.PREP_NATIVE.changed(); return need(function () { renderDay(host, +v); }); }
     if (a === "ys-pgo") return need(function () { var y = planOf(host), d = y && y.days[+v - 1]; if (d) runList(host, itemsOfDay(S.items, S.ix.analysis, d), k, "Day " + v + " · " + d.dom); });
   }

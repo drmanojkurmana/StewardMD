@@ -1,0 +1,292 @@
+{
+  "v": 1,
+  "id": "srm-ohss-prevention-management",
+  "module": "srm-ohss-prevention-management",
+  "title": "Ovarian Hyperstimulation Syndrome (OHSS): Pathophysiology, Prevention and Critical Care",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "RCOG Green-top Guideline No. 5 (Management of OHSS)",
+    "Speroff's Clinical Gynecologic Endocrinology and Infertility 9e Ch 32",
+    "ASRM Practice Committee Guideline on Prevention and Treatment of OHSS"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Ovarian hyperstimulation syndrome is driven by vasoactive mediators from hyperstimulated ovaries. Triggering with hCG stimulates granulosa production of VEGF, creating widespread capillary permeability.",
+      "tx": "Luteinized granulosa cells respond to **hCG stimulation** by secreting excessive quantities of vascular endothelial growth factor (**VEGF**). Interaction of VEGF with VEGFR-2 on vascular endothelium disrupts intercellular adherens junctions, triggering profound systemic **capillary permeability** and massive third-space fluid transudation. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "o1",
+            "label": "hCG trigger binds LH/hCG receptors"
+          },
+          {
+            "id": "o2",
+            "label": "Hyperstimulated granulosa secretes VEGF"
+          },
+          {
+            "id": "o3",
+            "label": "Systemic endothelial capillary hyperpermeability"
+          }
+        ],
+        "edges": [
+          [
+            "o1",
+            "o2",
+            "Luteinization"
+          ],
+          [
+            "o2",
+            "o3",
+            "VEGFR-2 activation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The clinical timing of symptoms distinguishes early from late hyperstimulation. Early onset occurs within 3 to 7 days post-trigger, whereas late onset emerges 10 to 14 days post-trigger driven by pregnancy hCG.",
+      "tx": "Differentiating **early OHSS** developing 3 to 7 days post-trigger from **late OHSS** appearing 10 to 14 days post-trigger is clinically critical. While early cases reflect acute response to exogenous trigger injections, late presentations are driven and escalated by **endogenous hCG** produced by an establishing syncytiotrophoblast.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early OHSS",
+          "points": [
+            "Develops 3 to 7 days post-trigger",
+            "Exogenous hCG trigger response",
+            "Self-limiting if non-pregnant",
+            "Prevented by GnRH agonist trigger"
+          ]
+        },
+        "right": {
+          "title": "Late OHSS",
+          "points": [
+            "Develops 10 to 14 days post-trigger",
+            "Endogenous hCG from pregnancy",
+            "Severe, protracted clinical course",
+            "Prevented by elective freeze-all"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Baseline patient features alert clinicians to hyperstimulation danger. Key risk factors include age under 35, PCOS, AMH over 3.5, and follicle counts exceeding 20 to 24.",
+      "tx": "Identifying baseline **OHSS risk factors** guides preventive dosing. Vulnerability escalates in women aged under 35 years with PCOS, baseline AMH exceeding 3.5 ng/mL, or a baseline **antral follicle count** over 20 to 24 follicles. Cycle risk surges when stimulated follicular cohorts exceed an **oocyte threshold** of 18 to 20 retrieved eggs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk Parameter",
+          "High-Risk Threshold",
+          "Clinical Mechanism",
+          "Risk Reduction Action"
+        ],
+        "rows": [
+          [
+            "Patient Age",
+            "Age <35 years",
+            "High density of gonadotropin receptors",
+            "Conservative starting dose"
+          ],
+          [
+            "Serum AMH",
+            ">3.5 ng/mL",
+            "High functional preantral reserve",
+            "GnRH antagonist protocol"
+          ],
+          [
+            "Basal AFC",
+            ">20 to 24 follicles",
+            "Excessive cohort responsiveness",
+            "Daily monitoring of E2 and follicles"
+          ],
+          [
+            "Harvested Oocytes",
+            ">18 to 20 oocytes",
+            "Enormous luteinized granulosa mass",
+            "Mandatory elective freeze-all"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adopting an antagonist protocol combined with agonist trigger prevents early hyperstimulation. Pairing this with blastocyst cryopreservation achieves robust primary prevention.",
+      "tx": "Achieving reliable **primary prevention** in high-risk patients requires combining a flexible GnRH antagonist stimulation protocol with a **GnRH agonist trigger**. Deferring fresh transfer via a whole-cohort **freeze-all strategy** eliminates exposure to gestational hCG, virtually abolishing both early and late hyperstimulation. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "GnRH antagonist protocol with moderate FSH"
+          },
+          {
+            "id": "p2",
+            "label": "GnRH agonist trigger replaces hCG trigger"
+          },
+          {
+            "id": "p3",
+            "label": "Elective freeze-all blastocyst vitrification"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2",
+            "Follicles >=17 mm"
+          ],
+          [
+            "p2",
+            "p3",
+            "OHSS-free retrieval"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dopamine agonists counter vascular hyperpermeability pharmacologically. Oral cabergoline at 0.5 mg daily for 8 days blocks VEGFR-2 receptor phosphorylation.",
+      "tx": "Targeted pharmacological prophylaxis utilizes oral **Cabergoline**, a potent **dopamine agonist** administered at 0.5 mg daily for 8 days initiating on the day of trigger. Cabergoline prevents **VEGFR-2** phosphorylation in endothelial cells, significantly mitigating peritoneal fluid shifts and hemoconcentration without compromising oocyte maturity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacological Agent",
+          "Dose & Duration",
+          "Target Receptor",
+          "Clinical Benefit"
+        ],
+        "rows": [
+          [
+            "Cabergoline",
+            "0.5 mg PO daily for 8 days",
+            "Dopamine D2 / VEGFR-2",
+            "Reduces ascites and pleural effusion"
+          ],
+          [
+            "Metformin",
+            "1000 to 1500 mg PO daily",
+            "AMPK activation",
+            "Reduces OHSS risk in PCOS patients"
+          ],
+          [
+            "Albumin 20%",
+            "50 to 100 mL IV infusion",
+            "Intravascular oncotic pressure",
+            "Restores effective circulating volume"
+          ],
+          [
+            "LMWH Prophylaxis",
+            "Enoxaparin 40 mg SC daily",
+            "Factor Xa inhibition",
+            "Averts life-threatening thrombosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Severe hyperstimulation produces profound third-space fluid shifts and intravascular depletion. Patients present with tense ascites, oliguria, and hematocrit climbing over 45 percent.",
+      "tx": "The hallmark of **severe OHSS** is marked intravascular depletion paired with **tense ascites** and hydrothorax. Significant hemoconcentration elevates the **hematocrit** above 45 percent, accompanied by leukocytosis (>15000 /microL), oliguria, serum creatinine between 1.1 and 1.5 mg/dL, and elevated transaminases. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Moderate OHSS",
+          "points": [
+            "Abdominal pain and distension",
+            "Ultrasound evidence of ascites",
+            "Hematocrit <45 percent",
+            "Outpatient monitoring feasible"
+          ]
+        },
+        "right": {
+          "title": "Severe OHSS",
+          "points": [
+            "Clinically tense ascites and hydrothorax",
+            "Hematocrit >45 percent, WBC >15,000",
+            "Oliguria and creatinine 1.1 to 1.5 mg/dL",
+            "Mandatory inpatient admission"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Critical hyperstimulation represents a medical emergency with end-organ dysfunction. Severe hemoconcentration with hematocrit over 55 percent heralds life-threatening thromboembolism and anuria.",
+      "tx": "Progression to **critical OHSS** constitutes an intensive care emergency characterized by profound **hematocrit 55 percent** hemoconcentration and anuria. Patients face immediate danger from venous or arterial **thromboembolism**, acute renal failure, hypovolemic shock, and acute respiratory distress syndrome. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "Profound hemoconcentration (Hematocrit >55%)"
+          },
+          {
+            "id": "c2",
+            "label": "Sluggish microvascular perfusion and thrombosis"
+          },
+          {
+            "id": "c3",
+            "label": "Multi-organ failure and intensive care admission"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2",
+            "Viscosity rise"
+          ],
+          [
+            "c2",
+            "c3",
+            "Critical hypoperfusion"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Inpatient therapy focuses on restoring circulating blood volume while preventing clot formation. Strict fluid balance, isotonic crystalloids, intravenous albumin, and heparin are mandatory.",
+      "tx": "Hospital management prioritizes meticulous **fluid balance** and crystalloid resuscitation. When hypoalbuminemia persists despite crystalloids, **intravenous albumin** (20%) restores oncotic draw, while all admitted patients require **prophylactic LMWH** to prevent catastrophic thromboembolic complications during the convalescent phase. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Critical Care Domain",
+          "Clinical Strategy",
+          "Target Goal",
+          "Contraindicated Action"
+        ],
+        "rows": [
+          [
+            "Volume Replacement",
+            "Isotonic saline / Hartmann solution",
+            "Urine output >30 mL/hour",
+            "Diuretics during hypovolemia"
+          ],
+          [
+            "Colloid Support",
+            "20% Human Albumin infusion",
+            "Serum albumin >30 g/L",
+            "Excessive rapid crystalloid overload"
+          ],
+          [
+            "Anticoagulation",
+            "LMWH (Enoxaparin 40 mg SC)",
+            "DVT and arterial clot prevention",
+            "Holding prophylaxis while inpatient"
+          ],
+          [
+            "Ascites Relief",
+            "Ultrasound-guided paracentesis",
+            "Relief of splanchnic / renal pressure",
+            "Vigorous bimanual pelvic exam"
+          ]
+        ]
+      }
+    }
+  ]
+}
