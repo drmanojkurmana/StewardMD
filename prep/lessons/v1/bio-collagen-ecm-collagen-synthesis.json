@@ -1,0 +1,76 @@
+{
+ "v": 1,
+ "module": "bio-collagen-ecm",
+ "subject": "biochemistry",
+ "title": "Collagen synthesis and its defects",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Collagen is a **Gly-X-Y** triple helix (glycine every third residue fitting the crowded centre, X often proline, Y hydroxyproline, left handed polyproline chains supercoiled right handed), synthesised as preprocollagen, hydroxylated in the endoplasmic reticulum (prolyl 4-hydroxylase and lysyl hydroxylases needing vitamin C to keep iron reduced, plus alpha-ketoglutarate and oxygen), glycosylated on hydroxylysine, folded C to N with disulfide registration, secreted, propeptide cleaved, and crosslinked extracellularly.",
+   "say": "Collagen is a Gly-X-Y triple helix with glycine every third residue. Hydroxylases need vitamin C to keep iron reduced, and propeptides cleave after secretion before crosslinking strengthens fibrils.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-collagen-ecm-fig1.webp",
+    "alt": "Collagen synthesis from translation through hydroxylation, triple helix formation, secretion and crosslinking with disorder points.",
+    "caption": "Six steps of collagen synthesis with Marfan, Ehlers-Danlos, Alport and related disorder points.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Lysyl oxidase** (copper dependent, extracellular) oxidises lysine and hydroxylysine to aldehydes (allysine) that condense into covalent crosslinks maturing fibril tensile strength; its failure (Menkes copper delivery, lathyrism beta-aminopropionitrile in sweet pea, penicillamine copper chelation) weakens vessels, bone and skin. Hydroxyproline in urine historically tracked collagen turnover (bone resorption, Paget), now replaced by specific telopeptide assays (CTX, NTX) and P1NP formation markers in osteoporosis care.",
+   "say": "Lysyl oxidase needs copper to crosslink fibrils for tensile strength. Menkes copper failure and lathyrism weaken vessels and skin, while telopeptide assays now track collagen turnover clinically.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Synthesis step", "Cofactor or enzyme", "Failure signature"],
+    "rows": [
+     ["Prolyl and lysyl hydroxylation", "Vitamin C, iron, alpha-KG, oxygen", "Scurvy: unstable helix, bleeding, poor healing"],
+     ["Glycosylation of hydroxylysine", "Galactosyl transferases", "Ehlers-Danlos variants (rare)"],
+     ["Propeptide cleavage (ADAMTS, BMP1)", "Extracellular proteases", "Dermatosparaxis EDS: extreme skin fragility"],
+     ["Lysyl oxidase crosslinking", "Copper", "Menkes, lathyrism: vascular and bone weakness"]
+    ]
+   }
+  },
+  {
+   "tx": "**Scurvy** unwinds the whole pathway without vitamin C: helices under hydroxylated melt at body temperature, vessels leak (perifollicular haemorrhages, corkscrew hairs, gum hypertrophy bleeding in dentate patients), wounds dehisce and old scars reopen, arthralgia and anaemia (bleeding plus associated folate and iron dietary failure) follow, all reversing within weeks of ascorbate. Sailors, restricted diets (autism spectrum selective eating, alcohol dependence) and infantile Barlow disease (painful pseudoparalysis) rotate in stems.",
+   "say": "Scurvy melts under hydroxylated helices, leaking vessels and reopening wounds, reversing within weeks of ascorbate. Restricted diets and infantile Barlow disease rotate in examination stems regularly.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Scurvy (cofactor missing)", "points": ["Enzymes normal, vitamin C absent", "Bleeding gums, perifollicular bleeds", "Reverses in weeks with ascorbate"]},
+    "right": {"title": "Genetic collagenopathies (protein mutant)", "points": ["Vitamin C replete", "Syndrome specific tissues", "Lifelong, surveillance managed"]
+    }
+   }
+  },
+  {
+   "tx": "Type geography must be automatic: **type I** (bone, skin, tendon, dentin: osteogenesis imperfecta and Ehlers-Danlos arthrochalasia), II (cartilage and vitreous: chondrodysplasias, Stickler), III (vessels, uterus, bowel: vascular Ehlers-Danlos rupture), IV (basement membranes: Alport glomeruli, Goodpasture antigen), V (cornea and placenta, classical EDS partner), VII (anchoring fibrils: dystrophic epidermolysis bullosa), IX/XVII/XVIII assorted (Kniest, bullous pemphigoid antigen, Knobloch). Fibrillar (I, II, III, V, XI quarter stagger banding sixty seven nanometres) versus network IV architectures predict mechanics.",
+   "say": "Type one is bone and tendon, type three vessels, type four basement membranes. Fibrillar versus network architectures predict mechanics and syndrome geography automatically once geography is automatic.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-collagen-ecm-gen1.webp",
+    "alt": "Closeup photograph of an eye with blue grey sclera labels marking thin sclera over choroid pigment.",
+    "caption": "Blue grey sclera with labeled ocular landmarks, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Osteogenesis imperfecta** (type I collagen glycine substitutions dominant, plus recessive processing defects) gives brittle bones with minimal trauma fractures, blue sclerae (thin collagen showing choroid), dentinogenesis imperfecta opalescent teeth, conductive hearing loss and wormian skull bones; bisphosphonates reduce fractures without fixing collagen. Ehlers-Danlos classical (type V and I processing, skin hyperextensible with atrophic cigarette paper scars, joint hypermobility) versus vascular (type III, translucent skin, arterial and uterine rupture, celiprolol and surveillance, avoid elective arterial punctures) must never blur.",
+   "say": "Osteogenesis imperfecta gives brittle bones and blue sclerae from type one glycine substitutions. Vascular Ehlers-Danlos ruptures arteries and uterus, never to blur with classical skin disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Menkes disease** (ATP7A copper exporter, X linked) starves lysyl oxidase and other cuproenzymes systemically: kinky depigmented steely hair (pili torti microscopy), hypothermia, hypotonia, seizures, vascular tortuosity and bladder diverticula, death in early childhood without subcutaneous copper histidine begun neonatally. Its allelic opposite Wilson (ATP7B liver) overloads copper instead, pairing copper geography across modules as examiners intend, before elastin specialises crosslink chemistry further.",
+   "say": "Menkes starves lysyl oxidase of copper with kinky steely hair and vascular tortuosity. Its opposite Wilson overloads copper in liver, pairing copper geography across modules as examiners intend.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Copper disease", "Transporter and direction", "Collagen consequence"],
+    "rows": [
+     ["Menkes (ATP7A gut exit fails)", "Systemic copper deficiency", "Crosslinks fail: vessels, hair, bone"],
+     ["Wilson (ATP7B liver exit fails)", "Liver and brain copper overload", "Collagen less central; liver/brain dominate"],
+     ["Lathyrism (toxin, dietary)", "Lysyl oxidase inhibited", "Aneurysms, skeletal deformity outbreaks"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
