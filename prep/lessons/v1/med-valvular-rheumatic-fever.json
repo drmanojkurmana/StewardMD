@@ -1,0 +1,268 @@
+{
+ "v": 1,
+ "module": "med-valvular",
+ "subject": "medicine",
+ "title": "Acute rheumatic fever, Jones criteria and mitral stenosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A delayed autoimmune consequence of untreated Group A streptococcal pharyngitis is **rheumatic fever**. Molecular mimicry between streptococcal M protein and human cardiac antigens triggers cross-reactive T-cell and humoral immune attacks. In developing nations, recurrent acute rheumatic fever remains the predominant cause of acquired valvular heart disease in children and young adults, primarily targeting the mitral and aortic valves.",
+   "say": "A delayed autoimmune complication of untreated streptococcal pharyngitis is rheumatic fever. Molecular mimicry between streptococcal M protein and cardiac antigens triggers an immune attack on heart valves. In developing regions, it remains the leading cause of acquired valvular disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gas",
+      "label": "Group A streptococcal pharyngitis"
+     },
+     {
+      "id": "mimic",
+      "label": "Molecular mimicry (M protein vs myosin)"
+     },
+     {
+      "id": "inflam",
+      "label": "Autoimmune carditis and Aschoff bodies"
+     },
+     {
+      "id": "fibrosis",
+      "label": "Chronic leaflet thickening and commissural fusion"
+     },
+     {
+      "id": "ms",
+      "label": "Rheumatic mitral stenosis"
+     }
+    ],
+    "edges": [
+     [
+      "gas",
+      "mimic"
+     ],
+     [
+      "mimic",
+      "inflam"
+     ],
+     [
+      "inflam",
+      "fibrosis"
+     ],
+     [
+      "fibrosis",
+      "ms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical diagnosis requires strict adherence to the revised **Jones criteria**. Establishing a primary episode demands evidence of preceding streptococcal infection alongside two major criteria, or one major with two minor criteria. Major criteria comprise carditis, migratory polyarthritis of large joints, Sydenham chorea, subcutaneous nodules over bony prominences, and erythema marginatum on the trunk.",
+   "say": "Diagnosing acute rheumatic fever requires fulfilling the revised Jones criteria. Establishing a diagnosis requires evidence of preceding streptococcal infection plus two major criteria, or one major with two minor criteria. Major criteria include carditis, polyarthritis, Sydenham chorea, subcutaneous nodules and erythema marginatum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Jones criteria category",
+     "Specific manifestations",
+     "Clinical description"
+    ],
+    "rows": [
+     [
+      "Major criterion",
+      "Migratory polyarthritis",
+      "Affects large joints (knees, ankles, wrists) sequentially"
+     ],
+     [
+      "Major criterion",
+      "Carditis (pancarditis)",
+      "Endocarditis, myocarditis, pericarditis, new murmurs"
+     ],
+     [
+      "Major criterion",
+      "Sydenham chorea",
+      "Involuntary choreiform movements, emotional lability"
+     ],
+     [
+      "Major criterion",
+      "Erythema marginatum",
+      "Serpiginous, non-pruritic rash with central clearing on trunk"
+     ],
+     [
+      "Major criterion",
+      "Subcutaneous nodules",
+      "Firm, painless nodules over extensor tendon surfaces"
+     ],
+     [
+      "Minor criteria",
+      "Fever, arthralgia, high ESR/CRP, prolonged PR",
+      "Non-specific inflammatory and electrical signs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic rheumatic inflammation leads to progressive commissural fusion, leaflet thickening, and chordal shortening, producing **mitral stenosis**. Narrowing of the mitral valve orifice creates a diastolic pressure gradient between left atrium and left ventricle. Normal valve area measures 4 to 6 cm2; symptoms develop when the orifice narrows below 2.0 cm2, and severe stenosis is defined by an area of 1.5 cm2 or less.",
+   "say": "Chronic rheumatic inflammation causes progressive fusion of valve leaflets, resulting in mitral stenosis. Narrowing of the orifice obstructs left ventricular diastolic filling. While normal valve area is four to six square centimetres, an area below one point five indicates severe stenosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-clinical-cardiology-gen1.webp",
+    "alt": "Diagram showing stenotic narrowed mitral valve orifice with thickened fused leaflets.",
+    "caption": "Rheumatic commissural fusion and mitral valve orifice narrowing. [Credit: StewardMD]",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Auscultatory findings in mitral stenosis are distinctive and high-yield. Physical examination reveals a loud first heart sound, an early diastolic **opening snap**, and a low-pitched mid-diastolic rumbling murmur with presystolic accentuation. Auscultate with the stethoscope bell placed lightly at the apex while the patient turns into the left lateral decubitus position. A shorter interval between S2 and the opening snap signifies severe stenosis.",
+   "say": "Auscultatory findings in mitral stenosis are distinctive. Bedside examination reveals a loud first heart sound, an early opening snap and a rumbling mid-diastolic murmur with presystolic accentuation. Use the bell at the apex with the patient in the left lateral position.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Auscultatory triad",
+     "points": [
+      "Loud S1 (mobile pliable leaflets)",
+      "Early diastolic opening snap",
+      "Low-pitched rumbling diastolic murmur"
+     ]
+    },
+    "right": {
+     "title": "Severity markers",
+     "points": [
+      "Shortened A2-OS interval (< 80 ms)",
+      "Longer duration of diastolic murmur",
+      "Pulmonary hypertension signs (loud P2)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronically elevated left atrial pressure induces left atrial dilatation and pulmonary venous hypertension. Markedly enlarged atria frequently precipitate **atrial fibrillation**. Loss of atrial kick combined with tachycardia dramatically shortens diastolic filling time, precipitating acute pulmonary oedema. Furthermore, blood stasis in the dilated left atrial appendage promotes mural thrombus formation, carrying a high risk of embolic stroke.",
+   "say": "Chronic elevation in left atrial pressure causes chamber enlargement and pulmonary hypertension. Marked atrial stretch triggers atrial fibrillation. Loss of coordinated atrial contraction and rapid heart rates shorten diastolic filling, triggering pulmonary oedema and embolic stroke.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ms",
+      "label": "Severe mitral stenosis"
+     },
+     {
+      "id": "lap",
+      "label": "Elevated left atrial pressure"
+     },
+     {
+      "id": "lae",
+      "label": "Marked left atrial dilatation"
+     },
+     {
+      "id": "af",
+      "label": "Atrial fibrillation and stasis"
+     },
+     {
+      "id": "stroke",
+      "label": "Thromboembolic stroke and pulmonary oedema"
+     }
+    ],
+    "edges": [
+     [
+      "ms",
+      "lap"
+     ],
+     [
+      "lap",
+      "lae"
+     ],
+     [
+      "lae",
+      "af"
+     ],
+     [
+      "af",
+      "stroke"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary prevention of rheumatic recurrence requires long-term antibiotic prophylaxis. Intramuscular administration of **benzathine penicillin G** every 3 to 4 weeks is the definitive treatment of choice. For patients with carditis and residual valvular heart disease, prophylaxis must continue for 10 years after the last attack, or until age 40, whichever is longer. In penicillin-allergic patients, oral erythromycin or azithromycin serves as an acceptable alternative.",
+   "say": "Preventing recurrent rheumatic attacks requires long-term antibiotic prophylaxis. Intramuscular benzathine penicillin administered every three to four weeks represents standard therapy. Patients with residual valvular disease require prophylaxis for ten years or until age forty, whichever is longer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient category",
+     "Prophylaxis duration",
+     "First-line regimen"
+    ],
+    "rows": [
+     [
+      "Rheumatic fever without carditis",
+      "5 years or until age 21 (whichever longer)",
+      "Benzathine penicillin G 1.2 MU IM every 3-4 weeks"
+     ],
+     [
+      "Carditis without residual valve disease",
+      "10 years or until age 21 (whichever longer)",
+      "Benzathine penicillin G 1.2 MU IM every 3-4 weeks"
+     ],
+     [
+      "Carditis with persistent valvular disease",
+      "10 years or until age 40 (whichever longer)",
+      "Benzathine penicillin G 1.2 MU IM every 3-4 weeks"
+     ],
+     [
+      "Penicillin allergy",
+      "Same duration criteria",
+      "Erythromycin 250 mg orally twice daily"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Comprehensive diagnostic evaluation centers on transthoracic echocardiography. The established **Wilkins score** evaluates four morphological characteristics: leaflet mobility, leaflet thickening, subvalvular thickening, and leaflet calcification, each scored from 1 to 4. A total score of 8 or less identifies pliable leaflets ideal for percutaneous balloon mitral valvotomy, whereas higher scores indicate severe calcification requiring surgical valve replacement.",
+   "say": "Echocardiography evaluates valve morphology using the Wilkins score. It grades leaflet mobility, thickening, calcification and subvalvular disease from one to four. A score of eight or less identifies favorable pliable leaflets ideal for balloon mitral valvotomy.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-murmur-as-ar.svg",
+    "alt": "Echocardiographic and auscultatory diagram illustrating mitral stenosis pressure gradients.",
+    "caption": "Echocardiographic Doppler gradients and Wilkins score criteria. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Symptomatic patients with severe mitral stenosis require mechanical relief. In patients with pliable non-calcified leaflets and absence of left atrial thrombus, perform percutaneous **balloon mitral valvotomy**. Catheter-based balloon expansion splits the fused commissures, dramatically enlarging the orifice area and decompressing the pulmonary circulation without requiring open cardiac surgery.",
+   "say": "Symptomatic severe mitral stenosis requires mechanical decompression. For pliable leaflets without atrial thrombus, balloon mitral valvotomy is the procedure of choice. Expanding a catheter balloon splits fused commissures, relieving pulmonary venous hypertension without sternotomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ms",
+      "label": "Severe symptomatic MS (area <= 1.5 cm2)"
+     },
+     {
+      "id": "echo",
+      "label": "TEE: rule out LA thrombus, check Wilkins <= 8"
+     },
+     {
+      "id": "pbmv",
+      "label": "Percutaneous balloon mitral valvotomy"
+     },
+     {
+      "id": "relief",
+      "label": "Immediate drop in LA pressure and relief"
+     }
+    ],
+    "edges": [
+     [
+      "ms",
+      "echo"
+     ],
+     [
+      "echo",
+      "pbmv"
+     ],
+     [
+      "pbmv",
+      "relief"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

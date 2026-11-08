@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "module": "med-arrhythmias",
+ "subject": "medicine",
+ "title": "Atrioventricular heart blocks, pacemaker therapy and cardiac arrest prevention",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Impairment of electrical conduction from atria to ventricles defines atrioventricular block. In second-degree AV block, failure of intermittent atrial impulses to reach the ventricles sorts into two distinct varieties. **Mobitz type I** (Wenckebach) features progressive prolongation of the PR interval until a single P wave fails to conduct, repeating in regular cyclical groups. The block almost always resides benignly within the AV node itself.",
+   "say": "Failure of atrial impulses to conduct to the ventricles defines atrioventricular block. Mobitz type one, or Wenckebach block, displays progressive PR prolongation until a P wave fails to conduct. The block almost always resides benignly within the AV node itself, carrying a favourable prognosis.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-avblock.svg",
+    "alt": "ECG strips showing Mobitz type I and Mobitz type II second-degree AV block.",
+    "caption": "Second-degree Mobitz I (Wenckebach) and Mobitz II electrocardiographic patterns. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In sharp contrast to Wenckebach block, intermittent non-conduction without preceding PR changes defines **Mobitz type II**. Constant PR intervals precede non-conducted P waves, indicating pathological disease within the distal His-Purkinje conduction system. Mobitz II block carries a treacherous risk of abrupt degeneration into complete heart block or asystole. Permanent pacemaker implantation is mandatory even in completely asymptomatic patients.",
+   "say": "Intermittent dropped beats with constant PR intervals define Mobitz type two block. Unlike Wenckebach, the lesion resides in the distal His-Purkinje system. Mobitz two block carries high risk of sudden complete heart block and demands permanent pacemaker implantation even without symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mobitz Type I (Wenckebach)",
+     "points": [
+      "Progressive PR prolongation before dropped beat",
+      "AV nodal block level (supra-Hisian)",
+      "Improves with atropine and exercise",
+      "Benign; rarely requires pacemaker"
+     ]
+    },
+    "right": {
+     "title": "Mobitz Type II",
+     "points": [
+      "Constant PR intervals before dropped beat",
+      "Infranodal His-Purkinje block level",
+      "Worsens with atropine; risks asystole",
+      "Mandatory permanent pacemaker"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complete failure of all atrial impulses to reach the ventricles defines **complete heart block**. The electrocardiogram demonstrates total atrioventricular dissociation: regular P-P intervals and regular R-R intervals marching independently across the strip with no mathematical relationship. Atrial rate exceeds ventricular rate. Infranodal escape pacemakers generate wide, slow QRS complexes at 20 to 40 bpm, producing severe fatigue, presyncope, and Stokes-Adams syncopal attacks.",
+   "say": "Total failure of atrioventricular conduction defines third degree or complete heart block. The ECG shows complete dissociation with independent P waves and slow QRS escape complexes. Infranodal ventricular escape rates run between twenty and forty beats per minute, causing syncope.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Block level",
+     "Escape pacemaker location",
+     "Escape rate",
+     "QRS morphology",
+     "Stability"
+    ],
+    "rows": [
+     [
+      "AV nodal (congenital, inferior MI)",
+      "Junctional pacemaker",
+      "40 to 60 bpm",
+      "Narrow QRS (< 0.12s)",
+      "Stable, responds to atropine"
+     ],
+     [
+      "Infranodal (anterior MI, Lenegre)",
+      "Ventricular Purkinje tissue",
+      "20 to 40 bpm",
+      "Broad QRS (>= 0.12s)",
+      "Unstable, refractory to atropine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency stabilization of hemodynamically unstable high-grade atrioventricular block begins with **atropine**. Administer 0.5 to 1 mg intravenously, repeatable up to 3 mg. Atropine blocks parasympathetic muscarinic receptors, accelerating conduction in nodal blocks. However, infranodal Mobitz II and complete heart block with wide QRS complexes are unresponsive to atropine, requiring immediate transcutaneous pacing and temporary transvenous wire insertion.",
+   "say": "Stabilising symptomatic high grade heart block begins with intravenous atropine. Atropine increases heart rate in nodal blocks by blocking vagal tone. However, infranodal blocks with wide complexes do not respond, requiring immediate transcutaneous pacing and transvenous wire placement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "block",
+      "label": "Symptomatic high-grade AV block"
+     },
+     {
+      "id": "atropine",
+      "label": "IV Atropine 0.5-1 mg trial"
+     },
+     {
+      "id": "tcp",
+      "label": "Transcutaneous pacing pads"
+     },
+     {
+      "id": "tvp",
+      "label": "Temporary transvenous pacing wire"
+     },
+     {
+      "id": "ppm",
+      "label": "Permanent pacemaker implantation"
+     }
+    ],
+    "edges": [
+     [
+      "block",
+      "atropine"
+     ],
+     [
+      "atropine",
+      "tcp"
+     ],
+     [
+      "tcp",
+      "tvp"
+     ],
+     [
+      "tvp",
+      "ppm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive long-term pacing uses the NASPE/BPEG five-letter **pacemaker** code. The first letter denotes the chamber paced, the second the chamber sensed, and the third the response to sensing. Dual-chamber pacing, coded as DDD, senses and paces both atria and ventricles, tracking intrinsic atrial activity to trigger ventricular pacing when AV block occurs. This preserves physiological atrioventricular synchrony and cardiac output.",
+   "say": "Permanent pacing relies on the standard five letter code. The letters indicate chamber paced, chamber sensed, and response mode. Dual chamber DDD pacing senses and paces both atria and ventricles, maintaining atrioventricular synchrony and preventing pacemaker syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Position I (Paced)",
+     "Position II (Sensed)",
+     "Position III (Response)",
+     "Common clinical mode"
+    ],
+    "rows": [
+     [
+      "A (Atrium)",
+      "A (Atrium)",
+      "I (Inhibited)",
+      "AAI: Sinus node disease with intact AV node"
+     ],
+     [
+      "V (Ventricle)",
+      "V (Ventricle)",
+      "I (Inhibited)",
+      "VVI: Atrial fibrillation with slow ventricular response"
+     ],
+     [
+      "D (Dual)",
+      "D (Dual)",
+      "D (Dual: T and I)",
+      "DDD: Complete heart block, preserves AV synchrony"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ventricular pacing without atrial synchrony can trigger an adverse haemodynamic condition called **pacemaker syndrome**. When single-chamber ventricular pacing (VVI mode) causes ventriculoatrial conduction, atrial contraction strikes closed atrioventricular valves, precipitating elevated venous pressures and systemic hypotension. Patients report neck pulsations, dizziness, and fatigue. Reprogramming or upgrading to a dual-chamber DDD system promptly resolves the syndrome.",
+   "say": "Pacing the ventricle without atrial synchrony can trigger pacemaker syndrome. Backward conduction causes the atria to contract against closed valves, elevating venous pressure and reducing cardiac output. Patients report neck throbbing and syncope, which resolves upon upgrading to dual chamber pacing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "VVI single-chamber pacing",
+     "points": [
+      "Paces only the ventricle",
+      "Loss of atrioventricular synchrony",
+      "Risk of pacemaker syndrome",
+      "Used primarily in permanent AF"
+     ]
+    },
+    "right": {
+     "title": "DDD dual-chamber pacing",
+     "points": [
+      "Leads in right atrium and ventricle",
+      "Maintains normal AV synchrony",
+      "Higher cardiac output, lower AF risk",
+      "Preferred for complete heart block"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Patients suffering sudden cardiac arrest due to ventricular fibrillation or pulseless VT require an **ICD**. In contrast to conventional pacemakers that manage bradycardia, implantable cardioverter-defibrillators continuously analyze rhythm morphology. Upon detecting ventricular fibrillation, the device delivers a biphasic electrical shock of 35 to 40 joules, achieving defibrillation within 10 to 15 seconds. ICDs are also indicated for primary prevention in ischemic cardiomyopathy with LVEF under 35%.",
+   "say": "Survivors of cardiac arrest require an implantable cardioverter-defibrillator. Unlike simple pacemakers, these devices detect ventricular fibrillation and deliver internal biphasic shocks within fifteen seconds. Prophylactic ICD implantation is also indicated in ischemic cardiomyopathy with an ejection fraction below thirty-five percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "arrest",
+      "label": "Cardiac arrest / LVEF <= 35%"
+     },
+     {
+      "id": "eval",
+      "label": "Confirm indication and rule out reversible cause"
+     },
+     {
+      "id": "implant",
+      "label": "Transvenous ICD placement"
+     },
+     {
+      "id": "shock",
+      "label": "Internal antitachycardia pacing and shock delivery"
+     }
+    ],
+    "edges": [
+     [
+      "arrest",
+      "eval"
+     ],
+     [
+      "eval",
+      "implant"
+     ],
+     [
+      "implant",
+      "shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prompt recognition of high-grade conduction block prevents sudden death. When 12-lead ECG reveals Mobitz II or complete heart block, admit to an intensive care unit, withdraw all nodal blocking drugs, and arrange urgent **electrophysiology** consultation. Immediate temporary transcutaneous or transvenous wire pacing provides safe haemodynamic stabilization until a permanent dual-chamber pacemaker can be implanted.",
+   "say": "Prompt diagnosis of advanced heart block prevents sudden death. When you encounter Mobitz two or complete heart block, admit to intensive care, stop nodal blocking drugs and prepare for pacing. Temporary pacing bridges the patient safely until permanent pacemaker implantation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-heart-conduction-cycle.webp",
+    "alt": "Anatomical diagram of cardiac conduction system showing pacing sites.",
+    "caption": "Cardiac conduction system and permanent pacing lead implantation sites. [Credit: StewardMD]",
+    "ar": 1.4
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "module": "med-arrhythmias",
+ "subject": "medicine",
+ "title": "Wolff-Parkinson-White, ventricular tachycardia and long QT syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "An extranodal congenital muscular bridge connecting atrium and ventricle defines the **WPW syndrome**. Conduction across the accessory bundle of Kent bypasses atrioventricular nodal delay, pre-exciting the ventricle. The resting electrocardiogram displays a triad of a short PR interval under 0.12 seconds, a widened QRS complex, and a slurred initial upstroke termed a delta wave. Secondary repolarisation abnormalities cause T wave inversion opposite to the delta wave.",
+   "say": "An accessory congenital pathway between atrium and ventricle defines Wolff-Parkinson-White syndrome. Conduction across the bypass tract circumvents the AV node, causing early ventricular depolarisation. The ECG reveals a short PR interval, widened QRS and a slurred delta wave upstroke.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-heart-conduction-cycle.webp",
+    "alt": "Conduction diagram showing accessory pathway bypassing normal AV node.",
+    "caption": "Accessory pathway of Kent and ventricular pre-excitation. [Credit: StewardMD]",
+    "ar": 1.4
+   }
+  },
+  {
+   "tx": "Clinical tachycardias in pre-excitation sort into orthodromic and antidromic forms. In orthodromic AVRT, impulses travel down the normal AV node and retrograde up the accessory pathway, producing a narrow-complex tachycardia. In **antidromic AVRT**, impulses travel anterograde down the accessory pathway and retrograde up the AV node, resulting in a wide-complex tachycardia that mimics ventricular tachycardia and requires cautious pharmacological selection.",
+   "say": "Tachycardias in pre-excitation sort into orthodromic and antidromic varieties. Orthodromic conduction travels down the AV node, producing a narrow complex. Antidromic conduction travels down the bypass tract, creating a wide complex tachycardia that mimics ventricular tachycardia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Orthodromic AVRT (90%)",
+     "points": [
+      "Down AV node, up accessory pathway",
+      "Narrow regular QRS complex",
+      "Treat with vagal manoeuvres, adenosine"
+     ]
+    },
+    "right": {
+     "title": "Antidromic AVRT (10%)",
+     "points": [
+      "Down accessory pathway, up AV node",
+      "Wide bizarre regular QRS complex",
+      "Treat with procainamide; avoid AV blockers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A dreaded complication of Wolff-Parkinson-White syndrome is pre-excited **atrial fibrillation**. Extremely rapid conduction across the non-decremental accessory pathway drives ventricular rates exceeding 250 to 300 bpm, heralding degeneration into ventricular fibrillation. Administering AV nodal blocking agents like adenosine, verapamil, beta-blockers, or digoxin is strictly contraindicated, as blocking the AV node shunts all impulses through the accessory pathway, precipitating cardiac arrest.",
+   "say": "A life threatening emergency in pre-excitation is pre-excited atrial fibrillation. Rapid conduction across the bypass tract produces irregular wide complexes exceeding two hundred and fifty beats per minute. Nodal blocking drugs like verapamil and adenosine are contraindicated because they precipitate fatal ventricular fibrillation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical setting",
+     "Safe first-line drug",
+     "Strictly contraindicated drugs"
+    ],
+    "rows": [
+     [
+      "Pre-excited AF (stable)",
+      "IV Procainamide or Ibutilide",
+      "Adenosine, Verapamil, Beta-blockers, Digoxin"
+     ],
+     [
+      "Pre-excited AF (unstable)",
+      "Immediate electrical cardioversion",
+      "Any nodal blocking pharmacotherapy"
+     ],
+     [
+      "Orthodromic AVRT",
+      "Vagal manoeuvres, IV Adenosine",
+      "None (AV node is part of circuit)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three or more consecutive premature ventricular complexes at a rate exceeding 100 bpm constitutes **ventricular tachycardia**. Most commonly arising in hearts scarred by previous myocardial infarction, monomorphic VT features identical, wide QRS complexes. Bedside hallmarks of AV dissociation confirm VT: independent P waves, intermittent fusion beats, capture beats, and cannon a waves in the jugular venous pulse.",
+   "say": "Three or more consecutive ventricular beats at a rate above one hundred defines ventricular tachycardia. Usually occurring in scarred myocardium after an infarct, monomorphic VT exhibits broad identical QRS complexes. Confirming atrioventricular dissociation with fusion and capture beats proves a ventricular origin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "wide",
+      "label": "Wide complex tachycardia (QRS >= 0.12s)"
+     },
+     {
+      "id": "brugada",
+      "label": "Brugada / Vereckei criteria"
+     },
+     {
+      "id": "dissoc",
+      "label": "AV dissociation / Fusion / Capture"
+     },
+     {
+      "id": "vt",
+      "label": "Definitive diagnosis: Ventricular tachycardia"
+     },
+     {
+      "id": "svt",
+      "label": "No criteria met: SVT with aberrancy"
+     }
+    ],
+    "edges": [
+     [
+      "wide",
+      "brugada"
+     ],
+     [
+      "brugada",
+      "dissoc"
+     ],
+     [
+      "dissoc",
+      "vt"
+     ],
+     [
+      "brugada",
+      "svt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A unique form of polymorphic ventricular tachycardia characterized by QRS complexes twisting around an undulating isoelectric line is **torsades de pointes**. It occurs exclusively in the setting of prolonged ventricular repolarisation, defined by a prolonged corrected QT interval. Hypokalaemia, severe hypomagnesaemia, bradycardia, and QT-prolonging drugs such as sotalol, erythromycin, and haloperidol are frequent precipitants.",
+   "say": "A polymorphic ventricular tachycardia where QRS axes twist around the baseline defines torsades de pointes. It develops only in the presence of delayed repolarisation and a prolonged QT interval. Severe hypomagnesaemia, hypokalaemia and QT prolonging medications represent common reversible triggers.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-ecg-qt-lvh.svg",
+    "alt": "Diagram showing prolonged QT interval and progression to polymorphic torsades de pointes.",
+    "caption": "QT prolongation and vulnerability to polymorphic torsades de pointes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate management of acute torsades de pointes differs fundamentally from standard ventricular tachycardia protocols. The first-line intravenous treatment of choice is **intravenous magnesium sulphate**, administered as a 2 g bolus over 1 to 2 minutes regardless of baseline serum magnesium concentration. Magnesium blocks influx of L-type calcium currents, suppressing early afterdepolarisations. In refractory episodes, temporary overdrive pacing or isoprenaline infusion shortens the underlying QT interval.",
+   "say": "Emergency treatment of torsades de pointes differs from standard tachycardia protocols. The primary pharmacological intervention is intravenous magnesium sulphate given as a two gram bolus. Magnesium suppresses early afterdepolarisations. In recurrent episodes, temporary overdrive pacing shortens the QT interval.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment intervention",
+     "Dose and route",
+     "Mechanism of benefit"
+    ],
+    "rows": [
+     [
+      "Magnesium sulphate",
+      "2 g IV bolus over 1-2 min",
+      "Suppresses early afterdepolarisations"
+     ],
+     [
+      "Correct electrolytes",
+      "Replenish K+ to 4.5-5.0 mEq/L",
+      "Accelerates repolarisation reserve"
+     ],
+     [
+      "Overdrive pacing",
+      "Pacing at 90 to 110 bpm",
+      "Shortens QT interval by increasing rate"
+     ],
+     [
+      "Electrical defibrillation",
+      "Non-synchronized shock (200J)",
+      "Mandatory if hemodynamic collapse occurs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inherited cardiac ion channel gene mutations disrupting repolarisation currents cause congenital **long QT syndrome**. Romano-Ward syndrome is inherited in an autosomal dominant fashion with normal hearing, caused by KCNQ1 (LQT1), KCNH2 (LQT2), or SCN5A (LQT3) mutations. Jervell and Lange-Nielsen syndrome is an autosomal recessive disorder combining profound bilateral sensorineural deafness with extreme QT prolongation and a high risk of sudden death.",
+   "say": "Inherited channel mutations that disrupt repolarisation cause congenital long QT syndrome. Romano-Ward syndrome is autosomal dominant with normal hearing. Jervell and Lange-Nielsen syndrome is an autosomal recessive disorder combining severe bilateral sensorineural deafness with extreme QT prolongation and sudden death risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Romano-Ward syndrome",
+     "points": [
+      "Autosomal dominant inheritance",
+      "Normal auditory function",
+      "Most common congenital form (LQT1-3)",
+      "Beta-blockers first line therapy"
+     ]
+    },
+    "right": {
+     "title": "Jervell and Lange-Nielsen",
+     "points": [
+      "Autosomal recessive inheritance",
+      "Bilateral sensorineural deafness",
+      "Homozygous KCNQ1 or KCNE1 mutations",
+      "High malignant arrhythmia risk; requires ICD"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Survivors of sustained ventricular tachycardia or cardiac arrest require secondary prevention with an **implantable cardioverter-defibrillator**. An ICD continuously monitors cardiac rhythm, delivering antitachycardia pacing or high-energy internal shocks to terminate ventricular fibrillation. In patients with structural heart disease and a left ventricular ejection fraction of 35% or less despite 3 months of optimal medical therapy, primary prevention ICD implantation significantly reduces sudden cardiac death.",
+   "say": "Survivors of sustained ventricular tachycardia or cardiac arrest require an implantable cardioverter-defibrillator. The device delivers internal shocks to terminate lethal ventricular arrhythmias. In patients with heart failure and an ejection fraction below thirty-five percent, primary prophylactic ICD implantation saves lives.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vt",
+      "label": "Sustained VT or sudden cardiac arrest"
+     },
+     {
+      "id": "rev",
+      "label": "Rule out reversible ischemia / electrolytes"
+     },
+     {
+      "id": "icd",
+      "label": "Implantable cardioverter-defibrillator (ICD)"
+     },
+     {
+      "id": "sec",
+      "label": "Long-term sudden death prevention"
+     }
+    ],
+    "edges": [
+     [
+      "vt",
+      "rev"
+     ],
+     [
+      "rev",
+      "icd"
+     ],
+     [
+      "icd",
+      "sec"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
