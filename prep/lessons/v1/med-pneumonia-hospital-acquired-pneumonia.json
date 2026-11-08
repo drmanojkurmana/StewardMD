@@ -1,0 +1,257 @@
+{
+ "v": 1,
+ "module": "med-pneumonia",
+ "subject": "medicine",
+ "title": "Nosocomial pneumonia, aspiration syndromes, and opportunistic infections",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Pneumonia developing forty-eight hours or more following hospital admission that was not incubating at the time of entry defines nosocomial infection. Diagnosing **hospital-acquired pneumonia** (HAP) requires vigilance, as hospitalised patients are colonised with multidrug-resistant pathogens including Pseudomonas aeruginosa, methicillin-resistant Staphylococcus aureus (MRSA), Klebsiella, and Acinetobacter baumannii. Pathogens enter the lower respiratory tract primarily through microaspiration of contaminated oropharyngeal secretions, carrying an in-hospital mortality rate reaching twenty to thirty percent.",
+   "say": "Pneumonia developing forty-eight hours or longer after hospital admission that was not incubating upon entry defines nosocomial infection. Diagnosing hospital-acquired pneumonia requires vigilance, as hospitalised patients are colonized with multidrug-resistant pathogens including Pseudomonas and MRSA. Organisms enter the lower respiratory tract primarily through microaspiration of contaminated oral secretions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acinetobacter-infections-fig1.webp",
+    "alt": "Gross lung illustration and microscopy of necrotizing nosocomial pneumonia.",
+    "caption": "Multidrug-resistant nosocomial pneumonia and necrotizing pulmonary consolidation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Infection developing more than forty-eight hours after endotracheal intubation represents a specific, highly lethal subgroup of nosocomial infection. Diagnosing **ventilator-associated pneumonia** (VAP) is suspected when mechanically ventilated patients develop new or progressive pulmonary infiltrates on chest radiography accompanied by fever, leukocytosis, and purulent endotracheal aspirate. Endotracheal tubes bypass upper airway natural filtration, promote pooling of secretions above the cuff, and facilitate bacterial biofilm formation that seeds the lower respiratory tract.",
+   "say": "Infection developing more than forty-eight hours following endotracheal intubation represents a lethal form of nosocomial infection. Diagnosing ventilator-associated pneumonia is suspected when ventilated patients exhibit new pulmonary infiltrates with fever, leukocytosis and purulent secretions. The tube bypasses upper airway defences and promotes pooling of secretions that seed the lower lungs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tube",
+      "label": "Endotracheal intubation & loss of cough reflex"
+     },
+     {
+      "id": "pool",
+      "label": "Secretions pool above endotracheal tube cuff"
+     },
+     {
+      "id": "micro",
+      "label": "Microaspiration of pooled subglottic secretions"
+     },
+     {
+      "id": "biofilm",
+      "label": "Bacterial biofilm formation inside endotracheal tube"
+     },
+     {
+      "id": "vap",
+      "label": "Ventilator-associated pneumonia with hypoxaemia"
+     }
+    ],
+    "edges": [
+     [
+      "tube",
+      "pool"
+     ],
+     [
+      "pool",
+      "micro"
+     ],
+     [
+      "micro",
+      "biofilm"
+     ],
+     [
+      "biofilm",
+      "vap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evidence-based preventive interventions bundled together significantly decrease the incidence of ventilator-associated infection. Implementing the **ventilator bundle** comprises elevating the head of the bed between thirty and forty-five degrees, daily sedation interruptions to assess extubation readiness, subglottic secretion drainage, peptic ulcer disease prophylaxis, and deep vein thrombosis prophylaxis. Routine oral decontamination with chlorhexidine mouthwash and minimizing circuit disconnections further protect the vulnerable lower respiratory tract.",
+   "say": "Evidence-based preventive care bundles significantly lower the incidence of ventilator-associated infection. Implementing the ventilator bundle includes elevating the head of the bed thirty to forty-five degrees, daily sedation holds to evaluate extubation readiness and subglottic secretion drainage. These measures reduce colonization and accelerate weaning from mechanical ventilation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bundle intervention",
+     "Target clinical protocol",
+     "Pathophysiologic mechanism of prevention"
+    ],
+    "rows": [
+     [
+      "Head of bed elevation",
+      "Maintain 30 to 45 degrees elevation",
+      "Prevents gastroesophageal reflux and aspiration"
+     ],
+     [
+      "Sedation interruption",
+      "Daily spontaneous awakening trial",
+      "Shortens total duration of mechanical ventilation"
+     ],
+     [
+      "Subglottic drainage",
+      "Continuous suction above tube cuff",
+      "Evacuates pooled secretions before microaspiration"
+     ],
+     [
+      "Oral hygiene",
+      "Regular chlorhexidine oral decontamination",
+      "Reduces oropharyngeal bacterial colonization burden"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inhalation of gastric contents or colonized oropharyngeal secretions produces distinct clinical entities depending on chemical acidity versus bacterial load. Developing chemical aspiration pneumonitis (Mendelson syndrome) occurs from sterile gastric acid injury, causing rapid tachypnoea, bronchospasm, and hypoxaemia within hours without initial bacterial infection. In contrast, true **aspiration pneumonia** is an infectious process arising days after aspirating oral anaerobes, commonly targeting dependent lung segments like the superior segment of the lower lobe.",
+   "say": "Inhaling gastric contents or colonized oral secretions produces distinct syndromes depending on acidity versus bacterial burden. Chemical aspiration pneumonitis results from sterile acid injury, producing rapid breathlessness and hypoxaemia within hours without initial infection. In contrast, true aspiration pneumonia is an infectious process arising days later from oral anaerobes, targeting dependent lung segments.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aspiration pneumonitis (Mendelson)",
+     "points": [
+      "Chemical burn from acidic gastric juice (pH < 2.5)",
+      "Hyperacute onset within 2 to 12 hours of aspiration",
+      "Fever, wheezing, and hypoxaemia; sterile culture",
+      "Supportive therapy; antibiotics NOT indicated initially"
+     ]
+    },
+    "right": {
+     "title": "Aspiration pneumonia",
+     "points": [
+      "Bacterial infection from oral anaerobes & aerobes",
+      "Insidious onset over 2 to 7 days post-event",
+      "Foul-smelling sputum, cavitation, and abscess",
+      "Antibiotics indicated: ampicillin-sulbactam or clindamycin"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe immunocompromise, particularly advanced human immunodeficiency virus infection with CD4 counts below 200 cells/microlitre, predisposes to an opportunistic fungal pathogen. Developing **Pneumocystis jirovecii** pneumonia (PJP) manifests with insidious progressive exertional dyspnoea, non-productive dry cough, and hypoxaemia that worsens dramatically on exercise. Chest radiography classically reveals bilateral perihilar ground-glass infiltrates with apical sparing, while serum 1,3-beta-D-glucan is markedly elevated. First-line treatment relies on high-dose co-trimoxazole with adjunctive corticosteroids.",
+   "say": "Advanced immunocompromise with CD4 counts under two hundred cells per microlitre predisposes to an opportunistic fungal pathogen. Pneumocystis jirovecii pneumonia manifests with progressive exertional breathlessness, dry cough and hypoxaemia that worsens during exertion. Chest radiographs show bilateral bat-wing ground-glass infiltrates, while beta-D-glucan is elevated. Treatment relies on high-dose co-trimoxazole and adjunctive corticosteroids.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cd4",
+      "label": "HIV with CD4 count < 200 cells/microL"
+     },
+     {
+      "id": "pj",
+      "label": "Pneumocystis jirovecii alveolar trophic colonization"
+     },
+     {
+      "id": "exud",
+      "label": "Foamy alveolar exudate with impaired gas exchange"
+     },
+     {
+      "id": "desat",
+      "label": "Profound exertional arterial oxygen desaturation"
+     },
+     {
+      "id": "bactrim",
+      "label": "High-dose IV co-trimoxazole + Prednisolone (if PaO2 < 70)"
+     }
+    ],
+    "edges": [
+     [
+      "cd4",
+      "pj"
+     ],
+     [
+      "pj",
+      "exud"
+     ],
+     [
+      "exud",
+      "desat"
+     ],
+     [
+      "desat",
+      "bactrim"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Physical examination of dense alveolar consolidation produces a pathognomonic physical constellation. Detecting complete **lobar consolidation** yields dullness to percussion over the affected hemithorax, accompanied by tubular bronchial breath sounds with harsh, loud expiratory quality. Whispered words are heard with striking clarity through the stethoscope (whispering pectoriloquy), and tactile vocal fremitus is markedly increased because sound waves travel far more efficiently through solid, fluid-filled alveoli than through spongy air-filled lung tissue.",
+   "say": "Physical examination in dense alveolar consolidation produces a classic diagnostic constellation. Finding lobar consolidation yields dullness to percussion over the affected area, alongside tubular bronchial breath sounds with loud expiration. Whispered words are transmitted with clarity, termed whispering pectoriloquy, and vocal fremitus is increased because sound travels faster through dense fluid-filled lung tissue.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix-consolidation-triad.jpg",
+    "alt": "Physical signs of consolidation including dull percussion and bronchial breath sounds.",
+    "caption": "Lobar consolidation signs: dullness, bronchial breathing, and whispering pectoriloquy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Inflammatory exudation from pneumonia into the adjacent pleural space creates significant complications. Developing a **parapneumonic effusion** begins as an uncomplicated sterile exudate that readily resolves with systemic antibiotics. However, if bacteria invade the pleural space, it transitions into a complicated effusion or frank empyema with gross pus. Diagnostic thoracocentesis demonstrating a pleural fluid pH below 7.20, glucose under 3.3 mmol/L (60 mg/dL), or elevated LDH exceeding 1000 IU/L mandates prompt intercostal chest tube drainage.",
+   "say": "Inflammatory fluid extending from pneumonia into the adjacent pleural space produces significant complications. Developing a parapneumonic effusion begins as a sterile exudate that resolves with systemic antibiotics. However, bacterial invasion turns it into a complicated effusion or frank empyema with pus. Finding pleural fluid pH below seven point twenty or glucose under sixty milligrammes per decilitre requires chest tube drainage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uncomplicated parapneumonic",
+     "points": [
+      "Pleural fluid clear or cloudy; sterile",
+      "pH > 7.20 and glucose > 60 mg/dL",
+      "LDH < 1000 IU/L; Gram stain negative",
+      "Resolves with systemic antibiotics alone"
+     ]
+    },
+    "right": {
+     "title": "Complicated effusion / Empyema",
+     "points": [
+      "Frank pus or positive bacterial Gram stain",
+      "pH < 7.20 and glucose < 60 mg/dL",
+      "LDH > 1000 IU/L; loculated fluid pockets",
+      "Mandatory intercostal tube drainage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Comprehensive risk quantification using fine-grained demographic, clinical, and laboratory criteria predicts thirty-day mortality. Calculating the **pneumonia severity index** (PSI / PORT score) assigns points across twenty variables including age, nursing home residence, comorbidities (neoplasm, heart failure, cerebrovascular disease), vital sign derangements, and arterial blood gas values. Classifying patients into risk classes I to V accurately identifies low-risk individuals (classes I to III) suitable for safe outpatient care.",
+   "say": "Comprehensive risk quantification using clinical and laboratory parameters helps predict thirty-day pneumonia mortality. Calculating the pneumonia severity index score assigns points across twenty variables including age, chronic comorbidities, vital signs and blood gas measurements. Classifying patients into risk classes one through five reliably identifies low-risk individuals suitable for safe outpatient treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PSI / PORT Risk Class",
+     "Total point score",
+     "Expected 30-day mortality",
+     "Recommended site of care"
+    ],
+    "rows": [
+     [
+      "Class I",
+      "No risk factors present (age < 50)",
+      "0.1% to 0.4% mortality",
+      "Outpatient oral therapy"
+     ],
+     [
+      "Class II",
+      "<= 70 points",
+      "0.6% to 0.7% mortality",
+      "Outpatient oral therapy"
+     ],
+     [
+      "Class III",
+      "71 to 90 points",
+      "0.9% to 2.8% mortality",
+      "Observation unit or brief inpatient stay"
+     ],
+     [
+      "Class IV",
+      "91 to 130 points",
+      "8.2% to 9.3% mortality",
+      "Inpatient hospital ward admission"
+     ],
+     [
+      "Class V",
+      "> 130 points",
+      "27% to 31% mortality",
+      "Inpatient admission / intensive care unit"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

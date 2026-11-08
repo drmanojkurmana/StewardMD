@@ -1,0 +1,250 @@
+{
+ "v": 1,
+ "module": "med-copd",
+ "subject": "medicine",
+ "title": "COPD exacerbations, oxygen therapy, and advanced interventions",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Maintenance pharmacotherapy in symptomatic chronic obstructive pulmonary disease centers on long-acting bronchodilators. Administering a **long-acting muscarinic antagonist** (LAMA) like tiotropium or aclidinium provides sustained bronchodilation and reduces dynamic hyperinflation. Combining a LAMA with a long-acting beta agonist (LABA) achieves superior improvement in FEV1 and dyspnoea scores compared to monotherapy. LAMAs act as the primary pharmacological backbone to prevent recurrent exacerbations across GOLD groups B and E.",
+   "say": "Maintenance treatment in symptomatic chronic obstructive pulmonary disease focuses on long-acting bronchodilators. Administering a long-acting muscarinic antagonist like tiotropium delivers sustained bronchodilation and reduces lung hyperinflation. Combining a muscarinic blocker with a long-acting beta agonist achieves superior improvements in lung function and breathlessness. These agents act as the backbone to prevent recurrent exacerbations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "LAMA monotherapy",
+     "points": [
+      "Tiotropium, glycopyrronium, umeclidinium",
+      "Slow dissociation from muscarinic M3 receptors",
+      "Superior to LABA monotherapy in preventing exacerbations",
+      "Once-daily or twice-daily maintenance inhalation"
+     ]
+    },
+    "right": {
+     "title": "LAMA + LABA combination",
+     "points": [
+      "Tiotropium-olodaterol, umeclidinium-vilanterol",
+      "Synergistic smooth muscle relaxation pathways",
+      "Greater improvement in FEV1 and exercise capacity",
+      "Recommended initial therapy for highly symptomatic COPD"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute sustained worsening of respiratory symptoms requiring change in regular medication defines a clinical crisis. We diagnose an **acute exacerbation** of COPD by acute increases in dyspnoea, cough frequency, or sputum purulence and volume, triggered predominantly by viral upper respiratory infections or bacterial pathogens like Haemophilus influenzae and Streptococcus pneumoniae. Treatment relies on inhaled short-acting bronchodilators, a five-day course of oral prednisolone (40 mg daily), and targeted antibiotics when sputum is purulent.",
+   "say": "Acute sustained worsening of respiratory symptoms requiring treatment changes defines a clinical flare. Clinicians diagnose an acute exacerbation by sudden increases in breathlessness, sputum volume or purulence, triggered by viral infections or bacteria like Haemophilus influenzae. Treatment relies on inhaled short-acting bronchodilators, a five-day course of oral prednisolone and targeted antibiotics.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/copd-exac-ni-fig1.webp",
+    "alt": "Illustration of airway inflammation and gas trapping in acute COPD exacerbation.",
+    "caption": "Airway inflammation, dynamic hyperinflation, and acute exacerbation physiology. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Severe resting hypoxaemia accelerates pulmonary hypertension and increases mortality in advanced emphysema. Prescribing **long-term oxygen therapy** (LTOT) for at least fifteen hours daily significantly improves survival in patients with severe resting hypoxaemia. Indications require an arterial PaO2 of 55 mmHg or less (or SpO2 <= 88%), or a PaO2 between 56 and 59 mmHg with evidence of cor pulmonale, polycythaemia (haematocrit > 55%), or peripheral edema.",
+   "say": "Severe resting hypoxaemia accelerates pulmonary vascular disease and increases mortality in advanced emphysema. Giving long-term oxygen therapy for at least fifteen hours daily improves survival in severe chronic hypoxaemia. Indications require an arterial oxygen tension of fifty-five millimetres of mercury or less, or up to fifty-nine with secondary polycythaemia, cor pulmonale or peripheral swelling.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-gold-bode.svg",
+    "alt": "BODE index and long term oxygen therapy criteria in chronic obstructive pulmonary disease.",
+    "caption": "BODE index prognostic parameters and respiratory failure indications. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Severe chronic bronchitis produces marked ventilation-perfusion mismatch, hypercapnia, and secondary right heart failure. Clinicians historically designate this phenotype as the **blue bloater**, presenting as an overweight individual with chronic productive cough, cyanosis, peripheral edema, and elevated PaCO2. Because the central respiratory drive becomes blunted to chronic hypercapnia, high-flow uncontrolled oxygen can worsen ventilation-perfusion matching and suppress ventilation, mandating controlled oxygen delivery via 24% or 28% Venturi masks.",
+   "say": "Severe chronic bronchitis produces ventilation-perfusion mismatch, carbon dioxide retention and secondary right heart failure. Clinicians designate this presentation as the blue bloater, characterized by an overweight individual with chronic cough, cyanosis, peripheral edema and hypercapnia. Because ventilatory drive is blunted, uncontrolled oxygen can worsen carbon dioxide retention, requiring controlled Venturi masks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Blue bloater (Bronchitic)",
+     "points": [
+      "Overweight, central cyanosis, peripheral edema",
+      "Severe V/Q mismatch with early hypoxaemia",
+      "Prominent hypercapnia and respiratory acidosis",
+      "Frequent cor pulmonale and secondary polycythaemia"
+     ]
+    },
+    "right": {
+     "title": "Pink puffer (Emphysematous)",
+     "points": [
+      "Thin, cachectic, pursed-lip breathing",
+      "Severe dyspnoea with preserved PaO2 at rest",
+      "Hyperinflated barrel chest, quiet breath sounds",
+      "Low DLCO from extensive alveolar wall loss"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Predominant emphysema causes extensive alveolar surface area destruction, breathlessness, and significant muscle wasting. Patients with the classical **pink puffer** phenotype present as thin, asthenic individuals utilizing accessory muscles and pursed-lip breathing to prevent small airway dynamic collapse during expiration. Hyperventilation maintains normal blood gas tensions until terminal stages. Marked hyperinflation depresses the diaphragm and attenuates cardiac dullness, while diffusing capacity drops severely due to capillary bed destruction.",
+   "say": "Predominant emphysema causes alveolar destruction, severe breathlessness and significant muscle wasting. Patients exhibiting the pink puffer phenotype appear thin, using accessory muscles and pursed-lip breathing to prevent airway collapse during exhalation. Hyperventilation helps maintain blood gas levels until terminal stages. Hyperinflation flattens the diaphragm, while diffusing capacity falls severely from capillary loss.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "loss",
+      "label": "Extensive alveolar septal destruction"
+     },
+     {
+      "id": "recoil",
+      "label": "Loss of elastic recoil & radial airway traction"
+     },
+     {
+      "id": "pursed",
+      "label": "Pursed-lip breathing maintains positive airway pressure"
+     },
+     {
+      "id": "cachex",
+      "label": "Elevated work of breathing drives systemic cachexia"
+     },
+     {
+      "id": "normal",
+      "label": "PaO2 maintained near normal via hyperventilation"
+     }
+    ],
+    "edges": [
+     [
+      "loss",
+      "recoil"
+     ],
+     [
+      "recoil",
+      "pursed"
+     ],
+     [
+      "pursed",
+      "cachex"
+     ],
+     [
+      "cachex",
+      "normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe localized parenchymal destruction in emphysema can coalesce into giant, non-functioning airspaces. Developing large emphysematous **bullae** occurs when destroyed alveolar septa merge into thin-walled air collections exceeding one centimetre in diameter within the lung parenchyma. Giant bullae occupying more than one-third of a hemithorax compress adjacent preserved lung tissue and mediastinal structures, causing worsening dyspnoea. Surgical bullectomy re-expands compressed healthy lung tissue, improving mechanical ventilation and exercise tolerance.",
+   "say": "Severe localized parenchymal breakdown in emphysema can coalesce into giant airspaces. Developing large emphysematous bullae occurs when destroyed alveolar walls merge into thin-walled collections exceeding one centimetre in diameter. Giant bullae occupying more than one-third of a hemithorax compress adjacent lung tissue and worsen breathlessness. Surgical bullectomy re-expands healthy lung units, improving breathing mechanics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "coalesce",
+      "label": "Confluence of destroyed alveolar walls"
+     },
+     {
+      "id": "bulla",
+      "label": "Formation of giant emphysematous bulla (> 1 cm)"
+     },
+     {
+      "id": "comp",
+      "label": "Compression of adjacent functioning lung parenchyma"
+     },
+     {
+      "id": "bullect",
+      "label": "Surgical bullectomy or videothoracoscopic resection"
+     },
+     {
+      "id": "reexpand",
+      "label": "Re-expansion of compressed healthy lung & improved FEV1"
+     }
+    ],
+    "edges": [
+     [
+      "coalesce",
+      "bulla"
+     ],
+     [
+      "bulla",
+      "comp"
+     ],
+     [
+      "comp",
+      "bullect"
+     ],
+     [
+      "bullect",
+      "reexpand"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Carefully selected patients with severe hyperinflation refractory to maximal medical therapy benefit from anatomical volume reduction. Performing surgical or bronchoscopic **lung volume reduction** resects or collapses the most severely damaged, non-functional emphysematous lung zones, typically in the upper lobes. By reducing thoracic hyperinflation, volume reduction restores diaphragmatic curvature, improves chest wall mechanics, and increases elastic recoil, yielding substantial improvements in FEV1, exercise endurance, and overall quality of life.",
+   "say": "Selected patients with severe hyperinflation refractory to medical therapy benefit from lung volume reduction. Performing surgical or bronchoscopic volume reduction collapses the most severely damaged emphysematous lung areas, typically in upper lobes. By reducing hyperinflation, volume reduction restores diaphragmatic curvature, improves breathing mechanics and increases elastic recoil, yielding valuable improvements in exercise endurance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surgical LVRS",
+     "points": [
+      "Bilateral upper-lobe resection via VATS/sternotomy",
+      "NETT trial: survival benefit in upper-lobe low-exercise",
+      "Restores diaphragmatic dome geometry",
+      "High perioperative morbidity (air leaks)"
+     ]
+    },
+    "right": {
+     "title": "Endobronchial valves (EBV)",
+     "points": [
+      "Minimally invasive bronchoscopic deployment",
+      "One-way valves allow air exit and collapse bulla",
+      "Requires absence of collateral ventilation (Chartis)",
+      "Lower procedural morbidity than open surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronic alveolar hypoxia triggers persistent pulmonary vasoconstriction, driving right ventricular remodelling and failure. Developing secondary **cor pulmonale** is characterized by pulmonary arterial hypertension leading to right ventricular hypertrophy, dilatation, and eventual systolic failure. Physical examination reveals elevated jugular venous pressure with prominent v waves from secondary tricuspid regurgitation, a left parasternal heave, a loud pulmonic component of S2, hepatomegaly, and bilateral dependent lower extremity edema.",
+   "say": "Chronic alveolar hypoxia triggers persistent pulmonary vasoconstriction, driving right ventricular enlargement and failure. Developing secondary cor pulmonale is characterized by pulmonary arterial hypertension causing right ventricular hypertrophy and dilatation. Examination reveals elevated jugular venous pressure with prominent v waves, a parasternal heave, a loud second heart sound, hepatomegaly and peripheral edema.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hypox",
+      "label": "Chronic alveolar hypoxia (PaO2 < 55 mmHg)"
+     },
+     {
+      "id": "vaso",
+      "label": "Hypoxic pulmonary vasoconstriction & vascular remodeling"
+     },
+     {
+      "id": "pah",
+      "label": "Secondary pulmonary arterial hypertension"
+     },
+     {
+      "id": "rvh",
+      "label": "Right ventricular hypertrophy & chamber dilatation"
+     },
+     {
+      "id": "fail",
+      "label": "Cor pulmonale: Peripheral edema & high JVP"
+     }
+    ],
+    "edges": [
+     [
+      "hypox",
+      "vaso"
+     ],
+     [
+      "vaso",
+      "pah"
+     ],
+     [
+      "pah",
+      "rvh"
+     ],
+     [
+      "rvh",
+      "fail"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
