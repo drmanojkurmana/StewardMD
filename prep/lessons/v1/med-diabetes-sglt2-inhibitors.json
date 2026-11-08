@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "med-diabetes",
+ "subject": "medicine",
+ "title": "SGLT2 Inhibitors and Insulin Regimens",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Inhibition of high-capacity sodium-glucose cotransporters in the renal proximal convoluted tubule promotes therapeutic urinary glucose excretion. Prescribing **sglt2 inhibitors** such as empagliflozin, dapagliflozin, and canagliflozin blocks glucose reabsorption, lowering plasma glucose in an insulin-independent manner. Beyond glycaemic efficacy, this class delivers profound reductions in heart failure hospitalizations and slows chronic kidney disease progression by restoring tubuloglomerular feedback. Adverse effects include mycotic genital infections, volume depletion, and euglycaemic diabetic ketoacidosis during acute stress.",
+   "say": "Inhibition of high-capacity sodium-glucose cotransporters in the renal proximal convoluted tubule promotes therapeutic urinary glucose excretion. Prescribing sglt2 inhibitors such as empagliflozin and dapagliflozin blocks glucose reabsorption, lowering plasma glucose independently of insulin. Beyond glycaemic efficacy, this class delivers profound reductions in heart failure hospitalizations and preserves renal function. Adverse effects include genital mycotic infections and euglycaemic ketoacidosis during metabolic stress.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/pharma-insulin-profiles.svg",
+    "alt": "Pharmacodynamic profiles illustrating peak times and durations of rapid, regular, intermediate, and long-acting insulins.",
+    "caption": "Comparative pharmacodynamic curves and action profiles of modern therapeutic insulins. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Designing physiological insulin replacement requires combining basal coverage with bolus mealtime administration to mimic native pancreatic endocrine secretion. Standard intensive **insulin regimens** employ a basal-bolus protocol, utilizing once-daily long-acting analogues like glargine or degludec alongside rapid-acting mealtime analogues like lispro, aspart, or glulisine. Alternatively, twice-daily premixed biphasic insulin provides convenience for select patients with fixed dietary schedules. Accurate carbohydrate counting and individualized insulin-to-carbohydrate ratios empower patients to adjust prandial doses dynamically, minimizing postprandial hyperglycaemia and hypoglycaemic risk.",
+   "say": "Designing physiological insulin replacement requires combining basal coverage with bolus mealtime administration to mimic native pancreatic endocrine secretion. Standard intensive insulin regimens employ a basal-bolus protocol, utilizing once-daily long-acting analogues alongside rapid-acting mealtime analogues. Alternatively, twice-daily premixed insulin offers convenience for individuals with fixed meal schedules. Accurate carbohydrate counting empowers patients to adjust prandial doses dynamically, minimizing glycaemic excursions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/insulin-types-regimens-dka-hypoglycaemia-fig1.webp",
+    "alt": "Basal bolus insulin regimens and glucose monitoring strategies in diabetes management.",
+    "caption": "Basal-bolus replacement strategy mimicking endogenous physiological insulin secretion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Nocturnal hypoglycaemia triggering compensatory neuroendocrine counterregulation produces morning rebound hyperglycaemia. Designated as the **somogyi effect**, unperceived early morning hypoglycaemia around three o'clock stimulates surges of epinephrine, cortisol, glucagon, and growth hormone. These stress hormones accelerate hepatic glycogenolysis and gluconeogenesis, producing high fasting glucose readings at seven in the morning. Diagnosing this phenomenon mandates checking a three o'clock blood glucose level; finding hypoglycaemia dictates reducing the evening basal insulin dose rather than erroneously increasing it.",
+   "say": "Nocturnal hypoglycaemia triggering compensatory neuroendocrine counterregulation produces morning rebound hyperglycaemia. Designated as the somogyi effect, unperceived early morning hypoglycaemia around three o'clock stimulates surges of cortisol, epinephrine, and glucagon. These counterregulatory hormones promote hepatic gluconeogenesis, producing high morning glucose readings. Checking a three o'clock blood glucose level reveals hypoglycaemia, indicating that the evening insulin dose must be reduced.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Somogyi Effect",
+     "points": [
+      "3:00 AM Blood Glucose: Low (< 70 mg/dL)",
+      "Rebound neuroendocrine surge",
+      "High fasting 7:00 AM glucose",
+      "Management: Reduce evening basal insulin",
+      "Provide bedtime complex carbohydrate snack"
+     ]
+    },
+    "right": {
+     "title": "Dawn Phenomenon",
+     "points": [
+      "3:00 AM Blood Glucose: Normal or High",
+      "Circadian growth hormone surge",
+      "High fasting 7:00 AM glucose",
+      "Management: Increase evening basal insulin",
+      "Adjust timing of basal analogue"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An early morning rise in plasma glucose occurring without antecedent nocturnal hypoglycaemia reflects normal circadian endocrine physiology. In the **dawn phenomenon**, physiological surges of nocturnal growth hormone and cortisol between four and eight o'clock reduce hepatic insulin sensitivity, elevating fasting glucose in diabetic patients lacking endogenous compensatory insulin release. Distinguishing the dawn phenomenon from the Somogyi effect requires checking three o'clock blood glucose; finding normal or elevated readings confirms the dawn phenomenon, requiring an increase or timing adjustment of evening basal insulin.",
+   "say": "An early morning rise in plasma glucose occurring without antecedent nocturnal hypoglycaemia reflects normal circadian endocrine physiology. In the dawn phenomenon, physiological surges of nocturnal growth hormone and cortisol reduce hepatic insulin sensitivity, elevating morning fasting glucose. Distinguishing this phenomenon from the Somogyi effect requires checking three o'clock glucose levels. Demonstrating normal or elevated values confirms the dawn phenomenon, requiring an increase in evening basal insulin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "3:00 AM Glucose",
+     "7:00 AM Glucose",
+     "Pathophysiological Mechanism",
+     "Therapeutic Action"
+    ],
+    "rows": [
+     [
+      "Somogyi Effect",
+      "Low (< 70 mg/dL)",
+      "Elevated (> 140 mg/dL)",
+      "Counterregulatory surge post-hypoglycaemia",
+      "Decrease evening basal dose"
+     ],
+     [
+      "Dawn Phenomenon",
+      "Normal / High",
+      "Elevated (> 140 mg/dL)",
+      "Physiological GH and cortisol circadian surge",
+      "Increase evening basal dose"
+     ],
+     [
+      "Poor Glycaemic Control",
+      "Elevated",
+      "Elevated",
+      "Inadequate 24-hour basal coverage",
+      "Titrate overall basal and prandial insulin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Impaired cellular responsiveness to physiological concentrations of circulating insulin constitutes the core pathophysiological abnormality of the metabolic syndrome. Developing **insulin resistance** involves post-receptor signaling defects in skeletal muscle, adipose tissue, and hepatocytes, predominantly driven by ectopic lipid accumulation and chronic low-grade inflammation. Intracellular diacylglycerol and ceramides activate protein kinase C isoforms, impairing insulin receptor substrate 1 (IRS-1) tyrosine phosphorylation and GLUT4 transporter translocation. Clinical hallmarks include acanthosis nigricans, visceral adiposity, hypertriglyceridaemia, and low HDL cholesterol.",
+   "say": "Impaired cellular responsiveness to physiological concentrations of circulating insulin constitutes the core abnormality of metabolic syndrome. Developing insulin resistance involves post-receptor signaling defects in muscle, fat, and liver, driven by ectopic lipid accumulation and inflammation. Intracellular lipid intermediates impair insulin receptor phosphorylation and GLUT4 translocation. Clinical hallmarks include acanthosis nigricans, central adiposity, elevated triglycerides, and low HDL cholesterol.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "adipose",
+      "label": "Visceral Adiposity & Free Fatty Acids"
+     },
+     {
+      "id": "pkc",
+      "label": "Intracellular DAG & PKC Activation"
+     },
+     {
+      "id": "irs",
+      "label": "Impaired IRS-1 Tyrosine Phosphorylation"
+     },
+     {
+      "id": "glut4",
+      "label": "Blunted GLUT4 Translocation & Glucose Uptake"
+     }
+    ],
+    "edges": [
+     [
+      "adipose",
+      "pkc"
+     ],
+     [
+      "pkc",
+      "irs"
+     ],
+     [
+      "irs",
+      "glut4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern ultra-long-acting basal insulin analogues provide remarkably flat pharmacodynamic profiles with extended durations of action exceeding thirty-six hours. Formulations such as **insulin degludec** form subcutaneous multihexamer chains that slowly dissociate into monomeric units, ensuring ultra-stable steady-state circulating concentrations with minimal peak-trough variability. Compared with first-generation basal insulins like neutral protamine Hagedorn (NPH), modern analogues such as degludec and glargine U-300 significantly reduce the incidence of nocturnal hypoglycaemia, permitting greater day-to-day dosing flexibility.",
+   "say": "Modern ultra-long-acting basal insulin analogues provide remarkably flat pharmacodynamic profiles with extended durations of action exceeding thirty-six hours. Formulations such as insulin degludec form subcutaneous multihexamer chains that slowly dissociate into monomers, ensuring ultra-stable steady-state concentrations with minimal peak variability. Compared with neutral protamine Hagedorn, modern analogues significantly reduce nocturnal hypoglycaemia while permitting flexible daily injection timing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "NPH Insulin",
+     "points": [
+      "Intermediate-acting suspension",
+      "Pronounced peak at 4-8 hours",
+      "Duration 12-18 hours",
+      "High risk of nocturnal hypoglycaemia",
+      "Requires strict resuspension mixing"
+     ]
+    },
+    "right": {
+     "title": "Insulin Degludec",
+     "points": [
+      "Ultra-long-acting analogue",
+      "Peakless flat 24-hour profile",
+      "Duration > 42 hours",
+      "Significantly lower nocturnal hypoglycaemia",
+      "Flexible once-daily injection timing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rapid-acting insulin analogues engineered through recombinant DNA technology accelerate monomer absorption from subcutaneous tissues to control postprandial glycaemia. Modifying amino acid sequences in **insulin lispro** or aspart prevents self-association into hexamers, facilitating rapid capillary uptake within fifteen minutes of administration. Patients inject rapid-acting insulins immediately before or up to twenty minutes after starting a meal, closely mirroring physiological postprandial insulin surges. Their short three-to-four-hour duration of action dramatically lowers the incidence of late postprandial hypoglycaemia.",
+   "say": "Rapid-acting insulin analogues engineered through recombinant technology accelerate monomer absorption from subcutaneous tissues to control postprandial glycaemia. Modifying amino acid sequences in insulin lispro or aspart prevents self-association into hexamers, facilitating capillary uptake within fifteen minutes. Patients inject rapid-acting insulins immediately before meals, mimicking physiological postprandial insulin surges while substantially reducing late postprandial hypoglycaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Insulin Type",
+     "Onset of Action",
+     "Peak Effect",
+     "Effective Duration",
+     "Clinical Administration"
+    ],
+    "rows": [
+     [
+      "Lispro / Aspart",
+      "10-15 minutes",
+      "1-2 hours",
+      "3-5 hours",
+      "Inject 0-15 min before meals"
+     ],
+     [
+      "Regular Human Insulin",
+      "30-60 minutes",
+      "2-3 hours",
+      "6-8 hours",
+      "Inject 30 min before meals"
+     ],
+     [
+      "NPH Human Insulin",
+      "2-4 hours",
+      "4-10 hours",
+      "12-18 hours",
+      "Twice daily basal coverage"
+     ],
+     [
+      "Glargine / Degludec",
+      "1-2 hours",
+      "Peakless / Flat",
+      "24-42 hours",
+      "Once daily at consistent time"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Continuous subcutaneous insulin infusion delivered via automated insulin pumps represents the gold standard for achieving tight glycaemic control in type 1 diabetes. Utilizing rapid-acting insulin exclusively, the infusion pump delivers pre-programmed micro-boluses as basal infusion throughout twenty-four hours, paired with patient-activated meal boluses. Advanced hybrid **closed-loop systems** integrate continuous glucose sensor data with predictive algorithms, automatically modulating basal delivery to prevent nocturnal hypoglycaemia and postprandial excursions, substantially reducing glycaemic variability.",
+   "say": "Continuous subcutaneous insulin infusion delivered via automated pumps represents the gold standard for achieving tight glycaemic control in type 1 diabetes. Utilizing rapid-acting insulin exclusively, the pump delivers micro-boluses as basal infusion throughout the day, paired with meal boluses. Advanced hybrid closed-loop systems integrate continuous glucose sensor data with automated predictive algorithms, substantially reducing glycaemic variability and preventing hypoglycaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sensor",
+      "label": "Continuous Glucose Monitor (CGM)"
+     },
+     {
+      "id": "algo",
+      "label": "Control Algorithm Calculates Infusion Rate"
+     },
+     {
+      "id": "pump",
+      "label": "Micro-Pump Adjusts Subcutaneous Lispro/Aspart"
+     },
+     {
+      "id": "target",
+      "label": "Time in Range (70-180 mg/dL) > 70%"
+     }
+    ],
+    "edges": [
+     [
+      "sensor",
+      "algo"
+     ],
+     [
+      "algo",
+      "pump"
+     ],
+     [
+      "pump",
+      "target"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

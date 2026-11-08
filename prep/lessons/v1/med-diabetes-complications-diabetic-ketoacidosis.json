@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "med-diabetes-complications",
+ "subject": "medicine",
+ "title": "Diabetic Ketoacidosis and Acute Hyperglycaemic Emergencies",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "An acute, life-threatening metabolic crisis triggered by profound insulin deficiency coupled with excess counterregulatory hormones defines **diabetic ketoacidosis**. Unchecked lipolysis mobilizes massive quantities of free fatty acids to hepatocytes, where unopposed beta-oxidation generates acetoacetate and beta-hydroxybutyrate. High circulating ketone levels consume bicarbonate buffers, producing a high anion gap metabolic acidosis. Patients present with dehydration, Kussmaul respirations, fruity acetone breath, abdominal pain, and vomiting, commonly precipitated by acute infection, non-compliance, or myocardial infarction.",
+   "say": "An acute metabolic crisis triggered by profound insulin deficiency coupled with excess counterregulatory hormones defines diabetic ketoacidosis. Unchecked lipolysis mobilizes free fatty acids to hepatocytes, where beta-oxidation generates acetoacetate and beta-hydroxybutyrate. Accumulating ketones consume bicarbonate buffers, producing severe high anion gap metabolic acidosis. Patients present with dehydration, Kussmaul breathing, acetone breath, and abdominal pain, often triggered by acute infection or omitted insulin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dka-fig1.webp",
+    "alt": "Metabolic and pathophysiological pathways driving ketone production and acidemia in diabetic ketoacidosis.",
+    "caption": "Biochemical pathways of lipolysis and hepatic ketogenesis in diabetic ketoacidosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A severe metabolic derangement predominantly striking older patients with type 2 diabetes features extreme hyperglycaemia without significant ketosis. Developing **hyperosmolar hyperglycaemic state** involves partial residual insulin secretion sufficient to suppress hepatic ketogenesis but inadequate to prevent severe hyperglycaemia and osmotic diuresis. Plasma glucose typically exceeds 600 milligrams per decilitre, with serum osmolality rising above 320 milliosmoles per kilogram. Profound intracellular and extracellular dehydration induces progressive lethargy, confusion, stupor, and focal neurological deficits, carrying higher mortality than classic ketoacidosis.",
+   "say": "A severe metabolic derangement predominantly striking older patients with type 2 diabetes features extreme hyperglycaemia without significant ketosis. Developing hyperosmolar hyperglycaemic state involves residual insulin secretion sufficient to suppress ketogenesis but inadequate to prevent profound osmotic diuresis. Plasma glucose exceeds 600 milligrams per decilitre with severe hyperosmolality. Profound dehydration induces progressive neurological impairment, coma, and carries high mortality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diabetic Ketoacidosis (DKA)",
+     "points": [
+      "Younger type 1 diabetes predominantly",
+      "Glucose usually 250 to 600 mg/dL",
+      "Arterial pH < 7.30, HCO3 < 18 mEq/L",
+      "Elevated serum & urine ketones",
+      "Rapid onset over 24 hours"
+     ]
+    },
+    "right": {
+     "title": "Hyperosmolar State (HHS)",
+     "points": [
+      "Older type 2 diabetes predominantly",
+      "Glucose markedly elevated (> 600 mg/dL)",
+      "Arterial pH > 7.30, HCO3 > 18 mEq/L",
+      "Serum osmolality > 320 mOsm/kg",
+      "Insidious onset over days to weeks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emergency management of ketoacidosis mandates aggressive crystalloid resuscitation paired with low-dose intravenous regular insulin infusion. Intravenous **fluid resuscitation** with isotonic normal saline restores intravascular volume and renal perfusion, lowering circulating counterregulatory hormones. Continuous regular insulin at 0.1 units per kilogram per hour suppresses ongoing lipolysis and ketogenesis. Crucially, clinicians must assess serum potassium before starting insulin; if potassium is below 3.3 milliequivalents per litre, insulin must be withheld and potassium repleted to avoid fatal cardiac arrhythmias.",
+   "say": "Emergency management of ketoacidosis mandates aggressive crystalloid resuscitation paired with low-dose intravenous regular insulin infusion. Intravenous fluid resuscitation with isotonic saline restores intravascular volume and renal perfusion, blunting counterregulatory stress hormones. Continuous regular insulin suppresses ongoing lipolysis and ketogenesis. Crucially, clinicians must check serum potassium before starting insulin; if potassium is under 3.3 milliequivalents per litre, potassium must be replaced before administering insulin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ivf",
+      "label": "Normal Saline (1-1.5 L/hr initially)"
+     },
+     {
+      "id": "k",
+      "label": "Assess Serum Potassium (K+ > 3.3 mEq/L)"
+     },
+     {
+      "id": "ins",
+      "label": "IV Regular Insulin (0.1 U/kg/hr infusion)"
+     },
+     {
+      "id": "d5",
+      "label": "Add 5% Dextrose when Glucose < 200 mg/dL"
+     }
+    ],
+    "edges": [
+     [
+      "ivf",
+      "k"
+     ],
+     [
+      "k",
+      "ins"
+     ],
+     [
+      "ins",
+      "d5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most dreaded complication of diabetic ketoacidosis therapy occurs primarily in children receiving overly rapid osmotic correction. Developing **cerebral oedema** manifests during treatment as sudden headache, lethargy, bradycardia, vomiting, and declining consciousness while biochemical parameters appear to improve. Rapid drops in serum effective osmolality induce water movement along osmotic gradients into swollen astrocytes. Immediate therapeutic intervention requires urgent administration of intravenous mannitol (0.5 to 1 gram per kilogram) or three percent hypertonic saline, paired with head elevation.",
+   "say": "The most dreaded complication of diabetic ketoacidosis therapy occurs primarily in children receiving overly rapid osmotic correction. Developing cerebral oedema manifests during treatment as sudden headache, lethargy, bradycardia, and neurological deterioration while laboratory parameters seem to improve. Rapid decreases in serum osmolality draw fluid into swollen astrocytes. Immediate intervention requires intravenous mannitol or hypertonic saline alongside head elevation and fluid reduction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "risk",
+      "label": "Rapid Osmolality Drop / Overzealous Hypotonic Fluids"
+     },
+     {
+      "id": "brain",
+      "label": "Astrocyte Swelling: Headache, Lethargy, Papilloedema"
+     },
+     {
+      "id": "rx",
+      "label": "Immediate IV Mannitol (0.5-1 g/kg) or 3% Hypertonic Saline"
+     }
+    ],
+    "edges": [
+     [
+      "risk",
+      "brain"
+     ],
+     [
+      "brain",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progressive microvascular damage to retinal capillaries driven by chronic hyperglycaemia and pericyte loss leads to irreversible visual impairment. Clinically graded as non-proliferative or proliferative, **diabetic retinopathy** represents the leading cause of acquired blindness among working-age adults. Non-proliferative changes feature microaneurysms, dot-and-blot haemorrhages, hard exudates representing lipid leakage, and cotton-wool spots indicating retinal nerve fibre infarction. Diabetic macular oedema can occur at any stage, requiring prompt optical coherence tomography and intravitreal anti-VEGF therapy to preserve vision.",
+   "say": "Progressive microvascular damage to retinal capillaries driven by chronic hyperglycaemia and pericyte loss leads to irreversible visual impairment. Clinically graded as non-proliferative or proliferative, diabetic retinopathy represents the leading cause of acquired blindness among working-age adults. Non-proliferative disease features microaneurysms, dot haemorrhages, hard exudates, and cotton-wool spots indicating nerve fibre infarction. Macular oedema can occur at any stage, requiring optical coherence tomography and intravitreal anti-VEGF therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetic-retinopathy-fig1.webp",
+    "alt": "Funduscopic hallmarks of diabetic retinopathy including microaneurysms, exudates, and neovascularization.",
+    "caption": "Retinal funduscopic examination demonstrating microaneurysms, haemorrhages, and hard exudates. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Retinal capillary non-perfusion and widespread ischaemia stimulate the secretion of vascular endothelial growth factor (VEGF). This pathological angiogenic stimulus drives **proliferative diabetic retinopathy**, characterized by fragile neovascularization on the optic disc (NVD) or elsewhere across the retina (NVE). These abnormal vessels readily rupture into the vitreous gel, causing sudden painless vision loss from vitreous haemorrhage. Fibrovascular contraction can subsequently produce tractional retinal detachment, necessitating urgent panretinal photocoagulation laser therapy or pars plana vitrectomy.",
+   "say": "Retinal capillary non-perfusion and widespread ischaemia stimulate the secretion of vascular endothelial growth factor. This pathological angiogenic stimulus drives proliferative diabetic retinopathy, characterized by fragile neovascularization on the optic disc or retina. These abnormal vessels readily rupture into the vitreous gel, causing sudden painless vision loss from vitreous haemorrhage. Fibrovascular proliferation risks tractional retinal detachment, requiring panretinal photocoagulation or vitrectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-Proliferative Retinopathy",
+     "points": [
+      "Pericyte loss and basement membrane thickening",
+      "Microaneurysms, dot-blot haemorrhages",
+      "Hard exudates (lipid deposits)",
+      "Cotton-wool spots (ischaemic axoplasm)",
+      "Management: Optimize glycaemic & BP control"
+     ]
+    },
+    "right": {
+     "title": "Proliferative Retinopathy",
+     "points": [
+      "Severe retinal ischaemia driving VEGF release",
+      "Neovascularization of disc (NVD) or retina (NVE)",
+      "Vitreous haemorrhage with sudden vision loss",
+      "Tractional retinal detachment risk",
+      "Management: Panretinal photocoagulation / Anti-VEGF"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Recognizing resolution criteria for ketoacidosis dictates the appropriate timing for transitioning from intravenous insulin to subcutaneous regimens. Successful **dka resolution** requires achieving a blood glucose below 200 milligrams per decilitre alongside two of the following: serum bicarbonate of 15 milliequivalents per litre or higher, venous pH above 7.30, and a normalized anion gap. Subcutaneous basal insulin must be injected two hours prior to discontinuing the intravenous insulin drip, ensuring continuous circulating hormone and preventing rebound ketoacidosis.",
+   "say": "Recognizing resolution criteria for ketoacidosis dictates the appropriate timing for transitioning from intravenous insulin to subcutaneous regimens. Successful dka resolution requires achieving a blood glucose below 200 milligrams per decilitre alongside normalized bicarbonate, venous pH above 7.30, and a closed anion gap. Subcutaneous basal insulin must be injected two hours prior to stopping intravenous insulin, preventing rebound ketoacidosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "DKA Presentation",
+     "Resolution Criteria",
+     "Transition Action"
+    ],
+    "rows": [
+     [
+      "Blood Glucose",
+      "> 250 mg/dL",
+      "< 200 mg/dL",
+      "Maintain D5W infusion"
+     ],
+     [
+      "Serum Bicarbonate",
+      "< 15 mEq/L",
+      ">= 15 mEq/L",
+      "Bicarbonate corrected"
+     ],
+     [
+      "Venous Blood pH",
+      "< 7.30",
+      "> 7.30",
+      "Acidosis resolved"
+     ],
+     [
+      "Serum Anion Gap",
+      "> 12 mEq/L",
+      "<= 12 mEq/L",
+      "Give subcutaneous basal 2 hr prior"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sodium bicarbonate administration in ketoacidosis remains highly controversial and is strictly reserved for life-threatening severe acidemia. Administering **sodium bicarbonate** is recommended only when arterial pH falls below 6.90, because rapid alkali infusion risks paradoxical intracellular CNS acidosis from diffusable carbon dioxide, severe hypokalaemia, and impaired tissue oxygen unloading. When indicated, one hundred millimoles of isotonic sodium bicarbonate in sterile water with potassium chloride is infused over two hours until venous pH rises safely above 7.00.",
+   "say": "Sodium bicarbonate administration in ketoacidosis remains highly controversial and is strictly reserved for life-threatening severe acidemia. Administering sodium bicarbonate is recommended only when arterial pH falls below 6.90, because alkali infusion risks paradoxical intracellular brain acidosis, hypokalaemia, and blunted tissue oxygen delivery. When indicated, isotonic bicarbonate is infused slowly until venous pH rises safely above 7.00.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "pH >= 6.90 (Routine DKA)",
+     "points": [
+      "No bicarbonate indicated",
+      "Fluid and insulin resolve ketoacidosis",
+      "Avoids paradoxical CSF acidosis",
+      "Prevents rebound metabolic alkalosis"
+     ]
+    },
+    "right": {
+     "title": "pH < 6.90 (Severe DKA)",
+     "points": [
+      "100 mmol sodium bicarbonate infused",
+      "Co-administer 20 mEq KCl",
+      "Protects against myocardial depression",
+      "Reassess arterial pH every 2 hours"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
