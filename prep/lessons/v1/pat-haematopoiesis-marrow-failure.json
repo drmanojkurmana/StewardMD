@@ -3,11 +3,11 @@
  "module": "pat-haematopoiesis-marrow-failure",
  "subject": "pathology",
  "title": "Bone marrow failure: aplastic anaemia, red cell aplasia and pancytopenia",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Aplastic anaemia** empties multipotent myeloid stem cells (fatty hypocellular marrow with pancytopenia and reticulocytopenia) after benzene, chloramphenicol, hepatitis, pregnancy or autoimmunity; severity grades by neutrophils, platelets and reticulocytes. Young patients with donors get **bone marrow transplant** (curative), others get **antithymocyte globulin with ciclosporin** (and eltrombopag debates); androgens bridge historically. Transfuse sparingly (alloimmunisation) with iron watched; MDS and PNH clones lurk in survivors.",
-   "say": "Empty fatty marrow with pancytopenia is aplastic: transplant the young, immune suppress the rest. Benzene and chloramphenicol warn.",
+   "tx": "**Aplastic anaemia** empties the marrow of multipotent stem cells and leaves fatty hypocellular marrow with pancytopenia and low reticulocytes. Causes include benzene, chloramphenicol, hepatitis, pregnancy and autoimmune attack on stem cells in susceptible patients. Severity grading uses neutrophil, platelet and reticulocyte counts to guide urgency of treatment. Young patients with a suitable donor receive **bone marrow transplant** for cure, while others receive **antithymocyte globulin with ciclosporin** based immunosuppression.",
+   "say": "This disease empties the marrow and lowers every cell line because the stem cells have failed. Benzene exposure and chloramphenicol are classic triggers that examiners expect you to remember during revision. Young patients receive a transplant when possible while older patients receive strong immune suppression instead.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-haematopoiesis-marrow-failure-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Inherited failures** declare early: **Fanconi anaemia** (DNA repair defect, cafe au lait with thumb and radial anomalies, microcephaly, chromosome breakage with DEB testing, leukaemia risk, BMT before malignancy), dyskeratosis congenita (nail dystrophy with leukoplakia, telomere short), Shwachman-Diamond (pancreatic insufficiency with neutropenia). **Paroxysmal nocturnal haemoglobinuria** (PIGA somatic clone, GPI anchor loss, morning haemoglobinuria with thrombosis and aplasia overlap, **eculizumab**, FLAER testing) bridges acquired and inherited; small PNH clones complicate half of aplastic cases.",
-   "say": "Thumb anomalies with marrow failure are Fanconi: breakage testing. Morning dark urine with clots is PNH: eculizumab.",
+   "tx": "**Fanconi anaemia** is an inherited DNA repair defect that causes marrow failure with brown skin patches, thumb and radial anomalies and small head size. Chromosome breakage testing with diepoxybutane confirms the diagnosis and leukaemia risk makes early **bone marrow transplant** important before malignancy develops. Dyskeratosis congenita shows nail dystrophy with white oral patches and short telomeres, while Shwachman Diamond syndrome combines pancreatic insufficiency with low neutrophils. **Paroxysmal nocturnal haemoglobinuria** is an acquired clone that loses the GPI anchor and causes dark morning urine with clotting.",
+   "say": "Fanconi anaemia damages DNA repair and causes marrow failure with skin patches and thumb anomalies in children. Breakage testing confirms the diagnosis, and early transplant prevents leukaemia from developing in later years. Paroxysmal nocturnal haemoglobinuria is different because an acquired clone loses its protective anchor and causes dark urine.",
    "vis": null
   },
   {
-   "tx": "**Pure red cell aplasia** (reticulocytopenia with absent erythroblasts, normal white cells and platelets) splits into **Diamond-Blackfan** (ribosomal, congenital with thumb and craniofacial anomalies, steroids then BMT) and acquired (thymoma resected, parvovirus B19 in haemolytics, anti EPO antibodies). **Parvovirus B19** (slapped cheek fifth disease, **aplastic crisis** in sickle and spherocytosis as giant pronormoblasts halt red cells, hydrops in pregnancy) is diagnosed by IgM or PCR; IVIG treats chronic infection in immunodeficiency. Myelophthisis (fibrosis, granulomas, metastases with teardrop cells) crowds out last.",
-   "say": "No reticulocytes with empty red precursors is red cell aplasia. Slapped cheek then sickle crisis is parvovirus B19.",
+   "tx": "The photograph shows both forearms with brown **cafe au lait macules** on the skin and a short abnormal thumb on one hand. These bedside signs point toward **Fanconi anaemia** when they occur with marrow failure in a child or young patient. The annotations remind you that **chromosome breakage testing** confirms the defect and that transplant before malignancy gives the best chance of cure. In the exam, thumb anomaly plus pancytopenia should immediately raise Fanconi anaemia.",
+   "say": "This photograph is showing brown skin patches and a short thumb in a patient with marrow failure. Those bedside signs point toward Fanconi anaemia, and breakage testing confirms the underlying DNA repair defect. Early transplant matters greatly because leukaemia risk rises when treatment waits for malignancy to appear.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-haematopoiesis-marrow-failure-gen1.webp",
+    "alt": "Paired forearms showing brown macules and thumb anomaly with test and transplant annotations.",
+    "caption": "Cafe au lait macules, thumb anomaly and DEB testing. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Pure red cell aplasia** means reticulocytopenia with absent red cell precursors while white cells and platelets remain normal in number. **Diamond Blackfan anaemia** is the congenital ribosomal form with thumb and craniofacial anomalies that responds to steroids or transplant. Acquired causes include thymoma, parvovirus B19 infection in patients with haemolysis, and antibodies against erythropoietin in treated patients. **Parvovirus B19** causes slapped cheek disease and halts red cell production as giant pronormoblasts, producing aplastic crisis and hydrops in pregnancy.",
+   "say": "Pure red cell aplasia removes only the red cell line while other cell lines remain completely normal. Congenital disease shows thumb anomalies and responds to steroids, while acquired disease follows thymoma or viral infection. Parvovirus halts red cell production and causes a sudden aplastic crisis in patients with haemolysis.",
    "vis": null
   },
   {
-   "tx": "**Pancytopenia differentials** organise by marrow: hypocellular (aplastic, Fanconi, PNH, hypoplastic MDS), hypercellular with ineffective production (megaloblastic B12 and folate, MDS with blasts and dysplasia, AML), infiltrative (myelofibrosis with tear drops and massive spleen, tuberculosis, lymphoma, metastatic prostate), peripheral destruction (hypersplenism, sepsis, SLE). **Reticulocyte count** first separates production failure (low) from destruction or loss (high); marrow biopsy with cytogenetics then stages. B12 and folate correct before marrow blamed.",
-   "say": "Pancytopenia with low reticulocytes is production failure: biopsy the marrow. High reticulocytes mean destruction or bleed.",
+   "tx": "**Pancytopenia** needs a marrow based approach because the same blood picture arises from empty, overactive or infiltrated marrow in different patients. Hypocellular causes include aplastic anaemia, Fanconi anaemia and hypoplastic myelodysplasia, while hypercellular causes include vitamin B12 deficiency and myelodysplasia with dysplasia. Infiltrative causes include myelofibrosis with tear drop cells and a large spleen, tuberculosis, lymphoma and metastatic cancer. The **reticulocyte count** separates production failure with low values from destruction or blood loss with high values.",
+   "say": "You should organise pancytopenia by marrow cellularity because treatment differs completely between empty and infiltrated marrow. The reticulocyte count separates production failure from destruction, and low values point toward marrow disease in most cases. Vitamin deficiency must be corrected before you blame the marrow in any pancytopenia stem.",
    "vis": {
     "kind": "table",
     "cols": [

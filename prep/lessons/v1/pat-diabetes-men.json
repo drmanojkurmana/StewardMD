@@ -6,13 +6,13 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Diabetes mellitus** is chronic hyperglycaemia from insulin deficiency, resistance or both, diagnosed by glucose or HbA1c thresholds and classified chiefly as autoimmune type 1, insulin resistant type 2 and pancreatic or drug induced forms. Acute decompensation differs: ketoacidosis dominates type 1 while hyperosmolar states dominate type 2 in the elderly.",
-   "say": "Diabetes is chronic high glucose from too little insulin action. Type 1 autoimmunity ketoacidoses; type 2 resistance hyperosmolarises in the elderly. Threshold tests confirm it.",
+   "tx": "Diabetes mellitus is chronic hyperglycaemia caused by deficient insulin action. **Diabetes mellitus** is classified mainly as autoimmune type one and insulin resistant type two disease, and **ketoacidosis** dominates decompensation in type one diabetes. Hyperosmolar states dominate in elderly type two patients, and diagnosis rests on glucose or HbA1c thresholds.",
+   "say": "Diabetes is chronic hyperglycaemia because insulin action is deficient in the body. Type one disease is autoimmune and type two disease is insulin resistant predominantly. Ketoacidosis dominates in type one whereas hyperosmolar states affect elderly patients. Diagnosis is confirmed because glucose or glycated haemoglobin thresholds are met.",
    "vis": null
   },
   {
-   "tx": "Chronic hyperglycaemia damages vessels through glycation, oxidative stress and protein kinase pathways producing the classic triad of **retinopathy, nephropathy and neuropathy** plus accelerated atherosclerosis. Non enzymatic glycation thickens basement membranes while sorbitol accumulates in lens and nerves. Pathology stems map each complication to its microvascular bed.",
-   "say": "Years of high glucose glycates and thickens small vessels causing eye, kidney and nerve damage plus faster atherosclerosis. Each complication names its microvascular bed.",
+   "tx": "Chronic hyperglycaemia injures vessels through glycation and oxidative stress pathways. The classic triad is **retinopathy, nephropathy and neuropathy**, and **accelerated atherosclerosis** adds major macrovascular disease in diabetes. Basement membranes thicken in small vessels, and sorbitol accumulates in lens and nerve tissue during prolonged hyperglycaemia in patients.",
+   "say": "Years of hyperglycaemia cause damage because glycation and oxidative stress injure vessels progressively. Small vessel disease causes retinopathy, nephropathy and neuropathy in classic distribution patterns. Large vessel atherosclerosis is accelerated and cardiovascular events occur earlier in diabetes. Each complication is localised to a vulnerable microvascular bed in examinations.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-diabetes-men-fig1.webp",
@@ -22,8 +22,8 @@
    }
   },
   {
-   "tx": "**Diabetic nephropathy** progresses from hyperfiltration through microalbuminuria to overt proteinuria with nodular glomerulosclerosis, while retinopathy advances from microaneurysms and hard exudates to proliferative new vessels that bleed and detach retina. Peripheral neuropathy stockings the feet toward painless ulcers, and autonomic failure silences angina and gastroparesis alike.",
-   "say": "Diabetic kidneys leak albumin stepwise into nodules and failure. Eyes grow fragile new vessels. Feet lose feeling into ulcers. Silent hearts hide infarction pain.",
+   "tx": "Diabetic kidney and eye disease progress through recognisable sequential stages. **Diabetic nephropathy** progresses from hyperfiltration to proteinuria, and **proliferative retinopathy** produces fragile new vessels that bleed. Nodular glomerulosclerosis develops in advanced kidney disease, whereas peripheral neuropathy causes painless foot ulcers and autonomic failure silences angina.",
+   "say": "Diabetic kidney disease is progressive because hyperfiltration is followed by albuminuria gradually. Nodular sclerosis develops in glomeruli and renal failure follows in advanced disease. Retinal vessels proliferate and bleeding with detachment threatens vision in untreated patients. Neuropathy causes ulcers because protective sensation is lost in feet.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -47,13 +47,24 @@
    }
   },
   {
-   "tx": "**Insulinoma** causes Whipple triad of fasting hypoglycaemia symptoms relieved by glucose with inappropriately high insulin and C peptide, distinguishing endogenous overproduction from injected insulin where C peptide is suppressed. Most are benign solitary pancreatic tumours, but MEN1 association mandates calcium screening. Gastrinoma instead floods acid causing refractory ulcers in Zollinger Ellison syndrome.",
-   "say": "Fasting lows with high insulin and C peptide mean insulinoma. Injected insulin suppresses C peptide. Gastrinoma floods acid into refractory ulcers. Screen MEN1 calcium.",
+   "tx": "This glomerulus shows round pink nodules with expanded mesangial matrix in diabetes. These **Kimmelstiel Wilson nodules** indicate nodular glomerulosclerosis, and **mesangial expansion** is labelled in the surrounding tuft. The labels trace progression from albuminuria to overt proteinuria, which is the classic renal sequence tested in diabetes.",
+   "say": "This glomerulus shows round laminated nodules in the mesangial areas clearly. Mesangial matrix is expanded and capillary loops are compressed by sclerosis progressively. These nodules indicate advanced diabetic glomerulosclerosis in long standing disease typically. Proteinuria progresses because filtration barrier damage increases over years.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-diabetes-men-gen1.webp",
+    "alt": "H&E stained glomerulus showing round mesangial nodules and expanded matrix in diabetic nephropathy.",
+    "caption": "Glomerulus with Kimmelstiel Wilson nodules and mesangial expansion. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Insulinoma is diagnosed by documenting endogenous insulin excess during hypoglycaemia. The **Whipple triad** links fasting symptoms to low glucose, and high **C peptide** separates endogenous secretion from injected insulin. Most tumours are benign and solitary, and MEN1 association requires calcium screening, whereas gastrinoma causes refractory ulcers through acid excess.",
+   "say": "Fasting hypoglycaemia with high insulin indicates endogenous overproduction by a tumour usually. C peptide is high in insulinoma because endogenous insulin is secreted with it. Injected insulin suppresses C peptide and that contrast separates the two causes. Calcium screening is required because MEN1 association occurs in some patients.",
    "vis": null
   },
   {
-   "tx": "**MEN1** (Wermer) unites parathyroid hyperplasia, pituitary adenomas and pancreatic neuroendocrine tumours (the three Ps) from menin tumour suppressor loss. MEN2 instead drives medullary thyroid cancer and phaeochromocytoma through RET activation. Inheritance is autosomal dominant in both, so cascade family screening is part of pathology informed care.",
-   "say": "MEN1 is parathyroid, pituitary and pancreas from menin loss. MEN2 is medullary thyroid and phaeochromocytoma from RET. Both dominant: screen families.",
+   "tx": "Multiple endocrine neoplasia syndromes unite tumours by inherited gene defects. **MEN1** combines parathyroid, pituitary and pancreatic tumours, and **MEN2** combines medullary thyroid cancer with phaeochromocytoma through RET activation. MEN1 results from menin tumour suppressor loss, and both syndromes are autosomal dominant so cascade family screening is essential.",
+   "say": "MEN1 is characterised by parathyroid, pituitary and pancreatic tumours as three Ps. Menin loss causes MEN1 whereas RET activation causes MEN2 syndromes instead. Medullary thyroid cancer dominates MEN2 and phaeochromocytoma requires exclusion before surgery always. Family screening is essential because inheritance is autosomal dominant in both.",
    "vis": {
     "kind": "table",
     "cols": [

@@ -3,11 +3,11 @@
  "module": "rad-ir-pain-spine",
  "subject": "radiology",
  "title": "Pain and spine interventions",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Collapsed vertebrae can be cemented back to function. **Vertebroplasty** injects bone cement directly into the fractured body, while **kyphoplasty** first inflates a balloon to restore height before cementing. **Osteoporotic fractures** with severe ongoing pain despite conservative care are the core indication under **NICE guidance**. **Malignant fractures** from myeloma or metastases respond when the posterior wall is intact. **Burst fractures** with retropulsion and neurology need surgery, not cement.",
-   "say": "Collapsed vertebrae can be cemented. Vertebroplasty injects cement directly, while kyphoplasty restores height with a balloon first. Severe painful osteoporotic fractures are the core indication. Malignant fractures respond with intact posterior walls, while burst fractures with neurology need surgery.",
+   "tx": "A painful collapsed vertebra can be stabilised by injecting bone cement. **Vertebroplasty** injects cement directly into the fractured body, while kyphoplasty first inflates a balloon. The balloon restores height before cementing and suits a wedge shaped collapse. **Osteoporotic fractures** with severe persisting pain are the core indication for augmentation. Malignant fractures respond when the posterior wall is intact, while **burst fractures** with neurology need surgery.",
+   "say": "A painful collapsed vertebra can be stabilised by injecting bone cement. Vertebroplasty injects cement directly, while a balloon first restores height. Severe painful osteoporotic fractures are the core indication for augmentation. Malignant fractures respond with an intact wall, while burst fractures with neurology need surgical care instead.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -35,8 +35,19 @@
    }
   },
   {
-   "tx": "Cement demands respect for leaks. **Cement leakage** into discs or veins is usually silent but paravertebral leak can injure nerves. **Pulmonary cement embolism** follows venous leak and needs monitoring. **Adjacent fractures** cluster after augmentation because stiffened bone loads neighbours. **Infection** is rare with sterile technique. **Height restoration** favours kyphoplasty, while pain relief is similar between the two techniques.",
-   "say": "Cement demands respect. Leaks are usually silent but nerve injury and lung embolism occur. Neighbouring bones fracture more after stiffening. Infection stays rare with sterile technique, height favours balloons, and pain relief matches between techniques.",
+   "tx": "The left fluoroscopy panel shows a **kyphoplasty balloon** inflated inside a collapsed vertebra and lifting the endplates apart. The right panel shows dense white **PMMA cement** filling the restored body after balloon removal. The posterior wall remains intact and no cement enters the spinal canal behind it. This pair separates height restoration from simple cement injection in **vertebral augmentation** questions.",
+   "say": "The left panel shows a balloon that inflates inside a collapsed vertebra. The right panel shows dense cement filling the restored body afterwards. The posterior wall remains intact and no cement enters the canal. This pair separates height restoration from simple cement injection in examination questions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-pain-spine-gen1.webp",
+    "alt": "Paired spinal fluoroscopy images showing kyphoplasty balloon restoring height then cement fill with intact wall.",
+    "caption": "Fluoroscopy shows balloon inflation then PMMA cement fill without leak. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Cement leakage is the complication that examiners ask about most often. **Cement leakage** into a disc or vein is usually silent and needs only observation. Leakage beside the vertebra can injure a nerve and cause new leg pain. Cement that reaches the lungs through veins causes **pulmonary cement embolism** and needs monitoring. Neighbouring vertebrae fracture more often after stiffening, while infection remains rare with sterile technique and height gain favours the balloon method.",
+   "say": "Cement leakage is the complication that examiners ask about most often. Leakage into a disc is usually silent and needs observation. Leakage beside the vertebra can injure a nerve badly. Cement reaching the lungs needs monitoring, while neighbouring vertebrae fracture more often after stiffening changes spinal loading.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-pain-spine-fig1.webp",
@@ -46,8 +57,8 @@
    }
   },
   {
-   "tx": "Pancreatic cancer pain yields to neurolysis. **Celiac plexus neurolysis** with alcohol or phenol suits **upper abdominal cancer pain** refractory to opioids, classically pancreatic. **Endoscopic ultrasound guidance** reaches the plexus without crossing tumour-laden planes. **Diarrhoea and hypotension** follow sympathectomy and need fluids and warning. **Opioid doses** fall after successful blocks, which matters for bowels and minds. **Repeat blocks** fade in value, so timing near peak need is best.",
-   "say": "Pancreatic pain yields to neurolysis. Celiac plexus destruction suits upper abdominal cancer pain failing opioids. Endoscopic ultrasound reaches the plexus cleanly. Diarrhoea and hypotension follow and need warning, opioid doses fall afterwards, and timing near peak need works best.",
+   "tx": "Upper abdominal cancer pain can be eased by destroying the coeliac plexus. **Coeliac plexus neurolysis** with alcohol or phenol suits pancreatic cancer pain that opioids cannot control. Endoscopic ultrasound guidance reaches the plexus without crossing tumour filled planes unnecessarily. Diarrhoea and low blood pressure follow the sympathetic block and need fluids and prior warning. Successful treatment lowers **opioid dose** and thereby eases bowels and thinking for the patient.",
+   "say": "Upper abdominal cancer pain can be eased by destroying the coeliac plexus. Neurolysis suits pancreatic pain that opioids cannot control adequately. Endoscopic guidance reaches the plexus without crossing tumour planes. Diarrhoea and low pressure follow the block, while successful treatment lowers opioid dose and helps bowel function.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Backs and legs have targeted injections. **Facet joint injections** with steroid and local anaesthetic suit **axial back pain** worse on extension and rotation. **Medial branch blocks** diagnose facet pain before **radiofrequency denervation** burns the nerve. **Epidural steroid injections** suit **radicular leg pain** from disc or stenosis, with transforaminal routes reaching the exiting root. **Red flags** with neurology, saddle numbness or retention need urgent surgery, never injection.",
-   "say": "Backs and legs have targeted injections. Facet shots suit axial pain worse on twisting. Medial branch blocks diagnose before denervation burns the nerve. Epidurals suit leg pain from discs, and red flags with numbness or retention need urgent surgery instead.",
+   "tx": "Facet and epidural injections target different spinal pain generators precisely. **Facet joint injections** suit axial back pain that worsens on extension and rotation. A **medial branch block** diagnoses facet pain before the nerve is burnt for longer relief. **Epidural steroid injections** suit leg pain that radiates from a disc or stenosis. Saddle numbness, weakness or retention are red flags that need urgent surgery rather than any injection.",
+   "say": "Facet and epidural injections target different spinal pain generators precisely. Facet injections suit axial pain that worsens on extension movement. A diagnostic block precedes nerve burning for longer relief afterwards. Epidural steroids suit radiating leg pain, while saddle numbness or retention needs urgent surgery rather than injection.",
    "vis": {
     "kind": "table",
     "cols": [
