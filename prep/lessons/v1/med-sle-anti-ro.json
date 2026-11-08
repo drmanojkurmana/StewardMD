@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "med-sle",
+ "subject": "medicine",
+ "title": "Anti-Ro and Antiphospholipid Syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Autoantibodies targeting cellular ribonucleoprotein complexes composed of small cytoplasmic RNAs and polypeptide antigens define a distinct autoimmune subset. Circulating **anti-ro** (SSA) autoantibodies, directed against 52-kDa and 60-kDa protein antigens, occur in up to ninety percent of patients with primary Sjögren syndrome and forty percent of systemic lupus erythematosus. Anti-Ro antibodies confer an exquisite clinical susceptibility to ultraviolet light-induced photosensitivity, subacute cutaneous lupus erythematosus (SCLE featuring widespread annular polycyclic or papulosquamous plaques), secondary pulmonary interstitial fibrosis, and the devastating complication of neonatal congenital heart block.",
+   "say": "Autoantibodies targeting cellular ribonucleoprotein complexes define a distinct autoimmune subset. Circulating anti-ro autoantibodies occur in up to ninety percent of patients with primary Sjögren syndrome and forty percent of systemic lupus erythematosus. Anti-Ro antibodies confer exquisite susceptibility to photosensitivity, subacute cutaneous lupus with annular plaques, secondary pulmonary fibrosis, and neonatal congenital heart block.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/subacute-cutaneous-lupus-fig1.webp",
+    "alt": "Clinical photograph of subacute cutaneous lupus erythematosus showing annular polycyclic plaques.",
+    "caption": "Photosensitive annular polycyclic plaques characteristic of anti-Ro positive subacute cutaneous lupus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An acquired systemic thrombophilia mediated by pathogenic autoantibodies directed against phospholipid-binding plasma proteins characterizes **antiphospholipid syndrome** (APS). Diagnosing APS under the revised Sapporo criteria requires meeting at least one clinical criterion (documented venous, arterial, or microvascular thrombosis, or pregnancy morbidity such as recurrent unexplained miscarriages before ten weeks or late fetal loss after ten weeks) alongside at least one persistent laboratory criterion detected on two occasions twelve weeks apart: lupus anticoagulant, anticardiolipin antibodies, or anti-beta-2-glycoprotein-1 antibodies.",
+   "say": "An acquired systemic thrombophilia mediated by pathogenic autoantibodies directed against phospholipid-binding plasma proteins characterizes antiphospholipid syndrome. Diagnosing APS requires at least one clinical criterion, including venous or arterial thrombosis or pregnancy morbidity, alongside at least one persistent laboratory criterion confirmed twelve weeks apart: lupus anticoagulant, anticardiolipin antibodies, or anti-beta-2-glycoprotein-1.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antiphospholipid-syndrome-fig1.webp",
+    "alt": "Clinical and laboratory criteria defining antiphospholipid syndrome including thrombosis and obstetric loss.",
+    "caption": "Diagnostic clinical criteria and laboratory serological hallmarks in antiphospholipid syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A paradoxical laboratory phenomenon wherein an in vivo prothrombotic autoantibody prolongs phospholipid-dependent clotting assays in vitro defines the **lupus anticoagulant**. These autoantibodies bind phospholipid-protein complexes, competing with clotting factors for reagent phospholipid surfaces in vitro and prolonging screening tests like the dilute Russell viper venom time (dRVVT) or silica clotting time. To establish lupus anticoagulant, three sequential criteria must be satisfied: demonstration of a prolonged phospholipid-dependent clotting time; failure to correct with 1:1 normal plasma mix; and definitive shortening or correction upon adding excess hexagonal phase phospholipids.",
+   "say": "A paradoxical laboratory phenomenon wherein an in vivo prothrombotic autoantibody prolongs clotting assays in vitro defines the lupus anticoagulant. These autoantibodies bind phospholipid-protein complexes, competing with clotting factors and prolonging screening tests like the dilute Russell viper venom time. Confirmation requires showing a prolonged clotting time, failure to correct on mixing study, and definitive correction upon adding excess phospholipid.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Screen: Prolonged Phospholipid-Dependent Clotting Time (dRVVT / aPTT)"
+     },
+     {
+      "id": "mix",
+      "label": "Mix: 1:1 Normal Pooled Plasma Mixing Study Fails to Correct"
+     },
+     {
+      "id": "confirm",
+      "label": "Confirm: Shortening of Clotting Time with Excess Phospholipid"
+     },
+     {
+      "id": "dx",
+      "label": "Lupus Anticoagulant Confirmed (Strongest Thrombotic Risk)"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "mix"
+     ],
+     [
+      "mix",
+      "confirm"
+     ],
+     [
+      "confirm",
+      "dx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Quantifying autoantibodies directed against cardiolipin-protein complexes provides an essential laboratory criterion for antiphospholipid syndrome classification. Standardized enzyme-linked immunosorbent assays detect **anticardiolipin** IgG and IgM antibodies. Medium-to-high titres exceeding 40 IgG phospholipid units (GPL) or 40 IgM phospholipid units (MPL), measured on two occasions at least twelve weeks apart, fulfill diagnostic laboratory criteria. IgG isotypes carry significantly higher clinical predictive value for vascular thrombosis and pregnancy loss than IgM isotypes. Cross-reactivity with cardiolipin reagents historically caused biological false-positive VDRL/RPR syphilis non-treponemal screening tests in lupus patients.",
+   "say": "Quantifying autoantibodies directed against cardiolipin-protein complexes provides an essential laboratory criterion for antiphospholipid syndrome classification. Standardized enzyme-linked assays detect anticardiolipin IgG and IgM antibodies. Medium-to-high titres confirmed twelve weeks apart fulfill diagnostic criteria. IgG isotypes carry significantly higher predictive value for vascular thrombosis and pregnancy loss than IgM. Cross-reactivity historically caused biological false-positive syphilis screening tests in lupus patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Criterion",
+     "Target Antigen / Complex",
+     "Standardized Diagnostic Cutoff",
+     "Clinical Thrombotic Correlation"
+    ],
+    "rows": [
+     [
+      "Lupus Anticoagulant (LA)",
+      "Phospholipid-protein surfaces",
+      "Confirmed via dRVVT three-step panel",
+      "Strongest predictor of arterial & venous thrombosis"
+     ],
+     [
+      "Anticardiolipin (aCL)",
+      "Cardiolipin + beta-2-glycoprotein-1",
+      "IgG / IgM titre > 40 GPL / MPL units",
+      "High risk of deep vein thrombosis & stroke"
+     ],
+     [
+      "Anti-beta-2-glycoprotein-1",
+      "Domain I of beta-2-GPI molecule",
+      "Titre > 99th percentile of healthy controls",
+      "Specific marker; mediates endothelial activation"
+     ],
+     [
+      "Triple Positive APS",
+      "Positive for all three laboratory markers",
+      "Persistently positive at 12 weeks",
+      "Highest risk of recurrent thrombosis & catastrophic APS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-bacterial verrucous vegetations developing on cardiac valve leaflets in patients with systemic lupus erythematosus and antiphospholipid syndrome characterize **libman-sacks endocarditis**. Immune complex deposition and anti-phospholipid antibody-mediated endothelial injury stimulate sterile fibrovascular microthrombi composed of fibrin, platelets, and mononuclear cells. Unlike infective endocarditis which predominantly affects valve closure lines, Libman-Sacks vegetations characteristically locate on both the flow and non-flow surfaces of the mitral and aortic valves, particularly on the undersurface of valve leaflets. Most lesions are asymptomatic, but severe disease causes valvular regurgitation and secondary cardioembolic embolic strokes.",
+   "say": "Non-bacterial verrucous vegetations developing on cardiac valve leaflets in patients with systemic lupus erythematosus and antiphospholipid syndrome characterize Libman-Sacks endocarditis. Immune complex deposition and endothelial injury stimulate sterile vegetations composed of fibrin and platelets. Unlike infective endocarditis, Libman-Sacks vegetations locate on both the flow and non-flow surfaces of the mitral and aortic valves. While often silent, lesions can cause valvular regurgitation and cardioembolic strokes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Libman-Sacks Endocarditis",
+     "points": [
+      "Non-bacterial sterile verrucous vegetations",
+      "Located on both sides of valve leaflets (undersurface)",
+      "Mitral valve (posterior leaflet) and Aortic valve",
+      "High association with Antiphospholipid Syndrome",
+      "Carries elevated risk of cardioembolic stroke"
+     ]
+    },
+    "right": {
+     "title": "Infective Endocarditis",
+     "points": [
+      "Bacterial / fungal colonization (Staph, Strep)",
+      "Located strictly along lines of valve closure",
+      "Destructive with valve perforation and abscesses",
+      "Accompanied by persistent high-grade bacteremia",
+      "Requires prolonged bactericidal IV antibiotics"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long-term therapeutic secondary thromboprophylaxis for patients with confirmed antiphospholipid syndrome and prior venous thrombosis mandates therapeutic anticoagulation. Frontline anticoagulation relies on oral **vitamin k antagonists** such as warfarin, maintaining a target international normalized ratio (INR) strictly between 2.0 and 3.0. Direct oral anticoagulants (DOACs like rivaroxaban) are strictly contraindicated in high-risk triple-positive antiphospholipid syndrome, as randomized controlled trials demonstrated significantly higher rates of recurrent arterial thromboembolic events (myocardial infarction and stroke) on DOACs compared with warfarin.",
+   "say": "Long-term secondary thromboprophylaxis for patients with confirmed antiphospholipid syndrome and prior venous thrombosis mandates therapeutic anticoagulation. Frontline anticoagulation relies on oral vitamin K antagonists such as warfarin, maintaining an INR between 2.0 and 3.0. Direct oral anticoagulants are contraindicated in high-risk triple-positive antiphospholipid syndrome, because clinical trials demonstrated significantly higher rates of recurrent arterial thromboembolic events compared with warfarin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Scenario in APS",
+     "First-Line Anticoagulation Strategy",
+     "Target Intensity",
+     "Key Clinical Trial Evidence"
+    ],
+    "rows": [
+     [
+      "First Venous Thromboembolism",
+      "Warfarin (Vitamin K Antagonist)",
+      "Target INR 2.0 to 3.0",
+      "Indefinite extended anticoagulation"
+     ],
+     [
+      "Arterial Thrombosis (Stroke / TIA)",
+      "Warfarin (Target INR 2.0-3.0) + Aspirin",
+      "Target INR 2.0 to 3.0",
+      "Or high-intensity warfarin (INR 3.0-4.0)"
+     ],
+     [
+      "Triple-Positive High-Risk APS",
+      "Strictly Warfarin; Avoid DOACs",
+      "Target INR 2.0 to 3.0",
+      "TRAPS trial: DOACs showed excess stroke & MI"
+     ],
+     [
+      "Recurrent Thrombosis on Warfarin",
+      "Switch to LMWH or Add Low-Dose Aspirin",
+      "Target INR 3.0 to 4.0",
+      "Investigate non-adherence and subtherapeutic INR"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preventing recurrent pregnancy loss and obstetric complications in women with antiphospholipid syndrome utilizes combination antithrombotic therapy. In women with obstetric APS (recurrent early miscarriages or late fetal loss), prophylactic subcutaneous **low-molecular-weight heparin** (enoxaparin 40 mg daily) paired with low-dose oral aspirin (75 to 100 mg daily) is initiated upon documented positive pregnancy test and continued throughout gestation. Warfarin is strictly teratogenic, causing nasal hypoplasia and stippled epiphyses (warfarin embryopathy) during the first trimester, requiring immediate cessation before six weeks gestation.",
+   "say": "Preventing recurrent pregnancy loss and obstetric complications in women with antiphospholipid syndrome utilizes combination antithrombotic therapy. In women with obstetric APS, prophylactic subcutaneous low-molecular-weight heparin paired with low-dose oral aspirin is initiated upon positive pregnancy testing and continued throughout gestation. Warfarin is strictly teratogenic, causing nasal hypoplasia and skeletal abnormalities during the first trimester, requiring substitution with heparin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "preg",
+      "label": "Documented Conception in Woman with Obstetric APS"
+     },
+     {
+      "id": "switch",
+      "label": "Discontinue Warfarin (Teratogenic Warfarin Embryopathy)"
+     },
+     {
+      "id": "rx",
+      "label": "Prophylactic LMWH (Enoxaparin 40 mg SC daily) + Low-Dose Aspirin"
+     },
+     {
+      "id": "deliv",
+      "label": "Hold LMWH 24 Hours Prior to Planned Delivery / Epidural"
+     }
+    ],
+    "edges": [
+     [
+      "preg",
+      "switch"
+     ],
+     [
+      "switch",
+      "rx"
+     ],
+     [
+      "rx",
+      "deliv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A life-threatening, fulminant variant of antiphospholipid syndrome characterized by widespread microvascular occlusions in multiple organs within days defines **catastrophic aps** (Asherson syndrome). Manifesting with acute microvascular thrombosis affecting at least three distinct organ systems (kidneys, lungs, brain, heart, skin) over a single week, patients present in severe septic-like multi-organ failure. Histopathology reveals non-inflammatory intravascular thrombosis without vasculitis. Management requires emergency triple therapy combining therapeutic anticoagulation with intravenous unfractionated heparin, high-dose intravenous methylprednisolone, and plasma exchange or intravenous immunoglobulin.",
+   "say": "A life-threatening, fulminant variant of antiphospholipid syndrome characterized by widespread microvascular occlusions across multiple organs within days defines catastrophic APS. Manifesting with acute microvascular thrombosis affecting at least three distinct organ systems over a single week, patients present in multi-organ failure. Management requires emergency triple therapy combining therapeutic anticoagulation, high-dose intravenous corticosteroids, and plasma exchange or IVIG.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Antiphospholipid Syndrome",
+     "points": [
+      "Single large-vessel venous or arterial thrombosis",
+      "Deep vein thrombosis, pulmonary embolism, stroke",
+      "Non-acute progression over months to years",
+      "Managed with standard oral Warfarin anticoagulation",
+      "Low acute procedure-related mortality"
+     ]
+    },
+    "right": {
+     "title": "Catastrophic APS (Asherson Syndrome)",
+     "points": [
+      "Simultaneous microvascular occlusions in >= 3 organs",
+      "Rapid onset within < 1 week; multi-organ failure",
+      "Triggers: Infection, surgery, stopping anticoagulation",
+      "Requires Triple Therapy: Heparin + Steroids + PLEX",
+      "High acute mortality exceeding 30-40%"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

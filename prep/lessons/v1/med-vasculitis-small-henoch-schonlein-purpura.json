@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "med-vasculitis-small",
+ "subject": "medicine",
+ "title": "Immune Complex Small Vessel Vasculitis and Behçet Disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Immune complex-mediated small vessel vasculitides develop when circulating antigen-antibody complexes deposit in postcapillary venules, activating the classical complement cascade and recruiting neutrophils. Neutrophilic karyorrhexis with vascular wall necrosis produces the pathognomonic clinical hallmark termed **palpable purpura**, characterised by non-blanching raised erythematous lesions distributed symmetrically across dependent lower extremities.",
+   "say": "Immune complex-mediated small vessel vasculitides occur when antigen-antibody complexes deposit in postcapillary venules, activating complement and recruiting neutrophils. Neutrophil nuclear fragmentation produces the classic sign termed palpable purpura, presenting as non-blanching raised lesions across dependent lower extremities.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Palpable Purpura (Vasculitis)",
+     "points": [
+      "Elevated, indurated dermal lesions",
+      "Inflammatory venular wall necrosis",
+      "Non-blanching upon diascopy",
+      "Symmetrical dependent distribution"
+     ]
+    },
+    "right": {
+     "title": "Non-Palpable Purpura (Platelet)",
+     "points": [
+      "Flat macules, petechiae, ecchymoses",
+      "Non-inflammatory erythrocyte extravasation",
+      "Seen in thrombocytopenia and scurvy",
+      "Generalized cutaneous distribution"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most common systemic vasculitis of childhood is an IgA-dominant immune complex vasculitis historically termed **Henoch-Schönlein purpura** (HSP, now classified as IgA vasculitis). Triggered frequently by an antecedent upper respiratory tract infection, HSP manifests as a classic tetrad of palpable cutaneous purpura, periarticular non-deforming arthralgias, colicky abdominal pain, and glomerulonephritis.",
+   "say": "The most common systemic vasculitis of childhood is an IgA-dominant immune complex vasculitis historically termed Henoch-Schönlein purpura, or IgA vasculitis. Triggered frequently by an upper respiratory infection, it manifests as a tetrad of palpable purpura, arthralgias, abdominal pain, and glomerulonephritis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/henoch-schonlein-purpura-fig1.webp",
+    "alt": "Clinical tetrad and vascular histopathology of Henoch-Schönlein purpura.",
+    "caption": "Clinical tetrad of Henoch-Schönlein purpura and IgA vascular deposition. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Histopathology of skin lesions in IgA vasculitis shows leukocytoclastic vasculitis of postcapillary venules with perivascular neutrophilic dust. Direct immunofluorescence of dermal and renal biopsies demonstrates predominant granular vascular deposition of **immunoglobulin A** (specifically galactose-deficient IgA1) and complement C3 within capillary walls and glomerular mesangium, identical to the renal lesions of primary IgA nephropathy.",
+   "say": "Histopathology of skin lesions in IgA vasculitis demonstrates leukocytoclastic vasculitis of postcapillary venules. Direct immunofluorescence of dermal and renal biopsies demonstrates predominant granular vascular deposition of immunoglobulin A and complement C3 within capillary walls and glomerular mesangium.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "iga1",
+      "label": "Galactose-Deficient IgA1 Complexes"
+     },
+     {
+      "id": "dep",
+      "label": "Dermal & Mesangial Deposition"
+     },
+     {
+      "id": "c3",
+      "label": "Complement C3 & Neutrophil Influx"
+     }
+    ],
+    "edges": [
+     [
+      "iga1",
+      "dep"
+     ],
+     [
+      "dep",
+      "c3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cold-precipitable circulating immunoglobulins characterise another distinct immune complex small vessel vasculitis designated as **cryoglobulinaemic vasculitis**. Type II and III mixed cryoglobulinaemias contain monoclonal or polyclonal IgM rheumatoid factor bound to polyclonal IgG, strongly associated in over eighty percent of instances with chronic hepatitis C virus infection.",
+   "say": "Cold-precipitable circulating immunoglobulins characterize another distinct immune complex small vessel vasculitis designated as cryoglobulinaemic vasculitis. Mixed cryoglobulinaemia involves monoclonal or polyclonal IgM rheumatoid factor bound to IgG, strongly associated with chronic hepatitis C virus infection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cryoglobulin Type",
+     "Immunoglobulin Composition",
+     "Underlying Association",
+     "Complement Profile"
+    ],
+    "rows": [
+     [
+      "Type I (Simple)",
+      "Monoclonal IgM or IgG",
+      "Multiple Myeloma, Waldenström",
+      "Normal complement"
+     ],
+     [
+      "Type II (Mixed)",
+      "Monoclonal IgM RF + Polyclonal IgG",
+      "Hepatitis C Virus infection",
+      "Markedly low C4, normal C3"
+     ],
+     [
+      "Type III (Mixed)",
+      "Polyclonal IgM RF + Polyclonal IgG",
+      "Autoimmune CTD, Chronic infections",
+      "Low C4, variable C3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A multi-system, chronic relapsing inflammatory disorder capable of involving vessels of all sizes across both arterial and venous systems is **Behçet disease**. It exhibits a distinctive geographic distribution concentrated along the ancient Silk Road, spanning the Mediterranean basin, Middle East, and East Asia, and displays a strong genetic association with HLA-B51.",
+   "say": "A multi-system chronic relapsing inflammatory disorder capable of involving vessels of all sizes across both arterial and venous systems is Behçet disease. It exhibits a distinctive geographic distribution concentrated along the ancient Silk Road and displays a strong genetic association with human leukocyte antigen B51.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/beh-et-syndrome-fig1.webp",
+    "alt": "Clinical manifestations of Behçet syndrome including aphthae and hypopyon uveitis.",
+    "caption": "Aphthous ulceration, hypopyon uveitis, and pathergy reaction in Behçet disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pathognomonic hallmark of Behçet disease is the recurrent development of painful oral aphthae occurring at least three times over a twelve-month interval. These are accompanied by painful scarring **genital ulcers** affecting the scrotum or vulva, relapsing non-granulomatous hypopyon panuveitis threatening vision, and spontaneous deep vein thromboses or pulmonary arterial pseudoaneurysms.",
+   "say": "The clinical hallmark of Behçet disease is the recurrent development of painful oral aphthae occurring at least three times yearly. These are accompanied by painful genital ulcers on the scrotum or vulva, relapsing hypopyon panuveitis threatening sight, and spontaneous venous or arterial thromboses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral Aphthous Ulcers",
+     "points": [
+      "Present in virtually 100% of Behçet",
+      "Painful, recurrent (>= 3 times/year)",
+      "Well-demarcated with necrotic base",
+      "Usually heal without scarring"
+     ]
+    },
+    "right": {
+     "title": "Genital Ulcers",
+     "points": [
+      "Occur on scrotum, penis, or vulva",
+      "Painful, deeper than oral aphthae",
+      "High diagnostic specificity (> 95%)",
+      "Frequently heal with permanent scarring"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A highly specific physical finding reflecting non-specific cutaneous neutrophil hyperreactivity to minor mechanical trauma is the **pathergy test**. Following oblique intradermal puncture of the forearm with a sterile twenty-gauge needle, the appearance of an erythematous sterile papule or pustule measuring two millimetres or larger within twenty-four to forty-eight hours confirms a positive diagnostic response.",
+   "say": "A highly specific diagnostic finding reflecting cutaneous neutrophil hyperreactivity to minor mechanical trauma is the pathergy test. Following intradermal puncture of the forearm with a sterile needle, development of an erythematous sterile papule or pustule within forty-eight hours confirms a positive result.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "prick",
+      "label": "Sterile 20G Needle Intradermal Prick"
+     },
+     {
+      "id": "influx",
+      "label": "Neutrophil Cutaneous Hyperreactivity"
+     },
+     {
+      "id": "pust",
+      "label": "Sterile Pustule at 24-48 Hours"
+     }
+    ],
+    "edges": [
+     [
+      "prick",
+      "influx"
+     ],
+     [
+      "influx",
+      "pust"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Therapeutic strategies in immune complex vasculitis focus on the underlying trigger and organ involvement. Pediatric IgA vasculitis is typically self-limiting and managed with supportive hydration and analgesia, reserving corticosteroids for severe abdominal pain or crescentic nephritis. Cryoglobulinaemic vasculitis requires antiviral eradication of hepatitis C using direct-acting antivirals, while Behçet disease responds to **colchicine** for mucocutaneous lesions and azathioprine or anti-TNF agents for ocular and vascular disease.",
+   "say": "Therapeutic strategies in immune complex vasculitides focus on the underlying trigger and organ involvement. Pediatric IgA vasculitis is typically self-limiting and managed supportively. Cryoglobulinaemic vasculitis requires direct-acting antivirals for hepatitis C, while Behçet disease responds to colchicine for mucosal ulcers and anti-TNF therapies for severe ocular involvement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Entity",
+     "First-Line Therapeutic Regimen",
+     "Secondary or Biologic Options"
+    ],
+    "rows": [
+     [
+      "Pediatric IgA Vasculitis",
+      "Supportive care (NSAIDs/Hydration)",
+      "Prednisone for severe GI or renal involvement"
+     ],
+     [
+      "HCV Cryoglobulinaemia",
+      "Direct-acting antivirals (Sofosbuvir/Velpatasvir)",
+      "Rituximab + PLEX for severe cryo flares"
+     ],
+     [
+      "Behçet Mucocutaneous",
+      "Oral Colchicine (1-2 mg/day)",
+      "Topical corticosteroids, Apremilast"
+     ],
+     [
+      "Behçet Uveitis / Vascular",
+      "Systemic Glucocorticoids + Azathioprine",
+      "Anti-TNF alpha biologics (Infliximab/Adalimumab)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 356"
+}
