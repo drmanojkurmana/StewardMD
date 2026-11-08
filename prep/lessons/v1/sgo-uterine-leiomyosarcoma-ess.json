@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgo-uterine-leiomyosarcoma-ess",
+ "title": "Uterine Leiomyosarcoma (uLMS) & Endometrial Stromal Sarcoma (ESS): Stanford Criteria, Morcellation Risk and Systemic Regimens",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 14",
+  "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11th Edition Ch 84",
+  "NCCN Clinical Practice Guidelines in Oncology: Uterine Sarcoma (Version 1.2024)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Uterine leiomyosarcoma is an aggressive mesenchymal malignancy characterized by specific diagnostic histological hallmarks that differentiate it from benign cellular leiomyomas.",
+   "tx": "Diagnosis of uterine leiomyosarcoma (**uLMS**) relies upon the Bell and **Stanford criteria** triad: severe diffuse cytological atypia, geographic **coagulative tumor necrosis** (tumor cell necrosis), and an elevated mitotic index demonstrating **>=10 mitoses per 10 HPFs**, distinguishing sarcoma from benign leiomyoma variants.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-fibroid-s1.webp",
+    "ar": 1.3333,
+    "caption": "Coronal section of the uterus showing Type 0 and Type 7 uterine leiomyomas. Credit: StewardMD.",
+    "alt": "Diagram contrasting benign fibroid architecture with aggressive uterine sarcoma growth."
+   }
+  },
+  {
+   "say": "Unlike endometrial adenocarcinoma which uses endometrial depth and cervical spread, uterine leiomyosarcoma staging is determined by absolute tumor dimension and anatomical boundaries.",
+   "tx": "Dedicated **sarcoma FIGO staging** employs a **5 cm cutoff** to establish early local extent: **Stage IA <=5 cm** and **Stage IB >5 cm** in largest tumor diameter. Stage II denotes pelvic extension, Stage III indicates intra-abdominal dissemination, and Stage IV signifies mucosal invasion of the bladder, rectum, or distant hematogenous metastases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "FIGO Sarcoma Stage",
+     "Tumor Dimensions & Extension",
+     "Clinical Presentation"
+    ],
+    "rows": [
+     [
+      "Stage IA",
+      "Tumor limited to uterus, <= 5 cm greatest dimension",
+      "Early localized disease; favorable local control"
+     ],
+     [
+      "Stage IB",
+      "Tumor limited to uterus, > 5 cm greatest dimension",
+      "Large localized primary; higher recurrence risk"
+     ],
+     [
+      "Stage II",
+      "Tumor extends beyond uterus within the pelvis",
+      "Involves adnexa or pelvic peritoneum"
+     ],
+     [
+      "Stage III",
+      "Tumor invades abdominal tissues (peritoneum, omentum)",
+      "Extrapelvic peritoneal metastatic deposits"
+     ],
+     [
+      "Stage IV",
+      "Invades bladder/rectal mucosa or distant organs (lungs)",
+      "Distant haematogenous metastatic disease"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The unintentional power morcellation of an unsuspected uterine leiomyosarcoma during minimally invasive fibroid surgery represents a severe surgical error that disseminates malignant tissue.",
+   "tx": "Elective intracorporeal **uterine morcellation hazard** causes widespread peritoneal dissemination of sarcoma cells, transforming localized disease into diffuse abdominopelvic carcinosarcomatosis. Morcellation causes severe **iatrogenic dissemination**, leading to an alarming **survival reduction 73% to 46%** in 5-year overall survival across prospective oncology registries.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intact Specimen Extraction",
+     "points": [
+      "Extracted intact via minilaparotomy or protected endobag",
+      "Peritoneal cavity protected from cellular spillage",
+      "5-year overall survival in Stage I uLMS reaches ~73%"
+     ]
+    },
+    "right": {
+     "title": "Uncontained Power Morcellation",
+     "points": [
+      "Spreads viable malignant mesenchymal fragments across peritoneum",
+      "Triples intra-abdominal recurrence rate",
+      "5-year overall survival plummets to ~46%"
+     ]
+    }
+   }
+  },
+  {
+   "say": "The standard primary surgical therapy for patients suspected of having uterine leiomyosarcoma is en bloc total abdominal hysterectomy with bilateral adnexectomy.",
+   "tx": "Standard operative management requires en bloc **TAH-BSO**. Routine **omission of lymphadenectomy** is accepted clinical practice because occult **nodal metastasis <3-5%** in apparent early-stage uLMS; lymph node dissection does not confer overall survival benefits and is reserved for clinically or radiologically enlarged suspicious nodes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Perform complete midline laparotomy with careful exploration"
+     },
+     {
+      "id": "b",
+      "label": "Execute total abdominal hysterectomy and bilateral salpingo-oophorectomy"
+     },
+     {
+      "id": "c",
+      "label": "Avoid morcellation and maintain tumor pseudocapsule intact"
+     },
+     {
+      "id": "d",
+      "label": "Omit routine systematic lymphadenectomy unless nodes are clinically enlarged"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Low-grade endometrial stromal sarcoma represents an indolent hormone-sensitive uterine neoplasm defined by characteristic genetic translocations and intense sex hormone receptor expression.",
+   "tx": "In **LG-ESS**, neoplastic stromal cells recapitulate proliferative-phase endometrial stroma. The tumor is driven by recurrent **t(7;17) translocation** producing the **JAZF1-SUZ12 fusion** oncogene, displays diffuse **ER/PR positivity**, runs an indolent clinical course, and demonstrates a propensity for **late recurrence** even decades after initial resection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature",
+     "Low-Grade ESS (LG-ESS)",
+     "High-Grade ESS (HG-ESS)"
+    ],
+    "rows": [
+     [
+      "Genetic Translocation",
+      "t(7;17)(p15;q21) resulting in JAZF1-SUZ12",
+      "t(10;17)(q22;p13) resulting in YWHAE-NUTM2"
+     ],
+     [
+      "Receptor Profile",
+      "Strong ER and PR positivity (>80%)",
+      "Typically negative for ER and PR"
+     ],
+     [
+      "Histological Grade",
+      "Bland uniform cells resembling proliferative stroma",
+      "Marked pleomorphism with necrosis and brisk mitoses"
+     ],
+     [
+      "Primary Systemic Rx",
+      "Hormonal therapy (AIs, progestins)",
+      "Cytotoxic chemotherapy (doxorubicin, ifosfamide)"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "High-grade endometrial stromal sarcoma is an aggressive mesenchymal malignancy characterized by distinct cytogenetic alterations and loss of hormonal receptor expression.",
+   "tx": "Conversely, **HG-ESS** is characterized by the distinct **t(10;17) translocation** generating the **YWHAE-NUTM2 fusion** transcript. Microscopically it exhibits round-cell morphology with brisk mitoses, is **ER/PR negative**, pursues an **aggressive course**, and fails to respond to endocrine manipulation, requiring cytotoxic systemic chemotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "LG-ESS Biology & Behavior",
+     "points": [
+      "Translocation t(7;17) JAZF1-SUZ12 fusion",
+      "Intense estrogen and progesterone receptor expression",
+      "Slow growth, high response to aromatase inhibitors"
+     ]
+    },
+    "right": {
+     "title": "HG-ESS Biology & Behavior",
+     "points": [
+      "Translocation t(10;17) YWHAE-NUTM2 fusion",
+      "Loss of hormone receptors (ER and PR negative)",
+      "Aggressive haematogenous dissemination; cytotoxic chemotherapy required"
+     ]
+    }
+   }
+  },
+  {
+   "say": "For patients presenting with unresectable, metastatic, or recurrent uterine leiomyosarcoma, systemic cytotoxic combination chemotherapy represents the mainstay of palliative treatment.",
+   "tx": "In metastatic or recurrent uLMS, standard **first-line uLMS chemo** consists of combination **gemcitabine docetaxel** or single-agent **doxorubicin**, achieving objective clinical **response rate 25-35%**; trabectedin, dacarbazine, and the multikinase inhibitor pazopanib represent validated second-line systemic treatment options. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diagnose advanced, metastatic, or recurrent uterine leiomyosarcoma"
+     },
+     {
+      "id": "b",
+      "label": "Administer first-line gemcitabine plus docetaxel or doxorubicin"
+     },
+     {
+      "id": "c",
+      "label": "Assess tumor response by RECIST 1.1 on surveillance CT imaging"
+     },
+     {
+      "id": "d",
+      "label": "Initiate second-line targeted therapy with pazopanib or trabectedin upon progression"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Given the intense hormone dependency of low-grade endometrial stromal sarcoma, endocrine manipulation provides prolonged disease control in adjuvant and metastatic settings.",
+   "tx": "Maintenance **hormonal therapy in LG-ESS** utilizes **aromatase inhibitors** (letrozole or anastrozole) or high-dose progestins (megestrol acetate). Conversely, there is an absolute **contraindication to tamoxifen/estrogen** because tamoxifen acts as a partial uterine agonist and stimulates lethal tumor progression in these estrogen-dependent neoplasms.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-fibroid-fig1.webp",
+    "ar": 1.0191,
+    "caption": "Adenomyosis: endometrial tissue within myometrium causing hypertrophy. Credit: StewardMD.",
+    "alt": "Gross cross-section of uterine wall showing infiltrative mesenchymal tissue expansion."
+   }
+  }
+ ]
+}

@@ -65,6 +65,15 @@ test("subjectLessons: modules with lessons, in module order, own lesson first", 
   assert.deepEqual(L.subjectLessons(null, null), []);
 });
 
+test("subjectLessons with sections: lessons not in the bank topics still show, grouped by system", () => {
+  const ix = { modules: { m1: { title: "One" }, m2: { title: "Two" }, m4: { title: "Four, lesson only" } } };
+  const secs = [{ name: "Breast", modules: [{ id: "m1" }, { id: "m4", name: "Four" }] }, { name: "GI", modules: [{ id: "m2" }] }];
+  const out = L.subjectLessons(ix, [{ id: "m1", title: "One" }, { id: "m2", title: "Two" }], secs);
+  assert.deepEqual(out.map((m) => m.mid), ["m1", "m4", "m2"], "m4 has a lesson but no bank topic: it still shows");
+  const g = L.groups(out);
+  assert.deepEqual(g.map((x) => [x.title, x.n]), [["Breast", 2], ["GI", 1]]);
+});
+
 /* ss-radiology (bank v6 to v10) has no search.json; the app builds the same index from the module files on a 404. */
 test("buildSearch: the index built in the app finds items like search.json, flagged items left out", () => {
   const BANK = require("../specialty-bank.js");

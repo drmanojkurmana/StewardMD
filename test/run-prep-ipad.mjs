@@ -53,11 +53,14 @@ const key = (k) => ev(`var r=document.getElementById("smdPrep"), t=document.acti
    zoomed px depending on the engine, so K converts with the fixed root, which always spans the window. */
 const GEO = `var Z=parseFloat(document.documentElement.style.zoom)||1, RT=document.getElementById("smdPrep"), RR=RT.getBoundingClientRect(), K=innerWidth/RR.width;
   function R(el){ var b=el.getBoundingClientRect(); return { l:(b.left-RR.left)*K, r:(b.right-RR.left)*K, t:(b.top-RR.top)*K, b:(b.bottom-RR.top)*K, w:b.width*K, h:b.height*K }; }`;
-const geo = (body) => ev(GEO + body);
+const geo = async (body) => { if (body === OVER) await settled(); return ev(GEO + body); };
+// prep-motion.js slides each new screen in (translateX 28 px, or 40% of the width for a push): measuring mid-slide reads
+// the moving body as sideways overflow. Wait for the finite animations in the PrepNucleus root to finish (at most 1.5 s).
+const settled = async () => { for (let i = 0; i < 20; i++) { if (await ev(`var r=document.getElementById("smdPrep"); if(!r||!r.getAnimations) return 0; return r.getAnimations({subtree:true}).filter(function(x){ var t=x.effect&&x.effect.getComputedTiming&&x.effect.getComputedTiming(); return x.playState==="running"&&t&&isFinite(t.endTime); }).length;`) === 0) return; await sleep(75); } };   // ev does not await promises: poll
 // 6 holds on iPad sizes; a 390 px phone run (SIZES=390x844, screenshots) shows the phone's own 0.95 zoom, out of scope.
 const SMALL = `if(innerWidth===390&&screen.width===390) return ""; var bad=[]; RT.querySelectorAll(".pn-ib, .pn-chip, .pn-tab, .pn-opt").forEach(function(el){ var b=R(el); if(b.w===0&&b.h===0) return; if(b.h<43.5||(el.classList.contains("pn-ib")&&b.w<43.5)) bad.push((el.getAttribute("data-act")||el.className)+":"+b.w.toFixed(1)+"x"+b.h.toFixed(1)); }); return bad.join(", ");`;
 // scrollWidth and clientWidth share units whatever the zoom (this Chrome reports both in window px), so compare them.
-const OVER = `var de=document.documentElement, b=RT.querySelector(".pn-body"), o=[]; if(de.scrollWidth>de.clientWidth+1) o.push("document "+de.scrollWidth+">"+de.clientWidth); if(RT.scrollWidth>RT.clientWidth+1) o.push("root "+RT.scrollWidth+">"+RT.clientWidth); if(b&&b.scrollWidth>b.clientWidth+1) o.push("body "+b.scrollWidth+">"+b.clientWidth); return o.join(", ");`;
+const OVER = `var de=document.documentElement, b=RT.querySelector(".pn-body"), o=[]; if(de.scrollWidth>de.clientWidth+1) o.push("document "+de.scrollWidth+">"+de.clientWidth); if(RT.scrollWidth>RT.clientWidth+1){ var rr=RT.getBoundingClientRect().right, cul=[]; RT.querySelectorAll("*").forEach(function(e){ if(cul.length>=3) return; var r=e.getBoundingClientRect(); if(r.width&&r.right>rr+1){ var p=e.parentElement, inScroll=false; while(p&&p!==RT){ var ox=getComputedStyle(p).overflowX; if(/auto|scroll|hidden|clip/.test(ox)&&p.getBoundingClientRect().right<=rr+1){ inScroll=true; break; } p=p.parentElement; } if(!inScroll) cul.push((e.id?"#"+e.id:e.tagName.toLowerCase()+"."+String(e.className).split(" ")[0])+"@"+Math.round(r.right)); } }); o.push("root "+RT.scrollWidth+">"+RT.clientWidth+(cul.length?" ["+cul.join(" ")+"]":"")); } if(b&&b.scrollWidth>b.clientWidth+1) o.push("body "+b.scrollWidth+">"+b.clientWidth); return o.join(", ");`;
 const COLS = (sel) => `var g=document.querySelector(${JSON.stringify(sel)}); return g ? getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length : -1;`;
 // A sheet: centred, no wider than 600 px, inside the window, its last button on screen.
 const SHEET = (sel) => GEO + `var s=RT.querySelector(${JSON.stringify(sel)}); if(!s) return "no sheet"; var b=R(s), mw=parseFloat(getComputedStyle(s).maxWidth), bt=s.querySelectorAll("button"), last=bt[bt.length-1], lb=last?R(last):null, p=[];
@@ -176,7 +179,8 @@ try {
 
     // ---- subject
     await click("#smdPrep .pn-tile[data-s=anatomy]");
-    ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 3;`, 10000), "subject lists its modules" + at);
+    // the fixture's Placenta has no questions, and filterModules leaves a module with none off the list
+    ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 2;`, 10000), "subject lists its modules that have questions" + at);
     await sleep(400);
     ok(await geo(OVER) === "", "1. subject: no horizontal overflow " + (await geo(OVER)) + at);
     const fl = await geo(`var f=RT.querySelector(".pn-filters"), c=RT.querySelector("#pnSub > *"), cs=getComputedStyle(f), pl=parseFloat(cs.paddingLeft)*K*Z/K; var a=R(f), b=R(c); return Math.abs(a.l+parseFloat(cs.paddingLeft)*Z-b.l).toFixed(1);`);
@@ -216,7 +220,8 @@ try {
     await sleep(400);
     ok(await geo(OVER) === "", "1. runner: no horizontal overflow " + (await geo(OVER)) + at);
     if (land) {
-      const two = await geo(`var q=R(RT.querySelector(".pn-q")), f=R(RT.querySelector(".pn-qw > :first-child")), o=R(RT.querySelector(".pn-opts")); return q.r <= o.l + 1 && Math.abs(f.t-o.t) < 4 ? "" : "stem "+q.l.toFixed(0)+".."+q.r.toFixed(0)+" options "+o.l.toFixed(0)+".."+o.r.toFixed(0);`);
+      // the answer column can open with the IQoach card above the options: compare the stem's top with that column's first block
+      const two = await geo(`var q=R(RT.querySelector(".pn-q")), o=R(RT.querySelector(".pn-opts")), top=o.t; [].forEach.call(RT.querySelector(".pn-qw").children,function(c){ var b=R(c); if(b.w&&b.h&&b.l>=q.r-1&&b.t<top) top=b.t; }); return q.r <= o.l + 1 && Math.abs(q.t-top) < 4 ? "" : "stem "+q.l.toFixed(0)+".."+q.r.toFixed(0)+" top "+q.t.toFixed(0)+" options "+o.l.toFixed(0)+".."+o.r.toFixed(0)+" column top "+top.toFixed(0);`);
       ok(two === "", "D5. landscape runner: the stem left, the options right " + two + at);
     } else {
       const col = await geo(`var w=R(RT.querySelector(".pn-qw")).w; return w <= 720*Z+1 ? "" : w.toFixed(1)+" > "+(720*Z).toFixed(1);`);

@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "srm-tubal-uterine-evaluation",
+  "title": "Tubal and Uterine Cavity Evaluation in Reproductive Medicine",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Speroff Clinical Gynecologic Endocrinology 9e Ch 28",
+    "Gynecology by Ten Teachers 21e Ch 17"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Evaluation of tubal architecture and uterine contour is fundamental to the female subfertility workup. Hysterosalpingography is conventionally scheduled during the post-menstrual follicular window between cycle days 7 and 10, ensuring the endometrium is thin while avoiding an unsuspected early luteal conception.",
+      "tx": "Initial anatomical screening utilizes **hysterosalpingography** (HSG) timed strictly during the early **follicular phase** between cycle days 7 and 10 following complete cessation of menstrual bleeding. This interval guarantees a thin endometrium for clear diagnostic visualization while verifying **tubal patency** before follicular maturation and physiological ovulation occur.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/wh-fertility-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Hysterosalpingography demonstrates uterine contours and tubal architecture. Credit: StewardMD.",
+        "alt": "Fluoroscopic HSG showing uterine cavity and fallopian tube passage."
+      }
+    },
+    {
+      "say": "Fluoroscopic hysterosalpingography demonstrates modest sensitivity but excellent specificity for mechanical tubal occlusion. Interestingly, randomized trials indicate that flushing with oil-soluble contrast yields significantly higher post-procedure spontaneous pregnancy rates than water-soluble media.",
+      "tx": "Meta-analyses demonstrate that HSG achieves 65 percent sensitivity and 83 percent specificity for diagnosing **tubal occlusion**. In large randomized multicenter trials, the therapeutic use of **oil-soluble contrast** media resulted in a significantly enhanced subsequent clinical **pregnancy rate** compared with standard water-soluble formulations.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "HSG Parameter / Trial",
+          "Statistical Value",
+          "Clinical Implications"
+        ],
+        "rows": [
+          [
+            "Sensitivity for tubal occlusion",
+            "65 percent",
+            "Moderate false negative rate; requires laparoscopy if symptomatic"
+          ],
+          [
+            "Specificity for tubal occlusion",
+            "83 percent",
+            "High true negative value; normal spill reliably rules out block"
+          ],
+          [
+            "Oil-soluble contrast (H2Oil)",
+            "39.7% pregnancy rate",
+            "Clears viscous debris and modulates peritoneal macrophage function"
+          ],
+          [
+            "Water-soluble contrast",
+            "29.1% pregnancy rate",
+            "Rapid peritoneal absorption with lower therapeutic flushing benefit"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Saline infusion sonohysterography introduces sterile fluid to distend the uterine cavity during transvaginal scanning. This technique achieves greater than 95 percent accuracy in differentiating between pedunculated endometrial polyps and submucosal fibroids.",
+      "tx": "Transvaginal **sonohysterography** utilizing sterile saline infusion provides superior diagnostic clarity over standard HSG for defining an **intracavitary lesion**. By highlighting mucosal contours, saline distension distinguishes between an endometrial polyp and a **submucosal fibroid** with greater than 95 percent diagnostic accuracy, guiding hysteroscopic surgical planning.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Saline Infusion Sonohysterography",
+          "points": [
+            "Accurate differentiation of submucosal fibroids vs polyps (>95%)",
+            "Dynamic assessment of myometrial involvement and basal border",
+            "Radiation-free office procedure utilizing transvaginal ultrasound"
+          ]
+        },
+        "right": {
+          "title": "Hysterosalpingography (HSG)",
+          "points": [
+            "Visualizes cavity silhouette but cannot assess myometrial wall depth",
+            "Shows radiolucent filling defects without histological differentiation",
+            "Exposes pelvic structures to ionizing radiation and iodinated dye"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Hysterosalpingo-foam sonography offers an accurate, radiation-free office assessment of tubal status. Echogenic microbubbles created by mixing hydroxyethyl cellulose and glycerol are tracked directly in real time under ultrasound visualization.",
+      "tx": "Ambulatory **HyFoSy** (hysterosalpingo-foam sonography) utilizes an infused gel formulation to generate stable microbubbles for real-time transvaginal **contrast ultrasound**. By continuously tracking echogenic **foam sonography** transit through each tubal ostium to the fimbriae, clinicians evaluate patency at the bedside without ionizing radiation or iodinated contrast.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Infuse stable echogenic gel-foam into uterine cavity via cervical cannula"
+          },
+          {
+            "id": "b",
+            "label": "Track linear hyperechoic bubble stream traversing intramural and isthmic tube"
+          },
+          {
+            "id": "c",
+            "label": "Confirm fimbrial exit and peritoneal dispersion around the ipsilateral ovary"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Laparoscopy paired with chromopertubation represents the established reference standard for pelvic fertility assessment. Direct visualization following transcervical injection of methylene blue dye identifies subtle distal phimosis, peritubal adhesions, and pelvic endometriosis.",
+      "tx": "Surgical **chromopertubation** during diagnostic laparoscopy remains the definitive **gold standard** for comprehensive tubal and peritoneal assessment. Transcervical instillation of dilute **methylene blue** directly verifies fimbrial flow while direct optical laparoscopy inspects for extratubal pelvic endometriosis, periadnexal adhesions, and subtle pelvic anatomy distortions missed on imaging.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Modality",
+          "Anatomical Scope",
+          "Diagnostic Strengths & Seams"
+        ],
+        "rows": [
+          [
+            "Chromopertubation (LPS)",
+            "Lumen, serosa, and pelvis",
+            "Gold standard: direct view of fimbrial dye spill and pelvic endometriosis"
+          ],
+          [
+            "HSG Fluoroscopy",
+            "Endocervix, cavity, and lumen",
+            "Excellent for proximal cornual spasm vs true mechanical occlusion"
+          ],
+          [
+            "HyFoSy Ultrasound",
+            "Endocavity and tubal transit",
+            "Zero radiation office screen: dynamic echogenic foam monitoring"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The presence of a communicating hydrosalpinx drastically impairs in vitro fertilization outcomes. Mechanically flushing the endometrial cavity with embryotoxic fluid halves embryo implantation rates and doubles the risk of spontaneous early miscarriage.",
+      "tx": "The presence of an untreated **hydrosalpinx** reduces **IVF implantation** rates by 50 percent and doubles subsequent pregnancy loss. Accumulation of stagnant, **embryotoxic fluid** rich in inflammatory cytokines periodically regurgitates into the uterine cavity, exerting hostile mechanical shearing and chemical damage upon developing blastocysts.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/female-infertility-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Tubal pathology including hydrosalpinx disrupting the uterine endometrial environment. Credit: StewardMD.",
+        "alt": "Anatomical schematic showing hydrosalpinx with intrauterine fluid regurgitation."
+      }
+    },
+    {
+      "say": "Surgical intervention is strictly required before embarking on assisted reproduction in patients with hydrosalpinx. Laparoscopic salpingectomy or proximal tubal disconnection isolates toxic tubal washings and completely restores expected IVF success rates.",
+      "tx": "Prior to commencing IVF cycles, surgical intervention via laparoscopic **salpingectomy** or **proximal tubal clipping** is strongly recommended for visible hydrosalpinx. This essential **pre-IVF surgery** eliminates inflammatory tubal reflux into the endometrial cavity, effectively restoring clinical pregnancy and live birth rates to normal control expectations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify ultrasound-visible communicating hydrosalpinx in infertile patient"
+          },
+          {
+            "id": "b",
+            "label": "Perform laparoscopic salpingectomy or proximal bipolar occlusion / clipping"
+          },
+          {
+            "id": "c",
+            "label": "Abolish embryotoxic fluid reflux to restore normal endometrial implantation rates"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Direct hysteroscopy serves as the gold standard for examining and surgically restoring the uterine architecture. Operative hysteroscopy provides precise, tissue-sparing correction of congenital septa, endometrial polyps, and dense intrauterine adhesions in Asherman syndrome.",
+      "tx": "Operative **hysteroscopy** represents the supreme gold standard for the definitive direct visualization and simultaneous operative repair of intrauterine architecture. Transcervical resection cleanly resolves dense intrauterine synechiae in **Asherman syndrome**, divides a congenital **uterine septum**, and removes polyps under direct micro-camera magnification.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hysteroscopic Septum Division",
+          "points": [
+            "Cold scissor or bipolar needle transection without myometrial excision",
+            "Restores symmetrical single cavity with minimal scar tissue formation",
+            "Significantly reduces early miscarriage and mid-trimester pregnancy loss"
+          ]
+        },
+        "right": {
+          "title": "Adhesiolysis in Asherman",
+          "points": [
+            "Fluoroscopic or laparoscopic guidance during severe central synechiae lysis",
+            "Postoperative barrier balloon or Foley catheter with estrogen therapy",
+            "Aims to re-establish regular menstruation and functional endometrium"
+          ]
+        }
+      }
+    }
+  ]
+}

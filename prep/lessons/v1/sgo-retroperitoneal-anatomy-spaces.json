@@ -1,0 +1,295 @@
+{
+  "v": 1,
+  "module": "sgo-retroperitoneal-anatomy-spaces",
+  "title": "Surgical Pelvic Neuroanatomy, Retroperitoneal Spaces & Vascular Control",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 23 (Surgical Anatomy)",
+    "DiSaia and Creasman Clinical Gynecologic Oncology 10th Edition Ch 18",
+    "Morrow's Gynecologic Oncology Surgery 2nd Edition"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "A mastery of pelvic retroperitoneal avascular spaces is essential for safely performing radical oncologic resections without injuring pelvic vessels, ureters, or autonomic nerves. Developing the paravesical space establishes the anterior lateral surgical dissection boundary.",
+      "tx": "Developing the avascular **paravesical space** establishes the anterolateral pelvic dissection boundary. It is bounded laterally by the external iliac vessels and obturator internus muscle, medially by the **obliterated umbilical artery**, posteriorly by the **cardinal ligament**, and anteriorly by the pubic symphysis. Comprehensive staging and multidisciplinary tumor board review ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "incise",
+            "label": "Incise pelvic sidewall peritoneum parallel to external iliac artery"
+          },
+          {
+            "id": "identify",
+            "label": "Identify obliterated umbilical artery (medial umbilical ligament)"
+          },
+          {
+            "id": "develop",
+            "label": "Bluntly develop avascular fat space down to levator ani"
+          },
+          {
+            "id": "expose",
+            "label": "Expose obturator nerve and cardinal ligament anterior leaf"
+          }
+        ],
+        "edges": [
+          [
+            "incise",
+            "identify"
+          ],
+          [
+            "identify",
+            "develop"
+          ],
+          [
+            "develop",
+            "expose"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The avascular pararectal space provides critical access to the pelvic sidewall, hypogastric vessels, and pelvic autonomic nerve plexus. It is bounded medially by the rectum and uterosacral ligament, and laterally by the internal iliac artery.",
+      "tx": "The avascular **pararectal space** provides lateral pelvic sidewall exposure. It is bounded medially by the **rectum** and uterosacral ligament, laterally by the **internal iliac artery**, posteriorly by the sacrum, and anteriorly by the **cardinal ligament**; the ureter courses along its medial peritoneal leaf.  Evidence-based practice integrates cardinal ligament anterior boundary, internal iliac lateral boundary, ureter on medial leaf.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Boundary Direction",
+          "Anatomical Structure",
+          "Surgical Relevance"
+        ],
+        "rows": [
+          [
+            "Medial boundary",
+            "Rectum and uterosacral ligament",
+            "Retracted medially to protect bowel"
+          ],
+          [
+            "Lateral boundary",
+            "Internal iliac (hypogastric) artery",
+            "Retracted laterally with pelvic sidewall"
+          ],
+          [
+            "Posterior boundary",
+            "Sacral promontory and presacral fascia",
+            "Avascular cleavage plane anterior to sacrum"
+          ],
+          [
+            "Anterior boundary",
+            "Cardinal ligament (Mackenrodt)",
+            "Separates pararectal from paravesical space"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The cardinal ligament represents the central fibromuscular barrier dividing the paravesical space anteriorly from the pararectal space posteriorly. It transmits the uterine artery, which crosses directly superior and anterior to the ureter roughly two centimeters lateral to the cervix.",
+      "tx": "The **cardinal ligament** (Mackenrodt's ligament) separates the paravesical space anteriorly from the pararectal space posteriorly. It transmits the **uterine artery**, which crosses superior and anterior to the **ureter** ('water under the bridge') approximately 1.5 to 2 cm lateral to the cervix.  Evidence-based practice integrates paravesical and pararectal boundary, uterine artery crosses ureter, 1.5-2 cm lateral to cervix.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anterior: Paravesical Space",
+          "points": [
+            "Bounded medially by obliterated umbilical artery",
+            "Exposes obturator fossa and lymph nodes",
+            "Avascular development down to pubococcygeus"
+          ]
+        },
+        "right": {
+          "title": "Posterior: Pararectal Space",
+          "points": [
+            "Bounded medially by rectum and uterosacral ligament",
+            "Exposes hypogastric artery and autonomic nerves",
+            "Avascular development down to iliococcygeus"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The presacral space lies between the parietal fascia covering the anterior sacral promontory and the visceral fascia propria of the rectum. Dissection within this retrorectal plane must avoid tearing the valveless presacral venous plexus, which causes catastrophic hemorrhage.",
+      "tx": "The **presacral space** (retrorectal space) lies between the anterior sacral periosteum and the visceral fascia propria of the rectum. Dissection must strictly avoid tearing the valveless **presacral venous plexus**, which retracts into sacral foramina and produces life-threatening, intractable hemorrhage. Integrated clinical protocols and evidence-based decision pathways improve overall treatment efficacy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "incise_perit",
+            "label": "Incise posterior pelvic peritoneum over sacral promontory"
+          },
+          {
+            "id": "retract_rect",
+            "label": "Retract rectum anteriorly within intact fascia propria"
+          },
+          {
+            "id": "avoid_veins",
+            "label": "Avoid blunt trauma to underlying middle sacral and presacral veins"
+          },
+          {
+            "id": "thumbtack",
+            "label": "Control unexpected bleeding with sterile titanium thumbtacks"
+          }
+        ],
+        "edges": [
+          [
+            "incise_perit",
+            "retract_rect"
+          ],
+          [
+            "retract_rect",
+            "avoid_veins"
+          ],
+          [
+            "avoid_veins",
+            "thumbtack"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Bilateral ligation of the internal iliac arteries represents a lifesaving emergency surgical technique to control severe pelvic hemorrhage. Hypogastric artery ligation reduces pelvic arterial pulse pressure by eighty-five percent and total pelvic blood flow by nearly fifty percent.",
+      "tx": "Bilateral **internal iliac artery ligation** (hypogastric artery ligation) reduces pelvic pulse pressure by 85% and blood flow by 48%, converting a high-pressure pulsatile pelvic arterial hemorrhage into a low-pressure venous bleed controlled through extensive **collateral arterial circulation**.  Evidence-based practice integrates 85% pulse pressure reduction, 48% flow reduction, pelvic collateral circulation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Major Systemic Collateral",
+          "Source Artery",
+          "Anastomotic Recipient Artery",
+          "Functional Blood Supply"
+        ],
+        "rows": [
+          [
+            "Lumbar-iliolumbar",
+            "Aorta / lumbar arteries",
+            "Iliolumbar artery (hypogastric branch)",
+            "Pelvic sidewall collateral flow"
+          ],
+          [
+            "Middle sacral-lateral sacral",
+            "Aortic bifurcation",
+            "Lateral sacral artery branches",
+            "Posterior pelvic collateral flow"
+          ],
+          [
+            "Superior-middle rectal",
+            "Inferior mesenteric artery",
+            "Middle rectal artery (hypogastric)",
+            "Pelvic visceral collateral flow"
+          ],
+          [
+            "Deep circumflex-iliolumbar",
+            "External iliac artery",
+            "Iliolumbar artery branches",
+            "Anterior sidewall collateral flow"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Internal iliac artery ligation is performed three to four centimeters distal to the common iliac bifurcation. The surgeon carefully mobilizes the artery off the underlying internal iliac vein and passes a right-angle clamp from lateral to medial to avoid vessel laceration.",
+      "tx": "Internal iliac artery ligation is performed 3 to 4 cm distal to the common iliac bifurcation, preserving the posterior division when feasible. The surgeon passes a right-angle clamp from **lateral to medial** beneath the artery to avoid catastrophic laceration of the adherent underlying **internal iliac vein**.  Evidence-based practice integrates internal iliac ligation technique, 3-4 cm distal to bifurcation, lateral to medial clamp passage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "retract_ureter",
+            "label": "Retract ureter medially with posterior peritoneum"
+          },
+          {
+            "id": "id_bifurc",
+            "label": "Identify common iliac bifurcation and external/internal branches"
+          },
+          {
+            "id": "clamp_lateral",
+            "label": "Pass right-angle clamp from lateral to medial beneath hypogastric artery"
+          },
+          {
+            "id": "tie_suture",
+            "label": "Place double non-absorbable ligatures without transecting vessel"
+          }
+        ],
+        "edges": [
+          [
+            "retract_ureter",
+            "id_bifurc"
+          ],
+          [
+            "id_bifurc",
+            "clamp_lateral"
+          ],
+          [
+            "clamp_lateral",
+            "tie_suture"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The pelvic autonomic nervous system comprises sympathetic hypogastric nerves and parasympathetic pelvic splanchnic nerves that coalesce to form the inferior hypogastric plexus. Preserving these nerves during radical hysterectomy prevents postoperative neurogenic bladder and anorectal dysfunction.",
+      "tx": "The **pelvic autonomic nervous system** comprises sympathetic hypogastric nerves (from L5-S1) and parasympathetic **pelvic splanchnic nerves** (nervi erigentes, S2-S4) forming the **inferior hypogastric plexus** lateral to the rectum; nerve-sparing surgery prevents neurogenic bladder atony and severe chronic obstipation.  Evidence-based practice integrates hypogastric nerves (sympathetic), pelvic splanchnic S2-S4 (parasympathetic).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sympathetic Hypogastric Nerves",
+          "points": [
+            "Arise from superior hypogastric plexus at L5-S1",
+            "Descend along posterolateral pelvic sidewall",
+            "Control internal urinary sphincter and bladder filling"
+          ]
+        },
+        "right": {
+          "title": "Parasympathetic Splanchnic Nerves",
+          "points": [
+            "Emerge from anterior sacral roots S2-S4 (nervi erigentes)",
+            "Ascend within lateral rectal ligaments",
+            "Drive detrusor muscle contraction and bladder emptying"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The obturator nerve originates from the posterior divisions of the second, third, and fourth lumbar ventral rami and traverses the lateral pelvic sidewall deep to the external iliac vein. Iatrogenic transection causes loss of thigh adduction and sensory anesthesia over the medial thigh.",
+      "tx": "The **obturator nerve** (L2-L4 lumbar plexus) traverses the obturator fossa deep to the external iliac vein, coursing along the obturator internus muscle into the obturator canal. Iatrogenic transection results in paralysis of the **thigh adductor muscles** and sensory numbness over the medial thigh.  Evidence-based practice integrates obturator nerve L2-L4, medial thigh anesthesia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical Feature",
+          "Clinical / Surgical Characteristic",
+          "Neurological Consequence of Injury"
+        ],
+        "rows": [
+          [
+            "Spinal nerve roots",
+            "Ventral rami of lumbar nerves L2, L3, and L4",
+            "Motor innervation to gracilis, adductor longus, brevis, magnus"
+          ],
+          [
+            "Surgical landmark",
+            "Runs deep to external iliac vein across obturator internus",
+            "Vulnerable during radical pelvic lymphadenectomy"
+          ],
+          [
+            "Motor deficit",
+            "Loss of thigh adduction / difficulty crossing legs",
+            "Gait instability and wide-based swinging gait"
+          ],
+          [
+            "Sensory deficit",
+            "Anesthesia over medial distal third of thigh",
+            "Numbness over inner aspect of knee and thigh"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1087,6 +1087,12 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-sublearn > svg { color: var(--pn-pri); flex-shrink: 0; }
 .pn-root .pn-sl-n { font-size: 13.5px; font-weight: 600; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
 .pn-root .pn-sl-n::before { content: "\00b7"; margin-right: 8px; }
+/* An atlas button (prep-imglearn.js atlasBtn: "Image Library · Every image in the app") beside Practise in a two-column
+   row on iPad: the title stays on one line and the note shortens with an ellipsis, instead of both wrapping into a
+   three-line block (2026-11-07). */
+.pn-root .pn-sublearn { min-width: 0; }
+.pn-root .pn-sublearn > .pn-sl-t { flex: none; white-space: nowrap; }
+.pn-root .pn-sublearn > .pn-sl-n { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @media (min-width: 700px) {
   .pn-root .pn-subacts { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
   .pn-root .pn-subacts > .pn-btn:only-child, .pn-root .pn-subacts > .su-lastb, .pn-root .pn-subacts > .pn-subgo:not(:has(+ .pn-sublearn)) { grid-column: 1 / -1; }
@@ -1132,6 +1138,11 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   .pn-root .pn-run:not(.pn-battle) .pn-qw:not(:has(> .pn-yq-fig, > .pn-stack)) > .pn-q { position: sticky; top: 0; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > :is(.pn-yq-fig:last-of-type, .pn-stack) { position: sticky; top: 0; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-stack { margin-top: 2px; }
+  /* The IQoach intro comes before the stem in the markup: float it to the top of the answer column so the stem starts
+     at the top on the left (2026-11-07: it pushed the stem down level with option A). What follows in the answer column
+     clears it. */
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-intro { float: right; clear: right; width: calc(100% - var(--pn-ql) - 14px); margin-left: 0; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > :not(.pn-yq-tags, .pn-q, .pn-yq-fig, .pn-stack, .ky-intro) { clear: right; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb + .pn-navrow { margin-bottom: 0; }   /* the footer row ends flush with the scroller */
 }
 
@@ -1885,10 +1896,19 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 }
 
 
-/* iPad: .pn-body spans the screen; its children are centred by gutters on the scroller. */
+/* iPad: .pn-body spans the screen; its children are centred by gutters on the scroller. The tabs and the filter row
+   (the subject's All / In progress / Completed / Unattempted control) take the same gutters, so their first chip starts
+   at the column's left edge instead of the window's (2026-11-07: they had kept the old 720 / 1072 px centred widths and
+   ran edge to edge over a 960 px column). --pn-fpad is the filter row's side padding; the segmented track and thumb
+   read it. */
 @media (min-width: 700px) {
-  .pn-root .pn-body { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  .pn-root { --pn-gutl: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); --pn-gutr: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  .pn-root .pn-body { padding-left: var(--pn-gutl); padding-right: var(--pn-gutr); }
   .pn-root .pn-body > * { max-width: none; margin-left: 0; margin-right: 0; }
+  .pn-root > .pn-filters, .pn-root:has(> #pnSub) > .pn-filters { width: 100%; max-width: none; margin-left: 0; margin-right: 0; --pn-fpad: var(--pn-gutl); padding-left: var(--pn-gutl); padding-right: var(--pn-gutr); }
+  .pn-root > .pn-tabs, .pn-root:has(> .pn-body.pn-home) > .pn-tabs { width: auto; max-width: none; margin-left: var(--pn-gutl); margin-right: var(--pn-gutr); }
+  .pn-root > .pn-filters.pn-seg::before { left: var(--pn-gutl); right: var(--pn-gutr); }
+  .pn-root > .pn-filters.pn-seg .pn-seg-th { left: calc(var(--pn-gutl) + 3px); width: calc((100% - var(--pn-gutl) - var(--pn-gutr) - 6px) / var(--n, 4)); }
 }
 
 /* More menu: opens from the button's corner, rows rise in one after another. */

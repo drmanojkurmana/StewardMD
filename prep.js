@@ -2033,7 +2033,6 @@
       (G.PREP_PLAN ? row("weak", ico("target"), "Weak areas", "Mistakes and modules under 60%") : "") +
       // Previous year papers (prep-pyq.js): NEET-PG recall papers only, so the row shows on that tab.
       (G.PREP_PYQ && s.exam === "neet-pg" ? G.PREP_PYQ.homeRow(HOST) : "") +
-      (G.PREP_PYQSS && s.exam === "neet-ss" ? G.PREP_PYQSS.homeRow(HOST) : "") +
       // Cards due (prep-flash.js): shows once the student has studied any module card.
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
@@ -2299,7 +2298,9 @@
       // Learn (prep-lessons.js, only when a module of this subject has a lesson), then "Start with last settings".
       var go = setupOn() && q ? '<button type="button" class="pn-btn pri pn-subgo" data-act="su-subject" data-s="' + esc(sid) + '">' + ico("play") + " Practise " + tx(sb.name) + "</button>" : "";
       var acts = go + lastBtn("subject", sid, ' data-s="' + esc(sid) + '"');
-      if (box) patchHtml(box, head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + (html || '<p class="pn-empty">Nothing in this filter yet.</p>'));
+      // NEET-SS Medical Oncology papers, analysis and 30-day plan (prep-pyqss.js) live inside the subject (owner 2026-11-07).
+      var ys = G.PREP_PYQSS && sid === "ss-medical-oncology" ? '<h2 class="pn-sec">Previous year questions</h2><div class="pn-group">' + G.PREP_PYQSS.homeRow(HOST) + "</div>" : "";
+      if (box) patchHtml(box, head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + ys + (html || '<p class="pn-empty">Nothing in this filter yet.</p>'));
       if (G.PREP_LESSONS && G.PREP_LESSONS.subjectButton) G.PREP_LESSONS.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
       if (G.PREP_IMGLEARN && G.PREP_IMGLEARN.subjectButton) G.PREP_IMGLEARN.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
     });
@@ -2380,7 +2381,7 @@
       if (!list.length) { toast("Nothing to practise here right now."); return rerender(); }
       runQuestions(list, kind === "exam" ? "exam" : "study", tx(topicOf(sid, mid).title));
     }, function () {
-      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">Questions need a connection. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
+      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">' + (G.PREP_BANK_MSG || String)("Questions need a connection. Check the connection and try again.") + '</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
       st.cur = { s: sid, m: mid };
     });
   }
@@ -3487,7 +3488,7 @@
         '<div class="pn-group">' + row("p-settings", ico("gear"), "Change exam", "Exam: " + esc(planExamLabel())) + "</div>";
       else {
       // The previous year papers row (NEET-PG) sits on top.
-      var pyq = G.PREP_PYQ && s.exam === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(HOST) + "</div>" : G.PREP_PYQSS && s.exam === "neet-ss" ? '<div class="pn-group">' + G.PREP_PYQSS.homeRow(HOST) + "</div>" : "";
+      var pyq = G.PREP_PYQ && s.exam === "neet-pg" ? '<div class="pn-group">' + G.PREP_PYQ.homeRow(HOST) + "</div>" : "";
       body = '<div class="pn-banner pn-art-mock" aria-hidden="true"></div>' + pyq + list.map(function (m) {
         var mini = Math.min(50, m.n), part = m.parts ? m.n / m.parts : 0;
         return '<section class="pn-panel"><p class="pn-big pn-mid">' + esc(m.label) + '</p><p class="pn-mut">' + m.n + " questions" + (part ? " in " + m.parts + " parts of " + part + ", " + fmtMin(m.min / m.parts) + " each" : ", " + fmtMin(m.min)) + ". Right +" + fmtMark(m.plus) + (m.minus ? ", wrong minus " + fmtMark(m.minus) : ", no negative marking") + ", unanswered 0." + (m.pass ? " Pass mark " + m.pass + " of " + m.n * m.plus + "." : "") + "</p>" +

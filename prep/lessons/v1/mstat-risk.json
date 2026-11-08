@@ -3,7 +3,7 @@
  "module": "mstat-risk",
  "subject": "mrcp-statistics",
  "title": "Risk, NNT/NNH and likelihood ratios",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "**Absolute risk** is the proportion of people who develop an outcome in a group over a set time. The **absolute risk reduction** (ARR) is the control event rate minus the treated event rate. The **number needed to treat** (NNT) is 1 divided by the ARR, giving the number of patients treated to prevent one event. Always calculate it from absolute rates, never from relative reduction alone, and report the time frame with it.",
@@ -66,6 +66,17 @@
       "Lowers post-test odds"
      ]
     }
+   }
+  },
+  {
+   "tx": "The nomogram joins left **pre test odds** through middle **likelihood ratio** to right post test odds. A strong positive result from a **high specificity** test swings probability sharply upward and rules disease in. A strong negative result from a highly sensitive test swings it sharply downward and rules disease out. Multiply prior odds by the ratio to set post test odds.",
+   "say": "The image shows a three column nomogram linking pre test odds on the left through the likelihood ratio in the centre to post test odds on the right. A positive result with a large ratio raises post test odds and helps rule disease in, while a negative result with a small ratio lowers them and helps rule disease out. The rule follows one line, post test odds equal pre test odds times the likelihood ratio.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mstat-risk-gen1.webp",
+    "alt": "The image shows a nomogram joining pre test odds through likelihood ratio to post test odds.",
+    "caption": "Prior odds times ratio sets post test odds. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
