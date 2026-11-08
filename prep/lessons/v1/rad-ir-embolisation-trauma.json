@@ -3,11 +3,11 @@
  "module": "rad-ir-embolisation-trauma",
  "subject": "radiology",
  "title": "Trauma and solid-organ embolisation",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Stable trauma bleeds belong to radiology. **CT with arterial phase** sorts stable pelvic and solid-organ bleeders into embolisation candidates while unstable cases go straight to theatre. **Contrast blush** with falling haemoglobin marks active bleeding worth coiling. **Transient responders** who stabilise then sag suit hybrid pathways with surgeons scrubbed nearby. **Damage-control resuscitation** with blood-first ratios runs alongside mapping, never after it.",
-   "say": "Stable trauma bleeds belong to radiology. Arterial-phase CT sorts stable pelvic and organ bleeders for coiling while unstable cases go to theatre. Blush with falling haemoglobin marks coilable bleeding. Transient responders suit hybrid pathways with surgeons nearby. Blood-first resuscitation runs during mapping.",
+   "tx": "Stable trauma bleeding is assessed for embolisation while unstable bleeding goes to theatre. **Arterial phase CT** sorts stable pelvic and solid organ bleeders into embolisation candidates quickly. A **contrast blush** with falling haemoglobin marks active bleeding that is worth coiling. Patients who stabilise and then deteriorate suit a hybrid pathway with surgeons nearby. Blood based **damage control resuscitation** runs alongside mapping and is never delayed until afterwards.",
+   "say": "Stable trauma bleeding is assessed for embolisation while unstable bleeding goes to theatre. Arterial phase CT sorts stable organ bleeders into suitable candidates quickly. A contrast blush with falling haemoglobin marks bleeding that needs coiling. Blood based resuscitation runs alongside mapping and is never delayed until imaging finishes in emergencies.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Spleens survive proximal sacrifice. **Proximal splenic coiling** drops perfusion pressure so torn branches clot while collaterals keep spleens alive under AAST-aligned pathways. **Distal superselective coils** suit focal pseudoaneurysms with intact trunks. **Vaccination after splenectomy** only, since embolised spleens keep immune function. **Re-bleed watches** with haemoglobin and repeat CT catch failures before collapse.",
-   "say": "Spleens survive proximal sacrifice. Main-trunk coils drop pressure so tears clot while collaterals keep spleens alive. Focal sacs take distal coils with intact trunks. Vaccines follow removal only since coiled spleens still immunise. Haemoglobin with repeat CT catches re-bleeds.",
+   "tx": "The axial contrast CT shows disrupted **splenic parenchyma** with a dark laceration crossing the spleen. A bright round **arterial blush** is circled beside the injury and marks active bleeding inside the spleen. That blush is labelled as the **embolisation target** for urgent catheter treatment. Examiners use this sign to select stable trauma patients for spleen saving embolisation.",
+   "say": "The axial CT is clear because a splenic laceration disrupts normal parenchyma visibly. A bright arterial blush is circled and marks active bleeding inside. That blush is the target for urgent catheter embolisation treatment. Examiners use this sign to select stable patients for spleen saving embolisation rather than surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-embolisation-trauma-gen1.webp",
+    "alt": "Axial contrast CT of upper abdomen showing splenic parenchyma disruption and circled arterial blush.",
+    "caption": "Axial CT shows splenic injury with arterial blush circled as embolisation target. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The spleen can survive embolisation because collateral flow keeps it alive. **Proximal splenic coiling** drops perfusion pressure so torn branches clot while the spleen stays viable. A focal pseudoaneurysm with an intact trunk suits **distal superselective coils** instead. Vaccination is needed after splenectomy only, because an embolised spleen keeps immune function. Falling haemoglobin or repeat imaging detects **rebleeding** before collapse develops.",
+   "say": "The spleen can survive embolisation because collateral flow keeps it alive. Proximal coiling drops pressure so torn branches clot naturally. A focal sac with an intact trunk is suitable for distal coils instead. Vaccination follows removal only because an embolised spleen keeps immune function and protects the patient.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Livers and kidneys forgive distal work. **Hepatic pseudoaneurysms** pack with parent preservation since portal flow alone cannot carry livers. **Renal segmental coils** sacrifice bleeding poles while sparing remaining nephrons for filtration. **Pelvic packing versus coils** splits unstable cases to theatre and stable blushes to radiology. **Urinoma and biloma** drain percutaneously when collections compress or infect.",
-   "say": "Livers and kidneys forgive distal work. Hepatic sacs pack with parents spared since portal flow cannot carry livers alone. Renal coils sacrifice bleeding poles while sparing filtering tissue. Unstable pelvises go to theatre while stable blushes coil. Compressing collections drain percutaneously.",
+   "tx": "Liver and kidney injuries forgive carefully placed distal embolisation. A **hepatic pseudoaneurysm** is packed while preserving the parent artery where possible. **Renal segmental coils** sacrifice a bleeding pole while sparing the remaining filtering tissue. Unstable pelvic bleeding goes to theatre for packing, while a stable blush goes to radiology for coils. A urine or bile collection that compresses or infects is drained percutaneously for control.",
+   "say": "Liver and kidney injuries forgive carefully placed distal embolisation. A hepatic sac is packed while the parent artery is preserved. Renal coils sacrifice a bleeding pole and spare filtering tissue deliberately. Unstable pelvic bleeding needs theatre packing, while compressing collections need percutaneous drainage for control and relief.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-embolisation-trauma-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Follow-up proves the save lasted. **Repeat CT before discharge** confirms sealed blushes and viable organs in high-grade injuries. **Activity restriction** for weeks protects healing spleens and livers from second ruptures. **Antibiotics for open pelvic fractures** accompany embolisation where contamination brews. **Trauma MDT review** audits every embolised case for timing and selection lessons.",
-   "say": "Follow-up proves saves lasted. Repeat CT before discharge confirms sealed blushes with viable organs. Weeks of restricted activity protect healing organs from second ruptures. Open pelvic fractures take antibiotics alongside coils. Team review audits timing and selection.",
+   "tx": "Follow up proves that the organ save has lasted after embolisation. **Repeat CT** before discharge confirms sealed blushes and viable organs in high grade injuries. **Activity restriction** for some weeks protects healing spleens and livers from second rupture. Antibiotics accompany embolisation for open pelvic fractures where contamination is present. Team review audits every embolised case so timing and selection improve for the next patient.",
+   "say": "Follow up proves that the organ save has lasted after embolisation. Repeat imaging before discharge confirms sealed blushes and viable organs. Restricted activity for some weeks protects healing organs from rupture. Team review audits every case so timing and patient selection improve for future trauma care.",
    "vis": {
     "kind": "flow",
     "nodes": [

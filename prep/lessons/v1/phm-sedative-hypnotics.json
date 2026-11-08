@@ -1,124 +1,135 @@
 {
- "v": 1,
- "module": "phm-sedative-hypnotics",
- "subject": "pharmacology",
- "title": "Sedative-hypnotics, anxiolytics and alcohol dependence",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Sedative hypnotics** climb a dose staircase from calm through sleep to anaesthesia, coma and medullary failure by enhancing **GABA**, the brain's main inhibitory transmitter at GABA-A chloride channels. **Benzodiazepines** increase how often the channel opens (ceiling effect, rarely lethal alone) while **barbiturates** prolong each opening and at high doses open channels directly (no ceiling, lethal overdose). Both synergise fatally with alcohol and opioids, the stack behind most community overdose deaths.",
-   "say": "Benzodiazepines open channels more often with a ceiling; barbiturates hold them open without one. Never stack sedatives with alcohol or opioids.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/phm-sedative-hypnotics-fig1.webp",
-    "alt": "Diagram showing a dose-response curve for sedative-hypnotics and a GABA-A receptor, illustrating how benzodiazepines increase channel opening frequency and barbiturates prolong duration or open directly.",
-    "caption": "Sedative-hypnotic dose-response and GABA-A receptor modulation",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Benzodiazepines** are chosen by half life and route: **diazepam** (long with active metabolites, smooth withdrawal tapers, status epilepticus with lorazepam preferred IV), **lorazepam** (conjugation safe in liver failure and elderly, reliable IM absorption), **midazolam** (short, procedural sedation and infusion), chlordiazepoxide (withdrawal legacy). **Flumazenil** antagonises the binding site reversing sedation, but in dependence or mixed tricyclic overdose it precipitates seizures, so use stays selective and hospital based with resuscitation ready.",
-   "say": "Diazepam tapers withdrawal, lorazepam suits failing livers, midazolam sedates procedures. Flumazenil reverses but can seize dependents.",
-   "vis": null
-  },
-  {
-   "tx": "**Z drugs** (zolpidem, zopiclone, eszopiclone) favour GABA-A alpha-1 subunits for sleep with less anxiolysis and dependence, yet complex sleep behaviours with morning impairment persist (women and elderly dosed lower). **Barbiturates** survive in niches (phenobarbital epilepsy and withdrawal protocols, thiopental historical induction); porphyria forbids them (ALA synthase induction). Buspirone (5HT1A partial, delayed weeks, no dependence) suits chronic anxiety without sedation.",
-   "say": "Z drugs sleep selectively but still sleepwalk and impair mornings. Porphyria forbids barbiturates.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Agent",
-     "Pearl",
-     "Role"
+    "v": 1,
+    "module": "phm-sedative-hypnotics",
+    "subject": "pharmacology",
+    "title": "Sedative-hypnotics, anxiolytics and alcohol dependence",
+    "minutes": 7,
+    "steps": [
+        {
+            "tx": "**Sedative hypnotics** enhance **GABA** inhibition at chloride channels and calm the brain in a dose dependent staircase. Rising doses move patients from calm through sleep to anaesthesia, coma and medullary failure in sequence. Benzodiazepines increase how often the channel opens and they show a ceiling that rarely kills alone. Barbiturates prolong each opening and open channels directly at high doses, so no ceiling protects overdose victims. Alcohol and opioids synergise fatally with both classes in community overdoses every year.",
+            "say": "Sedative hypnotics enhance inhibitory signalling in the brain and they calm patients in a dose dependent staircase. Rising doses move patients from calm through sleep toward coma and medullary failure in sequence during overdose. Benzodiazepines increase channel opening frequency and they show a ceiling that rarely kills alone in practice. Barbiturates prolong each opening and they open channels directly at high doses without any ceiling protection. Alcohol and opioids are a fatal combination with both classes in community overdoses every year in cities.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/phm-sedative-hypnotics-fig1.webp",
+                "alt": "Diagram showing a dose-response curve for sedative-hypnotics and a GABA-A receptor, illustrating how benzodiazepines increase channel opening frequency and barbiturates prolong duration or open directly.",
+                "caption": "Sedative-hypnotic dose-response and GABA-A receptor modulation",
+                "ar": 1.8349
+            }
+        },
+        {
+            "tx": "**Benzodiazepines** differ by half life, metabolism and route, and examiners test those choices repeatedly. **Diazepam** lasts long with active metabolites and suits smooth withdrawal tapers in alcohol dependence programmes. Lorazepam undergoes conjugation only, so liver failure and old age make it the safer choice there. Midazolam acts briefly and suits procedural sedation and controlled infusion in critical care units. Flumazenil reverses sedation at the binding site, but it precipitates seizures in dependent patients and mixed overdoses.",
+            "say": "Benzodiazepines differ by half life and metabolism and examiners test those choices repeatedly in papers today. Diazepam lasts long with active metabolites and it suits smooth withdrawal tapers in dependence programmes run. Lorazepam undergoes conjugation only so liver failure and old age make it safer there clinically indeed. Midazolam acts briefly and it suits procedural sedation and controlled infusion in critical care units daily. Flumazenil reverses sedation but it precipitates seizures in dependent patients and mixed overdoses in hospital settings.",
+            "vis": null
+        },
+        {
+            "tx": "Drugs for insomnia that favour the alpha 1 subunit induce sleep with less anxiolysis and dependence than older agents. They still cause **complex sleep behaviours** and morning impairment, so women and older patients need lower doses. **Barbiturates** survive only in niches such as phenobarbital for epilepsy and withdrawal protocols in specialist units. Porphyria forbids barbiturates because they induce the enzyme that drives acute attacks in susceptible patients. Buspirone treats chronic anxiety over weeks without sedation or dependence for long term users.",
+            "say": "Drugs for insomnia are designed to favour one receptor subunit and induce sleep with less dependence than older agents. They still cause complex sleep behaviours and morning impairment so older patients need lower doses prescribed carefully. Barbiturates survive only in niches such as epilepsy treatment and withdrawal protocols in specialist units today still. Porphyria forbids barbiturates because they induce the enzyme that drives acute attacks in susceptible patients presenting. Buspirone treats chronic anxiety over weeks without sedation or dependence for long term users needing therapy.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Agent",
+                    "Pearl",
+                    "Role"
+                ],
+                "rows": [
+                    [
+                        "Diazepam",
+                        "Long, active metabolites",
+                        "Withdrawal taper"
+                    ],
+                    [
+                        "Lorazepam",
+                        "Liver safe",
+                        "Elderly, IM"
+                    ],
+                    [
+                        "Midazolam",
+                        "Short",
+                        "Procedures"
+                    ],
+                    [
+                        "Zolpidem",
+                        "Alpha-1 selective",
+                        "Insomnia"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "**Alcohol withdrawal** evolves from tremor and anxiety through seizures toward **delirium tremens** with fever and autonomic storm. A structured severity score guides symptom triggered benzodiazepine tapers and reduces total drug exposure in hospital. Thiamine always precedes glucose because glucose without thiamine can precipitate Wernicke injury in malnourished drinkers suddenly. Relapse prevention combines counselling with acamprosate, naltrexone or supervised disulfiram for selected motivated patients after detoxification. Each untreated withdrawal kindles the next, so early adequate treatment protects the brain long term.",
+            "say": "Alcohol withdrawal is a progressive syndrome that evolves from tremor and anxiety through seizures toward a dangerous delirious state with autonomic storm. A structured severity score guides symptom triggered tapers and it reduces total drug exposure in hospital wards. Thiamine always precedes glucose because glucose alone can precipitate brain injury in malnourished drinkers presenting acutely unwell. Relapse prevention combines counselling with medicines that reduce craving or block reward after detoxification finishes safely at home. Each untreated withdrawal kindles the next episode so early adequate treatment protects the brain long term.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Phase",
+                    "Timing",
+                    "Drug"
+                ],
+                "rows": [
+                    [
+                        "Tremor",
+                        "Hours",
+                        "Benzo taper"
+                    ],
+                    [
+                        "Seizures",
+                        "Day 1 to 2",
+                        "Benzo load"
+                    ],
+                    [
+                        "DTs",
+                        "Day 2 to 4",
+                        "ICU taper"
+                    ],
+                    [
+                        "Relapse",
+                        "Months",
+                        "Acamprosate"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "This bedside photograph shows a tremulous sweating patient whose monitor displays tachycardia and hypertension during **alcohol withdrawal**. The nurse scores severity on a structured **CIWA** chart and gives benzodiazepine only when symptoms cross the trigger level. That symptom triggered method treats the autonomic storm while avoiding continuous oversedation in a monitored bed. The labels also warn that delirium tremens carries real mortality without prompt treatment and close observation. Thiamine before glucose completes the examination answer beside the chart in this scene.",
+            "say": "This bedside photograph shows a tremulous sweating patient whose monitor displays tachycardia and hypertension during withdrawal from alcohol. The nurse scores severity on a structured chart and gives medicine only when symptoms cross trigger levels set. That symptom triggered method treats the autonomic storm while avoiding continuous oversedation in a monitored bed safely. The labels warn that the delirious stage carries real mortality without prompt treatment and close observation given. Thiamine before glucose is the rule that completes the examination answer beside the chart in this scene every time.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/phm-sedative-hypnotics-gen1.webp",
+                "alt": "Hospital bedside photo of tremulous sweating patient with cardiac monitor, nurse marking CIWA alcohol withdrawal scale, benzodiazepine vials nearby.",
+                "caption": "Tremulous monitored patient with CIWA scoring guiding benzodiazepine therapy. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        }
     ],
-    "rows": [
-     [
-      "Diazepam",
-      "Long, active metabolites",
-      "Withdrawal taper"
-     ],
-     [
-      "Lorazepam",
-      "Liver safe",
-      "Elderly, IM"
-     ],
-     [
-      "Midazolam",
-      "Short",
-      "Procedures"
-     ],
-     [
-      "Zolpidem",
-      "Alpha-1 selective",
-      "Insomnia"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Alcohol withdrawal** unfolds over hours to days (tremor and anxiety, seizures in the first two days, **delirium tremens** with fever, confusion and autonomic storm carrying mortality) and is scored by **CIWA** for **symptom triggered benzodiazepine tapers**; **thiamine precedes glucose** always to prevent Wernicke injury. Relapse prevention pairs counselling with **acamprosate** (glutamate balance), **naltrexone** (reward blockade) or supervised **disulfiram** (aldehyde deterrence). Kindling worsens each untreated withdrawal.",
-   "say": "Withdrawal tremor to DT storm is scored by CIWA and tapered. Thiamine before sugar, always.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Phase",
-     "Timing",
-     "Drug"
+    "quiz": [
+        "bk2-phm-121",
+        "bk2-phm-122",
+        "bk2-phm-123",
+        "bk2-phm-124",
+        "bk2-phm-125",
+        "bk2-phm-126",
+        "bk2-phm-127",
+        "bk2-phm-128",
+        "bk2-phm-129",
+        "bk2-phm-130"
     ],
-    "rows": [
-     [
-      "Tremor",
-      "Hours",
-      "Benzo taper"
-     ],
-     [
-      "Seizures",
-      "Day 1 to 2",
-      "Benzo load"
-     ],
-     [
-      "DTs",
-      "Day 2 to 4",
-      "ICU taper"
-     ],
-     [
-      "Relapse",
-      "Months",
-      "Acamprosate"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "bk2-phm-121",
-  "bk2-phm-122",
-  "bk2-phm-123",
-  "bk2-phm-124",
-  "bk2-phm-125",
-  "bk2-phm-126",
-  "bk2-phm-127",
-  "bk2-phm-128",
-  "bk2-phm-129",
-  "bk2-phm-130"
- ],
- "src": [],
- "refs": [
-  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-pharma2b",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+    "src": [],
+    "refs": [
+        "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+    ],
+    "gen": "AI",
+    "run": "books2-pharma2b",
+    "model": "muse-wonder (local authoring, no external API)",
+    "checks": {
+        "shape": true,
+        "numbers": true,
+        "drugs": true,
+        "verbatim": true,
+        "dashes": true,
+        "verify": true,
+        "redone": 0,
+        "dropped": 0,
+        "kbWords": 0,
+        "itemN": 10
+    }
 }

@@ -3,11 +3,11 @@
  "module": "rad-ir-access-closure",
  "subject": "radiology",
  "title": "Haemostasis and closure after arterial access",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Pressing by hand still closes most punctures. **Manual compression** holds pressure over the **common femoral artery** for fifteen to twenty minutes after sheath removal, then the patient lies flat with the leg straight while a nurse watches the groin. **Haematoma** forms when pressure slips too early or too high above the ligament. **Bed rest** with head-end low continues for a few hours before first ambulation. **Reuse of the same groin** within days favours the opposite side.",
-   "say": "Hand pressure still closes most holes. Press over the femoral artery for fifteen to twenty minutes after the sheath comes out, then lie flat with the leg straight while the groin is watched. Early release causes haematoma. Rest flat for a few hours before walking, and use the other groin if restuck within days.",
+   "tx": "Manual compression still closes most arterial punctures after sheath removal in practice. The operator holds pressure over the **common femoral artery** for fifteen to twenty minutes and then keeps the leg straight. A **haematoma** forms when pressure is released too early or when the puncture sits too high. The patient rests flat for a few hours before walking, and **bed rest** protects the fresh clot. Reusing the same groin within days is avoided where the opposite side is available.",
+   "say": "Manual compression is still effective and closes most arterial punctures after sheath removal. The operator holds firm pressure over the femoral artery for fifteen to twenty minutes. The patient then lies flat with the leg straight while staff are watching the groin. Early release causes haematoma formation, and flat rest protects the fresh clot before walking.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,8 @@
    }
   },
   {
-   "tx": "Plugs and stitches speed haemostasis in busy labs. **Suture-mediated closure** places a stitch at the arterial wall for large sheaths and lets selected patients walk sooner under Society of Interventional Radiology standards. **Collagen plug devices** seal the track outside the artery where infection risk stays low. **Clip devices** suit calcified walls that needles cross poorly. **Device failure** always falls back to manual compression, so pressure skills stay mandatory.",
-   "say": "Plugs and stitches speed closure. Suture devices stitch the wall for large sheaths and allow earlier walking. Collagen plugs seal the track outside the artery. Clips suit calcified walls. When a device fails, fall back to hand pressure, so compression skills stay mandatory.",
+   "tx": "Closure devices speed haemostasis and allow selected patients to walk sooner after procedures. **Suture mediated closure** places a stitch directly at the arterial wall and suits larger sheaths well. A **collagen plug** seals the track outside the artery and works best when infection risk is low. **Clip devices** suit calcified walls that needles cross poorly during access. Device failure always needs immediate manual compression, so compression skills remain mandatory for every operator.",
+   "say": "Closure devices speed haemostasis and allow selected patients to walk sooner after procedures. A suture device is useful because it places a stitch at the arterial wall directly. A collagen plug seals the track outside the artery in suitable patients. Device failure always needs immediate manual compression, so compression skills remain mandatory for operators.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +74,19 @@
    }
   },
   {
-   "tx": "Thin blood changes sheath timing. **Heparin reversal** with protamine is reserved for bleeding punctures because routine reversal invites thrombosis, following CIRSE peri-procedural guidance. **Sheath removal** waits until clotting recovers after heparinised cases, with the activated clotting time checked at the bedside. **Antiplatelet drugs** usually continue through diagnostic work but pause for large-bore closure by cardiology advice. **Warfarin** bridges only when thrombotic risk outweighs groin bleeding.",
-   "say": "Thin blood changes sheath timing. Protamine reverses heparin only for bleeding holes because routine reversal invites clots. Sheaths come out once clotting recovers, checked at the bedside. Antiplatelets usually continue for diagnostic cases but pause for large sheaths. Warfarin bridges only when clot risk outweighs bleeding.",
+   "tx": "The cutaway shows a **suture mediated closure** device passing a stitch through the arterial wall at the puncture site. The **suture foot** sits inside the lumen and anchors the needles that carry thread through the wall. The blue thread is tied outside as a **stitch knot** that pulls the wall edges together. This mechanism explains faster haemostasis after large sheaths in exam answers.",
+   "say": "The cutaway is clear because it shows a device placing a stitch through the wall. The foot sits inside the lumen and anchors needles during deployment. The blue thread is tied outside and pulls the wall edges together. This mechanism explains faster haemostasis after larger sheaths are removed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-access-closure-gen1.webp",
+    "alt": "Cutaway artery with closure device deploying suture through wall, tied knot outside, labeled parts.",
+    "caption": "Illustration shows suture foot closing arterial wall puncture. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Blood thinning changes the timing of sheath removal after heparinised cases. **Protamine reversal** is reserved for bleeding punctures because routine reversal increases thrombosis risk. Sheath removal waits until clotting recovers, and the **activated clotting time** is checked at the bedside. Antiplatelet drugs usually continue through diagnostic work but may pause before large bore closure. **Warfarin** bridging is used only when thrombotic risk clearly outweighs groin bleeding risk.",
+   "say": "Blood thinning changes the timing of sheath removal after heparinised cases. Protamine reversal is reserved for bleeding punctures because routine reversal increases thrombosis risk. Sheath removal waits until clotting recovers and the bedside clotting time is checked. Bridging is used only when thrombotic risk clearly outweighs groin bleeding risk for the patient.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-access-closure-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "The leg tells the truth after the lab. **Distal pulse checks** compare foot pulses with the opposite side every fifteen minutes at first, since a lost pulse means thrombosis or dissection. **Groin inspection** looks for swelling, bruit and falling haemoglobin that mark retroperitoneal bleeding. **Pseudoaneurysm** presents days later as a painful pulsing lump and needs ultrasound-guided thrombin. **Discharge advice** warns that spreading bruise, numbness or pallor means return at once.",
-   "say": "The leg tells the truth after the procedure. Compare foot pulses with the other side every fifteen minutes at first, since a lost pulse means clot or tear. Inspect the groin for swelling, bruit and falling haemoglobin. A painful pulsing lump days later is pseudoaneurysm needing thrombin injection. Spreading bruise, numbness or pallor means return at once.",
+   "tx": "The leg gives early warning after the patient leaves the laboratory. **Distal pulse checks** compare foot pulses with the opposite side every fifteen minutes at first. A lost pulse suggests thrombosis or dissection and needs urgent review. Groin inspection looks for swelling, bruit and falling haemoglobin that suggest **retroperitoneal bleeding**. A painful pulsatile lump days later suggests a **pseudoaneurysm** and needs ultrasound assessment, while spreading bruise, numbness or pallor needs immediate return.",
+   "say": "The leg gives early warning after the patient leaves the laboratory safely. Staff are careful and compare foot pulses with the opposite side every fifteen minutes. A lost pulse suggests thrombosis or dissection and needs urgent review. A painful pulsatile lump days later suggests pseudoaneurysm formation, while spreading bruise or pallor needs immediate return.",
    "vis": {
     "kind": "flow",
     "nodes": [

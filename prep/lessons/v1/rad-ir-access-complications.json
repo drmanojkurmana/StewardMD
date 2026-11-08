@@ -3,11 +3,11 @@
  "module": "rad-ir-access-complications",
  "subject": "radiology",
  "title": "Access complications and endovascular rescue",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Resistance means stop and look. **Arterial dissection** starts when wires or catheters lift an **intimal flap**, announced by sudden resistance, pain or contrast hanging up in a false channel. **Completion angiography** through the sheath maps the flap extent before any device crosses it again. **Flow-limiting flaps** with lost distal pulses need tacking by balloon or stent, while small **non-flow-limiting flaps** heal with observation and antiplatelets. **Subintimal wiring** that will not re-enter converts to another access rather than forcing onward.",
-   "say": "Resistance means stop and look. Dissection starts when wires lift a wall flap, announced by sudden resistance, pain or hanging contrast. Final angiography maps the flap before anything crosses again. Flaps that block flow need balloon or stent tacking, while small flaps heal with watching. Wiring that will not re-enter converts elsewhere.",
+   "tx": "Resistance during wiring means the operator stops and looks before forcing equipment onward. **Arterial dissection** begins when a wire or catheter lifts an **intimal flap** from the vessel wall. Sudden resistance, pain or contrast hanging in a false channel announces the injury. **Completion angiography** through the sheath maps the flap before any device crosses it again. Flow limiting flaps need balloon or stent tacking, while small flaps heal with observation.",
+   "say": "Resistance during wiring means the operator stops and looks before forcing equipment onward. Dissection is likely when a wire lifts a flap from the vessel wall. Sudden resistance and pain with hanging contrast announce the injury clearly. Completion angiography maps the flap, and flow limiting flaps need balloon or stent tacking.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Covered metal rescues torn arteries. **Covered stents** bridge wall defects and pseudoaneurysm necks from inside, sealing leaks while preserving downstream flow under SIR rescue standards. **Coil embolisation** sacrifices small bleeding muscular branches where collateral networks cover the territory. **Prolonged balloon tamponade** across the hole buys minutes for clotting in iliac and femoral injuries. **Reversal and pressure** run alongside every endovascular rescue, never instead of it.",
-   "say": "Covered metal rescues torn arteries. Fabric-covered stents bridge holes while keeping downstream flow. Coils sacrifice small bleeding branches where collaterals cover the area. Long balloon inflation across the hole buys clotting minutes. Reversal with pressure runs alongside every rescue.",
+   "tx": "The pelvic angiogram shows a **linear intimal flap** that splits contrast into true and false channels. Contrast hangs up in the **false channel** while distal true lumen flow is reduced below the injury. This is a completion angiogram that maps the flap before further wiring is attempted. The image teaches why resistance needs imaging first because a **flow limiting dissection** needs tacking rather than force.",
+   "say": "The pelvic angiogram is diagnostic because it shows a flap splitting contrast into channels. Contrast hangs up in the false channel while distal flow is reduced. This completion study maps the flap before further wiring is attempted. A flow limiting dissection needs tacking rather than force and needs careful watching.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-access-complications-gen1.webp",
+    "alt": "Completion pelvic angiogram showing linear dissection flap, false channel contrast stasis and reduced distal flow.",
+    "caption": "Pelvic angiogram shows intimal flap with contrast in false channel. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Covered stents rescue torn arteries while preserving flow to distal tissue. A **covered stent** bridges a wall defect or pseudoaneurysm neck from inside the lumen. **Coil embolisation** sacrifices a small bleeding muscular branch where collateral networks protect the territory. Prolonged **balloon tamponade** across the hole buys minutes for clotting in iliac and femoral injuries. Reversal of anticoagulation and direct pressure support every rescue and never replace definitive control.",
+   "say": "Covered stents rescue torn arteries while preserving flow to distal tissue. A covered stent bridges a wall defect from inside the lumen securely. Coil embolisation sacrifices a small bleeding branch where collateral networks protect tissue. Balloon tamponade buys minutes for clotting, while pressure and reversal support every rescue attempt.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Knives still save groins that devices cannot. **Surgical cutdown** exposes the artery directly when percutaneous seals fail, haematomas compress nerves or infection needs debridement. **Thigh compartment syndrome** after massive groin bleeding brings severe pain with a tense thigh and needs urgent fasciotomy. **Graft interposition** replaces destroyed segments that neither pressure nor stents can bridge. **Joint vascular rounds** after bailouts catch re-bleeds early on the ward.",
-   "say": "Knives still save groins that devices cannot. Surgical cutdown exposes the artery when seals fail, nerves compress or infection needs cleaning. Thigh compartment syndrome after massive bleeding brings extreme pain with tension needing urgent release. Destroyed segments take grafts. Joint ward rounds catch re-bleeds early.",
+   "tx": "Surgery still saves the groin when percutaneous methods cannot control the problem. **Surgical cutdown** exposes the artery directly when seals fail or infection needs debridement. A tense painful thigh after massive groin bleeding suggests **thigh compartment syndrome** and needs urgent fasciotomy. **Graft interposition** replaces a destroyed arterial segment that pressure and stents cannot bridge. Joint ward rounds after a bailout detect rebleeding early and protect the limb.",
+   "say": "Surgery still saves the groin when percutaneous methods cannot control the problem. Surgical cutdown exposes the artery directly when seals fail in practice. A tense painful thigh after massive bleeding suggests compartment syndrome and needs urgent release. Graft replacement restores a destroyed segment, and joint ward rounds detect rebleeding early.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-access-complications-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Small tracks usually close themselves. **Asymptomatic fistulae** between small branches often thrombose alone within weeks and merit duplex watching rather than instant closure. **Symptomatic shunts** with limb swelling, heart strain or skin changes need ultrasound-guided compression or covered stents. **Cholesterol embolisation** after rough catheter handling showers blue toes with livedo and kidney injury days later, managed supportively. **Exam answers** prioritise watching silent tracks while acting on symptomatic ones.",
-   "say": "Small tracks usually close themselves. Silent fistulae often clot alone within weeks and merit duplex watching. Shunts with swelling, heart strain or skin changes need compression or covered stents. Rough handling can shower cholesterol to toes and kidneys days later, managed supportively. Exams favour watching silent tracks.",
+   "tx": "Small arteriovenous tracks after access usually close without any intervention. An **asymptomatic fistula** between small branches often thromboses within weeks and needs duplex watching. **Symptomatic shunts** with limb swelling, heart strain or skin changes need compression or a covered stent. **Cholesterol embolisation** after rough handling showers blue toes with livedo and kidney injury days later. Examination answers favour watching silent tracks while treating symptomatic shunts promptly.",
+   "say": "Small arteriovenous tracks after access usually close without any intervention. A silent fistula between small branches is common and often thromboses within weeks naturally. Shunts with swelling or heart strain need compression or a covered stent. Cholesterol showering after rough handling affects toes and kidneys and needs supportive care and monitoring.",
    "vis": {
     "kind": "flow",
     "nodes": [

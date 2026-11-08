@@ -3,11 +3,11 @@
  "module": "rad-ir-embolisation-gi",
  "subject": "radiology",
  "title": "Gastrointestinal bleeding embolisation",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Maps find bleeders before catheters move. **CT angiography** with arterial-phase contrast spots active extravasation above roughly half a millilitre per minute, guiding the catheter to the right territory. **Catheter angiography** then confirms with selective blushes, pseudoaneurysms or abrupt cutoffs. **Negative maps** with ongoing bleeding still merit empiric embolisation of the likely bed. **Provocative heparin** is avoided outside trials, since stirring clots risks losing control.",
-   "say": "Maps find bleeders before catheters move. CT angiography spots active leaks above trace rates and guides catheters to the right territory. Selective angiography confirms blushes and cutoffs. Negative maps with ongoing bleeding still merit empiric treatment of the likely bed. Clot-stirring provocation stays experimental.",
+   "tx": "Imaging finds the bleeding point before any catheter is moved. **CT angiography** in the arterial phase shows active extravasation above roughly half a millilitre per minute. **Catheter angiography** then confirms the site with a selective blush, pseudoaneurysm or abrupt vessel cutoff. A negative map with continuing bleeding can still justify **empiric embolisation** of the likely bed. Provocative clot stirring is avoided outside studies because it risks losing control of bleeding.",
+   "say": "Imaging finds the bleeding point before any catheter is moved. CT angiography shows active leakage and guides the catheter correctly. Selective angiography then confirms a blush or abrupt cutoff clearly. Continuing bleeding with a negative map can still justify treatment of the likely bed in unstable patients.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Gut arteries tolerate sacrifice by design. **Gastroduodenal sandwich** coils front and back because pancreaticoduodenal arcades refill single-sided blocks. **Left gastric embolisation** calms diffuse fundal oozing where endoscopy fails repeatedly. **Mesenteric branches** demand superselective tips since vasa recta are end arteries. **Empiric embolisation** of the gastroduodenal or left gastric without a seen blush suits unstable re-bleeders after failed endoscopy.",
-   "say": "Gut arteries tolerate sacrifice by design. Gastroduodenal coils trap both ends because arcades refill single blocks. Left gastric work calms diffuse fundal oozing. Mesenteric branches need superselective tips as end arteries. Empiric treatment without a seen blush suits unstable re-bleeders.",
+   "tx": "The axial arterial phase CT shows a bright **contrast extravasation blush** spilling inside a bowel loop in the left abdomen. A white **mesenteric feeding artery** runs towards the blush and names the territory for catheterisation. This single image localises active bleeding before any catheter is advanced. Examiners expect this map first because it shortens procedure time and reduces **non target embolisation** risk.",
+   "say": "The axial CT is diagnostic because a bright blush spills inside a bowel loop. A mesenteric feeding artery runs towards the blush and names the territory. This image localises active bleeding before any catheter is advanced. Examiners expect this map first because it shortens the procedure and reduces unnecessary embolisation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-embolisation-gi-gen1.webp",
+    "alt": "Axial arterial phase CT angiogram showing active bowel contrast extravasation and feeding mesenteric artery.",
+    "caption": "Arterial CT shows active intraluminal contrast blush from mesenteric branch. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Upper gut arteries tolerate embolisation because rich collateral arcades protect tissue. **Gastroduodenal sandwich coils** block both ends because pancreaticoduodenal arcades refill a single sided block. **Left gastric embolisation** calms diffuse fundal oozing when endoscopy fails repeatedly. Mesenteric branches need a superselective tip because **vasa recta** are end arteries with little collateral supply. Empiric treatment without a seen blush suits unstable patients who rebleed after failed endoscopy.",
+   "say": "Upper gut arteries are tolerant of embolisation because collateral arcades protect tissue well. Gastroduodenal coils block both ends because arcades refill single blocks. Left gastric treatment calms diffuse fundal oozing after endoscopy fails. Mesenteric branches need superselective tips because their small branches are end arteries with little collateral supply.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Bowel ischaemia is the feared price. **Vasa recta embolisation** too proximal infarcts long bowel segments, so tips advance beyond marginal arcades. **Post-procedure pain** with rising lactate and peritonism signals infarction needing surgical review. **Coil over particle** choice favours coils in bowel beds where particles shower too widely. **Stricture months later** marks healed ischaemia and needs endoscopic watching.",
-   "say": "Bowel ischaemia is the feared price. Proximal blocks infarct long segments, so tips advance beyond arcades. Pain with rising lactate and peritonism signals infarction needing surgeons. Coils beat particles in bowel beds where grains shower widely. Late stricture marks healed ischaemia needing endoscopic watch.",
+   "tx": "Bowel infarction is the feared price of poorly placed embolisation. A block placed too proximally infarcts a long bowel segment, so the tip advances beyond **marginal arcades**. New pain with rising lactate and peritonism after the procedure suggests **bowel infarction** and needs surgical review. **Coils** are favoured over particles in bowel beds because particles shower too widely. A stricture months later marks healed ischaemia and needs endoscopic surveillance.",
+   "say": "Bowel infarction is the feared price of poorly placed embolisation. A proximal block infarcts a long segment, so the tip advances distally. New pain with rising lactate suggests infarction and needs surgical review. Coils are favoured over particles because particles shower too widely, while late stricture marks healed ischaemia.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-embolisation-gi-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Re-bleeds follow a protocol, not panic. **Repeat angiography** first re-maps since new feeders often replace sealed ones. **Surgical backup** stands warned for ischaemic or uncontrollable cases rather than called late. **Acid suppression and transfusion** continue alongside radiology, never paused for the procedure. **Mortality audits** review every gut embolisation death for mapping or selection lessons under CIRSE quality guidance.",
-   "say": "Re-bleeds follow protocol not panic. Repeat angiography re-maps since new feeders replace sealed ones. Surgeons stand warned for ischaemic cases rather than called late. Acid suppression with transfusion continues alongside radiology. Death audits review mapping and selection lessons.",
+   "tx": "Rebleeding after gut embolisation follows a protocol rather than panic. **Repeat angiography** remaps the territory first because new feeders often replace sealed vessels. Surgical backup is warned early for ischaemic or uncontrollable cases rather than called late. **Acid suppression** and transfusion continue alongside radiology and are never paused for the procedure. Every death after gut embolisation is reviewed so mapping and selection lessons improve future care.",
+   "say": "Rebleeding after gut embolisation follows a protocol rather than panic. Repeat angiography remaps the territory because new feeders replace sealed vessels. Surgical backup is warned early for ischaemic or uncontrollable cases. Acid suppression and transfusion continue alongside radiology, and every death is reviewed for future learning.",
    "vis": {
     "kind": "flow",
     "nodes": [

@@ -3,11 +3,11 @@
  "module": "rad-ir-ablation-planning",
  "subject": "radiology",
  "title": "Thermal ablation: planning and protection",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Margins cure tumours. **Thermal ablation** kills with heat where **5 mm margins** around visible tumours predict complete necrosis. **Microwave beats radiofrequency** near vessels since heat-sink steals less energy. **Hydrodissection** with dextrose separates bowel from burn zones. **Track ablation** on withdrawal seeds no tumour along needle paths.",
-   "say": "Margins cure tumours. Heat ablation kills where five-millimetre margins around tumours predict complete death. Microwave beats radiofrequency near vessels since flowing blood steals less heat. Fluid injection separates bowel from burns. Burning tracks on withdrawal seeds no tumour.",
+   "tx": "Thermal ablation destroys a liver tumour with heat, and complete treatment needs a clear rim of dead tissue around the visible tumour. A **5 mm margin** around the tumour predicts complete necrosis and lowers local recurrence in examinations. **Microwave ablation** loses less energy near flowing blood than radiofrequency ablation does, so it suits tumours beside vessels. **Hydrodissection** with dextrose fluid separates bowel from the burn zone and protects the gut wall.",
+   "say": "Thermal ablation destroys a liver tumour with heat and needs a rim of dead tissue around it. A margin of five millimetres is important because it predicts complete necrosis and lowers recurrence. Microwave ablation loses less energy near flowing blood and suits tumours beside vessels. Dextrose fluid separates bowel from the burn zone and protects the gut wall.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Images guide every burn. **Ultrasound with fusion** overlays CT targets onto live livers for precise probes. **Immediate contrast scans** reveal residual nodules needing same-day touch-ups. **Heat-sink vessels** above 3 mm cool radiofrequency zones requiring microwave or longer burns. **General anaesthesia** stills diaphragms for dome lesions.",
-   "say": "Images guide every burn. Fusion ultrasound overlays CT targets onto live livers. Immediate contrast scans reveal leftovers needing same-day touch-ups. Large vessels cool radiofrequency zones needing microwave. General anaesthesia stills diaphragms for dome lesions.",
+   "tx": "The picture shows a **microwave antenna** placed inside a liver tumour with a dark rim that marks the planned ablation zone. The bracket highlights the **5 mm margin** of normal tissue that must die with the tumour for complete treatment. Fluid labelled as **hydrodissection** separates liver from bowel and protects the gut from heat injury. This image links margin planning with neighbour protection in one exam ready view.",
+   "say": "The picture shows a microwave antenna that sits inside a liver tumour with a treated rim around it. The bracket highlights the five millimetre margin that must die with the tumour. Fluid separates the liver from bowel and protects the gut from heat injury. This view links margin planning with neighbour protection clearly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-ablation-planning-gen1.webp",
+    "alt": "Illustration of liver tumour with ablation needle surrounding margin and bowel protection fluid",
+    "caption": "Liver tumour with microwave antenna hydrodissection and margin annotation. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Good imaging guides every ablation and confirms that the tumour is fully covered. **Fusion ultrasound** overlays earlier CT targets onto live liver images so the probe reaches the right spot. A contrast scan done immediately afterwards shows any residual enhancing nodule that needs further treatment. Large vessels above 3 mm cool the radiofrequency zone through the **heat sink effect**, while **general anaesthesia** keeps the diaphragm still for dome lesions.",
+   "say": "Good imaging guides every ablation and confirms that the tumour is fully covered. Fusion ultrasound overlays earlier CT targets onto live liver images for accurate probe placement. A contrast scan afterwards shows residual enhancing tissue that needs further treatment. Large vessels cool the radiofrequency zone, while general anaesthesia keeps the diaphragm still for dome lesions.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Burns injure beyond tumours. **Bile duct strictures** follow central burns needing stents. **Liver abscess** in necrotic zones declares with fever needing drainage. **Grounding burns** from radiofrequency pads mark poor contact needing pad checks. **Tumour seeding** along tracks stays rare where track burns prevent.",
-   "say": "Burns injure beyond tumours. Central burns stricture bile ducts needing stents. Necrotic zones abscess with fever needing drains. Pad burns mark poor grounding needing checks. Track seeding stays rare where withdrawal burns prevent.",
+   "tx": "Heat can injure normal liver structures that lie close to the ablation zone. A **bile duct stricture** may follow a central burn and may need stenting for drainage. Fever after treatment may signal a **liver abscess** inside the necrotic zone and needs drainage. A **grounding pad burn** during radiofrequency treatment marks poor pad contact and needs prompt checks. Tumour seeding along the needle track remains uncommon when the track is ablated during withdrawal.",
+   "say": "Heat can injure normal liver structures that lie close to the ablation zone. A central burn may narrow a bile duct and may need stenting for drainage. Fever after treatment may signal an abscess and needs urgent assessment. A grounding pad burn marks poor pad contact, while track ablation during withdrawal reduces tumour seeding.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-ablation-planning-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Follow-up proves lasting kill. **Contrast imaging at one month** with no enhancement marks technical success. **Local progression** at edges earns repeat ablation while distant spread changes strategy. **Tumour markers** falling confirm response alongside scans. **Multidisciplinary review** aligns repeat burns with surgery and systemic options.",
-   "say": "Follow-up proves lasting kill. One-month contrast scans with no enhancement mark success. Edge regrowth earns repeat burns while distant spread changes strategy. Falling markers confirm response. Team review aligns repeats with surgery and drugs.",
+   "tx": "Follow up imaging proves whether the ablation has achieved a lasting result. **Contrast imaging at one month** with no enhancement marks technical success for the treated lesion. **Local progression** at the edge needs repeat ablation, while distant spread needs a different overall strategy. Falling **tumour markers** support the scan findings and confirm a good response. Team review aligns repeat ablation with surgery and systemic treatment options for each patient.",
+   "say": "Follow up imaging proves whether the ablation has achieved a lasting result. A contrast scan at one month is reassuring when no enhancement remains in the lesion. Regrowth at the edge needs repeat ablation, while distant spread needs a different strategy. Falling tumour markers support the scan findings, and team review aligns further treatment for each patient.",
    "vis": {
     "kind": "flow",
     "nodes": [
