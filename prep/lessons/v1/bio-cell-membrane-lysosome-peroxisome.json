@@ -1,0 +1,175 @@
+{
+ "v": 1,
+ "module": "bio-cell-membrane",
+ "subject": "biochemistry",
+ "title": "Lysosomal and peroxisomal disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "New lysosomal hydrolases earn a **mannose-6-phosphate** tag in cis Golgi (phosphotransferase recognises their folded signal patch, uncovering enzyme adds the phosphate), binding M6P receptors that deliver them through endosomes and recycle. Plasma membrane receptors rescue escaped enzymes by endocytosis, which is why infused replacement enzymes (bearing M6P) enter deficient cells therapeutically. Tagging, not enzyme synthesis, is the vulnerable invention.",
+   "say": "Hydrolases earn a mannose-6-phosphate tag in Golgi for receptor delivery to lysosomes. Infused replacement enzymes enter cells through the same receptors, making tagging the vulnerable invention therapeutically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Tag, deliver, recycle",
+    "nodes": [
+     {
+      "id": "tag",
+      "label": "M6P tag added in cis Golgi"
+     },
+     {
+      "id": "rec",
+      "label": "M6P receptor carries to endosome"
+     },
+     {
+      "id": "acid",
+      "label": "Acid releases enzyme to lysosome"
+     },
+     {
+      "id": "back",
+      "label": "Receptor recycles to Golgi"
+     }
+    ],
+    "edges": [
+     [
+      "tag",
+      "rec"
+     ],
+     [
+      "rec",
+      "acid"
+     ],
+     [
+      "acid",
+      "back"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**I-cell disease** (mucolipidosis II, phosphotransferase absent) makes normal hydrolases that are never tagged, so they pour into plasma (ten to twenty fold high) while lysosomes starve and inclusions pack fibroblasts: coarse facies resembling Hurler but earlier and severer, stiff joints, gingival hypertrophy, dysostosis, cardiomegaly valves, developmental failure and childhood death. Pseudo-Hurler polydystrophy (III) retains partial tagging and milder, later disease. Urine oligosaccharides rise while mucopolysaccharide screening misleads.",
+   "say": "I-cell disease makes normal hydrolases that pour into plasma untagged while lysosomes starve. Coarse facies resemble Hurler but earlier and severer, with childhood death without treatment advances.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "I-cell (tag missing)",
+     "points": [
+      "Plasma hydrolases very HIGH",
+      "Lysosomes empty, inclusions dense",
+      "Hurler like but neonatal severe"
+     ]
+    },
+    "right": {
+     "title": "Hurler (enzyme missing)",
+     "points": [
+      "One hydrolase absent, plasma normal",
+      "GAG storage in lysosomes",
+      "Urine GAG high, enzyme assay names it"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Peroxisomes** import folded proteins through PEX peroxins addressed by PTS1 (Ser-Lys-Leu) signals, oxidise very long chain (22 plus) and branched fatty acids (pristanic after phytanic alpha oxidation), start plasmalogen (ether lipid myelin) and bile acid synthesis, and detoxify hydrogen peroxide by catalase. Their oxidases make peroxide directly (unlike mitochondrial respiration), so organelle failure simultaneously accumulates substrates and oxidative vulnerability in brain, liver, kidney and adrenal.",
+   "say": "Peroxisomes oxidise very long and branched fatty acids, start plasmalogens, and detoxify peroxide by catalase. Failure accumulates substrates in brain, liver, kidney and adrenal simultaneously.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peroxisome job",
+     "Biochemical flag when failed"
+    ],
+    "rows": [
+     [
+      "VLCFA beta oxidation (shortening)",
+      "Plasma C26 and ratios high"
+     ],
+     [
+      "Phytanic alpha oxidation",
+      "Phytanic acid high (Refsum separate enzyme)"
+     ],
+     [
+      "Plasmalogen synthesis",
+      "Red cell plasmalogens low"
+     ],
+     [
+      "Catalase peroxide disposal",
+      "Oxidative injury contribution"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Zellweger syndrome** (peroxisome biogenesis, PEX genes, empty peroxisomal ghosts) is the devastating prototype: severe neonatal hypotonia (floppy, poor suck), high forehead, wide fontanelles, seizures, neuronal migration defects, hepatomegaly with jaundice, renal cortical cysts, patellar calcific stippling, cataracts and death usually within the first year. Plasma VLCFA and phytanic and pipecolic acids rise while plasmalogens fall, the metabolite signature biochemistry stems quote verbatim.",
+   "say": "Zellweger syndrome leaves empty peroxisomal ghosts with severe hypotonia, seizures and liver disease, usually fatal within the first year. Very long chain fatty acids rise while plasmalogens fall diagnostically.",
+   "vis": null
+  },
+  {
+   "tx": "Single peroxisomal enzyme and transporter defects narrow the picture: **X-linked adrenoleukodystrophy** (ABCD1 VLCFA transporter) demyelinates cerebral white matter in boys (behaviour, vision, gait collapse) or causes adrenomyeloneuropathy in adults, with primary adrenal insufficiency (bronze skin, crisis) in most males; Lorenzo oil historically, early stem cell or gene therapy for cerebral childhood disease, steroids for adrenal failure. Refsum (phytanoyl hydroxylase) adds retinitis and ataxia treatable by diet, from the oxidation module.",
+   "say": "X-linked adrenoleukodystrophy demyelinates cerebral white matter in boys with adrenal insufficiency in most males. Early stem cell or gene therapy addresses cerebral childhood disease before advance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Peroxisome break",
+     "Signature organs"
+    ],
+    "rows": [
+     [
+      "Zellweger",
+      "Biogenesis (PEX), all jobs lost",
+      "Brain, liver, kidney, eye, neonatal lethal"
+     ],
+     [
+      "X-linked adrenoleukodystrophy",
+      "ABCD1 VLCFA import",
+      "Brain white matter plus adrenal"
+     ],
+     [
+      "Refsum (adult)",
+      "Phytanic alpha oxidation",
+      "Retina, nerve, cerebellum; diet treats"
+     ],
+     [
+      "Rhizomelic chondrodysplasia",
+      "Plasmalogen synthesis (PEX7 axis)",
+      "Short limbs, cataracts, severe delay"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Therapeutic logic** divides cleanly: replace what blood can deliver (lysosomal enzymes by M6P uptake, transplant microglia for brain in selected diseases), restrict what diet supplies (phytanic acid in Refsum), replace what glands lose (steroids in adrenoleukodystrophy), and screen newborns where early therapy rewrites fate. Junctions and cytoskeleton architecture next complete the membrane module by connecting cells to each other and to matrix.",
+   "say": "Therapy replaces what blood can deliver, restricts what diet supplies, and replaces what glands lose. Junctions and cytoskeleton next complete the membrane module by connecting cells together.",
+   "vis": {
+    "kind": "flow",
+    "title": "Match therapy to compartment",
+    "nodes": [
+     {
+      "id": "lys",
+      "label": "Lysosome enzyme missing: infuse or transplant"
+     },
+     {
+      "id": "perox",
+      "label": "Peroxisome substrate dietary: restrict (Refsum)"
+     },
+     {
+      "id": "adr",
+      "label": "Adrenal destroyed: replace steroids, watch brain"
+     }
+    ],
+    "edges": [
+     [
+      "lys",
+      "perox"
+     ],
+     [
+      "perox",
+      "adr"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

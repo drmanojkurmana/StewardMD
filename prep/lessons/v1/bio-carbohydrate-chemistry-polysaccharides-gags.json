@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-carbohydrate-chemistry",
+ "subject": "biochemistry",
+ "title": "Polysaccharides and glycosaminoglycans",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Starch stores plant energy as **amylose** (long alpha-1,4 helices, iodine blue black inside the helix) plus amylopectin (alpha-1,6 branches every twenty four to thirty residues); glycogen is amylopectin logic intensified (branches every eight to twelve, one free reducing end anchored to glycogenin, thousands of non reducing ends for simultaneous enzyme attack). Salivary and pancreatic amylases cut internal alpha-1,4 only, leaving dextrins for brush border finishing.",
+   "say": "Glycogen intensifies amylopectin branching for simultaneous enzyme attack from thousands of ends. Amylases cut internal alpha bonds only, leaving dextrins for brush border finishing enzymes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Polymer", "Bonds and branching", "Job and iodine"],
+    "rows": [
+     ["Amylose", "Alpha-1,4, unbranched helix", "Plant storage, iodine blue black"],
+     ["Amylopectin", "Alpha-1,4 plus 1,6 every 24 to 30", "Plant storage, iodine red brown"],
+     ["Glycogen", "Alpha-1,4 plus 1,6 every 8 to 12", "Animal storage, rapid mobilisation"],
+     ["Cellulose", "Beta-1,4, straight ribbons H-bonded", "Plant structure, human fibre"]
+    ]
+   }
+  },
+  {
+   "tx": "**Cellulose** beta-1,4 ribbons hydrogen bond into microfibrils no human enzyme opens; gut bacteria ferment a fraction to short chain fatty acids (butyrate colonocyte fuel) while insoluble fibre adds stool bulk and soluble viscous fibres (beta-glucans, pectins) blunt glucose and cholesterol absorption enough for licensed health claims. Inulin (fructose beta-2,1) feeds bacteria and tests glomerular filtration as a freely filtered, neither secreted nor reabsorbed marker historically.",
+   "say": "Cellulose resists human enzymes while bacteria ferment a fraction to short chain fatty acids. Soluble fibres blunt glucose and cholesterol absorption, and inulin historically tests filtration ideally.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Insoluble fibre (cellulose, lignin)", "points": ["Stool bulk, transit faster", "Limited fermentation", "Constipation and diverticular protection"]},
+    "right": {"title": "Soluble fibre (beta-glucan, pectin)", "points": ["Viscous gels slow absorption", "Fermented to short chain acids", "Glucose and cholesterol blunted"]
+    }
+   }
+  },
+  {
+   "tx": "**Glycosaminoglycans** are long unbranched disaccharide repeats (amino sugar plus uronic acid, heavily sulfated except hyaluronan) carrying dense negative charge that hydrates and compresses resiliently: hyaluronic acid (huge, unsulfated, no protein core, lubricant in synovial fluid and vitreous, CD44 signalling), heparin and heparan sulfate (most sulfated, antithrombin activation), chondroitin sulfate (cartilage), dermatan, keratan (cornea clarity) each localise by sulfation pattern.",
+   "say": "Glycosaminoglycans carry dense negative charge that hydrates resiliently. Hyaluronic acid lubricates unsulfated, while heparin activates antithrombin as the most sulfated member of the family.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-carbohydrate-chemistry-gen1.webp",
+    "alt": "The blue stained section shows chondrocytes resting in lacunae within cartilage matrix rich in glycosaminoglycans.",
+    "caption": "Chondrocytes in lacunae within blue stained cartilage matrix, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Proteoglycans** bottle brush one core protein with dozens of GAG chains (aggrecan with over one hundred chondroitin and keratan chains on hyaluronan aggregates bearing cartilage load), while cell surface syndecans and basement membrane perlecan (heparan sulfate filtering and growth factor reservoirs) signal and sieve. Heparin cofactor pharmacology (unfractionated versus low molecular weight chain length for antithrombin versus Xa selectivity) is applied GAG chemistry prescribed daily.",
+   "say": "Proteoglycans bottle brush core proteins with dozens of GAG chains bearing cartilage load. Heparin chain length determines antithrombin versus Xa selectivity in daily prescribing pharmacology.",
+   "vis": {
+    "kind": "table",
+    "cols": ["GAG", "Sulfated?", "Signature place or job"],
+    "rows": [
+     ["Hyaluronic acid", "No (exception), no core protein", "Synovial lubricant, vitreous, migration"],
+     ["Heparin", "Most heavily", "Mast cells, anticoagulant drug"],
+     ["Chondroitin sulfate", "Yes", "Cartilage compression resistance"],
+     ["Dermatan sulfate", "Yes", "Skin, vessels, valves (Hurler/Hunter storage)"],
+     ["Keratan sulfate", "Yes", "Cornea transparency, cartilage"]
+    ]
+   }
+  },
+  {
+   "tx": "GAG degradation is sequential lysosomal exoglycosidase and sulfatase trimming from the non reducing end, so one missing step stores dermatan and heparan (Hurler, Hunter), heparan alone (Sanfilippo) or keratan (Morquio) exactly as the storage module detailed. **Heparan sulfate** also binds fibroblast growth factors as co-receptor and antithrombin through a specific pentasaccharide sequence (fondaparinux synthetic copy), proving sequence specific information inside apparently repetitive polymers.",
+   "say": "One missing trimming step stores exactly the GAG patterns detailed in storage diseases. Heparan sulfate binds growth factors and antithrombin through specific sequences inside repetitive polymers.",
+   "vis": null
+  },
+  {
+   "tx": "Dextran (bacterial alpha-1,6 glucose polymer) expands plasma volume colloidally and dextrin limits define amylase endpoints, while **cyclodextrins** solubilise drugs pharmaceutically, three applied polymers closing the carbohydrate arc. You now own the grammar (anomers, bonds, branches, charge) that glycolysis, glycogen disease, mucopolysaccharidosis and anticoagulant stems all reuse, which is why this chemistry precedes metabolism in every serious syllabus.",
+   "say": "Dextran expands plasma volume colloidally, closing the carbohydrate arc. You now own the grammar that glycolysis, glycogen disease, storage and anticoagulant stems all reuse across the syllabus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Carbohydrate grammar reused",
+    "nodes": [
+     {"id": "gram", "label": "Anomers, bonds, branches, charge"},
+     {"id": "met", "label": "Glycogen and glycolysis stems"},
+     {"id": "store", "label": "Storage and anticoagulant stems"}
+    ],
+    "edges": [["gram", "met"], ["gram", "store"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

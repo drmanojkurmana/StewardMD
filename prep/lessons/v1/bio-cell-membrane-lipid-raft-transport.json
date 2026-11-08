@@ -1,0 +1,77 @@
+{
+ "v": 1,
+ "module": "bio-cell-membrane",
+ "subject": "biochemistry",
+ "title": "Membrane lipids, rafts and solute transport",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **fluid mosaic model** pictures an amphipathic phospholipid bilayer whose lipids drift laterally within seconds, flip between leaflets only rarely with flippase help, and host cholesterol that buffers fluidity (restraining motion when hot, preventing packing when cold). Proteins float as integral spans (hydrophobic alpha helices), peripheral attachments, or GPI anchored surface proteins, whose loss in paroxysmal nocturnal haemoglobinuria leaves red cells defenceless to complement.",
+   "say": "The fluid mosaic bilayer drifts laterally while cholesterol buffers fluidity in both directions. GPI anchored proteins protect red cells from complement, and their loss causes paroxysmal nocturnal haemoglobinuria.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-cell-membrane-gen1.webp",
+    "alt": "A cutaway of the phospholipid bilayer shows tucked cholesterol, spanning integral proteins and surface proteins near cytoskeletal threads.",
+    "caption": "Fluid mosaic bilayer with cholesterol and seated membrane proteins, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Lipid rafts** are cholesterol and sphingolipid enriched microdomains that concentrate signalling receptors (GPI proteins, Src kinases, caveolin invaginations called caveolae) for efficient switching, exploited by cholera and tetanus toxin entry and HIV budding. Their ordered stiffness contrasts with surrounding fluid phospholipids, and detergent resistance historically defined them before microscopy confirmed dynamic nanoscale assembly in living membranes.",
+   "say": "Lipid rafts concentrate signalling receptors for efficient switching and are exploited by toxins for entry. Their ordered stiffness contrasts with surrounding fluid phospholipids in living membranes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Membrane feature", "Composition bias", "Functional payoff"],
+    "rows": [
+     ["Lipid rafts and caveolae", "Cholesterol, sphingolipids, caveolin", "Signal concentration, endocytosis"],
+     ["Fluid bulk bilayer", "Unsaturated phospholipids", "Flexibility, fusion competence"],
+     ["Glycocalyx", "Glycoprotein and glycolipid sugars", "Identity, ABO antigens, protection"]
+    ]
+   }
+  },
+  {
+   "tx": "Transport sorts by energy and saturability: **simple diffusion** (oxygen, carbon dioxide, steroids, uncharged drugs) follows gradients unsaturably, facilitated diffusion uses specific carriers (GLUT uniporters, aquaporin water channels whose failure or excess explains nephrogenic diabetes insipidus and cerebral oedema contexts) saturably without ATP, and active transport spends ATP directly or borrows ion gradients, always saturable and often electrogenic.",
+   "say": "Simple diffusion follows gradients unsaturably, while facilitated diffusion uses saturable carriers without ATP. Active transport spends ATP directly or borrows ion gradients, always saturable and often electrogenic.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-cell-membrane-fig1.webp",
+    "alt": "Classification of membrane solute transport mechanisms into passive and active categories with examples.",
+    "caption": "Mechanisms of solute transport across biological membranes.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Primary active pumps define internal chemistry: the **sodium potassium ATPase** (three sodium out, two potassium in, ouabain and digoxin binding outside) maintains gradients for excitability, volume and secondary transport, consuming roughly a quarter of resting ATP (far more in brain and kidney). Calcium ATPases (SERCA into sarcoplasmic reticulum, thapsigargin blocked experimentally), gastric H/K ATPase (proton pump inhibitor target) and ABC flippases complete the P-type and ABC families.",
+   "say": "The sodium potassium ATPase maintains gradients for excitability and volume, consuming roughly a quarter of resting ATP. Digoxin binds it outside, and related pumps handle calcium and gastric acid.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Primary active (ATP direct)", "points": ["Na/K ATPase (3 out, 2 in)", "SERCA calcium into stores", "Gastric H/K ATPase (PPI target)"]},
+    "right": {"title": "Secondary active (gradient borrowed)", "points": ["SGLT sodium glucose symport", "Sodium calcium exchanger", "Sodium hydrogen antiport"]
+    }
+   }
+  },
+  {
+   "tx": "Channels gate by voltage, ligands, stretch or phosphorylation and conduct millions of ions per second without saturation in the carrier sense; **cystic fibrosis** (CFTR chloride channel, an ABC protein acting as channel) and long QT potassium and sodium channelopathies prove their physiology in clinic. Uniporters, symporters and antiporters (exchangers) vocabulary must be exact, because stems swap them to test mechanism rather than memory of names.",
+   "say": "Channels conduct millions of ions per second gated by voltage or ligands. Cystic fibrosis and long QT channelopathies prove their physiology. Carrier vocabulary must be exact under examination swapping.",
+   "vis": null
+  },
+  {
+   "tx": "Endocytosis and transcytosis move cargo in bulk: clathrin coated pits (LDL receptors, transferrin iron), caveolae (transcytosis in endothelium, albumin ferrying), phagocytosis (professional eaters) and pinocytosis, with Rab GTPases and SNAREs addressing vesicles to lysosomes, recycling endosomes or opposite membranes. **Receptor mediated** uptake failure therefore starves cells of cholesterol (familial hypercholesterolaemia) or iron despite plasma plenty, previewing organelle lessons next.",
+   "say": "Bulk transport addresses vesicles through Rab and SNARE machinery to lysosomes or recycling. Receptor mediated failure starves cells of cholesterol or iron despite plasma plenty, previewing organelle lessons.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bulk traffic decisions",
+    "nodes": [
+     {"id": "pit", "label": "Clathrin pit or caveola captures cargo"},
+     {"id": "endo", "label": "Early endosome sorts (acidifies)"},
+     {"id": "rec", "label": "Recycle receptor to surface"},
+     {"id": "lys", "label": "Cargo to lysosome for digestion"}
+    ],
+    "edges": [["pit", "endo"], ["endo", "rec"], ["endo", "lys"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
