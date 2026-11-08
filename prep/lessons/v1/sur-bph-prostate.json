@@ -3,16 +3,16 @@
  "module": "sur-bph-prostate",
  "subject": "surgery",
  "title": "Prostate and bladder outlet: BPH drugs, TURP and PSA",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**BPH** (**IPSS** scores, **hesitancy weak stream** dribbling, **retention** catheterise, **DRE** smooth enlarged, **PSA** age density, **uroflow** 15 ml peak, **residual** 100 ml) with **drugs** (**tamsulosin** relaxes ejaculation, **finasteride** halves PSA 6 months shrinks, **tadalafil** daily, **combination** large) treats mild; **surgery** (retention stones infections renal) indicates. Streams score.",
-   "say": "Weak dribbling smooth big slow trickles is BPH: blockers relax reductase halves combos large. Scores flow.",
+   "tx": "**Benign prostatic enlargement** presents with hesitancy, a weak stream, and terminal dribbling, and the **IPSS score** grades symptom severity. Examination finds a smooth enlarged prostate, while uroflow and residual volume quantify obstruction objectively. **Tamsulosin** relaxes the outlet, finasteride shrinks the gland and halves PSA over six months, and combination treatment suits large glands. Retention, stones, recurrent infection, or renal impairment mandates surgery.",
+   "say": "Benign enlargement presents with hesitancy and weak stream. The symptom score grades severity for treatment decisions. Examination finds a smooth enlarged prostate on palpation. Flow studies and residual volume measure obstruction objectively. Drug treatment reduces outlet obstruction and makes the gland smaller over months. Retention or renal impairment mandates surgical referral urgently.",
    "vis": null
   },
   {
-   "tx": "**TURP** (**chips** resect verumontanum, **glycine** irrigant, **TUR syndrome** hyponatraemia confusion, **bipolar** saline safer, **laser** HoLEP enucleates, **catheter** 2 days, **stricture** meatal) with **minimally** (**UroLift** preserves ejaculation, **Rezum** steam, **iTIND** temporary, **PAE** embolises) spares sex; **open** (over 80 g) removes. Chips wash.",
-   "say": "Shaved chips glycine salts confuse is TURP: bipolars saline lasers enucleate lifts steam stents embolise. Glands debulk.",
+   "tx": "**TURP** resects prostatic chips through a resectoscope down to the verumontanum under continuous irrigation. Glycine irrigation risks the **TUR syndrome** of hyponatraemia and confusion, whereas bipolar resection in saline is safer. **HoLEP** enucleates the adenoma with a laser, and newer options include UroLift, steam treatment, and prostatic artery embolisation. Very large glands above eighty grams may still need open removal.",
+   "say": "The resectoscope resects prostatic chips through the prostatic urethra. Glycine irrigation risks hyponatraemia and confusion during surgery. Bipolar resection in saline prevents this dangerous complication. Laser enucleation removes the adenoma as complete lobes. Newer options preserve ejaculation in selected men afterward. Very large glands may still need open removal.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/sur-bph-prostate-fig1.webp",
@@ -22,13 +22,24 @@
    }
   },
   {
-   "tx": "**PSA** (**over 4** biopsies, **density** 0.15, **velocity** rises, **free** low cancers, **MRI** PI-RADS fusion, **TRUS** 12 cores sepsis, **active surveillance** low risk) with **prostatitis** (**acute** fever tender ciprofloxacin, **chronic** pelvic alpha blockers, **granulomatous** BCG, **abscess** drains) and **cancer** (Gleason MRI stage, **prostatectomy** nerves spare, **radiation** brachy) screens; **DRE** (nodules hard) feels. Fingers screen.",
-   "say": "Rising dense MRIs fuse cores survey is PSA pathway: fevers tender cipro pelvics alpha nodules hard feel. Grades stage.",
+   "tx": "A raised **PSA** needs interpretation through density, velocity, and the free fraction before biopsy decisions follow. **Multiparametric MRI** with PI RADS scoring guides fusion biopsy, while systematic cores risk sepsis after transrectal sampling. Low risk cancer may enter **active surveillance** instead of immediate radical treatment. Acute prostatitis presents with fever and a tender gland, whereas chronic disease causes persistent pelvic pain.",
+   "say": "Raised prostate specific antigen needs careful interpretation before biopsy. Density, velocity, and free fraction refine cancer risk estimates. Magnetic resonance imaging guides targeted fusion biopsy afterward. Low risk cancer may enter active surveillance safely. Acute prostatitis presents with fever and gland tenderness. Chronic disease causes persistent pelvic pain instead.",
    "vis": null
   },
   {
-   "tx": "**Retention** (**catheterise** urethral suprapubic, **trial without** alpha blocker, **Precipitants** anticholinergics, **upper tracts** ultrasound creatinine) with **incontinence** (stress post prostatectomy Kegels, **urge** antimuscarinics, **overflow** retention drains, **sling** mesh) and **UTI** (recurrent evaluate, **prophylaxis** nightly) manages; **haematuria** (visible cystoscopy, **CT urogram** upper) images. Bladders drain.",
-   "say": "Blocked catheters trials triggers uppers watch is retention: leaks Kegels urges calm overflows drain bloods scope. Pressures image.",
+   "tx": "The left panels show a **PI RADS lesion** in the peripheral zone that appears dark on the ADC map because diffusion is restricted. The right panel shows the **fusion biopsy** needle trajectory reaching that target under combined imaging guidance. Histopathology then confirms adenocarcinoma and **Gleason grading** stratifies risk for treatment planning. Targeted sampling therefore replaces blind systematic cores for suspicious lesions.",
+   "say": "The left panels show a peripheral zone lesion clearly. The lesion appears dark because diffusion is restricted there. The right panel shows targeted needle trajectory during biopsy. Combined imaging guides the needle toward the target accurately. Histopathology confirms cancer and grading stratifies risk afterward. Targeted sampling replaces blind cores for suspicious lesions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sur-bph-prostate-gen1.webp",
+    "alt": "Two prostate MRI panels showing PI RADS peripheral zone lesion with restricted diffusion plus biopsy trajectory diagram and histopathology Gleason scores",
+    "caption": "T2W and ADC prostate MRI with fusion biopsy diagram and Gleason grading. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Acute **retention** needs prompt catheter drainage by the urethral route, with a suprapubic route reserved for failure. A **trial without catheter** follows alpha blocker cover once precipitants such as anticholinergic drugs are withdrawn. Ultrasound and creatinine assessment protect the upper tracts during obstruction. Visible haematuria afterwards needs cystoscopy and upper tract imaging to exclude malignancy.",
+   "say": "Acute retention needs prompt catheter drainage without delay. The urethral route succeeds usually before suprapubic drainage follows. A trial without catheter follows alpha blocker cover afterward. The team withdraws precipitating anticholinergic drugs before trialling voiding. Ultrasound assessment protects the upper tracts during obstruction. Visible haematuria needs cystoscopy and imaging afterward.",
    "vis": {
     "kind": "table",
     "cols": [

@@ -3,21 +3,32 @@
  "module": "ped-growth",
  "subject": "paediatrics",
  "title": "Normal growth and short stature: charts to workup",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Charts** (**WHO** under-five standards curves, **CDC** older references, **Fenton** preterm postnatal, **velocity** centimetres yearly trends, **percentiles** crossing lines flags, **mid-parental** target ranges, **BMI** thin obese sorts, **head** micro macro tracks) with **measures** (**length** recumbent stadiometer, **weight** naked scales, **technique** thrice averages) plots; **velocity** (deceleration alarms) watches. Children grow.",
-   "say": "WHOs CDCs Fentons velocities is charts: percentiles cross mid-parentals aim BMIs sort heads track measures plot techniques average velocities watch decelerations flag. Curves climb.",
+   "tx": "Growth assessment starts with accurate measurement and the correct chart. Use **WHO standards** under five years, appropriate reference charts for older children, and Fenton charts for preterm infants, with corrected age after prematurity. Plot length or height, weight, BMI, and head circumference, then calculate **growth velocity** because crossing percentiles and deceleration matter more than one point. Compare height with mid parental target range and repeat measurements with correct technique to avoid error.",
+   "say": "Growth assessment needs accurate measurement and correct plotting. A single height value is less useful than the trend over time. Velocity shows whether the child grows at a normal rate. Mid parental height gives the expected family range. Deceleration across percentiles is a warning that the doctor needs to investigate further.",
    "vis": null
   },
   {
-   "tx": "**Variants** (**constitutional** delayed bone-age family, **familial** short parents normal velocity, **SGA** catch-up failure risks, **prematurity** corrected age plots, **puberty** early late tempo, **nutrition** iron zinc catch-ups, **psychosocial** deprivation reversible, **athlete** energy deficit delays) with **reassures** (**velocity** normal predicts, **bone-age** matches height-age) calms; **follow** (six-monthly reviews) schedules. Tempos vary.",
-   "say": "Constitutionals familials SGAs prematurities is variants: puberties tempo nutritions restore psychosocials stunt athletes drain reassures calm bone-ages match follows schedule reviews book. Growth hums.",
+   "tx": "Normal variants explain many short children with normal growth velocity. **Constitutional delay** shows delayed bone age and a family pattern of late puberty, while **familial short stature** shows short parents with bone age matching chronological age. Small for gestational age children usually catch up, psychosocial deprivation can reversibly stunt growth, and energy deficit can delay puberty in athletes. Reassurance is safe only when velocity is normal and examination shows no disease clues.",
+   "say": "Normal variants often explain short stature when growth velocity stays normal. Constitutional delay runs in families and bone age lags behind. Familial short stature reflects parental height with normal timing. The doctor reassures only after checking the growth trend carefully. Regular review confirms that velocity remains reassuring over time.",
    "vis": null
   },
   {
-   "tx": "**Disease** (**hypothyroid** constipation dry delayed, **coeliac** anaemia TTG wheat, **Turner** webbed shield short girls, **SHOX** Madelung forearms, **GH** deficiency chubby hypoglycaemia, **Cushing** obese striae slow, **renal** acidosis CKD stunts, **syndromic** dysmorphic workups) with **labs** (**TSH** thyroxine first, **coeliac** screens, **karyotype** girls short) hunts; **bone-age** (delayed pathologic) reads. Statures stall.",
-   "say": "Hypothyroids coeliacs Turners SHOXs is disease: GHs cherub Cushings moon renals acid syndromics mark labs hunt bone-ages lag karyotypes count. Causes hide.",
+   "tx": "This hand and wrist radiograph labels **delayed ossification** of the carpal bones and an open growth plate in a child aged seven years and six months. Comparing bone age with chronological age and height age separates constitutional delay from pathological disease. A delayed **bone age** with normal velocity supports reassurance and follow up, while delayed bone age with systemic features needs thyroid, coeliac, and other targeted testing before growth hormone is considered.",
+   "say": "This radiograph is an example of carpal ossification that lags behind chronological age. The growth plate remains open and bone age can be estimated from ossification. Delayed bone age supports constitutional delay when velocity stays normal. Systemic symptoms change the interpretation and need further testing. The image therefore links a simple radiograph to the whole short stature workup.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-growth-gen1.webp",
+    "alt": "Radiograph of left hand and wrist labeled delayed ossification and growth plate with chronological age text.",
+    "caption": "Hand wrist radiograph showing delayed carpal ossification and physis. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Pathological short stature is suggested by poor velocity, dysmorphic features, or systemic symptoms. **Hypothyroidism** causes constipation, dry skin, and delayed bone age, coeliac disease causes anaemia and malabsorption, and **Turner syndrome** causes short stature in girls with webbed neck and shield chest. Growth hormone deficiency, Cushing syndrome, chronic kidney disease, and SHOX defects also stunt growth. Thyroid tests, coeliac screening, karyotype in short girls, and bone age begin the workup.",
+   "say": "Pathological causes become likely when growth velocity falls. Hypothyroidism causes slow growth and delayed bone age in children. Coeliac disease impairs nutrition and causes anaemia. Turner syndrome must be considered in every short girl. Bone age and targeted blood tests help separate these causes efficiently.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/ped-growth-fig1.webp",
@@ -27,8 +38,8 @@
    }
   },
   {
-   "tx": "**Treat** (**GH** stimulation IGF-1 trials, **thyroxine** catch-up restores, **gluten-free** coeliac rebounds, **Turner** growth oestrogen plans, **nutrition** zinc iron repletes, **steroid-sparing** asthma heights, **counsel** expectations bullying, **monitor** velocity IGF safety) with **traps** (**Cushing** steroids stunt, **precocious** bone-age fuses, **IGF** glucose cancers) closes; **refer** (endocrine thresholds) sends. Heights climb.",
-   "say": "GHs thyroxines glutens Turners is treat: nutritions replete spares save counsels support monitors watch Cushings stunt precocious fuse IGFs risk refers send thresholds cross. Therapies lift.",
+   "tx": "Treatment targets the cause and monitors safety and expectations. **Growth hormone** is used for proven deficiency and selected indications with IGF monitoring, **thyroxine** restores catch up growth in hypothyroidism, and a gluten free diet allows rebound in coeliac disease. Turner syndrome needs growth and puberty planning, nutrition corrects iron and zinc deficiency, and steroid sparing treatment protects height in chronic disease. Exogenous steroids stunt growth, precocious puberty advances bone age, and endocrine referral is needed below referral thresholds.",
+   "say": "Treatment works when it targets the underlying cause. Thyroxine can restore growth in a child who has hypothyroidism. A gluten free diet allows catch up growth in coeliac disease. Growth hormone helps selected children under specialist supervision. The doctor keeps monitoring velocity and counsels the family about realistic expectations.",
    "vis": null
   }
  ],
