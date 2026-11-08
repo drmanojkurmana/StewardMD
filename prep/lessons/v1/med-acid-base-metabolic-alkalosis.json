@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-acid-base",
+ "subject": "medicine",
+ "title": "Metabolic Alkalosis and Respiratory Disorders",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "An elevation in arterial blood pH above seven point four five with a primary increase in serum bicarbonate defines **metabolic alkalosis**, a common inpatient disorder. Generating the alkalosis requires hydrogen ion loss through the gastrointestinal tract or kidneys, or excessive exogenous alkali intake. Sustaining the alkalosis requires impaired renal bicarbonate excretion, mediated by volume depletion, chloride deficiency, hypokalaemia, or mineralocorticoid excess. Compensatory hypoventilation elevates arterial carbon dioxide tension to blunt systemic alkalaemia.",
+   "say": "An elevation in arterial pH above seven point four five with a primary increase in bicarbonate defines metabolic alkalosis. Generating the alkalosis requires hydrogen ion loss through the gastrointestinal tract or kidneys, or excessive alkali administration. Sustaining the alkalosis requires impaired renal bicarbonate excretion, driven by volume depletion, hypokalaemia, or mineralocorticoids. Compensatory hypoventilation raises arterial carbon dioxide tension by zero point seven millimetres of mercury per milliequivalent bicarbonate rise.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gen",
+      "label": "Generation: Gastric H+ loss, diuretics, or alkali ingestion"
+     },
+     {
+      "id": "maint",
+      "label": "Maintenance: Volume contraction, low Cl-, or hypokalaemia"
+     },
+     {
+      "id": "comp",
+      "label": "Compensation: Alveolar hypoventilation raises PaCO2"
+     }
+    ],
+    "edges": [
+     [
+      "gen",
+      "maint"
+     ],
+     [
+      "maint",
+      "comp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measuring urinary chloride concentrations cleanly bifurcates metabolic alkalosis into distinct therapeutic categories based on extracellular volume status. Presenting with low urinary chloride under twenty milliequivalents per litre, **saline-responsive alkalosis** arises from vomiting, nasogastric suction, or prior diuretic therapy. Gastric losses deplete hydrochloric acid and extracellular fluid volume, stimulating aldosterone secretion and avid proximal sodium bicarbonate reabsorption. Administering isotonic intravenous saline replenishes chloride and volume, turning off secondary hyperaldosteronism and enabling the kidney to excrete excess bicarbonate rapidly.",
+   "say": "Measuring urinary chloride cleanly bifurcates metabolic alkalosis into distinct therapeutic categories based on volume status. Presenting with urinary chloride under twenty milliequivalents per litre, saline-responsive alkalosis arises from vomiting, nasogastric suction, or prior diuretics. Gastric losses deplete hydrochloric acid and extracellular fluid, stimulating secondary hyperaldosteronism. Administering isotonic normal saline replenishes chloride and volume, allowing the kidney to excrete excess bicarbonate.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-gastric_outlet_obstruction.webp",
+    "alt": "Clinical signs and metabolic alkalosis pathophysiology resulting from gastric outlet obstruction and vomiting.",
+    "caption": "Gastric outlet obstruction inducing profound hypochloraemic hypokalaemic metabolic alkalosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In contrast to volume-depleted states, autonomous mineralocorticoid production sustains alkalosis despite extracellular volume expansion. Manifesting with urinary chloride exceeding twenty milliequivalents per litre, **saline-resistant alkalosis** occurs in primary aldosteronism, Cushing syndrome, renin-secreting tumours, and Liddle syndrome. Excess mineralocorticoid action stimulates cortical collecting duct hydrogen and potassium secretion via apical epithelial sodium channels. Because these patients are already hypervolaemic and hypertension is prominent, infusing isotonic saline fails to correct the alkalosis, requiring aldosterone receptor antagonists, potassium-sparing diuretics, or definitive surgical excision.",
+   "say": "In contrast to volume-depleted states, autonomous mineralocorticoid production sustains alkalosis despite extracellular volume expansion. Manifesting with urinary chloride exceeding twenty milliequivalents per litre, saline-resistant alkalosis occurs in primary aldosteronism, Cushing syndrome, and Liddle syndrome. Excess mineralocorticoid action stimulates collecting duct proton and potassium secretion. Because these patients are hypervolaemic and hypertensive, saline infusion fails to correct the alkalosis, requiring specific hormonal blockade.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Saline-Responsive (Urine Cl < 20)",
+     "points": [
+      "Vomiting, nasogastric suction, remote diuretics",
+      "Extracellular fluid volume contraction",
+      "Low or normal blood pressure",
+      "Corrects fully with 0.9% normal saline infusion"
+     ]
+    },
+    "right": {
+     "title": "Saline-Resistant (Urine Cl > 20)",
+     "points": [
+      "Primary aldosteronism, Cushing, Liddle syndrome",
+      "Extracellular fluid volume expansion",
+      "Systemic arterial hypertension common",
+      "Refractory to saline; requires spironolactone or surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Alveolar hypoventilation producing carbon dioxide retention and acidaemia defines the core pathophysiology of ventilatory failure. Developing acute or chronic **respiratory acidosis** occurs when alveolar ventilation fails to excrete metabolically produced carbon dioxide, driving arterial carbon dioxide above forty-five millimetres of mercury. Common causes include chronic obstructive pulmonary disease, narcotic overdose, and neuromuscular weakness. Renal compensation generates new bicarbonate over three to five days, raising plasma bicarbonate to buffer systemic acidaemia.",
+   "say": "Alveolar hypoventilation producing carbon dioxide retention and acidaemia defines the pathophysiology of pulmonary failure. Developing respiratory acidosis occurs when minute ventilation fails to clear metabolically produced carbon dioxide, driving arterial carbon dioxide above forty-five millimetres of mercury. Common causes include chronic obstructive pulmonary disease, narcotic overdose, and neuromuscular weakness. Renal compensation generates new bicarbonate over three to five days to buffer systemic acidaemia.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-abg-steps.svg",
+    "alt": "Diagnostic decision algorithm for arterial blood gas interpretation.",
+    "caption": "Stepwise algorithmic assessment of primary respiratory and metabolic acid-base derangements. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Excessive alveolar ventilation driving carbon dioxide tension below thirty-five millimetres of mercury produces systemic alkalosis. Encountering acute **respiratory alkalosis** triggers dizziness, perioral paresthesias, carpopedal spasm, and confusion due to cerebral vasoconstriction and decreased ionized calcium. Primary hyperventilation stems from severe anxiety, acute pulmonary embolism, pneumonia, early salicylate intoxication, high altitude hypoxia, and sepsis. In acute respiratory alkalosis, cellular buffering drops plasma bicarbonate by two milliequivalents per litre per ten millimetre reduction in carbon dioxide, while chronic renal compensation decreases bicarbonate by four to five milliequivalents.",
+   "say": "Excessive alveolar ventilation driving carbon dioxide tension below thirty-five millimetres of mercury produces systemic alkalosis. Encountering acute respiratory alkalosis triggers dizziness, perioral paresthesias, carpopedal spasm, and confusion due to cerebral vasoconstriction and decreased ionized calcium. Hyperventilation stems from anxiety, pulmonary embolism, pneumonia, early salicylate intoxication, and sepsis. Acute cellular buffering and chronic renal compensation sequentially lower serum bicarbonate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Primary Disturbance",
+     "Expected Compensation",
+     "Rate of Compensation"
+    ],
+    "rows": [
+     [
+      "Acute Respiratory Acidosis",
+      "PaCO2 > 45 mmHg",
+      "HCO3- rises 1 mEq/L per 10 mmHg PaCO2",
+      "Minutes (cellular buffering)"
+     ],
+     [
+      "Chronic Respiratory Acidosis",
+      "PaCO2 > 45 mmHg",
+      "HCO3- rises 3.5 mEq/L per 10 mmHg PaCO2",
+      "3 to 5 days (renal H+ excretion)"
+     ],
+     [
+      "Acute Respiratory Alkalosis",
+      "PaCO2 < 35 mmHg",
+      "HCO3- falls 2 mEq/L per 10 mmHg PaCO2",
+      "Minutes (cellular exchange)"
+     ],
+     [
+      "Chronic Respiratory Alkalosis",
+      "PaCO2 < 35 mmHg",
+      "HCO3- falls 4 to 5 mEq/L per 10 mmHg PaCO2",
+      "2 to 3 days (renal HCO3- wasting)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recognizing mixed acid-base derangements requires calculating expected compensatory boundaries for any primary disturbance. When arterial blood gases reveal abnormal carbon dioxide and bicarbonate values, validating the degree of **respiratory compensation** identifies occult secondary disorders. If observed carbon dioxide in metabolic alkalosis exceeds expected compensation, superimposed respiratory acidosis from central hypoventilation is present. Conversely, if carbon dioxide falls lower than predicted, a concomitant primary respiratory alkalosis coexists, as seen in septic patients developing severe vomiting or diuretic-induced alkalosis.",
+   "say": "Recognizing mixed acid-base derangements requires calculating expected compensatory boundaries for any primary disturbance. When arterial blood gases reveal abnormal values, validating the degree of respiratory compensation identifies occult secondary disorders. If observed carbon dioxide in metabolic alkalosis exceeds expected compensation, superimposed respiratory acidosis is present. Conversely, if carbon dioxide falls lower than predicted, concomitant respiratory alkalosis coexists.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "abg",
+      "label": "Arterial Blood Gas: Identify primary pH and HCO3- change"
+     },
+     {
+      "id": "calc",
+      "label": "Calculate expected PaCO2 using compensation formulas"
+     },
+     {
+      "id": "match",
+      "label": "PaCO2 matches: Pure disorder | PaCO2 diverges: Mixed disorder"
+     }
+    ],
+    "edges": [
+     [
+      "abg",
+      "calc"
+     ],
+     [
+      "calc",
+      "match"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Potassium homeostasis and systemic acid-base equilibrium remain inextricably linked across tubular and systemic fluid compartments. Developing hypokalaemia accelerates renal bicarbonate generation because intracellular proton entry forces hydrogen ion secretion across the **collecting duct**, worsening systemic alkalosis. Furthermore, low potassium stimulates proximal renal ammoniagenesis and tubular proton secretion via hydrogen-potassium ATPase pumps. Correcting severe metabolic alkalosis therefore mandates aggressive intravenous or oral potassium chloride replacement alongside volume expansion, restoring intracellular potassium and enabling renal bicarbonate excretion.",
+   "say": "Potassium homeostasis and systemic acid-base equilibrium remain inextricably linked across tubular and systemic compartments. Developing hypokalaemia accelerates renal bicarbonate generation because intracellular proton shifts promote hydrogen ion secretion across the collecting duct, worsening alkalosis. Low potassium also stimulates proximal ammoniagenesis and tubular proton secretion. Correcting metabolic alkalosis therefore mandates aggressive potassium chloride replacement alongside volume repletion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypokalaemia Driving Alkalosis",
+     "points": [
+      "K+ shifts out of cells in exchange for H+",
+      "Intracellular acidosis triggers renal H+ secretion",
+      "Increased apical H+/K+-ATPase activity",
+      "Accelerates ammoniagenesis and HCO3- generation"
+     ]
+    },
+    "right": {
+     "title": "Potassium Chloride Repletion",
+     "points": [
+      "Restores intracellular K+ stores and neutralizes cell pH",
+      "Decreases collecting duct proton excretion",
+      "Supplies necessary chloride anion to kidney",
+      "Enables urinary bicarbonate wasting to normalize pH"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical management of acute ventilatory failure demands rapid identification of the root respiratory mechanism. Acute respiratory acidosis with severe hypoxaemia necessitates immediate airway protection and **mechanical ventilation** or non-invasive positive pressure support. In chronic compensated hypercapnia, clinicians must exercise caution during supplemental oxygen administration, titrating target saturations between eighty-eight and ninety-two percent to prevent blunting hypoxic respiratory drive and worsening hypercapnic encephalopathy. In contrast, managing acute respiratory alkalosis focuses on reassuring the patient, providing analgesia, and correcting underlying sepsis or pulmonary embolism.",
+   "say": "Clinical management of acute ventilatory failure demands rapid identification of the root respiratory mechanism. Acute respiratory acidosis with severe hypoxaemia necessitates immediate airway protection and mechanical ventilation or non-invasive ventilatory support. In chronic compensated hypercapnia, oxygen must be titrated between eighty-eight and ninety-two percent to prevent worsening hypercapnia. In contrast, managing acute respiratory alkalosis focuses on analgesia, reassurance, and treating underlying pulmonary embolism or sepsis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Urgent Intervention",
+     "Avoid / Precaution"
+    ],
+    "rows": [
+     [
+      "Acute Respiratory Acidosis",
+      "Non-invasive ventilation or intubation",
+      "Sedatives without airway control"
+     ],
+     [
+      "Chronic Hypercapnic Acidosis",
+      "Target SpO2 88% to 92% with BiPAP",
+      "Uncontrolled high-flow oxygen"
+     ],
+     [
+      "Acute Respiratory Alkalosis",
+      "Treat underlying cause (PE, sepsis, pain)",
+      "Paper bag breathing in hypoxic patients"
+     ],
+     [
+      "Severe Saline-Responsive Alkalosis",
+      "Intravenous 0.9% normal saline plus KCl",
+      "Administering pure dextrose solutions"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
