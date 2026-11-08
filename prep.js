@@ -1158,10 +1158,14 @@
       var bankU = unionItems(banks), items = markLevels(unionItems([bankU].concat(ovs)));
       if (!items.length && bankErr) throw bankErr;
       items.forEach(function (it) { it._s = sid; it._m = g.id; });
-      flagNoImage(items);
-      if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
-      writeBackXCounts(g, bankU, unionItems(ovs));
-      return items;
+      // Fixes are stored per member module and can add the image a question needs, so apply them before flagging.
+      return Promise.all((g.members || []).map(function (m) { return fixesFor(m[1]); })).then(function (fxs) {
+        fxs.forEach(function (fx) { items.forEach(function (it) { if (fx.q && fx.q[it.id]) applyFix(it, fx.q[it.id]); }); });
+        flagNoImage(items);
+        if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+        writeBackXCounts(g, bankU, unionItems(ovs));
+        return items;
+      });
     });
   }
   // The exact union counts of a group just read, written to every loaded member subject's row: bank items and
