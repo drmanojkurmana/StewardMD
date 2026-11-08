@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-fatty-acid-oxidation",
+ "subject": "biochemistry",
+ "title": "Oxidation defects, odd chains and Refsum",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**MCAD deficiency** (medium chain acyl-CoA dehydrogenase) is the commonest oxidation defect: fasting or illness in infancy precipitates hypoketotic hypoglycaemia, lethargy, seizures and sometimes sudden death, because medium chains stall mid spiral. Newborn tandem mass spectrometry flags raised C8 (octanoyl) carnitine presymptomatically, and strict fasting avoidance with emergency glucose regimens has transformed prognosis where screening runs.",
+   "say": "MCAD deficiency precipitates hypoketotic hypoglycaemia in fasting infants, flagged by raised C8 carnitine on newborn screening. Strict fasting avoidance with emergency glucose regimens has transformed prognosis where screening runs.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Defect", "Flag on profiling", "Classic presentation"],
+    "rows": [
+     ["MCAD", "C8 acylcarnitine high", "Fasting hypoketotic coma in infancy"],
+     ["VLCAD", "C14:1 high", "Cardiomyopathy, exercise collapse"],
+     ["LCHAD", "Hydroxy long chain species", "Liver disease, maternal HELLP link"],
+     ["CPT-II (adult)", "Long chain species", "Exercise myoglobinuria, normal between attacks"]
+    ]
+   }
+  },
+  {
+   "tx": "Chain length sorts phenotypes predictably: very long and long chain defects (VLCAD, LCHAD, CPT and translocase failures) injure heart, liver and exercising muscle, while medium and short chain defects present mainly with fasting liver brain crises. Maternal acute fatty liver or **HELLP** association with fetal LCHAD deficiency is a uniquely testable obstetric link, because placental fat handling fails alongside fetal oxidation.",
+   "say": "Very long and long chain defects injure heart, liver and muscle, while medium chain defects present with fasting crises. Fetal LCHAD deficiency associates with maternal acute fatty liver and HELLP, a testable obstetric link.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Long chain defects", "points": ["Cardiomyopathy common", "Exercise intolerance, rhabdomyolysis", "Retinopathy in LCHAD"]},
+    "right": {"title": "Medium chain (MCAD)", "points": ["Heart usually spared", "Fasting coma dominates", "Screening prevents crises"]
+    }
+   }
+  },
+  {
+   "tx": "Odd chain fatty acids end as three carbon **propionyl-CoA**, carboxylated by biotin dependent propionyl-CoA carboxylase to methylmalonyl-CoA, then rearranged by vitamin B12 dependent methylmalonyl-CoA mutase into succinyl-CoA for the TCA cycle. Blocks cause propionic or methylmalonic acidaemias: neonatal vomiting, ketoacidosis, hyperammonaemia and failure to thrive, treated with protein restriction, carnitine and B12 responsive forms identified early.",
+   "say": "Odd chains end as propionyl-CoA, needing biotin carboxylase then B12 mutase to reach succinyl-CoA. Blocks cause acidaemias with vomiting, ketoacidosis and hyperammonaemia, treated with protein restriction and carnitine.",
+   "vis": {
+    "kind": "flow",
+    "title": "Odd chain exit ramp",
+    "nodes": [
+     {"id": "odd", "label": "Odd chain (3C remainder)"},
+     {"id": "pro", "label": "Propionyl-CoA (biotin step)"},
+     {"id": "met", "label": "Methylmalonyl-CoA (B12 step)"},
+     {"id": "suc", "label": "Succinyl-CoA to TCA and glucose"}
+    ],
+    "edges": [["odd", "pro"], ["pro", "met"], ["met", "suc"]]
+   }
+  },
+  {
+   "tx": "Distinguish B12 deficiency from isolated mutase failure by pairing metabolites: B12 failure raises both **methylmalonate** and homocysteine (both B12 reactions starve), while pure mutase apoenzyme failure raises methylmalonate alone. Hydroxocobalamin responsive cobalamin processing defects hide between them. This two metabolite logic recurs in the vitamin module and rewards learning once, properly.",
+   "say": "B12 failure raises both methylmalonate and homocysteine, while pure mutase failure raises methylmalonate alone. Hydroxocobalamin responsive processing defects hide between them. This two metabolite logic rewards learning once, properly.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "B12 deficiency (both reactions)", "points": ["Methylmalonate high", "Homocysteine high", "Megaloblastic anaemia often"]},
+    "right": {"title": "Isolated mutase defect", "points": ["Methylmalonate high", "Homocysteine normal", "Neonatal acidosis dominates"]
+    }
+   }
+  },
+  {
+   "tx": "Branched phytanic acid from dairy and ruminant fat cannot beta oxidise until **alpha oxidation** in peroxisomes removes one carbon; its failure causes adult Refsum disease with retinitis pigmentosa (night blindness first), anosmia, peripheral neuropathy, ataxia, ichthyosis and raised CSF protein. Dietary phytanic restriction and plasma exchange for crises exploit the dietary origin, unlike most oxidation defects where fat is endogenous.",
+   "say": "Phytanic acid needs alpha oxidation in peroxisomes first. Its failure causes Refsum disease with retinitis pigmentosa, anosmia, neuropathy and ataxia. Dietary restriction exploits the dietary origin of the fat.",
+   "vis": null
+  },
+  {
+   "tx": "When beta oxidation blocks, microsomal **omega oxidation** in endoplasmic reticulum oxidises the far end instead, spilling dicarboxylic acids (adipic, suberic) into urine, a diagnostic overflow signature during crises. Jamaican vomiting sickness (hypoglycin in unripe ackee fruit) pharmacologically mimics MCAD blockade and caused fatal childhood hypoglycaemia outbreaks historically. Together these teach one principle: stalled fat burning always advertises itself in urine or acylcarnitine patterns if you look.",
+   "say": "Omega oxidation spills dicarboxylic acids into urine when beta oxidation blocks. Hypoglycin in unripe ackee mimics MCAD blockade. Stalled fat burning advertises itself in urine or acylcarnitine patterns if you look.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Overflow clue", "Points to"],
+    "rows": [
+     ["Dicarboxylic aciduria (no ketones)", "Beta oxidation block, omega detour"],
+     ["C8 carnitine high", "MCAD deficiency"],
+     ["High very long chain fatty acids", "Peroxisomal failure (Zellweger, X-ALD)"],
+     ["High phytanic acid", "Refsum alpha oxidation failure"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

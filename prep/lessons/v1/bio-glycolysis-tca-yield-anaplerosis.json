@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Yield, shuttles and anaplerosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Modern P/O values credit each mitochondrial **NADH** with about 2.5 ATP and each FADH2 with about 1.5 ATP, because proton pumping and transport costs are now counted honestly. Older teaching used integers three and two, giving the familiar 36 or 38 ATP per glucose. Expect either convention in examinations, but state which shuttle assumption sits behind your total.",
+   "say": "Modern values credit each mitochondrial NADH with about two and a half ATP and each FADH2 with about one and a half ATP. Older teaching used three and two, giving thirty six or thirty eight ATP per glucose. You should state which shuttle assumption sits behind your total.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Carrier", "Modern ATP", "Older ATP"],
+    "rows": [
+     ["Mitochondrial NADH", "2.5", "3"],
+     ["FADH2 (complex II entry)", "1.5", "2"],
+     ["GTP from TCA", "1", "1"]
+    ]
+   }
+  },
+  {
+   "tx": "Cytosolic NADH cannot cross the inner membrane, so two **shuttle systems** smuggle its electrons inward at different prices. The glycerol phosphate shuttle hands them to FAD in muscle and brain, yielding 1.5 ATP each, while the malate-aspartate shuttle preserves them as matrix NADH in liver and heart, yielding 2.5 ATP each. Hence one glucose totals 30 or 32 ATP by modern counting.",
+   "say": "Cytosolic NADH cannot cross the inner membrane, so two shuttles smuggle its electrons inward at different prices. The glycerol phosphate shuttle yields one and a half ATP each, while the malate aspartate shuttle yields two and a half each. One glucose therefore totals thirty or thirty two ATP by modern counting.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Glycerol phosphate shuttle (30 total)", "points": ["Muscle and brain favour speed", "Electrons enter as FADH2", "Cytosolic NADH worth 1.5 ATP"]},
+    "right": {"title": "Malate-aspartate shuttle (32 total)", "points": ["Liver and heart favour yield", "Electrons enter as NADH", "Cytosolic NADH worth 2.5 ATP"]
+    }
+   }
+  },
+  {
+   "tx": "Tallying one glucose completely gives four ATP at substrate level net two after investment, plus ten NADH and two FADH2 across cytosol, PDH and TCA. Per **acetyl-CoA** alone the cycle plus its PDH entry is worth about ten ATP by modern values. Anaerobic tissues forfeit all carrier yield and keep only the net two ATP, explaining their voracious glucose appetite.",
+   "say": "One glucose gives four ATP at substrate level, net two after investment, plus ten NADH and two FADH2 across cytosol, dehydrogenase and cycle. Per acetyl-CoA the yield is about ten ATP. Anaerobic tissues keep only the net two ATP, explaining their voracious glucose appetite.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Stage (per glucose)", "ATP or carriers"],
+    "rows": [
+     ["Glycolysis substrate level", "Net 2 ATP"],
+     ["Cytosolic NADH (2)", "3 or 5 ATP by shuttle"],
+     ["PDH NADH (2)", "5 ATP"],
+     ["TCA (2 turns)", "20 ATP (includes 2 GTP)"]
+    ]
+   }
+  },
+  {
+   "tx": "Because intermediates are constantly withdrawn for synthesis, **anaplerosis** must refill the wheel or it slows for lack of oxaloacetate. The main refill carboxylates pyruvate directly to oxaloacetate through pyruvate carboxylase, which needs biotin and is switched on by acetyl-CoA. Fasting raises acetyl-CoA from fat burning, so the signal automatically prepares the cycle to receive gluconeogenesis traffic.",
+   "say": "Intermediates are constantly withdrawn, so anaplerosis must refill the wheel. Pyruvate carboxylase carboxylates pyruvate to oxaloacetate, needs biotin, and is switched on by acetyl-CoA. Fasting raises acetyl-CoA from fat, preparing the cycle for glucose production traffic.",
+   "vis": {
+    "kind": "flow",
+    "title": "Main anaplerotic refills",
+    "nodes": [
+     {"id": "pyr", "label": "Pyruvate"},
+     {"id": "oaa", "label": "Oxaloacetate refilled"},
+     {"id": "glu", "label": "Glutamate to alpha-KG"},
+     {"id": "pro", "label": "Propionyl-CoA to succinyl-CoA"}
+    ],
+    "edges": [["pyr", "oaa"], ["glu", "oaa"], ["pro", "oaa"]]
+   }
+  },
+  {
+   "tx": "Other refills enter at different points: glutamate deaminates to alpha-ketoglutarate, aspartate transaminates to oxaloacetate, and odd chain fat fragments reach succinyl-CoA through **propionyl-CoA** and methylmalonyl-CoA. That last route needs biotin then vitamin B12 and is the sole reason any fat carbon can net become glucose. Even chain acetyl-CoA still cannot, because its carbons leave as carbon dioxide.",
+   "say": "Glutamate refills at alpha-ketoglutarate, aspartate at oxaloacetate, and odd chain fragments at succinyl-CoA through propionyl-CoA. That route needs biotin then vitamin B12 and is the sole reason any fat carbon can become glucose. Even chain acetyl-CoA still cannot.",
+   "vis": null
+  },
+  {
+   "tx": "Exports in the opposite direction are called cataplerosis, and two dominate examination answers. **Citrate** leaves mitochondria in the fed state to donate acetyl groups for fatty acid and cholesterol synthesis, while malate leaves during gluconeogenesis to deliver reducing power to the cytosol. Balanced anaplerosis and cataplerosis keep the oxaloacetate pool constant while traffic flows both ways across the membrane.",
+   "say": "Exports are called cataplerosis. Citrate leaves in the fed state to donate acetyl groups for fat synthesis, while malate leaves during glucose production to deliver reducing power. Balanced flows keep the oxaloacetate pool constant while traffic moves both ways.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Anaplerosis (refill)", "points": ["Pyruvate to oxaloacetate", "Glutamate to alpha-KG", "Propionate to succinyl-CoA"]},
+    "right": {"title": "Cataplerosis (export)", "points": ["Citrate for fat synthesis", "Malate for gluconeogenesis", "Succinyl-CoA for heme"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
