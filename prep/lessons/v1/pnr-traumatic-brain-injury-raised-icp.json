@@ -69,31 +69,10 @@
       "say": "In pediatric neurotrauma, twenty millimeters of mercury serves as the critical intervention line. Sustained elevations above this level trigger stepwise escalation of therapies.",
       "tx": "Enforce the **Intracranial pressure threshold for intervention** in severe pediatric traumatic brain injury (GCS <= 8). The critical intracranial pressure intervention threshold is established at 20 mmHg. Sustained elevations of ICP > 20 mmHg for longer than 5 minutes compromise capillary microcirculation and accelerate secondary brain ischemia, mandating immediate step-up through tiered intracranial hypertension protocols under continuous invasive ICP catheter monitoring (Tier-1 measures).",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "monitor",
-            "label": "Severe TBI (GCS <= 8): Invasive ICP monitoring"
-          },
-          {
-            "id": "normal",
-            "label": "ICP <= 20 mmHg: Continue baseline neuroprotective measures"
-          },
-          {
-            "id": "spike",
-            "label": "Sustained ICP > 20 mmHg for > 5 min: Immediate tiered therapy escalation"
-          }
-        ],
-        "edges": [
-          [
-            "monitor",
-            "normal"
-          ],
-          [
-            "normal",
-            "spike"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/traumatic-brain-injury-fig1.webp",
+        "alt": "Epidural and subdural blood with shift, contusion and herniation.",
+        "caption": "Traumatic brain injury: haematomas, shift and herniation. Credit: StewardMD."
       }
     },
     {
@@ -134,23 +113,10 @@
       "say": "When intracranial pressure spikes despite first-line measures, hyperosmolar therapy pulls water from brain parenchyma. Three percent hypertonic saline is preferred over mannitol.",
       "tx": "Administer **Hyperosmolar therapy (3% NaCl vs mannitol)** for acute intracranial hypertension spikes. Hypertonic 3% sodium chloride administered as a bolus of 2 to 5 mL/kg over 10 to 20 minutes (or continuous infusion of 0.1 to 1 mL/kg/hr) creates an osmolar gradient that draws water out of edematous astrocytic footplates, targeting serum sodium between 150 and 155 mEq/L and serum osmolarity under 360 mOsm/L. Hypertonic saline is superior to mannitol in trauma because it preserves circulating blood volume and maintains mean arterial pressure (Prophylactic hyperventilation).",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "3% Hypertonic Saline (Preferred)",
-          "points": [
-            "Bolus: 2 to 5 mL/kg over 10-20 minutes",
-            "Maintains intravascular volume & blood pressure",
-            "Target serum Na: 150-155 mEq/L; Osm < 360 mOsm/L"
-          ]
-        },
-        "right": {
-          "title": "Mannitol (Reserve)",
-          "points": [
-            "Dose: 0.25 to 1.0 g/kg IV over 20-30 minutes",
-            "Potent osmotic diuresis; risk of hypovolemia & hypotension",
-            "Contraindicated in hypotensive, unstable pediatric trauma"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/traumatic-brain-injury-hematomas-and-icp-fig1.webp",
+        "alt": "Epidural and subdural haematomas with Monro-Kellie doctrine and uncal herniation.",
+        "caption": "Monro-Kellie: added volume raises intracranial pressure. Credit: StewardMD."
       }
     },
     {
@@ -206,7 +172,7 @@
             "Increases cranial vault volume; relieves brainstem compression"
           ],
           [
-            "Mild hypothermia (32-34\u00b0C)",
+            "Mild hypothermia (32-34°C)",
             "Slows enzymatic cascades and cellular necrosis",
             "Suppresses edema; coagulopathy and infection risks"
           ]

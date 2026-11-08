@@ -11,23 +11,10 @@
       "say": "Charcot-Marie-Tooth disease is divided into demyelinating and axonal forms based on nerve conduction velocity. The median motor velocity cutoff is thirty-eight meters per second.",
       "tx": "Apply the **CMT1A duplication genetics** threshold to classify hereditary motor and sensory neuropathies. CMT1 is characterized by primary Schwann cell demyelination resulting in uniform, symmetrical motor nerve conduction slowing with upper limb (median/ulnar) motor conduction velocities below 38 m/s, marked temporal dispersion, and absent sural potentials. Conversely, CMT2 represents primary axonal degeneration where conduction velocities remain preserved (> 38 m/s) but compound muscle action potential amplitudes are markedly reduced (PMP22 genetics).",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "CMT1 (Demyelinating)",
-          "points": [
-            "Primary Schwann cell & myelin sheath pathology",
-            "Median motor velocity < 38 m/s (slowed)",
-            "Onion bulb formations on nerve biopsy"
-          ]
-        },
-        "right": {
-          "title": "CMT2 (Axonal)",
-          "points": [
-            "Primary neuronal & axonal neurofilament loss",
-            "Median motor velocity > 38 m/s (normal/mildly slow)",
-            "Reduced CMAP amplitudes with axonal sprouting"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/charcot-marie-tooth-disease-type-1a-fig1.webp",
+        "alt": "Distal wasting, pes cavus and hammer toes in Charcot-Marie-Tooth type 1A.",
+        "caption": "CMT1A: distal wasting with pes cavus. Credit: StewardMD."
       }
     },
     {
@@ -63,31 +50,10 @@
       "say": "Children present with high arched feet and distal lower extremity muscle wasting. The classic physical appearance resembles an inverted champagne bottle or stork legs.",
       "tx": "Identify the **Stork leg and inverted champagne bottle appearance** deformity during neuromuscular examination. Distal muscle denervation beginning in intrinsic foot muscles and the anterior tibialis compartment leads to unopposed action of peroneus longus and posterior tibialis, producing bilateral high arches (pes cavus), hammer toes, and progressive ankle drop. As wasting progresses to the lower third of the quadriceps and calf musculature, the limbs assume the characteristic inverted champagne bottle or stork leg appearance, with absent ankle jerks and stocking sensory loss (MFN2 axonal).",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "denerv",
-            "label": "Distal intrinsic foot & peroneus brevis denervation"
-          },
-          {
-            "id": "deform",
-            "label": "Pes cavus, hammer claw toes & high-steppage gait"
-          },
-          {
-            "id": "bottle",
-            "label": "Peroneal atrophy: Inverted champagne bottle lower limbs"
-          }
-        ],
-        "edges": [
-          [
-            "denerv",
-            "deform"
-          ],
-          [
-            "deform",
-            "bottle"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/charcot-marie-tooth-fig1.webp",
+        "alt": "Foot deformities and distal leg wasting in Charcot-Marie-Tooth disease.",
+        "caption": "Stork legs and foot deformity in CMT. Credit: StewardMD."
       }
     },
     {
@@ -204,7 +170,7 @@
     },
     {
       "say": "Multidisciplinary management focuses on preserving function and mobility. Ankle foot orthoses, physical therapy, and corrective orthopedic surgery prevent fixed joint contractures.",
-      "tx": "Prescribe **Orthotic and surgical management** to maintain ambulatory independence in CMT. Custom rigid or dynamic ankle-foot orthoses (AFOs) stabilize the ankle, prevent foot drop tripping, and reduce fatigue. Physical therapy maintains Achilles tendon flexibility and prevents equinovarus contractures. When flexible deformities progress to rigid pes cavus and clawing, surgical correction\u2014including plantar fascia release, posterior tibial tendon transfer, calcaneal osteotomy, and midfoot osteotomy\u2014restores a plantigrade weight-bearing foot (Evaluation complete).",
+      "tx": "Prescribe **Orthotic and surgical management** to maintain ambulatory independence in CMT. Custom rigid or dynamic ankle-foot orthoses (AFOs) stabilize the ankle, prevent foot drop tripping, and reduce fatigue. Physical therapy maintains Achilles tendon flexibility and prevents equinovarus contractures. When flexible deformities progress to rigid pes cavus and clawing, surgical correction—including plantar fascia release, posterior tibial tendon transfer, calcaneal osteotomy, and midfoot osteotomy—restores a plantigrade weight-bearing foot (Evaluation complete).",
       "vis": {
         "kind": "flow",
         "nodes": [

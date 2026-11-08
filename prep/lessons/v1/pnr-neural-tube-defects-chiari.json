@@ -1,0 +1,196 @@
+{
+  "v": 1,
+  "id": "pnr-neural-tube-defects-chiari",
+  "title": "Neural Tube Defects, Chiari Malformations and Dandy-Walker Continuum",
+  "module": "pnr-malformations-hydrocephalus",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Periconceptional Folic Acid Prophylaxis",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Target Population Risk",
+          "Daily Folic Acid Dosing",
+          "Recommended Window of Supplementation"
+        ],
+        "rows": [
+          [
+            "Standard Risk Pregnancies",
+            "0.4 mg/day (400 mcg) oral folic acid",
+            "1 month prior to conception through 12 weeks gestation"
+          ],
+          [
+            "High Risk (Prior NTD / Antiseizure meds)",
+            "4.0 mg/day (4000 mcg) oral folic acid",
+            "1 month prior to conception through 12 weeks gestation"
+          ],
+          [
+            "Efficacy Benchmark",
+            "Reduces first-time and recurrent NTD by 70%",
+            "Critical neurulation window closes by embryonic day 28"
+          ]
+        ]
+      },
+      "tx": "Public health evidence establishes that **Folic acid peri-conceptional dosing** dramatically reduces open neural tube defects by 70%. Standard low-risk pregnancies require 0.4 mg/day of oral folic acid, whereas high-risk women with a previous affected pregnancy, pregestational diabetes, or taking sodium valproate require 4.0 mg/day. Supplementation must begin at least 1 month prior to conception and continue through 12 weeks of gestation, covering primary neural tube closure.",
+      "say": "Periconceptional folic acid supplementation at zero point four milligrams daily, or four milligrams for high-risk mothers, reduces neural tube defects by seventy percent."
+    },
+    {
+      "title": "Management of Myelomeningocele Study Trials",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prenatal Fetal Surgery (< 26 weeks)",
+          "points": [
+            "In-utero open hysterotomy repair of myelomeningocele",
+            "Halves post-natal ventriculoperitoneal shunt requirements by 50%",
+            "Reverses hindbrain herniation and improves independent ambulation"
+          ]
+        },
+        "right": {
+          "title": "Postnatal Standard Closure",
+          "points": [
+            "Surgical placode closure within 24 to 48 hours of birth",
+            "Higher risk of permanent progressive Chiari II hindbrain descent",
+            "Significantly higher lifetime dependence on hydrocephalus shunts"
+          ]
+        }
+      },
+      "tx": "Landmark findings from the **MOMS trial fetal myelomeningocele repair** demonstrated that open fetal surgical repair performed before 26 weeks gestation significantly improves long-term outcomes compared to standard postnatal repair. In-utero placode closure and dural coverage reduces the incidence of secondary hindbrain herniation, decreases the requirement for postnatal hydrocephalus shunting by 50%, and doubles the likelihood of independent ambulation at 30 months.",
+      "say": "The landmark MOMS trial proved that prenatal in-utero myelomeningocele repair before twenty six weeks reduces hydrocephalus shunt requirements by fifty percent."
+    },
+    {
+      "title": "Chiari I Malformation Tonsillar Herniation",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chiari-malformation-fig1.webp",
+        "alt": "Sagittal T1 and T2 MRI demonstrating low-lying cerebellar tonsils below foramen magnum and spinal syrinx",
+        "caption": "Cerebellar tonsillar herniation through the foramen magnum associated with a prominent cervical cord syrinx (StewardMD)."
+      },
+      "tx": "The formal neuroimaging diagnostic benchmark for **Chiari I tonsillar herniation benchmark** is downward displacement of the cerebellar tonsils exceeding 5 mm below the basion-opisthion line of the foramen magnum on sagittal T1/T2 MRI. Crowding of the craniocervical junction impairs pulsatile cerebrospinal fluid dynamics, precipitating cervical or thoracic syringomyelia in 50-70% of symptomatic patients, manifesting with cape-like dissociated sensory loss, neck pain, and scoliosis.",
+      "say": "Chiari I malformation is defined by cerebellar tonsillar descent exceeding five millimeters below the foramen magnum, associated with spinal cord syringomyelia."
+    },
+    {
+      "title": "Chiari II Complex Hindbrain Herniation",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/spina-bifida-fig1.webp",
+        "alt": "Sagittal neuroimaging illustrating Chiari II complex with tectal beaking and lumbar myelomeningocele",
+        "caption": "Chiari II malformation with severe caudal hindbrain descent and dysplastic posterior fossa (StewardMD)."
+      },
+      "tx": "Nearly universally associated with open spinal dysraphism, **Chiari II malformation components** involve complex caudal displacement of the cerebellar vermis, fourth ventricle, and elongated medulla through the foramen magnum into the upper cervical canal. Characteristic pathognomonic neuroimaging abnormalities include tectal beaking, a small hypoplastic posterior fossa, low tentorial attachment, luckenschadel skull lacunae, and medullary kinking producing stridor and apnea.",
+      "say": "Chiari II malformation accompanies myelomeningocele, featuring caudal herniation of the cerebellar vermis and fourth ventricle with tectal beaking."
+    },
+    {
+      "title": "Dandy-Walker Malformation Triad",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "d1",
+            "label": "Agenesis or severe hypoplasia of cerebellar vermis"
+          },
+          {
+            "id": "d2",
+            "label": "Cystic ballooning dilatation of fourth ventricle"
+          },
+          {
+            "id": "d3",
+            "label": "Enlarged posterior fossa with elevated tentorium & torcula"
+          }
+        ],
+        "edges": [
+          [
+            "d1",
+            "d2"
+          ],
+          [
+            "d2",
+            "d3"
+          ]
+        ]
+      },
+      "tx": "Congenital posterior fossa cystic anomalies are characterized by **Dandy-Walker malformation triad**, comprising complete or partial agenesis of the cerebellar vermis, marked cystic dilatation of the fourth ventricle, and an enlarged posterior fossa with elevated tentorium and torcula. Children present with hydrocephalus, prominent occipital bossing, ataxia, and cognitive delay, requiring combined endoscopic or shunting interventions.",
+      "say": "The classic Dandy-Walker triad encompasses vermian hypoplasia, fourth ventricular cystic dilatation, and an enlarged posterior fossa with elevated torcula."
+    },
+    {
+      "title": "Tethered Cord Syndrome Presentation",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pathological Anatomy",
+          "points": [
+            "Conus medullaris terminating abnormally below L2 level",
+            "Thickened fatty filum terminale (> 2 mm on axial MRI)",
+            "Conus traction exacerbated during rapid adolescent growth"
+          ]
+        },
+        "right": {
+          "title": "Clinical Presentation",
+          "points": [
+            "Progressive pes cavus, hammer toes and foot asymmetry",
+            "Neurological gait disturbance with asymmetric leg weakness",
+            "New-onset urinary incontinence and progressive scoliosis"
+          ]
+        }
+      },
+      "tx": "Abnormal longitudinal fixation of the spinal cord produces **Tethered cord syndrome signs**, where the conus medullaris terminates pathologically below the L2 vertebral body. Longitudinal mechanical traction during growth spurts leads to progressive asymmetrical lower-extremity weakness, sensorimotor foot drop, worsening scoliosis, and neurogenic bladder dysfunction. Cutaneous stigmata including sacral dimples, hairy patches, and subcutaneous lipomas warrant early screening.",
+      "say": "Tethered cord syndrome features low termination of the conus medullaris below L2, presenting with progressive leg weakness, foot deformities, and neurogenic bladder."
+    },
+    {
+      "title": "Neurogenic Bladder and Renal Preservation",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Urological Measure",
+          "Target Metric & Protocol",
+          "Renal Protection Goal"
+        ],
+        "rows": [
+          [
+            "Clean Intermittent Catheterization",
+            "Initiate CIC q4h early in neonatal period",
+            "Prevents urinary stasis, sepsis, and hydronephrosis"
+          ],
+          [
+            "Anticholinergic Pharmacotherapy",
+            "Oral Oxybutynin 0.2 mg/kg/day divided bid-tid",
+            "Reduces detrusor hyperreflexia and bladder spasms"
+          ],
+          [
+            "Detrusor Leak Point Pressure",
+            "Maintain leak pressure < 40 cmH2O",
+            "Prevents vesicoureteral reflux and chronic renal scarring"
+          ]
+        ]
+      },
+      "tx": "Preserving upper urinary tract function requires proactive **Neurogenic bladder CIC management**. Neonates with myelomeningocele undergo early clean intermittent catheterization (q4h) combined with anticholinergic therapy (oral oxybutynin 0.2 mg/kg/day). Urodynamic surveillance ensures that detrusor leak point pressure remains strictly below 40 cmH2O, successfully preventing secondary vesicoureteral reflux, recurrent pyelonephritis, and end-stage chronic kidney disease.",
+      "say": "Early clean intermittent catheterization and oral oxybutynin keep detrusor leak point pressure below forty centimeters of water, protecting long-term renal function."
+    },
+    {
+      "title": "Latex Allergy Precautions in Spina Bifida",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Latex Sensitization Mechanism",
+          "points": [
+            "Repeated mucosal exposure to natural rubber latex gloves",
+            "Frequent urological catheterizations and surgical closures",
+            "Cross-reactive food allergies to kiwi, banana, and avocado"
+          ]
+        },
+        "right": {
+          "title": "Mandatory Safety Precautions",
+          "points": [
+            "Severe IgE-mediated anaphylaxis develops in up to 70%",
+            "Strict latex-free operating room and clinic environment",
+            "Non-latex silicone catheters and synthetic gloves from birth"
+          ]
+        }
+      },
+      "tx": "A vital safety mandate for all children with myelomeningocele involves **Latex allergy precautions**, as up to 70% develop severe IgE-mediated type I hypersensitivity reactions. Repeated mucosal exposure during neonatal neurosurgical closures and lifelong intermittent catheterization drives sensitization. Every child with spina bifida must be managed in a strict latex-free environment from the moment of birth to prevent fatal intraoperative anaphylaxis.",
+      "say": "Up to seventy percent of patients with spina bifida develop severe latex allergy from early exposures; strict latex-free protocols are mandatory from birth."
+    }
+  ]
+}
