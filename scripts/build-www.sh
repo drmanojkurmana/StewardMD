@@ -92,6 +92,8 @@ if [ -d assets/kb-diagrams ]; then mkdir -p "$WWW/assets/kb-diagrams"; cp assets
 mkdir -p "$WWW/assets" && cp assets/oncqis-* "$WWW/assets/" 2>/dev/null || true
 # MaiK logo (circle), the icon on every Ask MaiK entry: maik-ai-mark.js renders it at 128/256/512 px.
 mkdir -p "$WWW/assets" && cp assets/maik-logo-*.webp "$WWW/assets/" 2>/dev/null || true
+# Home hero (reference look): stethoscope crop cropped from the owner reference, ships offline + OTA.
+[ -f assets/home-hero.webp ] && cp assets/home-hero.webp "$WWW/assets/"
 # Knowledge Base real clinical images (authentic X-rays, CTs, ECGs, photographs under assets/kb-real-images/)
 if [ -d assets/kb-real-images ]; then mkdir -p "$WWW/assets/kb-real-images"; cp assets/kb-real-images/* "$WWW/assets/kb-real-images/" 2>/dev/null || true; fi
 # Learn-ECG atlas images (bundled ECGs for kardiox-content-pack.js lessons)
