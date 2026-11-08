@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "module": "med-ecg",
+ "subject": "medicine",
+ "title": "Ventricular hypertrophy, Brugada pattern and metabolic ECG signs",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Chronic pressure or volume overload induces structural myocardial thickening detected on electrocardiography. To diagnose **left ventricular hypertrophy**, clinicians apply standard Sokolow-Lyon voltage criteria, where the S wave in lead V1 plus the R wave in lead V5 or V6 exceeds 35 mm. Cornell voltage criteria use R in aVL plus S in V3 exceeding 28 mm in men or 20 mm in women, showing superior specificity for pathological mass.",
+   "say": "Chronic pressure overload promotes left ventricular hypertrophy detectable on the surface ECG. Sokolow-Lyon criteria require the sum of S in V1 and R in V5 or V6 to exceed thirty-five millimetres. Cornell voltage criteria measure R in aVL plus S in V3, offering superior diagnostic specificity.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-ecg-qt-lvh.svg",
+    "alt": "Diagram showing ECG voltage criteria for left ventricular hypertrophy and QT changes.",
+    "caption": "Sokolow-Lyon and Cornell voltage criteria for left ventricular hypertrophy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An inherited cardiac channelopathy predisposing young individuals to sudden nocturnal death is **Brugada pattern**. Mutations in the SCN5A sodium channel gene impair epicardial sodium influx. Type 1 morphology shows a coved ST elevation of 2 mm or greater in right precordial leads V1 to V2, followed by a negative T wave. Fever, sodium channel blockers, and psychotropic drugs can provoke or unmask this malignant electrocardiographic phenotype.",
+   "say": "An inherited sodium channel disorder causing sudden nocturnal cardiac death is Brugada syndrome. Mutations in the cardiac sodium channel gene impair inward current. The type one pattern displays coved ST elevation of two millimetres or more in leads V1 and V2, followed by inverted T waves. Fever frequently unmasks this appearance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Brugada pattern type",
+     "ST segment contour",
+     "Clinical significance"
+    ],
+    "rows": [
+     [
+      "Type 1 (diagnostic)",
+      "Coved elevation >= 2 mm with inverted T wave",
+      "High risk of polymorphic VT and sudden death"
+     ],
+     [
+      "Type 2 (saddle-back)",
+      "Saddle-back elevation >= 2 mm, positive/biphasic T",
+      "Suggestive, requires provocation testing"
+     ],
+     [
+      "Type 3",
+      "Coved or saddle-back elevation < 1 mm",
+      "Non-diagnostic screening pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ventricular pre-excitation via an accessory pathway of Kent generates a slurred QRS upstroke known as a **delta wave**. This defines the Wolff-Parkinson-White electrocardiographic pattern. Bypassing the normal delay of the atrioventricular node results in a short PR interval under 0.12 seconds and a widened QRS duration. Antidromic or orthodromic re-entrant tachycardias, as well as rapid pre-excited atrial fibrillation, can precipitate ventricular fibrillation.",
+   "say": "Ventricular pre-excitation across an accessory bypass tract produces a slurred upstroke termed a delta wave. This sign defines the Wolff-Parkinson-White pattern. Bypassing atrioventricular nodal delay creates a short PR interval and widened QRS complex. Patients risk paroxysmal re-entrant tachycardia and pre-excited atrial fibrillation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "kent",
+      "label": "Accessory pathway of Kent"
+     },
+     {
+      "id": "bypass",
+      "label": "Bypasses AV nodal delay"
+     },
+     {
+      "id": "short",
+      "label": "Short PR (< 0.12s)"
+     },
+     {
+      "id": "delta",
+      "label": "Delta wave with slurred QRS"
+     },
+     {
+      "id": "svt",
+      "label": "Risk of re-entrant tachycardia"
+     }
+    ],
+    "edges": [
+     [
+      "kent",
+      "bypass"
+     ],
+     [
+      "bypass",
+      "short"
+     ],
+     [
+      "short",
+      "delta"
+     ],
+     [
+      "delta",
+      "svt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serum potassium disturbances cause progressive and predictable electrical conduction delays. In severe **hyperkalaemia ECG** findings, tall, narrow, symmetrical peaked T waves appear early. As serum levels exceed 6.5 to 7.0 mEq/L, P waves flatten and PR intervals lengthen. Further elevation causes QRS widening into a classic sine-wave configuration, heralding imminent ventricular asystole or fibrillation requiring emergency intravenous calcium gluconate.",
+   "say": "Elevated potassium levels produce progressive and life-threatening electrical abnormalities. Peaked tall T waves represent the earliest manifestation of hyperkalaemia. As levels rise, P waves flatten and the QRS complex broadens. Severe toxicity forms a sine wave pattern that demands immediate intravenous calcium gluconate.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-ecg-potassium.svg",
+    "alt": "ECG strips showing progressive hyperkalemic changes from peaked T waves to sine wave.",
+    "caption": "Sequential ECG manifestations of rising serum potassium concentrations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Conversely, potassium depletion impairs ventricular repolarisation, causing T wave flattening and promoting a prominent **U wave**. The U wave is an upright deflection following the T wave, best appreciated in precordial leads V2 and V3. As potassium drops below 3.0 mEq/L, fusion of the flattened T wave with the prominent U wave creates false QT prolongation, predisposing to torsades de pointes.",
+   "say": "Hypokalaemia impairs repolarisation, causing T wave flattening and prominent U waves. The U wave follows the T wave and is prominent in leads V2 and V3. Severe hypokalaemia produces apparent QT prolongation through T and U wave fusion, predisposing to dangerous ventricular arrhythmias.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyperkalaemia signs",
+     "points": [
+      "Tall peaked tented T waves",
+      "P wave flattening and PR prolongation",
+      "QRS widening to sine wave"
+     ]
+    },
+    "right": {
+     "title": "Hypokalaemia signs",
+     "points": [
+      "ST segment depression",
+      "T wave flattening or inversion",
+      "Prominent U waves and QU prolongation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Beat-to-beat shifting in QRS amplitude across consecutive cardiac cycles describes **electrical alternans**. This striking electrocardiographic finding results from mechanical swinging of the heart within a massive pericardial fluid effusion. Alternating QRS axis and voltage occurs in cardiac tamponade. When accompanied by sinus tachycardia and low voltage QRS complexes, electrical alternans forms a diagnostic triad strongly indicating tense pericardial tamponade.",
+   "say": "Beat to beat variation in QRS amplitude defines electrical alternans. This finding reflects the heart physically swinging inside a large pericardial effusion. When combined with sinus tachycardia and low voltage complexes, electrical alternans strongly indicates pericardial tamponade requiring urgent pericardiocentesis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eff",
+      "label": "Large pericardial effusion"
+     },
+     {
+      "id": "swing",
+      "label": "Heart swings inside fluid bag"
+     },
+     {
+      "id": "alt",
+      "label": "Beat-to-beat QRS axis shift"
+     },
+     {
+      "id": "tamp",
+      "label": "Cardiac tamponade triad"
+     }
+    ],
+    "edges": [
+     [
+      "eff",
+      "swing"
+     ],
+     [
+      "swing",
+      "alt"
+     ],
+     [
+      "alt",
+      "tamp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When peak-to-peak QRS amplitude measures under 5 mm in all limb leads and under 10 mm in all precordial leads, diagnose **low voltage complexes**. Extracardiac dampening or myocardial replacement causes this attenuation. Common etiologies include cardiac amyloidosis, severe obesity, large pericardial or pleural effusions, end-stage dilated cardiomyopathy, and severe myxoedema. Discrepancy between thick ventricular walls on echocardiogram and low ECG voltage strongly suggests cardiac amyloidosis.",
+   "say": "QRS amplitude under five millimetres in limb leads and ten millimetres in precordial leads defines low voltage. Extracardiac fluid or myocardial infiltration causes this attenuation. A striking discordance between thick ventricular walls on ultrasound and low ECG voltages points directly toward cardiac amyloidosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiology category",
+     "Specific pathology",
+     "Mechanism of low voltage"
+    ],
+    "rows": [
+     [
+      "Myocardial infiltration",
+      "Cardiac amyloidosis",
+      "Amyloid fibrils replace contractile myocytes"
+     ],
+     [
+      "Pericardial fluid",
+      "Pericardial effusion or tamponade",
+      "Fluid layer insulates electrical transmission"
+     ],
+     [
+      "Extracardiac insulation",
+      "Severe obesity, emphysema",
+      "Air or adipose tissue dampens conductivity"
+     ],
+     [
+      "Endocrine disease",
+      "Severe hypothyroidism (myxoedema)",
+      "Myocardial oedema and pericardial fluid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prompt recognition of metabolic and structural ECG anomalies prevents catastrophic cardiac arrests. When severe hyperkalaemia, Brugada pattern, or electrical alternans is identified, initiate emergency management and arrange immediate **echocardiogram** or electrophysiology consultation. Emergency treatment of hyperkalaemia with calcium stabilizes myocardial membranes within minutes, while suspected pericardial tamponade demands urgent decompression under echocardiographic guidance.",
+   "say": "Recognising metabolic and structural ECG patterns prevents sudden cardiac death. When you encounter hyperkalaemic sine waves, Brugada pattern or electrical alternans, initiate treatment immediately and consult cardiology. Calcium gluconate stabilises hyperkalaemic membranes, while tamponade requires emergency pericardial drainage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "alert",
+      "label": "Critical ECG pattern identified"
+     },
+     {
+      "id": "stab",
+      "label": "Membrane stabilization or pericardiocentesis"
+     },
+     {
+      "id": "echo",
+      "label": "Emergent bedside echocardiogram"
+     },
+     {
+      "id": "icu",
+      "label": "ICU admission and rhythm monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "alert",
+      "stab"
+     ],
+     [
+      "stab",
+      "echo"
+     ],
+     [
+      "echo",
+      "icu"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

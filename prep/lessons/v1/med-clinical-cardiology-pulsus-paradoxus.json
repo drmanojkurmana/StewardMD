@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "med-clinical-cardiology",
+ "subject": "medicine",
+ "title": "Pulsus paradoxus, alternans and arterial wave contours",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Arterial pulse evaluation begins with assessing rate, rhythm, volume and character. When testing for **pulsus paradoxus**, inflate the sphygmomanometer cuff above systolic pressure and deflate it slowly. An inspiratory drop in systolic blood pressure exceeding 10 mmHg defines paradoxus. Cardiac tamponade is the classic clinical cause, where right ventricular expansion inside a stiff pericardium compromises left ventricular filling.",
+   "say": "Arterial pulse assessment requires careful examination of rate, rhythm and contour. When testing for pulsus paradoxus, deflate the blood pressure cuff slowly. An inspiratory fall exceeding 10 millimetres of mercury confirms the sign. Cardiac tamponade is the classic cause because pericardial constraint impairs left ventricular filling during inspiration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cardiac causes",
+     "points": [
+      "Cardiac tamponade classic",
+      "Constrictive pericarditis less frequent",
+      "Massive pulmonary embolism"
+     ]
+    },
+    "right": {
+     "title": "Non-cardiac causes",
+     "points": [
+      "Severe acute asthma",
+      "Tension pneumothorax",
+      "Severe COPD exacerbation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extracardiac mechanisms can also generate this exaggerated respiratory variation. Severe status asthmaticus and acute exacerbation of chronic obstructive pulmonary disease create massive negative intrathoracic pressure swings. This pooling in the pulmonary bed decreases left atrial return during inspiration. In contrast, **hypertrophic cardiomyopathy** does not produce pulsus paradoxus, making this distinction a favourite differential question in postgraduate exams.",
+   "say": "Extracardiac conditions can also produce marked pressure swings. Severe asthma and chronic obstructive airway disease create extreme negative thoracic pressure. Blood pools in pulmonary vessels and diminishes left heart return. Notice that hypertrophic cardiomyopathy does not produce paradoxus, which is an important negative discriminator.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-clinical-cardiology-gen1.webp",
+    "alt": "Cutaway illustration of the heart showing thickened ventricle wall with pulse wave contour comparisons.",
+    "caption": "Cardiovascular structural changes and peripheral arterial wave alterations. [Credit: StewardMD]",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Alternation in peak systolic pulse amplitude from beat to beat during a regular rhythm defines **pulsus alternans**. It signals severe left ventricular systolic dysfunction and impending haemodynamic exhaustion. Mechanical alternans arises from cyclical variation in intracellular calcium handling within failing cardiomyocytes. Palpate the radial or femoral artery with light pressure to appreciate the alternating strong and weak arterial beats.",
+   "say": "Alternating pulse strength during a regular rhythm defines pulsus alternans. This finding indicates severe left ventricular systolic failure. The underlying mechanism involves fluctuating calcium release in diseased heart muscle cells. Light palpation at the radial or femoral artery reveals this beat to beat variation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pulse sign",
+     "Haemodynamic mechanism",
+     "Primary pathology"
+    ],
+    "rows": [
+     [
+      "Pulsus alternans",
+      "Cyclical calcium handling defect",
+      "Severe LV systolic failure"
+     ],
+     [
+      "Pulsus paradoxus",
+      "Exaggerated ventricular interdependence",
+      "Pericardial tamponade"
+     ],
+     [
+      "Pulsus bisferiens",
+      "Rapid ejection plus reflected wave",
+      "Combined AS and AR"
+     ],
+     [
+      "Water hammer",
+      "Large stroke volume with rapid runoff",
+      "Severe chronic AR"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A twin-peaked systolic wave appreciated on carotid palpation describes **pulsus bisferiens**. The arterial trace demonstrates two distinct systolic peaks separated by a midsystolic dip. This characteristically occurs in combined aortic stenosis and aortic regurgitation, or in hypertrophic obstructive cardiomyopathy. The initial percussion wave results from rapid early ventricular ejection, followed by a tidal wave from continued ejection or peripheral reflection.",
+   "say": "A twin peak in systole felt at the carotid artery represents pulsus bisferiens. The waveform shows two distinct peaks within one cardiac cycle. You encounter this in combined aortic stenosis and regurgitation, as well as hypertrophic obstructive cardiomyopathy. Rapid early ventricular ejection creates the initial wave.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-murmur-as-ar.svg",
+    "alt": "Auscultation and pulse wave tracing comparing aortic stenosis and aortic regurgitation dynamics.",
+    "caption": "Aortic stenosis and aortic regurgitation wave profiles. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Severe aortic incompetence produces a rapidly rising and abruptly collapsing pulse known as a **water hammer pulse**. Increased left ventricular stroke volume generates a bounding initial upstroke, while rapid diastolic runoff into the low-pressure left ventricle produces rapid collapse. Elevate the patient's forearm vertically while grasping the muscular belly of the forearm to accentuate this sensation at the radial artery.",
+   "say": "A sharp rise followed by sudden diastolic collapse constitutes the water hammer pulse. High stroke volume creates the bounding wave, while rapid regurgitation into the ventricle causes rapid diastolic collapse. Raising the patient's forearm vertically accentuates this peripheral phenomenon.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ar",
+      "label": "Severe aortic regurgitation"
+     },
+     {
+      "id": "sv",
+      "label": "High stroke volume"
+     },
+     {
+      "id": "rise",
+      "label": "Bounding systolic upstroke"
+     },
+     {
+      "id": "runoff",
+      "label": "Rapid diastolic runoff"
+     },
+     {
+      "id": "collapse",
+      "label": "Abrupt peripheral collapse"
+     }
+    ],
+    "edges": [
+     [
+      "ar",
+      "sv"
+     ],
+     [
+      "sv",
+      "rise"
+     ],
+     [
+      "rise",
+      "runoff"
+     ],
+     [
+      "runoff",
+      "collapse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Capillary pulsations visible in the nail bed upon gentle pressure represent **Quincke sign**. Along with head nodding synchronous with the pulse, known as de Musset sign, and pistol-shot sounds over the femoral artery, termed Traube sign, these peripheral markers reflect hyperdynamic wide pulse pressure. While classic for chronic severe aortic regurgitation, similar peripheral signs appear in thyrotoxicosis, severe anaemia, and arteriovenous fistulas.",
+   "say": "Capillary pulsations seen in nail beds represent Quincke sign. Together with rhythmic head nodding and femoral pistol shot sounds, these peripheral findings reflect wide pulse pressure. Although characteristic of severe aortic regurgitation, high output states like thyrotoxicosis and severe anaemia can produce identical findings.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Eponymous sign",
+     "Physical examination finding",
+     "Underlying mechanism"
+    ],
+    "rows": [
+     [
+      "Corrigan pulse",
+      "Visible carotid arterial pulsation",
+      "Abrupt arterial expansion"
+     ],
+     [
+      "Quincke sign",
+      "Alternating capillary nailbed flush",
+      "Wide pulse pressure runoff"
+     ],
+     [
+      "de Musset sign",
+      "Systolic head bobbing",
+      "Large cervical stroke volume"
+     ],
+     [
+      "Traube sign",
+      "Pistol-shot sound over femoral artery",
+      "Sudden systolic expansion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In fixed aortic valve narrowing, the pulse contour changes in the opposite direction. A small-amplitude pulse with a slow, delayed systolic upstroke is termed **pulsus parvus et tardus**. This waveform reflects prolonged left ventricular ejection time across a stenotic orifice. The delay is best appreciated by simultaneously palpating the patient's apical impulse and carotid artery, where the carotid peak lags noticeably behind the apex.",
+   "say": "Fixed aortic valve obstruction alters the pulse wave in the opposite direction. A low amplitude wave with delayed upstroke is called pulsus parvus et tardus. The stenotic valve prolongs left ventricular ejection time. Palpating apex and carotid simultaneously reveals this characteristic carotid lag.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aortic stenosis pulse",
+     "points": [
+      "Pulsus parvus et tardus",
+      "Slow rising delayed upstroke",
+      "Narrow pulse pressure"
+     ]
+    },
+    "right": {
+     "title": "Aortic regurgitation pulse",
+     "points": [
+      "Water hammer bounding pulse",
+      "Rapid collapse in diastole",
+      "Wide pulse pressure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Always document arterial pulse findings alongside formal non-invasive blood pressure measurements. When exam findings suggest severe valvular narrowing or haemodynamic instability, arrange an urgent **echocardiography** to evaluate ventricular dimensions and valve gradients. Bedside recognition of distinct arterial wave contours directs diagnostic testing and prevents inappropriate vasodilatation in patients with critical left ventricular outflow tract obstruction.",
+   "say": "Document all arterial pulse characteristics alongside blood pressure readings. If findings indicate significant valvular disease or ventricular failure, obtain urgent echocardiography to measure gradients and chamber size. Recognising arterial wave abnormalities ensures accurate clinical diagnosis and prevents adverse treatment decisions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pulse",
+      "label": "Abnormal arterial waveform"
+     },
+     {
+      "id": "exam",
+      "label": "Bedside examination"
+     },
+     {
+      "id": "echo",
+      "label": "Transthoracic echocardiogram"
+     },
+     {
+      "id": "strat",
+      "label": "Definitive management plan"
+     }
+    ],
+    "edges": [
+     [
+      "pulse",
+      "exam"
+     ],
+     [
+      "exam",
+      "echo"
+     ],
+     [
+      "echo",
+      "strat"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
