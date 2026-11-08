@@ -1,0 +1,228 @@
+{
+  "id": "pnp-iga-nephropathy-and-vasculitis",
+  "title": "IgA Nephropathy and IgA Vasculitis HSP Nephritis: Oxford Classification and Care",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Glomerular Diseases, Nephrotic Syndrome and Nephritis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Macroscopic hematuria occurring concurrently with upper respiratory infections represents the hallmark of childhood IgA nephropathy.",
+      "tx": "Identify the timing of clinical presentation to recognize **Synpharyngitic macrohematuria hallmark** in affected children. IgA nephropathy typically presents with recurrent episodes of gross macroscopic hematuria developing concurrently (within twenty-four to forty-eight hours) with an upper respiratory tract infection (synpharyngitic hematuria). This timing sharply contrasts with acute post-streptococcal glomerulonephritis, where macroscopic hematuria and nephritis develop after a prolonged latent interval of one to three weeks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "IgA Nephropathy (Synpharyngitic)",
+          "points": [
+            "Onset within 24-48 hours of infection",
+            "Concurrent with upper respiratory symptoms",
+            "Normal serum complement C3/C4 levels"
+          ]
+        },
+        "right": {
+          "title": "Post-Streptococcal GN (Post-Infectious)",
+          "points": [
+            "Latency of 1-3 weeks post-pharyngitis",
+            "Latency of 3-6 weeks post-impetigo",
+            "Profound transient depression of serum C3"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The multi-hit hypothesis delineates how galactose-deficient antibodies form pathogenic immune complexes that deposit in mesangium.",
+      "tx": "Review molecular pathophysiology to grasp the **Galactose-deficient IgA1 multi-hit hypothesis** underlying disease progression. Pathogenesis involves elevated circulatory galactose-deficient IgA1 (Hit 1), generation of anti-glycan autoantibodies (Hit 2), subsequent circulating immune complex formation (Hit 3), and mesangial immune deposition triggering mesangial cell proliferation, inflammatory cytokine release, and podocyte injury (Hit 4). These events drive progressive glomerulosclerosis and interstitial fibrosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hit1",
+            "label": "Hit 1: Elevated Galactose-Deficient IgA1"
+          },
+          {
+            "id": "hit2",
+            "label": "Hit 2: Anti-Glycan IgG/IgA Autoantibodies"
+          },
+          {
+            "id": "hit3",
+            "label": "Hit 3: Circulating Immune Complex Formation"
+          },
+          {
+            "id": "hit4",
+            "label": "Hit 4: Mesangial Deposition & Glomerular Injury"
+          }
+        ],
+        "edges": [
+          [
+            "hit1",
+            "hit2"
+          ],
+          [
+            "hit2",
+            "hit3"
+          ],
+          [
+            "hit3",
+            "hit4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Biopsy scoring utilizing the Oxford MEST-C classification accurately predicts long-term renal survival and guide therapy.",
+      "tx": "Utilize renal histopathology to apply the **Oxford MEST-C histopathological scoring** on renal biopsy specimens. The revised Oxford classification scores M (mesangial hypercellularity in over 50% of glomeruli), E (endocapillary hypercellularity), S (segmental glomerulosclerosis), T (tubular atrophy and interstitial fibrosis in over 25% of the cortex), and C (cellular or fibrocellular crescents in any glomerulus). These validated histological features predict renal outcome independently of clinical variables.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/iga-nephropathy-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Immunofluorescence microscopy demonstrating intense mesangial IgA immune complex deposition characteristic of IgA nephropathy",
+        "alt": "Immunofluorescence microscopy demonstrating intense mesangial IgA immune complex deposition characteristic of IgA nephropathy"
+      },
+      "caption": "Immunofluorescence microscopy demonstrating intense mesangial IgA immune complex deposition characteristic of IgA nephropathy",
+      "alt": "Immunofluorescence microscopy demonstrating intense mesangial IgA immune complex deposition characteristic of IgA nephropathy"
+    },
+    {
+      "say": "Optimizing renin-angiotensin-aldosterone blockade forms the mandatory initial supportive intervention for all proteinuric patients.",
+      "tx": "Enforce rigorous conservative treatment through **First-line supportive RAAS inhibition** before considering systemic immunosuppression. For persistent proteinuria exceeding 0.5-1.0 g/day/1.73m\u00b2 (or spot UPCR > 0.5-1.0 mg/mg), maximum tolerated angiotensin-converting enzyme inhibitor or angiotensin receptor blocker therapy is recommended for at least ninety days prior to considering immunosuppression. Tight ambulatory blood pressure control and dietary sodium restriction are simultaneously mandated.",
+      "vis": {
+        "kind": "table",
+        "title": "First-Line Supportive Care in IgA Nephropathy",
+        "cols": [
+          "Intervention",
+          "Clinical Target",
+          "Duration Before Escalation"
+        ],
+        "rows": [
+          [
+            "ACEi / ARB titration",
+            "Maximal tolerated antiproteinuric dose",
+            "At least 90 days (3 months)"
+          ],
+          [
+            "Blood pressure target",
+            "< 50th percentile for age, sex, height",
+            "Continuous maintenance"
+          ],
+          [
+            "Dietary sodium limitation",
+            "< 2 g/day (< 5 g NaCl/day)",
+            "Long-term lifestyle modification"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Targeted-release formulation of budesonide acts directly on mucosal Peyer patches to suppress pathogenic IgA1 production.",
+      "tx": "Deploy gut-directed anti-inflammatory therapy using **Targeted-release oral budesonide (Nefecon)** in high-risk pediatric and adolescent cases. Targeted-release oral budesonide (administered at sixteen milligrams daily, designed to deliver active drug selectively to the distal ileum mucosal Peyer patches) significantly reduces galactose-deficient IgA1 synthesis, lowers proteinuria, and slows estimated glomerular filtration rate loss in high-risk progressive IgA nephropathy while minimizing systemic corticosteroid toxicity.",
+      "vis": {
+        "kind": "table",
+        "title": "Targeted-Release Budesonide Profile",
+        "cols": [
+          "Property",
+          "Specification",
+          "Clinical Benefit"
+        ],
+        "rows": [
+          [
+            "Dose",
+            "16 mg orally once daily",
+            "Proven efficacy in clinical trials"
+          ],
+          [
+            "Delivery Site",
+            "Distal ileum Peyer patches",
+            "Suppresses origin of mucosal IgA1"
+          ],
+          [
+            "First-Pass Metabolism",
+            "90% hepatic clearance",
+            "Markedly reduced systemic glucocorticoid side effects"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "IgA vasculitis manifests with a distinctive clinical tetrad dominated by dependent non-thrombocytopenic purpura.",
+      "tx": "Recognize multi-system involvement through the **IgA vasculitis (Henoch-Schonlein purpura) tetrad** in presenting children. IgA vasculitis presents with the classic tetrad of non-thrombocytopenic palpable purpura (characteristically distributed across dependent lower limbs and buttocks), arthralgia or non-erosive arthritis, colicky abdominal pain (with risk of gastrointestinal bleeding and intussusception), and glomerulonephritis manifesting with hematuria and variable proteinuria.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/henoch-schonlein-purpura-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Characteristic clinical distribution of palpable purpuric cutaneous lesions in pediatric Henoch-Schonlein purpura",
+        "alt": "Characteristic clinical distribution of palpable purpuric cutaneous lesions in pediatric Henoch-Schonlein purpura"
+      },
+      "caption": "Characteristic clinical distribution of palpable purpuric cutaneous lesions in pediatric Henoch-Schonlein purpura",
+      "alt": "Characteristic clinical distribution of palpable purpuric cutaneous lesions in pediatric Henoch-Schonlein purpura"
+    },
+    {
+      "say": "Extensive crescentic formation on renal biopsy mandates immediate immunosuppressive therapy to rescue kidney function.",
+      "tx": "Institute aggressive rescue protocols for **Crescentic HSP nephritis intervention** to arrest rapidly progressive renal failure. Renal biopsy showing crescents in over fifty percent of glomeruli in IgA vasculitis nephritis warrants immediate aggressive therapy with intravenous pulsed methylprednisolone (thirty milligrams per kilogram per dose, maximum one thousand milligrams daily for three consecutive days) followed by oral glucocorticoids and intravenous cyclophosphamide.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "biopsy",
+            "label": "Renal Biopsy: Crescents in > 50% Glomeruli"
+          },
+          {
+            "id": "pulse",
+            "label": "IV Pulsed Methylprednisolone (30 mg/kg/day x 3 days)"
+          },
+          {
+            "id": "cyc",
+            "label": "Oral Steroid Maintenance + IV Cyclophosphamide"
+          },
+          {
+            "id": "monitor",
+            "label": "Serial eGFR & UPCR Surveillance"
+          }
+        ],
+        "edges": [
+          [
+            "biopsy",
+            "pulse"
+          ],
+          [
+            "pulse",
+            "cyc"
+          ],
+          [
+            "cyc",
+            "monitor"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Systematic longitudinal urinalysis surveillance detects occult nephritis during the initial six months post-vasculitis.",
+      "tx": "Establish rigorous outpatient follow-up through **Urine screening surveillance in HSP** across all pediatric presentations. All children diagnosed with IgA vasculitis require serial blood pressure measurements and urinalysis screening weekly for the first month, then every two to four weeks for at least six months. This protocol ensures early detection of late-onset nephritis, allowing prompt intervention before irreversible sclerotic damage ensues.",
+      "vis": {
+        "kind": "table",
+        "title": "HSP Nephritis Surveillance Schedule",
+        "cols": [
+          "Time Period",
+          "Frequency",
+          "Assessments Required"
+        ],
+        "rows": [
+          [
+            "Weeks 1 to 4",
+            "Weekly",
+            "Blood pressure, dipstick urinalysis, macroscopic check"
+          ],
+          [
+            "Months 2 to 6",
+            "Every 2-4 weeks",
+            "Blood pressure, urinalysis, spot UPCR if protein detected"
+          ],
+          [
+            "Beyond 6 months",
+            "Periodic / Annual",
+            "Continued monitoring if persistent microhematuria or proteinuria"
+          ]
+        ]
+      }
+    }
+  ]
+}
