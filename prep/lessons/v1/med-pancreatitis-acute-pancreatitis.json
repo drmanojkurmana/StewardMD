@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-pancreatitis",
+ "subject": "medicine",
+ "title": "Acute pancreatitis: aetiology, diagnostic enzymes, scoring systems, and physical signs",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Premature intrapancreatic zymogen activation initiates enzymatic autodigestion and microvascular injury of the glandular parenchyma. Patients experiencing **Acute pancreatitis** present with severe, boring epigastric pain radiating directly through to the back, characteristically relieved by leaning forward and exacerbated by supine posture. Accompanying nausea, persistent vomiting, abdominal distension, and low-grade pyrexia reflect retroperitoneal inflammation. Formal diagnosis requires satisfying at least two of three criteria: characteristic abdominal pain, elevated serum lipase or amylase, and diagnostic cross-sectional imaging.",
+   "say": "Premature zymogen activation causes enzymatic autodigestion and parenchymal injury. Patients with acute pancreatitis present with severe epigastric pain radiating through to the back, eased by leaning forward and worsened by lying flat. Nausea, persistent vomiting, and abdominal distension accompany the illness. Confirmation requires two of three features: pain, enzyme elevation, or cross-sectional imaging.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-pancreatitis-and-pancreaticoduodenectomy-fig1.webp",
+    "alt": "Medical illustration of acute pancreatitis showing pancreatic duct anatomy and enzymatic autodigestion.",
+    "caption": "Pancreatic ductal architecture, enzymatic autodigestion, and parenchymal inflammation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Superior clinical sensitivity and prolonged diagnostic longevity establish lipase as the definitive biochemical investigation for acute glandular necrosis. Elevation of **serum lipase** greater than three times the upper reference limit confirms pancreatitis, rising within four to eight hours of symptom onset and persisting for eight to fourteen days. Unlike amylase, lipase remains entirely unproduced by salivary glands and undergoes extensive renal tubular reabsorption, preventing premature normalization in patients presenting several days following initial pain onset.",
+   "say": "Superior diagnostic sensitivity makes lipase the preferred biochemical test for acute pancreatic inflammation. Elevation of serum lipase greater than three times normal confirms the diagnosis, rising within eight hours and persisting up to two weeks. Unlike amylase, lipase is not produced by salivary tissue and does not normalize prematurely in delayed presentations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serum Lipase",
+     "points": [
+      "Elevates within 4-8 hours; peaks at 24 hours",
+      "Remains elevated for 8 to 14 days",
+      "Higher sensitivity (90-100%) and specificity",
+      "Superior in delayed presentations and alcohol"
+     ]
+    },
+    "right": {
+     "title": "Serum Amylase",
+     "points": [
+      "Elevates within 2-12 hours; peaks at 24 hours",
+      "Normalizes rapidly within 3 to 5 days",
+      "Produced by both salivary glands and pancreas",
+      "False positive in macroamylasaemia and parotitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Measurement of serum pancreatic endoamylase provides rapid initial screening but carries diagnostic vulnerability to delayed presentation and non-pancreatic clearance defects. Circulating **amylase** levels elevate rapidly following onset but decline to normal within three to five days due to rapid urinary excretion. Falsely low values occur in hypertriglyceridaemia-induced pancreatitis because high serum chylomicrons interfere with colorimetric laboratory assays. Conversely, elevated levels in macroamylasaemia reflect giant macromolecular complexes bound to immunoglobulins, characterized by low urine amylase clearance.",
+   "say": "Measuring serum endoamylase offers rapid screening but carries notable diagnostic pitfalls. Circulating amylase levels rise rapidly but normalize within five days because of fast renal excretion. Spurious normal levels occur in severe hypertriglyceridaemia due to assay interference. In contrast, elevated levels in macroamylasaemia stem from complexes bound to circulating immunoglobulins.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical condition",
+     "Serum amylase",
+     "Serum lipase",
+     "Diagnostic pearl"
+    ],
+    "rows": [
+     [
+      "Acute pancreatitis",
+      "Elevated >3x limit",
+      "Elevated >3x limit",
+      "Both enzymes markedly raised"
+     ],
+     [
+      "Macroamylasaemia",
+      "Markedly elevated",
+      "Normal",
+      "Low urinary amylase clearance"
+     ],
+     [
+      "Hypertriglyceridaemia",
+      "Spuriously normal",
+      "Elevated",
+      "Lipaemic serum interferes with assay"
+     ],
+     [
+      "Chronic pancreatitis flare",
+      "May be normal",
+      "May be normal",
+      "Loss of functioning exocrine mass"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Historical severity stratifications evaluate multifactorial demographic and laboratory parameters assessed at admission and forty-eight hours post-hospitalization. The classic **Ranson criteria** utilize five parameters at admission (age over 55, white cell count, blood glucose, AST, and LDH) and six parameters during the subsequent two days (haematocrit fall, BUN rise, serum calcium, PaO2, base deficit, and fluid sequestration). A total score of three or higher predicts severe necrotizing disease and heightened mortality.",
+   "say": "Severity stratification evaluates demographic and laboratory indicators at admission and during the next two days. The classic Ranson criteria assess five variables on admission and six parameters over the subsequent forty-eight hours, including haematocrit drop and fluid sequestration. A score of three or greater predicts severe disease and heightened mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Assessment timing",
+     "Parameters evaluated",
+     "Significance"
+    ],
+    "rows": [
+     [
+      "At admission (0 hours)",
+      "Age >55, WBC >16k, Glucose >200, AST >250, LDH >350",
+      "Initial inflammatory burden"
+     ],
+     [
+      "At 48 hours",
+      "Hct drop >10%, BUN rise >5, Ca <8, PaO2 <60, Base def >4, Fluid >6L",
+      "Evolving capillary leak & necrosis"
+     ],
+     [
+      "Score 0 to 2",
+      "Predicted mortality <1%",
+      "Mild acute pancreatitis"
+     ],
+     [
+      "Score >=3",
+      "Predicted mortality 15-40%",
+      "Severe acute necrotizing disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Contemporary clinical practice utilizes simplified bedside risk scoring calculable within the first twenty-four hours of admission. The validated **BISAP score** (Bedside Index for Severity in Acute Pancreatitis) assigns one point each for: BUN exceeding twenty-five milligrams per decilitre, Impaired mental status (Glasgow Coma Scale under fifteen), SIRS criteria, Age over sixty, and Pleural effusion. A score of three or greater correlates with substantially elevated risk of in-hospital mortality and persistent organ failure.",
+   "say": "Modern clinical practice uses simplified bedside scores calculated within twenty-four hours of hospital admission. The BISAP score assigns one point each for elevated blood urea nitrogen, impaired mental status, systemic inflammatory response, age over sixty, and pleural effusion. A score of three or greater indicates heightened risk of organ failure and mortality.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bisap",
+      "label": "Calculate BISAP (BUN, Mental status, SIRS, Age, Effusion)"
+     },
+     {
+      "id": "score_low",
+      "label": "Score 0-2: Low mortality risk (<2%), ward care"
+     },
+     {
+      "id": "score_high",
+      "label": "Score 3-5: High mortality (>15%), intensive monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "bisap",
+      "score_low"
+     ],
+     [
+      "bisap",
+      "score_high"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transient or persistent ampullary impaction by migrating biliary microlithiasis represents the most prevalent global cause of pancreatic inflammation. Triggering **gallstone pancreatitis** occurs when calculi traverse the cystic duct and occlude the common channel of the ampulla of Vater, creating acute biliary hypertension and reflux. Urgent therapeutic endoscopic retrograde cholangiopancreatography with sphincterotomy is indicated within twenty-four hours when concurrent acute cholangitis or persistent choledocholithiasis causes biliary sepsis. Index admission cholecystectomy prevents early recurrent biliary events.",
+   "say": "Ampullary impaction by migrating biliary stones represents the leading cause of pancreatic inflammation. Developing gallstone pancreatitis occurs when calculi lodge in the ampulla of Vater, creating ductal hypertension and triggering enzyme activation. Urgent endoscopic sphincterotomy is indicated within twenty-four hours if acute cholangitis supervenes. Cholecystectomy during the index admission prevents recurrent attacks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "migration",
+      "label": "Gallstone migrates into ampulla of Vater"
+     },
+     {
+      "id": "hypertension",
+      "label": "Pancreatic duct obstruction and hypertension"
+     },
+     {
+      "id": "activation",
+      "label": "Zymogen auto-activation and acinar necrosis"
+     }
+    ],
+    "edges": [
+     [
+      "migration",
+      "hypertension"
+     ],
+     [
+      "hypertension",
+      "activation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massive elevations of circulating triglyceride-rich lipoproteins precipitate acinar microvascular ischaemia through release of toxic unbound free fatty acids. Developing pancreatitis from **hypertriglyceridaemia** typically arises when serum triglyceride concentrations surpass one thousand milligrams per decilitre (ten millimoles per litre). Pancreatic lipase hydrolyses excess triglycerides within capillary beds, releasing high levels of free fatty acids that induce capillary thrombosis, free-radical generation, and acinar necrosis. Initial management entails intravenous insulin infusions and aggressive hydration to accelerate triglyceride clearance.",
+   "say": "Severe elevations of circulating triglycerides trigger microvascular injury through the generation of toxic free fatty acids. Pancreatitis from hypertriglyceridaemia typically occurs when serum triglyceride levels exceed one thousand milligrams per decilitre. Pancreatic lipase breaks down excess triglycerides into free fatty acids that damage capillary beds. Management involves intravenous insulin and hydration to promote clearance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pathophysiology",
+     "points": [
+      "Serum triglycerides >1000 mg/dL",
+      "Lipase hydrolyses triglycerides into FFA",
+      "High free fatty acids cause capillary necrosis",
+      "Ischaemia damages pancreatic acinar cells"
+     ]
+    },
+    "right": {
+     "title": "Acute Management",
+     "points": [
+      "Intravenous insulin infusion stimulates LPL",
+      "Dextrose infusion to prevent hypoglycaemia",
+      "Therapeutic apheresis in severe toxicity",
+      "Long-term fibrates and lifestyle modification"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Retroperitoneal tracking of blood-stained enzymatic exudate along anatomical fascial planes produces characteristic cutaneous ecchymotic manifestations in necrotising disease. Presence of **Cullen sign** manifests as bluish-purple periumbilical discoloration resulting from retroperitoneal haemorrhage spreading along the falciform ligament to the anterior abdominal wall. Although observed in under three percent of patients, this physical sign denotes extensive retroperitoneal tissue necrosis and severe retroperitoneal haemorrhage, correlating with significantly elevated mortality.",
+   "say": "Retroperitoneal tracking of blood along fascial planes produces characteristic ecchymotic signs in severe necrotizing disease. Cullen sign presents as bluish-purple discoloration around the umbilicus, caused by haemorrhage tracking along the falciform ligament. Although observed in only a minority of patients, its presence indicates extensive retroperitoneal necrosis and carries high mortality.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-abdominal_trauma.webp",
+    "alt": "Clinical illustration of abdominal wall signs indicating retroperitoneal haemorrhage including Cullen and Grey Turner signs.",
+    "caption": "Clinical physical examination findings of abdominal ecchymosis in retroperitoneal haemorrhage. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
