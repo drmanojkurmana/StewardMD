@@ -1,0 +1,242 @@
+{
+  "id": "pnp-bartter-and-gitelman-syndromes",
+  "title": "Bartter vs Gitelman Syndromes: Loop vs DCT Transporters and Urinary Calcium",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Tubular Disorders, Cystic Diseases and Stones",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Bartter and Gitelman syndromes share hypokalemic metabolic alkalosis with normal or low systemic blood pressure.",
+      "tx": "Recognize the unifying hemodynamic and electrolyte features of **Metabolic alkalosis and blood pressure phenotype** in inherited tubulopathies. Both Bartter and Gitelman syndromes feature hypokalemic, hypochloremic metabolic alkalosis with normal or low blood pressure despite marked hyperreninemic hyperaldosteronism. Renal salt wasting stimulates the renin-angiotensin-aldosterone axis, driving distal sodium reabsorption in exchange for potassium and hydrogen ion excretion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Shared Clinical Phenotype",
+          "points": [
+            "Hypokalemic, hypochloremic metabolic alkalosis",
+            "Normal or low blood pressure (salt wasting)",
+            "High plasma renin activity and aldosterone"
+          ]
+        },
+        "right": {
+          "title": "Distinguishing Features",
+          "points": [
+            "Bartter: Early onset, hypercalciuria, nephrocalcinosis",
+            "Gitelman: School-age onset, hypocalciuria, hypomagnesemia",
+            "Transporter defect: Loop of Henle vs Distal tubule"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Bartter syndrome results from mutations in transport proteins located within the thick ascending limb of Henle.",
+      "tx": "Map molecular genetics to the comprehensive **Bartter syndrome molecular classification (Types I-V)** across nephron segments. Bartter syndrome impairs thick ascending limb sodium chloride reabsorption: Type I results from SLC12A1 (NKCC2 cotransporter) mutations, Type II from KCNJ1 (apical ROMK potassium channel), Type III from CLCNKB (basolateral ClC-Kb chloride channel), Type IV from BSND (Barttin subunit, causing sensorineural deafness), and Type V from gain-of-function CASR mutations.",
+      "vis": {
+        "kind": "table",
+        "title": "Bartter Syndrome Molecular Classification",
+        "cols": [
+          "Type",
+          "Mutated Gene",
+          "Affected Transporter",
+          "Clinical Distinctions"
+        ],
+        "rows": [
+          [
+            "Type I",
+            "SLC12A1",
+            "NKCC2 Na-K-2Cl cotransporter",
+            "Antenatal Bartter, severe polyhydramnios"
+          ],
+          [
+            "Type II",
+            "KCNJ1",
+            "ROMK apical potassium channel",
+            "Antenatal Bartter, transient hyperkalemia at birth"
+          ],
+          [
+            "Type III",
+            "CLCNKB",
+            "ClC-Kb basolateral chloride channel",
+            "Classic Bartter, milder childhood presentation"
+          ],
+          [
+            "Type IV",
+            "BSND",
+            "Barttin accessory subunit (ClC-Ka/Kb)",
+            "Antenatal Bartter with sensorineural deafness"
+          ],
+          [
+            "Type V",
+            "CASR",
+            "Calcium-sensing receptor (activating)",
+            "Autosomal dominant hypocalcemia, salt wasting"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Antenatal Bartter syndrome presents with maternal polyhydramnios, severe prematurity, and neonatal salt wasting.",
+      "tx": "Identify early perinatal manifestations characteristic of **Antenatal Bartter syndrome presentation** in neonatal care units. Antenatal Bartter (Types I and II) presents with severe maternal polyhydramnios requiring repeated amnioreductions, extreme preterm delivery, life-threatening neonatal salt wasting, profound hyposthenuria, and rapid development of medullary nephrocalcinosis within the first weeks of life.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "intra",
+            "label": "Fetal Polyuria & Severe Polyhydramnios"
+          },
+          {
+            "id": "preterm",
+            "label": "Preterm Delivery & Neonatal Salt Wasting"
+          },
+          {
+            "id": "nephro",
+            "label": "Rapid Medullary Nephrocalcinosis & Dehydration"
+          },
+          {
+            "id": "rx",
+            "label": "Emergency Fluid / NaCl Repletion + Indomethacin"
+          }
+        ],
+        "edges": [
+          [
+            "intra",
+            "preterm"
+          ],
+          [
+            "preterm",
+            "nephro"
+          ],
+          [
+            "nephro",
+            "rx"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Gitelman syndrome stems from mutations in the thiazide-sensitive sodium chloride cotransporter of the distal convoluted tubule.",
+      "tx": "Understand the pathophysiology of **Gitelman syndrome SLC12A3 and NCCT defect** in school-age children. Gitelman syndrome is an autosomal recessive disorder caused by loss-of-function mutations in SLC12A3 encoding the thiazide-sensitive sodium chloride cotransporter (NCCT) in the distal convoluted tubule. This replicates the pharmacological effects of chronic thiazide diuretic use, manifesting typically in school-age children or adolescents with muscle cramps, fatigue, and salt craving.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-tubulopathies-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Physiologic schema of distal nephron electrolyte transport and specific channel mutations causing inherited tubulopathies",
+        "alt": "Physiologic schema of distal nephron electrolyte transport and specific channel mutations causing inherited tubulopathies"
+      },
+      "caption": "Physiologic schema of distal nephron electrolyte transport and specific channel mutations causing inherited tubulopathies",
+      "alt": "Physiologic schema of distal nephron electrolyte transport and specific channel mutations causing inherited tubulopathies"
+    },
+    {
+      "say": "Urinary calcium excretion provides the decisive clinical biomarker that cleanly differentiates Bartter from Gitelman syndrome.",
+      "tx": "Order spot urine electrolytes to evaluate **Urinary calcium-to-creatinine differentiation** between these inherited conditions. Urinary calcium excretion cleanly differentiates the two disorders: Bartter syndrome causes hypercalciuria (urinary calcium-to-creatinine ratio > 0.2 mg/mg) due to loss of the lumen-positive transepithelial potential in the thick ascending limb, whereas Gitelman syndrome causes marked hypocalciuria (urine Ca/Cr ratio < 0.1 mg/mg).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bartter Syndrome (Loop Defect)",
+          "points": [
+            "Urine Ca/Cr ratio > 0.2 mg/mg (Hypercalciuria)",
+            "Frequent medullary nephrocalcinosis",
+            "Early childhood / neonatal onset"
+          ]
+        },
+        "right": {
+          "title": "Gitelman Syndrome (DCT Defect)",
+          "points": [
+            "Urine Ca/Cr ratio < 0.1 mg/mg (Hypocalciuria)",
+            "Nephrocalcinosis typically absent",
+            "School-age / adolescent presentation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Severe persistent hypomagnesemia caused by TRPM6 channel down-regulation represents the hallmark of Gitelman syndrome.",
+      "tx": "Recognize the metabolic consequences of **Hypomagnesemia in Gitelman syndrome** in symptomatic adolescents. Severe persistent hypomagnesemia (serum magnesium < 1.7 mg/dL) due to down-regulation of TRPM6 epithelial magnesium channels in the atrophied distal convoluted tubule is a classic hallmark of Gitelman syndrome. Clinical manifestations include recurrent carpopedal spasms, muscle tetany, chondrocalcinosis, and cardiac arrhythmias.",
+      "vis": {
+        "kind": "table",
+        "title": "Electrolyte and Mineral Differentiation Profile",
+        "cols": [
+          "Laboratory Parameter",
+          "Bartter Syndrome",
+          "Gitelman Syndrome"
+        ],
+        "rows": [
+          [
+            "Serum Magnesium",
+            "Normal or mildly reduced",
+            "Markedly reduced (< 1.7 mg/dL)"
+          ],
+          [
+            "Urinary Calcium / Creatinine",
+            "High (> 0.2 mg/mg)",
+            "Low (< 0.1 mg/mg)"
+          ],
+          [
+            "Nephrocalcinosis on Ultrasound",
+            "Present in majority (medullary)",
+            "Absent"
+          ],
+          [
+            "Serum Potassium",
+            "Markedly reduced (< 3.0 mEq/L)",
+            "Markedly reduced (< 3.0 mEq/L)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Non-steroidal anti-inflammatory agents block renal prostaglandin synthesis to attenuate excessive polyuria and salt wasting.",
+      "tx": "Prescribe cyclooxygenase inhibitors as **Indomethacin therapy in Bartter syndrome** to stabilize electrolyte losses. Excessive renal prostaglandin E2 (PGE2) production drives hyperreninemia and profound polyuria in Bartter syndrome. Cyclooxygenase inhibitors (indomethacin at 1.5-3.0 mg/kg/day or celecoxib) close this feedback loop, markedly reducing polyuria, improving glomerular filtration rate, and stabilizing serum potassium and chloride levels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pge2",
+            "label": "Elevated Renal PGE2 Synthesis"
+          },
+          {
+            "id": "indo",
+            "label": "Indomethacin Therapy (1.5-3.0 mg/kg/day)"
+          },
+          {
+            "id": "inhibit",
+            "label": "Suppresses COX Enzymes & PGE2 Production"
+          },
+          {
+            "id": "balance",
+            "label": "Reduces Polyuria, GFR Normalization & Electrolyte Retention"
+          }
+        ],
+        "edges": [
+          [
+            "pge2",
+            "indo"
+          ],
+          [
+            "indo",
+            "inhibit"
+          ],
+          [
+            "inhibit",
+            "balance"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Potassium-sparing diuretics supplement potassium chloride repletion to counteract secondary hyperaldosteronism.",
+      "tx": "Administer combination electrolyte management through **Potassium-sparing diuretics add-on** in severe hypokalemic states. High-dose oral potassium chloride repletion is supplemented with potassium-sparing diuretics (spironolactone at 2-4 mg/kg/day, amiloride, or eplerenone) to counteract secondary hyperaldosteronism. This approach diminishes kaliuresis and stabilizes systemic potassium concentrations while monitoring for signs of dehydration.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/renal-tubular-transport-and-diuretics-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Renal tubular transport pathways, sites of diuretic action, and mechanisms of potassium handling along the collecting duct",
+        "alt": "Renal tubular transport pathways, sites of diuretic action, and mechanisms of potassium handling along the collecting duct"
+      },
+      "caption": "Renal tubular transport pathways, sites of diuretic action, and mechanisms of potassium handling along the collecting duct",
+      "alt": "Renal tubular transport pathways, sites of diuretic action, and mechanisms of potassium handling along the collecting duct"
+    }
+  ]
+}

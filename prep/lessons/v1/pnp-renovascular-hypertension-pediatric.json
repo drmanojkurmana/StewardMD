@@ -1,0 +1,233 @@
+{
+  "id": "pnp-renovascular-hypertension-pediatric",
+  "title": "Renovascular Hypertension in Children: Fibromuscular Dysplasia, Takayasu and Angioplasty",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Pediatric Hypertension and Vasculitis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Renovascular disease accounts for up to fifteen percent of secondary pediatric hypertension, primarily driven by fibromuscular dysplasia.",
+      "tx": "Evaluate secondary hypertension etiology by assessing the **Renovascular proportion of secondary hypertension** in childhood. Renovascular hypertension accounts for ten to fifteen percent of all secondary pediatric hypertension cases. The predominant etiology is fibromuscular dysplasia (FMD, responsible for sixty to seventy percent of cases), followed by Takayasu arteritis, neurofibromatosis type 1 (NF-1 vasculopathy), and middle aortic syndrome.",
+      "vis": {
+        "kind": "table",
+        "title": "Etiology of Pediatric Renovascular Hypertension",
+        "cols": [
+          "Etiology",
+          "Relative Proportion",
+          "Key Associated Features"
+        ],
+        "rows": [
+          [
+            "Fibromuscular dysplasia (FMD)",
+            "60-70%",
+            "Non-atherosclerotic, intimal or medial fibroplasia"
+          ],
+          [
+            "Takayasu arteritis",
+            "15-20%",
+            "Large vessel panarteritis, pulse deficits, bruits"
+          ],
+          [
+            "Neurofibromatosis type 1",
+            "5-10%",
+            "Caf\u00e9-au-lait macules, neurofibromas, vascular dysplasia"
+          ],
+          [
+            "Middle aortic syndrome",
+            "5%",
+            "Abdominal aortic hypoplasia with renal artery stenosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pediatric fibromuscular dysplasia involves intimal and perimedial fibroplasia rather than classic adult medial string-of-beads lesions.",
+      "tx": "Distinguish pediatric vascular pathology by evaluating **Intimal and medial FMD pathology** on cross-sectional and angiographic imaging. Unlike adults where medial fibroplasia producing classic string-of-beads lesions dominates, pediatric renal fibromuscular dysplasia frequently exhibits intimal fibroplasia or perimedial fibroplasia. These lesions manifest as smooth, focal, tubular, or ostial vascular narrowings involving the main renal artery or branch vessels.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adult Renal FMD Pattern",
+          "points": [
+            "Medial fibroplasia (80-90% of adults)",
+            "Alternating stenosis and ectasia (string-of-beads)",
+            "Predominantly mid-to-distal main renal artery"
+          ]
+        },
+        "right": {
+          "title": "Pediatric Renal FMD Pattern",
+          "points": [
+            "Intimal or perimedial fibroplasia dominates",
+            "Focal tubular stenosis or ostial web narrowing",
+            "High frequency of intrarenal branch vessel lesions"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Catheter digital subtraction angiography remains the gold standard investigation, detecting distal and branch stenoses missed by non-invasive scans.",
+      "tx": "Select definitive diagnostic imaging by ordering **Catheter digital subtraction angiography gold standard** in suspected renovascular disease. Conventional catheter digital subtraction angiography (DSA) remains the definitive diagnostic gold standard in children. DSA provides superior spatial and temporal resolution, reliably detecting distal segmental branch and intrarenal stenoses that are frequently missed by computed tomography angiography (CTA) or magnetic resonance angiography (MRA).",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/angioplasty-and-stents-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Digital subtraction angiography demonstrating renal artery stenosis and procedural endovascular balloon angioplasty",
+        "alt": "Digital subtraction angiography demonstrating renal artery stenosis and procedural endovascular balloon angioplasty"
+      },
+      "caption": "Digital subtraction angiography demonstrating renal artery stenosis and procedural endovascular balloon angioplasty",
+      "alt": "Digital subtraction angiography demonstrating renal artery stenosis and procedural endovascular balloon angioplasty"
+    },
+    {
+      "say": "Percutaneous balloon angioplasty without stenting cures or significantly improves hypertension in over seventy percent of pediatric patients.",
+      "tx": "Plan endovascular revascularization using **Percutaneous transluminal renal angioplasty (PTRA)** as the preferred intervention. Percutaneous transluminal balloon angioplasty without stenting is the primary revascularization intervention for pediatric non-ostial fibromuscular dysplasia. Balloon dilation achieves clinical cure or marked blood pressure reduction in over seventy to eighty percent of children, while stents are strictly avoided due to ongoing somatic vessel growth.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dsa",
+            "label": "DSA Confirms Non-Ostial FMD Stenosis"
+          },
+          {
+            "id": "ptra",
+            "label": "Balloon Angioplasty (Avoid Routine Stenting)"
+          },
+          {
+            "id": "cure",
+            "label": "Clinical Cure / Marked BP Drop (> 70-80% Children)"
+          },
+          {
+            "id": "surv",
+            "label": "Post-Procedure Blood Pressure & Doppler Surveillance"
+          }
+        ],
+        "edges": [
+          [
+            "dsa",
+            "ptra"
+          ],
+          [
+            "ptra",
+            "cure"
+          ],
+          [
+            "cure",
+            "surv"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Angiotensin-converting enzyme inhibitors are strictly contraindicated in bilateral renal artery stenosis due to risk of sudden acute renal failure.",
+      "tx": "Recognize critical pharmacological contraindications involving **ACE inhibitor contraindication in bilateral stenosis** during clinical care. Angiotensin-converting enzyme inhibitors and angiotensin receptor blockers are strictly contraindicated in bilateral renal artery stenosis or solitary functioning kidney stenosis. These drugs ablate efferent arteriolar vasoconstriction driven by angiotensin II, triggering sudden precipitous drops in intraglomerular capillary hydrostatic pressure and acute renal failure.",
+      "vis": {
+        "kind": "table",
+        "title": "Antihypertensive Strategy in Renovascular Stenosis",
+        "cols": [
+          "Stenosis Pattern",
+          "Safe First-Line Drug Classes",
+          "Strictly Contraindicated Drugs"
+        ],
+        "rows": [
+          [
+            "Unilateral stenosis (two kidneys)",
+            "Calcium channel blockers, beta-blockers, ACEi (with monitoring)",
+            "None absolute (monitor contralateral function)"
+          ],
+          [
+            "Bilateral renal artery stenosis",
+            "Calcium channel blockers (amlodipine), labetalol",
+            "ACE inhibitors (enalapril), ARBs (losartan)"
+          ],
+          [
+            "Solitary functioning kidney stenosis",
+            "Calcium channel blockers, centrally acting agents",
+            "ACE inhibitors, ARBs (causes abrupt acute GFR loss)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Takayasu arteritis presents with absent pulses, bruits, and active inflammation requiring immunosuppressive induction prior to surgery.",
+      "tx": "Identify vascular inflammation to manage **Takayasu arteritis active inflammation phase** in presenting children. Takayasu arteritis is a chronic granulomatous large-vessel vasculitis presenting with diminished or asymmetric peripheral pulses, vascular bruits, claudication, and markedly elevated inflammatory markers (ESR, CRP). Revascularization interventions must be delayed until corticosteroid and biologic therapy (such as tocilizumab or infliximab) achieves complete clinical disease quiescence.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/takayasu-arteritis-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Angiographic and clinical presentation of Takayasu arteritis with large-vessel branch stenoses and vessel wall thickening",
+        "alt": "Angiographic and clinical presentation of Takayasu arteritis with large-vessel branch stenoses and vessel wall thickening"
+      },
+      "caption": "Angiographic and clinical presentation of Takayasu arteritis with large-vessel branch stenoses and vessel wall thickening",
+      "alt": "Angiographic and clinical presentation of Takayasu arteritis with large-vessel branch stenoses and vessel wall thickening"
+    },
+    {
+      "say": "A renal vein renin ratio exceeding one point five indicates hemodynamically significant lateralization and predicts surgical cure.",
+      "tx": "Interpret selective endocrine sampling using the **Renal vein renin ratio (RVRR) lateralization** diagnostic criteria. Selective catheter renal vein renin sampling compares plasma renin activity from both renal veins. A selective renal vein renin ratio (affected stenotic kidney to contralateral normal kidney) exceeding 1.5 indicates hemodynamically significant lateralization, strongly predicting successful curative response to percutaneous transluminal angioplasty or surgical revascularization.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sample",
+            "label": "Selective Catheter Sampling of Bilateral Renal Veins"
+          },
+          {
+            "id": "ratio",
+            "label": "Calculate RVRR (Affected Kidney / Contralateral Kidney)"
+          },
+          {
+            "id": "cutoff",
+            "label": "RVRR > 1.5 Confirms Significant Hemodynamic Lateralization"
+          },
+          {
+            "id": "predict",
+            "label": "Predicts Curative Success for Angioplasty / Surgery"
+          }
+        ],
+        "edges": [
+          [
+            "sample",
+            "ratio"
+          ],
+          [
+            "ratio",
+            "cutoff"
+          ],
+          [
+            "cutoff",
+            "predict"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Ex-vivo bench reconstruction with renal autotransplantation rescues kidneys with complex intrarenal branch stenosis.",
+      "tx": "Identify surgical salvage procedures through **Surgical autotransplantation indication** in children with refractory renovascular disease. Ex-vivo microvascular bench arterial reconstruction with renal autotransplantation into the iliac fossa is indicated for complex intrarenal branch fibromuscular dysplasia or when repeated balloon angioplasties fail, successfully salvaging renal function and curing renovascular hypertension without requiring permanent nephrectomy.",
+      "vis": {
+        "kind": "table",
+        "title": "Surgical Indications in Pediatric Renovascular Disease",
+        "cols": [
+          "Indication",
+          "Surgical Procedure",
+          "Primary Clinical Goal"
+        ],
+        "rows": [
+          [
+            "Complex intrarenal branch stenosis",
+            "Ex-vivo bench microvascular reconstruction",
+            "Salvage renal parenchyma and cure hypertension"
+          ],
+          [
+            "PTRA failure / ostial stenosis",
+            "Aortorenal bypass or autotransplantation",
+            "Restore adequate renal artery perfusion"
+          ],
+          [
+            "Non-functioning ischemic kidney (< 10% function)",
+            "Unilateral nephrectomy",
+            "Eliminate severe renin-driven hypertension"
+          ]
+        ]
+      }
+    }
+  ]
+}
