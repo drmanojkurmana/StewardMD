@@ -3,11 +3,11 @@
  "module": "mic-respiratory-rna-viruses",
  "subject": "microbiology",
  "title": "Influenza, parainfluenza, RSV, measles, mumps, rubella and coronaviruses",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
-   "tx": "**Influenza A** (segmented negative RNA, **H haemagglutinin with N neuraminidase**) escapes by **drift** (point mutations, yearly epidemics) and **shift** (reassortment, pandemics like 2009 H1N1); avian H5N1 and H7N9 spill with high mortality. Treatment is **oseltamivir** within 48 hours for high risk groups with yearly inactivated or live vaccines reformulated; **Reye syndrome** forbids aspirin in viral children. Diagnosis is rapid antigen or PCR with droplet precautions. B drifts only; C is mild.",
-   "say": "Shift pandemics, drift epidemics: H with N sorts flu. High risk flu gets oseltamivir in 2 days.",
+   "tx": "Influenza A carries segmented negative RNA dressed with H haemagglutinin and N neuraminidase. **Drift** means point mutations that refresh yearly epidemics, while **shift** means reassortment that launches pandemics such as 2009 H1N1, with avian H5N1 and H7N9 spilling over at high mortality. Treatment is **oseltamivir** within 48 hours for high risk groups, with yearly inactivated or live vaccines reformulated to chase drift. **Reye syndrome** forbids aspirin in viral children, diagnosis runs on rapid antigen or PCR with droplet precautions, B drifts without shifting, and C stays mild.",
+   "say": "Flu escapes immunity by two mechanisms, and their names are the exam. Drift is slow mutation that refreshes epidemics every year, which is why vaccines are reformulated annually. Shift is sudden reassortment of segments that launches pandemics, which is how 2009 H1N1 arose. Bird strains such as H5N1 spill into humans with frightening mortality, which is why they are watched. Oseltamivir is reserved for high risk patients within forty eight hours, aspirin is banned in viral children because of Reye syndrome, and diagnosis is confirmed by rapid antigen or PCR.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/mic-respiratory-rna-viruses-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Parainfluenza** causes **croup** (barking seal cough with **steeple sign** subglottic narrowing, worse at night, nebulised adrenaline with dexamethasone) while **RSV** (syncytia, infants) causes **bronchiolitis** (wheeze with hypoxia and apnoea, hyperinflated films, oxygen with fluids, **palivizumab** prophylaxis for preemies, ribavirin selected). Human metapneumovirus mimics RSV; adenovirus (pink eye with pharyngoconjunctival fever, military barracks) persists environmentally. Humidified oxygen beats antibiotics in both.",
-   "say": "Seal bark with steeple is croup: mist with steroids. Infant wheeze epidemic is RSV: oxygen, not antibiotics.",
+   "tx": "Parainfluenza causes **croup** with barking seal cough and steeple sign of subglottic narrowing, worse at night, treated with nebulised adrenaline and dexamethasone. RSV fuses syncytia in infants and causes **bronchiolitis** with wheeze, hypoxia and apnoea on hyperinflated films, managed with oxygen and fluids, **palivizumab** prophylaxis for preemies and ribavirin in selected cases. Human metapneumovirus mimics RSV, while adenovirus brings pink eye with pharyngoconjunctival fever in barracks and persists in the environment. Humidified oxygen beats antibiotics in both.",
+   "say": "Croup and bronchiolitis are the two noisy breathers of childhood. Croup follows parainfluenza with a seal like bark and stridor that worsen at night, and the neck film shows the steeple sign, which is diagnostic. Nebulised adrenaline with dexamethasone is the treatment that settles it. RSV instead fills infant wards in epidemics with wheezing hypoxic babies, some of whom stop breathing, and care is oxygen with fluids, not antibiotics. Palivizumab is the monthly shield reserved for premature babies, which is how the exam frames prevention.",
    "vis": null
   },
   {
-   "tx": "**Measles** (morbillivirus, cough coryza conjunctivitis with **Koplik spots** before maculopapular head to foot rash, infectious 4 days either side) kills by pneumonia and encephalitis; **vitamin A** halves mortality with **SSPE** (years later myoclonus with periodic EEG) haunting survivors. **Mumps** (paramyxovirus, parotitis with **orchitis** threatening fertility, aseptic meningitis, pancreatitis) and **rubella** (mild with posterior nodes, **congenital triad** of cataract, deafness and PDA with blueberry muffin rash) complete MMR targets; IgM with PCR confirms while support prevails.",
-   "say": "Koplik plus head to foot rash is measles: vitamin A saves. Parotid swelling with testicular pain is mumps.",
+   "tx": "The neck film shows **croup** in silhouette. The airway tapers to a **steeple sign** of **subglottic narrowing**, where oedema pinches the trachea below the cords, against the normal inset with its square shoulders. This is parainfluenza in a barking toddler worse at night, and the film is ordered to exclude a swallowed coin or epiglottic thumbprint. Treatment is nebulised adrenaline with dexamethasone, and stridor at rest is the flag for admission.",
+   "say": "Read this film against the normal inset. The sick child has a tapered church spire where the airway should stay wide, which is the steeple sign of subglottic oedema, while the healthy inset keeps its square shoulders. This picture belongs to croup, which is parainfluenza laryngitis in a toddler with a seal like bark that worsens at night. The film is requested to exclude mimics such as a coin or epiglottitis, and the treatment that follows is nebulised adrenaline with dexamethasone.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mic-respiratory-rna-viruses-gen1.webp",
+    "alt": "Frontal neck radiograph showing subglottic narrowing with steeple sign and tracheal air column plus normal inset.",
+    "caption": "Neck radiograph showing subglottic narrowing with steeple sign. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Measles opens with cough, coryza and conjunctivitis plus **Koplik spots** before the maculopapular rash marches head to foot, infectious four days either side of the rash. Pneumonia and encephalitis kill, **vitamin A** halves mortality, and **SSPE** haunts survivors years later with myoclonus and periodic EEG complexes. Mumps swells parotids with orchitis threatening fertility plus aseptic meningitis and pancreatitis, while rubella stays mild with posterior nodes yet causes the **congenital triad** of cataract, deafness and PDA with blueberry muffin rash. IgM with PCR confirms while support prevails.",
+   "say": "Measles is recognised by its prodrome and its spots. Cough, coryza and conjunctivitis with Koplik spots precede the head to foot rash, which is the sequence to memorise, and the child infects others four days either side of the rash. Pneumonia and encephalitis are the killers, vitamin A is the intervention that halves deaths, and SSPE is the late brain degeneration that follows years later. Mumps is the parotid swelling that descends to the testes, while rubella is mild in mothers but causes cataract, deafness and heart defects in babies, which is why MMR coverage is chased.",
    "vis": null
   },
   {
-   "tx": "**Coronaviruses** (enveloped positive RNA, crown spikes) range from common colds to **SARS, MERS and SARS-CoV-2** (zoonotic spillovers, anosmia with ground glass pneumonia, dexamethasone in hypoxia, antivirals per era guidance, vaccines blunting severity). **MMR strategy** (live attenuated, two doses, egg and gelatin cautions, pregnancy avoided a month) eliminates measles, mumps and rubella together; outbreaks signal coverage gaps needing catch up. Isolation with notification contains importations.",
-   "say": "Ground glass with anosmia is COVID until PCR rules out. Two MMR doses erase three diseases.",
+   "tx": "**Coronaviruses** are enveloped positive RNA viruses with crown spikes, ranging from colds to **SARS, MERS and SARS-CoV-2** after zoonotic spillovers. Anosmia with ground glass pneumonia marks COVID, dexamethasone helps in hypoxia, antivirals follow era guidance, and vaccines blunt severity. The **MMR strategy** uses live attenuated vaccines in **two doses** with egg and gelatin cautions, avoiding pregnancy for a month, to eliminate measles, mumps and rubella together. Outbreaks signal coverage gaps needing catch up, and isolation with notification contains importations.",
+   "say": "Coronaviruses range from nuisance colds to pandemic killers. SARS, MERS and SARS-CoV-2 each spilled from animals, and COVID is recognised by anosmia with ground glass lungs, which is the signature pairing. Dexamethasone is the drug that saves hypoxic patients, and vaccines are the shield that blunts severity. MMR is the counter strategy for the rash viruses: two live doses that are avoided in pregnancy and in severe egg allergy. Outbreaks are the signal that coverage has slipped, and isolation with notification is the response that contains importations.",
    "vis": {
     "kind": "table",
     "cols": [

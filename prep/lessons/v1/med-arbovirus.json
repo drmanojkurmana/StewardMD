@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-arbovirus",
- "subject": "medicine",
- "title": "Dengue, chikungunya and arboviral fevers",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**breakbone** retro-orbital muscle agony, **saddleback** biphasic fever return, **bleeds** gums nose tourniquet spots, **warns** abdominal vomiting restless defervesce, **joints** chikungunya ankles crippling symmetric, **rash** flushed islets morbilliform itch, **travel** monsoon daytime bites, **past** dengue severity order asks) with **viva** (**leaking** restless defervescent, **arthralgic** ankle-bound chronic) profiles; **water** (stagnant coolers) asks. Bones break.",
-   "say": "Breakbones saddlebacks bleeds warns is history: joints cripple rashes flush travels expose pasts worsen waters breed leakings narrow arthralgics linger fluids titrate counts watch. Fevers saddle.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**tourniquet** petechiae capillary leak, **pulse** narrowing thready shock, **pressure** hypotensive cold clammy, **belly** tender liver effusions ascites, **rash** petechial confluent itchy, **joints** chikungunya swollen ankles wrists, **bleeds** mucosal menorrhagia haematuria, **lungs** effusion crackles leak) with **bedside** (**haematocrit** rising leak tracks, **platelets** falling bleed watches, **urine** output shock guides) grades; **posture** (orthostatic drops) tests. Plasma leaks.",
-   "say": "Tourniquets pulses pressures bellies is exam: rashes spot joints swell bleeds ooze lungs drown haematocrits climb platelets dive urines dry fluids drip transfuses wait. Vessels weep.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-arbovirus-fig1.webp",
-    "alt": "Diagram illustrating the three phases of Dengue fever, showing typical changes in temperature, platelet count, and haematocrit, with markers for warning signs and shock.",
-    "caption": "Dengue fever phases: clinical course, key lab changes, and critical events",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Investigations** (**NS1** early dengue confirms, **IgM** late paired serology, **haematocrit** leak kinetics serial, **platelets** leucopenia dengue hints, **transaminases** hepatic dengue climbs, **chikungunya** PCR serology NS1-negative, **ultrasound** gallbladder ascites leak, **malaria** smear dual screens) with **differentials** (**malaria** rings periodicity, **enteric** step-ladder rose, **chikungunya** ankles chronic, **leptospirosis** calf conjunctival) sorts; **physician** (ICU leak calls) meets. NS1 decides.",
-   "say": "NS1s IgMs haematocrits platelets is Ix: transaminases climb chikungunyas ache ultrasounds weep malarias ring enterics ladder leptospiroses ache physicians meet drips tune wishes respect. Antigens show.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**fluids** isotonic leak-titrated charts, **no-NSAID** aspirin ban bleed guards, **paracetamol** fever tepid cools, **transfuse** mucosal shock thresholds, **monitor** haematocrit urine leak phase, **chikungunya** physio chronic NSAID late, **prevent** source larvae nets screens, **counsel** warning-sign return) with **traps** (**steroids** unproven dengue harm, **IM** injections haematoma bleed, **discharge** defervesce leak lurks) closes; **follow** (counts leak recovery) tracks. Leaks seal.",
-   "say": "Fluids bans paracetamols transfuses is Rx: monitors watch chikungunyas stretch prevents drain counsels warn steroids harm injections bruise discharges leak follows track counts rise wishes respect. Shocks lift.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-791",
-  "bk2-med-792",
-  "bk2-med-793",
-  "bk2-med-794",
-  "bk2-med-795",
-  "bk2-med-796",
-  "bk2-med-797",
-  "bk2-med-798",
-  "bk2-med-799",
-  "bk2-med-800"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon9",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-arbovirus",
+  "quiz": [
+    "bk2-med-791",
+    "bk2-med-792",
+    "bk2-med-793",
+    "bk2-med-794",
+    "bk2-med-795",
+    "bk2-med-796",
+    "bk2-med-797",
+    "bk2-med-798",
+    "bk2-med-799",
+    "bk2-med-800"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon9",
+  "src": [],
+  "steps": [
+    {
+      "say": "You should ask when the fever began and whether muscles and eyes ache severely, because breakbone pain defines dengue. Check whether fever dipped and then returned, since a saddleback course is characteristic. Ask about gum bleeding, nosebleeds, vomiting, belly pain and restlessness around defervescence, because these warnings herald leakage and shock. Record symmetric ankle and wrist pain with morning stiffness, since crippling arthritis points to chikungunya. You should clarify mosquito exposure, stagnant water and prior dengue, because background shapes risk.",
+      "tx": "Take a **breakbone fever story** with abrupt high fever, severe muscle pain, retro-orbital headache and a saddleback return of fever after brief improvement. Ask about **bleeding and warning signs** such as gum or nose bleeds, tourniquet spots, persistent vomiting, abdominal pain, restlessness and reduced urine as defervescence approaches. Capture the **chikungunya joint clue** of symmetric ankle and wrist pain with crippling stiffness, plus flushed morbilliform rash, daytime mosquito bites, monsoon travel, stagnant water near home, and whether a previous dengue episode raises severity risk.",
+      "vis": null
+    },
+    {
+      "say": "Look at the forearm with the cuff above and the inked square below, because this is the tourniquet test. Count the dense red petechiae crowded inside the square, since more than ten to twenty per square inch counts as positive. Link this sign to dengue capillary fragility, because it appears before major bleeding. Use the picture to remember technique and site, so the test is done the same way every time.",
+      "tx": "The photograph shows a **cuffed forearm square** marked on the flexor surface below a blood pressure cuff, with arrows naming the site and the result. Inside the square, **dense petechiae clusters** stand out as tiny red spots from leaking capillaries, counted per square inch to judge positivity. Read it as **capillary fragility proof** in suspected dengue, linking the history of bleeding to bedside examination before haematocrit rise and platelet fall confirm leakage.",
+      "vis": {
+        "alt": "Forearm flexor surface under blood pressure cuff with marked square full of dense red petechiae clusters.",
+        "ar": 1.3393,
+        "caption": "Forearm tourniquet test showing dense petechiae in dengue. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-arbovirus-gen1.webp"
+      }
+    },
+    {
+      "say": "Apply the tourniquet test and count petechiae, because capillary fragility supports dengue. Feel the pulse and record pressure and posture, since narrowing pressure with cold hands warns of shock. You should palpate the belly and percuss the chest, because tender liver, ascites and effusion reveal leakage. Inspect skin, gums and joints for bleeding and arthritis, and track haematocrit, platelets and urine output closely. Reassess the lungs often, so fluids restore perfusion without causing overload.",
+      "tx": "Perform a **capillary leak check** with the tourniquet test, narrow pulse pressure, cold clammy peripheries, tender liver, ascites and pleural effusion as plasma escapes the vasculature. Complete a **bleeding survey** of petechiae, confluent rash, mucosal oozing, haematuria and menorrhagia, plus swollen tender ankles and wrists when chikungunya overlaps. Maintain a **shock and output chart** with serial haematocrit rise, platelet fall and urine output, test postural drops, and listen for basal crackles that warn of effusion and overload during resuscitation.",
+      "vis": {
+        "alt": "Diagram illustrating the three phases of Dengue fever, showing typical changes in temperature, platelet count, and haematocrit, with markers for warning signs and shock.",
+        "ar": 1.8349,
+        "caption": "Dengue fever phases: clinical course, key lab changes, and critical events",
+        "kind": "image",
+        "src": "v1/lessons/media/med-arbovirus-fig1.webp"
+      }
+    },
+    {
+      "say": "Send NS1 antigen testing in the first days of fever, because positivity confirms dengue early. Add paired serology when presentation is late, since antibodies rise as antigen disappears. Repeat haematocrit and platelet counts, because a climbing haematocrit with falling platelets tracks leakage. Scan the belly and chest when warning signs appear, since fluid collections confirm the critical phase. Exclude malaria, enteric fever, chikungunya and leptospirosis by smear, culture and serology, because monsoon fever has many mimics.",
+      "tx": "Use the **NS1 antigen window** early in dengue with PCR where available, then paired IgM serology later when antigen fades. Track **serial leak markers** with rising haematocrit, falling platelets and leucopenia, climbing transaminases, and ultrasound showing gallbladder wall oedema, ascites or effusion. Complete a **chikungunya and mimic rule out** with chikungunya PCR and serology when joints dominate or NS1 stays negative, plus malaria smears, enteric assessment and leptospirosis review, and seek senior help when leak or shock thresholds approach.",
+      "vis": null
+    },
+    {
+      "say": "You should titrate isotonic fluids to pulse, pressure and urine output, because both shortage and excess harm dengue patients. Control fever with paracetamol, and avoid aspirin, NSAIDs, steroids and intramuscular injections during the acute illness. You should watch haematocrit and urine closely around defervescence, since leakage peaks even as fever settles. Arrange physiotherapy for lingering chikungunya joint pain, clear stagnant water, and explain red flag symptoms clearly. Follow counts until recovery is complete.",
+      "tx": "Give **titrated isotonic fluids** guided by pulse, pressure, haematocrit and urine output through the leak phase, transfusing for mucosal bleeding or shock at accepted thresholds. Choose **safe fever control** with paracetamol and tepid sponging while banning aspirin and NSAIDs in acute dengue because they worsen bleeding. Keep **leak phase vigilance** around defervescence with haematocrit and urine monitoring, add physiotherapy and late NSAIDs for chronic chikungunya arthritis, remove breeding sites with nets and screens, and counsel every family on warning signs needing urgent return.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Dengue, chikungunya and arboviral fevers",
+  "v": 1
 }

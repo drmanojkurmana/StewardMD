@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-neuropathy",
- "subject": "medicine",
- "title": "Peripheral neuropathy, GBS and CIDP",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**stocking** numbness burning feet hands, **areflexia** falls stairs buttons, **GBS** ascending diarrhoea vaccine facial diplegia, **dysautonomia** labile bowels bladder, **CIDP** chronic relapsing steroids, **causes** diabetes B12 alcohol drugs chemo, **red** weight malignancy vasculitis) with **viva** (**neuropathic** stockinged areflexic, **GBS** ascending ventilated) profiles; **tempo** (acute chronic sorts) times. Nerves fray.",
-   "say": "Stockings areflexias GBSs dysautonomias is history: CIDPs relapse causes poison reds warn tempos time neuropathics numb GBSs climb triggers bite bowels swing. Feet tingle.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**stocking** pinprick vibration proprioception, **areflexia** ankles knees arms, **wasting** foot drop steppage, **GBS** facial bulbar respiratory counts, **autonomic** postural sweats pupils, **vasculitic** mononeuritis painful asymmetric, **cord** mimics Babinski levels) with **bedside** (**monofilament** 10g annual, **vital** capacity GBS monitors, **glucose** B12 screens) filaments; **ulcers** (pressure callus) checks. Reflexes vanish.",
-   "say": "Stockings areflexias wastings GBSs is exam: autonomics swing vasculitics ache cords mimic filaments touch vitals blow glucoses check ulcers probe shoes fit. Legs deaden.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**NCS** axonal demyelinating sorts, **CSF** albuminocytologic GBS proves, **glucose** HbA1c B12 TFT causes, **vasculitis** ANCA ESR nerves, **myeloma** protein electrophoresis, **genetic** Charcot family feet) with **differentials** (**GBS** ascending CSF protein, **CIDP** chronic steroids, **vasculitic** painful asymmetric, **diabetic** stocking length) sorts; **neurology** (IVIg plasma decides) meets. Conductions slow.",
-   "say": "NCSs CSFs glucoses vasculitides is Ix: myelomas gap genetics test GBSs ascend CIDPs persist vasculitics sting diabetics stock neurologists meet globulins pour plasmas wash. Signals fade.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-neuropathy-fig1.webp",
-    "alt": "Diagram comparing normal nerve conduction with demyelinating neuropathy (slowed conduction) and axonal neuropathy (reduced amplitude).",
-    "caption": "Nerve conduction study findings in normal, demyelinating, and axonal neuropathies",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**GBS** IVIg plasma ICU ventilate, **CIDP** steroids IVIg azathioprine, **cause** glucose B12 alcohol drugs, **pain** gabapentin duloxetine amitriptyline, **physio** splints falls prevents, **vaccinate** flu pneumococcal guards) with **traps** (**respiratory** failure misses, **dysautonomia** arrests swings, **pressure** ulcers neglects) closes; **follow** (strength function NCS) tracks. Nerves recover.",
-   "say": "GBSs CIDPs causes pains is Rx: physios splint vaccinates shield respiratories fail dysautonomias swing pressures sore follows track strengths return wishes respect. Feet feel.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-521",
-  "bk2-med-522",
-  "bk2-med-523",
-  "bk2-med-524",
-  "bk2-med-525",
-  "bk2-med-526",
-  "bk2-med-527",
-  "bk2-med-528",
-  "bk2-med-529",
-  "bk2-med-530"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon6",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-neuropathy",
+  "quiz": [
+    "bk2-med-521",
+    "bk2-med-522",
+    "bk2-med-523",
+    "bk2-med-524",
+    "bk2-med-525",
+    "bk2-med-526",
+    "bk2-med-527",
+    "bk2-med-528",
+    "bk2-med-529",
+    "bk2-med-530"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon6",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about stocking numbness with burning of feet and hands, and lost reflexes with falls on stairs and buttons. Ask about ascending weakness after diarrhoea or vaccine with facial diplegia, labile bowels with bladder, and a chronic relapsing course. Record diabetes, B12, alcohol, drugs and chemotherapy causes, and flag weight loss with malignancy or vasculitis.",
+      "tx": "Ask about stocking numbness with burning of feet and hands, and areflexia with falls on stairs and buttons. Ask about ascending weakness after diarrhoea or vaccine with facial diplegia of **Guillain Barre**, labile bowels with bladder of **dysautonomia disease**, and chronic relapsing course of CIDP. Record diabetes, B12, alcohol, drugs and chemotherapy causes, and flag weight loss with malignancy or **vasculitis clues**.",
+      "vis": null
+    },
+    {
+      "say": "Map stocking loss of pinprick, vibration and proprioception, and test reflexes from ankles to arms. Read wasting with foot drop and steppage, count facial, bulbar and respiratory failure, and test postural pressure with sweats and pupils. Feel painful asymmetric mononeuritis, exclude cord mimics with Babinski and levels, and check pressure callus with foot ulcers.",
+      "tx": "Map stocking loss of pinprick, vibration and proprioception, and test areflexia from ankles to arms. Read wasting with foot drop and steppage, count facial, bulbar and **respiratory failure** in GBS, and test postural pressure with sweats and pupils for autonomic disease. Feel painful asymmetric **mononeuritis multiplex**, exclude cord mimics with Babinski and levels, and check pressure callus with **foot ulcers**.",
+      "vis": null
+    },
+    {
+      "say": "Watch the clinician press the filament against the sole until it buckles at ninety degrees, testing the marked plantar sites. Failure to feel the filament marks loss of protective sensation and predicts foot ulcers. For the exam, press until the filament buckles, test every marked site, and link insensitivity with glycaemic control and footwear referral.",
+      "tx": "The photograph shows a **10 gram monofilament** buckling at ninety degrees against the sole, testing the marked plantar sites of stocking loss. Failure to feel the filament marks loss of **protective sensation** and predicts foot ulcers. For the exam, press until the filament buckles, test every marked site, and link insensitivity with glycaemic control and **footwear referral**.",
+      "vis": {
+        "alt": "Gloved hand pressing buckling monofilament on sole of foot marked with plantar sensory test sites.",
+        "ar": 1.3393,
+        "caption": "Clinician applies buckling monofilament to plantar foot test sites. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-neuropathy-gen1.webp"
+      }
+    },
+    {
+      "say": "Sort axonal from demyelinating patterns on nerve conduction studies, and prove GBS with albuminocytologic dissociation in CSF. Screen glucose with HbA1c, B12 and thyroid function for causes, test ANCA with ESR for vasculitis, and run protein electrophoresis for myeloma. Test Charcot family feet by genetics, and involve neurology for IVIg choice.",
+      "tx": "Sort axonal from **demyelinating patterns** on nerve conduction studies, and prove GBS with **albuminocytologic dissociation** in CSF. Screen glucose with HbA1c, B12 and thyroid function for causes, test ANCA with ESR for vasculitis, and run protein electrophoresis for myeloma. Test Charcot family feet by genetics, separate GBS, CIDP, vasculitic and diabetic patterns, and involve **neurology services** for IVIg choice.",
+      "vis": {
+        "alt": "Diagram comparing normal nerve conduction with demyelinating neuropathy (slowed conduction) and axonal neuropathy (reduced amplitude).",
+        "ar": 1.8349,
+        "caption": "Nerve conduction study findings in normal, demyelinating, and axonal neuropathies",
+        "kind": "image",
+        "src": "v1/lessons/media/med-neuropathy-fig1.webp"
+      }
+    },
+    {
+      "say": "Ventilate GBS in ICU with IVIg or plasma exchange, which is required, and treat CIDP with steroids, IVIg or azathioprine. Fix the cause through glucose, B12, alcohol and drug control, and ease pain with gabapentin, duloxetine or amitriptyline. Prevent falls with physiotherapy and splints, shield with flu and pneumococcal vaccines, and track strength with function.",
+      "tx": "Ventilate GBS in ICU with IVIg or **plasma exchange**, and treat CIDP with steroids, IVIg or azathioprine. Fix the cause through glucose, B12, alcohol and drug control, and ease pain with gabapentin, duloxetine or **amitriptyline therapy**. Prevent falls with physiotherapy and splints, shield with flu and pneumococcal vaccines, never miss **respiratory decline** with dysautonomia swings, and track strength with function.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Peripheral neuropathy, GBS and CIDP",
+  "v": 1
 }

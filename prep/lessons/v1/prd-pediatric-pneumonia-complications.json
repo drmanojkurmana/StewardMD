@@ -1,0 +1,233 @@
+{
+ "gen": "AI",
+ "id": "prd-pediatric-pneumonia-complications",
+ "minutes": 7,
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Young children can grow a perfectly round pneumonia that looks exactly like a tumour. Under eight years the collateral air pathways are immature, so infection stays spherical, usually in a lower lobe.",
+   "tx": "**Round pneumonia in young children** appears as a well-circumscribed solitary spherical mass that mimics a tumour on chest radiograph. It occurs almost exclusively **under 8 years** (before collateral air drift matures), favours the posterior lower lobes, and air bronchograms inside the opacity favour infection over neoplasm.",
+   "vis": {
+    "alt": "Alveolar consolidation and lung parenchymal changes in bacterial pneumonia.",
+    "ar": 1.3393,
+    "caption": "Red hepatisation with fibrin and neutrophils in pneumonia. Illustration: StewardMD original.",
+    "kind": "image",
+    "src": "v1/lessons/media/pat-pulmonary-infections-gen1.webp"
+   }
+  },
+  {
+   "say": "Pneumococcus causes most round and lobar pneumonias in otherwise healthy children. Fever, high inflammatory markers and quick clearing with antibiotics make the bacterial diagnosis far likelier than a mass.",
+   "tx": "**Streptococcus pneumoniae etiology** dominates this pattern, because pneumococcus is the single most common causative organism of round pneumonia and lobar consolidation in healthy immunocompetent children. A short febrile history, raised inflammatory markers and rapid radiographic clearing on antibiotics all support the bacterial diagnosis.",
+   "vis": {
+    "cols": [
+     "Age Group",
+     "Collateral Airway Anatomy",
+     "Radiologic Pattern"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Under 8 years",
+      "Rudimentary pores of Kohn",
+      "Round, well-defined mass-like opacity"
+     ],
+     [
+      "Over 8 years",
+      "Fully developed Kohn & Lambert channels",
+      "Segmental or lobar consolidation"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Pneumatoceles are thin walled, air filled cystic cavities that form during acute staphylococcal or pneumococcal pneumonia. Check valve airway obstruction leads to focal hyperinflation, with most cysts resolving spontaneously over months.",
+   "tx": "**Pneumatocele formation** is a classic complication of bacterial pneumonia, classically associated with **Staphylococcus aureus** or Streptococcus pneumoniae. Microscopic bronchial necrosis creates check-valve air trapping, resulting in thin-walled, gas-filled cysts that typically undergo **spontaneous regression** over several weeks to months without intervention.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "Suppurative bronchiolitis"
+     ],
+     [
+      "b",
+      "c",
+      "Air trapping"
+     ],
+     [
+      "c",
+      "d",
+      "Conservative wait"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bacterial bronchiolar necrosis"
+     },
+     {
+      "id": "b",
+      "label": "Ball-valve airway obstruction"
+     },
+     {
+      "id": "c",
+      "label": "Thin-walled pneumatocele"
+     },
+     {
+      "id": "d",
+      "label": "Spontaneous resolution"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Necrotizing pneumonia destroys lung from inside, leaving poorly enhancing tissue riddled with small cavities. Staphylococci and pneumococcal serotypes 19A and 3 are the usual culprits after severe infection.",
+   "tx": "**Necrotizing pneumonia CT hallmarks** include loss of normal parenchymal enhancement with multiple small thin-walled cavities inside consolidated lung. **Staphylococcus aureus** and **Streptococcus pneumoniae serotype 19A/3** lead the causes, and contrast CT (computed tomography) maps devitalised tissue before pneumatoceles or bronchopleural fistula develop.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "No enhancement of necrotic lung",
+      "Multiple irregular internal microcavities",
+      "No thick fibrous capsule wall",
+      "Medical therapy first-line"
+     ],
+     "title": "Necrotizing Pneumonia"
+    },
+    "right": {
+     "points": [
+      "Central fluid-attenuation cavity",
+      "Thick, smooth enhancing fibrous wall",
+      "Prominent air-fluid level",
+      "May require percutaneous drainage"
+     ],
+     "title": "Lung Abscess"
+    }
+   }
+  },
+  {
+   "say": "Ultrasound reads pleural fluid better than CT in children and uses no radiation. It shows fibrin strands and septations, judges whether fluid will drain, and guides exactly where to place the drain.",
+   "tx": "**Ultrasound for parapneumonic effusion** outperforms CT (computed tomography) at characterising pleural fluid in children. Sonography detects internal fibrin strands, loculations and septations, grades echogenic debris, guides drainage position, and stages effusion from free-flowing exudate toward organised empyema without any ionising radiation dose.",
+   "vis": {
+    "cols": [
+     "Sonographic Feature",
+     "Simple Parapneumonic",
+     "Organized Empyema"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Internal echogenicity",
+      "Anechoic, clear fluid",
+      "Echogenic debris, turbid fluid"
+     ],
+     [
+      "Septation",
+      "Completely absent",
+      "Dense fibrin webs, multiple locules"
+     ],
+     [
+      "Pleural peel",
+      "Thin, smooth pleura",
+      "Marked pleural thickening (>2 mm)"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "A trapped, loculated empyema needs more than a drain. Alteplase and dornase alfa dissolve fibrin and thick pus through the tube, and thoracoscopic surgery waits if that approach fails.",
+   "tx": "**Empyema fibrinolysis criteria** favour intrapleural therapy when a loculated complex effusion or frank empyema with thickened pleural peel traps the lung. Intrapleural **alteplase** with **dornase alfa** breaks fibrin and DNA debris, while video-assisted thoracoscopic surgery (VATS) remains the alternative when drainage and enzymes fail.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Loculated empyema on ultrasound"
+     },
+     {
+      "id": "b",
+      "label": "Tube drain plus alteplase and dornase alfa"
+     },
+     {
+      "id": "c",
+      "label": "Free drainage and lung re-expansion"
+     },
+     {
+      "id": "d",
+      "label": "VATS only if drainage fails"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "Peel and septations present"
+     ],
+     [
+      "b",
+      "c",
+      "Fibrin and debris cleared"
+     ],
+     [
+      "b",
+      "d",
+      "Persistent trap"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "After severe adenovirus pneumonia, one lung can stay small and abnormally lucent. Swyer-James-Macleod syndrome prunes its vessels and traps air, so expiratory films confirm the diagnosis.",
+   "tx": "**Swyer-James-Macleod syndrome** is post-infectious obliterative bronchiolitis after childhood adenovirus or mycoplasma pneumonia. One lung or lobe stays abnormally lucent and small, vessels look pruned, and expiratory films prove air trapping, producing a unilateral hyperlucent lung that must not be mistaken for congenital absence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Swyer-James-Macleod lung",
+     "points": [
+      "Unilateral hyperlucency",
+      "Small lung with pruned vessels",
+      "Air trapping on expiration"
+     ]
+    },
+    "right": {
+     "title": "Normal opposite lung",
+     "points": [
+      "Normal vascular markings",
+      "Full volume maintained",
+      "Empties normally on expiration"
+     ]
+    }
+   }
+  },
+  {
+   "say": "The middle lobe bronchus is long, narrow and ringed by lymph nodes, so it blocks easily. Recurrent collapse there earns the name right middle lobe syndrome and can end in bronchiectasis.",
+   "tx": "**Right middle lobe syndrome** means recurrent or persistent middle lobe atelectasis (collapse). The long narrow bronchus leaves at an acute angle and a ring of lymph nodes surrounds it, so minor inflammation seals it shut; bronchiectasis and recurrent infection follow when the lobe never re-expands.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Mechanism",
+     "Imaging clue"
+    ],
+    "rows": [
+     [
+      "Right middle lobe syndrome",
+      "Narrow bronchus ringed by nodes",
+      "Persistent middle lobe collapse"
+     ],
+     [
+      "Swyer-James-Macleod",
+      "Obliterative bronchiolitis after infection",
+      "Small hyperlucent lung, air trapping"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-paediatric-radiology",
+ "system": "respiratory",
+ "title": "Pediatric Pneumonia, Round Pneumonia and Parapneumonic Empyema",
+ "v": 1,
+ "module": "prd-neonatal-respiratory-imaging"
+}

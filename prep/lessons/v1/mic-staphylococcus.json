@@ -3,11 +3,11 @@
  "module": "mic-staphylococcus",
  "subject": "microbiology",
  "title": "Staphylococcus aureus, MRSA and coagulase negative staphylococci",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
-   "tx": "**Staphylococcus aureus** clusters like grapes as Gram positive cocci because division planes stay random, and the laboratory separates it from streptococci by **catalase positivity** (bubbles with hydrogen peroxide) and from coagulase negative species by **tube coagulase** (free coagulase clotting plasma). Golden pigment, beta haemolysis on blood agar and mannitol fermentation support the call, while protein A (binding Fc of IgG) explains phagocytosis evasion. Slide coagulase detects bound clumping factor rapidly.",
-   "say": "Grape like clusters that bubble with peroxide and clot plasma are aureus. Catalase splits staph from strep.",
+   "tx": "Staphylococcus aureus clusters like grapes because division planes stay random. The laboratory separates it from streptococci by **catalase positivity** with bubbles in hydrogen peroxide, and from coagulase negative species by **tube coagulase** that clots plasma through free coagulase. Golden pigment, beta haemolysis on blood agar and mannitol fermentation support the call, while **protein A** binding the Fc of IgG explains phagocytosis evasion. Slide coagulase detects bound clumping factor rapidly.",
+   "say": "Staphylococci are recognised by their grouping and their chemistry. Cocci in grape like clusters that bubble with peroxide are staphylococci, which is the catalase divide from streptococci. Clotting of plasma in a tube proves free coagulase and names aureus, while a rapid slide test is used to detect the bound form. Golden colour, haemolysis and mannitol fermentation support the identification, and protein A is the surface factor that grips antibody tails and defeats phagocytes.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/mic-staphylococcus-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Toxin diseases** declare themselves fast: **staphylococcal food poisoning** (preformed heat stable enterotoxin in cream filled sweets, vomiting within 6 hours, no fever, self limiting with fluids), **toxic shock syndrome** (TSST-1 superantigen in tampon users or wound packing, fever with rash, desquamation and hypotension), and **staphylococcal scalded skin syndrome** (exfoliatin in neonates, Nikolsky positive but mucosa spared, unlike TEN). PVL strains necrotise lungs after viral illness.",
-   "say": "Vomiting 6 hours after sweets is preformed toxin. Scalded neonate with spared mucosa is exfoliatin.",
+   "tx": "Toxin diseases declare themselves fast. **Staphylococcal food poisoning** follows preformed heat stable enterotoxin in cream sweets with vomiting within six hours, no fever, settling with fluids. **Toxic shock syndrome** follows TSST-1 superantigen in tampon users or wound packing with fever, rash, desquamation and hypotension. **Scalded skin syndrome** from exfoliatin peels neonates with Nikolsky positive skin but spares mucosa, unlike TEN. PVL strains necrotise lungs after viral illness.",
+   "say": "Toxin diseases are diagnosed by speed and setting. Vomiting within six hours of cream sweets without fever is preformed enterotoxin, which is food poisoning that settles with fluids. Fever with rash, peeling and low blood pressure in a tampon user is toxic shock from superantigen, which is managed with support and source removal. A scalded peeling neonate with spared mouth is exfoliatin disease, which is distinguished from TEN by the intact mucosa. PVL strains are the ones that rot lungs after influenza, which is the necrotising pneumonia to remember.",
    "vis": null
   },
   {
-   "tx": "**MRSA** carries **mecA** on SCCmec encoding PBP2a, a transpeptidase with a closed active site that beta lactams cannot reach, so oxacillin screening flags resistance to the whole class except ceftaroline. Hospital clones (SCCmec I to III, multidrug resistant) differ from community clones (SCCmec IV, PVL positive skin abscesses). **Vancomycin** remains the parenteral backbone with trough and MIC creep watched; **VRSA** (vanA from enterococci) needs linezolid or daptomycin (never in pneumonia, surfactant inactivates). Mupirocin decolonises carriers with contact precautions containing spread.",
-   "say": "Oxacillin resistant means whole beta lactam class fails. Community MRSA abscesses carry PVL.",
+   "tx": "The infant shows **scalded skin syndrome** from exfoliatin. Diffuse red skin peels in sheets with **Nikolsky** positivity, where gentle pressure slides the epidermis off, yet the inset proves the **spared mucosa** with an intact open mouth. That sparing separates it from TEN, where mucosa burns too. Neonates are targeted because they cannot clear the toxin, and management is supportive with fluids, warmth and antistaphylococcal antibiotics for the source.",
+   "say": "Look at the whole infant first. The torso is red and peeling in large sheets that slip with gentle pressure, which is Nikolsky positivity from exfoliatin toxin. The mouth inset is the key: the mucosa is completely spared, which is how scalded skin differs from toxic epidermal necrolysis. Newborns are vulnerable because their kidneys cannot yet excrete the toxin, which is why age matters. Fluids, warmth and antibiotics against the staphylococcal source are the treatment, and the skin is expected to heal without scarring.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mic-staphylococcus-gen1.webp",
+    "alt": "Infant torso with diffuse erythema and peeling desquamating epidermis, plus inset of open mouth showing spared mucosa.",
+    "caption": "Infant with desquamating erythema, Nikolsky positive skin and spared mucosa. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**MRSA** carries **mecA** on SCCmec encoding PBP2a, a transpeptidase with a closed active site that beta lactams cannot reach, so oxacillin screening flags resistance to the whole class except ceftaroline. Hospital clones with SCCmec I to III resist many drugs, while community clones with SCCmec IV cause PVL positive skin abscesses. **Vancomycin** remains the parenteral backbone with trough and MIC creep watched, and **VRSA** with vanA from enterococci needs linezolid or daptomycin, never in pneumonia since surfactant inactivates. Mupirocin decolonises carriers with contact precautions containing spread.",
+   "say": "Methicillin resistance is a single gene with wide consequences. The mecA gene builds an altered penicillin binding protein that beta lactams cannot grip, which is why oxacillin resistance closes the whole class except ceftaroline. Hospital clones resist many drug families, while community clones cause boils and abscesses with PVL toxin. Vancomycin is the parenteral backbone with levels and MIC creep watched, and fully resistant VRSA must be treated with linezolid or daptomycin, the latter never in pneumonia. Nasal mupirocin with contact precautions is the decolonisation strategy.",
    "vis": null
   },
   {
-   "tx": "**Coagulase negative staphylococci** matter on hardware: **S. epidermidis** (biofilm slime on catheters, shunts and prosthetic valves, novobiocin sensitive) causes indolent device infections needing removal, while **S. saprophyticus** (novobiocin resistant) causes honeymoon cystitis in young women. **S. lugdunensis**, though coagulase negative, behaves like aureus with aggressive native valve endocarditis and needs full aureus style therapy. Speciation guides whether to pull the line or treat the bladder.",
-   "say": "Device infection with slime is epidermidis: pull hardware. Honeymoon cystitis resisting novobiocin is saprophyticus.",
+   "tx": "Coagulase negative staphylococci matter on hardware. **S. epidermidis** lays biofilm slime on catheters, shunts and prosthetic valves and stays novobiocin sensitive, causing indolent device infections that need removal. **S. saprophyticus** resists novobiocin and causes honeymoon cystitis in young women. **S. lugdunensis**, though coagulase negative, behaves like aureus with aggressive native valve endocarditis and needs full aureus style therapy. Speciation guides whether to pull the line or treat the bladder.",
+   "say": "Coagulase negative species earn attention on devices, where epidermidis coats catheters and valves with slime, and causes low grade device infections that only improve when hardware is removed, which is the rule to remember. Saprophyticus is the odd one that resists novobiocin and causes cystitis in young women after intercourse. Lugdunensis is the wolf in sheep's clothing that destroys native valves like aureus and must receive full aureus therapy. Speciation is the step that decides between pulling a line and treating a bladder.",
    "vis": {
     "kind": "table",
     "cols": [

@@ -1,0 +1,245 @@
+{
+  "gen": "AI",
+  "id": "prd-perthes-scfe-hip",
+  "module": "Non-Accidental Trauma, Salter-Harris Fractures and Bone Infections",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Pediatric Hip Pathology: SCFE, Legg-Calve-Perthes and Synovitis",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Slipped capital femoral epiphysis occurs in overweight adolescents during their rapid growth spurt. A type one Salter-Harris fracture through the hypertrophic zone causes the displacement.",
+      "tx": "Recognize **SCFE age and demographics** when adolescents present with hip, groin, thigh, or knee pain. Slipped Capital Femoral Epiphysis (SCFE) is a Salter-Harris Type I physeal fracture through the hypertrophic zone of the proximal femoral physis. It occurs predominantly in overweight adolescents (males 12-14 years, females 10-12 years), who frequently present with referred medial knee pain that delays hip imaging (Klein line criteria).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient parameter",
+          "Typical presentation",
+          "Diagnostic pitfall"
+        ],
+        "rows": [
+          [
+            "Age and sex",
+            "Males 12-14 years, females 10-12 years",
+            "Failure to suspect SCFE in atypical ages"
+          ],
+          [
+            "Body habitus",
+            "Overweight / obesity with rapid growth",
+            "May be triggered by endocrinopathy if thin"
+          ],
+          [
+            "Pain distribution",
+            "Referred pain to thigh or knee",
+            "Ordering knee x-rays while ignoring the hip"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "On anteroposterior and frog-leg lateral pelvic radiographs, clinicians assess the Klein line along the superior femoral neck. Failure of this line to intersect the lateral epiphysis indicates Trethowan sign.",
+      "tx": "Evaluate the **Klein line criteria** on AP and frog-leg lateral pelvic radiographs. A line drawn tangential to the superior border of the femoral neck (Klein line) should normally intersect the lateral aspect of the capital femoral epiphysis. In SCFE, the slipped epiphysis fails to intersect the line, a finding known as Trethowan sign. Bilateral frog-leg lateral views provide the highest sensitivity for detecting subtle early slips (Slip direction).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal hip (Klein line)",
+          "points": [
+            "Line intersects lateral 20% of epiphysis",
+            "Symmetric epiphyseal height above line",
+            "Smooth femoral neck-head transition"
+          ]
+        },
+        "right": {
+          "title": "SCFE (Trethowan sign)",
+          "points": [
+            "Klein line fails to intersect epiphysis",
+            "Loss of normal lateral epiphyseal shoulder",
+            "Blanch sign of Steel (double density)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The capital femoral epiphysis slips posteromedially relative to the neck, resembling a scoop of ice cream falling off a cone. The femoral neck actually shifts anterolaterally.",
+      "tx": "Understand the **posteromedial slip direction** biomechanics in SCFE. While the terminology implies epiphyseal movement, the capital femoral epiphysis remains firmly anchored within the acetabulum by the ligamentum teres while the femoral neck displaces anterosuperiorly and rotates externally. On radiographs, this creates the classic appearance of a scoop of ice cream slipping posteromedially off its cone (Bilateral risk).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "weight",
+            "label": "Axial shear stress on weakened growth plate"
+          },
+          {
+            "id": "physeal",
+            "label": "Type I Salter-Harris physeal separation"
+          },
+          {
+            "id": "displacement",
+            "label": "Femoral neck moves anterosuperiorly"
+          },
+          {
+            "id": "appearance",
+            "label": "Epiphysis appears posteromedially slipped"
+          }
+        ],
+        "edges": [
+          [
+            "weight",
+            "physeal"
+          ],
+          [
+            "physeal",
+            "displacement"
+          ],
+          [
+            "displacement",
+            "appearance"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Bilateral slipped capital femoral epiphysis is remarkably common, affecting up to forty percent of patients. If a child has hypothyroidism or renal osteodystrophy, the bilateral risk exceeds fifty percent.",
+      "tx": "Screen for **bilateral involvement in SCFE** in every diagnosed patient. Bilateral slips occur in 20-40% of cases, presenting either simultaneously or sequentially within 12 to 18 months. If an underlying endocrinopathy exists (hypothyroidism, growth hormone deficiency, renal osteodystrophy), the bilateral rate exceeds 50%, prompting many pediatric orthopedists to perform prophylactic contralateral in-situ screw fixation (Perthes disease).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical scenario",
+          "Bilateral SCFE frequency",
+          "Management strategy"
+        ],
+        "rows": [
+          [
+            "Idiopathic SCFE in adolescent",
+            "20-40% bilateral rate",
+            "Close serial frog-leg radiographs or pinning"
+          ],
+          [
+            "Endocrinopathy / renal disease",
+            "> 50% bilateral rate",
+            "Mandatory prophylactic contralateral pinning"
+          ],
+          [
+            "Unilateral slip presentation",
+            "Contralateral slip in 12-18 months",
+            "Educate family regarding contralateral symptoms"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Legg-Calve-Perthes disease is idiopathic avascular necrosis of the femoral head in young children. Active boys aged four to eight years present with a painless or low-grade limp.",
+      "tx": "Recognize **Legg-Calve-Perthes disease peak age** and presentation. Legg-Calve-Perthes disease (LCPD) is idiopathic avascular necrosis of the capital femoral epiphysis occurring in children aged 4 to 8 years, with a marked 4:1 male-to-female predominance. Children typically present with an unprovoked, painless or mildly aching limp and insidious loss of internal rotation and abduction of the hip (Waldenstrom staging).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Legg-Calve-Perthes disease",
+          "points": [
+            "Ages 4 to 8 years (4:1 boys)",
+            "Idiopathic avascular necrosis",
+            "Insidious, painless or low-grade limp"
+          ]
+        },
+        "right": {
+          "title": "Slipped capital femoral epiphysis",
+          "points": [
+            "Ages 10 to 14 years (overweight)",
+            "Physeal shear fracture",
+            "Painful limp with external rotation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Perthes disease progresses through four distinct radiographic stages described by Waldenstrom. An early subchondral crescent fracture gives way to fragmentation and subsequent reossification.",
+      "tx": "Trace the **Waldenstrom radiographic stages** of Legg-Calve-Perthes disease across disease evolution. Stage 1 (Initial) manifests as femoral head sclerosis, joint space widening, and a subchondral fracture (crescent sign). Stage 2 (Fragmentation) features epiphyseal collapse and radiolucent fissuring. Stage 3 (Reossification) shows gradual restoration of bone density, leading to Stage 4 (Remodeling) with healed spherical or flattened head morphology (Herring classification).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "st1",
+            "label": "Stage 1 (Initial): Sclerosis & subchondral crescent sign"
+          },
+          {
+            "id": "st2",
+            "label": "Stage 2 (Fragmentation): Epiphyseal fissuring & collapse"
+          },
+          {
+            "id": "st3",
+            "label": "Stage 3 (Reossification): New bone fills avascular zone"
+          },
+          {
+            "id": "st4",
+            "label": "Stage 4 (Remodeling): Healed spherical or aspherical head"
+          }
+        ],
+        "edges": [
+          [
+            "st1",
+            "st2"
+          ],
+          [
+            "st2",
+            "st3"
+          ],
+          [
+            "st3",
+            "st4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Herring lateral pillar classification determines long-term prognosis during the fragmentation stage. Maintaining over fifty percent of the lateral pillar height protects against late osteoarthritis.",
+      "tx": "Apply the **Catterall and Herring classifications** during the fragmentation stage of Perthes disease. The Herring lateral pillar classification on AP pelvis radiographs provides the most accurate prognostic guide: Group A maintains 100% lateral pillar height (excellent prognosis); Group B maintains > 50% height (favorable outcome); and Group C suffers > 50% loss of lateral pillar height, resulting in femoral head deformity and early osteoarthritis (Transient synovitis).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Herring group",
+          "Lateral pillar height maintained",
+          "Long-term clinical prognosis"
+        ],
+        "rows": [
+          [
+            "Group A",
+            "100% lateral pillar height intact",
+            "Excellent; complete remodeling expected"
+          ],
+          [
+            "Group B",
+            "> 50% lateral pillar height maintained",
+            "Good; minimal femoral head flattening"
+          ],
+          [
+            "Group C",
+            "< 50% lateral pillar height remaining",
+            "Poor; severe aspherical deformity & arthrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transient synovitis is a benign, self-limiting hip effusion following a mild viral illness. Pelvic radiographs are normal, and ultrasound confirms an effusion that resolves within days.",
+      "tx": "Differentiate **transient synovitis ultrasound** findings from septic arthritis. Transient synovitis (toxic synovitis) is a self-limiting, post-viral inflammatory effusion occurring in children aged 3-8 years. Pelvic radiographs are normal without bone destruction, while ultrasound demonstrates a small-to-moderate hip effusion that resolves completely within 7-10 days with rest and non-steroidal anti-inflammatory therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transient synovitis",
+          "points": [
+            "Mild effusion resolving in 7-10 days",
+            "Child remains well and non-toxic",
+            "Afebrile or low-grade temperature"
+          ]
+        },
+        "right": {
+          "title": "Septic arthritis",
+          "points": [
+            "Purulent tense effusion (> 2 mm asymmetry)",
+            "High fever with inability to bear weight",
+            "Elevated ESR > 40 mm/hr and CRP"
+          ]
+        }
+      }
+    }
+  ]
+}

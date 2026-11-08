@@ -1,66 +1,65 @@
 {
- "v": 1,
- "module": "med-jaundice",
- "subject": "medicine",
- "title": "Jaundice and liver function tests",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**yellow** sclera urine pale stools, **pre-hepatic** haemolysis Gilbert fasting, **hepatic** viral drugs alcohol, **cholestatic** itch xanthoma gallstones, **pain** biliary colic cholangitis, **weight** malignant anorexia, **drugs** paracetamol antibiotics, **travel** hepatitis water shellfish) with **viva** (**itchy** cholestatic scratcher, **wasted** malignant knot) profiles; **colours** (urine stools eyes) notes. Skins yellow.",
-   "say": "Yellows pres hepatics is history: cholestatics itch pains colic weights waste drugs harm travels sicken colours note urines darken stools pale eyes stain drinks quantify contacts trace. Bilirubins rise.",
-   "vis": null
-  },
-  {
-   "tx": "**Examination** (**scleral** yellow grades, **xanthelasma** chronic cholestasis, **stigmata** spider palmar Dupuytren, **liver** span tender craggy, **spleen** portal enlarges, **ascites** shifting dullness, **encephalopathy** flaps fetor, **Courvoisier** palpable GB malignant) with **bedside** (**urine** bilirubin dips, **BMI** wastes, **vitals** Charcot fever) dips; **pruritus** (scratches excoriates) scores. Bodies yellow.",
-   "say": "Sclerals xanthelasmas stigmatas is exam: livers span spleens swell ascites shifts encephalopathies flap Courvoisiers feel urines dip BMIs waste vitals fever prurituses score stools inspect bleeds watch. Hands stigmata.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**LFT** ALT ALP bilirubin patterns, **unconjugated** haemolysis Gilbert retics, **cholestatic** GGT ALP MRCP, **viral** serology windows, **autoimmune** ANA SMA IgG, **ultrasound** CBD dilates, **CT** masses nodes, **biopsy** DILI AIH proves) with **differentials** (**haemolysis** retics LDH haptoglobin, **Gilbert** fasting benign genes, **stones** colic Murphy dilates, **tumour** Courvoisier weight) sorts; **pattern** (R ratio decides) reads. Labs pattern.",
-   "say": "LFTs unconjugateds cholestatics is Ix: virals window autoimmunes mark ultrasounds widen CTs stage biopsies prove haemolyses retics Gilberts fast stones colic tumours knot ratios read drugs stop alcohols quit transfusions match. Enzymes sort.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-jaundice-fig1.webp",
-    "alt": "Diagram illustrating LFT patterns for pre-hepatic, hepatic, and cholestatic jaundice, showing bilirubin, ALT, ALP, GGT levels.",
-    "caption": "LFT patterns differentiate pre-hepatic, hepatic, and cholestatic jaundice",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**stop** drugs alcohol suspects, **UDCA** PBC itch slows, **cholestyramine** itch binds, **ERCP** stones stents drains, **surgery** resectable stages, **NAC** paracetamol protects, **transplant** fulminant lists, **palliation** stents itches) with **traps** (**cholangitis** Charcot ERCP urgent, **paracetamol** levels Rumack treats, **coagulopathy** vitamin K FFP, **encephalopathy** lactulose grades) closes; **follow** (LFT trends) tracks. Yellows fade.",
-   "say": "Stops UDCAs cholestyramines is Rx: ERCPs drain surgeries resect NACs guard transplants list palliations stent cholangitises fever paracetamols level coagulopathies clot encephalopathies cloud lactuloses clear itches soothe wishes respect. Bilirubins fall.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-231",
-  "bk2-med-232",
-  "bk2-med-233",
-  "bk2-med-234",
-  "bk2-med-235",
-  "bk2-med-236",
-  "bk2-med-237",
-  "bk2-med-238",
-  "bk2-med-239",
-  "bk2-med-240"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon3",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 7,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-jaundice",
+  "quiz": [
+    "bk2-med-231",
+    "bk2-med-232",
+    "bk2-med-233",
+    "bk2-med-234",
+    "bk2-med-235",
+    "bk2-med-236",
+    "bk2-med-237",
+    "bk2-med-238",
+    "bk2-med-239",
+    "bk2-med-240"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon3",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask whether the eyes look yellow and whether the urine has turned dark with pale stools, because this combination points toward cholestasis. Find out if jaundice appears during fasting or illness, which suggests Gilbert syndrome or haemolysis. Check viral contacts, alcohol intake, paracetamol and antibiotic use, travel, unsafe water and shellfish. Ask about itching, upper abdominal pain after fatty food, fever with rigors, and weight loss with poor appetite, since painless progressive jaundice with weight loss warns of malignancy.",
+      "tx": "Ask about yellow discoloration of the eyes with dark urine and pale stools, since this triad defines **scleral jaundice** with cholestasis. Separate fasting haemolytic jaundice seen in Gilbert syndrome from viral, drug induced and alcoholic liver injury. Ask about itching with xanthoma and gallstones, pain with **biliary colic** or cholangitis, weight loss with anorexia as a **red flag** for malignancy, paracetamol and antibiotic use, travel, water, shellfish exposure and contacts.",
+      "vis": null
+    },
+    {
+      "say": "Look at the eyes and skin for yellow discoloration and scratch marks, and inspect the eyelids for xanthelasma. Look for spider naevi, palmar erythema and Dupuytren contracture as markers of chronic liver disease. Palpate the liver edge and measure its span, feel for the spleen tip, and test for shifting dullness when ascites is suspected. Watch for a flapping tremor with altered sleep and sweet breath odour in encephalopathy. Remember that a palpable gallbladder in a jaundiced patient favours malignancy, and always record temperature, pulse, urine dip and weight.",
+      "tx": "Examine the eyes for yellow sclera and the skin for scratch marks, xanthelasma and **chronic liver stigmata** such as spider naevi and palmar erythema. Measure liver span and feel its edge for tenderness or a hard craggy surface, palpate the spleen for portal hypertension, test for shifting dullness of ascites, and look for flap with fetor in encephalopathy. A palpable gallbladder with jaundice follows **Courvoisier law** toward malignancy. Dip the urine for bilirubin, record BMI and vitals, and check **Charcot triad** of fever, pain and jaundice.",
+      "vis": null
+    },
+    {
+      "say": "Study the illustration of the pancreatic head mass pressing on the bile duct. Notice how the duct above the blockage has become wide and swollen, and how the gallbladder has ballooned with trapped bile. This explains why the patient turns yellow with pale stools and dark urine yet feels little pain. In the exam, connect this picture with Courvoisier law, where a palpable gallbladder with jaundice points toward malignancy rather than stones.",
+      "tx": "The illustration shows a **pancreatic head tumour** compressing the lower bile duct with a grossly **dilated bile duct** above it and a distended green gallbladder. This anatomy explains painless progressive jaundice with pale stools and dark urine, weight loss with anorexia, and a **palpable gallbladder** on examination. For the exam, link this picture to Courvoisier law, choledocholithiasis as the benign mimic, and ultrasound with MRCP as the next investigation.",
+      "vis": {
+        "alt": "Anatomical view of pancreatic head mass compressing bile duct with dilated duct and distended gallbladder",
+        "ar": 1.3393,
+        "caption": "Illustration of pancreatic head tumour causing biliary obstruction. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-jaundice-gen1.webp"
+      }
+    },
+    {
+      "say": "Compare ALT with ALP before ordering more tests, because ALT dominance means liver cell injury while ALP dominance with raised GGT means blocked bile flow. Send reticulocyte count, LDH and haptoglobin when haemolysis is possible, and suspect Gilbert syndrome when only unconjugated bilirubin rises during fasting. Send viral serology and autoimmune markers, then image the bile duct with ultrasound and MRCP. Reserve CT for lumps and nodes and biopsy for drug injury, and use the R ratio to name the pattern.",
+      "tx": "Read bilirubin with ALT and ALP together, since a predominant ALT rise marks a **hepatocellular pattern** while a predominant ALP with GGT rise marks a **cholestatic pattern**. Check reticulocyte count with LDH and haptoglobin for haemolysis, consider Gilbert syndrome when fasting unconjugated bilirubin rises alone, request viral serology with autoimmune ANA, SMA and IgG, and image the duct with ultrasound and MRCP. Use CT for masses and nodes, reserve biopsy for drug injury and autoimmune hepatitis, and apply the **R ratio** to settle the pattern.",
+      "vis": {
+        "alt": "Diagram illustrating LFT patterns for pre-hepatic, hepatic, and cholestatic jaundice, showing bilirubin, ALT, ALP, GGT levels.",
+        "ar": 1.8349,
+        "caption": "LFT patterns differentiate pre-hepatic, hepatic, and cholestatic jaundice",
+        "kind": "image",
+        "src": "v1/lessons/media/med-jaundice-fig1.webp"
+      }
+    },
+    {
+      "say": "Stop the suspected drug and advise complete abstinence from alcohol while the liver recovers. Relieve itching with cholestyramine and continue UDCA for primary biliary cholangitis. Arrange ERCP urgently for ascending cholangitis and for stones, place a stent when a tumour cannot be removed, and refer early tumours for surgery. Give N acetylcysteine for paracetamol poisoning, correct clotting with vitamin K, clear encephalopathy with lactulose, and list fulminant failure for transplant.",
+      "tx": "First **stop the cause** by withdrawing suspect drugs and alcohol, then relieve itching of cholestasis with cholestyramine and slow primary biliary cholangitis with UDCA. Arrange **biliary drainage** by ERCP for stones and cholangitis and by stenting for palliation, and refer resectable tumours for surgery. Give **NAC** for paracetamol poisoning guided by levels, correct coagulopathy with vitamin K, treat encephalopathy with lactulose, list fulminant failure for transplant, and track LFT trends in follow up.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Jaundice and liver function tests",
+  "v": 1
 }
