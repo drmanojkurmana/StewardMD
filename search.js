@@ -329,7 +329,24 @@
     });
     var pre = hasQ ? prefilledCalc(q) : null;
     if (pre) out.calcs = [pre].concat((out.calcs || []).filter(function (it) { return it.id !== pre.id; }));
+    if (hasQ) out.tools = problemTools(q, out.tools || []);
     return out;
+  }
+  /* Problem search (owner 2026-11-07): a doctor types the problem, not the tool's name ("sodium 122", "dose for a
+   * child", "stage breast cancer"). tool-groups.js suggest() maps the words to tools; those lead the Tools list,
+   * marked "Fits your search", ahead of the title matches. Only tools the user can open (the SMD_HOME_TOOLS list). */
+  function problemTools(q, ranked) {
+    var TG = G.SMD_TOOL_GROUPS, sug = [];
+    try { sug = (TG && TG.suggest) ? TG.suggest(q, 3) : []; } catch (e) { sug = []; }
+    if (!sug.length) return ranked;
+    var all = toolsProvider(), lead = [];
+    sug.forEach(function (s) {
+      for (var i = 0; i < all.length; i++) if (all[i].id === s.act) {
+        var it = all[i]; lead.push({ cat: "tools", id: it.id, title: it.title, sub: "Fits your search: " + it.sub, kw: it.kw, open: it.open }); break;
+      }
+    });
+    var ids = lead.map(function (x) { return x.id; });
+    return lead.concat(ranked.filter(function (it) { return ids.indexOf(it.id) < 0; }));
   }
   /* "crcl 72F 58kg cr 1.4" (flag smd_calc_prefill): the numbers never match a title, so the calculator
    * was not found at all. Find it by the words left after the attributed values are removed, and offer
