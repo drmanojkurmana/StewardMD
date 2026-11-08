@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "bio-lipid-synthesis",
+ "subject": "biochemistry",
+ "title": "Fatty acid synthesis and the citrate shuttle",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Fatty acid synthesis runs in fed liver and adipose cytosol when carbohydrate overflows, beginning with the **citrate shuttle**: mitochondrial citrate (glucose carbon plus oxaloacetate) crosses to cytosol, where ATP citrate lyase splits it back to acetyl-CoA for building and oxaloacetate for recycling. Malic enzyme on the return leg generates NADPH, coupling carbon export to reducing power supply in one elegant circuit.",
+   "say": "Fatty acid synthesis begins with the citrate shuttle. Citrate crosses to cytosol and splits back to acetyl-CoA for building. Malic enzyme on the return leg generates NADPH, coupling carbon export to reducing power.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-lipid-synthesis-gen1.webp",
+    "alt": "Citrate shuttle exporting mitochondrial citrate for cytosolic fatty acid synthesis with NADPH generation.",
+    "caption": "Citrate shuttle exporting mitochondrial citrate for cytosolic fatty acid synthesis.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Acetyl-CoA carboxylase** commits carbon by carboxylating acetyl-CoA to malonyl-CoA, needing biotin, ATP and bicarbonate. Citrate activates it (polymerising filaments) when carbon is plentiful, palmitoyl-CoA inhibits it when product accumulates, insulin dephosphorylates it on, and glucagon plus adrenaline phosphorylate it off through AMP kinase. Malonyl-CoA simultaneously blocks CPT-I, so synthesis and burning exclude each other.",
+   "say": "Acetyl-CoA carboxylase commits carbon to malonyl-CoA, needing biotin and ATP. Citrate activates it, insulin switches it on, and glucagon switches it off. Malonyl-CoA blocks CPT-I, so synthesis and burning exclude each other.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Regulator", "Carboxylase effect", "Fed or fasting signal"],
+    "rows": [
+     ["Citrate high", "Activates (polymerises)", "Carbon plentiful, fed"],
+     ["Insulin", "Dephosphorylates ON", "Fed"],
+     ["Glucagon, adrenaline, AMP kinase", "Phosphorylates OFF", "Fasting, energy short"],
+     ["Palmitoyl-CoA high", "Inhibits", "Product enough"]
+    ]
+   }
+  },
+  {
+   "tx": "The **fatty acid synthase** dimer then builds palmitate on a swinging phosphopantetheine arm (from pantothenate, vitamin B5), condensing one acetyl primer with seven malonyl extenders, spending fourteen NADPH (supplied by malic enzyme and the HMP shunt). Each cycle adds two carbons with full reduction; release at sixteen carbons by thioesterase gives free palmitate, the default saturated product other enzymes elongate or desaturate.",
+   "say": "Fatty acid synthase builds palmitate on a swinging pantothenate arm, spending fourteen NADPH from malic enzyme and the shunt. Release at sixteen carbons gives palmitate, which other enzymes elongate or desaturate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-lipid-synthesis-fig1.webp",
+    "alt": "Fatty acid synthase multi-enzyme complex domains building palmitate on an acyl carrier protein arm.",
+    "caption": "Fatty acid synthase: multi-enzyme complex for palmitate synthesis.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Elongases and desaturases in endoplasmic reticulum extend palmitate to stearate and insert a delta-9 double bond (oleate), but humans lack delta-12 and delta-15 desaturases, so **linoleate** and alpha-linolenate remain essential dietary fats. Arachidonate synthesis from linoleate feeds eicosanoids, while fish oils supply preformed EPA and DHA that bypass sluggish conversion, explaining their distinct physiology.",
+   "say": "Humans lack desaturases beyond delta-9, so linoleate and alpha-linolenate remain essential. Arachidonate feeds eicosanoids, while fish oils supply preformed EPA and DHA that bypass sluggish conversion.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Humans can make", "points": ["Palmitate (16:0) de novo", "Stearate (18:0) by elongation", "Oleate (18:1 delta-9)"]},
+    "right": {"title": "Humans must eat", "points": ["Linoleate (omega-6 essential)", "Alpha-linolenate (omega-3 essential)", "Preformed EPA and DHA (efficient)"]
+    }
+   }
+  },
+  {
+   "tx": "Essential fatty acid deficiency (fat free parenteral nutrition, severe malabsorption) produces scaly dermatitis, hair loss, poor wound healing and infertility, with a diagnostic triene to tetraene ratio rise (Mead acid 20:3 over arachidonate 20:4 above 0.2). Arachidonate starvation also thins **eicosanoid** production, linking this chemistry lesson forward to prostaglandin and leukotriene pharmacology.",
+   "say": "Essential fatty acid deficiency produces scaly dermatitis, hair loss and poor wound healing, with a raised triene to tetraene ratio. Arachidonate starvation thins eicosanoid production, linking forward to prostaglandin pharmacology.",
+   "vis": null
+  },
+  {
+   "tx": "Alcohol and fructose both flood this machinery (NADH plus uncontrolled acetyl and glycerol supply), while insulin resistance keeps hepatic synthesis switched on despite systemic overnutrition, the engine of metabolic fatty liver. Conversely, fasting AMP kinase shuts carboxylase within minutes, long before enzyme amounts change. Synthesis therefore reports minute energy state and month long diet in the same molecule, **malonyl-CoA**.",
+   "say": "Alcohol, fructose and insulin resistance flood this machinery, driving metabolic fatty liver. Fasting AMP kinase shuts carboxylase within minutes. Synthesis reports minute energy state and long term diet in malonyl-CoA.",
+   "vis": {
+    "kind": "flow",
+    "title": "Malonyl-CoA as fed switch",
+    "nodes": [
+     {"id": "fed", "label": "Fed: citrate and insulin high"},
+     {"id": "mal", "label": "Malonyl-CoA rises"},
+     {"id": "syn", "label": "Palmitate synthesis runs"},
+     {"id": "blk", "label": "CPT-I blocked, burning paused"}
+    ],
+    "edges": [["fed", "mal"], ["mal", "syn"], ["mal", "blk"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

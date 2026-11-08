@@ -1,0 +1,245 @@
+{
+  "gen": "AI",
+  "id": "prd-pvl-hie-mri",
+  "module": "Neonatal Cranial Ultrasound and Periventricular Injury",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Periventricular Leukomalacia (PVL) and Neonatal HIE Imaging",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Premature infants are vulnerable to periventricular white matter injury due to poor vascular autoregulation. The deep penetrating arterial border zones around the ventricles are the typical sites of damage.",
+      "tx": "Identify the **PVL arterial watershed territory** on neonatal neurosonography. Premature neonates born before 32 weeks gestation have immature vascular autoregulation and poorly developed ventriculopetal penetrating vessels. Periventricular leukomalacia selectively damages this deep white matter watershed adjacent to the external angles of the lateral ventricles, trigones, and frontal horns (Ultrasound evolution).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Periventricular white matter",
+          "points": [
+            "End-artery terminal zone",
+            "Lacks active muscular autoregulation",
+            "High metabolic oligodendrocyte demand"
+          ]
+        },
+        "right": {
+          "title": "Subcortical white matter",
+          "points": [
+            "Ventriculofugal collateral supply",
+            "More resilient in preterm infants",
+            "Vulnerable in term asphyxia"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Periventricular leukomalacia presents through two distinct phases on ultrasound. Bright echogenicity appears in the first week, followed by characteristic cystic cavitation over the subsequent month.",
+      "tx": "Track the **ultrasound stages of PVL** on serial cranial ultrasound. During days 1-7 of life, the acute phase manifests as coarse hyperechogenicity in the periventricular halos, appearing brighter than the adjacent choroid plexus. Over 2 to 4 weeks post-insult, necrotic tissue liquefies into multiple periventricular cysts (cystic PVL), which eventually collapse leaving ex-vacuo ventricular enlargement (Motor outcome).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "insult",
+            "label": "Hypoxic-ischemic insult (preterm)"
+          },
+          {
+            "id": "acute",
+            "label": "Acute phase (days 1-7): Bright echogenicity"
+          },
+          {
+            "id": "cystic",
+            "label": "Cystic phase (2 to 4 weeks): Fluid cavities"
+          },
+          {
+            "id": "chronic",
+            "label": "Chronic phase: Ventriculomegaly & gliosis"
+          }
+        ],
+        "edges": [
+          [
+            "insult",
+            "acute"
+          ],
+          [
+            "acute",
+            "cystic"
+          ],
+          [
+            "cystic",
+            "chronic"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The motor tracts supplying the lower extremities pass directly through the periventricular zone. Damage here explains why spastic diplegia is the characteristic neurological outcome of periventricular leukomalacia.",
+      "tx": "Establish the **spastic diplegia correlation** in surviving infants. Descending corticospinal motor tracts from the motor cortex to the lower limbs traverse the periventricular white matter directly adjacent to the lateral ventricles. Ischemic injury to these pathways leads to spastic diplegia, whereas extensive lateral necrosis involving upper extremity fibers causes spastic quadriplegia and cognitive disability (Term asphyxia patterns).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical tract",
+          "Pathway location",
+          "Clinical motor deficit"
+        ],
+        "rows": [
+          [
+            "Lower extremity corticospinal",
+            "Medial periventricular white matter",
+            "Spastic diplegia (scissoring gait)"
+          ],
+          [
+            "Upper extremity corticospinal",
+            "Lateral internal capsule tracts",
+            "Spastic quadriplegia (severe PVL)"
+          ],
+          [
+            "Optic radiation fibers",
+            "Peritrigonal white matter",
+            "Cortical visual impairment"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In term neonates, acute profound asphyxia injures metabolically demanding deep gray structures. Symmetrical lesions develop in the ventrolateral thalami and posterior putamina.",
+      "tx": "Recognize the **term HIE profound asphyxia pattern** on neonatal MRI. Unlike preterm infants, term infants subject to acute, catastrophic anoxia (uterine rupture, cord prolapse) shunt remaining perfusion away from cerebral cortex to the brainstem. This produces selective ischemic necrosis of high-metabolic deep gray nuclei: the ventrolateral thalami and posterior putamina in a symmetrical distribution (Posterior limb of internal capsule).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Profound acute asphyxia",
+          "points": [
+            "Ventrolateral thalami and posterior putamina",
+            "Perirolandic cortex injury",
+            "Preserved subcortical white matter"
+          ]
+        },
+        "right": {
+          "title": "Partial prolonged asphyxia",
+          "points": [
+            "Parasagittal watershed cortex",
+            "Inter-arterial border zones",
+            "Preserved deep basal ganglia"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The posterior limb of the internal capsule should normally appear hyperintense on T1 MRI in term neonates. Loss of this bright signal indicates severe injury and strongly predicts future motor impairment.",
+      "tx": "Evaluate for the **absent PLIC sign on T1 MRI** as a sensitive prognostic marker. In healthy term neonates, myelin in the posterior limb of the internal capsule (PLIC) generates a distinctive hyperintense signal on unenhanced T1-weighted imaging. Loss of this normal hyperintense signal within the first week of life predicts adverse neuromotor outcome and cerebral palsy with > 90% sensitivity (Diffusion timing).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "T1-weighted appearance",
+          "Pathophysiological status",
+          "Long-term prognosis"
+        ],
+        "rows": [
+          [
+            "Hyperintense T1 signal intact",
+            "Normal myelinated axons present",
+            "Favorable neuromotor outcome"
+          ],
+          [
+            "Equivocal signal intensity",
+            "Partial ischemic axonal disruption",
+            "Indeterminate; follow-up MRI indicated"
+          ],
+          [
+            "Absent / hypointense T1 signal",
+            "Severe corticospinal tract infarction",
+            "> 90% risk of spastic cerebral palsy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Diffusion weighted imaging shows restricted diffusion peaking in the first few days of life. By the end of the first week, this signal pseudonormalizes, which can fool the unwary observer.",
+      "tx": "Consider the **DWI timing in neonatal HIE** when scheduling neuroimaging. Diffusion-weighted imaging demonstrates cytotoxic edema as restricted water diffusion with marked ADC hypointensity. This restricted diffusion peaks between days 3 and 5 of life. Pseudonormalization occurs by day 7-10 as membrane permeability changes, meaning late MRI scans can appear misleadingly normal on diffusion sequences (Parasagittal watershed).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "day1",
+            "label": "Day 1-2: Emerging cytotoxic edema"
+          },
+          {
+            "id": "day3",
+            "label": "Days 3 and 5: Peak diffusion restriction (low ADC)"
+          },
+          {
+            "id": "day7",
+            "label": "Day 7-10: Pseudonormalization of ADC"
+          },
+          {
+            "id": "chronic",
+            "label": "Late stage: T1/T2 gliosis and encephalomalacia"
+          }
+        ],
+        "edges": [
+          [
+            "day1",
+            "day3"
+          ],
+          [
+            "day3",
+            "day7"
+          ],
+          [
+            "day7",
+            "chronic"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prolonged low-grade hypoperfusion produces a parasagittal watershed pattern in term infants. Symmetrical injury affects the cortical border zones between the anterior, middle, and posterior cerebral arteries.",
+      "tx": "Diagnose the **parasagittal watershed pattern** resulting from partial prolonged asphyxia. When systemic hypotension lasts for hours rather than minutes, auto-regulatory vascular compensation prioritizes deep brain nuclei at the expense of distal cortical territories. This results in bilateral wedge-shaped infarcts along the watershed boundaries between the anterior and middle cerebral arteries and middle and posterior cerebral arteries (Therapeutic cooling).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anterior-middle watershed",
+          "points": [
+            "Parasagittal frontoparietal cortex",
+            "Proximal upper extremity weakness",
+            "Man-in-a-barrel motor syndrome"
+          ]
+        },
+        "right": {
+          "title": "Middle-posterior watershed",
+          "points": [
+            "Parieto-occipital cortical ribbon",
+            "Visual tracking and perceptual deficits",
+            "Cortical blindness susceptibility"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Therapeutic hypothermia protects brain tissue and shifts the optimal MRI window. Scanning is best performed between days four and seven after the infant has been rewarmed.",
+      "tx": "Account for the **therapeutic hypothermia effect** when interpreting neonatal imaging. Whole-body hypothermia maintained at 33.5 degrees C for 72 hours attenuates secondary energy failure and free-radical cascade injury. Cooling delays the progression of cytotoxic edema, shifting the optimal neuroimaging window to day 4-7 of life, immediately following rewarming, where T1 and ADC contrast abnormalities are most diagnostic.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment parameter",
+          "Clinical protocol",
+          "Neuroimaging impact"
+        ],
+        "rows": [
+          [
+            "Target temperature",
+            "33.5 degrees C core temperature",
+            "Suppresses secondary metabolic cascade"
+          ],
+          [
+            "Duration of cooling",
+            "72 hours continuous",
+            "Delays cellular lysis and pseudonormalization"
+          ],
+          [
+            "Optimal MRI timing",
+            "Day 4-7 post-birth (post-rewarming)",
+            "Maximizes T1 signal clarity and ADC detection"
+          ]
+        ]
+      }
+    }
+  ]
+}

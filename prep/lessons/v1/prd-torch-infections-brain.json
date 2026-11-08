@@ -1,0 +1,235 @@
+{
+  "gen": "AI",
+  "id": "prd-torch-infections-brain",
+  "module": "Posterior Fossa Anomalies, Dysraphism and Brain Tumors",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Congenital TORCH Infections and Neonatal Brain Calcifications",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Cytomegalovirus is the most frequent congenital intrauterine viral infection. Dense calcifications distribute strictly in the periventricular zone, often accompanied by microcephaly and sensorineural deafness.",
+      "tx": "Recognize **CMV periventricular calcifications** on cranial ultrasound and non-contrast CT. Congenital Cytomegalovirus (CMV) is the most common intrauterine viral infection, selectively targeting the metabolically active germinal matrix lining the lateral ventricles. This tropism produces dense, bilateral, symmetrical periventricular calcifications, accompanied by microcephaly, ventriculomegaly, polymicrogyria, and sensorineural deafness (Toxoplasmosis diffuse parenchymal calcifications).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathology / finding",
+          "Imaging appearance",
+          "Clinical significance"
+        ],
+        "rows": [
+          [
+            "Periventricular calcifications",
+            "Dense high-density rim around lateral ventricles",
+            "Hallmark of congenital CMV infection"
+          ],
+          [
+            "Microcephaly",
+            "Reduced cranial volume with sloping forehead",
+            "Secondary to impaired cortical neurogenesis"
+          ],
+          [
+            "Sensorineural deafness",
+            "Cochlear and auditory nerve injury",
+            "Leading non-genetic cause of pediatric hearing loss"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Congenital toxoplasmosis produces a completely different pattern of calcification. Nodular mineralization is scattered randomly throughout the basal ganglia, cortex, and subcortical white matter, alongside hydrocephalus.",
+      "tx": "Distinguish **toxoplasmosis diffuse parenchymal calcifications** from cytomegalovirus. Unlike the strictly periventricular calcifications of CMV, Toxoplasma gondii tachyzoites cause multifocal necrotizing encephalitis. This produces coarse, randomly scattered diffuse nodular parenchymal calcifications throughout the cortex, basal ganglia, and subcortical white matter, typically accompanied by aqueductal stenosis, severe obstructive hydrocephalus, and chorioretinitis (Neonatal HSV-2 temporal lobe necrosis).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Congenital CMV",
+          "Congenital toxoplasmosis"
+        ],
+        "rows": [
+          [
+            "Calcification distribution",
+            "Exclusively periventricular ring",
+            "Randomly scattered in basal ganglia & cortex"
+          ],
+          [
+            "Ventricular size",
+            "Ventriculomegaly ex-vacuo",
+            "Obstructive hydrocephalus (aqueductal stenosis)"
+          ],
+          [
+            "Cerebral volume",
+            "Microcephaly prominent",
+            "Macrocephaly secondary to hydrocephalus"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Herpes simplex virus type two causes catastrophic necrotizing encephalitis in neonates. Infection produces diffuse multicystic brain destruction with prominent temporal and frontal lobe involvement.",
+      "tx": "Identify **neonatal HSV-2 temporal lobe necrosis** on emergency neuroimaging. While childhood HSV-1 preferentially targets the limbic system, neonatal Herpes Simplex Virus type 2 (HSV-2) acquired during vaginal delivery causes overwhelming diffuse, catastrophic multicystic encephalomalacia. MRI demonstrates extensive cortical diffusion restriction, gyral necrosis with a prominent temporal and frontal lobe predilection, and progressive cystic brain destruction (Congenital rubella vascular calcifications).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neonatal HSV-2 infection",
+          "points": [
+            "Catastrophic multicystic encephalomalacia",
+            "Temporal and frontal lobe destruction",
+            "Severe cortical diffusion restriction"
+          ]
+        },
+        "right": {
+          "title": "Congenital CMV infection",
+          "points": [
+            "Periventricular calcification rim",
+            "Polymicrogyria and white matter gliosis",
+            "Absence of acute multicystic liquefaction"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Congenital rubella syndrome causes subependymal cysts and a characteristic mineralizing microangiopathy. Branching vascular calcifications develop within the deep basal ganglia and thalamus.",
+      "tx": "Recognize **congenital rubella vascular calcifications** on neurosonography and CT. Maternal rubella transmission during early pregnancy leads to an obliterative endothelial microangiopathy. Brain imaging reveals branching striatocerebral calcifications in the basal ganglia, subependymal cysts, microcephaly, and periventricular white matter injury, presenting clinically with cataracts, sensorineural deafness, and cardiac malformations (Congenital Zika syndrome pattern).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "maternal",
+            "label": "Maternal rubella viremia during early gestation"
+          },
+          {
+            "id": "vasculo",
+            "label": "Endothelial obliterative microangiopathy"
+          },
+          {
+            "id": "calc",
+            "label": "Branching striatocerebral basal ganglia calcification"
+          },
+          {
+            "id": "syndrome",
+            "label": "Cataracts + sensorineural deafness + PDA"
+          }
+        ],
+        "edges": [
+          [
+            "maternal",
+            "vasculo"
+          ],
+          [
+            "vasculo",
+            "calc"
+          ],
+          [
+            "calc",
+            "syndrome"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Congenital Zika virus produces catastrophic fetal brain disruption. Extreme microcephaly is paired with redundant scalp rugae and dense subcortical band calcifications at the gray-white junction.",
+      "tx": "Detect the **congenital Zika syndrome pattern** on cranial imaging. Congenital Zika virus infection produces a severe fetal brain disruption sequence: extreme microcephaly, redundant scalp rugae, and a thin cerebral cortex with a distinctive band of subcortical calcifications located precisely at the gray-white junction, alongside ex-vacuo ventriculomegaly and cerebellar hypoplasia (Lenticulostriate vasculopathy).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Congenital Zika pattern",
+          "points": [
+            "Subcortical band at gray-white junction",
+            "Extreme microcephaly with collapsed cranium",
+            "Prominent redundant scalp skin folds"
+          ]
+        },
+        "right": {
+          "title": "Congenital CMV pattern",
+          "points": [
+            "Strictly periventricular ependymal ring",
+            "Moderate microcephaly without skull collapse",
+            "Normal scalp and craniofacial skin contours"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Echogenic branching streaks in the basal ganglia on neonatal ultrasound represent lenticulostriate vasculopathy. Mineralizing microangiopathy from TORCH infection or Down syndrome produces this finding.",
+      "tx": "Identify **lenticulostriate vasculopathy** on high-resolution neonatal cranial neurosonography. Coronal and parasagittal views demonstrate bright, echogenic branching linear streaks within the thalamus and lentiform nucleus. This appearance reflects a mineralizing microangiopathy of lenticulostriate arterial walls, provoked by intrauterine TORCH infections, Trisomy 21 (Down syndrome), or perinatal hypoxic-ischemic insult (Connatal cysts vs subependymal cysts).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Etiological category",
+          "Pathological mechanism",
+          "Clinical associations"
+        ],
+        "rows": [
+          [
+            "Congenital TORCH infection",
+            "Viral endarteritis and mineralization",
+            "CMV, rubella, syphilis, toxoplasmosis"
+          ],
+          [
+            "Chromosomal aneuploidy",
+            "Microvascular dysgenesis",
+            "Trisomy 21 (Down syndrome), Trisomy 13"
+          ],
+          [
+            "Perinatal ischemic injury",
+            "Reperfusion arterial calcification",
+            "Neonatal encephalopathy, severe HIE"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Connatal cysts are benign developmental variants at the superolateral angles of the frontal horns. True subependymal cysts develop posterior to the caudothalamic groove from prior hemorrhage or infection.",
+      "tx": "Distinguish **connatal cysts vs subependymal cysts** on neonatal cranial sonography. Connatal cysts (coarctation of the lateral ventricles) are harmless normal anatomical variants situated at the rounded superolateral corners of the frontal horns, resolving spontaneously. In contrast, true subependymal cysts are acquired post-hemorrhagic or post-infectious lesions located posterior to the caudothalamic groove or within the subependymal germinal matrix (Intrauterine cerebral ischemia / hydranencephaly).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Connatal cysts (normal variant)",
+          "points": [
+            "Located at superolateral angle of frontal horns",
+            "Anterior to the foramen of Monro",
+            "Benign transient finding resolving with age"
+          ]
+        },
+        "right": {
+          "title": "Subependymal cysts (pathological)",
+          "points": [
+            "Located posterior to caudothalamic groove",
+            "Sequela of germinal hemorrhage or CMV",
+            "Associated with neurodevelopmental delay"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Hydranencephaly is the most extreme form of intrauterine cerebral ischemia. Complete occlusion of both internal carotid arteries destroys the cerebral hemispheres while sparing the posterior fossa.",
+      "tx": "Recognize **intrauterine cerebral ischemia / hydranencephaly** on neonatal ultrasound, CT, or MRI. Hydranencephaly results from catastrophic bilateral internal carotid artery occlusion occurring in utero during the second or third trimester. The supratentorial cerebral hemispheres are replaced by a massive cerebrospinal fluid sac, while the posterior fossa structures, thalami, and brainstem remain preserved because their blood supply originates from the intact posterior circulation and basilar artery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical region",
+          "Vascular territory",
+          "Hydranencephaly status"
+        ],
+        "rows": [
+          [
+            "Cerebral cortex & hemispheres",
+            "Bilateral anterior and middle cerebral arteries",
+            "Completely destroyed and liquefied into CSF"
+          ],
+          [
+            "Basal thalami and brainstem",
+            "Basilar artery and posterior circulation",
+            "Preserved and structurally intact"
+          ],
+          [
+            "Cerebellum and posterior fossa",
+            "Vertebral and basilar arteries",
+            "Completely preserved normal anatomy"
+          ]
+        ]
+      }
+    }
+  ]
+}

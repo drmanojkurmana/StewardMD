@@ -1,0 +1,265 @@
+{
+  "id": "pnr-floppy-infant-differential",
+  "title": "Hypotonic Floppy Infant: Central vs Peripheral Localization and Workup",
+  "subject": "ss-paediatric-neurology",
+  "module": "Spinal Muscular Atrophy, Duchenne Dystrophy and Neuropathies",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Evaluating the floppy infant begins by distinguishing central cerebral etiologies from peripheral neuromuscular disorders.",
+      "tx": "Differentiate **Central vs peripheral hypotonia features** as the fundamental first branch point when evaluating an infant with decreased muscle tone. Central hypotonia accounts for approximately 80% of floppy infants; it is distinguished by axial weakness exceeding limb weakness, brisk or normal deep tendon reflexes, ankle clonus, cortical fisting, encephalopathy or altered alertness, dysmorphism, and neonatal seizures. Peripheral hypotonia accounts for the remaining 20% and features profound antigravity motor weakness, absent reflexes, muscle atrophy, and a classic frog-leg posture with preserved alertness (Traction response and vertical suspension).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Central Hypotonia (80%)",
+          "points": [
+            "Axial weakness greater than limb weakness",
+            "Normal or brisk deep tendon reflexes, clonus, cortical fisting",
+            "Lethargy, altered alertness, dysmorphic features, seizures",
+            "Etiologies: HIE, chromosomal anomalies, genetic malformations"
+          ]
+        },
+        "right": {
+          "title": "Peripheral Hypotonia (20%)",
+          "points": [
+            "Profound antigravity limb and trunk weakness",
+            "Absent or markedly depressed deep tendon reflexes",
+            "Classic frog-leg posture with alert, engaging facial expression",
+            "Etiologies: SMA, congenital myopathies, neuropathies, NMJ"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Traction response and vertical suspension maneuvers unmask abnormal axial tone and shoulder girdle weakness.",
+      "tx": "Perform **Traction response and vertical suspension** to clinically delineate the motor level in hypotonic neonates. In the pull-to-sit traction response, the examiner gently pulls the infant by the wrists from supine; persistent complete head lag past 4 months is pathological and confirms diminished axial tone. During vertical suspension, holding the infant upright under the axillae reveals whether the child slips straight through the examiner's hands, which directly indicates severe shoulder girdle flaccidity characteristic of peripheral hypotonia (Prone horizontal suspension).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tone Maneuver",
+          "Technique & Landmark",
+          "Abnormal Clinical Finding"
+        ],
+        "rows": [
+          [
+            "Traction (Pull-to-sit)",
+            "Pull infant gently by wrists from supine",
+            "Complete head lag past 4 months indicates abnormal axial hypotonia"
+          ],
+          [
+            "Vertical Suspension",
+            "Hold infant upright under axillae without squeezing",
+            "Slipping through examiner hands confirms shoulder girdle weakness"
+          ],
+          [
+            "Scarf Sign",
+            "Draw infant hand across chest toward opposite shoulder",
+            "Elbow easily crosses anterior midline without physiological resistance"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prone horizontal suspension evaluates postural tone where the floppy baby drapes limply like an inverted letter U.",
+      "tx": "Assess **Prone horizontal suspension (Landau reflex)** by supporting the infant's trunk prone on the examiner's outstretched hand. A neurologically normal infant suspends convexly with the head held erect, spine straightened, and upper and lower extremities actively flexed against gravity. In contrast, an infant with severe hypotonia drapes limply over the examiner's palm, forming an inverted U posture with dependent, non-resisting limbs and complete lack of cervical extension (Anterior horn cell clues in floppy neonate).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "h1",
+            "label": "Suspend infant prone on examiner's palm"
+          },
+          {
+            "id": "h2",
+            "label": "Normal: head raised, back extended, limbs flexed"
+          },
+          {
+            "id": "h3",
+            "label": "Floppy: hangs limply like inverted U over palm"
+          },
+          {
+            "id": "h4",
+            "label": "Confirms generalized axial and proximal weakness"
+          }
+        ],
+        "edges": [
+          [
+            "h1",
+            "h2"
+          ],
+          [
+            "h1",
+            "h3"
+          ],
+          [
+            "h3",
+            "h4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Anterior horn cell degeneration displays distinct physical hallmarks in an alert floppy neonate.",
+      "tx": "Identify pathognomonic **Anterior horn cell clues in floppy neonate** when suspecting infantile spinal muscular atrophy (SMA type 1, Werdnig-Hoffmann disease). Classic diagnostic clues in an alert, visually attentive neonate include fine resting fasciculations of the lateral borders of the tongue, a bell-shaped thorax resulting from intercostal muscle paralysis, paradoxical diaphragmatic breathing (abdominal excursion during inspiration), and complete, generalized areflexia. These signs distinguish anterior horn cell apoptosis from cerebral or myopathic hypotonia (Prader-Willi syndrome screening).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Physical Landmark",
+          "Anatomical Substrate",
+          "Diagnostic Clue"
+        ],
+        "rows": [
+          [
+            "Tongue fasciculations",
+            "Hypoglossal nucleus (CN XII) denervation",
+            "Spontaneous fibrillary twitches in quiet awake infant"
+          ],
+          [
+            "Bell-shaped chest",
+            "Intercostal muscle denervation and wasting",
+            "Narrow apical thorax with splayed lower ribs"
+          ],
+          [
+            "Paradoxical respiration",
+            "Preserved diaphragmatic phrenic innervation",
+            "Inward chest collapse during diaphragmatic descent"
+          ],
+          [
+            "Generalized areflexia",
+            "Spinal anterior horn alpha motor neuron loss",
+            "Complete absence of deep tendon reflexes throughout"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prader Willi syndrome screening is essential for neonates with severe hypotonia poor suck and hypogonadism.",
+      "tx": "Execute prompt **Prader-Willi syndrome screening** in any floppy newborn displaying severe central hypotonia alongside poor feeding and genital hypoplasia. Prader-Willi syndrome presents with severe neonatal hypotonia, absent suck reflex requiring nasogastric tube gavage feeding, cryptorchidism with a hypoplastic scrotum and microphallus, and characteristic almond-shaped palpebral fissures. Definite diagnosis is established by 15q11-q13 methylation-specific PCR, which detects absence of the paternal gene expression resulting from paternal deletion, maternal uniparental disomy, or imprinting centre mutations (Congenital myopathies vs muscular dystrophies).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Realm",
+          "Characteristic Neonatal Finding",
+          "Confirmatory Molecular Test"
+        ],
+        "rows": [
+          [
+            "Tone and feeding",
+            "Profound central hypotonia with absent suck",
+            "Requires prolonged gavage feeding in early infancy"
+          ],
+          [
+            "Genitourinary",
+            "Cryptorchidism, microphallus, hypoplastic scrotum",
+            "Bilateral impalpable testes and diminished rugae"
+          ],
+          [
+            "Genetics",
+            "Loss of paternal expression at 15q11-q13",
+            "Methylation-specific PCR (detects >99% of cases)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Congenital myopathies must be distinguished from muscular dystrophies and neuromuscular junction defects.",
+      "tx": "Differentiate **Congenital myopathies vs muscular dystrophies** and congenital myasthenic syndromes presenting in the newborn period. Congenital myasthenia features fluctuating muscle weakness that fatigues with sustained physical activity, improving with oral pyridostigmine or 3,4-diaminopyridine (3,4-DAP). In contrast, congenital myotonic dystrophy (DM1) presents with severe hypotonia, bilateral talipes equinovarus, respiratory failure, a tented upper lip (carp mouth), and an essential maternal history of grip myotonia or cataract surgery (Biochemical tier-1 testing).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Congenital Myasthenic Syndromes",
+          "points": [
+            "Defects in AChR subunits, rapsyn, or choline acetyltransferase",
+            "Fluctuating ptosis, ophthalmoparesis, and fatiguing weakness",
+            "Absence of anti-AChR autoantibodies (non-autoimmune)",
+            "Responds to pyridostigmine or 3,4-diaminopyridine"
+          ]
+        },
+        "right": {
+          "title": "Congenital Myotonic Dystrophy (DM1)",
+          "points": [
+            "Severe neonatal hypotonia with bilateral clubfoot (talipes)",
+            "Tented upper lip ('carp mouth') with facial diplegia",
+            "Maternal DMPK CTG trinucleotide expansion (> 1000 repeats)",
+            "Elicit delayed handgrip relaxation in the mother"
+          ]
+        }
+      }
+    },
+    {
+      "say": "First tier biochemical testing rapidly identifies treatable metabolic acidoses and storage disorders.",
+      "tx": "Initiate comprehensive **Biochemical tier-1 testing** as immediate laboratory assessment in unexplained neonatal hypotonia. Crucial baseline evaluations include arterial or venous blood gas (to assess for metabolic acidosis), serum lactate, pyruvate (calculating lactate-to-pyruvate ratio), serum creatine kinase (CK, dramatically elevated in dystrophinopathies and Pompe disease), plasma ammonia, and acylcarnitine profile. These studies rapidly identify organic acidemias, mitochondrial cytopathies, fatty acid oxidation defects, and urea cycle disorders prior to committing to invasive tissue biopsies (Infant botulism differential).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Laboratory Parameter",
+          "Pathological Abnormality",
+          "Diagnostic Direction"
+        ],
+        "rows": [
+          [
+            "Blood gas & lactate",
+            "High anion gap metabolic acidosis, elevated lactate",
+            "Mitochondrial encephalopathy, organic acidemias"
+          ],
+          [
+            "Serum ammonia",
+            "Severe hyperammonemia with respiratory alkalosis",
+            "Urea cycle disorders, transient hyperammonemia of newborn"
+          ],
+          [
+            "Creatine kinase (CK)",
+            "Massive elevation (> 10-50x normal limit)",
+            "Congenital muscular dystrophies, Pompe disease (GAA)"
+          ],
+          [
+            "Acylcarnitine profile",
+            "Elevated specific acylcarnitine species",
+            "Fatty acid oxidation defects, organic acidurias"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Infant botulism presents with acute descending paralysis after ingesting honey and requires human antitoxin.",
+      "tx": "Investigate the **Infant botulism differential** in previously healthy infants aged 2-6 months who develop subacute descending flaccid weakness. Triggered by intestinal colonization by Clostridium botulinum spores following raw honey ingestion or agricultural soil exposure, botulinum neurotoxin blocks presynaptic acetylcholine release. Early constipation is followed by sluggish or unreactive pupils, weak cry, loss of head control, and flaccid descending paralysis. Treatment requires botulism immune globulin intravenous (BabyBIG) and meticulous supportive respiratory care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "b1",
+            "label": "Honey ingestion / soil exposure (infant 2-6 months)"
+          },
+          {
+            "id": "b2",
+            "label": "Intestinal spore germination & toxin production"
+          },
+          {
+            "id": "b3",
+            "label": "Early constipation followed by ptosis & descending paralysis"
+          },
+          {
+            "id": "b4",
+            "label": "Administer botulism immune globulin intravenous (BabyBIG)"
+          }
+        ],
+        "edges": [
+          [
+            "b1",
+            "b2"
+          ],
+          [
+            "b2",
+            "b3"
+          ],
+          [
+            "b3",
+            "b4"
+          ]
+        ]
+      }
+    }
+  ]
+}
