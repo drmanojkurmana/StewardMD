@@ -3,11 +3,11 @@
  "module": "sur-oncology",
  "subject": "surgery",
  "title": "Uro-oncology: bladder, kidney and testis cancers",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Bladder** (**painless haematuria** smoker, **cystoscopy** blue light, **TURBT** stages resects, **CIS** flat BCG, **TaT1** BCG mitomycin, **muscle T2** cystectomy neoadjuvant, **neobladder** Studer, **trimodal** selected) with **surveillance** (scopes cytology, **smoking** quits, **UTI** mimics) follows; **diversion** (ileal conduit, **stoma** bags) counsels. Scopes stage.",
-   "say": "Bloody painless smokers scopes resect BCG flats cystectomise muscles is bladder: conduits bags quits survey. Stages resect.",
+   "tx": "**Bladder cancer** classically presents with painless visible haematuria in a smoker and needs cystoscopy without delay. **TURBT** resects and stages the tumour, while flat carcinoma in situ and high risk superficial disease receive intravesical BCG or mitomycin. Muscle invasive disease needs neoadjuvant chemotherapy followed by radical cystectomy with urinary diversion. Surveillance cystoscopy and smoking cessation protect against recurrence after treatment.",
+   "say": "Bladder cancer presents with painless visible haematuria usually. Smoking history strengthens suspicion before cystoscopy follows quickly. Resection stages the tumour and guides further treatment. Superficial high risk disease is given intravesical therapy afterward. Muscle invasive disease needs chemotherapy before radical surgery. Surveillance cystoscopy detects recurrence during follow up care.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/sur-oncology-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Kidney** (**triad** flank pain mass haematuria late, **incidental** small scans, **clear cell** VHL, **papillary** MET, **chromophobe** good, **nephrometry** RENAL, **partial** T1 preserves, **radical** T2 clamps, **thrombus** cava levels, **sunitinib** metastatic) with **upper tract** (smokers, **nephroureterectomy** cuff, **mitomycin** instills) operates; **embolise** (bleeds palliation) selects. Kidneys spare small.",
-   "say": "Late triads incidentals clear VHL partials preserves radicals clamps thrombi levels is kidney: cuffs excise instills wash. Nephrons spare.",
+   "tx": "The classic **renal tumour triad** of flank pain, mass, and haematuria appears late, so most tumours today are incidental scan findings. Clear cell cancer associates with **VHL disease**, papillary cancer with MET alteration, and chromophobe cancer carries a better prognosis. **Partial nephrectomy** preserves nephrons for T1 tumours, while radical surgery handles larger tumours and venous thrombus. Metastatic disease may receive sunitinib or embolisation for bleeding palliation.",
+   "say": "Kidney tumours appear incidentally on scans most often today. The classic triad appears late in advanced disease usually. Partial surgery keeps functioning nephrons for small T1 tumours. Radical surgery is needed for larger tumours with venous thrombus extension. Upper tract tumours need nephroureterectomy with bladder cuff excision. Embolisation controls bleeding during palliative care sometimes.",
    "vis": null
   },
   {
-   "tx": "**Testis** (**painless lump** young, **AFP hCG LDH** markers, **ultrasound** hypoechoic, **inguinal** orchidectomy no scrotal, **seminoma** radiosensitive surveillance, **non-seminoma** RPLND chemo BEP, **fertility** banks) with **penis** (phimosis **circumcise**, **SCC** partial glansectomy, **groins** dissect) and **prostate** (metastatic hormones chemo) completes male; **retroperitoneum** (masses resect) clears residual. Lumps markers.",
-   "say": "Young lumps markers scans groins orchidectomise seminomas watch nonseminomas dissect chemo is testis: banks freeze residuals clear. Inguinals cut.",
+   "tx": "A painless testicular lump in a young man needs **tumour markers** and scrotal ultrasound before any surgical intervention. AFP, beta hCG, and LDH together stage germ cell tumours and monitor response afterward. Radical **inguinal orchidectomy** removes the tumour without violating the scrotum. Seminoma remains radiosensitive and may enter surveillance, while non seminoma may need retroperitoneal node dissection or **BEP chemotherapy**.",
+   "say": "A painless lump in a young man needs urgent assessment. Tumour markers and ultrasound always come before any surgical intervention. Inguinal orchidectomy removes the tumour without scrotal violation. Seminoma may enter surveillance after orchidectomy safely. Non seminoma may need node dissection or chemotherapy afterward. Sperm banking precedes treatment whenever fertility matters.",
    "vis": null
   },
   {
-   "tx": "**Adrenal** (**incidentaloma** 4 cm operate, **pheo** metanephrines alpha block, **Cushing** cortisol, **Conn** aldosterone potassium, **laparoscopic** adrenalectomy) with **follow** (markers scans schedules, **late** relapses, **genetics** VHL Lynch, **smoking** quits) and **trials** (immunotherapy) closes; **supportive** (stents nephrostomy, **pain** ladders) palliates. Glands image.",
-   "say": "Lumps hormones alphas cortisol potassium laps remove is adrenal: schedules genes quits trials enrol stents drain. Images stage.",
+   "tx": "This ultrasound shows a large **hypoechoic mass** replacing testicular tissue, while the inset shows the uniform echo pattern of the **normal contralateral testis**. The contrast confirms a solid intratesticular tumour rather than a benign cystic lesion. Raised **tumour markers** support the diagnosis before radical inguinal orchidectomy. Examiners expect ultrasound recognition followed by the inguinal approach without scrotal violation.",
+   "say": "This ultrasound presents a large dark mass inside the testis. The inset presents uniform tissue in the normal opposite testis. The contrast confirms a solid tumour rather than cystic disease. Blood markers support diagnosis before surgery follows. The inguinal approach removes tumour without scrotal violation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sur-oncology-gen1.webp",
+    "alt": "Scrotal ultrasound showing large hypoechoic mass beside normal contralateral testis.",
+    "caption": "Scrotal ultrasound showing hypoechoic testicular tumour mass. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "An **adrenal incidentaloma** above four centimetres generally needs removal after hormonal evaluation excludes dangerous secretion. Phaeochromocytoma needs metanephrine testing and alpha blockade before surgery, while Conn syndrome shows aldosterone excess with potassium disturbance. **Laparoscopic adrenalectomy** suits most resectable lesions without invasion. Follow up watches markers and scans because late relapse occurs, and VHL or Lynch testing guides family screening.",
+   "say": "An adrenal lump above four centimetres generally needs removal. Hormonal evaluation is needed before surgery begins because secretion is dangerous. Phaeochromocytoma needs alpha blockade before any operation safely. Aldosterone excess causes potassium disturbance in Conn syndrome characteristically. Laparoscopic removal is suitable for most resectable lesions today. Follow up watches for late relapse afterward carefully.",
    "vis": {
     "kind": "table",
     "cols": [
