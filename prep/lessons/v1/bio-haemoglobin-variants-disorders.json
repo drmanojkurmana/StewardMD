@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-haemoglobin",
+ "subject": "biochemistry",
+ "title": "Haemoglobinopathies and methaemoglobin",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sickle haemoglobin** (beta six glutamate to valine, hydrophobic patch exposed only in deoxy T state) polymerises into fourteen strand fibres when deoxygenated (acidosis, dehydration, cold, hypoxia, infection prolonging transit), sickling red cells reversibly then irreversibly (membrane damage, dense cells) to vaso-occlude microcirculation (pain crises, dactylitis first in infants as HbF falls, acute chest, stroke, splenic sequestration then autosplenectomy) and haemolyse (anaemia, jaundice, gallstones, leg ulcers, priapism). HbF dilution and hydration kinetically delay polymerisation, the therapeutic lever.",
+   "say": "Sickle haemoglobin polymerises only when deoxygenated, sickling cells to occlude and haemolyse. HbF dilution delays polymerisation kinetically, the therapeutic lever behind hydroxyurea and transfusion strategies.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-haemoglobin-gen1.webp",
+    "alt": "A blood smear shows pointed sickled cells and target cells scattered among normal red cells.",
+    "caption": "Sickled and target cells marking sickle cell disease on smear, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Sickle solubility (dithionite turbidity) screens, while **electrophoresis and HPLC** diagnose definitively (alkaline cellulose acetate versus acid citrate agar separating S from D/G and C from E/O mimics, newborn screening dried spots). Trait (AS, about forty percent S) is usually asymptomatic except renal papillary necrosis, hyposthenuria and exertional collapse rarities with counselling duties; disease genotypes SS, SC (C is beta six glutamate to lysine, milder haemolysis, more retinopathy and osteonecrosis) and S-beta thalassaemia grade severity genetically.",
+   "say": "Electrophoresis and HPLC diagnose definitively, separating S from its mimics on two media. Trait is usually asymptomatic except renal rarities, while SC disease adds retinopathy and osteonecrosis patterns.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Genotype", "Haemoglobins present", "Severity sketch"],
+    "rows": [
+     ["AS trait", "A greater than S", "Carrier, counselling, rare renal events"],
+     ["SS disease", "S dominant, F variable, A absent", "Severe haemolysis and occlusion"],
+     ["SC disease", "S equals C", "Milder anaemia, eye and bone events"],
+     ["S-beta thalassaemia", "S plus A low or absent (by beta type)", "Grades between trait and SS"]
+    ]
+   }
+  },
+  {
+   "tx": "**Thalassaemias** unbalance chain production: alpha deletions (four genes, silent carrier one, trait two, HbH beta4 tetramers three deletions with haemolysis and inclusions, Hb Bart gamma4 hydrops fetalis four deletions lethal without intrauterine transfusion programmes) versus beta point mutations (microcytic hypochromic indices out of proportion to anaemia, target cells, raised HbA2 in trait, major with transfusion dependence, ineffective erythropoiesis expanding marrow (chipmunk facies), iron overload of heart, liver and endocrine glands chelated lifelong).",
+   "say": "Alpha deletions grade from silent carrier to lethal hydrops by gene count, while beta trait raises HbA2 characteristically. Major disease expands marrow and overloads iron through transfusions and absorption.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Alpha thalassaemia (deletions)", "points": ["Genes lost 1 to 4 grade disease", "HbH (beta4) and Bart (gamma4) tetramers", "Newborn Bart screening clue"]},
+    "right": {"title": "Beta thalassaemia (mutations)", "points": ["Trait: microcytosis, HbA2 high", "Major: transfusion, iron chelation", "Marrow expansion facies and bones"]
+    }
+   }
+  },
+  {
+   "tx": "Unstable haemoglobin variants precipitate as **Heinz bodies** (denatured globin on membranes, bite cells after splenic pitting, haemolysis worsened by oxidant drugs and infection, Hb Koln prototype) and high or low oxygen affinity variants cause familial erythrocytosis or cyanosis with normal cardiorespiratory examination respectively. Electrophoresis misses many (co-migrating with A), so instability testing (heat, isopropanol), HPLC, mass spectrometry and sequencing escalate in reference laboratories when smear and story insist.",
+   "say": "Unstable variants precipitate as Heinz bodies with bite cells after splenic pitting. Many co-migrate with HbA on electrophoresis, so instability testing and sequencing escalate when story insists strongly.",
+   "vis": null
+  },
+  {
+   "tx": "**Methaemoglobinaemia** oxidises heme iron to ferric (unloading oxygen and left shifting neighbours): congenital cytochrome b5 reductase deficiency (lifelong slate cyanosis, chocolate blood that stays brown on filter paper versus deoxyhaemoglobin reddening) or haemoglobin M (tyrosine substitutions stabilising ferric, dominant), versus acquired oxidants (benzocaine, dapsone, nitrites, aniline dyes) with symptoms by percentage (cyanosis fifteen, dyspnoea and headache thirty, coma and death beyond fifty). Co-oximetry measures it; standard pulse oximetry plateaus deceptively near eighty five percent.",
+   "say": "Methaemoglobinaemia oxidises iron to ferric with chocolate blood staying brown on paper. Co-oximetry measures it while pulse oximetry plateaus deceptively near eighty five percent regardless of severity.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cause family", "Prototype", "Methylene blue response"],
+    "rows": [
+     ["Reductase deficiency (recessive)", "Cytochrome b5 reductase", "Works (needs NADPH pathway intact)"],
+     ["Haemoglobin M (dominant)", "His to Tyr near heme", "No (enzyme normal, globin locked)"],
+     ["Acquired oxidants", "Benzocaine, dapsone, nitrites", "Works; avoid in G6PD deficiency (haemolysis)"],
+     ["Sulfhaemoglobin (irreversible)", "Sulfur incorporation, drugs", "No; time and support only"]
+    ]
+   }
+  },
+  {
+   "tx": "**Methylene blue** (one to two milligrams per kilogram intravenous) accelerates NADPH methaemoglobin reductase as electron shuttle, failing in G6PD deficiency (no NADPH, haemolysis risk, use high dose ascorbate or exchange in extremis) and useless in HbM and sulfhaemoglobin, distinctions that decide therapy at three in the morning. Cyanosis differentials (cardiac right to left shunt unresponsive to oxygen, methaemoglobin unresponsive with chocolate blood, pseudocyanosis metals) close haemoglobin chemistry into bedside oxygen physiology for the enzyme kinetics that follow.",
+   "say": "Methylene blue shuttles electrons through NADPH reductase, failing in G6PD deficiency and useless in haemoglobin M. Cyanosis differentials close haemoglobin chemistry into bedside oxygen physiology completely.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cyanosis at the bedside",
+    "nodes": [
+     {"id": "cyan", "label": "Cyanosed, oxygen unresponsive"},
+     {"id": "blood", "label": "Blood chocolate brown, stays brown"},
+     {"id": "coox", "label": "Co-oximetry: methaemoglobin percent"},
+     {"id": "rx", "label": "Methylene blue unless G6PD or HbM"}
+    ],
+    "edges": [["cyan", "blood"], ["blood", "coox"], ["coox", "rx"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

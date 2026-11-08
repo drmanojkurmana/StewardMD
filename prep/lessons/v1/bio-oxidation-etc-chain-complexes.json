@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "bio-oxidation-etc",
+ "subject": "biochemistry",
+ "title": "Chain complexes and electron flow",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Electrons flow downhill by **redox potential** from negative donors (NADH/NAD+ about minus three hundred twenty millivolts) through flavins, iron sulfur centres, quinones and cytochromes (heme iron flipping ferrous ferric) to oxygen (plus eight hundred twenty), releasing free energy in three large drops captured as proton pumping at complexes I, III and IV. Standard potentials predict direction; actual potentials follow Nernst ratios, so backed up carriers (high NADH) stall upstream dehydrogenases by mass action before any poison is invoked.",
+   "say": "Electrons flow downhill by redox potential to oxygen, capturing three large energy drops as proton pumping. Backed up carriers stall upstream dehydrogenases by mass action before any poison is invoked clinically.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-oxidation-etc-fig1.webp",
+    "alt": "Diagram of the mitochondrial electron transport chain, showing complexes one to four, coenzyme Q, cytochrome c and ATP synthase.",
+    "caption": "Electron transport chain showing complexes, electron flow, and proton pumping.",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Complex I** (NADH ubiquinone oxidoreductase, FMN plus iron sulfur chain, largest complex, forty plus subunits seven mtDNA encoded) pumps four protons per NADH and is blocked by rotenone (fish poison insecticide), amobarbital, piericidin, and weakly by metformin therapeutically debated; its flavin and quinone sites leak superoxide especially in reverse electron transport (succinate driven reperfusion). MPP+ (MPTP contaminant) concentrates here destroying dopaminergic neurons as parkinsonism toxicology classic.",
+   "say": "Complex one pumps four protons per NADH and is blocked by rotenone classically. Its sites leak superoxide in reverse electron transport, and MPP plus destroys dopaminergic neurons as toxicology classic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complex",
+     "Input",
+     "Protons pumped per pair",
+     "Classic blocker"
+    ],
+    "rows": [
+     [
+      "I (NADH dehydrogenase)",
+      "Matrix NADH",
+      "4",
+      "Rotenone, amobarbital"
+     ],
+     [
+      "II (succinate dehydrogenase)",
+      "Succinate (FAD covalent)",
+      "0",
+      "Malonate competitive"
+     ],
+     [
+      "III (cytochrome bc1, Q cycle)",
+      "Ubiquinol (QH2)",
+      "4",
+      "Antimycin A"
+     ],
+     [
+      "IV (cytochrome oxidase)",
+      "Cytochrome c (reduced)",
+      "2",
+      "Cyanide, CO, azide"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Complex II** uniquely never pumps (succinate oxidation energy drop too small) and moonlights as TCA enzyme, feeding electrons through covalently bound FAD and iron sulfur to ubiquinone while succinate dehydrogenase mutations cause paragangliomas (pseudohypoxia HIF signalling tumours) beyond bioenergetics. Ubiquinone (coenzyme Q10 in humans, mobile lipophilic pool) collects electrons convergently from complexes I and II, ETF dehydrogenase (fat oxidation), glycerol phosphate shuttle, dihydroorotate dehydrogenase (pyrimidine synthesis, leflunomide target) making Q the true Grand Central of mitochondrial electrons.",
+   "say": "Complex two never pumps and moonlights as the TCA enzyme whose mutations cause paragangliomas. Ubiquinone collects electrons convergently from fat, shuttle and pyrimidine sources as Grand Central station.",
+   "vis": {
+    "kind": "flow",
+    "title": "Many roads into Q",
+    "nodes": [
+     {
+      "id": "i",
+      "label": "Complex I (NADH)"
+     },
+     {
+      "id": "ii",
+      "label": "Complex II (succinate)"
+     },
+     {
+      "id": "etf",
+      "label": "ETF (fat) and GPD shuttle, DHODH"
+     },
+     {
+      "id": "q",
+      "label": "Ubiquinone pool to complex III"
+     }
+    ],
+    "edges": [
+     [
+      "i",
+      "q"
+     ],
+     [
+      "ii",
+      "q"
+     ],
+     [
+      "etf",
+      "q"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Q cycle** at complex III oxidises two ubiquinol at the outer Qo site (one electron to Rieske iron sulfur then cytochrome c via cytochrome c1, second through b hemes to inner Qi reducing ubiquinone), netting four protons released outside per pair reaching two cytochrome c, explaining pumping stoichiometry antimycin (Qi) versus myxothiazol (Qo) dissected experimentally. Mobile cytochrome c (twelve kilodaltons, intermembrane, apoptotic messenger when cytosolic) ferries single electrons to complex IV without diffusing away from the membrane surface.",
+   "say": "The Q cycle nets four protons per pair reaching cytochrome c through bifurcated electron paths. Mobile cytochrome c ferries single electrons onward while moonlighting as an apoptotic messenger cytosolically.",
+   "vis": null
+  },
+  {
+   "tx": "**Complex IV** (cytochrome c oxidase, hemes a and a3, copper A and B centres, three mtDNA subunits) reduces oxygen fully to two waters, holding partially reduced intermediates tightly until four electrons accumulate (preventing peroxide escape normally), pumping two protons and consuming two matrix scalar protons for water chemistry (charge accounting eight per oxygen taught in advanced courses). Cyanide (ferric a3), carbon monoxide (ferrous a3, light reversible experimentally), azide, and hydrogen sulfide share the oxygen binding site toxicologically, sulfide emerging as gasotransmitter at nanomoles and poison at micromoles.",
+   "say": "Complex four reduces oxygen fully to water holding intermediates tightly until four electrons accumulate. Cyanide, carbon monoxide, azide and sulfide share its oxygen binding site toxicologically across concentrations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complex IV block phenotype",
+     "points": [
+      "Histotoxic hypoxia, venous hyperoxia",
+      "Lactic acidosis, oxygen extraction fails",
+      "Cyanide antidotes: hydroxocobalamin first line"
+     ]
+    },
+    "right": {
+     "title": "Upstream block phenotype (I or III)",
+     "points": [
+      "NADH or Q pool backs up reductively",
+      "ROS leak prominent",
+      "Substrate specific rescues experimental (succinate bypass I)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Supercomplexes** (respirasomes I plus III dimer plus IV) channel ubiquinone and cytochrome c for efficiency and ROS restraint (debated degree, examination current awareness), while plant and fungal alternative oxidases (absent in humans) remind you our chain has no bypass when blocked, hence poison lethality. Next, proton motive force converts these ten pumped protons per NADH (four plus four plus two) into ATP through the synthase turbine with P/O arithmetic already used in glycolysis yield.",
+   "say": "Respirasomes channel carriers for efficiency, while humans have no alternative oxidase bypass when blocked, hence poison lethality. Proton motive force converts ten pumped protons per NADH into ATP next lesson.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Accounting per electron pair",
+     "From NADH",
+     "From succinate (FAD entry)"
+    ],
+    "rows": [
+     [
+      "Protons pumped",
+      "10 (4+4+2)",
+      "6 (0+4+2)"
+     ],
+     [
+      "ATP by synthase plus transport (modern)",
+      "About 2.5",
+      "About 1.5"
+     ],
+     [
+      "Oxygen consumed",
+      "Half O2 to water",
+      "Half O2 to water"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
