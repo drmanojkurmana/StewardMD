@@ -1,0 +1,252 @@
+{
+  "v": 1,
+  "module": "sct-empyema-parapneumonic-decortication",
+  "title": "Parapneumonic Effusion and Empyema: Staging, Light Criteria, VATS and Decortication",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 110 (Pleura: Infections and Empyema)",
+    "British Thoracic Society (BTS) Pleural Disease Guideline",
+    "MIST-2 Randomized Clinical Trial (tPA and DNase in Pleural Infection)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Evaluating an undifferentiated pleural effusion begins with thoracentesis and chemical analysis. Light criteria differentiate between transudative and exudative pleural effusions with high sensitivity. An effusion is classified as an exudate if the pleural fluid to serum protein ratio exceeds zero point five, or if the lactate dehydrogenase ratio exceeds zero point six.",
+      "tx": "Application of **Light criteria** provides the gold standard **exudate definition** for pleural fluid analysis. A fluid is classified as an exudate if the **protein ratio** (pleural to serum) exceeds 0.5, the **LDH ratio** exceeds 0.6, or pleural fluid LDH exceeds two-thirds the upper limit of normal serum LDH (ratio >2/3 normal).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Exudative Effusion (Light Criteria)",
+          "Transudative Effusion"
+        ],
+        "rows": [
+          [
+            "Pleural / Serum Protein Ratio",
+            ">0.5",
+            "<=0.5"
+          ],
+          [
+            "Pleural / Serum LDH Ratio",
+            ">0.6",
+            "<=0.6"
+          ],
+          [
+            "Pleural Fluid LDH Level",
+            ">2/3 upper limit of normal serum LDH",
+            "<=2/3 upper limit of normal serum LDH"
+          ],
+          [
+            "Clinical Pathophysiology",
+            "Local inflammation, infection, malignancy",
+            "Systemic hydrostatic pressure or low oncotic pressure"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Parapneumonic pleural effusions evolve through three distinct pathological phases over days to weeks, which is recognized by surgical teams. The exudative stage features sterile, thin, free-flowing fluid that responds to antibiotics. If untreated, bacterial invasion triggers the fibropurulent stage with heavy fibrin loculation. The organizing stage traps the lung under a dense fibroblastic cortex.",
+      "tx": "Parapneumonic infection evolves through 3 distinct chronological phases: **Stage 1 exudative** phase, characterized by sterile, free-flowing serous fluid; **Stage 2 fibropurulent** phase, featuring dense fibrin septation, multiloculation, and bacterial invasion; and **Stage 3 organizing** phase, where fibroblast proliferation forms an unyielding collagenous peel, producing a chronic **trapped lung**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage 1 (Exudative Phase)",
+          "points": [
+            "Thin, clear, sterile free-flowing pleural fluid",
+            "Normal glucose and neutral pH (>7.20)",
+            "Resolves with systemic antibiotics alone",
+            "Tube thoracostomy rarely required unless large"
+          ]
+        },
+        "right": {
+          "title": "Stage 2 and 3 (Fibropurulent / Organizing)",
+          "points": [
+            "Bacterial invasion, dense fibrin, and loculations",
+            "Acidic pH (<7.20) and low glucose (<40-60 mg/dL)",
+            "Thick collagenous peel incarcerates lung parenchyma",
+            "Requires VATS debridement or open decortication"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A complicated parapneumonic effusion indicates active bacterial invasion into the pleural space. Bacterial metabolism consumes glucose and generates lactic acid, lowering pleural fluid pH below seven point two zero. A glucose level below forty to sixty milligrams per decilitre and LDH over one thousand units mandate chest tube insertion, which is recognized by surgical teams.",
+      "tx": "A **complicated parapneumonic effusion** requires mandatory tube thoracostomy drainage, defined by a **pleural fluid pH** below 7.20, **glucose** below 40 to 60 mg/dL, **LDH** greater than 1000 IU/L, or a positive Gram stain or culture. Relying on systemic antibiotics alone without tube drainage leads to loculation and sepsis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pleural Fluid Marker",
+          "Uncomplicated Parapneumonic",
+          "Complicated Parapneumonic (Mandates Drainage)"
+        ],
+        "rows": [
+          [
+            "Pleural fluid pH",
+            ">7.20 (typically >7.30)",
+            "<7.20 (active bacterial lactic acid production)"
+          ],
+          [
+            "Pleural glucose level",
+            ">60 mg/dL",
+            "<40 to 60 mg/dL (consumed by leukocyte/bacterial metabolism)"
+          ],
+          [
+            "Pleural fluid LDH",
+            "<1000 IU/L",
+            ">1000 IU/L (extensive cellular lysis and inflammation)"
+          ],
+          [
+            "Gram stain / Culture",
+            "Negative",
+            "Positive or negative (antibiotic pre-treatment)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Overt empyema represents the macroscopic accumulation of thick pus within the pleural cavity, which is recognized by surgical teams. The fluid is thick, opaque, and foul-smelling, populated by dead neutrophils and bacteria. Empyema represents a true surgical abscess that will never resolve with antibiotics alone, requiring complete drainage.",
+      "tx": "Establishing an **empyema definition** requires the macroscopic identification of **frank pus** upon pleural aspiration. An established empyema functions physiologically as a closed intrathoracic abscess that will never resolve with systemic antibiotics alone, mandating immediate, complete **mechanical drainage** via large-bore chest tube or thoracoscopy.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-xray-pleural-effusion-empyema.webp",
+        "ar": 1.3333,
+        "caption": "Pleural effusion and empyema thoracis loculation. Credit: StewardMD.",
+        "alt": "Chest radiograph and computed tomography showing loculated empyema thoracis."
+      }
+    },
+    {
+      "say": "In patients with multiloculated empyema who fail chest tube drainage, intrapleural enzymatic therapy can clear fibrinous debris. The MIST-2 trial established that combining tissue plasminogen activator with recombinant deoxyribonuclease improves drainage. Administering tPA ten milligrams and DNase five milligrams twice daily for three days avoids surgery.",
+      "tx": "The landmark **MIST-2 trial** demonstrated that combined **intrapleural fibrinolysis** using **tPA and DNase** significantly enhances fluid evacuation and reduces surgical referrals. The protocol instills 10 mg of tPA and 5 mg of human recombinant DNase twice daily for 3 days, dissolving fibrin septations and cleaving free bacterial DNA.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "CT demonstrates multiloculated Stage 2 parapneumonic effusion failing tube"
+          },
+          {
+            "id": "b",
+            "label": "Instill intrapleural tPA (10 mg) and DNase (5 mg) into chest tube"
+          },
+          {
+            "id": "c",
+            "label": "Clamp tube for 1 to 2 hours to allow enzymatic fibrin and DNA lysis"
+          },
+          {
+            "id": "d",
+            "label": "Release clamp to low negative suction; repeat twice daily for 3 days (6 doses)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Video-assisted thoracoscopic surgery is the surgical treatment of choice for early multiloculated empyema. In stage two disease, thoracoscopy enables thorough mechanical disruption of all fibrinous loculations, which is recognized by surgical teams. The surgeon aspirates gelatinous purulent exudate, breaks down fibrous webs, and positions large chest tubes under direct vision.",
+      "tx": "Early **VATS debridement** represents the operative standard for **Stage 2 empyema** that fails tube thoracostomy. Under thoracoscopic visualization, the surgeon performs mechanical **loculation breakdown**, evacuates gelatinous fibrin debris, irrigates the pleural space with warm saline, and positions large-bore chest drains directly into dependent gutters.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-surg-empyema_thoracis.webp",
+        "ar": 1.3333,
+        "caption": "Chronic empyema thoracis stages and fibroblastic peel. Credit: StewardMD.",
+        "alt": "Surgical pathology and thoracoscopic debridement of multiloculated empyema."
+      }
+    },
+    {
+      "say": "Chronic stage three organizing empyema forms a thick fibrous peel that encases the visceral pleura and traps the lung. Once an unyielding peel develops, thoracoscopic suction is insufficient. Surgeons perform open decortication via posterolateral thoracotomy, carefully peeling the fibrous cortex off the lung to achieve full re-expansion.",
+      "tx": "In chronic Stage 3 disease, a thick, collagenous **fibroblastic peel** incarcerates the pulmonary parenchyma, causing restrictive atelectasis. Management requires **open decortication** via thoracotomy to meticulously dissect and strip the fibrous peel from the visceral pleura, achieving complete **pulmonary re-expansion** and obliterating the residual pleural dead space.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Posterolateral thoracotomy entered through 5th or 6th intercostal space"
+          },
+          {
+            "id": "b",
+            "label": "Incise thick parietal peel and enter extrapleural cleavage plane"
+          },
+          {
+            "id": "c",
+            "label": "Meticulously peel visceral fibrous cortex off entrapped pulmonary lobes"
+          },
+          {
+            "id": "d",
+            "label": "Inflate lungs under 30 cm H2O airway pressure to verify complete expansion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Postpneumonectomy empyema with a bronchopleural fistula is one of the most formidable thoracic surgical challenges. Emergency management requires immediate chest tube drainage to prevent drowning of the remaining lung. Subsequent care requires open window thoracostomy with an Eloesser flap or Clagett procedure to sterilize the cavity.",
+      "tx": "The catastrophic combination of postpneumonectomy empyema and **bronchopleural fistula** requires emergent dependent pleural drainage to protect the contralateral lung from aspirated pus. Definitive control employs an open window thoracostomy, such as an **Eloesser flap** or **Clagett procedure**, followed by delayed cavity closure with antibiotic solution or muscle transposition.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Stage",
+          "Operative Procedure",
+          "Clinical Objective"
+        ],
+        "rows": [
+          [
+            "Emergency stage",
+            "Immediate tube thoracostomy or dependent cannula",
+            "Prevents lethal aspiration of purulent fluid into solitary remaining lung"
+          ],
+          [
+            "Subacute stage",
+            "Eloesser U-shaped flap open thoracostomy",
+            "Provides long-term dependent open cavity drainage and daily packing"
+          ],
+          [
+            "Sterilization stage",
+            "Cavity debridement and antiseptic dressing changes",
+            "Granulates pleural walls and clears bacterial colonization"
+          ],
+          [
+            "Definitive stage",
+            "Clagett procedure or intrathoracic muscle transposition",
+            "Fistula closure with latissimus/pectoralis flap and antibiotic fluid fill"
+          ]
+        ]
+      }
+    }
+  ]
+}
