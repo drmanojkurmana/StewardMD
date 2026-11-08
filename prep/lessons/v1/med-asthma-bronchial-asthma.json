@@ -1,0 +1,250 @@
+{
+ "v": 1,
+ "module": "med-asthma",
+ "subject": "medicine",
+ "title": "Bronchial asthma: pathogenesis, clinical assessment, and maintenance therapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Chronic airway inflammation with bronchial hyperresponsiveness and variable airflow obstruction defines asthma. Developing **bronchial asthma** stems from complex gene-environment interactions triggering type-2 helper T-cell (Th2) predominant immune responses. Interleukins 4, 5, and 13 stimulate B-cell immunoglobulin E synthesis, eosinophil recruitment, and goblet cell hyperplasia. Patients present with episodic breathlessness, chest tightness, nocturnal cough, and variable expiratory airflow limitation triggered by allergens, cold air, viral infections, or vigorous exercise.",
+   "say": "Chronic airway inflammation with bronchial hyperresponsiveness is the central feature of asthma. Developing bronchial asthma arises from immune interactions promoting helper T-cell type-two responses. Interleukins stimulate immunoglobulin E production, eosinophil influx and mucus hypersecretion. Patients present with episodic breathlessness, chest tightness, nocturnal cough and airflow limitation triggered by viral infections, cold air or exercise.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "allergen",
+      "label": "Aeroallergen inhalation in atopic airway"
+     },
+     {
+      "id": "th2",
+      "label": "Th2 cytokine release (IL-4, IL-5, IL-13)"
+     },
+     {
+      "id": "ige",
+      "label": "IgE mast cell degranulation & eosinophilia"
+     },
+     {
+      "id": "hyper",
+      "label": "Airway smooth muscle hyperresponsiveness"
+     },
+     {
+      "id": "obstruct",
+      "label": "Variable airflow obstruction and wheeze"
+     }
+    ],
+    "edges": [
+     [
+      "allergen",
+      "th2"
+     ],
+     [
+      "th2",
+      "ige"
+     ],
+     [
+      "ige",
+      "hyper"
+     ],
+     [
+      "hyper",
+      "obstruct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Auscultation of the thorax during an acute asthma exacerbation reveals the quintessential physical sign of bronchoconstriction. Generating a polyphonic, high-pitched **wheeze** occurs predominantly during prolonged expiration as turbulent air currents rush through narrowed, edematous bronchioles. The intensity of audible wheezing does not correlate reliably with obstruction severity. In mild early exacerbations, wheezing may be heard only during forced expiration, while severely exhausted patients may lose all breath sounds entirely.",
+   "say": "Thoracic auscultation during an acute asthma attack reveals the typical physical finding of bronchoconstriction. Producing a polyphonic, musical wheeze occurs primarily during prolonged expiration as airflow passes through constricted bronchioles. The loudness of wheezing does not correlate with disease severity. In mild episodes, wheezing appears only on forced exhalation, whereas exhausted patients can lose breath sounds entirely.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-asthma-attack.webp",
+    "alt": "Clinical signs and red flags of acute severe asthma attack.",
+    "caption": "Physical examination findings and danger signs in acute asthma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Serial bedside monitoring of maximal expiratory airflow provides objective verification of airway variability. Measuring **peak expiratory flow** using a portable handheld meter allows patients to monitor disease control at home. Diurnal variability exceeding ten percent across twice-daily measurements, or an improvement of twenty percent or sixty litres per minute fifteen minutes following inhaled bronchodilator, confirms the physiological diagnosis of asthma. Establishing the patient's personal best reading guides action plan zones.",
+   "say": "Bedside recording of maximal expiratory airflow delivers objective proof of airway variability. Measuring peak expiratory flow using a portable meter allows individuals to assess control at home. Diurnal variability exceeding ten percent across serial recordings confirms asthma. Establishing the patient's personal best reading guides self-management action plan zones.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PEFR Zone",
+     "Percentage of personal best",
+     "Clinical symptom status",
+     "Action plan intervention"
+    ],
+    "rows": [
+     [
+      "Green Zone (Good)",
+      "80% to 100% of personal best",
+      "No cough or wheeze; normal activity",
+      "Continue routine maintenance inhaler"
+     ],
+     [
+      "Yellow Zone (Caution)",
+      "50% to 79% of personal best",
+      "Persistent cough, wheeze, nocturnal waking",
+      "Step up inhaled steroids; add reliever doses"
+     ],
+     [
+      "Red Zone (Emergency)",
+      "< 50% of personal best",
+      "Severe dyspnoea, speaking in words",
+      "Immediate inhaled reliever; emergency medical care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Global Initiative for Asthma outlines a comprehensive stepwise management strategy based on symptom frequency. Implementing the **GINA steps** matches pharmacological intensity to individual asthma control. Modern guidelines strongly discourage short-acting beta agonist monotherapy without anti-inflammatory coverage due to increased exacerbation and mortality risks. Instead, low-dose inhaled corticosteroid combined with formoterol is established as the preferred reliever and maintenance strategy across all severity steps.",
+   "say": "The Global Initiative for Asthma provides a stepwise management ladder based on symptom frequency. Implementing the guideline steps matches drug intensity to individual control. Modern recommendations discourage short-acting beta agonist monotherapy because it increases exacerbation risks. Instead, low-dose inhaled corticosteroid combined with formoterol serves as the preferred reliever and maintenance regimen.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-asthma-steps.svg",
+    "alt": "Stepwise management ladder for asthma based on GINA guidelines.",
+    "caption": "Stepwise pharmacological progression in asthma maintenance therapy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Suppression of chronic mucosal inflammation forms the cornerstone of effective disease-modifying asthma therapy. Prescribing daily **inhaled corticosteroids** such as budesonide, fluticasone, or beclometasone targets mucosal edema, downregulates cytokine production, and restores beta-2 receptor sensitivity. Regular steroid inhalation dramatically decreases bronchial hyperresponsiveness, prevents permanent airway remodelling, and reduces hospitalisation by more than half. Patients are instructed to rinse their mouths thoroughly after each inhalation to prevent local dysphonia and oral candidiasis.",
+   "say": "Suppressing chronic mucosal inflammation represents the foundation of disease-modifying asthma treatment. Prescribing daily inhaled corticosteroids like budesonide or fluticasone treats airway swelling and reduces inflammatory cytokine production. Regular inhalation decreases bronchial hyperresponsiveness and cuts hospital admissions in half. Patients must rinse their mouths after inhalation to prevent oral candidiasis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inhaled corticosteroids",
+     "points": [
+      "Budesonide, fluticasone, beclometasone",
+      "Suppresses eosinophilic inflammation & cytokines",
+      "Prevents exacerbations and remodelling",
+      "Local side effects: dysphonia, oral thrush"
+     ]
+    },
+    "right": {
+     "title": "Inhaled bronchodilators",
+     "points": [
+      "Formoterol, salmeterol (LABA); salbutamol (SABA)",
+      "Relaxes airway smooth muscle via beta-2 receptors",
+      "Provides rapid or sustained bronchodilation",
+      "Never used as monotherapy without ICS"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Assessing **clinical asthma control** requires evaluating daytime symptoms, nighttime awakenings, and reliever usage over the preceding four weeks. Categorizing patients as well-controlled, partly controlled, or uncontrolled guides therapy adjustments. Well-controlled patients experience daytime symptoms twice or less weekly, no nocturnal waking, and normal exercise capacity. Treatment is maintained for at least three months before considering a careful step-down in medication dose.",
+   "say": "Assessing asthma control requires evaluating daytime symptoms, nocturnal awakenings and rescue inhaler use over four weeks. Categorizing patients guides treatment escalation or step-down. Well-controlled individuals experience daytime symptoms twice or less weekly and maintain normal exercise capacity. Stable control is maintained for three months before attempting dose reductions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Control criterion",
+     "Well-controlled",
+     "Partly controlled (1 to 2 present)",
+     "Uncontrolled"
+    ],
+    "rows": [
+     [
+      "Daytime symptoms",
+      "<= 2 times per week",
+      "> 2 times per week",
+      ">= 3 features of partly controlled"
+     ],
+     [
+      "Nighttime waking",
+      "None",
+      "Any awakening due to asthma",
+      "Frequent nocturnal symptoms"
+     ],
+     [
+      "Reliever medication need",
+      "<= 2 times per week",
+      "> 2 times per week",
+      "Daily reliever usage"
+     ],
+     [
+      "Activity limitation",
+      "None",
+      "Any exercise limitation",
+      "Severe restriction of daily life"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent airway inflammation leads to progressive structural alterations termed **airway remodelling**. Chronic unchecked eosinophilic inflammation induces subepithelial collagen deposition, thickening of the basement membrane, goblet cell metaplasia, and bronchial smooth muscle hypertrophy. These irreversible anatomical changes cause fixed airflow limitation that ceases to respond to bronchodilator therapy, highlighting the critical importance of early, sustained anti-inflammatory treatment with inhaled corticosteroids.",
+   "say": "Persistent airway inflammation causes progressive structural modifications termed airway remodelling. Chronic eosinophilic inflammation induces subepithelial collagen deposition, basement membrane thickening and smooth muscle hypertrophy. These structural changes produce fixed airflow obstruction that fails to respond to bronchodilators, highlighting the value of early anti-inflammatory therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "chronic",
+      "label": "Uncontrolled chronic eosinophilic inflammation"
+     },
+     {
+      "id": "growth",
+      "label": "Release of TGF-beta & fibroblastic factors"
+     },
+     {
+      "id": "thick",
+      "label": "Subepithelial fibrosis & basement membrane thickening"
+     },
+     {
+      "id": "hyper",
+      "label": "Smooth muscle hyperplasia & goblet cell metaplasia"
+     },
+     {
+      "id": "fixed",
+      "label": "Fixed irreversible airflow limitation"
+     }
+    ],
+    "edges": [
+     [
+      "chronic",
+      "growth"
+     ],
+     [
+      "growth",
+      "thick"
+     ],
+     [
+      "thick",
+      "hyper"
+     ],
+     [
+      "hyper",
+      "fixed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Proper inhaler delivery technique is crucial to achieve adequate pulmonary drug deposition. Selecting between pressurized metered-dose inhalers (pMDIs) with **valved holding chambers** (spacers) and dry powder inhalers depends on patient inspiratory flow and coordination. Using a spacer with pMDI decelerates aerosol particle velocity, reduces oropharyngeal impaction, and increases intrapulmonary lung deposition from fifteen percent to more than forty percent, maximizing clinical therapeutic efficacy.",
+   "say": "Proper inhaler technique is essential to achieve reliable pulmonary drug deposition. Selecting between metered-dose inhalers with holding chambers and dry powder devices depends on inspiratory coordination. Using a spacer slows aerosol velocity, reduces throat deposition and increases intrapulmonary delivery to over forty percent, improving therapeutic outcomes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "pMDI with spacer",
+     "points": [
+      "Eliminates hand-breath coordination requirement",
+      "Reduces oropharyngeal impaction & local thrush",
+      "Increases lung deposition over 40%",
+      "Preferred in children and acute exacerbations"
+     ]
+    },
+    "right": {
+     "title": "Dry powder inhaler (DPI)",
+     "points": [
+      "Breath-actuated without chemical propellants",
+      "Requires vigorous, deep inspiratory effort",
+      "Ineffective in severe acute dyspnoea",
+      "Compact and convenient for outpatient use"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

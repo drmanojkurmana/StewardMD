@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "med-asthma",
+ "subject": "medicine",
+ "title": "Near-fatal asthma, aspirin-exacerbated disease, and pulmonary eosinophilia",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Progressive ventilatory failure during an acute asthma exacerbation culminates in an ominous physical finding. Developing a **silent chest** occurs when severe airflow limitation and respiratory muscle exhaustion reduce tidal volume so profoundly that audible breath sounds and wheezes completely disappear. Patients display cyanosis, bradycardia, confusion, and paradoxical thoracoabdominal breathing, indicating impending cardiopulmonary arrest that demands immediate emergency endotracheal intubation and mechanical ventilation.",
+   "say": "Progressive respiratory failure during an asthma attack produces an ominous physical finding. Developing a silent chest occurs when extreme airway narrowing and respiratory exhaustion diminish airflow so severely that wheezing disappears. Patients display cyanosis, confusion and paradoxical abdominal breathing, signaling impending arrest that requires immediate endotracheal intubation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute severe asthma",
+     "points": [
+      "PEFR 33% to 50% of best",
+      "Respiratory rate >= 25 breaths/min",
+      "Heart rate >= 110 beats/min",
+      "Inability to complete sentences in one breath"
+     ]
+    },
+    "right": {
+     "title": "Life-threatening asthma",
+     "points": [
+      "PEFR < 33% of best or silent chest",
+      "Cyanosis, bradycardia, hypotension",
+      "Normal or elevated PaCO2 (> 45 mmHg)",
+      "Exhaustion, confusion, or coma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Evaluating blood gas parameters during acute severe asthma provides critical prognostic warnings of impending respiratory arrest. In early exacerbations, hyperventilation drives PaCO2 down below 35 mmHg. Finding a **pseudonormal PaCO2** (40 to 45 mmHg) in a tachypnoeic, struggling patient is not reassuring; it signals profound diaphragmatic exhaustion and heralds catastrophic hypercapnic respiratory arrest, requiring immediate transfer to the intensive care unit.",
+   "say": "Blood gas analysis during acute asthma provides vital warnings of impending respiratory arrest. In early attacks, hyperventilation causes carbon dioxide levels to drop. Finding a normal carbon dioxide tension in a tachypnoeic patient is alarming; it indicates respiratory muscle fatigue and warns of acute hypercapnic failure, requiring urgent intensive care transfer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "early",
+      "label": "Early asthma attack: Hyperventilation & low PaCO2 (< 35 mmHg)"
+     },
+     {
+      "id": "tire",
+      "label": "Progressive muscle fatigue & airway obstruction"
+     },
+     {
+      "id": "pseudo",
+      "label": "Pseudonormal PaCO2 (40 to 45 mmHg): Warning of fatigue"
+     },
+     {
+      "id": "hyper",
+      "label": "Severe hypercapnia (PaCO2 > 50 mmHg) & acidosis"
+     },
+     {
+      "id": "vent",
+      "label": "Emergent invasive mechanical ventilation"
+     }
+    ],
+    "edges": [
+     [
+      "early",
+      "tire"
+     ],
+     [
+      "tire",
+      "pseudo"
+     ],
+     [
+      "pseudo",
+      "hyper"
+     ],
+     [
+      "hyper",
+      "vent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inhibition of cyclooxygenase-1 in susceptible asthmatic patients shunts arachidonic acid into potent inflammatory pathways. Developing **aspirin-exacerbated respiratory disease** (AERD), historically termed Samter triad, comprises bronchial asthma, chronic rhinosinusitis with recurrent nasal polyposis, and acute bronchospasm following ingestion of aspirin or non-steroidal anti-inflammatory drugs. Shunting arachidonic acid toward 5-lipoxygenase generates massive quantities of cysteinyl leukotrienes, causing severe bronchospasm, rhinorrhoea, and conjunctival injection.",
+   "say": "Blocking cyclooxygenase in susceptible individuals shunts arachidonic acid into inflammatory mediator pathways. Developing aspirin-exacerbated respiratory disease, known as Samter triad, combines asthma, nasal polyposis and acute bronchospasm after taking non-steroidal anti-inflammatory drugs. Shunting toward five-lipoxygenase produces abundant leukotrienes, generating severe bronchospasm, facial flushing and nasal congestion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aspirin-exacerbated-respiratory-disease-fig1.webp",
+    "alt": "Pathophysiological diagram of Samter triad and leukotriene shunting.",
+    "caption": "Aspirin-exacerbated respiratory disease, Samter triad, and leukotriene cascade. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Managing aspirin-exacerbated respiratory disease requires strict lifelong avoidance of all COX-1 inhibiting medications. Prescribing **leukotriene receptor antagonists** like montelukast or 5-lipoxygenase inhibitors like zileuton provides substantial symptomatic relief. For patients requiring aspirin for cardiovascular indications or those with recalcitrant nasal polyposis, therapeutic aspirin desensitization followed by daily maintenance aspirin therapy downregulates cysteinyl leukotriene receptors and improves upper and lower airway control.",
+   "say": "Managing aspirin-exacerbated disease demands strict lifelong avoidance of non-steroidal anti-inflammatory drugs. Giving leukotriene receptor blockers like montelukast delivers valuable symptomatic relief. For individuals requiring aspirin for coronary disease or recalcitrant polyps, therapeutic aspirin desensitisation followed by daily aspirin therapy suppresses leukotriene receptors and improves respiratory control.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medications to avoid",
+     "points": [
+      "Aspirin (acetylsalicylic acid)",
+      "Ibuprofen, naproxen, diclofenac",
+      "Ketorolac, indomethacin, piroxicam",
+      "All non-selective COX-1 inhibitors"
+     ]
+    },
+    "right": {
+     "title": "Safe alternatives",
+     "points": [
+      "Paracetamol (low doses <= 500 mg)",
+      "Highly selective COX-2 inhibitors (celecoxib)",
+      "Leukotriene modifiers (montelukast, zileuton)",
+      "Aspirin desensitization protocol in hospital"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transient narrowing of the lower airways provoked by vigorous physical activity affects up to ninety percent of asthmatic individuals. Triggering **exercise-induced bronchospasm** results from rapid thermal and osmotic changes in the airway mucosa during hyperpnoea. Inhaling large volumes of cool, dry air dehydrates the periciliary fluid layer, triggering mucosal mast cell degranulation. Symptoms peak five to fifteen minutes after cessation of exercise, and inhaling salbutamol fifteen minutes before exertion prevents attacks.",
+   "say": "Transient narrowing of lower airways provoked by physical exertion affects many asthmatic individuals. Developing exercise-induced bronchospasm results from thermal and osmotic changes in airway mucosa during hyperventilation. Breathing dry air dehydrates airway fluid, triggering mast cell degranulation. Symptoms peak ten minutes after stopping exercise, and inhaling salbutamol beforehand prevents bronchospasm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ex",
+      "label": "Vigorous exercise with sustained hyperpnoea"
+     },
+     {
+      "id": "dry",
+      "label": "Airway water loss and thermal heat exchange"
+     },
+     {
+      "id": "osm",
+      "label": "Hyperosmolar periciliary fluid stimulates mast cells"
+     },
+     {
+      "id": "med",
+      "label": "Release of histamine and cysteinyl leukotrienes"
+     },
+     {
+      "id": "spasm",
+      "label": "Bronchoconstriction peaking 5 to 15 min post-exercise"
+     }
+    ],
+    "edges": [
+     [
+      "ex",
+      "dry"
+     ],
+     [
+      "dry",
+      "osm"
+     ],
+     [
+      "osm",
+      "med"
+     ],
+     [
+      "med",
+      "spasm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A complex hypersensitivity reaction to Aspergillus fumigatus colonizing the bronchial tree complicates chronic asthma and cystic fibrosis. Clinicians diagnose **allergic bronchopulmonary aspergillosis** (ABPA) by recurrent asthma exacerbations, expectoration of brownish mucus plugs, high total serum IgE (> 1000 IU/mL), positive Aspergillus skin prick tests, and peripheral blood eosinophilia. High-resolution computed tomography classically demonstrates central, proximal bronchiectasis with upper lobe predominance and characteristic finger-in-glove mucoid impaction.",
+   "say": "A complex allergic reaction to Aspergillus fumigatus colonising the bronchi complicates asthma and cystic fibrosis. Clinicians diagnose allergic bronchopulmonary aspergillosis by asthma flares, brownish mucus plugs, elevated total immunoglobulin E and blood eosinophilia. High-resolution computed tomography shows central bronchiectasis with upper-lobe predominance and characteristic finger-in-glove mucus impaction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/allergic-bronchopulmonary-aspergillosis-fig1.webp",
+    "alt": "Computed tomography and pathology findings of allergic bronchopulmonary aspergillosis.",
+    "caption": "Central bronchiectasis and mucoid impaction in ABPA. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Therapy for allergic bronchopulmonary aspergillosis combines immune suppression with antifungal eradication. Administering oral **systemic corticosteroids** with prednisolone suppresses hypersensitivity inflammation, while oral itraconazole reduces the antigenic fungal burden in the airway lumen. Serial measurement of total serum IgE levels serves as an objective biomarker to monitor disease activity and therapeutic response, where a fifty percent reduction confirms clinical remission.",
+   "say": "Treatment for allergic bronchopulmonary aspergillosis requires immunosuppression combined with antifungal eradication. Giving oral corticosteroids with prednisolone dampens hypersensitivity inflammation, while oral itraconazole reduces fungal colonisation. Tracking total serum immunoglobulin E levels delivers an objective biomarker to monitor disease activity, with a fifty percent fall indicating remission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic criterion",
+     "Required clinical finding",
+     "Therapeutic purpose"
+    ],
+    "rows": [
+     [
+      "Predisposing condition",
+      "Bronchial asthma or cystic fibrosis",
+      "Underlying airway disease setting"
+     ],
+     [
+      "Total serum IgE",
+      "> 1000 IU/mL (often > 2000)",
+      "Reflects intense allergic sensitization"
+     ],
+     [
+      "Aspergillus sensitization",
+      "Positive skin prick or specific IgE/IgG",
+      "Confirms hypersensitivity to fungal antigens"
+     ],
+     [
+      "Chest imaging",
+      "Central proximal bronchiectasis on HRCT",
+      "Monitors structural airway damage and bronchiectasis"
+     ],
+     [
+      "Oral itraconazole",
+      "200 mg twice daily for 16 weeks",
+      "Clears bronchial fungal colonization"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extensive accumulation of eosinophils within the pulmonary interstitium and alveolar spaces characterizes a spectrum of non-fungal parenchymal lung disorders. Presenting with fever, hypoxaemia, and migratory peripheral infiltrates defines **eosinophilic pneumonia**, categorized into acute and chronic variants. Acute eosinophilic pneumonia causes rapid respiratory failure in young smokers with prominent bronchoalveolar lavage eosinophilia (> 25%), while chronic eosinophilic pneumonia predominantly affects middle-aged women with asthma, producing the photographic negative of pulmonary oedema on chest imaging.",
+   "say": "Extensive accumulation of eosinophils within lung tissue characterizes a distinct group of pulmonary disorders. Developing eosinophilic pneumonia manifests with fever, hypoxaemia and peripheral infiltrates, divided into acute and chronic variants. Acute eosinophilic pneumonia produces rapid respiratory distress in new smokers, while chronic eosinophilic pneumonia affects asthmatic patients, showing peripheral infiltrates on chest imaging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute eosinophilic pneumonia (AEP)",
+     "points": [
+      "Rapid onset over < 7 days; acute hypoxaemia",
+      "Strong association with new smoking onset",
+      "BAL eosinophils > 25%; blood eosinophils normal",
+      "Prompt, dramatic response to IV corticosteroids"
+     ]
+    },
+    "right": {
+     "title": "Chronic eosinophilic pneumonia (CEP)",
+     "points": [
+      "Subacute insidious onset over months",
+      "Associated with severe atopic asthma",
+      "Marked peripheral blood and BAL eosinophilia",
+      "Photographic negative of pulmonary oedema on X-ray"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
