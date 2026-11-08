@@ -3,11 +3,11 @@
  "module": "mic-salmonella",
  "subject": "microbiology",
  "title": "Salmonella: enteric fever and non typhoidal disease",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
-   "tx": "**Enteric fever** (Typhi and Paratyphi A, B, C) starts with step ladder fever climbing over week one with headache, then **rose spots** (faint truncal macules), splenomegaly and **relative bradycardia** (Faget sign: pulse lagging temperature) in week two. Bacteria invade ileal **Peyer patches**, and week three threatens **perforation with peritonitis** or gastrointestinal bleeding. Paratyphi runs milder; **Vi capsule** shields Typhi from complement. Humans are the only reservoir, spread by the 5 Fs with contaminated water.",
-   "say": "Step ladder fever plus rose spots plus slow pulse is enteric fever. Week three perforates ileum.",
+   "tx": "**Enteric fever** from Typhi and Paratyphi A, B and C climbs as **step ladder fever** over week one with headache. Week two adds **rose spots** as faint truncal macules with splenomegaly and **relative bradycardia**, the Faget sign of pulse lagging temperature. Bacteria invade ileal Peyers patches, and week three threatens perforation with peritonitis or gastrointestinal bleeding. Paratyphi runs milder, Vi capsule shields Typhi from complement, humans are the only reservoir, and spread follows the 5 Fs with contaminated water.",
+   "say": "Enteric fever is recognised by its timetable. Fever climbs in stepwise fashion through the first week with headache, which is the step ladder pattern. The second week adds faint rose coloured spots on the trunk with an enlarged spleen and a pulse slower than the temperature warrants, which is relative bradycardia. Bacilli invade the Peyers patches of the ileum, and the third week threatens perforation or intestinal bleeding. Paratyphi behaves more mildly, humans are the only reservoir, and spread follows contaminated water and the five Fs.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/mic-salmonella-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Chronic carriers** (2 to 5 percent, gallbladder colonisation especially with gallstones, shedding Vi positive bacilli in stool) sustain endemicity; food handlers need exclusion with clearance cultures. Complications beyond perforation include encephalopathy (muttering delirium, typhoid state), hepatitis, pneumonia, myocarditis and osteomyelitis. Relapse follows inadequate therapy as intracellular bacilli resurge. Paratyphi B (Schottmuller) and C add focal suppurations.",
-   "say": "Gallbladder carriers shedding Vi bacilli keep typhoid endemic. Muttering delirium with fever is typhoid state.",
+   "tx": "**Chronic carriers** in two to five percent sustain endemicity through **gallbladder colonisation**, especially with gallstones, shedding Vi positive bacilli in stool. Food handlers need exclusion with clearance cultures. Beyond perforation, complications include encephalopathy with muttering delirium in **typhoid state**, hepatitis, pneumonia, myocarditis and osteomyelitis. Relapse follows inadequate therapy as intracellular bacilli resurge, and Paratyphi B with C add focal suppurations.",
+   "say": "Carriers keep typhoid alive between epidemics. Two to five percent of patients become chronic shedders because bacilli colonise the gallbladder, especially when stones are present, and stool cultures stay positive for Vi bacilli. Food handlers must be excluded until clearance cultures are documented, which is the public health rule. Complications reach beyond the gut: muttering delirium marks the typhoid state, and hepatitis, pneumonia, heart and bone infection can follow. Relapse is the price of inadequate therapy, as intracellular bacilli resurge after early stopping.",
    "vis": null
   },
   {
-   "tx": "**Diagnosis follows the week**: week one **blood culture** (highest yield before antibiotics), week two stool culture with rising **Widal O and H titres** (O appears first, H persists; single titres mislead in endemic zones, paired rising titres diagnose), week three urine culture. **Bone marrow culture** stays most sensitive even after antibiotics (intracellular niche). TyphiDot IgM and IDL Tubex support rapid calls; **leukopenia with eosinopenia** (rather than leukocytosis) hints enteric over other fevers. Vi serology flags carriers.",
-   "say": "Bleed cultures week one, Widal rising week two, marrow beats all. Leukopenia points to typhoid.",
+   "tx": "The ultrasound explains the **chronic carrier**. The gallbladder lumen holds bright **gallstones** casting dark posterior shadows, the classic echogenic foci and shadowing of stone disease. The inset magnifies the secret: typhoid bacilli tangled in a **biofilm niche** on stone surface, unreachable by antibiotics or bile. Such a patient sheds Vi bacilli in stool for years while feeling well, food handling is forbidden, and cure demands prolonged ciprofloxacin with cholecystectomy when stones persist.",
+   "say": "Look at this scan the way a carrier is found. The dark gallbladder lumen contains bright stones that block sound and cast black shadows behind them, which is the textbook appearance of cholelithiasis. The circular inset shows the reason carriers never clear: typhoid bacilli woven into biofilm on the stone surface, which is beyond the reach of drugs. Such people shed bacteria in stool for years while remaining well, which is why food handling is forbidden until clearance cultures are documented. Cure needs prolonged ciprofloxacin, and the gallbladder must come out when stones persist.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mic-salmonella-gen1.webp",
+    "alt": "Grayscale RUQ ultrasound of gallbladder lumen with gallstones plus circular inset of bacilli on gallstone.",
+    "caption": "RUQ ultrasound showing echogenic gallstones with shadowing, biofilm inset. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Diagnosis follows the week. Week one belongs to **blood culture** with highest yield before antibiotics, week two to stool culture with rising **Widal O and H titres**, where O appears first and H persists. Single titres mislead in endemic zones, so paired rising titres diagnose, and week three offers urine culture. **Bone marrow culture** stays most sensitive even after antibiotics from its intracellular niche. TyphiDot IgM with Tubex supports rapid calls, **leukopenia with eosinopenia** rather than leukocytosis hints enteric over other fevers, and Vi serology flags carriers.",
+   "say": "The right test depends on the week of illness. Blood culture is the answer in week one before antibiotics blunt it, stool culture with rising Widal titres takes over in week two, and urine culture contributes in week three. O agglutinins appear first while H persists longer, and only paired rising titres are trusted in endemic zones. Marrow culture remains the most sensitive test even after antibiotics have been started, which is why it settles disputes. Low white cells with absent eosinophils favour typhoid over other fevers, and rapid antibody kits support bedside calls.",
    "vis": null
   },
   {
-   "tx": "**Treatment** outruns resistance: **ceftriaxone or azithromycin** for MDR strains (chloramphenicol, ampicillin and cotrimoxazole resistance), with **fluoroquinolone resistance** (gyrA mutations, nalidixic acid screen) now widespread in South Asia forcing XDR regimens (azithromycin plus meropenem debates). Carriers get prolonged ciprofloxacin with **cholecystectomy** when stones persist. Vaccines: **Ty21a oral live** (3 year cover) versus **Vi polysaccharide injectable** (single dose, no memory, over 2 years) versus Vi conjugate (Typbar TCV, infants, memory). Sanitation prevents; vaccines bridge.",
-   "say": "MDR typhoid gets ceftriaxone or azithromycin. Vi conjugate protects infants with memory.",
+   "tx": "Treatment outruns resistance. **Ceftriaxone or azithromycin** covers MDR strains resistant to chloramphenicol, ampicillin and cotrimoxazole, while **fluoroquinolone resistance** through gyrA mutations, screened by nalidixic acid, is now widespread in South Asia and forces XDR regimens. Carriers need prolonged ciprofloxacin with **cholecystectomy** when stones persist. Vaccines divide three ways: Ty21a oral live with three year cover, Vi polysaccharide injectable as a single dose with no memory above two years, and **Vi conjugate** for infants with memory. Sanitation prevents while vaccines bridge.",
+   "say": "Therapy must outrun resistance. Ceftriaxone or azithromycin is the answer for multidrug resistant strains, while fluoroquinolones can no longer be trusted across South Asia, which is why extensively resistant regimens are debated. Carriers need prolonged ciprofloxacin with gallbladder removal when stones persist. Three vaccines cover different needs: oral Ty21a for three years, single dose Vi polysaccharide without memory above two years, and Vi conjugate that is given to infants with memory. Sanitation remains the permanent answer while vaccines are the bridge.",
    "vis": {
     "kind": "table",
     "cols": [

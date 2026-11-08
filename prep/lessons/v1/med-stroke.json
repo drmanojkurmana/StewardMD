@@ -1,66 +1,77 @@
 {
-  "v": 1,
-  "module": "med-stroke",
-  "subject": "medicine",
-  "title": "Stroke and hemiplegia: infarct, bleed and TIA",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**sudden** FACE arm speech minutes hours, **TIA** transient fully recovered ABCD2, **bleed** headache vomit hypertensive coma, **SAH** thunderclap neck, **risks** AF rheumatic smoking pill, **young** dissection drugs vasculitis, **mimics** Todd Todd hypoglycaemia migraine) with **viva** (**hemiplegic** dense aphasic, **crescendo** TIAs warning) profiles; **onset** (last-known-well clocks) times. Vessels block.",
-      "say": "Suddens TIAs bleeds SAHs is history: risks score youngs tear mimics mimic onsets clock hemiplegics drop crescendos warn clocks tick windows shut. Brains starve.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**face** droops forehead spared UMN, **arm** pronator drift dense, **speech** Broca nonfluent Wernicke fluent, **NIHSS** scores gaze fields neglect, **carotid** bruit AF murmur, **fundi** emboli hypertensive, **coma** GCS bleed dilates, **swallow** coughs aspirates) with **bedside** (**glucose** hypo mimics, **ECG** AF rate, **swallow** screen before feed) screens; **neglect** (right parietal ignores) tests. Sides fail.",
-      "say": "Faces arms speeches NIHSSs is exam: carotids bruit fundis spot comas sink swallows choke glucoses correct ECGs race neglects ignore tests show sides weaken. Limbs dangle.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**CT** bleed excludes thrombolysis gates, **MRI** DWI infarct core penumbra, **carotid** Doppler stenosis endarterectomy, **echo** PFO vegetations Holter AF, **sugar** lipids HbA1c risks, **vasculitis** young ESR screens) with **differentials** (**infarct** pale windowed, **ICH** hypertensive coma, **SAH** thunderclap xanthochromia, **venous** young seizures haemorrhagic) sorts; **stroke** (thrombolysis thrombectomy decides) meets. Clots lodge.",
-      "say": "CTs MRIs carotids echoes is Ix: sugars profile vasculitides screen infarcts pale ICHs bleed SAHs burst venouses clot strokes meet windows open retrievers pull. Scans gate.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**thrombolyse** alteplase 4-point-5 window, **thrombectomy** large vessel 24, **aspirin** clopidogrel statin starts, **swallow** NG safe feeds, **physio** early mobilise prevents, **ICH** lowers reverses operates, **AF** anticoagulate after days, **prevent** pressure sugar smoke) with **traps** (**bleed** thrombolysis kills, **feed** aspirates drowns, **hemicraniectomy** malignant saves) closes; **follow** (rehab mood seizures) tracks. Brains recover.",
-      "say": "Thrombolyses thrombectomies aspirins swallows is Rx: physios move ICHs lower AFs wait prevents guard bleeds kill feeds drown craniectomies save follows track rehabs restore wishes respect. Functions return.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/med-stroke-clock.svg",
-        "alt": "Clot-busting countdown: alteplase to 4.5 hours from last-known-well, thrombectomy for large vessel blockage to 24 hours, then aspirin with clopidogrel and statin; bleeds lower pressure, reverse and operate.",
-        "caption": "Minutes buy brain: lyse to 4.5, retrieve to 24.",
-        "ar": 1.5385
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-med-481",
-    "bk2-med-482",
-    "bk2-med-483",
-    "bk2-med-484",
-    "bk2-med-485",
-    "bk2-med-486",
-    "bk2-med-487",
-    "bk2-med-488",
-    "bk2-med-489",
-    "bk2-med-490"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon6",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-stroke",
+ "subject": "medicine",
+ "title": "Stroke and hemiplegia: infarct, bleed and TIA",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Take a history of **sudden weakness** of face, arm, or speech over minutes to hours, and pin down the last known well time. Full recovery within a day marks a **transient ischaemic attack**, while headache with vomiting and coma in hypertension suggests a bleed, and thunderclap headache with neck stiffness suggests subarachnoid bleeding. Record atrial fibrillation, rheumatic disease, smoking, and pill use, and consider dissection, drugs, or vasculitis in the young. Exclude Todd paresis, low glucose, and **migraine mimics**.",
+   "say": "Sudden weakness of face, arm, or speech that arrives over minutes to hours is the classic story. The last known well time is fixed first, because treatment windows are measured from that moment. Full recovery within a day is a transient ischaemic attack, while headache with vomiting suggests a bleed. Thunderclap headache with a stiff neck is typical of subarachnoid bleeding and is scanned urgently. Atrial fibrillation with rheumatic disease, smoking, and pill use are noted, and dissection is considered in young patients. Todd paresis with low glucose and migraine are ruled out before stroke is concluded.",
+   "vis": null
+  },
+  {
+   "tx": "Look for a drooping face with a spared forehead, marking an **upper motor neuron lesion**, and test for pronator drift of the weak arm. Classify speech as non fluent Broca or fluent Wernicke loss, and score gaze, fields, and neglect on the **stroke scale**. Listen for carotid bruit with an atrial fibrillation murmur, inspect fundi for emboli, and grade coma on the Glasgow scale. Test the swallow before any feed, correct glucose because low glucose mimics stroke, record the **electrocardiogram**, and test for right parietal neglect.",
+   "say": "The face droops with a spared forehead, which is the mark of an upper motor lesion. The arm is tested for pronator drift, and speech loss is classified as non fluent or fluent. Gaze with visual fields and neglect are scored together, since neglect is common after right parietal stroke. The carotids are checked for a bruit, the pulse is felt for atrial fibrillation, and fundi are inspected. Coma is graded on the Glasgow scale, the swallow is tested before feeding, and low glucose is corrected first. The electrocardiogram is recorded, and one sided neglect is tested in every suspected stroke.",
+   "vis": null
+  },
+  {
+   "tx": "Order computed tomography first, because excluding a bleed gates **thrombolysis**, and use magnetic resonance with diffusion to map the infarct core against the penumbra. Study the carotids with Doppler since tight narrowing invites surgery, and search the heart with echo and Holter for patent foramen ovale, vegetations, or **atrial fibrillation**. Profile sugar, lipids, and glycated haemoglobin, and screen the young with erythrocyte sedimentation for **vasculitis**. Separate pale infarct, hypertensive bleed with coma, thunderclap subarachnoid bleed with yellow spinal fluid, and venous thrombosis with seizures.",
+   "say": "Computed tomography is ordered first, because excluding a bleed is what permits clot busting treatment. Magnetic resonance with diffusion is added to map the dead core against salvageable penumbra. The carotids are scanned with Doppler, since tight narrowing is an invitation to surgery. The heart is studied with echo and Holter monitoring for embolic sources such as atrial fibrillation. Sugar with lipids and glycated haemoglobin are profiled, and young patients are screened for vasculitis. Pale infarct is distinguished from hypertensive bleed with coma, thunderclap subarachnoid bleed, and venous thrombosis with seizures.",
+   "vis": null
+  },
+  {
+   "tx": "The scan shows a **dense middle cerebral artery** sign with early hypodensity in its territory and no bleeding. The bright artery marks fresh clot, the subtle darkening marks early ischaemia, and the absent blood permits **thrombolysis**. Read every suspected stroke scan for these three features in order, because blood on the scan redirects care toward bleed protocols. This pattern is the classic examination image of an **acute infarct**.",
+   "say": "The scan has a bright dense artery with subtle darkening in its territory and no bleeding. The bright vessel is fresh clot, while the dark zone is early starved brain. Absence of blood is what permits clot busting treatment in this patient. Every stroke scan is read for clot, early darkening, and blood in that order. Blood on the scan is a signal that redirects care toward bleed protocols instead. Examiners favour this classic image of an acute infarct, so its three features are worth study.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-stroke-gen1.webp",
+    "alt": "Axial brain CT showing dense middle cerebral artery sign with early MCA territory hypodensity and no haemorrhage.",
+    "caption": "Brain CT shows dense middle cerebral artery with early hypodensity, no haemorrhage. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Thrombolyse with alteplase within four and a half hours and retrieve vessel clots by **thrombectomy** up to twenty four hours. Start aspirin with clopidogrel and a statin, keep the patient nil by mouth until the swallow is safe with nasogastric feeding, and mobilise early with **physiotherapy**. Bleeds need pressure lowering, reversal, and operation, while atrial fibrillation needs anticoagulation after days. Control pressure, sugar, and smoking for **prevention**. Never feed before the swallow screen, never lyse a bleed, and consider hemicraniectomy for malignant swelling, tracking rehab, mood, and seizures.",
+   "say": "Alteplase is given within four and a half hours of onset in suitable patients. Large vessel clots are retrieved by thrombectomy within a day of onset. Aspirin with clopidogrel and a statin is started, and the patient is starved until the swallow proves safe. Early mobilisation with physiotherapy is encouraged, while bleeds are managed with pressure control, reversal, and surgery. Atrial fibrillation is anticoagulated after a delay, and pressure with sugar and smoking are controlled thereafter. Feeding is never started before the swallow screen, and clot busting is never used in a bleed. Rehab with mood and fits is watched during follow up.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-stroke-clock.svg",
+    "alt": "Clot-busting countdown: alteplase to 4.5 hours from last-known-well, thrombectomy for large vessel blockage to 24 hours, then aspirin with clopidogrel and statin; bleeds lower pressure, reverse and operate.",
+    "caption": "Minutes buy brain: lyse to 4.5, retrieve to 24.",
+    "ar": 1.5385
+   }
   }
+ ],
+ "quiz": [
+  "bk2-med-481",
+  "bk2-med-482",
+  "bk2-med-483",
+  "bk2-med-484",
+  "bk2-med-485",
+  "bk2-med-486",
+  "bk2-med-487",
+  "bk2-med-488",
+  "bk2-med-489",
+  "bk2-med-490"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon6",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

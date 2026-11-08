@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-megaloblastic",
- "subject": "medicine",
- "title": "Megaloblastic anaemia: B12, folate and pernicious",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**beefy** tongue sore angular mouth, **paraesthesia** gloves stocking dorsal columns, **gait** stamping Romberg positive, **pernicious** autoimmune thyroid vitiligo family, **diet** vegan nitrous alcohol, **drugs** methotrexate phenytoin PPI, **pregnancy** demands twins folate) with **viva** (**deficient** lemon-yellow paraesthetic, **pernicious** achlorhydric autoimmune) profiles; **alcohol** (diet folate lacks) asks. Marrows megaloblast.",
-   "say": "Beefies paraesthesias gaits perniciouses is history: diets lack drugs block pregnancies demand alcohols starve deficients yellow perniciouses fade intrinsic fails nerves tingle. Tongues beef.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**lemon** yellow pallor premature grey, **tongue** beefy bald Hunter glossitis, **dorsal** columns vibration proprioception Romberg, **lateral** corticospinal brisk Babinski, **neuropathy** stocking areflexic, **dementia** reversible B12 confuses, **vitiligo** thyroid autoimmune) with **bedside** (**MCV** high hypersegmented LDH, **retics** low ineffective, **IF** parietal antibodies) films; **gait** (stamping videos) films. Nerves demyelinate.",
-   "say": "Lemons tongues dorsals laterals is exam: neuropathies stock dementias confuse vitiligos patch MCVs swell retics flat IFs lack gaits stamp replacements start. Patients yellow.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**B12** low MMA homocysteine rises, **folate** low diet pregnancy drugs, **LDH** ineffective haemolysis haptoglobin, **antibodies** IF parietal pernicious, **endoscopy** atrophic gastritis screens, **marrow** megaloblasts giant bands) with **differentials** (**B12** neuro MMA, **folate** pregnant drugs, **pernicious** antibodies autoimmune, **myelodysplasia** blasts cytogenetics) sorts; **gastro** (coeliac Crohn decides) meets. DNAs fail.",
-   "say": "B12s folates LDHs antibodies is Ix: endoscopies scope marrows blast B12s nerve folates feed perniciouses bind myelodysplasias clone gastros meet diets fix intrinsic replace. Nuclei swell.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-megaloblastic-fig1.webp",
-    "alt": "Composite image: bone marrow megaloblasts, peripheral hypersegmented neutrophil, and diagram of B12/folate role in DNA synthesis.",
-    "caption": "Megaloblasts, hypersegmented neutrophils, and DNA synthesis failure in anaemia. Image: Yadav MK, Manoli NM, Madhunapantula SV, CC BY 4.0, Wikimedia Commons.",
-    "ar": 2.5
-   }
-  },
-  {
-   "tx": "**Management** (**B12** IM lifelong pernicious replaces, **folate** never alone masks cords, **cause** diet nitrous PPI treats, **pregnancy** folate neural tube guards, **transfuse** heart failure slow, **monitor** potassium retics surges) with **traps** (**folate** alone harms cords, **nitrous** inactivates cripples, **malignancy** masks misses) closes; **follow** (B12 MCV neuro) tracks. Marrows normoblast.",
-   "say": "B12s folates causes pregnancies is Rx: transfuses slow monitors watch folates mask nitrous cripple malignancies hide follows track MCVs steady wishes respect. Bloods mature.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-571",
-  "bk2-med-572",
-  "bk2-med-573",
-  "bk2-med-574",
-  "bk2-med-575",
-  "bk2-med-576",
-  "bk2-med-577",
-  "bk2-med-578",
-  "bk2-med-579",
-  "bk2-med-580"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon7",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-megaloblastic",
+  "quiz": [
+    "bk2-med-571",
+    "bk2-med-572",
+    "bk2-med-573",
+    "bk2-med-574",
+    "bk2-med-575",
+    "bk2-med-576",
+    "bk2-med-577",
+    "bk2-med-578",
+    "bk2-med-579",
+    "bk2-med-580"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon7",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about a sore beefy tongue with mouth cracks, tingling of the hands and feet, and a stamping gait with a positive Romberg test. Ask about pernicious anaemia with thyroid disease and vitiligo in the family, vegan diet with nitrous oxide or alcohol use, and drugs such as methotrexate, phenytoin and proton pump inhibitors, as all are relevant. Record twin pregnancy demands for folate, since needs are doubled.",
+      "tx": "Ask about a sore beefy tongue with mouth cracks, glove and stocking **paraesthesia**, and a stamping gait with a positive Romberg test. Ask about pernicious anaemia with thyroid disease and vitiligo in the family, vegan diet with nitrous oxide or alcohol use, and drugs such as methotrexate, phenytoin and **proton pump** inhibitors. Record twin pregnancy demands for **folate stores**.",
+      "vis": null
+    },
+    {
+      "say": "Note lemon yellow pallor with premature grey hair, and inspect the bald beefy tongue of Hunter glossitis, which is typical. Test vibration with proprioception and Romberg for dorsal columns, check brisk reflexes with Babinski for lateral columns, and map stocking neuropathy with lost reflexes. Screen for reversible B12 confusion with vitiligo and thyroid disease, and film the stamping gait.",
+      "tx": "Note **lemon yellow** pallor with premature grey hair, and inspect the bald beefy tongue of **Hunter glossitis**. Test vibration with proprioception and Romberg for dorsal columns, check brisk reflexes with Babinski for lateral columns, and map stocking **neuropathy** with lost reflexes. Screen for reversible B12 confusion and vitiligo with thyroid disease, and film the stamping gait.",
+      "vis": null
+    },
+    {
+      "say": "Look at the mouth and notice the smooth red tongue with lost papillae of Hunter glossitis, plus cracked sores at both mouth corners from angular cheilitis. These mucosal flags reflect failed DNA synthesis in rapidly dividing epithelium. For the exam, link glossitis with B12 deficiency before folate, cheilitis with combined deficiency, and both with dorsal column signs.",
+      "tx": "The mouth shows a smooth red **Hunter glossitis** tongue with lost papillae, plus cracked **angular cheilitis** at both mouth corners. These mucosal flags reflect failed DNA synthesis in rapidly dividing epithelium. For the exam, link glossitis with B12 deficiency before folate, cheilitis with combined deficiency, and both with **dorsal column** signs that confirm the diagnosis.",
+      "vis": {
+        "alt": "Open mouth showing smooth red Hunter glossitis tongue and cracked angular cheilitis.",
+        "ar": 1.3393,
+        "caption": "Hunter glossitis with angular cheilitis in B12 deficiency. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-megaloblastic-gen1.webp"
+      }
+    },
+    {
+      "say": "Confirm low B12 with raised MMA and homocysteine, and read low folate against diet, pregnancy and drug history. Track LDH with haptoglobin for ineffective haemolysis, test intrinsic factor with parietal antibodies for pernicious anaemia, and scope atrophic gastritis. Read marrow megaloblasts with giant bands, separate B12 from folate and pernicious patterns, and exclude myelodysplasia mimics.",
+      "tx": "Confirm low B12 with raised MMA and **homocysteine levels**, and read low folate against diet, pregnancy and drug history. Track LDH with haptoglobin for ineffective haemolysis, test intrinsic factor with **parietal antibodies** for pernicious anaemia, and scope atrophic gastritis. Read marrow megaloblasts with giant bands, separate B12 from folate and pernicious patterns, and exclude **myelodysplasia mimics**.",
+      "vis": {
+        "alt": "Composite image: bone marrow megaloblasts, peripheral hypersegmented neutrophil, and diagram of B12/folate role in DNA synthesis.",
+        "ar": 2.5,
+        "caption": "Megaloblasts, hypersegmented neutrophils, and DNA synthesis failure in anaemia. Image: Yadav MK, Manoli NM, Madhunapantula SV, CC BY 4.0, Wikimedia Commons.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-megaloblastic-fig1.webp"
+      }
+    },
+    {
+      "say": "Replace B12 by injection lifelong in pernicious anaemia, and never give folate alone since it masks cord damage. Treat the cause by fixing diet, stopping nitrous oxide and reviewing proton pump therapy, and guard twin pregnancy with folate for the neural tube. Transfuse slowly in heart failure, watch potassium with reticulocyte surge, and track B12, MCV and neurology.",
+      "tx": "Replace B12 by injection lifelong in **pernicious anaemia**, and never give folate alone since it masks **cord damage**. Treat the cause by fixing diet, stopping nitrous oxide and reviewing proton pump therapy, and guard twin pregnancy with folate for the **neural tube**. Transfuse slowly in heart failure, watch potassium with reticulocyte surge, and track B12, MCV and neurology.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Megaloblastic anaemia: B12, folate and pernicious",
+  "v": 1
 }

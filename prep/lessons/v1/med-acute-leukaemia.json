@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-acute-leukaemia",
- "subject": "medicine",
- "title": "Acute leukaemia: ALL, AML and emergencies",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**fever** neutropenic mouth ulcers, **bleed** gums epistaxis menorrhagia, **fatigue** anaemic breathless, **ALL** child limp bone pain, **gums** hypertrophy monocytic skin, **chloroma** orbital testicular lumps, **APL** DIC bleed clots) with **viva** (**blastic** febrile bleeding, **leukostatic** dyspnoeic confused) profiles; **tempo** (weeks acute sorts) clocks. Marrows blast.",
-   "say": "Fevers bleeds fatigues ALLs is history: gums swell chloromas lump APLs bleed tempos clock blastics fever leukostatics choke counts crowd organs fail. Bloods crowd.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**pallor** anaemic febrile tachycardic, **bleed** purpura gums retinal, **nodes** ALL mediastinal testicular, **gums** monocytic swollen bleed, **liver** spleen AML palpable, **neuro** meningeal headache cranial, **leukostasis** lungs brain priapism, **DIC** oozing lines clots) with **bedside** (**counts** blasts cytopenias, **smear** Auer rods faggots, **coag** DIC FDPs) smears; **tumour** (TLS kidneys) guards. Blasts spill.",
-   "say": "Pallors bleeds nodes gums is exam: livers swell neuros ache leukostases choke DICs ooze counts blast smears rod coags consume tumours lyse kidneys guard. Bodies bruise.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**marrow** 20 percent blasts proves, **Auer** rods AML faggots, **flow** lineage CD sorts, **cytogenetics** APL PML-RARA risk, **LP** CNS sanctuary screens, **TLS** uric potassium phosphate) with **differentials** (**ALL** child TdT, **AML** Auer adult, **APL** DIC ATRA, **CML** chronic BCR) sorts; **haematology** (induction decides) meets. Lineages mark.",
-   "say": "Marrows Auers flows cytogenetics is Ix: LPs seed TLSs spike ALLs limp AMLs rod APLs clot CMLs fuse haematologists meet anthracyclines push ATRA melts. Blasts type.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-acute-leukaemia-fig1.webp",
-    "alt": "A composite image illustrating diagnostic features of acute leukemia: bone marrow blasts with Auer rods, flow cytometry plots, and cytogenetic findings.",
-    "caption": "Key investigations for acute leukemia diagnosis and classification",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**7-plus-3** cytarabine daunorubicin induces, **ATRA** APL arsenic cures, **ALL** vincristine steroids asparaginase, **TLS** fluids rasburicase guards, **DIC** ATRA platelets cryo, **transplant** high-risk harvests, **CNS** intrathecal shields) with **traps** (**anthracycline** hearts fail, **tumour** kidneys block, **induction** neutropenic kills) closes; **follow** (MRD counts marrow) tracks. Marrows remit.",
-   "say": "Inductions ATRAs ALLs TLSs is Rx: DICs clot transplants harvest CNSs shield anthracyclines strain tumours block inductions kill follows track MRDs clear wishes respect. Blasts vanish.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-641",
-  "bk2-med-642",
-  "bk2-med-643",
-  "bk2-med-644",
-  "bk2-med-645",
-  "bk2-med-646",
-  "bk2-med-647",
-  "bk2-med-648",
-  "bk2-med-649",
-  "bk2-med-650"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon7",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-acute-leukaemia",
+  "quiz": [
+    "bk2-med-641",
+    "bk2-med-642",
+    "bk2-med-643",
+    "bk2-med-644",
+    "bk2-med-645",
+    "bk2-med-646",
+    "bk2-med-647",
+    "bk2-med-648",
+    "bk2-med-649",
+    "bk2-med-650"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon7",
+  "src": [],
+  "steps": [
+    {
+      "say": "Think of acute leukaemia when a patient develops fever, bleeding and tiredness over a few weeks because the marrow stops making normal blood cells. Ask about mouth ulcers, gum bleeding, heavy periods and breathlessness on exertion. In children, ask about bone pain and limp, which point toward ALL. Notice swollen gums, skin lumps or unusual clotting, because monocytic variants and APL give these clues.",
+      "tx": "Acute leukaemia presents over weeks with **marrow failure**, namely fever with mouth ulcers from neutropenia, bleeding gums and heavy periods from thrombocytopenia, and breathlessness on exertion from anaemia. Children with ALL often develop limb and **bone pain** with limp, while monocytic AML can swell the gums and skin. APL may show abnormal clotting with both bleeding and clots, and **chloroma** lumps can appear around the eye or testis.",
+      "vis": null
+    },
+    {
+      "say": "Examine the patient for pallor, fever and a fast pulse, and inspect the skin, gums and eyes for bleeding. Palpate lymph nodes, liver and spleen, and examine the testes and nervous system because ALL can involve these sites. Watch for breathlessness, confusion or priapism, which suggest leukostasis from a very high white cell count. Notice any oozing from lines or new clots, since APL often triggers DIC.",
+      "tx": "Examination often reveals **pallor** with fever and fast pulse, plus purpuric spots, bleeding gums and retinal haemorrhages from low platelets. Feel for lymph nodes and testicular or mediastinal masses in ALL, and check for swollen gums in monocytic disease. Look for liver and spleen enlargement, meningeal signs with headache, breathlessness or confusion from **leukostasis**, and oozing lines with clots when **DIC** complicates APL.",
+      "vis": null
+    },
+    {
+      "say": "Look at this photograph and notice how the gums are swollen, puffy and covered with blood. This happens because leukaemic cells infiltrate the gum tissue while low platelets allow constant oozing. When you see bleeding gums together with fever and tiredness, think of marrow failure and examine the blood counts urgently.",
+      "tx": "The new image shows swollen blood covered gums with **monocytic infiltration**, the classic oral sign of monocytic AML. The gums look hypertrophic and bleed easily because leukaemic cells pack the tissue and platelets run low. In the exam, inspect the mouth routinely and link **bleeding gums** with fever and fatigue to suspect **marrow failure** rather than simple dental disease.",
+      "vis": {
+        "alt": "Close-up mouth with swollen blood-covered hypertrophic gums around teeth; labels bleeding gums and monocytic infiltration.",
+        "ar": 1.3393,
+        "caption": "Clinical oral photograph of swollen bleeding gums with monocytic infiltration. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-acute-leukaemia-gen1.webp"
+      }
+    },
+    {
+      "say": "Confirm the diagnosis with a bone marrow study that shows a high blast percentage. Use flow cytometry to identify the cell lineage and cytogenetics to detect APL and guide risk grouping. Sample the spinal fluid when the central nervous system may be involved. Monitor uric acid, potassium and phosphate closely because tumour lysis can damage the kidneys.",
+      "tx": "Diagnosis needs a **bone marrow** study showing at least twenty percent blasts, with Auer rods and faggot cells pointing to AML. **Flow cytometry** defines the lineage and **cytogenetics** detects PML RARA in APL and assigns risk. Examine the spinal fluid when CNS spread is possible, and watch uric acid, potassium and phosphate for tumour lysis syndrome.",
+      "vis": {
+        "alt": "A composite image illustrating diagnostic features of acute leukemia: bone marrow blasts with Auer rods, flow cytometry plots, and cytogenetic findings.",
+        "ar": 1.8349,
+        "caption": "Key investigations for acute leukemia diagnosis and classification",
+        "kind": "image",
+        "src": "v1/lessons/media/med-acute-leukaemia-fig1.webp"
+      }
+    },
+    {
+      "say": "Treat AML with induction chemotherapy that combines cytarabine and daunorubicin, and treat APL with ATRA plus arsenic because it reverses the clotting defect. You should manage ALL with vincristine based combinations that include steroids and asparaginase. Prevent tumour lysis with fluids and rasburicase, correct DIC promptly, protect the central nervous system, and refer high risk patients for transplant.",
+      "tx": "AML induction classically uses cytarabine with daunorubicin, often called seven plus three, while APL responds to **ATRA** with arsenic. ALL treatment combines **vincristine**, steroids and asparaginase. Give fluids with rasburicase cover for **tumour lysis**, replace platelets and cryoprecipitate for DIC, use intrathecal therapy for CNS disease, and refer high risk patients for transplant.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Acute leukaemia: ALL, AML and emergencies",
+  "v": 1
 }

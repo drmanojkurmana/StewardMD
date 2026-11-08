@@ -3,21 +3,32 @@
   "module": "med-acs",
   "subject": "medicine",
   "title": "Acute coronary syndromes",
-  "minutes": 6,
+  "minutes": 7,
   "steps": [
     {
-      "tx": "**History** (**crushing** 20 minutes retrosternal, **radiation** arm neck jaw epigastric, **sweats** nausea vomiting dyspnoea, **onset** exertion rest nocturnal, **relief** GTN partial unstable, **risks** prior angina diabetes sudden family, **cocaine** young dissects, **aortic** tearing migrates back) with **triage** (**pain** now scores, **vitals** shock killip, **ECG** 10-minute rule) races; **troponin** (rise fall deltas) defines. Pains race.",
-      "say": "Crushings radiations sweats onsets reliefs risks cocaines aortics is history: pains score vitals shock ECGs race troponins delta failures kill. Chests crush.",
+      "tx": "A typical episode is **crushing retrosternal pain** lasting more than 20 minutes, often spreading to the **left arm**, neck, jaw or abdomen, with sweating, nausea or breathlessness. Note onset on exertion, at rest or at night, and whether nitrates gave partial relief. Ask about prior angina, diabetes, family history of heart disease, cocaine use, and tearing pain that moves to the back. Triage with a pain score, vital signs and Killip class, record an ECG within 10 minutes, and confirm injury with serial **troponin** rise and fall.",
+      "say": "Ask about a heavy pressing pain in the centre of the chest that lasts beyond twenty minutes and spreads to the arm, neck, jaw or belly, usually with sweating, nausea or breathlessness. Check whether the pain began during effort, at rest or at night, and whether nitrate tablets relieved it only partly. Take a history of earlier angina, diabetes, sudden heart disease in the family, cocaine use, and any tearing pain that travels to the back. Score the current pain, record pulse and blood pressure, assign a Killip class, obtain an ECG within ten minutes, and follow serial troponin values for a rise and fall.",
       "vis": null
     },
     {
-      "tx": "**Examination** (**pale** clammy hypotensive, **pulse** thready arrhythmic, **JVP** raised RV fails, **crackles** Killip grades failure, **murmurs** VSR MR acute, **pericardial** rub Dressler late, **neuro** gaze speech strokes, **bleeds** access DAPT) with **bedside** (**ECG** ST elevations reciprocal, **monitor** VT VF blocks, **echo** wall shock) scans; **shock** (cold mottled oliguric) flags. Bodies scan.",
-      "say": "Pales pulses JVPs crackles murmurs rubs neuros bleeds is exam: ECGs elevate monitors alarm echos stun shocks mottle failures grade. Hands shock.",
+      "tx": "On examination the patient looks **pale and clammy** with low blood pressure and a thready or irregular **pulse**. A raised jugular venous pressure suggests right ventricular involvement, while basal crackles grade left ventricular failure by Killip class. Listen for harsh murmurs of septal rupture or acute mitral regurgitation, and a late pericardial rub. Check gaze and speech for a stroke, look for bleeding at access sites on dual therapy, and watch the monitor and **echocardiogram** for arrhythmia, blocks, wall motion loss and **shock** with cold mottled skin and low urine.",
+      "say": "The patient usually appears pale and sweaty with a falling blood pressure and a weak or irregular pulse that warns of pump failure. A raised neck venous pressure points to right ventricular strain, while crackles at the lung bases reflect the Killip grade of left heart failure. Listen for a fresh harsh murmur from septal rupture or papillary muscle ischaemia, and note any late friction rub. Examine speech and gaze for stroke, inspect puncture sites for bleeding on dual therapy, and use continuous monitoring and bedside echo to catch rhythm blocks, wall motion loss, cold mottled shock and falling urine output.",
       "vis": null
     },
     {
-      "tx": "**Management** (**MONA** morphine oxygen nitrates aspirin, **ticagrelor** prasugrel clopidogrel bleeds, **heparin** fondaparinux lines, **PCI** door-balloon 90 lysis 30, **CABG** shock multivessel, **statin** ACE beta early, **complications** rupture shock blocks) with **windows** (**lyse** 12 hours no PCI, **rescue** failed lysis, **facilitated** never routine) times; **DAPT** (12 months stents) duals. Clocks time.",
-      "say": "MONAs ticagrelors heparins PCIs CABGs statins is Rx: twelves lyse rescues fail facilitated bans DAPTs dual stents guard shocks support. Arteries open.",
+      "tx": "This tracing shows an **inferior ST elevation** myocardial infarction, with raised ST segments in leads II, III and aVF and mirror image **reciprocal depression** in leads I and aVL. The pattern localises the culprit to the right coronary territory and confirms a full thickness infarct rather than early repolarisation. Recognising it matters because it starts the reperfusion clock toward primary angioplasty or lysis, and it warns of right ventricular injury, bradycardia and **heart block** needing rhythm watch.",
+      "say": "The tracing shows raised ST segments in leads two, three and aVF, with downward mirror changes in leads one and aVL. This combination identifies an inferior wall infarction supplied by the right coronary artery and confirms transmural injury rather than a benign variant. Spotting the pattern matters because it triggers urgent reperfusion by angioplasty or lysis within the target windows. It also alerts you to right ventricular involvement, slow rhythms and conduction blocks that require continuous monitoring and pacing readiness.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-acs-gen1.webp",
+        "alt": "Twelve lead ECG showing inferior ST elevation in II III aVF with reciprocal depression in I aVL",
+        "caption": "ECG showing inferior STEMI with reciprocal changes Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Give **aspirin** with morphine, oxygen and nitrates, then add a platelet drug such as ticagrelor, prasugrel or clopidogrel, balancing the **bleeding risk**, plus heparin or fondaparinux. Open the artery by angioplasty within 90 minutes of door, or give lysis within 30 minutes when angioplasty is delayed. Consider bypass surgery for shock or multivessel disease, and start a statin, ACE inhibitor and beta blocker. Use lysis within 12 hours if angioplasty is unavailable, arrange rescue angioplasty after failed lysis, avoid facilitated lysis, and continue **dual therapy** for 12 months after stenting.",
+      "say": "Start aspirin together with morphine, oxygen and nitrates, then add ticagrelor, prasugrel or clopidogrel according to bleeding risk, with heparin or fondaparinux cover. Restore flow with balloon angioplasty within ninety minutes of arrival, or inject a lytic within thirty minutes when angioplasty cannot start in time. Reserve bypass surgery for shock or extensive multivessel disease, and begin a statin, an ACE inhibitor and a beta blocker promptly. Offer lysis within twelve hours where angioplasty is unavailable, repeat angiography urgently after failed lysis, avoid planned facilitated lysis, and maintain dual platelet therapy for twelve months after stenting.",
       "vis": {
         "kind": "image",
         "src": "prep/lessons/media/med-acs-reperfusion.svg",
@@ -27,8 +38,8 @@
       }
     },
     {
-      "tx": "**Counsel** (**smoking** quits halves, **rehab** monitored exercise, **driving** 1 month rules, **sex** stairs counsel, **depression** screens treats, **diabetes** tight lipids LDL, **follow** echo EF devices) with **traps** (**Dressler** weeks rub steroids, **aneurysm** LV clots anticoagulate, **VSR** harsh shock operates, **no NSAIDs** rupture risks) closes; **registry** (audits delays) tracks. Lives counsel.",
-      "say": "Quits rehabs drives sexes depressions diabetics is counsel: Dresslers weeks aneurysms clot VSRs harsh NSAIDs rupture registries audit delays track stents watch. Futures guard.",
+      "tx": "After discharge stress **smoking cessation**, which halves risk, plus supervised cardiac **rehabilitation** with graded exercise. Advise no driving for one month, gradual return to sexual activity and stair climbing, screening for depression, tight control of diabetes and lipids with a low LDL target, and follow up with echocardiography for ejection fraction and device decisions. Warn about Dressler syndrome with rub weeks later managed with steroids, left ventricular aneurysm and clot needing anticoagulation, septal rupture with new harsh murmur and shock needing surgery, avoid **NSAIDs**, and track delays through audit.",
+      "say": "After discharge, quitting smoking halves the chance of another event, and supervised rehabilitation rebuilds fitness through graded exercise. Advise the patient to avoid driving for one month, to resume sexual activity and stair climbing gradually, and to seek help for low mood. Control diabetes and lipids tightly, recheck pump function with echocardiography, and consider rhythm devices where ejection fraction remains low. Watch for Dressler syndrome with fever and rub weeks later, ventricular clot from an aneurysm, sudden rupture with shock that requires surgery, avoid painkillers that injure healing muscle, and record every delay for audit.",
       "vis": null
     }
   ],
