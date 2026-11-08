@@ -3,7 +3,7 @@
  "module": "bio-transcription",
  "subject": "biochemistry",
  "title": "Transcription and RNA processing",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "Transcription copies a DNA sequence into RNA. Three nuclear **RNA polymerases** do this in eukaryotes. Pol I makes most ribosomal RNA, except 5S rRNA. Pol II makes precursors of mRNA, most snRNA and microRNA. Pol III makes tRNA, 5S rRNA and other small RNAs. Pol II is the enzyme most often tested, and it is the one blocked by alpha-amanitin.",
@@ -153,6 +153,17 @@
    "tx": "Small RNAs regulate gene expression. **microRNAs** are made by Pol II and processed by Drosha and Dicer. They guide the RISC complex to target mRNA, causing cleavage or repression of translation. **Ribozymes** are RNAs with catalytic activity, such as snRNA in splicing and the RNA in peptidyl transferase. Northern blotting detects RNA, while Southern detects DNA and Western detects protein.",
    "say": "Small RNAs regulate gene expression. MicroRNAs are made by polymerase II and processed by Drosha and Dicer. They guide the RISC complex to target messenger RNA, causing cleavage or repression of translation. Ribozymes are RNAs with catalytic activity. Northern blotting detects RNA, Southern blotting detects DNA and Western blotting detects protein.",
    "vis": null
+  },
+  {
+   "tx": "This blot proves **microRNA** silencing worked. The target **mRNA** band fades in the knockdown lanes while the **GAPDH** housekeeping band stays equally strong, so the loss is specific and not poor loading. That pattern is exactly what RISC guided cleavage or repression should produce. Recall that Northern blotting reads RNA while Southern reads DNA.",
+   "say": "This blot compares control lanes with microRNA expressing knockdown lanes. The target messenger band nearly vanishes after knockdown while the GAPDH housekeeping band stays constant, proving specific silencing rather than uneven loading. This matches microRNA action through the RISC complex, and the RNA readout marks it as a Northern blot.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-transcription-gen1.webp",
+    "alt": "Blot lanes show a faded target band after knockdown with a steady GAPDH control band.",
+    "caption": "Knockdown blot with preserved loading control, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   }
  ],
  "quiz": [

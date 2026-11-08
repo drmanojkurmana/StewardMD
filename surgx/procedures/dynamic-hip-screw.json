@@ -1,0 +1,239 @@
+{
+  "id": "dynamic-hip-screw",
+  "title": "Dynamic hip screw",
+  "subtitle": "Sliding hip screw for an intertrochanteric fracture",
+  "system": "musculoskeletal",
+  "aliases": [
+    "DHS",
+    "sliding hip screw",
+    "SHS",
+    "intertrochanteric fixation"
+  ],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "nice-cg124",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Hip fracture: management (CG124)",
+      "year": 2011,
+      "version": "CG124, last updated 2023",
+      "url": "https://www.nice.org.uk/guidance/cg124",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "baumgaertner-1995",
+      "org": "Baumgaertner MR et al. J Bone Joint Surg Am 77:1058",
+      "title": "The value of the tip-apex distance in predicting failure of fixation of peritrochanteric fractures of the hip",
+      "year": 1995,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7608228/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "aagbi-hip",
+      "org": "Association of Anaesthetists (Griffiths R et al). Anaesthesia 76:225",
+      "title": "Guideline for the management of hip fractures 2020",
+      "year": 2021,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/33289066/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "4at",
+    "cfs",
+    "caprini"
+  ],
+  "chapters": {
+    "indications": [
+      "Trochanteric fractures above and including the lesser trochanter, other than reverse oblique patterns. For these, NICE CG124 prefers an extramedullary implant such as a sliding hip screw over a nail.",
+      "Basicervical fractures, and some undisplaced intracapsular fractures, according to local practice."
+    ],
+    "contraindications": [
+      "Reverse oblique and subtrochanteric fractures: the screw slides in the wrong direction, so use an intramedullary nail.",
+      "Patterns with a deficient lateral femoral wall: many surgeons prefer a nail because the barrel has no buttress.",
+      "Pathological fracture from metastasis: needs whole-bone imaging and usually a different construct."
+    ],
+    "preparation": [
+      "Surgery on the day of or the day after admission, with correctable problems treated in parallel rather than in sequence.",
+      "Anteroposterior pelvis and lateral hip radiographs; template the plate angle against the uninjured side.",
+      "Group and save, haemoglobin, renal function; anticoagulant plan documented.",
+      "Consent includes fixation failure and cut-out, bleeding, infection, thromboembolism, delirium, limb shortening and mortality."
+    ],
+    "positioning": [
+      "Supine on a traction table with a well-padded perineal post.",
+      "The uninjured leg in a well-leg holder or scissored down, positioned so the C-arm can reach a true lateral.",
+      "Reduce by longitudinal traction and internal rotation, and confirm on both views before preparing the skin."
+    ],
+    "equipment": [
+      "Sliding hip screw set with angled barrel plates (commonly 135 degrees) and lag screws.",
+      "Angle guide, guidewires, triple reamer, tap and depth gauge.",
+      "Image intensifier and a radiolucent traction table."
+    ],
+    "anatomy": [
+      "The femoral neck sits at roughly 130 degrees to the shaft and is anteverted, which is why a true lateral view is essential.",
+      "Vastus lateralis arises from the lateral intermuscular septum; perforating branches of the profunda femoris pass through near the linea aspera.",
+      "The medial femoral circumflex artery supplies most of the femoral head; trochanteric fractures spare it, which is why fixation works here.",
+      "The lateral wall of the greater trochanter acts as the buttress the screw slides against."
+    ],
+    "criticalSafety": [
+      "Accept no implant until the reduction is acceptable on both views.",
+      "Place the lag screw centrally in the head on both views with a small tip-apex distance. A large tip-apex distance predicts cut-out.",
+      "Watch the guidewire on screen while reaming: it can advance into the joint or pelvis with the reamer."
+    ],
+    "structuresAtRisk": [
+      "Hip joint, from lag screw or guidewire penetration",
+      "Pelvic structures, from an over-advanced guidewire",
+      "Perforating vessels of the profunda femoris",
+      "Pudendal nerve and perineal skin at the traction post"
+    ],
+    "commonErrors": [
+      "A superior or anterior lag screw position, which predicts cut-out.",
+      "Accepting a varus or rotated reduction because it looked adequate on one view.",
+      "Losing the guidewire with the reamer and having to re-pass it."
+    ],
+    "complications": [
+      "Lag screw cut-out from the femoral head.",
+      "Excessive collapse and medialisation of the shaft, particularly with lateral wall failure.",
+      "Malunion in varus or with shortening; intra-articular screw penetration.",
+      "Surgical site infection, haematoma, venous thromboembolism, pressure injury and delirium.",
+      "High peri-operative mortality in frail patients, which is the context for every decision."
+    ],
+    "postop": [
+      "Full weight-bearing without restriction.",
+      "Physiotherapy assessment and mobilisation on the day after surgery, with orthogeriatric review.",
+      "Regular paracetamol and opioid as needed, no NSAIDs, delirium screening, and a check of haemoglobin.",
+      "Bone health assessment and falls prevention before discharge."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Traction table with a padded post. Confirm a true lateral is obtainable before preparing the skin; the anteverted neck cannot be judged without it."
+    },
+    {
+      "ref": "step.ortho.image-intensifier"
+    },
+    {
+      "ref": "step.ortho.reduction-check",
+      "emphasis": "Traction plus internal rotation usually reduces the fracture. Check neck-shaft angle on the AP view and that there is no posterior sag on the lateral."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.dhs.approach"
+    },
+    {
+      "ref": "step.ortho.guidewire",
+      "emphasis": "Use the angle guide on the lateral cortex. Aim for a central position in the head on both views and a small tip-apex distance."
+    },
+    {
+      "ref": "step.ortho.implant-check"
+    },
+    {
+      "ref": "step.dhs.ream-lag"
+    },
+    {
+      "ref": "step.dhs.plate"
+    },
+    {
+      "ref": "step.ortho.final-imaging"
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure"
+    },
+    {
+      "ref": "step.ortho.nv-check"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.dhs.approach": {
+      "id": "step.dhs.approach",
+      "kind": "access",
+      "title": "Lateral approach to the proximal femur",
+      "why": "The lateral approach reaches the lateral cortex through a single muscle with no internervous plane needed, and it is extensile if the plan changes.",
+      "how": [
+        "Incise along the lateral femur from the vastus ridge distally, sized to the plate.",
+        "Divide the fascia lata in line with the skin incision.",
+        "Elevate vastus lateralis from the intermuscular septum, or split it, and ligate or coagulate perforating vessels as they appear."
+      ],
+      "structuresAtRisk": [
+        "Perforating branches of the profunda femoris"
+      ],
+      "pitfalls": [
+        "Tearing perforators that retract behind the septum and bleed.",
+        "An incision placed too anteriorly, forcing heavy retraction."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dhs.ream-lag": {
+      "id": "step.dhs.ream-lag",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Measure, ream and insert the lag screw",
+      "why": "The lag screw is the fixation. Its length and depth decide whether it holds subchondral bone or ploughs out of the head.",
+      "how": [
+        "Measure the guidewire length and set the triple reamer to the length recommended by the system.",
+        "Ream under image control, watching that the guidewire does not advance.",
+        "Tap in dense bone; insert the lag screw with its tip close to subchondral bone and centred on both views."
+      ],
+      "structuresAtRisk": [
+        "Hip joint",
+        "Pelvic structures beyond the acetabulum"
+      ],
+      "pitfalls": [
+        "Guidewire advancing with the reamer.",
+        "Screw stopping short in soft cancellous bone of the neck."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dhs.plate": {
+      "id": "step.dhs.plate",
+      "kind": "reconstruction",
+      "title": "Barrel plate application and compression",
+      "why": "The barrel lets the head-neck fragment slide and impact onto the shaft. The plate must sit flush and aligned or it will lever the fracture into varus.",
+      "how": [
+        "Slide the barrel plate over the lag screw with the keys aligned, and seat it against the lateral cortex.",
+        "Clamp the plate to the shaft and insert cortical screws.",
+        "Release traction to allow the fracture to impact, and use the compression screw if the system and pattern permit."
+      ],
+      "structuresAtRisk": [
+        "Lateral femoral cortex"
+      ],
+      "pitfalls": [
+        "Plate not flush with the shaft.",
+        "Over-compression of an osteoporotic head."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

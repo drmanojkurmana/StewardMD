@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgo-interval-cytoreduction-hipec",
+ "title": "Neoadjuvant Chemotherapy, Interval Debulking & HIPEC: Trial Evidence, Peritoneal Cancer Index and Heated Perfusion",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 16",
+  "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11th Edition Ch 85",
+  "van Driel WJ et al. Hyperthermic Intraperitoneal Chemotherapy in Ovarian Cancer. NEJM 2018"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "The oncological equivalence of neoadjuvant chemotherapy followed by interval debulking surgery compared to upfront primary debulking has been confirmed in multiple phase three randomized trials.",
+   "tx": "Four landmark phase III trials (**EORTC 55971**, **CHORUS trial**, JCOG0602, and SCORPION) demonstrated that neoadjuvant chemotherapy followed by **interval debulking surgery (IDS)** achieves **equivalent overall survival** compared to primary debulking surgery in bulky Stage IIIC and IV epithelial ovarian cancer.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/son-ovary-gen2.webp",
+    "ar": 1.3393,
+    "caption": "Complete visible clearance is the goal of ovarian debulking. Illustration: StewardMD original.",
+    "alt": "Illustration showing surgical field after maximal debulking of advanced ovarian cancer."
+   }
+  },
+  {
+   "say": "Administering neoadjuvant chemotherapy before cytoreductive surgery significantly diminishes perioperative morbidity and enhances complete surgical cytoreduction rates.",
+   "tx": "Neoadjuvant chemotherapy followed by interval debulking achieves a significant **reduction in perioperative morbidity**, markedly lower postoperative mortality (<1%), reduced requirements for intensive care, and a significantly **higher R0 resection rate** compared to upfront primary surgery in advanced disease across multicenter international cohorts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diagnose advanced Stage IIIC/IV ovarian cancer with high tumor burden"
+     },
+     {
+      "id": "b",
+      "label": "Administer 3 cycles of neoadjuvant carboplatin AUC 6 and paclitaxel 175 mg/m2"
+     },
+     {
+      "id": "c",
+      "label": "Confirm biochemical and CT radiological response without progression"
+     },
+     {
+      "id": "d",
+      "label": "Perform interval debulking surgery targeting complete macroscopic R0 resection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "To prevent unnecessary laparotomies in patients whose disease is unresectable, staging laparoscopy and the Fagotti scoring algorithm provide objective resectability assessment.",
+   "tx": "Diagnostic **staging laparoscopy** utilizes the **Fagotti score** (evaluating 7 parameters: omental cake, peritoneal carcinomatosis, diaphragmatic and mesenteric retraction, bowel and stomach infiltration, liver metastasis); a **Fagotti score >=8** reliably predicts incomplete cytoreduction with >90% accuracy, directing patients to neoadjuvant therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fagotti Laparoscopic Parameter",
+     "Finding (Score = 2)",
+     "Finding (Score = 0)"
+    ],
+    "rows": [
+     [
+      "Omental Cake",
+      "Massive omental infiltration extending to stomach spleen",
+      "Absent or only minimal omental nodules"
+     ],
+     [
+      "Peritoneal Carcinomatosis",
+      "Confluent carcinomatosis of diaphragmatic peritoneum",
+      "Isolated small nodules or smooth peritoneum"
+     ],
+     [
+      "Mesenteric Retraction",
+      "Root of mesentery retracted with bowel clumped",
+      "Soft flexible pliable uninvolved mesentery"
+     ],
+     [
+      "Bowel Infiltration",
+      "Miliary serosal implants or deep subserosal nodules",
+      "Superficial isolated serosal implants"
+     ],
+     [
+      "Stomach Infiltration",
+      "Visible serosal infiltration of stomach or liver surface",
+      "Completely clear stomach and hepatic parenchyma"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Quantifying the anatomical extent of peritoneal carcinomatosis is critical for standardizing surgical planning and predicting cytoreductive success.",
+   "tx": "The Sugarbaker **Peritoneal Cancer Index (PCI)** divides the abdomen into 13 anatomical regions, scoring lesion size from 0 to 3 in each region (yielding a maximum **PCI maximum 39**). A high PCI score directly correlates with unresectability and worse progression-free survival.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low to Moderate PCI (< 15-20)",
+     "points": [
+      "Localized or limited regional peritoneal carcinomatosis",
+      "High probability of achieving complete R0 cytoreduction",
+      "Excellent candidate for complete surgical cytoreduction and HIPEC"
+     ]
+    },
+    "right": {
+     "title": "Extensive PCI (> 20-25)",
+     "points": [
+      "Diffuse involvement of small bowel mesentery and diaphragms",
+      "Significantly increased risk of leaving residual macroscopic disease",
+      "Higher rate of severe postoperative multi-organ morbidity"
+     ]
+    }
+   }
+  },
+  {
+   "say": "The prospective Dutch OVHIPEC-1 phase three randomized trial established the therapeutic benefit of adding heated intraperitoneal chemotherapy at the time of interval debulking.",
+   "tx": "The landmark **OVHIPEC-1 trial** (van Driel 2018) demonstrated that adding hyperthermic intraperitoneal chemotherapy (**HIPEC**) at the time of interval debulking surgery yielded a statistically significant **12-month overall survival benefit** (median OS 45.7 months vs 33.9 months) in Stage III ovarian cancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Patient undergoes 3 cycles of NACT followed by interval debulking"
+     },
+     {
+      "id": "b",
+      "label": "Surgeon achieves complete R0 or optimal (<1 cm) cytoreduction"
+     },
+     {
+      "id": "c",
+      "label": "Randomize intraoperatively to HIPEC perfusion vs surgery alone"
+     },
+     {
+      "id": "d",
+      "label": "HIPEC delivers significant 12-month improvement in median overall survival"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The delivery of heated intraperitoneal chemotherapy relies on rigorous pharmacological, temperature, and perfusate circulation standards.",
+   "tx": "The standard HIPEC protocol delivers heated **cisplatin 100 mg/m2** dissolved in isotonic dialysate circulated through a closed abdominopelvic circuit at a therapeutic temperature maintained strictly at **40 to 41 degrees C** for a continuous perfusion **duration 90 minutes** under close hemodynamic monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "HIPEC Parameter",
+     "Clinical Protocol Specification",
+     "Physiological Objective"
+    ],
+    "rows": [
+     [
+      "Chemotherapy Agent",
+      "Cisplatin 100 mg/m2 (50% initially, 25% at 30 min, 25% at 60 min)",
+      "Direct cytotoxic DNA cross-linking"
+     ],
+     [
+      "Target Perfusion Temperature",
+      "Maintained strictly at 40.0 C to 41.5 C intra-abdominally",
+      "Increases tissue penetration and platinum cytotoxicity"
+     ],
+     [
+      "Perfusion Duration",
+      "90 minutes of continuous recirculation",
+      "Maximizes cellular drug uptake"
+     ],
+     [
+      "Nephroprotection",
+      "Intravenous sodium thiosulfate hydration protocol",
+      "Prevents platinum-induced nephrotoxicity"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The therapeutic synergy of hyperthermic intraperitoneal chemotherapy derives from distinct thermal and pharmacokinetic mechanisms that overcome systemic chemotherapy barriers.",
+   "tx": "HIPEC relies on **hyperthermic synergy**, which impairs cellular DNA repair pathways, enhances platinum alkylation, and exploits the **peritoneal-plasma barrier** to achieve up to 20-fold higher local **peritoneal drug concentration** while limiting systemic haematological and renal toxicities throughout the body. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thermal Enhancement Mechanism",
+     "points": [
+      "Hyperthermia directly inhibits homologous recombination DNA repair",
+      "Increases microvascular permeability in microscopic tumor deposits",
+      "Sensitizes malignant cells to platinum-induced apoptosis"
+     ]
+    },
+    "right": {
+     "title": "Peritoneal Pharmacokinetics",
+     "points": [
+      "Peritoneal-plasma barrier retards systemic drug absorption",
+      "Local peritoneal concentration up to 20 times higher than serum",
+      "Eliminates microscopic residual cells floating in peritoneal fluid"
+     ]
+    }
+   }
+  },
+  {
+   "say": "The application of hyperthermic intraperitoneal chemotherapy requires strict patient selection and must not be offered following upfront primary debulking outside clinical trials.",
+   "tx": "HIPEC is clinically validated exclusively following interval debulking after neoadjuvant therapy. The trial **omission in primary debulking** is supported by recent data showing no survival advantage when added during upfront surgery, while carrying a recognized **acute kidney injury risk** that requires vigilant perioperative hydration.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-ovarian-cancer-s3.webp",
+    "ar": 1.3333,
+    "caption": "Comprehensive surgical staging of epithelial ovarian carcinoma via midline laparotomy. Credit: StewardMD.",
+    "alt": "Diagram illustrating extensive peritoneal cytoreduction and abdominal organ inspection."
+   }
+  }
+ ]
+}

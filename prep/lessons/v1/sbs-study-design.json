@@ -3,7 +3,7 @@
  "module": "sbs-study-design",
  "subject": "ss-biostatistics",
  "title": "Study designs and epidemiological measures",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "Study design choice depends on the question. A **cohort study** starts with exposed and unexposed groups and follows them forward, so incidence and relative risk can be measured directly. A **case-control study** starts with diseased and control subjects and looks back at exposure, suiting rare diseases and long latency. It yields an **odds ratio**. A **cross-sectional study** captures a snapshot and measures prevalence, not incidence.",
@@ -108,6 +108,17 @@
       "keep in arm"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The flowchart splits one randomised cohort into **intention to treat** analysis, which keeps crossovers, non adherers and dropouts in their original arms, and per protocol analysis, which excludes them. Keeping everyone preserves **randomisation** and **prognostic balance**, so the result measures real world effectiveness. Excluding them breaks randomisation and reintroduces selection bias.",
+   "say": "Follow the diagram from randomisation downward. On the left, every participant stays in the assigned arm even after crossing over, stopping the drug, or dropping out, so the groups stay balanced. That is why trial questions call it the standard primary analysis. On the right, removing those people breaks the balance and can bias the result, so it stays supportive.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sbs-study-design-gen1.webp",
+    "alt": "Flowchart compares intention to treat analysis preserving randomisation with per protocol analysis excluding non adherers and dropouts.",
+    "caption": "Flowchart contrasting intention to treat analysis with per protocol analysis for trial dropouts, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

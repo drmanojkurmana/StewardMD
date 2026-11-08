@@ -3,7 +3,7 @@
  "module": "sur-shock-transfusion",
  "subject": "surgery",
  "title": "Massive haemorrhage and transfusion: stop bleeding, replace blood, keep warm",
- "minutes": 8,
+ "minutes": 5,
  "steps": [
   {
    "tx": "In **massive haemorrhage**, survival depends on three parallel actions: **stop the bleeding**, **restore circulating volume with blood products**, and **activate the major haemorrhage protocol** early so the laboratory and blood bank move with you. Permissive hypotension before surgical control, where protocol allows, avoids dislodging clots. Warm the patient and every fluid; cold blood does not clot (ATLS).",
@@ -37,6 +37,17 @@
    }
   },
   {
+   "tx": "The photo set links four bedside acts in major **bleeding**. Hands press gauze for **pressure** on the wound while the cooler shows an active **protocol** box of matched products and the warmer shows heated red cells ready to give. A screen shows a low pressure target accepted before control, since chasing normal pressure can loosen fresh clot and cold blood clots poorly.",
+   "say": "The image ties together pressing on the wound, switching on the major haemorrhage protocol, giving warmed blood products and accepting a low pressure target until bleeding is controlled. The point is to stop the leak first without dislodging clot or cooling the patient.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sur-shock-transfusion-gen1.webp",
+    "alt": "Hands press a bleeding wound beside protocol blood stock and pressure monitors.",
+    "caption": "Major bleeding bedside strategy shown as Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "tx": "Give blood components in balanced proportions per protocol, guided by repeated clotting and blood tests where available, rather than litres of clear fluid. **Tranexamic acid is given early** in bleeding trauma and obstetric haemorrhage where indicated. Recheck calcium, potassium, temperature and acid-base state, because transfusion itself disturbs all four. The endpoint is controlled bleeding and restored perfusion, not a number alone.",
    "say": "Use balanced blood components guided by clotting tests, give tranexamic acid early where indicated, and recheck calcium, potassium and temperature.",
    "vis": {
@@ -67,6 +78,37 @@
     "caption": "Stop, saline, recheck, call, return: in that order.",
     "ar": 1.5385
    }
+  },
+  {
+   "tx": "Cold, acidotic blood does not clot, and transfusion can worsen all three arms of the **lethal triad** of hypothermia, acidosis and coagulopathy. Replace **calcium** per protocol, because citrate in stored blood binds it; a falling ionised calcium weakens the heart and clotting together. Ratios of red cells, plasma and platelets follow the local major haemorrhage protocol rather than memory, and cell salvage returns the patient's own blood where the field is clean.",
+   "say": "Fight the lethal triad of cold, acid and failed clotting together. Replace calcium per protocol, since citrate in stored blood binds it. Follow the local protocol for component ratios rather than memory, and use cell salvage where the field is clean.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arm of the triad",
+     "Counter"
+    ],
+    "rows": [
+     [
+      "Hypothermia",
+      "Warm the patient and every fluid"
+     ],
+     [
+      "Acidosis",
+      "Restore perfusion; limit clear fluids"
+     ],
+     [
+      "Coagulopathy plus low calcium",
+      "Balanced components and calcium per protocol"
+     ]
+    ]
+   }
   }
- ]
+ ],
+ "quiz": [
+  "mk-gap751",
+  "mk-gap756",
+  "mk-gap758"
+ ],
+ "gen": "hand"
 }

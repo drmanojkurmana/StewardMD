@@ -3,7 +3,7 @@
  "module": "mstat-design",
  "subject": "mrcp-statistics",
  "title": "Study design, bias and confounding",
- "minutes": 5,
+ "minutes": 6,
  "steps": [
   {
    "tx": "A **confounder** is a factor linked to both the exposure and the outcome, which is not an intermediate step on the causal path. Confounding makes a crude association misleading. It can be handled by **randomisation**, restriction, matching, stratification or multivariable adjustment, but only for measured variables. Residual confounding persists when measurement is imperfect.",
@@ -39,6 +39,17 @@
       "o"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The diagram shows a **confounder** as a shared background factor at the top with arrows pointing to both **exposure** and outcome. Because it influences both sides, it creates an apparent distorted link between exposure and outcome shown by the dashed arrow. This **crude association** can mislead unless the confounder is handled by **randomisation** or adjustment for measured variables.",
+   "say": "This diagram explains confounding. A confounder is a background factor linked to both the exposure and the outcome, but it is not a step on the causal path between them. Because it touches both sides, it makes the crude link between exposure and outcome look stronger or weaker than it truly is. Good design handles confounders through randomisation, restriction, matching, stratification or adjustment, though residual confounding can persist when measurement is imperfect.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mstat-design-gen1.webp",
+    "alt": "Three labelled circles show a confounder sending arrows to both exposure and outcome while a dashed arrow marks the distorted apparent association.",
+    "caption": "Diagram of a confounder distorting the link between exposure and outcome, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

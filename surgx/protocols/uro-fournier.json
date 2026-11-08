@@ -1,0 +1,65 @@
+{
+  "id": "uro-fournier",
+  "title": "Fournier gangrene",
+  "subtitle": "Necrotising infection of the perineum: cut early, cut again",
+  "category": "uro_emergency",
+  "specialty": "urology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "eau-infections", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urological Infections: Fournier's gangrene (necrotising soft-tissue infection of the perineum)", "year": 2024, "url": "https://uroweb.org/guidelines/urological-infections", "accessed": "2026-11-04" },
+    { "id": "wses-ssti", "org": "World Society of Emergency Surgery (WSES) and Surgical Infection Society Europe (SIS-E)", "title": "2018 WSES/SIS-E consensus conference: recommendations for the management of skin and soft-tissue infections (Sartelli M et al., World Journal of Emergency Surgery)", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2018+WSES%2FSIS-E+consensus+conference+skin+and+soft-tissue+infections", "accessed": "2026-11-04" },
+    { "id": "ssc-2021", "org": "Surviving Sepsis Campaign (SCCM and ESICM)", "title": "Surviving Sepsis Campaign: international guidelines for management of sepsis and septic shock 2021", "year": 2021, "url": "https://www.sccm.org/survivingsepsiscampaign", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Perineal or scrotal pain out of proportion to what you can see. The skin is the last layer to show the disease." },
+      { "text": "Crepitus, dusky or black skin, blistering, or a thin grey foul-smelling discharge." },
+      { "text": "Systemic toxicity with a modest-looking perineal cellulitis, especially in a diabetic, an immunosuppressed or an alcohol-dependent patient." },
+      { "text": "Rapid spread of erythema or oedema across the perineum, penis, abdominal wall or thighs over hours." },
+      { "text": "A recent perianal abscess, urethral stricture, traumatic catheterisation or perineal procedure as the possible portal of entry." }
+    ],
+    "do_now": [
+      { "text": "Start empirical broad-spectrum intravenous antibiotics covering Gram-positive, Gram-negative and anaerobic organisms on presentation, per local protocol, and refine them to culture results.", "timeCritical": true, "evidenceRef": "eau-infections" },
+      { "text": "Book theatre for urgent radical debridement. Surgery is the treatment; antibiotics and resuscitation only buy time for it.", "timeCritical": true, "evidenceRef": "eau-infections" },
+      { "text": "Resuscitate as septic shock: blood cultures, lactate, intravenous fluid, and early vasopressor support if hypotension persists.", "timeCritical": true, "evidenceRef": "ssc-2021" },
+      { "text": "Do not wait for imaging to confirm a clinical diagnosis in a toxic patient. Imaging must never delay debridement.", "timeCritical": true, "evidenceRef": "wses-ssti" }
+    ],
+    "assess": [
+      { "text": "Mark the edge of erythema with a pen and the time. Spread beyond the line within an hour or two is a decision in itself." },
+      { "text": "Examine the whole perineum, the anal canal, the penis and the abdominal wall. Look for the source: anorectal, urethral or skin." },
+      { "text": "Sepsis severity and organ dysfunction.", "calcs": ["qsofa", "sofa", "news2", "shock_index"] },
+      { "text": "A laboratory risk score can support suspicion of necrotising infection but has limited sensitivity. A low score never overrules a clinical diagnosis.", "calcs": ["lrinec"] },
+      { "text": "Glucose control and diabetic ketoacidosis screen; uncontrolled diabetes is the commonest predisposition." }
+    ],
+    "investigate": [
+      { "text": "Full blood count, renal function, electrolytes, glucose, C-reactive protein, lactate, coagulation, blood cultures, and group and save." },
+      { "text": "Tissue from the debridement for microscopy and culture. Superficial swabs are of little value." },
+      { "text": "CT pelvis and perineum in a stable patient when the diagnosis or the extent is genuinely uncertain, or to look for a retroperitoneal or pelvic source." }
+    ],
+    "resuscitate": [
+      { "text": "Intravenous fluid resuscitation and vasopressors to a target mean arterial pressure per sepsis guidance; critical care admission after the first debridement.", "evidenceRef": "ssc-2021" },
+      { "text": "Correct glucose and electrolytes; start nutritional support early because the catabolic and wound losses are large.", "evidenceRef": "wses-ssti" }
+    ],
+    "definitive": [
+      { "text": "Radical debridement of all necrotic skin, fascia and subcutaneous tissue back to bleeding, viable tissue. The testes usually have their own blood supply and are rarely involved.", "evidenceRef": "eau-infections" },
+      { "text": "Planned re-look in theatre within 24 to 48 hours, and repeat until no further necrosis is found.", "evidenceRef": "eau-infections" },
+      { "text": "Urinary diversion with a suprapubic catheter when the urethra is involved or the source is urethral; a urethral catheter otherwise keeps the wound dry.", "evidenceRef": "eau-infections" },
+      { "text": "Consider faecal diversion when the anal sphincter is involved or the wound cannot be kept clean.", "evidenceRef": "wses-ssti" },
+      { "text": "Adjuncts such as hyperbaric oxygen have weak supporting evidence and must never delay or replace surgical debridement.", "evidenceRef": "eau-infections" },
+      { "text": "Reconstruction (delayed closure, grafts, flaps) only once the infection is controlled, with plastic surgery input.", "evidenceRef": "wses-ssti" }
+    ],
+    "escalate": [
+      { "text": "Consultant urologist or general surgeon to theatre for the first debridement. This is not a first operation for an unsupervised trainee." },
+      { "text": "Critical care on the day of presentation." },
+      { "text": "Colorectal surgery for an anorectal source or sphincter involvement; plastic surgery for reconstruction; microbiology for antibiotic choice." }
+    ]
+  },
+  "notes": [
+    "Pain out of proportion and systemic toxicity with unimpressive skin is the classic presentation. If you are thinking about necrotising infection, the patient needs a surgeon to look at the fascia.",
+    "The first debridement is almost always too conservative. Plan the re-look before leaving theatre and tell the patient and family that more than one operation is expected.",
+    "Mortality is driven by delay to the first debridement. Time from the door to the knife is the metric that matters."
+  ],
+  "calcs": ["qsofa", "sofa", "news2", "shock_index", "lrinec"]
+}

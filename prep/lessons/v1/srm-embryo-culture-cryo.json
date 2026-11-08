@@ -1,0 +1,284 @@
+{
+  "v": 1,
+  "id": "srm-embryo-culture-cryo",
+  "module": "srm-embryo-culture-cryo",
+  "title": "Embryo Culture Systems, Gardner Blastocyst Grading and Vitrification Dynamics",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Gardner's Textbook of Assisted Reproductive Technologies 5e Ch 16 & 18",
+    "Alpha Scientists in Reproductive Medicine and ESHRE Special Interest Group Consensus on Embryo Assessment",
+    "The Vienna Consensus on Embryology Quality Indicators"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Evaluating early cleavage embryos requires systematic morphology scoring on day 3. Blastomere count should reach 6 to 8 cells, and top quality grade 1 embryos display fragmentation under 10 percent.",
+      "tx": "Scoring a **cleavage embryo** on day 3 evaluates developmental rate, symmetry, and degree of anucleate debris. An optimal **blastomere number** spans 6 to 8 cells, with an extracellular **fragmentation percentage** under 10 percent defining top-tier Grade 1 morphology prior to compaction. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cleavage Parameter",
+          "Optimal Target (Day 3)",
+          "Suboptimal Finding",
+          "Clinical Consequence"
+        ],
+        "rows": [
+          [
+            "Cell Count",
+            "6 to 8 cells",
+            "<5 cells or >9 cells",
+            "Delayed development or precocious cleavage"
+          ],
+          [
+            "Blastomere Symmetry",
+            "Even, equally sized",
+            "Uneven sizes",
+            "Aneuploidy or irregular cytokinesis"
+          ],
+          [
+            "Fragmentation",
+            "<10 percent (Grade 1)",
+            ">25 percent (Grade 3)",
+            "Compromised blastulation and viability"
+          ],
+          [
+            "Multinucleation",
+            "Absent (1 nucleus/cell)",
+            "Binucleate / micronuclei",
+            "High frequency of chromosomal error"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Gardner scoring system evaluates blastocyst expansion and morphological maturity. Blastocysts are graded on an expansion scale from 1 to 6 based on blastocoel cavity formation, with inner cell mass and trophectoderm graded A to C.",
+      "tx": "The international **Gardner grading** scheme evaluates day 5 or 6 blastocysts using three components: degree of blastocoel expansion across stages 1 to 6, morphological grade of the **inner cell mass** (A, B, or C), and cellular cohesion of the **trophectoderm** (A, B, or C).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Expansion Stage",
+          "Cavity Characteristics",
+          "Zona Pellucida Status",
+          "Clinical Designation"
+        ],
+        "rows": [
+          [
+            "Stage 1 to 2",
+            "Cavity < to >= half embryo",
+            "Intact, thick",
+            "Early blastocyst"
+          ],
+          [
+            "Stage 3 to 4",
+            "Cavity fills embryo to enlarged",
+            "Thinning zona",
+            "Full to expanded blastocyst"
+          ],
+          [
+            "Stage 5",
+            "Trophectoderm herniating",
+            "Breached zona",
+            "Hatching blastocyst"
+          ],
+          [
+            "Stage 6",
+            "Completely escaped from shell",
+            "Discarded zona",
+            "Fully hatched blastocyst"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Human embryos shift transcriptional control from maternal transcripts to nascent embryonic DNA. This vital maternal-to-zygotic transition occurs at the 4-to-8 cell stage on cycle day 3.",
+      "tx": "The critical **maternal-to-zygotic transition** represents the handover from stored oocyte messenger RNA to embryonic gene expression. In human development, this definitive **genomic activation** occurs during **day 3 cleavage** at the 4 to 8 cell division boundary, allowing autonomous embryonic transcriptional regulation. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "g1",
+            "label": "Oocyte maternal mRNA directs initial divisions"
+          },
+          {
+            "id": "g2",
+            "label": "4 to 8 cell cleavage stage on day 3"
+          },
+          {
+            "id": "g3",
+            "label": "Embryonic genome activation and compaction"
+          }
+        ],
+        "edges": [
+          [
+            "g1",
+            "g2",
+            "Maternal control"
+          ],
+          [
+            "g2",
+            "g3",
+            "Nascent transcription"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sequential culture media replicate fluid compositions across the reproductive tract. Early cleavage relies on pyruvate and lactate, while blastocyst expansion requires elevated glucose.",
+      "tx": "Modern **sequential media** formulations mirror maternal physiology by altering nutrient availability. Day 1 to 3 media supply low glucose with high **pyruvate** and lactate to match tubal fluid, switching on days 3 to 5 to higher **glucose concentration** and essential amino acids matching uterine secretions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tubal Phase Media (Days 1 to 3)",
+          "points": [
+            "High pyruvate and lactate",
+            "Low glucose concentration",
+            "Non-essential amino acids",
+            "Quiet oxidative metabolism"
+          ]
+        },
+        "right": {
+          "title": "Uterine Phase Media (Days 3 to 5)",
+          "points": [
+            "High glucose concentration",
+            "Essential and non-essential amino acids",
+            "Elevated biosynthetic turnover",
+            "High glycolytic energy consumption"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Time-lapse imaging provides continuous developmental surveillance without removing dishes from incubators. Tracking cleavage timestamps and synchrony refines embryo selection.",
+      "tx": "Utilizing **time-lapse imaging** systems equipped with high-resolution internal optics enables continuous **morphokinetics** analysis without environmental disruption. Embryologists track precise **cleavage intervals** such as t2, t3, and t5 alongside round-two division synchrony (s2 = t4 minus t3) to identify embryos with highest implantation competence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "k1",
+            "label": "Automated time-lapse image capture inside incubator"
+          },
+          {
+            "id": "k2",
+            "label": "Annotation of cleavage intervals t2, t3, and t5"
+          },
+          {
+            "id": "k3",
+            "label": "Algorithm-guided selection of top viable blastocyst"
+          }
+        ],
+        "edges": [
+          [
+            "k1",
+            "k2",
+            "Image stream"
+          ],
+          [
+            "k2",
+            "k3",
+            "Morphokinetic model"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Vitrification bypasses harmful crystallization through extreme cooling speeds. Plunging microvolumes into liquid nitrogen achieves cooling exceeding 15,000 to 20,000 degrees Celsius per minute.",
+      "tx": "Blastocyst **vitrification** achieves reliable cellular preservation through an **ultra-rapid cooling** velocity exceeding 15000 to 20000 degrees C per minute. This extreme temperature plunge transitions aqueous solutions directly into a solid, amorphous **glass-like state** that completely eliminates damaging intracellular ice crystal formation. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Slow Programmable Freezing",
+          "points": [
+            "Cooling rate 0.3 to 1.0 C per min",
+            "Extracellular ice crystal lattices",
+            "Lower cryoprotectant concentrations",
+            "Post-thaw survival 75 to 80 percent"
+          ]
+        },
+        "right": {
+          "title": "Modern Vitrification Protocol",
+          "points": [
+            "Cooling rate >15,000 to 20,000 C/min",
+            "Zero ice crystallization",
+            "High solute cryoprotectant vitrification",
+            "Post-thaw survival >95 percent"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Balanced cryoprotectant mixtures protect cell membranes while drawing out free cytoplasmic water. Permeating agents like DMSO and ethylene glycol pair with extracellular disaccharides.",
+      "tx": "Safe vitrification protocols pair penetrating and non-penetrating **cryoprotectants**. Permeating molecules such as **DMSO** and **ethylene glycol** enter cells to lower freezing points and displace water, while non-penetrating disaccharides like sucrose and trehalose establish an extracellular osmotic gradient that safely dehydrates cytoplasm. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cryoprotectant Category",
+          "Representative Agents",
+          "Cellular Mechanism",
+          "Primary Function"
+        ],
+        "rows": [
+          [
+            "Permeating Agent",
+            "DMSO, Ethylene Glycol",
+            "Crosses cell membrane",
+            "Displaces water, prevents ice lattice"
+          ],
+          [
+            "Non-Permeating Agent",
+            "Sucrose, Trehalose",
+            "Remains in extracellular fluid",
+            "Osmotic dehydration, membrane stabilization"
+          ],
+          [
+            "Equilibration Phase",
+            "Low-concentration mixture",
+            "Gradual cellular penetration",
+            "Prepares embryo without osmotic shock"
+          ],
+          [
+            "Vitrification Phase",
+            "High-concentration solution",
+            "Rapid final dehydration",
+            "Enables instantaneous glass formation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Blastocyst survival following vitrification routinely exceeds 95 percent in accredited laboratories. Clinical outcomes with frozen transfers equal or exceed fresh embryo replacements.",
+      "tx": "Achieving exceptional **post-thaw survival** exceeding 95 percent establishes vitrification as the cornerstone of contemporary IVF programs. Efficient **vitrification recovery** permits elective single embryo transfer and planned **frozen embryo transfer**, delivering clinical pregnancy and live birth rates that match or surpass fresh embryo cycles.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fresh Embryo Replacement",
+          "points": [
+            "Transfer in hyperstimulated hormonal milieu",
+            "Elevated risk of ovarian hyperstimulation",
+            "Advancing endometrial secretory maturation",
+            "Higher incidence of low birthweight"
+          ]
+        },
+        "right": {
+          "title": "Vitrified-Warmed Replacement",
+          "points": [
+            "Transfer in physiological natural or HRT cycle",
+            "Virtually zero OHSS risk",
+            "Optimal physiological endometrial receptivity",
+            "Higher post-thaw survival and live birth rates"
+          ]
+        }
+      }
+    }
+  ]
+}

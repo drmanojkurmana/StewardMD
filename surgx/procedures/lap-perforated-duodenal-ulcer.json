@@ -1,0 +1,148 @@
+{
+  "id": "lap-perforated-duodenal-ulcer",
+  "title": "Laparoscopic repair of perforated duodenal ulcer",
+  "subtitle": "Omental patch, washout, treat the cause",
+  "system": "gastrointestinal",
+  "aliases": ["perforated DU repair", "Graham patch", "omental patch repair", "perforated peptic ulcer"],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "wses-pud-2020", "org": "World Society of Emergency Surgery (WSES)", "title": "Perforated and bleeding peptic ulcer: WSES guidelines", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/31921329/", "accessed": "2026-11-04" },
+    { "id": "wses-iai-2017", "org": "World Society of Emergency Surgery (WSES)", "title": "The management of intra-abdominal infections from a global perspective: 2017 WSES guidelines", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/28702076/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "qsofa", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Perforated duodenal or juxtapyloric ulcer with peritonitis confirmed on CT or erect chest radiograph, in a patient fit for pneumoperitoneum.",
+      "Laparoscopy is preferred by WSES where the expertise exists and the patient is haemodynamically stable."
+    ],
+    "contraindications": [
+      "Haemodynamic instability or septic shock not responding to resuscitation: open repair is faster and more controlled.",
+      "A large perforation (commonly cited as above about 2 cm), a perforation with bleeding, or suspected gastric outlet obstruction: these need an open and often more extensive operation.",
+      "Inability to tolerate pneumoperitoneum.",
+      "Non-operative management can be considered only in a carefully selected stable patient with a sealed perforation on contrast imaging, under close senior surveillance. It is the exception."
+    ],
+    "preparation": [
+      "Resuscitate, nasogastric decompression, urinary catheter, intravenous proton pump inhibitor.",
+      "Broad-spectrum antibiotics per local protocol for intra-abdominal infection; add antifungal cover only for specific risk groups as locally advised.",
+      "Ask about non-steroidal anti-inflammatory drugs, steroids, smoking and previous ulcer disease; plan Helicobacter pylori testing.",
+      "Consent to include conversion to open, leak from the repair, intra-abdominal collection, and the possibility that a gastric perforation is malignant."
+    ],
+    "positioning": [
+      "Supine, French position (legs apart) or American, with reverse Trendelenburg for the upper abdomen and Trendelenburg later for pelvic washout.",
+      "Strap the patient securely; the table will tilt in several directions."
+    ],
+    "equipment": [
+      "30-degree laparoscope, three to four ports, liver retractor if needed.",
+      "Atraumatic graspers, needle holders, 2/0 or 3/0 absorbable sutures on a curved needle.",
+      "Suction-irrigation and several litres of warm saline.",
+      "Nasogastric tube in place for air or dye testing."
+    ],
+    "anatomy": [
+      "Most perforated duodenal ulcers are anterior, on the first part of the duodenum just distal to the pylorus. The pyloric vein (of Mayo) marks the pylorus.",
+      "A posterior duodenal ulcer bleeds into the gastroduodenal artery rather than perforating. A perforation with haematemesis suggests kissing ulcers.",
+      "The greater omentum hangs from the greater curve and usually provides a well-vascularised pedicle that reaches the duodenum without tension.",
+      "The common bile duct lies behind the first part of the duodenum. Deep sutures at the inferior edge of the perforation risk it."
+    ],
+    "criticalSafety": [
+      "Biopsy any gastric perforation, because a perforated gastric cancer can look exactly like a benign ulcer.",
+      "Do not attempt to close a friable perforation primarily under tension. The omentum seals the hole; the sutures only hold the omentum.",
+      "Convert to open early for instability, poor view, a large perforation or difficult tissue. Conversion is a safety decision.",
+      "Treat the cause after the operation: Helicobacter pylori eradication and stopping non-steroidal anti-inflammatory drugs prevent recurrence."
+    ],
+    "structuresAtRisk": [
+      "Common bile duct behind D1",
+      "Gastroduodenal artery",
+      "Pylorus, which can be narrowed by over-zealous sutures",
+      "Transverse colon and its mesentery when mobilising the omentum"
+    ],
+    "commonErrors": [
+      "Tying the sutures over the perforation first and strangulating the friable edges.",
+      "An omental patch under tension that pulls off.",
+      "Incomplete washout, leaving collections in the subphrenic spaces and pelvis.",
+      "Omitting a biopsy of a gastric perforation."
+    ],
+    "complications": [
+      "Leak from the repair, presenting with ongoing sepsis and peritonitis.",
+      "Subphrenic, subhepatic or pelvic collection.",
+      "Gastric outlet narrowing from a bulky repair.",
+      "Wound and port-site infection, chest infection, and the systemic complications of peritonitis.",
+      "Recurrent ulceration if Helicobacter pylori or drug causes are not addressed."
+    ],
+    "postop": [
+      "Nasogastric decompression only as long as clinically needed; feed early once there is no sign of leak.",
+      "Continue proton pump inhibitor; test for and treat Helicobacter pylori.",
+      "A short, defined course of antibiotics after adequate source control, as WSES advises, extended only for ongoing infection.",
+      "Stop non-steroidal anti-inflammatory drugs; review the need for steroids, antiplatelets and anticoagulants.",
+      "Endoscopy at follow-up after a gastric perforation to confirm healing and obtain histology."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Therapeutic antibiotics for peritonitis should already be running." },
+    { "ref": "step.core.positioning", "emphasis": "French position with secure strapping: reverse Trendelenburg for the repair, head-down for the pelvic washout." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.lap.access", "emphasis": "Open (Hasson) entry is safer in a distended septic abdomen." },
+    { "ref": "step.lap.ports" },
+    { "ref": "step.lap.survey", "emphasis": "Find the perforation by following the fibrin and bile to the anterior duodenum. If it is gastric, it needs a biopsy." },
+    { "ref": "step.pdu.expose" },
+    { "ref": "step.pdu.patch" },
+    { "ref": "step.bowel.leak-check", "emphasis": "Air via the nasogastric tube with the repair under saline, or dilute methylene blue." },
+    { "ref": "step.pdu.convert" },
+    { "ref": "step.abd.lavage", "emphasis": "Laparoscopic washout of all four quadrants, subphrenic spaces and pelvis with warm saline until the return is clear." },
+    { "ref": "step.abd.drain", "emphasis": "A drain near the repair is optional; WSES does not mandate one." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Biopsy only for a gastric perforation. Duodenal ulcers are not routinely biopsied." },
+    { "ref": "step.lap.closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Hand over the Helicobacter pylori test, the drug review and any biopsy result to chase." }
+  ],
+  "steps_local": {
+    "step.pdu.expose": {
+      "id": "step.pdu.expose", "kind": "dissection",
+      "title": "Exposing and assessing the perforation",
+      "why": "The size, site and tissue quality of the perforation decide whether a laparoscopic patch is the right operation. That decision is made in the first five minutes, not after an hour of struggling.",
+      "how": [
+        "Lift the liver edge to expose the pylorus and first part of the duodenum.",
+        "Aspirate contaminated fluid around the perforation and send a sample for culture.",
+        "Measure the perforation against an instrument jaw and assess the edges: friable, indurated or healthy.",
+        "Locate the omentum and check that a pedicle will reach the defect without tension."
+      ],
+      "structuresAtRisk": ["Liver capsule", "Gallbladder"],
+      "pitfalls": ["Starting the repair before deciding whether this perforation suits a laparoscopic patch."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.pdu.patch": {
+      "id": "step.pdu.patch", "kind": "reconstruction", "critical": true,
+      "title": "Omental patch repair",
+      "why": "A perforated ulcer edge is inflamed and holds sutures poorly. A vascularised omental plug seals the hole; the sutures exist only to hold the omentum in place. Tying them over the hole first strangulates the edges and enlarges the defect.",
+      "how": [
+        "Place three interrupted absorbable sutures across the perforation, taking full-thickness bites of healthy duodenum well back from the edge, oriented along the long axis so the pylorus is not narrowed.",
+        "Leave the sutures untied.",
+        "Bring a tongue of well-vascularised omentum over the perforation and lay it under the sutures.",
+        "Tie the sutures gently over the omentum, enough to hold it, not to throttle it.",
+        "Alternatively, for a small perforation with healthy edges, primary closure reinforced with omentum is acceptable."
+      ],
+      "structuresAtRisk": ["Common bile duct", "Pylorus", "Omental blood supply"],
+      "pitfalls": ["Tying the sutures to close the hole before laying the omentum.", "A thin, pale strip of omentum that devascularises."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.pdu.convert": {
+      "id": "step.pdu.convert", "kind": "bailout",
+      "title": "When to convert or change the operation",
+      "why": "Laparoscopy is a means to a good repair and a thorough washout, not an end. Most failed laparoscopic repairs are ones in which the warning signs were visible early.",
+      "how": [
+        "Convert to open for haemodynamic deterioration, poor view, an inability to wash out adequately, or tissue that will not hold a patch.",
+        "A large perforation may need a jejunal serosal patch, a pyloric exclusion, a resection, or a controlled duodenostomy: these are senior and often open decisions.",
+        "A perforation that is bleeding as well needs the gastroduodenal artery controlled, which usually means an open duodenotomy.",
+        "Call for senior help before, not after, the repair has failed."
+      ],
+      "structuresAtRisk": ["The repair", "Gastroduodenal artery"],
+      "pitfalls": ["Persisting laparoscopically because conversion feels like failure."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

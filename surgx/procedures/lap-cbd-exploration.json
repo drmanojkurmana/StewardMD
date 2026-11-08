@@ -1,0 +1,228 @@
+{
+  "id": "lap-cbd-exploration",
+  "title": "Laparoscopic common bile duct exploration",
+  "subtitle": "Transcystic or choledochotomy, single-stage stone clearance",
+  "system": "hepatobiliary",
+  "aliases": ["LCBDE", "lap CBD exploration", "laparoscopic choledocholithotomy", "transcystic exploration", "laparoscopic choledochotomy"],
+  "estMinutes": 150,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "bsg-cbds", "org": "British Society of Gastroenterology (BSG)", "title": "Updated guideline on the management of common bile duct stones (CBDS) (Williams E et al., Gut)", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Williams+updated+guideline+management+of+common+bile+duct+stones+Gut+2017", "accessed": "2026-11-04" },
+    { "id": "esge-cbds", "org": "European Society of Gastrointestinal Endoscopy (ESGE)", "title": "Endoscopic management of common bile duct stones: European Society of Gastrointestinal Endoscopy (ESGE) guideline (Manes G et al., Endoscopy)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Manes+endoscopic+management+of+common+bile+duct+stones+ESGE+guideline+2019", "accessed": "2026-11-04" },
+    { "id": "cochrane-bds", "org": "Cochrane Database of Systematic Reviews", "title": "Surgical versus endoscopic treatment of bile duct stones (Dasari BV et al.)", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Dasari+surgical+versus+endoscopic+treatment+of+bile+duct+stones+Cochrane", "accessed": "2026-11-04" },
+    { "id": "cochrane-ttube", "org": "Cochrane Database of Systematic Reviews", "title": "T-tube drainage versus primary closure after laparoscopic common bile duct exploration (Gurusamy KS, Koti R, Davidson BR)", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Gurusamy+T-tube+drainage+versus+primary+closure+after+laparoscopic+common+bile+duct+exploration", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["rcri", "caprini", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Common bile duct stones found before or during cholecystectomy, where single-stage laparoscopic clearance with cholecystectomy is offered as an alternative to ERCP followed by cholecystectomy.",
+      "Failed or unavailable ERCP, or anatomy that makes ERCP difficult (for example after gastric surgery).",
+      "Stones found on intra-operative cholangiography during an elective or emergency cholecystectomy, where the team has the skills and equipment."
+    ],
+    "contraindications": [
+      "Severe acute cholangitis with organ dysfunction: urgent biliary decompression, usually by ERCP, comes first.",
+      "A narrow, non-dilated duct with stones that cannot be reached transcystically: choledochotomy risks stricture; prefer ERCP before or after surgery.",
+      "Suspected malignant biliary obstruction, which needs staging rather than exploration.",
+      "Lack of a choledochoscope, fluoroscopy or experience: complete the cholecystectomy and arrange post-operative ERCP."
+    ],
+    "preparation": [
+      "Ultrasound, liver function tests and MRCP or endoscopic ultrasound to confirm stones, their number and size, and the duct diameter.",
+      "Treat cholangitis and correct coagulopathy (vitamin K if jaundiced).",
+      "Check equipment before starting: flexible choledochoscope with its own stack and irrigation, baskets and balloon catheters, cholangiography set and C-arm, T-tube, fine absorbable sutures.",
+      "Agree a fall-back plan with gastroenterology for post-operative ERCP if the duct cannot be cleared.",
+      "Consent: bile leak, retained stones and the need for ERCP, conversion to open, bile duct injury or later stricture, pancreatitis, a T-tube or biliary stent, bleeding and infection."
+    ],
+    "positioning": [
+      "Supine, reverse Trendelenburg with left tilt, as for laparoscopic cholecystectomy.",
+      "Radiolucent table, with the C-arm positioned and tested before draping.",
+      "Second monitor or picture-in-picture for the choledochoscope image."
+    ],
+    "equipment": [
+      "Standard laparoscopic cholecystectomy set with an additional 5 mm port for the choledochoscope.",
+      "Flexible choledochoscope (small calibre for transcystic use), saline irrigation, wire baskets, balloon catheters and a balloon dilator for the cystic duct.",
+      "Cholangiography catheter and fluoroscopy.",
+      "Laparoscopic scissors or micro-knife for the choledochotomy, fine absorbable monofilament sutures, T-tube or antegrade biliary stent if used.",
+      "Closed suction drain."
+    ],
+    "anatomy": [
+      "The supraduodenal common bile duct lies anterolaterally in the hepatoduodenal ligament, with the hepatic artery medially and the portal vein behind.",
+      "The duct's blood supply runs longitudinally at about 3 and 9 o'clock, so a vertical anterior choledochotomy divides the fewest vessels.",
+      "The cystic duct joins the common hepatic duct with variable length, angle and spiral valves; a low or medial insertion makes transcystic access difficult.",
+      "The distal duct passes behind the duodenum and through the pancreas to the ampulla, where impacted stones lodge."
+    ],
+    "criticalSafety": [
+      "Confirm the anatomy (Critical View of Safety and cholangiogram) before opening any duct.",
+      "Prefer the transcystic route when it can work; choledochotomy only in a dilated duct.",
+      "Open the duct vertically on its anterior surface, below the cystic duct junction, never circumferentially and never in the hilum.",
+      "Confirm clearance by choledochoscopy or completion cholangiogram before closure."
+    ],
+    "structuresAtRisk": [
+      "Common bile duct (tear, stricture, perforation by instruments)",
+      "Right hepatic artery and the duct's axial arteries",
+      "Portal vein",
+      "Duodenum and the ampulla (pancreatitis from instrumentation)"
+    ],
+    "commonErrors": [
+      "Opening a narrow duct, leading to a stricture.",
+      "Forcing a basket or a scope against an impacted stone and perforating the distal duct.",
+      "Closing the duct over a retained stone because the completion check was skipped.",
+      "Extending the choledochotomy up into the hilum or round the duct to retrieve a large stone."
+    ],
+    "complications": [
+      "Bile leak from the choledochotomy or the cystic duct stump.",
+      "Retained or recurrent duct stones.",
+      "Bile duct stricture.",
+      "Pancreatitis and cholangitis.",
+      "T-tube dislodgement or leak at removal; general risks of cholecystectomy."
+    ],
+    "postop": [
+      "Monitor drain output and liver function; a falling bilirubin is expected.",
+      "Bilious drain output or rising bilirubin needs imaging and usually ERCP.",
+      "T-tube: leave on free drainage, perform a cholangiogram before removal per unit protocol, and remove only once the tract has matured.",
+      "If the duct was not cleared, arrange ERCP before discharge as agreed in advance."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Consent covers post-operative ERCP, a T-tube or stent, and conversion." },
+    { "ref": "step.core.timeout", "emphasis": "Confirm the choledochoscope works, the C-arm is in place, and the fall-back ERCP plan is agreed." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Bile with stones is often colonised; treat cholangitis with therapeutic antibiotics per local protocol." },
+    { "ref": "step.core.positioning", "emphasis": "Reverse Trendelenburg with left tilt on a radiolucent table; test the C-arm path before draping." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.lap.access" },
+    { "ref": "step.lap.ports", "emphasis": "Add a 5 mm port in the right upper quadrant in line with the cystic or common duct for the choledochoscope." },
+    { "ref": "step.cbde.cvs-first" },
+    { "ref": "step.hpb.cholangiogram", "emphasis": "Define stone number, size and position, the duct diameter, and the cystic duct anatomy: these decide the route." },
+    { "ref": "step.cbde.route-decision" },
+    { "ref": "step.cbde.transcystic" },
+    { "ref": "step.cbde.choledochotomy" },
+    { "ref": "step.cbde.clearance" },
+    { "ref": "step.cbde.duct-closure" },
+    { "ref": "step.cbde.abandon" },
+    { "ref": "step.hpb.bile-leak-check", "emphasis": "Inspect the choledochotomy closure and the cystic duct stump with a white swab." },
+    { "ref": "step.abd.drain", "emphasis": "Subhepatic drain after every choledochotomy; record what output would prompt imaging." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.lap.specimen-retrieval", "emphasis": "Complete the cholecystectomy off the cystic plate as in a standard laparoscopic cholecystectomy, then bag the gallbladder and any retrieved stones." },
+    { "ref": "step.core.counts", "emphasis": "Count baskets, balloons and stones retrieved; a lost stone in the abdomen is retrieved." },
+    { "ref": "step.lap.closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record the route, stones retrieved, whether clearance was confirmed and how, the closure method, and any planned ERCP." }
+  ],
+  "steps_local": {
+    "step.cbde.cvs-first": {
+      "id": "step.cbde.cvs-first", "kind": "checkpoint", "critical": true,
+      "title": "Critical View of Safety before any duct is opened",
+      "why": "Duct exploration means deliberately opening a duct. It is only safe once the cystic duct and the common duct have been positively identified, so the CVS comes first, exactly as in a routine cholecystectomy.",
+      "how": [
+        "Dissect the hepatocystic triangle to the Critical View of Safety with lateral retraction of the infundibulum.",
+        "Clip and divide the cystic artery; place a clip on the cystic duct close to the gallbladder only, keeping the duct open for cholangiography and transcystic access.",
+        "Keep the gallbladder attached to the liver for now: it is the handle for retraction during the exploration."
+      ],
+      "structuresAtRisk": ["Common bile duct", "Right hepatic artery"],
+      "pitfalls": [
+        "Removing the gallbladder first and losing the retraction that exposes the duct.",
+        "Opening the 'cystic duct' before the view is achieved, which may be the common duct."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cbde.route-decision": {
+      "id": "step.cbde.route-decision", "kind": "checkpoint", "critical": true,
+      "title": "Choosing the route: transcystic or choledochotomy",
+      "why": "The transcystic route leaves the common duct intact and avoids a duct closure, so it has fewer bile leaks and strictures. Choledochotomy clears large or proximal stones but should be reserved for a duct wide enough to be opened and closed safely.",
+      "how": [
+        "Favour transcystic when stones are few and small enough to pass through the (dilated) cystic duct, lie below the cystic duct junction, and the cystic duct is not too narrow or tortuous.",
+        "Favour choledochotomy when stones are large, numerous, or above the cystic junction, and the common duct is dilated. Many surgeons use a minimum duct diameter of around 8 mm; follow your unit's threshold.",
+        "If neither is suitable, plan ERCP rather than force a route.",
+        "State the decision and the reason to the team."
+      ],
+      "structuresAtRisk": ["Common bile duct"],
+      "pitfalls": [
+        "Choledochotomy in a narrow duct because it is the technique the surgeon prefers.",
+        "Persisting with a transcystic route that has repeatedly failed, instead of converting to choledochotomy or ERCP."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cbde.transcystic": {
+      "id": "step.cbde.transcystic", "kind": "dissection",
+      "title": "Transcystic exploration",
+      "why": "Working through the cystic duct uses an opening that will be ligated anyway, so clearance can be achieved without any incision in the common duct.",
+      "how": [
+        "Extend the cystic ductotomy close to the common duct junction and, if needed, dilate the cystic duct gently with a balloon dilator under vision.",
+        "Pass a small-calibre choledochoscope or a wire basket under fluoroscopy down the duct, capture stones and withdraw them through the cystic duct; small stones may be flushed through the ampulla with saline.",
+        "Once clear, ligate the cystic duct securely with an endoloop or sutured ligature; a dilated, oedematous duct does not hold a clip reliably."
+      ],
+      "structuresAtRisk": ["Cystic duct and its junction with the common duct", "Distal common bile duct and ampulla"],
+      "pitfalls": [
+        "Over-dilating the cystic duct and tearing it into the common duct.",
+        "Relying on a clip on a dilated cystic duct after exploration, which leaks."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cbde.choledochotomy": {
+      "id": "step.cbde.choledochotomy", "kind": "access", "critical": true,
+      "title": "Anterior vertical choledochotomy",
+      "why": "A short vertical incision on the front of the supraduodenal duct avoids the axial arteries at 3 and 9 o'clock and can be closed without narrowing the duct.",
+      "how": [
+        "Clear the peritoneum over the anterior supraduodenal duct below the cystic duct junction, with minimal lateral dissection.",
+        "Place stay sutures either side if helpful, then open the duct vertically with scissors or a micro-knife, without energy.",
+        "Make the opening just long enough to admit the choledochoscope or deliver the largest stone; extend downwards, not upwards into the hilum."
+      ],
+      "structuresAtRisk": ["Axial arteries of the bile duct", "Portal vein behind the duct", "Hepatic artery medially"],
+      "pitfalls": [
+        "Using diathermy on the duct wall, causing a thermal stricture.",
+        "Cutting the back wall by inserting the scissors too deep.",
+        "A transverse opening that devascularises the duct."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cbde.clearance": {
+      "id": "step.cbde.clearance", "kind": "resection", "critical": true,
+      "title": "Stone clearance and confirming a clear duct",
+      "why": "A retained stone defeats the purpose of the operation and stresses the duct closure. Clearance is proven by seeing a clear duct, not assumed because the stone count matches the scan.",
+      "how": [
+        "Irrigate with saline under pressure to flush stones out of the opening; use the choledochoscope to see each remaining stone and capture it with a basket or a balloon.",
+        "Inspect the duct distally to the ampulla (seeing it open) and proximally to both hepatic ducts.",
+        "For an impacted distal stone, try irrigation, basket and gentle manipulation; do not force instruments through the ampulla.",
+        "Confirm clearance with a final choledochoscopic pass or a completion cholangiogram."
+      ],
+      "structuresAtRisk": ["Distal duct and ampulla", "Duct wall (perforation by instruments)"],
+      "pitfalls": [
+        "Pushing a stone up into the intrahepatic ducts and losing it.",
+        "Repeated forceful passage through the ampulla, causing pancreatitis or a false passage."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cbde.duct-closure": {
+      "id": "step.cbde.duct-closure", "kind": "reconstruction", "critical": true,
+      "title": "Closing the choledochotomy",
+      "why": "The closure must be watertight without narrowing the duct. Primary closure avoids the morbidity of a T-tube; a T-tube or an antegrade stent decompresses the duct when there is distal oedema, cholangitis or doubt about clearance.",
+      "how": [
+        "Primary closure with a fine absorbable monofilament, continuous or interrupted, with small even bites, when the duct is clear and the ampulla drains freely.",
+        "Close over a T-tube, brought out through a separate stab and with the closure snug around it, when there is distal oedema, cholangitis or concern about retained fragments, or an antegrade stent as the unit prefers.",
+        "Check the closure for bile leakage before removing the gallbladder from its bed."
+      ],
+      "structuresAtRisk": ["Common bile duct lumen", "Back wall of the duct"],
+      "pitfalls": [
+        "Bites that are too deep or too wide, narrowing the lumen.",
+        "Primary closure over a distal obstruction, which raises duct pressure and causes a leak."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cbde.abandon": {
+      "id": "step.cbde.abandon", "kind": "bailout",
+      "title": "When the duct cannot be cleared: drain, stent or convert",
+      "why": "An uncleared duct is not a failure if it is left safe. Post-operative ERCP clears most residual stones; the operative job is to leave the duct decompressed and accessible and to avoid an injury from forcing the issue.",
+      "how": [
+        "If clearance fails after reasonable attempts, place an antegrade stent across the ampulla or a T-tube so that the duct is drained and ERCP is easier.",
+        "If the duct has not been opened, ligate the cystic duct, complete the cholecystectomy and arrange post-operative ERCP.",
+        "Convert to open only for a reason (bleeding, injury, an impacted stone that cannot otherwise be managed) and with the appropriate expertise.",
+        "Record what is left in the duct and the plan agreed with gastroenterology."
+      ],
+      "structuresAtRisk": ["Common bile duct", "Ampulla"],
+      "pitfalls": [
+        "Repeated instrumentation of an impacted stone until the duct perforates.",
+        "Closing a duct with a known retained stone without a drainage route."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

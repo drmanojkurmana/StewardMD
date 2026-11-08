@@ -1,0 +1,66 @@
+{
+  "id": "ent-deep-neck-infection",
+  "title": "Deep neck space infection and Ludwig angina",
+  "subtitle": "Including peritonsillar abscess: the airway first, then the pus",
+  "category": "ent_airway",
+  "specialty": "ent",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "ludwig-review-2021", "org": "American Journal of Emergency Medicine", "title": "Diagnosis and management of Ludwig's angina: an evidence-based review (Bridwell et al.)", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/33383265/", "accessed": "2026-11-04" },
+    { "id": "nice-ng84", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Sore throat (acute): antimicrobial prescribing (NG84)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng84", "accessed": "2026-11-04" },
+    { "id": "das-ati-2020", "org": "Difficult Airway Society (DAS)", "title": "Difficult Airway Society guidelines for awake tracheal intubation (ATI) in adults", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/31729018/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Stridor, drooling, inability to swallow saliva, or a patient who insists on sitting up: the airway is threatened now." },
+      { "text": "Ludwig angina: firm bilateral submandibular swelling with a raised, tender floor of mouth and the tongue pushed up and back." },
+      { "text": "Trismus with a muffled 'hot potato' voice and deviation of the uvula: peritonsillar abscess, or a parapharyngeal abscess if the neck is also swollen." },
+      { "text": "Neck stiffness or torticollis with fever in a child: retropharyngeal abscess." },
+      { "text": "Chest pain, mediastinal widening or sepsis with a neck infection: descending necrotising mediastinitis." },
+      { "text": "Unilateral neck swelling and tenderness along the sternocleidomastoid after a sore throat, with septic emboli to the lungs: Lemierre syndrome." }
+    ],
+    "do_now": [
+      { "text": "Assess the airway first and call the senior anaesthetist and senior ENT surgeon at once for any airway sign. Keep the patient upright and with them.", "timeCritical": true, "evidenceRef": "ludwig-review-2021" },
+      { "text": "No sedation and no lying flat for a scan in a patient with any airway sign until the airway plan is agreed.", "timeCritical": true, "evidenceRef": "das-ati-2020" },
+      { "text": "Intravenous broad-spectrum antibiotics covering streptococci and anaerobes per local protocol, started without waiting for imaging.", "timeCritical": true, "evidenceRef": "ludwig-review-2021" },
+      { "text": "Refer to hospital any sore throat with severe systemic illness or a suspected suppurative complication such as quinsy, parapharyngeal or retropharyngeal abscess.", "evidenceRef": "nice-ng84" }
+    ],
+    "assess": [
+      { "text": "Dental examination: most Ludwig angina comes from the lower molar teeth, whose roots lie below the mylohyoid line." },
+      { "text": "Trismus and the degree of mouth opening, which tells the anaesthetist whether a laryngoscope will fit." },
+      { "text": "Flexible nasendoscopy, with the airway team present, to see the supraglottis and the pharyngeal wall." },
+      { "text": "Sepsis screen and severity scores. Diabetes and immunosuppression are common and worsen the course.", "calcs": ["news2", "qsofa"] },
+      { "text": "Peritonsillar abscess versus cellulitis: a fluctuant bulge above and lateral to the tonsil with uvular deviation suggests pus." }
+    ],
+    "investigate": [
+      { "text": "Contrast-enhanced CT of the neck, and of the chest if mediastinal spread is possible, once the airway is safe or the patient is accompanied by someone who can secure it." },
+      { "text": "Blood cultures, full blood count, renal function, glucose and inflammatory markers." },
+      { "text": "Orthopantomogram or the dental windows on the CT to identify the source tooth." },
+      { "text": "A peritonsillar abscess does not need a CT routinely. Image when the abscess may extend beyond the peritonsillar space or the diagnosis is unclear." }
+    ],
+    "resuscitate": [
+      { "text": "Fluid resuscitation and sepsis care in parallel with airway planning.", "evidenceRef": "ludwig-review-2021" },
+      { "text": "Intravenous corticosteroid is used in many units to reduce airway oedema, though the evidence base is limited. Follow local protocol.", "evidenceRef": "ludwig-review-2021" }
+    ],
+    "definitive": [
+      { "text": "Secure the airway in theatre with awake fibreoptic intubation or awake tracheostomy under local anaesthesia when the airway is threatened, with the neck marked and a surgeon scrubbed.", "timeCritical": true, "evidenceRef": "das-ati-2020" },
+      { "text": "Surgical drainage of the involved spaces with removal of the source tooth for Ludwig angina with a collection or a deteriorating patient. Early cellulitis without pus may settle with antibiotics under close observation.", "timeCritical": true, "evidenceRef": "ludwig-review-2021" },
+      { "text": "Peritonsillar abscess: needle aspiration or incision and drainage under local anaesthesia, with antibiotics and analgesia so the patient can swallow.", "evidenceRef": "nice-ng84" },
+      { "text": "Parapharyngeal and retropharyngeal abscesses with a collection on CT usually need surgical drainage, transorally or through the neck, under general anaesthesia with a secured airway.", "evidenceRef": "ludwig-review-2021" },
+      { "text": "Mediastinal extension needs cardiothoracic surgery for drainage. Neck drainage alone is not enough.", "timeCritical": true, "evidenceRef": "ludwig-review-2021" }
+    ],
+    "escalate": [
+      { "text": "Senior ENT, senior anaesthetist and critical care for any deep neck infection with airway signs." },
+      { "text": "Maxillofacial or dental surgery for an odontogenic source. Cardiothoracic surgery for mediastinitis." },
+      { "text": "Transfer a patient with a threatened airway only after it is secured, or with airway-competent staff and equipment in the vehicle." }
+    ]
+  },
+  "notes": [
+    "Ludwig angina is a cellulitis of the floor of the mouth that kills through the airway. The infection is treated with antibiotics and surgery; the patient survives because of the airway plan.",
+    "Trismus in a peritonsillar abscess is from muscle spasm and often improves after drainage, but trismus with neck swelling is a parapharyngeal abscess until imaged.",
+    "The scanner is a dangerous place for a patient with a threatened airway. Secure it, or bring the team."
+  ],
+  "calcs": ["news2", "qsofa", "sirs"]
+}

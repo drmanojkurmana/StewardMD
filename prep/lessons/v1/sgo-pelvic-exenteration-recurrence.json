@@ -1,0 +1,227 @@
+{
+ "v": 1,
+ "module": "sgo-pelvic-exenteration-recurrence",
+ "title": "Pelvic Exenteration: Anterior, Posterior, Total & Urinary Diversions: Patient Selection, Flap Reconstruction and Incontinent Conduits",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 24",
+  "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11th Edition Ch 83",
+  "DiSaia and Creasman Clinical Gynecologic Oncology 10th Edition Ch 14"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Pelvic exenteration is an ultraradical surgical procedure first introduced by Alexander Brunschwig in 1948 as a salvage operation for recurrent pelvic malignancy.",
+   "tx": "Originally described by **Brunschwig 1948**, **pelvic exenteration** is an ultraradical salvage operation performed with strict **curative intent** for isolated **central recurrence after radiation** in cervical, vaginal, or vulvar carcinoma, where all alternative radiotherapy and conventional surgical options have been exhausted.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-anatomy-development-fig1.webp",
+    "ar": 1.8349,
+    "caption": "Pelvic ureter relationships: critical for gynecological surgery. Credit: StewardMD.",
+    "alt": "Illustration of pelvic retroperitoneum showing ureteric course, uterine artery crossing, and visceral relationships."
+   }
+  },
+  {
+   "say": "Anterior pelvic exenteration is indicated when the recurrent central pelvic tumor involves the anterior vaginal wall and bladder but spares the posterior compartment.",
+   "tx": "**Anterior exenteration** comprises en bloc resection of the uterus, cervix, vagina, bladder, and urethra with **cystectomy and urinary conduit** creation, while maintaining bowel continuity through deliberate **rectum preservation** in patients with uninvolved posterior pelvic compartments. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exenteration Type",
+     "Resected Pelvic Organs",
+     "Preserved Structures",
+     "Reconstructive Requirement"
+    ],
+    "rows": [
+     [
+      "Anterior Exenteration",
+      "Uterus, cervix, vagina, bladder, urethra",
+      "Rectum and anal sphincter",
+      "Urinary diversion (ileal conduit)"
+     ],
+     [
+      "Posterior Exenteration",
+      "Uterus, cervix, vagina, rectosigmoid, anus",
+      "Bladder and lower urinary tract",
+      "End-colostomy"
+     ],
+     [
+      "Total Exenteration",
+      "Bladder, urethra, uterus, vagina, rectum, anus",
+      "Pelvic bony walls and vessels",
+      "Double stoma (urinary + fecal)"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Posterior pelvic exenteration is selected when the recurrent neoplasm infiltrates the posterior vaginal wall and rectum while leaving the anterior urinary tract free.",
+   "tx": "Conversely, **posterior exenteration** entails **rectal resection and colostomy** along with en bloc excision of the uterus, cervix, and vagina with permanent end-sigmoid colostomy, achieving oncological clearance while ensuring complete **bladder preservation**. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Exenteration Profile",
+     "points": [
+      "Indicated for anterior wall central recurrence invading bladder",
+      "Spares rectum, rectovaginal septum, and anal sphincter",
+      "Requires ileal conduit or continent urinary reservoir"
+     ]
+    },
+    "right": {
+     "title": "Posterior Exenteration Profile",
+     "points": [
+      "Indicated for posterior vaginal recurrence invading rectal wall",
+      "Spares bladder, distal ureters, and urethral sphincter",
+      "Requires permanent descending or sigmoid end-colostomy"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Total pelvic exenteration involves complete evisceration of all intrapelvic organs and requires dual abdominal stomas for urinary and fecal drainage.",
+   "tx": "**Total pelvic exenteration** achieves **complete visceral clearance** through en bloc extirpation of the bladder, urethra, uterus, cervix, vagina, rectosigmoid, and anal canal. It necessitates permanent **urinary and fecal stomas** (a wet urinary conduit stoma and a dry fecal end-colostomy). Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Perform staging laparotomy to rule out occult extrapelvic disease"
+     },
+     {
+      "id": "b",
+      "label": "Develop avascular pelvic retroperitoneal spaces and divide hypogastric vessels"
+     },
+     {
+      "id": "c",
+      "label": "Excise bladder, urethra, uterus, vagina, rectum, and levator diaphragm en bloc"
+     },
+     {
+      "id": "d",
+      "label": "Construct Bricker ileal conduit and permanent end-colostomy stomas"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Pre-operative evaluation must rigorously exclude specific anatomical and oncological contraindications that preclude curative resection.",
+   "tx": "Critical absolute **contraindications to exenteration** include extrapelvic distant metastases, **peritoneal carcinomatosis**, histological lymph node metastases beyond the pelvis, **pelvic sidewall fixation**, or **sciatic nerve involvement** causing intractable leg pain and lower extremity lymphedema. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Absolute Contraindications",
+     "points": [
+      "Distant hematogenous metastases to lungs, liver, or bone",
+      "Peritoneal carcinomatosis or positive para-aortic lymph nodes",
+      "Triad of unifocal leg pain, sciatic involvement, and hydronephrosis"
+     ]
+    },
+    "right": {
+     "title": "Curable Ideal Candidates",
+     "points": [
+      "Isolated central pelvic recurrence without lateral sidewall fixation",
+      "Long disease-free interval following prior radiotherapy (>1-2 years)",
+      "Excellent performance status and psychological resilience"
+     ]
+    }
+   }
+  },
+  {
+   "say": "The Bricker ileal conduit remains the worldwide gold standard technique for incontinent urinary diversion following radical pelvic exenteration.",
+   "tx": "The standard **Bricker ileal conduit** isolates a **15-20 cm ileal segment** located **15 cm from ileocecal valve** with intact mesenteric blood supply. Restoration of gastrointestinal continuity precedes bilateral **Wallace/Bricker ureteral anastomosis** to the conduit with cutaneous stoma creation. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Isolate 15 to 20 cm segment of terminal ileum with vascular pedicle"
+     },
+     {
+      "id": "b",
+      "label": "Restore small bowel intestinal continuity with stapled side-to-side anastomosis"
+     },
+     {
+      "id": "c",
+      "label": "Perform spatulated bilateral ureteroileal anastomoses with absorbable sutures"
+     },
+     {
+      "id": "d",
+      "label": "Bring distal ileal conduit through right lower quadrant abdominal wall"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Continent urinary diversions provide an internal catheterizable reservoir that avoids the necessity of an external appliance in highly selected patients.",
+   "tx": "A **continent urinary reservoir**, such as the **Indiana pouch** or **Miami pouch**, utilizes detubularized right colon or cecum with plicated terminal ileum to create a continent catheterizable pouch requiring **clean intermittent catheterization**, suitable for motivated patients with normal renal function.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bricker Ileal Conduit (Incontinent)",
+     "points": [
+      "Simple, rapid, low operative complication profile",
+      "Requires permanent external collecting appliance bag",
+      "Gold standard in irradiated, elderly, or compromised patients"
+     ]
+    },
+    "right": {
+     "title": "Continent Cutaneous Reservoir (Indiana / Miami)",
+     "points": [
+      "Detubularized cecal/ileal reservoir with flap valve continence",
+      "No external bag; managed with clean intermittent catheterization",
+      "Higher risk of metabolic acidosis, urinary calculi, and strictures"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Reconstructing the pelvic floor and obliterating the large empty pelvic dead space is critical to prevent bowel herniation and severe sepsis.",
+   "tx": "Successful **pelvic floor reconstruction** utilizes vascularized myocutaneous flaps including the **VRAM flap** (vertical rectus abdominis myocutaneous), **gracilis flap**, or **omental pedicle** to achieve **dead space obliteration**, reducing pelvic sepsis, small bowel evisceration, and chronic perineal sinus formation. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abdominal-pelvic-and-retroperitoneal-trauma-fig1.webp",
+    "ar": 1.7778,
+    "caption": "Retroperitoneal anatomy: compartments, tissue spaces, and boundaries. Credit: StewardMD.",
+    "alt": "Anatomical schematic showing deep pelvic spaces, levator ani planes, and pelvic sidewall structures."
+   }
+  }
+ ]
+}

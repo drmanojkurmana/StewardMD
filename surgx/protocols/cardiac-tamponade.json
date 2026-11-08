@@ -1,0 +1,64 @@
+{
+  "id": "cardiac-tamponade",
+  "title": "Cardiac tamponade after cardiac surgery and in trauma",
+  "subtitle": "Recognise it, open the chest early, avoid the induction trap",
+  "category": "thoracic",
+  "specialty": "cardiothoracic",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "eacts-arrest-2009", "org": "European Association for Cardio-Thoracic Surgery (EACTS)", "title": "Guideline for resuscitation in cardiac arrest after cardiac surgery", "year": 2009, "url": "https://pubmed.ncbi.nlm.nih.gov/19297185/", "accessed": "2026-11-04" },
+    { "id": "sts-arrest-2017", "org": "Society of Thoracic Surgeons (STS)", "title": "The STS Expert Consensus for the Resuscitation of Patients Who Arrest After Cardiac Surgery", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/28122680/", "accessed": "2026-11-04" },
+    { "id": "erc-2021-special", "org": "European Resuscitation Council (ERC)", "title": "European Resuscitation Council Guidelines 2021: Cardiac arrest in special circumstances", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/33773826/", "accessed": "2026-11-04" },
+    { "id": "esc-pericardial-2015", "org": "European Society of Cardiology (ESC)", "title": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/26320112/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "After cardiac surgery: falling cardiac output, rising filling pressures, rising inotrope need, falling urine output, and chest drain output that suddenly stops after being heavy." },
+      { "text": "Equalisation of filling pressures, pulsus paradoxus, or a narrowing pulse pressure in a patient after cardiac surgery." },
+      { "text": "Late tamponade days after surgery, often on anticoagulation, presenting as breathlessness, low output or hypotension. It may be localised clot, not a circumferential effusion." },
+      { "text": "Penetrating wound to the precordium or epigastrium with hypotension: tamponade until proven otherwise. Distended neck veins may be absent if hypovolaemic." },
+      { "text": "Pulseless electrical activity in any of these patients." }
+    ],
+    "do_now": [
+      { "text": "Arrest after cardiac surgery: in VF or pulseless VT, give up to three quick successive shocks before starting external compressions.", "timeCritical": true, "evidenceRef": "erc-2021-special" },
+      { "text": "Arrest after cardiac surgery that does not respond to initial measures: emergency resternotomy within about 5 minutes, by a team trained to do it.", "timeCritical": true, "evidenceRef": "eacts-arrest-2009" },
+      { "text": "Do not give routine full-dose adrenaline in arrest after cardiac surgery. It can cause severe rebound hypertension and bleeding once output returns.", "timeCritical": true, "evidenceRef": "sts-arrest-2017" },
+      { "text": "Traumatic tamponade in a peri-arrest patient: release the pericardium surgically by thoracotomy or sternotomy. Needle pericardiocentesis is a bridge at best because the blood is clotted.", "timeCritical": true, "evidenceRef": "erc-2021-special" }
+    ],
+    "assess": [
+      { "text": "Beck triad (hypotension, raised venous pressure, muffled heart sounds) is incomplete in most patients. Do not wait for all three." },
+      { "text": "After cardiac surgery, check drain patency, the trend in drain output, mixed venous saturation, and the response of pressure to fluid." },
+      { "text": "Pacing wires: check the pacing mode and capture in a bradycardic or asystolic arrest after cardiac surgery." },
+      { "text": "Trauma: wound location, eFAST pericardial view, and response to fluid." }
+    ],
+    "investigate": [
+      { "text": "Transthoracic echocardiography first; transoesophageal echocardiography after cardiac surgery when windows are poor or localised clot is suspected." },
+      { "text": "eFAST in trauma. A negative pericardial view with a large haemothorax can be falsely negative because blood decompresses into the pleura." },
+      { "text": "Chest radiograph for mediastinal widening and drain position; coagulation, platelets and fibrinogen after cardiac surgery." }
+    ],
+    "resuscitate": [
+      { "text": "Give volume to maintain preload while the definitive release is arranged. Avoid vasodilators and high intrathoracic pressures.", "evidenceRef": "esc-pericardial-2015" },
+      { "text": "Prepare and drape the chest before induction of anaesthesia for surgical drainage. Induction and positive pressure ventilation can cause collapse.", "evidenceRef": "esc-pericardial-2015" },
+      { "text": "After cardiac surgery, correct coagulopathy and treat bleeding per the unit protocol while preparing for re-exploration.", "evidenceRef": "sts-arrest-2017" }
+    ],
+    "definitive": [
+      { "text": "Tamponade after cardiac surgery: surgical re-exploration through the sternotomy, evacuation of clot and control of bleeding.", "evidenceRef": "eacts-arrest-2009" },
+      { "text": "Medical or late post-operative effusion with tamponade: echocardiography-guided pericardiocentesis, or surgical drainage when the fluid is clotted, localised or recurrent.", "evidenceRef": "esc-pericardial-2015" },
+      { "text": "Traumatic tamponade: pericardiotomy and repair of the cardiac wound via sternotomy, or left anterolateral or clamshell thoracotomy in the arrested patient.", "evidenceRef": "erc-2021-special" },
+      { "text": "Aortic dissection with haemopericardium: surgical repair. Pericardiocentesis risks further bleeding and is reserved for the patient who cannot otherwise reach theatre.", "evidenceRef": "esc-pericardial-2015" }
+    ],
+    "escalate": [
+      { "text": "Cardiac surgeon immediately for any suspected tamponade after cardiac surgery, day or night." },
+      { "text": "In trauma, the trauma surgeon and cardiothoracic surgeon together; transfer only when the pericardium is already decompressed or the patient is stable." },
+      { "text": "Cardiac anaesthetist for induction. This is one of the most dangerous inductions in medicine." }
+    ]
+  },
+  "notes": [
+    "After cardiac surgery a drain that suddenly stops is more often clotted than dry.",
+    "Tamponade is a diagnosis of physiology. Echo confirms it, but a dying patient after cardiac surgery is opened, not scanned.",
+    "In traumatic tamponade the blood is clot. A needle rarely removes enough of it, and a scalpel does."
+  ],
+  "calcs": ["map"]
+}

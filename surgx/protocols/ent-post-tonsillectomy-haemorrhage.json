@@ -1,0 +1,66 @@
+{
+  "id": "ent-post-tonsillectomy-haemorrhage",
+  "title": "Post-tonsillectomy haemorrhage",
+  "subtitle": "Every bleed is admitted; a child hides blood loss until late",
+  "category": "ent_emergency",
+  "specialty": "ent",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "aaohns-tonsil-2019", "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)", "title": "Clinical Practice Guideline: Tonsillectomy in Children (Update)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/30798778/", "accessed": "2026-11-04" },
+    { "id": "npta", "org": "Royal College of Surgeons of England and British Association of Otorhinolaryngologists", "title": "Key messages from the National Prospective Tonsillectomy Audit (Laryngoscope 2007)", "year": 2007, "url": "https://pubmed.ncbi.nlm.nih.gov/17415144/", "accessed": "2026-11-04" },
+    { "id": "pth-protocols-2026", "org": "International Journal of Pediatric Otorhinolaryngology", "title": "Tranexamic acid and beyond: a systematic review of pediatric post-tonsillectomy hemorrhage protocols and introduction of a universal management guideline (Casey et al.)", "year": 2026, "url": "https://pubmed.ncbi.nlm.nih.gov/42398383/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Any fresh blood from the mouth or nose after tonsillectomy, however small. A small 'herald' bleed often precedes a large one." },
+      { "text": "Frequent swallowing, especially in a sleeping child: the child is swallowing blood." },
+      { "text": "Vomiting of dark or altered blood. The stomach can hold a large volume before anyone sees it." },
+      { "text": "Tachycardia, pallor, cool peripheries or prolonged capillary refill in a child. Hypotension is a late, pre-arrest sign." },
+      { "text": "Clot sitting in the tonsil fossa: it is holding a bleeding vessel open and will bleed again." },
+      { "text": "Airway compromise from blood or clot, or a reduced conscious level." }
+    ],
+    "do_now": [
+      { "text": "Sit the patient up and forward, or lie a drowsy child on their side. Ask them to spit, not swallow. High-flow oxygen.", "timeCritical": true, "evidenceRef": "pth-protocols-2026" },
+      { "text": "Call the senior ENT surgeon and the senior anaesthetist now, for any active bleeding, not after the bloods return.", "timeCritical": true, "evidenceRef": "pth-protocols-2026" },
+      { "text": "Intravenous access (two cannulae if possible), full blood count, coagulation tests, and group and crossmatch.", "timeCritical": true, "evidenceRef": "pth-protocols-2026" },
+      { "text": "Nil by mouth from now, because the next step may be an anaesthetic with a stomach full of blood.", "evidenceRef": "pth-protocols-2026" }
+    ],
+    "assess": [
+      { "text": "Estimate the blood loss against the child's circulating volume, not the adult's. A few hundred millilitres is a large proportion of a small child's blood volume.", "calcs": ["ebv", "shock_index"] },
+      { "text": "Look in the mouth with a good light and suction: active bleeding, clot in the fossa, or a clean fossa with slough. Normal white slough is not infection." },
+      { "text": "Timing: primary haemorrhage within 24 hours is usually technical; secondary haemorrhage after 24 hours, typically days 5 to 10, is usually associated with infection or separation of slough." },
+      { "text": "Ask about poor oral intake, pain, fever and anticoagulant or antiplatelet use, and whether the operation used a hot technique." },
+      { "text": "Track the observations as a trend: heart rate, capillary refill and an early warning score every 15 minutes while bleeding.", "calcs": ["news2"] }
+    ],
+    "investigate": [
+      { "text": "Haemoglobin may be normal early in an acute bleed. Treat the clinical picture, not the first result." },
+      { "text": "Coagulation tests where there is a bleeding history, anticoagulant use, or a large or recurrent bleed." },
+      { "text": "No imaging is needed for a typical bleed. A massive or recurrent bleed in an unusual pattern may need CT angiography to look for vascular injury." }
+    ],
+    "resuscitate": [
+      { "text": "Fluid and blood resuscitation in proportion to the loss and the physiology, with early blood in a shocked child.", "evidenceRef": "pth-protocols-2026" },
+      { "text": "Intravenous tranexamic acid per local protocol: published protocols commonly include it for active bleeding.", "evidenceRef": "pth-protocols-2026" },
+      { "text": "Local measures in a cooperative patient who is not bleeding heavily: gentle removal of clot by suction, and topical vasoconstriction or hydrogen peroxide per local protocol, by an experienced clinician only.", "evidenceRef": "pth-protocols-2026" }
+    ],
+    "definitive": [
+      { "text": "Return to theatre for active bleeding not stopped by local measures, for a significant bleed with haemodynamic change, and for recurrent bleeding.", "timeCritical": true, "evidenceRef": "pth-protocols-2026" },
+      { "text": "The anaesthetic is high risk: full stomach of blood, blood in the airway, and hypovolaemia. Senior anaesthetist, rapid sequence induction, two suction devices, a range of tube sizes, and the surgeon scrubbed before induction.", "timeCritical": true, "evidenceRef": "pth-protocols-2026" },
+      { "text": "In theatre: identify the bleeding point, then control it with bipolar diathermy, ties or oversewing the pillars. Aspirate the stomach before waking the patient.", "evidenceRef": "pth-protocols-2026" },
+      { "text": "Admit every patient with a post-tonsillectomy bleed for observation, even if it has stopped by arrival, and treat with antibiotics per local protocol for a secondary bleed.", "evidenceRef": "pth-protocols-2026" },
+      { "text": "Record each haemorrhage and return to theatre for audit. The guideline recommends that surgeons know their own bleeding rates.", "evidenceRef": "aaohns-tonsil-2019" }
+    ],
+    "escalate": [
+      { "text": "Senior ENT and senior anaesthetist for every active bleed. Paediatric anaesthesia and paediatric critical care for a child with haemodynamic compromise." },
+      { "text": "Ligation of the external carotid artery or embolisation is a last resort for uncontrolled bleeding, needing senior and interventional radiology input." },
+      { "text": "Units without an on-site ENT surgeon need a local agreement for stabilisation and transfer. A child bleeding at night is not transferred without a senior escort and a secured airway if bleeding is active." }
+    ]
+  },
+  "notes": [
+    "The sentinel bleed is the warning. Clinicians who send home a child with a small bleed that has stopped are relying on luck.",
+    "A child compensates with heart rate and vasoconstriction until they suddenly do not. Capillary refill and heart rate trend are the vital signs here, not blood pressure.",
+    "The National Prospective Tonsillectomy Audit found higher haemorrhage rates with hot techniques than with cold steel. Know which technique was used."
+  ],
+  "calcs": ["ebv", "shock_index", "news2"]
+}

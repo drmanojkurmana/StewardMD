@@ -1,0 +1,177 @@
+{
+  "id": "lap-anterior-resection-tme",
+  "title": "Laparoscopic anterior resection with total mesorectal excision",
+  "subtitle": "Holy plane, nerve preservation, safe low anastomosis",
+  "system": "gastrointestinal",
+  "aliases": ["anterior resection", "low anterior resection", "LAR", "TME", "rectal cancer resection", "laparoscopic AR"],
+  "estMinutes": 240,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "heald-1982", "org": "British Journal of Surgery", "title": "The mesorectum in rectal cancer surgery: the clue to pelvic recurrence? (Heald RJ, Husband EM, Ryall RD)", "year": 1982, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Heald+mesorectum+in+rectal+cancer+surgery+clue+to+pelvic+recurrence", "accessed": "2026-11-04" },
+    { "id": "esmo-rectal", "org": "European Society for Medical Oncology (ESMO)", "title": "Rectal cancer: ESMO Clinical Practice Guidelines for diagnosis, treatment and follow-up (Glynne-Jones R et al., Ann Oncol)", "year": 2017, "url": "https://www.esmo.org/guidelines/guidelines-by-topic/gastrointestinal-cancers/rectal-cancer", "accessed": "2026-11-04" },
+    { "id": "ascrs-rectal", "org": "American Society of Colon and Rectal Surgeons (ASCRS)", "title": "The American Society of Colon and Rectal Surgeons Clinical Practice Guidelines for the Management of Rectal Cancer (You YN et al., Dis Colon Rectum)", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=American+Society+of+Colon+and+Rectal+Surgeons+Clinical+Practice+Guidelines+Management+of+Rectal+Cancer+2020", "accessed": "2026-11-04" },
+    { "id": "nice-ng151", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Colorectal cancer (NG151)", "year": 2020, "url": "https://www.nice.org.uk/guidance/ng151", "accessed": "2026-11-04" },
+    { "id": "eras-crc", "org": "ERAS Society", "title": "Guidelines for perioperative care in elective colorectal surgery: Enhanced Recovery After Surgery (ERAS) Society recommendations: 2018 (Gustafsson UO et al., World J Surg)", "year": 2019, "url": "https://erassociety.org/guidelines/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "rcri", "caprini", "apfel", "must", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Adenocarcinoma of the mid and low rectum where the MDT recommends resection with sphincter preservation, after neoadjuvant therapy when indicated by MRI staging.",
+      "Upper rectal cancer: anterior resection with partial (tumour-specific) mesorectal excision, dividing the mesorectum at right angles a sufficient distance below the tumour.",
+      "Selected large benign rectal neoplasms not removable endoscopically or by transanal excision.",
+      "Locally recurrent or advanced tumours are beyond this template: they need an extended (beyond-TME) resection planned in a specialist unit."
+    ],
+    "contraindications": [
+      "Tumour involving or threatening the anal sphincters or the levators, where sphincter preservation would compromise the margin: abdominoperineal excision is the operation.",
+      "MRI-predicted involvement of the mesorectal fascia that has not responded to neoadjuvant therapy, unless an extended resection is planned.",
+      "Poor sphincter function or a frail patient for whom a low anastomosis would give unacceptable function: consider a Hartmann's procedure or an intersphincteric resection with an end colostomy.",
+      "Laparoscopy specifically: inability to tolerate steep head-down pneumoperitoneum, or a bulky tumour in a narrow male pelvis beyond the team's experience."
+    ],
+    "preparation": [
+      "Complete colonoscopy to exclude synchronous lesions; rigid or flexible sigmoidoscopy by the operating surgeon to record the height of the tumour from the anal verge.",
+      "Pelvic MRI (tumour height, T stage, mesorectal fascia, extramural venous invasion, nodes) and CT chest, abdomen and pelvis; CEA.",
+      "Documented MDT decision including neoadjuvant treatment and the interval since it; re-staging MRI after neoadjuvant treatment.",
+      "Stoma siting by a stoma nurse for both a loop ileostomy (right) and a colostomy (left), and preoperative stoma education.",
+      "ERAS: prehabilitation, correction of anaemia, nutrition screening, carbohydrate loading where appropriate; bowel preparation per unit protocol.",
+      "Consent: anastomotic leak, defunctioning or permanent stoma, bleeding (including presacral), injury to the ureter, bladder, vagina, or small bowel, conversion to open, urinary and sexual dysfunction, low anterior resection syndrome (urgency, frequency, incontinence), wound and port complications, VTE, and death."
+    ],
+    "positioning": [
+      "Modified Lloyd-Davies with legs in padded stirrups, thighs nearly flat so they do not obstruct the instruments; buttocks just over the end of the table for transanal access.",
+      "Both arms tucked by the side, shoulders or a vacuum mattress to prevent sliding in steep Trendelenburg; test the tilt before draping.",
+      "Right side down and head down for the pelvic and medial dissection; head up and right side down for the splenic flexure.",
+      "Calf compression; check the common peroneal nerve at the stirrup and the calves for pressure (risk of compartment syndrome in long cases)."
+    ],
+    "equipment": [
+      "Laparoscopic stack, 30-degree scope, atraumatic bowel graspers, energy device, clips or vascular staplers.",
+      "Articulating laparoscopic linear stapler for rectal transection; circular stapler and anvil; transanal sizers.",
+      "Wound protector for the extraction site; rectal washout set and air leak test materials.",
+      "Open pelvic retractors, long instruments and a set for presacral bleeding (sutures, pledgets, haemostatic agents) immediately available.",
+      "Objective perfusion assessment (for example fluorescence angiography) where the unit has it."
+    ],
+    "anatomy": [
+      "The mesorectum is the fatty envelope of the rectum containing its lymphatics and vessels, wrapped by the mesorectal (visceral) fascia. The areolar 'holy plane' lies between it and the parietal (presacral) fascia.",
+      "Posteriorly the presacral venous plexus lies behind the parietal fascia; breaching that fascia (Waldeyer's) produces bleeding that can be life-threatening.",
+      "The superior hypogastric plexus lies on the aorta below the inferior mesenteric artery and divides into the hypogastric nerves, which run posterolaterally over the pelvic brim; the pelvic splanchnic nerves (S2 to S4) join them on the pelvic side walls to form the inferior hypogastric plexus.",
+      "Anteriorly, Denonvilliers' fascia separates the rectum from the seminal vesicles and prostate in men; in women the rectovaginal septum separates it from the vagina. The neurovascular bundles lie anterolaterally.",
+      "The left ureter crosses the iliac vessels at the pelvic brim just lateral to the sigmoid mesentery; the right ureter lies close to the right side of the dissection at the brim."
+    ],
+    "criticalSafety": [
+      "Identify the left ureter before dividing the inferior mesenteric pedicle.",
+      "Stay in the holy plane: inside it the specimen is intact and the nerves are safe; behind the presacral fascia lie the veins and nerves.",
+      "Complete the mesorectal dissection below the tumour before transection, and confirm the distal margin by digital or endoscopic examination.",
+      "Before the anastomosis: tension-free reach, no twist, good perfusion, vagina excluded from the stapler, complete doughnuts and a negative air leak test.",
+      "Decide on defunctioning deliberately and record the reasons."
+    ],
+    "structuresAtRisk": [
+      "Left and right ureters",
+      "Superior hypogastric plexus, hypogastric nerves and pelvic splanchnic nerves",
+      "Presacral venous plexus",
+      "Seminal vesicles, prostate and bladder; posterior vaginal wall",
+      "Spleen during flexure mobilisation",
+      "Iliac vessels at the pelvic brim"
+    ],
+    "commonErrors": [
+      "Coning in towards the rectum low in the pelvis, leaving mesorectum behind (a 'waist' in the specimen) and risking a positive circumferential margin.",
+      "Dissecting behind the presacral fascia posteriorly and tearing presacral veins.",
+      "Multiple stapler firings across the low rectum, which increases leak risk; plan the angle and the port so that one or two firings suffice.",
+      "An anastomosis under tension because the splenic flexure was not mobilised.",
+      "Failure to check the doughnuts and perform an air leak test."
+    ],
+    "complications": [
+      "Anastomotic leak, with pelvic sepsis; risk is higher with low anastomoses, male sex, prior radiotherapy and smoking.",
+      "Presacral haemorrhage.",
+      "Ureteric injury, bladder injury, rectovaginal fistula.",
+      "Urinary retention and sexual dysfunction from autonomic nerve injury.",
+      "Low anterior resection syndrome.",
+      "High-output ileostomy and dehydration; small bowel obstruction; port-site and parastomal hernia; VTE."
+    ],
+    "postop": [
+      "ERAS pathway: early oral intake, early mobilisation, opioid-sparing analgesia, early urinary catheter removal with a trial of void (retention is more common after pelvic dissection).",
+      "Daily review for leak: tachycardia, fever, pelvic pain, ileus, rising CRP or purulent rectal discharge; low threshold for CT with rectal contrast.",
+      "Ileostomy output monitoring and stoma nurse input; teach the patient to recognise dehydration.",
+      "Extended pharmacological thromboprophylaxis after major abdominal and pelvic cancer surgery per NICE.",
+      "MDT review of histology: TME grade, circumferential and distal margins, nodal count, tumour regression; plan for ileostomy reversal after a contrast study of the anastomosis."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the MDT decision, the MRI and the neoadjuvant record; both stoma sites marked; consent covers a defunctioning or permanent stoma and bladder and sexual dysfunction." },
+    { "ref": "step.core.timeout", "emphasis": "State the tumour height from the anal verge and the planned anastomotic level; confirm blood is available and the open pelvic set is in theatre." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Modified Lloyd-Davies, thighs nearly flat, arms tucked, patient secured for steep head-down and right tilt. Test the tilt before draping." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare the abdomen and the perineum; insert a urinary catheter. Rectal washout before transection per unit practice." },
+    { "ref": "step.lap.access" },
+    { "ref": "step.lap.ports", "emphasis": "Place the right iliac fossa port at the intended ileostomy site where possible, and angle the stapling port so the rectum can be divided in one or two firings." },
+    { "ref": "step.lap.survey", "emphasis": "Staging laparoscopy: liver, peritoneum and pelvis before committing. Pack the small bowel out of the pelvis into the upper abdomen." },
+    { "ref": "step.bowel.left-medial-to-lateral" },
+    { "ref": "step.bowel.ima-ligation", "emphasis": "For rectal cancer the vascular tie is oncological: high or low tie as planned, with the IMV divided at the pancreas for length." },
+    { "ref": "step.bowel.splenic-flexure", "emphasis": "Routinely mobilise for a low anastomosis; a tension-free reach is not negotiable." },
+    { "ref": "step.tme.posterior" },
+    { "ref": "step.tme.anterolateral" },
+    { "ref": "step.tme.transection" },
+    { "ref": "step.lap.specimen-retrieval", "emphasis": "Wound protector at the extraction site (often a Pfannenstiel or left iliac fossa incision). Divide the proximal colon extracorporeally at a well-perfused point." },
+    { "ref": "step.bowel.circular-anastomosis" },
+    { "ref": "step.bowel.leak-check", "emphasis": "Air leak test: fill the pelvis with saline, clamp the colon above the anastomosis, insufflate air transanally and watch for bubbles. A leak needs repair and usually a defunctioning stoma or a redo. Check the pelvis for bleeding at the same time." },
+    { "ref": "step.bowel.colorectal-bailout" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Photograph the specimen front and back and grade the mesorectum (complete, nearly complete, incomplete) before it goes; do not open it unless your pathologist asks." },
+    { "ref": "step.core.skin-closure", "emphasis": "Close the extraction site fascia and every 10 mm or larger port; mature the ileostomy last." },
+    { "ref": "step.core.debrief", "emphasis": "Record TME plane quality, doughnuts, air test, ureter seen, nerves preserved and the stoma decision with its reasons." }
+  ],
+  "steps_local": {
+    "step.tme.posterior": {
+      "id": "step.tme.posterior", "kind": "dissection", "critical": true,
+      "title": "Posterior mesorectal dissection in the holy plane",
+      "why": "The posterior plane is the easiest to find and the one that sets up the whole dissection. Inside it the specimen stays intact; behind it lie the hypogastric nerves and the presacral veins, whose bleeding can be life-threatening.",
+      "how": [
+        "Continue the medial plane down over the sacral promontory, lifting the rectum forwards and the mesorectum with it, so the areolar 'angel hair' tissue of the holy plane is put on stretch.",
+        "Identify the hypogastric nerves at the promontory and sweep them posterolaterally, keeping them on the pelvic side.",
+        "Divide the areolar tissue with diathermy or energy, sharply and under vision, following the curve of the sacrum down to the rectosacral (Waldeyer's) fascia and dividing it to reach the levators.",
+        "Keep the mesorectal fascia glistening and intact on the specimen side; if fat is seen on the specimen side, the plane has been entered too close."
+      ],
+      "structuresAtRisk": ["Hypogastric nerves", "Presacral venous plexus", "Mesorectal fascia (specimen integrity)"],
+      "pitfalls": [
+        "Blunt dissection with a hand or a peanut, which tears presacral veins and the mesorectum.",
+        "Following Waldeyer's fascia down behind the presacral fascia instead of dividing it.",
+        "Presacral bleeding treated with diathermy or deep sutures: apply direct pressure first, then use pressure with haemostatic agents, muscle-patch welding or sacral thumbtacks per experience, and pack if needed."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.tme.anterolateral": {
+      "id": "step.tme.anterolateral", "kind": "dissection", "critical": true,
+      "title": "Lateral and anterior mesorectal dissection",
+      "why": "The lateral and anterior planes are where the circumferential margin is most often lost and where the pelvic autonomic nerves and the neurovascular bundles are injured. The dissection follows the curve of the mesorectum rather than the line of least resistance.",
+      "how": [
+        "Develop the lateral planes from the posterior dissection, alternating sides, keeping the pelvic side-wall nerves (inferior hypogastric plexus) laterally and dividing the lateral ligaments close to the mesorectal fascia.",
+        "Incise the peritoneum anteriorly at the base of the rectovesical or rectouterine pouch.",
+        "In men, decide whether to dissect anterior to or behind Denonvilliers' fascia according to the tumour position: anterior tumours need the fascia taken with the specimen.",
+        "Retract the bladder or vagina forwards (a uterine suspension suture helps in women) and work down in short steps on all sides together to below the tumour."
+      ],
+      "structuresAtRisk": ["Neurovascular bundles anterolaterally", "Inferior hypogastric plexus and pelvic splanchnic nerves", "Seminal vesicles and prostate", "Posterior vaginal wall", "Ureters at the pelvic brim"],
+      "pitfalls": [
+        "Coning in laterally and leaving mesorectum behind.",
+        "Bleeding from the neurovascular bundles from dissecting too wide anterolaterally.",
+        "Diathermy injury to the posterior vaginal wall, which presents as a rectovaginal fistula."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.tme.transection": {
+      "id": "step.tme.transection", "kind": "resection", "critical": true,
+      "title": "Confirming the distal margin and transecting the rectum",
+      "why": "The distal margin and the number of stapler firings are both decided here. An inadequate margin risks recurrence; multiple crossing staple lines raise the leak rate; a stapler across the vagina creates a fistula.",
+      "how": [
+        "Confirm the lower edge of the tumour by digital rectal examination or endoscopy before clamping, and mark the level.",
+        "Low rectal cancer: complete the mesorectal dissection to the pelvic floor and divide the rectum with a clear distal mural margin as planned by the MDT. Upper rectal cancer: divide the mesorectum at right angles to the bowel at the planned distance below the tumour, without coning.",
+        "Apply a cross-clamp below the tumour and perform a rectal washout per unit policy before transection.",
+        "Divide with an articulating linear stapler, aiming for one or at most two firings, with the vagina and the bladder seen to be clear of the jaws."
+      ],
+      "structuresAtRisk": ["Posterior vaginal wall", "Bladder and prostate", "Distal margin"],
+      "pitfalls": [
+        "Transecting above the tumour's lower edge because it was assumed rather than checked.",
+        "Three or more overlapping firings with a cross-staple line.",
+        "Coning the mesorectal division in an upper rectal resection, leaving tumour-bearing mesorectum."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

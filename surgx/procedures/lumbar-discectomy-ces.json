@@ -1,0 +1,158 @@
+{
+  "id": "lumbar-discectomy-ces",
+  "title": "Lumbar decompression for cauda equina syndrome",
+  "subtitle": "Discectomy with laminotomy or laminectomy",
+  "system": "spine",
+  "aliases": ["emergency discectomy", "lumbar laminectomy", "CES decompression"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "sbns-bass", "org": "Society of British Neurological Surgeons (SBNS) and British Association of Spine Surgeons (BASS)", "title": "Standards of care for investigation and management of cauda equina syndrome", "year": 2018, "url": "https://www.sbns.org.uk/", "accessed": "2026-11-04" },
+    { "id": "girft-ces", "org": "Getting It Right First Time (GIRFT), NHS England", "title": "National suspected cauda equina syndrome (CES) pathway", "year": 2023, "url": "https://gettingitrightfirsttime.co.uk/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["caprini"],
+  "chapters": {
+    "indications": [
+      "Cauda equina syndrome with radiological compression of the cauda equina, most often a large central lumbar disc prolapse.",
+      "Both incomplete CES and CES with retention, as soon as possible after confirmation."
+    ],
+    "contraindications": [
+      "No compression on MRI. Look for another cause rather than operating.",
+      "Uncorrected coagulopathy: correct urgently in parallel.",
+      "Compression from tumour, infection or haematoma needs a different operative plan."
+    ],
+    "preparation": [
+      "MRI reviewed in theatre: level, side of the disc, canal size, and any sequestrated fragment.",
+      "Record the pre-operative neurological, saddle sensation and bladder status with the time.",
+      "Catheter in situ if in retention.",
+      "Consent should include dural tear and CSF leak, nerve root injury, failure to recover bladder, bowel or sexual function, infection, haematoma, recurrence and wrong level."
+    ],
+    "positioning": [
+      "Prone on a frame or bolsters that keep the abdomen free, to reduce epidural venous bleeding.",
+      "Pad the eyes, face, breasts, genitals and bony prominences; no pressure on the orbits.",
+      "Slight flexion opens the interlaminar window."
+    ],
+    "equipment": [
+      "Image intensifier for level check.",
+      "Kerrison rongeurs, pituitary rongeurs, nerve root retractor, dissectors.",
+      "Bipolar diathermy, haemostatic agents.",
+      "Microscope or loupes and headlight."
+    ],
+    "anatomy": [
+      "The cauda equina occupies the thecal sac below the conus, usually from L1 or L2.",
+      "A large central disc compresses the whole thecal sac. Room to retract the sac is limited, which is why a wider bony decompression is often needed.",
+      "The traversing root runs over the disc at its level and exits at the level below; the exiting root lies higher in the foramen.",
+      "Epidural veins bleed readily when the abdomen is compressed."
+    ],
+    "criticalSafety": [
+      "Confirm the level radiologically before incising and again before opening the canal.",
+      "Do not retract a tightly compressed thecal sac to reach the disc; create room by removing bone first.",
+      "Confirm free movement of the thecal sac and roots at the end."
+    ],
+    "structuresAtRisk": [
+      "Dura and thecal sac",
+      "Traversing and exiting nerve roots",
+      "Great vessels anterior to the disc if instruments pass through the anterior annulus",
+      "Pars interarticularis and facet joints if over-resected"
+    ],
+    "commonErrors": [
+      "Wrong-level surgery from inadequate imaging confirmation.",
+      "Forceful retraction of a compressed thecal sac.",
+      "Inserting pituitary rongeurs too deep through the anterior annulus.",
+      "Leaving a sequestrated fragment behind."
+    ],
+    "complications": [
+      "Persisting bladder, bowel or sexual dysfunction, or saddle anaesthesia.",
+      "Dural tear and CSF leak.",
+      "Nerve root injury.",
+      "Epidural haematoma causing recurrent compression.",
+      "Infection, discitis, recurrence and instability."
+    ],
+    "postop": [
+      "Document post-operative lower-limb, saddle and bladder function as a baseline.",
+      "Urgent MRI for new deficit or new retention: post-operative epidural haematoma must be excluded.",
+      "Trial without catheter and post-void residual scan; urology referral for persisting dysfunction.",
+      "Follow-up for bladder, bowel, sexual and psychological effects, with written information."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.neuro.preop-check", "emphasis": "The spinal level and side are read from the MRI aloud and matched to the mark." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Prone with the abdomen free; this reduces epidural venous bleeding more than any haemostatic agent." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.spine.level-check" },
+    { "ref": "step.spine.exposure" },
+    { "ref": "step.spine.decompress" },
+    { "ref": "step.spine.confirm" },
+    { "ref": "step.neuro.dural-repair", "emphasis": "Only if a durotomy has occurred; tell the ward team and record the plan." },
+    { "ref": "step.core.specimen", "emphasis": "Send disc material for histology if there is any suspicion of tumour or infection." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.neuro.postop-neuro-obs", "emphasis": "Include saddle sensation and bladder function in the baseline and the trigger." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.spine.level-check": {
+      "id": "step.spine.level-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Radiological level confirmation",
+      "why": "Wrong-level spinal surgery is a recognised never-event pattern. Counting from the sacrum on the image intensifier, before and after exposure, is the only reliable protection.",
+      "how": [
+        "Place a marker at the planned level and screen in the lateral view before incision.",
+        "Count from the sacrum, and account for transitional vertebrae seen on the MRI.",
+        "Re-check with an instrument on the lamina once exposed, before removing bone."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Relying on palpation of spinous processes alone."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spine.exposure": {
+      "id": "step.spine.exposure",
+      "kind": "access",
+      "title": "Midline exposure and laminotomy",
+      "why": "Adequate bony access creates space to reach the disc without retracting a compressed thecal sac.",
+      "how": [
+        "Midline incision over the level, subperiosteal dissection of the paraspinal muscles off the lamina.",
+        "Remove the inferior part of the upper lamina and the ligamentum flavum with Kerrison rongeurs.",
+        "Extend to a full laminectomy if the disc is large and central and the sac cannot be mobilised safely."
+      ],
+      "structuresAtRisk": ["Dura", "Pars interarticularis", "Facet joints"],
+      "pitfalls": ["Removing so much facet that the segment becomes unstable."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spine.decompress": {
+      "id": "step.spine.decompress",
+      "kind": "resection",
+      "critical": true,
+      "title": "Discectomy and decompression of the thecal sac",
+      "why": "This is the step that relieves the compression. It must be done without adding traction injury to roots already under pressure.",
+      "how": [
+        "Identify the thecal sac and the traversing root; retract gently only once there is room.",
+        "Coagulate epidural veins, incise the annulus, and remove the herniated disc and free fragments.",
+        "Keep pituitary rongeurs at a controlled depth within the disc space."
+      ],
+      "structuresAtRisk": ["Thecal sac", "Traversing nerve root", "Great vessels anterior to the disc"],
+      "pitfalls": ["Pushing instruments through the anterior annulus into the retroperitoneum."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spine.confirm": {
+      "id": "step.spine.confirm",
+      "kind": "checkpoint",
+      "title": "Confirming adequate decompression",
+      "why": "The operation is judged by the space left for the cauda equina. A retained fragment means a second operation and a worse outcome.",
+      "how": [
+        "Check that the thecal sac is slack and re-expands, and that the roots move freely.",
+        "Probe under the sac, into the foramen and up and down the canal for retained fragments.",
+        "Inspect the dura for any tear before closing."
+      ],
+      "structuresAtRisk": ["Thecal sac"],
+      "pitfalls": ["Stopping when the obvious fragment is out, leaving a migrated piece behind."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

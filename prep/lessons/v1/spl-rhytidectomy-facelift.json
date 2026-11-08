@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "spl-rhytidectomy-facelift",
+  "subject": "ss-plastic-surgery",
+  "title": "Rhytidectomy and Facial Rejuvenation",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Mitz and Peyronie defined the **superficial musculoaponeurotic system** or SMAS in 1976 as a continuous fibroaponeurotic network investing the mimetic muscles of the face. The SMAS is continuous superiorly with the temporoparietal fascia (galea) and inferiorly with the platysma muscle in the neck.",
+      "say": "Mitz and Peyronie gave facelifting its foundation in nineteen seventy-six when they described the SMAS, a continuous fibrous sheet wrapping the muscles of expression. It runs upward into the temple fascia and downward into the neck's platysma, so tightening it lifts the whole face rather than just the skin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Temporoparietal fascia (galea) above zygomatic arch"
+          },
+          {
+            "id": "b",
+            "label": "Superficial musculoaponeurotic system (SMAS) in the cheek"
+          },
+          {
+            "id": "c",
+            "label": "Platysma muscle extending into the neck"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "True osteocutaneous **facial retaining ligaments** anchor the overlying soft tissues and skin firmly to the facial skeleton. The zygomatic retaining ligament (McGregor patch) and mandibular retaining ligament must be surgically released during deep-plane or extended SMAS dissection to mobilize midfacial soft tissues.",
+      "say": "The face is tied down by true retaining ligaments running from bone to skin. The zygomatic ligament at the cheekbone and the mandibular ligament at the jaw must both be cut free during a deep-plane lift, because only released tissue can be moved upward.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ligament Type",
+          "Key Ligaments",
+          "Anatomical Fixation"
+        ],
+        "rows": [
+          [
+            "True (Osteocutaneous)",
+            "Zygomatic, Mandibular",
+            "Arise directly from bone into the dermis"
+          ],
+          [
+            "False (Fasciocutaneous)",
+            "Parotid-cutaneous, Masseteric",
+            "Arise from deep fascia into the dermis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Facelift surgical planes encompass subcutaneous skin-only undermining, SMAS plication or imbrication, and the **deep plane rhytidectomy**. Popularized by Hamra, deep plane rhytidectomy enters the avascular sub-SMAS plane, releasing the retaining ligaments and repositioning the composite malar fat pad, midface, and platysma.",
+      "say": "Facelifts range from skin-only tightening to the deep plane operation Hamra popularised. The deep plane travels beneath the SMAS in a bloodless layer, freeing the ligaments and carrying the cheek fat, midface and platysma upward as one composite block with no pull on the skin itself.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Subcutaneous Skin Lift",
+          "points": [
+            "Undermining limited to fat layer",
+            "High skin tension and wide scars",
+            "Prone to windswept deformity and early relapse"
+          ]
+        },
+        "right": {
+          "title": "Deep Plane Rhytidectomy",
+          "points": [
+            "Sub-SMAS composite flap elevation",
+            "Tension borne entirely by deep fascia",
+            "Natural durable midfacial restoration"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Anterior neck laxity and prominent platysma bands are addressed via a submental incision. An **anterior platysmaplasty** reapproximates the separated medial platysma borders using a midline corset suturing technique, combined with subplatysmal fat excision and partial transverse transection of platysma bands to deepen the cervicomental angle.",
+      "say": "Neck bands are fixed through a small cut under the chin. Anterior platysmaplasty sews the separated inner edges of the platysma together in a corset, trims the fat beneath, and nicks the bands across so the angle between chin and neck deepens into a youthful curve.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Submental incision and submental skin flap elevation"
+          },
+          {
+            "id": "b",
+            "label": "Conservative subplatysmal fat reduction"
+          },
+          {
+            "id": "c",
+            "label": "Midline corset platysmaplasty and lateral SMAS suspension"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **great auricular nerve** is the most commonly injured nerve during rhytidectomy, vulnerable as it crosses superficial to the sternocleidomastoid muscle. McKinney landmark locates the nerve 6.5 cm below the external auditory meatus at the midpoint of the muscle belly, requiring careful superficial dissection.",
+      "say": "The nerve most often hurt in a facelift is the great auricular, felt behind the ear. It crosses the surface of the sternocleidomastoid about six and a half centimetres below the ear canal at McKinney's point, exactly where the neck flap is raised, so dissect shallowly there.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-ins-metzenbaum-scissors.webp",
+        "alt": "Metzenbaum scissors for delicate postauricular nerve dissection",
+        "caption": "Surgical instruments for protecting the great auricular nerve over sternocleidomastoid. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Motor nerve branches of the facial nerve are safeguarded by adhering strictly to anatomical planes. The **frontal branch of the facial nerve** runs in the sub-temporoparietal fascia plane, crossing the zygomatic arch about 1.5 cm anterior to the tragus along the Pitanguy line, demanding dissection deep to the nerve on the deep temporal fascia.",
+      "say": "The brow's nerve needs equal respect. The frontal branch crosses the cheekbone about a centimetre and a half in front of the ear along Pitanguy's line, travelling just under the temple fascia, so above the arch the dissection must stay deep to the nerve on the deep temporal fascia or the eyebrow falls.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Nerve Branch",
+          "Vulnerable Anatomic Landmark",
+          "Protective Plane"
+        ],
+        "rows": [
+          [
+            "Frontal branch",
+            "Crosses zygoma on Pitanguy line",
+            "Deep to deep temporal fascia"
+          ],
+          [
+            "Marginal mandibular",
+            "Crosses facial vessels at mandible border",
+            "Deep to platysma and superficial layer of cervical fascia"
+          ],
+          [
+            "Buccal branches",
+            "Travel superficial to buccal fat pad",
+            "Protected under parotid-masseteric fascia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An expanding **major hematoma** represents the single most common early acute surgical complication of rhytidectomy, developing in 1% to 3% of operative cases and presenting with sudden severe pain, unilateral swelling, and dermal ecchymosis. Immediate bedside stitch removal and surgical evacuation are mandatory to prevent skin flap ischaemic necrosis.",
+      "say": "The commonest early disaster after a facelift is an expanding haematoma, striking one to three percent of cases. Sudden one-sided pain, swelling and bruising mean blood collecting under the flap: open stitches at the bedside and evacuate the clot, or the skin dies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Expanding Hematoma",
+          "points": [
+            "Sudden severe unilateral facial pain",
+            "Tense swelling and ecchymosis",
+            "Emergency bedside suture release"
+          ]
+        },
+        "right": {
+          "title": "Small Stable Seroma",
+          "points": [
+            "Painless soft fluctuant collection",
+            "Presents several days postoperatively",
+            "Managed with needle aspiration and compression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Perioperative blood pressure control is the single most critical factor in reducing post-rhytidectomy hematoma risk. Maintaining systolic blood pressure strictly under **140 mmHg** before induction, intraoperatively, and throughout the initial 48 hours postoperatively decreases haematoma occurrence by more than half.",
+      "say": "Blood pressure decides who bleeds. Keeping the systolic strictly below one hundred and forty before, during, and for two days after surgery more than halves the haematoma rate, which makes pressure control the single most important step in the whole operation.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-tub-closed-suction-drain.webp",
+        "alt": "Closed suction surgical drain in facial rejuvenation",
+        "caption": "Surgical drain placement to monitor post-rhytidectomy bleeding and dead space. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    }
+  ]
+}

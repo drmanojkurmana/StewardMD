@@ -1,0 +1,168 @@
+{
+  "id": "right-hemicolectomy",
+  "title": "Right hemicolectomy",
+  "subtitle": "Oncological lymphadenectomy and complete mesocolic excision principles",
+  "system": "gastrointestinal",
+  "aliases": ["right colectomy", "CME", "laparoscopic right hemicolectomy"],
+  "estMinutes": 180,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "hohenberger", "org": "Colorectal Disease", "title": "Standardized surgery for colonic cancer: complete mesocolic excision and central ligation, technical notes and outcome (Hohenberger W et al.)", "year": 2009, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Hohenberger+standardized+surgery+for+colonic+cancer+complete+mesocolic+excision+central+ligation", "accessed": "2026-11-04" },
+    { "id": "esmo-colon", "org": "European Society for Medical Oncology (ESMO)", "title": "Localised colon cancer: ESMO Clinical Practice Guidelines for diagnosis, treatment and follow-up (Argiles G et al., Ann Oncol)", "year": 2020, "url": "https://www.esmo.org/guidelines/guidelines-by-topic/gastrointestinal-cancers/early-stage-colon-cancer", "accessed": "2026-11-04" },
+    { "id": "nice-ng151", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Colorectal cancer (NG151)", "year": 2020, "url": "https://www.nice.org.uk/guidance/ng151", "accessed": "2026-11-04" },
+    { "id": "eras-crc", "org": "ERAS Society", "title": "Guidelines for perioperative care in elective colorectal surgery: Enhanced Recovery After Surgery (ERAS) Society recommendations: 2018 (Gustafsson UO et al., World J Surg)", "year": 2019, "url": "https://erassociety.org/guidelines/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "rcri", "caprini", "apfel", "must", "fong_crc"],
+  "chapters": {
+    "indications": [
+      "Adenocarcinoma of the caecum, ascending colon or hepatic flexure; extended right hemicolectomy for transverse colon tumours as planned by the MDT.",
+      "Appendiceal neoplasms that need a right hemicolectomy by histology or size.",
+      "Endoscopically unresectable polyps of the right colon.",
+      "Benign indications (Crohn's disease of the terminal ileum, caecal volvulus) use the same steps without the oncological lymphadenectomy."
+    ],
+    "contraindications": [
+      "Widespread unresectable metastatic disease in an asymptomatic primary, unless the MDT recommends resection.",
+      "A patient unfit for anaesthesia, for whom endoscopic or palliative options are safer.",
+      "Laparoscopy specifically: inability to tolerate pneumoperitoneum, or a locally advanced tumour invading duodenum or pancreas that needs an open en bloc resection."
+    ],
+    "preparation": [
+      "Complete colonoscopy (or CT colonography) to exclude a synchronous tumour; tattoo small lesions.",
+      "CT chest, abdomen and pelvis for staging, CEA, and MDT decision.",
+      "Correct iron-deficiency anaemia before surgery where time allows.",
+      "ERAS preparation: carbohydrate loading where appropriate, no routine prolonged fasting, prehabilitation and nutrition.",
+      "Consent: anastomotic leak, bleeding, ileus, injury to duodenum or ureter, conversion to open, stoma in selected circumstances, and VTE."
+    ],
+    "positioning": [
+      "Supine with arms tucked, or modified Lloyd-Davies if preferred; secure the patient for steep tilts.",
+      "Head-down and left side down for the medial-to-lateral dissection; head-up for the hepatic flexure.",
+      "Surgeon and assistant on the patient's left; monitor on the right."
+    ],
+    "equipment": [
+      "Laparoscopic stack, 30-degree scope, atraumatic bowel graspers, energy device, clips or vascular staplers.",
+      "Linear stapler for the anastomosis and transection, or materials for a handsewn anastomosis.",
+      "Wound protector for the extraction site.",
+      "Open set immediately available."
+    ],
+    "anatomy": [
+      "The right colon is supplied by the ileocolic artery, a right colic artery when present, and the right branch of the middle colic artery, all from the superior mesenteric artery.",
+      "The superior mesenteric vein lies to the right of the artery and is the central landmark for the high tie; the gastrocolic trunk of Henle drains into it at the inferior border of the pancreas and bleeds readily.",
+      "The mesocolon is an envelope with a fascial covering separated from the retroperitoneum by an embryological plane (Toldt's fascia). Dissecting in this plane keeps the lymphatics intact inside the specimen.",
+      "Posterior relations: the duodenum (second and third parts), the head of the pancreas, the right ureter and the gonadal vessels."
+    ],
+    "criticalSafety": [
+      "Stay in the embryological plane between the mesocolon and the retroperitoneum: below it lie the ureter, gonadal vessels and duodenum.",
+      "Identify the superior mesenteric vein before ligating the ileocolic vessels at their origin.",
+      "Ligate the right branch of the middle colic vessels for hepatic flexure tumours.",
+      "Before the anastomosis: confirm perfusion of both ends, orientation of the mesentery without twist, and tension-free apposition."
+    ],
+    "structuresAtRisk": [
+      "Duodenum and head of pancreas",
+      "Superior mesenteric vein and gastrocolic trunk of Henle",
+      "Right ureter and gonadal vessels",
+      "Middle colic vessels",
+      "Terminal ileum mesentery (anastomotic perfusion)"
+    ],
+    "commonErrors": [
+      "Dissecting behind Toldt's fascia, exposing the ureter and gonadal vessels, or in front of it, breaching the mesocolon.",
+      "Traction on the gastrocolic trunk of Henle, which tears and bleeds from the superior mesenteric vein.",
+      "Twisting the ileal mesentery when constructing the anastomosis.",
+      "A low ileocolic tie that leaves central nodes behind."
+    ],
+    "complications": [
+      "Anastomotic leak.",
+      "Bleeding, including from the superior mesenteric vein tributaries.",
+      "Prolonged ileus, more common after right than left colectomy.",
+      "Duodenal or ureteric injury.",
+      "Wound infection, extraction site hernia, and VTE."
+    ],
+    "postop": [
+      "ERAS pathway: early diet, mobilisation, opioid-sparing analgesia, early catheter removal.",
+      "Monitor for leak from day three: tachycardia, fever, rising CRP, pain out of proportion.",
+      "Consider extended thromboprophylaxis after major abdominal cancer surgery.",
+      "Discuss histology (stage, node count, margins, extramural venous invasion) at the MDT for adjuvant chemotherapy."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.onco.mdt-check", "emphasis": "Confirm the tumour site matches the tattoo and the colonoscopy report; a hepatic flexure tumour needs the middle colic right branch taken." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "The patient will be tilted steeply in two directions. Secure them and test the tilt before draping." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.lap.access" },
+    { "ref": "step.lap.ports" },
+    { "ref": "step.lap.survey", "emphasis": "Staging laparoscopy: inspect the liver and peritoneum for metastases before committing to the resection." },
+    { "ref": "step.onco.tumour-handling" },
+    { "ref": "step.rhc.medial-to-lateral" },
+    { "ref": "step.rhc.central-ligation" },
+    { "ref": "step.rhc.flexure" },
+    { "ref": "step.lap.specimen-retrieval", "emphasis": "Wound protector at the extraction site, every time, for a cancer specimen." },
+    { "ref": "step.abd.bowel-handling" },
+    { "ref": "step.rhc.anastomosis" },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "Mark the high tie with a suture so the pathologist can find the apical node." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.lap.closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.rhc.medial-to-lateral": {
+      "id": "step.rhc.medial-to-lateral", "kind": "dissection", "critical": true,
+      "title": "Medial-to-lateral mobilisation in the mesocolic plane",
+      "why": "Complete mesocolic excision depends on lifting an intact mesocolon off the retroperitoneum in the embryological plane. That keeps the lymphatic envelope intact and keeps the duodenum and ureter out of harm's way.",
+      "how": [
+        "Tent the ileocolic pedicle and incise the peritoneum beneath it.",
+        "Enter the plane between the mesocolon and Toldt's fascia, sweeping the retroperitoneum down and the mesocolon up.",
+        "Identify the duodenum and the head of the pancreas early and keep them below the plane.",
+        "Extend the dissection laterally and superiorly before dividing the lateral attachments."
+      ],
+      "structuresAtRisk": ["Duodenum", "Right ureter", "Gonadal vessels"],
+      "pitfalls": ["Entering the mesocolon and creating a defect in the specimen.", "Going too deep and lifting the ureter with the colon."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.rhc.central-ligation": {
+      "id": "step.rhc.central-ligation", "kind": "resection", "critical": true,
+      "title": "Central vascular ligation at the superior mesenteric vessels",
+      "why": "Central ligation removes the apical lymph nodes and increases the nodal yield that determines staging and adjuvant treatment. It is also where the most dangerous bleeding in this operation happens.",
+      "how": [
+        "Identify the superior mesenteric vein and follow the ileocolic vein to its junction.",
+        "Ligate the ileocolic artery and vein at their origins, and the right colic vessels when present.",
+        "For hepatic flexure tumours, divide the right branch of the middle colic vessels at its origin.",
+        "Handle the gastrocolic trunk of Henle gently; control bleeding with pressure before any clip near the superior mesenteric vein."
+      ],
+      "structuresAtRisk": ["Superior mesenteric vein and artery", "Gastrocolic trunk of Henle", "Middle colic vessels"],
+      "pitfalls": ["Clipping blindly at the superior mesenteric vein.", "A low tie on the ileocolic pedicle that leaves central nodes behind."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.rhc.flexure": {
+      "id": "step.rhc.flexure", "kind": "dissection",
+      "title": "Lateral attachments and hepatic flexure",
+      "why": "With the medial dissection complete, the lateral release is quick and safe. Doing it first loses the natural lateral traction that holds the colon in place for the medial approach.",
+      "how": [
+        "Divide the lateral peritoneal attachments along the white line from the caecum to the hepatic flexure.",
+        "Enter the lesser sac or divide the gastrocolic omentum to release the hepatic flexure, staying away from the duodenum.",
+        "Confirm the right colon and its mesentery are free and can be delivered to the extraction site."
+      ],
+      "structuresAtRisk": ["Duodenum", "Gallbladder", "Right kidney"],
+      "pitfalls": ["Traction tears of the hepatic flexure vessels or the gastrocolic trunk."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.rhc.anastomosis": {
+      "id": "step.rhc.anastomosis", "kind": "reconstruction", "critical": true,
+      "title": "Ileocolic anastomosis",
+      "why": "The anastomosis is the part of the operation that most often causes harm afterwards. Perfusion, orientation and tension are checked deliberately, not assumed.",
+      "how": [
+        "Divide the ileum and colon at well-perfused points with clear margins from the tumour.",
+        "Construct a stapled side-to-side or handsewn anastomosis, extracorporeally or intracorporeally per experience.",
+        "Check that the mesentery is not twisted and the bowel ends are pink and bleeding.",
+        "Close the mesenteric defect if that is the unit's practice, and record the anastomosis type in the operative note."
+      ],
+      "structuresAtRisk": ["Ileal and colonic blood supply"],
+      "pitfalls": ["A twisted ileal mesentery.", "Accepting dusky bowel ends to avoid further resection."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

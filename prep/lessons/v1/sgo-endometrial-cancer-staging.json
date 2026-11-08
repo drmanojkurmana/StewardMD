@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "sgo-endometrial-cancer-staging",
+ "title": "Endometrial Cancer FIGO 2023 Staging & Surgical Principles: Molecular Integration, Staging Laparoscopy and Omentectomy",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "FIGO Cancer Report 2023: Cancer of the Endometrium",
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 13",
+  "NCCN Clinical Practice Guidelines in Oncology: Uterine Neoplasms (Version 1.2024)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "The International Federation of Gynecology and Obstetrics unveiled an updated staging system for endometrial carcinoma in 2023 that bridges anatomical surgical findings with molecular genetics.",
+   "tx": "The revolutionary **FIGO 2023** staging system for endometrial carcinoma formally incorporates histological subtyping, tumor differentiation grade, presence of **substantial LVSI**, and genomic **molecular integration** directly into surgical stage categorization, refining prognostic discrimination and modern adjuvant treatment allocation for all patients.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-endometrial-cancer-fig1.webp",
+    "ar": 1.8349,
+    "caption": "Lynch syndrome screening pathway for endometrial carcinoma. Credit: StewardMD.",
+    "alt": "Flowchart showing IHC MMR screening, MLH1 hypermethylation testing, and germline sequencing."
+   }
+  },
+  {
+   "say": "In the 2023 FIGO staging classification, Stage I is partitioned into three distinct subcategories based on the depth of myometrial invasion and specific anatomical findings.",
+   "tx": "**Stage IA1** designates non-aggressive endometrioid tumors confined to the endometrium or a polyp. **Stage IA2** involves **myometrial invasion <50%** with absent or focal LVSI. **Stage IA3** encompasses **concurrent ovarian low-grade** endometrioid carcinomas that fulfill stringent criteria for dual independent primaries rather than metastatic spread.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "FIGO 2023 Substage",
+     "Anatomical Extent",
+     "Histological & Molecular Feature"
+    ],
+    "rows": [
+     [
+      "Stage IA1",
+      "Confined to endometrial mucosa or polyp",
+      "Non-aggressive histology, low-grade"
+     ],
+     [
+      "Stage IA2",
+      "Invasion of less than 50% myometrium",
+      "Non-aggressive histology, no/focal LVSI"
+     ],
+     [
+      "Stage IA3",
+      "Simultaneous uterus and ovarian lesion",
+      "Low-grade endometrioid meeting dual-primary criteria"
+     ],
+     [
+      "Stage IB",
+      "Invasion of 50% or more myometrium",
+      "Non-aggressive histology, no substantial LVSI"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Stage IB and Stage IC disease reflect deeper muscle infiltration and high-risk histological phenotypes that predict heightened risks of systemic dissemination.",
+   "tx": "**Stage IB** represents non-aggressive histological types demonstrating **myometrial invasion >=50%** without extensive vascular permeation. Conversely, **Stage IC** denotes **aggressive histological types** such as serous carcinoma, clear cell carcinoma, carcinosarcoma, or mesonephric-like adenocarcinomas confined entirely to the uterine corpus without extrauterine extension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stage IB (Deep Invasion Non-Aggressive)",
+     "points": [
+      "Myometrial invasion >= 50% of wall thickness",
+      "Low-grade endometrioid histological subtype",
+      "Absent or only focal lymphovascular space invasion"
+     ]
+    },
+    "right": {
+     "title": "Stage IC (Aggressive Histologies)",
+     "points": [
+      "Uterine serous carcinoma, clear cell, or carcinosarcoma",
+      "Confined to uterus regardless of depth of invasion",
+      "Carries high intrinsic risk of microscopic dissemination"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Cervical stromal extension and prominent lymphovascular invasion substantially elevate recurrence hazards and dictate upstaging to FIGO Stage II.",
+   "tx": "Under FIGO 2023, **Stage IIA cervical stroma** invasion is defined by macroscopic or microscopic glandular and stromal involvement. **Stage IIB substantial LVSI** recognizes unequivocal widespread vascular space invasion as a Stage II equivalent, while **Stage IIC aggressive myometrium** denotes aggressive histologies invading any degree of myometrium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage II Substage",
+     "Anatomical or Histological Criterion",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Stage IIA",
+      "Invasion of cervical stromal connective tissue",
+      "Increased pelvic recurrence; needs EBRT"
+     ],
+     [
+      "Stage IIB",
+      "Substantial lymphovascular space invasion (LVSI)",
+      "Equated to Stage II even if organ-confined"
+     ],
+     [
+      "Stage IIC",
+      "Aggressive histology with myometrial invasion",
+      "Upstaged due to high distant failure risk"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Regional lymphatic dissemination represents the most important prognostic factor in apparent early-stage endometrial cancer, subdividing into pelvic and para-aortic groups.",
+   "tx": "Lymph node metastasis is staged as Stage IIIC: **Stage IIIC1** denotes pelvic lymph node metastasis, whereas **Stage IIIC2** signifies para-aortic lymph node involvement. Pathological staging further differentiates nodal tumor burden into **micrometastasis (i)** measuring 0.2 to 2 mm and **macrometastasis (ii)** exceeding 2 mm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Perform sentinel lymph node mapping and ultrastaging"
+     },
+     {
+      "id": "b",
+      "label": "Isolated tumor cells (<=0.2 mm): Stage I/II (record as N0[i+])"
+     },
+     {
+      "id": "c",
+      "label": "Micrometastasis (>0.2 mm to <=2 mm): assign Stage IIIC1i or IIIC2i"
+     },
+     {
+      "id": "d",
+      "label": "Macrometastasis (>2 mm): assign Stage IIIC1ii or IIIC2ii"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Standard comprehensive surgical staging remains the cornerstone of initial endometrial cancer management for all medically operable candidates.",
+   "tx": "Comprehensive primary **surgical staging** comprises total extrafascial abdominal or laparoscopic **extrafascial hysterectomy**, bilateral salpingo-oophorectomy (**BSO**), peritoneal washings for cytology, and targeted bilateral nodal evaluation via fluorescent **sentinel lymph node mapping** using indocyanine green (ICG) to detect occult metastases. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Core Surgical Components",
+     "points": [
+      "Total extrafascial hysterectomy without morcellation",
+      "Bilateral salpingo-oophorectomy intact with specimens",
+      "Peritoneal washings obtained immediately upon entry"
+     ]
+    },
+    "right": {
+     "title": "Nodal Staging Protocol",
+     "points": [
+      "Bervical injection of indocyanine green (ICG)",
+      "Systematic identification of sentinel nodes bilaterally",
+      "Mandatory pathologic ultrastaging with cytokeratin IHC"
+     ]
+    }
+   }
+  },
+  {
+   "say": "The route of surgical access for endometrial cancer staging has shifted decisively toward minimally invasive approaches over the past two decades.",
+   "tx": "The definitive **minimally invasive staging** standard of care was established by the randomized **LAP2 trial** (GOG) and the international **LACE trial**. These prospective trials proved that laparoscopic or **robotic hysterectomy** achieves equivalent disease-free and overall survival compared to open laparotomy while dramatically lowering blood loss and wound complications.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Minimally Invasive Surgery (LAP2 & LACE Standard)",
+     "points": [
+      "Equivalent 5-year overall survival and recurrence rates",
+      "Significantly lower intraoperative blood loss and wound infections",
+      "Shorter hospital stays (1-2 days vs 4-6 days for laparotomy)"
+     ]
+    },
+    "right": {
+     "title": "Open Laparotomy",
+     "points": [
+      "Reserved for massive uteri, extensive adhesions, or peritoneal spread",
+      "Higher rate of wound dehiscence and postoperative incisional hernia",
+      "Longer post-operative recovery before adjuvant systemic therapy"
+     ]
+    }
+   }
+  },
+  {
+   "say": "In patients presenting with aggressive high-risk histological variants, surgical staging must include examination and removal of the greater omentum.",
+   "tx": "Routine infra-colic **omentectomy** is mandatory for aggressive histologies including uterine **serous carcinoma**, clear cell carcinoma, and uterine **carcinosarcoma**. These variants share ovarian-like peritoneal tropism, yielding a **15-20% occult omental disease** rate even in the absence of macroscopic peritoneal abnormality during surgical exploration.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-endometrial-cancer-gen1.webp",
+    "ar": 1.3393,
+    "caption": "Endometrial stripe measured against the four millimetre threshold. Illustration: StewardMD original.",
+    "alt": "Ultrasound view measuring endometrial stripe thickness with calipers indicating postmenopausal evaluation cut-off."
+   }
+  }
+ ]
+}

@@ -1,0 +1,161 @@
+{
+  "id": "hemithyroidectomy",
+  "title": "Hemithyroidectomy (thyroid lobectomy)",
+  "subtitle": "One lobe and the isthmus, with the nerve and parathyroids kept",
+  "system": "endocrine",
+  "aliases": ["thyroid lobectomy", "lobectomy", "hemithyroid", "diagnostic lobectomy"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "ata-2015", "org": "American Thyroid Association (ATA)", "title": "2015 American Thyroid Association management guidelines for adult patients with thyroid nodules and differentiated thyroid cancer (Haugen BR et al., Thyroid)", "year": 2016, "url": "https://www.thyroid.org/professionals/ata-professional-guidelines/", "accessed": "2026-11-04" },
+    { "id": "bethesda-2023", "org": "Thyroid (journal)", "title": "The 2023 Bethesda System for Reporting Thyroid Cytopathology (Ali SZ et al.)", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2023+Bethesda+System+for+Reporting+Thyroid+Cytopathology", "accessed": "2026-11-04" },
+    { "id": "inmsg-2011", "org": "International Neural Monitoring Study Group (INMSG)", "title": "Electrophysiologic recurrent laryngeal nerve monitoring during thyroid and parathyroid surgery: international standards guideline statement (Randolph GW et al., Laryngoscope)", "year": 2011, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Randolph+electrophysiologic+recurrent+laryngeal+nerve+monitoring+international+standards+guideline+statement", "accessed": "2026-11-04" },
+    { "id": "das-baets", "org": "Difficult Airway Society (DAS), British Association of Endocrine and Thyroid Surgeons (BAETS) and ENT UK", "title": "Management of haematoma after thyroid surgery: systematic review and multidisciplinary consensus guidelines (Iliff HA et al., Anaesthesia)", "year": 2022, "url": "https://das.uk.com/guidelines/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["stopbang", "caprini", "bmi"],
+  "chapters": {
+    "indications": [
+      "Indeterminate cytology (Bethesda III or IV) where diagnostic lobectomy is the agreed plan, with or without molecular testing.",
+      "Low-risk differentiated thyroid cancer confined to one lobe, where the MDT and the patient choose lobectomy over total thyroidectomy as the ATA 2015 guideline permits for selected tumours without extrathyroidal extension or nodal disease.",
+      "Unilateral nodule or nodular goitre causing compressive symptoms or cosmetic concern, or growing on serial ultrasound.",
+      "Solitary toxic adenoma when surgery is preferred to radioiodine.",
+      "Suspicious or malignant cytology (Bethesda V or VI) in a unifocal small tumour when lobectomy is the MDT decision."
+    ],
+    "contraindications": [
+      "Disease needing total thyroidectomy: bilateral cancer, nodal or distant metastases, extrathyroidal extension, medullary carcinoma, or a plan for radioiodine.",
+      "Uncontrolled thyrotoxicosis; render euthyroid first to avoid thyroid storm.",
+      "Suspected anaplastic carcinoma or lymphoma, where the diagnosis comes before any resection.",
+      "Unassessed vocal cord function in a patient with voice change or previous neck surgery."
+    ],
+    "preparation": [
+      "Ultrasound of the thyroid and both lateral neck compartments, with cytology reported in Bethesda categories.",
+      "Pre-operative laryngoscopy to document cord function, routine in many units and essential with voice change, previous neck surgery or a suspected invasive cancer.",
+      "Thyroid function tests; a toxic adenoma must be euthyroid on antithyroid drugs before surgery.",
+      "Discuss that histology may show a cancer needing completion thyroidectomy as a second operation.",
+      "Consent risks: voice change and recurrent laryngeal nerve injury (temporary or permanent), external branch of superior laryngeal nerve injury affecting pitch, haematoma with airway risk, wound infection and scar, need for thyroxine afterwards in some patients, and the possibility of completion thyroidectomy."
+    ],
+    "positioning": [
+      "Supine with a shoulder roll, neck extended on a head ring, slight reverse Trendelenburg to lower venous pressure.",
+      "Avoid hyperextension in cervical spondylosis or rheumatoid disease; agree the degree with the anaesthetist.",
+      "Arms tucked at the sides, with access to the monitoring tube connections."
+    ],
+    "equipment": [
+      "Nerve monitoring endotracheal tube and handheld stimulating probe, where available.",
+      "Fine bipolar diathermy, fine ligatures or clips; vessel-sealing device used only away from the nerve.",
+      "Loupe magnification if the surgeon uses it.",
+      "Haematoma kit to travel with the patient to recovery and the ward."
+    ],
+    "anatomy": [
+      "Each lobe is supplied by the superior thyroid artery (from the external carotid) and the inferior thyroid artery (from the thyrocervical trunk), and drained by superior, middle and inferior thyroid veins.",
+      "The recurrent laryngeal nerve runs in or near the tracheo-oesophageal groove, more obliquely on the right, and enters the larynx below the inferior constrictor close to the ligament of Berry, where it is most at risk.",
+      "A non-recurrent laryngeal nerve occurs rarely, almost always on the right with an aberrant right subclavian artery.",
+      "The external branch of the superior laryngeal nerve runs with the superior thyroid vessels to cricothyroid and is caught by mass ligation of the upper pole.",
+      "The superior parathyroid lies dorsal to the nerve near the cricothyroid junction; the inferior parathyroid is ventral to the nerve near the lower pole, in a more variable position.",
+      "The tubercle of Zuckerkandl, when present, points to the nerve lying just deep to it."
+    ],
+    "criticalSafety": [
+      "See the recurrent laryngeal nerve before dividing anything near its course; monitoring supplements identification, it does not replace it.",
+      "Ligate the superior pole vessels individually on the capsule to protect the external branch of the superior laryngeal nerve.",
+      "Keep both parathyroids on the operated side on their blood supply, and inspect the specimen for an inadvertently removed gland.",
+      "Divide the isthmus flush with the contralateral lobe without straying into the opposite tracheo-oesophageal groove.",
+      "Close the straps loosely and hand over the haematoma plan; a neck haematoma is an airway emergency."
+    ],
+    "structuresAtRisk": [
+      "Recurrent laryngeal nerve",
+      "External branch of the superior laryngeal nerve",
+      "Superior and inferior parathyroid glands",
+      "Trachea and oesophagus",
+      "Internal jugular vein and common carotid artery"
+    ],
+    "commonErrors": [
+      "Mass ligation of the superior pole.",
+      "Dividing tissue at the ligament of Berry before the nerve has been seen.",
+      "Leaving a substantial remnant at Berry's ligament in a cancer case, which complicates later completion or radioiodine.",
+      "Over-vigorous medial traction on the lobe, stretching the nerve.",
+      "Failing to warn the patient that a completion thyroidectomy may follow."
+    ],
+    "complications": [
+      "Neck haematoma with airway compromise, needing bedside release (SCOOP) and return to theatre.",
+      "Recurrent laryngeal nerve palsy, usually temporary; permanent palsy is uncommon.",
+      "Change in voice pitch and projection from external branch injury.",
+      "Hypothyroidism needing thyroxine in some patients after lobectomy.",
+      "Hypocalcaemia is uncommon after lobectomy alone because the contralateral glands are untouched.",
+      "Wound infection, seroma, hypertrophic or tethered scar."
+    ],
+    "postop": [
+      "Structured neck observations with a haematoma kit at the bedside; most units discharge the same or next day.",
+      "Voice check before discharge; laryngoscopy for voice change or after a loss of monitoring signal.",
+      "Thyroid function after surgery per local protocol to identify those who need thyroxine.",
+      "Histology to the thyroid MDT; completion thyroidectomy is ideally done early or after the tissues settle, per local practice.",
+      "Wound review and return advice: neck swelling, breathlessness or voice change mean urgent return."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side. Confirm the patient understands this is one lobe and that a second operation may follow histology." },
+    { "ref": "step.onco.mdt-check", "emphasis": "For a nodule, confirm the Bethesda category, the ultrasound of both lateral compartments and the laryngoscopy result. For a cancer, confirm the MDT chose lobectomy rather than total thyroidectomy." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "A clean neck operation: routine antibiotic prophylaxis is usually not needed. Follow local policy." },
+    { "ref": "step.core.positioning", "emphasis": "Shoulder roll and neck extension, then ask the anaesthetist to recheck the monitoring tube position." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.neck.collar-access" },
+    { "ref": "step.neck.ionm-setup" },
+    { "ref": "step.hemi.superior-pole" },
+    { "ref": "step.neck.parathyroid-recognition", "emphasis": "Here the aim is preservation: sweep both glands on the operated side laterally on their pedicles before the nerve dissection." },
+    { "ref": "step.neck.rln-identify" },
+    { "ref": "step.hemi.unexpected-findings" },
+    { "ref": "step.hemi.berry-isthmus" },
+    { "ref": "step.neck.ionm-final", "emphasis": "In a lobectomy there is no second side today, but a lost signal changes the voice plan and makes cord assessment essential before any completion surgery." },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "A suture on the superior pole is the usual minimum; mark the nodule of concern if more than one is present." },
+    { "ref": "step.core.haemostasis", "emphasis": "Valsalva or a raised pressure, and inspect the superior pole stump, the Berry's ligament area and the isthmus edge." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.neck.closure" },
+    { "ref": "step.neck.haematoma-handover" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.hemi.superior-pole": {
+      "id": "step.hemi.superior-pole", "kind": "dissection", "critical": true,
+      "title": "Superior pole: individual vessel ligation, external branch protected",
+      "why": "The external branch of the superior laryngeal nerve runs with or between the superior pole vessels. Mass ligation injures it, which reduces pitch and voice projection for life, a disaster for singers and teachers.",
+      "how": [
+        "Divide the middle thyroid vein first so the lobe can be rotated forwards and medially.",
+        "Retract the upper pole downwards and laterally to open the avascular space between the pole and cricothyroid (the sternothyroid-laryngeal triangle).",
+        "Look for the external branch on the inferior constrictor, or confirm it by stimulation (a cricothyroid twitch).",
+        "Ligate the superior thyroid artery and vein branches individually, close to the capsule, keeping the superior parathyroid posterior."
+      ],
+      "structuresAtRisk": ["External branch of the superior laryngeal nerve", "Superior parathyroid gland", "Superior thyroid artery"],
+      "pitfalls": ["Taking the whole pedicle in one bite away from the capsule.", "A slipped superior pedicle ligature retracting upwards, which then bleeds out of view."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hemi.unexpected-findings": {
+      "id": "step.hemi.unexpected-findings", "kind": "bailout", "critical": true,
+      "title": "Unexpected invasive tumour or nodal disease: stop extending, reassess",
+      "why": "A lobectomy is planned for low-risk disease. Finding a tumour invading the nerve, trachea or oesophagus, or obviously involved central nodes, changes the operation the patient needs. Improvising a radical resection without consent or preparation, or sacrificing a working nerve, causes harm that cannot be undone.",
+      "how": [
+        "If the tumour is adherent to a nerve that conducted normally on monitoring, shave the tumour off the nerve where possible rather than divide it; record any residual disease.",
+        "If the trachea, oesophagus or larynx is invaded, stop, call a senior colleague, and do not proceed with an unplanned aerodigestive resection.",
+        "If central nodes are obviously involved, take frozen section or clear the ipsilateral central compartment only if this was consented and the team has the expertise; otherwise finish the lobectomy and return to the MDT.",
+        "Document the findings exactly and tell the patient after recovery."
+      ],
+      "structuresAtRisk": ["Recurrent laryngeal nerve", "Trachea", "Oesophagus", "Central compartment parathyroids"],
+      "pitfalls": ["Dividing a functioning recurrent laryngeal nerve to achieve a clear margin.", "Converting to total thyroidectomy without consent or monitoring data from the first side."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hemi.berry-isthmus": {
+      "id": "step.hemi.berry-isthmus", "kind": "resection", "critical": true,
+      "title": "Ligament of Berry, isthmus division and lobe removal",
+      "why": "The nerve is closest to the gland at the ligament of Berry, and small vessels here bleed. Most nerve injuries happen at this point, so it is done slowly with the nerve in view. The isthmus is then divided cleanly at the contralateral lobe so that any completion operation starts in untouched tissue.",
+      "how": [
+        "With the nerve in view, divide the ligament of Berry in small bites with fine instruments, close to the gland.",
+        "Control bleeding here with pressure or fine bipolar under vision, not with blind clips or monopolar diathermy.",
+        "Lift the lobe off the trachea towards the midline, take the pyramidal lobe with the specimen if present, and divide the isthmus flush with the contralateral lobe.",
+        "Oversew or seal the cut edge of the remaining lobe for haemostasis, staying anterior to the trachea and away from the contralateral groove."
+      ],
+      "structuresAtRisk": ["Recurrent laryngeal nerve at its laryngeal entry", "Trachea", "Contralateral recurrent laryngeal nerve if the isthmus dissection strays"],
+      "pitfalls": ["Chasing bleeding at Berry's ligament with diathermy.", "Leaving thyroid tissue at Berry's ligament in a cancer case.", "Tracheal injury from an energy device on the isthmus."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

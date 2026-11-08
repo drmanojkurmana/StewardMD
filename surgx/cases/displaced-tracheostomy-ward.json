@@ -1,0 +1,97 @@
+{
+  "id": "displaced-tracheostomy-ward",
+  "title": "The tracheostomy that moved",
+  "subtitle": "Displaced tracheostomy on the ward",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "ent-stridor-airway",
+  "procedureRef": "surgical-tracheostomy",
+  "sources": [
+    { "id": "ntsp-2012", "org": "National Tracheostomy Safety Project (NTSP)", "title": "Multidisciplinary guidelines for the management of tracheostomy and laryngectomy airway emergencies (Anaesthesia 2012)", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/22731935/", "accessed": "2026-11-04" },
+    { "id": "ncepod-2014", "org": "National Confidential Enquiry into Patient Outcome and Death (NCEPOD)", "title": "On the right Trach? A review of the care received by patients who underwent a tracheostomy", "year": 2014, "url": "https://www.ncepod.org.uk/2014tc.html", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 64-year-old man is on the head and neck ward five days after an open surgical tracheostomy, performed for prolonged ventilation after a stroke. He was stepped down from intensive care yesterday, breathing spontaneously through a cuffed tracheostomy tube with humidified oxygen. At 2am the nurse calls you urgently: after being turned he became agitated and distressed, his saturation is falling, and 'the tube looks like it is sticking out more than before'. The bedhead sign says he has a tracheostomy with a patent upper airway.",
+  "vitals": { "HR": "122", "BP": "168/94", "RR": "34", "SpO2": "84% on 40% via trach mask", "EtCO2": "No trace available" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "You arrive at the bedside. What do you do first?",
+      "hint": "The NTSP algorithm starts with two things at once.",
+      "options": [
+        { "id": "a", "text": "Call for airway help (anaesthetist and ENT) and apply high-flow oxygen to both the face and the tracheostomy", "correct": true, "feedback": "Correct. Help is summoned at once, and oxygen is applied to both routes because you do not yet know which one is working." },
+        { "id": "b", "text": "Pull the tube out and push in a new one of the same size", "correct": false, "feedback": "A blind re-insertion into a five-day-old tract can easily create a false passage in front of the trachea. The algorithm assesses patency first." },
+        { "id": "c", "text": "Give a sedative to settle his agitation", "correct": false, "feedback": "Agitation here is hypoxia. Sedating a patient with a failing airway removes his remaining respiratory drive." },
+        { "id": "d", "text": "Request an urgent chest X-ray", "correct": false, "feedback": "A chest X-ray does not answer the airway question and wastes the minutes you have." }
+      ],
+      "why": "Displacement and blockage are the commonest tracheostomy emergencies and are often fatal when managed without a structured approach. Calling for help early and oxygenating via the face and the stoma together covers both possibilities: a blocked or displaced tube, and a patent upper airway.",
+      "missedRedFlags": ["No capnography trace on a patient with a tracheostomy", "Agitation attributed to confusion rather than hypoxia"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "Help is on the way. Oxygen is on the face and the tracheostomy. He is not improving. What is the next step at the tracheostomy?",
+      "hint": "Remove anything that could be blocking the tube, then test the lumen.",
+      "options": [
+        { "id": "a", "text": "Remove the speaking valve or cap if present, remove the inner tube, and try to pass a suction catheter", "correct": true, "feedback": "Correct. Many apparent displacements are blocked inner tubes. If a suction catheter passes easily, the tube is in the trachea." },
+        { "id": "b", "text": "Inflate the cuff further to seal the airway", "correct": false, "feedback": "If the tube is displaced, inflating the cuff in the pretracheal tissue makes things worse. Patency is tested first." },
+        { "id": "c", "text": "Bag-ventilate hard through the tracheostomy", "correct": false, "feedback": "Forcing gas through a displaced tube causes surgical emphysema and makes subsequent intubation harder. Confirm patency first." },
+        { "id": "d", "text": "Wait for the anaesthetist before touching anything", "correct": false, "feedback": "Calling for help is right; doing nothing while waiting is not. These first steps are for any trained ward clinician." }
+      ],
+      "why": "The NTSP algorithm tests tube patency before anything is pushed or blown down it. Removing the inner tube clears most blockages. A suction catheter that passes freely means the tube is in the airway; one that will not pass means the tube is blocked or displaced.",
+      "stepRef": "step.trach.confirm"
+    },
+    {
+      "id": "dp3", "phase": "decide",
+      "prompt": "The suction catheter will not pass beyond a few centimetres. There is still no capnography trace. You deflate the cuff and he does not improve. What now?",
+      "hint": "The tube is not in the trachea and is now obstructing the stoma.",
+      "options": [
+        { "id": "a", "text": "Remove the tracheostomy tube, then reassess breathing at the mouth and the stoma", "correct": true, "feedback": "Correct. A displaced tube is an obstruction. Removing it lets the patient breathe through the stoma or upper airway, and allows oxygenation by other routes." },
+        { "id": "b", "text": "Leave the tube in because removing it might make things worse", "correct": false, "feedback": "A displaced tube in the pretracheal tissues obstructs both routes. The patient is deteriorating with it in." },
+        { "id": "c", "text": "Push the tube in harder", "correct": false, "feedback": "Forcing a displaced tube into an immature tract creates a false passage and can cause bleeding or pneumothorax." },
+        { "id": "d", "text": "Increase the oxygen to the tracheostomy mask", "correct": false, "feedback": "Oxygen delivered through a displaced tube goes nowhere useful." }
+      ],
+      "why": "If the catheter does not pass and deflating the cuff does not help, the algorithm removes the tube. The patient may then breathe spontaneously through the stoma or the upper airway, and the team can oxygenate by the routes that are open.",
+      "missedRedFlags": ["Persisting with a displaced tube while the saturation falls"]
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "The tube is out. He is making respiratory efforts but saturation is 78 per cent. His bedhead sign confirms a patent upper airway. How do you oxygenate him?",
+      "hint": "He is not a laryngectomy patient. Which routes are open?",
+      "options": [
+        { "id": "a", "text": "Oxygenate from above with a bag-valve-mask and airway adjuncts while an assistant occludes the stoma, or apply a small face mask or laryngeal mask to the stoma", "correct": true, "feedback": "Correct. With a patent upper airway, standard oral techniques work if the stoma is covered. Oxygenation via the stoma is the alternative." },
+        { "id": "b", "text": "Oxygenate only via the stoma; the mouth is no longer connected to the lungs", "correct": false, "feedback": "That is true for a laryngectomy patient, not for him. The bedhead sign tells you which applies." },
+        { "id": "c", "text": "Blindly insert a new tracheostomy tube of the same size through the stoma", "correct": false, "feedback": "Blind re-insertion through a five-day-old tract risks a false passage. Oxygenate first; definitive re-intubation is done by an expert, ideally with a fibreoptic scope." },
+        { "id": "d", "text": "Start chest compressions", "correct": false, "feedback": "He has a pulse and is making respiratory efforts. Oxygenation is the problem to solve; start CPR only if there is no pulse." }
+      ],
+      "why": "The bedhead sign answers the most important question: is the upper airway connected to the lungs? For a tracheostomy with a patent upper airway, primary emergency oxygenation can be via the mouth with the stoma occluded, or via the stoma. A laryngectomy patient can only be oxygenated via the stoma.",
+      "missedRedFlags": ["Not checking the bedhead sign before choosing the oxygenation route"],
+      "levels": ["resident", "surgeon"]
+    },
+    {
+      "id": "dp5", "phase": "operate",
+      "prompt": "The anaesthetist arrives. Saturation is 90 per cent with bag-mask ventilation and the stoma covered. How should the airway be secured?",
+      "hint": "The tract is only five days old.",
+      "options": [
+        { "id": "a", "text": "Oral intubation by the anaesthetist with an uncut tube advanced beyond the stoma, or intubation of the stoma by an expert using a small tube over a fibreoptic scope or bougie", "correct": true, "feedback": "Correct. These are the NTSP secondary oxygenation techniques. Placement is confirmed by capnography." },
+        { "id": "b", "text": "Re-insert a new tracheostomy tube blindly through the stoma without any guide", "correct": false, "feedback": "An immature tract collapses and a blind tube can easily pass in front of the trachea. Use a guide and confirm with capnography." },
+        { "id": "c", "text": "Continue bag-mask ventilation until the morning list", "correct": false, "feedback": "Bag-mask ventilation is a bridge, not a plan. Secure the airway now while he is oxygenating." },
+        { "id": "d", "text": "Perform a cricothyroidotomy", "correct": false, "feedback": "He has an open stoma and a patent upper airway, and he is oxygenating. Front-of-neck access is for cannot intubate, cannot oxygenate." }
+      ],
+      "why": "Once oxygenation is restored, the airway is secured by the most experienced person available: oral intubation with the tube advanced beyond the stoma, or careful intubation of the stoma using a fibreoptic scope or bougie. Every new airway is confirmed by waveform capnography.",
+      "levels": ["resident", "surgeon"]
+    },
+    {
+      "id": "dp6", "phase": "postop",
+      "prompt": "He is stabilised with a new tracheostomy confirmed by capnography. What should the team learn from this?",
+      "hint": "NCEPOD found the same problems repeatedly.",
+      "options": [
+        { "id": "a", "text": "Check the bedhead sign, emergency equipment, capnography availability, tie security and staff training on this ward, and report the incident", "correct": true, "feedback": "Correct. Displacement during turning is predictable and preventable, and the response depends on equipment and training being in place before the event." },
+        { "id": "b", "text": "Nothing: displacement is an unavoidable complication", "correct": false, "feedback": "National reviews have found that many displacements and their consequences were avoidable." },
+        { "id": "c", "text": "Move all tracheostomy patients back to intensive care", "correct": false, "feedback": "Many patients are safely cared for on wards. The answer is a ward that is equipped and trained, not the absence of wards." },
+        { "id": "d", "text": "Blame the nurse who turned the patient", "correct": false, "feedback": "This is a system issue. The ties, the turning technique and the ward's preparation are what need review." }
+      ],
+      "why": "Tracheostomy displacement is a recurring cause of avoidable harm. Bedhead signs, spare tubes, capnography, secure ties, care when moving the patient, and staff who know the emergency algorithm are the system defences. The incident is reported and reviewed so the next patient benefits.",
+      "missedRedFlags": ["No capnography available on a ward caring for tracheostomy patients"]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "id": "burr-hole-csdh",
+  "title": "Burr hole evacuation of chronic subdural haematoma",
+  "subtitle": "Wash out, drain, prevent recurrence",
+  "system": "neurological",
+  "aliases": ["burr hole drainage", "CSDH evacuation", "chronic subdural washout"],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "santarius", "org": "Santarius T et al, The Lancet", "title": "Use of drains versus no drains after burr-hole evacuation of chronic subdural haematoma: a randomised controlled trial (Lancet 2009;374:1067-73)", "year": 2009, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Santarius+2009+drains+versus+no+drains+chronic+subdural+haematoma+Lancet", "accessed": "2026-11-04" },
+    { "id": "dex-csdh", "org": "Hutchinson PJ et al, N Engl J Med (Dex-CSDH)", "title": "Trial of dexamethasone for chronic subdural hematoma (N Engl J Med 2020;383:2616-27)", "year": 2020, "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa2020473", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["gcs", "mrs"],
+  "chapters": {
+    "indications": [
+      "Symptomatic chronic subdural haematoma: headache, confusion, gait disturbance, limb weakness, dysphasia or falling GCS, with a hypodense or mixed-density collection on CT.",
+      "Collection with mass effect causing neurological deficit.",
+      "Recurrent collection after previous drainage when symptoms return."
+    ],
+    "contraindications": [
+      "Uncorrected coagulopathy or thrombocytopenia: correct first unless the patient is deteriorating rapidly.",
+      "A small asymptomatic collection, which can be observed.",
+      "An acute, hyperdense, clotted subdural, which usually needs a craniotomy rather than burr holes."
+    ],
+    "preparation": [
+      "CT within the admission; review the side, the thickest point, membranes and any acute component.",
+      "Stop or reverse anticoagulants and antiplatelets per local protocol, and document the plan for restarting.",
+      "Do not give routine dexamethasone: in the Dex-CSDH trial it led to fewer favourable outcomes than placebo.",
+      "Consent should include recurrence, seizures, infection, acute haemorrhage, stroke, pneumocephalus and the need for further surgery."
+    ],
+    "positioning": [
+      "Supine with a sandbag under the shoulder and the head turned to the opposite side, on a horseshoe or head ring.",
+      "Keep the head slightly up to reduce venous congestion, without kinking the neck.",
+      "Local anaesthesia with sedation is an option for frail patients; general anaesthesia otherwise."
+    ],
+    "equipment": [
+      "Cranial perforator and burrs, bone wax, bipolar diathermy.",
+      "Soft subdural or subgaleal drain with a closed drainage bag.",
+      "Warmed irrigation fluid and a soft catheter for irrigation."
+    ],
+    "anatomy": [
+      "The chronic subdural lies between the dura and the arachnoid, contained by an outer and an inner membrane formed by the body's attempt to absorb it.",
+      "Bridging veins cross the subdural space from cortex to the venous sinuses. Brain atrophy stretches them, which is why older patients and those on antithrombotics are at risk.",
+      "Typical burr hole sites are parietal over the parietal eminence and frontal anterior to the coronal suture, adjusted to the collection on CT.",
+      "The middle meningeal artery runs under the pterion and is the vessel targeted by embolisation as an adjunct in recurrent cases."
+    ],
+    "criticalSafety": [
+      "Confirm the side from the scan in theatre. Bilateral collections need a decision about which side, or both.",
+      "Do not breach the inner membrane or the arachnoid. The cortex lies directly beneath.",
+      "Place the drain gently along the inner surface of the dura, not into the brain."
+    ],
+    "structuresAtRisk": [
+      "Cortex beneath the inner membrane",
+      "Bridging veins and cortical veins",
+      "Superior sagittal sinus with a frontal burr hole placed too medially",
+      "Middle meningeal artery near the pterion"
+    ],
+    "commonErrors": [
+      "Placing the burr hole on the wrong side because a bilateral or isodense collection was misread.",
+      "Aggressive suction or catheter passage that injures the cortex.",
+      "Not placing a drain, which was associated with substantially higher recurrence in trial evidence.",
+      "Mobilising the patient too early with an open drain, causing pneumocephalus or overdrainage."
+    ],
+    "complications": [
+      "Recurrence requiring further surgery.",
+      "Acute subdural or intracerebral haemorrhage, and seizures.",
+      "Tension pneumocephalus.",
+      "Wound or subdural infection.",
+      "Post-operative confusion and medical complications in a frail population."
+    ],
+    "postop": [
+      "Neurological observations with a written trigger for CT.",
+      "Drain left in for a defined period per local practice, usually about 48 hours, and removed when output falls.",
+      "Restart antithrombotics on an agreed date balanced against the indication.",
+      "Early mobilisation after drain removal, with falls assessment and outpatient follow-up."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.neuro.preop-check", "emphasis": "Check for bilateral collections and confirm which side is being drained." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Head turned with the burr hole site uppermost; avoid neck kinking, which raises venous pressure." },
+    { "ref": "step.neuro.cranial-landmarks", "emphasis": "Plan the burr holes over the thickest part of the collection, avoiding the midline." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.neuro.burr-hole" },
+    { "ref": "step.neuro.dura-open", "emphasis": "Open the dura and the outer membrane; dark motor-oil fluid under pressure confirms the diagnosis." },
+    { "ref": "step.csdh.irrigation" },
+    { "ref": "step.neuro.drain-tunnel", "emphasis": "A subdural or subgaleal drain reduces recurrence. Keep the bag below head level, per local practice." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.neuro.postop-neuro-obs" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.csdh.irrigation": {
+      "id": "step.csdh.irrigation",
+      "kind": "resection",
+      "critical": true,
+      "title": "Irrigation of the subdural space",
+      "why": "Washing out the liquefied haematoma removes the fluid and the inflammatory mediators that drive re-accumulation, while warm irrigation reduces the risk of new bleeding.",
+      "how": [
+        "Irrigate gently with warmed fluid through the burr hole, using a soft catheter directed along the inner surface of the dura.",
+        "Continue until the return is clear or nearly clear.",
+        "Fill the subdural space with fluid before closing to reduce trapped air."
+      ],
+      "structuresAtRisk": ["Cortex", "Bridging veins"],
+      "pitfalls": [
+        "Directing the catheter towards the brain rather than along the dura.",
+        "High-pressure irrigation that tears membranes or veins."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

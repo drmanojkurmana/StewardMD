@@ -1,0 +1,155 @@
+{
+  "id": "loop-ileostomy",
+  "title": "Loop ileostomy: formation and closure",
+  "subtitle": "Defunctioning stoma and its reversal",
+  "system": "gastrointestinal",
+  "aliases": ["defunctioning ileostomy", "diverting ileostomy", "ileostomy reversal", "closure of loop ileostomy"],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "ascrs-ostomy-2022", "org": "American Society of Colon and Rectal Surgeons (ASCRS)", "title": "Clinical Practice Guidelines for Ostomy Surgery", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/35616386/", "accessed": "2026-11-04" },
+    { "id": "eras-colorectal-2018", "org": "ERAS Society", "title": "Guidelines for Perioperative Care in Elective Colorectal Surgery: ERAS Society Recommendations 2018", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/30426190/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["caprini", "must", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Formation: to defunction a low colorectal or coloanal anastomosis, a pouch, or a high-risk anastomosis, and as diversion for complex perianal sepsis or distal obstruction when resection is not appropriate.",
+      "Formation: as part of the management of a small, contained anastomotic leak in a stable patient, together with drainage.",
+      "Closure: once the distal anastomosis has healed on contrast study or endoscopy and the patient has recovered from the index operation and any adjuvant treatment."
+    ],
+    "contraindications": [
+      "Formation: a patient in septic shock with generalised faecal peritonitis, in whom diversion alone does not control the source.",
+      "Closure: an unhealed or strictured distal anastomosis, a persistent sinus or fistula, or a patient still recovering from chemotherapy.",
+      "Closure: poor anorectal function with incontinence, where a permanent stoma may give the better quality of life; discuss before reversing."
+    ],
+    "preparation": [
+      "Formation: stoma siting with a stoma nurse before the index operation, usually in the right iliac fossa.",
+      "Formation: counsel about high output, dehydration and acute kidney injury, which are the commonest reasons for readmission.",
+      "Closure: confirm distal integrity with a contrast enema or endoscopy, and review any histology or oncology plan.",
+      "Closure: digital rectal examination of a low anastomosis to exclude stricture.",
+      "Both: antibiotic prophylaxis, thromboprophylaxis, and consent including leak, ileus, wound infection and incisional hernia at the old stoma site."
+    ],
+    "positioning": [
+      "Supine, or modified Lloyd-Davies when the ileostomy is formed as part of a pelvic operation.",
+      "Arms out; the right side of the abdomen fully exposed."
+    ],
+    "equipment": [
+      "Stoma rod or bridge if used.",
+      "Linear cutting stapler and/or slowly absorbable monofilament sutures for the closure anastomosis.",
+      "Purse-string suture for the closure wound, stoma appliance for formation."
+    ],
+    "anatomy": [
+      "The loop is taken from the terminal ileum, typically 20 to 30 cm proximal to the ileocaecal valve, far enough to allow a later anastomosis without encroaching on the valve and close enough to minimise high output.",
+      "The afferent (proximal, functional) limb must be identified and placed inferiorly so it can be spouted; the efferent (distal) limb lies superiorly and flush. Some surgeons prefer the reverse orientation; consistency in the unit matters more than the convention, but it must be deliberate.",
+      "At closure, the stoma lies in the rectus muscle with adhesions of the mesentery to the peritoneum and fascia; the inferior epigastric vessels are lateral and deep."
+    ],
+    "criticalSafety": [
+      "Mark the proximal limb with a stitch before delivery. A twisted or reversed loop ileostomy that defunctions nothing is a recognised and avoidable error.",
+      "Confirm the distal anastomosis has healed before closure.",
+      "At closure, check for and repair any enterotomy made during mobilisation. A missed enterotomy presents as peritonitis on day two or three."
+    ],
+    "structuresAtRisk": [
+      "Mesentery of the loop, causing stoma ischaemia",
+      "Inferior epigastric vessels",
+      "Adjacent small bowel adherent to the stoma at closure"
+    ],
+    "commonErrors": [
+      "Bringing out the wrong limb as the functional spout, or a twisted loop.",
+      "Using bowel too close to the ileocaecal valve, making closure difficult.",
+      "A trephine too tight, causing outflow obstruction and a high-output stoma from a partially obstructed limb.",
+      "At closure, tearing the serosa while freeing the stoma and not recognising it."
+    ],
+    "complications": [
+      "Formation: high output with dehydration and acute kidney injury, peristomal skin breakdown, retraction, prolapse, parastomal hernia, outflow obstruction.",
+      "Closure: anastomotic leak, postoperative ileus (common), small bowel obstruction, wound infection, incisional hernia at the stoma site.",
+      "Low anterior resection syndrome becomes apparent after closure and should have been discussed beforehand."
+    ],
+    "postop": [
+      "Formation: daily stoma output and fluid balance; an output persistently above about 1.5 litres a day needs treatment, oral rehydration solution and restriction of hypotonic fluids, and senior review.",
+      "Formation: stoma nurse review, appliance teaching, and written advice on dehydration before discharge.",
+      "Closure: early oral intake and mobilisation within an enhanced recovery pathway; distension and vomiting suggest ileus or a leak, and a leak is excluded clinically, not assumed away.",
+      "Closure: purse-string wounds generally have lower infection rates than primary linear closure; dress the central defect."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Formation: explain high output and dehydration. Closure: explain bowel function after reversal, which can be erratic for months after a low anastomosis." },
+    { "ref": "step.bowel.stoma-siting", "emphasis": "Usually right iliac fossa, within the rectus." },
+    { "ref": "step.core.timeout", "emphasis": "Run it at both the formation and the closure operation." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.ileo.select-loop" },
+    { "ref": "step.bowel.trephine", "emphasis": "Two fingers usually suffice. A loop needs a little more room than an end stoma." },
+    { "ref": "step.ileo.deliver-loop" },
+    { "ref": "step.bowel.stoma-mature", "emphasis": "Spout the afferent limb; mature the efferent limb flush. Formation ends here: haemostasis, counts, closure and debrief follow." },
+    { "ref": "step.ileo.closure-mobilise" },
+    { "ref": "step.bowel.anastomosis-stapled", "emphasis": "Closure option A: resect the stoma segment and make a stapled side-to-side anastomosis." },
+    { "ref": "step.bowel.anastomosis-handsewn", "emphasis": "Closure option B: trim the edges and close the enterotomy transversely by hand, or resect and anastomose end-to-end. Choose one option." },
+    { "ref": "step.bowel.leak-check" },
+    { "ref": "step.ileo.fascia-closure" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Closure: send the resected stoma segment if the unit policy requires; formation produces no specimen." },
+    { "ref": "step.core.skin-closure", "emphasis": "Closure wound: purse-string approximation leaving a small central defect to drain." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.ileo.select-loop": {
+      "id": "step.ileo.select-loop", "kind": "dissection",
+      "title": "Selecting and orienting the loop",
+      "why": "The loop must defunction what lies distal to it, reach the skin without tension and be closable later. All three depend on choosing the right segment and knowing which limb is which.",
+      "how": [
+        "Identify the ileocaecal junction and select a mobile loop of terminal ileum roughly 20 to 30 cm proximal to it.",
+        "Check that the loop reaches the trephine site easily.",
+        "Mark the proximal (afferent) limb with a coloured or tagged suture so its identity survives delivery through the abdominal wall.",
+        "In a laparoscopic or open case, confirm orientation visually from inside before delivery."
+      ],
+      "structuresAtRisk": ["Ileal mesentery", "Ileocaecal valve region"],
+      "pitfalls": ["Selecting a loop too close to the valve.", "Losing track of which limb is proximal after delivery."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ileo.deliver-loop": {
+      "id": "step.ileo.deliver-loop", "kind": "reconstruction",
+      "title": "Delivering the loop and placing the rod",
+      "why": "Delivery without twisting and without tearing the mesentery keeps the stoma perfused and functional. The rod, where used, prevents early retraction while the stoma adheres to the abdominal wall.",
+      "how": [
+        "Pass a tape or soft sling around the loop through a window in the mesentery close to the bowel.",
+        "Deliver the loop gently through the trephine with the marked proximal limb in the planned position, usually inferior.",
+        "Check from inside, or by palpation, that the loop is not twisted.",
+        "Place a rod or bridge through the mesenteric window if the unit uses one; evidence for routine rods is limited and they can cause skin problems."
+      ],
+      "structuresAtRisk": ["Mesentery of the loop"],
+      "pitfalls": ["Pulling the loop through a tight trephine, which tears the mesentery.", "A 180-degree twist that obstructs the afferent limb."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ileo.closure-mobilise": {
+      "id": "step.ileo.closure-mobilise", "kind": "dissection", "critical": true,
+      "title": "Closure: freeing the stoma from the abdominal wall",
+      "why": "Closure is often taught as a minor operation, but most of its complications come from this step: enterotomies made while freeing a stoma that is densely adherent to fascia and peritoneum.",
+      "how": [
+        "Incise around the mucocutaneous junction leaving a narrow skin cuff, or excise it.",
+        "Dissect through the subcutaneous fat down to the fascia with the bowel under gentle traction.",
+        "Free the bowel from the anterior sheath, rectus and peritoneum, keeping the dissection on the fascia rather than the bowel wall.",
+        "Enter the peritoneum and sweep adhesions off with a finger until both limbs are mobile and can be delivered for several centimetres.",
+        "Inspect for serosal tears and enterotomies and repair them before the anastomosis."
+      ],
+      "structuresAtRisk": ["Serosa of both limbs", "Adherent small bowel loops", "Inferior epigastric vessels"],
+      "pitfalls": ["Dissecting on the bowel wall rather than on the fascia.", "Incomplete mobilisation that forces an anastomosis under tension in the wound."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ileo.fascia-closure": {
+      "id": "step.ileo.fascia-closure", "kind": "closure",
+      "title": "Closure: returning the bowel and closing the fascia",
+      "why": "The old stoma site is a weak point. Careful fascial closure reduces the incisional hernia that follows a large proportion of reversals; mesh reinforcement is used in some units for high-risk patients.",
+      "how": [
+        "Return the anastomosis to the abdomen without tension or twist.",
+        "Close the posterior and anterior sheath with a slowly absorbable or non-absorbable suture, taking good bites of healthy fascia.",
+        "Consider prophylactic mesh reinforcement in high-risk patients where the unit has adopted it, accepting that the evidence is still being established."
+      ],
+      "structuresAtRisk": ["The anastomosis caught in the fascial suture"],
+      "pitfalls": ["Taking bowel in a fascial bite.", "Small, weak fascial bites in a thinned rectus."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

@@ -188,6 +188,9 @@
      items vh: true; markLevels sets d 4 on those at load time (the files are not rewritten). levelOf reads either. */
   function levelOf(it) { return it.vh === true || it.d === 4 ? 4 : it.d === 1 || it.d === 3 ? it.d : 2; }
   function markLevels(items) { (items || []).forEach(function (it) { if (it && it.vh === true) it.d = 4; }); return items; }
+  // A stem that reads a picture the item does not carry ("The radiograph of skull is suggestive of") is flagged, so no
+  // test, practice or Nucleus360 set shows an unanswerable question (owner 2026-11-08). Run after fixes: a fix can add the image.
+  function flagNoImage(items) { (items || []).forEach(function (it) { if (ASSESS && ASSESS.needsImage && ASSESS.needsImage(it) && !(it.flags && it.flags.indexOf("img-missing") >= 0)) it.flags = (it.flags || []).concat("img-missing"); }); return items; }
   function shuffle(a, rnd) { rnd = rnd || Math.random; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
   // Custom module: n questions from the given items, optionally one difficulty, spread across modules and,
   // since topic-diverse selection, across concepts too: each module pool is concept-ordered first, then round-robin
@@ -1086,6 +1089,7 @@
             var c = JSON.parse(JSON.stringify(n)); c._s = sid; c._m = mid; c._pub = 1; items.push(c);
           });
         }
+        flagNoImage(items);
         if ((!bankErr || addedMod) && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
         return items;
       });
@@ -1154,6 +1158,7 @@
       var bankU = unionItems(banks), items = markLevels(unionItems([bankU].concat(ovs)));
       if (!items.length && bankErr) throw bankErr;
       items.forEach(function (it) { it._s = sid; it._m = g.id; });
+      flagNoImage(items);
       if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
       writeBackXCounts(g, bankU, unionItems(ovs));
       return items;
@@ -1251,6 +1256,7 @@
   var ICON = {
     lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     menu: '<path d="M4 7h16M4 12h16M4 17h11"/>', back: '<path d="M15 18l-6-6 6-6"/>', close: '<path d="M18 6L6 18M6 6l12 12"/>', chev: '<path d="M9 6l6 6-6 6"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/>',
+    dots: '<path d="M12 5v.01M12 12v.01M12 19v.01" stroke-width="3"/>',
     bm: '<path d="M6 3h12v18l-6-4-6 4z"/>', plus: '<path d="M12 5v14M5 12h14"/>', star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
     flag: '<path d="M5 21V4h11l-1.5 4L16 12H5"/>', play: '<path d="M7 5l12 7-12 7z"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     dl: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>', search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>', next: '<path d="M5 12h14M13 6l6 6-6 6"/>', check: '<path d="M5 12l5 5 9-10"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>',
@@ -1467,6 +1473,53 @@
     lessonZoomToViewer();
     try { if (G.PREP_TIDE) G.PREP_TIDE.sync(root); } catch (e) {}
     try { if (G.PREP_NAV) G.PREP_NAV.sync(root); } catch (e) {}   // the floating tab bar (prep-nav.js)
+    try { tableFit(root); } catch (e) {}
+  }
+  /* Tables (lesson steps, explanations): one that nearly fits is tightened until it does; one that is really wider
+     scrolls sideways, fades the edge that has more, and nudges once when first on screen so nobody has to guess. */
+  function tableFit(scope) {
+    var ws = scope.querySelectorAll(".pn-vtbl, .pn-xt, .pn-pearl-tablewrap");
+    for (var i = 0; i < ws.length; i++) tableOne(ws[i]);
+  }
+  function tableEdges(w) {
+    var max = w.scrollWidth - w.clientWidth;
+    w.classList.toggle("pn-more-l", w.scrollLeft > 2);
+    w.classList.toggle("pn-more-r", w.scrollLeft < max - 2);
+  }
+  function tableOne(w) {
+    var cw = w.clientWidth;
+    if (!cw) return;
+    w.classList.remove("pn-tight", "pn-ovf");
+    if (w.scrollWidth - cw > 1) { w.classList.add("pn-tight"); if (w.scrollWidth - cw > 1) w.classList.remove("pn-tight"); }
+    if (w.scrollWidth - cw <= 1) { w.classList.remove("pn-more-l", "pn-more-r"); return; }
+    w.classList.add("pn-ovf");
+    tableEdges(w);
+    if (!w.__pnT) {
+      w.__pnT = { stop: false, done: false };
+      w.addEventListener("scroll", function () { tableEdges(w); }, { passive: true });
+      w.addEventListener("pointerdown", function () { w.__pnT.stop = true; }, { passive: true });
+    }
+    var t = w.__pnT;
+    if (t.done || reducedMo()) return;
+    var go = function () {
+      if (t.done || t.stop || w.scrollLeft > 0) return;
+      t.done = true;
+      var dist = Math.min(44, w.scrollWidth - w.clientWidth), t0 = null;
+      var step = function (now) {
+        if (t.stop) return;
+        if (t0 === null) t0 = now;
+        var p = Math.min(1, (now - t0) / 1100);
+        w.scrollLeft = dist * Math.sin(Math.PI * p) * (1 - 0.25 * p);
+        if (p < 1) G.requestAnimationFrame(step); else w.scrollLeft = 0;
+      };
+      G.requestAnimationFrame(step);
+    };
+    if (G.IntersectionObserver) {
+      var io = new G.IntersectionObserver(function (es) {
+        if (es[0] && es[0].isIntersecting && es[0].intersectionRatio >= 0.6) { io.disconnect(); G.setTimeout(go, 350); }
+      }, { threshold: [0.6] });
+      io.observe(w);
+    } else G.setTimeout(go, 600);
   }
   function reducedMo() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   // A screen that fills in after its paint (a list read from storage) is not yet tall enough for the kept position:
@@ -2084,12 +2137,41 @@
   /* ---------- menu (prep50) ----------
      Everything PrepNucleus has outside the daily path, in one list from the home bar: the course (exam) and plan,
      Pro, downloads, stats, friends. Rows appear only for features that are loaded. */
+  /* The You card: the account's name and photo (window.SMD_ACCOUNT), the course and level. Tapping it opens the app's
+     Profile page (window.SMD_openProfile: name from sign-in, role, registration, hospital, speciality, city), raised above
+     PrepNucleus while it is open. Without an account layer it falls back to the PrepNucleus mark and is not a button. */
+  function meProfile() { try { var A = G.SMD_ACCOUNT; return (A && A.profile && A.profile()) || null; } catch (e) { return null; } }
+  function meCard(exLabel, lv, rank) {
+    var P = meProfile(), nm = P && P.signedIn ? String(P.name || "").trim() : "", pic = P && P.signedIn ? P.picture : "";
+    var who = nm ? nm.replace(/^(dr|prof)\.?\s+/i, "") : "", ini = (who.charAt(0) || "").toUpperCase();
+    var av = pic ? '<img src="' + esc(pic) + '" alt="" width="52" height="52" referrerpolicy="no-referrer" class="pn-me-pic">'
+      : ini ? '<span class="pn-me-ini">' + esc(ini) + "</span>"
+      : '<img src="/prep/art/logo-mark-prussian-96.webp" alt="" width="28" height="28" class="pn-lg-l"><img src="/prep/art/logo-mark-amber-96.webp" alt="" width="28" height="28" class="pn-lg-d">';
+    var title = nm ? esc(nm) : P && !P.signedIn ? "Guest" : esc(exLabel), sub = (nm || (P && !P.signedIn) ? esc(exLabel) + " · " : "") + "Level " + lv + " · " + esc(rank);
+    var inner = '<span class="pn-me-av" aria-hidden="true">' + av + '</span><span class="pn-tb"><b>' + title + "</b><small>" + sub + "</small></span>";
+    if (typeof G.SMD_openProfile !== "function") return '<section class="pn-me">' + inner + "</section>";
+    return '<button type="button" class="pn-me pn-me-btn" data-act="me-edit" aria-label="' + (P && !P.signedIn ? "Sign in or set up your profile" : "Edit profile") + '">' + inner +
+      '<span class="pn-me-ed">' + (P && !P.signedIn ? "Sign in" : "Edit") + "</span></button>";
+  }
+  /* The app's Profile sheet sits below this overlay (z-index 640 under 885); body.pn-over-sheet lifts it above while it is
+     open, and is dropped (and the menu redrawn with any new name) when it closes. */
+  function openProfile() {
+    var B = D.body; B.classList.add("pn-over-sheet");
+    try { G.SMD_openProfile(); } catch (e) { B.classList.remove("pn-over-sheet"); return; }
+    var sh = D.getElementById("hvSheet");
+    if (!sh || !G.MutationObserver) return;
+    var mo = new G.MutationObserver(function () {
+      if (sh.classList.contains("on")) return;
+      mo.disconnect(); B.classList.remove("pn-over-sheet");
+      if (root && root.querySelector(".pn-body.pn-menu")) rerender();
+    });
+    mo.observe(sh, { attributes: true, attributeFilter: ["class"] });
+  }
   function renderMenu() {
     var s = load(), ex = examOf(s.exam), plan = !!G.PREP_PLAN, choice = plan && s.pl && s.pl.exam && G.PREP_PLAN._pure.choiceOf(s.pl.exam), exLabel = choice && choice.tab === ex.id ? choice.label : ex.label;
     var lv = levelN(xpOfStore(s)), rank = rankOf(lv);
     paint(bar("Menu", "", "back") + '<div class="pn-body pn-menu">' +
-      '<section class="pn-me"><span class="pn-me-av" aria-hidden="true"><img src="/prep/art/logo-mark-prussian-96.webp" alt="" width="28" height="28" class="pn-lg-l"><img src="/prep/art/logo-mark-amber-96.webp" alt="" width="28" height="28" class="pn-lg-d"></span>' +
-      '<span class="pn-tb"><b>' + esc(exLabel) + "</b><small>Level " + lv + " · " + esc(rank) + "</small></span></section>" +
+      meCard(exLabel, lv, rank) +
       '<h2 class="pn-sec">Your course</h2><div class="pn-group">' +
       (plan ? row("p-settings", ico("gear"), "Exam and plan", "Exam: " + esc(exLabel) + " · daily goal and reminder") : "") +
       (G.PrepPro ? row("pro-open", ico("star"), "PrepNucleus Pro", "Your plan and what it includes") : "") +
@@ -2221,7 +2303,9 @@
       // Learn (prep-lessons.js, only when a module of this subject has a lesson), then "Start with last settings".
       var go = setupOn() && q ? '<button type="button" class="pn-btn pri pn-subgo" data-act="su-subject" data-s="' + esc(sid) + '">' + ico("play") + " Practise " + tx(sb.name) + "</button>" : "";
       var acts = go + lastBtn("subject", sid, ' data-s="' + esc(sid) + '"');
-      if (box) patchHtml(box, head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + (html || '<p class="pn-empty">Nothing in this filter yet.</p>'));
+      // NEET-SS Medical Oncology papers, analysis and 30-day plan (prep-pyqss.js) live inside the subject (owner 2026-11-07).
+      var ys = G.PREP_PYQSS && sid === "ss-medical-oncology" ? '<h2 class="pn-sec">Previous year questions</h2><div class="pn-group">' + G.PREP_PYQSS.homeRow(HOST) + "</div>" : "";
+      if (box) patchHtml(box, head + '<div class="pn-subacts" id="pnSubActs"' + (acts ? "" : " hidden") + ">" + acts + "</div>" + ys + (html || '<p class="pn-empty">Nothing in this filter yet.</p>'));
       if (G.PREP_LESSONS && G.PREP_LESSONS.subjectButton) G.PREP_LESSONS.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
       if (G.PREP_IMGLEARN && G.PREP_IMGLEARN.subjectButton) G.PREP_IMGLEARN.subjectButton(box && box.querySelector("#pnSubActs"), sid, ix.topics, HOST);
     });
@@ -2302,7 +2386,7 @@
       if (!list.length) { toast("Nothing to practise here right now."); return rerender(); }
       runQuestions(list, kind === "exam" ? "exam" : "study", tx(topicOf(sid, mid).title));
     }, function () {
-      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">Questions need a connection. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
+      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">' + (G.PREP_BANK_MSG || String)("Questions need a connection. Check the connection and try again.") + '</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
       st.cur = { s: sid, m: mid };
     });
   }
@@ -2684,10 +2768,17 @@
     // Study: bookmark and, once answered, report, as labelled icon buttons in the bar.
     // Share IDs (prep-ids.js): share in the bar, the ID itself under the question (tap copies). Not your own deck's items.
     var IDS = !own && G.PREP_IDS ? G.PREP_IDS : null, qid = IDS ? IDS.ofItem(it) : null;
-    var acts = (qid ? IDS.shareBtn(qid) : "") + (TOOLS ? TOOLS.noteBtn(it) : "") + (own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>") +
+    var bmBtn = own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>";
+    var acts = (qid ? IDS.shareBtn(qid) : "") + (TOOLS ? TOOLS.noteBtn(it) : "") +
       (shown && (!own || it.qg) ? '<button type="button" class="pn-ib" data-act="report" aria-label="Report this question">' + ico("flag") + "</button>" : "");
     // A clock per question shows its figure in the progress row, at the end of the line (the bar keeps the title room).
     var clk = r.limit || r.qsec || r.sc ? (r.qc && r.qc.used ? "" : clockHtml(r)) : "";
+    // Bookmark, the most used, stays in the bar; share, note and report fold into one "More" button (a menu under it).
+    if ((acts.match(/<button/g) || []).length > 1) {
+      acts = '<span class="pn-more"><button type="button" class="pn-ib" data-act="actsmenu" aria-haspopup="true" aria-expanded="false" aria-label="More actions">' + ico("dots") + "</button>" +
+        '<div class="pn-qmenu" role="group" aria-label="Question actions" hidden>' + acts + "</div></span>";
+    }
+    acts = bmBtn + acts;
     var right = r.mode === "exam" ? clk : acts || clk ? '<span class="pn-acts">' + clk + acts + "</span>" : "";
     var fb = "", revealFb = false;
     if (shown) {
@@ -4229,7 +4320,18 @@
   /* ---------- events ---------- */
   function onClick(e) {
     var b = e.target.closest ? e.target.closest("[data-act]") : null;
+    // The question-actions menu closes on any tap outside it, or on the button that opened it.
+    var om = root && root.querySelector(".pn-qmenu:not([hidden])");
+    if (om && !(e.target.closest && e.target.closest(".pn-more")) || (om && b && b.getAttribute("data-act") === "actsmenu")) {
+      om.hidden = true; var ob = om.parentNode.querySelector("[data-act=actsmenu]"); if (ob) ob.setAttribute("aria-expanded", "false");
+      if (b && b.getAttribute("data-act") === "actsmenu") return;
+    }
     if (!b || !root.contains(b) || b.getAttribute("aria-disabled") === "true" || b.disabled) return;
+    if (b.getAttribute("data-act") === "actsmenu") {
+      var mn = b.parentNode.querySelector(".pn-qmenu");
+      if (mn) { mn.hidden = false; b.setAttribute("aria-expanded", "true"); }
+      return;
+    }
     // The tap that ends a sheet drag is not a press on whatever it lifted over.
     if (e.isTrusted && Date.now() - (st.sheetDragAt || 0) < 350 && b.closest(".pn-sheet-wrap")) return;
     var a = b.getAttribute("data-act"), v = b.getAttribute("data-v"), s = load();
@@ -4425,6 +4527,7 @@
     if (a === "downloads") return push(renderDownloads);
     if (a === "menu") return push(renderMenu);
     if (a === "img-credits") return push(renderImageCredits);
+    if (a === "me-edit") return openProfile();
     if (a === "credit-close") return closeCreditSheet();
     if (a === "img-credit") {
       var cid = b.getAttribute("data-id");
@@ -4461,6 +4564,8 @@
     if (a.indexOf("il-") === 0 && G.PREP_IMGLEARN) return G.PREP_IMGLEARN.act(a, b, HOST);
     // Previous year papers (prep-pyq.js) own every data-act starting "y-".
     if (a.indexOf("y-") === 0 && G.PREP_PYQ) return G.PREP_PYQ.act(a, b, HOST);
+    // NEET-SS Medical Oncology previous-year questions + analysis (prep-pyqss.js) own every data-act starting "ys-".
+    if (a.indexOf("ys-") === 0 && G.PREP_PYQSS) return G.PREP_PYQSS.act(a, b, HOST);
     // Radiology image series (prep-rad.js) own every data-act starting "rd-".
     if (a.indexOf("rd-") === 0 && G.PREP_RAD) return G.PREP_RAD.act(a, b, HOST);
     // Onboarding, readiness and today's plan (prep-plan.js) own every data-act starting "p-".
@@ -4549,6 +4654,6 @@
 
   var API_OBJ = { open: open, close: close, back: back, loadItems: function (subject, module) { return loadModule(subject, module); }, fixesFor: fixesFor,
     // After an editor saves or reverts a fix on this phone: forget the cached index and the loaded modules so the next open shows it.
-    refreshFixes: function () { var s = load(); delete s.fxix; save(); Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:") === 0 || k.indexOf("fx:") === 0) delete st.mem[k]; }); }, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
+    refreshFixes: function () { var s = load(); delete s.fxix; save(); Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:") === 0 || k.indexOf("fx:") === 0) delete st.mem[k]; }); }, isOpen: function () { return st.open; }, _pure: PURE, _tableFit: tableFit, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
   G.PREP = API_OBJ;
 })(typeof window !== "undefined" ? window : this);

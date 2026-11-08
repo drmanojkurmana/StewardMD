@@ -1,0 +1,149 @@
+{
+  "id": "thyroid-neck-haematoma",
+  "title": "Neck haematoma after thyroid surgery",
+  "subtitle": "SCOOP at the bedside, then theatre",
+  "category": "endocrine_surgery",
+  "specialty": "endocrine",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "das-baets",
+      "org": "Difficult Airway Society (DAS), British Association of Endocrine and Thyroid Surgeons (BAETS) and ENT UK",
+      "title": "Management of haematoma after thyroid surgery: systematic review and multidisciplinary consensus guidelines (Iliff HA, El-Boghdadly K, Ahmad I et al., Anaesthesia)",
+      "year": 2022,
+      "url": "https://das.uk.com/guidelines/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "das-fona",
+      "org": "Difficult Airway Society (DAS)",
+      "title": "Difficult Airway Society 2015 guidelines for management of unanticipated difficult intubation in adults (Frerk C et al., Br J Anaesth)",
+      "year": 2015,
+      "url": "https://das.uk.com/guidelines/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "ata-outpt",
+      "org": "American Thyroid Association (ATA)",
+      "title": "American Thyroid Association statement on outpatient thyroidectomy (Terris DJ et al., Thyroid)",
+      "year": 2013,
+      "url": "https://www.thyroid.org/professionals/ata-professional-guidelines/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "DESATS: Difficulty swallowing or discomfort, Early warning score change, Swelling, Anxiety, Tachypnoea or difficulty breathing, Stridor."
+      },
+      {
+        "text": "Stridor or a rapidly enlarging neck: airway compromise is imminent. Venous congestion and laryngeal oedema, not just tracheal compression, close the airway."
+      },
+      {
+        "text": "Desaturation is a late sign. Do not wait for it."
+      },
+      {
+        "text": "Most haematomas present within the first hours after surgery, but late presentations occur, including after discharge."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Call for help immediately: senior surgeon, senior anaesthetist, and the emergency team. Sit the patient up and give high-flow oxygen.",
+        "timeCritical": true,
+        "evidenceRef": "das-baets"
+      },
+      {
+        "text": "If the airway is compromised, open the wound at the bedside without waiting for theatre: SCOOP. Skin exposure, Cut sutures, Open skin, Open muscles, Pack.",
+        "timeCritical": true,
+        "evidenceRef": "das-baets"
+      },
+      {
+        "text": "Open all layers including the strap muscle closure, and evacuate the clot with a gloved finger; then pack loosely with a gauze swab.",
+        "timeCritical": true,
+        "evidenceRef": "das-baets"
+      },
+      {
+        "text": "Keep a haematoma kit at the bedside of every post-thyroidectomy patient: suture or clip remover, scalpel, gauze and gloves.",
+        "evidenceRef": "das-baets"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Regular structured neck checks in recovery and on the ward by staff trained to recognise DESATS and to perform SCOOP.",
+        "calcs": [
+          "news2"
+        ]
+      },
+      {
+        "text": "Measure the progression: neck circumference markings or serial photographs help staff see change."
+      },
+      {
+        "text": "Airway assessment by the anaesthetist even after decompression: laryngeal oedema persists after the clot is removed."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "No imaging for a suspected expanding haematoma with airway symptoms. Imaging delays the treatment."
+      },
+      {
+        "text": "FBC, coagulation and crossmatch once the airway is safe."
+      },
+      {
+        "text": "Review antithrombotic drugs and any peri-operative anticoagulation."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "After SCOOP, continue oxygen, keep the patient sitting up, and transfer to theatre for formal exploration and haemostasis.",
+        "evidenceRef": "das-baets"
+      },
+      {
+        "text": "Plan tracheal intubation for an experienced anaesthetist with difficult airway equipment; evacuate the haematoma before induction whenever possible, as this often improves the view.",
+        "evidenceRef": "das-baets"
+      },
+      {
+        "text": "Be prepared for front-of-neck access, knowing that the anatomy is distorted by oedema and blood.",
+        "evidenceRef": "das-fona"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Formal re-exploration in theatre: evacuate clot, irrigate, identify and control the bleeding point, check both recurrent laryngeal nerves and the parathyroids, and close.",
+        "evidenceRef": "das-baets"
+      },
+      {
+        "text": "Correct coagulopathy and review the restart of antithrombotic drugs explicitly.",
+        "evidenceRef": "das-baets"
+      },
+      {
+        "text": "Day-case or short-stay thyroidectomy only with a protocol for observation, a haematoma kit and clear advice for the patient to return immediately.",
+        "evidenceRef": "ata-outpt"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Senior anaesthetist and senior surgeon at once for any suspected haematoma. This is a team emergency."
+      },
+      {
+        "text": "Critical care after re-intubation for laryngeal oedema, or after a difficult airway."
+      },
+      {
+        "text": "Report and debrief every haematoma; review whether recognition and SCOOP training worked."
+      }
+    ]
+  },
+  "notes": [
+    "Opening the wound feels drastic on a ward. It is the single action that saves the airway, and the wound heals well afterwards.",
+    "Removing only skin sutures is not enough; the strap muscle layer contains the haematoma and must be opened too.",
+    "Laryngeal oedema from venous congestion explains why intubation is still difficult after the clot is out."
+  ],
+  "calcs": [
+    "news2"
+  ]
+}

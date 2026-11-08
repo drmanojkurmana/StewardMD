@@ -1,0 +1,191 @@
+{
+  "id": "total-abdominal-hysterectomy",
+  "title": "Total abdominal hysterectomy",
+  "subtitle": "Pedicle by pedicle, close to the uterus, ureters seen",
+  "system": "gynaecological",
+  "aliases": ["TAH", "abdominal hysterectomy", "TAH BSO", "open hysterectomy"],
+  "estMinutes": 120,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng88", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Heavy menstrual bleeding: assessment and management (NG88)", "year": 2018, "version": "NG88, updated 2021", "url": "https://www.nice.org.uk/guidance/ng88", "accessed": "2026-11-04" },
+    { "id": "rcog-ca4", "org": "Royal College of Obstetricians and Gynaecologists (RCOG)", "title": "Abdominal hysterectomy for benign conditions (Consent Advice No. 4)", "year": 2009, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/consent-advice/", "accessed": "2026-11-04" },
+    { "id": "telinde", "org": "Wolters Kluwer", "title": "Te Linde's Operative Gynecology: abdominal hysterectomy", "edition": "12th edition", "year": 2019, "url": "https://shop.lww.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["caprini", "apfel", "bmi", "allowable_blood_loss"],
+  "chapters": {
+    "indications": [
+      "Heavy menstrual bleeding, fibroids or adenomyosis where hysterectomy is the woman's informed choice after discussion of alternatives, as NICE NG88 describes.",
+      "Endometriosis or chronic pelvic pain in selected women who have completed their family, as part of a planned management pathway.",
+      "Premalignant or malignant disease when the abdominal route is chosen within an oncology plan.",
+      "The abdominal route is chosen when a vaginal or laparoscopic hysterectomy is not suitable, for example a very large uterus, dense adhesions, or limited access, after the routes have been discussed."
+    ],
+    "contraindications": [
+      "Pregnancy.",
+      "A wish for future fertility.",
+      "A mass with features of malignancy that has not been discussed with gynaecological oncology: a benign-route operation may be the wrong operation.",
+      "Uncorrected anaemia before elective surgery."
+    ],
+    "preparation": [
+      "Confirm cervical screening is up to date, and the endometrial assessment where abnormal bleeding warrants it.",
+      "Discuss ovarian conservation or removal: removing the ovaries before the menopause causes immediate surgical menopause, so discuss hormone replacement in advance.",
+      "Consent for: bleeding and transfusion, infection, injury to bladder, ureter or bowel, venous thromboembolism, return to theatre, wound problems, conversion of the incision, and the frequencies in the RCOG consent advice; include the option of subtotal hysterectomy if the cervix cannot be removed safely.",
+      "Group and screen or crossmatch per local protocol; correct anaemia beforehand; mechanical and pharmacological thromboprophylaxis per risk."
+    ],
+    "positioning": [
+      "Supine, arms on boards or tucked, slight head-down once the abdomen is open to pack the bowel away.",
+      "Urinary catheter after vaginal preparation."
+    ],
+    "equipment": [
+      "Major gynaecology set with hysterectomy clamps, self-retaining abdominal retractor, long instruments.",
+      "Delayed-absorbable sutures for pedicles and vault; energy device if preferred.",
+      "Cell salvage available where heavy bleeding is anticipated."
+    ],
+    "anatomy": [
+      "The uterus is supported by the round ligaments anteriorly, the broad ligaments laterally, and the cardinal and uterosacral ligaments at the cervix.",
+      "The ovarian vessels run in the infundibulopelvic ligament; the ureter crosses the pelvic brim just medial to it.",
+      "The uterine artery arises from the internal iliac artery and crosses over the ureter close to the side of the cervix, before ascending along the side of the uterus.",
+      "The bladder lies on the lower uterus and cervix beneath the vesicouterine peritoneum, and is often densely adherent after caesarean section.",
+      "The rectum lies behind the cervix and posterior vaginal fornix in the pouch of Douglas."
+    ],
+    "criticalSafety": [
+      "See the ureter before clamping the infundibulopelvic ligament and know where it is before clamping the uterine vessels.",
+      "Push the bladder well below the cervix before the vagina is opened.",
+      "Keep every clamp close to the uterus, each one medial to the last.",
+      "Confirm the whole cervix has been removed."
+    ],
+    "structuresAtRisk": [
+      "Ureter at the pelvic brim, beneath the uterine artery and at the vaginal angles",
+      "Bladder",
+      "Rectum and sigmoid colon",
+      "Uterine and ovarian vessels",
+      "Ilioinguinal and iliohypogastric nerves at a transverse incision"
+    ],
+    "commonErrors": [
+      "Clamping the uterine vessels too far laterally, where the ureter lies.",
+      "Opening the vagina before the bladder has been pushed down far enough.",
+      "Losing a pedicle into the side wall and clamping blindly to stop the bleeding.",
+      "Leaving a cervical stump unintentionally at a total hysterectomy."
+    ],
+    "complications": [
+      "Haemorrhage, intra-operative or from a slipped pedicle afterwards.",
+      "Bladder or ureteric injury, sometimes presenting days later as a fistula or loin pain.",
+      "Bowel injury.",
+      "Vault haematoma or infection, wound infection.",
+      "Venous thromboembolism.",
+      "Surgical menopause after bilateral oophorectomy."
+    ],
+    "postop": [
+      "Enhanced recovery: early eating, mobilisation and catheter removal per local pathway.",
+      "Monitor urine output and look for loin pain, fever or leakage of urine that may signal urinary tract injury.",
+      "Thromboprophylaxis for the duration set by the risk assessment.",
+      "Advise on avoiding heavy lifting and intercourse until the vault has healed, and explain what the histology will add."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the plan for the ovaries and whether subtotal hysterectomy is acceptable if needed." },
+    { "ref": "step.core.timeout", "emphasis": "State anticipated blood loss, blood availability and whether cell salvage is set up." },
+    { "ref": "step.obg.preop-check", "emphasis": "Cervical screening up to date; imaging and any endometrial sampling reviewed." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Catheterise after vaginal preparation; plan for head-down tilt once the bowel is packed." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare the vagina as well as the abdomen." },
+    { "ref": "step.obg.pfannenstiel", "emphasis": "Use a midline incision for a uterus reaching well above the pelvis." },
+    { "ref": "step.abd.exploration", "emphasis": "Include the upper abdomen, omentum and both adnexa; anything suspicious of malignancy changes the plan." },
+    { "ref": "step.tah.round-ligament" },
+    { "ref": "step.obg.ureter-identification" },
+    { "ref": "step.tah.adnexal-pedicle" },
+    { "ref": "step.tah.bladder" },
+    { "ref": "step.tah.uterine-vessels" },
+    { "ref": "step.tah.cervix-vault" },
+    { "ref": "step.tah.bailout" },
+    { "ref": "step.core.haemostasis", "emphasis": "Check each pedicle and the vault angles in turn with the head-down tilt reduced." },
+    { "ref": "step.obg.blood-loss" },
+    { "ref": "step.core.specimen", "emphasis": "Uterus, cervix and any adnexa, with the clinical question for the pathologist." },
+    { "ref": "step.core.counts", "emphasis": "Count before closing the vault and before closing the abdomen; vaginal swabs are included." },
+    { "ref": "step.obg.transverse-closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record whether the ovaries were conserved, the ureters seen, and that the bladder was intact." }
+  ],
+  "steps_local": {
+    "step.tah.round-ligament": {
+      "id": "step.tah.round-ligament", "kind": "dissection",
+      "title": "Uterine traction, round ligaments and opening the broad ligament",
+      "why": "Clamps at the cornua give control of the uterus and occlude collateral supply. Dividing the round ligament opens the broad ligament, the space in which the ureter and vessels are seen.",
+      "how": [
+        "Place a long straight clamp at each cornu across the tube, utero-ovarian ligament and round ligament, close to the uterus, for traction.",
+        "Clamp, divide and ligate the round ligament towards the pelvic side wall.",
+        "Open the anterior leaf of the broad ligament towards the vesicouterine fold and the posterior leaf parallel to the ovarian vessels, exposing the retroperitoneal space."
+      ],
+      "structuresAtRisk": ["Uterine and ovarian vessel branches in the broad ligament"],
+      "pitfalls": ["Opening the posterior leaf without seeing what is beneath it.", "Traction clamps placed so far laterally that they catch the side-wall vessels."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.tah.adnexal-pedicle": {
+      "id": "step.tah.adnexal-pedicle", "kind": "resection", "critical": true,
+      "title": "Adnexal pedicle: conserve or remove the ovaries",
+      "why": "The decision about the ovaries was made in clinic; this step carries it out. When the ovaries are removed, the infundibulopelvic ligament is the pedicle most often taken together with the ureter.",
+      "how": [
+        "If conserving the ovaries, clamp, divide and ligate the tube and utero-ovarian ligament close to the uterus.",
+        "If removing them, make a window in the posterior broad ligament peritoneum above the ureter, then clamp, divide and doubly ligate the infundibulopelvic ligament through it.",
+        "Confirm that the ureter is outside the pedicle before every clamp is closed."
+      ],
+      "structuresAtRisk": ["Ureter at the pelvic brim", "Ovarian vessels"],
+      "pitfalls": ["Clamping the infundibulopelvic ligament without a window, so the ureter is drawn into it.", "A single tie on the ovarian vessels that slips."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.tah.bladder": {
+      "id": "step.tah.bladder", "kind": "dissection", "critical": true,
+      "title": "Reflecting the bladder off the cervix",
+      "why": "The bladder lies on the cervix and upper vagina. Pushing it well down before the vessels are clamped and the vagina is opened is the main protection for both the bladder and the ureters, which travel with it.",
+      "how": [
+        "Lift the vesicouterine peritoneum and incise it transversely between the two broad ligament openings.",
+        "Develop the avascular plane between bladder and cervix in the midline, with sharp dissection where there is scarring from previous caesarean section.",
+        "Advance the bladder to below the level of the cervix, checking by palpation of the cervix through the anterior vaginal wall."
+      ],
+      "structuresAtRisk": ["Bladder", "Ureters at the bladder base"],
+      "pitfalls": ["Blunt pushing through a scarred plane, tearing the bladder.", "Dissecting laterally into the bladder pillars, causing bleeding."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.tah.uterine-vessels": {
+      "id": "step.tah.uterine-vessels", "kind": "resection", "critical": true,
+      "title": "Clamping the uterine vessels",
+      "why": "The uterine artery crosses over the ureter close to the cervix. Clamps placed hard against the uterus, at the level of the internal os, take the vessels and leave the ureter safely lateral.",
+      "how": [
+        "Skeletonise the uterine vessels by clearing the loose areolar tissue from the side of the lower uterus.",
+        "Place the clamp perpendicular to the uterus at the level of the internal os, sliding it off the cervix so the tip hugs the uterine wall.",
+        "Divide and doubly ligate the pedicle, then check the ureter's position again."
+      ],
+      "structuresAtRisk": ["Ureter beneath the uterine artery", "Uterine artery and veins"],
+      "pitfalls": ["A clamp placed laterally on the side wall rather than on the uterus.", "Clamping blindly into a bleeding pedicle that has retracted."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.tah.cervix-vault": {
+      "id": "step.tah.cervix-vault", "kind": "resection", "critical": true,
+      "title": "Cardinal and uterosacral ligaments, removing the uterus and closing the vault",
+      "why": "Below the uterine vessels the ureter is closest to the cervix. Small bites each medial to the last keep it safe, and anchoring the vault to the cardinal and uterosacral ligaments supports it against later prolapse.",
+      "how": [
+        "Clamp, divide and ligate the cardinal ligaments, then the uterosacral ligaments, in successive small bites, each just medial to the previous pedicle and close to the cervix.",
+        "Confirm by palpation that the clamps are below the cervix, then enter the vagina anteriorly and cut around the cervix to remove the uterus.",
+        "Inspect the specimen to confirm the whole cervix has been removed.",
+        "Close the vault with angle sutures that incorporate the cardinal and uterosacral pedicles, then close or oversew the vault edges for haemostasis."
+      ],
+      "structuresAtRisk": ["Ureter at the vaginal angle", "Bladder", "Rectum in the pouch of Douglas"],
+      "pitfalls": ["Large lateral bites at the angles that catch the ureter.", "Leaving part of the cervix behind."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.tah.bailout": {
+      "id": "step.tah.bailout", "kind": "bailout",
+      "title": "When the plane is lost, the bladder is breached or bleeding will not stop",
+      "why": "A hysterectomy that becomes dangerous at the cervix has safer endpoints than persistence: subtotal hysterectomy, a recognised and repaired injury, or packing while help arrives. Unrecognised injuries cause the worst outcomes.",
+      "how": [
+        "If the bladder or rectum is densely adherent to the cervix, or bleeding at the lower pedicles is escalating, consider subtotal hysterectomy within the consent and call the consultant.",
+        "If the bladder is opened, mark it, complete the hysterectomy safely, repair it in layers and leave a catheter for the period urology advises; check the ureteric orifices if the injury is near the trigone.",
+        "If ureteric injury is suspected, stop and call urology to theatre rather than exploring alone.",
+        "For bleeding that does not respond to direct pressure and identified-vessel ligation, pack, tell the anaesthetist, activate the major haemorrhage protocol and call senior help."
+      ],
+      "structuresAtRisk": ["Ureter", "Bladder", "Pelvic side-wall vessels"],
+      "pitfalls": ["Blind clamping in a bleeding pelvic side wall.", "Not recording an injury and its repair, so the ward team does not know to look for a leak."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

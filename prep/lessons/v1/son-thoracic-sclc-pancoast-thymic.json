@@ -1,0 +1,136 @@
+{
+  "v": 1,
+  "module": "son-thoracic-sclc-pancoast-thymic",
+  "subject": "ss-medical-oncology",
+  "title": "Pancoast Trimodality Protocol, SCLC Paraneoplastic Syndromes and Thymic Neoplasms",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "Arising at the pulmonary apex, **superior sulcus tumours** (Pancoast tumours, most commonly non-small cell lung cancer) invade the thoracic inlet, involving the parietal pleura, first ribs, **stellate ganglion** (producing ipsilateral Horner syndrome), and lower trunk of the **brachial plexus** (C8 and T1 nerve roots, causing medial arm pain and hand intrinsic muscle wasting). In medically fit patients with resectable disease lacking distant or mediastinal nodal metastases, standard care is **trimodality therapy**: induction concurrent chemoradiotherapy followed by en bloc surgical resection.",
+      "say": "When non-small cell lung cancer develops in the superior pulmonary sulcus, anatomical invasion into adjacent neurovascular structures dictates clinical presentation and staging. Tumour extension into the lower brachial plexus produces severe radiating arm pain along the C8 and T1 dermatomes, while disruption of sympathetic fibers produces classic Horner syndrome. Upfront surgery alone carries unacceptable local recurrence rates, which is why induction concurrent cisplatin and etoposide with radiation followed by complete en bloc surgical resection is the established standard.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/thymoma-fig1.webp",
+        "alt": "Anterior mediastinal cross-sectional anatomical diagram illustrating spatial relationships of great vessels and pulmonary apex.",
+        "caption": "Thoracic inlet and anterior mediastinal relationships. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Neuroendocrine small cell lung carcinoma frequently secretes bioactive peptide hormones. Ectopic synthesis of **adrenocorticotropic hormone** (ACTH) or pro-opiomelanocortin drives **ectopic Cushing syndrome**, which carries the worst prognosis and shortest median survival among all paraneoplastic complications. Unlike pituitary Cushing disease, ectopic ACTH is refractory to high-dose dexamethasone suppression. Patients present acutely with profound **hypokalemic metabolic alkalosis**, severe proximal muscle weakness, rapidly worsening hyperglycemia, and catastrophic opportunistic infections, necessitating emergency steroidogenesis blockade with **ketoconazole or metyrapone** and immediate cytotoxic chemotherapy.",
+      "say": "Small cell lung cancer can act as a malignant endocrine factory, but ectopic ACTH production is by far its most devastating paraneoplastic manifestation. Rather than developing classic centripetal obesity over years, these patients deteriorate rapidly over weeks with severe hypokalemia, metabolic alkalosis, and uncontrolled hyperglycemia. Ectopic ACTH confers the worst overall survival of any lung cancer syndrome, and you must start adrenal enzyme inhibitors like ketoconazole alongside induction chemotherapy to reverse life-threatening electrolyte derangements.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ectopic ACTH (Paraneoplastic)",
+          "points": [
+            "Secreted by small cell neuroendocrine lung cancer",
+            "Extreme hypokalemic metabolic alkalosis",
+            "Rapid onset; lacks cushingoid body habitus",
+            "High-dose dexamethasone suppression fails",
+            "Shortest median survival (poor prognosis)"
+          ]
+        },
+        "right": {
+          "title": "Pituitary Cushing Disease",
+          "points": [
+            "Benign pituitary corticotroph adenoma",
+            "Mild or absent hypokalemia",
+            "Slow onset: buffalo hump, striae, moon facies",
+            "Suppressed by high-dose dexamethasone (8 mg)",
+            "Surgical cure via transsphenoidal resection"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Ectopic secretion of **arginine vasopressin** in small cell lung cancer triggers the **syndrome of inappropriate antidiuretic hormone** (SIADH), manifesting as euvolemic hyponatremia with elevated urine sodium (greater than 30 mEq/L) and high urine osmolality. Asymptomatic mild-to-moderate hyponatremia is managed first-line with strict **free water restriction** (under 800 to 1000 mL daily) or oral urea. Severe, symptomatic hyponatremia with neurological compromise requires hypertonic 3% saline, with correction strictly capped at **eight to ten mEq/L per 24 hours** to prevent irreversible **osmotic demyelination syndrome**.",
+      "say": "Inappropriate secretion of antidiuretic hormone is the most common electrolyte disturbance in small cell lung cancer, but over-correcting serum sodium is extraordinarily hazardous. Patients present with euvolemic hyponatremia and concentrated urine. Restricting fluid intake to under one liter daily corrects mild cases. When seizures or coma demand three percent hypertonic saline, you must strictly limit sodium elevation to less than eight to ten milliequivalents over twenty-four hours to prevent catastrophic pontine myelinolysis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "SCLC Paraneoplastic SIADH"
+          },
+          {
+            "id": "s2",
+            "label": "Euvolemic Hyponatremia"
+          },
+          {
+            "id": "s3",
+            "label": "Mild: Water Restriction"
+          },
+          {
+            "id": "s4",
+            "label": "Severe: 3% Hypertonic Saline"
+          },
+          {
+            "id": "s5",
+            "label": "Cap <=8-10 mEq/L/24h to Avoid ODS"
+          }
+        ],
+        "edges": [
+          ["s1", "s2"],
+          ["s2", "s3"],
+          ["s2", "s4"],
+          ["s4", "s5"]
+        ]
+      }
+    },
+    {
+      "tx": "Due to an explosive growth fraction and early propensity to invade mediastinal nodal stations, **small cell lung cancer** (SCLC) exhibits the highest per-case incidence of **superior vena cava obstruction** (SVCO, occurring in approximately 10% of patients at diagnosis) and multiple paraneoplastic neuroendocrine syndromes, including SIADH, ectopic ACTH secretion, and **Lambert-Eaton myasthenic syndrome** (LEMS, driven by antibodies against P/Q-type voltage-gated calcium channels). Because SCLC is exquisitely chemosensitive, emergent multi-agent chemotherapy promptly relieves vascular compression without requiring upfront palliative vascular stenting.",
+      "say": "When comparing thoracic malignancies, small cell lung cancer stands apart in its aggressive biology and unique clinical manifestations. It has the highest frequency per patient of both superior vena cava obstruction and autoimmune neuroendocrine syndromes like Lambert-Eaton myasthenic syndrome and SIADH. While vascular stenting is occasionally needed, systemic platinum-etoposide chemotherapy works so rapidly in small cell disease that mediastinal venous decompression is often achieved within forty-eight hours of treatment initiation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Feature",
+          "Small Cell Lung Cancer (SCLC)",
+          "Squamous Cell Lung Carcinoma",
+          "Adenocarcinoma of the Lung"
+        ],
+        "rows": [
+          [
+            "Growth Kinetics",
+            "Rapid doubling time; central mediastinal",
+            "Central endobronchial cavitation",
+            "Peripheral parenchymal mass"
+          ],
+          [
+            "SVCO Incidence",
+            "Highest propensity per case (~10%)",
+            "Moderate (local central invasion)",
+            "Low (predominantly peripheral)"
+          ],
+          [
+            "Paraneoplastic Predilection",
+            "SIADH, Ectopic ACTH, LEMS (calcium channel)",
+            "Hypercalcemia (PTHrP secretion)",
+            "Hypertrophic osteoarthropathy (clubbing)"
+          ],
+          [
+            "Frontline Systemic Regimen",
+            "EP plus Anti-PD-L1 (Atezolizumab/Durvalumab)",
+            "Platinum doublet plus Pembrolizumab",
+            "Targeted therapy (EGFR/ALK) or Chemo-IO"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Anterior mediastinal epithelial neoplasms separate into indolent thymomas and aggressive thymic carcinomas. **Thymoma** carries a strong link to autoimmune disorders, with 30% to 50% of patients exhibiting **myasthenia gravis** mediated by anti-acetylcholine receptor autoantibodies. In contrast, **thymic carcinoma** lacks association with myasthenia gravis, displays frankly malignant cytokeratin-positive squamous or anaplastic histology, infiltrates surrounding phrenic nerves and great vessels, and has a high risk of distant metastasis. Because of intrinsic biological aggressiveness, **postoperative radiotherapy** (PORT) is routinely indicated for thymic carcinoma, even following complete R0 surgical resection.",
+      "say": "Differentiating a thymoma from a thymic carcinoma is crucial for both systemic evaluation and adjuvant treatment planning. Thymomas are organotypic neoplasms strongly linked to paraneoplastic autoimmunity, especially anti-acetylcholine receptor myasthenia gravis and pure red cell aplasia. Conversely, thymic carcinomas behave like high-grade invasive carcinomas, invading adjacent mediastinal organs early while showing virtually no association with myasthenia. Because local recurrence rates remain high even after complete microscopic resection, postoperative radiation is routinely recommended for all thymic carcinomas.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/good-syndrome-fig1.webp",
+        "alt": "Anterior mediastinal soft tissue mass on cross-sectional thoracic imaging.",
+        "caption": "Anterior mediastinal thymic neoplasm. Credit: StewardMD."
+      }
+    }
+  ],
+  "quiz": [
+    "27c56aa5-f4d2-45f1-99f1-836df389c461",
+    "790a98b1-e42c-4b14-b7c0-7af9ee0f943c",
+    "d41ffb2c-da90-4201-9dcb-a97cb77aeae9"
+  ],
+  "gen": "AI"
+}

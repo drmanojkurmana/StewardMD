@@ -1,4 +1,6 @@
-# Narkē (Anaesthesia), shown as **Anesthetica**
+# Narkē (Anaesthesia), shown as **Anaesthetica**
+
+- **Respelled 2026-11-07 (owner):** "Anaesthetica" (British spelling) in the app; marketing pamphlets still say Anesthetica.
 
 - **Renamed 2026-10-27 (owner):** the user-facing name is **Anesthetica** (Hindi एनेस्थेटिका) in the app and marketing.
   Code ids keep `narke` (flag `smd_narke`, route `stewardmd://narke`, files, `window.NARKE`), the SURGX convention.

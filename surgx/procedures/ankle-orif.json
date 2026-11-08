@@ -1,0 +1,269 @@
+{
+  "id": "ankle-orif",
+  "title": "Open reduction and internal fixation of the ankle",
+  "subtitle": "Lateral malleolus plate and syndesmosis fixation for an unstable ankle fracture",
+  "system": "musculoskeletal",
+  "aliases": [
+    "ankle ORIF",
+    "Weber B fixation",
+    "Weber C fixation",
+    "bimalleolar ankle fracture fixation",
+    "syndesmosis fixation",
+    "lateral malleolus plating"
+  ],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "boast-ankle",
+      "org": "British Orthopaedic Association",
+      "title": "BOAST: The management of ankle fractures",
+      "year": 2016,
+      "url": "https://www.boa.ac.uk/resource/boast-12-pdf.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "willett-2016-aim",
+      "org": "Willett K et al. JAMA 316:1455",
+      "title": "Close contact casting vs surgery for initial treatment of unstable ankle fractures in older adults: a randomized clinical trial",
+      "year": 2016,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Willett+close+contact+casting+vs+surgery+unstable+ankle+fractures+older+adults",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng89",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Venous thromboembolism in over 16s: reducing the risk of hospital-acquired deep vein thrombosis or pulmonary embolism (NG89)",
+      "year": 2018,
+      "version": "NG89, last updated 2019",
+      "url": "https://www.nice.org.uk/guidance/ng89",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "ottawa_ankle",
+    "caprini"
+  ],
+  "chapters": {
+    "indications": [
+      "Unstable ankle fractures: bimalleolar and trimalleolar fractures, and lateral malleolus fractures with talar shift or medial injury (deltoid ligament).",
+      "Fractures with syndesmotic injury (often Weber C, or Maisonneuve patterns).",
+      "Fractures that cannot be held reduced in a cast, or open fractures after debridement.",
+      "In older adults with unstable fractures, close contact casting is a reasonable alternative with similar function at 6 months (AIM trial); discuss both options."
+    ],
+    "contraindications": [
+      "Swollen or blistered skin over the incision: delay surgery until the swelling settles and stabilise the ankle in a cast or spanning external fixator meanwhile.",
+      "Severe peripheral arterial disease or uncontrolled diabetes with poor skin: weigh fixation against casting with the patient.",
+      "Stable isolated lateral malleolus fractures with no talar shift: treat without surgery."
+    ],
+    "preparation": [
+      "Reduce a dislocated or subluxed ankle immediately in the emergency department and splint, with neurovascular checks and radiographs after reduction (BOAST).",
+      "Anteroposterior, mortise and lateral radiographs; full-length tibia and fibula views if a proximal fibular fracture is suspected; CT for posterior malleolar or complex patterns.",
+      "Assess diabetes, neuropathy, smoking and peripheral pulses; plan longer protection if neuropathy is present.",
+      "Consent risks to discuss: infection, wound breakdown, nerve injury (superficial peroneal, sural, saphenous), malreduction, loss of fixation, prominent metalwork needing removal, venous thromboembolism, stiffness, post-traumatic arthritis, complex regional pain syndrome, and the non-operative alternative."
+    ],
+    "positioning": [
+      "Supine with a sandbag under the ipsilateral buttock to internally rotate the leg, or lateral for a posterior approach.",
+      "Thigh tourniquet; heel on a padded support so the C-arm can obtain true mortise and lateral views."
+    ],
+    "equipment": [
+      "Small fragment set with one-third tubular and anatomical distal fibular plates, lag and locking screws.",
+      "Pointed reduction clamps, K-wires, bone hook, syndesmotic screws or suture-button devices.",
+      "Image intensifier with a radiolucent table extension."
+    ],
+    "anatomy": [
+      "The superficial peroneal nerve pierces the deep fascia in the distal leg and crosses anterior to the fibula at a variable level, so it is at risk in the proximal wound.",
+      "The syndesmosis comprises the anterior and posterior inferior tibiofibular ligaments and the interosseous ligament; the fibula sits in the incisura of the tibia.",
+      "The deltoid ligament is the main medial stabiliser; its rupture with a lateral malleolus fracture makes the injury unstable even without a medial fracture.",
+      "Fibular length and rotation determine the position of the talus in the mortise."
+    ],
+    "criticalSafety": [
+      "Operate when the soft tissues allow, not when the list allows.",
+      "Restore fibular length and rotation before judging the syndesmosis.",
+      "Always test the syndesmosis after fixation and confirm congruent mortise on the final images."
+    ],
+    "structuresAtRisk": [
+      "Superficial peroneal nerve",
+      "Sural nerve and peroneal tendons",
+      "Long saphenous vein and saphenous nerve",
+      "Anterior tibial vessels and deep peroneal nerve during syndesmotic drilling",
+      "Ankle joint surface"
+    ],
+    "commonErrors": [
+      "Shortened or externally rotated fibula.",
+      "Syndesmotic malreduction from a misdirected clamp.",
+      "Distal screws in the lateral malleolus entering the joint.",
+      "Operating through swollen, blistered skin."
+    ],
+    "complications": [
+      "Wound breakdown and infection, more frequent in diabetes, smoking and older patients.",
+      "Malreduction, loss of fixation, syndesmotic diastasis.",
+      "Nerve injury, prominent painful metalwork.",
+      "Venous thromboembolism, complex regional pain syndrome, stiffness and post-traumatic arthritis."
+    ],
+    "postop": [
+      "Elevation, backslab or boot, and a wound check before definitive cast or boot.",
+      "Weight bearing per the fixation and the surgeon's instruction; many stable constructs allow early protected weight bearing, while syndesmotic fixation and neuropathy may need longer protection.",
+      "Thromboprophylaxis assessment for lower-limb immobilisation per NICE NG89.",
+      "Clinic review with radiographs; plan for syndesmotic screw removal only if the local protocol requires it."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Check the skin and the wrinkle sign before confirming the operation goes ahead today."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine with a sandbag under the buttock so the fibula faces up; heel clear of the table for the C-arm."
+    },
+    {
+      "ref": "step.ortho.tourniquet"
+    },
+    {
+      "ref": "step.ortho.image-intensifier",
+      "emphasis": "Confirm a true mortise view (about 15 to 20 degrees of internal rotation) and a true lateral before preparing."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.ankle.lateral-approach"
+    },
+    {
+      "ref": "step.ortho.fracture-exposure"
+    },
+    {
+      "ref": "step.ortho.reduction-check",
+      "emphasis": "Restore fibular length, rotation and alignment; the talus should sit congruent in the mortise with a normal medial clear space."
+    },
+    {
+      "ref": "step.ortho.provisional-fixation"
+    },
+    {
+      "ref": "step.ortho.implant-check"
+    },
+    {
+      "ref": "step.ortho.plate-fixation",
+      "emphasis": "For a short oblique Weber B fracture: an interfragmentary lag screw, then a neutralisation plate laterally or an antiglide plate posterolaterally. Avoid long distal screws entering the joint."
+    },
+    {
+      "ref": "step.ankle.medial-malleolus"
+    },
+    {
+      "ref": "step.ankle.syndesmosis"
+    },
+    {
+      "ref": "step.ortho.final-imaging",
+      "emphasis": "Mortise and lateral: congruent joint, equal medial clear space, fibular length restored, no intra-articular screws."
+    },
+    {
+      "ref": "step.ortho.fixation-bailout",
+      "emphasis": "If the skin is not ready or the reduction cannot be held, stabilise with a spanning external fixator and return when the soft tissues allow."
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure",
+      "emphasis": "Tension-free closure with careful handling of thin skin over the plate."
+    },
+    {
+      "ref": "step.ortho.nv-check"
+    },
+    {
+      "ref": "step.core.debrief",
+      "emphasis": "State the weight-bearing instruction and the length of protection explicitly."
+    }
+  ],
+  "steps_local": {
+    "step.ankle.lateral-approach": {
+      "id": "step.ankle.lateral-approach",
+      "kind": "access",
+      "critical": true,
+      "title": "Lateral approach to the distal fibula",
+      "why": "The fibula is subcutaneous, so the approach is simple, but the superficial peroneal nerve crosses from posterior to anterior in the distal leg at a variable level and the skin over the fibula tolerates little retraction or a prominent plate.",
+      "how": [
+        "Incise along the posterior border of the fibula (or directly lateral, according to the planned plate position), centred on the fracture.",
+        "Before deepening proximally, look for the superficial peroneal nerve crossing anteriorly in the subcutaneous tissue and protect it.",
+        "Incise periosteum only along the line needed to see the fracture edges; keep full-thickness skin flaps and avoid heavy retraction."
+      ],
+      "structuresAtRisk": [
+        "Superficial peroneal nerve",
+        "Sural nerve and short saphenous vein (posterior incision)",
+        "Peroneal tendons (posterior to the fibula)"
+      ],
+      "pitfalls": [
+        "Cutting the superficial peroneal nerve in the proximal part of the wound.",
+        "Undermining thin flaps that later break down over the plate."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ankle.medial-malleolus": {
+      "id": "step.ankle.medial-malleolus",
+      "kind": "reconstruction",
+      "title": "Medial malleolus reduction and fixation",
+      "why": "A displaced medial malleolar fracture leaves the talus unstable and the joint incongruent. Periosteum folded into the fracture is the usual reason it will not reduce or heal.",
+      "how": [
+        "Anteromedial incision over the fracture, protecting the long saphenous vein and saphenous nerve.",
+        "Clear interposed periosteum, inspect the anteromedial joint surface and the talar dome, and reduce with a pointed clamp or a K-wire joystick.",
+        "Fix with two partially threaded cancellous screws perpendicular to the fracture, or a tension band or plate for small or vertical fragments.",
+        "Screen to confirm the screws do not enter the joint."
+      ],
+      "structuresAtRisk": [
+        "Long saphenous vein and saphenous nerve",
+        "Tibialis posterior tendon behind the malleolus",
+        "Ankle joint (screw penetration)"
+      ],
+      "pitfalls": [
+        "Accepting a gap with interposed periosteum.",
+        "Screws angled into the joint or through the posterior cortex into tibialis posterior."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ankle.syndesmosis": {
+      "id": "step.ankle.syndesmosis",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Syndesmosis: test, reduce and fix",
+      "why": "An unstable syndesmosis left unfixed lets the talus shift, but a syndesmosis fixed in a malreduced position is common and harms outcome as much. Testing, then accurate reduction into the incisura, both matter.",
+      "how": [
+        "After fibular fixation, stress the syndesmosis: a lateral pull on the fibula with a bone hook, and an external rotation stress under fluoroscopy. Look for widening of the medial clear space and tibiofibular clear space.",
+        "If unstable, reduce the fibula into the incisura under direct vision or fluoroscopy, checking fibular length and rotation; use a clamp with moderate force, aligned with the axis of the incisura, to avoid over-compression and malreduction.",
+        "Fix with syndesmotic screws or a suture-button device placed above the joint, parallel to the plafond and angled from posterolateral to anteromedial.",
+        "Compare with the uninjured ankle's images or use intra-operative assessment where the reduction is uncertain; open and reduce directly if in doubt."
+      ],
+      "structuresAtRisk": [
+        "Anterior tibial vessels and deep peroneal nerve (anteromedial drill exit)",
+        "Long saphenous vein and nerve (medial drill exit)",
+        "Syndesmotic reduction (malreduction)"
+      ],
+      "pitfalls": [
+        "Clamp placed obliquely, pushing the fibula anterior or posterior in the incisura.",
+        "Not testing the syndesmosis because the fibula fracture looked low.",
+        "Fixing a fibula left short or externally rotated."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

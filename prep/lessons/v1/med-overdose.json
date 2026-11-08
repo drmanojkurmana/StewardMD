@@ -3,7 +3,7 @@
  "module": "med-overdose",
  "subject": "medicine",
  "title": "Paracetamol poisoning: time, levels, antidote by toxicology advice",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
    "tx": "**Paracetamol** in overdose silently injures the liver, so the patient may look well while damage begins. Record the **exact time and amount ingested**, other drugs and alcohol taken, and whether the dose was staggered over days, because staggered overdoses carry risk at lower apparent doses. Involve **toxicology advice (NPIS TOXBASE in the UK)** early; management is protocol-driven, never guessed.",
@@ -38,7 +38,7 @@
   },
   {
    "tx": "A **timed blood paracetamol level**, liver tests, clotting and other baseline bloods guide whether the antidote **acetylcysteine** is needed, judged against the treatment line and toxicology advice. Activated charcoal is considered only very early and only where protocol and airway allow. Vomiting, abdominal pain or jaundice appearing days later signals established liver injury and possible transplant-centre referral.",
-   "say": "Timed levels and liver tests, judged with toxicology advice, decide acetylcysteine. Late pain or jaundice means liver injury.",
+   "say": "Timed levels and liver tests, judged with toxicology advice, decide acetylcysteine. Late pain or jaundice indicates established liver injury.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -49,12 +49,27 @@
      [
       "Timed level + advice",
       "Pain, jaundice: liver injury"
+     ],
+     [
+      "Exact time, amount and staggered pattern",
+      "Staggered pattern missed"
      ]
     ]
    }
   },
   {
-   "tx": "Assess the person, not only the poison: mental-health assessment, collateral history and safeguarding follow medical stabilisation in every deliberate overdose. Never discharge a staggered overdose as low risk without toxicology input. Document times honestly; in poisoning, the clock is an investigation result.",
+   "tx": "The image places paracetamol toxicity inside a liver cell. An enzyme pathway converts paracetamol into **NAPQI**, a toxic product that is normally cleared by binding **glutathione** into a harmless conjugate. In overdose the glutathione store runs out, shown as depletion, and free NAPQI causes oxidative liver cell injury. **Acetylcysteine** rescues the cell by replenishing glutathione, which is why timely antidote treatment guided by levels and toxicology advice matters.",
+   "say": "Picture paracetamol toxicity inside a single liver cell. Paracetamol is converted into NAPQI, a toxic product. Normally glutathione binds NAPQI into a harmless conjugate that the cell removes. In overdose the glutathione store is depleted, so free NAPQI attacks the cell and causes oxidative liver injury. Acetylcysteine works by replenishing glutathione. That is why timed blood levels and early toxicology advice matter, so the antidote is given before injury is established.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-overdose-gen1.webp",
+    "alt": "Liver cell diagram shows paracetamol converted to NAPQI with glutathione depletion causing injury and acetylcysteine replenishing protection.",
+    "caption": "Paracetamol converted to toxic product with antidote rescue, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Assess the person, not only the poison: mental-health assessment, collateral history and safeguarding follow medical stabilisation in every deliberate overdose. Never discharge a staggered overdose as low risk without **toxicology** input. Document times honestly; in poisoning, the clock is an investigation result.",
    "say": "After stabilisation, assess mental health and safeguarding, and never clear a staggered overdose without toxicology input.",
    "vis": {
     "kind": "image",
@@ -63,6 +78,37 @@
     "caption": "Beyond toxicology: comprehensive patient assessment and safety",
     "ar": 1.8349
    }
+  },
+  {
+   "tx": "The treatment line belongs to a single timed ingestion. Plot the **paracetamol level** taken between four and twenty four hours on the Rumack Matthew nomogram with toxicology advice, and start acetylcysteine where the line dictates. Staggered ingestions, unknown times and delayed presentations cannot use the nomogram; they are treated on advice, not on a reassuring level. Rising clotting time with falling consciousness raises **transplant referral**, so involve the liver unit early.",
+   "say": "Use the nomogram only for a single timed ingestion between four and twenty four hours, with toxicology advice guiding acetylcysteine. Staggered or unknown-time ingestions are treated on advice, never on one reassuring level. Rising clotting time with falling consciousness means involving the liver unit early.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Use the line?"
+    ],
+    "rows": [
+     [
+      "Single ingestion, level at 4 to 24 hours",
+      "Plot on the nomogram with advice"
+     ],
+     [
+      "Staggered or unknown time",
+      "No nomogram: treat on advice"
+     ],
+     [
+      "Clotting rising, consciousness falling",
+      "Early liver unit and transplant discussion"
+     ]
+    ]
+   }
   }
- ]
+ ],
+ "quiz": [
+  "mk-gap771",
+  "mk-gap774",
+  "mk-gap778"
+ ],
+ "gen": "hand"
 }

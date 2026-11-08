@@ -1,0 +1,251 @@
+{
+  "id": "haemorrhoidectomy",
+  "title": "Excisional haemorrhoidectomy",
+  "subtitle": "Milligan-Morgan open technique",
+  "system": "anorectal",
+  "aliases": [
+    "Milligan-Morgan haemorrhoidectomy",
+    "open haemorrhoidectomy",
+    "piles surgery"
+  ],
+  "estMinutes": 40,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "ascrs-haem",
+      "org": "American Society of Colon and Rectal Surgeons (ASCRS)",
+      "title": "Clinical practice guidelines for the management of hemorrhoids",
+      "year": 2018,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=American+Society+of+Colon+and+Rectal+Surgeons+clinical+practice+guidelines+management+of+hemorrhoids+2018",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "escp-haem",
+      "org": "European Society of Coloproctology (ESCP)",
+      "title": "Guideline for haemorrhoidal disease",
+      "year": 2020,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=European+Society+of+Coloproctology+guideline+for+haemorrhoidal+disease+van+Tol",
+      "accessed": "2026-11-05"
+    }
+  ],
+  "calcs": [
+    "wexner",
+    "caprini"
+  ],
+  "chapters": {
+    "indications": [
+      "Symptomatic grade III and IV haemorrhoids, or those with a large external component.",
+      "Haemorrhoids that have failed or are unsuitable for office procedures such as rubber band ligation.",
+      "Mixed internal and external haemorrhoids causing persistent symptoms.",
+      "Selected acutely thrombosed or strangulated haemorrhoids, in experienced hands."
+    ],
+    "contraindications": [
+      "Uncertain diagnosis: rectal bleeding in a patient at risk of colorectal cancer needs the colon assessed first.",
+      "Crohn's disease, in which perianal surgery heals poorly and may cause incontinence.",
+      "Portal hypertension with anorectal varices, which are not haemorrhoids.",
+      "Uncorrected coagulopathy and, in many units, anticoagulation that cannot be safely interrupted.",
+      "Significant pre-existing faecal incontinence, unless investigated and discussed."
+    ],
+    "preparation": [
+      "Confirm the diagnosis clinically and assess the colon according to age, symptoms and family history.",
+      "Record baseline continence (for example a Wexner score), previous anal surgery and obstetric history.",
+      "Plan anticoagulant and antiplatelet interruption with the prescriber.",
+      "A phosphate enema or bowel preparation according to unit practice.",
+      "Consent must include pain, bleeding including secondary haemorrhage after discharge, urinary retention, infection, anal stenosis, faecal incontinence, recurrence and skin tags."
+    ],
+    "positioning": [
+      "Lithotomy with the buttocks at the edge of the table, or prone jack-knife with the buttocks taped apart.",
+      "State the position in the note, because it changes the clock-face description of findings."
+    ],
+    "equipment": [
+      "Anal retractors (for example Eisenhammer or Parks), proctoscope and sigmoidoscope.",
+      "Artery forceps, fine scissors and diathermy, or a vessel-sealing device if used.",
+      "Absorbable transfixion suture.",
+      "Local anaesthetic with adrenaline."
+    ],
+    "anatomy": [
+      "Haemorrhoids are vascular cushions of the anal canal; the three primary complexes lie left lateral, right posterior and right anterior.",
+      "The dentate line separates the somatically innervated, painful anoderm below from the viscerally innervated mucosa above.",
+      "The internal sphincter is the thickened continuation of the circular muscle of the rectum and lies directly beneath the haemorrhoids.",
+      "The external sphincter surrounds it, with the intersphincteric groove palpable between them at the anal verge.",
+      "Each pedicle carries terminal branches of the superior rectal artery."
+    ],
+    "criticalSafety": [
+      "Examine the rectum and anal canal fully under anaesthesia before excising anything.",
+      "Preserve adequate mucocutaneous bridges between excisions.",
+      "Keep the internal sphincter out of the specimen and out of the transfixion.",
+      "Transfix pedicles above the dentate line and check each one before moving on.",
+      "Restrict intravenous fluids and use local anaesthesia to reduce urinary retention."
+    ],
+    "structuresAtRisk": [
+      "Internal and external anal sphincters",
+      "Anoderm and the mucocutaneous bridges",
+      "Superior rectal vessel branches in the pedicles"
+    ],
+    "commonErrors": [
+      "Excising too much anoderm, causing stenosis.",
+      "Dissecting into the internal sphincter.",
+      "Missing a rectal tumour by not examining above the haemorrhoids.",
+      "Discharging the patient without a laxative regimen."
+    ],
+    "complications": [
+      "Pain, the dominant concern for patients.",
+      "Reactionary haemorrhage within hours, and secondary haemorrhage typically in the second week.",
+      "Urinary retention.",
+      "Wound infection and perianal abscess, uncommon.",
+      "Anal stenosis.",
+      "Faecal incontinence, usually minor and often temporary, but sometimes permanent.",
+      "Recurrence and residual skin tags."
+    ],
+    "postop": [
+      "Usually a day case; check the patient has passed urine before discharge.",
+      "Regular simple analgesia and stool softeners; minimise opioids, which cause constipation.",
+      "Warm water soaks or showering after bowel actions.",
+      "Advise that heavy bleeding, particularly in the second week, needs urgent assessment.",
+      "Review at a few weeks to check healing and for stenosis."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Routine antibiotic prophylaxis is not standard for haemorrhoidectomy; follow local policy. Assess VTE risk as for any day case."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Lithotomy or prone jack-knife; record which, since the clock face changes."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.ano.local-block"
+    },
+    {
+      "ref": "step.ano.eua",
+      "emphasis": "Look above the haemorrhoids for a rectal tumour or proctitis before deciding what to excise."
+    },
+    {
+      "ref": "step.ano.sphincter-identify"
+    },
+    {
+      "ref": "step.ano.when-to-stop"
+    },
+    {
+      "ref": "step.hmd.plan"
+    },
+    {
+      "ref": "step.hmd.excision"
+    },
+    {
+      "ref": "step.hmd.ligation"
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.ano.final-inspection",
+      "emphasis": "Check every pedicle apex and that the canal admits the retractor without tension: the bridges must be intact."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.specimen",
+      "emphasis": "Send each haemorrhoid labelled by position; occasional unexpected pathology is found."
+    },
+    {
+      "ref": "step.ano.wound-care"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.hmd.plan": {
+      "id": "step.hmd.plan",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Planning the excisions and the skin bridges",
+      "why": "Anal stenosis after haemorrhoidectomy is caused by taking too much anoderm. Deciding which piles to excise, and where the bridges of skin and mucosa will lie, before the first cut, prevents it.",
+      "how": [
+        "Identify the primary haemorrhoidal complexes, classically left lateral, right posterior and right anterior, and any secondary piles.",
+        "Grasp the external component of each with an artery forceps and the internal component above it, and pull gently to display the pile and its pedicle.",
+        "Plan up to three excisions with a bridge of intact anoderm and mucosa between each; the bridges must be generous, not thin strips.",
+        "Leave small secondary piles alone or include them in an adjacent excision rather than making a fourth wound."
+      ],
+      "structuresAtRisk": [
+        "Anoderm forming the skin bridges",
+        "Internal sphincter beneath each pile"
+      ],
+      "pitfalls": [
+        "Excising every visible pile and leaving no bridges.",
+        "Planning by clock face without stating the patient's position."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hmd.excision": {
+      "id": "step.hmd.excision",
+      "kind": "resection",
+      "critical": true,
+      "title": "Excising each haemorrhoid off the internal sphincter",
+      "why": "The haemorrhoid lies on the internal sphincter. Dissecting in the plane between them removes the vascular cushion while leaving the sphincter intact; dissecting into the muscle causes incontinence and severe pain.",
+      "how": [
+        "Make a V-shaped incision in the perianal skin at the base of the external component, with the point outwards.",
+        "Dissect the pile upwards off the internal sphincter with scissors or diathermy, keeping the white transverse sphincter fibres in view and pushed down, not lifted with the specimen.",
+        "Narrow the dissection as it approaches the dentate line, keeping the mucosal incision within the boundaries of the pile.",
+        "Continue to the pedicle above the dentate line, where the vascular stalk becomes narrow."
+      ],
+      "structuresAtRisk": [
+        "Internal anal sphincter",
+        "External anal sphincter at the outer margin",
+        "Anoderm of the adjacent bridges"
+      ],
+      "pitfalls": [
+        "Lifting the internal sphincter fibres with the specimen.",
+        "Widening the excision at the anal verge so the bridges become narrow.",
+        "Excessive diathermy that chars the sphincter and adds pain."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.hmd.ligation": {
+      "id": "step.hmd.ligation",
+      "kind": "resection",
+      "critical": true,
+      "title": "Transfixing and dividing the pedicle",
+      "why": "The pedicle carries a branch of the superior rectal vessels. A transfixion that slips is the source of reactionary haemorrhage, which can fill the rectum with blood before it is visible externally.",
+      "how": [
+        "Transfix the pedicle above the dentate line with an absorbable suture, tying it securely without tearing the mucosa.",
+        "Excise the haemorrhoid distal to the tie, leaving a small cuff so the tie cannot slip off.",
+        "Alternatively use a vessel-sealing device across the pedicle if the unit uses one, with the same attention to the plane.",
+        "Inspect the pedicle stump and the wound edges for bleeding before moving to the next pile, and leave the wound open in the Milligan-Morgan technique."
+      ],
+      "structuresAtRisk": [
+        "Internal sphincter caught in the transfixion",
+        "Rectal mucosa above the pedicle"
+      ],
+      "pitfalls": [
+        "Tying the pedicle too low, below the dentate line, which is very painful.",
+        "Including sphincter muscle in the transfixion.",
+        "Cutting flush with the tie, so it slips."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "educationalOnly": true
+}

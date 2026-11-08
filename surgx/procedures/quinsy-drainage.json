@@ -1,0 +1,173 @@
+{
+  "id": "quinsy-drainage",
+  "title": "Peritonsillar abscess (quinsy) drainage under local anaesthetic",
+  "subtitle": "Aspirate before you cut, and never aim laterally",
+  "system": "ent",
+  "aliases": ["quinsy drainage", "peritonsillar abscess drainage", "incision and drainage of quinsy", "needle aspiration of quinsy", "PTA drainage"],
+  "estMinutes": 20,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "powell-wilson-2012", "org": "Clinical Otolaryngology", "title": "An evidence-based review of peritonsillar abscess (Powell J, Wilson JA)", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Powell+Wilson+evidence-based+review+of+peritonsillar+abscess", "accessed": "2026-11-04" },
+    { "id": "nice-ng84", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Sore throat (acute): antimicrobial prescribing (NG84)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng84", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["news2"],
+  "chapters": {
+    "indications": [
+      "Clinical peritonsillar abscess: unilateral peritonsillar swelling with displacement of the uvula to the opposite side, trismus, a muffled voice, drooling and fever, in a cooperative adult or older child.",
+      "A suspected abscess where aspiration is both diagnostic and therapeutic: pus confirms an abscess, no pus suggests peritonsillar cellulitis.",
+      "Failure of a previous aspiration to relieve symptoms, or reaccumulation."
+    ],
+    "contraindications": [
+      "Airway compromise, stridor or inability to handle secretions: secure the airway with senior ENT and anaesthetic input first.",
+      "Suspected deep neck space spread, such as parapharyngeal or retropharyngeal abscess, with neck swelling, torticollis or a medial bulge of the lateral pharyngeal wall below the tonsil. Image with contrast-enhanced CT and drain appropriately.",
+      "A young or uncooperative child, in whom drainage under general anaesthesia is usually safer.",
+      "Severe trismus that prevents a safe view and access, and uncorrected coagulopathy. A pulsatile swelling is never needled."
+    ],
+    "preparation": [
+      "Start intravenous fluids if the patient is dehydrated, analgesia, and intravenous antibiotics according to local protocol, with cover that the local guideline specifies for streptococci and anaerobes. NICE NG84 advises same-day hospital referral for suspected quinsy.",
+      "Check observations and a set of bloods including inflammatory markers and glucose; consider infectious mononucleosis testing.",
+      "Many units give a single dose of corticosteroid if not contraindicated; follow local protocol.",
+      "Consent risks to discuss: pain, bleeding, failure to find pus and the need for a repeat procedure or imaging, recurrence, aspiration of pus or blood, and the rare risk of injury to deep vessels, which the technique is designed to avoid."
+    ],
+    "positioning": [
+      "Sitting upright on a couch or chair with the head supported against a headrest or held by an assistant, chin slightly down.",
+      "Headlight on, Yankauer suction connected and working, and a vomit bowl in the patient's hands.",
+      "The patient's hands kept away from the field; explain they should breathe through the nose and keep still."
+    ],
+    "equipment": [
+      "Headlight, tongue depressors, Yankauer suction.",
+      "Topical lidocaine spray and local anaesthetic with adrenaline for infiltration, within weight-based dose limits.",
+      "A 10 mL or 20 mL syringe with a large-bore (for example 18 or 19 gauge) needle, guarded by trimming the needle cap so that only about 1 cm of needle is exposed.",
+      "A scalpel with a number 11 or 15 blade guarded with tape to leave only the tip exposed, and Tilley's or sinus forceps to open the cavity. Culture pots."
+    ],
+    "anatomy": [
+      "The abscess lies in the peritonsillar space, between the tonsil capsule and the superior constrictor, most commonly at the superior pole.",
+      "The commonest point of maximal swelling is above and lateral to the upper pole of the tonsil, at the soft palate, roughly where a line along the base of the uvula meets a vertical line along the anterior pillar.",
+      "The internal carotid artery lies posterolateral to the tonsillar fossa, separated from it by the constrictor and the parapharyngeal space. Needles and blades must not go deep or be directed laterally.",
+      "Parapharyngeal extension lies lateral to the constrictor and presents with neck swelling and a medial bulge of the lateral pharyngeal wall; it needs imaging."
+    ],
+    "criticalSafety": [
+      "Guard both the needle and the blade, so neither can pass more than about 1 cm deep.",
+      "Aim directly posteriorly or slightly medially, never laterally towards the carotid sheath.",
+      "Aspirate before incision. No pus at the first site is a reason to try one more site, not to cut deeper.",
+      "Never needle a pulsatile swelling.",
+      "Suction ready and working before the first puncture; the patient must not aspirate the pus."
+    ],
+    "structuresAtRisk": [
+      "Internal carotid artery and parapharyngeal vessels",
+      "Airway (aspiration of pus or blood)",
+      "Soft palate and uvula",
+      "Tonsil and peritonsillar vessels"
+    ],
+    "commonErrors": [
+      "Using an unguarded needle and going too deep in the search for pus.",
+      "Aspirating too low, below the abscess, which is usually superior.",
+      "Diagnosing peritonsillar cellulitis after a single dry tap without considering a second site or imaging.",
+      "Missing deep neck space extension in a patient whose neck is swollen or stiff."
+    ],
+    "complications": [
+      "Failure to drain or reaccumulation, needing repeat aspiration or drainage under general anaesthesia.",
+      "Bleeding, usually minor; major haemorrhage from a deep vessel is rare and is an emergency.",
+      "Aspiration of pus, spread to the parapharyngeal or retropharyngeal space, mediastinitis and airway compromise.",
+      "Recurrence, which may justify interval or acute tonsillectomy."
+    ],
+    "postop": [
+      "Admit for intravenous antibiotics, fluids and analgesia according to local protocol, then switch to oral antibiotics when swallowing.",
+      "Review within the day: trismus and pain should improve markedly after successful drainage. If not, consider repeat aspiration and contrast-enhanced CT of the neck.",
+      "Warm saline gargles or mouthwash; encourage oral intake once comfortable.",
+      "Discuss interval tonsillectomy for patients with recurrent quinsy or recurrent tonsillitis, and give clear advice to return with breathing difficulty, drooling or worsening swelling."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Verbal or written consent per local policy; explain that one or two needle passes may be needed and that no pus does not mean failure." },
+    { "ref": "step.ent.preop-data-check", "emphasis": "Confirm the side, the clinical diagnosis and the absence of airway compromise or neck signs that would need imaging first." },
+    { "ref": "step.core.timeout", "emphasis": "A local safety checklist in the treatment room or emergency department: identity, side, allergies, anticoagulants, suction working." },
+    { "ref": "step.core.positioning", "emphasis": "Sitting upright, head supported, headlight on, suction in your hand or the assistant's." },
+    { "ref": "step.st.local", "emphasis": "Topical lidocaine spray, then infiltrate a small volume of local anaesthetic with adrenaline submucosally at the planned puncture site. Infiltrate superficially, not deep." },
+    { "ref": "step.quinsy.landmark" },
+    { "ref": "step.quinsy.aspirate" },
+    { "ref": "step.st.culture", "emphasis": "Send the first aspirate for culture before any further drainage or irrigation." },
+    { "ref": "step.quinsy.incise" },
+    { "ref": "step.st.deloculate", "emphasis": "Open the incision with closed Tilley's or sinus forceps, spreading gently in the cavity only. Never push forceps laterally or deep." },
+    { "ref": "step.quinsy.no-pus-bailout" },
+    { "ref": "step.core.haemostasis", "emphasis": "Most bleeding stops with pressure from a swab on a holder and the patient spitting. Brisk or pulsatile bleeding is an emergency: pressure, airway, senior help immediately." },
+    { "ref": "step.core.counts", "emphasis": "Needles and the blade disposed of; any swab used in the mouth accounted for." },
+    { "ref": "step.ent.airway-handover", "emphasis": "Hand over the side, the volume of pus, trismus before and after, and the observations that would prompt review: stridor, drooling, neck swelling." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.quinsy.landmark": {
+      "id": "step.quinsy.landmark",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Choose the puncture site",
+      "why": "The abscess is usually at the superior pole, and the carotid is lateral. Choosing the point of maximal bulge in the upper peritonsillar area maximises the chance of pus and minimises the depth needed.",
+      "how": [
+        "With the tongue depressed, identify the point of maximal swelling or fluctuance, usually on the soft palate above and lateral to the upper pole of the tonsil.",
+        "Use as a guide the point where a horizontal line along the base of the uvula meets a vertical line along the anterior pillar.",
+        "Feel for pulsation before any puncture. A pulsatile swelling is not needled."
+      ],
+      "structuresAtRisk": ["Internal carotid artery", "Soft palate"],
+      "pitfalls": [
+        "Choosing a site on the tonsil itself, below the abscess.",
+        "Not noticing that the swelling is in the lateral pharyngeal wall below the tonsil, which suggests parapharyngeal disease."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.quinsy.aspirate": {
+      "id": "step.quinsy.aspirate",
+      "kind": "access",
+      "critical": true,
+      "title": "Guarded needle aspiration",
+      "why": "Needle aspiration confirms the diagnosis and often drains the abscess on its own. The guard on the needle, not the operator's restraint, is what keeps the needle away from the deep vessels.",
+      "how": [
+        "Trim the needle cap so only about 1 cm of needle is exposed, and refit it over the needle.",
+        "Advance the needle at the chosen point, directed straight back or slightly medially, never laterally, to the depth of the guard.",
+        "Aspirate as you advance and as you withdraw. Pus usually appears at shallow depth.",
+        "If pus is obtained, aspirate as much as possible, with suction ready for any that leaks into the mouth."
+      ],
+      "structuresAtRisk": ["Internal carotid artery", "Parapharyngeal vessels"],
+      "pitfalls": [
+        "An unguarded needle advanced deeper and deeper in search of pus.",
+        "Directing the needle laterally towards the carotid sheath."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.quinsy.incise": {
+      "id": "step.quinsy.incise",
+      "kind": "dissection",
+      "title": "Guarded incision over the abscess",
+      "why": "Aspiration alone often suffices, but a large or thick-walled collection drains better through an incision. The same depth rule applies: the blade is guarded, and the cut is shallow.",
+      "how": [
+        "Tape the blade so only its tip is exposed, about 1 cm or less.",
+        "Make a short incision through mucosa at the site where pus was aspirated, directed posteriorly.",
+        "Have suction in the mouth as the incision is made; pus will flow immediately."
+      ],
+      "structuresAtRisk": ["Internal carotid artery", "Soft palate", "Peritonsillar vessels"],
+      "pitfalls": [
+        "Incising at a site where aspiration found no pus.",
+        "A deep stab rather than a shallow mucosal incision."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.quinsy.no-pus-bailout": {
+      "id": "step.quinsy.no-pus-bailout",
+      "kind": "bailout",
+      "title": "Bail-out: no pus, a failing patient, or an unsafe procedure",
+      "why": "A dry tap may mean peritonsillar cellulitis, an abscess in a different position, or deep neck space disease. Repeated blind punctures do not distinguish them; a defined limit and imaging do.",
+      "how": [
+        "If the first aspiration is dry, make one further attempt at a second site, usually lower, at the middle of the tonsil, with the same guarded needle and posterior direction.",
+        "If still dry, stop. Treat as cellulitis with intravenous antibiotics, review within the day, and arrange contrast-enhanced CT of the neck if there is no improvement or any sign of deep extension.",
+        "If the patient cannot tolerate the procedure, has severe trismus, or is a child, stop and arrange drainage under general anaesthesia with a planned airway.",
+        "Any stridor, inability to swallow saliva or brisk bleeding: call the senior ENT surgeon and anaesthetist immediately."
+      ],
+      "structuresAtRisk": ["Airway", "Internal carotid artery"],
+      "pitfalls": [
+        "Three, four or five punctures in increasingly deep positions.",
+        "Discharging a dry tap without review or imaging."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

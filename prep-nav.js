@@ -279,7 +279,7 @@
       var ix = res[0], ixs = host.ix(), counts = {}, done = {};
       subs.forEach(function (sb) {
         var topics = (ixs[sb.id] && ixs[sb.id].topics) || [], n = 0, d = 0;
-        (P ? P.subjectLessons(ix, topics) : []).forEach(function (m) { m.list.forEach(function (x) { n++; if (s.ls[x[0]] && s.ls[x[0]].done) d++; }); });
+        (P ? P.subjectLessons(ix, topics, sb.sections) : []).forEach(function (m) { m.list.forEach(function (x) { n++; if (s.ls[x[0]] && s.ls[x[0]].done) d++; }); });
         counts[sb.id] = n; done[sb.id] = d;
       });
       // Lessons started and not finished, most recent first (the store keeps them in the order they were opened).

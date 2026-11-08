@@ -1,0 +1,148 @@
+{
+  "id": "small-bowel-resection",
+  "title": "Small bowel resection with anastomosis",
+  "subtitle": "Resect what is dead, keep what is alive, measure what is left",
+  "system": "gastrointestinal",
+  "aliases": ["enterectomy", "small bowel resection", "SBR", "ileal resection", "jejunal resection"],
+  "estMinutes": 120,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "wses-asbo-2017", "org": "World Society of Emergency Surgery (WSES)", "title": "Bologna guidelines for diagnosis and management of adhesive small bowel obstruction (ASBO): 2017 update", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/29946347/", "accessed": "2026-11-04" },
+    { "id": "wses-iai-2017", "org": "World Society of Emergency Surgery (WSES)", "title": "The management of intra-abdominal infections from a global perspective: 2017 WSES guidelines", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/28702076/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "possum", "caprini", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Non-viable small bowel from strangulated obstruction: adhesive band, internal hernia, or a strangulated external hernia.",
+      "Acute mesenteric ischaemia after revascularisation or where infarcted bowel must be removed.",
+      "Small bowel tumours, Crohn's strictures not suitable for strictureplasty, traumatic injury with extensive damage, and some perforations (for example typhoid or tuberculous perforation where the segment is diseased)."
+    ],
+    "contraindications": [
+      "A primary anastomosis is relatively contraindicated in the unstable, vasopressor-dependent, acidotic or hypothermic patient: resect, leave in discontinuity and return at a planned second look.",
+      "Bowel of doubtful viability that might recover with time and warmth should not be resected reflexly; reassess or plan a second look.",
+      "Strictureplasty rather than resection is preferred for short Crohn's strictures to preserve length."
+    ],
+    "preparation": [
+      "Resuscitate, nasogastric decompression, urinary catheter, correct electrolytes.",
+      "CT signs of strangulation (reduced wall enhancement, mesenteric fluid, closed loop, pneumatosis) mean theatre, not a trial of conservative management.",
+      "Antibiotic prophylaxis, or treatment when there is peritonitis or necrosis.",
+      "Consent to include stoma, leak, short bowel if extensive resection is possible, and second-look laparotomy."
+    ],
+    "positioning": [
+      "Supine, arms out.",
+      "Warming from the start; hypothermia worsens coagulopathy and anastomotic healing."
+    ],
+    "equipment": [
+      "Laparotomy set with self-retaining retractor.",
+      "Linear cutting staplers and/or slowly absorbable monofilament sutures.",
+      "Bowel clamps, warm packs, a sterile tape measure or ruler for measuring residual length."
+    ],
+    "anatomy": [
+      "The small bowel runs roughly from the duodenojejunal flexure to the ileocaecal valve. Total length varies widely between people, which is why the length LEFT is measured rather than the length removed.",
+      "The jejunum has a thicker wall, a wider lumen, fewer arcades and longer vasa recta; the ileum has more arcades, shorter vasa recta and more mesenteric fat.",
+      "The superior mesenteric artery supplies the small bowel through jejunal and ileal branches joined by arcades. The vasa recta are end arteries to the bowel wall.",
+      "The terminal ileum absorbs vitamin B12 and bile salts; its loss has metabolic consequences even when total length is adequate.",
+      "The ileocaecal valve slows transit, and its preservation matters when residual length is short."
+    ],
+    "criticalSafety": [
+      "Assess viability over time, after relief of obstruction and with warm packs, before deciding the extent of resection.",
+      "Measure and record the length of remaining small bowel along the antimesenteric border, and whether the ileocaecal valve and colon are in continuity. This number determines the patient's nutritional future.",
+      "Decide whether an anastomosis is safe in this patient today. Physiology, not technique, is the commonest reason an anastomosis fails.",
+      "In mesenteric ischaemia, a planned second look within 24 to 48 hours is often safer than an anastomosis at the first operation."
+    ],
+    "structuresAtRisk": [
+      "Superior mesenteric vessels at the root of the mesentery",
+      "Arcades supplying the retained ends",
+      "Ureters and duodenum when dividing adhesions",
+      "Adjacent loops during adhesiolysis"
+    ],
+    "commonErrors": [
+      "Resecting bowel that would have recovered, or keeping bowel that would not.",
+      "Not measuring the residual length.",
+      "Making an anastomosis in a shocked, acidotic patient because a stoma felt like a failure.",
+      "Missing a second point of obstruction or a second ischaemic segment because the whole bowel was not run.",
+      "Leaving the mesenteric defect open, creating a route for internal herniation."
+    ],
+    "complications": [
+      "Anastomotic leak, typically presenting from day three to five with tachycardia, pain and sepsis.",
+      "Intra-abdominal collection, prolonged ileus, early adhesive obstruction.",
+      "Short bowel syndrome and intestinal failure after extensive resection.",
+      "Bile salt diarrhoea and vitamin B12 deficiency after terminal ileal resection.",
+      "Wound infection, dehiscence, incisional hernia, and the general complications of emergency laparotomy."
+    ],
+    "postop": [
+      "Monitor for leak: unexplained tachycardia, increasing pain, rising inflammatory markers or new organ dysfunction warrant a CT, not reassurance.",
+      "Early enteral feeding when the patient is ready; after extensive resection, involve the nutrition team early.",
+      "Fluid and electrolyte balance closely after extensive resection, with attention to magnesium.",
+      "Vitamin B12 replacement after significant terminal ileal resection.",
+      "Thromboprophylaxis per local protocol."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Active warming from induction." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.abd.midline" },
+    { "ref": "step.abd.exploration", "emphasis": "Run the entire small bowel from the duodenojejunal flexure to the ileocaecal valve. There may be a second lesion." },
+    { "ref": "step.abd.bowel-handling", "emphasis": "Relieve the obstruction first, wrap the segment in warm packs, and reassess after several minutes before deciding what to resect." },
+    { "ref": "step.sbr.define-margins" },
+    { "ref": "step.bowel.mesentery-division" },
+    { "ref": "step.bowel.bowel-division" },
+    { "ref": "step.bowel.anastomosis-stapled", "emphasis": "Option A, if an anastomosis is safe." },
+    { "ref": "step.bowel.anastomosis-handsewn", "emphasis": "Option B, for thick, oedematous or mismatched bowel. Choose one." },
+    { "ref": "step.sbr.mesenteric-defect" },
+    { "ref": "step.bowel.leak-check" },
+    { "ref": "step.sbr.measure-length" },
+    { "ref": "step.abd.lavage" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.abd.mass-closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "State the residual length, the valve status and whether a second look is planned." }
+  ],
+  "steps_local": {
+    "step.sbr.define-margins": {
+      "id": "step.sbr.define-margins", "kind": "checkpoint", "critical": true,
+      "title": "Deciding the extent of resection",
+      "why": "Every centimetre resected unnecessarily may matter later, and every centimetre of dead bowel left behind will perforate. The margin is set on viability, not on convenience.",
+      "how": [
+        "Mark the proximal and distal limits on bowel that is clearly viable: pink, peristalsing, with pulsatile mesenteric vessels and bleeding from the serosa.",
+        "For a tumour, take an adequate margin with the draining mesentery as the oncological plan requires.",
+        "Where viability of a long segment is uncertain, resect only what is clearly dead and plan a second look rather than resecting all doubtful bowel.",
+        "Discuss extensive resection with a senior before proceeding."
+      ],
+      "structuresAtRisk": ["Residual small bowel length"],
+      "pitfalls": ["Resecting a long segment of dusky but recoverable bowel immediately after releasing a band."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.sbr.mesenteric-defect": {
+      "id": "step.sbr.mesenteric-defect", "kind": "closure",
+      "title": "Closing the mesenteric defect",
+      "why": "An open mesenteric window can trap a loop of small bowel and cause an internal hernia. Closure must not catch or kink the vessels supplying the anastomosis.",
+      "how": [
+        "Close the cut edges of the mesentery with interrupted or continuous absorbable sutures, taking only the peritoneum.",
+        "Watch the anastomotic ends for colour change as you close."
+      ],
+      "structuresAtRisk": ["Mesenteric vessels to the anastomosis"],
+      "pitfalls": ["Deep bites that ligate a vessel or create a haematoma."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.sbr.measure-length": {
+      "id": "step.sbr.measure-length", "kind": "checkpoint", "critical": true,
+      "title": "Measuring and recording residual small bowel",
+      "why": "The residual length, the presence of the ileocaecal valve and continuity with the colon predict the risk of intestinal failure. If it is not recorded at this operation, nobody will know it later.",
+      "how": [
+        "Measure the remaining small bowel along the antimesenteric border without stretching, from the duodenojejunal flexure to the anastomosis and from the anastomosis to the valve or stoma.",
+        "Record the total, whether the valve and colon remain, and the length and site of what was removed.",
+        "If residual length is short, involve the nutrition and intestinal failure teams early."
+      ],
+      "structuresAtRisk": ["None: this is a measurement step"],
+      "pitfalls": ["Estimating rather than measuring.", "Recording what was removed but not what remains."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

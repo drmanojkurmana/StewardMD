@@ -3,7 +3,7 @@
  "module": "obg-abortion",
  "subject": "obstetrics-gynaecology",
  "title": "Miscarriage and medical termination of pregnancy: key classifications, causes and legal limits",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "**Threatened abortion** shows bleeding with a closed cervix and an alive fetus. Around two-thirds of these pregnancies continue beyond 28 weeks. Those that continue carry higher risks of preterm labour, placenta praevia, growth restriction and fetal anomalies. Management is rest and avoiding coitus, with progesterone support in selected cases.",
@@ -14,6 +14,17 @@
    "tx": "**Recurrent pregnancy loss** is usually defined as three or more pregnancy losses. Chromosomal defects, notably balanced translocations, dominate first trimester loss. Second trimester loss is more often anatomical, with **cervical incompetence** as a leading cause. The commonest cause of cervical incompetence is idiopathic, but congenital Mullerian anomalies, DES exposure, obstetric trauma and conization are recognised causes.",
    "say": "Recurrent pregnancy loss is usually defined as three or more pregnancy losses. Chromosomal defects, notably balanced translocations, dominate first trimester loss. Second trimester loss is more often anatomical, with cervical incompetence as a leading cause. Its commonest cause is idiopathic, but congenital Mullerian anomalies, DES exposure, obstetric trauma and conization are recognised causes.",
    "vis": null
+  },
+  {
+   "tx": "The scan shows membranes bulging through the internal os with a short remaining cervical canal. This is the anatomy behind **cervical incompetence**, a leading cause of **second trimester loss** in women with recurrent miscarriage. Transvaginal measurement of **bulging membranes** and short length flags the at risk cervix. Recognised contributors include prior obstetric trauma, conization and congenital uterine anomalies.",
+   "say": "The ultrasound shows the membranes pushing down through the open inner cervix with little closed length left. A weak cervix opening silently in mid pregnancy explains repeated second trimester losses. Measuring the cervix and spotting bulging membranes identifies the problem, and past trauma, cone treatment or womb shape differences are known contributors.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-abortion-gen1.webp",
+    "alt": "Transvaginal ultrasound showing bulging membranes at the internal os with short cervical length.",
+    "caption": "Bulging membranes with short cervix in mid pregnancy. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "tx": "**Antiphospholipid antibody syndrome** is an autoimmune cause of recurrent second trimester loss. Lupus anticoagulant prolongs the aPTT but acts as a procoagulant. Diagnosis needs two positive tests at least six weeks apart. ACOG suggests low dose aspirin 81 mg with prophylactic LMWH, such as dalteparin 5000 units subcutaneously twice daily, started once pregnancy is confirmed.",
@@ -40,8 +51,8 @@
    }
   },
   {
-   "tx": "Medical termination under the **MTP legislation** is permitted up to 20 weeks, which is 140 days. Once the pregnancy passes 12 weeks, two registered medical practitioners must agree. The **mifepristone followed by misoprostol** regimen is restricted to 9 weeks, or 63 days. Key **contraindications** include haemoglobin below 8 grams, suspected **ectopic pregnancy**, glaucoma and uncontrolled hypertension.",
-   "say": "Medical termination under the MTP legislation is permitted up to 20 weeks, which is 140 days. Once the pregnancy passes 12 weeks, two registered medical practitioners must agree. The mifepristone followed by misoprostol regimen is restricted to 9 weeks, or 63 days. Key contraindications include haemoglobin below 8 grams, suspected ectopic pregnancy, glaucoma and uncontrolled hypertension.",
+   "tx": "Medical termination under the **MTP (Amendment) Act 2021** is permitted up to 20 weeks, and up to 24 weeks (168 days) for specified categories. Up to 20 weeks one medical practitioner may certify; from 20 to 24 weeks two medical practitioners must agree. Beyond 24 weeks a medical board may allow it only for substantial foetal abnormality. The **mifepristone followed by misoprostol** regimen is restricted to 9 weeks, or 63 days. Key **contraindications** that doctors must exclude are haemoglobin below 8 grams, suspected **ectopic pregnancy**, glaucoma and uncontrolled hypertension.",
+   "say": "Medical termination under the amended MTP Act is permitted up to 20 weeks, and up to 24 weeks for specified categories, which is 168 days. Up to 20 weeks one registered medical practitioner may certify, and from 20 to 24 weeks two must agree. Beyond 24 weeks only a medical board may allow it for substantial foetal abnormality. The mifepristone followed by misoprostol regimen is restricted to 9 weeks, or 63 days. Key contraindications that doctors must exclude are haemoglobin below 8 grams, suspected ectopic pregnancy, glaucoma and uncontrolled hypertension.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -52,13 +63,13 @@
      },
      {
       "id": "b",
-      "label": "9 to 12 weeks",
-      "sub": "Procedure options widen"
+      "label": "9 to 20 weeks",
+      "sub": "One doctor certifies"
      },
      {
       "id": "c",
-      "label": "12 to 20 weeks",
-      "sub": "Needs two doctors"
+      "label": "20 to 24 weeks",
+      "sub": "Two doctors, specified category"
      }
     ],
     "edges": [

@@ -1,0 +1,205 @@
+{
+  "gen": "AI",
+  "id": "prd-contrast-media-safety",
+  "module": "Pediatric Radiation Protection, ALARA and Contrast Media",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Pediatric Intravenous Contrast Agents and Sedation Protocols",
+  "v": 1,
+  "steps": [
+    {
+      "say": "For intravenous studies in children we reach for a low osmolar non ionic monomer such as iohexol or iopamidol. The usual dose is one point five to two millilitres per kilogram, and we never exceed three millilitres per kilogram or one hundred millilitres in total, whichever comes first.",
+      "tx": "Use **low-osmolar non-ionic iodinated contrast** for paediatric intravenous (IV) studies. Agents such as iohexol and iopamidol are the standard monomers because they cause fewer reactions and less discomfort than older high-osmolar media. Give 1.5 to 2.0 mL/kg by weight, with an absolute ceiling of 3.0 mL/kg or 100 mL total, and record the exact volume given in the report for every child scanned (Macrocyclic gadolinium preference).",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/contrast-safety-kidneys-allergy-fig1.webp",
+        "alt": "Contrast safety summary covering kidney protection, allergy risk and safe administration in children.",
+        "caption": "Contrast safety: kidney protection and allergy precautions. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "When a child needs magnetic resonance imaging with contrast, choose a macrocyclic gadolinium agent like gadobutrol or gadoterate. These ring shaped molecules hold onto gadolinium tightly, so almost none is left behind in the brain or bone, which is exactly what we want in a growing child.",
+      "tx": "Prefer **macrocyclic gadolinium-based contrast agents** for paediatric magnetic resonance imaging (MRI). Gadobutrol and gadoterate have a closed ring structure with high thermodynamic stability, so the gadolinium ion stays chelated and is excreted unchanged. This stability is the main reason macrocyclic agents carry the lowest risk of intracranial and bone gadolinium retention in children who may need repeated scans over a lifetime (Linear GBCA restriction).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Macrocyclic agents (preferred)",
+          "points": [
+            "Gadobutrol and gadoterate in a stable ring",
+            "Minimal brain or bone retention",
+            "First choice in all children"
+          ]
+        },
+        "right": {
+          "title": "Linear agents (avoid)",
+          "points": [
+            "Open chain chelate, less stable",
+            "Deposition in dentate nucleus described",
+            "Suspended or restricted in children"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Older linear gadolinium agents behave very differently, and regulators acted on that difference. Because free gadolinium was found deposited in the dentate nucleus and globus pallidus after repeated doses, linear agents are now suspended or severely restricted for children, so check the label before any booking.",
+      "tx": "Respect the **linear gadolinium contrast agent restriction** in paediatric practice. Linear agents release gadolinium more readily, and follow up imaging showed long term deposition in the dentate nucleus and globus pallidus of the brain. European regulators therefore suspended or severely restricted these products in children. Before any examination, confirm the agent on the trolley is macrocyclic and document its name and dose (Pediatric eGFR calculation).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent class",
+          "Paediatric position"
+        ],
+        "rows": [
+          [
+            "Macrocyclic (gadobutrol, gadoterate)",
+            "Preferred at standard dose"
+          ],
+          [
+            "Linear agents",
+            "Suspended or severely restricted"
+          ],
+          [
+            "Any repeat study",
+            "Review cumulative gadolinium history first"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Kidney function in a child is not read off the adult chart on the wall. We calculate it at the bedside with the Schwartz formula, multiplying nought point four one three by the height in centimetres and dividing by the serum creatinine, so measure the child's height on the day.",
+      "tx": "Calculate **paediatric estimated glomerular filtration rate (eGFR)** with the updated bedside Schwartz formula: eGFR = 0.413 x Height (cm) / Serum Creatinine (mg/dL). Height is essential because muscle mass, and therefore creatinine generation, scales with growth in children. A creatinine value that looks normal for an adult can hide poor renal function in a short child, so never book contrast on creatinine alone (Nephrogenic systemic fibrosis risk).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Measure height and serum creatinine"
+          },
+          {
+            "id": "b",
+            "label": "eGFR = 0.413 x height / creatinine"
+          },
+          {
+            "id": "c",
+            "label": "Compare with 30 mL/min/1.73m2 threshold"
+          },
+          {
+            "id": "d",
+            "label": "Decide contrast and hydration plan"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Parents often ask about nephrogenic systemic fibrosis, and here the news is reassuring. That fibrosing condition is virtually eliminated once the filtration rate stays above thirty and a macrocyclic agent is used at the standard dose of nought point one millimoles per kilogram.",
+      "tx": "Counsel families that **nephrogenic systemic fibrosis (NSF) risk** is virtually eliminated when eGFR exceeds 30 mL/min/1.73m2 and a macrocyclic agent is given at the standard dose of 0.1 mmol/kg (0.2 mL/kg for a 0.5 molar preparation). NSF was linked to unstable linear agents in severe renal failure. Below that threshold, seek a nephrology opinion, consider a non contrast technique, and document the shared decision (Enteral contrast dilution in infants).",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/urinary-tract-obstruction-fig1.webp",
+        "alt": "Urinary tract imaging showing the kidneys and collecting systems assessed before contrast studies.",
+        "caption": "Renal assessment before contrast administration. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Oral contrast needs just as much care in a small baby. Gastrografin is intensely hyperosmolar at about nineteen hundred milliosmoles per litre, so in neonates we dilute it one to four or one to five, otherwise it pulls fluid into the bowel and can tip the baby into hypovolaemia.",
+      "tx": "Dilute **enteral water-soluble iodinated contrast** before use in neonates and young infants. Meglumine diatrizoate (Gastrografin) is hyperosmolar at 1900 mOsm/L, far above plasma, so undiluted contrast draws water into the gut lumen and can cause fluid shift, hypovolemia and enterocolitis. Dilute 1:4 to 1:5 for neonatal studies, give it slowly, and monitor hydration throughout the examination.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Situation",
+          "Contrast handling"
+        ],
+        "rows": [
+          [
+            "Neonate or young infant",
+            "Dilute diatrizoate 1:4 to 1:5"
+          ],
+          [
+            "Older child",
+            "Standard dilution per protocol"
+          ],
+          [
+            "Suspected perforation",
+            "Water-soluble agent, never barium"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Many infant scans need no sedation at all if we time them well. Feeding the baby and wrapping them snugly so they sleep naturally, the feed and swaddle method, gives diagnostic brain and spine pictures in over eighty five percent of infants under three to four months.",
+      "tx": "Use the **feed and swaddle MRI technique** before considering sedation or general anaesthesia. A warm feed followed by firm swaddling, ear protection and a quiet scanner room induces natural sleep, achieving diagnostic quality brain and spine MRI in infants under 3-4 months of age in over 85-90% of scans. Success avoids anaesthetic risk, fasting delays and recovery time, so schedule these babies at their usual nap time (Contrast extravasation management).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Book infant under 3-4 months at nap time"
+          },
+          {
+            "id": "b",
+            "label": "Warm feed, then firm swaddle"
+          },
+          {
+            "id": "c",
+            "label": "Ear protection and quiet room"
+          },
+          {
+            "id": "d",
+            "label": "Diagnostic MRI without anaesthesia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Contrast occasionally leaks into the tissues around a small cannula, and small volumes matter in a neonatal arm. Stop the injection, remove the catheter, lift the limb and apply a cold compress, and call plastic surgery early if more than five to ten millilitres has gone in.",
+      "tx": "Manage **peripheral IV contrast extravasation** actively in neonates and infants. Stop the injection at once, remove the catheter, elevate the extremity and apply a cold compress while marking the swollen area and checking perfusion. Volumes that seem trivial in adults are significant in a neonatal limb, so obtain a plastic surgery opinion whenever the extravasated volume exceeds 5-10 mL or blistering appears.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immediate bedside steps",
+          "points": [
+            "Stop injection and remove catheter",
+            "Elevate limb, cold compress",
+            "Mark area and check perfusion"
+          ]
+        },
+        "right": {
+          "title": "Escalate when",
+          "points": [
+            "Volume exceeds 5-10 mL",
+            "Blistering or tense swelling",
+            "Plastic surgery review needed"
+          ]
+        }
+      }
+    }
+  ]
+}

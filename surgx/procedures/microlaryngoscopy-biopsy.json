@@ -1,0 +1,201 @@
+{
+  "id": "microlaryngoscopy-biopsy",
+  "title": "Direct laryngoscopy and microlaryngoscopy with biopsy",
+  "subtitle": "Agree the airway first, map before you bite",
+  "system": "ent",
+  "aliases": ["microlaryngoscopy", "MLB", "direct laryngoscopy", "DL", "panendoscopy", "laryngeal biopsy", "suspension laryngoscopy"],
+  "estMinutes": 40,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng36", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Cancer of the upper aerodigestive tract: assessment and management in people aged 16 and over (NG36)", "year": 2016, "url": "https://www.nice.org.uk/guidance/ng36", "accessed": "2026-11-04" },
+    { "id": "uk-larynx-2016", "org": "ENT UK and partner specialty associations (UK National Multidisciplinary Guidelines)", "title": "Laryngeal cancer: United Kingdom National Multidisciplinary Guidelines (Jones TM et al., J Laryngol Otol)", "year": 2016, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Laryngeal+cancer+United+Kingdom+National+Multidisciplinary+guidelines", "accessed": "2026-11-04" },
+    { "id": "das-2015", "org": "Difficult Airway Society (DAS)", "title": "Difficult Airway Society 2015 guidelines for management of unanticipated difficult intubation in adults", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/26556848/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["mallampati", "stopbang"],
+  "chapters": {
+    "indications": [
+      "Histological diagnosis and staging of a suspected laryngeal, hypopharyngeal or oropharyngeal cancer seen on flexible nasendoscopy, with assessment of extent for the MDT.",
+      "Excision biopsy or treatment of benign vocal fold lesions (polyps, cysts, nodules not responding to voice therapy, papillomatosis) and of leukoplakia or suspected dysplasia.",
+      "Assessment of airway stenosis, persistent unexplained hoarseness or a lesion that cannot be fully seen in clinic.",
+      "Search for a primary in a patient with a metastatic neck node and unknown primary, as part of panendoscopy with targeted biopsies."
+    ],
+    "contraindications": [
+      "An obstructing airway lesion where general anaesthesia without a secured airway is unsafe. The airway plan comes first, which may mean awake tracheostomy or awake fibreoptic intubation before the biopsy.",
+      "Severe cervical spine disease or instability that prevents the neck position needed for exposure; consider flexible endoscopic biopsy under local anaesthesia.",
+      "Uncorrected coagulopathy for biopsy of a vascular lesion.",
+      "Where imaging is still needed for staging, scan before the biopsy where possible, because biopsy oedema can distort the images."
+    ],
+    "preparation": [
+      "Review the flexible nasendoscopy images or video with the anaesthetist: the size and site of the lesion, its effect on the airway, and the expected difficulty of exposure.",
+      "Cross-sectional imaging for suspected malignancy, ideally before biopsy, as set out in the UK laryngeal cancer guideline.",
+      "Agree the ventilation technique: small-bore microlaryngoscopy tube, jet ventilation, or tubeless techniques; and laser safety precautions if a laser will be used.",
+      "Consent risks to discuss: damage to teeth, lips, gums and tongue; sore throat; change in voice, which may be permanent after vocal fold surgery; bleeding; airway swelling and the rare need for a tracheostomy; tongue numbness or taste change from pressure; perforation of the pharynx or oesophagus if the oesophagus is examined; and that the biopsy may be non-diagnostic and need repeating."
+    ],
+    "positioning": [
+      "Supine with the neck flexed on the chest and the head extended at the atlanto-occipital joint (the sniffing position), on a head ring with a pillow or adjustable headrest.",
+      "Table height so the surgeon looks down the laryngoscope with a straight back; the suspension frame rests on a chest support or a Mayo table, never on the chest wall alone.",
+      "Eyes taped and protected from instruments and from laser if used."
+    ],
+    "equipment": [
+      "Range of operating laryngoscopes, including an anterior commissure laryngoscope, and suspension apparatus.",
+      "Operating microscope with a long focal length objective lens suitable for laryngeal work, and 0, 30 and 70 degree rigid endoscopes with camera and recording.",
+      "Microlaryngeal instruments: cupped and straight biting forceps, microscissors, sickle knife, fine suction; topical adrenaline on counted neurosurgical patties with strings.",
+      "Tooth guard; rigid oesophagoscope or pharyngoscope if panendoscopy is planned; laser with laser-safe tube, wet patties and fire precautions if planned."
+    ],
+    "anatomy": [
+      "The larynx has three subsites: the supraglottis (epiglottis, aryepiglottic folds, false cords, ventricles), the glottis (true vocal folds and the anterior and posterior commissures), and the subglottis down to the lower border of the cricoid.",
+      "The vocal fold is layered: epithelium, the superficial lamina propria (Reinke's space), the vocal ligament and the vocalis muscle. Voice quality depends on the superficial lamina propria being preserved.",
+      "The anterior commissure is where the two folds meet. Raw surfaces on both sides here heal with a web.",
+      "The hypopharynx comprises the piriform fossae, the posterior pharyngeal wall and the postcricoid region; a systematic examination includes them for any cancer workup.",
+      "The vallecula and tongue base sit above the epiglottis, and are examined and palpated for the unknown primary and for supraglottic extension."
+    ],
+    "criticalSafety": [
+      "The airway plan is agreed before induction, including what happens if the lesion bleeds or swells after biopsy and the patient cannot be extubated.",
+      "Protect the upper teeth; never lever on them to gain exposure.",
+      "Map and photograph the lesion before biopsy; biopsy changes the appearance and the next person cannot see what you saw.",
+      "Count patties in and out; a patty left in the larynx or trachea obstructs the airway.",
+      "For benign vocal fold lesions, preserve the superficial lamina propria and avoid raw surfaces at both sides of the anterior commissure."
+    ],
+    "structuresAtRisk": [
+      "Upper teeth, lips and gums",
+      "Vocal fold layered structure and the anterior commissure",
+      "Airway (bleeding, oedema, retained patty)",
+      "Lingual and hypoglossal nerves (pressure from the laryngoscope)",
+      "Pharyngeal and oesophageal wall if rigid oesophagoscopy is performed"
+    ],
+    "commonErrors": [
+      "Taking a small superficial biopsy from the necrotic centre of a tumour, which returns as non-diagnostic.",
+      "Failing to examine the subglottis, ventricles and hypopharynx, so the stage is wrong.",
+      "Stripping the whole vocal fold mucosa for a benign or dysplastic lesion.",
+      "Not recording the exposure difficulty and the airway findings for the anaesthetist who will see the patient next."
+    ],
+    "complications": [
+      "Dental injury, lip and tongue injury, tongue numbness or taste change from pressure.",
+      "Airway oedema or bleeding after biopsy, occasionally needing reintubation or tracheostomy; laryngospasm at extubation.",
+      "Voice change, vocal fold scarring or anterior commissure web.",
+      "Pharyngeal or oesophageal perforation after rigid endoscopy, presenting with pain, fever, surgical emphysema or tachycardia."
+    ],
+    "postop": [
+      "Observe for stridor and bleeding. Humidified oxygen and a plan agreed with the anaesthetist for patients with a bulky airway lesion; some need high-dependency care.",
+      "Voice rest according to the surgeon's instruction for vocal fold surgery, and voice therapy referral where indicated.",
+      "If the oesophagus was examined with a rigid scope, check for chest or neck pain, fever and surgical emphysema before oral intake.",
+      "Results go to the head and neck MDT; give the patient a date and a named contact for the results."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Teeth, voice change and the airway risks discussed. For suspected cancer, the patient knows this is a diagnostic operation and when results are expected." },
+    { "ref": "step.ent.preop-data-check", "emphasis": "Flexible nasendoscopy images and the imaging on screen. Agree the subsites to examine and biopsy." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "No routine antibiotics. VTE assessment. The anaesthetist may give dexamethasone to reduce airway oedema." },
+    { "ref": "step.ent.airway-share", "emphasis": "Microlaryngoscopy tube, jet ventilation or tubeless technique agreed; laser fire precautions if a laser is used. For an obstructing lesion, the surgeon is scrubbed at induction with the tracheostomy set open." },
+    { "ref": "step.core.positioning", "emphasis": "Sniffing position. Chest support for the suspension arm placed before the laryngoscope goes in." },
+    { "ref": "step.ent.dental-protection" },
+    { "ref": "step.mll.insert" },
+    { "ref": "step.mll.survey" },
+    { "ref": "step.mll.suspend" },
+    { "ref": "step.ent.microscope-setup", "emphasis": "Long focal length objective so the microscope works down the laryngoscope; leave room for instruments." },
+    { "ref": "step.mll.biopsy" },
+    { "ref": "step.mll.airway-bailout" },
+    { "ref": "step.core.haemostasis", "emphasis": "Adrenaline-soaked patties on strings, pressure, and suction diathermy for discrete points. Reinspect after the patties come out." },
+    { "ref": "step.ent.pharynx-clearance", "emphasis": "Every patty and the tooth guard accounted for; the larynx and hypopharynx free of clot before extubation." },
+    { "ref": "step.core.counts", "emphasis": "Patties counted out by number and checked against the strings." },
+    { "ref": "step.core.specimen", "emphasis": "Each biopsy site in a separate, labelled pot with the subsite named; state the clinical question on the form." },
+    { "ref": "step.ent.airway-handover", "emphasis": "State the lesion, the bleeding and swelling risk, and the plan if stridor develops." },
+    { "ref": "step.core.debrief", "emphasis": "Draw or describe the lesion map by subsite, attach the photographs, and record exposure difficulty and the laryngoscope that worked." }
+  ],
+  "steps_local": {
+    "step.mll.insert": {
+      "id": "step.mll.insert",
+      "kind": "access",
+      "critical": true,
+      "title": "Introduce the laryngoscope without using the teeth",
+      "why": "Exposure of the larynx is achieved by lifting the tongue and hyoid forward along the laryngoscope's axis. Levering against the teeth breaks them and rarely improves the view.",
+      "how": [
+        "Open the mouth with the fingers of the left hand, protecting the upper teeth and lips with the tooth guard.",
+        "Insert the laryngoscope along the right side of the tongue, moving the tongue to the left, and advance in the midline to see the epiglottis.",
+        "Lift the epiglottis with the tip and advance into the larynx, lifting along the line of the handle. Avoid catching the lips between the scope and the teeth.",
+        "If the view is poor, ask for external laryngeal pressure, change the head position, or choose a different laryngoscope before forcing the current one."
+      ],
+      "structuresAtRisk": ["Upper teeth", "Lips", "Tongue", "Endotracheal tube"],
+      "pitfalls": [
+        "Pivoting on the upper incisors to gain an anterior view.",
+        "Displacing a small tube while manoeuvring the laryngoscope; watch the capnograph and tell the anaesthetist."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mll.survey": {
+      "id": "step.mll.survey",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Systematic examination and lesion mapping before biopsy",
+      "why": "The MDT stages the tumour from this examination. A lesion seen only in part, or an extension into the subglottis or hypopharynx that is missed, puts the patient into the wrong treatment.",
+      "how": [
+        "Examine in a fixed order: oral cavity, tongue base and vallecula, epiglottis, aryepiglottic folds, false cords, ventricles, true cords, anterior and posterior commissures, subglottis, then piriform fossae, posterior pharyngeal wall and postcricoid region.",
+        "Use 0, 30 and 70 degree endoscopes to see the ventricles, the undersurface of the cords and the subglottis.",
+        "Palpate the tongue base and tonsils, and note vocal fold mobility as seen in clinic.",
+        "Photograph or record the lesion and its extent before biopsy, and state the subsites involved aloud."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Biopsying the first abnormality seen and stopping the examination.",
+        "Missing subglottic extension because only a zero degree view was used."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mll.suspend": {
+      "id": "step.mll.suspend",
+      "kind": "access",
+      "title": "Suspend the laryngoscope",
+      "why": "Suspension frees both hands for microsurgery and gives a stable view under the microscope. A suspension arm resting on the patient's chest compresses it and moves with every breath.",
+      "how": [
+        "Attach the suspension arm to the laryngoscope and rest it on a chest support or a Mayo table, not the chest wall.",
+        "Adjust to bring the lesion into the centre of the view, using the minimum force needed.",
+        "Check again that the teeth and lips are free and that ventilation pressures are unchanged."
+      ],
+      "structuresAtRisk": ["Upper teeth", "Tongue (pressure ischaemia, numbness)", "Chest wall"],
+      "pitfalls": [
+        "Excessive suspension force for a long time, causing tongue numbness and taste change.",
+        "Suspending with the lesion at the edge of the view, then working at an angle."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mll.biopsy": {
+      "id": "step.mll.biopsy",
+      "kind": "resection",
+      "critical": true,
+      "title": "Biopsy: deep enough for diagnosis, conservative on the vocal fold",
+      "why": "A suspected cancer needs tissue deep enough to show invasion, from the living edge of the tumour. A benign or premalignant vocal fold lesion needs the opposite: removal with the least possible disturbance of the layered fold, because the voice depends on it.",
+      "how": [
+        "For a suspected cancer, take biopsies from the edge of the lesion where tumour meets normal mucosa, avoiding necrotic centres, and take enough tissue for diagnosis. Send separately any biopsy from a different subsite.",
+        "For a benign vocal fold lesion or leukoplakia, grasp the lesion with fine forceps, retract it medially and excise it with microscissors at its base, or raise a microflap, preserving the superficial lamina propria and the vocal ligament.",
+        "Avoid creating raw areas on both sides of the anterior commissure at the same operation.",
+        "Place an adrenaline patty on the biopsy site after each bite."
+      ],
+      "structuresAtRisk": ["Vocal ligament and superficial lamina propria", "Anterior commissure", "Arytenoid cartilage"],
+      "pitfalls": [
+        "A superficial biopsy of a cancer that shows only dysplasia, leading to a repeat anaesthetic.",
+        "Stripping the whole fold for a small lesion, causing a stiff fold and a permanently poor voice."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mll.airway-bailout": {
+      "id": "step.mll.airway-bailout",
+      "kind": "bailout",
+      "title": "Bail-out: failed exposure, bleeding or a threatened airway",
+      "why": "The larynx is the airway. A bleeding biopsy site or a swollen tumour can turn a diagnostic procedure into an airway emergency, and repeated attempts at exposure cause the oedema that makes it worse.",
+      "how": [
+        "Failed exposure: try a different laryngoscope, external counter-pressure and head repositioning. If still inadequate, stop and plan a flexible endoscopic biopsy or a different approach rather than forcing.",
+        "Bleeding: pressure with an adrenaline patty and suction diathermy, under vision, while the anaesthetist protects the airway. Do not extubate until it has stopped.",
+        "Airway compromise after biopsy of a bulky tumour: agree with the anaesthetist whether to keep the patient intubated and transfer to critical care, or to perform a tracheostomy before waking, according to the shared airway plan.",
+        "Inform the consultant and record the decision and its reasons."
+      ],
+      "structuresAtRisk": ["Airway"],
+      "pitfalls": [
+        "Extubating a patient whose bulky lesion has just been biopsied without a plan for reintubation.",
+        "Repeated forceful laryngoscopy that causes swelling and bleeding."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

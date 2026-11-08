@@ -1,0 +1,64 @@
+{
+  "id": "chest-drain-management",
+  "title": "Chest drain: insertion and management",
+  "subtitle": "Safe triangle, image guidance, and when not to",
+  "category": "thoracic",
+  "specialty": "cardiothoracic",
+  "isoFigure": "chest-drain",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "bts-pleural-2023", "org": "British Thoracic Society (BTS)", "title": "British Thoracic Society Guideline for pleural disease", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37433578/", "accessed": "2026-11-04" },
+    { "id": "bts-procedures-2023", "org": "British Thoracic Society (BTS)", "title": "British Thoracic Society Clinical Statement on pleural procedures", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37433579/", "accessed": "2026-11-04" },
+    { "id": "atls", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Drain inserted below the nipple line or outside the safe triangle: risk of liver, spleen, diaphragm or heart injury." },
+      { "text": "A collapsed lung on the radiograph that could be a large bulla. Draining a bulla causes a bronchopleural fistula; get a CT first if unsure." },
+      { "text": "Complete white-out with the mediastinum pulled TOWARDS the white side: lobar collapse, not effusion. A drain will not help and may harm." },
+      { "text": "Sudden chest tightness, cough or hypoxia during drainage of a large effusion: re-expansion pulmonary oedema. Stop and clamp." },
+      { "text": "Fresh blood or a rapid rise in output from a drain: haemorrhage, which needs a surgical opinion now." },
+      { "text": "A bubbling drain that has been clamped. Clamping a drain with an air leak can produce a tension pneumothorax." }
+    ],
+    "do_now": [
+      { "text": "Use thoracic ultrasound to guide every drain for pleural fluid, either in real time or marking immediately before insertion with the patient in the same position.", "timeCritical": false, "evidenceRef": "bts-procedures-2023" },
+      { "text": "Insert within the safe triangle: the anterior border of latissimus dorsi, the lateral border of pectoralis major, a line at the level of the nipple (fifth intercostal space), with the apex below the axilla.", "evidenceRef": "bts-procedures-2023" },
+      { "text": "Never use a trocar. Use a Seldinger small-bore drain or blunt dissection with a finger sweep for a large-bore drain.", "evidenceRef": "bts-procedures-2023" },
+      { "text": "Tension pneumothorax is decompressed on clinical grounds before any imaging, then a formal drain placed.", "timeCritical": true, "evidenceRef": "atls" }
+    ],
+    "assess": [
+      { "text": "Confirm the side against the imaging and the patient at the bedside, and mark it. Wrong-side drains still happen." },
+      { "text": "Indication and size: small-bore Seldinger drains are first-line for most pneumothoraces, effusions and pleural infection. Large-bore drains for trauma haemothorax and some cases of haemothorax or viscous collections." },
+      { "text": "Check coagulation and anticoagulant status in elective cases; do not delay an emergency drain for this." },
+      { "text": "Daily drain review: swinging, bubbling, draining, volume and character of fluid, insertion site and position on imaging." }
+    ],
+    "investigate": [
+      { "text": "Chest radiograph after insertion to confirm position and response." },
+      { "text": "Send pleural fluid for protein, LDH, pH, glucose, microscopy and culture, and cytology as indicated, at the time of insertion." },
+      { "text": "CT chest for a drain that is not working, an unexpected collection, suspected malposition or a suspected bulla." }
+    ],
+    "resuscitate": [
+      { "text": "Drain large effusions in a controlled manner and stop if the patient develops chest tightness, cough or vasovagal symptoms, to reduce re-expansion pulmonary oedema.", "evidenceRef": "bts-procedures-2023" },
+      { "text": "Keep the underwater seal bottle below the level of the chest at all times and never clamp a bubbling drain.", "evidenceRef": "bts-procedures-2023" },
+      { "text": "Adequate analgesia; give premedication or sedation only with appropriate monitoring.", "evidenceRef": "bts-procedures-2023" }
+    ],
+    "definitive": [
+      { "text": "Remove the drain when it has stopped bubbling and the lung is re-expanded for pneumothorax, or when fluid output has fallen and the effusion is drained for fluid indications.", "evidenceRef": "bts-pleural-2023" },
+      { "text": "Pleural infection: drain and give antibiotics; intrapleural fibrinolytic and DNase therapy, or surgery, for failure to drain.", "evidenceRef": "bts-pleural-2023" },
+      { "text": "Persistent air leak or failure of lung re-expansion: early discussion with respiratory and thoracic surgery rather than indefinite waiting.", "evidenceRef": "bts-pleural-2023" },
+      { "text": "Remove at end-expiration or during a Valsalva manoeuvre, and close the site.", "evidenceRef": "bts-procedures-2023" }
+    ],
+    "escalate": [
+      { "text": "Senior help when the safe triangle is difficult to define, the patient is obese, or ultrasound shows no safe window." },
+      { "text": "Thoracic surgery for haemothorax, persistent air leak, failed drainage of infection, or a drain in the wrong place." },
+      { "text": "Report every serious drain-related incident through the local reporting system." }
+    ]
+  },
+  "notes": [
+    "The safe triangle is safe because it keeps you above the diaphragm and lateral to the heart. The commonest serious errors happen below it.",
+    "Ultrasound before every fluid drain. A radiograph tells you there is fluid; ultrasound tells you where you can safely reach it.",
+    "The drain is only as safe as the ward that manages it: a clamped bubbling drain or a bottle on the bed is a tension pneumothorax waiting."
+  ]
+}

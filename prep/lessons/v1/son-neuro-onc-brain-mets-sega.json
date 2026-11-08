@@ -1,0 +1,148 @@
+{
+  "v": 1,
+  "module": "son-neuro-onc-brain-mets-sega",
+  "subject": "ss-medical-oncology",
+  "title": "Brain Metastases Radiosurgery, SEGA Tuberous Sclerosis and Leptomeningeal Spread",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "Modern therapeutic paradigms for secondary **brain metastases** prioritize focal intracranial control and neurocognitive preservation. For patients presenting with limited intracranial disease (1 to 4 intact lesions, and selected patients with up to 10 low-volume metastases measuring under three centimetres), **stereotactic radiosurgery** (SRS) alone is preferred over whole-brain radiotherapy. Furthermore, in neurologically asymptomatic patients with targetable genomic alterations (such as EGFR mutations, ALK fusions, or HER2-amplified disease), upfront **CNS-penetrant targeted therapy** achieves high intracranial response, safely deferring upfront irradiation.",
+      "say": "When treating brain metastases, preserving neurocognitive function and memory is as vital as achieving tumor control. Whole-brain radiation frequently inflicts irreversible hippocampal injury and cognitive decline. For patients with limited metastases measuring less than three centimeters, stereotactic radiosurgery delivers ablative radiation precisely to tumor margins while sparing healthy brain tissue. In asymptomatic patients with targetable alterations like EGFR or ALK, modern third-generation inhibitors cross the blood-brain barrier so effectively that radiation can often be safely deferred.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/brain-tumour-fig1.webp",
+        "alt": "Contrast-enhanced cranial magnetic resonance imaging revealing circumscribed ring-enhancing metastatic parenchymal lesions.",
+        "caption": "Parenchymal cerebral metastases displaying peripheral enhancement. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "A patient presenting with a single, large (greater than three centimetres), surgically accessible, symptomatic **cerebral metastasis** causing midline shift and impending herniation requires immediate dexamethasone stabilization to rapidly eliminate peritumoral **vasogenic edema** before emergency **neurosurgical resection**. Resection rapidly relieves mass effect, provides definitive diagnostic tissue, and controls focal neurological deficits. Following complete gross surgical excision, the standard of care is adjuvant **cavity stereotactic radiosurgery** delivered to the surgical margins. This sequence yields equivalent local control to postoperative whole-brain radiotherapy while completely avoiding whole-brain neurocognitive toxicity.",
+      "say": "Managing a large, solitary symptomatic brain metastasis requires prompt multimodal neuro-oncologic intervention. When a lesion exceeds three centimeters and produces significant mass effect or peritumoral vasogenic edema, radiosurgery alone cannot achieve rapid decompression. Urgent neurosurgical resection eliminates the space-occupying threat and rapidly resolves neurological symptoms. Following complete removal, delivering stereotactic radiosurgery specifically to the operative cavity secures excellent local control without exposing the rest of the brain to radiation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Brain Met (>3 cm)"
+          },
+          {
+            "id": "m2",
+            "label": "Urgent Resection"
+          },
+          {
+            "id": "m3",
+            "label": "Resection Cavity"
+          },
+          {
+            "id": "m4",
+            "label": "Cavity Radiosurgery"
+          },
+          {
+            "id": "m5",
+            "label": "Cognitive Sparing"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2"
+          ],
+          [
+            "m2",
+            "m3"
+          ],
+          [
+            "m3",
+            "m4"
+          ],
+          [
+            "m4",
+            "m5"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In tuberous sclerosis complex, inactivating mutations in TSC1 (hamartin) or TSC2 (tuberin) lead to loss of the Rheb-GAP complex, causing constitutive hyperactivation of the mammalian target of rapamycin complex 1 (**mTORC1 signalling**). This drives the development of **subependymal giant cell astrocytomas** (SEGAs) near the foramen of Monro, which can cause acute obstructive hydrocephalus. The oral allosteric mTORC1 inhibitor **everolimus** (demonstrated in the phase three EXIST-1 trial) is the first-line medical therapy, producing sustained tumor shrinkage and avoiding morbid ventricular neurosurgery.",
+      "say": "Subependymal giant cell astrocytomas in tuberous sclerosis illustrate how unraveling molecular genetics transforms clinical surgery into medical oncology. Mutations in either TSC1 or TSC2 unleash uncontrolled mTORC1 activity, causing these benign astrocytomas to expand at the foramen of Monro and obstruct ventricular flow. The phase three EXIST-1 trial established that oral everolimus potently suppresses mTOR signaling, shrinking these vascular tumors by half or more and preventing the need for dangerous intraventricular neurosurgery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Surgical Resection (Historical)",
+          "points": [
+            "Open craniotomy into lateral ventricle",
+            "Risk of intraventricular haemorrhage",
+            "Postoperative hydrocephalus and shunt risk",
+            "Neurocognitive morbidity from tissue traction",
+            "High recurrence if subtotal excision"
+          ]
+        },
+        "right": {
+          "title": "Everolimus Therapy (EXIST-1)",
+          "points": [
+            "Oral daily allosteric mTORC1 inhibitor",
+            ">= 50% tumor volume reduction achieved",
+            "Relieves foramen of Monro obstruction",
+            "Treats concurrent epilepsy and AMLs",
+            "Avoids morbid intraventricular surgery"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Beyond intracranial SEGAs, tuberous sclerosis complex frequently produces bilateral, multifocal **renal angiomyolipomas** (AMLs), composed of abnormal thick-walled blood vessels, immature smooth muscle, and adipose tissue. Lesions measuring four centimetres or greater carry substantial risk of spontaneous vascular aneurysm rupture and catastrophic retroperitoneal haemorrhage (**Wunderlich syndrome**). In the phase three EXIST-2 trial, systemic therapy with the oral mTOR inhibitor **everolimus** achieved significant angiomyolipoma volume reduction (exceeding 50%), halted aneurysm expansion, preserved renal nephrons, and eliminated the need for invasive arterial embolization or nephrectomy.",
+      "say": "Tuberous sclerosis affects multiple organ systems simultaneously through the identical biochemical defect. Just as loss of mTOR inhibition fuels ventricular astrocytomas in the brain, it drives the proliferation of dysplastic vascular smooth muscle in the kidneys, forming bulky angiomyolipomas. When these renal lesions surpass four centimeters, aneurysms within their walls frequently rupture, causing life-threatening retroperitoneal hemorrhage. Daily everolimus shrinks the tumors, seals off fragile aneurysmal vessels, and preserves lifelong renal function.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-ix-surg-neuroimaging_icsol.webp",
+        "alt": "Computed tomography neuroimaging displaying periventricular and subependymal soft tissue architecture.",
+        "caption": "Subependymal and intracranial periventricular anatomy. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Secondary seeding of the leptomeninges and subarachnoid space (**leptomeningeal metastases**, or neoplastic meningitis) represents a devastating oncologic complication occurring in approximately 5% of advanced solid tumours. **Breast cancer** is the single most common solid tumour primary cause overall (accounting for 35% to 40% of cases), with disproportionate enrichment in triple-negative and HER2-positive subtypes, followed by lung cancer and cutaneous melanoma. Diagnosis requires contrast-enhanced **whole-neuraxis MRI** showing nodular subarachnoid enhancement and lumbar puncture **cerebrospinal fluid cytology** demonstrating malignant cells.",
+      "say": "Neoplastic meningitis develops when circulating cancer cells breach the choroid plexus or track along nerve roots into the cerebrospinal fluid. Among all solid tumors, breast cancer is the most frequent cause, responsible for over a third of all cases, particularly in patients with HER2-positive or triple-negative disease. Patients present with a classic triad of cranial neuropathies, headache, and spinal radiculopathy. You must obtain contrast-enhanced magnetic resonance imaging of both the brain and total spine, accompanied by serial lumbar punctures for malignant cytology.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Primary Solid Malignancy",
+          "Contribution to Leptomeningeal Spread",
+          "High-Risk Subtype / Driver",
+          "Diagnostic Triad"
+        ],
+        "rows": [
+          [
+            "Breast Carcinoma",
+            "35% to 40% (most common overall)",
+            "Triple-negative, HER2-positive, lobular",
+            "Multifocal cranial neuropathies, radiculopathy"
+          ],
+          [
+            "Non-Small Cell Lung Cancer",
+            "25% to 30%",
+            "EGFR-mutated, ALK-rearranged",
+            "Linear leptomeningeal enhancement on MRI"
+          ],
+          [
+            "Cutaneous Melanoma",
+            "15% to 20%",
+            "BRAF V600E, NRAS mutant",
+            "Elevated CSF opening pressure, high protein"
+          ],
+          [
+            "Gastrointestinal Tumours",
+            "5% to 10%",
+            "Gastric signet-ring adenocarcinoma",
+            "Positive CSF malignant cytology on serial taps"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_a34e6bf5fd36",
+    "q_b779b502108b",
+    "e46728c6-352c-425e-924e-b2087db4e299"
+  ],
+  "gen": "AI"
+}

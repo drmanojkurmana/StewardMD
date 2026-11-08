@@ -1,0 +1,204 @@
+{
+  "id": "modified-radical-neck-dissection",
+  "title": "Modified radical neck dissection",
+  "subtitle": "Levels I to V cleared, accessory nerve, jugular vein and sternomastoid kept",
+  "system": "head and neck",
+  "aliases": ["MRND", "comprehensive neck dissection", "neck dissection levels I to V", "functional neck dissection"],
+  "estMinutes": 180,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "robbins-2002", "org": "American Head and Neck Society and American Academy of Otolaryngology-Head and Neck Surgery", "title": "Neck dissection classification update: revisions proposed by the American Head and Neck Society and the American Academy of Otolaryngology-Head and Neck Surgery (Robbins KT et al., Arch Otolaryngol Head Neck Surg)", "year": 2002, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Robbins+neck+dissection+classification+update+revisions+proposed+American+Head+and+Neck+Society", "accessed": "2026-11-04" },
+    { "id": "robbins-2008", "org": "Archives of Otolaryngology-Head and Neck Surgery", "title": "Consensus statement on the classification and terminology of neck dissection (Robbins KT et al.)", "year": 2008, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Robbins+consensus+statement+classification+terminology+neck+dissection", "accessed": "2026-11-04" },
+    { "id": "nice-ng36", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Cancer of the upper aerodigestive tract: assessment and management in people aged 16 and over (NG36)", "year": 2016, "url": "https://www.nice.org.uk/guidance/ng36", "accessed": "2026-11-04" },
+    { "id": "nccn-hn", "org": "National Comprehensive Cancer Network (NCCN)", "title": "NCCN Clinical Practice Guidelines in Oncology: Head and Neck Cancers", "year": 2025, "url": "https://www.nccn.org/guidelines/category_1", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["ecog", "caprini", "must", "rcri"],
+  "chapters": {
+    "indications": [
+      "Clinically or radiologically node-positive neck in squamous cell carcinoma of the upper aerodigestive tract where a comprehensive (levels I to V) dissection is the MDT plan.",
+      "Nodal recurrence after previous treatment where a comprehensive dissection is feasible.",
+      "Lateral neck nodal metastases from cutaneous malignancy of the head and neck, per MDT.",
+      "Note: thyroid cancer lateral neck disease is usually treated by a selective dissection of levels II to V, not levels I to V; the MDT defines the extent."
+    ],
+    "contraindications": [
+      "Unresectable nodal disease: encasement of the common or internal carotid artery, invasion of the prevertebral fascia or deep muscles, or skull base involvement, unless the MDT has a specific plan.",
+      "Distant metastatic disease where neck surgery would not change the outcome.",
+      "Unfit for general anaesthesia; consider non-surgical treatment.",
+      "Bilateral internal jugular vein sacrifice at one sitting should be avoided; stage it if both veins must go."
+    ],
+    "preparation": [
+      "Tissue diagnosis of the primary or the node, cross-sectional imaging of the neck, and staging of the chest per NICE NG36 and the MDT.",
+      "Airway plan with the anaesthetist; consider whether the primary resection or a tracheostomy is part of the same operation.",
+      "Dental, nutritional and speech and swallowing assessment before treatment; feeding plan if the primary is being resected.",
+      "Assess shoulder function and document baseline cranial nerve function (VII marginal branch, X, XI, XII).",
+      "Consent risks: shoulder weakness and pain from accessory nerve injury, lower lip weakness (marginal mandibular nerve), tongue weakness (hypoglossal), lingual nerve numbness, haematoma, chyle leak, seroma, wound infection or breakdown (higher after radiotherapy), facial and neck lymphoedema, numbness of the ear and neck skin, carotid injury and stroke (rare), and unplanned sacrifice of the vein, nerve or muscle if involved by tumour."
+    ],
+    "positioning": [
+      "Supine with a shoulder roll, head on a ring, turned away from the side of dissection, slight reverse Trendelenburg.",
+      "Arm on the operated side tucked and the shoulder pulled gently down to open the posterior triangle, without traction on the brachial plexus.",
+      "Eyes protected; tube secured to the opposite side away from the field."
+    ],
+    "equipment": [
+      "Head and neck set with fine dissecting scissors, bipolar and monopolar diathermy, ligaclips and a vessel-sealing device where preferred.",
+      "Nerve stimulator to confirm motor nerves (accessory, hypoglossal, marginal mandibular, phrenic).",
+      "Vascular instruments and fine monofilament vascular sutures available.",
+      "Closed suction drains; specimen board and level labels prepared in advance."
+    ],
+    "anatomy": [
+      "Levels: Ia submental and Ib submandibular triangles; II upper jugular (skull base to hyoid), divided by the accessory nerve into IIa (anterior) and IIb (posterior); III mid jugular (hyoid to cricoid); IV lower jugular (cricoid to clavicle); V posterior triangle, between the posterior border of sternocleidomastoid and the anterior border of trapezius, split by the cricoid level into Va and Vb.",
+      "A radical neck dissection clears levels I to V and sacrifices the accessory nerve, internal jugular vein and sternocleidomastoid; a modified radical dissection clears the same levels and preserves one or more of these structures (Robbins classification).",
+      "The accessory nerve crosses level II in front of or behind the internal jugular vein, enters the deep surface of sternocleidomastoid, then emerges from its posterior border near where the great auricular nerve curls around it (Erb's point) to cross the posterior triangle to trapezius.",
+      "The phrenic nerve lies on scalenus anterior deep to the prevertebral fascia; the brachial plexus trunks emerge between scalenus anterior and medius. Both are protected by staying superficial to the prevertebral fascia.",
+      "The marginal mandibular branch of the facial nerve runs deep to platysma, superficial to the facial vein, and may dip below the lower border of the mandible.",
+      "The thoracic duct arches over the left subclavian artery to enter the confluence of the internal jugular and subclavian veins at the base of level IV; accessory lymphatic ducts occur on the right."
+    ],
+    "criticalSafety": [
+      "Identify the accessory nerve in level II and at the posterior border of sternocleidomastoid before clearing levels II and V; confirm with the stimulator.",
+      "Stay superficial to the prevertebral fascia at all times: everything deep to it (phrenic, brachial plexus) stays undisturbed.",
+      "Find the vagus and hypoglossal nerves before ligating anything near the carotid sheath or the bifurcation.",
+      "On the left, identify and ligate lymphatic tissue at the base of level IV and check for chyle with Valsalva before closing.",
+      "Warn the anaesthetist before carotid bifurcation manipulation (bradycardia and hypotension) and before any manoeuvre near a large vein (air embolism)."
+    ],
+    "structuresAtRisk": [
+      "Spinal accessory nerve",
+      "Internal jugular vein and common, internal and external carotid arteries",
+      "Vagus, hypoglossal, phrenic nerves and brachial plexus",
+      "Marginal mandibular branch of the facial nerve and lingual nerve",
+      "Thoracic duct and right lymphatic duct",
+      "Cervical sympathetic chain"
+    ],
+    "commonErrors": [
+      "Traction or skeletonisation injury to the accessory nerve in level IIb or the posterior triangle, causing shoulder dysfunction even when the nerve is in continuity.",
+      "Dissecting through the prevertebral fascia in the posterior triangle and injuring the phrenic nerve or brachial plexus.",
+      "Ligating the facial vein high on the mandible, catching the marginal mandibular nerve.",
+      "Diathermy across the base of level IV on the left instead of ligating lymphatics, leading to a chyle leak.",
+      "Losing the level labels when the specimen is divided."
+    ],
+    "complications": [
+      "Shoulder syndrome: pain, weakness and winging from accessory nerve dysfunction; physiotherapy reduces disability.",
+      "Haematoma, which in the neck threatens the airway.",
+      "Chyle leak, presenting as milky drain fluid rising after feeding; managed conservatively with dietary fat modification first, with re-exploration for high-output or persistent leaks per unit protocol.",
+      "Marginal mandibular, hypoglossal, vagus or phrenic nerve palsy; Horner syndrome from sympathetic chain injury.",
+      "Wound breakdown and, after radiotherapy, carotid exposure and blowout, a life-threatening late complication.",
+      "Seroma, infection, facial and submental lymphoedema, numbness of the ear lobe and neck skin."
+    ],
+    "postop": [
+      "Airway and neck observations with a haematoma plan; keep the head of the bed raised.",
+      "Drain output and character recorded each shift; milky fluid after enteral feeding suggests chyle.",
+      "Early shoulder physiotherapy when the accessory nerve was dissected.",
+      "Nutrition and speech and language therapy per the primary treatment plan.",
+      "Histology to the head and neck MDT: number of nodes, involved levels and extranodal extension guide adjuvant radiotherapy or chemoradiotherapy."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side. Consent explicitly for sacrifice of the accessory nerve, internal jugular vein or sternocleidomastoid if found involved." },
+    { "ref": "step.onco.mdt-check", "emphasis": "Confirm the levels to be cleared and which non-lymphatic structures are to be preserved, against the latest imaging." },
+    { "ref": "step.core.timeout", "emphasis": "State the anticipated critical events aloud: carotid manipulation, possible vein injury, chyle leak on the left." },
+    { "ref": "step.core.prophylaxis", "emphasis": "A neck dissection alone is clean; if combined with a resection opening the upper aerodigestive tract it is clean-contaminated and prophylaxis follows local policy." },
+    { "ref": "step.core.positioning", "emphasis": "Head turned away and the shoulder drawn gently down; no traction strong enough to stretch the brachial plexus." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare from the lower lip to below the clavicle and back to the trapezius, leaving the ear lobe and mandible visible as landmarks." },
+    { "ref": "step.mrnd.incision-flaps" },
+    { "ref": "step.mrnd.level-i" },
+    { "ref": "step.mrnd.accessory-nerve" },
+    { "ref": "step.mrnd.posterior-triangle" },
+    { "ref": "step.mrnd.carotid-sheath" },
+    { "ref": "step.onco.nodal-clearance", "emphasis": "Sweep the specimen from posterior to anterior and from inferior to superior off the prevertebral fascia and the carotid sheath, delivering levels II to V in continuity with level I." },
+    { "ref": "step.onco.major-vein-injury", "emphasis": "The internal jugular vein is the usual culprit, often at a tributary or the jugulo-facial junction. Head down, press, control, repair." },
+    { "ref": "step.mrnd.thoracic-duct" },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "Pin the specimen out on a board and label each level, or send levels separately in labelled pots as your pathologist prefers." },
+    { "ref": "step.core.haemostasis", "emphasis": "Valsalva to test the internal jugular vein tributaries and the base of the neck." },
+    { "ref": "step.onco.suction-drain", "emphasis": "One or two drains along the posterior triangle and the carotid sheath, kept away from the vein and the carotid." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.core.skin-closure", "emphasis": "Close platysma as a separate layer; in an irradiated neck make sure the carotid is covered by healthy tissue." },
+    { "ref": "step.neck.haematoma-handover" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.mrnd.incision-flaps": {
+      "id": "step.mrnd.incision-flaps", "kind": "access",
+      "title": "Incision and subplatysmal flaps",
+      "why": "The incision must give access from the mandible to the clavicle and from the midline to trapezius, while keeping skin flap blood supply intact and keeping a scar off the carotid. Raising flaps in the subplatysmal plane protects the marginal mandibular nerve and the flap circulation.",
+      "how": [
+        "Use an incision that suits the primary and previous radiotherapy, commonly a hockey-stick or apron incision in a skin crease; avoid a trifurcation directly over the carotid.",
+        "Raise flaps deep to platysma, up to the lower border of the mandible, down to the clavicle, back to the anterior border of trapezius and forward to the midline.",
+        "Preserve the external jugular vein and great auricular nerve where oncologically safe, as they lie on sternocleidomastoid.",
+        "Keep the flaps moist and do not let retractors tear their edges."
+      ],
+      "structuresAtRisk": ["Marginal mandibular branch of the facial nerve", "Great auricular nerve", "External jugular vein", "Skin flap circulation"],
+      "pitfalls": ["Flaps raised too thin, superficial to platysma, which necrose after radiotherapy.", "A three-point junction lying over the carotid."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mrnd.level-i": {
+      "id": "step.mrnd.level-i", "kind": "dissection", "critical": true,
+      "title": "Level I: submental and submandibular triangles",
+      "why": "Level I drains the oral cavity and lip and must be cleared when involved or at risk. The marginal mandibular, lingual and hypoglossal nerves all run at its edges, so each is protected by a deliberate manoeuvre rather than by luck.",
+      "how": [
+        "Protect the marginal mandibular nerve by dividing the facial vein low, below the submandibular gland, and reflecting it upwards with the fascia (the Hayes Martin manoeuvre), or by identifying the nerve directly.",
+        "Clear level Ia between the anterior bellies of digastric down to mylohyoid, then mobilise the submandibular gland and its nodes from anterior to posterior.",
+        "Retract mylohyoid forwards to display the lingual nerve, divide the submandibular ganglion connection, and ligate Wharton's duct, keeping the lingual and hypoglossal nerves in view.",
+        "Ligate the facial artery as it hooks round the gland, then deliver level I in continuity with level II."
+      ],
+      "structuresAtRisk": ["Marginal mandibular nerve", "Lingual nerve", "Hypoglossal nerve", "Facial artery and vein"],
+      "pitfalls": ["Dissecting above the facial vein near the mandible, where the nerve lies.", "Catching the hypoglossal nerve when ligating the ranine veins that accompany it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mrnd.accessory-nerve": {
+      "id": "step.mrnd.accessory-nerve", "kind": "dissection", "critical": true,
+      "title": "Find and preserve the spinal accessory nerve",
+      "why": "Preserving the accessory nerve is the main functional gain of a modified over a radical dissection. A nerve divided or devascularised costs the patient shoulder abduction and causes chronic pain. Finding it early, at two points, makes the rest of the dissection around it safe.",
+      "how": [
+        "Release the anterior border of sternocleidomastoid and retract the muscle laterally; find the nerve in level II as it crosses the internal jugular vein, below the posterior belly of digastric, or as it enters the deep surface of the muscle.",
+        "Find it again at the posterior border of sternocleidomastoid, a little above the point where the great auricular nerve winds round the muscle, and follow it across the posterior triangle towards trapezius.",
+        "Confirm with the stimulator (shoulder twitch) and avoid stripping its surrounding tissue and vessels over long lengths.",
+        "Clear level IIb by passing the fibrofatty tissue under the nerve to join the main specimen, with minimal traction on the nerve."
+      ],
+      "structuresAtRisk": ["Spinal accessory nerve", "Internal jugular vein", "Occipital artery"],
+      "pitfalls": ["Traction on the nerve while clearing level IIb, which causes a palsy with the nerve in continuity.", "Mistaking cervical plexus branches in the posterior triangle for the accessory nerve, or the reverse; confirm with stimulation."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mrnd.posterior-triangle": {
+      "id": "step.mrnd.posterior-triangle", "kind": "dissection", "critical": true,
+      "title": "Level V: posterior triangle above the prevertebral fascia",
+      "why": "Clearing the posterior triangle exposes the floor of the neck. The phrenic nerve and brachial plexus are safe as long as the dissection stays superficial to the prevertebral fascia; breaching it causes diaphragm paralysis or arm weakness.",
+      "how": [
+        "Define the anterior border of trapezius and dissect the fibrofatty tissue forwards off the floor, keeping the accessory nerve in view.",
+        "Identify the prevertebral fascia over the scalene and levator scapulae muscles and stay on its surface.",
+        "Preserve the cervical plexus roots where possible (they carry some sensory and phrenic contributions) by dividing branches lateral to the phrenic nerve.",
+        "Ligate the transverse cervical vessels and the inferior belly of omohyoid as needed at the lower border, avoiding deep diathermy at the base of the neck."
+      ],
+      "structuresAtRisk": ["Phrenic nerve", "Brachial plexus", "Spinal accessory nerve", "Transverse cervical vessels"],
+      "pitfalls": ["Dissecting through the prevertebral fascia to remove a little more fat.", "Diathermy close to the phrenic nerve on scalenus anterior."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mrnd.carotid-sheath": {
+      "id": "step.mrnd.carotid-sheath", "kind": "dissection", "critical": true,
+      "title": "Unwrap the carotid sheath and preserve the internal jugular vein",
+      "why": "The nodes of levels II to IV lie along the internal jugular vein, so the specimen is peeled off the carotid sheath. The vagus, hypoglossal and sympathetic chain are all in this field, and the vein is thin-walled with many tributaries: careful, sequential exposure prevents both nerve injury and haemorrhage.",
+      "how": [
+        "Open the fascia over the internal jugular vein along its length and peel the specimen medially off the vein, ligating each tributary individually.",
+        "Identify the vagus nerve between the vein and the carotid, and the hypoglossal nerve crossing the carotid bifurcation region, before ligating anything near them.",
+        "Warn the anaesthetist before handling the carotid bifurcation, which can cause bradycardia and hypotension.",
+        "If the vein is involved by tumour, ligate it above and below the disease with secure ligatures and remove it with the specimen, as consented."
+      ],
+      "structuresAtRisk": ["Internal jugular vein", "Common, internal and external carotid arteries", "Vagus nerve", "Hypoglossal nerve", "Cervical sympathetic chain"],
+      "pitfalls": ["Tearing a tributary flush with the vein wall.", "Ligating the hypoglossal nerve's accompanying veins together with the nerve.", "Unnecessary dissection behind the carotid, injuring the sympathetic chain."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.mrnd.thoracic-duct": {
+      "id": "step.mrnd.thoracic-duct", "kind": "checkpoint", "critical": true,
+      "title": "Base of the neck: lymphatic ligation and chyle check",
+      "why": "The thoracic duct and its branches enter the venous confluence at the base of level IV, especially on the left. A divided duct that is not tied causes a chyle leak, which brings fluid, protein and lymphocyte loss and may need a return to theatre.",
+      "how": [
+        "At the lower limit of level IV, dissect gently and ligate or clip the fibrofatty tissue between the internal jugular vein and the clavicle rather than diathermying across it.",
+        "Ask the anaesthetist for a sustained Valsalva (positive airway pressure) and watch the base of the neck for clear or milky fluid.",
+        "Ligate any leak site with fine non-absorbable sutures, taking care not to injure the vein or the phrenic nerve; a muscle flap or sealant may reinforce the repair.",
+        "Record the chyle check and its result in the operative note."
+      ],
+      "structuresAtRisk": ["Thoracic duct", "Right lymphatic duct", "Internal jugular and subclavian veins", "Phrenic nerve"],
+      "pitfalls": ["Assuming a dry field in a fasted patient means no chyle: the leak may only appear when feeding starts.", "Deep suture ligation that catches the phrenic nerve."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

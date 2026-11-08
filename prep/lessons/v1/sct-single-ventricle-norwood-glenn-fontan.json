@@ -1,0 +1,259 @@
+{
+  "v": 1,
+  "module": "sct-single-ventricle-norwood-glenn-fontan",
+  "title": "Single-ventricle palliation: Norwood, bidirectional Glenn and Fontan completion",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 117 (Congenital Heart Disease: Hypoplastic Left Heart Syndrome)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 42 (Hypoplastic Left Heart Syndrome and Fontan Operation)",
+    "AHA Scientific Statement on Single Ventricle and Fontan Circulation"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Hypoplastic left heart syndrome is the prototype single-ventricle malformation. Severe hypoplasia of the left ventricle, mitral valve, and aortic arch renders the left heart incapable of supporting systemic circulation. The right ventricle must support both pulmonary and systemic vascular beds in parallel.",
+      "tx": "**Hypoplastic left heart syndrome** features severe underdevelopment of the left-sided cardiac structures, including aortic and mitral atresia. The morphological **single right ventricle** functions as the sole systemic pumping chamber, supporting both systemic and pulmonary vascular beds through an obligatory parallel circulation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Biventricular Circulation",
+          "points": [
+            "In-series systemic and pulmonary circulations",
+            "Left ventricle generates high systemic pressure",
+            "Right ventricle pumps low-pressure deoxygenated blood"
+          ]
+        },
+        "right": {
+          "title": "HLHS Single Ventricle Circulation",
+          "points": [
+            "Obligatory parallel circulation fed by solitary right ventricle",
+            "Systemic cardiac output depends entirely on ductus arteriosus",
+            "Pulmonary and systemic flows compete dynamically"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The Norwood stage one operation establishes unobstructed systemic output and controlled pulmonary blood flow in the neonatal period. The surgeon constructs a neoaorta by amalgamating the main pulmonary artery with the hypoplastic aortic arch. Atrial septectomy ensures unrestricted pulmonary venous return.",
+      "tx": "The neonatal **Norwood procedure** achieves three vital surgical goals: constructing a wide **neoaorta** by anastomosing the pulmonary trunk to the hypoplastic aortic arch, performing an **atrial septectomy** to prevent pulmonary venous hypertension, and providing calibrated systemic-to-pulmonary **pulmonary blood flow**. Performing this complex neonatal reconstruction establishes reliable systemic tissue perfusion while safeguarding the pulmonary vascular bed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Transect main pulmonary artery from branching pulmonary arteries"
+          },
+          {
+            "id": "b",
+            "label": "Amalgamate pulmonary trunk with hypoplastic aorta using homograft patch"
+          },
+          {
+            "id": "c",
+            "label": "Resect interatrial septum to create unrestrictive mixing"
+          },
+          {
+            "id": "d",
+            "label": "Establish controlled systemic-to-pulmonary shunt"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgeons balance the pulmonary circulation using either a modified Blalock-Taussig shunt or a Sano right ventricle-to-pulmonary artery conduit. The Blalock-Taussig shunt connects the innominate artery to the pulmonary artery, whereas the Sano conduit originates directly from the right ventricular free wall.",
+      "tx": "Pulmonary blood flow is established using either a **modified Blalock-Taussig shunt** from the innominate artery or a **Sano shunt** connecting the right ventricle directly to the pulmonary artery. The Sano conduit eliminates diastolic runoff, preserving **coronary perfusion pressure** and preventing sudden cardiac arrest.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modified Blalock-Taussig Shunt (mBTS)",
+          "points": [
+            "3.5 mm PTFE tube from innominate to pulmonary artery",
+            "Continuous systemic runoff lowers diastolic blood pressure",
+            "Vulnerable to coronary steal and ventricular ischemia"
+          ]
+        },
+        "right": {
+          "title": "Sano RV-PA Conduit",
+          "points": [
+            "5 mm PTFE conduit from RV infundibulum to PA bifurcation",
+            "Flow occurs purely in systole without diastolic runoff",
+            "Preserves diastolic coronary driving pressure in neonates"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The bidirectional Glenn procedure unloads the single ventricle by removing upper body volume work. The superior vena cava is anastomosed to the right pulmonary artery. This creates passive pulmonary flow from cerebral venous return directly into the pulmonary vascular bed without ventricular work.",
+      "tx": "The bidirectional Glenn procedure provides vital **ventricular unloading** by eliminating volume work from the single ventricle. Direct cavopulmonary connection establishes **passive pulmonary flow**, channeling upper body **cerebral venous return** directly into the pulmonary arterial tree without passing through a subpulmonary pump.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm low pulmonary vascular resistance (< 2 to 3 Wood units)"
+          },
+          {
+            "id": "b",
+            "label": "Transect superior vena cava from the right atrium"
+          },
+          {
+            "id": "c",
+            "label": "End-to-side anastomosis of SVC to right pulmonary artery"
+          },
+          {
+            "id": "d",
+            "label": "Take down previous neonatal systemic-to-pulmonary shunt"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Fontan completion serves as the final stage of palliation, performed at two to four years of age. An extracardiac conduit carries and directs inferior vena caval blood directly into the pulmonary arteries. Passive venous return now bypasses the heart completely, separating pulmonary and systemic circulations.",
+      "tx": "The final stage is the **extracardiac conduit Fontan**, performed at 2 to 4 years of age. A polytetrafluoroethylene tube graft connects the inferior vena cava directly to the pulmonary artery, establishing **passive pulmonary perfusion** and directing all desaturated blood through the lungs without a subpulmonary pump.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Palliation Stage",
+          "Typical Timing",
+          "Primary Hemodynamic Milestone"
+        ],
+        "rows": [
+          [
+            "Stage 1: Norwood",
+            "First 7 to 10 days of life",
+            "Relieves systemic arch obstruction; calibrated parallel shunt"
+          ],
+          [
+            "Stage 2: Glenn",
+            "4 to 6 months of age",
+            "SVC to PA shunt; unloads single ventricle volume overload"
+          ],
+          [
+            "Stage 3: Fontan",
+            "2 to 4 years of age",
+            "IVC to PA conduit; completes total cavopulmonary separation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Successful Fontan physiology requires strict baseline hemodynamic criteria. The mean pulmonary artery pressure must remain below fifteen millimeters of mercury, with pulmonary vascular resistance under two to three Wood units. Low pulmonary impedance is essential because blood flows through the lungs without a ventricle.",
+      "tx": "Successful Fontan function requires strict **hemodynamic Fontan criteria**: mean pulmonary artery pressure under 15 mmHg, **pulmonary vascular resistance < 2 to 3 Wood units**, and preserved single ventricular systolic function. Without a subpulmonary ventricle, passive pulmonary transit relies entirely on low **downstream resistance**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Physiological Metric",
+          "Acceptable Fontan Threshold",
+          "Hemodynamic Significance"
+        ],
+        "rows": [
+          [
+            "Mean pulmonary artery pressure",
+            "< 15 mmHg",
+            "Permits passive transpulmonary gradient driving flow"
+          ],
+          [
+            "Pulmonary vascular resistance",
+            "< 2 to 3 Wood units x m2",
+            "Avoids cavopulmonary stasis and low cardiac output"
+          ],
+          [
+            "Ventricular end-diastolic pressure",
+            "< 8 to 10 mmHg",
+            "Guarantees low filling pressure in systemic ventricle"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Creating a small surgical fenestration in the conduit improves early postoperative stability. A four to five millimeter communication between the Fontan conduit and the common atrium allows right-to-left shunting. This pop-off decompression maintains cardiac output during periods of transient pulmonary vasoconstriction.",
+      "tx": "Surgeons frequently construct a 4 to 5 mm **Fontan fenestration** connecting the extracardiac conduit to the atrium. This intentional right-to-left pop-off decompression augments systemic **cardiac output maintenance** at the expense of mild cyanosis, significantly curbing prolonged postoperative **pleural effusions** and ascites.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fenestrated Fontan",
+          "points": [
+            "4 to 5 mm conduit-to-atrial communication",
+            "Permits right-to-left decompression during pulmonary strain",
+            "Reduces early chest tube drainage and hospital stay"
+          ]
+        },
+        "right": {
+          "title": "Non-Fenestrated Fontan",
+          "points": [
+            "Complete physical separation without intracardiac shunt",
+            "Achieves complete arterial oxygen saturation (> 95%)",
+            "Higher incidence of prolonged ascites and pleural drainage"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The abnormal Fontan circulation produces significant late systemic complications across decades. Elevated central venous pressure and low cardiac output lead to protein-losing enteropathy, plastic bronchitis, and progressive hepatic fibrosis. Regular multidisciplinary surveillance is required to manage failing Fontan physiology.",
+      "tx": "Chronic venous hypertension and diminished cardiac output trigger late **failing Fontan physiology**. Long-term systemic attrition manifests as **protein-losing enteropathy**, life-threatening **plastic bronchitis**, cardiac cirrhosis, and ventricular arrhythmias, often necessitating late heart transplantation evaluation in specialized adult congenital clinics. Lifelong dedicated clinical follow-up is mandatory to detect and manage these insidious systemic and circulatory Fontan sequelae.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Late Complication",
+          "Underlying Pathophysiology",
+          "Diagnostic Manifestation"
+        ],
+        "rows": [
+          [
+            "Protein-losing enteropathy",
+            "Mesenteric venous congestion causing enteric lymph loss",
+            "Profound hypoalbuminemia, ascites, elevated fecal a1-antitrypsin"
+          ],
+          [
+            "Plastic bronchitis",
+            "High lymphatic pressures leak mucin casts into airways",
+            "Expectoration of branched bronchial casts, asphyxiation"
+          ],
+          [
+            "Fontan-associated liver disease",
+            "Chronic hepatic venous congestion and sinusoidal fibrosis",
+            "Bridging fibrosis, cirrhosis, hepatocellular carcinoma risk"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "id": "paeds-orchidopexy",
+  "title": "Inguinal orchidopexy for undescended testis",
+  "subtitle": "Mobilise, ligate the processus, gain length, fix in a dartos pouch",
+  "system": "genitourinary",
+  "aliases": ["orchidopexy", "orchiopexy", "undescended testis repair", "cryptorchidism surgery", "subdartos orchidopexy"],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-paed", "org": "European Association of Urology (EAU) and European Society for Paediatric Urology (ESPU)", "title": "EAU Guidelines on Paediatric Urology: undescended testes", "year": 2024, "url": "https://uroweb.org/guidelines/paediatric-urology", "accessed": "2026-11-04" },
+    { "id": "aua-crypt", "org": "American Urological Association (AUA)", "title": "Evaluation and Treatment of Cryptorchidism: AUA Guideline", "year": 2014, "url": "https://www.auanet.org/guidelines-and-quality/guidelines", "accessed": "2026-11-04" },
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: undescended testes and testicular tumours", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["paeds_weight", "corrected_age", "flacc"],
+  "chapters": {
+    "indications": [
+      "Palpable undescended testis (inguinal, suprascrotal or ectopic) that has not descended by 6 months of corrected age; EAU/ESPU and AUA guidance advise surgery from 6 months, completed by about 18 months at the latest.",
+      "Acquired undescended (ascending) testis in an older child, previously documented in the scrotum.",
+      "Undescended testis found at herniotomy or with a symptomatic inguinal hernia, repaired together."
+    ],
+    "contraindications": [
+      "Retractile testis that can be brought to the bottom of the scrotum and stays there: no surgery, annual review for ascent.",
+      "Non-palpable testis: the open inguinal operation is not the first step; examination under anaesthesia then laparoscopy decides the plan.",
+      "Bilateral non-palpable testes, or an undescended testis with hypospadias: assess for a difference of sex development before any surgery.",
+      "Intercurrent illness; ex-premature infants need an apnoea monitoring plan rather than a cancellation."
+    ],
+    "preparation": [
+      "Examine the child yourself in clinic, warm and relaxed, and document the side, the lowest position reached and the opposite testis.",
+      "Consent the parents for: wound infection and haematoma, testicular atrophy, re-ascent needing a second operation, injury to the vas or testicular vessels, a staged operation if length is insufficient, and removal of a non-viable remnant if found.",
+      "Explain that orchidopexy improves position and allows self-examination, but the risks to fertility and of later testicular cancer remain higher than in the general population, and teach testicular self-examination at puberty.",
+      "Plan day-case surgery with a caudal or ilioinguinal block agreed with the anaesthetist."
+    ],
+    "positioning": [
+      "Supine, legs slightly abducted (frog-leg in an infant) so the scrotum is accessible, on a warmed mattress."
+    ],
+    "equipment": [
+      "Fine paediatric set with non-toothed fine forceps, small self-retaining retractor, bipolar diathermy.",
+      "Fine absorbable sutures; magnifying loupes."
+    ],
+    "anatomy": [
+      "The testis descends behind the processus vaginalis; when the processus stays patent it lies anteromedial to the cord and must be separated from it to gain length.",
+      "The gubernaculum attaches the lower pole; the vas may loop down beyond the testis within it, so the gubernaculum is divided close to the testis only after the vas is seen.",
+      "Length is limited by the testicular vessels, which are freed by retroperitoneal dissection above the internal ring; the vas usually has length to spare.",
+      "The ilioinguinal nerve lies on the cord beneath the external oblique aponeurosis.",
+      "Many palpable undescended testes lie in the superficial inguinal pouch, outside the external ring, above Scarpa fascia."
+    ],
+    "criticalSafety": [
+      "Re-examine under anaesthesia: the operation depends on where the testis is now, not where it was in clinic.",
+      "Never grasp the vas or the vessels with forceps; handle the testis by the gubernaculum or tunica.",
+      "Confirm the cord is not twisted as the testis is passed into the scrotum.",
+      "Do not divide the testicular vessels in an unplanned open operation to gain length."
+    ],
+    "structuresAtRisk": [
+      "Testicular vessels",
+      "Vas deferens, including a long looping vas in the gubernaculum",
+      "Ilioinguinal nerve",
+      "Inferior epigastric vessels during a Prentiss manoeuvre",
+      "Peritoneum and bowel when the processus is opened"
+    ],
+    "commonErrors": [
+      "Incomplete separation of the patent processus, the commonest reason the testis will not reach.",
+      "Dividing the gubernaculum blindly and cutting a looping vas.",
+      "Fixing the testis under tension, which leads to re-ascent or atrophy.",
+      "Twisting the cord when passing the testis through the scrotal tunnel."
+    ],
+    "complications": [
+      "Wound infection and scrotal haematoma.",
+      "Testicular atrophy from vascular injury or tension.",
+      "Re-ascent of the testis needing redo surgery.",
+      "Injury to the vas deferens, which may only declare itself as subfertility years later.",
+      "Ilioinguinal nerve injury causing numbness or neuralgia."
+    ],
+    "postop": [
+      "Day-case discharge with weight-based simple analgesia.",
+      "Avoid straddle toys and rough play for about two weeks per local advice.",
+      "Review in clinic to confirm testicular position and size, typically after several months, and teach self-examination when the child is older."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side with a parent present. Confirm whether the opposite testis is normal and what has been consented for a non-viable testis." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.paeds.physiology-gate", "emphasis": "Today's weight for analgesia and local anaesthetic doses; gestation for any infant under the local apnoea age threshold." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotics are not routinely needed for a clean groin operation; follow local policy." },
+    { "ref": "step.paeds.warming" },
+    { "ref": "step.core.positioning", "emphasis": "Frog-leg in an infant so the scrotum is accessible without repositioning." },
+    { "ref": "step.orch.eua" },
+    { "ref": "step.core.prep-drape", "emphasis": "Include the scrotum and both groins in the field." },
+    { "ref": "step.paeds.local-anaesthetic", "emphasis": "Count any caudal or ilioinguinal block already given against the single maximum dose." },
+    { "ref": "step.orch.access" },
+    { "ref": "step.orch.mobilise" },
+    { "ref": "step.orch.processus" },
+    { "ref": "step.orch.length" },
+    { "ref": "step.orch.bailout" },
+    { "ref": "step.orch.dartos-pouch" },
+    { "ref": "step.core.haemostasis", "emphasis": "Bipolar diathermy near the cord; a scrotal haematoma can compress the newly placed testis." },
+    { "ref": "step.core.specimen", "emphasis": "Usually none. A non-viable remnant (nubbin) that is excised is sent for histology." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure", "emphasis": "Close the external oblique aponeurosis without narrowing the ring around the cord, then Scarpa fascia, then absorbable subcuticular sutures to groin and scrotum." },
+    { "ref": "step.paeds.daycase-discharge" },
+    { "ref": "step.core.debrief", "emphasis": "Record the pre-operative position, testis size and appearance, final position, and any plan for a second stage." }
+  ],
+  "steps_local": {
+    "step.orch.eua": {
+      "id": "step.orch.eua", "kind": "checkpoint", "critical": true,
+      "title": "Examination under anaesthesia confirms the plan",
+      "why": "Under anaesthesia a retractile testis may come down fully, and a testis felt in clinic may become impalpable. Either finding changes the operation, and this is the last moment to change it cheaply.",
+      "how": [
+        "Before preparation, examine both sides with warm hands, milking from the anterior superior iliac spine towards the scrotum.",
+        "If the testis reaches the bottom of the scrotum without tension and stays there, it is retractile: do not proceed with orchidopexy.",
+        "If the testis is now impalpable, convert to examination of the groin with laparoscopy as consented, rather than an inguinal exploration.",
+        "Record the lowest position reached and the size of both testes."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Operating on a retractile testis because the child is already asleep.", "Exploring the groin blind for a testis that is intra-abdominal."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.access": {
+      "id": "step.orch.access", "kind": "access",
+      "title": "Groin crease incision and finding the testis",
+      "why": "Many palpable undescended testes lie in the superficial inguinal pouch, outside the canal. Finding the testis before opening the aponeurosis avoids damaging a testis that was lying just under the skin.",
+      "how": [
+        "Make a short incision in the lower inguinal skin crease over the internal ring.",
+        "Divide Scarpa fascia carefully and look for the testis in the superficial pouch before going deeper.",
+        "Open the external oblique aponeurosis in the line of its fibres through the external ring, identifying and protecting the ilioinguinal nerve."
+      ],
+      "structuresAtRisk": ["Testis in the superficial inguinal pouch", "Ilioinguinal nerve"],
+      "pitfalls": ["Cutting through Scarpa fascia boldly onto a superficially placed testis.", "Dividing the ilioinguinal nerve with the aponeurosis."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.mobilise": {
+      "id": "step.orch.mobilise", "kind": "dissection",
+      "title": "Mobilising the testis and dividing the gubernaculum",
+      "why": "The gubernaculum and cremaster tether the testis. Freeing them is easy, but the vas can loop down into the gubernaculum below the testis and be cut by an unwary division.",
+      "how": [
+        "Grasp the gubernaculum or the tunica, never the testis or cord, and free the testis from its attachments.",
+        "Identify the vas before dividing the gubernaculum close to the lower pole with bipolar diathermy.",
+        "Divide the cremasteric fibres off the cord to expose the processus vaginalis.",
+        "Inspect the testis and epididymis and record size, consistency and any epididymal separation or anomaly."
+      ],
+      "structuresAtRisk": ["Looping vas deferens in the gubernaculum", "Testicular vessels"],
+      "pitfalls": ["Dividing the gubernaculum before seeing the vas.", "Handling the testis with toothed forceps."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.processus": {
+      "id": "step.orch.processus", "kind": "dissection", "critical": true,
+      "title": "Separating and ligating the patent processus vaginalis",
+      "why": "The patent processus is both a hernia sac and the main tether shortening the cord. Separating it from the vas and vessels gains most of the length needed, and its high ligation prevents a later hernia.",
+      "how": [
+        "Open the processus anteriorly and identify the vas and vessels on its posterior wall.",
+        "Separate the processus from the cord structures with fine non-toothed instruments, sweeping the vas and vessels away rather than grasping them.",
+        "Continue proximally to the internal ring, twist the sac to empty it, and transfix and ligate it at the level of the extraperitoneal fat."
+      ],
+      "structuresAtRisk": ["Vas deferens", "Testicular vessels", "Bowel or omentum within the processus"],
+      "pitfalls": ["Tearing a thin processus and losing its proximal end.", "Leaving strands of processus around the vessels that keep the cord short."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.length": {
+      "id": "step.orch.length", "kind": "dissection",
+      "title": "Gaining length on the vessels",
+      "why": "A testis fixed under tension retracts or becomes atrophic. Length comes from freeing the vessels in the retroperitoneum, not from pulling.",
+      "how": [
+        "Retract the internal ring upwards and free the lateral peritoneal bands from the testicular vessels in the retroperitoneum.",
+        "Test whether the testis reaches the bottom of the scrotum without tension.",
+        "If still short, consider moving the cord medial to the inferior epigastric vessels (Prentiss manoeuvre), dividing the vessels if necessary, so it takes a straighter course."
+      ],
+      "structuresAtRisk": ["Testicular vessels", "Inferior epigastric vessels", "Peritoneum"],
+      "pitfalls": ["Accepting a testis that only reaches the upper scrotum under traction.", "Skeletonising the vessels so their adventitial supply is lost."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.bailout": {
+      "id": "step.orch.bailout", "kind": "bailout",
+      "title": "When the testis will not reach, or is not viable",
+      "why": "Forcing an inadequate cord into the scrotum risks losing the testis. A planned staged operation, or removal of a remnant that is not a functioning testis, are both better outcomes than an atrophic testis after a single forced attempt.",
+      "how": [
+        "If length is insufficient after full mobilisation, fix the testis at the lowest point it reaches without tension and plan a second-stage operation after an interval agreed by the consultant.",
+        "If only a small remnant (nubbin) at the end of blind-ending vas and vessels is found, excise it and send it for histology.",
+        "Call the consultant before any decision to divide the testicular vessels or to remove a testis that looks viable.",
+        "Record what was found and why the plan changed, and explain it to the parents the same day."
+      ],
+      "structuresAtRisk": ["Testicular vessels", "Testis"],
+      "pitfalls": ["Dividing the testicular vessels in an unplanned open operation.", "Calling a small but viable testis a nubbin and removing it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.dartos-pouch": {
+      "id": "step.orch.dartos-pouch", "kind": "reconstruction", "critical": true,
+      "title": "Placing the testis in a subdartos pouch",
+      "why": "A pouch between the scrotal skin and the dartos holds the testis in the scrotum without sutures through it. The commonest technical cause of a lost testis at this stage is a twisted cord.",
+      "how": [
+        "Make a transverse incision in the scrotal skin and develop a pouch between skin and dartos with blunt dissection.",
+        "Pass a clamp up through the dartos into the groin and draw the testis down by the gubernaculum remnant, keeping the cord in its natural orientation.",
+        "Confirm the cord is not twisted, with the epididymis posterior and the vessels running straight.",
+        "Narrow the dartos opening around the cord to hold the testis, avoiding sutures through the testicular parenchyma, then close the scrotal skin."
+      ],
+      "structuresAtRisk": ["Testicular vessels", "Testis"],
+      "pitfalls": ["Twisting the cord as the testis is pulled through.", "Narrowing the dartos neck so tightly that it constricts the vessels."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

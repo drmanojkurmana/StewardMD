@@ -1,0 +1,188 @@
+{
+  "id": "dislocation-neurovascular",
+  "title": "Major joint dislocation with neurovascular compromise",
+  "subtitle": "Examine, reduce, re-examine, image the artery",
+  "category": "ortho_emergency",
+  "specialty": "orthopaedics",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "boast-arterial",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Diagnosis and management of arterial injuries associated with musculoskeletal trauma",
+      "year": 2026,
+      "url": "https://www.boa.ac.uk/resource/diagnosis-and-management-of-arterial-injuries-associated-with-musculoskeletal-trauma.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "mills-2004",
+      "org": "Mills WJ et al. J Trauma 56:1261",
+      "title": "The value of the ankle-brachial index for diagnosing arterial injury after knee dislocation: a prospective study",
+      "year": 2004,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/15211135/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "esvs-2025",
+      "org": "European Society for Vascular Surgery (ESVS), Wahlgren CM et al. Eur J Vasc Endovasc Surg 69:179",
+      "title": "ESVS 2025 Clinical Practice Guidelines on the Management of Vascular Trauma",
+      "year": 2025,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39809666/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "atls",
+      "org": "American College of Surgeons Committee on Trauma",
+      "title": "Advanced Trauma Life Support (ATLS) Student Course Manual",
+      "edition": "10th edition",
+      "year": 2018,
+      "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng37",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Fractures (complex): assessment and management (NG37)",
+      "year": 2016,
+      "version": "NG37",
+      "url": "https://www.nice.org.uk/guidance/ng37",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Knee dislocation, including the one that reduced before arrival and presents as a multiligament knee injury. Popliteal artery injury occurs even with palpable pulses."
+      },
+      {
+        "text": "A pulse that is absent, weaker than the other side, or a cool pale limb."
+      },
+      {
+        "text": "Skin tented or blanched over a fracture-dislocation, typically the ankle. The skin will necrose if it waits for the next list."
+      },
+      {
+        "text": "Posterior hip dislocation, particularly with a sciatic nerve deficit or a femoral head fracture."
+      },
+      {
+        "text": "Elbow dislocation with a brachial artery, median or ulnar nerve deficit."
+      },
+      {
+        "text": "Anterior shoulder dislocation in an older patient with an expanding axillary swelling: axillary artery injury."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Examine and document arterial and peripheral nerve function, with times, before any manipulation.",
+        "timeCritical": true,
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Reduce or realign a deformed, pulseless limb urgently, with adequate analgesia or sedation, then splint.",
+        "timeCritical": true,
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Repeat and document the arterial and neurological examination after reduction and after splinting.",
+        "timeCritical": true,
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "If the pulse still does not feel the same as the uninjured side after reduction, treat it as an arterial injury: consultant input and CT angiography.",
+        "timeCritical": true,
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Perform procedural sedation in a monitored area with airway skills present.",
+        "evidenceRef": "atls"
+      }
+    ],
+    "assess": [
+      {
+        "text": "After a knee dislocation, measure the ankle-brachial index once reduced. An index below 0.9 needs CT angiography; a normal index with normal pulses supports observation with serial examination.",
+        "calcs": [
+          "abi"
+        ]
+      },
+      {
+        "text": "Hip: sciatic nerve, particularly the peroneal division, and the ipsilateral femur and knee."
+      },
+      {
+        "text": "Elbow: radial pulse, median, ulnar and radial nerve function, and the forearm compartments."
+      },
+      {
+        "text": "Shoulder: axillary nerve by deltoid contraction; the patch of sensation over the deltoid is an unreliable test."
+      },
+      {
+        "text": "Obtain radiographs before reduction unless waiting would harm skin or perfusion; then reduce first."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Radiographs in two planes before and after reduction."
+      },
+      {
+        "text": "CT after hip reduction to confirm a concentric joint and look for intra-articular fragments and acetabular or femoral head fractures."
+      },
+      {
+        "text": "CT angiography for a persistent pulse deficit after reduction, or an abnormal ankle-brachial index after knee dislocation."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Control external bleeding with direct pressure or a tourniquet applied as distally as possible. Do not clamp blindly.",
+        "evidenceRef": "boast-arterial"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "A joint that cannot be reduced closed, or will not stay reduced, goes to theatre for open reduction.",
+        "timeCritical": true,
+        "evidenceRef": "atls"
+      },
+      {
+        "text": "Reduce a dislocated hip as an emergency; delay is associated with avascular necrosis of the femoral head.",
+        "timeCritical": true,
+        "evidenceRef": "atls"
+      },
+      {
+        "text": "Confirmed arterial injury: revascularisation as an emergency, commenced within one hour of arrival, with a temporary shunt and skeletal stabilisation such as a spanning external fixator.",
+        "timeCritical": true,
+        "evidenceRef": "boast-arterial"
+      },
+      {
+        "text": "Vascular repair or interposition grafting by a vascular surgeon, with fasciotomy considered after revascularisation.",
+        "evidenceRef": "esvs-2025"
+      },
+      {
+        "text": "Do not rely on capillary return or a Doppler signal to exclude arterial injury.",
+        "evidenceRef": "nice-ng37"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Vascular surgery at the same time as orthopaedics for any dysvascular limb after reduction."
+      },
+      {
+        "text": "New or worse nerve deficit after reduction: senior review the same day, and a peripheral nerve service referral."
+      },
+      {
+        "text": "Multiligament knee reconstruction is a specialist, delayed procedure; arrange the referral before discharge."
+      }
+    ]
+  },
+  "notes": [
+    "Document the neurovascular examination before you touch the joint. A deficit found only after reduction cannot be attributed, and the question will be asked.",
+    "A 'reduced' knee dislocation is still a knee dislocation. Ligament laxity in three or more directions is the clue.",
+    "Doppler signals persist distal to an intimal flap. The ankle-brachial index is the screening test, not the presence of a signal."
+  ],
+  "calcs": [
+    "abi",
+    "mrc_power"
+  ]
+}

@@ -72,6 +72,9 @@
     evList: null, evQuery: "",
     // cases
     caseList: null, kase: null, caseAnswers: null, caseIdx: 0, caseLevel: "",
+    // specialty browsing, shared by protocols / procedures / cases so a surgeon who picks
+    // "Urology" once sees urology in every section
+    catalog: null, spec: "", find: "",
     // notes
     noteIndex: null, note: null, noteSchema: null, noteType: "", noteTemplate: ""
   };
@@ -102,15 +105,20 @@
     var right = opts.right || "";
     // The eyebrow must not simply repeat the title. "Acute abdomen / Acute abdomen" is what
     // category-as-subtitle produces for a protocol whose name IS its category.
-    if (sub && String(sub).toLowerCase() === String(title).toLowerCase()) sub = "";
+    // Section numbers ("02", "03 · Endocrine") were a kicker above the title: the sequence carries no
+    // information a surgeon needs here (2026-11-05 anti-slop pass). Keep only the words, shown UNDER
+    // the title as a quiet subtitle, never as an eyebrow above it.
+    sub = String(sub || "").replace(/^\s*0\d\s*(·\s*)?/, "").trim();
+    if (sub) sub = sub.charAt(0).toUpperCase() + sub.slice(1);   // content data is often lower case ("endocrine")
+    if (sub && sub.toLowerCase() === String(title).toLowerCase()) sub = "";
     // titleless: the screen below already carries the wordmark. On HOME the hero sits directly under
     // this bar, so printing SURGX in both stacked the same title twice (reported from internal
     // testing: "Remove this....keep it as clinix"). The bar is kept for its close button; the overlay
     // and that button both still name SURGX for screen readers.
     return '<div class="sgx-head' + (opts.titleless ? " sgx-head-bare" : "") + '">' + lead +
       (opts.titleless ? '<div class="sgx-htitle"></div>' :
-      '<div class="sgx-htitle">' + (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") +
-      (opts.rawTitle || esc(title)) + "</div>") +
+      '<div class="sgx-htitle">' + (opts.rawTitle || esc(title)) +
+      (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") + "</div>") +
       right +
       (isHome ? "" : '<button class="sgx-hbtn sgx-close" data-sgx="close" aria-label="Close SURGX">' + ic("close") + "</button>") +
       "</div>";
@@ -228,8 +236,8 @@
 
   var SECTIONS = [
     { n: "01", id: "notes", act: "notes", tt: "Notes", sb: "Operative, pre-op, post-op, progress and discharge documentation", icon: "clinical_notes" },
-    { n: "02", id: "protocols", act: "protocols", tt: "Protocols", sb: "Trauma, surgical emergencies and peri-operative pathways", icon: "emergency" },
-    { n: "03", id: "procedures", act: "procedures", tt: "Procedures", sb: "Step-by-step operative reference and structures at risk", icon: "content_cut" },
+    { n: "02", id: "protocols", act: "protocols", tt: "Protocols", sb: "Emergencies and pathways across every surgical specialty", icon: "emergency" },
+    { n: "03", id: "procedures", act: "procedures", tt: "Procedures", sb: "Step-by-step operative reference, by specialty", icon: "content_cut" },
     { n: "04", id: "evidence", act: "evidence", tt: "Evidence", sb: "Guidelines, sources and the reasoning behind them", icon: "menu_book" },
     { n: "05", id: "cases", act: "cases", tt: "Cases", sb: "Interactive surgical reasoning with a senior surgeon's questions", icon: "psychology" }
   ];
@@ -245,7 +253,6 @@
         if (notesAccess === "verify_required") locked = '<span class="lock">Verify</span>';
       }
       return '<button class="sgx-sec" data-sgx="go" data-r="' + attr(s.act) + '"' + disabled + '>' +
-        '<span class="n">' + s.n + "</span>" +
         '<span class="tx"><span class="tt">' + esc(s.tt) + '</span><span class="sb">' + esc(s.sb) + "</span></span>" +
         locked +
         '<span class="go">' + ic("chevron_right") + "</span></button>";
@@ -287,6 +294,81 @@
     infection: "Surgical infection", perioperative: "Peri-operative", surgical_emergency: "Surgical emergency"
   };
 
+
+  /* ── specialty browsing ──────────────────────────────────────────────────── */
+
+  // Titles come from manifest.specialties / manifest.categories so new content needs no code
+  // change; these are only the fallback for an old cached manifest.
+  var SPEC_FALLBACK = { general: "General and GI surgery", trauma: "Trauma", periop: "Peri-operative care" };
+  function ensureCatalog() {
+    if (state.catalog) return;
+    var cc = C(); if (!cc) return;
+    state.catalog = { specialties: [], categories: [] };
+    cc.loadCatalog().then(function (cat) {
+      state.catalog = { specialties: (cat && cat.specialties) || [], categories: (cat && cat.categories) || [], raw: cat || {} };
+      var h0 = routeHead(); if (h0 === "evidence") render();
+      var h = routeHead();
+      if (h === "protocols" || h === "procedures" || h === "cases" || h === "protocol") render();
+    });
+  }
+  function specTitle(id) {
+    var list = (state.catalog && state.catalog.specialties) || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i].title;
+    return SPEC_FALLBACK[id] || id;
+  }
+  function catTitle(id) {
+    var list = (state.catalog && state.catalog.categories) || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i].title;
+    return CAT_TITLES[id] || id;
+  }
+  // A human title for a protocol or procedure id. Falls back to the id made readable, never a raw slug.
+  function itemTitle(kind, id) {
+    var raw = (state.catalog && state.catalog.raw) || {}, list = raw[kind === "protocol" ? "protocols" : "procedures"] || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id && list[i].title) return list[i].title;
+    (state.protoIndex || []).forEach(function (p) { if (p.id === id && p.title) id = "\u0000" + p.title; });
+    if (id.charAt(0) === "\u0000") return id.slice(1);
+    var t = String(id).replace(/[-_]+/g, " ");
+    return t.charAt(0).toUpperCase() + t.slice(1);
+  }
+  function specOf(x) { return (x && x.specialty) || "general"; }
+  // Order follows manifest.specialties, then anything unlisted, so the chip row is stable.
+  function specOrder(list) {
+    var seen = {}, out = [];
+    ((state.catalog && state.catalog.specialties) || []).forEach(function (s) {
+      if (list.some(function (x) { return specOf(x) === s.id; })) { seen[s.id] = 1; out.push(s.id); }
+    });
+    list.forEach(function (x) { var k = specOf(x); if (!seen[k]) { seen[k] = 1; out.push(k); } });
+    return out;
+  }
+  function matchesFind(x) {
+    var q = String(state.find || "").trim().toLowerCase();
+    if (!q) return true;
+    var hay = [x.title, x.subtitle, x.system, specTitle(specOf(x))].concat(x.aliases || []).join(" ").toLowerCase();
+    return q.split(/\s+/).every(function (w) { return hay.indexOf(w) >= 0; });
+  }
+  function browseFilter(list) {
+    return list.filter(function (x) { return (!state.spec || specOf(x) === state.spec) && matchesFind(x); });
+  }
+  // Search box + specialty chips. Hidden for a single-specialty list, where it would be noise.
+  function browseBar(list, what) {
+    var order = specOrder(list);
+    var chips = order.length > 1 ? '<div class="sgx-spec" role="tablist" aria-label="Specialty">' +
+      '<button class="sgx-chip' + (!state.spec ? " on" : "") + '" data-sgx="spec" data-id="">All</button>' +
+      order.map(function (k) {
+        return '<button class="sgx-chip' + (state.spec === k ? " on" : "") + '" data-sgx="spec" data-id="' + attr(k) + '">' + esc(specTitle(k)) + "</button>";
+      }).join("") + "</div>" : "";
+    return '<input class="sgx-find" id="sgxFind" type="search" autocomplete="off" placeholder="Search ' + attr(what) +
+      '" aria-label="Search ' + attr(what) + '" value="' + attr(state.find) + '">' + chips;
+  }
+  function rowsBySpec(list, rowFn) {
+    var shown = browseFilter(list);
+    if (!shown.length) return '<div class="sgx-empty">Nothing matches. Clear the search or pick another specialty.</div>';
+    return specOrder(shown).map(function (k) {
+      return '<div class="sgx-seclabel">' + esc(specTitle(k)) + "</div>" +
+        shown.filter(function (x) { return specOf(x) === k; }).map(rowFn).join("");
+    }).join("");
+  }
+
   function screenProtocols() {
     if (state.protoIndex === null) {
       var cc = C();
@@ -301,25 +383,32 @@
       return head("Protocols", "02") +
         emptyState("emergency", "No protocols available", "Protocols could not be loaded. Check your connection and try again.");
     }
-    var groups = {}, order = [];
-    state.protoIndex.forEach(function (p) {
-      var c = p.category || "surgical_emergency";
-      if (!groups[c]) { groups[c] = []; order.push(c); }
-      groups[c].push(p);
-    });
-    var html = order.map(function (c) {
-      return '<div class="sgx-seclabel">' + esc(CAT_TITLES[c] || c) + "</div>" +
-        groups[c].map(function (p) {
-          return '<button class="sgx-row" data-sgx="go" data-r="protocol/' + attr(p.id) + '">' +
-            '<span class="tx"><span class="tt">' + esc(p.title) + "</span>" +
-            (p.subtitle ? '<span class="sb">' + esc(p.subtitle) + "</span>" : "") + "</span>" +
-            '<span class="go">' + ic("chevron_right") + "</span></button>";
-        }).join("");
-    }).join("");
+    ensureCatalog();
+    function protoRow(p) {
+      return '<button class="sgx-row" data-sgx="go" data-r="protocol/' + attr(p.id) + '">' +
+        '<span class="tx"><span class="tt">' + esc(p.title) + "</span>" +
+        (p.subtitle ? '<span class="sb">' + esc(p.subtitle) + "</span>" : "") + "</span>" +
+        '<span class="go">' + ic("chevron_right") + "</span></button>";
+    }
+    var html;
+    if (state.spec) {
+      // One specialty: group by clinical category inside it, as before.
+      var shown = browseFilter(state.protoIndex), groups = {}, order = [];
+      shown.forEach(function (p) {
+        var c = p.category || "surgical_emergency";
+        if (!groups[c]) { groups[c] = []; order.push(c); }
+        groups[c].push(p);
+      });
+      html = shown.length ? order.map(function (c) {
+        return '<div class="sgx-seclabel">' + esc(catTitle(c)) + "</div>" + groups[c].map(protoRow).join("");
+      }).join("") : '<div class="sgx-empty">Nothing matches. Clear the search or pick another specialty.</div>';
+    } else {
+      html = rowsBySpec(state.protoIndex, protoRow);
+    }
     return head("Protocols", "02") + wrap(
-      '<div class="sgx-banner info">' + ic("bolt") +
+      '<div class="sgx-banner info">' + ic("info") +
       " Red flags and immediate actions are always at the top. Interactive protocols recalculate as you tick findings.</div>" +
-      html);
+      browseBar(state.protoIndex, "protocols") + html);
   }
 
   function screenProtocol() {
@@ -403,7 +492,8 @@
       "</div>";
     body += '<div class="sgx-disclaim">' + esc(p.disclaimer) + "</div>";
 
-    return head(p.title, "02 · " + (CAT_TITLES[p.category] || "Protocol")) + wrap(body);
+    ensureCatalog();
+    return head(p.title, "02 · " + (catTitle(p.category) || "Protocol")) + wrap(body);
   }
 
   function bandBody(p, b) {
@@ -489,16 +579,17 @@
       return head("Procedures", "03") +
         emptyState("surgical", "No procedures available", "Procedures could not be loaded. Check your connection and try again.");
     }
-    var rows = state.procList.map(function (p) {
+    ensureCatalog();
+    var rows = rowsBySpec(state.procList, function (p) {
       return '<button class="sgx-row" data-sgx="go" data-r="procedure/' + attr(p.id) + '">' +
         '<span class="tx"><span class="tt">' + esc(p.title) + "</span>" +
         '<span class="sb">' + esc(p.subtitle || p.system || "") + (p.estMinutes ? " · about " + p.estMinutes + " min" : "") + "</span></span>" +
         '<span class="go">' + ic("chevron_right") + "</span></button>";
-    }).join("");
+    });
     return head("Procedures", "03") + wrap(
       '<div class="sgx-banner info">' + ic("school") +
       " Educational reference. These pages describe operations; they do not make decisions about a particular patient.</div>" +
-      rows);
+      browseBar(state.procList, "procedures") + rows);
   }
 
   function screenProcedure() {
@@ -568,7 +659,7 @@
     body += sourcesCard(p.sources);
     body += '<div class="sgx-disclaim">' + esc(p.disclaimer) + "</div>";
 
-    return head(p.title, "03 · " + esc(p.system || "Procedure")) + tabBar + wrap(body);
+    return head(p.title, "03 · " + (p.system || "Procedure")) + tabBar + wrap(body);
   }
 
   function renderStep(s) {
@@ -638,14 +729,17 @@
       "</div>" +
       '<div class="own">StewardMD summary · not reproduced guideline text</div></div>';
 
+    ensureCatalog();
     var links = "";
-    (rec.protocolRefs || []).forEach(function (pid) {
-      links += '<button class="sgx-chip" data-sgx="go" data-r="protocol/' + attr(pid) + '">' + ic("emergency") + " " + esc(pid) + "</button>";
-    });
-    (rec.procedureRefs || []).forEach(function (pid) {
-      links += '<button class="sgx-chip" data-sgx="go" data-r="procedure/' + attr(pid) + '">' + ic("content_cut") + " " + esc(pid) + "</button>";
-    });
-    if (links) body += '<div class="sgx-card"><h4>Used by</h4><div class="sgx-chips">' + links + "</div></div>";
+    function linkRow(kind, id) {
+      return '<button class="sgx-row" data-sgx="go" data-r="' + kind + "/" + attr(id) + '">' +
+        '<span class="tx"><span class="tt">' + esc(itemTitle(kind, id)) + '</span><span class="sb">' +
+        (kind === "protocol" ? "Protocol" : "Operation") + "</span></span>" +
+        '<span class="go">' + ic("chevron_right") + "</span></button>";
+    }
+    (rec.protocolRefs || []).forEach(function (pid) { links += linkRow("protocol", pid); });
+    (rec.procedureRefs || []).forEach(function (pid) { links += linkRow("procedure", pid); });
+    if (links) body += '<div class="sgx-seclabel">Used by</div>' + links;
 
     body += '<div class="sgx-card"><h4>Go further</h4>' +
       '<div class="sgx-disclaim" style="border:none;margin:0;padding:0 0 10px">A live literature review uses one of your two ' +
@@ -739,15 +833,17 @@
     }).join("");
 
     var st = ST();
-    var rows = state.caseList.filter(function (c) {
+    ensureCatalog();
+    var atLevel = state.caseList.filter(function (c) {
       return !c.levels || c.levels.indexOf(lv) >= 0;
-    }).map(function (c) {
+    });
+    var rows = atLevel.length ? browseBar(atLevel, "cases") + rowsBySpec(atLevel, function (c) {
       var prev = st ? st.caseResult(c.id) : null;
       return '<button class="sgx-row" data-sgx="go" data-r="case/' + attr(c.id) + '">' +
         '<span class="tx"><span class="tt">' + esc(c.title) + "</span>" +
         '<span class="sb">' + esc(c.subtitle || "") + (prev ? " · attempted" : "") + "</span></span>" +
         '<span class="go">' + ic("chevron_right") + "</span></button>";
-    }).join("");
+    }) : "";
 
     return head("Cases", "05") + wrap(
       '<div class="sgx-banner sim">' + ic("science") + " Simulation. Not real patients.</div>" +
@@ -835,7 +931,7 @@
     if (k.vitals) {
       var vs = "";
       for (var key in k.vitals) if (Object.prototype.hasOwnProperty.call(k.vitals, key)) {
-        vs += '<span class="sgx-vital">' + esc(key) + " " + esc(k.vitals[key]) + "</span>";
+        vs += '<span class="sgx-vital"><span class="k">' + esc(key) + "</span>" + esc(k.vitals[key]) + "</span>";
       }
       if (vs) body += '<div class="sgx-vitals">' + vs + "</div>";
     }
@@ -882,7 +978,8 @@
   }
 
   function renderDecision(d, picked, k) {
-    var h = '<div class="sgx-card"><h4>' + esc(d.phase) + " · question " + d.n + "</h4>" +
+    var ph = String(d.phase || "");
+    var h = '<div class="sgx-card"><h4>' + esc(ph.charAt(0).toUpperCase() + ph.slice(1)) + " · question " + d.n + "</h4>" +
       '<div style="font:650 14.5px/1.5 var(--sgx-sans);margin-bottom:10px">' + esc(d.prompt) + "</div>";
     if (!picked && d.hint) {
       h += '<div class="sgx-banner info" style="margin-bottom:10px">' + ic("lightbulb") + " " + esc(d.hint) + "</div>";
@@ -1464,11 +1561,19 @@
     var h = '<div class="sgx-fld' + cls + '" data-fk="' + attr(f.k) + '">' +
       '<label for="sgxF-' + attr(f.k) + '">' + esc(f.label) +
       (f.required ? ' <span class="req" title="Required">*</span>' : "") +
-      (f.aiFillable === false ? " " + ic("lock") : "") +
+      (f.aiFillable === false && f.type !== "choice" ? " " + ic("lock") : "") +
       (provLabel ? '<span class="sgx-prov ' + pv + '">' + provLabel + "</span>" : "") +
       "</label>";
     if (f.help) h += '<div class="help">' + esc(f.help) + "</div>";
-    if (f.type === "text") {
+    if (f.type === "choice" && f.options && f.options.length) {
+      // Tap targets, one per option. The value is a plain string, so the note text, completeness
+      // and provenance treat it exactly like a typed field; a tap is the clinician's own act.
+      h += '<div class="sgx-choice" role="radiogroup" id="sgxF-' + attr(f.k) + '">' + f.options.map(function (o) {
+        var on = v === o;
+        return '<button type="button" class="sgx-chip' + (on ? " on" : "") + '" role="radio" aria-checked="' + (on ? "true" : "false") +
+          '" data-sgx="choice" data-k="' + attr(f.k) + '" data-v="' + attr(o) + '">' + esc(o) + "</button>";
+      }).join("") + "</div>";
+    } else if (f.type === "text") {
       h += '<input id="sgxF-' + attr(f.k) + '" type="text" data-sgx-field="' + attr(f.k) + '"' + (f.k === "patientRef" ? " data-phi-input" : "") + ' value="' + attr(v) +
         '" placeholder="' + attr(f.ph) + '">';
     } else {
@@ -1477,7 +1582,9 @@
     }
     // Confirmation is an explicit act. A dictated or generated field that reads correctly is still
     // not a field the surgeon has put their name to, and an operative note is signed.
-    if (v.trim() && pv !== "clinician") {
+    if (f.type === "choice") {
+      // A tap IS the confirmation; there is no separate Confirm step for a choice.
+    } else if (v.trim() && pv !== "clinician") {
       h += '<button class="sgx-confirm" data-sgx="confirm" data-k="' + attr(f.k) + '">' + ic("check") + " Confirm as mine</button>";
     } else if (v.trim() && pv === "clinician") {
       h += '<button class="sgx-confirm done" data-sgx="confirm" data-k="' + attr(f.k) + '" disabled>' + ic("check_circle") + " Confirmed</button>";
@@ -1530,8 +1637,31 @@
       case "note": html = screenNote(); break;
       default: html = screenHome();
     }
+    if (html && r === "note" && tabletSplit()) html = noteSplit(html, routeArg());
     if (html) paint(html);
     try { if (ST()) ST().setLastSection(r); } catch (e) {}
+  }
+
+  /* iPad, landscape regular width (vault/plans/iPad-Standards.md rule 2): an open note sits beside
+   * the list of notes on this device, the selected one highlighted, instead of a full-screen push.
+   * Phones and Split View never take this path. It reads the same listNotes() the Notes screen
+   * shows; nothing is saved, loaded or changed here. */
+  function tabletSplit() {
+    try { return document.documentElement.classList.contains("smd-tablet") && window.innerWidth >= 1000; } catch (e) { return false; }
+  }
+  function noteSplit(html, currentId) {
+    var st = ST(), ns = NS(), list;
+    if (!st || !ns) return html;
+    try { list = st.listNotes(); } catch (e) { return html; }
+    var rows = list.length ? list.map(function (n) {
+      var t = ns.SCHEMAS[n.type], on = n.id === currentId;
+      return '<button class="sgx-row' + (on ? " on" : "") + '" data-sgx="noteswap" data-r="note/' + attr(n.id) + '"' + (on ? ' aria-current="true"' : "") + ">" +
+        '<span class="tx"><span class="tt">' + esc(n.label || (t ? t.title : "Note")) + "</span>" +
+        '<span class="sb">' + esc(t ? t.title : n.type) + " · " + (n.finalized ? "finalised" : "draft") + "</span></span></button>";
+    }).join("") : '<div class="sgx-empty">No saved notes on this device yet.</div>';
+    return '<div class="sgx-split"><aside class="sgx-split-list" aria-label="Notes on this device">' +
+      '<div class="sgx-seclabel">On this device</div>' + rows + "</aside>" +
+      '<div class="sgx-split-main">' + html + "</div></div>";
   }
 
   /* Live field editing without a re-render: repainting the whole screen on every keystroke would
@@ -1581,6 +1711,19 @@
       if (act === "close") { haptic("light"); if (window.SURGX) window.SURGX.close(); return; }
       if (act === "back") { haptic("light"); back(); return; }
       if (act === "go") { haptic("light"); go(t.getAttribute("data-r")); return; }
+      // iPad split: picking another note from the side list swaps the detail in place (no deeper stack).
+      if (act === "noteswap") {
+        haptic("light");
+        var dest = t.getAttribute("data-r"), cur = state.note;
+        var go2 = function () { replace(dest); try { state.host.scrollTop = 0; } catch (e) {} };
+        // Notes save only on Save, so the open draft is saved first (silently, as the hand-offs below do):
+        // one tap on the side list must never drop what was typed. A finalised note is not re-saved; a new
+        // note with nothing typed is not saved. If the save fails, the switch does not happen.
+        var typed = cur && cur.values && Object.keys(cur.values).some(function (k) { return String(cur.values[k] || "").trim(); });
+        if (cur && !cur.finalized && !cur.__failed && !cur.__loadingFor && (cur.id || typed)) { saveNote(true).then(function (ok) { if (ok) go2(); }); }
+        else go2();
+        return;
+      }
       if (act === "retry") { state.protoIndex = null; state.procList = null; state.evList = null; state.caseList = null; render(); return; }
 
       if (act === "calc") { openCalc(t.getAttribute("data-id")); return; }
@@ -1716,6 +1859,7 @@
       if (act === "tab") { state.procTab = t.getAttribute("data-id"); render(); try { state.host.scrollTop = 0; } catch (er) {} return; }
 
       // cases
+      if (act === "spec") { state.spec = t.getAttribute("data-id") || ""; haptic("light"); render(); return; }
       if (act === "level") { state.caseLevel = t.getAttribute("data-id"); state.kase = null; render(); return; }
       if (act === "answer") {
         var dp = t.getAttribute("data-dp"), opt = t.getAttribute("data-opt");
@@ -1743,6 +1887,16 @@
       }
       if (act === "mknote") { createNote(t.getAttribute("data-t"), t.getAttribute("data-tpl")); return; }
       if (act === "notestructure") { structureNote(); return; }
+      if (act === "choice") {
+        if (!state.note || state.note.finalized) return;
+        var ck = t.getAttribute("data-k"), cv = t.getAttribute("data-v");
+        // Tapping the selected option again clears it, so a mis-tap is undoable without a reset.
+        if (state.note.values[ck] === cv) { state.note.values[ck] = ""; state.note.provenance[ck] = "missing"; }
+        else { state.note.values[ck] = cv; state.note.provenance[ck] = "clinician"; }
+        haptic("light");
+        render();
+        return;
+      }
       if (act === "confirm") {
         var fk = t.getAttribute("data-k");
         if (!state.note) return;
@@ -2061,6 +2215,17 @@
       var el = e.target;
       if (el && el.getAttribute && el.getAttribute("data-sgx-field") != null) { onFieldInput(el); return; }
       if (el && el.hasAttribute && el.hasAttribute("data-sgx-label")) { if (state.note) state.note.label = el.value; return; }
+      if (el && el.id === "sgxFind") {
+        state.find = el.value;
+        clearTimeout(rootEl.__fT);
+        rootEl.__fT = setTimeout(function () {
+          var pos = el.selectionStart;
+          render();
+          var again = state.root.querySelector("#sgxFind");
+          if (again) { again.focus(); try { again.setSelectionRange(pos, pos); } catch (er) {} }
+        }, 220);
+        return;
+      }
       if (el && el.id === "sgxEvQ") {
         state.evQuery = el.value;
         clearTimeout(rootEl.__evT);

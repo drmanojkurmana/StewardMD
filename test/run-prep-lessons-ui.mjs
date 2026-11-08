@@ -55,14 +55,15 @@ const shot = async (name) => {
 const step = () => ev(`var p=document.querySelector("#smdPrep .pn-t p"); return p ? p.textContent : "";`);
 const store = (expr) => ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return ${expr};`);
 
-// speechSynthesis stub: records every utterance and cancel, and ends an utterance after 1.5 s (the time it "speaks").
+// speechSynthesis stub: records every utterance and cancel, and ends an utterance after 0.4 s (a step is read a sentence at a time).
 const TTS_STUB = `
+  window.SMD_PREP_VOICE = false;
   window.__tts = []; window.__ttsCancel = 0;
   window.SpeechSynthesisUtterance = function (t) { this.text = t; this.rate = 1; this.lang = ""; };
   var cur = null;
   Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { speaking: false,
     speak: function (u) { cur = u; window.__tts.push({ text: u.text, rate: u.rate, lang: u.lang }); this.speaking = true; var self = this;
-      setTimeout(function () { if (cur === u) { self.speaking = false; cur = null; if (u.onend) u.onend({}); } }, 1500); },
+      setTimeout(function () { if (cur === u) { self.speaking = false; cur = null; if (u.onend) u.onend({}); } }, 400); },
     cancel: function () { window.__ttsCancel++; cur = null; this.speaking = false; } } });`;
 
 try {
@@ -135,13 +136,17 @@ try {
   await click("#smdPrep [data-act=l-play]");
   ok(await until(`return window.__tts.length===1;`, 3000), "Play speaks");
   ok(await ev(`var u=window.__tts[0]; return /^A suspicious lump goes through triple assessment/.test(u.text) && u.rate===1 && u.lang==="en-IN";`) === true, "it speaks the step's narration at 1x, en-IN");
+  ok(await ev(`var on=document.querySelectorAll("#smdPrep .pn-lsn-tx .pn-sent.on"); return on.length===1 && on[0].getAttribute("data-k")==="0" && /^A suspicious lump/.test(on[0].textContent);`) === true, "read-along: the first sentence is lit while it is spoken");
+  ok(await until(`var on=document.querySelector("#smdPrep .pn-lsn-tx .pn-sent.on"); return !!on && Number(on.getAttribute("data-k"))>=1;`, 4000), "read-along: the light moves on to the next sentence as the voice does");
+  ok(await ev(`var s=document.querySelectorAll("#smdPrep .pn-lsn-tx .pn-sent"), tx=document.querySelector("#smdPrep .pn-lsn-tx"); return s.length>=3 && tx.textContent.replace(/\\s+/g," ").trim().indexOf("A suspicious lump goes through triple assessment")===0;`) === true, "read-along: the step text reads the same with its sentences wrapped");
+  await shot("step2-readalong");
   ok(await ev(`var b=document.querySelector("#smdPrep [data-act=l-play]"); return b.getAttribute("aria-pressed")==="true" && b.getAttribute("aria-label")==="Pause narration";`) === true, "Play becomes Pause");
   ok(await ev(`var w=document.querySelectorAll("#smdPrep .pn-lsn-play.on .pn-wave i"); return w.length===5 && getComputedStyle(w[0]).animationName==="pn-wave";`) === true, "the Play pill's waveform moves while the voice speaks");
   ok(await ev(`var i=document.querySelectorAll("#smdPrep .pn-lsn-prog i"); return i[1].classList.contains("cur") && i[0].classList.contains("on") && !i[0].classList.contains("cur") && i[1].getBoundingClientRect().width > i[0].getBoundingClientRect().width * 2;`) === true, "step dots: the current step is the lit pill");
   await shot("step2-playing");
   await click("#smdPrep [data-act=l-speed]");
   ok(await ev(`return document.querySelector("#smdPrep [data-act=l-speed]").textContent;`) === "1.25x", "speed cycles to 1.25x");
-  ok(await until(`return window.__tts.length===2 && window.__tts[1].rate===1.25;`, 2000), "a speed change while playing restarts the step at the new rate");
+  ok(await until(`return window.__tts.some(function (u) { return u.rate===1.25 && /^A suspicious lump goes through triple assessment/.test(u.text); });`, 2000), "a speed change while playing restarts the step at the new rate");
   ok(await store(`s.lsp.r`) === 1.25, "the speed is kept in the store");
   ok(await until(`return document.querySelector("#smdPrep [data-act=l-play]").getAttribute("aria-pressed")==="false";`, 4000) && await step() === "Step 2 of 8", "without auto-advance the narration ends on the same step and Play resets");
   await click("#smdPrep [data-act=l-auto]");
@@ -153,6 +158,8 @@ try {
   const c0 = await ev(`return window.__ttsCancel;`);
   await click("#smdPrep [data-act=l-play]");
   ok(await ev(`return window.__ttsCancel;`) > c0 && await ev(`return document.querySelector("#smdPrep [data-act=l-play]").getAttribute("aria-pressed");`) === "false", "Pause cancels the speech");
+  ok(await ev(`return document.querySelectorAll("#smdPrep .pn-sent.on").length===0;`) === true, "read-along: pausing clears the light");
+
   await click("#smdPrep [data-act=l-auto]");
   await shot("step3-compare");
 

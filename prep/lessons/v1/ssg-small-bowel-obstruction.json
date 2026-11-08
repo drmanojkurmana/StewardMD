@@ -1,0 +1,196 @@
+{
+ "checks": {
+  "bank": null,
+  "dropped": 0,
+  "drugs": true,
+  "numbers": true,
+  "redone": 0,
+  "selfCheck": false,
+  "shape": true,
+  "verbatim": true
+ },
+ "gen": "hand",
+ "minutes": 8,
+ "module": "ssg-small-bowel-obstruction",
+ "quiz": [],
+ "refs": [
+  "Sabiston Surgery 22e Ch 91, small intestine",
+  "WSES Adhesive Obstruction guideline 2023"
+ ],
+ "src": [
+  "ss-c-small-bowel-obstruction-ground"
+ ],
+ "steps": [
+  {
+   "say": "Adhesions from prior surgery cause most small bowel blocks, so the previous operation scar is the first suspect. A blocked virgin abdomen without prior surgery points instead to hernia, tumour, Crohn disease or gallstone ileus. Examine every hernia orifice and the groin before ordering scans.",
+   "tx": "Postoperative **adhesions** cause **70** percent of small bowel obstructions, and a **virgin abdomen** with obstruction points to hernia, malignancy, Crohn disease or **gallstone ileus** instead. Colicky pain with vomiting, distension and absolute constipation marks complete blockage, while flatus passage suggests partial disease. Examine groin, femoral, umbilical and port-site orifices in every virgin abdomen because an external hernia is the commonest curable surprise.",
+   "vis": {
+    "alt": "Adhesive small bowel obstruction with strangulated closed loop, sigmoid volvulus and a management flow box for drip and suck versus surgery.",
+    "caption": "Adhesions, strangulation and volvulus patterns. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/lessons/media/sur-obstruction-fig1.webp"
+   }
+  },
+  {
+   "say": "Gastrografin contrast earns its place by predicting who avoids theatre. When swallowed contrast reaches the colon within twenty four hours, nonoperative resolution follows with ninety five percent accuracy. Absent colonic contrast means continuing obstruction and pushes toward surgery.",
+   "tx": "Contrast CT with oral **Gastrografin** distinguishes **partial obstruction** from complete obstruction, and contrast reaching the colon within **24** hours predicts nonoperative resolution with **95** percent accuracy. Water-soluble contrast also draws fluid into the lumen and may itself relieve sticking loops. Serial examination with drip-and-suck support continues while contrast transits, and contrast absent from the colon by 24 hours ends the contrast trial and favours surgery, within the overall 48 to 72 hour limit of conservative care.",
+   "vis": {
+    "cols": [
+     "CT finding",
+     "Pattern",
+     "Decision"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Contrast in colon by 24 h",
+      "Partial obstruction",
+      "Continue conservative"
+     ],
+     [
+      "No colonic contrast",
+      "Complete block",
+      "Plan surgery"
+     ],
+     [
+      "Beaking with swirl",
+      "Closed loop",
+      "Urgent laparotomy"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Four findings end all debate and mandate laparotomy. Peritonitis, strangulation with closed loop beaking, pneumatosis with portal venous gas, and deterioration after forty eight to seventy two hours of careful treatment each mean operate now. Waiting past these signs converts viable bowel into dead bowel.",
+   "tx": "Peritonitis, **strangulation** with **closed-loop** beaking, **pneumatosis** with portal venous gas, and deterioration after **48** to **72** hours of conservative care mandate laparotomy. Tachycardia with rising lactate and base deficit mark transmural ischaemia before frank necrosis, so trend blood gases hourly. At operation resect frankly dead segments, second-look doubtful ones and fix the band or hernia that caused the closed loop.",
+   "vis": {
+    "edges": [
+     [
+      "sign",
+      "cutoff"
+     ],
+     [
+      "cutoff",
+      "knife"
+     ],
+     [
+      "sign",
+      "watch"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sign",
+      "label": "Peritonitis or beaking"
+     },
+     {
+      "id": "cutoff",
+      "label": "Gas in wall or 48 to 72 h fail"
+     },
+     {
+      "id": "knife",
+      "label": "Laparotomy now"
+     },
+     {
+      "id": "watch",
+      "label": "Partial: Gastrografin trial"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Gallstone ileus is the great imitator in elderly women with a virgin abdomen. The Rigler triad of small bowel block, air in the biliary tree and an ectopic stone impacting at the ileocaecal valve clinches it. Enterolithotomy alone in the acute setting saves lives, with cholecystectomy deferred.",
+   "tx": "**Rigler triad** of small bowel obstruction, **pneumobilia** and ectopic gallstone marks gallstone ileus impacting at the ileocecal valve, treated by **enterolithotomy** alone in the acute setting. Open the antimesenteric border longitudinally, milk the stone out and close transversely to avoid stenosis. One-stage fistula repair and cholecystectomy suit only fit young patients, since the second procedure doubles operating time in frail elderly women.",
+   "vis": null
+  },
+  {
+   "say": "Internal hernias trap bowel through defects the surgeon created or anatomy left behind. Petersen, paraduodenal and foramen of Winslow defects each hold dilated loops with the mesenteric swirl sign on CT. Reduce urgently and close the defect, because these closed loops strangulate fast.",
+   "tx": "**Internal hernia** through Petersen, paraduodenal or foramen of Winslow defects traps dilated loops with **mesenteric swirl** on CT and needs urgent reduction with defect closure. Post bypass Petersen defects follow rapid weight loss as mesenteric fat thins, so close all defects primarily at index surgery. Swirl with engorged nodes and beaking at two points marks impending strangulation and forbids any further conservative trial.",
+   "vis": {
+    "cols": [
+     "Defect",
+     "Setting",
+     "Repair"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Petersen space",
+      "After gastric bypass",
+      "Close at index op"
+     ],
+     [
+      "Paraduodenal",
+      "Congenital fossa",
+      "Reduce and suture"
+     ],
+     [
+      "Foramen of Winslow",
+      "Rare, acute pain",
+      "Reduce, fix caecum"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Adult intussusception is never idiopathic the way childhood cases often are. Nine in ten carry a lead point such as polyp, Meckel diverticulum or tumour, so colonic cases go to resection without reduction. Reducing a malignant lead point risks perforation and tumour spill.",
+   "tx": "**Intussusception** in adults is pathological with a **lead point** such as polyp, Meckel diverticulum or tumour in **90** percent, so resection without reduction is the rule for colonic cases. Target or sausage-shaped mass with telescoping layers on CT confirms the diagnosis, and anaemia with weight loss warns of malignancy. Small-bowel cases with benign history may reduce gently, but ischaemic or colonic segments always come out en bloc.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Often idiopathic",
+      "Air enema reduces",
+      "Surgery only if failed"
+     ],
+     "title": "Childhood"
+    },
+    "right": {
+     "points": [
+      "Lead point in 90%",
+      "Never reduce colonic",
+      "Oncologic resection"
+     ],
+     "title": "Adult"
+    }
+   }
+  },
+  {
+   "say": "The rule of twos makes Meckel unforgettable, with two percent prevalence, two feet from the valve and two inches long. Bleeding comes from acid secreting ectopic gastric mucosa inside the diverticulum. Technetium pertechnetate scan lights up that ectopic mucosa and confirms the diagnosis.",
+   "tx": "**Meckel diverticulum** follows the rule of twos at **2** percent prevalence, **2** feet from the valve and **2** inches long, bleeding from **ectopic gastric mucosa** detected by **technetium scan**. The **99m**Tc-pertechnetate tracer concentrates in gastric mucosa wherever it sits, and pentagastrin plus H2 blockade sharpen uptake. Symptomatic cases need diverticulectomy or segmental resection with the ulcer-bearing ileum, while silent incidental diverticula in adults usually stay.",
+   "vis": {
+    "alt": "Technetium-99m pertechnetate scan serial images showing focal tracer uptake from ectopic gastric mucosa in Meckel diverticulum.",
+    "caption": "Meckel scan lighting up ectopic gastric mucosa. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/lessons/media/sur-small-bowel-fig1.webp"
+   }
+  },
+  {
+   "say": "Keyhole adhesiolysis suits the mild first episode with modest distension under four centimetres. Massive distension, dense midline scarring or any strangulation sign needs open surgery instead. Converting early when the view is unsafe beats causing an enterotomy through the camera port.",
+   "tx": "Laparoscopic **adhesiolysis** suits first-episode partial obstruction with mild distension under **4** cm, while massive distension, dense midline scarring or strangulation needs open surgery. Optical entry away from old scars, cold scissors over energy near bowel and a low threshold for conversion keep enterotomy rates down. Dense matted adhesions with multiple transition zones favour a planned open xiphoid-to-pubis approach with full small-bowel walk from ligament to caecum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "First episode, partial",
+      "Distension under 4 cm",
+      "No strangulation"
+     ],
+     "title": "Laparoscopic"
+    },
+    "right": {
+     "points": [
+      "Massive distension",
+      "Dense midline scars",
+      "Strangulation signs"
+     ],
+     "title": "Open laparotomy"
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "subject": "ss-surgical-gastroenterology",
+ "title": "Small bowel obstruction: adhesions, strangulation and special causes"
+}

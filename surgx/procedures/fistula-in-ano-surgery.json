@@ -1,0 +1,283 @@
+{
+  "id": "fistula-in-ano-surgery",
+  "title": "Fistula-in-ano: fistulotomy and seton",
+  "subtitle": "Find the internal opening, protect the sphincter",
+  "system": "anorectal",
+  "aliases": [
+    "anal fistula surgery",
+    "fistulotomy",
+    "seton insertion",
+    "lay open of fistula",
+    "fistula in ano"
+  ],
+  "estMinutes": 40,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "ascrs-fistula",
+      "org": "American Society of Colon and Rectal Surgeons (ASCRS)",
+      "title": "Clinical practice guidelines for the management of anorectal abscess, fistula-in-ano, and rectovaginal fistula",
+      "year": 2022,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=American+Society+of+Colon+and+Rectal+Surgeons+clinical+practice+guidelines+anorectal+abscess+fistula-in-ano+rectovaginal+fistula+2022",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "parks-1976",
+      "org": "Parks AG, Gordon PH, Hardcastle JD (British Journal of Surgery)",
+      "title": "A classification of fistula-in-ano",
+      "year": 1976,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Parks+Gordon+Hardcastle+classification+of+fistula-in-ano",
+      "accessed": "2026-11-05"
+    }
+  ],
+  "calcs": [
+    "wexner"
+  ],
+  "chapters": {
+    "indications": [
+      "Symptomatic fistula-in-ano, usually after a previous perianal abscess.",
+      "Simple low fistulas suitable for fistulotomy.",
+      "High, complex, recurrent or Crohn's-related fistulas, where a loose seton controls sepsis before definitive surgery.",
+      "Persistent drainage after abscess drainage, at examination under anaesthesia."
+    ],
+    "contraindications": [
+      "Active undrained sepsis: drain first; definitive surgery comes later.",
+      "Fistulotomy is contraindicated for high trans-sphincteric, suprasphincteric and extrasphincteric tracts, most anterior fistulas in women, and patients with significant incontinence.",
+      "Active perianal Crohn's disease, where a loose seton and medical treatment come before any division of muscle.",
+      "Suspected malignancy in the tract: biopsy first."
+    ],
+    "preparation": [
+      "Examine the perineum, note external openings and assess baseline continence (for example a Wexner score).",
+      "Obtain MRI of the pelvis for recurrent, complex or Crohn's-related fistulas, or when the anatomy is uncertain; endoanal ultrasound is an alternative in some units.",
+      "Consider tuberculosis, Crohn's disease, HIV and malignancy in atypical, multiple or recurrent fistulas, particularly in high-prevalence settings.",
+      "Consent must include recurrence or persistence, faecal incontinence (minor or major), bleeding, the need for further staged operations, prolonged seton treatment, and the possibility that a seton will be placed instead of a fistulotomy."
+    ],
+    "positioning": [
+      "Lithotomy or prone jack-knife; record which, because the position determines how findings are described.",
+      "General or regional anaesthesia, so the sphincters can be assessed and the tract explored."
+    ],
+    "equipment": [
+      "Anal retractors, proctoscope and sigmoidoscope.",
+      "Malleable fistula probes of several sizes, a grooved director and a fistula hook.",
+      "Dilute hydrogen peroxide or a coloured dye and a soft cannula.",
+      "Seton material (silicone sling or non-absorbable suture), curette and histology pots."
+    ],
+    "anatomy": [
+      "Most fistulas arise from infection of an anal gland at the dentate line (cryptoglandular origin).",
+      "The internal opening is usually at the dentate line, most often in the posterior midline.",
+      "Parks classification describes the tract's relation to the sphincters: intersphincteric, trans-sphincteric, suprasphincteric and extrasphincteric.",
+      "The anorectal ring, formed by the puborectalis and the upper sphincters, is palpable posteriorly and laterally; dividing it causes incontinence.",
+      "The external sphincter is shorter anteriorly in women, so anterior tracts involve a greater proportion of muscle."
+    ],
+    "criticalSafety": [
+      "Never force a probe.",
+      "Assess how much muscle lies below the tract before cutting anything.",
+      "When in doubt, place a loose seton and image.",
+      "Send tract tissue for histology, and for tuberculosis testing where suspected.",
+      "Record the anatomy precisely: openings, tract type, sphincter involvement and the patient's position."
+    ],
+    "structuresAtRisk": [
+      "External anal sphincter",
+      "Internal anal sphincter",
+      "Puborectalis and the anorectal ring",
+      "Rectovaginal septum in anterior fistulas in women",
+      "Inferior rectal vessels"
+    ],
+    "commonErrors": [
+      "Creating a false passage with the probe.",
+      "Missing the internal opening and treating only the external opening.",
+      "Laying open too much sphincter.",
+      "Missing a secondary tract or horseshoe extension.",
+      "Not arranging imaging and follow-up after seton placement."
+    ],
+    "complications": [
+      "Recurrence or persistence.",
+      "Faecal incontinence, ranging from soiling to major incontinence.",
+      "Bleeding.",
+      "Delayed wound healing and recurrent abscess.",
+      "Keyhole deformity after a posterior lay-open."
+    ],
+    "postop": [
+      "Usually a day case.",
+      "Stool softeners, simple analgesia and warm water soaks; daily cleaning of the open wound.",
+      "Explain how to care for a seton and that it may stay for weeks to months.",
+      "Follow up the histology, including tuberculosis studies where sent, and arrange MRI and a plan for definitive surgery if a seton was placed.",
+      "Review continence at follow-up."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Consent should explicitly allow seton placement instead of fistulotomy if the tract is higher than expected."
+    },
+    {
+      "ref": "step.core.timeout",
+      "emphasis": "Display any MRI and state the expected tract anatomy at the time-out."
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Follow local policy; antibiotics are for surrounding cellulitis or specific indications, not routine fistula surgery."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Lithotomy or prone jack-knife; record which."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.ano.local-block"
+    },
+    {
+      "ref": "step.ano.eua",
+      "emphasis": "Note every external opening, its distance from the verge and its position, and feel for induration and secondary tracts."
+    },
+    {
+      "ref": "step.ano.sphincter-identify"
+    },
+    {
+      "ref": "step.fia.internal-opening"
+    },
+    {
+      "ref": "step.fia.classify"
+    },
+    {
+      "ref": "step.ano.when-to-stop",
+      "emphasis": "Uncertain anatomy, high or complex tract, Crohn's disease or suspicion of malignancy: loose seton, biopsy and MRI, not division."
+    },
+    {
+      "ref": "step.fia.fistulotomy"
+    },
+    {
+      "ref": "step.fia.seton"
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.ano.final-inspection"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.specimen",
+      "emphasis": "Send tract curettings for histology, and for tuberculosis culture or PCR where clinically suspected."
+    },
+    {
+      "ref": "step.ano.wound-care"
+    },
+    {
+      "ref": "step.core.debrief",
+      "emphasis": "Record the internal opening, tract type, sphincter involvement, the patient's position and whether fistulotomy or seton was done."
+    }
+  ],
+  "steps_local": {
+    "step.fia.internal-opening": {
+      "id": "step.fia.internal-opening",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Finding the internal opening",
+      "why": "A fistula is cured only when the internal opening is dealt with. Most persistent and recurrent fistulas follow an operation that treated the external opening and a false track while the real internal opening was missed.",
+      "how": [
+        "Note the position and distance of each external opening from the anal verge and apply Goodsall's rule as a guide, knowing its exceptions (anterior openings further from the verge often track posteriorly).",
+        "Palpate for the indurated cord of the tract running towards the canal.",
+        "Inspect the dentate line with the retractor for a crypt with pus or a pit; gentle pressure on the tract may express pus from it.",
+        "Inject dilute hydrogen peroxide or a coloured solution through the external opening and watch the dentate line for it to appear.",
+        "Pass a malleable probe gently along the tract from outside and, if needed, from inside, never forcing it."
+      ],
+      "structuresAtRisk": [
+        "Anal mucosa and the anorectal ring, which a forced probe can breach",
+        "Sphincter muscle around the tract"
+      ],
+      "pitfalls": [
+        "Forcing a probe and creating a false internal opening, usually higher than the true one.",
+        "Treating the external opening alone.",
+        "Assuming Goodsall's rule is always right."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fia.classify": {
+      "id": "step.fia.classify",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Classifying the tract and deciding: lay open or seton",
+      "why": "The decision to divide muscle is the decision about continence. It is made on how much sphincter lies below the tract, the position of the tract, the sex of the patient and the underlying disease, not on what was planned in clinic.",
+      "how": [
+        "With the probe in the tract, palpate how much sphincter lies below it and where it crosses relative to the anorectal ring.",
+        "Classify the tract using the Parks system (intersphincteric, trans-sphincteric, suprasphincteric, extrasphincteric) and look for secondary extensions or a horseshoe component.",
+        "Lay open only a simple low fistula: subcutaneous, intersphincteric or low trans-sphincteric, with clearly a small proportion of external sphincter involved, in a patient without risk factors.",
+        "Choose a loose draining seton, and later definitive sphincter-sparing surgery, for high or complex tracts, anterior fistulas in women, Crohn's disease, recurrent fistulas, or pre-existing incontinence.",
+        "If anatomy is unclear, drain, place a loose seton, and obtain MRI before any further division."
+      ],
+      "structuresAtRisk": [
+        "External anal sphincter",
+        "Puborectalis and the anorectal ring"
+      ],
+      "pitfalls": [
+        "Underestimating the sphincter involved because the patient is relaxed under anaesthesia.",
+        "Laying open an anterior fistula in a woman.",
+        "Missing a secondary tract that continues to feed the sepsis."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fia.fistulotomy": {
+      "id": "step.fia.fistulotomy",
+      "kind": "resection",
+      "critical": true,
+      "title": "Fistulotomy: laying open a simple low tract",
+      "why": "Fistulotomy has the highest healing rate of any fistula operation, provided the tract is simple and low. It heals because the whole tract is converted into an open wound that heals from its base.",
+      "how": [
+        "With the probe through both openings, divide the skin, subcutaneous tissue and the sphincter fibres overlying the probe in one line.",
+        "Curette the granulation tissue from the base of the tract and send it for histology, and for tuberculosis culture where clinically suspected.",
+        "Explore and lay open any secondary tracts that are superficial; do not chase high extensions with the knife.",
+        "Trim overhanging skin edges so the wound drains freely; marsupialise the edges of a deep wound with absorbable sutures if you use that technique."
+      ],
+      "structuresAtRisk": [
+        "External anal sphincter overlying the probe",
+        "Inferior rectal vessels"
+      ],
+      "pitfalls": [
+        "Dividing muscle along a false track created by the probe.",
+        "Leaving overhanging edges that bridge over and form a new tract.",
+        "Not sending the curettings, missing tuberculosis, Crohn's disease or malignancy."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fia.seton": {
+      "id": "step.fia.seton",
+      "kind": "reconstruction",
+      "title": "Placing a loose draining seton",
+      "why": "A loose seton keeps the tract draining, controls sepsis and protects the sphincter while the anatomy is defined and definitive surgery is planned. It is the safe answer whenever the fistula is high, complex or uncertain.",
+      "how": [
+        "Pass the seton material (for example a silicone sling or a non-absorbable suture) along the probe through the tract.",
+        "Lay open the skin and subcutaneous portion only, below the sphincter, so the seton sits comfortably.",
+        "Tie the seton loosely so that it can rotate and does not cut through the muscle, and leave the knot outside the canal.",
+        "Explain to the patient that this is usually a staged treatment, and that a cutting seton, which divides muscle over time, carries a higher incontinence risk and is a different operation."
+      ],
+      "structuresAtRisk": [
+        "External anal sphincter, if the seton is tightened",
+        "Anal skin at the knot"
+      ],
+      "pitfalls": [
+        "Tying the seton tight, turning a draining seton into a cutting one without consent.",
+        "Placing a seton in a false tract created by the probe.",
+        "Failing to arrange follow-up and imaging, so the seton stays for years."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  },
+  "educationalOnly": true
+}

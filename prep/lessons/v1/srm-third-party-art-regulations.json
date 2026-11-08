@@ -1,0 +1,286 @@
+{
+  "id": "srm-third-party-art-regulations",
+  "module": "srm-third-party-art-regulations",
+  "title": "Third-Party Reproduction, Gamete Donation and Legal Framework of the Indian ART Act 2021",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "The Assisted Reproductive Technology (Regulation) Act, 2021 (India)",
+    "The Surrogacy (Regulation) Act, 2021 (India)",
+    "National Assisted Reproductive Technology and Surrogacy Board Guidelines"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The Assisted Reproductive Technology Act sets clear statutory age criteria for couples and individuals. Female commissioning patients must be between 21 and 50 years, while males must be 21 to 55.",
+      "tx": "Enacted by the Parliament of India, the **ART Act 2021** establishes clear statutory age boundaries for individuals seeking assisted reproduction. The legal **female age limit** requires women to be between 21 and 50 years old, whereas the legal **male age limit** spans 21 to 55 years at the time of accessing ART procedures.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Commissioning Female",
+            "21 years",
+            "50 years",
+            "Obstetric safety and parental longevity"
+          ],
+          [
+            "Commissioning Male",
+            "21 years",
+            "55 years",
+            "Paternal fitness and child welfare"
+          ],
+          [
+            "Oocyte Donor",
+            "23 years",
+            "35 years",
+            "Optimal oocyte quality and completed family"
+          ],
+          [
+            "Semen Donor",
+            "21 years",
+            "55 years",
+            "Spermatogenic competence and screening integrity"
+          ]
+        ],
+        "cols": [
+          "Regulated Party",
+          "Minimum Legal Age",
+          "Maximum Legal Age",
+          "Statutory Objective"
+        ]
+      }
+    },
+    {
+      "say": "Oocyte donor eligibility follows strict protective requirements under Indian law. A donor must be an ever-married woman aged 23 to 35 years who donates oocytes only once in her lifetime.",
+      "tx": "Statutory **oocyte donor criteria** mandate that donors must be ever-married women aged 23 to 35 with at least one living biological child aged at least 3 years. To protect women from commercial hyperstimulation, the Act enforces **one donation lifetime** across all registered ART banks: **age 23 to 35**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "o1",
+            "label": "Ever-married woman aged 23 to 35 years"
+          },
+          {
+            "id": "o2",
+            "label": "At least 1 living biological child (>=3 years old)"
+          },
+          {
+            "id": "o3",
+            "label": "Single lifetime oocyte donation cycle permitted"
+          }
+        ],
+        "edges": [
+          [
+            "o1",
+            "o2",
+            "Eligibility check"
+          ],
+          [
+            "o2",
+            "o3",
+            "National registry verification"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sperm donation is subject to strict single-couple distribution limits. Donors must be 21 to 55 years old, and their semen may supply only one commissioning couple or recipient.",
+      "tx": "Under Indian regulations, the permissible **semen donor age** is restricted between 21 and 55 years. To prevent unintentional consanguinity and commercial trading, a registered **ART bank** can source semen from a donor for supply to only **one commissioning couple** or single woman.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Female Gamete Donor",
+          "points": [
+            "Age 23 to 35 years",
+            "Ever-married with child >=3 years",
+            "Exactly 1 donation cycle in lifetime",
+            "Mandatory 12-month health insurance"
+          ]
+        },
+        "right": {
+          "title": "Male Gamete Donor",
+          "points": [
+            "Age 21 to 55 years",
+            "Marital status unrestricted",
+            "Semen supplied to only 1 commissioning couple",
+            "Quarantine testing for infectious diseases"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Commercial surrogacy is banned across India. The Surrogacy Act permits only altruistic gestational arrangements supported by an official Essentiality Certificate from the appropriate board.",
+      "tx": "The Surrogacy Regulation Act enforces an absolute **commercial surrogacy prohibition**, banning financial compensation beyond medical costs. Only **altruistic surrogacy** is permitted, requiring an **Essentiality Certificate** proving medical necessity issued by the State Surrogacy Board alongside a Certificate of Eligibility: **Indian Surrogacy Act 2021**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "Proven medical indication for surrogacy"
+          },
+          {
+            "id": "s2",
+            "label": "State Surrogacy Board issues Essentiality Certificate"
+          },
+          {
+            "id": "s3",
+            "label": "Altruistic gestational surrogacy proceeding"
+          }
+        ],
+        "edges": [
+          [
+            "s1",
+            "s2",
+            "Medical board review"
+          ],
+          [
+            "s2",
+            "s3",
+            "Legal sanction"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surrogate mothers must fulfill explicit marital, family, and age criteria. Candidates must be married women aged 25 to 35 with their own living child, serving as a surrogate once only.",
+      "tx": "Strict **surrogate mother criteria** dictate that the surrogate must be an ever-married woman aged 25 to 35 with a living biological child of her own. She can act as a surrogate only once in her life, with commercial fees prohibited while receiving comprehensive medical **insurance coverage**: **age 25 to 35**.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Age Window",
+            "25 to 35 years",
+            "Physiological maturity and completed personal childbearing",
+            "National identity documentation"
+          ],
+          [
+            "Marital Status",
+            "Married with living child",
+            "Demonstrated obstetric competence",
+            "Marriage and birth records"
+          ],
+          [
+            "Lifetime Frequency",
+            "Exactly 1 time",
+            "Protects surrogate from exploitation",
+            "National ART registry tracking"
+          ],
+          [
+            "Remuneration",
+            "Zero commercial fees",
+            "Upholds altruistic framework",
+            "Financial affidavit audit"
+          ]
+        ],
+        "cols": [
+          "Surrogate Parameter",
+          "Statutory Requirement",
+          "Rationale",
+          "Legal Verification"
+        ]
+      }
+    },
+    {
+      "say": "Statutory embryo transfer ceilings prevent high-order multifetal gestations. The ART Act restricts transfer to no more than 3 embryos while encouraging elective single embryo transfer.",
+      "tx": "Addressing maternal-fetal morbidity associated with multifetal gestations, statutory **embryo transfer limits** under the ART Act mandate transfer of a **maximum three embryos** during any single treatment cycle. Clinical guidelines strongly promote **eSET** in good-prognosis blastocyst transfers: **ART transfer regulations 2021**. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Good Prognosis / Blastocyst Cycle",
+          "points": [
+            "Statutory limit <=3 embryos",
+            "Elective single embryo transfer (eSET)",
+            "Single healthy singleton pregnancy",
+            "Averts prematurity and NICU admission"
+          ]
+        },
+        "right": {
+          "title": "Refractory Failure / Advanced Maternal Age",
+          "points": [
+            "Absolute legal ceiling of 3 embryos",
+            "Double embryo transfer (DET) considered",
+            "Strict avoidance of quadruplet or triplet risk",
+            "Mandatory counseling on multifetal reduction"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Commissioning parents must purchase comprehensive health insurance for donors and surrogates. The law specifies 12 months coverage for egg donors and 36 months for surrogate mothers.",
+      "tx": "Mandatory statutory insurance protects third-party participants against postpartum and procedural morbidity. The commissioning couple must secure policies specifying an **insurance duration** of 12 months for **oocyte donor insurance** and 36 months of comprehensive health coverage for **surrogate insurance**. Comprehensive assessment and rigorous clinical monitoring ensure optimal outcomes across every assisted reproductive technology protocol in modern practice.",
+      "vis": {
+        "kind": "table",
+        "rows": [
+          [
+            "Oocyte Donor",
+            "12 months",
+            "Ovarian hyperstimulation, surgical trauma, infection",
+            "ART Act 2021"
+          ],
+          [
+            "Surrogate Mother",
+            "36 months",
+            "Obstetric complications, operative delivery, postpartum morbidity",
+            "Surrogacy Act 2021"
+          ],
+          [
+            "Commissioning Couple",
+            "Policy funding obligation",
+            "Direct insurer payment prior to cycle initiation",
+            "Requisite for board certificate"
+          ]
+        ],
+        "cols": [
+          "Participant",
+          "Mandatory Policy Term",
+          "Coverage Scope",
+          "Statutory Mandate"
+        ]
+      }
+    },
+    {
+      "say": "Sex selection is strictly illegal under Indian law and carries severe penalties. Determining embryonic sex for social reasons violates the PC-PNDT Act and the Assisted Reproductive Technology Act.",
+      "tx": "Preimplantation genetic sex selection for non-medical reasons constitutes a criminal offense under the **PC-PNDT Act** 1994 and the ART Act 2021. Any clinic or clinician violating the **sex selection prohibition** faces immediate license cancellation, heavy fines, and imprisonment for this **punishable offense**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Strict prohibition of pre-conception / preimplantation sex selection"
+          },
+          {
+            "id": "p2",
+            "label": "PGT allowed strictly for serious monogenic sex-linked disorders"
+          },
+          {
+            "id": "p3",
+            "label": "Violations trigger license cancellation and imprisonment"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2",
+            "Medical exception"
+          ],
+          [
+            "p1",
+            "p3",
+            "Criminal sanction"
+          ]
+        ]
+      }
+    }
+  ],
+  "v": 1
+}

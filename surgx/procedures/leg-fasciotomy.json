@@ -1,0 +1,212 @@
+{
+  "id": "leg-fasciotomy",
+  "title": "Fasciotomy of the leg",
+  "subtitle": "Two-incision, four-compartment decompression",
+  "system": "musculoskeletal",
+  "aliases": [
+    "four compartment fasciotomy",
+    "lower leg fasciotomy",
+    "fasciotomy"
+  ],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "boast-acs",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Diagnosis and Management of Compartment Syndrome of the Extremities",
+      "year": 2025,
+      "version": "updated July 2025",
+      "url": "https://www.boa.ac.uk/resource/boast-10-pdf.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "boast-open",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Open Fractures",
+      "year": 2017,
+      "url": "https://www.boa.ac.uk/resource/boast-4-pdf.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng37",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Fractures (complex): assessment and management (NG37)",
+      "year": 2016,
+      "version": "NG37",
+      "url": "https://www.nice.org.uk/guidance/ng37",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "kdigo_aki"
+  ],
+  "chapters": {
+    "indications": [
+      "Acute compartment syndrome of the leg diagnosed clinically, or by pressure measurement where clinical assessment is unreliable.",
+      "After revascularisation of an ischaemic limb, where fasciotomy must always be considered.",
+      "Prophylactically in selected high-risk injuries at the surgeon's judgement."
+    ],
+    "contraindications": [
+      "Late presentation with established muscle death: discuss between two consultants, since non-operative management with renal protection may be safer."
+    ],
+    "preparation": [
+      "The decision is an emergency (NCEPOD category 1); theatre is not delayed for further imaging.",
+      "Consent covers open wounds, a second look, skin grafting or flap closure, muscle loss and amputation risk.",
+      "Creatine kinase and renal function for baseline."
+    ],
+    "positioning": [
+      "Supine, with the leg supported so both medial and lateral sides are accessible.",
+      "Tourniquet applied but not inflated."
+    ],
+    "equipment": [
+      "Major orthopaedic or general set, long scissors.",
+      "Sealed or negative-pressure dressing materials."
+    ],
+    "anatomy": [
+      "Anterior compartment: tibialis anterior, toe extensors, anterior tibial artery and deep peroneal nerve.",
+      "Lateral compartment: peronei and the superficial peroneal nerve, which pierces the fascia in the distal third.",
+      "Superficial posterior compartment: gastrocnemius and soleus.",
+      "Deep posterior compartment: tibialis posterior and long toe flexors, with the posterior tibial artery and tibial nerve; reached by detaching soleus from the back of the tibia."
+    ],
+    "criticalSafety": [
+      "Decompress all four compartments and confirm each one is open.",
+      "The deep posterior compartment is the one most often missed.",
+      "Long incisions. A short skin incision can still constrict the swollen muscle beneath it.",
+      "Document the viability of the muscle in each compartment."
+    ],
+    "structuresAtRisk": [
+      "Superficial peroneal nerve",
+      "Saphenous vein and nerve",
+      "Posterior tibial vessels and tibial nerve",
+      "Perforators needed for later flaps"
+    ],
+    "commonErrors": [
+      "Missing the deep posterior compartment.",
+      "Incisions too short.",
+      "Closing the skin at the first operation."
+    ],
+    "complications": [
+      "Muscle necrosis and infection requiring further debridement.",
+      "Nerve injury, particularly the superficial peroneal nerve.",
+      "Rhabdomyolysis and acute kidney injury.",
+      "Chronic wound problems, skin graft requirement and altered appearance."
+    ],
+    "postop": [
+      "Plastic surgery discussion within 24 hours and re-exploration within 72 hours, or earlier if indicated.",
+      "Creatine kinase, renal function and urine output monitoring.",
+      "Delayed primary closure, or split-thickness skin grafting when it cannot be closed."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Leg supported so both the medial and lateral aspects can be reached without moving it."
+    },
+    {
+      "ref": "step.ortho.tourniquet",
+      "emphasis": "Apply but leave deflated: the muscle is already ischaemic and you need to see it bleed."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.ortho.leg-incisions"
+    },
+    {
+      "ref": "step.fas.lateral"
+    },
+    {
+      "ref": "step.fas.medial"
+    },
+    {
+      "ref": "step.ortho.muscle-viability"
+    },
+    {
+      "ref": "step.st.debride",
+      "emphasis": "Excise only clearly dead muscle now. Doubtful muscle is reassessed at the planned second look."
+    },
+    {
+      "ref": "step.ortho.wound-photos"
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.ortho.temp-cover",
+      "emphasis": "Do not close the skin. Cover with a sealed or negative-pressure dressing and set the date for the second look."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.ortho.nv-check"
+    },
+    {
+      "ref": "step.core.debrief",
+      "emphasis": "Record each compartment and its muscle viability by name."
+    }
+  ],
+  "steps_local": {
+    "step.fas.lateral": {
+      "id": "step.fas.lateral",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Lateral incision: anterior and lateral compartments",
+      "why": "One lateral incision over the intermuscular septum releases both the anterior and the lateral compartments, provided the septum is found first.",
+      "how": [
+        "Incise anterior to the fibula along the length of the leg.",
+        "Make a small transverse cut in the fascia to identify the anterior intermuscular septum.",
+        "Release the anterior compartment fascia in line with tibialis anterior and the lateral compartment fascia in line with the fibula, proximally and distally under direct vision."
+      ],
+      "structuresAtRisk": [
+        "Superficial peroneal nerve in the distal third"
+      ],
+      "pitfalls": [
+        "Releasing only one of the two compartments because the septum was not identified.",
+        "Dividing the superficial peroneal nerve where it pierces the fascia."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.fas.medial": {
+      "id": "step.fas.medial",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Medial incision: superficial and deep posterior compartments",
+      "why": "The deep posterior compartment is the one that is missed, and it contains the posterior tibial vessels and tibial nerve.",
+      "how": [
+        "Incise a short distance behind the posteromedial border of the tibia, protecting the saphenous vein and nerve.",
+        "Release the superficial posterior compartment fascia over gastrocnemius and soleus.",
+        "Detach soleus from the back of the tibia to enter and release the deep posterior compartment along its length."
+      ],
+      "structuresAtRisk": [
+        "Saphenous vein and nerve",
+        "Posterior tibial artery and tibial nerve",
+        "Medial perforators"
+      ],
+      "pitfalls": [
+        "Stopping after the superficial compartment.",
+        "Cutting across the medial perforators."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

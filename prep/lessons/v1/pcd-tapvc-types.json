@@ -1,0 +1,215 @@
+{
+  "v": 1,
+  "id": "pcd-tapvc-types",
+  "title": "Total Anomalous Pulmonary Venous Connection (TAPVC)",
+  "module": "Cyanotic Heart Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Darling's anatomical classification categorises anomalous venous drainage into four distinct patterns based on the site of systemic connection.",
+      "tx": "Anatomical mapping follows the **Darling classification**. Darling classification divides TAPVC into Type I Supracardiac (**45%**), Type II Cardiac (**25%**), Type III Infracardiac (**20-25%**), and Type IV Mixed (**5%**), based upon the specific site of systemic venous termination. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Anatomical Drainage Pathway",
+          "Relative Incidence",
+          "Obstruction Frequency"
+        ],
+        "rows": [
+          [
+            "Type I: Supracardiac",
+            "Vertical vein -> Left innominate vein -> SVC",
+            "45-55%",
+            "Occasional (compression by PA and bronchus)"
+          ],
+          [
+            "Type II: Cardiac",
+            "Coronary sinus or directly into Right Atrium",
+            "20-30%",
+            "Rare"
+          ],
+          [
+            "Type III: Infracardiac",
+            "Descending vertical vein -> Portal system / IVC",
+            "15-20%",
+            "Almost universal (>95%)"
+          ],
+          [
+            "Type IV: Mixed",
+            "Multiple independent drainage sites",
+            "5-10%",
+            "Variable"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Unobstructed supracardiac drainage produces a celebrated radiographic contour on chest radiography in older surviving infants.",
+      "tx": "Chest radiography demonstrates the **snowman sign**. The classic snowman sign (figure-of-8 appearance) on CXR is characteristic of unobstructed Type I supracardiac TAPVC, formed by the dilated left vertical vein, innominate vein, and right superior vena cava atop an enlarged right heart. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/ped-congenital-heart-fig1.webp",
+        "ar": 1.8349,
+        "caption": "Cyanotic congenital cardiac anomalies and classic pulmonary vascular patterns on radiography. Image: Dong Soo Kim.",
+        "alt": "Radiological and anatomical comparison of cyanotic heart defects."
+      }
+    },
+    {
+      "say": "Subdiaphragmatic drainage carries an exceptionally high frequency of severe anatomical obstruction that precipitates rapid neonatal pulmonary edema.",
+      "tx": "Subdiaphragmatic variants feature severe **infracardiac obstruction**. Type III infracardiac TAPVC drains below the diaphragm into the portal vein or ductus venosus and is almost universally obstructed (>95%), presenting with severe pulmonary venous hypertension, profound hypoxemia, and acute respiratory distress within hours of birth.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anatomical Pathway of Obstruction",
+          "points": [
+            "Long descending vertical vein courses through esophageal hiatus of diaphragm",
+            "Drains into portal vein, ductus venosus, or hepatic vascular sinusoids",
+            "Extrinsic compression by diaphragm and intrinsic high hepatic resistance"
+          ]
+        },
+        "right": {
+          "title": "Clinical Emergency Presentation",
+          "points": [
+            "Severe obstruction to pulmonary venous return develops in >95% of infants",
+            "Fulminant neonatal pulmonary edema, severe lactic acidosis, and cyanosis",
+            "Mandates immediate emergency surgical repair within hours of birth"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Because all venous return enters the right side of the heart, systemic perfusion is entirely dependent upon an open interatrial communication.",
+      "tx": "Systemic perfusion mandates an **obligatory right-to-left ASD**. An unrestrictive atrial septal defect is mandatory to allow oxygenated blood to enter the left atrium and systemic circulation; restrictive ASD causes profound low cardiac output and systemic hypoperfusion. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "All four pulmonary veins drain abnormally into systemic venous channels"
+          },
+          {
+            "id": "b",
+            "label": "Complete systemic and pulmonary venous mixing occurs in the right atrium"
+          },
+          {
+            "id": "c",
+            "label": "Obligatory right-to-left shunting across patent foramen ovale or ASD"
+          },
+          {
+            "id": "d",
+            "label": "Supplies essential systemic output to left ventricle and arterial tree"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Complete mixing of pulmonary and systemic venous return produces uniform oxygen saturations across all four cardiac chambers.",
+      "tx": "Intracardiac oximetry documents **identical saturations**. Complete mixing in the right atrium results in identical oxygen saturation in all four cardiac chambers and the great arteries, typically ranging between **75-85%** in unobstructed forms with high pulmonary blood flow. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oximetric Triad in TAPVC",
+          "points": [
+            "Complete mixing of systemic and pulmonary venous return in right atrium",
+            "Identical saturations in RA, RV, PA, LA, LV, and systemic aorta",
+            "Resting arterial saturation typically 75% to 85% in unobstructed defects"
+          ]
+        },
+        "right": {
+          "title": "Differentiating Features",
+          "points": [
+            "D-TGA: Reversed saturation differential (PA saturation higher than aorta)",
+            "Truncus Arteriosus: Near-equal saturations in aorta and pulmonary trunk",
+            "Normal Circulation: Distinct systemic (75%) vs pulmonary venous (98%) saturations"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Acute pulmonary venous obstruction precipitates severe pulmonary edema and cardiogenic shock requiring emergent operative intervention.",
+      "tx": "Obstructed neonates require **emergency surgery for obstructed TAPVC**. Obstructed TAPVC is a true surgical emergency; balloon septostomy is ineffective for pulmonary venous obstruction, and emergent surgical anastomosis of the pulmonary venous confluence to the left atrium is life-saving. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Parameter",
+          "Obstructed TAPVC",
+          "Respiratory Distress Syndrome (RDS)"
+        ],
+        "rows": [
+          [
+            "Gestation",
+            "Usually full-term infant",
+            "Predominantly preterm infant"
+          ],
+          [
+            "Response to 100% O2",
+            "Refractory hypoxemia (PaO2 <50 mmHg)",
+            "Improved oxygenation"
+          ],
+          [
+            "Prostaglandin E1 Response",
+            "No improvement; may worsen edema",
+            "No indication"
+          ],
+          [
+            "Echocardiography",
+            "Small left heart, no pulmonary veins entering LA",
+            "Normal intracardiac anatomy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Direct drainage into the coronary sinus or right atrium constitutes the intracardiac subtype with favorable surgical exposure.",
+      "tx": "Intracardiac connections represent **cardiac type drainage**. Type II cardiac TAPVC drains directly into the coronary sinus or right atrium, where surgical repair involves unroofing the coronary sinus into the left atrium and closing the atrial septal defect with a pericardial patch. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Coronary Sinus Drainage",
+          "points": [
+            "Pulmonary veins enter coronary sinus, causing massive coronary sinus dilation",
+            "Surgically unroofed into the left atrium with patch closure of the ASD",
+            "Excellent long-term outcomes with minimal risk of pulmonary vein obstruction"
+          ]
+        },
+        "right": {
+          "title": "Right Atrial Drainage",
+          "points": [
+            "Pulmonary veins enter directly into posterior wall of right atrium",
+            "Baffled across the atrial septum into left atrium using pericardial patch",
+            "Requires careful avoidance of sinus node and AV node conduction injury"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Postoperative narrowing of the individual or confluent pulmonary veins poses a grave late management challenge.",
+      "tx": "Late surveillance watches for **postoperative pulmonary vein stenosis**. Recurrent pulmonary vein stenosis occurs in **10-15%** of postoperative patients, carries a poor prognosis, and may require sutureless repair techniques or catheter-directed stenting to preserve lung vascular beds. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/rad-cardiovascular-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Severe pulmonary venous hypertension and marked vascular congestion on chest radiography. Illustration: StewardMD original.",
+        "alt": "Chest radiograph showing severe pulmonary vascular congestion."
+      }
+    }
+  ]
+}

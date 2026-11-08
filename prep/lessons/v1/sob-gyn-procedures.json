@@ -1,0 +1,266 @@
+{
+  "v": 1,
+  "module": "sob-gyn-procedures",
+  "title": "Gynaecological Endoscopy, Laparoscopy Entry, Hysteroscopy, Distension Media, and Colposcopy",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Ten Teachers Gynaecology 21e Ch 21 (Gynaecological surgery and procedures)",
+    "Williams Gynecology 4e Ch 41 (Diagnostic and Operative Hysteroscopy), Ch 42 (Laparoscopy)",
+    "AAGL Practice Guidelines on Laparoscopic Entry and Hysteroscopy Fluid Management"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Primary laparoscopic abdominal entry is achieved using either a closed Veress needle technique or an open Hasson cannula cut-down at the umbilical ring. Following Veress needle placement and successful aspiration testing, insufflation with carbon dioxide gas establishes pneumoperitoneum up to a target intra-abdominal working pressure of twelve to fifteen millimetres of mercury.",
+      "tx": "Primary laparoscopic entry is established using a closed Veress needle or open Hasson cut-down at the inferior umbilical margin. Carbon dioxide gas insufflation establishes **pneumoperitoneum**, maintaining an intra-abdominal working pressure of **12 to 15 mmHg**. Pressures exceeding 20 mmHg compromise venous return, whereas pressures under 10 mmHg provide insufficient visualization.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-prc-laparoscopic-technique.webp",
+        "ar": 1.3333,
+        "caption": "Primary laparoscopic entry via Veress or open Hasson technique. Credit: StewardMD.",
+        "alt": "Surgical technique demonstrating umbilical cutdown and Veress needle safety checks."
+      }
+    },
+    {
+      "say": "Palmer point in the left upper quadrant, situated three centimetres below the left costal margin in the midclavicular line, is the safest alternative laparoscopic entry site in patients with suspected periumbilical adhesions, umbilical hernia repairs, or prior midline laparotomies. A nasogastric or orogastric tube must be placed to decompress the stomach prior to inserting the Veress needle at Palmer point.",
+      "tx": "**Palmer's point** in the left upper quadrant (located 3 cm below the left subcostal margin in the midclavicular line) represents the established safe alternative laparoscopic entry site for patients with suspected periumbilical adhesions or prior laparotomies. Prior to insertion, the surgeon must ensure **gastric decompression via an orogastric tube** and verify the absence of splenomegaly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify risk: Prior midline laparotomy, severe adhesions, or umbilical hernia"
+          },
+          {
+            "id": "b",
+            "label": "Insert orogastric tube to decompress the stomach completely"
+          },
+          {
+            "id": "c",
+            "label": "Identify Palmer's point as safe alternative entry site in left midclavicular line"
+          },
+          {
+            "id": "d",
+            "label": "Insert Veress needle perpendicularly; confirm negative pressure drop (<10 mmHg)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ],
+        "caption": "Palmer point left upper quadrant alternative entry site in prior laparotomy. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Diagnostic and operative hysteroscopy requires continuous uterine cavity distension to visualize the endocervical canal and endometrium. Modern bipolar electrosurgical resectoscopes utilize isotonic normal saline distension fluid, effectively eliminating the life-threatening dilutional hyponatremia and cerebral oedema historically associated with hypotonic non-electrolyte media like glycine.",
+      "tx": "Operative hysteroscopy requires fluid distension to separate the anterior and posterior uterine walls. Modern bipolar electrosurgical systems utilize **isotonic normal saline** as the distension medium, entirely eliminating the lethal risk of **dilutional hyponatremia and acute cerebral oedema** historically associated with hypotonic non-electrolyte solutions like 1.5% glycine.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-ins-hysteroscopy-system.webp",
+        "ar": 1.3333,
+        "caption": "Hysteroscopy distension system using normal saline and bipolar electrosurgery. Credit: StewardMD.",
+        "alt": "Hysteroscopic camera console, light source, and automatic fluid deficit monitoring system."
+      }
+    },
+    {
+      "say": "Strict automated fluid deficit monitoring is mandatory during all operative hysteroscopic procedures. The procedure must be terminated immediately when the fluid deficit reaches one thousand millilitres for hypotonic electrolyte-free media such as glycine or sorbitol, or twenty five hundred millilitres for isotonic saline in healthy premenopausal women, to prevent pulmonary oedema and circulatory overload.",
+      "tx": "Continuous **fluid deficit monitoring** during operative hysteroscopy mandates procedure cessation when the fluid deficit reaches **1000 mL for hypotonic electrolyte-free media** (glycine) or **2500 mL for isotonic normal saline** in healthy women. Surpassing these strict thresholds precipitates massive vascular intravasation and pulmonary oedema.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Distension Medium",
+          "Electrolyte Composition",
+          "Maximum Fluid Deficit Cut-off",
+          "Primary Vascular Toxicity"
+        ],
+        "rows": [
+          [
+            "1.5% Glycine",
+            "Hypotonic; non-electrolyte",
+            "1000 mL maximum deficit",
+            "Avoid glycine hyponatremia, hyperammonemia, and acute cerebral oedema"
+          ],
+          [
+            "0.9% Normal Saline",
+            "Isotonic; contains Na and Cl",
+            "Cease procedure if saline deficit reaches 2500 mL",
+            "Hypervolemic fluid overload, congestive pulmonary oedema"
+          ],
+          [
+            "3% Sorbitol / 5% Mannitol",
+            "Hypotonic non-electrolyte",
+            "1000 mL maximum deficit",
+            "Severe hyponatremic encephalopathy and osmotic shifts"
+          ],
+          [
+            "Carbon Dioxide (Gas)",
+            "Gaseous diagnostic medium",
+            "Flow <= 100 mL/min; pressure <100 mmHg",
+            "Fatal gas embolism; restricted solely to diagnostic office scopes"
+          ]
+        ],
+        "caption": "Fluid monitoring preventing glycine hyponatremia and saline deficit excess. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Colposcopy evaluates women with abnormal cervical cytology or persistent high-risk human papillomavirus infection. Applying three to five percent dilute acetic acid to the cervix precipitates cellular proteins, producing characteristic acetowhite changes within dysplastic areas. Examination focuses on the transformation zone to identify abnormal vascular patterns, including punctation and mosaicism.",
+      "tx": "**Colposcopic examination** involves applying 3 to 5 percent **dilute acetic acid** to the cervix, which dehydrates cells and precipitates nuclear proteins to produce distinctive **acetowhite epithelium** in dysplastic lesions. The transformation zone is scrutinized under magnification for abnormal vascular patterns, specifically **punctation and mosaicism**, directing targeted punch biopsies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Abnormal cervical cytology or high-risk HPV detection"
+          },
+          {
+            "id": "b",
+            "label": "Apply 3% to 5% acetic acid solution to the cervix"
+          },
+          {
+            "id": "c",
+            "label": "Inspect transformation zone for acetowhite changes, mosaicism, punctation"
+          },
+          {
+            "id": "d",
+            "label": "Perform targeted punch biopsy from areas with most severe colposcopic changes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Schiller test involves applying Lugol iodine solution to the cervix and upper vagina. Glycogen in mature normal squamous epithelium absorbs iodine to stain a dark mahogany brown, termed Schiller-negative. Conversely, dysplastic or malignant cells are depleted of glycogen and fail to take up iodine, appearing mustard-yellow or unstained, termed a Schiller-positive finding.",
+      "tx": "The **Schiller test** employs **Lugol's iodine solution**, which stains glycogen-rich normal mature squamous epithelium a dark mahogany brown (iodine-positive). In contrast, dysplastic neoplastic cells and columnar glandular epithelium lack glycogen, remaining completely unstained and appearing **mustard-yellow (Schiller-positive)**, precisely demarcating margins for excisional therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Squamous Epithelium",
+          "points": [
+            "Abundant cellular intracytoplasmic glycogen",
+            "Takes up Lugol's iodine avidly",
+            "Stains uniform dark mahogany brown",
+            "Designated Schiller-negative (healthy finding)"
+          ]
+        },
+        "right": {
+          "title": "Dysplastic / Neoplastic Epithelium",
+          "points": [
+            "Dysplastic glycogen depletion fails to take up iodine solution",
+            "Fails to take up iodine solution",
+            "Remains bright canary or mustard-yellow",
+            "Designated Schiller-positive (identifies CIN/malignancy)"
+          ]
+        },
+        "caption": "Schiller test demonstrating dysplastic glycogen depletion with canary yellow staining. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Outpatient manual endometrial aspiration biopsy using a flexible Pipelle cannula is the first-line diagnostic investigation for postmenopausal bleeding and abnormal uterine bleeding in women over forty five years of age. Without requiring cervical dilatation or general anaesthesia, Pipelle biopsy achieves a diagnostic sensitivity exceeding ninety five percent for detecting endometrial carcinoma.",
+      "tx": "Outpatient endometrial sampling using a flexible **Pipelle suction curette** represents the primary diagnostic evaluation for postmenopausal bleeding. Achieving a **sensitivity exceeding 95 percent** for identifying endometrial carcinoma without requiring cervical dilatation or general anaesthesia, it reliably replaces inpatient formal dilation and curettage in the initial workup.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Postmenopausal bleeding or endometrial thickness >4 mm on ultrasound"
+          },
+          {
+            "id": "b",
+            "label": "Insert flexible 3.1 mm Pipelle cannula through cervical os without anaesthesia"
+          },
+          {
+            "id": "c",
+            "label": "Withdraw internal piston to generate high negative suction pressure"
+          },
+          {
+            "id": "d",
+            "label": "Rotate 360 degrees while moving between fundus and os to obtain histology sample"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Cervical conization, performed via cold knife cone biopsy or loop electrosurgical excision procedure, serves as both definitive diagnosis and fertility-sparing therapy for high-grade cervical intraepithelial neoplasia. Complete histological evaluation mandates clear endocervical and ectocervical margins and documentation of the absence of invasive microcarcinoma.",
+      "tx": "**Cervical conization**, accomplished via the loop electrosurgical excision procedure (LEEP) or cold-knife cone biopsy, provides diagnostic evaluation and curative therapy for **CIN 2 and CIN 3**. Pathological reporting demands confirmation of **negative ectocervical and endocervical surgical margins**, as positive endocervical margins triple the risk of persistent or recurrent dysplastic disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Excisional Modality",
+          "Surgical Technique",
+          "Indications and Specimen Margin Status"
+        ],
+        "rows": [
+          [
+            "LEEP / LLETZ",
+            "Tungsten wire loop with high-frequency electrosurgical blend",
+            "Excellent for ectocervical lesions; minimal margin thermal artifact"
+          ],
+          [
+            "Cold-knife conization (CKC)",
+            "Scalpel excision under regional or general anaesthesia",
+            "Preferred for adenocarcinoma in situ (AIS); pristine margins without burn"
+          ],
+          [
+            "Laser conization",
+            "CO2 laser beam excision",
+            "Low bleeding; expensive specialized equipment needed"
+          ],
+          [
+            "Endocervical curettage (ECC)",
+            "Kevorkian curette sampling of canal above cone bed",
+            "Verifies absence of occult invasive disease higher in the endocervix"
+          ]
+        ],
+        "caption": "Cervical cone biopsy histological evaluation for clear margin status. Credit: StewardMD."
+      }
+    }
+  ]
+}

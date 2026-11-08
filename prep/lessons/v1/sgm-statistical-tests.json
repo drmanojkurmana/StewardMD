@@ -3,7 +3,7 @@
  "module": "sgm-statistical-tests",
  "subject": "ss-general-medicine",
  "title": "Statistical tests and inference: P value, confidence interval, power and choosing a test",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "A **P value** is the probability of obtaining results at least as extreme as those observed, assuming the **null hypothesis** is true. It is not the probability that the null hypothesis is true, and it does not measure the size of an effect. Alpha, usually 0.05, is fixed before data collection. If the P value falls below alpha, the result is called statistically significant.",
@@ -95,6 +95,17 @@
       "Cox regression"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The flowchart splits continuous data by shape, sending bell shaped data one way and skewed data the other. Normal data with two independent groups leads to the **Student t-test**, while three or more groups lead to **one-way ANOVA**. Skewed or ordinal data with two groups leads to the **Mann-Whitney U test** instead. The picture matters because the distribution decides the test, so read shape first and count groups second.",
+   "say": "This chart organises the choice of test for continuous data. First ask about distribution, then count the groups. Normal data with two independent groups calls for the Student t-test, and normal data with three or more groups calls for one-way ANOVA. Skewed or ordinal data with two independent groups calls for the Mann-Whitney U test, also called the Wilcoxon rank-sum test. The image teaches a two step habit: check shape first, then group count, before naming any test.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgm-statistical-tests-gen1.webp",
+    "alt": "Flowchart routes normal data to t test or ANOVA and skewed data to Mann Whitney test.",
+    "caption": "Test selection chart by distribution shape and group count, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

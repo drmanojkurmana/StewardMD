@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "module": "srm-oral-ovulation-agents",
+  "title": "Oral Ovulation Induction: Letrozole, Clomiphene, and Metformin",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Speroff Clinical Gynecologic Endocrinology 9e Ch 31",
+    "International PCOS Network Guideline 2023",
+    "Legro et al. PPCOS II Trial (NEJM 2014)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "International guidelines establish letrozole as the first-line oral ovulation induction agent in women with polycystic ovary syndrome. By inhibiting the cytochrome P450 aromatase enzyme, letrozole significantly outperforms clomiphene in achieving higher cumulative ovulation and live birth rates.",
+      "tx": "The selective **aromatase inhibitor** drug **letrozole** represents the undisputed first-line ovulation induction agent for anovulatory PCOS. Landmark randomized multicenter trials, including the PPCOS II study, confirmed that letrozole delivers significantly superior monofollicular ovulation rates and cumulative **live birth rate** outcomes compared with clomiphene.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/infertility-evaluation-and-assisted-reproduction-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Ovulation induction pathways and algorithmic management in anovulatory subfertility. Credit: StewardMD.",
+        "alt": "Algorithm for oral ovulation induction in PCOS."
+      }
+    },
+    {
+      "say": "Letrozole therapy commences with a daily oral dose of 2.5 milligrams for five consecutive days starting between cycle days 2 and 5. In cases with inadequate follicular development, the daily dose is titrated incrementally up to a maximum of 7.5 milligrams.",
+      "tx": "Standard **letrozole dosing** begins at 2.5 mg daily for 5 days, initiated on **cycle day 3** (or between days 2 and 5). If ultrasound surveillance confirms absent folliculogenesis, the daily regimen escalates stepwise to 5.0 mg daily and ultimately up to a **maximum dose** of 7.5 mg daily in resistant cohorts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Initiate letrozole 2.5 mg daily for 5 days starting on cycle day 3"
+          },
+          {
+            "id": "b",
+            "label": "Assess follicular growth on day 11 to 14 via transvaginal ultrasound"
+          },
+          {
+            "id": "c",
+            "label": "If anovulatory, step up dose to 5.0 mg and then 7.5 mg daily in subsequent cycles"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Clomiphene citrate functions as a selective estrogen receptor modulator. By antagonizing estrogen receptors in the hypothalamus, it disrupts physiological negative feedback, prompting an increase in GnRH pulse frequency and stimulating pituitary FSH release.",
+      "tx": "The traditional agent **Clomiphene citrate** acts as a selective estrogen receptor modulator (**SERM**) that binds and downregulates hypothalamic nuclear receptors. Functioning as a central **estrogen receptor antagonist**, it impedes negative feedback, tricking neuroendocrine circuits into generating pulsatile GnRH and compensatory pituitary FSH discharge to rescue developing follicles.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Letrozole (Aromatase Inhibitor)",
+          "points": [
+            "Blocks androgen-to-estrogen conversion without depleting receptors",
+            "Intact hypothalamic feedback ensures monofollicular dominance",
+            "No peripheral anti-estrogenic effects on endometrium or cervical mucus"
+          ]
+        },
+        "right": {
+          "title": "Clomiphene Citrate (SERM)",
+          "points": [
+            "Prolonged clearance and persistent central receptor downregulation",
+            "Higher risk of multifollicular recruitment and twin gestation (~8%)",
+            "Antagonizes estrogen action in peripheral endometrium and cervical glands"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A notable limitation of clomiphene citrate is its persistent peripheral anti-estrogenic action on reproductive target tissues. Long tissue half-lives lead to a thin endometrial lining measuring under 7 millimeters and tenacious cervical mucus, creating a discordance between ovulation and conception.",
+      "tx": "Due to isomer tissue accumulation, clomiphene exerts prominent **anti-estrogenic** actions on peripheral targets. Prolonged receptor antagonism impairs endometrial proliferation, yielding a **thin endometrium** (<7 mm) and hostile **cervical mucus** in 15 to 25 percent of patients, limiting pregnancy rates despite documented ovulation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Target Tissue",
+          "Clomiphene Impact",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "Endometrium",
+            "Suppresses stromal VEGF & glandular growth",
+            "Lining < 7 mm at trigger; reduces implantation"
+          ],
+          [
+            "Endocervix",
+            "Inhibits estrogenic mucin hydration",
+            "Hostile, tenacious mucus impairing sperm transit"
+          ],
+          [
+            "Ovary",
+            "Stimulates multiple follicle recruitment",
+            "Twin gestation risk elevated to 7-9 percent"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Clomiphene resistance occurs in roughly 15 to 25 percent of women who fail to develop a mature follicle despite receiving 150 milligrams daily for five days. This phenotype correlates strongly with elevated body mass index, profound hyperandrogenism, and marked insulin resistance.",
+      "tx": "Clinicians define **Clomiphene resistance** as the failure to achieve ovulation despite escalating therapy up to **150 mg daily** for 5 days across three **consecutive cycles**. Encountered in resistant cohorts, this state is driven by visceral adiposity, severe hyperandrogenism, and marked compensatory hyperinsulinemia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Clomiphene 50 mg daily for 5 days yields absent follicular growth"
+          },
+          {
+            "id": "b",
+            "label": "Titrate to 100 mg and then 150 mg daily in subsequent treatment cycles"
+          },
+          {
+            "id": "c",
+            "label": "Persistent anovulation at 150 mg daily defines clomiphene resistance"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A critical distinction between oral ovulation agents lies in their associated multiple gestation risks. Clomiphene citrate carries a multiple pregnancy rate of 5 to 8 percent primarily consisting of dizygotic twins, whereas letrozole twins occur in only 3 to 4 percent.",
+      "tx": "A major clinical advantage of aromatase inhibitors over clomiphene is the markedly lower **multiple pregnancy rate**. Clomiphene induces multifollicular ovulation with an incidence of 5 to 8 percent, predominantly **dizygotic twins**, whereas **letrozole twins** occur in only 3 to 4 percent of successful conceptions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Multiple Pregnancy Rate",
+          "Twin Characteristics"
+        ],
+        "rows": [
+          [
+            "Clomiphene citrate",
+            "5 to 8 percent rate",
+            "Predominantly dizygotic twins via multi-follicle recruitment"
+          ],
+          [
+            "Letrozole",
+            "3 to 4 percent rate",
+            "Intact central feedback preserves monofollicular dominance"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adjuvant metformin therapy provides significant clinical benefits in insulin-resistant polycystic ovary syndrome. Daily doses of 1500 to 2000 milligrams improve insulin sensitivity and lower circulating androgens, restoring ovulatory function in clomiphene-resistant women.",
+      "tx": "Adjuvant **Metformin** at 1500 to 2000 mg daily substantially enhances peripheral **insulin sensitivity** and attenuates excessive thecal androgen synthesis. In **clomiphene-resistant** anovulatory women with elevated baseline metabolic markers, adding metformin successfully restores spontaneous physiological ovulation and augments subsequent clinical pregnancy rates.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-infertility-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Follicular surveillance and ovarian response optimization. Credit: StewardMD.",
+        "alt": "Ultrasound monitoring showing dominant ovarian follicle during ovulation induction."
+      }
+    },
+    {
+      "say": "Laparoscopic ovarian drilling provides a durable surgical alternative for persistent anovulation. Delivering 4 to 10 monopolar diathermy punctures at 40 watts per ovary triggers unifollicular ovulation without increasing the risk of multiple gestation or hyperstimulation.",
+      "tx": "Surgical **laparoscopic ovarian drilling** utilizing 4 to 10 punctures of **monopolar diathermy** (40 watts for 4 seconds) per ovary effectively reduces hyperandrogenic stroma. This intervention promotes physiological **unifollicular ovulation** and regular menstrual cyclicity without elevating ovarian hyperstimulation syndrome or multiple pregnancy hazards.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Select clomiphene-resistant anovulatory PCOS candidate for surgical second-line therapy"
+          },
+          {
+            "id": "b",
+            "label": "Apply 4 to 10 punctures of monopolar diathermy at 40 watts for 4 seconds per ovary"
+          },
+          {
+            "id": "c",
+            "label": "Stromal destruction lowers intraovarian androgen tone to establish unifollicular ovulation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

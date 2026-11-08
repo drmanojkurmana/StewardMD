@@ -1,0 +1,194 @@
+{
+  "id": "av-fistula-radiocephalic",
+  "title": "Radiocephalic arteriovenous fistula",
+  "subtitle": "Wrist fistula for haemodialysis access",
+  "system": "vascular",
+  "aliases": ["AV fistula", "AVF", "Cimino fistula", "Brescia-Cimino fistula", "wrist fistula", "dialysis fistula"],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "esvs-access-2018", "org": "European Society for Vascular Surgery (ESVS)", "title": "Vascular Access: 2018 Clinical Practice Guidelines of the European Society for Vascular Surgery", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/29730128/", "accessed": "2026-11-04" },
+    { "id": "kdoqi-access-2019", "org": "National Kidney Foundation KDOQI", "title": "KDOQI Clinical Practice Guideline for Vascular Access: 2019 Update", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/32778223/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["ckdepi"],
+  "chapters": {
+    "indications": [
+      "Planned haemodialysis access in a patient with progressive chronic kidney disease, created early enough for the fistula to mature before dialysis is needed.",
+      "Conversion from a tunnelled dialysis catheter to autologous access, to reduce catheter infection and central vein injury.",
+      "The most distal suitable site is chosen first (usually the non-dominant wrist) to preserve proximal options for the future (ESVS 2018)."
+    ],
+    "contraindications": [
+      "Radial artery or cephalic vein too small, diseased or thrombosed on duplex mapping.",
+      "Inadequate collateral hand perfusion through the ulnar artery, raising the risk of hand ischaemia.",
+      "Ipsilateral central venous stenosis or occlusion that has not been treated, which will cause arm swelling and fistula failure.",
+      "Active infection of the arm, or a limb with lymphoedema."
+    ],
+    "preparation": [
+      "Vein preservation: no venepuncture or cannulas in the planned arm, ideally from diagnosis of advanced kidney disease.",
+      "Duplex mapping of the arteries and veins of both arms; many units use about 2 mm as a lower limit for artery and vein diameter (ESVS 2018), but follow the unit's criteria.",
+      "Check potassium, haemoglobin and clotting; plan the timing around dialysis sessions if already on dialysis.",
+      "Agree anaesthesia: local infiltration or a brachial plexus block, which also dilates the vessels.",
+      "Consent risks to discuss: failure to mature or early thrombosis needing further surgery; bleeding; infection; hand ischaemia (steal); swelling; numbness from nerve injury; aneurysmal dilatation later."
+    ],
+    "positioning": [
+      "Supine with the arm abducted on an arm table, palm up, the wrist slightly extended over a small roll.",
+      "The whole forearm and hand visible for perfusion checks; operator and assistant seated."
+    ],
+    "equipment": [
+      "Fine vascular instruments, micro-bulldog clamps, vessel loops, coronary-size dilators or probes.",
+      "Fine monofilament sutures for the anastomosis.",
+      "Loupe magnification.",
+      "Heparinised saline and a handheld Doppler."
+    ],
+    "anatomy": [
+      "The radial artery lies at the wrist between brachioradialis and flexor carpi radialis, with its venae comitantes.",
+      "The cephalic vein runs over the radial side of the distal forearm in the subcutaneous tissue, usually close enough to the radial artery to reach it without tension.",
+      "Branches of the superficial radial nerve run close to the cephalic vein at the wrist; the lateral antebrachial cutaneous nerve accompanies it in the forearm.",
+      "The palmar arches connect radial and ulnar circulations; a complete arch protects the hand when radial flow is diverted into the fistula."
+    ],
+    "criticalSafety": [
+      "Do not use an arm in which the vein or artery has failed the mapping criteria because it is the arm on the list.",
+      "Avoid twisting or kinking the vein as it is swung to the artery.",
+      "Keep the arteriotomy short to limit the risk of steal.",
+      "Check the hand for perfusion and the fistula for a thrill before leaving theatre."
+    ],
+    "structuresAtRisk": [
+      "Superficial radial nerve branches",
+      "Lateral antebrachial cutaneous nerve",
+      "Radial artery and its venae comitantes",
+      "Palmar perfusion of the hand"
+    ],
+    "commonErrors": [
+      "A twist in the mobilised vein.",
+      "Too little vein mobilised, so that the anastomosis is under tension and kinks.",
+      "Ligating a vein branch that would have been the main outflow.",
+      "Over-distending the vein with a syringe and injuring its intima."
+    ],
+    "complications": [
+      "Early thrombosis.",
+      "Failure to mature.",
+      "Bleeding and haematoma.",
+      "Hand ischaemia (steal syndrome), less common with distal fistulas but serious when it occurs.",
+      "Nerve injury causing numbness over the radial thumb.",
+      "Infection; later stenosis, aneurysm and venous hypertension."
+    ],
+    "postop": [
+      "Check for a thrill and the hand perfusion before discharge; teach the patient to feel the thrill daily and to report its loss urgently.",
+      "No blood pressure cuffs, venepuncture or tight dressings on the fistula arm.",
+      "Early loss of thrill is an emergency: contact the access team the same day for salvage.",
+      "Assess maturation clinically and with duplex at the interval the unit uses before first cannulation."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the arm with the patient and the dialysis team; mark the vein and the arm." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotic prophylaxis per local protocol; many units give none for a primary autologous fistula. Mechanical thromboprophylaxis is rarely relevant for this short operation." },
+    { "ref": "step.vasc.vein-mapping", "emphasis": "Confirm the cephalic vein is continuous to the elbow and the radial artery is soft and of adequate calibre. Mark the vein with a tourniquet on." },
+    { "ref": "step.avf.anaesthesia" },
+    { "ref": "step.core.positioning", "emphasis": "Arm table, palm up, wrist slightly extended; fingertips visible." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare the hand and whole forearm so that the incision can move proximally if the wrist vessels prove unsuitable." },
+    { "ref": "step.avf.exposure" },
+    { "ref": "step.avf.vein-mobilise" },
+    { "ref": "step.vasc.vessel-control", "emphasis": "Loops or micro-bulldogs on the radial artery above and below the planned arteriotomy; no circumferential dissection beyond what is needed." },
+    { "ref": "step.vasc.heparin", "emphasis": "Many surgeons use local heparinised saline only, or a small systemic dose; agree it with the anaesthetist." },
+    { "ref": "step.avf.arteriotomy" },
+    { "ref": "step.vasc.end-to-side-anastomosis", "emphasis": "End of the cephalic vein to the side of the radial artery, with the vein lying in a gentle curve without twist or tension." },
+    { "ref": "step.vasc.restore-flow", "emphasis": "Release the vein clamp, then the distal and proximal arterial clamps; small-volume flow means systemic effects are minimal, but suture line leaks show now." },
+    { "ref": "step.vasc.perfusion-check", "emphasis": "Feel for a continuous thrill along the vein and check the hand: colour, capillary refill and the radial and ulnar Doppler signals at the palm." },
+    { "ref": "step.avf.no-thrill" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure", "emphasis": "Loose closure without compression over the vein; a light dressing that allows the thrill to be felt." },
+    { "ref": "step.core.debrief", "emphasis": "Record the vessels' sizes, the anastomosis, the thrill and the hand status at the end; give the patient and the dialysis unit the plan." }
+  ],
+  "steps_local": {
+    "step.avf.anaesthesia": {
+      "id": "step.avf.anaesthesia",
+      "kind": "prep",
+      "title": "Anaesthesia that dilates the vessels",
+      "why": "Small vessels in spasm are hard to sew and quick to thrombose. Regional anaesthesia produces sympathetic block and vasodilatation as well as analgesia.",
+      "how": [
+        "Agree with the anaesthetist on a brachial plexus block where available, or careful local infiltration away from the vessels.",
+        "Keep the patient and the arm warm.",
+        "Avoid infiltrating local anaesthetic directly around the vein, which can cause spasm and distort the plane."
+      ],
+      "structuresAtRisk": ["Cephalic vein from needle injury during infiltration"],
+      "pitfalls": [
+        "A cold theatre and an exposed arm, producing spasm.",
+        "Large-volume infiltration that hides the vessels."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.avf.exposure": {
+      "id": "step.avf.exposure",
+      "kind": "access",
+      "title": "Incision and exposure at the wrist",
+      "why": "One incision placed between the artery and the vein reaches both without undermining, and keeps away from the superficial radial nerve branches.",
+      "how": [
+        "Make a longitudinal or slightly oblique incision between the marked cephalic vein and the radial pulse at the distal forearm.",
+        "Find the cephalic vein in the subcutaneous fat and identify any nerve branches lying with it.",
+        "Open the deep fascia over the radial artery and expose a short length between its venae comitantes."
+      ],
+      "structuresAtRisk": ["Superficial radial nerve branches", "Cephalic vein", "Radial artery venae comitantes"],
+      "pitfalls": [
+        "An incision directly over the vein, leaving the scar over the future needling site.",
+        "Diathermy close to a nerve branch."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.avf.vein-mobilise": {
+      "id": "step.avf.vein-mobilise",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Mobilising and preparing the cephalic vein",
+      "why": "The vein must reach the artery in a smooth curve. Too little length kinks it; rough handling or high-pressure distension injures its intima and causes early thrombosis.",
+      "how": [
+        "Free a sufficient length of cephalic vein to reach the artery without tension, ligating small branches a short distance from the wall.",
+        "Ligate the distal vein and divide it obliquely to create a spatulated end.",
+        "Distend gently with heparinised saline through a fine cannula to check for outflow and to overcome spasm, and mark the surface to prevent twist."
+      ],
+      "structuresAtRisk": ["Cephalic vein intima", "Nerve branches alongside the vein"],
+      "pitfalls": [
+        "High-pressure syringe distension.",
+        "Ligating a large branch that turns out to be the main outflow channel."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.avf.arteriotomy": {
+      "id": "step.avf.arteriotomy",
+      "kind": "access",
+      "title": "Radial arteriotomy",
+      "why": "The arteriotomy length controls the fistula flow. Too long increases the risk of hand ischaemia and high flow; too short limits maturation.",
+      "how": [
+        "Make a longitudinal arteriotomy on the side of the radial artery facing the vein, sized to the spatulated vein end and kept short.",
+        "Check proximal inflow and distal back-bleeding through the arteriotomy before sewing.",
+        "Gently pass a fine probe or dilator to confirm the lumen if the artery is in spasm."
+      ],
+      "structuresAtRisk": ["Back wall of the radial artery", "Radial artery intima"],
+      "pitfalls": [
+        "Cutting the back wall in a small artery.",
+        "Accepting weak inflow at the wrist instead of moving proximally."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.avf.no-thrill": {
+      "id": "step.avf.no-thrill",
+      "kind": "bailout",
+      "title": "No thrill or a cold hand",
+      "why": "A fistula that has only a pulse and no thrill at the end of the operation is likely to fail within hours. The cause is usually technical and is easier to correct now than after it has thrombosed.",
+      "how": [
+        "A pulse without a thrill suggests outflow obstruction: check the vein for twist, kink, a ligated outflow branch or a valve, and pass a probe or flush along it.",
+        "No pulse and no thrill suggests inflow or anastomotic failure: open the anastomosis, remove thrombus, check the arteriotomy and resew.",
+        "If the vessels are unusable, ligate and plan a more proximal site rather than leaving a poor fistula.",
+        "A pale or cold hand with poor palmar Doppler signals: reassess immediately and consider narrowing or revising the fistula; get senior help."
+      ],
+      "structuresAtRisk": ["Hand perfusion", "Future access sites"],
+      "pitfalls": [
+        "Closing on a weak or absent thrill and hoping it improves.",
+        "Ignoring a cold hand because the fistula looks good."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

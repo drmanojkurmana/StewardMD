@@ -1,0 +1,236 @@
+{
+ "checks": {
+  "bank": null,
+  "dropped": 0,
+  "drugs": true,
+  "numbers": true,
+  "redone": 0,
+  "selfCheck": false,
+  "shape": true,
+  "verbatim": true
+ },
+ "gen": "hand",
+ "minutes": 8,
+ "module": "ssg-cholangiocarcinoma",
+ "quiz": [],
+ "refs": [
+  "Blumgart Surgery of the Liver 6e Ch 41, 47 and 50",
+  "NCCN Biliary Tract Cancers 2025"
+ ],
+ "src": [
+  "ss-c-cholangiocarcinoma-ground"
+ ],
+ "steps": [
+  {
+   "say": "Cholangiocarcinoma splits by site into intrahepatic, perihilar and distal disease, and the perihilar Klatskin group is typed by Bismuth Corlette. Type four with bilateral secondary branch involvement is usually unresectable. Site decides the operation.",
+   "tx": "**Perihilar** **Klatskin** tumours at the confluence are typed **Bismuth-Corlette** **I** to **IV** by ductal extent, and type **IV** with bilateral secondary radical involvement is usually unresectable. Intrahepatic tumours follow liver resection rules while distal tumours need pancreaticoduodenectomy, so precise MRCP mapping precedes every plan. Brush cytology with FISH polysomy supports malignancy when positive in dominant strictures.",
+   "vis": {
+    "alt": "Anatomical map of intrahepatic, perihilar and distal cholangiocarcinoma around liver, bile ducts, gallbladder, pancreas and duodenum.",
+    "caption": "Cholangiocarcinoma sites by anatomy. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/cholangiocarcinoma-fig1.webp"
+   }
+  },
+  {
+   "say": "Painless jaundice with itching, weight loss and a palpable Courvoisier gallbladder marks malignant distal block. Triple phase CT plus MRCP stages the stricture and vessels. Ideally stage before any drainage, except in cholangitis, since drainage artefacts ruin staging.",
+   "tx": "Painless jaundice with pruritus, weight loss and a **Courvoisier** palpable gallbladder marks malignant distal obstruction needing triple-phase CT plus MRCP for staging. A palpable non-tender gallbladder with jaundice is cancer until proven otherwise, contrasting with scarred chronic cholecystitis. Complete cross-sectional staging before any drainage except in cholangitis, because stents obscure ductal extent and vascular contact.",
+   "vis": {
+    "cols": [
+     "Sign",
+     "Meaning",
+     "Next step"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Painless jaundice",
+      "Malignant block",
+      "Triple-phase CT"
+     ],
+     [
+      "Courvoisier gallbladder",
+      "Distal obstruction",
+      "MRCP mapping"
+     ],
+     [
+      "Weight loss, pruritus",
+      "Advanced disease",
+      "Metastatic hunt"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "A quarter of perihilar cancers hide occult metastases that only laparoscopy finds. Staging laparoscopy with cytology and ultrasound precedes laparotomy when resectability is borderline. Finding spread spares a futile major hepatectomy.",
+   "tx": "Resectability needs unilateral vascular preservation with adequate remnant, no bilateral secondary biliary involvement and no distant spread, with **staging laparoscopy** detecting **occult metastases** in **25** percent. Peritoneal deposits, surface liver seedlings and positive cytology all cancel curative resection. Laparoscopy with laparoscopic ultrasound spots peritoneal and liver-surface deposits that CT underestimates.",
+   "vis": {
+    "edges": [
+     [
+      "fit",
+      "scope"
+     ],
+     [
+      "scope",
+      "open"
+     ],
+     [
+      "scope",
+      "spread"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fit",
+      "label": "Borderline resectable"
+     },
+     {
+      "id": "scope",
+      "label": "Staging laparoscopy"
+     },
+     {
+      "id": "open",
+      "label": "No spread: proceed"
+     },
+     {
+      "id": "spread",
+      "label": "Spread: palliate"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Routine preoperative drainage harms more than it helps by seeding sepsis. Reserve drainage for cholangitis, severe malnutrition or planned portal embolisation. Operate jaundiced but clean patients with an adequate remnant without delay.",
+   "tx": "**Preoperative drainage** is reserved for **cholangitis**, severe malnutrition or planned portal embolisation because routine drainage raises septic complications. Stented ducts grow resistant biofilm that infects the hepatectomy field, while undrained bile without sepsis is usually sterile. Bilirubin alone never mandates drainage, and early resection beats weeks of stenting in resectable perihilar disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Cholangitis present",
+      "Severe malnutrition",
+      "Planned embolisation"
+     ],
+     "title": "Drain first"
+    },
+    "right": {
+     "points": [
+      "Resectable, no sepsis",
+      "Stent obscures extent",
+      "Biofilm infects field"
+     ],
+     "title": "No routine drain"
+    }
+   }
+  },
+  {
+   "say": "Curative perihilar surgery means extended hepatectomy with caudate lobectomy and Roux-en-Y drainage. The caudate drains directly into the confluence, so leaving it usually leaves a positive margin. Harvest nodes for staging, at least six and fifteen or more in perihilar disease.",
+   "tx": "Extended hepatectomy with **caudate lobectomy** and Roux-en-Y hepaticojejunostomy is the curative operation for perihilar disease, harvesting nodes for staging with at least **6** examined and **15** or more sought in perihilar disease. High hilar division with frozen-section duct margins guides how much liver must go, and portal vein resection joins the plan when R0 stays achievable. Roux-en-Y biliary drainage with a long defunctioned limb prevents reflux cholangitis in the remnant.",
+   "vis": {
+    "alt": "Bismuth-Corlette types I to IV of perihilar cholangiocarcinoma from confluence involvement to bilateral secondary duct spread.",
+    "caption": "Bismuth types guiding resectability. Image: StewardMD.",
+    "kind": "image",
+    "src": "v1/lessons/media/sur-bile-duct-s4.webp"
+   }
+  },
+  {
+   "say": "Unresectable perihilar tumours of three centimetres or less without metastases suit liver transplantation under the Mayo protocol. Neoadjuvant chemoradiation with staging discipline at protocol centres lifts five year survival near seventy percent. Strict selection makes these results, not the operation alone.",
+   "tx": "Liver transplantation with neoadjuvant chemoradiation under **Mayo protocol** suits unresectable **perihilar** tumours of **3** cm or less without metastases, with **5**-year survival near **70** percent. Brachytherapy with chemosensitisation precedes staging laparotomy, and any nodal or peritoneal spread exits the protocol. PSC patients with dominant strictures and high CA 19-9 form the classic referral group.",
+   "vis": {
+    "cols": [
+     "Criterion",
+     "Mayo rule",
+     "Reason"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Size",
+      "Under 3 cm",
+      "Control with radiation"
+     ],
+     [
+      "Spread",
+      "None allowed",
+      "Staging laparotomy"
+     ],
+     [
+      "Survival",
+      "Near 70% at 5 years",
+      "Strict selection"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Big or multifocal intrahepatic tumours start with gemcitabine and cisplatin, not surgery. FGFR2 fusions respond to pemigatinib and IDH1 mutation to ivosidenib, so profile every advanced case. Systemic therapy converts some unresectable disease to resectable.",
+   "tx": "Intrahepatic cholangiocarcinoma over **5** cm or multifocal that is unresectable gets **gemcitabine-cisplatin** first, and **FGFR2** fusions later respond to pemigatinib while **IDH1** mutation responds to ivosidenib. Molecular profiling at diagnosis guides first-line and trial options together, and durable response can downstage selected tumours to resection. Adjuvant capecitabine is recommended after resected biliary tract cancer (BILCAP).",
+   "vis": {
+    "edges": [
+     [
+      "big",
+      "chemo"
+     ],
+     [
+      "chemo",
+      "profile"
+     ],
+     [
+      "profile",
+      "target"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "big",
+      "label": "Over 5 cm or multifocal"
+     },
+     {
+      "id": "chemo",
+      "label": "Gemcitabine-cisplatin"
+     },
+     {
+      "id": "profile",
+      "label": "FGFR2, IDH1 test"
+     },
+     {
+      "id": "target",
+      "label": "Targeted agent"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Primary sclerosing cholangitis carries ten to fifteen percent lifetime cancer risk, so dominant strictures need tissue proof. CA 19-9 over one hundred with brush cytology and FISH polysomy supports cholangiocarcinoma. Annual MRCP surveillance catches dominant strictures early.",
+   "tx": "Primary sclerosing cholangitis with **dominant stricture** and **CA 19-9** over **100** units per mL needs brush cytology with **FISH polysomy** because of **10** to **15** percent lifetime cancer risk. Rising CA 19-9 with new dominant narrowing triggers ERCP sampling, since cholangitis alone also raises the marker. Polysomy on FISH strongly supports the diagnosis, and confirmed cancer exits surveillance into the transplant or resection pathway.",
+   "vis": {
+    "cols": [
+     "Finding",
+     "Cutoff",
+     "Meaning"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "CA 19-9",
+      "Over 100 units per mL",
+      "Sample the stricture"
+     ],
+     [
+      "Cytology plus FISH",
+      "Polysomy",
+      "Cancer likely"
+     ],
+     [
+      "Lifetime risk",
+      "10 to 15%",
+      "Annual MRCP"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-surgical-gastroenterology",
+ "title": "Cholangiocarcinoma: Bismuth staging, resection and transplant rules",
+ "v": 1
+}

@@ -1,0 +1,148 @@
+{
+  "id": "uro-suprapubic-catheter",
+  "title": "Suprapubic catheter insertion",
+  "subtitle": "Full bladder, no bowel in the way",
+  "system": "urology",
+  "aliases": ["SPC", "suprapubic cystostomy", "suprapubic catheterisation"],
+  "estMinutes": 25,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "baus-spc", "org": "British Association of Urological Surgeons (BAUS)", "title": "British Association of Urological Surgeons' suprapubic catheter practice guidelines (Harrison SCW et al., BJU International)", "year": 2011, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=British+Association+of+Urological+Surgeons+suprapubic+catheter+practice+guidelines", "accessed": "2026-11-04" },
+    { "id": "eaun-cath", "org": "European Association of Urology Nurses (EAUN)", "title": "Evidence-based guidelines for best practice in urological health care: catheterisation, indwelling catheters in adults, urethral and suprapubic", "year": 2012, "url": "https://nurses.uroweb.org/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["qsofa", "news2"],
+  "chapters": {
+    "indications": [
+      "Acute retention where urethral catheterisation has failed or is contraindicated (suspected urethral injury, false passage, urethral stricture).",
+      "Long-term bladder drainage, where a suprapubic route is preferred to a long-term urethral catheter (urethral erosion, patient preference, sexual activity, neurogenic bladder).",
+      "Urinary diversion in Fournier gangrene or perineal trauma."
+    ],
+    "contraindications": [
+      "A bladder that cannot be confidently filled and identified.",
+      "Known or suspected bladder cancer, where the tract may seed tumour.",
+      "Uncorrected coagulopathy and anticoagulation that cannot be safely managed.",
+      "Previous lower abdominal or pelvic surgery, or a pelvic mass, is a relative contraindication to blind insertion: use ultrasound guidance, cystoscopic guidance, or an open approach."
+    ],
+    "preparation": [
+      "Confirm a full bladder by palpation and ultrasound; fill it through a urethral catheter or cystoscope where possible.",
+      "Ultrasound the lower abdomen to look for bowel between the skin and the bladder.",
+      "Consent covers bleeding, infection, bowel injury, catheter blockage or displacement, and long-term catheter care.",
+      "Antibiotic prophylaxis per local policy, particularly in a patient with a long-term urethral catheter or known infected urine."
+    ],
+    "positioning": [
+      "Supine, with slight head-down tilt to move bowel away from the bladder; lithotomy if cystoscopic guidance is used."
+    ],
+    "equipment": [
+      "Ultrasound with a curvilinear probe.",
+      "Suprapubic catheter kit (trocar and sheath, or Seldinger set) and an appropriately sized catheter.",
+      "Local anaesthetic, a long seeker needle, skin suture or fixation device.",
+      "Flexible or rigid cystoscope if cystoscopic guidance is used."
+    ],
+    "anatomy": [
+      "The full bladder rises out of the pelvis and pushes the peritoneal reflection upwards, leaving an extraperitoneal window above the pubic symphysis.",
+      "An empty bladder lies behind the pubis, with peritoneum and bowel above and in front of it.",
+      "The insertion site is in the midline, about two finger-breadths above the symphysis, below any lower abdominal scar.",
+      "The inferior epigastric vessels lie lateral to the midline; staying in the midline avoids them."
+    ],
+    "criticalSafety": [
+      "Never insert a suprapubic catheter into a bladder that is not clearly full.",
+      "Aspirate urine with the seeker needle before inserting the trocar; no urine means stop.",
+      "Previous lower abdominal surgery: image first and use ultrasound or cystoscopic guidance, or an open approach."
+    ],
+    "structuresAtRisk": [
+      "Small bowel and sigmoid colon",
+      "Inferior epigastric vessels",
+      "Bladder base and prostate (trocar passed too deep)"
+    ],
+    "commonErrors": [
+      "Inserting into a partially filled bladder.",
+      "Choosing an insertion point too high, above the peritoneal reflection, or too close to the pubis.",
+      "Pushing the trocar through the back wall of the bladder.",
+      "Inflating the balloon before urine flows freely."
+    ],
+    "complications": [
+      "Bowel perforation, which can present days later as peritonitis.",
+      "Bleeding and haematuria.",
+      "Catheter blockage, bypassing and encrustation.",
+      "Urinary infection; wound infection at the tract.",
+      "Catheter dislodgement before the tract has matured."
+    ],
+    "postop": [
+      "Observe for abdominal pain, peritonism or sepsis in the first days; new abdominal signs are a bowel injury until proven otherwise.",
+      "Plan the first catheter change, which is usually done by the urology team because the tract is immature.",
+      "Give written catheter care instructions to the patient and community team.",
+      "Document catheter type, size, balloon volume, the insertion technique and any imaging used."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Infected urine is common in this group; follow culture results where available." },
+    { "ref": "step.core.positioning", "emphasis": "Slight head-down tilt helps bowel fall away from the bladder." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.uro.cystoscopy", "emphasis": "Where cystoscopic guidance is used, fill the bladder and watch the needle enter in the midline at the dome. Transillumination helps confirm the site." },
+    { "ref": "step.spc.ultrasound" },
+    { "ref": "step.spc.seeker" },
+    { "ref": "step.spc.insert" },
+    { "ref": "step.spc.secure" },
+    { "ref": "step.core.haemostasis", "emphasis": "Light pressure around the tract usually suffices; persistent bleeding needs ultrasound and a senior opinion." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure", "emphasis": "Secure the catheter with a skin suture or fixation device; do not close the skin around it tightly." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.spc.ultrasound": {
+      "id": "step.spc.ultrasound", "kind": "checkpoint", "critical": true,
+      "title": "Ultrasound: full bladder and no bowel",
+      "why": "Bowel injury is the complication that kills after suprapubic catheterisation, and ultrasound is the cheapest way to prevent it.",
+      "how": [
+        "Confirm a distended bladder in two planes.",
+        "Look for bowel loops between the anterior abdominal wall and the bladder along the planned track, especially below a scar.",
+        "Mark the site in the midline above the symphysis, and estimate the depth to the bladder."
+      ],
+      "structuresAtRisk": ["Small bowel", "Sigmoid colon"],
+      "pitfalls": ["Accepting a palpable mass as the bladder without imaging it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spc.seeker": {
+      "id": "step.spc.seeker", "kind": "access", "critical": true,
+      "title": "Local anaesthetic and seeker needle aspiration",
+      "why": "Aspirating urine confirms the track and depth before the large trocar goes in. No urine means the trocar must not follow.",
+      "how": [
+        "Infiltrate local anaesthetic into the skin and down the planned track.",
+        "Advance a long needle perpendicular to the skin, or angled slightly towards the pelvis, aspirating as you go, until urine is aspirated.",
+        "Note the depth at which urine appears. If no urine is obtained, stop and reassess with ultrasound."
+      ],
+      "structuresAtRisk": ["Bowel", "Inferior epigastric vessels"],
+      "pitfalls": ["Multiple blind passes searching for the bladder.", "Aspirating blood or faeculent material and continuing."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spc.insert": {
+      "id": "step.spc.insert", "kind": "access", "critical": true,
+      "title": "Trocar or Seldinger insertion and catheter placement",
+      "why": "The track has been proven; the risk now is depth. Too shallow and the catheter sits in the abdominal wall; too deep and the trocar injures the back wall or the bladder base.",
+      "how": [
+        "Make a small skin incision at the site and insert the trocar along the same track as the seeker needle, with controlled pressure and a hand stop.",
+        "Once urine flows, advance the catheter through the sheath well into the bladder, then remove the sheath per the kit design.",
+        "Inflate the balloon only after free drainage of urine, with sterile water to the specified volume."
+      ],
+      "structuresAtRisk": ["Posterior bladder wall", "Bladder base", "Bowel"],
+      "pitfalls": ["Losing control of the trocar as it gives through the bladder wall.", "Inflating the balloon in the abdominal wall or the prevesical space."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.spc.secure": {
+      "id": "step.spc.secure", "kind": "closure",
+      "title": "Confirm drainage and secure the catheter",
+      "why": "An immature tract closes quickly if the catheter falls out, and the replacement may need a second procedure.",
+      "how": [
+        "Confirm free drainage and clear or clearing urine.",
+        "Secure the catheter and apply a dressing; connect to a closed drainage system.",
+        "Leave a urethral catheter in place temporarily only if there is a specific reason, and document it."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["A catheter secured under tension that kinks and blocks."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

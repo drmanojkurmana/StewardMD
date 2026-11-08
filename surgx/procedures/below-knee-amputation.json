@@ -1,0 +1,193 @@
+{
+  "id": "below-knee-amputation",
+  "title": "Below-knee amputation",
+  "subtitle": "Long posterior myocutaneous flap",
+  "system": "vascular",
+  "aliases": ["BKA", "transtibial amputation", "below knee amputation"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "gvg-2019", "org": "European Society for Vascular Surgery, Society for Vascular Surgery and World Federation of Vascular Societies", "title": "Global Vascular Guidelines on the Management of Chronic Limb-Threatening Ischemia", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31182334/", "accessed": "2026-11-04" },
+    { "id": "vsgbi-amp-2016", "org": "Vascular Society of Great Britain and Ireland (VSGBI)", "title": "A Best Practice Clinical Care Pathway for Major Amputation Surgery", "year": 2016, "url": "https://www.vascularsociety.org.uk/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["abi", "caprini", "rcri"],
+  "chapters": {
+    "indications": [
+      "Non-reconstructable chronic limb-threatening ischaemia with extensive tissue loss or intractable rest pain.",
+      "Uncontrollable foot sepsis, usually after a staged guillotine amputation or debridement.",
+      "Irreversible acute limb ischaemia, or a mangled lower leg not suitable for salvage.",
+      "A non-functional, painful foot in a patient who would walk better with a prosthesis."
+    ],
+    "contraindications": [
+      "Inadequate perfusion at the below-knee level, where the stump will not heal and an above-knee or through-knee amputation is safer.",
+      "A fixed knee flexion contracture or a non-ambulatory patient, for whom a below-knee stump offers no benefit and risks breakdown.",
+      "Infection extending above the planned level; perform a guillotine amputation first and a definitive one later."
+    ],
+    "preparation": [
+      "Senior vascular review documenting that revascularisation is not possible or not appropriate.",
+      "Assessment of the level: skin temperature, condition of the calf, pulses, and perfusion tests where available.",
+      "Multidisciplinary pre-operative input from physiotherapy and the prosthetic team where time allows; plan for rehabilitation goals.",
+      "Optimise analgesia, including a perineural catheter or epidural, to reduce phantom and stump pain.",
+      "Operate on a planned list with a consultant or senior surgeon, not as a late-night case."
+    ],
+    "positioning": [
+      "Supine, with a sandbag under the ipsilateral buttock and the knee able to flex.",
+      "Pad the contralateral heel and protect the other foot, which is often also ischaemic."
+    ],
+    "equipment": [
+      "Amputation set with an oscillating saw or Gigli saw, bone rasp and bone cutters.",
+      "Heavy absorbable ligatures and transfixion sutures for the vessels.",
+      "A thigh tourniquet if used, without exsanguination in ischaemic limbs.",
+      "A bag to isolate the foot from the field."
+    ],
+    "anatomy": [
+      "Four compartments: anterior (tibialis anterior, anterior tibial vessels, deep peroneal nerve), lateral (peronei, superficial peroneal nerve), superficial posterior (gastrocnemius and soleus) and deep posterior (tibialis posterior, posterior tibial and peroneal vessels, tibial nerve).",
+      "The tibia is subcutaneous anteromedially; its anterior crest must be bevelled to avoid pressure through the stump.",
+      "The long posterior flap relies on the gastrocnemius and soleus and their blood supply from the sural arteries; the posterior skin is usually better perfused than the anterior skin in ischaemic disease.",
+      "The ideal tibial length for prosthetic fitting is around 12 to 15 cm below the knee joint, and the fibula is cut 1 to 2 cm shorter than the tibia."
+    ],
+    "criticalSafety": [
+      "Confirm the side with the awake patient and mark it. Wrong-side amputation is a never event.",
+      "Do not exsanguinate an ischaemic or infected limb before applying a tourniquet.",
+      "Handle the flaps without forceps on the skin; ischaemic skin does not forgive crushing.",
+      "Close without tension. A tight stump breaks down."
+    ],
+    "structuresAtRisk": [
+      "Posterior flap blood supply",
+      "Tibial nerve, which causes painful neuroma if cut under tension with surrounding tissue",
+      "Common peroneal nerve near the fibular neck if the fibula is cut too high"
+    ],
+    "commonErrors": [
+      "Choosing a level that will not heal because of pressure from the list or the patient.",
+      "A short anterior flap with the skin incision too far below the planned bone cut.",
+      "Leaving a sharp anterior tibial crest.",
+      "Leaving the fibula as long as the tibia, making a painful stump."
+    ],
+    "complications": [
+      "Stump wound breakdown and infection, sometimes requiring revision to a higher level.",
+      "Haematoma.",
+      "Phantom limb pain and stump neuroma.",
+      "Knee flexion contracture, which prevents prosthetic walking.",
+      "Venous thromboembolism, myocardial infarction and death; major amputation carries significant 30-day mortality in this population.",
+      "Fall onto the stump during early mobilisation."
+    ],
+    "postop": [
+      "Keep the knee extended; avoid pillows under the knee to prevent flexion contracture.",
+      "Stump protection and early physiotherapy; prosthetic referral once the wound allows.",
+      "Thromboprophylaxis, analgesia including neuropathic agents as needed, and secondary prevention for cardiovascular disease.",
+      "Inspect the wound at the first dressing change and early if there is pain, fever or discharge."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side and the level. Discuss the chance of the stump not healing and needing a higher level, and phantom pain." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Cover for skin flora and, in an infected or gangrenous limb, the organisms grown or likely, per local protocol. Thromboprophylaxis is essential." },
+    { "ref": "step.core.positioning", "emphasis": "Sandbag under the buttock, knee able to flex, contralateral heel padded." },
+    { "ref": "step.core.prep-drape", "emphasis": "Isolate the foot in a sealed bag or glove so that infected tissue never enters the field." },
+    { "ref": "step.bka.flaps" },
+    { "ref": "step.bka.anterior" },
+    { "ref": "step.bka.vessels" },
+    { "ref": "step.bka.bone" },
+    { "ref": "step.bka.nerves" },
+    { "ref": "step.bka.posterior" },
+    { "ref": "step.core.haemostasis", "emphasis": "Release any tourniquet before closure and secure haemostasis; a stump haematoma becomes a stump infection." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "Send the limb for histology, with bone margin for culture if osteomyelitis was suspected." },
+    { "ref": "step.core.skin-closure", "emphasis": "Close without tension, handling skin edges without forceps. Interrupted sutures allow a single area to be released." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.bka.flaps": {
+      "id": "step.bka.flaps",
+      "kind": "access",
+      "critical": true,
+      "title": "Marking the level and flaps",
+      "why": "Most stump failures are decided at the marking: a level without enough blood supply, or flaps too short to close without tension.",
+      "how": [
+        "Mark the tibial cut at around 12 to 15 cm below the knee joint line.",
+        "Mark the anterior incision transversely at the level of the bone cut, across two thirds of the leg circumference.",
+        "Mark a long posterior flap equal in length to about the anteroposterior diameter of the leg at that level, plus a little extra.",
+        "Check that the skin of the posterior flap is healthy and warm."
+      ],
+      "structuresAtRisk": ["Blood supply of the posterior flap"],
+      "pitfalls": ["A posterior flap too short to cover the bone end without tension.", "Marking over cyanosed or mottled skin."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bka.anterior": {
+      "id": "step.bka.anterior",
+      "kind": "dissection",
+      "title": "Anterior and lateral compartments",
+      "why": "Dividing the anterior and lateral compartments at the bone level exposes the tibia and fibula and the anterior tibial vessels in a controlled order.",
+      "how": [
+        "Incise the anterior skin and fascia down to the tibia, without undermining the skin.",
+        "Divide the muscles of the anterior and lateral compartments at the level of the bone cut.",
+        "Identify the anterior tibial vessels and deep peroneal nerve on the interosseous membrane."
+      ],
+      "structuresAtRisk": ["Anterior tibial vessels", "Superficial and deep peroneal nerves"],
+      "pitfalls": ["Undermining the anterior skin from the periosteum, which devascularises it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bka.vessels": {
+      "id": "step.bka.vessels",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Division of the vessels",
+      "why": "Named arteries in a stump must be individually suture-ligated. A slipped tie in the stump is a major haemorrhage on the ward.",
+      "how": [
+        "Divide the anterior tibial, posterior tibial and peroneal arteries and veins separately.",
+        "Suture-ligate or doubly ligate each artery; transfix the larger ones.",
+        "Inspect the vessels: a calcified artery that does not bleed may predict poor healing."
+      ],
+      "structuresAtRisk": ["Posterior tibial and peroneal vessels"],
+      "pitfalls": ["Mass ligation of vessels and nerve together.", "A single tie on a large artery."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bka.bone": {
+      "id": "step.bka.bone",
+      "kind": "resection",
+      "critical": true,
+      "title": "Division and shaping of the tibia and fibula",
+      "why": "A sharp or prominent bone end will erode through the skin or make a prosthesis painful. Shaping the bone is part of the reconstruction.",
+      "how": [
+        "Elevate the periosteum minimally and divide the tibia at the marked level.",
+        "Bevel the anterior crest of the tibia at roughly 45 degrees and smooth it with a rasp.",
+        "Divide the fibula 1 to 2 cm proximal to the tibial cut.",
+        "Irrigate away bone dust."
+      ],
+      "structuresAtRisk": ["Common peroneal nerve if the fibula is divided too high", "Posterior flap during sawing"],
+      "pitfalls": ["Leaving a sharp anterior tibial spike.", "Fibula left as long as or longer than the tibia."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bka.nerves": {
+      "id": "step.bka.nerves",
+      "kind": "dissection",
+      "title": "Nerve handling",
+      "why": "A nerve cut under tension retracts away from the stump end, so the neuroma forms in protected tissue rather than where the prosthesis loads.",
+      "how": [
+        "Identify the tibial, superficial peroneal, deep peroneal, sural and saphenous nerves.",
+        "Pull each gently distally, divide it sharply, and allow it to retract proximally.",
+        "Ligate the tibial nerve if its accompanying vessel bleeds, without crushing a large length."
+      ],
+      "structuresAtRisk": ["Tibial nerve and its accompanying vessels"],
+      "pitfalls": ["Cutting a nerve flush with the bone end.", "Excessive traction that avulses the nerve."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bka.posterior": {
+      "id": "step.bka.posterior",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Fashioning the posterior myocutaneous flap",
+      "why": "The posterior flap carries the best blood supply and the muscle padding for the stump. Too much muscle makes it bulky and tight; too little leaves the bone end unprotected.",
+      "how": [
+        "Divide the deep posterior muscles at the bone level, then cut the posterior flap with an amputation knife along the marked lines.",
+        "Trim the soleus to reduce bulk while preserving the gastrocnemius and its blood supply.",
+        "Bring the flap forward over the bone end and suture the gastrocnemius fascia to the anterior fascia and periosteum.",
+        "Check that the flap lies without tension before skin closure."
+      ],
+      "structuresAtRisk": ["Sural arteries supplying the gastrocnemius", "Posterior flap skin"],
+      "pitfalls": ["A bulky flap closed under tension.", "Bevelling the flap so that the skin is thinner than the muscle."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

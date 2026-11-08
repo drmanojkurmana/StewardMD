@@ -1,0 +1,154 @@
+{
+  "id": "hartmanns-procedure",
+  "title": "Hartmann's procedure",
+  "subtitle": "Sigmoid resection, end colostomy, closed rectal stump",
+  "system": "gastrointestinal",
+  "aliases": ["Hartmann's", "sigmoid colectomy with end colostomy", "proctosigmoidectomy with end colostomy"],
+  "estMinutes": 150,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "wses-diverticulitis-2020", "org": "World Society of Emergency Surgery (WSES)", "title": "2020 update of the WSES guidelines for the management of acute colonic diverticulitis in the emergency setting", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/32381121/", "accessed": "2026-11-04" },
+    { "id": "ascrs-diverticulitis-2020", "org": "American Society of Colon and Rectal Surgeons (ASCRS)", "title": "Clinical Practice Guidelines for the Treatment of Left-Sided Colonic Diverticulitis", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/32384404/", "accessed": "2026-11-04" },
+    { "id": "ascrs-ostomy-2022", "org": "American Society of Colon and Rectal Surgeons (ASCRS)", "title": "Clinical Practice Guidelines for Ostomy Surgery", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/35616386/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["p_possum", "possum", "clavien_dindo", "caprini"],
+  "chapters": {
+    "indications": [
+      "Perforated sigmoid diverticulitis with purulent or faecal peritonitis (Hinchey III or IV) in a patient who is unstable, immunosuppressed or heavily comorbid, where a primary anastomosis is unsafe.",
+      "Obstructing or perforated left-sided colorectal cancer in an unstable patient.",
+      "Sigmoid volvulus with gangrene or perforation.",
+      "Anastomotic leak after a left-sided resection with generalised peritonitis, as the salvage operation.",
+      "Ischaemic or traumatic injury of the sigmoid colon with contamination and physiological derangement."
+    ],
+    "contraindications": [
+      "A stable, well-perfused patient with limited contamination in whom resection with primary anastomosis, with or without a defunctioning ileostomy, is reasonable in experienced hands.",
+      "Hinchey III purulent peritonitis in selected stable patients, where laparoscopic lavage or resection with anastomosis may be considered by an experienced team; the decision belongs to the senior surgeon.",
+      "A patient for whom the aims of care are palliative and who would not survive or benefit from laparotomy; agree the ceiling of care first."
+    ],
+    "preparation": [
+      "Resuscitate in parallel with preparing theatre. Source control should not wait for full optimisation in septic shock.",
+      "Broad-spectrum intravenous antibiotics covering Gram-negative and anaerobic organisms per local protocol, started before theatre.",
+      "Mark the stoma site in the left iliac fossa with the stoma nurse if time allows, and the right side as a fallback.",
+      "Consent must cover the stoma, the realistic chance that it may be permanent, a rectal stump leak, wound infection, ureteric injury and the need for critical care.",
+      "Group and save or crossmatch, urinary catheter, nasogastric tube if vomiting or distended."
+    ],
+    "positioning": [
+      "Modified Lloyd-Davies with legs in padded stirrups, giving access to the anus for a transanal stapler or rectal washout and to the pelvis for a second assistant.",
+      "Thighs nearly flat so the legs do not obstruct the instruments; protect the common peroneal nerve at the fibular head.",
+      "Head-down tilt and right tilt during pelvic and sigmoid mobilisation."
+    ],
+    "equipment": [
+      "Major laparotomy set with a self-retaining retractor and deep pelvic instruments.",
+      "Linear cutting and linear non-cutting staplers, or a transverse stapler for the rectal stump.",
+      "Long non-absorbable sutures for marking the stump.",
+      "Warm saline for lavage, stoma appliance."
+    ],
+    "anatomy": [
+      "The sigmoid colon is on a mesentery whose root crosses the left common iliac vessels and the left ureter at the pelvic brim. The ureter lies under the intersigmoid recess, behind the mesentery, not in it.",
+      "The gonadal vessels run lateral to and parallel with the ureter and are the usual landmark that confirms the retroperitoneal plane.",
+      "The rectosigmoid junction is where the taenia coli splay out to form a continuous longitudinal muscle coat, roughly at the sacral promontory. The distal margin is taken here or just below it, on soft bowel.",
+      "The inferior mesenteric artery gives the left colic and sigmoid branches; for benign disease the sigmoid vessels can be divided close to the bowel and the superior rectal artery preserved.",
+      "The splenic flexure may need mobilising to bring a tension-free colostomy to the left iliac fossa in an obese patient."
+    ],
+    "criticalSafety": [
+      "Identify the left ureter before dividing anything in the sigmoid mesentery, and again before transecting the rectal stump. In a severely inflamed field, ureteric stents may help a later identification but do not prevent injury.",
+      "Divide the rectum on soft bowel distal to the diseased segment, at the rectosigmoid junction. A stump left in inflamed diverticular colon is a stump that leaks.",
+      "Do not attempt a primary anastomosis in a patient on rising vasopressors with faecal peritonitis. The safe operation is the one this patient will survive.",
+      "Bring the colostomy out without tension and confirm it is pink after closure of the abdomen."
+    ],
+    "structuresAtRisk": [
+      "Left ureter and gonadal vessels",
+      "Hypogastric nerves at the sacral promontory",
+      "Left common and external iliac vessels",
+      "Spleen during splenic flexure mobilisation",
+      "Inferior epigastric vessels at the stoma trephine"
+    ],
+    "commonErrors": [
+      "Leaving residual diseased sigmoid on the rectal stump.",
+      "Entering the wrong plane behind the mesentery and lifting the ureter with it.",
+      "A colostomy under tension because the descending colon and splenic flexure were not mobilised enough.",
+      "Not marking the rectal stump, so the reversal operation begins with a search for it.",
+      "A long rectal stump when a short one was possible, or a short stump that makes reversal very difficult; aim for the rectosigmoid junction."
+    ],
+    "complications": [
+      "Rectal stump dehiscence presenting as a pelvic collection; most are managed with drainage rather than re-laparotomy.",
+      "Wound infection and dehiscence, which are common after a contaminated laparotomy.",
+      "Stoma necrosis, retraction, parastomal hernia and prolapse.",
+      "Ureteric injury, recognised or unrecognised.",
+      "Intra-abdominal collection, prolonged ileus, and the systemic complications of emergency laparotomy.",
+      "A substantial proportion of patients never have the colostomy reversed, which is why the consent conversation matters."
+    ],
+    "postop": [
+      "Critical care for physiological instability; continue antibiotics for a short defined course guided by source control and clinical response, not indefinitely.",
+      "Stoma check by nursing staff every shift for the first 48 hours, with a clear appliance; a dusky or black stoma is a surgical review that day.",
+      "Stoma nurse review, appliance teaching and dietary advice before discharge.",
+      "Thromboprophylaxis per local protocol; consider extended prophylaxis after cancer surgery.",
+      "Histology review. A colonoscopic or CT colonographic assessment of the remaining colon before any reversal, because a perforated cancer can mimic diverticulitis.",
+      "Discuss reversal timing at follow-up; it is usually planned no earlier than several months later, once the patient has recovered."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Say the word 'stoma' and say that it may be permanent. Many Hartmann's colostomies are never reversed." },
+    { "ref": "step.bowel.stoma-siting", "emphasis": "Left iliac fossa for an end colostomy. Mark it even in an emergency if the patient can sit up for one minute." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "This is treatment, not prophylaxis: therapeutic antibiotics should already be running. Redose if the operation is long or blood loss is heavy." },
+    { "ref": "step.core.positioning", "emphasis": "Modified Lloyd-Davies so the anus is accessible for a rectal washout and stump assessment." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.abd.midline" },
+    { "ref": "step.abd.exploration", "emphasis": "Grade the contamination and look at the whole colon. A perforated cancer, a second lesion or a synchronous ischaemia changes the operation." },
+    { "ref": "step.abd.bowel-handling" },
+    { "ref": "step.hartmann.mobilise" },
+    { "ref": "step.bowel.mesentery-division", "emphasis": "For benign disease divide close to the bowel and preserve the superior rectal artery; for suspected cancer divide at the oncological level." },
+    { "ref": "step.hartmann.rectal-stump" },
+    { "ref": "step.bowel.bowel-division", "emphasis": "Proximal division on soft, well-perfused descending or sigmoid colon that will reach the abdominal wall." },
+    { "ref": "step.abd.lavage" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.abd.drain", "emphasis": "A pelvic drain is reasonable after a contaminated pelvic field; it does not prevent a stump leak but may reveal one." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.bowel.trephine" },
+    { "ref": "step.abd.stoma", "emphasis": "Deliver the colon end through the trephine before closing the abdomen, with its mesentery oriented and without twist." },
+    { "ref": "step.abd.mass-closure" },
+    { "ref": "step.core.skin-closure", "emphasis": "In heavy contamination, consider leaving the skin open or using delayed primary closure." },
+    { "ref": "step.bowel.stoma-mature", "emphasis": "End colostomy: flush or slightly raised, full-thickness to dermis." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.hartmann.mobilise": {
+      "id": "step.hartmann.mobilise", "kind": "dissection", "critical": true,
+      "title": "Lateral mobilisation and ureter identification",
+      "why": "The left ureter is injured during sigmoid mobilisation when the surgeon dissects in an inflamed field without first finding it. Identifying it in normal tissue, above or below the inflammation, makes the rest of the operation safe.",
+      "how": [
+        "Divide the congenital adhesions and the white line of Toldt lateral to the sigmoid and descending colon.",
+        "Develop the plane between the mesocolon and the retroperitoneum medially, keeping the gonadal vessels and ureter down on the posterior wall.",
+        "Identify the left ureter where it crosses the iliac vessels at the pelvic brim. If inflammation obscures it, find it in normal tissue higher up and follow it down.",
+        "Mobilise the descending colon and, if needed, the splenic flexure so that the proximal end reaches the abdominal wall without tension."
+      ],
+      "structuresAtRisk": ["Left ureter", "Left gonadal vessels", "Spleen"],
+      "pitfalls": [
+        "Lifting the ureter up with the mesentery by dissecting too deep in an inflammatory mass.",
+        "Pinching off a phlegmon blindly with fingers in the base of the sigmoid mesentery near the ureter."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hartmann.rectal-stump": {
+      "id": "step.hartmann.rectal-stump", "kind": "resection", "critical": true,
+      "title": "Transecting and securing the rectal stump",
+      "why": "The rectal stump is closed blind and left in a contaminated pelvis. Its security depends on dividing healthy rectum, not diseased sigmoid, and its later reversal depends on being able to find it.",
+      "how": [
+        "Identify the rectosigmoid junction where the taeniae splay out, at about the level of the sacral promontory.",
+        "Clear the mesorectum from the bowel wall at the point of division, keeping close to the bowel for benign disease to protect the hypogastric nerves.",
+        "Divide with a linear or transverse stapler on soft, uninflamed rectum, confirming the ureter is clear first.",
+        "Mark the stump apex with long non-absorbable sutures, and consider oversewing the staple line if the tissue is friable.",
+        "A transanal rectal washout before division reduces the faecal load left in the stump."
+      ],
+      "structuresAtRisk": ["Left ureter", "Hypogastric nerves", "Presacral veins"],
+      "pitfalls": [
+        "Dividing through diverticular sigmoid because the dissection became difficult, leaving a stump that dehisces.",
+        "Clearing too much mesorectum around the stump, devascularising its apex."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

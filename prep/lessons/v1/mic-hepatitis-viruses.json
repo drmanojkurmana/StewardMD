@@ -3,16 +3,16 @@
  "module": "mic-hepatitis-viruses",
  "subject": "microbiology",
  "title": "Hepatitis B, C, D and E: serology, phases and cure",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Five hepatitides** sort by route and chronicity: **A** (faeco oral, never chronic), **B** (blood, sex, vertical, **Dane particle** with surface, core and e antigens, chronicity 90 percent neonates versus 5 percent adults), **C** (blood,IVDU, chronicity 85 percent, no vaccine), **D** (defective, needs B), **E** (water, pregnancy fulminance). **Fulminant** hepatitis (encephalopathy with coagulopathy within weeks) transplants urgently; all others rest with monitoring. Needlestick HBV gets immunoglobulin plus vaccine; HCV gets early PCR.",
-   "say": "Blood, sex, birth: B chronifies babies. Blood alone: C chronifies adults. Water: A and E never chronic.",
+   "tx": "Five hepatitides divide by spread and chronicity. **Hepatitis A** travels faeco orally and never chronifies, while **hepatitis B** spreads by blood, sex and birth with Dane particles and chronifies most neonates but few adults. **Hepatitis C** spreads by blood and chronifies most adults with no vaccine available, **hepatitis D** rides only on B, and E spreads by water with fulminance in pregnancy. Fulminant failure with encephalopathy needs urgent transplant review.",
+   "say": "Faeco oral spread without chronicity is characteristic of hepatitis A infection. Blood and birth related spread with frequent neonatal chronicity is typical of hepatitis B. Blood borne infection that chronifies adults is most suggestive of hepatitis C. Water borne hepatitis with fulminance in pregnancy is caused by hepatitis E.",
    "vis": null
   },
   {
-   "tx": "**HBV serology** reads like clockwork: **HBsAg** (infection), **anti HBs** (immunity), **anti HBc IgM** (acute window), **HBeAg** (replication with infectivity), anti HBe (seroconversion calming). **Window period** (HBsAg gone, anti HBs not yet, lone anti HBc IgM) marks acute clearance; isolated anti HBc means window, occult infection or false positive. Phases run immune tolerant (high DNA, normal ALT), immune active (flares with fibrosis), inactive carrier (low DNA, normal ALT) and reactivation (immunosuppression, pre empt with entecavir). **Tenofovir or entecavir** suppresses; pegylated interferon suits selected young.",
-   "say": "Lone anti HBc IgM is the window. e antigen means replicating and infectious: suppress with tenofovir.",
+   "tx": "**HBsAg** marks infection while anti HBs marks immunity and **anti HBc IgM** alone marks the window between clearance and protection. **HBeAg** signals active replication with high infectivity, calming after seroconversion to anti HBe. Disease phases run tolerant with high DNA, active with flares, inactive carriage and reactivation under immunosuppression, and suppression uses **tenofovir** or entecavir with interferon for selected young patients.",
+   "say": "Surface antigen that persists in blood is proof of ongoing infection. Antibody to surface antigen is proof of immunity after clearance or vaccination. Lone core IgM in the window period is characteristic of recent acute infection. Antigen e that remains detectable is a marker of active replication and infectivity.",
    "vis": {
     "kind": "image",
     "src": "prep/lessons/media/micro-hepb-serology.svg",
@@ -22,13 +22,24 @@
    }
   },
   {
-   "tx": "**Hepatitis C** (flavivirus, genotypes 1 and 3 dominating India, **no vaccine** as envelope hypervaries) is now curable: **direct acting antivirals** (**sofosbuvir** with velpatasvir or daclatasvir, 12 weeks, SVR over 95 percent) replaced interferon. Extrahepatic flags (**cryoglobulinaemia** with purpura, porphyria cutanea tarda, lichen planus, NHL) resolve with cure; screen IVDU, transfused before 2002, dialysis and HIV cohorts. Fibroscan stages; cirrhotics need **6 monthly HCC ultrasound with AFP** lifelong even after SVR. Reinfection counsels harm reduction.",
-   "say": "C never vaccinates but now cures in 12 weeks: sofosbuvir based. Cured cirrhosis still watches for cancer.",
+   "tx": "**Hepatitis C** is a flavivirus with dominant genotypes 1 and 3 and **no vaccine**, since its envelope hypervaries to escape immunity. Cure now comes from **direct acting antivirals** such as **sofosbuvir** with velpatasvir or daclatasvir for twelve weeks with response above ninety five percent. Extrahepatic cryoglobulinaemia with purpura and lichen planus resolves after cure, while cirrhosis still needs lifelong six monthly ultrasound with AFP because cancer risk remains.",
+   "say": "Flavivirus infection without a vaccine that chronifies adults is characteristic of hepatitis C. Twelve week oral therapy is curative in the great majority of treated patients. Extrahepatic features such as purpura and lichen planus will resolve after cure. Cured cirrhosis is still surveyed lifelong with six monthly ultrasound examinations.",
    "vis": null
   },
   {
-   "tx": "**HDV** (defective RNA needing HBsAg cloak) worsens B as coinfection (mild together) or **superinfection** (severe flare on chronic B, rapid cirrhosis); pegylated interferon with bulevirtide debates treat while HBV suppression helps indirectly. **HEV** (pregnancy fulminance, ribavirin in chronic transplant cases) was covered in enteric wave. **HCC surveillance** (6 monthly ultrasound with AFP for cirrhosis, chronic B with family history, HDV) catches curable lesions; alcohol with aflatoxin multiplies risk.",
-   "say": "D worsens B worst as superinfection. Every cirrhotic liver images twice yearly for cancer.",
+   "tx": "**Hepatitis C** replication offers three drug handles in the picture: NS3 protease, NS5A blocked by velpatasvir and NS5B polymerase blocked by **sofosbuvir**. The panel notes genotypes 1 and 3 with cure above ninety five percent after **direct acting antivirals**. The image is worth memorising because examiners link each drug to its protein target and its cure rate.",
+   "say": "The virion shown at the margin is the starting point for the replication cycle. Three nonstructural proteins are displayed as handles for modern drug therapy. Polymerase blockade by sofosbuvir is central to cure across genotypes. Cure above ninety five percent is achievable with twelve weeks of combination treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mic-hepatitis-viruses-gen1.webp",
+    "alt": "Hepatitis C virion with NS3 protease, NS5A and NS5B polymerase drug targets",
+    "caption": "Hepatitis C replication targets with high cure rates Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Hepatitis D** is a defective virus that borrows the B cloak, mild in coinfection but severe as **superinfection** on chronic B with rapid cirrhosis. **Hepatitis E** spreads by water and fulminates in pregnancy, with ribavirin reserved for chronic transplant cases. Surveillance with six monthly ultrasound and AFP covers cirrhosis, chronic B with family history and D infection, since alcohol and aflatoxin multiply cancer risk.",
+   "say": "Defective virus that needs hepatitis B to spread is characteristic of hepatitis D. Flares on chronic B are severest when superinfection is the cause. Water borne infection that fulminates in pregnancy is caused by hepatitis E. Twice yearly ultrasound is required for every cirrhotic liver under surveillance.",
    "vis": {
     "kind": "table",
     "cols": [

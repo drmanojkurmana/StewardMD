@@ -505,7 +505,11 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-group-title { color: #e6f0ed; 
   --kbr-card-bg: #fff;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  grid-template-columns: minmax(0, 1fr);
+  /* 16 px gutters (were 10): the sheet sat almost on the screen edge (owner 2026-11-05).
+     The article itself is the card now (branch reader-card): header and body span
+     1 / -1 and the visible inset comes from .kbr-read margins below, so these
+     gutter tracks stay empty and both intents hold. */
+  grid-template-columns: max(16px, env(safe-area-inset-left, 0px)) minmax(0, 1fr) max(16px, env(safe-area-inset-right, 0px));
   background: linear-gradient(90deg, #dff3ec 0%, #e8eef6 48%, #e6e0f4 100%) !important;
 }
 html[data-appearance] #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) {
@@ -551,7 +555,9 @@ html[data-appearance] #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-mgmt-top 
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-brand {
   position: absolute;
   left: 50%;
-  top: 50%;
+  /* centre in the bar's content box, below the status bar: the bar's top padding includes the safe-area inset, so a
+     plain 50% put the title under the clock (owner 2026-11-05) */
+  top: calc(50% + env(safe-area-inset-top, 0px) / 2);
   transform: translate(-50%, -50%);
   width: max-content;
   max-width: calc(100% - 196px);
@@ -721,6 +727,8 @@ body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) [class^="md-"]:not(.md-ab
 }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-jump {
   position: sticky;
+  /* pinned to the scroller's top edge: an inset here left a strip where text scrolled visibly above the chips
+     (owner screenshots 2026-11-05) */
   top: 0;
   z-index: 3;
   margin: 2px 0 12px;
@@ -834,3 +842,26 @@ body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back { color: #b9d0ff
   #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) :is(.dx-back, .kbr-chip, .kbr-figchip, .dx-reader-favourite) { transition: none; }
   #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) :is(.dx-back, .kbr-chip, .kbr-figchip, .dx-reader-favourite):active { transform: none; }
 }
+
+/* Phone: the sheet runs to the bottom edge and the text scrolls off it, like a native reading view. A floating sheet
+   with a 40 px gap clipped the last visible line mid-text above an empty band (owner 2026-11-05). The home-indicator
+   inset moves inside the scroller so the last line can still scroll clear of it. iPad keeps its floating card. */
+@media (max-width: 699px) {
+  #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-sheet { margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom: 0; }
+  #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-mgmt-body { margin-bottom: 0; }
+  #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-read { padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* A step pathway folds shut under its title (reasoning.js kbrAlgo, owner 2026-11-05). One hairline row with a chevron,
+   44 px tall; open, the steps show as before. */
+#dxOverlay #dxMgmt.dx-reader .kbr-fold { margin: 14px 0; border-top: 1px solid var(--kbr-line, var(--rd-line, #e3e6ee)); border-bottom: 1px solid var(--kbr-line, var(--rd-line, #e3e6ee)); }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 6px 0; list-style: none; cursor: pointer; font: 650 16px/1.3 var(--sans, system-ui); color: var(--kbr-ink, var(--rd-ink, #16161a)); }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold-sum::-webkit-details-marker { display: none; }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold-sum .dx-chev { flex: none; color: var(--rd-mut, #5b6472); transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold[open] > .kbr-fold-sum .dx-chev { transform: rotate(90deg); }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold > .kbr-fig { margin: 4px 0 14px; }
+#dxOverlay #dxMgmt.dx-reader .kbr-fold-sum:focus-visible { outline: 2px solid var(--reader-accent, #5954b2); outline-offset: 2px; }
+body.dark #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum { color: #f4f5f7; }
+@media (prefers-reduced-motion: reduce) { #dxOverlay #dxMgmt.dx-reader .kbr-fold-sum .dx-chev { transition: none; } }
+/* the figure image's own box, so the watermark overlay (image-viewer.css .smd-wm) covers the picture and its rounded corners */
+#dxOverlay #dxMgmt.dx-reader .kbr-media-host { display: block; border-radius: 12px; }

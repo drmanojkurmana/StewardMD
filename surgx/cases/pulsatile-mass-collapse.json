@@ -1,0 +1,83 @@
+{
+  "id": "pulsatile-mass-collapse",
+  "title": "Collapse, abdominal pain and a pulsatile mass",
+  "subtitle": "Ruptured abdominal aortic aneurysm",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "raaa",
+  "procedureRef": "open-raaa-repair",
+  "sources": [
+    { "id": "esvs-aaa-2024", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2024 Clinical Practice Guidelines on the Management of Abdominal Aorto-Iliac Artery Aneurysms", "year": 2024, "url": "https://pubmed.ncbi.nlm.nih.gov/38307694/", "accessed": "2026-11-04" },
+    { "id": "improve", "org": "IMPROVE Trial Investigators", "title": "Endovascular or open repair strategy for ruptured abdominal aortic aneurysm: 30 day outcomes from IMPROVE randomised trial (BMJ)", "year": 2014, "url": "https://pubmed.ncbi.nlm.nih.gov/24418950/", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 72-year-old man, a lifelong smoker, collapsed at home while straining. He has severe pain in his back and left flank. In the emergency department he is pale, sweaty, and talking. You feel a tender, expansile mass above the umbilicus. He was treated for 'renal colic' last week.",
+  "vitals": { "HR": "118", "BP": "84/52", "RR": "24", "SpO2": "95% on air", "GCS": "15" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "The emergency nurse has started a litre of crystalloid to 'get his pressure up to normal'. What do you do?",
+      "hint": "He is talking.",
+      "options": [
+        { "id": "a", "text": "Continue fluids until the systolic pressure is normal", "correct": false, "feedback": "Raising the pressure with crystalloid dilutes clotting and can turn a contained leak into a free rupture." },
+        { "id": "b", "text": "Slow the crystalloid, accept a lower pressure while he is conscious, give blood via the major haemorrhage protocol, and call the vascular surgeon and theatre", "correct": true, "feedback": "Correct. Permissive hypotension with blood products, and the call to the vascular team, are the first actions." },
+        { "id": "c", "text": "Start a noradrenaline infusion to raise the pressure", "correct": false, "feedback": "Driving a normal pressure is the problem, whichever drug does it. He is perfusing his brain." },
+        { "id": "d", "text": "Insert a central line and an arterial line before calling anyone", "correct": false, "feedback": "Lines can wait for theatre. The call to the vascular team cannot." }
+      ],
+      "why": "In suspected rupture, ESVS supports permissive hypotension while the patient is conscious, with blood products rather than crystalloid. The aim is to keep the retroperitoneal clot in place until the aorta is controlled.",
+      "missedRedFlags": ["A recent 'renal colic' diagnosis in an older male smoker"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "Bedside ultrasound shows a 7 cm infrarenal aneurysm. No free fluid is seen. What does this tell you?",
+      "hint": "What can ultrasound see, and what can it not see?",
+      "options": [
+        { "id": "a", "text": "The aneurysm is intact because there is no free fluid", "correct": false, "feedback": "Most ruptures bleed into the retroperitoneum, which ultrasound sees poorly. Absence of free fluid does not exclude rupture." },
+        { "id": "b", "text": "There is an aneurysm, and with this presentation it should be managed as ruptured", "correct": true, "feedback": "Correct. Ultrasound confirms the aneurysm; the clinical picture makes the diagnosis of rupture." },
+        { "id": "c", "text": "The pain is likely renal colic with an incidental aneurysm", "correct": false, "feedback": "This is the classic misdiagnosis. Shock with back pain and an aneurysm is a rupture." },
+        { "id": "d", "text": "Ultrasound is unreliable, so ignore the result", "correct": false, "feedback": "It is reliable for the presence of an aneurysm, which is the question it answered." }
+      ],
+      "why": "Bedside ultrasound is a quick way to confirm an aneurysm and justify the call. It is not a test for rupture, because the bleed is usually retroperitoneal.",
+      "missedRedFlags": ["Reassurance from the absence of free fluid"]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "After two units of blood, his pressure is 96/60 and he remains alert. The vascular consultant is on the way and the endovascular team is available. What next?",
+      "hint": "He responded. That changes what you can do.",
+      "options": [
+        { "id": "a", "text": "Straight to theatre for open repair without imaging", "correct": false, "feedback": "Possible, but a patient who responds to resuscitation can have a CT that may allow endovascular repair." },
+        { "id": "b", "text": "CT angiography now, accompanied by a doctor, to assess suitability for EVAR", "correct": true, "feedback": "Correct. CT in the responding patient confirms rupture and decides whether the anatomy suits endovascular repair." },
+        { "id": "c", "text": "Admit to the ward for observation and a CT in the morning", "correct": false, "feedback": "A ruptured aneurysm is never observed on the ward." },
+        { "id": "d", "text": "Ultrasound of the kidneys to exclude obstruction", "correct": false, "feedback": "This continues the renal colic error." }
+      ],
+      "why": "In a stable or responding patient, CT angiography is recommended because endovascular repair is preferred when the anatomy is suitable. The scan must not become a delay, and the patient goes with a doctor and blood.",
+      "missedRedFlags": ["Sending an unstable patient to CT without a doctor"]
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "CT confirms a ruptured infrarenal aneurysm with a 25 mm neck and good iliac access. What repair do you choose?",
+      "hint": "Anatomy is suitable and the team is available.",
+      "options": [
+        { "id": "a", "text": "Endovascular repair, under local anaesthesia if possible", "correct": true, "feedback": "Correct. ESVS 2024 recommends EVAR as first choice for rupture with suitable anatomy, and local anaesthesia was associated with lower mortality in IMPROVE." },
+        { "id": "b", "text": "Open repair, because it is more durable", "correct": false, "feedback": "Durability matters later. With suitable anatomy, endovascular repair is preferred in the emergency." },
+        { "id": "c", "text": "Delay repair until he is optimised by cardiology", "correct": false, "feedback": "A ruptured aneurysm cannot wait for optimisation." },
+        { "id": "d", "text": "Palliative care, because of his age", "correct": false, "feedback": "Age alone is not a reason to withhold repair from a fit, alert patient with suitable anatomy." }
+      ],
+      "why": "With suitable anatomy, current guidance favours endovascular repair for rupture. Local anaesthesia avoids the haemodynamic collapse that can follow induction.",
+      "alternatives": ["If the anatomy had been unsuitable or EVAR unavailable, open repair with the abdomen prepped and draped before induction is the correct alternative."]
+    },
+    {
+      "id": "dp5", "phase": "postop",
+      "prompt": "Six hours after repair in intensive care, he needs more ventilatory pressure, his urine output has fallen and his abdomen is tense. What do you check?",
+      "hint": "A complication common after rupture repair, whichever method was used.",
+      "options": [
+        { "id": "a", "text": "Intra-abdominal pressure via the bladder catheter", "correct": true, "feedback": "Correct. Abdominal compartment syndrome is common after rupture and needs decompression if confirmed with organ dysfunction." },
+        { "id": "b", "text": "A chest radiograph only", "correct": false, "feedback": "It will not explain oliguria and a tense abdomen." },
+        { "id": "c", "text": "Give more fluid for the oliguria and recheck in the morning", "correct": false, "feedback": "More fluid can worsen abdominal compartment syndrome." },
+        { "id": "d", "text": "Start a diuretic", "correct": false, "feedback": "The kidneys are being compressed, not overloaded." }
+      ],
+      "why": "The retroperitoneal haematoma and bowel oedema after rupture raise intra-abdominal pressure. Rising ventilatory pressures, oliguria and a tense abdomen are the classic triad. Bladder pressure confirms it, and decompressive laparotomy treats it.",
+      "missedRedFlags": ["Treating oliguria with more fluid in a tense abdomen"]
+    }
+  ]
+}

@@ -3,7 +3,7 @@
  "module": "mcc-cc-addiction",
  "subject": "mcc-chronic-care",
  "title": "Chronic addiction care: maintenance, safety and relapse management",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "A patient on **methadone** with vomiting and diarrhoea for four days, palpitations and a prolonged corrected QT needs urgent attention. Diarrhoea and vomiting cause **hypokalaemia** and **hypomagnesaemia**, which prolong ventricular repolarisation. Methadone also prolongs QT, so the combination raises the risk of torsades de pointes. The first step is to replace potassium and magnesium, correct the cause, and repeat the ECG. Do not simply discharge or increase the dose.",
@@ -50,6 +50,17 @@
       "e"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The ECG shows a markedly prolonged **QTc** beyond 500 ms with a flattened T wave and a prominent U wave. Vomiting and diarrhoea wash out potassium and magnesium, and **methadone** further lengthens repolarisation, so the combination invites **torsades de pointes**. Replace potassium and magnesium first, correct the underlying cause, then repeat the ECG before any discharge decision.",
+   "say": "Study the bottom rhythm strip. The QT interval stretches past normal with a flat T wave followed by a distinct U wave, a pattern that warns of a dangerous twisting rhythm. Gut losses have depleted potassium and magnesium while methadone adds its own repolarisation delay. Refill both electrolytes, treat the cause of the losses, and record another ECG to confirm recovery before deciding next care.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mcc-cc-addiction-gen1.webp",
+    "alt": "Twelve lead ECG with prolonged QTc interval, flattened T wave and prominent U wave.",
+    "caption": "ECG of methadone related prolonged QTc with flattened T and prominent U waves, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

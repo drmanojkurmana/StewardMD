@@ -480,6 +480,8 @@ test("guard test: all bank paths classified public or gated; no question file is
     { path: "v1/anatomy/search-0a1b2c3d.json", expected: "gated" },
     { path: "v2/pyq/index.json", expected: "gated" },
     { path: "v2/pyq/items-0a1b2c3d.json", expected: "gated" },
+    { path: "v5/pyq-ss/index.json", expected: "gated" },
+    { path: "v5/pyq-ss/items-74e44465.json", expected: "gated" },
     { path: "v2/pyq/img/neet-pg-2025-r1-1-1.webp", expected: "gated" },
     { path: "v5/img/ana-brachial-plexus-1.webp", expected: "gated" },
     { path: "img/radnotes/rn-n1-p031-2.webp", expected: "gated" },

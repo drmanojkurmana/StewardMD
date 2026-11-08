@@ -1,0 +1,135 @@
+{
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "numbers": true,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
+  "minutes": 9,
+  "model": "muse-spark",
+  "module": "son-anthracycline-heart",
+  "quiz": [
+    "mk-7cc7f7e4aafd",
+    "mk-f57000592481",
+    "mk-a924838f24eb"
+  ],
+  "refs": [
+    "NCCN Guidelines for Survivorship",
+    "ESC Cardio-Oncology Guidelines 2022"
+  ],
+  "run": "ss-lessons-pyq-gap-muse",
+  "src": [],
+  "steps": [
+    {
+      "say": "Each anthracycline carries a strict lifetime cumulative dose threshold that clinicians must calculate precisely. Epirubicin permits the highest cumulative exposure because rapid hepatic glucuronidation limits myocardial toxicity, whereas idarubicin and mitoxantrone require substantially lower lifetime ceilings. Recognizing this dosage hierarchy from nine hundred down to one hundred and forty milligrams per square metre prevents irreversible heart failure.",
+      "tx": "Every anthracycline (a family of red coloured cell killing drugs ending in rubicin) has a maximum lifetime cumulative dose (the total ever given), above which heart failure risk soars. **Epirubicin** (the 4 prime epimer of doxorubicin) allows 900 mg/m2 (milligrams per square metre of body surface), daunorubicin 550 to 600, doxorubicin 450 to 550, idarubicin 150 and mitoxantrone (an anthracenedione relative) 140. Epirubicin glucuronidation (liver sugar tagging) clears it faster with less intramyocardial free radical generation. These ceilings decide retreatment and trial eligibility.",
+      "vis": {
+        "alt": "Normal versus dilated hearts with treatment pillars.",
+        "ar": 1.3405,
+        "caption": "Dilated cardiomyopathy from cumulative anthracycline injury with treatment pillars. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/dilated-cardiomyopathy-fig2.webp"
+      }
+    },
+    {
+      "say": "Endomyocardial biopsy reveals a pathognomonic morphologic appearance following anthracycline injury. Light microscopy demonstrates extensive sarcoplasmic vacuolar degeneration, while electron microscopy shows profound myofibrillar loss and disrupted Z-bands. This distinctive histopathological pattern, graded using the Billingham scale, reflects cumulative toxic damage uniquely associated with anthracyclines rather than ischemic or inflammatory cardiomyopathy.",
+      "tx": "Anthracycline cardiotoxicity produces pathognomonic **Adria cells** (heart muscle cells damaged by Adriamycin, a trade name of doxorubicin), graded on endomyocardial biopsy (a catheter sample of heart tissue) by the Billingham scale. Light microscopy shows cytoplasmic vacuolar degeneration (bubble like swelling of the sarcoplasmic reticulum), while electron microscopy shows dropout and loss of myofibrils (the striped contractile threads) with Z band disruption. Iron chelation (iron binding) therapy and biopsy surveillance follow from this pathology in high dose protocols.",
+      "vis": {
+        "cols": [
+          "Microscope",
+          "Adria cell finding",
+          "Meaning"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "Light microscopy",
+            "Cytoplasmic vacuolar degeneration",
+            "Swollen sarcoplasmic reticulum bubbles"
+          ],
+          [
+            "Electron microscopy",
+            "Myofibrillar loss with Z band loss",
+            "Lost contractile threads"
+          ],
+          [
+            "Biopsy grade",
+            "Billingham scale",
+            "Decides dose stop or iron chelation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Clinical monitoring must focus on the crucial first twelve months following therapy, when chronic anthracycline cardiomyopathy most commonly manifests. Cardiomyopathy risk rises continuously with cumulative dose, increasing sharply once exposure exceeds five hundred and fifty milligrams per square metre. Unlike transient infusion-related rhythm disturbances, this progressive myocardial failure is characterized by permanent cardiomyocyte loss and adverse ventricular remodeling.",
+      "tx": "Classic anthracycline cardiomyopathy (chronic progressive heart muscle failure) is cumulative and dose dependent, most commonly declaring itself **within 1 year** (the first twelve months) after completing therapy. Doxorubicin heart failure rates run about 3 to 5 percent at 400 mg/m2, 4 to 7 percent at 500 to 550 and above 36 percent at 600 or more. Antitumour action runs through DNA intercalation (drug wedging between base pairs) and topoisomerase II alpha blockade, while cardiac injury runs through the beta isoform discussed next.",
+      "vis": {
+        "cols": [
+          "Doxorubicin total",
+          "Heart failure rate",
+          "Bedside rule"
+        ],
+        "kind": "table",
+        "rows": [
+          [
+            "400 mg/m2",
+            "3 to 5 percent",
+            "Baseline echo and risk review"
+          ],
+          [
+            "500 to 550 mg/m2",
+            "4 to 7 percent",
+            "Consider cardioprotection"
+          ],
+          [
+            "600 or above mg/m2",
+            "Above 36 percent",
+            "Avoid or protect aggressively"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Two poisons work together inside the heart cell, and each one explains a different protective strategy. Iron driven free radicals shred mitochondrial membranes while topoisomerase beta blockade breaks cardiac DNA. Dexrazoxane counters both arms at once, which is why it remains the proven shield. The HER2 neighbourhood fact explains why some breast cancers melt faster under anthracyclines.",
+      "tx": "Cardiac injury flows from myocardial oxidative damage by iron catalysed **reactive oxygen species** (ROS, unstable molecules from quinone redox cycling) plus cardiomyocyte topoisomerase II beta (Top2B, a DNA untangling enzyme) poisoning. Dexrazoxane (an iron chelator that also degrades Top2B) prevents both arms. The TOP2A gene (encoding the tumour target Top2 alpha) sits beside ERBB2 (HER2) on chromosome 17q12 to 21 and is co amplified in 35 to 40 percent of HER2 positive breast cancers, heightening anthracycline sensitivity there.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "points": [
+            "Intercalation and Top2 alpha blockade",
+            "Kills dividing tumour cells",
+            "TOP2A near HER2 on 17q12 to 21",
+            "HER2 positive tumours extra sensitive"
+          ],
+          "title": "Tumour Kill Top2 Alpha"
+        },
+        "right": {
+          "points": [
+            "Iron ROS plus Top2 beta poisoning",
+            "Injures resting heart cells",
+            "Blocked by dexrazoxane chelation",
+            "Screen with echo and strain"
+          ],
+          "title": "Heart Injury Top2 Beta"
+        }
+      }
+    },
+    {
+      "say": "Evidence-based cardioprotection relies on verified pharmacologic and formulation strategies. Dexrazoxane provides proven cardioprotection once cumulative doxorubicin exceeds three hundred milligrams per square metre, while liposomal encapsulation and prolonged infusions reduce myocardial peak concentrations. Ivabradine provides symptom rate control in heart failure but does not prevent anthracycline-induced myocyte death. Apply the European Society of Cardiology strain and ejection fraction criteria rigorously.",
+      "tx": "Proven cardioprotection means **dexrazoxane** (the Top2B degrading iron chelator) once doxorubicin exceeds 300 mg/m2 at a 10 to 1 dose ratio, liposomal doxorubicin (fat bubble packs) or continuous infusion over 6 to 96 hours lowering peaks. Ivabradine (a sinus node If channel blocker) slows heart rate but does not prevent anthracycline cardiomyopathy. ESC defines cancer therapy related cardiac dysfunction as a left ventricular ejection fraction (LVEF, pumping percentage) drop above 10 points to below 50 percent or a relative global longitudinal strain (GLS, fibre shortening) fall above 15 percent.",
+      "vis": {
+        "alt": "Ventricular remodeling in reduced and preserved ejection fraction failure.",
+        "ar": 1.3405,
+        "caption": "Remodeling in systolic failure tracked by ejection fraction and strain monitoring. Credit: StewardMD.",
+        "kind": "image",
+        "src": "v1/kb/media/heart-failure-fig2.webp"
+      }
+    }
+  ],
+  "subject": "ss-medical-oncology",
+  "title": "Anthracycline cardiotoxicity: thresholds, pathology, mechanism and prevention",
+  "v": 1
+}

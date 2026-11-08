@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Hormonal and tissue integration of glycolysis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Insulin announces the fed state to glycolysis at three levels: it induces **glucokinase** synthesis over hours, raises fructose-2,6-bisphosphate within minutes in liver, and keeps pyruvate kinase dephosphorylated and active. Glucagon reverses each liver effect through cyclic AMP and protein kinase A. Muscle ignores glucagon entirely because it never exports glucose, answering instead to adrenaline, AMP and calcium.",
+   "say": "Insulin induces glucokinase over hours, raises fructose-2,6-bisphosphate within minutes in liver, and keeps pyruvate kinase active. Glucagon reverses each liver effect. Muscle ignores glucagon because it never exports glucose, answering instead to adrenaline, AMP and calcium.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Hormone signal", "Liver glycolysis", "Muscle glycolysis"],
+    "rows": [
+     ["Insulin (fed)", "Strongly on", "On via GLUT4 entry"],
+     ["Glucagon (fasting)", "Off, glucose exported", "No direct effect"],
+     ["Adrenaline (stress)", "Off in liver", "Strongly on for work"]
+    ]
+   }
+  },
+  {
+   "tx": "Fed liver deliberately runs glycolysis beyond pyruvate into fat, because excess carbohydrate cannot all be stored as limited glycogen. Acetyl-CoA exits mitochondria as **citrate**, which both feeds fatty acid synthesis and signals PFK-1 that carbon is plentiful. In fasting the same liver silences glycolysis completely, so newly rebuilt glucose escapes instead of burning in a wasteful circle.",
+   "say": "Fed liver runs glycolysis beyond pyruvate into fat, because excess carbohydrate cannot all be stored as glycogen. Acetyl-CoA exits as citrate, which feeds fat synthesis. In fasting the same liver silences glycolysis so rebuilt glucose escapes instead of burning in a wasteful circle.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fed liver overflow to fat",
+    "nodes": [
+     {"id": "glu", "label": "Glucose floods liver"},
+     {"id": "pyr", "label": "Pyruvate to acetyl-CoA"},
+     {"id": "cit", "label": "Citrate exported to cytosol"},
+     {"id": "fat", "label": "Fatty acids and VLDL"}
+    ],
+    "edges": [["glu", "pyr"], ["pyr", "cit"], ["cit", "fat"]]
+   }
+  },
+  {
+   "tx": "Working muscle regulates itself locally with impressive speed: contraction calcium and rising **AMP** activate phosphorylase and PFK-1 before any hormone arrives. Lactate exported during sprints is welcomed by heart muscle, which preferentially oxidises it, and by liver through the Cori cycle. Training expands mitochondria so pyruvate oxidation keeps pace longer and lactate threshold moves to higher workloads.",
+   "say": "Working muscle regulates itself locally. Contraction calcium and rising AMP activate phosphorylase and phosphofructokinase-one before any hormone arrives. Lactate is welcomed by heart and liver. Training expands mitochondria so the lactate threshold moves to higher workloads.",
+   "vis": null
+  },
+  {
+   "tx": "Brain tissue normally burns glucose obligatorily through **GLUT1** and GLUT3 transporters that ignore insulin, protecting supply during fasting. Retina, renal medulla, testis and red cells share heavy glycolytic dependence for anatomical or oxygen reasons. During prolonged starvation the brain adapts to ketones for roughly two thirds of its fuel, sparing glucose and slowing muscle protein breakdown for gluconeogenesis.",
+   "say": "The brain burns glucose through GLUT1 and GLUT3 transporters that ignore insulin, protecting supply during fasting. During prolonged starvation it adapts to ketones for roughly two thirds of its fuel, sparing glucose and slowing muscle protein breakdown.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Tissue", "Glycolysis habit", "Reason"],
+    "rows": [
+     ["Brain", "Obligate glucose, then ketones", "Fatty acids cross barrier poorly"],
+     ["Red cells", "Glycolysis only", "No mitochondria"],
+     ["Renal medulla, retina", "Mostly glycolytic", "Low oxygen environment"],
+     ["Exercising muscle", "Glycolysis plus oxidation", "Burst power exceeds oxygen supply"]
+    ]
+   }
+  },
+  {
+   "tx": "Many cancers rewire toward **aerobic glycolysis**, the Warburg effect, fermenting glucose to lactate even when oxygen is available. Rapid glycolysis supplies carbon skeletons for nucleotides, amino acids and lipids that division demands, at the cost of huge glucose uptake. That appetite is exploited clinically: fluorodeoxyglucose PET scanning lights up tumours precisely because they trap the glucose analogue through hexokinase.",
+   "say": "Many cancers ferment glucose to lactate even when oxygen is available, the Warburg effect. Rapid glycolysis supplies carbon skeletons for division at the cost of huge glucose uptake. Fluorodeoxyglucose PET lights up tumours because they trap the analogue through hexokinase.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Normal aerobic cell", "points": ["Pyruvate oxidised fully", "About 30 ATP per glucose", "Modest glucose uptake"]},
+    "right": {"title": "Warburg cancer cell", "points": ["Lactate despite oxygen", "2 ATP per glucose in cytosol", "Avid glucose uptake on PET"]
+    }
+   }
+  },
+  {
+   "tx": "Diabetes distorts this integration in opposite directions across tissues: muscle and fat resist insulin so **GLUT4** entry and glucose disposal lag, while liver behaves as if fasting, overproducing glucose through unopposed gluconeogenesis. Post meal hyperglycaemia therefore combines under uptake with over production. Restoring control means addressing both arms, which is why drugs pair hepatic suppression with peripheral sensitisation or urinary disposal.",
+   "say": "Diabetes distorts integration in opposite directions. Muscle and fat resist insulin so disposal lags, while liver overproduces glucose as if fasting. Post meal hyperglycaemia combines under uptake with over production, which is why drugs pair hepatic suppression with disposal.",
+   "vis": {
+    "kind": "flow",
+    "title": "Two arms of diabetic hyperglycaemia",
+    "nodes": [
+     {"id": "res", "label": "Muscle and fat resist insulin"},
+     {"id": "liv", "label": "Liver overproduces glucose"},
+     {"id": "high", "label": "Blood glucose stays high"}
+    ],
+    "edges": [["res", "high"], ["liv", "high"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

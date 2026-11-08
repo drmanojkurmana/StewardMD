@@ -3,16 +3,27 @@
  "module": "mic-innate-antigens",
  "subject": "microbiology",
  "title": "Innate immunity, complement and antigens",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
-   "tx": "**Innate immunity** strikes without memory: skin and mucosa with lysozyme and defensins bar entry, while **pattern recognition receptors** (TLR4 sensing LPS, TLR5 flagellin, NOD sensing muramyl dipeptide) trigger inflammation. **Phagocytosis** (chemotaxis, opsonin dependent engulfment by C3b and IgG Fc, respiratory burst killing) clears most invaders; **NK cells** kill MHC-I bare targets virally infected, and **interferons** (alpha beta antiviral, gamma macrophage activating) bridge to adaptive responses. Fever with acute phase proteins (CRP, MBL) follows IL-1, IL-6 and TNF.",
-   "say": "No memory, no delay: innate strikes first. Missing MHC invites NK killing.",
+   "tx": "Innate immunity acts at once with no memory. Skin and mucosa with lysozyme and defensins bar entry, while **pattern recognition receptors** such as TLR4 for LPS, TLR5 for flagellin and NOD for muramyl dipeptide trigger inflammation. **Phagocytosis** follows chemotaxis, with C3b and IgG Fc driving engulfment and the respiratory burst finishing the kill. **NK cells** destroy targets that have lost MHC I, typically virus infected cells. Interferons bridge the gap: alpha and beta block viruses while gamma activates macrophages, and IL-1, IL-6 and TNF raise fever with CRP and MBL.",
+   "say": "Innate immunity is the response that acts within minutes and remembers nothing from earlier encounters. Barriers and sensors come first: intact skin and mucosa block entry while receptors such as TLR4 recognise bacterial endotoxin and raise the alarm. Neutrophils are then drawn to the site, coat microbes with C3b and antibody, swallow them and kill them with bleach like chemicals. Cells that hide MHC class one are eliminated by natural killer cells, which is how virus infected cells are removed. Interferon and fever signals then slow viral growth and raise body heat, which is how the early response holds the line.",
    "vis": null
   },
   {
-   "tx": "**Complement** converges on C3 through three doors: **classical** (C1q binding antibody Fc, needs immune complexes), **lectin** (mannose binding lectin on microbial sugars), and **alternative** (spontaneous C3 tickover amplified on unprotected surfaces, properdin stabilised). Downstream, **C3b opsonises**, **C3a and C5a** (anaphylatoxins) recruit and degranulate mast cells, and **MAC C5b to C9** punches osmotic holes. Regulation (C1 inhibitor, factor H, factor I, DAF, protectin) protects self; paroxysmal nocturnal haemoglobinuria (GPI anchor loss, Ham and sucrose tests, eculizumab) shows regulation failure.",
-   "say": "Three doors, one C3: classical needs antibody, lectin needs sugar, alternative ticks over. C3b sticks, C5a calls, MAC kills.",
+   "tx": "The four panels track a neutrophil from summons to kill. **Chemotaxis** comes first as IL-8, LTB4 and C5a draw the cell toward bacteria. **Opsonisation** follows as C3b and IgG Fc coat the microbe and grip CR1 and Fc receptors. The panels then show phagosome lysosome fusion pouring enzymes over the trapped bacteria. Killing closes the sequence through the **respiratory burst**, where NADPH oxidase makes superoxide and MPO converts it to bleach like HOCl. Defects at this last step explain chronic granulomatous disease.",
+   "say": "Read this image left to right as the life story of one neutrophil. Chemical signals such as interleukin 8 and C5a summon the cell toward bacteria, which is the chemotaxis panel. The microbe is then coated with C3b and antibody so that receptors on the neutrophil can grip it firmly, which is opsonisation. The third panel shows the trapped bacteria fused with enzyme filled sacs, and the last panel shows the respiratory burst in which oxidase and myeloperoxidase generate bleach that destroys the bacteria. Examiners link this final step to chronic granulomatous disease, which is detected by the DHR test.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mic-innate-antigens-gen1.webp",
+    "alt": "Neutrophil migrating to bacteria, opsonin binding, phagosome lysosome fusion, then NADPH oxidase respiratory burst",
+    "caption": "Four panel neutrophil sequence from chemotaxis through oxidative burst killing. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Complement runs three roads into C3. The **classical pathway** opens when C1q grips antibody Fc, the lectin road opens when MBL grips microbial sugars, and the **alternative pathway** ticks over spontaneously on bare surfaces, steadied by properdin. Past C3, C3b coats targets, C3a and C5a act as anaphylatoxins, and **MAC** from C5b to C9 punches osmotic holes. Regulators such as C1 inhibitor, factor H, factor I, DAF and protectin guard self, and loss of the GPI anchor produces PNH, diagnosed by Ham and sucrose tests and treated with eculizumab.",
+   "say": "Complement is a cascade that converges on one molecule, C3, and the diagram maps all three roads that reach it. The classical road is opened by antibody bound to target, the lectin road by microbial sugars, and the alternative road by constant low level tickover on unprotected surfaces. Once C3 is split, C3b coats microbes for eating, C3a and C5a summon inflammatory cells, and the membrane attack complex drills holes that lyse the target. Regulators protect our own cells at every stage, and failure of this control produces diseases such as night time haemoglobin in urine.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/mic-innate-antigens-fig1.webp",
@@ -22,13 +33,13 @@
    }
   },
   {
-   "tx": "**Complement deficiencies** pattern predictably: **C1 inhibitor deficiency** (hereditary angioedema, C4 low with normal C3, danazol or C1 concentrate, no urticaria unlike allergy), **C3 deficiency** (recurrent pyogenic infections, worst opsonic failure), **terminal C5 to C9 deficiency** (recurrent neisserial disease), **factor H deficiency** (atypical HUS with microangiopathy). **Eculizumab** (anti C5, PNH and aHUS) mandates meningococcal vaccination as MAC blockade invites neisseriae. CH50 (classical) with AH50 (alternative) screens; component assays pinpoint.",
-   "say": "Swelling without itch with low C4 is C1 inhibitor deficiency. Eculizumab demands meningococcal vaccines.",
+   "tx": "Complement defects fail in set patterns. **C1 inhibitor deficiency** causes hereditary angioedema with low C4 but normal C3, treated with danazol or C1 concentrate, and it has no urticaria unlike allergy. C3 deficiency brings recurrent pyogenic infections from opsonic failure, while **terminal C5 to C9 deficiency** invites recurrent neisserial disease. Factor H failure produces atypical HUS with microangiopathy. **Eculizumab** blocks C5 in PNH and atypical HUS, so meningococcal vaccination is mandatory before MAC blockade. CH50 tests the classical road and AH50 the alternative, and component assays pinpoint the gap.",
+   "say": "Each complement defect has a signature, so learn them as pairs. C1 inhibitor deficiency causes episodic swelling without any itch, and blood shows low C4 with normal C3, which is the reverse of what allergy shows. C3 deficiency is the worst opsonic defect and brings repeated pus forming infections, while loss of the terminal components invites repeated neisserial attacks and factor H loss causes atypical haemolytic uraemic syndrome. The monoclonal antibody eculizumab blocks C5 and is used in PNH and atypical HUS, but every recipient must first receive meningococcal vaccine because MAC blockade removes neisserial defence. Screening starts with CH50 and AH50, which are functional assays of the two roads.",
    "vis": null
   },
   {
-   "tx": "**Antigens** need shape and size: complete antigens immunise alone while **haptens** (penicillin, nickel) need carrier proteins to turn immunogenic. **Epitopes** are the contact patches antibodies grip; **T dependent antigens** (proteins, memory with class switching) differ from **T independent** (polysaccharides, IgM only, no memory, poor infants). **MHC-I** (all nucleated cells, CD8 killers) versus **MHC-II** (antigen presenting cells, CD4 helpers) route responses; **superantigens** (TSST, streptococcal pyrogenic exotoxins) clamp MHC-II outside the groove firing polyclonal storms.",
-   "say": "Small haptens need carriers to immunise. Polysaccharides make IgM without memory; proteins remember.",
+   "tx": "Antigens must be shaped to immunise. **Haptens** such as penicillin and nickel are too small and need a carrier protein to immunise, while epitopes are the patches antibodies grip. **T dependent antigens** are proteins that earn memory and class switching, unlike **T independent** polysaccharides that raise IgM only with no memory in infants. MHC I on all nucleated cells feed CD8 killers, while MHC II on antigen presenting cells guide CD4 helpers. **Superantigens** such as TSST and streptococcal toxins grip MHC II outside the groove and fire polyclonal storms.",
+   "say": "Size decides whether a molecule can immunise on its own. Haptens such as penicillin are too small to matter until they attach to a carrier protein, which is why drug allergies need that partnership. Protein antigens recruit T cell help and therefore earn memory and class switching, while plain polysaccharides raise only IgM and leave infants unprotected, which is why conjugate vaccines were built. MHC class one displays peptides to killer CD8 cells on every nucleated cell, while class two presents to helper CD4 cells. Superantigens short circuit the system by gripping MHC outside the groove and firing whole families of T cells at once.",
    "vis": {
     "kind": "table",
     "cols": [

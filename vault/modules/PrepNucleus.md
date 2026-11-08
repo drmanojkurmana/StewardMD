@@ -140,8 +140,34 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   tap to enlarge (opaque overlay, tap again for 2.2x, back/Escape closes it first). Finish: +10 XP a step on the first
   finish only, then "3 quick questions" through the normal runner (`study` mode: FSRS cards, mistakes), "Read again".
 - **Narration:** `Capacitor.Plugins.TextToSpeech` on native (`lang en-IN`, `rate` = speed), `speechSynthesis` on the
-  web; nothing leaves the phone. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
+  web; nothing leaves the phone.
+  Text goes through `sayText` first (mg, %, >, markdown spoken as words) and is read a sentence at a time (`sayChunks`,
+  160 ms rest between them). The voice is `bestVoice`: an installed on-device English voice whose identifier says
+  premium, enhanced, neural or Siri (iOS `voiceURI` is the AVSpeechSynthesisVoice identifier; the plugin's `voice` is an
+  index into that list); compact, Eloquence, novelty and network voices (`localService:false`) are never chosen, and
+  with none installed the en-IN system default stays. The better voices are a user download (iOS Settings,
+  Accessibility, Spoken Content, Voices), so a phone with only compact voices sounds as before. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
   reader, closing PrepNucleus or Ask MaiK stops it. No voice available: the play and speed controls are not drawn.
+  **Natural voice (`prep-voice.js`, optional):** Phonon 31M (Gradium phonon-31m-en, Apache-2.0, 64.5 MB at 8 bits, pinned
+  commit), its one default voice, run by the vendored `phonon-tts` 0.6.0 WebAssembly runtime (`vendor/phonon-tts/`, MIT or
+  Apache-2.0; single-thread builds only, because the threaded one needs a cross-origin isolated page the app does not
+  have) in a module worker. It reads the text itself: no phonemizer, no lexicon. The first tap of Play starts the
+  download (Hugging Face, kept in the Cache API `phonon-tts-v1`) and reading waits for it, so the lesson is read by Phonon from the first word (owner's call: no phone voice meanwhile); a card above the bar shows the one-time download (fill updated in place, then "Natural voice ready"
+  for 1.8 s). Once downloaded it is never fetched again: `prep_voice_have_phonon` in localStorage marks it (no card on
+  later loads), and `navigator.storage.persist()` asks the phone not to evict the Cache API copy. A voice downloaded
+  before loads when a lesson opens and is released when it closes. No model name or voice switch is shown anywhere.
+  Read-along: the sentence being spoken is highlighted (`.pn-sent.on`), mapped from spoken pieces to displayed sentences
+  by `alignSay` (word overlap, monotonic). After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
+  real time and `usable()` is false, so the lesson uses the system voice rather than stall between sentences; the system voice is otherwise only the fallback when Phonon cannot load. Each
+  sentence (`sayChunks`) is rendered, the next one rendered ahead, and played through one `<audio>` element unlocked in
+  the Play tap (WebAudio is muted by the iOS silent switch); the lesson's speed is its `playbackRate`.
+  `window.SMD_PREP_VOICE = false` turns it off (the UI tests do). Tests use a stub of the module
+  (`test/run-prep-voice-ui.mjs`). **The real Phonon runtime has not been run by us** (the sandbox blocked executing the
+  npm package): its speed, sound and behaviour in the iOS and Android WebViews (module worker on the app's scheme,
+  Cache API writes from a worker) are unverified, and so is whether phones keep up. History: Kokoro-82M (92 MB,
+  onnxruntime-web, CMU lexicon phonemizer) was built and merged in #1966 beside Phonon for a comparison, rendered 2.3
+  times real time on a 4-core VM, and was removed on the owner's call; the system-voice work (voice choice, units as
+  words, sentence by sentence) stays as the fallback.
 - **Data and offline:** lessons, the index and `prep/lessons/media/*` ship in www (`scripts/build-www.sh`); each lesson
   is also kept in IndexedDB `prep-bank` under `lessons/v1/<module>.json`. **Generated lessons are served from R2**
   (2026-10-06, branch `feat/prep-native`): `prep-bank/v1/lessons/index.json` + `<module>.json` (1,082 modules, uploaded
@@ -1298,6 +1324,14 @@ keyboard; conversation and box hidden under the keyboard, the page showing throu
   counts and "finished", plus up to 3 lessons in progress; rows use the existing `l-subject` / `l-open` actions; left out
   when prep-lessons.js is missing), Tests (renderMocks), You (renderMenu). The home bar's Menu button is hidden
   (`visibility`) while the bar shows.
+- You card (`meCard` in prep.js): the account's name and photo from `SMD_ACCOUNT.profile()` (initial when no photo,
+  Guest when signed out), the course and level, and an Edit (or Sign in) pill. Tapping it opens the app's Profile page
+  (`SMD_openProfile`, home.js: role, registration, hospital, degree, speciality, city, phone); that sheet (`.hv-sheet`,
+  z-index 640) would sit under `#smdPrep` (885), so `body.pn-over-sheet` lifts it to 892 while it is open and a
+  MutationObserver drops the class and redraws You when it closes. Gotcha (2026-11-06): the You screen body is
+  `.pn-body.pn-menu` (prep-nav.js matches it), so the question screen's More popup is `.pn-qmenu`; when both used
+  `pn-menu` the popup's absolute, max-content styles blanked the You screen on the phone. `run-prep-nav-ui.mjs`
+  (ENGINES=chromium runs without WebKit) asserts You shows its rows full width and the profile card opens Profile.
 - Navigation: a tab sets the stack to `[home]` or `[home, root]` (Android back from a tab goes home), cross-fade (nav 0).
   Current tab = nearest tab root down the stack. Tapping the current tab pops to its root (back slide); at the root it
   scrolls to the top. Each tab root keeps its scroll (`tabY`). Focus returns to the pressed tab after a keyboard switch.

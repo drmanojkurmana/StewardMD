@@ -3,7 +3,7 @@
  "module": "sgm-drug-interactions",
  "subject": "ss-general-medicine",
  "title": "Drug interactions and cytochrome P450",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "Cytochrome P450 (CYP) enzymes are **monooxygenases** found mainly in the liver, with a single heme group in the active site. They need NADPH and molecular oxygen to work. Their main job is phase I biotransformation, converting lipophilic drugs into more hydrophilic metabolites so the kidney or bile can clear them. CYP3A4 and CYP2D6 are the isoforms most important for clinical drug interactions.",
@@ -57,6 +57,17 @@
       "Example: potent enzyme inducer class"
      ]
     }
+   }
+  },
+  {
+   "tx": "The left panel shows **inhibition** where a blocker plugs the enzyme heme site so unused substrate piles up and toxicity strikes quickly. The right panel shows **induction** where a signal through nuclear receptors orders fresh enzyme copies, so drug levels sink and therapy fails after a delay. Drugs with a **narrow therapeutic index** suffer most, since small level swings flip control into harm or failure.",
+   "say": "On the left the enzyme is blocked, so each dose adds to a growing pile of drug and poisoning can appear fast. On the right the cell builds many extra enzymes, so each dose is chewed up and blood levels fall until the treatment stops working days later. Drugs with a small safe window are the danger zone, because a modest shift in level means either toxicity or failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgm-drug-interactions-gen1.webp",
+    "alt": "Split cell view contrasting blocked enzyme with piled drug against multiplied enzymes with falling drug.",
+    "caption": "Diagram contrasting enzyme blockade with enzyme copying and drug level shifts, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

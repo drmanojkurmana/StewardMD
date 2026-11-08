@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-pancreatitis",
- "subject": "medicine",
- "title": "Acute and chronic pancreatitis",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**epigastric** boring back radiates, **relief** leaning fluids starves, **gallstones** fat flatus female, **alcohol** units binges, **drugs** azathioprine statins, **hypertriglyceridaemia** eruptive milky, **mumps** Coxsackie children, **family** PRSS1 young) with **viva** (**leaning** forward reliever, **alcoholic** binger gallstone) profiles; **scores** (Glasgow BISAP predicts) stages. Bellies bore.",
-   "say": "Epigastrics reliefs gallstones alcohols is history: drugs harm milks cloud mumps swell families mutate scores stage Glasgows count BISAPs grade attacks recur causes hunt stones pass. Pains pierce.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**tachycardia** SIRS fevers, **Grey-Turner** flanks bruise, **Cullen** umbilical bleeds, **epigastric** tender guarding, **jaundice** CBD compresses, **ascites** enzymes leak, **tetany** calcium saponifies, **confusion** delirium tremens) with **bedside** (**urine** output kidneys, **oximetry** ARDS warns, **glucose** diabetes stresses) watches; **shock** (third-spacing fills) fills. Bellies bruise.",
-   "say": "Tachycardias Greys Cullens epigastrics is exam: jaundices block ascites fill tetanies cramp confusions shake urines measure oximetries dip glucoses rise shocks fill lines run surgeries consult. Flanks stain.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**lipase** 3x diagnoses, **CT** necrosis collections, **ultrasound** gallstones sludge, **LFT** CBD stones ALT, **calcium** low saponifies, **triglycerides** milky causes, **MRCP** duct stones divides, **genetics** PRSS1 young) with **differentials** (**perforated** air boards operates, **MI** troponin ECG ages, **aortic** tearing migrates, **ectopic** pregnancy tests) sorts; **chronic** (calcifies atrophy Creon) scars. Enzymes leak.",
-   "say": "Lipases CTs ultrasounds is Ix: LFTs rise calciums fall milks separate MRCPs map genes mutate perforations burst MIs strain aortics tear ectopics bleed chronics stone diabetises abstinences hold Pseudocysts drain stents bridge. Glands digest.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-pancreatitis-fig1.webp",
-    "alt": "Axial CT scan of the abdomen demonstrating areas of pancreatic necrosis and peripancreatic fluid collections, characteristic of severe acute pancreatitis.",
-    "caption": "CT scan: necrosis and fluid collections",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**fluids** aggressive monitors, **analgesia** ladders PCA blocks, **nutrition** early enteral feeds, **ERCP** cholangitis stones drains, **antibiotics** infected necrosis, **ITU** organ failure supports, **cholecystectomy** index gallstones, **chronic** Creon diabetes abstains) with **traps** (**necrosis** walled drains, **pseudocyst** 6-week waits, **splenic** vein thrombosis bleeds, **diabetes** 3c screens) closes; **quit** (alcohol smoking) counsels. Glands rest.",
-   "say": "Fluids analgesias nutritions is Rx: ERCPs drain antibiotics seed ITUs support gallbladders remove chronics replace necroses wall pseudocysts wait veins clot diabetises screen quits halve relapses watch wishes respect. Pains ease.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-221",
-  "bk2-med-222",
-  "bk2-med-223",
-  "bk2-med-224",
-  "bk2-med-225",
-  "bk2-med-226",
-  "bk2-med-227",
-  "bk2-med-228",
-  "bk2-med-229",
-  "bk2-med-230"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon3",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 5,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-pancreatitis",
+  "quiz": [
+    "bk2-med-221",
+    "bk2-med-222",
+    "bk2-med-223",
+    "bk2-med-224",
+    "bk2-med-225",
+    "bk2-med-226",
+    "bk2-med-227",
+    "bk2-med-228",
+    "bk2-med-229",
+    "bk2-med-230"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon3",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about boring epigastric pain that radiates to the back, and relief on leaning forward with starving fluids. Ask about fatty flatus in women with gallstones, unit binges of alcohol, azathioprine with statin drugs, milky triglycerides, childhood mumps, and young familial disease, which is typical. Stage attacks by Glasgow with BISAP scoring, and hunt stones that pass.",
+      "tx": "Ask about boring epigastric pain that radiates to the back, and relief on leaning forward with **starving fluids**. Ask about fatty flatus in women with gallstones, unit binges of alcohol, azathioprine with statin drugs, milky triglycerides with eruptive xanthomas, childhood mumps with Coxsackie, and young familial disease by **PRSS1 testing**. Stage attacks by Glasgow with **BISAP scoring**, and hunt stones that pass.",
+      "vis": null
+    },
+    {
+      "say": "Read tachycardia with fever of SIRS, and inspect flank bruising with umbilical bleeding. Press tender guarding of the epigastrium, read jaundice of compressed bile duct, and tap ascites of leaking enzymes. Test tetany of saponified calcium, watch confusion of alcohol withdrawal, and track urine with oximetry and glucose.",
+      "tx": "Read tachycardia with fever of SIRS, and inspect flank bruising of **Grey Turner** with umbilical bleeding of Cullen. Press tender guarding of the epigastrium, read jaundice of compressed bile duct, and tap ascites of leaking enzymes. Test tetany of saponified calcium, watch confusion of **alcohol withdrawal**, and track urine with oximetry and **glucose stress** for shock with third spacing.",
+      "vis": null
+    },
+    {
+      "say": "Look at the abdomen and notice periumbilical bruising of Cullen sign with flank bruising of Grey Turner sign. These bruises mark severe necrotising pancreatitis with SIRS, not mild oedematous disease. For the exam, link Cullen with periumbilical blood tracking and Grey Turner with flank tracking.",
+      "tx": "The abdomen shows periumbilical bruising of **Cullen sign** with flank bruising of **Grey Turner** sign from retroperitoneal bleed. These bruises mark severe necrotising pancreatitis with SIRS, not mild oedematous disease. For the exam, link Cullen with periumbilical blood tracking, Grey Turner with flank tracking, and both with **intensive monitoring**.",
+      "vis": {
+        "alt": "Abdomen with periumbilical bruising and flank bruising labeled Cullen and Grey Turner signs.",
+        "ar": 1.3393,
+        "caption": "Periumbilical and flank bruising in pancreatitis. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-pancreatitis-gen1.webp"
+      }
+    },
+    {
+      "say": "Diagnose with lipase past threefold rise, and map necrosis with collections by CT. Find gallstones with sludge by ultrasound, read ALT for duct stones, and track low calcium with saponification. Separate milky triglycerides as cause, divide duct stones by MRCP mapping, and test the young by genetics. Exclude perforation, infarction, aortic tear and ectopic pregnancy, which is essential.",
+      "tx": "Diagnose with lipase past **threefold rise**, and map necrosis with collections by CT. Find gallstones with sludge by ultrasound, read ALT for duct stones on LFT, and track low calcium with saponification. Separate milky triglycerides as cause, divide duct stones by **MRCP mapping**, and test the young by **PRSS1 genetics**. Exclude perforation, infarction, aortic tear and ectopic pregnancy, and scar chronic disease by calcification.",
+      "vis": {
+        "alt": "Axial CT scan of the abdomen demonstrating areas of pancreatic necrosis and peripancreatic fluid collections, characteristic of severe acute pancreatitis.",
+        "ar": 1.8349,
+        "caption": "CT scan: necrosis and fluid collections",
+        "kind": "image",
+        "src": "v1/lessons/media/med-pancreatitis-fig1.webp"
+      }
+    },
+    {
+      "say": "Fill aggressively with fluid resuscitation under monitoring, and climb analgesia ladders to PCA with blocks. Feed early by enteral route, drain cholangitis stones by urgent ERCP, and reserve antibiotics for infected necrosis. Support organ failure in ITU, remove index gallstones by cholecystectomy, and counsel quitting alcohol with smoking.",
+      "tx": "Fill aggressively with **fluid resuscitation** under monitoring, and climb analgesia ladders to PCA with blocks. Feed early by enteral route, drain cholangitis stones by **urgent ERCP**, and reserve antibiotics for infected necrosis. Support organ failure in ITU, remove index gallstones by cholecystectomy, replace chronic loss with Creon and diabetes care, and counsel quitting alcohol with **smoking cessation**.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Acute and chronic pancreatitis",
+  "v": 1
 }

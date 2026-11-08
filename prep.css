@@ -424,7 +424,8 @@ body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: bri
 .pn-root .pn-vzi { flex: 0 0 auto; display: inline-flex; margin-top: 1px; color: var(--pn-pri); }
 .pn-root .pn-vzi svg { width: 16px; height: 16px; }
 /* bottom bar: a solid shelf with a hairline; the text scrolls under it */
-.pn-root .pn-lsn-bar { position: relative; z-index: 1; flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--pn-edge); background: var(--pn-bg); }
+/* Its own layer above the step: on iOS a 3D flip card scrolled under the bar otherwise takes the Play tap. */
+.pn-root .pn-lsn-bar { position: relative; z-index: 5; transform: translateZ(0); flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--pn-edge); background: var(--pn-bg); }
 .pn-root .pn-lsn-bar > *, .pn-root .pn-lsn-bin > * { flex: 0 0 auto; }
 /* The controls sit in the 720 px reading column; the shelf behind them stays the full width. */
 .pn-root .pn-lsn-bin { display: flex; align-items: center; gap: 8px; width: 100%; max-width: 720px; margin: 0 auto; }
@@ -1087,6 +1088,12 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-sublearn > svg { color: var(--pn-pri); flex-shrink: 0; }
 .pn-root .pn-sl-n { font-size: 13.5px; font-weight: 600; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
 .pn-root .pn-sl-n::before { content: "\00b7"; margin-right: 8px; }
+/* An atlas button (prep-imglearn.js atlasBtn: "Image Library · Every image in the app") beside Practise in a two-column
+   row on iPad: the title stays on one line and the note shortens with an ellipsis, instead of both wrapping into a
+   three-line block (2026-11-07). */
+.pn-root .pn-sublearn { min-width: 0; }
+.pn-root .pn-sublearn > .pn-sl-t { flex: none; white-space: nowrap; }
+.pn-root .pn-sublearn > .pn-sl-n { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 @media (min-width: 700px) {
   .pn-root .pn-subacts { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
   .pn-root .pn-subacts > .pn-btn:only-child, .pn-root .pn-subacts > .su-lastb, .pn-root .pn-subacts > .pn-subgo:not(:has(+ .pn-sublearn)) { grid-column: 1 / -1; }
@@ -1132,6 +1139,11 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   .pn-root .pn-run:not(.pn-battle) .pn-qw:not(:has(> .pn-yq-fig, > .pn-stack)) > .pn-q { position: sticky; top: 0; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > :is(.pn-yq-fig:last-of-type, .pn-stack) { position: sticky; top: 0; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-stack { margin-top: 2px; }
+  /* The IQoach intro comes before the stem in the markup: float it to the top of the answer column so the stem starts
+     at the top on the left (2026-11-07: it pushed the stem down level with option A). What follows in the answer column
+     clears it. */
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-intro { float: right; clear: right; width: calc(100% - var(--pn-ql) - 14px); margin-left: 0; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > :not(.pn-yq-tags, .pn-q, .pn-yq-fig, .pn-stack, .ky-intro) { clear: right; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb + .pn-navrow { margin-bottom: 0; }   /* the footer row ends flush with the scroller */
 }
 
@@ -1176,37 +1188,8 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-missed .pn-rv-ok small { color: var(--pn-ok); }
 .pn-root .pn-missed .pn-rv-no small { color: var(--pn-bad); }
 
-/* ---- Image viewer (prep-viewer.js): one full-screen viewer for every enlarged image ----
-   Always dark (a light-box reads images best on near black, in both themes). It owns every touch on it (touch-action:
-   none; the script keeps the page behind still). Controls are 44 px, inside the safe areas; the bottom bar holds zoom
-   out, the zoom level (tap to fit) and zoom in, for anyone who cannot pinch. */
-.pv { position: fixed; inset: 0; z-index: 2147483000; display: flex; flex-direction: column; color: #f5f3ee; touch-action: none; overscroll-behavior: contain;
-  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
-  font-family: var(--sans, -apple-system, "Segoe UI", Roboto, sans-serif); }
-.pv:focus { outline: none; }
-.pv-scrim { position: absolute; inset: 0; background: #0e0e1c; }
-.pv-stage { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; touch-action: none; cursor: zoom-in;
-  padding: calc(64px + env(safe-area-inset-top, 0px)) calc(8px + env(safe-area-inset-right, 0px)) calc(88px + env(safe-area-inset-bottom, 0px)) calc(8px + env(safe-area-inset-left, 0px)); }
-.pv.pv-zoomed .pv-stage { cursor: grab; }
-.pv-img { display: block; flex: 0 0 auto; max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 6px; background: #fff;
-  transform-origin: 50% 50%; will-change: transform; -webkit-user-drag: none; pointer-events: none; }
-.pv-top, .pv-bot { position: absolute; left: 0; right: 0; z-index: 1; display: flex; align-items: center; gap: 12px; pointer-events: none; transition: opacity 180ms ease-out; }
-.pv-top { top: 0; padding: calc(8px + env(safe-area-inset-top, 0px)) calc(12px + env(safe-area-inset-right, 0px)) 8px calc(16px + env(safe-area-inset-left, 0px));
-  background: linear-gradient(180deg, rgba(14, 14, 28, .85), rgba(14, 14, 28, 0)); }
-.pv-bot { bottom: 0; flex-direction: column; gap: 6px; padding: 8px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(0deg, rgba(14, 14, 28, .85), rgba(14, 14, 28, 0)); }
-.pv-cap { flex: 1 1 auto; min-width: 0; margin: 0; font-size: 13px; line-height: 1.4; color: #c3c8d8; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.pv-b { pointer-events: auto; flex: 0 0 auto; min-width: 44px; height: 44px; padding: 0 10px; border: 0; border-radius: 22px; background: rgba(255, 255, 255, .14); color: #fff;
-  display: inline-flex; align-items: center; justify-content: center; font: inherit; font-size: 14px; font-weight: 650; font-variant-numeric: tabular-nums; cursor: pointer;
-  touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: transform 120ms cubic-bezier(.23, 1, .32, 1), background-color 120ms ease; }
-.pv-b:active { transform: scale(.92); background: rgba(255, 255, 255, .24); }
-.pv-b:focus-visible { outline: 2px solid #efc07b; outline-offset: 2px; }
-.pv-x { width: 44px; padding: 0; }
-.pv-zb { display: inline-flex; gap: 8px; pointer-events: auto; }
-.pv-pct { min-width: 72px; }
-.pv-hint { margin: 0; font-size: 12px; color: #a9b1c7; text-align: center; }
-.pv.pv-zoomed .pv-hint { opacity: 0; }
-@media (hover: hover) and (pointer: fine) { .pv-b:hover { background: rgba(255, 255, 255, .22); } }
-@media (prefers-reduced-motion: reduce) { .pv-b, .pv-top, .pv-bot { transition: none; } }
+/* The image viewer's styles (.pv*) moved to image-viewer.css (2026-11-05): every image in the app opens in it now
+   (image-zoom.js), so they load with the app, not with PrepNucleus. */
 
 /* ---- App shell (mobile-native pass, 2026-10-09) ----
    The overlay is the app: it never moves, nothing behind it scrolls, only the screen body (.pn-body) scrolls, and only
@@ -1638,6 +1621,20 @@ body.dark .pn-root .pn-self-c .ln { stroke: var(--pn-c-amber); } body.dark .pn-r
 .pn-root .pn-me-av .pn-lg-d, body.dark .pn-root .pn-me-av .pn-lg-l { display: none; }
 body.dark .pn-root .pn-me-av .pn-lg-d { display: block; }
 .pn-root .pn-me .pn-tb b { font-family: var(--pn-disp); font-size: 20px; letter-spacing: -.025em; }
+/* The You card is a button to the app's Profile page when the account layer is there. */
+.pn-root .pn-me-btn { width: 100%; border: 0; text-align: left; font: inherit; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform var(--pn-d-press, 120ms) ease; }
+.pn-root .pn-me-btn:active { transform: scale(.985); }
+.pn-root .pn-me-btn:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
+.pn-root .pn-me .pn-tb { flex: 1 1 auto; min-width: 0; }
+.pn-root .pn-me .pn-tb b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pn-root .pn-me-av { overflow: hidden; }
+.pn-root .pn-me-pic { width: 100%; height: 100%; object-fit: cover; }
+.pn-root .pn-me-ini { font-family: var(--pn-disp); font-size: 22px; font-weight: 750; color: var(--pn-tile-ink, var(--pn-pri)); }
+.pn-root .pn-me-ed { flex: 0 0 auto; min-height: 32px; padding: 0 14px; display: inline-flex; align-items: center; border-radius: var(--pn-r-pill); background: var(--pn-pri-soft); color: var(--pn-pri); font-size: 13px; font-weight: 700; }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-me-btn { transition: none; } }
+/* The app's Profile sheet (home.js #hvSheet, z-index 640) opened from PrepNucleus (z-index 885): lifted above while open. */
+body.pn-over-sheet .hv-sheet { z-index: 892; }
+body.pn-over-sheet .hv-scrim { z-index: 891; }
 
 /* ---- Pressables: a specular sheen crosses a primary button on press (React Bits ShinyText / SpecularButton, as one
    CSS sweep started by prep-tide.js on pointerdown), and a soft light follows the finger or pointer on cards
@@ -1686,7 +1683,17 @@ body.dark .pn-root :is(.pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext) { ba
 .pn-root .pn-qbs { margin: -4px 2px 10px; font-variant-numeric: tabular-nums; }
 
 .pn-root .pn-figrow { margin: 12px 0 4px; }
-.pn-root .pn-figchip { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+.pn-root .pn-figchip { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; max-width: 100%; box-sizing: border-box; padding-block: 8px; white-space: normal; text-align: left; }
+.pn-root .pn-figchip b { min-width: 0; overflow-wrap: anywhere; }
+.pn-root .pn-figchip > span { flex: 0 0 auto; }
+/* Question-actions menu: one "More" button in the bar, the four actions as labelled rows under it. */
+.pn-root .pn-more { position: relative; flex: 0 0 auto; }
+.pn-root .pn-qmenu { position: absolute; top: calc(100% + 6px); right: 0; z-index: 30; width: max-content; min-width: 220px; max-width: calc(100vw - 24px); display: flex; flex-direction: column; gap: 2px; padding: 6px; border-radius: 16px; background: var(--pn-card); box-shadow: var(--pn-elev, 0 8px 28px rgba(0, 0, 0, .18)); border: 1px solid var(--pn-edge); }
+.pn-root .pn-qmenu[hidden] { display: none; }
+.pn-root .pn-qmenu .pn-ib, .pn-root.pn-tided > .pn-bar .pn-qmenu .pn-ib, body.dark .pn-root.pn-tided > .pn-bar .pn-qmenu .pn-ib { box-sizing: border-box; width: 100%; height: 48px; flex: 0 0 auto; border-radius: 12px; justify-content: flex-start; gap: 12px; padding: 0 12px; box-shadow: none; background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+.pn-root .pn-qmenu .pn-ib svg { flex: 0 0 auto; }
+.pn-root .pn-qmenu .pn-ib::after { content: attr(aria-label); font-size: 15px; font-weight: 600; color: var(--pn-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.pn-root .pn-qmenu .pn-ib:active { background: var(--pn-s1); }
 /* Interactive figure card (prep-lessons.js figureHtml); the full-screen page is fig-viewer.js. */
 .pn-root .pn-figgo { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 12px 14px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-lg); background: var(--pn-card); color: var(--pn-text); font: inherit; text-align: left; cursor: pointer; }
 .pn-root .pn-figgo-i { flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--pn-pri); color: var(--pn-text); }
@@ -1890,11 +1897,69 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 }
 
 
-/* iPad: .pn-body spans the screen; its children are centred by gutters on the scroller. */
+/* iPad: .pn-body spans the screen; its children are centred by gutters on the scroller. The tabs and the filter row
+   (the subject's All / In progress / Completed / Unattempted control) take the same gutters, so their first chip starts
+   at the column's left edge instead of the window's (2026-11-07: they had kept the old 720 / 1072 px centred widths and
+   ran edge to edge over a 960 px column). --pn-fpad is the filter row's side padding; the segmented track and thumb
+   read it. */
 @media (min-width: 700px) {
-  .pn-root .pn-body { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  .pn-root { --pn-gutl: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); --pn-gutr: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  .pn-root .pn-body { padding-left: var(--pn-gutl); padding-right: var(--pn-gutr); }
   .pn-root .pn-body > * { max-width: none; margin-left: 0; margin-right: 0; }
+  .pn-root > .pn-filters, .pn-root:has(> #pnSub) > .pn-filters { width: 100%; max-width: none; margin-left: 0; margin-right: 0; --pn-fpad: var(--pn-gutl); padding-left: var(--pn-gutl); padding-right: var(--pn-gutr); }
+  .pn-root > .pn-tabs, .pn-root:has(> .pn-body.pn-home) > .pn-tabs { width: auto; max-width: none; margin-left: var(--pn-gutl); margin-right: var(--pn-gutr); }
+  .pn-root > .pn-filters.pn-seg::before { left: var(--pn-gutl); right: var(--pn-gutr); }
+  .pn-root > .pn-filters.pn-seg .pn-seg-th { left: calc(var(--pn-gutl) + 3px); width: calc((100% - var(--pn-gutl) - var(--pn-gutr) - 6px) / var(--n, 4)); }
 }
+
+/* More menu: opens from the button's corner, rows rise in one after another. */
+@keyframes pn-menu-in { from { opacity: 0; transform: translateY(-6px) scale(.88); } to { opacity: 1; transform: none; } }
+@keyframes pn-menu-row { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.pn-root .pn-qmenu { transform-origin: top right; animation: pn-menu-in 180ms var(--pn-ease, ease-out) both; }
+.pn-root .pn-qmenu .pn-ib { animation: pn-menu-row 220ms var(--pn-ease, ease-out) both; }
+.pn-root .pn-qmenu .pn-ib:nth-child(2) { animation-delay: 40ms; }
+.pn-root .pn-qmenu .pn-ib:nth-child(3) { animation-delay: 80ms; }
+.pn-root .pn-qmenu .pn-ib:nth-child(4) { animation-delay: 120ms; }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-qmenu, .pn-root .pn-qmenu .pn-ib { animation: none; } }
+
+/* Tables: tightened to fit when they nearly do; otherwise they scroll, fade the edge that has more, and nudge once. */
+.pn-root :is(.pn-vtbl, .pn-xt, .pn-pearl-tablewrap).pn-ovf { --pn-fl: 0px; --pn-fr: 0px; -webkit-mask-image: linear-gradient(90deg, transparent 0, black var(--pn-fl), black calc(100% - var(--pn-fr)), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, black var(--pn-fl), black calc(100% - var(--pn-fr)), transparent 100%); }
+.pn-root :is(.pn-vtbl, .pn-xt, .pn-pearl-tablewrap).pn-more-l { --pn-fl: 26px; }
+.pn-root :is(.pn-vtbl, .pn-xt, .pn-pearl-tablewrap).pn-more-r { --pn-fr: 34px; }
+.pn-root .pn-xt.pn-tight table { font-size: 13.5px; }
+.pn-root .pn-xt.pn-tight th, .pn-root .pn-xt.pn-tight td { min-width: 0; padding: 8px 8px; }
+.pn-root .pn-vtbl.pn-tight table { font-size: 13px; }
+.pn-root .pn-vtbl.pn-tight th, .pn-root .pn-vtbl.pn-tight td { padding: 8px 8px; }
+.pn-root .pn-vtbl.pn-tight tbody th { min-width: 0; }
+.pn-root .pn-pearl-tablewrap.pn-tight :is(th, td) { padding-inline: 8px; min-width: 0; }
+
+/* One-time natural voice download: a card floating just above the lesson bar. */
+.pn-root .pn-lsn-bar > .pn-vdl { position: absolute; left: 12px; right: 12px; bottom: calc(100% + 10px); padding: 12px 14px 12px; border-radius: var(--pn-r-lg); background: var(--pn-s1); border: 1px solid var(--pn-edge); animation: pn-vdl-in var(--pn-d-base, 260ms) var(--pn-ease, ease) both; }
+.pn-root .pn-vdl-row { display: flex; align-items: center; gap: 12px; }
+.pn-root .pn-vdl-ic { flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--pn-pri-soft); color: var(--pn-pri); }
+.pn-root .pn-vdl-ic .pn-wave { height: 14px; gap: 2px; }
+.pn-root .pn-vdl-ic .pn-wave i { width: 2.5px; height: 14px; opacity: 1; animation: pn-wave 820ms ease-in-out infinite alternate; }
+.pn-root .pn-vdl-ic .pn-wave i:nth-child(2n) { animation-delay: -420ms; animation-duration: 700ms; }
+.pn-root .pn-vdl-ic .pn-wave i:nth-child(3) { animation-delay: -160ms; }
+.pn-root .pn-vdl-t { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pn-root .pn-vdl-t b { font-size: 14px; font-weight: 700; color: var(--pn-text); }
+.pn-root .pn-vdl-t small { font-size: 12px; color: var(--pn-mut); line-height: 1.35; }
+.pn-root .pn-vdl-pc { flex: 0 0 auto; font-size: 15px; font-weight: 750; color: var(--pn-pri); font-variant-numeric: tabular-nums; }
+.pn-root .pn-vdl-track { position: relative; height: 6px; margin-top: 10px; border-radius: var(--pn-r-pill); background: var(--pn-ring-track, var(--pn-s2)); overflow: hidden; }
+.pn-root .pn-vdl-track i { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: var(--pn-pri); transition: width 400ms ease-out; overflow: hidden; }
+.pn-root .pn-vdl-track i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); transform: translateX(-100%); animation: pn-vdl-sheen 1.4s ease-in-out infinite; }
+.pn-root .pn-vdl.ok .pn-vdl-track i::after { animation: none; }
+.pn-root .pn-vdl.ok .pn-vdl-ic { background: var(--pn-ok-bg); color: var(--pn-ok); }
+.pn-root .pn-vdl.ok .pn-vdl-pc { color: var(--pn-ok); }
+.pn-root .pn-vdl.ok .pn-vdl-track i { background: var(--pn-ok); }
+@keyframes pn-vdl-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes pn-vdl-sheen { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-lsn-bar > .pn-vdl, .pn-root .pn-vdl-track i::after, .pn-root .pn-vdl-ic .pn-wave i { animation: none; } .pn-root .pn-vdl-track i { transition: none; } }
+
+/* Read-along: the sentence being spoken in a lesson step. */
+.pn-root .pn-sent { border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background-color 220ms ease; }
+.pn-root .pn-sent.on { background: var(--pn-pri-soft); }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-sent { transition: none; } }
 
 /* ---- Why option chips (free stored explanation) ---- */
 .pn-root .pn-why-wrap { margin: 10px 0 6px; display: flex; flex-direction: column; gap: 8px; }

@@ -1,66 +1,65 @@
 {
- "v": 1,
- "module": "med-endocarditis",
- "subject": "medicine",
- "title": "Infective endocarditis",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**fever** weeks rigors night sweats, **murmur** new changing regurgitant, **teeth** extraction decay procedures, **valve** rheumatic prosthetic IV lines, **weight** anorexia malaise arthralgia, **emboli** stroke splenic renal haematuria, **drugs** IVDU skin pops, **immune** SLE negative cultures) with **viva** (**young** IVDU tricuspid, **elderly** TAVI prosthetic) profiles; **Dukes** (major minor counts) scores. Fevers seed.",
-   "say": "Fevers rigors sweats murmurs teeth valves weights emboli drugs is history: young inject elderlies replace Dukes count majors minors cultures grow emboli fly. Hearts seed.",
-   "vis": null
-  },
-  {
-   "tx": "**Examination** (**pallor** anaemia clubbing, **Osler** tender finger pulp, **Janeway** painless palms, **splinters** nail beds bleed, **Roth** retinal ovals, **spleen** tender infarcts, **murmurs** changing aortic mitral, **failure** new regurgitation) with **bedside** (**urine** haematuria protein, **fundi** Roth spots, **skin** purpura infarcts) spots; **neuro** (mycotic aneurysm bleeds) watches. Hands spot.",
-   "say": "Pallors Oslers Janeways splinters Roths spleens is exam: urines bloody fundi spotted skins bruised neuros bleed aneurysms burst emboli seed valves leak. Fingers nodes.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-endocarditis-fig1.webp",
-    "alt": "Composite image showing Osler nodes, Janeway lesions, splinter hemorrhages, clubbing, and a Roth spot, characteristic physical signs of infective endocarditis.",
-    "caption": "Key peripheral stigmata of infective endocarditis on examination",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Investigations** (**cultures** 3 sets before antibiotics, **echo** TTE TEE vegetations abscess, **CRP** ESR anaemia high, **urine** RBC casts infarcts, **ECG** PR prolongs abscess, **CT** chest abdomen emboli, **PET** prosthetic lights, **serology** Coxiella Bartonella negative) with **Dukes** (**major** cultures echo, **minor** fever vascular immune, **definite** 2 major 1-3, **reject** firm alternative) proves; **surgery** (failure abscess large mobile) times. Cultures prove.",
-   "say": "Cultures sets echos vegetations CRPs urines ECGs CTs PETs is Ix: majors grow minors fever definites count rejects firm surgeries time failures abscess dehisce blocks conduct. Bugs grow.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**penicillin** strep sensitive kills, **gentamicin** synergy kidneys hears, **vancomycin** MRSA prosthetic, **duration** 4-6 weeks valves, **surgery** heart failure uncontrolled emboli, **dental** prophylaxis high-risk, **IVDU** rehab counsels, **follow** echo CRP cultures) with **traps** (**negative** prior antibiotics serology, **fungal** lines TPN treats, **abscess** PR blocks paces) closes; **mortality** (staph prosthetic high) warns. Drugs kill.",
-   "say": "Penicillins gentamicins vancomycins durations is Rx: failures operate uncontrolled resect embolies recur dentals cover injectors counsel negatives test fungals treat abscesses block paced deaths warn. Valves sterilise.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-041",
-  "bk2-med-042",
-  "bk2-med-043",
-  "bk2-med-044",
-  "bk2-med-045",
-  "bk2-med-046",
-  "bk2-med-047",
-  "bk2-med-048",
-  "bk2-med-049",
-  "bk2-med-050"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon1",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-endocarditis",
+  "quiz": [
+    "bk2-med-041",
+    "bk2-med-042",
+    "bk2-med-043",
+    "bk2-med-044",
+    "bk2-med-045",
+    "bk2-med-046",
+    "bk2-med-047",
+    "bk2-med-048",
+    "bk2-med-049",
+    "bk2-med-050"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon1",
+  "src": [],
+  "steps": [
+    {
+      "say": "Take a careful history of prolonged fever with rigors and drenching night sweats. You should ask specifically about any new murmur and recent dental work or valve disease. Find out about injecting drug use, prosthetic valves and intravenous lines. Remember that young injecting drug users often develop tricuspid infection while elderly patients with prosthetic valves face higher risk.",
+      "tx": "Ask about prolonged fever with rigors and night sweats, plus any new or changing **murmur** suggesting valve regurgitation. Take a history of recent dental extraction or decay, prior rheumatic disease, **prosthetic valves**, intravenous lines and injecting drug use. Note weight loss, malaise and joint pains, and ask about **embolic symptoms** such as stroke, flank pain or haematuria. Match the profile: tricuspid disease in young injecting drug users and prosthetic valve infection in the elderly.",
+      "vis": null
+    },
+    {
+      "say": "You should examine the hands carefully for tender finger pulp nodules and painless palm lesions. Look at the nails for splinter bleeds and examine the fundi for pale centred retinal spots. Palpate the spleen because infarction makes it tender and enlarged. Listen for a changing murmur and assess the patient for new heart failure.",
+      "tx": "Look for pallor and anaemia, finger clubbing, tender **Osler nodes** on the finger pulps and painless **Janeway lesions** on the palms. Examine the nails for splinter haemorrhages, check the fundi for **Roth spots** and palpate for a tender enlarged spleen from infarction. Listen for a new or changing aortic or mitral regurgitant murmur and assess for heart failure. Check the urine for blood and watch for neuro signs of mycotic aneurysm bleed.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-endocarditis-fig1.webp",
+        "alt": "Composite image showing Osler nodes, Janeway lesions, splinter hemorrhages, clubbing, and a Roth spot, characteristic physical signs of infective endocarditis.",
+        "caption": "Key peripheral stigmata of infective endocarditis on examination",
+        "ar": 1.8349
+      }
+    },
+    {
+      "say": "Always collect three sets of blood cultures before you start antibiotics. Confirm vegetations or abscess on transthoracic echo and move to transoesophageal echo when views remain unclear. Expect raised inflammatory markers with anaemia and check the urine for red cells. You should watch the ECG for PR prolongation because it warns of aortic root abscess. Use CT to find emboli and order PET imaging for suspected prosthetic valve infection.",
+      "tx": "Take at least three sets of **blood cultures** before starting antibiotics, then confirm vegetations or abscess with transthoracic and transoesophageal echo. Expect raised CRP and ESR with anaemia, and check the urine for red cells from infarction. Watch the ECG for PR prolongation suggesting **aortic root abscess**, and use CT to detect chest or abdominal emboli. Consider PET for prosthetic valves and send serology for Coxiella and Bartonella when cultures stay negative. Apply **Duke criteria** using major culture and echo findings plus minor fever, vascular and immune features.",
+      "vis": null
+    },
+    {
+      "say": "Look at this transoesophageal echo showing the left atrium above and the left ventricle below. Identify the bright bulky mass attached to the mitral valve as vegetation. Notice the dark cavity beside the aortic root, which is perivalvular abscess. Remember that abscess formation explains persistent fever, conduction block and the need for urgent surgery.",
+      "tx": "Study this transoesophageal echo which shows a bulky bright **vegetation** on the **mitral valve** between the left atrium and left ventricle. Note the adjacent dark cavity labelled as **abscess** spreading around the aortic root, a classic perivalvular complication. For exams, link large mobile vegetations with embolic risk and abscess with conduction block, persistent fever and need for surgery. Practise naming the chambers and lesions exactly as labelled.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-endocarditis-gen1.webp",
+        "alt": "Transesophageal echo showing mitral vegetation and abscess between LA and LV.",
+        "caption": "Transesophageal echo of mitral valve vegetation with perivalvular abscess.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "You should treat sensitive streptococcal infection with penicillin and add gentamicin for synergy. Monitor renal function and hearing closely during aminoglycoside therapy. Choose vancomycin for MRSA and prosthetic valve infection and continue treatment for four to six weeks. Refer early for surgery when heart failure, uncontrolled infection or emboli develop. Counsel injecting drug users and arrange dental prophylaxis for high risk patients.",
+      "tx": "Treat sensitive streptococcal infection with penicillin and add **gentamicin** for synergy while watching renal function and hearing. Use **vancomycin** for MRSA and prosthetic valve infection, and continue antibiotics for four to six weeks guided by echo, CRP and repeat cultures. Refer early for **surgery** when heart failure, uncontrolled infection or recurrent emboli develop. Offer dental prophylaxis to high risk patients, counsel injecting drug users on rehabilitation and warn that staphylococcal and prosthetic valve disease carry higher mortality.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Infective endocarditis",
+  "v": 1
 }

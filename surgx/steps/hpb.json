@@ -1,0 +1,135 @@
+{
+  "_comment": "SURGX shared hepatopancreatobiliary steps: upper abdominal access, intra-operative ultrasound and cholangiography, hepatoduodenal ligament dissection, the Pringle manoeuvre, bile leak testing and the major haemorrhage bail-out. Used by two or more of open and subtotal cholecystectomy, laparoscopic bile duct exploration, splenectomy, pancreaticoduodenectomy and right hepatectomy. Procedure-only steps stay in each procedure's steps_local.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.hpb.upper-access": {
+      "id": "step.hpb.upper-access", "kind": "access",
+      "title": "Upper abdominal incision and fixed retraction",
+      "why": "Upper abdominal organs sit high under the costal margin. Exposure here comes from the incision and a fixed retractor, not from an assistant pulling harder. Poor exposure is the root of most bleeding and duct injuries in open hepatobiliary surgery.",
+      "how": [
+        "Choose the incision for the operation: right subcostal (Kocher) for the gallbladder and bile duct; bilateral subcostal (rooftop or chevron), a reversed L (J) or an upper midline for the liver and pancreas.",
+        "Divide the rectus and the oblique muscles with diathermy, ligating the superior epigastric vessels; preserve the intercostal nerves at the lateral end where possible.",
+        "Divide the ligamentum teres between ties and the falciform ligament up towards the suprahepatic veins, staying on the anterior abdominal wall.",
+        "Place a fixed costal-margin retractor (for example a ring or bar retractor) that lifts the costal margins upwards and cephalad, then pack the hepatic flexure and duodenum down.",
+        "When converting from laparoscopy, extend or join port sites rather than making a separate small incision that will not give the view you need."
+      ],
+      "structuresAtRisk": ["Superior epigastric vessels", "Intercostal nerves (denervation of the rectus)", "Liver capsule under the retractor blades"],
+      "pitfalls": [
+        "A short subcostal incision that forces deep retraction on the liver and tears its capsule.",
+        "Retractor blades placed on the liver itself rather than on the costal margin, causing capsular tears that ooze for the rest of the case.",
+        "Dividing the falciform ligament close to the liver where it bleeds from small parenchymal vessels."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hpb.ious": {
+      "id": "step.hpb.ious", "kind": "checkpoint", "critical": true,
+      "title": "Intra-operative ultrasound before committing",
+      "why": "Pre-operative imaging is a map made weeks ago. Intra-operative ultrasound finds small metastases, shows the relationship of a tumour to the hepatic veins, portal pedicles and mesenteric vessels, and can change the operation before anything irreversible has been done.",
+      "how": [
+        "Scan the whole liver systematically, segment by segment, before any mobilisation that alters its shape.",
+        "Trace the hepatic veins to the vena cava and the portal pedicles to the hilum, and mark the relevant vessels on the liver surface with diathermy.",
+        "For a pancreatic head tumour, assess its relationship to the superior mesenteric vein, portal vein and superior mesenteric artery, and look for liver metastases not seen on CT.",
+        "State what the scan has changed, if anything, to the team before proceeding."
+      ],
+      "structuresAtRisk": ["Middle hepatic vein", "Portal vein and superior mesenteric vein", "Left portal pedicle (the future remnant's inflow)"],
+      "pitfalls": [
+        "Scanning only the known lesion and missing a small contralateral metastasis that makes the resection futile.",
+        "Scanning after mobilisation, when the liver has rotated and the landmarks are distorted.",
+        "Treating ultrasound as optional when the pre-operative imaging is old or after chemotherapy."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hpb.cholangiogram": {
+      "id": "step.hpb.cholangiogram", "kind": "checkpoint",
+      "title": "Intra-operative cholangiography",
+      "why": "A cholangiogram shows the anatomy of the ducts and any stones within them. It cannot prevent an injury on its own, but it can reveal a misidentified duct before it is divided and it answers whether the common bile duct needs clearing.",
+      "how": [
+        "Flush the catheter and tubing to remove every air bubble; bubbles mimic stones.",
+        "Cannulate the cystic duct through a small ductotomy (or, when the triangle is obliterated, inject through the gallbladder), and secure the catheter with a clip or a loop.",
+        "Inject dilute contrast under fluoroscopy and look for: filling of the common hepatic duct and both left and right hepatic ducts, free flow into the duodenum, filling defects, and the length and insertion of the cystic duct.",
+        "If the right or left hepatic ducts do not fill, or the image does not make anatomical sense, stop and reconsider what has been cannulated.",
+        "Save the images and record the findings in the note."
+      ],
+      "structuresAtRisk": ["Common bile duct (if it is the duct cannulated)", "Cystic duct (tearing at the ductotomy)"],
+      "pitfalls": [
+        "Accepting a cholangiogram that fills only the distal duct: that pattern can mean the catheter is in the common bile duct, not the cystic duct.",
+        "Air bubbles read as stones, prompting an unnecessary duct exploration.",
+        "Too concentrated contrast, which hides small stones."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hpb.hepatoduodenal": {
+      "id": "step.hpb.hepatoduodenal", "kind": "dissection", "critical": true,
+      "title": "Dissecting the hepatoduodenal ligament",
+      "why": "The hepatoduodenal ligament carries the inflow of the whole liver: the bile duct, the hepatic artery and the portal vein. Arterial anatomy varies often, and a replaced or accessory hepatic artery divided by mistake can devascularise the liver or the bile duct anastomosis.",
+      "how": [
+        "Palpate the ligament between finger and thumb before dissecting, feeling for a pulse behind the bile duct on the right, which suggests a replaced right hepatic artery from the superior mesenteric artery.",
+        "Open the peritoneum over the ligament and identify the common bile duct anterolaterally, the hepatic artery medially and the portal vein posteriorly.",
+        "Sling each structure only after it has been positively identified and followed to where it goes; label what you sling aloud.",
+        "Before dividing any artery, test-clamp it and confirm a pulse persists in the artery that will supply the remnant."
+      ],
+      "structuresAtRisk": ["Replaced or accessory right hepatic artery", "Proper and left hepatic arteries", "Portal vein", "Bile duct blood supply at 3 and 9 o'clock"],
+      "pitfalls": [
+        "Assuming textbook anatomy because the CT report did not mention a variant.",
+        "Skeletonising the bile duct circumferentially well above the planned division line, which devascularises it and leads to anastomotic stricture.",
+        "Dividing an artery before the test clamp, with no way back if the liver loses its pulse."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hpb.pringle": {
+      "id": "step.hpb.pringle", "kind": "checkpoint", "critical": true,
+      "title": "Pringle manoeuvre: sling, clamp, time, release",
+      "why": "Occluding the hepatoduodenal ligament stops hepatic arterial and portal inflow. It reduces bleeding during liver transection and turns uncontrolled haemorrhage from the liver bed or a hepatic artery branch into a field where the bleeding point can be seen and repaired. It does not stop hepatic venous back-bleeding.",
+      "how": [
+        "Open the lesser omentum, pass a finger through the foramen of Winslow (epiploic foramen) behind the ligament, and place a sling or tape around it before you need it.",
+        "Clamp by tightening the tourniquet or with a soft vascular clamp, tell the anaesthetist and start a clock; call out the time at intervals.",
+        "Use intermittent clamping for elective transection, with periods of release between clamping intervals per the unit protocol, and release fully when the transection is complete.",
+        "In an emergency, compression of the ligament between finger and thumb gives the same control while a sling is placed.",
+        "If bleeding continues despite a good Pringle, the source is hepatic venous or caval, or there is an aberrant left hepatic artery in the lesser omentum: lower the central venous pressure and look for these."
+      ],
+      "structuresAtRisk": ["Portal vein and hepatic artery (clamp injury)", "Aberrant left hepatic artery in the lesser omentum", "Liver function in the cirrhotic or chemotherapy-injured liver"],
+      "pitfalls": [
+        "Forgetting the clamp is on, or not recording the total ischaemic time.",
+        "Assuming a Pringle will control back-bleeding from the hepatic veins.",
+        "Long continuous clamping of a cirrhotic liver without discussion with the anaesthetist and the operating consultant."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hpb.bile-leak-check": {
+      "id": "step.hpb.bile-leak-check", "kind": "checkpoint",
+      "title": "Checking for bile leakage before closure",
+      "why": "Bile leaks are among the commonest complications of biliary and liver surgery. A leaking duct seen on the table costs a stitch; the same leak found as a biloma on day five costs a drain, an ERCP and sometimes a re-operation.",
+      "how": [
+        "Dry the operative field and place a clean white swab against the raw surface, duct closure or anastomosis for a minute, then inspect it for yellow or green staining.",
+        "After liver resection, consider a formal leak test where available, injecting saline, air or a fat emulsion through the cystic duct stump and watching the cut surface.",
+        "Suture visible leaking ducts with a fine monofilament rather than diathermising them.",
+        "Check the bile duct closure or hepaticojejunostomy along its whole circumference, including the back wall where it can be seen."
+      ],
+      "structuresAtRisk": ["Remnant bile ducts on the cut surface", "Bile duct closure or anastomosis"],
+      "pitfalls": [
+        "Treating a negative swab test as proof that no leak will occur: necrosis of a cauterised duct leaks days later.",
+        "Diathermising a leaking duct, which seals it briefly and then sloughs."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hpb.major-bleed": {
+      "id": "step.hpb.major-bleed", "kind": "bailout", "critical": true,
+      "title": "Major haemorrhage: press, tell, call, then repair or pack",
+      "why": "In upper abdominal surgery the large veins (portal, superior mesenteric, splenic, hepatic and the cava) tear rather than cut, and clamping blindly makes a small hole large. Survival depends on immediate pressure, early communication and the decision to stop and pack when physiology fails, not on finding the bleeding point quickly.",
+      "how": [
+        "Put pressure on the bleeding: a finger, a swab on a stick or packs, and hold it. Do not clamp or clip into a pool of blood.",
+        "Tell the anaesthetist clearly, ask for the major haemorrhage protocol to be activated if blood loss is heavy, and ask for a second experienced surgeon, a cell saver and vascular instruments.",
+        "Improve exposure while holding pressure: suction, extend the incision, a second sucker, mobilise to get proximal and distal control.",
+        "Liver bleeding: Pringle for inflow, lower the central venous pressure for back-bleeding, and compress the liver between hands. Splenic bleeding: compress the hilum and complete the splenectomy. Mesenteric venous bleeding: digital control, then repair with fine monofilament.",
+        "If the patient becomes cold, acidotic or coagulopathic, stop: pack, close temporarily and plan a return after resuscitation (damage control)."
+      ],
+      "structuresAtRisk": ["Portal vein and superior mesenteric vein", "Splenic vein", "Hepatic veins and the inferior vena cava", "Adjacent bile duct and pancreas from blind suturing"],
+      "pitfalls": [
+        "Blind clamping or deep suturing into a field of blood, which converts a bleed into a bile duct or pancreatic injury.",
+        "Continuing to operate on a physiologically exhausted patient to finish the planned operation.",
+        "Not telling the anaesthetist until the blood pressure has already fallen."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

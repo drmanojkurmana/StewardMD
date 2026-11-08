@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "sgo-sentinel-lymph-node-mapping",
+  "title": "Sentinel Lymph Node Mapping (ICG) in Endometrial, Cervical & Vulvar Cancers",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 24",
+    "NCCN Clinical Practice Guidelines in Oncology: Uterine Neoplasms (2024)",
+    "NCCN Clinical Practice Guidelines in Oncology: Cervical Cancer (2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Near infrared fluorescence imaging with indocyanine green has replaced radiocolloids as the preferred modality for sentinel node mapping. Dual site cervical injections map both hemipelvises effectively.",
+      "tx": "**SLN mapping** utilizing near-infrared fluorescence with **Indocyanine Green (ICG)** (1 mg to **1.25** mg/mL) injected superficial (1 to 2 mm) and deep (1 cm) at **3 and 9 o'clock cervical injection** achieves excellent **bilateral mapping >85-90%** (**85** to **90** percent) in early endometrial and cervical carcinoma.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-cervix.webp",
+        "ar": 1.3333,
+        "caption": "Anatomical staging and local invasion pathways in carcinoma cervix. Credit: StewardMD.",
+        "alt": "Cervical lymphatic drainage basins and ICG injection technique"
+      }
+    },
+    {
+      "say": "The multi center FIRES trial provided prospective validation for sentinel node mapping in endometrial cancer. The technique demonstrated exceptionally high diagnostic accuracy.",
+      "tx": "The prospective multicenter **FIRES trial** (**Rossi 2017**) in endometrial cancer established an outstanding **NPV 99.6%** (negative predictive value **99.6** percent) and **sensitivity 97.2%** (**97.2** percent) for nodal metastasis, confirming that SLN biopsy safely **replaces lymphadenectomy** without compromising oncological outcomes in Stage **1** disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "FIRES Trial Results (SLNB with ICG)",
+          "points": [
+            "Sensitivity: 97.2% for identifying pelvic nodal metastasis",
+            "Negative Predictive Value: 99.6% across 340 patients",
+            "Lower extremity lymphedema reduced from 20% to under 2%"
+          ]
+        },
+        "right": {
+          "title": "Systematic Full Lymphadenectomy",
+          "points": [
+            "Removes 20 to 40 lymph nodes per patient",
+            "High incidence of chronic symptomatic lower-limb lymphedema",
+            "Higher rates of vascular injury, obturator nerve palsy, and lymphoceles"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Strict adherence to a standardized surgical algorithm is mandatory when sentinel lymph node mapping is employed. Any non mapping hemipelvis requires completion lymphadenectomy.",
+      "tx": "The **NCCN SLN algorithm** mandates: peritoneal inspection, excision of all fluorescent mapping sentinel nodes, **resection of suspicious nodes** regardless of fluorescence, and mandatory **hemipelvic lymphadenectomy for non-mapping** on any pelvic side where a sentinel node is not definitively identified, ensuring complete pathological staging and preventing unrecognized nodal metastasis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Inject ICG at 3 and 9 o'clock cervix; retroperitoneal exploration"
+          },
+          {
+            "id": "b",
+            "label": "Excise all green-fluorescent sentinel lymph nodes"
+          },
+          {
+            "id": "c",
+            "label": "Palpate and resect any grossly enlarged or suspicious lymph node"
+          },
+          {
+            "id": "d",
+            "label": "Non-mapping hemipelvis: perform side-specific hemipelvic lymphadenectomy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pathological processing of sentinel lymph nodes requires ultrastaging with step sectioning and immunohistochemical stains. Cytokeratin antibodies detect minute occult tumor clusters.",
+      "tx": "Pathological evaluation requires a standardized **ultrastaging protocol**: gross longitudinal bisection along the long axis followed by **serial sectioning 50-250 um** (**50** to **250** um intervals) through the paraffin block and anticytokeratin immunohistochemistry using **cytokeratin AE1/AE3 IHC** (anti-cytokeratin AE**1**/AE**3** cocktail) to identify subtle metastatic deposits.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathological Technique",
+          "Tissue Sectioning Protocol",
+          "Diagnostic Capability"
+        ],
+        "rows": [
+          [
+            "Routine H&E Sectioning",
+            "1-2 random sections per lymph node",
+            "Detects only gross macrometastases (>2 mm)"
+          ],
+          [
+            "Serial Ultrastaging",
+            "Ribbon step-sections at 50-250 um intervals",
+            "Uncovers occult micrometastases (0.2 to 2 mm)"
+          ],
+          [
+            "Cytokeratin AE1/AE3 IHC",
+            "Monoclonal anti-cytokeratin cocktail",
+            "Visualizes isolated single tumor cells (ITCs <=0.2 mm)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "International staging systems classify lymph node tumor volume into three distinct pathological categories. Prognosis correlates closely with metastatic tumor dimension.",
+      "tx": "Lymph node tumor volume is stratified into: **macrometastasis >2 mm** (**2.0 mm**), **micrometastasis >0.2 to <=2 mm** (greater than **0.2** mm to <=2 mm), and **isolated tumor cells (ITCs) <=0.2 mm** (clusters <=0.2 mm or under the **200 cell cutoff**).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Nodal Metastasis Tier",
+          "Diameter & Cellular Threshold",
+          "FIGO 2023 / AJCC Staging Category"
+        ],
+        "rows": [
+          [
+            "Macrometastasis",
+            ">2.0 mm diameter",
+            "FIGO Stage IIIC / pN1 (indicates systemic chemotherapy + RT)"
+          ],
+          [
+            "Micrometastasis",
+            ">0.2 mm to <=2.0 mm",
+            "FIGO Stage IIIC / pN1(mi) (treated with adjuvant therapy)"
+          ],
+          [
+            "Isolated Tumor Cells (ITCs)",
+            "<=0.2 mm or <200 individual cells",
+            "FIGO Stage I / pN0(i+) (observation in low-risk disease)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The therapeutic significance of isolated tumor cells in otherwise low risk endometrial cancer remains an area of active study. Low risk histology with isolated cells does not compromise outcome.",
+      "tx": "In early low-grade endometrioid endometrial carcinoma, the detection of **ITCs pN0(i+)** (staged as pN**0**(i+)) does not worsen **prognostic impact** (overall disease-free survival exceeds 95 percent), supporting safe **observation in low-risk** disease without adjuvant systemic chemotherapy or pelvic radiation when uterine risk factors remain strictly favorable.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low-Risk Endometrial Cancer with ITCs (pN0(i+))",
+          "points": [
+            "Stage IA Grade 1 or 2 endometrioid carcinoma",
+            "Excellent disease-free survival (>95%) without adjuvant systemic therapy",
+            "Observation alone or vaginal brachytherapy based on uterine risk features"
+          ]
+        },
+        "right": {
+          "title": "High-Intermediate or High-Risk Histologies with ITCs",
+          "points": [
+            "Grade 3 endometrioid, serous, or clear cell histology",
+            "Higher risk of distant systemic dissemination",
+            "Requires adjuvant platinum-based chemotherapy and external radiotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "In early cervical cancer prospective trials confirmed that sentinel node mapping reduces post operative lymphedema. Bilateral detection is essential to ensure oncological safety.",
+      "tx": "In prospective cervical cancer trials (**SENTICOL I and II**), sentinel node mapping in Stage **1** and **2** tumors yielded significant **cervical cancer SLN** accuracy and **lymphedema reduction** (dropping morbidity by **30** percent), while establishing a strict **bilateral mapping requirement** before omitting pelvic dissection.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-vulva.webp",
+        "ar": 1.3333,
+        "caption": "FIGO 2021 staging, anatomical margins, and nodal drainage in carcinoma of the vulva. Credit: StewardMD.",
+        "alt": "Sentinel node mapping in pelvic and vulvar lymph nodes"
+      }
+    },
+    {
+      "say": "Several clinical factors contribute to mapping failure during surgical procedures. Severe obesity and tumor blockage of lymphatic channels represent common impediments.",
+      "tx": "Recognized **mapping failure causes** include severe obesity with **BMI >40 kg/m2** (**40** kg/m2), previous retroperitoneal pelvic surgery, prior pelvic radiation, and extensive **tumor blockage of lymphatic channels**, producing an expected baseline **failure rate 10-15%** (**10** to **15** percent) requiring hemipelvic lymphadenectomy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Factor",
+          "Impact on SLN Mapping Success",
+          "Recommended Corrective Action"
+        ],
+        "rows": [
+          [
+            "Morbid Obesity (BMI >40 kg/m2)",
+            "Attenuates infrared signal; thick retroperitoneal fat",
+            "Increase ICG concentration; perform careful fat dissection"
+          ],
+          [
+            "Tumor Lymphatic Embolization",
+            "Obstructs primary lymphatic drainage channels",
+            "Hemipelvic lymphadenectomy on the non-mapping side"
+          ],
+          [
+            "Prior Conization / Cervical Distortion",
+            "Alters initial lymphatic capillary networks",
+            "Re-inject ICG deeper into cervical stroma (1 to 2 cm)"
+          ],
+          [
+            "Unilateral Failure to Map",
+            "Non-mapping on one hemipelvis (10-15% incidence)",
+            "Adhere to NCCN algorithm: perform side-specific pelvic LND"
+          ]
+        ]
+      }
+    }
+  ]
+}

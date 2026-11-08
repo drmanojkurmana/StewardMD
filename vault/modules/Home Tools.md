@@ -35,3 +35,26 @@ Owner: tools are overwhelming and hard to arrange. `tool-groups.js` (`window.SMD
   first pin/hide, so the grid never jumps; after that it behaves exactly as before.
 - **Adding a tool:** add it to `HOME_TOOLS`, to one `GROUPS[].acts` and to `DESC` (the unit test fails otherwise).
 - Tests: `test/tool-groups.test.mjs`, `test/run-tool-groups-ui.mjs` (390 px, both themes, kill switch).
+
+## Home tabs, discovery and problem search (2026-11-07)
+Owner: tools should be easy for any doctor to find. `tool-groups.js` adds `TASKS` (learn, bedside, practice),
+`BRANCHES` (specialty tab, mapped from `smd_my_specialty` kit ids), `PROBLEMS` (problem words per tool), and the seen
+list; `home.js` `homeToolsSectionMarkup` renders the tabs.
+- **Tabs:** For you (the grid as before, with `#rnavToolsGrid`, drag, All tools) | Learn | Bedside | Practice | branch.
+  Task tabs show every eligible tool of that kind (locked ones after); each Home tool not in `ON_HOME_ALREADY` is in
+  exactly one task (unit test). Tab remembered in `smd_home_tab` (default For you for every role: a student default of Learn hid the For you grid and left hidden duplicate tiles, which broke focus return in run-tokos-app-ui); branch pick in
+  `smd_home_branch`. Tapping the open branch tab (or with no kit) opens the picker. Row scrolls on phones, with a fade.
+- **Discovery:** `smd_tools_seen` (tool ids) is seeded on first render with what is on Home plus Recently used; tools
+  never opened get a "New" chip; `#rnavTry` offers one unseen tool per week (`tryNext`), "Not now" hides it for the
+  week (`smd_tools_try_hide`). Opening any tool (`noteToolOpened`) marks it seen.
+- **Problem search:** `search.js` `problemTools` puts `suggest(q)` hits first in Tools ("Fits your search"). Short
+  phrases (3 letters or fewer) match whole words only. The All tools filter matches the same words.
+- **Subtitles:** rewritten in plain words (max 30 chars, unit test); titles unchanged; Narke tile is "Anaesthetica".
+- **Flag:** `smd_home_tabs` default on; "0" or `?hometabs=0` = the single grid.
+- Tests: `test/home-tabs.test.mjs`, `test/run-home-tabs-ui.mjs` (390 px and iPad, light and dark, kill switch).
+- **Design pass (owner, same day: "not AI slop, best fonts"):** Home type is **Atkinson Hyperlegible Next** (Braille
+  Institute, OFL, self-hosted `assets/fonts/atkinson-next-latin*.woff2`, preloaded), scoped by overriding `--rds-font`
+  on `#homeV2.rnav`; the rest of the app keeps Inter. Tabs are underline tabs (not pills), the specialty selector sits
+  at the row's end, and **All tools** is a text button beside the "Clinical tools" heading (on iPad directly above the
+  selector). The Try card has no eyebrow label: its heading is the action ("Try Insulin", button "Open Insulin").
+  The "New" tag is a small square-cornered label. At 390 px the five tabs fit; longer branch names scroll with a fade.

@@ -1,0 +1,83 @@
+{
+  "id": "back-pain-retention",
+  "title": "Back pain and a full bladder",
+  "subtitle": "Suspected cauda equina syndrome",
+  "simulation": true,
+  "levels": ["student", "intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "cauda-equina-syndrome",
+  "procedureRef": "lumbar-discectomy-ces",
+  "sources": [
+    { "id": "girft-ces", "org": "Getting It Right First Time (GIRFT), NHS England", "title": "National suspected cauda equina syndrome (CES) pathway", "year": 2023, "url": "https://gettingitrightfirsttime.co.uk/", "accessed": "2026-11-04" },
+    { "id": "sbns-bass", "org": "Society of British Neurological Surgeons (SBNS) and British Association of Spine Surgeons (BASS)", "title": "Standards of care for investigation and management of cauda equina syndrome", "year": 2018, "url": "https://www.sbns.org.uk/", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 38-year-old delivery driver has had low back pain for a week after lifting. It is 10pm. Since this morning he has pain down both legs, and says it 'feels odd' when he wipes after the toilet. He has not passed urine since lunchtime but does not feel a strong urge.",
+  "vitals": { "Temp": "36.8 C", "HR": "88", "BP": "138/84", "RR": "16", "SpO2": "99% on air" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "Which features make this an emergency rather than mechanical back pain?",
+      "hint": "Look at the legs, the saddle and the bladder.",
+      "options": [
+        { "id": "a", "text": "Bilateral sciatica, altered saddle sensation and reduced bladder sensation", "correct": true, "feedback": "Correct. These are cauda equina red flags and together demand emergency assessment." },
+        { "id": "b", "text": "The lifting injury and the duration of a week", "correct": false, "feedback": "These describe ordinary mechanical back pain. They are not the features that matter." },
+        { "id": "c", "text": "His age and occupation", "correct": false, "feedback": "Neither changes the urgency." },
+        { "id": "d", "text": "None: this is likely muscular and can wait for a GP review", "correct": false, "feedback": "Bilateral sciatica with saddle and bladder change cannot wait. Delay risks permanent sphincter loss." }
+      ],
+      "why": "Most back pain is mechanical. The features that change everything are bilateral leg symptoms, saddle sensory change, and any change in bladder, bowel or sexual function. Ask about them directly; patients rarely volunteer them.",
+      "missedRedFlags": ["Altered sensation on wiping", "Loss of the urge to void"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "How do you assess him?",
+      "hint": "Examine what you are worried about, and measure the bladder.",
+      "options": [
+        { "id": "a", "text": "Full lower-limb neurology, saddle sensation by dermatome, perianal assessment with consent and a chaperone, and a post-void bladder scan", "correct": true, "feedback": "Correct. This defines the deficit, records a baseline with the time, and objectively assesses the bladder." },
+        { "id": "b", "text": "Straight-leg raise and analgesia, then reassess tomorrow", "correct": false, "feedback": "Straight-leg raise does not assess the cauda equina, and tomorrow is too late." },
+        { "id": "c", "text": "Examine the legs but skip saddle sensation to avoid embarrassment", "correct": false, "feedback": "Saddle sensation is central to the diagnosis. Explain why it matters and examine it properly with a chaperone." },
+        { "id": "d", "text": "Lumbar X-ray first", "correct": false, "feedback": "Plain films do not show the cauda equina or a disc. They only delay the MRI." }
+      ],
+      "why": "The examination must include saddle sensation and an assessment of the bladder. A bladder scan showing a large residual with reduced sensation suggests retention, a later and worse stage. Document findings and times precisely.",
+      "missedRedFlags": ["A large post-void residual with no urge to void"]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "The bladder scan shows a large residual volume. Saddle sensation is reduced. What next?",
+      "hint": "It is 10pm.",
+      "options": [
+        { "id": "a", "text": "Catheterise and arrange emergency MRI of the lumbosacral spine tonight", "correct": true, "feedback": "Correct. Suspected CES is scanned as an emergency at any hour, not on the next routine list." },
+        { "id": "b", "text": "Catheterise and book an MRI for the morning", "correct": false, "feedback": "Waiting overnight is the commonest preventable delay in CES. The national pathway expects emergency imaging at any hour." },
+        { "id": "c", "text": "CT lumbar spine and discharge if no fracture", "correct": false, "feedback": "CT does not reliably show the soft-tissue compression. MRI is the test." },
+        { "id": "d", "text": "Start oral steroids and review in clinic", "correct": false, "feedback": "Steroids have no role in compressive CES and outpatient review risks permanent harm." }
+      ],
+      "why": "MRI is the definitive test for suspected CES, and the timing matters. Where local MRI is not available out of hours, the patient is transferred the same day to a unit that has it.",
+      "missedRedFlags": ["Out-of-hours presentation used as a reason to delay"]
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "MRI shows a large central L4/5 disc prolapse filling the canal. What is the plan?",
+      "hint": "Who, and when.",
+      "options": [
+        { "id": "a", "text": "Inform the on-call spinal surgeon and plan decompression as soon as possible, tonight if a suitable team and theatre are available", "correct": true, "feedback": "Correct. Surgery should follow confirmation without unnecessary delay." },
+        { "id": "b", "text": "Physiotherapy and analgesia first, surgery if no improvement in six weeks", "correct": false, "feedback": "That is the pathway for radiculopathy, not for cauda equina compression." },
+        { "id": "c", "text": "Epidural steroid injection", "correct": false, "feedback": "Injection has no role in compressive CES." },
+        { "id": "d", "text": "Wait until his bladder function recovers before operating", "correct": false, "feedback": "Bladder function will not recover while the compression continues." }
+      ],
+      "why": "The aim is to decompress before function is lost or while there is the best chance of recovery. The standard is surgery as soon as possible after radiological confirmation, by an appropriately experienced team.",
+      "levels": ["intern", "resident", "surgeon"]
+    },
+    {
+      "id": "dp5", "phase": "operate",
+      "prompt": "At surgery the thecal sac is tightly compressed by the central disc. How do you reach the disc safely?",
+      "hint": "Create room before you retract.",
+      "options": [
+        { "id": "a", "text": "Widen the bony decompression, up to a laminectomy, so the sac can be mobilised gently before removing the disc", "correct": true, "feedback": "Correct. Bone removal creates space; forceful retraction of a compressed sac injures the roots." },
+        { "id": "b", "text": "Retract the thecal sac firmly medially through a small laminotomy", "correct": false, "feedback": "This adds traction injury to roots already compressed." },
+        { "id": "c", "text": "Open the dura and approach the disc transdurally as a first choice", "correct": false, "feedback": "This is not a routine approach and adds risk of CSF leak and root injury." },
+        { "id": "d", "text": "Remove only the part of the disc that is easy to reach", "correct": false, "feedback": "An incomplete decompression leaves the cauda equina compressed." }
+      ],
+      "why": "A large central disc leaves little room to retract the thecal sac. Wider bony decompression is the safe way to gain access, followed by confirmation that the sac and roots are free.",
+      "levels": ["surgeon"]
+    }
+  ]
+}

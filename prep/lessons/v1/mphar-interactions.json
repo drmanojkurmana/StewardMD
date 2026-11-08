@@ -3,7 +3,7 @@
  "module": "mphar-interactions",
  "subject": "mrcp-pharmacology",
  "title": "Drug interactions: enzyme, additive and absorption traps",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
    "tx": "**Interactions** harm by three broad routes: one drug changing another's **metabolism** (enzyme induction lowering levels, inhibition raising them), **additive effects** (bleeding, sedation, potassium, QT prolongation) and **absorption or excretion** changes. The clinical question is always consequence: loss of effect can mean pregnancy, transplant rejection or stroke, while excess can mean bleeding, falls or arrhythmia. Check every new prescription against the full list, including over-the-counter and herbal products (BNF interactions).",
@@ -58,7 +58,18 @@
    }
   },
   {
-   "tx": "Patients leave with interaction counselling in plain words: what not to buy over the counter, which symptoms to report, and which monitoring (blood level, INR, potassium, ECG) to attend. Herbal products such as St John's Wort are real enzyme inducers and belong in every medication history. Exact pair-by-pair actions follow the current BNF and are flagged here as look-up territory, not memory territory (BNF).",
+   "tx": "The hepatocyte diagram contrasts the two enzyme traps. On the left, an inhibitor tablet blocks **CYP450**, so substrate molecules pile up and the level curve climbs into the **toxicity zone**. On the right, **St John's Wort** triggers extra enzyme synthesis, so rapid metabolism drags levels into the subtherapeutic zone and treatment fails. The lesson pairs these pictures with one habit: **anticipate, substitute, adjust and monitor** whenever a drug is started, stopped or changed.",
+   "say": "This hepatocyte diagram contrasts enzyme inhibition with induction. An inhibitor tablet blocks CYP450, so drug levels climb into the toxicity zone. St John's Wort does the opposite by triggering extra enzyme synthesis, so rapid metabolism drags levels down and treatment fails. Anticipate classic high stakes pairs, substitute or adjust as directed, and recheck whenever any drug is started, stopped or changed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mphar-interactions-gen1.webp",
+    "alt": "A hepatocyte diagram contrasts CYP450 inhibition raising drug levels with induction by St John's Wort lowering them.",
+    "caption": "Enzyme inhibition versus induction and resulting drug levels, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Patients leave with interaction counselling in plain words: what not to buy over the counter, which symptoms to report, and which monitoring (blood level, **INR**, potassium, ECG) to attend. Herbal products such as St John's Wort are real enzyme inducers and belong in every medication history. Exact pair-by-pair actions follow the current BNF and are flagged here as look-up territory, not memory territory (BNF).",
    "say": "Take a herbal and over-the-counter history, counsel in plain words, and look up pair actions in the current BNF.",
    "vis": {
     "kind": "image",
@@ -67,6 +78,37 @@
     "caption": "Patient counselling: avoid OTC/herbals, report symptoms, attend monitoring",
     "ar": 1.8349
    }
+  },
+  {
+   "tx": "Enzyme effects have named culprits worth knowing. Azole antifungals, macrolides except azithromycin, and grapefruit juice **inhibit** cytochrome P450 (a family of liver enzymes that clear many drugs) and raise levels of statins and immunosuppressants. Rifampicin, carbamazepine and St John Wort **induce** the same enzymes and lower levels, so contraceptives and transplant drugs can fail. Induction builds over days and wears off over days to weeks, so risk outlives the stopped culprit.",
+   "say": "Learn the named culprits: azoles, macrolides and grapefruit juice raise levels by inhibition, while rifampicin, carbamazepine and St John Wort lower them by induction. Induction builds over days and fades over days to weeks, so the risk outlives the stopped drug. Look up each pair in the current BNF.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Culprit",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Azoles, macrolides, grapefruit juice",
+      "Inhibition: levels rise"
+     ],
+     [
+      "Rifampicin, carbamazepine, St John Wort",
+      "Induction: levels fall, effect fails"
+     ],
+     [
+      "Culprit stopped days ago",
+      "Risk persists for days to weeks"
+     ]
+    ]
+   }
   }
- ]
+ ],
+ "quiz": [
+  "mk-gap882",
+  "mk-gap883",
+  "mk-gap887"
+ ],
+ "gen": "hand"
 }

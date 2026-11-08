@@ -1,0 +1,68 @@
+{
+  "id": "uro-acute-retention",
+  "title": "Acute urinary retention",
+  "subtitle": "Drain the bladder, then find the cause",
+  "category": "uro_emergency",
+  "specialty": "urology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "nice-cg97", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Lower urinary tract symptoms in men: management (CG97)", "year": 2010, "version": "CG97", "url": "https://www.nice.org.uk/guidance/cg97", "accessed": "2026-11-04" },
+    { "id": "eau-luts", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Management of Non-neurogenic Male Lower Urinary Tract Symptoms", "year": 2024, "url": "https://uroweb.org/guidelines/management-of-non-neurogenic-male-luts", "accessed": "2026-11-04" },
+    { "id": "baus-spc", "org": "British Association of Urological Surgeons (BAUS)", "title": "British Association of Urological Surgeons' suprapubic catheter practice guidelines (Harrison SCW et al., BJU International)", "year": 2011, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=British+Association+of+Urological+Surgeons+suprapubic+catheter+practice+guidelines", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Retention with back pain, saddle anaesthesia, bilateral leg weakness or loss of anal tone: cauda equina until an MRI says otherwise." },
+      { "text": "Painless retention with a large residual, a raised creatinine or hydronephrosis: high-pressure chronic retention, which behaves differently after drainage." },
+      { "text": "Retention with fever, rigors or a tender prostate: infected urine behind an obstruction, or a prostatic abscess." },
+      { "text": "Failed urethral catheterisation with blood at the meatus: a false passage or urethral injury has probably been made already." },
+      { "text": "Clot retention: the bladder is full of clot, the catheter will not drain, and the bleeding source is still active." },
+      { "text": "Retention in a woman, a young man or a child is uncommon and always needs a cause found." }
+    ],
+    "do_now": [
+      { "text": "Confirm a full bladder with a bladder scan or examination, then pass a urethral catheter with full asepsis and adequate lubricating local anaesthetic gel left in place for a few minutes.", "timeCritical": true, "evidenceRef": "campbell" },
+      { "text": "Record the volume drained in the first 10 to 15 minutes. The residual volume is the single most useful number for planning the trial without catheter and for spotting chronic retention.", "evidenceRef": "campbell" },
+      { "text": "If one careful attempt fails, stop. Repeated forceful attempts make false passages. Escalate to the urology team for a coude or Tiemann tip catheter, a flexible cystoscope with a guidewire, or a suprapubic catheter.", "timeCritical": true, "evidenceRef": "baus-spc" },
+      { "text": "Suprapubic catheterisation only with a palpable or ultrasound-confirmed full bladder. Previous lower abdominal surgery needs ultrasound guidance or an open or cystoscopic approach because bowel may lie in front of the bladder.", "timeCritical": true, "evidenceRef": "baus-spc" },
+      { "text": "Clot retention: change to a large-bore three-way catheter, wash out the clot by hand with a bladder syringe, then start continuous irrigation.", "timeCritical": true, "evidenceRef": "campbell" }
+    ],
+    "assess": [
+      { "text": "Precipitants: anticholinergics, opioids, decongestants, constipation, recent anaesthesia, alcohol, urinary infection, immobility." },
+      { "text": "Prior lower urinary tract symptoms, previous retention, prostate size on rectal examination, and a neurological examination including perineal sensation and anal tone." },
+      { "text": "Score the symptoms once the acute episode settles; it guides the outpatient plan.", "calcs": ["ipss"] },
+      { "text": "Renal function and hydration. A raised creatinine with a large residual is chronic retention and needs admission.", "calcs": ["kdigo_aki", "ckdepi"] },
+      { "text": "Watch for sepsis after catheterisation in infected urine; rigors in the first hour are common and can herald bacteraemia.", "calcs": ["qsofa", "news2"] }
+    ],
+    "investigate": [
+      { "text": "Urea, creatinine and electrolytes in every case. Urine dipstick and culture from the catheter specimen." },
+      { "text": "Renal tract ultrasound when the creatinine is raised or the residual is large, looking for hydronephrosis and a thick-walled bladder." },
+      { "text": "Do not send a prostate-specific antigen during the acute episode: retention and catheterisation both raise it. Measure it later if it will change management." },
+      { "text": "MRI of the lumbosacral spine without delay if any red flag for cauda equina is present." }
+    ],
+    "resuscitate": [
+      { "text": "High-pressure chronic retention: admit, monitor urine output hourly, weigh daily and check electrolytes; a post-obstructive diuresis can cause hypovolaemia and needs fluid replacement guided by output and examination.", "evidenceRef": "campbell" },
+      { "text": "There is no need to clamp the catheter or drain the bladder in stages. Haematuria and hypotension after rapid drainage are usually transient and minor.", "evidenceRef": "campbell" },
+      { "text": "Treat infected urine with antibiotics per local protocol once cultures are sent; obstruction plus infection is a source-control problem first.", "evidenceRef": "eau-luts" }
+    ],
+    "definitive": [
+      { "text": "Offer an alpha-blocker before a trial without catheter in men with benign prostatic obstruction; it improves the chance of voiding.", "evidenceRef": "nice-cg97" },
+      { "text": "Trial without catheter after a few days in acute painful retention with a precipitant and a normal creatinine. Do not trial without catheter in high-pressure chronic retention.", "evidenceRef": "nice-cg97" },
+      { "text": "Failed trial or chronic retention: long-term catheter, intermittent self-catheterisation, or bladder outflow surgery after urodynamic and specialist assessment.", "evidenceRef": "eau-luts" },
+      { "text": "Clot retention that does not clear with washout and irrigation needs cystoscopy, clot evacuation and haemostasis in theatre.", "evidenceRef": "campbell" }
+    ],
+    "escalate": [
+      { "text": "Urology registrar after one failed catheterisation attempt, not after three." },
+      { "text": "Spinal or neurosurgical team immediately for suspected cauda equina." },
+      { "text": "Senior review and a higher level of care for post-obstructive diuresis with rising creatinine or electrolyte derangement." }
+    ]
+  },
+  "notes": [
+    "A catheter that will not go in is usually blocked at the bladder neck or the prostatic urethra. A curved-tip catheter, with the curve pointing upwards, follows the anatomy; more force does not.",
+    "Never inflate the balloon until urine flows. A balloon inflated in the prostatic urethra is a common, painful and preventable injury.",
+    "The volume drained is a diagnosis. A painful retention with a clear precipitant suggests acute retention; a very large painless residual with a raised creatinine is chronic retention, and the two are managed differently."
+  ],
+  "calcs": ["ipss", "kdigo_aki", "ckdepi", "qsofa", "news2"]
+}

@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sob-operative-obstetrics",
+  "title": "Operative Delivery: Instrumental Forceps, Vacuum, Caesarean Incisions, TOLAC, and Hysterectomy",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 29 (Operative Vaginal Delivery), Ch 30 (Cesarean Delivery and Peripartum Hysterectomy)",
+    "ACOG Practice Bulletin on Operative Vaginal Delivery",
+    "RCOG Green-top Guideline on Operative Vaginal Delivery"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Instrumental vaginal delivery requires strict fulfillment of essential prerequisites before application. The cervix must be fully dilated, membranes ruptured, maternal pelvis adequate, and the fetal presentation must be vertex with the position precisely known. Crucially, the fetal head must be engaged with the leading bony point at or below station zero, and the maternal bladder emptied.",
+      "tx": "Mandatory prerequisites for **operative vaginal delivery** demand a fully dilated cervix, ruptured membranes, an **engaged fetal head**, known vertex position, an emptied maternal bladder, and adequate analgesia. Performing instrumental traction on an unengaged head is strictly prohibited in modern obstetric practice.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-ins-forceps-types.webp",
+        "ar": 1.3333,
+        "caption": "Types of obstetric forceps for outlet and low pelvic delivery. Credit: StewardMD.",
+        "alt": "Surgical instruments showing Simpson, Wrigley, and Kielland obstetric forceps."
+      }
+    },
+    {
+      "say": "Obstetric guidelines classify instrumental deliveries by station. Outlet delivery requires the scalp to be visible at the introitus without separating the labia, skull at the pelvic floor, and rotation under forty five degrees. Low delivery requires the leading bony point to be at station plus two or lower. Midpelvic delivery involves station zero to plus one, while high applications are contraindicated.",
+      "tx": "Guidelines classify operative vaginal delivery using strict **station classification**: **outlet forceps** require the fetal scalp visible at the introitus without separating labia and skull on pelvic floor; **low forceps** require the leading bony vertex at **station +2 or lower**; and midpelvic applications involve **station 0 or +1**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classification Tier",
+          "Bony Station Criteria",
+          "Permissible Cranial Rotation"
+        ],
+        "rows": [
+          [
+            "Outlet operative delivery",
+            "Scalp visible at introitus; skull on pelvic floor",
+            "Rotation 45 degrees or less (OA or OP)"
+          ],
+          [
+            "Low operative delivery",
+            "Leading bony point at +2 station or lower",
+            "Rotation <=45 degrees or >45 degrees"
+          ],
+          [
+            "Midpelvic delivery",
+            "Station above +2 but head engaged (station 0 to +1)",
+            "Rarely performed; high risk of maternal-fetal trauma"
+          ],
+          [
+            "High operative delivery",
+            "Station above zero (unengaged fetal head)",
+            "Strictly contraindicated in modern obstetric practice"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Specific obstetric forceps designs address distinct anatomical conditions. Simpson forceps possess an elongated cephalic curve designed for moulded fetal heads in nulliparas. Elliott forceps feature a rounder cephalic curve for unmoulded heads in multiparas. Kielland forceps feature minimal pelvic curves and a sliding lock, engineered specifically for rotational delivery of deep transverse arrest.",
+      "tx": "Instrument selection matches fetal cranial anatomy: **Simpson forceps** feature an elongated cephalic curve suitable for moulded heads; Elliott forceps feature rounder curves for unmoulded heads; and **Kielland forceps** feature minimal pelvic curves and a sliding lock, designed specifically as **rotational forceps** for deep transverse arrest.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Kielland Rotational Forceps",
+          "points": [
+            "Minimal pelvic curve allows safe axial rotation",
+            "Sliding lock corrects fetal cranial asynclitism",
+            "Indicated for deep transverse arrest and malpositions",
+            "Demands advanced obstetric surgical expertise"
+          ]
+        },
+        "right": {
+          "title": "Simpson Traction Forceps",
+          "points": [
+            "Prominent pelvic curve and separated shanks",
+            "English fixed lock stabilizes parallel blades",
+            "Optimal for traction in direct occiput anterior",
+            "Safe for outlet and low non-rotational deliveries"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Vacuum extraction requires centering the suction cup precisely over the flexion point on the sagittal suture, located three centimetres anterior to the posterior fontanelle. Applying traction along the pelvic curve promotes cephalic flexion and minimal presenting diameters. Improper placement or excessive traction risks scalp lacerations, cephalohematoma, and life-threatening neonatal subgaleal hemorrhage.",
+      "tx": "During **vacuum extraction**, the cup must be centered directly over the **flexion point** on the sagittal suture, located **3 cm anterior to the posterior fontanelle**. Proper cup traction promotes flexion and autorotation, whereas improper placement or excessive traction increases the hazard of devastating neonatal **subgaleal hemorrhage**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify flexion point: 3 cm anterior to posterior fontanelle on sagittal suture"
+          },
+          {
+            "id": "b",
+            "label": "Seat cup without entrapping maternal vaginal or cervical tissue"
+          },
+          {
+            "id": "c",
+            "label": "Raise negative pressure to 0.8 kg/cm2 (600 mmHg) during contractions"
+          },
+          {
+            "id": "d",
+            "label": "Apply traction along pelvic axis concurrent with maternal pushing efforts"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transverse lower uterine segment hysterotomy, or Kerr incision, represents the standard surgical technique for caesarean section. The Kerr incision offers minimal blood loss, easy anatomical closure, and a low uterine scar rupture risk of zero point five to one point zero percent in subsequent pregnancies, in contrast to a classical vertical incision which carries a four to nine percent rupture risk.",
+      "tx": "A transverse lower uterine segment hysterotomy, or **Kerr incision**, is the global standard for caesarean delivery. It provides excellent healing with a subsequent **uterine rupture risk under 0.5 to 1.0%**, compared with a **classical incision** which carries a prohibitive **4 to 9%** rupture risk in future pregnancies.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-prc-lower-segment-caesarean-section.webp",
+        "ar": 1.3333,
+        "caption": "Lower segment transverse uterine incision and delivery. Credit: StewardMD.",
+        "alt": "Surgical exposure and transverse hysterotomy in lower segment caesarean section."
+      }
+    },
+    {
+      "say": "Trial of labour after caesarean is offered to women with one prior low transverse uterine incision and no recurrent obstetric contraindications. A planned trial of labour achieves a sixty to eighty percent success rate. However, prostaglandins such as misoprostol are strictly avoided for cervical ripening or labour induction due to significantly heightened risks of uterine scar rupture.",
+      "tx": "A planned **TOLAC** in candidates with a single **low transverse scar** achieves an overall **success rate of 60 to 80 percent**. However, prostaglandin agents like misoprostol are strictly contraindicated for labour induction in women with prior hysterotomy scars due to an unacceptably high rate of uterine dehiscence and rupture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eligible TOLAC Candidates",
+          "points": [
+            "One previous low transverse caesarean section",
+            "Clinically adequate maternal bony pelvis",
+            "Immediate access to emergency surgical facilities",
+            "60 to 80 percent successful vaginal delivery rate"
+          ]
+        },
+        "right": {
+          "title": "Absolute VBAC Contraindications",
+          "points": [
+            "Previous classical or inverted-T hysterotomy scar",
+            "Prior full-thickness uterine rupture",
+            "Induction using prostaglandin E1 or E2 agents",
+            "Presence of recurring obstetric contraindications"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Emergency peripartum hysterectomy is the definitive lifesaving intervention for unmanageable postpartum hemorrhage refractory to medical uterotonics, uterine balloon tamponade, and compression sutures. Placenta accreta spectrum disorders and catastrophic uterine rupture represent the most frequent surgical indications in contemporary obstetric practice.",
+      "tx": "**Emergency peripartum hysterectomy** serves as the definitive surgical intervention for **life-threatening haemorrhage** unresponsive to uterotonics, balloon tamponade, or vascular ligation. In modern practice, invasive **placenta accreta spectrum** disorders and catastrophic uterine rupture represent the leading indications for peripartum organ removal.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Severe postpartum hemorrhage refractory to uterotonics and compression sutures"
+          },
+          {
+            "id": "b",
+            "label": "Intractable bleeding from placenta accreta spectrum or uterine rupture"
+          },
+          {
+            "id": "c",
+            "label": "Rapid multidisciplinary decision for emergency peripartum hysterectomy"
+          },
+          {
+            "id": "d",
+            "label": "Perform vascular clamping of uterine arteries to arrest life-threatening hemorrhage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When performing peripartum hysterectomy in a hemodynamically unstable patient, subtotal or supracervical hysterectomy is significantly faster and entails less dissection of the bladder and ureters. Total hysterectomy is reserved for cases where extensive lower uterine segment bleeding or invasive cervical placenta accreta precludes leaving the cervix.",
+      "tx": "A **subtotal hysterectomy**, or **supracervical** amputation, is preferred in hemodynamically unstable patients because it significantly shortens operative time and minimizes bladder and **ureteral injury**. However, total hysterectomy is required when morbidly adherent placenta accreta extensively involves the lower segment and cervix.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hysterectomy Technique",
+          "Surgical Characteristics",
+          "Clinical Selection"
+        ],
+        "rows": [
+          [
+            "Subtotal (supracervical)",
+            "Amputation at internal os; cervix retained",
+            "Faster; less ureteral dissection in exsanguinating patients"
+          ],
+          [
+            "Total peripartum hysterectomy",
+            "Complete removal including cervical cuff",
+            "Required when placenta accreta involves cervix or lower segment"
+          ],
+          [
+            "Ureteral identification",
+            "Direct visualization or retroperitoneal palpation",
+            "Crucial step before clamping uterine vascular pedicles"
+          ],
+          [
+            "Internal iliac ligation",
+            "Ligation of anterior division internal iliac artery",
+            "Adjunctive hemostatic measure to reduce pelvic perfusion pressure"
+          ]
+        ]
+      }
+    }
+  ]
+}

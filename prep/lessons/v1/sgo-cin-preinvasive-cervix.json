@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "sgo-cin-preinvasive-cervix",
+ "title": "Cervical Intraepithelial Neoplasia (CIN) & Colposcopy: Histopathology, ASCCP 2019 Guidelines and Excisional Therapy",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 8",
+  "DiSaia and Creasman Clinical Gynecologic Oncology 10th Edition Ch 1",
+  "ASCCP 2019 Risk-Based Management Consensus Guidelines"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Cervical intraepithelial neoplasia grade 3 represents the true biological precursor to invasive squamous cell carcinoma. Pathologically, it exhibits loss of cellular polarity, nuclear pleomorphism, and abnormal mitotic figures spanning the upper third of the stratified squamous epithelium.",
+   "tx": "Cervical intraepithelial neoplasia grade 3 (**CIN3**) serves as the definitive **preinvasive precursor** to invasive cervical squamous cell carcinoma. Histopathologically, the dysplastic lesion displays severe loss of normal epithelial maturation, marked nuclear pleomorphism, elevated nuclear-to-cytoplasmic ratio, and abnormal mitotic figures demonstrating **full-thickness atypia** that extends through the **upper third epithelium**.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mcc-hp-cervical-gen1.webp",
+    "ar": 1.3393,
+    "caption": "HPV oncoproteins E6 and E7 disrupting p53 and Rb toward CIN progression. Illustration: StewardMD original.",
+    "alt": "Diagram showing HPV oncoproteins E6 and E7 inactivating tumor suppressors p53 and Rb leading to CIN3."
+   }
+  },
+  {
+   "say": "The modern management of abnormal cervical cancer screening tests is governed by the 2019 ASCCP risk-based consensus guidelines. When an individual patient's immediate risk of high-grade disease exceeds sixty percent, immediate treatment is favored over intervening diagnostic colposcopic biopsy.",
+   "tx": "Under **ASCCP 2019** risk-based management, clinical action thresholds are guided by calculated risk rather than cytological results alone. When the estimated immediate risk of high-grade lesions reaches the **60% risk threshold**, an **immediate excisional treatment** approach is expedited without mandatory preceding biopsy, exemplified by **HPV 16 HSIL** in post-reproductive patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Patient undergoes cervical screening with cytology and HPV genotyping"
+     },
+     {
+      "id": "b",
+      "label": "Calculate personalized immediate CIN3+ risk using ASCCP algorithms"
+     },
+     {
+      "id": "c",
+      "label": "Immediate risk reaches 60% threshold (e.g., HPV 16 with HSIL)"
+     },
+     {
+      "id": "d",
+      "label": "Proceed directly to immediate diagnostic and therapeutic excisional procedure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Colposcopic examination is considered adequate and satisfactory only when the entire transformation zone and squamocolumnar junction are completely visualized. When the junction recedes into the endocervical canal, forming a Type 3 transformation zone, colposcopy becomes unsatisfactory.",
+   "tx": "Colposcopy requires complete circumferential visualization of the **squamocolumnar junction** (SCJ). In patients with a **Type 3 transformation zone**, the SCJ lies entirely within the endocervical canal, resulting in an **unsatisfactory colposcopy** that prevents exclusion of invasive disease and necessitates diagnostic **endocervical curettage** (ECC) or diagnostic conization.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 & Type 2 Transformation Zones",
+     "points": [
+      "Type 1 is fully ectocervical and completely visible",
+      "Type 2 has endocervical component but SCJ remains 100% visible",
+      "Allows satisfactory colposcopy and targeted punch biopsies"
+     ]
+    },
+    "right": {
+     "title": "Type 3 Transformation Zone",
+     "points": [
+      "SCJ retracted entirely into the endocervical canal",
+      "Upper limit of lesion cannot be visualized colposcopically",
+      "Mandates endocervical curettage (ECC) or cone biopsy"
+     ]
+    }
+   }
+  },
+  {
+   "say": "High-grade preinvasive cervical lesions exhibit characteristic morphological vascular and epithelial features under colposcopic magnification after application of five percent acetic acid. The presence of dense acetowhitening and coarse vessel patterns indicates high-grade CIN.",
+   "tx": "Colposcopic hallmarks predictive of CIN 2 and 3 include **dense acetowhite** epithelium with rapid onset and dull grey appearance, **coarse punctation**, **coarse mosaicism**, prominent cuffed crypt openings, and **atypical vessels** with irregular branching, caliber changes, and abrupt terminal tapering across the transformation zone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Colposcopic Feature",
+     "Low-Grade Appearance (CIN 1)",
+     "High-Grade Appearance (CIN 2/3)"
+    ],
+    "rows": [
+     [
+      "Acetowhite Epithelium",
+      "Translucent, thin, slow uptake, rapid fade",
+      "Dense, opaque, rapid uptake, prolonged persistence"
+     ],
+     [
+      "Punctation Pattern",
+      "Fine, regular caliber, widely spaced vessels",
+      "Coarse, irregular, large caliber stippling"
+     ],
+     [
+      "Mosaicism Pattern",
+      "Fine, regular caliber polygonal borders",
+      "Coarse, prominent raised irregular tiles"
+     ],
+     [
+      "Vessel Architecture",
+      "Orderly arborizing branching capillaries",
+      "Atypical non-branching comma-shaped vessels"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Excisional treatment of high-grade cervical dysplasia can be accomplished using loop electrosurgical excision or cold knife conization. Cold knife conization produces pristine specimens with uncharred surgical margins, which is critical when invasive disease or glandular neoplasia is suspected.",
+   "tx": "Primary excisional modalities comprise **cold knife conization (CKC)** and loop electrosurgical excision procedure (**LEEP**). CKC provides **non-cauterized margins** with intact histological architecture, making it the preferred method whenever microinvasive carcinoma, high-grade endocervical disease, or suspected **adenocarcinoma in situ (AIS)** requires precise histopathological assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Loop Electrosurgical Excision (LEEP)",
+     "points": [
+      "Outpatient local anaesthesia office procedure",
+      "Rapid healing with low operative bleeding risk",
+      "Thermal cautery artifact may compromise margin evaluation"
+     ]
+    },
+    "right": {
+     "title": "Cold Knife Conization (CKC)",
+     "points": [
+      "Inpatient operating room procedure under anaesthesia",
+      "Completely intact non-cauterized margins without thermal damage",
+      "Definitive procedure for suspected microinvasion and AIS"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Adenocarcinoma in situ of the uterine cervix presents unique management challenges due to its multifocal nature and frequent occurrence of skip lesions. After diagnostic conization establishes clean margins, completion hysterectomy remains the definitive treatment once family planning is complete.",
+   "tx": "In patients with **adenocarcinoma in situ**, diagnostic conization must demonstrate **negative margins** with an endocervical clearance of at least **3 mm margin**. Because glandular precursors demonstrate frequent non-contiguous **skip lesions**, completion simple extrafascial hysterectomy remains the standard definitive therapy once childbearing is completed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Histopathological confirmation of cervical adenocarcinoma in situ"
+     },
+     {
+      "id": "b",
+      "label": "Perform cold knife conization targeting minimum 3 mm clear margins"
+     },
+     {
+      "id": "c",
+      "label": "Verify completely negative endocervical and ectocervical margins"
+     },
+     {
+      "id": "d",
+      "label": "Recommend definitive extrafascial hysterectomy after childbearing completes"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Cervical excisional procedures significantly alter structural cervical integrity and may lead to future adverse obstetrical outcomes. The risk of mid-trimester pregnancy loss and preterm delivery increases proportionally with excision depth.",
+   "tx": "Cervical excisional interventions carry an elevated **preterm birth risk** with a 2-fold increased relative risk of preterm delivery before 37 weeks gestation. This risk of mid-trimester loss and **cervical insufficiency** correlates directly with surgical excision depth, escalating sharply when **cone depth >10-15 mm**.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Shallow Excision (Depth < 10 mm)",
+     "points": [
+      "Preserves deep endocervical fibrous stroma",
+      "Minimal alteration in structural biomechanical strength",
+      "Preterm delivery rate comparable to general population"
+     ]
+    },
+    "right": {
+     "title": "Deep Excision (Depth > 10 to 15 mm)",
+     "points": [
+      "Significant destruction of cervical load-bearing collagen",
+      "Two-fold increase in preterm birth before 37 weeks",
+      "Higher risk of mid-trimester spontaneous cervical incompetence"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Following excisional management of high-grade cervical dysplasia, long-term oncological surveillance is essential because patients retain an elevated risk of recurrent neoplasia for several decades.",
+   "tx": "Long-term **post-treatment surveillance** following CIN2 or CIN3 excision mandates cotesting with **6-month HPV testing**, followed by **annual HPV for 3 years**. Thereafter, clinical surveillance must continue at 3-year intervals for a minimum **25-year duration**, as persistent elevated cervical cancer risk remains throughout life.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-cervical-cancer-gen1.webp",
+    "ar": 1.3393,
+    "caption": "Cervical smear showing ringed virus changed cells beside normal flat cells after prompt fixation, Illustration: StewardMD original.",
+    "alt": "Microscopic cervical cytology view showing HPV cytopathic effects and high-grade dysplastic squamous cells."
+   }
+  }
+ ]
+}

@@ -1,0 +1,68 @@
+{
+  "id": "periop-diabetes-steroids",
+  "title": "Peri-operative diabetes, SGLT2 inhibitors and steroid cover",
+  "subtitle": "Keep glucose safe, avoid ketoacidosis, prevent adrenal crisis",
+  "category": "perioperative",
+  "specialty": "periop",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "cpoc-diabetes", "org": "Centre for Perioperative Care (CPOC) with the Joint British Diabetes Societies for Inpatient Care (JBDS-IP)", "title": "Guideline for perioperative care for people with diabetes mellitus undergoing elective and emergency surgery", "year": 2021, "url": "https://cpoc.org.uk/guidelines-resources-guidelines/perioperative-diabetes", "accessed": "2026-11-04" },
+    { "id": "aagbi-steroids-2020", "org": "Association of Anaesthetists, Royal College of Physicians and Society for Endocrinology", "title": "Guidelines for the management of glucocorticoids during the peri-operative period for patients with adrenal insufficiency", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/32017012/", "accessed": "2026-11-04" },
+    { "id": "aha-acc-2024", "org": "American Heart Association and American College of Cardiology (AHA/ACC)", "title": "2024 AHA/ACC guideline for perioperative cardiovascular management for noncardiac surgery", "year": 2024, "url": "https://pubmed.ncbi.nlm.nih.gov/39316661/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Nausea, vomiting, abdominal pain, tachypnoea or acidosis in a patient on an SGLT2 inhibitor, even with a normal glucose: euglycaemic diabetic ketoacidosis. Check blood ketones." },
+      { "text": "Unexplained hypotension, hyponatraemia, hyperkalaemia or hypoglycaemia in a patient on long-term steroids or with known adrenal insufficiency: adrenal crisis." },
+      { "text": "Type 1 diabetes: never omit basal insulin, even when fasting. Omission causes ketoacidosis within hours." },
+      { "text": "Capillary glucose below 4 mmol/L or persistently above 12 mmol/L around surgery." },
+      { "text": "HbA1c above 69 mmol/mol (8.5%) before elective surgery." }
+    ],
+    "do_now": [
+      { "text": "Check HbA1c from the last three months at pre-assessment; if above 69 mmol/mol (8.5%), refer for optimisation and consider deferring elective surgery.", "evidenceRef": "cpoc-diabetes" },
+      { "text": "Place people with diabetes early on the operating list to minimise fasting.", "evidenceRef": "cpoc-diabetes" },
+      { "text": "Target capillary glucose of 6 to 10 mmol/L, accepting 4 to 12 mmol/L, and check at least hourly during surgery.", "timeCritical": true, "evidenceRef": "cpoc-diabetes" },
+      { "text": "SGLT2 inhibitors: stop 3 days before elective surgery (4 days for ertugliflozin), per the 2024 AHA/ACC guideline and product labelling. Some UK guidance uses a shorter omission; follow the local policy and document the plan.", "evidenceRef": "aha-acc-2024" },
+      { "text": "Steroid cover for adrenal insufficiency or long-term glucocorticoids: give hydrocortisone 100 mg intravenously at induction for surgery under general or regional anaesthesia, then continued cover per the 2020 guideline.", "timeCritical": true, "evidenceRef": "aagbi-steroids-2020" }
+    ],
+    "assess": [
+      { "text": "Type of diabetes, every glucose-lowering drug and its timing, hypoglycaemia awareness, and complications: renal, cardiac, autonomic neuropathy.", "calcs": ["hba1c"] },
+      { "text": "Steroid exposure: dose, duration and when stopped. Convert to prednisolone equivalent to compare preparations.", "calcs": ["steroid_conv"] },
+      { "text": "How many meals will be missed. One missed meal is often managed by adjusting medication; more than one, or poor control, usually needs a variable rate intravenous insulin infusion." },
+      { "text": "Renal function for metformin and other agents.", "calcs": ["ckdepi"] }
+    ],
+    "investigate": [
+      { "text": "Capillary glucose on admission and hourly during surgery and recovery." },
+      { "text": "Blood ketones in anyone on an SGLT2 inhibitor who is unwell, and routinely before surgery in many local protocols." },
+      { "text": "Electrolytes, including potassium, during an insulin infusion." },
+      { "text": "Venous gas for acidosis if ketones are raised or the patient is unwell." }
+    ],
+    "resuscitate": [
+      { "text": "Reduce long-acting basal insulin by 20% on the evening before and the day of surgery; continue it alongside any intravenous insulin infusion.", "evidenceRef": "cpoc-diabetes" },
+      { "text": "Use a variable rate intravenous insulin infusion with glucose-containing fluid when more than one meal will be missed, when control is poor, or in emergency surgery with hyperglycaemia.", "evidenceRef": "cpoc-diabetes" },
+      { "text": "Adjust oral agents according to the CPOC drug table, which specifies the day before and the day of surgery for each class.", "evidenceRef": "cpoc-diabetes" },
+      { "text": "Ketones raised in a patient on an SGLT2 inhibitor: treat as diabetic ketoacidosis with glucose and insulin even if blood glucose is normal, and involve the diabetes team.", "evidenceRef": "cpoc-diabetes" },
+      { "text": "Steroids, major surgery: after the induction dose, continue hydrocortisone by infusion (200 mg over 24 hours) or 50 mg 6-hourly by injection until oral intake resumes, then double the usual oral dose for 48 hours or longer after complicated surgery.", "evidenceRef": "aagbi-steroids-2020" }
+    ],
+    "definitive": [
+      { "text": "Restart usual diabetes medication once eating and drinking; overlap the subcutaneous insulin with the infusion before stopping it, typically with a meal.", "evidenceRef": "cpoc-diabetes" },
+      { "text": "Restart SGLT2 inhibitors only when the patient is eating and drinking normally and is clinically well.", "evidenceRef": "aha-acc-2024" },
+      { "text": "Steroid cover is not needed beyond the usual dose for minor procedures under local anaesthesia; for intermediate and major surgery follow the graded 2020 guideline schedule.", "evidenceRef": "aagbi-steroids-2020" },
+      { "text": "Suspected adrenal crisis: hydrocortisone 100 mg intravenously immediately, intravenous fluids, and then continued hydrocortisone; do not delay for a cortisol result.", "evidenceRef": "aagbi-steroids-2020" },
+      { "text": "Discharge with a written plan for diabetes medication and, for steroid-dependent patients, sick-day rules and a steroid emergency card.", "evidenceRef": "cpoc-diabetes" }
+    ],
+    "escalate": [
+      { "text": "Inpatient diabetes team for type 1 diabetes, insulin pumps, poor control, ketosis or recurrent hypoglycaemia." },
+      { "text": "Endocrinology for uncertain adrenal status or complex steroid regimens." },
+      { "text": "Critical care for diabetic ketoacidosis, hyperosmolar state or adrenal crisis with shock." }
+    ]
+  },
+  "notes": [
+    "Euglycaemic ketoacidosis is the trap: an SGLT2 inhibitor keeps the glucose normal while the patient becomes acidotic. Check ketones, not just glucose.",
+    "Steroid cover is cheap and adrenal crisis is lethal. When steroid exposure is uncertain, give the cover.",
+    "Most peri-operative diabetes harm comes from omitted basal insulin in type 1 diabetes and prolonged fasting, both of which are preventable at pre-assessment."
+  ],
+  "calcs": ["hba1c", "steroid_conv", "ckdepi"]
+}

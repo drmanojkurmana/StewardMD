@@ -1,0 +1,185 @@
+{
+  "id": "lscs",
+  "title": "Lower segment caesarean section",
+  "subtitle": "Category, incision, delivery, closure",
+  "system": "obstetric",
+  "aliases": ["caesarean section", "C-section", "LSCS", "caesarean birth"],
+  "estMinutes": 45,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-ng192", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Caesarean birth (NG192)", "year": 2021, "version": "NG192", "url": "https://www.nice.org.uk/guidance/ng192", "accessed": "2026-11-04" },
+    { "id": "rcog-gtg52", "org": "Royal College of Obstetricians and Gynaecologists (RCOG)", "title": "Prevention and management of postpartum haemorrhage (Green-top Guideline No. 52)", "year": 2016, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/prevention-and-management-of-postpartum-haemorrhage-green-top-guideline-no-52/", "accessed": "2026-11-04" },
+    { "id": "rcog-gtg37a", "org": "Royal College of Obstetricians and Gynaecologists (RCOG)", "title": "Reducing the risk of venous thromboembolism during pregnancy and the puerperium (Green-top Guideline No. 37a)", "year": 2015, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["bishop", "apgar", "shock_index", "edd"],
+  "chapters": {
+    "indications": [
+      "Emergency: suspected fetal compromise, failure to progress in labour, cord prolapse, major antepartum haemorrhage, uterine rupture, failed instrumental delivery.",
+      "Planned: breech presentation where external cephalic version has failed or is declined, placenta praevia, some multiple pregnancies, maternal request after discussion, and previous caesarean when that is the woman's informed choice.",
+      "Urgency is classified in four categories, from immediate threat to the life of the woman or fetus (category 1) to delivery timed to suit the woman and the service (category 4)."
+    ],
+    "contraindications": [
+      "Few absolute contraindications; the decision balances maternal and fetal risk. A dead fetus is usually better delivered vaginally unless there is a maternal indication.",
+      "Uncorrected severe coagulopathy needs correction or blood products running before the incision."
+    ],
+    "preparation": [
+      "Confirm the urgency category and communicate it to the whole team; for category 1, aim for delivery within 30 minutes of the decision, for category 2 within 75 minutes, as NICE NG192 sets out.",
+      "Haemoglobin, group and save; crossmatch for praevia, suspected accreta, or high bleeding risk.",
+      "Antacid and anti-emetic premedication per anaesthetic protocol; regional anaesthesia unless contraindicated or too slow for the urgency.",
+      "Urinary catheter, consent including bleeding, infection, bladder and bowel injury, venous thromboembolism, hysterectomy, and implications for future pregnancies.",
+      "Known placenta praevia or accreta: senior obstetrician and anaesthetist, blood available, interventional radiology and cell salvage considered."
+    ],
+    "positioning": [
+      "Supine with left lateral tilt (or a wedge) until delivery, to relieve aortocaval compression.",
+      "Arms out on boards; diathermy plate placed; legs supported."
+    ],
+    "equipment": [
+      "Standard caesarean set, Doyen retractor, delivery forceps or vacuum available, cord clamps and cord-gas syringes.",
+      "Neonatal resuscitaire checked and neonatal team called according to indication.",
+      "Uterotonics prepared, cell salvage and balloon tamponade available."
+    ],
+    "anatomy": [
+      "The lower segment forms in late pregnancy and labour from the isthmus; it is thin, less vascular and heals well, which is why the transverse lower segment incision is used.",
+      "The bladder lies on the anterior lower segment beneath the uterovesical fold and is drawn upwards in prolonged labour and after previous caesareans.",
+      "The uterine vessels run lateral to the lower segment. Lateral extension of the uterine incision tears into them.",
+      "The uterus is usually dextrorotated, so the left uterine vessels lie closer to the midline than expected."
+    ],
+    "criticalSafety": [
+      "State the urgency category at the time-out and the decision-to-delivery time.",
+      "Check the uterus position and rotation before the uterine incision so the incision is central.",
+      "Deliver the head by lifting it out of the pelvis rather than levering against the lower segment, which tears laterally.",
+      "Quantify blood loss and give uterotonics proactively."
+    ],
+    "structuresAtRisk": [
+      "Bladder",
+      "Uterine vessels and broad ligament",
+      "Fetus (laceration at uterine incision)",
+      "Bowel in a repeat procedure with adhesions",
+      "Ureters during repair of lateral extensions"
+    ],
+    "commonErrors": [
+      "An off-centre uterine incision in a rotated uterus, extending into the vessels on one side.",
+      "Pushing the bladder down insufficiently in a repeat caesarean, then incising into it.",
+      "Difficult delivery of a deeply impacted head in second-stage caesarean without assistance from below or a planned technique.",
+      "Underestimating blood loss until the woman is shocked."
+    ],
+    "complications": [
+      "Haemorrhage from atony, extensions or placental bed bleeding; placenta accreta spectrum in praevia with previous caesarean.",
+      "Infection of wound, endometrium or urinary tract.",
+      "Bladder, ureteric and bowel injury.",
+      "Venous thromboembolism.",
+      "Fetal laceration; neonatal respiratory morbidity, particularly at planned delivery before 39 weeks.",
+      "Long term: scar dehiscence or rupture in later pregnancy, placenta praevia and accreta in future pregnancies."
+    ],
+    "postop": [
+      "Observations, quantified ongoing blood loss and uterine tone in recovery.",
+      "Thromboprophylaxis by risk assessment per RCOG Green-top 37a.",
+      "Early eating and drinking, catheter removal and mobilisation when the regional block has worn off.",
+      "Debrief the woman about the indication and the implications for future births."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "In category 1, verbal consent is valid and documented; do not delay delivery for a written form." },
+    { "ref": "step.core.timeout", "emphasis": "State the urgency category and the time of decision aloud." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotic before skin incision, not after cord clamping, per NICE NG192. VTE risk assessment per Green-top 37a." },
+    { "ref": "step.core.positioning", "emphasis": "Left lateral tilt until the baby is delivered." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.cs.entry" },
+    { "ref": "step.cs.uterine-incision" },
+    { "ref": "step.cs.delivery" },
+    { "ref": "step.cs.placenta" },
+    { "ref": "step.cs.uterine-closure" },
+    { "ref": "step.obg.adnexal-check" },
+    { "ref": "step.core.haemostasis", "emphasis": "Check the angles of the uterine incision, the bladder flap and the posterior uterus before closing." },
+    { "ref": "step.obg.blood-loss" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.cs.sheath" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.obg.rhesus", "emphasis": "Cord blood sample for a rhesus-negative woman so the newborn's group and the anti-D dose can be determined." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.cs.entry": {
+      "id": "step.cs.entry", "kind": "access",
+      "title": "Abdominal entry (Joel-Cohen)",
+      "why": "A transverse incision with blunt separation of the layers is fast, bleeds less and is associated with shorter operating time and less fever than the traditional Pfannenstiel.",
+      "how": [
+        "Make a straight transverse skin incision about 3 cm above the symphysis pubis.",
+        "Open subsequent tissue layers bluntly, extending with scissors only where needed.",
+        "Open the peritoneum high and away from the bladder, then extend under vision.",
+        "In a repeat caesarean, expect adhesions and take more time; sharp dissection may be needed."
+      ],
+      "structuresAtRisk": ["Bladder", "Inferior epigastric vessels", "Bowel adherent to the peritoneum"],
+      "pitfalls": ["Opening the peritoneum low and entering the bladder.", "Rushing a repeat entry in a category 2 or 3 case."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cs.uterine-incision": {
+      "id": "step.cs.uterine-incision", "kind": "access", "critical": true,
+      "title": "Lower segment uterine incision",
+      "why": "A central transverse incision in the lower segment heals well and reduces the risk of rupture in a future labour. Extensions into the uterine vessels are the commonest source of intra-operative haemorrhage.",
+      "how": [
+        "Correct for dextrorotation and palpate the round ligaments to centre the incision.",
+        "Incise the uterovesical fold and reflect the bladder down where needed.",
+        "Make a short transverse incision through the lower segment until the membranes bulge, protecting the fetus.",
+        "Extend the incision bluntly with the fingers, which is associated with less blood loss than sharp extension."
+      ],
+      "structuresAtRisk": ["Uterine vessels", "Bladder", "Fetus"],
+      "pitfalls": ["A deep single cut that lacerates the fetus.", "A low incision into the cervix or vagina in a fully dilated woman."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cs.delivery": {
+      "id": "step.cs.delivery", "kind": "resection", "critical": true,
+      "title": "Delivery of the baby",
+      "why": "Delivery is the purpose of the operation and the time is recorded. The technique decides whether the incision extends.",
+      "how": [
+        "Insert a hand below the presenting part, flex the head and lift it to the incision; fundal pressure by the assistant aids delivery.",
+        "Use forceps or a vacuum cup for a high head; for an impacted head at full dilatation, use a planned technique (assistant pushing from below, or reverse breech extraction) and call for senior help early.",
+        "Deliver the body, record the time of delivery, and hand the baby to the midwife or neonatal team.",
+        "Clamp the cord after a delay where the baby's condition allows, per local policy, and take paired cord gases when indicated."
+      ],
+      "structuresAtRisk": ["Fetus", "Uterine angles"],
+      "pitfalls": ["Levering the head out against the lower segment.", "Delaying the call for help with an impacted head."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cs.placenta": {
+      "id": "step.cs.placenta", "kind": "resection",
+      "title": "Uterotonic and placental delivery",
+      "why": "Controlled cord traction rather than manual removal reduces blood loss and endometritis. The uterotonic given at this point is the main prevention of atony.",
+      "how": [
+        "The anaesthetist gives the uterotonic per local protocol as the baby is delivered.",
+        "Deliver the placenta by controlled cord traction and check it is complete.",
+        "Check the cavity is empty; exteriorise the uterus only if it helps exposure or repair."
+      ],
+      "structuresAtRisk": ["Placental bed"],
+      "pitfalls": ["Manual removal by habit.", "Missing a retained cotyledon or succenturiate lobe."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cs.uterine-closure": {
+      "id": "step.cs.uterine-closure", "kind": "reconstruction", "critical": true,
+      "title": "Uterine closure",
+      "why": "The uterine scar is what every future pregnancy depends on. NICE advises double-layer closure outside research because the safety of single-layer closure for future rupture is uncertain.",
+      "how": [
+        "Identify both angles and secure them first, including any extension.",
+        "Close the uterus in two layers with absorbable suture.",
+        "Do not routinely close the visceral or parietal peritoneum.",
+        "Check haemostasis along the suture line and at the angles."
+      ],
+      "structuresAtRisk": ["Uterine vessels", "Ureters with lateral extensions", "Bladder"],
+      "pitfalls": ["Placing blind deep sutures at a bleeding lateral angle, risking the ureter.", "Missing an angle that retracted out of view."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cs.sheath": {
+      "id": "step.cs.sheath", "kind": "closure",
+      "title": "Rectus sheath closure",
+      "why": "A secure sheath closure prevents incisional hernia, and routine subcutaneous drains or subcutaneous closure add nothing in most women.",
+      "how": [
+        "Close the rectus sheath with a continuous absorbable suture.",
+        "Close subcutaneous fat only in women with more than about 2 cm of fat, as NICE NG192 advises; do not use superficial wound drains routinely."
+      ],
+      "structuresAtRisk": ["Inferior epigastric vessels", "Bowel"],
+      "pitfalls": ["Bites that catch bowel or bladder in a thin abdominal wall."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

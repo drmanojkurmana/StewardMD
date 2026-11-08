@@ -81,7 +81,20 @@
     if (!(window.Motion && window.Motion.animate)) return;   // Motion gone: app's removal handles it
     var f = F[famOf.get(el) || familyOf(el)];
     el.style.transition = "none";
-    try { window.Motion.animate(el, f.kout, f.oout); } catch (e) {}
+    var kout = f.kout;
+    // A sheet ends where its own closed CSS puts it. On iPad (ipad-native.css) the More sheet floats 20 px above the
+    // dock and closes to translateY(100% + 40px); a fixed translateY(100%) left its top edge peeking over the dock.
+    // On a phone the closed CSS is translateY(100%), so the target is the same as before.
+    // A drag-to-dismiss leaves its finger offset inline: read the closed CSS without it, then put it back so the slide
+    // starts from where the finger let go.
+    if (f === F.sheet) {
+      try {
+        var inl = el.style.transform; el.style.transform = "";
+        var ct = getComputedStyle(el).transform; el.style.transform = inl;
+        if (ct && ct !== "none") kout = { transform: ct, opacity: f.kout.opacity };
+      } catch (e) {}
+    }
+    try { window.Motion.animate(el, kout, f.oout); } catch (e) {}
   }
   function onOpen(el) { if (openState.has(el)) return; openState.add(el); if (reduced() || !visible(el)) return; animateIn(el); }
   function onClose(el) { if (!openState.has(el)) return; openState.delete(el); if (reduced()) return; animateOut(el); }

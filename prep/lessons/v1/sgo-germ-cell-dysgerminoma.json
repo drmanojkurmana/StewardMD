@@ -1,0 +1,244 @@
+{
+  "v": 1,
+  "module": "sgo-germ-cell-dysgerminoma",
+  "title": "Malignant Ovarian Germ Cell Tumors: Dysgerminoma & Yolk Sac",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 18",
+    "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11e Ch 85",
+    "NCCN Clinical Practice Guidelines in Oncology: Ovarian Cancer (2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Malignant germ cell neoplasms occur predominantly in adolescent and young adult females. Dysgerminoma represents the most prevalent histological variant, identical morphologically to testicular seminoma.",
+      "tx": "**Dysgerminoma** is the **most common MOGCT** (malignant ovarian germ cell tumor), accounting for **30-40%** (**30** to **40** percent) of cases with **median age 15-20** (**15** to **20** years). It uniquely exhibits **bilateral involvement 10-15%** (**10** to **15** percent) at initial diagnosis, whereas other malignant germ cell variants are almost universally unilateral.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ovarian-cancer-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Malignant ovarian tumor histology and tumor marker expression. Credit: StewardMD.",
+        "alt": "Malignant ovarian germ cell tumor microscopic features"
+      }
+    },
+    {
+      "say": "Serum tumor biomarkers play an indispensable role in distinguishing distinct histological variants. Dysgerminoma secretes lactate dehydrogenase while yolk sac tumors produce alpha fetoprotein.",
+      "tx": "Characteristic serum markers for dysgerminoma include **LDH**, **PLAP** (placental alkaline phosphatase), and beta-hCG (secreted by **syncytiotrophoblastic giant cells** in up to **5** percent of cases) alongside **normal AFP**, providing essential diagnostic distinction from yolk sac tumors, immature teratomas, and mixed embryonal carcinomas.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Germ Cell Histological Subtype",
+          "Primary Serum Tumor Marker",
+          "Key Pathological / Microscopic Feature"
+        ],
+        "rows": [
+          [
+            "Dysgerminoma",
+            "LDH, PLAP, beta-hCG (<5%), normal AFP",
+            "Fibrous septa with mature lymphocytes; Fried-egg cells"
+          ],
+          [
+            "Yolk Sac Tumor (Endodermal Sinus)",
+            "AFP (alpha-fetoprotein) markedly elevated",
+            "Schiller-Duval bodies and hyaline globules"
+          ],
+          [
+            "Embryonal Carcinoma",
+            "Both AFP and beta-hCG markedly elevated",
+            "Sheets of pleomorphic primitive epithelial-like cells"
+          ],
+          [
+            "Non-gestational Choriocarcinoma",
+            "Extreme beta-hCG (>100,000 mIU/mL)",
+            "Plexiform syncytiotrophoblasts and cytotrophoblasts"
+          ],
+          [
+            "Immature Teratoma",
+            "None specific (occasionally elevated AFP)",
+            "Immature neuroectodermal rosettes and glia"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Yolk sac tumors represent biologically aggressive malignancies that secrete high levels of alpha fetoprotein. Histological examination reveals pathognomonic glomeruloid microstructures known as Schiller Duval bodies.",
+      "tx": "**Yolk sac tumor** (**endodermal sinus** tumor) represents the second most common MOGCT, universally characterized by rapid abdominal distension, **elevated serum AFP**, and pathognomonic **Schiller-Duval bodies** consisting of a glomerulus-like central capillary encircled by primitive columnar epithelial cells within an endodermal sinus space.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Present with rapid pelvic mass and acute lower abdominal pain"
+          },
+          {
+            "id": "b",
+            "label": "Document extreme elevation in serum alpha-fetoprotein (AFP >1000 ng/mL)"
+          },
+          {
+            "id": "c",
+            "label": "Identify Schiller-Duval bodies and PAS-positive hyaline globules on biopsy"
+          },
+          {
+            "id": "d",
+            "label": "Initiate urgent fertility-sparing surgery followed by mandatory platinum chemotherapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Given the young age of affected patients, preservation of reproductive potential is the paramount surgical objective. Unilateral salpingo-oophorectomy is standard even in advanced stage disease.",
+      "tx": "**Fertility-sparing surgery** comprising **unilateral salpingo-oophorectomy** with **contralateral ovarian preservation** and uterine conservation is standard across **all stages MOGCT** (Stage I through Stage IV), because extreme sensitivity to combination platinum chemotherapy preserves curative potential without requiring radical bilateral pelvic gonadectomy or hysterectomy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fertility-Sparing Staging (USO)",
+          "points": [
+            "Unilateral salpingo-oophorectomy with preservation of uterus and opposite ovary",
+            "Comprehensive surgical staging: peritoneal cytology, omentectomy, nodal sampling",
+            "Safe in Stage I through Stage IV due to extreme chemosensitivity"
+          ]
+        },
+        "right": {
+          "title": "Contraindicated Interventions",
+          "points": [
+            "Routine wedge biopsy of normal-appearing contralateral ovary",
+            "Bilateral oophorectomy in young patients without proven bilateral involvement",
+            "Aggressive debulking causing extensive pelvic visceral damage"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Routine biopsy of the normal contralateral ovary must be avoided during surgical staging. Unnecessary wedge resection compromises ovarian follicular reserve.",
+      "tx": "There is a strict **contraindication to wedge biopsy** of a **normal contralateral ovary** in MOGCT staging, because wedge resection induces mechanical pelvic adhesions and causes iatrogenic infertility, compromising future **preservation of ovarian reserve** without yielding meaningful occult diagnostic findings in young women.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Maneuver",
+          "Recommended Practice in MOGCT",
+          "Clinical Rationale & Patient Outcome"
+        ],
+        "rows": [
+          [
+            "Contralateral Normal Ovary",
+            "Inspect and palpate only; DO NOT BIOPSY",
+            "Prevents tubal-ovarian adhesion and follicular loss"
+          ],
+          [
+            "Contralateral Ovarian Cyst",
+            "Conservative cystectomy with frozen section",
+            "Preserves functional ovarian parenchyma if benign"
+          ],
+          [
+            "Omentectomy & Peritoneal Washings",
+            "Infracolic omentectomy and cytologic washings",
+            "Provides accurate surgical staging for adjuvant decision"
+          ],
+          [
+            "Retroperitoneal Lymph Nodes",
+            "Sample only grossly enlarged or suspicious nodes",
+            "Avoids excessive retroperitoneal dissection morbidity"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Patients with completely resected early stage pure dysgerminoma have an extraordinary prognosis without systemic treatment. Active surveillance avoids unnecessary chemotherapy exposure.",
+      "tx": "In **Stage IA dysgerminoma** (pure encapsulated tumor completely resected with negative staging), postoperative **observation alone** with **omission of adjuvant chemo** is standard, achieving a **cure rate >95%** (cure rate **1**00% with **95** percent salvage rate upon relapse using standard BEP chemotherapy).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage IA Pure Dysgerminoma (Active Surveillance)",
+          "points": [
+            "Capsule intact, negative peritoneal cytology, negative lymph nodes",
+            "Avoids gonadotoxicity, pulmonary fibrosis, and secondary leukemia",
+            "Serial abdominal-pelvic CT and serum LDH monitoring"
+          ]
+        },
+        "right": {
+          "title": "All Non-Dysgerminomas & Advanced Dysgerminoma",
+          "points": [
+            "Yolk sac tumors, embryonal carcinomas, or Stage IB-IV dysgerminoma",
+            "Mandatory adjuvant BEP chemotherapy regardless of stage (except Stage I G1 teratoma)",
+            "Prevents rapid, life-threatening metastatic recurrence"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Unlike dysgerminoma, yolk sac tumors require mandatory systemic chemotherapy regardless of stage. The combination of bleomycin, etoposide, and cisplatin prevents lethal recurrence.",
+      "tx": "In **yolk sac tumor adjuvant chemo**, there is **mandatory adjuvant therapy** with the BEP regimen for all patients regardless of stage, because rapid **hematogenous dissemination** and intrinsic aggressive biology lead to fatal relapse in over ninety percent of patients managed with surgery alone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Document histological confirmation of yolk sac tumor"
+          },
+          {
+            "id": "b",
+            "label": "Obtain baseline serum AFP and pulmonary function tests (DLCO)"
+          },
+          {
+            "id": "c",
+            "label": "Administer 3 cycles of BEP for completely resected stage I disease"
+          },
+          {
+            "id": "d",
+            "label": "Deliver 4 cycles of BEP for bulky or metastatic disease"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adolescent females presenting with dysgerminoma require cytogenetic analysis to evaluate for underlying gonadal dysgenesis. The presence of a Y chromosome mandates bilateral gonadectomy.",
+      "tx": "Mandatory **karyotyping in dysgerminoma** is indicated in children and young adolescents with primary amenorrhea: discovering **Swyer syndrome 46,XY** (karyotype **46**,XY) or mixed gonadal dysgenesis carries a **30** percent risk of bilateral malignancy, mandating **bilateral gonadectomy** to eliminate lethal **gonadoblastoma** and dysgerminoma transformation.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-ovary.webp",
+        "ar": 1.3333,
+        "caption": "High-grade serous carcinoma STIC lesions confirming fallopian tube origin. Credit: StewardMD.",
+        "alt": "Yolk sac tumor and ovarian germ cell pathology"
+      }
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "id": "who-safety-checklist",
+  "title": "WHO Surgical Safety Checklist",
+  "subtitle": "Sign in, time out, sign out: what each item prevents",
+  "category": "perioperative",
+  "specialty": "periop",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "who-safe-surgery-2009", "org": "World Health Organization (WHO)", "title": "WHO guidelines for safe surgery 2009: safe surgery saves lives", "year": 2009, "url": "https://www.who.int/publications/i/item/9789241598552", "accessed": "2026-11-04" },
+    { "id": "haynes-2009", "org": "Safe Surgery Saves Lives Study Group (New England Journal of Medicine)", "title": "A surgical safety checklist to reduce morbidity and mortality in a global population", "year": 2009, "url": "https://pubmed.ncbi.nlm.nih.gov/19144931/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Emergency cases, out-of-hours lists, list changes and staff handovers mid-case: the settings in which checklists are most often skipped and errors most often happen." },
+      { "text": "Laterality, multiple sites, or levels (spine, digits, teeth): wrong-site surgery risk." },
+      { "text": "A checklist read aloud while people keep working, or ticked without the team stopping: compliance on paper, not in practice." },
+      { "text": "Anyone in the room who feels unable to speak up. The checklist only works if the most junior person can stop the case." }
+    ],
+    "do_now": [
+      { "text": "SIGN IN, before induction of anaesthesia, with at least the anaesthetist and nurse: confirm patient identity, site, procedure and consent with the patient. Prevents wrong-patient and wrong-procedure surgery.", "timeCritical": true, "evidenceRef": "who-safe-surgery-2009" },
+      { "text": "Sign in: is the site marked? Prevents wrong-side and wrong-site surgery, especially where laterality or level applies.", "timeCritical": true, "evidenceRef": "who-safe-surgery-2009" },
+      { "text": "Sign in: anaesthesia machine and medication check complete, and pulse oximeter on and working. Prevents undetected hypoxaemia and equipment failure at induction.", "timeCritical": true, "evidenceRef": "who-safe-surgery-2009" },
+      { "text": "Sign in: known allergy, difficult airway or aspiration risk with equipment and help available, and risk of more than 500 mL blood loss (7 mL/kg in children) with access and blood planned. Prevents anaphylaxis to a known allergen, airway disasters and unprepared haemorrhage.", "timeCritical": true, "evidenceRef": "who-safe-surgery-2009" }
+    ],
+    "assess": [
+      { "text": "TIME OUT, before skin incision, with the whole team stopping: every member introduces themselves by name and role. Names make it easier to speak up and to direct a request in a crisis." },
+      { "text": "Time out: surgeon, anaesthetist and nurse verbally confirm patient, site and procedure once more. This is the last chance to catch an error made upstream." },
+      { "text": "Time out: has antibiotic prophylaxis been given in the appropriate window before incision? Prevents surgical site infection from mistimed or omitted prophylaxis." },
+      { "text": "Time out: anticipated critical events. Surgeon: critical or non-routine steps, duration, anticipated blood loss. Anaesthetist: patient-specific concerns. Nursing: sterility confirmed including indicator results, and equipment issues. Prevents surprises nobody prepared for." },
+      { "text": "Time out: is essential imaging displayed? Prevents operating on the wrong side or level from memory." }
+    ],
+    "investigate": [
+      { "text": "Audit checklist completion and quality, not just the presence of ticks. Observational audit of a sample of cases reveals whether the team actually pauses." },
+      { "text": "Review incidents and never events against the checklist: which item, if done properly, would have prevented it." }
+    ],
+    "resuscitate": [
+      { "text": "Adapt the checklist to local practice by adding items, but do not remove the core items.", "evidenceRef": "who-safe-surgery-2009" },
+      { "text": "In a true emergency, do an abbreviated but spoken sign in and time out: identity, procedure, allergy, blood, and antibiotics. Skipping it entirely is when errors cluster.", "evidenceRef": "who-safe-surgery-2009" }
+    ],
+    "definitive": [
+      { "text": "SIGN OUT, before the patient leaves theatre: the nurse confirms aloud the name of the procedure performed as recorded. Prevents an operative note and coding that do not match what was done.", "evidenceRef": "who-safe-surgery-2009" },
+      { "text": "Sign out: instrument, swab and needle counts are correct. Prevents retained foreign objects.", "evidenceRef": "who-safe-surgery-2009" },
+      { "text": "Sign out: specimen labelled, read aloud including the patient name. Prevents lost or mislabelled histology, which can mean a missed cancer or the wrong patient treated.", "evidenceRef": "who-safe-surgery-2009" },
+      { "text": "Sign out: any equipment problems to be addressed, and key concerns for recovery and management of this patient. Prevents faulty equipment reaching the next patient and an incomplete handover.", "evidenceRef": "who-safe-surgery-2009" },
+      { "text": "Implementation of the checklist across eight hospitals in high- and low-income settings was associated with substantial reductions in complications and deaths.", "evidenceRef": "haynes-2009" }
+    ],
+    "escalate": [
+      { "text": "Any team member may halt the case if a checklist item is not satisfied. The operating surgeon and anaesthetist support that, every time." },
+      { "text": "Report near misses caught by the checklist through the incident system; they are the evidence that keeps it in use." },
+      { "text": "Persistent non-compliance by an individual is a clinical governance issue, escalated to the theatre lead." }
+    ]
+  },
+  "notes": [
+    "The checklist works through the conversation it forces, not the paper. A team that reads it aloud without stopping gets the paper and loses the benefit.",
+    "Each item maps to a known failure: wrong site, hypoxaemia, anaphylaxis, unprepared haemorrhage, infection, retained swab, lost specimen. Knowing which is which makes it harder to skip.",
+    "The introduction by name is not a courtesy. In a crisis, a request directed to a named person gets done faster than one directed to the room."
+  ],
+  "calcs": []
+}

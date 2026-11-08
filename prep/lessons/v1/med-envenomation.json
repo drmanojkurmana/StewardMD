@@ -3,7 +3,7 @@
  "module": "med-envenomation",
  "subject": "medicine",
  "title": "Snake bite: immobilise, reassure, antivenom for systemic or severe local signs",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
    "tx": "Most snake bites do **not** need antivenom. First aid is reassurance, **immobilisation** of the bitten limb at heart level, removal of rings, and rapid transport (WHO South-East Asia snakebite guideline). Do not apply tourniquets, cut, suck or apply herbs; they worsen injury. Record bite time, snake description if safe, and evolving swelling.",
@@ -37,6 +37,17 @@
    }
   },
   {
+   "tx": "The photo shows correct snakebite first aid inside an ambulance. The bitten forearm rests on a rigid splint and is carried in a sling at **heart level**, keeping the limb still during rapid transport to care. A paramedic supervises the transfer. The crossed out symbols stress what to avoid: never apply a **tourniquet**, and never cut or suck the wound, since these actions worsen injury. Reassurance plus **immobilisation** and fast transfer matter more than any local intervention.",
+   "say": "This photo shows correct snakebite first aid. The bitten forearm is immobilised on a rigid splint and supported in a sling at heart level while a paramedic arranges rapid transport. The warning symbol reminds you never to apply a tourniquet and never to cut or suck the wound, because those actions worsen injury. Reassure the patient, keep the limb still, remove rings, and transfer quickly for assessment for antivenom.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-envenomation-gen1.webp",
+    "alt": "A snakebite patient lies in an ambulance with the bandaged forearm on a splint in a sling beside a paramedic and a no tourniquet warning symbol.",
+    "caption": "Splinted bitten limb held at heart level during rapid transfer, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "tx": "Give **antivenom** only for systemic envenoming (spontaneous bleeding, incoagulable blood, neurotoxicity, shock, kidney injury) or severe local envenoming (rapidly progressive swelling). Test clotting with the 20-minute whole blood clotting test where labs are limited. Have adrenaline ready: antivenom reactions are treated by pausing the infusion and giving intramuscular adrenaline.",
    "say": "Give antivenom only for systemic envenoming or severe local envenoming. Test clotting with the 20-minute whole blood clotting test where labs are limited. Have adrenaline ready, because antivenom reactions are treated by pausing the infusion and giving intramuscular adrenaline.",
    "vis": {
@@ -49,12 +60,16 @@
      [
       "Bleeding, incoagulable blood, paralysis, shock",
       "Local pain and mild swelling alone"
+     ],
+     [
+      "Rapidly spreading severe swelling",
+      "Bite with no symptoms after hours of watching"
      ]
     ]
    }
   },
   {
-   "tx": "Neurotoxic bites cause descending paralysis: ptosis first, then breathing failure. Support the airway and ventilation; antivenom works best early. Haemotoxic bites cause bleeding and kidney injury, so monitor urine, clotting and renal function. Antibiotics and tetanus cover are secondary; pressure immobilisation is for neurotoxic elapid bites where taught.",
+   "tx": "Neurotoxic bites cause descending paralysis: ptosis first, then breathing failure. Support the airway and ventilation; **antivenom** works best early. Haemotoxic bites cause bleeding and kidney injury, so monitor urine, clotting and renal function. Antibiotics and tetanus cover are secondary; pressure immobilisation is for neurotoxic elapid bites where taught.",
    "say": "Neurotoxic bites cause descending paralysis, ptosis first, then breathing failure. Support airway and ventilation. Haemotoxic bites cause bleeding and kidney injury, so monitor urine, clotting and renal function.",
    "vis": {
     "kind": "image",
@@ -62,6 +77,31 @@
     "alt": "A diagram comparing neurotoxic and haemotoxic snakebite effects. Neurotoxic shows ptosis and breathing support. Haemotoxic shows bleeding and kidney injury with urine monitoring.",
     "caption": "Key clinical features and management for neurotoxic and haemotoxic snakebites",
     "ar": 1.8349
+   }
+  },
+  {
+   "tx": "After antivenom, keep watching the limb and the clotting. Mark the swelling edge and repeat the **20-minute clotting test**, because coagulopathy can return as venom depots empty. Most tense swelling is venom oedema, not compartment syndrome, so fasciotomy needs measured pressures and senior agreement, not a tight look alone. Days later, fever with rash and joint pain means **serum sickness**; it follows antivenom and needs medical review, not another dose at home.",
+   "say": "Recheck the swelling edge and the clotting after antivenom, because both can worsen again. A tense limb is usually venom swelling rather than compartment syndrome, so surgery needs measured pressures and a senior decision. Fever with rash and joint pain days later is serum sickness, and the patient should come back for review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Recheck",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Swelling edge and 20-minute clotting test",
+      "Repeat on schedule; coagulopathy can return"
+     ],
+     [
+      "Tense limb",
+      "Measure pressures; senior decision before any fasciotomy"
+     ],
+     [
+      "Fever, rash and joint pain days later",
+      "Serum sickness: medical review"
+     ]
+    ]
    }
   }
  ],

@@ -1,0 +1,59 @@
+{
+  "id": "paeds-appendicitis",
+  "title": "Appendicitis in a child",
+  "subtitle": "Score, ultrasound, then decide",
+  "category": "paeds_surgery",
+  "specialty": "paediatric",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "wses-2020", "org": "World Society of Emergency Surgery (WSES)", "title": "Diagnosis and treatment of acute appendicitis: 2020 update of the WSES Jerusalem guidelines (World J Emerg Surg 2020;15:27)", "year": 2020, "url": "https://wjes.biomedcentral.com/articles/10.1186/s13017-020-00306-3", "accessed": "2026-11-04" },
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: appendicitis", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" },
+    { "id": "nice-ng29", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Intravenous fluid therapy in children and young people in hospital (NG29)", "year": 2015, "version": "NG29, bolus volume updated 2022", "url": "https://www.nice.org.uk/guidance/ng29", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A child under five with abdominal pain and fever. Perforation rates are high in young children because the history is poor and the omentum is short." },
+      { "text": "Generalised peritonitis, a rigid abdomen or septic shock." },
+      { "text": "Diarrhoea with pain and fever: pelvic appendicitis is frequently misdiagnosed as gastroenteritis." },
+      { "text": "Pain that settles then returns with fever and a mass: an appendix abscess." }
+    ],
+    "do_now": [
+      { "text": "Analgesia at a weight-based dose. Analgesia does not mask the signs and makes the examination more reliable.", "calcs": ["paeds_weight"], "evidenceRef": "wses-2020" },
+      { "text": "Septic or peritonitic child: intravenous access, fluid resuscitation at the NICE NG29 bolus volume, and broad-spectrum antibiotics per local protocol.", "timeCritical": true, "evidenceRef": "nice-ng29" },
+      { "text": "Paediatric surgical review for any child with a high clinical score or peritonism.", "timeCritical": true, "evidenceRef": "wses-2020" }
+    ],
+    "assess": [
+      { "text": "Calculate a validated score. The Paediatric Appendicitis Score and the Appendicitis Inflammatory Response score help rule out and stratify, but they do not make the diagnosis alone.", "calcs": ["pas", "air_score"] },
+      { "text": "Migration of pain, anorexia, pain on hopping or coughing, right iliac fossa tenderness, fever." },
+      { "text": "Consider the alternatives: mesenteric adenitis, gastroenteritis, urinary infection, constipation, testicular or ovarian torsion, lower lobe pneumonia, Meckel diverticulitis." }
+    ],
+    "investigate": [
+      { "text": "Full blood count and C-reactive protein; urinalysis; pregnancy test in post-menarchal girls." },
+      { "text": "Ultrasound is the first-line imaging in children. Report should state whether the appendix was seen." },
+      { "text": "CT is reserved for the child with an equivocal ultrasound and a persisting high suspicion; MRI where available is a radiation-free alternative." },
+      { "text": "Low-risk score and a well child: discharge with safety-netting or a planned review rather than imaging everyone." }
+    ],
+    "resuscitate": [
+      { "text": "Isotonic maintenance fluids while nil by mouth, with glucose and electrolytes checked.", "calcs": ["holliday"], "evidenceRef": "nice-ng29" },
+      { "text": "Pre-operative antibiotics per local protocol, continued post-operatively only for complicated appendicitis.", "evidenceRef": "wses-2020" }
+    ],
+    "definitive": [
+      { "text": "Appendicectomy, laparoscopic where expertise allows, for uncomplicated and complicated appendicitis.", "evidenceRef": "wses-2020" },
+      { "text": "Non-operative management with antibiotics is an option in selected children with uncomplicated appendicitis on imaging, discussed with the family including the risk of recurrence. An appendicolith predicts failure.", "evidenceRef": "wses-2020" },
+      { "text": "Appendix abscess in a stable child: antibiotics with or without image-guided drainage; interval appendicectomy is not mandatory.", "evidenceRef": "wses-2020" }
+    ],
+    "escalate": [
+      { "text": "Paediatric anaesthesia and surgery for young children. A district hospital without paediatric anaesthesia should transfer the under-fives after resuscitation." },
+      { "text": "Paediatric intensive care for septic shock." },
+      { "text": "Gynaecology input when the adnexa are a realistic alternative in an adolescent girl." }
+    ]
+  },
+  "notes": [
+    "In a young child, the time from symptoms to perforation is short. A child sent home must leave with a clear plan for review, not a vague reassurance.",
+    "Scores are best at ruling out and identifying the child who needs imaging. They do not replace a surgeon's examination.",
+    "Ultrasound is operator-dependent. A report that the appendix was not seen is not a report that the appendix is normal."
+  ],
+  "calcs": ["pas", "air_score", "paeds_weight", "holliday"]
+}

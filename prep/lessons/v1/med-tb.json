@@ -1,66 +1,77 @@
 {
-  "v": 1,
-  "module": "med-tb",
-  "subject": "medicine",
-  "title": "Tuberculosis",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**chronic** 3-week cough colours, **weight** anorexia night sweats, **haemoptysis** cavitary streaks, **contacts** household screening, **HIV** disseminated CD4 low, **diabetes** smokers risks, **lymph** neck scrofula sinuses, **past** defaulted interrupted) with **viva** (**thin** coughing contact, **miliary** disseminated choroids) profiles; **duration** (weeks months counts) tallies. Lungs waste.",
-      "say": "Chronics weights haemoptyses contacts is history: HIVs spread diabetics sweet lymphs swell pasts default durations tally BCGs scar vaccines guard jobs dust mines screen. Bodies thin.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**wasting** temporalis hollows, **clubbing** bronchiectasis warns, **upper** cavitary crackles, **effusion** stony dull absent, **lymph** matted sinuses, **spine** gibbus Pott paraplegia, **choroids** miliary fundi, **meningeal** neck Kernig) with **bedside** (**sputum** pots colours volumes, **BMI** nutrition grades, **oximetry** desaturates) pots; **B signos** (erythema nodosum) nodules. Bodies waste.",
-      "say": "Wastings clubbings uppers effusions is exam: lymphs mat spines hunch choroids seed meninges stiff sputums pot BMIs grade oximetries dip nodosums redden steroids blind HIVs test. Chests hollow.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**sputum** AFB CBNAAT rifampicin, **CXR** upper fibrosis cavitation, **Mantoux** BCG crosses IGRA, **effusion** lymphocytic ADA taps, **biopsy** granuloma caseates, **HIV** CD4 viral loads, **LFT** ATT monitors, **DST** MDR XDR cultures) with **differentials** (**malignancy** smoker non-resolving, **ABPA** plugs IgE asthma, **sarcoid** bilateral hilar ACE, **pneumonia** acute lobar CURB) sorts; **contacts** (household chemoprophylaxis) traces. Bugs prove.",
-      "say": "Sputums CXRs Mantouxs effusions is Ix: biopsies caseate HIVs stage LFTs watch DSTs resist malignancies persist ABPAs plug sarcoids halo pneumonias race contacts trace chemoprophylaxes guard vaccines boost notifications count cures track. Bacilli stain.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**ATT** 2HRZE 4HR daily, **DOTS** observes defaults, **steroids** meningeal pericardial, **MDR** bedaquiline delamanid, **HIV** ART timing IRIS, **surgery** destroyed bleeds, **nutrition** BMI counsels, **follow** sputum monthly weights) with **traps** (**hepatotoxicity** yellow stops, **optic** ethambutol red-green, **joints** pyrazinamide gout, **default** MDR breeds) closes; **cure** (completion counts) declares. Bugs die.",
-      "say": "ATTs DOTSs steroids is Rx: MDRs treat HIVs time surgeries resect nutritions feed follows culture cures declare livers yellow eyes redden joints ache defaults breed adherence counsel relapses watch. Courses complete.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/med-tb-att.svg",
-        "alt": "TB cure plan: 2 months of HRZE then 4 months of HR, daily under DOTS; steroids for meningeal or pericardial disease, bedaquiline with delamanid for MDR, timed ART with IRIS watch for HIV.",
-        "caption": "Two months of four, four months of two.",
-        "ar": 1.5385
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-med-121",
-    "bk2-med-122",
-    "bk2-med-123",
-    "bk2-med-124",
-    "bk2-med-125",
-    "bk2-med-126",
-    "bk2-med-127",
-    "bk2-med-128",
-    "bk2-med-129",
-    "bk2-med-130"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-tb",
+ "subject": "medicine",
+ "title": "Tuberculosis",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Ask about a **chronic cough** beyond three weeks with sputum colour change, plus weight loss with poor appetite and night sweats. Blood in sputum hints at cavitary disease. Trace household contacts for screening, and note HIV with low CD4, diabetes, smoking, neck nodes with sinuses, and any past treatment that was defaulted. Picture a thin coughing contact and disseminated miliary illness with eye involvement to set the **tempo of weeks**. Record occupation with dust or mine exposure and **BCG scarring**.",
+   "say": "Cough beyond three weeks with changing sputum is the lead symptom, with weight loss, poor appetite, and night sweats. Blood in sputum is a hint of cavitary disease, and it is never ignored in a chronic cough. Household contacts are traced for screening, and HIV status with diabetes, smoking, and neck swellings is noted. Defaulted past treatment is recorded, and disseminated illness that evolves over weeks is pictured. Dust or mine exposure is recorded for occupation, and a BCG scar is checked on the arm.",
+   "vis": null
+  },
+  {
+   "tx": "Note wasting with hollow temples and clubbing that warns of bronchiectasis, and listen over upper zones for **cavitary crackles**. A stony dull effusion with absent breath sounds, matted nodes with sinuses, gibbus of Pott spine with paraplegia, choroid tubercles on fundoscopy, and neck stiffness with Kernig sign each localise disease. Inspect sputum pots for colour and volume, grade nutrition by **body mass index**, watch oximetry for desaturation, and spot **erythema nodosum** nodules.",
+   "say": "Wasting with hollow temples and clubbing is observed, and the upper zones are listened to for cavitary crackles. A stony dull effusion is percussed, and nodes are palpated for matting with sinuses. The spine is inspected for a gibbus, and leg weakness is tested when deformity is found. Fundi are examined for choroid tubercles, and the neck is tested for stiffness. Sputum pots are inspected for colour and volume, and nutrition is graded by body weight. The oximeter is watched for desaturation, and red tender shin nodules are noted as erythema nodosum.",
+   "vis": null
+  },
+  {
+   "tx": "Examine sputum by smear with **CBNAAT for rifampicin** resistance, and read the chest film for upper zone fibrosis with cavitation. Interpret Mantoux remembering BCG cross reaction, preferring interferon release assay, and tap effusions for lymphocytic fluid with adenosine deaminase. Biopsy shows caseating granuloma, while HIV staging with CD4 and viral load, liver tests guide therapy. Culture with sensitivity testing separates multidrug and extensively resistant disease from malignancy that fails to resolve, asthmatic bronchopulmonary aspergillosis with plugs, bilateral hilar **sarcoidosis**, and acute lobar **pneumonia**. Trace household contacts for chemoprophylaxis.",
+   "say": "Sputum is tested by smear with molecular assay for rifampicin resistance. The chest film is read for upper zone fibrosis with cavitation. The skin test is interpreted remembering BCG cross reaction, and effusions are tapped for lymphocyte rich fluid with adenosine deaminase. Biopsy reveals caseating granuloma, while HIV staging with CD4 counts is used to guide therapy. Resistance is confirmed by culture methods, and malignancy that refuses to resolve is considered separately. Asthmatic allergy with plugs, bilateral hilar sarcoid disease, and acute lobar pneumonia are distinguished as mimics. Household contacts are traced for preventive therapy in every case.",
+   "vis": null
+  },
+  {
+   "tx": "The frontal radiograph shows bilateral **upper lobe fibrosis** with patchy consolidation and a thick walled apical cavity, pulled upward with **hilar traction**. Post primary tuberculosis favours apices because oxygen tension runs highest there, and healing fibrosis drags the hila upward. Match this film to the chronic cough with cavitary bleeding, and request sputum confirmation with **resistance testing**. This classic film pattern earns easy examination marks.",
+   "say": "The chest film has scarring in both upper lobes with patchy shadows and a thick walled cavity near the apex. Healing fibrosis is what drags both hila upward as the lung contracts. Upper zones suffer most because oxygen tension is highest at the apices. This classic film is matched to chronic cough with blood in sputum, and sputum tests are requested for resistance. Examiners reward this pattern with easy marks, so its three labels are worth study.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-tb-gen1.webp",
+    "alt": "Chest X ray shows bilateral upper lobe opacities with thick walled apical cavity and arrows marking fibrosis consolidation and hilar traction.",
+    "caption": "Frontal chest radiograph shows bilateral upper lobe fibrosis cavitation and hilar traction. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Prescribe daily **antitubercular therapy** as two months of four drugs then four months of two, observed under **DOTS** to prevent default. Add steroids for meningeal or pericardial disease, switch multidrug resistance to bedaquiline with delamanid, and time antiretroviral therapy watching for immune reconstitution. Operate on destroyed bleeding lung, counsel nutrition by body mass, and follow sputum with weight every month. Stop therapy when the liver turns yellow, watch colour vision on ethambutol, ease gout from pyrazinamide, and declare cure only on **completion**.",
+   "say": "Daily treatment is prescribed as two months of four drugs followed by four months of two. Doses are given under direct observation, which prevents default and protects the community. Steroids are added for disease of brain coverings or the pericardium, and resistant cases are switched to newer combinations. Antiretroviral therapy is timed carefully while immune reconstitution illness is watched for. Destroyed bleeding lung is operated on, nutrition is counselled, and sputum with weight is reviewed each month. Therapy is halted when jaundice appears, colour vision and joints are monitored, and cure is declared only on full completion.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-tb-att.svg",
+    "alt": "TB cure plan: 2 months of HRZE then 4 months of HR, daily under DOTS; steroids for meningeal or pericardial disease, bedaquiline with delamanid for MDR, timed ART with IRIS watch for HIV.",
+    "caption": "Two months of four, four months of two.",
+    "ar": 1.5385
+   }
   }
+ ],
+ "quiz": [
+  "bk2-med-121",
+  "bk2-med-122",
+  "bk2-med-123",
+  "bk2-med-124",
+  "bk2-med-125",
+  "bk2-med-126",
+  "bk2-med-127",
+  "bk2-med-128",
+  "bk2-med-129",
+  "bk2-med-130"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

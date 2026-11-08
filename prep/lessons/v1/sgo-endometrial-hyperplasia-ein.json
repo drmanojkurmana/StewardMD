@@ -1,0 +1,244 @@
+{
+  "v": 1,
+  "module": "sgo-endometrial-hyperplasia-ein",
+  "title": "Endometrial Hyperplasia, EIN & Lynch Syndrome Genetics",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 12",
+    "Williams Obstetrics 25e Ch 33",
+    "SGO Clinical Practice Statement: Screening for Lynch Syndrome in Endometrial Cancer"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Endometrial intraepithelial neoplasia represents the clonal precursor lesion to endometrioid carcinoma. Morphological diagnosis hinges on gland crowding where crowded glandular elements outstrip surrounding stroma.",
+      "tx": "Monoclonal premalignant transformation is designated as **EIN** (**atypical hyperplasia**). Histopathological criteria require glandular crowding with **volume percent stroma <55%** (glands exceeding stroma), cytological demarcation, and lesion size >1 mm. Significantly, immediate surgical hysterectomy reveals an underlying **40-45% concurrent adenocarcinoma** in **40** to **45** percent of cases.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-endometrial-cancer-gen1.webp",
+        "ar": 1.3333,
+        "caption": "Histopathological and molecular pathways of Bokhman Type I and Type II endometrial tumors. Credit: StewardMD.",
+        "alt": "Endometrial hyperplasia and EIN histopathology progression"
+      }
+    },
+    {
+      "say": "Surgical extirpation represents the definitive standard of care for atypical lesions once childbearing is complete. Total hysterectomy with bilateral salpingo-oophorectomy should strictly avoid morcellation techniques.",
+      "tx": "For postmenopausal women or patients who have finished childbearing, **definitive management** of atypical hyperplasia is total hysterectomy with bilateral salpingo-oophorectomy (**TH-BSO**). Minimally invasive removal must ensure specimen integrity with strict **avoidance of morcellation** to prevent iatrogenic intraperitoneal dissemination of occult invasive carcinoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Parameter",
+          "Surgical Standard",
+          "Rationale & Risk Prevention"
+        ],
+        "rows": [
+          [
+            "Primary Procedure",
+            "Total hysterectomy with bilateral salpingo-oophorectomy",
+            "Eliminates 40% concurrent invasive cancer risk"
+          ],
+          [
+            "Surgical Route",
+            "Laparoscopic or robotic approach",
+            "Reduced morbidity, shorter hospitalization"
+          ],
+          [
+            "Uterine Extraction",
+            "Intact vaginal or bag-contained extraction",
+            "Strict avoidance of power morcellation dissemination"
+          ],
+          [
+            "Ovarian Removal",
+            "Bilateral salpingo-oophorectomy",
+            "Prevents synchronous ovarian endometrioid malignancy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Young women desiring childbearing may pursue conservative hormonal management under stringent surveillance. Intrauterine levonorgestrel delivery or high dose oral progestins achieve high pathological regression rates.",
+      "tx": "Young patients desiring **fertility preservation** may undergo medical progestin therapy utilizing the **LNG-IUD 52 mg** (levonorgestrel intrauterine system) or oral **megestrol acetate 160 mg** daily. This approach achieves an objective histological **regression rate 80-90%** (**80** to **90** percent) typically within **6** to **9** months of therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Levonorgestrel IUD (52 mg LNG-IUD)",
+          "points": [
+            "High local endometrial progestin concentration",
+            "Minimal systemic metabolic and thromboembolic side effects",
+            "Higher patient compliance and durability for 5 years"
+          ]
+        },
+        "right": {
+          "title": "High-Dose Oral Megestrol Acetate (160 mg daily)",
+          "points": [
+            "Systemic progestational anti-estrogenic therapy",
+            "Weight gain, fluid retention, and thromboembolic risk",
+            "Combined option for incomplete response to local IUD"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Close histological monitoring during medical progestin therapy is vital to detect persistent or progressive lesions. Endometrial sampling must be performed at quarterly to semi annual intervals.",
+      "tx": "Endometrial surveillance mandates **endometrial biopsy every 3-6 months** (**3** to **6** months) along with direct **hysteroscopic evaluation**. Continued conservative management requires documenting **2** **consecutive negative specimens** before attempting assisted conception, with definitive hysterectomy recommended immediately after completion of desired childbearing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Initiate LNG-IUD 52 mg or megestrol acetate 160 mg"
+          },
+          {
+            "id": "b",
+            "label": "Perform endometrial biopsy every 3-6 months with hysteroscopy"
+          },
+          {
+            "id": "c",
+            "label": "Document 2 consecutive negative biopsies 3 months apart"
+          },
+          {
+            "id": "d",
+            "label": "Expedite assisted conception or perform definitive TH-BSO"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Hereditary nonpolyposis colorectal cancer represents the most prevalent familial cause of endometrial malignancies. Germline DNA mismatch repair defects confer high lifetime endometrial cancer risks.",
+      "tx": "**Lynch syndrome** arises from autosomal dominant germline mutations in **MMR genes MLH1 MSH2 MSH6 PMS2** (or EPCAM deletions). Mutation carriers face a **40-60% lifetime endometrial cancer risk** (**40** to **60** percent), which frequently functions as the primary **sentinel cancer** presenting years prior to colorectal adenocarcinoma in over half of affected women.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mismatch Repair Gene",
+          "Lifetime Endometrial Cancer Risk",
+          "Lifetime Ovarian Cancer Risk",
+          "Median Age at Diagnosis"
+        ],
+        "rows": [
+          [
+            "MLH1 mutation",
+            "35% to 55%",
+            "5% to 10%",
+            "47 to 50 years"
+          ],
+          [
+            "MSH2 mutation",
+            "40% to 50%",
+            "8% to 12%",
+            "47 to 50 years"
+          ],
+          [
+            "MSH6 mutation",
+            "30% to 45%",
+            "1% to 11%",
+            "53 to 55 years"
+          ],
+          [
+            "PMS2 mutation",
+            "15% to 25%",
+            "1% to 3%",
+            "50 to 57 years"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Current clinical consensus mandates routine testing of all endometrial malignancies for mismatch repair proficiency. Reflex immunohistochemistry and microsatellite instability assays identify inherited cases.",
+      "tx": "International societies establish a **universal screening** protocol (**SGO/NCCN recommendation**) mandating **MMR immunohistochemistry** (testing MLH1, MSH2, MSH6, and PMS2 protein expression) or **MSI testing** on all newly resected endometrial carcinoma specimens, regardless of patient age or family pedigree, to identify prospective Lynch syndrome kindreds.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diagnose endometrial adenocarcinoma on surgical pathology"
+          },
+          {
+            "id": "b",
+            "label": "Perform universal MMR immunohistochemistry on all tumors"
+          },
+          {
+            "id": "c",
+            "label": "Intact MMR proteins: mismatch repair proficient (pMMR)"
+          },
+          {
+            "id": "d",
+            "label": "Loss of MSH2, MSH6, or PMS2: refer for germline genetic testing"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When immunohistochemistry reveals dual loss of MLH1 and PMS2, epigenetic silencing must be distinguished from inherited mutations. Somatic promoter hypermethylation accounts for the vast majority of cases.",
+      "tx": "Loss of MLH1 and PMS2 expression triggers reflex **MLH1 promoter hypermethylation** analysis. Epigenetic promoter methylation accounts for **sporadic epigenetic silencing** in over **90** percent of cases (not heritable), whereas unmethylated tumors (**10** percent) represent genuine germline mutations requiring genetic sequencing for **germline differentiation** and family cascade testing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sporadic MLH1 Hypermethylation (~90%)",
+          "points": [
+            "Acquired somatic promoter hypermethylation",
+            "BRAF V600E mutation occasionally present",
+            "No germline mutation; family cascade testing not required"
+          ]
+        },
+        "right": {
+          "title": "Germline MLH1 Mutation (Lynch Syndrome ~10%)",
+          "points": [
+            "Absence of somatic promoter hypermethylation",
+            "Inherited autosomal dominant pathogenic germline variant",
+            "Requires genetic counseling and full family cascade screening"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Prophylactic surgical extirpation eliminates the risk of future endometrial and ovarian malignancies in mutation carriers. The timing of surgery is tailored to the specific mismatch repair gene.",
+      "tx": "In confirmed carriers, **risk-reducing hysterectomy** with **prophylactic BSO** is recommended between **age 35-40** (**35** to **40** years) for MLH1 and MSH2 carriers after childbearing. In **MSH6/PMS2 carriers**, risk accrues later, permitting deferral of prophylactic surgery until age **45** years, completely mitigating gynecological cancer mortality.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-endometrial-cancer-fig1.webp",
+        "ar": 1.3333,
+        "caption": "FIGO 2023 anatomical staging and molecular risk stratification in endometrial cancer. Credit: StewardMD.",
+        "alt": "Endometrial cancer staging and Lynch syndrome risk reduction"
+      }
+    }
+  ]
+}

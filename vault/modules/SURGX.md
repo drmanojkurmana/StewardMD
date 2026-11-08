@@ -290,3 +290,68 @@ config for project `stewardmd`). Verified against production, not assumed: a POS
 write gate is open and the request only failed on auth. Probe writes nothing (no valid session).
 
 - **Iso figure (2026-10-12):** see [[Iso Figures]] for the isometric equipment figure shown here, its flag `smd_iso` and tests.
+
+## iPad (2026-11-04)
+`ipad-care.css` lays out the hub as a grid and lists in two columns on `html.smd-tablet` at 700 px and wider. In landscape
+(tablet, 1000 px and wider) `surgx-screens.js` `noteSplit()` renders an open note beside the "On this device" list
+(`data-sgx="noteswap"` replaces the route, no deeper stack). It only reads `listNotes()`; no storage code changed.
+
+## Every surgical specialty (2026-11-04)
+After the 2026-11-04 audit (5.5/10, general surgery only), content covers 16 specialties: general/GI/HPB, trauma,
+peri-operative care, ENT, eye emergencies, urology, neurosurgery, orthopaedics, plastics, vascular, cardiothoracic,
+paediatric surgery, O&G, surgical oncology, breast, endocrine. Totals: 97 protocols (84 authored + 13 engine),
+38 procedures, 19 cases, 64 evidence records, 13 step packs. Everything new is `ai_drafted`.
+Round 2 (2026-11-05, operations only): 70 more procedures, so **108 procedures** and 19 step packs
+(new: `hernia`, `anorectal`, `hpb`, `hand`, `thoracic`, `neck`; others appended to, never edited). Each 15 to 22 steps,
+every chapter filled, a bail-out step, a note template; per-set step reuse 71 to 84%.
+- **`specialty`** on every manifest entry; `manifest.specialties[]` and `manifest.categories[]` hold the titles, so a new
+  specialty needs no code. `surgx-content.js` passes `specialty` through `protocolIndex()`.
+- **Browsing:** `surgx-screens.js` `browseBar()` (search + specialty chips), `rowsBySpec()`. One `state.spec` /
+  `state.find` shared by Protocols, Procedures and Cases. A picked specialty groups protocols by category.
+- **Step packs per specialty** (`steps/ent.json`, `urology.json`, `neuro.json`, `ortho.json`, `vascular.json`,
+  `paeds.json`, `obgyn.json`, `onco.json`, `bowel.json`): the 60% reuse rule still holds (each set measured 68 to 86%).
+- **Operative note templates** for every procedure (generated block in `surgx-note-schema.js` between the
+  "specialty templates" markers). A template must never repeat a base field key: the LSCS template once re-declared
+  `ebl` and the note showed blood loss twice (`test/surgx-specialties.test.mjs` now fails on that).
+- **WHO Surgical Safety Checklist** in the operative note: 11 `type:"choice"` fields, all `aiFillable:false` and on the
+  server `NEVER_AI_FILLABLE` list. Identity, time out and sign out are required. "Not done" is recordable on purpose.
+- **Clavien-Dindo** `clavienDindo` choice on post-op and discharge notes, never AI-filled.
+- **`type:"choice"`** renders tap targets (`data-sgx="choice"`); the value is a plain string, so completeness, provenance
+  and `renderNoteText()` are unchanged. A tap sets provenance `clinician`; tapping the selected option clears it.
+- Tests: `test/surgx-specialties.test.mjs` (coverage per specialty, template safety, WHO/Clavien, no em-dash);
+  `test/run-surgx-ui.mjs` WHO and SPEC checks. Reviewer flags per specialty are in the PR #1971 description.
+
+## Visual pass: theatre green, anti-slop (2026-11-05)
+Owner asked for "a gradient that suits the surgery department" and "remove all UI slop" using the Impeccable,
+antislop and Appllama skills. Polish, not a redesign: layout, behaviour and copy are unchanged.
+- **Domain hue is theatre green** (`--sgx-steel` keeps its name, now `#0F5E55`; dark `#6CC3B3`). Reason: operating
+  theatres use green scrubs and drapes because it is the complement of blood red. Red still means one thing: time-critical.
+- **One gradient, behind everything:** `#surgxRoot` paints a drape-green wash (`--sgx-room-top` to `--sgx-room-mid` to
+  `--sgx-room-end`) that fades to neutral by 520px. The sticky header uses `--sgx-room-top` so bar and wash read as
+  one surface. Cards and text never carry the gradient. The home hero is a deep theatre-green gradient
+  (`--sgx-hero-a/b`); `graphite-dark.css` now uses those vars for the dark hero instead of graphite grey.
+- **Removed:** section numbers 01 to 05 (mono) on home rows and as a kicker above every screen title; the category now
+  sits UNDER the title (`.sgx-hsub`, first letter capitalised). Every uppercase wide-tracked label is sentence case.
+  Two 4px left-stripe accents (`.sgx-headline`, `.sgx-stem`) became full hairline borders. Logo drop-shadow removed.
+  The protocols info banner icon changed from a lightning bolt (which elsewhere means time-critical) to info.
+- **Grouped lists:** consecutive `.sgx-row` / `.sgx-sec` join into one iOS-style grouped list via `:has()`; a WebView
+  without `:has()` keeps separate cards. Press state is a background tint, not a scale bounce.
+- **Browser surfaces themed:** `::selection`, `caret-color`, `accent-color`, `:focus-visible`, scrollbar.
+- Fixed while here: the procedure header double-escaped its specialty ("O&G" would show as "O&amp;G"), and protocol
+  headers said only "Protocol" instead of the category title.
+- Check: `impeccable detect` on surgx.css and graphite-dark.css returns no findings.
+
+### Second anti-slop pass (2026-11-05, owner: "still looks vibe coded")
+Structure, not detail, was the tell. Changed:
+- **Home hero card removed.** The boxed dark gradient card became a native large title on the theatre-green wash
+  (`.sgx-hero` transparent, logo ink in light / white in dark, wordmark in theatre green). `--sgx-hero-a/b` deleted;
+  `graphite-dark.css` now sets the SURGX hero transparent instead of painting it.
+- **Protocol items grouped:** consecutive `.sgx-item` in a band join into one list with hairline separators.
+- **Meta pills are plain text** (sources, review date, framing): no border, no fill, one line.
+- **Explanation banners are footnotes** (`.sgx-banner.info`, `.sgx-banner.sim`: no box). Real warnings keep their box.
+- **Tabs** are an underline tab bar on the header colour, not pills.
+- **Segmented controls** for exclusive choices: the case level picker and every note `choice` field (WHO checklist,
+  Clavien-Dindo). The lock icon is not shown on choice fields: a tap-only field can never be AI-filled.
+- **Evidence "Used by"** lists real protocol and operation titles as rows (`itemTitle()`), not raw ids on pills.
+- Case vitals read as label over value (tabular numbers, sans), not mono pills; phase label capitalised.
+- Radii 12 / 10 (was 16 / 12).

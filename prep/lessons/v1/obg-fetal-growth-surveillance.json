@@ -3,7 +3,7 @@
  "module": "obg-fetal-growth-surveillance",
  "subject": "obstetrics-gynaecology",
  "title": "Cardiotocography: baseline heart rate, variability, deceleration patterns and FIGO classification",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
    "tx": "Intrapartum electronic fetal monitoring utilizing **cardiotocography (CTG)** provides continuous real-time assessment of fetal oxygenation and autonomic neurological integrity. Systematic interpretation requires structured evaluation of four fundamental parameters: baseline heart rate, baseline variability, presence of accelerations, and deceleration morphology in relation to uterine contraction frequency.",
@@ -72,7 +72,13 @@
   {
    "tx": "Variable decelerations are the most common deceleration pattern encountered during labor, characterized by an abrupt drop from baseline taking under thirty seconds to nadir. Mediated by transient **umbilical cord compression**, partial venous occlusion initially induces a brief compensatory heart rate rise ('shouldering') before complete arterial occlusion triggers systemic hypertension, baroreceptor stimulation, and steep vagal deceleration.",
    "say": "Variable decelerations are the most common pattern, showing an abrupt drop in heart rate caused by umbilical cord compression. Partial cord compression causes initial shouldering before complete occlusion triggers baroreceptor vagal slowing.",
-   "vis": {"kind": "image", "src": "prep/lessons/media/obg-decelerations.svg", "alt": "Early dips mirror the contraction from head compression and are benign; late dips lag the contraction from placental failure and demand action; variable dips drop abruptly within 30 seconds from cord squeeze and are the commonest. Schematic, not to scale.", "caption": "Timing names the dip: mirror, lag, or abrupt V.", "ar": 1.5384615384615385}
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/obg-decelerations.svg",
+    "alt": "Early dips mirror the contraction from head compression and are benign; late dips lag the contraction from placental failure and demand action; variable dips drop abruptly within 30 seconds from cord squeeze and are the commonest. Schematic, not to scale.",
+    "caption": "Timing names the dip: mirror, lag, or abrupt V.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "A smooth, regular, undulating sine wave devoid of accelerations or normal beat-to-beat variability defines a **sinusoidal heart rate pattern**. Lasting longer than twenty to thirty minutes, it is pathognomonic for severe fetal anemia secondary to Rh isoimmunization, massive fetomaternal hemorrhage, ruptured vasa previa, or acute fetal asphyxia. It represents an emergency requiring immediate operative delivery or urgent intrauterine resuscitation.",
@@ -111,6 +117,17 @@
       "Immediate Category 1 emergency delivery"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The CTG strip shows a smooth **sine wave pattern** cycling regularly with absent beat to beat variability and no accelerations. The lower trace records uterine contractions alongside the abnormal heart rate. This **sinusoidal trace** signals possible severe **fetal anemia** from causes such as bleeding or hemolysis. It is an **obstetric emergency** demanding immediate delivery or urgent resuscitation.",
+   "say": "This CTG shows a sinusoidal pattern, a smooth regular sine wave without normal variability or accelerations. The bottom trace shows the uterine contractions running alongside it. This pattern is pathognomonic for severe fetal anemia, which can follow Rh disease, massive fetomaternal bleeding, ruptured vasa previa or acute asphyxia. It is an emergency that needs immediate operative delivery or urgent intrauterine resuscitation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-fetal-growth-surveillance-gen1.webp",
+    "alt": "CTG strip shows a smooth regular sinusoidal fetal heart rate without variability above a uterine contraction trace.",
+    "caption": "CTG showing a sinusoidal fetal heart pattern of severe anemia, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

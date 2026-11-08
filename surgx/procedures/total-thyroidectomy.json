@@ -1,0 +1,208 @@
+{
+  "id": "total-thyroidectomy",
+  "title": "Total thyroidectomy",
+  "subtitle": "Nerves, parathyroids, neuromonitoring",
+  "system": "endocrine",
+  "aliases": ["thyroidectomy", "TT", "total thyroid"],
+  "estMinutes": 120,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "ata-2015", "org": "American Thyroid Association (ATA)", "title": "2015 American Thyroid Association management guidelines for adult patients with thyroid nodules and differentiated thyroid cancer (Haugen BR et al., Thyroid)", "year": 2016, "url": "https://www.thyroid.org/professionals/ata-professional-guidelines/", "accessed": "2026-11-04" },
+    { "id": "inmsg-2011", "org": "International Neural Monitoring Study Group (INMSG)", "title": "Electrophysiologic recurrent laryngeal nerve monitoring during thyroid and parathyroid surgery: international standards guideline statement (Randolph GW et al., Laryngoscope)", "year": 2011, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Randolph+electrophysiologic+recurrent+laryngeal+nerve+monitoring+international+standards+guideline+statement", "accessed": "2026-11-04" },
+    { "id": "inmsg-2018", "org": "International Neural Monitoring Study Group (INMSG)", "title": "International neural monitoring study group guideline 2018 part I: staging bilateral thyroid surgery with monitoring loss of signal (Schneider R et al., Laryngoscope)", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=International+neural+monitoring+study+group+guideline+2018+part+I+staging+bilateral+thyroid+surgery", "accessed": "2026-11-04" },
+    { "id": "ata-hypopara", "org": "American Thyroid Association (ATA)", "title": "American Thyroid Association statement on postoperative hypoparathyroidism: diagnosis, prevention, and management in adults (Orloff LA et al., Thyroid)", "year": 2018, "url": "https://www.thyroid.org/professionals/ata-professional-guidelines/", "accessed": "2026-11-04" },
+    { "id": "das-baets", "org": "Difficult Airway Society (DAS), British Association of Endocrine and Thyroid Surgeons (BAETS) and ENT UK", "title": "Management of haematoma after thyroid surgery: systematic review and multidisciplinary consensus guidelines (Iliff HA et al., Anaesthesia)", "year": 2022, "url": "https://das.uk.com/guidelines/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["corr_ca", "mallampati", "stopbang", "caprini"],
+  "chapters": {
+    "indications": [
+      "Differentiated thyroid cancer where total thyroidectomy is the MDT plan (for example larger tumours, extrathyroidal extension, nodal or distant metastases), and medullary thyroid cancer.",
+      "Bilateral nodular goitre with compressive symptoms or retrosternal extension.",
+      "Graves disease when surgery is preferred to radioiodine or antithyroid drugs, or when there is significant eye disease, a large goitre or suspicion of malignancy.",
+      "Completion after hemithyroidectomy when histology shows a cancer needing total thyroidectomy."
+    ],
+    "contraindications": [
+      "Uncontrolled thyrotoxicosis: operating on a thyrotoxic patient risks thyroid storm. Render euthyroid first.",
+      "Pre-existing contralateral vocal cord palsy without a plan agreed for the airway and for staging the surgery.",
+      "Anaplastic carcinoma or lymphoma, which are usually not treated by thyroidectomy; obtain the diagnosis first."
+    ],
+    "preparation": [
+      "Cytology classified by the Bethesda system and ultrasound of the neck, including the lateral compartments, when cancer is suspected.",
+      "Pre-operative laryngoscopy to document vocal cord function, especially with voice change, previous neck surgery or a suspected invasive cancer.",
+      "Euthyroid state for Graves disease; consider pre-operative potassium iodide where local protocol uses it.",
+      "Check calcium and vitamin D before surgery and correct deficiency.",
+      "Consent: voice change, recurrent laryngeal nerve injury (unilateral and the rare bilateral injury needing tracheostomy), hypocalcaemia, haematoma and its airway risk, scar, and lifelong thyroxine."
+    ],
+    "positioning": [
+      "Supine with a shoulder roll and the neck extended, head on a ring, with the table in slight reverse Trendelenburg to reduce venous pressure.",
+      "Avoid hyperextension in patients with cervical spine disease.",
+      "Arms tucked; the anaesthetist needs access to the neuromonitoring tube connections."
+    ],
+    "equipment": [
+      "Nerve monitoring endotracheal tube with surface electrodes, positioned and checked after final patient positioning.",
+      "Handheld stimulating probe; fine bipolar diathermy, ligatures or a vessel-sealing device.",
+      "Loupe magnification where the surgeon uses it.",
+      "Haematoma kit ordered for the ward bed before the patient leaves theatre."
+    ],
+    "anatomy": [
+      "The recurrent laryngeal nerve runs in the tracheo-oesophageal groove on the left, and more obliquely on the right, to enter the larynx below the inferior constrictor at the cricothyroid joint, close to the ligament of Berry.",
+      "A non-recurrent laryngeal nerve occurs rarely, almost always on the right with an aberrant right subclavian artery; it runs directly from the vagus to the larynx.",
+      "The tubercle of Zuckerkandl is a posterolateral projection of the thyroid that commonly overlies the recurrent laryngeal nerve, a reliable landmark.",
+      "The external branch of the superior laryngeal nerve supplies cricothyroid. It runs close to the superior thyroid vessels and can be injured during superior pole ligation, altering pitch and voice projection.",
+      "The superior parathyroids are relatively constant, posterior at the level of the cricothyroid junction and dorsal to the nerve; the inferior parathyroids are more variable, near the lower pole and the thyrothymic ligament, ventral to the nerve."
+    ],
+    "criticalSafety": [
+      "Identify the recurrent laryngeal nerve on each side before dividing any structure near it; visual identification is the standard, with or without monitoring.",
+      "Follow the INMSG standard for monitoring: vagal and recurrent laryngeal nerve signals before and after resection on each side.",
+      "Loss of signal on the first side in a planned total thyroidectomy: consider stopping and staging the contralateral side to avoid bilateral palsy.",
+      "Preserve each parathyroid with its blood supply; autotransplant any gland that is devascularised or inadvertently removed, after confirming it is parathyroid.",
+      "Meticulous haemostasis before closure, with a Valsalva or raised pressure check; loose closure of the strap muscles in the midline so a haematoma can decompress."
+    ],
+    "structuresAtRisk": [
+      "Recurrent laryngeal nerves",
+      "External branch of the superior laryngeal nerves",
+      "Parathyroid glands and their blood supply",
+      "Trachea and oesophagus",
+      "Internal jugular vein and carotid artery in a large goitre"
+    ],
+    "commonErrors": [
+      "Mass ligation of the superior pole, which catches the external branch of the superior laryngeal nerve.",
+      "Dividing tissue at the ligament of Berry without having seen the nerve, where it is closest to the gland.",
+      "Over-reliance on monitoring: a signal tells you the nerve still conducts, not where the nerve is.",
+      "Stripping the parathyroid blood supply by dissecting lateral to the capsule rather than on it.",
+      "Using energy devices immediately next to the nerve, causing thermal injury."
+    ],
+    "complications": [
+      "Neck haematoma with airway compromise, the immediate life-threatening complication: SCOOP at the bedside.",
+      "Recurrent laryngeal nerve injury: temporary or permanent hoarseness; bilateral injury may cause stridor needing reintubation or tracheostomy.",
+      "Hypocalcaemia from hypoparathyroidism, usually transient, sometimes permanent.",
+      "External branch of superior laryngeal nerve injury: voice fatigue and loss of high pitch.",
+      "Wound infection, seroma, hypertrophic scar; thyroid storm in an inadequately prepared thyrotoxic patient."
+    ],
+    "postop": [
+      "Structured neck checks for DESATS, with a haematoma kit at the bedside and staff trained in SCOOP.",
+      "PTH and adjusted calcium per local protocol; start calcium and active vitamin D for low PTH or symptoms.",
+      "Voice assessment, with laryngoscopy for voice change or after loss of signal.",
+      "Thyroxine replacement, with dose and TSH target set by the cancer risk category where applicable.",
+      "Return histology to the thyroid MDT for decisions on radioiodine and surveillance."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.onco.mdt-check", "emphasis": "For benign goitre the equivalent check is the documented indication, cytology and laryngoscopy. For cancer, confirm the extent of central and lateral neck dissection planned." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Shoulder roll and neck extension, then check the monitoring tube position again: extension moves the electrodes off the cords." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.thyr.incision" },
+    { "ref": "step.thyr.ionm-baseline" },
+    { "ref": "step.thyr.superior-pole" },
+    { "ref": "step.thyr.parathyroids" },
+    { "ref": "step.thyr.rln" },
+    { "ref": "step.thyr.berry" },
+    { "ref": "step.thyr.ionm-decision" },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "A suture on the superior pole of each lobe is the usual minimum; mark the side of any suspicious nodule." },
+    { "ref": "step.core.haemostasis", "emphasis": "Valsalva or a raised pressure before closure. A neck haematoma is an airway emergency, not a wound problem." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.core.skin-closure", "emphasis": "Approximate the strap muscles loosely in the midline so blood can escape into the subcutaneous space rather than compress the trachea." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.thyr.incision": {
+      "id": "step.thyr.incision", "kind": "access",
+      "title": "Collar incision, subplatysmal flaps and midline opening",
+      "why": "A well-placed incision in a skin crease gives a good scar, and opening the avascular midline between the strap muscles gives bloodless access to both lobes.",
+      "how": [
+        "Mark a skin-crease incision about two finger-breadths above the sternal notch with the patient sitting, before positioning if possible.",
+        "Raise subplatysmal flaps superiorly to the thyroid cartilage and inferiorly to the sternal notch, superficial to the anterior jugular veins.",
+        "Divide the investing fascia in the midline and separate the sternohyoid and sternothyroid from the gland; divide the straps high only for a large goitre."
+      ],
+      "structuresAtRisk": ["Anterior jugular veins"],
+      "pitfalls": ["An incision placed too low, which migrates onto the sternum as the scar matures."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thyr.ionm-baseline": {
+      "id": "step.thyr.ionm-baseline", "kind": "checkpoint", "critical": true,
+      "title": "Neuromonitoring baseline: vagal signal before dissection",
+      "why": "A baseline vagal signal confirms the system works. Without it, a later absent signal cannot be distinguished from equipment failure, and the staging decision is made blind.",
+      "how": [
+        "Open the carotid sheath and stimulate the vagus nerve before thyroid dissection (V1).",
+        "Record the amplitude and latency; troubleshoot the tube position with the anaesthetist if the signal is absent.",
+        "Use a standard stimulation current and record each signal in the operative note."
+      ],
+      "structuresAtRisk": ["Vagus nerve", "Internal jugular vein", "Common carotid artery"],
+      "pitfalls": ["Starting dissection with an untested system and discovering the problem only when the nerve signal is lost."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thyr.superior-pole": {
+      "id": "step.thyr.superior-pole", "kind": "dissection", "critical": true,
+      "title": "Superior pole: protect the external branch of the superior laryngeal nerve",
+      "why": "The external branch of the superior laryngeal nerve runs with or between the superior pole vessels. Mass ligation injures it, which changes a singer's or a teacher's voice for life.",
+      "how": [
+        "Retract the upper pole laterally and inferiorly to open the avascular sternothyroid-laryngeal (cricothyroid) space.",
+        "Identify the nerve on the inferior constrictor where possible, or confirm it with stimulation (cricothyroid twitch).",
+        "Ligate the superior pole vessels individually, close to the thyroid capsule, not as a single pedicle."
+      ],
+      "structuresAtRisk": ["External branch of the superior laryngeal nerve", "Superior parathyroid gland"],
+      "pitfalls": ["Taking the superior pedicle in one large bite with an energy device away from the capsule."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thyr.parathyroids": {
+      "id": "step.thyr.parathyroids", "kind": "dissection", "critical": true,
+      "title": "Identify and preserve the parathyroids on their blood supply",
+      "why": "Hypoparathyroidism is the commonest serious long-term complication of total thyroidectomy. Glands left on a vascular pedicle function; glands stripped of their supply do not.",
+      "how": [
+        "Dissect on the thyroid capsule, ligating the inferior thyroid artery branches close to the gland rather than the trunk.",
+        "Look for each parathyroid in its expected position and sweep it laterally with its blood supply intact.",
+        "Inspect the specimen before it leaves the field for any gland removed inadvertently.",
+        "Autotransplant a devascularised or removed gland: confirm it is parathyroid (frozen section of a small fragment if in doubt), mince it, and implant it into a pocket in sternocleidomastoid, marked with a clip or non-absorbable suture."
+      ],
+      "structuresAtRisk": ["Superior and inferior parathyroid glands", "Inferior thyroid artery branches"],
+      "pitfalls": ["Ligating the inferior thyroid artery trunk laterally, devascularising both parathyroids on that side.", "Discarding a parathyroid on the specimen without checking it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thyr.rln": {
+      "id": "step.thyr.rln", "kind": "dissection", "critical": true,
+      "title": "Identify and trace the recurrent laryngeal nerve",
+      "why": "Visual identification of the recurrent laryngeal nerve is the main defence against injury. A nerve you have seen along its course is a nerve you can protect.",
+      "how": [
+        "Rotate the lobe medially and look for the nerve in the tracheo-oesophageal groove, at its relation to the inferior thyroid artery, or beneath the tubercle of Zuckerkandl.",
+        "Confirm it with the stimulating probe (R1) and trace it upwards to its entry into the larynx.",
+        "Suspect a non-recurrent nerve on the right when no nerve is found in the groove, especially with a known aberrant subclavian artery.",
+        "Divide nothing that crosses the expected course of the nerve until the nerve is seen."
+      ],
+      "structuresAtRisk": ["Recurrent laryngeal nerve and its extralaryngeal branches", "Inferior parathyroid"],
+      "pitfalls": ["Traction injury from vigorous medial rotation of the lobe.", "Mistaking an inferior thyroid artery branch for the nerve, or vice versa."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thyr.berry": {
+      "id": "step.thyr.berry", "kind": "resection", "critical": true,
+      "title": "Ligament of Berry and lobe removal",
+      "why": "The nerve is closest to the gland at the ligament of Berry, and small vessels here bleed. This is where most nerve injuries happen, so it is done slowly, with the nerve in view.",
+      "how": [
+        "Keep the nerve in view while dividing the ligament of Berry with fine instruments, close to the gland.",
+        "Control small bleeding with pressure or fine bipolar, not with blind clips or diathermy near the nerve.",
+        "Divide the isthmus and complete the lobectomy; for total thyroidectomy repeat the sequence on the opposite side only after the first nerve signal is confirmed."
+      ],
+      "structuresAtRisk": ["Recurrent laryngeal nerve", "Trachea"],
+      "pitfalls": ["Chasing bleeding at Berry's ligament with diathermy.", "Leaving thyroid tissue at Berry's ligament in a cancer operation, which defeats radioiodine treatment."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.thyr.ionm-decision": {
+      "id": "step.thyr.ionm-decision", "kind": "bailout", "critical": true,
+      "title": "Signal check after the first side, and the staging decision",
+      "why": "Bilateral recurrent laryngeal nerve palsy can obstruct the airway. A loss of signal on the first side is the warning that lets you avoid it by staging the operation.",
+      "how": [
+        "After removing the first lobe, stimulate the recurrent laryngeal nerve proximally (R2) and the vagus (V2).",
+        "If the signal is lost, troubleshoot the system and the tube, and map the nerve to find the injury site.",
+        "With a confirmed loss of signal, discuss stopping and completing the other side at a later date, once the cord has been assessed and has recovered.",
+        "Document every signal value and the decision in the operative note."
+      ],
+      "structuresAtRisk": ["Recurrent laryngeal nerves"],
+      "pitfalls": ["Proceeding to the second side after a loss of signal because the patient was told it would be one operation."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

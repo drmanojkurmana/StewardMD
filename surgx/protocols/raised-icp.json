@@ -1,0 +1,69 @@
+{
+  "id": "raised-icp",
+  "title": "Raised intracranial pressure and herniation",
+  "subtitle": "Recognise, buy time, decompress",
+  "category": "neuro_cranial",
+  "specialty": "neurosurgery",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "btf4", "org": "Brain Trauma Foundation", "title": "Guidelines for the management of severe traumatic brain injury, 4th edition (Carney et al, Neurosurgery 2017;80:6-15)", "edition": "4th edition", "year": 2016, "url": "https://braintrauma.org/guidelines", "accessed": "2026-11-04" },
+    { "id": "sibicc", "org": "Seattle International Severe Traumatic Brain Injury Consensus Conference (SIBICC)", "title": "A management algorithm for patients with intracranial pressure monitoring (Hawryluk et al, Intensive Care Med 2019)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Hawryluk+SIBICC+management+algorithm+intracranial+pressure+monitoring", "accessed": "2026-11-04" },
+    { "id": "rescueicp", "org": "RESCUEicp Trial Collaborators", "title": "Trial of decompressive craniectomy for traumatic intracranial hypertension (Hutchinson et al, N Engl J Med 2016;375:1119-30)", "year": 2016, "url": "https://www.nejm.org/doi/full/10.1056/NEJMoa1605215", "accessed": "2026-11-04" },
+    { "id": "nice-ng232", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Head injury: assessment and early management (NG232)", "year": 2023, "version": "NG232", "url": "https://www.nice.org.uk/guidance/ng232", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Falling GCS, particularly a fall in the motor score, in a patient with a known or suspected intracranial lesion." },
+      { "text": "A new unilateral dilated or sluggish pupil: uncal herniation compressing the third nerve until proven otherwise." },
+      { "text": "Extensor or flexor posturing, or a new hemiparesis." },
+      { "text": "Cushing response: hypertension, bradycardia and irregular breathing. This is a late, pre-terminal sign." },
+      { "text": "Monitored ICP above 22 mmHg that does not settle with first-tier measures." },
+      { "text": "Headache with vomiting and papilloedema, or a reduced conscious level, in a patient with a shunt, tumour or hydrocephalus." }
+    ],
+    "do_now": [
+      { "text": "Secure the airway. Intubate for GCS 8 or less or a falling GCS with signs of herniation, avoiding hypoxia and hypotension at induction.", "timeCritical": true, "evidenceRef": "btf4" },
+      { "text": "Head up about 30 degrees, neck neutral, tube ties and collar not compressing the jugular veins.", "timeCritical": true, "evidenceRef": "sibicc" },
+      { "text": "For clinical signs of herniation, give a hyperosmolar agent (mannitol or hypertonic saline per local protocol) as a bridge to imaging and a neurosurgical decision.", "timeCritical": true, "evidenceRef": "sibicc" },
+      { "text": "Urgent CT head, and call neurosurgery at the same time, not after the report.", "timeCritical": true, "evidenceRef": "nice-ng232" }
+    ],
+    "assess": [
+      { "text": "GCS by component, pupils and limb movements, repeated and timed. The trend matters more than the single value.", "calcs": ["gcs", "gcs_p"] },
+      { "text": "Look for a cause that is treatable outside the skull: hypoxia, hypercapnia, hypotension, hypoglycaemia, hyponatraemia, seizures and fever." },
+      { "text": "Ask about anticoagulants and antiplatelets, a shunt, a known tumour, recent surgery, and the time course of decline." },
+      { "text": "Estimate haematoma volume from the scan when a mass lesion is present.", "calcs": ["abc2_ich_volume"] }
+    ],
+    "investigate": [
+      { "text": "CT head without contrast: mass lesion, midline shift, effacement of basal cisterns, hydrocephalus, and diffuse swelling." },
+      { "text": "Arterial blood gas, sodium, glucose, coagulation screen and full blood count." },
+      { "text": "Intracranial pressure monitoring in severe traumatic brain injury when the neurosurgical team judges it will guide treatment." },
+      { "text": "Repeat CT for any new deterioration or unexplained rise in ICP; a new surgical lesion must be excluded before escalating medical therapy." }
+    ],
+    "resuscitate": [
+      { "text": "Avoid hypotension. The BTF systolic thresholds are at least 100 mmHg at age 50 to 69, and at least 110 mmHg at age 15 to 49 or over 70.", "evidenceRef": "btf4" },
+      { "text": "Treat ICP above 22 mmHg, and target a cerebral perfusion pressure of 60 to 70 mmHg in severe traumatic brain injury.", "evidenceRef": "btf4" },
+      { "text": "Normal oxygenation and normocapnia. Do not use prolonged prophylactic hyperventilation; brief hyperventilation is only a bridge for active herniation.", "evidenceRef": "btf4" },
+      { "text": "Escalate in tiers: sedation and analgesia, CSF drainage if a ventricular drain is in place, hyperosmolar therapy, then higher-tier options agreed with neurosurgery and intensive care.", "evidenceRef": "sibicc" },
+      { "text": "Do not give corticosteroids for traumatic brain injury; they increase mortality.", "evidenceRef": "btf4" },
+      { "text": "Consider early seizure prophylaxis in severe traumatic brain injury, per local protocol; it reduces early seizures but not late epilepsy.", "evidenceRef": "btf4" }
+    ],
+    "definitive": [
+      { "text": "Evacuate a surgical mass lesion (extradural, acute subdural, or contusion with mass effect) as an emergency.", "timeCritical": true, "evidenceRef": "btf4" },
+      { "text": "External ventricular drainage for obstructive hydrocephalus or for ICP control when a drain is indicated.", "evidenceRef": "btf4" },
+      { "text": "Decompressive craniectomy as a last-tier option for refractory ICP: it reduces death, at the cost of more survivors with severe disability. Discuss this trade-off with the family.", "evidenceRef": "rescueicp" },
+      { "text": "If a craniectomy is performed, a large frontotemporoparietal flap is recommended over a small one.", "evidenceRef": "btf4" }
+    ],
+    "escalate": [
+      { "text": "Call neurosurgery at the first sign of herniation. Transfer is part of treatment, and hyperosmolar therapy only buys time for it." },
+      { "text": "Transfer intubated and ventilated with oxygenation and blood pressure controlled, images sent ahead, and a clinician who can manage the airway." },
+      { "text": "Involve intensive care early; tiered ICP management needs continuous monitoring and nursing that a ward cannot provide." }
+    ]
+  },
+  "notes": [
+    "A blown pupil is a sign of where the brain is going, not of what is wrong. The cure is usually a scan and an operation, not more mannitol.",
+    "Hyperventilation lowers ICP by making the brain ischaemic. Use it for minutes as a bridge, never as a strategy.",
+    "Before escalating any medical ICP therapy, ask whether something has changed that needs a new scan."
+  ],
+  "calcs": ["gcs", "gcs_p", "abc2_ich_volume"]
+}

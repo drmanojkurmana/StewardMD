@@ -158,8 +158,8 @@
     if (!isImage(fig)) return "";
     var ar = Number(fig.ar);
     var dims = (ar > 0 && isFinite(ar)) ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "";
-    return '<figure class="kbp-diagram-card"><img class="kbp-diagram-img" src="' + esc(String(src || fig.src)) +
-      '" alt="' + esc(fig.alt) + '"' + dims + ' loading="lazy" decoding="async">' +
+    return '<figure class="kbp-diagram-card"><span class="kbp-diagram-host smd-wm-host"><img class="kbp-diagram-img" src="' + esc(String(src || fig.src)) +
+      '" alt="' + esc(fig.alt) + '"' + dims + ' loading="lazy" decoding="async">' + (root.SMD_WM ? root.SMD_WM.html(String(src || fig.src)) : "") + "</span>" +
       "<figcaption><strong>" + esc(fig.title || fig.id || "Figure") + "</strong>" +
       '<span class="kbp-diagram-meta">' + esc(fig.caption) + "</span></figcaption></figure>";
   }
@@ -171,7 +171,9 @@
     var ar = Number(fig.ar);
     var dims = (ar > 0 && isFinite(ar)) ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "";
     return '<figure class="kbr-fig"><figcaption class="kbr-cap">' + esc(fig.title || fig.id || "Figure") + "</figcaption>" +
-      '<img class="kbr-media" src="' + esc(String(src || fig.src)) + '" alt="' + esc(fig.alt) + '"' + dims + ' loading="lazy" decoding="async">' +
+      // the StewardMD watermark overlay (image-watermark.js) sits on the image's own box
+      '<span class="kbr-media-host smd-wm-host"><img class="kbr-media" src="' + esc(String(src || fig.src)) + '" alt="' + esc(fig.alt) + '"' + dims + ' loading="lazy" decoding="async">' +
+      (root.SMD_WM ? root.SMD_WM.html(String(src || fig.src)) : "") + "</span>" +
       '<p class="kbr-note">' + esc(fig.caption) + "</p></figure>";
   }
 

@@ -462,6 +462,26 @@ test("kbOpen from global search tags from:'search' and still closes the library 
   assert.equal(closeRefCalls, 1, "non-library opens still dismiss the library chrome");
 });
 
+test("kbOpen with no entry id opens the Knowledge Library, not an empty disease reader (iPad audit 2026-11-04)", () => {
+  resetDx();
+  unmountLibrary();
+  const realDx = global.DX;
+  let readerCalls = 0;
+  const tabs = [];
+  global.DX = { openRef: () => { readerCalls++; } };
+  const realSB = global.SB;
+  global.SB = { openRef: (t) => tabs.push(t), closeRef: () => {} };
+  try {
+    realDx._kbOpen();
+    realDx._kbOpen("");
+  } finally {
+    global.DX = realDx;
+    global.SB = realSB;
+  }
+  assert.equal(readerCalls, 0, "no reader for a missing id");
+  assert.deepEqual(tabs, ["syndromes", "syndromes"], "the library's Syndromes tab opens instead");
+});
+
 test("Back from a library-opened topic returns to the library at the same scroll, never exposing Clinical Reasoning", () => {
   resetDx();
   mountLibrary(222);

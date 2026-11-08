@@ -1,0 +1,234 @@
+{
+  "v": 1,
+  "module": "sgo-platinum-resistance-ovarian",
+  "title": "Recurrent Ovarian Cancer, Platinum Sensitivity & Secondary Cytoreduction (DESKTOPIII)",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 17",
+    "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11e Ch 85",
+    "NCCN Clinical Practice Guidelines in Oncology: Ovarian Cancer (2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The duration of clinical remission following initial platinum chemotherapy defines the platinum free interval. This metric stratifies recurrent disease into biologically distinct therapeutic categories.",
+      "tx": "The **platinum-free interval (PFI)** categorizes recurrence: **platinum-resistant <6 months** (<**6** months, poor response to re-challenge), **partially sensitive 6-12 months** (**6** to **12** months), and **platinum-sensitive >12 months** (>**12** months, high response rate to platinum re-induction), dictating the choice between surgery, platinum doublets, or non-platinum monotherapies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Recurrence Category",
+          "Platinum-Free Interval (PFI)",
+          "Expected Response to Platinum Re-Challenge"
+        ],
+        "rows": [
+          [
+            "Platinum-Refractory",
+            "Progression during first-line platinum therapy",
+            "<10% response; switch to non-platinum single agents"
+          ],
+          [
+            "Platinum-Resistant",
+            "Relapse <6 months after completing platinum",
+            "10% to 15% response; non-platinum monotherapy + bevacizumab"
+          ],
+          [
+            "Partially Platinum-Sensitive",
+            "Relapse between 6 and 12 months post-treatment",
+            "25% to 35% response; platinum doublet combinations"
+          ],
+          [
+            "Fully Platinum-Sensitive",
+            "Relapse >12 months post-treatment",
+            "50% to 70% response; platinum doublet + maintenance PARPi"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The prospective randomized DESKTOP III trial established the survival benefit of secondary cytoreduction in selected patients. Complete surgical debulking substantially prolongs overall survival.",
+      "tx": "In the randomized phase **3** **DESKTOP III trial** (**Harter 2021**), **secondary cytoreduction** followed by platinum chemotherapy achieved a dramatic overall survival gain in patients with complete resection: **R0 overall survival 61.9 vs 46.0 mo** (median **61.9** vs **46.0** months, **HR 0.75**, median OS **53.7** mo overall), establishing surgery in AGO-score positive recurrence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complete Gross Resection (R0 in DESKTOP III)",
+          "points": [
+            "Median overall survival: 61.9 months",
+            "Statistically significant overall survival advantage (HR 0.75)",
+            "Achieved in 75% of AGO-score positive selected patients"
+          ]
+        },
+        "right": {
+          "title": "Chemotherapy Alone (DESKTOP III Control)",
+          "points": [
+            "Median overall survival: 46.0 months",
+            "Lower progression-free survival (14.0 vs 18.4 months)",
+            "Avoids surgical laparotomy and perioperative complications"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Patient selection for secondary cytoreduction relies on validated clinical criteria. The Arbeitsgemeinschaft Gynaekologische Onkologie score identifies candidates likely to achieve complete gross resection.",
+      "tx": "The validated **AGO score** requires: **ECOG 0** performance status, **R0 at primary surgery** (complete resection at initial debulking), and **ascites <500 mL** (<**500** mL on CT). When all three criteria are met, the score **predicts R0 debulking >75%** (**75** percent) at secondary surgery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Document first platinum-sensitive recurrence with PFI >6 months"
+          },
+          {
+            "id": "b",
+            "label": "Evaluate ECOG performance status: must be 0"
+          },
+          {
+            "id": "c",
+            "label": "Confirm complete macroscopic resection (R0) at initial primary cytoreduction"
+          },
+          {
+            "id": "d",
+            "label": "Verify absence of significant ascites (<500 mL on preoperative CT)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In contrast to European findings, an American cooperative group trial failed to demonstrate an overall survival advantage from secondary surgery. The divergent results underscore the critical importance of patient selection.",
+      "tx": "In the randomized trial **GOG-213 trial** (**Coleman 2019**), secondary cytoreduction demonstrated **no OS benefit in unselected cohort** (median overall survival **50.6** months with surgery versus **64.7** months with chemotherapy alone, hazard ratio **1.29**), highlighting that strict **patient selection requirement** via the AGO score is essential.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "DESKTOP III Trial (Strict AGO Score Selection)",
+          "points": [
+            "Mandatory positive AGO score required for surgical entry",
+            "Complete R0 resection achieved in 75% of operated patients",
+            "Demonstrated statistically significant overall survival benefit (HR 0.75)"
+          ]
+        },
+        "right": {
+          "title": "GOG-213 Trial (Surgeon Discretion Selection)",
+          "points": [
+            "Surgeon judgment without standardized resectability scoring",
+            "Complete resection rate lower (67% R0 resection)",
+            "No overall survival advantage observed (HR 1.29; 50.6 vs 64.7 mo)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "For platinum sensitive recurrent disease without surgical indications, platinum doublet chemotherapy remains standard. Combining carboplatin with pegylated liposomal doxorubicin minimizes peripheral neurotoxicity.",
+      "tx": "In the landmark **CALYPSO trial**, the doublet **carboplatin-PLD** (**pegylated liposomal doxorubicin**) demonstrated superior therapeutic index over carboplatin-paclitaxel, offering equivalent progression-free survival with significantly **lower neurotoxicity** and alopecia, making it the preferred second-line platinum doublet for patients experiencing recurrent ovarian disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Platinum Doublet Regimen",
+          "Key Toxicity Profile",
+          "Preferred Clinical Setting"
+        ],
+        "rows": [
+          [
+            "Carboplatin + Pegylated Liposomal Doxorubicin (PLD)",
+            "Palmar-plantar erythrodysesthesia; minimal neuropathy",
+            "Pre-existing peripheral neuropathy; preferred standard"
+          ],
+          [
+            "Carboplatin + Paclitaxel",
+            "Alopecia, arthralgias, cumulative peripheral neuropathy",
+            "Patients prioritizing shorter infusion time"
+          ],
+          [
+            "Carboplatin + Gemcitabine (+ Bevacizumab)",
+            "Myelosuppression (thrombocytopenia, neutropenia)",
+            "High tumor burden or rapidly progressive symptoms"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In platinum resistant disease, single agent non platinum chemotherapy yields modest response rates. The addition of the anti VEGF monoclonal antibody bevacizumab substantially improves progression free survival.",
+      "tx": "The phase III **AURELIA trial** established the role of **bevacizumab in platinum-resistant** ovarian cancer: adding bevacizumab to single-agent chemotherapy (weekly paclitaxel, PLD, or topotecan) doubled median progression-free survival (**PFS 6.7 vs 3.4 months**, **HR 0.48**), establishing a standard of care for resistant relapse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Document platinum-resistant ovarian recurrence (PFI <6 months)"
+          },
+          {
+            "id": "b",
+            "label": "Select chemotherapy backbone: weekly paclitaxel, PLD, or topotecan"
+          },
+          {
+            "id": "c",
+            "label": "Add concurrent bevacizumab (10-15 mg/kg every 2-3 weeks)"
+          },
+          {
+            "id": "d",
+            "label": "Exclude patients with prior bowel obstruction or transmural bowel invasion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Targeted antibody drug conjugates have emerged as effective therapies in biomarker selected platinum resistant disease. Mirvetuximab soravtansine delivers a cytotoxic maytansinoid payload.",
+      "tx": "**Mirvetuximab soravtansine** is an approved antibody-drug conjugate targeting **folate receptor alpha (FR-alpha)** delivering the microtubule-disrupting **DM4 payload**. In the phase **3** **MIRASOL trial**, it demonstrated significant overall survival superiority over chemotherapy (**OS HR 0.67**, median OS **16.5** vs **12.7** months) in high FR-alpha expressing resistant tumors.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ovarian-cancer-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Malignant ovarian tumor histology and tumor marker expression. Credit: StewardMD.",
+        "alt": "Targeted therapies in platinum-resistant ovarian carcinoma"
+      }
+    },
+    {
+      "say": "Repeated exposure to carboplatin carries a progressive risk of acute hypersensitivity reactions. Standardized desensitization protocols permit safe re treatment in responsive patients.",
+      "tx": "**Platinum hypersensitivity** reactions occur in **15% to 20%** (**15** to **20** percent) of patients, with peak incidence during **cycle 6-8 peak incidence** (**6** to **8** cycles). In patients who benefit from continued platinum therapy, administration using a standardized **12-step desensitization protocol** (**12**-step protocol) safely allows re-treatment in over ninety percent.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-ovary.webp",
+        "ar": 1.3333,
+        "caption": "High-grade serous carcinoma STIC lesions confirming fallopian tube origin. Credit: StewardMD.",
+        "alt": "Management of chemotherapy hypersensitivity and ovarian relapse"
+      }
+    }
+  ]
+}

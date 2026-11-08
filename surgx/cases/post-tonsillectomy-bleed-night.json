@@ -1,0 +1,99 @@
+{
+  "id": "post-tonsillectomy-bleed-night",
+  "title": "Bleeding on day six after tonsillectomy",
+  "subtitle": "Secondary post-tonsillectomy haemorrhage at night",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "ent-post-tonsillectomy-haemorrhage",
+  "procedureRef": "tonsillectomy",
+  "sources": [
+    { "id": "aaohns-tonsil-2019", "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)", "title": "Clinical Practice Guideline: Tonsillectomy in Children (Update)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/30798778/", "accessed": "2026-11-04" },
+    { "id": "pth-protocols-2026", "org": "International Journal of Pediatric Otorhinolaryngology", "title": "Tranexamic acid and beyond: a systematic review of pediatric post-tonsillectomy hemorrhage protocols and introduction of a universal management guideline (Casey et al.)", "year": 2026, "url": "https://pubmed.ncbi.nlm.nih.gov/42398383/", "accessed": "2026-11-04" }
+  ],
+  "stem": "It is 1am. An 8-year-old boy weighing 26 kg is brought to the emergency department by his mother. He had a tonsillectomy for recurrent tonsillitis six days ago and went home the same evening. Tonight he coughed up 'a mouthful' of bright red blood and has since been swallowing repeatedly. He has not eaten much for two days because of pain. He is sitting on his mother's lap, pale and quiet, with dried blood around his mouth.",
+  "vitals": { "Temp": "37.9 C", "HR": "128", "BP": "102/64", "RR": "24", "SpO2": "98% on air", "CRT": "3 s" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "The triage nurse says the bleeding has 'nearly stopped' and asks if he can wait to be seen. What do you do?",
+      "hint": "Look at the heart rate and capillary refill for an 8-year-old, and at what he is doing with his throat.",
+      "options": [
+        { "id": "a", "text": "See him now: sit him up, ask him to spit not swallow, give oxygen, site an IV cannula, send FBC, coagulation and crossmatch, and call the ENT registrar", "correct": true, "feedback": "Correct. A post-tonsillectomy bleed in a child is an emergency until a senior has looked in the mouth, and the preparation for theatre starts now." },
+        { "id": "b", "text": "Let him wait in the waiting room with his mother, since the bleeding has slowed", "correct": false, "feedback": "Repeated swallowing means he is still bleeding into his stomach. A child in a waiting room is a child nobody is watching." },
+        { "id": "c", "text": "Give oral paracetamol and ibuprofen, and reassess in an hour", "correct": false, "feedback": "Analgesia matters, but nothing should go by mouth now: he may need an anaesthetic soon." },
+        { "id": "d", "text": "Ask him to gargle with cold water and watch for further bleeding", "correct": false, "feedback": "This delays the work-up and the senior call, and does nothing for a vessel bleeding behind a clot." }
+      ],
+      "why": "A herald bleed after tonsillectomy is often followed by a larger one. The frequent swallowing tells you he is still bleeding. Positioning, access, crossmatch, nil by mouth and an early senior call cost nothing and buy the time needed if he bleeds heavily.",
+      "missedRedFlags": ["Repeated swallowing", "Heart rate of 128 with a capillary refill of 3 seconds in an 8-year-old"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "His blood pressure is normal. The registrar on the phone asks how worried you are. What is your assessment?",
+      "hint": "Which vital sign changes last in a bleeding child?",
+      "options": [
+        { "id": "a", "text": "Worried: he is tachycardic with a prolonged capillary refill, which in a child means significant loss even with a normal blood pressure", "correct": true, "feedback": "Correct. Children maintain their blood pressure until they have lost a large share of their circulating volume, then fall suddenly." },
+        { "id": "b", "text": "Reassured: the blood pressure is normal, so he has not lost much", "correct": false, "feedback": "Hypotension in a child is a late, pre-arrest sign. A normal blood pressure here is not reassurance." },
+        { "id": "c", "text": "Reassured: the tachycardia is due to the fever and pain", "correct": false, "feedback": "Fever and pain contribute, but attributing tachycardia to them in a bleeding child is how hypovolaemia is missed." },
+        { "id": "d", "text": "Unable to say until the haemoglobin is back", "correct": false, "feedback": "The first haemoglobin can be normal in acute bleeding. The physiology is already giving you the answer." }
+      ],
+      "why": "A 26 kg child has a circulating volume of around 2 litres. A few hundred millilitres swallowed and vomited is a large proportion of that. Heart rate, capillary refill and the trend are the vital signs that matter; blood pressure falls late and suddenly.",
+      "missedRedFlags": ["Normal blood pressure used as reassurance in a tachycardic child"]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "The registrar arrives and looks in the mouth with a headlight. There is a dark clot adherent to the lower pole of the left tonsil fossa and slight oozing around it. He vomits about 150 mL of dark altered blood. What next?",
+      "hint": "What is the clot doing, and what does the vomit tell you?",
+      "options": [
+        { "id": "a", "text": "Call the ENT consultant and the senior anaesthetist, keep him nil by mouth, give IV tranexamic acid per local protocol, and prepare for theatre", "correct": true, "feedback": "Correct. An adherent clot with oozing and haematemesis of swallowed blood indicates a significant bleed that is unlikely to settle." },
+        { "id": "b", "text": "Pull the clot off with forceps in the emergency department to see the vessel", "correct": false, "feedback": "Removing a clot in an uncooperative child without the airway team present can provoke a torrential bleed in the worst possible place." },
+        { "id": "c", "text": "Admit to the ward for observation overnight and review on the morning round", "correct": false, "feedback": "Admission is right, but he is actively bleeding and has vomited blood. Waiting for the morning is not observation." },
+        { "id": "d", "text": "Discharge with oral antibiotics because the bleeding is slowing", "correct": false, "feedback": "Every post-tonsillectomy bleed is admitted. This child is also actively bleeding." }
+      ],
+      "why": "A clot in the fossa holds a bleeding vessel open and is a marker of a further bleed. Vomited altered blood means a large volume has already been swallowed. Removing a clot is done in a cooperative adult or in theatre, not in a frightened child at 1am. Theatre is prepared in parallel with resuscitation.",
+      "missedRedFlags": ["Clot in the fossa", "Haematemesis of swallowed blood"],
+      "levels": ["resident", "surgeon"]
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "He goes to theatre. The anaesthetist asks what you expect from the induction. Which statement is right?",
+      "hint": "Think about what is in his stomach, what is in his airway, and his circulating volume.",
+      "options": [
+        { "id": "a", "text": "This is a high-risk induction: a full stomach of blood, blood in the airway, and hypovolaemia. Senior anaesthetist, rapid sequence induction, two suckers, a range of tubes, and the surgeon scrubbed before induction", "correct": true, "feedback": "Correct. The induction is the most dangerous point of the night, and the surgeon must be ready to act before it starts." },
+        { "id": "b", "text": "A routine induction, as for the original tonsillectomy", "correct": false, "feedback": "Nothing about this is routine. A gas induction with blood in the pharynx and a full stomach risks aspiration and loss of the airway." },
+        { "id": "c", "text": "Delay theatre until his haemoglobin and blood pressure are normal", "correct": false, "feedback": "He will not stabilise while the vessel keeps bleeding. Resuscitate in parallel and operate." },
+        { "id": "d", "text": "Pass a nasogastric tube in the emergency department first to empty the stomach", "correct": false, "feedback": "This distresses the child, can provoke further bleeding, and does not reliably empty clot. The stomach is aspirated in theatre once the airway is secure." }
+      ],
+      "why": "A bleeding tonsil returning to theatre combines three risks: a full stomach of blood, a pharynx full of blood, and hypovolaemia. The experienced team, rapid sequence induction, suction and a surgeon ready before induction are what make this safe.",
+      "missedRedFlags": ["Planning a routine induction for a bleeding child"],
+      "stepRef": "step.ent.airway-share"
+    },
+    {
+      "id": "dp5", "phase": "operate",
+      "prompt": "Under anaesthetic, the clot is removed and a bleeding vessel is seen at the lower pole of the left fossa. The fossa is sloughy. How do you finish safely?",
+      "hint": "There are two things to do after the bleeding point is controlled.",
+      "options": [
+        { "id": "a", "text": "Control the vessel with bipolar or a tie, oversew if needed, check both fossae, clear the postnasal space and aspirate the stomach before waking him", "correct": true, "feedback": "Correct. Haemostasis, a check of the other side, and clearing blood from the nasopharynx and stomach reduce both rebleeding and aspiration at extubation." },
+        { "id": "b", "text": "Control the vessel and wake him immediately to limit anaesthetic time", "correct": false, "feedback": "A clot in the nasopharynx and a stomach full of blood are both hazards at extubation. A few minutes clearing them is time well spent." },
+        { "id": "c", "text": "Pack the fossa tightly and leave the pack in overnight", "correct": false, "feedback": "A retained pharyngeal pack is an airway hazard in a child. Control the vessel instead." },
+        { "id": "d", "text": "Cauterise the whole fossa extensively with monopolar diathermy", "correct": false, "feedback": "Extensive diathermy on an infected fossa increases pain and further sloughing and does not target the vessel." }
+      ],
+      "why": "Control the specific bleeding point, check the other fossa, and then clear the pharynx and stomach. Blood in the nasopharynx is aspirated at extubation, and swallowed blood is vomited and mistaken for a new bleed overnight.",
+      "stepRef": "step.ent.pharynx-clearance",
+      "levels": ["resident", "surgeon"]
+    },
+    {
+      "id": "dp6", "phase": "postop",
+      "prompt": "He recovers well. What is the plan for the rest of the admission?",
+      "hint": "Why did he bleed on day six?",
+      "options": [
+        { "id": "a", "text": "Admit for observation with a full set of observations, antibiotics per local protocol for the infected fossa, regular analgesia so he can eat, and a check of haemoglobin", "correct": true, "feedback": "Correct. Secondary haemorrhage is linked to infection and poor intake. Treating both reduces the chance of another bleed." },
+        { "id": "b", "text": "Discharge from recovery once awake", "correct": false, "feedback": "He has had a significant bleed and an anaesthetic tonight. He needs observation." },
+        { "id": "c", "text": "Keep him nil by mouth for 48 hours to rest the fossa", "correct": false, "feedback": "Eating normally helps the fossae heal. Prolonged fasting adds dehydration and worsens the slough." },
+        { "id": "d", "text": "Stop all analgesia to avoid masking a further bleed", "correct": false, "feedback": "Pain stops children eating and drinking, which promotes infection and bleeding. Treat it." }
+      ],
+      "why": "Secondary bleeding typically occurs between days 5 and 10 and is associated with infection of the fossa and poor oral intake from pain. Antibiotics per local protocol, good analgesia, early eating and drinking, and clear advice for the family address the cause. The episode is recorded for the surgeon's bleeding audit.",
+      "alternatives": ["Some units give oral rather than intravenous antibiotics once the child is eating. Follow the local protocol."]
+    }
+  ]
+}

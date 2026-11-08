@@ -1,0 +1,166 @@
+{
+  "id": "uro-ureteroscopy-laser",
+  "title": "Ureteroscopy with laser lithotripsy",
+  "subtitle": "Safety wire first, low pressure, never force the scope",
+  "system": "urology",
+  "aliases": ["URS", "URSL", "ureterorenoscopy", "semirigid ureteroscopy", "flexible ureteroscopy", "RIRS", "retrograde intrarenal surgery"],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-stones", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urolithiasis", "year": 2024, "url": "https://uroweb.org/guidelines/urolithiasis", "accessed": "2026-11-04" },
+    { "id": "aua-stones", "org": "American Urological Association (AUA) and Endourological Society", "title": "Surgical Management of Stones: AUA/Endourological Society Guideline", "year": 2016, "url": "https://www.auanet.org/guidelines-and-quality/guidelines/kidney-stones-surgical-management-guideline", "accessed": "2026-11-04" },
+    { "id": "nice-ng118", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Renal and ureteric stones: assessment and management (NG118)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng118", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["stone_score", "qsofa", "ckdepi", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Ureteric stone unlikely to pass, or failing a trial of medical expulsive therapy, with persistent pain, obstruction or impaired renal function.",
+      "Ureteric stone in a solitary or transplant kidney, or with bilateral obstruction, once any infection is controlled.",
+      "Renal stone suitable for flexible ureteroscopy (retrograde intrarenal surgery) where shock wave lithotripsy is unsuitable or has failed, or where the patient's choice, anticoagulation or body habitus favour it.",
+      "Definitive treatment after decompression of an infected obstructed system, once the infection has resolved."
+    ],
+    "contraindications": [
+      "Untreated urinary infection, and above all an infected obstructed kidney: decompress first, treat definitively later.",
+      "Uncorrected coagulopathy is relative; ureteroscopy is often the preferred stone operation when anticoagulation cannot be stopped, after discussion with the prescriber.",
+      "Pregnancy is not an absolute contraindication but needs specialist planning, minimal or no fluoroscopy and an obstetric opinion.",
+      "A ureter that will not admit the scope safely: pre-stent and return rather than force."
+    ],
+    "preparation": [
+      "Recent non-contrast CT (CT KUB) to confirm stone size, site and number, and to plan the approach.",
+      "Mid-stream urine culture before surgery; treat a positive culture before elective ureteroscopy.",
+      "Renal function and, where relevant, coagulation, with an agreed plan for antiplatelet and anticoagulant drugs.",
+      "Consent: bleeding and haematuria, infection and sepsis, ureteric injury from mucosal abrasion to perforation and, rarely, avulsion, failure to access or clear the stone, need for a stent and stent symptoms, need for further procedures, and the rare need for open or percutaneous surgery.",
+      "Pregnancy test where relevant; check for contrast allergy."
+    ],
+    "positioning": [
+      "Lithotomy, legs in padded supports, with the ipsilateral leg lowered or the contralateral leg raised if it helps the semirigid scope align with the ureter.",
+      "C-arm positioned so that the whole ureter and kidney can be screened before draping."
+    ],
+    "equipment": [
+      "Cystoscope, semirigid ureteroscope and flexible ureteroscope (reusable or single-use) with the light lead, camera and irrigation system.",
+      "Guidewires (hydrophilic-tip and stiff), open-ended ureteric catheter, contrast, and a ureteric access sheath if a flexible scope is planned.",
+      "Holmium or thulium fibre laser with appropriately sized fibres, protective eyewear for all staff and a warning sign.",
+      "Nitinol stone baskets and graspers; double-J stents of a range of lengths; irrigation pump or hand-held system able to run at low pressure."
+    ],
+    "anatomy": [
+      "The ureter has three natural narrowings where stones lodge: the pelviureteric junction, the crossing of the iliac vessels at the pelvic brim, and the vesicoureteric junction, which is the narrowest.",
+      "The intramural ureter runs obliquely through the bladder wall; the semirigid scope follows it best when rotated so the orifice lies at the scope's six or twelve o'clock.",
+      "The ureter is thin-walled with a segmental blood supply from the renal, gonadal, iliac and vesical vessels; mucosal tears heal, full-thickness injuries and avulsions do not without repair.",
+      "Calyceal anatomy varies; the lower pole infundibulopelvic angle and infundibular length decide whether a flexible scope can reach a lower pole stone and whether fragments will clear."
+    ],
+    "criticalSafety": [
+      "A safety guidewire stays in the ureter throughout, except when a flexible scope is passed over its own working wire and the safety wire is retained alongside.",
+      "Never force a ureteroscope or an access sheath against resistance. Place a stent and return in one to two weeks.",
+      "Pus above the obstruction: drain and stop.",
+      "Keep intrarenal pressure low: irrigate only as much as the view needs, and allow outflow.",
+      "Every stent is recorded with a removal date before the patient leaves theatre."
+    ],
+    "structuresAtRisk": [
+      "Ureteric mucosa and wall (abrasion, false passage, perforation)",
+      "Whole ureter (avulsion, intussusception)",
+      "Ureteric orifice and intramural ureter",
+      "Renal pelvis, calyces and papillae (laser injury, pressure-related backflow)",
+      "Iliac vessels at the pelvic brim (rare, with perforation at that level)"
+    ],
+    "commonErrors": [
+      "Starting the case without a safety wire, and then needing one.",
+      "Forcing the semirigid scope beyond the iliac crossing in a tight or angulated ureter.",
+      "Inserting an access sheath against resistance, causing a full-thickness ureteric wall injury.",
+      "Basketing a fragment wider than the ureter and pulling it down.",
+      "Discharging the patient with a stent and no removal plan."
+    ],
+    "complications": [
+      "Fever and urinary infection; urosepsis, particularly after long procedures, high irrigation pressure or untreated infection.",
+      "Haematuria, usually self-limiting.",
+      "Stent symptoms: frequency, urgency, flank pain on voiding, haematuria.",
+      "Ureteric injury: mucosal abrasion, perforation, and rarely avulsion.",
+      "Ureteric stricture as a late complication, particularly after impacted stones or perforation.",
+      "Residual fragments needing further treatment; steinstrasse.",
+      "Forgotten, encrusted stent."
+    ],
+    "postop": [
+      "Observe for fever, rigors and hypotension in the first hours; early sepsis after ureteroscopy needs cultures, antibiotics and a check that the kidney is draining.",
+      "Analgesia, including advice on stent-related pain and use of the agents in local protocol for stent symptoms.",
+      "Most patients go home the same day once voiding and comfortable.",
+      "Stent removal on the booked date; a string stent can be removed by the patient or the ward if planned.",
+      "Imaging to confirm stone-free status where it will change management, stone analysis and metabolic evaluation per stone guidelines."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the side against the most recent CT. Stones move: if the scan is old, re-image before starting." },
+    { "ref": "step.core.timeout", "emphasis": "State the laser, the scopes available, and the plan if the ureter will not admit the scope." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Use the pre-operative urine culture to choose the agent. A positive culture should have been treated before elective surgery." },
+    { "ref": "step.core.positioning", "emphasis": "Lithotomy with padded supports; check the common peroneal nerve at the fibular head on the leg support." },
+    { "ref": "step.uro.fluoro-setup" },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.uro.cystoscopy", "emphasis": "Identify the ipsilateral orifice and note efflux; a stone may be visible at the orifice." },
+    { "ref": "step.uro.retrograde-pyelogram" },
+    { "ref": "step.uro.safety-guidewire" },
+    { "ref": "step.uro.infected-system-bailout" },
+    { "ref": "step.ursl.semirigid" },
+    { "ref": "step.ursl.flexible-access" },
+    { "ref": "step.uro.lithotripsy", "emphasis": "Laser settings are chosen for the goal: higher energy and lower frequency to fragment, lower energy and higher frequency to dust. Record them." },
+    { "ref": "step.uro.fragment-clearance" },
+    { "ref": "step.ursl.ureter-inspection" },
+    { "ref": "step.uro.dj-stent", "emphasis": "A stent is not mandatory after uncomplicated ureteroscopy. Stent after ureteric injury, residual fragments, a solitary kidney, an impacted stone, infection, or significant oedema." },
+    { "ref": "step.uro.stent-register" },
+    { "ref": "step.core.specimen", "emphasis": "Stone fragments for analysis; pelvic urine for culture labelled separately from bladder urine." },
+    { "ref": "step.core.counts", "emphasis": "Account for every wire, basket and fibre that entered the patient." },
+    { "ref": "step.core.debrief", "emphasis": "Record stone-free status, any ureteric injury and its grade, and the stent plan." }
+  ],
+  "steps_local": {
+    "step.ursl.semirigid": {
+      "id": "step.ursl.semirigid", "kind": "access", "critical": true,
+      "title": "Semirigid ureteroscopy alongside the safety wire",
+      "why": "The semirigid scope gives the best view and working channel in the distal and mid ureter, but it is a rigid rod in a mobile tube. The ureter forgives looking; it does not forgive pushing.",
+      "how": [
+        "Enter the orifice alongside the safety wire, rotating the scope so the wire lifts the roof of the orifice; a second working wire can be used to open it.",
+        "Advance only with the lumen in the centre of the view, with irrigation just enough to open it.",
+        "At the iliac crossing, follow the ureter as it curves; drop the hand and use the lumen, not force.",
+        "If the scope will not pass, or the ureter grips it, stop: place a stent and return after passive dilatation."
+      ],
+      "structuresAtRisk": ["Intramural ureter", "Ureter at the iliac vessels", "Ureteric mucosa (false passage alongside the stone)"],
+      "pitfalls": [
+        "Advancing with the ureteric wall filling the view, which creates a submucosal tunnel.",
+        "Treating a tight ureter as a challenge rather than a reason to pre-stent."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ursl.flexible-access": {
+      "id": "step.ursl.flexible-access", "kind": "access", "critical": true,
+      "title": "Flexible access and access sheath, when needed",
+      "why": "Proximal ureteric and renal stones need the flexible scope. An access sheath helps outflow and repeated passes, but a sheath forced up a ureter that is too narrow causes the most serious ureteric wall injuries of the operation.",
+      "how": [
+        "Pass the flexible scope over a working wire, keeping the safety wire separate and in place.",
+        "Use an access sheath only if it advances smoothly over a stiff wire under fluoroscopy; stop at the first resistance and choose a smaller sheath or none.",
+        "Place the sheath tip below the pelviureteric junction, and confirm the position on fluoroscopy.",
+        "Map the calyces systematically against the pyelogram before starting lithotripsy, and relocate lower pole stones to a more accessible calyx where possible."
+      ],
+      "structuresAtRisk": ["Ureteric wall (sheath injury)", "Pelviureteric junction", "Flexible scope (damage from over-deflection or laser)"],
+      "pitfalls": [
+        "Pushing a sheath through resistance because the next size down is not open.",
+        "Firing the laser in full deflection, where the fibre is most likely to damage the scope."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ursl.ureter-inspection": {
+      "id": "step.ursl.ureter-inspection", "kind": "checkpoint", "critical": true,
+      "title": "Withdrawal inspection of the whole ureter",
+      "why": "Ureteric injuries are graded on withdrawal, and the grade decides whether to stent, for how long, and whether imaging is needed later. An injury not looked for is an injury not managed.",
+      "how": [
+        "Withdraw the scope or sheath slowly with the camera on, inspecting the full length of the ureter.",
+        "Grade any injury: superficial mucosal, submucosal, perforation, or full-thickness with periureteric fat visible.",
+        "If the wall is perforated, keep the wire across it and stent; do not continue stone work through a perforation.",
+        "If the ureter appears to come down with the scope, stop at once: an intussusception or avulsion needs senior help and is managed by stenting, nephrostomy or repair, never by pulling harder."
+      ],
+      "structuresAtRisk": ["Whole ureter", "Ureteric orifice"],
+      "pitfalls": [
+        "Removing the access sheath blind and missing the injury it caused.",
+        "Pulling against resistance on withdrawal because the case is over."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "id": "stridor-post-thyroidectomy",
+  "title": "Stridor four hours after thyroidectomy",
+  "subtitle": "Endocrine surgery - the neck that is closing",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "thyroid-neck-haematoma",
+  "procedureRef": "total-thyroidectomy",
+  "sources": [
+    { "id": "das-baets", "org": "Difficult Airway Society (DAS), British Association of Endocrine and Thyroid Surgeons (BAETS) and ENT UK", "title": "Management of haematoma after thyroid surgery: systematic review and multidisciplinary consensus guidelines (Iliff HA et al., Anaesthesia)", "year": 2022, "url": "https://das.uk.com/guidelines/", "accessed": "2026-11-04" },
+    { "id": "inmsg-2018", "org": "International Neural Monitoring Study Group (INMSG)", "title": "International neural monitoring study group guideline 2018 part I: staging bilateral thyroid surgery with monitoring loss of signal (Schneider R et al., Laryngoscope)", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=International+neural+monitoring+study+group+guideline+2018+part+I+staging+bilateral+thyroid+surgery", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 48-year-old woman had a total thyroidectomy for a multinodular goitre this afternoon. It is now four hours later. The ward nurse calls because she is anxious, says her neck feels tight, and has developed a noisy breath on inspiration. The operation note records both recurrent laryngeal nerves identified with normal monitoring signals at the end, and three parathyroids preserved. No drain was placed.",
+  "vitals": { "HR": "112", "BP": "168/94", "RR": "26", "SpO2": "95% on room air", "Temp": "36.9 C" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "What do you do first?",
+      "hint": "The oxygen saturation is not the number that matters here.",
+      "options": [
+        { "id": "a", "text": "Go immediately, call the senior surgeon and anaesthetist on the way, and ask the nurse to sit her up, give oxygen and bring the haematoma kit", "correct": true, "feedback": "Correct. This is a team emergency. Help is called before you arrive, not after you have assessed her." },
+        { "id": "b", "text": "Ask for a nebuliser of salbutamol and review after it", "correct": false, "feedback": "Inspiratory noise after neck surgery is an upper airway problem, not bronchospasm. The delay could be fatal." },
+        { "id": "c", "text": "Request an urgent CT neck to look for a haematoma", "correct": false, "feedback": "Imaging an expanding neck with stridor is a recognised cause of death. The diagnosis is clinical." },
+        { "id": "d", "text": "Reassure her: the saturation is 95% and anxiety after surgery is common", "correct": false, "feedback": "Anxiety is one of the DESATS warning features. Desaturation is a late sign and does not reassure." }
+      ],
+      "why": "Anxiety, a tight neck, tachypnoea and stridor after thyroid surgery are the DESATS features of an expanding haematoma. Oxygen saturation stays normal until late. The first action is to mobilise people who can secure the airway and to have the kit ready to open the wound.",
+      "missedRedFlags": ["Anxiety and neck tightness reported by the patient", "A respiratory rate of 26 with a normal saturation"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "At the bedside the neck is swollen and tense under the dressing, and the stridor is louder. The anaesthetist is five minutes away. What do you do?",
+      "hint": "Five letters, done at the bedside.",
+      "options": [
+        { "id": "a", "text": "Open the wound now at the bedside: skin exposure, cut sutures, open skin, open the strap muscles, evacuate the clot, and pack", "correct": true, "feedback": "Correct. SCOOP decompresses the airway in seconds. Waiting for theatre or for the anaesthetist costs the airway." },
+        { "id": "b", "text": "Remove the skin sutures only and wait for the anaesthetist", "correct": false, "feedback": "The haematoma is deep to the strap muscles. Opening only the skin leaves the compression in place." },
+        { "id": "c", "text": "Aspirate the haematoma with a needle", "correct": false, "feedback": "Clot cannot be aspirated, and the attempt wastes time while the airway closes." },
+        { "id": "d", "text": "Book an emergency theatre and transfer her there for evacuation", "correct": false, "feedback": "Theatre is the next step, after bedside decompression. A transfer with a closing airway risks arrest in the lift." }
+      ],
+      "why": "The DAS, BAETS and ENT UK guidance teaches SCOOP for exactly this situation: Skin exposure, Cut sutures, Open skin, Open muscles, Pack. Venous congestion causes laryngeal oedema, and releasing the pressure early limits it. It can be done by any trained member of the team at the bedside.",
+      "missedRedFlags": ["Waiting for a senior to arrive before decompressing an obstructing haematoma"]
+    },
+    {
+      "id": "dp3", "phase": "decide",
+      "prompt": "After evacuation the stridor improves and she settles. The anaesthetist arrives. What is the plan?",
+      "hint": "The clot is out, but the bleeding point is not controlled.",
+      "options": [
+        { "id": "a", "text": "Return to theatre for formal exploration and haemostasis, with an experienced anaesthetist and difficult airway equipment", "correct": true, "feedback": "Correct. The source must be controlled and the wound closed properly, and the airway may still be difficult." },
+        { "id": "b", "text": "Leave the wound packed and observe on the ward", "correct": false, "feedback": "The bleeding vessel is untreated and the airway remains at risk. This is not definitive care." },
+        { "id": "c", "text": "Resuture the skin on the ward and apply a pressure dressing", "correct": false, "feedback": "A pressure dressing on the neck compresses the airway, and the haematoma will recur." },
+        { "id": "d", "text": "Give tranexamic acid and observe for six hours", "correct": false, "feedback": "Pharmacology does not replace surgical haemostasis for an arterial or venous bleeding point in the neck." }
+      ],
+      "why": "Bedside decompression buys time; it does not treat the cause. Formal exploration finds and controls the bleeding, irrigates the wound and lets the surgeon check both recurrent laryngeal nerves. Intubation can still be difficult because laryngeal oedema persists after the clot is removed.",
+      "alternatives": ["If intubation fails, front-of-neck access may be needed, and the anatomy is distorted. This is why a senior anaesthetist and surgeon are present together."]
+    },
+    {
+      "id": "dp4", "phase": "operate",
+      "prompt": "In theatre a bleeding branch of the superior thyroid artery is found and ligated. The neuromonitoring tube signals are normal on both sides. How do you close?",
+      "hint": "Think about what happens if it bleeds again.",
+      "options": [
+        { "id": "a", "text": "Haemostasis checked at normal blood pressure with a Valsalva, and the strap muscles approximated loosely in the midline before skin closure", "correct": true, "feedback": "Correct. A loose strap closure lets any new bleeding escape superficially, where it is visible, rather than compressing the trachea." },
+        { "id": "b", "text": "Tight closure of the strap muscles to tamponade any oozing", "correct": false, "feedback": "Tight closure traps blood against the trachea. This is how the first haematoma became an airway problem." },
+        { "id": "c", "text": "Place a drain and close; the drain will prevent a recurrence", "correct": false, "feedback": "Drains do not prevent haematoma after thyroidectomy and can give false reassurance when blocked by clot." },
+        { "id": "d", "text": "Close at a low blood pressure to reduce oozing", "correct": false, "feedback": "Closure at a low pressure hides the vessel that will bleed when her pressure returns to normal in recovery." }
+      ],
+      "why": "Haemostasis is tested at the pressures the patient will have on the ward. A loose midline strap closure and no reliance on drains reflect the current consensus that drains do not prevent haematoma, and that the strap layer should not seal blood against the airway.",
+      "stepRef": "step.core.haemostasis"
+    },
+    {
+      "id": "dp5", "phase": "postop",
+      "prompt": "She returns to the ward at 11pm. What must be in place before you leave?",
+      "hint": "Assume it could happen again at 3am, with someone else on call.",
+      "options": [
+        { "id": "a", "text": "A haematoma kit at the bedside, structured neck checks by staff trained in DESATS and SCOOP, calcium and PTH checks, and a clear handover", "correct": true, "feedback": "Correct. Recognition and immediate action by the ward team are what saved her the first time." },
+        { "id": "b", "text": "Hourly saturation monitoring only", "correct": false, "feedback": "Saturation falls late. Neck checks, respiratory rate and the patient's own symptoms are earlier signals." },
+        { "id": "c", "text": "Plan discharge first thing in the morning", "correct": false, "feedback": "She needs a period of observation after a re-exploration, and her calcium has not yet been checked." },
+        { "id": "d", "text": "Nothing additional: the bleeding point has been ligated", "correct": false, "feedback": "Recurrent haematoma is uncommon but possible, and hypocalcaemia is still to come after a total thyroidectomy." }
+      ],
+      "why": "The system around the patient matters as much as the operation: a kit, trained staff, regular structured checks and a handover that names the risk. Total thyroidectomy also carries a risk of hypocalcaemia, which usually reaches its lowest point in the first day or two.",
+      "missedRedFlags": ["No haematoma kit at the bedside after a re-exploration"]
+    }
+  ]
+}

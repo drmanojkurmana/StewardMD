@@ -1,0 +1,59 @@
+{
+  "id": "pneumothorax",
+  "title": "Spontaneous and tension pneumothorax",
+  "subtitle": "Symptoms and risk, not size alone, decide the intervention",
+  "category": "thoracic",
+  "specialty": "cardiothoracic",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "bts-pleural-2023", "org": "British Thoracic Society (BTS)", "title": "British Thoracic Society Guideline for pleural disease", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37433578/", "accessed": "2026-11-04" },
+    { "id": "bts-procedures-2023", "org": "British Thoracic Society (BTS)", "title": "British Thoracic Society Clinical Statement on pleural procedures", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37433579/", "accessed": "2026-11-04" },
+    { "id": "atls", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Tension: respiratory distress, hypoxia, tachycardia, hypotension, absent breath sounds, and in the ventilated patient rising airway pressures. Tracheal deviation is late." },
+      { "text": "High-risk characteristics: haemodynamic compromise, significant hypoxia, bilateral pneumothorax, underlying lung disease, age 50 or over with a significant smoking history, or haemopneumothorax." },
+      { "text": "Pneumothorax in a patient about to be ventilated or to fly. Positive pressure and altitude both expand it." },
+      { "text": "Recurrent pneumothorax, or a pneumothorax around the menses: consider catamenial disease and refer." }
+    ],
+    "do_now": [
+      { "text": "Suspected tension pneumothorax: decompress immediately on clinical grounds, without waiting for a radiograph, then place a chest drain.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "In adults, needle decompression is placed in the fourth or fifth intercostal space just anterior to the mid-axillary line; finger thoracostomy in the ventilated trauma patient.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "High-flow oxygen for hypoxia, titrated to target saturations, especially with chronic lung disease.", "evidenceRef": "bts-pleural-2023" }
+    ],
+    "assess": [
+      { "text": "Decide primary (no known lung disease) or secondary (underlying lung disease, or age 50 or over with significant smoking history)." },
+      { "text": "Assess symptoms, breathlessness and the patient's priorities. In the BTS 2023 pathway, symptoms and high-risk features drive treatment more than radiological size." },
+      { "text": "Look for subcutaneous emphysema, bilateral signs and haemodynamic compromise." }
+    ],
+    "investigate": [
+      { "text": "Erect posteroanterior chest radiograph. Measure and record the size for trend, but do not let size alone decide treatment." },
+      { "text": "CT chest when the radiograph is unclear, a bulla is suspected, or for complex or recurrent disease and surgical planning." },
+      { "text": "Thoracic ultrasound can detect a pneumothorax at the bedside in experienced hands." }
+    ],
+    "resuscitate": [
+      { "text": "Primary pneumothorax with minimal symptoms and no high-risk features: conservative management with clear safety-net advice and follow-up is an option.", "evidenceRef": "bts-pleural-2023" },
+      { "text": "Symptomatic primary pneumothorax needing intervention: needle aspiration, an ambulatory device, or a small-bore chest drain, chosen with the patient.", "evidenceRef": "bts-pleural-2023" },
+      { "text": "Secondary pneumothorax: admit. Most need a small-bore chest drain; observe all patients in hospital.", "evidenceRef": "bts-pleural-2023" }
+    ],
+    "definitive": [
+      { "text": "Insert drains in the safe triangle, with a small-bore Seldinger drain first-line. Never clamp a bubbling drain.", "evidenceRef": "bts-procedures-2023" },
+      { "text": "Persistent air leak or failure to re-expand: early respiratory and thoracic surgical review. Suction or an endobronchial valve may be options in selected patients.", "evidenceRef": "bts-pleural-2023" },
+      { "text": "Offer definitive surgery (VATS with pleurectomy or pleural abrasion) for a recurrence, a first contralateral episode, bilateral pneumothorax, persistent air leak, and in high-risk occupations.", "evidenceRef": "bts-pleural-2023" },
+      { "text": "Advise no flying until the pneumothorax has resolved and been confirmed, and avoid diving permanently unless definitive surgery has been performed.", "evidenceRef": "bts-pleural-2023" }
+    ],
+    "escalate": [
+      { "text": "Senior help for tension, bilateral pneumothorax, or pneumothorax in a ventilated patient." },
+      { "text": "Respiratory team for every secondary pneumothorax; thoracic surgeons for persistent air leak and recurrence." },
+      { "text": "Smoking cessation for every patient: smoking increases recurrence substantially." }
+    ]
+  },
+  "notes": [
+    "Tension is a clinical diagnosis. The radiograph of a tension pneumothorax should never exist.",
+    "In a young patient with a large primary pneumothorax and few symptoms, doing less is often the right answer.",
+    "A secondary pneumothorax with a small rim on the film can still kill a patient with poor lung reserve."
+  ]
+}

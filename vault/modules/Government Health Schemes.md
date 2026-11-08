@@ -368,3 +368,9 @@ Deps: [[Decisions]]
   The import needs re-parsing; D1 not fixed yet.
 - MaiK's scheme vocabulary (aarogyasri -> `andhra-pradesh/ap-ntr-vaidya-seva` + `telangana/telangana-aarogyasri`,
   pmjay -> `central`, cmchis -> `tamil-nadu`, mjpjay -> `maharashtra` with 0 packages) lives in `edge-router.js` SCHEMES.
+
+## iPad (2026-11-04, iPad standards pass)
+- On `html.smd-tablet` at 1000 px and wider, a package tapped in a Browse package list or in Search results opens in a
+  pane beside the list (`openDetailSplit` in `govschemes.js`, root class `.gs-split`, layout in `ipad-clinical.css`).
+  `renderList` / `renderBrowseBody` clear the split, so changing level or tab returns to the full-width list. Phones
+  and narrow Split View keep the push to the detail screen.

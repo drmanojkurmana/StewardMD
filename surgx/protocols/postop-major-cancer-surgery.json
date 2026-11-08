@@ -1,0 +1,194 @@
+{
+  "id": "postop-major-cancer-surgery",
+  "title": "After major cancer surgery",
+  "subtitle": "ERAS care, chyle leak, pancreatic fistula grading",
+  "category": "onco_periop",
+  "specialty": "oncology",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "eras-crc",
+      "org": "ERAS Society",
+      "title": "Guidelines for perioperative care in elective colorectal surgery: Enhanced Recovery After Surgery (ERAS) Society recommendations: 2018 (Gustafsson UO et al., World J Surg)",
+      "year": 2019,
+      "url": "https://erassociety.org/guidelines/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "eras-pd",
+      "org": "ERAS Society",
+      "title": "Guidelines for perioperative care for pancreatoduodenectomy: Enhanced Recovery After Surgery (ERAS) recommendations 2019 (Melloul E et al., World J Surg)",
+      "year": 2020,
+      "url": "https://erassociety.org/guidelines/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "isgps-popf",
+      "org": "International Study Group of Pancreatic Surgery (ISGPS)",
+      "title": "The 2016 update of the International Study Group (ISGPS) definition and grading of postoperative pancreatic fistula: 11 years after (Bassi C et al., Surgery)",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=2016+update+International+Study+Group+ISGPS+definition+grading+postoperative+pancreatic+fistula",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "isgps-chyle",
+      "org": "International Study Group of Pancreatic Surgery (ISGPS)",
+      "title": "Definition and classification of chyle leak after pancreatic operation: a consensus statement by the ISGPS (Besselink MG et al., Surgery)",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Definition+and+classification+of+chyle+leak+after+pancreatic+operation+ISGPS",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng89",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Venous thromboembolism in over 16s: reducing the risk of hospital-acquired deep vein thrombosis or pulmonary embolism (NG89)",
+      "year": 2018,
+      "url": "https://www.nice.org.uk/guidance/ng89",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Tachycardia, new atrial fibrillation, fever or rising inflammatory markers from day three: anastomotic or pancreatic leak until imaging says otherwise."
+      },
+      {
+        "text": "A small bleed from a drain or the gut after pancreatic surgery: a sentinel bleed that may precede a pseudoaneurysm rupture."
+      },
+      {
+        "text": "Milky drain fluid that increases once the patient eats: chyle leak."
+      },
+      {
+        "text": "Persistent vomiting and a distended abdomen beyond the expected ileus: delayed gastric emptying, obstruction or a collection."
+      },
+      {
+        "text": "Calf swelling, unexplained breathlessness or hypoxia: cancer surgery carries a high thrombosis risk."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Follow the ERAS pathway: early oral intake, early mobilisation, multimodal opioid-sparing analgesia, PONV prophylaxis, and avoidance of fluid overload.",
+        "evidenceRef": "eras-crc"
+      },
+      {
+        "text": "Remove the urinary catheter and nasogastric tube as early as the operation allows; do not leave tubes in by habit.",
+        "evidenceRef": "eras-crc"
+      },
+      {
+        "text": "Pharmacological and mechanical thromboprophylaxis; consider extending pharmacological prophylaxis to 28 days after major abdominal or pelvic cancer surgery.",
+        "evidenceRef": "nice-ng89"
+      },
+      {
+        "text": "Sentinel bleed after pancreatic surgery: urgent CT angiography and interventional radiology, not observation.",
+        "timeCritical": true,
+        "evidenceRef": "isgps-popf"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Daily review against the expected trajectory: pain, mobility, oral intake, bowel function, drain volume and character, and observations.",
+        "calcs": [
+          "news2"
+        ]
+      },
+      {
+        "text": "Grade complications consistently so they can be audited and discussed honestly.",
+        "calcs": [
+          "clavien_dindo"
+        ]
+      },
+      {
+        "text": "Nutritional intake and the need for supplementary feeding when oral intake lags.",
+        "calcs": [
+          "must",
+          "nrs2002"
+        ]
+      },
+      {
+        "text": "Nausea risk and prophylaxis.",
+        "calcs": [
+          "apfel"
+        ]
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Drain fluid amylase after pancreatic resection, interpreted against the serum upper limit of normal and the day after surgery."
+      },
+      {
+        "text": "Drain fluid triglycerides when chyle is suspected."
+      },
+      {
+        "text": "CRP trend: a falling value supports safe discharge; a rising value after day three needs an explanation."
+      },
+      {
+        "text": "CT abdomen and pelvis with IV contrast for suspected leak or collection, with oral or rectal contrast where it helps."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Goal-directed fluid therapy, avoiding both hypovolaemia and the weight gain that worsens ileus and anastomotic oedema.",
+        "evidenceRef": "eras-crc"
+      },
+      {
+        "text": "Chyle leak: dietary modification (low-fat, medium-chain triglyceride diet), and escalation to nil by mouth with parenteral nutrition for a high-output or persistent leak; a somatostatin analogue may be considered.",
+        "evidenceRef": "isgps-chyle"
+      },
+      {
+        "text": "Clinically relevant pancreatic fistula: keep the drain in situ, treat infection, drain undrained collections percutaneously, and support nutrition.",
+        "evidenceRef": "isgps-popf"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Grade pancreatic fistula per ISGPS 2016. Biochemical leak: drain amylase above three times the serum upper limit of normal on or after day three without clinical impact; no longer called a fistula. Grade B: a change in management (prolonged drainage beyond three weeks, percutaneous or endoscopic drainage, angiography for bleeding, or infection without organ failure). Grade C: reoperation, organ failure or death.",
+        "evidenceRef": "isgps-popf"
+      },
+      {
+        "text": "Grade chyle leak per ISGPS 2017: drain or wound output of any volume on or after day three with triglycerides of 110 mg/dL (1.2 mmol/L) or more. Grade A needs no or dietary treatment only; grade B needs prolonged nutritional restriction, parenteral nutrition, drainage, a somatostatin analogue or readmission; grade C needs invasive in-hospital treatment or critical care, or results in death.",
+        "evidenceRef": "isgps-chyle"
+      },
+      {
+        "text": "Post-pancreatectomy haemorrhage from a pseudoaneurysm: angiographic embolisation or stenting first-line in a patient stable enough, with laparotomy if that fails.",
+        "evidenceRef": "eras-pd"
+      },
+      {
+        "text": "Anastomotic leak with sepsis: source control by percutaneous drainage or reoperation, decided by physiology and the extent of contamination.",
+        "evidenceRef": "eras-crc"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Consultant surgeon for any suspected leak, sentinel bleed or return to theatre."
+      },
+      {
+        "text": "Interventional radiology for collections and bleeding after pancreatic and hepatobiliary surgery."
+      },
+      {
+        "text": "Dietitian early for chyle leak, pancreatic fistula or poor oral intake."
+      },
+      {
+        "text": "Critical care for organ dysfunction; do not let a grade C complication declare itself on the ward."
+      }
+    ]
+  },
+  "notes": [
+    "A biochemical leak after pancreatectomy is not a complication. Grading consistently stops overtreatment of numbers and undertreatment of patients.",
+    "ERAS is a bundle; its benefit comes from adherence to many small elements together, not any single one.",
+    "Failure to rescue, not the complication rate, is what separates high-performing cancer units. Recognise early, escalate early."
+  ],
+  "calcs": [
+    "news2",
+    "clavien_dindo",
+    "must",
+    "nrs2002",
+    "apfel",
+    "caprini"
+  ]
+}

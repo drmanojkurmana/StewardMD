@@ -1,0 +1,65 @@
+/* ipad-native.css: iPad (and large Android tablet) shell polish, owner 2026-11-04: "polish it to fit and work like a
+ * native iPad app". Everything is scoped to html.smd-tablet, which the inline boot script in index.html sets on a large
+ * touch screen (more than one touch point, shorter screen side 600 px or more) unless localStorage smd_ipad_native=0.
+ * Phones never get the class, and an iPad in narrow Split View or Slide Over falls under the width queries below, so
+ * it keeps the phone layout it was tested at. Module inner layouts stay in tablet-fit.css. */
+
+/* 1. Tab bar: iPadOS groups its tabs in the middle instead of spreading five items across 1,366 px. The bar keeps its
+      full-width background (it is the dock); only the buttons gather. */
+@media (min-width: 700px) {
+  html.smd-tablet #homeV2.rnav .rnav-tabbar { justify-content: center; gap: 8px; }
+  html.smd-tablet #homeV2.rnav .rnav-tab { flex: 0 0 112px; font-size: 11.5px; border-radius: 12px; }
+}
+
+/* 2. Home tools: three columns of orbs left 300 px gaps on iPad Pro. Four in portrait, five in landscape. */
+@media (min-width: 700px) {
+  html.smd-tablet #homeV2.rnav .rnav-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px 10px; }
+}
+@media (min-width: 1100px) {
+  html.smd-tablet #homeV2.rnav .rnav-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+/* 3. Shell sheets (More, Display, and the rest built on .hv-sheet): on iPad a sheet floats as a card above the dock
+      instead of a 1,366 px slab glued to the bottom edge. It stays bottom-anchored so sheet-drag.js swipe-to-dismiss
+      (a translateY on the sheet) still works, and the closed state slides it fully out of view. */
+@media (min-width: 700px) {
+  html.smd-tablet body .hv-sheet.hv-sheet {
+    left: max(24px, calc(50vw - 300px)); right: max(24px, calc(50vw - 300px));
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    border-radius: 22px; max-height: min(80vh, 760px);
+    transform: translateY(calc(100% + 40px));
+    box-shadow: 0 24px 60px rgba(15, 23, 42, .28), 0 2px 8px rgba(15, 23, 42, .12);
+  }
+  html.smd-tablet body .hv-sheet.hv-sheet.on { transform: none; }
+  html.smd-tablet body .hv-sheet.hv-sheet .hv-sheet-wrap { max-width: none; margin: 0; padding: 8px 22px 22px; }
+}
+
+/* 4. Trackpad and mouse (Magic Keyboard, Smart Keyboard Folio with trackpad): iPadOS reports a fine pointer that can
+      hover. Give the shell's controls the hover highlight a native iPad button shows under the pointer. Touch-only
+      iPads never match this query, so a tap never leaves a sticky hover tint. */
+@media (any-hover: hover) and (any-pointer: fine) {
+  html.smd-tablet button, html.smd-tablet [role="button"], html.smd-tablet [data-act], html.smd-tablet a[href],
+  html.smd-tablet summary, html.smd-tablet label[for] { cursor: pointer; }
+  html.smd-tablet #homeV2.rnav .rnav-qa-btn { transition: background-color .15s ease, border-color .15s ease; }
+  html.smd-tablet #homeV2.rnav .rnav-qa-btn:hover { background: color-mix(in srgb, var(--rds-primary, #0F766E) 7%, var(--rds-surface, #fff)); border-color: color-mix(in srgb, var(--rds-primary, #0F766E) 35%, transparent); }
+  html.smd-tablet #homeV2.rnav .rnav-tab { transition: background-color .15s ease, color .15s ease; }
+  html.smd-tablet #homeV2.rnav .rnav-tab:hover { background: color-mix(in srgb, var(--rds-primary, #0F766E) 8%, transparent); color: var(--rds-primary, #0F766E); }
+  html.smd-tablet #homeV2.rnav .rnav-tile .rnav-badge { transition: filter .15s ease; }
+  html.smd-tablet #homeV2.rnav .rnav-tile:hover .rnav-badge { filter: brightness(1.12); }
+  html.smd-tablet #homeV2.rnav .rnav-tile:hover .rnav-tile-tt { color: var(--rds-primary, #0F766E); }
+  html.smd-tablet body .hv-sheet button:hover { background-color: color-mix(in srgb, var(--rds-primary, #0F766E) 6%, transparent); }
+}
+
+/* 5. Hardware keyboard: a visible focus ring when moving with Tab (keyboard only, never on tap). */
+html.smd-tablet :focus-visible { outline: 2px solid var(--rds-primary, #0F766E); outline-offset: 2px; }
+
+/* 6. Keyboard shortcuts card (hold Command, or Command + /), the web version of the iPadOS shortcut overlay. */
+#smdKeyHelp { position: fixed; inset: 0; z-index: 2147483000; display: flex; align-items: center; justify-content: center; background: rgba(15, 23, 42, .28); }
+#smdKeyHelp[hidden] { display: none; }
+#smdKeyHelp .kh-card { width: min(440px, calc(100vw - 48px)); max-height: 80vh; overflow: auto; box-sizing: border-box; padding: 18px 20px 14px; border-radius: 18px; background: var(--rds-surface, #fff); color: var(--rds-ink, #0F172A); box-shadow: 0 24px 60px rgba(15, 23, 42, .3); font: 500 14px var(--rds-font, -apple-system, system-ui, sans-serif); }
+#smdKeyHelp h2 { margin: 0 0 10px; font-size: 15px; font-weight: 700; }
+#smdKeyHelp .kh-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0; border-top: 1px solid var(--rds-line, #E2E8F0); }
+#smdKeyHelp kbd { font: 600 13px var(--rds-font, -apple-system, system-ui, sans-serif); color: var(--rds-muted, #64748B); white-space: nowrap; }
+body.dark #smdKeyHelp .kh-card { background: #111B2E; color: #E7EDF5; }
+body.dark #smdKeyHelp .kh-row { border-top-color: #1E2B43; }
+#smdKeyHelp .kh-card:focus { outline: none; }

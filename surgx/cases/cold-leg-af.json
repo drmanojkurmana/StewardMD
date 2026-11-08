@@ -1,0 +1,95 @@
+{
+  "id": "cold-leg-af",
+  "title": "Sudden cold painful leg",
+  "subtitle": "Acute limb ischaemia in atrial fibrillation",
+  "simulation": true,
+  "levels": ["student", "intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "acute-limb-ischaemia",
+  "procedureRef": "femoral-embolectomy",
+  "sources": [
+    { "id": "esvs-ali-2020", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2020 Clinical Practice Guidelines on the Management of Acute Limb Ischaemia", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/31899099/", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 76-year-old woman is brought in at 10pm. Four hours ago, while watching television, she felt sudden severe pain in her right leg. The leg is now white, cold to mid-calf and she says her toes feel 'numb and strange'. She has atrial fibrillation and stopped her anticoagulant two months ago after a nosebleed. The left leg has normal pulses.",
+  "vitals": { "HR": "112 irregular", "BP": "148/86", "RR": "18", "SpO2": "96% air", "Temp": "36.8 C" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "You have confirmed an absent right femoral pulse and a cold white leg. What is your first action?",
+      "hint": "One drug, given now, stops the clot getting bigger.",
+      "options": [
+        { "id": "a", "text": "Give an intravenous bolus of unfractionated heparin and call the vascular surgeon", "correct": true, "feedback": "Correct. Heparin at diagnosis limits propagation of thrombus into collaterals and the distal bed, and the vascular team must be called now." },
+        { "id": "b", "text": "Arrange a CT angiogram and refer once the result is back", "correct": false, "feedback": "Imaging may be needed, but referring after the scan wastes time the limb may not have, and heparin has still not been given." },
+        { "id": "c", "text": "Start aspirin and review in the morning", "correct": false, "feedback": "Aspirin does not treat an acute embolus, and a threatened limb will not survive until the morning." },
+        { "id": "d", "text": "Rate-control the AF first, then reassess the leg", "correct": false, "feedback": "Rate control matters, but it does not save the leg. Treat the ischaemia first and the AF in parallel." }
+      ],
+      "why": "In acute limb ischaemia, heparin given at diagnosis reduces clot propagation, and the outcome is decided by the time to revascularisation. Both need to happen in the first minutes, before any imaging.",
+      "missedRedFlags": ["Numbness of the toes, which means the limb is already threatened"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "She has reduced light-touch sensation over the toes and forefoot, and weak toe dorsiflexion. The calf is soft. Ankle Doppler: no arterial signal, venous signal present. How do you classify the limb?",
+      "hint": "Sensory loss beyond the toes, plus any weakness.",
+      "options": [
+        { "id": "a", "text": "Rutherford I, viable", "correct": false, "feedback": "A viable limb has no sensory or motor loss. This one has both." },
+        { "id": "b", "text": "Rutherford IIa, marginally threatened", "correct": false, "feedback": "IIa has minimal sensory loss confined to the toes and no weakness. This limb has more." },
+        { "id": "c", "text": "Rutherford IIb, immediately threatened", "correct": true, "feedback": "Correct. Sensory loss beyond the toes with mild to moderate weakness is IIb, which needs immediate revascularisation." },
+        { "id": "d", "text": "Rutherford III, irreversible", "correct": false, "feedback": "III has profound anaesthesia, paralysis, rigid muscles and no venous Doppler signal. The calf is soft and the venous signal is present." }
+      ],
+      "why": "The Rutherford acute classes are defined by sensory loss, motor loss and Doppler signals. IIb is the class where hours matter most: the limb can still be saved but not if you wait.",
+      "missedRedFlags": ["Weak dorsiflexion, which moves the limb from IIa to IIb"]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "The CT scanner is busy for the next two hours. What do you do?",
+      "hint": "Is a scan needed to decide on this operation?",
+      "options": [
+        { "id": "a", "text": "Wait for CT angiography, because operating without it is unsafe", "correct": false, "feedback": "For a IIb limb with a clear embolic history, waiting two hours for a scan costs muscle and nerve." },
+        { "id": "b", "text": "Proceed to theatre for femoral embolectomy with on-table angiography", "correct": true, "feedback": "Correct. Sudden onset, AF and a normal contralateral leg point to embolus, and on-table angiography gives the imaging needed." },
+        { "id": "c", "text": "Arrange catheter-directed thrombolysis", "correct": false, "feedback": "Thrombolysis is slow to restore flow and is better for limbs that can wait. This one cannot." },
+        { "id": "d", "text": "Arrange an outpatient duplex scan", "correct": false, "feedback": "This is an emergency. Outpatient imaging has no role." }
+      ],
+      "why": "ESVS advises that imaging should not delay revascularisation of an immediately threatened limb. When the history points to an embolus, the operation can proceed with on-table angiography.",
+      "missedRedFlags": ["Delaying a IIb limb for imaging"]
+    },
+    {
+      "id": "dp4", "phase": "operate",
+      "prompt": "At embolectomy, catheters retrieve clot from the femoral bifurcation. Proximal inflow is strong. Distally, two passes return clot, the third is clean, but back-bleeding is weak. What next?",
+      "hint": "What does weak back-bleeding tell you?",
+      "options": [
+        { "id": "a", "text": "Close the arteriotomy; weak back-bleeding is normal in older patients", "correct": false, "feedback": "Weak back-bleeding after embolectomy suggests residual distal clot and must be investigated before closing." },
+        { "id": "b", "text": "Perform on-table angiography and treat what it shows, including below-knee exploration if needed", "correct": true, "feedback": "Correct. Completion imaging finds residual tibial clot or an underlying stenosis while it can still be treated." },
+        { "id": "c", "text": "Pass a larger balloon inflated more firmly", "correct": false, "feedback": "Over-inflation causes intimal injury and late thrombosis. Image before more blind passes." },
+        { "id": "d", "text": "Close and start an iloprost infusion", "correct": false, "feedback": "Drugs do not replace a patent outflow. You have not yet found out why back-bleeding is poor." }
+      ],
+      "why": "Clinical signs on the table are unreliable. Completion angiography is the check that an embolectomy has cleared the outflow, and it guides further passes from below the knee or adjunctive endovascular treatment.",
+      "missedRedFlags": ["Accepting poor back-bleeding without imaging"]
+    },
+    {
+      "id": "dp5", "phase": "postop",
+      "prompt": "Flow is restored with a palpable pedal pulse. The limb was ischaemic for about seven hours. What do you do before leaving theatre?",
+      "hint": "The calf may be soft now. It may not be at 3am.",
+      "options": [
+        { "id": "a", "text": "Consider four-compartment fasciotomy through two incisions, or document why not and set up regular compartment checks", "correct": true, "feedback": "Correct. After prolonged ischaemia of a IIb limb, reperfusion swelling is likely. The decision is made in theatre, not left to the ward." },
+        { "id": "b", "text": "Nothing further; the pedal pulse means the limb is safe", "correct": false, "feedback": "A pulse does not exclude compartment syndrome. Pulses are often present until late." },
+        { "id": "c", "text": "Apply a compression bandage to reduce swelling", "correct": false, "feedback": "Compression raises compartment pressure further and is harmful." },
+        { "id": "d", "text": "Elevate the leg high on pillows overnight", "correct": false, "feedback": "Marked elevation reduces arterial perfusion pressure in a freshly reperfused limb." }
+      ],
+      "why": "Compartment syndrome after reperfusion destroys muscle and nerve within hours. ESVS advises considering fasciotomy after revascularisation of severe or prolonged ischaemia. A palpable pulse does not exclude it.",
+      "missedRedFlags": ["Relying on a pedal pulse to exclude compartment syndrome"]
+    },
+    {
+      "id": "dp6", "phase": "postop",
+      "prompt": "She recovers well. What is the long-term plan for her AF?",
+      "hint": "The source has not gone away.",
+      "options": [
+        { "id": "a", "text": "Aspirin only, because of the previous nosebleed", "correct": false, "feedback": "Aspirin does not adequately prevent cardioembolism in AF. The bleeding risk should be managed, not used as a reason to leave the source untreated." },
+        { "id": "b", "text": "Long-term anticoagulation, with the bleeding risk assessed and its correctable causes addressed, and an echocardiogram", "correct": true, "feedback": "Correct. After an embolic event from AF, the recurrence risk is high and anticoagulation is indicated unless contraindicated." },
+        { "id": "c", "text": "No antithrombotic therapy, because the clot has been removed", "correct": false, "feedback": "The clot came from the heart, and the heart is still in AF." },
+        { "id": "d", "text": "Anticoagulation for six weeks only", "correct": false, "feedback": "The risk from AF is lifelong, not limited to the post-operative period." }
+      ],
+      "why": "ESVS recommends long-term anticoagulation after embolic acute limb ischaemia from a cardiac source unless contraindicated. Stopping it after a minor bleed is a common route to this presentation.",
+      "missedRedFlags": ["Stopping anticoagulation after a minor bleed without a plan"]
+    }
+  ]
+}

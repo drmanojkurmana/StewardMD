@@ -3,7 +3,7 @@
  "module": "cm-measures",
  "subject": "community-medicine",
  "title": "Measurements of morbidity and mortality",
- "minutes": 7,
+ "minutes": 8,
  "steps": [
   {
    "tx": "Morbidity and mortality measures turn raw counts into rates so that populations can be compared. **Incidence** counts new cases over a period in a population at risk. **Prevalence** counts all existing cases, old and new, at a point or over a period. Prevalence equals incidence multiplied by mean duration of disease, so long-lasting conditions accumulate higher prevalence even when incidence is modest.",
@@ -71,6 +71,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The cutaway house turns a formula into a floor plan. One bedroom holds the **primary case** in bed while other rooms hold **susceptible contacts** marked with arrows. A banner names the **secondary attack rate** within one incubation period, meaning new cases among contacts divided by exposed contacts with the first patient excluded. An investigator interviews a resident below, reminding learners that field counting of who fell ill after exposure gives the measure.",
+   "say": "Start upstairs with the first sick person, then count the others. The primary case does not enter the fraction. Watch the healthy contacts through one incubation period and count who becomes ill. That share is the secondary attack rate, and it reflects how readily infection spreads in close contact. Household diagrams like this are the classic exam picture for the idea.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/cm-measures-gen1.webp",
+    "alt": "Cutaway house marks the first patient plus exposed contacts while an investigator interviews below.",
+    "caption": "House plan separates first patient from later contact cases Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

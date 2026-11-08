@@ -1,0 +1,252 @@
+{
+  "id": "gsv-ablation-stripping",
+  "title": "Great saphenous vein surgery",
+  "subtitle": "Endovenous thermal ablation, and open high tie with stripping",
+  "system": "vascular",
+  "aliases": ["varicose vein surgery", "EVLA", "endovenous laser ablation", "radiofrequency ablation", "RFA", "high tie and strip", "saphenofemoral ligation", "Trendelenburg operation"],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "nice-cg168", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Varicose veins: diagnosis and management (CG168)", "year": 2013, "url": "https://www.nice.org.uk/guidance/cg168", "accessed": "2026-11-04" },
+    { "id": "esvs-cvd-2022", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2022 Clinical Practice Guidelines on the Management of Chronic Venous Disease of the Lower Limbs", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/35027279/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["caprini", "wells_dvt"],
+  "chapters": {
+    "indications": [
+      "Symptomatic varicose veins with duplex-confirmed great saphenous vein reflux at the saphenofemoral junction and along the trunk.",
+      "Skin changes of chronic venous disease, healed or active venous ulceration with superficial reflux.",
+      "Superficial thrombophlebitis with truncal reflux, once the acute episode has settled, or bleeding from varicosities.",
+      "Endothermal ablation is offered first for truncal reflux; ultrasound-guided foam sclerotherapy if it is unsuitable; open surgery if neither is suitable (NICE CG168). Open high tie and stripping remains appropriate where endovenous treatment is unavailable or the vein is unsuitable (very tortuous, large aneurysmal junction, previous thrombosis)."
+    ],
+    "contraindications": [
+      "Acute deep vein thrombosis, or deep venous occlusion where the superficial veins are the main outflow.",
+      "Significant peripheral arterial disease (check pulses and ankle-brachial index before compression).",
+      "Pregnancy; immobility; inability to walk after the procedure.",
+      "For endovenous ablation: a vein too tortuous or too superficial to treat safely, or an occluded segment that will not admit the catheter."
+    ],
+    "preparation": [
+      "Recent duplex scan confirming reflux, the junction anatomy, the deep veins and any accessory saphenous reflux; scan the patient yourself or with the vascular scientist before treatment.",
+      "Assess venous thromboembolism risk and plan pharmacological prophylaxis for those at increased risk, per local protocol.",
+      "Mark the tributaries for phlebectomy with the patient standing.",
+      "Consent risks to discuss: bruising and pain; skin burns and pigmentation; numbness from saphenous nerve injury; superficial thrombophlebitis; deep vein thrombosis and pulmonary embolism; endovenous heat-induced thrombus extending into the deep vein; recurrence; for open surgery, groin wound infection, lymph leak and, rarely, injury to the femoral vein or artery."
+    ],
+    "positioning": [
+      "Supine with the leg slightly externally rotated and the knee slightly flexed.",
+      "Reverse Trendelenburg tilt to fill the vein for cannulation, then head-down tilt to empty it for ablation or stripping."
+    ],
+    "equipment": [
+      "Duplex ultrasound with a sterile probe cover.",
+      "Endovenous laser or radiofrequency generator and catheter, introducer sheath and guidewire.",
+      "Tumescent solution and a delivery pump or syringes.",
+      "Open set: self-retaining retractor, ligatures, a vein stripper (inversion stripper preferred), phlebectomy hooks.",
+      "Compression bandages or stockings."
+    ],
+    "anatomy": [
+      "The saphenofemoral junction lies about 2 to 3 cm below and lateral to the pubic tubercle, deep to the cribriform fascia.",
+      "Tributaries at the junction vary but typically include the superficial epigastric, superficial circumflex iliac, superficial and deep external pudendal, and the anterior and posterior accessory saphenous veins.",
+      "The superficial external pudendal artery often crosses close to the junction, and the common femoral artery lies lateral to the common femoral vein.",
+      "In the thigh the great saphenous vein lies within the saphenous fascial compartment; below the knee the saphenous nerve runs alongside it, which is why stripping stops at the knee."
+    ],
+    "criticalSafety": [
+      "Never tie or divide any vessel at the groin until the common femoral vein has been seen and the junction identified with certainty.",
+      "Before thermal ablation, confirm the catheter tip position on ultrasound in longitudinal view, short of the junction and beyond the deep vein.",
+      "Tumescent fluid must surround the vein along the whole treated length to protect the skin and nerves.",
+      "Duplex the deep vein at the end of ablation, and arrange follow-up imaging per protocol to detect heat-induced thrombus."
+    ],
+    "structuresAtRisk": [
+      "Common femoral vein and artery",
+      "Saphenous nerve below the knee",
+      "Skin over a superficial vein during ablation",
+      "Superficial external pudendal artery",
+      "Lymphatics at the groin"
+    ],
+    "commonErrors": [
+      "Treating the wrong vein (an accessory saphenous instead of the refluxing trunk) because the scan was not reviewed.",
+      "Tip too close to the junction, causing thrombus extension into the common femoral vein.",
+      "Inadequate tumescent fluid, causing burns and nerve injury.",
+      "In open surgery, ligating the saphenous vein too far from the junction and leaving a tributary stump that causes recurrence.",
+      "Stripping below the knee and injuring the saphenous nerve."
+    ],
+    "complications": [
+      "Bruising, pain and induration along the treated vein.",
+      "Skin burns and pigmentation after ablation.",
+      "Saphenous nerve paraesthesia.",
+      "Superficial thrombophlebitis; deep vein thrombosis and pulmonary embolism; endovenous heat-induced thrombus.",
+      "Groin wound infection, lymph leak and haematoma after open surgery.",
+      "Femoral vein or artery injury during open surgery: rare but catastrophic.",
+      "Recurrence from neovascularisation or untreated incompetent veins."
+    ],
+    "postop": [
+      "Compression bandage or stocking for the period recommended by the unit; NICE advises no more than 7 days of compression after interventional treatment.",
+      "Walk the same day, and avoid prolonged sitting or standing; return to normal activity early.",
+      "Thromboprophylaxis for patients at increased risk, per the documented assessment.",
+      "Post-procedure duplex per unit protocol; advise the patient on symptoms of deep vein thrombosis."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side and the tributaries with the patient standing. Confirm which technique is planned and that the patient understands the alternatives." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotic prophylaxis is not routinely needed for endovenous ablation; follow local policy for open groin surgery. Document the venous thromboembolism risk assessment and plan." },
+    { "ref": "step.vasc.vein-mapping", "emphasis": "Confirm the refluxing segment, the junction, the deep veins and the point of lowest reflux, where cannulation will be." },
+    { "ref": "step.core.positioning", "emphasis": "Reverse Trendelenburg for cannulation, then head-down for ablation or stripping." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare the whole leg from the groin to the foot, with a sterile cover for the ultrasound probe." },
+    { "ref": "step.gsv.cannulation" },
+    { "ref": "step.gsv.tip-position" },
+    { "ref": "step.gsv.tumescent" },
+    { "ref": "step.gsv.ablation" },
+    { "ref": "step.gsv.sfj-ligation" },
+    { "ref": "step.gsv.strip" },
+    { "ref": "step.gsv.phlebectomy" },
+    { "ref": "step.gsv.bailout" },
+    { "ref": "step.core.haemostasis", "emphasis": "Firm pressure along the stripped track and phlebectomy sites, with the leg elevated, is the main haemostatic manoeuvre." },
+    { "ref": "step.core.counts", "emphasis": "Include the guidewires, sheaths and stripper heads." },
+    { "ref": "step.vasc.groin-closure", "emphasis": "After open junction ligation; close the cribriform fascia and subcutaneous layer over the ligated stump." },
+    { "ref": "step.core.skin-closure", "emphasis": "Adhesive strips to phlebectomy incisions; apply the compression bandage from the foot upwards before the patient leaves theatre." },
+    { "ref": "step.core.debrief", "emphasis": "Record the technique, treated length, energy delivered, distance of the tip from the junction, the end-of-procedure deep vein scan, and the compression and thromboprophylaxis plan." }
+  ],
+  "steps_local": {
+    "step.gsv.cannulation": {
+      "id": "step.gsv.cannulation",
+      "kind": "access",
+      "title": "Ultrasound-guided cannulation of the saphenous vein",
+      "why": "Cannulating at the lowest point of reflux treats the whole incompetent segment, and a single clean puncture avoids spasm and haematoma that make further attempts harder.",
+      "how": [
+        "With the leg dependent, scan the vein at the planned entry point, usually at or just above the knee for the great saphenous vein, and infiltrate a small amount of local anaesthetic.",
+        "Puncture the vein under direct ultrasound vision in long or short axis, confirm venous backflow, and pass the guidewire.",
+        "Place the sheath and introduce the ablation catheter, following it on ultrasound as it advances towards the groin."
+      ],
+      "structuresAtRisk": ["Saphenous nerve at and below the knee", "Accompanying arteries mistaken for the vein"],
+      "pitfalls": [
+        "Cannulating below the knee, where the saphenous nerve lies against the vein.",
+        "Multiple failed passes causing spasm; warm the leg and tilt further feet-down."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gsv.tip-position": {
+      "id": "step.gsv.tip-position",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Confirming the catheter tip position at the junction",
+      "why": "Heat delivered too close to the junction can propagate thrombus into the common femoral vein, which turns a cosmetic operation into a deep vein thrombosis or pulmonary embolism.",
+      "how": [
+        "Image the junction in longitudinal view and identify the common femoral vein and the superficial epigastric vein.",
+        "Position the tip short of the junction at the distance specified by the device instructions and unit protocol (commonly 1 to 2 cm distal to the junction).",
+        "Re-check the tip after tumescent infiltration, which can displace it, and immediately before energy delivery."
+      ],
+      "structuresAtRisk": ["Common femoral vein"],
+      "pitfalls": [
+        "Measuring in transverse view only, which misjudges the distance.",
+        "Not re-checking after tumescent infiltration and the change to head-down tilt."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gsv.tumescent": {
+      "id": "step.gsv.tumescent",
+      "kind": "prep",
+      "title": "Tumescent anaesthesia",
+      "why": "Tumescent fluid provides analgesia, compresses the vein onto the catheter for effective heat transfer, and creates a heat sink that protects the skin and nerves.",
+      "how": [
+        "Infiltrate dilute local anaesthetic solution under ultrasound into the saphenous compartment along the whole length to be treated.",
+        "Aim for a halo of fluid around the vein that separates it from the skin; superficial segments need more.",
+        "Keep the total local anaesthetic dose within the safe limit for the patient's weight, per protocol."
+      ],
+      "structuresAtRisk": ["Skin", "Saphenous nerve", "Vein wall perforated by the needle"],
+      "pitfalls": [
+        "Gaps in the tumescent sleeve, which lead to burns and pain.",
+        "Exceeding the maximum local anaesthetic dose in a long or bilateral treatment."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gsv.ablation": {
+      "id": "step.gsv.ablation",
+      "kind": "resection",
+      "critical": true,
+      "title": "Delivering thermal energy and checking the deep vein",
+      "why": "Ablation closes the refluxing vein permanently only when the right energy is delivered along its length; checking the deep vein afterwards finds the thrombus that would otherwise present as a pulmonary embolism.",
+      "how": [
+        "With the patient head-down and the tip confirmed, deliver energy and withdraw the catheter according to the device protocol, with ultrasound or manual compression over the vein.",
+        "Give extra attention to the junctional segment as the device instructions advise.",
+        "At the end, scan the junction and the common femoral vein for flow and thrombus, and the treated vein for closure."
+      ],
+      "structuresAtRisk": ["Skin", "Saphenous nerve", "Common femoral vein"],
+      "pitfalls": [
+        "Firing the device with the tip outside the vein or in a tributary.",
+        "Skipping the end-of-procedure deep vein scan."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gsv.sfj-ligation": {
+      "id": "step.gsv.sfj-ligation",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Open saphenofemoral junction ligation (high tie)",
+      "why": "Recurrence after open surgery comes largely from tributaries or a stump left behind, and the most serious injury in varicose vein surgery, ligation or stripping of the femoral vein, happens here. The junction must be proved before anything is tied.",
+      "how": [
+        "Make a groin crease incision centred over the junction as marked on ultrasound, below and lateral to the pubic tubercle.",
+        "Find the great saphenous vein and follow it up to the common femoral vein, which must be clearly seen above and below the junction before any tie is placed.",
+        "Ligate and divide every tributary beyond its first branching, then ligate the saphenous vein flush with the common femoral vein without narrowing it (transfixion or double ligature).",
+        "Do not divide any vein running deep to the artery or crossing the common femoral vein until its identity is certain."
+      ],
+      "structuresAtRisk": ["Common femoral vein", "Common femoral artery", "Superficial external pudendal artery", "Groin lymphatics"],
+      "pitfalls": [
+        "Mistaking the common femoral vein for a large saphenous vein and ligating or stripping it.",
+        "Leaving a long stump with tributaries, causing recurrence.",
+        "Tying the junction so close that it narrows the common femoral vein."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gsv.strip": {
+      "id": "step.gsv.strip",
+      "kind": "resection",
+      "title": "Stripping the great saphenous vein to the knee",
+      "why": "Removing the refluxing thigh trunk reduces recurrence compared with junction ligation alone. Stopping at the knee spares the saphenous nerve, which lies against the vein below it.",
+      "how": [
+        "Pass the stripper from the groin down the vein to just below the knee and bring it out through a small incision.",
+        "Secure the vein to the stripper and remove it by inversion from groin to knee, with the leg elevated.",
+        "Apply firm pressure along the track immediately to reduce haematoma."
+      ],
+      "structuresAtRisk": ["Saphenous nerve", "Deep vein if the stripper passes through a perforator"],
+      "pitfalls": [
+        "Stripping the below-knee segment routinely, causing saphenous neuralgia.",
+        "Assuming the stripper is in the saphenous vein without feeling or scanning its course."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gsv.phlebectomy": {
+      "id": "step.gsv.phlebectomy",
+      "kind": "resection",
+      "title": "Phlebectomy of marked tributaries",
+      "why": "Treating the trunk alone often leaves visible varicosities and symptoms. Removing the marked tributaries through tiny incisions completes the treatment in one sitting.",
+      "how": [
+        "Make small stab incisions along the marked varicosities, using the standing marks made before surgery.",
+        "Hook out the vein segments with a phlebectomy hook, avulsing them with gentle traction and pressure.",
+        "Close the incisions with adhesive strips."
+      ],
+      "structuresAtRisk": ["Cutaneous nerves, especially around the knee and ankle", "Skin from hook trauma"],
+      "pitfalls": [
+        "Marks washed off by skin preparation; re-mark with a surgical marker after preparation if needed.",
+        "Large incisions that scar more than the veins they treat."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.gsv.bailout": {
+      "id": "step.gsv.bailout",
+      "kind": "bailout",
+      "title": "When access fails or the junction is unclear",
+      "why": "The serious harms of this operation come from pressing on: forcing a catheter, ablating a vein that has not been reached, or dissecting a groin whose anatomy is not understood.",
+      "how": [
+        "If cannulation fails after a few attempts, try a different puncture site higher on the vein or a small cut-down; otherwise convert to foam sclerotherapy or open surgery, or defer.",
+        "If the catheter will not pass, treat the accessible segment and plan the remainder separately rather than forcing it.",
+        "If the groin anatomy is unclear, the vein bleeds heavily or the common femoral vein or artery may be injured: apply pressure, call a senior vascular surgeon, and do not clamp or tie blindly.",
+        "If thrombus is seen in the common femoral vein at the end of ablation, manage per protocol with anticoagulation and follow-up scanning."
+      ],
+      "structuresAtRisk": ["Common femoral vein and artery"],
+      "pitfalls": [
+        "Blind clamping in a bleeding groin.",
+        "Repeated punctures that leave the vein in spasm and the leg bruised."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

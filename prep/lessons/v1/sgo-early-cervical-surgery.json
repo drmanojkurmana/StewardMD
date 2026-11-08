@@ -1,0 +1,244 @@
+{
+  "v": 1,
+  "module": "sgo-early-cervical-surgery",
+  "title": "Early-Stage Cervical Cancer & Radical Hysterectomy",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 10",
+    "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11e Ch 83",
+    "NCCN Clinical Practice Guidelines in Oncology: Cervical Cancer (2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Surgical resection of early invasive cervical neoplasms follows standardized anatomical classification frameworks. Modern practice utilizes the Querleu Morrow schema to define the lateral and caudal margins of parametrial excision.",
+      "tx": "The anatomical **Querleu-Morrow classification** standardizes radical hysterectomy into four tiers. **Type A resection** entails minimal pericervical resection, **Type B ureteral unroofing** transects paracervical tissue at the unroofed ureter, and **Type C complete resection** requires complete excision of the ventral and dorsal parametria directly to the internal iliac vessels and pelvic sidewall.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-cervix.webp",
+        "ar": 1.3333,
+        "caption": "Anatomical staging and local invasion pathways in carcinoma cervix. Credit: StewardMD.",
+        "alt": "Cervical anatomy and radical hysterectomy resection boundaries"
+      }
+    },
+    {
+      "say": "The choice of surgical access route underwent a profound paradigm shift following high level prospective evidence. Laparotomy demonstrated clear survival superiority over laparoscopic and robotic approaches.",
+      "tx": "The prospective phase **3** **LACC trial** published by **Ramirez 2018** established **open radical hysterectomy superiority** (three-year disease-free survival **97.1** percent) over minimally invasive laparoscopy or robotics, which exhibited **inferior survival minimally invasive** (disease-free survival **91.2** percent) and a fourfold increase in locoregional pelvic recurrences.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Open Abdominal Approach (LACC Gold Standard)",
+          "points": [
+            "3-year disease-free survival rate reaches 97.1%",
+            "Avoids tumor rupture from uterine manipulators",
+            "Absence of CO2 pneumoperitoneum tumor dissemination"
+          ]
+        },
+        "right": {
+          "title": "Minimally Invasive Surgery (Laparoscopic / Robotic)",
+          "points": [
+            "3-year disease-free survival dropped to 91.2%",
+            "Fourfold escalation in locoregional pelvic recurrences",
+            "Restricted or contraindicated for standard curative resections"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Postoperative histological examination determines whether patients require supplementary pelvic radiotherapy. Specific intermediate risk factors combine tumor dimension with deep myometrial and vascular penetration.",
+      "tx": "Following radical hysterectomy, **Sedlis criteria** from protocol **GOG 92** identify intermediate-risk pathological features mandating **adjuvant pelvic radiation**. Validated criteria evaluate combinations of **outer third stromal invasion** (deep third), positive **LVSI**, and clinical tumor diameter >=**4** cm, which reduce recurrence risk from 28 percent to 15 percent when treated.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "LVSI Status",
+          "Depth of Stromal Invasion",
+          "Tumor Diameter Threshold"
+        ],
+        "rows": [
+          [
+            "Positive LVSI",
+            "Deep 1/3 (outer third of cervical stroma)",
+            "Any measurable tumor diameter"
+          ],
+          [
+            "Positive LVSI",
+            "Middle 1/3 of cervical stroma",
+            "Tumor diameter >=2 cm"
+          ],
+          [
+            "Positive LVSI",
+            "Superficial 1/3 of stroma",
+            "Tumor diameter >=5 cm"
+          ],
+          [
+            "Negative LVSI",
+            "Deep or middle 1/3 of stroma",
+            "Tumor diameter >=4 cm"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adverse pathological findings at the surgical margins or nodal stations indicate biologically aggressive disease. In these situations combined chemoradiotherapy delivers superior local control compared to radiation alone.",
+      "tx": "The landmark **Peters criteria** established by protocol **GOG 109** mandate postoperative **concurrent cisplatin chemoradiotherapy** (weekly cisplatin 40 mg/m2) for high-risk pathology: pathologically **positive nodes** (pelvic lymph node metastasis), microscopic parametrial involvement, or **positive margins** on the vaginal cuff, conferring a marked survival advantage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Review surgical specimen histopathology"
+          },
+          {
+            "id": "b",
+            "label": "Identify positive lymph nodes, parametrial spread, or close margins"
+          },
+          {
+            "id": "c",
+            "label": "Initiate external beam pelvic radiation (45 to 50.4 Gy)"
+          },
+          {
+            "id": "d",
+            "label": "Deliver concurrent weekly intravenous cisplatin (40 mg/m2)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Preservation of autonomous pelvic neuroanatomy minimizes long term voiding and anorectal morbidity. Careful dissection isolates the hypogastric nerves and splanchnic fibers within the paracervical connective tissues.",
+      "tx": "In **nerve-sparing radical hysterectomy** (**Type C1**), meticulous surgical dissection preserves the **inferior hypogastric plexus** and bilateral **pelvic splanchnic nerves S2-S4** along with the sympathetic hypogastric trunks, preserving parasympathetic detrusor innervation and preventing severe post-operative urinary retention in tier **1**, **2**, or **4** pelvic operations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify hypogastric nerve trunk lateral to rectovaginal septum"
+          },
+          {
+            "id": "b",
+            "label": "Preserve pelvic splanchnic roots from sacral roots S2-S4"
+          },
+          {
+            "id": "c",
+            "label": "Separate bladder branches from lateral cardinal ligament"
+          },
+          {
+            "id": "d",
+            "label": "Achieve radical resection margins while sparing vesical motor nerves"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Microinvasive lesions without vascular invasion harbor an exceedingly low probability of regional lymphatic metastasis. Conservative surgical excision or simple extrafascial hysterectomy achieves curative oncological outcomes.",
+      "tx": "For microscopic **Stage IA1** squamous disease without lymphovascular space invasion (stromal invasion depth <=3 mm), regional nodal metastasis occurs in under **1** percent. Curative management consists of therapeutic **conization** with negative surgical margins or extrafascial **simple hysterectomy**, delivering an exceptional **cure rate >99%** (**99** percent).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage IA1 without LVSI (Depth <=3 mm)",
+          "points": [
+            "Risk of pelvic nodal metastasis <1%",
+            "Diagnostic and therapeutic cervical conization curative",
+            "Extrafascial simple hysterectomy if childbearing complete"
+          ]
+        },
+        "right": {
+          "title": "Stage IA1 with LVSI or Stage IA2 (3 to 5 mm)",
+          "points": [
+            "Risk of nodal metastasis rises to 3 to 5%",
+            "Requires modified radical hysterectomy (Querleu-Morrow Type B)",
+            "Mandatory pelvic lymph node assessment or sentinel node biopsy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Deeper microinvasion or lymphovascular penetration requires wider parametrial tissue margins. Modified radical surgery clears the paracervical tissues up to the unroofed ureter combined with regional nodal sampling.",
+      "tx": "When **Stage IA1** exhibits lymphovascular space invasion or progresses to **Stage IA2** (depth >3 mm to <=5 mm), risk of pelvic nodal involvement increases to 3 to 5 percent. Standard intervention shifts to **modified radical hysterectomy** (**Type B** resection) with systematic **pelvic lymphadenectomy** clearing tissue medial to the unroofed ureters.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage / Feature",
+          "Parametrial Resection Margin",
+          "Nodal Assessment Required",
+          "Fertility Option"
+        ],
+        "rows": [
+          [
+            "Stage IA1, LVSI negative",
+            "Extrafascial (Type A)",
+            "None indicated (<1% risk)",
+            "Cervical conization"
+          ],
+          [
+            "Stage IA1, LVSI positive",
+            "Modified radical (Type B)",
+            "Pelvic lymphadenectomy or SLNB",
+            "Radical trachelectomy"
+          ],
+          [
+            "Stage IA2 (3 to 5 mm)",
+            "Modified radical (Type B)",
+            "Pelvic lymphadenectomy or SLNB",
+            "Radical trachelectomy"
+          ],
+          [
+            "Stage IB1 / IB2",
+            "Classic radical (Type C)",
+            "Systematic pelvic lymphadenectomy",
+            "Radical trachelectomy if <=2 cm"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Premenopausal women with non squamous cervical histologies can undergo surgical preservation of gonadal function. The ovaries are repositioned into the upper paracolic gutters beyond prospective pelvic radiation fields.",
+      "tx": "In **premenopausal squamous** cell carcinoma requiring adjuvant pelvic radiotherapy, surgical **ovarian transposition** (**oophoropexy**) transposes the ovaries to achieve **pelvic brim clearance** at least **2** to **3** cm above the pelvic brim and **4** cm from prospective radiation fields, preserving functional endocrine activity in over eighty percent of patients.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-prc-laparoscopic-technique.webp",
+        "ar": 1.3333,
+        "caption": "Primary laparoscopic entry via Veress or open Hasson technique. Credit: StewardMD.",
+        "alt": "Surgical mobilization and ovarian transposition technique"
+      }
+    }
+  ]
+}

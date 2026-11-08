@@ -35,6 +35,26 @@ export function kindOf(text, fallback) {
   if (/slit lamp|slit-lamp/.test(t)) return "Slit lamp";
   return fallback || "Illustration";
 }
+/* Commons descriptions: drop the gallery cross-links some uploaders append ("Related images: Low mag. High mag.")
+ * and the space wiki markup leaves before punctuation. Wording is otherwise the uploader's. */
+export function tidyCommonsCaption(s) {
+  return clean(s).replace(/\s*\bRelated images?\b[\s\S]*$/i, "").replace(/\s+([.,;:])/g, "$1").trim();
+}
+/* A Commons file name is the title unless it is mostly codes ("Dsrct1", "Dabska histo2"); then the opening words
+ * of the uploader's caption stand in, cut at a sentence or clause end. */
+export function commonsTitle(title, caption) {
+  const t = clean(title), words = t.split(/[\s,]+/).filter((w) => /^[A-Za-z][A-Za-z'-]{2,}$/.test(w));
+  if (words.length >= 2) return t;
+  const c = clean(caption).replace(/^(this|the) (image|picture|photo|micrograph) (shows|is)\s+/i, "");
+  const first = c.split(/(?<=[a-z)])\.\s|;\s/)[0];
+  const cut = first.length <= 70 ? first : first.slice(0, 70).replace(/[\s,]+\S*$/, "");
+  return (cut.charAt(0).toUpperCase() + cut.slice(1)).replace(/[.,;:]$/, "") || t;
+}
+/* Commons thumbnails come from upload. or thumb.wikimedia.org; the API adds utm tracking parameters, dropped here. */
+export function commonsSrc(src) {
+  const u = String(src || "");
+  return /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(u) ? u.replace(/\?.*$/, "") : "";
+}
 export function originOf(text) {
   const t = String(text || "");
   if (/wikimedia|commons\.wikimedia|upload\.wikimedia/i.test(t)) return "commons";
@@ -226,6 +246,30 @@ export function buildAll(root = ROOT) {
     push({ s: "/prep/pearl-figs/" + c.id, t: clean(c.title), c: clean(c.title), a: clean(c.title), ar: null,
       k: "Illustration", o: "stewardmd", f: "Pearls", ri: c.id, rn: clean(c.title),
       cr: clean(c.author), li: clean(c.licence), lk: "prep", sys: slugify(system), sysName: system });
+  }
+
+  /* 8. Openly licensed pathology and histology micrographs from Wikimedia Commons (tools/fetch-commons-pathology.mjs:
+   *    CC BY, CC BY-SA, CC0 or public domain only; the uploader's own English description is the caption). The
+   *    viewer shows author and licence and links to the Commons file page, which is the attribution CC BY asks for. */
+  const COMMONS_BUDGET = 680 * 1024, sysBytes = new Map();
+  for (const it of items) sysBytes.set(it.sys, (sysBytes.get(it.sys) || 0) + JSON.stringify(it).length);
+  const cp = readJSON(path.join(root, "kb/imglib/commons-pathology.json"));
+  for (const m of (cp && cp.items) || []) {
+    const src = commonsSrc(m && m.src);
+    if (!src || !m.licence || !/^https:\/\/commons\.wikimedia\.org\//.test(String(m.page || ""))) continue;
+    const cap = tidyCommonsCaption(m.caption);
+    if (cap.length < 20) continue;
+    const system = clean(m.system) || "Pathology and Immunology";
+    /* Title stands in for alt and ref name (the viewer falls back to it), and each system file keeps a byte budget
+     * so the per-system download stays phone-sized: the in-app sources fill first, Commons tops up. */
+    const e = { s: src, t: commonsTitle(m.title, cap), c: cap, ar: m.w && m.h ? +(m.w / m.h).toFixed(3) : null,
+      k: clean(m.kind) || "Histopathology", o: "commons", f: m.kind === "Histology" ? "Commons histology" : "Commons pathology",
+      cr: tidyCommonsCaption(m.author).slice(0, 100), li: clean(m.licence), lk: "commons", u: m.page,
+      sys: slugify(system), sysName: sysName(slugify(system), system) };
+    const len = JSON.stringify(e).length;
+    if ((sysBytes.get(e.sys) || 0) + len > COMMONS_BUDGET) continue;
+    sysBytes.set(e.sys, (sysBytes.get(e.sys) || 0) + len);
+    push(e);
   }
 
   /* Group by system, stable order: count desc, then name. */

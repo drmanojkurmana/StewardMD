@@ -5,6 +5,24 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-04 · iPad shell: native iPad layout and hardware keyboard (owner: "work like native iPad app")
+
+**Decision.** A shell layer for large touch screens, `ipad-native.css` + `ipad-native.js`, scoped to `html.smd-tablet`
+(set before first paint by an inline script in `index.html`: more than one touch point and shorter screen side >= 600,
+the same test as `bigTouchD()` in home.js). At 700 px and wider: the five tabs gather in the middle of the dock, the
+Home tool grid is 4 columns (5 from 1100 px), and `.hv-sheet` (More, Display, Customize) floats as a 600 px card
+20 px above the dock instead of a full-width slab. Trackpad hover tints only under `(any-hover: hover) and
+(any-pointer: fine)`. Keyboard: Cmd+1..5 tabs (Home only), Cmd+[ back (`SMD_SWIPE_BACK.goBack`), Cmd+, Settings,
+Esc closes the sheet, Cmd+/ or hold Cmd shows a shortcut card. Navigation only, nothing writes.
+Also: `dialog-motion.js` closes a sheet to its own closed CSS transform (a fixed translateY(100%) left the floating
+card's top peeking over the dock), and `voice.js`, `device-id.js`, `native-push.js` now treat a touch "Macintosh" user
+agent as iPad (iPadOS WKWebView sends the desktop UA, so voice used WebKit speech recognition on iPad only).
+**Why.** Module inner layouts already pass `test/run-ipad-layout-ui.mjs`; what still read as a stretched phone was the
+shell: tabs 270 px apart, 300 px gaps between tool orbs, edge-to-edge sheets, no keyboard.
+**Trade-off.** Split View / Slide Over under 700 px keeps the phone layout. Module-owned sheets (75 files) are not
+converted. Web shortcuts cannot appear in the system Cmd-hold overlay (that needs native UIKeyCommand), hence our card.
+**Status.** Default on; kill switch localStorage `smd_ipad_native=0`. Needs build-www + native rebuild; confirm on a device.
+
 ## 2026-10-30 · PrepNucleus Play: Gen Z features, honest by rule (owner: "build all")
 
 **Decision.** Twelve engagement features in one optional module (`prep-play.js`, flag `smd_prep_play` default on) plus
@@ -12107,3 +12125,37 @@ manifests of the 10 newest versions in `ota/history.json` plus the live channel 
 build), then deletes unreferenced `ota/files/*` and old `ota/manifests/*`, and fails if the live build is missing a
 file. `.github/workflows/ota-prune.yml` runs it after every successful "OTA — publish live", in the `ota-stage`
 concurrency group. Consequence: rollback is possible only to the last 10 published versions.
+
+## Lesson narration: one on-device neural voice, Phonon 31M (owner, 2026-11-04)
+The system voice sounded artificial, so Learn got an on-device neural voice that downloads on the first tap of Play. Two
+were built and merged side by side to compare (#1966): Kokoro-82M (92 MB, needs a phonemizer; espeak-ng is GPL, so a CMU
+dictionary plus spelling rules was written instead) and Gradium's Phonon 31M (64.5 MB, Apache-2.0, reads text directly,
+runtime vendored as `vendor/phonon-tts`). The owner ruled: keep Phonon, one voice only, remove the rest. Kokoro, its
+lexicon, the voice-switch pill and the engine facade are gone; the system voice stays as the fallback (also used when a
+one-time speed timing says the phone renders slower than 1.3 times real time, and when the voice is unsupported or the
+download fails). Open: the real Phonon runtime has not been run by us, so its speed and behaviour in the iOS and Android
+WebViews are unverified. If it proves too slow or fails in the app, the options were KittenTTS nano (24 MB) or native MLX
+on iOS. Reversible: `window.SMD_PREP_VOICE = false`, or drop `prep-voice.js` from the loader list.
+
+## SURGX across every surgical specialty (owner "make it 10/10", 2026-11-04)
+The 2026-11-04 audit scored SURGX 5.5/10: excellent note safety and engineering, but only general and emergency surgery.
+Content now covers ENT, urology, neurosurgery, orthopaedics, plastics, vascular, cardiothoracic, paediatric surgery,
+O&G surgery, eye emergencies, surgical oncology, breast, endocrine, GI/HPB and peri-operative care. Each specialty gets a
+shared step pack, so the 60% step-reuse rule still holds. Every entry carries a `specialty` that the manifest declares.
+The Protocols, Procedures and Cases lists have search and a specialty chip row. The operative note records the WHO
+Surgical Safety Checklist as taps, never AI-filled, and "Not done" is a valid answer: sign in identity, time out and
+sign out are required to finalise. Post-op and discharge notes record a Clavien-Dindo grade. Every procedure has an
+operative note template.
+All new content is `ai_drafted`. A real 10/10 still needs a named consultant reviewer per specialty to flip
+`review.status`: that is the owner's step, not code. Reversible: content is data (revert the manifest entries); the
+WHO section and Clavien field are in `surgx-note-schema.js`; recovery point is the parent of the merge commit.
+
+## Home tools grouped by task, not job title (owner, 2026-11-07)
+Owner sketched tabs by role (Students corner, Resident tools, Physician, Oncologist tools). Chose task tabs instead:
+roles overlap (an oncology resident is two roles), specialties do not scale as tabs (about 20 kits), and a consultant
+would scroll past "Students" every day. Home now shows `[For you] [Learn] [Bedside] [Practice] [<branch> v]`.
+For you is the old grid unchanged; the task tabs list every tool of that kind, pinned or not; the last tab is one
+specialty named after the kit, switchable from a picker. Plus: plain-language subtitles (titles kept), Narke renamed
+**Anaesthetica** (British spelling, owner), problem search ("sodium 122" -> Electrolytes), a weekly "Try something
+new" card and New chips on never-opened tools. Not yet built: tools suggesting the next tool in context, and a
+"Try with a sample patient" button per tool. Flag `smd_home_tabs` (default on; "0" or `?hometabs=0` restores the grid).

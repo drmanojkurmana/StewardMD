@@ -260,6 +260,41 @@ try {
   ok((await ev("!!document.querySelector('#surgxRoot .sgx-opt.right')")) === true, "the correct option is marked");
   ok((await ev("!!document.querySelector('#surgxRoot .sgx-opt[disabled]')")) === true, "the question locks after answering");
 
+  /* ── 7b. SPECIALTY BROWSING (2026-11-04): every specialty reachable, search narrows ── */
+  await ev("window.SMD_SURGX_SCREENS.go('protocols')");
+  ok(await waitFor("#surgxRoot .sgx-spec .sgx-chip"), "SPEC: the protocol list has a specialty chip row");
+  {
+    const chips = await ev("[...document.querySelectorAll('#surgxRoot .sgx-spec .sgx-chip')].map(b => b.textContent)");
+    ok(Array.isArray(chips) && chips.length >= 17, `SPEC: All plus every specialty is offered (${chips && chips.length})`);
+    ok(["Urology", "Neurosurgery and spine"].every((t) => chips.includes(t)) || chips.some((t) => /Urology/.test(t)),
+      "SPEC: specialty titles come from the manifest, not raw ids");
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "Urology");
+    await sleep(300);
+    const rows = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(rows.length >= 8 && rows.some((t) => /scrot/i.test(t)) && !rows.some((t) => /Appendic|Acute abdomen/i.test(t)),
+      `SPEC: picking Urology shows only urology protocols (${rows.length})`);
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "All");
+    await ev(`(() => { const el = document.querySelector('#surgxRoot #sgxFind'); el.value = "torsion"; el.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`);
+    await sleep(500);
+    const hits = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(hits.length >= 1 && hits.length < 10, `SPEC: search narrows the list (${hits.length} for 'torsion')`);
+    ok((await ev("document.activeElement && document.activeElement.id")) === "sgxFind", "SPEC: the search box keeps focus while typing");
+    await ev(`(() => { const el = document.querySelector('#surgxRoot #sgxFind'); el.value = ""; el.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`);
+    await sleep(400);
+  }
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await sleep(500);
+  {
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "ENT");
+    await sleep(300);
+    const procs = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(procs.some((t) => /Tonsillectomy/i.test(t)), "SPEC: the ENT filter is shared with Procedures and shows tonsillectomy");
+    await clickText("#surgxRoot .sgx-row", "Tonsillectomy");
+    ok(await waitFor("#surgxRoot .sgx-tab"), "SPEC: a new-specialty procedure opens with its chapters");
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "All");
+  }
+  await ev("(() => { const S = window.SMD_SURGX_SCREENS._state(); S.spec = ''; S.find = ''; return true; })()");
+
   /* ── 8. NOTES: the finalise gate ───────────────────────────────────────── */
   console.log("\n--- 01 notes ---");
   // The harness reuses --user-data-dir, so localStorage survives between runs, and the "verified
@@ -355,6 +390,33 @@ try {
     })()`);
     ok(filled > 8, `every required field can be typed (${filled} filled)`);
     await sleep(300);
+
+    /* WHO Surgical Safety Checklist (2026-11-04): choice fields are TAPS, never typed and never
+     * AI-filled. Still missing until tapped, so typing alone must not finalise. */
+    ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('WHO Surgical Safety Checklist')")) === true,
+      "WHO: the operative note carries the Surgical Safety Checklist");
+    ok((await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').disabled")) === true,
+      "WHO: the required sign in / time out / sign out items still block finalising until tapped");
+    ok((await ev("!!document.querySelector('#surgxRoot [data-sgx=\"choice\"][data-k=\"whoTimeOut\"][data-v=\"Not done\"]')")) === true,
+      "WHO: 'Not done' is a recordable answer, not just a Done tick");
+    const tapped = await ev(`(() => {
+      const S = window.SMD_SURGX_SCREENS._state();
+      const fields = S.noteSchema.sections.reduce((a, s) => a.concat(s.fields), []);
+      let n = 0;
+      fields.forEach(f => {
+        if (!f.required || f.type !== "choice") return;
+        const b = document.querySelector('#surgxRoot [data-sgx="choice"][data-k="' + f.k + '"][data-v="Done"]');
+        if (!b) return;
+        b.click(); n++;
+      });
+      return n;
+    })()`);
+    ok(tapped === 3, `WHO: the three required checklist items are tappable (${tapped})`);
+    await sleep(300);
+    ok((await ev("window.SMD_SURGX_SCREENS._state().note.provenance.whoTimeOut")) === "clinician",
+      "WHO: a tap is the clinician's own act (provenance clinician)");
+    ok((await ev("document.querySelector('#surgxRoot #sgxNotePreview').textContent.includes('Time out: patient, site and procedure confirmed aloud: Done')")) === true,
+      "WHO: the exported note text carries the checklist answer");
     ok((await ev("document.querySelector('#surgxRoot .sgx-sticky .stat').textContent.includes('Ready to finalise')")) === true,
       "with every required field confirmed, the status bar says so");
     ok((await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').disabled")) === false,

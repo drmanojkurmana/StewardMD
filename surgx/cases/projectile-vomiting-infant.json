@@ -1,0 +1,95 @@
+{
+  "id": "projectile-vomiting-infant",
+  "title": "Three weeks old and vomiting",
+  "subtitle": "Paediatric surgery: correct first, operate second",
+  "simulation": true,
+  "levels": ["student", "intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "paeds-pyloric-stenosis",
+  "procedureRef": "pyloromyotomy",
+  "sources": [
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: hypertrophic pyloric stenosis", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" },
+    { "id": "nice-ng29", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Intravenous fluid therapy in children and young people in hospital (NG29)", "year": 2015, "url": "https://www.nice.org.uk/guidance/ng29", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 3-week-old boy, born at term, is brought in by his parents with four days of vomiting after almost every feed. They describe the vomit as forceful, travelling across the room, and milky. He feeds hungrily immediately afterwards. He has had fewer wet nappies today. His birth weight was 3.4 kg and he weighs 3.3 kg today.",
+  "vitals": { "Temp": "36.8 C", "HR": "168", "RR": "34", "CRT": "3 seconds", "SpO2": "99% in air", "Weight": "3.3 kg" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "Before anything else, which feature of the history do you need to confirm yourself?",
+      "hint": "One colour changes this from a planned problem to an emergency.",
+      "options": [
+        { "id": "a", "text": "Whether the vomit has ever been green", "correct": true, "feedback": "Correct. Bilious vomiting would point to malrotation with volvulus, which is a surgical emergency. Non-bilious vomiting fits pyloric stenosis." },
+        { "id": "b", "text": "Whether he has had a fever", "correct": false, "feedback": "Worth asking, but it does not separate the dangerous diagnosis from the expected one here." },
+        { "id": "c", "text": "Which formula he is fed", "correct": false, "feedback": "Feed changes are often blamed but rarely the answer. The colour of the vomit matters far more." },
+        { "id": "d", "text": "Whether there is a family history of reflux", "correct": false, "feedback": "A family history of pyloric stenosis is relevant; reflux is not the question to settle first." }
+      ],
+      "why": "In a vomiting infant the first branch point is bile. Green vomit means a contrast study or theatre today; milky projectile vomit in a hungry baby of this age points to pyloric stenosis, which is treated by correction first.",
+      "missedRedFlags": ["Bilious vomiting not specifically excluded"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "The vomit has never been green. He has a sunken fontanelle and capillary refill of 3 seconds. What do you do now?",
+      "hint": "What would a blood gas tell you, and what must run while you wait for it?",
+      "options": [
+        { "id": "a", "text": "Stop feeds, site intravenous access, send a blood gas with electrolytes and glucose, and start fluids per NICE NG29", "correct": true, "feedback": "Correct. He is dehydrated. Fluids and a gas come before any imaging or surgical discussion." },
+        { "id": "b", "text": "Trial of smaller, more frequent feeds and review tomorrow", "correct": false, "feedback": "He has lost weight and is dehydrated. Feeding advice delays treatment and the alkalosis worsens." },
+        { "id": "c", "text": "Book him for theatre this evening", "correct": false, "feedback": "There is no diagnosis yet, and even with one, an uncorrected infant does not go to theatre." },
+        { "id": "d", "text": "Start an anti-reflux medicine", "correct": false, "feedback": "This is not reflux. Medication will not relieve a mechanical outlet obstruction." }
+      ],
+      "why": "Ongoing gastric losses cause dehydration and loss of hydrogen and chloride ions. The blood gas defines how far from safe the baby is, and isotonic fluids with glucose start the correction immediately.",
+      "missedRedFlags": ["Prolonged capillary refill and a sunken fontanelle"]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "The gas shows a raised pH, a high bicarbonate and a low chloride and potassium. Which investigation confirms the diagnosis?",
+      "hint": "Choose the test without radiation that sees the muscle.",
+      "options": [
+        { "id": "a", "text": "Abdominal ultrasound of the pylorus", "correct": true, "feedback": "Correct. Ultrasound measures muscle thickness and channel length and is the investigation of choice." },
+        { "id": "b", "text": "Upper GI contrast study", "correct": false, "feedback": "It can show the string sign but involves radiation and is reserved for an equivocal ultrasound or suspected malrotation." },
+        { "id": "c", "text": "CT abdomen", "correct": false, "feedback": "Unnecessary radiation and no advantage over ultrasound." },
+        { "id": "d", "text": "Plain abdominal radiograph", "correct": false, "feedback": "May show a large gastric bubble but does not confirm the diagnosis." }
+      ],
+      "why": "Hypochloraemic hypokalaemic metabolic alkalosis is the classic picture of pyloric stenosis. Ultrasound confirms it; a palpable olive during a test feed does too, in experienced hands."
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "Ultrasound confirms pyloric stenosis. The parents ask when he will have his operation. The chloride is still well below normal. What is your plan?",
+      "hint": "Who sets the threshold for theatre here?",
+      "options": [
+        { "id": "a", "text": "Continue intravenous correction with repeat gases, and operate once electrolytes meet the criteria agreed with paediatric anaesthesia", "correct": true, "feedback": "Correct. Pyloromyotomy is not an emergency. Correction may take a day or two and that is appropriate." },
+        { "id": "b", "text": "Operate tonight because the diagnosis is confirmed", "correct": false, "feedback": "An alkalotic infant is at risk of post-operative apnoea. Confirmation of the diagnosis is not readiness for anaesthesia." },
+        { "id": "c", "text": "Give a large bolus of fluid to correct the chloride quickly and operate in the morning", "correct": false, "feedback": "Boluses are for shock. Electrolyte correction is gradual, monitored, and with glucose-containing maintenance." },
+        { "id": "d", "text": "Feed him to correct the dehydration", "correct": false, "feedback": "He cannot empty his stomach. Feeding increases vomiting and losses." }
+      ],
+      "why": "Alkalosis depresses respiratory drive, and general anaesthesia and opioids add to that. The operation waits for the physiology; the anaesthetist's criteria are the gate.",
+      "missedRedFlags": ["Operating on an uncorrected alkalotic infant"]
+    },
+    {
+      "id": "dp5", "phase": "operate",
+      "levels": ["resident", "surgeon"],
+      "prompt": "During the pyloromyotomy, the myotomy has been spread. What must you do before closing?",
+      "hint": "The commonest complication can be found now or on day two.",
+      "options": [
+        { "id": "a", "text": "Insufflate air through the nasogastric tube with the duodenum occluded and look for a leak, especially at the duodenal end", "correct": true, "feedback": "Correct. A recognised perforation is repaired now. An unrecognised one becomes peritonitis." },
+        { "id": "b", "text": "Close as the myotomy looks complete", "correct": false, "feedback": "Small perforations at the duodenal fornix are easy to miss by eye." },
+        { "id": "c", "text": "Extend the myotomy onto the duodenum to be sure it is complete", "correct": false, "feedback": "That is how the fornix is perforated. The duodenal end stops short of the junction." },
+        { "id": "d", "text": "Leave a drain beside the pylorus", "correct": false, "feedback": "A drain does not replace a leak test and is not standard." }
+      ],
+      "why": "The duodenal fornix is where the mucosa is most vulnerable. A leak test, done every time, converts a delayed catastrophe into a simple repair.",
+      "stepRef": "step.pyl.leak-test"
+    },
+    {
+      "id": "dp6", "phase": "postop",
+      "prompt": "Six hours after surgery he vomits after his first feed. The parents are worried the operation failed.",
+      "hint": "Is this expected?",
+      "options": [
+        { "id": "a", "text": "Reassure: some vomiting early after pyloromyotomy is common. Continue the feeding plan and monitor glucose and fluids", "correct": true, "feedback": "Correct. Early vomiting is common and usually settles. Persistent vomiting beyond a few days, fever or distension needs review." },
+        { "id": "b", "text": "Return to theatre for a redo pyloromyotomy", "correct": false, "feedback": "Far too early to call an incomplete myotomy." },
+        { "id": "c", "text": "Stop all feeds for three days", "correct": false, "feedback": "Prolonged starvation is unnecessary and delays discharge." },
+        { "id": "d", "text": "Request an upper GI contrast study", "correct": false, "feedback": "Not indicated for expected early vomiting in a well infant." }
+      ],
+      "why": "The pylorus is oedematous after the myotomy. Early vomiting is expected and does not mean failure. Persistent vomiting, fever, irritability or distension after the first days are the signals of incomplete myotomy or perforation."
+    }
+  ]
+}

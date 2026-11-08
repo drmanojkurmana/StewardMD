@@ -1,0 +1,217 @@
+{
+ "gen": "AI",
+ "id": "prd-gmh-ultrasound",
+ "minutes": 7,
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Preterm infants have a delicate capillary network in the subependymal germinal matrix at the caudothalamic groove. This cellular layer lacks muscular support and autoregulation, leaving it prone to hemorrhage before thirty two to thirty four weeks of gestation.",
+   "tx": "The **germinal matrix vulnerability** stems from a highly cellular, vascularized layer at the caudothalamic notch that regresses by **32-34 weeks gestation**. Impaired autoregulation and fragile capillaries make very low birth weight preterm infants prone to bleeding under perfusion pressure fluctuations.",
+   "vis": {
+    "alt": "Ultrasound anatomy of neonatal brain through anterior fontanelle.",
+    "ar": 1.3333,
+    "caption": "Parenchymal cerebral anatomy displaying periventricular zones and germinal matrix. Credit: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/brain-tumour-fig1.webp"
+   }
+  },
+  {
+   "say": "Papile Grade one hemorrhage remains strictly confined to the subependymal tissue. High frequency cranial ultrasound through the anterior fontanelle shows an echogenic lesion at the caudothalamic notch without blood spilling into the ventricle.",
+   "tx": "**Papile Grade I GMH** is defined as bleeding strictly confined to the **subependymal germinal matrix** at the caudothalamic groove. Coronal neurosonography shows a focal bulbous hyperechoic area along the inferolateral angle of the lateral ventricle frontal horn without intraventricular blood.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "Confined subependyma"
+     ],
+     [
+      "b",
+      "c",
+      "Grade I confirmed"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Caudothalamic notch bleed"
+     },
+     {
+      "id": "b",
+      "label": "Zero intraventricular blood"
+     },
+     {
+      "id": "c",
+      "label": "Grade I: Excellent prognosis"
+     }
+    ]
+   }
+  },
+  {
+   "say": "When hemorrhage ruptures into the ventricular cavity without expanding its caliber, it is classified as Grade two. Blood fills less than fifty percent of the lateral ventricle lumen, often layering along the occipital horn.",
+   "tx": "**Papile Grade II GMH** indicates rupture of hemorrhage into the **lateral ventricle** with blood occupying **less than 50%** of the ventricular lumen on neurosonography. Crucially, the ventricular dimensions remain normal without pathologic enlargement, carrying a generally favorable neurodevelopmental outlook. Serial scans watch for later clot retraction and early ventricular enlargement over time.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Grade I",
+     "Grade II"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Location",
+      "Confined to notch",
+      "Ruptures into ventricle"
+     ],
+     [
+      "Ventricular volume",
+      "0% intraventricular",
+      "< 50% cavity filled"
+     ],
+     [
+      "Ventriculomegaly",
+      "Absent",
+      "Absent (normal size)"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Grade three hemorrhage fills over half the ventricle and produces marked ventricular dilation. Clot burden and chemical inflammation compromise cerebrospinal fluid outflow pathways, requiring meticulous serial sonographic measurements.",
+   "tx": "**Papile Grade III GMH** occurs when intraventricular hemorrhage fills **more than 50%** of the lateral ventricle lumen accompanied by **acute ventricular dilatation**. Obstruction by cast clots triggers rapid ventricular expansion, carrying significant risk of permanent neurodevelopmental sequelae. Daily head circumference charting and fontanelle examination accompany the serial ultrasound surveillance programme.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Fills under 50% of lumen",
+      "Normal ventricular size",
+      "Low risk of hydrocephalus",
+      "Preserved cortical mantle"
+     ],
+     "title": "Grade II Intraventricular"
+    },
+    "right": {
+     "points": [
+      "Fills over 50% of lumen",
+      "Acute ventricular dilatation",
+      "High hydrocephalus risk",
+      "Ventricular wall stretching"
+     ],
+     "title": "Grade III Dilated"
+    }
+   }
+  },
+  {
+   "say": "Grade four is not a simple progression of ventricular bleeding, but a periventricular venous hemorrhagic infarction. Blood clots compress medullary veins, triggering venous stasis and fan shaped hemorrhagic necrosis in adjacent white matter.",
+   "tx": "**Grade IV venous hemorrhagic infarction** represents secondary periventricular venous stasis and hemorrhagic necrosis caused by clot occlusion of the **terminal medullary veins**. Rather than ventricular rupture, it manifests as asymmetric echogenic fan shaped intraparenchymal infiltration with subsequent porencephalic cyst formation.",
+   "vis": {
+    "alt": "Ultrasound and imaging features of intracranial lesions and hydrocephalus.",
+    "ar": 1.3393,
+    "caption": "Tuberous sclerosis brain lesions with SEGA and ventricular changes. Illustration: StewardMD original.",
+    "kind": "image",
+    "src": "v1/lessons/media/ped-neuro-disorders-gen1.webp"
+   }
+  },
+  {
+   "say": "Every infant born under fifteen hundred grams or before thirty weeks requires screening. Day three to seven of life provides the optimal screening window, capturing more than ninety percent of clinically significant bleeds.",
+   "tx": "**Cranial ultrasound screening timing** in premature neonates weighing **under 1500 g** or born before **30 weeks** mandates imaging between **day 3 and 7 of life**. Because **over 90%** of hemorrhages arise within the first 72 hours, early screening captures evolving bleed patterns accurately.",
+   "vis": {
+    "cols": [
+     "Parameter",
+     "Screening Criterion",
+     "Clinical Rule"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Birth weight",
+      "< 1500 grams (VLBW)",
+      "Universal cranial US"
+     ],
+     [
+      "Gestational age",
+      "< 30 completed weeks",
+      "Mandatory baseline scan"
+     ],
+     [
+      "Scan timing",
+      "Day 3 to 7 of life",
+      ">90% bleeds detectable"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Post hemorrhagic hydrocephalus develops when blood products produce obliterative arachnoiditis or block the Sylvian aqueduct. Serial tracking along the Levene ventricular index identifies progressive dilatation before clinical head circumference accelerates.",
+   "tx": "**Post-hemorrhagic hydrocephalus** stems from blood clots occluding the cerebral aqueduct or obliterative arachnoiditis impairing arachnoid granulation reabsorption. Serial measurements of the frontal horn diameter and **ventricular index** plotted on the standard **Levene curve** dictate the timing of ventricular taps or reservoirs.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "Clot / arachnoiditis"
+     ],
+     [
+      "b",
+      "c",
+      "Serial measurements"
+     ],
+     [
+      "c",
+      "d",
+      "Crosses 97th percentile"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Intraventricular clot"
+     },
+     {
+      "id": "b",
+      "label": "CSF outflow impairment"
+     },
+     {
+      "id": "c",
+      "label": "Plot Levene ventricular index"
+     },
+     {
+      "id": "d",
+      "label": "Reservoir or shunt decompression"
+     }
+    ]
+   }
+  },
+  {
+   "say": "While the anterior fontanelle is the primary portal, scanning through the mastoid fontanelle adds crucial views. This acoustic window is the clearest route to the fourth ventricle, cerebellar hemispheres, and cisterna magna.",
+   "tx": "The **mastoid fontanelle acoustic window** provides optimal coronal and axial resolution for posterior fossa structures. It allows direct sonographic evaluation of **fourth ventricular hemorrhage**, cerebellar parenchymal hemorrhagic necrosis, and cisterna magna effacement that remain obscured on standard anterior fontanelle sweeps.",
+   "vis": {
+    "cols": [
+     "Fontanelle Window",
+     "Primary Structures Assessed",
+     "Advantage"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Anterior fontanelle",
+      "Lateral ventricles, caudothalamic notch",
+      "Standard coronal/sagittal planes"
+     ],
+     [
+      "Mastoid fontanelle",
+      "Fourth ventricle, cerebellar hemispheres",
+      "Unobstructed posterior fossa view"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-paediatric-radiology",
+ "system": "neuro",
+ "title": "Germinal Matrix Hemorrhage: Papile Classification and Complications",
+ "v": 1,
+ "module": "prd-neonatal-neurosonography"
+}

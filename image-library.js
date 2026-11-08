@@ -149,8 +149,8 @@
     r.querySelector(".igl-body").innerHTML =
       (shown.length ? '<div class="igl-grid">' + shown.map(function (e, i) {
         return '<button type="button" class="igl-card" data-igl="open" data-i="' + i + '">' +
-          '<span class="igl-thumb"' + (e.ar ? ' style="aspect-ratio:' + e.ar + '"' : "") + '><img src="' + esc(imgUrl(e.s)) +
-          '" alt="' + esc(e.a || e.t) + '" loading="lazy" decoding="async"></span>' +
+          '<span class="igl-thumb smd-wm-host"><img src="' + esc(imgUrl(e.s)) +
+          '" alt="' + esc(e.a || e.t) + '" loading="lazy" decoding="async">' + (G.SMD_WM ? G.SMD_WM.html(e.s) : "") + '</span>' +
           '<span class="igl-cardt">' + esc(e.t) + '</span><span class="igl-cardf">' + esc(e.f) + " · " + esc(e.k) + "</span></button>";
       }).join("") + "</div>" : '<p class="igl-empty">No images match. Try a shorter search or clear a filter.</p>') +
       (list.length > S.shown ? '<button type="button" class="igl-more" data-igl="more">Show more (' +
@@ -176,7 +176,14 @@
   }
 
   var LINK_LABEL = { kb: "Read the article", lesson: "Open the lesson", ecg: "Open in KardiqX", eye: "Open in Ophthalmós",
-    ophthalmos: "Open in Ophthalmós", prep: "Open in PrepNucleus", clinix: "Open in CliniX", tokos: "Open in Tokós", narke: "Open in Narkē" };
+    ophthalmos: "Open in Ophthalmós", prep: "Open in PrepNucleus", clinix: "Open in CliniX", tokos: "Open in Tokós", narke: "Open in Narkē",
+    commons: "Open on Wikimedia Commons" };
+  /* A Commons file page opens outside the app (Capacitor Browser in the app, a new window in the test harness). */
+  function openExternal(url) {
+    try { var P = G.Capacitor && G.Capacitor.Plugins; if (P && P.Browser && P.Browser.open) { P.Browser.open({ url: url }); return true; } } catch (x) {}
+    try { if (G.open && G.open(url, "_blank")) return true; } catch (x) {}
+    return false;
+  }
   function openRef(e) {
     try {
       if (e.lk === "kb" && G.SMD_KB && G.SMD_KB.open) { close(); G.SMD_KB.open(e.ri); return; }
@@ -184,6 +191,7 @@
       if ((e.lk === "eye" || e.lk === "ophthalmos") && G.OPHTHALMOS && G.OPHTHALMOS.open) { close(); G.OPHTHALMOS.open(); return; }
       if ((e.lk === "lesson" || e.lk === "prep") && G.PREP && G.PREP.open) { close(); G.PREP.open({}); return; }
       if (e.lk === "clinix" && G.CLINIX && G.CLINIX.open) { close(); G.CLINIX.open(); return; }
+      if (e.lk === "commons" && /^https:\/\/commons\.wikimedia\.org\//.test(String(e.u || "")) && openExternal(e.u)) return;
     } catch (x) {}
     try { if (G.toast) G.toast("Open it from " + (e.f || "its module") + ": " + (e.rn || e.t)); } catch (x) {}
   }
@@ -197,7 +205,8 @@
     v.innerHTML = '<div class="igl-vbar"><button type="button" class="igl-vclose" data-igl="vclose" aria-label="Close viewer">‹</button>' +
       '<span class="igl-vpos">' + (S.vi + 1) + " of " + S.list.length.toLocaleString() + '</span>' +
       '<button type="button" class="igl-vnav" data-igl="vprev" aria-label="Previous image">‹ Prev</button>' +
-      '<button type="button" class="igl-vnav" data-igl="vnext" aria-label="Next image">Next ›</button></div>' +
+      '<button type="button" class="igl-vnav" data-igl="vnext" aria-label="Next image">Next ›</button>' +
+      (G.SMD_IMGZOOM ? '<button type="button" class="igl-vnav" data-igl="vreport" aria-label="Report this image">Report</button>' : "") + '</div>' +
       '<div class="igl-vstage"><img class="igl-vimg" src="' + esc(imgUrl(e.s)) + '" alt="' + esc(e.a || e.t) + '" draggable="false"></div>' +
       '<div class="igl-vmeta"><h2>' + esc(e.t) + '</h2><p class="igl-vcap">' + esc(e.c) + "</p>" +
       '<p class="igl-vfrom">From ' + esc(e.f) + (e.rn && e.rn !== e.t ? ": " + esc(e.rn) : "") + " · " + esc(e.k) + "</p>" +
@@ -207,6 +216,7 @@
   }
   function bindViewerTouch(v) {
     var stage = v.querySelector(".igl-vstage"), img = v.querySelector(".igl-vimg");
+    if (G.SMD_WM) G.SMD_WM.follow(img);   // the watermark rides the image's zoom
     var x0 = null, y0 = null, d0 = 0, moved = false, lastTap = 0;
     function dist(t) { return Math.hypot(t[0].clientX - t[1].clientX, t[0].clientY - t[1].clientY); }
     stage.addEventListener("touchstart", function (ev) {
@@ -256,6 +266,8 @@
     if (a === "vprev") { stepViewer(-1); return; }
     if (a === "vnext") { stepViewer(1); return; }
     if (a === "vlink") { openRef(S.list[S.vi]); return; }
+    // Report (image-zoom.js): a correction, a copyright concern or a better image, checked by an admin.
+    if (a === "vreport") { var re = S.list[S.vi]; if (re && G.SMD_IMGZOOM) G.SMD_IMGZOOM.report({ src: /^https:/.test(re.s) ? re.s : String(re.s || ""), title: re.t, where: "Image Library: " + (S.name || "") }); return; }
   }
   function onKey(ev) { if (ev.key === "Escape") back(); }
 

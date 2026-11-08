@@ -10336,6 +10336,28 @@
       "</div>";
   }
 
+  /* iPad (vault/plans/iPad-Standards.md, owner 2026-11-04): on a regular-width tablet at 1000 px and wider the ward
+   * list stays beside the chart, the open patient highlighted, so switching patient is one tap instead of back,
+   * scroll, open. The rail rows send "railopen", which refuses while the chart holds unsaved typing (dispatch).
+   * Phones, Split View and every non-tablet screen get chartView exactly as before. */
+  function ipadSplitOn() {
+    try { var de = typeof document !== "undefined" && document.documentElement; return !!(de && de.classList && de.classList.contains("smd-tablet") && (G.innerWidth || 0) >= 1000); } catch (e) { return false; }
+  }
+  function ipadChart(state) {
+    var all = (state.patients || []).slice();
+    if (!ipadSplitOn() || !all.length) return chartView(state);
+    var cur = state.sel && state.sel.encounterId;
+    var rows = all.sort(bedCompare).map(function (p) {
+      var on = p.encounterId === cur;
+      return '<button class="w-bed' + (on ? " on" : "") + '" data-w-act="railopen:' + esc(p.encounterId) + '" type="button"' + (on ? ' aria-current="true"' : "") + ">" +
+        '<span class="w-bed-no">' + esc(p.bed || "-") + "</span>" +
+        '<span class="w-bed-b"><b>' + phiWho(p.name, p.mrn, p.patientId) + "</b><small>" +
+          (p.mrn && p.name ? phi("id", p.mrn) + (p.ward ? " · " : "") : "") + esc(p.ward || "") + "</small></span></button>";
+    }).join("");
+    return '<div class="w-ipad-split"><aside class="w-ipad-rail" aria-label="' + wTA("ward.ward-round", "Ward round") + '">' +
+      "<h3>" + wTH("ward.ward-round", "Ward round") + "<small>" + all.length + " " + wTH("ward.patients", "patients") + "</small></h3>" + rows +
+      '</aside><div class="w-ipad-detail">' + chartView(state) + "</div></div>";
+  }
   function _render(state) {
     return "<div class=\"w-shell\"><header class=\"w-top\"><button class=\"w-ic\" data-w-act=\"close\" aria-label=\"" + wTA("ward.close-the-ward", "Close the ward") + "\">" + ms("close") + "</button>" +
       "<span class=\"w-title\">" + wTH("ward.wardsynq-inpatient", "WardSynQ &middot; Inpatient") + "</span>" +
@@ -10347,7 +10369,7 @@
       "<button class=\"w-ic\" data-w-act=\"keys\" aria-label=\"" + wTA("ward.keyboard-shortcuts", "Keyboard shortcuts") + "\" aria-keyshortcuts=\"?\">" + ms("keyboard") + "</button></header>" +
       '<div class="w-canvas" id="wCanvas"' + (PHI_VIEWS[state.view || "list"] ? "" : " data-phi-unmasked") + '>' + banner(state) + labelOfferBar(state) + offlineBar(state) +
       (state.view === "offline" ? offlineView(state)
-        : state.view === "chart" ? chartView(state)
+        : state.view === "chart" ? ipadChart(state)
         : state.view === "downtime" ? downtimeView(state)
         : state.view === "reports" ? reportsView(state)
         : state.view === "purchasing" ? purchasingView(state)
@@ -16514,6 +16536,15 @@
     // Fills one field and changes nothing else, so it never closes a layer it was pressed inside (the Collect question).
     if (cmd === "camscan") { camScan(arg); return; }
     if (cmd !== "summary") closeSummaryLayer();
+    /* iPad rail (ipadChart): another patient's chart from beside this one. Typed and unsaved entries are never
+     * thrown away by it: the switch is refused and said, exactly as the keyboard layer refuses a repaint. */
+    if (cmd === "railopen") {
+      if (st.sel && st.sel.encounterId === arg) return;
+      if (unsavedTyping(root())) { announce(wT("ward.this-screen-has-unsaved-entries-save", "This screen has unsaved entries. Save or clear them first: moving now would discard them.")); return; }   // no paint(): a repaint would discard the very typing this protects
+      dispatch("open:" + arg);
+      var rc = document.getElementById("wCanvas"); if (rc) rc.scrollTop = 0;
+      return;
+    }
     if (cmd === "close") { close(); return; }
     if (cmd === "chartcat") { chartNavShow(arg); return; }
     chartNavNote(cmd);

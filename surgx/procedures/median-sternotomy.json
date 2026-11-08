@@ -1,0 +1,166 @@
+{
+  "id": "median-sternotomy",
+  "title": "Median sternotomy and closure",
+  "subtitle": "Opening, closing, and emergency re-sternotomy",
+  "system": "thoracic",
+  "aliases": ["sternotomy", "sternal closure", "resternotomy", "re-sternotomy", "chest reopening"],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "sts-arrest-2017", "org": "The Society of Thoracic Surgeons (STS), Annals of Thoracic Surgery", "title": "The Society of Thoracic Surgeons Expert Consensus for the Resuscitation of Patients Who Arrest After Cardiac Surgery", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/28122680/", "accessed": "2026-11-04" },
+    { "id": "eacts-arrest-2009", "org": "European Association for Cardio-Thoracic Surgery (EACTS)", "title": "Guideline for resuscitation in cardiac arrest after cardiac surgery", "year": 2009, "url": "https://pubmed.ncbi.nlm.nih.gov/19297185/", "accessed": "2026-11-04" },
+    { "id": "aats-sternal-2016", "org": "American Association for Thoracic Surgery (AATS), Journal of Thoracic and Cardiovascular Surgery", "title": "Prevention and management of sternal wound infections", "year": 2016, "url": "https://pubmed.ncbi.nlm.nih.gov/27555340/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["bmi"],
+  "chapters": {
+    "indications": [
+      "Access for most cardiac operations: coronary bypass, valve and aortic surgery, and cardiac trauma.",
+      "Access to the anterior mediastinum: thymectomy, anterior mediastinal tumours, retrosternal goitre extension.",
+      "Bilateral lung or anterior lung access where a clamshell or bilateral thoracotomy is not chosen.",
+      "Emergency re-sternotomy after cardiac surgery for tamponade, bleeding or cardiac arrest not responding to initial measures."
+    ],
+    "contraindications": [
+      "Active sternal or mediastinal infection, unless the purpose is debridement.",
+      "A re-operative chest with structures adherent to the sternum, where the approach must be modified (oscillating saw, peripheral cannulation first, CT planning) rather than abandoned.",
+      "Severe sternal deformity or previous radiotherapy, which change the approach and the closure.",
+      "Lesions better reached through a thoracotomy or minimally invasive approach."
+    ],
+    "preparation": [
+      "Review the CT in any redo case: distance between the sternum and the right ventricle, aorta and patent grafts.",
+      "Infection prevention bundle per unit: screening and decolonisation for Staphylococcus aureus where used, glycaemic control, clipping rather than shaving, and timely prophylaxis.",
+      "For a redo or high-risk case, expose and prepare the groin or axillary vessels for peripheral cannulation before re-entry.",
+      "Emergency re-sternotomy set checked and stored at every cardiac surgical bedside.",
+      "Consent risks to discuss: bleeding and re-operation; sternal wound infection and mediastinitis; sternal instability and dehiscence; chronic chest wall pain; wire-related discomfort; injury to the heart or grafts during re-entry; brachial plexus injury from retraction."
+    ],
+    "positioning": [
+      "Supine with the arms tucked at the sides and padded, or abducted per unit practice, with a small roll between the scapulae to lift the sternum.",
+      "Defibrillator pads applied before draping in redo and high-risk cases."
+    ],
+    "equipment": [
+      "Sternal saw and an oscillating saw for re-entry; sternal retractor.",
+      "Stainless steel sternal wires and wire twisters; plates if reinforcement is planned.",
+      "Diathermy, bone wax (minimal use).",
+      "Emergency re-sternotomy set: scalpel, wire cutters, retractor, suction, sterile gowns and gloves, internal defibrillator paddles."
+    ],
+    "anatomy": [
+      "The sternum consists of the manubrium, body and xiphoid; the sternal angle marks the second costal cartilage.",
+      "The innominate (left brachiocephalic) vein crosses behind the manubrium, sometimes high in the neck, sometimes low.",
+      "The internal mammary arteries run vertically about one to two centimetres lateral to the sternal edge, behind the costal cartilages.",
+      "The right ventricle and, in a redo, adherent grafts lie immediately behind the lower sternum; the pleurae may reach the midline."
+    ],
+    "criticalSafety": [
+      "Stop ventilation during the saw pass.",
+      "In a redo, never use the standard sternal saw for re-entry, and have peripheral cannulation sites prepared.",
+      "Counts must be correct before the sternum is closed: the mediastinum is a cavity.",
+      "Sternal wires close to the edge cut out; wires too lateral injure the mammary vessels.",
+      "After cardiac surgery, if early measures for arrest fail, reopen the chest within about five minutes (STS 2017)."
+    ],
+    "structuresAtRisk": [
+      "Innominate vein",
+      "Right ventricle and aorta",
+      "Patent bypass grafts in a redo",
+      "Internal mammary arteries",
+      "Pleurae and lungs",
+      "Brachial plexus from retraction"
+    ],
+    "commonErrors": [
+      "An off-midline sternotomy.",
+      "Opening the retractor too wide and too high.",
+      "Heavy use of bone wax.",
+      "Closing a high-risk sternum with standard wiring without considering reinforcement.",
+      "Delayed decision to reopen a bleeding or tamponading patient."
+    ],
+    "complications": [
+      "Bleeding from the sternal edges, wire sites or mammary bed; tamponade.",
+      "Sternal wound infection, from superficial infection to deep sternal wound infection and mediastinitis.",
+      "Sternal instability and dehiscence.",
+      "Rib fracture and brachial plexus injury.",
+      "Chronic post-sternotomy pain.",
+      "Injury to the heart or grafts at re-entry."
+    ],
+    "postop": [
+      "Drain output monitoring with clear thresholds for calling the surgeon; correct coagulopathy and temperature.",
+      "Sternal precautions per unit, avoiding heavy lifting and pushing up with the arms in the early weeks.",
+      "Wound review for discharge, erythema, a clicking or unstable sternum, which suggest infection or dehiscence.",
+      "Re-sternotomy set and trained staff available at the bedside while the patient is in intensive care."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Include sternal infection, dehiscence and, in a redo, injury at re-entry." },
+    { "ref": "step.core.timeout", "emphasis": "State whether this is a redo, what lies behind the sternum on CT, and the plan for peripheral cannulation." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Timed prophylaxis per cardiac unit protocol with redosing for long cases and bypass; glycaemic control is part of sternal infection prevention." },
+    { "ref": "step.core.positioning", "emphasis": "Arms tucked and padded or supported, roll between the scapulae; external defibrillator pads before draping in a redo." },
+    { "ref": "step.core.prep-drape", "emphasis": "Chin to knees and both legs or arms if conduit may be needed; groins prepared for cannulation." },
+    { "ref": "step.st.landmarks" },
+    { "ref": "step.thor.sternotomy-open" },
+    { "ref": "step.st.redo-entry" },
+    { "ref": "step.thor.pericardium-open" },
+    { "ref": "step.vasc.heparin-reversal", "emphasis": "At the end of the cardiac procedure, after separation from bypass and decannulation." },
+    { "ref": "step.core.haemostasis", "emphasis": "Check the sternal edges, periosteum, mammary bed, thymic remnant, cannulation sites and pericardial edges in order." },
+    { "ref": "step.thor.pacing-wires" },
+    { "ref": "step.thor.chest-drains" },
+    { "ref": "step.core.counts", "emphasis": "Before the sternum is closed: the mediastinum and any opened pleura are cavities." },
+    { "ref": "step.st.open-chest" },
+    { "ref": "step.thor.sternal-closure" },
+    { "ref": "step.core.skin-closure", "emphasis": "Close presternal fascia and subcutaneous tissue in layers over the wires, then skin; a sealed dressing." },
+    { "ref": "step.core.debrief", "emphasis": "Record the closure method and wire count, drains and pacing wires, and any concern about bleeding or sternal quality." },
+    { "ref": "step.thor.emergency-resternotomy", "emphasis": "Taught here because it is part of every sternotomy's after-care: the whole team must know where the set is and who opens." }
+  ],
+  "steps_local": {
+    "step.st.landmarks": {
+      "id": "step.st.landmarks",
+      "kind": "prep",
+      "title": "Marking the midline",
+      "why": "Skin landmarks are misleading in obese patients and those with asymmetric chests. The midline of the bone, not the skin, determines a symmetric sternotomy.",
+      "how": [
+        "Palpate the sternal notch and the xiphoid, and the intercostal spaces on both sides along the body of the sternum.",
+        "Mark the midline of the bone and keep the skin incision short of the notch where possible, for cosmesis and to reduce wound problems.",
+        "Divide subcutaneous tissue down to the periosteum in the same plane, without undermining."
+      ],
+      "structuresAtRisk": ["Presternal skin and subcutaneous blood supply"],
+      "pitfalls": [
+        "Following the skin midline when the sternum is rotated or the breasts pull the skin sideways.",
+        "Undermining presternal tissue, creating a dead space."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.st.redo-entry": {
+      "id": "step.st.redo-entry",
+      "kind": "access",
+      "critical": true,
+      "title": "Re-entry in a previously opened chest",
+      "why": "In a redo the right ventricle, aorta and patent grafts may be stuck to the back of the sternum, and injury at re-entry is a major cause of death in re-operative cardiac surgery.",
+      "how": [
+        "Review the CT for structures adherent to the sternum before starting; prepare or cannulate peripheral vessels first when the risk is high.",
+        "Remove the old wires (or cut them and leave them in place as a guard until the saw has passed), and divide the anterior table with an oscillating saw.",
+        "Lift each half of the sternum with rakes and divide the posterior table and adhesions under direct vision, staying on the back of the bone.",
+        "If a structure is entered, control it with pressure and call for senior help; institute peripheral bypass before attempting repair if bleeding is major."
+      ],
+      "structuresAtRisk": ["Right ventricle", "Aorta", "Patent left internal mammary artery graft", "Innominate vein"],
+      "pitfalls": [
+        "Using the standard sternal saw for re-entry.",
+        "Dissecting the heart free before both sternal halves are lifted off it."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.st.open-chest": {
+      "id": "step.st.open-chest",
+      "kind": "bailout",
+      "title": "Delayed sternal closure when the chest will not close safely",
+      "why": "Closing the sternum over a swollen heart or ongoing coagulopathic bleeding can cause tamponade physiology and haemodynamic collapse. Leaving the chest open is a deliberate, safe choice.",
+      "how": [
+        "Consider leaving the sternum open when approximation causes hypotension, rising filling pressures or arrhythmia, or when diffuse bleeding needs packing.",
+        "Cover the open sternum with a sealed membrane or dressing per unit protocol, with drains in place, and keep the patient sedated and ventilated.",
+        "Plan return to theatre for wash-out and closure once the heart and coagulation have recovered, usually within days.",
+        "Record the reason, any packs left and their number in the operative note and handover."
+      ],
+      "structuresAtRisk": ["Heart and grafts beneath an open sternum"],
+      "pitfalls": [
+        "Forcing closure because an open chest feels like failure.",
+        "Retained packs not recorded."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

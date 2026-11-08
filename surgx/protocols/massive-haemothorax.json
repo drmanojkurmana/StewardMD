@@ -1,0 +1,64 @@
+{
+  "id": "massive-haemothorax",
+  "title": "Massive haemothorax and resuscitative thoracotomy",
+  "subtitle": "Drain output, the thoracotomy decision, and who should be opened",
+  "category": "thoracic",
+  "specialty": "cardiothoracic",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "atls", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-11-04" },
+    { "id": "east-edt-2015", "org": "Eastern Association for the Surgery of Trauma (EAST)", "title": "An evidence-based approach to patient selection for emergency department thoracotomy: a practice management guideline", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/26091330/", "accessed": "2026-11-04" },
+    { "id": "wta-rt-2012", "org": "Western Trauma Association (WTA)", "title": "Western Trauma Association critical decisions in trauma: resuscitative thoracotomy", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/23188227/", "accessed": "2026-11-04" },
+    { "id": "east-htx-2021", "org": "Eastern Association for the Surgery of Trauma (EAST)", "title": "Management of simple and retained hemothorax: a practice management guideline", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/33487403/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Shock with a dull, silent hemithorax: massive haemothorax until proven otherwise." },
+      { "text": "Initial drain output of about 1500 mL, or continuing output of around 200 mL per hour for 2 to 4 hours." },
+      { "text": "Penetrating wound medial to the nipple line or the scapula: think great vessels, hilum and heart." },
+      { "text": "Loss of output after brisk bleeding with continuing shock: a clotted drain, not a stopped bleed." },
+      { "text": "Traumatic arrest with signs of life after penetrating chest injury: the patient for whom resuscitative thoracotomy works best." }
+    ],
+    "do_now": [
+      { "text": "Restore volume with blood and activate the major haemorrhage protocol, then decompress the chest with a large-bore drain in the safe triangle.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Call the trauma and cardiothoracic surgeons as soon as massive haemothorax is suspected. Thoracotomy is decided by output and physiology together.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Pulseless after penetrating chest injury with signs of life: resuscitative thoracotomy is strongly recommended.", "timeCritical": true, "evidenceRef": "east-edt-2015" },
+      { "text": "Pulseless after blunt injury with no signs of life: resuscitative thoracotomy is not recommended.", "timeCritical": true, "evidenceRef": "east-edt-2015" }
+    ],
+    "assess": [
+      { "text": "Measure the drain output at insertion and every hour, together with heart rate, pressure and transfusion requirement. Output alone can mislead." },
+      { "text": "Signs of life include pupillary response, spontaneous ventilation, carotid pulse, measurable pressure, limb movement or cardiac electrical activity." },
+      { "text": "Duration of CPR and mechanism: time without response is the strongest predictor of futility." },
+      { "text": "Look for a second cavity: abdominal bleeding, pericardial fluid on eFAST, pelvic and long bone sources.", "calcs": ["shock_index"] }
+    ],
+    "investigate": [
+      { "text": "eFAST for haemothorax, pericardial fluid and the abdomen in the resuscitation room." },
+      { "text": "Chest radiograph after drain insertion: a persisting opacity means retained blood or a malpositioned drain." },
+      { "text": "CT with contrast for the stabilised patient, to find the source and retained haemothorax." }
+    ],
+    "resuscitate": [
+      { "text": "Balanced blood product resuscitation with limited crystalloid, and correction of hypothermia, acidosis, calcium and fibrinogen.", "evidenceRef": "atls" },
+      { "text": "Autotransfusion of drained blood where the system is available, as part of the massive haemorrhage plan.", "evidenceRef": "atls" },
+      { "text": "Do not clamp the drain to tamponade the bleed. It hides the bleeding and compresses the lung.", "evidenceRef": "atls" }
+    ],
+    "definitive": [
+      { "text": "Urgent thoracotomy for initial drain output of 1500 mL or more, continuing loss of about 200 mL per hour for 2 to 4 hours, or ongoing transfusion requirement to maintain haemodynamics.", "evidenceRef": "atls" },
+      { "text": "Resuscitative thoracotomy is conditionally recommended for pulseless penetrating thoracic injury without signs of life, for penetrating extra-thoracic injury, and for blunt injury with signs of life.", "evidenceRef": "east-edt-2015" },
+      { "text": "Resuscitative thoracotomy is unlikely to help after more than about 15 minutes of CPR in penetrating trauma or 10 minutes in blunt trauma without response, or in asystole without tamponade.", "evidenceRef": "wta-rt-2012" },
+      { "text": "Retained haemothorax after drainage: early video-assisted thoracoscopic evacuation rather than a second drain.", "evidenceRef": "east-htx-2021" }
+    ],
+    "escalate": [
+      { "text": "Consultant trauma surgeon and cardiothoracic surgeon for every massive haemothorax and every resuscitative thoracotomy." },
+      { "text": "Transfer to a major trauma centre with thoracic surgery once the chest is drained and the airway is secure, if the patient is stable enough." },
+      { "text": "Critical care for every thoracotomy survivor." }
+    ]
+  },
+  "notes": [
+    "The drain is a measurement tool as well as a treatment. Decide on the trend in output and physiology, not on one number.",
+    "Resuscitative thoracotomy works for the stabbed heart with tamponade. It rarely works in blunt arrest without signs of life.",
+    "A clamped drain does not stop bleeding. It only stops you seeing it."
+  ],
+  "calcs": ["shock_index"]
+}
