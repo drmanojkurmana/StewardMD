@@ -437,7 +437,7 @@
       SMD_OTA.check().then(function (r) {
         checkBtn.disabled = false; r = r || {};
         var lbl = function (v) { try { return SMD_OTA.versionLabel ? SMD_OTA.versionLabel(v) : String(v); } catch (e) { return String(v); } };
-        if (r.status === "available") { pending = r; if (statusEl) statusEl.textContent = "Update available: " + lbl(r.version); if (installBtn) installBtn.style.display = ""; }
+        if (r.status === "available") { pending = r; if (statusEl) statusEl.textContent = "Update available: " + lbl(r.version); if (installBtn) installBtn.style.display = ""; checkBtn.style.display = "none"; }
         else if (r.status === "uptodate") { pending = null; if (statusEl) statusEl.textContent = "You're up to date (" + lbl(r.current) + ")"; if (installBtn) installBtn.style.display = "none"; }
         else { if (statusEl) statusEl.textContent = "Couldn't check — " + (r.error || "try again"); }
       });
@@ -447,6 +447,8 @@
       installBtn.disabled = true;
       // The download card (native-ota.js progressUI): bar, MB, live speed and a speed graph, so people can see it working.
       var pu = SMD_OTA.progressUI ? SMD_OTA.progressUI(root.querySelector("#otaProg")) : null;
+      // While it downloads the status card is the whole section: no buttons, no duplicate status line.
+      if (checkBtn) checkBtn.style.display = "none"; installBtn.style.display = "none"; if (pu && statusEl) statusEl.hidden = true;
       SMD_OTA.install(pending, function (pct, label, info) {
         if (pu && info) { if (statusEl) statusEl.textContent = "Downloading update"; pu.update(pct, label, info); }
         else if (statusEl) statusEl.textContent = label || ("Downloading… " + pct + "%");
@@ -454,7 +456,7 @@
         if (res && res.ok) { if (pu) pu.done(); if (statusEl) statusEl.textContent = "Update ready, reopening…"; }
         else {
           if (pu) pu.fail();
-          installBtn.disabled = false;
+          installBtn.disabled = false; installBtn.style.display = ""; if (checkBtn) checkBtn.style.display = ""; if (statusEl) statusEl.hidden = false;
           // Phrase it from the failure CODE, same vocabulary as the update banner. The raw code was
           // reaching the screen verbatim ("Install failed — download-failed"), which tells a doctor
           // nothing about what to do next.
