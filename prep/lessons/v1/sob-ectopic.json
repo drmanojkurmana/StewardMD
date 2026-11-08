@@ -1,252 +1,233 @@
 {
- "v": 1,
- "module": "sob-ectopic",
- "title": "Ectopic Pregnancy: Methotrexate Protocol, Salpingostomy and Ruptured Ectopic",
- "subject": "ss-obg",
- "minutes": 8,
- "gen": "AI",
- "checks": {
-  "shape": true,
-  "dashes": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "verify": true
- },
- "refs": [
-  "Williams Obstetrics 25e Ch 19 (Ectopic Pregnancy)",
-  "Ten Teachers Gynaecology 21e",
-  "ACOG Practice Bulletin No. 193 (Tubal Ectopic Pregnancy)"
- ],
- "src": [],
- "quiz": [],
- "steps": [
-  {
-   "tx": "Over 95 percent of **ectopic pregnancies** implant within the fallopian tube, with the **ampulla** representing the most common site (70 percent), followed by the isthmus (12 percent), fimbria (11 percent), and **interstitial or cornual region** (2 to 3 percent), which carries the highest risk of catastrophic hemorrhage due to uterine artery branches. Clinically, key parameters encompass ectopic pregnancy.",
-   "say": "The fallopian tube is the site of ninety-five percent of ectopic gestations. The ampullary segment accounts for seventy percent of cases, followed by the narrower isthmic portion. Interstitial or cornual implantations, though representing only two to three percent, carry catastrophic hemorrhagic mortality because rupture involves ascending branches of the uterine and ovarian arteries.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/obg-ectopic-fig1.webp",
-    "ar": 1.5701,
-    "caption": "Anatomical distribution of tubal ectopic implantation sites and sonographic features. Credit: StewardMD.",
-    "alt": "Anatomical diagram of the female reproductive tract illustrating the distribution and percentages of ampullary, isthmic, interstitial, and ovarian ectopic pregnancies."
-   }
+  "v": 1,
+  "module": "sob-ectopic",
+  "title": "Ectopic Pregnancy: Methotrexate Protocol, Salpingostomy and Ruptured Ectopic",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "The **discriminatory zone** for transvaginal sonography is a serum **beta-hCG of 1500 to 2000 mIU/mL**, at which an intrauterine gestational sac with double decidual sign must be visualized. Absence of an intrauterine sac with hCG above this threshold strongly indicates an ectopic pregnancy or failed early gestation.",
-   "say": "Transvaginal ultrasound reliably demonstrates an intrauterine gestational sac when serum beta-hCG reaches the discriminatory threshold of fifteen hundred to two thousand milli-units per millilitre. If high-resolution transvaginal imaging reveals an empty uterine cavity in the presence of hCG above this level, the clinician must treat for ectopic pregnancy.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Diagnostic Modality",
-     "Beta-hCG Threshold",
-     "Expected Intrauterine Finding"
-    ],
-    "rows": [
-     [
-      "Transvaginal Sonography (TVS)",
-      "1500 to 2000 mIU/mL",
-      "Definitive gestational sac with double decidual sac sign"
-     ],
-     [
-      "Transabdominal Sonography (TAS)",
-      "6000 to 6500 mIU/mL",
-      "Clear intrauterine chorionic cavity visualization"
-     ],
-     [
-      "Sub-discriminatory zone (< 1500)",
-      "Serial 48-hour hCG tracking",
-      "Normal intrauterine rises >= 35 to 50% every 48 hours"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Medical management with **single-dose methotrexate** (50 mg/m2 BSA intramuscularly) requires strict eligibility: hemodynamic stability, unruptured mass <=3.5 cm, absence of **fetal cardiac activity**, serum **beta-hCG < 5000 mIU/mL**, normal renal and hepatic profiles, and confirmed patient compliance for serial biochemical follow-up. Clinically, key parameters encompass tubal ring sign, ring of fire, adnexal mass.",
-   "say": "Systemic single-dose methotrexate administered at fifty milligrams per square metre of body surface area is an effective non-surgical treatment. Ideal candidates must be hemodynamically stable with unruptured ectopic masses under three point five centimetres, absent embryonic cardiac motion, baseline hCG below five thousand, and normal liver and renal chemistries.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Assess hemodynamic stability and baseline lab panel"
-     },
-     {
-      "id": "b",
-      "label": "Confirm criteria: mass <=3.5 cm, no fetal cardiac activity, hCG <5000"
-     },
-     {
-      "id": "c",
-      "label": "Administer intramuscular methotrexate (50 mg/m2 BSA) on Day 1"
-     },
-     {
-      "id": "d",
-      "label": "Serial serum beta-hCG monitoring on Day 4 and Day 7"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The single-dose methotrexate protocol tracks serum beta-hCG on **Day 4 and Day 7**. An initial rise on Day 4 is expected due to trophoblast lysis. Successful resolution is defined as a **>=15 percent decrease** in hCG between Day 4 and Day 7, followed by weekly monitoring until non-pregnant levels (<5 mIU/mL) are reached. Clinically, key parameters encompass single-dose protocol, unruptured mass, 50, 3.5, 5000.",
-   "say": "Serum beta-hCG is drawn on day one, day four, and day seven following methotrexate injection. Clinicians should anticipate an initial increase in hCG on day four resulting from cellular breakdown and hormone release. Successful treatment requires at least a fifteen percent drop between day four and day seven, after which weekly tests continue until non-pregnant values are confirmed.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Treatment Success (>= 15% Drop)",
-     "points": [
-      "Day 7 hCG falls >= 15% below Day 4 level",
-      "Monitor serum beta-hCG weekly until < 5 mIU/mL",
-      "Avoid NSAIDs, folic acid, and sexual intercourse"
-     ]
+  "refs": [
+    "Williams Obstetrics 25e Ch 19 (Ectopic Pregnancy)",
+    "Ten Teachers Gynaecology 21e",
+    "ACOG Practice Bulletin No. 193 (Tubal Ectopic Pregnancy)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Over 95 percent of **ectopic pregnancies** implant within the fallopian tube, with the **ampulla** representing the most common site (70 percent), followed by the isthmus (12 percent), fimbria (11 percent), and **interstitial or cornual region** (2 to 3 percent), which carries the highest risk of catastrophic hemorrhage due to uterine artery branches. Clinically, key parameters encompass ectopic pregnancy.",
+      "say": "The fallopian tube is the site of ninety-five percent of ectopic gestations. The ampullary segment accounts for seventy percent of cases, followed by the narrower isthmic portion. Interstitial or cornual implantations, though representing only two to three percent, carry catastrophic hemorrhagic mortality because rupture involves ascending branches of the uterine and ovarian arteries.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-ectopic-fig1.webp",
+        "ar": 1.5701,
+        "caption": "Anatomical distribution of tubal ectopic implantation sites and sonographic features. Credit: StewardMD.",
+        "alt": "Anatomical diagram of the female reproductive tract illustrating the distribution and percentages of ampullary, isthmic, interstitial, and ovarian ectopic pregnancies."
+      }
     },
-    "right": {
-     "title": "Treatment Failure (< 15% Drop)",
-     "points": [
-      "Day 7 hCG plateau or decline < 15% from Day 4",
-      "Administer second dose of methotrexate (50 mg/m2)",
-      "Indicate laparoscopic surgical salpingectomy if failing"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Laparoscopic **linear salpingostomy** is indicated for unruptured tubal ectopics in patients desiring future fertility who have contralateral tubal damage. A longitudinal antimesenteric incision is made over the ectopic bulge, trophoblastic tissue is hydrodissected, and the tubal incision is left to heal by secondary intention without suturing. Clinically, key parameters encompass methotrexate monitoring, beta-hCG decline, day 4 and 7, 4, 7, 15.",
-   "say": "When future fertility preservation is paramount and the contralateral fallopian tube is absent or diseased, laparoscopic linear salpingostomy is preferred. The surgeon makes a longitudinal incision on the antimesenteric border over the maximum distension, evacuates the pregnancy with gentle hydrodissection, and leaves the tubal margins to heal by secondary intention.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Operative Approach",
-     "Primary Clinical Indication",
-     "Key Surgical Nuance"
-    ],
-    "rows": [
-     [
-      "Linear salpingostomy",
-      "Desires fertility with damaged contralateral tube",
-      "Antimesenteric incision; allow secondary intention healing"
-     ],
-     [
-      "Total salpingectomy",
-      "Ruptured tube, completed childbearing, healthy other tube",
-      "Bipolar coagulate and resect tube flush to uterine cornua"
-     ],
-     [
-      "Cornuostomy / wedge",
-      "Interstitial / cornual implantation",
-      "Deep myometrial purse-string or layered haemostatic sutures"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Following conservative salpingostomy, **persistent trophoblast** develops in 5 to 15 percent of cases due to retained microscopic syncytiotrophoblasts. This complication requires mandatory weekly **postoperative beta-hCG surveillance** until levels fall below 5 mIU/mL; plateauing or rising titers are treated promptly with single-dose methotrexate. Clinically, key parameters encompass interstitial ectopic, cornual ectopic, torrential haemorrhage, 12, 16.",
-   "say": "Because linear salpingostomy preserves the tube, residual trophoblastic tissue can continue to proliferate in five to fifteen percent of patients. Postoperative surveillance with weekly serum beta-hCG is imperative until non-pregnant values are verified. If levels plateau or rise, single-dose intramuscular methotrexate reliably eradicates persistent trophoblastic tissue.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Complete laparoscopic linear salpingostomy"
-     },
-     {
-      "id": "b",
-      "label": "Initiate weekly serum beta-hCG tracking on post-op day 7"
-     },
-     {
-      "id": "c",
-      "label": "Detect persistent trophoblast: hCG plateau or rise"
-     },
-     {
-      "id": "d",
-      "label": "Treat with single-dose intramuscular methotrexate (50 mg/m2)"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Acute **ruptured ectopic pregnancy** presents with severe unilateral lower abdominal pain, marked peritoneal guarding, shoulder-tip pain from diaphragmatic irritation by **hemoperitoneum**, and rapid hemodynamic instability with profound syncope and hypovolemic shock, mandating immediate aggressive volume resuscitation and emergent **laparoscopy or exploratory laparotomy**. Clinically, key parameters encompass laparoscopic salpingostomy, persistent trophoblast, future childbearing.",
-   "say": "Tubal rupture is a surgical catastrophe presenting with acute severe pelvic peritonitis, shoulder-tip pain from hemoperitoneum irritating the diaphragm, and decompensated hypovolemic shock. Management demands instant resuscitation with two large-bore intravenous lines, type-specific blood transfusion, and immediate surgical exploration without waiting for imaging.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Unruptured Ectopic Presentation",
-     "points": [
-      "Subtle crampy lower quadrant unilateral pain",
-      "Hemodynamically stable with normal pulse and blood pressure",
-      "Apyrexial with soft non-peritoneal abdomen"
-     ]
+    {
+      "tx": "The **discriminatory zone** for transvaginal sonography is a serum **beta-hCG of 1500 to 2000 mIU/mL**, at which an intrauterine gestational sac with double decidual sign must be visualized. Absence of an intrauterine sac with hCG above this threshold strongly indicates an ectopic pregnancy or failed early gestation.",
+      "say": "Transvaginal ultrasound reliably demonstrates an intrauterine gestational sac when serum beta-hCG reaches the discriminatory threshold of fifteen hundred to two thousand milli-units per millilitre. If high-resolution transvaginal imaging reveals an empty uterine cavity in the presence of hCG above this level, the clinician must treat for ectopic pregnancy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Modality",
+          "Beta-hCG Threshold",
+          "Expected Intrauterine Finding"
+        ],
+        "rows": [
+          [
+            "Transvaginal Sonography (TVS)",
+            "1500 to 2000 mIU/mL",
+            "Definitive gestational sac with double decidual sac sign"
+          ],
+          [
+            "Transabdominal Sonography (TAS)",
+            "6000 to 6500 mIU/mL",
+            "Clear intrauterine chorionic cavity visualization"
+          ],
+          [
+            "Sub-discriminatory zone (< 1500)",
+            "Serial 48-hour hCG tracking",
+            "Normal intrauterine rises >= 35 to 50% every 48 hours"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Acute Ruptured Ectopic Shock",
-     "points": [
-      "Sudden lancinating pain with syncope and peritonitis",
-      "Hypotension, tachycardic shock, cold clammy extremities",
-      "Diaphragmatic Kehr sign and free fluid in pouch of Douglas"
-     ]
+    {
+      "tx": "Medical management with **single-dose methotrexate** (50 mg/m2 BSA intramuscularly) requires strict eligibility: hemodynamic stability, unruptured mass <=3.5 cm, absence of **fetal cardiac activity**, serum **beta-hCG < 5000 mIU/mL**, normal renal and hepatic profiles, and confirmed patient compliance for serial biochemical follow-up. Clinically, key parameters encompass tubal ring sign, ring of fire, adnexal mass.",
+      "say": "Systemic single-dose methotrexate administered at fifty milligrams per square metre of body surface area is an effective non-surgical treatment. Ideal candidates must be hemodynamically stable with unruptured ectopic masses under three point five centimetres, absent embryonic cardiac motion, baseline hCG below five thousand, and normal liver and renal chemistries.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Assess hemodynamic stability and baseline lab panel"
+          },
+          {
+            "id": "b",
+            "label": "Confirm criteria: mass <=3.5 cm, no fetal cardiac activity, hCG <5000"
+          },
+          {
+            "id": "c",
+            "label": "Administer intramuscular methotrexate (50 mg/m2 BSA) on Day 1"
+          },
+          {
+            "id": "d",
+            "label": "Serial serum beta-hCG monitoring on Day 4 and Day 7"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The single-dose methotrexate protocol tracks serum beta-hCG on **Day 4 and Day 7**. An initial rise on Day 4 is expected due to trophoblast lysis. Successful resolution is defined as a **>=15 percent decrease** in hCG between Day 4 and Day 7, followed by weekly monitoring until non-pregnant levels (<5 mIU/mL) are reached. Clinically, key parameters encompass single-dose protocol, unruptured mass, 50, 3.5, 5000.",
+      "say": "Serum beta-hCG is drawn on day one, day four, and day seven following methotrexate injection. Clinicians should anticipate an initial increase in hCG on day four resulting from cellular breakdown and hormone release. Successful treatment requires at least a fifteen percent drop between day four and day seven, after which weekly tests continue until non-pregnant values are confirmed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Treatment Success (>= 15% Drop)",
+          "points": [
+            "Day 7 hCG falls >= 15% below Day 4 level",
+            "Monitor serum beta-hCG weekly until < 5 mIU/mL",
+            "Avoid NSAIDs, folic acid, and sexual intercourse"
+          ]
+        },
+        "right": {
+          "title": "Treatment Failure (< 15% Drop)",
+          "points": [
+            "Day 7 hCG plateau or decline < 15% from Day 4",
+            "Administer second dose of methotrexate (50 mg/m2)",
+            "Indicate laparoscopic surgical salpingectomy if failing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Laparoscopic **linear salpingostomy** is indicated for unruptured tubal ectopics in patients desiring future fertility who have contralateral tubal damage. A longitudinal antimesenteric incision is made over the ectopic bulge, trophoblastic tissue is hydrodissected, and the tubal incision is left to heal by secondary intention without suturing. Clinically, key parameters encompass methotrexate monitoring, beta-hCG decline, day 4 and 7, 4, 7, 15.",
+      "say": "When future fertility preservation is paramount and the contralateral fallopian tube is absent or diseased, laparoscopic linear salpingostomy is preferred. The surgeon makes a longitudinal incision on the antimesenteric border over the maximum distension, evacuates the pregnancy with gentle hydrodissection, and leaves the tubal margins to heal by secondary intention.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-prc-ectopic-pregnancy-surgeries.webp",
+        "alt": "Surgical diagram of a tubal ectopic pregnancy with a linear tube incision and removal of the gestation sac.",
+        "caption": "Linear salpingostomy for an unruptured tubal ectopic pregnancy. Credit: Takatakatakumi, CC BY-SA 3.0."
+      }
+    },
+    {
+      "tx": "Following conservative salpingostomy, **persistent trophoblast** develops in 5 to 15 percent of cases due to retained microscopic syncytiotrophoblasts. This complication requires mandatory weekly **postoperative beta-hCG surveillance** until levels fall below 5 mIU/mL; plateauing or rising titers are treated promptly with single-dose methotrexate. Clinically, key parameters encompass interstitial ectopic, cornual ectopic, torrential haemorrhage, 12, 16.",
+      "say": "Because linear salpingostomy preserves the tube, residual trophoblastic tissue can continue to proliferate in five to fifteen percent of patients. Postoperative surveillance with weekly serum beta-hCG is imperative until non-pregnant values are verified. If levels plateau or rise, single-dose intramuscular methotrexate reliably eradicates persistent trophoblastic tissue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Complete laparoscopic linear salpingostomy"
+          },
+          {
+            "id": "b",
+            "label": "Initiate weekly serum beta-hCG tracking on post-op day 7"
+          },
+          {
+            "id": "c",
+            "label": "Detect persistent trophoblast: hCG plateau or rise"
+          },
+          {
+            "id": "d",
+            "label": "Treat with single-dose intramuscular methotrexate (50 mg/m2)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute **ruptured ectopic pregnancy** presents with severe unilateral lower abdominal pain, marked peritoneal guarding, shoulder-tip pain from diaphragmatic irritation by **hemoperitoneum**, and rapid hemodynamic instability with profound syncope and hypovolemic shock, mandating immediate aggressive volume resuscitation and emergent **laparoscopy or exploratory laparotomy**. Clinically, key parameters encompass laparoscopic salpingostomy, persistent trophoblast, future childbearing.",
+      "say": "Tubal rupture is a surgical catastrophe presenting with acute severe pelvic peritonitis, shoulder-tip pain from hemoperitoneum irritating the diaphragm, and decompensated hypovolemic shock. Management demands instant resuscitation with two large-bore intravenous lines, type-specific blood transfusion, and immediate surgical exploration without waiting for imaging.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Unruptured Ectopic Presentation",
+          "points": [
+            "Subtle crampy lower quadrant unilateral pain",
+            "Hemodynamically stable with normal pulse and blood pressure",
+            "Apyrexial with soft non-peritoneal abdomen"
+          ]
+        },
+        "right": {
+          "title": "Acute Ruptured Ectopic Shock",
+          "points": [
+            "Sudden lancinating pain with syncope and peritonitis",
+            "Hypotension, tachycardic shock, cold clammy extremities",
+            "Diaphragmatic Kehr sign and free fluid in pouch of Douglas"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Definitive surgical therapy for acute ruptured ectopic pregnancy is emergent **salpingectomy**. The mesosalpinx containing tubal branches of the ovarian artery is systematically coagulated and transected from fimbria to cornua, ensuring complete excision of the ruptured tube and evacuation of all intraperitoneal clotted **hemoperitoneum** to stabilize the patient.",
+      "say": "Emergent laparoscopic or open salpingectomy is the definitive life-saving operation for tubal rupture. The surgeon clamps or coagulates the mesosalpinx close to the tube to safeguard ovarian collateral blood supply, transects the tube cleanly flush with the uterine cornua, and evacuates hemoperitoneum to minimize postoperative adhesion formation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Step",
+          "Anatomical Structure",
+          "Complication Avoidance"
+        ],
+        "rows": [
+          [
+            "Mesosalpinx division",
+            "Tubal branches of ovarian vessels",
+            "Stay close to tube to preserve utero-ovarian anastomotic arcade"
+          ],
+          [
+            "Cornual resection",
+            "Interstitial tubal junction",
+            "Avoid deep myometrial injury to prevent uterine rupture in future"
+          ],
+          [
+            "Hemoperitoneum wash",
+            "Peritoneal cavity & Morrison pouch",
+            "Warm saline irrigation reduces postoperative ileus and adhesions"
+          ],
+          [
+            "Rh-immunoglobulin",
+            "Rh-negative un-sensitized mother",
+            "Administer anti-D immunoglobulin (250-300 mcg) within 72 hours"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Definitive surgical therapy for acute ruptured ectopic pregnancy is emergent **salpingectomy**. The mesosalpinx containing tubal branches of the ovarian artery is systematically coagulated and transected from fimbria to cornua, ensuring complete excision of the ruptured tube and evacuation of all intraperitoneal clotted **hemoperitoneum** to stabilize the patient.",
-   "say": "Emergent laparoscopic or open salpingectomy is the definitive life-saving operation for tubal rupture. The surgeon clamps or coagulates the mesosalpinx close to the tube to safeguard ovarian collateral blood supply, transects the tube cleanly flush with the uterine cornua, and evacuates hemoperitoneum to minimize postoperative adhesion formation.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Surgical Step",
-     "Anatomical Structure",
-     "Complication Avoidance"
-    ],
-    "rows": [
-     [
-      "Mesosalpinx division",
-      "Tubal branches of ovarian vessels",
-      "Stay close to tube to preserve utero-ovarian anastomotic arcade"
-     ],
-     [
-      "Cornual resection",
-      "Interstitial tubal junction",
-      "Avoid deep myometrial injury to prevent uterine rupture in future"
-     ],
-     [
-      "Hemoperitoneum wash",
-      "Peritoneal cavity & Morrison pouch",
-      "Warm saline irrigation reduces postoperative ileus and adhesions"
-     ],
-     [
-      "Rh-immunoglobulin",
-      "Rh-negative un-sensitized mother",
-      "Administer anti-D immunoglobulin (250-300 mcg) within 72 hours"
-     ]
-    ]
-   }
-  }
- ]
+  ]
 }

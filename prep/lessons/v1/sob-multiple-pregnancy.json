@@ -1,262 +1,233 @@
 {
- "v": 1,
- "module": "sob-multiple-pregnancy",
- "title": "Multiple Pregnancy: Chorionicity, TTTS, TAPS, TRAP and Delivery Timing",
- "subject": "ss-obg",
- "minutes": 8,
- "gen": "AI",
- "checks": {
-  "shape": true,
-  "dashes": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "verify": true
- },
- "refs": [
-  "Williams Obstetrics 25e Ch 45 (Multifetal Gestation)",
-  "Ten Teachers Gynaecology 21e",
-  "ISUOG Practice Guidelines (Role of Ultrasound in Twin Pregnancy)"
- ],
- "src": [],
- "quiz": [],
- "steps": [
-  {
-   "tx": "Establishing accurate **chorionicity** via first trimester ultrasound (11 to 13 weeks 6 days) is the single most critical prognostic determinant in twin gestations. Dichorionic diamniotic (DCDA) twins exhibit a thick dividing membrane and the **twin-peak or lambda sign**, whereas monochorionic diamniotic (MCDA) twins display a thin membrane and the **T-sign**. Clinically, key parameters encompass monozygotic twins, cleavage timing, 0, 3, 30, 4, 8, 70, 12, 1, 2.",
-   "say": "Determining chorionicity during the eleven to thirteen week window is the fundamental cornerstone of twin management. Dichorionic twins show a triangular projection of placental tissue extending into the base of the inter-twin membrane, known as the lambda or twin-peak sign. In contrast, monochorionic gestations demonstrate right-angle membrane insertion forming the characteristic T-sign.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/obg-multiple-pregnancy-fig1.webp",
-    "ar": 1.7778,
-    "caption": "First-trimester ultrasound signs of chorionicity: Lambda versus T-sign. Credit: StewardMD.",
-    "alt": "Ultrasound comparison demonstrating the thick triangular lambda sign in dichorionic twins versus the thin T-sign in monochorionic twin gestations."
-   }
+  "v": 1,
+  "module": "sob-multiple-pregnancy",
+  "title": "Multiple Pregnancy: Chorionicity, TTTS, TAPS, TRAP and Delivery Timing",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "The timing of **monozygotic twinning** cleavage governs subsequent placentation: cleavage within days 1 to 3 yields **dichorionic diamniotic** twins (25-30%); days 4 to 8 yields **monochorionic diamniotic** twins (70-75%); days 8 to 12 yields **monochorionic monoamniotic** twins (1-2%); and cleavage beyond day 13 results in conjoined twins. Clinically, key parameters encompass lambda sign, T-sign, twin peak sign, 98.",
-   "say": "In monozygotic pregnancies, the timing of embryo division determines structural anatomy. Separation during the morula stage in the first three days creates two distinct placentas and sacs. Division between days four and eight produces a single placenta with two amniotic sacs. Delayed cleavage beyond day eight leads to monoamniotic twins, while splitting after day thirteen results in conjoined twins.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Cleavage Post-Fertilization",
-     "Chorionicity & Amnionicity",
-     "Incidence & Key Risk"
-    ],
-    "rows": [
-     [
-      "Days 1 to 3 (Morula)",
-      "Dichorionic Diamniotic (DCDA)",
-      "25 to 30% of MZ twins; lowest complication rate"
-     ],
-     [
-      "Days 4 to 8 (Blastocyst)",
-      "Monochorionic Diamniotic (MCDA)",
-      "70 to 75% of MZ twins; risk of TTTS, TAPS, and sFGR"
-     ],
-     [
-      "Days 8 to 12 (Implanted)",
-      "Monochorionic Monoamniotic (MCMA)",
-      "1 to 2% of MZ twins; extreme risk of cord entanglement"
-     ],
-     [
-      "> Day 13 (Embryonic disc)",
-      "Conjoined twins (Thoracopagus)",
-      "< 1 in 50,000 births; requires specialized surgical separation"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Twin-to-twin transfusion syndrome** (TTTS) complicates 10 to 15 percent of monochorionic diamniotic pregnancies, caused by unbalanced deep unidirectional **arteriovenous (AV) placental anastomoses**. Diagnostic criteria mandate oligohydramnios (maximum vertical pocket **MVP < 2 cm**) in the donor twin and polyhydramnios (**MVP > 8 cm** before 20 weeks, or > 10 cm later) in the recipient twin. Clinically, key parameters encompass arteriovenous anastomoses.",
-   "say": "Twin-to-twin transfusion syndrome results from unbalanced inter-twin vascular communication across deep arteriovenous anastomoses in monochorionic placentas. The donor twin becomes hypovolemic and oliguric, presenting with severe oligohydramnios. Conversely, the recipient twin suffers hypervolemia and polyuria, leading to massive polyhydramnios and high-output cardiovascular compromise.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Deep placental arteriovenous anastomoses direct flow to recipient"
-     },
-     {
-      "id": "b",
-      "label": "Donor: hypovolemia, renin-angiotensin activation, oliguria, MVP < 2 cm"
-     },
-     {
-      "id": "c",
-      "label": "Recipient: hypervolemia, ANP release, polyuria, MVP > 8-10 cm"
-     },
-     {
-      "id": "d",
-      "label": "Progressive donor stuck-twin status and recipient heart failure"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **Quintero staging system** classifies TTTS into five progressive clinical stages: **Stage I** (amniotic fluid discordance alone); **Stage II** (absent donor bladder); **Stage III** (abnormal Doppler: absent/reversed end-diastolic velocity in umbilical artery, reversed ductus venosus a-wave, or pulsatile umbilical vein); **Stage IV** (fetal hydrops); and **Stage V** (death of one or both twins). Clinically, key parameters encompass polyhydramnios-oligohydramnios, 8, 2.",
-   "say": "Quintero staging stratifies severity in twin-to-twin transfusion syndrome. Stage one features fluid discordance while the donor bladder remains visible. In stage two, the donor bladder is no longer visible on ultrasound. Stage three adds abnormal vascular Doppler flow patterns. Stage four is characterized by recipient or donor hydrops, and stage five indicates demise of one or both fetuses.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Quintero Stage",
-     "Sonographic & Doppler Criteria",
-     "Recommended Therapeutic Action"
-    ],
-    "rows": [
-     [
-      "Stage I",
-      "Oligohydramnios (MVP <2 cm) & polyhydramnios (MVP >8 cm)",
-      "Conservative surveillance or fetoscopic laser if symptomatic"
-     ],
-     [
-      "Stage II",
-      "Donor bladder persistently empty / not visualized",
-      "Fetoscopic laser photocoagulation of anastomoses"
-     ],
-     [
-      "Stage III",
-      "Critically abnormal Dopplers (UA AREDF, DV reversed a-wave)",
-      "Urgent fetoscopic laser surgery"
-     ],
-     [
-      "Stage IV",
-      "Fetal hydrops (ascites, pericardial/pleural effusion)",
-      "Urgent fetoscopic laser surgery; guarded prognosis"
-     ],
-     [
-      "Stage V",
-      "Demise of one or both fetuses",
-      "Specialized surveillance for survivor neurological injury"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Fetoscopic laser photocoagulation** of all connecting vascular anastomoses along the vascular equator (Solomon technique) is the definitive gold standard treatment for **Quintero Stage II to IV TTTS** between 16 and 26 weeks gestation, significantly improving dual survival and reducing neurological morbidity compared to serial amnioreduction. Clinically, key parameters encompass communicating anastomoses.",
-   "say": "Fetoscopic laser photocoagulation is the primary curative intervention for severe twin-to-twin transfusion syndrome between sixteen and twenty-six weeks. Using a slender operative fetoscope, the surgeon coagulates all anastomotic vessels crossing the placental vascular equator, functionally converting the single shared placenta into two distinct independent circulations.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Fetoscopic Laser Coagulation",
-     "points": [
-      "Definitive interruption of underlying AV anastomoses",
-      "Significantly higher dual survival (~65 to 70%)",
-      "Reduces long-term neurodevelopmental impairment (< 10%)"
-     ]
+  "refs": [
+    "Williams Obstetrics 25e Ch 45 (Multifetal Gestation)",
+    "Ten Teachers Gynaecology 21e",
+    "ISUOG Practice Guidelines (Role of Ultrasound in Twin Pregnancy)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Establishing accurate **chorionicity** via first trimester ultrasound (11 to 13 weeks 6 days) is the single most critical prognostic determinant in twin gestations. Dichorionic diamniotic (DCDA) twins exhibit a thick dividing membrane and the **twin-peak or lambda sign**, whereas monochorionic diamniotic (MCDA) twins display a thin membrane and the **T-sign**. Clinically, key parameters encompass monozygotic twins, cleavage timing, 0, 3, 30, 4, 8, 70, 12, 1, 2.",
+      "say": "Determining chorionicity during the eleven to thirteen week window is the fundamental cornerstone of twin management. Dichorionic twins show a triangular projection of placental tissue extending into the base of the inter-twin membrane, known as the lambda or twin-peak sign. In contrast, monochorionic gestations demonstrate right-angle membrane insertion forming the characteristic T-sign.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-multiple-pregnancy-fig1.webp",
+        "ar": 1.7778,
+        "caption": "First-trimester ultrasound signs of chorionicity: Lambda versus T-sign. Credit: StewardMD.",
+        "alt": "Ultrasound comparison demonstrating the thick triangular lambda sign in dichorionic twins versus the thin T-sign in monochorionic twin gestations."
+      }
     },
-    "right": {
-     "title": "Serial Amnioreduction",
-     "points": [
-      "Palliative removal of excess recipient amniotic fluid",
-      "Underlying vascular shunts remain active and uncorrected",
-      "High rate of neurological handicap in survivors (~25%)"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "**Twin anemia-polycythemia sequence** (TAPS) is characterized by large hemoglobin discordance without severe amniotic fluid volume discrepancy, mediated by microscopic (<1 mm) AV anastomoses. Diagnosis relies on Doppler **middle cerebral artery peak systolic velocity** (MCA-PSV): >1.5 MoM in the anemic donor and <1.0 MoM in the polycythemic recipient. Clinically, key parameters encompass twin anaemia-polycythaemia sequence, hemoglobin difference.",
-   "say": "Twin anemia-polycythemia sequence is a distinct form of chronic feto-fetal transfusion driven by miniscule arteriovenous anastomoses. Because flow rates are slow, amniotic fluid volume discrepancies do not develop. Instead, diagnosis is made by measuring middle cerebral artery peak systolic velocity, which exceeds one point five multiples of the median in the donor and falls below one point zero in the recipient.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Microscopic AV placental anastomoses (< 1 mm diameter)"
-     },
-     {
-      "id": "b",
-      "label": "Slow chronic transfer of red blood cells without volume shifts"
-     },
-     {
-      "id": "c",
-      "label": "Donor MCA-PSV > 1.5 MoM indicates moderate-to-severe anemia"
-     },
-     {
-      "id": "d",
-      "label": "Recipient MCA-PSV < 1.0 MoM indicates severe polycythemia"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Twin reversed arterial perfusion** (TRAP) sequence features a parasitic acardiac twin perfused retrograde by a normal pump twin via an artery-to-artery placental anastomosis. The pump twin faces severe high-output cardiac failure and hydrops, managed by **intrafetal radiofrequency ablation** (RFA) or bipolar cord occlusion of the acardiac twin's vessels. Clinically, key parameters encompass TRAP sequence.",
-   "say": "Twin reversed arterial perfusion sequence is a rare monochorionic complication where an abnormal acardiac twin lacks a functioning heart. A normal pump twin perfuses the acardiac mass retrograde through large superficial arterio-arterial anastomoses. Because this imposes severe high-output heart failure on the pump twin, minimally invasive radiofrequency ablation is performed to arrest flow to the parasite.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Acardiac Twin (Parasite)",
-     "points": [
-      "Gross malformation: absent cranial vault and heart",
-      "Receives deoxygenated blood retrograde via umbilical artery",
-      "Pure parasitic dependent tissue mass"
-     ]
+    {
+      "tx": "The timing of **monozygotic twinning** cleavage governs subsequent placentation: cleavage within days 1 to 3 yields **dichorionic diamniotic** twins (25-30%); days 4 to 8 yields **monochorionic diamniotic** twins (70-75%); days 8 to 12 yields **monochorionic monoamniotic** twins (1-2%); and cleavage beyond day 13 results in conjoined twins. Clinically, key parameters encompass lambda sign, T-sign, twin peak sign, 98.",
+      "say": "In monozygotic pregnancies, the timing of embryo division determines structural anatomy. Separation during the morula stage in the first three days creates two distinct placentas and sacs. Division between days four and eight produces a single placenta with two amniotic sacs. Delayed cleavage beyond day eight leads to monoamniotic twins, while splitting after day thirteen results in conjoined twins.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cleavage Post-Fertilization",
+          "Chorionicity & Amnionicity",
+          "Incidence & Key Risk"
+        ],
+        "rows": [
+          [
+            "Days 1 to 3 (Morula)",
+            "Dichorionic Diamniotic (DCDA)",
+            "25 to 30% of MZ twins; lowest complication rate"
+          ],
+          [
+            "Days 4 to 8 (Blastocyst)",
+            "Monochorionic Diamniotic (MCDA)",
+            "70 to 75% of MZ twins; risk of TTTS, TAPS, and sFGR"
+          ],
+          [
+            "Days 8 to 12 (Implanted)",
+            "Monochorionic Monoamniotic (MCMA)",
+            "1 to 2% of MZ twins; extreme risk of cord entanglement"
+          ],
+          [
+            "> Day 13 (Embryonic disc)",
+            "Conjoined twins (Thoracopagus)",
+            "< 1 in 50,000 births; requires specialized surgical separation"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Pump Twin (Donor)",
-     "points": [
-      "Structurally normal cardiovascular architecture",
-      "High-output cardiomegaly, polyhydramnios, hydrops risk",
-      "High mortality (50%) without selective vascular occlusion"
-     ]
+    {
+      "tx": "**Twin-to-twin transfusion syndrome** (TTTS) complicates 10 to 15 percent of monochorionic diamniotic pregnancies, caused by unbalanced deep unidirectional **arteriovenous (AV) placental anastomoses**. Diagnostic criteria mandate oligohydramnios (maximum vertical pocket **MVP < 2 cm**) in the donor twin and polyhydramnios (**MVP > 8 cm** before 20 weeks, or > 10 cm later) in the recipient twin. Clinically, key parameters encompass arteriovenous anastomoses.",
+      "say": "Twin-to-twin transfusion syndrome results from unbalanced inter-twin vascular communication across deep arteriovenous anastomoses in monochorionic placentas. The donor twin becomes hypovolemic and oliguric, presenting with severe oligohydramnios. Conversely, the recipient twin suffers hypervolemia and polyuria, leading to massive polyhydramnios and high-output cardiovascular compromise.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/twin-twin-transfusion-syndrome-fig1.webp",
+        "alt": "Uterine diagram and fetoscopy view of monochorionic twins with unequal fluid and laser treatment of shared vessels.",
+        "caption": "Shared placental vessels and laser treatment in twin transfusion. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "The **Quintero staging system** classifies TTTS into five progressive clinical stages: **Stage I** (amniotic fluid discordance alone); **Stage II** (absent donor bladder); **Stage III** (abnormal Doppler: absent/reversed end-diastolic velocity in umbilical artery, reversed ductus venosus a-wave, or pulsatile umbilical vein); **Stage IV** (fetal hydrops); and **Stage V** (death of one or both twins). Clinically, key parameters encompass polyhydramnios-oligohydramnios, 8, 2.",
+      "say": "Quintero staging stratifies severity in twin-to-twin transfusion syndrome. Stage one features fluid discordance while the donor bladder remains visible. In stage two, the donor bladder is no longer visible on ultrasound. Stage three adds abnormal vascular Doppler flow patterns. Stage four is characterized by recipient or donor hydrops, and stage five indicates demise of one or both fetuses.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Quintero Stage",
+          "Sonographic & Doppler Criteria",
+          "Recommended Therapeutic Action"
+        ],
+        "rows": [
+          [
+            "Stage I",
+            "Oligohydramnios (MVP <2 cm) & polyhydramnios (MVP >8 cm)",
+            "Conservative surveillance or fetoscopic laser if symptomatic"
+          ],
+          [
+            "Stage II",
+            "Donor bladder persistently empty / not visualized",
+            "Fetoscopic laser photocoagulation of anastomoses"
+          ],
+          [
+            "Stage III",
+            "Critically abnormal Dopplers (UA AREDF, DV reversed a-wave)",
+            "Urgent fetoscopic laser surgery"
+          ],
+          [
+            "Stage IV",
+            "Fetal hydrops (ascites, pericardial/pleural effusion)",
+            "Urgent fetoscopic laser surgery; guarded prognosis"
+          ],
+          [
+            "Stage V",
+            "Demise of one or both fetuses",
+            "Specialized surveillance for survivor neurological injury"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Fetoscopic laser photocoagulation** of all connecting vascular anastomoses along the vascular equator (Solomon technique) is the definitive gold standard treatment for **Quintero Stage II to IV TTTS** between 16 and 26 weeks gestation, significantly improving dual survival and reducing neurological morbidity compared to serial amnioreduction. Clinically, key parameters encompass communicating anastomoses.",
+      "say": "Fetoscopic laser photocoagulation is the primary curative intervention for severe twin-to-twin transfusion syndrome between sixteen and twenty-six weeks. Using a slender operative fetoscope, the surgeon coagulates all anastomotic vessels crossing the placental vascular equator, functionally converting the single shared placenta into two distinct independent circulations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fetoscopic Laser Coagulation",
+          "points": [
+            "Definitive interruption of underlying AV anastomoses",
+            "Significantly higher dual survival (~65 to 70%)",
+            "Reduces long-term neurodevelopmental impairment (< 10%)"
+          ]
+        },
+        "right": {
+          "title": "Serial Amnioreduction",
+          "points": [
+            "Palliative removal of excess recipient amniotic fluid",
+            "Underlying vascular shunts remain active and uncorrected",
+            "High rate of neurological handicap in survivors (~25%)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Twin anemia-polycythemia sequence** (TAPS) is characterized by large hemoglobin discordance without severe amniotic fluid volume discrepancy, mediated by microscopic (<1 mm) AV anastomoses. Diagnosis relies on Doppler **middle cerebral artery peak systolic velocity** (MCA-PSV): >1.5 MoM in the anemic donor and <1.0 MoM in the polycythemic recipient. Clinically, key parameters encompass twin anaemia-polycythaemia sequence, hemoglobin difference.",
+      "say": "Twin anemia-polycythemia sequence is a distinct form of chronic feto-fetal transfusion driven by miniscule arteriovenous anastomoses. Because flow rates are slow, amniotic fluid volume discrepancies do not develop. Instead, diagnosis is made by measuring middle cerebral artery peak systolic velocity, which exceeds one point five multiples of the median in the donor and falls below one point zero in the recipient.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Microscopic AV placental anastomoses (< 1 mm diameter)"
+          },
+          {
+            "id": "b",
+            "label": "Slow chronic transfer of red blood cells without volume shifts"
+          },
+          {
+            "id": "c",
+            "label": "Donor MCA-PSV > 1.5 MoM indicates moderate-to-severe anemia"
+          },
+          {
+            "id": "d",
+            "label": "Recipient MCA-PSV < 1.0 MoM indicates severe polycythemia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Twin reversed arterial perfusion** (TRAP) sequence features a parasitic acardiac twin perfused retrograde by a normal pump twin via an artery-to-artery placental anastomosis. The pump twin faces severe high-output cardiac failure and hydrops, managed by **intrafetal radiofrequency ablation** (RFA) or bipolar cord occlusion of the acardiac twin's vessels. Clinically, key parameters encompass TRAP sequence.",
+      "say": "Twin reversed arterial perfusion sequence is a rare monochorionic complication where an abnormal acardiac twin lacks a functioning heart. A normal pump twin perfuses the acardiac mass retrograde through large superficial arterio-arterial anastomoses. Because this imposes severe high-output heart failure on the pump twin, minimally invasive radiofrequency ablation is performed to arrest flow to the parasite.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acardiac Twin (Parasite)",
+          "points": [
+            "Gross malformation: absent cranial vault and heart",
+            "Receives deoxygenated blood retrograde via umbilical artery",
+            "Pure parasitic dependent tissue mass"
+          ]
+        },
+        "right": {
+          "title": "Pump Twin (Donor)",
+          "points": [
+            "Structurally normal cardiovascular architecture",
+            "High-output cardiomegaly, polyhydramnios, hydrops risk",
+            "High mortality (50%) without selective vascular occlusion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Uncomplicated **dichorionic diamniotic** (DCDA) twins are delivered electively between **37 and 37 weeks 6 days**, whereas uncomplicated **monochorionic diamniotic** (MCDA) twins are delivered between **36 and 36 weeks 6 days**. Monochorionic monoamniotic (MCMA) twins mandate elective caesarean delivery between **32 and 34 weeks** due to cord entanglement. Clinically, key parameters encompass delivery timing, monoamniotic twins, 38.",
+      "say": "Delivery timing balances risks of prematurity against in-utero stillbirth. Uncomplicated dichorionic twins are delivered between thirty-seven and thirty-eight weeks. Monochorionic diamniotic twins require delivery between thirty-six and thirty-seven weeks. Due to high hazards of cord entanglement, monoamniotic twins require planned caesarean delivery between thirty-two and thirty-four weeks after steroid maturation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Twin Placentation Type",
+          "Recommended Delivery Window",
+          "Recommended Delivery Mode"
+        ],
+        "rows": [
+          [
+            "Dichorionic Diamniotic (DCDA)",
+            "37+0 to 37+6 weeks gestation",
+            "Vaginal trial permitted if first twin is cephalic"
+          ],
+          [
+            "Monochorionic Diamniotic (MCDA)",
+            "36+0 to 36+6 weeks gestation",
+            "Vaginal trial permitted in specialized centres if twin A cephalic"
+          ],
+          [
+            "Monochorionic Monoamniotic (MCMA)",
+            "32+0 to 34+0 weeks gestation",
+            "Mandatory elective caesarean section due to cord entanglement"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Uncomplicated **dichorionic diamniotic** (DCDA) twins are delivered electively between **37 and 37 weeks 6 days**, whereas uncomplicated **monochorionic diamniotic** (MCDA) twins are delivered between **36 and 36 weeks 6 days**. Monochorionic monoamniotic (MCMA) twins mandate elective caesarean delivery between **32 and 34 weeks** due to cord entanglement. Clinically, key parameters encompass delivery timing, monoamniotic twins, 38.",
-   "say": "Delivery timing balances risks of prematurity against in-utero stillbirth. Uncomplicated dichorionic twins are delivered between thirty-seven and thirty-eight weeks. Monochorionic diamniotic twins require delivery between thirty-six and thirty-seven weeks. Due to high hazards of cord entanglement, monoamniotic twins require planned caesarean delivery between thirty-two and thirty-four weeks after steroid maturation.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Twin Placentation Type",
-     "Recommended Delivery Window",
-     "Recommended Delivery Mode"
-    ],
-    "rows": [
-     [
-      "Dichorionic Diamniotic (DCDA)",
-      "37+0 to 37+6 weeks gestation",
-      "Vaginal trial permitted if first twin is cephalic"
-     ],
-     [
-      "Monochorionic Diamniotic (MCDA)",
-      "36+0 to 36+6 weeks gestation",
-      "Vaginal trial permitted in specialized centres if twin A cephalic"
-     ],
-     [
-      "Monochorionic Monoamniotic (MCMA)",
-      "32+0 to 34+0 weeks gestation",
-      "Mandatory elective caesarean section due to cord entanglement"
-     ]
-    ]
-   }
-  }
- ]
+  ]
 }
