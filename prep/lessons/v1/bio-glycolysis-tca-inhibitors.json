@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Pathway inhibitors and poisons",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Examiners return to the same poison map every year, so learn each blocker with the metabolite that piles up behind it. **Fluoride** stops enolase near the glycolysis exit, iodoacetate alkylates the cysteine of glyceraldehyde-3-phosphate dehydrogenase mid pathway, and arsenate tricks that same enzyme into wasting the payoff. Location predicts pattern: early blocks starve everything downstream, late blocks flood upstream intermediates.",
+   "say": "Learn each blocker with the metabolite that piles up behind it. Fluoride stops enolase near the exit, iodoacetate blocks the mid pathway dehydrogenase, and arsenate tricks that enzyme into wasting the payoff. Early blocks starve downstream, late blocks flood upstream.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Blocker", "Enzyme stopped", "What accumulates"],
+    "rows": [
+     ["Iodoacetate", "GAP dehydrogenase (cysteine)", "Fructose-1,6-BP and trioses"],
+     ["Arsenate", "GAP dehydrogenase (uncouples)", "Heat instead of ATP"],
+     ["Fluoride", "Enolase", "2 and 3-phosphoglycerate"],
+     ["Arsenite", "PDH and alpha-KGDH (lipoate)", "Pyruvate and lactate"]
+    ]
+   }
+  },
+  {
+   "tx": "Arsenic deserves two names because its two forms attack differently: **arsenate** mimics phosphate and uncouples, while arsenite binds lipoate sulfhydryls and arrests decarboxylation. Acute poisoning brings vomiting, rice water diarrhoea, garlic breath, QT prolongation and shock from capillary leak. Chronic exposure adds pigmentation, palmar keratosis and Mees lines on nails, with skin and bladder cancer risk rising over years.",
+   "say": "Arsenate mimics phosphate and uncouples, while arsenite binds lipoate and arrests decarboxylation. Acute poisoning brings vomiting, rice water diarrhoea, garlic breath and shock. Chronic exposure adds pigmentation, palmar keratosis and Mees lines on nails.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Arsenate (phosphate mimic)", "points": ["Substitutes at GAPDH step", "Product hydrolyses at once", "Glycolysis without ATP gain"]},
+    "right": {"title": "Arsenite (lipoate binder)", "points": ["Freezes PDH swinging arm", "Also blocks alpha-KGDH", "Pyruvate and lactate pile up"]
+    }
+   }
+  },
+  {
+   "tx": "Within the cycle, **malonate** is the defining competitive inhibitor because its two carboxyl groups imitate succinate closely enough to occupy succinate dehydrogenase without reacting. Succinate accumulates, fumarate falls, and extra succinate outcompetes the blocker, the exact signature of competitive kinetics. Fluoroacetate works sneakier: aconitase converts it to fluorocitrate, which then jams aconitase itself and halts citrate handling.",
+   "say": "Malonate imitates succinate and competitively blocks succinate dehydrogenase, so succinate accumulates and extra succinate outcompetes it. Fluoroacetate is sneakier because aconitase converts it to fluorocitrate, which then jams aconitase itself.",
+   "vis": null
+  },
+  {
+   "tx": "Downstream of the cycle, chain poisons reproduce cycle failure from the respiration side: rotenone at complex I, antimycin at complex III, and **cyanide** or carbon monoxide at complex IV all leave NADH reduced and ATP falling. Cyanide binds ferric iron of cytochrome oxidase, causing bitter almond odour, severe lactic acidosis and venous blood that looks arterial because tissues cannot extract oxygen.",
+   "say": "Chain poisons reproduce cycle failure from the respiration side. Cyanide binds ferric iron of cytochrome oxidase, causing bitter almond odour and severe lactic acidosis. Venous blood looks arterial because tissues cannot extract oxygen.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Poison", "Site", "Antidote or rescue pointer"],
+    "rows": [
+     ["Cyanide", "Complex IV ferric iron", "Hydroxocobalamin; nitrites plus thiosulfate"],
+     ["Carbon monoxide", "Complex IV and haemoglobin", "High flow oxygen, hyperbaric in selected cases"],
+     ["Rotenone", "Complex I", "Supportive, no specific antidote"],
+     ["Oligomycin", "ATP synthase F0", "Supportive, respiration backs up"]
+    ]
+   }
+  },
+  {
+   "tx": "Two drug like blockers complete the map by acting on ATP capture rather than electron flow. **Oligomycin** plugs the ATP synthase proton channel, so the gradient climbs until pumping stalls and respiration secondarily stops. Uncouplers such as dinitrophenol or brown fat thermogenin do the opposite, short circuiting the gradient into heat with respiration racing and ATP falling, causing fever and weight loss.",
+   "say": "Oligomycin plugs the ATP synthase channel, so the gradient climbs until pumping stalls. Uncouplers do the opposite, short circuiting the gradient into heat with respiration racing and ATP falling, causing fever and weight loss.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Oligomycin (plug)", "points": ["Protons cannot re-enter", "Gradient maximal, chain stalls", "Oxygen use falls"]},
+    "right": {"title": "Uncoupler (short circuit)", "points": ["Protons leak back freely", "Gradient collapses to heat", "Oxygen use races, ATP falls"]
+    }
+   }
+  },
+  {
+   "tx": "At the bedside, read the pile up to find the block: lactate with pyruvate points to **pyruvate dehydrogenase**, succinate excess suggests malonate style competition in teaching experiments, and citrate arrest suggests fluoroacetate. Metformin weakly restrains complex I and hepatic glucose output, which is why lactate rises when kidneys fail or perfusion collapses during its use. The map you have built now predicts each pattern before you memorise it.",
+   "say": "Read the pile up to find the block. Lactate with pyruvate points to pyruvate dehydrogenase, and citrate arrest suggests fluoroacetate. Metformin weakly restrains complex one, which is why lactate rises when kidneys fail or perfusion collapses.",
+   "vis": {
+    "kind": "flow",
+    "title": "From pile up to poison",
+    "nodes": [
+     {"id": "obs", "label": "Which metabolite piled up?"},
+     {"id": "enz", "label": "Enzyme just downstream"},
+     {"id": "poi", "label": "Blocker that fits that enzyme"}
+    ],
+    "edges": [["obs", "enz"], ["enz", "poi"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

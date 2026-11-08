@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-amino-acid-disorders",
+ "subject": "biochemistry",
+ "title": "Homocystinuria and cystinuria",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Methionine cycles through SAM to **homocysteine**, which either remethylates to methionine (folate and B12 dependent methionine synthase, or betaine in liver) or transsulfurates through cystathionine beta-synthase (pyridoxal phosphate) toward cysteine. Classic homocystinuria blocks transsulfuration, so homocysteine and methionine both climb, while nutritional folate or B12 failure blocks remethylation, raising homocysteine with methionine low or normal, the pairing that separates them.",
+   "say": "Homocysteine either remethylates using folate and B12 or transsulfurates using pyridoxal phosphate. Classic homocystinuria raises homocysteine and methionine together, while vitamin failure raises homocysteine alone.",
+   "vis": {
+    "kind": "flow",
+    "title": "Homocysteine crossroads",
+    "nodes": [
+     {"id": "met", "label": "Methionine (via SAM)"},
+     {"id": "hcy", "label": "Homocysteine"},
+     {"id": "rem", "label": "Remethylate (folate, B12)"},
+     {"id": "cys", "label": "Transsulfurate to cysteine (B6)"}
+    ],
+    "edges": [["met", "hcy"], ["hcy", "rem"], ["hcy", "cys"]]
+   }
+  },
+  {
+   "tx": "Classic **homocystinuria** announces itself across four systems: ectopia lentis dislocated downward and inward, Marfanoid tall habitus with osteoporosis, intellectual disability and psychiatric disease, and premature arterial and venous thrombosis (the killer, including with anaesthesia or dehydration). Lens direction separates it from Marfan syndrome (upward and outward, fibrillin, aortic root), the most reliable paired contrast in metabolic examinations.",
+   "say": "Classic homocystinuria dislocates the lens downward, unlike Marfan upward. Tall habitus, intellectual disability and premature thrombosis complete four systems. Lens direction separates the two syndromes reliably.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Homocystinuria (CBS absent)", "points": ["Lens DOWN and in", "Thrombosis prominent", "Methionine high, diet treats"]},
+    "right": {"title": "Marfan syndrome (fibrillin)", "points": ["Lens UP and out", "Aortic root dilation prominent", "Methionine normal"]
+    }
+   }
+  },
+  {
+   "tx": "About half of classic patients respond to pharmacological **pyridoxine** (residual synthase stabilised), tested formally before committing to lifelong low methionine, cystine supplemented diet with betaine remethylation support and folate/B12 optimisation. Thrombosis precautions (hydration, avoiding oestrogen contraceptives where possible, perioperative planning) and ophthalmology, skeletal and developmental surveillance structure follow up as tightly as amino acid levels.",
+   "say": "About half respond to pyridoxine before committing to low methionine diet with betaine support. Thrombosis precautions and multi system surveillance structure follow up as tightly as amino acid levels.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test result", "Interpretation"],
+    "rows": [
+     ["Homocysteine high, methionine high", "Transsulfuration block (CBS)"],
+     ["Homocysteine high, methionine low/normal", "Remethylation block (folate, B12, MTHFR axis)"],
+     ["Homocysteine mildly high, vitamins low", "Nutritional, correct and recheck"],
+     ["Cystine stones, COLA amino acids in urine", "Cystinuria transporter, different disease"]
+    ]
+   }
+  },
+  {
+   "tx": "**Cystinuria** is a transport, not enzyme, failure: the dibasic amino acid transporter (rBAT/b0,+AT) in gut and proximal tubule loses cystine, ornithine, lysine and arginine (COLA), and poorly soluble cystine precipitates as hexagonal crystals and recurrent staghorn calculi from childhood. Cyanide nitroprusside positivity, stone analysis and family history confirm it; gut loss is silent because peptides still absorb.",
+   "say": "Cystinuria loses cystine, ornithine, lysine and arginine through a gut and kidney transporter. Poorly soluble cystine forms hexagonal stones from childhood. Gut loss stays silent because peptides still absorb.",
+   "vis": null
+  },
+  {
+   "tx": "Stone prevention exploits solubility chemistry: urine volumes above three litres daily including overnight drinking, urinary **alkalinisation** (potassium citrate, pH above 7 to 7.5), sodium and animal protein moderation, and thiol chelators (tiopronin preferred over penicillamine for tolerance) that cleave cystine into soluble mixed disulfides for refractory cases. Urology partnership plans stone procedures, because prevention fails episodically even in exemplary patients.",
+   "say": "Prevention needs volumes above three litres including overnight, alkalinisation above pH seven, and thiol chelators for refractory cases. Urology partnership plans procedures, because prevention fails episodically.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Chemistry exploited"],
+    "rows": [
+     ["High urine volume day and night", "Dilutes cystine below precipitation"],
+     ["Potassium citrate alkali", "Cystine solubility rises with pH"],
+     ["Tiopronin thiol exchange", "Soluble mixed disulfides excreted"],
+     ["Sodium and methionine moderation", "Less cystine filtered and excreted"]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguish cystinuria from **cystinosis** once and forever: cystinosis stores cystine inside lysosomes (CTNS transporter) in every tissue, causing infantile Fanconi syndrome, photophobia from corneal crystals, hypothyroidism and myopathy, treated with cysteamine depletion. Same amino acid, opposite compartment and prognosis. Sulfur metabolism thus spans vitamin responsive enzyme failure, stone transport failure and lysosomal failure in three consecutive stems.",
+   "say": "Cystinosis stores cystine inside lysosomes everywhere, causing Fanconi syndrome and photophobia, treated with cysteamine. Same amino acid, opposite compartment and prognosis from cystinuria. Learn the pair once, forever.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Cystinuria (apical transporter)", "points": ["Kidney stones only", "Hexagonal crystals", "Alkali and thiols"]},
+    "right": {"title": "Cystinosis (lysosomal CTNS)", "points": ["Fanconi, cornea, thyroid, muscle", "Crystals in tissues", "Cysteamine depletion"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

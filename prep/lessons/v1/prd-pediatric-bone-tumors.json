@@ -1,0 +1,196 @@
+{
+ "gen": "AI",
+ "id": "prd-pediatric-bone-tumors",
+ "minutes": 7,
+ "module": "prd-pediatric-fractures-nat",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "The classic malignant bone tumour of teenagers grows at the metaphysis near active growth plates. Around the knee is the favourite address, with the distal femur leading by a wide margin.",
+   "tx": "**Osteosarcoma metaphyseal location** defines the commonest primary malignant bone tumour of childhood, peaking at **10-20 years**. It favours the metaphysis (the growing end) of long bones, with **distal femur 45%** and **proximal tibia 20%**, so persistent knee pain in an adolescent always earns a radiograph.",
+   "vis": {
+    "cols": [
+     "Site",
+     "Share of cases",
+     "Clinical clue"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Distal femur",
+      "45%",
+      "Knee pain in adolescent"
+     ],
+     [
+      "Proximal tibia",
+      "20%",
+      "Swelling below knee"
+     ],
+     [
+      "Proximal humerus",
+      "Next commonest",
+      "Shoulder pain and mass"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Its radiograph looks aggressive and disorganised. Cloudy tumour bone, a lifted periosteal triangle and spicules radiating like sun rays announce that this lesion needs urgent specialist referral.",
+   "tx": "**Osteoid matrix and Codman triangle** mark the classic osteosarcoma radiograph. Cloud-like cumulus osteoid (tumour bone) calcification mixes with cortical destruction, a **sunburst periosteal reaction**, and a **Codman triangle** where raised periosteum meets intact cortex at the tumour edge. Any adolescent with this pattern bypasses routine follow-up and enters the tumour pathway immediately.",
+   "vis": {
+    "alt": "Bone tumour diagram showing osteosarcoma Codman triangle, sunburst reaction and Ewing onion-skin pattern.",
+    "ar": 1.3333,
+    "caption": "Osteosarcoma sunburst with Codman triangle, Ewing sarcoma onion-skin reaction. Credit: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/bone-tumours-osteosarcoma-ewing-paget-fig1.webp"
+   }
+  },
+  {
+   "say": "Ewing sarcoma is usually located in the shaft rather than the bone end, and it eats through bone in a moth-eaten pattern. A large soft tissue mass often looks out of proportion to the bony change.",
+   "tx": "**Ewing sarcoma diaphyseal permeative** change affects the diaphysis (shaft) or metadiaphysis of long bones and the pelvis. Permeative moth-eaten destruction, driven by the **EWSR1-FLI1 translocation, t(11;22)**, spreads through cortex with a disproportionately large soft-tissue mass and frequent fever mimicking infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Metaphyseal near growth plate",
+      "Cloud-like osteoid matrix",
+      "Sunburst reaction, Codman triangle"
+     ],
+     "title": "Osteosarcoma pattern"
+    },
+    "right": {
+     "points": [
+      "Diaphyseal shaft lesion",
+      "Permeative moth-eaten destruction",
+      "Huge soft-tissue mass, fever"
+     ],
+     "title": "Ewing sarcoma pattern"
+    }
+   }
+  },
+  {
+   "say": "Layer upon layer of new periosteal bone gives Ewing its onion-skin look. Each sheet records a growth spurt of tumour lifting the periosteum, pausing, then lifting it again.",
+   "tx": "**Onion-skin periostitis** describes multilayered concentric lamellated subperiosteal new bone, classic for Ewing sarcoma. Repeated periosteal lifting lays down parallel sheets around the shaft, and magnetic resonance imaging (MRI, magnetic resonance scan) shows the accompanying massive soft-tissue mass far exceeding the visible bone destruction.",
+   "vis": {
+    "alt": "Ewing sarcoma imaging diagram with layered periosteal reaction.",
+    "ar": 1.3333,
+    "caption": "Ewing sarcoma with lamellated periosteal reaction and soft-tissue mass. Credit: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/ewing-sarcoma-fig1.webp"
+   }
+  },
+  {
+   "say": "Not every lytic lesion in a child is malignant. Histiocytosis punches clean holes in the skull with bevelled edges, and in the spine it can flatten a whole vertebral body like a pancake.",
+   "tx": "**Langerhans cell histiocytosis punched-out** lesions lack sclerotic margins and favour the skull, where a **beveled-edge sign** reflects uneven table destruction. In the spine the same process collapses a body into **vertebra plana** (a pancake vertebra), while long bones show endosteal scalloping without aggressive periosteal reaction.",
+   "vis": {
+    "cols": [
+     "Site",
+     "Signature appearance",
+     "Behaviour"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Skull",
+      "Punched-out lesion, beveled edge",
+      "No sclerotic margin"
+     ],
+     [
+      "Spine",
+      "Vertebra plana collapse",
+      "Disc spaces preserved"
+     ],
+     [
+      "Long bones",
+      "Lytic lesion, endosteal scalloping",
+      "Usually non-aggressive margins"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "A ballooned, blood-filled cyst near the growth plate shows a giveaway pattern on MRI. Multiple fluid levels settle inside it, layering blood products at different heights.",
+   "tx": "An **Aneurysmal bone cyst fluid levels** pattern identifies this expansile eccentric lytic metaphyseal lesion with internal bony septations. T2-weighted MRI (magnetic resonance imaging) demonstrates multiple **fluid-fluid levels** from layered blood products, although the same levels can overlie a secondary cyst inside another primary tumour.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "Septated expansile cavity"
+     ],
+     [
+      "b",
+      "c",
+      "Layered blood products settle"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Eccentric lytic metaphyseal lesion"
+     },
+     {
+      "id": "b",
+      "label": "T2 MRI internal septations"
+     },
+     {
+      "id": "c",
+      "label": "Multiple fluid-fluid levels"
+     }
+    ]
+   }
+  },
+  {
+   "say": "The commonest benign incidental lesion sits eccentrically in the cortex with a scalloped sclerotic rim. Small ones are called fibrous cortical defects, and most simply vanish as the skeleton matures.",
+   "tx": "**Non-ossifying fibroma cortical origin** describes a benign eccentric multilocular lytic lesion with a scalloped sclerotic border in the posterior distal femur or proximal tibia metaphysis. A lesion **under 2 cm** is a fibrous cortical defect; larger lesions still heal spontaneously and need intervention only if fracture threatens.",
+   "vis": {
+    "cols": [
+     "Lesion",
+     "Margin and site",
+     "Usual course"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Fibrous cortical defect",
+      "Cortical, under 2 cm",
+      "Involutes with growth"
+     ],
+     [
+      "Non-ossifying fibroma",
+      "Eccentric, scalloped sclerotic rim",
+      "Observe unless fracture risk"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "One benign outgrowth carries an absolute diagnostic sign. Its cortex and marrow flow uninterrupted from the parent bone, and the stalk points away from the nearest joint as growth proceeds.",
+   "tx": "**Osteochondroma marrow continuity** is pathognomonic: cortex and medullary cavity continue directly from parent bone into the exostosis (a cartilage-capped bony outgrowth). The stalk points away from the nearest joint, and a cartilage cap thicker than expected for age raises concern for malignant change.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Cortex flows into the stalk",
+      "Marrow cavity fully continuous",
+      "Points away from joint"
+     ],
+     "title": "Osteochondroma signs"
+    },
+    "right": {
+     "points": [
+      "Cortical break or destruction",
+      "Separate soft-tissue mass",
+      "Thick irregular cartilage cap"
+     ],
+     "title": "Worrying change"
+    }
+   }
+  }
+ ],
+ "subject": "ss-paediatric-radiology",
+ "system": "msk",
+ "title": "Pediatric Bone Tumors: Osteosarcoma, Ewing Sarcoma and LCH",
+ "v": 1
+}
