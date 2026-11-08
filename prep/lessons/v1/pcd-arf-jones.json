@@ -1,0 +1,198 @@
+{
+  "v": 1,
+  "id": "pcd-arf-jones",
+  "title": "Acute Rheumatic Fever and Rheumatic Heart Disease",
+  "module": "Acquired Pediatric Heart Diseases",
+  "subject": "ss-paediatric-cardiology",
+  "system": "cvs",
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The diagnosis of acute rheumatic fever follows the revised Jones criteria, which account for background population disease risk.",
+      "tx": "Diagnostic criteria adhere to **revised Jones criteria 2015**. AHA **2015** revised Jones criteria distinguish low-risk from moderate-to-high risk populations; diagnosis requires **2** major criteria OR **1** major plus **2** minor criteria alongside evidence of preceding Group A Streptococcus infection. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/phe-screening-fig1.webp",
+        "ar": 1.8349,
+        "caption": "Pathogenesis of acute rheumatic fever and rheumatic heart disease with autoimmune valve damage. Image: StewardMD original.",
+        "alt": "Diagram illustrating streptococcal pharyngeal infection progressing to autoimmune carditis."
+      }
+    },
+    {
+      "say": "In moderate-to-high risk populations, the criteria expand to recognize monoarthritis and subclinical echocardiographic carditis.",
+      "tx": "Diagnostic recognition identifies **major criteria in high-risk groups**. In moderate/high-risk endemic populations, major criteria include carditis (clinical or subclinical by Doppler echo), monoarthritis or polyarthritis, polyarthralgia, chorea, erythema marginatum, and subcutaneous nodules, preventing underdiagnosis of isolated subclinical carditis. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Category",
+          "Criteria Components",
+          "Specific Diagnostic Rules"
+        ],
+        "rows": [
+          [
+            "Major Criteria",
+            "Carditis (clinical or subclinical echo), Arthritis (mono or poly), Polyarthralgia, Chorea, Erythema marginatum, Nodules",
+            "Joint pain cannot serve as both major and minor"
+          ],
+          [
+            "Minor Criteria",
+            "Monoarthralgia, Fever (>=38.0 C), ESR >=30 mm/hr or CRP >=3.0 mg/dL, Prolonged PR interval on ECG",
+            "PR interval prolonged for age cannot be used if carditis is major"
+          ],
+          [
+            "GAS Evidence",
+            "Elevated/rising ASO or anti-DNase B, positive rapid antigen, or positive throat culture",
+            "Mandatory except in isolated Sydenham chorea or insidious carditis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sydenham chorea represents a delayed manifestation of post-streptococcal autoimmunity that can establish the diagnosis in isolation.",
+      "tx": "Delayed clinical presentation reflects **Sydenham chorea latency**. Sydenham chorea may present after a prolonged latent period of **1 to 6 months** post-streptococcal pharyngitis and does not require streptococcal serological proof, serving as a standalone diagnostic manifestation of acute rheumatic fever. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sydenham Chorea Presentation",
+          "points": [
+            "Purposeless, involuntary, non-rhythmic choreiform limb movements",
+            "Accompanied by facial grimacing, emotional lability, and hypotonia",
+            "Disappears completely during sleep; exacerbated by emotional stress"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic Exemption Rule",
+          "points": [
+            "Latency period extends up to 1 to 6 months post-streptococcal pharyngitis",
+            "Antistreptococcal antibody titers (ASO) often fall back to normal levels",
+            "Establishes standalone diagnosis of ARF without serological proof of GAS"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Rheumatic carditis predominantly targets the mitral valve apparatus, producing acute mitral regurgitation as the primary initial lesion.",
+      "tx": "Valvular auscultation identifies the **most common valvular lesion**. Mitral regurgitation is the single most common valvular lesion in acute rheumatic carditis (**90%**), followed by aortic regurgitation, manifesting as a high-pitched apical pansystolic murmur radiating to the left axilla. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Rheumatic Carditis (Pancarditis)",
+          "points": [
+            "Active valvulitis with leaflet edema, fibrinous verrucae, and chordal elongation",
+            "Mitral regurgitation is the dominant manifestation encountered in 90% of cases",
+            "High potential for complete anatomic regression following anti-inflammatory therapy"
+          ]
+        },
+        "right": {
+          "title": "Chronic Rheumatic Heart Disease",
+          "points": [
+            "Progressive fibrous scarring, commissural fusion, and chordal shortening",
+            "Produces classic stenotic lesions such as fish-mouth mitral stenosis",
+            "Requires lifelong secondary penicillin prophylaxis to prevent re-activation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A transient mid-diastolic apical murmur frequently arises during acute carditis due to copious blood flow traversing the inflamed mitral valve.",
+      "tx": "Auscultatory findings include the **Carey Coombs murmur**. A short, soft, mid-diastolic murmur at the apex caused by increased flow across an inflamed, oedematous mitral valve during acute carditis confirms active valvulitis in the absence of established anatomical mitral stenosis. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute rheumatic valvulitis produces severe mitral leaflet edema and chordal stretch"
+          },
+          {
+            "id": "b",
+            "label": "Induces substantial acute mitral regurgitation and volume overload"
+          },
+          {
+            "id": "c",
+            "label": "Increased volume of pulmonary venous return crosses the inflamed mitral orifice in diastole"
+          },
+          {
+            "id": "d",
+            "label": "Generates transient low-pitched mid-diastolic apical Carey Coombs murmur"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Anti-inflammatory pharmacotherapy is tailored specifically to the presence and severity of cardiac involvement.",
+      "tx": "Medical stabilization implements **anti-inflammatory therapy**. **Aspirin** (**50-60 mg/kg/day** up to **80-100 mg/kg/day** in 4 divided doses) is indicated for arthritis; oral **prednisolone** (**1-2 mg/kg/day** for **2-3 weeks**) is indicated for moderate-to-severe carditis to suppress active pancarditis. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Presentation",
+          "First-Line Drug",
+          "Dosage & Duration",
+          "Follow-up Strategy"
+        ],
+        "rows": [
+          [
+            "Isolated Arthritis",
+            "Aspirin",
+            "50-60 mg/kg/day up to 80-100 mg/kg/day divided qid for 1-2 weeks",
+            "Taper to 50 mg/kg/day for 2-4 weeks; monitor salicylate levels"
+          ],
+          [
+            "Moderate / Severe Carditis",
+            "Prednisolone",
+            "1-2 mg/kg/day for 2-3 weeks",
+            "Taper over 2-3 weeks; overlap with aspirin to prevent inflammatory rebound"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Continuous long-acting intramuscular penicillin G serves as the worldwide cornerstone of secondary prevention against recurrent streptococcal attacks.",
+      "tx": "Infection prevention institutes **secondary penicillin prophylaxis**. Intramuscular **benzathine penicillin G** (**600,000 units** for <= **27 kg**; **1,200,000 units** for > **27 kg**) administered every **3-4 weeks** is the gold standard secondary prophylaxis against recurrent Group A streptococcal attacks. Comprehensive evaluation and serial clinical assessments remain essential to guide individualized management and ensure optimal patient outcomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Weight <= 27 kg",
+          "points": [
+            "Intramuscular benzathine penicillin G dose: 600,000 units",
+            "Administered every 3 to 4 weeks by deep intramuscular injection",
+            "Maintains continuous protective bactericidal penicillin serum concentrations"
+          ]
+        },
+        "right": {
+          "title": "Weight > 27 kg",
+          "points": [
+            "Intramuscular benzathine penicillin G dose: 1,200,000 units",
+            "Administered every 3 to 4 weeks (every 3 weeks in endemic high-risk regions)",
+            "Oral alternatives reserved strictly for documented penicillin hypersensitivity"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The required duration of secondary antimicrobial prophylaxis depends strictly upon the presence and persistence of rheumatic heart disease.",
+      "tx": "Long-term protocols enforce **prophylaxis duration rules**. Duration of secondary prophylaxis: without carditis = **5 years** or until age **21** (whichever longer); with carditis but no residual valve damage = **10 years** or until age **21**; with persistent valvular disease = **10 years** or until age **40**.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/complement-c3-deficiency-fig1.webp",
+        "ar": 1.33,
+        "caption": "Autoimmune complement activation and inflammatory pathways in post-streptococcal rheumatic injury. Illustration: StewardMD original.",
+        "alt": "Flowchart showing immune complex and complement-mediated tissue inflammation."
+      }
+    }
+  ]
+}

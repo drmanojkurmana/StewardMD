@@ -1,66 +1,75 @@
 {
- "v": 1,
- "module": "med-ibd",
- "subject": "medicine",
- "title": "Inflammatory bowel disease",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**bloody** mucus urgency tenesmus, **UC** continuous rectum proximal, **Crohn** skip mouth anus strictures, **pain** mass fistula abscess, **smoke** Crohn harms UC quits, **NSAID** flares triggers, **family** polyposis screens, **growth** children delays puberty) with **viva** (**urgent** bloody runner, **fistulising** perianal drainer) profiles; **stools** (frequency nocturnal blood) counts. Bowels inflame.",
-   "say": "Bloodies urgencies pains smokes is history: UCs spread Crohns skip families screen growths stall stools count nights wake joints ache eyes red skins nod. Guts bleed.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**wasting** chronic hollows, **clubbing** Crohn warns, **erythema** nodosum shins, **pyoderma** ulcers legs, **episcleritis** uveitis eyes, **perianal** tags fissures fistulas, **mass** RIF Crohn feels, **mouth** aphthous cobbles) with **bedside** (**stool** charts calprotectin pots, **BMI** MUST grades, **BP** dehydrates) pots; **arthritis** (ankylosing sacroiliac) aches. Bodies inflame.",
-   "say": "Wastings clubbings erythemas is exam: pyodermas ulcer episclerites red perianals tag masses feel mouths cobble stools pot BMIs grade pressures drop arthritides stiffen backs fuse. Skins joints.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**calprotectin** scopes triages, **colonoscopy** UC Crohn biopsies, **MRI** small bowel fistulas, **histology** granuloma cryptitis, **CRP** albumin anaemia, **stool** C diff CMV excludes, **TB** ileocaecal AFB, **vitamins** B12 D iron) with **differentials** (**infective** travel cultures resolves, **TB** night sweats caseates, **ischaemic** elderly watershed, **malignancy** mass weight scopes) sorts; **MDT** (surgery radiology decides) meets. Scopes biopsy.",
-   "say": "Calprotectins colonoscopies MRIs is Ix: histologies granulomatise CRPs rise stools exclude TBs sweat ischaemics age malignancies mass MDTs meet resections offer biologics target colectomies cure pouches form. Walls ulcerate.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-ibd-fig1.webp",
-    "alt": "Diagram illustrating the distinct endoscopic patterns (continuous vs. skip) and histological features (cryptitis vs. granuloma) of Ulcerative Colitis and Crohn's Disease.",
-    "caption": "Key endoscopic and histological differences between UC and Crohn's Disease",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**mesalazine** UC maintains, **steroids** flares bones, **azathioprine** TPMT monitors, **biologics** anti-TNF vedolizumab, **Crohn** strictures dilate resect, **UC** colectomy pouch cures, **perianal** setons abscess drains, **smoking** Crohn quits counsels) with **traps** (**toxic** megacolon operates, **C diff** vancomycin fidaxomicin, **clots** prophylaxis heparin, **cancer** surveillance dysplasia) closes; **follow** (calprotectin scopes) tracks. Bowels calm.",
-   "say": "Mesalazines steroids azathioprines is Rx: biologics target Crohns strictures dilate UCs cure perianals drain smokings quit toxics distend diffs recur clots guard cancers watch scopes survey relapses treat wishes respect. Guts heal.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-211",
-  "bk2-med-212",
-  "bk2-med-213",
-  "bk2-med-214",
-  "bk2-med-215",
-  "bk2-med-216",
-  "bk2-med-217",
-  "bk2-med-218",
-  "bk2-med-219",
-  "bk2-med-220"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon3",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-ibd",
+  "quiz": [
+    "bk2-med-211",
+    "bk2-med-212",
+    "bk2-med-213",
+    "bk2-med-214",
+    "bk2-med-215",
+    "bk2-med-216",
+    "bk2-med-217",
+    "bk2-med-218",
+    "bk2-med-219",
+    "bk2-med-220"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon3",
+  "src": [],
+  "steps": [
+    {
+      "say": "Take a focused bowel history in suspected inflammatory bowel disease. Ask how often the patient passes stool, whether bleeding or mucus is present, and whether urgency or night waking occurs. Ulcerative colitis usually produces bloody diarrhoea that starts in the rectum and spreads upward continuously. Crohn disease can affect any part from the mouth to the anus and may cause strictures, fistulas or an abdominal lump. Always ask about smoking, painkillers, family history and growth in children.",
+      "tx": "Ask about bloody diarrhoea with mucus, urgency, tenesmus and nocturnal stools, and record daily stool frequency. In **ulcerative colitis** inflammation starts in the rectum and extends proximally in one continuous sheet, while in **Crohn disease** skip lesions can appear from mouth to anus with strictures, an abdominal mass, fistula or abscess. Ask about pain, perianal discharge, NSAID use, family history, and growth or puberty delay in children. Remember that **smoking** harms Crohn disease and stopping can flare colitis.",
+      "vis": null
+    },
+    {
+      "say": "Examine the patient from top to toe when bowel inflammation is suspected. Look for weight loss, pallor, mouth ulcers, red eyes, swollen joints and finger clubbing. Inspect both shins for painful red nodules and the legs for spreading ulcers. You should palpate the abdomen carefully for a tender lump in the right lower area. You should inspect the perianal skin for tags, cracks, discharge or fistula openings. You should record pulse, blood pressure, temperature, weight and stool details.",
+      "tx": "Look for wasting, low body mass and signs of chronic illness, and check stool charts and hydration. Examine the shins for tender red nodules of **erythema nodosum** and the legs for ulcers of **pyoderma gangrenosum**, plus mouth ulcers, red eyes, clubbing and joint swelling. Feel the abdomen for a right sided mass suggesting Crohn disease and inspect the anus for tags, fissures or fistulas in **perianal disease**. Record temperature, pulse, blood pressure and rectal bleeding severity.",
+      "vis": null
+    },
+    {
+      "say": "Look at this photograph of both shins with the examiner. You can see several raised red and purple lumps that feel tender when touched. This rash is called erythema nodosum and it commonly accompanies active bowel inflammation. You should mention that it usually fades when the bowel disease settles. In the exam, you should state the distribution clearly and connect it to inflammatory bowel disease.",
+      "tx": "This photograph shows multiple tender red and purple nodules over both anterior shins, typical of **erythema nodosum**. It is the most common skin **extraintestinal manifestation** of inflammatory bowel disease and often parallels bowel **disease activity**. For the exam, describe the site, symmetry, tenderness and colour evolution from red to purple, and link the finding to active colitis or Crohn disease rather than primary skin disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-ibd-gen1.webp",
+        "alt": "Both lower legs showing multiple raised tender red and purple nodules on anterior shins.",
+        "caption": "Photo of tender red nodules across both anterior shins.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "Organise stool and blood tests before scoping the bowel. Faecal calprotectin helps separate inflammation from functional symptoms, while cultures exclude infection. Colonoscopy with biopsy remains the key test and shows whether disease is continuous or patchy. Magnetic resonance imaging maps small bowel strictures and fistulas. Histology, blood counts, albumin, inflammatory markers, iron, B12 and vitamin D guide the assessment. Consider tuberculosis when the ileocaecal area is affected.",
+      "tx": "Send stool tests including **faecal calprotectin** to triage suspected inflammation, plus cultures to exclude infection such as Clostridioides difficile and cytomegalovirus. Arrange **colonoscopy** with biopsies, which shows continuous disease in ulcerative colitis and skip lesions in Crohn disease, and use magnetic resonance imaging of the small bowel for strictures or fistulas. Histology showing cryptitis favours colitis while **granuloma** favours Crohn disease. Check C reactive protein, albumin, anaemia, vitamin B12, vitamin D and iron, and exclude ileocaecal tuberculosis in at risk patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-ibd-fig1.webp",
+        "alt": "Diagram illustrating the distinct endoscopic patterns (continuous vs. skip) and histological features (cryptitis vs. granuloma) of Ulcerative Colitis and Crohn's Disease.",
+        "caption": "Key endoscopic and histological differences between UC and Crohn's Disease",
+        "ar": 1.8349
+      }
+    },
+    {
+      "say": "Treatment aims to settle flares and keep the bowel in remission. Mesalazine maintains ulcerative colitis, while short steroid courses control acute flares. Azathioprine or biologic drugs help patients who relapse or have severe disease. Surgeons dilate strictures, drain abscesses and treat fistulas, and colectomy can cure colitis. Advise all Crohn patients to stop smoking. Monitor for severe dilation of the colon, infection, blood clots and bowel cancer.",
+      "tx": "Maintain ulcerative colitis with **mesalazine** and treat flares with short courses of **corticosteroids**, adding azathioprine with blood monitoring or **biologic therapy** when disease recurs or is severe. Dilate or resect Crohn strictures, drain perianal abscesses, place setons for fistulas, and counsel every Crohn patient to stop smoking. Watch for toxic megacolon needing surgery, test for Clostridioides difficile, give clot prophylaxis, and arrange long term cancer surveillance with repeat scopes and faecal calprotectin.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Inflammatory bowel disease",
+  "v": 1
 }

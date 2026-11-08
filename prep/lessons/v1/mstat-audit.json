@@ -3,7 +3,7 @@
  "module": "mstat-audit",
  "subject": "mrcp-statistics",
  "title": "Clinical audit, governance and quality improvement",
- "minutes": 4,
+ "minutes": 5,
  "steps": [
   {
    "tx": "Clinical **audit** compares practice against explicit standards and then acts to improve it. The audit cycle has three stages: measure current practice, compare it with a standard, and change practice before re-auditing. Audit is distinct from research, which seeks generalisable knowledge.",
@@ -94,6 +94,17 @@
       "Run charts or control data"
      ]
     }
+   }
+  },
+  {
+   "tx": "The plot starts with a cluster of extreme high readings selected at the first visit. By the second visit the points drift down toward the population **mean** without any real **treatment** effect. Crediting that natural drift to care is **audit bias**. Judge change only against a comparison group chosen independently of the baseline value.",
+   "say": "The image shows patients chosen for extreme high values at baseline whose repeat readings drift back toward the population mean at follow up. That drift happens through natural biological variability even without treatment. An audit that credits the fall to its own intervention commits regression to the mean bias, so a comparison group chosen independently of baseline is needed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mstat-audit-gen1.webp",
+    "alt": "The image shows extreme baseline readings drifting back toward the population mean at follow up.",
+    "caption": "Extreme values drift toward the mean without treatment. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

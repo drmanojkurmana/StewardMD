@@ -1,0 +1,275 @@
+{
+  "id": "srm-endometriosis-art",
+  "module": "srm-endometriosis-art",
+  "title": "Endometriosis, Adenomyosis and Infertility",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "ESHRE Guideline on Endometriosis (2022)",
+    "Ten Teachers Gynaecology 21e Ch 15",
+    "ASRM Practice Committee Opinions on Endometriosis and Infertility"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Endometriosis represents a prevalent chronic disorder impairing reproductive capacity. Between thirty and fifty percent of infertile women harbor ectopic lesions. The peritoneal milieu exhibits sustained inflammatory changes.",
+      "tx": "Affecting roughly **30 to 50 percent** of women undergoing fertility evaluations, **endometriosis prevalence** underscores a major pathophysiological challenge. Subfertility stems from toxic peritoneal **chronic inflammation**, tubal distorted architecture from **pelvic adhesions**, and diminished follicular quality. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "e1",
+            "label": "Ectopic endometrial tissue implants"
+          },
+          {
+            "id": "e2",
+            "label": "Peritoneal cytokine storm (IL-1, IL-6, TNF-alpha)"
+          },
+          {
+            "id": "e3",
+            "label": "Dense pelvic adhesions and altered tubo-ovarian anatomy"
+          },
+          {
+            "id": "e4",
+            "label": "Impaired gamete transport and reduced oocyte competence"
+          }
+        ],
+        "edges": [
+          [
+            "e1",
+            "e2",
+            "Macrophage recruitment"
+          ],
+          [
+            "e2",
+            "e3",
+            "Fibrogenesis"
+          ],
+          [
+            "e3",
+            "e4",
+            "Fecundity impairment"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgical staging standardizes anatomical disease burden across clinical trials. The revised American system sums point values across four anatomical tiers. Severe disease reflects extensive pelvic obliteration.",
+      "tx": "The revised American Society for Reproductive Medicine classification scores disease burden into Stage I (minimal, 1-5), Stage II (mild, 6-15), Stage III (moderate, 16-40), and Stage IV (severe, >40). This **rASRM score** guides standardized **endometriosis staging** and clinical prognosis. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/female-infertility-fig1.webp",
+        "caption": "Pelvic endometriosis lesions, adhesion formation, and distorted tubo-ovarian architecture. Credit: StewardMD.",
+        "alt": "Pelvic endometriosis lesions, adhesion formation, and distorted tubo-ovarian architecture"
+      }
+    },
+    {
+      "say": "Surgical excision of ovarian endometriomas carries significant collateral risk. Stripping the cyst wall inadvertently removes healthy adjacent primordial follicles. Postoperative ovarian reserve markers show substantial declines.",
+      "tx": "Laparoscopic stripping during **ovarian cystectomy** inadvertently removes functional follicles, causing marked **cortex stripping**. The resulting thermal and mechanical trauma leads to an average **AMH depletion** of 30 to 40 percent, permanently compromising follicular ovarian reserve. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cystectomy Stripping Technique",
+          "points": [
+            "Cleaves pseudo-capsule from cortex",
+            "Inadvertent removal of healthy primordial pool",
+            "Bipolar diathermy compromises vascular supply",
+            "Significant post-op drop in AMH (30-40%)"
+          ]
+        },
+        "right": {
+          "title": "Ablation / Sclerotherapy Alternatives",
+          "points": [
+            "CO2 laser ablation or plasma energy",
+            "Preserves deep vascular architecture",
+            "Ethanol sclerotherapy in selected cases",
+            "Attenuates ovarian reserve depletion"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Clinical guidelines urge caution before operating on endometriomas prior to assisted reproduction. Asymptomatic cysts do not diminish in vitro fertilization success. Surgery is reserved for intractable symptoms or diagnostic ambiguity.",
+      "tx": "Laparoscopic cystectomy for an **endometrioma 4 cm** or larger prior to IVF does not improve IVF pregnancy rates or live births. Such **pre-IVF surgery** should be avoided in asymptomatic women to achieve vital **ovarian reserve preservation** before stimulation. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "Endometrioma detected prior to IVF"
+          },
+          {
+            "id": "c2",
+            "label": "Assess symptoms, ultrasound features, and size"
+          },
+          {
+            "id": "c3",
+            "label": "Asymptomatic / benign ultrasound: Proceed directly to IVF"
+          },
+          {
+            "id": "c4",
+            "label": "Intractable pain / suspicious features: Laparoscopic surgery"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2",
+            "Diagnostic evaluation"
+          ],
+          [
+            "c2",
+            "c3",
+            "Preserve ovarian reserve"
+          ],
+          [
+            "c2",
+            "c4",
+            "Clear indications"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Prolonged suppression of the hypothalamic pituitary axis prior to transfer mitigates uterine inflammation. Down regulation for three to six months clears receptive defects. Clinical trials confirm improved pregnancy rates in advanced disease.",
+      "tx": "Pre-treatment with an **ultra-long protocol** employing **GnRH agonist pre-treatment** for **3 to 6 months** prior to fresh or frozen embryo transfer suppresses inflammatory mediators, enhancing clinical pregnancy and live birth rates in patients with severe endometriosis or **adenomyosis**. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Suppression Strategy",
+          "Duration",
+          "Biological Mechanism",
+          "Clinical Benefit in ART"
+        ],
+        "rows": [
+          [
+            "GnRH agonist depot",
+            "3 to 6 months",
+            "Profound hypoestrogenism; clears IL-6 and TNF",
+            "Improves implantation in Stage III/IV"
+          ],
+          [
+            "Continuous oral progestins",
+            "2 to 4 months",
+            "Endometrial stromal decidualization and atrophy",
+            "Reduces pain and focal adenomyoma"
+          ],
+          [
+            "Aromatase inhibitor + progestin",
+            "2 to 3 months",
+            "Direct suppression of local intra-lesional E2",
+            "Adjunct in refractory adenomyosis"
+          ],
+          [
+            "Immediate transfer (no pre-op)",
+            "None",
+            "Persistent local inflammatory cytokines",
+            "Lower implantation rates"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adenomyosis represents ectopic invasion within the myometrial wall. Imaging demonstrates diagnostic structural irregularities along the inner margin. Expansion of the junctional zone impairs deep vascular remodeling.",
+      "tx": "Diagnostic criteria for **adenomyosis criteria** feature asymmetrical myometrial thickening, **subendometrial microcysts**, and a **junctional zone** maximum thickness exceeding **12 mm** on high-resolution transvaginal ultrasound or MRI, correlating with increased miscarriage risks. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/wh-fertility-fig1.webp",
+        "caption": "Adenomyosis and junctional zone alterations on high-resolution imaging. Credit: StewardMD.",
+        "alt": "Adenomyosis and junctional zone alterations on high-resolution imaging"
+      }
+    },
+    {
+      "say": "Postoperative fecundity prediction requires validated clinical staging calculators. The Endometriosis Fertility Index combines historical factors with surgical scores. It accurately predicts spontaneous pregnancy probabilities.",
+      "tx": "The **Endometriosis Fertility Index** generates an **EFI score** from 0 to 10 by integrating historical patient factors (age, duration of infertility, pregnancy history) with surgical scores, reliably predicting the probability of **spontaneous conception** over **36 months** post-laparoscopy. Comprehensive clinical evaluation and disciplined reproductive management ensure optimal procedural outcomes and diagnostic precision across advanced subfertility protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "EFI Score Category",
+          "Score Value",
+          "Estimated 36-Month Spontaneous Pregnancy",
+          "Clinical Management Recommendation"
+        ],
+        "rows": [
+          [
+            "High spontaneous fecundity",
+            "Scores 8 to 10",
+            "Over 60 to 75 percent",
+            "Expectant management or timed IUI for 6-12 mo"
+          ],
+          [
+            "Moderate fecundity",
+            "Scores 5 to 7",
+            "40 to 50 percent",
+            "Consider 3 to 6 months trial then IVF"
+          ],
+          [
+            "Low spontaneous fecundity",
+            "Scores 0 to 4",
+            "Under 20 percent",
+            "Expedite directly to IVF without delay"
+          ],
+          [
+            "Severe male / tubal factor",
+            "Any EFI score",
+            "Negligible spontaneous rate",
+            "Immediate IVF/ICSI regardless of score"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Infiltrating disease involving retroperitoneal spaces demands careful therapeutic prioritization. Extensive resections carry significant surgical morbidity. In vitro fertilization takes precedence when subfertility dominates.",
+      "tx": "Patients with **deep infiltrating endometriosis** (DIE) involving bowel or bladder require **multidisciplinary surgery** for intractable pain. However, **IVF prioritization** is preferred over extensive surgical excision when infertility is the primary indication without acute obstruction. Structured diagnostic algorithms and evidence-based reproductive protocols guide tailored clinical interventions across modern fertility management.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "d1",
+            "label": "Deep infiltrating endometriosis diagnosed"
+          },
+          {
+            "id": "d2",
+            "label": "Evaluate primary patient complaint"
+          },
+          {
+            "id": "d3",
+            "label": "Severe pain / organ obstruction: Multidisciplinary excision"
+          },
+          {
+            "id": "d4",
+            "label": "Infertility primary: Upfront IVF prior to extensive pelvic surgery"
+          }
+        ],
+        "edges": [
+          [
+            "d1",
+            "d2",
+            "Clinical stratification"
+          ],
+          [
+            "d2",
+            "d3",
+            "Ureteral/bowel compromise"
+          ],
+          [
+            "d2",
+            "d4",
+            "Avoid pelvic neurovascular trauma"
+          ]
+        ]
+      }
+    }
+  ],
+  "v": 1
+}

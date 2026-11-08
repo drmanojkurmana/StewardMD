@@ -1,66 +1,75 @@
 {
- "v": 1,
- "module": "med-hypertension",
- "subject": "medicine",
- "title": "Systemic hypertension and aortic disease",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Grades** (**140-90** clinic diagnoses, **white** coat ambulatory rules, **masked** home catches, **grades** 1-3 crises, **malignant** papilloedema AKI MAHA, **resistant** 3 drugs adheres, **cuffs** size arms legs, **postural** elderly diabetics drops) with **measure** (**seated** rested repeats, **ambulatory** 24-hour dips, **home** 7-day averages) records; **urgency** (severe no damage) calms. Pressures grade.",
-   "say": "One-forties whites masks grades is hypertension: malignants bleed resistants adhere cuffs size posturals drop seateds rest ambulatories dip homes average urgencies calm crises control. Arms squeeze.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Secondary** (**renal** CKD protein bruits, **aldosterone** low renin Conn, **phaeo** paroxysms sweats, **Cushing** moon striae weight, **coarctation** arm-leg brachiofemoral, **sleep** apnoea snores dips, **drugs** NSAIDs steroids liquorice, **thyroid** hyper hypo pulses) with **clues** (**young** 30 secondary hunts, **abrupt** resistant screens, **hypokalaemia** aldo suggests) hunts; **renal** (duplex ARR metanephrines) screens. Causes hunt.",
-   "say": "Renals aldos phaeos Cushings is secondary: coarctations lag sleeps snore drugs press thyroids race youngs hunt abrupts screen potassiums hint duplexes image ratios score catechols surge. Glands kidneys.",
-   "vis": null
-  },
-  {
-   "tx": "**Damage** (**fundi** Keith grades bleed, **LVH** Sokolow echo strains, **protein** ACR CKD stages, **stroke** lacunar bleeds, **claudication** ABI pulses, **dementia** white matter slows, **targets** 130-80 diabetic, **statin** aspirin risks) with **drugs** (**ACE** cough angioedema, **amlodipine** ankles gums, **thiazide** gout hyponatraemia, **spironolactone** potassium gynaecomastia) lowers; **adherence** (once daily counts) simplifies. Organs damage.",
-   "say": "Fundis LVHs proteins strokes is damage: claudications hobble dementias slow targets tighten statins guard ACEs cough amlodipines swell thiazides waste spironolactones spare adherences simplify pills count pressures fall. Vessels harden.",
-   "vis": null
-  },
-  {
-   "tx": "**Aorta** (**dissection** tearing migrates widens, **Stanford** A operates B stents, **pulses** deficits differ, **murmur** AR dissects, **CT** flap lights, **labetalol** nitroprusside lowers, **Marfan** root screens, **aneurysm** 5.5 operates smokes) with **traps** (**cocaine** young dissects, **pregnancy** Marfan warns, **IMH** crescent watches, **rupture** shock opens) alarms; **follow** (CT yearly) tracks. Aortas tear.",
-   "say": "Dissections tear Stanfords split is aorta: pulses differ murmurs leak flaps light labetalols drop Marfans screen aneurysms watch cocaines rip pregnancies warn haematomas crescent ruptures shock scans track pressures tame. Walls split.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-hypertension-fig1.webp",
-    "alt": "Diagram showing aortic dissection (intimal flap, true/false lumens, Stanford A/B types) and aortic aneurysm, with an inset of a CT scan.",
-    "caption": "Aortic pathologies: dissection (Stanford A/B) and aneurysm",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "bk2-med-071",
-  "bk2-med-072",
-  "bk2-med-073",
-  "bk2-med-074",
-  "bk2-med-075",
-  "bk2-med-076",
-  "bk2-med-077",
-  "bk2-med-078",
-  "bk2-med-079",
-  "bk2-med-080"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon1",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-hypertension",
+  "quiz": [
+    "bk2-med-071",
+    "bk2-med-072",
+    "bk2-med-073",
+    "bk2-med-074",
+    "bk2-med-075",
+    "bk2-med-076",
+    "bk2-med-077",
+    "bk2-med-078",
+    "bk2-med-079",
+    "bk2-med-080"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon1",
+  "src": [],
+  "steps": [
+    {
+      "say": "Diagnose hypertension when repeated clinic readings reach 140 over 90 after rest. Suspect white coat effect when the clinic reading looks high but ambulatory monitoring stays normal through day and night. Remember masked hypertension when home readings run high despite a normal clinic visit. Always use the correct cuff size and check both arms and legs, then confirm with ambulatory or home averages. You should treat severe elevation without organ damage as urgency and lower it calmly.",
+      "tx": "Hypertension is diagnosed when clinic pressure is 140 over 90 or higher on repeated seated readings after rest. **White coat hypertension** means high clinic values with normal 24 hour ambulatory monitoring, including loss of normal night dipping. **Masked hypertension** means normal clinic values with high home averages over seven days. Use correct cuff size, check arms and legs, and test posture in elderly and diabetic patients. Grade one to three guides risk, while malignant signs and resistant use of three drugs change plans.",
+      "vis": null
+    },
+    {
+      "say": "Suspect secondary causes when hypertension appears before age 30 or behaves abruptly or resists treatment. Check renal function and urine protein and listen for bruits when kidney disease drives pressure. Measure potassium and the aldosterone renin ratio when aldosterone excess seems likely. Order metanephrines when sweaty paroxysmal spikes suggest phaeochromocytoma. Examine for Cushing features, thyroid swings, coarctation with arm leg difference, sleep apnoea, and drugs such as NSAIDs and steroids.",
+      "tx": "Consider **secondary hypertension** when onset is before age 30, when pressure rises abruptly, or when it resists three drugs despite adherence. **Primary aldosteronism** suggests itself with low potassium and low renin, while sweaty paroxysms suggest phaeochromocytoma. Look for chronic kidney disease with proteinuria and bruits, Cushing weight and striae, thyroid pulse changes, coarctation with brachiofemoral delay, sleep apnoea with snoring, and pressor drugs. Screen with renal duplex, aldosterone renin ratio and metanephrines.",
+      "vis": null
+    },
+    {
+      "say": "Assess target organ injury in every hypertensive patient because it decides risk and urgency. Examine the fundi for graded retinopathy and order ECG and echo for left ventricular hypertrophy with strain. Test urine albumin creatinine ratio and stage kidney disease and ask about stroke, claudication and cognitive slowing. Aim for tighter control such as 130 over 80 in diabetes and add statin and aspirin by overall risk. Simplify tablets to once daily dosing and count pills because adherence controls pressure.",
+      "tx": "Assess **target organ damage** because fundi, heart, kidney, brain and vessels set risk and treatment urgency. Check fundi for Keith grades with bleeds, ECG and echo for **left ventricular hypertrophy** with strain, and urine protein with albumin creatinine ratio for kidney staging. Note lacunar stroke, peripheral claudication with weak pulses, and white matter slowing toward dementia. Aim for 130 over 80 in diabetes, add statin by risk, and improve adherence with once daily tablets. Choose ACE drugs, amlodipine, thiazides or spironolactone and watch their classic effects.",
+      "vis": null
+    },
+    {
+      "say": "Look at this fundus photograph and trace the retinopathy grades in order from mild to severe. See how the arterioles show copper wiring first and then compress veins at crossings with nicking. Notice flame haemorrhages and cotton wool spots that define grade three disease in the retina. Finally observe the swollen optic disc that marks grade four and signals malignant hypertension with risk to vision. You should use this sequence to answer fundus based questions confidently in exams.",
+      "tx": "This fundus image shows **hypertensive retinopathy** from grade one to grade four in a single view. Grade one appears as **copper wiring** of retinal arterioles with increased light reflex. Grade two adds arteriovenous nicking where thickened arteries compress veins at crossings. Grade three adds flame haemorrhages, cotton wool spots and hard exudates around the macula. Grade four adds swelling of the optic disc, which marks malignant hypertension and demands urgent pressure control.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-hypertension-gen1.webp",
+        "alt": "Fundus photo showing copper wiring, AV nicking, flame haemorrhages, cotton wool spots and swollen disc.",
+        "caption": "Fundus photo showing hypertensive retinopathy grades one to four.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "Suspect aortic dissection when tearing chest pain migrates and pulses differ between arms. Classify the dissection as Stanford type A when the ascending aorta is involved and arrange urgent surgery. Manage Stanford type B medically with control and consider stenting for complications. Confirm the intimal flap on CT angiography and listen for aortic regurgitation murmur. Lower pressure and shear stress promptly with labetalol and nitroprusside while screening Marfan aortas and watching aneurysms.",
+      "tx": "Suspect **aortic dissection** when tearing pain migrates, pulses differ, deficits appear, or a new regurgitation murmur develops. Use the **Stanford classification** because type A needs urgent operation while type B usually receives medical care with stenting for complications. Confirm the flap on CT, lower pressure and shear with labetalol and nitroprusside, and watch for rupture with shock. Screen Marfan roots yearly, plan repair for large **aortic aneurysm** around 5.5, and remember cocaine, pregnancy, and intramural haematoma as traps.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-hypertension-fig1.webp",
+        "alt": "Diagram showing aortic dissection (intimal flap, true/false lumens, Stanford A/B types) and aortic aneurysm, with an inset of a CT scan.",
+        "caption": "Aortic pathologies: dissection (Stanford A/B) and aneurysm",
+        "ar": 1.8349
+      }
+    }
+  ],
+  "subject": "medicine",
+  "title": "Systemic hypertension and aortic disease",
+  "v": 1
 }

@@ -1,0 +1,297 @@
+{
+  "v": 1,
+  "module": "sgo-endometrial-molecular-tcga",
+  "title": "TCGA & ProMisE Molecular Classification of Endometrial Carcinoma",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "DeVita, Hellman, and Rosenberg's Cancer 11th Edition Ch 84 (Endometrial Cancer)",
+    "FIGO Cancer Report: Cancer of the endometrium (2023 update)",
+    "NCCN Clinical Practice Guidelines in Oncology: Uterine Neoplasms (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The landmark Cancer Genome Atlas research project revolutionized the clinical management of endometrial carcinoma by identifying four biologically distinct molecular subgroups. These categories include ultramutated POLE, mismatch repair deficient, p53 abnormal, and no specific molecular profile neoplasms.",
+      "tx": "The **TCGA molecular classification** and practical **ProMisE algorithm** stratify endometrial cancer into 4 prognostically divergent subgroups: **POLE ultramutated**, **Mismatch Repair Deficient** (MMRd), **p53 abnormal** (p53abn), and **No Specific Molecular Profile** (NSMP), fundamentally guiding modern adjuvant therapy decisions.  Evidence-based practice integrates TCGA classification.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "spec",
+            "label": "Resected endometrial carcinoma specimen"
+          },
+          {
+            "id": "pole",
+            "label": "Perform POLE exonuclease domain mutation sequencing"
+          },
+          {
+            "id": "mmr",
+            "label": "Perform MMR immunohistochemistry (MLH1, PMS2, MSH2, MSH6)"
+          },
+          {
+            "id": "p53",
+            "label": "Perform p53 immunohistochemistry (aberrant vs wild-type)"
+          },
+          {
+            "id": "group",
+            "label": "Assign TCGA molecular subgroup and tailor therapy"
+          }
+        ],
+        "edges": [
+          [
+            "spec",
+            "pole"
+          ],
+          [
+            "spec",
+            "mmr"
+          ],
+          [
+            "spec",
+            "p53"
+          ],
+          [
+            "p53",
+            "group"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The POLE ultramutated molecular subgroup accounts for approximately seven to ten percent of all endometrial cancers and exhibits extremely high somatic mutation burdens. Despite displaying high histological grade and bizarre nuclear pleomorphism, patients enjoy outstanding progression-free survival.",
+      "tx": "The **POLE ultramutated** subgroup, driven by exonuclease domain mutations (P286R, V411L), displays somatic **hypermutation** (>100 mutations/Mb). Despite frequent high-grade morphology and intense lymphocytic infiltration, these tumors exhibit an **exceptionally favorable prognosis** with near-zero recurrence rates, enabling safe de-escalation of adjuvant therapy.  Evidence-based practice integrates P286R mutation, adjuvant de-escalation. Key numerical parameters include 7.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pathology Features",
+          "points": [
+            "Pathogenic mutations in POLE exonuclease domain",
+            "High somatic mutation burden >100 mut/Mb",
+            "Marked tumor-infiltrating lymphocytes and giant cells"
+          ]
+        },
+        "right": {
+          "title": "Clinical Behavior",
+          "points": [
+            "Excellent progression-free survival >95%",
+            "Very low risk of distant or pelvic relapse",
+            "Candidate for safe de-escalation of chemotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Mismatch repair deficient tumors represent twenty-five to thirty percent of endometrial carcinomas, driven by MLH1 promoter hypermethylation or germline Lynch syndrome mutations. These tumors express high levels of programmed death ligand one and respond dramatically to immune checkpoint blockade.",
+      "tx": "The **MMRd subgroup** (25% to 30% of cases) results from loss of mismatch repair proteins (MLH1, PMS2, MSH2, MSH6) causing **microsatellite instability** (MSI-H). Characterized by high neoantigen burden and PD-L1 expression, MMRd cancers demonstrate profound clinical sensitivity to **immune checkpoint inhibitors** like dostarlimab and pembrolizumab.  Evidence-based practice integrates p53abn, aberrant TP53 IHC, null mutation, strong diffuse overexpression, unfavorable prognosis. Key numerical parameters include 53, 15, 80.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Etiology / Mechanism",
+          "Protein Expression Pattern",
+          "Germline Testing Required?",
+          "Immunotherapy Efficacy"
+        ],
+        "rows": [
+          [
+            "Somatic MLH1 hypermethylation",
+            "Loss of MLH1 and PMS2",
+            "No, sporadic epigenetic event",
+            "High response rates to anti-PD-1"
+          ],
+          [
+            "Lynch syndrome germline MSH2 mutation",
+            "Loss of MSH2 and MSH6",
+            "Yes, genetic counseling required",
+            "High response rates to anti-PD-1"
+          ],
+          [
+            "Lynch syndrome germline MSH6 mutation",
+            "Isolated loss of MSH6",
+            "Yes, genetic counseling required",
+            "High response rates to anti-PD-1"
+          ],
+          [
+            "Lynch syndrome germline PMS2 mutation",
+            "Isolated loss of PMS2",
+            "Yes, genetic counseling required",
+            "High response rates to anti-PD-1"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The p53 abnormal molecular subgroup comprises roughly fifteen percent of endometrial cancers and is enriched for serous carcinomas and high-grade endometroid variants. Driven by extensive copy number alterations and TP53 mutations, this subgroup carries an ominous prognosis demanding aggressive systemic treatment.",
+      "tx": "The **p53 abnormal** subgroup (15% of cases), characterized by extensive somatic **copy-number alterations** and TP53 mutations, exhibits mutational null or diffuse overexpression patterns on immunohistochemistry. This subgroup carries an **unfavorable prognosis** with early distant dissemination, requiring systemic platinum-based chemotherapy and radiotherapy.  Evidence-based practice integrates MMRd subgroup, intermediate prognosis, PD-1 inhibitors, dostarlimab, pembrolizumab. Key numerical parameters include 25, 30, 2, 6.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "p53 Abnormal Subgroup",
+          "points": [
+            "Mutational p53 staining (null or >80% diffuse)",
+            "Enriched for uterine serous and carcinosarcoma",
+            "Highest recurrence and distant metastasis rates"
+          ]
+        },
+        "right": {
+          "title": "POLE Ultramutated Subgroup",
+          "points": [
+            "Pathogenic POLE exonuclease domain mutation",
+            "High somatic mutations but intact genome stability",
+            "Near-zero recurrence rates despite high grade"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The No Specific Molecular Profile subgroup represents approximately half of all cases and consists largely of low-grade, hormone receptor-positive endometrioid carcinomas. Their prognosis is intermediate and strongly dictated by clinical stage, depth of myometrial invasion, and lymphovascular space invasion.",
+      "tx": "The **NSMP subgroup** accounts for ~50% of endometrial carcinomas, predominantly comprising low-grade endometrioid adenocarcinomas with intact MMR and wild-type p53. Their clinical behavior is intermediate, with outcomes heavily dependent on **myometrial invasion**, hormone receptor status, and **lymphovascular space invasion**.  Evidence-based practice integrates ER positivity, intermediate prognosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "test",
+            "label": "Test MMR (intact) and p53 (wild-type)"
+          },
+          {
+            "id": "seq",
+            "label": "Confirm wild-type POLE exonuclease sequence"
+          },
+          {
+            "id": "diag",
+            "label": "Classify as No Specific Molecular Profile (NSMP)"
+          },
+          {
+            "id": "strat",
+            "label": "Risk-stratify by LVSI, myometrial invasion, and stage"
+          }
+        ],
+        "edges": [
+          [
+            "test",
+            "seq"
+          ],
+          [
+            "seq",
+            "diag"
+          ],
+          [
+            "diag",
+            "strat"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Practical diagnostic algorithms utilize mismatch repair and p53 immunohistochemistry together with targeted POLE gene sequencing. Cases with multiple molecular abnormalities, known as multiple classifiers, are categorized hierarchically based on biological driver primacy.",
+      "tx": "Practical clinical profiling utilizes immunohistochemistry for **MMR proteins** and **p53**, alongside targeted sequencing of the **POLE gene**. When tumors display overlapping molecular abnormalities ('multiple classifiers'), POLE mutations trump MMR deficiency or p53 abnormalities, dictating the underlying favorable clinical course.  Evidence-based practice integrates FIGO 2023 molecular modification, POLE downstaging, Stage IAm(POLE). Key numerical parameters include 2023, 1, 2.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classifier Conflict",
+          "Molecular Findings",
+          "Hierarchical Allocation",
+          "Prognostic Assignment"
+        ],
+        "rows": [
+          [
+            "POLE plus p53abn",
+            "Pathogenic POLE mutation with mutant p53",
+            "POLE ultramutated takes primacy",
+            "Favorable prognosis (POLE driver)"
+          ],
+          [
+            "POLE plus MMRd",
+            "Pathogenic POLE mutation with MMR loss",
+            "POLE ultramutated takes primacy",
+            "Favorable prognosis (POLE driver)"
+          ],
+          [
+            "MMRd plus p53abn",
+            "Loss of MMR proteins with mutant p53",
+            "MMRd subgroup takes primacy",
+            "Intermediate prognosis (treat as MMRd)"
+          ],
+          [
+            "Single abnormality",
+            "Isolated MMR loss, p53 mutation, or POLE",
+            "Classified into respective single group",
+            "Standard subgroup prognosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The landmark PORTEC-3 clinical trial integrated molecular subgrouping to demonstrate that patients with p53 abnormal tumors gain a dramatic five-year survival advantage from adjuvant chemoradiation over radiation alone. Conversely, POLE ultramutated cancers showed outstanding survival irrespective of therapy.",
+      "tx": "Post-hoc molecular analysis of the **PORTEC-3 trial** established that patients harboring **p53 abnormal** endometrial carcinomas achieve a dramatic survival advantage from **adjuvant chemoradiotherapy** compared with radiation alone (5-year OS 59% vs 36%), establishing systemic chemotherapy as mandatory for p53abn disease.  Evidence-based practice integrates p53abn upstaging, Stage IICm(p53abn), aggressive molecular risk. Key numerical parameters include 2023, 1, 2.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "p53 Abnormal Response (PORTEC-3)",
+          "points": [
+            "5-year OS with chemoradiotherapy: 59%",
+            "5-year OS with radiotherapy alone: 36%",
+            "Mandates platinum-based systemic combination chemotherapy"
+          ]
+        },
+        "right": {
+          "title": "POLE Ultramutated Response",
+          "points": [
+            "5-year recurrence-free survival >95%",
+            "No difference between radiotherapy and chemoradiation",
+            "Supports safe de-escalation of adjuvant systemic therapy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The revolutionary FIGO 2023 staging system for endometrial carcinoma formally incorporates molecular classification directly into stage assignment. For instance, POLE mutated stage one or two disease is downstaged to stage one A, whereas p53 abnormal disease is upstaged.",
+      "tx": "The updated **FIGO 2023 staging** system formally incorporates molecular subgroups into staging criteria. Early-stage **POLE-mutated** tumors confined to the uterus are categorized as **Stage IAm POLE**, whereas any myometrial-invasive tumor harboring **p53 abnormal** status is upstaged directly to **Stage IIC**.  Evidence-based practice integrates PORTEC-4a trial, molecular-directed adjuvant therapy, vaginal brachytherapy de-escalation. Key numerical parameters include 4.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical Disease Extent",
+          "Molecular Classifier Status",
+          "FIGO 2023 Stage Assignment",
+          "Adjuvant Recommendation"
+        ],
+        "rows": [
+          [
+            "Confined to uterus / cervix (T1-T2)",
+            "Pathogenic POLE mutation",
+            "Stage IAm(POLE)",
+            "Observation / omit adjuvant therapy"
+          ],
+          [
+            "Confined to endometrium (T1a)",
+            "p53 abnormal (p53abn)",
+            "Stage IAm(p53abn)",
+            "Observation or vaginal brachytherapy"
+          ],
+          [
+            "Myometrial invasion present (T1a/b-T2)",
+            "p53 abnormal (p53abn)",
+            "Stage IIC(p53abn)",
+            "Chemoradiotherapy mandatory"
+          ],
+          [
+            "Pelvic or para-aortic nodes involved",
+            "Any molecular status",
+            "Stage IIIC1 / IIIC2",
+            "Systemic chemotherapy plus radiation"
+          ]
+        ]
+      }
+    }
+  ]
+}
