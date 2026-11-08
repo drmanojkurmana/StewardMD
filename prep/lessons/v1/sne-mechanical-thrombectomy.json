@@ -31,7 +31,26 @@
     {
       "tx": "Strict blood pressure control is mandatory before initiating intravenous thrombolytic infusion. Prior to starting **thrombolysis**, arterial blood pressure must be reduced to a **systolic below 185 mmHg** and a **diastolic below 110 mmHg**. Preferred first-line intravenous antihypertensive agents include intravenous **labetalol** boluses, continuous intravenous nicardipine infusion, or clevidipine titration. Rapid uncontrolled pressure swings must be prevented during acute therapy to safeguard marginal cerebral perfusion while preventing vascular rupture.",
       "say": "Strict hemodynamic targets must be secured before administering intravenous thrombolysis in acute ischaemic stroke. Systolic blood pressure must fall below one hundred eighty five millimeters of mercury and diastolic below one hundred ten millimeters of mercury. Intravenous labetalol boluses or continuous nicardipine infusions are the preferred first line options to achieve safe blood pressure levels.",
-      "vis": null
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Target before lysis",
+          "Limit",
+          "First-line drugs"
+        ],
+        "rows": [
+          [
+            "Systolic pressure",
+            "Below 185 mmHg",
+            "Labetalol bolus or nicardipine infusion"
+          ],
+          [
+            "Diastolic pressure",
+            "Below 110 mmHg",
+            "Clevidipine titration if needed"
+          ]
+        ]
+      }
     },
     {
       "tx": "Following reperfusion therapy, intensive hemodynamic monitoring is essential to prevent hemorrhagic complications. For the initial **24 hours** after intravenous thrombolysis or endovascular intervention, arterial blood pressure must be strictly maintained below **180/105 mmHg**. Sustained pressures exceeding this ceiling exponentially heighten the danger of symptomatic **intracerebral haemorrhage** within reperfused capillary beds. Neurological vital signs and automated cuff blood pressure recordings are documented every 15 minutes during the initial two hours of therapy.",

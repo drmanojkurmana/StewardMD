@@ -42,7 +42,25 @@
     {
       "tx": "Definitive therapeutic management of progressive cerebral ischaemia in Moyamoya requires prompt surgical **revascularization**. Surgical techniques include direct extra-intracranial bypass grafting using the **STA-MCA** anastomosis connecting the superficial temporal artery to middle cerebral artery branches. Indirect revascularization procedures such as encephaloduroarteriosynangiosis or pial synangiosis promote spontaneous neovascular ingrowth from vascularised dura and muscle flaps into ischaemic cerebral cortex.",
       "say": "Surgical revascularization is the primary definitive treatment for progressive ischemia in Moyamoya disease. Direct bypass provides a direct connection from the superficial temporal artery to a cortical branch of the middle cerebral artery. Indirect procedures like encephaloduroarteriosynangiosis lay vascularised dura over the brain surface to induce robust collateral capillary sprouting.",
-      "vis": null
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Direct bypass",
+          "points": [
+            "STA to MCA anastomosis",
+            "Immediate new cortical supply",
+            "Superficial temporal artery donor"
+          ]
+        },
+        "right": {
+          "title": "Indirect bypass",
+          "points": [
+            "Encephaloduroarteriosynangiosis",
+            "Vascular dura laid on cortex",
+            "Collaterals grow in over time"
+          ]
+        }
+      }
     },
     {
       "tx": "Inflammatory cerebrovascular disorders require careful differentiation from non-inflammatory vasculopathies. **Primary angiitis** of the central nervous system represents an extremely rare, isolated vasculitis confined to small and medium leptomeningeal and cortical arteries. Clinical presentation encompasses subacute cognitive decline, persistent headache, and multifocal ischemic infarcts. Because cerebral catheter angiography lacks sensitivity for purely microscopic parenchymal vessels, a definitive **brain biopsy** spanning cortex and leptomeninges is mandatory for diagnosis.",
@@ -92,7 +110,31 @@
     {
       "tx": "Monogenic small vessel diseases cause premature recurrent lacunar strokes and progressive cognitive decline. **CADASIL** represents an autosomal dominant arteriopathy caused by stereotyped missense mutations in the **NOTCH3** gene on chromosome 19. Cranial magnetic resonance imaging characteristically reveals confluent white matter hyperintensities with pathognomonic early involvement of the anterior temporal poles and external capsule. Skin biopsy demonstrating granular osmiophilic material within vascular smooth muscle basement membranes confirms the diagnosis.",
       "say": "Cerebral autosomal dominant arteriopathy with subcortical infarcts and leukoencephalopathy results from stereotypic NOTCH3 gene mutations on chromosome nineteen. Cranial magnetic resonance imaging reveals symmetrical leukoencephalopathy with pathognomonic early involvement of the anterior temporal poles and external capsule. Ultrastructural examination of skin biopsy tissue demonstrates pathognomonic granular osmiophilic material.",
-      "vis": null
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "CADASIL",
+          "CARASIL"
+        ],
+        "rows": [
+          [
+            "Gene",
+            "NOTCH3",
+            "HTRA1"
+          ],
+          [
+            "Inheritance",
+            "Autosomal dominant",
+            "Autosomal recessive"
+          ],
+          [
+            "Clues",
+            "Temporal pole white matter change",
+            "Early alopecia and spondylosis"
+          ]
+        ]
+      }
     },
     {
       "tx": "Recessive small vessel arteriopathies exhibit distinct syndromic clinical features that guide precise molecular testing. **CARASIL** is an autosomal recessive cerebral small vessel disease linked to loss-of-function mutations in the **HTRA1** gene encoding high-temperature requirement serine peptidase A1. Affected young adults develop recurrent subcortical lacunar infarctions, early diffuse alopecia, severe premature lumbar spondylosis, and progressive spastic paraparesis culminating in subcortical vascular dementia.",
