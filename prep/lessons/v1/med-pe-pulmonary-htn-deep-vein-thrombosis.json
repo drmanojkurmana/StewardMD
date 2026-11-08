@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "med-pe-pulmonary-htn",
+ "subject": "medicine",
+ "title": "Deep vein thrombosis and pulmonary embolism: diagnosis and stratifying risk",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Venous thromboembolism encompasses a spectrum spanning lower extremity thrombi to fatal pulmonary vascular occlusion. Pathological formation of **deep vein thrombosis** (DVT) arises from Virchow triad: venous stasis, vascular endothelial injury, and systemic hypercoagulability. Thrombi originate predominantly within the valve pockets of deep veins in the lower extremities, particularly the popliteal, femoral, and iliac vessels. Major clinical risk factors include recent orthopedic surgery, prolonged immobilization, active malignancy, oral contraceptive therapy, pregnancy, and hereditary thrombophilias such as factor V Leiden.",
+   "say": "Venous thromboembolism encompasses lower extremity thrombosis and life-threatening pulmonary vascular occlusion. Pathological development of deep vein thrombosis stems from Virchow triad comprising stasis, endothelial injury and hypercoagulability. Thrombi form mainly within valve pockets of proximal lower limb veins. Risk factors include major surgery, immobilization, malignancy and thrombophilia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "triad",
+      "label": "Virchow triad (stasis, injury, hypercoagulability)"
+     },
+     {
+      "id": "valve",
+      "label": "Thrombus nidus in deep venous valve sinuses"
+     },
+     {
+      "id": "prop",
+      "label": "Fibrin propagation into proximal femoral/iliac veins"
+     },
+     {
+      "id": "embolus",
+      "label": "Thrombus detachment into vena cava and heart"
+     }
+    ],
+    "edges": [
+     [
+      "triad",
+      "valve"
+     ],
+     [
+      "valve",
+      "prop"
+     ],
+     [
+      "prop",
+      "embolus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside physical examination in acute lower extremity thrombosis reveals unilateral local inflammatory and congestive findings. Presenting signs of **unilateral calf swelling** exceeding three centimeters compared to the asymptomatic contralateral leg measured ten centimeters below the tibial tuberosity strongly suggest acute thrombosis. Additional physical findings include pitting edema confined to the affected leg, localized tenderness along the deep venous distribution, and superficial venous dilation. Eliciting pain upon forced ankle dorsiflexion (Homan sign) is notoriously insensitive and non-specific, rendering it clinically unreliable.",
+   "say": "Physical examination in acute lower limb thrombosis reveals unilateral swelling and venous congestion. Noticing calf circumference asymmetry greater than three centimeters compared to the unaffected leg strongly suggests thrombosis. Further findings include localized calf tenderness, pitting edema and prominent collateral veins. Forced ankle dorsiflexion pain is unreliable for diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proximal deep vein thrombosis",
+     "points": [
+      "Popliteal, femoral, and iliac veins",
+      "High risk of pulmonary embolisation (up to 50%)",
+      "Pronounced thigh and calf swelling",
+      "Mandates immediate anticoagulation"
+     ]
+    },
+    "right": {
+     "title": "Distal calf vein thrombosis",
+     "points": [
+      "Anterior tibial, posterior tibial, peroneal veins",
+      "Lower embolisation risk (< 10%)",
+      "Mild localized calf tenderness",
+      "Serial ultrasound surveillance option in low risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Dislodgement of lower extremity thrombi leads to mechanical obstruction of the pulmonary arterial circulation. Acute migration producing **pulmonary embolism** results in acute dead-space ventilation, severe ventilation-perfusion mismatch, and hypoxaemia. Occlusion of more than thirty to fifty percent of the pulmonary vascular bed abruptly increases right ventricular afterload, inducing acute right ventricular dilation, tricuspid regurgitation, and right heart failure. Left ventricular preload falls, causing decreased cardiac output, hypotension, and cardiogenic shock in massive hemodynamically unstable presentations.",
+   "say": "Detachment of venous thrombi causes mechanical obstruction of the pulmonary vascular tree. Acute migration causing pulmonary embolism leads to sudden dead-space ventilation and hypoxaemia. Occluding over thirty percent of pulmonary vessels sharply raises right ventricular afterload, triggering ventricular dilation and right heart failure. Left ventricular filling drops, precipitating cardiogenic shock.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thrombolysis-and-thrombectomy-fig1.webp",
+    "alt": "Thrombus lodged in pulmonary arterial vasculature causing acute perfusion obstruction.",
+    "caption": "Occlusion of pulmonary arterial branches by thromboembolism and hemodynamic sequelae. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Standardized clinical risk stratification guides the diagnostic algorithm and optimizes diagnostic imaging utilization. Calculating the **Wells score** categorizes pre-test probability of pulmonary embolism into two-tier (PE unlikely versus PE likely) or three-tier systems. Clinical variables award points for signs of DVT (3 points), PE as primary diagnosis (3 points), tachycardia > 100 beats/min (1.5 points), recent surgery or bed rest (1.5 points), prior documented VTE (1.5 points), hemoptysis (1 point), and active malignancy (1 point). Scores exceeding four indicate PE likely, directing immediate imaging.",
+   "say": "Standardized clinical scoring guides the diagnostic pathway and avoids unnecessary radiological procedures. Calculating the Wells score stratifies patients into unlikely or likely probability categories. The score assigns points for signs of thrombosis, alternative diagnoses, tachycardia, immobilization, prior thromboembolism, hemoptysis and malignancy. Scores exceeding four indicate high likelihood, mandating immediate imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Wells scoring criterion",
+     "Points allocated",
+     "Diagnostic threshold"
+    ],
+    "rows": [
+     [
+      "Clinical signs & symptoms of DVT",
+      "3.0 points",
+      "Score > 4: PE likely (imaging directly)"
+     ],
+     [
+      "PE most likely or equally likely diagnosis",
+      "3.0 points",
+      "Score <= 4: PE unlikely (check D-dimer)"
+     ],
+     [
+      "Heart rate > 100 beats per minute",
+      "1.5 points",
+      "High sensitivity marker of right strain"
+     ],
+     [
+      "Immobilization >= 3 days or surgery in 4 weeks",
+      "1.5 points",
+      "Key Virchow stasis / injury risk factor"
+     ],
+     [
+      "Previous documented DVT or PE",
+      "1.5 points",
+      "Elevated recurrence baseline"
+     ],
+     [
+      "Hemoptysis",
+      "1.0 point",
+      "Sign of peripheral pulmonary infarction"
+     ],
+     [
+      "Active cancer (treatment within 6 months)",
+      "1.0 point",
+      "Malignancy hypercoagulable state"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Quantifying fibrin degradation products provides exceptional negative predictive value to rule out thromboembolism in low-risk individuals. Performing a plasma **D-dimer** enzyme-linked immunosorbent assay (ELISA) detects cross-linked fibrin fragments released during endogenous fibrinolysis. In patients with an unlikely pre-test probability, a normal D-dimer (< 500 ng/mL or age-adjusted cutoff: age x 10 in patients older than 50 years) safely excludes pulmonary embolism without radiological imaging. However, elevated D-dimer is non-specific, frequently occurring in pregnancy, sepsis, trauma, advanced age, and active malignancy.",
+   "say": "Quantifying fibrin degradation products delivers high negative predictive value in low-risk patients. Measuring plasma D-dimer detects cross-linked fibrin fragments produced during endogenous clot breakdown. When clinical probability is unlikely, a normal level safely excludes thromboembolism without radiation. However, elevated levels are non-specific and occur in sepsis, trauma, pregnancy and cancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "wells",
+      "label": "Wells score pre-test probability assessment"
+     },
+     {
+      "id": "unlikely",
+      "label": "PE unlikely (Wells score <= 4)"
+     },
+     {
+      "id": "ddimer",
+      "label": "High-sensitivity D-dimer testing"
+     },
+     {
+      "id": "ruleout",
+      "label": "Negative result: PE excluded without imaging"
+     }
+    ],
+    "edges": [
+     [
+      "wells",
+      "unlikely"
+     ],
+     [
+      "unlikely",
+      "ddimer"
+     ],
+     [
+      "ddimer",
+      "ruleout"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Multi-detector helical vascular scanning represents the definitive initial diagnostic modality of choice in suspected cases. Utilizing multidetector **CT pulmonary angiography** (CTPA) allows direct, rapid visualization of intraluminal filling defects within the pulmonary arterial tree down to subsegmental branches. A positive scan characteristically demonstrates sharp intravascular filling defects outlined by radiopaque contrast or total occlusive cutoff of a pulmonary arterial vessel. CTPA concurrently evaluates thoracic alternatives, including pneumonia, pleural effusion, aortic dissection, or pneumothorax, while identifying right ventricular enlargement.",
+   "say": "Multidetector helical vascular scanning serves as the definitive first-line diagnostic investigation. Performing computed tomography pulmonary angiography allows direct visualization of filling defects down to subsegmental branches. A positive scan reveals persistent intraluminal filling defects or abrupt vascular cutoff. The study concurrently screens for alternative diagnoses like pneumonia or dissection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-thromboembolic-pulmonary-hypertension-fig1.webp",
+    "alt": "Computed tomography angiography displaying intraluminal pulmonary arterial filling defects.",
+    "caption": "Intraluminal vascular filling defect on computed tomography pulmonary angiography. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Specific patient subsets require non-contrast or radiation-sparing alternative diagnostic techniques. Performing a radionuclide **ventilation-perfusion scan** (V/Q scintigraphy) is preferred in patients with severe renal impairment, life-threatening iodinated contrast allergy, or pregnancy. A normal perfusion scan definitively rules out pulmonary embolism. A high-probability V/Q scan (two or more segmental perfusion defects with normal ventilation, termed V/Q mismatch) confirms the diagnosis. For lower extremity evaluation, compression duplex venous ultrasonography confirming non-compressibility of deep venous lumens establishes DVT directly.",
+   "say": "Specific patient populations require alternative diagnostic techniques that avoid iodinated contrast. Performing a ventilation-perfusion scan is preferred in renal failure, severe contrast allergy or pregnancy. A completely normal perfusion scan excludes embolism, whereas high-probability mismatch confirms the diagnosis. Lower extremity compression ultrasonography identifying non-compressible veins confirms thrombosis directly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CT pulmonary angiography",
+     "points": [
+      "Direct intraluminal thrombus visualization",
+      "Rapid acquisition in emergency settings",
+      "Evaluates parenchymal & pleural alternatives",
+      "Requires iodinated contrast & ionizing radiation"
+     ]
+    },
+    "right": {
+     "title": "Ventilation-perfusion (V/Q) scan",
+     "points": [
+      "Demonstrates V/Q mismatch defects",
+      "Preferred in severe renal failure (eGFR < 30)",
+      "Preferred in contrast allergy & pregnancy",
+      "Requires normal baseline chest radiograph"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prompt therapeutic anticoagulation halts thrombus propagation, reduces embolisation risk, and promotes endogenous recanalization. Prescribing **direct oral anticoagulants** (DOACs) such as apixaban or rivaroxaban represents first-line therapy for hemodynamically stable patients, obviating the need for parenteral heparin bridging or routine international normalized ratio (INR) monitoring. In severe renal impairment, severe obesity, or hemodynamic instability, unfractionated heparin or low-molecular-weight heparin is preferred. Anticoagulation is maintained for at least three to six months for provoked thrombosis, and extended indefinitely for unprovoked or recurrent events.",
+   "say": "Prompt therapeutic anticoagulation prevents clot propagation and fatal recurrent embolisation. Prescribing direct oral anticoagulants like apixaban or rivaroxaban represents first-line therapy for stable patients without requiring heparin bridging. Unfractionated heparin remains preferred in severe renal failure or hemodynamic instability. Therapy continues for three to six months or indefinitely for unprovoked disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thrombosis-anticoagulation-transfusion-long-case-fig1.webp",
+    "alt": "Coagulation cascade targets for parenteral heparins and direct oral anticoagulants.",
+    "caption": "Anticoagulation mechanisms targeting factor Xa and thrombin in venous thrombosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
