@@ -1,0 +1,71 @@
+{
+  "v": 1,
+  "module": "bio-nutrition-integration",
+  "subject": "biochemistry",
+  "title": "Energy, protein quality and diet measures",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Basal metabolic rate** is the energy cost of simply existing, measured at rest, fasting and in thermal comfort. Lean body mass and thyroid hormone are its main drivers, which is why muscular people and thyrotoxic patients burn more at complete rest. Fever raises metabolic rate by roughly thirteen percent per degree Celsius, a teaching figure behind the calorie needs of septic patients.",
+      "say": "Basal metabolic rate is the idling speed of the body, set mainly by lean mass and thyroid hormone. Fever adds about thirteen percent per degree.",
+      "vis": null
+    },
+    {
+      "tx": "**Respiratory quotient** reports which fuel is burning. The ratio of carbon dioxide produced to oxygen consumed is one point zero for carbohydrate, about zero point seven for fat and zero point eight for protein, with mixed diets near zero point eight five. During overfeeding with lipogenesis the quotient climbs above one, because making fat from glucose releases extra carbon dioxide.",
+      "say": "Respiratory quotient reads the fuel mix: one for carbohydrate, nought point seven for fat. Above one means the body is busy making fat.",
+      "vis": {
+        "kind": "table",
+        "title": "Respiratory quotient by fuel",
+        "cols": [
+          "Fuel",
+          "RQ"
+        ],
+        "rows": [
+          [
+            "Carbohydrate",
+            "1.0"
+          ],
+          [
+            "Protein",
+            "0.8"
+          ],
+          [
+            "Fat",
+            "0.7"
+          ],
+          [
+            "Mixed diet",
+            "About 0.85"
+          ],
+          [
+            "Lipogenesis from overfeeding",
+            "Above 1.0"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Diet induced thermogenesis**, historically called specific dynamic action, is the energy spent processing a meal. Protein costs the most, roughly thirty percent of its own calories, while fat costs least. This is one honest reason high protein diets feel more satiating per calorie, and why total energy calculations that ignore processing losses mislead at the margins of diet planning.",
+      "say": "Eating itself burns energy, and protein is the expensive fuel at about thirty percent processing cost. Fat, by contrast, is stored almost for free.",
+      "vis": null
+    },
+    {
+      "tx": "**Protein quality** measures how well a food protein matches human needs. Biological value compares nitrogen retained with nitrogen absorbed, net protein utilisation folds in digestibility, and PDCAAS scores against a reference pattern with egg as the classic standard. Cereals limit in lysine and pulses in methionine, so eating them together completes the pattern, the biochemical basis of traditional mixed diets worldwide.",
+      "say": "Cereals lack lysine and pulses lack methionine, so together they complete each other. That complementation is why rice and dal style pairings evolved everywhere.",
+      "vis": null
+    },
+    {
+      "tx": "**Nitrogen balance** tracks protein gain or loss with simple arithmetic. Each gram of urinary nitrogen represents about six point two five grams of protein broken down. Growing children and pregnant women run positive, retaining nitrogen for new tissue, while illness, burns and starvation run negative. Persistent negative balance is the quiet definition of wasting, whatever the weight chart seems to say.",
+      "say": "Multiply nitrogen lost by six point two five to get protein lost. Growth runs positive, illness runs negative, and negative balance means wasting.",
+      "vis": null
+    },
+    {
+      "tx": "**Fibre and glycaemic measures** finish diet assessment. Soluble viscous fibre slows glucose absorption and binds bile acids, lowering cholesterol, while insoluble fibre adds stool bulk; colonic bacteria ferment fibre into short chain fatty acids that feed colonocytes. Glycaemic index ranks carbohydrate quality and glycaemic load corrects it for portion, though both ignore mixed meal effects and individual variation.",
+      "say": "Soluble fibre blunts glucose and cholesterol; insoluble fibre bulks stool, and fermentation feeds the colon. Glycaemic index helps, but portion and mixed meals limit it.",
+      "vis": null
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
