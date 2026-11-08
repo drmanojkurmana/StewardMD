@@ -343,7 +343,8 @@
     if (!pairs.length && topic.subject && topic.module) pairs = [{ s: topic.subject, m: topic.module }];
     H.loadMany(pairs, H.stepMsg).then(function (lists) {
       var items = [];
-      lists.forEach(function (l) { (l.items || []).forEach(function (it) { items.push(it); }); });
+      // Flagged (image missing, wrong key) or held items never enter a chapter, the same rule as every other test.
+      lists.forEach(function (l) { (l.items || []).forEach(function (it) { if (it && !it.hold && !(it.flags && it.flags.length)) items.push(it); }); });
       var ty = typeOf(topic);
       var matched = matchConcepts(outline, items, ty);
       var weak = null;

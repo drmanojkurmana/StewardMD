@@ -477,3 +477,14 @@ test("assemble: profile item_ex keeps MRCP Part 1 and Part 2 pools apart", () =>
   const ids1 = r1.items.map((i) => i.id), ids2 = r2.items.map((i) => i.id);
   assert.equal(ids1.filter((id) => ids2.includes(id)).length, 0, "no shared item");
 });
+
+test("needsImage: a stem that reads a missing picture is caught, text-described findings and image-bearing items stay", () => {
+  const no = (q) => A.needsImage({ q });
+  for (const q of ["The radiograph of skull is suggestive of which of the following diagnosis ?", "ECG of a patient with snake bite is shown below. What is the abnormality seen?",
+    "The given below instrument is used for:", "Identify the structure marked A", "What is this instrument used to measure?", "CXR of a patient is shown. What is the next investigation?"])
+    assert.equal(no(q), true, q);
+  for (const q of ["Bat wing appearance on chest X-ray is seen in which condition?", "Rugger jersey spine on X-ray is characteristic of:", "PR interval in ECG shows?",
+    "DMPA is given:", "Which of the drugs given below is safe?", "Earliest X-ray sign of rickets is:", "Hair on end appearance on skull X-ray is seen in"])
+    assert.equal(no(q), false, q);
+  assert.equal(A.needsImage({ q: "The radiograph of skull is suggestive of which?", img: ["v90/img/fx-abc.webp"] }), false);
+});
