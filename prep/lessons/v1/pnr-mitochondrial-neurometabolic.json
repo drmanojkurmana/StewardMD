@@ -1,0 +1,265 @@
+{
+  "id": "pnr-mitochondrial-neurometabolic",
+  "title": "Mitochondrial Encephalopathies: Leigh Syndrome and MELAS",
+  "subject": "ss-paediatric-neurology",
+  "module": "Leukodystrophies, Neurometabolic Crises and Mitochondrial Disease",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Leigh syndrome necrotizing lesions involve the basal ganglia and brainstem while characteristically sparing the mammillary bodies.",
+      "tx": "Identify **Leigh syndrome necrotizing lesions** on cranial magnetic resonance imaging when evaluating infants with subacute developmental regression. Leigh syndrome (subacute necrotizing encephalomyelopathy) produces bilateral, symmetric, sharply demarcated necrotic spongiform lesions within the putamina, globus pallidus, caudate nuclei, substantia nigra, periaqueductal gray matter, and brainstem tegmentum. In sharp contrast to Wernicke encephalopathy, the mammillary bodies are characteristically completely spared from necrotic signal alteration (Elevated CSF and blood lactate).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Brain Region",
+          "MRI Signal Characteristic",
+          "Pathological Feature"
+        ],
+        "rows": [
+          [
+            "Putamen and caudate",
+            "Bilateral symmetric T2/FLAIR hyperintensity",
+            "Spongiform degeneration with capillary proliferation"
+          ],
+          [
+            "Brainstem tegmentum",
+            "Periaqueductal and dorsal brainstem hyperintensity",
+            "Vacuolation and neuronal loss in cranial nerve nuclei"
+          ],
+          [
+            "Mammillary bodies",
+            "Normal T2 signal intensity (spared)",
+            "Distinguishes Leigh syndrome from Wernicke encephalopathy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Elevated CSF and blood lactate accompanied by an inverted lactate doublet on proton spectroscopy confirm mitochondrial dysfunction.",
+      "tx": "Evaluate **Elevated CSF and blood lactate** concentrations alongside proton magnetic resonance spectroscopy (1H-MRS) in suspected mitochondrial disease. Patients exhibit elevated blood and cerebrospinal fluid lactate concentrations with an increased lactate-to-pyruvate ratio (> 20), indicating a block in pyruvate oxidation. On 1H-MRS performed at long echo time (TE 144 ms), lactate displays a pathognomonic inverted doublet resonance peak at 1.33 ppm in affected cerebral tissue and ventricular CSF (MELAS m.3243A>G mutation).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "l1",
+            "label": "Serum & CSF lactate elevation (lactate:pyruvate > 20)"
+          },
+          {
+            "id": "l2",
+            "label": "Proton 1H-MRS of basal ganglia or occipital cortex"
+          },
+          {
+            "id": "l3",
+            "label": "Inverted doublet resonance peak at 1.33 ppm (TE 144 ms)"
+          },
+          {
+            "id": "l4",
+            "label": "Confirms cellular respiratory chain oxidative failure"
+          }
+        ],
+        "edges": [
+          [
+            "l1",
+            "l2"
+          ],
+          [
+            "l2",
+            "l3"
+          ],
+          [
+            "l3",
+            "l4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The m three two four three A to G point mutation underlies more than eighty percent of cases of MELAS syndrome.",
+      "tx": "Identify the **MELAS m.3243A>G mutation** as the primary molecular hallmark in Mitochondrial Encephalomyopathy, Lactic Acidosis, and Stroke-like episodes. Over 80% of affected patients harbour this specific point mutation in the MT-TL1 gene, which encodes mitochondrial tRNALeu(UUR). Impairment of this essential tRNA disrupts intramitochondrial translation of respiratory chain subunits (primarily Complex I and IV), causing systemic energetic exhaustion and microvascular smooth muscle angiopathy (Non-vascular territory stroke lesions).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genomic Feature",
+          "Specific Molecular Finding",
+          "Pathophysiological Impact"
+        ],
+        "rows": [
+          [
+            "Mitochondrial gene",
+            "MT-TL1 (mitochondrial tRNALeu(UUR))",
+            "Point mutation m.3243A>G present in > 80% of MELAS"
+          ],
+          [
+            "Protein translation",
+            "Disrupts intramitochondrial protein synthesis",
+            "Severe deficiency of respiratory Complex I and Complex IV"
+          ],
+          [
+            "Vascular pathology",
+            "Mitochondrial proliferation in pial smooth muscle",
+            "Microvascular angiopathy and localized energetic hypoperfusion"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Non-vascular territory stroke lesions in MELAS do not respect arterial borders and show a parieto-occipital predilection.",
+      "tx": "Distinguish **Non-vascular territory stroke lesions** in MELAS from classical thromboembolic arterial strokes. Stroke-like episodes manifest between 2-15 years of age with cortical blindness, hemianopia, focal seizures, and recurrent migraines. On neuroimaging, diffusion restriction and swelling involve cortical gray and subcortical white matter\u2014predominantly affecting the parieto-occipital and temporal regions\u2014without respecting the anatomical boundaries of the anterior, middle, or posterior cerebral arteries (L-arginine infusion in acute stroke).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MELAS Stroke-Like Lesions",
+          "points": [
+            "Crosses anatomical vascular boundaries (non-vascular distribution)",
+            "Strong predilection for parieto-occipital and temporal cortex",
+            "Driven by microvascular angiopathy and cellular energetic failure",
+            "Transient, migratory signal abnormalities that regress or shift"
+          ]
+        },
+        "right": {
+          "title": "Thromboembolic Ischemic Stroke",
+          "points": [
+            "Conforms strictly to a defined arterial territory (e.g., MCA, PCA)",
+            "Abrupt onset without prodromal migraine or cyclic vomiting",
+            "Permanent wedge-shaped encephalomalacia in territorial distribution",
+            "Angiography reveals discrete arterial branch cutoff"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Intravenous L-arginine infusion rescues microvascular perfusion during acute metabolic stroke episodes.",
+      "tx": "Administer **L-arginine infusion in acute stroke** episodes to restore endothelial nitric oxide availability in MELAS. During acute stroke-like presentations, localized microvascular nitric oxide is severely depleted. Administering intravenous L-arginine as an acute bolus of 0.5 g/kg over 30 minutes, followed by a continuous infusion of 0.5 g/kg/day over 3 to 5 days, stimulates nitric oxide production, promotes vasodilation of cerebral pial microvessels, and significantly reduces stroke-like deficit severity (Valproate contraindication in POLG).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a1",
+            "label": "Acute stroke-like episode in MELAS"
+          },
+          {
+            "id": "a2",
+            "label": "IV L-arginine bolus: 0.5 g/kg over 30 minutes"
+          },
+          {
+            "id": "a3",
+            "label": "Continuous IV L-arginine infusion: 0.5 g/kg/day x 3-5 days"
+          },
+          {
+            "id": "a4",
+            "label": "Restores endothelial nitric oxide -> Microvascular vasodilation"
+          }
+        ],
+        "edges": [
+          [
+            "a1",
+            "a2"
+          ],
+          [
+            "a2",
+            "a3"
+          ],
+          [
+            "a3",
+            "a4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sodium valproate is absolutely contraindicated in POLG mutations due to the risk of fatal liver failure.",
+      "tx": "Enforce strict **Valproate contraindication in POLG** across all suspected mitochondrial encephalopathies. Sodium valproate directly impairs mitochondrial fatty acid oxidation and depletes carnitine. In patients with mutations in the nuclear DNA polymerase gamma (POLG) gene\u2014such as Alpers-Huttenlocher syndrome presenting with intractable epilepsy and psychomotor regression\u2014administering sodium valproate precipitates fulminant, irreversible microvesicular hepatic necrosis and death within weeks (MERFF ragged red fibers).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Contraindicated Drugs in Mitochondrial Disease",
+          "points": [
+            "Sodium valproate (precipitates fatal hepatic failure in POLG)",
+            "Aminoglycosides (worsen mitochondrial sensorineural deafness)",
+            "Linezolid (potently inhibits mitochondrial protein translation)",
+            "Statins (exacerbate coenzyme Q10 deficiency and myopathy)"
+          ]
+        },
+        "right": {
+          "title": "Safe Antiseizure Alternatives",
+          "points": [
+            "Levetiracetam and brivaracetam",
+            "Clobazam and clonazepam",
+            "Topiramate and lacosamide",
+            "Preserve carnitine pools and mitochondrial respiratory complexes"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Modified Gomori trichrome staining reveals pathognomonic ragged red fibers in MERRF syndrome.",
+      "tx": "Identify **MERFF ragged red fibers** on skeletal muscle biopsy in Myoclonic Epilepsy with Ragged Red Fibers (MERRF syndrome). Caused in > 80% of cases by the m.8344A>G mutation in the MT-TK gene encoding mitochondrial tRNALys, MERRF presents with progressive myoclonic ataxia, generalized seizures, sensorineural hearing loss, and myopathy. Modified Gomori trichrome staining of skeletal muscle reveals subsarcolemmal proliferation of abnormal, enlarged mitochondria forming pathognomonic ragged red fibers (Biotin-thiamine responsive basal ganglia).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Modality",
+          "Pathological Finding",
+          "Clinical Implication"
+        ],
+        "rows": [
+          [
+            "Modified Gomori trichrome",
+            "Subsarcolemmal accumulation of ragged red fibers",
+            "Reflects compensatory mitochondrial proliferation in muscle"
+          ],
+          [
+            "Molecular genetics",
+            "m.8344A>G mutation in MT-TK (tRNALys)",
+            "Disrupts lysine-dependent mitochondrial translation"
+          ],
+          [
+            "Clinical presentation",
+            "Myoclonic epilepsy, ataxia, deafness, myopathy",
+            "Differentiate from progressive myoclonus epilepsies"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Biotin thiamine responsive basal ganglia disease is a treatable metabolic disorder mimicking Leigh syndrome.",
+      "tx": "Screen for **Biotin-thiamine responsive basal ganglia** disease (BTBGD) in any child presenting with subacute encephalopathy and bilateral caudate/putamen necrosis. Caused by bi-allelic mutations in the SLC19A3 gene encoding the human thiamine transporter 2 (ThTr2), it mimics Leigh syndrome with encephalopathy, dystonia, and quadriparesis. Immediate initiation of high-dose oral biotin (5-10 mg/kg/day) combined with oral thiamine (300-900 mg/day) produces dramatic, rapid clinical reversal and resolution of basal ganglia lesions if instituted early.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "b1",
+            "label": "Child with subacute dystonia & bilateral putaminal necrosis"
+          },
+          {
+            "id": "b2",
+            "label": "SLC19A3 mutation causing ThTr2 thiamine transporter defect"
+          },
+          {
+            "id": "b3",
+            "label": "Initiate high-dose oral biotin (5-10 mg/kg/day)"
+          },
+          {
+            "id": "b4",
+            "label": "Co-administer high-dose oral thiamine (300-900 mg/day) -> Rapid recovery"
+          }
+        ],
+        "edges": [
+          [
+            "b1",
+            "b2"
+          ],
+          [
+            "b2",
+            "b3"
+          ],
+          [
+            "b3",
+            "b4"
+          ]
+        ]
+      }
+    }
+  ]
+}
