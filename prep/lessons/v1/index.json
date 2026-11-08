@@ -676,7 +676,7 @@
   "ans-difficult-airway": {
    "title": "Difficult airway and airway devices: predict to rescue",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ans-fluids-transfusion": {
@@ -700,7 +700,7 @@
   "ans-intraop-complications": {
    "title": "Intraoperative complications: hypotension to malignant hyperthermia",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ans-intubation": {
@@ -718,7 +718,7 @@
   "ans-local-anaesthetics": {
    "title": "Local anaesthetics: chemistry to LAST rescue",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ans-machine": {
@@ -748,7 +748,7 @@
   "ans-neuraxial": {
    "title": "Spinal and epidural anaesthesia: levels to headaches",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ans-nmb": {
@@ -760,13 +760,13 @@
   "ans-obstetric": {
    "title": "Obstetric anaesthesia: labour to crash section",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ans-opioids": {
    "title": "Opioids and perioperative analgesics: receptors to PCA",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ans-oxygen-respiratory": {
@@ -784,7 +784,7 @@
   "ans-pain": {
    "title": "Acute and chronic pain management: ladders to interventions",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ans-positioning-safety": {
@@ -802,7 +802,7 @@
   "ans-recovery": {
    "title": "Recovery, PONV and postoperative care: Aldrete to ERAS",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ans-specialty": {
@@ -834,6 +834,27 @@
    "minutes": 6,
    "steps": 7,
    "gen": "hand"
+  },
+  "bio-amino-acid-disorders-branched": {
+   "title": "Branched chain disorders and methylmalonate",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-amino-acid-disorders"
+  },
+  "bio-amino-acid-disorders-sulfur": {
+   "title": "Homocystinuria and cystinuria",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-amino-acid-disorders"
+  },
+  "bio-amino-acid-disorders-transport": {
+   "title": "Transport and glycine disorders",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-amino-acid-disorders"
   },
   "bio-apoptosis-cell-cycle": {
    "title": "Cellular homeostasis: apoptosis cascades, caspases, and cell cycle checkpoints",
@@ -1009,6 +1030,20 @@
    "steps": 7,
    "gen": "hand"
   },
+  "bio-heme-bilirubin": {
+   "title": "Bilirubin and the jaundice syndromes",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-heme"
+  },
+  "bio-heme-synthesis-porphyrias": {
+   "title": "Heme synthesis, lead and the porphyrias",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-heme"
+  },
   "bio-immunochemistry-mhc": {
    "title": "Immunochemistry: V(D)J recombination, MHC antigen processing, and complement cascades",
    "minutes": 6,
@@ -1177,6 +1212,41 @@
    "steps": 7,
    "gen": "hand"
   },
+  "bio-specialised-products-catecholamines": {
+   "title": "Catecholamine synthesis and breakdown",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-specialised-products"
+  },
+  "bio-specialised-products-no-creatine": {
+   "title": "Nitric oxide, creatine and glutathione",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-specialised-products"
+  },
+  "bio-specialised-products-sam-polyamines": {
+   "title": "SAM, methyl gifts and polyamines",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-specialised-products"
+  },
+  "bio-specialised-products-serotonin": {
+   "title": "Serotonin, melatonin and carcinoid",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-specialised-products"
+  },
+  "bio-specialised-products-transmitters": {
+   "title": "Histamine and inhibitory transmitters",
+   "minutes": 6,
+   "steps": 6,
+   "gen": "AI",
+   "module": "bio-specialised-products"
+  },
   "bio-sphingolipids-lysosomal": {
    "title": "Sphingolipids and lysosomal storage disorders: Gaucher, Tay-Sachs, Niemann-Pick and Fabry diseases",
    "minutes": 6,
@@ -1234,13 +1304,13 @@
   "can-cpb-bypass": {
    "title": "Cardiopulmonary bypass and myocardial protection",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "can-valve-tee": {
    "title": "Valve surgery, TEE and perioperative echo",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ch-adolescent": {
@@ -1780,13 +1850,13 @@
   "ent-airway": {
    "title": "Tracheostomy and airway foreign bodies",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-aom-ome": {
    "title": "Acute otitis media and otitis media with effusion",
-   "minutes": 6,
-   "steps": 5,
+   "minutes": 7,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-benign-larynx": {
@@ -1798,13 +1868,13 @@
   "ent-csom": {
    "title": "Chronic otitis media and cholesteatoma",
    "minutes": 6,
-   "steps": 5,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-dysphagia": {
    "title": "Dysphagia and the oesophagus",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-ear-anatomy": {
@@ -1822,19 +1892,19 @@
   "ent-ear-tumours": {
    "title": "Tumours of the ear and cerebellopontine angle",
    "minutes": 6,
-   "steps": 5,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-epistaxis": {
    "title": "Epistaxis",
-   "minutes": 6,
-   "steps": 5,
+   "minutes": 7,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-external-ear": {
    "title": "Diseases of the external ear",
-   "minutes": 6,
-   "steps": 5,
+   "minutes": 7,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-facial-nerve": {
@@ -1846,13 +1916,13 @@
   "ent-facial-trauma": {
    "title": "Maxillofacial fractures and CSF rhinorrhoea",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-hearing-rehab": {
    "title": "Hearing aids, cochlear implants and the deaf child",
-   "minutes": 6,
-   "steps": 5,
+   "minutes": 7,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-hearing-tests": {
@@ -1869,8 +1939,8 @@
   },
   "ent-laryngeal-cancer": {
    "title": "Carcinoma of the larynx",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-larynx-anatomy": {
@@ -1888,19 +1958,19 @@
   "ent-nasopharynx": {
    "title": "Nasopharyngeal tumours",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-neck-masses": {
    "title": "Neck masses and neck dissection",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-neck-spaces": {
    "title": "Deep neck space infections",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-nose-anatomy": {
@@ -1911,20 +1981,20 @@
   },
   "ent-om-complications": {
    "title": "Complications of otitis media",
-   "minutes": 6,
-   "steps": 5,
+   "minutes": 7,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-oral-hypopharynx-cancer": {
    "title": "Oral, oropharyngeal and hypopharyngeal cancers",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-otosclerosis": {
    "title": "Otosclerosis and conductive deafness",
-   "minutes": 6,
-   "steps": 5,
+   "minutes": 7,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-pharynx-anatomy": {
@@ -1935,56 +2005,56 @@
   },
   "ent-rhinitis-polyps": {
    "title": "Rhinitis and nasal polyps",
-   "minutes": 6,
-   "steps": 5,
+   "minutes": 7,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-salivary": {
    "title": "Salivary gland disorders",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-septum-external-nose": {
    "title": "External nose, nasal septum and choanal atresia",
-   "minutes": 6,
-   "steps": 5,
+   "minutes": 7,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-sinonasal-tumours": {
    "title": "Sinonasal tumours and granulomatous conditions",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-sinusitis": {
    "title": "Sinusitis and its complications",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-sleep-apnoea": {
    "title": "Snoring and obstructive sleep apnoea",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-snhl-inner-ear": {
    "title": "Sensorineural hearing loss and inner ear disorders",
-   "minutes": 6,
-   "steps": 5,
+   "minutes": 7,
+   "steps": 6,
    "gen": "hand"
   },
   "ent-stridor-paediatric": {
    "title": "Stridor and congenital laryngeal lesions",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-tonsils-adenoids": {
    "title": "Tonsils and adenoids",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ent-vestibular-tests": {
@@ -1995,8 +2065,8 @@
   },
   "ent-vocal-cord-palsy": {
    "title": "Vocal cord paralysis",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "hand"
   },
   "fmt-autopsy": {
@@ -2091,14 +2161,14 @@
   },
   "gyn-cervix-endometrium": {
    "title": "SS gyn-oncology: cervical and endometrial cancer staging and therapy",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "gyn-ovary-vulva-gtn": {
    "title": "SS gyn-oncology: ovarian, vulval and GTN staging and therapy",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mbsci-anatomy": {
@@ -2769,14 +2839,14 @@
   },
   "med-acs": {
    "title": "Acute coronary syndromes",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-acute-leukaemia": {
    "title": "Acute leukaemia: ALL, AML and emergencies",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-adrenal": {
@@ -2788,7 +2858,7 @@
   "med-aki": {
    "title": "Acute kidney injury: prerenal, intrinsic and postrenal",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-aldo-pheo": {
@@ -2799,20 +2869,20 @@
   },
   "med-allergy-immunology": {
    "title": "Allergy, anaphylaxis and immunodeficiency",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-amyloid-misc": {
    "title": "Amyloidosis and multisystem inflammatory disorders",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-arbovirus": {
    "title": "Dengue, chikungunya and arboviral fevers",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-arrhythmias": {
@@ -2830,13 +2900,13 @@
   "med-autoimmune-metabolic-liver": {
    "title": "Autoimmune, cholestatic, metabolic and drug-induced liver disease",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-bleeding": {
    "title": "Bleeding disorders: platelets, von Willebrand and haemophilia",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-bone": {
@@ -2847,14 +2917,14 @@
   },
   "med-bronchiectasis-cf": {
    "title": "Bronchiectasis and cystic fibrosis",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 5,
+   "steps": 5,
    "gen": "AI"
   },
   "med-cad-stable": {
    "title": "Stable coronary artery disease and dyslipidaemia",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-cardiomyopathy": {
@@ -2866,7 +2936,7 @@
   "med-cirrhosis": {
    "title": "Cirrhosis and portal hypertension",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-ckd": {
@@ -2884,31 +2954,31 @@
   "med-cns-infections": {
    "title": "Meningitis, encephalitis and brain abscess",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-copd": {
    "title": "Chronic obstructive pulmonary disease",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-crystal": {
    "title": "Gout and crystal arthropathies: podagra, tophi and pseudogout",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-ctd": {
    "title": "Systemic sclerosis, Sjogren syndrome and inflammatory myopathies",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-dementia": {
    "title": "Dementia and delirium: reversible and progressive",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-diabetes": {
@@ -3075,8 +3145,8 @@
   },
   "med-jaundice": {
    "title": "Jaundice and liver function tests",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-lab-interpretation": {
@@ -3088,7 +3158,7 @@
   "med-leprosy": {
    "title": "Leprosy: tuberculoid to lepromatous spectrum and reactions",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-localisation": {
@@ -3100,43 +3170,43 @@
   "med-lung-cancer": {
    "title": "Lung cancer and pulmonary nodules",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-lymphoma": {
    "title": "Lymphoma: Hodgkin, non-Hodgkin and CLL",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-malabsorption": {
    "title": "Diarrhoea, malabsorption and coeliac disease",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-malaria": {
    "title": "Malaria: falciparum severity and radical cure",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-marrow-failure": {
    "title": "Aplastic anaemia and marrow failure",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-megaloblastic": {
    "title": "Megaloblastic anaemia: B12, folate and pernicious",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-microcytic": {
    "title": "Microcytic anaemia: iron deficiency and thalassaemia",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-mixed": {
@@ -3148,61 +3218,61 @@
   "med-movement": {
    "title": "Parkinsonism, tremor, chorea and dystonia",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-mpn": {
    "title": "Myeloproliferative neoplasms: CML, PV, ET and myelofibrosis",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-ms": {
    "title": "Multiple sclerosis and demyelination",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-myeloma": {
    "title": "Multiple myeloma and plasma cell disorders",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-nephrotic": {
    "title": "Nephrotic syndrome: heavy proteinuria and clots",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-neuromuscular": {
    "title": "Neuromuscular weakness: myasthenia, myopathy and MND",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-neuropathy": {
    "title": "Peripheral neuropathy, GBS and CIDP",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-nutrition": {
    "title": "Nutrition, vitamins and trace elements: deficiency to refeeding",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-oesophagus": {
    "title": "Oesophageal disorders and dyspepsia",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-onc-emergencies": {
    "title": "Oncological emergencies: neutropenic sepsis, TLS and cord compression",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-onc-principles": {
@@ -3225,44 +3295,44 @@
   },
   "med-pancreatitis": {
    "title": "Acute and chronic pancreatitis",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 5,
+   "steps": 5,
    "gen": "AI"
   },
   "med-paraneoplastic": {
    "title": "Paraneoplastic syndromes and tumour markers: hormones to antibodies",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-parasitic": {
    "title": "Parasitic and helminthic infections: intestinal, tissue and blood",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-parathyroid": {
    "title": "Hyperparathyroidism, hypoparathyroidism and tetany",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-pe-pulmonary-htn": {
    "title": "Pulmonary embolism and pulmonary hypertension",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-peptic-gi-bleed": {
    "title": "Peptic ulcer disease and gastrointestinal bleeding",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-pericardial": {
    "title": "Pericardial diseases",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-pesticides": {
@@ -3280,61 +3350,61 @@
   "med-pituitary": {
    "title": "Pituitary adenomas, acromegaly and Sheehan's syndrome",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-pleural": {
    "title": "Pleural diseases and pneumothorax",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-pneumonia": {
    "title": "Pneumonia",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-poisoning-general": {
    "title": "Approach to poisoning and antidotes: ABCs to enhanced elimination",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-potassium": {
    "title": "Potassium, magnesium and phosphate emergencies",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-ra": {
    "title": "Rheumatoid arthritis: symmetric erosive polyarthritis",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-renovascular": {
    "title": "Renovascular disease and thrombotic microangiopathy",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-resp-failure": {
    "title": "Respiratory failure, ARDS and sleep apnoea",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 5,
+   "steps": 5,
    "gen": "AI"
   },
   "med-resuscitation": {
    "title": "Cardiac arrest and resuscitation: rhythms to post-ROSC care",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-sepsis": {
    "title": "Sepsis, fever of unknown origin and healthcare-associated infections",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-shock": {
@@ -3346,97 +3416,97 @@
   "med-sle": {
    "title": "Systemic lupus erythematosus and antiphospholipid syndrome",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-sodium": {
    "title": "Sodium and water balance: hypo- and hypernatraemia",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-spa": {
    "title": "Spondyloarthritis: ankylosing, psoriatic, reactive and enteropathic",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-spinal-cord": {
    "title": "Spinal cord compression and myelopathy",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-sti": {
    "title": "Syphilis and sexually transmitted infections: chancre to gummata",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-stroke": {
    "title": "Stroke and hemiplegia: infarct, bleed and TIA",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-tb": {
    "title": "Tuberculosis",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-thrombosis-transfusion": {
    "title": "Thrombosis, anticoagulation and transfusion",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-tubulointerstitial": {
    "title": "Tubulointerstitial, cystic and inherited kidney disease",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-uti-stones": {
    "title": "Urinary tract infection and kidney stones",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-valvular": {
    "title": "Valvular and rheumatic heart disease",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "med-vasculitis-large": {
    "title": "Large and medium vessel vasculitis: GCA, Takayasu, PAN and Kawasaki",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-vasculitis-small": {
    "title": "ANCA-associated and small vessel vasculitis: GPA, EGPA, MPA and IgAV",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-viral": {
    "title": "Influenza, COVID-19 and other viral infections: testing to antivirals",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-viral-hepatitis": {
    "title": "Viral hepatitis and acute liver failure",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "med-zoonoses-toxin": {
    "title": "Rabies, tetanus, diphtheria and zoonoses: bites and toxins",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "mendo-calcium": {
@@ -3598,7 +3668,7 @@
   "mic-arbo-rabies": {
    "title": "Arboviruses: dengue, chikungunya, zika, JE and rabies",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-bacterial-genetics": {
@@ -3610,13 +3680,13 @@
   "mic-blood-tissue-protozoa": {
    "title": "Malaria, babesiosis, leishmaniasis, trypanosomiasis and toxoplasmosis",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-cestodes-trematodes": {
    "title": "Cestodes and trematodes: taenia, hydatid, schistosoma and flukes",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-clostridia-anaerobes": {
@@ -3634,7 +3704,7 @@
   "mic-enterobacteriaceae": {
    "title": "Enterobacteriaceae: E. coli, Klebsiella, Proteus and Shigella",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-general-virology": {
@@ -3651,20 +3721,20 @@
   },
   "mic-haemophilus-zoonotic": {
    "title": "Haemophilus, Bordetella and zoonotic bacilli",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 5,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-hepatitis-viruses": {
    "title": "Hepatitis B, C, D and E: serology, phases and cure",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 5,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-herpesviruses": {
    "title": "Herpesviruses: HSV, VZV, EBV, CMV, HHV6 and HHV8",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 5,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-history-morphology": {
@@ -3687,20 +3757,20 @@
   },
   "mic-immunodeficiency-transplant": {
    "title": "Primary immunodeficiency and transplant rejection",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-innate-antigens": {
    "title": "Innate immunity, complement and antigens",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-intestinal-protozoa": {
    "title": "Intestinal protozoa: amoebiasis, giardiasis and coccidia",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-mixed": {
@@ -3711,26 +3781,26 @@
   },
   "mic-neisseria": {
    "title": "Gonococcus and meningococcus",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-nematodes": {
    "title": "Nematodes: intestinal roundworms, filariae and tissue worms",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-non-fermenters": {
    "title": "Pseudomonas, Acinetobacter and Burkholderia",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-ntm-leprosy": {
    "title": "Mycobacterium leprae and non tuberculous mycobacteria",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-other-dna-viruses": {
@@ -3741,26 +3811,26 @@
   },
   "mic-picorna-enteric": {
    "title": "Picornaviruses, hepatitis A and E, rhinovirus and norovirus",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-respiratory-rna-viruses": {
    "title": "Influenza, parainfluenza, RSV, measles, mumps, rubella and coronaviruses",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-rickettsia-chlamydia-mycoplasma": {
    "title": "Rickettsia, Chlamydia and Mycoplasma",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-salmonella": {
    "title": "Salmonella: enteric fever and non typhoidal disease",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-spirochaetes": {
@@ -3771,8 +3841,8 @@
   },
   "mic-staphylococcus": {
    "title": "Staphylococcus aureus, MRSA and coagulase negative staphylococci",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-sterilisation": {
@@ -3783,8 +3853,8 @@
   },
   "mic-streptococcus": {
    "title": "Streptococci, pneumococcus and enterococcus",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-superficial-subcutaneous-mycoses": {
@@ -3795,8 +3865,8 @@
   },
   "mic-systemic-opportunistic-mycoses": {
    "title": "Systemic and opportunistic mycoses",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "mic-tuberculosis": {
@@ -3808,7 +3878,7 @@
   "mic-vibrio-campylobacter": {
    "title": "Vibrio cholerae, Campylobacter and Helicobacter",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "minf-antimicrobial": {
@@ -4102,7 +4172,7 @@
   "obg-amenorrhoea": {
    "title": "Amenorrhoea: primary, secondary and Turner, MRKH, Asherman",
    "minutes": 6,
-   "steps": 4,
+   "steps": 6,
    "gen": "AI"
   },
   "obg-amniotic-fluid": {
@@ -4114,7 +4184,7 @@
   "obg-anaemia-pregnancy": {
    "title": "Anaemia in pregnancy: iron, B12, thalassemia and transfusion thresholds",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-anatomy-development": {
@@ -4150,7 +4220,7 @@
   "obg-contraception": {
    "title": "Contraception: pills, IUCD, injectables, implants and sterilisation",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-diabetes-pregnancy": {
@@ -4162,13 +4232,13 @@
   "obg-diagnosis-antenatal-care": {
    "title": "Diagnosis of pregnancy and antenatal care schedules",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-ectopic": {
    "title": "Ectopic pregnancy: diagnosis and methotrexate versus surgery",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-endometrial-cancer": {
@@ -4180,7 +4250,7 @@
   "obg-endometriosis-adenomyosis": {
    "title": "Endometriosis and adenomyosis: chocolate cysts, DIE and stepped care",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-fetal-growth-surveillance": {
@@ -4228,7 +4298,7 @@
   "obg-infections-pregnancy": {
    "title": "Infections in pregnancy: TORCH, UTI, HIV, hepatitis and malaria",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-infertility": {
@@ -4252,7 +4322,7 @@
   "obg-menstrual-physiology": {
    "title": "Menstrual cycle and reproductive hormones",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-mixed": {
@@ -4276,7 +4346,7 @@
   "obg-operative-obstetrics": {
    "title": "Operative obstetrics: forceps, vacuum and caesarean technique",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-other-medical": {
@@ -4294,7 +4364,7 @@
   "obg-pcos-hirsutism": {
    "title": "PCOS and hirsutism: Rotterdam, metabolic risk and ovulation induction",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-pelvis-fetal-skull": {
@@ -4318,7 +4388,7 @@
   "obg-pph": {
    "title": "Postpartum haemorrhage: atony, trauma, tissue and thrombin",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-prenatal-screening": {
@@ -4330,7 +4400,7 @@
   "obg-preterm-prom-postterm": {
    "title": "Preterm labour, PROM and post-term: steroids, magnesium and induction",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-prolapse-urogynaecology": {
@@ -4348,7 +4418,7 @@
   "obg-puerperium": {
    "title": "Puerperium: involution, sepsis, breastfeeding and contraception timing",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-rh-isoimmunisation": {
@@ -4366,13 +4436,13 @@
   "obg-vaginitis-sti": {
    "title": "Vaginal discharge and STIs: clue cells, froth, ulcers and warts",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "obg-vulval-vaginal": {
    "title": "Vulval and vaginal disorders: lichen, VIN, VaIN and cancers",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "oph-anatomy": {
@@ -4384,7 +4454,7 @@
   "oph-anterior-uveitis": {
    "title": "Anterior uveitis",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-cataract": {
@@ -4402,7 +4472,7 @@
   "oph-conjunctiva": {
    "title": "Diseases of the conjunctiva",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-cornea": {
@@ -4414,7 +4484,7 @@
   "oph-corneal-degenerations": {
    "title": "Corneal degenerations, dystrophies and ectasias",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-glaucoma": {
@@ -4437,14 +4507,14 @@
   },
   "oph-lids": {
    "title": "Diseases of the eyelids",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-macula": {
    "title": "Diseases of the macula",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-mixed": {
@@ -4456,7 +4526,7 @@
   "oph-optic-nerve": {
    "title": "Optic nerve disorders",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-orbit": {
@@ -4480,13 +4550,13 @@
   "oph-posterior-uveitis": {
    "title": "Posterior uveitis, panuveitis and endophthalmitis",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-pupil": {
    "title": "Pupillary reflexes and abnormalities",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-refraction": {
@@ -4498,7 +4568,7 @@
   "oph-retinal-detachment": {
    "title": "Retinal detachment and retinal degenerations",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-retinal-vascular": {
@@ -4510,19 +4580,19 @@
   "oph-sclera": {
    "title": "Diseases of the sclera",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-secondary-glaucoma": {
    "title": "Congenital and secondary glaucoma",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-strabismus": {
    "title": "Strabismus, amblyopia and nystagmus",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-systemic": {
@@ -4534,13 +4604,13 @@
   "oph-trauma": {
    "title": "Ocular injuries",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-tumours": {
    "title": "Intraocular tumours",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "oph-visual-pathway": {
@@ -4552,7 +4622,7 @@
   "oph-vitreous": {
    "title": "Diseases of the vitreous",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "hand"
   },
   "ort-amputation-gait": {
@@ -4570,19 +4640,19 @@
   "ort-benign-bone-tumours": {
    "title": "Benign bone tumours: age, site and margin sort them",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ort-ctev": {
    "title": "Clubfoot: Ponseti casting before scalpels",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ort-ddh": {
    "title": "Developmental dysplasia of the hip: clunks to osteotomies",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 8,
+   "steps": 5,
    "gen": "AI"
   },
   "ort-elbow-injuries": {
@@ -4605,8 +4675,8 @@
   },
   "ort-fracture-complications": {
    "title": "Complications of fractures: early threats to late failures",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "ort-fracture-principles": {
@@ -4617,14 +4687,14 @@
   },
   "ort-hand-injuries": {
    "title": "Hand injuries: metacarpals, tendons, nails and replantation",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 8,
+   "steps": 5,
    "gen": "AI"
   },
   "ort-hand-wrist-conditions": {
    "title": "Hand and wrist: tunnels, cords, ganglia and lunates",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "ort-hip-injuries": {
@@ -4647,14 +4717,14 @@
   },
   "ort-low-back-pain": {
    "title": "Low back pain: discs, slips, stenosis and red flags",
-   "minutes": 6,
-   "steps": 4,
+   "minutes": 7,
+   "steps": 5,
    "gen": "AI"
   },
   "ort-malignant-bone-tumours": {
    "title": "Malignant bone tumours and metastasis: stage, chemo, salvage",
    "minutes": 6,
-   "steps": 4,
+   "steps": 5,
    "gen": "AI"
   },
   "ort-metabolic-bone": {
