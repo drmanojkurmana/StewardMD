@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "bio-dna-replication-repair",
+ "subject": "biochemistry",
+ "title": "Replication fork enzymes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Replication is **semiconservative** (Meselson-Stahl nitrogen fifteen density proof), bidirectional from thousands of eukaryotic origins (licensed by ORC, Cdc6, Cdt1 loading MCM helicase in G1, fired by CDK/DDK in S, once per cycle licensing prevents re-replication genome instability), forks moving about fifty nucleotides per second eukaryotes versus a thousand in bacteria. Helicase (MCM ring, ATP) unwinds, single strand binding proteins (RPA) protect and signal damage, topoisomerases relieve ahead torsion (type I nick swivel, camptothecin trapped cleavage complexes; type II double cut, etoposide and bacterial gyrase fluoroquinolones).",
+   "say": "Replication is semiconservative and bidirectional from licensed origins fired once per cycle only. Helicase unwinds while topoisomerases relieve torsion ahead through nick or double cut mechanisms distinctly targeted.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-dna-replication-repair-gen1.webp",
+    "alt": "Unwound DNA fork with helicase, topoisomerase, polymerases on leading and lagging strands and RNA primers marked.",
+    "caption": "Replication fork with leading and lagging strand machinery, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "No polymerase starts from nothing: **primase** (in polymerase alpha complex eukaryotes) lays short RNA (then DNA iDNA) primers, leading strand needs one per origin, lagging strand one per Okazaki fragment (one to two hundred nucleotides eukaryotes, one to two thousand bacteria) because polymerases extend only three prime hydroxyls five to three direction, reading template three to five. Lagging synthesis therefore loops trombone style, fragments matured by RNase H, FEN1 flap cleavage (polymerase delta strand displacement), DNA polymerase filling and ligase sealing (ATP eukaryotes, NAD bacteria teaching contrast).",
+   "say": "Primase lays RNA primers because polymerases extend only three prime hydroxyls in five to three direction. Lagging fragments mature through flap cleavage and ligase sealing in trombone style synthesis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Leading strand",
+     "points": [
+      "One primer per origin arm",
+      "Continuous toward fork",
+      "Pol epsilon main (current model)"
+     ]
+    },
+    "right": {
+     "title": "Lagging strand",
+     "points": [
+      "Primer per Okazaki fragment",
+      "Discontinuous away from fork, loops back",
+      "Pol delta main plus FEN1/ligase maturation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Polymerase fidelity layers multiplicatively: base selection (about ten to minus five errors), three to five exonuclease **proofreading** (epsilon and delta holoenzymes, primer fraying to exonuclease site when mismatched, another hundred fold), then mismatch repair post replication (another hundred to thousand fold) netting about one error per billion incorporated heritable after cell division surveillance. Processivity clamps (PCNA ring loaded by RFC clamp loader, beta clamp bacteria) tether polymerases for kilobases without dissociation, ubiquitinated PCNA switching to translesion synthesis when damage blocks ahead.",
+   "say": "Fidelity layers multiply from base selection through proofreading to mismatch repair, netting one error per billion heritable. PCNA clamps tether polymerases processively and switch to translesion synthesis at damage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Polymerase (eukaryote)",
+     "Main job",
+     "Proofreads?"
+    ],
+    "rows": [
+     [
+      "Alpha (with primase)",
+      "Priming both strands",
+      "No exonuclease (error prone starts, replaced)"
+     ],
+     [
+      "Epsilon",
+      "Leading strand bulk",
+      "Yes (POLE cancers hypermutate)"
+     ],
+     [
+      "Delta",
+      "Lagging, maturation, repair",
+      "Yes (POLD1 cancers and immunodeficiency)"
+     ],
+     [
+      "Beta",
+      "Base excision repair short patch",
+      "No (gap filling specialist)"
+     ],
+     [
+      "Gamma",
+      "Mitochondrial DNA (sole)",
+      "Yes (POLG depletion syndromes)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bacterial prototypes** map cleanly (polymerase III holoenzyme main replicative with proofreading subunit, polymerase I five to three exonuclease removing RNA primers ahead of its polymerase (nick translation), polymerase II repair restart, ligase NAD dependent, DnaB helicase, DnaG primase, gyrase supercoiling) and antibiotics exploit deltas: fluoroquinolones trap gyrase/topoisomerase IV cleavage complexes, rifampicin (transcription, separate), metronidazole breaks DNA after anaerobic reduction. Eukaryotic origin firing excess (dormant origins) rescues stalled forks in replication stress (ATR kinase guardian, hydroxyurea and aphidicolin experimental stalls).",
+   "say": "Bacterial polymerase three replicates while polymerase one removes primers by nick translation historically. Dormant origins rescue stalled forks in replication stress under ATR guardian surveillance during S phase.",
+   "vis": null
+  },
+  {
+   "tx": "**Fork stalling** lesions (thymine dimers, interstrand crosslinks, R loops transcription collisions, fragile sites under replicated in oncogene stress) collapse to double strand breaks if restart fails (homologous recombination restart next lessons), checkpoint kinases ATR-Chk1 (single strand RPA signal) and ATM-Chk2 (break signal) arrest cycle and stabilise forks, BRCA deficient cells dying by PARP trapping synthetic lethality ahead. Nucleotide starvation (hydroxyurea, antifolates prior lesson) stalls globally and reversibly, synchronising cell culture classics still used experimentally.",
+   "say": "Stalled forks collapse to breaks if restart fails, with ATR and ATM checkpoints arresting cycle protectively. Nucleotide starvation stalls globally and reversibly, synchronising cultures in classic experimental designs.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fork in trouble",
+    "nodes": [
+     {
+      "id": "les",
+      "label": "Lesion or nucleotide starvation stalls fork"
+     },
+     {
+      "id": "atr",
+      "label": "RPA single strand: ATR-Chk1 stabilises"
+     },
+     {
+      "id": "restart",
+      "label": "Repair, bypass or dormant origin rescues"
+     },
+     {
+      "id": "break",
+      "label": "Collapse to break if all fail (HR repairs)"
+     }
+    ],
+    "edges": [
+     [
+      "les",
+      "atr"
+     ],
+     [
+      "atr",
+      "restart"
+     ],
+     [
+      "restart",
+      "break"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Telomeres solve linear ends next lesson, but fork completeness ends here with termination: converging forks, decatenation by topoisomerase II (sister chromatids disentangled for mitosis, etoposide leukaemia translocation cost), replication timing programmes (early euchromatin, late heterochromatin, replication timing domains shifting in cancer), and **origin licensing** repression in G2 (geminin inhibiting Cdt1, degraded at mitosis reset) ensuring exactly once duplication whose failure rereplicates segments into gene amplifications and breaks, genome instability examiners connect to cancer hallmarks directly.",
+   "say": "Converging forks decatenate by topoisomerase two for mitosis with leukaemia translocation costs historically. Licensing ensures exactly once duplication whose failure rereplicates segments into genome instability and cancer hallmarks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Licensed once (healthy S)",
+     "points": [
+      "Origins loaded G1, fired S, geminin guards G2",
+      "Dormant origins as reserve",
+      "Genome copied exactly once"
+     ]
+    },
+    "right": {
+     "title": "Re-replication (licensing failed)",
+     "points": [
+      "Origins refire within S/G2",
+      "Gene amplification and breaks",
+      "Oncogene induced stress model"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
