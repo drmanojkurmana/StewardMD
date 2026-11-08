@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Payoff phase and pyruvate kinase",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "After commitment, **aldolase** splits fructose-1,6-bisphosphate into two interconvertible three carbon sugars, and triose phosphate isomerase keeps only glyceraldehyde-3-phosphate moving forward. The next enzyme oxidises that sugar while attaching inorganic phosphate, producing 1,3-bisphosphoglycerate with a very high energy bond. Arsenate can replace phosphate here, but the product hydrolyses spontaneously, so glycolysis runs without capturing ATP.",
+   "say": "Aldolase splits the six carbon sugar into two three carbon sugars, and only glyceraldehyde-3-phosphate moves forward. The next enzyme oxidises it and attaches phosphate, making high energy 1,3-bisphosphoglycerate. Arsenate can replace phosphate, but the product breaks down at once, so no ATP is captured.",
+   "vis": {
+    "kind": "flow",
+    "title": "From six carbons to payoff",
+    "nodes": [
+     {"id": "f16", "label": "Fructose-1,6-bisphosphate"},
+     {"id": "tri", "label": "Two triose phosphates"},
+     {"id": "bpg", "label": "1,3-Bisphosphoglycerate"},
+     {"id": "pyr", "label": "Pyruvate"}
+    ],
+    "edges": [["f16", "tri"], ["tri", "bpg"], ["bpg", "pyr"]]
+   }
+  },
+  {
+   "tx": "Phosphoglycerate kinase now performs the first **substrate level phosphorylation**, handing the high energy phosphate directly to ADP. Because two trioses run per glucose, this step repays the two ATP invested earlier. A mutase then shifts the remaining phosphate, and enolase removes water to create phosphoenolpyruvate, whose phosphate bond is among the most energy rich in metabolism.",
+   "say": "Phosphoglycerate kinase performs the first substrate level phosphorylation, handing phosphate directly to ADP. Because two trioses run per glucose, this step repays the two ATP invested earlier. Enolase then removes water to create phosphoenolpyruvate, whose phosphate bond is among the most energy rich in metabolism.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Step", "Energy event", "Exam hook"],
+    "rows": [
+     ["Phosphoglycerate kinase", "ATP made (substrate level)", "Repays the investment phase"],
+     ["Enolase", "Makes phosphoenolpyruvate", "Blocked by fluoride in blood tubes"],
+     ["Pyruvate kinase", "Second ATP made", "Needs magnesium and potassium"]
+    ]
+   }
+  },
+  {
+   "tx": "Fluoride earns its place in blood collection tubes by blocking **enolase**, which freezes glycolysis after sampling so the laboratory measures the glucose the patient actually had. Inside the body the step needs magnesium ions. When enolase stalls, upstream intermediates accumulate and ATP harvest falls, illustrating how one late block starves the whole payoff sequence despite a normal entry rate.",
+   "say": "Fluoride blocks enolase, which freezes glycolysis after sampling so the laboratory measures the glucose the patient actually had. Inside the body the step needs magnesium. When enolase stalls, upstream intermediates accumulate and the ATP harvest falls despite a normal entry rate.",
+   "vis": null
+  },
+  {
+   "tx": "The final step uses **pyruvate kinase** to transfer the phosphate from phosphoenolpyruvate to ADP, yielding pyruvate and the second net ATP per triose. Counting both trioses, glycolysis nets two ATP and two cytosolic NADH per glucose before mitochondria are involved. Feed forward activation by fructose-1,6-bisphosphate keeps this exit synchronised with the committed step upstream.",
+   "say": "Pyruvate kinase transfers phosphate from phosphoenolpyruvate to ADP, yielding pyruvate and ATP. Counting both trioses, glycolysis nets two ATP and two cytosolic NADH per glucose. Feed forward activation by fructose-1,6-bisphosphate keeps this exit synchronised with the committed step.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Investment phase (per glucose)", "points": ["Hexokinase spends 1 ATP", "PFK-1 spends 1 ATP", "Total spent: 2 ATP"]},
+    "right": {"title": "Payoff phase (per glucose)", "points": ["Kinase step makes 2 ATP", "Pyruvate kinase makes 2 ATP", "Net gain: 2 ATP plus 2 NADH"]
+    }
+   }
+  },
+  {
+   "tx": "Red cells depend entirely on this payoff because they carry no mitochondria, so inherited **pyruvate kinase deficiency** leaves them short of ATP. Sodium and calcium leak in, membranes stiffen, and splenic macrophages remove the rigid cells, causing chronic haemolytic anaemia with splenomegaly. Raised 2,3-BPG partly compensates by releasing oxygen more easily to tissues despite the anaemia.",
+   "say": "Red cells have no mitochondria, so they depend entirely on this payoff. In pyruvate kinase deficiency they run short of ATP, membranes stiffen, and the spleen removes them, causing chronic haemolytic anaemia. Raised 2,3-BPG partly compensates by releasing oxygen more easily.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Finding in pyruvate kinase deficiency", "Why it happens"],
+    "rows": [
+     ["Chronic haemolysis, high reticulocytes", "ATP poor red cells removed by spleen"],
+     ["Splenomegaly", "Work hypertrophy from constant trapping"],
+     ["Raised 2,3-BPG", "Upstream intermediates divert to the shunt"],
+     ["Improvement after splenectomy", "Main destruction site removed"]
+    ]
+   }
+  },
+  {
+   "tx": "Pyruvate itself now faces three competing fates decided by oxygen, energy state and tissue type. With oxygen and mitochondria it enters the **pyruvate dehydrogenase** route toward acetyl-CoA, without oxygen it becomes lactate to regenerate NAD, and in liver it can be carboxylated back toward glucose. The next lessons follow the mitochondrial road and then the lactate and red cell detours.",
+   "say": "Pyruvate now faces three fates decided by oxygen, energy state and tissue type. With oxygen it heads to acetyl-CoA, without oxygen it becomes lactate to regenerate NAD, and in liver it can be carboxylated toward glucose. The next lessons follow the mitochondrial road and the lactate detour.",
+   "vis": {
+    "kind": "flow",
+    "title": "Three fates of pyruvate",
+    "nodes": [
+     {"id": "pyr", "label": "Pyruvate"},
+     {"id": "aco", "label": "Acetyl-CoA (aerobic)"},
+     {"id": "lac", "label": "Lactate (anaerobic)"},
+     {"id": "oaa", "label": "Oxaloacetate (liver)"}
+    ],
+    "edges": [["pyr", "aco"], ["pyr", "lac"], ["pyr", "oaa"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

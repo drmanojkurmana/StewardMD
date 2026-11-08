@@ -1,66 +1,75 @@
 {
- "v": 1,
- "module": "ort-benign-bone-tumours",
- "subject": "orthopaedics",
- "title": "Benign bone tumours: age, site and margin sort them",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Sort** (**age** child versus adult splits, **site** epi-meta-diaphyseal zones, **Enneking** latent active aggressive, **geographic** sharp benign rims, **moth-eaten** lymphoma aggressive, **permeative** Ewing round-cell, **Codman** triangle lifts, **sunburst** osteosarcoma spikes) with **reads** (**x-ray** whole-bone views, **MRI** marrow soft-tissue) stages; **biopsy** (tract-planned cores) proves. Margins speak.",
-   "say": "Ages sites Ennekings geographics is sort: splits sort child-adult zones map epi-meta rims rim geographics edge moths eat aggressives drill spikes lift Codmans tent biopsies plan tracts seed reads scan wholes stage. Films sort.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Cartilage** (**osteochondroma** exostosis away-grows cartilage-cap, **malignant** one-percent chondrosarcoma cap-thick, **enchondroma** hands calcified stipple, **Ollier** multiple enchondromas deform, **Maffucci** haemangioma sarcoma-risk, **chondroblastoma** epiphysis young sclerotic, **fibroma** chondromyxoid eccentric, **excise** symptomatic extra-periosteal) with **watches** (**growth** cessation matures, **pain** adult-growth alarms) tracks; **map** (skeletal survey) counts. Caps cartilage.",
-   "say": "Exostoses enchondromas Olliers chondroblastomas is cartilage: caps top exostoses point aways thicken warn maligns change stipples dot hands deform bend multiples curve surveys map skeletons count watches track growths halt maps draw wholes survey. Lumps cap.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/ort-benign-bone-tumours-fig1.webp",
-    "alt": "Radiographic examples of benign cartilaginous tumors: osteochondroma (metaphysis), enchondroma (hand, stipple), and chondroblastoma (epiphysis). Illustrates age, site, and margin characteristics.",
-    "caption": "Benign cartilaginous tumors: typical age, site, and radiographic features",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Bone-fibrous** (**osteoid** night aspirin nidus small, **osteoblastoma** larger spine posterior, **NOF** eccentric cortically-based heals, **fibrous** ground-glass shepherd-crook, **McCune** cafe-au-lait precocious polyostotic, **cyst** fallen-fragment humerus, **aneurysmal** fluid-levels young blowout, **curette** graft defects) with **relieves** (**salicylate** night-pain test, **RFA** nidus burns) treats; **brace** (fracture-risk) guards. Fibres fill.",
-   "say": "Osteoids blasts NOFs fibrous is bone: nights ache aspirins ease nidi glow smalls dot backs arch posteriors hug eccentrics hug cortices heal glasses grind grounds crooks curve shepherds bend relieves calm salicylates soothe braces guard fractures risk. Lesions ache.",
-   "vis": null
-  },
-  {
-   "tx": "**GCT-ABC** (**GCT** epiphysio-metaphyseal soap-bubble mature, **grade** Campanacci cortex breach, **denosumab** RANKL giant-cell melts, **cement** curettage thermal kills, **recur** twenty-percent re-curette, **ABC** blow-out shell younger, **fluid** levels MRI double-density, **embolise** sacral unresectable) with **spans** (**resection** expendable fibula, **prosthesis** joint-sparing) rebuilds; **follow** (lung nodules) screens. Giants bubble.",
-   "say": "GCTs grades denosumabs cements is giant: bubbles foam soaps lather breaches grade cortices melt drugs shrink RANKLs block kills burn cements bake recurs seed twenties loom spans bridge resections span follows screen lungs seed. Epiphyses bubble.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-ort-081",
-  "bk2-ort-082",
-  "bk2-ort-083",
-  "bk2-ort-084",
-  "bk2-ort-085",
-  "bk2-ort-086",
-  "bk2-ort-087",
-  "bk2-ort-088",
-  "bk2-ort-089",
-  "bk2-ort-090"
- ],
- "src": [],
- "refs": [
-  "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-ort1",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "module": "ort-benign-bone-tumours",
+  "quiz": [
+    "bk2-ort-081",
+    "bk2-ort-082",
+    "bk2-ort-083",
+    "bk2-ort-084",
+    "bk2-ort-085",
+    "bk2-ort-086",
+    "bk2-ort-087",
+    "bk2-ort-088",
+    "bk2-ort-089",
+    "bk2-ort-090"
+  ],
+  "refs": [
+    "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-ort1",
+  "src": [],
+  "steps": [
+    {
+      "say": "Every bone lesion is first sorted by the age of the patient, the site in the bone, and the sharpness of its margin. A sharp geographic rim suggests benign disease, while moth eaten or permeative margins, Codman triangle, or sunburst spikes warn of aggression. Whole bone radiographs with MRI for marrow and soft tissue extension complete staging, and a tract planned core biopsy proves the diagnosis.",
+      "tx": "Sort every bone lesion by age, site, and margin before naming it. Children and adults differ, and epiphyseal, metaphyseal, and diaphyseal zones point to different entities. A **geographic** margin with a sharp sclerotic rim favours benign disease, while moth eaten or permeative patterns, **Codman triangle**, and sunburst spiculation warn of aggression. Whole bone X ray with MRI for marrow and soft tissue stages the lesion, and planned core **biopsy** proves it.",
+      "vis": null
+    },
+    {
+      "say": "Osteochondroma grows away from the joint with a cartilage cap and stops growing at maturity, so new growth in an adult warns of chondrosarcoma. Stippled calcification in hand bones suggests enchondroma, while multiple lesions suggest Ollier disease and added haemangiomas suggest Maffucci syndrome. Chondroblastoma affects the epiphysis in young patients with surrounding sclerosis, and symptomatic lesions are excised outside the periosteum.",
+      "tx": "Cartilage tumours start with **osteochondroma**, a metaphyseal exostosis that grows away from the joint with a cartilage cap and stops at maturity. Adult growth or a thick cap warns of secondary chondrosarcoma in about one percent. **Enchondroma** gives stippled calcification in hand bones, multiple lesions mark Ollier disease, and haemangiomas with sarcoma risk mark Maffucci syndrome. **Chondroblastoma** affects the epiphysis in the young with sclerosis, and symptomatic lesions are excised outside the periosteum.",
+      "vis": {
+        "alt": "Radiographic examples of benign cartilaginous tumors: osteochondroma (metaphysis), enchondroma (hand, stipple), and chondroblastoma (epiphysis). Illustrates age, site, and margin characteristics.",
+        "ar": 1.8349,
+        "caption": "Benign cartilaginous tumors: typical age, site, and radiographic features",
+        "kind": "image",
+        "src": "v1/lessons/media/ort-benign-bone-tumours-fig1.webp"
+      }
+    },
+    {
+      "say": "A small nidus with night pain that eases with salicylates points to osteoid osteoma, which ablation treats, while a larger spinal lesion points to osteoblastoma. Ground glass bone with shepherd crook deformity indicates fibrous dysplasia, sometimes with cafe au lait spots and early puberty. Cysts with a fallen fragment and blowout lesions with fluid levels in the young are curetted and grafted, with bracing when fracture threatens.",
+      "tx": "Bone and fibrous lesions include **osteoid osteoma**, a small nidus with night pain relieved by salicylates and treated by radiofrequency ablation, and larger spinal osteoblastoma of posterior elements. Non ossifying fibroma is eccentric and cortical and heals, while **fibrous dysplasia** shows ground glass bone with shepherd crook deformity and McCune Albright overlap. Simple cysts show a fallen fragment, **aneurysmal bone cyst** shows fluid levels with blowout in the young, and defects are curetted, grafted, and braced.",
+      "vis": null
+    },
+    {
+      "say": "Giant cell tumour of mature bone shows a soap bubble lucency near the joint and is graded by cortical breach. Extended curettage with cement, denosumab for giant cells, resection of expendable bone, or joint sparing prosthesis rebuilds the limb, with follow up for recurrence and lung nodules. Aneurysmal bone cyst gives a blowout shell with fluid levels in younger patients, and sacral lesions that cannot be removed are embolised.",
+      "tx": "**Giant cell tumour** affects mature epiphyseal metaphyseal bone with a soap bubble lucency, graded by Campanacci cortex breach. Extended curettage with cement heat kills residual cells, **denosumab** melts giant cells by RANKL blockade, expendable bone is resected, and joints are rebuilt with prosthesis. Recurrence reaches twenty percent and lung nodules need follow up. **Aneurysmal bone cyst** gives blowout shell lesions with fluid levels in the young, and sacral lesions are embolised when unresectable.",
+      "vis": null
+    },
+    {
+      "say": "This knee film shows an expansile bubbly lucency of the distal femur reaching close to the joint, with a thinned lateral cortex stretched into a shell. The mature site near the joint with soap bubble septations points to giant cell tumour. Curettage with cement, denosumab in selected cases, and follow up for recurrence and lung nodules completes the management.",
+      "tx": "This knee radiograph shows a classic **giant cell tumour** of the distal femur with expansile **soap bubble lucency** reaching the joint surface. The lateral **thinned cortex** is stretched into a shell without wide destruction, the mature epiphyseal metaphyseal site examiners expect. Recognising this picture matters because curettage with cement, denosumab in selected cases, and follow up for recurrence and lung nodules completes this exact diagnosis.",
+      "vis": {
+        "alt": "Frontal knee radiograph showing expansile bubbly distal femur lucency with thinned lateral cortex.",
+        "ar": 1.3393,
+        "caption": "Knee radiograph showing soap bubble lucency and cortical thinning Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/ort-benign-bone-tumours-gen1.webp"
+      }
+    }
+  ],
+  "subject": "orthopaedics",
+  "title": "Benign bone tumours: age, site and margin sort them",
+  "v": 1
 }

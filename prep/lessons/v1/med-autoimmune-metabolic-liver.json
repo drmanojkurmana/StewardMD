@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-autoimmune-metabolic-liver",
- "subject": "medicine",
- "title": "Autoimmune, cholestatic, metabolic and drug-induced liver disease",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**AIH** (**young** female arthralgia acne, **ANA** SMA IgG high, **biopsy** interface hepatitis rosettes, **steroids** prednisolone induces, **azathioprine** TPMT maintains, **relapse** tapers flares, **overlap** PBC PSC cholestasis, **transplant** fails lists) with **viva** (**flaring** jaundiced girl, **steroid** cushingoid moon) profiles; **scores** (revised originals) counts. Livers attack.",
-   "say": "Youngs ANAs biopsies steroids is AIH: azathioprines maintain relapses taper overlaps mix transplants list scores count flares monitor bones thin sugars sweet faces moon moods lift. Immunity turns.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**PBC** (**middle-aged** female itch fatigue, **AMA** M2 specific, **ALP** GGT cholestatic rises, **UDCA** slows itches, **obeticholic** second-line pruritus, **bones** osteoporosis DEXAs, **xanthoma** xanthelasma marks, **transplant** bilirubin lists) with **Sjogren** (**sicca** dry Schirmer) dries; **fat** (ADEK replaces) supplements. Ducts vanish while phosphatase climbs bilirubin lags biopsies stage.",
-   "say": "Females AMAs ALPs UDCAs is PBC: obeticholics itch bones thin xanthomas mark transplants list Sjogrens dry fats replace vitamins supplement itches soothe nails club bleeds watch. Biles stall while pruritus ranks bile acids sequestrants relieve.",
-   "vis": null
-  },
-  {
-   "tx": "**PSC** (**IBD** UC young male, **MRCP** beaded strictures, **cholangitis** Charcot ERCP drains, **cholangiocarcinoma** CA19-9 brushings, **dominant** strictures dilates, **transplant** recurrent lists, **surveillance** colon dysplasia, **vancomycin** trials selected) with **IgG4** (**pancreas** sausage steroids) mimics; **pruritus** (cholestyramine rifampicin) eases. Ducts bead while stents exchange strictures dilate surveillance continues.",
-   "say": "IBDs MRCPs cholangitises is PSC: carcinomas brush dominants dilate transplants list surveillances scope vancomycins trial IgG4s mimic pancreases swell prurituses ease transplants cure recurrences haunt bowels scope. Beads stricture while stents exchange cholangitis recurs surveillance continues.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-autoimmune-metabolic-liver-fig1.webp",
-    "alt": "Magnetic Resonance Cholangiopancreatography (MRCP) image displaying the pathognomonic \"beaded\" appearance of bile ducts, indicative of Primary Sclerosing Cholangitis (PSC).",
-    "caption": "MRCP showing characteristic beaded strictures in Primary Sclerosing Cholangitis",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Metabolic** (**Wilson** young Kayser-Fleischer ceruloplasmin, **penicillamine** chelates zinc blocks, **haemochromatosis** bronze diabetes C282Y, **venesection** ferritin taps, **A1AT** young emphysema levels, **DILI** Roussel timing stops, **paracetamol** Rumack NAC guards, **pregnancy** HELLP AFLP delivers) with **tests** (**slit** lamp rings, **iron** saturation MRIs, **levels** A1AT phenotypes) proves; **family** (screens counsels) traces. Genes load.",
-   "say": "Wilsons penicillamines haemochromatoses is metabolic: venesections tap A1ATs wheeze DILIs time paracetamols plot pregnancies press slits lamp irons load levels type families screen siblings test diets counsel steels avoid transfusions limit. Coppers irons.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-271",
-  "bk2-med-272",
-  "bk2-med-273",
-  "bk2-med-274",
-  "bk2-med-275",
-  "bk2-med-276",
-  "bk2-med-277",
-  "bk2-med-278",
-  "bk2-med-279",
-  "bk2-med-280"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon3",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-autoimmune-metabolic-liver",
+  "quiz": [
+    "bk2-med-271",
+    "bk2-med-272",
+    "bk2-med-273",
+    "bk2-med-274",
+    "bk2-med-275",
+    "bk2-med-276",
+    "bk2-med-277",
+    "bk2-med-278",
+    "bk2-med-279",
+    "bk2-med-280"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon3",
+  "src": [],
+  "steps": [
+    {
+      "say": "Consider autoimmune hepatitis when a young woman develops jaundice with joint pain and acne, because this demographic pattern is classic. Check ANA, smooth muscle antibody and IgG levels, and arrange liver biopsy, since interface hepatitis with plasma cells confirms the diagnosis. Induce remission with steroids and maintain it with azathioprine, because relapse follows hasty tapers. Watch bones, sugar and mood on treatment, screen for overlap syndromes, and refer early for transplant assessment when failure looms.",
+      "tx": "Suspect autoimmune hepatitis in a **young woman pattern** with fluctuating jaundice, fatigue, arthralgia and acne, mapping relapses against steroid tapers and overlap cholestasis. Confirm with a **serology and histology pair** of raised ANA, smooth muscle antibody and IgG plus interface hepatitis with plasma cells and rosettes on biopsy. Start a **steroid induction plan** with prednisolone, maintain with azathioprine after TPMT assessment, counsel on relapse, bone and metabolic effects, screen overlap with primary biliary cholangitis or sclerosing cholangitis, and list for transplant when liver failure advances.",
+      "vis": null
+    },
+    {
+      "say": "Study the pink liver tissue crowded by blue inflammatory cells, because the battle sits at the portal edge. Find where inflammation crosses into the parenchyma, since this interface activity defines autoimmune hepatitis. You should spot the plasma cells with their clock face nuclei, because they mark antibody driven injury. Notice the rosettes below, where surviving liver cells ring a lumen during repair. Link this picture to high IgG, because histology and serology confirm each other.",
+      "tx": "The micrograph shows a dense **portal inflammation field** in pink and blue, with arrows marking interface hepatitis where inflammation spills into surrounding liver tissue. Nearby **plasma cell clusters** with round eccentric nuclei signal the autoimmune process behind the attack. Lower right, **rosette formation** appears as hepatocytes ringed around a central lumen, a classic regenerative response that helps examiners separate autoimmune hepatitis from viral or drug injury.",
+      "vis": {
+        "alt": "Liver histology with portal inflammation, interface hepatitis, plasma cells and hepatocyte rosettes",
+        "ar": 1.3393,
+        "caption": "Histology of autoimmune hepatitis with interface activity. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-autoimmune-metabolic-liver-gen1.webp"
+      }
+    },
+    {
+      "say": "Suspect primary biliary cholangitis when a middle aged woman reports relentless itch with fatigue, because cholestasis explains both. Check alkaline phosphatase and request antimitochondrial M2 antibody, since strong positivity secures the diagnosis. Start ursodeoxycholic acid early, because it slows duct loss. Soothe itching, replace vitamins A, D, E and K, monitor bones with DEXA, and watch xanthomas and bilirubin. Ask about dry eyes and mouth, since Sjogren overlap is common. List for transplant when liver function declines.",
+      "tx": "Build a **cholestatic itch profile** in a middle aged woman with fatigue and pruritus, raised alkaline phosphatase and gamma GT, xanthelasma and bone thinning from chronic cholestasis. Anchor diagnosis on the **AMA M2 anchor** with antimitochondrial M2 antibody, staging biopsy and exclusion of obstruction, while noting dry eyes and mouth from Sjogren overlap. Provide **UDCA based care** with ursodeoxycholic acid, second line agents where response fails, pruritus relief, fat soluble vitamin replacement, DEXA surveillance and transplant listing as bilirubin climbs.",
+      "vis": null
+    },
+    {
+      "say": "Request MRCP when a young man with colitis develops cholestasis, because beaded strictures reveal sclerosing cholangitis. Drain acute cholangitis promptly and dilate dominant strictures, since obstruction accelerates damage. You should survey brushings and the colon regularly, because cancer and dysplasia threaten long term survival. Exclude IgG4 disease that mimics this picture, since steroids help that mimic. Control itching, maintain bowel surveillance and list for transplant when indicated, remembering recurrence can follow grafting.",
+      "tx": "Recognise the **beaded duct signature** of primary sclerosing cholangitis on MRCP in a young man with inflammatory bowel disease, usually ulcerative colitis, presenting with cholestasis and recurrent cholangitis. Manage dominant strictures with endoscopic dilation and drainage, and keep a **stricture and cancer watch** with CA19-9, brushings and colon dysplasia surveillance because cholangiocarcinoma risk persists. Finish with **IBD and IgG4 sorting** by scoping the bowel, excluding IgG4 pancreatic mimics that respond to steroids, easing pruritus, and listing for transplant while remembering disease can recur in the graft.",
+      "vis": {
+        "alt": "Magnetic Resonance Cholangiopancreatography (MRCP) image displaying the pathognomonic \"beaded\" appearance of bile ducts, indicative of Primary Sclerosing Cholangitis (PSC).",
+        "ar": 1.8349,
+        "caption": "MRCP showing characteristic beaded strictures in Primary Sclerosing Cholangitis",
+        "kind": "image",
+        "src": "v1/lessons/media/med-autoimmune-metabolic-liver-fig1.webp"
+      }
+    },
+    {
+      "say": "Examine young liver disease for tremor and Kayser Fleischer rings, because copper deposition explains Wilson disease. Check ceruloplasmin and arrange slit lamp review, since both support the diagnosis. Think of bronze skin with diabetes and joint pain as iron overload, and confirm it with saturation, ferritin and genetics. You should consider alpha-1 antitrypsin deficiency when emphysema accompanies liver disease. Stop the culprit drug in drug injury, give acetylcysteine for paracetamol poisoning, and deliver urgently for HELLP or fatty liver of pregnancy. Screen siblings in inherited disease.",
+      "tx": "Chase a **copper overload story** in a young patient with tremor, dysarthria, Kayser Fleischer rings and low ceruloplasmin, confirming Wilson disease before chelation and family screening. Contrast it with an **iron overload story** of bronze skin, diabetes and arthropathy with high saturation and ferritin from C282Y haemochromatosis, managed by venesection and MRI guidance, plus emphysema pointing to alpha-1 antitrypsin deficiency. Finish with **drug and pregnancy triggers** by timing drug induced injury with Roussel criteria, guarding paracetamol overdose with acetylcysteine, and delivering for HELLP or acute fatty liver of pregnancy.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Autoimmune, cholestatic, metabolic and drug-induced liver disease",
+  "v": 1
 }

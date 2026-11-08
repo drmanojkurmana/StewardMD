@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-malabsorption",
- "subject": "medicine",
- "title": "Diarrhoea, malabsorption and coeliac disease",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**chronic** 4-week bulky floats, **steatorrhoea** oily difficult flushes, **weight** wasting despite eats, **anaemia** iron B12 folate, **coeliac** family autoimmune thyroid, **pancreatic** alcohol pain diabetes, **IBD** blood mucus urgency, **travel** Giardia antibiotics) with **viva** (**thin** floating stools, **bloated** deficient child) profiles; **diet** (gluten dairy FODMAP) recalls. Guts malabsorb.",
-   "say": "Chronics steatorrhoeas weights anaemias is history: coeliacs cluster pancreatics ache IBDs bleed travels parasitise diets recall glutens hide dairies bloat FODMAPs ferment stools float. Bellies bloat.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**wasting** temporalis hollows, **oedema** protein loss ankles, **anaemia** pallor angular cheilitis, **dermatitis** herpetiformis elbows, **clubbing** IBD warns, **mouth** ulcers aphthous B12, **thyroid** autoimmune associations, **growth** children stalls) with **bedside** (**BMI** MUST scores, **stool** charts Bristol pots, **BP** postural dehydrates) charts; **neuropathy** (B12 dorsal) tests. Bodies waste.",
-   "say": "Wastings oedemas anaemias dermatitides is exam: clubbings warn mouths ulcer thyroids swell growths stall BMIs score stools chart pressures drop neuropathies tingle diets weigh supplements replace. Skins blister.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-malabsorption-fig1.webp",
-    "alt": "A composite image showing a child with wasting and growth faltering, dermatitis herpetiformis on an elbow, finger clubbing, and angular cheilitis, illustrating malabsorption signs.",
-    "caption": "Key physical signs of malabsorption: dermatitis herpetiformis, wasting, clubbing, and growth faltering",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Investigations** (**tTG** IgA coeliac genotypes, **duodenal** villous Marsh biopsies, **faecal** elastase calprotectin, **B12** folate iron studies, **albumin** protein loss, **DEXA** coeliac bones, **hydrogen** breath SIBO lactose, **CT** pancreatic calcifies) with **differentials** (**IBS** Rome pain relief, **IBD** blood calprotectin scopes, **TB** ileocaecal night sweats, **malignancy** weight blocks scopes) sorts; **dietitian** (exclusion re-challenges) guides. Tests sort.",
-   "say": "tTGs duodenals faecals is Ix: B12s low albumins fall DEXAs thin breaths rise CTs stone IBSs cramp IBDs bleed TBs sweat malignancies block dietitians guide exclusions trial rechallenges prove nutrients replace flares treat. Villi flatten.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**gluten-free** lifelong oats labelled, **iron** B12 folate replaces, **pancreatic** Creon doses fats, **IBD** mesalazine biologics, **SIBO** rifaximin rotates, **lactose** avoidance lactase, **dietitian** reviews growth, **vaccines** coeliac spleen) with **traps** (**refractory** lymphoma screens, **hyposplenism** Howell-Jolly vaccines, **osteoporosis** DEXA calcium, **pregnancy** folate controls) closes; **follow** (tTG yearly) tracks. Guts absorb.",
-   "say": "Gluten-frees irons Creons is Rx: IBDs calm SIBOs rotate lactoses avoid dietitians review vaccines guard refractories scope spleens fail bones thin pregnancies guard folates shield growths track relapses watch. Villi heal.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-201",
-  "bk2-med-202",
-  "bk2-med-203",
-  "bk2-med-204",
-  "bk2-med-205",
-  "bk2-med-206",
-  "bk2-med-207",
-  "bk2-med-208",
-  "bk2-med-209",
-  "bk2-med-210"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon3",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-malabsorption",
+  "quiz": [
+    "bk2-med-201",
+    "bk2-med-202",
+    "bk2-med-203",
+    "bk2-med-204",
+    "bk2-med-205",
+    "bk2-med-206",
+    "bk2-med-207",
+    "bk2-med-208",
+    "bk2-med-209",
+    "bk2-med-210"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon3",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about diarrhoea lasting past four weeks with bulky stools that float and flush poorly, because this defines steatorrhoea. Ask about weight loss despite eating well, pallor and tiredness from iron, B12 and folate deficiency, and coeliac disease with thyroid disease in the family. Record pancreatic pain with alcohol use and diabetes, blood with mucus and urgency, travel and antibiotics, and gluten, dairy and FODMAP intake, as all are relevant.",
+      "tx": "Ask about chronic diarrhoea past four weeks with bulky floating stools that flush poorly, the picture of **steatorrhoea**. Ask about weight loss despite eating, iron, B12 and folate deficiency, coeliac disease with thyroid autoimmunity in the family, pancreatic pain with alcohol and diabetes, and blood with mucus and urgency of **inflammatory bowel** disease. Record travel, Giardia, antibiotics, and gluten, dairy and **FODMAP intake**.",
+      "vis": null
+    },
+    {
+      "say": "Look for wasting of the temporalis muscle, ankle oedema from protein loss, pallor with cracked mouth corners, itchy blisters over the elbows, clubbing, and mouth ulcers. Check the thyroid for autoimmune swelling and chart growth in children, because growth stalls early in deficiency. Record BMI with a malnutrition score, chart the stools, and test postural pressure and dorsal column signs.",
+      "tx": "Look for temporal wasting, ankle oedema of protein loss, pallor with angular cheilitis, **dermatitis herpetiformis** over elbows, clubbing of inflammatory bowel disease, and mouth ulcers of B12 deficiency. Check thyroid swelling of autoimmunity and stalled growth in children. Record BMI with a **malnutrition score**, chart stools on the **Bristol scale**, and test posture, pressure and dorsal column signs.",
+      "vis": {
+        "alt": "A composite image showing a child with wasting and growth faltering, dermatitis herpetiformis on an elbow, finger clubbing, and angular cheilitis, illustrating malabsorption signs.",
+        "ar": 1.8349,
+        "caption": "Key physical signs of malabsorption: dermatitis herpetiformis, wasting, clubbing, and growth faltering",
+        "kind": "image",
+        "src": "v1/lessons/media/med-malabsorption-fig1.webp"
+      }
+    },
+    {
+      "say": "Order tissue transglutaminase IgA with total IgA, then biopsy the duodenum for villous atrophy graded by Marsh. Check faecal elastase for pancreatic failure and calprotectin for bowel inflammation, and replace B12, folate and iron. Read albumin and bone density for chronic loss, use hydrogen breath tests for SIBO and lactose intolerance, and CT for pancreatic calcification. Separate IBS, IBD, tuberculosis and malignancy.",
+      "tx": "Order **tissue transglutaminase** IgA with total IgA, then biopsy the duodenum for villous atrophy graded by Marsh. Check faecal elastase for pancreatic failure and calprotectin for bowel inflammation, replace B12, folate and iron, and read albumin and **bone density** for chronic loss. Use hydrogen breath tests for SIBO and lactose intolerance, CT for pancreatic calcification, and separate IBS, IBD, tuberculosis and malignancy.",
+      "vis": null
+    },
+    {
+      "say": "Compare the flat mucosa with the normal inset that shows tall villi, and notice the deep crypts with dense lymphocytes crowding the surface. This triad of villous atrophy, crypt hyperplasia and lymphocytes defines coeliac histology and explains why nutrients pass unabsorbed. For the exam, link flat villi with positive transglutaminase, Marsh grading, and lifelong gluten exclusion.",
+      "tx": "The section shows flat mucosa with **villous atrophy**, deep crypt hyperplasia and dense **intraepithelial lymphocytes**, set against a normal inset with tall villi. This triad defines coeliac histology and explains why nutrients pass unabsorbed. For the exam, link flat villi with positive transglutaminase, **Marsh grading**, and lifelong gluten exclusion that heals the mucosa.",
+      "vis": {
+        "alt": "Pink stained duodenal section showing flat villi, deep crypts, dense lymphocytes, normal inset.",
+        "ar": 1.3393,
+        "caption": "Duodenal histology with villous atrophy, crypt hyperplasia, lymphocytes. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-malabsorption-gen1.webp"
+      }
+    },
+    {
+      "say": "Keep a lifelong gluten free diet with labelled oats, and replace iron, B12 and folate until stores recover. Give pancreatic Creon with fatty meals, treat inflammatory bowel disease by tier, rotate rifaximin for SIBO, and ease lactose intolerance with avoidance or lactase. Review growth with a dietitian, vaccinate the hyposplenic patient, and track transglutaminase yearly.",
+      "tx": "Keep a lifelong **gluten free diet** with labelled oats, and replace iron, B12 and folate until stores recover. Give pancreatic Creon with fatty meals, treat inflammatory bowel disease by tier, rotate rifaximin for SIBO, and ease **lactose intolerance** with avoidance or lactase. Review growth with a dietitian, vaccinate the hyposplenic coeliac patient, and track tissue transglutaminase yearly for **refractory disease**.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Diarrhoea, malabsorption and coeliac disease",
+  "v": 1
 }

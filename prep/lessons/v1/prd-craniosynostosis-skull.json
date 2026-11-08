@@ -1,0 +1,209 @@
+{
+  "gen": "AI",
+  "id": "prd-craniosynostosis-skull",
+  "module": "Neonatal Cranial Ultrasound and Periventricular Injury",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Craniosynostosis and Skull Sutural Pathology",
+  "v": 1,
+  "steps": [
+    {
+      "say": "The commonest suture to fuse early is the sagittal suture, accounting for fifty to sixty percent of all craniosynostosis. Because the skull cannot widen across the fused suture, it grows long and narrow instead, giving the boat shaped head we call scaphocephaly.",
+      "tx": "Recognise **sagittal synostosis (scaphocephaly)** as the most common craniosynostosis, accounting for 50-60% of cases. Premature fusion of the sagittal suture blocks transverse calvarial growth, so compensatory growth along the open coronal and lambdoid sutures produces an elongated, boat-shaped dolichocephalic skull. Palpation often finds a ridged sagittal suture, and the head circumference chart shows length increasing out of proportion to width (Sagittal synostosis frequency).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Suture fused",
+          "Resulting head shape"
+        ],
+        "rows": [
+          [
+            "Sagittal (50-60%)",
+            "Scaphocephaly: long and narrow"
+          ],
+          [
+            "Metopic",
+            "Trigonocephaly: pointed forehead"
+          ],
+          [
+            "Unilateral coronal",
+            "Plagiocephaly: asymmetric forehead"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When one coronal suture fuses, the forehead and brow on that side flatten and the eye opening looks lifted. Radiographs show the raised sphenoid ridge and superior orbital rim that create the classic harlequin eye appearance, a sign worth naming in the report.",
+      "tx": "Identify the **Harlequin eye sign of unilateral coronal synostosis**. Premature fusion of one coronal suture causes ipsilateral frontal flattening with elevation of the sphenoid ridge and superior orbital rim, producing anterior plagiocephaly. The orbit looks raised and rounded like a harlequin mask on frontal imaging. This asymmetry differs from positional flattening because the brow itself is displaced upward on the fused side (Coronal synostosis and Harlequin eye).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Unilateral coronal synostosis",
+          "points": [
+            "Ipsilateral brow raised (Harlequin eye)",
+            "Forehead flattened on fused side",
+            "Surgical correction usually advised"
+          ]
+        },
+        "right": {
+          "title": "Deformational plagiocephaly",
+          "points": [
+            "Parallelogram head shape",
+            "Ipsilateral frontal bossing",
+            "Repositioning and physiotherapy first"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A fused metopic suture gives a very different forehead. The brow comes to a point in the middle with a palpable keel, the eyes sit closer together, and the whole forehead looks triangular from above, which is why we call it trigonocephaly.",
+      "tx": "Diagnose **metopic synostosis (trigonocephaly)** from the triangular forehead it produces. Premature closure of the metopic suture, the midline forehead suture that normally fuses in infancy, creates a pointed triangular forehead with a prominent midline frontal keel and hypotelorism, meaning the orbits sit abnormally close together. Mild metopic ridging without trigonocephaly is common and benign, so correlate the palpable ridge with the overall forehead shape.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Metopic suture fuses early"
+          },
+          {
+            "id": "b",
+            "label": "Midline frontal keel forms"
+          },
+          {
+            "id": "c",
+            "label": "Triangular forehead, hypotelorism"
+          },
+          {
+            "id": "d",
+            "label": "Trigonocephaly confirmed on 3D CT"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Not every flat head is a fused suture, and separating the two saves babies unnecessary surgery. Positional flattening makes a parallelogram shape with frontal bossing on the same side, while true lambdoid fusion makes a trapezoid and pulls the ear down and back.",
+      "tx": "Separate **deformational plagiocephaly from true lambdoid synostosis** by head shape and ear position. Positional non-synostotic plagiocephaly produces a parallelogram skull with ipsilateral frontal bossing and the ear pushed forward. True lambdoid synostosis is rare and creates a trapezoid skull with the ipsilateral ear displaced downward and backward, plus a palpable ridged lambdoid suture. Imaging is reserved for doubtful or worsening cases (Deformational plagiocephaly vs lambdoid).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Positional",
+          "Lambdoid synostosis"
+        ],
+        "rows": [
+          [
+            "Head shape from above",
+            "Parallelogram",
+            "Trapezoid"
+          ],
+          [
+            "Ear on flat side",
+            "Pushed forward",
+            "Down and backward"
+          ],
+          [
+            "Management",
+            "Repositioning first",
+            "Surgical referral"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Occasionally almost every suture fuses together, and the skull takes on a three lobed cloverleaf shape. This striking deformity, called kleeblattschadel, is classically linked with thanatophoric dysplasia type two and with Pfeiffer syndrome, so look carefully at the rest of the skeleton.",
+      "tx": "Recognise **cloverleaf skull deformity (Kleeblattschadel)** as pan-synostosis. Simultaneous fusion of the coronal, lambdoid and sagittal sutures forces the skull into a trilobed cloverleaf shape with bulging temporal regions. The classic associations are Thanatophoric dysplasia Type 2 and Pfeiffer syndrome. These children need urgent neurosurgical and genetic involvement because the constricted vault threatens the brain and the airway is often compromised by midface hypoplasia.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-paed-neo-head_skull_trauma.webp",
+        "alt": "Neonatal head and skull examination showing assessment of head shape and sutures.",
+        "caption": "Skull shape and suture assessment in the infant. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "A skull that has been under raised pressure for a long time leaves its mark on the bone itself. The inner table develops many small convolutional indentations, the copper beaten appearance, which should always prompt a search for the cause of the raised pressure.",
+      "tx": "Interpret the **copper beaten skull appearance** as a sign of chronically raised intracranial pressure. Diffuse convolutional indentations of the inner calvarial table, also called beaten brass change, develop when growing brain presses against a skull that cannot expand, most often in multi-suture synostosis. The finding is not a diagnosis by itself: it mandates assessment of head growth, fundoscopy for papilloedema and imaging of the fused sutures and ventricular size.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hydrocephalus-fig1.webp",
+        "alt": "Imaging of raised intracranial pressure and ventricular enlargement in a child.",
+        "caption": "Raised intracranial pressure: assess ventricles and sutures together. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Plain films can suggest a fused suture, but surgical planning needs the full three dimensional picture. A low dose volumetric scan with surface rendered reconstructions shows exactly which sutures are closed and lets the team plan the vault remodelling before theatre.",
+      "tx": "Use **low-dose 3D CT reconstructions** as the definitive preoperative roadmap for craniosynostosis. Volumetric surface-rendered computed tomography (CT) displays suture patency, calvarial shape and intracranial volume in a format the craniofacial team can plan against. Paediatric low-dose protocols keep radiation as low as reasonably achievable while preserving bony detail. Ultrasound of the sutures can screen young infants first, reserving CT for confirmed or complex cases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Clinical suspicion of synostosis"
+          },
+          {
+            "id": "b",
+            "label": "Suture ultrasound in young infant"
+          },
+          {
+            "id": "c",
+            "label": "Low-dose 3D CT if confirmed"
+          },
+          {
+            "id": "d",
+            "label": "Craniofacial surgical planning"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Finally, remember that several of these conditions run in families through fibroblast growth factor receptor mutations. Apert, Crouzon and Pfeiffer syndromes are autosomal dominant, combine complex synostosis with midface underdevelopment, and need genetics, airway and eye care alongside surgery.",
+      "tx": "Link **syndromic craniosynostoses to FGFR mutations**. Apert, Crouzon and Pfeiffer syndromes are autosomal dominant conditions driven by gain-of-function mutations in FGFR2 or FGFR3, the fibroblast growth factor receptor genes. They feature midface hypoplasia and complex multi-suture synostosis, often with raised intracranial pressure and airway obstruction. Every syndromic child needs genetic confirmation, ophthalmology surveillance and coordinated craniofacial follow up through growth (Syndromic craniosynostoses FGFR).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non-syndromic synostosis",
+          "points": [
+            "Usually a single suture",
+            "Head shape predicts the suture",
+            "Timed vault surgery"
+          ]
+        },
+        "right": {
+          "title": "Syndromic synostosis (FGFR)",
+          "points": [
+            "Apert, Crouzon, Pfeiffer syndromes",
+            "Midface hypoplasia and airway risk",
+            "Genetics and multidisciplinary care"
+          ]
+        }
+      }
+    }
+  ]
+}

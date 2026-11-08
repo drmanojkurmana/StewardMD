@@ -1,0 +1,209 @@
+{
+  "gen": "AI",
+  "id": "prd-pediatric-brain-tumors",
+  "module": "Posterior Fossa Anomalies, Dysraphism and Brain Tumors",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Pediatric Brain Tumors: Infratentorial and Supratentorial Neoplasms",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Age completely changes where you expect a child's brain tumour to sit. Between one and ten years of age, sixty to seventy percent of primary tumours are infratentorial, down in the posterior fossa, while neonates and adolescents flip back to mainly supratentorial disease.",
+      "tx": "Use the **infratentorial predominance rule** when approaching paediatric brain tumours. In children aged 1 to 10 years, over 60-70% of primary intracranial tumors are infratentorial, arising in the cerebellum, fourth ventricle and brainstem. The balance flips to supratentorial in neonates and adolescents. A posterior fossa presentation with morning headache, vomiting and ataxia in a school age child should therefore trigger urgent magnetic resonance imaging (MRI).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Age group",
+          "Commoner site"
+        ],
+        "rows": [
+          [
+            "Neonates",
+            "Supratentorial"
+          ],
+          [
+            "1 to 10 years",
+            "Infratentorial (60-70%)"
+          ],
+          [
+            "Adolescents",
+            "Supratentorial again"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The classic malignant posterior fossa tumour of childhood starts in the vermis, in the midline. Medulloblastoma looks dense on an unenhanced scan because it is packed with cells, and that same cellularity makes it restrict strongly on diffusion imaging.",
+      "tx": "Recognise **medulloblastoma imaging features** in the midline posterior fossa. This WHO grade 4 embryonal tumour arises from the cerebellar vermis at the roof of the 4th ventricle. High cellularity makes it hyperdense on unenhanced computed tomography (CT) and gives marked diffusion restriction with low apparent diffusion coefficient (ADC) on diffusion-weighted imaging (DWI). It enhances fairly homogeneously and commonly obstructs the fourth ventricle, causing hydrocephalus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/medulloblastoma-fig1.webp",
+        "alt": "MRI of medulloblastoma, a midline posterior fossa tumour of childhood.",
+        "caption": "Medulloblastoma: midline vermian mass with diffusion restriction. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Finding a medulloblastoma is only half the staging job. Up to thirty percent of children already have tumour coating the spinal meninges at presentation, so the whole spine needs contrast enhanced imaging before surgery, not after, to avoid confusing blood products with spread.",
+      "tx": "Complete **whole neuroaxis spine staging (CSI)** for every medulloblastoma patient. Contrast enhanced MRI of the entire spine is required before surgery to detect leptomeningeal drop metastases, present in up to 30% of children at diagnosis. Imaging after surgery is unreliable because blood products coat the meninges and mimic metastases. The spinal result changes the Chang stage, the craniospinal irradiation volume and the overall risk group (CSI spine staging).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Posterior fossa tumour found"
+          },
+          {
+            "id": "b",
+            "label": "Contrast MRI whole spine first"
+          },
+          {
+            "id": "c",
+            "label": "Detect drop metastases (up to 30%)"
+          },
+          {
+            "id": "d",
+            "label": "Stage, then plan resection"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The benign counterpart in the cerebellum looks completely different on imaging. A pilocytic astrocytoma is typically a cyst with a brightly enhancing nodule in one cerebellar hemisphere, and because it has few cells it shows high signal on diffusion imaging rather than restriction.",
+      "tx": "Identify **pilocytic astrocytoma** by its cyst with mural nodule pattern. This WHO grade 1 tumour is characteristically a cystic lesion with an intensely enhancing mural nodule in the cerebellar hemisphere. Low cellularity gives high ADC values, the opposite of medulloblastoma, which is a useful discriminator on diffusion imaging. Pilocytic astrocytomas are circumscribed, often curable by complete resection of the nodule, and carry an excellent long term prognosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/brain-tumour-fig1.webp",
+        "alt": "MRI of a paediatric brain tumour showing a cystic mass with an enhancing component.",
+        "caption": "Paediatric brain tumour: cystic mass with enhancing nodule. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "An ependymoma behaves like soft plastic squeezed out of a tube. Growing from the floor of the fourth ventricle, it pushes out through the side and midline openings into the cisterns, and it calcifies in more than half of cases, which helps separate it from medulloblastoma.",
+      "tx": "Recognise the **plastic growth pattern of infratentorial ependymoma**. This WHO grade 2-3 tumour arises from the floor of the 4th ventricle and extends through the foramina of Luschka and Magendie into the cerebellopontine and premedullary cisterns, earning the name squeeze tumour. Calcification is present in over 50% of cases. Unlike medulloblastoma it sits lower, wraps around vessels and nerves, and is harder to resect completely (Ependymoma plasticity).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ependymoma",
+          "points": [
+            "Floor of fourth ventricle",
+            "Squeezes through foramina",
+            "Calcifies in over 50%"
+          ]
+        },
+        "right": {
+          "title": "Medulloblastoma",
+          "points": [
+            "Roof of fourth ventricle (vermis)",
+            "Hyperdense, restricts on DWI",
+            "Drop metastases in up to 30%"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A tumour that swells the whole pons and wraps around the basilar artery is a diffuse midline glioma until proved otherwise. These tumours brighten on T2 imaging, enhance very little at first, and carry the H3 K27M mutation that defines their poor prognosis.",
+      "tx": "Diagnose **diffuse intrinsic pontine glioma (DIPG), now diffuse midline glioma**, from its expansile pontine pattern. The tumour diffusely expands the pons, engulfs the basilar artery posteriorly and shows T2 hyperintensity with typically little enhancement at presentation. The H3 K27M mutation defines the entity in current classification. Imaging is usually diagnostic without biopsy, and the infiltrative growth through the brainstem makes surgical resection impossible (DIPG / Diffuse Midline Glioma).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Diffuse midline glioma"
+        ],
+        "rows": [
+          [
+            "Site",
+            "Pons, expands it diffusely"
+          ],
+          [
+            "Artery",
+            "Basilar artery engulfed"
+          ],
+          [
+            "Enhancement",
+            "Little or none at presentation"
+          ],
+          [
+            "Mutation",
+            "H3 K27M"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Up in the suprasellar region, one tumour follows a memorable rule of nineties. Adamantinomatous craniopharyngioma is ninety percent cystic, ninety percent calcified and ninety percent enhancing, a lobulated suprasellar mass that explains growth failure and visual loss in a child.",
+      "tx": "Apply the **90% rule to adamantinomatous craniopharyngioma**. The childhood suprasellar tumour is 90% cystic, 90% calcified and 90% enhancing, forming a lobulated suprasellar mass with cholesterol rich cyst fluid. Calcification is often obvious on computed tomography (CT), which complements magnetic resonance imaging (MRI) for surgical planning. Children present with growth failure, visual field loss and endocrine disturbance from compression of the pituitary stalk and optic chiasm (Craniopharyngioma 90% rule).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Suprasellar lobulated mass"
+          },
+          {
+            "id": "b",
+            "label": "Cystic, calcified, enhancing (90% rule)"
+          },
+          {
+            "id": "c",
+            "label": "Adamantinomatous craniopharyngioma"
+          },
+          {
+            "id": "d",
+            "label": "Check vision and pituitary function"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In a child under three with a posterior fossa tumour that looks messier than a medulloblastoma, think of atypical teratoid rhabdoid tumour. More necrosis, more bleeding and an off midline position near the cerebellopontine angle point that way, and the tumour has lost the INI1 protein.",
+      "tx": "Consider **atypical teratoid/rhabdoid tumor (ATRT)** in the very young child. ATRT occurs in children under 3 years with loss of SMARCB1/INI1, the tumour suppressor confirmed on immunostaining. Compared with medulloblastoma it exhibits more necrosis, hemorrhage and an off-midline cerebellopontine angle location. The distinction matters because ATRT follows different chemotherapy protocols and carries a worse prognosis, so tissue diagnosis with INI1 staining is essential (ATRT distinction from medulloblastoma).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ATRT (under 3 years)",
+          "points": [
+            "Off-midline, cerebellopontine angle",
+            "Necrosis and hemorrhage common",
+            "SMARCB1/INI1 loss"
+          ]
+        },
+        "right": {
+          "title": "Medulloblastoma",
+          "points": [
+            "Midline vermian mass",
+            "Homogeneous, restricts on DWI",
+            "INI1 retained"
+          ]
+        }
+      }
+    }
+  ]
+}
