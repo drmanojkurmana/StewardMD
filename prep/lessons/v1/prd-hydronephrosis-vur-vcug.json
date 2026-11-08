@@ -1,0 +1,221 @@
+{
+ "gen": "AI",
+ "id": "prd-hydronephrosis-vur-vcug",
+ "minutes": 7,
+ "module": "prd-pediatric-renal-urinary",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "A dilated fetal kidney is graded after birth with the urinary tract dilation system. Low risk kidneys simply get watched, while the highest grade, with thinned parenchyma, moves quickly toward further imaging.",
+   "tx": "The **UTD classification system** (Urinary Tract Dilation) grades postnatal hydronephrosis as **UTD P1** low risk, **UTD P2** intermediate risk, and **UTD P3** high risk. Parenchymal thinning, abnormal bladder findings and worsening dilatation push a kidney up the grades and toward specialist referral.",
+   "vis": {
+    "cols": [
+     "UTD grade",
+     "Risk level",
+     "Typical action"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "UTD P1",
+      "Low risk",
+      "Serial ultrasound surveillance"
+     ],
+     [
+      "UTD P2",
+      "Intermediate risk",
+      "Ultrasound plus selective VCUG"
+     ],
+     [
+      "UTD P3",
+      "High risk, thinned parenchyma",
+      "VCUG and functional renogram"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Timing matters for the first scan after birth. Scanning in the first two days can make dilatation look deceptively mild, so the baseline study waits until the baby is passing urine well.",
+   "tx": "**Postnatal ultrasound timing** places the first renal scan **after 48-72 hours of life** for antenatal hydronephrosis (kidney swelling seen before birth). Transient neonatal oliguria (low urine output) in the first days underestimates true dilatation, so early films falsely reassure and must be repeated.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "Avoids oliguria artefact"
+     ],
+     [
+      "b",
+      "c",
+      "True grade assigned"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Antenatal hydronephrosis noted"
+     },
+     {
+      "id": "b",
+      "label": "Wait 48-72 hours after birth"
+     },
+     {
+      "id": "c",
+      "label": "Baseline postnatal renal ultrasound"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Reflux is graded on the voiding study from one to five. Grade one only fills the ureter, while grade five twists and grossly dilates the whole collecting system.",
+   "tx": "**VCUG reflux grading I to V** (voiding cystourethrogram, an X-ray study during urination) follows the International Reflux Study scale, numbered 1 to 5. **Grade I** fills the ureter only, **Grade II** reaches the pelvis without dilatation, **Grade III** adds mild blunting, **Grade IV** brings moderate tortuosity, and **Grade V** shows gross hydroureteronephrosis.",
+   "vis": {
+    "cols": [
+     "Grade",
+     "Contrast extent",
+     "Dilatation"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "I",
+      "Ureter only",
+      "None"
+     ],
+     [
+      "II",
+      "Pelvis reached",
+      "None"
+     ],
+     [
+      "III",
+      "Mild pelvic dilatation",
+      "Slight fornix blunting"
+     ],
+     [
+      "IV",
+      "Moderate dilatation",
+      "Ureteric tortuosity"
+     ],
+     [
+      "V",
+      "Gross hydroureteronephrosis",
+      "Severe tortuosity, lost papillae"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "In a baby boy, a thick walled bladder with a dilated channel below it forms the keyhole shape on ultrasound. Bilateral kidney swelling and low liquor complete this warning picture.",
+   "tx": "The **Posterior urethral valves keyhole sign** appears on antenatal ultrasound as a distended, thick-walled bladder continuous with a dilated posterior urethra. Bilateral hydroureteronephrosis (swollen kidneys and ureters) and oligohydramnios (reduced amniotic fluid) accompany it, marking bladder outlet obstruction in a male fetus.",
+   "vis": {
+    "alt": "Paediatric urology diagram showing posterior urethral valves keyhole sign.",
+    "ar": 1.3333,
+    "caption": "Posterior urethral valves with keyhole sign on ultrasound. Credit: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/paediatric-urology-hypospadias-cryptorchidism-and-wilms-tumor-fig1.webp"
+   }
+  },
+  {
+   "say": "The voiding study confirms valves directly. During urination the posterior urethra balloons, then narrows abruptly, and the trabeculated bladder with its thick neck tells the chronic obstruction story.",
+   "tx": "**VCUG in PUV** (posterior urethral valves) shows an abrupt calibre change at the valve level, with a dilated elongated posterior urethra above it. A hypertrophied bladder neck, trabeculated thick bladder wall and possible reflux into dilated ureters complete the voiding-phase picture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Dilated elongated posterior urethra",
+      "Abrupt narrowing at valve level",
+      "Thick trabeculated bladder wall"
+     ],
+     "title": "Valves on voiding film"
+    },
+    "right": {
+     "points": [
+      "Uniform urethral calibre throughout",
+      "Smooth thin bladder wall",
+      "Complete bladder emptying"
+     ],
+     "title": "Normal voiding study"
+    }
+   }
+  },
+  {
+   "say": "The commonest blockage is located where the renal pelvis meets the ureter. The pelvis and calyces are dilated, yet the ureter below the junction is completely normal in calibre.",
+   "tx": "**Ureteropelvic junction obstruction** is the most common cause of congenital hydronephrosis (kidney swelling from blocked drainage). Ultrasound shows marked pelvicalyceal dilatation ending abruptly at the pelvis outlet, with a normal non-dilated ureter below, separating it from reflux or lower obstruction.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "Abrupt transition point"
+     ],
+     [
+      "b",
+      "c",
+      "Normal ureter below"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dilated pelvis and calyces"
+     },
+     {
+      "id": "b",
+      "label": "Narrow ureteropelvic junction"
+     },
+     {
+      "id": "c",
+      "label": "Normal calibre ureter"
+     }
+    ]
+   }
+  },
+  {
+   "say": "A diuretic renogram is the test that separates true obstruction from simple dilatation. Washout under ten minutes reassures, beyond twenty minutes confirms significant obstruction, and the middle band stays indeterminate.",
+   "tx": "The **MAG3 Lasix renogram wash-out** test uses technetium-99m MAG3 with **furosemide** (a diuretic, given as Lasix) to test drainage. Clearance half-time **under 10 min** is non-obstructed, **10-20 min** is indeterminate, and **over 20 min** indicates significant mechanical obstruction needing surgical opinion.",
+   "vis": {
+    "alt": "Urinary drainage and collecting system imaging diagram.",
+    "ar": 1.3333,
+    "caption": "Urinary tract drainage pathways assessed on functional renography. Credit: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/biliary-and-urinary-drainage-fig1.webp"
+   }
+  },
+  {
+   "say": "Sometimes the kidney never forms normally at all and becomes a bunch of separate cysts. That dysplastic kidney cannot work, so attention turns to protecting its partner kidney on the other side.",
+   "tx": "**Multicystic dysplastic kidney** shows multiple non-communicating cysts of varying sizes separated by echogenic dysplastic stroma, with no normal renal parenchyma and an atretic unseen ureter. The affected kidney never functions, and contralateral vesicoureteric reflux appears in **20-30%**, so the healthy kidney needs surveillance.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Multicystic dysplastic kidney",
+     "Severe hydronephrosis"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Cyst pattern",
+      "Non-communicating separate cysts",
+      "Connected dilated calyces"
+     ],
+     [
+      "Parenchyma",
+      "Absent, dysplastic stroma",
+      "Present, may be thinned"
+     ],
+     [
+      "Function",
+      "Never functions",
+      "Usually preserved partly"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-paediatric-radiology",
+ "system": "gu",
+ "title": "Antenatal Hydronephrosis, VCUG Grading and Posterior Urethral Valves",
+ "v": 1
+}
