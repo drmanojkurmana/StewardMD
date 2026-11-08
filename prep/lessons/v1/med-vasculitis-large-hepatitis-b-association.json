@@ -1,0 +1,190 @@
+{
+ "v": 1,
+ "module": "med-vasculitis-large",
+ "subject": "medicine",
+ "title": "Medium Vessel Vasculitis: Polyarteritis Nodosa and Kawasaki Disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Medium vessel vasculitides selectively target main visceral muscular arteries and their secondary branches without causing glomerulonephritis or microvascular capillaritis. **Polyarteritis nodosa** (PAN) is a classic systemic necrotising vasculitis that induces transmural fibrinoid necrosis of small and medium-sized muscular arteries. The necrotising process typically spares the pulmonary vasculature, which serves as a crucial negative hallmark distinguishing PAN from microscopic polyangiitis and granulomatosis with polyangiitis.",
+   "say": "Medium vessel vasculitides selectively target main visceral muscular arteries and their branches while sparing glomerulonephritis. Polyarteritis nodosa is a classic systemic necrotising vasculitis that induces transmural fibrinoid necrosis of muscular arteries. The necrotising process typically spares pulmonary vasculature, distinguishing it from small vessel vasculitides.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Polyarteritis Nodosa (PAN)",
+     "points": [
+      "Medium-sized muscular arteries",
+      "Transmural fibrinoid necrosis",
+      "Pulmonary vessels spared",
+      "Glomerulonephritis absent"
+     ]
+    },
+    "right": {
+     "title": "ANCA Small Vessel Vasculitis",
+     "points": [
+      "Arterioles, capillaries, venules",
+      "Pauci-immune necrotising lesions",
+      "Pulmonary capillaritis common",
+      "Crescentic glomerulonephritis frequent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The pathogenesis of polyarteritis nodosa has a well-established viral trigger in up to thirty percent of secondary cases. Specifically, **hepatitis B virus** infection produces circulating surface antigen-antibody immune complexes that deposit within muscular arterial walls, initiating complement-mediated endothelial necrosis. Patients present with constitutional fevers, asymmetric sensory motor mononeuritis multiplex, severe testicular or abdominal pain, and new-onset secondary hypertension resulting from severe renal arterial parenchymal ischaemia.",
+   "say": "The pathogenesis of polyarteritis nodosa features a recognized viral trigger in up to thirty percent of cases. Specifically, hepatitis B virus infection produces circulating immune complexes that deposit within muscular arterial walls. Patients present with constitutional fevers, asymmetric mononeuritis multiplex, testicular pain, and renovascular hypertension from renal ischemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hbv",
+      "label": "HBV Surface Immune Complexes"
+     },
+     {
+      "id": "nec",
+      "label": "Transmural Fibrinoid Necrosis"
+     },
+     {
+      "id": "isch",
+      "label": "Renal Parenchymal Ischaemia"
+     }
+    ],
+    "edges": [
+     [
+      "hbv",
+      "nec"
+     ],
+     [
+      "nec",
+      "isch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Segmental transmural inflammation weakens the structural integrity of internal and external elastic laminae within visceral vascular beds. Pulsatile intra-arterial pressures induce secondary focal arterial wall ballooning, forming multiple characteristic **microaneurysms** visible on mesenteric or renal catheter angiography. Alternating segments of luminal aneurysmal dilatation and post-inflammatory luminal thrombosis or concentric stenosis generate the classic diagnostic rosary bead or string of pearls angiographic configuration.",
+   "say": "Segmental transmural inflammation weakens the internal elastic lamina of visceral arteries. Pulsatile arterial pressure causes focal vascular ballooning, forming multiple characteristic microaneurysms seen on renal and mesenteric angiography. Alternating segments of dilatation and luminal stenosis generate the classic diagnostic string of pearls angiographic sign.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Angiographic Feature",
+     "Pathological Basis",
+     "Clinical Correlation"
+    ],
+    "rows": [
+     [
+      "Microaneurysms (1-5 mm)",
+      "Internal elastic lamina destruction",
+      "Risk of retroperitoneal rupture"
+     ],
+     [
+      "Segmental Stenoses",
+      "Intimal proliferation & thrombosis",
+      "Renal and mesenteric ischaemia"
+     ],
+     [
+      "String-of-Pearls Sign",
+      "Alternating ectasia & narrowing",
+      "Pathognomonic PAN sign"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the paediatric population, an acute self-limiting medium vessel necrotising vasculitis presents predominantly in infants and children under five years of age. Clinically defined as **Kawasaki disease**, also termed mucocutaneous lymph node syndrome, it manifests with persistent high spiking fevers lasting at least five consecutive days accompanied by polymorphous cutaneous exanthem, bilateral non-purulent bulbar conjunctival injection, strawberry tongue, and cervical lymphadenopathy.",
+   "say": "In paediatric practice, an acute self-limiting medium vessel necrotising vasculitis occurs primarily under age five. Clinically defined as Kawasaki disease, it presents with persistent spiking fevers lasting at least five days. Diagnostic criteria include polymorphous rash, bilateral non-purulent conjunctivitis, strawberry tongue, extremity edema, and unilateral cervical lymphadenopathy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-kawasaki.webp",
+    "alt": "Clinical diagnostic signs of Kawasaki disease in a child.",
+    "caption": "Diagnostic mucocutaneous criteria of acute Kawasaki disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The critical prognostic determinant and principal clinical hazard of Kawasaki disease involves inflammatory destruction of the tunica media within coronary vessels. Untreated vasculitis leads to acute thrombosis or ectatic aneurysmal dilatation, known as a **coronary aneurysm**, in up to twenty-five percent of affected young children. Timely intravenous immunoglobulin (IVIG) administered within the initial ten days of fever onset drastically reduces coronary complications.",
+   "say": "The critical prognostic hazard of Kawasaki disease involves inflammatory destruction within coronary vessels. Untreated vasculitis leads to acute thrombosis or aneurysmal dilatation, known as a coronary aneurysm, in one-quarter of affected children. Timely intravenous immunoglobulin administered within ten days of fever onset drastically lowers this risk.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acquired-rheumatic-kawasaki-arrhythmia-fig1.webp",
+    "alt": "Coronary artery aneurysm and lumen thrombosis in Kawasaki disease.",
+    "caption": "Coronary aneurysm and secondary luminal thrombosis in Kawasaki disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A distinct non-atherosclerotic segmental inflammatory occlusive vasculopathy predominantly affects small and medium arteries and veins of distal extremities in young heavy tobacco users. Historically termed **Buerger disease**, this condition is characterised by severe digital ischaemia, exertional instep foot claudication, and painful superficial migratory thrombophlebitis. Biopsy demonstrates highly cellular luminal inflammatory microabscesses with complete preservation of the internal elastic lamina.",
+   "say": "A distinct non-atherosclerotic segmental inflammatory occlusive vasculopathy affects small and medium arteries and veins of distal extremities in young tobacco users. Historically termed Buerger disease, it causes digital ischemia, instep claudication, and superficial migratory thrombophlebitis. Microscopic examination demonstrates cellular inflammatory thrombi with preservation of the internal elastic lamina.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thromboangiitis-obliterans-fig1.webp",
+    "alt": "Distal gangrene and corkscrew collaterals in thromboangiitis obliterans.",
+    "caption": "Thromboangiitis obliterans showing distal digital gangrene and corkscrew collaterals. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The formal histological and pathophysiological designation for Buerger disease is **thromboangiitis obliterans**, reflecting its inflammatory involvement of accompanying adjacent nerves and veins along with muscular arteries. Angiography reveals distal arterial tapering, multiple segmental occlusions in plantar and palmar arches, and distinctive corrugated or corkscrew collateral vessels bypassing blocked segments. Complete smoking cessation constitutes the only therapeutic intervention proven to arrest disease progression and prevent digital amputation.",
+   "say": "The formal pathological designation for Buerger disease is thromboangiitis obliterans, reflecting cellular inflammation of neurovascular bundles. Angiography reveals distal arterial occlusions with characteristic corkscrew collateral vessels bypassing occluded tibial and digital arteries. Complete cessation of all tobacco exposure represents the only therapy that prevents limb amputation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tob",
+      "label": "Heavy Tobacco Exposure"
+     },
+     {
+      "id": "thromb",
+      "label": "Cellular Luminal Microthrombi"
+     },
+     {
+      "id": "cork",
+      "label": "Corkscrew Collateral Bypass"
+     }
+    ],
+    "edges": [
+     [
+      "tob",
+      "thromb"
+     ],
+     [
+      "thromb",
+      "cork"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of medium vessel vasculitides depends upon accurate identification of the underlying trigger and vessel distribution. Systemic polyarteritis nodosa without hepatitis responds to high-dose oral corticosteroids combined with cyclophosphamide for severe organ involvement. Conversely, HBV-associated PAN requires antiviral therapy paired with short-term plasma exchange to clear immune complexes. Pediatric Kawasaki disease requires high-dose **aspirin** combined with intravenous immunoglobulin to abolish coronary aneurysm development.",
+   "say": "Management of medium vessel vasculitides depends upon accurate identification of the underlying trigger and vessel distribution. Systemic polyarteritis nodosa without hepatitis responds to corticosteroids and cyclophosphamide. In contrast, hepatitis-associated disease requires antiviral therapy and plasma exchange. Kawasaki disease mandates high-dose aspirin paired with intravenous immunoglobulin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Primary Induction Therapy",
+     "Maintenance or Adjunct Strategy"
+    ],
+    "rows": [
+     [
+      "Idiopathic PAN",
+      "Prednisone + Cyclophosphamide",
+      "Transition to Azathioprine"
+     ],
+     [
+      "HBV-Associated PAN",
+      "Antiviral (Entecavir) + PLEX",
+      "Avoid prolonged immunosuppression"
+     ],
+     [
+      "Kawasaki Disease",
+      "High-dose IVIG (2 g/kg) + Aspirin",
+      "Low-dose antiplatelet Aspirin"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 356"
+}

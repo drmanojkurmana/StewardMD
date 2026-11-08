@@ -1,0 +1,270 @@
+{
+ "v": 1,
+ "module": "med-sle",
+ "subject": "medicine",
+ "title": "Lupus Nephritis and Neonatal Lupus",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Renal involvement resulting from immune complex deposition in the glomeruli represents the primary predictor of morbidity and mortality in SLE. Characterizing **lupus nephritis classes** according to the International Society of Nephrology and Renal Pathology Society (ISN/RPS) guides aggressive immunosuppressive management. Class I represents minimal mesangial disease; Class II is mesangial proliferative; Class III represents focal proliferative nephritis (involving < 50% of glomeruli); Class IV is diffuse proliferative nephritis (involving >= 50% of glomeruli, the commonest and most aggressive form); Class V is membranous; and Class VI represents advanced sclerosing disease.",
+   "say": "Renal involvement resulting from immune complex deposition in the glomeruli represents the primary predictor of morbidity and mortality in SLE. Characterizing lupus nephritis classes according to the ISN/RPS criteria guides aggressive immunosuppressive management. Class I represents minimal mesangial disease; Class II is mesangial proliferative; Class III is focal proliferative; Class IV is diffuse proliferative, representing the commonest and most aggressive form; Class V is membranous; and Class VI represents advanced sclerosing disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lupus-nephritis-fig1.webp",
+    "alt": "Renal biopsy histology displaying diffuse proliferative lupus nephritis (Class IV) with wire-loop subendothelial deposits.",
+    "caption": "Renal biopsy histology displaying Class IV diffuse proliferative lupus nephritis with wire-loop lesions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most aggressive and clinically prevalent form of lupus nephritis presents with nephritic urinary sediment and rapid renal functional decline. In **class iv lupus nephritis** (diffuse proliferative), massive subendothelial immune complex deposition stimulates severe endocapillary and extracapillary hypercellularity, cellular crescents, and pathognomonic wire-loop lesions on light microscopy. Immunofluorescence demonstrates classic full-house staining (positive for IgG, IgA, IgM, C3, and C1q). Without prompt aggressive induction therapy with high-dose intravenous corticosteroids paired with mycophenolate mofetil or intravenous cyclophosphamide, Class IV nephritis rapidly progresses to end-stage kidney failure.",
+   "say": "The most aggressive and clinically prevalent form of lupus nephritis presents with nephritic urinary sediment and rapid renal functional decline. In class IV lupus nephritis, massive subendothelial immune complex deposition stimulates endocapillary proliferation and pathognomonic wire-loop lesions. Immunofluorescence demonstrates full-house staining for all immunoglobulin isotypes and complement components. Without prompt induction therapy with corticosteroids and mycophenolate, Class IV nephritis rapidly progresses to kidney failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ISN/RPS Nephritis Class",
+     "Glomerular Histology",
+     "Light Microscopy Hallmarks",
+     "First-Line Therapeutic Regimen"
+    ],
+    "rows": [
+     [
+      "Class I: Minimal Mesangial",
+      "Normal light microscopy; mesangial IF",
+      "Mesangial immune deposits only",
+      "Optimize hydroxychloroquine"
+     ],
+     [
+      "Class II: Mesangial Proliferative",
+      "Mesangial hypercellularity & matrix",
+      "Mild proteinuria / microhematuria",
+      "Low-dose oral steroids if active"
+     ],
+     [
+      "Class III: Focal Proliferative",
+      "Endocapillary proliferation in < 50%",
+      "Subendothelial deposits, crescents",
+      "Induction: MMF or Cyclophosphamide + Steroids"
+     ],
+     [
+      "Class IV: Diffuse Proliferative",
+      "Endocapillary proliferation in >= 50%",
+      "Wire-loop lesions, crescents, full-house IF",
+      "Intensive Induction: MMF or IV CYC + High-dose Steroids"
+     ],
+     [
+      "Class V: Membranous Nephritis",
+      "Subepithelial immune deposits",
+      "Spikes on silver stain, heavy nephrotic syndrome",
+      "MMF or Calcineurin Inhibitor + Steroids"
+     ],
+     [
+      "Class VI: Advanced Sclerosing",
+      "Global glomerulosclerosis in > 90%",
+      "Fibrotic obsolescence, small kidneys",
+      "Prepare for dialysis / renal transplant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Activation of the classical complement cascade driven by circulating immune complexes consumes endogenous complement proteins. Measuring serum **complement c3 and c4** concentrations provides an invaluable clinical surrogate of immunological disease activity. In active proliferative lupus nephritis (Class III and IV), continuous immune complex deposition in glomerular capillaries drives extensive C1q, C4, and C3 consumption. Serum C3 and C4 levels plummet into profoundly low ranges. Successful immunosuppressive therapy halts classical pathway consumption, leading to normalization of serum C3 and C4, serving as a reliable indicator of clinical remission.",
+   "say": "Activation of the classical complement cascade driven by circulating immune complexes consumes endogenous complement proteins. Measuring serum complement C3 and C4 concentrations provides an invaluable clinical surrogate of immunological disease activity. In active proliferative lupus nephritis, continuous immune complex deposition drives extensive complement consumption, causing serum C3 and C4 to plummet. Normalization of complement levels reliably signals clinical remission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ic",
+      "label": "Circulating Anti-dsDNA Immune Complex Deposition in Glomeruli"
+     },
+     {
+      "id": "c1q",
+      "label": "Binds C1q: Triggers Massive Classical Pathway Activation"
+     },
+     {
+      "id": "drop",
+      "label": "Serum C3 and C4 Levels Plummet into Profoundly Low Ranges"
+     },
+     {
+      "id": "monitor",
+      "label": "Serial C3/C4 Monitoring Tracks Nephritis Activity & Remission"
+     }
+    ],
+    "edges": [
+     [
+      "ic",
+      "c1q"
+     ],
+     [
+      "c1q",
+      "drop"
+     ],
+     [
+      "drop",
+      "monitor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An idiosyncratic lupus-like autoimmune syndrome triggered by chronic exposure to specific pharmacological agents resolves upon drug cessation. In **drug-induced lupus**, culprit medications with high acetylation requirements (procainamide, hydralazine, isoniazid, minocycline, diltiazem, anti-TNF agents) induce autoreactive lymphocyte activation. Patients present with constitutional fever, arthralgias, arthritis, and serositis (pleurisy, pericarditis). Central nervous system involvement and active renal glomerulonephritis are characteristically absent, and classic cutaneous malar rashes are rare. The vast majority of patients are slow hepatic acetylators, predisposing to intermediate metabolite accumulation.",
+   "say": "An idiosyncratic lupus-like autoimmune syndrome triggered by chronic exposure to specific pharmacological agents resolves upon drug cessation. In drug-induced lupus, culprit medications including procainamide, hydralazine, and isoniazid induce autoreactive lymphocyte activation. Patients present with fever, arthralgias, and pleuropericarditis, while renal and neurological involvement are characteristically absent. The vast majority of patients are slow hepatic acetylators.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/drug-induced-lupus-fig1.webp",
+    "alt": "Clinical and pharmacological features of drug-induced lupus erythematosus.",
+    "caption": "Pharmacological culprits and serological hallmarks characterizing drug-induced lupus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnostic serological confirmation of drug-induced lupus erythematosus relies on detecting autoantibodies directed against chromatin core proteins. Demonstrating circulating **anti-histone** antibodies is present in over ninety-five percent of patients with drug-induced lupus. Conversely, antibodies targeting double-stranded DNA (anti-dsDNA) and anti-Smith (anti-Sm) are characteristically absent, and serum complement C3 and C4 levels remain completely normal. Discontinuing the offending medication results in complete resolution of clinical symptoms within weeks to months, with anti-histone antibody titres gradually declining over subsequent months.",
+   "say": "Diagnostic serological confirmation of drug-induced lupus erythematosus relies on detecting autoantibodies directed against chromatin core proteins. Demonstrating circulating anti-histone antibodies is present in over ninety-five percent of patients with drug-induced lupus. Conversely, anti-dsDNA and anti-Smith antibodies are characteristically absent, and complement levels remain normal. Discontinuing the offending medication results in complete resolution of clinical symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Drug-Induced Lupus (DILE)",
+     "points": [
+      "Culprits: Procainamide, Hydralazine, Isoniazid",
+      "Anti-histone antibodies positive in > 95%",
+      "Anti-dsDNA and anti-Sm: Strictly Negative",
+      "Complement levels (C3/C4): Strictly Normal",
+      "Renal and CNS involvement: Rare / Absent",
+      "Resolves completely following drug withdrawal"
+     ]
+    },
+    "right": {
+     "title": "Systemic Lupus Erythematosus (SLE)",
+     "points": [
+      "Idiopathic autoimmune polygenic etiology",
+      "Anti-histone positive in only 50-70%",
+      "Anti-dsDNA and anti-Sm positive",
+      "Complement levels (C3/C4): Markedly Depressed",
+      "Renal (nephritis) and CNS disease frequent",
+      "Lifelong chronic remitting-relapsing course"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transplacental passive transfer of maternal IgG autoantibodies into the fetal circulation triggers a spectrum of transient and permanent neonatal organ manifestations. In **neonatal lupus**, maternal IgG autoantibodies directed against Ro/SSA (52 kDa and 60 kDa) and La/SSB cross the placenta from sixteen weeks gestation. Transient clinical manifestations in the newborn include non-scarring annular polycyclic cutaneous lesions (raccoon-eye appearance), transient hepatic transaminitis, and mild thrombocytopenia, which resolve spontaneously by six months of age as maternal IgG antibodies are cleared from infant circulation.",
+   "say": "Transplacental passive transfer of maternal IgG autoantibodies into the fetal circulation triggers a spectrum of transient and permanent neonatal organ manifestations. In neonatal lupus, maternal IgG autoantibodies targeting Ro and La cross the placenta from sixteen weeks gestation. Transient manifestations include annular cutaneous lesions, transient hepatitis, and mild thrombocytopenia, resolving by six months of age as maternal antibodies are degraded.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mat",
+      "label": "Maternal Anti-Ro/SSA & Anti-La/SSB IgG Antibodies"
+     },
+     {
+      "id": "plac",
+      "label": "Transplacental Transfer into Fetal Circulation (Weeks 16-24)"
+     },
+     {
+      "id": "bind",
+      "label": "Autoantibodies Bind Fetal Cardiomyocytes & L-Type Ca2+ Channels"
+     },
+     {
+      "id": "chb",
+      "label": "AV Node Fibrosis: Irreversible Complete Congenital Heart Block"
+     }
+    ],
+    "edges": [
+     [
+      "mat",
+      "plac"
+     ],
+     [
+      "plac",
+      "bind"
+     ],
+     [
+      "bind",
+      "chb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most dreaded and irreversible complication of neonatal lupus involves autoimmune inflammatory destruction of the fetal cardiac conduction system. Maternal anti-Ro/SSA antibodies bind fetal cardiomyocyte L-type calcium channels, inducing intracellular apoptosis, calcification, and fibrotic replacement of the atrioventricular (AV) node, culminating in permanent third-degree **congenital heart block**. Typically detected between 18 and 24 weeks gestation by fetal echocardiography showing persistent severe fetal bradycardia (heart rate 50 to 80 beats per minute), complete AV block is irreversible and mandates permanent pacemaker implantation at birth.",
+   "say": "The most dreaded and irreversible complication of neonatal lupus involves autoimmune inflammatory destruction of the fetal cardiac conduction system. Maternal anti-Ro antibodies bind fetal cardiomyocyte calcium channels, inducing calcification and fibrotic replacement of the atrioventricular node, culminating in permanent third-degree congenital heart block. Typically detected between 18 and 24 weeks gestation showing severe fetal bradycardia, complete block is irreversible and requires pacemaker implantation at birth.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neonatal Lupus Manifestation",
+     "Target Fetal Organ",
+     "Clinical Duration in Infant",
+     "Therapeutic Intervention"
+    ],
+    "rows": [
+     [
+      "Congenital Complete Heart Block",
+      "Atrioventricular (AV) Node",
+      "Permanent / Irreversible",
+      "Permanent epicardial pacemaker at birth"
+     ],
+     [
+      "Annular Cutaneous Lupus",
+      "Epidermis (Periorbital 'raccoon eyes')",
+      "Transient (Resolves by 6 months)",
+      "Photoprotection, mild topical hydrocortisone"
+     ],
+     [
+      "Transient Hepatitis / Cholestasis",
+      "Hepatic parenchymal canaliculi",
+      "Transient (Resolves by 3-6 months)",
+      "Supportive monitoring, self-limiting"
+     ],
+     [
+      "Neonatal Thrombocytopenia",
+      "Circulating platelets (opsonization)",
+      "Transient (Resolves by 2-3 months)",
+      "Supportive; IVIG if severe bleeding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preventing recurrent congenital heart block in subsequent pregnancies in mothers with known anti-Ro/SSA autoantibodies relies on intensive surveillance and antenatal pharmacotherapy. The recurrence risk of congenital heart block in a subsequent pregnancy rises from two percent to nearly twenty percent. Serial fetal Doppler echocardiography performed weekly from sixteen to twenty-eight weeks gestation monitors the mechanical PR interval. If early incomplete (first or second-degree) heart block is detected, maternal administration of fluorinated oral **dexamethasone** (which crosses the placenta unmetabolized) can arrest inflammatory progression to complete block.",
+   "say": "Preventing recurrent congenital heart block in subsequent pregnancies in mothers with known anti-Ro autoantibodies relies on intensive surveillance and antenatal pharmacotherapy. The recurrence risk in a subsequent pregnancy rises to nearly twenty percent. Serial fetal echocardiography performed weekly from sixteen to twenty-eight weeks monitors the PR interval. Detecting early incomplete heart block warrants maternal fluorinated dexamethasone to arrest inflammatory progression before complete irreversible block occurs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mom",
+      "label": "Anti-Ro/SSA Positive Mother (Prior Child with Heart Block: 20% Risk)"
+     },
+     {
+      "id": "echo",
+      "label": "Weekly Fetal Doppler Echocardiography (Weeks 16 to 28)"
+     },
+     {
+      "id": "block",
+      "label": "Early First / Second-Degree AV Block Detected"
+     },
+     {
+      "id": "dex",
+      "label": "Maternal Oral Dexamethasone (4 mg/day): Arrests Progression"
+     }
+    ],
+    "edges": [
+     [
+      "mom",
+      "echo"
+     ],
+     [
+      "echo",
+      "block"
+     ],
+     [
+      "block",
+      "dex"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
