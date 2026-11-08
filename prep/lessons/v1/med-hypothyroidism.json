@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-hypothyroidism",
- "subject": "medicine",
- "title": "Hypothyroidism, Hashimoto's and myxoedema coma",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**cold** intolerance weight gains constipation, **skin** dry hair loss outer eyebrows, **voice** hoarse slow speech, **menses** menorrhagia infertility libido, **neck** Hashimoto goitre family vitiligo pernicious, **drugs** amiodarone lithium recent, **ablation** thyroidectomy radioiodine neck, **coma** triggers infection cold sedatives) with **viva** (**myxoedematous** puffy slowed elder, **Hashimoto** goitrous teenager) profiles; **TSH** (primary high screens) triages. Glands fail.",
-   "say": "Colds skins voices menses is history: necks swell drugs blunt ablations burn comas trigger myxoedemata puff Hashimotos lump TSHs rise FT4s fall. Bodies slow.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**skin** dry coarse cool doughy, **hair** loss eyebrows outer thirds, **face** puffy periorbital tongue, **voice** hoarse slow mentation, **pulse** bradycardic diastolic hypertensive, **reflexes** delayed relaxation phases, **goitre** Hashimoto firm rubbery, **coma** hypothermic hypoventilating hypotensive) with **bedside** (**ECG** low voltage bradycardia, **lipids** cholesterol climbs, **anaemia** macrocytic B12) charts; **growth** (cretin stalls) measures. Metabolisms idle.",
-   "say": "Skins hairs faces voices is exam: pulses slow reflexes lag goitres firm comas cool ECGs flatten lipids climb anaemias pale growths stall replacements start. Patients chill.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-hypothyroidism-fig1.webp",
-    "alt": "Composite image showing a patient with myxedema (puffy face, periorbital edema, dry skin, outer eyebrow hair loss), a patient with Hashimoto's goitre, and a child with stunted growth (cretinism).",
-    "caption": "Key physical signs of hypothyroidism, Hashimoto's, and cretinism",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Investigations** (**TSH** high FT4 low primary proves, **TPO** antibodies Hashimoto marks, **lipids** CK cholesterol climbs, **ECG** bradycardia effusion, **cortisol** synacthen before coma thyroxine, **pituitary** MRI central low TSH) with **differentials** (**Hashimoto** TPO goitrous, **ablative** neck scarred, **iodine** deficient endemic, **drugs** amiodarone lithium, **central** pituitary low) sorts; **endocrine** (adrenal pituitary decides) meets. Hormones wane.",
-   "say": "TSHs TPOs lipids ECGs is Ix: cortisols guard MRIs show Hashimotos mark ablatives scar iodines lack drugs blunt centrals dip endocrines meet thyroxines wait steroids first. Numbers confirm.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**levothyroxine** morning empty stomach titrates, **elderly** cardiac low starts slow, **coma** ICU thyroxine hydrocortisone warms ventilates, **precipitants** antibiotics rewarm sedatives stop, **pregnancy** dose rises monitors, **calcium** iron apart spaces) with **traps** (**over-replace** AF angina bones, **coma** thyroxine alone kills, **interactions** binding blocks) closes; **follow** (TSH yearly symptoms) tracks. Glands replaced.",
-   "say": "Levothyroxines starts warms precipitants is Rx: pregnancies raise calciums space over-replaces harm comas guard interactions block follows track TSHs steady wishes respect. Hormones restore.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-381",
-  "bk2-med-382",
-  "bk2-med-383",
-  "bk2-med-384",
-  "bk2-med-385",
-  "bk2-med-386",
-  "bk2-med-387",
-  "bk2-med-388",
-  "bk2-med-389",
-  "bk2-med-390"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon5",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-hypothyroidism",
+  "quiz": [
+    "bk2-med-381",
+    "bk2-med-382",
+    "bk2-med-383",
+    "bk2-med-384",
+    "bk2-med-385",
+    "bk2-med-386",
+    "bk2-med-387",
+    "bk2-med-388",
+    "bk2-med-389",
+    "bk2-med-390"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon5",
+  "src": [],
+  "steps": [
+    {
+      "say": "When you take the history, ask specifically about cold intolerance, weight gain, constipation and dry skin. Ask about hair loss, hoarseness, slowing of speech, tiredness and heavy menstrual bleeding. Ask about neck swelling, family history of thyroid disease, previous surgery or radioiodine, and use of amiodarone or lithium. Finally, look for triggers of myxoedema coma such as infection, cold exposure and sedative drugs, and remember that a raised TSH confirms primary hypothyroidism.",
+      "tx": "Take a focused history for hypothyroidism in adults and older patients. Ask about cold intolerance, weight gain, constipation, dry skin, hair loss, hoarse voice, slow speech, fatigue and menstrual change such as menorrhagia. Ask about neck swelling, family thyroid disease, prior thyroid surgery or radioiodine, and drugs such as amiodarone and lithium. Identify triggers of myxoedema coma such as **infection**, **cold exposure** and sedatives, and confirm primary disease with high **TSH**.",
+      "vis": null
+    },
+    {
+      "say": "On examination, look for dry and coarse skin, thinning of the outer eyebrows, puffy face and swollen tongue. Listen for hoarseness, check the pulse for bradycardia, record blood pressure for diastolic rise, and test ankle jerks for delayed relaxation. Feel the thyroid for a firm rubbery goitre of Hashimoto disease. In severe cases, watch for low temperature, slow breathing and low blood pressure, and remember that growth delay points to congenital hypothyroidism in children.",
+      "tx": "Examine for dry coarse cool skin, loss of the outer third of eyebrows, puffy face with periorbital swelling, enlarged tongue, hoarse voice and slow thinking. Record bradycardia, diastolic hypertension, delayed relaxation of ankle reflexes and a firm rubbery Hashimoto goitre. Watch for myxoedema coma with hypothermia, slow breathing and hypotension. Note supporting clues such as **bradycardia**, **delayed reflex relaxation** and **pericardial effusion**, and assess growth delay in children with congenital disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-hypothyroidism-fig1.webp",
+        "alt": "Composite image showing a patient with myxedema (puffy face, periorbital edema, dry skin, outer eyebrow hair loss), a patient with Hashimoto's goitre, and a child with stunted growth (cretinism).",
+        "caption": "Key physical signs of hypothyroidism, Hashimoto's, and cretinism",
+        "ar": 1.8349
+      }
+    },
+    {
+      "say": "Order thyroid function tests and expect a high TSH with low free T4 in primary hypothyroidism. Request anti TPO antibodies when Hashimoto thyroiditis is suspected, and review cholesterol, creatine kinase and blood counts for supportive clues. Obtain an ECG to detect bradycardia and low voltage complexes, and consider echocardiography when effusion is suspected. When TSH is low, evaluate the pituitary for central disease. In suspected myxoedema coma, assess cortisol before starting thyroid hormone and give steroid cover when adrenal failure cannot be excluded.",
+      "tx": "Confirm primary hypothyroidism with high TSH and low free T4, and check anti TPO antibodies to support Hashimoto thyroiditis. Review lipids, creatine kinase, blood counts and ECG for bradycardia, low voltage complexes and effusion. Consider secondary causes when TSH is low, and image the pituitary when central disease is suspected. Exclude iodine deficiency, prior ablation, and drugs such as amiodarone and lithium. In suspected myxoedema coma, assess **cortisol**, **TSH** and **anti TPO antibodies** before giving thyroid hormone, with steroid cover when adrenal failure is possible.",
+      "vis": null
+    },
+    {
+      "say": "Look carefully at this twelve lead ECG which shows sinus bradycardia at about 48 beats per minute. Notice the small QRS complexes and the flattened T waves, which reflect low voltage in hypothyroidism. Examine the echocardiography inset which demonstrates pericardial effusion around the heart. Connect these findings with high TSH, low free T4 and positive anti TPO antibodies, because examiners often test this cardiac pattern in severe primary hypothyroidism.",
+      "tx": "Study the twelve lead ECG shown here with sinus bradycardia near 48 beats per minute, low voltage QRS complexes and flattened or inverted T waves. Note the echocardiography inset showing pericardial effusion, with labels for high TSH, low free T4 and positive anti TPO antibodies. This pattern is classic for severe primary hypothyroidism and is frequently examined. Correlate the tracing with **sinus bradycardia**, **low voltage QRS** and **pericardial effusion** before planning further care.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-hypothyroidism-gen1.webp",
+        "alt": "Twelve lead ECG with bradycardia and low voltage plus echo inset showing pericardial effusion.",
+        "caption": "Bradycardic low voltage ECG with effusion in severe primary hypothyroidism.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "Start levothyroxine in the morning on an empty stomach and adjust treatment using symptoms and TSH. Use a low starting dose and increase slowly in older patients and in those with heart disease. Treat myxoedema coma in intensive care with warming, ventilatory support, antibiotics for infection, stopping of sedatives, and thyroid hormone given together with hydrocortisone. Raise the dose during pregnancy, separate calcium and iron from thyroid tablets, and follow patients for symptoms, rhythm problems and bone effects of excess replacement.",
+      "tx": "Start oral levothyroxine on an empty stomach in the morning and adjust the dose against symptoms and TSH. Begin with a low dose and increase slowly in older patients and those with heart disease. Manage myxoedema coma in intensive care with warming, ventilation, antibiotics for infection, withdrawal of sedatives and combined thyroid hormone with hydrocortisone. Increase the dose during pregnancy, separate calcium and iron, and monitor for **over replacement**, **cardiac ischaemia** and **poor absorption** from interacting medicines.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Hypothyroidism, Hashimoto's and myxoedema coma",
+  "v": 1
 }

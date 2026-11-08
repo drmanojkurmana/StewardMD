@@ -1,66 +1,75 @@
 {
- "v": 1,
- "module": "med-ild",
- "subject": "medicine",
- "title": "Interstitial, granulomatous and occupational lung disease",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**dry** cough dyspnoea exertional, **clubbing** grades fibrotic, **exposures** asbestos silica birds farmers, **drugs** amiodarone nitrofurantoin, **connective** RA scleroderma sicca, **sarcoid** uveitis nodes erythema, **HP** weekends feathers improves, **family** pulmonary fibrosis genes) with **viva** (**breathless** Velcro clubbed, **exposed** miner farmer breeder) profiles; **pace** (months years counts) paces. Lungs stiffen.",
-   "say": "Dries clubs exposures drugs is history: connectives ache sarcoids redden HPs weekend families gene paces count jobs mine dusts mask birds feather silicas stone. Interstitiums scar.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**Velcro** basal late inspiratory, **clubbing** ILD grades, **tachypnoea** desaturates exercises, **cor** pulmonale oedema late, **skin** scleroderma heliotrope, **joints** RA deformans, **eyes** uveitis sicca, **lymph** hilar nodes) with **bedside** (**oximetry** exertional dips, **spirometry** restrictive FVC falls, **walk** 6-minute desaturates) walks; **wheeze** (HP reversible) listens. Chests Velcro.",
-   "say": "Velcros clubs tachypnoeas cors is exam: skins tighten joints deform eyes dry lymphs swell oximetries dip spirometries restrict walks time wheezes whistle steroids puff dusts avoid smokes quit. Bases crackle.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**HRCT** UIP honeycombing NSIP, **sarcoid** bilateral hilar ACE, **PFT** restriction DLCO falls, **BAL** lymphocytosis HP, **biopsy** VATS UIP proves, **autoimmune** ANA myositis screens, **precipitins** farmer lung IgG, **echo** pulmonary pressures) with **differentials** (**failure** orthopnoea BNP wet, **pneumonia** acute febrile CURB, **TB** upper cavitates AFB, **asbestosis** plaques exposure) sorts; **MDT** (radiology pathology decides) meets. Scans honeycomb.",
-   "say": "HRCTs sarcoids PFTs BALs is Ix: biopsies prove autoimmunes screen precipitins stain echos press failures wet pneumonias race TBs waste asbestos plaques MDTs meet antifibrotics slow transplants refer trials enrol. Fibrosis webs.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-ild-fig1.webp",
-    "alt": "High-resolution CT scans showing UIP with honeycombing and NSIP with ground-glass opacities, illustrating key diagnostic patterns of interstitial lung disease.",
-    "caption": "HRCT patterns in interstitial lung disease: UIP and NSIP. Image: Drriad, CC BY-SA 3.0, Wikimedia Commons.",
-    "ar": 1.6072
-   }
-  },
-  {
-   "tx": "**Management** (**steroids** sarcoid HP COP, **antifibrotics** pirfenidone nintedanib IPF, **oxygen** exertional LTOT, **rehab** pulmonary trains, **avoid** exposures masks jobs, **vaccines** flu pneumo yearly, **transplant** young refers, **palliation** breathlessness plans) with **traps** (**steroid** bones sugars psychosis, **amiodarone** lungs thyroid eyes, **methotrexate** lungs liver nodes) closes; **follow** (PFT 6-monthly) tracks. Scars slow.",
-   "say": "Steroids antifibrotics oxygens is Rx: rehabs train avoids mask vaccines guard transplants refer palliations ease bones thin sugars sweet moods lift lungs watch eyes test livers guard declines track flares treat wishes respect. Breaths ease.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-131",
-  "bk2-med-132",
-  "bk2-med-133",
-  "bk2-med-134",
-  "bk2-med-135",
-  "bk2-med-136",
-  "bk2-med-137",
-  "bk2-med-138",
-  "bk2-med-139",
-  "bk2-med-140"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon2",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-ild",
+  "quiz": [
+    "bk2-med-131",
+    "bk2-med-132",
+    "bk2-med-133",
+    "bk2-med-134",
+    "bk2-med-135",
+    "bk2-med-136",
+    "bk2-med-137",
+    "bk2-med-138",
+    "bk2-med-139",
+    "bk2-med-140"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon2",
+  "src": [],
+  "steps": [
+    {
+      "say": "When you take the history, ask how long the dry cough and exertional breathlessness have lasted because interstitial disease usually builds over months or years. Ask about work with stone, mining or farming, contact with birds or mouldy hay, and medicines such as amiodarone. Look for joint pains, dry eyes, dry mouth or skin tightening that point toward connective tissue disease. You should ask about red eyes, skin lumps and symptoms that ease away from home, and you should always record any family history of lung fibrosis.",
+      "tx": "Take a focused history in suspected interstitial lung disease. Ask about **dry cough** and breathlessness on exertion over months or years, and note exposures such as asbestos, silica, birds, farming or mouldy hay. Review drugs such as amiodarone and nitrofurantoin, plus joint pains, dry eyes or mouth, and skin tightening that suggest **connective tissue disease**. Ask about red eyes, skin lumps, breathlessness that improves away from home suggesting **hypersensitivity pneumonitis**, and family history of pulmonary fibrosis.",
+      "vis": null
+    },
+    {
+      "say": "Examine the fingers for clubbing and listen carefully at both lung bases for fine late crackles that sound like Velcro opening. Measure the respiratory rate and check oxygen saturation at rest and after a short walk because many patients desaturate on exertion. Inspect the skin, joints and eyes for features of rheumatoid arthritis, scleroderma or sarcoidosis, and feel for enlarged lymph nodes. Bedside spirometry usually shows restriction, and leg swelling suggests advanced disease with strain on the right heart.",
+      "tx": "Examine the hands for **finger clubbing** and listen for fine late inspiratory Velcro crackles at both lung bases. Record respiratory rate and check oxygen saturation at rest and after walking, since exertional desaturation is common. Look for signs of right heart strain such as leg swelling in advanced disease. Inspect skin, joints and eyes for clues to rheumatoid arthritis, scleroderma or sarcoidosis, and feel for enlarged **lymph nodes**. Bedside **oximetry** and spirometry often show a restrictive pattern with reduced forced vital capacity.",
+      "vis": null
+    },
+    {
+      "say": "Look at the fingertip in this photograph and notice how bulbous it appears with flattening of the normal angle between the nail and the skin. This change is classic finger clubbing, and you should describe the loss of the Lovibond angle in your examination. Clubbing alone never proves the cause, so always connect it with Velcro crackles, exposure history and clues from the skin, joints and eyes when you present the case.",
+      "tx": "This photograph shows **finger clubbing** with a bulbous fingertip and loss of the normal Lovibond angle between nail and skin. Clubbing reflects chronic lung injury with new tissue growth under the nail, and it supports fibrotic interstitial disease when combined with Velcro crackles on examination. In exams, mention the **Lovibond angle** and grade the finding, then link clubbing to causes such as idiopathic pulmonary fibrosis and asbestosis plus **extrapulmonary clues** from skin, joints and eyes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-ild-gen1.webp",
+        "alt": "Close up photograph of finger showing bulbous clubbing with loss of Lovibond angle",
+        "caption": "Finger clubbing with lost Lovibond angle",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "Order a high resolution CT scan and look for honeycombing in usual interstitial pneumonia or ground glass change in nonspecific interstitial pneumonia. Check lung function for a restrictive pattern with reduced gas transfer, and remember that lavage with many lymphocytes supports hypersensitivity pneumonitis. Screen for autoimmune markers and farmer lung antibodies, and check the heart pressures with echocardiography. Always separate this illness from heart failure, pneumonia and tuberculosis before you finalise the diagnosis.",
+      "tx": "Confirm the pattern with **high resolution CT**, which may show usual interstitial pneumonia with honeycombing or nonspecific interstitial pneumonia with ground glass change. Check lung function for restriction with reduced diffusing capacity, and use bronchoalveolar lavage lymphocytosis to support hypersensitivity pneumonitis. Screen for autoimmune markers, farmer lung precipitins and pulmonary hypertension on echocardiography. Distinguish from heart failure, pneumonia and tuberculosis, and discuss the scans in a **multidisciplinary meeting** with **respiratory pathology** input.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-ild-fig1.webp",
+        "alt": "High-resolution CT scans showing UIP with honeycombing and NSIP with ground-glass opacities, illustrating key diagnostic patterns of interstitial lung disease.",
+        "caption": "HRCT patterns in interstitial lung disease: UIP and NSIP. Image: Drriad, CC BY-SA 3.0, Wikimedia Commons.",
+        "ar": 1.6072
+      }
+    },
+    {
+      "say": "Choose treatment by cause, so give corticosteroids for sarcoidosis, hypersensitivity pneumonitis and cryptogenic organising pneumonia, and consider antifibrotic drugs for idiopathic pulmonary fibrosis. Prescribe oxygen for exertional desaturation, arrange pulmonary rehabilitation, help the patient avoid further dust or bird exposure, and keep flu and pneumococcal vaccines current. Refer suitable young patients for transplant assessment, follow lung function over time, and watch closely for toxicity from steroids and other lung active drugs.",
+      "tx": "Treat the treatable traits while slowing fibrosis. Give **corticosteroids** for sarcoidosis, hypersensitivity pneumonitis and cryptogenic organising pneumonia, and consider pirfenidone or nintedanib for idiopathic pulmonary fibrosis. Prescribe oxygen for exertional desaturation, arrange **pulmonary rehabilitation**, enforce exposure avoidance and update flu and pneumococcal vaccines. Refer suitable young patients for **lung transplant** assessment, monitor lung function regularly and watch for steroid, amiodarone and methotrexate toxicity.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Interstitial, granulomatous and occupational lung disease",
+  "v": 1
 }
