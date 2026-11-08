@@ -1,0 +1,270 @@
+{
+  "id": "pen-congenital-hypothyroidism-screening",
+  "title": "Congenital Hypothyroidism: Newborn Screening, Levothyroxine Timing and Etiologies",
+  "subject": "ss-paediatric-endocrinology",
+  "module": "Thyroid Disorders, Short Stature and Skeletal Dysplasias",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Newborn blood spot screening for congenital hypothyroidism requires precise timing to avoid the physiologic surge immediately after birth.",
+      "tx": "Execute **Newborn screening sampling window** protocols between 48 and 72 hours of life on dried blood spots to evaluate thyroid-stimulating hormone. Sampling prior to 48 hours causes unacceptable false-positive recalls due to the physiological neonatal TSH surge that peaks at 30 minutes after delivery and gradually wanes over two days.",
+      "vis": {
+        "kind": "table",
+        "title": "Neonatal TSH Surge Dynamics and Screening Windows",
+        "cols": [
+          "Timeline Parameter",
+          "Endocrine Physiology",
+          "Screening Impact"
+        ],
+        "rows": [
+          [
+            "Peak surge (30 minutes)",
+            "Cold exposure induces acute TRH-mediated TSH spike",
+            "Serum TSH can spike up to 70-100 mIU/L"
+          ],
+          [
+            "48 and 72 hours",
+            "Physiological surge clears to true baseline concentrations",
+            "Optimal dried blood spot window avoiding false recalls"
+          ],
+          [
+            "Preterm infants",
+            "Immature hypothalamic-pituitary-thyroid axis response",
+            "Requires mandatory repeat screening at 2 to 4 weeks"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The etiological spectrum separates permanent congenital hypothyroidism into dysgenesis and autosomal recessive dyshormonogenesis.",
+      "tx": "Analyze the **Etiological distribution (dysgenesis vs dyshormonogenesis)** underlying permanent primary hypothyroidism in infants. Thyroid dysgenesis represents 85% of cases, comprising ectopia 60% (sublingual lingual thyroid), athyreosis 25% (total agenesis), and hypoplasia 5%. Autosomal recessive thyroid dyshormonogenesis accounts for the remaining 15% from enzymatic pathway defects.",
+      "vis": {
+        "kind": "table",
+        "title": "Etiological Breakdown of Congenital Hypothyroidism",
+        "cols": [
+          "Defect Category",
+          "Frequency & Phenotypes",
+          "Genetic Basis"
+        ],
+        "rows": [
+          [
+            "Thyroid dysgenesis (85%)",
+            "Ectopia 60%, athyreosis 25%, hypoplasia 5%",
+            "PAX8, NKX2-1, FOXE1 transcription factors"
+          ],
+          [
+            "Dyshormonogenesis (15%)",
+            "Goitrous congenital hypothyroidism",
+            "TPO, TG, DUOX2, SLC5A5 (NIS) mutations"
+          ],
+          [
+            "Iodine transport defects",
+            "Failure of iodide organification and symporter",
+            "Autosomal recessive sodium-iodide symporter errors"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Immediate replacement therapy with weight-adjusted oral levothyroxine is essential to protect normal neurocognitive development.",
+      "tx": "Initiate an **Initial levothyroxine dosing benchmark** of 10-15 mcg/kg/day orally as single daily dosing within the first two weeks of life. This full starting dose rapidly normalizes serum free T4 within 3-7 days and suppresses elevated TSH within 2-4 weeks, safeguarding neurocognitive potential and preventing irreversible IQ loss.",
+      "vis": {
+        "kind": "flow",
+        "title": "Levothyroxine Initiation and Biochemical Recovery",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Screen Positive / Confirmed Low FT4"
+          },
+          {
+            "id": "n2",
+            "label": "Start Levothyroxine 10-15 mcg/kg/day"
+          },
+          {
+            "id": "n3",
+            "label": "FT4 Normalizes within 3-7 days"
+          },
+          {
+            "id": "n4",
+            "label": "TSH Normalizes within 2-4 weeks"
+          }
+        ],
+        "edges": [
+          [
+            "n1",
+            "n2",
+            "Within 14 days of life"
+          ],
+          [
+            "n2",
+            "n3",
+            "Early peripheral saturation"
+          ],
+          [
+            "n3",
+            "n4",
+            "Pituitary feedback reset"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Levothyroxine tablets must be crushed with breast milk or water, avoiding known dietary binders that block absorption.",
+      "tx": "Prevent drug interactions involving **Soy and iron interference with absorption** by educating parents on strict administration techniques. Levothyroxine tablets must be crushed in breast milk or water; co-administration with soy formulas, calcium carbonate, iron supplements, and aluminum hydroxide severely inhibits intestinal absorption, causing persistent TSH elevation.",
+      "vis": {
+        "kind": "compare",
+        "title": "Levothyroxine Administration Practices",
+        "left": {
+          "title": "Approved Administration",
+          "points": [
+            "Crushed in small volume of breast milk or water",
+            "Administered via spoon or oral syringe immediately",
+            "Given on an empty stomach 30 minutes before feed"
+          ]
+        },
+        "right": {
+          "title": "Absorption Inhibitors",
+          "points": [
+            "Soy formulas chelate hormone in intestinal lumen",
+            "Iron supplements create insoluble complexes",
+            "Calcium carbonate and sucralfate blunt bioavailability"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Close laboratory monitoring in infancy ensures hormonal targets remain in the optimal upper physiological range.",
+      "tx": "Maintain tight surveillance targeting the **Target serum free T4 monitoring range** during the initial year of therapy. During the first year of life, serum free T4 must be kept in the upper half of the age-specific reference range (1.4-2.3 ng/dL) with TSH normalized between 0.5 and 2.0 mIU/L.",
+      "vis": {
+        "kind": "table",
+        "title": "Infant Biochemical Targets and Frequency",
+        "cols": [
+          "Laboratory Marker",
+          "Target Therapeutic Window",
+          "Surveillance Schedule"
+        ],
+        "rows": [
+          [
+            "Serum Free T4",
+            "Upper half of normal (1.4-2.3 ng/dL)",
+            "Monthly for 6 months, then every 2 months"
+          ],
+          [
+            "Serum TSH",
+            "Target window 0.5 and 2.0 mIU/L",
+            "Avoid oversuppression (< 0.1 mIU/L risk of craniosynostosis)"
+          ],
+          [
+            "Growth & Auxology",
+            "Length and head circumference curves",
+            "At each clinical endocrine visit across 1 year"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transient hypothyroidism must be distinguished from permanent disease by identifying maternal and environmental triggers.",
+      "tx": "Recognize distinct **Transient congenital hypothyroidism triggers** causing temporary neonatal thyroid axis suppression. Common etiologies include maternal TSH receptor blocking antibodies (TRBAb) crossed transplacentally, maternal antithyroid drug ingestion (propylthiouracil, methimazole), endemic iodine deficiency, or excessive topical iodinated antiseptic exposure in preterm neonates inducing Wolff-Chaikoff block.",
+      "vis": {
+        "kind": "flow",
+        "title": "Mechanisms of Transient Neonatal Hypothyroidism",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Maternal / Environmental Insult"
+          },
+          {
+            "id": "t2",
+            "label": "Antibodies (TRBAb) or Antithyroid Drugs"
+          },
+          {
+            "id": "t3",
+            "label": "Excessive Topical Iodine Antiseptics"
+          },
+          {
+            "id": "t4",
+            "label": "Wolff-Chaikoff Block or Receptor Inhibition"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2",
+            "Transplacental transfer"
+          ],
+          [
+            "t1",
+            "t3",
+            "Neonatal skin absorption"
+          ],
+          [
+            "t2",
+            "t4",
+            "Reversible thyroid suppression"
+          ],
+          [
+            "t3",
+            "t4",
+            "Acute transient glandular block"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In children with a normal gland in situ, a diagnostic withdrawal trial at three years of age establishes permanency.",
+      "tx": "Implement a formal **Trial off levothyroxine at age 3 years** to clarify permanent versus transient etiology. In children without documented thyroid ectopia or aplasia on infant scintigraphy or ultrasound, a trial off levothyroxine for 4-6 weeks at age 3 years assesses whether hypothyroidism is permanent or transient after brain myelination completes.",
+      "vis": {
+        "kind": "compare",
+        "title": "Diagnostic Levothyroxine Re-evaluation Protocol",
+        "left": {
+          "title": "Indication Criteria",
+          "points": [
+            "Child reaches age 3 years with complete CNS myelination",
+            "Normal thyroid gland visualized on neonatal ultrasound/radionuclide scan",
+            "No requirement for progressive dose escalation during early life"
+          ]
+        },
+        "right": {
+          "title": "Re-evaluation Outcomes",
+          "points": [
+            "Discontinue levothyroxine for 4-6 weeks under endocrine supervision",
+            "TSH elevation > 10 mIU/L confirms permanent hypothyroidism",
+            "Normal TSH and FT4 establishes transient disease recovery"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Pendred syndrome is an important genetic cause of dyshormonogenesis with associated sensorineural hearing loss.",
+      "tx": "Identify the characteristic **Pendred syndrome pairing** in children presenting with goitrous congenital hypothyroidism and hearing loss. Pendred syndrome is an autosomal recessive mutation in SLC26A4 encoding pendrin (an anion transporter in thyroid and inner ear), pairing congenital dyshormonogenic goitrous hypothyroidism with sensorineural hearing loss and enlarged vestibular aqueducts on imaging.",
+      "vis": {
+        "kind": "table",
+        "title": "Clinical Features of Pendred Syndrome",
+        "cols": [
+          "Organ System",
+          "Clinical Manifestation",
+          "Diagnostic Finding"
+        ],
+        "rows": [
+          [
+            "Thyroid gland",
+            "Goitrous hypothyroidism or euthyroid goiter",
+            "Perchlorate discharge test positive (> 10%)"
+          ],
+          [
+            "Auditory apparatus",
+            "Bilateral sensorineural deafness",
+            "Profound prelingual or progressive hearing impairment"
+          ],
+          [
+            "Vestibular system",
+            "Enlarged vestibular aqueducts (EVA)",
+            "Bony cochlear defect on high-resolution temporal CT"
+          ]
+        ]
+      }
+    }
+  ]
+}

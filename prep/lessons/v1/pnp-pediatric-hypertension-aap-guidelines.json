@@ -13,12 +13,32 @@
       "vis": {
         "kind": "table",
         "title": "AAP 2017 Blood Pressure Staging (Ages 1-13 Years)",
-        "cols": ["Classification", "Systolic and Diastolic Criteria", "Clinical Management"],
+        "cols": [
+          "Classification",
+          "Systolic and Diastolic Criteria",
+          "Clinical Management"
+        ],
         "rows": [
-          ["Normal BP", "< 90th percentile", "Routine annual screening"],
-          ["Elevated BP", ">= 90th to < 95th percentile (or 120/80 mmHg)", "Lifestyle modifications, recheck in 6 months"],
-          ["Stage 1 HTN", ">= 95th to < 95th percentile + 12 mmHg", "Confirm over 3 visits, ABPM, lifestyle + meds"],
-          ["Stage 2 HTN", ">= 95th percentile + 12 mmHg (or >= 140/90)", "Urgent diagnostic evaluation, prompt medication"]
+          [
+            "Normal BP",
+            "< 90th percentile",
+            "Routine annual screening"
+          ],
+          [
+            "Elevated BP",
+            ">= 90th to < 95th percentile (or 120/80 mmHg)",
+            "Lifestyle modifications, recheck in 6 months"
+          ],
+          [
+            "Stage 1 HTN",
+            ">= 95th to < 95th percentile + 12 mmHg",
+            "Confirm over 3 visits, ABPM, lifestyle + meds"
+          ],
+          [
+            "Stage 2 HTN",
+            ">= 95th percentile + 12 mmHg (or >= 140/90)",
+            "Urgent diagnostic evaluation, prompt medication"
+          ]
         ]
       }
     },
@@ -53,12 +73,37 @@
       "vis": {
         "kind": "table",
         "title": "Ambulatory Blood Pressure Monitoring Phenotypes",
-        "cols": ["Phenotype", "Clinic BP", "ABPM Mean / Load", "Target Organ Risk"],
+        "cols": [
+          "Phenotype",
+          "Clinic BP",
+          "ABPM Mean / Load",
+          "Target Organ Risk"
+        ],
         "rows": [
-          ["Normal", "Normal (< 90th / < 120/80)", "Normal wake/sleep (< 95th)", "Baseline normal risk"],
-          ["White-coat", "Elevated (>= 95th)", "Normal wake/sleep (< 95th)", "Low risk; avoid overtreatment"],
-          ["Masked", "Normal in clinic", "Elevated wake or sleep (> 95th)", "High risk; equal to sustained HTN"],
-          ["Sustained", "Elevated in clinic", "Elevated on ABPM (> 95th)", "Highest target-organ damage risk"]
+          [
+            "Normal",
+            "Normal (< 90th / < 120/80)",
+            "Normal wake/sleep (< 95th)",
+            "Baseline normal risk"
+          ],
+          [
+            "White-coat",
+            "Elevated (>= 95th)",
+            "Normal wake/sleep (< 95th)",
+            "Low risk; avoid overtreatment"
+          ],
+          [
+            "Masked",
+            "Normal in clinic",
+            "Elevated wake or sleep (> 95th)",
+            "High risk; equal to sustained HTN"
+          ],
+          [
+            "Sustained",
+            "Elevated in clinic",
+            "Elevated on ABPM (> 95th)",
+            "Highest target-organ damage risk"
+          ]
         ]
       }
     },
@@ -93,11 +138,27 @@
       "vis": {
         "kind": "table",
         "title": "Echocardiographic Target Organ Thresholds",
-        "cols": ["Patient Population", "LV Mass Index Threshold", "Clinical Significance"],
+        "cols": [
+          "Patient Population",
+          "LV Mass Index Threshold",
+          "Clinical Significance"
+        ],
         "rows": [
-          ["Children and girls", ">= 38.6 g/m^2.7", "Indicates concentric or eccentric LV hypertrophy"],
-          ["Adolescent boys", "> 51 g/m^2.7", "Indicates significant cardiac remodel/hypertrophy"],
-          ["Concentric geometry", "Relative wall thickness > 0.42", "Reflects chronic pressure-overload adaptation"]
+          [
+            "Children and girls",
+            ">= 38.6 g/m^2.7",
+            "Indicates concentric or eccentric LV hypertrophy"
+          ],
+          [
+            "Adolescent boys",
+            "> 51 g/m^2.7",
+            "Indicates significant cardiac remodel/hypertrophy"
+          ],
+          [
+            "Concentric geometry",
+            "Relative wall thickness > 0.42",
+            "Reflects chronic pressure-overload adaptation"
+          ]
         ]
       }
     },
@@ -107,13 +168,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "init", "label": "Stage 1 with LVH or Stage 2 Hypertension"},
-          {"id": "mono", "label": "Start ACEi (Enalapril), ARB (Losartan), or CCB (Amlodipine 0.1-0.6 mg/kg/day)"},
-          {"id": "comb", "label": "Inadequate response: Add Thiazide diuretic or second agent"}
+          {
+            "id": "init",
+            "label": "Stage 1 with LVH or Stage 2 Hypertension"
+          },
+          {
+            "id": "mono",
+            "label": "Start ACEi (Enalapril), ARB (Losartan), or CCB (Amlodipine 0.1-0.6 mg/kg/day)"
+          },
+          {
+            "id": "comb",
+            "label": "Inadequate response: Add Thiazide diuretic or second agent"
+          }
         ],
         "edges": [
-          ["init", "mono"],
-          ["mono", "comb"]
+          [
+            "init",
+            "mono"
+          ],
+          [
+            "mono",
+            "comb"
+          ]
         ]
       }
     },
@@ -121,25 +197,10 @@
       "say": "Severe blood pressure elevations accompanied by acute end-organ damage constitute a medical emergency.",
       "tx": "Distinguish life-threatening presentations based on the **Hypertensive emergency vs urgency definition**. A hypertensive emergency is defined as severe Stage 2 hypertension (blood pressure > 30 mmHg above the 95th percentile or > 180/120 mmHg) accompanied by acute, life-threatening target-organ injury such as hypertensive encephalopathy, seizures, papilledema, acute pulmonary edema, aortic dissection, or acute renal failure, necessitating ICU admission and continuous intravenous infusions of nicardipine or labetalol.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Hypertensive Urgency",
-          "points": [
-            "Severe Stage 2 BP elevation",
-            "No acute target-organ injury",
-            "Managed with oral agents over 24-48 hours",
-            "Outpatient or regular ward observation"
-          ]
-        },
-        "right": {
-          "title": "Hypertensive Emergency",
-          "points": [
-            "Severe Stage 2 BP (> 30 mmHg above 95th)",
-            "Acute encephalopathy, seizures, or heart failure",
-            "Requires immediate PICU admission",
-            "Continuous titratable IV infusions (nicardipine)"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/htn-emergency-fig1.webp",
+        "alt": "Arteriolar fibrinoid necrosis causing encephalopathy, papilloedema and nephrosclerosis.",
+        "caption": "Hypertensive emergency: fibrinoid necrosis injures brain, eye and kidney. Credit: StewardMD."
       }
     },
     {
@@ -148,13 +209,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "start", "label": "Emergency Presentation: Severe Stage 2 BP"},
-          {"id": "eight", "label": "First 8 hours: Reduce BP by no more than 25% of excess"},
-          {"id": "norm", "label": "Next 24-48 hours: Gradually normalize toward 95th percentile"}
+          {
+            "id": "start",
+            "label": "Emergency Presentation: Severe Stage 2 BP"
+          },
+          {
+            "id": "eight",
+            "label": "First 8 hours: Reduce BP by no more than 25% of excess"
+          },
+          {
+            "id": "norm",
+            "label": "Next 24-48 hours: Gradually normalize toward 95th percentile"
+          }
         ],
         "edges": [
-          ["start", "eight"],
-          ["eight", "norm"]
+          [
+            "start",
+            "eight"
+          ],
+          [
+            "eight",
+            "norm"
+          ]
         ]
       }
     }

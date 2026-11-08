@@ -34,14 +34,10 @@
       "say": "The clinical syndrome classically unites smoky dark urine, peripheral swelling, and sudden volume-dependent hypertension.",
       "tx": "Identify the hallmark findings of the **Classic acute nephritic syndrome triad** during emergency triage. Affected children typically present with sudden onset gross hematuria producing tea-colored or cola-colored smoky urine, variable dependent edema (prominently periorbital upon morning waking and pretibial fluid accumulation), and systemic hypertension accompanied by oliguria and circulatory congestion.",
       "vis": {
-        "kind": "table",
-        "title": "Nephritic Syndrome Triad Components",
-        "cols": ["Feature", "Clinical Manifestation", "Physiologic Basis"],
-        "rows": [
-          ["Hematuria", "Smoky cola-colored urine, RBC casts", "Glomerular capillary wall disruption"],
-          ["Edema", "Periorbital and pretibial swelling", "Sodium and water retention via reduced GFR"],
-          ["Hypertension", "Elevated systolic and diastolic BP", "Expanded intravascular fluid volume"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/acute-glomerulonephritis-child-fig1.webp",
+        "alt": "Hypercellular glomerulus with red cell cast and subepithelial humps in a child.",
+        "caption": "Acute nephritic syndrome: hypercellular glomerulus and humps. Credit: StewardMD."
       }
     },
     {
@@ -50,13 +46,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "onset", "label": "Acute presentation: C3 depressed > 90%"},
-          {"id": "resolv", "label": "6-8 weeks: C3 returns to normal"},
-          {"id": "bx", "label": "> 8 weeks low C3: mandatory renal biopsy"}
+          {
+            "id": "onset",
+            "label": "Acute presentation: C3 depressed > 90%"
+          },
+          {
+            "id": "resolv",
+            "label": "6-8 weeks: C3 returns to normal"
+          },
+          {
+            "id": "bx",
+            "label": "> 8 weeks low C3: mandatory renal biopsy"
+          }
         ],
         "edges": [
-          ["onset", "resolv"],
-          ["resolv", "bx"]
+          [
+            "onset",
+            "resolv"
+          ],
+          [
+            "resolv",
+            "bx"
+          ]
         ]
       }
     },
@@ -66,11 +77,27 @@
       "vis": {
         "kind": "table",
         "title": "Serological Testing in Post-Streptococcal Nephritis",
-        "cols": ["Assay", "Sensitivity by Site", "Key Diagnostic Feature"],
+        "cols": [
+          "Assay",
+          "Sensitivity by Site",
+          "Key Diagnostic Feature"
+        ],
         "rows": [
-          ["ASO titer", "80% in pharyngitis; low in skin", "Standard screening for upper respiratory entry"],
-          ["Anti-DNase B", "> 90% in pyoderma and impetigo", "Preferred antibody test for cutaneotropic strains"],
-          ["Streptozyme", "High combined screen (> 95%)", "Measures five distinct streptococcal antibodies"]
+          [
+            "ASO titer",
+            "80% in pharyngitis; low in skin",
+            "Standard screening for upper respiratory entry"
+          ],
+          [
+            "Anti-DNase B",
+            "> 90% in pyoderma and impetigo",
+            "Preferred antibody test for cutaneotropic strains"
+          ],
+          [
+            "Streptozyme",
+            "High combined screen (> 95%)",
+            "Measures five distinct streptococcal antibodies"
+          ]
         ]
       }
     },
@@ -78,14 +105,10 @@
       "say": "Renal tissue inspection demonstrates hypercellular capillary tufts with prominent dome-shaped subepithelial deposits.",
       "tx": "Interpret characteristic biopsy findings identifying **Light and electron microscopy subepithelial humps** in atypical presentations. Light microscopy demonstrates diffuse endocapillary proliferative glomerulonephritis characterized by global endothelial swelling and neutrophil infiltration occluding capillary lumina; ultrastructural electron microscopy classically reveals pathognomonic dome-shaped electron-dense subepithelial humps situated on the outer aspect of the glomerular basement membrane.",
       "vis": {
-        "kind": "table",
-        "title": "Histopathological Signatures of APSGN",
-        "cols": ["Modality", "Characteristic Finding", "Location in Glomerulus"],
-        "rows": [
-          ["Light microscopy", "Diffuse endocapillary proliferation", "Glomerular tufts occluded by neutrophils"],
-          ["Electron microscopy", "Dome-shaped dense humps", "Subepithelial surface of basement membrane"],
-          ["Immunofluorescence", "Granular C3 and IgG deposition", "Capillary loops and mesangial matrix"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/poststreptococcal-glomerulonephritis-fig1.webp",
+        "alt": "Subepithelial humps above the basement membrane with neutrophils in the lumen.",
+        "caption": "Biopsy in APSGN: subepithelial humps and neutrophils. Credit: StewardMD."
       }
     },
     {
@@ -117,13 +140,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "vol", "label": "Fluid overload & acute hypertension"},
-          {"id": "diur", "label": "IV furosemide 1-2 mg/kg + strict fluid limit"},
-          {"id": "ccb", "label": "Add CCB/labetalol if encephalopathy persists"}
+          {
+            "id": "vol",
+            "label": "Fluid overload & acute hypertension"
+          },
+          {
+            "id": "diur",
+            "label": "IV furosemide 1-2 mg/kg + strict fluid limit"
+          },
+          {
+            "id": "ccb",
+            "label": "Add CCB/labetalol if encephalopathy persists"
+          }
         ],
         "edges": [
-          ["vol", "diur"],
-          ["diur", "ccb"]
+          [
+            "vol",
+            "diur"
+          ],
+          [
+            "diur",
+            "ccb"
+          ]
         ]
       }
     },
@@ -133,12 +171,32 @@
       "vis": {
         "kind": "table",
         "title": "Clinical Recovery Timetable in APSGN",
-        "cols": ["Clinical Parameter", "Expected Resolution Window", "Prognostic Significance"],
+        "cols": [
+          "Clinical Parameter",
+          "Expected Resolution Window",
+          "Prognostic Significance"
+        ],
         "rows": [
-          ["Edema and oliguria", "1-2 weeks", "Marks onset of spontaneous diuretic phase"],
-          ["Hypertension", "2-4 weeks", "Normalization allows weaning of antihypertensives"],
-          ["Proteinuria", "2-3 weeks", "Significant proteinuria beyond 6 months warrants biopsy"],
-          ["Microscopic hematuria", "1-2 years", "Benign persistent finding; does not imply chronicity"]
+          [
+            "Edema and oliguria",
+            "1-2 weeks",
+            "Marks onset of spontaneous diuretic phase"
+          ],
+          [
+            "Hypertension",
+            "2-4 weeks",
+            "Normalization allows weaning of antihypertensives"
+          ],
+          [
+            "Proteinuria",
+            "2-3 weeks",
+            "Significant proteinuria beyond 6 months warrants biopsy"
+          ],
+          [
+            "Microscopic hematuria",
+            "1-2 years",
+            "Benign persistent finding; does not imply chronicity"
+          ]
         ]
       }
     }
