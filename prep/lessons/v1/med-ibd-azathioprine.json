@@ -1,0 +1,211 @@
+{
+ "v": 1,
+ "module": "med-ibd",
+ "subject": "medicine",
+ "title": "Immunomodulators, biologics, serological markers, and extraintestinal manifestations in IBD",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Purine analogue antimetabolites serve as essential steroid-sparing maintenance agents in corticosteroid-dependent or refractory inflammatory bowel disease. Administering oral **azathioprine** provides a prodrug converted into 6-mercaptopurine and subsequently into active 6-thioguanine nucleotides, which inhibit lymphocyte proliferation. Pre-treatment testing for thiopurine S-methyltransferase (TPMT) activity or genotype prevents life-threatening myelosuppression in homozygous deficient individuals. Because onset of clinical efficacy requires eight to twelve weeks, it is unsuitable for acute induction, requiring bridging glucocorticoids.",
+   "say": "Purine antimetabolites provide essential steroid-sparing maintenance in refractory inflammatory bowel disease. Administering oral azathioprine generates active thioguanine nucleotides that inhibit lymphocyte proliferation. Pre-treatment testing for thiopurine methyltransferase deficiency prevents life-threatening bone marrow suppression. Because clinical efficacy requires several weeks to develop, bridging steroids are needed during induction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "prodrug",
+      "label": "Oral Azathioprine prodrug"
+     },
+     {
+      "id": "conversion",
+      "label": "Metabolism to 6-mercaptopurine & 6-TGN"
+     },
+     {
+      "id": "inhibition",
+      "label": "Inhibition of de novo purine synthesis"
+     }
+    ],
+    "edges": [
+     [
+      "prodrug",
+      "conversion"
+     ],
+     [
+      "conversion",
+      "inhibition"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted monoclonal antibody inhibition of inflammatory cytokines revolutionised the management of severe, steroid-refractory, and fistulising phenotypes. Intravenous infusion of **infliximab** delivers a chimeric IgG1 monoclonal antibody targeting both soluble and membrane-bound tumour necrosis factor-alpha. By blocking TNF-induced apoptosis resistance and downregulating endothelial adhesion molecules, it promotes deep endoscopic mucosal healing. Mandatory pre-treatment screening for latent tuberculosis and hepatitis B infection prevents fatal reactivation during ongoing anti-TNF maintenance therapy.",
+   "say": "Monoclonal antibody blockade of tumour necrosis factor revolutionized management of severe and fistulising bowel disease. Intravenous infliximab binds soluble and membrane-bound TNF-alpha, downregulating inflammatory cascades and promoting mucosal healing. Screening for latent tuberculosis and viral hepatitis prior to commencing therapy is mandatory to prevent lethal reactivation during treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ibd-flare-fig1.webp",
+    "alt": "Diagram of biologic cytokine inhibition and inflammatory cell signaling in mucosal tissues.",
+    "caption": "Cytokine signaling cascades and targeted biologic pathways in intestinal inflammation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Selective inhibition of leukocyte trafficking provides effective gut-specific immunosuppression without provoking widespread systemic immune suppression. Intravenous administration of **vedolizumab** delivers a humanized monoclonal antibody specifically directed against the alpha-4-beta-7 integrin heterodimer expressed on circulating gut-homing T-lymphocytes. By blocking its binding to mucosal addressin cell adhesion molecule-1 (MAdCAM-1) on intestinal vascular endothelium, it prevents lymphocyte extravasation into inflamed lamina propria. Its gut-selective mechanism avoids systemic infectious risks, including progressive multifocal leukoencephalopathy.",
+   "say": "Selective inhibition of leukocyte migration provides effective gut-specific immunosuppression without broad systemic immune compromise. Administering intravenous vedolizumab delivers a monoclonal antibody targeting the alpha-4-beta-7 integrin on gut-homing lymphocytes. Blocking adherence to mucosal adhesion molecules prevents lymphocyte infiltration into inflamed lamina propria, avoiding systemic immunosuppression risks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "binding",
+      "label": "Vedolizumab binds alpha-4-beta-7 integrin"
+     },
+     {
+      "id": "blockade",
+      "label": "Blocks MAdCAM-1 interaction on gut venules"
+     },
+     {
+      "id": "prevention",
+      "label": "Prevents T-cell extravasation into lamina propria"
+     }
+    ],
+    "edges": [
+     [
+      "binding",
+      "blockade"
+     ],
+     [
+      "blockade",
+      "prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serological biomarkers targeting neutrophil cytoplasmic components demonstrate high diagnostic specificity in distinguishing chronic colitis subtypes. Detection of **pANCA** (perinuclear antineutrophil cytoplasmic antibodies) occurs in sixty to seventy percent of patients with ulcerative colitis, compared to under ten percent in Crohn disease. Unlike the proteinase-3 or myeloperoxidase autoantibodies seen in systemic vasculitis, the pANCA found in inflammatory bowel disease targets nuclear envelope antigens. When combined with negative anti-glycan antibodies, it strongly reinforces a clinical diagnosis of ulcerative colitis.",
+   "say": "Serological antibodies targeting neutrophil components assist in distinguishing colitis subtypes. Detecting perinuclear antineutrophil cytoplasmic antibodies, termed pANCA, occurs in up to seventy percent of ulcerative colitis patients but rarely in Crohn disease. Unlike vasculitic antibodies, this marker binds to nuclear envelope proteins. Finding positive pANCA alongside negative fungal antibodies strongly supports ulcerative colitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "pANCA Serology",
+     "points": [
+      "Perinuclear immunofluorescence staining pattern",
+      "Positive in 60-70% of Ulcerative Colitis",
+      "Positive in only 5-10% of Crohn Disease",
+      "Correlates with refractory pouchitis"
+     ]
+    },
+    "right": {
+     "title": "ASCA Serology",
+     "points": [
+      "Anti-Saccharomyces cerevisiae antibodies",
+      "Positive in 50-60% of Crohn Disease",
+      "Positive in only 5-10% of Ulcerative Colitis",
+      "Associated with stricturing and fibrostenosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Circulating antibodies directed against cell wall phosphopeptidomannan of baker's yeast assist in phenotypic characterisation of regional enteritis. Presence of serum **ASCA** (anti-Saccharomyces cerevisiae antibodies) demonstrates high specificity for Crohn disease, appearing in over fifty percent of affected patients. High circulating IgG and IgA ASCA titres correlate with early disease onset, ileal involvement, and complicated fibrostenotic or penetrating phenotypes requiring surgical intervention. Combining positive ASCA with negative pANCA yields a diagnostic specificity exceeding ninety-five percent for Crohn disease.",
+   "say": "Antibodies against yeast cell wall antigens help in phenotypic characterization of regional enteritis. The presence of serum ASCA demonstrates strong specificity for Crohn disease, occurring in over half of patients. Elevated titres correlate with ileal disease, strictures, and penetrating complications requiring surgery. Combining positive ASCA with negative pANCA provides high specificity for Crohn disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serological profile",
+     "Likely diagnosis",
+     "Clinical associations"
+    ],
+    "rows": [
+     [
+      "pANCA(+) / ASCA(-)",
+      "Ulcerative colitis",
+      "Extensive colitis, primary sclerosing cholangitis"
+     ],
+     [
+      "pANCA(-) / ASCA(+)",
+      "Crohn disease",
+      "Small bowel ileal disease, fibrostenotic strictures"
+     ],
+     [
+      "pANCA(+) / ASCA(+)",
+      "Indeterminate colitis",
+      "Intermediate overlap phenotype"
+     ],
+     [
+      "pANCA(-) / ASCA(-)",
+      "Non-specific / IBD",
+      "Lower predictive power, relies on histology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tender, erythematous subcutaneous nodules situated symmetrically over the anterior tibial surfaces represent the most common cutaneous extraintestinal manifestation. Developing **erythema nodosum** reflects a septal panniculitis triggered by immune complex deposition, closely paralleling the inflammatory activity of the underlying bowel. Lesions resolve without ulceration or scarring as intestinal inflammation remits with systemic therapy. Supportive management includes leg elevation, non-steroidal anti-inflammatory avoidance, and optimizing primary bowel anti-inflammatory treatment with systemic corticosteroids.",
+   "say": "Tender, red nodules located over the anterior shins represent the most common cutaneous complication of inflammatory bowel disease. Developing erythema nodosum reflects septal panniculitis that directly mirrors underlying intestinal disease activity. Lesions heal without scarring as bowel inflammation responds to therapy. Treatment relies on resting the legs and intensifying primary bowel management.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Erythema nodosum",
+     "points": [
+      "Tender pretibial subcutaneous nodules",
+      "Activity parallels intestinal inflammation",
+      "Heals without scarring or tissue necrosis",
+      "Responds to treatment of underlying IBD"
+     ]
+    },
+    "right": {
+     "title": "Pyoderma gangrenosum",
+     "points": [
+      "Painful necrotizing ulcer with violaceous border",
+      "Runs course independent of gut activity",
+      "Exhibits pathergy (worsens with debridement)",
+      "Requires systemic corticosteroids or anti-TNF"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rapidly progressive, destructive ulceration exhibiting purplish undermined borders constitutes a severe non-infectious neutrophilic dermatosis. Presenting as **pyoderma gangrenosum**, the condition begins as a pustule or erythematous nodule that rapidly breaks down into an agonizing necrotic ulcer with purulent exudate. The disease course often runs independently of intestinal activity, occurring even in quiescent colitis or post-colectomy. Surgical debridement is strictly contraindicated due to pathergy, where minor trauma provokes massive ulcer extension.",
+   "say": "Rapidly destructive ulceration with violaceous undermined borders represents a severe non-infectious dermatosis. Developing pyoderma gangrenosum starts as a pustule that rapidly breaks down into an agonizing, necrotic ulcer. Its activity often runs independently of intestinal inflammation. Surgical debridement must be avoided because pathergy triggers rapid expansion of the wound.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "nodule",
+      "label": "Initial painful pustule or violaceous papule"
+     },
+     {
+      "id": "necrosis",
+      "label": "Rapid ulceration with undermined violaceous borders"
+     },
+     {
+      "id": "therapy",
+      "label": "Systemic steroids or Infliximab; avoid debridement"
+     }
+    ],
+    "edges": [
+     [
+      "nodule",
+      "necrosis"
+     ],
+     [
+      "necrosis",
+      "therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic watery diarrhoea in elderly patients displaying entirely normal mucosal architecture on colonoscopy warrants systematic mucosal biopsy sampling. Diagnosing **microscopic colitis** requires histological evaluation, which reveals two distinct subtypes: lymphocytic colitis with intraepithelial lymphocytosis exceeding twenty lymphocytes per one hundred enterocytes, and collagenous colitis characterized by a thickened subepithelial collagen band exceeding ten micrometres. Budesonide controlled-release oral capsules provide rapid, highly effective symptomatic remission by delivering targeted topical glucocorticoid activity with minimal systemic bioavailability.",
+   "say": "Chronic watery diarrhoea in older adults with normal colonoscopic appearances requires systematic mucosal biopsies. Diagnosing microscopic colitis relies on histological evaluation, dividing into lymphocytic colitis and collagenous colitis with a thickened subepithelial collagen band. Oral budesonide provides rapid, highly effective symptomatic control through targeted topical glucocorticoid release.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/collagenous-colitis-fig1.webp",
+    "alt": "Histopathological section demonstrating thickened subepithelial collagen band in collagenous colitis.",
+    "caption": "Subepithelial collagen band and intraepithelial lymphocytes in microscopic colitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

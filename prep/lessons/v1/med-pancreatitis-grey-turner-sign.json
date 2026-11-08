@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "med-pancreatitis",
+ "subject": "medicine",
+ "title": "Pancreatic necrosis, fluid collections, chronic pancreatitis, and autoimmune disease",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Extravasation of retroperitoneal sanguinous fluid tracking along the lateral border of the quadratus lumborum muscle discolors the lateral abdominal wall. Clinical observation of **Grey Turner sign** reveals dark violaceous flank ecchymosis signifying retroperitoneal pancreatic necrosis and severe haemorrhage. Typically manifesting two to three days after the initial presentation, it reflects retroperitoneal tracking from the posterior pararenal space. Its presence signals severe necrotizing disease, warranting immediate intensive care monitoring and contrast-enhanced cross-sectional abdominal imaging.",
+   "say": "Tracking of sanguinous fluid along the quadratus lumborum muscle discolors the lateral abdominal wall. Observing Grey Turner sign reveals violaceous flank ecchymosis indicating retroperitoneal necrosis and haemorrhage. Typically appearing several days into severe pancreatitis, it reflects fluid dissecting from the pararenal space. Its presence demands close monitoring and cross-sectional imaging.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-abdominal_trauma.webp",
+    "alt": "Clinical diagram illustrating flank discoloration corresponding to Grey Turner sign in retroperitoneal injury.",
+    "caption": "Flank and retroperitoneal ecchymosis in necrotizing abdominal disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Enzymatic disruption of the main or branch pancreatic duct produces localized fluid collections bounded entirely by fibrous inflammatory granulation tissue. Development of a **pancreatic pseudocyst** occurs more than four weeks after acute interstitial edematous pancreatitis, lacking a true epithelial lining. Patients may remain entirely asymptomatic or present with persistent epigastric fullness, early satiety, gastric outlet obstruction, or secondary infection. Drainage via endoscopic cystogastrostomy or transmural stenting is indicated for collections that become symptomatic, enlarging, or infected.",
+   "say": "Ductal disruption causes localized fluid collections encapsulated by fibrous granulation tissue. Developing a pancreatic pseudocyst occurs more than four weeks after interstitial pancreatitis and lacks an epithelial lining. Patients present with abdominal fullness, early satiety, or secondary infection. Endoscopic cystogastrostomy provides definitive drainage for symptomatic, enlarging, or infected collections.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pancreatic pseudocyst",
+     "points": [
+      "Occurs >4 weeks after interstitial pancreatitis",
+      "Fibrous granulation capsule without epithelium",
+      "Contains purely amylase-rich fluid",
+      "Internal drainage via cystogastrostomy"
+     ]
+    },
+    "right": {
+     "title": "Walled-off necrosis (WON)",
+     "points": [
+      "Occurs >4 weeks after necrotizing pancreatitis",
+      "Encapsulated collection of fluid and solid debris",
+      "Contains non-viable pancreatic parenchyma",
+      "Requires endoscopic necrosectomy if infected"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Maturation of confluent parenchymal and peripancreatic necrosis results in encapsulated, thick-walled collections containing variable quantities of liquid and solid tissue. Diagnosing **walled-off necrosis** is established four weeks or more following necrotising pancreatitis when contrast-enhanced computed tomography demonstrates an organized capsule enclosing non-viable parenchyma. Secondary infection of necrotic tissue introduces gas bubbles, generating sepsis and clinical deterioration. Infected collections require minimally invasive step-up therapy consisting of percutaneous catheter drainage followed by endoscopic transluminal necrosectomy if unreversed.",
+   "say": "Maturation of parenchymal necrosis results in encapsulated collections containing fluid and solid debris. Establishing a diagnosis of walled-off necrosis occurs four weeks after necrotizing pancreatitis when imaging shows an organized capsule around non-viable tissue. Infection of necrosis causes sepsis and gas formation. Management uses a minimally invasive step-up protocol starting with drainage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "necrosis",
+      "label": "Acute necrotizing pancreatitis (>4 weeks)"
+     },
+     {
+      "id": "encapsulation",
+      "label": "Capsule maturation into walled-off necrosis"
+     },
+     {
+      "id": "stepup",
+      "label": "Minimally invasive drainage and necrosectomy"
+     }
+    ],
+    "edges": [
+     [
+      "necrosis",
+      "encapsulation"
+     ],
+     [
+      "encapsulation",
+      "stepup"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progressive, irreversible fibro-inflammatory transformation leads to sustained architectural parenchymal destruction and permanent glandular dysfunction. Patients suffering from **chronic pancreatitis** endure debilitating recurrent or continuous epigastric pain, secondary to ductal hypertension and pancreatic perineural inflammation. Chronic alcohol consumption and cigarette smoking constitute the primary toxic-metabolic aetiologies, while genetic mutations in PRSS1, SPINK1, and CFTR predispose to recurrent juvenile attacks. End-stage disease culminates in the classic triad of ductal calcification, steatorrhoea, and secondary diabetes mellitus.",
+   "say": "Progressive fibro-inflammatory injury leads to irreversible parenchymal destruction and permanent loss of function. Patients suffering from chronic pancreatitis endure chronic epigastric pain caused by ductal hypertension and neural inflammation. Alcohol abuse and smoking represent major causes, alongside genetic mutations. Advanced disease results in the classic triad of calcification, steatorrhoea, and secondary diabetes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-pancreatitis-fig1.webp",
+    "alt": "Histopathological specimen showing extensive interstitial fibrosis and acinar atrophy in chronic pancreatitis.",
+    "caption": "Acinar tissue atrophy and dense parenchymal fibrosis in chronic pancreatitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Deposition of insoluble intraductal calcium carbonate stones provides the pathognomonic radiological confirmation of advanced parenchymal damage. Visualization of **pancreatic calcification** on plain abdominal radiographs or non-contrast computed tomography appears in an irregular, ductal distribution spanning the head, body, and tail. Calcification reflects chronic stagnation of protein-rich pancreatic juice, lithostathine deficiency, and intraductal plug mineralization. Its presence confirms irreversible exocrine insufficiency and eliminates the need for invasive diagnostic secretin-cholecystokinin hormonal stimulation testing.",
+   "say": "Deposition of intraductal calcium carbonate calculi provides pathognomonic radiographic confirmation of end-stage pancreatitis. Observing pancreatic calcification on plain abdominal radiographs or computed tomography outlines the ductal system across the gland. Calcification reflects stagnation of protein-rich secretions and lithostathine depletion. Its detection confirms irreversible exocrine destruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging modality",
+     "Calcification findings",
+     "Diagnostic value"
+    ],
+    "rows": [
+     [
+      "Plain abdominal radiograph",
+      "Radio-opaque speckled calcification across L1-L2",
+      "Specific but low sensitivity in early disease"
+     ],
+     [
+      "Non-contrast CT abdomen",
+      "High-density intraductal calculi and atrophy",
+      "Gold standard for detecting calcifications"
+     ],
+     [
+      "MRCP",
+      "Flow voids from stones; beaded chain-of-lakes duct",
+      "Optimal for mapping ductal strictures"
+     ],
+     [
+      "Endoscopic ultrasound (EUS)",
+      "Hyperechoic foci with acoustic shadowing",
+      "Most sensitive for early parenchymal changes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Profound maldigestion of dietary lipids develops only after functional pancreatic exocrine output declines below ten percent of normal capacity. Development of **steatorrhoea** causes bulky, pale, greasy, foul-smelling stools that float and prove difficult to flush, accompanied by fat-soluble vitamin (A, D, E, K) malabsorption. Measurement of faecal elastase-1 provides high diagnostic accuracy, with levels falling below one hundred micrograms per gram denoting severe insufficiency. Treatment requires oral enteric-coated pancreatic enzyme replacement containing high-dose lipase administered during every meal.",
+   "say": "Severe lipid maldigestion emerges only when pancreatic exocrine output falls below ten percent of physiological capacity. Developing steatorrhoea causes bulky, pale, foul-smelling stools that float, accompanied by fat-soluble vitamin malabsorption. Measuring faecal elastase provides reliable diagnosis, with values under one hundred micrograms indicating severe insufficiency. Therapy requires oral enteric-coated enzyme replacement taken with meals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Exocrine Insufficiency Signs",
+     "points": [
+      "Lipase output falls below 10% of normal",
+      "Faecal elastase-1 <100 mcg/g of stool",
+      "Voluminous, floating, foul-smelling stools",
+      "Deficiencies of fat-soluble vitamins (A, D, E, K)"
+     ]
+    },
+    "right": {
+     "title": "Enzyme Replacement Therapy",
+     "points": [
+      "Enteric-coated micro-tablets (Creon)",
+      "Minimum 40,000-50,000 units lipase per meal",
+      "Administered concurrently with food intake",
+      "Co-prescribe PPI to prevent acid denaturation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A distinctive fibro-inflammatory form of chronic pancreatitis frequently mimics pancreatic adenocarcinoma, presenting as painless obstructive jaundice and glandular enlargement. Recognized as **autoimmune pancreatitis**, type 1 represents the systemic manifestation of IgG4-related systemic fibro-inflammatory disease, characterized histologically by dense lymphoplasmacytic sclerosing pancreatitis and obliterative phlebitis. Contrast CT reveals characteristic diffuse, sausage-like pancreatic enlargement with an attenuated peripheral halo. Unlike malignant tumours, it demonstrates rapid, complete clinical, biochemical, and morphological remission following high-dose systemic oral corticosteroid therapy.",
+   "say": "A distinct fibro-inflammatory disorder frequently mimics pancreatic adenocarcinoma, presenting with painless obstructive jaundice. Autoimmune pancreatitis type 1 represents a systemic manifestation of IgG4-related disease, marked by dense lymphoplasmacytic inflammation and phlebitis. Computed tomography reveals diffuse sausage-shaped enlargement with a peripheral halo. Corticosteroids produce dramatic clinical and radiological resolution.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autoimmune Pancreatitis (AIP)",
+     "points": [
+      "Diffuse 'sausage-shaped' enlarged pancreas",
+      "Elevated serum IgG4 levels (>2x normal)",
+      "Associated with salivary & retroperitoneal fibrosis",
+      "Dramatic resolution with systemic corticosteroids"
+     ]
+    },
+    "right": {
+     "title": "Pancreatic Adenocarcinoma",
+     "points": [
+      "Focal hypodense mass, typically in head",
+      "Elevated serum CA 19-9 biomarker",
+      "Vascular encasement and distal atrophy",
+      "Resistant to steroids; requires resection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Identification of elevated specific immunoglobulin subclasses aids in confirming systemic autoimmune pancreatitis and monitoring clinical relapse after steroid tapering. Serum **IgG4** concentrations rise greater than two times the upper limit of normal in over eighty percent of patients with type 1 disease. Furthermore, multiorgan manifestations including sclerosing cholangitis, bilateral submandibular sialadenitis, and retroperitoneal fibrosis share this identical immunoglobulin signature. Monitoring serial serum titres during immunosuppressive maintenance identifies occult relapses prior to overt clinical symptom recurrence.",
+   "say": "Identifying elevated immunoglobulin subclasses confirms systemic autoimmune pancreatitis and monitors for disease relapse. Serum IgG4 levels rise more than twice normal in most patients with type 1 disease. Extrapancreatic involvement including sclerosing cholangitis and submandibular sialadenitis exhibits this same serological profile. Serial titres track treatment response and detect occult flares.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "presentation",
+      "label": "Painless jaundice and sausage-shaped pancreas"
+     },
+     {
+      "id": "serology",
+      "label": "Serum IgG4 elevation >2x upper normal limit"
+     },
+     {
+      "id": "steroids",
+      "label": "Oral Prednisolone 40 mg/day yields rapid remission"
+     }
+    ],
+    "edges": [
+     [
+      "presentation",
+      "serology"
+     ],
+     [
+      "serology",
+      "steroids"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
