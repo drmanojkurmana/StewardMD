@@ -111,47 +111,10 @@
       "say": "Surgical staging for uterine carcinosarcoma mirrors high-risk endometrial adenocarcinoma and requires total abdominal hysterectomy, bilateral salpingo-oophorectomy, and retroperitoneal lymphadenectomy. Pelvic and para-aortic lymph node metastases occur in up to thirty percent of patients.",
       "tx": "Definitive surgical management demands **surgical staging** via total abdominal hysterectomy, bilateral salpingo-oophorectomy, peritoneal washings, omental biopsy, and systematic **pelvic and para-aortic lymphadenectomy**, as occult retroperitoneal nodal metastases occur in 20% to 30% of clinically confined cases.  Evidence-based practice integrates TP53 mutation, p53 overexpression, copy-number high phenotype, 90% frequency. Key numerical parameters include 90, 53.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "lap",
-            "label": "Perform exploratory laparotomy and peritoneal fluid cytology"
-          },
-          {
-            "id": "tah",
-            "label": "Total abdominal hysterectomy and bilateral salpingo-oophorectomy"
-          },
-          {
-            "id": "lnd",
-            "label": "Systematic pelvic and para-aortic lymph node dissection"
-          },
-          {
-            "id": "omg",
-            "label": "Infracolic omentectomy and multiple peritoneal biopsies"
-          },
-          {
-            "id": "stg",
-            "label": "Assign surgical stage by FIGO endometrial cancer criteria"
-          }
-        ],
-        "edges": [
-          [
-            "lap",
-            "tah"
-          ],
-          [
-            "tah",
-            "lnd"
-          ],
-          [
-            "lnd",
-            "omg"
-          ],
-          [
-            "omg",
-            "stg"
-          ]
-        ]
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-uterine-sarcoma.webp",
+        "alt": "Uterine diagrams illustrating sarcoma stages one to four with local, nodal and distant spread.",
+        "caption": "Uterine sarcoma stages one to four. Credit: StewardMD."
       }
     },
     {
