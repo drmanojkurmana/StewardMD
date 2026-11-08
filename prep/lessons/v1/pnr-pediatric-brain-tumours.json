@@ -1,0 +1,255 @@
+{
+  "id": "pnr-pediatric-brain-tumours",
+  "title": "Pediatric Brain Tumours: Medulloblastoma, Astrocytomas and Posterior Fossa Masses",
+  "subject": "ss-paediatric-neurology",
+  "module": "Neurocutaneous Syndromes and CNS Tumours",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Posterior fossa brain tumours predominate in children between one and ten years of age.",
+      "tx": "Evaluate **Posterior fossa predominance** when approaching suspected central nervous system neoplasms in children. In children aged 1-10 years, approximately 50-60% of all primary intracranial tumours arise within the posterior fossa (infratentorial compartment), in sharp contrast to adults where supratentorial hemispheric neoplasms predominate. Commonest entities include pilocytic astrocytoma, medulloblastoma, ependymoma, and diffuse midline gliomas of the brainstem, which typically present with triad of morning vomiting, headache, and cerebellar ataxia (Medulloblastoma WHO molecular subgroups).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Age Group",
+          "Predominant Compartment",
+          "Typical Neoplasms"
+        ],
+        "rows": [
+          [
+            "Infants < 1 year",
+            "Supratentorial predominance",
+            "Choroid plexus papilloma/carcinoma, ATRT, desmoplastic infantile ganglioglioma"
+          ],
+          [
+            "Children 1-10 years",
+            "Infratentorial (50-60% posterior fossa)",
+            "Pilocytic astrocytoma, medulloblastoma, ependymoma, DIPG"
+          ],
+          [
+            "Adolescents > 10 years",
+            "Supratentorial compartment",
+            "Diffuse astrocytomas, oligodendrogliomas, craniopharyngiomas, germ cell tumours"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Medulloblastoma is classified into four molecular subgroups that govern treatment and five year survival.",
+      "tx": "Classify **Medulloblastoma WHO molecular subgroups** to dictate personalized risk stratification and protocol therapy. Medulloblastoma, the commonest malignant embryonal tumor of childhood, is divided into 4 biological subgroups: WNT-activated (harbouring CTNNB1 mutations and monosomy 6, boasting excellent prognosis with > 95% 5-year survival); SHH-activated (stratified by TP53 status); Group 3 (MYC amplification, early leptomeningeal metastasis, < 50% 5-year survival); and Group 4 (most prevalent, isochromosome 17q) (Pilocytic astrocytoma BRAF alterations).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Molecular Subgroup",
+          "Genomic Alterations",
+          "Clinical Behavior & 5-Year Survival"
+        ],
+        "rows": [
+          [
+            "WNT-activated",
+            "CTNNB1 mutation, monosomy 6, nuclear beta-catenin",
+            "Classical histology, older children, > 95% 5-year survival"
+          ],
+          [
+            "SHH-activated",
+            "PTCH1, SUFU, SMO, TP53 mutations",
+            "Infants & young adults, desmoplastic/nodular, intermediate risk"
+          ],
+          [
+            "Group 3",
+            "MYC amplification, overexpressed GFI1",
+            "Infants, large cell/anaplastic, early metastasis, < 50% 5-year survival"
+          ],
+          [
+            "Group 4",
+            "Isochromosome 17q, PRDM6 activation",
+            "Most common (35-40%), classical histology, intermediate prognosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pilocytic astrocytoma is the most common paediatric brain tumour boasting a ten year survival exceeding ninety percent.",
+      "tx": "Evaluate **Pilocytic astrocytoma BRAF alterations** when reviewing cerebellar masses in young children. Pilocytic astrocytoma (WHO Grade 1) is the single most common pediatric central nervous system neoplasm overall, exhibiting a 10-year overall survival exceeding 90% following gross total surgical resection. On cranial MRI, it presents as a cystic cerebellar lesion with an enhancing mural nodule. Over 80-90% harbor tandem duplication producing the KIAA1549-BRAF fusion gene, or less commonly BRAF V600E point mutations (Ependymoma plastic growth and CSF staging).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Realm",
+          "Characteristic Feature",
+          "Pathognomonic Significance"
+        ],
+        "rows": [
+          [
+            "Neuroimaging",
+            "Cystic cerebellar mass with enhancing mural nodule",
+            "Non-infiltrative border with minimal surrounding vasogenic edema"
+          ],
+          [
+            "Histology",
+            "Biphasic architecture with Rosenthal fibers",
+            "Eosinophilic corkscrew structures confirming WHO Grade 1 biology"
+          ],
+          [
+            "Molecular Genetics",
+            "KIAA1549-BRAF fusion (tandem duplication 7q34)",
+            "Activates MAPK pathway; >90% 10-year survival"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Ependymomas exhibit plastic growth through basal foramina and require spinal fluid cytology at two weeks.",
+      "tx": "Recognise **Ependymoma plastic growth and CSF staging** as critical hallmarks of posterior fossa ependymomas. Arising from the ependymal lining of the fourth ventricle floor, these pliable neoplasms insinuate through the foramina of Luschka and Magendie into the cerebellopontine angles and upper cervical spinal canal (plastic tumor). Complete staging mandates full-spine contrast-enhanced MRI and lumbar CSF cytology collected at 2 weeks post-operatively to accurately detect drop metastases without contamination from surgical debris (DIPG / DMG H3K27M mutations).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "e1",
+            "label": "Origin: floor of fourth ventricle"
+          },
+          {
+            "id": "e2",
+            "label": "Plastic extrusion through foramina of Luschka & Magendie"
+          },
+          {
+            "id": "e3",
+            "label": "Maximal safe gross total surgical resection"
+          },
+          {
+            "id": "e4",
+            "label": "Post-op craniospinal MRI & CSF cytology at 2 weeks"
+          }
+        ],
+        "edges": [
+          [
+            "e1",
+            "e2"
+          ],
+          [
+            "e2",
+            "e3"
+          ],
+          [
+            "e3",
+            "e4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Diffuse midline glioma expanding the pons carries a histone mutation and an extremely dismal prognosis.",
+      "tx": "Identify **DIPG / DMG H3K27M mutations** in children presenting with subacute pontine expansion. Diffuse Intrinsic Pontine Glioma (reclassified as Diffuse Midline Glioma, H3 K27M-altered, WHO Grade 4) expands the basis pontis, engulfing the basilar artery. Children present with a classic clinical triad: multiple cranial neuropathies (chiefly cranial nerves VI and VII), pyramidal long-tract signs (hyperreflexia, Babinski sign), and cerebellar ataxia. Prognosis remains devastating with a median survival under 12 months, where palliative focal radiotherapy provides transient symptom relief (Craniospinal radiation avoidance in infants).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical Triad of DIPG / DMG",
+          "points": [
+            "Multiple cranial neuropathies (abducens VI, facial VII)",
+            "Long-tract pyramidal signs (hyperreflexia, hemiparesis)",
+            "Progressive cerebellar ataxia and dysmetria",
+            "Rapid onset over weeks; biopsy confirms H3 K27M mutation"
+          ]
+        },
+        "right": {
+          "title": "Therapeutic Boundaries",
+          "points": [
+            "Surgical resection impossible due to pontine parenchymal infiltration",
+            "Palliative focal fractionated radiation (54-59 Gy) delays progression",
+            "Systemic conventional cytotoxic chemotherapies show zero survival benefit",
+            "Median survival under 12 months despite radiation therapy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Craniospinal radiation is strictly avoided in children under three years to safeguard cognitive development.",
+      "tx": "Enforce strict **Craniospinal radiation avoidance in infants** younger than 3 years of age. Delivering craniospinal irradiation (CSI) to the actively myelinating infant brain precipitates devastating, irreversible neurocognitive decline (IQ loss exceeding 20-30 points), severe neuroendocrine axes collapse, and microcephaly. For infants with high-grade embryonal neoplasms such as medulloblastoma and ATRT, modern oncology protocols employ maximal safe surgical resection followed by dose-intensive induction chemotherapy and consolidation with high-dose chemotherapy supported by autologous hematopoietic stem cell rescue (Craniopharyngioma adamantinomatous vs papillary).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Age Cohort",
+          "Radiation Strategy",
+          "Alternative Oncology Protocol"
+        ],
+        "rows": [
+          [
+            "Infants < 3 years",
+            "Strictly avoid craniospinal irradiation (CSI)",
+            "High-dose marrow-ablative chemotherapy with autologous stem cell rescue"
+          ],
+          [
+            "Children >= 3 years",
+            "CSI (23.4-36 Gy) + posterior fossa boost",
+            "Combined adjuvant vincristine, cisplatin, and cyclophosphamide"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adamantinomatous craniopharyngiomas are treated with surgical drainage and hormone replacement including desmopressin.",
+      "tx": "Contrast **Craniopharyngioma adamantinomatous vs papillary** subtypes in children presenting with visual disturbance and pituitary failure. Adamantinomatous craniopharyngiomas (driven by somatic CTNNB1 mutations) account for >90% of pediatric cases, presenting with bitemporal hemianopsia, growth failure, and central diabetes insipidus. Cyst fluid contains 'machinery oil' rich in cholesterol crystals alongside nodular calcification. Comprehensive perioperative care mandates endocrinological hormone replacement with desmopressin and oral hydrocortisone (Posterior fossa syndrome).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adamantinomatous Subtype (Pediatric)",
+          "points": [
+            "Accounts for > 90% of childhood craniopharyngiomas",
+            "Driven by somatic activating CTNNB1 (beta-catenin) mutations",
+            "Cystic architecture with thick 'machinery oil' fluid and cholesterol crystals",
+            "Requires hormone replacement with desmopressin and hydrocortisone"
+          ]
+        },
+        "right": {
+          "title": "Papillary Subtype (Adult)",
+          "points": [
+            "Predominates almost exclusively in mature adults (> 45 years)",
+            "Driven by BRAF V600E point mutations (lacks CTNNB1 mutations)",
+            "Solid or mixed composition; cystic component lacks cholesterol sheen",
+            "Calcifications are rare or absent on neuroimaging"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Posterior fossa syndrome occurs one to two days after cerebellar surgery causing mutism and emotional distress.",
+      "tx": "Anticipate **Posterior fossa syndrome (cerebellar mutism)** during postoperative surveillance following cerebellar tumor resection. Developing in roughly 25% of children 24-48 hours after midline posterior fossa surgery (especially vermian incision and dentate nucleus retraction), it manifests as complete mutism or severe speech dyspraxia accompanied by extreme emotional lability, irritability, profound axial hypotonia, and oropharyngeal dysphagia. The underlying mechanism involves bilateral disruption of the dentato-thalamo-cortical outflow tract, requiring prolonged intensive speech, physical, and psychiatric rehabilitation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Midline cerebellar vermian tumor resection"
+          },
+          {
+            "id": "p2",
+            "label": "Surgical retraction / ischemia to dentate nuclei"
+          },
+          {
+            "id": "p3",
+            "label": "Delayed onset in 25% at 24-48 hours: mutism & emotional lability"
+          },
+          {
+            "id": "p4",
+            "label": "Slow neurorehabilitation over months to years"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2"
+          ],
+          [
+            "p2",
+            "p3"
+          ],
+          [
+            "p3",
+            "p4"
+          ]
+        ]
+      }
+    }
+  ]
+}

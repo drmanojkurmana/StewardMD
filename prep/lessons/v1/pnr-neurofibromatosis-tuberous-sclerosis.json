@@ -1,0 +1,266 @@
+{
+  "id": "pnr-neurofibromatosis-tuberous-sclerosis",
+  "title": "Neurofibromatosis Type 1 and Tuberous Sclerosis Complex: Clinical Criteria and Therapies",
+  "subject": "ss-paediatric-neurology",
+  "module": "Neurocutaneous Syndromes and CNS Tumours",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Neurofibromatosis type one is diagnosed through specific clinical and genetic criteria. Meeting at least two of the revised criteria confirms the diagnosis.",
+      "tx": "Apply the revised **NF1 diagnostic criteria (revised Legius)** requiring at least two cardinal features or a pathogenic NF1 mutation alongside one clinical sign. Cardinal features include: 6 or more cafe-au-lait macules (> 5 mm in prepubertal children, > 15 mm in postpubertal individuals); 2 or more neurofibromas of any type or 1 plexiform neurofibroma; axillary or inguinal freckling (Crowe sign); optic pathway glioma; 2 or more iris Lisch nodules or choroidal abnormalities; distinctive sphenoid wing dysplasia or anterolateral tibial bowing; or a first-degree relative with NF1 (Optic pathway gliomas).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic criterion",
+          "Cutoff / Definition in children",
+          "Clinical evaluation method"
+        ],
+        "rows": [
+          [
+            "Cafe-au-lait macules",
+            ">= 6 macules (> 5 mm prepubertal, > 15 mm postpubertal)",
+            "Wood lamp examination under dark room"
+          ],
+          [
+            "Axillary / inguinal freckles",
+            "Multiple lentiginous macules (Crowe sign)",
+            "Skin folds inspection (emerges ages 3-5 yr)"
+          ],
+          [
+            "Ophthalmological signs",
+            ">= 2 Lisch nodules or >= 2 choroidal abnormalities",
+            "Slit-lamp examination & optical coherence tomography"
+          ],
+          [
+            "Skeletal dysplasia",
+            "Sphenoid wing dysplasia or anterolateral tibial bowing",
+            "Plain radiography; congenital pseudarthrosis risk"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Optic pathway gliomas affect up to twenty percent of children with neurofibromatosis type one. Annual visual acuity screening is essential to detect subclinical tumor growth.",
+      "tx": "Conduct structured **Selumetinib for plexiform neurofibromas** in all children under age 8 with NF1. Pilocytic astrocytomas (WHO grade 1) of the optic nerves, chiasm, or retrochiasmal tracts occur in 15% to 20% of affected children. Annual age-appropriate visual acuity testing, color vision testing, visual fields, and fundoscopy are mandatory. Routine neuroimaging in asymptomatic children with normal vision is controversial, but contrast MRI of the brain and orbits is indicated immediately for progressive visual loss, proptosis, or precocious puberty (Plexiform neurofibromas).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nf1",
+            "label": "Child with NF1 under 8 years of age"
+          },
+          {
+            "id": "eye",
+            "label": "Annual formal visual acuity & ophthalmology testing"
+          },
+          {
+            "id": "mri",
+            "label": "Brain/orbital MRI if visual decline, proptosis, or precocious puberty"
+          },
+          {
+            "id": "rx",
+            "label": "First-line chemotherapy: Carboplatin + Vincristine if vision threatened"
+          }
+        ],
+        "edges": [
+          [
+            "nf1",
+            "eye"
+          ],
+          [
+            "eye",
+            "mri"
+          ],
+          [
+            "mri",
+            "rx"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Plexiform neurofibromas grow along major nerve trunks and cause severe disfigurement. Selumetinib is the first approved MEK inhibitor that halts progression and shrinks tumors.",
+      "tx": "Administer **Optic pathway glioma screening** for symptomatic, inoperable plexiform neurofibromas. Neurofibromin deficiency causes hyperactivation of the intracellular RAS-mitogen-activated protein kinase (MAPK) signaling pathway. Selumetinib, an oral selective small-molecule inhibitor of MEK1 and MEK2, is approved for pediatric patients aged 2 years and older with inoperable plexiform neurofibromas causing pain, airway compromise, motor impairment, or severe disfigurement, producing objective tumor volume shrinkage >= 20% in over 70% of treated patients (Tibial dysplasia).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Target parameter",
+          "Selumetinib clinical protocol",
+          "Safety surveillance"
+        ],
+        "rows": [
+          [
+            "Mechanism of action",
+            "Selective MEK1/2 kinase inhibitor; suppresses RAS/ERK",
+            "Blocks autonomous Schwann cell proliferation"
+          ],
+          [
+            "Target population",
+            "Inoperable plexiform neurofibromas causing morbidity",
+            "Age >= 2 years; dosed 25 mg/m2 oral BID with water"
+          ],
+          [
+            "Mandatory monitoring",
+            "Quarterly volumetric MRI, serial ECG/Echo, dermatology",
+            "Monitor LVEF reduction, CPK elevation, and acneiform rash"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Congenital bowing of the tibia presents a difficult orthopedic challenge in neurofibromatosis type one. Pathological fracture leads to stubborn pseudarthrosis with high rates of non-union.",
+      "tx": "Recognize **Tuberous sclerosis complex major criteria** as a pathognomonic osseous manifestation of NF1. Anterolateral bowing of the lower leg is present at birth or manifests during early weight-bearing infancy, characterized by cortical thinning, intramedullary sclerosis, and osteoclast-driven bone resorption. Minor trauma precipitates a pathological fracture that notoriously fails to heal, producing a mobile false joint (pseudarthrosis of the tibia) that requires complex intramedullary rodding, vascularized fibular grafting, or Ilizarov external fixation (TSC criteria).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bow",
+            "label": "Congenital anterolateral bowing of the tibia"
+          },
+          {
+            "id": "fx",
+            "label": "Pathological fracture following minor weight-bearing stress"
+          },
+          {
+            "id": "pseudo",
+            "label": "Non-union & pseudarthrosis: Intramedullary rodding & bone graft"
+          }
+        ],
+        "edges": [
+          [
+            "bow",
+            "fx"
+          ],
+          [
+            "fx",
+            "pseudo"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Tuberous sclerosis complex is an autosomal dominant disorder caused by mutations in TSC1 or TSC2. Diagnostic criteria combine dermatological, neurological, and visceral manifestations.",
+      "tx": "Apply the revised **SEGA and mTOR inhibitors** to establish tuberous sclerosis complex. Definite diagnosis requires identification of a pathogenic mutation in TSC1 (hamartin, chromosome 9q34) or TSC2 (tuberin, chromosome 16p13.3) or the presence of 2 major clinical features (or 1 major plus >= 2 minor features). Major criteria include: >= 3 hypomelanotic macules (ash-leaf spots); >= 3 angiofibromas or fibrous cephalic plaque; >= 2 ungual fibromas; shagreen patch; multiple retinal hamartomas; cortical tubers or radial migration lines; subependymal nodules; SEGA; cardiac rhabdomyoma; lymphangioleiomyomatosis; or >= 2 renal angiomyolipomas (SEGA everolimus).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organ system",
+          "Major TSC criteria",
+          "Minor TSC criteria"
+        ],
+        "rows": [
+          [
+            "Cutaneous & mucosal",
+            ">= 3 ash-leaf spots (>= 5 mm), shagreen patch, angiofibromas",
+            "Confetti skin lesions, dental enamel pits, gingival fibromas"
+          ],
+          [
+            "Central nervous system",
+            "Cortical tubers, subependymal nodules, SEGA",
+            "Radial cerebral white matter migration lines"
+          ],
+          [
+            "Visceral & systemic",
+            "Cardiac rhabdomyoma, renal angiomyolipomas, LAM",
+            "Multiple renal cysts, non-renal hamartomas, retinal achromic patch"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Subependymal giant cell astrocytomas arise near the foramen of Monro and cause obstructive hydrocephalus. Oral mTOR inhibitors provide an effective non-surgical treatment.",
+      "tx": "Manage **Cardiac rhabdomyoma natural history** in growing subependymal lesions. Subependymal giant cell astrocytomas (SEGAs, WHO grade 1) develop in 10% to 15% of TSC patients, typically arising adjacent to the foramen of Monro and predisposing to acute obstructive ventriculomegaly. Everolimus, an oral rapamycin-derivative mTOR complex 1 (mTORC1) inhibitor, binds FKBP-12 to suppress hyperactive downstream phosphorylation, producing >= 50% tumor volume reduction in over half of patients and serving as the primary non-surgical intervention for inoperable lesions (Cardiac rhabdomyoma).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tsc",
+            "label": "Loss of TSC1/TSC2 hamartin-tuberin complex"
+          },
+          {
+            "id": "mtor",
+            "label": "Constitutive hyperactivation of mTORC1 kinase"
+          },
+          {
+            "id": "sega",
+            "label": "SEGA at foramen of Monro causing hydrocephalus"
+          },
+          {
+            "id": "ev",
+            "label": "Everolimus oral therapy: Suppresses mTOR and shrinks tumor"
+          }
+        ],
+        "edges": [
+          [
+            "tsc",
+            "mtor"
+          ],
+          [
+            "mtor",
+            "sega"
+          ],
+          [
+            "sega",
+            "ev"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Cardiac rhabdomyomas are benign intracardiac tumors that frequently reveal the diagnosis in fetal life. Most regress spontaneously during early infancy without requiring surgery.",
+      "tx": "Anticipate **Epilepsy surveillance and vigabatrin in TSC** in neonates with tuberous sclerosis complex. Cardiac rhabdomyomas occur in over 60% to 80% of infants with TSC, frequently detected on prenatal ultrasound as well-circumscribed echogenic masses within the interventricular septum and ventricular walls. Unless causing severe left ventricular outflow tract obstruction, coarctation-like physiology, or refractory arrhythmias (WPW syndrome), rhabdomyomas spontaneously involute and regress during the first two years of life as maternal estrogen stimulation disappears (Vigabatrin in TSC).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neonatal Presentation",
+          "points": [
+            "Intraventricular septum & ventricular masses",
+            "Detected in 60-80% of infants on fetal/postnatal echo",
+            "Strongest early diagnostic marker for TSC"
+          ]
+        },
+        "right": {
+          "title": "Natural History & Management",
+          "points": [
+            "Spontaneous regression by 2-3 years of life",
+            "Conservative monitoring unless outflow obstruction",
+            "Everolimus rapidly shrinks obstructing tumors if symptomatic"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Renal angiomyolipomas require regular imaging surveillance because large tumors carry a risk of catastrophic bleeding. Selective embolization or mTOR inhibitors prevent retroperitoneal hemorrhage.",
+      "tx": "Establish structured **Renal angiomyolipoma monitoring** and bleeding prophylaxis in adolescents with TSC. Renal angiomyolipomas occur in up to 80% of patients with TSC, consisting of dysplastic blood vessels, smooth muscle, and mature adipose tissue. Abdominal MRI or ultrasound every 1 to 3 years tracks lesion growth; angiomyolipomas exceeding 3 cm in diameter carry a high risk of aneurysmal rupture and catastrophic retroperitoneal hemorrhage (Wunderlich syndrome), mandating treatment with everolimus or selective transcatheter arterial embolization (Management complete).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "Renal MRI/ultrasound surveillance every 1-3 years from childhood"
+          },
+          {
+            "id": "size",
+            "label": "Angiomyolipoma diameter exceeds 3 cm or contains aneurysms > 5 mm"
+          },
+          {
+            "id": "rx",
+            "label": "First-line Everolimus therapy or transcatheter arterial embolization to prevent rupture"
+          }
+        ],
+        "edges": [
+          [
+            "screen",
+            "size"
+          ],
+          [
+            "size",
+            "rx"
+          ]
+        ]
+      }
+    }
+  ]
+}

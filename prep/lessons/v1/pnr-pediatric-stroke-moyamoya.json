@@ -1,0 +1,254 @@
+{
+  "id": "pnr-pediatric-stroke-moyamoya",
+  "title": "Pediatric Arterial Ischemic Stroke and Moyamoya Arteriopathy",
+  "subject": "ss-paediatric-neurology",
+  "module": "Pediatric Stroke, Moyamoya and Movement Disorders",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Arterial ischemic stroke in childhood exhibits significant presentation delays due to lack of clinical recognition.",
+      "tx": "Evaluate **Incidence and presentation delay** when managing pediatric arterial ischemic stroke. Pediatric AIS has an incidence of 2-3 per 100,000 children per year. Due to low clinical suspicion, symptom overlap with migraine or postictal states, and delayed neuroimaging, the median time from symptom onset to definitive diagnosis is 20-24 hours. Minimizing this pre-hospital and in-hospital delay is essential to salvage ischemic penumbra and permit hyperacute reperfusion therapy (Focal cerebral arteriopathy of childhood).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Epidemiological Metric",
+          "Numerical Benchmark",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Annual incidence",
+            "2-3 cases per 100,000 children/year",
+            "Comparable to incidence of pediatric CNS neoplasms"
+          ],
+          [
+            "Median diagnostic delay",
+            "20-24 hours from symptom onset",
+            "Limits eligibility for hyperacute thrombolysis or thrombectomy"
+          ],
+          [
+            "Primary etiologies",
+            "Arteriopathies (50%), cardiac (30%)",
+            "Requires urgent vascular imaging (MRA/CTA) alongside brain MRI"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Focal cerebral arteriopathy represents the most common arteriopathy in previously healthy children with acute stroke.",
+      "tx": "Identify **Focal cerebral arteriopathy of childhood** (FCA) as the single most common cause of arterial ischemic stroke in previously well children. Frequently triggered by an inflammatory reaction following a recent varicella zoster virus infection within the preceding year, FCA manifests on vascular imaging as unilateral, irregular stenosis or banding of the distal internal carotid or proximal middle cerebral artery. Initial treatment combines oral aspirin with pulsed intravenous methylprednisolone followed by an oral taper to stabilize arterial inflammation (Sickle cell anemia stroke prevention).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Focal Cerebral Arteriopathy (FCA)",
+          "points": [
+            "Unilateral focal stenosis of distal ICA or M1 segment",
+            "Strongly associated with antecedent varicella zoster infection",
+            "Monophasic inflammatory course stabilising after 6 months",
+            "Treated with corticosteroids and aspirin therapy"
+          ]
+        },
+        "right": {
+          "title": "Moyamoya Disease",
+          "points": [
+            "Bilateral progressive stenosis of supraclinoid internal carotids",
+            "Non-inflammatory fibrocellular intimal proliferation (RNF213)",
+            "Lifelong progressive course with recurrent ischemic TIAs",
+            "Refractory to steroids; mandates surgical revascularization"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Transcranial Doppler screening prevents strokes in sickle cell disease by detecting high arterial velocities.",
+      "tx": "Implement **Sickle cell anemia stroke prevention** protocols in all children with homozygous HbSS disease. Children require annual transcranial Doppler (TCD) ultrasonography screening between 2 and 16 years of age. A time-averaged maximum mean velocity >= 200 cm/s in the distal internal carotid or middle cerebral artery indicates high risk for overt stroke, mandating initiation of chronic blood transfusion therapy or automated erythrocytapheresis to maintain hemoglobin S fractions below 30% (Acute antithrombotic management).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Annual TCD screening (ages 2 to 16 years)"
+          },
+          {
+            "id": "t2",
+            "label": "Normal: velocity < 170 cm/s (re-screen annually)"
+          },
+          {
+            "id": "t3",
+            "label": "Conditional: velocity 170-199 cm/s (re-screen 1-3 mo)"
+          },
+          {
+            "id": "t4",
+            "label": "High risk: velocity >= 200 cm/s -> Transfusions (HbS < 30%)"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2"
+          ],
+          [
+            "t1",
+            "t3"
+          ],
+          [
+            "t1",
+            "t4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Acute antithrombotic management relies on subcutaneous enoxaparin or heparin for dissection and aspirin for noncardiac stroke.",
+      "tx": "Direct **Acute antithrombotic management** based on the underlying etiology and vascular imaging findings. For arterial dissection, cardioembolic stroke, or ongoing crescendo TIAs, initiate therapeutic anticoagulation with intravenous unfractionated heparin or subcutaneous enoxaparin dosed at 1 mg/kg every 12 hr (adjusting to target anti-Xa levels 0.5-1.0 IU/mL). For non-cardioembolic arterial ischemic stroke without dissection, oral aspirin dosed at 3-5 mg/kg/day serves as standard first-line therapy (Puff of smoke angiographic hallmark).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stroke Etiology",
+          "Antithrombotic Regimen",
+          "Dosing & Monitoring Target"
+        ],
+        "rows": [
+          [
+            "Arterial dissection / cardioembolic",
+            "Low-molecular-weight heparin (enoxaparin)",
+            "1 mg/kg every 12 hr subcutaneous (anti-Xa 0.5-1.0 IU/mL)"
+          ],
+          [
+            "Non-cardioembolic AIS / FCA",
+            "Oral aspirin (acetylsalicylic acid)",
+            "3-5 mg/kg/day single daily dose with food"
+          ],
+          [
+            "Heparin infusion alternative",
+            "Unfractionated heparin intravenous",
+            "Target activated partial thromboplastin time (aPTT) 60-85 sec"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A puff of smoke on cerebral angiography represents the pathognomonic collateral network of Moyamoya.",
+      "tx": "Recognise the **Puff of smoke angiographic hallmark** on cerebral catheter angiography in Moyamoya arteriopathy. Moyamoya disease involves progressive stenosis or occlusion of the terminal supraclinoid internal carotid arteries and proximal anterior and middle cerebral arteries. To compensate for severe parenchymal hypoperfusion, an exuberant network of fragile basal parenchymal collateral microvessels forms at the circle of Willis, producing the pathognomonic appearance resembling a hazy puff of smoke on conventional digital subtraction angiography (RNF213 gene susceptibility).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Angiographic Territory",
+          "Vascular Modification",
+          "Diagnostic Imaging Feature"
+        ],
+        "rows": [
+          [
+            "Supraclinoid internal carotid",
+            "Concentric luminal stenosis and occlusion",
+            "Progressive tapering of ICA bifurcation, A1 and M1"
+          ],
+          [
+            "Basal ganglia and thalamus",
+            "Proliferation of lenticulostriate microvessels",
+            "Hazy 'puff of smoke' network on catheter angiography"
+          ],
+          [
+            "Leptomeningeal surface",
+            "Pial and transdural external carotid collaterals",
+            "'Ivy sign' on FLAIR MRI reflecting slow retrograde flow"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Mutations in the RNF two one three gene confer marked susceptibility to Moyamoya disease in Asian populations.",
+      "tx": "Assess **RNF213 gene susceptibility** when evaluating familial or East Asian children presenting with Moyamoya disease. The p.R4810K founder variant in the RNF213 gene (encoding a ring finger protein with AAA+ ATPase activity) on chromosome 17q25.3 is strongly associated with familial and sporadic Moyamoya arteriopathy, conferring an odds ratio exceeding 100 for disease development. Screen for associated syndromic conditions including Down syndrome (trisomy 21), neurofibromatosis type 1, and sickle cell disease (Revascularization surgery in moyamoya).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Moyamoya Disease (Idiopathic / Genetic)",
+          "points": [
+            "Strong genetic link to RNF213 (p.R4810K) variant on chromosome 17q",
+            "High prevalence in East Asian and Indian pediatric populations",
+            "Isolated intracranial vasculopathy without systemic syndromic signs"
+          ]
+        },
+        "right": {
+          "title": "Moyamoya Syndrome (Secondary)",
+          "points": [
+            "Associated with Down syndrome (Trisomy 21)",
+            "Associated with Neurofibromatosis Type 1 (NF1)",
+            "Associated with Sickle Cell Disease and cranial irradiation",
+            "Requires surveillance for systemic syndromic complications"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Surgical revascularization reduces long term ischemic stroke recurrence by more than eighty percent in Moyamoya.",
+      "tx": "Coordinate **Revascularization surgery in moyamoya** to protect against recurrent cerebral infarction. Surgical revascularization procedures\u2014including indirect synangiosis (such as encephaloduroarteriosynangiosis [EDAS] and pial synangiosis) and direct bypass (superficial temporal artery to middle cerebral artery [STA-MCA])\u2014stimulate extensive neocortical collateral vessel formation. Following successful surgical revascularization, long-term ischemic stroke risk decreases by more than 80%, providing durable preservation of neurocognitive function (Cerebral sinovenous thrombosis).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Document Moyamoya stenosis on cerebral angiography"
+          },
+          {
+            "id": "m2",
+            "label": "Hydration, normocapnia & oral aspirin therapy"
+          },
+          {
+            "id": "m3",
+            "label": "Indirect EDAS or direct STA-MCA surgical bypass"
+          },
+          {
+            "id": "m4",
+            "label": ">80% reduction in long-term ischemic stroke recurrence"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2"
+          ],
+          [
+            "m2",
+            "m3"
+          ],
+          [
+            "m3",
+            "m4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Cerebral sinovenous thrombosis requires prompt therapeutic anticoagulation with enoxaparin for three to six months.",
+      "tx": "Manage **Cerebral sinovenous thrombosis** (CSVT) in neonates and children presenting with raised intracranial pressure, encephalopathy, and focal seizures. Diagnosis is confirmed by magnetic resonance venography demonstrating filling defects within the superior sagittal or transverse sinuses. Even in the presence of secondary hemorrhagic venous infarction, initial treatment requires therapeutic anticoagulation using subcutaneous enoxaparin, continued for 3 to 6 months to promote venous recanalization and prevent propagation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Parameter",
+          "Management Directive",
+          "Evidence & Target"
+        ],
+        "rows": [
+          [
+            "Diagnostic standard",
+            "Contrast-enhanced MR venography (MRV)",
+            "Identifies non-filling of superior sagittal or transverse sinus"
+          ],
+          [
+            "Initial anticoagulation",
+            "Subcutaneous enoxaparin (1 mg/kg BID)",
+            "Indicated even with secondary hemorrhagic infarction"
+          ],
+          [
+            "Therapy duration",
+            "3 to 6 months total duration",
+            "Repeat MRV at 3 months to confirm sinus recanalization"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "v": 1,
+  "id": "pen-type-2-diabetes-pediatric-metformin",
+  "title": "Pediatric Type 2 Diabetes: TODAY Trial, Metformin, GLP-1 RAs and Microvascular Screening",
+  "module": "pen-diabetes-glucose",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Aggressive Beta-Cell Demise in Youth-Onset T2D",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Youth-Onset Disease (TODAY)",
+          "points": [
+            "Rapid 20-35% annual loss of beta-cell function",
+            "Decline occurs 3-4 times faster than adult-onset T2D",
+            "High rate of early oral monotherapy failure"
+          ]
+        },
+        "right": {
+          "title": "Adult-Onset Disease",
+          "points": [
+            "Indolent 5-7% annual loss of beta-cell secretory mass",
+            "Sustained glycemic durability on oral agents",
+            "Gradual progression over decades"
+          ]
+        }
+      },
+      "tx": "The TODAY trial demonstrated that beta-cell function declines 3-4 times faster in youth-onset type 2 diabetes (20-35% annual decline) than in adult-onset T2D, leading to rapid oral therapy failure. Understanding **Aggressive beta-cell failure in pediatric T2D** demonstrates how severe pubertal insulin resistance and glucolipotoxicity drive rapid exhaustion of pancreatic insulin reserve. This hyper-accelerated decline necessitates prompt treatment intensification beyond simple lifestyle modifications.",
+      "say": "The TODAY study showed that pancreatic beta-cell function declines up to four times faster in youth than in adult-onset type two diabetes."
+    },
+    {
+      "title": "Metformin First-Line Titration and Precautions",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Phase",
+          "Dosing Parameter",
+          "Target Ceiling",
+          "Contraindications / Warnings"
+        ],
+        "rows": [
+          [
+            "Initiation",
+            "500-1000 mg once daily with meals",
+            "Minimize GI distress",
+            "eGFR < 30 mL/min/1.73m²"
+          ],
+          [
+            "Maintenance Titration",
+            "Increase weekly to 2000 mg/day",
+            "Divided BID dosing",
+            "Hold during acute dehydration, hypoxia, or sepsis"
+          ]
+        ]
+      },
+      "tx": "Oral metformin is initiated at 500-1000 mg daily and titrated to 2000 mg/day (divided BID) with meals; contraindicated if eGFR < 30 mL/min/1.73m² or during acute dehydration/hypoxia due to lactic acidosis risk. Guiding **Metformin first-line titration** shows how metformin suppresses hepatic gluconeogenesis and activates AMP-activated protein kinase without inducing hypoglycemia. Gradual upward dose titration with meals minimizes gastrointestinal adverse effects such as nausea and diarrhea.",
+      "say": "Oral metformin is titrated to two thousand milligrams daily as first-line therapy, but must be held during dehydration due to lactic acidosis risk."
+    },
+    {
+      "title": "Approved GLP-1 Receptor Agonists in Pediatric T2D",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Liraglutide Daily Injection",
+          "points": [
+            "Approved in youth >= 10 years of age",
+            "Titrated from 0.6 mg up to 1.8 mg subcutaneously daily",
+            "Promotes satiety and slows gastric emptying"
+          ]
+        },
+        "right": {
+          "title": "Once-Weekly Formulations",
+          "points": [
+            "Dulaglutide 0.75-1.5 mg or Semaglutide weekly",
+            "FDA-approved for adolescents >= 10 years",
+            "Significant reductions in HbA1c and body mass index"
+          ]
+        }
+      },
+      "tx": "Subcutaneous GLP-1 receptor agonists liraglutide (up to 1.8 mg daily) and once-weekly dulaglutide (0.75-1.5 mg) or semaglutide are FDA-approved in youth >= 10 years, achieving significant HbA1c and BMI reductions. Leveraging **GLP-1 receptor agonist approvals in youth** utilizes incretin mimetics to augment glucose-dependent insulin secretion, suppress glucagon release, and induce central satiety. These agents offer a potent non-insulin option to stabilize glycemic control and promote weight loss.",
+      "say": "Glucagon-like peptide one receptor agonists including liraglutide and weekly dulaglutide are approved for children aged ten and older."
+    },
+    {
+      "title": "Insulin Initiation Thresholds at Initial Presentation",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "New-Onset Presentation\nSevere metabolic decompensation"
+          },
+          {
+            "id": "2",
+            "label": "Glycemic Thresholds\nHbA1c >= 8.5% or glucose >= 250 mg/dL"
+          },
+          {
+            "id": "3",
+            "label": "Basal Insulin Therapy\nGlargine 0.25-0.5 U/kg/day"
+          },
+          {
+            "id": "4",
+            "label": "Concurrent Metformin\nAdd oral metformin as acidosis clears"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "Basal insulin (glargine 0.25-0.5 U/kg/day) must be initiated alongside lifestyle and metformin if HbA1c >= 8.5%, blood glucose >= 250 mg/dL, ketosis, or metabolic decompensation is present at diagnosis. Adhering to **Insulin initiation criteria in new-onset youth** overcomes high initial glucose toxicity that suppresses endogenous insulin secretion. Once metabolic stability is achieved, insulin can frequently be tapered down if metformin and GLP-1 therapy succeed.",
+      "say": "Basal insulin is required at diagnosis when hemoglobin A1c reaches eight point five percent or blood glucose exceeds two hundred and fifty."
+    },
+    {
+      "title": "Immediate Microvascular Complication Surveillance",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type 1 Diabetes Screening",
+          "points": [
+            "Begins 5 years after initial diagnosis",
+            "Or starting at age 10-11 years",
+            "Reflects slow microvascular damage"
+          ]
+        },
+        "right": {
+          "title": "Pediatric Type 2 Diabetes",
+          "points": [
+            "Screening mandatory immediately at diagnosis",
+            "Urine albumin-to-creatinine ratio (ACR >= 30 mcg/mg)",
+            "Dilated funduscopy and fasting lipid panel"
+          ]
+        }
+      },
+      "tx": "Unlike type 1 diabetes where screening begins after 5 years, pediatric T2D mandates screening for microalbuminuria (urine ACR >= 30 mcg/mg), diabetic retinopathy (dilated eye exam), and dyslipidemia immediately at diagnosis. Enforcing **Immediate microvascular complication screening** is critical because youth-onset type 2 diabetes has a prolonged subclinical phase, meaning end-organ pathology is frequently already established at presentation. Yearly surveillance ensures early intervention.",
+      "say": "Screening for microalbuminuria, retinopathy, and dyslipidemia must begin immediately at diagnosis in youth-onset type two diabetes."
+    },
+    {
+      "title": "Metabolic Dysfunction-Associated Steatohepatitis",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Baseline Screening\nSerum ALT at diagnosis"
+          },
+          {
+            "id": "2",
+            "label": "Persistent Elevation\nALT > 2x upper normal for 6 mo"
+          },
+          {
+            "id": "3",
+            "label": "Hepatic Evaluation\nExclude viral and autoimmune; liver ultrasound"
+          },
+          {
+            "id": "4",
+            "label": "Gastroenterology Referral\nAssess fibrosis and NASH progression"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "Screening for non-alcoholic steatohepatitis (NASH / MASLD) with serum alanine aminotransferase (ALT) is mandatory at diagnosis; ALT > 2x upper normal limit persistent for 6 months warrants pediatric GI evaluation. Implementing **NASH and liver fibrosis screening** recognizes that severe visceral adiposity and hepatic insulin resistance drive profound triglyceride accumulation and inflammatory fibrosis. Early evaluation detects progressive steatohepatitis before cirrhosis develops.",
+      "say": "Serum aminotransferase testing at diagnosis screens for steatohepatitis, where persistent two-fold elevations warrant specialist evaluation."
+    },
+    {
+      "title": "Hypertension Detection and Renin-Angiotensin Blockade",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Blood Pressure Thresholds",
+          "points": [
+            "Blood pressure >= 95th percentile for age/sex",
+            "Or absolute reading >= 130/80 mmHg",
+            "Confirmed on three separate occasions"
+          ]
+        },
+        "right": {
+          "title": "Pharmacotherapy and Caution",
+          "points": [
+            "First-line ACE inhibitor (enalapril) or ARB",
+            "Monitor serum potassium and creatinine",
+            "Mandatory teratogenicity counseling in females"
+          ]
+        }
+      },
+      "tx": "Blood pressure >= 95th percentile or >= 130/80 mmHg in pediatric T2D is treated promptly with an ACE inhibitor enalapril or ARB losartan, monitoring for hyperkalemia and teratogenicity counseling in adolescent females. Protocol for **Hypertension screening and ACE inhibitor therapy** with enalapril or losartan slows renal glomerulosclerosis and reduces urinary albumin leakage. Because ACE inhibitors and ARBs are strictly teratogenic, mandatory contraception education is essential in adolescent females.",
+      "say": "Hypertension in young diabetics requires prompt angiotensin-converting enzyme inhibitor therapy, paired with strict teratogenicity precautions."
+    },
+    {
+      "title": "Bariatric Metabolic Surgery in Severe Adolescent Obesity",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient Criteria",
+          "Surgical Options",
+          "Metabolic Efficacy",
+          "Long-Term Considerations"
+        ],
+        "rows": [
+          [
+            "BMI >= 35 kg/m² with severe comorbidities",
+            "Vertical sleeve gastrectomy",
+            "High rate of T2D remission",
+            "Lifelong multivitamin, iron, B12, vitamin D"
+          ],
+          [
+            "BMI >= 40 kg/m² regardless of comorbidities",
+            "Roux-en-Y gastric bypass",
+            "Dramatic sustained weight reduction",
+            "Multidisciplinary adolescent psychological support"
+          ]
+        ]
+      },
+      "tx": "Metabolic bariatric surgery (vertical sleeve gastrectomy or Roux-en-Y) is indicated in adolescents with BMI >= 35 kg/m² with severe comorbidities (poorly controlled T2D, severe sleep apnea) or BMI >= 40 kg/m². Adhering to **Bariatric metabolic surgery criteria in adolescents** restores endogenous insulin sensitivity through surgical alteration of gastrointestinal hormones, inducing complete diabetes remission in over 70-80% of adolescents. Lifelong nutritional micronutrient supplementation is essential.",
+      "say": "Metabolic surgery is indicated for severe adolescent obesity with poorly controlled diabetes, offering high rates of glycemic remission."
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "id": "pnp-adpkd-and-nephronophthisis",
+  "title": "ADPKD in Children vs Nephronophthisis: Corticomedullary Cysts and Ciliopathy Overlap",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Tubulopathies, Polycystic Kidney Disease and Ciliopathies",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Dominant polycystic disease stems from distinct gene defects governing polycystin complex assembly.",
+      "tx": "Contrast genetic drivers and renal timelines comparing **ADPKD PKD1 vs PKD2 genes** during family genetic counseling. Autosomal dominant polycystic kidney disease results from mutations in PKD1 on chromosome 16p13.3 (85% of families, encoding polycystin-1, reaching ESRD at a median age 54) or PKD2 on chromosome 4q21 (15% of families, encoding polycystin-2, reaching ESRD at a median age 74).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PKD1 Mutation (16p13.3)",
+          "points": [
+            "Accounts for 85% of ADPKD families",
+            "Encodes polycystin-1 membrane receptor",
+            "More severe with median ESRD at age 54"
+          ]
+        },
+        "right": {
+          "title": "PKD2 Mutation (4q21)",
+          "points": [
+            "Accounts for 15% of ADPKD families",
+            "Encodes polycystin-2 calcium channel",
+            "Milder progression with median ESRD at age 74"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Even a solitary macroscopic cyst carries definitive diagnostic predictive power in young at-risk children.",
+      "tx": "Evaluate familial offspring using revised **Pediatric ADPKD ultrasound diagnostic criteria** on screening sonography. In at-risk children < 15 years with an affected first-degree relative, the presence of >= 1 renal cyst of any size in either kidney has a positive predictive value > 95% for ADPKD, confirming early heterozygous transmission without requiring bilateral involvement.",
+      "vis": {
+        "kind": "table",
+        "title": "Pediatric ADPKD Diagnostic Sonographic Criteria",
+        "cols": ["Patient Age Bracket", "Ultrasound Finding Threshold", "Positive Predictive Value"],
+        "rows": [
+          ["Children < 15 years", ">= 1 renal cyst in either kidney", "> 95% predictive with positive family history"],
+          ["Individuals 15-39 years", ">= 3 cysts (unilateral or bilateral)", "Confirms adult-onset diagnosis"],
+          ["Symptom Burden", "Early nocturnal hypertension", "Mandates ambulatory 24h blood pressure monitoring"]
+        ]
+      }
+    },
+    {
+      "say": "Targeted vasopressin receptor antagonism impedes intracellular cyclic AMP to retard cyst enlargement.",
+      "tx": "Inhibit cystogenesis in rapidly progressive adolescents utilizing **Tolvaptan V2 receptor antagonist approval** under strict guidance. Tolvaptan, an oral selective V2 receptor antagonist, slows total kidney volume (TKV) expansion and retards eGFR decline by inhibiting intracellular cAMP generation in collecting ducts, approved specifically in adolescents with confirmed rapidly progressive ADPKD phenotype.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "v2", "label": "Vasopressin Binds Basolateral V2 Receptor"},
+          {"id": "camp", "label": "cAMP Surges & Drives Tubular Fluid Secretion"},
+          {"id": "tol", "label": "Oral Tolvaptan Blocks V2 Receptor"},
+          {"id": "slow", "label": "Slows Total Kidney Volume & Preserves eGFR"}
+        ],
+        "edges": [
+          ["v2", "camp"],
+          ["camp", "tol"],
+          ["tol", "slow"]
+        ]
+      }
+    },
+    {
+      "say": "Nephronophthisis represents the leading monogenic cause of pediatric kidney failure and maps to primary cilia.",
+      "tx": "Investigate juvenile tubulointerstitial failure evaluating **Nephronophthisis (NPHP) genetics and ESRD timeline** across pediatric age groups. Nephronophthisis is an autosomal recessive ciliopathy and the most common monogenic cause of pediatric ESRD; homozygous NPHP1 deletions on chromosome 2q13 account for 20-25% of juvenile cases, relentlessly reaching ESRD at a median age 13 years.",
+      "vis": {
+        "kind": "table",
+        "title": "Juvenile Nephronophthisis Genetic Profile",
+        "cols": ["Parameter", "Finding / Locus", "Clinical Course"],
+        "rows": [
+          ["Inheritance Pattern", "Autosomal recessive ciliopathy", "Absence of enlarged polycystic kidneys"],
+          ["Primary Mutation", "NPHP1 homozygous deletion (2q13)", "Accounts for 20-25% of juvenile presentations"],
+          ["Renal Prognosis", "End-stage renal disease", "Median age 13 years requiring dialysis or transplant"]
+        ]
+      }
+    },
+    {
+      "say": "Renal sonography in nephronophthisis shows shrunken kidneys with microscopic cysts hugging the corticomedullary junction.",
+      "tx": "Differentiate nephronophthisis from polycystic enlargement identifying the **Nephronophthisis ultrasound tri-hallmark** on imaging. Ultrasonography reveals normal or small-sized kidneys with increased parenchymal echogenicity, loss of corticomedullary differentiation, and characteristic cysts localized exclusively to the corticomedullary junction, distinguishing this fibrosing ciliopathy from the massively enlarged bilateral nephromegaly characteristic of infantile ARPKD or ADPKD.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nephronophthisis Sonography",
+          "points": [
+            "Normal or small contracted kidneys",
+            "Increased echogenicity with lost corticomedullary boundary",
+            "Cysts restricted strictly to corticomedullary junction"
+          ]
+        },
+        "right": {
+          "title": "ADPKD / ARPKD Sonography",
+          "points": [
+            "Massively enlarged bilateral kidneys",
+            "Diffuse parenchymal microcysts or macroscopic cysts",
+            "Distortion of entire renal architecture"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Defective medullary concentrating capacity generates severe polyuria alongside profound normocytic anemia.",
+      "tx": "Recognize insidious clinical presentation characterized by **Polyuria, polydipsia and anemia out of proportion** in school-aged children. Affected children present with severely impaired urinary concentrating ability manifesting as polyuria, polydipsia, and secondary enuresis, salt wasting, and normocytic anemia disproportionately severe for their modest level of early renal dysfunction due to blunted peritubular erythropoietin synthesis.",
+      "vis": {
+        "kind": "table",
+        "title": "Clinical Manifestations of Tubulointerstitial Nephronophthisis",
+        "cols": ["Feature", "Symptom / Sign", "Pathophysiological Mechanism"],
+        "rows": [
+          ["Concentration Defect", "Polyuria, polydipsia, enuresis", "Medullary tubular unresponsiveness to vasopressin"],
+          ["Tubular Salt Wasting", "Hyponatremic volume contraction", "Failed distal sodium reabsorption"],
+          ["Severe Anemia", "Normocytic normochromic anemia", "Early interstitial destruction of erythropoietin-producing cells"]
+        ]
+      }
+    },
+    {
+      "say": "Syndromic ciliopathies couple tubulointerstitial fibrosis with degenerative retinal pigmentary blindness.",
+      "tx": "Perform comprehensive neuro-ophthalmological screening to detect the **Senior-Loken syndrome ciliopathy association** in affected families. Senior-Loken syndrome pairs nephronophthisis with tapetoretinal degeneration (retinitis pigmentosa or Leber congenital amaurosis), diagnosed definitively by electroretinography showing absent photoreceptor responses, linking shared ciliary axonemal machinery across both renal tubular and retinal photoreceptor cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "cil", "label": "Shared Ciliary Axoneme Disruption"},
+          {"id": "kid", "label": "Tubulointerstitial Nephronophthisis"},
+          {"id": "ret", "label": "Tapetoretinal Degeneration (Leber Amaurosis)"},
+          {"id": "erg", "label": "Electroretinography Confirms Senior-Loken"}
+        ],
+        "edges": [
+          ["cil", "kid"],
+          ["cil", "ret"],
+          ["ret", "erg"]
+        ]
+      }
+    },
+    {
+      "say": "Midbrain structural dysplasia producing the molar tooth sign reveals complex central ciliopathy syndromes.",
+      "tx": "Evaluate neurodevelopmental abnormalities and obtain neuroimaging to recognize **Joubert syndrome molar tooth sign** pathology. Joubert syndrome associates NPHP with cerebellar vermis hypoplasia (manifesting as the classic molar tooth sign on axial brain MRI), neonatal episodic tachypnea/apnea, ataxia, oculomotor apraxia, and global developmental delay, reflecting generalized basal body and primary ciliary dysfunction.",
+      "vis": {
+        "kind": "table",
+        "title": "Joubert Syndrome Systemic Manifestations",
+        "cols": ["Organ System", "Characteristic Feature", "Diagnostic Modality"],
+        "rows": [
+          ["Central Nervous", "Molar tooth sign on axial MRI", "Deep interpeduncular fossa & elongated peduncles"],
+          ["Respiratory", "Neonatal episodic hyperpnea & apnea", "Clinical observation in neonatal nursery"],
+          ["Renal", "Corticomedullary cystic ciliopathy", "Renal sonography showing NPHP pattern"]
+        ]
+      }
+    }
+  ]
+}

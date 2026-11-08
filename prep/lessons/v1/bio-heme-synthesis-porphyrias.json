@@ -1,0 +1,76 @@
+{
+ "v": 1,
+ "module": "bio-heme",
+ "subject": "biochemistry",
+ "title": "Heme synthesis, lead and the porphyrias",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**ALA synthase** opens heme synthesis in mitochondria, condensing glycine with succinyl-CoA (pyridoxal phosphate, decarboxylating) to delta-aminolevulinic acid. Liver ALAS1 is repressed by heme and induced by cytochrome P450 demand (barbiturates, alcohol, steroids, fasting through PGC-1 alpha), while erythroid ALAS2 answers to iron (its mRNA iron responsive element) and erythropoietin, so anaemia and drug induction speak different regulatory languages in marrow versus liver.",
+   "say": "ALA synthase condenses glycine with succinyl-CoA using pyridoxal phosphate. Liver enzyme answers to heme and drug demand, while erythroid enzyme answers to iron and erythropoietin in marrow.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-heme-fig1.webp",
+    "alt": "Five steps of haem biosynthesis from ALA synthase to ferrochelatase with porphyria and lead block points marked.",
+    "caption": "Haem biosynthesis steps, porphyrias, lead poisoning and bilirubin metabolism.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "ALA dehydratase (zinc dependent, lead exquisitely sensitive) makes porphobilinogen, whose deaminase builds the linear tetrapyrrole cyclised (with isomerase guidance to type III) through uroporphyrinogen and coproporphyrinogen back into mitochondria, where oxidase, protoporphyrinogen oxidase and **ferrochelatase** (iron insertion, lead sensitive, zinc substituted when iron or enzyme fails) finish heme. Compartment shuttling (mitochondria cytosol mitochondria) is itself a tested sequence.",
+   "say": "ALA dehydratase makes porphobilinogen, and ferrochelatase inserts iron to finish heme after cytosolic detours. Both dehydratase and ferrochelatase are lead sensitive, with compartment shuttling itself tested.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Enzyme", "Lead sensitivity", "Block disease"],
+    "rows": [
+     ["ALA synthase (ALAS1 liver)", "Induced indirectly in attacks", "Rate limiting, hemin suppresses"],
+     ["ALA dehydratase", "Very high (zinc enzyme)", "ALA rises, porphyria mimic (plumboporphyria rare)"],
+     ["PBG deaminase", "Low", "Acute intermittent porphyria"],
+     ["Ferrochelatase", "High", "Zinc protoporphyrin rises; EPP when inherited"]
+    ]
+   }
+  },
+  {
+   "tx": "**Lead poisoning** therefore gives microcytic anaemia with basophilic stippling (ribosomal RNA undegraded, pyrimidine nucleotidase also blocked), high free erythrocyte (zinc) protoporphyrin, abdominal colic, wrist drop, gum Burton lines, encephalopathy in children and saturnine gout and kidney injury in adults. Sources (paint, batteries, illicit spirits, traditional remedies, shooting ranges), blood lead measurement and chelation (succimer, CaNa2EDTA, dimercaprol by severity) structure management beyond the pathway.",
+   "say": "Lead gives microcytic anaemia with basophilic stippling and high zinc protoporphyrin, plus colic and wrist drop. Blood lead measurement and chelation by severity structure management beyond the pathway.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-heme-gen1.webp",
+    "alt": "A blood smear shows microcytic red cells with basophilic stippling and an inset blocked heme pathway.",
+    "caption": "Lead poisoning smear with stippled microcytic cells and blocked pathway inset.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Acute intermittent porphyria** (PBG deaminase half activity, autosomal dominant with low penetrance) stays latent until ALAS1 induction floods the partial block: ALA and PBG accumulate (urine darkens red brown on standing), causing severe abdominal pain without peritonism, tachycardia and hypertension, peripheral and bulbar neuropathy, seizures (hyponatraemia SIADH), psychosis and respiratory paralysis, without any skin disease. Attacks kill by neuropathy and arrhythmia, not pain.",
+   "say": "Acute intermittent porphyria floods a partial block when ALAS1 is induced, causing abdominal pain, neuropathy and psychosis without skin disease. Attacks kill by neuropathy and arrhythmia, not pain.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Acute hepatic porphyrias (AIP prototype)", "points": ["ALA and PBG neurotoxic", "Abdomen, nerves, mind; no rash", "Glucose and hemin suppress ALAS1"]},
+    "right": {"title": "Cutaneous porphyrias (PCT prototype)", "points": ["Porphyrins phototoxic in skin", "Blisters, fragility, milia", "Phlebotomy or hydroxychloroquine (PCT)"]
+    }
+   }
+  },
+  {
+   "tx": "Attack management suppresses ALAS1 and removes inducers: stop barbiturates, phenytoin, sulfonamides, alcohol and fasting; give high dose **glucose** (mild attacks) and intravenous hemin (heme arginate, definitive, represses ALAS1 and replenishes regulatory pool) early in severe or neuropathic attacks; correct hyponatraemia carefully, treat pain and tachycardia, ventilate for respiratory weakness, and choose safe drugs (levetiracetam over phenytoin for seizures) from porphyria safe lists thereafter. Givosiran (ALAS1 siRNA) prevents recurrent attacks monthly.",
+   "say": "Management stops inducers and suppresses ALAS1 with glucose or intravenous hemin early in severe attacks. Givosiran prevents recurrent attacks monthly. Safe drug lists govern prescribing thereafter.",
+   "vis": null
+  },
+  {
+   "tx": "**Porphyria cutanea tarda** (uroporphyrinogen decarboxylase inhibited in liver by iron, alcohol, hepatitis C, oestrogens and smoking, inherited in a minority) blisters sun exposed hands with fragility, milia, hypertrichosis and hyperpigmentation, urine pink fluorescence under Wood light; phlebotomy to ferritin near fifty or low dose hydroxychloroquine treats it while triggers withdraw. Erythropoietic protoporphyria (ferrochelatase) instead burns painfully within minutes of sun without blisters, with gallstones and liver risk, treated by afamelanotide and light avoidance, separating blistering from non blistering photosensitivity.",
+   "say": "Porphyria cutanea tarda blisters sun exposed hands with iron and hepatitis C drivers, treated by phlebotomy. Erythropoietic protoporphyria burns painfully without blisters, separating the photosensitivities cleanly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cutaneous disease", "Enzyme or block", "Skin signature"],
+    "rows": [
+     ["Porphyria cutanea tarda", "Uroporphyrinogen decarboxylase (liver inhibited)", "Blisters, fragility, milia on hands"],
+     ["Variegate and hereditary copro (mixed)", "Oxidase steps", "Blisters plus acute attacks"],
+     ["Erythropoietic protoporphyria", "Ferrochelatase", "Burning pain, no blisters, waxy thickening"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
