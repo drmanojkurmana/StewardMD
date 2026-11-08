@@ -1,237 +1,237 @@
 {
-  "v": 1,
-  "module": "sob-contraception",
-  "title": "Contraceptive Modalities: MEC Criteria, Hormonal, IUCD, Emergency and Surgical Sterilisation",
-  "subject": "ss-obg",
-  "minutes": 8,
-  "gen": "AI",
-  "checks": {
-    "shape": true,
-    "dashes": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "verify": true
+ "v": 1,
+ "module": "sob-contraception",
+ "title": "Contraceptive Modalities: MEC Criteria, Hormonal, IUCD, Emergency and Surgical Sterilisation",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Ten Teachers Gynaecology 21e Ch 7 (Contraception)",
+  "Williams Obstetrics 25e",
+  "WHO Medical Eligibility Criteria for Contraceptive Use (5th Edition)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The **WHO Medical Eligibility Criteria (MEC)** for contraceptive use categorizes safety into four tiers: **Category 1** (unrestricted use); **Category 2** (advantages outweigh theoretical or proven risks); **Category 3** (risks usually outweigh advantages; method not recommended unless other methods unavailable); and **Category 4** (unacceptable health risk; method represents an absolute contraindication). Clinically, key parameters encompass WHO MEC, Category 1 to 4.",
+   "say": "The World Health Organization Medical Eligibility Criteria provides the evidence-based framework for safe contraceptive selection. Category one permits completely unrestricted use. Category two indicates advantages outweigh minor risks. In category three, risks generally outweigh benefits, reserving the method for exceptional circumstances. Category four represents an absolute medical contraindication where the method must not be used.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/obg-contra-fail.svg",
+    "ar": 1.5385,
+    "caption": "Typical-use contraceptive failure rates and emergency contraception timeframes. Credit: StewardMD.",
+    "alt": "Graphic comparing first-year typical failure rates across contraceptive methods and efficacy windows for emergency contraception."
+   }
   },
-  "refs": [
-    "Ten Teachers Gynaecology 21e Ch 7 (Contraception)",
-    "Williams Obstetrics 25e",
-    "WHO Medical Eligibility Criteria for Contraceptive Use (5th Edition)"
-  ],
-  "src": [],
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "The **WHO Medical Eligibility Criteria (MEC)** for contraceptive use categorizes safety into four tiers: **Category 1** (unrestricted use); **Category 2** (advantages outweigh theoretical or proven risks); **Category 3** (risks usually outweigh advantages; method not recommended unless other methods unavailable); and **Category 4** (unacceptable health risk; method represents an absolute contraindication). Clinically, key parameters encompass WHO MEC, Category 1 to 4.",
-      "say": "The World Health Organization Medical Eligibility Criteria provides the evidence-based framework for safe contraceptive selection. Category one permits completely unrestricted use. Category two indicates advantages outweigh minor risks. In category three, risks generally outweigh benefits, reserving the method for exceptional circumstances. Category four represents an absolute medical contraindication where the method must not be used.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/obg-contra-fail.svg",
-        "ar": 1.5385,
-        "caption": "Typical-use contraceptive failure rates and emergency contraception timeframes. Credit: StewardMD.",
-        "alt": "Graphic comparing first-year typical failure rates across contraceptive methods and efficacy windows for emergency contraception."
-      }
+  {
+   "tx": "Major **WHO Category 4 contraindications to combined oral contraceptives (COCs)** comprise maternal **age >=35 years smoking >=15 cigarettes/day**, severe hypertension (systolic >=160 or diastolic >=100 mmHg), acute or past history of **venous thromboembolism (DVT/PE)**, known thrombogenic mutations, ischemic heart disease, stroke, **migraine with aura** at any age, active breast cancer, and decompensated cirrhosis. Clinically, key parameters encompass smoking threshold.",
+   "say": "Ethinylestradiol in combined hormonal contraception carries venous and arterial thrombotic risks. Absolute category four contraindications encompass smokers aged thirty-five and older smoking fifteen or more cigarettes daily, uncontrolled hypertension, history of venous thromboembolism, known thrombophilias, complicated vascular diabetes, active breast carcinoma, and migraine with focal neurological aura.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Risk Condition",
+     "WHO MEC Category for COCs",
+     "Pathophysiological Rationale"
+    ],
+    "rows": [
+     [
+      "Migraine with focal aura (any age)",
+      "MEC Category 4 (Unacceptable)",
+      "Synergistic elevation of ischemic stroke risk"
+     ],
+     [
+      "Age >= 35 and smoking >= 15 cigs/day",
+      "MEC Category 4 (Unacceptable)",
+      "Marked acceleration of coronary and arterial thrombosis"
+     ],
+     [
+      "Current or past VTE / PE",
+      "MEC Category 4 (Unacceptable)",
+      "Hepatic induction of procoagulant clotting factors"
+     ],
+     [
+      "Uncomplicated diabetes mellitus",
+      "MEC Category 2 (Advantages > Risks)",
+      "Minimal impact on baseline microvascular disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **copper intrauterine device (Cu-IUCD, TCu-380A)** provides 10 to 12 years of highly effective non-hormonal contraception. The primary mechanism of action is intense sterile foreign-body reaction with release of **cytotoxic copper ions**, which inhibit **sperm motility**, capacitation, and acrosome reaction, while preventing blastocyst implantation. Clinically, key parameters encompass etonogestrel implant, Nexplanon, failure rate, 68, 0.05, 3, 5.",
+   "say": "The copper TCu-380A intrauterine device provides ten to twelve years of premier non-hormonal contraception. Copper ions continuously released into the endometrial cavity exert direct cytotoxic effects on sperm flagellar motility and viability. Furthermore, the local sterile foreign body inflammatory reaction in the endometrium alters cervical mucus and prevents blastocyst implantation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/infertility-and-contraception-fig1.webp",
+    "alt": "Diagram of the female reproductive tract showing an intrauterine contraceptive device inside the uterus.",
+    "caption": "Intrauterine device seated inside the uterine cavity. Credit: StewardMD."
+   }
+  },
+  {
+   "tx": "The **levonorgestrel-releasing intrauterine system (LNG-IUS 52 mg)** provides 8 years of premier contraception. By releasing 20 micrograms of levonorgestrel locally per day, it causes profound **endometrial glandular atrophy**, stroma decidualization, thickening of cervical mucus into an impenetrable barrier to sperm, and variable **anovulation (in 15-20%)**. Clinically, key parameters encompass DMPA, bone mineral density loss, return of fertility, 150, 12, 9, 10.",
+   "say": "The fifty-two milligram levonorgestrel intrauterine system provides eight years of dual contraceptive and therapeutic efficacy. Daily local intrauterine release of twenty micrograms of levonorgestrel renders the cervical mucus dense and impenetrable to sperm. Marked suppression of endometrial glandular proliferation produces profound hypomenorrhoea or amenorrhoea, while systemic ovarian follicular ovulation is preserved in the majority.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Copper TCu-380A Intrauterine Device",
+     "points": [
+      "100% non-hormonal mechanism of action",
+      "Lifespan: Approved for 10 to 12 years of continuous use",
+      "Side effect: May increase menstrual flow volume and cramps",
+      "Emergency contraception efficacy within 5 days (>99%)"
+     ]
     },
-    {
-      "tx": "Major **WHO Category 4 contraindications to combined oral contraceptives (COCs)** comprise maternal **age >=35 years smoking >=15 cigarettes/day**, severe hypertension (systolic >=160 or diastolic >=100 mmHg), acute or past history of **venous thromboembolism (DVT/PE)**, known thrombogenic mutations, ischemic heart disease, stroke, **migraine with aura** at any age, active breast cancer, and decompensated cirrhosis. Clinically, key parameters encompass smoking threshold.",
-      "say": "Ethinylestradiol in combined hormonal contraception carries venous and arterial thrombotic risks. Absolute category four contraindications encompass smokers aged thirty-five and older smoking fifteen or more cigarettes daily, uncontrolled hypertension, history of venous thromboembolism, known thrombophilias, complicated vascular diabetes, active breast carcinoma, and migraine with focal neurological aura.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Clinical Risk Condition",
-          "WHO MEC Category for COCs",
-          "Pathophysiological Rationale"
-        ],
-        "rows": [
-          [
-            "Migraine with focal aura (any age)",
-            "MEC Category 4 (Unacceptable)",
-            "Synergistic elevation of ischemic stroke risk"
-          ],
-          [
-            "Age >= 35 and smoking >= 15 cigs/day",
-            "MEC Category 4 (Unacceptable)",
-            "Marked acceleration of coronary and arterial thrombosis"
-          ],
-          [
-            "Current or past VTE / PE",
-            "MEC Category 4 (Unacceptable)",
-            "Hepatic induction of procoagulant clotting factors"
-          ],
-          [
-            "Uncomplicated diabetes mellitus",
-            "MEC Category 2 (Advantages > Risks)",
-            "Minimal impact on baseline microvascular disease"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The **copper intrauterine device (Cu-IUCD, TCu-380A)** provides 10 to 12 years of highly effective non-hormonal contraception. The primary mechanism of action is intense sterile foreign-body reaction with release of **cytotoxic copper ions**, which inhibit **sperm motility**, capacitation, and acrosome reaction, while preventing blastocyst implantation. Clinically, key parameters encompass etonogestrel implant, Nexplanon, failure rate, 68, 0.05, 3, 5.",
-      "say": "The copper TCu-380A intrauterine device provides ten to twelve years of premier non-hormonal contraception. Copper ions continuously released into the endometrial cavity exert direct cytotoxic effects on sperm flagellar motility and viability. Furthermore, the local sterile foreign body inflammatory reaction in the endometrium alters cervical mucus and prevents blastocyst implantation.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/infertility-and-contraception-fig1.webp",
-        "alt": "Diagram of the female reproductive tract showing an intrauterine contraceptive device inside the uterus.",
-        "caption": "Intrauterine device seated inside the uterine cavity. Credit: StewardMD."
-      }
-    },
-    {
-      "tx": "The **levonorgestrel-releasing intrauterine system (LNG-IUS 52 mg)** provides 8 years of premier contraception. By releasing 20 micrograms of levonorgestrel locally per day, it causes profound **endometrial glandular atrophy**, stroma decidualization, thickening of cervical mucus into an impenetrable barrier to sperm, and variable **anovulation (in 15-20%)**. Clinically, key parameters encompass DMPA, bone mineral density loss, return of fertility, 150, 12, 9, 10.",
-      "say": "The fifty-two milligram levonorgestrel intrauterine system provides eight years of dual contraceptive and therapeutic efficacy. Daily local intrauterine release of twenty micrograms of levonorgestrel renders the cervical mucus dense and impenetrable to sperm. Marked suppression of endometrial glandular proliferation produces profound hypomenorrhoea or amenorrhoea, while systemic ovarian follicular ovulation is preserved in the majority.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Copper TCu-380A Intrauterine Device",
-          "points": [
-            "100% non-hormonal mechanism of action",
-            "Lifespan: Approved for 10 to 12 years of continuous use",
-            "Side effect: May increase menstrual flow volume and cramps",
-            "Emergency contraception efficacy within 5 days (>99%)"
-          ]
-        },
-        "right": {
-          "title": "Levonorgestrel LNG-IUS (52 mg)",
-          "points": [
-            "Progestin-mediated local endometrial and cervical action",
-            "Lifespan: Approved for 8 years of continuous contraception",
-            "Side effect: 70-90% reduction in menstrual blood loss",
-            "First-line medical therapy for heavy menstrual bleeding"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The single-rod **etonogestrel subdermal implant (Nexplanon, 68 mg)** represents the single most effective reversible contraceptive available (Pearl Index 0.05). Inserted subdermally in the non-dominant upper arm for 3 years, it continuously suppresses the **LH surge to inhibit ovulation**, while thickening cervical mucus. Clinically, key parameters encompass copper intrauterine device, sterile inflammation, spermicidal effect, 380, 10, 12.",
-      "say": "The sixty-eight milligram single-rod etonogestrel implant achieves the lowest failure rate among all reversible contraceptives, with a Pearl Index of zero point zero five. Inserted under local anaesthesia in the subdermal groove of the upper inner arm, it delivers continuous progestin to block the mid-cycle LH surge and suppress ovulation for three full years.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Contraceptive Method",
-          "Typical-Use First-Year Failure",
-          "Pearl Index"
-        ],
-        "rows": [
-          [
-            "Etonogestrel subdermal implant",
-            "0.05 percent failure",
-            "0.05 (Most effective reversible method)"
-          ],
-          [
-            "Levonorgestrel-releasing IUS",
-            "0.1 to 0.2 percent failure",
-            "0.1 to 0.2 per 100 woman-years"
-          ],
-          [
-            "Copper TCu-380A IUCD",
-            "0.8 percent failure",
-            "0.6 to 0.8 per 100 woman-years"
-          ],
-          [
-            "Combined Oral Contraceptive Pills",
-            "7 to 9 percent failure (typical use)",
-            "0.3 (perfect use) to 7.0 (typical use)"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Emergency contraception** modalities comprise three principal options: the **copper IUCD** (most effective, failure rate <0.1%, inserted up to 5 days / 120 hours after unprotected coitus); **ulipristal acetate** (selective progesterone receptor modulator, 30 mg single oral dose up to 120 hours); and **levonorgestrel** (1.5 mg single oral dose within 72 hours). Clinically, key parameters encompass 99.",
-      "say": "Emergency contraception prevents unintended pregnancy following unprotected intercourse. Insertion of a copper IUCD within five days is the most effective modality, failing in less than zero point one percent of cases while establishing ongoing long-term contraception. Oral options comprise ulipristal acetate thirty milligrams effective up to one hundred and twenty hours, and levonorgestrel one point five milligrams within seventy-two hours.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Unprotected sexual intercourse within preceding 120 hours"
-          },
-          {
-            "id": "b",
-            "label": "Copper TCu-380A insertion: most effective (<0.1% failure; up to 120 h)"
-          },
-          {
-            "id": "c",
-            "label": "Ulipristal acetate (30 mg PO single dose): effective up to 120 hours"
-          },
-          {
-            "id": "d",
-            "label": "Levonorgestrel (1.5 mg PO single dose): effective up to 72 hours"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "a",
-            "c"
-          ],
-          [
-            "a",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Ulipristal acetate prevents pregnancy by **delaying or inhibiting ovulation** even after the LH surge has begun (until the LH peak), whereas levonorgestrel is effective only **prior to the onset of the LH surge**. Emergency hormonal pills have zero efficacy once ovulation and fertilisation have occurred, and do not disrupt established implantation. Clinically, key parameters encompass emergency contraception, 30, 120, 1.5, 72.",
-      "say": "The pharmacodynamic distinction between emergency oral progestins is crucial. Levonorgestrel suppresses follicular rupture only when administered prior to the start of the luteinizing hormone surge. Ulipristal acetate, as a selective progesterone receptor modulator, is more potent because it postpones follicular rupture even after the LH surge has already commenced.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Levonorgestrel (1.5 mg Single Dose)",
-          "points": [
-            "Timing: Within 72 hours (efficacy drops over time)",
-            "Mechanism: Inhibits follicular development before LH surge begins",
-            "Ineffective once LH surge has commenced",
-            "Decreased efficacy in women with BMI > 25-30 kg/m2"
-          ]
-        },
-        "right": {
-          "title": "Ulipristal Acetate (30 mg Single Dose)",
-          "points": [
-            "Timing: Up to 120 hours with consistent high efficacy",
-            "Mechanism: Postpones ovulation even during active LH surge",
-            "Selective progesterone receptor modulator",
-            "Superior efficacy in overweight and obese women"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "**Female surgical sterilization** by the modified **Pomeroy technique** involves grasping the mid-isthmic loop of the fallopian tube, ligating the knuckle with rapid-absorbing **No. 0 or 1 plain catgut**, and excising a 1 cm segment. Absorbable suture digestion allows the severed tubal ends to retract and seal separately, minimizing recanalization risks. Clinically, key parameters encompass tubal ligation, sterilisation failure, 0.5, 200.",
-      "say": "The modified Pomeroy procedure remains the most widely practiced female surgical sterilization technique. A loop of the mobile mid-isthmic segment of the fallopian tube is elevated, its base ligated with plain absorbable catgut, and the knuckle resected for histological confirmation. As the suture dissolves rapidly, the two severed tubal ends pull apart and seal separately, preventing spontaneous recanalization.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Tubal Sterilization Method",
-          "Operative Technique",
-          "10-Year Failure Rate (CREST)"
-        ],
-        "rows": [
-          [
-            "Modified Pomeroy technique",
-            "Loop isthmic ligation with absorbable catgut and knuckle excision",
-            "7.5 per 1000 procedures"
-          ],
-          [
-            "Filshie hinged clip",
-            "Titanium-silicone clip across mid-isthmic tube",
-            "2 to 3 per 1000 procedures (technique dependent)"
-          ],
-          [
-            "Bipolar electrocoagulation",
-            "Coagulation of 3 contiguous segments of isthmus",
-            "Up to 24 per 1000 procedures (high recanalization if incomplete)"
-          ],
-          [
-            "Bilateral salpingectomy",
-            "Complete laparoscopic excision of entire fallopian tube",
-            "Near 0% failure; substantially reduces ovarian cancer risk"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Levonorgestrel LNG-IUS (52 mg)",
+     "points": [
+      "Progestin-mediated local endometrial and cervical action",
+      "Lifespan: Approved for 8 years of continuous contraception",
+      "Side effect: 70-90% reduction in menstrual blood loss",
+      "First-line medical therapy for heavy menstrual bleeding"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "The single-rod **etonogestrel subdermal implant (Nexplanon, 68 mg)** represents the single most effective reversible contraceptive available (Pearl Index 0.05). Inserted subdermally in the non-dominant upper arm for 3 years, it continuously suppresses the **LH surge to inhibit ovulation**, while thickening cervical mucus. Clinically, key parameters encompass copper intrauterine device, sterile inflammation, spermicidal effect, 380, 10, 12.",
+   "say": "The sixty-eight milligram single-rod etonogestrel implant achieves the lowest failure rate among all reversible contraceptives, with a Pearl Index of zero point zero five. Inserted under local anaesthesia in the subdermal groove of the upper inner arm, it delivers continuous progestin to block the mid-cycle LH surge and suppress ovulation for three full years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Contraceptive Method",
+     "Typical-Use First-Year Failure",
+     "Pearl Index"
+    ],
+    "rows": [
+     [
+      "Etonogestrel subdermal implant",
+      "0.05 percent failure",
+      "0.05 (Most effective reversible method)"
+     ],
+     [
+      "Levonorgestrel-releasing IUS",
+      "0.1 to 0.2 percent failure",
+      "0.1 to 0.2 per 100 woman-years"
+     ],
+     [
+      "Copper TCu-380A IUCD",
+      "0.8 percent failure",
+      "0.6 to 0.8 per 100 woman-years"
+     ],
+     [
+      "Combined Oral Contraceptive Pills",
+      "7 to 9 percent failure (typical use)",
+      "0.3 (perfect use) to 7.0 (typical use)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Emergency contraception** modalities comprise three principal options: the **copper IUCD** (most effective, failure rate <0.1%, inserted up to 5 days / 120 hours after unprotected coitus); **ulipristal acetate** (selective progesterone receptor modulator, 30 mg single oral dose up to 120 hours); and **levonorgestrel** (1.5 mg single oral dose within 72 hours). Clinically, key parameters encompass 99.",
+   "say": "Emergency contraception prevents unintended pregnancy following unprotected intercourse. Insertion of a copper IUCD within five days is the most effective modality, failing in less than zero point one percent of cases while establishing ongoing long-term contraception. Oral options comprise ulipristal acetate thirty milligrams effective up to one hundred and twenty hours, and levonorgestrel one point five milligrams within seventy-two hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Unprotected sexual intercourse within preceding 120 hours"
+     },
+     {
+      "id": "b",
+      "label": "Copper TCu-380A insertion: most effective (<0.1% failure; up to 120 h)"
+     },
+     {
+      "id": "c",
+      "label": "Ulipristal acetate (30 mg PO single dose): effective up to 120 hours"
+     },
+     {
+      "id": "d",
+      "label": "Levonorgestrel (1.5 mg PO single dose): effective up to 72 hours"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ulipristal acetate prevents pregnancy by **delaying or inhibiting ovulation** even after the LH surge has begun (until the LH peak), whereas levonorgestrel is effective only **prior to the onset of the LH surge**. Emergency hormonal pills have zero efficacy once ovulation and fertilisation have occurred, and do not disrupt established implantation. Clinically, key parameters encompass emergency contraception, 30, 120, 1.5, 72.",
+   "say": "The pharmacodynamic distinction between emergency oral progestins is crucial. Levonorgestrel suppresses follicular rupture only when administered prior to the start of the luteinizing hormone surge. Ulipristal acetate, as a selective progesterone receptor modulator, is more potent because it postpones follicular rupture even after the LH surge has already commenced.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Levonorgestrel (1.5 mg Single Dose)",
+     "points": [
+      "Timing: Within 72 hours (efficacy drops over time)",
+      "Mechanism: Inhibits follicular development before LH surge begins",
+      "Ineffective once LH surge has commenced",
+      "Decreased efficacy in women with BMI > 25-30 kg/m2"
+     ]
+    },
+    "right": {
+     "title": "Ulipristal Acetate (30 mg Single Dose)",
+     "points": [
+      "Timing: Up to 120 hours with consistent high efficacy",
+      "Mechanism: Postpones ovulation even during active LH surge",
+      "Selective progesterone receptor modulator",
+      "Superior efficacy in overweight and obese women"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Female surgical sterilization** by the modified **Pomeroy technique** involves grasping the mid-isthmic loop of the fallopian tube, ligating the knuckle with rapid-absorbing **No. 0 or 1 plain catgut**, and excising a 1 cm segment. Absorbable suture digestion allows the severed tubal ends to retract and seal separately, minimizing recanalization risks. Clinically, key parameters encompass tubal ligation, sterilisation failure, 0.5, 200.",
+   "say": "The modified Pomeroy procedure remains the most widely practiced female surgical sterilization technique. A loop of the mobile mid-isthmic segment of the fallopian tube is elevated, its base ligated with plain absorbable catgut, and the knuckle resected for histological confirmation. As the suture dissolves rapidly, the two severed tubal ends pull apart and seal separately, preventing spontaneous recanalization.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tubal Sterilization Method",
+     "Operative Technique",
+     "10-Year Failure Rate (CREST)"
+    ],
+    "rows": [
+     [
+      "Modified Pomeroy technique",
+      "Loop isthmic ligation with absorbable catgut and knuckle excision",
+      "7.5 per 1000 procedures"
+     ],
+     [
+      "Filshie hinged clip",
+      "Titanium-silicone clip across mid-isthmic tube",
+      "2 to 3 per 1000 procedures (technique dependent)"
+     ],
+     [
+      "Bipolar electrocoagulation",
+      "Coagulation of 3 contiguous segments of isthmus",
+      "Up to 24 per 1000 procedures (high recanalization if incomplete)"
+     ],
+     [
+      "Bilateral salpingectomy",
+      "Complete laparoscopic excision of entire fallopian tube",
+      "Near 0% failure; substantially reduces ovarian cancer risk"
+     ]
+    ]
+   }
+  }
+ ]
 }

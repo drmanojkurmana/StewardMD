@@ -1,242 +1,242 @@
 {
-  "v": 1,
-  "module": "sob-pph",
-  "title": "Postpartum Haemorrhage: Atony, Balloon Tamponade, Compression Sutures, Embolisation and Transfusion",
-  "subject": "ss-obg",
-  "minutes": 8,
-  "gen": "AI",
-  "checks": {
-    "shape": true,
-    "dashes": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "verify": true
+ "v": 1,
+ "module": "sob-pph",
+ "title": "Postpartum Haemorrhage: Atony, Balloon Tamponade, Compression Sutures, Embolisation and Transfusion",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Williams Obstetrics 25e Ch 41 (Obstetrical Hemorrhage)",
+  "Ten Teachers Gynaecology 21e",
+  "WHO Guidelines for the Management of Postpartum Haemorrhage and Retained Placenta"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Postpartum haemorrhage** (PPH) is defined as cumulative blood loss >=500 mL following vaginal delivery or >=1000 mL following caesarean delivery, or any blood loss accompanied by signs of hypovolemia within 24 hours of birth. The **4 Ts mnemonic** outlines its primary etiologies: **Tone** (uterine atony, 70%), **Trauma** (20%), **Tissue** (10%), and **Thrombin** (1%). Clinically, key parameters encompass blood loss threshold.",
+   "say": "Postpartum haemorrhage represents the single leading cause of maternal mortality worldwide. Primary PPH is defined as blood loss exceeding five hundred millilitres following vaginal birth, or one thousand millilitres after caesarean delivery, or any loss inducing hemodynamic instability within twenty-four hours. Etiologies follow the four Ts: uterine atony causes seventy percent of cases, followed by genital tract trauma, retained placental tissue, and coagulopathy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-pph-fig1.webp",
+    "ar": 1.7778,
+    "caption": "Etiological classification and stepped management of postpartum haemorrhage. Credit: StewardMD.",
+    "alt": "Clinical management algorithm diagram outlining the four Ts of PPH and progressive medical, mechanical, and surgical haemostatic interventions."
+   }
   },
-  "refs": [
-    "Williams Obstetrics 25e Ch 41 (Obstetrical Hemorrhage)",
-    "Ten Teachers Gynaecology 21e",
-    "WHO Guidelines for the Management of Postpartum Haemorrhage and Retained Placenta"
-  ],
-  "src": [],
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "**Postpartum haemorrhage** (PPH) is defined as cumulative blood loss >=500 mL following vaginal delivery or >=1000 mL following caesarean delivery, or any blood loss accompanied by signs of hypovolemia within 24 hours of birth. The **4 Ts mnemonic** outlines its primary etiologies: **Tone** (uterine atony, 70%), **Trauma** (20%), **Tissue** (10%), and **Thrombin** (1%). Clinically, key parameters encompass blood loss threshold.",
-      "say": "Postpartum haemorrhage represents the single leading cause of maternal mortality worldwide. Primary PPH is defined as blood loss exceeding five hundred millilitres following vaginal birth, or one thousand millilitres after caesarean delivery, or any loss inducing hemodynamic instability within twenty-four hours. Etiologies follow the four Ts: uterine atony causes seventy percent of cases, followed by genital tract trauma, retained placental tissue, and coagulopathy.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/obg-pph-fig1.webp",
-        "ar": 1.7778,
-        "caption": "Etiological classification and stepped management of postpartum haemorrhage. Credit: StewardMD.",
-        "alt": "Clinical management algorithm diagram outlining the four Ts of PPH and progressive medical, mechanical, and surgical haemostatic interventions."
-      }
+  {
+   "tx": "First-line medical therapy for **uterine atony** begins with vigorous bimanual uterine massage and rapid **oxytocin** administration (10 IU IM or 20 to 40 IU in 1000 mL saline infusion at 250 mL/hour), followed by sequential second-line uterotonics: **ergometrine/methylergometrine** (0.2 mg IM, contraindicated in hypertension), **carboprost** (PGF2-alpha, 0.25 mg IM every 15 min, contraindicated in asthma), and misoprostol (800 mcg sublingual/rectal). Clinically, key parameters encompass 4Ts framework, retained placenta, 70, 80, 1.",
+   "say": "Immediate medical management of atony couples continuous bimanual uterine compression with intravenous oxytocin infusion. If uterine contraction remains suboptimal, methylergometrine is administered intramuscularly unless maternal hypertension or preeclampsia is present. The potent prostaglandin F2-alpha analogue carboprost is injected every fifteen minutes, provided the patient has no history of reactive airway disease or asthma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Uterotonic Agent",
+     "Standard Dose & Route",
+     "Absolute Clinical Contraindication"
+    ],
+    "rows": [
+     [
+      "Oxytocin",
+      "10 IU IM or 20-40 IU in 1L infusion",
+      "Rapid intravenous bolus causes hypotension and arrhythmia"
+     ],
+     [
+      "Methylergometrine",
+      "0.2 mg IM or slow IV",
+      "Chronic hypertension, preeclampsia, cardiac disease"
+     ],
+     [
+      "Carboprost (PGF2-alpha)",
+      "0.25 mg IM every 15 min (max 8 doses)",
+      "Active bronchial asthma and severe pulmonary disease"
+     ],
+     [
+      "Misoprostol (PGE1)",
+      "800 mcg sublingually or rectally",
+      "Known hypersensitivity to prostaglandin compounds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intrauterine balloon tamponade** (Bakri balloon or condom catheter) is indicated when uterotonics fail to arrest atonic haemorrhage, prior to proceeding to invasive laparotomy. The silicone balloon is inserted into the uterine cavity under ultrasound guidance and filled with **300 to 500 mL of sterile warm saline**, applying uniform hydrostatic pressure against the bleeding placental bed. Clinically, key parameters encompass oxytocin, methylergonovine, carboprost, 10, 40, 0.2, 0.25, 800.",
+   "say": "Intrauterine balloon tamponade represents a remarkably effective minimally invasive bridge when uterotonics fail. A Bakri balloon is advanced through the cervix into the uterine fundus and inflated with three hundred to five hundred millilitres of sterile saline. The hydrostatic pressure compresses bleeding subendothelial venous plexuses, rapidly achieving haemostasis in over eighty percent of atonic cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Identify refractory uterine atony unresponsive to medical uterotonics"
+     },
+     {
+      "id": "b",
+      "label": "Introduce Bakri balloon catheter into uterine cavity under ultrasound"
+     },
+     {
+      "id": "c",
+      "label": "Inflate balloon with 300 to 500 mL sterile warm isotonic saline"
+     },
+     {
+      "id": "d",
+      "label": "Perform tamponade test: arrest of cervical drainage confirms success"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **tamponade test** is deemed positive if vaginal bleeding ceases or diminishes to minimal serosanguinous discharge within 15 minutes of balloon inflation, indicating successful non-surgical control. The balloon is maintained inflated for **12 to 24 hours** under continuous prophylactic antibiotic coverage and low-dose oxytocin infusion before gradual deflation. Clinically, key parameters encompass tranexamic acid, antifibrinolytic, WOMAN trial, 1, 10, 3, 30.",
+   "say": "Evaluation of haemostasis following balloon inflation is known as the tamponade test. If vaginal bleeding rapidly halts or transitions to light serosanguinous fluid, the test is positive, successfully averting exploratory laparotomy. The device remains inflated for twelve to twenty-four hours alongside prophylactic broad-spectrum antibiotics and a maintenance oxytocin infusion to prevent secondary atony.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Positive Tamponade Test",
+     "points": [
+      "Immediate cessation of heavy transvaginal bleeding",
+      "Maintain balloon inflation for 12 to 24 hours",
+      "Maintain low-dose oxytocin infusion and broad-spectrum antibiotics",
+      "Avoids emergency laparotomy and uterine devascularisation"
+     ]
     },
-    {
-      "tx": "First-line medical therapy for **uterine atony** begins with vigorous bimanual uterine massage and rapid **oxytocin** administration (10 IU IM or 20 to 40 IU in 1000 mL saline infusion at 250 mL/hour), followed by sequential second-line uterotonics: **ergometrine/methylergometrine** (0.2 mg IM, contraindicated in hypertension), **carboprost** (PGF2-alpha, 0.25 mg IM every 15 min, contraindicated in asthma), and misoprostol (800 mcg sublingual/rectal). Clinically, key parameters encompass 4Ts framework, retained placenta, 70, 80, 1.",
-      "say": "Immediate medical management of atony couples continuous bimanual uterine compression with intravenous oxytocin infusion. If uterine contraction remains suboptimal, methylergometrine is administered intramuscularly unless maternal hypertension or preeclampsia is present. The potent prostaglandin F2-alpha analogue carboprost is injected every fifteen minutes, provided the patient has no history of reactive airway disease or asthma.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Uterotonic Agent",
-          "Standard Dose & Route",
-          "Absolute Clinical Contraindication"
-        ],
-        "rows": [
-          [
-            "Oxytocin",
-            "10 IU IM or 20-40 IU in 1L infusion",
-            "Rapid intravenous bolus causes hypotension and arrhythmia"
-          ],
-          [
-            "Methylergometrine",
-            "0.2 mg IM or slow IV",
-            "Chronic hypertension, preeclampsia, cardiac disease"
-          ],
-          [
-            "Carboprost (PGF2-alpha)",
-            "0.25 mg IM every 15 min (max 8 doses)",
-            "Active bronchial asthma and severe pulmonary disease"
-          ],
-          [
-            "Misoprostol (PGE1)",
-            "800 mcg sublingually or rectally",
-            "Known hypersensitivity to prostaglandin compounds"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Intrauterine balloon tamponade** (Bakri balloon or condom catheter) is indicated when uterotonics fail to arrest atonic haemorrhage, prior to proceeding to invasive laparotomy. The silicone balloon is inserted into the uterine cavity under ultrasound guidance and filled with **300 to 500 mL of sterile warm saline**, applying uniform hydrostatic pressure against the bleeding placental bed. Clinically, key parameters encompass oxytocin, methylergonovine, carboprost, 10, 40, 0.2, 0.25, 800.",
-      "say": "Intrauterine balloon tamponade represents a remarkably effective minimally invasive bridge when uterotonics fail. A Bakri balloon is advanced through the cervix into the uterine fundus and inflated with three hundred to five hundred millilitres of sterile saline. The hydrostatic pressure compresses bleeding subendothelial venous plexuses, rapidly achieving haemostasis in over eighty percent of atonic cases.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Identify refractory uterine atony unresponsive to medical uterotonics"
-          },
-          {
-            "id": "b",
-            "label": "Introduce Bakri balloon catheter into uterine cavity under ultrasound"
-          },
-          {
-            "id": "c",
-            "label": "Inflate balloon with 300 to 500 mL sterile warm isotonic saline"
-          },
-          {
-            "id": "d",
-            "label": "Perform tamponade test: arrest of cervical drainage confirms success"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The **tamponade test** is deemed positive if vaginal bleeding ceases or diminishes to minimal serosanguinous discharge within 15 minutes of balloon inflation, indicating successful non-surgical control. The balloon is maintained inflated for **12 to 24 hours** under continuous prophylactic antibiotic coverage and low-dose oxytocin infusion before gradual deflation. Clinically, key parameters encompass tranexamic acid, antifibrinolytic, WOMAN trial, 1, 10, 3, 30.",
-      "say": "Evaluation of haemostasis following balloon inflation is known as the tamponade test. If vaginal bleeding rapidly halts or transitions to light serosanguinous fluid, the test is positive, successfully averting exploratory laparotomy. The device remains inflated for twelve to twenty-four hours alongside prophylactic broad-spectrum antibiotics and a maintenance oxytocin infusion to prevent secondary atony.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Positive Tamponade Test",
-          "points": [
-            "Immediate cessation of heavy transvaginal bleeding",
-            "Maintain balloon inflation for 12 to 24 hours",
-            "Maintain low-dose oxytocin infusion and broad-spectrum antibiotics",
-            "Avoids emergency laparotomy and uterine devascularisation"
-          ]
-        },
-        "right": {
-          "title": "Negative Tamponade Test",
-          "points": [
-            "Persistent bright red haemorrhage past the balloon",
-            "Immediate deflation and removal of the device",
-            "Transfer immediately to operating theatre for laparotomy",
-            "Proceed directly to surgical compression sutures or hysterectomy"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "When laparotomy is required for refractory atony, the **B-Lynch uterine compression suture** provides mechanical apposition of anterior and posterior uterine walls. Using a large curved needle with No. 2 chromic catgut or poliglecaprone (Monocryl), continuous brace-like sutures loop over the uterine fundus and traverse the lower uterine segment, compressing myometrial vascular spaces. Clinically, key parameters encompass Bakri balloon, intrauterine tamponade, tamponade test, 300, 500.",
-      "say": "The B-Lynch brace suture is an indispensable fertility-preserving surgical technique for refractory atonic bleeding during laparotomy. Using absorbable monofilament suture on a blunt curved needle, brace loops encompass the uterine fundus from anterior to posterior lower uterine segments. Tying the sutures under manual compression compresses the anterior and posterior walls together like suspenders, obliterating myometrial vascular spaces.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/practicals/obg-prc-b-lynch-suture.webp",
-        "alt": "Uterine diagram of a compression brace suture looping over the fundus and anchoring below the lower segment incision.",
-        "caption": "Compression brace suture for an atonic uterus. Credit: SlideShare uploader via StewardMD index."
-      }
-    },
-    {
-      "tx": "Stepwise **pelvic devascularisation** systematically ligates ascending and descending branches of the **uterine arteries** (O'Leary stitches) and **utero-ovarian anastomotic vessels**. If bleeding persists, bilateral **internal iliac (hypogastric) artery ligation** reduces pelvic pulse pressure by 85 percent, ligating the anterior division 3 to 4 cm distal to the common iliac bifurcation. Clinically, key parameters encompass B-Lynch suture, Hayman suture, compression sutures.",
-      "say": "Systematic surgical devascularisation proceeds in an anatomical hierarchy. Bilateral uterine artery ligation at the level of the lower uterine segment arrests the major blood supply to the corpus. If haemorrhage continues, bilateral ligation of the anterior division of the internal iliac artery reduces pelvic arterial pulse pressure by eighty-five percent, transforming high-pressure arterial bleeding into a manageable venous ooze.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Bilateral uterine artery ligation at lower uterine segment"
-          },
-          {
-            "id": "b",
-            "label": "Ligation of ovarian ligament utero-ovarian anastomotic arcade"
-          },
-          {
-            "id": "c",
-            "label": "Retroperitoneal dissection of internal iliac artery anterior division"
-          },
-          {
-            "id": "d",
-            "label": "Ligation 3-4 cm distal to bifurcation spares posterior gluteal branch"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Uterine artery embolisation** (UAE) is an effective minimally invasive radiological intervention for stable patients with persistent bleeding or delayed secondary PPH. Under fluoroscopic guidance via femoral access, **gelatin sponge (Gelfoam) particles** or microcoils are selectively injected into bilateral uterine arteries, achieving 90 percent success while preserving future menstrual and reproductive function. Clinically, key parameters encompass uterine artery ligation, internal iliac artery ligation, devascularization.",
-      "say": "In hemodynamically stable women with persistent genital tract haemorrhage or secondary PPH from pseudoaneurysms, transcatheter angiographic embolisation offers a fertility-preserving alternative to re-laparotomy. Under fluoroscopy via femoral arterial puncture, interventional radiologists selectively cannulate the uterine vessels and embolise them with absorbable gelatin sponges, achieving over ninety percent haemostatic success.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Uterine Artery Embolisation (UAE)",
-          "points": [
-            "Requires hemodynamically stable patient and angiographic suite",
-            "Minimally invasive catheterization via common femoral artery",
-            "Preserves uterine architecture and future menstrual function",
-            "Temporary absorbable gelatin sponge particles recanalize"
-          ]
-        },
-        "right": {
-          "title": "Emergency Peripartum Hysterectomy",
-          "points": [
-            "Definitive life-saving surgery for exsanguinating shock",
-            "Permanent sterility and loss of childbearing potential",
-            "Subtotal or total hysterectomy performed expeditiously",
-            "High risk of bladder, ureteric, and vascular injury"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Massive obstetric haemorrhage protocols mandate early **balanced blood product transfusion** in a fixed **1:1:1 ratio** (packed red blood cells, fresh frozen plasma, and platelets) alongside **intravenous tranexamic acid (1 g over 10 minutes)** within 3 hours of delivery (WOMAN trial), targeting fibrinogen >200 mg/dL and preventing the lethal triad of hypothermia, acidosis, and coagulopathy. Clinically, key parameters encompass massive transfusion protocol, balanced ratio, cryoprecipitate.",
-      "say": "Exsanguinating obstetric haemorrhage demands activation of a standardized massive transfusion protocol. Packed red cells, fresh frozen plasma, and platelets are transfused in a balanced one-to-one-to-one ratio to prevent dilutional coagulopathy. Groundbreaking evidence from the WOMAN trial confirms that administering one gram of intravenous tranexamic acid within three hours of birth reduces maternal death from bleeding by one-third.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Resuscitation Target",
-          "Haemostatic Parameter Threshold",
-          "Therapeutic Transfusion Product"
-        ],
-        "rows": [
-          [
-            "Serum Fibrinogen",
-            "> 200 mg/dL (critical trigger < 150)",
-            "Cryoprecipitate (10 units) or fibrinogen concentrate (2-4 g)"
-          ],
-          [
-            "Platelet count",
-            "> 50,000 / microL (>= 100,000 in active DIC)",
-            "Platelet concentrate pool (1 adult therapeutic dose)"
-          ],
-          [
-            "Coagulation screen",
-            "PT and APTT < 1.5 times laboratory control",
-            "Fresh Frozen Plasma (15 mL/kg, 4 units minimum)"
-          ],
-          [
-            "Antifibrinolytic",
-            "Given within 3 hours of delivery onset",
-            "Tranexamic acid 1 g IV over 10 min; repeat at 30 min if ongoing"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Negative Tamponade Test",
+     "points": [
+      "Persistent bright red haemorrhage past the balloon",
+      "Immediate deflation and removal of the device",
+      "Transfer immediately to operating theatre for laparotomy",
+      "Proceed directly to surgical compression sutures or hysterectomy"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "When laparotomy is required for refractory atony, the **B-Lynch uterine compression suture** provides mechanical apposition of anterior and posterior uterine walls. Using a large curved needle with No. 2 chromic catgut or poliglecaprone (Monocryl), continuous brace-like sutures loop over the uterine fundus and traverse the lower uterine segment, compressing myometrial vascular spaces. Clinically, key parameters encompass Bakri balloon, intrauterine tamponade, tamponade test, 300, 500.",
+   "say": "The B-Lynch brace suture is an indispensable fertility-preserving surgical technique for refractory atonic bleeding during laparotomy. Using absorbable monofilament suture on a blunt curved needle, brace loops encompass the uterine fundus from anterior to posterior lower uterine segments. Tying the sutures under manual compression compresses the anterior and posterior walls together like suspenders, obliterating myometrial vascular spaces.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-b-lynch-suture.webp",
+    "alt": "Uterine diagram of a compression brace suture looping over the fundus and anchoring below the lower segment incision.",
+    "caption": "Compression brace suture for an atonic uterus. Credit: SlideShare uploader via StewardMD index."
+   }
+  },
+  {
+   "tx": "Stepwise **pelvic devascularisation** systematically ligates ascending and descending branches of the **uterine arteries** (O'Leary stitches) and **utero-ovarian anastomotic vessels**. If bleeding persists, bilateral **internal iliac (hypogastric) artery ligation** reduces pelvic pulse pressure by 85 percent, ligating the anterior division 3 to 4 cm distal to the common iliac bifurcation. Clinically, key parameters encompass B-Lynch suture, Hayman suture, compression sutures.",
+   "say": "Systematic surgical devascularisation proceeds in an anatomical hierarchy. Bilateral uterine artery ligation at the level of the lower uterine segment arrests the major blood supply to the corpus. If haemorrhage continues, bilateral ligation of the anterior division of the internal iliac artery reduces pelvic arterial pulse pressure by eighty-five percent, transforming high-pressure arterial bleeding into a manageable venous ooze.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bilateral uterine artery ligation at lower uterine segment"
+     },
+     {
+      "id": "b",
+      "label": "Ligation of ovarian ligament utero-ovarian anastomotic arcade"
+     },
+     {
+      "id": "c",
+      "label": "Retroperitoneal dissection of internal iliac artery anterior division"
+     },
+     {
+      "id": "d",
+      "label": "Ligation 3-4 cm distal to bifurcation spares posterior gluteal branch"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Uterine artery embolisation** (UAE) is an effective minimally invasive radiological intervention for stable patients with persistent bleeding or delayed secondary PPH. Under fluoroscopic guidance via femoral access, **gelatin sponge (Gelfoam) particles** or microcoils are selectively injected into bilateral uterine arteries, achieving 90 percent success while preserving future menstrual and reproductive function. Clinically, key parameters encompass uterine artery ligation, internal iliac artery ligation, devascularization.",
+   "say": "In hemodynamically stable women with persistent genital tract haemorrhage or secondary PPH from pseudoaneurysms, transcatheter angiographic embolisation offers a fertility-preserving alternative to re-laparotomy. Under fluoroscopy via femoral arterial puncture, interventional radiologists selectively cannulate the uterine vessels and embolise them with absorbable gelatin sponges, achieving over ninety percent haemostatic success.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uterine Artery Embolisation (UAE)",
+     "points": [
+      "Requires hemodynamically stable patient and angiographic suite",
+      "Minimally invasive catheterization via common femoral artery",
+      "Preserves uterine architecture and future menstrual function",
+      "Temporary absorbable gelatin sponge particles recanalize"
+     ]
+    },
+    "right": {
+     "title": "Emergency Peripartum Hysterectomy",
+     "points": [
+      "Definitive life-saving surgery for exsanguinating shock",
+      "Permanent sterility and loss of childbearing potential",
+      "Subtotal or total hysterectomy performed expeditiously",
+      "High risk of bladder, ureteric, and vascular injury"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Massive obstetric haemorrhage protocols mandate early **balanced blood product transfusion** in a fixed **1:1:1 ratio** (packed red blood cells, fresh frozen plasma, and platelets) alongside **intravenous tranexamic acid (1 g over 10 minutes)** within 3 hours of delivery (WOMAN trial), targeting fibrinogen >200 mg/dL and preventing the lethal triad of hypothermia, acidosis, and coagulopathy. Clinically, key parameters encompass massive transfusion protocol, balanced ratio, cryoprecipitate.",
+   "say": "Exsanguinating obstetric haemorrhage demands activation of a standardized massive transfusion protocol. Packed red cells, fresh frozen plasma, and platelets are transfused in a balanced one-to-one-to-one ratio to prevent dilutional coagulopathy. Groundbreaking evidence from the WOMAN trial confirms that administering one gram of intravenous tranexamic acid within three hours of birth reduces maternal death from bleeding by one-third.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Resuscitation Target",
+     "Haemostatic Parameter Threshold",
+     "Therapeutic Transfusion Product"
+    ],
+    "rows": [
+     [
+      "Serum Fibrinogen",
+      "> 200 mg/dL (critical trigger < 150)",
+      "Cryoprecipitate (10 units) or fibrinogen concentrate (2-4 g)"
+     ],
+     [
+      "Platelet count",
+      "> 50,000 / microL (>= 100,000 in active DIC)",
+      "Platelet concentrate pool (1 adult therapeutic dose)"
+     ],
+     [
+      "Coagulation screen",
+      "PT and APTT < 1.5 times laboratory control",
+      "Fresh Frozen Plasma (15 mL/kg, 4 units minimum)"
+     ],
+     [
+      "Antifibrinolytic",
+      "Given within 3 hours of delivery onset",
+      "Tranexamic acid 1 g IV over 10 min; repeat at 30 min if ongoing"
+     ]
+    ]
+   }
+  }
+ ]
 }
