@@ -1,0 +1,231 @@
+{
+  "id": "pnp-steroid-resistant-nephrotic-syndrome",
+  "title": "Steroid-Resistant Nephrotic Syndrome: Genetics, CNI Therapy and Transplant Recurrence",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Glomerular Diseases, Nephrotic Syndrome and Nephritis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Steroid resistance in nephrotic children is formally diagnosed when daily prednisolone fails to induce remission after four to six weeks.",
+      "tx": "Apply the standardized **Steroid resistance operational definition** when assessing children with inadequate treatment response. Steroid resistance (SRNS) is defined as the persistence of nephrotic-range proteinuria despite four to six weeks of daily oral prednisolone at sixty milligrams per square meter per day (60 mg/m\u00b2/day, maximum 60 mg/day). Clinicians distinguish initial resistance (presenting from disease onset) from late resistance occurring in children who previously experienced documented steroid sensitivity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "present",
+            "label": "Nephrotic Presentation"
+          },
+          {
+            "id": "pred",
+            "label": "Oral Prednisolone 60 mg/m\u00b2/day x 4-6 weeks"
+          },
+          {
+            "id": "eval",
+            "label": "Assess Proteinuria (Dipstick / UPCR)"
+          },
+          {
+            "id": "srns",
+            "label": "Persistent Proteinuria: Steroid Resistance (SRNS)"
+          }
+        ],
+        "edges": [
+          [
+            "present",
+            "pred"
+          ],
+          [
+            "pred",
+            "eval"
+          ],
+          [
+            "eval",
+            "srns"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A percutaneous renal biopsy is essential to identify the underlying histopathology before initiating second-line therapy.",
+      "tx": "Evaluate clinical criteria to determine **Renal biopsy indications in children** presenting with nephrotic features. Renal biopsy is indicated before treatment in children presenting at under one year or over twelve years of age, macroscopic hematuria, persistent hypertension, low serum C3 complement, renal failure, or documented steroid resistance. Light microscopy, immunofluorescence, and electron microscopy establish the structural subtype, commonly revealing focal segmental glomerulosclerosis or minimal change disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/glomerular-diseases-nephritic-nephrotic-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Histopathologic evaluation of glomerular architecture in nephrotic disease confirming podocyte effacement and segmental sclerosis",
+        "alt": "Histopathologic evaluation of glomerular architecture in nephrotic disease confirming podocyte effacement and segmental sclerosis"
+      },
+      "caption": "Histopathologic evaluation of glomerular architecture in nephrotic disease confirming podocyte effacement and segmental sclerosis",
+      "alt": "Histopathologic evaluation of glomerular architecture in nephrotic disease confirming podocyte effacement and segmental sclerosis"
+    },
+    {
+      "say": "Up to thirty percent of childhood steroid resistance has a monogenic cause rooted in structural podocyte defects.",
+      "tx": "Order comprehensive gene panel sequencing to identify **Monogenic SRNS podocyte genes** before exposing children to intensive regimens. Up to thirty percent of pediatric SRNS is monogenic, caused by podocyte and slit diaphragm gene mutations: NPHS1 (encoding nephrin), NPHS2 (podocin), WT1 (associated with Denys-Drash and Frasier syndromes), PLCE1, LAMB2, and INF2. Identifying a causative structural variant clarifies familial risk and precludes unnecessary prolonged immunosuppression.",
+      "vis": {
+        "kind": "table",
+        "title": "Major Monogenic SRNS Podocyte Genes",
+        "cols": [
+          "Gene",
+          "Encoded Protein",
+          "Associated Phenotype"
+        ],
+        "rows": [
+          [
+            "NPHS1",
+            "Nephrin",
+            "Congenital nephrotic syndrome of Finnish type"
+          ],
+          [
+            "NPHS2",
+            "Podocin",
+            "Autosomal recessive SRNS, early childhood onset"
+          ],
+          [
+            "WT1",
+            "Wilms tumor 1 protein",
+            "Denys-Drash / Frasier syndrome, nephropathy, Wilms tumor"
+          ],
+          [
+            "LAMB2",
+            "Laminin beta-2",
+            "Pierson syndrome, microcoria, congenital nephrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Recognizing monogenic podocytopathies prevents the toxic side effects of futile immunosuppressive therapy.",
+      "tx": "Understand the therapeutic consequences of **Genetic SRNS immunosuppression resistance** across all clinical settings. Children with confirmed monogenic genetic podocytopathies do not respond to immunosuppressive therapy because the underlying defect is structural rather than immunological. In these patients, corticosteroids and calcineurin inhibitors should be rapidly tapered and discontinued to avoid toxicity, severe infections, and drug-induced nephrotoxicity while prioritizing supportive nephroprotective measures.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immunological (Non-Genetic) SRNS",
+          "points": [
+            "Underlying immune dysregulation",
+            "High responsiveness to calcineurin inhibitors",
+            "T-cell and podocyte stabilizing targets"
+          ]
+        },
+        "right": {
+          "title": "Monogenic Structural SRNS",
+          "points": [
+            "Mutations in slit diaphragm structural proteins",
+            "Complete lack of response to immunosuppression",
+            "Prompt taper of steroids and calcineurin inhibitors"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Calcineurin inhibitors represent the primary therapeutic cornerstone for non-genetic steroid-resistant nephrotic syndrome.",
+      "tx": "Prescribe targeted immunosuppression with **Calcineurin inhibitors (tacrolimus and cyclosporine)** to induce clinical remission. In non-genetic SRNS, calcineurin inhibitors (tacrolimus 0.1-0.15 mg/kg/day targeting trough levels of 5-8 ng/mL, or cyclosporine targeting trough levels of 100-150 ng/mL) induce complete or partial remission in seventy to eighty percent of patients. These agents exert dual therapeutic effects by inhibiting nuclear factor of activated T-cells (NFAT) and directly stabilizing the podocyte actin cytoskeleton.",
+      "vis": {
+        "kind": "table",
+        "title": "Calcineurin Inhibitor Regimens in Pediatric SRNS",
+        "cols": [
+          "Agent",
+          "Starting Dose",
+          "Target Trough Level",
+          "Expected Remission"
+        ],
+        "rows": [
+          [
+            "Tacrolimus",
+            "0.1-0.15 mg/kg/day divided BID",
+            "5-8 ng/mL",
+            "70-80% (Complete or partial)"
+          ],
+          [
+            "Cyclosporine",
+            "4-5 mg/kg/day divided BID",
+            "100-150 ng/mL",
+            "70-80% (Complete or partial)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Columbia classification delineates distinct histopathological variants of focal segmental glomerulosclerosis with variable prognoses.",
+      "tx": "Categorize renal biopsy findings using the standardized **FSGS histopathological variants (Columbia classification)** to anticipate prognosis. Focal segmental glomerulosclerosis is classified into five variants: tip (best prognosis, steroid responsive), cellular, perihilar, collapsing (worst prognosis, marked by podocyte proliferation and rapid progression to ESRD), and not-otherwise-specified (NOS). The collapsing variant frequently manifests with severe refractory nephrotic syndrome and accelerated glomerular filtration rate loss.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/membranous-nephropathy-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Histopathological evaluation of glomerular basement membrane and podocyte morphology in progressive glomerulopathies",
+        "alt": "Histopathological evaluation of glomerular basement membrane and podocyte morphology in progressive glomerulopathies"
+      },
+      "caption": "Histopathological evaluation of glomerular basement membrane and podocyte morphology in progressive glomerulopathies",
+      "alt": "Histopathological evaluation of glomerular basement membrane and podocyte morphology in progressive glomerulopathies"
+    },
+    {
+      "say": "Circulating permeability factors cause rapid allograft recurrence in children receiving kidney transplants for non-genetic disease.",
+      "tx": "Recognize the dangerous impact of **Circulating permeability factor and recurrence post-transplant** in pediatric allograft recipients. Idiopathic non-genetic FSGS recurs in thirty to fifty percent of renal allografts within forty-eight hours post-transplant due to circulating permeability factor (such as suPAR or anti-UCHL1). Immediate post-operative management requires urgent intensive plasma exchange combined with intravenous rituximab to remove and suppress the pathogenic circulating factor.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "txp",
+            "label": "Renal Allograft Implantation"
+          },
+          {
+            "id": "factor",
+            "label": "Circulating Permeability Factors (suPAR / anti-UCHL1)"
+          },
+          {
+            "id": "recur",
+            "label": "Proteinuria Recurrence within 48 Hours (30-50%)"
+          },
+          {
+            "id": "rx",
+            "label": "Urgent Intensive Plasma Exchange + Rituximab"
+          }
+        ],
+        "edges": [
+          [
+            "txp",
+            "factor"
+          ],
+          [
+            "factor",
+            "recur"
+          ],
+          [
+            "recur",
+            "rx"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Angiotensin blockade provides essential non-immunological nephroprotection by lowering intraglomerular pressure and proteinuria.",
+      "tx": "Optimize long-term supportive care by implementing **RAAS blockade in persistent proteinuria** across all pediatric cohorts. Angiotensin-converting enzyme (ACE) inhibitors such as enalapril or angiotensin receptor blockers (ARBs) such as losartan reduce intraglomerular capillary pressure and reduce proteinuria by thirty to fifty percent in SRNS. Careful serial monitoring of serum potassium and creatinine is essential to detect hyperkalemia and acute hemodynamic drops in estimated glomerular filtration rate.",
+      "vis": {
+        "kind": "table",
+        "title": "RAAS Blockade Nephroprotection Protocol",
+        "cols": [
+          "Mechanism",
+          "Expected Proteinuria Drop",
+          "Safety Monitoring Parameters"
+        ],
+        "rows": [
+          [
+            "Efferent arteriolar vasodilation",
+            "30-50% reduction in urinary protein",
+            "Serum potassium (hyperkalemia risk)"
+          ],
+          [
+            "Reduction of intraglomerular pressure",
+            "Decreased podocyte mechanical strain",
+            "Serum creatinine and eGFR stability"
+          ],
+          [
+            "Anti-fibrotic signaling",
+            "Attenuates interstitial fibrosis",
+            "Blood pressure (avoid hypotension)"
+          ]
+        ]
+      }
+    }
+  ]
+}

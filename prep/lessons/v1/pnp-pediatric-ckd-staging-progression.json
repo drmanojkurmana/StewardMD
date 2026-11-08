@@ -1,0 +1,241 @@
+{
+  "id": "pnp-pediatric-ckd-staging-progression",
+  "title": "Pediatric CKD: Etiology, Schwartz Formula, Staging and Progression Retardation",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Renal Failure, Dialysis and Transplantation",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Unlike adults where diabetes predominates, congenital anomalies and hereditary nephropathies cause seventy percent of pediatric kidney disease.",
+      "tx": "Recognize the distinct epidemiologic profile of **Pediatric CKD etiology vs adult CKD** during clinical evaluation. Unlike adults where diabetes mellitus and hypertension dominate the etiology, pediatric chronic kidney disease is primarily caused by congenital anomalies of the kidney and urinary tract (CAKUT, accounting for fifty percent of cases) and hereditary nephropathies (accounting for twenty percent), followed by glomerulonephritis and hemolytic uremic syndrome.",
+      "vis": {
+        "kind": "table",
+        "title": "Pediatric Chronic Kidney Disease Etiology Distribution",
+        "cols": [
+          "Etiologic Category",
+          "Prevalence",
+          "Typical Diagnoses"
+        ],
+        "rows": [
+          [
+            "CAKUT",
+            "50%",
+            "Renal hypodysplasia, posterior urethral valves, reflux nephropathy"
+          ],
+          [
+            "Hereditary Nephropathies",
+            "20%",
+            "Nephronophthisis, ARPKD, Alport syndrome, cystinosis"
+          ],
+          [
+            "Glomerulonephritis",
+            "15%",
+            "FSGS, IgA nephropathy, lupus nephritis"
+          ],
+          [
+            "Other / Vascular",
+            "15%",
+            "Hemolytic uremic syndrome, cortical necrosis, ischemic injury"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The bedside Schwartz formula provides an accurate, rapid calculation of pediatric glomerular filtration rate from serum creatinine.",
+      "tx": "Calculate estimated filtration using the validated **Bedside Schwartz formula for pediatric eGFR** across outpatient and inpatient settings. The updated bedside Schwartz equation is: eGFR (in mL/min/1.73m\u00b2) = 0.413 multiplied by Height (in centimeters) divided by Serum Creatinine (in milligrams per deciliter). This formula is formally validated for children aged one to sixteen years utilizing enzymatic, isotope dilution mass spectrometry (IDMS)-traceable creatinine assays.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inputs",
+            "label": "Measure Height (cm) & Serum Creatinine (mg/dL)"
+          },
+          {
+            "id": "formula",
+            "label": "eGFR = (0.413 x Height) / Serum Creatinine"
+          },
+          {
+            "id": "stage",
+            "label": "Assign KDIGO CKD Stage (1 through 5)"
+          }
+        ],
+        "edges": [
+          [
+            "inputs",
+            "formula"
+          ],
+          [
+            "formula",
+            "stage"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Standard KDIGO staging classifies chronic kidney disease into five stages based on glomerular filtration rate thresholds.",
+      "tx": "Classify disease severity by applying formal **CKD staging thresholds (KDIGO)** to establish clinical management plans. Pediatric CKD is staged by GFR: Stage 1 (>= 90 mL/min/1.73m\u00b2 with structural kidney damage), Stage 2 (60-89 mL/min/1.73m\u00b2), Stage 3a (45-59 mL/min/1.73m\u00b2), Stage 3b (30-44 mL/min/1.73m\u00b2), Stage 4 (15-29 mL/min/1.73m\u00b2, representing severe reduction), and Stage 5 (< 15 mL/min/1.73m\u00b2, representing kidney failure).",
+      "vis": {
+        "kind": "table",
+        "title": "KDIGO Pediatric CKD Staging",
+        "cols": [
+          "Stage",
+          "eGFR (mL/min/1.73m\u00b2)",
+          "Clinical Description",
+          "Key Focus"
+        ],
+        "rows": [
+          [
+            "Stage 1",
+            ">= 90",
+            "Kidney damage, normal GFR",
+            "Diagnosis, etiology, retard progression"
+          ],
+          [
+            "Stage 2",
+            "60-89",
+            "Mild GFR reduction",
+            "Monitor progression, cardiovascular risk"
+          ],
+          [
+            "Stage 3a/b",
+            "30-59",
+            "Moderate GFR reduction",
+            "Manage anemia, bone-mineral disorder, acidosis"
+          ],
+          [
+            "Stage 4",
+            "15-29",
+            "Severe GFR reduction",
+            "Prepare for dialysis and pre-emptive transplant"
+          ],
+          [
+            "Stage 5",
+            "< 15",
+            "Kidney failure (ESRD)",
+            "Transplantation, peritoneal dialysis, hemodialysis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Strict ambulatory blood pressure control reduces the risk of reaching end-stage renal disease by thirty-five percent.",
+      "tx": "Enforce rigorous blood pressure regulation through the **Blood pressure target to retard progression** demonstrated in landmark trials. The ESCAPE trial established that strict ambulatory blood pressure control to below the 50th percentile using angiotensin-converting enzyme inhibitors significantly slows CKD progression and reduces the composite risk of a fifty percent decline in GFR or progression to end-stage renal disease by thirty-five percent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Conventional BP Control (< 90th percentile)",
+          "points": [
+            "Permits higher intraglomerular capillary hypertension",
+            "Faster loss of surviving nephron mass",
+            "Higher rate of reaching ESRD in follow-up"
+          ]
+        },
+        "right": {
+          "title": "Intensive BP Control (< 50th percentile)",
+          "points": [
+            "Strict target established by ESCAPE trial",
+            "Primary therapy with ACE inhibitors (enalapril)",
+            "35% risk reduction in CKD progression / ESRD"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Recombinant human growth hormone restores linear growth velocity in children with persistent growth impairment.",
+      "tx": "Evaluate growth parameters to initiate **Growth failure and recombinant human GH** in eligible pediatric patients. Persistent height velocity below the 25th percentile or height standard deviation score below minus two (SDS < -2.0) despite optimal caloric nutrition and metabolic acidosis correction warrants recombinant human growth hormone therapy (rhGH at 0.045-0.05 mg/kg/day administered subcutaneously daily). Therapy is continued until adult height is reached or epiphyses close.",
+      "vis": {
+        "kind": "table",
+        "title": "Pediatric CKD Growth Failure Management Protocol",
+        "cols": [
+          "Step",
+          "Action",
+          "Goal"
+        ],
+        "rows": [
+          [
+            "Step 1: Nutrition",
+            "Ensure 100% dietary reference intake (DRI)",
+            "Address caloric and protein malnutrition"
+          ],
+          [
+            "Step 2: Acidosis",
+            "Correct serum bicarbonate to >= 22 mEq/L",
+            "Ablate protein catabolism and bone buffering"
+          ],
+          [
+            "Step 3: rhGH",
+            "rhGH 0.045-0.05 mg/kg/day subcutaneous",
+            "Accelerate linear growth velocity to > 50th percentile"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Maintaining serum bicarbonate at twenty-two milliequivalents per liter prevents bone dissolution and muscle wasting.",
+      "tx": "Institute sodium bicarbonate supplementation using the **Correction of metabolic acidosis threshold** across all stages. Serum bicarbonate must be maintained at or above twenty-two milliequivalents per liter (>= 22 mEq/L) using oral sodium bicarbonate (one to three mEq/kg/day in divided doses). This prevents metabolic acidosis-induced bone mineral dissolution, muscle protein degradation, and accelerated decline in residual glomerular filtration rate.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/renal-osteodystrophy-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Radiologic and metabolic features of bone mineral dissolution and osteodystrophy secondary to chronic uremia and acidosis",
+        "alt": "Radiologic and metabolic features of bone mineral dissolution and osteodystrophy secondary to chronic uremia and acidosis"
+      },
+      "caption": "Radiologic and metabolic features of bone mineral dissolution and osteodystrophy secondary to chronic uremia and acidosis",
+      "alt": "Radiologic and metabolic features of bone mineral dissolution and osteodystrophy secondary to chronic uremia and acidosis"
+    },
+    {
+      "say": "Sodium-glucose cotransporter two inhibitors lower intraglomerular hyperfiltration and reduce proteinuria in adolescents.",
+      "tx": "Evaluate newer nephroprotective agents including **SGLT2 inhibitors in pediatric CKD** in adolescent populations. Sodium-glucose cotransporter-2 inhibitors (such as empagliflozin and dapagliflozin) reduce intraglomerular hyperfiltration by restoring tubuloglomerular feedback, leading to sustained reductions in proteinuria and blood pressure in adolescents with proteinuric chronic kidney disease, translating evidence established in landmark adult clinical trials.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sglt2",
+            "label": "SGLT2 Inhibitor Therapy (Dapagliflozin/Empagliflozin)"
+          },
+          {
+            "id": "macula",
+            "label": "Increased Distal NaCl Delivery to Macula Densa"
+          },
+          {
+            "id": "tgf",
+            "label": "Restores Tubuloglomerular Feedback (Afferent Constriction)"
+          },
+          {
+            "id": "protect",
+            "label": "Reduces Intraglomerular Pressure, Albuminuria & Fibrosis"
+          }
+        ],
+        "edges": [
+          [
+            "sglt2",
+            "macula"
+          ],
+          [
+            "macula",
+            "tgf"
+          ],
+          [
+            "tgf",
+            "protect"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pre-emptive living donor kidney transplantation avoids dialysis and delivers superior neurodevelopmental outcomes.",
+      "tx": "Establish early multidisciplinary planning to achieve the **Pre-emptive kidney transplantation goal** in advanced stages. Pre-emptive living donor kidney transplantation (transplantation performed before the initiation of maintenance dialysis) is the gold standard for pediatric CKD stage 5 (eGFR < 15 mL/min/1.73m\u00b2). Pre-emptive transplantation avoids dialysis-related morbidity, maximizes neurocognitive and linear growth outcomes, and extends long-term allograft survival.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ckd-dialysis-transplant-long-case-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Comprehensive clinical management of pediatric end-stage renal disease: vascular access, peritoneal dialysis, and transplantation",
+        "alt": "Comprehensive clinical management of pediatric end-stage renal disease: vascular access, peritoneal dialysis, and transplantation"
+      },
+      "caption": "Comprehensive clinical management of pediatric end-stage renal disease: vascular access, peritoneal dialysis, and transplantation",
+      "alt": "Comprehensive clinical management of pediatric end-stage renal disease: vascular access, peritoneal dialysis, and transplantation"
+    }
+  ]
+}
