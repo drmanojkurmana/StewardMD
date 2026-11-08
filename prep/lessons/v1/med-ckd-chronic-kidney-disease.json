@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-ckd",
+ "subject": "medicine",
+ "title": "Chronic kidney disease staging, CKD-EPI equation, and renal osteodystrophy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Persistent structural or functional nephron destruction lasting longer than three months defines irreversible progressive renal impairment. Establishing the clinical diagnosis of **Chronic kidney disease** (CKD) requires documentation of an estimated glomerular filtration rate below sixty millilitres per minute per one point seven three square metres, or verified markers of kidney damage present for a minimum duration of three months. Pathological albuminuria, urine sediment abnormalities, histological alterations on renal biopsy, or structural lesions on imaging confirm disease presence regardless of the calculated glomerular filtration rate.",
+   "say": "Persistent structural or functional kidney damage lasting over three months defines chronic kidney disease. Establishing the diagnosis of Chronic kidney disease requires an estimated glomerular filtration rate below sixty millilitres per minute, or persistent markers of parenchymal damage. Albuminuria, abnormal urine sediment, or structural defects on ultrasound confirm diagnosis regardless of filtration rate.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-ckd-heatmap.svg",
+    "alt": "KDIGO heatmap matrix demonstrating prognosis of chronic kidney disease by GFR and albuminuria categories.",
+    "caption": "KDIGO chronic kidney disease staging heatmap by glomerular filtration rate and albuminuria. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Standardized staging of chronic renal compromise utilizes dual classification based on functional clearance and persistent urinary protein excretion. Staging by **eGFR** categorizes disease severity from stage G1 (preserved filtration exceeding ninety millilitres per minute) and G2 (mild reduction between sixty and eighty-nine), to G3a (forty-five to fifty-nine) and G3b (thirty to forty-four). Further functional deterioration defines stage G4 as severe clearance compromise (fifteen to twenty-nine), culminating in stage G5 kidney failure (clearance below fifteen millilitres per minute), where preparations for renal replacement become urgent.",
+   "say": "Standardized staging of chronic renal disease uses dual classification based on filtration clearance and urinary protein leakage. Staging by eGFR spans from stage G1 with normal filtration, to stage G3 with moderate impairment. Stage G4 represents severe functional compromise, culminating in stage G5 kidney failure below fifteen millilitres per minute where renal replacement planning becomes urgent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "KDIGO G-stage",
+     "eGFR range (mL/min/1.73 m2)",
+     "Clinical description",
+     "Primary management focus"
+    ],
+    "rows": [
+     [
+      "G1",
+      ">= 90",
+      "Normal or high filtration with kidney damage",
+      "Diagnose etiology, treat comorbidities, CVD risk"
+     ],
+     [
+      "G2",
+      "60 to 89",
+      "Mildly decreased filtration with kidney damage",
+      "Slow progression, dose adjust cleared drugs"
+     ],
+     [
+      "G3a & G3b",
+      "30 to 59 (G3a: 45-59; G3b: 30-44)",
+      "Moderately decreased filtration",
+      "Screen and manage complications (anemia, MBD)"
+     ],
+     [
+      "G4",
+      "15 to 29",
+      "Severely decreased filtration",
+      "Prepare vascular access and transplant evaluation"
+     ],
+     [
+      "G5",
+      "< 15",
+      "Kidney failure / End-stage renal disease",
+      "Initiate dialysis or preemptive transplantation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accurate estimation of glomerular filtration rate avoids inaccurate drug dosing and enables reliable epidemiological surveillance across diverse patient cohorts. Utilizing the **CKD-EPI** (Chronic Kidney Disease Epidemiology Collaboration) equation calculates filtration based on serum creatinine, age, and sex without incorporating race variables. Compared to legacy Cockcroft-Gault formulas and the Modification of Diet in Renal Disease (MDRD) study equation, the modern CKD-EPI algorithm displays superior precision, particularly in patients with preserved filtration above sixty millilitres per minute, significantly diminishing false-positive overdiagnosis.",
+   "say": "Accurate estimation of filtration rate prevents improper drug dosing and improves clinical surveillance across populations. Utilizing the CKD-EPI equation calculates filtration using serum creatinine, age, and sex without racial modifiers. Compared to historical formulas, the modern CKD-EPI equation shows superior precision across higher filtration ranges, minimizing false-positive diagnoses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Modern CKD-EPI Equation",
+     "points": [
+      "Incorporates serum creatinine, age, and female sex",
+      "Eliminates race coefficient for equitable accuracy",
+      "Superior accuracy across eGFR > 60 mL/min/1.73 m2",
+      "Endorsed by international guidelines (KDIGO / NICE)"
+     ]
+    },
+    "right": {
+     "title": "Cockcroft-Gault Formula",
+     "points": [
+      "Estimates creatinine clearance in mL/min (not per 1.73 m2)",
+      "Incorporates patient body weight and serum creatinine",
+      "Overestimates clearance in obesity and oedematous states",
+      "Historically utilized for pharmacokinetic drug dosing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pathological transudation of plasma proteins into urine indicates glomerular barrier disruption and serves as an independent predictor of renal progression and cardiovascular death. Quantifying **albuminuria** utilizes the spot morning urine albumin-to-creatinine ratio (uACR), expressed in milligrams per gram of creatinine. Staging classifies normal to mildly increased excretion as category A1 (under thirty milligrams per gram), moderately increased microalbuminuria as category A2 (thirty to three hundred milligrams per gram), and severely increased overt proteinuria as category A3 (exceeding three hundred milligrams per gram).",
+   "say": "Pathological leakage of plasma proteins into urine indicates glomerular barrier disruption and predicts cardiovascular mortality. Quantifying albuminuria uses the spot urine albumin-to-creatinine ratio to measure daily protein excretion. Categories span from normal A1 under thirty, to microalbuminuria A2 between thirty and three hundred, and macroalbuminuria A3 above three hundred milligrams per gram.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Albuminuria category",
+     "uACR range (mg/g)",
+     "Equivalent uACR (mg/mmol)",
+     "Cardiovascular and progression risk"
+    ],
+    "rows": [
+     [
+      "A1 (Normal to mildly increased)",
+      "< 30 mg/g",
+      "< 3 mg/mmol",
+      "Baseline reference population risk"
+     ],
+     [
+      "A2 (Moderately increased)",
+      "30 to 300 mg/g",
+      "3 to 30 mg/mmol",
+      "Doubled risk of progression and cardiovascular death"
+     ],
+     [
+      "A3 (Severely increased)",
+      "> 300 mg/g",
+      "> 30 mg/mmol",
+      "Markedly accelerated nephron loss; nephrotic if >2200"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted hemodynamic and metabolic interventions slow the trajectory of functional decline in proteinuric chronic kidney disease. Directing **nephroprotection strategies** prioritizes first-line renin-angiotensin-aldosterone system inhibition using maximum tolerated doses of ACE inhibitors or angiotensin receptor blockers in all patients with category A2 or A3 albuminuria. Adding sodium-glucose cotransporter-two (SGLT2) inhibitors delivers profound synergistic nephron protection by restoring tubuloglomerular feedback, reducing intraglomerular hypertension, and slowing eGFR decline regardless of diabetes status. The non-steroidal mineralocorticoid receptor antagonist finerenone provides further cardiorenal risk reduction.",
+   "say": "Targeted hemodynamic and metabolic therapies slow functional decline in proteinuric chronic kidney disease. Directing nephroprotection strategies prioritizes renin-angiotensin system blockade using ACE inhibitors or ARBs for significant albuminuria. Adding SGLT2 inhibitors provides powerful synergistic protection by lowering intraglomerular pressure and slowing nephron loss, while finerenone reduces cardiorenal complications.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ckd",
+      "label": "CKD with Albuminuria (uACR >= 30 mg/g)"
+     },
+     {
+      "id": "raas",
+      "label": "First-Line: ACE Inhibitor or ARB titrated to maximum tolerated dose"
+     },
+     {
+      "id": "sglt2",
+      "label": "Add SGLT2 Inhibitor (Dapagliflozin or Empagliflozin) + Finerenone"
+     }
+    ],
+    "edges": [
+     [
+      "ckd",
+      "raas"
+     ],
+     [
+      "raas",
+      "sglt2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progressive nephron dropout disrupts mineral homeostasis, creating a systemic syndrome of mineral and bone disorder. Developing **secondary hyperparathyroidism** initiates with diminished glomerular filtration of inorganic phosphate, precipitating systemic hyperphosphataemia. Concurrently, loss of renal proximal tubular mass impairs one-alpha-hydroxylase enzymatic conversion of twenty-five-hydroxyvitamin D to active calcitriol (one comma twenty-five-dihydroxyvitamin D). Combined hyperphosphataemia, calcitriol deficiency, and resultant hypocalcaemia trigger continuous parathyroid chief cell proliferation and unrestrained parathyroid hormone secretion, inducing accelerated bone resorption and vascular calcification.",
+   "say": "Progressive nephron loss disrupts mineral balance, triggering metabolic bone disease and vascular calcification. Developing secondary hyperparathyroidism begins with impaired renal phosphate clearance causing hyperphosphataemia. Loss of proximal tubular tissue simultaneously impairs active vitamin D synthesis, producing hypocalcaemia that stimulates continuous parathyroid hormone secretion and extensive bone resorption.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ckd-fig1.webp",
+    "alt": "Endocrine pathways linking phosphate retention, calcitriol deficiency, and parathyroid hormone secretion in CKD.",
+    "caption": "Phosphate retention, calcitriol depletion, and secondary hyperparathyroidism in CKD. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Deranged mineral metabolism produces diverse skeletal architectural alterations collectively categorized under chronic kidney disease-mineral and bone disorder. Diagnosing **renal osteodystrophy** encompasses three major histological phenotypes: high-turnover osteitis fibrosa cystica driven by excessive parathyroid hormone stimulating uncoupled osteoclastic bone resorption with marrow fibrosis, adynamic bone disease characterized by profound suppression of bone turnover due to overzealous vitamin D or calcium therapy, and osteomalacia characterized by defective mineralization of osteoid. Subperiosteal bone resorption on hand radiographs provides classic radiological confirmation.",
+   "say": "Altered mineral metabolism produces diverse skeletal changes known collectively as renal osteodystrophy. Diagnosing renal osteodystrophy encompasses high-turnover osteitis fibrosa cystica caused by excess parathyroid hormone, adynamic bone disease caused by oversuppression of bone remodelling, and osteomalacia with unmineralized bone matrix. Hand imaging demonstrates classic subperiosteal bone resorption.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-Turnover Bone Disease (Osteitis Fibrosa)",
+     "points": [
+      "Severe secondary hyperparathyroidism (high PTH)",
+      "Marked osteoclastic bone resorption and marrow fibrosis",
+      "Subperiosteal resorption of phalanges and skull rugger-jersey spine",
+      "Managed by phosphate binders and calcimimetics"
+     ]
+    },
+    "right": {
+     "title": "Low-Turnover Adynamic Bone Disease",
+     "points": [
+      "Oversuppression of parathyroid hormone (low/normal PTH)",
+      "Arrested bone formation and osteoblast quiescence",
+      "Heightened fracture risk and extensive vascular calcification",
+      "Managed by reducing calcium load and holding vitamin D"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Therapeutic protocols in metabolic bone disease aim to maintain serum phosphate and calcium within normal ranges while preventing severe secondary parathyroid overgrowth. Directing **CKD-MBD management** initiates with dietary phosphate restriction (eight hundred to one thousand milligrams daily), combining non-calcium phosphate binders like sevelamer carbonate or lanthanum carbonate with meals to minimize vascular calcification risks. When parathyroid hormone levels remain elevated despite phosphate control, active vitamin D sterols (calcitriol or paricalcitol) or the oral calcimimetic cinacalcet (which allosterically sensitizes the calcium-sensing receptor) suppress hormone secretion.",
+   "say": "Therapeutic protocols in metabolic bone disease maintain normal calcium and phosphate levels while preventing severe parathyroid hyperplasia. Directing CKD-MBD management combines dietary phosphate restriction with non-calcium phosphate binders like sevelamer to prevent vascular calcification. When parathyroid hormone remains high, calcitriol or calcimimetics such as cinacalcet suppress hormone secretion effectively.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Monitor Serum Calcium, Phosphate, and intact PTH"
+     },
+     {
+      "id": "binders",
+      "label": "Dietary Phosphate Restriction + Non-Calcium Binders (Sevelamer)"
+     },
+     {
+      "id": "suppress",
+      "label": "Add Calcitriol / Paricalcitol or Calcimimetic (Cinacalcet) for high PTH"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "binders"
+     ],
+     [
+      "binders",
+      "suppress"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
