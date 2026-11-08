@@ -1,0 +1,205 @@
+{
+  "gen": "AI",
+  "id": "prd-pyloric-stenosis-intussusception-rad",
+  "module": "Neonatal GI Obstruction and Volvulus",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Hypertrophic Pyloric Stenosis and Intussusception Imaging",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Ultrasound settles pyloric stenosis with two numbers that are easy to remember together as pi. The muscle wall measures at least three millimetres thick and the channel at least fourteen to fifteen millimetres long, three point one four, and the fluid filled stomach should never empty through it during the scan.",
+      "tx": "Apply the **pyloric ultrasound 3-14 criteria** for hypertrophic pyloric stenosis. Diagnostic measurements are pyloric muscle wall thickness of at least 3.0 mm in the transverse plane and pyloric channel length of at least 14-15 mm, remembered as pi = 3.14. Numbers alone are not enough: watch in real time to confirm gastric contents never traverse the channel. Borderline measurements need a repeat scan after a feed rather than a forced diagnosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Measurement",
+          "Positive threshold"
+        ],
+        "rows": [
+          [
+            "Muscle wall thickness",
+            "At least 3.0 mm"
+          ],
+          [
+            "Channel length",
+            "At least 14-15 mm"
+          ],
+          [
+            "Dynamic sign",
+            "No gastric emptying seen"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "On the longitudinal view the swollen pylorus pokes into the fluid filled antrum and looks uncannily like a cervix. Naming that cervix sign, also called the doughnut on cross section, helps the whole team picture exactly what the scan has found.",
+      "tx": "Describe the **pyloric cervix sign** when reporting hypertrophic pyloric stenosis. The elongated, thickened pylorus projecting into the fluid-filled gastric antrum mimics the uterine cervix on longitudinal ultrasound, while the transverse view gives a doughnut appearance. These pattern signs support the measurement criteria but never replace them. The report should state muscle thickness, channel length and whether any gastric content passed during the observation period.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/paediatric-gastrointestinal-emergencies-pyloromyotomy-and-ladd-procedure-fig1.webp",
+        "alt": "Paediatric gastrointestinal emergency imaging including pyloric stenosis assessment.",
+        "caption": "Pyloric assessment: measurements plus dynamic emptying. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Fluoroscopy is now a backup test, but its signs remain examination favourites. Contrast trickles through the stretched canal as a thin string, splits into parallel double tracks, and the hypertrophied muscle indents the antrum as a shoulder, three signs that all describe the same narrowed outlet.",
+      "tx": "Know the **fluoroscopic signs of hypertrophic pyloric stenosis (HPS)** for when ultrasound is unavailable. Barium upper gastrointestinal study demonstrates the string sign of the elongated narrow pyloric canal, the double-track sign of parallel mucosal streaks, and the shoulder sign of muscle bulging into the antrum. Fluoroscopy involves radiation and aspiration risk in a vomiting baby, so it is reserved for equivocal ultrasound or an alternative diagnosis such as malrotation (Fluoroscopic signs of HPS).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Vomiting infant, equivocal ultrasound"
+          },
+          {
+            "id": "b",
+            "label": "String and double-track signs"
+          },
+          {
+            "id": "c",
+            "label": "Shoulder sign in antrum"
+          },
+          {
+            "id": "d",
+            "label": "HPS confirmed on fluoroscopy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Intussusception announces itself on a transverse scan as a target of concentric rings. The telescoped bowel measures three to five centimetres across, with alternating bright mucosa and darker oedematous muscle wall, and finding that target in a colicky infant moves you straight to the reduction pathway.",
+      "tx": "Recognise the **intussusception target sign** on transverse abdominal ultrasound. The intussusceptum telescoping into the receiving bowel creates a multilayered concentric target or doughnut sign measuring 3-5 cm in diameter, with alternating echogenic mucosa and hypoechoic edematous muscle walls. Colour Doppler assessment of trapped bowel and a search for free fluid accompany the diagnosis, because absent flow raises concern for ischaemia and lowers the chance of successful enema reduction.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intussusception-fig1.webp",
+        "alt": "Ultrasound target sign of intussusception in a child.",
+        "caption": "Intussusception: transverse target or doughnut sign. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Turn the probe ninety degrees and the same telescoped segment draws a completely different picture. Lengthwise, the layered bowel resembles a kidney without a sinus, the pseudokidney or sandwich sign, and scanning the whole colon in both planes confirms how far the intussusception has travelled.",
+      "tx": "Use the **pseudokidney sign on longitudinal ultrasound** to confirm and map intussusception. Longitudinal views of the intussusceptum telescoping into the intussuscipiens create the pseudokidney or sandwich sign, layered bowel resembling a kidney outline. Trace the lesion along the colon to state its position precisely, since a lesion that has reached the left colon or contains trapped fluid between layers carries a lower reduction success rate and higher ischaemia risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transverse view",
+          "points": [
+            "Concentric target or doughnut",
+            "Diameter 3-5 cm",
+            "Doppler for trapped bowel flow"
+          ]
+        },
+        "right": {
+          "title": "Longitudinal view",
+          "points": [
+            "Pseudokidney or sandwich sign",
+            "Trace lesion along colon",
+            "State position for reduction team"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Most childhood intussusceptions are reduced with air rather than surgery. The pneumatic technique caps pressure at one hundred and twenty millimetres of mercury, and success is only declared when air refluxes freely back into several loops of small bowel, proving the telescope has fully unwound.",
+      "tx": "Follow **air enema pneumatic reduction criteria** for image guided reduction. Pneumatic reduction uses a maximum safe pressure of 120 mmHg in infants, with steady pressure and rest intervals between attempts. Success is confirmed only by free reflux of air into multiple small bowel loops. Pressure, number of attempts and total time are documented, and the surgical team stays aware throughout in case perforation or failed reduction forces an operation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Reduction parameter",
+          "Safe practice"
+        ],
+        "rows": [
+          [
+            "Maximum pressure",
+            "120 mmHg in infants"
+          ],
+          [
+            "Success sign",
+            "Air reflux into small bowel"
+          ],
+          [
+            "Stop and escalate",
+            "Peritonism or perforation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "One film must always come before the enema, because reducing an intussusception in a perforated abdomen spreads contamination. The plain radiograph excludes free intraperitoneal air, shown by the Rigler double wall sign or a visible falciform ligament, and any peritonitis stops the procedure outright.",
+      "tx": "Exclude perforation under the **enema contraindication pneumoperitoneum** rule. A plain radiograph prior to reduction must exclude free intraperitoneal air, suggested by the Rigler sign of both bowel wall surfaces visible and the falciform ligament sign, together with clinical signs of peritonitis. Either finding is an absolute stop: the child goes to theatre for surgery instead. Shock and severe dehydration must also be corrected before any reduction attempt.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Plain film before any enema"
+          },
+          {
+            "id": "b",
+            "label": "No free air, no peritonitis"
+          },
+          {
+            "id": "c",
+            "label": "Proceed to air reduction"
+          },
+          {
+            "id": "d",
+            "label": "Free air present: theatre instead"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Most intussusceptions in the classic age group have no cause, but ultrasound should still hunt for the exception. A Meckel diverticulum, duplication cyst or lymphoma sitting at the head of the telescope acts as a lead point, predicts failed air reduction, and usually means the child needs surgery.",
+      "tx": "Search for a **pathological lead point by ultrasound** in every intussusception. Ultrasound identifies lead points such as Meckel diverticulum, duplication cyst, inverted appendiceal stump and lymphoma as focal cystic or solid masses within the intussusception head. Lead points are commoner outside the classic three month to three year window and in recurrent episodes. Their presence predicts failed pneumatic reduction and directs the child toward operative management (Lead point detection by ultrasound).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Idiopathic (usual)",
+          "points": [
+            "Classic infant age group",
+            "No lead point on scan",
+            "Air reduction first line"
+          ]
+        },
+        "right": {
+          "title": "Lead point present",
+          "points": [
+            "Meckel, cyst or lymphoma at head",
+            "Recurrence or atypical age",
+            "Surgery usually required"
+          ]
+        }
+      }
+    }
+  ]
+}

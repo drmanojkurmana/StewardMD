@@ -6,13 +6,13 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Enterobacteriaceae** ferment glucose as oxidase negative Gram negative bacilli, and **MacConkey agar** sorts them: **lactose fermenters** (E. coli, Klebsiella) blush pink while non fermenters (Salmonella, Shigella, Proteus) stay pale. **E. coli** (indole positive, motile) causes most community **UTI** via P fimbriae ascending in women; uncomplicated cystitis gets **nitrofurantoin or fosfomycin** (no pyelonephritis cover) while pyelonephritis needs fluoroquinolones or ceftriaxone. Klebsiella (nonmotile, urease negative, mucoid) strikes alcoholics and diabetics.",
-   "say": "Pink on MacConkey is lactose fermenter. E. coli UTI cystitis gets nitrofurantoin, kidney needs more.",
+   "tx": "**Enterobacteriaceae** are oxidase negative Gram negative rods that ferment glucose, and **MacConkey agar** separates **lactose fermenters** such as E. coli and Klebsiella, which grow pink, from pale non fermenters such as Salmonella, Shigella and Proteus. **E. coli** ascends by P fimbriae to cause most community urinary infection in women. Uncomplicated cystitis responds to nitrofurantoin or fosfomycin, while kidney infection needs fluoroquinolone or ceftriaxone therapy.",
+   "say": "Members of this family are oxidase negative rods that ferment glucose for energy. Lactose fermenters turn pink on MacConkey agar, which helps identification in the laboratory. Ascending Escherichia coli infection is the commonest cause of community urinary infection in women. Simple bladder infection is treated with nitrofurantoin, while kidney involvement requires stronger systemic therapy.",
    "vis": null
   },
   {
-   "tx": "**E. coli diarrhoeas** each carry a signature: **ETEC** (traveller's watery diarrhoea, LT and ST enterotoxins), **EPEC** (infantile watery diarrhoea, attaching effacing pedestals), **EIEC** (dysentery like Shigella, invades M cells), **EHEC O157:H7** (undercooked beef, haemorrhagic colitis with Shiga toxin, **haemolytic uraemic syndrome**; sorbitol non fermenter on SMAC, and antibiotics withheld as lysis worsens toxin release), and **EAEC** (stacked brick persistence in children and travellers). Hydration leads; antibiotics only for traveller's (azithromycin) and shiga excluded cases.",
-   "say": "Bloody beef diarrhoea with falling platelets is O157: hydrate, never antibiotics. Traveller's watery is ETEC.",
+   "tx": "Five **E. coli** gut pathotypes explain traveller and childhood diarrhoea. **ETEC** releases LT and ST enterotoxins that cause watery traveller diarrhoea, while EPEC effaces infant brush borders into pedestals and EIEC invades M cells to mimic Shigella dysentery. **EHEC** O157 from undercooked beef releases Shiga toxin with haemorrhagic colitis and **haemolytic uraemic syndrome**, so antibiotics are withheld and fluids lead. EAEC stacks like bricks and persists in children.",
+   "say": "Watery diarrhoea in travellers is usually caused by toxin producing ETEC strains. Infantile disease with effaced brush borders is characteristic of EPEC infection. Beef related bloody colitis with falling platelets is likely EHEC and requires urgent hydration. Antibiotics are withheld in Shiga toxin infection because lysis can worsen toxin release.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/mic-enterobacteriaceae-fig1.webp",
@@ -22,8 +22,8 @@
    }
   },
   {
-   "tx": "**Klebsiella pneumoniae** (currant jelly sputum, bulging fissures, cavitation in alcoholics) and **Proteus mirabilis** (**swarming** waves, **urease** splitting urea into ammonia, **struvite staghorn stones** with alkaline urine, Dienes lines where strains meet) round out urinary and lung patterns. **Shigella** (nonmotile, no H2S, tiny infective dose of 10 organisms, M cell invasion with bloody mucoid stools and tenesmus) is treated with ceftriaxone or azithromycin; S. dysenteriae type 1 makes Shiga toxin with HUS risk. Motility with H2S instead suggests Salmonella.",
-   "say": "Swarming urease positive urine is Proteus: staghorn stones follow. Ten organisms suffice for Shigella dysentery.",
+   "tx": "**Klebsiella pneumoniae** causes currant jelly sputum with bulging fissures and cavitation, favouring drinkers and diabetics, while its mucoid capsule resists phagocytosis. **Proteus mirabilis** shows bulls eye **swarming** waves and splits urea through **urease** into ammonia, alkalinising urine into struvite staghorn stones with Dienes lines between strains. Shigella needs only ten organisms to invade M cells and cause bloody mucoid dysentery with tenesmus.",
+   "say": "Currant jelly sputum with a bulging fissure is typical of Klebsiella pneumonia in debilitated patients. Swarming growth with a positive urease test is characteristic of Proteus urinary infection. Alkaline urine from split urea allows struvite stones to form in the renal pelvis. As few as ten Shigella organisms are enough to cause bloody dysentery.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -56,8 +56,19 @@
    }
   },
   {
-   "tx": "**Resistance** travels on plasmids: **ESBLs** (TEM, SHV and CTX-M hydrolysing penicillins and cephalosporins, clavulanate sensitive, screened by ceftazidime or cefotaxime resistance) versus **AmpC** (chromosomal in Enterobacter and Citrobacter, clavulanate resistant, needing cefepime or carbapenem) versus **carbapenemases** (KPC serine, NDM and VIM metallo needing aztreonam plus avibactam or colistin combinations). Uncomplicated ESBL cystitis keeps **fosfomycin or nitrofurantoin**; pyelonephritis and bacteraemia need **carbapenems** with source control and de-escalation.",
-   "say": "ESBL bladder keeps fosfomycin; kidney and blood need carbapenems. AmpC shrugs at clavulanate.",
+   "tx": "**Proteus mirabilis** spreads in bulls eye **swarming** rings on the plate while its **urease** tube turns bright pink and split urea hardens into **struvite** stones. Beside it the mucoid pink lactose fermenting Klebsiella plate pairs with a pot of currant jelly sputum and a chest film showing a bulging fissure. The picture links bench clues with bedside disease, which is exactly how examiners test these organisms.",
+   "say": "The left panel is dominated by concentric swarming rings that identify Proteus on the plate. A bright pink urease tube is shown beside fragments that represent struvite stones. The right panel is centred on mucoid pink colonies that indicate Klebsiella pneumonia. The clinical picture is completed by a sputum pot and a chest film with a bulging fissure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/mic-enterobacteriaceae-gen1.webp",
+    "alt": "Proteus swarming plate with urease tube and Klebsiella culture with chest film",
+    "caption": "Proteus swarming and urease versus Klebsiella pneumonia features Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Plasmid **ESBLs** such as TEM, SHV and CTX-M hydrolyse penicillins and cephalosporins yet remain clavulanate sensitive, so simple cystitis still answers to fosfomycin or nitrofurantoin. Chromosomal **AmpC** in Enterobacter and Citrobacter resists clavulanate and needs cefepime or a carbapenem. Serine KPC and metallo NDM or VIM **carbapenemases** threaten last line therapy and demand combination regimens with source control and prompt de-escalation.",
+   "say": "Enzymes that hydrolyse penicillins are concerning when they spread on plasmids between bacteria. Simple bladder infection with ESBL producers is still treated with fosfomycin in selected patients. Organisms that produce AmpC enzymes are resistant to clavulanate combinations in practice. Carbapenemase producers will require combination therapy with strict source control.",
    "vis": null
   }
  ],

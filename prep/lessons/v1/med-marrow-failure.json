@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-marrow-failure",
- "subject": "medicine",
- "title": "Aplastic anaemia and marrow failure",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**pancytopenia** fatigue infections bruises bleed, **drugs** chloramphenicol carbamazepine gold, **chemicals** benzene pesticides dyes, **hepatitis** seronegative preceding months, **Fanconi** short thumbs café hyperpigment, **PNH** dark urine thrombosis, **telomere** nails lungs liver family) with **viva** (**aplastic** pancytopenic infected, **Fanconi** short-thumbed pigmented) profiles; **exposures** (drugs chemicals timelines) dates. Marrows empty.",
-   "say": "Pancytopenias drugs chemicals hepatitides is history: Fanconis short PNHs darken telomeres grey exposures date aplastics bleed Fanconis break chromosomes snap counts fall. Bloods vanish.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**pallor** pancytopenic purpuric, **infections** mouth ulcers perianal, **bleed** gums epistaxis menorrhagia, **Fanconi** short stature microcephaly, **nails** dyskeratosis leukoplakia, **spleen** absent aplastic clues, **lymph** no nodes leukaemia) with **bedside** (**counts** pancytopenia retics flat, **smear** no blasts dysplasia, **cultures** febrile neutropenia) counts; **isolation** (reverse barrier rooms) guards. Defences fall.",
-   "say": "Pallors infections bleeds Fanconis is exam: nails stripe spleens hide lymphs spare counts plunge smears clear cultures grow isolations shield transfuses match rooms guard. Bodies bleed.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**trephine** hypocellular fat proves, **PNH** flow clone screens, **cytogenetics** Fanconi breaks DEB, **telomeres** short dyskeratosis, **B12** folate copper mimics, **viral** hepatitis parvovirus HIV) with **differentials** (**aplastic** empty trephine, **MDS** dysplastic blasts, **leukaemia** blasts nodes, **hypersplenism** spleen counts) sorts; **transplant** (sibling donor decides) meets. Factories close.",
-   "say": "Trephines PNHs cytogenetics telomeres is Ix: B12s mimic virals trigger aplastics empty MDSs dysplase leukaemias blast hypersplenisms pool transplants meet donors match serums type. Marrows fade.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-marrow-failure-fig1.webp",
-    "alt": "Three bone marrow biopsy photomicrographs comparing aplastic anaemia (hypocellular, fatty), myelodysplastic syndrome (dysplastic cells), and acute leukaemia (blast infiltration).",
-    "caption": "Marrow biopsies differentiate aplastic anaemia (hypocellular fat) from MDS and leukaemia",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**ATG** ciclosporin eltrombopag grows, **transplant** young sibling cures, **support** irradiated platelets granulocytes, **isolate** neutropenic sepsis treats, **Fanconi** androgens transplant counsel, **PNH** eculizumab watches) with **traps** (**transfuse** alloimmunises delays, **G-CSF** long MDS risks, **pregnancy** counts guards) closes; **follow** (counts clone MDS) tracks. Marrows regrow.",
-   "say": "ATGs transplants supports isolates is Rx: Fanconis counsel PNHs watch transfuses sensitise G-CSFs risk pregnancies guard follows track counts rise wishes respect. Factories restart.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-601",
-  "bk2-med-602",
-  "bk2-med-603",
-  "bk2-med-604",
-  "bk2-med-605",
-  "bk2-med-606",
-  "bk2-med-607",
-  "bk2-med-608",
-  "bk2-med-609",
-  "bk2-med-610"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon7",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-marrow-failure",
+  "quiz": [
+    "bk2-med-601",
+    "bk2-med-602",
+    "bk2-med-603",
+    "bk2-med-604",
+    "bk2-med-605",
+    "bk2-med-606",
+    "bk2-med-607",
+    "bk2-med-608",
+    "bk2-med-609",
+    "bk2-med-610"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon7",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about fatigue with infections and bruising or bleeding, because this triad suggests pancytopenia. Date every drug with chloramphenicol, carbamazepine and gold, and record benzene, pesticide and dye exposure, since timing is everything. Ask about hepatitis in the preceding months, short thumbs with cafe pigmentation, dark urine with thrombosis, and nail, lung and liver clues. Record timelines and family history, as both are vital.",
+      "tx": "Ask about fatigue with infections and bruising or bleeding of **pancytopenia**, and date every drug with chloramphenicol, carbamazepine and gold. Ask about benzene, pesticide and dye exposure, hepatitis in the preceding months, short thumbs with cafe pigmentation of **Fanconi anaemia**, dark urine with thrombosis of PNH, and nail, lung and liver clues of **telomere disease**. Record timelines and family history.",
+      "vis": null
+    },
+    {
+      "say": "Read pallor with purpura, and inspect the mouth and perianal skin for ulcers of febrile neutropenia. Ask about gum bleeding, epistaxis and menorrhagia, and look for short stature with microcephaly of Fanconi anaemia. Inspect nails for dyskeratosis with leukoplakia, note the absent spleen of aplasia, confirm no nodes, and nurse in reverse barrier isolation.",
+      "tx": "Read pallor with purpura, and inspect the mouth and perianal skin for ulcers of **febrile neutropenia**. Ask about gum bleeding, epistaxis and menorrhagia, and look for short stature with microcephaly of **Fanconi anaemia**. Inspect nails for dyskeratosis with leukoplakia, note the absent spleen of aplasia, confirm no nodes, and nurse in **reverse barrier** isolation.",
+      "vis": null
+    },
+    {
+      "say": "Look at panel A and notice the short thumb with dystrophic ridged nails, then look at panel B with its white leukoplakia patch on the tongue. These flags point toward inherited marrow failure from Fanconi anaemia or dyskeratosis congenita, not acquired aplasia. For the exam, link thumb and nail defects with chromosome fragility and leukoplakia with cancer surveillance.",
+      "tx": "Panel A shows a **short thumb** with dystrophic ridged nails, and panel B shows a white **leukoplakia patch** on the tongue. These flags point toward inherited marrow failure from Fanconi anaemia or **dyskeratosis congenita**, not acquired aplasia. For the exam, link thumb and nail defects with chromosome fragility, leukoplakia with cancer surveillance, and both with transplant counselling.",
+      "vis": {
+        "alt": "Hand with short thumb and dystrophic nails beside tongue with white leukoplakia patch",
+        "ar": 1.3393,
+        "caption": "Clinical photos showing thumb nail and tongue mucosal abnormalities. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-marrow-failure-gen1.webp"
+      }
+    },
+    {
+      "say": "Prove aplasia with a trephine biopsy showing hypocellular fat, and screen for a PNH clone by flow cytometry. Test chromosome fragility for Fanconi anaemia, measure telomeres for dyskeratosis congenita, and exclude B12, folate and copper mimics with viral screens. Separate aplastic anaemia from MDS, leukaemia and hypersplenism, and find a sibling donor early.",
+      "tx": "Prove aplasia with a **trephine biopsy** showing hypocellular fat, and screen for a PNH clone by flow cytometry. Test chromosome fragility for Fanconi anaemia, measure telomeres for **dyskeratosis congenita**, and exclude B12, folate and copper mimics with viral screens for hepatitis, parvovirus and HIV. Separate aplastic anaemia from MDS, leukaemia and **hypersplenism**, and find a sibling donor early.",
+      "vis": {
+        "alt": "Three bone marrow biopsy photomicrographs comparing aplastic anaemia (hypocellular, fatty), myelodysplastic syndrome (dysplastic cells), and acute leukaemia (blast infiltration).",
+        "ar": 1.8349,
+        "caption": "Marrow biopsies differentiate aplastic anaemia (hypocellular fat) from MDS and leukaemia",
+        "kind": "image",
+        "src": "v1/lessons/media/med-marrow-failure-fig1.webp"
+      }
+    },
+    {
+      "say": "Offer sibling transplant to the young fit patient for cure, and grow counts with ATG, ciclosporin and eltrombopag otherwise. Support with irradiated platelets, treat neutropenic sepsis in isolation, counsel Fanconi families toward transplant, and watch PNH for clonal evolution. Avoid needless transfusion that sensitises, use G-CSF with care, shield pregnancy counts, and track MDS surveillance.",
+      "tx": "Offer **sibling transplant** to the young fit patient for cure, and grow counts with ATG, ciclosporin and eltrombopag otherwise. Support with irradiated platelets, treat neutropenic sepsis in isolation, counsel Fanconi families toward transplant, and watch PNH for **clonal evolution**. Avoid needless transfusion that sensitises, use G-CSF with care, shield pregnancy counts, and track counts with **MDS surveillance**.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Aplastic anaemia and marrow failure",
+  "v": 1
 }

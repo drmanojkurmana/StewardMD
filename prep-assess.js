@@ -153,6 +153,28 @@
     return it.o.filter(function (o) { return COMBO.test(String(o)); }).length >= 3;
   }
   function hasImage(it) { return !!(it && ((it.img && it.img.length) || it.stack)); }
+  /* needsImage(it): the stem reads a picture the item does not carry ("The radiograph of skull is suggestive of which",
+     "ECG shown below", "instrument marked A"); such an item can never be answered (owner 2026-11-08). Tuned on all
+     182,822 MedMCQA stems: text-described findings ("Bat wing appearance on chest X-ray is seen in") stay. */
+  var IMG_N = "(?:radiographs?|x-?rays?|cxr|skiagrams?|ct(?: scans?)?|mri|ecg|ekg|photographs?|photo|pictures?|images?|figures?|diagrams?|slides?|smears?|specimens?|films?|fundus|usg|ultrasound|sonograms?|histopathology|microphotographs?|photomicrographs?|instruments?|graphs?|charts?|tracings?|angiograms?|mammograms?|ivp|hsg|mcu|barium (?:swallow|meal|enema))";
+  var IMG_RE = [
+    new RegExp("\\b(?:this|these|the (?:given(?: below| above)?|above|below|accompanying|attached|adjacent|displayed|shown|provided))\\s+(?:[a-z-]+\\s+){0,2}" + IMG_N + "\\b", "i"),
+    new RegExp("\\b" + IMG_N + "\\s+(?:shown|provided|displayed|depicted|given (?:below|above|here))\\b", "i"),
+    new RegExp("(?:^|[.?!]\\s+)(?:the|a|an|his|her|their)?\\s*(?:(?!in |on |of |by |at |with |for )[a-z-]+\\s+){0,3}" + IMG_N + "\\b[^.?]{0,50}?\\b(?:is suggestive of|suggests|shows?|showing|depicts|demonstrates|reveals|indicates|is (?:characteristic|diagnostic|typical|consistent) (?:of|with)|is most likely|is likely)\\s*(?:which|what|the following(?! (?:changes|features|findings|signs))|[:?])", "i"),
+    /\b(?:is|are|was|were) (?:shown|depicted|displayed)(?: below| above| here| alongside)?\s*(?:[.:?;,]|$)/i,
+    /\bas shown\b|\b(?:shown|depicted|displayed) (?:below|above|here|alongside|in (?:the )?(?:figure|image|picture|plate))\b|\bin (?:the )?plate\b/i,
+    /\bidentify (?:the|this) (?:instrument|structure|bone|specimen|lesion|device|tool|organ|pattern|appearance|sign)\b/i,
+    /\b(?:shown|marked|indicated|pointed|labell?ed)(?: out)? (?:by|with) (?:an? |the )?(?:[a-z]+ )?arrows?\b|\barrow (?:head )?(?:points?|marks?|shows?)\b/i,
+    /\b(?:marked|labell?ed)(?: as)? ['"(]?[A-Z]['")]?(?=[\s,.?]|$)|\blettered structure\b/,
+    /\bthe given (?:below |above )?(?:condition|lesion|rash|appearance|finding|sign|structure|procedure|technique|maneuver|manoeuvre)\b/i
+  ];
+  var IMG_GIVEN = /\b(?:is|are) (?:given|provided)\s*[.:]/i, IMG_NOUN = new RegExp("\\b" + IMG_N + "\\b", "i");
+  function needsImage(it) {
+    if (!it || hasImage(it) || (it.x && it.x.img)) return false;
+    var q = String(it.q == null ? "" : it.q);
+    for (var i = 0; i < IMG_RE.length; i++) if (IMG_RE[i].test(q)) return true;
+    return IMG_GIVEN.test(q) && IMG_NOUN.test(q);
+  }
   // Clinical vignette: the same rule the bank build tags USMLE items with (tools/prep-build-bank.mjs isVignette,
   // plan 5.1): age-led or "presents / is brought / complains", at least 25 words. A USMLE-tagged item counts on any
   // exam; the pattern covers untagged bank and overlay items so case tests work beyond USMLE subjects.
@@ -565,7 +587,7 @@
 
   var API = { RANK_MIN_N: RANK_MIN_N, CLOCK_BACK_MS: CLOCK_BACK_MS, SAVE_EVERY_MS: SAVE_EVERY_MS, TYPES: TYPES,
     profiles: profiles, profileIds: profileIds, profile: profile, forTab: forTab, paceSec: paceSec, scheme: scheme, legacyMocks: legacyMocks, schemes: schemes, coreProfiles: coreProfiles, validateProfile: validateProfile, provOf: provOf, bankStatus: bankStatus,
-    rng: rng, hashStr: hashStr, istDate: istDate, normStem: normStem, isCombination: isCombination, hasImage: hasImage, isVignette: isVignette, itemStyle: itemStyle, levelOf: levelOf, eligible: eligible, readQuality: readQuality,
+    rng: rng, hashStr: hashStr, istDate: istDate, normStem: normStem, isCombination: isCombination, hasImage: hasImage, needsImage: needsImage, isVignette: isVignette, itemStyle: itemStyle, levelOf: levelOf, eligible: eligible, readQuality: readQuality,
     blueprint: blueprint, apportion: apportion, assemble: assemble, targetLevel: targetLevel,
     scNew: scNew, scLeft: scLeft, scStart: scStart, scCharge: scCharge, scResume: scResume, scClose: scClose,
     score: score, result: result, nextActions: nextActions, ownTrend: ownTrend, rankShown: rankShown, streaks: streaks, summary: summary, SUMMARY_MAX_BYTES: SUMMARY_MAX_BYTES,

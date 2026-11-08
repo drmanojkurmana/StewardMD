@@ -1,95 +1,104 @@
 {
- "v": 1,
- "module": "oph-vitreous",
- "subject": "ophthalmology",
- "title": "Diseases of the vitreous",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Posterior vitreous detachment** (PVD) liquefies gel with age or myopia, flashing with floaters as cortex peels from retina; Weiss ring (peripapillary glial annulus) confirms complete separation. Uncomplicated PVD reassures with retinal check, but **Shafer sign** (tobacco dust pigment over inferior vitreous) warns of retinal tear needing urgent barrage laser. Myopes, post cataract and traumatised eyes detach earlier; fellow eye screening follows tears. Vitreous syneresis precedes detachment by years asymptomatically.",
-   "say": "Flashes plus new shower of floaters needs same day retinal check. Tobacco dust inside means tear until lasered.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/oph-vitreous-fig1.webp",
-    "alt": "Diagram showing stages of posterior vitreous detachment (PVD), from normal to complete PVD with Weiss ring, and a complicated PVD with retinal tear and Shafer sign.",
-    "caption": "Posterior vitreous detachment (PVD) progression with Weiss ring and Shafer sign",
-    "ar": 1.8349
-   }
+  "checks": {
+    "dashes": true,
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Vitreous haemorrhage** blinds suddenly with floaters or red haze: proliferative diabetic retinopathy (commonest), retinal tear with vessel rupture, vein occlusion, trauma, sickle cell sea fans and subarachnoid (Terson syndrome) patterns. B scan grades when no view (detachment versus blood alone); spontaneous clearing watched in diabetics with laser once visible, while dense non clearing blood, detachment or ghost cell pressure needs pars plana vitrectomy. Sickle cell disease needs exchange caution (sickling with acidosis) and sea fan laser.",
-   "say": "Sudden red curtain with no view: scan it. Diabetic blood often clears; tear related blood operates.",
-   "vis": null
-  },
-  {
-   "tx": "Degenerative inclusions: **asteroid hyalosis** (calcium phosphate balls, unilateral elderly diabetics, moves with vitreous, vision spared) versus **synchysis scintillans** (cholesterol crystals settling inferiorly like gold snow, hypermobile). Amyloid and lymphoma infiltrate vitreous (vitritis with subretinal infiltrates, CNS linkage needing biopsy with IL-10 workup). Persistent hyperplastic primary vitreous (leukocoria with microphthalmos and elongated ciliary processes, unilateral) differs from retinoblastoma by small eye without calcification. Vitreous touch in cataract surgery invites oedema and detachment.",
-   "say": "Sparkling balls sparing vision in elderly diabetic is asteroid. Small eye with white pupil is PHPV, not tumour.",
-   "vis": null
-  },
-  {
-   "tx": "**Pars plana vitrectomy** clears blood, peels membranes, repairs detachments and samples vitritis: small gauge transconjunctival ports with tamponade (gas needing posturing and altitude warnings, or silicone oil needing later removal). Endophthalmitis needs emergent vitrectomy with intravitreal antibiotics (see uveitis wave). Gas expansion with nitrous anaesthesia or flights blinds; face down posturing closes macular holes. Proliferative vitreoretinopathy (membranes redetaching retina) grades surgical prognosis.",
-   "say": "Gas in eye means no flying and posture face down. Redetaching membranes grade prognosis.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Floaters",
-     "Disease",
-     "Action"
-    ],
-    "rows": [
-     [
-      "Weiss ring alone",
-      "Uncomplicated PVD",
-      "Retinal check, reassure"
-     ],
-     [
-      "Tobacco dust",
-      "Retinal tear",
-      "Urgent laser"
-     ],
-     [
-      "Red haze no view",
-      "Vitreous haemorrhage",
-      "Scan, watch or vitrectomy"
-     ],
-     [
-      "Gold shower settling",
-      "Synchysis scintillans",
-      "Observe"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "bk2-oph-111",
-  "bk2-oph-112",
-  "bk2-oph-113",
-  "bk2-oph-114",
-  "bk2-oph-115",
-  "bk2-oph-116",
-  "bk2-oph-117",
-  "bk2-oph-118",
-  "bk2-oph-119",
-  "bk2-oph-120"
- ],
- "src": [],
- "refs": [
-  "Parsons' Diseases of the Eye 23rd Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "hand",
- "run": "books2-oph2",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "hand",
+  "minutes": 6,
+  "module": "oph-vitreous",
+  "quiz": [
+    "bk2-oph-111",
+    "bk2-oph-112",
+    "bk2-oph-113",
+    "bk2-oph-114",
+    "bk2-oph-115",
+    "bk2-oph-116",
+    "bk2-oph-117",
+    "bk2-oph-118",
+    "bk2-oph-119",
+    "bk2-oph-120"
+  ],
+  "refs": [
+    "Parsons' Diseases of the Eye 23rd Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-oph2",
+  "src": [],
+  "steps": [
+    {
+      "say": "Flashes with a sudden shower of floaters mean the vitreous may have separated from the retina, so the patient needs same day retinal examination. A Weiss ring confirms a complete separation, which is reassuring when the retina looks intact. Pigment like tobacco dust in the vitreous warns of a tear, so urgent laser and review of the other eye follow.",
+      "tx": "**Posterior vitreous detachment** occurs when the vitreous gel liquefies with age or myopia and the cortex separates from the retina, causing flashes and a shower of new floaters. A complete separation forms a **Weiss ring**, a peripapillary glial ring that confirms the cortex has released. **Shafer sign**, pigment over the inferior vitreous, warns of a retinal tear that needs urgent barrage laser and fellow eye review.",
+      "vis": {
+        "alt": "Diagram showing stages of posterior vitreous detachment (PVD), from normal to complete PVD with Weiss ring, and a complicated PVD with retinal tear and Shafer sign.",
+        "ar": 1.8349,
+        "caption": "Posterior vitreous detachment (PVD) progression with Weiss ring and Shafer sign",
+        "kind": "image",
+        "src": "v1/lessons/media/oph-vitreous-fig1.webp"
+      }
+    },
+    {
+      "say": "Sudden painless red haze with no view of the retina suggests bleeding into the vitreous, often from proliferative diabetic disease or a torn vessel. Ultrasound of the eye separates blood alone from retinal detachment when the examiner cannot see inside. Light diabetic blood is often watched until laser becomes possible, while dense blood that persists, detachment, or raised pressure needs vitrectomy.",
+      "tx": "**Vitreous haemorrhage** causes sudden painless loss of vision with floaters or a red haze, most often from **proliferative diabetic retinopathy**, and also from retinal tear with vessel rupture, vein occlusion, trauma, sickle cell sea fans, or subarachnoid bleeding with Terson pattern. When no view is possible, a **B scan** separates blood alone from retinal detachment. Light diabetic bleeding is watched until laser is possible, while dense persistent blood, detachment, or raised pressure needs vitrectomy.",
+      "vis": null
+    },
+    {
+      "say": "This photograph shows dense blood over the disc and macula with layered preretinal blood and scattered blot haemorrhages around it. The inset ultrasound panel shows echoes of blood inside the globe when the examiner cannot see the retina. Blood alone can be watched for clearing before laser, while detachment or dense blood that persists moves toward vitrectomy.",
+      "tx": "This fundus photograph shows dense **vitreous haemorrhage** over the disc and macula with layered preretinal blood and scattered blot haemorrhages in diabetic disease. The inset **B scan** shows echogenic blood within the globe when the view is lost, the bedside test that separates blood alone from **retinal detachment**. Recognising this pattern matters because blood alone can be watched for clearing before laser, while detachment or dense non clearing blood moves toward vitrectomy.",
+      "vis": {
+        "alt": "Fundus photo with dense preretinal and vitreous blood plus inset B scan ultrasound.",
+        "ar": 1.3393,
+        "caption": "Fundus showing vitreous hemorrhage with B scan inset Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/oph-vitreous-gen1.webp"
+      }
+    },
+    {
+      "say": "Small sparkling balls that move with the vitreous but spare vision suggest asteroid hyalosis in an older diabetic patient. Golden crystals that settle downward and shift with movement suggest synchysis scintillans, which is usually observed. A white pupil in a small eye with elongated processes points toward persistent hyperplastic primary vitreous, while calcification in a normal sized eye suggests retinoblastoma.",
+      "tx": "Degenerative deposits include **asteroid hyalosis**, calcium phosphate balls in older diabetic eyes that move with the vitreous and spare vision, and **synchysis scintillans**, cholesterol crystals that settle inferiorly like golden snow and shift with eye movement. Amyloid and lymphoma can infiltrate the vitreous and need biopsy with systemic review. **Persistent hyperplastic primary vitreous** gives leukocoria with a small eye and elongated ciliary processes, unlike retinoblastoma which shows calcification in a normal sized eye.",
+      "vis": null
+    },
+    {
+      "say": "Vitrectomy through small ports clears blood, peels membranes, repairs detachment, and samples inflammation inside the eye. Gas tamponade needs face down posturing and strict avoidance of flights or nitrous anaesthesia, while oil needs later removal. Suspected infection inside the eye needs emergency surgery with antibiotics, and redetaching membranes worsen the prognosis.",
+      "tx": "**Pars plana vitrectomy** clears vitreous blood, peels membranes, repairs retinal detachment, and samples vitritis through small gauge transconjunctival ports. **Tamponade** with expanding gas needs face down posturing and altitude warnings, while silicone oil needs later removal. Suspected endophthalmitis needs emergent vitrectomy with intravitreal antibiotics. Gas expands with nitrous anaesthesia or flights and can blind, and **proliferative vitreoretinopathy** with redetaching membranes grades the surgical prognosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Floaters",
+          "Disease",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Weiss ring alone",
+            "Uncomplicated PVD",
+            "Retinal check, reassure"
+          ],
+          [
+            "Tobacco dust",
+            "Retinal tear",
+            "Urgent laser"
+          ],
+          [
+            "Red haze no view",
+            "Vitreous haemorrhage",
+            "Scan, watch or vitrectomy"
+          ],
+          [
+            "Gold shower settling",
+            "Synchysis scintillans",
+            "Observe"
+          ]
+        ]
+      }
+    }
+  ],
+  "subject": "ophthalmology",
+  "title": "Diseases of the vitreous",
+  "v": 1
 }

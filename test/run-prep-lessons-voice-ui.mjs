@@ -24,7 +24,7 @@ const FAKE = (o) => `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"
   var st="none", cb=null; window.__said=[]; window.__voice={ p:function(x){cb&&cb(x)}, done:null, fail:null };
   window.__V={available:function(){return true},state:function(){return st},progress:function(){return 0},saved:function(){return ${!!o.saved}},unlock:function(){},init:function(){},
     usable:function(){return st==="ready"},stop:function(){},release:function(){},prefetch:function(){},
-    say:function(t){window.__said.push(t);return new Promise(function(r){setTimeout(r,300)})},
+    say:function(t){window.__said.push(t);if(${!!o.sayFail}&&window.__said.length===1)return Promise.reject(new Error("audio"));return new Promise(function(r){setTimeout(r,300)})},
     download:function(f){st="downloading";cb=f;return new Promise(function(r,j){window.__voice.done=function(){st="ready";r()};window.__voice.fail=function(){st="error";j(new Error("x"))}})}};
   Object.defineProperty(window,"PREP_VOICE",{configurable:true,get:function(){return window.__V},set:function(){}});`;
 async function lesson(o) {
@@ -67,6 +67,11 @@ try {
   // the natural voice fails: the phone voice reads
   pg = await lesson({}); await pg.evaluate(() => window.__voice.fail()); await sleep(600);
   ok(await pg.evaluate(() => window.__tts.length >= 1 && !document.querySelector("#smdPrep .pn-vdl")), "when the natural voice cannot load, the phone voice reads and the card goes");
+  await pg.context().close();
+  // one sentence the natural voice cannot read on the phone: the phone voice reads it and the lesson reads on
+  pg = await lesson({ saved: true, sayFail: true }); await pg.evaluate(() => window.__voice.done()); await sleep(1500);
+  const sf = await pg.evaluate(() => ({ tts: window.__tts.slice(), said: window.__said.slice(), on: window.PREP_LESSONS._l.playing }));
+  ok(sf.tts.length === 1 && sf.tts[0] === sf.said[0] && sf.said.length >= 2 && sf.on, "a sentence the natural voice fails on is read by the phone voice, then the natural voice reads on");
   await pg.context().close();
 } catch (e) { console.log("FAIL " + (e && e.stack || e)); fails++; }
 await browser.close(); serve.kill();
