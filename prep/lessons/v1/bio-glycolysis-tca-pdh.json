@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Pyruvate dehydrogenase complex",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **pyruvate dehydrogenase complex** stands at the gate between cytosolic glycolysis and mitochondrial oxidation, decarboxylating pyruvate to acetyl-CoA with NADH and carbon dioxide released. Animals cannot reverse this step, so acetyl-CoA from fat or glucose can never rebuild glucose. That single irreversibility explains why fatty acids fail as glucose precursors while glycerol and odd chain fragments succeed.",
+   "say": "The pyruvate dehydrogenase complex gates entry from glycolysis into mitochondrial oxidation, making acetyl-CoA with NADH and carbon dioxide. Animals cannot reverse this step, so acetyl-CoA can never rebuild glucose. That irreversibility explains why fatty acids fail as glucose precursors.",
+   "vis": {
+    "kind": "flow",
+    "title": "Through the gate",
+    "nodes": [
+     {"id": "pyr", "label": "Pyruvate enters mitochondria"},
+     {"id": "pdh", "label": "PDH complex decarboxylates"},
+     {"id": "aco", "label": "Acetyl-CoA to TCA or fat"}
+    ],
+    "edges": [["pyr", "pdh"], ["pdh", "aco"]]
+   }
+  },
+  {
+   "tx": "Three enzymes share the work inside one giant assembly: **E1** decarboxylates with thiamine pyrophosphate, E2 transfers the acetyl group to coenzyme A through a swinging lipoamide arm, and E3 restores the arm using FAD and NAD. Five coenzymes cooperate in sequence (thiamine, lipoic acid, coenzyme A, FAD, NAD), remembered as Tender Loving Care For Nancy.",
+   "say": "Three enzymes share the work. E1 decarboxylates with thiamine pyrophosphate, E2 transfers the acetyl group to coenzyme A through a swinging lipoamide arm, and E3 restores the arm using FAD and NAD. Five coenzymes cooperate: thiamine, lipoic acid, coenzyme A, FAD and NAD.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Subunit", "Coenzyme it uses", "Job in one line"],
+    "rows": [
+     ["E1 pyruvate dehydrogenase", "Thiamine pyrophosphate (B1)", "Removes carbon dioxide"],
+     ["E2 transacetylase", "Lipoic acid, then CoA (B5)", "Hands acetyl to CoA"],
+     ["E3 dihydrolipoyl dehydrogenase", "FAD (B2), then NAD (B3)", "Resets the arm, makes NADH"]
+    ]
+   }
+  },
+  {
+   "tx": "A dedicated kinase switches the complex off by phosphorylation when **NADH**, acetyl-CoA or ATP announce that energy is abundant. A phosphatase switches it back on when ADP, calcium or insulin request more oxidation, matching pyruvate burning to muscle contraction and feeding. Pyruvate itself restrains the kinase, so substrate arrival tends to open its own gate.",
+   "say": "A kinase switches the complex off when NADH, acetyl-CoA or ATP announce that energy is abundant. A phosphatase switches it back on when ADP, calcium or insulin request more oxidation. Pyruvate itself restrains the kinase, so substrate arrival opens its own gate.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Kinase dominates (OFF)", "points": ["NADH and acetyl-CoA high", "ATP plentiful", "E1 phosphorylated, gate shut"]},
+    "right": {"title": "Phosphatase dominates (ON)", "points": ["ADP and calcium signal work", "Insulin after meals", "E1 dephosphorylated, gate open"]
+    }
+   }
+  },
+  {
+   "tx": "Arsenite poisons the complex by gripping the sulfhydryl groups of **lipoic acid**, freezing the swinging arm mid cycle. Pyruvate and lactate then pile up while acetyl-CoA starves, producing vomiting, rice water stools, garlic scented breath and capillary leak in acute poisoning. The same chemistry disables alpha-ketoglutarate dehydrogenase, compounding energy failure in brain and gut.",
+   "say": "Arsenite grips the sulfhydryl groups of lipoic acid and freezes the swinging arm. Pyruvate and lactate pile up while acetyl-CoA starves, producing vomiting, rice water stools and garlic scented breath. The same chemistry disables alpha-ketoglutarate dehydrogenase.",
+   "vis": null
+  },
+  {
+   "tx": "Thiamine deficiency disables the same gate from the coenzyme side, which is why giving glucose first can precipitate crisis. Glycolysis accelerates, pyruvate cannot pass, lactate climbs, and vulnerable brainstem nuclei fail as **Wernicke encephalopathy** with confusion, ataxia and eye movement palsies. Thiamine before glucose, generous magnesium replacement and slow refeeding prevent this predictable iatrogenic worsening.",
+   "say": "Thiamine deficiency disables the same gate from the coenzyme side, so giving glucose first can precipitate crisis. Pyruvate cannot pass, lactate climbs, and brainstem nuclei fail as Wernicke encephalopathy. Thiamine before glucose prevents this predictable worsening.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Clue", "Points toward"],
+    "rows": [
+     ["Alcohol dependence, vomiting, poor intake", "Thiamine stores empty in weeks"],
+     ["Confusion plus ataxia plus nystagmus", "Wernicke encephalopathy, treat now"],
+     ["Lactate rises after glucose load", "PDH blocked at E1"],
+     ["Confabulation persists after treatment", "Korsakoff memory syndrome"]
+    ]
+   }
+  },
+  {
+   "tx": "Children born with a faulty complex present differently, with congenital **lactic acidosis**, hypotonia, seizures and developmental delay from the first months. Dichloroacetate can help by inhibiting the PDH kinase and holding residual enzyme in its active state, alongside a ketogenic strategy in selected cases. Distinguishing this neurology picture from pyruvate kinase haemolysis anchors the clinical lesson that follows.",
+   "say": "Children born with a faulty complex present with congenital lactic acidosis, hypotonia, seizures and developmental delay. Dichloroacetate inhibits the kinase and holds residual enzyme active. This neurology picture contrasts with the haemolysis of pyruvate kinase deficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "PDH deficiency picture", "points": ["Brain and lactate dominate", "Onset in infancy", "Acidosis without haemolysis"]},
+    "right": {"title": "Pyruvate kinase deficiency picture", "points": ["Red cells and spleen dominate", "Chronic haemolysis", "Lactate usually normal"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

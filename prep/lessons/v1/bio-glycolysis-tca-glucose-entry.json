@@ -1,0 +1,82 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Glucose entry and the hexokinase step",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Glucose enters cells through **GLUT transporters** that move it down its concentration gradient without using ATP. GLUT1 provides basal uptake in red cells and across the blood brain barrier, while GLUT3 serves neurons that need a steady supply. GLUT2 in liver and pancreatic beta cells has low affinity, so it only carries large amounts when glucose is plentiful after food.",
+   "say": "Glucose crosses the membrane through GLUT transporters that work down the gradient without ATP. GLUT1 gives basal uptake in red cells and at the blood brain barrier, and GLUT3 serves neurons. GLUT2 in liver and beta cells has low affinity, so it mainly works when glucose is plentiful after meals.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Transporter", "Main sites", "Teaching point"],
+    "rows": [
+     ["GLUT1", "Red cells, blood brain barrier", "Basal uptake; deficiency causes seizures"],
+     ["GLUT2", "Liver, beta cell, kidney, gut", "Low affinity glucose sensor"],
+     ["GLUT3", "Neurons", "High affinity steady supply"],
+     ["GLUT4", "Muscle and fat", "Recruited by insulin and exercise"],
+     ["GLUT5", "Gut and sperm", "Carries fructose, not glucose"],
+     ["SGLT1 and 2", "Gut and kidney tubule", "Sodium coupled active uptake"]
+    ]
+   }
+  },
+  {
+   "tx": "The **GLUT4 transporter** is stored in vesicles inside muscle and fat cells and moves to the surface when insulin arrives. Exercise recruits the same vesicles through a separate signal, which is why working muscle takes up glucose even when insulin is low. After translocation, glucose is trapped by phosphorylation, keeping free intracellular glucose low and the inward gradient alive.",
+   "say": "GLUT4 sits in vesicles inside muscle and fat and moves to the surface when insulin arrives. Exercise recruits those same vesicles through a separate signal, so working muscle takes up glucose even when insulin is low. Once inside, glucose is trapped by phosphorylation, which keeps the inward gradient alive.",
+   "vis": {
+    "kind": "flow",
+    "title": "How GLUT4 reaches the surface",
+    "nodes": [
+     {"id": "sig", "label": "Insulin or exercise signal"},
+     {"id": "ves", "label": "GLUT4 vesicles move to membrane"},
+     {"id": "up", "label": "Glucose enters the cell"},
+     {"id": "trap", "label": "Phosphorylation traps glucose"}
+    ],
+    "edges": [["sig", "ves"], ["ves", "up"], ["up", "trap"]]
+   }
+  },
+  {
+   "tx": "Sodium coupled **SGLT transporters** work differently because they drag glucose uphill by spending the sodium gradient. SGLT1 in the gut absorbs glucose and galactose even when luminal levels fall, and its failure causes severe neonatal diarrhoea that stops when those sugars are withdrawn. SGLT2 in the kidney reclaims most filtered glucose, and blocking it lowers blood glucose by spilling sugar into urine.",
+   "say": "SGLT transporters drag glucose uphill by spending the sodium gradient. In the gut, SGLT1 absorbs glucose and galactose even when luminal levels fall, and its failure causes severe neonatal diarrhoea. In the kidney, SGLT2 reclaims most filtered glucose, and blocking it spills sugar into the urine.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Facilitated GLUT transport", "points": ["Moves down the gradient", "No ATP and no sodium needed", "Bidirectional in most tissues", "GLUT2 releases liver glucose"]},
+    "right": {"title": "Secondary active SGLT transport", "points": ["Moves against the gradient", "Spends the sodium gradient", "One way uptake in gut and kidney", "Blocked to treat diabetes"]
+    }
+   }
+  },
+  {
+   "tx": "Two enzymes phosphorylate incoming glucose, and their contrast is a favourite exam theme. **Hexokinase** types I to III sit in most tissues with a low Km, so they work at full speed even during fasting, but their own product glucose-6-phosphate switches them off. This feedback stops tissues trapping more glucose than they can use and keeps free glucose available for export organs.",
+   "say": "Most tissues use hexokinase types one to three, which have a low Km and work at full speed even during fasting. Their own product, glucose-6-phosphate, switches them off. That feedback stops a tissue from trapping more glucose than it can use.",
+   "vis": null
+  },
+  {
+   "tx": "Liver and beta cells instead use **glucokinase**, also called hexokinase IV, whose high Km makes it a true glucose sensor. It ignores low fasting levels, accelerates in proportion to portal glucose after meals, and suffers no product inhibition, so the liver can keep clearing a large load. A regulatory protein hides it in the nucleus when fructose-6-phosphate is high and releases it when glucose rises.",
+   "say": "Liver and beta cells use glucokinase, or hexokinase four, whose high Km makes it a true glucose sensor. It ignores low fasting levels and accelerates in proportion to portal glucose after meals, with no product inhibition to slow it. A regulatory protein hides it in the nucleus until glucose rises.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Hexokinase I to III", "points": ["Low Km, high affinity", "Active during fasting", "Switched off by glucose-6-phosphate", "Found in most tissues"]},
+    "right": {"title": "Glucokinase (hexokinase IV)", "points": ["High Km, low affinity", "Wakes after meals", "No product inhibition", "Liver and beta cell sensor"]
+    }
+   }
+  },
+  {
+   "tx": "Once formed, **glucose-6-phosphate** stands at a metabolic crossroads and cannot leave the cell because membranes lack a transporter for it. Liver can store it as glycogen, burn it in glycolysis, or release free glucose with glucose-6-phosphatase, while muscle cannot release glucose at all. Inherited glucokinase faults illustrate sensing: losing mutations raise the set point and cause mild MODY2 hyperglycaemia, gaining mutations cause hyperinsulinism hypoglycaemia.",
+   "say": "Glucose-6-phosphate cannot leave the cell, so it stands at a crossroads. Liver can store it as glycogen, burn it, or release free glucose, while muscle cannot release glucose at all. Losing glucokinase mutations raise the set point and cause mild MODY2, while gaining mutations cause hypoglycaemia from excess insulin.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fate of glucose-6-phosphate", "Where it dominates", "What decides it"],
+    "rows": [
+     ["Glycolysis to pyruvate", "Most tissues", "Energy need and PFK-1 control"],
+     ["Glycogen synthesis", "Liver and muscle after meals", "Insulin and glucose-6-phosphate itself"],
+     ["HMP shunt to NADPH", "Liver, fat, red cells", "NADPH demand and G6PD activity"],
+     ["Free glucose release", "Liver and kidney only", "Glucose-6-phosphatase present only there"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
