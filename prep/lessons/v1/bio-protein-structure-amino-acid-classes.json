@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "module": "bio-protein-structure",
+ "subject": "biochemistry",
+ "title": "Amino acid classes and nutrition",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Ten amino acids are **essential** in the classic mnemonic PVT TIM HALL (phenylalanine, valine, threonine, tryptophan, isoleucine, methionine, histidine, arginine, leucine, lysine), with histidine and arginine semi-essential because adults synthesise some yet children and illness outgrow supply. Tyrosine spares phenylalanine and cysteine spares methionine, so diet tables quote combined aromatic and sulfur requirements rather than singles.",
+   "say": "Ten amino acids are essential, with histidine and arginine semi-essential. Tyrosine spares phenylalanine and cysteine spares methionine, so requirements quote combined aromatic and sulfur totals.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Class by side chain", "Members", "Charge or character at pH 7"],
+    "rows": [
+     ["Nonpolar aliphatic", "Gly, Ala, Val, Leu, Ile, Met, Pro", "Hydrophobic core; Pro is imino kink"],
+     ["Aromatic", "Phe, Tyr, Trp", "UV absorbing; Tyr polar hydroxyl"],
+     ["Polar uncharged", "Ser, Thr, Cys, Asn, Gln", "H-bonding; Cys disulfide capable"],
+     ["Acidic", "Asp, Glu (plus amides Asn, Gln)", "Negative, metal and salt bridges"],
+     ["Basic", "Lys, Arg, His", "Positive; His near neutral pKa buffers"]
+    ]
+   }
+  },
+  {
+   "tx": "The **branched chain** trio (valine, leucine, isoleucine) bypass liver first pass (liver lacks their transaminase surge) for muscle uptake, leucine signalling muscle protein synthesis through mTOR in sports and sarcopenia literature. Aromatic tryptophan is scarcest in proteins yet precursor to serotonin and niacin; its indole ring dominates protein ultraviolet absorbance at 280 nanometres (tyrosine second, disulfides faint), the basis of A280 protein estimation.",
+   "say": "Branched chain amino acids target muscle, with leucine signalling protein synthesis. Tryptophan dominates ultraviolet absorbance at 280 nanometres, the basis of rapid protein estimation in laboratories.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Glucogenic (to glucose)", "points": ["Most amino acids via pyruvate or TCA", "Alanine flagship to liver", "Fasting muscle export form"]},
+    "right": {"title": "Ketogenic (to acetyl-CoA)", "points": ["Leucine and lysine ONLY purely ketogenic", "Phe, Ile, Thr, Trp, Tyr both routes", "Never net glucose from leucine/lysine"]
+    }
+   }
+  },
+  {
+   "tx": "Purely **ketogenic** leucine and lysine is the non negotiable pair: every other degradable amino acid can net yield glucose through pyruvate or cycle intermediates, while isoleucine, phenylalanine, threonine, tryptophan and tyrosine split both ways. Alcoholic and starvation states, maple syrup disease (branched) and PKU (phenylalanine) later in the course all presuppose this carbon accounting, so fix the pair before any pathway detail tempts memorisation.",
+   "say": "Leucine and lysine are the only purely ketogenic amino acids. Five others split both ways, and the rest net yield glucose. Fix this pair before pathway detail tempts memorisation.",
+   "vis": null
+  },
+  {
+   "tx": "Special singletons earn disproportionate questions: **glycine** (smallest, achiral, every third collagen residue, inhibitory transmitter, heme and purine donor), proline (secondary amine, helix breaker, collagen hydroxyproline precursor), cysteine (disulfide, glutathione, taurine), methionine (start codon, SAM methyl donor, homocysteine risk), arginine (most basic, urea and nitric oxide), histidine (buffer, haemoglobin Bohr histidines, carnosine). Each singleton maps to a later module flagship disease or drug.",
+   "say": "Glycine, proline, cysteine, methionine, arginine and histidine each map to a flagship disease or drug later. Singletons earn disproportionate questions relative to their abundance in proteins.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Singleton", "Superpower", "Later flagship"],
+    "rows": [
+     ["Glycine", "Smallest, flexible, donor", "Collagen, heme, glycine encephalopathy"],
+     ["Proline", "Imino kink maker", "Collagen hydroxylation, scurvy"],
+     ["Cysteine", "Disulfide and thiol redox", "Glutathione, cystinuria stones"],
+     ["Methionine", "Start plus SAM methyls", "Homocystinuria, methylation"],
+     ["Arginine", "Most basic, guanidinium", "Urea cycle, nitric oxide"],
+     ["Histidine", "Buffer at body pH", "Bohr effect, carnosine, HAL disease histidinaemia benign"]
+    ]
+   }
+  },
+  {
+   "tx": "Non standard residents deserve one exact sweep: **selenocysteine** (21st, UGA recoded, glutathione peroxidases and deiodinases), hydroxyproline and hydroxylysine (post translational collagen only, vitamin C), desmosine (elastin crosslink), gamma-carboxyglutamate (vitamin K clotting factors), phospho and glycosylated residues (signalling), citrulline and ornithine (urea intermediates, not coded), homocysteine (methionine intermediate, not coded). Coded versus made later separates translation questions from metabolism questions cleanly.",
+   "say": "Selenocysteine is the twenty first coded amino acid, while hydroxyproline and carboxyglutamate are made after translation. Coded versus made later separates translation questions from metabolism questions cleanly.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Coded (in genetic code)", "points": ["20 standard plus selenocysteine (UGA)", "Inserted during translation", "Citrulline and ornithine excluded"]},
+    "right": {"title": "Made after translation", "points": ["Hydroxyproline, hydroxylysine (collagen)", "Gamma-carboxyglutamate (clotting)", "Phosphorylation, glycosylation signals"]
+    }
+   }
+  },
+  {
+   "tx": "Absorbance and charge tricks close the lesson: proteins absorb at **280** nanometres by tryptophan (280) over tyrosine, nucleic acid contamination absorbs at 260 (A260/A280 purity ratios), peptide bonds absorb far UV 214 for chromatography; acidic amino acids are negative and basic positive at pH seven with histidine titrating in between, predicting electrophoresis direction toward cathode or anode once net charge is summed in the zwitterion lesson next.",
+   "say": "Tryptophan dominates absorbance at 280 nanometres for protein estimation. Acidic residues are negative and basic positive at pH seven, predicting electrophoresis direction once net charge is summed next.",
+   "vis": {
+    "kind": "flow",
+    "title": "From class to behaviour",
+    "nodes": [
+     {"id": "side", "label": "Side chain class known"},
+     {"id": "charge", "label": "Charge at pH 7 predicted"},
+     {"id": "fate", "label": "Glucogenic or ketogenic fate"},
+     {"id": "flag", "label": "Flagship disease or drug"}
+    ],
+    "edges": [["side", "charge"], ["side", "fate"], ["fate", "flag"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
