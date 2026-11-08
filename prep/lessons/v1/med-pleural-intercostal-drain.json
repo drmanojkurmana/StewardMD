@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "med-pleural",
+ "subject": "medicine",
+ "title": "Pneumothorax, intercostal drainage, and pleural malignancies",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Accumulation of air within the pleural cavity uncouples the visceral and parietal pleura, causing secondary lung collapse. Rupture of small subpleural apical blebs or bullae initiates **primary spontaneous pneumothorax** (PSP) in tall, thin young individuals without pre-existing clinical pulmonary disease. Cigarette smoking dramatically escalates rupture risk. Patients present with sudden, unilateral pleuritic chest pain and resting dyspnoea. Auscultation demonstrates absent breath sounds, reduced tactile fremitus, and hyperresonant percussion over the affected hemithorax, with erect expiratory chest radiography confirming a thin visceral pleural line.",
+   "say": "Air accumulation within the pleural cavity uncouples the pleural layers, triggering secondary lung collapse. Rupture of apical subpleural blebs initiates primary spontaneous pneumothorax in tall, thin individuals without underlying lung disease. Cigarette smoking increases rupture risk. Patients develop sudden pleuritic chest pain and dyspnoea with hyperresonant percussion and absent breath sounds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary spontaneous (PSP)",
+     "points": [
+      "No clinically apparent lung disease",
+      "Apical subpleural bleb rupture",
+      "Tall, thin males aged 15 to 30 years",
+      "Lower recurrence rate than secondary"
+     ]
+    },
+    "right": {
+     "title": "Secondary spontaneous (SSP)",
+     "points": [
+      "Underlying COPD, TB, CF, or fibrosis",
+      "Rupture of bullae or cavitary necrosis",
+      "Severe hypoxaemia and respiratory failure",
+      "Requires definitive intercostal tube drainage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A one-way valve pleural breach permits air entry during inspiration while preventing egress during expiration. Generating a **tension pneumothorax** leads to progressive accumulation of intrapleural air under positive pressure, causing total ipsilateral lung collapse and marked contralateral shift of mediastinal structures. Elevated intrathoracic pressure compresses the superior and inferior vena cava, drastically curtailing venous return and cardiac output. Patients exhibit severe respiratory distress, cyanosis, marked hypotension, tachycardia, absent breath sounds on the affected side, and distended neck veins, representing an immediate clinical emergency.",
+   "say": "A one-way valve defect allows air to enter during inspiration while blocking egress during expiration. Developing a tension pneumothorax generates positive intrapleural pressure, collapsing the ipsilateral lung and shifting mediastinal structures contralaterally. High pressure compresses the vena cava, slashing venous return and cardiac output. Patients exhibit shock, distended neck veins and tracheal deviation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tension-pneumothorax-fig1.webp",
+    "alt": "Tension pneumothorax radiograph displaying complete lung collapse and contralateral mediastinal shift.",
+    "caption": "Tension pneumothorax mechanics with contralateral mediastinal displacement and hemodynamic collapse. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Recognizing tension physiology mandates immediate clinical decompression prior to obtaining any radiological imaging. Performing emergency **needle decompression** utilizes a large-bore (14 to 16 gauge) cannula inserted into the second intercostal space in the midclavicular line or the fourth/fifth intercostal space in the anterior axillary line immediately superior to the lower rib margin. A characteristic rush of pressurized air confirms successful decompression, instantly converting the tension mechanism into an open pneumothorax and restoring venous return. Emergency needle thoracostomy must be followed immediately by definitive tube thoracostomy.",
+   "say": "Recognizing tension physiology mandates immediate decompression before obtaining radiographic imaging. Performing emergency needle decompression involves inserting a large-bore cannula into the second intercostal space midclavicular line or fifth space anterior axillary line. A characteristic hiss of escaping air confirms decompression, converting the emergency into an open pneumothorax prior to tube placement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Clinical diagnosis of tension pneumothorax"
+     },
+     {
+      "id": "needle",
+      "label": "Immediate 14-gauge needle thoracostomy"
+     },
+     {
+      "id": "relief",
+      "label": "Release of pressurized intrapleural air"
+     },
+     {
+      "id": "icd",
+      "label": "Definitive tube thoracostomy with underwater seal"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "needle"
+     ],
+     [
+      "needle",
+      "relief"
+     ],
+     [
+      "relief",
+      "icd"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive evacuation of air, blood, or purulent exudate requires closed underwater-seal drainage. Inserting an **intercostal drain** (tube thoracostomy) is performed safely within the anatomical triangle of safety, bounded by the lateral border of pectoralis major, the anterior border of latissimus dorsi, and a horizontal line through the fifth intercostal space. The chest tube is passed directly over the superior border of the rib to avoid lacerating the intercostal neurovascular bundle. The tube connects to an underwater-seal drainage bottle, re-establishing negative intrapleural pressure and allowing lung re-expansion.",
+   "say": "Definitive evacuation of pleural air or fluid requires underwater-seal drainage. Inserting an intercostal drain is performed safely within the triangle of safety bounded by pectoralis major, latissimus dorsi and the fifth intercostal space. The tube is guided over the upper rib border to avoid injuring intercostal vessels, connecting to an underwater bottle to restore negative pleural pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-tube-thoracostomy-intercostal-drain.webp",
+    "alt": "Surgical steps for inserting an intercostal chest tube in the thoracic triangle of safety.",
+    "caption": "Anatomical landmarks and tube thoracostomy technique for pleural evacuation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Traumatic injury or vascular disruption can lead to rapid accumulation of blood within the thoracic cavity. Diagnosing a **haemothorax** requires pleural fluid hematocrit measurement equal to or exceeding fifty percent of peripheral blood hematocrit. Primary management involves immediate large-bore intercostal chest tube insertion (28 to 32 French) to evacuate blood, prevent fibrothorax, and monitor ongoing bleeding rates. Indications for emergency surgical thoracotomy include an initial chest drain output exceeding 1500 milliliters of blood, or persistent ongoing blood loss exceeding 200 milliliters per hour over three consecutive hours.",
+   "say": "Thoracic trauma or vascular disruption can trigger rapid accumulation of blood within the pleural space. Diagnosing a haemothorax requires pleural fluid hematocrit exceeding half of peripheral blood levels. Primary management involves large-bore tube thoracostomy to evacuate blood and monitor hemorrhage. Immediate thoracotomy is indicated if initial drainage exceeds 1500 milliliters or persistent bleeding exceeds 200 milliliters per hour.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trauma",
+      "label": "Thoracic trauma or vascular laceration"
+     },
+     {
+      "id": "tube",
+      "label": "Large-bore chest tube thoracostomy insertion"
+     },
+     {
+      "id": "monitor",
+      "label": "Monitor initial & hourly blood output"
+     },
+     {
+      "id": "thoracotomy",
+      "label": "Thoracotomy if > 1500 mL initial or > 200 mL/hr"
+     }
+    ],
+    "edges": [
+     [
+      "trauma",
+      "tube"
+     ],
+     [
+      "tube",
+      "monitor"
+     ],
+     [
+      "monitor",
+      "thoracotomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Permanent obliteration of the pleural space prevents disabling recurrences in malignant effusions or persistent pneumothoraces. Performing chemical **pleurodesis** involves instilling a sclerosing agent into the pleural cavity through an intercostal tube or during medical thoracoscopy. Sterile asbestos-free talc poudrage or talc slurry represents the most effective sclerosing agent, inducing intense diffuse aseptic pleural inflammation, fibroblastic proliferation, and dense symphysis between parietal and visceral pleural surfaces. Successful pleurodesis strictly requires complete lung re-expansion with full visceral-parietal pleural opposition prior to sclerotherapy.",
+   "say": "Permanent obliteration of the pleural space prevents disabling recurrences in malignant effusions or persistent air leaks. Performing chemical pleurodesis involves administering a sclerosing agent through an intercostal drain or during thoracoscopy. Sterile talc represents the most effective agent, inducing aseptic inflammation and permanent pleural symphysis. Complete lung re-expansion is necessary prior to instilling sclerosants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sclerosing agent",
+     "Administration technique",
+     "Success rate",
+     "Key clinical precautions"
+    ],
+    "rows": [
+     [
+      "Talc poudrage / slurry",
+      "Thoracoscopic spray or tube slurry",
+      "90% to 95%",
+      "Ensure graded large-particle talc to avoid ARDS"
+     ],
+     [
+      "Doxycycline",
+      "Diluted intrapleural instillation",
+      "75% to 80%",
+      "Pre-medicate with local intrapleural lidocaine"
+     ],
+     [
+      "Bleomycin",
+      "Chemotherapeutic sclerosant instillation",
+      "60% to 70%",
+      "High financial cost; minimal systemic toxicity"
+     ],
+     [
+      "Mechanical pleurodesis",
+      "Surgical pleural abrasion (VATS)",
+      "95%",
+      "Preferred in fit young patients with recurrent PSP"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary malignant neoplasia originating from mesothelial pleural surfaces is strongly linked to past occupational exposures. Developing malignant **mesothelioma** occurs thirty to forty years following inhalation of amphibole asbestos fibres. Tumours characteristically encase the lung parenchyma within a thick, nodular, rind-like pleural sheet, contracting the affected hemithorax and invading the diaphragm and chest wall. Patients present with non-pleuritic, dull aching chest wall pain, progressive dyspnoea, and weight loss. Thoracoscopic biopsy reveals epithelioid, sarcomatoid, or biphasic histology staining positively for calretinin and Wilms tumour 1 (WT1).",
+   "say": "Primary malignant neoplasia originating from mesothelial pleural surfaces is linked to past occupational exposures. Developing malignant mesothelioma occurs thirty to forty years after asbestos inhalation. Tumours encase the lung in a thick nodular rind, contracting the hemithorax and invading adjacent chest structures. Patients report dull chest wall pain and progressive breathlessness. Biopsy stains positively for calretinin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Malignant mesothelioma",
+     "points": [
+      "Originates from mesothelial pleural lining",
+      "Enveloping nodular pleural rind with volume loss",
+      "Strong link to amphibole asbestos exposure",
+      "Immunohistochemistry: Calretinin & WT1 positive"
+     ]
+    },
+    "right": {
+     "title": "Metastatic adenocarcinoma",
+     "points": [
+      "Originates from lung, breast, or GI primary",
+      "Scattered pleural nodules without encasing rind",
+      "Associated with tobacco smoking or distant cancer",
+      "Immunohistochemistry: TTF-1 & CEA positive"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Co-occurrence of benign pelvic neoplasia with serosal fluid accumulations defines a classical polyserositis syndrome. Characterizing **Meigs syndrome** entails the distinct triad of a benign solid ovarian tumor (characteristically an ovarian fibroma or thecoma), ascites, and pleural effusion. The pleural effusion is typically right-sided (in 70% of cases) and transudative or low-protein exudative, resulting from transdiaphragmatic fluid transfer through microscopic diaphragmatic defects. Remarkably, both ascites and pleural effusion resolve completely and permanently within weeks following simple surgical excision of the benign ovarian tumor.",
+   "say": "Co-occurrence of benign pelvic neoplasia with serosal fluid collections defines a classic clinical syndrome. Characterizing Meigs syndrome involves the triad of a benign ovarian tumor like a fibroma, ascites and pleural effusion. The pleural effusion is typically right-sided, arising from transdiaphragmatic fluid migration. Both ascites and pleural fluid resolve completely following surgical removal of the ovarian tumor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tumor",
+      "label": "Benign ovarian fibroma / thecoma"
+     },
+     {
+      "id": "ascites",
+      "label": "Peritoneal transudation & ascites accumulation"
+     },
+     {
+      "id": "diaphragm",
+      "label": "Fluid transfer across diaphragmatic lymphatics / fenestrations"
+     },
+     {
+      "id": "effusion",
+      "label": "Right-sided pleural effusion (Meigs syndrome triad)"
+     }
+    ],
+    "edges": [
+     [
+      "tumor",
+      "ascites"
+     ],
+     [
+      "ascites",
+      "diaphragm"
+     ],
+     [
+      "diaphragm",
+      "effusion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

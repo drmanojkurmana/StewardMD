@@ -1,0 +1,260 @@
+{
+ "v": 1,
+ "module": "med-pe-pulmonary-htn",
+ "subject": "medicine",
+ "title": "Pulmonary arterial hypertension: classification, hemodynamics, and therapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Progressive remodeling of small pulmonary muscular arterioles leads to pathologically elevated pulmonary arterial pressures and right ventricular failure. Hemodynamically defining **pulmonary arterial hypertension** (PAH, Group 1) requires demonstrating a resting mean pulmonary arterial pressure (mPAP) greater than 20 mmHg, a normal pulmonary arterial wedge pressure (PAWP) of 15 mmHg or less, and an elevated pulmonary vascular resistance (PVR) exceeding 2 Wood units. Pathophysiology features an imbalance between vasoconstrictive, proliferative mediators (endothelin-1, thromboxane) and vasodilatory, antiproliferative factors (prostacyclin, nitric oxide).",
+   "say": "Progressive remodeling of distal pulmonary arterioles causes sustained elevation of pulmonary pressures and right heart failure. Diagnosing pulmonary arterial hypertension requires a resting mean pressure above twenty millimeters of mercury with normal wedge pressure and elevated vascular resistance. The pathophysiology features an imbalance favoring vasoconstrictors like endothelin over vasodilators like prostacyclin and nitric oxide.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "imbalance",
+      "label": "Endothelial imbalance (elevated ET-1, low PGI2/NO)"
+     },
+     {
+      "id": "vasocon",
+      "label": "Sustained pulmonary arteriolar vasoconstriction"
+     },
+     {
+      "id": "remodel",
+      "label": "Medial hypertrophy & adventitial fibrosis"
+     },
+     {
+      "id": "ph",
+      "label": "mPAP > 20 mmHg, PAWP <= 15 mmHg, PVR > 2 WU"
+     }
+    ],
+    "edges": [
+     [
+      "imbalance",
+      "vasocon"
+     ],
+     [
+      "vasocon",
+      "remodel"
+     ],
+     [
+      "remodel",
+      "ph"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The World Health Organization classifies pulmonary hypertension into five distinct pathophysiological and clinical groups. Group 1 encompasses true **PAH** (idiopathic, heritable BMPR2 mutations, connective tissue disease, HIV, portal hypertension). Group 2 denotes pulmonary hypertension due to left heart disease (heart failure with preserved or reduced ejection fraction, valvular disease), characterized by elevated wedge pressure > 15 mmHg. Group 3 comprises pulmonary hypertension associated with chronic lung diseases or hypoxia (COPD, interstitial lung disease). Group 4 represents chronic thromboembolic disease, while Group 5 encompasses unclear multifactorial mechanisms.",
+   "say": "The World Health Organization classifies pulmonary hypertension into five clinical categories. Group one includes true arterial hypertension from idiopathic causes, connective tissue disease or congenital lesions. Group two denotes hypertension secondary to left heart disease with elevated wedge pressure. Group three encompasses hypoxic lung disorders. Group four represents chronic thromboembolic disease, while group five includes multifactorial disorders.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "WHO Group",
+     "Clinical category",
+     "Typical underlying etiologies",
+     "PAWP status"
+    ],
+    "rows": [
+     [
+      "Group 1",
+      "Pulmonary arterial hypertension (PAH)",
+      "Idiopathic, heritable BMPR2, scleroderma, HIV",
+      "<= 15 mmHg (pre-capillary)"
+     ],
+     [
+      "Group 2",
+      "PH due to left heart disease",
+      "HFrEF, HFpEF, mitral/aortic valve lesions",
+      "> 15 mmHg (post-capillary)"
+     ],
+     [
+      "Group 3",
+      "PH due to lung diseases / hypoxia",
+      "COPD, idiopathic pulmonary fibrosis, OSA",
+      "<= 15 mmHg (pre-capillary)"
+     ],
+     [
+      "Group 4",
+      "Chronic thromboembolic PH (CTEPH)",
+      "Organized recurrent pulmonary emboli",
+      "<= 15 mmHg (pre-capillary)"
+     ],
+     [
+      "Group 5",
+      "Unclear / multifactorial mechanisms",
+      "Sarcoidosis, histiocytosis, chronic hemolytic anemia",
+      "Variable hemodynamics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Invasive hemodynamic assessment confirms the pre-capillary diagnosis, quantifies disease severity, and evaluates acute vasoreactivity. Performing formal **right heart catheterisation** measures right atrial pressure, right ventricular pressure, mean pulmonary arterial pressure, and pulmonary capillary wedge pressure, while calculating cardiac output and pulmonary vascular resistance. During catheterisation, an acute vasodilator challenge using inhaled nitric oxide, intravenous epoprostenol, or adenosine tests for vasoreactivity. Responders (mPAP decrease >= 10 mmHg to an absolute value <= 40 mmHg with preserved cardiac output) qualify for high-dose calcium channel blocker therapy.",
+   "say": "Invasive hemodynamic recording confirms pre-capillary disease and assesses acute vasoreactivity. Performing right heart catheterisation measures chamber pressures, wedge pressure, cardiac output and vascular resistance. During testing, an acute vasodilator challenge using inhaled nitric oxide determines vasoreactivity. Responders who achieve significant pressure drops qualify for high-dose calcium channel blocker therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cath",
+      "label": "Right heart catheterisation vascular access"
+     },
+     {
+      "id": "hemo",
+      "label": "Measure mPAP, PAWP, CO, and calculate PVR"
+     },
+     {
+      "id": "chal",
+      "label": "Acute vasodilator challenge (inhaled nitric oxide)"
+     },
+     {
+      "id": "rx",
+      "label": "Stratify to CCB vs targeted PAH combination therapy"
+     }
+    ],
+    "edges": [
+     [
+      "cath",
+      "hemo"
+     ],
+     [
+      "hemo",
+      "chal"
+     ],
+     [
+      "chal",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Advanced vascular remodeling produces distinctive histopathologic lesions throughout the distal pulmonary arterial tree. Concentric intimal proliferation, medial smooth muscle hypertrophy, adventitial elastosis, and cellular microthrombosis obliterate the arteriolar lumen. In advanced stages of disease, pathognomonic **plexiform lesions** appear as complex glomeruloid networks of slit-like, endothelial-lined channels supported by a fibroblastic stroma. These complex vascular proliferations signify irreversible structural obliteration, increasing right ventricular afterload and driving right ventricular compensatory dilation, hypertrophy, and eventual systolic failure.",
+   "say": "Advanced vascular remodeling produces distinctive histopathological lesions throughout small pulmonary arteries. Concentric intimal thickening, medial smooth muscle hypertrophy and adventitial fibrosis narrow arteriolar lumens. In advanced disease, pathognomonic plexiform lesions emerge as complex glomeruloid endothelial networks. These structural alterations signify irreversible obliteration that drives progressive right heart failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pulmonary-hypertension-fig1.webp",
+    "alt": "Histopathology of severe pulmonary arterial hypertension exhibiting characteristic plexiform lesion.",
+    "caption": "Plexiform arteriopathy and medial hypertrophy in advanced pulmonary arterial hypertension. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Antagonizing endothelin-mediated vasoconstriction and vascular proliferation provides a major therapeutic pathway in Group 1 disease. Prescribing oral **bosentan** competitively blocks both endothelin receptor A (ETA) and endothelin receptor B (ETB), suppressing endothelin-1-induced arterial vasoconstriction and smooth muscle mitogenesis. Clinical trials show bosentan significantly improves six-minute walk distance, hemodynamic parameters, and functional class. Because bosentan causes dose-dependent hepatic transaminase elevation in up to ten percent of patients, mandatory monthly serum liver function monitoring and teratogenicity surveillance are required.",
+   "say": "Antagonizing endothelin-mediated vasoconstriction forms a primary therapeutic avenue in pulmonary arterial hypertension. Prescribing oral bosentan blocks both endothelin receptor types, inhibiting vasoconstriction and smooth muscle hyperplasia. Bosentan enhances exercise tolerance and hemodynamic parameters. Because the drug can cause transaminase elevations, mandatory monthly liver function monitoring is required.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dual antagonist (Bosentan)",
+     "points": [
+      "Competitive ETA and ETB receptor blockade",
+      "Improves exercise capacity & hemodynamics",
+      "Causes transaminitis in up to 10% of patients",
+      "Mandatory monthly liver function monitoring"
+     ]
+    },
+    "right": {
+     "title": "Selective antagonist (Ambrisentan)",
+     "points": [
+      "Selective ETA receptor blockade",
+      "Preserves endothelial ETB vasodilatory clearance",
+      "Significantly lower risk of hepatotoxicity",
+      "Peripheral edema is most common adverse effect"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Enhancing intracellular cyclic guanosine monophosphate signaling promotes potent pulmonary arterial vasodilatation and antiproliferative effects. Administering oral **sildenafil** or tadalafil selectively inhibits phosphodiesterase type 5 (PDE-5), the primary enzyme responsible for degrading cyclic guanosine monophosphate (cGMP) in pulmonary vascular smooth muscle. Elevated cGMP activates protein kinase G, causing smooth muscle relaxation and inhibiting vascular hypertrophy. Co-administration of PDE-5 inhibitors with nitrates (such as nitroglycerin or isosorbide dinitrate) is absolutely contraindicated due to the risk of severe, life-threatening systemic hypotension.",
+   "say": "Enhancing intracellular cyclic guanosine monophosphate signaling promotes pulmonary vascular relaxation. Administering oral sildenafil selectively inhibits phosphodiesterase type five, preventing degradation of cyclic guanosine monophosphate. Increased mediator levels trigger smooth muscle relaxation and inhibit vascular hypertrophy. Co-administration with organic nitrates is contraindicated due to severe systemic hypotension.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "no",
+      "label": "Nitric oxide stimulates soluble guanylyl cyclase"
+     },
+     {
+      "id": "cgmp",
+      "label": "GTP conversion into cyclic GMP"
+     },
+     {
+      "id": "pde5",
+      "label": "Sildenafil blocks PDE-5 enzymatic degradation"
+     },
+     {
+      "id": "vasod",
+      "label": "Sustained pulmonary vasodilation & antiproliferation"
+     }
+    ],
+    "edges": [
+     [
+      "no",
+      "cgmp"
+     ],
+     [
+      "cgmp",
+      "pde5"
+     ],
+     [
+      "pde5",
+      "vasod"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe or progressive functional class III and IV disease mandates escalation to prostacyclin pathway agonism. Infusing intravenous **epoprostenol** continuously via a dedicated tunneled central venous catheter delivers potent synthetic prostacyclin (PGI2), stimulating cyclic adenosine monophosphate (cAMP) production, promoting powerful vasodilation, and inhibiting platelet aggregation. Epoprostenol is the sole therapy demonstrated in randomized trials to reduce mortality in idiopathic PAH. Alternative prostacyclin analogs include subcutaneous or inhaled treprostinil, inhaled iloprost, and oral selexipag, a non-prostanoid prostacyclin receptor agonist.",
+   "say": "Severe or progressive disease requires escalation to prostacyclin pathway agonism. Administering intravenous epoprostenol through a central catheter delivers synthetic prostacyclin, stimulating cyclic AMP production and promoting potent vasodilatation. Epoprostenol is the only treatment shown to decrease mortality in idiopathic disease. Alternative formulations include treprostinil, inhaled iloprost and oral selexipag.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic pathway",
+     "Pharmacological agent",
+     "Administration route",
+     "Primary clinical utility"
+    ],
+    "rows": [
+     [
+      "Endothelin pathway",
+      "Bosentan / Ambrisentan",
+      "Oral daily",
+      "Initial oral combination in Class II/III"
+     ],
+     [
+      "Nitric oxide pathway",
+      "Sildenafil / Tadalafil",
+      "Oral daily",
+      "First-line oral combination therapy"
+     ],
+     [
+      "Soluble guanylyl cyclase",
+      "Riociguat",
+      "Oral three times daily",
+      "Effective in both PAH and CTEPH"
+     ],
+     [
+      "Prostacyclin pathway",
+      "Epoprostenol",
+      "Continuous IV infusion",
+      "Class IV high-risk disease; reduces mortality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Organized, non-resolving thromboemboli in major pulmonary arteries can cause severe secondary pre-capillary pulmonary hypertension. Diagnosing **CTEPH** (Group 4 pulmonary hypertension) requires identifying mismatched segmental perfusion defects on radionuclide V/Q scanning following at least three months of therapeutic anticoagulation. Unlike pulmonary arterial hypertension, CTEPH is potentially curable surgically via pulmonary endarterectomy (PEA), which completely extracts fibrotic, endothelialized thromboembolic material from the pulmonary arterial bed. Inoperable distal disease or persistent postoperative pulmonary hypertension is treated with riociguat or balloon pulmonary angioplasty.",
+   "say": "Organized, non-resolving thrombi within major pulmonary arteries cause secondary pre-capillary hypertension. Diagnosing chronic thromboembolic pulmonary hypertension requires identifying mismatched perfusion defects on ventilation-perfusion scanning after three months of anticoagulation. Unlike arterial disease, this condition is surgically curable through pulmonary endarterectomy. Inoperable distal disease is treated with riociguat or balloon angioplasty.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-thromboembolic-pulmonary-hypertension-fig1.webp",
+    "alt": "Pulmonary angiographic display of webs, bands, and chronic stenoses in CTEPH.",
+    "caption": "Organised thromboembolic obstruction in chronic thromboembolic pulmonary hypertension. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

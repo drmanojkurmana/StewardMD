@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "med-ild",
+ "subject": "medicine",
+ "title": "Idiopathic pulmonary fibrosis and hypersensitivity pneumonitis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Chronic, progressive fibrosing interstitial pneumonia of unknown etiology predominantly afflicts older adult cigarette smokers. Developing **idiopathic pulmonary fibrosis** involves repetitive micro-injuries to an aging, genetically vulnerable alveolar epithelium followed by aberrant, exaggerated wound healing. Epithelial cell senescence and failure of re-epithelialization trigger excessive release of profibrotic mediators, particularly transforming growth factor beta one. Patients present insidiously with worsening exertional dyspnoea, chronic dry hacking cough, and progressive exercise intolerance over months to years without antecedent systemic disease.",
+   "say": "Chronic progressive fibrosing interstitial pneumonia of unknown cause primarily affects older adults. Developing idiopathic pulmonary fibrosis stems from recurrent micro-injuries to vulnerable alveolar epithelium followed by abnormal repair. Failure of proper healing drives excessive release of profibrotic cytokines like transforming growth factor beta. Patients experience progressive exertional breathlessness and persistent dry cough.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "injury",
+      "label": "Repetitive alveolar epithelial micro-injury"
+     },
+     {
+      "id": "senesce",
+      "label": "Epithelial senescence & apoptosis"
+     },
+     {
+      "id": "mediator",
+      "label": "Profibrotic cytokine release (TGF-beta)"
+     },
+     {
+      "id": "myofib",
+      "label": "Fibroblast activation & collagen deposition"
+     },
+     {
+      "id": "fibrosis",
+      "label": "Irreversible architectural lung distortion"
+     }
+    ],
+    "edges": [
+     [
+      "injury",
+      "senesce"
+     ],
+     [
+      "senesce",
+      "mediator"
+     ],
+     [
+      "mediator",
+      "myofib"
+     ],
+     [
+      "myofib",
+      "fibrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histopathologic examination reveals a distinctive, non-uniform pattern of parenchymal injury termed **usual interstitial pneumonia** (UIP). Hallmark features include spatial and temporal heterogeneity, wherein patches of dense, mature collagenous fibrosis and architectural distortion alternate with areas of entirely preserved, normal pulmonary architecture. Actively proliferating myofibroblastic foci compose the leading edge of fibrotic expansion. In contrast to non-specific interstitial pneumonia, inflammatory cell infiltrates in usual interstitial pneumonia are minimal, and cellular expansion of alveolar walls is characteristically absent.",
+   "say": "Histopathological analysis reveals a distinct non-uniform pattern termed usual interstitial pneumonia. Defining characteristics include alternating patches of dense fibrosis and preserved normal lung architecture. Actively proliferating fibroblastic foci form the advancing border of disease. In contrast to non-specific interstitial pneumonia, inflammatory infiltration is minimal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Usual interstitial pneumonia (UIP)",
+     "points": [
+      "Spatial and temporal heterogeneity",
+      "Subpleural and paraseptal distribution",
+      "Prominent fibroblastic foci",
+      "Irreversible honeycombing destruction"
+     ]
+    },
+    "right": {
+     "title": "Non-specific interstitial pneumonia (NSIP)",
+     "points": [
+      "Temporal and spatial homogeneity",
+      "Diffuse alveolar septal inflammation",
+      "Uniform interstitial fibrosis without honeycombing",
+      "Higher responsiveness to corticosteroid therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-resolution computed tomography of the chest provides definitive, non-invasive diagnosis in characteristic clinical settings. Demonstrating bilateral, subpleural, basal-predominant reticular opacities with traction bronchiectasis and clustered cystic spaces termed **honeycombing** confirms a definitive UIP pattern. Honeycomb cysts are thick-walled, fibrous spaces measuring three to ten millimetres, arranged in multiple stacked layers immediately adjacent to the visceral pleural boundary. Ground-glass opacities, if present, are strictly subordinate in extent to reticular fibrosis, distinguishing idiopathic pulmonary fibrosis from active cellular inflammatory pneumonitis.",
+   "say": "High-resolution thoracic computed tomography provides definitive diagnosis without surgical biopsy. Revealing subpleural, basal reticular opacities with traction bronchiectasis and stacked cystic spaces termed honeycombing confirms the radiological diagnosis. These clustered cysts sit beneath the visceral pleura. Ground-glass changes are minimal compared to established fibrotic distortion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/occupational-lung-disease-fig1.webp",
+    "alt": "Radiographic and computed tomography patterns of interstitial lung disease and fibrosis.",
+    "caption": "Radiographic hallmarks of interstitial fibrosis and parenchymal architectural distortion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bedside physical examination in advanced pulmonary fibrosis yields classic, reproducible physical signs of parenchymal restriction. Thoracic auscultation characteristically reveals dry, fine, bilateral end-inspiratory crackles, often compared to the sound of separating **Velcro crackles**, audible earliest over the posterior lung bases. Progressive peripheral hypoxaemia stimulates platelet-derived growth factors, causing digital clubbing in approximately fifty percent of patients. In advanced disease, pulmonary arterial hypertension develops, producing an accentuated pulmonary second heart sound (P2), right ventricular heave, and elevated jugular venous pressure.",
+   "say": "Bedside physical examination in pulmonary fibrosis yields characteristic signs of restrictive pathology. Thoracic auscultation reveals dry, fine end-inspiratory Velcro crackles over the lung bases. Chronic hypoxaemia promotes digital clubbing in roughly half of patients. Advanced disease leads to pulmonary hypertension with a loud second heart sound and right heart strain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical sign",
+     "Pathophysiological mechanism",
+     "Diagnostic implication"
+    ],
+    "rows": [
+     [
+      "Velcro crackles",
+      "Sudden explosive reopening of fibrotic airways",
+      "Early sign present before radiographic changes"
+     ],
+     [
+      "Digital clubbing",
+      "PDGF & VEGF release from megakaryocyte fragments",
+      "Found in 50% of IPF cases; poor prognosis"
+     ],
+     [
+      "Tachypnoea",
+      "Reduced compliance with shallow rapid breathing",
+      "Minimizes mechanical work of breathing"
+     ],
+     [
+      "Loud pulmonary S2",
+      "Elevated pulmonary arterial vascular resistance",
+      "Secondary pulmonary hypertension complication"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pharmacological therapy with anti-fibrotic small molecules significantly decelerates the rate of functional lung volume deterioration. Prescribing oral **pirfenidone** downregulates the synthesis of transforming growth factor beta, tumor necrosis factor alpha, and procollagens one and two. Clinical trials establish that pirfenidone reduces the annual decline in forced vital capacity by approximately fifty percent compared to placebo. Treatment requires dose titration over three weeks to mitigate common adverse events, which include gastrointestinal dyspepsia, anorexia, and cutaneous photosensitivity rash requiring broad-spectrum sunscreen application.",
+   "say": "Targeted anti-fibrotic small molecules decelerate the loss of functional lung volumes. Prescribing oral pirfenidone downregulates transforming growth factor beta and collagen synthesis. Clinical evidence proves it cuts the annual decline of forced vital capacity in half. Dose titration helps minimize common adverse effects like nausea and cutaneous photosensitivity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pirfenidone",
+     "points": [
+      "Pyridone synthetic molecule",
+      "Inhibits TGF-beta and collagen synthesis",
+      "Reduces fibroblast proliferation",
+      "Photosensitivity and nausea common"
+     ]
+    },
+    "right": {
+     "title": "Nintedanib",
+     "points": [
+      "Intracellular receptor tyrosine kinase inhibitor",
+      "Blocks PDGF, FGF, and VEGF receptors",
+      "Inhibits fibroblast migration & differentiation",
+      "Diarrhea and transaminitis common"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inhibiting receptor tyrosine kinases involved in fibroblast signaling provides an alternative anti-fibrotic treatment mechanism. Administering oral **nintedanib** blocks platelet-derived growth factor receptors, fibroblast growth factor receptors, and vascular endothelial growth factor receptors by occupying their intracellular adenosine triphosphate-binding pockets. Similar to pirfenidone, nintedanib halves the annual decline in forced vital capacity and significantly reduces the frequency of acute respiratory exacerbations. The most frequent dose-limiting adverse effect is diarrhea, which occurs in over sixty percent of patients and requires antidiarrheal therapy.",
+   "say": "Inhibiting receptor tyrosine kinases provides a complementary mechanism to halt fibrogenesis. Administering oral nintedanib blocks receptors for platelet-derived and fibroblast growth factors within target cells. The drug halves the rate of lung function decline and decreases acute exacerbation episodes. Diarrhea represents the primary dose-limiting adverse effect.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "kinase",
+      "label": "Nintedanib binds PDGF/FGF/VEGF kinase domains"
+     },
+     {
+      "id": "signal",
+      "label": "Blockade of downstream intracellular phosphorylation"
+     },
+     {
+      "id": "prolif",
+      "label": "Suppression of myofibroblast migration & proliferation"
+     },
+     {
+      "id": "fvc",
+      "label": "50% reduction in annual forced vital capacity decline"
+     }
+    ],
+    "edges": [
+     [
+      "kinase",
+      "signal"
+     ],
+     [
+      "signal",
+      "prolif"
+     ],
+     [
+      "prolif",
+      "fvc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inhaled environmental and occupational organic antigens can induce an intense, immunologically mediated interstitial lung inflammatory response. Developing **hypersensitivity pneumonitis** (extrinsic allergic alveolitis) involves combined type III immune-complex and type IV delayed-type hypersensitivity reactions to repeated exposure. Culprit antigens include thermophilic actinomycetes from mouldy hay (farmer lung) and avian serum proteins from bird droppings (bird fancier lung). Bronchoalveolar lavage demonstrates marked lymphocytosis exceeding twenty to forty percent with a decreased CD4 to CD8 ratio, and high-resolution computed tomography shows centrilobular ground-glass nodules and air trapping.",
+   "say": "Inhaled environmental antigens can trigger severe immunologically mediated interstitial inflammation. Developing hypersensitivity pneumonitis stems from mixed type three and type four hypersensitivity reactions to recurrent organic exposures. Classic triggers include mouldy hay and avian proteins. Bronchial lavage reveals marked lymphocytosis, while computed tomography displays centrilobular nodules and air trapping.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease variant",
+     "Causative environmental antigen",
+     "Source of exposure"
+    ],
+    "rows": [
+     [
+      "Farmer lung",
+      "Saccharopolyspora rectivirgula",
+      "Mouldy hay and grain stores"
+     ],
+     [
+      "Bird fancier lung",
+      "Avian mucin and serum proteins",
+      "Pigeon and parakeet droppings"
+     ],
+     [
+      "Bagassosis",
+      "Thermoactinomyces sacchari",
+      "Mouldy sugarcane residue"
+     ],
+     [
+      "Mushroom worker lung",
+      "Thermophilic actinomycetes",
+      "Mushroom compost material"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Destruction and thickening of the delicate alveolar-capillary barrier impair gas transfer across the pulmonary parenchyma. Progressive interstitial collagen deposition causes **diffusion impairment**, manifest on pulmonary function testing as an isolated severe reduction in diffusing capacity of the lung for carbon monoxide (DLCO). Resting arterial blood gas analysis may reveal mild hypoxaemia with hypocapnia driven by compensatory hyperventilation. However, formal exercise testing unmasks marked desaturation and an abnormal widening of the alveolar-arterial oxygen gradient, confirming profound ventilation-perfusion mismatch and diffusion limitation.",
+   "say": "Structural thickening of the alveolar-capillary membrane impairs gas exchange across the pulmonary parenchyma. Interstitial collagen accumulation causes marked diffusion impairment, demonstrated by reduced carbon monoxide transfer capacity on lung function testing. Resting blood gases show hypoxaemia with hypocapnia from hyperventilation. Exercise testing triggers severe oxygen desaturation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-lung-alveoli-gas-exchange.webp",
+    "alt": "Alveolar capillary gas exchange membrane anatomy and diffusive barriers.",
+    "caption": "Structural alveolar gas exchange barrier and diffusion impairment in fibrotic lung disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
