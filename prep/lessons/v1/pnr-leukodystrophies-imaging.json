@@ -1,0 +1,196 @@
+{
+  "v": 1,
+  "id": "pnr-leukodystrophies-imaging",
+  "title": "Metachromatic Leukodystrophy, X-ALD, Krabbe and Canavan Disease",
+  "module": "pnr-neurogenetic-metabolic",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Metachromatic Leukodystrophy Enzymatic Defect",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biochemical Feature",
+          "Metachromatic Leukodystrophy Profile",
+          "Diagnostic Confirmation"
+        ],
+        "rows": [
+          [
+            "Deficient Hydrolase",
+            "Arylsulfatase A (ARSA gene mutation)",
+            "Assayed in isolated peripheral leukocytes"
+          ],
+          [
+            "Accumulated Lipid",
+            "Galactosylceramide-3-sulfate (sulfatides)",
+            "Excreted in urine; metachromatic brown granules"
+          ],
+          [
+            "Clinical Phenotype",
+            "Late-infantile motor regression & gait loss",
+            "Combined central and peripheral demyelinating neuropathy"
+          ]
+        ]
+      },
+      "tx": "The underlying cause of **Metachromatic leukodystrophy enzyme** deficiency is autosomal recessive loss of arylsulfatase A, encoded by the ARSA gene. Deficiency prevents hydrolysis of sulfatides into cerebrosides, resulting in toxic sulfatide accumulation in oligodendrocytes, Schwann cells, and renal tubules. Infants present between 12 and 24 months with developmental regression, spasticity, lost motor milestones, and peripheral neuropathy.",
+      "say": "Metachromatic leukodystrophy is caused by deficient arylsulfatase A, leading to toxic sulfatide accumulation in central and peripheral myelin."
+    },
+    {
+      "title": "Characteristic Leopard-Skin Neuroimaging Pattern",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "White Matter Involvement",
+          "points": [
+            "Diffuse confluent periventricular T2 hyperintensity",
+            "Sparing of subcortical U-fibers in early stages",
+            "Centrifugal progression with severe volume loss"
+          ]
+        },
+        "right": {
+          "title": "Tigroid Sparing Pattern",
+          "points": [
+            "Radial stripes of intact perivenular myelin",
+            "Leopard-skin appearance on axial T2 MRI",
+            "Differentiates MLD from other symmetric leukodystrophies"
+          ]
+        }
+      },
+      "tx": "Neuroimaging reveals the classic **Tigroid leopard-skin MRI pattern** on axial T2-weighted brain magnetic resonance imaging. Symmetric, confluent periventricular white matter hyperintensity spares the subcortical U-fibers until end-stage disease. Linear radial stripes and spots of preserved perivenular myelin traverse the demyelinated fields, creating a tigroid or leopard-skin appearance pathognomonic for metachromatic leukodystrophy.",
+      "say": "T2 weighted magnetic resonance imaging reveals a tigroid or leopard skin pattern with radial stripes of preserved perivenular myelin."
+    },
+    {
+      "title": "X-Linked Adrenoleukodystrophy Transporter Defect",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adrenoleukodystrophy-fig1.webp",
+        "alt": "Peroxisomal ABCD1 transporter defect and elevated very long chain fatty acids",
+        "caption": "Peroxisomal ATP-binding cassette transporter failure leading to toxic VLCFA accumulation (StewardMD)."
+      },
+      "tx": "The molecular pathogenesis of **X-linked adrenoleukodystrophy ABCD1** involves hemizygous mutations in the ABCD1 gene encoding an ATP-binding cassette peroxisomal membrane transporter. Failure of this transporter impairs peroxisomal beta-oxidation, leading to marked plasma and tissue accumulation of very long chain fatty acids (VLCFAs: hexacosanoic C26:0 and tetracosanoic C24:0 acids), driving adrenal failure and progressive cerebral inflammatory demyelination.",
+      "say": "X-linked adrenoleukodystrophy is caused by ABCD1 gene mutations, impairing peroxisomal beta-oxidation of very long chain fatty acids."
+    },
+    {
+      "title": "Loes Neuroimaging Score and Zonal Progression",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "l1",
+            "label": "Zone 1: Central necrotic, gliotic core"
+          },
+          {
+            "id": "l2",
+            "label": "Zone 2: Active inflammatory edge with gadolinium uptake"
+          },
+          {
+            "id": "l3",
+            "label": "Zone 3: Peripheral dysmyelinating leading front"
+          }
+        ],
+        "edges": [
+          [
+            "l1",
+            "l2"
+          ],
+          [
+            "l2",
+            "l3"
+          ]
+        ]
+      },
+      "tx": "Quantifying cerebral involvement utilizes the **Loes score and MRI zones in X-ALD**, a validated 34-point severity score. Inflammatory demyelination typically originates in the splenium of the corpus callosum and parieto-occipital white matter, organized into 3 concentric histopathological zones. Gadolinium enhancement marks active inflammatory Zone 2, signaling an urgent therapeutic window for hematopoietic stem cell transplantation before Loes exceeds 9.",
+      "say": "The Loes neuroimaging score grades three concentric zones of parieto-occipital demyelination, identifying the crucial window for stem cell transplantation."
+    },
+    {
+      "title": "Krabbe Disease Globoid Cell Leukodystrophy",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Biochemical Enzymology",
+          "points": [
+            "Deficiency of galactocerebrosidase (GALC gene)",
+            "Toxic accumulation of psychosine (galactosylsphingosine)",
+            "Rapid oligodendrocyte and Schwann cell apoptosis"
+          ]
+        },
+        "right": {
+          "title": "Histopathology and Features",
+          "points": [
+            "Multinucleated globoid histiocytes in white matter",
+            "Hyperirritability, extreme fever and hyperacusis",
+            "Thickened enhancing optic nerves and roots"
+          ]
+        }
+      },
+      "tx": "Infantile galactosylceramide lipidosis manifests as **Krabbe disease globoid cells**, an autosomal recessive lysosomal disorder caused by galactocerebrosidase (GALC) deficiency. Inability to cleave galactocerebroside leads to toxic accumulation of psychosine, triggering oligodendrocyte death. Histopathology demonstrates multinucleated, Periodic acid-Schiff-positive globoid histiocytes infiltrating white matter tracts alongside early optic nerve enlargement and extreme sensory hyperirritability.",
+      "say": "Krabbe disease is caused by galactocerebrosidase deficiency, triggering psychosine toxicity and pathognomonic multinucleated globoid cell infiltration."
+    },
+    {
+      "title": "Canavan Disease NAA Peak and Spongy Degeneration",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/canavan-disease-fig1.webp",
+        "alt": "Magnetic resonance spectroscopy demonstrating massive N-acetylaspartate spectral peak",
+        "caption": "Prominent elevated N-acetylaspartate peak on MR spectroscopy diagnostic of Canavan disease (StewardMD)."
+      },
+      "tx": "In the differential diagnosis of megalencephalic leukodystrophies, **Canavan disease NAA peak** is pathognomonic on proton magnetic resonance spectroscopy. Deficient aspartoacylase (ASPA gene) blocks N-acetylaspartate degradation into acetate and aspartate, causing massive urinary excretion and central accumulation of NAA. Toxic osmotic shifts generate widespread intramyelinic vacuolization, spongy degeneration, diffuse subcortical U-fiber involvement, and severe macrocephaly.",
+      "say": "Canavan disease is marked by deficient aspartoacylase, producing massive N-acetylaspartate elevation on MR spectroscopy and spongy white matter degeneration."
+    },
+    {
+      "title": "Alexander Disease Frontal Predominance",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease Domain",
+          "Alexander Disease Signature",
+          "Diagnostic Hallmark"
+        ],
+        "rows": [
+          [
+            "Genetic Etiology",
+            "De novo heterozygous GFAP gain-of-function",
+            "Astrocytic intermediate filament pathology"
+          ],
+          [
+            "MRI Distribution",
+            "Striking frontal white matter predominance",
+            "Extends to caudate head, thalamus, and midbrain"
+          ],
+          [
+            "Neuropathology",
+            "Rosenthal fibers within astrocytic processes",
+            "Ubiquitinated cytoplasmic inclusions"
+          ]
+        ]
+      },
+      "tx": "A unique primary astrocytopathy underlies **Alexander disease frontal predominance**, driven by dominant gain-of-function mutations in the glial fibrillary acidic protein (GFAP) gene. Brain MRI reveals severe, extensive, symmetric T2 hyperintensity preferentially affecting frontal white matter and caudate heads with garland-like ventricular enhancement. Histopathology reveals pathognomonic Rosenthal fibers (eosinophilic, ubiquitinated intracytoplasmic astrocytic inclusions) concentrated in subpial and perivascular regions.",
+      "say": "Alexander disease is an astrocytic disorder caused by GFAP mutations, characterized by striking frontal white matter hyperintensity and Rosenthal fibers."
+    },
+    {
+      "title": "Pelizaeus-Merzbacher Hypomyelinating Leukodystrophy",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Genetic Mechanism",
+          "points": [
+            "X-linked PLP1 duplication (most common: 60-70%)",
+            "Missense mutations in proteolipid protein 1",
+            "Arrests oligodendrocyte maturation and sheath assembly"
+          ]
+        },
+        "right": {
+          "title": "Clinical and MRI Signature",
+          "points": [
+            "Neonatal pendular nystagmus and laryngeal stridor",
+            "Diffuse hyperintensity on T2 with isointense T1",
+            "Reversed gray-white contrast (arrested myelination)"
+          ]
+        }
+      },
+      "tx": "Unlike demyelinating leukodystrophies where formed myelin breaks down, **Pelizaeus-Merzbacher disease hypomyelination** represents a failure to assemble mature myelin. X-linked duplications or mutations in the proteolipid protein 1 (PLP1) gene impair oligodendrocyte function. Male infants present with pendular nystagmus, hypotonia, and titubation. Neuroimaging demonstrates a permanent infantile pattern with diffuse T2 hyperintensity and isointense T1 signaling across all cerebral tracts.",
+      "say": "Pelizaeus-Merzbacher disease is an X-linked hypomyelinating disorder caused by PLP1 defects, presenting with early pendular nystagmus and arrested myelination."
+    }
+  ]
+}

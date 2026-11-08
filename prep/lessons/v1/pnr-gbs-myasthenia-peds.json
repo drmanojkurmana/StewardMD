@@ -1,0 +1,202 @@
+{
+  "v": 1,
+  "id": "pnr-gbs-myasthenia-peds",
+  "title": "Guillain-Barr\u00e9 Syndrome and Juvenile Myasthenia Gravis",
+  "module": "pnr-neuromuscular-development",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Guillain-Barr\u00e9 Syndrome Clinical Presentation",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/mneur-neuropathy-gen1.webp",
+        "alt": "Demyelinating peripheral nerve conduction slowing and ascending motor paralysis",
+        "caption": "Peripheral nerve myelin sheath immune attack producing flaccid motor weakness (StewardMD)."
+      },
+      "tx": "Pediatric Guillain-Barr\u00e9 syndrome typically presents as symmetric, rapidly progressive **Ascending flaccid paralysis** beginning in the lower extremities. Children describe distal paresthesias, refusal to walk, lumbar root pain, and ascending weakness associated with universal loss of deep tendon reflexes. Bulbar and facial nerve involvement can develop rapidly, requiring intensive surveillance for acute neuromuscular respiratory failure.",
+      "say": "Pediatric Guillain-Barr\u00e9 syndrome manifests as acute ascending flaccid weakness with early loss of deep tendon reflexes following a viral illness."
+    },
+    {
+      "title": "Albuminocytological Dissociation in CSF",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CSF Parameter",
+          "Typical Finding in GBS",
+          "Diagnostic Differential"
+        ],
+        "rows": [
+          [
+            "Total Protein",
+            "Markedly elevated (> 45-100 mg/dL)",
+            "Severe blood-nerve root breakdown"
+          ],
+          [
+            "Total Leukocytes",
+            "Normal acellular count (< 5-10 cells/mcL)",
+            "Pleocytosis indicates infectious myelitis or Lyme"
+          ],
+          [
+            "Timing of Dissociation",
+            "Most pronounced during week 2 to 4",
+            "Early lumbar puncture in week 1 may be normal"
+          ]
+        ]
+      },
+      "tx": "Cerebrospinal fluid analysis reveals the classic hallmark of **Albuminocytological dissociation**, defined as elevated protein (> 45 mg/dL) with normal white blood cell count (< 5-10 mononuclear cells/mcL). This isolated protein elevation reflects widespread inflammation of spinal roots. Protein elevation typically peaks at 2 to 4 weeks after weakness onset; early lumbar puncture in the first week may be normal.",
+      "say": "Lumbar puncture demonstrates albuminocytological dissociation with high protein and normal cell counts, typically peaking in the second to fourth week."
+    },
+    {
+      "title": "Campylobacter Triggers and Miller Fisher Syndrome",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Campylobacter jejuni Mimicry",
+          "points": [
+            "Preceding bacterial gastroenteritis",
+            "Lipooligosaccharide mimics human GM1 gangliosides",
+            "Triggers severe axonal motor neuropathy (AMAN)"
+          ]
+        },
+        "right": {
+          "title": "Miller Fisher Triad",
+          "points": [
+            "Acute external ophthalmoplegia",
+            "Severe generalized sensory ataxia",
+            "Profound areflexia with high anti-GQ1b titers"
+          ]
+        }
+      },
+      "tx": "Post-infectious molecular mimicry frequently follows **Campylobacter jejuni and Miller Fisher** variants. Lipooligosaccharides on Campylobacter cell walls share epitopes with human gangliosides GM1 and GD1a, triggering acute motor axonal neuropathy. In the Miller Fisher clinical variant, anti-GQ1b antibodies target concentrated cranial nerve gangliosides, producing the diagnostic triad of external ophthalmoplegia, ataxia, and generalized areflexia.",
+      "say": "Campylobacter jejuni triggers axonal neuropathy via ganglioside molecular mimicry, while anti-GQ1b antibodies produce Miller Fisher ophthalmoplegia and ataxia."
+    },
+    {
+      "title": "First-Line Immunotherapy Protocols",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Modality",
+          "Standard Dosing Protocol",
+          "Key Clinical Principles"
+        ],
+        "rows": [
+          [
+            "Intravenous Immunoglobulin",
+            "2 g/kg total over 2 to 5 days",
+            "First-line therapy in children; excellent safety"
+          ],
+          [
+            "Plasma Exchange (PLEX)",
+            "4-5 volume exchanges over 7-14 days",
+            "Equivalent efficacy; requires stable central access"
+          ],
+          [
+            "Corticosteroids",
+            "Contraindicated in isolated GBS",
+            "No proven clinical benefit; impairs axonal healing"
+          ]
+        ]
+      },
+      "tx": "Randomized controlled trials confirm that targeted **Immunotherapy in pediatric GBS** significantly accelerates functional motor recovery. Intravenous immunoglobulin (IVIG 2 g/kg total, given as 0.4 g/kg/day for 5 days or 1 g/kg/day for 2 days) or plasmapheresis is first-line therapy. Systemic corticosteroids are proven completely ineffective and should not be administered for acute Guillain-Barr\u00e9 syndrome.",
+      "say": "Intravenous immunoglobulin at two grams per kilogram total dose or plasma exchange serves as definitive first line immunotherapy in pediatric patients."
+    },
+    {
+      "title": "Respiratory Muscle Failure Surveillance",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "r1",
+            "label": "Serial FVC, NIF & single breath count"
+          },
+          {
+            "id": "r2",
+            "label": "Diaphragmatic weakness & paradoxical breathing"
+          },
+          {
+            "id": "r3",
+            "label": "Elective endotracheal intubation before arrest"
+          }
+        ],
+        "edges": [
+          [
+            "r1",
+            "r2"
+          ],
+          [
+            "r2",
+            "r3"
+          ]
+        ]
+      },
+      "tx": "Close intensive care unit observation mandates strict **Respiratory failure monitoring** following the 20/30/40 rule. A vital capacity < 20 mL/kg, maximum inspiratory pressure < 30 cmH2O, or maximum expiratory pressure < 40 cmH2O indicates impending diaphragmatic paralysis requiring mechanical ventilation. Early elective endotracheal intubation prevents emergency hypoxic arrest and aspiration complications.",
+      "say": "Serial vital capacity and negative inspiratory force monitoring identify impending diaphragmatic failure, guiding timely elective intubation."
+    },
+    {
+      "title": "Juvenile Myasthenia Gravis Autoantibodies",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myasthenia-gravis-fig1.webp",
+        "alt": "Neuromuscular junction diagram with acetylcholine receptor antibodies and complement cascade",
+        "caption": "Autoantibodies cross-link acetylcholine receptors, accelerating receptor endocytosis at the motor endplate (StewardMD)."
+      },
+      "tx": "In contrast to peripheral neuropathies, **Juvenile myasthenia gravis antibodies** target postsynaptic neuromuscular junction proteins, presenting with fatiguable ptosis, diplopia, and bulbar weakness. Serum autoantibodies against the nicotinic acetylcholine receptor (AChR-Ab) are positive in 70-80% of generalized juvenile myasthenia, with anti-MuSK antibodies found in up to 40% of seronegative cases, marking a distinct severe phenotype.",
+      "say": "Juvenile myasthenia gravis is driven by autoantibodies against the acetylcholine receptor or muscle specific kinase, producing fluctuating fatiguable weakness."
+    },
+    {
+      "title": "Symptomatic Control with Pyridostigmine",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pyridostigmine Mechanism",
+          "points": [
+            "Reversible acetylcholinesterase inhibition",
+            "Prolongs acetylcholine survival at motor endplate",
+            "Initial dose: 0.5-1.0 mg/kg/dose orally q4-6h"
+          ]
+        },
+        "right": {
+          "title": "Cholinergic Toxicity Risks",
+          "points": [
+            "Abdominal cramps, hyperperistalsis & diarrhea",
+            "Bronchorrhea, salivation and bradycardia",
+            "Excess dosing triggers cholinergic weakness crisis"
+          ]
+        }
+      },
+      "tx": "Initial symptomatic treatment relies on **Pyridostigmine first-line therapy**, an oral acetylcholinesterase inhibitor. Oral acetylcholinesterase inhibitor pyridostigmine (0.5-1 mg/kg every 4-6 hours, max 300 mg/day) provides symptomatic improvement without modifying underlying autoimmunity. Dosing is timed 30 to 45 minutes before meals to optimize bulbar strength and prevent aspiration, while monitoring for cholinergic muscarinic side effects.",
+      "say": "Oral pyridostigmine is the first line symptomatic treatment for myasthenia gravis, dosed before meals to maximize bulbar strength and prevent aspiration."
+    },
+    {
+      "title": "Thymectomy in Pediatric Myasthenia",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Feature",
+          "Postpubertal Adolescents",
+          "Prepubertal Children"
+        ],
+        "rows": [
+          [
+            "Thymic Pathology",
+            "Prominent thymic follicular hyperplasia",
+            "Hyperplasia less common; minimal thymoma risk"
+          ],
+          [
+            "Thymectomy Indication",
+            "Recommended for generalized AChR-positive disease",
+            "Reserved for medically refractory generalized cases"
+          ],
+          [
+            "Clinical Benefit",
+            "Significantly reduces steroid doses and induces remission",
+            "Approached cautiously due to long-term immune role"
+          ]
+        ]
+      },
+      "tx": "Surgical intervention via **Thymectomy in adolescents** is recommended for generalized AChR-positive juvenile myasthenia gravis refractory to anticholinesterase monotherapy. Post-pubertal patients frequently exhibit thymic follicular hyperplasia with active germinal centers. Complete thymectomy removes autoantigen-sensitized T-cell clones, significantly increasing the probability of complete clinical remission and lowering lifetime corticosteroid requirements.",
+      "say": "Thymectomy is indicated for post-pubertal adolescents with generalized AChR positive myasthenia, significantly increasing the likelihood of complete remission."
+    }
+  ]
+}

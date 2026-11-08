@@ -11,23 +11,10 @@
       "say": "Pediatric hydrocephalus is classified pathophysiologically as non-communicating or communicating. Obstructive lesions prevent internal ventricular outflow, whereas communicating forms impair subarachnoid resorption.",
       "tx": "Classify **Communicating vs non-communicating hydrocephalus** based on the anatomical site of cerebrospinal fluid flow disruption. Non-communicating (obstructive) hydrocephalus results from intraventricular obstruction along CSF transit pathways (congenital aqueductal stenosis, Chiari malformation, Dandy-Walker cyst, or posterior fossa neoplasm). Communicating hydrocephalus arises from impaired extraventricular resorption of CSF by arachnoid villi and granulations, classically triggered by post-infectious meningitis or post-hemorrhagic intraventricular hemorrhage (Clinical signs).",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Non-Communicating (Obstructive)",
-          "points": [
-            "Intraventricular obstruction (aqueduct of Sylvius / foramina)",
-            "Disproportionate enlargement proximal to blockage",
-            "Aqueductal stenosis, Chiari II, Dandy-Walker, tectal glioma"
-          ]
-        },
-        "right": {
-          "title": "Communicating (Non-Obstructive)",
-          "points": [
-            "Obstruction at arachnoid granulations / basal cisterns",
-            "Symmetrical panventricular dilatation including 4th ventricle",
-            "Post-bacterial meningitis, subarachnoid or intraventricular hemorrhage"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/hydrocephalus-fig1.webp",
+        "alt": "CSF flow with obstructive blockage and communicating absorption failure.",
+        "caption": "Hydrocephalus: blocked flow or failed absorption. Credit: StewardMD."
       }
     },
     {
@@ -123,31 +110,10 @@
       "say": "Endoscopic third ventriculostomy creates an internal bypass from the third ventricle into the interpeduncular cistern. Calculating the success score helps select ideal surgical candidates.",
       "tx": "Apply **Endoscopic third ventriculostomy (ETV) criteria** to manage obstructive hydrocephalus without hardware. ETV uses a rigid or flexible neuroendoscope introduced through Kocher point to fenestrate the third ventricle floor (tuber cinereum) between the mamillary bodies and infundibular recess into the prepontine and interpeduncular cisterns. The ETV Success Score calculates predicted patency based on age, etiology, and prior shunt history; infants under 6 months or post-infectious etiologies have lower success, whereas older children with isolated aqueductal stenosis achieve > 80% long-term shunt-free survival (Overdrainage).",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "cand",
-            "label": "Non-communicating hydrocephalus (aqueductal stenosis / tectal mass)"
-          },
-          {
-            "id": "etv",
-            "label": "Endoscopic fenestration of third ventricle floor into prepontine cistern"
-          },
-          {
-            "id": "score",
-            "label": "ETV Success Score: Age + Etiology + Prior Shunt predicts long-term success"
-          }
-        ],
-        "edges": [
-          [
-            "cand",
-            "etv"
-          ],
-          [
-            "etv",
-            "score"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/hydrocephalus-mechanisms-vp-shunts-and-endoscopic-third-ventriculostomy-fig1.webp",
+        "alt": "VP shunt placement and endoscopic third ventriculostomy fenestration.",
+        "caption": "VP shunt and ETV: two ways to divert CSF. Credit: StewardMD."
       }
     },
     {
