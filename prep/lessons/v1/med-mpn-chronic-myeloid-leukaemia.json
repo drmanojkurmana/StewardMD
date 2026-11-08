@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "module": "med-mpn",
+ "subject": "medicine",
+ "title": "Chronic Myeloid Leukaemia and Polycythaemia Vera",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A clonal myeloproliferative neoplasm characterized by unregulated proliferation of the granulocytic lineage without loss of differentiation capacity defines **chronic myeloid leukaemia** (CML). Patients present classically in the chronic phase with massive splenomegaly, weight loss, night sweats, fatigue, and profound leukocytosis with the full spectrum of myeloid maturation (myeloblasts, promyelocytes, myelocytes, metamyelocytes, bands, and segmented neutrophils). Basophilia and eosinophilia are consistently present. Leukocyte alkaline phosphatase (LAP) score is characteristically low or zero, distinguishing CML from reactive leukaemoid reactions where LAP is elevated.",
+   "say": "A clonal myeloproliferative neoplasm characterized by unregulated proliferation of the granulocytic lineage without loss of differentiation defines chronic myeloid leukaemia. Patients present in the chronic phase with massive splenomegaly, weight loss, and marked leukocytosis displaying the full spectrum of myeloid maturation. Basophilia and eosinophilia are consistently present. The leukocyte alkaline phosphatase score is characteristically low or zero, distinguishing CML from a reactive leukaemoid reaction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-myeloid-leukemia-fig1.webp",
+    "alt": "Peripheral blood smear displaying massive leukocytosis with the entire spectrum of granulocytic differentiation.",
+    "caption": "Peripheral blood film demonstrating marked leukocytosis with complete granulocytic spectrum and basophilia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pathognomonic cytogenetic hallmark present in over ninety-five percent of patients with CML is the Philadelphia chromosome. Arising from a reciprocal translocation between the long arms of chromosomes 9 and 22, **t(9;22)**(q34;q11) translocates the ABL1 proto-oncogene from chromosome 9 to the breakpoint cluster region (BCR) on chromosome 22. The resulting chimeric BCR-ABL1 gene encodes a constitutively active 210-kilodalton cytoplasmic tyrosine kinase (p210). This mutant kinase continuously autophosphorylates downstream signaling cascades (JAK-STAT, PI3K-Akt, and RAS-MAPK), stimulating granulocyte proliferation and suppressing apoptosis.",
+   "say": "The pathognomonic cytogenetic hallmark present in over ninety-five percent of patients with CML is the Philadelphia chromosome. Arising from a reciprocal translocation between chromosomes 9 and 22, this translocation translocates the ABL1 proto-oncogene to the BCR gene on chromosome 22. The resulting chimeric BCR-ABL1 fusion gene encodes a constitutively active 210-kilodalton tyrosine kinase. This mutant kinase continuously drives downstream signaling cascades, stimulating granulocyte proliferation and suppressing apoptosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t922",
+      "label": "Reciprocal Chromosomal Translocation t(9;22)(q34;q11)"
+     },
+     {
+      "id": "p210",
+      "label": "Formation of Chimeric BCR-ABL1 p210 Fusion Gene"
+     },
+     {
+      "id": "kinase",
+      "label": "Constitutively Active Tyrosine Kinase Activity"
+     },
+     {
+      "id": "prolif",
+      "label": "Unchecked Granulopoiesis & Apoptosis Inhibition"
+     }
+    ],
+    "edges": [
+     [
+      "t922",
+      "p210"
+     ],
+     [
+      "p210",
+      "kinase"
+     ],
+     [
+      "kinase",
+      "prolif"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The discovery of selective tyrosine kinase inhibitors targeted against the ATP-binding pocket of BCR-ABL1 transformed CML from a fatal malignancy into a manageable chronic illness. Prescribing oral **imatinib** mesylate competitively inhibits the ATP-binding site of the BCR-ABL1 oncoprotein, locking the kinase in an inactive conformation and selectively inducing apoptosis of leukaemic clones. Over eighty-five percent of patients achieve complete cytogenetic remission and deep molecular response on long-term therapy. Second-generation inhibitors like nilotinib and dasatinib, and third-generation ponatinib, overcome kinase domain point mutations such as T315I.",
+   "say": "The discovery of selective tyrosine kinase inhibitors targeted against the ATP-binding pocket of BCR-ABL1 transformed CML from a fatal malignancy into a manageable condition. Prescribing oral imatinib competitively inhibits the ATP-binding site of the BCR-ABL1 oncoprotein, locking the kinase in an inactive state and selectively inducing apoptosis of leukaemic cells. Most patients achieve complete cytogenetic remission on long-term therapy. Second and third-generation inhibitors overcome secondary kinase domain mutations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Endpoint",
+     "Timeframe on TKI Therapy",
+     "Molecular / Cytogenetic Definition",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Complete Haematological Response",
+      "3 Months",
+      "Normal WBC (< 10,000), no immature cells, normal spleen",
+      "Initial disease control"
+     ],
+     [
+      "Early Molecular Response",
+      "3 Months",
+      "BCR-ABL1 transcript <= 10% on International Scale (IS)",
+      "Strong predictor of long-term OS"
+     ],
+     [
+      "Complete Cytogenetic Response",
+      "6 Months",
+      "Zero Philadelphia-positive metaphases on bone marrow",
+      "Elimination of cytogenetic clone"
+     ],
+     [
+      "Major Molecular Response (MMR)",
+      "12 Months",
+      "BCR-ABL1 transcript <= 0.1% (3-log reduction)",
+      "Durable progression-free survival"
+     ],
+     [
+      "Deep Molecular Response (MR4.5)",
+      "Sustained > 2 years",
+      "BCR-ABL1 transcript <= 0.0032% (4.5-log reduction)",
+      "Candidate for Treatment-Free Remission (TFR)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Untreated chronic myeloid leukaemia inevitably progresses through an accelerated phase into an acutely fatal acute leukaemia. Entering **blast crisis** is defined by twenty percent or more blasts in peripheral blood or bone marrow, or extramedullary blast proliferation. Approximately seventy percent of blast crises transform into acute myeloid leukaemia, while thirty percent transform into acute lymphoblastic leukaemia. Blast crisis carries an exceptionally grave prognosis, requiring potent second or third-generation TKIs, salvage induction chemotherapy, and urgent allogeneic stem cell transplantation.",
+   "say": "Untreated or refractory chronic myeloid leukaemia inevitably progresses through an accelerated phase into an acutely fatal acute leukaemia. Entering blast crisis is defined by twenty percent or more blasts in the blood or bone marrow, or extramedullary blast proliferation. Approximately seventy percent of blast crises transform into acute myeloid leukaemia, while thirty percent transform into acute lymphoblastic leukaemia. Blast crisis carries a poor prognosis, requiring potent tyrosine kinase inhibitors and allogeneic stem cell transplantation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CML Disease Phase",
+     "Marrow / Blood Blast %",
+     "Key Clinical Features",
+     "Therapeutic Strategy"
+    ],
+    "rows": [
+     [
+      "Chronic Phase",
+      "< 10% Blasts",
+      "Leukocytosis, splenomegaly, low LAP score",
+      "First-line TKI (Imatinib / Dasatinib)"
+     ],
+     [
+      "Accelerated Phase",
+      "10% to 19% Blasts",
+      "Persistent splenomegaly, thrombocytopenia / thrombocytosis",
+      "Switch to potent 2nd-gen TKI"
+     ],
+     [
+      "Blast Crisis (Myeloid)",
+      ">= 20% Blasts (70%)",
+      "Auer rods, MPO+, refractory pancytopenia",
+      "AML induction + TKI -> Allogeneic HCT"
+     ],
+     [
+      "Blast Crisis (Lymphoid)",
+      ">= 20% Blasts (30%)",
+      "TdT+, CD10+, CD19+ lymphoblasts",
+      "ALL induction + TKI -> Allogeneic HCT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A clonal stem cell myeloproliferative neoplasm characterized by autonomous erythropoietin-independent erythroid proliferation leads to panmyelosis. In **polycythaemia vera** (PV), excessive red blood cell mass elevates blood viscosity, precipitating arterial and venous thrombosis (including Budd-Chiari syndrome, mesenteric vein thrombosis, stroke, and myocardial infarction). Patients report aquagenic pruritus (severe itching after a warm shower mediated by basophil degranulation), burning erythromelalgia in the hands and feet, facial plethora (ruddy cyanosis), and splenomegaly. Serum erythropoietin level is characteristically low or suppressed, definitively ruling out secondary polycythaemia.",
+   "say": "A clonal stem cell myeloproliferative neoplasm characterized by autonomous erythropoietin-independent red cell proliferation leads to panmyelosis. In polycythaemia vera, excessive red cell mass increases blood viscosity, predisposing to arterial and venous thrombosis such as Budd-Chiari syndrome. Patients report severe itching after a warm shower, burning pain in the extremities, ruddy facial plethora, and splenomegaly. Serum erythropoietin is characteristically low, definitively ruling out secondary polycythaemia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/polycythaemia-vera-fig1.webp",
+    "alt": "Pathophysiological mechanisms of erythrocytosis, hyperviscosity, and thrombotic risk in polycythaemia vera.",
+    "caption": "Erythropoietin-independent erythrocytosis and microvascular thrombosis in polycythaemia vera. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A recurrent somatic gain-of-function point mutation in the pseudokinase domain of Janus kinase 2 drives polycythaemia vera. The **jak2 v617f** mutation substitutes phenylalanine for valine at codon 617 on chromosome 9p, disrupting the autoinhibitory JH2 pseudokinase domain. This mutation confers constitutive, ligand-independent phosphorylation of downstream STAT transcription factors. Present in over ninety-five percent of patients with polycythaemia vera, testing for JAK2 V617F represents the primary molecular diagnostic gateway.",
+   "say": "A recurrent somatic gain-of-function point mutation in the pseudokinase domain of Janus kinase 2 drives polycythaemia vera. The jak2 v617f mutation substitutes phenylalanine for valine at codon 617 on chromosome 9p. This mutation eliminates the autoinhibitory domain, conferring constitutive, ligand-independent activation of downstream STAT transcription factors. Present in over ninety-five percent of patients with polycythaemia vera, testing for JAK2 V617F represents the primary molecular diagnostic gateway.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "JAK2 V617F Mutation (Exon 14)",
+     "points": [
+      "Valine to Phenylalanine substitution (V617F)",
+      "Loss of autoinhibitory JH2 pseudokinase domain",
+      "Present in 95-98% of Polycythaemia Vera",
+      "Present in 50-60% of ET and Primary Myelofibrosis",
+      "Constitutive ligand-independent STAT signaling"
+     ]
+    },
+    "right": {
+     "title": "JAK2 Exon 12 Mutations",
+     "points": [
+      "In-frame deletions / duplications in exon 12",
+      "Present in 2-3% of Polycythaemia Vera (V617F negative)",
+      "Presents with isolated, pure erythrocytosis",
+      "Normal leukocyte and platelet counts",
+      "Same biological activation of erythropoietin axis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Differentiating primary clonal polycythaemia vera from secondary reactive erythrocytosis is critical to prevent inappropriate cytoreductive therapies. Measuring serum **erythropoietin** provides the essential biochemical branch point; low or undetectable erythropoietin confirms polycythaemia vera, whereas elevated erythropoietin indicates secondary polycythaemia. Causes of secondary erythrocytosis divide into physiologically appropriate tissue hypoxia (chronic obstructive pulmonary disease, high altitude, cyanotic congenital heart disease) and inappropriate autonomous erythropoietin secretion by neoplasms including renal cell carcinoma, hepatocellular carcinoma, cerebellar haemangioblastoma, uterine leiomyoma, and pheochromocytoma.",
+   "say": "Differentiating primary clonal polycythaemia vera from secondary reactive erythrocytosis is critical to avoid inappropriate therapies. Measuring serum erythropoietin provides the essential biochemical test; low or undetectable erythropoietin confirms polycythaemia vera, whereas elevated erythropoietin indicates secondary polycythaemia. Secondary causes include tissue hypoxia from pulmonary disease or cyanotic heart disease, and inappropriate erythropoietin secretion by tumours such as renal cell carcinoma and cerebellar haemangioblastoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "poly",
+      "label": "Documented Absolute Erythrocytosis (Hb > 16.5 M / > 16.0 F)"
+     },
+     {
+      "id": "epo",
+      "label": "Measure Serum Erythropoietin Level"
+     },
+     {
+      "id": "low",
+      "label": "Low / Undetectable EPO: Test for JAK2 V617F -> Polycythaemia Vera"
+     },
+     {
+      "id": "high",
+      "label": "Elevated / Normal EPO: Investigate Hypoxia or EPO-Secreting Tumour"
+     }
+    ],
+    "edges": [
+     [
+      "poly",
+      "epo"
+     ],
+     [
+      "epo",
+      "low"
+     ],
+     [
+      "epo",
+      "high"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First-line therapeutic management in polycythaemia vera aims to mitigate thrombotic complications by maintaining hematocrit strictly below forty-five percent. Performing regular therapeutic **phlebotomy** rapidly removes excess circulating erythrocytes, reducing blood viscosity and microvascular shear stress. Co-administering low-dose aspirin (75 to 100 milligrams daily) significantly suppresses platelet thromboxane production, reducing arterial thrombosis and relieving microvascular erythromelalgia. In high-risk patients (age over sixty years or history of thrombosis), cytoreductive therapy with oral hydroxyurea or pegylated interferon-alpha is added to control myeloproliferation.",
+   "say": "First-line therapeutic management in polycythaemia vera aims to mitigate thrombotic complications by maintaining hematocrit strictly below forty-five percent. Performing regular therapeutic phlebotomy rapidly removes excess circulating red blood cells, reducing blood viscosity. Co-administering low-dose aspirin significantly suppresses platelet activation, reducing arterial thrombosis and relieving erythromelalgia. In high-risk patients over sixty or with prior thrombosis, cytoreductive therapy with hydroxyurea is added.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Modality",
+     "Clinical Target",
+     "Mechanism of Action",
+     "Patient Indication"
+    ],
+    "rows": [
+     [
+      "Therapeutic Phlebotomy",
+      "Hematocrit strictly < 45%",
+      "Direct removal of excess RBC volume",
+      "All patients with Polycythaemia Vera"
+     ],
+     [
+      "Low-Dose Aspirin (75-100 mg)",
+      "Primary / Secondary Prevention",
+      "Irreversible platelet COX-1 inhibition",
+      "All patients lacking bleeding contraindications"
+     ],
+     [
+      "Hydroxyurea Cytoreduction",
+      "Normalization of WBC and PLT",
+      "Inhibits ribonucleotide reductase",
+      "High risk: Age > 60 or Prior Thrombosis"
+     ],
+     [
+      "Ruxolitinib (JAK1/2 Inhibitor)",
+      "Spleen reduction & symptom control",
+      "Selective JAK1/JAK2 kinase blockade",
+      "Hydroxyurea-resistant or intolerant PV"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
