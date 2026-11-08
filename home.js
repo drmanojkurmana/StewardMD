@@ -1240,6 +1240,7 @@
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
     menu: function () { if (window.SB && SB.open) SB.open(); },
     about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
+    paywall: function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("home-banner"); return; } } catch (e) {} toast("Plans loading\u2026"); },
     account: function () { if (window.SB && SB.open) SB.open(); },
     recent: function () { if (typeof openMyCases === "function") openMyCases(); },
     dictate: function () { try { window.SMD_dictateMaik(); } catch (e) { if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "text" }); else toast("Voice dictation loading…"); } },
@@ -1978,6 +1979,15 @@
     if (mins <= 270) return "Hi night owl" + nm + ". It\u2019s too early to say good morning";  // 00:00\u201304:30
     return greetV4() + nm;
   }
+  function isProV4() { try { return !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()); } catch (e) { return false; } }
+  // Hero greeting for the reference home: line 1 in white, "Dr <first>" in mint below.
+  // Same clock/account source as greetLineV4(); guests get the line with no name.
+  function greetHeroV4() {
+    var f = acctFirstV4(), nm = f ? "Dr " + escV4(f) : "";
+    var d = new Date(), mins = d.getHours() * 60 + d.getMinutes();
+    if (mins <= 270) return '<span class="hrf-greet-line">Hi night owl,</span>' + (nm ? '<span class="hrf-greet-name">' + nm + '</span>' : '') + '<span class="hrf-greet-note">It\u2019s too early to say good morning</span>';
+    return '<span class="hrf-greet-line">' + greetV4() + ',</span>' + (nm ? '<span class="hrf-greet-name">' + nm + '</span>' : '');
+  }
   function tileV4(act, icon, tt, sub) {
     return '<button class="v4-tile" data-act="' + act + '" aria-label="' + tt + '"><span class="ic">' + svg(icon) + '</span><span class="tt">' + tt + '</span><span class="sub">' + sub + '</span></button>';
   }
@@ -2605,9 +2615,9 @@
       var on = id === cur;
       return '<button type="button" role="tab" class="rnav-htab' + (on ? ' on' : '') + '" id="rnavHtab-' + id + '" data-hometab="' + id + '" aria-selected="' + on + '" aria-controls="rnavHpanel-' + id + '" tabindex="' + (on ? 0 : -1) + '">' + homeTabLabel(T, id) + '</button>';
     }).join("");
-    return '<div class="rnav-tools-head"><h2 class="rnav-tools-h" id="rnavToolsH">Clinical tools</h2>' +
-        '<button type="button" class="rnav-alltools" data-act="alltools">' + ric("apps") + '<span>All tools</span></button></div>' +
-      '<div class="rnav-htabs" role="tablist" aria-labelledby="rnavToolsH">' + tabs + '</div>' +
+    return '<div class="rnav-tools-head"><h2 class="rnav-tools-h" id="rnavToolsH">Clinical Tools</h2>' +
+        '<button type="button" class="rnav-alltools" data-act="alltools">' + ric("apps") + '<span>All Tools</span>' + ric("chevron_right") + '</button></div>' +
+      '<div class="hrf-pillsrow"><div class="rnav-htabs" role="tablist" aria-labelledby="rnavToolsH">' + tabs + '</div><button type="button" class="hrf-chev" data-hometab-pick="1" aria-label="More categories">' + ric("expand_more") + '</button></div>' +
       '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-foryou" aria-labelledby="rnavHtab-foryou"' + (cur === "foryou" ? '' : ' hidden') + '><div id="rnavTry">' + homeTryCard(T) + '</div>' + grid + '</div>' +
       T.TAB_IDS.filter(function (id) { return id !== "foryou"; }).map(function (id) {
         return '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-' + id + '" aria-labelledby="rnavHtab-' + id + '"' + (cur === id ? '' : ' hidden') + '>' + (cur === id ? homeTabPanel(T, id) : '') + '</div>';
@@ -2790,32 +2800,33 @@
   }
 
   function homeRedesignMarkup() {
+    var pro = isProV4();
     return '' +
-      '<header class="rnav-head rds-safe-top">' +
+      '<header class="rnav-head rds-safe-top hrf-head">' +
         '<button class="rds-icon-btn" data-act="menu" aria-label="Menu">' + ric("menu") + '</button>' +
-        '<div class="rnav-brand"><img src="/logo.png" alt="StewardMD"><span>Steward<b>MD</b></span></div>' +
+        '<div class="rnav-brand"><img src="/logo.png" alt="StewardMD"><span>Steward<b>MD</b></span><span class="hrf-pro" id="hrfProChip"' + (pro ? '' : ' hidden') + '>Pro</span></div>' +
         '<div class="rnav-head-sp"></div>' +
         '<button class="rds-icon-btn" data-act="search" aria-label="Search">' + ric("search") + '</button>' +
         '<button class="rds-icon-btn" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + ric("dark_mode") + '</button>' +
         '<button class="rds-icon-btn rnav-bell v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + ric("notifications") + '</button>' +
       '</header>' +
       '<main class="v3-main rnav-main"><div class="rnav-stack">' +
-        '<div class="rnav-greet"><div class="rnav-eyebrow">' + dateV4() + '</div><div class="rnav-hi">' + greetLineV4() + '</div></div>' +
+        '<div class="hrf-hero"><div class="rnav-greet"><div class="rnav-eyebrow hrf-date">' + dateV4() + '</div><div class="rnav-hi hrf-greet">' + greetHeroV4() + '</div><div class="hrf-rule" aria-hidden="true"></div></div><img class="hrf-steth" src="/assets/home-hero.webp" width="430" height="218" alt="" aria-hidden="true" fetchpriority="high" decoding="async"></div>' +
+        '<div class="rnav-qa hrf-qa">' +
+          '<button class="rnav-qa-btn hrf-qa-btn is-first" data-act="startcase" aria-label="Start a Case">' + ric("stethoscope") + '<span>Start Case</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn" data-act="reasoning" aria-label="Dx My Patient">' + ric("neurology") + '<span>Dx Patient</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + ric("medication") + '<span>Drugs</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn" data-act="calculators" aria-label="Calculators">' + ric("calculate") + '<span>Calculators</span></button>' +
+        '</div>' +
+        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + (pro ? '' : ' data-act="paywall" role="button" tabindex="0" aria-label="StewardMD Pro — see plans"') + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">StewardMD <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo hrf-banner-logo" src="/logo.png" alt=""><span class="hrf-dots" aria-hidden="true"></span></section>' +
+        '<div class="rnav-qrow hrf-qrow">' +
+          '<button class="rnav-qc hrf-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="antibiogram" aria-label="Antibiogram">' + ric("biotech") + '<span>Antibiogram</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + ric("medication") + '<span>Dosing</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + ric("local_hospital") + '<span>Hospital+</span></button>' +
+        '</div>' +
         '<div id="rnavWatch"></div>' +
         '<div id="rnavResume"></div>' +
-        '<div class="rnav-qa">' +
-          '<button class="rnav-qa-btn" data-act="startcase" aria-label="Start a Case">' + ric("stethoscope") + '<span>Start Case</span></button>' +
-          '<button class="rnav-qa-btn" data-act="reasoning" aria-label="Dx My Patient">' + ric("neurology") + '<span>Dx Patient</span></button>' +
-          '<button class="rnav-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + ric("medication") + '<span>Drugs</span></button>' +
-          '<button class="rnav-qa-btn" data-act="calculators" aria-label="Calculators">' + ric("calculate") + '<span>Calculators</span></button>' +
-        '</div>' +
-        '<section class="rnav-hero" data-act="about" role="button" tabindex="0" aria-label="About & Acknowledgements" style="cursor:pointer"><div class="rnav-hero-bd"><div class="rnav-hero-tt">Steward<b>MD</b></div><div class="rnav-hero-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo" src="/logo.png" alt=""></section>' +
-        '<div class="rnav-qrow">' +
-          '<button class="rnav-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
-          '<button class="rnav-qc" data-act="antibiogram" aria-label="Antibiogram">' + ric("biotech") + '<span>Antibiogram</span></button>' +
-          '<button class="rnav-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + ric("medication") + '<span>Dosing</span></button>' +
-          '<button class="rnav-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + ric("local_hospital") + '<span>Hospital+</span></button>' +
-        '</div>' +
         homeToolsSectionMarkup() +
         '<div id="rnavRecent"></div>' +
         '<div class="v4-foot rnav-foot"><div class="disc">Only for qualified clinicians</div>' +
@@ -2823,12 +2834,12 @@
           '<div class="cred">© 2026 StewardMD · All rights reserved</div>' +
           '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a role="button" tabindex="0" onclick="openModal(\'privacyModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Privacy Policy</a> · <a role="button" tabindex="0" onclick="openModal(\'termsModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Terms of Use</a> · <a role="button" tabindex="0" onclick="openModal(\'contactModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Support</a></div><div class="v4-rev" style="margin-top:4px;font:500 11px/1.5 var(--v3-font,sans-serif);color:var(--v3-muted,#889)">Clinical content last reviewed · 5 Jul 2026</div></div>' +
       '</div></main>' +
-      '<nav class="rnav-tabbar rds-safe-bottom">' +
-        '<button class="rnav-tab" data-act="hospital" aria-label="Hospital">' + ric("local_hospital") + '<span>Hospital</span></button>' +
+      '<nav class="rnav-tabbar rds-safe-bottom hrf-tabbar">' +
+        '<button class="rnav-tab active" data-act="home" aria-label="Home" aria-current="page">' + ric("home") + '<span>Home</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask Maik"><span class="rds-icon rnav-maik-mark" aria-hidden="true"><img src="/maik-ai-mark.png" alt="" width="26" height="26" draggable="false"></span><span>Ask Maik</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="rds-icon rnav-maik-mark" aria-hidden="true">auto_awesome</span><span>Ask MaiK</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
-        '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("more_horiz") + '<span>More</span></button>' +
+        '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("apps") + '<span>More</span></button>' +
       '</nav>';
   }
   // Populate the dashboard cards from REAL data only (no placeholders). Anything with
@@ -2964,6 +2975,15 @@
       if (_rtb) { var _rsync = function () { _rtb.innerHTML = document.body.classList.contains("dark") ? ric("light_mode") : ric("dark_mode"); };
         _rsync(); _rtb.addEventListener("click", function () { setTimeout(_rsync, 40); }); }
       try { hydrateRnav(); } catch (e) {}
+      // The banner is a section with role="button" (its content is not phrasing content),
+      // so Enter/Space are wired here; a native button would swallow the block markup.
+      try { var _bn = root.querySelector("#hrfBanner"); if (_bn) _bn.addEventListener("keydown", function (e) { if ((e.key === "Enter" || e.key === " ") && _bn.getAttribute("data-act") === "paywall") { e.preventDefault(); ACT.paywall(); } }); } catch (e) {}
+      // Tier can land after first paint: keep the Pro chip and the banner's tap honest.
+      try { window.addEventListener("smd:tier", function () {
+        var pro = isProV4(), chip = document.getElementById("hrfProChip"), bn = document.getElementById("hrfBanner");
+        if (chip) chip.hidden = !pro;
+        if (bn) { if (pro) { bn.removeAttribute("data-act"); bn.removeAttribute("role"); bn.removeAttribute("tabindex"); bn.removeAttribute("aria-label"); } else { bn.setAttribute("data-act", "paywall"); bn.setAttribute("role", "button"); bn.setAttribute("tabindex", "0"); bn.setAttribute("aria-label", "StewardMD Pro — see plans"); } }
+      }); } catch (e) {}
     } else if (homeV4On()) {
       root.classList.add("hv4"); root.innerHTML = homeV4Markup();
       // header theme toggle reflects current theme (moon in light, sun in dark)
