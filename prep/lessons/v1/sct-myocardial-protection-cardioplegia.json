@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sct-myocardial-protection-cardioplegia",
+  "title": "Myocardial Protection, Cardioplegia Solutions and Hypothermia",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Technique of myocardial revascularization: Conventional on-pump cardiopulmonary bypass)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 3 (Myocardial Protection)",
+    "AHA/ACC Coronary Artery Bypass Graft Surgery Guidelines"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Aortic cross-clamping isolates the coronary circulation, producing immediate global myocardial ischemia. Under normothermic conditions, cellular stores of adenosine triphosphate deplete within minutes, leading to irreversible myocyte death. Surgical teams administer chemical arrest and topical hypothermia to suppress myocardial metabolic demand and preserve cellular integrity.",
+      "tx": "Application of **aortic cross-clamping** completely isolates the coronary vascular bed, initiating immediate global myocardial ischemia. In the working normothermic heart, this sudden cessation of perfusion causes rapid adenosine triphosphate breakdown. Surgeons induce prompt **chemical arrest** alongside hypothermia to extinguish electromechanical work, successfully reducing **myocardial metabolic demand** by more than 90 percent.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cpb-bypass-myocardial-protection-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Cardiopulmonary bypass circuit and cardioplegia delivery. Credit: StewardMD.",
+        "alt": "Cardiopulmonary bypass circuit and cardioplegia delivery architecture."
+      }
+    },
+    {
+      "say": "Infusing potassium-rich cardioplegic solution raises the extracellular potassium concentration, depolarizing the cardiac myocyte membrane. As the resting potential shifts from minus 90 millivolts up to minus 50 millivolts, fast voltage-gated sodium channels inactivate. This electromechanical arrest locks the myocardium in diastole, preventing energetic expenditure during cross-clamp ischemia.",
+      "tx": "Delivery of **hyperkalemic cardioplegia** depolarizes cardiac sarcolemmal membranes by raising extracellular potassium. This shifts the cellular **resting membrane potential** from negative 90 millivolts to approximately negative 50 millivolts, permanently inactivating voltage-gated fast sodium channels. The heart arrests in **diastolic arrest**, preserving intracellular high-energy phosphate stores while creating a still, bloodless surgical operative field.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Physiological Phase",
+          "Resting Membrane Potential",
+          "Channel and Myocardial State"
+        ],
+        "rows": [
+          [
+            "Normal resting state",
+            "-90 mV",
+            "Fast voltage-gated sodium channels primed and functional"
+          ],
+          [
+            "Depolarized cardioplegic arrest",
+            "-50 mV",
+            "Fast sodium channels inactivated, causing complete electrical silence"
+          ],
+          [
+            "Arrest morphology",
+            "Relaxed diastole",
+            "Minimal wall tension and abolished actin-myosin ATPase activity"
+          ],
+          [
+            "Energy expenditure",
+            "<10 percent of baseline",
+            "Preserves endogenous phosphocreatine and ATP reserves"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Antegrade cardioplegia enters the ascending aortic root proximal to the cross-clamp or directly through individual coronary ostia. Its efficacy depends entirely on a competent aortic valve to prevent run-off into the ventricular cavity. In the presence of significant aortic regurgitation, antegrade root delivery causes dangerous ventricular distension.",
+      "tx": "Administering **antegrade cardioplegia** into the **aortic root** proximal to the cross-clamp allows fluid to enter the coronary ostia under controlled pressure. The method requires a fully competent valve, as severe **aortic insufficiency** allows the solution to escape into the chamber. This regurgitation causes hazardous left ventricular cavity distension and poor coronary myocardial distribution.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antegrade Route",
+          "points": [
+            "Delivered into aortic root or ostia",
+            "Follows physiological downstream coronary flow",
+            "Fails during significant aortic valve regurgitation",
+            "Malfused downstream vessels suffer poor flow"
+          ]
+        },
+        "right": {
+          "title": "Retrograde Route",
+          "points": [
+            "Delivered into coronary sinus lumen",
+            "Direct venous distribution independent of aortic valve",
+            "Homogeneous delivery across severe CAD lesions",
+            "Suboptimal perfusion to anterior right ventricle"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Retrograde cardioplegia bypasses diseased epicardial arteries by infusing solution directly into the coronary sinus. The balloon tip catheter seals the sinus mouth and directs flow backward through the cardiac capillary beds, which is recognized by surgical teams. This backward perfusion guarantees even delivery throughout the left ventricular myocardium despite critical proximal coronary occlusions.",
+      "tx": "Infusing **retrograde cardioplegia** directly into the **coronary sinus** utilizes an inflatable balloon-tipped catheter positioned via right atriotomy. The solution traverses cardiac veins in reverse, flowing through deep capillaries into epicardial arteries. This approach ensures homogeneous distribution across territories subtended by critical proximal **coronary occlusion** or severely calcified ostial stenosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Catheter passed into coronary sinus under TEE guidance"
+          },
+          {
+            "id": "b",
+            "label": "Balloon inflated to seal coronary venous ostium"
+          },
+          {
+            "id": "c",
+            "label": "Retrograde infusion traverses coronary venous network"
+          },
+          {
+            "id": "d",
+            "label": "Reverse perfusion delivers cardioplegia past severe arterial blocks"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Perfusionists and surgeons continuously monitor coronary sinus infusion pressures throughout retrograde administration, which is recognized by surgical teams. High hydrostatic pressure in the thin-walled venous drainage system can cause mechanical rupture or severe tissue injury. Pressures must stay strictly below 40 to 50 millimetres of mercury at all times.",
+      "tx": "Surgical safety requires continuous pressure transducing because elevated **coronary sinus pressure** causes mechanical vein tearing and severe **myocardial edema**. Infusion pressure must never exceed 40 to 50 mmHg during retrograde administration. High pressures cause catastrophic retropericardial **sinus rupture** and disruption of the delicate intramyocardial capillary endothelium.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Delivery Parameter",
+          "Target Threshold",
+          "Pathophysiological Rationale"
+        ],
+        "rows": [
+          [
+            "Retrograde sinus pressure",
+            "<40 to 50 mmHg",
+            "Prevents fatal venous wall rupture and intramyocardial hematoma"
+          ],
+          [
+            "Antegrade root pressure",
+            "60 to 80 mmHg",
+            "Ensures ostial perfusion while preventing endothelial shearing"
+          ],
+          [
+            "Cardioplegia solution temp",
+            "4 to 8 degrees Celsius",
+            "Maintains deep hypothermic metabolic suppression"
+          ],
+          [
+            "Systemic hypothermia",
+            "32 to 34 degrees Celsius",
+            "Reduces full body oxygen consumption during CPB"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Cold blood cardioplegia blends autologous oxygenated blood with high potassium crystalloid solution in a four to one ratio. The red cells deliver ongoing oxygen during ischemic cross-clamping while endogenous buffers counter acidosis. Surgeons re-administer fresh cold doses every 15 to 20 minutes to maintain arrest.",
+      "tx": "Techniques utilizing **cold blood cardioplegia** formulate an autologous **blood-to-crystalloid ratio** of 4 to 1 at 4 degrees Celsius. The erythrocytes maintain ongoing oxygen transport and physiological oncotic buffering throughout the ischemic arrest period. Surgeons follow a strict **reinfusion interval** of 15 to 20 minutes to replenish chilled substrate and maintain profound hypothermic arrest.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cardiac-surgery-cabg-valvular-repair-and-cardiopulmonary-bypass-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Coronary artery bypass and cannulation technique. Credit: StewardMD.",
+        "alt": "Coronary artery bypass grafting cannulation and cardioplegia setup."
+      }
+    },
+    {
+      "say": "Del Nido cardioplegia has gained widespread use in modern adult and paediatric cardiac surgery. It uses a single dose crystalloid to blood ratio of four to one enriched with lidocaine and magnesium. This unique composition provides sustained electromechanical quiescence for up to 60 to 90 minutes from a single infusion.",
+      "tx": "Popularized extensively in congenital and adult cardiac operations, **del Nido cardioplegia** incorporates a **single-dose cardioplegia** formulation mixing crystalloid with blood in a 4 to 1 ratio. The base solution contains **lidocaine** and magnesium to prevent intracellular calcium overload, safely conferring sustained, robust myocardial protection for 60 to 90 minutes of continuous cross-clamp duration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cold Blood Cardioplegia (4:1)",
+          "points": [
+            "Re-dosing required every 15 to 20 minutes",
+            "High blood content buffers tissue acidosis",
+            "Delivers continuous dissolved and hemoglobin oxygen",
+            "Frequent interruption of surgical anastomotic workflow"
+          ]
+        },
+        "right": {
+          "title": "Del Nido Formulation",
+          "points": [
+            "Single infusion protects for 60 to 90 minutes",
+            "Lidocaine blocks sodium entry and calcium accumulation",
+            "Magnesium competes with calcium at sarcoplasmic reticulum",
+            "Uninterrupted surgical focus during complex reconstructions"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Before releasing the aortic cross-clamp, surgical teams frequently administer a terminal warm reperfusion dose. This warm blood infusion washes out acidic metabolic end-products and replenishes depleted high-energy phosphates. Restoring physiological temperature and substrates minimizes reperfusion arrhythmias and accelerates hemodynamic recovery.",
+      "tx": "Immediately prior to releasing the aortic cross-clamp, administering **terminal warm reperfusion**, also termed a **hot shot**, restores active metabolic resuscitation to the myocardium. The normothermic substrate-enriched blood washes out acidic lactate and accumulated toxic ions, driving **substrate replenishment** into myocyte mitochondria to accelerate functional contractile recovery upon systemic reperfusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Completion of distal coronary or intracardiac repairs"
+          },
+          {
+            "id": "b",
+            "label": "Infusion of normothermic blood hot shot into coronary ostia"
+          },
+          {
+            "id": "c",
+            "label": "Washout of acidic lactate, calcium and cellular metabolites"
+          },
+          {
+            "id": "d",
+            "label": "Release of aortic cross-clamp with accelerated sinus rhythm resumption"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

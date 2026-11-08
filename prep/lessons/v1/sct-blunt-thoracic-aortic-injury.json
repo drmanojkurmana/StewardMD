@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "sct-blunt-thoracic-aortic-injury",
+  "title": "Blunt Thoracic Aortic Injury: Isthmus Anatomy, SVS Grading, TEVAR and Management",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 113 (Thoracic Aortic Trauma)",
+    "Society for Vascular Surgery (SVS) Clinical Practice Guidelines for Blunt Aortic Injury",
+    "EAST Practice Management Guidelines for Blunt Aortic Injury"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Blunt thoracic aortic injury occurs most commonly at the aortic isthmus. This region lies immediately distal to the origin of the left subclavian artery where the ligamentum arteriosum attaches. The mobile aortic arch transitions into the fixed descending aorta, making this transition point vulnerable to deceleration stress.",
+      "tx": "Over 90 percent of blunt thoracic aortic injuries localize anatomically to the **aortic isthmus**, situated immediately distal to the left subclavian artery origin at the insertion of the **ligamentum arteriosum**. At this anatomical junction, the relatively mobile transverse aortic arch transitions abruptly into the fixed retroperitoneal thoracic aorta, creating severe **deceleration shear** stress.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aortic-dissection-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Thoracic aortic injury at aortic isthmus. Credit: StewardMD.",
+        "alt": "Anatomical vulnerability of aortic isthmus to blunt deceleration disruption."
+      }
+    },
+    {
+      "say": "The primary injury mechanism is violent deceleration during high-speed motor vehicle collisions or falls from great heights. Rapid deceleration generates immense differential inertial forces across the tethered aorta. Water-hammer shockwaves and osseous pinching between the sternum and spine combine to tear the aortic wall.",
+      "tx": "High-energy **rapid deceleration** trauma, most frequently encountered in a head-on or lateral **motor vehicle collision** or free falls exceeding 3 storeys, generates catastrophic **torsional shear forces**. Concurrently, osseous compression of the great vessels between the anterior bony sternum and the posterior thoracic spine produces full-thickness or partial-thickness transverse intimal disruption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Aortic Isthmus Mechanics",
+          "points": [
+            "Fixed tethering by ligamentum arteriosum",
+            "Transition from mobile arch to tethered descending aorta",
+            "Vulnerable to torsional twisting and acute bending",
+            "Accounts for 90 to 95 percent of clinical survivors"
+          ]
+        },
+        "right": {
+          "title": "Aortic Root Mechanics",
+          "points": [
+            "Tethered firmly by cardiac base and pericardial reflection",
+            "Prone to transverse transection at sinotubular junction",
+            "Causes instantaneous hemopericardium and tamponade",
+            "High rate of immediate prehospital death at crash scene"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Initial trauma chest radiography provides critical screening clues for mediastinal hemorrhage. Classic radiographic signs include mediastinal widening exceeding eight centimetres on an upright view and blurring of the aortic knob contour. Clinicians also look for left apical pleural capping and rightward tracheal deviation.",
+      "tx": "Initial screening chest radiographs reveal prominent indirect signs of mediastinal hematoma, notably **mediastinal widening** measuring greater than 8 cm on an upright projection. Additional classic signs comprise loss of the normal **aortic knob contour**, a left **apical cap** of pleural fluid, tracheal deviation to the right, and depression of the left mainstem bronchus.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-xray-flail-chest-surgical-emphysema.webp",
+        "ar": 1.3333,
+        "caption": "Severe blunt thoracic trauma with deceleration injury. Credit: StewardMD.",
+        "alt": "Chest radiograph signs of high-energy blunt thoracic deceleration injury."
+      }
+    },
+    {
+      "say": "Contrast-enhanced computed tomography angiography of the chest is the undisputed gold standard for diagnosis. Thin-slice multidetector CT detects minimal intimal tears, pseudoaneurysms, and periaortic hematomas with near perfect accuracy, which is recognized by surgical teams. A negative scan reliably rules out injury without needing invasive catheter angiography.",
+      "tx": "Multidetector **CT angiography** of the chest represents the definitive **gold standard** imaging investigation for blunt aortic trauma. Modern helical scans achieve an **imaging sensitivity** and negative predictive value approaching 100 percent, accurately delineating intimal tears, luminal caliber, false aneurysms, and periaortic mediastinal extravasation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Imaging Modality",
+          "Diagnostic Sensitivity",
+          "Role in Clinical Pathway"
+        ],
+        "rows": [
+          [
+            "Chest Radiograph",
+            "60 to 75 percent (poor specificity)",
+            "Initial trauma screening tool; triggers urgent CTA if abnormal"
+          ],
+          [
+            "Contrast-Enhanced Chest CTA",
+            "99 to 100 percent",
+            "Definitive diagnostic gold standard; guides endovascular graft sizing"
+          ],
+          [
+            "Transesophageal Echo (TEE)",
+            "85 to 90 percent",
+            "Bedside alternative for hemodynamically unstable patients too unstable for CT"
+          ],
+          [
+            "Invasive Catheter Angiogram",
+            ">95 percent",
+            "Largely replaced by CTA; utilized primarily during therapeutic TEVAR"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Society for Vascular Surgery categorizes aortic injuries into four distinct grades. Grade one consists of an isolated intimal tear. Grade two features an intramural hematoma, grade three involves a pseudoaneurysm, and grade four represents free rupture with ongoing extravasation.",
+      "tx": "The **SVS grading scale** stratifies injury severity to guide management: **Grade I** represents an intimal tear; **Grade II** comprises intramural hematoma; **Grade III** indicates traumatic pseudoaneurysm; and **Grade IV** represents free rupture with active extravasation, defining immediate life-threatening exsanguination into the left pleural cavity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "SVS Grade",
+          "Pathological Description",
+          "Recommended Clinical Management"
+        ],
+        "rows": [
+          [
+            "Grade I (Intimal tear)",
+            "Intimal defect <10 mm without external wall deformity",
+            "Conservative medical impulse control; serial CT surveillance"
+          ],
+          [
+            "Grade II (Intramural hematoma)",
+            "Aortic wall thickening without contour deformity",
+            "Urgent endovascular repair (TEVAR) or strict medical therapy"
+          ],
+          [
+            "Grade III (Pseudoaneurysm)",
+            "Contained transmural defect with contour bulging",
+            "Urgent endovascular repair (TEVAR) within 24 to 48 hours"
+          ],
+          [
+            "Grade IV (Free rupture)",
+            "Active contrast extravasation into mediastinum/pleura",
+            "Emergent endovascular or open surgical salvage"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Grade one intimal tears are safely managed with non-operative medical impulse control. Intravenous beta-blockers suppress myocardial contractility and maintain systolic blood pressure under one hundred millimetres of mercury. Most intimal flaps heal spontaneously, verified on serial computed tomography scans.",
+      "tx": "A minimal **Grade I tear** is managed non-operatively with rigorous **medical impulse control** using intravenous short-acting beta-blockers. Maintaining systolic blood pressure below 100 mmHg and heart rate under 80 bpm reduces wall stress. Healing is confirmed through protocolized **serial CT surveillance** at 48 hours and 1 month follow-up.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Grade I (Intimal Tear) Management",
+          "points": [
+            "Non-operative medical therapy",
+            "Intravenous beta-blockers (esmolol/labetalol)",
+            "Target SBP <100 mmHg and HR <80 bpm",
+            "High rate of spontaneous anatomical remodeling"
+          ]
+        },
+        "right": {
+          "title": "Grade II to IV Management",
+          "points": [
+            "Definitive endovascular stent repair (TEVAR)",
+            "Eliminates late pseudoaneurysm expansion",
+            "Reduces delayed aortic rupture risk",
+            "Significantly lower morbidity than open thoracotomy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Thoracic endovascular aortic repair is now the universal standard of care for grades two through four injuries. Deploying a covered stent-graft avoids full heparinization and thoracotomy in polytrauma patients. TEVAR dramatically reduces operative mortality and paraplegia rates compared with traditional open repairs.",
+      "tx": "Contemporary practice establishes **TEVAR standard of care** for **Grade II to IV** injuries, entirely replacing open repair. Endovascular stent deployment avoids full systemic heparinization and single-lung ventilation, achieving a profound **paraplegia reduction** (less than 2 percent versus 15 to 20 percent with open cross-clamping) and superior operative survival.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify Grade II, III, or IV aortic disruption on CTA"
+          },
+          {
+            "id": "b",
+            "label": "Percutaneous femoral access under local/general anesthesia"
+          },
+          {
+            "id": "c",
+            "label": "Deploy appropriately sized covered stent-graft across isthmic tear"
+          },
+          {
+            "id": "d",
+            "label": "Confirm complete exclusion of pseudoaneurysm with completion angiogram"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In polytrauma patients with intracranial bleeding, liver lacerations, or pelvic fractures, a delayed aortic repair strategy is employed. Initiating strict blood pressure control stabilizes the contained aortic pseudoaneurysm. This allows trauma surgeons to address life-threatening neurosurgical or abdominal hemorrhage before endovascular repair.",
+      "tx": "In patients presenting with severe associated multisystem injuries, intentional **delayed repair** within 24 to 48 hours is standard practice. Establishing **strict pressure control** safely stabilizes contained pseudoaneurysms, permitting **polytrauma prioritization** where life-threatening intracranial hematomas or exsanguinating pelvic fractures are addressed prior to aortic stent deployment.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trauma Priority Sequence",
+          "Clinical Condition",
+          "Action Protocol"
+        ],
+        "rows": [
+          [
+            "Immediate Priority 1",
+            "Expanding intracranial hematoma or massive intra-abdominal hemorrhage",
+            "Emergent craniotomy or exploratory laparotomy first"
+          ],
+          [
+            "Concurrent Priority 1",
+            "Anti-impulse blood pressure therapy (MAP 60-70 mmHg)",
+            "Prevents contained aortic pseudoaneurysm rupture during abdominal surgery"
+          ],
+          [
+            "Subsequent Priority 2",
+            "Thoracic endovascular aortic repair (TEVAR)",
+            "Performed within 24 to 48 hours once hemorrhagic shock and coagulopathy resolve"
+          ],
+          [
+            "Orthopedic Priority 3",
+            "Extremity fracture fixation",
+            "Completed electively after aortic stent stabilization"
+          ]
+        ]
+      }
+    }
+  ]
+}
