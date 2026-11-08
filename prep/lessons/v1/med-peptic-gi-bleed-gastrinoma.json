@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "module": "med-peptic-gi-bleed",
+ "subject": "medicine",
+ "title": "Acute upper gastrointestinal hemorrhage, risk stratification, and gastrinoma",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Acute bleeding originating proximal to the ligament of Treitz presents with melaena, haematemesis, or hemodynamic instability. Rapid clinical risk assessment before endoscopy optimizes resuscitation and triage. Calculating the pre-endoscopic **Glasgow-Blatchford score** utilizes blood urea, hemoglobin concentration, systolic blood pressure, heart rate, presentation with syncope or melaena, and presence of hepatic disease or heart failure. A Glasgow-Blatchford score of zero or one identifies exceptionally low-risk patients who can be safely managed in outpatient settings without emergency overnight endoscopy, while higher scores mandate immediate resuscitation and hospitalization.",
+   "say": "Acute bleeding proximal to the ligament of Treitz presents with vomiting of blood, black stools or hemodynamic shock. Rapid clinical risk stratification before endoscopy optimizes resuscitation. Calculating the Glasgow-Blatchford score incorporates blood urea, hemoglobin, blood pressure, pulse rate and clinical presentation. A score of zero or one identifies low-risk patients suitable for outpatient care, while higher scores require immediate inpatient admission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Glasgow-Blatchford parameter",
+     "Abnormal value threshold",
+     "Assigned risk score points"
+    ],
+    "rows": [
+     [
+      "Blood urea nitrogen",
+      "6.5 to > 25 mmol/L",
+      "2 to 6 points (graded rise)"
+     ],
+     [
+      "Hemoglobin (men)",
+      "< 100 to 129 g/L",
+      "1 to 6 points (graded fall)"
+     ],
+     [
+      "Systolic blood pressure",
+      "< 100 to 109 mmHg",
+      "1 to 3 points (graded hypotension)"
+     ],
+     [
+      "Heart rate & presentation",
+      "Pulse >= 100 bpm; syncope; melaena",
+      "1 to 2 points each"
+     ],
+     [
+      "Hepatic / Cardiac comorbidity",
+      "Known liver disease or cardiac failure",
+      "2 points each"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Post-endoscopic clinical risk scores incorporate diagnostic endoscopic findings to predict rebleeding and inpatient mortality. Calculating the full **Rockall score** combines pre-endoscopy variables (age, hemodynamic shock, systemic comorbidities) with endoscopic findings (diagnosis of peptic ulcer versus malignancy, and stigmata of recent hemorrhage). Rockall scores <= 2 indicate low risk of rebleeding and negligible mortality (< 0.5%), whereas scores >= 6 identify high-risk individuals with mortality exceeding twenty-five percent, requiring intensive care monitoring and aggressive supportive management.",
+   "say": "Post-endoscopic risk stratification incorporates diagnostic findings to predict recurrent bleeding and mortality. Calculating the complete Rockall score combines age, hemodynamic shock and comorbidities with endoscopic findings and bleeding stigmata. Scores of two or less indicate low risk with negligible mortality. In contrast, scores of six or greater identify high-risk patients with mortality exceeding twenty-five percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Glasgow-Blatchford score",
+     "points": [
+      "Calculated entirely pre-endoscopy",
+      "Incorporates blood urea, Hb, BP, pulse",
+      "Superior for identifying outpatients (score 0-1)",
+      "Guides need for urgent inpatient endoscopy"
+     ]
+    },
+    "right": {
+     "title": "Rockall score",
+     "points": [
+      "Requires diagnostic endoscopic visualization",
+      "Incorporates ulcer stigmata & major comorbidity",
+      "Superior for predicting mortality & rebleeding",
+      "Guides duration of intensive care monitoring"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Endoscopic characterization of ulcer bases predicts risk of persistent or recurrent bleeding and directs endoscopic hemostasis. The **Forrest classification** categorizes bleeding peptic ulcers into distinct risk tiers: Forrest Ia represents active arterial spurting (90% rebleeding risk); Forrest Ib denotes active oozing (10-30% risk); Forrest IIa reveals a non-bleeding visible vessel (50% risk); Forrest IIb demonstrates an adherent clot (25-30% risk); Forrest IIc shows a flat pigmented spot (7-10% risk); and Forrest III is a clean-based ulcer (3-5% risk).",
+   "say": "Endoscopic evaluation of the ulcer base predicts rebleeding risk and directs therapeutic interventions. The Forrest classification stratifies lesions into risk tiers. Forrest 1a denotes active arterial spurting, while 1b indicates oozing. Forrest 2a reveals a non-bleeding visible vessel, and 2b shows an adherent clot. Forrest 2c demonstrates a pigmented spot, while Forrest 3 represents a clean-based ulcer carrying minimal rebleeding risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Forrest class",
+     "Endoscopic visual appearance",
+     "Risk of rebleeding",
+     "Endoscopic therapy required"
+    ],
+    "rows": [
+     [
+      "Class Ia",
+      "Spurting arterial hemorrhage",
+      "90% without treatment",
+      "Mandatory dual hemostasis"
+     ],
+     [
+      "Class Ib",
+      "Oozing active hemorrhage",
+      "10% to 30%",
+      "Mandatory dual hemostasis"
+     ],
+     [
+      "Class IIa",
+      "Non-bleeding visible vessel",
+      "50% without treatment",
+      "Mandatory dual hemostasis"
+     ],
+     [
+      "Class IIb",
+      "Adherent overlying clot",
+      "25% to 30%",
+      "Targeted clot irrigation & therapy"
+     ],
+     [
+      "Class IIc",
+      "Flat dark pigmented spot",
+      "7% to 10%",
+      "Medical PPI therapy alone"
+     ],
+     [
+      "Class III",
+      "Clean white-based ulcer",
+      "3% to 5%",
+      "Oral PPI; early hospital discharge"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endoscopic intervention for high-risk bleeding ulcers utilizes multimodal combination hemostasis to achieve definitive clot stabilization. For Forrest Ia, Ib, and IIa lesions, **dual endoscopic therapy** is superior to monotherapy alone. Management combines diluted epinephrine injection (1:10,000 to induce local vasoconstriction and tamponade) with a second mechanical or thermal modality: through-the-scope hemoclips or bipolar thermal electrocoagulation. Concurrently, high-dose intravenous proton pump inhibitor therapy (pantoprazole 80 mg bolus followed by 8 mg/hr continuous infusion for 72 hours) maintains intragastric pH > 6.0, stabilizing fibrin clot formation.",
+   "say": "Endoscopic intervention for high-risk bleeding ulcers utilizes multimodal hemostasis to achieve definitive clot stability. Combining dilute adrenaline injection with a mechanical hemoclip or thermal coagulation proves superior to injection alone. Concurrently, continuous intravenous proton pump inhibitor infusion maintains intragastric pH above six, which stabilizes clot formation and prevents recurrent hemorrhage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peptic-ulcer-fig1.webp",
+    "alt": "Bleeding duodenal peptic ulcer endoscopy, visible vessel, and hemostatic clipping.",
+    "caption": "Active bleeding duodenal peptic ulcer and targeted endoscopic hemoclip placement. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Portal hypertension produces severe, torrential hemorrhage from dilated portosystemic collateral veins. Managing acute **variceal bleeding** in cirrhotic patients begins with immediate hemodynamic resuscitation aiming for a restrictive transfusion strategy (target hemoglobin 70 to 80 g/L). Vasoactive splanchnic vasoconstrictors (terlipressin, octreotide, or somatostatin) are initiated immediately on presentation, reducing portal venous inflow and variceal pressure. Prophylactic intravenous ceftriaxone is administered for seven days to prevent spontaneous bacterial peritonitis and secondary bacteremia, which significantly reduces rebleeding and inpatient mortality.",
+   "say": "Portal hypertension causes severe hemorrhage from dilated portosystemic collateral veins. Managing acute variceal bleeding begins with restrictive blood transfusion targeting a hemoglobin of seventy to eighty grams per liter. Vasoactive infusions like terlipressin or octreotide reduce portal pressure promptly. Administering prophylactic intravenous ceftriaxone prevents bacterial peritonitis, lowering rebleeding and mortality.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resus",
+      "label": "Restrictive blood transfusion (Hb target 70 to 80 g/L)"
+     },
+     {
+      "id": "vaso",
+      "label": "Early IV terlipressin / octreotide splanchnic vasoconstriction"
+     },
+     {
+      "id": "abx",
+      "label": "Prophylactic IV ceftriaxone for 7 days"
+     },
+     {
+      "id": "evl",
+      "label": "Emergency endoscopy & endoscopic variceal band ligation"
+     }
+    ],
+    "edges": [
+     [
+      "resus",
+      "vaso"
+     ],
+     [
+      "vaso",
+      "abx"
+     ],
+     [
+      "abx",
+      "evl"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency upper endoscopy confirms and definitively treats variceal hemorrhage within twelve hours of presentation. Performing endoscopic **variceal ligation** (EVL or rubber band ligation) is the procedure of choice for bleeding esophageal varices, capturing mucosal venous columns into plastic cylinders and releasing elastic rings to induce thrombotic obliteration. EVL carries lower rebleeding and complication rates than sclerotherapy. For bleeding gastric fundal varices (GOV2 or IGV1), endoscopic injection of cyanoacrylate tissue adhesive glue is preferred to polymerize and seal the large vascular channels.",
+   "say": "Emergency upper endoscopy provides definitive therapeutic control of variceal hemorrhage within twelve hours. Endoscopic variceal band ligation is the preferred procedure for esophageal varices, placing elastic bands over dilated veins to trigger thrombosis. Banding achieves lower complication rates than sclerotherapy. For bleeding gastric fundal varices, injection of cyanoacrylate tissue glue provides effective vascular occlusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endoscopic variceal ligation (EVL)",
+     "points": [
+      "Treatment of choice for esophageal varices",
+      "Elastic rubber bands deployed over columns",
+      "Lower stricture & ulceration rates than sclerotherapy",
+      "Repeat sessions every 2 to 4 weeks until eradicated"
+     ]
+    },
+    "right": {
+     "title": "Cyanoacrylate tissue glue",
+     "points": [
+      "Treatment of choice for gastric fundal varices",
+      "Monomer polymerizes upon contact with blood",
+      "Rapidly solidifies to occlude large vascular channels",
+      "Requires careful technique to avoid endoscope damage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Refractory or torrential variceal hemorrhage failing medical and endoscopic therapy requires emergency mechanical bridge decompression. Deploying a balloon tamponade tube (Sengstaken-Blakemore or **Minnesota tube**) achieves temporary hemostasis via direct mechanical compression against the bleeding gastro-oesophageal junction. Balloon tamponade serves purely as a temporary bridge (maximum 24 hours) due to high risks of oesophageal rupture and mucosal necrosis. Transjugular intrahepatic portosystemic shunt (TIPS) provides definitive rescue by creating an artificial low-resistance conduit between the portal vein and hepatic vein.",
+   "say": "Torrential variceal hemorrhage unresponsive to endoscopic therapy requires mechanical balloon tamponade. Deploying a Minnesota or Sengstaken-Blakemore tube achieves temporary hemostatic control by inflating balloons against bleeding veins. Tamponade is limited to twenty-four hours to prevent tissue necrosis. Placement of a transjugular intrahepatic portosystemic shunt creates a low-resistance channel to decompress portal hypertension definitively.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-tub-sengstaken-blakemore-tube.webp",
+    "alt": "Sengstaken-Blakemore tube triple-lumen design with gastric and esophageal balloons.",
+    "caption": "Sengstaken-Blakemore balloon tamponade device for refractory variceal bleeding. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rare neuroendocrine gastrin-producing neoplasms must be considered in patients presenting with recurrent, atypical, or bleeding peptic ulcers. Surgical resection of localized **gastrinoma** within the duodenum or pancreas offers the only curative possibility for Zollinger-Ellison syndrome. Prior to surgical exploration, patients require high-dose oral proton pump inhibitor therapy (omeprazole 60 to 120 mg daily) to suppress gastric hyperchlorhydria, heal active mucosal ulceration, and prevent catastrophic gastrointestinal perforation. In metastatic or unresectable gastrinoma, long-acting somatostatin analogues (octreotide, lanreotide) control neuroendocrine hormonal secretion and stabilize tumor growth.",
+   "say": "Neuroendocrine gastrin-producing tumors must be suspected in patients presenting with atypical or recurrent bleeding peptic ulcers. Surgical exploration and resection of localized gastrinoma within the duodenum or pancreas offers potential cure. Prior to surgery, high-dose proton pump inhibitors suppress severe acid hypersecretion, enabling ulcer healing. For metastatic disease, somatostatin analogs control hormone output and slow tumor progression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspect",
+      "label": "Recurrent atypical ulceration & hypergastrinemia"
+     },
+     {
+      "id": "suppress",
+      "label": "High-dose oral PPI therapy (60 to 120 mg/day)"
+     },
+     {
+      "id": "stage",
+      "label": "68Ga-DOTATATE PET-CT & endoscopic ultrasound"
+     },
+     {
+      "id": "cure",
+      "label": "Surgical duodenectomy / enucleation for localized cure"
+     }
+    ],
+    "edges": [
+     [
+      "suspect",
+      "suppress"
+     ],
+     [
+      "suppress",
+      "stage"
+     ],
+     [
+      "stage",
+      "cure"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
