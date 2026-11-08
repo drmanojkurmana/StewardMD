@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-tubulointerstitial",
+ "subject": "medicine",
+ "title": "Acute interstitial nephritis, urinary eosinophils, and papillary necrosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Immune-mediated hypersensitivity reactions targeting interstitial compartments provoke rapid deterioration of renal excretory function. Clinically recognized as **Acute interstitial nephritis** (AIN), over seventy percent of presentations stem from adverse drug reactions to beta-lactam antibiotics, proton pump inhibitors, non-steroidal anti-inflammatory drugs, or sulfonamides. The classic allergic triad of fever, maculopapular cutaneous rash, and peripheral eosinophilia occurs in fewer than ten to fifteen percent of cases. Patients typically present with an asymptomatic acute elevation in serum creatinine, accompanied by sterile pyuria, white blood cell casts, and mild subnephrotic proteinuria.",
+   "say": "Immune-mediated hypersensitivity reactions targeting renal interstitial tissue cause rapid deterioration of kidney function. Clinically recognized as Acute interstitial nephritis, over seventy percent of cases stem from medications like antibiotics, proton pump inhibitors, or anti-inflammatory drugs. While the classic allergic triad of fever, rash, and eosinophilia is rare, patients show sterile pyuria and rising creatinine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-tubulointerstitial-fig1.webp",
+    "alt": "Histopathology of acute interstitial nephritis showing dense inflammatory infiltrate and tubulitis.",
+    "caption": "Interstitial inflammatory infiltration, interstitial oedema, and tubulitis in AIN. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Laboratory evaluation of urinary sediment provides supportive diagnostic clues, though definitive confirmation requires tissue histopathology. Detecting **urinary eosinophils** using specialized Hansel or Wright stains historically suggested acute interstitial nephritis, but contemporary studies reveal limited diagnostic sensitivity and specificity, as eosinophiluria also occurs in atheroembolic disease, glomerulonephritis, and severe urinary tract infections. Percutaneous renal biopsy remains the definitive gold standard, revealing diffuse interstitial oedema, interstitial infiltration composed of T lymphocytes, monocytes, plasma cells, and eosinophils, accompanied by tubulitis featuring inflammatory invasion into tubular basolateral membranes.",
+   "say": "Laboratory evaluation of urinary sediment provides supportive diagnostic clues, though confirmation requires tissue biopsy. Detecting urinary eosinophils using special stains historically suggested interstitial nephritis, but modern studies demonstrate poor diagnostic specificity. Percutaneous biopsy remains the gold standard, showing interstitial oedema, tubulitis, and mixed lymphocytic infiltrates with eosinophils.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urinary Sediment & Staining",
+     "points": [
+      "Hansel stain reveals urinary eosinophils (>1%)",
+      "Sterile pyuria without bacteriuria on culture",
+      "White blood cell casts confirm interstitial source",
+      "Non-invasive but lacks definitive diagnostic specificity"
+     ]
+    },
+    "right": {
+     "title": "Renal Core Biopsy",
+     "points": [
+      "Definitive gold standard diagnostic confirmation",
+      "Dense interstitial T-cell and eosinophil infiltration",
+      "Active tubulitis with disruption of tubular membranes",
+      "Excludes alternative glomerular or vascular pathology"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Early withdrawal of the offending xenobiotic agent represents the single most critical intervention determining long-term renal recovery. Directing **AIN therapeutic management** requires immediate identification and cessation of all potential culprit medications. In patients who fail to demonstrate functional improvement within three to five days of drug withdrawal, or whose initial biopsy reveals severe interstitial inflammatory infiltrates, initiating an early four- to six-week course of oral glucocorticoids (prednisolone one milligram per kilogram daily) significantly accelerates clearance recovery and halts progressive irreversible interstitial fibrosis.",
+   "say": "Early withdrawal of the offending medication represents the single most critical intervention determining kidney recovery. Directing AIN therapeutic management requires immediate cessation of all suspected drugs. In patients who fail to improve within several days, an early four-week course of oral corticosteroids accelerates clearance recovery and prevents permanent interstitial scarring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "susp",
+      "label": "Suspected Acute Interstitial Nephritis"
+     },
+     {
+      "id": "stop",
+      "label": "Immediately discontinue all potential culprit drugs (PPIs, NSAIDs, Abx)"
+     },
+     {
+      "id": "steroid",
+      "label": "If no recovery in 3-5 days: Oral Prednisolone 1 mg/kg/day for 4-6 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "susp",
+      "stop"
+     ],
+     [
+      "stop",
+      "steroid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic heavy cumulative ingestion of over-the-counter mixed antipyretic formulations provokes progressive, insidious medullary vascular sclerosis. Manifesting as **analgesic nephropathy**, the disorder historically followed habitual consumption of combination analgesics containing phenacetin or paracetamol combined with aspirin, caffeine, or codeine. Sustained medullary concentration of paracetamol metabolites depletes antioxidant glutathione, producing oxidative lipid peroxidation that is compounded by aspirin-mediated inhibition of vasodilatory medullary prostaglandins. The clinical presentation features sterile pyuria, mild chronic proteinuria, renal tubular acidosis, and progressive chronic tubulointerstitial nephritis.",
+   "say": "Chronic heavy ingestion of combination pain medications causes progressive medullary vascular sclerosis. Manifesting as analgesic nephropathy, this condition follows habitual consumption of combination analgesics over many years. Toxic metabolites deplete local glutathione stores, causing oxidative damage compounded by prostaglandin inhibition, presenting with chronic tubulointerstitial nephritis and papillary calcification.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic feature",
+     "Characteristic findings in analgesic nephropathy",
+     "Long-term clinical implications"
+    ],
+    "rows": [
+     [
+      "Medication exposure history",
+      "Cumulative lifetime ingestion > 2 to 3 kg analgesics",
+      "Phenacetin / Paracetamol + Aspirin combinations"
+     ],
+     [
+      "Non-contrast CT imaging",
+      "Bumpy, shrunken kidneys with papillary calcifications",
+      "Garland pattern of calcified renal medullary papillae"
+     ],
+     [
+      "Urinary concentrating defect",
+      "Early polyuria and nocturia; impaired acidification",
+      "Loss of medullary hypertonicity from capillary sclerosis"
+     ],
+     [
+      "Malignancy risk",
+      "High incidence of urothelial transitional cell carcinoma",
+      "Mandates long-term surveillance for painless haematuria"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ischemic infarction and coagulative necrosis involving the renal medullary pyramids precipitates sloughing of non-viable tissue into the collecting system. Clinically recognized as **papillary necrosis**, classic predisposing conditions follow the POSTCARDS mnemonic: pyelonephritis, obstruction, sickle cell disease or trait, tuberculosis, cirrhosis, analgesic nephropathy, renal vein thrombosis, and diabetes mellitus. Sloughed necrotic papillae cause acute ureteral obstruction manifesting with severe flank pain, gross haematuria, and ureteric colic. Retrograde pyelography or contrast-enhanced computed tomography classically identifies the pathognomonic ring sign representing contrast encircling the sloughed papilla.",
+   "say": "Ischemic necrosis involving renal medullary pyramids causes sloughing of dead tissue into the urinary collecting system. Clinically recognized as papillary necrosis, predisposing causes include diabetes, sickle cell disease, pyelonephritis, and analgesic abuse. Sloughed papillae cause ureteric obstruction with severe flank pain and haematuria, with contrast imaging showing a diagnostic ring sign.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-tubulointerstitial-gen1.webp",
+    "alt": "Contrast CT scan showing the pathognomonic ring sign of renal papillary necrosis.",
+    "caption": "Sloughed medullary pyramid and diagnostic contrast ring sign in papillary necrosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Generalized dysfunction of specialized reabsorptive transport mechanisms across the proximal convoluted tubule provokes pan-tubular urinary solute wasting. Manifesting as **Fanconi syndrome**, failure of energy-dependent apical symporters leads to inappropriate urinary excretion of glucose, amino acids, inorganic phosphate, bicarbonate, uric acid, and low-molecular-weight proteins. Clinical hallmarks comprise euglycaemic glucosuria (urinary glucose with completely normal blood sugar), hypophosphataemic rickets or osteomalacia, and hypokalaemic proximal renal tubular acidosis (type two). Leading aetiologies include hereditary cystinosis in children, multiple myeloma light-chain cast nephropathy, and tenofovir disoproxil toxicity.",
+   "say": "Generalized dysfunction of reabsorptive mechanisms across the proximal tubule causes pan-tubular urinary solute wasting. Manifesting as Fanconi syndrome, transport failure leads to urinary leakage of glucose, amino acids, phosphate, and bicarbonate. Clinical hallmarks involve glucosuria with normal blood sugar, hypophosphataemic bone disease, and proximal renal tubular acidosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cause",
+      "label": "Aetiologies: Cystinosis, Myeloma Light Chains, Tenofovir, Lead"
+     },
+     {
+      "id": "proximal",
+      "label": "Proximal Tubular ATP Depletion & Transport Collapse"
+     },
+     {
+      "id": "wasting",
+      "label": "Euglycaemic Glucosuria, Aminoaciduria, Phosphaturia, Type 2 RTA"
+     }
+    ],
+    "edges": [
+     [
+      "cause",
+      "proximal"
+     ],
+     [
+      "proximal",
+      "wasting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inherited channelopathies affecting electroneutral ion transport within the thick ascending limb of the loop of Henle mimic continuous high-dose loop diuretic administration. Transmitted as an autosomal recessive trait, **Bartter syndrome** results from loss-of-function mutations in transport genes including SLC12A1 (encoding the apical NKCC2 cotransporter), KCNJ1 (apical ROMK potassium channel), or CLCNKB (basolateral chloride channel). Defective sodium chloride reabsorption eliminates the medullary osmotic gradient, producing severe urinary salt wasting, hypokalaemic metabolic alkalosis, marked hyperreninaemic hyperaldosteronism with normal blood pressure, and prominent hypercalciuria predisposing to nephrocalcinosis.",
+   "say": "Inherited transport defects in the thick ascending limb of Henle mimic continuous loop diuretic administration. Transmitted as an autosomal recessive trait, Bartter syndrome results from mutations in the NKCC2 or ROMK transport channels. Defective sodium chloride reabsorption causes urinary salt wasting, hypokalaemic metabolic alkalosis, normal blood pressure, and hypercalciuria predisposing to nephrocalcinosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bartter Syndrome (Loop Defect)",
+     "points": [
+      "Mutation in NKCC2, ROMK, or CLCNKB",
+      "Mimics chronic Furosemide (loop diuretic) action",
+      "Early childhood onset with growth impairment",
+      "Hypercalciuria with frequent nephrocalcinosis"
+     ]
+    },
+    "right": {
+     "title": "Gitelman Syndrome (DCT Defect)",
+     "points": [
+      "Mutation in SLC12A3 (NCCT thiazide cotransporter)",
+      "Mimics chronic Hydrochlorothiazide diuretic action",
+      "Late childhood / adult onset with muscle cramps",
+      "Hypocalciuria and severe refractory hypomagnesaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Loss-of-function mutations in distal convoluted tubule solute carriers mirror the biochemical alterations observed during chronic thiazide diuretic therapy. Transmitted as an autosomal recessive channelopathy, **Gitelman syndrome** results from mutations in the SLC12A3 gene encoding the apical electroneutral sodium-chloride cotransporter (NCCT). Patients present in late adolescence or adulthood with recurrent muscle cramps, tetany, fatigue, and normal or low arterial blood pressure. Biochemical testing confirms hypokalaemic metabolic alkalosis, profound hypomagnesaemia from downregulated TRPM6 magnesium channels, and distinctive hypocalciuria with urinary calcium-to-creatinine ratios under zero point two.",
+   "say": "Loss-of-function mutations in distal convoluted tubule transport proteins mirror the biochemical profile of chronic thiazide diuretic therapy. Transmitted as an autosomal recessive condition, Gitelman syndrome results from mutations in the NCCT sodium-chloride cotransporter. Patients present in adulthood with muscle cramps, hypokalaemic metabolic alkalosis, severe hypomagnesaemia, and characteristic hypocalciuria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic variable",
+     "Bartter syndrome",
+     "Gitelman syndrome"
+    ],
+    "rows": [
+     [
+      "Anatomical nephron site",
+      "Thick ascending limb of Henle",
+      "Distal convoluted tubule (DCT)"
+     ],
+     [
+      "Defective transport protein",
+      "NKCC2 cotransporter / ROMK channel",
+      "NCCT (thiazide-sensitive cotransporter)"
+     ],
+     [
+      "Diuretic class mimicked",
+      "Loop diuretics (Furosemide / Bumetanide)",
+      "Thiazide diuretics (Hydrochlorothiazide)"
+     ],
+     [
+      "Urinary calcium excretion",
+      "Hypercalciuria (nephrocalcinosis common)",
+      "Hypocalciuria (uCa:uCr < 0.2; no nephrocalcinosis)"
+     ],
+     [
+      "Serum magnesium level",
+      "Normal or mildly decreased",
+      "Profoundly decreased (<1.2 mg/dL)"
+     ],
+     [
+      "Clinical age of onset",
+      "Antenatal / Neonatal / Infantile",
+      "Late childhood / Adolescence / Adulthood"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
