@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "bio-protein-structure",
+ "subject": "biochemistry",
+ "title": "Alpha helix and beta sheet",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **alpha helix** coils the backbone right handed at three point six residues per turn (rise five point four angstroms per turn), hydrogen bonding each carbonyl (residue i) to the amide four ahead (i plus four), side chains radiating outward, dipole macropolarity positive at N terminus (phosphate binding nests exploit it). Alanine, leucine and methionine favour helices; proline and glycine statistically break them for opposite reasons (missing donor versus excess freedom).",
+   "say": "The alpha helix bonds residue i to i plus four at three point six residues per turn. Proline and glycine break helices for opposite reasons of missing donor versus excess freedom.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-protein-structure-gen1.webp",
+    "alt": "Molecular models show a kinked alpha helix beside an antiparallel beta sheet with hydrogen bonds.",
+    "caption": "Helix and sheet folds joined by hydrogen bonds, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Proline** fits a helix only in its first turn because its ring nitrogen carries no amide hydrogen to donate and its phi angle is locked near minus sixty; mid chain it kinks chains by about thirty degrees (haemoglobin and membrane receptor kinks are functional, GPCR proline kinks in signalling). Glycine, with only hydrogen as side chain, samples forbidden Ramachandran space and entropically destabilises helices while enabling tight turns and collagen packing next module.",
+   "say": "Proline fits only the first turn because it cannot donate a hydrogen bond, kinking chains functionally in receptors. Glycine destabilises helices entropically while enabling tight turns and collagen packing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Helix breakers",
+     "points": [
+      "Proline: no donor H, locked phi (kinks)",
+      "Glycine: too flexible, entropy cost",
+      "Both enriched in turns and loops"
+     ]
+    },
+    "right": {
+     "title": "Helix formers",
+     "points": [
+      "Alanine strongest statistically",
+      "Leucine, methionine, glutamate favour",
+      "Keratin and myosin rods exemplify"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Beta pleated sheets** hydrogen bond between strands (not within), parallel (slanted weaker bonds, buried) or antiparallel (linear stronger bonds, Silk fibroin glycine alanine repeats), side chains alternating above and below the pleat, sheets twisting right handed and forming barrels and propellers. Amyloid cross beta (strands perpendicular to fibril axis) is the pathological sheet geometry of the misfolding lesson, linking normal and disease architecture inseparably.",
+   "say": "Beta sheets bond between strands, parallel or antiparallel, with side chains alternating above and below. Amyloid cross beta is the pathological sheet geometry linking normal and disease architecture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sheet type",
+     "H-bond geometry",
+     "Exemplar"
+    ],
+    "rows": [
+     [
+      "Antiparallel",
+      "Linear, stronger, strands reverse",
+      "Silk fibroin, immunoglobulin folds"
+     ],
+     [
+      "Parallel",
+      "Slanted, weaker, buried cores",
+      "Flavodoxin type barrels"
+     ],
+     [
+      "Cross beta amyloid",
+      "Strands across fibril axis",
+      "All amyloids (Congo red lesson)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Turns and motifs organise secondaries into working parts: beta turns (four residues, glycine and proline rich, type I and II geometries) reverse chains atop sheets, helix-turn-helix reads DNA major grooves, zinc fingers coordinate zinc with cysteine/histidine for transcription factors, leucine zippers dimerise coiled coils (two helices supercoiled, leucine every seventh), EF hands bind calcium, and Rossmann folds cradle nucleotides in enzymes. **Keratin** alpha coiled coils (hair, disulfide hardened) versus silk beta crystals contrast mechanical proteins in practicals.",
+   "say": "Turns and motifs organise secondaries into DNA reading, zinc finger and calcium binding parts. Keratin coiled coils versus silk beta crystals contrast mechanical proteins memorably in practicals.",
+   "vis": null
+  },
+  {
+   "tx": "Spectroscopy reads secondary content without crystals: circular dichroism minima near **two hundred eight and two hundred twenty two** nanometres report helix, single minimum near two hundred eighteen reports sheet, infrared amide bands shift with bonding, while Ramachandran plots validate solved structures (outliers flagged except glycine). Denaturants erase these signals cooperatively, melting curves (Tm) quantifying stability that tertiary forces in the next lesson sum and disease mutations subtract.",
+   "say": "Circular dichroism minima report helix and sheet content without crystals, and Ramachandran plots validate solved structures. Melting curves quantify stability that tertiary forces sum next lesson.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Helix signature",
+     "Sheet signature"
+    ],
+    "rows": [
+     [
+      "Circular dichroism",
+      "Minima 208 and 222 nm",
+      "Minimum about 218 nm"
+     ],
+     [
+      "Ramachandran plot",
+      "Cluster near phi -57, psi -47",
+      "Broad upper left region"
+     ],
+     [
+      "Melting (Tm)",
+      "Cooperative signal loss with heat or urea",
+      "Same: stability is global"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Membrane helices** rewrite solvent rules: twenty hydrophobic residues span bilayers (hydropathy plots predict), proline kinks gate channels, glycine zippers pack helices tightly (glycophorin dimer), and beta barrels (porins) replace helices in outer membranes of bacteria and mitochondria. Secondary structure is therefore environment relative: the same sequence logic, inverted inside out (hydrophobics outward) when water is replaced by lipid, a sophistication stems increasingly reward.",
+   "say": "Membrane helices invert solvent rules with hydrophobics outward, proline kinks gating channels. Secondary structure is environment relative, a sophistication stems increasingly reward over rote lists.",
+   "vis": {
+    "kind": "flow",
+    "title": "Environment flips the rule",
+    "nodes": [
+     {
+      "id": "wat",
+      "label": "In water: hydrophobics hide inside"
+     },
+     {
+      "id": "mem",
+      "label": "In membrane: hydrophobics face lipid"
+     },
+     {
+      "id": "pred",
+      "label": "Hydropathy predicts spans; kinks gate"
+     }
+    ],
+    "edges": [
+     [
+      "wat",
+      "mem"
+     ],
+     [
+      "mem",
+      "pred"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
