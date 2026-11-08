@@ -53,7 +53,29 @@
     {
       "tx": "Caudal progression of brainstem compression produces severe extensor motor patterns. **Decerebrate posturing** exhibits rigid extension, adduction, and pronation of the arms accompanied by rigid **extensor posturing** of both legs with plantar flexion. This posturing pattern reflects destructive lesions affecting the midbrain and upper pons below the red nucleus, allowing unchecked excitatory output from intact lateral vestibulospinal tracts to dominate motor pathways, portending a worse prognosis.",
       "say": "Decerebrate posturing reflects damage situated between the red nucleus in the midbrain and the vestibular nuclei in the lower pons. Patients present with rigid extension, adduction, and pronation of the upper extremities alongside lower limb extension. Unchecked activity from lateral vestibulospinal pathways drives this extensor posture and portends worse clinical outcomes.",
-      "vis": null
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Posture",
+          "Arm pattern",
+          "Leg pattern",
+          "Lesion level"
+        ],
+        "rows": [
+          [
+            "Decorticate",
+            "Flexed and adducted",
+            "Extended",
+            "Above the red nucleus"
+          ],
+          [
+            "Decerebrate",
+            "Extended, adducted, pronated",
+            "Extended with plantar flexion",
+            "Midbrain to upper pons"
+          ]
+        ]
+      }
     },
     {
       "tx": "Preconditions for **brain death** determination require establishing an irreversible proximate cause while ruling out confounders. Core body **temperature** must be maintained above 36 degrees Celsius, and systolic blood pressure maintained above 100 mmHg. Clinicians must meticulously exclude central nervous system depressant medications, therapeutic neuromuscular blockade, and severe uncorrected metabolic disturbances before testing.",
@@ -92,7 +114,36 @@
     {
       "tx": "Comprehensive clinical testing confirms the complete absence of all **brainstem reflexes**. Testing verifies absent pupillary light responses, absent corneal reflexes, absent oculocephalic doll-eye reflexes, absent **oculovestibular** cold calorics, and absent gag and cough reflexes. The formal apnea test provides physiological confirmation of absent medullary respiratory drive.",
       "say": "Determining brain death requires proving irreversible cessation of all cerebral and brainstem activity. Before initiating testing, clinicians must confirm an irreversible etiology and exclude confounding factors. Core temperature must exceed thirty six degrees Celsius, systolic pressure must exceed one hundred millimeters of mercury, and all sedative drugs or paralytics must be fully cleared.",
-      "vis": null
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Brainstem test",
+          "What is checked",
+          "Absent response"
+        ],
+        "rows": [
+          [
+            "Pupillary light",
+            "Light shone in each eye",
+            "No constriction"
+          ],
+          [
+            "Corneal",
+            "Cornea touched lightly",
+            "No blink"
+          ],
+          [
+            "Cold calorics",
+            "Cold water in ear canal",
+            "No eye movement"
+          ],
+          [
+            "Gag and cough",
+            "Posterior pharynx and airway stimulus",
+            "No gag or cough"
+          ]
+        ]
+      }
     },
     {
       "tx": "**Apnea testing** confirms brain death when pre-oxygenated patients demonstrate absent spontaneous breathing effort despite arterial **PaCO2** rising to 60 mmHg or greater (or at least 20 mmHg above baseline) alongside an arterial pH below **7.28**. If profound hypotension or cardiac arrhythmia develops during testing, the patient must be immediately reconnected to mechanical ventilation.",
@@ -102,7 +153,7 @@
         "nodes": [
           {
             "id": "a",
-            "label": "Establish Prerequisites (Temp >36\u00b0C, MAP >65)"
+            "label": "Establish Prerequisites (Temp >36°C, MAP >65)"
           },
           {
             "id": "b",
