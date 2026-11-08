@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "module": "bio-gene-regulation",
+ "subject": "biochemistry",
+ "title": "Operons, epigenetics and imprinting",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **lac operon** (Jacob-Monod) integrates two signals by cis elements and trans factors: lacI repressor (constitutively made, binds operator overlapping promoter) blocks polymerase until allolactose (from lactose by basal beta-galactosidase) removes it (induction), while CAP (catabolite activator protein) with cAMP (high only when glucose low, adenylate cyclase glucose inhibited) bends DNA upstream superactivating only when glucose absent. Mutant logic follows: repressor loss (I minus) or operator Oc mutants express constitutively, superrepressor Is cannot induce, and CAP defects stay glucose blind.",
+   "say": "Lac operon requires lactose present and glucose absent together for full expression through repressor removal plus CAP activation. Mutant predictions are pure logic examinations set annually in molecular biology papers globally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genotype or condition",
+     "Beta-galactosidase outcome",
+     "Logic label"
+    ],
+    "rows": [
+     [
+      "Wild type, lactose only (no glucose)",
+      "High (induced, CAP active)",
+      "Both conditions met"
+     ],
+     [
+      "Wild type, glucose plus lactose",
+      "Low basal (catabolite repression)",
+      "Glucose vetoes despite lactose"
+     ],
+     [
+      "lacI minus (no repressor)",
+      "Constitutive (even without lactose)",
+      "Trans factor lost, both copies affected"
+     ],
+     [
+      "Operator Oc mutant",
+      "Constitutive cis only (one operon copy)",
+      "Cis element lost, repressor cannot bind"
+     ],
+     [
+      "lacIs superrepressor",
+      "Uninducible (dominant trans)",
+      "Inducer cannot release mutant repressor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trp operon** inverts logic to repressible biosynthesis: tryptophan corepresses its repressor (aporepressor inactive until tryptophan binds) shutting structural genes when product plentiful, fine tuned by attenuation (coupled transcription translation in bacteria: leader transcript with tandem tryptophan codons stalls ribosomes by tryptophan scarcity, choosing antiterminator versus terminator hairpins (regions two three versus three four) before polymerase commits, charged tRNA abundance literally folding RNA decisions). Eukaryotes lacking operons and coupled translation use unrelated amino acid sensing (GCN2 ATF4 prior lesson), convergent problem, divergent machinery, a distinction essays reward.",
+   "say": "Trp operon is repressible with attenuation fine tuning by ribosome stalling at tandem tryptophan codons literally folding RNA decisions. Eukaryotes sense amino acids unrelatedly through GCN2 pathways convergently evolved separately.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lac (catabolic, inducible)",
+     "points": [
+      "Substrate removes repressor (induction)",
+      "Default OFF until food appears",
+      "CAP glucose veto overlay"
+     ]
+    },
+    "right": {
+     "title": "Trp (anabolic, repressible)",
+     "points": [
+      "Product activates repressor (corepression)",
+      "Default ON until product plentiful",
+      "Attenuation hairpins fine tune"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Eukaryotic regulation layers combinatorially without operons: enhancer bound transcription factor codes per cell type, chromatin accessibility (pioneer factors, remodelers, histone marks prior lessons), promoter factor assembly, pause release, splicing and export, mRNA stability and translation (miRNA, upstream ORFs), protein modification and degradation, feedback metabolites. **Epigenetics**",
+   "say": "Eukaryotic regulation layers combinatorially with epigenetic methylation copied through mitosis without sequence change heritably. Reprogramming waves spare imprints, explaining cloning inefficiency and pluripotency resetting in development and regenerative medicine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-gene-regulation-fig1.webp",
+    "alt": "Comparative schematic of open euchromatin versus condensed heterochromatin states with histone marks and DNA methylation patterns.",
+    "caption": "Epigenetic regulation of euchromatin and heterochromatin states.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**X inactivation** (Lyon) silences one female X early embryonically randomly (Xist long noncoding RNA coats in cis recruiting Polycomb H3K27me3, heterochromatin Barr body (buccal smear drumstick neutrophil history), maintenance DNMT locking), clonally inherited so females mosaic (calico cats, G6PD mosaic erythrocytes, sweat gland patches in anhidrotic ectodermal dysplasia carriers, manifesting carriers when skewing unlucky in Duchenne, haemophilia, Fabry). About fifteen to twenty five percent genes escape inactivation (pseudoautosomal PAR1/2 obligately plus Xi escapees, Turner/Klinefelter dosage phenotypes from escapee imbalance), Turner and Klinefelter dosage logic closes the lesson.",
+   "say": "Xist coats one female X randomly for clonal mosaic silencing visible in calico and carrier manifestations variably. Escapee genes explain Turner and Klinefelter dosage phenotypes beyond simple inactivation counting rules simplistically.",
+   "vis": null
+  },
+  {
+   "tx": "**Genomic imprinting** marks parental origin in gametogenesis (methylation imprint control regions differentially methylated, erased and reset by sex of transmitting parent each generation) expressing only maternal or paternal allele for about one hundred fifty dosage critical genes (growth axis IGF2 (paternal growth promoter) versus H19/IGF2R maternal brakes, Beckwith-Wiedemann overgrowth paternal excess versus Silver-Russell maternal excess growth restriction). Chromosome fifteen deletions cause Prader-Willi when paternal (infant hypotonia then hyperphagic obesity) versus Angelman when maternal (severe disability, happy puppet laughter, seizures), with uniparental disomy producing both by parent of origin alone.",
+   "say": "Imprinting expresses only one parental allele reset each generation by transmitting sex. Prader-Willi paternal versus Angelman maternal loss at chromosome fifteen proves parent of origin alone decides phenotype dramatically and examinably.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-gene-regulation-gen1.webp",
+    "alt": "FISH metaphase and ideogram show loss of the red 15q11 q13 signal on one chromosome fifteen with green control retained.",
+    "caption": "Chromosome 15 deletion shown by FISH with ideogram map, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Clinical epigenetics closes the syllabus loop: imprinting disorders test by **methylation** first (Prader/Angelman methylation sensitive MLPA detects deletions, UPD and imprint defects triaged), cancer epigenomes silence MLH1 and CDKN2A (prior repair and cycle), DNMT inhibitors (azacitidine MDS) and HDAC inhibitors (vorinostat lymphoma) and EZH2/bromodomain readers drug the writers/erasers/readers table from chromatin lesson, constitutional epimutations and assisted reproduction imprint signal anxieties counselled with absolute risk honesty. Recombinant techniques next measure all of this (methylation arrays, ChIP, expression) converting regulation theory into laboratory orders.",
+   "say": "Methylation testing first diagnoses imprinting disorders triaging deletions and disomy molecularly. Epigenetic drugs target writers, erasers and readers from chromatin lessons, converting regulation theory into laboratory orders next module.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imprint disorder",
+     "Parent lost or gained",
+     "First test logic"
+    ],
+    "rows": [
+     [
+      "Prader-Willi",
+      "Paternal 15q11-13 absent (deletion, maternal UPD, imprint)",
+      "Methylation abnormal, then mechanism triage"
+     ],
+     [
+      "Angelman",
+      "Maternal UBE3A absent (deletion, paternal UPD, UBE3A mutation subset methylation normal)",
+      "Methylation, then UBE3A sequencing if normal"
+     ],
+     [
+      "Beckwith-Wiedemann",
+      "Paternal growth excess 11p15 (methylation centres, paternal UPD, CDKN1C)",
+      "Methylation plus tumour surveillance (Wilms ultrasound)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
