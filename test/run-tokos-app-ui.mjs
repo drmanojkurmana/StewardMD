@@ -126,6 +126,8 @@ try {
   await shot("review-desk-tokos-case-390");
   await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && TOKOS._st.view === "clinic" && TOKOS._st.session.list.length === 1 && TOKOS._st.session.list[0].c.id === "1031";`, 20000), "Read it opens Tokós straight into case 1031");
+  // The overlay springs in from translateY(100%); hit-test only once it has settled at the top of the viewport.
+  await until(`var r=document.getElementById("smdTokos").getBoundingClientRect(); return r.top === 0 && r.height > 0;`, 5000);
   ok(await ev(`var r=document.getElementById("smdTokos").getBoundingClientRect(), e=document.elementFromPoint(r.left+r.width/2, r.top+r.height/2); return !!(e && e.closest("#smdTokos"));`) === true, "Tokós sits above the Review Desk");
   await ev(`TOKOS.back(); TOKOS.back(); return 1;`);
   ok(await until(`return !TOKOS.isOpen() && document.querySelector('#smdReview.on') && getComputedStyle(document.getElementById('smdReview')).display !== 'none';`, 5000), "closing Tokós returns to the Review Desk");
