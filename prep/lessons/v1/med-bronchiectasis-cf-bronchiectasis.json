@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "med-bronchiectasis-cf",
+ "subject": "medicine",
+ "title": "Bronchiectasis: pathology, high-resolution CT, and ciliary dyskinesia",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Irreversible pathological dilatation of conducting bronchi resulting from chronic cycle of infection and inflammation defines bronchiectasis. Developing **bronchiectasis** follows Cole's vicious cycle hypothesis, wherein impaired mucociliary clearance permits persistent bacterial colonisation, recruiting neutrophils whose elastases destroy muscular and elastic components of bronchial walls. Patients present with chronic cough producing copious foul-smelling purulent sputum, recurrent respiratory infections, fatigue, and recurrent episodes of haemoptysis.",
+   "say": "Irreversible pathological dilatation of conducting bronchi resulting from chronic infection and inflammation defines bronchiectasis. Developing bronchiectasis follows the vicious cycle model, wherein impaired mucus clearance permits persistent bacterial colonisation. Recruited neutrophils release elastases that destroy bronchial wall elasticity. Patients present with chronic cough producing copious purulent sputum, recurrent infections and haemoptysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bronchiectasis-exacerbation-fig1.webp",
+    "alt": "Pathological diagram of bronchial dilatation and the vicious cycle of bronchiectasis.",
+    "caption": "Cole vicious cycle, airway dilatation, and mucus clearance failure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "High-resolution computed tomography of the chest represents the definitive imaging gold standard for establishing the diagnosis. Demonstrating the pathognomonic **HRCT signet ring sign** confirms abnormal bronchial dilatation, where the internal diameter of the dilated bronchus exceeds that of its accompanying pulmonary artery branch (bronchoarterial ratio > 1.0). In normal lung architecture, the bronchus and adjacent pulmonary artery have approximately equal diameters.",
+   "say": "High-resolution computed tomography of the chest represents the definitive imaging standard for establishing the diagnosis. Finding the classic signet ring sign confirms abnormal bronchial dilatation, where the internal diameter of the bronchus exceeds that of its companion pulmonary artery branch. In normal lung tissue, the bronchus and adjacent artery have equal diameters.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bronchiectasis-fig1.webp",
+    "alt": "Axial high-resolution chest CT scan showing dilated bronchi and signet ring sign.",
+    "caption": "High-resolution chest CT demonstrating signet ring sign and bronchial wall thickening. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Additional classical radiological signs on high-resolution computed tomography reflect chronic bronchial wall thickening and failure of normal tapering. Parallel thickened bronchial walls extending toward the lung periphery create the characteristic **tram track** sign on longitudinal sections. End-on dilated mucus-filled airways produce branching tubular opacities termed finger-in-glove sign, while non-clearing peripheral bronchi visible within one centimetre of the costal pleura confirm peripheral airway involvement.",
+   "say": "Additional classical radiological signs on computed tomography reflect chronic bronchial wall thickening and failure of tapering. Parallel thickened bronchial walls extending toward the periphery produce the characteristic tram-track appearance on longitudinal imaging. Dilated mucus-impacted airways form branching tubular shadows termed finger-in-glove sign, confirming widespread peripheral airway damage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Radiological CT sign",
+     "Cross-sectional plane",
+     "Pathological counterpart",
+     "Diagnostic implication"
+    ],
+    "rows": [
+     [
+      "Signet ring sign",
+      "Perpendicular (axial)",
+      "Bronchial diameter > adjacent artery",
+      "Hallmark diagnostic sign of bronchiectasis"
+     ],
+     [
+      "Tram track sign",
+      "Longitudinal (in-plane)",
+      "Parallel non-tapering thickened bronchial walls",
+      "Reflects chronic peribronchial inflammation"
+     ],
+     [
+      "Cluster of grapes",
+      "Axial / coronal",
+      "Confluent cystic dilated bronchioles",
+      "Severe cystic (saccular) bronchiectasis"
+     ],
+     [
+      "Finger-in-glove sign",
+      "Branching tubular",
+      "Mucoid impaction in dilated airway lumen",
+      "Seen in ABPA and severe cystic fibrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Daily expectoration of layered sputum is the hallmark clinical symptom of active bronchiectatic disease. Patients produce **copious purulent sputum** that classically separates into three distinct layers upon standing in a glass container: an uppermost foamy frothy layer, a middle cloudy greenish-yellow serous mucoid layer, and a dense sediment of cellular debris, mucus plugs, and pus at the bottom. Sputum volume often exceeds fifty to one hundred millilitres daily, particularly upon morning postural changes.",
+   "say": "Daily expectoration of layered sputum represents the hallmark symptom of active bronchiectatic disease. Patients expectorate copious purulent sputum that separates into three distinct layers upon standing in a glass: a top frothy layer, a middle cloudy mucoid layer and a bottom dense layer of cellular pus. Daily sputum production often exceeds fifty to one hundred millilitres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "impair",
+      "label": "Impaired mucociliary escalator"
+     },
+     {
+      "id": "stagn",
+      "label": "Mucus pooling in dilated bronchial saccular reservoirs"
+     },
+     {
+      "id": "col",
+      "label": "Chronic bacterial colonization & neutrophil lysis"
+     },
+     {
+      "id": "layer",
+      "label": "Three-layered purulent sputum expectoration"
+     }
+    ],
+    "edges": [
+     [
+      "impair",
+      "stagn"
+     ],
+     [
+      "stagn",
+      "col"
+     ],
+     [
+      "col",
+      "layer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital structural defects in the ciliary axoneme impair coordinated mucociliary clearance throughout the respiratory and reproductive tracts. Inheriting **primary ciliary dyskinesia** (PCD) is an autosomal recessive disorder caused by mutations in genes encoding ciliary dynein arms (such as DNAH5 and DNAI1). Immotile or dyskinetic cilia fail to clear bronchial secretions, leading to neonatal respiratory distress, chronic sinusitis, recurrent otitis media, male infertility from sperm immotility, and early-onset bilateral bronchiectasis.",
+   "say": "Congenital structural defects in the ciliary axoneme impair coordinated mucus clearance across the respiratory tract. Primary ciliary dyskinesia is an autosomal recessive condition caused by mutations in ciliary dynein arm genes. Dysfunctional cilia fail to clear secretions, leading to chronic sinusitis, recurrent otitis media, male subfertility and early-onset bilateral bronchiectasis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary ciliary dyskinesia",
+     "points": [
+      "Autosomal recessive dynein arm gene mutations",
+      "Immotile or uncoordinated ciliary beating",
+      "Nasal nitric oxide levels profoundly low",
+      "Electron microscopy shows absent outer dynein arms"
+     ]
+    },
+    "right": {
+     "title": "Cystic fibrosis",
+     "points": [
+      "CFTR chloride channel conductance mutation",
+      "Dehydrated, hyperviscous mucus secretions",
+      "Sweat chloride elevated (> 60 mmol/L)",
+      "Pancreatic insufficiency and meconium ileus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The classic clinical triad combining ciliary dysfunction with situs inversus bears an eponymous designation. Approximately fifty percent of patients with primary ciliary dyskinesia exhibit **Kartagener syndrome**, comprising the clinical triad of bronchiectasis, chronic rhinosinusitis, and situs inversus totalis with dextrocardia. Embryonic nodal cilia govern left-right organ asymmetry during early gastrulation; absent nodal ciliary motility results in random fifty-percent determination of visceral organ situs.",
+   "say": "The classic clinical triad combining ciliary dysfunction with situs inversus bears an eponymous designation. Half of patients with ciliary dyskinesia exhibit Kartagener syndrome, featuring bronchiectasis, chronic sinusitis and complete situs inversus with dextrocardia. Embryonic nodal cilia govern left-right organ asymmetry during gastrulation; absent ciliary rotation causes random determination of organ position.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dynein",
+      "label": "Mutation in ciliary dynein arm genes (DNAH5)"
+     },
+     {
+      "id": "nodal",
+      "label": "Impaired embryonic nodal ciliary rotation"
+     },
+     {
+      "id": "random",
+      "label": "Random 50% determination of visceral organ situs"
+     },
+     {
+      "id": "triad",
+      "label": "Kartagener triad: Bronchiectasis + Sinusitis + Situs inversus"
+     }
+    ],
+    "edges": [
+     [
+      "dynein",
+      "nodal"
+     ],
+     [
+      "nodal",
+      "random"
+     ],
+     [
+      "random",
+      "triad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A multisystem genetic disorder of epithelial chloride transport represents the most prevalent life-limiting cause of bronchiectasis in Caucasian populations. In **cystic fibrosis**, mutations in the cystic fibrosis transmembrane conductance regulator (CFTR) gene impair chloride and bicarbonate secretion while increasing sodium absorption. This produces dehydrated, hyperviscous mucus that obstructs pulmonary conducting airways, leading to early widespread bronchiectasis, chronic sinus disease, exocrine pancreatic insufficiency, and biliary cirrhosis.",
+   "say": "A genetic disorder of epithelial chloride transport represents the most frequent cause of bronchiectasis in Caucasian populations. In cystic fibrosis, mutations in the transmembrane conductance regulator gene impair chloride secretion while accelerating sodium absorption. This produces dehydrated, sticky mucus that plugs airways, causing early severe bronchiectasis, pancreatic failure and recurrent infections.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cystic-fibrosis-fig1.webp",
+    "alt": "Illustration of cystic fibrosis pathology and multisystem organ manifestations.",
+    "caption": "Cystic fibrosis multisystem pathology, airway plugging, and organ manifestations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Effective long-term maintenance in bronchiectasis relies on regular airway clearance and targeted antimicrobial suppression. Daily **chest physiotherapy** using positive expiratory pressure (PEP) devices, oscillating flutter valves, or active cycle of breathing techniques mobilizes inspissated secretions. Nebulized hypertonic saline (3% to 7%) hydrates dehydrated mucus and enhances mucociliary transport, while macrolide maintenance therapy with oral azithromycin three times weekly downregulates chronic neutrophilic inflammation and halves annual exacerbation frequency.",
+   "say": "Effective maintenance in bronchiectasis relies on consistent airway clearance and targeted antimicrobial suppression. Daily chest physiotherapy using positive expiratory pressure devices or oscillating flutter valves mobilizes pooled secretions. Inhaling hypertonic saline hydrates mucus, while maintenance azithromycin three times weekly dampens inflammation and reduces annual exacerbation rates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physical airway clearance",
+     "points": [
+      "Oscillating positive expiratory pressure (Acapella/Flutter)",
+      "Active cycle of breathing techniques (ACBT)",
+      "Postural drainage and huff coughing",
+      "High-frequency chest wall oscillation vests"
+     ]
+    },
+    "right": {
+     "title": "Inhaled & oral therapies",
+     "points": [
+      "Nebulized hypertonic saline (3% to 7%)",
+      "Nebulized dornase alfa (in cystic fibrosis)",
+      "Low-dose oral azithromycin (anti-inflammatory)",
+      "Nebulized tobramycin/colistin for Pseudomonas"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
