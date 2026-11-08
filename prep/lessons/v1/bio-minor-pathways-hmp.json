@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "bio-minor-pathways",
+ "subject": "biochemistry",
+ "title": "HMP shunt reactions and NADPH jobs",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The hexose monophosphate shunt branches from glucose-6-phosphate to make **NADPH** and ribose-5-phosphate without producing or consuming ATP. Its oxidative phase is irreversible and rate limited by glucose-6-phosphate dehydrogenase, yielding two NADPH and one carbon dioxide per glucose-6-phosphate. Tissues synthesising fat or steroids, and red cells defending against oxidants, run this shunt hardest.",
+   "say": "The shunt branches from glucose-6-phosphate to make NADPH and ribose without producing ATP. Glucose-6-phosphate dehydrogenase limits the irreversible oxidative phase. Fat synthesising tissues and red cells defending against oxidants run it hardest.",
+   "vis": {
+    "kind": "flow",
+    "title": "Shunt outline",
+    "nodes": [
+     {"id": "g6p", "label": "Glucose-6-phosphate"},
+     {"id": "ox", "label": "Oxidative phase (2 NADPH)"},
+     {"id": "rib", "label": "Ribulose then ribose-5-P"},
+     {"id": "back", "label": "Non-oxidative return to glycolysis"}
+    ],
+    "edges": [["g6p", "ox"], ["ox", "rib"], ["rib", "back"]]
+   }
+  },
+  {
+   "tx": "The non oxidative phase interconverts sugars reversibly through **transketolase** (thiamine pyrophosphate dependent) and transaldolase, so cells can make ribose without NADPH when nucleotides are needed, or burn ribose back to glycolytic intermediates when NADPH demand dominates. This reversibility lets one pathway serve proliferation (ribose), lipogenesis (NADPH) or both, tuned by substrate availability rather than hormones alone.",
+   "say": "The non oxidative phase interconverts sugars reversibly through transketolase and transaldolase. Cells can make ribose without NADPH, or burn ribose back when NADPH demand dominates. One pathway serves proliferation or lipogenesis as needed.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Need NADPH most (liver, fat, red cell defence)", "points": ["Oxidative phase runs forward", "Ribose recycled to glycolysis", "More NADPH per glucose"]},
+    "right": {"title": "Need ribose most (dividing cells)", "points": ["Glycolytic sugars run backward", "Ribose-5-phosphate harvested", "NADPH not required"]
+    }
+   }
+  },
+  {
+   "tx": "**NADPH** jobs define the shunt clinical reach: reductive synthesis (fatty acids, cholesterol, steroids), reduced glutathione regeneration for peroxide disposal, the phagocyte respiratory burst through NADPH oxidase, cytochrome P450 detoxification, and nitric oxide synthesis. NADPH is kept separate from NADH by transhydrogenase free design: NADH reports energy, NADPH funds construction and defence, and examinations test that separation relentlessly.",
+   "say": "NADPH funds synthesis, glutathione defence, the phagocyte burst, P450 detoxification and nitric oxide production. NADH reports energy while NADPH funds construction and defence. Examinations test that separation relentlessly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["NADPH consumer", "Setting", "Shunt failure clue"],
+    "rows": [
+     ["Glutathione reductase", "Red cells, all tissues", "Oxidant haemolysis in G6PD deficiency"],
+     ["NADPH oxidase", "Neutrophils and macrophages", "Chronic granulomatous disease when oxidase fails"],
+     ["Fatty acid and steroid synthesis", "Liver, fat, adrenal, gonads", "Fed state shunt induction"],
+     ["Cytochrome P450 system", "Liver microsomes", "Drug handling capacity"]
+    ]
+   }
+  },
+  {
+   "tx": "Insulin induces **glucose-6-phosphate dehydrogenase** and 6-phosphogluconate dehydrogenase in the fed state, coordinating NADPH supply with fatty acid synthesis. Red cells, lacking nuclei and protein synthesis, cannot induce anything: their enzyme at birth must last 120 days, so older cells fail first under oxidant stress. That aging gradient explains why haemolysis in deficiency is self limited once young reticulocytes dominate.",
+   "say": "Insulin induces the shunt enzymes in the fed state. Red cells cannot induce anything, so their enzyme must last 120 days and older cells fail first. Haemolysis is therefore self limited once young reticulocytes dominate.",
+   "vis": null
+  },
+  {
+   "tx": "Thiamine status surfaces here because **transketolase** activity in red cells, boosted by adding thiamine in vitro, historically assays B1 deficiency. Wernicke risk, shunt function and pyruvate dehydrogenase failure thus share one cofactor, a cross link examiners exploit. No ATP yield calculation ever includes the shunt: its carbon either returns to glycolysis or leaves as ribose and carbon dioxide.",
+   "say": "Red cell transketolase activity assays thiamine status because the enzyme needs thiamine pyrophosphate. Wernicke risk and shunt function share one cofactor. No ATP calculation includes the shunt, whose carbon returns or leaves as ribose.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Shunt fact", "Exam application"],
+    "rows": [
+     ["No ATP made or used", "Never add shunt to yield totals"],
+     ["G6PD rate limiting, insulin induced", "Fed liver shunt high"],
+     ["Transketolase needs TPP", "Thiamine assay and Wernicke link"],
+     ["Red cell sole NADPH source", "G6PD haemolysis mechanism"]
+    ]
+   }
+  },
+  {
+   "tx": "Keep three shunt numbers ready: one glucose-6-phosphate through one oxidative pass gives two NADPH, complete oxidation through recycling can yield up to twelve NADPH, and ribose-5-phosphate is a five carbon product feeding **PRPP** for nucleotide synthesis. Rapidly dividing marrow and tumours exploit the ribose arm, connecting this pathway to the nucleotide lessons later in the course.",
+   "say": "Keep three numbers ready. One oxidative pass gives two NADPH, complete recycling can yield up to twelve, and ribose feeds PRPP for nucleotide synthesis. Dividing marrow and tumours exploit the ribose arm.",
+   "vis": {
+    "kind": "flow",
+    "title": "Two products, two destinies",
+    "nodes": [
+     {"id": "g6p", "label": "Glucose-6-phosphate"},
+     {"id": "nad", "label": "NADPH to synthesis and defence"},
+     {"id": "rib", "label": "Ribose to PRPP and nucleotides"}
+    ],
+    "edges": [["g6p", "nad"], ["g6p", "rib"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

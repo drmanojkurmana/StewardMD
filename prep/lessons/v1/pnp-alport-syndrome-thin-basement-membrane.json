@@ -1,0 +1,146 @@
+{
+  "id": "pnp-alport-syndrome-thin-basement-membrane",
+  "title": "Alport Syndrome and Thin Basement Membrane Disease: Type IV Collagen Genetics",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Glomerular Diseases, Nephrotic Syndrome and Nephritis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Alport syndrome arises from mutations in genes encoding alpha chains of type four collagen, predominantly inherited in an X-linked pattern.",
+      "tx": "Analyze the genetic architecture of **Type IV collagen genetics and inheritance** across affected families. Type IV collagen is an essential structural constituent of the glomerular basement membrane, cochlea, and ocular lens; approximately 85% of Alport syndrome cases are X-linked Alport syndrome (XLAS) caused by pathogenic mutations in the COL4A5 gene on chromosome Xq22.3, whereas 15% are autosomal recessive or autosomal dominant Alport syndrome caused by mutations in COL4A3 or COL4A4 on chromosome 2q36.3.",
+      "vis": {
+        "kind": "table",
+        "title": "Genetic Subtypes of Alport Syndrome",
+        "cols": ["Subtype", "Affected Gene", "Chromosomal Locus", "Prevalence"],
+        "rows": [
+          ["X-linked (XLAS)", "COL4A5", "Xq22.3", "~85% of cases"],
+          ["Autosomal recessive", "COL4A3 or COL4A4", "2q36.3", "~15% of cases"],
+          ["Autosomal dominant", "COL4A3 or COL4A4 (heterozygous)", "2q36.3", "Mild/variable course"]
+        ]
+      }
+    },
+    {
+      "say": "Persistent microscopic hematuria begins during early childhood and heralds insidious progressive nephropathy.",
+      "tx": "Recognize the clinical onset of **Persistent hematuria and proteinuria progression** during pediatric surveillance. Universal presentation involves persistent microscopic hematuria starting in early infancy or childhood, frequently discovered on routine screening; over subsequent years, affected males develop progressive proteinuria, hypertension, and inexorable decline in glomerular filtration rate leading to end-stage kidney disease during the second to fourth decades of life.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "hem", "label": "Early Childhood: Persistent microscopic hematuria"},
+          {"id": "prot", "label": "Late Childhood: Progressive proteinuria & hypertension"},
+          {"id": "esrd", "label": "Young Adulthood: Decline in GFR to ESRD"}
+        ],
+        "edges": [
+          ["hem", "prot"],
+          ["prot", "esrd"]
+        ]
+      }
+    },
+    {
+      "say": "High-frequency sensorineural deafness develops during late childhood and parallels progressive renal failure.",
+      "tx": "Screen hearing function to detect **Sensorineural hearing loss (SNHL) onset** before school impairment occurs. Bilateral, symmetrical sensorineural hearing loss initially affects high frequencies (2000-8000 Hz) and typically manifests in late childhood or early adolescence (between ages 8-10 years); the hearing loss is never congenital, progresses steadily with advancing nephropathy, and correlates strongly with early progression toward terminal renal failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early Audiometric Stage",
+          "points": [
+            "Subclinical high-frequency deficit (2000-8000 Hz)",
+            "Speech frequencies initially spared",
+            "Detected by routine annual pure-tone audiometry"
+          ]
+        },
+        "right": {
+          "title": "Advanced Audiometric Stage",
+          "points": [
+            "Progression to speech-frequency impairment",
+            "Parallels worsening proteinuria and rising creatinine",
+            "Mandates hearing aid fitting and educational support"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Conical protrusion of the anterior lens surface and perimacular flecks represent pathognomonic ocular findings.",
+      "tx": "Perform comprehensive slit-lamp evaluation to identify **Ocular hallmarks: anterior lenticonus and flecks**. Pathognomonic ocular abnormalities in Alport syndrome include anterior lenticonus, characterized by conical protrusion of the central anterior lens surface into the anterior chamber causing progressive axial myopia, alongside bilateral dot-and-fleck retinopathy consisting of yellowish-white perimacular and midperipheral retinal flecks that spare the fovea.",
+      "vis": {
+        "kind": "table",
+        "title": "Ophthalmologic Signatures in Alport Syndrome",
+        "cols": ["Ocular Finding", "Anatomical Site", "Diagnostic Significance"],
+        "rows": [
+          ["Anterior lenticonus", "Anterior lens capsule", "Virtually pathognomonic of Alport syndrome"],
+          ["Dot-and-fleck retinopathy", "Perimacular and peripheral retina", "Correlates with early onset of renal failure"],
+          ["Posterior polymorphous dystrophy", "Corneal endothelium", "Rare corneal vesicle or band formation"]
+        ]
+      }
+    },
+    {
+      "say": "Ultrastructural examination reveals characteristic alternating thinning, thickening, and longitudinal splitting of the lamina densa.",
+      "tx": "Evaluate electron microscopy demonstrating **Electron microscopy basket-weave splitting** of the glomerular basement membrane. Ultrastructural pathology classically reveals variable thickening and thinning of the lamina densa with extensive longitudinal splitting, fragmentation, and interlacing lamellation, producing the characteristic basket-weave appearance accompanied by podocyte foot-process effacement in areas of advanced basement membrane attenuation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "early", "label": "Early infancy: Uniform GBM thinning"},
+          {"id": "split", "label": "Childhood: Longitudinal splitting of lamina densa"},
+          {"id": "weave", "label": "Late stage: Classic 'basket-weave' fragmentation"}
+        ],
+        "edges": [
+          ["early", "split"],
+          ["split", "weave"]
+        ]
+      }
+    },
+    {
+      "say": "Skin and kidney biopsies demonstrate complete absence of specific collagen alpha chains in hemizygous males.",
+      "tx": "Order specialized immunofluorescence assays to document **Immunohistochemistry alpha-chain absence** in tissue samples. Direct immunohistochemical staining of epidermal basement membrane on punch skin biopsy or renal basement membrane on kidney biopsy demonstrates complete absence of the alpha-5(IV) collagen chain in hemizygous X-linked males and absence of alpha-3, alpha-4, and alpha-5 chains in autosomal recessive disease due to disrupted heterotrimer assembly.",
+      "vis": {
+        "kind": "table",
+        "title": "Immunohistochemical Staining Patterns",
+        "cols": ["Tissue Layer", "Normal Staining", "X-linked Male Alport"],
+        "rows": [
+          ["Glomerular basement membrane", "Alpha-3, alpha-4, alpha-5 positive", "Completely absent alpha-3, 4, 5 chains"],
+          ["Epidermal basement membrane", "Alpha-5(IV) strongly positive", "Complete loss of alpha-5(IV) expression"],
+          ["Bowman capsule", "Alpha-5 and alpha-6 positive", "Absent alpha-5 and alpha-6 chains"]
+        ]
+      }
+    },
+    {
+      "say": "Early introduction of renin-angiotensin blockade significantly slows renal disease progression and prolongs native kidney life.",
+      "tx": "Initiate early medical therapy using **Renin-angiotensin blockade to delay ESRD** upon diagnosis. Early administration of angiotensin-converting enzyme inhibitors (such as ramipril or enalapril) or angiotensin receptor blockers initiated upon the onset of microalbuminuria drastically reduces glomerular intraglomerular hypertension, slows progressive proteinuria, and delays the onset of terminal end-stage kidney disease by several decades.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early ACE Inhibitor Therapy",
+          "points": [
+            "Initiated at microalbuminuria stage",
+            "Reduces glomerular hyperfiltration",
+            "Delays dialysis/transplant by decades"
+          ]
+        },
+        "right": {
+          "title": "Delayed or Absent Blockade",
+          "points": [
+            "Rapid escalation of macroproteinuria",
+            "Early glomerulosclerosis and tubular atrophy",
+            "ESRD typically reached in 2nd-3rd decade"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Benign familial hematuria features diffuse basement membrane thinning without sensorineural hearing loss or progressive renal failure.",
+      "tx": "Distinguish Alport syndrome from **Thin basement membrane disease (TBMD) contrast** in children presenting with isolated hematuria. Thin basement membrane nephropathy (benign familial hematuria) is typically caused by heterozygous COL4A3 or COL4A4 carrier mutations and is characterized by isolated microscopic hematuria, normal blood pressure and hearing, normal renal function, and uniform diffuse thinning of the lamina densa on electron microscopy without lamellation or progressive renal failure.",
+      "vis": {
+        "kind": "table",
+        "title": "Alport Syndrome vs Thin Basement Membrane Disease",
+        "cols": ["Clinical Feature", "Alport Syndrome", "Thin Basement Membrane Disease"],
+        "rows": [
+          ["Genetics", "COL4A5 (X-linked) or homozygous COL4A3/4", "Heterozygous COL4A3 or COL4A4 carrier"],
+          ["Electron microscopy", "Basket-weave splitting and lamellation", "Uniform diffuse GBM thinning (< 250 nm)"],
+          ["Extrarenal signs", "Sensorineural hearing loss, lenticonus", "No hearing loss, no ocular anomalies"],
+          ["Renal prognosis", "Progressive proteinuria, ESRD", "Benign, normal life expectancy"]
+        ]
+      }
+    }
+  ]
+}
