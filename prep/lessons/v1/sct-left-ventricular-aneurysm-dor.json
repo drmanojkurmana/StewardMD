@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sct-left-ventricular-aneurysm-dor",
+  "title": "Left Ventricular Aneurysm and Dor Procedure: Remodeling and Surgical Ventricular Restoration",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Surgical Ventricular Restoration: The Dor Procedure)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 8 (Complications of Myocardial Infarction)",
+    "STICH Randomized Trial (Surgical Treatment for Ischemic Heart Failure)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "A true left ventricular aneurysm develops following full-thickness myocardial infarction. The scarred ventricular wall becomes thin and fibrous, but it retains all three histological layers of the heart. The lesion features a broad neck and expands dyskinetically during systole, absorbing contractile energy.",
+      "tx": "A **true aneurysm** represents a thinned, scarred region of the left ventricular wall composed of fibrous tissue containing all 3 cardiac layers. The deformity features a **broad neck** communicating with the ventricular cavity. During ventricular systole, it displays characteristic paradoxical **dyskinetic expansion**, dissipating left ventricular contractile stroke energy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "True Ventricular Aneurysm",
+          "points": [
+            "Contains endocardium, fibrotic muscle, and epicardium",
+            "Broad neck communicating with the main chamber",
+            "Develops late following transmural infarction",
+            "Very low risk of free spontaneous rupture"
+          ]
+        },
+        "right": {
+          "title": "False Aneurysm (Pseudoaneurysm)",
+          "points": [
+            "Contained free rupture bounded only by pericardium",
+            "Narrow neck orifice leading into the cavity",
+            "Acute presentation after transmural wall rupture",
+            "Extremely high risk of catastrophic fatal rupture"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Left ventricular pseudoaneurysms represent contained myocardial ruptures bounded only by the pericardium and thrombus. The opening between the ventricle and the false sac features a characteristically narrow neck. Because the fibrous pericardial wall lacks structural strength, pseudoaneurysms carry a high risk of catastrophic rupture and require urgent surgical repair.",
+      "tx": "In contrast to true aneurysms, a **pseudoaneurysm** is a contained myocardial rupture bounded solely by **pericardium containment** and laminated clot. The connection to the left ventricular chamber is defined by a **narrow neck** with a neck-to-sac ratio under 0.5. Due to its extreme propensity for sudden fatal rupture, it represents an urgent surgical indication.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "True Ventricular Aneurysm",
+          "Ventricular Pseudoaneurysm"
+        ],
+        "rows": [
+          [
+            "Wall architecture",
+            "All 3 cardiac layers (fibrosed myocardium present)",
+            "Parietal pericardium and organized thrombus only"
+          ],
+          [
+            "Neck orifice ratio",
+            "Broad neck (>0.5 to 0.9 of maximum diameter)",
+            "Narrow neck (<0.5 of cavity diameter)"
+          ],
+          [
+            "Coronary vessels",
+            "Draped across outer epicardial surface of aneurysm",
+            "Absent over the outer pericardial false wall"
+          ],
+          [
+            "Rupture risk",
+            "Very rare (<2 percent chronic risk)",
+            "Extremely high (>30 to 45 percent urgent rupture risk)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "True ventricular aneurysms occur most commonly in the anteroapical segment of the heart. Complete occlusion of the left anterior descending coronary artery without adequate collaterals causes transmural infarction of the apex. Thinning of the infarcted muscle under high intraventricular pressure leads to progressive dilation.",
+      "tx": "Approximately 80 percent of true aneurysms present as an **anteroapical aneurysm** following extensive **transmural infarction**. The underlying cause is acute proximal **LAD occlusion** with inadequate collateral perfusion. High systolic wall stress acts across the infarcted zone, causing progressive architectural thinning, chamber dilation, and permanent geometric sphericity.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-coronary-syndrome-long-case-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Myocardial infarction distribution and transmural necrosis. Credit: StewardMD.",
+        "alt": "Pathological progression of acute transmural infarction into ventricular remodeling."
+      }
+    },
+    {
+      "say": "Patients with ventricular aneurysms suffer from a triad of clinical complications, which is recognized by surgical teams. Ineffective paradoxical wall motion leads to congestive heart failure and low cardiac output. Elevated ventricular wall tension causes recurrent angina, while scarred border zones generate malignant ventricular arrhythmias.",
+      "tx": "The clinical presentation is dominated by progressive **congestive heart failure** caused by paradoxical systolic pooling, elevated **ventricular wall tension** increasing myocardial oxygen consumption and provoking angina, and life-threatening **border-zone arrhythmias**. Re-entrant electrical circuits originating along the scarred border zone trigger sustained ventricular tachycardia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Large transmural LAD infarction produces akinetic/dyskinetic scar"
+          },
+          {
+            "id": "b",
+            "label": "Dyskinetic systolic expansion dissipates forward stroke volume"
+          },
+          {
+            "id": "c",
+            "label": "Compensatory chamber dilation elevates wall tension by Laplace law"
+          },
+          {
+            "id": "d",
+            "label": "Heart failure, recurrent angina, and border-zone ventricular tachycardia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Stagnant blood flow within the akinetic or dyskinetic apex frequently leads to mural thrombus formation. Up to fifty percent of aneurysm patients develop layered clot within the scarred cavity. Preoperative systemic anticoagulation is essential to prevent systemic and cerebrovascular thromboembolism.",
+      "tx": "Sluggish blood stasis within the dyskinetic aneurysm promotes **mural thrombus** formation in up to 50 percent of cases. Severe **stagnant blood flow** allows platelet and fibrin deposition, creating an elevated risk for catastrophic **thromboembolism** to the cerebral, mesenteric, and peripheral arterial beds, mandating preoperative therapeutic anticoagulation.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-surg-pulsatile_mass.webp",
+        "ar": 1.3333,
+        "caption": "Ventricular and aortic expansile wall remodeling. Credit: StewardMD.",
+        "alt": "Ventricular wall expansion, aneurysm geometry and hemodynamic consequences."
+      }
+    },
+    {
+      "say": "The Dor procedure reconstructs normal left ventricular geometry using an endoventricular patch. The surgeon incises the aneurysm parallel to the left anterior descending artery and evacuates all mural thrombus. An endoventricular purse-string suture placed at the transition zone between scarred and healthy tissue resizes the cavity.",
+      "tx": "The **Dor procedure**, or **endoventricular patch plasty**, reconstructs physiological left ventricular geometry. The surgeon incises the aneurysm, removes mural thrombus, and places an endoventricular Fontan purse-string stitch at the **transition zone** between scarred non-contractile tissue and viable contracting myocardium to define the new ventricular apex.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Open scarred aneurysm parallel to LAD on cardiopulmonary bypass"
+          },
+          {
+            "id": "b",
+            "label": "Evacuate mural thrombus and inspect ventricular cavity"
+          },
+          {
+            "id": "c",
+            "label": "Place circular purse-string suture at junction of scar and healthy tissue"
+          },
+          {
+            "id": "d",
+            "label": "Snug suture over balloon sizer and secure oval Dacron endoventricular patch"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "An oval Dacron or bovine pericardial patch is sewn across the neck of the aneurysm to exclude scarred muscle. This reconstructs a normal elliptical ventricular cavity and reduces chamber volume. The target end-systolic volume index after reconstruction is fifty to sixty millilitres per square metre.",
+      "tx": "An oval **Dacron patch** is sutured circumferentially across the neo-apex, excluding dyskinetic scar and restoring a physiological **elliptical geometry**. The surgical objective is to reduce left ventricular cavity size, targeting a postoperative **end-systolic volume index** of 50 to 60 mL/m2, which correlates directly with long-term functional recovery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Volumetric Metric",
+          "Preoperative Pathological State",
+          "Target After Dor Reconstruction"
+        ],
+        "rows": [
+          [
+            "LV End-Systolic Volume Index",
+            ">80 to 120 mL/m2 (dilated)",
+            "50 to 60 mL/m2 (physiologic)"
+          ],
+          [
+            "Chamber geometry",
+            "Globular spherical shape",
+            "Elliptical conical shape"
+          ],
+          [
+            "Dyskinetic scar segment",
+            "Expands during systole",
+            "Excluded completely from intracavitary pressure"
+          ],
+          [
+            "Myocardial wall stress",
+            "Markedly elevated (Laplace law)",
+            "Significantly reduced by volume reduction"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Patients with documented preoperative ventricular tachycardia require targeted surgical ablation during aneurysm repair. Surgeons perform cryoablation or surgical endocardectomy along the arrhythmogenic border zone. Freezing or resecting this transitional myocardium abolishes the re-entrant electrical circuits responsible for sudden death.",
+      "tx": "When preoperative electrophysiological mapping or holter recordings document recurrent **ventricular tachycardia**, surgeons perform border-zone **cryoablation** at minus 60 degrees Celsius or surgical **endocardectomy**. Eradication of slow-conducting transitional tissue around the aneurysm border abolishes lethal arrhythmogenic re-entry circuits, improving long-term arrhythmia-free survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Surgical Cryoablation",
+          "points": [
+            "Applied with nitrous oxide or argon cryoprobe",
+            "Targeted border temperature of -60 degrees C",
+            "Homogeneous transmural freezing with preserved collagen",
+            "Low risk of myocardial perforation during ablation"
+          ]
+        },
+        "right": {
+          "title": "Surgical Endocardectomy",
+          "points": [
+            "Mechanical peeling of thickened border-zone endocardium",
+            "Extends 2 to 3 cm onto adjacent viable myocardium",
+            "Direct excision of re-entrant conduction pathways",
+            "Requires meticulous hemostasis of bleeding raw surface"
+          ]
+        }
+      }
+    }
+  ]
+}

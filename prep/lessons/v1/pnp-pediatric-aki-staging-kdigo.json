@@ -11,14 +11,10 @@
       "say": "Serum creatinine elevation defines pediatric kidney injury severity across three standardized stages.",
       "tx": "Evaluate acute filtration loss using the standard **KDIGO pediatric AKI staging criteria** across age brackets. Stage 1 requires a serum creatinine increase >= 0.3 mg/dL within 48h or 1.5-1.9x baseline; Stage 2 spans 2.0-2.9x baseline; Stage 3 reaches >= 3.0x baseline, SCr >= 4.0 mg/dL, initiation of RRT, or an acute decrease in eGFR < 35 mL/min/1.73m² in patients < 18 years.",
       "vis": {
-        "kind": "table",
-        "title": "KDIGO Pediatric AKI Creatinine Staging",
-        "cols": ["Stage", "Creatinine Criteria", "Pediatric eGFR Criterion"],
-        "rows": [
-          ["Stage 1", "Increase >= 0.3 mg/dL in 48h or 1.5-1.9x baseline", "Baseline function preserved"],
-          ["Stage 2", "Increase 2.0-2.9x baseline", "Moderate filtration impairment"],
-          ["Stage 3", ">= 3.0x baseline or SCr >= 4.0 mg/dL or RRT", "eGFR < 35 mL/min/1.73m² (< 18 years)"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/aki-fig1.webp",
+        "alt": "Prerenal hypoperfusion, tubular necrosis and obstructive causes of acute kidney injury.",
+        "caption": "AKI has prerenal, intrinsic and obstructive causes. Credit: StewardMD."
       }
     },
     {
@@ -27,11 +23,27 @@
       "vis": {
         "kind": "table",
         "title": "KDIGO Urine Output Staging Thresholds",
-        "cols": ["Stage", "Urine Output Rate", "Duration Criterion"],
+        "cols": [
+          "Stage",
+          "Urine Output Rate",
+          "Duration Criterion"
+        ],
         "rows": [
-          ["Stage 1", "< 0.5 mL/kg/hr", "Sustained for 6-12 hours"],
-          ["Stage 2", "< 0.5 mL/kg/hr", "Sustained for >= 12 hours"],
-          ["Stage 3", "< 0.3 mL/kg/hr or anuria", ">= 24 hours (or anuria >= 12 hours)"]
+          [
+            "Stage 1",
+            "< 0.5 mL/kg/hr",
+            "Sustained for 6-12 hours"
+          ],
+          [
+            "Stage 2",
+            "< 0.5 mL/kg/hr",
+            "Sustained for >= 12 hours"
+          ],
+          [
+            "Stage 3",
+            "< 0.3 mL/kg/hr or anuria",
+            ">= 24 hours (or anuria >= 12 hours)"
+          ]
         ]
       }
     },
@@ -62,16 +74,10 @@
       "say": "Structural biomarkers uncover subclinical tubular damage days before creatinine begins to climb.",
       "tx": "Detect early subclinical cellular injury employing **Novel renal tubular injury biomarkers** following toxic insults. Both urinary and serum Neutrophil Gelatinase-Associated Lipocalin (NGAL > 150 ng/mL) and Kidney Injury Molecule-1 (KIM-1) concentrations surge within 2-4 hours of ischemic or toxic insults, reliably preceding standard serum creatinine rise by 24-48 hours and enabling pre-emptive nephroprotective interventions.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "insult", "label": "Tubular Ischemic or Toxic Insult"},
-          {"id": "early", "label": "NGAL > 150 ng/mL & KIM-1 Rise at 2-4 Hours"},
-          {"id": "late", "label": "Serum Creatinine Elevation at 24-48 Hours"}
-        ],
-        "edges": [
-          ["insult", "early"],
-          ["early", "late"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/aki-fig2.webp",
+        "alt": "Tubular epithelial sloughing and granular cast formation in acute tubular injury.",
+        "caption": "Tubular injury: sloughed cells and granular casts. Credit: StewardMD."
       }
     },
     {
@@ -80,10 +86,22 @@
       "vis": {
         "kind": "table",
         "title": "Pediatric Furosemide Stress Test (FST)",
-        "cols": ["Patient Exposure", "Intravenous Furosemide Dose", "2-Hour Response Threshold"],
+        "cols": [
+          "Patient Exposure",
+          "Intravenous Furosemide Dose",
+          "2-Hour Response Threshold"
+        ],
         "rows": [
-          ["Diuretic Naive", "1.0 mg/kg bolus", "Output < 2 mL/kg over 2 hours predicts severe AKI"],
-          ["Prior Exposure", "1.5 mg/kg bolus", "Output >= 2 mL/kg indicates responsive tubules"]
+          [
+            "Diuretic Naive",
+            "1.0 mg/kg bolus",
+            "Output < 2 mL/kg over 2 hours predicts severe AKI"
+          ],
+          [
+            "Prior Exposure",
+            "1.5 mg/kg bolus",
+            "Output >= 2 mL/kg indicates responsive tubules"
+          ]
         ]
       }
     },
@@ -93,15 +111,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "risk", "label": "Baseline Risk (ICU, Transplant, Sepsis)"},
-          {"id": "inj", "label": "Injury Severity (Creatinine Shift, %FO)"},
-          {"id": "rai", "label": "Score RAI >= 8: High Risk for Severe AKI"},
-          {"id": "bio", "label": "Deploy NGAL Biomarker & Initiate Renal Support"}
+          {
+            "id": "risk",
+            "label": "Baseline Risk (ICU, Transplant, Sepsis)"
+          },
+          {
+            "id": "inj",
+            "label": "Injury Severity (Creatinine Shift, %FO)"
+          },
+          {
+            "id": "rai",
+            "label": "Score RAI >= 8: High Risk for Severe AKI"
+          },
+          {
+            "id": "bio",
+            "label": "Deploy NGAL Biomarker & Initiate Renal Support"
+          }
         ],
         "edges": [
-          ["risk", "rai"],
-          ["inj", "rai"],
-          ["rai", "bio"]
+          [
+            "risk",
+            "rai"
+          ],
+          [
+            "inj",
+            "rai"
+          ],
+          [
+            "rai",
+            "bio"
+          ]
         ]
       }
     },
@@ -134,11 +173,27 @@
       "vis": {
         "kind": "table",
         "title": "NINJA Nephrotoxin Stewardship Guidelines",
-        "cols": ["High-Risk Exposure Criterion", "Monitored Antibiotics", "Target Outcome"],
+        "cols": [
+          "High-Risk Exposure Criterion",
+          "Monitored Antibiotics",
+          "Target Outcome"
+        ],
         "rows": [
-          [">= 3 simultaneous nephrotoxins", "Gentamicin & tobramycin", "Daily creatinine screening"],
-          [">= 3 days of aminoglycosides", "Intravenous vancomycin", "TDM drug level optimization"],
-          ["Institutional Protocol", "Multi-disciplinary surveillance", "38% overall reduction in hospital AKI"]
+          [
+            ">= 3 simultaneous nephrotoxins",
+            "Gentamicin & tobramycin",
+            "Daily creatinine screening"
+          ],
+          [
+            ">= 3 days of aminoglycosides",
+            "Intravenous vancomycin",
+            "TDM drug level optimization"
+          ],
+          [
+            "Institutional Protocol",
+            "Multi-disciplinary surveillance",
+            "38% overall reduction in hospital AKI"
+          ]
         ]
       }
     }

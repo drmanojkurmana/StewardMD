@@ -1,0 +1,257 @@
+{
+  "v": 1,
+  "module": "sct-cardiac-trauma-tamponade",
+  "title": "Cardiac Trauma: Penetrating, Blunt, Pericardial Tamponade and Emergency Resuscitative Thoracotomy",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Cardiac Trauma)",
+    "Advanced Trauma Life Support (ATLS) 10e Guidelines",
+    "Eastern Association for the Surgery of Trauma (EAST) Practice Management Guidelines"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Acute pericardial tamponade presents with classical clinical signs first described by Claude Beck. Rapid accumulation of blood within the non-compliant fibrous pericardium elevates intrapericardial pressures and restricts diastolic ventricular filling. Clinicians observe severe hypotension, distended neck veins, and muffled heart sounds on auscultation.",
+      "tx": "Acute hemopericardium rapidly compresses cardiac chambers, manifesting as **Beck triad** comprising systemic arterial hypotension, **cardiac tamponade** signs, and distant muffled heart tones. The non-distensible pericardial sac restricts diastolic ventricular filling, producing marked stroke volume reduction and **pulsus paradoxus** exceeding 10 mmHg on arterial blood pressure monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Beck Triad Component",
+          "Clinical Finding",
+          "Pathophysiological Mechanism"
+        ],
+        "rows": [
+          [
+            "Hypotension",
+            "Systolic BP <90 mmHg with narrow pulse pressure",
+            "Impaired ventricular diastolic filling reduces stroke volume"
+          ],
+          [
+            "Elevated JVP",
+            "Distended neck veins and elevated CVP",
+            "Impaired venous return into the compressed right atrium"
+          ],
+          [
+            "Muffled heart sounds",
+            "Faint distant tones on auscultation",
+            "Hydroacoustic damping by intrapericardial blood layer"
+          ],
+          [
+            "Pulsus paradoxus",
+            "Exaggerated inspiratory BP drop (>10 mmHg)",
+            "Ventricular interdependence across bulging interventricular septum"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The right ventricle is injured more often than any other cardiac chamber in penetrating thoracic trauma. Its broad anterior anatomical position lies directly behind the sternum and costal cartilages, which is recognized by surgical teams. Low intracavitary pressures allow stab wounds to occasionally seal with clot, whereas firearm injuries produce massive bleeding.",
+      "tx": "Due to its wide **anterior position** lying directly beneath the sternum and anterior chest wall, the **right ventricle** represents the most commonly lacerated chamber in **penetrating cardiac trauma**. Low right ventricular chamber pressures occasionally permit temporary clot sealing in low-velocity stab wounds, whereas high-velocity gunshot trauma creates extensive wall disruption.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-surg-haemothorax_tamponade.webp",
+        "ar": 1.3333,
+        "caption": "Physical findings in massive hemothorax and cardiac tamponade. Credit: StewardMD.",
+        "alt": "Clinical comparison between hemothorax and pericardial tamponade findings."
+      }
+    },
+    {
+      "say": "Bedside ultrasound has revolutionized the rapid assessment of penetrating chest trauma. The subxiphoid or parasternal view demonstrates anechoic fluid separating the pericardium from the epicardium. Detecting hemopericardium in an unstable patient mandates immediate operative exploration without waiting for computed tomography.",
+      "tx": "The **FAST scan** provides immediate, highly accurate bedside identification of hemopericardium using subxiphoid or parasternal transducer views. Imaging reveals an **anechoic fluid** stripe separating the parietal pericardium from the visceral epicardium. Demonstrating **hemopericardium** in a hemodynamically unstable trauma patient mandates emergency surgical decompression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Penetrating wound in cardiac box (clavicles to costal margin)"
+          },
+          {
+            "id": "b",
+            "label": "Bedside FAST ultrasound in resuscitation bay"
+          },
+          {
+            "id": "c",
+            "label": "Identify anechoic fluid stripe in pericardial space"
+          },
+          {
+            "id": "d",
+            "label": "Immediate transfer to operating theatre for surgical exploration"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Resuscitative thoracotomy in the emergency department can save patients in extremis. Indications include penetrating chest trauma with witnessed loss of vital signs and less than 15 minutes of cardiopulmonary resuscitation. Patients with blunt trauma and absent vitals have negligible survival, making the procedure rarely indicated in that setting.",
+      "tx": "An **emergency department thoracotomy** is indicated in patients sustaining **penetrating trauma** with **witnessed arrest** or under 15 minutes of cardiopulmonary resuscitation. Conversely, in blunt trauma victims presenting in cardiac arrest, survival approaches zero, making heroic emergency department thoracotomy rarely indicated or futile.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Penetrating Cardiac Arrest",
+          "points": [
+            "Indicated if CPR <15 minutes",
+            "Survival rates reach 15 to 35 percent",
+            "Allows relief of tamponade and internal massage",
+            "Direct digital repair of ventricular lacerations"
+          ]
+        },
+        "right": {
+          "title": "Blunt Cardiac Arrest",
+          "points": [
+            "Survival approaches <1 to 2 percent",
+            "Indicated only if arrest is witnessed in trauma bay",
+            "Extensive multisystem and intracranial trauma",
+            "High risk of bloodborne pathogen exposure to team"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Rapid thoracic access begins with a generous left anterolateral thoracotomy in the fifth intercostal space. If extensive cardiac injuries involve right-sided structures or the hilum, the surgeon extends the incision across the sternum. This clamshell thoracotomy opens both pleural spaces and exposes the entire mediastinum, which is recognized by surgical teams.",
+      "tx": "Access is rapidly achieved through an **anterolateral thoracotomy** in the left **fourth intercostal space** or fifth space curving from sternum to midaxillary line. When visualization of right-sided structures or great vessels is necessary, extending the cut across the sternum creates a **clamshell thoracotomy**, providing panoramic exposure of all four chambers and great vessels.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pericardial-disease-fig2.webp",
+        "ar": 1.3333,
+        "caption": "Cardiac tamponade signs and pericardiocentesis. Credit: StewardMD.",
+        "alt": "Pericardial tamponade mechanics and urgent decompression access."
+      }
+    },
+    {
+      "say": "The pericardium is incised longitudinally anterior to the left phrenic nerve to protect its motor function. The surgeon scoops out clotted blood to immediately relieve cardiac compression and begins internal cardiac massage. Cross-clamping the descending thoracic aorta redistributes remaining blood flow to the brain and coronary arteries.",
+      "tx": "The surgeon incises the tense pericardium strictly longitudinal and anterior to the **phrenic nerve** to avoid diaphragmatic paralysis, performing a rapid **pericardiotomy** that instantly evacuates the compressing clot. Concurrently, cross-clamping the descending aorta preserves cerebral flow while the surgeon performs direct manual **internal cardiac massage**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Grasp pericardial tent with toothed forceps anterior to phrenic nerve"
+          },
+          {
+            "id": "b",
+            "label": "Make longitudinal scissor incision and manually evacuate clot"
+          },
+          {
+            "id": "c",
+            "label": "Immediate release of chamber compression and restore filling"
+          },
+          {
+            "id": "d",
+            "label": "Place descending aortic vascular clamp to augment cerebral flow"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Controlling hemorrhage from ventricular lacerations requires gentle digital pressure or a temporary Foley balloon catheter. Surgeons close muscle defects with pledgeted horizontal mattress sutures. Sutures placed near epicardial coronary vessels must be passed beneath the vessel to avoid iatrogenic coronary occlusion.",
+      "tx": "Bleeding from a penetrating **ventricular laceration** is temporarily controlled by digital occlusion or gentle **Foley catheter occlusion** with 5 mL of saline. Definitive closure utilizes **pledgeted mattress sutures** with 3-0 polypropylene. Suture bites near epicardial arteries must pass deeply underneath the vessel to prevent iatrogenic coronary ligation and myocardial infarction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hemorrhage Control Step",
+          "Surgical Technique",
+          "Key Anatomical Precaution"
+        ],
+        "rows": [
+          [
+            "Temporary occlusion",
+            "Index fingertip or 16 Fr Foley catheter balloon (5 mL saline)",
+            "Avoid traction that could enlarge the tear"
+          ],
+          [
+            "Definitive closure",
+            "3-0 polypropylene with Teflon felt pledgets",
+            "Tie under gentle tension to avoid cutting myocardium"
+          ],
+          [
+            "Coronary proximity",
+            "Horizontal mattress passed deeply beneath epicardial artery",
+            "Prevent suture ligation of LAD or major branches"
+          ],
+          [
+            "Atrial laceration",
+            "Non-crushing vascular clamp (Satinsky) and running suture",
+            "Avoid incorporating the right coronary artery in the groove"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Blunt cardiac trauma ranges from subclinical myocardial contusions to fatal chamber rupture. Patients involved in high-speed collisions or crush injuries require careful evaluation with serum troponins and continuous cardiac rhythm monitoring. Monitoring detects life-threatening ventricular arrhythmias that can develop over the initial twenty-four hours.",
+      "tx": "Non-penetrating **blunt cardiac injury** spans a clinical spectrum from asymptomatic **myocardial contusion** to catastrophic free-wall rupture. Patients with suspected injury require baseline cardiac troponin testing and continuous 12-lead **continuous ECG monitoring** for at least 24 hours to detect delayed, life-threatening ventricular tachyarrhythmias or conduction blocks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "High-energy blunt anterior chest wall trauma"
+          },
+          {
+            "id": "b",
+            "label": "Admission 12-lead ECG and serum cardiac troponin I"
+          },
+          {
+            "id": "c",
+            "label": "Admit for continuous ECG monitoring for at least 24 hours"
+          },
+          {
+            "id": "d",
+            "label": "Echocardiography if hemodynamic instability or arrhythmias emerge"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -34,14 +34,10 @@
       "say": "Distal tubular failure manifests as inability to excrete protons despite systemic acidemia.",
       "tx": "Evaluate cortical collecting duct function recognizing the **Distal RTA Type 1 alpha-intercalated defect** in children presenting with failure to thrive. Type 1 (distal) RTA is caused by failure of alpha-intercalated cells to excrete H+ ions into tubular lumens (mutations in SLC4A1/AE1, or ATP6V1B1/ATP6V0A4 associated with sensorineural deafness), resulting in persistent inability to acidify urine below pH 5.5 despite severe systemic acidemia.",
       "vis": {
-        "kind": "table",
-        "title": "Distal RTA (Type 1) Molecular & Diagnostic Hallmarks",
-        "cols": ["Feature", "Finding / Mutation", "Pathophysiological Impact"],
-        "rows": [
-          ["Proton Pump Subunits", "ATP6V1B1 / ATP6V0A4", "Apical H+-ATPase failure (often with deafness)"],
-          ["Chloride-Bicarbonate", "SLC4A1 (AE1 anion exchanger)", "Basolateral bicarbonate export failure"],
-          ["Minimum Urine pH", "Cannot acidify below pH 5.5", "Alkaline urine in setting of systemic acidosis"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/distal-renal-tubular-acidosis-fig1.webp",
+        "alt": "Collecting duct proton pump failure with stones and acidosis in distal RTA.",
+        "caption": "Distal RTA: failed proton secretion, stones and acidosis. Credit: StewardMD."
       }
     },
     {
@@ -50,10 +46,22 @@
       "vis": {
         "kind": "table",
         "title": "Urine Anion Gap Diagnostic Interpretation",
-        "cols": ["Etiology", "Urine Anion Gap Formula", "Diagnostic Significance"],
+        "cols": [
+          "Etiology",
+          "Urine Anion Gap Formula",
+          "Diagnostic Significance"
+        ],
         "rows": [
-          ["Distal RTA (Type 1)", "Positive [U_Na + U_K - U_Cl]", "Low urinary NH4+ excretion from failing tubules"],
-          ["Enteric Diarrhea", "Negative [U_Na + U_K - U_Cl]", "High urinary NH4+ paired with chloride excretion"]
+          [
+            "Distal RTA (Type 1)",
+            "Positive [U_Na + U_K - U_Cl]",
+            "Low urinary NH4+ excretion from failing tubules"
+          ],
+          [
+            "Enteric Diarrhea",
+            "Negative [U_Na + U_K - U_Cl]",
+            "High urinary NH4+ paired with chloride excretion"
+          ]
         ]
       }
     },
@@ -63,15 +71,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "acid", "label": "Chronic Systemic Acidemia"},
-          {"id": "cit", "label": "Proximal Citrate Uptake & Severe Hypocitraturia"},
-          {"id": "precip", "label": "Hypercalciuria in Alkaline Urine (pH > 5.5)"},
-          {"id": "calcin", "label": "Medullary Nephrocalcinosis & Stone Formation"}
+          {
+            "id": "acid",
+            "label": "Chronic Systemic Acidemia"
+          },
+          {
+            "id": "cit",
+            "label": "Proximal Citrate Uptake & Severe Hypocitraturia"
+          },
+          {
+            "id": "precip",
+            "label": "Hypercalciuria in Alkaline Urine (pH > 5.5)"
+          },
+          {
+            "id": "calcin",
+            "label": "Medullary Nephrocalcinosis & Stone Formation"
+          }
         ],
         "edges": [
-          ["acid", "cit"],
-          ["cit", "precip"],
-          ["precip", "calcin"]
+          [
+            "acid",
+            "cit"
+          ],
+          [
+            "cit",
+            "precip"
+          ],
+          [
+            "precip",
+            "calcin"
+          ]
         ]
       }
     },
@@ -79,14 +108,10 @@
       "say": "Proximal reabsorption failure lowers the tubular bicarbonate threshold and triggers generalized transporter collapse.",
       "tx": "Assess proximal convoluted tubular transport to diagnose **Proximal RTA Type 2 and Fanconi syndrome** in young infants. Type 2 (proximal) RTA reflects defective proximal bicarbonate threshold reabsorption (< 15-18 mEq/L) via SLC4A4 (NBCe1), frequently occurring as part of generalized Fanconi syndrome characterized by glucosuria, aminoaciduria, phosphaturia, and uricosuria (seen in cystinosis, Lowe syndrome, galactosemia, and tyrosinemia).",
       "vis": {
-        "kind": "table",
-        "title": "Proximal RTA and Generalized Fanconi Syndrome",
-        "cols": ["Tubular Defect", "Molecular / Clinical Feature", "Wasted Solutes"],
-        "rows": [
-          ["Isolated Proximal RTA", "SLC4A4 (NBCe1 cotransporter)", "Isolated bicarbonate threshold < 15-18 mEq/L"],
-          ["Fanconi Syndrome", "CTNS, OCRL, metabolic toxins", "Phosphate, glucose, amino acids, bicarbonate"],
-          ["Skeletal Impact", "Hypophosphatemic rickets", "Failure of mineralization due to urinary phosphate wasting"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/renal-tubular-acidosis-fig1.webp",
+        "alt": "Defect sites and key features of type 1, type 2 and type 4 renal tubular acidosis.",
+        "caption": "RTA types 1, 2 and 4 by defect site. Credit: StewardMD."
       }
     },
     {
@@ -118,15 +143,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "mut", "label": "CTNS Mutation & Cystinosin Defect"},
-          {"id": "cryst", "label": "Intralysosomal Cystine Crystal Deposition"},
-          {"id": "drug", "label": "Oral Cysteamine (1.3 g/m²/day) + Eye Drops"},
-          {"id": "out", "label": "Cystine Disulfide Cleavage & Kidney Preservation"}
+          {
+            "id": "mut",
+            "label": "CTNS Mutation & Cystinosin Defect"
+          },
+          {
+            "id": "cryst",
+            "label": "Intralysosomal Cystine Crystal Deposition"
+          },
+          {
+            "id": "drug",
+            "label": "Oral Cysteamine (1.3 g/m²/day) + Eye Drops"
+          },
+          {
+            "id": "out",
+            "label": "Cystine Disulfide Cleavage & Kidney Preservation"
+          }
         ],
         "edges": [
-          ["mut", "cryst"],
-          ["cryst", "drug"],
-          ["drug", "out"]
+          [
+            "mut",
+            "cryst"
+          ],
+          [
+            "cryst",
+            "drug"
+          ],
+          [
+            "drug",
+            "out"
+          ]
         ]
       }
     },
@@ -136,11 +182,27 @@
       "vis": {
         "kind": "table",
         "title": "Type 4 Hyperkalemic RTA Characteristics",
-        "cols": ["Parameter", "Clinical Finding", "Therapeutic Intervention"],
+        "cols": [
+          "Parameter",
+          "Clinical Finding",
+          "Therapeutic Intervention"
+        ],
         "rows": [
-          ["Electrolyte Profile", "Hyperkalemic normal anion gap acidosis", "Dietary potassium restriction"],
-          ["Underlying Etiology", "Aldosterone deficiency vs ENaC/MR resistance", "Mineralocorticoid replacement (fludrocortisone)"],
-          ["Potassium Removal", "Distal ammonium synthesis suppression", "Sodium polystyrene sulfonate exchange resin"]
+          [
+            "Electrolyte Profile",
+            "Hyperkalemic normal anion gap acidosis",
+            "Dietary potassium restriction"
+          ],
+          [
+            "Underlying Etiology",
+            "Aldosterone deficiency vs ENaC/MR resistance",
+            "Mineralocorticoid replacement (fludrocortisone)"
+          ],
+          [
+            "Potassium Removal",
+            "Distal ammonium synthesis suppression",
+            "Sodium polystyrene sulfonate exchange resin"
+          ]
         ]
       }
     }
