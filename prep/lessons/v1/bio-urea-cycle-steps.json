@@ -1,0 +1,82 @@
+{
+ "v": 1,
+ "module": "bio-urea-cycle",
+ "subject": "biochemistry",
+ "title": "Urea cycle steps and energetics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The cycle spans two compartments in periportal hepatocytes: mitochondria host carbamoyl phosphate synthesis and citrulline formation, cytosol hosts the remaining steps back to ornithine, which re-enters mitochondria. One nitrogen arrives as free **ammonia**, the second as aspartate amino nitrogen, carbon as bicarbonate, and the product urea carries both nitrogens to urine at a cost detailed below.",
+   "say": "The cycle spans mitochondria and cytosol in hepatocytes. One nitrogen arrives as free ammonia, the second as aspartate, and carbon as bicarbonate. Urea carries both nitrogens to urine.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/bio-urea-cycle.svg",
+    "alt": "Urea cycle order from ornithine to citrulline through carbamoyl phosphate synthetase needing N-acetylglutamate, argininosuccinate steps returning fumarate.",
+    "caption": "CPS-I is rate limiting and needs NAG; each turn costs 4 high energy bonds.",
+    "ar": 1.5385
+   }
+  },
+  {
+   "tx": "**Carbamoyl phosphate synthetase I** (mitochondrial, distinct from cytosolic pyrimidine CPS II) spends two ATP to fix ammonia with bicarbonate, and absolutely requires N-acetylglutamate, made from acetyl-CoA plus glutamate by NAGS and stimulated by arginine and protein load. Ornithine transcarbamoylase then makes citrulline, exported to cytosol. Without N-acetylglutamate the cycle idles despite abundant ammonia, the pharmacological opening exploited by carglumic acid therapy.",
+   "say": "Carbamoyl phosphate synthetase one spends two ATP and absolutely requires N-acetylglutamate. Ornithine transcarbamoylase then makes citrulline. Without the activator the cycle idles despite abundant ammonia.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Step (enzyme)", "Place", "Energy or activator"],
+    "rows": [
+     ["CPS-I makes carbamoyl phosphate", "Mitochondria", "2 ATP, NAG essential"],
+     ["OTC makes citrulline", "Mitochondria", "Ornithine consumed, regenerated later"],
+     ["Argininosuccinate synthetase", "Cytosol", "ATP to AMP (2 bonds), aspartate in"],
+     ["Argininosuccinate lyase", "Cytosol", "Fumarate out to TCA"],
+     ["Arginase makes urea", "Cytosol", "Ornithine regenerated, manganese"]
+    ]
+   }
+  },
+  {
+   "tx": "Cytosolic **argininosuccinate synthetase** joins citrulline with aspartate (ATP to AMP, two bonds), lyase splits argininosuccinate to arginine plus fumarate, and arginase hydrolyses arginine to urea plus regenerated ornithine. Fumarate hydrates through malate to oxaloacetate, earning NADH and resupplying aspartate by transamination, the celebrated Krebs bicycle linking nitrogen disposal to energy metabolism in both directions.",
+   "say": "Synthetase joins citrulline with aspartate, lyase releases fumarate, and arginase makes urea plus ornithine. Fumarate resupplies aspartate through the TCA cycle, the Krebs bicycle linking nitrogen disposal to energy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Krebs bicycle link",
+    "nodes": [
+     {"id": "fum", "label": "Fumarate leaves cycle"},
+     {"id": "oaa", "label": "Malate to oxaloacetate (NADH)"},
+     {"id": "asp", "label": "Aspartate by transamination"},
+     {"id": "back", "label": "Aspartate re-enters urea cycle"}
+    ],
+    "edges": [["fum", "oaa"], ["oaa", "asp"], ["asp", "back"]]
+   }
+  },
+  {
+   "tx": "Energetics settle at four high energy phosphate bonds per **urea** (two ATP at CPS-I plus ATP to AMP at synthetase), partly offset by fumarate NADH (about two and a half ATP) when oxidised, so net cost approaches one and a half bonds. Protein load induces all cycle enzymes over days and raises N-acetylglutamate acutely, matching disposal capacity to dietary nitrogen without ammonia excursions after steak meals.",
+   "say": "Each urea costs four high energy bonds, partly offset by fumarate NADH, so net cost approaches one and a half. Protein load induces cycle enzymes and raises the activator, matching disposal to dietary nitrogen.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Gross cost per urea", "points": ["CPS-I: 2 ATP to ADP", "Synthetase: ATP to AMP (counts 2)", "Total 4 bonds spent"]},
+    "right": {"title": "Offset per urea", "points": ["Fumarate to OAA makes NADH", "About 2.5 ATP recovered", "Net about 1.5 bonds"]
+    }
+   }
+  },
+  {
+   "tx": "Arginine becomes conditionally essential when the cycle blocks or in prematurity, because dietary plus recycled arginine must cover protein synthesis, nitric oxide and creatine demands; therapeutic **arginine** (except in arginase deficiency) refills cycle intermediates below proximal blocks and promotes waste nitrogen incorporation. Citrulline supplementation exploits intestinal renal conversion to arginine even more efficiently in several defects.",
+   "say": "Arginine becomes conditionally essential when the cycle blocks, and therapeutic arginine refills intermediates below proximal blocks. Citrulline supplementation exploits intestinal conversion to arginine even more efficiently.",
+   "vis": null
+  },
+  {
+   "tx": "Localisation predicts defect patterns before genetics: mitochondrial steps (CPS-I, OTC) present with low citrulline, cytosolic steps with citrulline or argininosuccinate accumulation, arginase deficiency with high arginine and spastic paraparesis more than coma. The hyperammonaemia lesson now reads those patterns plus **orotic acid** to name the block and start scavenger therapy without waiting for confirmation.",
+   "say": "Mitochondrial blocks present with low citrulline, cytosolic blocks accumulate intermediates, and arginase deficiency raises arginine with spasticity. The next lesson reads those patterns to name the block.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Block site", "Citrulline pattern", "Extra flag"],
+    "rows": [
+     ["CPS-I or NAGS (mitochondrial entry)", "Low", "Orotic low, carglumic acid helps NAGS"],
+     ["OTC (mitochondrial)", "Low", "Orotic HIGH (spill to pyrimidines)"],
+     ["Synthetase or lyase (cytosolic)", "High citrulline or ASA", "Arginine therapy helps"],
+     ["Arginase", "Arginine high", "Spasticity, fewer coma episodes"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

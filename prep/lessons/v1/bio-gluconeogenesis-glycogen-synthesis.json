@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "bio-gluconeogenesis-glycogen",
+ "subject": "biochemistry",
+ "title": "Glycogen synthesis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Glycogen building starts by activating glucose as **UDP-glucose**, spending UTP and pulling the reaction forward with pyrophosphate hydrolysis. A self glucosylating primer protein, glycogenin, lays the first short chain on its own tyrosine because glycogen synthase can only extend, never begin. Every granule therefore carries glycogenin at its core, one protein per molecule however large it grows.",
+   "say": "Glycogen building activates glucose as UDP-glucose, spending UTP. Glycogenin lays the first short chain on its own tyrosine because glycogen synthase can only extend, never begin. Every granule carries glycogenin at its core.",
+   "vis": {
+    "kind": "flow",
+    "title": "Priming a granule",
+    "nodes": [
+     {"id": "g1p", "label": "Glucose-1-phosphate plus UTP"},
+     {"id": "udp", "label": "UDP-glucose donor"},
+     {"id": "gyn", "label": "Glycogenin primer chain"},
+     {"id": "ext", "label": "Synthase extends alpha-1,4"}
+    ],
+    "edges": [["g1p", "udp"], ["udp", "gyn"], ["gyn", "ext"]]
+   }
+  },
+  {
+   "tx": "**Glycogen synthase** adds glucose units in alpha-1,4 linkage to non reducing ends and is active when dephosphorylated (the a form). Insulin activates it through phosphatase signalling while glucose-6-phosphate activates it allosterically, so substrate abundance feeds storage directly. Glucagon and adrenaline phosphorylate and silence it in liver and muscle respectively, reciprocally with phosphorylase control.",
+   "say": "Glycogen synthase adds glucose in alpha-1,4 linkage and is active when dephosphorylated. Insulin activates it while glucose-6-phosphate activates it allosterically. Glucagon and adrenaline silence it, reciprocally with phosphorylase control.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Synthase ON (fed)", "points": ["Dephosphorylated a form", "Insulin phosphatase signal", "Glucose-6-phosphate allosteric on"]},
+    "right": {"title": "Synthase OFF (fasting, exercise)", "points": ["Phosphorylated b form", "Glucagon or adrenaline kinases", "Storage paused for release"]
+    }
+   }
+  },
+  {
+   "tx": "When a chain reaches about eleven residues, the **branching enzyme** cuts a six to eight residue piece and reattaches it in alpha-1,6 linkage, creating a new non reducing end. Branching keeps glycogen soluble, compact and rapidly mobilisable from many ends at once. Without it (Andersen disease, type IV), long unbranched chains precipitate, injuring liver toward childhood cirrhosis.",
+   "say": "The branching enzyme cuts a short piece and reattaches it in alpha-1,6 linkage, creating a new non reducing end. Branching keeps glycogen soluble and rapidly mobilisable. Without it, Andersen disease injures liver toward childhood cirrhosis.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Linkage", "Enzyme", "Share and role"],
+    "rows": [
+     ["Alpha-1,4", "Glycogen synthase", "Bulk chain elongation"],
+     ["Alpha-1,6", "Branching enzyme", "About 8 percent, branch points"],
+     ["Primer bond", "Glycogenin (tyrosine)", "One per granule, starts it all"]
+    ]
+   }
+  },
+  {
+   "tx": "Liver holds roughly one hundred grams of glycogen to feed the whole body for twelve to eighteen fasting hours, while muscle holds more in total but selfishly for its own contraction. That division explains why liver glycogen diseases cause **fasting hypoglycaemia** and muscle diseases cause exercise failure instead. Hormonal signals respect the division: glucagon addresses liver only, adrenaline addresses both.",
+   "say": "Liver holds glycogen to feed the whole body for twelve to eighteen fasting hours, while muscle holds it selfishly for contraction. Liver diseases cause fasting hypoglycaemia and muscle diseases cause exercise failure. Glucagon addresses liver only.",
+   "vis": null
+  },
+  {
+   "tx": "A separate lysosomal enzyme, acid maltase, nibbles glycogen that reaches lysosomes by autophagy and is irrelevant to normal cytosolic mobilisation. Its absence (Pompe disease) therefore swells lysosomes, especially in heart and muscle, while blood glucose stays normal. Remembering compartments prevents the classic error of expecting **hypoglycaemia** in Pompe disease.",
+   "say": "Acid maltase nibbles glycogen inside lysosomes and is irrelevant to normal mobilisation. Its absence in Pompe disease swells lysosomes in heart and muscle while blood glucose stays normal. Compartments prevent the error of expecting hypoglycaemia there.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Cytosolic glycogen system", "points": ["Synthase, phosphorylase, debrancher", "Feeds blood or muscle work", "Defects: von Gierke, McArdle, Cori"]},
+    "right": {"title": "Lysosomal glycogen route", "points": ["Acid maltase only", "Housekeeping, not mobilisation", "Defect: Pompe, glucose normal"]
+    }
+   }
+  },
+  {
+   "tx": "Synthesis and breakdown never idle together because phosphorylation switches them oppositely through one kinase cascade, detailed next. In the fed state phosphatases dominate, synthase wakes and phosphorylase sleeps; a single phosphate language thus encodes meal timing. Type 0 glycogen storage disease (synthase absent) proves necessity from the other side: no stores, fasting **hyperketotic hypoglycaemia** with post meal hyperglycaemia and lactate rise.",
+   "say": "Phosphorylation switches synthesis and breakdown oppositely through one cascade. In the fed state synthase wakes and phosphorylase sleeps. Type zero disease, with synthase absent, proves necessity: no stores, with fasting hypoglycaemia and ketones.",
+   "vis": {
+    "kind": "table",
+    "cols": ["State", "Synthase", "Phosphorylase"],
+    "rows": [
+     ["Fed (insulin, phosphatases)", "Dephosphorylated ON", "Dephosphorylated OFF"],
+     ["Fasting liver (glucagon, kinases)", "Phosphorylated OFF", "Phosphorylated ON"],
+     ["Exercising muscle (calcium, AMP)", "OFF", "ON by calcium and AMP"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

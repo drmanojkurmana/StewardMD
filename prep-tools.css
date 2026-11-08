@@ -2,9 +2,11 @@
    Theme tokens only, so body.dark follows prep.css. */
 
 /* Cross out: the option and its toggle share a row; a struck option dims and its text is lined through. */
-.pn-root .pn-opts li.px-ol { display: flex; align-items: stretch; gap: 6px; }
-.pn-root .pn-opts li.px-ol > .pn-opt { flex: 1 1 auto; min-width: 0; }
-.pn-root .px-strike { flex: 0 0 44px; width: 44px; min-height: 44px; align-self: center; color: var(--pn-mut); border-radius: var(--pn-r-md); }
+/* One grid for every row: the toggle is a full-height cell beside its option, so all toggles line up on one right edge
+   (owner 2026-11-08: it floated as a short square of its own). */
+.pn-root .pn-opts li.px-ol { display: grid; grid-template-columns: minmax(0, 1fr) 52px; gap: 8px; align-items: stretch; }
+.pn-root .pn-opts li.px-ol > .pn-opt { min-width: 0; height: 100%; }
+.pn-root .px-strike { width: auto; height: auto; min-height: 44px; align-self: stretch; color: var(--pn-mut); background: transparent; border-radius: var(--pn-r-lg); }
 .pn-root .px-strike.on { color: var(--pn-bad); background: var(--pn-bad-bg); }
 .pn-root .pn-opt.px-struck { opacity: .55; }
 .pn-root .pn-opt.px-struck > span:nth-child(2) { text-decoration: line-through; text-decoration-thickness: 2px; }
