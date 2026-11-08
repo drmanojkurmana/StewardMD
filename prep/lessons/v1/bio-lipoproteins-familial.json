@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-lipoproteins",
+ "subject": "biochemistry",
+ "title": "Familial dyslipidaemias and Fredrickson types",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **Fredrickson** table sorts dyslipidaemias by which particle accumulates, and each type names its broken station: type I chylomicrons (lipase or ApoC-II failure), type IIa LDL (receptor pathway failure), type IIb LDL plus VLDL, type III remnants (ApoE failure), type IV VLDL (overproduction), type V chylomicrons plus VLDL. Learn particle first, gene second, and most classification stems solve themselves.",
+   "say": "Fredrickson sorts dyslipidaemias by which particle accumulates, and each type names its broken station. Learn particle first and gene second, and most classification stems solve themselves.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-lipoproteins-fig1.webp",
+    "alt": "Lipoprotein pathways diagram with particle sizes, apolipoproteins and Fredrickson classification of dyslipidaemias.",
+    "caption": "Lipoprotein pathways and Fredrickson classification of dyslipidaemias.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Familial hypercholesterolaemia** (type IIa) affects about one in two hundred fifty heterozygotes: LDL receptor (commonest), ApoB ligand or PCSK9 gain defects halve clearance, LDL doubles, tendon xanthomas (Achilles, knuckles), corneal arcus under forty five and coronary disease in the thirties or forties follow. Homozygotes face childhood coronary disease, aortic stenosis and planar xanthomas, needing lipoprotein apheresis or newer agents beyond statins.",
+   "say": "Familial hypercholesterolaemia affects about one in two hundred fifty heterozygotes, doubling LDL with tendon xanthomas and early coronary disease. Homozygotes face childhood coronary disease needing apheresis or newer agents.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Gene broken", "Step lost", "Clue"],
+    "rows": [
+     ["LDL receptor", "Clearance halved or absent", "Commonest FH, tendon xanthomas"],
+     ["ApoB (ligand region)", "Binding defective", "Milder, same IIa pattern"],
+     ["PCSK9 gain of function", "Receptors destroyed faster", "Rare, severe LDL rise"],
+     ["LDLRAP1 (recessive)", "Receptor internalisation fails", "Parents often normal lipids"]
+    ]
+   }
+  },
+  {
+   "tx": "Type I **chylomicronaemia** (lipoprotein lipase or ApoC-II absent, also ApoA-V, LMF1, GPIHBP1 faults) presents in childhood with eruptive xanthomas, lipemia retinalis, recurrent pancreatitis and creamy plasma, while coronaries are largely spared because particles are too large to enter walls. Treatment is near zero fat diet with medium chain triglycerides (portal, lipase independent), utterly different from LDL lowering logic.",
+   "say": "Type one chylomicronaemia presents with eruptive xanthomas and recurrent pancreatitis, while coronaries are spared. Treatment is near zero fat with medium chain triglycerides, different from LDL lowering logic.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Type I (chylomicrons stuck)", "points": ["Childhood pancreatitis", "Eruptive xanthomas, lipemia retinalis", "Very low fat diet, MCT oil"]},
+    "right": {"title": "Type IIa (LDL stuck)", "points": ["Adult coronary disease", "Tendon xanthomas, arcus", "Statins, ezetimibe, PCSK9 drugs"]
+    }
+   }
+  },
+  {
+   "tx": "**Dysbetalipoproteinaemia** (type III) requires ApoE2 homozygosity plus a second metabolic hit (hypothyroidism, diabetes, menopause): remnants (IDL) accumulate because E2 binds receptors poorly, giving palmar crease and tuberous xanthomas with cholesterol and triglycerides raised together roughly equally. It responds dramatically to fibrates, weight loss and treating the second hit, a therapeutic clue examiners reward.",
+   "say": "Type three needs ApoE2 homozygosity plus a second hit, accumulating remnants with palmar xanthomas. Cholesterol and triglycerides rise together, and it responds dramatically to fibrates and treating the second hit.",
+   "vis": null
+  },
+  {
+   "tx": "Types IV and V dominate adult practice polygenically: **VLDL** overproduction with insulin resistance raises triglycerides (type IV, turbid plasma, pancreatitis only when severe), and added chylomicron clearance failure makes type V with pancreatitis at triglycerides above five hundred to one thousand. Familial combined hyperlipidaemia switches patterns (IIa, IIb, IV) within one family through ApoB overproduction and carries high coronary risk without dramatic xanthomas.",
+   "say": "Types four and five dominate adult practice. VLDL overproduction raises triglycerides, and added clearance failure risks pancreatitis. Familial combined hyperlipidaemia switches patterns within one family with high coronary risk.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type", "Particle up", "Chief danger"],
+    "rows": [
+     ["IIb", "LDL plus VLDL", "Coronary disease"],
+     ["III", "Remnants (IDL)", "Coronary plus peripheral disease"],
+     ["IV", "VLDL", "Pancreatitis when severe"],
+     ["V", "Chylomicrons plus VLDL", "Pancreatitis, eruptive xanthomas"]
+    ]
+   }
+  },
+  {
+   "tx": "Xanthoma geography localises the particle: **tendon** (LDL, FH), palmar crease and tuberous (remnants, type III), eruptive buttocks and elbows (chylomicrons, types I and V), xanthelasma (often normal lipids, least specific). Pair geography with age, plasma appearance and family pattern before ordering genetics, and cascade screen relatives in FH because each first degree relative carries fifty percent risk.",
+   "say": "Tendon xanthomas mean LDL, palmar crease means remnants, and eruptive means chylomicrons. Pair geography with age and family pattern, and cascade screen relatives in familial hypercholesterolaemia.",
+   "vis": {
+    "kind": "flow",
+    "title": "From xanthoma to particle",
+    "nodes": [
+     {"id": "tend", "label": "Tendon: think LDL (FH)"},
+     {"id": "palm", "label": "Palmar: think remnants (III)"},
+     {"id": "erup", "label": "Eruptive: think chylomicrons (I, V)"}
+    ],
+    "edges": [["tend", "palm"], ["palm", "erup"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

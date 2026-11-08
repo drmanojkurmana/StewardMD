@@ -1,0 +1,76 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "TCA cycle steps and enzymes",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Each turn begins when **citrate synthase** joins oxaloacetate (four carbons) with acetyl-CoA (two carbons) to make citrate (six carbons). Aconitase then shuffles citrate to isocitrate through a brief cis-aconitate intermediate. Fluoroacetate from rat poison is converted to fluorocitrate that jams aconitase, a classic lethal synthesis where the cell itself manufactures the inhibitor from a harmless precursor.",
+   "say": "Each turn begins when citrate synthase joins oxaloacetate with acetyl-CoA to make citrate. Aconitase shuffles citrate to isocitrate. Fluoroacetate is converted to fluorocitrate that jams aconitase, a classic lethal synthesis where the cell manufactures its own inhibitor.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/bio-glycolysis-tca.svg",
+    "alt": "Metabolic pathway map connecting cytoplasmic glycolysis to mitochondrial respiration. Glucose converts to 2 pyruvate yielding 2 ATP and 2 NADH. Pyruvate dehydrogenase decarboxylates pyruvate to Acetyl-CoA. Krebs citric acid cycle produces 3 NADH, 1 FADH2, and 1 GTP per turn, fueling oxidative phosphorylation to produce 30 to 32 ATP.",
+    "caption": "Cellular respiration hub: glycolysis feeds pyruvate dehydrogenase and the TCA cycle.",
+    "ar": 1.5384615384615385
+   }
+  },
+  {
+   "tx": "The first oxidative decarboxylation uses **isocitrate dehydrogenase** to release carbon dioxide and NADH while forming alpha-ketoglutarate (five carbons). ADP activates this main regulatory enzyme when energy is short, while ATP and NADH restrain it when the cycle is already well supplied. A second decarboxylation follows immediately, so two carbons leave as gas across the next two steps.",
+   "say": "Isocitrate dehydrogenase releases carbon dioxide and NADH while forming alpha-ketoglutarate. ADP activates this main regulatory enzyme when energy is short, while ATP and NADH restrain it. A second decarboxylation follows, so two carbons leave as gas.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Enzyme", "Carbon change", "Energy captured"],
+    "rows": [
+     ["Isocitrate dehydrogenase", "6C to 5C plus CO2", "1 NADH"],
+     ["Alpha-ketoglutarate dehydrogenase", "5C to 4C plus CO2", "1 NADH"],
+     ["Succinyl-CoA synthetase", "4C stays 4C", "1 GTP (substrate level)"]
+    ]
+   }
+  },
+  {
+   "tx": "The **alpha-ketoglutarate dehydrogenase** complex mirrors pyruvate dehydrogenase in subunits and all five coenzymes, including the vulnerable lipoamide arm. Arsenite therefore blocks both gates at once, which explains the severity of arsenic energy failure. Its product succinyl-CoA also leaves the cycle to build heme, linking respiration to haemoglobin synthesis in developing red cells.",
+   "say": "Alpha-ketoglutarate dehydrogenase mirrors pyruvate dehydrogenase in subunits and all five coenzymes, including the vulnerable lipoamide arm. Arsenite blocks both gates at once. Its product succinyl-CoA also leaves the cycle to build heme.",
+   "vis": null
+  },
+  {
+   "tx": "Succinyl-CoA synthetase captures the thioester energy as **GTP** in the cycle only substrate level phosphorylation, then succinate dehydrogenase oxidises succinate to fumarate. Uniquely, this enzyme sits in the inner mitochondrial membrane as complex II, feeding FADH2 electrons directly into the chain. Malonate, shaped like succinate, competitively blocks it and remains the textbook competitive inhibition example.",
+   "say": "Succinyl-CoA synthetase captures energy as GTP, the cycle only substrate level phosphorylation. Succinate dehydrogenase then oxidises succinate to fumarate from inside the membrane as complex two. Malonate, shaped like succinate, competitively blocks it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-glycolysis-tca-gen1.webp",
+    "alt": "Molecular rendering shows complex 2 converting succinate to fumarate with electron flow into ubiquinone.",
+    "caption": "Succinate dehydrogenase feeding electrons to ubiquinone, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Fumarase adds water across the double bond to make malate, and **malate dehydrogenase** oxidises malate back to oxaloacetate with the third NADH of the turn. The oxaloacetate concentration stays tiny because citrate synthase consumes it eagerly, pulling the unfavourable last step forward. Per acetyl-CoA the completed turn yields three NADH, one FADH2, one GTP and two carbon dioxide.",
+   "say": "Fumarase adds water to make malate, and malate dehydrogenase oxidises it back to oxaloacetate with the third NADH. Oxaloacetate stays scarce because citrate synthase consumes it eagerly. Per acetyl-CoA the turn yields three NADH, one FADH2, one GTP and two carbon dioxide.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Per acetyl-CoA (one turn)", "points": ["3 NADH (7.5 ATP)", "1 FADH2 (1.5 ATP)", "1 GTP (1 ATP)", "Total about 10 ATP"]},
+    "right": {"title": "Per glucose (two turns)", "points": ["6 NADH from TCA", "2 FADH2 from TCA", "2 GTP from TCA", "Plus PDH and cytosol yields"]
+    }
+   }
+  },
+  {
+   "tx": "Examiners stress that the cycle is **amphibolic**, both burning acetyl groups and supplying building blocks for glucose, fatty acids, amino acids and heme. It is also strictly aerobic in effect: without oxygen the chain cannot reoxidise NADH and FADH2, carriers stay reduced, and the wheel stops even though no cycle enzyme uses oxygen directly. Withdrawals must therefore be repaid by anaplerosis, the subject of the next lesson.",
+   "say": "The cycle is amphibolic, both burning acetyl groups and supplying building blocks. It is strictly aerobic in effect because without oxygen the carriers stay reduced and the wheel stops. Withdrawals must be repaid by anaplerosis, the subject of the next lesson.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Intermediate withdrawn", "Built from it"],
+    "rows": [
+     ["Citrate", "Fatty acids and cholesterol (cytosol)"],
+     ["Alpha-ketoglutarate", "Glutamate and other amino acids"],
+     ["Succinyl-CoA", "Heme"],
+     ["Malate and oxaloacetate", "Glucose via PEPCK"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

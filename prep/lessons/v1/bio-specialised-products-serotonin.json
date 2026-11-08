@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-specialised-products",
+ "subject": "biochemistry",
+ "title": "Serotonin, melatonin and carcinoid",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Serotonin synthesis mirrors catecholamines with tryptophan: **tryptophan hydroxylase** (BH4, gut type 1 versus brain type 2 isoforms, rate limiting) makes 5-hydroxytryptophan, decarboxylase (PLP) makes serotonin (5-HT). Ninety percent resides in gut enterochromaffin cells driving motility and nausea signalling, platelets scavenge and deliver it to clots (they cannot synthesise it), and raphe neurons supply brain mood, sleep and appetite circuits targeted by SSRIs.",
+   "say": "Tryptophan hydroxylase limits serotonin synthesis in gut and brain isoforms. Ninety percent resides in gut, platelets carry what they cannot make, and raphe neurons supply mood and sleep circuits.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Serotonin pool", "Share and job", "Drug lever"],
+    "rows": [
+     ["Gut enterochromaffin", "About 90 percent, motility and nausea", "Ondansetron (5-HT3) antiemetic"],
+     ["Platelets (carried)", "Clot amplification delivery", "SSRIs deplete platelet serotonin, bleeding nuance"],
+     ["Raphe brain neurons", "Mood, sleep, appetite", "SSRIs, triptans (5-HT1) in migraine"],
+     ["Pineal (evening)", "Melatonin precursor", "Light suppresses, darkness releases"]
+    ]
+   }
+  },
+  {
+   "tx": "**Melatonin** completes the pineal branch: serotonin is N-acetylated (rate limiting, darkness gated through sympathetic noradrenaline from the suprachiasmatic clock) then O-methylated by SAM dependent enzyme to melatonin, secreted at night to entrain circadian phase. Light, especially blue, suppresses it within minutes. Exogenous melatonin shifts phase (jet lag, delayed sleep phase) more than it sedates, a distinction sleep stems test against antihistamine hypnotics.",
+   "say": "Melatonin is made at night through a darkness gated sympathetic signal and entrains circadian phase. Light suppresses it within minutes. Exogenous melatonin shifts phase more than it sedates.",
+   "vis": {
+    "kind": "flow",
+    "title": "Night signal assembly",
+    "nodes": [
+     {"id": "dark", "label": "Darkness: clock permits signal"},
+     {"id": "na", "label": "Noradrenaline to pineal"},
+     {"id": "ac", "label": "Serotonin acetylated"},
+     {"id": "mel", "label": "Melatonin secreted (SAM methyl)"}
+    ],
+    "edges": [["dark", "na"], ["na", "ac"], ["ac", "mel"]]
+   }
+  },
+  {
+   "tx": "Breakdown by monoamine oxidase A yields urinary **5-HIAA**, normally trivial because serotonin flux is small; midgut carcinoid tumours with liver metastases (or bronchial and ovarian primaries bypassing portal clearance) flood systemic serotonin past hepatic and pulmonary MAO, producing carcinoid syndrome. Gut primaries without liver spread stay silent because portal serotonin is destroyed first pass, the anatomical pearl every carcinoid stem is built around.",
+   "say": "Breakdown yields urinary 5-HIAA. Midgut tumours with liver metastases flood systemic serotonin past first pass destruction, while gut primaries without liver spread stay silent anatomically.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Silent carcinoid", "points": ["Gut primary, no liver deposits", "Portal MAO destroys serotonin", "Found incidentally or obstructs"]},
+    "right": {"title": "Carcinoid syndrome", "points": ["Liver deposits or systemic primary", "Flushing, diarrhoea, wheeze", "Urine 5-HIAA high"]
+    }
+   }
+  },
+  {
+   "tx": "Syndrome features map to mediators (serotonin, tachykinins, histamine by site): episodic flushing (face, triggered by alcohol, food, stress), secretory diarrhoea, bronchospasm, hypotension crises under anaesthesia (octreotide cover), and **right sided** cardiac fibrosis (tricuspid regurgitation, pulmonary stenosis) because lung MAO protects the left heart unless shunt or bronchial primary intervenes. Pellagra can supervene as tryptophan diverts from niacin synthesis in high output tumours.",
+   "say": "Flushing, diarrhoea, bronchospasm and right sided cardiac fibrosis map to mediators, because lung oxidase protects the left heart. Pellagra can supervene as tryptophan diverts from niacin synthesis.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Mediator logic"],
+    "rows": [
+     ["Flushing episodes", "Tachykinins, histamine, serotonin mix"],
+     ["Secretory diarrhoea", "Serotonin gut drive"],
+     ["Right valve fibrosis", "Serotonin reaches right heart, lung clears rest"],
+     ["Pellagra in high output", "Tryptophan stolen from niacin (60 to 1)"]
+    ]
+   }
+  },
+  {
+   "tx": "Tryptophan also feeds the kynurenine route to **niacin** (NAD), roughly sixty milligrams tryptophan yielding one milligram niacin equivalent, needing B6, riboflavin and iron enzymes. Hartnup wasting, carcinoid diversion and isoniazid B6 blockade therefore converge on pellagra by three roads, while maize diets low in tryptophan and bound niacin caused historic epidemics. Niacin deficiency and excess pharmacology return in the vitamin module.",
+   "say": "Sixty milligrams of tryptophan yields about one milligram of niacin, needing B6 and riboflavin. Hartnup, carcinoid and isoniazid converge on pellagra by three roads from this pathway.",
+   "vis": null
+  },
+  {
+   "tx": "Serotonin toxicity completes clinical range: **serotonin syndrome** (SSRI plus MAOI, linezolid, tramadol, triptan combinations) gives clonus (lower limb, ocular), hyperreflexia, agitation, fever and diarrhoea, distinguished from neuroleptic malignant syndrome (lead pipe rigidity, bradyreflexia, slower onset) by reflexes and bowel activity. Cyproheptadine, benzodiazepines, cooling and stopping serotonergic drugs treat it; examination pairings of these syndromes are perennial and unforgiving.",
+   "say": "Serotonin syndrome gives clonus and hyperreflexia, distinguished from neuroleptic malignant syndrome by reflexes and bowel activity. Stop serotonergic drugs, cool, and use benzodiazepines with cyproheptadine.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Serotonin syndrome", "points": ["Clonus, hyperreflexia", "Diarrhoea, agitation, fast onset", "Stop serotonergics, cyproheptadine"]},
+    "right": {"title": "Neuroleptic malignant syndrome", "points": ["Lead pipe rigidity, bradyreflexia", "Slow onset after dopamine blockade", "Dantrolene/bromocriptine pathways"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

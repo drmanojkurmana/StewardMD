@@ -1,0 +1,237 @@
+{
+  "id": "pnr-hereditary-neuropathies-cmt",
+  "title": "Charcot-Marie-Tooth Disease and Hereditary Neuropathies in Children",
+  "subject": "ss-paediatric-neurology",
+  "module": "Spinal Muscular Atrophy, Duchenne Dystrophy and Neuropathies",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Charcot-Marie-Tooth disease is divided into demyelinating and axonal forms based on nerve conduction velocity. The median motor velocity cutoff is thirty-eight meters per second.",
+      "tx": "Apply the **CMT1A duplication genetics** threshold to classify hereditary motor and sensory neuropathies. CMT1 is characterized by primary Schwann cell demyelination resulting in uniform, symmetrical motor nerve conduction slowing with upper limb (median/ulnar) motor conduction velocities below 38 m/s, marked temporal dispersion, and absent sural potentials. Conversely, CMT2 represents primary axonal degeneration where conduction velocities remain preserved (> 38 m/s) but compound muscle action potential amplitudes are markedly reduced (PMP22 genetics).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CMT1 (Demyelinating)",
+          "points": [
+            "Primary Schwann cell & myelin sheath pathology",
+            "Median motor velocity < 38 m/s (slowed)",
+            "Onion bulb formations on nerve biopsy"
+          ]
+        },
+        "right": {
+          "title": "CMT2 (Axonal)",
+          "points": [
+            "Primary neuronal & axonal neurofilament loss",
+            "Median motor velocity > 38 m/s (normal/mildly slow)",
+            "Reduced CMAP amplitudes with axonal sprouting"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The commonest genetic cause of Charcot-Marie-Tooth disease is a submicroscopic duplication on chromosome seventeen. An extra copy of the peripheral myelin protein twenty-two gene produces disease.",
+      "tx": "Differentiate the **Nerve conduction velocity stratification** that define opposite peripheral neuropathy phenotypes. Autosomal dominant Charcot-Marie-Tooth type 1A (CMT1A), accounting for ~70% of all CMT1 cases, results from a 1.4-megabase duplication on chromosome 17p11.2 containing the PMP22 gene, causing toxic gene overexpression and aberrant peripheral myelin compaction. In stark contrast, a reciprocal heterozygous deletion of the identical 17p11.2 region causes hereditary neuropathy with liability to pressure palsies (HNPP), presenting with recurrent painless compressive palsies (Clinical phenotyping).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "17p11.2 copy number",
+          "Genetic syndrome",
+          "Clinical & electrophysiological hallmark"
+        ],
+        "rows": [
+          [
+            "3 copies (duplication)",
+            "CMT1A (demyelinating CMT)",
+            "Uniform slowing < 38 m/s, pes cavus, inverted champagne bottle legs"
+          ],
+          [
+            "1 copy (deletion)",
+            "HNPP (tomaculous neuropathy)",
+            "Episodic painless focal nerve palsies, focal conduction blocks at entrapment sites"
+          ],
+          [
+            "2 copies (normal diploid)",
+            "Normal wild-type phenotype",
+            "Normal motor & sensory nerve conduction parameters"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Children present with high arched feet and distal lower extremity muscle wasting. The classic physical appearance resembles an inverted champagne bottle or stork legs.",
+      "tx": "Identify the **Stork leg and inverted champagne bottle appearance** deformity during neuromuscular examination. Distal muscle denervation beginning in intrinsic foot muscles and the anterior tibialis compartment leads to unopposed action of peroneus longus and posterior tibialis, producing bilateral high arches (pes cavus), hammer toes, and progressive ankle drop. As wasting progresses to the lower third of the quadriceps and calf musculature, the limbs assume the characteristic inverted champagne bottle or stork leg appearance, with absent ankle jerks and stocking sensory loss (MFN2 axonal).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "denerv",
+            "label": "Distal intrinsic foot & peroneus brevis denervation"
+          },
+          {
+            "id": "deform",
+            "label": "Pes cavus, hammer claw toes & high-steppage gait"
+          },
+          {
+            "id": "bottle",
+            "label": "Peroneal atrophy: Inverted champagne bottle lower limbs"
+          }
+        ],
+        "edges": [
+          [
+            "denerv",
+            "deform"
+          ],
+          [
+            "deform",
+            "bottle"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The dominant cause of axonal Charcot-Marie-Tooth disease is a mutation in mitofusin two. Defective mitochondrial fusion impairs axonal transport along long peripheral nerves.",
+      "tx": "Recognize the **CMTX1 GJB1 mutations** causing severe early-onset hereditary neuropathy. Autosomal dominant CMT2A, responsible for ~20% of axonal CMT cases, is caused by pathogenic missense mutations in MFN2 on chromosome 1p36 encoding mitofusin 2, a dynamin-related GTPase on the outer mitochondrial membrane. Disrupted mitochondrial fusion and axonal transport impair energy delivery along long distal axons, producing severe childhood-onset foot drop, profound sensory ataxia, and frequently associated optic atrophy (Dejerine-Sottas).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "CMT2A (MFN2 mutations)",
+          "Clinical significance"
+        ],
+        "rows": [
+          [
+            "Inheritance & gene",
+            "Autosomal dominant; MFN2 (1p36)",
+            "Most common genetic etiology of axonal CMT2"
+          ],
+          [
+            "Cellular defect",
+            "Impaired mitochondrial fusion & transport",
+            "Distal energy depletion in long motor-sensory axons"
+          ],
+          [
+            "Associated findings",
+            "Optic atrophy, vocal cord palsy",
+            "Severe childhood disability compared to CMT1A"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dejerine-Sottas disease is a severe congenital hypomyelinating neuropathy. Infants present with marked hypotonia, palpable nerve enlargement, and profound conduction velocity slowing.",
+      "tx": "Diagnose **HNPP deletion features** (CMT3) in floppy infants with delayed motor milestones. This severe autosomal dominant or recessive hypomyelinating neuropathy arises from de novo mutations in PMP22, MPZ, or EGR2. Infants present with severe generalized hypotonia, delayed motor acquisition, profound sensory ataxia, palpable thickened peripheral nerves, and extremely slow motor nerve conduction velocities (< 10-12 m/s), exhibiting classic redundant Schwann cell onion-bulb proliferation on nerve biopsy (HNPP tomacula).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dejerine-Sottas (CMT3)",
+          "points": [
+            "Infantile onset with severe motor delay",
+            "Extreme conduction slowing (< 10-12 m/s)",
+            "Thickened palpable peripheral nerves"
+          ]
+        },
+        "right": {
+          "title": "CMT1A Typical",
+          "points": [
+            "First-decade presentation with foot deformity",
+            "Moderate uniform slowing (20-35 m/s)",
+            "Subtle nerve hypertrophy on palpation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Hereditary neuropathy with liability to pressure palsies presents with recurrent nerve palsies following minor mechanical compression. Biopsies reveal sausage-shaped myelin sheath swellings called tomacula.",
+      "tx": "Identify **Dejerine-Sottas disease (CMT3)** on clinical and histopathological grounds. Deletion of 17p11.2 (PMP22) predisposes peripheral nerves to transient, painless focal conduction blocks and mononeuropathies following minor compressive trauma or stretch (peroneal palsy from crossing legs, radial palsy from sleeping on an arm). Teased nerve fibers or sural nerve biopsy shows focal, hypermyelinated sausage-like swellings called tomacula, alongside prolonged distal motor latencies at common physiological entrapment tunnels (SORD neuropathy).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "del",
+            "label": "17p11.2 PMP22 heterozygous deletion"
+          },
+          {
+            "id": "trauma",
+            "label": "Minor mechanical compression or stretch at entrapment site"
+          },
+          {
+            "id": "palsy",
+            "label": "Painless focal motor/sensory palsy with tomacula on biopsy"
+          }
+        ],
+        "edges": [
+          [
+            "del",
+            "trauma"
+          ],
+          [
+            "trauma",
+            "palsy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "SORD deficiency is a treatable autosomal recessive axonal neuropathy. Accumulation of intracellular sorbitol causes toxicity that can be blocked by aldose reductase inhibitors.",
+      "tx": "Detect **Neurotoxic medication avoidance in CMT** as an actionable, potentially treatable form of autosomal recessive CMT2. Biallelic loss-of-function mutations in SORD (most commonly c.757delG) abolish sorbitol dehydrogenase activity in the polyol pathway, causing dramatic elevation of intracellular sorbitol levels in erythrocytes and neural tissues. Early genetic diagnosis allows enrollment in targeted clinical trials utilizing aldose reductase inhibitors (such as epalrestat or AT-007) to block sorbitol synthesis and halt progressive axonal loss (Surgical orthotics).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biochemical step",
+          "Enzyme & metabolite alteration",
+          "Therapeutic strategy"
+        ],
+        "rows": [
+          [
+            "Polyol pathway conversion",
+            "Glucose to sorbitol via aldose reductase",
+            "Pharmacological inhibition blocks upstream synthesis"
+          ],
+          [
+            "Metabolic block",
+            "Sorbitol dehydrogenase (SORD) absent",
+            "Toxic accumulation of intracellular sorbitol"
+          ],
+          [
+            "Clinical biomarker",
+            "Serum/erythrocyte sorbitol elevated > 10-fold",
+            "Biomarker of response to aldose reductase inhibitors"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Multidisciplinary management focuses on preserving function and mobility. Ankle foot orthoses, physical therapy, and corrective orthopedic surgery prevent fixed joint contractures.",
+      "tx": "Prescribe **Orthotic and surgical management** to maintain ambulatory independence in CMT. Custom rigid or dynamic ankle-foot orthoses (AFOs) stabilize the ankle, prevent foot drop tripping, and reduce fatigue. Physical therapy maintains Achilles tendon flexibility and prevents equinovarus contractures. When flexible deformities progress to rigid pes cavus and clawing, surgical correction\u2014including plantar fascia release, posterior tibial tendon transfer, calcaneal osteotomy, and midfoot osteotomy\u2014restores a plantigrade weight-bearing foot (Evaluation complete).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pt",
+            "label": "Physical therapy & stretching: Preserve Achilles tendon length"
+          },
+          {
+            "id": "afo",
+            "label": "Custom AFOs: Eliminate foot drop and stabilize gait"
+          },
+          {
+            "id": "surg",
+            "label": "Orthopedic surgery: Plantar release, tendon transfer & osteotomy"
+          }
+        ],
+        "edges": [
+          [
+            "pt",
+            "afo"
+          ],
+          [
+            "afo",
+            "surg"
+          ]
+        ]
+      }
+    }
+  ]
+}

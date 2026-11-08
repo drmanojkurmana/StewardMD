@@ -1,0 +1,237 @@
+{
+  "id": "pnr-status-epilepticus-protocol",
+  "title": "Pediatric Status Epilepticus: Timelines and Evidence-Based Management",
+  "subject": "ss-paediatric-neurology",
+  "module": "Pediatric Epilepsy Syndromes and Status Epilepticus",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The International League Against Epilepsy defines status epilepticus using two distinct operational milestones. Treatment must begin promptly at time one, before cellular injury sets in at time two.",
+      "tx": "Apply the **ILAE operational definition t1 and t2** to direct emergency resuscitation. Convulsive status epilepticus is defined by two critical time points: t1 at 5 minutes, representing the threshold when spontaneous seizure cessation becomes unlikely and emergent pharmacological therapy must start, and t2 at 30 minutes, representing the boundary beyond which sustained epileptic firing precipitates irreversible neuronal injury, excitotoxicity, and pharmacoresistance (Benzodiazepine dosing).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t0",
+            "label": "0 min: Seizure onset"
+          },
+          {
+            "id": "t1",
+            "label": "5 min (t1): Initiate first-line therapy"
+          },
+          {
+            "id": "t2",
+            "label": "30 min (t2): Neuronal injury & receptor internalization"
+          }
+        ],
+        "edges": [
+          [
+            "t0",
+            "t1"
+          ],
+          [
+            "t1",
+            "t2"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Initial therapy between five and ten minutes relies on rapid benzodiazepine administration. Choosing the route depends on whether stable intravenous access is already secured.",
+      "tx": "Administer **First-line benzodiazepine dosing** within 5 to 10 minutes of persistent seizure activity. Intravenous lorazepam at 0.1 mg/kg (maximum single dose 4 mg) is preferred when vascular access is available. If intravenous access is delayed or absent, administer intramuscular or buccal midazolam at 0.2 mg/kg (maximum 10 mg) or rectal diazepam at 0.2 to 0.5 mg/kg, repeating once after 5 minutes if convulsive movements persist (Second-line ASMs).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Route & standard dose",
+          "Maximum initial dose"
+        ],
+        "rows": [
+          [
+            "Lorazepam",
+            "IV: 0.1 mg/kg over 2 minutes",
+            "4 mg single dose"
+          ],
+          [
+            "Midazolam",
+            "IM / Buccal / Intranasal: 0.2 mg/kg",
+            "10 mg single dose"
+          ],
+          [
+            "Diazepam",
+            "IV: 0.2 mg/kg (Rectal: 0.2-0.5 mg/kg)",
+            "10 mg single dose (20 mg rectal)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "If seizures persist beyond ten minutes despite benzodiazepines, escalate immediately to second-line non-sedating agents. The landmark ESETT clinical trial compared the primary choices.",
+      "tx": "Select **Second-line non-sedating ASMs (ESETT trial)** if convulsive activity continues after two adequate benzodiazepine doses. The established status epilepticus treatment trial demonstrated equivalent roughly 50% cessation rates without respiratory depression across three intravenous regimens: levetiracetam at 60 mg/kg (maximum 4500 mg), fosphenytoin at 20 mg PE/kg (maximum 1500 mg PE), and sodium valproate at 40 mg/kg (maximum 3000 mg) infused over 10 minutes (Refractory status).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Levetiracetam & Valproate",
+          "points": [
+            "Levetiracetam: 60 mg/kg (max 4500 mg)",
+            "Valproate: 40 mg/kg (max 3000 mg)",
+            "Minimal cardiac conduction interference"
+          ]
+        },
+        "right": {
+          "title": "Fosphenytoin",
+          "points": [
+            "Dose: 20 mg PE/kg (max 1500 mg PE)",
+            "Requires cardiac rate & rhythm monitoring",
+            "Avoid in known Dravet or channelopathies"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Refractory status epilepticus is established when convulsive activity withstands both first and second line therapies. Rapid admission to pediatric intensive care is mandatory.",
+      "tx": "Establish the **Refractory status epilepticus definition** when clinical or electrographic seizures persist despite therapeutic doses of a first-line benzodiazepine and an appropriate second-line anti-seizure medication. Refractory status epilepticus occurs in up to 30% of pediatric status episodes, demanding immediate endotracheal intubation, invasive arterial pressure monitoring, and urgent transfer to a pediatric intensive care unit for continuous neurophysiological monitoring (Continuous infusions).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fline",
+            "label": "First-line: Benzodiazepine (t1 to 10 min)"
+          },
+          {
+            "id": "sline",
+            "label": "Second-line: Levetiracetam / Valproate / Fosphenytoin"
+          },
+          {
+            "id": "rse",
+            "label": "RSE: Seizures refractory to both tiers (ICU admission)"
+          }
+        ],
+        "edges": [
+          [
+            "fline",
+            "sline"
+          ],
+          [
+            "sline",
+            "rse"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Third-line therapy employs continuous anesthetic infusions titrated against continuous electroencephalography. The therapeutic target is electrographic silence or burst suppression.",
+      "tx": "Initiate **Continuous anesthetic infusions** for third-line management of refractory status under continuous electroencephalographic tracking. Continuous midazolam infusion (titrated from 0.1 to 2 mg/kg/hour), pentobarbital, or intravenous ketamine is adjusted to achieve burst suppression with 10 to 15 seconds of interburst electrographic silence or complete seizure termination, maintaining this neuroprotective depth for 24 to 48 hours before gradual weaning (Propofol warnings).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Infusion drug",
+          "Titration range",
+          "Target endpoint & monitoring"
+        ],
+        "rows": [
+          [
+            "Midazolam",
+            "0.1 to 2.0 mg/kg/hour IV",
+            "Burst suppression pattern (10-15s interburst)"
+          ],
+          [
+            "Pentobarbital",
+            "1 to 5 mg/kg/hour IV",
+            "Continuous EEG suppression; hypotension support"
+          ],
+          [
+            "Ketamine",
+            "1.0 to 5.0 mg/kg/hour IV",
+            "NMDA receptor blockade in prolonged status"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Propofol carries a black box contraindication for prolonged pediatric infusions. Metabolic collapse and fatal cardiac standstill can occur rapidly in young children.",
+      "tx": "Recognize the severe **Propofol infusion syndrome risk** in pediatric intensive care. Propofol is strictly contraindicated for prolonged sedation or refractory status management in children when given for longer than 48 hours or at doses exceeding 4 mg/kg/hour. Propofol infusion syndrome causes uncoupling of oxidative phosphorylation, resulting in severe lactic acidosis, rhabdomyolysis, hyperkalemia, hepatomegaly, acute renal failure, and refractory fatal myocardial failure (NORSE & FIRES).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathological mechanism",
+          "Clinical signs",
+          "Laboratory abnormalities"
+        ],
+        "rows": [
+          [
+            "Mitochondrial fatty-acid oxidation block",
+            "Refractory bradycardia & cardiogenic shock",
+            "High-anion-gap metabolic acidosis"
+          ],
+          [
+            "Skeletal muscle cytolysis",
+            "Brown urine, hyperthermia, flaccid weakness",
+            "Markedly elevated creatine kinase & myoglobin"
+          ],
+          [
+            "Renal tubular injury",
+            "Oliguria progressing to anuria",
+            "Severe hyperkalemia & hyperphosphatemia"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Children who suddenly develop prolonged refractory seizures following a non-specific fever often have febrile infection-related epilepsy syndrome. Autoimmune and metabolic interventions are crucial.",
+      "tx": "Manage **NORSE and FIRES syndromes** as distinct neuroinflammatory encephalopathies. New-onset refractory status epilepticus and its pediatric subset febrile infection-related epilepsy syndrome typically strike previously healthy school-aged children 1 to 14 days after a mild febrile illness. Conventional anti-seizure medications consistently fail, necessitating early immunomodulatory rescue with pulsed intravenous methylprednisolone, intravenous immunoglobulin, anakinra, tocilizumab, and a 4:1 ketogenic diet (Pyridoxine trial).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical Presentation",
+          "points": [
+            "School-age child with prior normal development",
+            "Preceding mild febrile illness 1 to 14 days prior",
+            "Explosive onset of multifocal status epilepticus"
+          ]
+        },
+        "right": {
+          "title": "Targeted Interventions",
+          "points": [
+            "Interleukin-1 receptor antagonist (anakinra)",
+            "IL-6 inhibitor (tocilizumab) & pulsed steroids",
+            "Early enteral 4:1 ketogenic diet induction"
+          ]
+        }
+      }
+    },
+    {
+      "say": "In infants under one year presenting with cryptogenic status, always test for inborn metabolic defects. Intravenous pyridoxine provides an immediate diagnostic and therapeutic challenge.",
+      "tx": "Perform a formal **Pyridoxine dependency trial** in any neonate or infant under 12 months presenting with cryptogenic, recurrent, or refractory status epilepticus. Pyridoxine-dependent epilepsy arises from autosomal recessive mutations in ALDH7A1 leading to antiquitin deficiency and intracellular alpha-aminoadipic semialdehyde accumulation. Administer 100 mg of intravenous pyridoxine slowly under continuous electroencephalographic and hemodynamic surveillance, anticipating immediate clinical and electrographic normalization (Management complete).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "infant",
+            "label": "Infant < 1 year with cryptogenic refractory status"
+          },
+          {
+            "id": "trial",
+            "label": "Administer Pyridoxine 100 mg IV under continuous EEG"
+          },
+          {
+            "id": "eeg_resp",
+            "label": "Monitor: Immediate EEG normalization confirms ALDH7A1 defect"
+          }
+        ],
+        "edges": [
+          [
+            "infant",
+            "trial"
+          ],
+          [
+            "trial",
+            "eeg_resp"
+          ]
+        ]
+      }
+    }
+  ]
+}

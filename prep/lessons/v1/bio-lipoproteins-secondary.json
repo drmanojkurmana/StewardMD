@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "bio-lipoproteins",
+ "subject": "biochemistry",
+ "title": "Secondary dyslipidaemia and abetalipoproteinaemia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Most dyslipidaemia in clinic is **secondary**, so every abnormal profile deserves a cause hunt before lifelong labels: hypothyroidism (receptors down, LDL up), nephrotic syndrome (liver overproduces ApoB, LDL up), chronic kidney disease (triglycerides up, HDL down), cholestasis, diabetes, alcohol, pregnancy and drugs. Treating the driver often halves the lipid abnormality and occasionally removes the need for lipid drugs entirely.",
+   "say": "Most dyslipidaemia is secondary, so hunt the cause first. Hypothyroidism, nephrotic syndrome, kidney disease, diabetes, alcohol and drugs drive most abnormal profiles, and treating the driver often halves the abnormality.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Driver", "Typical lipid pattern", "First move"],
+    "rows": [
+     ["Hypothyroidism", "LDL high", "Thyroxine, recheck lipids"],
+     ["Nephrotic syndrome", "LDL high (ApoB overproduced)", "Treat proteinuria cause"],
+     ["Diabetes, metabolic syndrome", "TG high, HDL low, small dense LDL", "Glucose, weight, triglyceride risk"],
+     ["Cholestasis", "Lipoprotein X, cholesterol high", "Treat obstruction"]
+    ]
+   }
+  },
+  {
+   "tx": "The diabetic pattern deserves mechanistic fluency: insulin resistance floods liver with fatty acids for VLDL, **CETP** trades LDL and HDL core lipids toward triglyceride rich forms, hepatic lipase then remodels them into small dense LDL (more atherogenic per particle) and rapidly cleared HDL. Hence ApoB or non HDL cholesterol captures risk that LDL cholesterol understates when triglycerides exceed two hundred.",
+   "say": "Insulin resistance floods liver for VLDL production, and core lipid trading remodels LDL small and dense. ApoB or non HDL cholesterol captures risk that LDL cholesterol understates when triglycerides are high.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diabetic lipid remodelling",
+    "nodes": [
+     {"id": "ir", "label": "Insulin resistance, fatty acid flood"},
+     {"id": "vldl", "label": "VLDL overproduced"},
+     {"id": "swap", "label": "CETP swaps cores"},
+     {"id": "sd", "label": "Small dense LDL, low HDL"}
+    ],
+    "edges": [["ir", "vldl"], ["vldl", "swap"], ["swap", "sd"]]
+   }
+  },
+  {
+   "tx": "Drug causes separate prescribers from memorisers: thiazides and non selective beta blockers modestly worsen triglycerides and HDL, corticosteroids and retinoids raise triglycerides (isotretinoin pancreatitis reports), protease inhibitors and atypical antipsychotics drive metabolic patterns, ciclosporin and oestrogens (oral, triglycerides; transdermal kinder) each distort characteristically. **Anabolic steroids** crash HDL strikingly, a sports medicine stem favourite.",
+   "say": "Thiazides, steroids, retinoids, protease inhibitors and antipsychotics each distort lipids characteristically. Anabolic steroids crash HDL strikingly, a sports medicine favourite. Review the drug chart before labelling anyone familial.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Triglycerides pushed up", "points": ["Oral oestrogens, retinoids", "Corticosteroids, alcohol", "Protease inhibitors"]},
+    "right": {"title": "HDL pushed down", "points": ["Anabolic steroids (dramatic)", "Smoking, beta blockers modest", "High triglyceride states via CETP"]
+    }
+   }
+  },
+  {
+   "tx": "**Abetalipoproteinaemia** deletes every ApoB particle: microsomal triglyceride transfer protein failure prevents chylomicron and VLDL assembly, so dietary fat malabsorbs, cholesterol and triglycerides sit extremely low, and fat soluble vitamins (E most dramatically) fail. Acanthocytes (spur cells from membrane lipid imbalance), retinitis pigmentosa, spinocerebellar ataxia and steatorrhoea from infancy complete the picture, treated with low fat diet, medium chain triglycerides and massive vitamin E and A supplementation.",
+   "say": "Abetalipoproteinaemia deletes every ApoB particle, so fat malabsorbs and vitamins fail. Acanthocytes, retinitis and ataxia complete the picture, treated with medium chain triglycerides and massive vitamin E.",
+   "vis": null
+  },
+  {
+   "tx": "Its milder allelic cousin **hypobetalipoproteinaemia** (truncated ApoB) halves ApoB particles with fatty liver tendency (export limited) but usually no neurology, while sitosterolaemia (ABCG5/8 failure) loads plant sterols, mimicking FH with xanthomas yet responding to ezetimibe dramatically. Tangier and LCAT diseases from the reverse transport lesson complete the very low HDL differential that stems rotate through.",
+   "say": "Hypobetalipoproteinaemia halves ApoB particles with fatty liver tendency. Sitosterolaemia loads plant sterols and mimics familial hypercholesterolaemia, yet responds dramatically to ezetimibe. Low HDL differentials complete the set.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disorder", "Transport break", "Signature"],
+    "rows": [
+     ["Abetalipoproteinaemia", "No ApoB assembly (MTP)", "Acanthocytes, ataxia, retinitis"],
+     ["Hypobetalipoproteinaemia", "Truncated ApoB", "Low LDL, fatty liver"],
+     ["Sitosterolaemia", "Plant sterols absorbed (ABCG5/8)", "Xanthomas, ezetimibe responsive"],
+     ["Tangier", "ABCA1 efflux absent", "Orange tonsils, very low HDL"]
+    ]
+   }
+  },
+  {
+   "tx": "Practical thresholds close the module: pancreatitis risk climbs steeply beyond **five hundred** milligrams per decilitre triglycerides (urgent beyond one thousand with pain), Friedewald LDL calculation fails beyond four hundred triglycerides or with chylomicrons (use direct LDL, non HDL or ApoB), and non fasting samples suffice for most screening except triglyceride precision. Next, storage diseases show what happens when lysosomes, not plasma carriers, cannot clear lipids.",
+   "say": "Pancreatitis risk climbs beyond five hundred triglycerides, and Friedewald calculation fails beyond four hundred. Non fasting samples suffice for most screening. Next, storage diseases show lysosomal clearance failure.",
+   "vis": {
+    "kind": "flow",
+    "title": "Triglyceride action ladder",
+    "nodes": [
+     {"id": "m", "label": "200 to 499: lifestyle, secondary causes"},
+     {"id": "h", "label": "500 plus: pancreatitis prevention"},
+     {"id": "e", "label": "1000 plus or pain: urgent lowering"}
+    ],
+    "edges": [["m", "h"], ["h", "e"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
