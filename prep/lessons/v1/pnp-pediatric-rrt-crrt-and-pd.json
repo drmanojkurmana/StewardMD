@@ -13,12 +13,32 @@
       "vis": {
         "kind": "table",
         "title": "Pediatric Renal Replacement Indications",
-        "cols": ["Indication", "Clinical Criterion", "Pathophysiologic Threat"],
+        "cols": [
+          "Indication",
+          "Clinical Criterion",
+          "Pathophysiologic Threat"
+        ],
         "rows": [
-          ["Fluid overload", "> 10-15% weight gain from baseline", "Pulmonary edema, prolonged mechanical ventilation"],
-          ["Hyperkalemia", "Serum potassium > 6.5 mEq/L refractory", "Fatal cardiac arrhythmias and conduction arrest"],
-          ["Metabolic acidosis", "pH < 7.15, standard bicarb unresponsive", "Myocardial depression and vascular collapse"],
-          ["Uremic complications", "Encephalopathy, pericarditis, bleeding", "Multi-organ failure and neurotoxicity"]
+          [
+            "Fluid overload",
+            "> 10-15% weight gain from baseline",
+            "Pulmonary edema, prolonged mechanical ventilation"
+          ],
+          [
+            "Hyperkalemia",
+            "Serum potassium > 6.5 mEq/L refractory",
+            "Fatal cardiac arrhythmias and conduction arrest"
+          ],
+          [
+            "Metabolic acidosis",
+            "pH < 7.15, standard bicarb unresponsive",
+            "Myocardial depression and vascular collapse"
+          ],
+          [
+            "Uremic complications",
+            "Encephalopathy, pericarditis, bleeding",
+            "Multi-organ failure and neurotoxicity"
+          ]
         ]
       }
     },
@@ -28,13 +48,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "calc", "label": "Calculate Total Blood Volume (80 mL/kg)"},
-          {"id": "eval", "label": "Compare Circuit Volume to Patient TBV"},
-          {"id": "prime", "label": "> 10% TBV: Mandatory blood or 5% albumin prime"}
+          {
+            "id": "calc",
+            "label": "Calculate Total Blood Volume (80 mL/kg)"
+          },
+          {
+            "id": "eval",
+            "label": "Compare Circuit Volume to Patient TBV"
+          },
+          {
+            "id": "prime",
+            "label": "> 10% TBV: Mandatory blood or 5% albumin prime"
+          }
         ],
         "edges": [
-          ["calc", "eval"],
-          ["eval", "prime"]
+          [
+            "calc",
+            "eval"
+          ],
+          [
+            "eval",
+            "prime"
+          ]
         ]
       }
     },
@@ -44,11 +79,27 @@
       "vis": {
         "kind": "table",
         "title": "Comparison of Continuous Extracorporeal Modalities",
-        "cols": ["Modality", "Primary Mechanism", "Clinical Niche in Pediatric ICU"],
+        "cols": [
+          "Modality",
+          "Primary Mechanism",
+          "Clinical Niche in Pediatric ICU"
+        ],
         "rows": [
-          ["CVVH", "Pure convection via ultrafiltration", "Removal of middle molecules and inflammatory mediators"],
-          ["CVVHD", "Pure diffusion via counter-current dialysate", "Rapid clearance of small solutes like urea and ammonia"],
-          ["CVVHDF", "Combined convection and diffusion", "Maximal solute clearance in unstable septic shock"]
+          [
+            "CVVH",
+            "Pure convection via ultrafiltration",
+            "Removal of middle molecules and inflammatory mediators"
+          ],
+          [
+            "CVVHD",
+            "Pure diffusion via counter-current dialysate",
+            "Rapid clearance of small solutes like urea and ammonia"
+          ],
+          [
+            "CVVHDF",
+            "Combined convection and diffusion",
+            "Maximal solute clearance in unstable septic shock"
+          ]
         ]
       }
     },
@@ -58,13 +109,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "pref", "label": "Pre-filter: Infuse trisodium citrate (chelates Ca2+)"},
-          {"id": "filt", "label": "In-filter: Target circuit iCa 0.25-0.40 mmol/L"},
-          {"id": "postf", "label": "Post-filter: Infuse IV calcium (systemic iCa 1.1-1.3)"}
+          {
+            "id": "pref",
+            "label": "Pre-filter: Infuse trisodium citrate (chelates Ca2+)"
+          },
+          {
+            "id": "filt",
+            "label": "In-filter: Target circuit iCa 0.25-0.40 mmol/L"
+          },
+          {
+            "id": "postf",
+            "label": "Post-filter: Infuse IV calcium (systemic iCa 1.1-1.3)"
+          }
         ],
         "edges": [
-          ["pref", "filt"],
-          ["filt", "postf"]
+          [
+            "pref",
+            "filt"
+          ],
+          [
+            "filt",
+            "postf"
+          ]
         ]
       }
     },
@@ -95,14 +161,10 @@
       "say": "Acute peritoneal dialysis provides life-saving renal replacement in neonates and centers without vascular access machines.",
       "tx": "Implement bedside technique for **Acute peritoneal dialysis catheter and fill volumes** in small pediatric patients. Peritoneal dialysis (PD) is the modality of choice in neonates, infants, and low-resource settings; using a flexible Tenckhoff or straight catheter, initial fill volumes start low at 10-20 mL/kg to assess tolerance, and are gradually titrated up to 30-40 mL/kg (or 800-1100 mL/m²) as tolerated without causing respiratory compromise.",
       "vis": {
-        "kind": "table",
-        "title": "Peritoneal Dialysis Volume Progression",
-        "cols": ["Phase", "Fill Volume", "Clinical Objective"],
-        "rows": [
-          ["Initial run-in", "10-20 mL/kg", "Assess comfort, prevent leakage and splinting"],
-          ["Maintenance infant", "25-30 mL/kg", "Optimize peritoneal surface area contact"],
-          ["Fully expanded child", "35-40 mL/kg (or 800-1100 mL/m²)", "Achieve maximal ultrafiltration and clearance"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/aki-ckd-hus-dialysis-transplant-fig1.webp",
+        "alt": "Peritoneal dialysis in a child using the peritoneum for fluid and solute exchange.",
+        "caption": "Peritoneal dialysis: the peritoneum as the filter in children. Credit: StewardMD."
       }
     },
     {
@@ -111,13 +173,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "cloud", "label": "Cloudy peritoneal effluent + abdominal pain"},
-          {"id": "count", "label": "Effluent WBC > 100/mcL with >= 50% PMNs"},
-          {"id": "rx", "label": "Intraperitoneal Cefazolin/Vancomycin + Ceftazidime"}
+          {
+            "id": "cloud",
+            "label": "Cloudy peritoneal effluent + abdominal pain"
+          },
+          {
+            "id": "count",
+            "label": "Effluent WBC > 100/mcL with >= 50% PMNs"
+          },
+          {
+            "id": "rx",
+            "label": "Intraperitoneal Cefazolin/Vancomycin + Ceftazidime"
+          }
         ],
         "edges": [
-          ["cloud", "count"],
-          ["count", "rx"]
+          [
+            "cloud",
+            "count"
+          ],
+          [
+            "count",
+            "rx"
+          ]
         ]
       }
     },
@@ -127,12 +204,32 @@
       "vis": {
         "kind": "table",
         "title": "Disequilibrium Syndrome Preventive Strategy",
-        "cols": ["Parameter", "Inaugural HD Limit", "Rationale"],
+        "cols": [
+          "Parameter",
+          "Inaugural HD Limit",
+          "Rationale"
+        ],
         "rows": [
-          ["Treatment duration", "Maximum 2 hours", "Prevents abrupt drop in plasma osmolality"],
-          ["Blood flow rate", "3-5 mL/kg/min", "Gradual urea extraction across dialyzer"],
-          ["BUN reduction ratio", "Restrict to < 30-40%", "Prevents osmotic water shift into cerebral cells"],
-          ["Adjunctive osmoprotection", "Mannitol infusion (0.5-1.0 g/kg)", "Supports extracellular osmolality during run"]
+          [
+            "Treatment duration",
+            "Maximum 2 hours",
+            "Prevents abrupt drop in plasma osmolality"
+          ],
+          [
+            "Blood flow rate",
+            "3-5 mL/kg/min",
+            "Gradual urea extraction across dialyzer"
+          ],
+          [
+            "BUN reduction ratio",
+            "Restrict to < 30-40%",
+            "Prevents osmotic water shift into cerebral cells"
+          ],
+          [
+            "Adjunctive osmoprotection",
+            "Mannitol infusion (0.5-1.0 g/kg)",
+            "Supports extracellular osmolality during run"
+          ]
         ]
       }
     }

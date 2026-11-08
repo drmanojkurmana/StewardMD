@@ -11,14 +11,10 @@
       "say": "Fetal pelvic dilatation provides early anatomical warning of developmental urinary obstruction.",
       "tx": "Evaluate gestational pelvic measurements applying the standardized **Antenatal hydronephrosis grading (AP renal pelvic diameter)** protocols. Antenatal hydronephrosis on maternal ultrasound is graded by anteroposterior renal pelvic diameter (APRPD): >= 4-7 mm in second trimester and >= 7-10 mm in third trimester warrants postnatal surveillance to detect obstructive uropathy, renal dysplasia, or vesicoureteral reflux.",
       "vis": {
-        "kind": "table",
-        "title": "Antenatal Hydronephrosis Sonographic Thresholds",
-        "cols": ["Gestational Window", "APRPD Threshold", "Clinical Strategy"],
-        "rows": [
-          ["Second Trimester", ">= 4-7 mm", "Identifies early mild to moderate caliceal dilatation"],
-          ["Third Trimester", ">= 7-10 mm", "Warrants mandatory postnatal structural surveillance"],
-          ["Severe Dilatation", "> 10-15 mm", "High risk of intrinsic obstruction or vesicoureteral reflux"]
-        ]
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-xray-intravenous-urogram-hydronephrosis.webp",
+        "alt": "Intravenous urogram showing a dilated ballooned renal pelvis with clubbed calyces.",
+        "caption": "Hydronephrosis: ballooned pelvis and clubbed calyces. Credit: Cambridge University Press."
       }
     },
     {
@@ -48,18 +44,10 @@
       "say": "Obstructive urethral membranes present exclusively in male neonates and distort the lower urinary tract.",
       "tx": "Identify severe infravesical blockage recognizing the **Posterior urethral valves (PUV) keyhole sign** on ultrasound. PUV occurs exclusively in males, caused by congenital obstructing folds of the verumontanum (Type 1 Young classification), displaying a thick-walled trabeculated bladder and dilated posterior urethra (keyhole sign) on ultrasound, accompanied by bilateral hydroureteronephrosis and high risks of neonatal respiratory distress.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "fold", "label": "Type 1 Young Verumontanum Folds"},
-          {"id": "press", "label": "High-Pressure Intravesical Obstruction"},
-          {"id": "us", "label": "Trabeculated Bladder & Dilated Urethra (Keyhole Sign)"},
-          {"id": "kid", "label": "Bilateral Hydroureteronephrosis & Renal Dysplasia"}
-        ],
-        "edges": [
-          ["fold", "press"],
-          ["press", "us"],
-          ["us", "kid"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/paediatric-urology-hypospadias-cryptorchidism-and-wilms-tumor-fig1.webp",
+        "alt": "Hypospadias, cryptorchidism, posterior urethral valves and Wilms tumour features.",
+        "caption": "Posterior urethral valves sit in a wider CAKUT spectrum. Credit: StewardMD."
       }
     },
     {
@@ -68,11 +56,27 @@
       "vis": {
         "kind": "table",
         "title": "Neonatal Posterior Urethral Valve Interventions",
-        "cols": ["Phase", "Procedure & Equipment", "Clinical Goal"],
+        "cols": [
+          "Phase",
+          "Procedure & Equipment",
+          "Clinical Goal"
+        ],
         "rows": [
-          ["Initial Decompression", "Transurethral 5-8 Fr feeding tube catheter", "Relieves high intravesical hydrostatic pressure"],
-          ["Definitive Treatment", "Transurethral cystoscopic valve ablation", "Disrupts obstructing mucosal leaflets"],
-          ["Alternative Bailout", "Cutaneous vesicostomy", "Decompresses bladder if infant urethra is too small"]
+          [
+            "Initial Decompression",
+            "Transurethral 5-8 Fr feeding tube catheter",
+            "Relieves high intravesical hydrostatic pressure"
+          ],
+          [
+            "Definitive Treatment",
+            "Transurethral cystoscopic valve ablation",
+            "Disrupts obstructing mucosal leaflets"
+          ],
+          [
+            "Alternative Bailout",
+            "Cutaneous vesicostomy",
+            "Decompresses bladder if infant urethra is too small"
+          ]
         ]
       }
     },
@@ -105,13 +109,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "eval", "label": "Serial MAG3 Renography & Ultrasound"},
-          {"id": "crit", "label": "Function < 40%, Loss > 10%, or Recurrent Febrile UTI"},
-          {"id": "surg", "label": "Anderson-Hynes Dismembered Pyeloplasty"}
+          {
+            "id": "eval",
+            "label": "Serial MAG3 Renography & Ultrasound"
+          },
+          {
+            "id": "crit",
+            "label": "Function < 40%, Loss > 10%, or Recurrent Febrile UTI"
+          },
+          {
+            "id": "surg",
+            "label": "Anderson-Hynes Dismembered Pyeloplasty"
+          }
         ],
         "edges": [
-          ["eval", "crit"],
-          ["crit", "surg"]
+          [
+            "eval",
+            "crit"
+          ],
+          [
+            "crit",
+            "surg"
+          ]
         ]
       }
     },
@@ -121,13 +140,37 @@
       "vis": {
         "kind": "table",
         "title": "International Reflux Study VUR Classification",
-        "cols": ["Grade", "Fluoroscopic Appearance", "Parenchymal Scarring Risk"],
+        "cols": [
+          "Grade",
+          "Fluoroscopic Appearance",
+          "Parenchymal Scarring Risk"
+        ],
         "rows": [
-          ["Grade I", "Reflux into ureter only, no caliceal filling", "Minimal risk of renal injury"],
-          ["Grade II", "Reflux into pelvis & calices without dilatation", "Low risk, excellent spontaneous resolution"],
-          ["Grade III", "Mild to moderate dilatation, blunting of fornices", "Moderate risk, requires close infection vigilance"],
-          ["Grade IV", "Moderate tortuosity, complete blunting of calices", "High risk of progressive reflux nephropathy"],
-          ["Grade V", "Massive reflux, extreme tortuosity, effaced calices", "Severe risk, surgical correction usually required"]
+          [
+            "Grade I",
+            "Reflux into ureter only, no caliceal filling",
+            "Minimal risk of renal injury"
+          ],
+          [
+            "Grade II",
+            "Reflux into pelvis & calices without dilatation",
+            "Low risk, excellent spontaneous resolution"
+          ],
+          [
+            "Grade III",
+            "Mild to moderate dilatation, blunting of fornices",
+            "Moderate risk, requires close infection vigilance"
+          ],
+          [
+            "Grade IV",
+            "Moderate tortuosity, complete blunting of calices",
+            "High risk of progressive reflux nephropathy"
+          ],
+          [
+            "Grade V",
+            "Massive reflux, extreme tortuosity, effaced calices",
+            "Severe risk, surgical correction usually required"
+          ]
         ]
       }
     },
@@ -137,11 +180,27 @@
       "vis": {
         "kind": "table",
         "title": "RIVUR Trial Prophylaxis Evidence",
-        "cols": ["Intervention", "Clinical Finding", "Long-Term Evidence"],
+        "cols": [
+          "Intervention",
+          "Clinical Finding",
+          "Long-Term Evidence"
+        ],
         "rows": [
-          ["Daily Prophylaxis", "Co-trimoxazole or nitrofurantoin daily", "50% reduction in recurrent febrile UTI"],
-          ["Target Cohort", "Children with Grade II to IV VUR", "Greatest benefit in bladder-bowel dysfunction"],
-          ["Parenchymal Scars", "DMSA scar incidence unchanged", "Emphasizes prompt treatment of acute infections"]
+          [
+            "Daily Prophylaxis",
+            "Co-trimoxazole or nitrofurantoin daily",
+            "50% reduction in recurrent febrile UTI"
+          ],
+          [
+            "Target Cohort",
+            "Children with Grade II to IV VUR",
+            "Greatest benefit in bladder-bowel dysfunction"
+          ],
+          [
+            "Parenchymal Scars",
+            "DMSA scar incidence unchanged",
+            "Emphasizes prompt treatment of acute infections"
+          ]
         ]
       }
     }

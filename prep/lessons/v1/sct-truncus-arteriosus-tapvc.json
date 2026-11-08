@@ -1,0 +1,257 @@
+{
+  "v": 1,
+  "module": "sct-truncus-arteriosus-tapvc",
+  "title": "Truncus Arteriosus and TAPVC: Classifications, Obstruction, Rastelli and Repair",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Congenital Heart Disease: Truncus and TAPVC)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 33 and 21",
+    "Darling and Collett-Edwards Congenital Classifications"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Persistent truncus arteriosus is characterized by failure of the embryonic conotruncus to septate into an aorta and pulmonary artery. A solitary great vessel arises from the cardiac base, overriding a large ventricular septal defect. The Collett-Edwards classification system groups the defect into four anatomical types based on how the pulmonary arteries arise.",
+      "tx": "In congenital **truncus arteriosus**, complete failure of conotruncal septation leaves a **single great trunk** providing coronary, systemic, and pulmonary circulation. The **Collett-Edwards** classification categorizes anatomy into 4 types: Type 1 features a common main pulmonary trunk arising from the posterior truncus; Types 2 and 3 feature separate pulmonary branch origins; and Type 4 represents bronchial collateral supply.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Collett-Edwards Type",
+          "Pulmonary Artery Origin",
+          "Anatomical Architecture"
+        ],
+        "rows": [
+          [
+            "Type 1",
+            "Single short main pulmonary trunk from left posterior truncus",
+            "Divides into right and left branch pulmonary arteries"
+          ],
+          [
+            "Type 2",
+            "Separate adjacent origins from posterior truncal wall",
+            "Both branch orifices sit close together on the posterior trunk"
+          ],
+          [
+            "Type 3",
+            "Separate lateral origins from lateral truncal walls",
+            "Branch orifices originate independently from opposite sides of the trunk"
+          ],
+          [
+            "Type 4 (Historical)",
+            "No true pulmonary arteries from trunk",
+            "Now recognized as pulmonary atresia with MAPCAs"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Primary neonatal truncus repair is performed within the first few weeks of life to prevent rapid pulmonary vascular obstructive disease. The surgeon detaches the pulmonary arteries as a single button from the truncal root and closes the ventricular septal defect with a patch, which is recognized by surgical teams. A valved right ventricle to pulmonary artery conduit completes the Rastelli repair.",
+      "tx": "Early **neonatal truncus repair** is mandatory to prevent irreversible pulmonary vascular obstructive disease from high-pressure left-to-right runoff. The surgeon excises the pulmonary arterial confluence from the truncus, closes the VSD with a Dacron patch, and restores RV-to-PA continuity utilizing a **valved homograft conduit** via the classic **Rastelli technique**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Establish cardiopulmonary bypass and transect pulmonary confluence from truncus"
+          },
+          {
+            "id": "b",
+            "label": "Reconstruct neo-aorta with running suture, leaving truncal valve as aortic valve"
+          },
+          {
+            "id": "c",
+            "label": "Perform ventriculotomy and close large malalignment VSD with Dacron patch"
+          },
+          {
+            "id": "d",
+            "label": "Interpose cryopreserved pulmonary homograft conduit between RV and pulmonary arteries"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Total anomalous pulmonary venous connection occurs when all four pulmonary veins fail to connect directly to the left atrium. The Darling classification divides cases into four anatomical groups. Type one supracardiac drainage is most frequent, accounting for fifty percent of cases, followed by cardiac, infracardiac, and mixed types.",
+      "tx": "In **TAPVC**, pulmonary venous return drains entirely into the systemic venous circulation. The **Darling classification** defines 4 categories: Type 1 **supracardiac TAPVC** is most common, representing 50 percent of cases; Type 2 cardiac drainage into the coronary sinus accounts for 25 percent; Type 3 infracardiac drainage represents 20 percent; and Type 4 mixed connection accounts for the remaining 5 percent.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-misc-cyanotic-chd.webp",
+        "ar": 1.3333,
+        "caption": "Cyanotic congenital cardiac anomalies with right-to-left shunting. Credit: StewardMD.",
+        "alt": "Pathological anatomy of total anomalous pulmonary venous drainage into systemic veins."
+      }
+    },
+    {
+      "say": "Supracardiac drainage typically courses via a vertical vein into the left brachiocephalic vein and superior vena cava. In older infants without obstruction, the wide mediastinal venous confluence produces a classic snowman or figure-of-eight sign on chest radiography. Children develop profound right-sided volume overload with tachypnea.",
+      "tx": "In Type 1 supracardiac connection, a left-sided **vertical vein** ascends to drain pulmonary venous blood into the innominate vein and superior vena cava. In un-obstructed infants, marked dilation of the vertical vein, innominate vein, and right heart generates the classic **snowman sign** or **figure-of-eight** contour on routine chest radiography.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Supracardiac TAPVC (Type 1)",
+          "points": [
+            "Accounts for 50 percent of cases",
+            "Drains via vertical vein to innominate vein / SVC",
+            "Frequently un-obstructed in early neonatal life",
+            "Classic snowman sign on chest radiography"
+          ]
+        },
+        "right": {
+          "title": "Infracardiac TAPVC (Type 3)",
+          "points": [
+            "Accounts for 20 percent of cases",
+            "Descending vertical vein traverses diaphragm into portal system",
+            "Almost universally obstructed at diaphragmatic hiatus",
+            "Severe pulmonary edema and neonatal shock"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Infracardiac anomalous drainage carries the highest risk of acute hemodynamic decompensation. The descending vertical vein passes through the esophageal hiatus to drain into the portal vein or ductus venosus. Compression at the diaphragmatic hiatus and hepatic sinusoids creates severe venous obstruction.",
+      "tx": "In Type 3 **infracardiac TAPVC**, pulmonary veins unite into a common vertical trunk that descends through the diaphragm to join the **portal vein drainage** or hepatic veins. Compression at the diaphragmatic hiatus and high-resistance liver capillary sinusoids produces severe **venous obstruction**, causing immediate retrograde pulmonary venous hypertension.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-paed-cvs-cyanosis.webp",
+        "ar": 1.3333,
+        "caption": "Evaluation of central cyanosis and hyperoxia test in congenital heart defects. Credit: StewardMD.",
+        "alt": "Clinical assessment of severe cyanosis and obstructed pulmonary venous drainage."
+      }
+    },
+    {
+      "say": "Obstructed anomalous pulmonary venous return represents an absolute surgical emergency in the newborn. Newborns present with profound cyanosis, severe pulmonary edema, and cardiogenic shock refractory to medical resuscitation. Immediate emergency operative repair is required to decompress the pulmonary venous confluence.",
+      "tx": "Acute neonatal **obstructed TAPVC** represents a critical, life-threatening **surgical emergency**. Severe pulmonary **venous hypertension** produces ground-glass alveolar edema, severe metabolic acidosis, and profound hypoxemia that fails completely to respond to hyperventilation or prostaglandin infusion, mandating emergent cardiopulmonary bypass decompression to save the infant.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "High pulmonary venous resistance generates severe pulmonary edema"
+          },
+          {
+            "id": "b",
+            "label": "Profound cyanosis, acidosis, and shock refractory to hyperoxia"
+          },
+          {
+            "id": "c",
+            "label": "Echocardiography confirms obstructed descending confluence"
+          },
+          {
+            "id": "d",
+            "label": "Emergent transport to operating room for cardiopulmonary bypass decompression"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Complete surgical repair of supracardiac and infracardiac connections constructs a wide anastomosis between the pulmonary venous confluence and the left atrium. The surgeon creates a tension-free side-to-side anastomosis and closes the atrial septal defect. The vertical vein is securely ligated to prevent residual systemic shunting.",
+      "tx": "Definitive repair creates a wide **side-to-side anastomosis** between the retrocardiac **pulmonary venous confluence** and the posterior wall of the left atrium with fine monofilament suture. The atrial septal defect is closed with a pericardial patch, and **vertical vein ligation** completes the redirection of oxygenated blood into the systemic ventricle.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Step",
+          "Anatomical Maneuver",
+          "Critical Technical Objective"
+        ],
+        "rows": [
+          [
+            "Atrial-confluence connection",
+            "Longitudinal side-to-side incision (15 to 20 mm)",
+            "Create non-restrictive orifice matching combined vein caliber"
+          ],
+          [
+            "ASD closure",
+            "Pledgeted patch closure of atrial septal defect",
+            "Directs all systemic venous return into right heart"
+          ],
+          [
+            "Vertical vein management",
+            "Permanent surgical ligation or clipping",
+            "Eliminates left-to-right decompression into systemic veins"
+          ],
+          [
+            "Concomitant PFO",
+            "Leave small fenestration if left ventricle is small",
+            "Decompresses compliant left heart if filling pressures surge"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Postoperative pulmonary vein stenosis is a devastating late complication that develops in up to ten percent of repaired children. Aggressive intimal hyperplasia narrows the anastomotic ostia or individual pulmonary vein branches, which is recognized by surgical teams. Recurrent pulmonary hypertension develops, necessitating challenging catheter re-interventions or surgical sutureless patch reoperations.",
+      "tx": "Late postoperative **pulmonary vein stenosis** develops in 5 to 10 percent of children following TAPVC reconstruction. Severe progressive **intimal hyperplasia** constricts individual branch ostia, precipitating recurrent pulmonary hypertension and demanding difficult repeat catheter stenting or **late reoperation** utilizing sutureless pericardial marsupialization techniques.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Initial successful neonatal TAPVC confluence anastomosis"
+          },
+          {
+            "id": "b",
+            "label": "Endothelial trauma triggers progressive fibromuscular intimal hyperplasia"
+          },
+          {
+            "id": "c",
+            "label": "Recurrent tachypnea, pulmonary arterial hypertension, and hemoptysis"
+          },
+          {
+            "id": "d",
+            "label": "Sutureless pericardial patch repair to avoid recurrent suture-line stenosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
