@@ -67,6 +67,7 @@
      "includes": "Neonatology, Paediatric Cardiology and 6 more",
      "subjects": [
       "ss-biostatistics",
+      "ss-paediatric-cardiology",
       "ss-neonatology",
       "ss-paediatric-cardiology",
       "ss-paediatric-neurology",
