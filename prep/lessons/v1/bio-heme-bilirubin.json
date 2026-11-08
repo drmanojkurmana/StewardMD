@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-heme",
+ "subject": "biochemistry",
+ "title": "Bilirubin and the jaundice syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Senescent red cells (about one percent daily, eighty percent of heme load; the rest from ineffective erythropoiesis and other hemoproteins) feed macrophage **heme oxygenase**, which opens the ring to biliverdin (green), carbon monoxide (the only endogenous source, measured as carboxyhaemoglobin) and recyclable iron, spending NADPH and oxygen. Biliverdin reductase then makes unconjugated bilirubin (yellow), whose internal hydrogen bonding hides its polar groups, forcing albumin carriage and hepatic conjugation.",
+   "say": "Heme oxygenase makes biliverdin, carbon monoxide and recyclable iron from senescent red cells. Biliverdin reductase makes unconjugated bilirubin, whose hidden polar groups force albumin carriage to liver.",
+   "vis": {
+    "kind": "flow",
+    "title": "Heme to bilirubin",
+    "nodes": [
+     {"id": "heme", "label": "Heme (old red cells)"},
+     {"id": "verd", "label": "Biliverdin plus CO plus iron"},
+     {"id": "uncon", "label": "Unconjugated bilirubin (albumin)"},
+     {"id": "con", "label": "Conjugated in liver (UGT1A1)"}
+    ],
+    "edges": [["heme", "verd"], ["verd", "uncon"], ["uncon", "con"]]
+   }
+  },
+  {
+   "tx": "Liver uptake (OATP), conjugation by **UGT1A1** to mono and diglucuronides (water soluble, diazo direct reacting), canalicular export by MRP2 (rate limiting, saturable first in illness), bacterial deconjugation and reduction to urobilinogen (part reabsorbed, kidney excretes urobilin yellow) and stercobilin (stool brown) complete the circuit. Interruption colours predict site: pale stool plus dark urine means conjugated bilirubin regurgitates to blood and urine instead of gut.",
+   "say": "UGT1A1 conjugates bilirubin and MRP2 exports it rate limitingly to bile. Pale stool plus dark urine means conjugated bilirubin regurgitates to blood and urine instead of gut, predicting the site.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Finding", "Unconjugated excess", "Conjugated excess"],
+    "rows": [
+     ["Urine bilirubin", "Absent (albumin bound, acholuric)", "Present (water soluble)"],
+     ["Urine urobilinogen", "Raised (more delivered to gut)", "Low or absent (none reaches gut)"],
+     ["Stool colour", "Normal or dark", "Pale or clay when obstructed"],
+     ["Prototype causes", "Haemolysis, Gilbert, Crigler-Najjar", "Obstruction, hepatitis, Dubin-Johnson"]
+    ]
+   }
+  },
+  {
+   "tx": "Free unconjugated bilirubin unbound to albumin crosses the immature or disrupted blood brain barrier and stains basal ganglia (**kernicterus**: hypotonia then hypertonia, retrocollis, fever, high pitched cry, later choreoathetoid cerebral palsy, auditory neuropathy and upward gaze palsy). Albumin competitors (sulfonamides, ceftriaxone caution, free fatty acids), prematurity, acidosis and haemolysis (G6PD, ABO/Rh incompatibility) raise free fraction at any total level, so treatment charts integrate age, gestation and risk, not bilirubin alone.",
+   "say": "Free unconjugated bilirubin stains basal ganglia as kernicterus when binding or barrier fails. Treatment charts integrate age, gestation and haemolysis risk, not bilirubin alone, for exchange decisions.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Bound bilirubin (safer)", "points": ["Albumin carried, brain excluded", "Total level guides charts", "Phototherapy isomerises for excretion"]},
+    "right": {"title": "Free bilirubin (dangerous)", "points": ["Displacers: sulfonamides, ceftriaxone caution", "Prematurity, acidosis, haemolysis", "Kernicterus risk at lower totals"]
+    }
+   }
+  },
+  {
+   "tx": "**Gilbert syndrome** (UGT1A1 promoter TA repeat, about thirty percent activity) affects five to ten percent, giving intermittent mild unconjugated jaundice with fasting, illness, exercise or stress, normal liver enzymes, haemolysis absent and reassurance as treatment (phenobarbitone historically lowers it by induction, never needed). It also unmasks irinotecan toxicity (SN-38 glucuronidation) and atazanavir jaundice pharmacogenetically, extending a benign variant into oncology prescribing.",
+   "say": "Gilbert syndrome gives mild unconjugated jaundice with fasting or illness and needs reassurance only. It unmasks irinotecan toxicity pharmacogenetically, extending a benign variant into oncology prescribing.",
+   "vis": null
+  },
+  {
+   "tx": "**Crigler-Najjar** grades UGT absence absolutely: type I (no activity) presents neonatal extreme unconjugated jaundice with kernicterus without phototherapy, exchange, lifelong phototherapy or liver transplantation (gene therapy investigational) and no phenobarbitone response; type II (partial, missense) survives with phenobarbitone induction lowering bilirubin by a quarter or more. The barbiturate response functionally separates them at the bedside before genetics returns.",
+   "say": "Crigler-Najjar type one has no enzyme activity and no phenobarbitone response, needing transplant pathways. Type two responds partially to phenobarbitone induction, separating them functionally at the bedside.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Syndrome", "UGT1A1 activity", "Phenobarbitone response"],
+    "rows": [
+     ["Gilbert", "About 30 percent", "Lowers (not needed clinically)"],
+     ["Crigler-Najjar II", "Partial (under 10 percent)", "Lowers by 25 percent plus"],
+     ["Crigler-Najjar I", "Absent", "None; transplant pathway"],
+     ["Dubin-Johnson and Rotor (conjugated)", "Normal conjugation, export or storage fails", "Not applicable (see next step)"]
+    ]
+   }
+  },
+  {
+   "tx": "Conjugated hereditary jaundices complete the set: **Dubin-Johnson** (MRP2 export absent) regurgitates conjugated bilirubin with a black liver (melanin like polymer pigment, not iron), gallbladder non visualisation historically and urinary coproporphyrin isomer I above eighty percent; Rotor (OATP1B uptake and storage failure) mimics it mildly without black liver and with total coproporphyrin raised differently. Both are benign, need no treatment, and punish unnecessary surgery when recognised late.",
+   "say": "Dubin-Johnson regurgitates conjugated bilirubin with a black liver, while Rotor mimics it mildly without black liver. Both are benign and punish unnecessary surgery when recognised late.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Dubin-Johnson (MRP2 absent)", "points": ["Black liver pigment", "Coproporphyrin I dominant in urine", "Gallbladder non visualisation classic"]},
+    "right": {"title": "Rotor (OATP uptake failure)", "points": ["No black liver", "Total coproporphyrin raised", "Milder, benign"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
