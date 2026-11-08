@@ -79,7 +79,9 @@ try {
   ok(await ev(`return !!document.querySelector('#smdTokos [data-act=sim][data-s=osce]');`) === true, "Test hub lists the OSCE link");
   await ev(`TOKOS.back(); return 1;`);
   ok(await until(`return !TOKOS.isOpen();`, 5000), "back() closes Tokós and returns to home");
-  ok(await ev(`var a=document.activeElement; return !!(a && a.matches && a.matches('.rnav-tile[data-act=tokos]'));`) === true, "closing Tokós returns focus to the tile that opened it");
+  const focusNow = await ev(`var a=document.activeElement; return JSON.stringify({ok: !!(a && a.matches && a.matches('.rnav-tile[data-act=tokos]')), tag: a && a.tagName, id: a && a.id, cls: a && String(a.className).slice(0, 80), act: a && a.getAttribute && a.getAttribute("data-act"), inDoc: !!(document.querySelector('.rnav-tile[data-act=tokos]'))});`);
+  const focusInfo = JSON.parse(focusNow);
+  ok(focusInfo.ok === true, "closing Tokós returns focus to the tile that opened it (focus on " + [focusInfo.tag, focusInfo.id, focusInfo.act, focusInfo.cls].filter(Boolean).join(" ") + "; tokos tile in DOM: " + focusInfo.inDoc + ")");
   ok(await ev(`return !document.getElementById("smdTokos") || !document.getElementById("smdTokos").offsetParent;`) === true, "overlay is gone");
   await ev(`SMD_openRoute("tokos"); return 1;`);
   ok(await until(`return TOKOS.isOpen();`, 5000), "default: stewardmd://tokos (SMD_openRoute) opens Tokós");
