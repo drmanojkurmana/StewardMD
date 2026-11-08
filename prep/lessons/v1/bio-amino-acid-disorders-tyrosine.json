@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "bio-amino-acid-disorders",
+ "subject": "biochemistry",
+ "title": "Tyrosine pathway disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Tyrosine catabolism steps downward through transamination, homogentisate formation, ring opening and final fumarate plus acetoacetate exit (both glucogenic and ketogenic, honouring tyrosine dual citizenship). Three famous blocks punctuate the road: **homogentisate oxidase** (alkaptonuria), fumarylacetoacetate hydrolase (tyrosinaemia type I), and the synthetic branch to melanin by tyrosinase (albinism). Order them by substrate accumulation and stems become maps, not trivia.",
+   "say": "Tyrosine breakdown exits to fumarate plus acetoacetate. Homogentisate oxidase, fumarylacetoacetate hydrolase and tyrosinase punctuate the road. Order them by accumulating substrate and stems become maps.",
+   "vis": {
+    "kind": "flow",
+    "title": "Tyrosine road with three blocks",
+    "nodes": [
+     {
+      "id": "tyr",
+      "label": "Tyrosine"
+     },
+     {
+      "id": "hom",
+      "label": "Homogentisate (alkaptonuria block)"
+     },
+     {
+      "id": "fum",
+      "label": "Fumarylacetoacetate (type I block)"
+     },
+     {
+      "id": "out",
+      "label": "Fumarate plus acetoacetate"
+     }
+    ],
+    "edges": [
+     [
+      "tyr",
+      "hom"
+     ],
+     [
+      "hom",
+      "fum"
+     ],
+     [
+      "fum",
+      "out"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alkaptonuria** excretes homogentisic acid that oxidises black on standing (nappies staining, urine darkening with alkali or time), while polymerised pigment (ochronosis) deposits blue black in sclerae, ear cartilage and heart valves and destroys spine and large joint cartilage from the thirties. Back pain with disc calcification in a young adult plus dark urine history is the adult stem; nitisinone (upstream blockade) and vitamin C strategies remain specialist territory.",
+   "say": "Alkaptonuria blackens urine on standing, while ochronosis deposits blue black pigment in sclerae and cartilage, destroying spine and joints from the thirties. Young back pain plus dark urine is the adult stem.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-amino-acid-disorders-gen2.webp",
+    "alt": "Close eye view shows patchy blue black scleral pigment labelled ochronotic pigmentation.",
+    "caption": "Blue black scleral ochronosis in alkaptonuria, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Tyrosinaemia type I** is the dangerous infant block: fumarylacetoacetate hydrolase failure accumulates succinylacetone (pathognomonic in blood and urine), injuring liver (failure, cirrhosis, hepatocellular carcinoma), kidney tubules (Fanconi, rickets) and porphyrin synthesis (ALA dehydratase inhibition causing abdominal and neuropathic crises mimicking porphyria). Cabbage like odour, coagulopathy out of proportion to transaminases, and high alpha fetoprotein complete bedside recognition.",
+   "say": "Tyrosinaemia type one accumulates succinylacetone, injuring liver and kidney tubules and mimicking porphyria. Coagulopathy out of proportion plus high alpha fetoprotein completes bedside recognition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type I injury",
+     "Mechanism flag"
+    ],
+    "rows": [
+     [
+      "Liver failure, cancer risk",
+      "Succinylacetone toxicity"
+     ],
+     [
+      "Renal Fanconi, rickets",
+      "Tubule poisoning"
+     ],
+     [
+      "Porphyria like crises",
+      "ALA dehydratase inhibited"
+     ],
+     [
+      "Diagnosis",
+      "Succinylacetone present (pathognomonic)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nitisinone** rescues type I by blocking 4-hydroxyphenylpyruvate dioxygenase upstream, preventing toxic metabolite formation at the price of raised tyrosine (diet managed, corneal crystal risk monitored), converting a lethal infant disease into chronic care with liver surveillance. Type II tyrosinaemia (transaminase failure) instead gives painful palmoplantar keratosis and photophobia with corneal dendrites (Richner-Hanhart) and variable learning difficulty, treated by tyrosine and phenylalanine restriction.",
+   "say": "Nitisinone blocks upstream and rescues type one at the price of raised tyrosine. Type two gives painful palmoplantar keratosis and photophobia with corneal dendrites, treated by dietary restriction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tyrosinaemia type I (hydrolase)",
+     "points": [
+      "Liver and kidney failure",
+      "Succinylacetone diagnostic",
+      "Nitisinone plus surveillance"
+     ]
+    },
+    "right": {
+     "title": "Tyrosinaemia type II (transaminase)",
+     "points": [
+      "Eyes and skin dominate",
+      "Corneal dendrites, keratoderma",
+      "Diet restriction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Albinism** leaves catabolism untouched and fails synthesis: tyrosinase (or melanosome transport) failure removes melanin, giving white or fair skin and hair, translucent irides, nystagmus, photophobia, foveal hypoplasia with reduced acuity and misrouted optic fibres, plus lifelong skin cancer vigilance. Hermansky-Pudlak adds platelet dense granule bleeding (and pulmonary fibrosis in adults), Chediak-Higashi adds giant lysosomal granules with immunodeficiency and silvery hair, separations worth one deliberate comparison.",
+   "say": "Albinism fails melanin synthesis, giving nystagmus, photophobia and misrouted optic fibres. Hermansky-Pudlak adds bleeding, while Chediak-Higashi adds immunodeficiency with silvery hair and giant granules.",
+   "vis": null
+  },
+  {
+   "tx": "**Transient neonatal tyrosinaemia** of prematurity (immature dioxygenase, high protein feeds, vitamin C responsive cofactor support historically) resolves and must not be confused with type I; succinylacetone separates them absolutely. Close the tyrosine road forwards: dopamine, thyroid hormone and melanin synthesis branches explain why one amino acid reaches neurology, endocrinology and dermatology stems simultaneously in finals.",
+   "say": "Transient neonatal tyrosinaemia resolves and succinylacetone separates it absolutely from type one. Dopamine, thyroid hormone and melanin branches explain why tyrosine reaches three specialties simultaneously.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tyrosine branch",
+     "Product",
+     "Disorder flag"
+    ],
+    "rows": [
+     [
+      "Catabolism to fumarate",
+      "Energy intermediates",
+      "Alkaptonuria, tyrosinaemias"
+     ],
+     [
+      "Melanin synthesis",
+      "Pigment, eye development",
+      "Albinism spectrum"
+     ],
+     [
+      "Catechol and thyroid (shared origin)",
+      "Dopamine, thyroxine",
+      "Cross refs specialised products"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

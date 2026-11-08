@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Red cell glycolysis, 2,3-BPG and lactate",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Mature red cells have discarded their nucleus and mitochondria, so **anaerobic glycolysis** is their only way to make ATP. That ATP runs the sodium potassium pump that holds cell volume and shape steady for about 120 days. Glucose enters freely through GLUT1, and almost all of it ends as lactate exported to plasma for the liver to reclaim.",
+   "say": "Mature red cells have no mitochondria, so anaerobic glycolysis is their only way to make ATP. That ATP runs the sodium potassium pump that holds volume and shape for about 120 days. Glucose enters through GLUT1 and almost all of it ends as exported lactate.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Red cell need", "Glycolysis product", "Failure if ATP falls"],
+    "rows": [
+     ["Ion pumping", "ATP for Na/K ATPase", "Swelling or shrinkage, early removal"],
+     ["Membrane flexibility", "ATP for shape control", "Rigid cells trapped by spleen"],
+     ["Glutathione defence", "NADPH from HMP shunt", "Oxidant haemolysis (see minor pathways)"]
+    ]
+   }
+  },
+  {
+   "tx": "A side loop called the **Rapoport-Luebering shunt** diverts 1,3-bisphosphoglycerate into 2,3-bisphosphoglycerate, the regulator that loosens haemoglobin grip on oxygen. Each diverted triose sacrifices the ATP that phosphoglycerate kinase would have made, so heavy shunting trades energy for oxygen delivery. At high altitude and in anaemia the shunt expands, shifting the dissociation curve rightward within a day or two.",
+   "say": "The Rapoport-Luebering shunt diverts 1,3-bisphosphoglycerate into 2,3-bisphosphoglycerate, which loosens haemoglobin grip on oxygen. Each diverted triose sacrifices one ATP, so heavy shunting trades energy for oxygen delivery. At altitude and in anaemia the shunt expands and shifts the curve rightward.",
+   "vis": {
+    "kind": "flow",
+    "title": "The shunt trade",
+    "nodes": [
+     {"id": "b13", "label": "1,3-Bisphosphoglycerate"},
+     {"id": "b23", "label": "2,3-BPG (oxygen release)"},
+     {"id": "pg3", "label": "3-Phosphoglycerate rejoins"},
+     {"id": "cost", "label": "Cost: one ATP forgone"}
+    ],
+    "edges": [["b13", "b23"], ["b23", "pg3"], ["b13", "cost"]]
+   }
+  },
+  {
+   "tx": "Stored bank blood gradually loses **2,3-BPG**, so freshly transfused cells initially hold oxygen tightly and release it poorly despite a normal haemoglobin level. Function recovers as the shunt rebuilds the molecule over the next day. Fetal haemoglobin binds this regulator weakly, which keeps fetal blood left shifted and helps it draw oxygen across the placenta from maternal blood.",
+   "say": "Stored bank blood gradually loses 2,3-BPG, so transfused cells hold oxygen tightly at first and release it poorly. Function recovers as the shunt rebuilds the molecule over the next day. Fetal haemoglobin binds it weakly, keeping fetal blood left shifted to draw oxygen across the placenta.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "High 2,3-BPG (altitude, anaemia)", "points": ["Curve shifts right", "Oxygen released easily", "Affinity falls, unloading rises"]},
+    "right": {"title": "Low 2,3-BPG (stored blood, HbF)", "points": ["Curve shifts left", "Oxygen held tightly", "Affinity rises, unloading falls"]
+    }
+   }
+  },
+  {
+   "tx": "Whenever pyruvate cannot enter mitochondria fast enough, **lactate dehydrogenase** reduces it to lactate and thereby regenerates the NAD that glycolysis consumes. Muscle isoform M4 favours lactate formation during sprints, while heart isoform H4 favours lactate consumption as fuel. Exported lactate is not waste: liver, heart and kidney cortex oxidise it or rebuild it into glucose.",
+   "say": "When pyruvate cannot enter mitochondria fast enough, lactate dehydrogenase reduces it to lactate and regenerates the NAD that glycolysis consumes. Muscle favours lactate formation during sprints, while heart favours burning lactate as fuel. Exported lactate is reclaimed by liver, heart and kidney.",
+   "vis": null
+  },
+  {
+   "tx": "Lactate becomes a clinical alarm when production overwhelms clearance, most often because tissues lack oxygen in shock or sepsis. The **lactate to pyruvate ratio** helps separate hypoxic accumulation, where NADH is high and the ratio climbs, from pyruvate dehydrogenase failure, where both metabolites rise together. Thiamine deficiency, metformin and liver failure all impair clearance and must be considered beside hypoperfusion.",
+   "say": "Lactate alarms clinicians when production overwhelms clearance, most often because tissues lack oxygen in shock or sepsis. The lactate to pyruvate ratio separates hypoxic accumulation from dehydrogenase failure. Thiamine deficiency, metformin and liver failure all impair clearance beside hypoperfusion.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Setting", "Lactate pattern", "Core problem"],
+    "rows": [
+     ["Shock and sepsis", "High lactate, high ratio", "Oxygen delivery fails"],
+     ["Thiamine deficiency", "Lactate and pyruvate both high", "PDH cannot run"],
+     ["Metformin, liver failure", "Clearance falls", "Liver cannot reclaim lactate"],
+     ["Hard exercise, seizures", "Brief rise, clears fast", "Production spike only"]
+    ]
+   }
+  },
+  {
+   "tx": "The liver closes the loop through the **Cori cycle**, spending six ATP equivalents to rebuild glucose from two muscle lactates that earned muscle only two ATP. The cycle therefore buys burst power at a net energy loss settled later during rest. Kidney cortex joins glucose rebuilding in prolonged fasting and acidosis, while red cell lactate continuously feeds the same hepatic machinery.",
+   "say": "The liver closes the loop through the Cori cycle, spending six ATP equivalents to rebuild glucose from lactate that earned muscle only two. The cycle buys burst power at a net loss settled during rest. Kidney cortex joins glucose rebuilding in prolonged fasting.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cori cycle in four moves",
+    "nodes": [
+     {"id": "mus", "label": "Muscle makes lactate (gain 2 ATP)"},
+     {"id": "blood", "label": "Lactate travels in blood"},
+     {"id": "liv", "label": "Liver rebuilds glucose (cost 6)"},
+     {"id": "back", "label": "Glucose returns to muscle"}
+    ],
+    "edges": [["mus", "blood"], ["blood", "liv"], ["liv", "back"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,248 @@
+{
+  "id": "pnr-dravet-syndrome",
+  "title": "Dravet Syndrome: Genetics, Triggers and Drug Contraindications",
+  "subject": "ss-paediatric-neurology",
+  "module": "Pediatric Epilepsy Syndromes and Status Epilepticus",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Dravet syndrome arises in the vast majority of infants from loss of function mutations in the principal voltage-gated sodium channel alpha subunit.",
+      "tx": "Identify the **SCN1A loss-of-function mutation** as the primary molecular hallmark in severe myoclonic epilepsy of infancy. Over 80-85% of affected children harbour de novo loss-of-function mutations in SCN1A on chromosome 2q24, which encodes the pore-forming alpha subunit of the Nav1.1 voltage-gated sodium channel. Because Nav1.1 is preferentially expressed on GABAergic parvalbumin-positive interneurons, impaired sodium current severely attenuates inhibitory drive throughout developing neocortical and hippocampal networks (Initial seizure presentation).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Genetic Finding",
+          "Pathophysiologic Impact"
+        ],
+        "rows": [
+          [
+            "Gene locus",
+            "SCN1A (2q24)",
+            "Heterozygous de novo loss-of-function mutation in 80-85%"
+          ],
+          [
+            "Channel affected",
+            "Nav1.1 alpha subunit",
+            "Voltage-gated sodium channel essential for rapid depolarisation"
+          ],
+          [
+            "Cellular target",
+            "GABAergic interneurons",
+            "Selectively reduces inhibitory interneuron output leading to hyperexcitability"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The initial seizure presentation typically unfolds during the first year of life as prolonged hemiclonic convulsions following mild fever.",
+      "tx": "Evaluate the **Initial seizure presentation** appearing in previously healthy infants between 5-8 months of age. The earliest clinical manifestation typically presents as prolonged febrile or afebrile hemiclonic or generalized clonic status epilepticus. Neurodevelopment and baseline interictal electroencephalograms remain entirely normal during this first infancy phase, which frequently leads clinicians to misclassify the event as a complicated febrile seizure until recurrent episodes manifest (Thermal and environmental triggers).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Normal development (0-5 months)"
+          },
+          {
+            "id": "n2",
+            "label": "First prolonged hemiclonic seizure (peak 5-8 months)"
+          },
+          {
+            "id": "n3",
+            "label": "Recurrent febrile & afebrile status epilepticus"
+          },
+          {
+            "id": "n4",
+            "label": "Developmental plateau & myoclonic jerks (1-4 years)"
+          }
+        ],
+        "edges": [
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n3",
+            "n4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A striking hallmark of Dravet syndrome is exquisite sensitivity to thermal and environmental triggers that precipitate status epilepticus.",
+      "tx": "Recognise characteristic **Thermal and environmental triggers** that prompt seizure clusters and refractory status epilepticus. Paroxysms are consistently provoked by modest body temperature elevation, including infectious fever, warm water baths, elevated ambient temperatures, and strenuous physical exertion. Furthermore, non-thermal environmental stimuli such as visual patterns, flickering light grids, geometric wallpaper, and rapid transitions from darkness into bright sunlight can trigger reflex myoclonic jerks or focal convulsions (Sodium channel blocker contraindication).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trigger Category",
+          "Specific Stimulus",
+          "Preventive Precaution"
+        ],
+        "rows": [
+          [
+            "Thermal",
+            "Warm bath or ambient heat",
+            "Maintain bath water at or below body temperature (lukewarm)"
+          ],
+          [
+            "Infection",
+            "Low-grade fevers or post-vaccination",
+            "Aggressive antipyresis with paracetamol and scheduled clobazam"
+          ],
+          [
+            "Visual / Photic",
+            "Flickering lights or geometric stripes",
+            "Avoid patterned wallpaper, strobe lighting, and polarized sunglasses"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sodium channel blockers are absolutely contraindicated in Dravet syndrome because shutting down remaining sodium channels worsens seizures.",
+      "tx": "Enforce the absolute **Sodium channel blocker contraindication** across emergency departments and primary pediatric clinics. Sodium channel-blocking anti-seizure medications including carbamazepine, oxcarbazepine, phenytoin, fosphenytoin, lamotrigine, and vigabatrin must be rigorously avoided. Because Nav1.1 interneuron firing is already defective, administering these drugs further suppresses remaining inhibitory neurotransmission, triggering life-threatening status epilepticus, severe choreoathetosis, and precipitous cognitive regression (First-line maintenance therapy).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Contraindicated Sodium Blockers",
+          "points": [
+            "Carbamazepine and oxcarbazepine",
+            "Phenytoin and fosphenytoin",
+            "Lamotrigine and vigabatrin",
+            "Precipitate refractory status epilepticus and worsen myoclonus"
+          ]
+        },
+        "right": {
+          "title": "Permitted Antiseizure Drugs",
+          "points": [
+            "Sodium valproate and clobazam",
+            "Stiripentol and fenfluramine",
+            "Cannabidiol and topiramate",
+            "Enhance GABAergic tone without blocking Nav1.1 sodium channels"
+          ]
+        }
+      }
+    },
+    {
+      "say": "First line maintenance therapy relies on combining clobazam with sodium valproate to stabilise cortical excitability.",
+      "tx": "Initiate **First-line maintenance therapy** combining optimized doses of clobazam and sodium valproate as soon as genetic or clinical diagnosis is established. Sodium valproate is titrated to 20-40 mg/kg/day divided into twice-daily dosing, providing broad-spectrum inhibition against generalized clonic and myoclonic seizures. Clobazam is co-administered at 0.5-1 mg/kg/day, acting as a positive allosteric modulator at GABAA receptors to suppress prolonged convulsive clusters and reduce status epilepticus recurrence (Stiripentol triple combination).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Maintenance Agent",
+          "Standard Target Dosage",
+          "Mechanism & Clinical Target"
+        ],
+        "rows": [
+          [
+            "Sodium valproate",
+            "20-40 mg/kg/day divided BID",
+            "Broad-spectrum GABA augmentation and T-type calcium inhibition"
+          ],
+          [
+            "Clobazam",
+            "0.5-1 mg/kg/day divided BID",
+            "1,5-benzodiazepine GABAA modulation reducing seizure duration"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adding stiripentol forms a proven triple therapy that markedly reduces prolonged seizures and emergency admissions.",
+      "tx": "Prescribe the **Stiripentol triple combination** when convulsive seizures persist despite optimized baseline valproate and clobazam. Stiripentol is dosed at 50 mg/kg/day in two to three divided doses taken with meals. It exerts a dual mechanism: direct barbiturate-like enhancement of GABAA receptor open-channel time, and potent metabolic inhibition of CYP2C19 and CYP3A4, which increases circulating active clobazam and norclobazam levels, achieving greater than 70% reduction in prolonged seizures (Fenfluramine 5-HT receptor agonist).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Valproate + Clobazam baseline"
+          },
+          {
+            "id": "m2",
+            "label": "Add Stiripentol 50 mg/kg/day"
+          },
+          {
+            "id": "m3",
+            "label": "Direct GABAA opening & CYP2C19 inhibition"
+          },
+          {
+            "id": "m4",
+            "label": ">70% reduction in prolonged status events"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2"
+          ],
+          [
+            "m2",
+            "m3"
+          ],
+          [
+            "m3",
+            "m4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Fenfluramine has emerged as a potent therapeutic agent that modulates serotonin pathways but requires cardiac surveillance.",
+      "tx": "Incorporate **Fenfluramine 5-HT receptor agonist** therapy as modern second-line disease modification in refractory Dravet syndrome. Dosed at 0.2-0.7 mg/kg/day (maximum 26 mg/day, or 17 mg/day if combined with stiripentol), fenfluramine acts via 5-HT1D, 5-HT2A, and 5-HT2C serotonergic agonism alongside sigma-1 receptor modulation. Due to historical associations with anorectic agents, baseline and serial 6-monthly echocardiograms are mandated to monitor for cardiac valvulopathy and pulmonary arterial hypertension (Cannabidiol adjunct).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Clinical Specification",
+          "Safety Directive"
+        ],
+        "rows": [
+          [
+            "Dosing range",
+            "0.2-0.7 mg/kg/day (max 26 mg/day)",
+            "Cap at 0.2 mg/kg/day (max 17 mg) if co-administered with stiripentol"
+          ],
+          [
+            "Mechanism",
+            "5-HT2 receptor and sigma-1 modulation",
+            "Promotes central serotonergic suppression of reflex seizures"
+          ],
+          [
+            "Monitoring protocol",
+            "Transthoracic echocardiography",
+            "Obtain baseline echocardiogram and repeat every 6 months during treatment"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Purified cannabidiol provides effective adjunctive reduction in convulsive seizures while necessitating baseline liver enzyme checks.",
+      "tx": "Utilize **Cannabidiol adjunct** formulation to further suppress refractory convulsive events in children two years of age and older. Highly purified oral cannabidiol is initiated at 5 mg/kg/day and titrated weekly to a target maintenance dose of 10-20 mg/kg/day divided twice daily. Placebo-controlled trials demonstrate significant reductions in convulsive seizure frequency and drop attacks; however, baseline and regular serum transaminases and total bilirubin must be tracked due to heightened risk of hepatotoxicity when combined with valproate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cannabidiol Benefits",
+          "points": [
+            "Reduces monthly convulsive seizures by 40-50%",
+            "Improves alertness and overall caregiver global impression",
+            "Effective oral solution twice daily with food"
+          ]
+        },
+        "right": {
+          "title": "Monitoring Mandate",
+          "points": [
+            "Serum transaminases (ALT, AST) at baseline, 1, 3, and 6 months",
+            "Elevated risk of transaminitis when paired with valproate",
+            "Monitor somnolence when co-prescribed with clobazam"
+          ]
+        }
+      }
+    }
+  ]
+}

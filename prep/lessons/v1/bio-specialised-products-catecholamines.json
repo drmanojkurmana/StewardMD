@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-specialised-products",
+ "subject": "biochemistry",
+ "title": "Catecholamine synthesis and breakdown",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Catecholamines descend from tyrosine in four steps: **tyrosine hydroxylase** (BH4, rate limiting, feedback inhibited by dopamine) makes L-DOPA, DOPA decarboxylase (PLP, ubiquitous) makes dopamine, dopamine beta-hydroxylase (vitamin C, copper, inside vesicles) makes noradrenaline, and PNMT (SAM methyl, cortisol induced, adrenal medulla) makes adrenaline. Each cofactor is a vitamin or mineral from earlier modules wearing a new hat.",
+   "say": "Tyrosine hydroxylase limits the chain to dopamine, noradrenaline, then adrenaline by PNMT under cortisol. Each cofactor is a vitamin or mineral wearing a new hat in sequence.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-specialised-products-gen1.webp",
+    "alt": "Pathway diagram shows tyrosine to adrenaline through DOPA dopamine and noradrenaline with cofactors labelled.",
+    "caption": "Tyrosine to adrenaline chain with cofactors, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Vesicles concentrate transmitters through VMAT, protect them from monoamine oxidase, and release them by calcium triggered fusion; cocaine and amphetamines hijack the plasma membrane dopamine transporter (DAT) in reward circuits, while reserpine depletes VMAT stores (historic hypertension therapy and depression lesson). Parkinson disease loses nigral dopamine neurons, and **L-DOPA** (crossing the blood brain barrier where dopamine cannot) plus carbidopa (peripheral decarboxylase blockade) remains its cornerstone replacement.",
+   "say": "Vesicles protect transmitters from oxidase until release. Parkinson disease loses nigral dopamine neurons, and L-DOPA plus carbidopa remains its cornerstone because dopamine itself cannot cross into brain.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Station", "Drug or disease lever"],
+    "rows": [
+     ["Tyrosine hydroxylase", "Metyrosine blocks (phaeochromocytoma adjunct)"],
+     ["VMAT storage", "Reserpine depletes; tetrabenazine in chorea"],
+     ["DAT reuptake", "Cocaine blocks; stimulants reverse"],
+     ["DOPA replacement", "L-DOPA plus carbidopa in Parkinson disease"]
+    ]
+   }
+  },
+  {
+   "tx": "Breakdown runs on COMT (SAM dependent methylation) and **MAO** (mitochondrial deamination, A preferring serotonin and noradrenaline, B preferring phenethylamine, both hitting dopamine in humans) in either order, ending as vanillylmandelic acid (VMA) from adrenaline and noradrenaline and homovanillic acid (HVA) from dopamine. MAO inhibitors risk hypertensive crisis with tyramine foods (cheese effect) because gut MAO-A normally destroys dietary pressor amines.",
+   "say": "COMT and monoamine oxidase end breakdown as VMA and HVA. MAO inhibitors risk hypertensive crisis with tyramine foods because gut oxidase normally destroys dietary pressor amines.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "COMT first ( periphery, liver)", "points": ["Metanephrines formed", "SAM consumed", "Plasma metanephrines most sensitive tumour test"]},
+    "right": {"title": "MAO first (neurons, gut)", "points": ["Aldehydes then acids (VMA, HVA)", "Tyramine crisis if blocked", "Antidepressant and Parkinson drug targets"]
+    }
+   }
+  },
+  {
+   "tx": "**Phaeochromocytoma** (adrenal medulla chromaffin tumour, paraganglioma extra adrenal) secretes noradrenaline, adrenaline or dopamine episodically: paroxysmal headache, palpitations, pallor, sweating and hypertension with orthostasis between spells, hyperglycaemia and weight loss. Plasma free metanephrines screen most sensitively (continuous tumour leakage), urine fractionated metanephrines and VMA confirm, clonidine fails to suppress autonomous secretion, and alpha blockade (phenoxybenzamine or doxazosin) plus fluids must precede any beta blockade or surgery to avoid unopposed alpha crisis.",
+   "say": "Phaeochromocytoma secretes episodically with headache, palpitations and hypertension spells. Plasma metanephrines screen most sensitively, and alpha blockade plus fluids must precede beta blockade or surgery.",
+   "vis": null
+  },
+  {
+   "tx": "Genetics modernised the tumour: roughly a third carry germline drivers (RET in MEN2, VHL, NF1, SDH subunits in paraganglioma syndromes with malignant and extra adrenal tendencies), so genetic testing follows biochemistry and imaging (CT/MRI, MIBG or DOTATATE functional scans for localisation and metastasis hunt). **Neuroblastoma**, the childhood counterpart, secretes dopamine metabolites (urine VMA and HVA raised) with opsoclonus myoclonus in a paraneoplastic subset, separating paediatric from adult stems.",
+   "say": "Roughly a third carry germline drivers including RET, VHL and SDH subunits, so genetic testing follows biochemistry and imaging. Neuroblastoma raises urine VMA and HVA in childhood counterpart stems.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Role in phaeochromocytoma"],
+    "rows": [
+     ["Plasma free metanephrines", "Most sensitive screen"],
+     ["Urine metanephrines plus VMA", "Confirmation, 24 hour pattern"],
+     ["CT or MRI, then functional imaging", "Localise, hunt metastases"],
+     ["Germline genetics (RET, VHL, SDH)", "Syndromes, family screening"]
+    ]
+   }
+  },
+  {
+   "tx": "Adrenal medulla physiology explains proportions worth quoting: about eighty percent adrenaline output (cortisol portal flow induces **PNMT**), splanchnic cholinergic drive through nicotinic receptors and chromaffin calcium release, and stress hyperglycaemia through hepatic glycogenolysis and lipolysis support. Pheochromocytoma in pregnancy, MEN2 prophylactic thyroidectomy timing, and SDH malignant paraganglioma surveillance are the applied extensions tutors probe after the pathway is secure.",
+   "say": "About eighty percent of medulla output is adrenaline because cortisol induces PNMT through portal flow. Syndrome surveillance and pregnancy management are the applied extensions tutors probe after the pathway.",
+   "vis": {
+    "kind": "flow",
+    "title": "Medulla output logic",
+    "nodes": [
+     {"id": "cort", "label": "Cortisol portal flow induces PNMT"},
+     {"id": "adr", "label": "Adrenaline about 80 percent output"},
+     {"id": "spl", "label": "Splanchnic drive releases on stress"},
+     {"id": "met", "label": "Metanephrines leak continuously (test)"}
+    ],
+    "edges": [["cort", "adr"], ["spl", "adr"], ["adr", "met"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

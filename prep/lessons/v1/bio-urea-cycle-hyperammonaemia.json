@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "module": "bio-urea-cycle",
+ "subject": "biochemistry",
+ "title": "Hyperammonaemia and orotic aciduria",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Ornithine transcarbamoylase deficiency**, the commonest cycle defect (X linked, so boys devastate neonatally while carrier girls and women decompensate with illness, childbirth or valproate), blocks citrulline formation so carbamoyl phosphate spills into cytosolic pyrimidine synthesis and orotic acid floods urine. Ammonia and glutamine soar, citrulline and arginine fall, respiratory alkalosis from hyperventilation appears early, and coma without acidosis separates cycle failure from organic acidaemias.",
+   "say": "Ornithine transcarbamoylase deficiency spills carbamoyl phosphate into pyrimidines, flooding urine with orotic acid. Ammonia soars with low citrulline and respiratory alkalosis, separating cycle failure from organic acidaemias.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Block",
+     "Orotic acid",
+     "Citrulline",
+     "Discriminator"
+    ],
+    "rows": [
+     [
+      "OTC deficiency",
+      "High",
+      "Low",
+      "X linked, commonest"
+     ],
+     [
+      "CPS-I deficiency",
+      "Low",
+      "Low",
+      "No pyrimidine spill"
+     ],
+     [
+      "NAGS deficiency",
+      "Low",
+      "Low",
+      "Carglumic acid curative"
+     ],
+     [
+      "UMP synthase (pyrimidine defect)",
+      "High",
+      "Normal, ammonia normal",
+      "Megaloblastic anaemia instead"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Newborn cycle crises mimic sepsis relentlessly: poor feeding, lethargy, hyperventilation, hypothermia then coma and cerebral oedema after one to two protein feeding days, with mothers sometimes reporting prior sibling deaths. Any encephalopathic neonate earns an **ammonia** level drawn free flowing without tourniquet delay, alongside glucose, gases and lactate, because hours determine cognitive outcome more than the eventual gene name.",
+   "say": "Newborn cycle crises mimic sepsis with poor feeding, hyperventilation and coma after protein feeding days. Any encephalopathic neonate earns an immediate ammonia level, because hours determine cognitive outcome.",
+   "vis": {
+    "kind": "flow",
+    "title": "Encephalopathic neonate: ammonia first",
+    "nodes": [
+     {
+      "id": "enc",
+      "label": "Lethargy, poor feeding, hyperventilation"
+     },
+     {
+      "id": "amm",
+      "label": "STAT ammonia plus gases, glucose"
+     },
+     {
+      "id": "stop",
+      "label": "Stop protein, IV glucose (stop catabolism)"
+     },
+     {
+      "id": "scav",
+      "label": "Scavengers, arginine, dialysis if coma"
+     }
+    ],
+    "edges": [
+     [
+      "enc",
+      "amm"
+     ],
+     [
+      "amm",
+      "stop"
+     ],
+     [
+      "stop",
+      "scav"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute therapy buys brain time on four rails: stop protein briefly (twenty four to forty eight hours maximum) while infusing high rate **glucose** (plus intralipid) to reverse catabolism, give nitrogen scavengers (sodium benzoate conjugates glycine to hippurate; sodium phenylacetate or glycerol phenylbutyrate conjugates glutamine), supplement arginine except in arginase deficiency, and escalate to haemodialysis or continuous filtration when coma, cerebral oedema or refractory levels threaten.",
+   "say": "Therapy stops protein briefly with high rate glucose, scavenges nitrogen with benzoate and phenylacetate, and supplements arginine. Coma or cerebral oedema escalates to dialysis without delay.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Scavenger chemistry",
+     "points": [
+      "Benzoate plus glycine to hippurate (1 N out)",
+      "Phenylacetate plus glutamine (2 N out)",
+      "Urine carries nitrogen past the block"
+     ]
+    },
+    "right": {
+     "title": "Escalation triggers",
+     "points": [
+      "Coma or cerebral oedema signs",
+      "Ammonia refractory or climbing",
+      "Haemodialysis or continuous filtration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Valproate** unmasks latent cycle failure by inhibiting N-acetylglutamate synthesis and carnitine handling, so unexplained encephalopathy on valproate (especially young girls, POLG disease, or known OTC carriers) demands ammonia measurement and drug withdrawal, with L-carnitine and carglumic acid as directed rescue. Topiramate and asparaginase share smaller ammonia signals worth recognising in examination drug lists.",
+   "say": "Valproate unmasks latent cycle failure, so encephalopathy on valproate demands ammonia measurement and drug withdrawal. Young girls and OTC carriers are classic victims. Carnitine and carglumic acid rescue as directed.",
+   "vis": null
+  },
+  {
+   "tx": "**Chronic management** prevents the next crisis: measured protein restriction with essential amino acid and citrulline or arginine supplementation, daily oral scavengers, sick day regimens (glucose polymers, early presentation), vaccination and fever plans, MedicAlert identification, and avoidance of valproate and prolonged fasting. Liver transplantation cures the metabolic defect in severe early disease, trading immunological for metabolic follow up deliberately.",
+   "say": "Chronic care restricts protein measurably, continues oral scavengers, and plans sick days in advance. Liver transplantation cures severe defects deliberately, trading immunological for metabolic follow up.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Chronic rail",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Protein prescription plus citrulline/arginine",
+      "Grow without ammonia excursions"
+     ],
+     [
+      "Daily scavengers (glycerol phenylbutyrate etc.)",
+      "Steady nitrogen bypass"
+     ],
+     [
+      "Sick day glucose plan, no prolonged fasts",
+      "Prevent catabolic crises"
+     ],
+     [
+      "Avoid valproate; alert cards",
+      "Remove unmasking drugs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Contrast liver failure hyperammonaemia honestly: cirrhotic encephalopathy evolves over days with asterixis, precipitants (bleeding, infection, constipation, sedatives) and shunting, treated by lactulose and precipitant removal, whereas cycle crises explode over hours in structurally normal livers with extreme ammonia. Both swell astrocytes through **glutamine**, one molecule explaining two wards. Next, amino acid disorders move from nitrogen disposal to carbon skeleton blocks.",
+   "say": "Cirrhotic encephalopathy evolves over days with precipitants, while cycle crises explode over hours in normal livers. Both swell astrocytes through glutamine, one molecule explaining two wards.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cycle crisis",
+     "points": [
+      "Hours, extreme ammonia",
+      "Normal liver, respiratory alkalosis",
+      "Scavengers plus dialysis readiness"
+     ]
+    },
+    "right": {
+     "title": "Cirrhotic encephalopathy",
+     "points": [
+      "Days, precipitant driven",
+      "Shunting, liver failure signs",
+      "Lactulose, remove precipitant"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,150 @@
+{
+  "id": "pnp-nephrogenic-diabetes-insipidus",
+  "title": "Congenital Nephrogenic Diabetes Insipidus: AVPR2, AQP2 and Pharmacotherapy",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Tubulopathies, Polycystic Kidney Disease and Ciliopathies",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "X-linked mutations in the vasopressin V2 receptor cause the vast majority of congenital cases in young boys.",
+      "tx": "Analyze genetic mechanisms underlying **AVPR2 (X-linked) vs AQP2 (autosomal) genetics** in children with impaired water concentration. Congenital nephrogenic diabetes insipidus (NDI) results from end-organ renal unresponsiveness to arginine vasopressin (AVP); approximately 90% of cases are inherited in an X-linked recessive pattern due to loss-of-function mutations in the AVPR2 gene on chromosome Xq28, whereas 10% are caused by autosomal recessive or autosomal dominant mutations in the AQP2 water channel gene on chromosome 12q13.",
+      "vis": {
+        "kind": "table",
+        "title": "Genetic Subtypes of Congenital NDI",
+        "cols": ["Inheritance Mode", "Affected Gene", "Locus", "Frequency"],
+        "rows": [
+          ["X-linked recessive", "AVPR2 (V2 receptor)", "Xq28", "~90% of cases (males)"],
+          ["Autosomal recessive", "AQP2 (aquaporin-2)", "12q13.12", "~9% of cases (severe)"],
+          ["Autosomal dominant", "AQP2 (C-terminal)", "12q13.12", "~1% of cases (milder)"]
+        ]
+      }
+    },
+    {
+      "say": "Severe intracellular signaling defects prevent aquaporin-2 water channels from translocating to the apical cell surface.",
+      "tx": "Trace the impaired biochemical pathway in **Cellular mechanism: V2R, cAMP and AQP2 trafficking** defects. Under normal physiology, vasopressin binds basolateral V2 receptors in medullary collecting duct principal cells, stimulating adenylate cyclase to produce cyclic AMP (cAMP) and activate protein kinase A, which phosphorylates aquaporin-2 channels and drives their exocytic insertion into the apical membrane; mutations in AVPR2 disrupt cAMP generation, while AQP2 mutations impair protein folding, tetramerization, or trafficking.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "avp", "label": "AVP binds basolateral V2 Receptor"},
+          {"id": "camp", "label": "Gs activation -> Adenylate cyclase -> cAMP rise"},
+          {"id": "pka", "label": "Protein kinase A phosphorylates Aquaporin-2"},
+          {"id": "apic", "label": "Apical membrane insertion -> Water reabsorption"}
+        ],
+        "edges": [
+          ["avp", "camp"],
+          ["camp", "pka"],
+          ["pka", "apic"]
+        ]
+      }
+    },
+    {
+      "say": "Affected infants present within the first weeks of life with recurrent unexplained fevers, dehydration, and failure to thrive.",
+      "tx": "Recognize the presenting signs of **Infantile presentation: hypernatremic dehydration and fevers** during early neonatal life. Male infants with X-linked NDI typically present within the first few weeks of life with irritable crying, poor feeding, failure to thrive, persistent vomiting, constipation, and recurrent episodes of hypernatremic dehydration accompanied by unexplained fevers without an infectious source, as insensible water loss causes hypovolemia.",
+      "vis": {
+        "kind": "table",
+        "title": "Clinical Presentation Features of Infantile NDI",
+        "cols": ["Feature", "Mechanism", "Diagnostic Danger"],
+        "rows": [
+          ["Hypernatremic dehydration", "Massive hypotonic urinary loss", "Can cause cerebral venous thrombosis"],
+          ["Unexplained fevers", "Hypovolemia and impaired sweat dissipation", "Often misdiagnosed as neonatal sepsis"],
+          ["Failure to thrive", "Preference for water over milk/formula", "Severe caloric deprivation and growth stunting"],
+          ["Irritable polydipsia", "Intense thirst mechanism activation", "Cries relieved only by free water feeds"]
+        ]
+      }
+    },
+    {
+      "say": "Exogenous desmopressin fails to increase urine osmolality, confirming end-organ collecting duct resistance.",
+      "tx": "Interpret diagnostic testing to confirm **Diagnostic water deprivation and DDAVP unresponsiveness** safely. Diagnosis is confirmed by demonstrating dilute polyuria with low urine osmolality (< 100-200 mOsm/kg) in the presence of elevated serum osmolality (> 300 mOsm/kg) and hypernatremia; administration of exogenous desmopressin (dDAVP 0.1-0.2 mcg/kg IV or 1 mcg SC) fails to elicit an increase in urine osmolality (remains < 50% rise or < 300 mOsm/kg), definitively confirming end-organ renal resistance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Central Diabetes Insipidus",
+          "points": [
+            "Deficient hypothalamic AVP release",
+            "Urine osmolality rises > 50-100% after dDAVP",
+            "Urine volume drops dramatically"
+          ]
+        },
+        "right": {
+          "title": "Nephrogenic Diabetes Insipidus",
+          "points": [
+            "Normal or high circulating endogenous AVP",
+            "Failure of urine osmolality to rise after dDAVP (< 50%)",
+            "Persistent polyuria confirming collecting duct defect"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Thiazide diuretics induce mild hypovolemia that paradoxical reduces distal delivery of water and limits polyuria.",
+      "tx": "Implement pharmacological therapy utilizing **Thiazide diuretics paradoxical antidiuretic mechanism** to manage urine output. Hydrochlorothiazide (2-4 mg/kg/day) exerts a paradoxical antidiuretic effect by inhibiting sodium-chloride cotransporters in the distal convoluted tubule; this induces mild extracellular volume depletion, which stimulates compensatory proximal tubular sodium and water reabsorption, thereby diminishing fluid delivery to the defective collecting duct and reducing overall urine output by 30-50%.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "hctz", "label": "Hydrochlorothiazide inhibits distal NaCl cotransporter"},
+          {"id": "vol", "label": "Mild extracellular volume depletion occurs"},
+          {"id": "prox", "label": "Increased proximal sodium and water reabsorption"},
+          {"id": "out", "label": "Decreased distal fluid delivery: Urine volume drops 30-50%"}
+        ],
+        "edges": [
+          ["hctz", "vol"],
+          ["vol", "prox"],
+          ["prox", "out"]
+        ]
+      }
+    },
+    {
+      "say": "Non-steroidal anti-inflammatory drugs enhance antidiuresis by suppressing renal prostaglandins that antagonize vasopressin signaling.",
+      "tx": "Combine therapy with **Indomethacin synergistic therapy** to optimize clinical response. Indomethacin (1.5-3.0 mg/kg/day) acts synergistically with thiazides by inhibiting cyclooxygenase, reducing renal prostaglandin E2 synthesis; because PGE2 normally antagonizes vasopressin-mediated cAMP signaling and increases medullary blood flow, its suppression enhances collecting duct water permeability and promotes medullary hypertonicity.",
+      "vis": {
+        "kind": "table",
+        "title": "Dual Pharmacotherapy Synergy in NDI",
+        "cols": ["Medication", "Primary Target", "Physiological Synergy"],
+        "rows": [
+          ["Hydrochlorothiazide", "Distal convoluted tubule NCC", "Reduces fluid volume reaching collecting duct"],
+          ["Indomethacin", "Cyclooxygenase inhibition (PGE2 drop)", "Removes prostaglandin inhibition of water reabsorption"],
+          ["Amiloride", "Cortical collecting duct ENaC", "Prevents thiazide-induced hypokalemia"]
+        ]
+      }
+    },
+    {
+      "say": "Strict dietary solute restriction decreases the mandatory volume of urinary solvent required for excretion.",
+      "tx": "Enforce essential lifestyle and **Low-sodium, low-protein diet to reduce solute load** requirements. Dietary management focuses on a low-sodium diet (1 mEq/kg/day) and moderate protein restriction (adhering to minimum recommended intake for age) to minimize the daily osmolar load that the kidney must clear, which substantially decreases the obligatory urine volume required to maintain solute homeostasis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High Solute Intake",
+          "points": [
+            "High dietary sodium and excess protein intake",
+            "Generates large daily urea and electrolyte solute load",
+            "Mandates massive polyuria to excrete osmoles"
+          ]
+        },
+        "right": {
+          "title": "Low Solute Management",
+          "points": [
+            "Sodium restricted to 1 mEq/kg/day",
+            "Age-appropriate protein to meet growth needs",
+            "Decreases obligatory urinary water requirement"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Chronic high-volume polyuria produces progressive dilatation of the bladder, ureters, and renal collecting systems.",
+      "tx": "Monitor the urinary tract to prevent **Megacystis, megaureter and non-obstructive hydronephrosis** complications. Lifelong excretion of massive urine volumes (frequently 5-10 L/day in older children) creates functional overload of the urinary tract, leading to marked non-obstructive hydroureteronephrosis, progressive megacystis with bladder decompensation, and secondary renal parenchymal injury from elevated backpressure, necessitating scheduled bladder emptying regimens.",
+      "vis": {
+        "kind": "table",
+        "title": "Urinary Tract Structural Complications",
+        "cols": ["Pathology", "Mechanism", "Surveillance and Management"],
+        "rows": [
+          ["Megacystis", "Massive bladder volume accommodation", "Double-voiding protocols, intermittent catheterization"],
+          ["Megaureter", "High hydrodynamic flow backpressure", "Serial renal-bladder ultrasonography"],
+          ["Hydronephrosis", "Non-obstructive urinary tract distention", "Preserve low intravesical pressure"]
+        ]
+      }
+    }
+  ]
+}
