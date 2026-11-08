@@ -1,0 +1,226 @@
+{
+ "v": 1,
+ "module": "med-oesophagus",
+ "subject": "medicine",
+ "title": "Gastro-oesophageal reflux, Barrett metaplasia, and primary motor disorders",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Retrograde movement of gastric acid, pepsin, and bile salts into the oesophagus incites mucosal inflammation and bothersome symptoms. Developing **GERD** (gastro-oesophageal reflux disease) is driven primarily by transient lower oesophageal sphincter relaxations, hypotensive basal sphincter pressure, and hiatal hernia disrupting the anatomical antireflux barrier. Patients present with retrosternal burning pain (heartburn) exacerbated by meals or recumbency, acid regurgitation, water brash, and nocturnal cough. Complications include erosive reflux oesophagitis, peptic stricture with progressive dysphagia to solids, and respiratory microaspiration.",
+   "say": "Retrograde flow of gastric acid and bile into the oesophagus causes mucosal inflammation and classic symptoms. Developing gastro-oesophageal reflux disease arises primarily from transient lower sphincter relaxations, low basal tone and hiatal hernia. Patients report retrosternal heartburn provoked by meals or lying flat, acid regurgitation and chronic cough. Complications include mucosal erosions, peptic strictures and microaspiration.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gastroesophageal-reflux-disease-fig1.webp",
+    "alt": "GORD pathophysiology, lower oesophageal sphincter dysfunction, and complications.",
+    "caption": "Lower oesophageal sphincter barrier disruption and acid reflux pathophysiology. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Chronic mucosal acid-peptic exposure can drive adaptive phenotypic reprogramming of the distal oesophageal squamous epithelium. Developing **Barrett oesophagus** represents the premalignant replacement of normal stratified squamous epithelium by specialized columnar epithelium containing goblet cells (intestinal metaplasia) proximal to the gastro-oesophageal junction. Endoscopic surveillance utilizing Prague classification criteria (measuring circumferential and maximal extent) monitors for neoplastic progression. Patients with confirmed Barrett esophagus carry an approximately thirty-fold increased risk of developing invasive oesophageal adenocarcinoma, requiring serial quadrantic biopsies and surveillance.",
+   "say": "Chronic acid exposure drives adaptive cellular reprogramming of the distal oesophagus. Developing Barrett oesophagus represents the replacement of normal stratified squamous epithelium with specialized intestinal columnar epithelium containing goblet cells. Endoscopic surveillance maps the mucosal extent. Confirmed intestinal metaplasia carries a heightened risk of developing oesophageal adenocarcinoma, requiring serial biopsies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal distal oesophagus",
+     "points": [
+      "Stratified non-keratinizing squamous epithelium",
+      "Smooth, pale pink mucosal appearance",
+      "Coincides with anatomical gastro-oesophageal junction",
+      "Resistant to friction but vulnerable to acid"
+     ]
+    },
+    "right": {
+     "title": "Barrett metaplasia",
+     "points": [
+      "Specialized columnar epithelium with goblet cells",
+      "Salmon-pink velvety mucosal tongues",
+      "Extends proximally above gastro-oesophageal junction",
+      "Premalignant precursor to oesophageal adenocarcinoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Degeneration of the inhibitory postganglionic myenteric plexus impairs smooth muscle relaxation and peristaltic propagation. Pathophysiological development of **achalasia cardia** is caused by autoimmune or inflammatory loss of nitric oxide- and VIP-producing inhibitory neurons in the Auerbach plexus. As a consequence, the lower oesophageal sphincter fails to relax completely during swallowing, while the oesophageal body exhibits absent peristalsis. Patients present with insidious, progressive dysphagia to both solids and liquids from disease onset, regurgitation of undigested food, nocturnal coughing, and progressive weight loss.",
+   "say": "Degeneration of myenteric neurons impairs smooth muscle relaxation and coordinated peristalsis. Pathological development of achalasia cardia results from loss of inhibitory neurons in the Auerbach plexus. Consequently, the lower sphincter fails to relax on swallowing and normal peristalsis is lost. Patients present with progressive dysphagia to both solids and liquids together, nocturnal regurgitation and weight loss.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "neuron",
+      "label": "Loss of nitric oxide inhibitory myenteric neurons"
+     },
+     {
+      "id": "sphincter",
+      "label": "Incomplete lower oesophageal sphincter relaxation"
+     },
+     {
+      "id": "aperistalsis",
+      "label": "Aperistalsis of smooth muscle oesophageal body"
+     },
+     {
+      "id": "dilation",
+      "label": "Progressive food retention & mega-oesophagus dilation"
+     }
+    ],
+    "edges": [
+     [
+      "neuron",
+      "sphincter"
+     ],
+     [
+      "sphincter",
+      "aperistalsis"
+     ],
+     [
+      "aperistalsis",
+      "dilation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Contrast fluoroscopic barium swallow reveals classic morphologic signs of distal functional obstruction. Performing a barium examination in achalasia characteristically demonstrates a dilated, tortuous, aperistaltic oesophageal body with smooth, symmetrical, tapered narrowing at the gastro-oesophageal junction, classically described as the **bird beak sign**. In advanced mega-oesophagus, the distal lumen retains massive columns of food residue and secretions. An air-fluid level is visible on plain chest radiography, with an absent gastric air bubble due to failed sphincter opening during deglutition.",
+   "say": "Contrast barium fluoroscopy displays diagnostic morphological signs of distal obstruction. Performing a barium swallow in achalasia demonstrates a dilated, aperistaltic oesophageal body with smooth, tapered narrowing at the junction, termed the bird-beak sign. In advanced disease, retained food debris forms prominent fluid levels on chest radiographs, while the gastric air bubble is absent.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-swallow-achalasia-cardia.webp",
+    "alt": "Barium swallow radiograph demonstrating mega-oesophagus and smooth bird-beak tapering.",
+    "caption": "Classic bird-beak tapering and dilated aperistaltic body in achalasia cardia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "High-resolution pressure profiling across the oesophageal body and sphincter serves as the gold-standard diagnostic modality. Conducting high-resolution **oesophageal manometry** utilizes a solid-state catheter with pressure sensors spaced one centimeter apart to construct color topographical pressure plots. Under the Chicago Classification version 4, achalasia requires an elevated integrated relaxation pressure (IRP > 15 mmHg) confirming failed sphincter relaxation, accompanied by 100% failed peristalsis. Type I features classic aperistalsis; Type II features pan-oesophageal pressurization; Type III features premature, spastic contractions.",
+   "say": "High-resolution pressure recording along the oesophagus represents the definitive diagnostic modality. Performing oesophageal manometry utilizes closely spaced sensors to create topographical pressure maps. Under modern criteria, achalasia requires an elevated integrated relaxation pressure confirming failed sphincter opening, combined with absent peristalsis. The classification identifies three distinct subtypes based on contraction dynamics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Chicago classification subtype",
+     "Integrated relaxation pressure",
+     "Body peristaltic pattern",
+     "Response to therapy"
+    ],
+    "rows": [
+     [
+      "Type I (Classic achalasia)",
+      "Elevated (IRP > 15 mmHg)",
+      "Complete aperistalsis without pressurization",
+      "Good response to myotomy / dilation"
+     ],
+     [
+      "Type II (Pressurization)",
+      "Elevated (IRP > 15 mmHg)",
+      "Pan-oesophageal pressurization > 20%",
+      "Highest therapeutic success rate (> 90%)"
+     ],
+     [
+      "Type III (Spastic achalasia)",
+      "Elevated (IRP > 15 mmHg)",
+      "Premature spastic contractions >= 20%",
+      "Poorer response; requires POEM"
+     ],
+     [
+      "Distal oesophageal spasm",
+      "Normal (IRP <= 15 mmHg)",
+      "Premature contractions >= 20%",
+      "Responds to calcium blockers & nitrates"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Uncoordinated, simultaneous non-propulsive contractions of the distal oesophagus produce severe retrosternal chest pain mimicking angina. Developing **diffuse oesophageal spasm** (distal oesophageal spasm) arises from impaired inhibitory nitrergic innervation while basal sphincter tone remains normal. Patients present with episodic, non-cardiac retrosternal chest pain and dysphagia triggered by hot or cold liquids. Barium swallow displays simultaneous non-peristaltic tertiary contractions giving a characteristic corkscrew oesophagus appearance. On high-resolution manometry, distal latency is abnormally shortened (< 4.5 seconds) in >= 20% of swallows with normal integrated relaxation pressure.",
+   "say": "Uncoordinated simultaneous contractions of the distal oesophagus trigger chest pain mimicking angina. Developing diffuse oesophageal spasm stems from impaired nitrergic inhibition while sphincter relaxation remains intact. Patients experience episodic chest pain and dysphagia provoked by temperature extremes. Barium swallow demonstrates tertiary contractions known as a corkscrew appearance, while manometry confirms shortened contraction latency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Achalasia cardia",
+     "points": [
+      "Elevated IRP (> 15 mmHg) at lower sphincter",
+      "100% absent peristalsis in body",
+      "Bird-beak smooth tapering on barium",
+      "Dysphagia to solids and liquids from onset"
+     ]
+    },
+    "right": {
+     "title": "Diffuse oesophageal spasm",
+     "points": [
+      "Normal IRP at lower sphincter",
+      "Premature non-propulsive spasms (>= 20%)",
+      "Corkscrew or rosary-bead appearance on barium",
+      "Severe episodic non-cardiac chest pain"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Therapeutic interventions in achalasia focus on mechanically disrupting or pharmacologically relaxing the non-compliant lower sphincter. Endoscopic **pneumatic dilation** utilizes graded balloon catheters (30, 35, 40 mm) inflated to disrupt circular muscle fibres, achieving excellent symptomatic relief in over eighty percent of patients. Laparoscopic Heller myotomy surgically incises the anterior muscular ring across the lower oesophagus and gastric cardia, routinely combined with an anterior (Dor) or posterior (Toupet) partial fundoplication to prevent postoperative acid reflux. Peroral endoscopic myotomy (POEM) provides an incisionless endoscopic alternative.",
+   "say": "Therapeutic strategies in achalasia aim to mechanically disrupt or relax the non-compliant lower sphincter. Endoscopic pneumatic dilation uses graded balloons to tear circular muscle fibres, achieving high rates of symptomatic relief. Laparoscopic Heller myotomy surgically divides the lower sphincter muscle and is combined with partial fundoplication to prevent reflux. Endoscopic myotomy provides a scarless alternative.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eval",
+      "label": "Confirm achalasia via manometry & endoscopy"
+     },
+     {
+      "id": "dilation",
+      "label": "Pneumatic balloon dilation (low surgical risk)"
+     },
+     {
+      "id": "myotomy",
+      "label": "Laparoscopic Heller myotomy with partial fundoplication"
+     },
+     {
+      "id": "poem",
+      "label": "Peroral endoscopic myotomy (POEM; preferred in Type III)"
+     }
+    ],
+    "edges": [
+     [
+      "eval",
+      "dilation"
+     ],
+     [
+      "eval",
+      "myotomy"
+     ],
+     [
+      "eval",
+      "poem"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Temporary pharmacological relaxation of the lower oesophageal sphincter is reserved for elderly or frail surgical non-candidates. Injecting endoscopically guided **botulinum toxin** into the four quadrants of the lower oesophageal sphincter blocks presynaptic acetylcholine release from excitatory cholinergic nerve terminals, reducing resting sphincter tone. Although initial symptom relief exceeds eighty percent, duration of benefit is limited, with recurrence occurring in over half of patients by six to twelve months. Oral calcium channel blockers (nifedipine) and sublingual isosorbide dinitrate provide mild, short-term reduction in sphincter pressure.",
+   "say": "Temporary pharmacological reduction of sphincter tone is reserved for frail individuals unsuitable for surgery. Injecting botulinum toxin into the lower sphincter blocks presynaptic acetylcholine release, lowering resting pressure. Although immediate relief is high, symptom recurrence occurs within six to twelve months. Oral calcium channel blockers and nitrates offer mild short-term relief before meals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Botulinum toxin injection",
+     "points": [
+      "Injected into four quadrants of sphincter",
+      "Blocks acetylcholine release from cholinergic nerves",
+      "Temporary efficacy lasting 6 to 12 months",
+      "Reserved for elderly patients unfit for myotomy"
+     ]
+    },
+    "right": {
+     "title": "Oral smooth muscle relaxants",
+     "points": [
+      "Nifedipine (calcium channel blocker) before meals",
+      "Sublingual isosorbide dinitrate (nitric oxide donor)",
+      "Modest symptom reduction with frequent headache",
+      "Temporary bridge while awaiting definitive procedures"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

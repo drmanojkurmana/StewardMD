@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "med-malabsorption",
+ "subject": "medicine",
+ "title": "Coeliac disease: immunogenetics, histopathology, and clinical management",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Immune-mediated enteropathy triggered by ingestion of dietary gluten in genetically susceptible individuals causes widespread small intestinal mucosal injury. Developing **coeliac disease** is initiated by dietary prolamins in wheat (gliadin), rye (secalin), and barley (hordein) resisting gastric enzymatic digestion. Resistant gliadin peptides pass through the intestinal epithelial barrier and are deamidated by mucosal tissue transglutaminase. Deamidated peptides bind tightly to human leukocyte antigens HLA-DQ2 or HLA-DQ8 on antigen-presenting cells, activating CD4-positive helper T cells that release pro-inflammatory interferon-gamma.",
+   "say": "Immune-mediated enteropathy triggered by dietary gluten in genetically susceptible individuals causes small bowel injury. Developing coeliac disease is initiated by gluten proteins in wheat, rye and barley that resist enzymatic breakdown. Deamidated gliadin fragments bind human leukocyte antigen DQ2 or DQ8 on antigen-presenting cells, driving helper T-cells to release interferon gamma and drive mucosal destruction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/celiac-disease-fig2.webp",
+    "alt": "Coeliac disease immunopathogenesis, HLA-DQ2 binding, and mucosal enteropathy.",
+    "caption": "Gluten deamidation, HLA-DQ2/DQ8 presentation, and T-cell mediated enteropathy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinical manifestations of coeliac enteropathy span classical **malabsorptive symptoms** and diverse extra-intestinal signs. Classical presentations feature chronic pale voluminous diarrhoea, flatulence, abdominal distension, steatorrhoea, and unintended weight loss. In adults, non-classical presentations are increasingly common, manifesting as refractory iron deficiency anaemia unresponsive to oral iron supplements, premature osteopenia or osteoporosis from calcium malabsorption, elevated transaminases, recurrent aphthous stomatitis, and peripheral neuropathy. Asymptomatic individuals with positive serology are frequently detected through family screening.",
+   "say": "Clinical presentations span classical digestive complaints and subtle extra-intestinal manifestations. Classical disease features chronic diarrhoea, bloating, steatorrhoea and unintended weight loss. In adults, non-classical presentations are common, presenting with refractory iron deficiency anaemia, premature osteoporosis from calcium malabsorption, mouth ulcers and elevated liver enzymes. Routine screening frequently detects asymptomatic cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical domain",
+     "Symptom or sign",
+     "Pathophysiological mechanism"
+    ],
+    "rows": [
+     [
+      "Gastrointestinal",
+      "Chronic steatorrhoea and bloating",
+      "Proximal small intestinal mucosal surface loss"
+     ],
+     [
+      "Haematological",
+      "Refractory microcytic anaemia",
+      "Duodenal enterocyte iron malabsorption"
+     ],
+     [
+      "Musculoskeletal",
+      "Osteopenia and pathological fractures",
+      "Calcium & vitamin D malabsorption in jejunum"
+     ],
+     [
+      "Neurological",
+      "Cerebellar ataxia & peripheral neuropathy",
+      "Immune-mediated neurotoxicity & B-vitamin deficiency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High-affinity serological autoantibody testing provides exceptional diagnostic sensitivity and specificity for initial screening. Measuring serum IgA **anti-tTG antibody** (tissue transglutaminase) using enzyme-linked immunosorbent assay represents the initial investigation of choice, with sensitivity and specificity exceeding ninety-five percent. Because coeliac patients have a tenfold increased prevalence of selective IgA deficiency (up to 2-3%), total serum IgA must be quantified concurrently. In patients with documented IgA deficiency, testing relies on IgG-based assays, particularly IgG anti-deamidated gliadin peptide (DGP) or IgG anti-tTG.",
+   "say": "Serological antibody testing provides exceptional accuracy for initial screening. Measuring immunoglobulin A tissue transglutaminase antibodies represents the primary investigation of choice. Because selective immunoglobulin A deficiency occurs ten times more frequently in coeliac disease, total immunoglobulin A must be checked concurrently. In deficient individuals, testing relies on immunoglobulin G antibodies to deamidated gliadin or transglutaminase.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "test",
+      "label": "Suspected coeliac disease on gluten-containing diet"
+     },
+     {
+      "id": "screen",
+      "label": "Check IgA anti-tTG antibody AND total serum IgA"
+     },
+     {
+      "id": "normal",
+      "label": "Normal IgA: positive IgA anti-tTG prompts biopsy"
+     },
+     {
+      "id": "deficient",
+      "label": "Low total IgA: reflex to IgG anti-DGP / IgG anti-tTG"
+     }
+    ],
+    "edges": [
+     [
+      "test",
+      "screen"
+     ],
+     [
+      "screen",
+      "normal"
+     ],
+     [
+      "screen",
+      "deficient"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endoscopic biopsy of the proximal small intestine confirms enteropathy and establishes pathological grading. Demonstrating blunted or flattened duodenal folds, scalloping, and mosaic mucosal pattern on upper endoscopy directs tissue sampling. The hallmark histological lesion is **villous atrophy** with crypt hyperplasia and marked intraepithelial lymphocytosis (> 25 intraepithelial lymphocytes per 100 enterocytes). According to the Marsh-Oberhuber classification, Marsh III lesions exhibit partial (IIIa), subtotal (IIIb), or total (IIIc) villous blunting. Adequate diagnostic sampling requires multiple biopsies: at least one from the duodenal bulb and four from the second or third duodenum.",
+   "say": "Endoscopic duodenal biopsy confirms small bowel enteropathy and establishes histological grading. Endoscopy reveals scalloping, mosaic patterns and mucosal flattening. The hallmark lesion is villous atrophy accompanied by crypt hyperplasia and prominent intraepithelial lymphocytosis. According to the Marsh classification, lesions exhibit partial to total villous blunting. Accurate diagnosis requires multiple biopsies from the bulb and distal duodenum.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/celiac-disease-fig1.webp",
+    "alt": "Duodenal biopsy histology in coeliac disease showing villous blunting and intraepithelial lymphocytosis.",
+    "caption": "Duodenal mucosal biopsy demonstrating severe villous atrophy and crypt hyperplasia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Histological changes follow an orderly sequence of immune-mediated mucosal damage categorized by the **Marsh classification**. Marsh stage 0 represents histologically normal pre-infiltrative mucosa. Marsh stage 1 (infiltrative lesion) demonstrates isolated intraepithelial lymphocytosis exceeding 25 lymphocytes per 100 enterocytes with normal villous architecture. Marsh stage 2 (hyperplastic lesion) features intraepithelial lymphocytosis combined with crypt hyperplasia. Marsh stage 3 (destructive lesion) is the diagnostic hallmark of active coeliac disease, characterized by progressive loss of villi ranging from partial blunting to complete, flat mucosal atrophy.",
+   "say": "Histological abnormalities follow an orderly sequence of mucosal injury categorized by the Marsh classification. Marsh stage one demonstrates isolated intraepithelial lymphocytosis with preserved villi. Marsh stage two features lymphocytosis combined with crypt deepening. Marsh stage three represents the classic diagnostic lesion of active disease, featuring progressive villous flattening from partial blunting to total mucosal atrophy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marsh stage",
+     "Intraepithelial lymphocytes (> 25/100)",
+     "Crypt hyperplasia",
+     "Villous architecture"
+    ],
+    "rows": [
+     [
+      "Marsh 0 (Normal)",
+      "Normal (< 25 / 100 enterocytes)",
+      "Normal crypt depth",
+      "Normal elongated villi (ratio 3:1)"
+     ],
+     [
+      "Marsh 1 (Infiltrative)",
+      "Elevated (> 25 / 100 enterocytes)",
+      "Normal crypt depth",
+      "Preserved normal villous architecture"
+     ],
+     [
+      "Marsh 2 (Hyperplastic)",
+      "Elevated (> 25 / 100 enterocytes)",
+      "Deepened, hyperplastic crypts",
+      "Preserved normal villi"
+     ],
+     [
+      "Marsh 3a (Partial)",
+      "Elevated intraepithelial lymphocytes",
+      "Marked crypt hyperplasia",
+      "Partial villous blunting"
+     ],
+     [
+      "Marsh 3b (Subtotal)",
+      "Elevated intraepithelial lymphocytes",
+      "Marked crypt hyperplasia",
+      "Subtotal villous blunting"
+     ],
+     [
+      "Marsh 3c (Total)",
+      "Elevated intraepithelial lymphocytes",
+      "Marked crypt hyperplasia",
+      "Total flat mucosal atrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An intensely pruritic cutaneous blistering eruption represents the pathognomonic dermatological manifestation of gluten-sensitive enteropathy. Presenting with **dermatitis herpetiformis** (Duhring disease) involves symmetrical, clustered, intensely itchy papulovesicular eruptions distributed over extensor surfaces, including elbows, knees, buttocks, and posterior scalp. Cutaneous pathology is driven by epidermal transglutaminase (eTG) autoantibodies; direct immunofluorescence of perilesional skin reveals pathognomonic granular IgA deposition within dermal papillae. Nearly all patients with dermatitis herpetiformis have underlying coeliac enteropathy on duodenal biopsy, responding completely to a gluten-free diet and oral dapsone.",
+   "say": "An intensely itchy blistering eruption represents the classic dermatological manifestation of gluten enteropathy. Presenting with dermatitis herpetiformis involves symmetrical clusters of papulovesicles over extensor surfaces like elbows, knees and buttocks. The condition stems from epidermal transglutaminase antibodies, and skin biopsy reveals granular immunoglobulin A deposits in dermal papillae. Nearly all patients have coeliac enteropathy and respond to a gluten-free diet.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dermatitis herpetiformis",
+     "points": [
+      "Intensely pruritic papulovesicles on extensor surfaces",
+      "Granular IgA deposition in dermal papillae on DIF",
+      "Associated with subclinical coeliac enteropathy in 90%",
+      "Treated with oral dapsone & strict gluten-free diet"
+     ]
+    },
+    "right": {
+     "title": "Linear IgA bullous dermatosis",
+     "points": [
+      "Tense annular bullae in 'string of pearls' arrangement",
+      "Linear continuous IgA deposition along basement membrane",
+      "No association with gluten enteropathy or HLA-DQ2",
+      "Often drug-induced (vancomycin) or idiopathic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complete, lifelong dietary exclusion of gluten-containing grains is the only established disease-modifying treatment. Maintaining a strict **gluten-free diet** eliminates wheat, rye, and barley, including hidden gluten in processed foods, sauces, and pharmaceutical excipients. Uncontaminated pure oats are tolerated by the majority of patients. Strict dietary adherence induces clinical symptom improvement within weeks, accompanied by mucosal histological reconstitution over six to twenty-four months and eventual normalization of serum anti-tTG antibody titers. Serial serology at six and twelve months monitors dietary compliance.",
+   "say": "Complete lifelong elimination of gluten grains represents the only effective treatment. Maintaining a strict gluten-free diet excludes wheat, rye and barley, including hidden ingredients in processed foods. Pure uncontaminated oats are tolerated by most individuals. Strict dietary compliance resolves symptoms within weeks, normalizes small bowel histology over months, and clears serum antibodies. Regular serology tracks dietary adherence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diet",
+      "label": "Initiate lifelong strict gluten-free diet"
+     },
+     {
+      "id": "sx",
+      "label": "Clinical symptom resolution within 2 to 4 weeks"
+     },
+     {
+      "id": "sero",
+      "label": "Normalization of serum anti-tTG titers at 6 to 12 months"
+     },
+     {
+      "id": "mucosa",
+      "label": "Complete duodenal mucosal architectural reconstitution"
+     }
+    ],
+    "edges": [
+     [
+      "diet",
+      "sx"
+     ],
+     [
+      "sx",
+      "sero"
+     ],
+     [
+      "sero",
+      "mucosa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent malabsorptive symptoms and villous atrophy despite strict dietary adherence signify severe refractory complications. Developing refractory coeliac disease is categorized into Type 1 (normal polyclonal intraepithelial T lymphocytes) and Type 2 (aberrant clonal intraepithelial lymphocytes lacking surface CD3 and CD8). Type 2 carries a dismal prognosis, acting as a direct precursor to **enteropathy-associated T-cell lymphoma** (EATL), an aggressive, high-grade malignancy of the proximal jejunum. Patients presenting with new anorexia, weight loss, fever, or intestinal perforation require staging computed tomography and systemic chemotherapy.",
+   "say": "Persistent symptoms and ongoing villous atrophy despite dietary compliance signal refractory complications. Refractory coeliac disease is divided into type one with normal polyclonal lymphocytes and type two with clonal aberrant lymphocytes lacking surface CD3. Type two carries a high risk of developing enteropathy-associated T-cell lymphoma, an aggressive jejunal malignancy. New weight loss, night sweats or bowel perforation require staging CT and chemotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Refractory coeliac Type 1",
+     "points": [
+      "Normal polyclonal intraepithelial T-cell population",
+      "Surface CD3, CD8, and TCR expressed normally",
+      "Favorable response to systemic corticosteroids / budesonide",
+      "Low risk of malignant transformation"
+     ]
+    },
+    "right": {
+     "title": "Refractory coeliac Type 2",
+     "points": [
+      "Clonal aberrant intraepithelial T-lymphocytes",
+      "Loss of surface CD3 and CD8 with clonal TCR rearrangements",
+      "Poor response to corticosteroids; requires cladribine",
+      "High risk of enteropathy-associated T-cell lymphoma (EATL)"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
