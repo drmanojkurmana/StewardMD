@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "med-pericardial",
+ "subject": "medicine",
+ "title": "Cardiac tamponade electrocardiography and constrictive pericarditis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Massive pericardial effusion causes the heart to swing freely within fluid-filled pericardial cavity. This periodic swinging motion produces **electrical alternans**, visible on the electrocardiogram as beat-to-beat alternation in QRS amplitude and axis. While low QRS voltage throughout all leads indicates pericardial fluid insulation, finding electrical alternans alongside sinus tachycardia is virtually pathognomonic of large pericardial effusion with impending or established cardiac tamponade.",
+   "say": "A large pericardial effusion allows the heart to oscillate freely within the fluid cushion. This motion produces electrical alternans, seen on the electrocardiogram as beat-to-beat variation in QRS height and axis. While low voltage reflects fluid insulation, seeing electrical alternans with sinus tachycardia strongly indicates cardiac tamponade.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eff",
+      "label": "Massive pericardial fluid accumulation"
+     },
+     {
+      "id": "swing",
+      "label": "Free pendular swinging motion of heart"
+     },
+     {
+      "id": "axis",
+      "label": "Alternating electrical cardiac axis"
+     },
+     {
+      "id": "ecg",
+      "label": "Beat-to-beat QRS amplitude variation"
+     }
+    ],
+    "edges": [
+     [
+      "eff",
+      "swing"
+     ],
+     [
+      "swing",
+      "axis"
+     ],
+     [
+      "axis",
+      "ecg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute hemodynamic compromise from cardiac tamponade mandates immediate evacuation of pericardial fluid. Performing emergency **pericardiocentesis** decompresses the intrapericardial space, rapidly restoring ventricular diastolic filling and systemic arterial pressure. The procedure is performed under echocardiographic guidance or via a subxiphoid approach, inserting a needle at a forty-five-degree angle toward the left shoulder while continuously aspirating. Withdrawing as little as fifty millilitres of fluid dramatically relieves tamponade physiology.",
+   "say": "Hemodynamic collapse from cardiac tamponade requires urgent pericardial drainage. Performing emergency pericardiocentesis decompresses the pericardial space, quickly restoring filling and blood pressure. The intervention uses ultrasound guidance or a subxiphoid route, aiming the needle toward the left shoulder. Evacuating as little as fifty millilitres of fluid provides dramatic clinical relief.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-haemothorax_tamponade.webp",
+    "alt": "Illustration of subxiphoid pericardiocentesis approach and anatomy.",
+    "caption": "Emergency pericardiocentesis and decompression of pericardial fluid. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Chronic scarring and loss of pericardial elasticity transform the pericardium into a rigid, non-compliant casing. Developing **constrictive pericarditis** impedes diastolic expansion of the ventricles without impairing early diastolic relaxation. Systemic venous return becomes severely congested, presenting with peripheral oedema, ascites, hepatomegaly, and elevated jugular venous pressure. Cardiac catheterisation reveals equalization of end-diastolic pressures across all four cardiac chambers, alongside the classical dip-and-plateau or square-root pressure waveform.",
+   "say": "Chronic scarring transforms the fibroserous pericardium into a rigid casing. The onset of constrictive pericarditis impairs diastolic ventricular expansion while sparing early myocardial relaxation. Systemic venous return becomes severely congested, producing peripheral oedema, ascites, hepatomegaly and elevated venous pressure. Catheterisation demonstrates chamber pressure equalisation and the characteristic square-root waveform.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/constrictive-pericarditis-fig1.webp",
+    "alt": "Pathophysiological diagram of constrictive pericarditis and pressure waveforms.",
+    "caption": "Constrictive pericarditis pathophysiology and square-root pressure sign. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Auscultating the precordium in constrictive pericarditis reveals a distinctive early diastolic sound. Clinicians recognize the **pericardial knock**, a high-frequency sound occurring shortly after the second heart sound (S2), earlier than a third heart sound (S3). The knock is produced by the abrupt arrest of rapid ventricular filling when the expanding myocardium collides forcefully against the rigid, non-yielding pericardial shell, corresponding precisely to the sudden plateau on intracardiac ventricular pressure tracings.",
+   "say": "Precordial auscultation in constrictive pericarditis demonstrates an early diastolic sound. Clinicians identify the pericardial knock, a high-pitched sound appearing shortly after the second heart sound. This knock originates from the sudden halt of ventricular filling as myocardium strikes the rigid pericardial shell, corresponding directly to the plateau on ventricular pressure tracings.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diastolic heart sound",
+     "Timing relative to S2",
+     "Pitch / Frequency",
+     "Underlying pathophysiology"
+    ],
+    "rows": [
+     [
+      "Pericardial knock",
+      "Early diastole (0.09 to 0.12 s after S2)",
+      "High frequency, sharp",
+      "Abrupt arrest of filling by rigid pericardium"
+     ],
+     [
+      "S3 gallop",
+      "Mid-diastole (0.12 to 0.18 s after S2)",
+      "Low frequency, dull",
+      "Deceleration into volume-overloaded compliant LV"
+     ],
+     [
+      "Opening snap",
+      "Very early diastole (0.04 to 0.10 s after S2)",
+      "High frequency, snapping",
+      "Tense stenotic mitral valve opening in diastole"
+     ],
+     [
+      "S4 gallop",
+      "Late diastole (presystolic)",
+      "Low frequency, dull",
+      "Atrial contraction into stiff hypertrophied LV"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast to normal physiological respiration where inspiration lowers intrathoracic and venous pressures, constriction disrupts venous dynamics. Observing **Kussmaul sign** is defined as a paradoxical rise, or failure of the expected fall, in jugular venous pressure during inspiration. Because the rigid pericardium prevents the right ventricle from accommodating the inspiratory surge in venous return, right atrial pressure spikes upward, producing a prominent, steep y descent on the jugular venous waveform.",
+   "say": "Constrictive physiology affects the normal respiratory changes in central venous pressure. Detecting Kussmaul sign is defined as a paradoxical rise, or failure to fall, in jugular venous pressure upon inspiration. Because the encased right ventricle cannot expand to receive incoming blood, right atrial pressure rises sharply, producing a prominent y descent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Constrictive pericarditis",
+     "points": [
+      "Kussmaul sign frequently positive",
+      "Prominent, steep y descent in JVP",
+      "Equalisation of diastolic pressures (< 5 mmHg)",
+      "Pericardial calcification present on CT/X-ray"
+     ]
+    },
+    "right": {
+     "title": "Cardiac tamponade",
+     "points": [
+      "Kussmaul sign usually absent (negative)",
+      "Absent or blunted y descent in JVP",
+      "Prominent x descent preserved",
+      "Pulsus paradoxus is the dominant physical sign"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnostic imaging plays a pivotal role in identifying structural pericardial pathology. Lateral chest radiographs and non-contrast computed tomography readily demonstrate extensive **pericardial calcification**, which wraps around the ventricles like a rigid shell. CT and cardiac magnetic resonance imaging accurately measure pericardial thickness exceeding four millimetres, differentiate dense fibrosis from active inflammatory effusion, and demonstrate dynamic respiratory shifting of the interventricular septum on real-time cine sequences.",
+   "say": "Diagnostic imaging plays an essential role in confirming constrictive pericardial disease. Lateral chest films and computed tomography demonstrate dense pericardial calcification encircling the ventricles. Cross-sectional imaging measures pericardial thickness over four millimetres, distinguishes fibrosis from active inflammation, and visualises respiratory septal bounce on real-time cine sequences.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "xr",
+      "label": "Chest radiograph: Pericardial calcification shell"
+     },
+     {
+      "id": "ct",
+      "label": "Cardiac CT: Thickened pericardium (> 4 mm)"
+     },
+     {
+      "id": "echo",
+      "label": "Echocardiography: Respiratory septal shift (bounce)"
+     },
+     {
+      "id": "cath",
+      "label": "Catheterization: Dip-and-plateau ventricular tracing"
+     }
+    ],
+    "edges": [
+     [
+      "xr",
+      "ct"
+     ],
+     [
+      "ct",
+      "echo"
+     ],
+     [
+      "echo",
+      "cath"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In tuberculosis-endemic regions across Asia and Africa, Mycobacterium tuberculosis is the predominant aetiology of chronic constriction. Managing **tuberculous pericarditis** requires standard four-drug anti-tubercular therapy (rifampicin, isoniazid, pyrazinamide, and ethambutol) for six months. Administering adjunctive systemic corticosteroids with prednisolone during the initial six to eight weeks significantly reduces pericardial fluid re-accumulation, accelerates clinical recovery, and lowers the long-term risk of developing constrictive pericarditis.",
+   "say": "In tuberculosis-endemic regions, Mycobacterium tuberculosis represents the primary cause of pericardial constriction. Treating tuberculous pericarditis requires standard four-drug antimicrobial therapy with rifampicin, isoniazid, pyrazinamide and ethambutol for six months. Adding adjunctive prednisolone during the first eight weeks reduces effusion recurrence and substantially lowers the incidence of chronic constriction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic agent",
+     "Standard dosing regimen",
+     "Duration of therapy",
+     "Clinical rationale"
+    ],
+    "rows": [
+     [
+      "Rifampicin + Isoniazid",
+      "Standard daily weight-based dose",
+      "6 months total duration",
+      "Bactericidal eradication of mycobacteria"
+     ],
+     [
+      "Pyrazinamide + Ethambutol",
+      "Standard daily weight-based dose",
+      "Initial 2 months intensive phase",
+      "Prevents drug resistance and clears bacilli"
+     ],
+     [
+      "Adjunctive prednisolone",
+      "60 mg daily tapered over 6 to 8 weeks",
+      "Initial 6 to 8 weeks",
+      "Reduces constrictive fibrosis and tamponade risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When medical therapy with diuretics fails to manage congestion in chronic fibrotic disease, operative intervention becomes definitive. Performing total **pericardiectomy** involves radical surgical stripping and resection of both the visceral and parietal pericardium from phrenic nerve to phrenic nerve. Complete decortication relieves mechanical constraint and allows the ventricles to remodel, though operative mortality ranges from six to twelve percent depending on underlying myocardial atrophy.",
+   "say": "When diuretics fail to manage systemic congestion in established fibrotic constriction, surgery becomes definitive. Performing total pericardiectomy involves radical surgical resection of both pericardial layers from phrenic nerve to phrenic nerve. Complete decortication relieves mechanical constriction and allows chamber filling, though perioperative risk depends on underlying myocardial atrophy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diur",
+      "label": "Refractory venous congestion on diuretics"
+     },
+     {
+      "id": "eval",
+      "label": "Preoperative hemodynamic and imaging assessment"
+     },
+     {
+      "id": "surg",
+      "label": "Total surgical pericardiectomy (phrenic to phrenic)"
+     },
+     {
+      "id": "remod",
+      "label": "Ventricular diastolic relaxation restored"
+     }
+    ],
+    "edges": [
+     [
+      "diur",
+      "eval"
+     ],
+     [
+      "eval",
+      "surg"
+     ],
+     [
+      "surg",
+      "remod"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

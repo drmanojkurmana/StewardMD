@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "med-endocarditis",
+ "subject": "medicine",
+ "title": "Infective endocarditis: peripheral stigmata, complications, and prophylaxis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Physical examination of patients with infective endocarditis often reveals peripheral vascular phenomena caused by septic emboli. Microvascular embolisation from friable vegetations creates painless **Janeway lesions** on the palms and soles. These flat, irregular, erythematous macules represent microabscesses with dermal necrosis and neutrophil infiltration, distinguishing them pathologically from immune complex lesions. Culturing aspirated fluid or biopsying these lesions frequently yields the causative bacterial pathogen.",
+   "say": "Physical examination in infective endocarditis frequently demonstrates vascular signs resulting from septic emboli. Embolic fragments from cardiac vegetations produce non-tender Janeway lesions across the palms and soles. These erythematous macular spots reflect microabscesses with tissue necrosis and neutrophil accumulation. Culturing biopsied skin tissue from Janeway lesions can recover the underlying bacterial organism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Janeway lesions",
+     "points": [
+      "Painless, non-tender macules",
+      "Located on palms and soles",
+      "Septic microemboli with bacterial microabscesses",
+      "Vascular phenomenon (Duke minor criterion)"
+     ]
+    },
+    "right": {
+     "title": "Osler nodes",
+     "points": [
+      "Painful, tender nodules",
+      "Located on pads of fingers and toes",
+      "Immune complex deposition and vasculitis",
+      "Immunological phenomenon (Duke minor criterion)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast to septic embolic manifestations, circulating antigen-antibody complexes induce painful dermatological findings. Intradermal immune complex deposition produces **Osler nodes**, presenting as tender, violaceous subcutaneous nodules located on the fleshy pulp of the fingers and toes. These painful lesions resolve spontaneously within hours to days without leaving scars. Osler nodes represent a classic immunological minor criterion in the modified Duke criteria framework.",
+   "say": "Unlike embolic manifestations, circulating antigen-antibody complexes induce painful immunological skin changes. Complex deposition produces Osler nodes, which appear as tender, violaceous nodules on the pads of the digits. These painful lumps typically resolve spontaneously within hours to days without scarring. Osler nodes serve as an immunological minor criterion in the diagnostic criteria.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-cvs-heart_failure_ie.webp",
+    "alt": "Diagram of peripheral physical examination findings in endocarditis.",
+    "caption": "Clinical signs of heart failure and peripheral infective endocarditis lesions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ophthalmoscopic evaluation of the fundus may reveal diagnostic retinal vascular lesions. Microvascular immune-mediated vasculitis causes **Roth spots**, which appear as flame-shaped retinal haemorrhages with distinctive pale or white fibrin centres. Although classically associated with subacute endocarditis, Roth spots also occur in severe anaemia, leukaemia, and systemic lupus erythematosus. Detecting them in a febrile patient provides strong collateral evidence supporting endocardial infection.",
+   "say": "Examining the optic fundus can reveal distinctive retinal vascular abnormalities. Immune-mediated vessel damage causes Roth spots, appearing as retinal haemorrhages with pale or white central fibrin cores. Although classically tied to subacute endocarditis, Roth spots may also occur in leukaemia or severe anaemia. Finding them in a febrile patient supports an endocarditis diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic stigma",
+     "Pathophysiologic mechanism",
+     "Anatomical location",
+     "Duke criterion class"
+    ],
+    "rows": [
+     [
+      "Janeway lesions",
+      "Septic microemboli / microabscess",
+      "Palms and soles (painless)",
+      "Vascular phenomenon"
+     ],
+     [
+      "Osler nodes",
+      "Immune complex vasculitis",
+      "Finger and toe pads (painful)",
+      "Immunological phenomenon"
+     ],
+     [
+      "Roth spots",
+      "Retinal capillaritis / microthrombi",
+      "Fundus (pale-centred haemorrhage)",
+      "Immunological phenomenon"
+     ],
+     [
+      "Splinter haemorrhages",
+      "Subungual capillary microemboli",
+      "Distal nail bed (longitudinal)",
+      "Vascular phenomenon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Capillary microembolisation or local vasculitis in the nail bed produces linear subungual streaks known as **splinter haemorrhages**. These dark red to brownish longitudinal lines run parallel to the long axis of the nail in the distal nail plate. While traumatic injury to the nail bed is the commonest overall cause, finding splinter haemorrhages proximally across multiple digits in a febrile patient strongly suggests infective endocarditis.",
+   "say": "Capillary embolisation or local inflammation beneath the nails produces linear subungual lines known as splinter haemorrhages. These dark longitudinal streaks run parallel along the distal nail beds. While accidental trauma represents their commonest benign cause, discovering multiple non-traumatic proximal splinter haemorrhages in a febrile individual points toward endocarditis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "veg",
+      "label": "Friable vegetative valve mass"
+     },
+     {
+      "id": "micro",
+      "label": "Microemboli dislodge into circulation"
+     },
+     {
+      "id": "nail",
+      "label": "Subungual capillary occlusion"
+     },
+     {
+      "id": "splint",
+      "label": "Linear splinter haemorrhages form"
+     }
+    ],
+    "edges": [
+     [
+      "veg",
+      "micro"
+     ],
+     [
+      "micro",
+      "nail"
+     ],
+     [
+      "nail",
+      "splint"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intravascular drug abuse markedly alters the epidemiology and anatomical distribution of endocardial infection. Patients develop **tricuspid endocarditis in IV drug users**, with Staphylococcus aureus causing over seventy percent of cases through contaminated needles and skin commensal inoculation. Patients typically present with persistent high fevers, pleuritic chest pain, and multiple septic pulmonary emboli with cavitation, while prominent peripheral peripheral stigmata and audible murmurs may initially be absent.",
+   "say": "Intravenous drug use substantially affects the epidemiology and anatomical site of endocardial infection. Individuals develop tricuspid valve endocarditis, with Staphylococcus aureus responsible for most cases introduced through unsterile injections. Affected individuals present with high spiking fevers, pleuritic pain and cavitating septic pulmonary emboli, often without an audible murmur on early examination.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ivdu",
+      "label": "Contaminated intravenous injection"
+     },
+     {
+      "id": "staph",
+      "label": "Staphylococcus aureus inoculation"
+     },
+     {
+      "id": "tv",
+      "label": "Tricuspid valve leaflet vegetation"
+     },
+     {
+      "id": "pe",
+      "label": "Septic pulmonary emboli and lung abscesses"
+     }
+    ],
+    "edges": [
+     [
+      "ivdu",
+      "staph"
+     ],
+     [
+      "staph",
+      "tv"
+     ],
+     [
+      "tv",
+      "pe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients with artificial valve replacements face catastrophic risks if microorganisms colonize the foreign implant surface. Managing **prosthetic valve endocarditis** requires prompt bactericidal antibiotic therapy combined with early surgical consultation. In early prosthetic valve infections caused by methicillin-resistant staphylococci, the recommended regimen combines intravenous vancomycin, gentamicin, and oral rifampicin. Rifampicin uniquely penetrates staphylococcal biofilms adhering to synthetic plastic and metallic valve struts.",
+   "say": "Artificial valve recipients encounter devastating complications when bacteria colonise foreign prosthesis surfaces. Treating prosthetic valve endocarditis demands aggressive bactericidal antibiotic regimens and early surgical advice. In early infections involving methicillin-resistant staphylococci, therapy combines intravenous vancomycin, gentamicin and oral rifampicin. Rifampicin is essential because it penetrates bacterial biofilms on synthetic valve components.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ie-fig2.webp",
+    "alt": "Illustration of endocarditis vegetations on prosthetic valve structures.",
+    "caption": "Prosthetic valve vegetations, biofilm formation, and structural failure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Evidence-based guidelines strictly limit antibiotic administration before healthcare interventions to individuals at highest risk. Delivering targeted **endocarditis prophylaxis** is restricted to dental procedures that involve manipulation of gingival tissue or periapical tooth regions. Prophylaxis is reserved exclusively for patients with prosthetic heart valves, prior endocarditis, unrepaired cyanotic congenital heart disease, or repaired congenital defects with residual shunts adjacent to prosthetic material.",
+   "say": "Clinical guidelines strictly reserve prophylactic antibiotic administration to individuals at highest adverse risk. Providing endocarditis prophylaxis is limited to dental procedures that manipulate gingival tissue or penetrate the oral mucosa. Treatment is reserved for prosthetic valve carriers, those with prior endocarditis, or individuals with unrepaired cyanotic congenital defects.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prophylaxis indicated",
+     "points": [
+      "Prosthetic heart valves or rings",
+      "Previous documented infective endocarditis",
+      "Unrepaired cyanotic congenital heart disease",
+      "Repaired congenital defects with residual patches"
+     ]
+    },
+    "right": {
+     "title": "Prophylaxis not indicated",
+     "points": [
+      "Mitral valve prolapse without regurgitation",
+      "Bicuspid aortic valve disease",
+      "Acquired native aortic or mitral stenosis",
+      "Routine GI or GU tract endoscopy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Invasive systemic spread of infection beyond the valve annulus represents a major surgical emergency. Developing a **perivalvular abscess** can destroy the fibrous skeleton of the heart and interrupt the cardiac conduction system. An unexplained new first-degree or complete atrioventricular block on serial ECGs in a patient with aortic valve endocarditis signals posterior root abscess extension, requiring immediate transoesophageal echocardiography and emergent operative debridement.",
+   "say": "Infection extending into the surrounding annular tissue represents a dangerous surgical emergency. The development of a perivalvular root abscess can disrupt the cardiac conduction pathway. A newly identified first-degree or complete heart block in aortic valve endocarditis indicates posterior root extension, demanding immediate transoesophageal imaging and urgent surgical intervention.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "aov",
+      "label": "Aortic valve endocarditis"
+     },
+     {
+      "id": "inv",
+      "label": "Annular invasion into cardiac skeleton"
+     },
+     {
+      "id": "abs",
+      "label": "Perivalvular aortic root abscess"
+     },
+     {
+      "id": "block",
+      "label": "AV block and bundle branch interruption"
+     },
+     {
+      "id": "surg",
+      "label": "Emergent surgical root reconstruction"
+     }
+    ],
+    "edges": [
+     [
+      "aov",
+      "inv"
+     ],
+     [
+      "inv",
+      "abs"
+     ],
+     [
+      "abs",
+      "block"
+     ],
+     [
+      "block",
+      "surg"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

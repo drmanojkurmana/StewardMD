@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "med-hypertension",
+ "subject": "medicine",
+ "title": "Secondary hypertension, renovascular stenosis, and pharmacotherapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Renovascular disease is the leading cause of correctable secondary hypertension in adults. Developing **renal artery stenosis** reduces renal perfusion pressure, stimulating excessive renin secretion by juxtaglomerular cells. Renin converts angiotensinogen to angiotensin I, which angiotensin-converting enzyme transforms into angiotensin II, triggering potent systemic vasoconstriction and aldosterone-mediated sodium retention. This high-renin state produces refractory hypertension and accelerated cardiovascular remodelling.",
+   "say": "Renovascular disease is the most common correctable cause of secondary hypertension. Developing renal artery stenosis reduces renal perfusion pressure, stimulating excessive renin secretion by juxtaglomerular apparatus. Renin activates the angiotensin and aldosterone cascade, producing vasoconstriction and sodium retention. This high-renin state produces refractory hypertension and vascular damage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sten",
+      "label": "Renal artery narrowing & hypoperfusion"
+     },
+     {
+      "id": "renin",
+      "label": "Juxtaglomerular renin hypersecretion"
+     },
+     {
+      "id": "at2",
+      "label": "Elevated angiotensin II and aldosterone"
+     },
+     {
+      "id": "vaso",
+      "label": "Systemic vasoconstriction & sodium retention"
+     },
+     {
+      "id": "htn",
+      "label": "Accelerated renovascular hypertension"
+     }
+    ],
+    "edges": [
+     [
+      "sten",
+      "renin"
+     ],
+     [
+      "renin",
+      "at2"
+     ],
+     [
+      "at2",
+      "vaso"
+     ],
+     [
+      "vaso",
+      "htn"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two distinct pathological entities account for almost all cases of renal artery narrowing. Atherosclerotic renovascular disease accounts for ninety percent of cases, typically involving the proximal ostium in older male smokers with generalized atherosclerosis. In contrast, **fibromuscular dysplasia** primarily affects young women between fifteen and fifty years of age. This non-atherosclerotic, non-inflammatory vascular disorder involves the media of the mid and distal renal artery, producing a characteristic string-of-beads angiographic appearance.",
+   "say": "Two distinct conditions account for nearly all instances of renal artery narrowing. Atherosclerotic stenosis comprises ninety percent of cases, typically affecting the arterial ostium in older smokers. In contrast, fibromuscular dysplasia occurs predominantly in younger women. This non-atherosclerotic disorder affects the mid and distal renal artery, displaying a classical string-of-beads pattern on angiography.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Atherosclerotic renal stenosis",
+     "points": [
+      "Affects older males (> 55 years)",
+      "Involves proximal ostium of renal artery",
+      "Associated with smoking and dyslipidaemia",
+      "Medical therapy first; stenting reserved"
+     ]
+    },
+    "right": {
+     "title": "Fibromuscular dysplasia",
+     "points": [
+      "Affects young women (15 to 50 years)",
+      "Involves mid and distal main renal artery",
+      "Classic string-of-beads angiographic sign",
+      "Cured by percutaneous balloon angioplasty"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Congenital narrowing of the aortic lumen represents a classic mechanical cause of secondary hypertension in children and young adults. Clinicians identify **coarctation of aorta** by elevated blood pressure in the upper extremities accompanied by diminished, delayed femoral pulses, termed radio-femoral delay. Long-standing collateral flow through intercostal arteries produces inferior rib notching (Roesler sign) on chest radiography, while the indentation of the coarctation creates the classic figure-of-3 sign on the aortic contour.",
+   "say": "Congenital narrowing of the aorta represents an important cause of secondary hypertension in young individuals. Clinicians detect coarctation of the aorta through elevated upper limb pressure and delayed femoral pulses, known as radio-femoral delay. Chronic collateral blood flow through intercostal vessels produces inferior rib notching on chest radiographs, while the aortic indentation forms the classic figure-of-three sign.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical feature",
+     "Diagnostic finding",
+     "Underlying mechanism"
+    ],
+    "rows": [
+     [
+      "Pulse examination",
+      "Radio-femoral pulse delay and weak femoral pulses",
+      "Mechanical obstruction distal to left subclavian artery"
+     ],
+     [
+      "Blood pressure gradient",
+      "Upper extremity hypertension, lower extremity hypotension",
+      "Post-stenotic pressure drop across aortic narrowing"
+     ],
+     [
+      "Chest radiograph",
+      "Inferior rib notching (ribs 3 to 8, Roesler sign)",
+      "Dilated, tortuous intercostal collateral arteries"
+     ],
+     [
+      "Aortic silhouette",
+      "Figure-of-3 sign on plain film and CT",
+      "Pre-stenotic and post-stenotic aortic dilatation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pharmacological management of essential hypertension begins with four primary drug classes proven to reduce cardiovascular mortality. Selecting appropriate **antihypertensive drugs** relies on ACE inhibitors or ARBs, dihydropyridine calcium channel blockers (amlodipine), and thiazide-like diuretics (chlorthalidone, indapamide). Initial combination therapy using two agents of complementary mechanisms is recommended for most patients with Stage 2 hypertension, combining an inhibitor of the renin system with a calcium blocker or diuretic.",
+   "say": "Pharmacological therapy for essential hypertension begins with four drug classes shown to reduce mortality. Choosing antihypertensive medications relies on ACE inhibitors, receptor blockers, dihydropyridine calcium channel blockers and thiazide-like diuretics. Starting with a combination of two drugs from complementary classes is recommended for most patients with stage two hypertension.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-clonidine.webp",
+    "alt": "Diagram of central sympathetic and autonomic blood pressure regulation.",
+    "caption": "Sympathetic and neurohormonal pathways in blood pressure regulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Administering renin-angiotensin-aldosterone system inhibitors requires careful monitoring of renal function and electrolytes. An acute rise in serum creatinine exceeding thirty percent following initiation of an ACE inhibitor or ARB strongly suggests **bilateral renal artery stenosis**. In this setting, glomerular filtration depends critically upon angiotensin II-mediated vasoconstriction of the efferent arteriole to maintain intraglomerular pressure, which pharmacological blockade abruptly removes.",
+   "say": "Giving inhibitors of the renin-angiotensin system requires monitoring of renal biochemistry. A sudden rise in serum creatinine greater than thirty percent after starting an ACE inhibitor or receptor blocker strongly suggests bilateral renal artery stenosis. In severe bilateral narrowing, filtration depends on angiotensin-mediated efferent arteriolar constriction, which these drugs eliminate.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-aki-fena.svg",
+    "alt": "Schematic of glomerular hemodynamics and efferent arteriolar tone.",
+    "caption": "Glomerular perfusion dynamics, efferent resistance, and filtration pressure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hypertension that remains uncontrolled despite concurrent use of three antihypertensive agents of different classes defines an important clinical challenge. We diagnose **resistant hypertension** when office blood pressure remains above 130/80 mmHg despite three medications, including a diuretic, at maximally tolerated doses. After confirming medication adherence and excluding secondary causes, adding the mineralocorticoid receptor antagonist spironolactone as a fourth agent provides superior blood pressure reduction.",
+   "say": "Hypertension that remains uncontrolled despite concurrent use of three medications of different classes defines an important clinical challenge. Clinicians diagnose resistant hypertension when blood pressure exceeds targets despite three drugs, including a diuretic, at full doses. After verifying adherence and ruling out secondary causes, adding spironolactone provides superior blood pressure reduction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "triple",
+      "label": "Triple therapy at full dose (ACEi/ARB + CCB + Diuretic)"
+     },
+     {
+      "id": "adh",
+      "label": "Verify adherence and exclude white-coat hypertension"
+     },
+     {
+      "id": "sec",
+      "label": "Screen for secondary causes (sleep apnoea, Conn)"
+     },
+     {
+      "id": "spiro",
+      "label": "Add spironolactone 25 to 50 mg daily as 4th agent"
+     }
+    ],
+    "edges": [
+     [
+      "triple",
+      "adh"
+     ],
+     [
+      "adh",
+      "sec"
+     ],
+     [
+      "sec",
+      "spiro"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Out-of-office blood pressure monitoring is essential to confirm the diagnosis and detect masked or nocturnal hypertension. Performing 24-hour **ambulatory BP monitoring** measures readings during normal daily activities and sleep. It identifies white-coat hypertension, where office readings are elevated but out-of-office values are normal, and masked hypertension with normal office but elevated ambulatory readings. Failure of blood pressure to fall by ten to twenty percent during sleep (non-dipping) signals increased cardiovascular risk.",
+   "say": "Out-of-office blood pressure recording is crucial to confirm the diagnosis and detect nocturnal hypertension. Performing twenty-four-hour ambulatory monitoring tracks readings during daily activities and sleep. It identifies white-coat hypertension and masked hypertension. Failure of arterial pressure to drop by ten to twenty percent during sleep, termed non-dipping, flags higher cardiovascular mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measurement setting",
+     "Diagnostic hypertension threshold",
+     "Key clinical application"
+    ],
+    "rows": [
+     [
+      "Office clinic reading",
+      ">= 130/80 mmHg (or >= 140/90)",
+      "Initial screening and routine clinical follow-up"
+     ],
+     [
+      "24-hour ambulatory average",
+      ">= 125/75 mmHg",
+      "Gold standard diagnostic threshold"
+     ],
+     [
+      "Daytime (awake) ambulatory",
+      ">= 130/80 mmHg",
+      "Assesses true daytime hypertensive burden"
+     ],
+     [
+      "Nighttime (asleep) ambulatory",
+      ">= 110/65 mmHg",
+      "Detects nocturnal non-dipping and sleep apnoea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive revascularization in renovascular disease depends upon the underlying histological pathology. In young women with fibromuscular dysplasia, catheter **balloon angioplasty** without stenting achieves clinical cure or significant improvement of hypertension in over eighty percent of cases. Conversely, in atherosclerotic renal stenosis, randomized clinical trials demonstrate that routine renal stenting does not confer clinical benefit over optimized medical therapy alone, reserving stenting for refractory angina, flash pulmonary oedema, or rapid loss of renal function.",
+   "say": "Definitive revascularisation in renovascular disease depends entirely on the underlying vascular pathology. In younger patients with fibromuscular dysplasia, balloon angioplasty without stenting cures hypertension in most cases. Conversely, in atherosclerotic renal stenosis, routine stenting offers no clinical advantage over medical therapy alone, reserving intervention for flash pulmonary oedema or refractory angina.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "FMD revascularization",
+     "points": [
+      "Balloon angioplasty alone without stenting",
+      "High rate of clinical cure or improvement",
+      "Restores normal renal artery lumen",
+      "First-line intervention of choice"
+     ]
+    },
+    "right": {
+     "title": "Atherosclerotic revascularization",
+     "points": [
+      "Medical therapy is first-line management",
+      "Stenting reserved for recurrent flash pulmonary oedema",
+      "Indicated for refractory hypertension failing 4+ drugs",
+      "Indicated for progressive unexplained renal function loss"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
