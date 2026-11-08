@@ -3,11 +3,11 @@
  "module": "rad-ir-malformation-avm",
  "subject": "radiology",
  "title": "AVM embolisation: nidus and nerves",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Shunts bypass capillary beds. **Arteriovenous malformations** tangle arteries into veins without capillaries, thrilling with bruits and warmth. **Schobinger staging** grades quiescence through expansion to ulceration and failure. **MRI with flow voids** maps extent without radiation. **High-output heart failure** follows large shunts stealing cardiac output.",
-   "say": "Shunts bypass capillary beds. Malformations tangle arteries into veins without capillaries, thrilling with warmth. Staging grades quiescence through expansion to ulceration. MRI maps extent without radiation. Large shunts steal cardiac output causing heart failure.",
+   "tx": "An arteriovenous malformation shunts blood directly from artery to vein. The tangle bypasses the capillary bed and feels warm with a thrill and bruit. **Schobinger staging** grades the lesion from quiescence through expansion to ulceration and failure. **MRI flow voids** map the extent of the tangle without radiation exposure. A large shunt steals cardiac output and can cause **high output heart failure** over time.",
+   "say": "An arteriovenous malformation is abnormal because blood shunts directly from artery to vein. The tangle bypasses capillaries and feels warm with a thrill. Staging grades the lesion from quiet disease to ulceration clearly. MRI is useful for mapping extent without radiation, while large shunts strain the heart.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Liquids cast niduses best. **Ethanol with copolymer liquids** penetrate deep nidus channels that coils cannot fill. **Transarterial with direct puncture** combines routes for complex deep tangles. **Balloon protection** guards normal branches during careful liquid pushes. **Compartment syndrome** threatens tight spaces after post-treatment swelling.",
-   "say": "Liquids cast niduses best. Ethanol with copolymers penetrate channels that coils cannot fill. Arterial with direct puncture combines for deep tangles. Balloons guard normal branches during pushes. Tight spaces swell dangerously after treatment.",
+   "tx": "The axial brain MRI shows a tangled **nidus** with dark serpiginous **flow voids** in the right cerebral hemisphere. Pale feeding arteries enter the tangle and enlarged draining veins leave it towards the cortex. Flow voids appear dark because fast blood gives no signal in the vessel lumen. This non invasive map shows extent without radiation and guides **embolisation planning** before catheter work.",
+   "say": "The brain MRI shows a tangled nidus with dark flow voids inside. Feeding arteries enter the tangle and draining veins leave it clearly. Flow voids appear dark because fast blood gives no signal. This map shows extent without radiation and guides planning before catheter work begins.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-malformation-avm-gen1.webp",
+    "alt": "Axial T2 brain MRI showing right sided nidus, flow voids, feeding arteries and draining veins.",
+    "caption": "Axial brain MRI shows nidus with flow voids. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Liquid agents cast the nidus more completely than coils alone can. **Ethanol and copolymer liquids** penetrate deep nidus channels that coils cannot fill. Arterial access combined with **direct puncture** reaches complex deep tangles from two routes. A balloon can protect normal branches while liquid is pushed carefully into the nidus. Tight anatomical compartments are watched closely because **post treatment swelling** can threaten nerves and tissue.",
+   "say": "Liquid agents cast the nidus more completely than coils alone can. Liquids are effective because they penetrate deep channels that coils cannot fill. Combined arterial and direct routes reach complex tangles safely. A balloon protects normal branches during injection, while swelling afterwards threatens tight compartments and needs close watching carefully.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Swelling and nerves suffer most after liquids. **Post-embolisation swelling** peaks at two days needing elevation with steroids. **Nerve injury** from liquids near neural paths needs careful mapping and dilution. **Skin necrosis** from superficial spill needs prolonged wound care. **Pulmonary embolism** from escaped liquid droplets needs close chest watching.",
-   "say": "Swelling and nerves suffer most. Post-treatment swelling peaks at days needing elevation. Liquids near nerves need mapping and dilution. Superficial spills necrose skin needing wound care. Escaped liquid threatens lungs needing chest watching.",
+   "tx": "Swelling and nerve injury are the main worries after liquid embolisation. **Post embolisation swelling** peaks at about two days and needs elevation with close observation. Liquid near a neural path can cause **nerve injury**, so mapping and dilution matter before injection. Superficial spill can necrose skin and needs prolonged wound care afterwards. Escaped liquid droplets can reach the lungs, so chest symptoms are watched after large treatments.",
+   "say": "Swelling and nerve injury are the main worries after liquid embolisation. Swelling peaks at about two days and needs elevation. Liquid near nerves can injure them and needs careful mapping beforehand. Superficial spill damages skin, while escaped droplets threaten the lungs and need chest observation after treatment.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-malformation-avm-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Cure means silent nidus at last. **Angiographic nidus obliteration** defines technical success with no early draining veins. **Staged sessions** shrink giant tangles stepwise over many months. **Surgery after downsizing** removes shrunken remnants cleanly with clear margins. **Lifelong surveillance** catches silent recanalisation early.",
-   "say": "Cure means silent nidus. Vanished nidus blush defines success with no early veins. Giant tangles shrink stepwise over sessions. Surgery removes shrunken remnants cleanly. Lifelong scans catch recanalisation early.",
+   "tx": "Cure means the nidus is silent on the final angiogram. **Nidus obliteration** with no early draining vein defines technical success after treatment. Giant tangles shrink in **staged sessions** over many months rather than in one sitting. Surgery after downsizing removes a shrunken remnant with clearer margins and less bleeding. Lifelong surveillance detects silent reopening early before symptoms return to the patient.",
+   "say": "Cure means the nidus is silent on the final angiogram. Absence of early venous drainage is the sign that defines technical success afterwards. Giant tangles shrink in staged sessions over many months safely. Surgery removes shrunken remnants afterwards, and lifelong surveillance detects silent reopening before symptoms return again.",
    "vis": {
     "kind": "flow",
     "nodes": [

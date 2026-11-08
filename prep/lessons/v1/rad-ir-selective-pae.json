@@ -3,11 +3,11 @@
  "module": "rad-ir-selective-pae",
  "subject": "radiology",
  "title": "Prostate and emerging selective embolisation",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Prostates shrink without surgery. **Prostatic artery embolisation** eases urinary obstruction where glands shrink over months. **Selection favours** large glands with failed drugs and surgical risk. **Bladder and rectal mapping** guards anastomoses before grains fly. **Symptom scores** with flow rates track relief objectively.",
-   "say": "Prostates shrink without surgery. Prostatic embolisation eases obstruction where glands shrink over months. Selection favours large glands with failed drugs and surgical risk. Bladder with rectal mapping guards neighbours. Symptom scores with flow track relief.",
+   "tx": "Prostate artery embolisation shrinks an enlarged gland without open surgery and relieves urinary obstruction gradually. The gland becomes smaller over months, so urine flow improves slowly rather than on the first day. Selection favours a man with a **large gland**, failed tablets and a high risk for anaesthesia or surgery. The operator maps bladder and rectal links before any particle leaves the catheter tip. The team records **symptom scores** and flow rates before treatment so later relief rests on objective change.",
+   "say": "Prostate artery embolisation shrinks an enlarged gland without open surgery and relieves urinary obstruction gradually. The gland becomes smaller over months so urine flow improves slowly rather than immediately. Selection favours a man with a large gland and failed tablets and high surgical risk. The operator maps bladder and rectal links before any particle leaves the catheter tip. The team records symptom scores and flow rates before treatment so later relief rests on change.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,8 @@
    }
   },
   {
-   "tx": "Tiny tortuous feeders test operator skills daily. **Prostatic arteries** twist off internal iliacs varying wildly between patients. **Cone-beam CT** confirms gland-only perfusion before embolising. **Non-target coil protection** blocks vesical and rectal shunts first. **Bilateral closure** beats unilateral where collaterals persist.",
-   "say": "Tiny tortuous feeders test skills. Prostatic arteries twist off pelvic trunks varying wildly. Cone-beam scans confirm gland-only flow before grains. Coils block bladder and rectal shunts first. Bilateral closure beats unilateral where collaterals persist.",
+   "tx": "The prostatic feeders challenge the operator because each artery is small, tortuous and variable between patients. The **prostatic artery** twists away from the internal iliac system and its origin changes from man to man. **Cone beam CT** confirms that contrast perfuses only the gland before the operator releases any particle. A **protective coil** blocks vesical and rectal shunts first, so particles cannot stray toward bladder or rectum. Treatment of **both sides** beats a single side whenever collaterals keep the gland alive after unilateral work.",
+   "say": "The prostatic feeders challenge the operator because each artery is small and tortuous and variable. The artery is tortuous as it leaves the pelvic trunk and its origin changes from man to man. Cone beam imaging confirms that contrast perfuses only the gland before any particle leaves. A protective coil blocks bladder and rectal shunts first so particles cannot stray toward neighbours. Treatment of both sides beats a single side whenever collaterals keep the gland alive afterwards.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +74,19 @@
    }
   },
   {
-   "tx": "Burning and blood alarm early. **Post-PAE dysuria with haematuria** settles with fluids and time. **Rectal ischaemia** from stray grains declares with pain and bleeding needing surgery. **Bladder wall injury** shows with haematuria and pain needing catheter rest. **Urinary retention** after swelling needs temporary catheterisation.",
-   "say": "Burning and blood alarm early. Post-procedure dysuria with bloody urine settles with fluids. Rectal stray grains declare with pain needing surgery. Bladder injury shows with bloody pain needing catheter rest. Swelling retention needs temporary catheters.",
+   "tx": "This frontal pelvic angiogram is helpful because it shows a tortuous **prostatic artery** that fills a bright gland blush in the midline pelvis. The operator has placed a **coil protection point** to block a rectal shunt before particles travel toward the gland. Fine links toward the bladder also appear, and those **vesical anastomoses** explain why mapping precedes embolisation in every case. The image matters for the exam because gland only perfusion predicts relief without neighbour injury. Bilateral completion then decides whether relief lasts or collaterals reopen the gland.",
+   "say": "This frontal pelvic angiogram is helpful because it shows a tortuous prostatic artery that fills a bright gland blush. The operator placed a coil that blocks a rectal shunt before particles travel toward the gland. Fine links toward the bladder also appear and those links explain why mapping precedes treatment. Gland only perfusion is the pattern that predicts relief without neighbour injury in prostate work. Bilateral completion then decides whether relief lasts or collaterals reopen the gland later.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-selective-pae-gen1.webp",
+    "alt": "Frontal pelvic angiogram showing prostatic artery supply, gland blush, coil protection point and anastomoses.",
+    "caption": "Pelvic angiogram shows prostatic perfusion with coil protection and rectal shunt. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Early symptoms after prostate embolisation usually reflect irritation, while a few signs warn of stray particles. Mild **dysuria with haematuria** settles with fluids, time and simple analgesia in most men after treatment. Particles that reach the rectum cause **rectal ischaemia**, which declares with pain and bleeding and may need surgery. A **bladder wall injury** presents with painful bloody urine and the bladder then needs catheter rest to heal. Swelling inside the gland can block urine flow, so temporary catheterisation supports the patient until swelling subsides.",
+   "say": "Early symptoms after prostate embolisation usually reflect irritation while a few signs warn of stray particles. Mild painful urination with bloody urine is common and it settles with fluids and time in most men. Particles that reach the rectum cause injury which declares with pain and bleeding and may need surgery. A bladder injury presents with painful bloody urine and the bladder needs catheter rest. Swelling inside the gland can block urine flow so temporary catheterisation supports the patient.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-selective-pae-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Relief builds slowly over months. **Gland shrinkage** peaks at months with flows improving steadily. **Drug weaning** follows relief where tablets stop stepwise. **Retreatment for regrowth** repeats grains or refers to surgery. **Sexual function** counselling tracks erections with ejaculation changes honestly.",
-   "say": "Relief builds over months. Glands shrink over months with flows improving. Tablet weaning follows relief stepwise. Regrowth repeats grains or refers surgery. Sexual counselling tracks erections with ejaculation honestly.",
+   "tx": "Relief after prostate embolisation builds slowly, and follow up therefore runs over months rather than days. **Gland shrinkage** reaches its peak over months, while urine flow improves steadily during the same period. The patient then stops tablets stepwise because **drug weaning** follows real relief and not a fixed calendar. Regrowth with returning symptoms earns repeat embolisation or referral for surgery after fresh assessment. Honest counselling records erection and ejaculation changes because **sexual function** matters greatly when men choose between options.",
+   "say": "Relief after prostate embolisation builds slowly and follow up therefore runs over months rather than days. The gland reaches peak shrinkage over months while urine flow improves steadily during that period. The patient then stops tablets stepwise because weaning follows real relief and not a calendar. Regrowth with returning symptoms earns repeat treatment or referral for surgery after fresh assessment. Honest counselling records erection and ejaculation changes because sexual function matters greatly to men.",
    "vis": {
     "kind": "flow",
     "nodes": [
