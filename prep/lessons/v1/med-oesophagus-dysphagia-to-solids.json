@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "med-oesophagus",
+ "subject": "medicine",
+ "title": "Dysphagia evaluation, infectious oesophagitis, and acid suppression",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Careful clinical history distinguishing mechanical obstruction from neuromuscular motor failure guides the initial diagnostic workup. Progressive **dysphagia to solids** that subsequently evolves to involve liquids strongly indicates a progressive mechanical structural narrowing, most ominously oesophageal carcinoma or benign peptic stricture. In contrast, dysphagia that affects both solids and liquids simultaneously from disease onset signifies neuromuscular dysmotility such as achalasia or diffuse oesophageal spasm. The presence of 'alarm features': unintended weight loss, anemia, hematemesis, or onset over age fifty-five: warrants urgent diagnostic upper gastrointestinal endoscopy.",
+   "say": "Careful history distinguishing mechanical obstruction from neuromuscular dysmotility directs the initial diagnostic pathway. Progressive dysphagia to solids that gradually advances to liquids strongly indicates mechanical structural narrowing like carcinoma or peptic stricture. Conversely, difficulty handling both solids and liquids from the onset reflects neuromuscular failure like achalasia. Unintentional weight loss or anemia mandates urgent endoscopy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanical obstruction",
+     "points": [
+      "Dysphagia to solids initially, then liquids",
+      "Progressive, relentless luminal encroachment",
+      "Peptic stricture, carcinoma, vascular ring",
+      "Confirmed by upper endoscopy with biopsy"
+     ]
+    },
+    "right": {
+     "title": "Motility / neuromuscular failure",
+     "points": [
+      "Dysphagia to both solids and liquids from onset",
+      "Intermittent or variable symptom severity",
+      "Achalasia, diffuse spasm, systemic sclerosis",
+      "Confirmed by high-resolution manometry"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Opportunistic fungal infection of the oesophageal mucosa occurs in immunocompromised individuals and patients using inhaled corticosteroids. Manifesting as **candida oesophagitis**, Candida albicans overgrowth produces characteristic white, plaque-like mucosal lesions adherent to an erythematous, friable mucosal background. Patients present with odynophagia, retrosternal chest pain, and dysphagia. Risk factors include human immunodeficiency virus infection with CD4 counts < 200/uL, systemic chemotherapy, prolonged broad-spectrum antibiotics, and improper metered-dose inhaler technique without mouth rinsing. Endoscopic brushings and biopsies confirm fungal pseudohyphae invading squamous epithelial cells.",
+   "say": "Opportunistic fungal colonization occurs in immunocompromised hosts and patients using inhaled steroids. Presenting as candida oesophagitis, Candida albicans overgrowth creates white, curd-like plaques adherent to erythematous mucosa. Patients report painful swallowing, retrosternal pain and dysphagia. Risk factors include advanced HIV infection, chemotherapy and unrinsed corticosteroid inhalers. Microscopic brushings reveal fungal pseudohyphae.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dysphagia-fig1.webp",
+    "alt": "Endoscopic and anatomical spectrum of infectious and mechanical dysphagia.",
+    "caption": "Oesophageal mucosal lesions and diagnostic pathways in acute dysphagia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Systemic antifungal therapy rapidly clears mucosal candidiasis and restores painless deglutition. Administering oral **fluconazole** (200 to 400 mg on day one, followed by 100 to 200 mg daily for fourteen to twenty-one days) represents the first-line treatment of choice, demonstrating superior clinical and mycological cure rates compared to non-absorbable topical agents like nystatin suspension. For fluconazole-refractory fungal disease or severe odynophagia preventing oral intake, intravenous echinocandins (caspofungin, micafungin) or liposomal amphotericin B provide effective rescue therapy. Concurrently, secondary prophylaxis and optimizing underlying immunological status are addressed.",
+   "say": "Systemic antifungal therapy clears mucosal candidiasis and resolves painful swallowing. Administering oral fluconazole for two to three weeks represents first-line therapy, proving superior to non-absorbable topical suspensions like nystatin. For refractory infections or patients unable to swallow tablets, intravenous echinocandins provide effective salvage. Correcting underlying immunosuppression prevents early fungal relapse.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "plaque",
+      "label": "Endoscopic confirmation of white adherent plaques"
+     },
+     {
+      "id": "smear",
+      "label": "Microscopic brushings show budding yeast & pseudohyphae"
+     },
+     {
+      "id": "flucon",
+      "label": "Oral fluconazole 200 mg daily for 14 to 21 days"
+     },
+     {
+      "id": "echino",
+      "label": "IV caspofungin / micafungin if fluconazole-refractory"
+     }
+    ],
+    "edges": [
+     [
+      "plaque",
+      "smear"
+     ],
+     [
+      "smear",
+      "flucon"
+     ],
+     [
+      "flucon",
+      "echino"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Viral pathogens produce distinctive ulcerative lesions that require targeted antiviral chemotherapy. Infection by herpes simplex virus type 1 causes **herpes oesophagitis**, presenting with acute severe odynophagia and small, discrete, punched-out mucosal ulcers with raised margins; biopsies reveal multinucleated giant cells and Cowdry A inclusion bodies. In contrast, cytomegalovirus (CMV) oesophagitis characteristically produces large, shallow, linear or geographic mucosal ulcers in severely immunosuppressed patients (CD4 < 50/uL); histology demonstrates pathognomonic owl-eye intranuclear and intracytoplasmic inclusions within vascular endothelial cells, treated with intravenous ganciclovir.",
+   "say": "Viral pathogens produce distinct ulcerative lesions requiring targeted antiviral therapy. Herpes simplex virus triggers acute severe odynophagia with punched-out ulcers showing multinucleated giant cells on biopsy. In contrast, cytomegalovirus causes large, shallow linear ulcers in severely immunocompromised patients. Biopsies display pathognomonic owl-eye inclusion bodies, and treatment requires intravenous ganciclovir.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Herpes simplex (HSV) oesophagitis",
+     "points": [
+      "Small, discrete, punched-out volcanic ulcers",
+      "Squamous epithelial multinucleated giant cells",
+      "Cowdry A eosinophilic intranuclear inclusions",
+      "Treated with oral or IV acyclovir"
+     ]
+    },
+    "right": {
+     "title": "Cytomegalovirus (CMV) oesophagitis",
+     "points": [
+      "Large, shallow, flat linear mucosal ulcers",
+      "Endothelial cell & fibroblast viral infection",
+      "Enlarged owl-eye basophilic intranuclear inclusions",
+      "Treated with intravenous ganciclovir"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Potent suppression of gastric parietal cell acid secretion forms the cornerstone of reflux and peptic ulcer therapeutics. Administering oral **proton pump inhibitors** (PPIs such as omeprazole, pantoprazole, or rabeprazole) irreversibly inhibits the luminal hydrogen-potassium ATPase enzyme, suppressing basal and stimulated hydrochloric acid secretion by over ninety percent. Because PPIs bind activated proton pumps, they must be ingested thirty to sixty minutes before meals for optimal pharmacodynamic efficacy. Long-term PPI administration carries mild associations with hypomagnesaemia, vitamin B12 malabsorption, Clostridioides difficile colitis, and microscopic enteric infections.",
+   "say": "Potent suppression of parietal acid secretion forms the foundation of reflux and ulcer therapy. Administering oral proton pump inhibitors irreversibly blocks the hydrogen-potassium ATPase pump, decreasing acid secretion by over ninety percent. Because these drugs target active pumps, patients must take them thirty minutes before meals. Long-term therapy requires monitoring for hypomagnesaemia, vitamin B12 deficiency and enteric infections.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "parietal",
+      "label": "Parietal cell proton pump stimulation by meal"
+     },
+     {
+      "id": "ppi",
+      "label": "PPI prodrug absorbed & concentrated in acidic canaliculi"
+     },
+     {
+      "id": "inhibit",
+      "label": "Irreversible covalent inhibition of H+/K+ ATPase"
+     },
+     {
+      "id": "suppress",
+      "label": "> 90% profound suppression of 24-hour gastric acidity"
+     }
+    ],
+    "edges": [
+     [
+      "parietal",
+      "ppi"
+     ],
+     [
+      "ppi",
+      "inhibit"
+     ],
+     [
+      "inhibit",
+      "suppress"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent epigastric symptoms without demonstrable organic or structural mucosal disease define the most common outpatient gastrointestinal disorder. Fulfilling Rome IV criteria for **functional dyspepsia** requires bothersome postprandial fullness, early satiety, epigastric pain, or epigastric burning for at least three months, with symptom onset at least six months prior to diagnosis, in the absence of organic pathology on upper endoscopy. Pathophysiology involves delayed gastric emptying, impaired gastric fundic accommodation, visceral hypersensitivity, and low-grade duodenal micro-inflammation following viral or bacterial gastroenteritis.",
+   "say": "Persistent upper digestive symptoms without structural mucosal abnormalities define a common gastrointestinal disorder. Fulfilling diagnostic criteria for functional dyspepsia requires postprandial fullness, early satiety or burning pain for at least three months without findings on endoscopy. Underlying mechanisms include delayed gastric emptying, impaired fundic relaxation, visceral hypersensitivity and post-infectious duodenal inflammation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/functional-dyspepsia-fig1.webp",
+    "alt": "Pathophysiological mechanisms of functional dyspepsia and gastric sensorimotor dysfunction.",
+    "caption": "Sensorimotor dysfunction and visceral hypersensitivity in functional dyspepsia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rome IV diagnostic criteria categorize functional gastroduodenal disorders into two clinically actionable phenotypic subgroups. Patients presenting with **postprandial distress syndrome** experience bothersome postprandial fullness or early satiation preventing completion of regular meals occurring at least three days per week. Conversely, epigastric pain syndrome features intermittent epigastric pain or burning severe enough to interfere with daily activities, occurring at least one day per week, not exclusively postprandial. First-line medical therapy for epigastric pain syndrome utilizes acid suppression with PPIs, whereas postprandial distress syndrome responds favorably to prokinetics.",
+   "say": "Diagnostic criteria divide functional gastroduodenal complaints into two distinct clinical subgroups. Patients with postprandial distress syndrome experience meal-induced fullness and early satiety preventing normal eating. In contrast, epigastric pain syndrome features intermittent burning pain that interferes with routine activities. Epigastric pain responds to proton pump inhibitors, whereas postprandial distress benefits from prokinetic agents.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dyspepsia subtype",
+     "Predominant symptom constellation",
+     "Targeted pharmacological therapy"
+    ],
+    "rows": [
+     [
+      "Postprandial distress (PDS)",
+      "Meal-induced fullness and early satiety",
+      "Prokinetics (itopride) & acotiamide"
+     ],
+     [
+      "Epigastric pain (EPS)",
+      "Intermittent localized epigastric burning pain",
+      "Proton pump inhibitors / H2-receptor blockers"
+     ],
+     [
+      "Overlapping phenotype",
+      "Concurrent fullness, pain, and early satiety",
+      "Combination PPI plus prokinetic trial"
+     ],
+     [
+      "Refractory dyspepsia",
+      "Persistent symptoms despite primary therapy",
+      "Neuromodulators (low-dose tricyclic antidepressants)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Central neuromodulation targeting the gut-brain axis provides effective symptom alleviation in refractory functional gastrointestinal disorders. Prescribing low-dose **tricyclic antidepressants** (such as amitriptyline or nortriptyline, 10 to 25 mg nocte) downregulates central visceral hypersensitivity, dampens pain processing at spinal cord dorsal horn synapses, and improves sleep quality without altering gastric motility. Concurrently, psychiatric therapies including cognitive behavioral therapy and gut-directed hypnotherapy demonstrate durable clinical benefit. Eradicating Helicobacter pylori in all infected dyspeptic patients yields small but statistically significant long-term symptom resolution.",
+   "say": "Targeting the gut-brain axis provides substantial symptom relief in refractory functional disorders. Prescribing low-dose tricyclic antidepressants like amitriptyline downregulates central visceral hypersensitivity and blunts pain signaling at spinal synapses. Psychological therapies like cognitive behavioral treatment demonstrate sustained benefit. Eradicating Helicobacter pylori in infected individuals achieves durable symptom improvement in a subset of patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Exclude alarm features & test for H. pylori"
+     },
+     {
+      "id": "subgroup",
+      "label": "Classify into EPS (PPI trial) vs PDS (prokinetic)"
+     },
+     {
+      "id": "refract",
+      "label": "Assess response at 8 to 12 weeks of therapy"
+     },
+     {
+      "id": "neuro",
+      "label": "Add low-dose tricyclic neuromodulator (amitriptyline)"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "subgroup"
+     ],
+     [
+      "subgroup",
+      "refract"
+     ],
+     [
+      "refract",
+      "neuro"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
