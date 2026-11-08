@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "bio-transcription",
+ "subject": "biochemistry",
+ "title": "Capping, tailing and splicing",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **five prime cap** (seven methylguanosine linked five to five triphosphate, added when nascent RNA reaches about twenty five nucleotides by capping enzyme recruited to serine five phosphorylated tail, methylations on first nucleotides following) protects from five prime exonucleases, licenses export and recruits cap binding complex for pioneer translation and nonsense surveillance. Viruses steal caps (influenza cap snatching endonuclease baloxavir target) or encode own capping (coronavirus proofreading plus cap methylation immune evasion), applied enzymology examinations now include.",
+   "say": "The five prime cap protects, licenses export and recruits pioneer translation machinery co-transcriptionally. Influenza steals caps by endonuclease snatching targeted by baloxavir antivirally in clinics and examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Processing event",
+     "Timing and enzyme logic",
+     "Failure consequence"
+    ],
+    "rows": [
+     [
+      "5-prime cap (m7G)",
+      "Early elongation, Ser5 tail recruited",
+      "Decapped RNA degraded 5 to 3 by XRN"
+     ],
+     [
+      "Splicing (spliceosome)",
+      "Co-transcriptional, intron by intron",
+      "Intron retention, frameshifts, NMD"
+     ],
+     [
+      "Cleavage and poly-A tail",
+      "AAUAAA signal, CPSF, poly-A polymerase",
+      "Readthrough transcription, unstable mRNA"
+     ],
+     [
+      "m6A methylation (writer/eraser/readers)",
+      "Co-transcriptional METTL complex",
+      "Splicing, export and decay tuning (epitranscriptome)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Polyadenylation**: cleavage and polyadenylation specificity factor reads AAUAAA ten to thirty bases upstream of cleavage, poly-A polymerase adds about two hundred adenines template independently, poly-A binding protein coats and circularises mRNA with initiation factors (closed loop enhancing reinitiation), deadenylation (CCR4-NOT) rate limits most decay pathways cytoplasmically. Alternative polyadenylation sites shorten three prime UTRs in proliferating and cancer cells (miRNA sites shed), histone mRNAs uniquely end in stem loops without tails (replication dependent S phase coupled decay).",
+   "say": "Polyadenylation adds about two hundred adenines template independently circularising messages for reinitiation efficiently. Alternative sites shorten regulatory tails in proliferating and cancer cells proliferatively and pathologically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Three prime end formation",
+    "nodes": [
+     {
+      "id": "sig",
+      "label": "AAUAAA signal transcribed"
+     },
+     {
+      "id": "cut",
+      "label": "Cleavage 10 to 30 bases downstream"
+     },
+     {
+      "id": "tail",
+      "label": "Poly-A polymerase adds about 200 A"
+     },
+     {
+      "id": "loop",
+      "label": "PABP closed loop translates efficiently"
+     }
+    ],
+    "edges": [
+     [
+      "sig",
+      "cut"
+     ],
+     [
+      "cut",
+      "tail"
+     ],
+     [
+      "tail",
+      "loop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Splicing** by the major spliceosome (U1 snRNP at five prime GU donor, U2 at branch point adenosine (bulged attacker), U4/U5/U6 catalytic tri-snRNP with U6 snRNA ribozyme heart and Prp8 protein scaffold, two transesterifications (branch lariat then exon ligation), intron lariat degraded, exon junction complex deposited twenty four nucleotides upstream marking exon boundaries for nonsense mediated decay geography) removes introns averaging thousands of bases to join exons averaging one hundred fifty.",
+   "say": "Splicing removes introns by two transesterifications through lariat intermediates catalysed by RNA heart spliceosomes. Exon junction complexes mark boundaries for nonsense surveillance geography downstream in cytoplasmic pioneer rounds.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-transcription-fig1.webp",
+    "alt": "Diagram showing pre-mRNA with introns and exons. The spliceosome, containing snRNPs, excises introns and joins exons.",
+    "caption": "Eukaryotic pre-mRNA splicing by the spliceosome.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Alternative splicing** (exon skipping commonest vertebrate, mutually exclusive exons, alternative five/three prime sites and intron retention) multiplies one gene into tissue proteomes (tropomyosin, CD44, Bcl-x apoptotic long anti versus short pro, FGFR2 epithelial/mesenchymal epithelial splicing regulatory proteins ESRP, neuronal Rbfox, muscle MBNL sequestered by myotonic dystrophy CTG expansions in trans (spliceopathy: chloride channel ClC-1 retained introns causing myotonia, insulin receptor isoform metabolic disease) proving splicing regulation diseases beyond cis mutations in single genes (beta thalassaemia splice donors, spinal muscular atrophy SMN2 exon seven skipping).",
+   "say": "Alternative splicing multiplies genes into tissue proteomes regulatorially, while myotonic expansions sequester splicing factors in trans spliceopathy. SMN2 exon skipping therapy anchors the next step clinically and examinably.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cis splicing mutations (one gene)",
+     "points": [
+      "Donor/acceptor GU-AG destroyed",
+      "Beta thalassaemia, many metabolic diseases",
+      "Exon skipped or cryptic site used"
+     ]
+    },
+    "right": {
+     "title": "Trans spliceopathy (factor poisoned)",
+     "points": [
+      "MBNL sequestered by CTG repeats (DM1)",
+      "Many transcripts mis-spliced foetally",
+      "Myotonia, insulin resistance pattern explained"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Nusinersen** (antisense oligonucleotide blocking intronic splicing silencer ISS-N1 in SMN2 intron seven) forces exon seven inclusion producing full length SMN protein, transforming spinal muscular atrophy survival intrathecally dosed, while risdiplam (oral small molecule splicing modifier) and onasemnogene gene replacement triangulate one exon by three modalities, the finest applied splicing lesson in current medicine. Splice switching for Duchenne exon skipping (eteplirsen exon fifty one, reading frame restoration Becker like protein) extends the principle with modest dystrophin gains debated.",
+   "say": "Nusinersen forces SMN2 exon seven inclusion transforming spinal muscular atrophy survival intrathecally. Risdiplam and gene replacement triangulate one exon by three modalities in current applied splicing medicine.",
+   "vis": null
+  },
+  {
+   "tx": "RNA editing and modification diversify beyond splicing: **ADAR** deaminates adenosine to inosine (read as G, glutamate receptor Q/R site essential, ApoB editing creating stop (intestine ApoB-48 prior module by APOBEC1 cytidine deamination), APOBEC3 antiviral hypermutation and cancer mutagenesis signatures), pseudouridylation guides (snoRNAs in nucleolus modifying rRNA, dyskerin failure dyskeratosis), two prime O methylation box C/D and H/ACA systems. Processing thus writes, cuts, tails and edits one transcript into regulated maturity whose cytoplasmic decay controls (AU rich, miRNA, nonsense mediated requiring downstream exon junction after stop) complete expression dosage.",
+   "say": "Editing diversifies transcripts by deamination creating ApoB forty eight and receptor variants essentially. Processing writes, cuts, tails and edits maturity whose decay controls complete expression dosage regulation cytoplasmically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Editing or mark",
+     "Chemistry",
+     "Anchor example"
+    ],
+    "rows": [
+     [
+      "A to I (ADAR)",
+      "Adenosine deamination read as G",
+      "GluR Q/R site; viral hyperediting"
+     ],
+     [
+      "C to U (APOBEC1)",
+      "Cytidine deamination stop created",
+      "Intestinal ApoB-48 (lipoprotein module)"
+     ],
+     [
+      "m6A (METTL writers)",
+      "Adenosine methylated, YTH readers",
+      "Decay and splicing tuning; FTO eraser obesity gene"
+     ],
+     [
+      "Pseudouridine (dyskerin H/ACA)",
+      "Uracil isomerised rRNA/tRNA",
+      "Dyskeratosis congenita ribosome link"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
