@@ -1,0 +1,249 @@
+{
+ "v": 1,
+ "module": "med-diabetes",
+ "subject": "medicine",
+ "title": "LADA and First-Line Pharmacotherapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A form of autoimmune diabetes manifesting insidiously in mature adults often masquerades initially as standard type 2 disease. Termed **lada**, latent autoimmune diabetes in adults is characterized by onset after age thirty-five, presence of circulating anti-GAD65 autoantibodies, and an initial non-insulin-requiring phase lasting at least six months. However, progressive autoimmune mediated destruction of pancreatic beta cells inevitably causes accelerated loss of C-peptide reserve, precipitating early secondary oral agent failure and necessitating timely introduction of basal insulin.",
+   "say": "A form of autoimmune diabetes manifesting insidiously in mature adults often masquerades initially as standard type 2 disease. Termed lada, latent autoimmune diabetes in adults is characterized by mature onset, circulating anti-GAD65 autoantibodies, and initial non-insulin dependence lasting at least six months. Progressive autoimmune destruction of pancreatic beta cells leads to accelerated loss of insulin reserve, causing early oral agent failure and requiring insulin therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/oral-antidiabetics-incretins-sglt2-glycemic-fig1.webp",
+    "alt": "Cellular targets and receptor mechanisms of non-insulin glucose-lowering pharmacological agents.",
+    "caption": "Receptor targets and pharmacological pathways of oral and injectable antidiabetic therapies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Carbohydrate intolerance with onset or first recognition during second or third trimester pregnancy defines **gestational diabetes**. Driven by placental secretion of diabetogenic hormones including human placental lactogen, progesterone, and cortisol, maternal peripheral insulin resistance increases sharply from twenty-four weeks gestation. Diagnosing GDM via standardized 75-gram oral glucose tolerance testing between 24 and 28 weeks prevents maternal preeclampsia and fetal macrosomia, neonatal hypoglycaemia, polycythaemia, and birth trauma from shoulder dystocia.",
+   "say": "Carbohydrate intolerance with onset or first recognition during mid to late pregnancy defines gestational diabetes. Driven by placental secretion of human placental lactogen and steroid hormones, maternal insulin resistance rises sharply from twenty-four weeks gestation. Diagnosing GDM with oral glucose tolerance testing prevents maternal preeclampsia, fetal macrosomia, neonatal hypoglycaemia, and birth trauma from shoulder dystocia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-diabetes-mellitus-fig1.webp",
+    "alt": "Placental hormone drivers of maternal insulin resistance and resulting fetal metabolic consequences.",
+    "caption": "Placental hormone drivers and fetal metabolic impacts in gestational diabetes mellitus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The cornerstone first-line oral biguanide reduces hepatic glucose production while improving peripheral insulin sensitivity without provoking hypoglycaemia. Administering **metformin** activates AMP-activated protein kinase (AMPK) in hepatocytes, suppressing key gluconeogenic enzymes and diminishing intestinal glucose absorption. Common gastrointestinal adverse effects include diarrhoea, nausea, and abdominal cramping, which subside with gradual titration. Because biguanides inhibit mitochondrial respiration and lactate clearance, metformin is strictly contraindicated in patients with severe renal impairment.",
+   "say": "The cornerstone first-line oral biguanide reduces hepatic glucose production while improving peripheral insulin sensitivity without provoking hypoglycaemia. Administering metformin activates AMP-activated protein kinase in hepatocytes, suppressing key gluconeogenic enzymes and diminishing intestinal glucose absorption. Common gastrointestinal side effects subside with gradual dose titration. Because biguanides impair lactate clearance, metformin is contraindicated in severe renal impairment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ingest",
+      "label": "Oral Metformin Ingestion"
+     },
+     {
+      "id": "ampk",
+      "label": "Hepatocyte AMPK Activation"
+     },
+     {
+      "id": "block",
+      "label": "Suppressed Gluconeogenesis & Glycogenolysis"
+     },
+     {
+      "id": "effect",
+      "label": "Reduced Fasting Plasma Glucose"
+     }
+    ],
+    "edges": [
+     [
+      "ingest",
+      "ampk"
+     ],
+     [
+      "ampk",
+      "block"
+     ],
+     [
+      "block",
+      "effect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Insulin secretagogues belonging to the second-generation sulfonylurea class stimulate direct pancreatic beta-cell exocytosis independent of ambient glucose concentrations. Prescribing **sulfonylureas** such as glimepiride or gliclazide binds the SUR1 regulatory subunit of ATP-sensitive potassium channels, causing membrane depolarization, calcium influx, and insulin release. Hypoglycaemia and modest weight gain represent the primary clinical risks. Long-acting sulfonylureas like glibenclamide undergo renal clearance with active metabolites, predisposing elderly individuals and renal patients to prolonged, life-threatening hypoglycaemic episodes.",
+   "say": "Insulin secretagogues belonging to the second-generation sulfonylurea class stimulate direct pancreatic beta-cell exocytosis independent of ambient glucose concentrations. Prescribing sulfonylureas such as glimepiride or gliclazide binds ATP-sensitive potassium channels, promoting membrane depolarization and insulin release. Hypoglycaemia and weight gain represent the primary clinical risks. Long-acting agents like glibenclamide carry elevated risks of prolonged hypoglycaemia in elderly or renal patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Biguanides (Metformin)",
+     "points": [
+      "Activates hepatocyte AMPK",
+      "Decreases hepatic gluconeogenesis",
+      "Weight-neutral or mild weight loss",
+      "Zero intrinsic hypoglycaemia risk",
+      "Lactic acidosis risk with eGFR < 30"
+     ]
+    },
+    "right": {
+     "title": "Sulfonylureas (Glimepiride)",
+     "points": [
+      "Closes beta-cell K-ATP channels",
+      "Stimulates direct insulin secretion",
+      "Associated with modest weight gain",
+      "Substantial hypoglycaemia risk",
+      "Renal metabolite accumulation risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Oral incretin enhancers prolong the physiological half-life of endogenous glucagon-like peptide-1 and glucose-dependent insulinotropic polypeptide. By inhibiting the brush-border enzyme dipeptidyl peptidase-4, **dpp-4 inhibitors** like sitagliptin and linagliptin increase active incretin levels in a strictly glucose-dependent manner. They enhance postprandial insulin release and suppress inappropriate glucagon secretion only when plasma glucose is elevated, rendering them weight-neutral with minimal hypoglycaemia risk. Linagliptin undergoes predominantly biliary excretion, requiring no dose adjustment in severe renal failure.",
+   "say": "Oral incretin enhancers prolong the physiological half-life of endogenous glucagon-like peptide-1 and glucose-dependent insulinotropic polypeptide. By inhibiting dipeptidyl peptidase-4, dpp-4 inhibitors like sitagliptin and linagliptin increase active incretin concentrations in a glucose-dependent manner. They enhance postprandial insulin release and suppress glucagon only when glucose is elevated, conferring weight neutrality and minimal hypoglycaemia risk without dose adjustment for linagliptin in renal disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug Class",
+     "Representative Agent",
+     "Mechanism of Action",
+     "Hypoglycaemia Risk",
+     "Weight Effect"
+    ],
+    "rows": [
+     [
+      "Biguanide",
+      "Metformin",
+      "Hepatic AMPK activation",
+      "Negligible",
+      "Neutral / Loss"
+     ],
+     [
+      "Sulfonylurea",
+      "Glimepiride",
+      "SUR1 receptor binding & closure",
+      "Moderate to High",
+      "Weight Gain"
+     ],
+     [
+      "DPP-4 Inhibitor",
+      "Sitagliptin",
+      "Incretin enzymatic degradation blockade",
+      "Negligible",
+      "Neutral"
+     ],
+     [
+      "GLP-1 Receptor Agonist",
+      "Semaglutide",
+      "Direct GLP-1 receptor stimulation",
+      "Negligible",
+      "Substantial Loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Injectable and oral incretin mimetics provide potent glycaemic lowering alongside substantial weight reduction and robust cardiovascular and renal protection. Administering **glp-1 agonists** such as semaglutide, dulaglutide, or liraglutide activates systemic GLP-1 receptors, stimulating glucose-dependent insulin release while delaying gastric emptying and promoting central hypothalamic satiety. In major cardiovascular outcome trials, GLP-1 receptor agonists significantly reduced three-point major adverse cardiovascular events (cardiovascular death, myocardial infarction, and stroke) in patients with type 2 diabetes.",
+   "say": "Injectable and oral incretin mimetics provide potent glycaemic lowering alongside substantial weight reduction and robust cardiovascular and renal protection. Administering glp-1 agonists such as semaglutide or dulaglutide activates GLP-1 receptors, stimulating glucose-dependent insulin secretion while slowing gastric emptying and promoting central satiety. In clinical trials, these agents significantly reduce major adverse cardiovascular events in patients with established cardiovascular disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "glp",
+      "label": "GLP-1 Receptor Agonist"
+     },
+     {
+      "id": "panc",
+      "label": "Pancreatic Beta Cells: Glucose-Dependent Insulin"
+     },
+     {
+      "id": "stomach",
+      "label": "Gastric Smooth Muscle: Delayed Emptying"
+     },
+     {
+      "id": "brain",
+      "label": "Hypothalamus: Satiety & Weight Loss"
+     }
+    ],
+    "edges": [
+     [
+      "glp",
+      "panc"
+     ],
+     [
+      "glp",
+      "stomach"
+     ],
+     [
+      "glp",
+      "brain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Selecting pharmacological agents in type 2 diabetes must incorporate patient-specific cardiovascular, renal, and weight considerations beyond baseline glycaemic control. In individuals with established atherosclerotic cardiovascular disease or high risk, GLP-1 receptor agonists with proven benefit are strongly recommended as part of the regimen. Common side effects of incretin therapies include transient nausea and vomiting, which are mitigated by slow dose escalation. Rare associations with **acute pancreatitis** mandate cautious discontinuation in patients presenting with persistent severe epigastric pain.",
+   "say": "Selecting pharmacological agents in type 2 diabetes must incorporate cardiovascular, renal, and weight considerations beyond baseline glycaemic control. In individuals with established atherosclerotic cardiovascular disease, GLP-1 receptor agonists with proven cardiovascular benefits are strongly recommended. Common side effects include transient gastrointestinal upset, managed with slow dose escalation. Rare associations with acute pancreatitis warrant immediate drug discontinuation in acute severe abdominal pain.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DPP-4 Inhibitors",
+     "points": [
+      "Oral once-daily dosing",
+      "Weight neutral",
+      "Modest HbA1c reduction (0.5-0.8%)",
+      "Neutral cardiovascular outcome trials",
+      "Well tolerated without nausea"
+     ]
+    },
+    "right": {
+     "title": "GLP-1 Receptor Agonists",
+     "points": [
+      "Subcutaneous weekly or daily injection",
+      "Marked weight reduction (3-8 kg)",
+      "Robust HbA1c reduction (1.0-1.8%)",
+      "Proven reduction in MACE and stroke",
+      "Transient nausea and vomiting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When non-insulin antidiabetic agents fail to maintain personalized HbA1c targets, intensifying therapy with basal insulin restores necessary hormone replacement. Initiating bedtime **basal insulin** at ten units daily, or 0.1 to 0.2 units per kilogram, suppresses uninhibited nocturnal hepatic glucose output, normalizing morning fasting readings. Clinicians titrate the basal dose every few days based on self-monitored fasting glucose measurements, avoiding over-basalization by adding prandial rapid-acting insulin or a GLP-1 receptor agonist when postprandial excursions persist.",
+   "say": "When non-insulin antidiabetic agents fail to maintain personalized targets, intensifying therapy with basal insulin restores necessary hormone replacement. Initiating bedtime basal insulin at ten units daily suppresses uninhibited nocturnal hepatic glucose output, normalizing morning fasting readings. Clinicians titrate the basal dose every few days based on fasting glucose logs, adding prandial rapid-acting insulin or an incretin agonist if postprandial glucose remains elevated.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fail",
+      "label": "Uncontrolled on Dual/Triple Oral Therapy"
+     },
+     {
+      "id": "start",
+      "label": "Initiate Basal Insulin (10 U or 0.1-0.2 U/kg)"
+     },
+     {
+      "id": "titrate",
+      "label": "Titrate by 2 U every 3 days to Fasting Target"
+     },
+     {
+      "id": "prandial",
+      "label": "Add GLP-1 RA or Prandial Insulin if Postprandial High"
+     }
+    ],
+    "edges": [
+     [
+      "fail",
+      "start"
+     ],
+     [
+      "start",
+      "titrate"
+     ],
+     [
+      "titrate",
+      "prandial"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
