@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "med-malabsorption",
+ "subject": "medicine",
+ "title": "Small intestinal bacterial overgrowth, bile acid diarrhoea, and irritable bowel syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Abnormal colonization of the upper gastrointestinal tract by colonic-type flora disrupts physiological intraluminal digestion and mucosal integrity. Proliferation of **small intestinal bacterial overgrowth** occurs when anatomical stasis, surgical blind loops, strictures, or hypomotility impair normal clearance mechanisms. Excessive bacteria deconjugate primary bile acids, leading to impaired micelle formation and fat malabsorption. Concurrently, intraluminal microbes consume dietary cobalamin while synthesizing folate, yielding high serum folate levels alongside low vitamin B12 concentrations.",
+   "say": "Proliferation of colonic bacteria in the small bowel inhibits normal digestion and mucosal integrity. Developing small intestinal bacterial overgrowth occurs when dysmotility, surgical loops, or strictures hinder clearance. Bacteria deconjugate bile acids, impairing fat absorption. Intraluminal bacteria consume cobalamin while synthesizing folate, causing low B12 alongside elevated serum folate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glucose-galactose-malabsorption-fig1.webp",
+    "alt": "Schematic representation of normal small intestinal digestion and absorptive microvilli.",
+    "caption": "Small intestinal mucosal absorption and luminal nutrient processing pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Non-invasive breath tests provide practical diagnostic confirmation of proximal microbial proliferation without requiring invasive endoscopy. Administering an oral substrate during the **glucose hydrogen breath test** detects early fermentation because glucose is completely absorbed in the proximal jejunum under normal conditions. A rise in breath hydrogen of at least twelve parts per million within ninety minutes indicates abnormal proximal bacterial metabolism. Quantitative culture of jejunal aspirate yielding greater than one thousand colony-forming units per millilitre remains the gold standard.",
+   "say": "Non-invasive breath tests detect proximal microbial proliferation without requiring enteroscopy. Administering the glucose hydrogen breath test identifies early fermentation because glucose normally absorbs rapidly in the proximal jejunum. An exhaled hydrogen rise of twelve parts per million within ninety minutes confirms abnormal bacterial colonization. Quantitative aspirate culture serves as the diagnostic reference.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic test",
+     "Substrate",
+     "Positive diagnostic criteria"
+    ],
+    "rows": [
+     [
+      "Glucose breath test",
+      "50 g oral glucose",
+      "Hydrogen rise >=12 ppm within 90 min"
+     ],
+     [
+      "Lactulose breath test",
+      "10 g oral lactulose",
+      "Early hydrogen rise before cecal transit"
+     ],
+     [
+      "Jejunal aspirate",
+      "Endoscopic collection",
+      "Colony count >10^3 CFU/mL in aspirate"
+     ],
+     [
+      "Methane breath test",
+      "Co-measured gas",
+      "Exhaled methane rise >=10 ppm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antimicrobial therapy aims to reduce bacterial burden and alleviate malabsorptive symptoms without disrupting lower bowel ecology. Targeted **rifaximin therapy** delivers high luminal concentrations because less than one percent of the oral dose is absorbed systemically. Administered for fourteen days, it suppresses both aerobic and anaerobic colonic flora, significantly reducing gaseous distension and diarrhoea. Addressing underlying predisposing factors, including discontinuing unnecessary proton pump inhibitors and promoting motility with prokinetic agents, prevents rapid post-treatment clinical recurrences.",
+   "say": "Targeted antimicrobial therapy reduces bacterial burden without disrupting normal colonic ecology. Prescribing oral rifaximin therapy provides high intraluminal antibiotic concentrations with minimal systemic absorption. A two-week course inhibits bacterial flora and reduces gaseous distension. Correcting underlying motile disorders and stopping unnecessary acid suppression prevents rapid recurrence.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/c-diff-fig1.webp",
+    "alt": "Illustration of mucosal inflammatory changes and microbial dysbiosis in the intestinal lumen.",
+    "caption": "Intestinal dysbiosis, bacterial proliferation, and mucosal inflammatory response. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Excessive passage of unabsorbed detergent bile salts into the large intestine stimulates mucosal secretomotor mechanisms. Pathological development of **bile acid malabsorption** arises from terminal ileal disease, ileal resection, cholecystectomy, or idiopathic hepatic bile acid overproduction. When unabsorbed dihydroxy bile acids enter the colon, they activate mucosal adenylate cyclase, stimulating active chloride secretion and inhibiting water absorption. Patients present with chronic, watery nocturnal diarrhoea, faecal urgency, and abdominal cramping that responds poorly to standard antidiarrhoeals.",
+   "say": "Spillover of unabsorbed bile salts into the large intestine triggers mucosal fluid secretion. Pathological development of bile acid malabsorption arises from terminal ileal resection, inflammation, or gallbladder removal. Entering the colon, bile acids stimulate chloride secretion and inhibit water absorption. Patients suffer chronic watery diarrhoea and nocturnal urgency that resists standard antidiarrhoeals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ileal",
+      "label": "Terminal ileal inflammation or resection"
+     },
+     {
+      "id": "spillover",
+      "label": "Unabsorbed bile salts flood colonic lumen"
+     },
+     {
+      "id": "secretion",
+      "label": "Mucosal adenylate cyclase activation and fluid secretion"
+     }
+    ],
+    "edges": [
+     [
+      "ileal",
+      "spillover"
+     ],
+     [
+      "spillover",
+      "secretion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Quantifying enterohepatic bile salt retention confirms bile acid enteropathy and guides targeted resin therapy. Undergoing a **SeHCAT retention scan** measures abdominal retention of selenium-75 labelled homocholic acid taurine seven days after oral administration. A seven-day retention value below ten percent confirms significant malabsorption, while values under five percent indicate severe depletion. Oral bile acid sequestrants such as cholestyramine, colestipol, or colesevelam bind luminal bile salts, successfully resolving secretory diarrhoea in over eighty percent of patients.",
+   "say": "Quantifying enterohepatic bile salt conservation confirms bile acid enteropathy. Performing a SeHCAT retention scan measures retention of radiolabelled tauroselcholic acid after seven days. Values under ten percent confirm significant malabsorption. Administering bile acid sequestrants like cholestyramine binds intraluminal bile salts, dramatically resolving secretory diarrhoea in most individuals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SeHCAT Retention Scan",
+     "points": [
+      "Selenium-75 radiolabelled bile acid analog",
+      "Whole-body gamma counter at 7 days",
+      "Retention <10% confirms malabsorption",
+      "Retention <5% indicates severe defect"
+     ]
+    },
+    "right": {
+     "title": "Bile Acid Sequestrants",
+     "points": [
+      "Cholestyramine, colestipol, colesevelam",
+      "Non-absorbable basic anion exchange resins",
+      "Form insoluble complex with bile salts",
+      "Take 1 hour before or 4 hours after drugs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Altered gut-brain axis communication and visceral hypersensitivity generate chronic gastrointestinal discomfort without identifiable structural or biochemical pathology. Characterizing **irritable bowel syndrome** requires distinguishing functional discomfort from organic pathology such as coeliac disease or inflammatory bowel disease. Patients experience fluctuating bowel habits categorized into constipation-predominant, diarrhoea-predominant, or mixed subtypes. Normal inflammatory biomarkers, including normal faecal calprotectin and C-reactive protein levels, reassure clinicians against invasive pathology and exclude inflammatory aetiologies.",
+   "say": "Altered gut-brain interactions and visceral hypersensitivity cause chronic bowel discomfort without structural pathology. Characterizing irritable bowel syndrome requires distinguishing functional symptoms from organic disease like inflammatory colitis. Patients experience fluctuating bowel patterns categorized into constipation, diarrhoea, or mixed subtypes. Normal calprotectin and inflammatory markers help eliminate structural gut inflammation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "IBS Subtype",
+     "Predominant stool form",
+     "Targeted therapies"
+    ],
+    "rows": [
+     [
+      "IBS-D (Diarrhoea)",
+      "Loose stools >25% of time",
+      "Loperamide, rifaximin, alosetron"
+     ],
+     [
+      "IBS-C (Constipation)",
+      "Hard stools >25% of time",
+      "Soluble fibre, lubiprostone, linaclotide"
+     ],
+     [
+      "IBS-M (Mixed)",
+      "Alternating hard and loose stools",
+      "Antispasmodics, dietary adjustment"
+     ],
+     [
+      "IBS-U (Unclassified)",
+      "Insufficient abnormality in form",
+      "Tricyclic antidepressants, low FODMAP"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "International consensus guidelines establish standardized symptomatic criteria to formalize the positive diagnosis of functional bowel disorders. Satisfying the **Rome IV criteria** requires recurrent abdominal pain occurring at least one day per week over the preceding three months, with symptom onset at least six months prior. The abdominal pain must be associated with two or more features: relation to defecation, change in stool frequency, or change in stool appearance.",
+   "say": "Consensus guidelines provide standardized criteria for establishing a positive diagnosis of functional bowel disorders. Meeting the Rome IV criteria requires recurrent abdominal pain at least one day weekly for the past three months. Pain must associate with two or more features: defecation, altered stool frequency, or altered stool form.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pain",
+      "label": "Abdominal pain >=1 day/week for 3 months"
+     },
+     {
+      "id": "features",
+      "label": "At least two defecation or stool associations"
+     },
+     {
+      "id": "diagnosis",
+      "label": "Positive diagnosis of irritable bowel syndrome"
+     }
+    ],
+    "edges": [
+     [
+      "pain",
+      "features"
+     ],
+     [
+      "features",
+      "diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Symptom duration exceeding four weeks distinguishes subacute and persistent enteropathies from self-limiting infectious episodes. Structured evaluation of **chronic diarrhoea** categorizes presentations into osmotic, secretory, inflammatory, or functional mechanisms based on stool osmolar gap and inflammatory markers. A stool osmotic gap exceeding one hundred milliosmoles per kilogram denotes osmotic diarrhoea that halts with fasting. Conversely, secretory diarrhoea persists despite fasting, demonstrating an osmotic gap below fifty milliosmoles per kilogram.",
+   "say": "Symptoms lasting over four weeks distinguish persistent enteropathies from self-limiting infections. Evaluating chronic diarrhoea categorizes presentations into osmotic, secretory, inflammatory, or functional mechanisms. A stool osmotic gap over one hundred milliosmoles flags osmotic diarrhoea that resolves during fasting. Secretory diarrhoea continues despite fasting, showing an osmotic gap under fifty milliosmoles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Osmotic diarrhoea",
+     "points": [
+      "Stool osmotic gap >100 mOsm/kg",
+      "Diarrhoea ceases during fasting",
+      "Due to unabsorbed osmotic solutes",
+      "Examples: Lactase deficiency, laxatives"
+     ]
+    },
+    "right": {
+     "title": "Secretory diarrhoea",
+     "points": [
+      "Stool osmotic gap <50 mOsm/kg",
+      "Diarrhoea persists during fasting",
+      "Active electrolyte secretion or low absorption",
+      "Examples: Cholera, VIPoma, bile acids"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
