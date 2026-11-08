@@ -11,29 +11,10 @@
       "say": "Duodenal atresia produces the classic double-bubble sign on plain abdominal radiographs. Complete absence of distal bowel gas is characteristic, and thirty percent of infants have Down syndrome.",
       "tx": "Recognize the **double-bubble sign** of duodenal atresia on neonatal plain abdominal radiographs. Congenital duodenal atresia results from failure of recanalization of the embryonic duodenum. Plain radiographs demonstrate two prominent gas collections representing the dilated stomach and duodenal bulb, with complete absence of distal bowel gas; 30% have Down syndrome (Trisomy 21) (Normal DJ flexure anatomical position).",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Duodenal atresia",
-          "Duodenal stenosis / web"
-        ],
-        "rows": [
-          [
-            "Radiographic sign",
-            "Classic double-bubble sign",
-            "Double-bubble with distal bowel gas"
-          ],
-          [
-            "Distal gas pattern",
-            "Complete absence of distal gas",
-            "Scattered distal intestinal gas collections"
-          ],
-          [
-            "Genetic association",
-            "30% have Down syndrome (Trisomy 21)",
-            "Less common chromosomal syndromic link"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/acute-intestinal-obstruction-fig1.webp",
+        "alt": "Bowel constricted by an adhesion band with air fluid levels on film.",
+        "caption": "Obstruction: dilated bowel with air fluid levels. Credit: StewardMD."
       }
     },
     {
@@ -63,39 +44,10 @@
       "say": "When volvulus supervenes on malrotation, contrast outlines a spiraling, twisted duodenum. This corkscrew appearance is pathognomonic of acute midgut volvulus.",
       "tx": "Identify the **corkscrew sign of volvulus** during an emergency upper gastrointestinal contrast study. When the malrotated midgut twists clockwise around its narrow vascular pedicle, contrast injected into the stomach traverses the pylorus into a dilated proximal duodenum, which then spirals downward in a tight helical twist resembling a corkscrew, heralding immediate operative intervention (Ultrasound whirlpool sign).",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "contrast",
-            "label": "Enteric contrast fills stomach and duodenum"
-          },
-          {
-            "id": "obstruction",
-            "label": "Third duodenum tapered at volvulus twist"
-          },
-          {
-            "id": "corkscrew",
-            "label": "Helical spiral configuration of bowel and vessels"
-          },
-          {
-            "id": "surgery",
-            "label": "Emergency Ladd procedure to prevent infarct"
-          }
-        ],
-        "edges": [
-          [
-            "contrast",
-            "obstruction"
-          ],
-          [
-            "obstruction",
-            "corkscrew"
-          ],
-          [
-            "corkscrew",
-            "surgery"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/acute-intestinal-obstruction-fig2.webp",
+        "alt": "Dilated proximal bowel, strangulation and radiographic air fluid levels.",
+        "caption": "Volvulus risks strangulation of dilated bowel. Credit: StewardMD."
       }
     },
     {
