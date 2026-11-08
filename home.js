@@ -1908,7 +1908,7 @@
       ".hv-drag{flex:0 0 auto;color:var(--hmut);padding:6px;margin-left:2px;touch-action:none;cursor:grab}",
       ".hv-tool-tog.dragging{opacity:.55;background:var(--hbg)}",
       ".rnav-grid.reordering .rnav-tile{touch-action:none}",
-      ".rnav-grid.reordering .rnav-tile:not(.addtool):not(.dragging){animation:rnavJiggle .28s ease-in-out infinite alternate}",
+      ".rnav-grid.reordering .rnav-tile:not(.addtool):not(.dragging){animation:rnavJiggle .28s cubic-bezier(.42,0,.58,1) infinite alternate}",
       ".rnav-grid.reordering .rnav-tile.addtool{opacity:.35;pointer-events:none}",
       "#rnavToolsGrid .rnav-tile.dragging{opacity:.18!important;transform:none!important;animation:none!important}#rnavToolsGrid .rnav-tile{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}.rnav-drag-ghost{will-change:transform;filter:drop-shadow(0 14px 18px #0004)}#rnavReorderHint{font-size:12px;color:var(--slate);margin:0 0 14px}",
       "@keyframes rnavJiggle{from{transform:rotate(-1deg)}to{transform:rotate(1deg)}}",
@@ -6099,7 +6099,7 @@
   background:var(--mk-bg);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);
   display:flex;flex-direction:column;overflow:hidden;
   transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);
-  font-family:'Inter',-apple-system,system-ui,sans-serif}
+  font-family:var(--sans,'Inter Variable','Inter',-apple-system,system-ui,sans-serif)}
 #maikSheet.on{transform:translateY(0)}
 body.dark #maikSheet{
   --mk-bg:#101a2c;--mk-ink:#eaf0f7;--mk-mut:#8c9ab0;--mk-faint:#5d6e86;--mk-bd:#233149;--mk-soft:#182338;--mk-field:#0e1829;
@@ -6508,7 +6508,7 @@ body.dark .maik-topicmode button[aria-pressed="true"],body.v3-dark .maik-topicmo
 .maik-welcome{font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
 .maik-calc-pf{margin-top:9px}.maik-calc-pf ul{margin:4px 0 0;padding-left:18px}.maik-calc-pf li{margin:2px 0}.maik-calc-src{color:var(--mk-mut);font-size:11.5px}.maik-calc-res{margin-top:6px}.maik-calc-in{margin-top:6px;color:var(--mk-mut)}
 .maik-edu{font:600 11px 'Inter';color:var(--mk-mut);background:var(--mk-soft);border-radius:10px;padding:6px 9px;margin-bottom:6px}
-.maik-assume{font:600 12px 'Inter';color:var(--mk-ink);background:rgba(37,99,235,.08);border-left:3px solid var(--mk-acc);border-radius:10px;padding:7px 10px;margin-bottom:8px}
+.maik-assume{font:600 12px 'Inter';color:var(--mk-ink);background:rgba(37,99,235,.08);border:1px solid var(--mk-acc);border-radius:10px;padding:7px 10px;margin-bottom:8px}
 .maik-assume b{color:var(--mk-acc)}
 /* content sits above the faint watermark */
 .maik-body>.maik-wm{z-index:0}
@@ -6584,7 +6584,7 @@ body.mk2.dark #maikSheet,body.mk2.v3-dark #maikSheet{
   --mk-teal:#2dd4bf;--mk-tsoft:rgba(45,212,191,.12);--mk-acc:#2dd4bf;--mk-glow:rgba(45,212,191,.22);
   --mk-userbub:#0f766e;--mk-userink:#fff;--mk-usersh:0 1px 2px rgba(0,0,0,.4);--mk-send:#0f766e}
 /* answer → clinical readout: teal grounding spine + hairline top, no card */
-body.mk2 #maikSheet .maik-b.ai{background:transparent;border:none;border-top:1px solid var(--mk-bd);border-left:2px solid var(--mk-teal);border-radius:0;box-shadow:none;padding:13px 2px 5px 14px;margin-top:4px;max-width:100%;font-variant-numeric:tabular-nums;animation:mk2rise .26s cubic-bezier(.4,0,.2,1) both}
+body.mk2 #maikSheet .maik-b.ai{background:transparent;border:none;border-top:1px solid var(--mk-bd);border-radius:0;box-shadow:none;padding:13px 2px 5px 2px;margin-top:4px;max-width:100%;font-variant-numeric:tabular-nums;animation:mk2rise .26s cubic-bezier(.4,0,.2,1) both}
 @keyframes mk2rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){body.mk2 #maikSheet .maik-b.ai{animation:none}}
 body.mk2 #maikSheet .maik-attr{margin-bottom:9px}
@@ -11674,8 +11674,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".ntf-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:720px;margin:0 auto;width:100%;box-sizing:border-box;padding-bottom:calc(40px + env(safe-area-inset-bottom))}",
       ".ntf-note{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--teal-soft,#e0f2f1);border-radius:10px;padding:10px 12px;margin-bottom:14px;line-height:1.5}",
       ".ntf-list{display:flex;flex-direction:column;gap:10px}",
-      ".ntf-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--line,#e5e5e0)}",
-      ".ntf-card.hi{border-left-color:#ef4444}",
+      ".ntf-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px}",
+      ".ntf-card.hi{border-color:#ef4444}",
       ".ntf-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}",
       ".ntf-cat{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1);border-radius:6px;padding:2px 8px}",
       ".ntf-cat.cat-safety,.ntf-cat.cat-recall{color:#b45309;background:#fef3c7}",
@@ -11704,9 +11704,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".fd-chip.on{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}",
       ".fd-search{width:100%;box-sizing:border-box;border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:9px 12px;font:500 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);background:var(--panel,#fff)}",
       // feed card
-      ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--teal,#0a9396);cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
+      ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
       ".fd-card:hover,.fd-card:focus{box-shadow:0 3px 14px rgba(0,0,0,.08);outline:none}.fd-card:active{transform:scale(.995)}",
-      ".fd-card.hi{border-left-color:#ef4444}",
+      ".fd-card.hi{border-color:#ef4444}",
       ".fd-signed{font:600 11px var(--sans,system-ui);color:#0f766e;background:rgba(15,118,110,.1);border-radius:999px;padding:2px 8px;white-space:nowrap}",
       ".fd-org{font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396);margin-top:3px}",
       ".fd-meta{display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap}",
