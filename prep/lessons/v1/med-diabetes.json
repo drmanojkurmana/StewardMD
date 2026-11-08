@@ -1,37 +1,14 @@
 {
-  "v": 1,
+  "checks": {
+    "dropped": 0,
+    "kbWords": 0,
+    "numbers": true,
+    "shape": true
+  },
+  "gen": "AI",
+  "minutes": 7,
+  "model": "muse-wonder (local authoring, no external API)",
   "module": "med-diabetes",
-  "subject": "medicine",
-  "title": "Diabetes mellitus long case: control, complications and crises",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**thirst** polyuria polydipsia nights, **weight** T1 loss T2 gain acanthosis, **MODY** young lean family three generations, **LADA** adult lean GAD slow insulin, **feet** numbness callus ulcers claudication, **eyes** blur laser cataract, **kidney** froth oedema dialysis, **crises** DKA vomiting HHS confusion) with **viva** (**ketotic** vomiting tachypnoeic, **footsore** ulcerated neuropathic) profiles; **control** (HbA1c hypos drives) grades. Sugars climb.",
-      "say": "Thirsts weights MODYs LADAs is history: feet numb eyes blur kidneys froth crises sicken ketotics breathe footsores limp controls grade HbA1cs track hypos warn. Urines sweeten.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**BMI** waist acanthosis xanthelasma, **feet** pulses monofilament callus ulcers Charcot, **neuro** stocking vibration reflexes, **eyes** cataract retinopathy macula, **kidney** oedema BP ACR, **skin** necrobiosis injections lipohypertrophy, **DKA** dehydrated Kussmaul fruity, **HHS** drowsy hyperosmolar) with **bedside** (**glucose** ketones gases, **ACR** protein quantifies, **ECG** potassium shifts) gases; **amputations** (toes healed) notes. Complications gather.",
-      "say": "BMIs feet neuros eyes is exam: kidneys swell skins mark DKAs breathe HHSs dull glucoses read ketones rise ACRs leak ECGs peak amputations heal shoes fit. Limbs threaten.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**HbA1c** control targets grades, **GAD** LADA MODY gene sorts, **ACR** eGFR kidney stages, **retina** screening laser grades, **feet** Doppler pressures debrides, **lipids** statin thresholds, **ketones** DKA HHS gases) with **differentials** (**T1** ketotic young, **T2** resistant obese, **MODY** gene lean, **secondary** pancreatic steroids) sorts; **MDT** (diabetes eyes feet decides) meets. Sugars stratify.",
-      "say": "HbA1cs GADs ACRs retinas is Ix: feet image lipids treat ketones gas T1s sicken T2s resist MODYs inherit secondaries scar MDTs meet lasers burn dialyses plan. Numbers stage.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**metformin** first SGLT2 GLP cardio-renal, **insulin** basal bolus sick rules, **statin** ACE BP targets guards, **feet** offload debride revascularise, **laser** retina vitrectomy saves, **DKA** fluids potassium insulin resolves, **HHS** slow osmolar corrects) with **traps** (**hypos** driving warns, **euglycaemic** SGLT2 keto checks, **pregnancy** plans folate) closes; **follow** (HbA1c ACR feet eyes) tracks. Sugars tamed.",
-      "say": "Metformins insulins statins feet is Rx: lasers burn DKAs fill HHSs slow hypos warn euglycaemics check pregnancies plan follows track controls steady wishes respect. Lives extend.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/med-dka-hhs.svg",
-        "alt": "DKA brings vomiting with Kussmaul breath and fruity ketones and resolves with fluids, potassium then insulin; HHS is drowsy and hyperosmolar and corrects slow; SGLT2 can keto at normal sugar.",
-        "caption": "DKA moves fast, HHS moves slow.",
-        "ar": 1.5385
-      }
-    }
-  ],
   "quiz": [
     "bk2-med-451",
     "bk2-med-452",
@@ -44,23 +21,51 @@
     "bk2-med-459",
     "bk2-med-460"
   ],
-  "src": [],
   "refs": [
     "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
   ],
-  "gen": "AI",
   "run": "books2-lon5",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
-  }
+  "src": [],
+  "steps": [
+    {
+      "say": "You should ask about excessive thirst, frequent urination at night, and recent weight change, because loss favours type 1 while gain with dark neck folds favours type 2. Suspect MODY when a lean young patient reports diabetes in three generations, and suspect LADA when a lean adult describes slow progression toward insulin. Ask about foot numbness, ulcers and leg pain on walking, blurred vision and laser therapy, frothy urine and ankle swelling, and any past vomiting with rapid breathing or confusion. Finally review HbA1c trend, hypoglycaemic episodes and driving safety.",
+      "tx": "Take a focused history of **polyuria** and polydipsia with nocturia and thirst, and ask about weight change with loss in type 1 and gain with acanthosis in type 2. Clarify young lean familial diabetes suggesting **MODY** and slow adult onset lean diabetes suggesting LADA. Ask about foot numbness, callus, ulcers and claudication, visual blurring and laser treatment, frothy urine and swelling, and prior **DKA** or HHS with vomiting or confusion. Review HbA1c control, hypoglycaemia and driving safety.",
+      "vis": null
+    },
+    {
+      "say": "Measure BMI and waist circumference and inspect the neck, eyelids and insulin injection sites for acanthosis, xanthelasma and lipohypertrophy. Feel foot pulses, test sensation with the monofilament, and look carefully for callus, ulcers and midfoot deformity. Test pinprick, vibration and ankle reflexes for stocking neuropathy, examine the lens and retina, and record oedema and blood pressure. Recognise DKA by dehydration, rapid deep breathing and fruity breath, and recognise HHS by drowsiness with severe dehydration. Check bedside glucose, ketones, urine protein and the ECG for potassium changes.",
+      "tx": "Examine **BMI** with waist circumference and look for acanthosis, xanthelasma and injection site lipohypertrophy. Check foot pulses, test light touch with monofilament, and inspect for callus, punched out ulcers and **Charcot** deformity. Test stocking pattern sensation, vibration and ankle reflexes, examine lens and retina including macula, and record oedema and blood pressure. Recognise dehydrated Kussmaul breathing with fruity odour in DKA and drowsiness with marked hyperosmolality in **HHS**. Note healed amputations and review bedside glucose, ketones, urine protein and ECG.",
+      "vis": null
+    },
+    {
+      "say": "Look at the sole where a painless punched out ulcer sits under the metatarsal head with a thick rim of callus around it. Notice the coloured dots that mark monofilament sensory testing points and the circles that mark pulse examination sites. Observe how the arch has collapsed into a rocker bottom Charcot deformity. Remember this pattern because callus with lost sensation and unnoticed ulcers commonly precedes foot infection and amputation.",
+      "tx": "Study the plantar foot showing a **punched out ulcer** under the metatarsal head with surrounding hyperkeratotic callus and a granulating base. Note the marked monofilament sensory test points over the toes and sole and the labelled dorsalis pedis and posterior tibial **pulse** sites. Observe the collapsed rocker bottom arch of **Charcot** midfoot deformity. Link each sign to bedside testing because painless ulcers with callus and lost protective sensation predict amputation risk.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-diabetes-gen1.webp",
+        "alt": "Plantar foot with punched out ulcer under metatarsal head, callus, monofilament dots, pulse sites and Charcot midfoot.",
+        "caption": "Diabetic foot with neuropathic ulcer and Charcot deformity.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "Follow HbA1c for control and urine albumin creatinine ratio with eGFR for kidney staging. Request GAD antibodies when slow adult onset in a lean patient suggests LADA, and request gene testing when early familial disease suggests MODY. Arrange retinal screening, foot Doppler studies, lipid profile and ketone with blood gas testing during crises. Distinguish ketosis prone type 1 youth from obese insulin resistant type 2, inherited MODY and secondary pancreatic or steroid related diabetes. Involve diabetes, eye and foot teams in joint decisions.",
+      "tx": "Track **HbA1c** for control and review renal staging with urine albumin creatinine ratio and eGFR. Request GAD antibodies when adult lean slow onset suggests LADA and gene testing when young lean familial disease suggests **MODY**. Arrange retinal screening with laser grading, foot Doppler with pressure assessment, lipid profile for statin decisions, and ketones with blood gases during crises. Contrast type 1 ketosis prone youth, type 2 obese insulin resistance, MODY inheritance and secondary pancreatic or steroid related disease. Involve the **MDT** across diabetes, eye and foot teams.",
+      "vis": null
+    },
+    {
+      "say": "You should begin with metformin and add an SGLT2 inhibitor or GLP receptor agonist when cardiac or renal protection matters. Use basal bolus insulin with clear sick day rules, and watch for hypoglycaemia, driving risk and ketoacidosis with normal sugar on SGLT2 inhibitors. Control blood pressure and lipids, offload and debride foot ulcers and revascularise when pulses remain poor, and refer sight threatening retinopathy for laser or vitrectomy. You should treat DKA with fluids, potassium and then insulin, and correct HHS slowly. Plan pregnancy early with folate and track control, kidney, foot and eye review.",
+      "tx": "Start **metformin** first line and add SGLT2 inhibitor or GLP receptor agonist for cardiac and renal protection. Use basal bolus insulin with sick day rules and monitor for hypoglycaemia, driving risk and euglycaemic ketoacidosis on **SGLT2** inhibitors. Control pressure and lipids with ACE inhibitor and statin, offload and debride foot ulcers with revascularisation when needed, and arrange laser or vitrectomy for sight threatening retinopathy. Treat **DKA** with fluids, potassium then insulin and correct HHS slowly. Plan pregnancy with folate and track HbA1c, renal, foot and eye review.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/med-dka-hhs.svg",
+        "alt": "DKA brings vomiting with Kussmaul breath and fruity ketones and resolves with fluids, potassium then insulin; HHS is drowsy and hyperosmolar and corrects slow; SGLT2 can keto at normal sugar.",
+        "caption": "DKA moves fast, HHS moves slow.",
+        "ar": 1.5385
+      }
+    }
+  ],
+  "subject": "medicine",
+  "title": "Diabetes mellitus long case: control, complications and crises",
+  "v": 1
 }

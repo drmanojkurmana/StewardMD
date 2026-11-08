@@ -1,66 +1,71 @@
 {
- "v": 1,
- "module": "med-hiv",
- "subject": "medicine",
- "title": "HIV infection and opportunistic infections",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**exposure** unprotected needle sharps months past, **window** flu-like seroconversion rash, **thrush** oral hairy oedema weight, **cough** PCP dry hypoxic exertional, **headache** crypto toxo seizures focal, **vision** CMV floaters painless loss, **diarrhoea** crypto microsporidia wasting, **drugs** adherence stigma asks) with **viva** (**wasted** thrushy diarrhoeal, **neurodeficient** seized demented) profiles; **partner** (disclosure testing) asks. Immunity fades.",
-   "say": "Exposures windows thrushes coughs is history: headaches cloud visions dim diarrhoeas drain drugs lapse partners share wasteds fade neurodeficients slip ARTs start IRISs watch. CD4s fall.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "kbWords": 0,
+    "numbers": true,
+    "shape": true
   },
-  {
-   "tx": "**Examination** (**wasting** temporal hollow chronic diarrhoea, **mouth** thrush hairy oedema Kaposi, **nodes** persistent generalised firm, **lungs** PCP dry tachypnoeic desaturating, **fundi** CMV pizza haemorrhagic, **neuro** toxo focal dementia vacuolar, **skin** Kaposi molluscum shingles scars, **liver** drug hepatitis tender) with **bedside** (**oxygen** exertional dips, **weight** wasting charts, **cognition** dementia screens) grades; **genitals** (ulcer discharge) checks. Defences crumble.",
-   "say": "Wastings mouths nodes lungs is exam: fundi bleed neuros focal skins stud livers ache oxygens dip weights chart cognitions fade ARTs build Cotrimoxazoles shield. Bodies thin.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-hiv-fig1.webp",
-    "alt": "Composite image showing oral thrush, Kaposi's sarcoma skin lesions, CMV retinitis fundus, and temporal wasting in HIV.",
-    "caption": "Key clinical signs of HIV-associated opportunistic infections. Image: Unknown, CC0/PD, Wikimedia Commons.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Investigations** (**ELISA** screen Western confirms, **viral-load** treatment response tracks, **CD4** bands OI predicts, **sputum** PCP TB GeneXpert sorts, ** cryptococcal** antigen meningitis screens, **toxoplasma** ring lesions imaging, **CMV** retinal PCR bloods, **malignancy** biopsy Kaposi lymphoma) with **differentials** (**TB** granulomas ADA, **lymphoma** monoclonal nodes, **dementia** metabolic drugs, **diarrhoea** CMV crypto parasites) sorts; **immunology** (prophylaxis tiers) meets. Counts stage.",
-   "say": "ELISAs loads CD4s sputums is Ix: antigens flag toxos ring CMVs stain malignancies knot TBs seed lymphomas clone dementias cloud diarrhoeas drain immunologists meet tiers choose wishes respect. Viruses count.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**ART** integrase backbone lifelong starts, **prophylaxis** cotrimoxazole fluconazole tiers, **PCP** high-dose cotrimoxazole steroids, **crypto** amphotericin flucytosine pressures, **toxo** pyrimethamine folinate chronic, **CMV** ganciclovir retinal guards, **IRIS** unmasking steroids watch, **prevent** condoms PrEP PEP PMTCT) with **traps** (**IRIS** early ART unmasks, **resistance** adherence gaps breed, **liver** nevirapine TB overlap) closes; **follow** (viral-load CD4 weight) tracks. Immunity rebuilds.",
-   "say": "ARTs prophylaxes PCP-treats cryptos is Ix: toxos calm CMVs guard IRISs warn resistances breed livers fail follows track loads sink wishes respect. Counts climb.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-771",
-  "bk2-med-772",
-  "bk2-med-773",
-  "bk2-med-774",
-  "bk2-med-775",
-  "bk2-med-776",
-  "bk2-med-777",
-  "bk2-med-778",
-  "bk2-med-779",
-  "bk2-med-780"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon9",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-hiv",
+  "quiz": [
+    "bk2-med-771",
+    "bk2-med-772",
+    "bk2-med-773",
+    "bk2-med-774",
+    "bk2-med-775",
+    "bk2-med-776",
+    "bk2-med-777",
+    "bk2-med-778",
+    "bk2-med-779",
+    "bk2-med-780"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon9",
+  "src": [],
+  "steps": [
+    {
+      "say": "Start by asking about any unprotected sexual contact or needle exposure and whether a flu like illness with fever and rash followed a few weeks later. Ask about mouth ulcers or white patches, chronic diarrhoea with weight loss, and a dry cough that worsens on exertion. Enquire about headache, fits, painless blurring of vision, missed doses, and whether the partner has been counselled and tested.",
+      "tx": "Take a focused HIV history starting with exposure and the acute seroconversion illness with fever, rash and sore throat a few weeks after contact. Ask about **oral thrush**, persistent diarrhoea with weight loss, and **dry cough** that suggests PCP on exertion. Ask about headache with seizures, painless visual loss, drug adherence, stigma and **partner testing** so contacts receive timely counselling and care.",
+      "vis": null
+    },
+    {
+      "say": "Look for temporal hollowing and weight loss, feel for firm generalised nodes, and inspect the mouth for white patches, white side tongue plaques, and violaceous nodules. Watch the respiratory rate and check whether saturation falls on walking, which points toward PCP. Examine the retina for haemorrhages, test power and memory for focal lesions and dementia, and palpate the abdomen for a tender liver.",
+      "tx": "Examine for chronic HIV clues including temporal wasting, **persistent lymphadenopathy**, and mouth lesions such as thrush, hairy leukoplakia or **Kaposi sarcoma**. Listen for tachypnoea with exertional desaturation that favours PCP and inspect the skin for molluscum, shingles scars and Kaposi lesions. Examine the fundi for haemorrhagic **CMV retinitis**, test for focal deficits and dementia, and palpate the liver for drug related tenderness.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-hiv-fig1.webp",
+        "alt": "Composite image showing oral thrush, Kaposi's sarcoma skin lesions, CMV retinitis fundus, and temporal wasting in HIV.",
+        "caption": "Key clinical signs of HIV-associated opportunistic infections. Image: Unknown, CC0/PD, Wikimedia Commons.",
+        "ar": 1.5
+      }
+    },
+    {
+      "say": "Confirm infection with a screening antibody test and a confirmatory assay, then follow viral load to judge treatment response and CD4 count to predict which infections threaten the patient. Send sputum for GeneXpert when cough or breathlessness suggests PCP or tuberculosis, and test serum cryptococcal antigen when headache or meningism appears. Request brain imaging for ring lesions in focal neurology and biopsy any suspicious node or skin lesion.",
+      "tx": "Confirm HIV with screening **ELISA** followed by confirmatory testing, then track **viral load** for treatment response and **CD4 count** to predict opportunistic infection risk. Order sputum GeneXpert to separate PCP from tuberculosis, serum cryptococcal antigen for meningitis, and brain imaging for toxoplasma ring lesions. Add retinal examination with CMV PCR and biopsy of suspicious nodes or skin lesions to exclude Kaposi sarcoma and lymphoma.",
+      "vis": null
+    },
+    {
+      "say": "Look at this axial contrast MRI and notice several bright rings scattered through both hemispheres with a clear preference for the deep grey nuclei. Observe the dark swelling around each ring, which represents vasogenic oedema and explains seizures and focal weakness. Connect this picture with advanced HIV and a low CD4 count in the exam, and contrast it with a single mass that would favour lymphoma instead.",
+      "tx": "This MRI shows multiple **ring enhancing lesions** favouring the **basal ganglia** with surrounding vasogenic oedema, which is classic for cerebral toxoplasmosis in advanced HIV. Contrast this pattern with a solitary lesion that favours lymphoma and with cryptococcal meningitis that usually lacks such rings. In an exam, link new focal seizures or deficits with a low CD4 count to this scan and state that serology plus imaging response guides management.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-hiv-gen1.webp",
+        "alt": "Axial contrast brain MRI showing multiple bright ring enhancing lesions in basal ganglia with surrounding oedema.",
+        "caption": "Axial brain MRI with ring enhancing basal ganglia lesions.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "Start lifelong combination treatment built on an integrase inhibitor and counsel strongly on adherence because missed doses breed resistance. Offer preventive cotrimoxazole according to the CD4 tier and treat each opportunistic infection on its own protocol while tracking weight, CD4 count, and viral load. Warn about immune reconstitution that can unmask hidden infection soon after treatment begins, and reinforce condoms, pre exposure prophylaxis, post exposure prophylaxis, and care in pregnancy.",
+      "tx": "Start lifelong **antiretroviral therapy** with an integrase backbone and reinforce adherence at every visit to prevent resistance. Give **cotrimoxazole prophylaxis** by CD4 tier, treat PCP with high dose cotrimoxazole plus steroids, and manage cryptococcal meningitis with antifungals while monitoring intracranial pressure. Treat toxoplasmosis and CMV retinitis promptly, watch for unmasking IRIS after ART starts, and combine condoms with PrEP, PEP and prevention of mother to child transmission.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "HIV infection and opportunistic infections",
+  "v": 1
 }

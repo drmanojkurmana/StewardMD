@@ -1,37 +1,8 @@
 {
-  "v": 1,
+  "gen": "AI",
+  "minutes": 7,
+  "model": "muse-wonder (local authoring, no external API)",
   "module": "med-glomerulonephritis",
-  "subject": "medicine",
-  "title": "Glomerulonephritis and the nephritic syndrome",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**cola** haematuria smoky clots, **oliguria** hypertensive headaches, **oedema** periorbital ankle, **post-streptococcal** sore impetigo latency weeks, **IgA** synpharyngitic loin ache, **vasculitic** purpura arthralgia sinus bleeds, **lupus** rashes mouth ulcers) with **viva** (**nephritic** hypertensive child, **pulmonary-renal** haemoptysis bleeder) profiles; **latency** (weeks strep, hours IgA) times. Glomeruli inflame.",
-      "say": "Colas oligurias oedemas latencies is history: synpharyngitics ache vasculitides bleed lupuses rash profiles time nephritics swell pulmonary-renals cough dips show. Urines darken.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/med-nephritic-nephrotic.svg",
-        "alt": "Nephritic syndrome is inflammatory: cola haematuria with red-cell casts, hypertension, oliguria, proteinuria below 3.5 grams per day; post-streptococcal disease follows by weeks, IgA disease strikes within hours. Nephrotic syndrome leaks above 3.5 grams per day with low albumin, oedema and high lipids.",
-        "caption": "Casts and latency split inflamed from leaky.",
-        "ar": 1.5385
-      }
-    },
-    {
-      "tx": "**Examination** (**BP** hypertensive encephalopathy grades, **oedema** periorbital sacral, **JVP** overload crackles, **dipstick** blood protein bedside, **purpura** palpable legs, **mouth** ulcers hairs, **ears** deaf Alport clues, **joints** arthritic lupus) with **bedside** (**urine** microscopy red-cell casts, **weights** daily gains, **fundi** hypertensive grades) dips; **lungs** (haemoptysis Goodpasture warns) listens. Bodies swell.",
-      "say": "Pressures oedemas jugulars dipsticks is exam: purpuras spot mouths ulcer ears deafen joints ache urines cast weights weigh fundi grade lungs bleed dialyses near. Faces puff.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**ASO** anti-DNase strep proves, **C3** low post-strep lupus, **ANCA** vasculitis MPO PR3, **anti-GBM** pulmonary-renal bleeds, **ANA** dsDNA lupus, **biopsy** crescents IgA deposits, **creatinine** RPGN velocity) with **differentials** (**post-strep** child recovers, **IgA** young recurs, **ANCA** old sinus purpura, **lupus** woman rashes) sorts; **renal** (urgent biopsy decides) meets. Complements fall.",
-      "say": "ASOs complements ANCAs GBMs is Ix: ANAs bind biopsies crescent creatinines race post-streps ease IgAs recur ANCAs age lupuses rash renals meet pulses give exchanges run. Filters clog.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**steroids** pulses flares, **cyclophosphamide** rituximab vasculitis, **plasma** exchange Goodpasture ANCA bleeds, **BP** ACE diuretics restricts, **dialysis** RPGN bridges, **prophylaxis** bones stomach PJP guards) with **traps** (**infection** immunosuppressed vaccines, **relapse** ANCA watches, **pregnancy** mycophenolate avoids) closes; **follow** (urine creatinine ANCA) tracks. Glomeruli quiet.",
-      "say": "Steroids cyclophosphamides plasmas exchanges is Rx: pressures lower dialyses bridge prophylaxes guard infections shield relapses watch pregnancies guard follows track remissions hold flares retreat. Urines clear.",
-      "vis": null
-    }
-  ],
   "quiz": [
     "bk2-med-301",
     "bk2-med-302",
@@ -44,23 +15,51 @@
     "bk2-med-309",
     "bk2-med-310"
   ],
-  "src": [],
   "refs": [
     "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
   ],
-  "gen": "AI",
   "run": "books2-lon4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
-  }
+  "src": [],
+  "steps": [
+    {
+      "say": "When you take the history, focus on the classic nephritic story. Ask whether the urine has turned dark like cola and whether urine output has fallen. Ask about swelling around the eyes in the morning and headaches from high blood pressure. Then pin down the timing because post streptococcal disease comes weeks after a sore throat or skin infection, while IgA disease arrives within hours with loin pain. Finally ask about rash, joint pain, mouth ulcers, sinus bleeding and coughing blood, because those point toward lupus, vasculitis or pulmonary renal disease.",
+      "tx": "Take a focused history for suspected nephritic syndrome. Ask about **cola coloured haematuria**, **oliguria** with hypertension and headache, and **periorbital oedema** that is worse in the morning. Clarify timing because post streptococcal disease follows a throat or skin infection by weeks while IgA disease follows within hours with loin pain. Ask about rash, joint pain, mouth ulcers, sinus bleeding and haemoptysis to spot lupus, vasculitis and pulmonary renal disease.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/med-nephritic-nephrotic.svg",
+        "alt": "Nephritic syndrome is inflammatory: cola haematuria with red-cell casts, hypertension, oliguria, proteinuria below 3.5 grams per day; post-streptococcal disease follows by weeks, IgA disease strikes within hours. Nephrotic syndrome leaks above 3.5 grams per day with low albumin, oedema and high lipids.",
+        "caption": "Casts and latency split inflamed from leaky.",
+        "ar": 1.5385
+      }
+    },
+    {
+      "say": "Start by measuring the blood pressure carefully because severe hypertension can injure the brain. Look for puffiness around the eyes and swelling over the ankles, and track daily weight to follow fluid gain. Listen to the chest for crackles and check the neck veins for overload. Dip the urine at the bedside for blood and protein and send a sample for microscopy to look for red cell casts. Examine the skin for purpuric spots, look inside the mouth, check hearing and joints, examine the fundi, and listen carefully for crackles or bleeding in the lungs.",
+      "tx": "Examine blood pressure carefully because hypertensive encephalopathy is the feared early complication. Look for **periorbital oedema**, check sacral oedema and daily weight gain, and listen for crackles with a raised jugular venous pressure that signals fluid overload. Test urine at the bedside for **blood and protein** and send it for microscopy to find red cell casts. Inspect skin for palpable purpura, check the mouth, ears and joints, examine fundi, and listen to lungs for **pulmonary haemorrhage**.",
+      "vis": null
+    },
+    {
+      "say": "Order blood tests that separate the causes clearly. Request streptococcal serology to prove recent infection and check complement levels because C3 falls in post streptococcal disease and lupus. Request ANCA testing for vasculitis, anti GBM antibody when the lungs are bleeding, and ANA with anti double stranded DNA when lupus is suspected. Follow creatinine closely because a rapid rise warns of crescentic disease. Arrange urgent renal biopsy when indicated, because it can reveal crescents or mesangial IgA deposits and guides treatment.",
+      "tx": "Order streptococcal serology such as **ASO titre** to prove recent infection, and check **C3 complement** which falls in post streptococcal disease and lupus. Request **ANCA testing** with MPO and PR3 for vasculitis, anti GBM antibody when there is pulmonary renal bleeding, and ANA with anti double stranded DNA for lupus. Follow creatinine closely because a rapid rise warns of crescentic disease, and arrange urgent renal biopsy which may show crescents or **mesangial IgA deposits**.",
+      "vis": null
+    },
+    {
+      "say": "Look closely at this paired biopsy panel because it shows what the blood tests predict. On the left, the PAS stain shows a glomerulus squeezed by a cellular crescent, which marks rapidly progressive disease and demands urgent treatment. On the right, immunofluorescence lights up green granular deposits of IgA in the mesangium, which is typical of IgA nephropathy. In the exam, connect crescents with a rapidly rising creatinine and connect this IgA pattern with haematuria that follows a sore throat by hours.",
+      "tx": "Study this paired histology panel because biopsy often decides the diagnosis. Panel A is a PAS stained glomerulus where a cellular **crescent** compresses the tuft, the hallmark of rapidly progressive disease that needs urgent action. Panel B is immunofluorescence showing granular green **mesangial IgA deposits**, the defining feature of IgA nephropathy. For exams, link crescents with a racing creatinine and link dominant IgA staining with synpharyngitic haematuria.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-glomerulonephritis-gen1.webp",
+        "alt": "PAS stain with glomerular crescent beside immunofluorescence showing mesangial IgA deposits",
+        "caption": "Crescentic glomerulonephritis and IgA nephropathy histology",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "You should treat active disease firmly but protect the patient at the same time. Give corticosteroids, including pulses for severe flares, and add cyclophosphamide or rituximab for vasculitis. Use plasma exchange for Goodpasture disease and for ANCA vasculitis with lung bleeding. Control blood pressure with ACE inhibitors and diuretics, restrict salt, and start dialysis when uraemia or overload threatens. Prevent bone loss, stomach injury and infection during immunosuppression, avoid mycophenolate in pregnancy, watch for relapse, and follow urine, creatinine and ANCA levels closely.",
+      "tx": "Treat flares with **corticosteroids** including pulses for severe disease, and add cyclophosphamide or rituximab for vasculitis. Use **plasma exchange** for Goodpasture disease and for ANCA vasculitis with pulmonary haemorrhage, control blood pressure with ACE inhibitors and diuretics with salt restriction, and start dialysis when uraemia or overload threatens. Guard bones, stomach and infection during immunosuppression, avoid mycophenolate in pregnancy, watch for relapse, and follow urine, creatinine and **ANCA titres**.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Glomerulonephritis and the nephritic syndrome",
+  "v": 1
 }

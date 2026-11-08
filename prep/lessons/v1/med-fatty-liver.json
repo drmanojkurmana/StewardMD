@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-fatty-liver",
- "subject": "medicine",
- "title": "Alcoholic and non-alcoholic fatty liver disease",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**metabolic** obese diabetic dyslipidaemic, **drinks** units binges CAGE, **weight** yo-yo sugary, **diabetes** control HbA1c, **drugs** amiodarone methotrexate, **thyroid** hypo PCOS risks, **family** lean NAFLD genes, **fatigue** RUQ aches) with **viva** (**central** obese drinker, **lean** diabetic steatotic) profiles; **units** (weekly tallies) counts. Livers fatten.",
-   "say": "Metabolics drinks weights diabetics is history: drugs harm thyroids slow families gene fatigues ache units tally CAGEs screen binges harm waists measure diets recall sugars spike. Fats deposit.",
-   "vis": null
-  },
-  {
-   "tx": "**Examination** (**obese** BMI waist grades, **hepatomegaly** smooth tender edge, **stigmata** spider palmar late, **xanthelasma** dyslipidaemia marks, **acanthosis** insulin resistance, **gynaecomastia** alcohol tells, **oedema** protein late, **confusion** encephalopathy flags) with **bedside** (**BP** metabolic pressures, **urine** protein diabetic, **glucose** fingers) fingers; **Dupuytren** (alcohol cords) bends. Bodies fatten.",
-   "say": "Obeses hepatomegalies stigmatas is exam: xanthelasmas mark acanthoses darken gynaecomastias swell oedemas pit confusions cloud pressures rise urines leak glucoses swing Dupuytrens cord drinks confess livers span. Waists widen.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**LFT** ALT GGT patterns, **ultrasound** bright liver grades, **FibroScan** stiffness CAP scores, **FIB-4** NFS triages, **lipids** HbA1c thyroid, **alcohol** CDT screens, **autoimmune** ANA excludes, **biopsy** NASH SAF proves) with **differentials** (**alcohol** CDT history separates, **drugs** timing Roussel, **viral** serology windows, **haemochromatosis** iron saturates) sorts; **stage** (fibrosis decides) grades. Fats image.",
-   "say": "LFTs ultrasounds FibroScans FIB-4s is Ix: lipids sweet alcohols screen autoimmunes mark biopsies prove CDT separates timings harm virals window irons load stages grade fibroses stiffen weights cut sugars tame pressures tame. Echoes bright.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-fatty-liver-fig1.webp",
-    "alt": "Two ultrasound images side-by-side. Left: normal liver with homogeneous echotexture. Right: fatty liver showing increased brightness and posterior attenuation.",
-    "caption": "Ultrasound comparison: normal liver versus fatty liver with increased echogenicity",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**abstain** CAGE counsel halves, **weight** 10 percent targets, **diabetes** tight statins, **vitamin E** selected NASH, **pioglitazone** diabetic NASH, **transplant** abstinence lists, **exercise** 150 minutes, **diet** Mediterranean cuts) with **traps** (**statin** fear treats protects, **paracetamol** safe doses, **surgery** risk assesses, **pregnancy** AFLP delivers) closes; **follow** (FIB-4 yearly) tracks. Fats melt.",
-   "say": "Abstains weights diabetics is Rx: Es guard pioglitazones sensitise transplants list exercises move diets cut statins guard paracetamols dose surgeries risk pregnancies deliver follow-ups fibrose screens relapses watch wishes respect. Livers slim.",
-   "vis": null
+  "v": 1,
+  "module": "med-fatty-liver",
+  "subject": "medicine",
+  "title": "Alcoholic and non-alcoholic fatty liver disease",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Take a focused **alcohol history** with weekly units, binge pattern and CAGE questions, since alcohol and metabolic risk often coexist in the same patient. Ask about **metabolic syndrome** features such as obesity, type 2 diabetes, dyslipidaemia and hypertension, plus weight trends and sugary diet. Record **drug history** including amiodarone, methotrexate and steroids, thyroid disease, PCOS, family history of liver disease, and symptoms like fatigue or right upper quadrant ache.",
+      "say": "Ask every patient with suspected fatty liver about alcohol intake in detail, because you must separate alcoholic from nonalcoholic disease. You should record weekly units, binge episodes and CAGE responses, and ask about diet, weight change and sugary drinks. Review diabetes control, lipid profile, thyroid status and all drugs that injure the liver. You should explore family history of liver disease and ask about fatigue or dull pain in the right upper abdomen.",
+      "vis": null
+    },
+    {
+      "tx": "Measure **body mass index** and waist circumference and record blood pressure, urine protein and capillary glucose at the bedside. Palpate for **hepatomegaly**, typically a smooth liver edge, and look for xanthelasma, Dupuytren contracture and gynaecomastia as clues to dyslipidaemia or alcohol use. Inspect for **acanthosis nigricans** marking insulin resistance, and watch for spider naevi, palmar erythema, oedema or confusion that signal advanced liver disease.",
+      "say": "Examine the patient for obesity by measuring body mass index and waist circumference, since central obesity strongly supports fatty liver. Palpate the abdomen for an enlarged smooth liver edge and check blood pressure, urine protein and capillary glucose at the bedside. Look for xanthelasma, Dupuytren contracture and gynaecomastia, which point toward dyslipidaemia or chronic alcohol use. Inspect the neck and axillae for dark velvety skin and watch for confusion or swelling that suggests advanced disease.",
+      "vis": null
+    },
+    {
+      "tx": "This photograph shows **acanthosis nigricans** as a dark velvety thickened plaque in the neck crease, labelled as a marker of insulin resistance. Recognise this sign during examination because it points toward **metabolic syndrome** and underlying nonalcoholic fatty liver disease. In exams, link the skin finding to **insulin resistance** and state that you would next check body mass index, glucose control and lipid profile in the patient.",
+      "say": "Look at this photograph of the neck crease, which shows a dark velvety plaque of acanthosis nigricans. You should recognise it as a visible marker of insulin resistance and metabolic syndrome in the examination. Mention in your answer that this finding strengthens the diagnosis of nonalcoholic fatty liver disease. State that you would follow it by checking weight, blood glucose and lipids in the patient.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-fatty-liver-gen1.webp",
+        "alt": "Close view of dark velvety hyperpigmented plaque in neck crease labeled acanthosis nigricans.",
+        "caption": "Photo of velvety neck plaque marking insulin resistance.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Check **liver function tests** for raised ALT with disproportionate GGT in drinkers, plus lipids, HbA1c, thyroid profile and carbohydrate deficient transferrin as an alcohol marker. Request **ultrasound** of the liver, which shows increased brightness in steatosis, and use FibroScan stiffness with CAP values for quantification. Apply **fibrosis scores** such as FIB-4 and NAFLD fibrosis score to triage, exclude viral, autoimmune and iron overload causes with serology, and reserve biopsy for suspected steatohepatitis or staging.",
+      "say": "Order liver function tests and compare ALT with GGT, because a disproportionate GGT rise favours alcohol related injury. Request an ultrasound of the liver, which appears abnormally bright when fat infiltrates the tissue. You should use FibroScan stiffness and blood based fibrosis scores to stage the disease without a biopsy. Exclude viral hepatitis, autoimmune disease and iron overload with targeted blood tests, and reserve liver biopsy for suspected steatohepatitis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-fatty-liver-fig1.webp",
+        "alt": "Two ultrasound images side-by-side. Left: normal liver with homogeneous echotexture. Right: fatty liver showing increased brightness and posterior attenuation.",
+        "caption": "Ultrasound comparison: normal liver versus fatty liver with increased echogenicity",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "Advise complete **alcohol abstinence** with counselling and follow up, since abstinence rapidly improves steatosis and liver enzymes. Prescribe structured **weight loss** targeting around ten percent of body weight through Mediterranean diet and at least 150 minutes of exercise weekly, with tight diabetes control. Consider vitamin E in selected non diabetic steatohepatitis and pioglitazone in diabetic patients, continue **statin therapy** where indicated, and monitor fibrosis yearly while referring advanced disease for transplant assessment.",
+      "say": "Counsel the patient to stop alcohol completely and arrange regular follow up, because abstinence improves liver fat and enzymes quickly. Prescribe a Mediterranean diet with at least 150 minutes of exercise each week and aim for steady sustained weight loss. Control diabetes and lipids firmly and continue statins when guidelines indicate them. Reserve vitamin E and pioglitazone for selected steatohepatitis cases and monitor fibrosis scores every year.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-251",
+    "bk2-med-252",
+    "bk2-med-253",
+    "bk2-med-254",
+    "bk2-med-255",
+    "bk2-med-256",
+    "bk2-med-257",
+    "bk2-med-258",
+    "bk2-med-259",
+    "bk2-med-260"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon3",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ],
- "quiz": [
-  "bk2-med-251",
-  "bk2-med-252",
-  "bk2-med-253",
-  "bk2-med-254",
-  "bk2-med-255",
-  "bk2-med-256",
-  "bk2-med-257",
-  "bk2-med-258",
-  "bk2-med-259",
-  "bk2-med-260"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon3",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
 }

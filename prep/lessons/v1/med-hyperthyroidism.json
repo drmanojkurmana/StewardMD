@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-hyperthyroidism",
- "subject": "medicine",
- "title": "Thyrotoxicosis, Graves' disease and thyroid storm",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**heat** intolerance sweats thirst, **weight** loss good appetite, **bowel** frequent diarrhoea motions, **tremor** hands shaky writing, **palpitations** AF breathless chest, **eye** gritty stare diplopia, **neck** Graves diffuse bruit thrill, **storm** fever agitation precipitant infection) with **viva** (**thyrotoxic** tremulous tachycardic, **stormy** febrile delirious) profiles; **appetite** (loss hypo, excess hyper) contrasts. Glands race.",
-   "say": "Heats weights bowels tremors is history: palpitations race eyes stare necks thrill storms rage thyrotoxics shake stormies burn appetites contrast colds slow heats waste. Bodies overheat.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**hands** fine tremor sweaty onycholysis, **pulse** sinus AF collapsing, **eye** stare lid lag chemosis proptosis, **neck** diffuse Graves thrill bruit nodule, **pretibial** myxoedema clubbing acropachy, **reflexes** brisk proximal myopathy, **storm** hyperpyrexia agitation coma, **weight** loss measures) with **bedside** (**ECG** AF tachycardia, **tremor** paper rattles, **eye** closure diplopia) stares; **goitre** (toxic nodule solitary) feels. Glands overdrive.",
-   "say": "Hands pulses eyes necks is exam: pretibials thick reflexes brim storms burn weights fall ECGs race tremors rattle closures fail goitres thrill toxics race. Patients shake.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-hyperthyroidism-fig1.webp",
-    "alt": "Illustration of a patient with exophthalmos, goitre, hand tremor, onycholysis, and pretibial myxoedema, demonstrating Graves' disease.",
-    "caption": "Key clinical signs of Graves' disease and thyrotoxicosis",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Investigations** (**TSH** suppressed FT4 FT3 high proves, **TRAb** Graves TPO marks, **uptake** diffuse Graves hot nodule thyroiditis low, **ECG** AF rate controls, **calcium** APAT hypercalcaemia, **storm** Burch Wartofsky scores) with **differentials** (**Graves** eye bruit diffuse, **nodule** solitary hot, **thyroiditis** tender low uptake, **factitious** thyroglobulin low) sorts; **ophthalmology** (sight threatens) meets. Hormones surge.",
-   "say": "TSHs TRAbs uptakes ECGs is Ix: calciums rise storms score Graves stare nodules burn thyroiditides ache factitious steal ophthalmologies meet steroids shield sight saves. Numbers race.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**carbimazole** blocks synthesis rashes marrow, **beta** propranolol tremor rate eyes, **storm** ICU carbimazole iodine steroids cool fluids, **radioiodine** Graves nodule cures pregnancy avoids, **surgery** compressive eye uncontrolled, **eye** selenium steroids decompress, **AF** anticoagulate rate) with **traps** (**agranulocytosis** sore throat stops, **storm** delay kills, **pregnancy** PTU first trimester) closes; **follow** (TFT TRAb eyes) tracks. Glands brake.",
-   "say": "Carbimazoles betas iodines radiations is Rx: surgeries cut eyes shield AFs thin agranulocytoses halt storms kill pregnancies guard follows track TFTs steady wishes respect. Hormones calm.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-391",
-  "bk2-med-392",
-  "bk2-med-393",
-  "bk2-med-394",
-  "bk2-med-395",
-  "bk2-med-396",
-  "bk2-med-397",
-  "bk2-med-398",
-  "bk2-med-399",
-  "bk2-med-400"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon5",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 5,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-hyperthyroidism",
+  "quiz": [
+    "bk2-med-391",
+    "bk2-med-392",
+    "bk2-med-393",
+    "bk2-med-394",
+    "bk2-med-395",
+    "bk2-med-396",
+    "bk2-med-397",
+    "bk2-med-398",
+    "bk2-med-399",
+    "bk2-med-400"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon5",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about heat intolerance, sweating, thirst and weight change despite good appetite. You should ask about loose motions, hand tremor, palpitations and breathlessness in daily life. Look for gritty eyes, double vision and neck swelling with a bruit. Remember that fever with agitation suggests thyroid storm, often after infection.",
+      "tx": "Hyperthyroidism usually presents with heat intolerance, sweating and thirst, with **weight loss** despite a good appetite and frequent loose motions. Patients report hand tremor that disturbs writing, **palpitations** with breathlessness, and gritty eyes with double vision. The neck may show a diffuse **Graves goitre** with a thrill or bruit. **Thyroid storm** presents with fever and agitation, often triggered by infection.",
+      "vis": null
+    },
+    {
+      "say": "Examine the hands for fine tremor, sweating and nail lifting from the bed. Feel the pulse for sinus tachycardia or atrial fibrillation with rapid rate. Inspect the eyes for stare, lid lag and proptosis, and test eye closure. You should palpate the neck for a diffuse thrill and listen for a bruit.",
+      "tx": "On examination look for a fine tremor of sweaty hands, onycholysis and a rapid or irregular pulse. Eye signs include stare, lid lag, chemosis and **proptosis**. The neck may show a diffuse **Graves goitre** with a thrill and bruit, or a solitary toxic nodule. **Pretibial myxoedema**, clubbing, brisk reflexes and proximal weakness support the diagnosis. Storm shows hyperpyrexia with agitation or coma.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-hyperthyroidism-fig1.webp",
+        "alt": "Illustration of a patient with exophthalmos, goitre, hand tremor, onycholysis, and pretibial myxoedema, demonstrating Graves' disease.",
+        "caption": "Key clinical signs of Graves' disease and thyrotoxicosis",
+        "ar": 1.8349
+      }
+    },
+    {
+      "say": "Check thyroid function tests and expect suppressed TSH with raised free hormones. Request TRAb when Graves disease seems likely from eye or neck signs. Compare causes with uptake scanning before committing to a diagnosis. Obtain an ECG for atrial fibrillation and check calcium when indicated.",
+      "tx": "Blood tests show suppressed **TSH** with raised free T4 and free T3. Positive **TRAb** supports Graves disease, while a low thyroglobulin suggests factitious intake. **Uptake scanning** shows diffuse uptake in Graves disease, a solitary hot nodule in toxic adenoma, and low uptake in thyroiditis. ECG may show atrial fibrillation, and calcium may rise. Use a clinical score when storm is suspected.",
+      "vis": null
+    },
+    {
+      "say": "Study the three panels and link each pattern to its cause. You should notice diffuse glow across both lobes in Graves disease. Contrast that with one bright hot nodule and a dark rest in toxic adenoma. Recognise the faint low uptake of thyroiditis, where stored hormone leaks out.",
+      "tx": "The scan panel shows three classic patterns that separate common causes. Graves disease shows **diffuse uptake** across the whole gland. Toxic adenoma shows a solitary **hot nodule** with suppression elsewhere. Subacute thyroiditis shows globally **low uptake** because stored hormone leaks without new synthesis. Matching the scan to the neck and eye findings focuses treatment correctly.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-hyperthyroidism-gen1.webp",
+        "alt": "Three thyroid scintigraphy panels showing diffuse uptake in Graves disease, focal hot nodule in toxic adenoma, and low uptake in subacute thyroiditis",
+        "caption": "Thyroid scintigraphy comparing diffuse, focal hot, and low uptake patterns",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "Start carbimazole to block hormone synthesis and warn about rash, sore throat and fever. Add propranolol to settle tremor, rapid pulse and distressing eye symptoms. Treat storm urgently in intensive care with fluids, cooling, steroids and iodine. Choose radioiodine or surgery for suitable patients and avoid radioiodine in pregnancy.",
+      "tx": "**Carbimazole** blocks new hormone synthesis but can cause rash and marrow suppression, so warn about sore throat and fever. **Propranolol** controls tremor, tachycardia and eye symptoms while definitive therapy starts. **Thyroid storm** needs intensive care with carbimazole, iodine, steroids, cooling and fluids. Radioiodine suits Graves disease and toxic nodules but is avoided in pregnancy, where propylthiouracil is preferred early. Surgery helps compressive or uncontrolled goitre.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Thyrotoxicosis, Graves' disease and thyroid storm",
+  "v": 1
 }

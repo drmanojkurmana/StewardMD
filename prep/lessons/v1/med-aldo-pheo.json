@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-aldo-pheo",
- "subject": "medicine",
- "title": "Primary aldosteronism and phaeochromocytoma",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**resistant** three-drug hypertension young, **potassium** low cramps weakness polyuria, **alkalosis** muscle tetany tingling, **paroxysms** headache sweats palpitations pallor, **triggers** exercise tyramine micturition, **MEN** family medullary pheo parathyroid, **lump** adrenal incidental spells) with **viva** (**aldosteronic** resistant hypokalaemic, **pheo** paroxysmal sweating) profiles; **pressure** (resistant curable sorts) states. Glands overact.",
-   "say": "Resistants potassiums alkaloses paroxysms is history: triggers fire MENs cluster lumps swell pressures state aldos resist pheos burst spells strike crises spike. Pressures surge.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**BP** resistant arms legs young, **potassium** cramps tetany weakness, **pallor** paroxysmal sweats tremor, **pulse** tachycardic labile pressures, **fundi** malignant grades, **thyroid** medullary nodule MEN, **striae** absent Conn slims, **weight** pheo loses) with **bedside** (**electrolytes** low high bicarbonate, **ECG** U waves prolonged, **urine** metanephrines collects) collects; **crisis** (induction triggers) guards. Catecholamines surge.",
-   "say": "Pressures potassiums pallors pulses is exam: fundi grade thyroids lump striae spare weights fall electrolytes dip ECGs wave urines collect crises guard blocks start. Bodies flush.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**ratio** aldosterone renin high screens, **saline** suppression fails confirms, **adrenal** vein sampling lateralises, **metanephrines** plasma urine pheo proves, **CT** MRI adrenals lump hunts, **MIBG** metastatic maps) with **differentials** (**adenoma** unilateral resects, **hyperplasia** bilateral blocks, **pheo** metanephrine spells, **renal** artery bruit young) sorts; **surgical** (laparoscopic decides) meets. Hormones flood.",
-   "say": "Ratios salines samplings metanephrines is Ix: CTs lump MIBGs map adenomas side hyperplasias spread pheos fire renals narrow surgicals meet cuts cure alphas block crises guard. Numbers screen.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-aldo-pheo-fig1.webp",
-    "alt": "Flowchart showing diagnostic steps for primary aldosteronism and pheochromocytoma, including biochemical screens, confirmatory tests, imaging, and localization.",
-    "caption": "Diagnostic pathway for primary aldosteronism and pheochromocytoma",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**spironolactone** eplerenone blocks pressure potassium, **resect** adenoma cures hypertension, **alpha** phenoxybenzamine first weeks fluids, **beta** after alpha tachycardia, **operate** laparoscopic crisis covers, **metastatic** MIBG octreotide controls) with **traps** (**beta** alone kills, **biopsy** pheo storms, **pregnancy** methyldopa plans) closes; **follow** (pressure potassium metanephrines) tracks. Glands calmed.",
-   "say": "Spironolactones resects alphas betas is Rx: operates cut metastatics map biopsies storm betas kill pregnancies plan follows track pressures ease potassiums rise wishes respect. Surges settle.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-431",
-  "bk2-med-432",
-  "bk2-med-433",
-  "bk2-med-434",
-  "bk2-med-435",
-  "bk2-med-436",
-  "bk2-med-437",
-  "bk2-med-438",
-  "bk2-med-439",
-  "bk2-med-440"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon5",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-aldo-pheo",
+  "quiz": [
+    "bk2-med-431",
+    "bk2-med-432",
+    "bk2-med-433",
+    "bk2-med-434",
+    "bk2-med-435",
+    "bk2-med-436",
+    "bk2-med-437",
+    "bk2-med-438",
+    "bk2-med-439",
+    "bk2-med-440"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon5",
+  "src": [],
+  "steps": [
+    {
+      "say": "Suspect these disorders when hypertension resists three medicines in a young patient, especially with cramps, weakness and excess urination from low potassium. Ask about sudden bursts of headache, sweating, palpitations and pallor, and identify triggers such as exercise or passing urine. Record any adrenal lump found by chance, and explore the family history for thyroid or parathyroid tumours.",
+      "tx": "Suspect secondary hypertension when a young patient needs three drugs yet pressure stays high, with low **potassium** causing cramps, weakness and polyuria. Ask about headache, sweats, palpitations and pallor arriving in **paroxysms**, plus triggers such as exercise, straining or micturition. Record adrenal lumps found by chance, and take a family history of medullary thyroid cancer or parathyroid disease suggesting **MEN** syndromes.",
+      "vis": null
+    },
+    {
+      "say": "Measure blood pressure carefully in both arms and legs, because resistant hypertension in a young person suggests a curable cause. Observe cramps, weakness, pallor, sweating and tremor, particularly during a paroxysm. Feel the pulse for tachycardia, examine the fundi for severe hypertensive change, and palpate the thyroid for nodules linked with inherited syndromes.",
+      "tx": "Measure pressure in both arms and legs, since **resistant hypertension** in the young points to a curable cause. Look for cramps, tetany and weakness from low potassium, and for pallor with sweats and tremor during **paroxysms**. Feel a fast labile pulse, grade the fundi for malignant change, palpate the thyroid for a medullary nodule, and note that Conn patients stay slim without **striae**.",
+      "vis": null
+    },
+    {
+      "say": "Screen for aldosterone excess with the aldosterone renin ratio, and confirm the diagnosis when saline loading fails to suppress aldosterone. Localise the source with adrenal vein sampling, which separates a one sided adenoma from two sided hyperplasia. Confirm phaeochromocytoma with plasma or urine metanephrines, locate the tumour with CT or MRI, and map spread with MIBG scanning.",
+      "tx": "Screen with a high aldosterone to **renin ratio**, then confirm autonomy when saline **suppression** fails to lower aldosterone. Use **adrenal vein** sampling to lateralise between unilateral adenoma and bilateral hyperplasia. Prove phaeochromocytoma with raised plasma or urine metanephrines, hunt the lump with CT or MRI of the adrenals, and map spread with MIBG scanning.",
+      "vis": {
+        "alt": "Flowchart showing diagnostic steps for primary aldosteronism and pheochromocytoma, including biochemical screens, confirmatory tests, imaging, and localization.",
+        "ar": 1.8349,
+        "caption": "Diagnostic pathway for primary aldosteronism and pheochromocytoma",
+        "kind": "image",
+        "src": "v1/lessons/media/med-aldo-pheo-fig1.webp"
+      }
+    },
+    {
+      "say": "Treat aldosterone excess with spironolactone or eplerenone to control pressure and potassium, and offer surgery when a one sided adenoma promises cure. Block alpha receptors with phenoxybenzamine for several weeks before phaeochromocytoma surgery, and add beta blockade only afterwards. Remove the tumour laparoscopically with full crisis cover, and never biopsy a suspected phaeochromocytoma or use beta blockade alone.",
+      "tx": "Control aldosterone effects with **spironolactone** or eplerenone, which lower pressure and restore potassium, and resect a unilateral adenoma for cure. Prepare phaeochromocytoma with **alpha blockade** using phenoxybenzamine plus fluids for weeks, adding beta blockade only afterwards for tachycardia. Remove the tumour laparoscopically with crisis cover, never biopsy a suspected **phaeochromocytoma**, and never give beta blockade alone.",
+      "vis": null
+    },
+    {
+      "say": "Look at this operative view and identify the graspers, the laparoscope and the clips closing the adrenal vein. Surgeons secure the vein early because all the hormones leaving the gland travel through it. Explain that removing the adenoma completely can cure hypertension in unilateral disease, and recall that careful preparation prevents a crisis on the table.",
+      "tx": "The new view shows **laparoscopic surgery** for an adrenal adenoma, with graspers holding tissue and clips across the **adrenal vein** beside the laparoscope. Secure venous control matters because the gland pours catecholamines or aldosterone into this single channel. In the exam, describe the instruments and the clipped vein, and explain why complete **tumour removal** cures unilateral disease.",
+      "vis": {
+        "alt": "Laparoscopic view shows adrenal adenoma, adrenal vein with clips, graspers and laparoscope.",
+        "ar": 1.3393,
+        "caption": "Surgical illustration of laparoscopic adrenal adenoma with clipped vein. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-aldo-pheo-gen1.webp"
+      }
+    }
+  ],
+  "subject": "medicine",
+  "title": "Primary aldosteronism and phaeochromocytoma",
+  "v": 1
 }
