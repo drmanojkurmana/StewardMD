@@ -1,0 +1,209 @@
+{
+  "gen": "AI",
+  "id": "prd-mediastinal-masses-pediatric",
+  "module": "Neonatal Respiratory Distress and Congenital Thoracic Pathology",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Pediatric Mediastinal Compartment Masses and Thymic Pathology",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Before calling any anterior mediastinal shadow a mass in a young child, study the normal thymus. It makes a triangular sail shape against the right heart border and a wavy scalloped edge where the ribs press on it, and crucially it never squeezes the airway behind it.",
+      "tx": "Recognise the **normal thymic wave and sail sign** before diagnosing a mediastinal mass. The normal paediatric thymus creates the sail sign, a triangular shadow with a sharp lateral margin, and the wave sign, a scalloped lateral border from anterior rib indentations. Normal thymus moulds around structures without compressing the trachea or displacing vessels. When in doubt, ultrasound shows normal thymic tissue with fine echogenic strands and no mass effect.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/thymoma-fig1.webp",
+        "alt": "Imaging of an anterior mediastinal thymic mass for comparison with the normal thymus.",
+        "caption": "Anterior mediastinum: compare any mass with normal thymus. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "For a true anterior mediastinal mass in a child, work through the four Ts with a paediatric twist. T cell lymphoblastic lymphoma leads the list, then teratoma and other germ cell tumours, while thymoma is genuinely rare in childhood and an ectopic thyroid mass completes the set.",
+      "tx": "Apply the **anterior mediastinal 4Ts in children**. The differential is T-cell lymphoblastic lymphoma, the most common cause, teratoma and other germ cell tumors, thymoma or thymic carcinoma, which is rare in children, and thyroid ectopic mass. Age refines the list further: neuroblastoma dominates the posterior compartment in toddlers, while lymphoma leads in older children and adolescents presenting with an anterior mass.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "4Ts differential",
+          "Paediatric note"
+        ],
+        "rows": [
+          [
+            "T-cell lymphoma",
+            "Most common anterior mass"
+          ],
+          [
+            "Teratoma / germ cell",
+            "Fat, fluid, calcification"
+          ],
+          [
+            "Thymoma",
+            "Rare in children"
+          ],
+          [
+            "Thyroid ectopic",
+            "Confirm orthotopic thyroid present"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "T cell lymphoblastic lymphoma earns respect because of how fast it grows. A large anterior mass can narrow the trachea and bronchi and obstruct the superior vena cava within days, which is why the anaesthetist must see the airway imaging before any biopsy is attempted.",
+      "tx": "Treat **T-lymphoblastic lymphoma mass** as an airway emergency until proved otherwise. It presents as a rapidly expanding anterior mediastinal mass causing severe tracheobronchial compression, superior vena cava syndrome and pleural effusion. Cross sectional imaging must quantify tracheal narrowing before sedation or general anaesthesia, because induction can complete the obstruction. Where the airway is critical, diagnosis may need a pleural fluid sample or peripheral node rather than mediastinal biopsy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Rapid anterior mediastinal mass"
+          },
+          {
+            "id": "b",
+            "label": "Measure tracheal compression"
+          },
+          {
+            "id": "c",
+            "label": "Anaesthetist reviews airway first"
+          },
+          {
+            "id": "d",
+            "label": "Safest tissue route chosen"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A mature teratoma usually declares itself by containing tissues from several germ layers at once. Look for a well wrapped anterior mass holding fat and fluid together with coarse calcification, sometimes even a formed tooth, which appears in over half of these tumours.",
+      "tx": "Identify **mediastinal mature teratoma** by its mixed tissue content. The well-encapsulated anterior mass contains fat, fluid and coarse calcifications, occasionally bone or tooth fragments, in over 50% of cases. That combination is close to diagnostic on computed tomography (CT). Immature elements and raised alpha-fetoprotein suggest a malignant germ cell component instead, so tumour markers accompany imaging for every paediatric mediastinal germ cell lesion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mature teratoma",
+          "points": [
+            "Fat, fluid and calcification together",
+            "Tooth or bone fragments possible",
+            "Well encapsulated mass"
+          ]
+        },
+        "right": {
+          "title": "Lymphoblastic lymphoma",
+          "points": [
+            "Solid, fast growing mass",
+            "Airway and SVC compression",
+            "Pleural effusion common"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Move to the back of the chest and the differential narrows sharply. Over ninety percent of posterior mediastinal masses in children are neurogenic, arising either from the sympathetic chain tumours or from nerve sheath tumours alongside the spine.",
+      "tx": "Remember that **posterior mediastinal masses are neurogenic** in the great majority of children. Over 90% are neurogenic tumors arising from the sympathetic chain, namely neuroblastoma, ganglioneuroblastoma and ganglioneuroma, or from nerve sheath tumors such as schwannoma. The imaging task is to localise the mass along the paravertebral gutter, look for calcification and rib remodelling, and then examine the spinal canal for extension before anyone operates (Posterior mediastinum neurogenic tumors).",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/disorders-of-the-mediastinum-fig1.webp",
+        "alt": "Imaging of the mediastinal compartments and their common masses.",
+        "caption": "Mediastinal compartments guide the differential diagnosis. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "The finding that changes the operation is tumour slipping through a neural foramen into the spinal canal. This dumbbell extension can sit silently against the cord, so a contrast enhanced scan of the spine is mandatory before resection whenever a neurogenic tumour hugs the vertebrae.",
+      "tx": "Exclude **dumbbell tumor neuroaxis invasion** before resecting a posterior mediastinal mass. Neurogenic tumors can extend through the intervertebral neural foramen into the spinal canal, forming a dumbbell or hourglass lesion that threatens the cord. Contrast enhanced magnetic resonance imaging (MRI) of the spine is therefore mandatory before surgical resection. Removing the chest component alone can destabilise the intraspinal part and cause catastrophic cord injury.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Paravertebral neurogenic tumour"
+          },
+          {
+            "id": "b",
+            "label": "Contrast MRI of whole spine"
+          },
+          {
+            "id": "c",
+            "label": "Exclude dumbbell canal extension"
+          },
+          {
+            "id": "d",
+            "label": "Joint neurosurgical plan if present"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The middle compartment holds a mixed bag that is worth listing separately. Lymphoma and tuberculous lymph nodes live here alongside foregut cysts such as bronchogenic and enteric duplication cysts, and the pattern of calcified nodes can point strongly toward tuberculosis in the right setting.",
+      "tx": "List **middle mediastinal adenopathy and cysts** as the central compartment differential. Middle mediastinal lesions encompass lymphoma, tuberculous lymphadenopathy, bronchogenic cysts and enteric duplication cysts. Enlarged nodes that calcify or show rim enhancement with central low density favour tuberculosis, especially with a positive exposure history. Smooth, water density, non enhancing masses favour a foregut duplication cyst, best confirmed on magnetic resonance imaging (MRI).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Middle mediastinal lesion",
+          "Imaging hint"
+        ],
+        "rows": [
+          [
+            "Lymphoma",
+            "Bulky confluent adenopathy"
+          ],
+          [
+            "Tuberculous nodes",
+            "Calcification, rim enhancement"
+          ],
+          [
+            "Bronchogenic cyst",
+            "Water density, no enhancement"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A thymus that swells months after chemotherapy finishes frightens families, but it is usually the gland simply growing back. This rebound appears two to nine months after treatment ends, and chemical shift imaging shows the fatty drop out that proves it is thymus rather than relapse.",
+      "tx": "Recognise **thymic rebound hyperplasia** after treatment stress. Marked thymic enlargement occurs within 2 to 9 months following cessation of chemotherapy or recovery from severe burns and illness. The gland keeps a smooth shape and demonstrates signal drop-out on chemical shift magnetic resonance imaging (MRI) from interspersed fat, which separates rebound from recurrent lymphoma. Short interval follow up is usually safer than biopsy when the imaging pattern is typical.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thymic rebound",
+          "points": [
+            "2 to 9 months after chemotherapy",
+            "Smooth enlarged gland",
+            "Signal drop-out on chemical shift MRI"
+          ]
+        },
+        "right": {
+          "title": "Recurrent lymphoma",
+          "points": [
+            "Nodular, asymmetric enlargement",
+            "No chemical shift drop-out",
+            "Biopsy usually required"
+          ]
+        }
+      }
+    }
+  ]
+}

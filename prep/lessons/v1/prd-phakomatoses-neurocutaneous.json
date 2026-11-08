@@ -1,0 +1,236 @@
+{
+ "gen": "AI",
+ "id": "prd-phakomatoses-neurocutaneous",
+ "minutes": 7,
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Neurofibromatosis type one involves neural crest derivatives throughout the neuroaxis. Characteristic findings are optic pathway gliomas, plexiform neurofibromas, sphenoid wing dysplasia, and focal white matter bright spots on T2 sequences.",
+   "tx": "**NF1 diagnostic imaging features** reflect autosomal dominant multi-organ dysplasia. Brain MRI highlights **optic pathway gliomas** in **15-20%** of children, **sphenoid wing dysplasia**, and **focal areas of signal intensity** (FASI) appearing as non-enhancing T2 bright spots in the basal ganglia, cerebellar white matter, and brainstem.",
+   "vis": {
+    "alt": "Brain MRI pathology with neoplastic involvement and intracranial lesions.",
+    "ar": 1.3333,
+    "caption": "Parenchymal cerebral lesions displaying characteristic neurocutaneous features. Credit: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/brain-tumour-fig1.webp"
+   }
+  },
+  {
+   "say": "Tuberous sclerosis complex produces striking intracranial stigmata. Subependymal nodules line the margins of the lateral ventricles like dripping wax, while cortical tubers disrupt the normal gyral architecture.",
+   "tx": "**Tuberous sclerosis intracranial lesions** arise from mutations in **TSC1 or TSC2**. Classic imaging demonstrates subependymal nodules producing the candle guttering sign along lateral ventricles, radially oriented subcortical tubers, and white matter migration lines representing disorganized dysplastic neuronal development. Subependymal giant cell astrocytomas near the foramen of Monro can obstruct cerebrospinal fluid flow.",
+   "vis": {
+    "cols": [
+     "Lesion Type",
+     "Anatomical Location",
+     "Imaging Characteristic"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Subependymal nodules",
+      "Ventricular margins",
+      "Candle-guttering, dense calcification"
+     ],
+     [
+      "Cortical tubers",
+      "Cerebral cortex/subcortex",
+      "T2 hyperintense, expand gyri"
+     ],
+     [
+      "Radial migration bands",
+      "Periventricular to cortex",
+      "Linear T2 white matter hyperintensities"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "When a subependymal nodule at the foramen of Monro enlarges and enhances brightly, it is a subependymal giant cell astrocytoma. This benign tumor obstructs ventricular cerebrospinal fluid pathways, causing acute hydrocephalus.",
+   "tx": "**SEGA foramen of Monro location** is a hallmark of tuberous sclerosis. Occurring near the **foramen of Monro**, these benign glioneuronal tumors exhibit serial growth, vivid gadolinium enhancement, and calcification, precipitating obstructive hydrocephalus. Treatment relies on microsurgical resection or targeted **mTOR inhibitors** such as **everolimus**.",
+   "vis": {
+    "alt": "Tuberous sclerosis neuroimaging findings with SEGA and ventricular changes.",
+    "ar": 1.3393,
+    "caption": "Tuberous sclerosis brain lesions with SEGA and hydrocephalus. Illustration: StewardMD original.",
+    "kind": "image",
+    "src": "v1/lessons/media/ped-neuro-disorders-gen1.webp"
+   }
+  },
+  {
+   "say": "Sturge Weber syndrome presents with a facial port wine stain and ipsilateral leptomeningeal angiomatosis. Computed tomography reveals classic gyriform tram track cortical calcifications underlying the affected meninges.",
+   "tx": "**Sturge-Weber tram-track calcification** characterizes encephalotrigeminal angiomatosis. Non-contrast CT reveals progressive **tram-track gyriform cortical calcifications**, while contrast MRI demonstrates **leptomeningeal angiomatosis**, ipsilateral choroid plexus enlargement, and progressive unilateral cerebral hemiatrophy with refractory seizures. Calcification typically appears after infancy, so a normal early scan never excludes the diagnosis.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "Facial V1 angioma"
+     ],
+     [
+      "b",
+      "c",
+      "Venous stasis / ischemia"
+     ],
+     [
+      "c",
+      "d",
+      "Intractable epilepsy"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Trigeminal vascular malformation"
+     },
+     {
+      "id": "b",
+      "label": "Ipsilateral leptomeningeal angioma"
+     },
+     {
+      "id": "c",
+      "label": "Gyriform tram-track calcification"
+     },
+     {
+      "id": "d",
+      "label": "Hemiatrophy and early medical control"
+     }
+    ]
+   }
+  },
+  {
+   "say": "In contrast to type one, neurofibromatosis type two is defined by bilateral vestibular schwannomas. Patients develop multiple intracranial meningiomas and spinal ependymomas.",
+   "tx": "**NF2 vestibular schwannomas** define neurofibromatosis type 2, often termed MISME syndrome for multiple inherited schwannomas, meningiomas, and ependymomas. The presence of **bilateral vestibular schwannomas** (acoustic neuromas) on internal auditory canal MRI is pathognomonic, accompanied by multi-level spinal tumors. Gadolinium enhancement outlines the ice-cream-on-cone appearance of tumour extending into the canal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Chromosome 17 (neurofibromin)",
+      "Optic pathway gliomas",
+      "Plexiform neurofibromas",
+      "Sphenoid wing dysplasia"
+     ],
+     "title": "Neurofibromatosis 1"
+    },
+    "right": {
+     "points": [
+      "Chromosome 22 (merlin)",
+      "Bilateral vestibular schwannomas",
+      "Multiple cranial meningiomas",
+      "Intramedullary spinal ependymomas"
+     ],
+     "title": "Neurofibromatosis 2"
+    }
+   }
+  },
+  {
+   "say": "In von Hippel-Lindau disease, look in the posterior fossa for a cyst with a brightly enhancing nodule touching the pial surface. Spinal lesions look the same, and the eyes, kidneys and adrenals need surveillance too.",
+   "tx": "**Von Hippel-Lindau CNS hemangioblastomas** are cystic posterior fossa masses with an intensely enhancing mural nodule abutting the pial surface. Cerebellar and spinal cord lesions dominate, and retinal hemangioblastomas, renal cell carcinoma, phaeochromocytoma and pancreatic cysts complete the systemic picture on surveillance imaging.",
+   "vis": {
+    "cols": [
+     "Organ System",
+     "VHL Neoplasm",
+     "Radiologic Key"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Cerebellum",
+      "Hemangioblastoma",
+      "Cystic lesion with hypervascular mural nodule"
+     ],
+     [
+      "Retina",
+      "Retinal angioma",
+      "Tortuous feeding vessels on fundoscopy"
+     ],
+     [
+      "Kidney",
+      "Clear cell RCC",
+      "Multiple solid or complex cystic masses"
+     ],
+     [
+      "Adrenal",
+      "Pheochromocytoma",
+      "Intensely T2 bright vascular mass"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Ataxia telangiectasia gradually shrinks the cerebellum, especially the vermis, so the fourth ventricle looks prominent. Recurrent chest infections, visible telangiectasia and a raised alpha-fetoprotein point the same way.",
+   "tx": "**Ataxia telangiectasia imaging** shows progressive cerebellar vermian and hemisphere atrophy from defective DNA repair after **ATM gene mutation**. The fourth ventricle enlarges as the cerebellum shrinks, while recurrent sinopulmonary infections, oculocutaneous telangiectasia and raised alpha-fetoprotein support the clinical diagnosis. Imaging surveillance repeats through childhood as lesions evolve.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "ATM gene mutation"
+     ],
+     [
+      "b",
+      "c",
+      "Purkinje cell loss"
+     ],
+     [
+      "c",
+      "d",
+      "Severe progressive ataxia"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "DNA repair failure"
+     },
+     {
+      "id": "b",
+      "label": "Purkinje cell degeneration"
+     },
+     {
+      "id": "c",
+      "label": "Marked cerebellar vermian atrophy"
+     },
+     {
+      "id": "d",
+      "label": "Oculocutaneous telangiectasia & immunodeficiency"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Gorlin syndrome is visible on ordinary films. Bifid ribs, a calcified falx in a young patient and jaw keratocysts form the pattern, and affected children carry a higher medulloblastoma risk.",
+   "tx": "**Gorlin syndrome bifid ribs** flag nevoid basal cell carcinoma syndrome from **PTCH1 mutation**. Imaging shows odontogenic keratocysts of the jaw, lamellar falx cerebri calcification in a young patient, bifid or fused ribs, and an increased risk of medulloblastoma in childhood.",
+   "vis": {
+    "cols": [
+     "Visceral Organ",
+     "Pathologic Lesion",
+     "Natural History & Imaging"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Heart",
+      "Cardiac rhabdomyoma",
+      "Ventricular septum, spontaneous infantile regression"
+     ],
+     [
+      "Kidneys",
+      "Angiomyolipoma (AML)",
+      "Bilateral, fat attenuation, risk of aneurysm rupture"
+     ],
+     [
+      "Lungs",
+      "LAM (females)",
+      "Thin-walled round cysts throughout lung parenchyma"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-paediatric-radiology",
+ "system": "neuro",
+ "title": "Neurocutaneous Syndromes: NF1, Tuberous Sclerosis and Sturge-Weber",
+ "v": 1,
+ "module": "prd-pediatric-cns-malformations"
+}

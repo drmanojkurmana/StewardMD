@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-minor-pathways",
+ "subject": "biochemistry",
+ "title": "G6PD deficiency and red cell defence",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**G6PD deficiency**, the commonest human enzyme deficiency, is X linked and episodic: patients are well until an oxidant drug, fava beans, naphthalene or infection overwhelms red cell glutathione one to three days later. Without NADPH, peroxides denature haemoglobin into Heinz bodies that splenic macrophages bite out, leaving bite cells, jaundice, dark urine and a falling haemoglobin with brisk reticulocytosis.",
+   "say": "G6PD deficiency is X linked and episodic until oxidants overwhelm glutathione one to three days later. Heinz bodies are bitten out by the spleen, leaving bite cells, jaundice and dark urine with brisk reticulocytosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-minor-pathways-gen1.webp",
+    "alt": "Paired smears show bite and blister cells beside dark Heinz body dots on the right panel.",
+    "caption": "Bite cells and Heinz bodies marking G6PD deficiency Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The defence chain has four links to recite in order: shunt NADPH keeps **glutathione** reduced through glutathione reductase, reduced glutathione feeds glutathione peroxidase (selenium) that neutralises hydrogen peroxide, and catalase assists. Break the first link and oxidants also oxidise membrane lipids and haem iron, so haemolysis is both extravascular (spleen) and intravascular in severe attacks with haemoglobinuria.",
+   "say": "NADPH keeps glutathione reduced, which feeds peroxidase to neutralise peroxide. Break the first link and haemolysis is both extravascular and intravascular in severe attacks. Recite the four links in order.",
+   "vis": {
+    "kind": "flow",
+    "title": "Red cell antioxidant chain",
+    "nodes": [
+     {"id": "nad", "label": "Shunt NADPH"},
+     {"id": "gsh", "label": "Reduced glutathione"},
+     {"id": "per", "label": "Peroxide neutralised"},
+     {"id": "fail", "label": "Failure: Heinz bodies, haemolysis"}
+    ],
+    "edges": [["nad", "gsh"], ["gsh", "per"], ["nad", "fail"]]
+   }
+  },
+  {
+   "tx": "Trigger lists earn marks: antimalarials (**primaquine**), rasburicase, methylene blue (paradoxically an oxidant here), nitrofurantoin, sulfonamides, fava beans (favism, especially Mediterranean variant), henna and naphthalene mothballs. Infection is the commonest real world trigger in children. Safe paracetamol and most penicillins contrast with the avoid list, and families need the list in writing after a first crisis.",
+   "say": "Primaquine, rasburicase, methylene blue, nitrofurantoin, sulfonamides and fava beans trigger attacks. Infection is the commonest trigger in children. Families need the avoid list in writing after a first crisis.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Category", "Examples to avoid or use cautiously"],
+    "rows": [
+     ["Antimalarial and urate drugs", "Primaquine, rasburicase"],
+     ["Antimicrobials", "Nitrofurantoin, sulfonamides, chloramphenicol caution"],
+     ["Foods and chemicals", "Fava beans, naphthalene, henna"],
+     ["Dyes as drugs", "Methylene blue (needs NADPH to work)"]
+    ]
+   }
+  },
+  {
+   "tx": "Severity follows variant geography: the Mediterranean variant leaves under ten percent activity and favism with severe neonatal jaundice, while African A minus retains moderate activity with milder, strictly oxidant timed episodes. Female **heterozygotes** mosaic by lyonisation range from normal to severely affected, so a normal screen never fully excludes carrier risk. Malaria selection maintains these alleles where Plasmodium historically killed non carriers.",
+   "say": "The Mediterranean variant leaves under ten percent activity with severe jaundice, while African A minus is milder. Female heterozygotes mosaic by lyonisation range widely. Malaria selection maintains these alleles historically.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Mediterranean variant", "points": ["Very low activity", "Favism, severe neonatal jaundice", "Chronic haemolysis rare"]},
+    "right": {"title": "African A minus variant", "points": ["Moderate activity", "Drug timed episodes", "Self limited as young cells survive"]
+    }
+   }
+  },
+  {
+   "tx": "Testing traps abound: during a crisis reticulocytes are enzyme rich, so fluorescent spot or quantitative assays can read falsely normal; repeat testing after about three months, when the red cell population ages evenly. Neonatal screening matters because deficiency amplifies **kernicterus** risk from haemolytic bilirubin. Genetic testing resolves borderline female results and family counselling.",
+   "say": "During a crisis, young reticulocytes can make assays read falsely normal, so repeat testing after about three months. Neonatal deficiency amplifies kernicterus risk. Genetic testing resolves borderline female results.",
+   "vis": null
+  },
+  {
+   "tx": "Acute care is supportive and trigger focused: stop the oxidant, hydrate, monitor haemoglobin and renal function, transfuse for symptomatic anaemia or haemodynamic compromise, and treat infection. Chronic nonspherocytic haemolysis (rare class I variants) needs folate, iron monitoring and splenectomy caution. Counsel every patient that future drug charts must flag **G6PD deficiency** prominently, because the next primaquine or rasburicase prescription is the preventable disaster.",
+   "say": "Care stops the oxidant, hydrates, monitors, and transfuses for symptomatic anaemia. Chronic variants need folate and iron monitoring. Every drug chart must flag G6PD deficiency, because the next oxidant prescription is preventable.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Action", "Timing"],
+    "rows": [
+     ["Stop oxidant, treat infection", "Immediately"],
+     ["Hydrate, watch haemoglobin and kidneys", "First 48 hours"],
+     ["Repeat enzyme assay", "About 3 months later"],
+     ["Alert card and family screening", "Before discharge"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

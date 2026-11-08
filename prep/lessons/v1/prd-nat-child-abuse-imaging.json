@@ -1,0 +1,261 @@
+{
+  "gen": "AI",
+  "id": "prd-nat-child-abuse-imaging",
+  "module": "Non-Accidental Trauma, Salter-Harris Fractures and Bone Infections",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Non-Accidental Trauma (NAT): High-Specificity Skeletal Lesions",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Classic metaphyseal lesions carry the highest specificity for physical abuse in infants. Planar shearing forces from violent shaking fracture the fragile primary spongiosa.",
+      "tx": "Recognize the **classic metaphyseal lesion specificity** on high-detail skeletal radiographs. Classic metaphyseal lesions (CML), manifesting as corner fractures or bucket-handle fractures, are practically pathognomonic of non-accidental trauma in infants under 2 years of age. They result from violent pulling, twisting, or shaking forces that produce microfractures across the primary spongiosa of the metaphysis parallel to the growth plate (Posterior rib fractures).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Corner fracture projection",
+          "points": [
+            "X-ray beam tangential to peripheral rim",
+            "Triangular avulsed bone fragment",
+            "Involves distal femur or proximal tibia"
+          ]
+        },
+        "right": {
+          "title": "Bucket-handle projection",
+          "points": [
+            "X-ray beam angled oblique to growth plate",
+            "Crescentic disc-like rim of mineralized bone",
+            "Shearing through primary spongiosa"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Posterior rib fractures adjacent to the costovertebral joint are classic for manual squeezing of an infant chest. They are virtually never caused by accidental household falls.",
+      "tx": "Identify **posterior rib fractures** as definitive indicators of violent thoracic compression. Manual squeezing of an infant chest compresses the anterior thorax against the posterior costovertebral articulation, using the transverse processes of the spine as a fulcrum. These fractures occur near the costovertebral joints and are virtually never produced by cardiopulmonary resuscitation or accidental falls from a bed (Skeletal survey protocol).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fracture location",
+          "Biomechanical mechanism",
+          "Specificity for physical abuse"
+        ],
+        "rows": [
+          [
+            "Posterior ribs (costovertebral)",
+            "Manual bilateral thoracic squeezing",
+            "Highest specificity for abuse"
+          ],
+          [
+            "Lateral and anterior ribs",
+            "Direct blunt compressive force",
+            "Moderate-to-high specificity"
+          ],
+          [
+            "Clavicle middle third",
+            "Fall with outstretched arm / birth trauma",
+            "Low specificity (common accidental fracture)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A complete skeletal survey requires at least twenty-one dedicated high-resolution views. Never settle for an abbreviated study or a babygram when child abuse is suspected.",
+      "tx": "Perform a complete **skeletal survey 21 views** according to ACR and SPR guidelines. An infant suspected of non-accidental trauma requires dedicated, high-detail separate radiographs of every body region, encompassing at least 21 individual views. Babygrams (single whole-body exposures) are unacceptable due to severe geometric distortion and inadequate resolution to detect subtle metaphyseal fractures (Two-week follow-up survey).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomic region",
+          "Required radiographic views",
+          "Target lesions"
+        ],
+        "rows": [
+          [
+            "Skull & facial bones",
+            "AP, lateral, and Towne views",
+            "Parietal/occipital fractures, suture diastasis"
+          ],
+          [
+            "Thorax & spine",
+            "AP, lateral, and bilateral oblique ribs",
+            "Posterior rib fractures, vertebral compression"
+          ],
+          [
+            "Extremities",
+            "Separate AP views of arms, forearms, hands, thighs, legs, feet",
+            "Classic metaphyseal lesions, subperiosteal hematomas"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A repeat skeletal survey at ten to fourteen days detects occult fractures that were invisible on initial presentation. Subperiosteal healing and callus make healing fractures obvious.",
+      "tx": "Schedule a mandatory **follow-up skeletal survey at 2 weeks** post-injury. Acute non-displaced fractures and metaphyseal injuries may be radiographically occult on initial emergency presentation. Repeating the skeletal survey after 10-14 days unmasks these fractures because subperiosteal new bone formation, osteopenia, and callus remodeling become prominently visible, establishing the true extent and chronology of injuries (Salter-Harris injuries).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "day0",
+            "label": "Initial 21-view survey: Acute occult fractures"
+          },
+          {
+            "id": "wait",
+            "label": "10-14 days of physiological bone repair"
+          },
+          {
+            "id": "callus",
+            "label": "Subperiosteal new bone & callus formation"
+          },
+          {
+            "id": "repeat",
+            "label": "Follow-up survey: Conclusively unmasks fractures"
+          }
+        ],
+        "edges": [
+          [
+            "day0",
+            "wait"
+          ],
+          [
+            "wait",
+            "callus"
+          ],
+          [
+            "callus",
+            "repeat"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Salter-Harris system categorizes physeal fractures from type one to five. Type two is by far the most frequent, characterized by the triangular Thurston Holland metaphyseal fragment.",
+      "tx": "Master the **Salter-Harris classification SALTR** for pediatric growth plate injuries. Type I involves slipped physis alone; Type II fractures above the physis through the metaphysis (accounting for 75% of all physeal injuries, featuring the Thurston Holland corner fragment); Type III fractures lower into the epiphysis; Type IV passes through both metaphysis and epiphysis; and Type V represents crush injury of the physis with high risk of growth arrest (Toddler fracture).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Fracture plane (SALTR mnemonic)",
+          "Prognosis & frequency"
+        ],
+        "rows": [
+          [
+            "Type I",
+            "Slipped physis along hypertrophic zone",
+            "Good; 5-10% frequency"
+          ],
+          [
+            "Type II",
+            "Above physis into metaphysis (Thurston Holland)",
+            "Excellent; 75% most common"
+          ],
+          [
+            "Type III",
+            "Lower into epiphysis into joint space",
+            "Guarded; intra-articular step-off risk"
+          ],
+          [
+            "Type IV",
+            "Through metaphysis, physis, and epiphysis",
+            "High risk of physeal bony bridge"
+          ],
+          [
+            "Type V",
+            "Rammed / crush injury of germinal physis",
+            "Severe; inevitable growth arrest"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A toddler fracture is a benign accidental injury seen when an infant begins to walk. It manifests as a non-displaced spiral fracture of the distal tibia without fibular injury.",
+      "tx": "Distinguish an accidental **toddler fracture** from non-accidental trauma. A toddler fracture is an isolated, non-displaced, oblique or spiral fracture of the distal third of the tibial shaft in ambulatory children aged 9 months to 3 years. It results from low-energy torsional twisting during normal play, presenting with sudden refusal to bear weight without soft tissue bruising or associated fibular fracture (Acute osteomyelitis).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Toddler fracture (accidental)",
+          "points": [
+            "Isolated distal tibia non-displaced spiral",
+            "Intact fibula with no soft tissue contusion",
+            "Low-energy fall in ambulatory 9 mo to 3 yr"
+          ]
+        },
+        "right": {
+          "title": "Non-accidental tibial injury",
+          "points": [
+            "Metaphyseal corner / bucket-handle lesion",
+            "Multiple fractures of varying ages",
+            "Non-ambulatory infant under 9 months"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Magnetic resonance imaging is the most sensitive technique for pediatric osteomyelitis. Low T1 marrow signal and high T2 edema indicate infection days before radiographs show changes.",
+      "tx": "Rely on **acute osteomyelitis MRI sensitivity** exceeding 95% in pediatric bone infections. Plain radiographs remain normal for the first 10-14 days until 30-50% of bone mineral is lost. MRI demonstrates infection within hours of onset, revealing replacement of normal hyperintense T1 fatty marrow with hypointense inflammatory exudate, hyperintense T2/STIR marrow edema, periosteal elevation, and subperiosteal abscess (Septic arthritis).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Modality",
+          "Sensitivity & timeframe",
+          "Key diagnostic findings"
+        ],
+        "rows": [
+          [
+            "Plain radiograph",
+            "Insensitive in acute phase (days 1-10)",
+            "Deep soft tissue swelling; late periosteal reaction"
+          ],
+          [
+            "T1-weighted MRI",
+            "> 95% sensitivity (hours 1-48)",
+            "Replacement of bright marrow fat with low signal"
+          ],
+          [
+            "Post-contrast T1 FS",
+            "Delineates non-enhancing necrosis",
+            "Subperiosteal abscess rim enhancement"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Ultrasound is the imaging modality of choice for suspected septic arthritis of the hip. Capsular distension greater than two millimeters compared to the normal hip warrants urgent needle aspiration.",
+      "tx": "Perform **septic arthritis ultrasound** for any child presenting with a painful, irritable hip and fever. Longitudinal anterior hip sonography measures the anterior capsular-femoral distance: an effusion measuring > 2 mm thicker than the asymptomatic contralateral side confirms joint pathology. Ultrasound-guided aspiration is mandatory to obtain synovial fluid for gram stain and culture to prevent femoral head avascular necrosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fever",
+            "label": "Child with fever, hip pain & refusal to bear weight"
+          },
+          {
+            "id": "us",
+            "label": "Bedside anterior hip ultrasonography"
+          },
+          {
+            "id": "capsule",
+            "label": "Capsular distension > 2 mm vs contralateral"
+          },
+          {
+            "id": "aspiration",
+            "label": "Urgent ultrasound-guided joint aspiration & washout"
+          }
+        ],
+        "edges": [
+          [
+            "fever",
+            "us"
+          ],
+          [
+            "us",
+            "capsule"
+          ],
+          [
+            "capsule",
+            "aspiration"
+          ]
+        ]
+      }
+    }
+  ]
+}

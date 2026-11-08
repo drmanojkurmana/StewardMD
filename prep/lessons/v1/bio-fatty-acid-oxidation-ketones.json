@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "bio-fatty-acid-oxidation",
+ "subject": "biochemistry",
+ "title": "Ketogenesis, ketolysis and ketoacidosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Ketogenesis runs only in liver mitochondria when fat derived **acetyl-CoA** floods in while oxaloacetate is diverted to gluconeogenesis: two acetyl-CoA condense, mitochondrial HMG-CoA synthase (the rate limiting, fasting induced isoform) commits them, and HMG-CoA lyase releases acetoacetate. Acetoacetate reduces to beta-hydroxybutyrate (dominant in blood) or decarboxylates to breath acetone, the fruity signature of ketoacidosis.",
+   "say": "Ketogenesis runs in liver mitochondria when acetyl-CoA floods in. Mitochondrial HMG-CoA synthase commits it, releasing acetoacetate. Beta-hydroxybutyrate dominates in blood, while acetone scents the breath.",
+   "vis": {
+    "kind": "flow",
+    "title": "Making ketones in liver",
+    "nodes": [
+     {
+      "id": "aco",
+      "label": "Acetyl-CoA flood (fat burning)"
+     },
+     {
+      "id": "hmg",
+      "label": "Mitochondrial HMG-CoA"
+     },
+     {
+      "id": "ace",
+      "label": "Acetoacetate"
+     },
+     {
+      "id": "bhb",
+      "label": "Beta-hydroxybutyrate (main circulating)"
+     }
+    ],
+    "edges": [
+     [
+      "aco",
+      "hmg"
+     ],
+     [
+      "hmg",
+      "ace"
+     ],
+     [
+      "ace",
+      "bhb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extrahepatic tissues burn ketones through **thiophorase** (succinyl-CoA acetoacetate CoA transferase), which liver conspicuously lacks, so liver exports but never consumes its own product. Heart, muscle and fasting brain induce thiophorase and monocarboxylate transporters, sparing glucose. Each beta-hydroxybutyrate fully oxidised yields roughly twenty one to twenty two ATP by modern values, making ketones efficient, not toxic waste.",
+   "say": "Extrahepatic tissues burn ketones through thiophorase, which liver lacks, so liver exports but never consumes its own product. Fasting brain induces the machinery and spares glucose. Ketones are efficient fuel, not toxic waste.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Liver (maker only)",
+     "points": [
+      "Mitochondrial HMG-CoA synthase present",
+      "Thiophorase absent",
+      "Exports acetoacetate and BHB"
+     ]
+    },
+    "right": {
+     "title": "Muscle, heart, fasting brain (users)",
+     "points": [
+      "Thiophorase present",
+      "Ketones to acetyl-CoA",
+      "Glucose spared"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ketosis becomes **ketoacidosis** when production overwhelms buffering, widening the anion gap with deep Kussmaul breathing as respiratory compensation. Nitroprusside urine sticks detect acetoacetate but miss beta-hydroxybutyrate, so severe disease (where BHB dominates nine to one) can underwhelm on sticks while capillary BHB meters tell truth. As treatment works, BHB converts back to acetoacetate and sticks may transiently darken despite improvement.",
+   "say": "Ketoacidosis widens the anion gap with Kussmaul breathing. Urine sticks miss beta-hydroxybutyrate, which dominates in severe disease, so capillary meters tell truth. Sticks may darken during recovery despite improvement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Sees",
+     "Trap"
+    ],
+    "rows": [
+     [
+      "Urine nitroprusside",
+      "Acetoacetate only",
+      "Misses dominant BHB, looks mild"
+     ],
+     [
+      "Capillary BHB meter",
+      "Beta-hydroxybutyrate",
+      "Preferred severity guide"
+     ],
+     [
+      "Anion gap and bicarbonate",
+      "Acid load total",
+      "Gap closes as ketones clear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Separate the three **ketoacidoses** by glucose and story: diabetic (glucose high, insulin absent, dehydration severe), starvation (glucose low normal, acidosis mild, bicarbonate rarely under 18), alcoholic (glucose variable often low, vomiting, high BHB ratio, thiamine need). All share low insulin effect with high glucagon and fat flux; glucose level simply reports whether gluconeogenesis has substrate and insulin cover.",
+   "say": "Separate ketoacidoses by glucose and story. Diabetic has high glucose, starvation has low glucose with mild acidosis, and alcoholic has variable glucose with vomiting. All share low insulin effect with high fat flux.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diabetic ketoacidosis",
+     "points": [
+      "Glucose high, osmotic diuresis",
+      "Potassium total body low",
+      "Insulin plus fluids plus potassium"
+     ]
+    },
+    "right": {
+     "title": "Starvation and alcoholic",
+     "points": [
+      "Glucose low or variable",
+      "Acidosis milder (starvation)",
+      "Glucose, thiamine, electrolytes (alcoholic)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "DKA potassium deceives twice: acidosis and insulin lack shift potassium out of cells, so admission levels look normal or high while total body stores are empty; insulin therapy then drives it back in and levels crash without replacement. Fluids restore perfusion and dilute glucose, insulin stops ketogenesis (the definitive step), and **potassium** replacement is titrated to levels and urine output with cardiac monitoring.",
+   "say": "Admission potassium looks normal while total body stores are empty, and insulin drives it back into cells. Fluids restore perfusion, insulin stops ketogenesis, and potassium replacement is titrated carefully with monitoring.",
+   "vis": null
+  },
+  {
+   "tx": "Children risk cerebral oedema during DKA correction, so fluids and osmolality shifts stay measured, headache or falling consciousness triggers emergency imaging and hyperosmolar therapy pathways. Euglycaemic DKA on **SGLT2 inhibitors** (glucose under 200 with acidosis, perioperative or fasting precipitated) completes modern teaching: hold the drug when ill, check ketones by BHB not glucose, and treat with insulin plus dextrose together.",
+   "say": "Children risk cerebral oedema during correction, so headache triggers emergency pathways. Euglycaemic ketoacidosis on SGLT2 inhibitors needs ketone checking by BHB, and treatment with insulin plus dextrose together.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "DKA pitfall",
+     "Antidote in practice"
+    ],
+    "rows": [
+     [
+      "Trusting urine sticks",
+      "Measure capillary BHB and gap"
+     ],
+     [
+      "Trusting admission potassium",
+      "Replace by protocol as insulin runs"
+     ],
+     [
+      "Trusting glucose (SGLT2 cases)",
+      "Check ketones when ill regardless"
+     ],
+     [
+      "Rapid shifts in children",
+      "Measured fluids, neuro vigilance"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

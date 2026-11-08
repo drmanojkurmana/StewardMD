@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-minor-pathways",
+ "subject": "biochemistry",
+ "title": "Fructose metabolism and its defects",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Liver fructose handling is built for speed without feedback: **fructokinase** traps fructose as fructose-1-phosphate, aldolase B splits it to dihydroxyacetone phosphate plus glyceraldehyde, and triokinase completes entry into glycolysis below PFK-1. Bypassing the committed step makes fructose intensely lipogenic: uncontrolled inflow floods pyruvate, acetyl-CoA and glycerol phosphate, driving fatty liver and triglycerides when intake is chronically high.",
+   "say": "Fructokinase traps fructose rapidly, and aldolase B feeds glycolysis below the committed step. Bypassing control makes fructose intensely lipogenic, driving fatty liver and triglycerides when intake is chronically high.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fructose entry below control",
+    "nodes": [
+     {"id": "fru", "label": "Fructose (liver)"},
+     {"id": "f1p", "label": "Fructose-1-phosphate (fructokinase)"},
+     {"id": "tri", "label": "DHAP plus glyceraldehyde (aldolase B)"},
+     {"id": "gly", "label": "Glycolysis, fat synthesis"}
+    ],
+    "edges": [["fru", "f1p"], ["f1p", "tri"], ["tri", "gly"]]
+   }
+  },
+  {
+   "tx": "Missing the first enzyme causes **essential fructosuria**, a benign curiosity where fructose spills into urine after fruit or sucrose, reducing Benedict reagent but ignoring glucose oxidase strips. No hypoglycaemia, no liver disease and no treatment beyond reassurance follow. Its value is differential: not every reducing sugar in urine is glucose, and not every fructose disorder is dangerous.",
+   "say": "Missing fructokinase causes essential fructosuria, a benign spill after fruit that reduces Benedict reagent but ignores glucose strips. No hypoglycaemia or liver disease follows. Not every reducing sugar in urine is glucose.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Essential fructosuria (fructokinase absent)", "points": ["Fructose in urine only", "Blood glucose normal", "Benign, no diet needed"]},
+    "right": {"title": "Hereditary fructose intolerance (aldolase B absent)", "points": ["Hypoglycaemia, vomiting, liver failure", "Starts at weaning", "Strict lifelong avoidance"]
+    }
+   }
+  },
+  {
+   "tx": "Missing the second enzyme causes **hereditary fructose intolerance**: fructose-1-phosphate accumulates, sequestering phosphate and strangling ATP regeneration, so glycogenolysis and gluconeogenesis both fail after fructose, sucrose or sorbitol. Vomiting, sweating, hypoglycaemia and progressive liver and kidney tubule injury follow weaning onto fruits and sweetened foods. Affected children develop protective aversion to sweets that history taking must ask about directly.",
+   "say": "Missing aldolase B traps phosphate and strangles ATP, so glucose release fails after fructose, sucrose or sorbitol. Vomiting, hypoglycaemia and liver injury follow weaning. Affected children develop protective aversion to sweets.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trapped step consequence", "Clinical translation"],
+    "rows": [
+     ["Phosphate sequestered, ATP falls", "Both glucose release routes fail"],
+     ["Fructose-1-phosphate inhibits enzymes", "Hypoglycaemia after sweet feeds"],
+     ["Repeated liver and tubule injury", "Failure to thrive, Fanconi pattern"],
+     ["Learned sweet aversion", "History clue in older children"]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis rests on history plus genetics or enzyme study, never on a fructose challenge that could harm; treatment is absolute exclusion of fructose, sucrose and **sorbitol** (including syrups and some medicines) with dietitian support. Prognosis normalises when exposure stops early, while continued exposure progresses to cirrhosis. Dental caries paradoxically stays low because patients avoid sugars lifelong, a memorable confirmatory detail.",
+   "say": "Diagnosis rests on history and genetics, never on a harmful fructose challenge. Treatment excludes fructose, sucrose and sorbitol absolutely, including medicines. Prognosis normalises when exposure stops early. Dental caries stays low lifelong.",
+   "vis": null
+  },
+  {
+   "tx": "Muscle handles fructose differently, phosphorylating it slowly with **hexokinase** straight to fructose-6-phosphate inside glycolysis, so no trap forms there. The liver specificity of intolerance follows fructokinase and aldolase B distribution. Seminal vesicles even make fructose as sperm fuel from glucose through the polyol route, linking this lesson to diabetic complications next.",
+   "say": "Muscle phosphorylates fructose slowly with hexokinase inside glycolysis, so no trap forms there. Liver specificity follows enzyme distribution. Seminal vesicles make fructose as sperm fuel through the polyol route.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Liver route (fast, trappable)", "points": ["Fructokinase to F-1-P", "Aldolase B splits", "Intolerance lives here"]},
+    "right": {"title": "Muscle route (slow, safe)", "points": ["Hexokinase to F-6-P", "Enters at PFK-1 control", "No phosphate trap"]
+    }
+   }
+  },
+  {
+   "tx": "The **polyol pathway** converts excess glucose to sorbitol by aldose reductase (NADPH consuming), then to fructose by sorbitol dehydrogenase in lens, nerve, retina and kidney. In diabetes, sorbitol osmotic swelling, NADPH theft from glutathione defence and fructose glycation converge on cataract, neuropathy and microvascular injury. Aldose reductase inhibitors disappointed clinically, but the pathway remains the mechanistic answer examinations expect for diabetic cataract.",
+   "say": "The polyol pathway converts excess glucose to sorbitol, then to fructose, in lens, nerve and retina. Sorbitol swelling and NADPH theft converge on diabetic cataract and neuropathy. The pathway remains the mechanistic answer examinations expect.",
+   "vis": {
+    "kind": "flow",
+    "title": "Polyol pathway in hyperglycaemia",
+    "nodes": [
+     {"id": "glu", "label": "Glucose excess"},
+     {"id": "sor", "label": "Sorbitol (aldose reductase, NADPH used)"},
+     {"id": "fru", "label": "Fructose (sorbitol dehydrogenase)"},
+     {"id": "dmg", "label": "Cataract, nerve injury"}
+    ],
+    "edges": [["glu", "sor"], ["sor", "fru"], ["fru", "dmg"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
