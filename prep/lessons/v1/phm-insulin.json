@@ -3,11 +3,11 @@
  "module": "phm-insulin",
  "subject": "pharmacology",
  "title": "Insulin: types, regimens, DKA and hypoglycaemia",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Insulins** sort by kinetics: rapid (**lispro, aspart, glulisine**: meal bolus, pumps), short (**regular**: IV DKA and infusions), intermediate (**NPH**: cloudy, peaks, nocturnal hypoglycaemia), long (**glargine, detemir, degludec**: flat basal, no peak, less nocturnal lows), **premixed** (convenience, rigid). Concentrated U200 and U300 suit resistance; **inhaled Afrezza** (smokers and lung disease banned, spirometry watched) niches. Rotation with lipohypertrophy checks preserves absorption.",
-   "say": "Meals bolus rapid, nights basaled flat: bolus feeds, basal fasts. Cloudy NPH peaks nightly: lows lurk.",
+   "tx": "**Insulins** sort by kinetics from rapid meal boluses through short acting regular insulin to cloudy intermediate and flat long acting basal preparations. Rapid **lispro, aspart and glulisine** cover meals and pumps, regular insulin runs intravenous infusions in ketoacidosis, and **glargine and degludec** provide peakless basal cover with fewer nocturnal lows. Cloudy NPH peaks overnight, premixed insulin trades flexibility for convenience, and site rotation prevents lipohypertrophy.",
+   "say": "Insulins differ mainly in onset, peak and duration of glucose lowering action. Rapid analogues cover meals while flat basal insulin covers fasting periods. Cloudy NPH peaks overnight and causes nocturnal hypoglycaemia in susceptible patients. Rotating injection sites prevents lipohypertrophy and preserves absorption reliably.",
    "vis": {
     "kind": "image",
     "src": "prep/lessons/media/pharma-insulin-profiles.svg",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Basal bolus** (long basal with rapid meal boluses, carb counting) mimics physiology beating **sliding scale alone** (reactive, hypoglycaemic, hospital harm); correction scales supplement, never substitute. Type 1 always basal (DKA without), type 2 adds basal to orals failing. Dawn phenomenon (morning surge) splits evening basal; Somogyi (nocturnal hypo rebounding) cuts it. Sick day rules (never stop basal, ketones, fluids) prevent DKA.",
-   "say": "Sliding scale alone harms inpatients: basal always, bolus meals. Dawn rises need basal; Somogyi rebounds cut.",
+   "tx": "**Basal bolus therapy** mimics physiology with long acting basal insulin plus rapid meal boluses adjusted by carbohydrate counting at each meal. Sliding scale alone reacts late, causes hypoglycaemia and harms hospital patients, so correction doses only supplement scheduled therapy never replace it. Type one diabetes always needs basal insulin, **dawn phenomenon** raises morning glucose, and **sick day rules** forbid stopping basal during illness.",
+   "say": "Basal bolus therapy is the regimen that mimics normal physiology most closely and helps daily control. Basal insulin covers fasting periods while meal boluses cover carbohydrate intake. Sliding scale alone reacts late and causes dangerous hypoglycaemia in hospital. Patients never stop basal insulin during illness because ketoacidosis follows.",
    "vis": null
   },
   {
-   "tx": "**Diabetic ketoacidosis** (hyperglycaemia with ketonaemia and acidosis, nausea with Kussmaul breathing and fruity breath; infection, missed insulin, SGLT2 euglycaemic triggers) is treated by **fluids first** (saline resuscitation), **IV regular insulin infusion** (fixed weight based, glucose falls, dextrose added), **potassium** (total body depleted despite normal labs; hold insulin under 3.3), bicarbonate only under pH 6.9, trigger hunted. Switch subcutaneous (basal given before stopping infusion) avoids relapse; HHS (no ketones, profound dehydration, higher mortality) fluids more.",
-   "say": "DKA fluids first, insulin infusion, potassium watched, basal before stopping drip. Euglycaemic SGLT2 DKA fools meters.",
+   "tx": "**Diabetic ketoacidosis** combines hyperglycaemia, ketonaemia and acidosis with nausea, Kussmaul breathing and fruity breath after infection, missed insulin or SGLT2 treatment. Treatment gives **fluids first** with saline resuscitation, then a fixed intravenous regular insulin infusion with dextrose added as glucose falls. Total body **potassium** remains depleted despite normal values, insulin holds below the critical threshold, and basal insulin starts before stopping the infusion.",
+   "say": "Diabetic ketoacidosis causes dehydration, acidosis and deep rapid breathing in affected patients. Saline resuscitation helps restore circulation before insulin infusion reduces glucose and corrects acidosis gradually afterwards. Potassium falls during treatment because total body stores remain depleted already. Basal insulin starts before the infusion stops and prevents relapse.",
    "vis": null
   },
   {
-   "tx": "**Hypoglycaemia** (**Whipple triad**: symptoms, low glucose, relief on correction; autonomic sweats and tremor versus neuroglycopenic confusion) is treated by **15-15 rule** (15 g fast carbs, recheck 15 minutes) with **glucagon** (unconscious, vomiters) and octreotide for sulfonylurea overdoses (long observation). Impaired awareness (beta blockers mask) needs driving and glucagon co-prescription; **lipodystrophy** rotates sites while pumps with CGM (hybrid closed loop) smooth. Sulfonylurea lows linger days.",
-   "say": "Confused sweaty diabetic is hypo until glucose proves otherwise: 15 grams, 15 minutes, glucagon if out.",
+   "tx": "The image traces free fatty acids from adipose tissue into the liver, where **ketogenesis** floods the blood with ketones during insulin deficiency. The patient breathes deeply with **Kussmaul breathing** and exhales fruity acetone breath while trying to blow off acid. The saline bag on the right states the first treatment priority, because **fluids first** restores circulation before insulin infusion corrects ketone production.",
+   "say": "The image follows fatty acids from fat tissue into hepatic ketone production. Ketones acidify blood and stimulate deep Kussmaul breathing for compensation. Fruity acetone breath is a bedside clue that helps clinicians suspect ketoacidosis without laboratory delay. Saline resuscitation helps restore circulation before insulin reduces ketone production and corrects acidosis safely afterwards.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-insulin-gen1.webp",
+    "alt": "Fatty acids entering liver forming ketones, breathless man with fruity breath, saline resuscitation bag",
+    "caption": "Liver ketogenesis, fruity breath and Kussmaul breathing, saline infusion. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Hypoglycaemia** follows the Whipple triad of symptoms, low measured glucose and relief after correction, with sweating and tremor preceding confusion and seizures. Conscious patients follow the **fifteen fifteen rule** with fast carbohydrate and rechecking after fifteen minutes, while unconscious patients need **glucagon** urgently. Sulfonylurea hypoglycaemia lingers for days and needs prolonged observation, and beta blockers mask warning tremor in treated diabetes.",
+   "say": "Hypoglycaemia causes sweating and tremor before confusion and seizures develop progressively. Conscious patients take fast carbohydrate and recheck glucose after fifteen minutes. Unconscious patients require glucagon because oral treatment risks aspiration harmfully. Sulfonylurea effects linger for days and require prolonged hospital observation.",
    "vis": {
     "kind": "table",
     "cols": [

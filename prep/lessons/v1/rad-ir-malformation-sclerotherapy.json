@@ -3,11 +3,11 @@
  "module": "rad-ir-malformation-sclerotherapy",
  "subject": "radiology",
  "title": "Sclerotherapy for slow-flow malformations",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Slow-flow lesions sclerose beautifully. **Venous malformations** with soft compressible blue masses and **lymphatic malformations** with cystic spaces suit **sclerotherapy** over surgery. **D-dimer with fibrinogen** screens localised clotting that flares with treatment. **Foam with ultrasound** spreads sclerosant across walls better than liquid alone. **Compression after** keeps walls apposed while scarring seals.",
-   "say": "Slow-flow lesions sclerose beautifully. Soft blue venous masses with cystic lymphatic spaces suit sclerotherapy over surgery. Blood screens catch local clotting that flares with treatment. Ultrasound foam spreads sclerosant across walls. Compression after keeps walls apposed.",
+   "tx": "Slow flow lesions are well suited to sclerotherapy rather than surgery. **Venous malformations** form soft compressible blue masses, while lymphatic lesions form cystic spaces in tissue. **Sclerotherapy** injures the lining so the channels scar shut over time. Blood tests screen for localised clotting that may flare during treatment. Foam spreads across walls better than liquid alone, and **compression afterwards** keeps the treated walls together.",
+   "say": "Slow flow lesions are well suited to sclerotherapy rather than surgery. Venous lesions form soft blue masses that compress easily. Sclerotherapy injures the lining so channels scar shut over time. Foam spreads across walls better than liquid, and compression keeps treated walls together while healing occurs.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Agents injure linings deliberately. **Sodium tetradecyl sulphate foam** scars venous walls with controlled inflammation. **Doxycycline with bleomycin** suit lymphatic cysts with lower skin risk. **Ethanol reserved** for resistant lesions given nerve and skin toxicity. **Dose limits** by weight and lesion size prevent haemolysis and renal injury.",
-   "say": "Agents injure linings deliberately. Sulphate foam scars venous walls with controlled inflammation. Doxycycline with bleomycin suit lymphatic cysts with lower skin risk. Ethanol stays reserved given nerve toxicity. Weight-based dose limits prevent blood breakdown.",
+   "tx": "The left ultrasound shows a multilocular **venous malformation** with many dark compressible spaces separated by thin walls. Colour Doppler on the right shows slow monophasic venous flow without any high flow shunting. The small inset proves the lesion collapses under **transducer compression** during scanning. This slow flow pattern confirms suitability for **foam sclerotherapy** rather than arterial embolisation in examinations.",
+   "say": "The ultrasound is typical because a multilocular lesion has dark compressible spaces inside. Doppler shows slow venous flow without high flow shunting present. The inset proves the lesion collapses under probe compression during scanning. This pattern confirms suitability for sclerotherapy rather than arterial embolisation in examination answers.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-malformation-sclerotherapy-gen1.webp",
+    "alt": "Grayscale and colour Doppler ultrasound showing multilocular compressible lesion with slow venous flow and compression inset.",
+    "caption": "Ultrasound with Doppler shows compressible multilocular low flow venous malformation. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Each sclerosant injures the vessel lining in a deliberate controlled way. **Tetradecyl sulphate foam** scars venous walls through controlled inflammation after injection. **Doxycycline and bleomycin** suit lymphatic cysts and carry lower skin risk in superficial lesions. **Ethanol** is reserved for resistant lesions because it can injure nerves and skin severely. Dose is limited by weight and lesion size to prevent blood breakdown and kidney injury.",
+   "say": "Each sclerosant injures the vessel lining in a deliberate controlled way. Sulphate foam scars venous walls through controlled inflammation after injection. Other agents suit lymphatic cysts and carry lower skin risk. Ethanol is reserved for resistant lesions, and dose limits prevent blood breakdown and kidney injury in patients.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Clots and nerves complicate foam work. **Localised intravascular coagulopathy** consumes factors where heparin bridges dangerous flare periods. **Nerve mapping** avoids motor branches in complex mixed lesions. **Skin blistering** from superficial spill needs elevation with careful wound care. **Haemoglobinuria** after large sessions marks haemolysis needing urgent fluids.",
-   "say": "Clots and nerves complicate. Local clotting consumes factors where heparin bridges flares. Nerve mapping avoids motor branches. Superficial spills blister skin needing elevation. Dark urine after large sessions marks blood breakdown needing fluids.",
+   "tx": "Clotting disturbance and nerve injury complicate sclerotherapy in large lesions. **Localised intravascular coagulopathy** consumes clotting factors inside extensive venous malformations at baseline. Heparin cover may bridge the period when treatment flares this consumption dangerously. **Nerve mapping** avoids motor branches hidden inside complex mixed lesions during needling. Superficial spill blisters skin and needs elevation with wound care, while dark urine after a large session signals **haemoglobinuria** needing fluids.",
+   "say": "Clotting disturbance and nerve injury complicate sclerotherapy in large lesions. Extensive venous lesions consume clotting factors inside the malformation itself. Heparin cover may bridge a dangerous flare during treatment safely. Careful mapping avoids motor branches, while dark urine after treatment signals blood breakdown and needs urgent fluids.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-malformation-sclerotherapy-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Shrinkage proves slowly over many months. **Ultrasound volumes** shrink steadily where repeat sessions space over many months. **Pain with heaviness** lifts gradually as channels fibrose. **Repeat foam sessions** continue while lesions shrink safely. **Surgery for residuals** removes fibrosed remnants cleanly.",
-   "say": "Shrinkage proves over months. Ultrasound volumes shrink steadily where sessions space over months. Pain with heaviness lifts as channels scar. Repeat foam continues while lesions shrink safely. Surgery removes fibrosed remnants cleanly.",
+   "tx": "Shrinkage after sclerotherapy appears slowly over many months of follow up. Ultrasound shows **falling lesion volume** steadily when sessions are spaced over months. Pain and heaviness lift gradually as the treated channels fibrose and close. **Repeat foam sessions** continue while the lesion keeps shrinking safely at each review. Surgery removes a fibrosed remnant that remains after sclerotherapy has done its work.",
+   "say": "Shrinkage after sclerotherapy appears slowly over many months of follow up. Ultrasound shows falling volume when sessions are spaced properly. Pain and heaviness are reduced gradually as channels fibrose and close over time. Repeat sessions continue while shrinkage is safe, and surgery removes fibrosed remnants that remain afterwards.",
    "vis": {
     "kind": "flow",
     "nodes": [

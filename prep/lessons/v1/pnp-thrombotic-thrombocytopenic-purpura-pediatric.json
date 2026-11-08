@@ -11,14 +11,10 @@
       "say": "Thrombotic thrombocytopenic purpura is caused by severe functional deficiency of the von Willebrand factor cleaving protease.",
       "tx": "Understand the central molecular defect driving **ADAMTS13 deficiency and vWF multimers** in thrombotic microangiopathy. Thrombotic thrombocytopenic purpura (TTP) results from a severe functional deficiency of ADAMTS13 (a disintegrin and metalloproteinase with thrombospondin type 1 motifs, member 13), defined as plasma activity < 10%; absent protease activity prevents normal cleavage of ultra-large von Willebrand factor (ULVWF) multimers, precipitating spontaneous microvascular platelet agglutination and widespread microthrombosis.",
       "vis": {
-        "kind": "table",
-        "title": "Molecular Mechanisms in TTP",
-        "cols": ["Component", "Physiological Function", "Pathology in TTP"],
-        "rows": [
-          ["ADAMTS13", "Cleaves endothelial ULVWF multimers", "Activity < 10% permits multimer persistence"],
-          ["ULVWF multimers", "Stored in Weibel-Palade bodies", "Spontaneously anchor and aggregate platelets"],
-          ["Microthrombi", "None in healthy microvasculature", "Cause shear-induced erythrocyte fragmentation"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/thrombotic-thrombocytopenic-purpura-fig1.webp",
+        "alt": "Ultra large von Willebrand multimers forming platelet microthrombi and schistocytes.",
+        "caption": "TTP: uncleaved multimers, microthrombi and schistocytes. Credit: StewardMD."
       }
     },
     {
@@ -48,15 +44,10 @@
       "say": "Acquired autoimmune TTP occurs in older children and adolescents mediated by neutralizing autoantibodies.",
       "tx": "Evaluate autoantibody-mediated pathophysiology in **Acquired/immune TTP (iTTP) in adolescents** presenting acutely. Acquired immune TTP (iTTP) is mediated by IgG autoantibodies (inhibitors) directed against ADAMTS13, predominantly seen in adolescent females and frequently associated with systemic lupus erythematosus or other autoimmune diseases; presentation is marked by acute, explosive microangiopathic hemolytic anemia, severe consumptive thrombocytopenia, and fluctuating neurological deficits.",
       "vis": {
-        "kind": "table",
-        "title": "Congenital vs Immune TTP Comparison",
-        "cols": ["Feature", "Congenital TTP (cTTP)", "Acquired Immune TTP (iTTP)"],
-        "rows": [
-          ["Etiology", "Biallelic ADAMTS13 gene mutation", "Acquired anti-ADAMTS13 IgG autoantibodies"],
-          ["Typical age", "Neonates and young infants", "Adolescents and older children"],
-          ["Inhibitor assay", "Negative (zero inhibitor titer)", "Positive (detectable neutralizing Bethesda units)"],
-          ["First-line therapy", "Fresh frozen plasma infusion", "Therapeutic plasma exchange + immunosuppression"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/acquired-thrombotic-thrombocytopenic-purpura-fig1.webp",
+        "alt": "Autoantibodies against ADAMTS13 with multimer strings and red cell fragmentation.",
+        "caption": "Immune TTP: autoantibody blocks ADAMTS13. Credit: StewardMD."
       }
     },
     {
@@ -65,12 +56,32 @@
       "vis": {
         "kind": "table",
         "title": "TTP Clinical Manifestation Spectrum",
-        "cols": ["Manifestation", "Frequency", "Clinical Significance"],
+        "cols": [
+          "Manifestation",
+          "Frequency",
+          "Clinical Significance"
+        ],
         "rows": [
-          ["MAHA + thrombocytopenia", "> 95%", "Essential dyad; mandates emergent treatment"],
-          ["Neurological symptoms", "~60-70%", "Fluctuating confusion, focal deficits, seizures"],
-          ["Fever", "~50%", "Systemic microvascular inflammation"],
-          ["Renal dysfunction", "~50%", "Mild hematuria/proteinuria; anuria is rare"]
+          [
+            "MAHA + thrombocytopenia",
+            "> 95%",
+            "Essential dyad; mandates emergent treatment"
+          ],
+          [
+            "Neurological symptoms",
+            "~60-70%",
+            "Fluctuating confusion, focal deficits, seizures"
+          ],
+          [
+            "Fever",
+            "~50%",
+            "Systemic microvascular inflammation"
+          ],
+          [
+            "Renal dysfunction",
+            "~50%",
+            "Mild hematuria/proteinuria; anuria is rare"
+          ]
         ]
       }
     },
@@ -80,13 +91,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "susp", "label": "Suspected TTP: MAHA + Thrombocytopenia"},
-          {"id": "draw", "label": "Draw baseline ADAMTS13 activity and inhibitor"},
-          {"id": "tpe", "label": "Initiate daily TPE (1-1.5 plasma vol) + steroids immediately"}
+          {
+            "id": "susp",
+            "label": "Suspected TTP: MAHA + Thrombocytopenia"
+          },
+          {
+            "id": "draw",
+            "label": "Draw baseline ADAMTS13 activity and inhibitor"
+          },
+          {
+            "id": "tpe",
+            "label": "Initiate daily TPE (1-1.5 plasma vol) + steroids immediately"
+          }
         ],
         "edges": [
-          ["susp", "draw"],
-          ["draw", "tpe"]
+          [
+            "susp",
+            "draw"
+          ],
+          [
+            "draw",
+            "tpe"
+          ]
         ]
       }
     },
@@ -96,13 +122,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "cttp", "label": "Congenital Upshaw-Schulman Syndrome confirmed"},
-          {"id": "ffp", "label": "Prophylactic FFP (10-15 mL/kg every 2-3 weeks)"},
-          {"id": "apad", "label": "Or recombinant ADAMTS13 (Apadamtase alfa)"}
+          {
+            "id": "cttp",
+            "label": "Congenital Upshaw-Schulman Syndrome confirmed"
+          },
+          {
+            "id": "ffp",
+            "label": "Prophylactic FFP (10-15 mL/kg every 2-3 weeks)"
+          },
+          {
+            "id": "apad",
+            "label": "Or recombinant ADAMTS13 (Apadamtase alfa)"
+          }
         ],
         "edges": [
-          ["cttp", "ffp"],
-          ["ffp", "apad"]
+          [
+            "cttp",
+            "ffp"
+          ],
+          [
+            "ffp",
+            "apad"
+          ]
         ]
       }
     },
@@ -112,11 +153,27 @@
       "vis": {
         "kind": "table",
         "title": "Adjuvant Biologic Agents in Immune TTP",
-        "cols": ["Drug", "Mechanism of Action", "Clinical Benefit"],
+        "cols": [
+          "Drug",
+          "Mechanism of Action",
+          "Clinical Benefit"
+        ],
         "rows": [
-          ["Caplacizumab", "Binds vWF A1 domain to block GP1b", "Stops microthrombi within hours, prevents stroke"],
-          ["Rituximab", "Depletes CD20+ B-lymphocytes", "Suppresses anti-ADAMTS13 inhibitor production"],
-          ["Corticosteroids", "Broad immunosuppression (IV methylpred)", "Blunts immediate autoantibody synthesis"]
+          [
+            "Caplacizumab",
+            "Binds vWF A1 domain to block GP1b",
+            "Stops microthrombi within hours, prevents stroke"
+          ],
+          [
+            "Rituximab",
+            "Depletes CD20+ B-lymphocytes",
+            "Suppresses anti-ADAMTS13 inhibitor production"
+          ],
+          [
+            "Corticosteroids",
+            "Broad immunosuppression (IV methylpred)",
+            "Blunts immediate autoantibody synthesis"
+          ]
         ]
       }
     },

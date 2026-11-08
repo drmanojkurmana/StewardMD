@@ -1,95 +1,106 @@
 {
- "v": 1,
- "module": "psy-schizophrenia",
- "subject": "psychiatry",
- "title": "Schizophrenia",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Schizophrenia** is a psychotic disorder of perception, belief, thought form, motivation and cognition typically beginning in late adolescence or early adulthood, with men earlier than women. Diagnosis needs characteristic psychotic symptoms with functional decline over at least six months (DSM pattern) after excluding mood psychosis, substances and medical causes. No single symptom is pathognomonic; Schneider first rank symptoms occur but are not exclusive.",
-   "say": "Schizophrenia starts young, lasts months, impairs function. No single symptom proves it; exclude mood, drugs and disease first.",
-   "vis": null
-  },
-  {
-   "tx": "**Positive symptoms** (delusions, hallucinations, disorganisation) reflect excess or distortion of normal function and respond best to dopamine blockade. **Negative symptoms** (flattening, alogia, avolition, anhedonia, asociality) reflect lost function, dominate long term disability and respond poorly. Cognitive impairment in memory, executive function and processing speed is core and present from first episode, driving educational failure.",
-   "say": "Positive symptoms add distortions and treat well. Negative and cognitive deficits disable and treat poorly.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/psy-schizophrenia-fig1.webp",
-    "alt": "Diagram showing positive symptoms (delusions, hallucinations), negative symptoms (alogia, avolition), and cognitive impairment (memory, executive function) in schizophrenia.",
-    "caption": "Key symptom clusters in schizophrenia: positive, negative, and cognitive impairments",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "The **dopamine hypothesis** in modern form proposes presynaptic striatal dopamine excess driving positive symptoms (aberrant salience), with cortical dopamine and glutamate NMDA hypofunction contributing negative and cognitive features. All effective antipsychotics block D2 receptors; clozapine's superior efficacy in resistance remains partly unexplained. Neurodevelopmental origins (obstetric complications, adolescent synaptic pruning, cannabis and stress interaction) precede symptoms by years with prodromal social withdrawal.",
-   "say": "Too much striatal dopamine drives positive symptoms. Antipsychotics block D2. Development goes off track years before psychosis.",
-   "vis": null
-  },
-  {
-   "tx": "Antipsychotics are first line, chosen by side effect profile (local formulary), continued at least one to two years after first episode to prevent relapse, and switched after adequate failed trials. **Clozapine** is mandatory after two failed antipsychotics (treatment resistance) with blood monitoring for agranulocytosis. Long acting injections aid covert nonadherence. Psychosocial care (family intervention, supported employment, CBT for psychosis) halves relapse beyond drugs alone, and physical health monitoring counters the 15 to 20 year mortality gap.",
-   "say": "Keep antipsychotics years after first episode. Two failures earn clozapine. Family and work support halve relapses.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Domain",
-     "Features",
-     "Drug response"
-    ],
-    "rows": [
-     [
-      "Positive",
-      "Delusions, hallucinations, disorganisation",
-      "Good D2 blockade response"
-     ],
-     [
-      "Negative",
-      "Avolition, alogia, flattening, anhedonia",
-      "Poor; rehabilitation focus"
-     ],
-     [
-      "Cognitive",
-      "Memory, executive, speed deficits",
-      "Poor; remediation research"
-     ],
-     [
-      "Affective",
-      "Depression, suicide risk about 5 percent lifetime",
-      "Treat comorbidity directly"
-     ]
-    ]
-   }
+  "v": 1,
+  "module": "psy-schizophrenia",
+  "subject": "psychiatry",
+  "title": "Schizophrenia",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "**Schizophrenia** is a psychotic disorder that affects perception, belief, thought form, motivation and cognition in young people. Illness usually begins during late adolescence or early adulthood and men present earlier than women. Diagnosis requires characteristic psychotic symptoms with functional decline over at least six months of illness. Clinicians exclude mood psychosis, substance effects and medical causes before confirming the diagnosis. No single symptom proves schizophrenia because **Schneider first rank symptoms** also occur in other psychotic disorders.",
+      "say": "Schizophrenia is a psychotic disorder that begins usually during late adolescence. Diagnosis requires psychotic symptoms with functional decline over at least six months. Clinicians exclude mood psychosis, substance effects and medical causes before confirming diagnosis. No single symptom proves schizophrenia because similar symptoms occur in other disorders.",
+      "vis": null
+    },
+    {
+      "tx": "**Positive symptoms** include delusions, hallucinations and disorganisation and reflect distortion of normal mental function. These symptoms respond best to dopamine blockade with antipsychotic medicines during acute treatment. **Negative symptoms** include flattening, alogia, avolition, anhedonia and asociality and reflect loss of normal function. Negative features dominate long term disability and respond poorly to available medicines at present. **Cognitive impairment** affects memory, executive function and processing speed from the first episode onward.",
+      "say": "Positive symptoms include delusions and hallucinations and reflect distortion of normal function. Negative symptoms include avolition and anhedonia and reflect loss of normal function. Cognitive impairment affects memory and executive function from the first episode onward. Negative features are dominant in long term disability and respond poorly to medicines.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/psy-schizophrenia-fig1.webp",
+        "alt": "Diagram showing positive symptoms (delusions, hallucinations), negative symptoms (alogia, avolition), and cognitive impairment (memory, executive function) in schizophrenia.",
+        "caption": "Key symptom clusters in schizophrenia: positive, negative, and cognitive impairments",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "The modern **dopamine hypothesis** proposes excess presynaptic striatal dopamine release that drives positive symptoms through aberrant salience. Cortical dopamine dysfunction and **glutamate NMDA hypofunction** contribute to negative and cognitive features of schizophrenia. Every effective antipsychotic blocks D2 receptors although clozapine has superior efficacy in resistant illness. Neurodevelopmental factors precede symptoms by years and include obstetric complications, adolescent synaptic pruning, cannabis exposure and stress. Prodromal social withdrawal often appears before frank psychosis becomes clinically obvious to families.",
+      "say": "The modern dopamine hypothesis proposes excess striatal dopamine release in schizophrenia. This excess is important because ordinary events acquire aberrant salience and cause positive symptoms. Cortical dopamine dysfunction is associated with negative symptoms and cognitive impairment together. Every effective antipsychotic blocks dopamine receptors during acute and maintenance treatment.",
+      "vis": null
+    },
+    {
+      "tx": "This brain diagram shows **mesolimbic** and nigrostriatal pathways in orange with a mesocortical pathway in blue reaching prefrontal cortex. The striatal inset shows excess presynaptic dopamine release with **D2 receptor blockade** by antipsychotic treatment. The prefrontal inset shows dopamine and NMDA hypofunction linked to negative and cognitive features. The image joins positive symptoms to striatal excess and disability to **prefrontal hypofunction** for examination answers.",
+      "say": "This brain diagram shows dopamine pathways reaching striatum and prefrontal cortex clearly. The striatal inset shows excess dopamine release linked to positive symptoms. The prefrontal inset shows dopamine hypofunction linked to negative and cognitive features. Antipsychotic medicines block dopamine receptors and reduce positive symptoms during treatment.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/psy-schizophrenia-gen1.webp",
+        "alt": "Translucent brain showing mesocortical, mesolimbic and nigrostriatal tracts with striatal and prefrontal synaptic insets.",
+        "caption": "Brain dopamine pathways linking striatal excess to prefrontal hypofunction in schizophrenia. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Antipsychotic medicines remain first line treatment and clinicians continue treatment for at least one to two years after a first episode. **Clozapine** becomes mandatory after two adequate antipsychotic trials have failed in treatment resistant schizophrenia. Clozapine needs regular blood monitoring because it can cause agranulocytosis in a small proportion of patients. **Long acting injections** help patients with covert nonadherence and reduce relapse from missed oral doses. Family intervention, supported employment and psychological therapy reduce relapse beyond medicines alone.",
+      "say": "Antipsychotic medicines remain first line treatment after a first psychotic episode occurs. Clinicians continue treatment for years because early stopping increases relapse risk considerably. Clozapine becomes necessary after two adequate antipsychotic trials have failed previously. Long acting injections help patients who miss oral doses and relapse repeatedly.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Domain",
+          "Features",
+          "Drug response"
+        ],
+        "rows": [
+          [
+            "Positive",
+            "Delusions, hallucinations, disorganisation",
+            "Good D2 blockade response"
+          ],
+          [
+            "Negative",
+            "Avolition, alogia, flattening, anhedonia",
+            "Poor; rehabilitation focus"
+          ],
+          [
+            "Cognitive",
+            "Memory, executive, speed deficits",
+            "Poor; remediation research"
+          ],
+          [
+            "Affective",
+            "Depression, suicide risk about 5 percent lifetime",
+            "Treat comorbidity directly"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-psy-011",
+    "bk2-psy-012",
+    "bk2-psy-013",
+    "bk2-psy-014",
+    "bk2-psy-015",
+    "bk2-psy-016",
+    "bk2-psy-017",
+    "bk2-psy-018",
+    "bk2-psy-019",
+    "bk2-psy-020"
+  ],
+  "src": [],
+  "refs": [
+    "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-batch2-psychiatry",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ],
- "quiz": [
-  "bk2-psy-011",
-  "bk2-psy-012",
-  "bk2-psy-013",
-  "bk2-psy-014",
-  "bk2-psy-015",
-  "bk2-psy-016",
-  "bk2-psy-017",
-  "bk2-psy-018",
-  "bk2-psy-019",
-  "bk2-psy-020"
- ],
- "src": [],
- "refs": [
-  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-batch2-psychiatry",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
 }

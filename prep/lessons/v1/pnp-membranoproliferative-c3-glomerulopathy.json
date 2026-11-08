@@ -1,0 +1,228 @@
+{
+  "id": "pnp-membranoproliferative-c3-glomerulopathy",
+  "title": "C3 Glomerulopathy and MPGN: Alternative Complement Dysregulation and Management",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Glomerular Diseases, Nephrotic Syndrome and Nephritis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Immunofluorescence microscopy divides MPGN into immune complex disease and alternative complement pathway C3 glomerulopathy.",
+      "tx": "Apply contemporary diagnostic paradigms for **Immunofluorescence reclassification of MPGN** on biopsy specimens. Membranoproliferative glomerulonephritis is categorized by immunofluorescence into immune complex-mediated MPGN (immunoglobulin-positive with complement, driven by persistent infections, autoimmune diseases, or monoclonal gammopathies) and complement-mediated C3 glomerulopathy (C3-dominant staining with absent or scant immunoglobulin deposition, reflecting alternative complement pathway dysregulation).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immune Complex MPGN",
+          "points": [
+            "Immunoglobulin positive (IgG/IgM + C3)",
+            "Classic complement pathway activation",
+            "Driven by viral/bacterial infections or autoimmunity"
+          ]
+        },
+        "right": {
+          "title": "C3 Glomerulopathy (C3G)",
+          "points": [
+            "C3-dominant staining (>= 2 orders magnitude > Ig)",
+            "Alternative complement pathway dysregulation",
+            "Genetic complement defects or autoantibodies (C3NeF)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Electron microscopy separates C3 glomerulonephritis from dense deposit disease based on the nature of intramembranous deposits.",
+      "tx": "Differentiate ultrastructural variants by assessing **C3 glomerulonephritis vs Dense Deposit Disease (DDD)** under electron microscopy. C3 glomerulopathy is subdivided into Dense Deposit Disease (characterized by extremely osmophilic, continuous, ribbon-like serpentine electron-dense intramembranous deposits transforming the lamina densa) and C3 glomerulonephritis (C3GN, showing lighter, ill-defined mesangial, subendothelial, and subepithelial electron-dense deposits).",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/c3-glomerulopathy-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Diagnostic ultrastructural and immunofluorescence findings in complement-mediated C3 glomerulopathy",
+        "alt": "Diagnostic ultrastructural and immunofluorescence findings in complement-mediated C3 glomerulopathy"
+      },
+      "caption": "Diagnostic ultrastructural and immunofluorescence findings in complement-mediated C3 glomerulopathy",
+      "alt": "Diagnostic ultrastructural and immunofluorescence findings in complement-mediated C3 glomerulopathy"
+    },
+    {
+      "say": "Autoantibodies known as C3 nephritic factors stabilize alternative pathway convertases, leading to profound fluid-phase complement consumption.",
+      "tx": "Understand the serological mechanisms of **C3 Nephritic Factor (C3NeF) autoantibodies** in disease pathogenesis. C3NeF is an IgG autoantibody directed against neoepitopes on the alternative pathway C3 convertase (C3bBb). By binding and stabilizing this enzymatic complex, C3NeF prolongs its operational half-life from minutes to hours, producing continuous fluid-phase C3 consumption and profound, persistent serum hypocomplementemia (depleted C3 with normal C4).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "auto",
+            "label": "C3NeF Autoantibody Formation (IgG)"
+          },
+          {
+            "id": "bind",
+            "label": "Stabilizes Alternative C3 Convertase (C3bBb)"
+          },
+          {
+            "id": "consume",
+            "label": "Continuous Fluid-Phase C3 Cleavage"
+          },
+          {
+            "id": "hypo",
+            "label": "Profound Depletion of Serum C3 (Normal C4)"
+          }
+        ],
+        "edges": [
+          [
+            "auto",
+            "bind"
+          ],
+          [
+            "bind",
+            "consume"
+          ],
+          [
+            "consume",
+            "hypo"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dense deposit disease exhibits striking systemic clinical associations with acquired partial lipodystrophy and retinal drusen.",
+      "tx": "Perform comprehensive physical and ophthalmic screening for **Acquired partial lipodystrophy association** in suspected cases. Dense deposit disease is uniquely associated with acquired partial lipodystrophy (Barraquer-Simons syndrome, characterized by the progressive symmetrical loss of subcutaneous adipose tissue from the face, neck, upper trunk, and arms) and bilateral ocular drusen deposits beneath the retinal pigment epithelium.",
+      "vis": {
+        "kind": "table",
+        "title": "Dense Deposit Disease Systemic Manifestations",
+        "cols": [
+          "Feature",
+          "Underlying Pathology",
+          "Clinical Screening"
+        ],
+        "rows": [
+          [
+            "Barraquer-Simons syndrome",
+            "Loss of subcutaneous fat from head/upper trunk",
+            "Physical inspection of facial and upper body contour"
+          ],
+          [
+            "Ocular drusen",
+            "Subretinal complement-rich deposits in Bruch membrane",
+            "Dilated funduscopy and optical coherence tomography"
+          ],
+          [
+            "Profound hypocomplementemia",
+            "Relentless fluid-phase C3 convertase hyperactivity",
+            "Serial serum C3 quantification and C3NeF assays"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Mesangial interposition creates characteristic capillary wall double contours termed the tram-track appearance on silver staining.",
+      "tx": "Examine histopathological slides to recognize the **Light microscopy tram-track appearance** in affected glomeruli. Both MPGN and C3G demonstrate lobular glomerular accentuation, prominent endocapillary proliferation, and extensive mesangial cell and matrix interposition into the subendothelial space. This circumferential interposition splits the capillary basement membrane, producing a diagnostic double-contour (tram-track sign) clearly visible on periodic acid-Schiff and silver methenamine stains.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/membranoproliferative-glomerulonephritis-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Light microscopy with periodic acid-methenamine silver stain revealing double-contour tram-tracking and lobular accentuation",
+        "alt": "Light microscopy with periodic acid-methenamine silver stain revealing double-contour tram-tracking and lobular accentuation"
+      },
+      "caption": "Light microscopy with periodic acid-methenamine silver stain revealing double-contour tram-tracking and lobular accentuation",
+      "alt": "Light microscopy with periodic acid-methenamine silver stain revealing double-contour tram-tracking and lobular accentuation"
+    },
+    {
+      "say": "Investigating complement-mediated glomerulopathy requires comprehensive genetic screening and functional alternative pathway profiling.",
+      "tx": "Order comprehensive specialized laboratory diagnostics using a **Complement genetic testing panel** to guide therapy. Evaluation of C3G requires genetic sequencing of regulatory genes including CFH, CFI, CD46 (MCP), and CFHR1-5 hybrid or rearranged genomic regions. Testing must also include autoantibodies against Factor H (anti-CFH), Factor B, and C3 convertase, alongside functional quantification of alternative pathway activation components (Factor Bb and soluble C5b-9).",
+      "vis": {
+        "kind": "table",
+        "title": "Comprehensive Complement Evaluation Panel",
+        "cols": [
+          "Category",
+          "Key Components Tested",
+          "Diagnostic Goal"
+        ],
+        "rows": [
+          [
+            "Genetic sequencing",
+            "CFH, CFI, CD46, CFHR1-5 hybrids",
+            "Identify loss-of-function regulatory mutations"
+          ],
+          [
+            "Autoantibody screen",
+            "C3NeF, anti-Factor H, anti-Factor B",
+            "Detect autoimmune convertase stabilization"
+          ],
+          [
+            "Functional biomarkers",
+            "Serum C3, C4, Factor Bb, sC5b-9",
+            "Distinguish classic vs alternative pathway consumption"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Mycophenolate mofetil combined with oral glucocorticoids serves as first-line immunosuppressive therapy for progressive disease.",
+      "tx": "Initiate medical immunosuppression by assessing **Mycophenolate mofetil and steroid efficacy** in children with active disease. First-line immunosuppressive therapy for children with C3G presenting with moderate-to-severe proteinuria or progressive renal decline consists of mycophenolate mofetil (1200 mg/m\u00b2/day in two divided doses) combined with oral glucocorticoids. This combination achieves disease stabilization or partial remission in approximately fifty percent of pediatric patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prog",
+            "label": "Active C3G / Progressive Proteinuria"
+          },
+          {
+            "id": "raas",
+            "label": "Supportive RAAS Blockade + SGLT2i"
+          },
+          {
+            "id": "mmf",
+            "label": "MMF 1200 mg/m\u00b2/day + Oral Glucocorticoids"
+          },
+          {
+            "id": "resp",
+            "label": "Remission / Stabilization in ~50% Patients"
+          }
+        ],
+        "edges": [
+          [
+            "prog",
+            "raas"
+          ],
+          [
+            "raas",
+            "mmf"
+          ],
+          [
+            "mmf",
+            "resp"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Targeted therapies inhibiting C3 and alternative pathway enzymes offer transformative disease-modifying benefits.",
+      "tx": "Evaluate emerging molecular therapeutics including **Pegcetacoplan and Factor B inhibitor therapies** in refractory pediatric disease. Novel proximal complement inhibitors targeting C3 (such as pegcetacoplan, a PEGylated cyclic peptide inhibitor of C3 and C3b) or Factor B (iptacopan, an oral small molecule Factor B inhibitor) demonstrate significant reduction in glomerular C3 deposition, clearance of proteinuria, and stabilization of kidney function in clinical trials.",
+      "vis": {
+        "kind": "table",
+        "title": "Novel Proximal Complement Inhibitors in C3G",
+        "cols": [
+          "Agent",
+          "Molecular Target",
+          "Mechanism of Benefit"
+        ],
+        "rows": [
+          [
+            "Pegcetacoplan",
+            "C3 and C3b",
+            "Blocks central C3 cleavage and downstream convertase"
+          ],
+          [
+            "Iptacopan",
+            "Factor B",
+            "Selectively inhibits alternative pathway C3 convertase (C3bBb)"
+          ],
+          [
+            "Eculizumab",
+            "Terminal C5",
+            "Limited efficacy; only benefits cases with high sC5b-9"
+          ]
+        ]
+      }
+    }
+  ]
+}

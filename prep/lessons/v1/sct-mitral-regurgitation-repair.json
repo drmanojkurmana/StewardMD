@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sct-mitral-regurgitation-repair",
+  "title": "Mitral Valve Repair: Carpentier Classification, Resection, Neochords and Annuloplasty",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Valvular Heart Disease: Mitral Valve Repair)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 11 (Mitral Valve Disease)",
+    "Carpentier's Reconstructive Valve Surgery: From Analysis to Reconstruction"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The Carpentier functional classification provides the universal anatomical framework for analyzing mitral regurgitation. Alain Carpentier categorized valve dysfunction based on leaflet motion relative to the annular plane. Type one exhibits normal leaflet motion, type two features excessive leaflet motion, and type three displays restricted leaflet motion.",
+      "tx": "The **Carpentier classification** analyzes regurgitation based on underlying **leaflet motion**. Type 1 features normal leaflet motion seen in annular dilation or leaflet perforation. Type 2 is characterized by **excessive motion** above the annular plane caused by chordal elongation or rupture, while Type 3 displays restricted leaflet excursion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Carpentier Class",
+          "Leaflet Motion Relative to Annulus",
+          "Underlying Pathological Etiologies"
+        ],
+        "rows": [
+          [
+            "Type I",
+            "Normal leaflet motion",
+            "Idiopathic annular dilatation, endocarditis leaflet perforation"
+          ],
+          [
+            "Type II",
+            "Excessive leaflet motion (prolapse/flail)",
+            "Degenerative myxomatous disease (Barlow, FED), chordal rupture"
+          ],
+          [
+            "Type IIIa",
+            "Restricted motion in diastole and systole",
+            "Rheumatic valvular disease, post-inflammatory leaflet thickening"
+          ],
+          [
+            "Type IIIb",
+            "Restricted motion predominantly in systole",
+            "Ischemic cardiomyopathy, asymmetric LV remodeling with papillary tethering"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Carpentier type three is divided into subtypes based on timing within the cardiac cycle. Type three-a exhibits restricted leaflet motion during both diastole and systole, characteristically seen in rheumatic mitral disease. Type three-b features systolic leaflet restriction caused by ischemic tethering from displaced papillary muscles.",
+      "tx": "Restricted valve pathology is subdivided into **Type IIIa**, exhibiting restricted leaflet motion throughout both diastole and systole characteristic of rheumatic contracture, and **Type IIIb**, displaying **restricted motion** confined to systole. Type IIIb is typical of **ischemic mitral regurgitation**, where posterolateral myocardial infarction displaces papillary muscles and tethers leaflet margins.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type IIIa (Rheumatic)",
+          "points": [
+            "Leaflet restriction during both diastole and systole",
+            "Thickened, calcified leaflets with commissural fusion",
+            "Chordal shortening and fusion to papillary heads",
+            "Often accompanied by progressive mitral stenosis"
+          ]
+        },
+        "right": {
+          "title": "Type IIIb (Ischemic / Functional)",
+          "points": [
+            "Leaflet restriction predominantly during systole",
+            "Structurally normal leaflets and chordae",
+            "Ventricular wall dyssynergy tethers leaflets into apex",
+            "Treated with undersized ring annuloplasty or chordal cutting"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Primary degenerative mitral regurgitation is caused by fibroelastic deficiency or Barlow disease. Myxomatous degeneration weakens the collagen core of the leaflets and chordae tendineae, which is recognized by surgical teams. This leads to progressive chordal elongation or rupture, with prolapse involving the middle scallop of the posterior leaflet most commonly.",
+      "tx": "Primary degenerative mitral disease spans a spectrum from localized **fibroelastic deficiency** in elderly patients to extensive myxomatous **Barlow disease**. Weakened collagen leads to chordal stretching or rupture, causing severe leaflet prolapse. The middle scallop of the posterior leaflet develops **P2 prolapse** as the most common anatomical lesion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mitral-regurgitation-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Mitral regurgitation anatomy and regurgitant jet dynamics. Credit: StewardMD.",
+        "alt": "Pathological anatomy of degenerative mitral regurgitation and jet origin."
+      }
+    },
+    {
+      "say": "Surgical repair is the undisputed gold standard for severe primary degenerative mitral regurgitation. Experienced cardiac surgical centers achieve operative mortality rates below one percent with repair rates exceeding ninety-five percent. Preserving the native subvalvular apparatus optimizes left ventricular geometry and confers superior long-term survival over replacement.",
+      "tx": "Reconstructive **mitral valve repair** represents the gold standard surgical intervention for severe degenerative disease, conferring a low **operative mortality** below 1 percent. Preserving the subvalvular chordal apparatus protects left ventricular geometry, ensuring **superior survival** and enhanced ejection fraction retention compared to prosthetic mitral valve replacement.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Strategy",
+          "Operative Mortality",
+          "10-Year Survival and Durability"
+        ],
+        "rows": [
+          [
+            "Mitral valve repair",
+            "<1 percent in experienced centers",
+            "Freedom from reoperation >90 to 95 percent; normal life expectancy"
+          ],
+          [
+            "Mechanical replacement",
+            "3 to 5 percent",
+            "Requires lifelong warfarin; risk of valve thrombosis and bleeding"
+          ],
+          [
+            "Bioprosthetic replacement",
+            "3 to 5 percent",
+            "Structural valve degeneration requiring reoperation in 10-12 years"
+          ],
+          [
+            "Transcatheter edge-to-edge",
+            "1 to 2 percent",
+            "Residual regurgitation higher; reserved for prohibitive surgical risk"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Classical resectional techniques for posterior leaflet prolapse utilize quadrangular or triangular resection, which is recognized by surgical teams. The surgeon excises the redundant flail segment of the P2 scallop back to the annulus. Approximating the remaining leaflet edges with fine sutures restores normal leaflet height and establishes a smooth coaptation surface.",
+      "tx": "Classical reconstruction of posterior leaflet prolapse utilizes **quadrangular resection** or **triangular resection** of the flail **posterior scallop**. Resecting excess degenerated tissue followed by leaflet reconstruction and re-approximation restores a normal 8 to 10 mm coaptation geometry, eliminating regurgitant gaps across the posterior leaflet margin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Inspect valve through left atriotomy to identify prolapsing P2 segment"
+          },
+          {
+            "id": "b",
+            "label": "Perform quadrangular or triangular excision of flail leaflet tissue"
+          },
+          {
+            "id": "c",
+            "label": "Perform annular plication or sliding leaflet plasty if tissue is excess"
+          },
+          {
+            "id": "d",
+            "label": "Reapproximate leaflet edges with interrupted 5-0 braided sutures"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Non-resectional leaflet preservation techniques employ artificial neochordae made of expanded polytetrafluoroethylene. The Gore-Tex sutures are anchored into the fibrous tip of the papillary muscle and secured to the free leaflet edge. Adjusting chordal length pulls the prolapsing leaflet back into the ventricular cavity.",
+      "tx": "Contemporary non-resectional repair constructs **artificial neochordae** utilizing micro-fibrous **PTFE sutures** (Gore-Tex). Pledgeted sutures are anchored deeply into the **papillary muscle anchor** head and affixed securely to the free edge of the prolapsing leaflet, successfully establishing an anatomically precise leaflet coaptation height.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Resectional Repair (Carpentier)",
+          "points": [
+            "Excises redundant or diseased leaflet tissue",
+            "Reduces posterior leaflet surface area",
+            "May risk narrowing posterior leaflet mobility",
+            "Extremely proven long-term historical track record"
+          ]
+        },
+        "right": {
+          "title": "Non-Resectional (PTFE Neochords)",
+          "points": [
+            "Preserves entire native leaflet tissue architecture",
+            "Creates large surface area of coaptation",
+            "Requires precise length calibration under saline test",
+            "Applicable to both anterior and posterior prolapse"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Implantation of a prosthetic annuloplasty ring is an indispensable component of every degenerative mitral repair. The rigid or semi-rigid ring is sutured circumferentially along the posterior and anterior annulus. Annuloplasty remodels annular shape, increases leaflet coaptation depth, and prevents recurrent regurgitation.",
+      "tx": "Placement of a prosthetic **ring annuloplasty** is mandatory in every degenerative mitral repair. Securing the ring with multiple braided sutures along the fibrous annulus achieves necessary **annular remodelling**, provides transverse **circumference reduction**, and provides permanent stabilization against late recurrent regurgitation caused by progressive native annular dilation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cardiac-surgery-cabg-valvular-repair-and-cardiopulmonary-bypass-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Intracardiac valvular repair and exposure. Credit: StewardMD.",
+        "alt": "Intracardiac mitral valve exposure, annuloplasty ring sizing and placement."
+      }
+    },
+    {
+      "say": "Systolic anterior motion of the anterior mitral leaflet is a recognized post-repair complication that obstructs the left ventricular outflow tract. Excess residual posterior leaflet tissue pushes the coaptation point anteriorly into the high-velocity outflow stream. The Venturi effect pulls the anterior leaflet toward the septum, which is recognized by surgical teams.",
+      "tx": "**Systolic anterior motion** (SAM) of the anterior leaflet can precipitate severe **outflow tract obstruction** following mitral repair. Having **excessive leaflet height** on the posterior leaflet pushes the coaptation line forward, causing Venturi suction to pull the elongated anterior leaflet into the septum during ventricular ejection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Excessive posterior leaflet height (>15 mm) pushes coaptation line anteriorly"
+          },
+          {
+            "id": "b",
+            "label": "Hyperdynamic ejection creates Venturi suction in narrowed LVOT"
+          },
+          {
+            "id": "c",
+            "label": "Anterior leaflet tip pulled toward interventricular septum in systole"
+          },
+          {
+            "id": "d",
+            "label": "Dynamic subaortic gradient and severe eccentric mitral regurgitation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

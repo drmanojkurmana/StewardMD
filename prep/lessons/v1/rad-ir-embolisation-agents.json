@@ -3,11 +3,11 @@
  "module": "rad-ir-embolisation-agents",
  "subject": "radiology",
  "title": "Embolic agents: choice and safe delivery",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Temporary plugs suit bleeding that heals itself. **Gelatin sponge** cut into pledgets or torpedoes blocks flow for days to weeks while trauma tracts and postpartum uteri recover. **Clot and hurry** mark its limits, since recanalisation follows and infected fields wash it out early. **Sizing by vessel** keeps pledgets proximal rather than sailing distally into danger. **Postpartum and trauma oozing** remain its classic territory under Society of Interventional Radiology guidance.",
-   "say": "Temporary plugs suit bleeding that heals itself. Gelatin sponge blocks flow for days to weeks while trauma and postpartum bleeding recover. It recanalises later and washes out of infected fields. Size pledgets to vessels to avoid distal sailing. Postpartum and trauma oozing remain classic uses.",
+   "tx": "Temporary agents suit bleeding that will heal by itself with time. **Gelatin sponge** cut into pledgets blocks flow for days to weeks while injured tissues recover. The vessel later reopens because the sponge is absorbed, so **recanalisation** limits lasting effect. Infected fields break the sponge down early and reduce its reliability. Postpartum bleeding and trauma oozing are classic uses where temporary block is enough for healing.",
+   "say": "Temporary agents suit bleeding that will heal by itself with time. Gelatin sponge blocks flow for days to weeks while tissues recover. The vessel later reopens because the sponge is absorbed naturally. Infected fields break it down early, while postpartum and trauma bleeding are classic temporary uses.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,8 @@
    }
   },
   {
-   "tx": "Permanent particles close tissue for good. **Polyvinyl alcohol particles** in calibrated sizes lodge at chosen levels, with small sizes reaching deeper at higher non-target risk. **Tris-acryl microspheres** offer smoother calibrated occlusion for fibroids and prostate work. **Size matching** pairs particle calibre to target diameter so shunts and collaterals do not carry grains astray. **Pain and fever** after particles mark expected ischaemia rather than failure.",
-   "say": "Permanent particles close tissue for good. Calibrated grains lodge at chosen levels, with smaller sizes reaching deeper at higher risk. Smooth microspheres suit fibroid and prostate work. Match grain size to vessel size to avoid stray grains. Pain with fever after marks expected ischaemia.",
+   "tx": "Permanent particles close a target bed for good when lasting block is needed. **Polyvinyl alcohol particles** lodge at a chosen level, with smaller sizes reaching deeper at higher risk. **Calibrated microspheres** give smoother occlusion and suit fibroid and prostate work well. **Size matching** pairs particle size with vessel size so grains do not enter shunts or collaterals. Pain and fever afterwards usually reflect expected ischaemia rather than treatment failure.",
+   "say": "Permanent particles close a target bed for good when lasting block is needed. Calibrated particles lodge at a chosen level inside the vessel. Smaller sizes reach deeper and carry higher non target risk. Pain and fever afterwards usually reflect expected ischaemia rather than failure and settle with supportive care.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +74,8 @@
    }
   },
   {
-   "tx": "Metal and glue finish what particles start. **Detachable coils** pack aneurysms and feeding trunks densely under CIRSE packing standards, with framing then filling then finishing loops. **Vascular plugs** cap large high-flow vessels where coils would migrate downstream. **Liquid embolics** of glue or copolymer penetrate niduses that coils cannot fill, demanding DMSO-compatible catheters and fast flow control. **Non-target glue** in normal branches infarcts healthy tissue, so balloon protection guards dangerous anastomoses.",
-   "say": "Metal and glue finish the job. Coils pack aneurysms and trunks densely in framing, filling and finishing stages. Plugs cap large high-flow vessels where coils would drift. Liquid glue penetrates tangles that coils cannot fill but needs compatible catheters. Glue in normal branches infarcts healthy tissue.",
+   "tx": "Metal coils and liquid agents finish occlusions that particles cannot complete. **Detachable coils** pack aneurysms and feeding trunks in framing, filling and finishing stages. A **vascular plug** caps a large high flow vessel where loose coils might migrate downstream. **Liquid embolics** such as glue penetrate a nidus that coils cannot fill and need compatible catheters. Glue entering normal branches infarcts healthy tissue, so protection of dangerous connections matters greatly.",
+   "say": "Metal coils and liquid agents are useful when particles cannot complete the occlusion. Detachable coils pack aneurysms in framing and filling stages carefully. A vascular plug caps a large vessel where coils might migrate. Liquid glue penetrates a tangled nidus, while glue in normal branches infarcts healthy tissue and needs avoidance.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-embolisation-agents-fig1.webp",
@@ -85,8 +85,8 @@
    }
   },
   {
-   "tx": "Technique protects normal tissue first. **Superselective catheterisation** with microcatheters parks the tip inside the bleeding branch before anything is injected. **Provocative pauses** with small test injections reveal dangerous shunts to skin, bowel or cord. **Sandwich occlusion** traps pseudoaneurysms front and back when collaterals feed both ends. **Post-embolisation syndrome** with pain, fever and nausea follows successful ischaemia and needs fluids with analgesia rather than antibiotics alone.",
-   "say": "Technique protects normal tissue first. Microcatheters park inside bleeding branches before injection. Small test shots reveal dangerous shunts to skin, bowel or cord. Sandwich coils trap sacs fed from both ends. Pain with fever after success needs fluids and analgesia rather than antibiotics.",
+   "tx": "Safe technique protects normal tissue before any embolic agent is released. **Superselective catheterisation** parks a microcatheter tip inside the target branch before injection begins. Small test injections reveal dangerous shunts towards skin, bowel or spinal cord. **Sandwich occlusion** traps a pseudoaneurysm from both ends when collaterals feed both sides. Pain, fever and nausea after successful ischaemia need fluids and analgesia rather than antibiotics alone.",
+   "say": "Safe technique protects normal tissue before any embolic agent is released. A microcatheter tip parks inside the target branch before injection begins. Small test injections reveal dangerous shunts towards skin or cord clearly. Sandwich occlusion traps a sac from both ends, while post procedure pain needs fluids and analgesia.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -121,6 +121,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The angiogram shows a **microcatheter tip** curled inside a single left target branch above a dark contrast blush. Branches on the opposite side are labelled as **spared non target branches** and remain fully open. This position allows embolic delivery only into diseased tissue while normal tissue stays perfused. Examiners reward this **superselective position** because it prevents the most feared embolisation error.",
+   "say": "The angiogram shows a microcatheter tip that sits inside a single target branch. A dark blush marks diseased tissue below the catheter tip clearly. Opposite branches remain open and are spared from embolic delivery. This superselective position prevents non target injury and is rewarded in examinations.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-embolisation-agents-gen1.webp",
+    "alt": "Aortic angiogram with microcatheter tip in left target branch, contrast blush, spared right branches.",
+    "caption": "Angiogram shows microcatheter in target branch with contrast blush. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

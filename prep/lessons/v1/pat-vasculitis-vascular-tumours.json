@@ -6,18 +6,29 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Vasculitis** inflames vessel walls classified by dominant vessel size: large (Takayasu, giant cell), medium (polyarteritis nodosa, Kawasaki) and small (ANCA associated, immune complex and cryoglobulinaemic). Wall inflammation stenoses, aneurysms or ruptures vessels while ischaemia injures downstream organs in patterns that localise size. Biopsy, ANCA serology and imaging triangulate diagnosis.",
-   "say": "Vasculitis sorts by vessel size: large, medium or small. Inflamed walls narrow, balloon or burst. Organ pattern plus ANCA plus biopsy triangulates it.",
+   "tx": "**Vasculitis** inflames vessel walls and it is classified by the dominant vessel size involved. Large vessel disease includes Takayasu arteritis and giant cell arteritis, while medium vessel disease includes polyarteritis nodosa and Kawasaki disease. Small vessel disease includes **ANCA associated vasculitis** and immune complex forms. Inflamed walls stenose, form aneurysms or rupture, and biopsy with serology and imaging triangulates the diagnosis.",
+   "say": "Clinicians classify vasculitis by dominant vessel size into three groups. Inflamed walls narrow, balloon outward or rupture suddenly. The organ pattern suggests which vessel size is involved. Biopsy, serology and imaging together triangulate the diagnosis.",
    "vis": null
   },
   {
-   "tx": "**Giant cell arteritis** inflames large arteries in patients over fifty with new headache, scalp tenderness, jaw claudication, raised ESR and vision loss from anterior ischaemic optic neuropathy. Temporal biopsy shows granulomatous panarteritis with giant cells at fragmented internal elastic lamina, but skip lesions demand long specimens and immediate steroids must never wait for biopsy when vision threatens.",
-   "say": "Over fifty with jaw claudication and high ESR means giant cell arteritis. Steroids immediately protect vision; biopsy follows within days. Skip lesions need long samples.",
+   "tx": "**Giant cell arteritis** inflames large arteries in patients over fifty years of age. Patients present with new headache, scalp tenderness, jaw claudication and a raised ESR. Vision loss comes from anterior ischaemic optic neuropathy and it is the feared complication. Temporal artery biopsy shows granulomatous inflammation with giant cells at the **fragmented internal elastic lamina**, but steroids must start immediately when vision is threatened and never wait for biopsy.",
+   "say": "Giant cell arteritis is inflaming large arteries in older patients. Jaw claudication and scalp tenderness point toward the diagnosis. Steroids must start immediately when vision is threatened. Biopsy follows within days and confirms granulomatous inflammation.",
    "vis": null
   },
   {
-   "tx": "**Polyarteritis nodosa** necrotises medium arteries causing renovascular hypertension, mononeuritis multiplex, livedo, testicular pain and visceral microaneurysms, sparing lungs and glomeruli (no glomerulonephritis), sometimes hepatitis B driven and ANCA negative. Kawasaki disease instead acutely inflames medium vessels in febrile children threatening coronary aneurysms prevented by early immunoglobulin.",
-   "say": "Polyarteritis aneurysms medium arteries sparing glomeruli, sometimes hepatitis B linked. Kawasaki fevers children toward coronary aneurysms prevented by early immunoglobulin.",
+   "tx": "This artery wall shows **granulomatous panarteritis** through all layers with dense inflammatory cells. **Multinucleated giant cells** sit near the internal elastic lamina, and intimal thickening narrows the lumen. The elastic stain inset shows the black lamina broken into fragments, which is the classic biopsy clue. Together these features identify **giant cell arteritis** in a temporal artery specimen for the exam.",
+   "say": "This artery is showing granulomatous inflammation through its whole wall. Multinucleated giant cells sit near the internal elastic lamina. The elastic stain shows the lamina broken into fragments. Intimal thickening narrows the lumen and threatens perfusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-vasculitis-vascular-tumours-gen1.webp",
+    "alt": "H and E artery wall with granulomatous infiltrate and multinucleated giant cells; elastic stain inset shows fragmented black lamina.",
+    "caption": "Artery with granulomatous inflammation, giant cells, and fragmented elastic lamina. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Polyarteritis nodosa** necrotises medium arteries and causes renovascular hypertension, mononeuritis multiplex, livedo and visceral microaneurysms. It spares the lungs and glomeruli, it may follow hepatitis B infection, and ANCA testing is negative. **Kawasaki disease** instead acutely inflames medium vessels in febrile children and threatens coronary aneurysms. Early immunoglobulin prevents most coronary complications, so timing matters greatly in both diseases for very different reasons.",
+   "say": "Polyarteritis nodosa damages medium arteries and forms microaneurysms within organs. It spares the glomeruli and ANCA testing stays negative. Kawasaki disease is inflaming medium vessels in febrile children. Early immunoglobulin prevents most coronary aneurysms in children.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -50,8 +61,8 @@
    }
   },
   {
-   "tx": "Small vessel **ANCA vasculitis** splits into granulomatosis with polyangiitis (PR3, upper airway destruction, lung nodules), microscopic polyangiitis (MPO, renal pulmonary capillaritis without granulomas) and eosinophilic granulomatosis (asthma, eosinophilia, neuropathy). All share pauci immune necrotising injury and crescentic nephritis potential needing urgent immunosuppression with infection exclusion.",
-   "say": "PR3 granulomatosis destroys upper airways; MPO capillaritis floods lungs and kidneys; eosinophilic type asthmas first. All pauci immune and urgent.",
+   "tx": "Small vessel **ANCA vasculitis** splits into granulomatosis with polyangiitis, microscopic polyangiitis and eosinophilic granulomatosis with polyangiitis. The first links with **PR3 antibodies**, upper airway destruction and lung nodules, while the second links with MPO antibodies and renal pulmonary capillaritis. Eosinophilic disease begins with asthma and eosinophilia before neuropathy appears. All share pauci immune necrotising injury and may cause crescentic nephritis needing urgent immunosuppression.",
+   "say": "Granulomatosis with polyangiitis is destroying the upper airway and lungs. Microscopic polyangiitis causes capillaritis in kidney and lung. Eosinophilic disease begins with asthma and raised eosinophils. All three forms share pauci immune necrotising injury.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-vasculitis-vascular-tumours-fig1.webp",
@@ -61,8 +72,8 @@
    }
   },
   {
-   "tx": "Vascular tumours range from benign **haemangiomas** (infantile proliferating then involuting, cherry angiomas of ageing) through Kaposi sarcoma (HHV8 spindle vessels in immunosuppression) to angiosarcoma (malignant endothelium, scalp of elderly, liver after vinyl chloride or arsenic, post radiation fields). Bacillary angiomatosis in AIDS mimics Kaposi but is Bartonella infection curable by antibiotics.",
-   "say": "Vascular tumours span involuting infant haemangiomas to lethal angiosarcomas. Kaposi follows HHV8 immunosuppression. Bartonella mimics it curably in AIDS.",
+   "tx": "Vascular tumours range from benign lesions to highly malignant cancers of endothelium. Infantile **haemangiomas** proliferate after birth and then involute, while cherry angiomas appear with ageing. **Kaposi sarcoma** follows HHV8 infection in immunosuppression and forms spindle cell vascular lesions. Angiosarcoma is malignant endothelium that arises on the elderly scalp or in the liver after certain exposures, and it behaves aggressively.",
+   "say": "Vascular tumours range from benign lesions to malignant cancers. Infantile haemangiomas are proliferating early and then are involuting slowly. Kaposi sarcoma follows HHV8 infection during immunosuppression. Angiosarcoma behaves aggressively and spreads early to distant sites.",
    "vis": null
   }
  ],

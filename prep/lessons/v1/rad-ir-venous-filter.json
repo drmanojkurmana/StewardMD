@@ -3,11 +3,11 @@
  "module": "rad-ir-venous-filter",
  "subject": "radiology",
  "title": "IVC filters: indications and retrieval",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Filters catch clots when drugs cannot. **Absolute indications** for **IVC filters** centre on venous thromboembolism with **anticoagulation contraindicated** or failed, under Society of Interventional Radiology guidance. **Relative indications** cover massive clot burdens with poor reserve and perioperative high-risk windows. **Prophylactic filters** without clot stay controversial and need documented justification. **Ultrasound surveillance** confirms caval patency before and after placement.",
-   "say": "Filters catch clots when drugs cannot. Absolute indications centre on clots with anticoagulation contraindicated or failed. Relative indications cover massive burdens with poor reserve. Prophylactic filters without clot stay controversial. Ultrasound confirms caval patency before and after.",
+   "tx": "An IVC filter earns placement only when clot protection matters and drug protection cannot work safely. **Absolute indications** centre on venous thromboembolism with **anticoagulation contraindicated** or anticoagulation that has already failed in hospital. **Relative indications** cover a massive clot burden with poor reserve and a perioperative high risk window briefly. A **prophylactic filter** without proven clot stays controversial and needs documented justification before any insertion. Ultrasound surveillance confirms caval patency before and after placement so the team deploys into a patent cava.",
+   "say": "A caval filter earns placement only when clot protection matters and drug protection cannot work safely. Absolute indications centre on clot disease where anticoagulation stays contraindicated or has already failed. Relative indications cover a massive clot burden with poor reserve and a perioperative window. A prophylactic filter without proven clot stays controversial and needs documented justification before insertion. Ultrasound confirms caval patency before and after placement so the team deploys safely.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,8 @@
    }
   },
   {
-   "tx": "Retrievable beats permanent when possible. **Retrievable filters** suit temporary contraindications with active retrieval planning from day one. **Permanent devices** serve lifelong contraindications or very limited life expectancy. **Dwell time** matters since tilt, embedment and perforation rise with months in situ. **Filter clinics** track every device so none drift into forgotten permanence.",
-   "say": "Retrievable beats permanent when possible. Retrievable filters suit temporary contraindications with retrieval planned from day one. Permanent devices serve lifelong blocks. Dwell time matters since tilt and embedment rise with months. Filter clinics track every device.",
+   "tx": "Retrievable design beats permanent design whenever the contraindication may resolve, because dwell time creates late harm. A **retrievable filter** suits a temporary contraindication and needs active retrieval planning from the first day onward. A **permanent device** serves a lifelong contraindication or very limited life expectancy where retrieval adds only risk. **Dwell time** matters greatly because tilt, embedment and perforation rise steadily with months inside the cava. A **filter clinic** tracks every device so no filter drifts into forgotten permanence without recall attempts.",
+   "say": "Retrievable design beats permanent design whenever the contraindication may resolve because dwell time creates late harm. A retrievable filter suits a temporary contraindication and needs active retrieval planning from day one. A permanent device serves a lifelong contraindication or very limited life expectancy where retrieval adds risk. Dwell time matters greatly because tilt and embedment and perforation rise with months inside. A filter clinic tracks every device so no filter drifts into forgotten permanence.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +74,8 @@
    }
   },
   {
-   "tx": "Retrieval is a planned procedure. **Standard snare retrieval** loops the hook through jugular access once clot clears and drugs resume. **Advanced techniques** with forceps or laser sheaths free tilted and embedded apices. **Residual clot in filters** postpones retrieval until anticoagulation clears the trap. **Cavagram before and after** maps tilt, thrombus and caval injury.",
-   "say": "Retrieval is planned. Snare loops hook filters through jugular access once clots clear and drugs resume. Forceps or laser sheaths free tilted apices. Residual trapped clot postpones retrieval until drugs clear it. Cavagrams map tilt and injury before and after.",
+   "tx": "Retrieval is a planned procedure rather than an afterthought, and imaging frames every step of removal. **Standard snare retrieval** loops the filter hook through jugular access once clot clears and drugs resume safely. **Advanced techniques** with forceps or laser sheaths free a tilted and embedded apex when snare traction fails. **Residual clot** inside the filter postpones retrieval until anticoagulation clears the trap and embolism risk falls. A **cavagram before and after** maps tilt, thrombus and caval injury across the retrieval procedure in theatre.",
+   "say": "Retrieval is a planned procedure rather than an afterthought and imaging frames every step of removal. Standard snare retrieval loops the filter hook through jugular access once clot clears safely. Advanced methods with forceps or laser sheaths free a tilted apex when snare traction fails. Residual clot inside the filter postpones retrieval until anticoagulation clears the trap fully. A cavagram before and after maps tilt and thrombus and caval injury during removal.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-venous-filter-fig1.webp",
@@ -85,8 +85,8 @@
    }
   },
   {
-   "tx": "Complications declare through symptoms. **Filter tilt with strut perforation** aches with back pain and needs urgent assessment. **Migration to hearts or lungs** announces with chest pain and arrhythmia needing snare rescue. **IVC thrombosis** swells both legs with collaterals across the abdomen. **Anticoagulate when possible** after placement since filters never treat clots themselves.",
-   "say": "Complications declare through symptoms. Tilted struts ache with back pain needing assessment. Migration to hearts announces with chest pain needing snare rescue. Caval thrombosis swells both legs with abdominal collaterals. Anticoagulate when possible since filters never treat clots.",
+   "tx": "Filter complications declare through symptoms, and a forgotten device explains many late presentations in clinic. **Filter tilt with strut perforation** aches through back pain and needs urgent assessment with cross sectional imaging. **Migration toward heart or lungs** announces with chest pain and arrhythmia and needs snare rescue in expert hands. **IVC thrombosis** swells both legs and opens collaterals across the abdominal wall over time slowly. Anticoagulation resumes when possible after placement because a filter traps clot and never treats clot itself.",
+   "say": "Filter complications declare through symptoms and a forgotten device explains many late presentations in clinic. Tilt with strut perforation aches through back pain and needs urgent assessment with imaging. Migration toward heart or lungs announces with chest pain and arrhythmia and needs rescue. Caval thrombosis is serious because it swells both legs and opens collaterals across the abdomen. Anticoagulation resumes when possible after placement because a filter traps clot only.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -121,6 +121,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "This coronal CT shows a caval filter whose apex tilts against the wall while one strut perforates outward. The labels identify the **perforated strut**, the **IVC wall** breach and a dark **perivascular haematoma** beside the cava below. That combination explains back pain after forgotten filter dwell and warns against simple traction at retrieval. The image matters for the exam because tilt and perforation rise with dwell time inside the cava. Planned early retrieval and registry recall prevent this late complication in most patients.",
+   "say": "This coronal scan is helpful because it shows a caval filter whose apex tilts against the wall with perforation. The labels identify a perforated strut and the caval wall breach and a haematoma beside. That combination explains back pain after forgotten dwell and warns against simple traction at retrieval. Tilt and perforation rise with dwell time inside the cava after filter placement. Planned early retrieval and registry recall prevent this late complication in most patients.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-venous-filter-gen1.webp",
+    "alt": "Coronal CT abdomen showing tilted IVC filter with perforated strut and perivascular haematoma.",
+    "caption": "Coronal CT showing tilted IVC filter perforation with haematoma. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

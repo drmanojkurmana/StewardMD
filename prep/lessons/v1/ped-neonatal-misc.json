@@ -3,11 +3,11 @@
  "module": "ped-neonatal-misc",
  "subject": "paediatrics",
  "title": "Neonatal seizures, asphyxia and metabolic problems",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Seizures** (**subtle** eye cycling sucking apnoea, **tonic** posturing desaturation, **clonic** focal migratory strokes, **myoclonic** metabolic jerks, **HIE** asphyxia Thompson grades, **jitteriness** stimulus-sensitive glucose, **timing** day-one HIE bleeds, **video** EEG captures) with **monitors** (**aEEG** background sleep-wake, **saturation** ictal dips) records; **treat** (correctables first) orders. Newborns fit.",
-   "say": "Subtles tonics clonics myoclonics is seizures: HIEs grade jitteriness trembles timings stage videos capture aEEGs trace saturations dip treats order glucose corrects. Eyes cycle.",
+   "tx": "Learn the four neonatal seizure patterns because subtle seizures are missed most often in newborns. **Subtle seizures** cause eye deviation, cycling movements, sucking or apnoea, while **clonic seizures** are focal and rhythmic. Tonic posturing and myoclonic jerks complete the set that examiners test. Jitteriness is stimulus sensitive and stops with restraint, which separates it from a true seizure. Video electroencephalography confirms doubtful events and guides treatment decisions.",
+   "say": "Subtle seizures cause eye movements, sucking or apnoea and are missed most often. Clonic seizures are focal and rhythmic and tonic posturing looks different again. Jitteriness stops with restraint and is stimulus sensitive in most babies. Video monitoring confirms doubtful events and guides treatment decisions safely.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/ped-neonatal-misc-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Metabolic** (**glucose** jittery macrosomic IDM, **calcium** DiGeorge high-phosphate, **magnesium** maternal diabetes losses, **pyridoxine** refractory B6 trial, **sodium** dehydration overhydration, **urea** cycle ammonia coma, **thyroid** maternal drugs screens, **correct** before anticonvulsants) with **labs** (**paired** insulin ketones, **gases** lactate gaps) sorts; **feeds** (early suckling) protects. Chemistries swing.",
-   "say": "Glucoses calciums magnesiums pyridoxines is metabolic: sodiums swing ureas rise thyroids lag corrects precede labs pair gases vent feeds suck early dextroses push. Salts shift.",
+   "tx": "Correct glucose, calcium, magnesium and sodium before you load antiseizure drugs, because **metabolic seizures** recur until the chemistry is fixed. Babies of diabetic mothers develop hypoglycaemia and hypocalcaemia, while high phosphate feeds lower calcium further. A **pyridoxine trial** matters when seizures resist standard drugs and no cause emerges. Paired insulin and ketone samples, blood gases and thyroid tests sort the remaining causes. Early feeding protects the newborn brain from hypoglycaemic injury.",
+   "say": "You should correct glucose and electrolytes before you load antiseizure drugs. Babies of diabetic mothers often develop low glucose and low calcium levels. Seizures that resist standard treatment need a pyridoxine trial promptly. Early feeding protects the newborn brain from hypoglycaemic injury effectively.",
    "vis": null
   },
   {
-   "tx": "**Asphyxia** (**Sarnat** mild moderate severe stages, **Thompson** numeric daily scores, **cooling** whole-body selective head, **aEEG** suppressed burst, **organ** renal cardiac gut injury, **bleeds** IVH germinal grades, **stroke** focal clonic imaging, **follow** CP high-risk) with **criteria** (**gases** base deficits, **Apgar** prolonged lows) selects; **support** (ventilation pressors) sustains. Brains injure.",
-   "say": "Sarnats Thompsons coolings aEEGs is asphyxia: organs fail bleeds grade strokes image follows track criteria select gases acid supports sustain pressors squeeze. Cooling saves.",
+   "tx": "Grade hypoxic ischaemic injury with **Sarnat staging** and daily **Thompson scores** because grade predicts both cooling benefit and prognosis. **Therapeutic cooling** uses whole body or selective head cooling for moderate to severe injury when criteria are met. A suppressed amplitude integrated electroencephalography trace supports severe injury and needs expert review. Remember that kidneys, heart and gut are injured alongside the brain in asphyxia. High risk follow up watches for cerebral palsy after discharge.",
+   "say": "Sarnat staging and Thompson scores grade hypoxic injury and guide cooling decisions. Moderate to severe injury benefits from therapeutic cooling when criteria are met. A suppressed brain trace supports severe injury and needs expert review. Kidneys and heart are often injured alongside the brain after asphyxia.",
    "vis": null
   },
   {
-   "tx": "**Treat** (**phenobarbitone** first-line loads, **phenytoin** second cardiac watches, **levetiracetam** renal safer profiles, **midazolam** refractory infusions, **pyridoxine** trial EEG responders, **surgery** malformation shunts, **counsel** recurrence SUDEP, **wean** EEG-guided stops) with **traps** (**overtreat** sedation apnoea, **missed** correctables relapse, **transport** unstable cooling) closes; **records** (semiology times) documents. Fits stop.",
-   "say": "Phenobarbitones phenytoins levetiracetams midazolams is treat: pyridoxines trial surgeries shunt counsels warn weans guide overtreates sedate misseds relapse transports cool records log videos store. Drugs load.",
+   "tx": "The incubator scene shows **whole body cooling** with continuous monitoring after hypoxic ischaemic injury, and the monitor displays a **suppressed aEEG** pattern. Cooling is offered for moderate to severe **hypoxic ischaemic encephalopathy** when clinical staging and blood gas criteria are met. The labels remind you that injury involves organs beyond the brain, including kidney, heart and gut. Exam questions test who qualifies for cooling and why staging matters before treatment starts.",
+   "say": "The picture shows whole body cooling with continuous monitoring after birth asphyxia. A suppressed brain trace supports severe hypoxic injury in this baby. Cooling is offered when staging and gas criteria confirm moderate to severe injury. Injury often involves kidneys and heart alongside the brain in asphyxia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-neonatal-misc-gen1.webp",
+    "alt": "Newborn in incubator receiving whole body cooling with monitors showing suppressed brain activity.",
+    "caption": "Whole body cooling for HIE with suppressed aEEG. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Start **phenobarbitone** first for neonatal seizures that persist after correctable causes are treated, then move to phenytoin or **levetiracetam** when fits continue. Use a **midazolam infusion** for refractory seizures with monitoring and ventilation support ready. Give pyridoxine when seizures resist standard therapy and watch the electroencephalogram for response. Avoid oversedation that causes apnoea, and never delay treatment while arranging transport. Record semiology and timing carefully because records guide weaning decisions later.",
+   "say": "Phenobarbitone is the first drug for persistent neonatal seizures in most units. Phenytoin or levetiracetam follows when seizures continue despite first treatment. Refractory seizures need infusion therapy with ventilation support available nearby. Careful recording of events guides later weaning decisions for each baby.",
    "vis": null
   }
  ],
