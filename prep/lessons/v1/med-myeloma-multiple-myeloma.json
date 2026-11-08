@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "med-myeloma",
+ "subject": "medicine",
+ "title": "Multiple Myeloma and Monoclonal Gammopathies",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A clonal plasma cell neoplasm originating in the bone marrow and producing excessive monoclonal immunoglobulin paraproteins defines **multiple myeloma**. Proliferating malignant plasma cells secrete osteoclast-activating factors (RANKL, MIP-1alpha) while inhibiting osteoblasts via Dickkopf-1 (DKK1), precipitating widespread osteolytic bone destruction. Pathological hallmark manifestations are summarized by the classic CRAB criteria: Hypercalcaemia from bone resorption, Renal insufficiency from light-chain cast nephropathy, Anaemia from erythroid marrow displacement, and Bone lytic lesions causing severe back pain and pathological fractures.",
+   "say": "A clonal plasma cell neoplasm originating in the bone marrow and producing excessive monoclonal immunoglobulin paraproteins defines multiple myeloma. Proliferating malignant plasma cells stimulate osteoclasts while suppressing osteoblasts, causing widespread osteolytic bone destruction. Hallmark manifestations are summarized by the classic CRAB criteria: Hypercalcaemia, Renal insufficiency, Anaemia, and Bone lytic lesions causing back pain and pathological fractures.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myeloma-fig1.webp",
+    "alt": "Pathophysiological mechanisms of clonal plasma cell marrow proliferation and multisystem CRAB organ damage.",
+    "caption": "Marrow plasma cell expansion driving osteolysis, light chain cast nephropathy, and anaemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Quantifying circulating monoclonal paraproteins via densitometric scanning of serum proteins provides the primary diagnostic screening tool. On **serum protein electrophoresis** (SPEP), abnormal clonal immunoglobulin synthesis generates a narrow, tall, sharp peak in the gamma-globulin or beta-globulin migration zone, clinically termed an M spike. Immunofixation electrophoresis (IFE) identifies the exact heavy chain (IgG in sixty percent, IgA in twenty percent) and light chain isotype (kappa or lambda). Approximately twenty percent of myelomas secrete light chains exclusively, which pass freely through glomeruli and evade detection on standard SPEP.",
+   "say": "Quantifying circulating monoclonal paraproteins via densitometric scanning provides the primary diagnostic screening tool. On serum protein electrophoresis, abnormal clonal immunoglobulin synthesis generates a sharp peak in the gamma region, termed an M spike. Immunofixation identifies the exact heavy and light chain isotypes. Approximately twenty percent of myelomas secrete light chains exclusively, which pass through glomeruli and evade detection on standard serum electrophoresis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal SPEP Densitometry",
+     "points": [
+      "Broad, low, rounded polyclonal gamma band",
+      "Polyclonal antibodies from diverse B cells",
+      "Albumin represents 60% of total protein",
+      "Normal alpha-1, alpha-2, and beta fractions"
+     ]
+    },
+    "right": {
+     "title": "Multiple Myeloma M Spike",
+     "points": [
+      "Narrow, tall, dense monoclonal gamma peak",
+      "Synthesized by single neoplastic plasma cell clone",
+      "Suppression of uninvolved normal immunoglobulins",
+      "Confirmed by immunofixation (IgG kappa most common)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unfolded monoclonal free light chains filtered by renal glomeruli precipitate in distal collecting tubules to provoke acute renal failure. Filtered free light chains overwhelm proximal tubular megalin-cubilin reabsorptive capacity, precipitating with Tamm-Horsfall mucoprotein (uromodulin) into obstructive intratubular casts termed myeloma cast nephropathy. Historically detected by thermal precipitation at 56°C, **bence jones proteinuria** consists of monoclonal kappa or lambda free light chains. Crucially, standard urine dipsticks detect only negatively charged albumin, yielding false-negative proteinuria despite massive Bence Jones proteinuria, which mandates 24-hour urine immunofixation.",
+   "say": "Unfolded monoclonal free light chains filtered by renal glomeruli precipitate in distal collecting tubules to provoke acute renal failure. Filtered free light chains overwhelm tubular reabsorption, precipitating with Tamm-Horsfall protein into obstructive casts termed cast nephropathy. Historically detected by thermal precipitation, bence jones proteinuria consists of monoclonal free light chains. Standard urine dipsticks detect only albumin, yielding false-negative results despite heavy light chain excretion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myeloma-fig2.webp",
+    "alt": "Clinical and diagnostic manifestations of multiple myeloma summarized by the CRAB criteria.",
+    "caption": "Multisystem organ involvement across hypercalcaemia, renal failure, anaemia, and bone destruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Quantifying circulating unbound kappa and lambda chains in peripheral blood enables diagnosis and sensitive therapeutic response monitoring. The serum **free light chains** (sFLC) assay measures circulating free light chains, calculating the kappa-to-lambda ratio (normal range 0.26 to 1.65). An involved-to-uninvolved free light chain ratio of 100 or higher serves as an independent validated myeloma-defining event, establishing active multiple myeloma even in the absence of classic CRAB organ damage. This quantitative assay provides sensitive monitoring for oligosecretory, non-secretory, and light-chain-only myelomas.",
+   "say": "Quantifying circulating unbound kappa and lambda chains in peripheral blood enables diagnosis and sensitive therapeutic monitoring. The serum free light chains assay measures unbound chains, calculating the kappa-to-lambda ratio. An involved-to-uninvolved ratio of one hundred or higher serves as an independent myeloma-defining event, establishing active multiple myeloma even without CRAB symptoms. This assay provides sensitive monitoring for light-chain myelomas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Plasma Cell Disorder",
+     "Bone Marrow Plasma Cells",
+     "Serum Monoclonal Paraprotein",
+     "End-Organ CRAB Symptoms"
+    ],
+    "rows": [
+     [
+      "MGUS",
+      "< 10% Clonal plasma cells",
+      "M spike < 3.0 g/dL",
+      "Strictly Absent (1% annual progression risk)"
+     ],
+     [
+      "Smoldering Myeloma",
+      "10% to 59% Plasma cells",
+      "M spike >= 3.0 g/dL or FLC ratio >= 8",
+      "Strictly Absent (High progression risk)"
+     ],
+     [
+      "Active Multiple Myeloma",
+      ">= 10% Plasma cells (or Plasmacytoma)",
+      "Monoclonal M spike / Elevated FLC",
+      "Present: CRAB criteria or SLiM biomarkers"
+     ],
+     [
+      "AL Amyloidosis",
+      "Usually < 20% Plasma cells",
+      "Free light chains (lambda > kappa)",
+      "Nephrotic syndrome, cardiomyopathy, macroglossia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High circulating concentrations of positively charged monoclonal paraproteins neutralize the negative electrostatic zeta potential of red blood cells. Examining the peripheral blood film reveals red blood cells stacked upon one another resembling a column of coins, a pathognomonic appearance termed **rouleaux formation**. Electrostatic neutralization permits close intercellular contact and accelerated red cell sedimentation, characteristically driving erythrocyte sedimentation rate (ESR) above one hundred millimetres per hour. Rouleaux must be distinguished from cold agglutination, where red cells clump into irregular, disorganized grape-like clusters.",
+   "say": "High circulating concentrations of monoclonal paraproteins neutralize the negative electrostatic charge of red blood cells. Examining the peripheral blood film reveals red blood cells stacked upon one another resembling a column of coins, an appearance termed rouleaux formation. Electrostatic neutralization permits close contact and accelerated sedimentation, driving the erythrocyte sedimentation rate above one hundred. Rouleaux differs from agglutination, where red cells form irregular clusters.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rouleaux Formation (Multiple Myeloma)",
+     "points": [
+      "Linear stacking of RBCs like a roll of coins",
+      "Paraproteins neutralize negative RBC zeta potential",
+      "Disperses readily upon saline dilution (saline test)",
+      "ESR markedly elevated (> 100 mm/hr)",
+      "Accompanied by bluish background staining"
+     ]
+    },
+    "right": {
+     "title": "Red Cell Agglutination (Cold AIHA)",
+     "points": [
+      "Irregular, chaotic, grape-like erythrocyte clumping",
+      "Driven by IgM cold agglutinin antibody cross-linking",
+      "Persists despite saline dilution",
+      "Resolves upon warming blood tube to 37°C",
+      "Spurious elevation in MCV on automated counters"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Widespread uncoupled osteolysis produces classical radiographic abnormalities without compensatory osteoblastic bone formation. Skeletal radiographic surveys and low-dose whole-body computed tomography demonstrate multiple well-circumscribed, non-sclerotic **punched-out lytic lesions** distributed throughout the calvarium, vertebrae, ribs, pelvis, and proximal long bones. The skull characteristically displays the classic raindrops on a roof appearance. Because myeloma lesions lack reactive osteoblastic activity, conventional technetium-99m bone scans are falsely negative, making low-dose whole-body CT, whole-body MRI, or fluorodeoxyglucose PET-CT the diagnostic imaging standards.",
+   "say": "Widespread uncoupled osteolysis produces classical radiographic abnormalities without compensatory bone formation. Skeletal surveys and low-dose whole-body computed tomography demonstrate multiple well-circumscribed punched-out lytic lesions throughout the skull, vertebrae, and long bones. The skull displays the classic raindrops on a roof appearance. Because myeloma lesions lack osteoblastic activity, standard technetium bone scans are falsely negative, making whole-body CT or MRI the imaging standards.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rankl",
+      "label": "Myeloma Cells Secrete RANKL & Suppress OPG"
+     },
+     {
+      "id": "clast",
+      "label": "Profound Osteoclast Activation & Bone Resorption"
+     },
+     {
+      "id": "dkk1",
+      "label": "DKK1 Secretion Inhibits Osteoblast Mineralization"
+     },
+     {
+      "id": "lytic",
+      "label": "Pure Punched-Out Lytic Lesions: Negative Bone Scan"
+     }
+    ],
+    "edges": [
+     [
+      "rankl",
+      "clast"
+     ],
+     [
+      "clast",
+      "dkk1"
+     ],
+     [
+      "dkk1",
+      "lytic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern frontline therapy for transplant-eligible newly diagnosed multiple myeloma combines proteasome inhibition with immunomodulatory drugs and steroids. The standard VRd induction triplet regimen combines the proteasome inhibitor **bortezomib** (Velcade), the immunomodulatory imide lenalidomide (Revlimid), and oral dexamethasone. Bortezomib reversibly inhibits the 26S proteasome, causing accumulation of toxic polyubiquitinated misfolded immunoglobulin proteins and triggering plasma cell apoptosis. Quadruplet regimens adding the anti-CD38 monoclonal antibody daratumumab (D-VRd) have become standard of care, achieving deep minimal residual disease negativity prior to autologous stem cell transplantation.",
+   "say": "Modern frontline therapy for transplant-eligible newly diagnosed multiple myeloma combines proteasome inhibition with immunomodulatory drugs and steroids. The standard VRd induction regimen combines the proteasome inhibitor bortezomib, the immunomodulatory agent lenalidomide, and oral dexamethasone. Bortezomib reversibly inhibits the 26S proteasome, causing accumulation of misfolded proteins and triggering plasma cell apoptosis. Adding the anti-CD38 antibody daratumumab achieves deep minimal residual disease negativity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological Class",
+     "Representative Agent",
+     "Mechanism of Action",
+     "Adverse Effects & Prophylaxis"
+    ],
+    "rows": [
+     [
+      "Proteasome Inhibitor",
+      "Bortezomib (Velcade)",
+      "26S proteasome inhibition, NF-kB suppression",
+      "Peripheral neuropathy (subcutaneous preferred), Shingles (Acyclovir)"
+     ],
+     [
+      "Immunomodulatory Drug",
+      "Lenalidomide (Revlimid)",
+      "CRBN binding, Ikaros/Aiolos degradation",
+      "Venous thromboembolism (Aspirin/DOAC), Myelosuppression"
+     ],
+     [
+      "Monoclonal Anti-CD38",
+      "Daratumumab (Darzalex)",
+      "Direct oncolysis & ADCC on CD38+ plasma cells",
+      "Infusion reactions, blood bank crossmatch interference"
+     ],
+     [
+      "High-Dose Corticosteroid",
+      "Dexamethasone",
+      "Synergistic plasma cell apoptosis induction",
+      "Hyperglycaemia, insomnia, peptic ulcer, infection risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bisphosphonate therapy is mandatory for all active multiple myeloma patients with bone disease to suppress osteoclastic resorption. Monthly intravenous infusions of **zoledronic acid** or pamidronate inhibit osteoclast farnesyl pyrophosphate synthase, reducing pathological skeletal fractures, spinal cord compression, and hypercalcaemic crises. A rare but devastating adverse effect of potent bisphosphonate therapy is osteonecrosis of the jaw (ONJ), characterized by exposed necrotic mandibular or maxillary bone following invasive dental extractions. Mandatory comprehensive dental examination and completion of invasive oral procedures are required prior to initiating long-term bisphosphonate therapy.",
+   "say": "Bisphosphonate therapy is mandatory for all active multiple myeloma patients with bone disease to suppress osteoclastic resorption. Monthly intravenous infusions of zoledronic acid inhibit osteoclast enzymes, reducing pathological skeletal fractures, spinal cord compression, and hypercalcaemic crises. A rare adverse effect of potent bisphosphonate therapy is osteonecrosis of the jaw, characterized by exposed necrotic bone following dental extractions. Comprehensive dental examination is required prior to initiating therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Active Multiple Myeloma with Lytic Bone Disease"
+     },
+     {
+      "id": "dent",
+      "label": "Pre-treatment Dental Examination & Clearance"
+     },
+     {
+      "id": "zoled",
+      "label": "Intravenous Zoledronic Acid (4 mg monthly)"
+     },
+     {
+      "id": "skelet",
+      "label": "Reduces SREs (Fractures, Spinal Compression, Hypercalcaemia)"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "dent"
+     ],
+     [
+      "dent",
+      "zoled"
+     ],
+     [
+      "zoled",
+      "skelet"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
