@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "bio-dna-replication-repair",
+ "subject": "biochemistry",
+ "title": "Ends, telomerase and polymerase table",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Linear chromosomes face the **end replication problem**: lagging strand terminal RNA primer removal leaves a five prime gap no upstream hydroxyl can fill, shortening daughters by fifty to two hundred base pairs per division (leading strand blunt processing adds regulated resection). Telomeres (TTAGGG repeats kilobases, double stranded plus three prime G rich overhang tucked into t-loops, shelterin complex TRF1/2, POT1, TIN2, TPP1, RAP1 hiding ends from DNA damage response) postpone coding erosion while counting divisions toward senescence (Hayflick limit) as a tumour suppressor clock.",
+   "say": "The end replication problem shortens daughters fifty to two hundred pairs per division counted toward senescence. Telomere shelterin hides chromosome ends from damage response as a tumour suppressor clock mechanism.",
+   "vis": {
+    "kind": "flow",
+    "title": "Shortening clock",
+    "nodes": [
+     {
+      "id": "div",
+      "label": "Each division: terminal gap unfilled"
+     },
+     {
+      "id": "short",
+      "label": "Telomeres shorten toward critical length"
+     },
+     {
+      "id": "sen",
+      "label": "Senescence or crisis checkpoint fires"
+     }
+    ],
+    "edges": [
+     [
+      "div",
+      "short"
+     ],
+     [
+      "short",
+      "sen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Telomerase** (TERT reverse transcriptase protein plus TERC RNA template CCCUAA repeat copy, dyskerin stability complex) extends G rich strand de novo in germline, stem, activated lymphocytes and about eighty five to ninety percent cancers (TERT promoter mutations commonest noncoding drivers in melanoma, glioblastoma, bladder), while most somatic cells silence it. Alternative lengthening of telomeres (ALT, homologous recombination copying, ATRX/DAXX loss, pancreatic neuroendocrine and sarcoma tumours, C-circles assay) maintains ends in the remaining cancers, two immortality routes stem questions demand distinguished.",
+   "say": "Telomerase extends ends in germline, stem and most cancers through promoter mutations commonly. ALT maintains ends by recombination in remaining cancers, two immortality routes demanding distinction in stems.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Telomere maintenance",
+     "Mechanism",
+     "Where dominant"
+    ],
+    "rows": [
+     [
+      "Telomerase reactivation",
+      "TERT plus TERC RNA templated extension",
+      "About 85 to 90 percent cancers; stem and germ cells normal"
+     ],
+     [
+      "ALT recombination",
+      "Homologous copying, ATRX/DAXX loss",
+      "Sarcomas, pancreatic NET, glioma subsets"
+     ],
+     [
+      "None (somatic default)",
+      "Shortening to senescence",
+      "Tumour suppression; aging tissues"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dyskeratosis congenita** (DKC1 dyskerin X linked, TERC/TERT and shelterin gene spectra) critically shortens telomeres for age (flow FISH diagnostic percentile), giving nail dystrophy, oral leukoplakia, reticular skin pigmentation classic triad plus marrow failure (major killer), pulmonary and liver fibrosis, cancer predisposition and anticipation as telomeres inherit shorter across generations. Short telomere syndromes in adults present as aplastic anaemia, MDS, familial pulmonary fibrosis (TERT/RTEL1) and cryptogenic liver disease without skin signs, androgens (danazol elongation effect) and transplant conditioning sensitivity (radiation and busulfan toxicity) alter management.",
+   "say": "Dyskeratosis congenita critically shortens telomeres with nail, mouth and skin triad plus marrow failure lethally. Adult short telomere syndromes present as marrow failure and pulmonary fibrosis without skin signs characteristically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic childhood dyskeratosis",
+     "points": [
+      "Mucocutaneous triad visible",
+      "Marrow failure childhood to young adult",
+      "Anticipation across generations"
+     ]
+    },
+    "right": {
+     "title": "Adult short telomere syndromes",
+     "points": [
+      "Lung fibrosis, aplastic anaemia, liver",
+      "Skin signs often absent",
+      "Transplant conditioning caution"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mitochondrial DNA** (sixteen point six kilobases circular, heavy/light strands, thirty seven genes: thirteen oxidative phosphorylation subunits, twenty two tRNAs, two rRNAs, intronless, histone free with TFAM packaging, thousands copies per cell, replication by polymerase gamma plus Twinkle helicase asynchronous strand displacement model) mutates ten to twenty fold faster (ROS adjacency, limited repair (base excision present, nucleotide excision absent)), maternally inherited because sperm mitochondria excluded and degraded, bottleneck in oogenesis randomising offspring heteroplasmy loads unpredictably for counselling.",
+   "say": "Mitochondrial DNA encodes thirteen respiratory subunits circularly without histones, mutating faster maternally. Oogenesis bottleneck randomises offspring heteroplasmy loads unpredictably for counselling families in genetics clinics nationally.",
+   "vis": null
+  },
+  {
+   "tx": "**Polymerase table** consolidation rewards one grid: bacterial I (primer removal and repair, Klenow fragment laboratory), II (restart), III (replication), eukaryote alpha priming, beta repair, gamma mitochondrial, delta lagging/repair, epsilon leading, zeta/rev translesion, terminal transferase (TdT VDJ additions, leukaemia marker), telomerase and reverse transcriptases (retroviral, hepatitis B) as RNA templated family. Inhibitors map aphidicolin (alpha/delta/epsilon eukaryotic, experimental), hydroxyurea starvation, chain terminators antivirals prior lesson, each polymerase vulnerability a drug or disease already earned.",
+   "say": "Polymerase grids consolidate bacterial and eukaryotic jobs with mitochondrial gamma separately inherited maternally. Inhibitors map from aphidicolin experimentally to chain terminator antivirals across prior nucleotide lessons completely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Polymerase",
+     "Kingdom or compartment",
+     "One line job"
+    ],
+    "rows": [
+     [
+      "III / Epsilon and Delta",
+      "Bacteria / eukaryote nucleus lead-lag",
+      "Bulk replication with proofreading"
+     ],
+     [
+      "I / Alpha and Beta",
+      "Bacteria / nucleus",
+      "Primer removal; priming; BER filling"
+     ],
+     [
+      "Gamma (POLG)",
+      "Mitochondria only",
+      "mtDNA replication; depletion diseases"
+     ],
+     [
+      "Reverse transcriptases (plus TERT)",
+      "Viruses / telomeres",
+      "RNA templated DNA; drug targets"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**POLG** disease (polymerase gamma, commonest mitochondrial disease gene nuclear encoded) spans Alpers infantile hepatocerebral failure (valproate precipitated liver death absolute avoidance), ataxia neuropathy spectra, progressive external ophthalmoplegia with deletions accumulating in muscle, and aminoglycoside deafness mutation pharmacogenetics from oxidation. Repair systems next defend both genomes (mismatch, excision, break repair), whose inherited failures produce the cancer and ageing syndromes finals assemble from these polymerase parts.",
+   "say": "POLG disease spans infantile liver failure with valproate avoidance absolutely to adult ophthalmoplegia with deletions. Repair systems next defend both genomes whose failures produce cancer and ageing syndromes assembled finally.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-dna-replication-repair-fig1.webp",
+    "alt": "Diagram showing p53's role in DNA damage response (G1 arrest, repair, apoptosis) and telomere regulation pathways.",
+    "caption": "Guardian of the genome: p53 and telomere regulation.",
+    "ar": 1.8333
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

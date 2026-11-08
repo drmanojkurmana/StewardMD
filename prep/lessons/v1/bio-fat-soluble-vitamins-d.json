@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "bio-fat-soluble-vitamins",
+ "subject": "biochemistry",
+ "title": "Vitamin D and calcium",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Vitamin D** is a secosteroid hormone made in skin, diet D2 (ergocalciferol plants/fortified) and D3 (animal, supplements), transported DBP, liver twenty five hydroxylated (CYP2R1, substrate driven, calcidiol (twenty five OH) storage form measured (half life weeks)), kidney proximal tubule one alpha hydroxylated (CYP27B1, PTH stimulated, FGF23 and calcitriol feedback suppressed, calcium/phosphate sensed) to calcitriol (one twenty five (OH)2, half life hours, nuclear VDR genomic plus rapid membrane).",
+   "say": "Skin makes vitamin D hormone photochemically, liver stores calcidiol measured clinically, and kidney activates calcitriol under PTH control feedback. Melanin, latitude and ageing compete quantitatively for synthesis capacity in populations.",
+   "vis": {
+    "kind": "flow",
+    "title": "Activation in two hydroxylations",
+    "nodes": [
+     {
+      "id": "skin",
+      "label": "Skin D3 or diet D2/D3"
+     },
+     {
+      "id": "liver",
+      "label": "Liver 25-OH (calcidiol stored, measured)"
+     },
+     {
+      "id": "kid",
+      "label": "Kidney 1-alpha (calcitriol active, PTH on)"
+     },
+     {
+      "id": "act",
+      "label": "VDR: gut calcium absorption chiefly"
+     }
+    ],
+    "edges": [
+     [
+      "skin",
+      "liver"
+     ],
+     [
+      "liver",
+      "kid"
+     ],
+     [
+      "kid",
+      "act"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Calcitriol chiefly raises gut **calcium** (calbindin TRPV6, plasma membrane pump) and phosphate absorption, cooperates with PTH on bone resorption and renal calcium reabsorption contextually, feedback suppresses PTH (parathyroid VDR and calcium sensing receptor CaSR set point integrated), twenty four hydroxylase CYP24A1 catabolises both calcidiol and calcitriol (loss causes idiopathic infantile hypercalcaemia with vitamin D sensitivity, granuloma macrophages (sarcoid, TB, lymphoma) extrarenally one alpha hydroxylate unregulated by PTH (hypercalcaemia with suppressed PTH, calcidiol normal/high calcitriol high pattern separating from primary hyperparathyroidism laboratory logic).",
+   "say": "Calcitriol raises gut calcium absorption chiefly with parathyroid feedback integrated through sensing receptors. Granuloma macrophages activate vitamin D unregulated, separating hypercalcaemia patterns by suppressed PTH laboratory logic diagnostically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hypercalcaemia pattern",
+     "PTH",
+     "Vitamin D clue"
+    ],
+    "rows": [
+     [
+      "Primary hyperparathyroidism",
+      "High (adenoma autonomous)",
+      "Calcitriol high normal, calcidiol irrelevant"
+     ],
+     [
+      "Granulomatous (sarcoid)",
+      "Suppressed",
+      "Calcitriol high, calcidiol normal; steroids suppress macrophage enzyme"
+     ],
+     [
+      "Vitamin D intoxication",
+      "Suppressed",
+      "Calcidiol massively high (supplements), long tail by fat storage"
+     ],
+     [
+      "Humoral malignancy (PTHrP)",
+      "Suppressed (PTHrP separate assay)",
+      "Vitamin D low/normal; phosphate low renal wasting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deficiency impairs mineralisation of growth plate cartilage and osteoid: **rickets** children (widened cupped frayed metaphyses radiographically, rachitic rosary costochondral, Harrison sulcus, bowing once weight bearing, craniotabes, delayed dentition/fontanelle, hypotonia, hypocalcaemic seizures/tetany presentations) versus osteomalacia adults (bone pain, Looser zones pseudofractures ribs pelvis femur Milkman lines, proximal myopathy waddle, fractures). Biochemistry grades cause: nutritional (low calcidiol, low/normal calcium, low phosphate (secondary hyperparathyroid phosphaturia), ALP high, PTH high) versus renal phosphate wasting and CKD mineral bone disorder separate axes (phosphate high in CKD, FGF23 earliest rise).",
+   "say": "Deficiency impairs mineralisation as childhood rickets versus adult osteomalacia with Looser zones and myopathy clinically. Biochemistry grades nutritional against renal phosphate wasting axes by phosphate direction oppositely in CKD disorders.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-fat-soluble-vitamins-gen2.webp",
+    "alt": "Wrist radiograph shows cupped frayed metaphyses and widened growth plates at the distal radius and ulna.",
+    "caption": "Rachitic wrist with cupped metaphyses, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Genetic and renal mimics** must separate by phosphate and calcitriol logic: vitamin D dependent rickets type I (CYP27B1 activation failure (calcitriol low despite calcidiol normal, calcitriol/calcifediol therapy bypass), type II (VDR receptor failure (calcitriol massively high, alopecia often, massive calcium/calcitriol heroic), X-linked hypophosphataemia (PHEX, FGF23 excess renal phosphate wasting (phosphate low, calcitriol inappropriately normal, ALP high, burosumab anti FGF23 modern), tumour induced osteomalacia (FGF23 secreting phosphaturic mesenchymal tumours hunted by DOTATATE), Fanconi proximal tubule generalised wasting (prior amino acid and storage links), CKD.",
+   "say": "Activation and receptor genetic rickets separate by calcitriol levels oppositely, while FGF23 phosphate wasting needs burosumab modernly. CKD retains phosphate oppositely, grading mineral bone axes laboratory wise for nephrology.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Calcium/vitamin D axis failure",
+     "points": [
+      "Nutritional, activation (VDDR I), receptor (VDDR II)",
+      "Phosphate low by PTH effect secondary",
+      "Calcitriol low (I) or huge (II) discriminates"
+     ]
+    },
+    "right": {
+     "title": "Phosphate wasting or retention failure",
+     "points": [
+      "XLH/tumour FGF23: phosphate low, wasting",
+      "CKD: phosphate high, FGF23 earliest",
+      "Burosumab versus phosphate/calcitriol historical"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Supplementation literacy** prevents harm and hype: deficiency treat with ergocalciferol/cholecalciferol loading then maintenance (calcium co supply, malabsorption higher/parenteral routes, calcifediol when liver or obesity kinetics demand faster), monitor calcium in granuloma and CYP24 risk, toxicity essentially supplemented/medical (hypercalcaemia, hypercalciuria stones, nephrocalcinosis, calcidiol level and duration, sunlight never toxic by skin feedback photodegradation). Extra skeletal claims (immunity, cancer, mortality megatrials (VITAL neutral primary endpoints, deficiency subgroup debates) taught as evidence graded uncertainty, not deficiency panacea, examination integrity requiring trial names over supplement marketing.",
+   "say": "Toxicity comes from supplements, never sunlight feedback photodegradation protectively in skin physiology. Megatrials grade extra skeletal claims as uncertainty, not deficiency panacea marketing in examination integrity teaching nationally.",
+   "vis": null
+  },
+  {
+   "tx": "**Calcium measurement** caveats integrate albumin and pH (corrected calcium formulas imperfect, ionised in critical illness, alkalosis tetany by ionised fall with normal total (hyperventilation), citrate chelation transfusion), magnesium permissive for PTH secretion/action (hypomagnesaemia functional hypoparathyroidism refractory hypocalcaemia/hypokalaemia pearl from mineral module ahead). Vitamins E antioxidant and K carboxylation complete fat solubles next, where warfarin and antibiotics weaponise vitamin cycles pharmacologically daily on wards.",
+   "say": "Ionised calcium falls in alkalosis causing tetany with normal totals misleadingly by albumin formulas imperfectly. Magnesium permits PTH action refractorily, linking mineral module ahead to parathyroid physiology integrated clinically daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Calcium read trap",
+     "Correction logic"
+    ],
+    "rows": [
+     [
+      "Low albumin (critical illness, nephrotic)",
+      "Total low, ionised often normal: measure ionised"
+     ],
+     [
+      "Alkalosis (hyperventilation)",
+      "Ionised low, total normal: tetany possible"
+     ],
+     [
+      "CKD phosphate high, calcium low/normal",
+      "Secondary hyperparathyroid axis, not simple vitamin lack"
+     ],
+     [
+      "Immobilisation, myeloma, thyrotoxicosis highs",
+      "Non PTH hypercalcaemias hunted by PTH suppressed algorithm"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

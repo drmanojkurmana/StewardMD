@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "module": "bio-recombinant-techniques",
+ "subject": "biochemistry",
+ "title": "PCR and its variants",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Polymerase chain reaction** cycles denaturation (about ninety four degrees separating strands), primer annealing (fifty five to sixty five by primer melting temperature and GC), and extension at seventy two by thermostable Taq polymerase, doubling target bounded by primers each cycle (twenty five to thirty five cycles, plateau from reagent depletion and product reannealing). Requirements (template, primer pair flanking, dNTPs, magnesium, buffer, polymerase) and controls (no template contamination sentinel, positive and internal amplification controls) recite as one list.",
+   "say": "PCR cycles denaturation, annealing and extension with thermostable Taq doubling target each cycle exponentially. Requirements and contamination controls recite as one list for practical examinations and laboratory competence.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-recombinant-techniques-fig1.webp",
+    "alt": "Cycle diagram of the three sequential steps of polymerase chain reaction: denaturation, annealing and extension with temperatures.",
+    "caption": "Three-step cycle of polymerase chain reaction DNA amplification.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**RT-PCR** prepends reverse transcription (oligo dT, random hexamers or gene specific primers; RNase inhibitors guarding labile RNA) to amplify expressed sequences and RNA viruses (HIV, HCV, influenza, SARS-CoV-2 diagnostics lineage), while real time quantitative PCR (qPCR) watches fluorescence per cycle threshold cycle Ct inversely logging starting copies for viral loads and expression delta-delta Ct normalisation (housekeeping controls debated). Digital droplet PCR partitions molecules Poisson counting absolute copies (rare mutant fractions, copy number) without standard curves.",
+   "say": "RT-PCR prepends reverse transcription for RNA viruses and expression studies diagnostically. Quantitative fluorescence threshold cycles log starting copies, while digital droplet partitions count molecules absolutely without curves.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PCR variant",
+     "Starting material or trick",
+     "Flagship use"
+    ],
+    "rows": [
+     [
+      "Conventional PCR plus gel",
+      "DNA, end point size",
+      "Genotyping, cloning, diagnosis presence"
+     ],
+     [
+      "RT-PCR / RT-qPCR",
+      "RNA via cDNA",
+      "RNA viruses, expression, viral loads"
+     ],
+     [
+      "Nested PCR",
+      "Two primer pairs sequential",
+      "Sensitivity for scarce templates (contamination risk)"
+     ],
+     [
+      "Digital droplet PCR",
+      "Partitioned molecules Poisson",
+      "Absolute copies, rare alleles (liquid biopsy)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Design rules** prevent predictable failures: primers eighteen to twenty five bases, forty to sixty percent GC, three prime GC clamp modest, avoid hairpins, dimers (especially three prime complementarity), repeats and SNP positions (allele dropout in prenatal and forensic assays by primer site variants), amplicons seventy to two hundred bases qPCR (degraded formalin DNA short), specificity BLAST checked, annealing gradient optimised empirically. Contamination is the dominant false positive mechanism in high sensitivity diagnostics historically (ancient DNA and pathogen discovery retractions).",
+   "say": "Primer design avoids dimers, SNP dropout and degraded template failures predictably by length rules. Amplicon contamination dominates false positives historically, prevented by separated rooms and carryover enzyme systems rigorously.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "False positive traps",
+     "points": [
+      "Amplicon carryover aerosols",
+      "No template control must stay blank",
+      "Nested PCR sensitivity doubles risk"
+     ]
+    },
+    "right": {
+     "title": "False negative traps",
+     "points": [
+      "Inhibitors (heme, heparin, formalin)",
+      "Primer site SNP allele dropout",
+      "Degraded template needs short amplicons"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Clinical PCR** empires to name fluently: pathogen detection and loads (HIV monitoring, HCV cure confirmation, tuberculosis Xpert MTB/RIF cartridge integrated extraction amplification plus rifampicin resistance rpoB probing (molecular DST hours versus culture weeks), meningitis multiplex panels), inherited genotyping (factor V Leiden, HFE, CFTR panels, pharmacogenomic CYP), oncology fusions and minimal residual disease (BCR-ABL qPCR international scale leukaemia monitoring), prenatal aneuploidy rapid QF-PCR, forensic STR (prior lesson). Sensitivity without viability (dead organisms amplify, culture still arbitrates infectivity in tuberculosis and viral isolation contexts) restrains interpretation.",
+   "say": "Xpert cartridges integrate tuberculosis detection with rifampicin resistance in hours versus culture weeks transformatively. PCR sensitivity without viability restrains interpretation because dead organisms amplify without infecting patients clinically.",
+   "vis": null
+  },
+  {
+   "tx": "**Isothermal** amplifications free diagnostics from thermocyclers: LAMP (four to six primers, strand displacing Bst polymerase, sixty five degrees, turbidity or colour readouts, malaria and tuberculosis field assays), RPA recombinase polymerase (body temperature range), NASBA RNA, and CRISPR coupled detection (Cas12/13 collateral cleavage reporters SHERLOCK/DETECTR attomolar with preamplification) point of care futures. Loop mediated specificity by multi primer recognition trades against multiplex difficulty, examination awareness qualitative rather than protocol deep.",
+   "say": "Isothermal methods free diagnostics from thermocyclers for field deployment globally. CRISPR coupled detection adds collateral cleavage reporters, trading multiplex difficulty against point of care futures qualitatively examinable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Amplification",
+     "Temperature logic",
+     "Field advantage"
+    ],
+    "rows": [
+     [
+      "PCR",
+      "Cycled 94/60/72",
+      "Laboratory gold standard flexibility"
+     ],
+     [
+      "LAMP",
+      "Constant about 65, 4 to 6 primers",
+      "Colour readout, no cycler"
+     ],
+     [
+      "RPA",
+      "Constant 37 to 42 (body heat range)",
+      "Fastest, lyophilised kits"
+     ],
+     [
+      "CRISPR detection (after amplification)",
+      "Collateral reporter cleavage",
+      "Programmable sequence specificity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Quantitative literacy** closes PCR: efficiency ninety to one hundred ten percent by standard curve slope (minus three point three per tenfold ideal), R squared, melt singularity, no reverse transcriptase controls excluding genomic DNA in expression work, MIQE reporting standards, Ct never compared across assays without calibration. Blots next trade amplification sensitivity for size separated physical evidence, a complementary evidentiary philosophy (see molecules separated, not just sequences detected) laboratories still require for integrity (RNA quality, protein size) PCR alone cannot certify.",
+   "say": "Efficiency, melt singularity and genomic DNA controls certify quantitative PCR literacy professionally. Blots next trade sensitivity for size separated physical evidence laboratories still require for integrity certification complementary.",
+   "vis": {
+    "kind": "flow",
+    "title": "Trust a Ct only after checks",
+    "nodes": [
+     {
+      "id": "eff",
+      "label": "Efficiency and standard curve sane"
+     },
+     {
+      "id": "melt",
+      "label": "Single melt peak or probe specific"
+     },
+     {
+      "id": "ctrl",
+      "label": "NTC blank, NRT clean, positive in range"
+     }
+    ],
+    "edges": [
+     [
+      "eff",
+      "melt"
+     ],
+     [
+      "melt",
+      "ctrl"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

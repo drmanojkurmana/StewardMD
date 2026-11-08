@@ -3,21 +3,32 @@
  "module": "phm-antipsychotics",
  "subject": "pharmacology",
  "title": "Antipsychotics: D2 blockade, EPS and clozapine",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Typical antipsychotics** (chlorpromazine, haloperidol; pure **D2 blockade**) control positive symptoms but hyperprolactinaemia (galactorrhoea, amenorrhoea, sexual dysfunction from tuberoinfundibular blockade) with **extrapyramidal symptoms** burden adherence; low potency sedates and hypotenses (alpha blockade) while high potency freezes. **Atypical antipsychotics** (serotonin-dopamine antagonism) spare EPS variably at metabolic cost. Depot decanoates (haloperidol, fluphenazine, paliperidone palmitate) enforce adherence in noncompliant psychosis.",
-   "say": "Pure D2 blocks psychosis and prolactin together: milky amenorrhoea with stiffness is typical. Depots enforce adherence.",
+   "tx": "**Typical antipsychotics** such as chlorpromazine and haloperidol control positive symptoms through strong **dopamine D2 blockade**, but the same blockade raises prolactin and causes galactorrhoea, amenorrhoea and sexual dysfunction. These drugs also cause **extrapyramidal symptoms** that reduce adherence, while low potency agents sedate and lower blood pressure and high potency agents cause more stiffness. Long acting depot injections help patients who repeatedly miss oral doses.",
+   "say": "Typical antipsychotics block dopamine receptors and control hallucinations and delusions in many patients with psychosis. The same blockade raises prolactin and causes milk discharge, missed periods and sexual problems. Stiffness and tremor also develop frequently and reduce adherence to treatment. Depot injections help maintain treatment and prevent relapse when patients repeatedly miss oral tablets.",
    "vis": null
   },
   {
-   "tx": "**Atypical fingerprints** guide choice: **clozapine** (treatment resistant gold, **agranulocytosis** with weekly then monthly ANC, myocarditis, seizures, sialorrhea, no EPS, smoking induces CYP1A2 lowering levels on cessation), **olanzapine** (metabolic syndrome with diabetes), **quetiapine** (sedative, cataracts debated, bipolar depression), **risperidone** (prolactin raising), **ziprasidone** (QT prolonging, weight neutral), **aripiprazole** (partial D2 agonist, least metabolic, akathisia). Thioridazine (retinal deposits, QT) retired mostly.",
-   "say": "Resistant psychosis with ANC watched is clozapine. Metabolic weight is olanzapine; prolactin is risperidone.",
+   "tx": "Treatment choice depends on the distinctive adverse effect profile of each **atypical antipsychotic**, and the examination often tests one drug with one signature harm. **Clozapine** remains the most effective drug for treatment resistant schizophrenia but requires blood count monitoring for agranulocytosis. **Olanzapine** causes marked weight gain and metabolic syndrome, while risperidone raises prolactin and ziprasidone prolongs the QT interval.",
+   "say": "Each atypical antipsychotic carries a distinctive harm that examiners test repeatedly in clinical vignettes. Clozapine treats resistant schizophrenia most effectively but requires regular blood monitoring because it suppresses neutrophils. Olanzapine causes major weight gain and diabetes in susceptible patients. Risperidone raises prolactin levels while ziprasidone prolongs cardiac conduction.",
    "vis": null
   },
   {
-   "tx": "**Extrapyramidal symptoms** time themselves: **acute dystonia** (hours to days, oculogyric crisis, **procyclidine or benztropine** rescue), **akathisia** (weeks, restless pacing, **propranolol** or benzodiazepines), drug induced **parkinsonism** (bradykinesia with rigidity, anticholinergics or amantadine, switch atypical), **tardive dyskinesia** (months to years, orofacial chorea, **valbenazine or deutetrabenazine** VMAT2, prevention by minimal dose). Rabbit syndrome (perioral tremor) mimics TD.",
-   "say": "Oculogyric hours after haloperidol is dystonia: procyclidine. Pacing weeks after is akathisia: propranolol.",
+   "tx": "The image shows **clozapine** monitoring with an absolute neutrophil count that stays safe for months and then falls sharply into the red zone. The blood film beside the graph looks almost empty of neutrophils, which explains the infection risk behind **agranulocytosis**. Weekly counts at first and monthly counts later catch this fall, and stopping smoking raises levels through **CYP1A2** changes.",
+   "say": "The image contrasts a stable neutrophil count with a sudden fall into danger. The blood film contains almost no neutrophils and shows why infection risk rises sharply. Regular blood monitoring catches the fall before sepsis develops in most patients. Stopping smoking also raises clozapine levels and requires dose review.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-antipsychotics-gen1.webp",
+    "alt": "ANC trend graph falling to agranulocytosis plus neutropenic blood film",
+    "caption": "Clozapine ANC monitoring with agranulocytosis and smoking note. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Extrapyramidal symptoms** appear in a predictable time order that helps the candidate identify the syndrome from the stem. **Acute dystonia** develops within hours to days with sustained muscle spasm and needs urgent anticholinergic treatment. **Akathisia** develops over weeks with inner restlessness and pacing, while drug induced parkinsonism causes bradykinesia and rigidity and tardive dyskinesia appears after months with involuntary orofacial movements.",
+   "say": "Extrapyramidal syndromes follow a clear timetable that reveals the diagnosis in the examination stem. Acute dystonia appears within hours and causes painful sustained muscle spasm. Akathisia develops over weeks and makes the patient restless and unable to sit still. Parkinsonism causes slowness and rigidity while tardive dyskinesia appears late with involuntary movements.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/phm-antipsychotics-fig1.webp",
@@ -27,8 +38,8 @@
    }
   },
   {
-   "tx": "**Neuroleptic malignant syndrome** (dopamine blockade: lead pipe rigidity with fever, autonomic instability, raised CK, delirium) is treated by **stopping drug with dantrolene or bromocriptine** and support; **QT prolongation** (thioridazine, ziprasidone, haloperidol IV) torsades needing ECG watched. **Clozapine** monitoring (ANC, myocarditis troponin, constipation ileus, nocturnal enuresis) sustains the resistant gold; re-challenge after neutropenia debates haematology. Smoking cessation doubles clozapine levels into toxicity.",
-   "say": "Rigid fever CK on antipsychotic is NMS: stop, dantrolene. Quitting smoking doubles clozapine: cut dose.",
+   "tx": "**Neuroleptic malignant syndrome** presents with lead pipe rigidity, high fever, autonomic instability, delirium and raised creatine kinase after dopamine blockade. Treatment requires immediate stopping of the antipsychotic with supportive care and **dantrolene or bromocriptine** in severe cases. Several antipsychotics also cause **QT prolongation** and torsades, so the electrocardiogram needs monitoring in high risk patients receiving intravenous haloperidol or ziprasidone.",
+   "say": "Neuroleptic malignant syndrome causes severe rigidity, fever, confusion and autonomic instability after antipsychotic treatment. The team stops the offending drug immediately and provides intensive supportive care without delay. Dantrolene or bromocriptine helps selected severe cases during recovery. Several antipsychotics also prolong the QT interval and require electrocardiogram monitoring.",
    "vis": {
     "kind": "table",
     "cols": [

@@ -1,0 +1,91 @@
+{
+  "v": 1,
+  "module": "bio-water-soluble-vitamins",
+  "subject": "biochemistry",
+  "title": "Vitamin B12 (cobalamin)",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Two human reactions** use vitamin B12, and only two. Methionine synthase, using methylcobalamin, converts homocysteine to methionine and frees folate from its trap. Methylmalonyl-CoA mutase, using adenosylcobalamin, handles propionate breakdown. The second reaction explains the cleanest separator in this area: methylmalonic acid rises in B12 deficiency but stays normal in folate deficiency.",
+      "say": "Two reactions only: methionine synthase and methylmalonyl-CoA mutase. Methylmalonate rises just in B12 lack, making it your cleanest separating test.",
+      "vis": null
+    },
+    {
+      "tx": "**The absorption chain** has five links examiners test in order. Salivary R protein protects B12 in the stomach, pancreatic enzymes free it in the duodenum, intrinsic factor from parietal cells binds it, the ileal cubam receptor absorbs the complex, and transcobalamin II carries it in blood. Liver stores last years, topped up by enterohepatic salvage.",
+      "say": "R protein, pancreatic release, intrinsic factor, ileal uptake, transcobalamin transport. Break any link and deficiency follows, but years of liver stores delay the fall.",
+      "vis": {
+        "kind": "flow",
+        "title": "B12 absorption chain",
+        "nodes": [
+          {
+            "id": "r",
+            "label": "R protein protects B12"
+          },
+          {
+            "id": "panc",
+            "label": "Pancreas frees B12"
+          },
+          {
+            "id": "IF",
+            "label": "Intrinsic factor binds it"
+          },
+          {
+            "id": "ileum",
+            "label": "Ileum absorbs complex"
+          },
+          {
+            "id": "tc",
+            "label": "Transcobalamin carries it"
+          }
+        ],
+        "edges": [
+          [
+            "r",
+            "panc"
+          ],
+          [
+            "panc",
+            "IF"
+          ],
+          [
+            "IF",
+            "ileum"
+          ],
+          [
+            "ileum",
+            "tc"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pernicious anaemia** is autoimmune destruction of the absorption machinery. Autoantibodies target parietal cells and intrinsic factor itself, producing achlorhydria and failed B12 uptake despite a normal diet. It is the classic cause in older adults of northern European ancestry and associates with other autoimmune diseases such as vitiligo and autoimmune thyroid disease.",
+      "say": "Pernicious anaemia is autoimmunity against parietal cells and intrinsic factor. The diet is fine; the stomach has destroyed the delivery system.",
+      "vis": null
+    },
+    {
+      "tx": "**Other causes** map onto the chain. Vegan diets remove intake, gastrectomy removes intrinsic factor, ileal Crohn disease or resection removes absorption, and bacterial overgrowth or fish tapeworm steal the vitamin. Metformin impairs uptake over years. Nitrous oxide oxidises and inactivates B12, causing functional deficiency with a misleadingly normal blood level after anaesthetic or recreational exposure.",
+      "say": "Vegan intake, gastrectomy, ileal disease, overgrowth, metformin and nitrous oxide each break a different link. Nitrous oxide is sneakiest: the level can look normal.",
+      "vis": null
+    },
+    {
+      "tx": "**Subacute combined degeneration** is the feared neurology. Dorsal and lateral spinal columns demyelinate together, so vibration and position sense fade while spastic weakness grows, an upper and lower sign mixture in one patient. Glossitis and anaemia may be mild or absent. Treatment is urgent because established cord damage recovers incompletely, and blood tests must never delay replacement.",
+      "say": "Lost vibration sense plus spastic weakness means combined cord degeneration. Anaemia may lag behind, so treat on the neurology, never wait for blood.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/bio-water-soluble-vitamins-gen1.webp",
+        "alt": "Blood smear shows large oval red cells beside a neutrophil with extra nuclear segments.",
+        "caption": "Megaloblastic smear with oversized cells labeled, Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "**Masking danger** closes the loop with folate. High dose folate can correct the anaemia of B12 deficiency while cord degeneration advances, removing the warning sign without touching the cause. The historical Schilling test, which traced labelled B12 absorption to localise the broken link, is now obsolete. Modern practice measures B12, methylmalonate, homocysteine and intrinsic factor antibodies directly.",
+      "say": "Folate can paint over the anaemia while the cord worsens, so never treat megaloblastic blood blind. Modern antibody and metabolite tests have replaced the old Schilling test.",
+      "vis": null
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

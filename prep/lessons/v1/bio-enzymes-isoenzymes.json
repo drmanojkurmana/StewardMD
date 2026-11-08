@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "module": "bio-enzymes",
+ "subject": "biochemistry",
+ "title": "Isoenzymes and isoforms",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Isoenzymes** (isozymes, multiple molecular forms catalysing the same reaction, genetically distinct subunits assembling combinatorially) differ in Km, Vmax, effectors, heat stability, electrophoretic mobility and tissue address, separated clinically by electrophoresis, heat inactivation, selective inhibitors or immunoassay. They let one reaction serve opposite physiologies (aerobic heart versus anaerobic muscle) and leak diagnostically from injured tissues in recognisable proportions that modern troponin era still examines through LDH and CK logic.",
+   "say": "Isoenzymes catalyse the same reaction with different kinetics and tissue addresses combinatorially. They serve opposite physiologies and leak diagnostically from injured tissues in recognisable proportions worth examining still.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Isoenzyme system", "Forms and tissues", "Separator used"],
+    "rows": [
+     ["Lactate dehydrogenase (H/M tetramers)", "LDH1 H4 heart to LDH5 M4 liver/muscle", "Electrophoresis, kinetics with pyruvate"],
+     ["Creatine kinase (M/B dimers)", "MM skeletal, MB cardiac enriched, BB brain", "Immunoassay mass, electrophoresis"],
+     ["Alkaline phosphatase", "Liver, bone, placental, intestinal genes/products", "Heat stability (placental stable), levamisole"],
+     ["Amylase", "Salivary versus pancreatic", "Isoenzyme assay when lipase ambiguous"]
+    ]
+   }
+  },
+  {
+   "tx": "**Lactate dehydrogenase** tetramers assort heart H and muscle M subunits binomially into five bands (LDH1 H4 fastest to anode through LDH5 M4): H4 kinetics favour lactate oxidation (inhibited by pyruvate excess, aerobic heart burning lactate as fuel), M4 favours pyruvate reduction (anaerobic muscle and liver). Normal serum LDH2 exceeds LDH1; flipped ratio (LDH1 above LDH2) historically flagged myocardial infarction and still flags haemolysis, megaloblastic ineffective erythropoiesis, renal infarction and germ cell tumours in undifferentiated LDH interpretation.",
+   "say": "LDH tetramers assort heart and muscle subunits into five bands with opposite kinetic favours. Flipped LDH1 above LDH2 flags haemolysis and ineffective erythropoiesis beyond its historic cardiac role today.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "LDH1 (H4, heart type kinetics)", "points": ["Prefers lactate to pyruvate (burns lactate)", "Pyruvate inhibits excess", "Flipped high in haemolysis, MI history"]},
+    "right": {"title": "LDH5 (M4, muscle type kinetics)", "points": ["Prefers pyruvate to lactate", "Liver and skeletal muscle injury raises it", "Hepatitis and muscle necrosis patterns"]
+    }
+   }
+  },
+  {
+   "tx": "**Creatine kinase** dimers (MM about ninety eight percent of skeletal effluent, MB enriched in myocardium though regenerated skeletal muscle re-expresses B confounding chronic myopathy interpretation, BB brain and smooth muscle rarely serum relevant) rise in myocardial infarction historically timed (four to eight hours up, twenty four peak, three days down) versus troponin persistence, and massively in rhabdomyolysis, muscular dystrophies (Duchenne thousands), hypothyroidism and statin myopathy spectra. Macro-CK (immunoglobulin complexes) causes persistent unexplained elevations requiring electrophoretic unmasking.",
+   "say": "CK-MB enriched in myocardium times infarction historically against troponin persistence, while total CK rises massively in rhabdomyolysis and dystrophies. Macro-CK causes persistent unexplained elevations requiring unmasking electrophoretically.",
+   "vis": {
+    "kind": "flow",
+    "title": "CK timing versus troponin (next lesson)",
+    "nodes": [
+     {"id": "ck", "label": "CK-MB up 4 to 8 h, peak 24 h, down 3 days"},
+     {"id": "trop", "label": "Troponin up similar, stays 7 to 14 days"},
+     {"id": "use", "label": "CK-MB reinfarction timing niche survives"}
+    ],
+    "edges": [["ck", "trop"], ["trop", "use"]]
+   }
+  },
+  {
+   "tx": "**Alkaline phosphatase** isoenzymes separate hepatic from bony elevation when GGT equivocal: bone isoenzyme heat labile, placental heat stable (Regan isoenzyme ectopically in cancers historically, pregnancy third trimester physiology), intestinal rises postprandially in blood group O/B secretors. Children growth and healing fractures physiologically raise bone fraction, Paget disease gives isolated dramatic ALP with normal calcium and GGT, and cholestasis induces hepatic synthesis (membrane solubilisation by bile) rather than mere leakage, mechanism language examiners insist upon.",
+   "say": "Bone alkaline phosphatase is heat labile while placental is heat stable historically. Paget gives isolated dramatic ALP, and cholestasis induces hepatic synthesis rather than mere leakage mechanistically.",
+   "vis": null
+  },
+  {
+   "tx": "Hexokinase isoenzymes unify prior modules (I ubiquitous low Km, II muscle insulin sensitive (cancer Warburg overexpression), III, IV **glucokinase** liver/beta high Km with regulatory protein and MODY genetics), while glucose-6-phosphate dehydrogenase variants, pyruvate kinase red cell versus liver (PKLR alternative promoters, phosphorylation only hepatic), and acetylcholinesterase versus plasma pseudocholinesterase (butyrylcholinesterase, succinylcholine apnoea dibucaine number) each supply one unforgettable isoform stem. Dibucaine inhibits normal pseudocholinesterase about eighty percent (dibucaine number), atypical variants resist (about twenty), quantifying pharmacogenetics numerically.",
+   "say": "Hexokinase isoenzymes unify prior modules from housekeeping to glucokinase sensing genetics. Pseudocholinesterase dibucaine numbers quantify succinylcholine apnoea pharmacogenetics numerically for anaesthesia examinations across specialties.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Isoform pair", "Kinetic or clinical split"],
+    "rows": [
+     ["Hexokinase I vs IV (glucokinase)", "Low Km housekeeping vs high Km sensing (MODY2)"],
+     ["Pyruvate kinase R vs L (same gene promoters)", "Red cell haemolysis vs liver phosphorylation control"],
+     ["Acetyl vs butyryl (pseudo) cholinesterase", "Synapse versus plasma; dibucaine number and apnoea"],
+     ["CYP isoforms (3A4, 2D6, 2C9 preview)", "Drug metabolism pharmacogenetics ahead"]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical laboratories increasingly replace isoenzyme electrophoresis with **mass immunoassays** (CK-MB mass, bone specific ALP immunoassay, troponin supremacy), yet interpretation logic (tissue address, kinetics, half life, confounders like macro enzymes and regeneration re-expression) transfers intact to every novel biomarker you will meet. The next two lessons apply that logic organ by organ, heart and muscle first, where timing decides diagnoses that enzymes alone cannot timestamp.",
+   "say": "Mass immunoassays replace electrophoresis while interpretation logic transfers intact to novel biomarkers. The next lessons apply that logic organ by organ, heart and muscle first where timing decides diagnoses.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Old electrophoretic logic", "points": ["Bands by charge and heat", "Patterns flipped and fractionated", "Still definitive for macro enzymes"]},
+    "right": {"title": "Modern mass immunoassay logic", "points": ["Antibody specific mass numbers", "CK-MB mass, bone ALP, troponins", "Same tissue and timing reasoning"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

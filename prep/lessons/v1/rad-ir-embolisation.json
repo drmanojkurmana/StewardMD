@@ -3,11 +3,11 @@
  "module": "rad-ir-embolisation",
  "subject": "radiology",
  "title": "Embolisation agents and techniques",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Embolic agents are chosen by how long the blockage must last. **Gelfoam** slurry is **temporary**, reopening vessels within weeks, and suits trauma and epistaxis where healing follows. **Permanent** agents include steel or platinum **coils**, nitinol **plugs**, **PVA particles** and calibrated **microspheres** for tumour and fibroid beds. **Liquid agents** such as cyanoacrylate glue and **Onyx** cast the vessel itself and reach otherwise inaccessible feeders. Matching duration to disease avoids both rebleeding and needless infarction.",
-   "say": "Agents are chosen by how long the blockage must last. Gelfoam is temporary and reopens within weeks, suiting trauma and nosebleeds. Coils, plugs, particles and microspheres block permanently for tumours and fibroids. Liquid glue and Onyx cast the vessel to reach difficult feeders.",
+   "tx": "Embolic agents are chosen by how long the vessel must stay blocked. **Gelfoam** is a temporary agent that reopens within weeks and suits trauma and nosebleeds that heal. Permanent agents include coils, plugs, particles and **calibrated microspheres** for tumour and fibroid beds. **Liquid agents** such as glue cast the vessel itself and reach feeders that catheters cannot enter. Matching duration to disease avoids both rebleeding and needless tissue infarction.",
+   "say": "Embolic agents are chosen by how long the vessel must stay blocked. Gelfoam is temporary and reopens within weeks as tissues heal. Coils and particles block permanently and suit tumours and fibroids well. Liquid agents are valuable because they cast the vessel and reach difficult feeders safely.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -35,8 +35,8 @@
    }
   },
   {
-   "tx": "Bleeding embolisation follows the vessel to the source. In brisk **upper gastrointestinal bleeding** beyond endoscopy, **mesenteric coils** or particles close the feeder after angiographic localisation. **Splenic embolisation** preserves the spleen in blunt trauma with blush or high-grade injury. Massive haemoptysis in tuberculosis usually arises from hypertrophied **bronchial arteries**, embolised first before non-bronchial collaterals. Severe **epistaxis** failing packing is treated through the **internal maxillary** and facial branches.",
-   "say": "Bleeding work follows the vessel to the source. Gut bleeding beyond endoscopy closes with coils after localisation. Splenic embolisation saves the spleen in blunt trauma with a blush. Massive haemoptysis in tuberculosis usually comes from bronchial arteries, and severe nosebleeds route through maxillary branches.",
+   "tx": "Bleeding embolisation follows the vessel directly to the bleeding source. Brisk upper gastrointestinal bleeding beyond endoscopy is closed with **mesenteric coils** after angiographic localisation. **Splenic embolisation** preserves the spleen in blunt trauma with a blush or high grade injury. Massive haemoptysis in tuberculosis usually arises from hypertrophied **bronchial arteries** that are embolised first. Severe nosebleeds that fail packing are treated through internal maxillary and facial branches.",
+   "say": "Bleeding embolisation follows the vessel directly to the bleeding source. Gut bleeding beyond endoscopy is closed with coils after localisation. Splenic embolisation is valuable because it preserves the spleen in blunt trauma cases. Massive haemoptysis usually arises from bronchial arteries, and severe nosebleeds are treated through maxillary branches after packing fails.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -64,8 +64,19 @@
    }
   },
   {
-   "tx": "Every embolisation trades benefit against tissue loss. **Post-embolisation syndrome** with fever, pain and nausea follows tumour work and needs fluids, analgesia and reassurance rather than antibiotics. **Non-target embolisation** is the feared technical error, so superselective **microcatheter** tips sit beyond normal branches before release. **Coil migration** can infarct downstream beds, while particles smaller than the shunt may pass to the lungs. **Abscess** complicates embolised necrotic tumours, so sterile technique and follow-up imaging are routine.",
-   "say": "Every embolisation trades benefit against tissue loss. Post-embolisation syndrome brings fever and pain after tumour work and needs fluids and analgesia. Non-target embolisation is the feared error, so microcatheters sit beyond normal branches. Coils can migrate and tiny particles can shunt to the lungs.",
+   "tx": "The left angiogram shows a dark pool of **active gastrointestinal bleeding** arising from a mesenteric feeder beyond endoscopic reach. The inset shows the same feeder packed with a **mesenteric coil** and complete contrast stasis beyond it. Normal neighbouring branches remain open while the bleeding branch is closed securely. This before and after pair teaches the **stasis endpoint** that examiners expect for bleeding embolisation.",
+   "say": "The left angiogram shows active gut bleeding that arises from a mesenteric feeder. The inset shows the feeder packed with coils and complete stasis beyond. Neighbouring branches remain open while the bleeding branch is closed. This pair teaches the stasis endpoint that examiners expect after bleeding embolisation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-embolisation-gen1.webp",
+    "alt": "Mesenteric angiogram showing active GI bleeding then coil embolisation of the feeder with contrast stasis.",
+    "caption": "Angiogram of GI bleeding treated by coil embolisation. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Every embolisation balances benefit against the risk of tissue loss. **Post embolisation syndrome** with fever, pain and nausea follows tumour work and needs fluids and analgesia. **Non target embolisation** is the feared error, so a **microcatheter** tip sits beyond normal branches before release. A migrated coil can infarct downstream tissue, while very small particles may pass through a shunt into the lungs. Abscess can complicate a necrotic embolised tumour and needs follow up imaging.",
+   "say": "Every embolisation is a balance between benefit gained and risk of tissue loss. Fever with pain after tumour work usually reflects ischaemia and needs fluids. Non target embolisation is the feared error and needs careful catheter positioning. A migrated coil can infarct tissue, while tiny particles may pass through a shunt into the lungs.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-embolisation-fig1.webp",
@@ -75,8 +86,8 @@
    }
   },
   {
-   "tx": "Choosing the endpoint decides success. **Stasis** in the target feeder with preserved flow in adjacent normal vessels marks a complete bleeding embolisation. **Tumour devascularisation** is judged by loss of abnormal blush rather than by the number of coils used. **Pain relief** after genicular or musculoskeletal embolisation lags the procedure by weeks, so early imaging should not trigger re-treatment. **Rebleeding** within days usually means an unembolised collateral or recanalised Gelfoam, not a failed concept.",
-   "say": "The endpoint decides success. Stasis in the target feeder with normal branches preserved marks complete bleeding work. Tumour success is loss of blush, not coil count. Pain relief after musculoskeletal embolisation takes weeks, and early rebleeding usually means a missed collateral.",
+   "tx": "The chosen endpoint decides whether embolisation has succeeded or failed. **Stasis** in the target feeder with preserved flow in normal vessels marks complete bleeding control. Tumour success is judged by loss of abnormal **tumour blush** rather than by the number of coils used. Pain relief after musculoskeletal embolisation takes weeks, so early imaging should not trigger retreatment. **Rebleeding** within days usually means a missed collateral or reopened temporary agent.",
+   "say": "The chosen endpoint decides whether embolisation has succeeded or failed. Stasis in the target feeder with normal flow preserved marks complete control. Tumour success is judged by loss of blush rather than coil numbers. Pain relief takes weeks after musculoskeletal work, and early rebleeding usually means a missed collateral vessel.",
    "vis": {
     "kind": "flow",
     "nodes": [

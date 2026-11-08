@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "bio-enzymes",
+ "subject": "biochemistry",
+ "title": "Liver, pancreas and bone enzymes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Transaminases leak from injured hepatocytes with localising nuance: **ALT** cytosolic and liver enriched (most specific), AST cytosolic plus mitochondrial in liver, heart, muscle and red cells (broader, rises in muscle and haemolysis). Viral and ischaemic hepatitis climb into hundreds to thousands (AST over ALT transiently in shock liver early), alcoholic hepatitis rarely exceeds three hundred with AST to ALT ratio at or above two (pyridoxal deficiency depressing ALT synthesis mechanistically), metabolic fatty disease ALT over AST until cirrhosis flips it.",
+   "say": "ALT is liver enriched while AST is broader across muscle and red cells. Alcoholic hepatitis rarely exceeds three hundred with AST doubling ALT, while viral hepatitis climbs into thousands diagnostically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Transaminase sketch",
+     "Think first"
+    ],
+    "rows": [
+     [
+      "Viral, autoimmune, drug (paracetamol)",
+      "ALT dominant, hundreds to thousands",
+      "Serology, drug history, INR severity"
+     ],
+     [
+      "Ischaemic (shock liver)",
+      "AST spike early, rapid fall, LDH huge",
+      "Hypotension episode, lactate context"
+     ],
+     [
+      "Alcoholic hepatitis",
+      "AST:ALT at least 2:1, under 300 typical",
+      "GGT high, bilirubin severity scores"
+     ],
+     [
+      "Muscle masquerade",
+      "AST over ALT modest, CK very high",
+      "Check CK before liver biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cholestatic enzymes are **induced**, not merely leaked: alkaline phosphatase synthesis rises with bile retention (plus canalicular membrane solubilisation), gamma glutamyl transferase (microsomal, alcohol and enzyme inducing drugs phenytoin/barbiturates sensitive) confirms hepatic source of ALP (versus bone, placenta, intestine) alongside 5-prime nucleotidase (more specific, less available). Isolated GGT elevation without ALP or transaminase disease usually reports enzyme induction or alcohol, not obstruction, restraining imaging cascades when taught properly.",
+   "say": "Cholestatic enzymes are induced, not merely leaked, with GGT confirming hepatic source of ALP elevation. Isolated GGT usually reports alcohol or drug induction, not obstruction requiring imaging cascades.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hepatocellular pattern",
+     "points": [
+      "ALT/AST dominant (R ratio high)",
+      "Viral, ischaemic, drug, autoimmune",
+      "INR and albumin grade function separately"
+     ]
+    },
+    "right": {
+     "title": "Cholestatic pattern",
+     "points": [
+      "ALP/GGT dominant (R ratio low)",
+      "Obstruction, PBC, PSC, drugs",
+      "Imaging ducts; bilirubin conjugated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "True liver **function** tests are synthetic and excretory, not enzymes: bilirubin, albumin (half life twenty days, nutrition and inflammation confounded), prothrombin time/INR (factor VII hours, vitamin K versus synthetic failure distinguished by correction), ammonia contextually, and cholinesterase (plasma pseudocholinesterase synthesised by liver, falling in failure, organophosphate poisoning and genetic variants prolonging succinylcholine). Child-Pugh and MELD score function; transaminases score injury only, the sentence hepatology examinations exist to extract.",
+   "say": "Function tests are bilirubin, albumin and INR, not transaminases that score injury only. Cholinesterase falls in liver failure and organophosphate poisoning, linking synthesis to anaesthesia apnoea genetically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Injury versus function",
+    "nodes": [
+     {
+      "id": "inj",
+      "label": "Injury enzymes: ALT, AST, ALP, GGT"
+     },
+     {
+      "id": "fun",
+      "label": "Function: bilirubin, albumin, INR"
+     },
+     {
+      "id": "score",
+      "label": "Scores (Child-Pugh, MELD) use function"
+     }
+    ],
+    "edges": [
+     [
+      "inj",
+      "fun"
+     ],
+     [
+      "fun",
+      "score"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pancreatic **lipase** (more specific and persistent three to four times upper limit diagnostic with characteristic pain) outperforms amylase (salivary, fallopian, macroamylasaemia renal retention confounders, clears in days); amylase isoenzymes or lipase to amylase ratios historically separate pancreatic from salivary sources, while chronic pancreatitis may show normal enzymes burned out. Acid phosphatase (prostatic, tartrate labile, historical prostate cancer marker replaced by PSA glycoprotein, not enzyme activity) and prostatic acid phosphatase in assault specimens survive as forensic and history footnotes worth one line each.",
+   "say": "Lipase outperforms amylase for pancreatic specificity and persistence diagnostically. Macroamylasaemia confounds amylase renally, while chronic pancreatitis may show normal enzymes burned out late in disease.",
+   "vis": null
+  },
+  {
+   "tx": "Bone alkaline phosphatase reports osteoblast activity (growth, healing, **Paget** isolated elevation, osteomalacia, hyperparathyroid bone disease, metastases osteoblastic prostate) with heat lability and bone specific immunoassays separating liver when GGT normal already suggests bone. Tartrate resistant acid phosphatase (TRAP 5b) reports osteoclasts historically (hairy cell leukaemia marker cytochemically), and cholinesterase dibucaine numbers from the isoenzyme lesson complete the clinical enzyme formulary anaesthesia and hepatology share.",
+   "say": "Bone alkaline phosphatase reports osteoblast activity in Paget and growth, separated by normal GGT suggesting bone source. Osteoclast TRAP completes the clinical enzyme formulary across specialties clinically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme isolated elevation",
+     "Source hunt order"
+    ],
+    "rows": [
+     [
+      "ALP high, GGT normal",
+      "Bone (Paget, growth, healing) or placenta/intestine physiology"
+     ],
+     [
+      "ALP high, GGT high",
+      "Hepatobiliary cholestasis imaging pathway"
+     ],
+     [
+      "GGT high alone",
+      "Alcohol, inducing drugs; observe, counsel"
+     ],
+     [
+      "Amylase high, lipase normal",
+      "Salivary, macroamylasaemia, renal retention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Enzyme replacement** and inhibition as therapy bookend clinical enzymology: infused enzymes (imiglucerase Gaucher, alglucosidase Pompe, pegaspargase leukaemia asparagine starvation inversion where enzyme is drug depleting substrate), deficient enzyme unblocking (febuxostat xanthine oxidase next modules), and plasma functional enzymes (pseudocholinesterase, ceruloplasmin ferroxidase, lipoprotein lipase post heparin activity) whose absence is disease. Oxidation and electron transport next move enzymology inside mitochondria, where complexes are enzymes whose poisons you have already prescribed antidotes for.",
+   "say": "Infused enzymes treat storage diseases while plasma functional enzyme absences are diseases themselves. Oxidation next moves enzymology inside mitochondria, where respiratory complexes are enzymes with prescribed antidotes awaiting.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Enzymes as biomarkers (leak or induce)",
+     "points": [
+      "Troponin, ALT, ALP, lipase",
+      "Tissue, timing, pattern logic",
+      "This lesson grammar"
+     ]
+    },
+    "right": {
+     "title": "Enzymes as drugs or drug targets",
+     "points": [
+      "Replacement infusions, asparaginase depletion",
+      "Statins, inhibitors across modules",
+      "Next: respiratory complexes as enzymes"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

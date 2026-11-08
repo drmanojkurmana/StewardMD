@@ -38,6 +38,8 @@ async function boot(query) {
 async function open(d) {
   await ev(`DX.openRef(${JSON.stringify(d)},{from:'knowledge-library'})`);
   for (let i = 0; i < 40; i++) { if (await ev(`[...document.querySelectorAll('#dxMgmt .kbv2-slot')].every(s=>s.getAttribute('data-kbv2-done'))`)) break; await sleep(150); }
+  // page-motion.js slides the body in for ~530 ms; measuring mid-slide reads a false overflow
+  await ev(`Promise.all(document.querySelector('#dxMgmt .dx-mgmt-body').getAnimations().map(a=>a.finished.catch(()=>{})))`);
   await sleep(200);
   // the reader slides in (dxReaderEnter, translateX 18px over 0.2 s): measure only once it has settled, or a column
   // reads as off-centre by however far the slide still had to go
@@ -91,7 +93,8 @@ try {
       await open(d);
       const fit = JSON.parse(await ev(FIT));
       ok(fit.page && fit.body && fit.n === 0, `${d} @${w}: fits ${fit.n ? JSON.stringify(fit.clipped) : ""}`);
-      const g = JSON.parse(await ev(`(()=>{const z=parseFloat(getComputedStyle(document.documentElement).zoom)||1,panel=document.querySelector('#dxMgmt').getBoundingClientRect(),sheet=document.querySelector('#dxMgmt .kbr-sheet').getBoundingClientRect(),c=document.querySelector('#dxMgmt .dx-reader-hero').getBoundingClientRect();return JSON.stringify({pw:panel.width,sw:sheet.width/z,sl:sheet.left,sr:innerWidth-sheet.right,cl:c.left,cr:innerWidth-c.right,cw:c.width/z})})()`));
+      const g = JSON.parse(await ev(`(()=>{const z=parseFloat(getComputedStyle(document.documentElement).zoom)||1,panel=document.querySelector('#dxMgmt').getBoundingClientRect(),sheet=document.querySelector('#dxMgmt .kbr-read').getBoundingClientRect(),c=document.querySelector('#dxMgmt .dx-reader-hero').getBoundingClientRect();return JSON.stringify({pw:panel.width,sw:sheet.width/z,sl:sheet.left,sr:innerWidth-sheet.right,cl:c.left,cr:innerWidth-c.right,cw:c.width/z,sheetHidden:getComputedStyle(document.querySelector('#dxMgmt .kbr-sheet')).display==='none'})})()`));
+      ok(g.sheetHidden, `${d} @${w}: legacy .kbr-sheet element hidden, article is the card`);
       ok(g.pw >= w - 2, `${d} @${w}: the reader spans the screen (${Math.round(g.pw)}px)`);
       ok(g.sw <= 961 && g.sw <= w - 20 && Math.abs(g.sl - g.sr) <= 3, `${d} @${w}: the card is inset and centred (${Math.round(g.sw)}px)`);
       ok(g.cw <= 961 && Math.abs(g.cl - g.cr) <= 3, `${d} @${w}: reading column centred, ${Math.round(g.cw)}px wide (left ${Math.round(g.cl)}, right ${Math.round(g.cr)})`);
@@ -148,6 +151,39 @@ try {
   await ev(`document.body.classList.add('dark')`); await open("gout");
   ok(await ev(`getComputedStyle(document.querySelector('#dxMgmt .kbr-jump')).backgroundColor!==getComputedStyle(document.querySelector('#dxMgmt .kbr-chip')).color`), "dark: jump row is painted");
   await shot("390-gout-dark-top"); await ev(`document.querySelector('#dxMgmt .kbr-chip[data-jump="kbr-mgmt"]').click()`); await sleep(700); await shot("390-gout-dark-mgmt");
+  // Card geometry (2026-11-04): article is the card, header opaque, no footer band.
+  for (const dark of [false, true]) {
+    await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+    await boot(""); if (dark) await ev(`document.body.classList.add('dark')`); else await ev(`document.body.classList.remove('dark')`);
+    await open("MENINGITIS");
+    const mode = dark ? "dark" : "light";
+    const geo = JSON.parse(await ev(`(()=>{const z=parseFloat(getComputedStyle(document.documentElement).zoom)||1,card=document.querySelector('#dxMgmt .kbr-read'),hero=document.querySelector('#dxMgmt .dx-reader-hero'),top=document.querySelector('#dxMgmt .dx-mgmt-top'),body=document.querySelector('#dxMgmt .dx-mgmt-body'),cr=card.getBoundingClientRect(),hr=hero.getBoundingClientRect();const cs=getComputedStyle(card);return JSON.stringify({cardL:cr.left/z,cardR:(innerWidth-cr.right)/z,textL:(hr.left-cr.left)/z,padL:parseFloat(cs.paddingLeft),radius:parseFloat(cs.borderTopLeftRadius),bg:cs.backgroundColor,bodyTop:body.getBoundingClientRect().top,topBottom:top.getBoundingClientRect().bottom,topBg:getComputedStyle(top).backgroundImage+' '+getComputedStyle(top).backgroundColor})})()`));
+    ok(geo.cardL >= 14 && geo.cardR >= 14, `${mode} @390: card left/right inset >= 14px (${geo.cardL}/${geo.cardR})`);
+    ok(geo.textL >= 20 && geo.padL >= 20, `${mode} @390: text inset >= 20px (pad ${geo.padL})`);
+    ok(geo.radius >= 16 && geo.radius <= 20, `${mode} @390: card radius 16-20px (${geo.radius})`);
+    ok(geo.bodyTop >= geo.topBottom - 1 && geo.topBg !== "none rgba(0, 0, 0, 0)", `${mode} @390: scroller starts below the opaque header row`);
+    // Scroll mid-article: nothing from the article is painted inside the header row.
+    await ev(`(()=>{const b=document.querySelector('#dxMgmt .dx-mgmt-body');b.scrollTop=Math.round(b.scrollHeight/3)})()`); await sleep(300);
+    ok(await ev(`(()=>{const top=document.querySelector('#dxMgmt .dx-mgmt-top'),body=document.querySelector('#dxMgmt .dx-mgmt-body');const y=top.getBoundingClientRect().bottom-4;let e=document.elementFromPoint(innerWidth/2,y);return !!e&&(top.contains(e)||e===top)&&body.getBoundingClientRect().top>=top.getBoundingClientRect().bottom-1})()`), `${mode} @390: nothing from the article is painted inside the header row while scrolled`);
+    await shot(`390-card-${mode}-mid`);
+    // Scroll to the end: card bottom edge + rounded corners visible, no empty white band over text.
+    await ev(`(()=>{const b=document.querySelector('#dxMgmt .dx-mgmt-body');b.scrollTop=b.scrollHeight})()`); await sleep(300);
+    const end = JSON.parse(await ev(`(()=>{const body=document.querySelector('#dxMgmt .dx-mgmt-body'),card=document.querySelector('#dxMgmt .kbr-read'),br=body.getBoundingClientRect(),cr=card.getBoundingClientRect();let last=null;card.querySelectorAll(':scope *').forEach(n=>{const r=n.getBoundingClientRect();if(r.height&&r.bottom<=cr.bottom+1&&(!last||r.bottom>last))last=r.bottom});return JSON.stringify({cardBottom:cr.bottom,bodyBottom:br.bottom,gapAfterLast:last==null?999:cr.bottom-last,radius:parseFloat(getComputedStyle(card).borderBottomLeftRadius)})})()`));
+    ok(end.cardBottom <= end.bodyBottom + 1 && end.cardBottom > end.bodyBottom - 160, `${mode} @390: card bottom edge visible after scrolling to the end (${Math.round(end.cardBottom)}/${Math.round(end.bodyBottom)})`);
+    ok(end.gapAfterLast <= 64, `${mode} @390: no empty white band over text at the end (gap ${Math.round(end.gapAfterLast)}px)`);
+    ok(end.radius >= 16, `${mode} @390: card bottom corners rounded at the end (${end.radius})`);
+    await shot(`390-card-${mode}-end`);
+    // Red-flag callout, when present.
+    const alert = JSON.parse(await ev(`(()=>{const a=document.querySelector('#dxMgmt .dx-reader-alert');if(!a)return 'null';const s=getComputedStyle(a);return JSON.stringify({l:parseFloat(s.borderLeftWidth),r:parseFloat(s.borderTopLeftRadius),bg:s.backgroundColor})})()`));
+    ok(!alert || (alert.l >= 2 && alert.r >= 8 && alert.bg !== 'rgba(0, 0, 0, 0)'), `${mode} @390: red flags are a tinted callout with a red left border ${JSON.stringify(alert)}`);
+  }
+  // iPad 820: card centred, max 960px, same insets.
+  await call("Emulation.setDeviceMetricsOverride", { width: 820, height: 1180, deviceScaleFactor: 2, mobile: true });
+  await boot(""); await open("MENINGITIS");
+  const ipad = JSON.parse(await ev(`(()=>{const z=parseFloat(getComputedStyle(document.documentElement).zoom)||1,cr=document.querySelector('#dxMgmt .kbr-read').getBoundingClientRect();return JSON.stringify({w:cr.width/z,l:cr.left/z,r:(innerWidth-cr.right)/z})})()`));
+  ok(ipad.w <= 961 && Math.abs(ipad.l - ipad.r) <= 3 && ipad.l >= 14, `iPad @820: card centred, <=960px, inset >=14px (${JSON.stringify(ipad)})`);
+  await shot("820-card");
+
   // kill switch
   await boot("?kbv2=0"); await open("gout");
   ok(await ev(`!window.SMD_KBV2_ON && document.querySelectorAll('#dxMgmt .kbv2-slot').length===0 && !!document.getElementById('kbr-mgmt')`), "?kbv2=0: no v2 slots, sections still render");

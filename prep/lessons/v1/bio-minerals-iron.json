@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "bio-minerals",
+  "subject": "biochemistry",
+  "title": "Iron handling and overload",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Duodenal absorption** is the only controlled entry point for iron. Ferric iron is reduced by Dcytb at the brush border, helped by vitamin C, then DMT1 carries ferrous iron into the enterocyte. Ferroportin exports it, with hephaestin restoring the ferric form for transferrin. Haem iron absorbs better, while phytate, tea and calcium block uptake.",
+      "say": "Iron enters only through the duodenum, reduced first and exported through ferroportin. Vitamin C helps it in; tea, phytate and calcium keep it out.",
+      "vis": null
+    },
+    {
+      "tx": "**No excretion route** exists for iron, so the body guards the gate instead. Humans cannot actively excrete iron; losses are only shed cells and blood. That single fact explains why absorption control is absolute, why overload is so dangerous once established, and why repeated transfusion inevitably loads iron into heart, liver and endocrine organs over time.",
+      "say": "There is no iron exit door. Control happens at absorption alone, which is why transfusional overload accumulates relentlessly year after year.",
+      "vis": null
+    },
+    {
+      "tx": "**Hepcidin** is the liver hormone running the gate. Iron loading and inflammation raise hepcidin, which degrades ferroportin and traps iron inside enterocytes and macrophages. Erythropoiesis and hypoxia lower hepcidin to release iron for red cell production. Inflammation driven hepcidin excess is the trap behind anaemia of chronic disease, where iron exists but stays locked away.",
+      "say": "Hepcidin locks ferroportin away when iron or inflammation rises. In chronic disease that lock causes anaemia despite full stores, the classic trap.",
+      "vis": {
+        "kind": "flow",
+        "title": "Hepcidin gate control",
+        "nodes": [
+          {
+            "id": "hep",
+            "label": "Hepcidin rises"
+          },
+          {
+            "id": "fp",
+            "label": "Ferroportin degraded"
+          },
+          {
+            "id": "trap",
+            "label": "Iron trapped in cells"
+          },
+          {
+            "id": "low",
+            "label": "Blood iron falls"
+          }
+        ],
+        "edges": [
+          [
+            "hep",
+            "fp"
+          ],
+          [
+            "fp",
+            "trap"
+          ],
+          [
+            "trap",
+            "low"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Transferrin and ferritin** divide transport from storage. Transferrin carries two ferric ions, and its saturation percentage is the sensitive early overload screen. Ferritin stores iron safely inside cells and leaks a measurable trace into blood, but ferritin is also an acute phase reactant, so inflammation can fake reassuring stores. Macrophage recycling of old red cells supplies most daily iron, dwarfing dietary intake.",
+      "say": "Transferrin saturation screens for overload; ferritin reports stores but rises with inflammation too. Most daily iron actually comes from recycling old red cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/bio-vitamins-minerals-gen1.webp",
+        "alt": "Hand photo shows concave spoon shaped nails with central thinning and labels.",
+        "caption": "Spoon shaped nails of iron lack Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "**Deficiency stages** unfold in a predictable order. Stores empty first as ferritin falls, then transport iron drops, and only finally does microcytic anaemia appear with a high red cell distribution width. Spoon shaped nails, angular cheilitis and restless legs belong to the tissue deficiency phase. The ferritin inflammation caveat must be quoted whenever a normal ferritin is used to exclude deficiency in a sick patient.",
+      "say": "Stores fall, then transport, then the blood count. Microcytic anaemia is the last stage, and inflammation can hide empty stores behind a normal ferritin.",
+      "vis": null
+    },
+    {
+      "tx": "**Haemochromatosis** is hepcidin set wrongly low. The HFE C282Y mutation leaves hepcidin inappropriately low for body iron, so absorption never switches off. Iron loads liver, pancreas, heart, skin and the second and third knuckle joints, giving bronze diabetes, cirrhosis with cancer risk and cardiomyopathy. Transferrin saturation screens first, venesection treats, and secondary transfusional overload chelates instead.",
+      "say": "In haemochromatosis the hepcidin brake fails and iron floods liver, pancreas, heart and knuckles. Screen with transferrin saturation; treat by venesection.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/bio-minerals-gen1.webp",
+        "alt": "Dark iron loaded liver and pancreas illustration.",
+        "caption": "Dark iron loaded liver and pancreas Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

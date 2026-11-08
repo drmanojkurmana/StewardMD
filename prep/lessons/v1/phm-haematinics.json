@@ -3,21 +3,32 @@
  "module": "phm-haematinics",
  "subject": "pharmacology",
  "title": "Haematinics, growth factors and chelators",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Oral iron** (ferrous sulphate, fumarate; **empty stomach with vitamin C**, tea, antacids and calcium blocking, black stools expected, constipation managed) corrects deficiency with **Hb rising 2 g in 4 weeks**; failure reviews bleeding, compliance and malabsorption (hookworm, piles, menorrhagia, PPI). **IV iron** (ferric carboxymaltose, iron sucrose; intolerance, malabsorption, ongoing loss, CKD, pregnancy beyond first trimester; **hypophosphataemia** with FCM, anaphylaxis watched) replenishes fast. Ferritin with transferrin saturation diagnoses; thalassaemia trait (normal RDW, HbA2 high) never irons.",
-   "say": "Black stools expected on iron: empty stomach vitamin C helps. Hb up 2 in 4 weeks or hunt bleeders.",
+   "tx": "**Oral iron** with ferrous salts corrects iron deficiency when patients take tablets on an empty stomach with vitamin C for better absorption. Tea, antacids and calcium block absorption, black stools remain expected, and haemoglobin should rise by **two grams in four weeks** with effective therapy. Failure prompts review of bleeding, adherence and malabsorption, while **intravenous iron** suits intolerance, ongoing loss, kidney disease and later pregnancy.",
+   "say": "Oral iron corrects deficiency when patients take tablets away from food. Vitamin C improves absorption while tea and antacids block uptake significantly. Haemoglobin rises by two grams within four weeks of effective therapy. Failure requires searching for bleeding, nonadherence or malabsorption promptly.",
    "vis": null
   },
   {
-   "tx": "**B12** (pernicious anti intrinsic factor, vegan, ileal disease; **high dose oral rivals IM** except neuro deficit which injects urgently, lifelong pernicious) with **folate** (pregnancy **4 mg high risk** neural tube, haemolysis demand, methotrexate rescue by **leucovorin**, B12 first as folate alone worsens cords) corrects megaloblastosis; reticulocytosis confirms. **Leucovorin** rescues methotrexate toxicity and 5FU boosts; **levoleucovorin** purifies. Homocysteine with methylmalonic sorts combined lack.",
-   "say": "Folate alone worsens B12 cords: replace B12 first. High risk pregnancy folate 4 mg; methotrexate needs leucovorin rescue.",
+   "tx": "**Vitamin B12 deficiency** from pernicious anaemia, vegan diet or ileal disease causes megaloblastic anaemia with neurological damage that needs urgent injection when cord signs appear. High dose oral treatment rivals injections without neurological deficit, while **folate** treats deficiency and prevents neural tube defects with higher doses in high risk pregnancy. Folate alone worsens B12 cord damage, so clinicians replace **B12 first** and use leucovorin to rescue methotrexate toxicity.",
+   "say": "Vitamin B12 deficiency causes megaloblastic anaemia and spinal cord damage simultaneously. Neurological deficit requires urgent injections while oral therapy suits uncomplicated deficiency. Folate prevents neural tube defects and treats folate deficiency effectively. Giving folate alone worsens cord damage when B12 deficiency coexists.",
    "vis": null
   },
   {
-   "tx": "**Erythropoietin** (CKD anaemia, chemo anaemia; **Hb target under 11.5** as higher clots and strokes, hypertension watched, iron replete first, **darbepoetin** longer) with **G-CSF** (**filgrastim** neutropenia, bone pain, leukapheresis mobilisation; **pegfilgrastim** single shot) and **GM-CSF** (macrophage, capillary leak) support marrow; **TPO mimetics** (**eltrombopag**, romiplostim: ITP second line, liver watched, rebound thrombocytopenia) raise platelets. Pure red cell aplasia (anti EPO antibodies) stops drug.",
-   "say": "EPO Hb capped under 11.5 or clots: iron first. Filgrastim aches bones mobilising stem cells.",
+   "tx": "The blood smear shows large oval red cells called **macro ovalocytes** beside a neutrophil with six or more nuclear lobes called a **hypersegmented neutrophil**. Together these findings diagnose **megaloblastic anaemia** from vitamin B12 or folate deficiency before confirmatory blood tests return. The labels remind candidates that leucovorin bypasses dihydrofolate reductase during methotrexate rescue, while B12 deficiency adds neuropathy and raised methylmalonic acid.",
+   "say": "The smear shows large oval red cells beside a hypersegmented neutrophil clearly. Together these findings indicate megaloblastic anaemia from B12 or folate deficiency. Hypersegmentation appears early and alerts clinicians before anaemia becomes severe. Leucovorin bypasses blocked folate metabolism during methotrexate rescue therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-haematinics-gen1.webp",
+    "alt": "Blood smear with macro ovalocytes and hypersegmented neutrophil plus B12 folate and leucovorin labels.",
+    "caption": "Macro ovalocytes and hypersegmented neutrophil in megaloblastic anaemia. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Erythropoietin** treats kidney and chemotherapy anaemia after iron repletion, but targets above the safe ceiling increase clots and strokes without survival benefit. The examination ceiling remains **haemoglobin under eleven point five**, with hypertension monitored throughout treatment and darbepoetin offering longer action. **Filgrastim** mobilises neutrophils and stem cells with bone pain, while thrombopoietin mimetics raise platelets in immune thrombocytopenia after first line failure.",
+   "say": "Erythropoietin helps treat anaemia of kidney disease after clinicians first check and correct iron deficiency. Higher haemoglobin targets increase clots and strokes without improving survival. Filgrastim raises neutrophils and mobilises stem cells for collection procedures. Thrombopoietin mimetics increase platelets and help treat resistant immune thrombocytopenia in selected patients with bleeding.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/phm-haematinics-fig1.webp",
@@ -27,8 +38,8 @@
    }
   },
   {
-   "tx": "**Hydroxyurea** (sickle cell raising **HbF**, crises with chest and priapism down, myelosuppression with leg ulcers watched) with **iron chelators** (**deferoxamine** infusion with ocular and auditory toxicity, growth delay; **deferiprone** oral with **agranulocytosis** weekly ANC; **deferasirox** oral with renal Fanconi watched) manages overload (thalassaemia major, ferritin with cardiac T2 star guiding). Luspatercept (thalassaemia, MDS ring sideroblasts) adjuncts; transfusion thresholds individualise.",
-   "say": "Sickle crises fall as HbF rises on hydroxyurea. Chelate overload: deferoxamine infuses, deferiprone watches counts.",
+   "tx": "**Hydroxyurea** raises fetal haemoglobin in sickle cell disease and reduces painful crises, acute chest syndrome and priapism during long term treatment. Iron overload from repeated transfusion needs **iron chelators**, and deferoxamine infuses with eye and ear toxicity while deferiprone risks **agranulocytosis** needing weekly counts. Deferasirox offers oral chelation with kidney monitoring, and cardiac iron imaging guides intensity in thalassaemia major.",
+   "say": "Hydroxyurea raises fetal haemoglobin and reduces sickle crises over time. Myelosuppression and leg ulcers require monitoring during long term therapy. Deferoxamine chelates iron but damages eyes and ears with prolonged use. Deferiprone causes agranulocytosis and requires weekly blood counts regularly.",
    "vis": {
     "kind": "table",
     "cols": [
