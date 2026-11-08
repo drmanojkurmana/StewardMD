@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-gluconeogenesis-glycogen",
+ "subject": "biochemistry",
+ "title": "Cori and glucose-alanine cycles and control",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "During a sprint, muscle exports lactate that liver rebuilds to glucose at a net loss of four ATP per turn of the **Cori cycle**. The loss is the price of anaerobic burst power repaid during recovery, historically called oxygen debt. Red cells feed lactate into the same loop continuously, so the cycle never fully rests even at night.",
+   "say": "During a sprint, muscle exports lactate that liver rebuilds to glucose at a net loss of four ATP per turn of the Cori cycle. The loss buys anaerobic burst power repaid during recovery. Red cells feed lactate into the same loop continuously.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cori cycle accounting",
+    "nodes": [
+     {"id": "m", "label": "Muscle: glucose to lactate (+2 ATP)"},
+     {"id": "b", "label": "Lactate in blood"},
+     {"id": "l", "label": "Liver: lactate to glucose (cost 6)"},
+     {"id": "g", "label": "Glucose returns (net minus 4)"}
+    ],
+    "edges": [["m", "b"], ["b", "l"], ["l", "g"]]
+   }
+  },
+  {
+   "tx": "Nitrogen rides a parallel loop, the **glucose-alanine cycle**, where muscle transaminates pyruvate with glutamate nitrogen to alanine using pyridoxal phosphate. Liver strips alanine back to pyruvate for glucose and sends its nitrogen to urea. Fasting therefore delivers glucose precursor and nitrogen disposal together, explaining rising urea production before muscle wasting becomes visible.",
+   "say": "Nitrogen rides the glucose-alanine cycle, where muscle transaminates pyruvate to alanine. Liver strips alanine back to pyruvate for glucose and sends nitrogen to urea. Fasting delivers glucose precursor and nitrogen disposal together, so urea production rises early.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Cori cycle (carbon only)", "points": ["Carries lactate carbon", "Costs net 4 ATP", "No nitrogen moved"]},
+    "right": {"title": "Glucose-alanine cycle (carbon plus nitrogen)", "points": ["Carries alanine carbon and nitrogen", "Nitrogen ends as urea", "Dominates in fasting"]
+    }
+   }
+  },
+  {
+   "tx": "Reciprocal control prevents liver running both directions at once: **fructose-2,6-bisphosphate** activates PFK-1 while inhibiting fructose-1,6-bisphosphatase, and AMP inhibits the phosphatase while citrate activates it. Acetyl-CoA from fat simultaneously activates pyruvate carboxylase and inhibits pyruvate dehydrogenase, steering pyruvate toward glucose. One metabolite pattern thus flips the whole hepatic switch coherently.",
+   "say": "Fructose-2,6-bisphosphate activates phosphofructokinase-one while inhibiting the bisphosphatase, and acetyl-CoA steers pyruvate toward glucose. One metabolite pattern flips the whole hepatic switch coherently, so liver never runs both directions at once.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-gluconeogenesis-glycogen-fig1.webp",
+    "alt": "Gluconeogenesis bypass enzymes with hormonal control, glycogen synthesis and breakdown, and storage disease map.",
+    "caption": "Gluconeogenesis control points and glycogen storage disease types.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Fructose and galactose slip past this control because they enter glycolysis below PFK-1, which is why fructose loads are intensely **lipogenic** and why hereditary fructose intolerance traps phosphate so dangerously. Teaching point: bypassing regulation is not the same as being harmless. Sorbitol converts to fructose in liver, extending the same risk to sugar free products in intolerant children.",
+   "say": "Fructose and galactose enter below phosphofructokinase-one, which is why fructose loads are intensely lipogenic. Bypassing regulation is not the same as being harmless. Sorbitol converts to fructose in liver, extending the risk to sugar free products.",
+   "vis": null
+  },
+  {
+   "tx": "In prolonged fasting the cycles slow as fat and ketones take over: glycerol and lactate continue, but **alanine** release falls as the brain accepts ketones and muscle protein is spared. Urinary nitrogen drops from about twelve grams toward four grams daily, a measurable signature of adaptation. Refeeding reverses the switch within hours as insulin rises and fructose-2,6-bisphosphate returns.",
+   "say": "In prolonged fasting, alanine release falls as the brain accepts ketones and muscle protein is spared. Urinary nitrogen drops measurably, a signature of adaptation. Refeeding reverses the switch within hours as insulin rises.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Phase", "Main glucose source", "Muscle protein fate"],
+    "rows": [
+     ["Fed (0 to 4 hours)", "Diet and glycogen building", "Synthesis favoured"],
+     ["Postabsorptive (12 to 24 hours)", "Glycogenolysis, then GNG", "Alanine export begins"],
+     ["Prolonged starvation (days)", "GNG from glycerol, lactate; ketones spare glucose", "Spared, nitrogen loss falls"]
+    ]
+   }
+  },
+  {
+   "tx": "Diabetes hijacks the fasting program permanently: hepatic **PEPCK** and phosphatase stay induced, glycogen synthase stays phosphorylated off, and glucose pours out despite hyperglycaemia. Metformin dampens hepatic glucose production and is first line partly for this reason. Dapagliflozin style urinary glucose loss compensates downstream, but the hepatic overproduction itself remains a core therapeutic target.",
+   "say": "Diabetes hijacks the fasting program. Hepatic PEPCK and phosphatase stay induced and glucose pours out despite hyperglycaemia. Metformin dampens hepatic production, while urinary glucose loss compensates downstream. Hepatic overproduction remains a core target.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diabetic liver stuck fasting",
+    "nodes": [
+     {"id": "ins", "label": "Insulin signal resisted"},
+     {"id": "enz", "label": "GNG enzymes stay induced"},
+     {"id": "out", "label": "Glucose output stays high"}
+    ],
+    "edges": [["ins", "enz"], ["enz", "out"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
