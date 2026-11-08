@@ -1,0 +1,77 @@
+{
+ "v": 1,
+ "module": "bio-protein-structure",
+ "subject": "biochemistry",
+ "title": "Tertiary and quaternary structure",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Tertiary folding buries hydrophobic side chains in a water free core (the dominant driving entropy gain as ordered water is released), while surface carries polar and charged residues hydrogen bonding solvent. Ranking forces honestly matters: covalent **disulfide** is strongest per bond, then ionic salt bridges (pH and salt sensitive), hydrogen bonds (numerous, individually weak, water competed), and van der Waals contacts (weakest, packing precise). Hydrophobic effect drives; the named bonds stabilise and specify.",
+   "say": "Folding buries hydrophobics as ordered water release drives entropy. Disulfides are strongest per bond, then ionic, hydrogen and van der Waals contacts stabilise and specify the core.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-protein-structure-fig1.webp",
+    "alt": "Diagram showing ionic bonds, hydrogen bonds, and van der Waals forces, illustrating their roles in protein structure and relative strengths.",
+    "caption": "Non-covalent interactions: ionic, hydrogen, van der Waals forces.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Domains** (twenty five to five hundred residues, independently folding, often exon shuffled) combine into modular proteins (fibronectin repeats, immunoglobulin domains, kinase plus regulatory lobes), connected by flexible linkers, hinges and intrinsically disordered regions that fold on binding (p53 transactivation, signalling hubs). Myoglobin (eight helices, heme pocket, monomeric oxygen store) versus haemoglobin (tetrameric transport with quaternary switching) remains the teaching pair where tertiary similarity meets quaternary invention.",
+   "say": "Domains fold independently and combine into modular proteins with disordered linkers folding on binding. Myoglobin versus haemoglobin teaches tertiary similarity meeting quaternary invention as a pair.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Myoglobin (tertiary only)", "points": ["One chain, one heme", "Hyperbolic oxygen curve", "Muscle store and buffer"]},
+    "right": {"title": "Haemoglobin (quaternary)", "points": ["Alpha2 beta2, four hemes", "Sigmoid cooperative curve", "T to R switching, BPG pocket"]
+    }
+   }
+  },
+  {
+   "tx": "**Quaternary** association (dimers through virus capsid megastructures) creates cooperativity, allosteric regulation and combinatorial specificity (haemoglobin, aspartate transcarbamoylase, ribonucleotide reductase, ion channels, proteasome). Interfaces bury hydrophobic patches specifically (hydrophobic plus shape and charge complementarity), dissociate by pH, ligands or phosphorylation for regulation, and misassemble pathologically when subunits mutate (transthyretin tetramer dissociation seeding amyloid, treated by stabiliser tafamidis).",
+   "say": "Quaternary association creates cooperativity and allosteric regulation from haemoglobin to proteasome. Transthyretin dissociation seeds amyloid and is treated by the stabiliser tafamidis therapeutically.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Quaternary gain", "Exemplar"],
+    "rows": [
+     ["Cooperativity and allostery", "Haemoglobin T/R, ATCase"],
+     ["Active site at interfaces", "HIV protease dimer (drug target)"],
+     ["Stability through association", "Transthyretin (tafamidis stabilises tetramer)"],
+     ["Combinatorial diversity", "Antibodies, haemoglobin variants HbA/A2/F"]
+    ]
+   }
+  },
+  {
+   "tx": "**Denaturation** unravels tertiary and secondary (never peptide primary) by heat, pH extremes, urea and guanidinium, detergents (SDS coats uniform charge), organic solvents and agitation, losing function with aggregation risk (cooked egg albumin, curdled milk casein by acid pI, sterilisation autoclaves). Renaturation succeeds only when aggregation and disulfide scrambling are prevented (Anfinsen conditions, dialysis refolding industrially for recombinant insulin), a caveat students omit at their peril.",
+   "say": "Denaturation unravels tertiary and secondary structure, never primary sequence. Renaturation succeeds only when aggregation and disulfide scrambling are prevented, a caveat students omit at their peril.",
+   "vis": null
+  },
+  {
+   "tx": "Solubility manipulations exploit surface charge: salting in (low salt shields charges, solubility rises), **salting out** (high ammonium sulfate competes water, proteins precipitate by hydrophobicity order, albumin last), isoelectric precipitation (pI zero net charge), organic solvent and heavy metal precipitation (silver, lead denaturing poisons historically), and dialysis desalting for recovery. Ammonium sulfate cuts remain proteomics first steps because they fractionate without fully denaturing most enzymes.",
+   "say": "Salting out with ammonium sulfate fractionates proteins by hydrophobicity without fully denaturing most enzymes. Isoelectric precipitation exploits zero net charge at pI for recovery in proteomics.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Salting in (low salt)", "points": ["Charges shielded by ions", "Solubility rises", "Physiological saline logic"]},
+    "right": {"title": "Salting out (high ammonium sulfate)", "points": ["Water competed away", "Hydrophobics precipitate first, albumin last", "Reversible fractionation"]
+    }
+   }
+  },
+  {
+   "tx": "Structure determination crowns the hierarchy: X-ray crystallography (resolution angstroms, static, crystal packing caveats), cryo-electron microscopy (near atomic, membrane proteins and megacomplexes revolution, Nobel recognised), NMR in solution (dynamics, small proteins, disorder), and **AlphaFold** prediction (sequence to model confidence scored, disordered tails honestly low). Methods choice by size, state and question is now examineable literacy, not trivia, before folding assistance and failure occupy the next lessons.",
+   "say": "Crystallography, cryo-electron microscopy, NMR and AlphaFold crown the hierarchy with complementary strengths. Methods choice by size and question is now examineable literacy before folding failure lessons.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hierarchy in one ascent",
+    "nodes": [
+     {"id": "p", "label": "Primary: sequence"},
+     {"id": "s", "label": "Secondary: helix and sheet (H-bonds)"},
+     {"id": "t", "label": "Tertiary: domains folded (hydrophobic core)"},
+     {"id": "q", "label": "Quaternary: subunits cooperate"}
+    ],
+    "edges": [["p", "s"], ["s", "t"], ["t", "q"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
