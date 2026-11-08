@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "med-resp-failure",
+ "subject": "medicine",
+ "title": "Acute respiratory failure and acute respiratory distress syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Inability of the respiratory apparatus to maintain adequate gas exchange results in life-threatening hypoxaemia or hypercapnia. Diagnosing **type 1 respiratory failure** (hypoxaemic failure) requires demonstrating an arterial partial pressure of oxygen (PaO2) less than 60 mmHg on room air with a normal or decreased arterial partial pressure of carbon dioxide (PaCO2 <= 45 mmHg). Pathophysiologically, hypoxaemia arises from ventilation-perfusion mismatch, intrapulmonary shunting, or alveolar diffusion impairment, commonly caused by pneumonia, acute pulmonary edema, acute pulmonary embolism, or diffuse parenchymal lung disease.",
+   "say": "Failure of the respiratory system to maintain gas exchange results in severe hypoxaemia or ventilatory failure. Diagnosing type 1 respiratory failure requires demonstrating an arterial oxygen tension below sixty millimeters of mercury with normal or low carbon dioxide. The hypoxaemia stems from ventilation-perfusion mismatch, shunt or diffusion impairment. Common etiologies include severe pneumonia, pulmonary edema and pulmonary embolism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 (Hypoxaemic failure)",
+     "points": [
+      "PaO2 < 60 mmHg on room air",
+      "PaCO2 normal or reduced (<= 45 mmHg)",
+      "Alveolar-arterial gradient is widened",
+      "Etiologies: pneumonia, ARDS, PE, edema"
+     ]
+    },
+    "right": {
+     "title": "Type 2 (Hypercapnic failure)",
+     "points": [
+      "PaCO2 > 45 mmHg (ventilatory pump failure)",
+      "PaO2 concurrently low without oxygen",
+      "Normal or elevated A-a gradient",
+      "Etiologies: COPD, myasthenia, opioids, chest wall"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inadequate alveolar minute ventilation leads to pathological retention of carbon dioxide within the systemic circulation. Developing **type 2 respiratory failure** (hypercapnic or ventilatory failure) is characterized by an arterial PaCO2 exceeding 45 mmHg accompanied by respiratory acidosis (pH < 7.35 in acute exacerbations). Ventilatory failure results from central respiratory drive depression (sedatives, encephalitis), neuromuscular weakness (Guillain-Barre syndrome, myasthenia gravis, amyotrophic lateral sclerosis), mechanical chest wall deformities (severe kyphoscoliosis), or severe resistive airway loading in advanced chronic obstructive pulmonary disease.",
+   "say": "Inadequate alveolar ventilation causes carbon dioxide accumulation within the arterial circulation. Developing type 2 respiratory failure features an arterial carbon dioxide tension above forty-five millimeters of mercury with acute respiratory acidosis. Pump failure stems from respiratory center depression, neuromuscular weakness, chest wall deformity or severe airflow resistance seen in advanced chronic obstructive disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pump",
+      "label": "Respiratory pump impairment (CNS / Nerve / Muscle)"
+     },
+     {
+      "id": "alveolar",
+      "label": "Reduction in effective alveolar minute ventilation"
+     },
+     {
+      "id": "co2",
+      "label": "Retention of PaCO2 > 45 mmHg (Hypercapnia)"
+     },
+     {
+      "id": "acid",
+      "label": "Acute respiratory acidosis (arterial pH < 7.35)"
+     }
+    ],
+    "edges": [
+     [
+      "pump",
+      "alveolar"
+     ],
+     [
+      "alveolar",
+      "co2"
+     ],
+     [
+      "co2",
+      "acid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-cardiogenic pulmonary edema provoked by diffuse inflammatory alveolar-capillary endothelial injury produces severe hypoxaemic failure. Developing **ARDS** (acute respiratory distress syndrome) is initiated by direct lung insults (aspiration, pneumonia, inhalation injury) or systemic inflammatory cascades (sepsis, severe acute pancreatitis, massive transfusion, poly-trauma). Neutrophilic degranulation, platelet-activating factor, and pro-inflammatory cytokines disrupt the microvascular barrier, flooding the alveoli with protein-rich exudate and cellular debris. Inactivated pulmonary surfactant precipitates widespread alveolar micro-atelectasis, profound physiological right-to-left intrapulmonary shunt, and severely decreased lung compliance.",
+   "say": "Non-cardiogenic pulmonary edema from diffuse alveolar endothelial damage triggers severe hypoxaemic failure. Developing ARDS arises from direct pulmonary insults like aspiration or systemic cascades like sepsis and pancreatitis. Activated neutrophils and cytokines disrupt the capillary-alveolar membrane, filling alveolar spaces with proteinaceous fluid. Loss of surfactant causes alveolar collapse, profound intrapulmonary shunting and stiff lungs.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-lung-alveoli-gas-exchange.webp",
+    "alt": "Alveolar capillary gas exchange membrane anatomy and diffusive barriers.",
+    "caption": "Disruption of alveolar-capillary barrier and exudative flooding in ARDS. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Standardized diagnostic consensus establishes uniform criteria to identify acute non-cardiogenic pulmonary injury. Fulfilling the **Berlin definition** of ARDS requires meeting four obligatory components: acute onset within one week of a recognized clinical insult; bilateral opacities on chest radiography or CT not fully explained by effusions, lobar collapse, or nodules; respiratory failure not fully explained by cardiac failure or hydrostatic volume overload; and documented objective impairment in arterial oxygenation with positive end-expiratory pressure (PEEP) >= 5 cmH2O.",
+   "say": "Standardized clinical criteria identify acute non-cardiogenic inflammatory lung injury. Fulfilling the Berlin definition requires four criteria: onset within one week of clinical insult, bilateral infiltrates on chest imaging, non-cardiogenic respiratory failure, and objective oxygenation impairment with positive end-expiratory pressure of at least five centimeters of water.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Berlin criteria component",
+     "Mandatory diagnostic requirement",
+     "Verification method"
+    ],
+    "rows": [
+     [
+      "Timing of onset",
+      "Within 1 week of clinical insult or worsening",
+      "Clinical history and timeline"
+     ],
+     [
+      "Chest imaging",
+      "Bilateral opacities not explained by effusions",
+      "Frontal radiograph or thoracic CT"
+     ],
+     [
+      "Edema origin",
+      "Respiratory failure not fully explained by cardiac failure",
+      "Echocardiography ruling out left atrial hypertension"
+     ],
+     [
+      "Oxygenation impairment",
+      "PaO2/FiO2 <= 300 mmHg with PEEP >= 5 cmH2O",
+      "Arterial blood gas under positive pressure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stratifying the severity of inflammatory lung injury guides invasive mechanical ventilatory settings and advanced salvage therapies. Calculating the **PaO2/FiO2 ratio** (arterial oxygen partial pressure divided by fractional inspired oxygen concentration) grades severity into three distinct tiers on PEEP >= 5 cmH2O. Mild ARDS corresponds to a ratio between 200 and 300 mmHg. Moderate ARDS encompasses ratios between 100 and 200 mmHg. Severe ARDS is defined by a ratio less than 100 mmHg, carrying a high hospital mortality rate exceeding forty-five percent.",
+   "say": "Stratifying inflammatory lung injury guides mechanical ventilation and salvage therapies. Calculating the PaO2/FiO2 ratio classifies severity into three categories on positive end-expiratory pressure. Mild ARDS features a ratio between two hundred and three hundred. Moderate disease encompasses ratios between one hundred and two hundred. Severe ARDS features a ratio under one hundred, with mortality exceeding forty-five percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "abg",
+      "label": "Perform arterial blood gas on PEEP >= 5 cmH2O"
+     },
+     {
+      "id": "mild",
+      "label": "PaO2/FiO2 200 to 300 mmHg: Mild ARDS"
+     },
+     {
+      "id": "mod",
+      "label": "PaO2/FiO2 100 to 200 mmHg: Moderate ARDS"
+     },
+     {
+      "id": "sev",
+      "label": "PaO2/FiO2 < 100 mmHg: Severe ARDS"
+     }
+    ],
+    "edges": [
+     [
+      "abg",
+      "mild"
+     ],
+     [
+      "abg",
+      "mod"
+     ],
+     [
+      "abg",
+      "sev"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lung-protective mechanical ventilation prevents ventilator-induced lung injury caused by barotrauma, volutrauma, and biotrauma. Implementing **low tidal volume** ventilation targets six milliliters per kilogram of predicted (ideal) body weight, rather than actual weight. Maintaining an end-inspiratory plateau airway pressure <= 30 cmH2O prevents overdistension of compliant aerated alveoli ('baby lung'). Permissive hypercapnia is tolerated (allowing arterial pH down to 7.20) to avoid alveolar shear injury. Applying titrated positive end-expiratory pressure (PEEP) keeps dependent alveoli recruited at end-expiration, preventing cyclic atelectotrauma.",
+   "say": "Lung-protective ventilation prevents secondary ventilator-induced lung injury from excessive pressures and volumes. Implementing low tidal volume ventilation delivers six milliliters per kilogram of predicted ideal body weight. Keeping plateau airway pressure below thirty centimeters of water prevents alveolar overdistension. Permissive hypercapnia is tolerated to spare healthy lung units, while positive end-expiratory pressure prevents cyclic collapse.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lung-protective ventilation",
+     "points": [
+      "Tidal volume: 4 to 8 mL/kg predicted body weight",
+      "Plateau pressure target: <= 30 cmH2O",
+      "Permissive hypercapnia accepted (pH >= 7.20)",
+      "Reduces systemic inflammation and mortality"
+     ]
+    },
+    "right": {
+     "title": "Conventional mechanical ventilation",
+     "points": [
+      "Tidal volume: 10 to 12 mL/kg actual body weight",
+      "Volutrauma from regional alveolar overdistension",
+      "Barotrauma from elevated inspiratory pressures",
+      "Increased risk of multisystem organ failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rotational positioning significantly improves ventilation-perfusion matching in moderate to severe inflammatory respiratory failure. Implementing **prone ventilation** for at least sixteen consecutive hours daily is strongly recommended in patients with ARDS and PaO2/FiO2 ratio < 150 mmHg. In the prone position, the gravitational pleural pressure gradient becomes more uniform, dorsal consolidated alveoli are recruited, ventral lung compression is relieved, and chest wall elastance becomes more homogeneous. Landmark clinical trials demonstrate a substantial absolute mortality reduction in severe ARDS managed with early, prolonged prone positioning.",
+   "say": "Rotational positioning improves ventilation-perfusion matching in severe respiratory failure. Implementing prone ventilation for at least sixteen consecutive hours daily is recommended when the oxygenation ratio drops below one hundred and fifty. Prone positioning promotes uniform pleural pressure gradients, recruits dorsal lung units and relieves heart compression. Trials prove a significant reduction in mortality.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hypox",
+      "label": "Refractory ARDS with PaO2/FiO2 < 150 mmHg"
+     },
+     {
+      "id": "prone",
+      "label": "Turn patient prone for >= 16 hours daily"
+     },
+     {
+      "id": "recruit",
+      "label": "Dorsal lung recruitment & uniform pleural pressure"
+     },
+     {
+      "id": "mort",
+      "label": "Improved V/Q matching and significant mortality reduction"
+     }
+    ],
+    "edges": [
+     [
+      "hypox",
+      "prone"
+     ],
+     [
+      "prone",
+      "recruit"
+     ],
+     [
+      "recruit",
+      "mort"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adjunctive neuromuscular paralysis and extracorporeal life support serve as advanced rescue modalities for refractory hypoxaemia. Administering an early forty-eight-hour continuous infusion of **neuromuscular blockade** (such as cisatracurium) eliminates patient-ventilator dyssynchrony, reduces transpulmonary pressures, and curtails muscular oxygen consumption in severe ARDS. For patients with life-threatening hypoxaemia refractory to lung-protective ventilation, neuromuscular blockade, and prone positioning, venovenous extracorporeal membrane oxygenation (VV-ECMO) drains deoxygenated venous blood, decarboxylates and oxygenates it externally through a polymethylpentene membrane, and returns it to the right atrium.",
+   "say": "Neuromuscular paralysis and extracorporeal life support serve as rescue strategies for refractory hypoxaemia. Administering early continuous cisatracurium eliminates ventilator dyssynchrony and reduces transpulmonary pressures. For refractory hypoxaemia despite prone positioning, venovenous extracorporeal membrane oxygenation drains venous blood, oxygenates it externally through an artificial membrane and reinfuses it, enabling ultra-protective mechanical ventilation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/scc-o2-delivery-fig1.webp",
+    "alt": "Oxygen delivery, extracorporeal circuitry, and systemic tissue oxygenation pathways.",
+    "caption": "Extracorporeal membrane oxygenation circuits and salvage gas exchange mechanisms. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
