@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "med-thrombosis-transfusion",
+ "subject": "medicine",
+ "title": "DOACs and Transfusion Medicine",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Small-molecule oral direct inhibitors of specific activated coagulation enzymes transformed the prevention and treatment of thromboembolic disorders. The direct oral anticoagulants (**doacs**) divide into oral direct factor Xa inhibitors (apixaban, rivaroxaban, edoxaban) and direct thrombin inhibitors (dabigatran etexilate). Offering fixed once or twice-daily oral dosing, rapid onset within two hours, predictable pharmacokinetics, and minimal food-drug interactions, DOACs require no routine coagulation monitoring. In major clinical trials, DOACs demonstrated non-inferior antithrombotic efficacy compared to warfarin, while significantly reducing catastrophic intracranial haemorrhage by fifty percent.",
+   "say": "Small-molecule oral direct inhibitors of specific activated coagulation enzymes transformed the treatment of thromboembolic disorders. Direct oral anticoagulants divide into direct factor Xa inhibitors, including apixaban and rivaroxaban, and direct thrombin inhibitors such as dabigatran. Offering fixed oral dosing, rapid onset, and predictable pharmacokinetics without routine coagulation monitoring, DOACs significantly reduce catastrophic intracranial haemorrhage compared to warfarin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "DOAC Agent",
+     "Target Enzyme",
+     "Renal Clearance Fraction",
+     "Specific Reversal Antidote"
+    ],
+    "rows": [
+     [
+      "Dabigatran Etexilate",
+      "Direct Thrombin (Factor IIa)",
+      "80% (High renal dependence)",
+      "Idarucizumab (Praxbind)"
+     ],
+     [
+      "Apixaban",
+      "Direct Factor Xa",
+      "27% (Lowest renal clearance)",
+      "Andexanet alfa"
+     ],
+     [
+      "Rivaroxaban",
+      "Direct Factor Xa",
+      "36% (Renal / Fecal excretion)",
+      "Andexanet alfa"
+     ],
+     [
+      "Edoxaban",
+      "Direct Factor Xa",
+      "50% (Moderate renal clearance)",
+      "Andexanet alfa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Specific humanized monoclonal antibody fragments achieve instantaneous reversal of dabigatran-induced anticoagulation during life-threatening haemorrhagic emergencies. Administering **idarucizumab** delivers a humanized Fab fragment that binds both free and thrombin-bound dabigatran with an affinity 350-fold higher than dabigatran's affinity for native thrombin. Intravenous administration of five grams of idarucizumab immediately neutralizes the anticoagulant effect within minutes, normalizing coagulation parameters and permitting emergency surgery. For factor Xa inhibitors (apixaban, rivaroxaban), andexanet alfa, a recombinant catalytically inactive decoy factor Xa molecule, acts as a molecular decoy to bind and sequester circulating inhibitors.",
+   "say": "Specific humanized monoclonal antibody fragments achieve instantaneous reversal of dabigatran anticoagulation during life-threatening haemorrhagic emergencies. Administering idarucizumab delivers a humanized Fab fragment that binds free and thrombin-bound dabigatran with affinity 350-fold higher than native thrombin. Intravenous administration neutralizes anticoagulation within minutes, permitting emergent surgery. For factor Xa inhibitors, andexanet alfa serves as a decoy molecule to restore haemostasis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Idarucizumab (Praxbind)",
+     "points": [
+      "Humanized Fab antibody fragment targeting Dabigatran",
+      "Binding affinity 350x higher than thrombin",
+      "Dose: 5 g IV (two consecutive 2.5 g vials)",
+      "Instantaneous complete reversal within minutes",
+      "Zero procoagulant rebound risk"
+     ]
+    },
+    "right": {
+     "title": "Andexanet Alfa (Andexxa)",
+     "points": [
+      "Recombinant modified decoy Factor Xa protein",
+      "Binds Apixaban, Rivaroxaban, and LMWH",
+      "Lacks catalytic activity (Ser to Ala mutation)",
+      "Administered as IV bolus followed by 2-hour infusion",
+      "Carries small risk of rebound thrombosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Modern blood banking separates donated whole blood into distinct concentrated components to optimize clinical utility and minimise volume overload. Blood **components** include packed red blood cells to restore tissue oxygen delivery, platelet concentrates to treat thrombocytopenia or functional platelet defects, fresh frozen plasma containing physiological concentrations of all clotting factors, and cryoprecipitate enriched in fibrinogen, factor VIII, and von Willebrand factor. Leukodepletion filters remove passenger donor white blood cells from cellular components, dramatically decreasing febrile non-haemolytic transfusion reactions, cytomegalovirus transmission, and HLA alloimmunization.",
+   "say": "Modern blood banking separates donated whole blood into distinct concentrated components to optimize clinical utility and minimise volume overload. Blood components include packed red blood cells, platelet concentrates, fresh frozen plasma containing all clotting factors, and cryoprecipitate enriched in fibrinogen. Leukodepletion filters remove donor white blood cells from cellular components, dramatically decreasing febrile reactions, cytomegalovirus transmission, and HLA alloimmunization.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blood Component",
+     "Storage Conditions",
+     "Shelf-Life Duration",
+     "Primary Clinical Indication"
+    ],
+    "rows": [
+     [
+      "Packed Red Blood Cells",
+      "1°C to 6°C",
+      "35 to 42 days (CPDA-1 / SAGM)",
+      "Symptomatic anaemia, acute blood loss (Hb < 7 g/dL)"
+     ],
+     [
+      "Platelet Concentrates",
+      "20°C to 24°C with agitation",
+      "5 to 7 days (Bacterial risk)",
+      "Thrombocytopenia bleeding, prophylaxis (< 10,000/mcL)"
+     ],
+     [
+      "Fresh Frozen Plasma",
+      "Frozen <= -18°C",
+      "12 months",
+      "Multiple factor deficiencies, liver coagulopathy, DIC"
+     ],
+     [
+      "Cryoprecipitate",
+      "Frozen <= -18°C",
+      "12 months",
+      "Hypofibrinogenemia (< 150 mg/dL), massive transfusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A catastrophic immunological emergency triggered by ABO incompatibility results from clerical patient identification or crossmatching errors. In an **acute haemolytic transfusion reaction**, preformed recipient IgM isohemagglutinins bind transfused donor erythrocytes, triggering immediate classical complement activation and intravascular haemolysis. Patients experience sudden fever, chills, chest tightness, dyspnoea, flank pain, hypotension, and acute disseminated intravascular coagulation within minutes of starting transfusion. Management mandates immediate cessation of the product and aggressive isotonic fluid resuscitation to maintain brisk urine output.",
+   "say": "A catastrophic immunological emergency triggered by ABO incompatibility results from clerical identification or crossmatching errors. In an acute haemolytic transfusion reaction, preformed recipient IgM antibodies bind transfused donor red cells, triggering immediate complement activation and intravascular lysis. Patients experience fever, chest tightness, flank pain, hypotension, and acute DIC within minutes. Management requires stopping the transfusion immediately and maintaining brisk urine output with fluid resuscitation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-haemolytic-transfusion-reaction-fig1.webp",
+    "alt": "Pathophysiological cascade of ABO mismatch, intravascular complement lysis, and renal tubule obstruction.",
+    "caption": "ABO incompatibility triggering intravascular complement activation, free haemoglobinuria, and shock. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The leading cause of transfusion-related mortality involves immune-mediated acute lung injury following plasma-containing blood transfusion. In **trali** (transfusion-related acute lung injury), anti-HLA class I, class II, or anti-human neutrophil antigen (HNA) antibodies in donor plasma bind recipient neutrophils sequestered in pulmonary microvessels. Activated neutrophils degranulate, releasing reactive oxygen species and proteases that destroy capillary endothelial junctions, producing non-cardiogenic pulmonary oedema within six hours of transfusion. Patients present with acute hypoxaemia, fever, hypotension, and bilateral fluffy pulmonary infiltrates, exhibiting normal central venous and pulmonary capillary wedge pressures.",
+   "say": "The leading cause of transfusion-related mortality involves immune-mediated acute lung injury following plasma-containing blood transfusion. In TRALI, donor anti-HLA or anti-neutrophil antibodies bind recipient neutrophils sequestered in pulmonary microvessels. Activated neutrophils degranulate, destroying capillary endothelial junctions and producing non-cardiogenic pulmonary oedema within six hours. Patients present with hypoxaemia, fever, hypotension, and bilateral infiltrates with normal cardiac filling pressures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TRALI (Non-Cardiogenic Permeability)",
+     "points": [
+      "Immune neutrophil activation via donor anti-HLA/HNA",
+      "Non-cardiogenic pulmonary capillary leak",
+      "Blood pressure: Typically hypotensive / fever",
+      "BNP / NT-proBNP: Normal or minimally elevated",
+      "Response to diuretics: Ineffective; requires lung-protective ventilation"
+     ]
+    },
+    "right": {
+     "title": "TACO (Cardiogenic Hydrostatic Overload)",
+     "points": [
+      "Circulatory hydrostatic volume overload",
+      "Left ventricular diastolic / systolic failure",
+      "Blood pressure: Typically hypertensive, afebrile",
+      "BNP / NT-proBNP: Markedly elevated (> 1.5x rise)",
+      "Response to diuretics: Dramatic improvement with IV Furosemide"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Circulatory hydrostatic volume overload resulting from excessive transfusion volume or rapid infusion rate defines **taco** (transfusion-associated circulatory overload). Striking predominantly elderly individuals with compromised cardiopulmonary or renal reserve, excessive intravascular volume acutely elevates left ventricular filling pressures, causing hydrostatic transudation into alveolar spaces within six hours of transfusion. Patients present with dyspnoea, orthopnoea, cyanosis, tachycardia, acute hypertension, elevated jugular venous pressure, bilateral basal crepitations, and wide S2 split. Management requires immediately stopping the transfusion, sitting the patient upright, administering high-flow oxygen, and intravenous furosemide diuresis.",
+   "say": "Circulatory hydrostatic volume overload resulting from excessive transfusion volume or rapid infusion rate defines TACO. Striking predominantly elderly patients with compromised cardiopulmonary reserve, excessive volume acutely elevates left ventricular filling pressures, causing hydrostatic alveolar oedema within six hours. Patients present with dyspnoea, acute hypertension, elevated jugular venous pressure, and pulmonary crackles. Management requires stopping the transfusion, sitting upright, and intravenous furosemide diuresis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rapid",
+      "label": "Rapid / Excessive Blood Transfusion Volume"
+     },
+     {
+      "id": "press",
+      "label": "Acute Rise in Left Atrial & Hydrostatic Capillary Pressure"
+     },
+     {
+      "id": "fluid",
+      "label": "Alveolar Hydrostatic Transudation & Acute Pulmonary Oedema"
+     },
+     {
+      "id": "rx",
+      "label": "Upright Posture + High-Flow O2 + IV Furosemide (40-80 mg)"
+     }
+    ],
+    "edges": [
+     [
+      "rapid",
+      "press"
+     ],
+     [
+      "press",
+      "fluid"
+     ],
+     [
+      "fluid",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exsanguinating haemorrhage requiring replacement of the patient's entire circulating blood volume within twenty-four hours triggers the massive transfusion protocol. Characterized clinically as **massive transfusion**, rapid crystalloid and red cell administration risks the lethal triad of hypothermia, metabolic acidosis, and consumptive dilution coagulopathy. Modern trauma resuscitation mandates a balanced 1:1:1 ratio protocol, infusing equal proportions of packed red blood cells, fresh frozen plasma, and platelets. In severe hypocalcaemia resulting from citrate toxicity (citrate chelating ionized calcium), serial monitoring of ionized calcium and intravenous calcium gluconate replacement are mandatory.",
+   "say": "Exsanguinating haemorrhage requiring replacement of the patient's entire circulating blood volume within twenty-four hours triggers the massive transfusion protocol. Rapid crystalloid and red cell administration risks the lethal triad of hypothermia, metabolic acidosis, and coagulopathy. Modern trauma resuscitation mandates a balanced 1:1:1 ratio protocol, infusing equal proportions of packed red blood cells, fresh frozen plasma, and platelets. Ionized calcium must be monitored and replaced to counteract citrate toxicity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/massive-transfusion-fig1.webp",
+    "alt": "Pathophysiological diagram illustrating the lethal triad of trauma and balanced 1:1:1 massive transfusion protocol.",
+    "caption": "Balanced 1:1:1 damage control resuscitation countering the lethal triad in massive transfusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Delayed haemolytic reactions occurring one to two weeks following blood transfusion reflect an anamnestic secondary immune response against minor red cell antigens. Triggering **delayed haemolytic transfusion reaction**, recipients previously alloimmunized through pregnancy or past transfusions harbour low, undetectable antibody titres against Kidd (Jka, Jkb), Rh, or Duffy antigens. Transfusion of antigen-positive blood stimulates an anamnestic IgG response; IgG-coated donor red cells undergo extravascular clearance by splenic macrophages seven to ten days post-transfusion, manifesting as unexpected hemoglobin drop, low-grade fever, and mild unconjugated hyperbilirubinaemia.",
+   "say": "Delayed haemolytic reactions occurring one to two weeks following blood transfusion reflect an anamnestic secondary immune response against minor red cell antigens. Triggering delayed haemolytic transfusion reaction, recipients previously alloimmunized harbour undetectable antibody titres against Kidd or Duffy antigens. Transfusion stimulates an anamnestic IgG response, leading to extravascular clearance by splenic macrophages days later, manifesting as an unexplained hemoglobin drop and mild jaundice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "anam",
+      "label": "Prior Alloimmunization to Kidd / Rh / Duffy Antigen"
+     },
+     {
+      "id": "trans",
+      "label": "Transfusion of Antigen-Positive RBCs with Undetectable Titres"
+     },
+     {
+      "id": "surge",
+      "label": "Anamnestic IgG Surge at 7-14 Days Post-Transfusion"
+     },
+     {
+      "id": "clear",
+      "label": "Extravascular Splenic Lysis: Falling Hb & Mild Spherocytosis"
+     }
+    ],
+    "edges": [
+     [
+      "anam",
+      "trans"
+     ],
+     [
+      "trans",
+      "surge"
+     ],
+     [
+      "surge",
+      "clear"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
