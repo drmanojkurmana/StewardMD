@@ -1,0 +1,140 @@
+{
+  "id": "pnp-pediatric-rrt-crrt-and-pd",
+  "title": "Pediatric Renal Replacement Therapy: CRRT, Peritoneal Dialysis and Hemodialysis",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Pediatric AKI, Dialysis and Chronic Kidney Disease",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Fluid overload exceeding ten to fifteen percent in critically ill children is a decisive trigger for initiating renal replacement.",
+      "tx": "Recognize critical clinical triggers and **Indications and fluid overload threshold (10-15%)** to initiate renal replacement therapy. In pediatric acute kidney injury, renal replacement is urgently indicated for refractory hyperkalemia (> 6.5 mEq/L), severe metabolic acidosis, symptomatic uremia, and particularly fluid overload exceeding 10-15% of baseline body weight, as fluid overload > 15-20% independently correlates with severe multiorgan failure and markedly increased pediatric ICU mortality.",
+      "vis": {
+        "kind": "table",
+        "title": "Pediatric Renal Replacement Indications",
+        "cols": ["Indication", "Clinical Criterion", "Pathophysiologic Threat"],
+        "rows": [
+          ["Fluid overload", "> 10-15% weight gain from baseline", "Pulmonary edema, prolonged mechanical ventilation"],
+          ["Hyperkalemia", "Serum potassium > 6.5 mEq/L refractory", "Fatal cardiac arrhythmias and conduction arrest"],
+          ["Metabolic acidosis", "pH < 7.15, standard bicarb unresponsive", "Myocardial depression and vascular collapse"],
+          ["Uremic complications", "Encephalopathy, pericarditis, bleeding", "Multi-organ failure and neurotoxicity"]
+        ]
+      }
+    },
+    {
+      "say": "Extracorporeal circuit blood volume must never exceed eight to ten percent of the infant's total circulating volume.",
+      "tx": "Calculate hemodynamic constraints including **Circuit blood volume constraint (< 8-10%)** prior to pediatric cannulation. To prevent hypovolemic shock, circuit blood volume (combined volume of dialysis tubing lines and dialyzer filter) must not exceed 8-10% of the patient's estimated total blood volume (calculated at 80 mL/kg for infants); whenever the circuit exceeds 10% of circulating volume, the system must be primed with 5% albumin or packed red blood cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "calc", "label": "Calculate Total Blood Volume (80 mL/kg)"},
+          {"id": "eval", "label": "Compare Circuit Volume to Patient TBV"},
+          {"id": "prime", "label": "> 10% TBV: Mandatory blood or 5% albumin prime"}
+        ],
+        "edges": [
+          ["calc", "eval"],
+          ["eval", "prime"]
+        ]
+      }
+    },
+    {
+      "say": "Continuous venovenous hemodiafiltration provides optimal hemodynamic stability for unstable children in shock.",
+      "tx": "Select appropriate modalities comparing **CRRT modalities: CVVH vs CVVHD vs CVVHDF** in the pediatric ICU. Continuous venovenous hemofiltration (CVVH) utilizes convection to clear middle molecules, continuous venovenous hemodialysis (CVVHD) uses diffusion for small solute clearance, and continuous venovenous hemodiafiltration (CVVHDF) combines both convection and diffusion, delivering superior clearance in hemodynamically unstable children with septic shock and multiorgan failure.",
+      "vis": {
+        "kind": "table",
+        "title": "Comparison of Continuous Extracorporeal Modalities",
+        "cols": ["Modality", "Primary Mechanism", "Clinical Niche in Pediatric ICU"],
+        "rows": [
+          ["CVVH", "Pure convection via ultrafiltration", "Removal of middle molecules and inflammatory mediators"],
+          ["CVVHD", "Pure diffusion via counter-current dialysate", "Rapid clearance of small solutes like urea and ammonia"],
+          ["CVVHDF", "Combined convection and diffusion", "Maximal solute clearance in unstable septic shock"]
+        ]
+      }
+    },
+    {
+      "say": "Regional citrate anticoagulation avoids systemic bleeding risks by chelating ionized calcium within the filter circuit.",
+      "tx": "Prescribe and monitor filter safety using **Regional citrate anticoagulation protocol** during pediatric continuous therapy. Regional citrate anticoagulation is the preferred method for pediatric CRRT; trisodium citrate is infused pre-filter to chelate ionized calcium (target circuit post-filter ionized calcium 0.25-0.40 mmol/L), while intravenous calcium gluconate or chloride is infused post-filter to normalize systemic ionized calcium (target 1.1-1.3 mmol/L).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "pref", "label": "Pre-filter: Infuse trisodium citrate (chelates Ca2+)"},
+          {"id": "filt", "label": "In-filter: Target circuit iCa 0.25-0.40 mmol/L"},
+          {"id": "postf", "label": "Post-filter: Infuse IV calcium (systemic iCa 1.1-1.3)"}
+        ],
+        "edges": [
+          ["pref", "filt"],
+          ["filt", "postf"]
+        ]
+      }
+    },
+    {
+      "say": "Citrate accumulation creates metabolic toxicity characterized by an elevated ratio of total to ionized calcium.",
+      "tx": "Monitor blood chemistry for signs of **Citrate toxicity and total-to-ionized calcium ratio** during continuous dialysis. Citrate accumulation occurs in severe hepatic failure or hypoperfusion; it is clinically identified by worsening metabolic acidosis with an elevated anion gap, refractory systemic hypocalcemia, and pathognomonic total serum calcium to ionized calcium ratio > 2.5, requiring immediate reduction or cessation of citrate infusion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Citrate Kinetics",
+          "points": [
+            "Hepatic metabolism of citrate to bicarbonate",
+            "Stable systemic ionized calcium (1.1-1.3 mmol/L)",
+            "Total Ca to ionized Ca ratio < 2.5"
+          ]
+        },
+        "right": {
+          "title": "Citrate Toxicity / Lock",
+          "points": [
+            "Impaired hepatic clearance in shock or cirrhosis",
+            "Refractory hypocalcemia and widening anion gap",
+            "Total calcium to ionized calcium ratio > 2.5"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Acute peritoneal dialysis provides life-saving renal replacement in neonates and centers without vascular access machines.",
+      "tx": "Implement bedside technique for **Acute peritoneal dialysis catheter and fill volumes** in small pediatric patients. Peritoneal dialysis (PD) is the modality of choice in neonates, infants, and low-resource settings; using a flexible Tenckhoff or straight catheter, initial fill volumes start low at 10-20 mL/kg to assess tolerance, and are gradually titrated up to 30-40 mL/kg (or 800-1100 mL/m²) as tolerated without causing respiratory compromise.",
+      "vis": {
+        "kind": "table",
+        "title": "Peritoneal Dialysis Volume Progression",
+        "cols": ["Phase", "Fill Volume", "Clinical Objective"],
+        "rows": [
+          ["Initial run-in", "10-20 mL/kg", "Assess comfort, prevent leakage and splinting"],
+          ["Maintenance infant", "25-30 mL/kg", "Optimize peritoneal surface area contact"],
+          ["Fully expanded child", "35-40 mL/kg (or 800-1100 mL/m²)", "Achieve maximal ultrafiltration and clearance"]
+        ]
+      }
+    },
+    {
+      "say": "Turbid peritoneal effluent containing over one hundred white blood cells per microliter confirms acute bacterial peritonitis.",
+      "tx": "Rapidly diagnose and manage suspected **PD peritonitis criteria and empiric therapy** in children on dialysis. PD peritonitis is diagnosed by cloudy effluent dialysate, abdominal pain, and an effluent cell count > 100 WBC/mcL with >= 50% polymorphonuclear leukocytes; empiric treatment requires immediate intraperitoneal antibiotics covering gram-positive organisms with cefazolin or vancomycin and gram-negative coverage with ceftazidime or an aminoglycoside.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "cloud", "label": "Cloudy peritoneal effluent + abdominal pain"},
+          {"id": "count", "label": "Effluent WBC > 100/mcL with >= 50% PMNs"},
+          {"id": "rx", "label": "Intraperitoneal Cefazolin/Vancomycin + Ceftazidime"}
+        ],
+        "edges": [
+          ["cloud", "count"],
+          ["count", "rx"]
+        ]
+      }
+    },
+    {
+      "say": "Overly rapid clearance of urea during hemodialysis can cause life-threatening cerebral edema and neurological deterioration.",
+      "tx": "Institute rigorous precautions against **Dialysis disequilibrium syndrome prevention** during initiation of intermittent hemodialysis. Dialysis disequilibrium syndrome results from rapid solute (urea) clearance causing water movement into brain tissue; prevention requires limiting initial blood flow rate (3-5 mL/kg/min), limiting treatment duration to 2 hours, and restricting blood urea nitrogen reduction to < 30-40% on the inaugural hemodialysis run.",
+      "vis": {
+        "kind": "table",
+        "title": "Disequilibrium Syndrome Preventive Strategy",
+        "cols": ["Parameter", "Inaugural HD Limit", "Rationale"],
+        "rows": [
+          ["Treatment duration", "Maximum 2 hours", "Prevents abrupt drop in plasma osmolality"],
+          ["Blood flow rate", "3-5 mL/kg/min", "Gradual urea extraction across dialyzer"],
+          ["BUN reduction ratio", "Restrict to < 30-40%", "Prevents osmotic water shift into cerebral cells"],
+          ["Adjunctive osmoprotection", "Mannitol infusion (0.5-1.0 g/kg)", "Supports extracellular osmolality during run"]
+        ]
+      }
+    }
+  ]
+}
