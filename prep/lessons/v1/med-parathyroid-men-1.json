@@ -1,0 +1,237 @@
+{
+ "v": 1,
+ "module": "med-parathyroid",
+ "subject": "medicine",
+ "title": "Multiple Endocrine Neoplasia and Vitamin D Toxicity",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Inherited predisposition syndromes caused by autosomal dominant mutations orchestrate synchronized neuroendocrine neoplasia across multiple organ systems. Characterized by the classical triad of pituitary, parathyroid, and pancreatic islet tumours, **men 1** (Wermer syndrome) stems from inactivating germline mutations in the MEN1 tumour suppressor gene encoding menin. Primary hyperparathyroidism represents the earliest and most penetrant manifestation, affecting over ninety-five percent of gene carriers by age fifty. It typically presents with multiglandular parathyroid hyperplasia rather than a solitary adenoma, predisposing to recurrent hypercalcaemia.",
+   "say": "Inherited predisposition syndromes caused by autosomal dominant mutations orchestrate synchronized neuroendocrine tumours across multiple systems. Characterized by the classical triad of pituitary, parathyroid, and pancreatic islet tumours, men 1 stems from inactivating mutations in the MEN1 tumour suppressor gene encoding menin. Primary hyperparathyroidism represents the earliest and most penetrant manifestation, affecting over ninety-five percent of gene carriers. It typically presents with multiglandular hyperplasia rather than a solitary adenoma, risking recurrent hypercalcaemia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/men1-fig1.webp",
+    "alt": "Organ distribution and clinical manifestations of Multiple Endocrine Neoplasia Type 1.",
+    "caption": "Anatomical distribution of pituitary, parathyroid, and enteropancreatic tumours in MEN 1. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Gain-of-function proto-oncogene mutations produce a distinct familial syndrome featuring medullary thyroid carcinoma and phaeochromocytoma. Designated as **men 2a** (Sipple syndrome), this autosomal dominant condition is driven by germline activating missense mutations in the RET proto-oncogene on chromosome 10q11. Nearly one hundred percent of gene carriers develop multifocal, bilateral medullary thyroid carcinoma. Roughly fifty percent develop phaeochromocytomas, and twenty to thirty percent develop primary parathyroid hyperplasia. Early prophylactic total thyroidectomy in childhood is mandatory based on RET mutation risk stratification.",
+   "say": "Gain-of-function proto-oncogene mutations produce a distinct familial syndrome featuring medullary thyroid carcinoma and phaeochromocytoma. Designated as men 2a, this autosomal dominant condition is driven by activating mutations in the RET proto-oncogene on chromosome ten. Nearly all gene carriers develop bilateral medullary thyroid carcinoma arising from calcitonin-secreting C cells. Roughly half develop phaeochromocytomas, and thirty percent develop parathyroid hyperplasia. Prophylactic total thyroidectomy is performed in childhood.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/men2-fig1.webp",
+    "alt": "Tumour spectrum and organ involvement of Multiple Endocrine Neoplasia Type 2A and 2B.",
+    "caption": "Tumour spectrum and RET proto-oncogene manifestations in MEN 2A and 2B. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A highly aggressive variant of hereditary neuroendocrine neoplasia pairs lethal early-onset medullary carcinoma with characteristic physical stigmata. Manifesting without parathyroid involvement, **men 2b** (Gorlin syndrome) is driven by specific RET codon M918T mutations in over ninety-five percent of cases. Medullary thyroid carcinoma develops within the first year of life with rapid, early lymphatic and hematogenous metastasis, necessitating prophylactic total thyroidectomy in infancy. Striking physical stigmata include a marfanoid habitus, mucosal neuromas on the lips and anterior tongue, thickened corneal nerve fibres, and intestinal ganglioneuromatosis causing severe chronic constipation or megacolon.",
+   "say": "A highly aggressive variant of hereditary neuroendocrine neoplasia pairs lethal early-onset medullary carcinoma with characteristic physical stigmata. Manifesting without parathyroid involvement, men 2b is driven by specific RET codon M918T mutations in most cases. Medullary thyroid carcinoma develops within the first year of life with early metastasis, requiring prophylactic thyroidectomy in infancy. Physical stigmata include a marfanoid habitus, mucosal neuromas on the lips and tongue, and intestinal ganglioneuromatosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MEN 2A Phenotype",
+     "points": [
+      "Medullary thyroid carcinoma (100%)",
+      "Phaeochromocytoma (50%, often bilateral)",
+      "Primary parathyroid hyperplasia (20-30%)",
+      "May exhibit cutaneous lichen amyloidosis"
+     ]
+    },
+    "right": {
+     "title": "MEN 2B Phenotype",
+     "points": [
+      "Aggressive medullary thyroid carcinoma in infancy",
+      "Phaeochromocytoma (50%, bilateral)",
+      "Mucosal neuromas (lips, tongue, conjunctiva)",
+      "Marfanoid habitus and intestinal ganglioneuromas"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exogenous hypervitaminosis driven by excessive ingestion of fat-soluble secosteroids produces severe hypercalcaemia with suppressed parathyroid hormone. Developing **vitamin d intoxication** occurs when mega-doses of ergocalciferol or cholecalciferol overwhelm hepatic 25-hydroxylase and circulating binding capacity. Marked elevations of circulating 25-hydroxyvitamin D directly stimulate enterocyte calcium absorption and mobilize skeletal mineral. Laboratory profiling reveals hypercalcaemia, hypercalciuria, hyperphosphataemia, suppressed intact PTH, and 25-hydroxyvitamin D levels exceeding one hundred and fifty nanograms per millilitre. Because vitamin D stores in adipose tissue, toxicity persists for weeks, responding to volume repletion, loop diuretics, and systemic glucocorticoids.",
+   "say": "Exogenous hypervitaminosis driven by excessive ingestion of fat-soluble vitamins produces severe hypercalcaemia with suppressed parathyroid hormone. Developing vitamin d intoxication occurs when mega-doses of cholecalciferol overwhelm hepatic enzymes and circulating binding capacity. Marked elevations of 25-hydroxyvitamin D stimulate enterocyte calcium absorption and bone resorption. Laboratory profiling reveals hypercalcaemia, hyperphosphataemia, suppressed intact PTH, and high vitamin D levels. Therapy includes saline rehydration, loop diuretics, and glucocorticoids.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tox",
+      "label": "Massive vitamin D ingestion: Serum 25-OH-D > 150 ng/mL"
+     },
+     {
+      "id": "abs",
+      "label": "Excessive gut Ca2+ and PO4- absorption + osteoclast resorption"
+     },
+     {
+      "id": "lab",
+      "label": "Suppressed PTH (< 5 pg/mL) + Hypercalcaemia + Hyperphosphataemia"
+     },
+     {
+      "id": "rx",
+      "label": "Treatment: Isotonic saline, furosemide, and oral Prednisone (40 mg/day)"
+     }
+    ],
+    "edges": [
+     [
+      "tox",
+      "abs"
+     ],
+     [
+      "abs",
+      "lab"
+     ],
+     [
+      "lab",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pancreatic neuroendocrine tumours in MEN 1 exhibit diverse secretory patterns and unpredictable malignant potential. The most common functional enteropancreatic neoplasm is gastrinoma, leading to severe Zollinger-Ellison syndrome with refractory, recurrent peptic ulcers. The second most frequent is insulinoma, causing episodic fasting neuroglycopenic hypoglycaemia. Glucagonomas provoke necrolytic migratory erythema, while VIPomas trigger profuse watery diarrhoea, hypokalaemia, and achlorhydria (Verner-Morrison syndrome). In contrast to sporadic single adenomas, **enteropancreatic tumours** in MEN 1 are characteristically multiple, multifocal, and scattered throughout the duodenum and pancreatic parenchyma, complicating curative surgical resection.",
+   "say": "Pancreatic neuroendocrine tumours in MEN 1 exhibit diverse secretory patterns and unpredictable malignant potential. The most common functional neoplasm is gastrinoma, leading to severe Zollinger-Ellison syndrome with refractory peptic ulcers. The second most frequent is insulinoma, causing fasting hypoglycaemia. Glucagonomas provoke necrolytic migratory erythema, while VIPomas trigger profuse watery diarrhoea and hypokalaemia. Enteropancreatic tumours in MEN 1 are characteristically multiple, multifocal, and scattered throughout the duodenum and pancreas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour Subtype",
+     "Secreted Hormone",
+     "Classic Clinical Syndrome",
+     "Primary Diagnostic Biomarker"
+    ],
+    "rows": [
+     [
+      "Gastrinoma",
+      "Gastrin",
+      "Zollinger-Ellison (Severe recurrent PUD)",
+      "Fasting serum gastrin > 1000 pg/mL"
+     ],
+     [
+      "Insulinoma",
+      "Insulin / C-peptide",
+      "Whipple triad (Fasting neuroglycopenia)",
+      "72-hour fasting hypoglycaemia test"
+     ],
+     [
+      "Glucagonoma",
+      "Glucagon",
+      "Necrolytic migratory erythema, diabetes",
+      "Elevated fasting plasma glucagon"
+     ],
+     [
+      "VIPoma",
+      "Vasoactive Intestinal Peptide",
+      "WDHA syndrome (Watery diarrhoea, low K+)",
+      "Markedly elevated fasting plasma VIP"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical management of multiglandular parathyroid disease in MEN 1 mandates balancing recurrence prevention against permanent hypoparathyroidism. Because all four parathyroid glands possess the germline mutation, leaving normal tissue risks late recurrent hyperparathyroidism. Performing **subtotal parathyroidectomy** with resection of three and a half glands, or total parathyroidectomy with autotransplantation into the forearm brachioradialis muscle, represents the standard surgical strategy. If hypercalcaemia recurs years later, a portion of the autotransplanted tissue can be excised under local anaesthesia in the forearm, avoiding reoperative cervical exploration.",
+   "say": "Surgical management of multiglandular parathyroid disease in MEN 1 mandates balancing recurrence prevention against permanent hypoparathyroidism. Because all four glands possess the germline mutation, leaving tissue risks late recurrent hyperparathyroidism. Performing subtotal parathyroidectomy with resection of three and a half glands, or total parathyroidectomy with forearm autotransplantation, represents the standard strategy. Forearm graft recurrence can be excised under local anaesthesia, avoiding reoperative cervical exploration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "MEN 1 multiglandular parathyroid hyperplasia"
+     },
+     {
+      "id": "surg",
+      "label": "Total parathyroidectomy + forearm brachioradialis autotransplantation"
+     },
+     {
+      "id": "recur",
+      "label": "Recurrence managed easily via minor forearm excision under local anaesthesia"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "surg"
+     ],
+     [
+      "surg",
+      "recur"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surveillance protocols for asymptomatic mutation carriers ensure early detection of lethal neuroendocrine neoplasms before distant metastatic dissemination. Genetic testing for **ret mutations** is recommended for all first-degree relatives of MEN 2 probands. Carriers of high-risk mutations (codons 634 or 918) undergo prophylactic total thyroidectomy in early childhood, monitored by serial serum calcitonin and carcinoembryonic antigen. Prior to any neck surgery, clinicians must rigorously exclude coexisting phaeochromocytoma via plasma fractionated metanephrines, because administering general anaesthesia in unblocked phaeochromocytoma precipitates fatal intraoperative hypertensive crisis.",
+   "say": "Surveillance protocols for asymptomatic mutation carriers ensure early detection of neuroendocrine neoplasms before distant metastasis. Genetic testing for ret mutations is recommended for all first-degree relatives of MEN 2 probands. Carriers of high-risk mutations undergo prophylactic total thyroidectomy in early childhood, monitored by serum calcitonin. Prior to any neck surgery, clinicians must exclude coexisting phaeochromocytoma, because general anaesthesia in unblocked phaeochromocytoma precipitates fatal intraoperative hypertensive crises.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rule of Priority in MEN 2 Surgery",
+     "points": [
+      "Screen for phaeochromocytoma BEFORE neck surgery",
+      "Measure 24-hr urine or plasma metanephrines",
+      "If phaeochromocytoma present, resect ADRENAL FIRST",
+      "Alpha-blockade with phenoxybenzamine prior to surgery"
+     ]
+    },
+    "right": {
+     "title": "Medullary Thyroidectomy Timing",
+     "points": [
+      "MEN 2B (M918T): Thyroidectomy in first year of life",
+      "MEN 2A (C634): Thyroidectomy before age 5 years",
+      "Central compartment lymph node dissection",
+      "Prevents lethal early calcitonin-producing metastasis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Differentiating hypercalcaemia etiologies across complex metabolic syndromes relies on integrating intact hormone, metabolite, and imaging findings. Intact parathyroid hormone is elevated in MEN 1 and primary hyperparathyroidism, but suppressed in vitamin D intoxication and humoral malignancy. Serum 1,25-dihydroxyvitamin D is elevated in sarcoidosis and lymphoma, whereas 25-hydroxyvitamin D is elevated in exogenous toxicity. Comprehensive assessment of serum phosphate, alkaline phosphatase, and urinary calcium guides targeted pharmacological therapy, preserving renal filtration and skeletal **bone density**.",
+   "say": "Differentiating hypercalcaemia etiologies across complex syndromes relies on integrating intact hormone, metabolite, and imaging findings. Intact parathyroid hormone is elevated in MEN 1 and primary hyperparathyroidism, but suppressed in vitamin D toxicity and humoral malignancy. Serum calcitriol is elevated in sarcoidosis and lymphoma, whereas 25-hydroxyvitamin D is elevated in exogenous toxicity. Assessment of phosphate and urinary calcium guides targeted therapy, preserving renal filtration and bone density.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiology",
+     "Intact PTH",
+     "25-OH-Vitamin D",
+     "1,25-(OH)2-Vitamin D",
+     "Serum Phosphate"
+    ],
+    "rows": [
+     [
+      "MEN 1 Parathyroid Hyperplasia",
+      "Elevated",
+      "Normal",
+      "Normal or elevated",
+      "Low (< 2.5 mg/dL)"
+     ],
+     [
+      "Vitamin D Intoxication",
+      "Suppressed (< 5 pg/mL)",
+      "Markedly high (> 150 ng/mL)",
+      "Normal or elevated",
+      "High (> 4.5 mg/dL)"
+     ],
+     [
+      "Sarcoidosis / Lymphoma",
+      "Suppressed (< 5 pg/mL)",
+      "Normal",
+      "Markedly high",
+      "Normal or high"
+     ],
+     [
+      "Humoral Malignancy (PTHrP)",
+      "Suppressed (< 5 pg/mL)",
+      "Normal",
+      "Low or normal",
+      "Low (< 2.5 mg/dL)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

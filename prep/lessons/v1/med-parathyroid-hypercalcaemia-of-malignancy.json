@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-parathyroid",
+ "subject": "medicine",
+ "title": "Hypercalcaemia of Malignancy and Hypoparathyroidism",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Severe, rapidly progressive hypercalcaemia occurring in hospitalized patients most frequently heralds an underlying advanced neoplasm. Developing **hypercalcaemia of malignancy** carries a grave clinical prognosis, with a median survival of less than three months from presentation. Malignancy causes hypercalcaemia via three major mechanisms: humoral hypercalcaemia mediated by circulating parathyroid hormone-related peptide, local osteolytic hypercalcaemia from bone metastases, and 1,25-dihydroxyvitamin D production in lymphomas. Unlike primary hyperparathyroidism, symptoms develop abruptly with marked dehydration, mental obtundation, and acute renal failure.",
+   "say": "Severe hypercalcaemia occurring in hospitalized patients most frequently heralds an underlying advanced neoplasm. Developing hypercalcaemia of malignancy carries a grave prognosis, with median survival under three months. Malignancy causes hypercalcaemia via humoral factors, local osteolytic metastases, or calcitriol production in lymphomas. Unlike primary hyperparathyroidism, symptoms develop abruptly with severe dehydration, confusion, and acute renal failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypercalcemia-fig1.webp",
+    "alt": "Pathophysiological pathways and tumor mechanisms driving hypercalcaemia of malignancy.",
+    "caption": "Humoral and osteolytic mechanisms driving severe hypercalcaemia of malignancy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Tumour secretion of a systemic peptide sharing structural homology with native parathyroid hormone drives the humoral variant of malignant hypercalcaemia. Secreted by squamous cell carcinomas of the lung, head, neck, and oesophagus, circulating **pthrp** binds to the common PTH1 receptor in bone and kidneys. This activation stimulates osteoclastic bone resorption and renal tubular calcium reabsorption while promoting urinary phosphate excretion. Because standard intact PTH assays detect the amino-terminal sequence of native hormone, endogenous intact PTH is completely suppressed, establishing the humoral malignant diagnosis.",
+   "say": "Tumour secretion of a systemic peptide sharing homology with native parathyroid hormone drives the humoral variant of malignant hypercalcaemia. Secreted by squamous carcinomas of the lung, head, and oesophagus, circulating pthrp binds to the common PTH1 receptor in bone and kidneys. This activation stimulates osteoclast resorption and renal calcium retention. Standard intact PTH assays reveal complete suppression of native hormone, confirming humoral malignancy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Humoral Hypercalcaemia (PTHrP)",
+     "points": [
+      "Squamous cell carcinoma of lung, head, neck, renal",
+      "Elevated circulating serum PTHrP levels",
+      "Endogenous intact PTH completely suppressed (< 5 pg/mL)",
+      "Normal or low 1,25-(OH)2D (unlike primary HPT)"
+     ]
+    },
+    "right": {
+     "title": "Osteolytic Hypercalcaemia",
+     "points": [
+      "Breast cancer, multiple myeloma, metastatic bone lesions",
+      "Local cytokine release (RANKL, IL-6, TNF)",
+      "Extensive osteolytic bone destruction on imaging",
+      "Both PTH and PTHrP are typically suppressed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An uncommon autosomal dominant disorder of calcium sensation mimics primary hyperparathyroidism but requires no surgical intervention. Caused by heterozygous inactivating mutations in the calcium-sensing receptor gene CASR, **familial hypocalciuric hypercalcaemia** shifts the physiological setpoint for calcium suppression upward. Chief cells and renal tubules perceive normal calcium levels as low, resulting in lifelong mild asymptomatic hypercalcaemia, borderline-elevated parathyroid hormone, and avid renal calcium recovery. Calculating a twenty-four-hour urine calcium-to-creatinine clearance ratio below zero point zero one confirms the benign condition, avoiding inappropriate parathyroidectomy.",
+   "say": "An uncommon autosomal dominant disorder of calcium sensation mimics primary hyperparathyroidism but requires no surgical intervention. Caused by inactivating mutations in the calcium-sensing receptor gene, familial hypocalciuric hypercalcaemia shifts the setpoint for calcium suppression upward. Chief cells and tubules perceive normal calcium as low, resulting in lifelong mild hypercalcaemia and avid renal calcium retention. A calcium-to-creatinine clearance ratio below zero point zero one confirms the benign condition.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gen",
+      "label": "Heterozygous CASR inactivating mutation: Blunted calcium sensing"
+     },
+     {
+      "id": "effect",
+      "label": "Renal tubules reabsorb Ca2+ avidly + mild unsuppressed PTH"
+     },
+     {
+      "id": "ratio",
+      "label": "Urine Ca/Cr clearance ratio < 0.01: Confirm FHH; avoid neck surgery"
+     }
+    ],
+    "edges": [
+     [
+      "gen",
+      "effect"
+     ],
+     [
+      "effect",
+      "ratio"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deficient parathyroid hormone synthesis produces hypocalcaemia with paradoxically elevated serum phosphate and absent calciuresis. Arising most commonly from accidental surgical excision or devascularization during total thyroidectomy, primary **hypoparathyroidism** impairs distal tubular calcium reabsorption and shuts down renal one-alpha-hydroxylase. Patients present with neuromuscular irritability, perioral paresthesias, painful carpopedal spasms, tetany, prolonged QT intervals on electrocardiography, and laryngospasm. Laboratory profiling reveals profound hypocalcaemia, hyperphosphataemia, and an undetectable or inappropriately low intact parathyroid hormone level.",
+   "say": "Deficient parathyroid hormone synthesis produces hypocalcaemia with elevated serum phosphate. Arising most commonly from accidental surgical excision during thyroidectomy, primary hypoparathyroidism impairs tubular calcium reabsorption and shuts down calcitriol synthesis. Patients present with neuromuscular irritability, perioral paresthesias, carpopedal spasms, tetany, and prolonged QT intervals. Laboratory testing confirms hypocalcaemia, hyperphosphataemia, and inappropriately low parathyroid hormone.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/parathyroid-calcium-disorders-fig1.webp",
+    "alt": "Diagnostic algorithm for hypercalcaemia and hypocalcaemia evaluating intact PTH and urinary calcium.",
+    "caption": "Diagnostic discrimination of parathyroid and non-parathyroid calcium derangements. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Emergency stabilization of acute severe symptomatic hypocalcaemia requires prompt parenteral cation replacement under continuous cardiac monitoring. Administering intravenous **calcium gluconate** provides elemental calcium without the intense tissue necrosis risk associated with calcium chloride if extravasation occurs. Initial therapy consists of one to two ampoules of ten percent calcium gluconate infused over ten to twenty minutes, followed by a continuous infusion. Concomitant hypomagnesaemia must be recognized and corrected immediately, because magnesium deficiency induces parathyroid gland resistance and impairs hormone exocytosis, rendering hypocalcaemia refractory to calcium replacement.",
+   "say": "Emergency stabilization of acute symptomatic hypocalcaemia requires prompt parenteral replacement under cardiac monitoring. Administering intravenous calcium gluconate provides elemental calcium without the tissue necrosis risk associated with calcium chloride extravasation. Initial therapy consists of ten percent calcium gluconate infused over twenty minutes, followed by continuous maintenance. Concomitant hypomagnesaemia must be corrected immediately, because low magnesium induces parathyroid resistance, rendering hypocalcaemia refractory.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sx",
+      "label": "Severe hypocalcaemic tetany / prolonged QT / stridor"
+     },
+     {
+      "id": "iv",
+      "label": "10% Calcium Gluconate (1-2 ampoules in 100 mL D5W over 20 min)"
+     },
+     {
+      "id": "mg",
+      "label": "Check and replete Magnesium (Target > 2.0 mg/dL)"
+     },
+     {
+      "id": "oral",
+      "label": "Transition to oral Calcitriol (0.25-1.0 mcg/day) + elemental Calcium"
+     }
+    ],
+    "edges": [
+     [
+      "sx",
+      "iv"
+     ],
+     [
+      "iv",
+      "mg"
+     ],
+     [
+      "mg",
+      "oral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic management of permanent hypoparathyroidism requires maintaining serum calcium in a safe, slightly subnormal target range. Administering active **calcitriol** (1,25-dihydroxyvitamin D3) is essential because the absent endogenous parathyroid hormone cannot stimulate renal one-alpha-hydroxylase to activate cholecalciferol. Oral calcium supplements are co-prescribed in divided doses. Because the absence of PTH promotes urinary calcium excretion, normalizing serum calcium often causes profound hypercalciuria, risking nephrolithiasis and nephrocalcinosis. Clinicians deliberately target serum calcium between eight point zero and eight point five milligrams per decilitre.",
+   "say": "Chronic management of permanent hypoparathyroidism requires maintaining serum calcium in a slightly subnormal range. Administering active calcitriol is essential because absent parathyroid hormone cannot activate vitamin D in the kidneys. Oral calcium supplements are co-prescribed in divided doses. Because absent PTH promotes urinary calcium wasting, normal serum levels cause hypercalciuria, risking nephrolithiasis. Clinicians deliberately target serum calcium between eight point zero and eight point five milligrams per decilitre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Goal",
+     "Target Parameter",
+     "Underlying Clinical Rationale"
+    ],
+    "rows": [
+     [
+      "Serum Calcium Target",
+      "8.0 to 8.5 mg/dL (Slightly subnormal)",
+      "Prevents symptoms while limiting severe hypercalciuria"
+     ],
+     [
+      "24-Hour Urine Calcium",
+      "< 300 mg/day (or < 4 mg/kg/day)",
+      "Prevents nephrocalcinosis, nephrolithiasis, and renal decline"
+     ],
+     [
+      "Serum Phosphate Target",
+      "High-normal (< 5.0 mg/dL)",
+      "Reduces calcium-phosphate precipitation product"
+     ],
+     [
+      "Calcium x Phosphate Product",
+      "< 55 mg2/dL2",
+      "Prevents ectopic soft-tissue and basal ganglia calcification"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autoimmune destruction of parathyroid tissue forms a key component of rare inherited polyglandular endocrinopathy syndromes. Manifesting as autoimmune **hypoparathyroidism**, this condition is the most frequent endocrine failure in autoimmune polyendocrinopathy-candidiasis-ectodermal dystrophy (APECED, or APS-1). Caused by autosomal recessive mutations in the autoimmune regulator gene AIRE, patients lack central thymic negative selection of self-reactive T cells. The classical diagnostic triad comprises chronic mucocutaneous candidiasis in childhood, followed by primary hypoparathyroidism and primary adrenal insufficiency (Addison disease), accompanied by dental enamel hypoplasia and vitiligo.",
+   "say": "Autoimmune destruction of parathyroid tissue forms a key component of inherited polyglandular syndromes. Manifesting as autoimmune hypoparathyroidism, this condition is the most frequent endocrine failure in autoimmune polyendocrinopathy-candidiasis-ectodermal dystrophy. Caused by mutations in the autoimmune regulator gene AIRE, patients lack central thymic selection of self-reactive T cells. The classical triad comprises chronic mucocutaneous candidiasis, hypoparathyroidism, and primary adrenal insufficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "APS-1 (APECED Triad)",
+     "points": [
+      "Chronic mucocutaneous candidiasis (first to appear)",
+      "Primary hypoparathyroidism (present in > 80%)",
+      "Primary adrenal insufficiency (Addison disease)",
+      "Autosomal recessive AIRE gene mutation on chromosome 21"
+     ]
+    },
+    "right": {
+     "title": "Clinical Surveillance",
+     "points": [
+      "Monitor serum calcium, PTH, and morning cortisol",
+      "Screen for autoimmune hepatitis and primary hypogonadism",
+      "Inspect for ectodermal dysplasia and nail dystrophy",
+      "Lifetime glucocorticoid and active calcitriol replacement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Longitudinal follow-up of hypoparathyroidism requires surveillance for intracranial calcifications and progressive renal damage. Chronic hyperphosphataemia with hypocalcaemia causes progressive deposition of calcium-phosphate crystals within the **basal ganglia**, leading to extrapyramidal movement disorders, parkinsonism, and chorea. In addition, subcapsular cataracts develop frequently from altered lens capsule permeability. Annual renal ultrasonography, twenty-four-hour urine calcium profiling, and slit-lamp examinations are mandatory to monitor therapeutic safety and detect complications before irreversible organ dysfunction occurs.",
+   "say": "Longitudinal follow-up of hypoparathyroidism requires surveillance for intracranial calcifications and renal damage. Chronic hyperphosphataemia with hypocalcaemia causes deposition of calcium-phosphate crystals within the basal ganglia, leading to extrapyramidal movement disorders and chorea. Subcapsular cataracts also develop frequently from altered lens permeability. Annual renal ultrasound, urine calcium profiling, and slit-lamp examinations are mandatory to monitor therapeutic safety.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "phos",
+      "label": "High Ca x PO4 product (> 55 mg2/dL2) in chronic disease"
+     },
+     {
+      "id": "dep",
+      "label": "Ectopic crystal deposition: Basal ganglia (Chorea) and ocular lens (Cataracts)"
+     },
+     {
+      "id": "prev",
+      "label": "Prevention: Calcitriol titration, thiazides for hypercalciuria, low PO4 diet"
+     }
+    ],
+    "edges": [
+     [
+      "phos",
+      "dep"
+     ],
+     [
+      "dep",
+      "prev"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
