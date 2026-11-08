@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sct-chest-wall-deformities-pectus",
+  "title": "Pectus Deformities: Haller Index, Minimally Invasive Nuss Procedure and Ravitch Repair",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 110 (Chest Wall: Congenital Deformities)",
+    "Nuss Minimally Invasive Pectus Excavatum Technique Guidelines",
+    "Chest Wall International Group (CWIG) Consensus Statements"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Pectus excavatum, commonly known as funnel chest, is the most common congenital chest wall deformity. Abnormal overgrowth of the costal cartilages displaces the lower body of the sternum posteriorly toward the vertebral column, which is recognized by surgical teams. The deformity occurs four times more frequently in males than in females.",
+      "tx": "**Pectus excavatum**, or **funnel chest**, represents the most prevalent congenital thoracic deformity, accounting for over 90 percent of chest wall anomalies. It is characterized by posterior depression of the sternal body and lower **costal cartilages**, exhibiting a marked male-to-female predominance with a ratio of 4 to 1.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-resp-inspection.webp",
+        "ar": 1.3333,
+        "caption": "Chest wall inspection in pectus excavatum and carinatum. Credit: StewardMD.",
+        "alt": "Clinical appearance of sternal depression and protrusion deformities of the thoracic wall."
+      }
+    },
+    {
+      "say": "The severity of pectus excavatum is objectively quantified using the Haller index measured on non-contrast chest computed tomography. The radiologist measures the transverse diameter of the inner chest wall at the deepest depression point. Dividing this by the distance between the posterior sternum and anterior spine yields the index.",
+      "tx": "Severity is objectively quantified on non-contrast **chest CT** by calculating the **Haller index**, also known as the **pectus severity index**. The index is derived by dividing the transverse inner thoracic diameter by the anteroposterior distance measured between the posterior cortex of the sternum and the anterior cortex of the vertebral body.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Chest CT Volumetric Parameter",
+          "Measurement Method",
+          "Mathematical Derivation"
+        ],
+        "rows": [
+          [
+            "Transverse inner diameter (A)",
+            "Maximum horizontal distance inside rib cage",
+            "Numerator (A)"
+          ],
+          [
+            "Anteroposterior distance (B)",
+            "Distance from posterior sternum to anterior spine",
+            "Denominator (B)"
+          ],
+          [
+            "Haller Index Formula",
+            "Ratio of transverse to AP distance",
+            "Haller Index = A / B"
+          ],
+          [
+            "Correction index alternative",
+            "Depression depth relative to anterior spine line",
+            "Quantifies percentage of chest wall inward displacement"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A normal chest has an average Haller index of approximately two point five. A Haller index greater than three point two five defines severe pectus excavatum and serves as the standard objective threshold for surgical insurance approval. Severe depression causes significant cardiac compression and pulmonary restriction.",
+      "tx": "In normal adolescents, the average Haller index is approximately 2.5. A **Haller index threshold** exceeding 3.25 defines **severe pectus**, serving as a standard international **objective criterion** for surgical repair. Patients with indices above this threshold frequently manifest objective cardiac compression and restrictive spirometric deficits.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Thoracic Geometry",
+          "points": [
+            "Haller index approximately 2.5",
+            "Symmetrical oval thoracic cross-section",
+            "Unrestricted right ventricular filling and stroke volume",
+            "Normal pulmonary spirometry and vital capacity"
+          ]
+        },
+        "right": {
+          "title": "Severe Pectus Excavatum",
+          "points": [
+            "Haller index >3.25 (often 4.0 to 7.0+)",
+            "Marked sternal indentation compressing heart",
+            "Right ventricular outflow and diastolic compromise",
+            "Classified as severe structural and functional disability"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Severe sternal depression directly impinges on the anterior surface of the right ventricle, which is recognized by surgical teams. Compression reduces right ventricular end-diastolic volume and impairs stroke volume during strenuous exercise. Patients experience exertional dyspnea, premature fatigue, and reduced exercise tolerance from restrictive cardiopulmonary impairment.",
+      "tx": "The depressed sternum causes direct **right ventricular compression**, shifting the cardiac silhouette into the left hemithorax and reducing stroke volume. Patients experience premature fatigue and **exercise intolerance** due to impaired diastolic filling, alongside a mild **restrictive defect** on pulmonary function testing during maximal exertion.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-paed-resp-inspection.webp",
+        "ar": 1.3333,
+        "caption": "Inspection of thoracic cage contours and sternal deformities. Credit: StewardMD.",
+        "alt": "Clinical inspection of chest wall contours and cardiopulmonary mechanics."
+      }
+    },
+    {
+      "say": "The minimally invasive Nuss procedure has become the preferred surgical technique in adolescents. Donald Nuss introduced retrosternal placement of custom-bent titanium or stainless steel bars under thoracoscopic guidance. Inserting the bar concave-down and rotating it one hundred and eighty degrees instantly pops the sternum forward.",
+      "tx": "The minimally invasive **Nuss procedure** inserts 1 or 2 pre-bent curved titanium bars into the substernal space. Conducted under continuous bilateral **thoracoscopic guidance** to prevent pericardial perforation, the concave bar is passed across the anterior mediastinum and rotated 180 degrees, using leverage to instantly elevate the sternum into a normal position.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Bilateral small lateral thoracic incisions placed along midaxillary line"
+          },
+          {
+            "id": "b",
+            "label": "Insert thoracoscope into right pleura to directly visualize anterior mediastinum"
+          },
+          {
+            "id": "c",
+            "label": "Pass curved blunt introducer across retrosternal tunnel anterior to pericardium"
+          },
+          {
+            "id": "d",
+            "label": "Draw pre-bent steel bar through tunnel and rotate 180 degrees to lift sternum"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Bar displacement is the most common early mechanical complication following a Nuss procedure. To maintain stability, surgeons secure the ends with lateral stabilizing plates and heavy pericostal wire fixations. The pectus bar remains in place for two to three years before elective removal.",
+      "tx": "To prevent bar flipping or migration, surgeons secure the lateral ends using **stabilizer plates** anchored to underlying ribs with heavy non-absorbable pericostal sutures. The implant requires a **bar retention duration** of 2 to 3 years to ensure permanent chest wall remodeling before undergoing **elective removal**.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Procedural Component",
+          "Technical Specification",
+          "Clinical Purpose"
+        ],
+        "rows": [
+          [
+            "Implant material",
+            "Medical-grade stainless steel or titanium alloy",
+            "Provides structural rigidity to elevate heavy anterior chest wall"
+          ],
+          [
+            "Stabilizer fixation",
+            "Lateral serrated stabilizer plates with wire cerclage",
+            "Prevents bar rotation and longitudinal migration"
+          ],
+          [
+            "Thoracoscopic visualization",
+            "30-degree optical scope in right/left pleura",
+            "Directly visualizes heart to eliminate pericardial or cardiac laceration"
+          ],
+          [
+            "Retention timeline",
+            "Retained in situ for 24 to 36 months",
+            "Allows mature osteochondral remodeling to prevent late recurrence"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The open modified Ravitch repair remains the preferred operation for severe asymmetric deformities or older adult patients with rigid skeletons. The surgeon performs subperichondrial resection of all deformed costal cartilages, preserving the perichondrium. A transverse sternal wedge osteotomy allows the sternum to be repositioned.",
+      "tx": "The open **modified Ravitch repair** is reserved for complex asymmetric deformities, redo cases, or rigid adult chest walls. The technique entails **subperichondrial resection** of the third through seventh deformed costal cartilages, transverse sternal **wedge osteotomy**, and anterior sternal stabilization with an absorbable strut or titanium reconstruction plate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Minimally Invasive Nuss Repair",
+          "points": [
+            "No cartilage resection or osteotomy required",
+            "Small bilateral lateral thoracic incisions",
+            "Optimal for adolescents with flexible chest walls",
+            "Bar retained for 2 to 3 years before removal"
+          ]
+        },
+        "right": {
+          "title": "Modified Ravitch Open Repair",
+          "points": [
+            "Subperichondrial excision of deformed cartilages",
+            "Sternal wedge osteotomy for rigid adult skeletons",
+            "Transverse anterior inframammary incision",
+            "Permanent internal titanium plate fixation"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Pectus carinatum, or pigeon chest, presents with anterior protrusion of the sternum and costal cartilages. In skeletally immature compliant adolescents, external dynamic chest compression bracing is the highly successful first-line treatment. Surgical chondrosternoplasty is reserved for rigid or refractory cases.",
+      "tx": "**Pectus carinatum** presents with rigid anterior protrusion of the sternal gladiolus. First-line therapy in compliant, skeletally immature adolescents utilizes dynamic **compressive bracing**, applying controlled anterior pressure to remodel pliable cartilages. In skeletally mature patients with rigid asymmetric protrusion, open **chondrosternoplasty** provides definitive anatomical correction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Clinical diagnosis of pectus carinatum (pigeon chest) in adolescent"
+          },
+          {
+            "id": "b",
+            "label": "Assess skeletal maturity and flexibility of chest wall protrusion"
+          },
+          {
+            "id": "c",
+            "label": "Fit custom dynamic external compression brace (worn 16-20 hrs/day for 6-12 months)"
+          },
+          {
+            "id": "d",
+            "label": "Modified Ravitch chondrosternoplasty if rigid, non-compliant, or refractory"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

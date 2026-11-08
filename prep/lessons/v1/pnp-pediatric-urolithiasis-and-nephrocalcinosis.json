@@ -11,15 +11,10 @@
       "say": "Underlying metabolic derangements account for the vast majority of pediatric nephrolithiasis cases.",
       "tx": "Recognize the fundamental principle of **Metabolic etiology dominance in children** presenting with kidney stones. Unlike adult nephrolithiasis where dietary habits and environmental factors predominate, over 75-80% of children with urolithiasis have an identifiable underlying metabolic risk factor; idiopathic hypercalciuria represents by far the most common single metabolic abnormality, identified in 40-50% of pediatric stone formers, followed by hypocitraturia, hyperuricosuria, and cystinuria.",
       "vis": {
-        "kind": "table",
-        "title": "Metabolic Abnormalities in Pediatric Urolithiasis",
-        "cols": ["Metabolic Derangement", "Pediatric Prevalence", "Pathophysiologic Impact"],
-        "rows": [
-          ["Idiopathic hypercalciuria", "40-50%", "Precipitates calcium oxalate/phosphate crystal nucleation"],
-          ["Hypocitraturia", "30-40%", "Loss of natural calcium complexation inhibitor"],
-          ["Hyperoxaluria", "10-20%", "Forms highly insoluble calcium oxalate crystals"],
-          ["Cystinuria", "5-10%", "Defective dibasic transporter forms insoluble cystine stones"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/nephrolithiasis-fig1.webp",
+        "alt": "Randall plaque in the papilla initiating calcium oxalate stone growth.",
+        "caption": "Stones start on Randall plaque in the papilla. Credit: StewardMD."
       }
     },
     {
@@ -28,12 +23,32 @@
       "vis": {
         "kind": "table",
         "title": "24-Hour Urine Metabolic Diagnostic Benchmarks",
-        "cols": ["Urinary Parameter", "Diagnostic Cutoff (Abnormal)", "Clinical Interpretation"],
+        "cols": [
+          "Urinary Parameter",
+          "Diagnostic Cutoff (Abnormal)",
+          "Clinical Interpretation"
+        ],
         "rows": [
-          ["Calcium", "> 4 mg/kg/day (or UPCR > 0.2)", "Hypercalciuria (absorptive, renal, or resorptive)"],
-          ["Oxalate", "> 0.5 mmol/1.73m²/day", "Hyperoxaluria (primary genetic or enteric)"],
-          ["Citrate", "< 320 mg/1.73m²/day", "Hypocitraturia (tubular acidosis or chronic diarrhea)"],
-          ["Uric acid", "> 10 mg/kg/day", "Hyperuricosuria (purine turnover or metabolic defect)"]
+          [
+            "Calcium",
+            "> 4 mg/kg/day (or UPCR > 0.2)",
+            "Hypercalciuria (absorptive, renal, or resorptive)"
+          ],
+          [
+            "Oxalate",
+            "> 0.5 mmol/1.73m²/day",
+            "Hyperoxaluria (primary genetic or enteric)"
+          ],
+          [
+            "Citrate",
+            "< 320 mg/1.73m²/day",
+            "Hypocitraturia (tubular acidosis or chronic diarrhea)"
+          ],
+          [
+            "Uric acid",
+            "> 10 mg/kg/day",
+            "Hyperuricosuria (purine turnover or metabolic defect)"
+          ]
         ]
       }
     },
@@ -43,13 +58,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "agxt", "label": "Biallelic AGXT mutation on 2q37.3 (PH1)"},
-          {"id": "shunt", "label": "Glyoxylate cannot transaminate -> shunted to Oxalate"},
-          {"id": "dep", "label": "Massive hyperoxaluria -> Nephrocalcinosis & Oxalosis"}
+          {
+            "id": "agxt",
+            "label": "Biallelic AGXT mutation on 2q37.3 (PH1)"
+          },
+          {
+            "id": "shunt",
+            "label": "Glyoxylate cannot transaminate -> shunted to Oxalate"
+          },
+          {
+            "id": "dep",
+            "label": "Massive hyperoxaluria -> Nephrocalcinosis & Oxalosis"
+          }
         ],
         "edges": [
-          ["agxt", "shunt"],
-          ["shunt", "dep"]
+          [
+            "agxt",
+            "shunt"
+          ],
+          [
+            "shunt",
+            "dep"
+          ]
         ]
       }
     },
@@ -80,15 +110,10 @@
       "say": "Defective dibasic amino acid transport leads to precipitation of pathognomonic hexagonal crystals in acidic urine.",
       "tx": "Evaluate transport genetics in **Cystinuria SLC3A1/SLC7A9 transporter defect** manifesting with recurrent calculi. Cystinuria is an autosomal recessive disorder caused by mutations in SLC3A1 (type A) or SLC7A9 (type B), which encode the heavy and light subunits of the renal and intestinal dibasic amino acid transporter responsible for reabsorbing COLA (cystine, ornithine, lysine, and arginine); insolubility of cystine in acidic urine forms radiopaque stones and pathognomonic flat hexagonal crystals.",
       "vis": {
-        "kind": "table",
-        "title": "Cystinuria Molecular and Laboratory Features",
-        "cols": ["Feature", "Mechanism / Test", "Characteristic Finding"],
-        "rows": [
-          ["Transporter defect", "Mutations in SLC3A1 (2p21) or SLC7A9 (19q13)", "Impaired proximal tubular COLA reabsorption"],
-          ["Urine microscopy", "Centrifuged first morning urine", "Pathognomonic hexagonal flat cystine plates"],
-          ["Screening test", "Cyanide-nitroprusside chemical reaction", "Red-purple coloration in presence of free cystine"],
-          ["Stone radiopacity", "Sulfur-containing amino acid structure", "Faintly radiopaque ground-glass appearance on X-ray"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/inherited-defects-of-membrane-transport-fig1.webp",
+        "alt": "Proximal tubular transporter defects in cystinuria and Fanconi syndrome.",
+        "caption": "Transporter defects behind cystinuria and Fanconi syndrome. Credit: StewardMD."
       }
     },
     {
@@ -97,13 +122,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "hydr", "label": "Aggressive fluid intake (> 3 L/m²/day around clock)"},
-          {"id": "alk", "label": "Potassium citrate to maintain urine pH >= 7.5"},
-          {"id": "thiol", "label": "Add Tiopronin if cystine excretion remains > 250 mg/L"}
+          {
+            "id": "hydr",
+            "label": "Aggressive fluid intake (> 3 L/m²/day around clock)"
+          },
+          {
+            "id": "alk",
+            "label": "Potassium citrate to maintain urine pH >= 7.5"
+          },
+          {
+            "id": "thiol",
+            "label": "Add Tiopronin if cystine excretion remains > 250 mg/L"
+          }
         ],
         "edges": [
-          ["hydr", "alk"],
-          ["alk", "thiol"]
+          [
+            "hydr",
+            "alk"
+          ],
+          [
+            "alk",
+            "thiol"
+          ]
         ]
       }
     },
@@ -138,11 +178,27 @@
       "vis": {
         "kind": "table",
         "title": "Neonatal Nephrocalcinosis Risk and Resolution",
-        "cols": ["Clinical Factor", "Pathophysiologic Action", "Management Strategy"],
+        "cols": [
+          "Clinical Factor",
+          "Pathophysiologic Action",
+          "Management Strategy"
+        ],
         "rows": [
-          ["Furosemide therapy", "Inhibits loop NKCC2, wasting calcium into urine", "Transition to chlorothiazide to spare calcium"],
-          ["Very low birth weight", "Immature tubular transport and high bone turnover", "Optimize calcium-to-phosphorus intake ratio"],
-          ["Ultrasonography", "Reveals hyperechoic medullary pyramids", "Periodic surveillance; often resolves spontaneously"]
+          [
+            "Furosemide therapy",
+            "Inhibits loop NKCC2, wasting calcium into urine",
+            "Transition to chlorothiazide to spare calcium"
+          ],
+          [
+            "Very low birth weight",
+            "Immature tubular transport and high bone turnover",
+            "Optimize calcium-to-phosphorus intake ratio"
+          ],
+          [
+            "Ultrasonography",
+            "Reveals hyperechoic medullary pyramids",
+            "Periodic surveillance; often resolves spontaneously"
+          ]
         ]
       }
     }
