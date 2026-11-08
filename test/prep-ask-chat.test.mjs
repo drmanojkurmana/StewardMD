@@ -300,7 +300,7 @@ test("every Ask MaiK label draws MaiK as the wordmark", () => {
   const home = src("home.js");
   const shell = home.slice(home.indexOf("function maikShellHTML"), home.indexOf("function maikShellHTML") + 6000);
   assert.ok(shell.length > 1000 && !/mkai|SMD_MAIK_MARK/.test(shell), "the MaiK assistant's own shell and logo are unchanged");
-  assert.equal((home.match(/SMD_MAIK_MARK/g) || []).length, 2, "home.js uses the wordmark only on the Ask MaiK tile title");
+  assert.equal((home.match(/SMD_MAIK_MARK/g) || []).length, 6, "home.js uses the mark only on the Ask MaiK tile title and the tab bar's Ask MaiK button");
 });
 
 test("every Ask MaiK entry point across the app carries the mark; the MaiK assistant and the footer keep their logos", () => {
