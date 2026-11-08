@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "bio-translation",
+ "subject": "biochemistry",
+ "title": "Targeting, modification and proteasome",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Signal sequences** (N-terminal fifteen to thirty hydrophobic residues, positively charged n-region) emerging from ribosomes recruit signal recognition particle (SRP GTPase pausing translation), dock translocon (Sec61) on rough ER, thread nascent chains co-translationally (signal peptidase luminal cleavage, multipass topogenic sequences orienting), while cytosolic completion addresses post-translationally: mitochondria (N-terminal amphipathic presequences, TOM/TIM import unfolding, membrane potential driven, presequence peptidase), nucleus (lysine rich NLS, importin Ran GTP), peroxisomes (C-terminal SKL PTS1 folded import, Zellweger link). Signal hypothesis (Blobel Nobel) unifies secretion geography examiners map protein by protein.",
+   "say": "Signal sequences recruit SRP to rough ER co-translationally, while mitochondria, nucleus and peroxisomes import post-translationally by distinct addresses. Signal hypothesis unifies secretion geography mapped protein by protein examinably.",
+   "vis": {
+    "kind": "flow",
+    "title": "Address labels decide destination",
+    "nodes": [
+     {
+      "id": "sig",
+      "label": "N signal: SRP to rough ER (secretory path)"
+     },
+     {
+      "id": "mito",
+      "label": "Presequence: TOM/TIM to mitochondria"
+     },
+     {
+      "id": "nls",
+      "label": "NLS: importin to nucleus"
+     },
+     {
+      "id": "skl",
+      "label": "SKL tail: PEX5 to peroxisomes"
+     }
+    ],
+    "edges": [
+     [
+      "sig",
+      "mito"
+     ],
+     [
+      "mito",
+      "nls"
+     ],
+     [
+      "nls",
+      "skl"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Secretory maturation** stacks modifications compartmentally: ER (N-glycosylation dolichol precursor en bloc to asparagine sequons (tunicamycin blocks dolichol synthesis experimentally), disulfide isomerase, proline hydroxylation collagen preview), Golgi (glycan trimming and extension determining ABO and selectin ligands (leukocyte adhesion deficiency II fucose transporter rolling failure), O-glycosylation mucins, sulfation, phosphorylation (casein), limited proteolysis (proinsulin, proopiomelanocortin tissue specific convertases to ACTH/MSH/endorphins), sorting to regulated granules, constitutive vesicles, lysosomes (M6P prior), apical/basolateral polarised delivery.",
+   "say": "ER and Golgi stack glycosylation, proteolysis and sorting compartmentally toward secretion destinations polarised. Proopiomelanocortin tissue convertases diversify hormones from one precursor geographically in pituitary and hypothalamus distinctly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Modification",
+     "Compartment chiefly",
+     "Disease or drug anchor"
+    ],
+    "rows": [
+     [
+      "N-glycosylation (Asn sequon)",
+      "ER starts, Golgi finishes",
+      "Congenital disorders of glycosylation (transferrin patterns)"
+     ],
+     [
+      "Gamma-carboxylation (Gla)",
+      "ER (vitamin K cycle)",
+      "Warfarin; clotting factors II VII IX X (prior vitamins)"
+     ],
+     [
+      "Limited proteolysis",
+      "Golgi granules, convertases",
+      "Proinsulin C-peptide; POMC processing obesity (PCSK1)"
+     ],
+     [
+      "GPI anchoring",
+      "ER transamidase",
+      "PNH PIGA somatic loss (prior membrane)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Covalent regulation modifications reverse or commit by design: **phosphorylation** (kinase/phosphatase toggling metabolism prior), acetylation (histones and metabolic enzymes, sirtuin NAD deacetylases fasting signals), methylation, ubiquitination (next steps), SUMOylation (nuclear), palmitoylation and myristoylation and prenylation (membrane anchoring cycles, Ras farnesyl), ADP-ribosylation (toxins and PARP), citrullination (PAD enzymes, rheumatoid anti-CCP antigens generated), deamidation ageing clocks. PTM crosstalk (phosphodegrons inviting ubiquitin, acetyl competing ubiquitin lysines) integrates signals into protein half lives of minutes (HIF hydroxylation VHL) to years (lens crystallins never turned over).",
+   "say": "Modifications toggle or commit by design with crosstalk integrating signals into half lives of minutes to years variably. Hydroxylation marks HIF for VHL destruction oxygen dependently in minutes physiologically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reversible signalling PTMs",
+     "points": [
+      "Phosphorylation, acetylation cycles",
+      "Seconds to minutes toggling",
+      "Kinase inhibitor pharmacology"
+     ]
+    },
+    "right": {
+     "title": "Address and fate PTMs",
+     "points": [
+      "Prenyl and GPI membrane anchors",
+      "Ubiquitin destruction tickets",
+      "Hydroxylation oxygen sensing (HIF)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ubiquitin** activation cascades with specificity at the last step: E1 activating (two human, ATP thioester), E2 conjugating (about forty), E3 ligases (over six hundred, RING scaffolds (MDM2 p53), HECT catalytic, RBR hybrids) recognising degrons (N-end rule, phosphodegrons, misfolded hydrophobic exposure via chaperone CHIP), chains linked lysine forty eight (proteasome ticket, four plus ubiquitins), lysine sixty three (signalling, DNA repair, endocytosis non degradative), linear M1 (NF-kappaB). Deubiquitinases edit and rescue, proteasome associated DUBs recycle ubiquitin before substrate threading.",
+   "say": "Ubiquitin specificity lives in over six hundred E3 ligases recognising degrons precisely. Lysine forty eight chains ticket proteasomes, while sixty three chains signal repair and endocytosis non degradatively in cells.",
+   "vis": null
+  },
+  {
+   "tx": "The **twenty six S proteasome** (nineteen S regulatory caps recognising ubiquitin (Rpn receptors), deubiquitinating, ATPase unfolding ring (six ATPases threading polypeptide), twenty S core barrel (four stacked rings, beta catalytic threonine N-terminal hydrolases chymotrypsin/trypsin/caspase like specificities sequestered inside, immunoproteasome beta replacements induced by interferon gamma for antigen peptide supply to MHC I (tap and ERAAP trimming downstream)) degrades short lived regulators and misfolded proteins ATP dependently to peptides for MHC presentation or amino acid recycling. Bortezomib and carfilzomib inhibit its beta five site in myeloma.",
+   "say": "The twenty six S proteasome unfolds ubiquitinated substrates into its catalytic barrel for peptide recycling and antigen supply. Bortezomib inhibits it in myeloma exploiting immunoglobulin proteotoxic vulnerability therapeutically with neuropathy cautions.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ubiquitin to proteasome",
+    "nodes": [
+     {
+      "id": "e3",
+      "label": "E3 tags misfolded or degron proteins (K48 chains)"
+     },
+     {
+      "id": "cap",
+      "label": "19S cap recognises, deubiquitinates, unfolds (ATP)"
+     },
+     {
+      "id": "core",
+      "label": "20S barrel cleaves to peptides"
+     },
+     {
+      "id": "mhc",
+      "label": "Peptides recycle or present on MHC I"
+     }
+    ],
+    "edges": [
+     [
+      "e3",
+      "cap"
+     ],
+     [
+      "cap",
+      "core"
+     ],
+     [
+      "core",
+      "mhc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Parallel destruction completes proteostasis geography: lysosomal **autophagy** (macroautophagy ATG LC3 lipidation double membranes to lysosomes for aggregates and organelles too large for proteasomes (aggrephagy p62 receptors, mitophagy PINK1 Parkin ubiquitin marking depolarised mitochondria (Parkinson genetics), chaperone mediated autophagy KFERQ HSC70 LAMP2), endosomal microautophagy) versus proteasome soluble clients, cross compensating when either clogs (proteasome inhibition induces autophagy trials in myeloma combinations, lysosomal storage blocks autophagic flux in Pompe and neurodegeneration). Gene regulation next decides which proteins exist to target at all, operons to imprinting.",
+   "say": "Autophagy handles aggregates and organelles too large for proteasomes through mitophagy genetics in Parkinson disease. Destruction geography cross compensates when either clogs pathologically or pharmacologically in combinations investigated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proteasome clients",
+     "points": [
+      "Soluble ubiquitinated regulators (cyclins, p53, IkB)",
+      "Minutes half lives, ATP unfolding",
+      "Bortezomib vulnerable myeloma"
+     ]
+    },
+    "right": {
+     "title": "Autophagy lysosome clients",
+     "points": [
+      "Aggregates, organelles, pathogens (xenophagy)",
+      "LC3 membranes, PINK1 Parkin mitophagy",
+      "Storage diseases clog flux"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
