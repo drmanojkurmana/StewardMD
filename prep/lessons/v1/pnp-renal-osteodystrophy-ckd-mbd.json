@@ -11,18 +11,10 @@
       "say": "Progressive nephron loss sets off an endocrine chain reaction disrupting mineral metabolism.",
       "tx": "Trace the metabolic consequences driving the **Pathophysiological cascade of CKD-MBD** as renal clearance deteriorates. Declining GFR causes systemic phosphate retention, triggering osteocyte secretion of FGF-23 and downregulating renal 1-alpha-hydroxylase (CYP27B1), leading to 1,25(OH)2D deficiency, resultant hypocalcemia, and progressive secondary hyperparathyroidism that damages the developing pediatric skeleton.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "gfr", "label": "Falling GFR & Phosphate Retention"},
-          {"id": "fgf", "label": "Osteocyte FGF-23 Surge"},
-          {"id": "cyp", "label": "CYP27B1 Downregulation & Calcitriol Drop"},
-          {"id": "pth", "label": "Hypocalcemia & Secondary Hyperparathyroidism"}
-        ],
-        "edges": [
-          ["gfr", "fgf"],
-          ["fgf", "cyp"],
-          ["cyp", "pth"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/ckd-fig2.webp",
+        "alt": "Phosphate retention, low calcium and secondary hyperparathyroidism driving bone disease.",
+        "caption": "CKD-MBD: phosphate, calcium and PTH fall out of balance. Credit: StewardMD."
       }
     },
     {
@@ -31,11 +23,27 @@
       "vis": {
         "kind": "table",
         "title": "Target Intact PTH Ranges by CKD Stage",
-        "cols": ["CKD Stage", "Target Multiplier", "Absolute Serum Target"],
+        "cols": [
+          "CKD Stage",
+          "Target Multiplier",
+          "Absolute Serum Target"
+        ],
         "rows": [
-          ["Stage 4", "1.5-3x upper normal limit", "70-150 pg/mL"],
-          ["Stage 5 / Dialysis", "2-9x upper normal limit", "150-300 pg/mL"],
-          ["Over-Suppressed", "< 1.5x normal (< 100 pg/mL)", "Induces adynamic low-turnover bone disease"]
+          [
+            "Stage 4",
+            "1.5-3x upper normal limit",
+            "70-150 pg/mL"
+          ],
+          [
+            "Stage 5 / Dialysis",
+            "2-9x upper normal limit",
+            "150-300 pg/mL"
+          ],
+          [
+            "Over-Suppressed",
+            "< 1.5x normal (< 100 pg/mL)",
+            "Induces adynamic low-turnover bone disease"
+          ]
         ]
       }
     },
@@ -66,14 +74,10 @@
       "say": "Activated vitamin D suppresses parathyroid transcription but requires strict safety thresholds.",
       "tx": "Administer active sterols following protocolized **Active vitamin D analog dosing** with biochemical oversight. Active vitamin D sterols like oral calcitriol at 0.25-1 mcg/day or alfacalcidol directly suppress parathyroid PTH gene expression; therapy must be paused if serum calcium x phosphate product exceeds 55-65 mg²/dL² to prevent severe metastatic soft-tissue and cardiovascular calcification.",
       "vis": {
-        "kind": "table",
-        "title": "Active Vitamin D Regimen Safety Parameters",
-        "cols": ["Agent", "Dose & Administration", "Safety Cutoff"],
-        "rows": [
-          ["Calcitriol", "0.25-1 mcg/day orally", "Titrate to intact PTH target range"],
-          ["Alfacalcidol", "Prodrug activated by liver 25-hydroxylase", "Requires hepatic conversion"],
-          ["Safety Threshold", "Pause if Ca x P > 55-65 mg²/dL²", "Halts extraosseous calcium deposition"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/parathyroid-calcium-disorders-fig2.webp",
+        "alt": "PTH and calcitriol acting across bone, kidney and gut.",
+        "caption": "The PTH and calcitriol axis across bone, kidney and gut. Credit: StewardMD."
       }
     },
     {
@@ -82,15 +86,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "ind", "label": "Severe Refractory Secondary HPT on HD"},
-          {"id": "drug", "label": "Oral Cinacalcet or IV Etelcalcetide"},
-          {"id": "mech", "label": "Allosteric Activation of Calcium-Sensing Receptor"},
-          {"id": "out", "label": "PTH Suppression Without Hypercalcemia"}
+          {
+            "id": "ind",
+            "label": "Severe Refractory Secondary HPT on HD"
+          },
+          {
+            "id": "drug",
+            "label": "Oral Cinacalcet or IV Etelcalcetide"
+          },
+          {
+            "id": "mech",
+            "label": "Allosteric Activation of Calcium-Sensing Receptor"
+          },
+          {
+            "id": "out",
+            "label": "PTH Suppression Without Hypercalcemia"
+          }
         ],
         "edges": [
-          ["ind", "drug"],
-          ["drug", "mech"],
-          ["mech", "out"]
+          [
+            "ind",
+            "drug"
+          ],
+          [
+            "drug",
+            "mech"
+          ],
+          [
+            "mech",
+            "out"
+          ]
         ]
       }
     },
@@ -123,12 +148,32 @@
       "vis": {
         "kind": "table",
         "title": "Pediatric Renal Osteodystrophy Physical Manifestations",
-        "cols": ["Deformity", "Anatomical Site", "Clinical Assessment"],
+        "cols": [
+          "Deformity",
+          "Anatomical Site",
+          "Clinical Assessment"
+        ],
         "rows": [
-          ["SCFE", "Proximal femoral physis", "Hip or knee pain with limp and external rotation"],
-          ["Genu valgum", "Knee joint growth plates", "Knock-knee angular deformity during growth spurt"],
-          ["Metaphyseal cupping", "Distal radius and ulna", "Radiographic widening and fraying of growth plate"],
-          ["Rachitic rosary", "Costochondral junctions", "Palpable expansion of anterior thoracic ribs"]
+          [
+            "SCFE",
+            "Proximal femoral physis",
+            "Hip or knee pain with limp and external rotation"
+          ],
+          [
+            "Genu valgum",
+            "Knee joint growth plates",
+            "Knock-knee angular deformity during growth spurt"
+          ],
+          [
+            "Metaphyseal cupping",
+            "Distal radius and ulna",
+            "Radiographic widening and fraying of growth plate"
+          ],
+          [
+            "Rachitic rosary",
+            "Costochondral junctions",
+            "Palpable expansion of anterior thoracic ribs"
+          ]
         ]
       }
     },
@@ -138,15 +183,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "det", "label": "PTH Rises Above Upper Normal Threshold"},
-          {"id": "diet", "label": "Restrict Phosphorus to 100% DRI for Age"},
-          {"id": "elim", "label": "Eliminate Processed Foods & Inorganic Additives"},
-          {"id": "goal", "label": "Maintain Normal Phosphate & Retard Bone Disease"}
+          {
+            "id": "det",
+            "label": "PTH Rises Above Upper Normal Threshold"
+          },
+          {
+            "id": "diet",
+            "label": "Restrict Phosphorus to 100% DRI for Age"
+          },
+          {
+            "id": "elim",
+            "label": "Eliminate Processed Foods & Inorganic Additives"
+          },
+          {
+            "id": "goal",
+            "label": "Maintain Normal Phosphate & Retard Bone Disease"
+          }
         ],
         "edges": [
-          ["det", "diet"],
-          ["diet", "elim"],
-          ["elim", "goal"]
+          [
+            "det",
+            "diet"
+          ],
+          [
+            "diet",
+            "elim"
+          ],
+          [
+            "elim",
+            "goal"
+          ]
         ]
       }
     }

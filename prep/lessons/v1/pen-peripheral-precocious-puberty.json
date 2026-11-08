@@ -1,0 +1,275 @@
+{
+  "id": "pen-peripheral-precocious-puberty",
+  "title": "Peripheral Precocious Puberty: McCune-Albright, Testotoxicosis and Aromatase Blockade",
+  "subject": "ss-paediatric-endocrinology",
+  "module": "Precocious and Delayed Puberty, Hypogonadism and Gynecomastia",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Peripheral precocious puberty is characterized by autonomous sex steroid excess with suppressed pituitary gonadotropins.",
+      "tx": "Recognize the biochemical hallmark of a **Peripheral (GnRH-independent) pubertal signature** in symptomatic children. Peripheral precocious puberty results from autonomous sex steroid production independent of pituitary LH/FSH; serum gonadotropins remain suppressed (LH < 0.1 IU/L) even after GnRH stimulation, contrasting sharply with the pubertal LH surge of central precocity.",
+      "vis": {
+        "kind": "table",
+        "title": "Peripheral vs Central Pubertal Signatures",
+        "cols": [
+          "Parameter",
+          "Peripheral Precocious Puberty",
+          "Central Precocious Puberty"
+        ],
+        "rows": [
+          [
+            "Basal LH",
+            "Suppressed (LH < 0.1 IU/L)",
+            "Pubertal (> 0.3-0.5 IU/L)"
+          ],
+          [
+            "GnRH-stimulated LH",
+            "Suppressed (< 2.0 IU/L)",
+            "Marked pubertal surge (> 5.0 IU/L)"
+          ],
+          [
+            "Gonadal histology",
+            "Infantile tubules / autonomous cyst",
+            "True pubertal bilateral gonadal enlargement"
+          ],
+          [
+            "Etiology",
+            "Ovarian cyst, testotoxicosis, adrenal tumor",
+            "Premature activation of hypothalamic GnRH generator"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "McCune-Albright syndrome is a classic mosaic disorder driven by postzygotic somatic GNAS mutations.",
+      "tx": "Characterize the **McCune-Albright syndrome triad and somatic GNAS** mosaic mutations in affected patients. McCune-Albright syndrome is caused by postzygotic somatic mosaic activating mutations in GNAS (p.Arg201), presenting with triad of peripheral precocious puberty (large ovarian cysts), café-au-lait spots (coast of Maine), and polyostotic fibrous dysplasia.",
+      "vis": {
+        "kind": "table",
+        "title": "McCune-Albright Classical Triad (3 Components)",
+        "cols": [
+          "Triad Component",
+          "Pathology",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "Peripheral precocious puberty",
+            "Autonomous recurrent ovarian follicular cysts",
+            "Painless cyclic vaginal bleeding in young girls"
+          ],
+          [
+            "Cutaneous pigmentation",
+            "Melanocyte receptor hyper-responsiveness",
+            "Large, asymmetric cafe-au-lait macules with jagged edges"
+          ],
+          [
+            "Skeletal dysplasia",
+            "Constitutive Gs-alpha activation in osteoblasts",
+            "Polyostotic fibrous dysplasia, fractures, shepherd's crook deformity"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Autonomous ovarian cysts in McCune-Albright spontaneously form and regress, causing abrupt estrogen withdrawal bleeding.",
+      "tx": "Identify the clinical presentation of **Recurrent estrogenic bleeding in McCune-Albright** in young phenotypic girls. Young girls with McCune-Albright present with sudden painless vaginal bleeding from estrogen withdrawal as autonomous luteinized follicular cysts spontaneously form and regress, recurring cyclically without preceding thelarche progression.",
+      "vis": {
+        "kind": "flow",
+        "title": "Estrogen Withdrawal Bleeding Cycle in MAS",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "Postzygotic GNAS Mosaic Activation in Ovary"
+          },
+          {
+            "id": "c2",
+            "label": "Autonomous Luteinized Follicular Cyst Formation"
+          },
+          {
+            "id": "c3",
+            "label": "Massive Estrogen Secretion & Endometrial Proliferation"
+          },
+          {
+            "id": "c4",
+            "label": "Spontaneous Cyst Regression & Withdrawal Bleeding"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2",
+            "cAMP-mediated follicular growth"
+          ],
+          [
+            "c2",
+            "c3",
+            "Autonomous steroidogenesis"
+          ],
+          [
+            "c3",
+            "c4",
+            "Abrupt estrogen drop induces vaginal menses"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Third-generation aromatase inhibitors combined with estrogen receptor blockers provide effective medical management.",
+      "tx": "Prescribe **Aromatase inhibitor and estrogen blocker therapy** to arrest skeletal and sexual advancement in girls with McCune-Albright. Medical therapy for McCune-Albright precocity utilizes third-generation aromatase inhibitors (letrozole 2.5 mg/day) combined with selective estrogen receptor modulators (tamoxifen) to arrest vaginal bleeding and skeletal maturation, with anastrozole as an alternative.",
+      "vis": {
+        "kind": "compare",
+        "title": "Targeted Endocrine Therapy in McCune-Albright",
+        "left": {
+          "title": "Aromatase Inhibitors",
+          "points": [
+            "Letrozole 2.5 mg/day or anastrozole",
+            "Blocks peripheral conversion of androgens to estrogens",
+            "Significantly slows growth velocity and bone age acceleration"
+          ]
+        },
+        "right": {
+          "title": "Estrogen Receptor Modulators",
+          "points": [
+            "Tamoxifen (selective estrogen receptor modulator)",
+            "Directly antagonizes estrogen action on endometrium and breast",
+            "Halts recurrent vaginal withdrawal bleeding"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Testotoxicosis is a male-limited disorder driven by activating mutations in the luteinizing hormone receptor.",
+      "tx": "Recognize the genetics and early onset of **Familial male-limited precocious puberty (Testotoxicosis)** in boys. Testotoxicosis is an autosomal dominant condition caused by activating mutations in LHCGR (2p21), driving constitutive Leydig cell testosterone secretion in boys by age 2-4 years despite prepubertal LH, producing bilateral phallic and testicular enlargement.",
+      "vis": {
+        "kind": "table",
+        "title": "Testotoxicosis Clinical Profile",
+        "cols": [
+          "Feature",
+          "Finding in Testotoxicosis",
+          "Underlying Mechanism"
+        ],
+        "rows": [
+          [
+            "Genetics",
+            "Activating LHCGR mutation (2p21)",
+            "Constitutive G-protein coupling in Leydig cells"
+          ],
+          [
+            "Age of onset",
+            "Rapid virilization by age 2-4 years",
+            "Precocious autonomous testosterone production"
+          ],
+          [
+            "Gonadotropins",
+            "Suppressed LH and FSH",
+            "Negative feedback from high circulating testosterone"
+          ],
+          [
+            "Testicular anatomy",
+            "Bilateral symmetrical enlargement",
+            "Leydig cell hyperplasia without tubular maturation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dual therapy combining an anti-androgen with an aromatase inhibitor effectively halts virilization and epiphyseal fusion.",
+      "tx": "Implement protocolized **Dual-agent therapy for testotoxicosis** to preserve adult height and control virilization. Testotoxicosis is treated with an anti-androgen (bicalutamide or spironolactone) combined with an aromatase inhibitor (anastrozole or letrozole) to block androgen receptors and prevent estrogen-mediated epiphyseal closure. Regular auxological follow-up and serial bone age determinations ensure therapeutic efficacy and guide timely dosage adjustments during growth.",
+      "vis": {
+        "kind": "compare",
+        "title": "Dual-Agent Mechanism in Testotoxicosis",
+        "left": {
+          "title": "Anti-Androgen Component",
+          "points": [
+            "Bicalutamide or spironolactone administration",
+            "Competitively blocks peripheral androgen receptor binding",
+            "Arrests rapid penile growth, pubarche, and aggressive behavior"
+          ]
+        },
+        "right": {
+          "title": "Aromatase Inhibitor Component",
+          "points": [
+            "Anastrozole or letrozole administration",
+            "Blocks aromatization of testosterone to estradiol",
+            "Prevents accelerated epiphyseal fusion and preserves adult height"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Prolonged exposure to peripheral sex steroids can mature the hypothalamus, triggering secondary central precocious puberty.",
+      "tx": "Anticipate the emergence of a **Secondary central activation phenomenon** following control of peripheral precocity. Chronic exposure to high peripheral sex steroid levels accelerates hypothalamic maturation; upon medical suppression of peripheral steroids, a secondary true central precocious puberty commonly erupts, requiring GnRH agonists such as leuprolide.",
+      "vis": {
+        "kind": "flow",
+        "title": "Evolution to Secondary Central Precocious Puberty",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Prolonged Peripheral Steroid Exposure"
+          },
+          {
+            "id": "p2",
+            "label": "Accelerated Hypothalamic Maturation"
+          },
+          {
+            "id": "p3",
+            "label": "Medical Suppression of Peripheral Steroid Source"
+          },
+          {
+            "id": "p4",
+            "label": "Central Activation Requiring Leuprolide"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2",
+            "Advanced bone age and neuroendocrine priming"
+          ],
+          [
+            "p2",
+            "p3",
+            "Peripheral steroid blockade achieved"
+          ],
+          [
+            "p3",
+            "p4",
+            "Hypothalamic pulse generator escapes inhibition"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Autonomous gonadal neoplasms must be excluded in children presenting with unilateral or rapidly progressing precocity.",
+      "tx": "Evaluate surgical etiologies involving **Granulosa and Leydig cell tumors** presenting with peripheral precocity. Ovarian juvenile granulosa cell tumors (producing estradiol and inhibin B) and testicular Leydig cell tumors (unilateral testicular mass, asymmetric enlargement) are surgical causes of peripheral precocity requiring urgent pelvic or scrotal ultrasonography and surgical resection.",
+      "vis": {
+        "kind": "table",
+        "title": "Gonadal Neoplasms Causing Peripheral Precocity",
+        "cols": [
+          "Tumor Type",
+          "Sex & Presentation",
+          "Biochemical Markers & Surgery"
+        ],
+        "rows": [
+          [
+            "Juvenile Granulosa Cell Tumor",
+            "Girls: rapid thelarche, abdominal mass",
+            "Elevated estradiol and inhibin B; unilateral oophorectomy"
+          ],
+          [
+            "Leydig Cell Tumor",
+            "Boys: asymmetric testicular enlargement",
+            "High testosterone with suppressed LH; radical inguinal orchiectomy"
+          ],
+          [
+            "Adrenal Adenoma / Carcinoma",
+            "Both sexes: severe rapid virilization",
+            "High DHEAS and 17-OHP; adrenalectomy indicated"
+          ]
+        ]
+      }
+    }
+  ]
+}

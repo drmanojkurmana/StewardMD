@@ -11,14 +11,10 @@
       "say": "Atypical hemolytic uremic syndrome is driven by uncontrolled complement activation destroying vascular endothelium.",
       "tx": "Map genetic pathogenic drivers within the **Atypical HUS genetic landscape** to identify primary thrombotic microangiopathy mechanisms. Atypical HUS represents uncontrolled alternative complement activation on host endothelial surfaces, driven predominantly by loss-of-function mutations in regulatory protective proteins including CFH, CFI, and CD46/MCP, or by gain-of-function mutations in active convertase components C3 and CFB.",
       "vis": {
-        "kind": "table",
-        "title": "Alternative Complement Pathway Genetic Alterations",
-        "cols": ["Gene & Factor", "Mutation Mechanism", "Pathologic Consequence"],
-        "rows": [
-          ["CFH, CFI, CD46/MCP", "Loss-of-function variants", "Failed protection of self endothelial cell surfaces"],
-          ["C3, CFB", "Gain-of-function variants", "Hyperactive C3/C5 alternative convertase assembly"],
-          ["Endothelial Impact", "Unchecked MAC (C5b-9) deposition", "Microvascular thrombosis and mechanical hemolysis"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/ttp-hus-fig1.webp",
+        "alt": "Microthrombi from von Willebrand multimers in TTP contrasted with Shiga toxin injury in HUS.",
+        "caption": "Thrombotic microangiopathy: TTP and HUS mechanisms compared. Credit: StewardMD."
       }
     },
     {
@@ -50,15 +46,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "del", "label": "Homozygous CFHR1-CFHR3 Gene Deletion"},
-          {"id": "ab", "label": "Anti-CFH Autoantibodies Form (10-15% Cases)"},
-          {"id": "tma", "label": "Alternative Pathway Endothelial Lysis"},
-          {"id": "rx", "label": "Plasma Exchange + Prednisolone + Rituximab"}
+          {
+            "id": "del",
+            "label": "Homozygous CFHR1-CFHR3 Gene Deletion"
+          },
+          {
+            "id": "ab",
+            "label": "Anti-CFH Autoantibodies Form (10-15% Cases)"
+          },
+          {
+            "id": "tma",
+            "label": "Alternative Pathway Endothelial Lysis"
+          },
+          {
+            "id": "rx",
+            "label": "Plasma Exchange + Prednisolone + Rituximab"
+          }
         ],
         "edges": [
-          ["del", "ab"],
-          ["ab", "tma"],
-          ["tma", "rx"]
+          [
+            "del",
+            "ab"
+          ],
+          [
+            "ab",
+            "tma"
+          ],
+          [
+            "tma",
+            "rx"
+          ]
         ]
       }
     },
@@ -68,11 +85,27 @@
       "vis": {
         "kind": "table",
         "title": "Eculizumab Monoclonal Antibody Profile",
-        "cols": ["Feature", "Mechanism / Specification", "Clinical Benefit"],
+        "cols": [
+          "Feature",
+          "Mechanism / Specification",
+          "Clinical Benefit"
+        ],
         "rows": [
-          ["Molecular Target", "Complement C5 protein cleavage site", "Prevents generation of C5a and C5b"],
-          ["Complex Blockade", "Halts terminal C5b-9 MAC assembly", "Shields glomerular endothelium from lysis"],
-          ["Efficacy Profile", "Hematologic & renal response > 80%", "Permits recovery of native renal filtration"]
+          [
+            "Molecular Target",
+            "Complement C5 protein cleavage site",
+            "Prevents generation of C5a and C5b"
+          ],
+          [
+            "Complex Blockade",
+            "Halts terminal C5b-9 MAC assembly",
+            "Shields glomerular endothelium from lysis"
+          ],
+          [
+            "Efficacy Profile",
+            "Hematologic & renal response > 80%",
+            "Permits recovery of native renal filtration"
+          ]
         ]
       }
     },
@@ -82,11 +115,27 @@
       "vis": {
         "kind": "table",
         "title": "Mandatory Meningococcal Protection Protocol",
-        "cols": ["Preventive Component", "Required Action", "Immunological Objective"],
+        "cols": [
+          "Preventive Component",
+          "Required Action",
+          "Immunological Objective"
+        ],
         "rows": [
-          ["Vaccination 1", "Conjugated MenACWY vaccine", "Capsular protective antibodies against serogroups A,C,W,Y"],
-          ["Vaccination 2", "Recombinant MenB vaccine", "Protects against prevalent serogroup B strains"],
-          ["Chemoprophylaxis", "Daily oral penicillin or erythromycin", "Bactericidal barrier against 2000-fold infection surge"]
+          [
+            "Vaccination 1",
+            "Conjugated MenACWY vaccine",
+            "Capsular protective antibodies against serogroups A,C,W,Y"
+          ],
+          [
+            "Vaccination 2",
+            "Recombinant MenB vaccine",
+            "Protects against prevalent serogroup B strains"
+          ],
+          [
+            "Chemoprophylaxis",
+            "Daily oral penicillin or erythromycin",
+            "Bactericidal barrier against 2000-fold infection surge"
+          ]
         ]
       }
     },
@@ -142,12 +191,32 @@
       "vis": {
         "kind": "table",
         "title": "DGKE Recessive Microangiopathy Features",
-        "cols": ["Feature", "Clinical Characterization", "Management Distinction"],
+        "cols": [
+          "Feature",
+          "Clinical Characterization",
+          "Management Distinction"
+        ],
         "rows": [
-          ["Gene & Function", "DGKE (diacylglycerol kinase epsilon)", "Phosphorylates DAG to phosphatidic acid"],
-          ["Age of Onset", "Infantile onset before age 1 year", "Recurrent episodes of microangiopathy & proteinuria"],
-          ["Complement Involvement", "Alternative complement cascade normal", "No systemic complement consumption"],
-          ["Drug Response", "Refractory to eculizumab & C5 blockade", "Requires aggressive supportive care and ACEi"]
+          [
+            "Gene & Function",
+            "DGKE (diacylglycerol kinase epsilon)",
+            "Phosphorylates DAG to phosphatidic acid"
+          ],
+          [
+            "Age of Onset",
+            "Infantile onset before age 1 year",
+            "Recurrent episodes of microangiopathy & proteinuria"
+          ],
+          [
+            "Complement Involvement",
+            "Alternative complement cascade normal",
+            "No systemic complement consumption"
+          ],
+          [
+            "Drug Response",
+            "Refractory to eculizumab & C5 blockade",
+            "Requires aggressive supportive care and ACEi"
+          ]
         ]
       }
     }

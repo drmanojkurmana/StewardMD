@@ -11,14 +11,10 @@
       "say": "Alport syndrome arises from mutations in genes encoding alpha chains of type four collagen, predominantly inherited in an X-linked pattern.",
       "tx": "Analyze the genetic architecture of **Type IV collagen genetics and inheritance** across affected families. Type IV collagen is an essential structural constituent of the glomerular basement membrane, cochlea, and ocular lens; approximately 85% of Alport syndrome cases are X-linked Alport syndrome (XLAS) caused by pathogenic mutations in the COL4A5 gene on chromosome Xq22.3, whereas 15% are autosomal recessive or autosomal dominant Alport syndrome caused by mutations in COL4A3 or COL4A4 on chromosome 2q36.3.",
       "vis": {
-        "kind": "table",
-        "title": "Genetic Subtypes of Alport Syndrome",
-        "cols": ["Subtype", "Affected Gene", "Chromosomal Locus", "Prevalence"],
-        "rows": [
-          ["X-linked (XLAS)", "COL4A5", "Xq22.3", "~85% of cases"],
-          ["Autosomal recessive", "COL4A3 or COL4A4", "2q36.3", "~15% of cases"],
-          ["Autosomal dominant", "COL4A3 or COL4A4 (heterozygous)", "2q36.3", "Mild/variable course"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/alport-syndrome-fig1.webp",
+        "alt": "Basket weave basement membrane splitting with lenticonus and cochlear changes.",
+        "caption": "Alport syndrome: kidney, eye and ear in one collagen defect. Credit: StewardMD."
       }
     },
     {
@@ -27,13 +23,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "hem", "label": "Early Childhood: Persistent microscopic hematuria"},
-          {"id": "prot", "label": "Late Childhood: Progressive proteinuria & hypertension"},
-          {"id": "esrd", "label": "Young Adulthood: Decline in GFR to ESRD"}
+          {
+            "id": "hem",
+            "label": "Early Childhood: Persistent microscopic hematuria"
+          },
+          {
+            "id": "prot",
+            "label": "Late Childhood: Progressive proteinuria & hypertension"
+          },
+          {
+            "id": "esrd",
+            "label": "Young Adulthood: Decline in GFR to ESRD"
+          }
         ],
         "edges": [
-          ["hem", "prot"],
-          ["prot", "esrd"]
+          [
+            "hem",
+            "prot"
+          ],
+          [
+            "prot",
+            "esrd"
+          ]
         ]
       }
     },
@@ -66,11 +77,27 @@
       "vis": {
         "kind": "table",
         "title": "Ophthalmologic Signatures in Alport Syndrome",
-        "cols": ["Ocular Finding", "Anatomical Site", "Diagnostic Significance"],
+        "cols": [
+          "Ocular Finding",
+          "Anatomical Site",
+          "Diagnostic Significance"
+        ],
         "rows": [
-          ["Anterior lenticonus", "Anterior lens capsule", "Virtually pathognomonic of Alport syndrome"],
-          ["Dot-and-fleck retinopathy", "Perimacular and peripheral retina", "Correlates with early onset of renal failure"],
-          ["Posterior polymorphous dystrophy", "Corneal endothelium", "Rare corneal vesicle or band formation"]
+          [
+            "Anterior lenticonus",
+            "Anterior lens capsule",
+            "Virtually pathognomonic of Alport syndrome"
+          ],
+          [
+            "Dot-and-fleck retinopathy",
+            "Perimacular and peripheral retina",
+            "Correlates with early onset of renal failure"
+          ],
+          [
+            "Posterior polymorphous dystrophy",
+            "Corneal endothelium",
+            "Rare corneal vesicle or band formation"
+          ]
         ]
       }
     },
@@ -80,13 +107,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "early", "label": "Early infancy: Uniform GBM thinning"},
-          {"id": "split", "label": "Childhood: Longitudinal splitting of lamina densa"},
-          {"id": "weave", "label": "Late stage: Classic 'basket-weave' fragmentation"}
+          {
+            "id": "early",
+            "label": "Early infancy: Uniform GBM thinning"
+          },
+          {
+            "id": "split",
+            "label": "Childhood: Longitudinal splitting of lamina densa"
+          },
+          {
+            "id": "weave",
+            "label": "Late stage: Classic 'basket-weave' fragmentation"
+          }
         ],
         "edges": [
-          ["early", "split"],
-          ["split", "weave"]
+          [
+            "early",
+            "split"
+          ],
+          [
+            "split",
+            "weave"
+          ]
         ]
       }
     },
@@ -96,11 +138,27 @@
       "vis": {
         "kind": "table",
         "title": "Immunohistochemical Staining Patterns",
-        "cols": ["Tissue Layer", "Normal Staining", "X-linked Male Alport"],
+        "cols": [
+          "Tissue Layer",
+          "Normal Staining",
+          "X-linked Male Alport"
+        ],
         "rows": [
-          ["Glomerular basement membrane", "Alpha-3, alpha-4, alpha-5 positive", "Completely absent alpha-3, 4, 5 chains"],
-          ["Epidermal basement membrane", "Alpha-5(IV) strongly positive", "Complete loss of alpha-5(IV) expression"],
-          ["Bowman capsule", "Alpha-5 and alpha-6 positive", "Absent alpha-5 and alpha-6 chains"]
+          [
+            "Glomerular basement membrane",
+            "Alpha-3, alpha-4, alpha-5 positive",
+            "Completely absent alpha-3, 4, 5 chains"
+          ],
+          [
+            "Epidermal basement membrane",
+            "Alpha-5(IV) strongly positive",
+            "Complete loss of alpha-5(IV) expression"
+          ],
+          [
+            "Bowman capsule",
+            "Alpha-5 and alpha-6 positive",
+            "Absent alpha-5 and alpha-6 chains"
+          ]
         ]
       }
     },
@@ -131,15 +189,10 @@
       "say": "Benign familial hematuria features diffuse basement membrane thinning without sensorineural hearing loss or progressive renal failure.",
       "tx": "Distinguish Alport syndrome from **Thin basement membrane disease (TBMD) contrast** in children presenting with isolated hematuria. Thin basement membrane nephropathy (benign familial hematuria) is typically caused by heterozygous COL4A3 or COL4A4 carrier mutations and is characterized by isolated microscopic hematuria, normal blood pressure and hearing, normal renal function, and uniform diffuse thinning of the lamina densa on electron microscopy without lamellation or progressive renal failure.",
       "vis": {
-        "kind": "table",
-        "title": "Alport Syndrome vs Thin Basement Membrane Disease",
-        "cols": ["Clinical Feature", "Alport Syndrome", "Thin Basement Membrane Disease"],
-        "rows": [
-          ["Genetics", "COL4A5 (X-linked) or homozygous COL4A3/4", "Heterozygous COL4A3 or COL4A4 carrier"],
-          ["Electron microscopy", "Basket-weave splitting and lamellation", "Uniform diffuse GBM thinning (< 250 nm)"],
-          ["Extrarenal signs", "Sensorineural hearing loss, lenticonus", "No hearing loss, no ocular anomalies"],
-          ["Renal prognosis", "Progressive proteinuria, ESRD", "Benign, normal life expectancy"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/thin-basement-membrane-nephropathy-fig1.webp",
+        "alt": "Thinned glomerular basement membrane letting red cells into Bowman space.",
+        "caption": "Thin basement membrane: a thinned filter that leaks red cells. Credit: StewardMD."
       }
     }
   ]

@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "sct-type-b-dissection-tevar",
+  "title": "Type B Aortic Dissection: Medical Impulse Control, TEVAR, Landing Zones and Spinal Protection",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 113 (Thoracic Aortic Aneurysm and Dissection)",
+    "STS/AATS Guidelines on the Management of Type B Aortic Dissection",
+    "INSTEAD and INSTEAD-XL Randomized Clinical Trials"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Uncomplicated acute Type B aortic dissection begins distal to the left subclavian artery without malperfusion or rupture. Medical management in an intensive care setting represents the cornerstone of initial treatment. Doctors administer intravenous beta-blockers and vasodilators to control blood pressure and reduce shear stress.",
+      "tx": "Management of **uncomplicated Type B** dissection relies on intensive **medical impulse control** therapy. The treatment regimen utilizes intravenous beta-blockers, such as labetalol or esmolol, followed by vasodilators to reduce aortic wall shear stress (dP/dt). Clinicians titrate infusions to maintain **systolic blood pressure** strictly between 100 and 120 mmHg and heart rate below 60 bpm.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Goal",
+          "Target Physiological Parameter",
+          "First-Line Pharmacotherapy"
+        ],
+        "rows": [
+          [
+            "Heart rate suppression",
+            "<60 beats per minute",
+            "Intravenous esmolol or labetalol infusion"
+          ],
+          [
+            "Systolic blood pressure",
+            "100 to 120 mmHg",
+            "Intravenous labetalol supplemented with nicardipine"
+          ],
+          [
+            "Impulse reduction (dP/dt)",
+            "Abolish rapid ventricular ejection velocity",
+            "Beta-blockade strictly administered BEFORE vasodilators"
+          ],
+          [
+            "Pain control",
+            "Complete resolution of back/chest pain",
+            "Intravenous opioid analgesia (fentanyl or morphine)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Approximately thirty percent of patients present with or develop complicated Type B dissection. Complicated dissection is defined by hemodynamic instability, persistent pain, rapid aortic expansion, or life-threatening rupture. Static or dynamic branch vessel obstruction producing organ malperfusion is also an indicator.",
+      "tx": "Patients with **complicated Type B** dissection exhibit dynamic clinical deterioration requiring urgent intervention. Complications include refractory pain or hypertension, **impending rupture**, or devastating **malperfusion syndrome**. Obstruction of visceral, renal, or lower extremity arteries leads to acute mesenteric ischemia, renal failure, or limb loss.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Uncomplicated Type B",
+          "points": [
+            "Hemodynamically stable patient",
+            "Complete resolution of pain with anti-impulse therapy",
+            "Preserved perfusion to all visceral and renal beds",
+            "Managed primarily in ICU with medical therapy"
+          ]
+        },
+        "right": {
+          "title": "Complicated Type B",
+          "points": [
+            "Refractory hypertension or relentless tearing pain",
+            "Visceral, renal, spinal or lower limb malperfusion",
+            "Aortic rupture or rapid localized dilation (>5 mm)",
+            "Mandates urgent thoracic endovascular repair (TEVAR)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Thoracic endovascular aortic repair has revolutionized the management of complicated Type B dissection. TEVAR delivers a covered stent-graft via femoral arterial access to cover the primary intimal tear. Sealing the tear redirects flow into the true lumen and depressurizes the false lumen.",
+      "tx": "Urgent **TEVAR** represents the primary gold standard intervention for complicated acute Type B dissection. Deploying a covered stent-graft across the **primary entry tear** depressurizes the false lumen, promotes **false lumen thrombosis**, and facilitates expansion of the compressed true lumen, restoring peripheral and visceral perfusion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aortic-dissection-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Stanford type B aortic dissection true and false lumens. Credit: StewardMD.",
+        "alt": "Pathological anatomy of aortic dissection false lumen and entry tear."
+      }
+    },
+    {
+      "say": "Constructing a durable proximal endovascular seal requires an adequate landing zone. The stent-graft must seat into at least twenty millimetres of healthy, non-dissected aortic wall. In many cases, covering the origin of the left subclavian artery is necessary, requiring prior carotid-subclavian bypass.",
+      "tx": "Achieving a stable endovascular seal requires a **proximal seal landing zone** measuring at least 20 mm of non-dissected aorta. When the tear lies close to the arch, landing in Ishimaru Zone 2 requires intentional coverage of the left subclavian artery. Surgeons perform prophylactic **carotid-subclavian bypass** to prevent **posterior circulation stroke** and left upper limb ischemia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "CT angiography measures distance from left subclavian to tear"
+          },
+          {
+            "id": "b",
+            "label": "Landing zone <20 mm requires coverage of left subclavian artery (Zone 2)"
+          },
+          {
+            "id": "c",
+            "label": "Pre-emptive left carotid-to-subclavian bypass or transposition"
+          },
+          {
+            "id": "d",
+            "label": "Deploy thoracic stent-graft with secure proximal seal and no type Ia endoleak"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The landmark INSTEAD and INSTEAD-XL randomized trials examined endovascular intervention in uncomplicated Type B dissection. In the subacute window between fifteen and ninety days, TEVAR was compared with medical therapy alone. The trials proved that subacute stenting induces positive aortic remodeling and significantly reduces five-year aortic mortality.",
+      "tx": "The randomized **INSTEAD trial** and long-term INSTEAD-XL follow-up demonstrated that performing elective TEVAR during the **subacute phase** (15 to 90 days after onset) in uncomplicated Type B dissection induces positive aortic remodeling, achieving a significant reduction in 5-year **aorta-specific mortality** compared to optimal medical therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Optimal Medical Therapy Alone",
+          "points": [
+            "Good acute in-hospital survival (90%)",
+            "Progressive late false lumen aneurysmal degeneration",
+            "High late aorta-specific mortality at 5 years",
+            "Requires frequent late open surgical conversion"
+          ]
+        },
+        "right": {
+          "title": "Subacute TEVAR (INSTEAD-XL)",
+          "points": [
+            "Performed in stable subacute window (15-90 days)",
+            "Promotes complete false lumen thrombosis and shrinkage",
+            "Significantly reduces 5-year aortic rupture and death",
+            "Prevents chronic aneurysmal remodeling"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Retrograde Type A dissection is a devastating, potentially lethal complication of thoracic endovascular repair. It occurs in one to four percent of patients treated for Type B dissection. Stent-graft spring pins or balloon dilation can tear the fragile ascending aorta, demanding immediate emergency open surgery.",
+      "tx": "A catastrophic **stent-graft complication** is **retrograde Type A dissection**, occurring in 1 to 4 percent of patients undergoing TEVAR for dissection. Rigid bare springs, aggressive balloon post-dilation, or oversizing can lacerate the **fragile arch**, producing retrograde propagation of a new dissection flap toward the aortic root.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/access-complications-rescue-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Endovascular stent-graft deployment and vascular rescue. Credit: StewardMD.",
+        "alt": "Vascular stent graft deployment, landing zone fixation and rescue."
+      }
+    },
+    {
+      "say": "Spinal cord ischemia resulting in paraplegia occurs in two to six percent of patients undergoing extensive thoracic stent coverage. Covering intercostal arteries, particularly the artery of Adamkiewicz between T9 and T12, compromises anterior spinal cord perfusion. Prevention relies on cerebrospinal fluid drainage and strict blood pressure management.",
+      "tx": "Severe **spinal cord ischemia** producing paraparesis or paraplegia complicates 2 to 6 percent of thoracic endovascular procedures. Clinicians prevent ischemia by inserting a prophylactic lumbar catheter for **CSF drainage** to maintain spinal perfusion pressure, alongside keeping **mean arterial pressure** strictly between 80 and 90 mmHg.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stent-graft coverage of critical intercostal branches (T8 to L1)"
+          },
+          {
+            "id": "b",
+            "label": "Acute decline in anterior spinal artery perfusion pressure"
+          },
+          {
+            "id": "c",
+            "label": "Insert lumbar CSF drain to reduce intrathecal pressure below 10 mmHg"
+          },
+          {
+            "id": "d",
+            "label": "Infuse vasopressors to maintain MAP >80 to 90 mmHg and preserve cord flow"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Aortic intramural hematoma and penetrating atherosclerotic ulcers represent important variants within the acute aortic syndrome spectrum. Intramural hematoma features hemorrhage within the aortic media without an intimal tear, which is recognized by surgical teams. Penetrating ulcers ulcerate through the internal elastic lamina, and both carry high risks of progressing to overt dissection or rupture.",
+      "tx": "Acute aortic syndromes also encompass **aortic intramural hematoma**, defined by crescentic non-enhancing blood within the aortic media without an identifiable flap, and **penetrating atherosclerotic ulcers**, where atheromatous plaques erode the internal elastic lamina. Both carry a significant **rupture risk** and frequently demand **urgent intervention** when associated with persistent pain.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Acute Aortic Variant",
+          "Imaging Characteristic on CT",
+          "Natural History and Treatment"
+        ],
+        "rows": [
+          [
+            "Intramural hematoma (IMH)",
+            "Crescentic, hyperdense non-enhancing wall thickening",
+            "30 to 40 percent progress to overt dissection or rupture; treat like dissection"
+          ],
+          [
+            "Penetrating ulcer (PAU)",
+            "Crater-like outpouching through calcified plaque",
+            "High rate of pseudoaneurysm or transmural rupture; treated with focal TEVAR"
+          ],
+          [
+            "Classic dissection",
+            "Intimal flap separating true and false lumens",
+            "Managed based on Stanford Type A (surgery) vs Type B (medical/TEVAR)"
+          ]
+        ]
+      }
+    }
+  ]
+}
