@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "bio-gluconeogenesis-glycogen",
+ "subject": "biochemistry",
+ "title": "Fasting, starvation and diabetes integration",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Fasting unfolds in predictable metabolic acts governed by the **insulin to glucagon ratio**: glycogenolysis covers the first twelve to eighteen hours, gluconeogenesis rises as stores fade, lipolysis accelerates, and ketones climb over days. Each act protects blood glucose for brain and red cells while progressively shifting other tissues to fat. Illness compresses the timetable, which is why sick children hypoglycaemia faster than adults.",
+   "say": "Fasting unfolds in acts governed by the insulin to glucagon ratio. Glycogenolysis covers the first twelve to eighteen hours, then glucose production and fat burning rise, and ketones climb over days. Illness compresses the timetable in children.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fasting window", "Dominant process", "Glucose defended by"],
+    "rows": [
+     ["0 to 18 hours", "Glycogenolysis", "Liver glycogen"],
+     ["1 to 3 days", "Gluconeogenesis peak", "Alanine, lactate, glycerol"],
+     ["Beyond 3 days", "Ketone adaptation", "Fat, brain spares glucose"]
+    ]
+   }
+  },
+  {
+   "tx": "By prolonged starvation the brain draws roughly two thirds of its energy from **ketone bodies**, cutting its glucose need from about 120 grams toward 40 grams daily. Muscle proteolysis therefore slows, urinary nitrogen falls, and survival time becomes a function of fat stores rather than protein. This protein sparing adaptation is the central triumph of starvation physiology and a guaranteed examination theme.",
+   "say": "In prolonged starvation the brain draws roughly two thirds of its energy from ketones, cutting glucose need sharply. Muscle breakdown slows and survival becomes a function of fat stores. This protein sparing adaptation is central to starvation physiology.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Early fasting brain", "points": ["Glucose about 120 g daily", "Muscle alanine flows freely", "Nitrogen loss high"]},
+    "right": {"title": "Adapted starvation brain", "points": ["Ketones supply two thirds", "Glucose need about 40 g daily", "Protein spared, nitrogen loss low"]
+    }
+   }
+  },
+  {
+   "tx": "Hypoglycaemia defence fires in a fixed hormonal order worth reciting: insulin falls first, then **glucagon** rises, then adrenaline (critical when glucagon fails in longstanding diabetes), with cortisol and growth hormone sustaining the late response. Symptoms split into autonomic warnings (sweating, tremor, hunger) and neuroglycopenic failure (confusion, seizures, coma). Whipple triad (symptoms, low measured glucose, relief on correction) still validates true hypoglycaemia.",
+   "say": "Defence fires in order: insulin falls, then glucagon rises, then adrenaline, with cortisol and growth hormone sustaining the late response. Whipple triad still validates true hypoglycaemia: symptoms, low measured glucose, and relief on correction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Counter-regulation order",
+    "nodes": [
+     {"id": "i", "label": "Insulin falls"},
+     {"id": "g", "label": "Glucagon rises"},
+     {"id": "a", "label": "Adrenaline rises"},
+     {"id": "c", "label": "Cortisol and GH sustain"}
+    ],
+    "edges": [["i", "g"], ["g", "a"], ["a", "c"]]
+   }
+  },
+  {
+   "tx": "Diabetic ketoacidosis is fasting physiology without brakes: absent insulin unleashes lipolysis and hepatic **ketogenesis** while gluconeogenesis drives hyperglycaemia, osmotic diuresis dehydrates, and potassium shifts deceive (total body potassium low despite normal plasma levels). Insulin, fluids and potassium replacement reverse all three arms; searching for the precipitating infection or missed doses prevents recurrence. Euglycaemic ketoacidosis with SGLT2 inhibitors traps the unwary who trust glucose alone.",
+   "say": "Diabetic ketoacidosis is fasting without brakes: lipolysis and ketogenesis surge while glucose production drives hyperglycaemia and dehydration. Insulin, fluids and potassium reverse all three arms. Euglycaemic ketoacidosis traps those who trust glucose alone.",
+   "vis": null
+  },
+  {
+   "tx": "Refeeding after starvation carries its own danger: insulin surge drives phosphate, potassium and magnesium into cells for anabolism, plasma **phosphate** crashes, and heart, respiratory muscles and blood fail (refeeding syndrome). Thiamine must precede carbohydrate, electrolytes are replaced pre emptively, and calories climb slowly over days. Oncology, alcohol dependence and neglected elderly patients share this risk on any ward.",
+   "say": "Refeeding drives phosphate, potassium and magnesium into cells, plasma phosphate crashes, and heart and respiratory muscles fail. Thiamine must precede carbohydrate, electrolytes are replaced early, and calories climb slowly over days.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Refeeding risk", "Mechanism", "Prevention"],
+    "rows": [
+     ["Hypophosphataemia", "Insulin drives phosphate into cells", "Replace before and during feeds"],
+     ["Wernicke precipitation", "Glucose consumes thiamine at PDH", "Thiamine first"],
+     ["Fluid and heart failure", "Sodium retention, weak myocardium", "Slow calories, monitor"]
+    ]
+   }
+  },
+  {
+   "tx": "Renal gluconeogenesis deserves its examination line: kidney cortex contributes up to a fifth of endogenous glucose in prolonged fasting and couples glutamine metabolism to **ammonia** excretion, disposing acid while releasing glucose carbon. Chronic kidney disease therefore predisposes to hypoglycaemia (reduced production plus reduced insulin clearance), and acidosis increases renal glucose contribution. Liver and kidney divide fasting labour more equally the longer food is absent.",
+   "say": "Kidney cortex contributes up to a fifth of glucose in prolonged fasting and couples glutamine use to ammonia excretion. Kidney disease predisposes to hypoglycaemia. Liver and kidney divide fasting labour more equally the longer food is absent.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Liver in fasting", "points": ["Glycogen first, then GNG", "Ketones exported", "Urea disposes nitrogen"]},
+    "right": {"title": "Kidney cortex in fasting", "points": ["GNG share grows with duration", "Glutamine to glucose plus ammonia", "Acid excreted as ammonium"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,245 @@
+{
+  "gen": "AI",
+  "id": "prd-image-gently-protocols",
+  "module": "Pediatric Radiation Protection, ALARA and Contrast Media",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Image Gently Campaign: ALARA Principles and Pediatric CT Optimization",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Children possess rapidly proliferating tissues and many future decades of life, making their radiation sensitivity substantially higher than adults. Because of this biology, radiation protection requires intentional adjustments for every pediatric scan.",
+      "tx": "Respect **radiation sensitivity in pediatric tissue** as the foundational principle of pediatric imaging. Rapidly dividing cellular populations and a prolonged future lifespan increase the risk of radiation-induced malignancy. Pediatric tissues exhibit a 3 to 10-fold higher lifetime radiation sensitivity compared to adults, making radiation dose stewardship critical across radiography, fluoroscopy, and computed tomography (ALARA principle).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pediatric tissue biology",
+          "points": [
+            "3 to 10-fold higher radiation sensitivity",
+            "Rapid mitotic rate in growing organs",
+            "Decades of remaining life to manifest risk"
+          ]
+        },
+        "right": {
+          "title": "Adult tissue biology",
+          "points": [
+            "Baseline baseline somatic radioresistance",
+            "Slower cellular proliferation rates",
+            "Shorter actuarial latency window"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The Image Gently campaign transformed pediatric radiology by insisting that protocols match the patient rather than adult presets. Child-sizing requires lowering tube current, voltage, and exposure time strictly by body size.",
+      "tx": "Adopt the **Image Gently campaign** guidance across every computed tomography (CT) protocol. The campaign advocates child-sizing scan parameters rather than using adult factory presets. Radiologists and technologists modify tube current-time product (mAs), tube potential (kVp), and pitch according to patient weight, age, and cross-sectional body diameter to keep exposures as low as reasonably achievable (SSDE organ dose).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Pediatric adjustment",
+          "Clinical objective"
+        ],
+        "rows": [
+          [
+            "kVp",
+            "Reduce to 70-80 kVp",
+            "Increases iodine absorption near k-edge"
+          ],
+          [
+            "mAs",
+            "Modulate by body weight",
+            "Avoids excessive photon flux in thin tissue"
+          ],
+          [
+            "Pitch",
+            "Increase above 1.0",
+            "Shortens acquisition time and motion artifact"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dose indices on scanner consoles reflect standard cylindrical phantoms rather than pediatric anatomy. Size-Specific Dose Estimates correct this discrepancy to calculate the true organ dose delivered to a child.",
+      "tx": "Calculate the **size-specific dose estimate** (SSDE) to quantify pediatric absorbed dose accurately. The volume CT dose index (CTDIvol) displayed on consoles is measured in 16-cm or 32-cm plastic phantoms, which substantially underestimates absorbed dose in smaller bodies. SSDE applies conversion factors based on the effective diameter of the patient, providing a standardized metric for quality monitoring and clinical auditing (Multiphase scanning avoidance).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ctdivol",
+            "label": "Measured CTDIvol on console"
+          },
+          {
+            "id": "diameter",
+            "label": "Measure patient effective diameter"
+          },
+          {
+            "id": "factor",
+            "label": "Apply AAPM 204 conversion factor"
+          },
+          {
+            "id": "ssde",
+            "label": "Calculate true patient SSDE"
+          }
+        ],
+        "edges": [
+          [
+            "ctdivol",
+            "diameter"
+          ],
+          [
+            "diameter",
+            "factor"
+          ],
+          [
+            "factor",
+            "ssde"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Never perform multiphase CT scans in children unless there is a rare, life-threatening indication. Scanning without non-contrast phases immediately halves their lifetime radiation burden.",
+      "tx": "Enforce the **elimination of multiphase pediatric CT** across acute protocols. Routine non-contrast, arterial, and delayed phases are unnecessary in pediatric imaging and simply multiply radiation exposure without changing clinical decisions. Single-phase contrast-enhanced imaging delivers definitive diagnostic information, reducing lifetime attributable cancer risk by 50-70% compared to multiphase adult protocols (Low kVp selection).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Single-phase protocol",
+          "points": [
+            "50-70% lower radiation exposure",
+            "Diagnostic contrast enhancement",
+            "Sufficient for appendicitis and trauma"
+          ]
+        },
+        "right": {
+          "title": "Multiphase protocol (avoid)",
+          "points": [
+            "Triple radiation dose burden",
+            "Redundant unenhanced and delayed acquisitions",
+            "No added yield in standard emergencies"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Lowering the tube voltage in infants increases the photoelectric effect near the iodine k-edge. This physics phenomenon produces bright vascular opacification even while reducing total radiation dose.",
+      "tx": "Implement **low kVp optimization** to enhance vascular and parenchymal contrast conspicuity. Reducing tube potential from 120 kVp to 70-80 kVp in infants and young children brings the x-ray spectrum closer to the iodine k-edge of 33.2 keV. This maneuver exploits the photoelectric effect, enhancing iodinated contrast attenuation while reducing the total radiation dose absorbed by small patients (Iterative reconstruction).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tube potential",
+          "Physical mechanism",
+          "Clinical advantage"
+        ],
+        "rows": [
+          [
+            "120 kVp",
+            "Compton scatter dominates",
+            "Higher dose, subdued iodine contrast"
+          ],
+          [
+            "80 kVp",
+            "Photoelectric effect increases",
+            "Lower radiation dose, higher contrast"
+          ],
+          [
+            "70 kVp",
+            "Near iodine k-edge (33.2 keV)",
+            "Optimal for neonatal and infant angiograms"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Modern reconstruction engines use mathematical models instead of filtered back projection. These iterative algorithms filter out image noise, allowing substantial dose reduction without diagnostic compromise.",
+      "tx": "Utilize **iterative reconstruction algorithms** on all pediatric acquisitions. Model-based and deep-learning iterative reconstruction systems process raw projection data repeatedly to filter out quantum mottle and geometric artifacts. Applying these algorithms allows 40-60% reduction in radiation dose compared to standard filtered back projection while preserving edge definition and low-contrast resolution (First-line ultrasonography).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "raw",
+            "label": "Low-dose raw CT acquisition"
+          },
+          {
+            "id": "model",
+            "label": "Forward projection & statistical modeling"
+          },
+          {
+            "id": "noise",
+            "label": "Noise reduction & artifact suppression"
+          },
+          {
+            "id": "diag",
+            "label": "Diagnostic high-resolution reconstruction"
+          }
+        ],
+        "edges": [
+          [
+            "raw",
+            "model"
+          ],
+          [
+            "model",
+            "noise"
+          ],
+          [
+            "noise",
+            "diag"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The safest radiation is zero radiation, which makes ultrasonography the mandatory starting point for pediatric abdominal pain and palpable masses. CT should be reserved only for cases where ultrasound is inconclusive.",
+      "tx": "Prioritize **ultrasound as primary initial modality** whenever evaluating pediatric disease. Grayscale and Doppler sonography deliver exceptional spatial resolution in thin children without ionizing radiation or sedation. Mandatory first-line sonography is the standard of care for acute abdominal pain, suspected appendicitis, intussusception, abdominal masses, and neonatal neuroimaging, reserving CT for complex polytrauma or surgical planning (Pulsed fluoroscopy).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical presentation",
+          "First-line modality",
+          "Secondary cross-sectional modality"
+        ],
+        "rows": [
+          [
+            "Suspected appendicitis",
+            "Graded-compression ultrasound",
+            "Low-dose contrast CT if equivocal"
+          ],
+          [
+            "Ileocolic intussusception",
+            "Abdominal ultrasound",
+            "Fluoroscopic air/contrast enema"
+          ],
+          [
+            "Neonatal head evaluation",
+            "Transfontanelle cranial US",
+            "Targeted brain MRI"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When fluoroscopy is necessary, low pulsed frame rates and anti-scatter grid removal keep the dose minimal. In infants under ten kilograms, the patient body produces minimal scatter, making the grid unnecessary.",
+      "tx": "Adjust **fluoroscopy pulsed frame rates** and equipment hardware for all pediatric gastrointestinal and urological procedures. In children under 10 kg, remove the anti-scatter grid because thin bodies generate negligible scatter radiation, instantly cutting exposure by half. Lower the pulsed fluoroscopy rate from 15 or 30 pulses per second down to 3-7.5 pulses per second, and rely on last-image-hold rather than continuous live exposure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pediatric fluoroscopy rules",
+          "points": [
+            "3-7.5 pulses per second low pulsed rate",
+            "Grid removal in infants under 10 kg",
+            "Use last-image-hold for documentation"
+          ]
+        },
+        "right": {
+          "title": "Adult fluoroscopy practice",
+          "points": [
+            "15-30 frames per second continuous",
+            "Anti-scatter grid permanently engaged",
+            "Cine loops with high cumulative exposure"
+          ]
+        }
+      }
+    }
+  ]
+}

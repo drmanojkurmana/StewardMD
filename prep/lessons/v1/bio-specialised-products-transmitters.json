@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-specialised-products",
+ "subject": "biochemistry",
+ "title": "Histamine and inhibitory transmitters",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Histamine** is decarboxylated histidine (PLP) stored in mast cells, basophils and gastric enterochromaffin like cells, acting at H1 (allergy, vasodilation, bronchospasm, wakefulness), H2 (gastric acid via cAMP), H3 (presynaptic brake in brain) and H4 (immune chemotaxis) receptors. First generation H1 blockers sedate by brain penetration; acid suppression exploits H2 before proton pump inhibitors surpassed it; scombroid fish poisoning mimics allergy from bacterial histamine in spoiled fish.",
+   "say": "Histamine acts at H1 for allergy, H2 for gastric acid, H3 as a brain brake and H4 for immune traffic. Scombroid poisoning mimics allergy from bacterial histamine in spoiled fish.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-specialised-products-gen2.webp",
+    "alt": "Split view shows mast cell histamine on vessel targets beside glutamate formation pathways in brain tissue.",
+    "caption": "Histamine targets beside GABA formation, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Glutamate, made from alpha-ketoglutarate by transamination and recycled through the astrocyte **glutamine cycle**, is the dominant excitatory transmitter, acting at NMDA (calcium, coincidence detection, magnesium block relieved by depolarisation), AMPA (fast sodium) and metabotropic receptors. Excess glutamate excitotoxicity injures neurons in stroke and status epilepticus, while ketamine and memantine exploit NMDA blockade therapeutically at opposite potency poles.",
+   "say": "Glutamate is the dominant excitatory transmitter through NMDA and AMPA receptors, recycled through astrocyte glutamine. Excess causes excitotoxic injury, while NMDA blockade is exploited therapeutically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Glutamate glutamine cycle",
+    "nodes": [
+     {"id": "neur", "label": "Neuron releases glutamate"},
+     {"id": "astr", "label": "Astrocyte takes it up"},
+     {"id": "gln", "label": "Glutamine returned (synthetase)"},
+     {"id": "back", "label": "Neuron remakes glutamate"}
+    ],
+    "edges": [["neur", "astr"], ["astr", "gln"], ["gln", "back"]]
+   }
+  },
+  {
+   "tx": "Decarboxylating glutamate by glutamic acid decarboxylase (PLP) yields **GABA**, the dominant inhibitory transmitter at GABA-A chloride channels (benzodiazepine, barbiturate, alcohol and anaesthetic modulation) and GABA-B G protein receptors (baclofen). Pyridoxine failure therefore seizes (isoniazid convulsions resistant to standard drugs until B6 given), and vigabatrin raises GABA by irreversibly blocking GABA transaminase breakdown, at the cost of visual field constriction.",
+   "say": "Decarboxylating glutamate yields GABA, the dominant inhibitory transmitter. Pyridoxine failure seizes until B6 is given, and vigabatrin raises GABA by blocking its breakdown irreversibly.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Glutamate (excitatory)", "points": ["NMDA calcium learning receptor", "Excitotoxic in excess", "From alpha-ketoglutarate"]},
+    "right": {"title": "GABA (inhibitory)", "points": ["GABA-A chloride channel drugs", "Made by PLP decarboxylase", "Vigabatrin blocks its breakdown"]
+    }
+   }
+  },
+  {
+   "tx": "**Glycine** inhibits in spinal cord and brainstem through chloride channels (strychnine antagonism causes hyperekplexia like convulsions; tetanus toxin prevents glycine and GABA release causing spastic paralysis) while co-activating NMDA receptors in cortex with D-serine. The same molecule therefore brakes below and enables above, resolving apparent contradictions in stems that place glycine on both sides.",
+   "say": "Glycine inhibits in cord through chloride channels, blocked by strychnine and silenced by tetanus toxin, while co-activating cortical NMDA receptors. The same molecule brakes below and enables above.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Agent", "Glycine system effect", "Clinical picture"],
+    "rows": [
+     ["Strychnine", "Blocks glycine receptors", "Stimulus convulsions, opisthotonus"],
+     ["Tetanus toxin", "Blocks glycine and GABA release", "Spastic paralysis, trismus"],
+     ["Glycine cleavage failure", "Glycine floods brain", "Neonatal encephalopathy (prior lesson)"]
+    ]
+   }
+  },
+  {
+   "tx": "Acetylcholine is deliberately not amino acid derived (choline plus acetyl-CoA by choline acetyltransferase), a boundary examiners probe when listing amino acid products; its vesicular transport, esterase termination and nicotinic/muscarinic split belong to pharmacology, but Alzheimer cholinergic loss and myasthenia link back biochemically. **Histidine** also yields carnosine in muscle and histamine above, completing its modest but testable portfolio.",
+   "say": "Acetylcholine is not amino acid derived, a boundary examiners probe when listing amino acid products. Histidine yields carnosine in muscle and histamine for allergy and acid control.",
+   "vis": null
+  },
+  {
+   "tx": "Mast cell activation syndromes and **anaphylaxis** translate histamine physiology to emergencies: tryptase peaks confirm mast cell degranulation, adrenaline (not antihistamines) reverses bronchospasm, vasodilation and oedema through alpha and beta receptors, and biphasic reactions mandate observation. Hereditary alpha tryptasemia and systemic mastocytosis (KIT D816V, c-kit driven) explain recurrent unexplained anaphylaxis stems in allergy clinics.",
+   "say": "Tryptase confirms mast cell degranulation, and adrenaline reverses anaphylaxis while antihistamines only assist. Systemic mastocytosis explains recurrent unexplained anaphylaxis stems in allergy clinics.",
+   "vis": {
+    "kind": "flow",
+    "title": "Anaphylaxis logic in one line",
+    "nodes": [
+     {"id": "mast", "label": "Mast cells degranulate (histamine)"},
+     {"id": "vas", "label": "Vasodilation, bronchospasm, oedema"},
+     {"id": "adr", "label": "Adrenaline reverses all three"},
+     {"id": "tryp", "label": "Tryptase confirms afterwards"}
+    ],
+    "edges": [["mast", "vas"], ["vas", "adr"], ["mast", "tryp"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
