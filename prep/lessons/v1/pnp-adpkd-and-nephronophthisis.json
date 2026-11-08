@@ -34,14 +34,10 @@
       "say": "Even a solitary macroscopic cyst carries definitive diagnostic predictive power in young at-risk children.",
       "tx": "Evaluate familial offspring using revised **Pediatric ADPKD ultrasound diagnostic criteria** on screening sonography. In at-risk children < 15 years with an affected first-degree relative, the presence of >= 1 renal cyst of any size in either kidney has a positive predictive value > 95% for ADPKD, confirming early heterozygous transmission without requiring bilateral involvement.",
       "vis": {
-        "kind": "table",
-        "title": "Pediatric ADPKD Diagnostic Sonographic Criteria",
-        "cols": ["Patient Age Bracket", "Ultrasound Finding Threshold", "Positive Predictive Value"],
-        "rows": [
-          ["Children < 15 years", ">= 1 renal cyst in either kidney", "> 95% predictive with positive family history"],
-          ["Individuals 15-39 years", ">= 3 cysts (unilateral or bilateral)", "Confirms adult-onset diagnosis"],
-          ["Symptom Burden", "Early nocturnal hypertension", "Mandates ambulatory 24h blood pressure monitoring"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/adpkd-fig1.webp",
+        "alt": "Bilateral polycystic kidneys with liver cysts and a berry aneurysm.",
+        "caption": "ADPKD: cystic kidneys, liver cysts and berry aneurysm. Credit: StewardMD."
       }
     },
     {
@@ -50,15 +46,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "v2", "label": "Vasopressin Binds Basolateral V2 Receptor"},
-          {"id": "camp", "label": "cAMP Surges & Drives Tubular Fluid Secretion"},
-          {"id": "tol", "label": "Oral Tolvaptan Blocks V2 Receptor"},
-          {"id": "slow", "label": "Slows Total Kidney Volume & Preserves eGFR"}
+          {
+            "id": "v2",
+            "label": "Vasopressin Binds Basolateral V2 Receptor"
+          },
+          {
+            "id": "camp",
+            "label": "cAMP Surges & Drives Tubular Fluid Secretion"
+          },
+          {
+            "id": "tol",
+            "label": "Oral Tolvaptan Blocks V2 Receptor"
+          },
+          {
+            "id": "slow",
+            "label": "Slows Total Kidney Volume & Preserves eGFR"
+          }
         ],
         "edges": [
-          ["v2", "camp"],
-          ["camp", "tol"],
-          ["tol", "slow"]
+          [
+            "v2",
+            "camp"
+          ],
+          [
+            "camp",
+            "tol"
+          ],
+          [
+            "tol",
+            "slow"
+          ]
         ]
       }
     },
@@ -68,11 +85,27 @@
       "vis": {
         "kind": "table",
         "title": "Juvenile Nephronophthisis Genetic Profile",
-        "cols": ["Parameter", "Finding / Locus", "Clinical Course"],
+        "cols": [
+          "Parameter",
+          "Finding / Locus",
+          "Clinical Course"
+        ],
         "rows": [
-          ["Inheritance Pattern", "Autosomal recessive ciliopathy", "Absence of enlarged polycystic kidneys"],
-          ["Primary Mutation", "NPHP1 homozygous deletion (2q13)", "Accounts for 20-25% of juvenile presentations"],
-          ["Renal Prognosis", "End-stage renal disease", "Median age 13 years requiring dialysis or transplant"]
+          [
+            "Inheritance Pattern",
+            "Autosomal recessive ciliopathy",
+            "Absence of enlarged polycystic kidneys"
+          ],
+          [
+            "Primary Mutation",
+            "NPHP1 homozygous deletion (2q13)",
+            "Accounts for 20-25% of juvenile presentations"
+          ],
+          [
+            "Renal Prognosis",
+            "End-stage renal disease",
+            "Median age 13 years requiring dialysis or transplant"
+          ]
         ]
       }
     },
@@ -105,11 +138,27 @@
       "vis": {
         "kind": "table",
         "title": "Clinical Manifestations of Tubulointerstitial Nephronophthisis",
-        "cols": ["Feature", "Symptom / Sign", "Pathophysiological Mechanism"],
+        "cols": [
+          "Feature",
+          "Symptom / Sign",
+          "Pathophysiological Mechanism"
+        ],
         "rows": [
-          ["Concentration Defect", "Polyuria, polydipsia, enuresis", "Medullary tubular unresponsiveness to vasopressin"],
-          ["Tubular Salt Wasting", "Hyponatremic volume contraction", "Failed distal sodium reabsorption"],
-          ["Severe Anemia", "Normocytic normochromic anemia", "Early interstitial destruction of erythropoietin-producing cells"]
+          [
+            "Concentration Defect",
+            "Polyuria, polydipsia, enuresis",
+            "Medullary tubular unresponsiveness to vasopressin"
+          ],
+          [
+            "Tubular Salt Wasting",
+            "Hyponatremic volume contraction",
+            "Failed distal sodium reabsorption"
+          ],
+          [
+            "Severe Anemia",
+            "Normocytic normochromic anemia",
+            "Early interstitial destruction of erythropoietin-producing cells"
+          ]
         ]
       }
     },
@@ -119,15 +168,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "cil", "label": "Shared Ciliary Axoneme Disruption"},
-          {"id": "kid", "label": "Tubulointerstitial Nephronophthisis"},
-          {"id": "ret", "label": "Tapetoretinal Degeneration (Leber Amaurosis)"},
-          {"id": "erg", "label": "Electroretinography Confirms Senior-Loken"}
+          {
+            "id": "cil",
+            "label": "Shared Ciliary Axoneme Disruption"
+          },
+          {
+            "id": "kid",
+            "label": "Tubulointerstitial Nephronophthisis"
+          },
+          {
+            "id": "ret",
+            "label": "Tapetoretinal Degeneration (Leber Amaurosis)"
+          },
+          {
+            "id": "erg",
+            "label": "Electroretinography Confirms Senior-Loken"
+          }
         ],
         "edges": [
-          ["cil", "kid"],
-          ["cil", "ret"],
-          ["ret", "erg"]
+          [
+            "cil",
+            "kid"
+          ],
+          [
+            "cil",
+            "ret"
+          ],
+          [
+            "ret",
+            "erg"
+          ]
         ]
       }
     },
@@ -137,11 +207,27 @@
       "vis": {
         "kind": "table",
         "title": "Joubert Syndrome Systemic Manifestations",
-        "cols": ["Organ System", "Characteristic Feature", "Diagnostic Modality"],
+        "cols": [
+          "Organ System",
+          "Characteristic Feature",
+          "Diagnostic Modality"
+        ],
         "rows": [
-          ["Central Nervous", "Molar tooth sign on axial MRI", "Deep interpeduncular fossa & elongated peduncles"],
-          ["Respiratory", "Neonatal episodic hyperpnea & apnea", "Clinical observation in neonatal nursery"],
-          ["Renal", "Corticomedullary cystic ciliopathy", "Renal sonography showing NPHP pattern"]
+          [
+            "Central Nervous",
+            "Molar tooth sign on axial MRI",
+            "Deep interpeduncular fossa & elongated peduncles"
+          ],
+          [
+            "Respiratory",
+            "Neonatal episodic hyperpnea & apnea",
+            "Clinical observation in neonatal nursery"
+          ],
+          [
+            "Renal",
+            "Corticomedullary cystic ciliopathy",
+            "Renal sonography showing NPHP pattern"
+          ]
         ]
       }
     }

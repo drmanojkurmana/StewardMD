@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sct-lvad-mechanical-support",
+  "title": "Ventricular Assist Devices: LVAD Mechanics, Inflow, Outflow and Complications",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Mechanical Circulatory Support)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 9 (Postoperative Care and Mechanical Support)",
+    "STS/INTERMACS Annual Registry Reports and Guidelines"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Left ventricular assist devices provide mechanical circulatory support in end-stage refractory heart failure. Contemporary devices employ continuous-flow rotary or centrifugal pumps with magnetically levitated impellers. Implantation serves as a bridge to heart transplantation or as permanent lifetime destination therapy.",
+      "tx": "Contemporary **continuous-flow** mechanical pumps are indicated for end-stage heart failure refractory to maximum medical therapy. Devices provide durable circulatory unloading as a **bridge to transplant** in eligible candidates or as permanent **destination therapy** in non-transplant candidates, significantly improving 2-year survival and functional capacity compared to inotropic therapy alone.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix-heartfailure-signs.jpg",
+        "ar": 1.3333,
+        "caption": "Clinical signs of advanced heart failure. Credit: StewardMD.",
+        "alt": "Clinical signs of advanced congestive heart failure requiring mechanical circulatory support."
+      }
+    },
+    {
+      "say": "Proper positioning of the left ventricular inflow cannula is critical to avoid catastrophic device malfunction. The surgeon cores the left ventricular apex and sews the sewing ring parallel to the interventricular septum. Directing the cannula tip precisely toward the mitral valve prevents suction events against the ventricular walls.",
+      "tx": "The surgeon cores the **left ventricular apex** under transesophageal echocardiographic guidance, securing the sewing ring with pledgeted sutures. The **inflow cannula** must point directly down the chamber axis along the **mitral valve axis**. Angulation toward the interventricular septum or lateral wall precipitates low-flow suction events and turbulent flow.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Locate true left ventricular apex lateral to LAD on beating heart"
+          },
+          {
+            "id": "b",
+            "label": "Secure circular sewing ring with multiple pledgeted mattress sutures"
+          },
+          {
+            "id": "c",
+            "label": "Full-thickness circular apical ventriculotomy using cylindrical coring tool"
+          },
+          {
+            "id": "d",
+            "label": "Seat inflow cannula directed coaxially toward mitral valve orifice"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The outflow graft carries pressurized blood from the pump directly into the systemic circulation. Surgeons construct a bevelled end-to-side anastomosis to the ascending aorta using a partial occlusion clamp. Meticulous graft routing prevents kinks and minimizes compression from the adjacent sternum.",
+      "tx": "The prosthetic **outflow graft** is routed through the pericardial space and anastomosed in a bevelled end-to-side fashion to the **ascending aorta** with running polypropylene. Achieving smooth **laminar flow** requires precise graft length and geometry to eliminate mechanical kinking or extrinsic compression from the sternum upon chest closure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anastomotic Component",
+          "Target Anatomical Site",
+          "Technical Pitfall to Avoid"
+        ],
+        "rows": [
+          [
+            "Inflow cannula",
+            "True left ventricular apex",
+            "Septal or lateral wall suction occlusion"
+          ],
+          [
+            "Outflow graft",
+            "Right anterolateral ascending aorta",
+            "Graft twist, redundant kinking, or sternal impingement"
+          ],
+          [
+            "Driveline tunnel",
+            "Left upper rectus abdominis muscle",
+            "Acute angle bends or superficial cutaneous erosion"
+          ],
+          [
+            "Pump housing",
+            "Intrapericardial pocket",
+            "Diaphragmatic compression or pericardial hematoma"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Acute right ventricular failure occurs in up to thirty percent of patients after LVAD placement. Decompressing the left ventricle shifts the interventricular septum to the left, which impairs right ventricular contractility. Concurrently increased venous return can rapidly overwhelm an already compromised right ventricle.",
+      "tx": "Approximately 20 to 30 percent of recipients develop **right ventricular failure** following pump activation. Unloading the left chamber causes a marked **interventricular septum shift** toward the left, altering right ventricular geometry and mechanical contractility. Concurrently augmented systemic **venous return** overloads the pre-existing dysfunctional right ventricle, requiring prompt inotropic and pulmonary vasodilator therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Left Ventricle Effects",
+          "points": [
+            "Profound pressure and volume unloading",
+            "Decreased end-diastolic wall stress",
+            "Leftward deviation of the ventricular septum",
+            "Restores forward systemic cardiac output"
+          ]
+        },
+        "right": {
+          "title": "Right Ventricle Consequences",
+          "points": [
+            "Immediate increase in pulmonary venous return",
+            "Septal shift eliminates contractile support",
+            "Tricuspid annular dilation and severe regurgitation",
+            "May require temporary right-sided mechanical support"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Continuous high shear stress across the spinning impeller damages high molecular weight von Willebrand factor multimers. This creates an acquired bleeding diathesis in nearly all long-term LVAD recipients. Patients present with frequent mucosal hemorrhages and recurrent gastrointestinal bleeding from occult arteriovenous malformations.",
+      "tx": "Rotary blood flow exposes circulation to extreme shear stress that cleaves **high-molecular-weight multimers**, causing **acquired von Willebrand disease**. Coupled with diminished arterial pulse pressure, this leads to mucosal vascular dysplasia and recurrent gastrointestinal bleeding from intestinal **arteriovenous malformation** lesions, often necessitating octreotide, endoscopic ablation, or cautious anticoagulation adjustments.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/heart-failure-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Acute left heart failure hemodynamics. Credit: StewardMD.",
+        "alt": "Hemodynamic pathophysiology of heart failure and assist device physiology."
+      }
+    },
+    {
+      "say": "Assist device thrombosis is a life-threatening complication that disrupts pump mechanics. Clot formation within the housing causes sudden spikes in electrical power consumption and intravascular hemolysis. Clinicians detect sharp rises in serum lactate dehydrogenase, accompanied by hemoglobinuria and worsening heart failure.",
+      "tx": "Thrombus deposition within the internal impeller causes acute **pump thrombosis**, signaled by sudden **pump power spike** recordings as the motor overcomes rotational resistance. Intravascular shear destruction of erythrocytes produces marked hemoglobinuria and a surge in serum **lactate dehydrogenase** exceeding 2.5 to 3 times the upper limit of normal, demanding urgent heparinization or emergent pump exchange.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Diagnostic Marker",
+          "Expected Finding in Thrombosis",
+          "Pathological Mechanism"
+        ],
+        "rows": [
+          [
+            "Serum LDH level",
+            ">2.5 to 3.0 times upper normal limit",
+            "Severe shear-induced intravascular erythrocyte hemolysis"
+          ],
+          [
+            "Pump power telemetry",
+            "Sustained abnormal power spikes (watts)",
+            "Increased motor torque required to turn clot-fouled rotor"
+          ],
+          [
+            "Plasma free hemoglobin",
+            "Elevated (>40 mg/dL)",
+            "Mechanical lysis of red blood cells across clot surface"
+          ],
+          [
+            "Urine analysis",
+            "Gross dark hemoglobinuria",
+            "Free hemoglobin filtration through renal glomeruli"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The percutaneous driveline powers the internal pump and represents the most common site of infection, which is recognized by surgical teams. Trauma or traction disrupts the tissue seal around the exit site, allowing skin pathogens to colonize the cable. Management combines strict wound care, stabilization dressings, and targeted antimicrobial therapy.",
+      "tx": "The transcutaneous power lead constitutes the most common portal of entry for serious **driveline infection**. Bacterial invasion along the subcutaneous tract is driven primarily by **exit site** trauma and poor anchor stabilization. Management requires strict sterile dressing protocols, immobilization belts, and culture-directed **antibiotic suppression** to prevent ascendance toward the intrapericardial housing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Skin trauma or driveline traction breaks fibrous tissue ingrowth"
+          },
+          {
+            "id": "b",
+            "label": "Staphylococcal colonization produces erythema and purulent drainage"
+          },
+          {
+            "id": "c",
+            "label": "Ultrasound checks for fluid collections along subcutaneous tunnel"
+          },
+          {
+            "id": "d",
+            "label": "Targeted systemic antibiotics and specialized wound immobilization"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Outpatient medical management balances the competing risks of thromboembolism and severe bleeding. Patients take daily antiplatelet therapy together with the oral anticoagulant warfarin. Teams titrate the medication to maintain an international normalized ratio between two and three.",
+      "tx": "Maintenance of outpatient assist device therapy requires rigorous chronic oral anticoagulation combining daily antiplatelet therapy with **warfarin** therapy. Clinicians monitor the **international normalized ratio** strictly between 2.0 and 3.0 to achieve reliable **thromboembolism** prevention across the artificial pump surfaces while minimizing the competing risk of fatal intracranial or gastrointestinal hemorrhage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thrombotic Risk Factors",
+          "points": [
+            "Foreign surface contact activation",
+            "Low-flow states from hypovolemia or dehydration",
+            "Subtherapeutic INR (<2.0)",
+            "Systemic infection promoting procoagulant state"
+          ]
+        },
+        "right": {
+          "title": "Hemorrhagic Risk Factors",
+          "points": [
+            "Supratherapeutic INR (>3.0)",
+            "Shear loss of von Willebrand factor multimers",
+            "Pre-existing intestinal arteriovenous malformations",
+            "Concomitant dual antiplatelet therapy"
+          ]
+        }
+      }
+    }
+  ]
+}
