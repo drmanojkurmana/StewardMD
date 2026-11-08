@@ -2815,7 +2815,9 @@
   function homeRedesignMarkup() {
     var pro = isProV4();
     return '' +
-      '<header class="rnav-head rds-safe-top hrf-head">' +
+      '<main class="v3-main rnav-main"><div class="rnav-stack">' +
+        '<div class="hrf-hero"><img class="hrf-art" src="/assets/home-hero.webp" width="190" height="128" alt="" aria-hidden="true" fetchpriority="high">' +
+      '<header class="rnav-head hrf-head">' +
         '<button class="rds-icon-btn" data-act="menu" aria-label="Menu">' + ric("menu") + '</button>' +
         '<div class="rnav-brand"><img src="/logo.png" alt="StewardMD"><span>Steward<b>MD</b></span><span class="hrf-pro" id="hrfProChip"' + (pro ? '' : ' hidden') + '>Pro</span></div>' +
         '<div class="rnav-head-sp"></div>' +
@@ -2823,8 +2825,7 @@
         '<button class="rds-icon-btn" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + ric("dark_mode") + '</button>' +
         '<button class="rds-icon-btn rnav-bell v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + ric("notifications") + '</button>' +
       '</header>' +
-      '<main class="v3-main rnav-main"><div class="rnav-stack">' +
-        '<div class="hrf-hero"><div class="rnav-greet"><div class="rnav-eyebrow hrf-date">' + dateV4() + '</div><div class="rnav-hi hrf-greet">' + greetHeroV4() + '</div><div class="hrf-rule" aria-hidden="true"></div></div><img class="hrf-steth" src="/assets/home-hero.webp" width="430" height="218" alt="" aria-hidden="true" fetchpriority="high" decoding="async"></div>' +
+        '<div class="rnav-greet"><div class="rnav-eyebrow hrf-date">' + dateV4() + '</div><div class="rnav-hi hrf-greet">' + greetHeroV4() + '</div><div class="hrf-rule" aria-hidden="true"></div></div></div>' +
         '<div class="rnav-qa hrf-qa">' +
           '<button class="rnav-qa-btn hrf-qa-btn is-first" data-act="startcase" aria-label="Start a Case">' + svg("hrfStart", "hrf-ic") + '<span>Start Case</span></button>' +
           '<button class="rnav-qa-btn hrf-qa-btn" data-act="reasoning" aria-label="Dx My Patient">' + svg("hrfDx", "hrf-ic") + '<span>Dx Patient</span></button>' +
@@ -2850,7 +2851,7 @@
       '<nav class="rnav-tabbar rds-safe-bottom hrf-tabbar">' +
         '<button class="rnav-tab active" data-act="home" aria-label="Home" aria-current="page">' + svg("hrfHome", "hrf-tab-ic") + '<span>Home</span></button>' +
         '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + svg("hrfFolder", "hrf-tab-ic") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="hrf-maik-circle" aria-hidden="true">' + svg("hrfSparkle", "hrf-sparkle") + '</span><span>Ask MaiK</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="hrf-maik-circle" aria-hidden="true">' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("tile", { size: 43 }) : svg("hrfSparkle", "hrf-sparkle")) + '</span><span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + svg("hrfCapsule", "hrf-tab-ic") + '<span>Drugs</span></button>' +
         '<button class="rnav-tab" data-act="more" aria-label="More">' + svg("hrfGrid4", "hrf-tab-ic") + '<span>More</span></button>' +
       '</nav>';
