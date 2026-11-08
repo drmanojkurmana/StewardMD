@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-lung-cancer",
- "subject": "medicine",
- "title": "Lung cancer and pulmonary nodules",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**smoker** pack-years quit years, **weight** anorexia cachexia, **haemoptysis** streaks clots, **Pancoast** shoulder Horner wasting, **SVC** face swells collaterals, **stridor** central wheeze fixed, **paraneoplastic** SIADH Lambert Cushing, **asbestos** mesothelioma lags) with **viva** (**thin** clubbed smoker, **stridulous** SVC plethoric) profiles; **pace** (weeks months counts) paces. Chests waste.",
-   "say": "Smokers weights haemoptyses Pancoasts is history: SVCs swell stridors fix paraneoplastics secrete asbestoses lag thins club smokes quit paces count jobs expose mines screen. Tumours grow.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**clubbing** grades malignant, **cachexia** temporalis hollows, **nodes** scalene supraclavicular, **SVC** plethora collaterals, **stridor** fixed monophonic, **effusion** bloody stony, **wheeze** localised fixed, **neuro** Lambert proximal weak) with **bedside** (**oximetry** desaturates, **PEF** fixed low, **BMI** stages) stages; **Horner** (Pancoast droops) warns. Bodies waste.",
-   "say": "Clubbings cachexias nodes SVCs is exam: stridors fix effusions bloody wheezes localise neuros weaken oximetries dip PEFs fix BMIs stage Horners droop pupils spare voices hoarsen cords palsy. Nails curve.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**CT** spiculated nodes adrenals, **biopsy** bronchoscopy CT guided, **staging** TNM PET brain, **SCLC** limited extensive, **markers** NSE proGRP SCC, **PFT** resectability predicts, **EBUS** nodes stages, **screening** LDCT high-risk) with **differentials** (**TB** upper cavitates AFB, **pneumonia** resolving antibiotics, **sarcoid** bilateral hilar ACE, **hamartoma** popcorn calcifies) sorts; **MDT** (surgery oncology decides) meets. Scans stage.",
-   "say": "CTs biopsies stagings is Ix: SCLCs spread markers rise PFTs predict EBUS samples screenings detect TBs waste pneumonias clear sarcoids halo hamartomas pop MDTs meet resections offer chemos shrink radiations burn trials enrol. Masses stage.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-lung-cancer-fig1.webp",
-    "alt": "A composite image showing a CT scan with a spiculated lung nodule and a PET scan revealing metabolic activity for cancer staging.",
-    "caption": "CT and PET imaging for lung cancer diagnosis and staging. Image: Hg6996, CC0/PD, Wikimedia Commons.",
-    "ar": 1
-   }
-  },
-  {
-   "tx": "**Management** (**lobectomy** early fit resects, **chemo** platinum doublets, **radiotherapy** radical palliative, **targeted** EGFR ALK ROS1, **immunotherapy** PD-L1 pembrolizumab, **SCLC** chemoRT PCI, **SVC** stents radiates, **palliation** pain breathlessness) with **traps** (**superior** vena urgent stents, **cord** compression steroids operates, **hypercalcaemia** fluids bisphosphonates, **neutropenia** febrile isolates) closes; **quit** (smoking halves) counsels. Tumours treat.",
-   "say": "Lobectomies chemos radiotherapies is Rx: targeteds mutate immunotherapies unleash SCLCs irradiate SVCs stent palliations ease venas block cords press calciums climb neutropenias fever quits halve relapses watch wishes respect cures chase. Cancers fight.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-161",
-  "bk2-med-162",
-  "bk2-med-163",
-  "bk2-med-164",
-  "bk2-med-165",
-  "bk2-med-166",
-  "bk2-med-167",
-  "bk2-med-168",
-  "bk2-med-169",
-  "bk2-med-170"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon2",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-lung-cancer",
+  "quiz": [
+    "bk2-med-161",
+    "bk2-med-162",
+    "bk2-med-163",
+    "bk2-med-164",
+    "bk2-med-165",
+    "bk2-med-166",
+    "bk2-med-167",
+    "bk2-med-168",
+    "bk2-med-169",
+    "bk2-med-170"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon2",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about pack years of smoking and years since quitting, because duration and intensity drive the risk of lung cancer. Ask about weight loss with poor appetite, streaks of blood in sputum, shoulder pain with a drooping eyelid from a Pancoast tumour, and facial swelling from vena cava obstruction. Record fixed wheeze, stridor, paraneoplastic features such as confusion or weakness, asbestos exposure, and the pace of symptoms over weeks, since all are telling.",
+      "tx": "Ask about pack years of smoking and years since quitting, since duration and intensity drive **lung cancer risk**. Ask about weight loss with anorexia, streaks of haemoptysis, shoulder pain with Horner syndrome from a **Pancoast tumour**, facial swelling from **superior vena cava** obstruction, fixed wheeze and stridor, and paraneoplastic features such as SIADH, Lambert Eaton syndrome and Cushing syndrome. Record asbestos exposure and the pace of symptoms over weeks.",
+      "vis": null
+    },
+    {
+      "say": "Grade finger clubbing and look for wasting of the temporalis muscle, then feel the scalene and supraclavicular nodes for spread. Look for a swollen plethoric face with veins coursing over the chest, which signals vena cava obstruction. Listen for a fixed localised wheeze and stridor, test for a bloody effusion, and check proximal muscle weakness of Lambert Eaton syndrome. Record oximetry and BMI, and never miss Horner syndrome with a Pancoast tumour, since it is classic.",
+      "tx": "Grade finger **clubbing** and look for temporal wasting of cachexia, then feel the scalene and supraclavicular nodes for spread. Look for facial plethora with chest collaterals of **vena cava obstruction**, listen for fixed monophonic wheeze and stridor, and test for a bloody effusion. Check proximal weakness of **Lambert Eaton syndrome**, record oximetry and BMI, and never miss Horner syndrome with a Pancoast tumour.",
+      "vis": null
+    },
+    {
+      "say": "Look at both hands and notice the bulbous fingertips with loss of the normal nail angle, labelled drumstick digit in the photograph. This is digital clubbing, and it reflects chronic disease inside the chest. In a smoker it should prompt a hunt for an underlying lung malignancy, and you should link it with cachexia, enlarged nodes and haemoptysis.",
+      "tx": "The photograph shows **digital clubbing** with bulbous fingertips and loss of the nail angle, labelled drumstick digit. Clubbing reflects chronic intrathoracic disease and should prompt a hunt for an underlying **lung malignancy** in a smoker. For the exam, demonstrate the **Schamroth window** test and grade the clubbing, then link it with cachexia, nodes and haemoptysis.",
+      "vis": {
+        "alt": "Clinical photograph of both hands on cloth showing bulbous fingertips labeled drumstick digit and clubbing",
+        "ar": 1.3393,
+        "caption": "Clinical photograph of hands showing digital clubbing of fingertips. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-lung-cancer-gen1.webp"
+      }
+    },
+    {
+      "say": "Read the CT for a spiculated nodule with nodes and adrenals, then prove the cell type with bronchoscopy or guided biopsy. Stage the disease with PET and brain imaging, separate limited from extensive small cell disease, and sample nodes with EBUS. Check spirometry for resectability, consider low dose CT screening in high risk smokers, and keep tuberculosis, resolving pneumonia, sarcoidosis and hamartoma in the differential diagnosis.",
+      "tx": "Read the CT for a spiculated nodule with nodes and adrenals, then prove the cell type with bronchoscopy or **CT guided biopsy**. Stage with the **TNM system** using PET and brain imaging, separate limited from extensive small cell disease, and sample nodes with EBUS. Check spirometry for resectability, consider low dose CT screening in high risk smokers, and separate tuberculosis, resolving pneumonia, sarcoidosis and hamartoma.",
+      "vis": {
+        "alt": "A composite image showing a CT scan with a spiculated lung nodule and a PET scan revealing metabolic activity for cancer staging.",
+        "ar": 1,
+        "caption": "CT and PET imaging for lung cancer diagnosis and staging. Image: Hg6996, CC0/PD, Wikimedia Commons.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-lung-cancer-fig1.webp"
+      }
+    },
+    {
+      "say": "Resect early fit disease with lobectomy, and treat small cell disease with combined chemotherapy and radiotherapy. Test for EGFR, ALK and ROS1 drivers before targeted therapy, and check PD-L1 before immunotherapy. Relieve vena cava obstruction with stenting and radiotherapy, palliate pain and breathlessness, and counsel every patient to stop smoking.",
+      "tx": "Resect early fit disease with **lobectomy**, and treat small cell disease with combined chemo radiotherapy. Test for **EGFR**, ALK and ROS1 drivers before targeted therapy, and check PD-L1 before immunotherapy. Relieve **vena cava obstruction** with stenting and radiotherapy, palliate pain and breathlessness, and counsel every patient to stop smoking.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Lung cancer and pulmonary nodules",
+  "v": 1
 }

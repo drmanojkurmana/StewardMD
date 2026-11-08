@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-mpn",
- "subject": "medicine",
- "title": "Myeloproliferative neoplasms: CML, PV, ET and myelofibrosis",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**spleen** massive dragging early satiety weight, **CML** fatigue sweats gout priapism, **PV** plethora itching aquagenic erythromelalgia, **ET** burning toes strokes miscarriages, **fibrosis** night sweats gout tear-drop, **risks** smoking JAK exposures, **blast** fever infections bleeds) with **viva** (**leukaemic** massively splenomegalic, **plethoric** ruddy itching) profiles; **counts** (white red platelets sorts) tallies. Marrows overgrow.",
-   "say": "Spleens CMLs PVs ETs is history: fibroses sweat blasts transform risks smoke counts tally leukaemics drag plethorics flush itches torment gout aches. Spleens swell.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**spleen** massive CML myelofibrosis crosses, **liver** CML palpable dual, **plethora** ruddy conjunctival hypertensive, **erythromelalgia** burning red toes, **gout** tophi turnover stones, **priapism** leukostatic painful, **blast** fever nodes bleed, **thrombosis** strokes digits) with **bedside** (**counts** leukocytosis thrombocytosis, **smear** tear-drop basophilia, **uric** gout stones) counts; **spleen** (serial centimetres) measures. Spleens enlarge.",
-   "say": "Spleens livers plethoras erythromelalgias is exam: gouts chalk priapisms ache blasts fever thromboses clot counts climb smears tear urics rise spleens measure centimetres shrink. Bellies fill.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-mpn-fig1.webp",
-    "alt": "Microscopic image of a peripheral blood smear with tear-drop shaped red blood cells (dacryocytes) and increased basophils, indicative of myeloproliferative neoplasms.",
-    "caption": "Peripheral blood smear showing tear-drop cells and basophilia, characteristic of MPNs. Image: Ajay Kumar Chaurasiya, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 1.3333
-   }
-  },
-  {
-   "tx": "**Investigations** (**BCR-ABL** CML PCR quantifies, **JAK2** PV ET fibrosis marks, **EPO** low PV secondary sorts, **marrow** fibrosis reticulin grades, **LAP** low CML high reactive, **blast** counts phase sorts) with **differentials** (**CML** BCR massive spleen, **PV** JAK plethora low EPO, **ET** platelets JAK clots, **fibrosis** tear-drop leukoerythroblastic) sorts; **transplant** (young blast decides) meets. Clones expand.",
-   "say": "BCR-ABLs JAK2s EPOs marrows is Ix: LAPs dip blasts phase CMLs fuse PVs redden ETs clot fibroses scar transplants meet donors match drugs switch. Genes fuse.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**imatinib** BCR daily PCR monitors, **venesect** PV haematocrit aspirin, **ET** aspirin hydroxycarbamide anagrelide, **fibrosis** ruxolitinib spleen anaemia, **blast** AML chemotherapy transplant, **gout** allopurinol fluids, **clots** anticoagulate manage) with **traps** (**blast** missed transforms, **venesection** iron confuses, **pregnancy** interferon plans) closes; **follow** (PCR counts spleen) tracks. Marrows calm.",
-   "say": "Imatinibs venesects ETs fibroses is Rx: blasts treat gouts dissolve clots thin blasts miss venesections confuse pregnancies plan follows track PCRs deepen wishes respect. Counts settle.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-611",
-  "bk2-med-612",
-  "bk2-med-613",
-  "bk2-med-614",
-  "bk2-med-615",
-  "bk2-med-616",
-  "bk2-med-617",
-  "bk2-med-618",
-  "bk2-med-619",
-  "bk2-med-620"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon7",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-mpn",
+  "quiz": [
+    "bk2-med-611",
+    "bk2-med-612",
+    "bk2-med-613",
+    "bk2-med-614",
+    "bk2-med-615",
+    "bk2-med-616",
+    "bk2-med-617",
+    "bk2-med-618",
+    "bk2-med-619",
+    "bk2-med-620"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon7",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about a massive spleen with dragging pain, early satiety and weight loss, and sort fatigue with sweats, gout and priapism. Ask about ruddy plethora with itching after hot baths and burning toes, strokes with miscarriages, and night sweats with gout. Record smoking with JAK exposures, tally white, red and platelet counts, and watch fever with infections for blast change.",
+      "tx": "Ask about a massive spleen with dragging pain, early satiety and weight loss, and sort CML fatigue with sweats, gout and priapism. Ask about ruddy plethora with aquagenic itching and burning toes of **polycythaemia vera**, strokes with miscarriages of **essential thrombocythaemia**, and night sweats with gout of myelofibrosis. Record smoking with JAK exposures, tally white, red and platelet counts, and watch fever with infections for **blast change**.",
+      "vis": null
+    },
+    {
+      "say": "Measure the massive spleen that crosses the midline, and palpate the liver for dual enlargement. Read ruddy plethora with hypertension, feel burning red toes of erythromelalgia, and inspect tophi with stones of gout. Examine painful priapism of leukostasis, fever with nodes and bleeding of blast phase, and digits lost to arterial thrombosis. Track counts with uric acid.",
+      "tx": "Measure the massive spleen that crosses the midline in CML and myelofibrosis, and palpate the liver for **dual enlargement**. Read ruddy plethora with hypertension, feel burning red toes of **erythromelalgia**, and inspect tophi with stones of gout. Examine painful priapism of leukostasis, fever with nodes and bleeding of blast phase, and digits lost to **arterial thrombosis**, then track counts with uric acid.",
+      "vis": {
+        "alt": "Microscopic image of a peripheral blood smear with tear-drop shaped red blood cells (dacryocytes) and increased basophils, indicative of myeloproliferative neoplasms.",
+        "ar": 1.3333,
+        "caption": "Peripheral blood smear showing tear-drop cells and basophilia, characteristic of MPNs. Image: Ajay Kumar Chaurasiya, CC BY-SA 4.0, Wikimedia Commons.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-mpn-fig1.webp"
+      }
+    },
+    {
+      "say": "Confirm CML with BCR ABL testing by PCR, and mark PV, ET and fibrosis with JAK2. Read low EPO to separate primary polycythaemia from secondary causes, grade marrow fibrosis on reticulin staining, and read low LAP for CML against high reactive counts. Count blasts to phase the disease, and find a young donor early for blast phase.",
+      "tx": "Confirm CML with **BCR ABL testing** by PCR, and mark PV, ET and fibrosis with JAK2. Read low EPO to separate primary polycythaemia from secondary causes, grade marrow fibrosis on **reticulin staining**, and read low LAP for CML against high reactive counts. Count blasts to phase the disease, separate the four entities by spleen, EPO and tear drops, and find a **young donor** early for blast phase.",
+      "vis": null
+    },
+    {
+      "say": "Study the left panel and notice the clustered megakaryocytes with blast phase cells in a JAK2 marked marrow with low EPO, while the silver stain on the right reveals dense reticulin fibrosis. Clustered megakaryocytes define the myeloproliferative marrow, and reticulin grades the fibrosis. For the exam, link JAK2 with PV, ET and fibrosis, and blasts with phase.",
+      "tx": "The left panel shows **clustered megakaryocytes** with blast phase cells in a JAK2 marked marrow with low EPO, while silver stain on the right reveals dense **reticulin fibrosis**. Clustered megakaryocytes define the myeloproliferative marrow, and reticulin grades the fibrosis. For the exam, link JAK2 with PV, ET and fibrosis, blasts with phase, and fibrosis with **tear drop** cells in blood.",
+      "vis": {
+        "alt": "Marrow H and E with clustered megakaryocytes and blasts beside silver stain reticulin fibrosis.",
+        "ar": 1.3393,
+        "caption": "Clustered megakaryocytes, blast phase, JAK2, low EPO, reticulin fibrosis. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-mpn-gen1.webp"
+      }
+    },
+    {
+      "say": "Treat CML with daily imatinib while tracking PCR depth, and control PV with venesection to haematocrit plus aspirin. Treat ET with aspirin, hydroxycarbamide or anagrelide, shrink spleen with ruxolitinib in myelofibrosis, and convert blast phase to AML chemotherapy with transplant. Dissolve gout with allopurinol and fluids, anticoagulate clots, and plan pregnancy on interferon.",
+      "tx": "Treat CML with daily **imatinib therapy** while tracking PCR depth, and control PV with venesection to haematocrit plus aspirin. Treat ET with aspirin, hydroxycarbamide or anagrelide, shrink spleen with ruxolitinib in **myelofibrosis care**, and convert blast phase to AML chemotherapy with transplant. Dissolve gout with allopurinol and fluids, anticoagulate clots, plan pregnancy on interferon, and track PCR with counts and **spleen size**.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Myeloproliferative neoplasms: CML, PV, ET and myelofibrosis",
+  "v": 1
 }

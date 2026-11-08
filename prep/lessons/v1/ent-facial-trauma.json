@@ -6,13 +6,13 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "Facial trauma triage protects airway (blood, swelling, displaced maxilla), cervical spine, eyes and brain before bones. **Zygomatic** fractures flatten cheek, restrict mouth opening (coronoid impingement), cause infraorbital numbness and diplopia from orbital floor involvement. Naso orbital ethmoid injuries telescope the nasal bridge with telecanthus. Mandible fractures (second commonest facial bone after nasal) malocclude, favour paired fractures (symphysis plus condyle ring), and threaten airway in bilateral parasymphyseal (flail, tongue falls back) injuries.",
-   "say": "Airway, spine, eyes, brain first. Flat cheek plus numb plus trismus is zygoma. Broken jaw breaks in two places.",
+   "tx": "Facial trauma triage protects airway from blood, swelling and displaced maxilla, plus cervical spine, eyes and brain before bones. **Zygomatic** fractures flatten cheek, restrict mouth opening through coronoid impingement, cause infraorbital **numbness** and diplopia from orbital floor involvement. Naso orbital ethmoid injuries telescope the nasal bridge with telecanthus. **Mandible** fractures malocclude, favour paired ring breaks, and threaten airway in bilateral parasymphyseal flail patterns.",
+   "say": "Triage starts with airway, spine, eyes and brain before any bone. Blood, swelling and a displaced maxilla block breathing quickly. Flat cheeks with numbness and trismus point toward zygomatic injury. Broken jaws disturb the bite and often break in two places. Bilateral front jaw breaks are dangerous because the tongue falls back.",
    "vis": null
   },
   {
-   "tx": "**Le Fort** midface fractures separate facial skeleton at levels: I low transverse above teeth (floating palate), II pyramidal through infraorbital rims and nasal bridge, III craniofacial disjunction through zygomatic arches and orbits (floating face). All can bleed massively and obstruct airway; mobile maxilla on examination (gentle, once) and malocclusion with CSF leak risk (cribriform in II or III) define them. CT facial bones with 3D reconstruction plans fixation restoring occlusion first, then buttresses.",
-   "say": "Le Fort one floats palate, two floats nose pyramid, three floats whole face. Fix occlusion first.",
+   "tx": "Le Fort injuries separate the facial skeleton at levels, with type I low transverse above teeth giving floating **palate**, type II pyramidal through infraorbital rims with nasal bridge giving CSF risk, and type III craniofacial disjunction through arches with orbits giving floating **face**. All can bleed massively and block airway, mobile maxilla with malocclusion defines them, and CT with three dimensional planning restores **occlusion** first with buttress fixation.",
+   "say": "Le Fort patterns are the description of where the midface separates from the skull. Type one is a floating palate above the teeth. Type two is a floating nose pyramid with infraorbital steps. Type three is a floating face through the arches and orbits. All bleed heavily and threaten the airway. Repair restores the bite first with strong fixation, which is the priority.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/ent-facial-trauma-fig1.webp",
@@ -22,13 +22,24 @@
    }
   },
   {
-   "tx": "**Orbital blowout** fractures floor (or medial wall) into sinuses after blunt globe injury, trapping inferior rectus causing diplopia worse on upgaze, enophthalmos later, infraorbital numbness and oculocardiac bradycardia in children (trapdoor white eyed blowout needs urgent release). Urgent indications: muscle entrapment, large floor defect with enophthalmos risk, retrobulbar haemorrhage (orbital compartment syndrome with proptosis, tense globe, vision loss needing lateral canthotomy). Retrobulbar bleed must not wait for CT when vision threatened.",
-   "say": "Child cannot look up, feels sick and slow pulse after eye hit: trapdoor, operate urgently. Tight proptosed eye bleeding behind globe: cut canthus now.",
+   "tx": "Orbital blowout fractures breach floor or medial wall into sinuses after blunt globe injury, trapping inferior rectus with diplopia worse on upgaze, later **enophthalmos**, infraorbital numbness and oculocardiac **bradycardia** in children with white eyed trapdoor urgency toward immediate release. Large defects with enophthalmos risk, muscle **entrapment** and retrobulbar haemorrhage with tense proptosed globe and vision loss needing lateral canthotomy complete the urgent list.",
+   "say": "Blowout fractures trap eye muscles after blunt injury, and double vision is the result. Double vision worse on looking up is a marker of inferior rectus entrapment. Children with white eyed trapdoor injuries need urgent release with heart slowing. Later sinking of the globe follows large defects. Tense proptosed eyes with vision loss mean compartment bleeding that needs canthotomy now.",
    "vis": null
   },
   {
-   "tx": "**CSF rhinorrhoea** follows anterior skull base fractures (cribriform, frontal sinus posterior table, sphenoid) presenting as clear watery unilateral discharge increasing leaning forward, salty taste, reservoir sign, confirmed by beta 2 transferrin (not glucose strips). Most traumatic leaks close within a week with head elevation and avoiding straining or nose blowing; persistent, recurrent meningitis or large defects need endoscopic repair. Prophylactic antibiotics do not prevent meningitis and are generally withheld. Beta trace protein is alternative test where available.",
-   "say": "Clear watery nose drip after head injury is CSF until beta 2 transferrin says no. Most seal in a week sitting up.",
+   "tx": "This coronal CT shows a left orbital floor **blowout fracture** with herniated fat, teardrop sign, entrapped inferior rectus and maxillary fluid. The entrapped muscle explains diplopia worse on upgaze with nausea and **bradycardia** in children, marking white eyed **trapdoor** urgency. Treat entrapment with urgent release, and tense proptosed compartment blood with lateral canthotomy before vision dies.",
+   "say": "This scan is a display of the blowout fracture that traps eye muscle. Herniated fat with the teardrop sign hangs below the floor with fluid in the sinus, which is typical. The entrapped rectus explains double vision worse on looking up. Children with this trapdoor pattern need urgent release. Tense proptosed bleeding needs canthotomy before vision is lost.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ent-facial-trauma-gen1.webp",
+    "alt": "Coronal CT showing left orbital floor blowout fracture with herniated fat, teardrop sign, entrapped inferior rectus and maxillary fluid",
+    "caption": "Coronal CT of orbital floor blowout fracture with entrapment. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Clear watery unilateral discharge after anterior skull base injury means **cerebrospinal fluid** leak until beta 2 transferrin says otherwise, worse leaning forward with salty taste and reservoir sign through cribriform, frontal or sphenoid fractures. Most traumatic leaks close within a week with head elevation and no straining or nose blowing, while persistent leaks, recurrent **meningitis** and large defects need endoscopic **repair**. Prophylactic antibiotics do not prevent meningitis and generally stay withheld.",
+   "say": "Clear watery drip after head injury is spinal fluid until proven otherwise. Flow worsens leaning forward with a salty taste. Most traumatic leaks are sealed within a week with head elevation. Straining, blowing and nose picking are stopped during healing. Persistent leaks, meningitis or large defects are movers to endoscopic repair.",
    "vis": {
     "kind": "table",
     "cols": [

@@ -520,16 +520,25 @@
       if (n >= chunks.length) { done(); return; }
       var part = chunks[n++], pause = function () { G.setTimeout(next, 160); };
       if (onPiece) { try { onPiece(n - 1); } catch (e) {} }
+      // The phone's own voice: the reader when the natural voice is off, and the stand-in for a sentence it fails on.
+      var system = function () {
+        if (tok !== L.tok) return;
+        try {
+          var P = plugin();
+          if (P) { nativeVoice(P).then(function (vi) { if (tok !== L.tok) return; var o = { text: part, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return P.speak(o); }).then(pause, fail); return; }
+          var u = new G.SpeechSynthesisUtterance(part), wv = webVoice();
+          u.lang = "en-IN"; u.rate = rate; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
+          u.onend = pause; u.onerror = fail;
+          G.speechSynthesis.speak(u);
+        } catch (e) { fail(); }
+      };
       try {
         var V = G.PREP_VOICE;
-        if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, fail); return; }
-        var P = plugin();
-        if (P) { nativeVoice(P).then(function (vi) { if (tok !== L.tok) return; var o = { text: part, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return P.speak(o); }).then(pause, fail); return; }
-        var u = new G.SpeechSynthesisUtterance(part), wv = webVoice();
-        u.lang = "en-IN"; u.rate = rate; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
-        u.onend = pause; u.onerror = fail;
-        G.speechSynthesis.speak(u);
-      } catch (e) { L.playing = false; }
+        // A sentence the natural voice cannot read (synthesis or playback fails on the phone) is read by the phone's
+        // voice and the lesson reads on; before this, one such sentence stopped the narration with no word (owner 2026-11-08).
+        if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, system); return; }
+      } catch (e) {}
+      system();
     };
     if (!chunks.length) { done(); return; }
     next();

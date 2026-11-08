@@ -424,7 +424,8 @@ body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: bri
 .pn-root .pn-vzi { flex: 0 0 auto; display: inline-flex; margin-top: 1px; color: var(--pn-pri); }
 .pn-root .pn-vzi svg { width: 16px; height: 16px; }
 /* bottom bar: a solid shelf with a hairline; the text scrolls under it */
-.pn-root .pn-lsn-bar { position: relative; z-index: 1; flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--pn-edge); background: var(--pn-bg); }
+/* Its own layer above the step: on iOS a 3D flip card scrolled under the bar otherwise takes the Play tap. */
+.pn-root .pn-lsn-bar { position: relative; z-index: 5; transform: translateZ(0); flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--pn-edge); background: var(--pn-bg); }
 .pn-root .pn-lsn-bar > *, .pn-root .pn-lsn-bin > * { flex: 0 0 auto; }
 /* The controls sit in the 720 px reading column; the shelf behind them stays the full width. */
 .pn-root .pn-lsn-bin { display: flex; align-items: center; gap: 8px; width: 100%; max-width: 720px; margin: 0 auto; }
