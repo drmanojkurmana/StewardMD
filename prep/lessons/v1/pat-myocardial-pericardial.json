@@ -3,16 +3,27 @@
  "module": "pat-myocardial-pericardial",
  "subject": "pathology",
  "title": "Myocarditis, cardiomyopathies and pericardial disease",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Myocarditis** (viral Coxsackie B commonest, parvovirus B19, Chagas with apical aneurysm, diphtheria, hypersensitivity drugs, **giant cell** fulminant in young with VT) presents with chest pain, heart failure or arrhythmia after viral prodrome; troponin with MRI Lake Louise criteria supports while **Dallas criteria** (endomyocardial biopsy lymphocytic infiltrate with myocyte necrosis) confirms. Most viral cases rest into recovery with heart failure therapy; giant cell needs combined immunosuppression with transplant listing, fulminant cases need mechanical support. Athletes rest months.",
-   "say": "Chest pain with failure after viral flu is myocarditis: rest, biopsy Dallas confirms. Giant cell VT storms need transplant listing.",
+   "tx": "**Myocarditis** is inflammation of heart muscle, most commonly following viral infection such as Coxsackie B virus infection. Patients present with chest pain, heart failure or arrhythmia after a viral prodrome has resolved recently. Troponin rises with myocyte injury, cardiac MRI supports diagnosis, and **Dallas criteria** on biopsy confirm lymphocytic infiltrate with necrosis. **Giant cell myocarditis** behaves fulminantly in young adults with ventricular arrhythmias and requires immunosuppression and transplant assessment.",
+   "say": "Myocarditis is an inflammatory disease where viruses injure heart muscle and trigger immune mediated myocyte damage afterwards. Chest pain develops because inflamed myocardium releases troponin and disturbs electrical conduction in the ventricles. Biopsy confirmation is reserved because Dallas criteria require lymphocytic infiltrate with visible myocyte necrosis.",
    "vis": null
   },
   {
-   "tx": "**Dilated cardiomyopathy** (alcohol, peripartum, haemochromatosis, anthracyclines, TTN truncations, tachycardia induced) dilates thin walls into systolic failure treated as HFrEF with devices; **hypertrophic cardiomyopathy** (autosomal dominant **MYH7 and MYBPC3**, **asymmetric septal hypertrophy** with SAM and dynamic outflow murmur easing on squatting, myocyte disarray) kills young athletes suddenly. HCM management is beta blockers, **septal myectomy or alcohol ablation** for obstruction, ICD by risk (family death, unexplained syncope, massive thickness, NSVT), endocarditis prophylaxis debated, strenuous sport avoided.",
-   "say": "Thin dilated failure is DCM. Thick septum with dynamic murmur is HCM: beta block, myectomy, ICD by risk.",
+   "tx": "This myocardial biopsy shows dense clusters of dark **lymphocytes** infiltrating between pink cardiac muscle fibres on microscopy. One labelled myocyte appears necrotic because inflammatory injury has destroyed its normal structure and staining pattern. That combination satisfies the histological idea behind **myocarditis**, where immune cells accompany actual myocyte damage rather than simple interstitial oedema. Examiners use this image because troponin positive chest pain after a viral illness needs tissue level reasoning.",
+   "say": "This biopsy shows lymphocytes infiltrating heart muscle because viral myocarditis attracts immune cells into the myocardium. Necrotic myocytes appear because inflammatory injury destroys individual muscle fibres during the active disease phase. This histology helps clinicians understand why troponin rises without coronary artery blockage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-myocardial-pericardial-gen1.webp",
+    "alt": "Microscopic heart muscle with pink myocytes, dark lymphocyte clusters, and one necrotic myocyte labeled.",
+    "caption": "Myocardial histology showing lymphocytic infiltrate and necrotic myocyte. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Dilated cardiomyopathy** causes thin walled ventricular dilatation and systolic failure from alcohol, peripartum change, anthracyclines or genetic causes. In contrast, **hypertrophic cardiomyopathy** causes asymmetric septal hypertrophy with myocyte disarray and dynamic outflow obstruction in young people. The murmur increases on standing and eases on squatting because outflow obstruction changes with ventricular loading conditions. Beta blockers, septal reduction and **implantable defibrillators** are selected according to obstruction and sudden death risk.",
+   "say": "Dilated cardiomyopathy is a disease where ventricles enlarge and systolic contraction becomes weak and ineffective overall. Hypertrophic cardiomyopathy is different because thick septal muscle obstructs outflow dynamically during ventricular contraction. This distinction helps clinicians explain why one murmur changes with squatting and standing.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-myocardial-pericardial-fig1.webp",
@@ -22,13 +33,13 @@
    }
   },
   {
-   "tx": "**Restrictive cardiomyopathy** (amyloid with low voltage plus thick walls, sarcoid with AV block, haemochromatosis, endomyocardial fibrosis) stiffens diastolic filling with **Kussmaul sign** (JVP rising on inspiration) shared with constriction; **arrhythmogenic RV cardiomyopathy** (**plakoglobin desmosomes**, epsilon waves with T inversions V1 to V3, VT of LBBB morphology, fibrofatty replacement) restricts athletes with ICD. **Stress Takotsubo** (postmenopausal grief, apical ballooning with clean coronaries) recovers; **LV noncompaction** trabeculates with clots and failure.",
-   "say": "Thick walls with tiny voltage are amyloid restrictive. Epsilon waves with LBBB VT are ARVC: ICD, no sport.",
+   "tx": "**Restrictive cardiomyopathy** stiffens ventricular filling because amyloid, sarcoid or iron infiltrates the myocardium over time. Amyloid characteristically combines thick walls on imaging with low voltage on the electrocardiogram in patients. **Arrhythmogenic right ventricular cardiomyopathy** replaces right ventricular muscle with fibrofatty tissue and causes ventricular arrhythmias in athletes. **Takotsubo cardiomyopathy** causes apical ballooning after emotional stress with clean coronary arteries and usually recovers well.",
+   "say": "Restrictive cardiomyopathy is a condition where stiff ventricles impair diastolic filling while systolic function stays relatively preserved initially. Amyloid infiltration is suspected because thick walls coexist with low electrocardiogram voltage in the same patient. Arrhythmogenic disease is dangerous because fibrofatty replacement creates ventricular arrhythmias during exercise.",
    "vis": null
   },
   {
-   "tx": "**Acute pericarditis** (viral idiopathic, uremic, post MI Dressler, TB, purulent Staph) gives pleuritic pain easing leaning forward with **diffuse concave ST elevation and PR depression**; treatment is **NSAIDs plus colchicine** (aspirin post MI), steroids only in autoimmune or refractory. **Tamponade** (Beck triad hypotension with muffled sounds and JVD, **pulsus paradoxus**, electrical alternans, diastolic chamber collapse) needs urgent **pericardiocentesis**; **constriction** (calcified rigid sac, **pericardial knock**, equalised diastolic pressures, septal bounce) needs **pericardiectomy**.",
-   "say": "Lean forward relief with diffuse ST elevation is pericarditis: NSAID plus colchicine. Muffled shock with paradoxus is tamponade: needle now.",
+   "tx": "**Acute pericarditis** causes pleuritic chest pain that eases when patients lean forward during examination. The electrocardiogram shows diffuse concave ST elevation with PR depression because the inflamed pericardium affects atrial and ventricular repolarisation. Treatment uses anti inflammatory drugs with **colchicine**, while steroids remain reserved for autoimmune or refractory cases. **Cardiac tamponade** causes hypotension, muffled sounds and pulsus paradoxus, and it requires urgent pericardiocentesis without delay.",
+   "say": "Acute pericarditis is an inflammatory condition where pleuritic pain improves when the patient leans forward during assessment. Colchicine treatment is important because it reduces recurrence when combined with anti inflammatory drug therapy. Tamponade is different because fluid compresses the heart and requires urgent needle drainage.",
    "vis": {
     "kind": "table",
     "cols": [

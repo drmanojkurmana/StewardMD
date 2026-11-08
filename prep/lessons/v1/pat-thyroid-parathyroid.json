@@ -6,18 +6,18 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Thyroid enlargement** splits into diffuse goitre, multinodular goitre and solitary nodules whose cancer risk depends on age, radiation history, growth and ultrasound features rather than size alone. Iodine deficiency drives endemic goitre through chronic TSH stimulation. Fine needle aspiration triages nodules by Bethesda cytology categories guiding surgery or surveillance.",
-   "say": "Goitre may be diffuse, multinodular or a single nodule. Cancer risk follows ultrasound and history, not size alone. Needle aspiration triages nodules into action categories.",
+   "tx": "Thyroid enlargement is sorted into diffuse goitre, multinodular goitre and a solitary nodule at the start. Cancer risk in a nodule depends on age, radiation history, growth and ultrasound features rather than size alone. **Iodine deficiency** drives endemic goitre through chronic stimulation by **thyroid stimulating hormone**. Fine needle aspiration triages nodules into cytology categories that guide surgery or surveillance for the patient.",
+   "say": "Goitre may appear diffuse, multinodular or as a single nodule. Cancer risk follows history and ultrasound features rather than size alone. Iodine deficiency is driving endemic goitre through chronic hormonal stimulation. Needle aspiration triages each nodule into a category that guides action.",
    "vis": null
   },
   {
-   "tx": "**Hashimoto thyroiditis** destroys the gland through lymphocytic infiltration with germinal centres and Hurthle cell change, causing painless goitre drifting into hypothyroidism with high anti TPO antibodies. Graves disease instead stimulates the TSH receptor with antibodies causing diffuse goitre, hyperthyroidism, eye disease and pretibial myxoedema. Riedel thyroiditis woody fibrosis is rare and invasive mimicking cancer.",
-   "say": "Hashimoto destroys thyroid with lymphocytes toward hypothyroidism. Graves stimulates it toward hyperthyroidism with eye disease. Antibodies and function separate destruction from stimulation.",
+   "tx": "**Hashimoto thyroiditis** destroys the gland through lymphocytic infiltration with germinal centres and Hurthle cell change. The gland enlarges painlessly and function drifts toward hypothyroidism with high anti TPO antibodies. **Graves disease** instead stimulates the TSH receptor with antibodies and it causes diffuse goitre with hyperthyroidism. Eye disease and pretibial myxoedema support Graves disease, while a rare woody Riedel thyroiditis can mimic cancer.",
+   "say": "Hashimoto thyroiditis is destroying the thyroid through lymphocytic infiltration over years. The gland is enlarging painlessly and function is drifting toward hypothyroidism. Graves disease stimulates the gland and causes hyperthyroidism with eye disease. Antibodies and thyroid function separate destruction from stimulation clearly.",
    "vis": null
   },
   {
-   "tx": "**Papillary carcinoma** is commonest, arising often after radiation, spreading to neck nodes yet carrying excellent prognosis with orphan Annie eye nuclei, grooves and psammoma bodies. Follicular carcinoma invades capsule and vessels spreading by blood to bone and lung, diagnosed only on histological invasion since cytology cannot separate adenoma. Medullary carcinoma secretes calcitonin from C cells with amyloid stroma and MEN associations.",
-   "say": "Papillary cancer spreads to nodes with orphan Annie nuclei and psammoma bodies. Follicular cancer spreads by blood and needs invasion to diagnose. Medullary secretes calcitonin.",
+   "tx": "**Papillary carcinoma** is the commonest thyroid cancer and it often follows radiation exposure in earlier life. It spreads first to neck nodes yet it carries an excellent prognosis for most patients. Its nuclei look clear like orphan Annie eyes and its stroma may contain **psammoma bodies**. Follicular carcinoma instead invades capsule and vessels, spreads by blood, and needs histology because cytology cannot separate it from adenoma.",
+   "say": "Papillary carcinoma spreads first to nodes in the neck. Its prognosis remains excellent for most patients despite nodal spread. Follicular carcinoma spreads by blood toward bone and lung. Histology must show invasion before follicular carcinoma is diagnosed.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -50,8 +50,19 @@
    }
   },
   {
-   "tx": "**Primary hyperparathyroidism** from a single parathyroid adenoma most often raises calcium with inappropriately high PTH causing stones, bones, abdominal groans and psychiatric moans. Secondary disease compensates for renal failure with gland hyperplasia, while tertiary disease becomes autonomous after long stimulation. Malignant hypercalcaemia from PTHrP suppresses PTH, separating cancer from parathyroid causes at once.",
-   "say": "One parathyroid adenoma usually causes primary hyperparathyroidism: stones, bones, groans and moans. Cancer hypercalcaemia suppresses PTH through PTHrP. PTH level splits the causes.",
+   "tx": "This micrograph shows papillary fronds lined by cells with clear **orphan Annie eye nuclei**, which is the classic nuclear clue. A round laminated **psammoma body** sits in the stroma and supports the diagnosis strongly. The tumour spreads through lymphatics toward neck nodes, as the label notes. Despite that spread, **papillary carcinoma** carries an excellent prognosis, and recognising these two microscopic signs answers many exam stems.",
+   "say": "This micrograph shows clear nuclei that look like orphan Annie eyes. A laminated psammoma body sits within the tumour stroma nearby. The tumour spreads through lymphatics toward nodes in the neck. Papillary carcinoma still carries an excellent prognosis for most patients.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-thyroid-parathyroid-gen1.webp",
+    "alt": "Thyroid micrograph showing clear nuclei, round laminated body and spread notes.",
+    "caption": "Papillary carcinoma with Annie nuclei and psammoma body. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Primary hyperparathyroidism** usually comes from a single parathyroid adenoma that raises calcium with inappropriately high PTH. Patients develop kidney stones, bone pain, abdominal symptoms and psychiatric symptoms from hypercalcaemia. **Secondary hyperparathyroidism** compensates for renal failure through hyperplasia of all glands. Malignant hypercalcaemia works through PTHrP and it suppresses PTH, which separates cancer from parathyroid disease at once in a stem.",
+   "say": "A single parathyroid adenoma usually causes primary hyperparathyroidism in adults. Calcium rises and patients develop stones in the kidney. Cancer causes hypercalcaemia through PTHrP and suppresses native PTH. The PTH level therefore splits parathyroid causes from malignant causes.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-thyroid-parathyroid-fig1.webp",
@@ -61,8 +72,8 @@
    }
   },
   {
-   "tx": "Parathyroid hormone raises calcium by bone resorption, renal calcium retention and vitamin D activation increasing gut absorption. **Hypoparathyroidism** after thyroid surgery causes tingling, Chvostek and Trousseau signs and prolonged QT from low calcium, while pseudohypoparathyroidism resists hormone action with high PTH and short metacarpals. Calcium, phosphate, PTH and vitamin D together decode every stem.",
-   "say": "PTH raises calcium from bone, kidney and gut. Surgical gland loss causes tingling and spasms. Resistant glands raise PTH with low calcium. Four tests decode calcium stems.",
+   "tx": "Parathyroid hormone raises calcium through bone resorption, renal calcium retention and activation of vitamin D. **Hypoparathyroidism** after thyroid surgery lowers calcium and it causes tingling, Chvostek sign, Trousseau sign and a prolonged QT interval. **Pseudohypoparathyroidism** resists hormone action so PTH stays high despite low calcium, and short metacarpals may appear. Calcium, phosphate, PTH and vitamin D together decode every calcium stem in the exam.",
+   "say": "Parathyroid hormone raises calcium from bone, kidney and gut. Surgical loss of the glands lowers calcium and causes tingling. Tissue resistance keeps PTH high despite a low calcium level. Four blood tests together decode almost every calcium stem.",
    "vis": null
   }
  ],

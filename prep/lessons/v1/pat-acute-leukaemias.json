@@ -6,13 +6,13 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Acute leukaemias** are clonal marrow malignancies where blast cells accumulate and suppress normal blood production, causing anaemia, infection and bleeding within weeks. Diagnosis needs a high blast proportion in blood or marrow, traditionally twenty percent or more with defining genetic lesions allowing diagnosis at lower counts. Immunophenotyping separates myeloid from lymphoid lineage and directs therapy.",
-   "say": "Acute leukaemia fills marrow with blasts and suppresses normal blood within weeks. Blast percentage and genetics define it. Flow cytometry separates myeloid from lymphoid lineage and guides treatment.",
+   "tx": "Acute leukaemias are clonal marrow disorders in which blast cells accumulate rapidly. **Acute leukaemia** causes marrow failure within weeks, and the **blast percentage** in blood or marrow supports the diagnosis. Defining genetic lesions can establish the diagnosis, and immunophenotyping separates myeloid disease from lymphoid disease reliably.",
+   "say": "Acute leukaemia is a clonal disorder and it causes marrow failure within weeks. Blast accumulation is rapid and normal blood cell production is suppressed in marrow. The diagnosis is supported by the blast percentage and by defining genetic lesions. Immunophenotyping is used because it separates myeloid disease from lymphoid disease.",
    "vis": null
   },
   {
-   "tx": "**Auer rods** are pink needle like cytoplasmic inclusions of myeloperoxidase crystals that prove myeloid lineage, most dramatic in acute promyelocytic leukaemia where faggot cells pack multiple rods. Myeloblasts express myeloperoxidase and CD33 and CD117, while lymphoblasts express terminal deoxynucleotidyl transferase with lineage markers. Cytochemistry is now largely replaced by flow cytometry.",
-   "say": "Pink needle Auer rods prove myeloid blasts. Promyelocytic leukaemia packs cells with multiple rods. Flow cytometry now classifies lineage faster than old cytochemistry.",
+   "tx": "Myeloid blasts contain distinctive inclusions that help the examiner identify lineage quickly. **Auer rods** are pink needle shaped crystals, and a **faggot cell** contains bundles of these rods in promyelocytic leukaemia. Myeloblasts express myeloperoxidase, whereas lymphoblasts express different markers, and flow cytometry now classifies lineage accurately.",
+   "say": "Auer rods are pink needle shaped inclusions and they indicate myeloid lineage clearly. A faggot cell is packed with bundles of rods in promyelocytic leukaemia. Myeloblasts express myeloperoxidase and they are separated from lymphoblasts by flow cytometry. This distinction is important because treatment differs between lineages.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "**Acute promyelocytic leukaemia** is a medical emergency because abnormal promyelocytes trigger disseminated intravascular coagulation and catastrophic bleeding at presentation. Its translocation fuses PML with the retinoic acid receptor, so all trans retinoic acid forces differentiation and transformed outcomes. Any suspicion demands immediate ATRA before genetic confirmation returns, alongside aggressive coagulation support.",
-   "say": "Promyelocytic leukaemia bleeds through DIC at presentation. Its PML RARA fusion responds to retinoic acid differentiation. Start ATRA on suspicion without waiting for genetics.",
+   "tx": "This smear shows a faggot cell packed with pink Auer rods among myeloid blasts. **Auer rods** prove myeloid lineage, and the **faggot cell** is the classic image of acute promyelocytic leukaemia. Recognising this picture matters because that disease causes severe bleeding and requires immediate all trans retinoic acid treatment.",
+   "say": "This blood smear is diagnostic because it contains myeloid blasts and a faggot cell. The faggot cell is packed with bundles of pink Auer rods. Auer rods indicate myeloid lineage and they are most dramatic in promyelocytic leukaemia. Recognition is urgent because that disease causes life threatening bleeding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-acute-leukaemias-gen1.webp",
+    "alt": "Blood smear with myeloid blasts; central faggot cell holds bundles of pink Auer rods.",
+    "caption": "Blood smear showing faggot cell with Auer rods. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Acute promyelocytic leukaemia is an emergency because bleeding can develop very rapidly. The **PML RARA fusion** blocks normal maturation, and **disseminated intravascular coagulation** causes catastrophic bleeding at presentation. All trans retinoic acid forces differentiation of abnormal cells, so treatment starts on suspicion before genetic confirmation returns.",
+   "say": "Acute promyelocytic leukaemia is an emergency because severe bleeding develops very rapidly. The fusion gene blocks maturation and it promotes disseminated intravascular coagulation. All trans retinoic acid is started on suspicion because it forces differentiation of abnormal cells. Coagulation support is given while genetic confirmation is awaited.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -70,8 +81,8 @@
    }
   },
   {
-   "tx": "**Tumour lysis syndrome** follows rapid malignant cell destruction, spontaneous or after chemotherapy, releasing potassium, phosphate and uric acid while calcium falls. Acute kidney injury from uric acid and calcium phosphate deposition is the danger. Prevention uses vigorous hydration and allopurinol, with rasburicase for high burden disease that converts uric acid to soluble allantoin.",
-   "say": "Rapid cell death releases potassium, phosphate and uric acid while calcium falls. Kidneys fail from crystal deposition. Hydration and urate lowering prevent it. Rasburicase suits high burden disease.",
+   "tx": "Rapid destruction of malignant cells releases intracellular contents into the blood. **Tumour lysis syndrome** causes high potassium, phosphate and uric acid levels, and **acute kidney injury** develops from crystal deposition. Vigorous hydration prevents complications, and rasburicase is used for high burden disease because it converts uric acid rapidly.",
+   "say": "Tumour lysis syndrome occurs when malignant cells are destroyed very rapidly after treatment. Potassium, phosphate and uric acid are released and calcium falls in the blood. Acute kidney injury develops because crystals are deposited in renal tubules. Hydration is essential and rasburicase is used in high burden disease.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-acute-leukaemias-fig1.webp",
@@ -81,8 +92,8 @@
    }
   },
   {
-   "tx": "Children with **acute lymphoblastic leukaemia** most often present with marrow failure plus lymphadenopathy, hepatosplenomegaly and sometimes a mediastinal mass in T lineage disease. Leucocyte count extremes, genetics and early treatment response stratify risk more than morphology alone. Central nervous system prophylaxis is essential because the meninges shelter blasts from systemic therapy.",
-   "say": "Childhood ALL presents with marrow failure, nodes and organ enlargement. Genetics and early response set risk. Meningeal prophylaxis is essential because the nervous system shelters blasts.",
+   "tx": "Childhood acute lymphoblastic leukaemia usually presents with features of marrow failure. **Acute lymphoblastic leukaemia** causes lymphadenopathy and hepatosplenomegaly, and a **mediastinal mass** can occur in T lineage disease. Genetics and early treatment response determine risk, and central nervous system prophylaxis is essential because meninges shelter blasts.",
+   "say": "Childhood lymphoblastic leukaemia presents with marrow failure and enlarged lymph nodes commonly. The liver and spleen are enlarged and a mediastinal mass occurs in T lineage disease. Risk is determined by genetics and by early response to treatment. Meningeal prophylaxis is essential because the meninges shelter blast cells.",
    "vis": null
   }
  ],

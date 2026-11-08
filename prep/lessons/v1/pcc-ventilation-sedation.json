@@ -3,11 +3,11 @@
  "module": "pcc-ventilation-sedation",
  "subject": "paediatrics",
  "title": "Ventilation, sedation and neuroprotection in PICU",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Ventilation** (**indications** apnoea GCS hypoxaemia shock, **SIMV AC** modes, **tidal 6 ml** lung protective, **PEEP FiO2** ARDSNet, **permissive hypercapnia** asthma, **prone** severe, **HFOV** air leak) with **ARDS** (**Berlin** bilateral infiltrates, **low tidal** paralysis selected, **nitric** bridge, **ECMO** refractory) oxygenates; **asthma** (permissive, **magnesium** ketamine, **avoid intubation**) bronchodilates. Volumes protect.",
-   "say": "Gasping comatose shocked hypoxaemic tubes modes low tidal PEEP ladders prone severe: asthma permits hypercapnia ketamine. Lungs protect.",
+   "tx": "Ventilation is indicated for apnoea, poor conscious level, refractory hypoxaemia or shock in a sick child. **Lung protective ventilation** uses a tidal volume around **6 ml per kg** with a PEEP and FiO2 ladder for ARDS, which shows bilateral infiltrates by Berlin criteria. Permissive hypercapnia suits severe asthma, prone positioning helps severe ARDS, and high frequency oscillation or ECMO is reserved for refractory cases or air leak.",
+   "say": "Ventilation supports children with apnoea or refractory hypoxaemia. Low tidal volumes protect the injured lung from overdistension. PEEP recruits alveoli and improves oxygenation in ARDS. Prone positioning helps children with severe refractory hypoxaemia.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pcc-ventilation-sedation-fig1.webp",
@@ -17,18 +17,18 @@
    }
   },
   {
-   "tx": "**Weaning** (**SBT** pressure support, **extubate** awake cough gag, **stridor** dexamethasone nebulised adrenaline, **NIV** post extubation selected, **tracheostomy** prolonged 2 weeks, **decannulation** sleep study) with **airway** (**cuffed** tubes age formula, **uncuffed** neonates leak, **capnography** confirms, **difficult** video bougie) secures; **VAP** (head up oral care, **suction** closed) prevents. Coughs extubate.",
-   "say": "Trials breathe cuffs age capnography secures stridor dexamethasone NIV bridges trachs weeks: heads up mouths suction. Weans trial.",
+   "tx": "Weaning begins with a **spontaneous breathing trial** on pressure support when the child improves. Extubation needs an awake child with cough and gag, while post extubation stridor is treated with dexamethasone and nebulised adrenaline. The **cuffed tube** size follows an age formula, capnography confirms placement, and non invasive ventilation supports selected children after extubation. Tracheostomy is considered after about two weeks, and head up care with oral hygiene prevents ventilator associated pneumonia.",
+   "say": "A breathing trial tests whether the child can wean. Extubation needs an awake child with protective reflexes. Capnography confirms that the tube sits in the trachea. Head up nursing and oral care prevent ventilator associated pneumonia.",
    "vis": null
   },
   {
-   "tx": "**Sedation** (**COMFORT** scores, **morphine midazolam** infusions, **dexmedetomidine** delirium sparing, **ketamine** bronchospasm dissociative, **propofol** infusion syndrome, **daily interruption** trials, **withdrawal** WAT methadone) with **analgesia** (paracetamol, **regional** caudals, **non-pharmacologic** sucrose swaddle) comforts; **paralysis** (rocuronium train of four, **awareness** sedation first) stills selected. Scores titrate.",
-   "say": "Scored morphine midazolam dex sparing ketamine wheezy propofol watches interruptions withdraws methadone: caudals sucrose still rocuronium aware. Comfort scores.",
+   "tx": "Sedation is titrated with **COMFORT scores** so the child is calm but not oversedated. Morphine and midazolam infusions are common, **dexmedetomidine** spares delirium, ketamine suits bronchospasm, and propofol infusion syndrome is the feared complication to avoid. Daily interruption and withdrawal scoring with tools such as WAT guide weaning, while paracetamol, regional caudal blocks and sucrose or swaddling add comfort. Paralysis with rocuronium needs sedation first and train of four monitoring.",
+   "say": "Sedation scores guide how much drug each child receives. Dexmedetomidine helps calm children while sparing delirium. Ketamine suits children with bronchospasm who need sedation. Paralysis requires sedation first so awareness never occurs.",
    "vis": null
   },
   {
-   "tx": "**Neuroprotection** (**HIE** cooling 33.5 72 hours, **TBI** ICP CPP bolts mannitol hypertonic, **status** midazolam infusions, **delirium** CAPD orient sleep, **rehab** early mobilisation, **family** presence rounds) with **transport** (stabilise lines warm, **referrals** criteria, **handoffs** SBAR) closes; **death** (brain criteria apnea, **organ** donation approached, **bereavement** follows) declares. Brains cool.",
-   "say": "Cooled thirty three seventy two bolts pressures seizes infuses delirious orients mobilises early families round: transports SBAR brains declare donate. Protects cool.",
+   "tx": "**Neuroprotection** after hypoxic ischaemic encephalopathy uses cooling to **33.5 degrees for 72 hours** in eligible newborns. Traumatic brain injury care monitors intracranial and cerebral perfusion pressure, with mannitol or hypertonic saline for surges. Status epilepticus may need midazolam infusions, delirium is screened and reduced by orientation and sleep, and early mobilisation with family presence aids recovery. Transport needs stabilised lines, warmth and a structured SBAR handover.",
+   "say": "Cooling protects the newborn brain after hypoxic ischaemic injury. Clinicians are monitoring intracranial pressure after traumatic brain injury carefully. Early mobilisation and family presence support recovery in intensive care. Structured handover keeps transport between units safe.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -58,6 +58,17 @@
       "Family"
      ]
     ]
+   }
+  },
+  {
+   "tx": "This image shows a swaddled newborn receiving **therapeutic cooling** on a servo controlled blanket in intensive care. The monitor displays **33.5 degrees** maintained for **72 hours**, which is the core prescription after hypoxic ischaemic encephalopathy. Amplitude integrated EEG leads track brain activity and seizures during cooling. Recognising this setup helps the student recall why temperature, timing and seizure monitoring decide outcome after birth asphyxia.",
+   "say": "This newborn lies on a servo controlled cooling blanket. The monitor shows cooling maintained for seventy two hours. EEG leads track brain activity and seizures during treatment. Cooling protects the brain after hypoxic ischaemic encephalopathy in newborns.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pcc-ventilation-sedation-gen1.webp",
+    "alt": "Swaddled neonate with cooling blanket, EEG leads, ICP bolt and monitor showing temperature and timer.",
+    "caption": "Neonatal cooling with EEG, ICP and timed control. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

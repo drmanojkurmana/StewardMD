@@ -1,0 +1,180 @@
+{
+ "v": 1,
+ "module": "bio-amino-acid-disorders",
+ "subject": "biochemistry",
+ "title": "Branched chain disorders and methylmalonate",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Leucine, isoleucine and valine transaminate reversibly, then share one oxidative decarboxylation complex, **branched chain alpha-keto acid dehydrogenase**, using the same five coenzymes as pyruvate dehydrogenase (thiamine, lipoamide, CoA, FAD, NAD). Maple syrup urine disease blocks this complex, so branched amino acids (leucine neurotoxic above all) and their keto acids accumulate, sweetening urine, sweat and cerumen while poisoning the newborn brain.",
+   "say": "Branched chain keto acid dehydrogenase uses the same five coenzymes as pyruvate dehydrogenase. Its block in maple syrup urine disease lets leucine poison the newborn brain while keto acids sweeten urine.",
+   "vis": {
+    "kind": "flow",
+    "title": "Shared complex, shared cofactors",
+    "nodes": [
+     {
+      "id": "bc",
+      "label": "Leucine, isoleucine, valine"
+     },
+     {
+      "id": "ka",
+      "label": "Alpha-keto acids (transaminated)"
+     },
+     {
+      "id": "dh",
+      "label": "BCKDH complex (TPP, lipoate, CoA, FAD, NAD)"
+     },
+     {
+      "id": "ac",
+      "label": "Acetyl and acetoacetyl fragments"
+     }
+    ],
+    "edges": [
+     [
+      "bc",
+      "ka"
+     ],
+     [
+      "ka",
+      "dh"
+     ],
+     [
+      "dh",
+      "ac"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic **maple syrup urine disease** presents after protein feeding days with poor feeding, alternating tone, opisthotonus, apnoea, ketosis and sweet odour, progressing to cerebral oedema and herniation without emergency leucine removal (dialysis, anabolic glucose and lipid, branched chain free nutrition). Thiamine responsive variants retain partial activity; intermittent and intermediate forms decompensate with illness or protein loads across childhood, so sick day plans matter at every severity.",
+   "say": "Classic disease presents with poor feeding, abnormal tone and sweet odour progressing to cerebral oedema. Emergency leucine removal and anabolic nutrition save brain. Sick day plans matter at every severity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Form",
+     "Residual activity",
+     "Story"
+    ],
+    "rows": [
+     [
+      "Classic neonatal",
+      "Near zero",
+      "Coma in first weeks without treatment"
+     ],
+     [
+      "Intermediate",
+      "Low partial",
+      "Delay, episodic decompensation"
+     ],
+     [
+      "Intermittent",
+      "Near normal baseline",
+      "Well until illness or protein load"
+     ],
+     [
+      "Thiamine responsive",
+      "Partial, cofactor boosted",
+      "High dose thiamine trial worthwhile"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Downstream single enzyme acidaemias (isovaleric from leucine, propionic from isoleucine/valine/methionine/threonine/odd chains) share vomiting, ketoacidosis, hyperammonaemia (propionyl-CoA inhibits N-acetylglutamate synthesis, a mechanistic pearl), neutropenia and failure to thrive. Sweaty feet odour flags **isovaleric acidaemia**; glycine conjugation therapy (forming excretable isovalerylglycine) exploits detoxification chemistry tested at finals.",
+   "say": "Single enzyme acidaemias share vomiting, ketoacidosis and hyperammonaemia, because propionyl-CoA inhibits activator synthesis. Sweaty feet odour flags isovaleric acidaemia, treated partly by glycine conjugation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MSUD (complex block)",
+     "points": [
+      "All three branched acids up",
+      "Leucine brain toxicity dominates",
+      "Sweet syrup odour"
+     ]
+    },
+    "right": {
+     "title": "Propionic and isovaleric (single steps)",
+     "points": [
+      "Ketoacidosis dominates",
+      "Hyperammonaemia secondary",
+      "Sweaty feet (isovaleric)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Methylmalonic acidaemia** blocks methylmalonyl-CoA mutase (adenosylcobalamin) or its cobalamin processing, accumulating methylmalonate, propionate metabolites and ammonia with metabolic stroke risk in basal ganglia and chronic kidney disease over years. Hydroxocobalamin responsiveness must be tested in every newborn case (cblA and related defects respond dramatically), alongside carnitine, protein prescription and emergency regimens shared with propionic acidaemia.",
+   "say": "Methylmalonic acidaemia risks basal ganglia stroke and kidney disease over years. Hydroxocobalamin responsiveness must be tested in every newborn case, because processing defects respond dramatically.",
+   "vis": null
+  },
+  {
+   "tx": "Pair methylmalonate with **homocysteine** to localise cobalamin faults: combined methylmalonic acidaemia with homocystinuria (cblC commonest, plus eye and neurology disease) means intracellular cobalamin processing failed for both enzymes, while isolated methylmalonate elevation means mutase or adenosyl pathway only, and isolated homocysteine elevation means remethylation only. This grid outperforms memorising every cbl letter under pressure.",
+   "say": "Pair methylmalonate with homocysteine to localise cobalamin faults. Combined elevation means processing failed for both enzymes, while isolated elevations isolate the mutase or remethylation arms respectively.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Methylmalonate",
+     "Homocysteine",
+     "Localisation"
+    ],
+    "rows": [
+     [
+      "High",
+      "High",
+      "Cobalamin processing (cblC etc.) or B12 deficiency"
+     ],
+     [
+      "High",
+      "Normal",
+      "Mutase or adenosylcobalamin arm"
+     ],
+     [
+      "Normal",
+      "High",
+      "Remethylation arm (synthase, folate)"
+     ],
+     [
+      "Normal",
+      "Normal",
+      "Look elsewhere"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Long term care** balances competing harms: over restriction stunts growth and causes essential amino acid deficiency dermatitis, under restriction permits leucine neurotoxicity, so plasma amino acid monitoring, valine and isoleucine supplementation (competing leucine at brain transport), and liver transplantation in brittle classic disease each find a place. The transport lesson next shows diseases where enzymes are normal but membranes lose the amino acids entirely.",
+   "say": "Care balances leucine neurotoxicity against growth failure from over restriction. Valine and isoleucine compete leucine at brain transport. The next lesson shows membranes losing amino acids entirely.",
+   "vis": {
+    "kind": "flow",
+    "title": "MSUD tightrope",
+    "nodes": [
+     {
+      "id": "over",
+      "label": "Too little protein: growth fails"
+     },
+     {
+      "id": "target",
+      "label": "Titrated leucine, monitored levels"
+     },
+     {
+      "id": "under",
+      "label": "Too much leucine: brain injured"
+     }
+    ],
+    "edges": [
+     [
+      "over",
+      "target"
+     ],
+     [
+      "target",
+      "under"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

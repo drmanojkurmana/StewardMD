@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "module": "bio-gluconeogenesis-glycogen",
+ "subject": "biochemistry",
+ "title": "Pompe, McArdle and Cori diseases",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Pompe disease** (type II) is the odd one out: lysosomal acid alpha-1,4-glucosidase (acid maltase) fails, so glycogen swells lysosomes while cytosolic glucose handling stays normal. Infantile disease brings a huge heart, floppy hypotonia, macroglossia and respiratory failure historically fatal by age two. Late onset disease instead weakens proximal and respiratory muscles without cardiac enlargement, often diagnosed after years of unexplained creatine kinase elevation.",
+   "say": "Pompe disease fails inside lysosomes, so glucose handling stays normal. Infantile disease brings a huge heart and floppy hypotonia. Late onset disease weakens proximal and respiratory muscles without cardiac enlargement, often after years of raised creatine kinase.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Infantile Pompe", "points": ["Cardiomegaly, heart failure", "Floppy baby, macroglossia", "Respiratory failure early"]},
+    "right": {"title": "Late onset Pompe", "points": ["Proximal weakness, back pain", "Respiratory muscles fail", "Heart usually spared"]
+    }
+   }
+  },
+  {
+   "tx": "Enzyme replacement with **alglucosidase** transformed infantile Pompe survival, especially when started before irreversible cardiac damage, though antibody responses and skeletal muscle delivery limit gains. Newborn screening in several programmes exists precisely because weeks matter. Blood glucose never features, so any stem mixing Pompe with fasting hypoglycaemia should steer you to von Gierke or debrancher disease instead.",
+   "say": "Enzyme replacement transformed infantile Pompe survival when started before irreversible cardiac damage. Weeks matter, so newborn screening exists in several programmes. Blood glucose never features, so hypoglycaemia stems point elsewhere.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Pompe clue", "Why it fits lysosomes"],
+    "rows": [
+     ["Normal fasting glucose", "Cytosolic mobilisation intact"],
+     ["High CK, vacuolar myopathy on biopsy", "Lysosomes rupture muscle fibres"],
+     ["Short PR interval, huge QRS voltages", "Glycogen in cardiac conduction tissue"]
+    ]
+   }
+  },
+  {
+   "tx": "McArdle disease (type V, muscle **phosphorylase** absent) blocks muscle glycogen use, so brief intense exercise triggers pain, cramps and contracture within minutes, with myoglobinuria darkening urine afterward. After about ten minutes of gentler pace, increased blood flow delivers glucose and fatty acids and a celebrated second wind lets exercise continue. Flat venous lactate rise during ischaemic forearm testing confirms the block historically.",
+   "say": "McArdle disease blocks muscle glycogen use, so brief intense exercise triggers cramps and dark urine from myoglobin. After about ten minutes a second wind lets exercise continue as blood borne fuels arrive. Venous lactate stays flat on testing.",
+   "vis": {
+    "kind": "flow",
+    "title": "McArdle exercise story",
+    "nodes": [
+     {"id": "ex", "label": "Intense exercise starts"},
+     {"id": "cr", "label": "Cramps (no glycogen fuel)"},
+     {"id": "wind", "label": "Second wind (blood fuels arrive)"},
+     {"id": "myo", "label": "Myoglobinuria if pushed"}
+    ],
+    "edges": [["ex", "cr"], ["cr", "wind"], ["ex", "myo"]]
+   }
+  },
+  {
+   "tx": "Practical McArdle care exploits the second wind: warm up gently, take oral **glucose** or sucrose before exertion (bypassing the block), avoid maximal isometric bursts, and treat rhabdomyolysis with fluids to protect kidneys. Creatine kinase rests high between attacks. Anaerobic training is limited, while supervised aerobic conditioning safely expands delivery capacity over time.",
+   "say": "Care exploits the second wind: warm up gently, take oral glucose before exertion, and avoid maximal bursts. Rhabdomyolysis needs fluids to protect kidneys. Supervised aerobic conditioning safely expands delivery capacity over time.",
+   "vis": null
+  },
+  {
+   "tx": "Cori disease (type III, **debrancher** absent) limits hepatic breakdown to outer branches, giving childhood hepatomegaly, fasting hypoglycaemia with ketones, short stature and variable muscle weakness or cardiomyopathy in subtype IIIa. Because gluconeogenesis is intact, hypoglycaemia improves with age as muscle mass and fasting tolerance grow. High protein diets help by feeding gluconeogenesis directly, unlike von Gierke management.",
+   "say": "Cori disease limits breakdown to outer branches, giving liver enlargement and fasting hypoglycaemia with ketones. Gluconeogenesis is intact, so hypoglycaemia improves with age. High protein diets help by feeding glucose production directly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disease (type)", "Missing enzyme", "Signature"],
+    "rows": [
+     ["Pompe (II)", "Lysosomal acid maltase", "Heart and muscle, glucose normal"],
+     ["McArdle (V)", "Muscle phosphorylase", "Exercise cramps, second wind"],
+     ["Cori (III)", "Debrancher", "Limit dextrin, milder fasting lows"],
+     ["Tarui (VII)", "Muscle PFK-1", "Exercise failure plus haemolysis"]
+    ]
+   }
+  },
+  {
+   "tx": "Two rarities complete the examination set: **Andersen disease** (type IV, brancher absent) deposits long amylopectin like chains causing childhood cirrhosis, while Tarui disease (type VII, muscle phosphofructokinase) couples exercise intolerance with compensated haemolysis because red cells share the M subunit. High carbohydrate meals worsen Tarui exercise (glucose suppresses fat fuels it could use), the opposite prescription to McArdle, a discrimination worth deliberate practice.",
+   "say": "Andersen disease deposits long chains causing childhood cirrhosis. Tarui disease couples exercise intolerance with haemolysis. Carbohydrate meals worsen Tarui exercise, the opposite prescription to McArdle, a discrimination worth deliberate practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "McArdle (phosphorylase)", "points": ["Glucose before exercise helps", "No haemolysis", "Second wind classic"]},
+    "right": {"title": "Tarui (muscle PFK)", "points": ["Glucose before exercise worsens (out of wind)", "Haemolysis present", "Red cells share the subunit"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

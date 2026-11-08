@@ -6,8 +6,8 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Haemolysis** shortens red cell survival causing anaemia with reticulocytosis, raised unconjugated bilirubin and LDH, low haptoglobin and gallstones or splenomegaly when chronic. Hereditary causes split into membrane defects, enzyme defects and haemoglobin disorders. Film morphology is the fastest guide: spherocytes, elliptocytes, bite cells or sickle forms each name their disease.",
-   "say": "Haemolysis raises reticulocytes, bilirubin and LDH while haptoglobin falls. Film shape names the cause: spheres, bites or sickles. Chronic haemolysis stones the gallbladder.",
+   "tx": "**Haemolysis** shortens red cell survival and causes anaemia with reticulocytosis, raised unconjugated bilirubin and lactate dehydrogenase, and low haptoglobin. Chronic haemolysis produces pigment gallstones and splenomegaly from sustained red cell destruction over many years. Hereditary causes split into membrane defects, enzyme defects and haemoglobin disorders that need different counselling. Film morphology gives the fastest guide because **spherocytes**, elliptocytes, bite cells and sickle forms each name their underlying disease.",
+   "say": "Haemolysis raises reticulocytes, bilirubin and one enzyme marker while haptoglobin falls during active destruction. Chronic destruction stones the gallbladder and enlarges the spleen over many years of sustained haemolysis. Film shape names the cause quickly because each morphology points toward a different inherited defect.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-haemolytic-hereditary-fig1.webp",
@@ -17,13 +17,13 @@
    }
   },
   {
-   "tx": "**Hereditary spherocytosis** from spectrin, ankyrin or band 3 defects loses membrane surface so cells become spherical, rigid and trapped by the spleen (extravascular haemolysis). Spherocytes lack central pallor with raised MCHC, osmotic fragility increases and splenectomy cures haemolysis while spherocytes persist. Aplastic crisis from parvovirus and pigment gallstones complicate childhood.",
-   "say": "Spherocytes lose membrane, ball up and die in the spleen. Fragility testing confirms them. Removing the spleen stops haemolysis though spheres remain.",
+   "tx": "**Hereditary spherocytosis** follows defects in spectrin, ankyrin or band 3 that reduce membrane surface and make red cells spherical and rigid. Spherical cells lack central pallor, show raised mean corpuscular haemoglobin concentration and become trapped inside the spleen. Increased **osmotic fragility** supports the diagnosis, and splenectomy stops haemolysis although spherocytes persist on the film afterwards. Parvovirus infection can halt production and pigment gallstones complicate childhood in many affected families.",
+   "say": "Spherocytes lose membrane surface, become round and rigid, and die inside the spleen during passage. Fragility testing supports the diagnosis, and removing the spleen stops haemolysis although the abnormal shape persists. Affected families often develop gallstones and jaundice because chronic destruction begins early in childhood for many patients.",
    "vis": null
   },
   {
-   "tx": "**G6PD deficiency** (X linked) leaves red cells defenceless against oxidant stress, so infections, fava beans, naphthalene or drugs like primaquine and dapsone trigger episodic intravascular haemolysis with Heinz bodies and bite cells. Between crises counts normalise, and enzyme assay during crisis falsely normalises from young reticulocytes, a classic testing trap.",
-   "say": "G6PD deficient cells burst under oxidant stress from beans, infections or drugs, showing Heinz bodies and bite cells. Test enzyme between crises, not during.",
+   "tx": "**G6PD deficiency** is an X linked enzyme defect that leaves red cells defenceless against oxidant stress from infections, fava beans, naphthalene and selected drugs. Primaquine and dapsone are classic drug triggers that cause episodic intravascular haemolysis with **Heinz bodies** and bite cells on the film. Counts normalise between crises, so the history and film during an episode carry great diagnostic weight. Enzyme assay during a crisis can falsely normalise because young reticulocytes contain more enzyme, a classic testing trap.",
+   "say": "This X linked defect leaves red cells defenceless whenever oxidant stress follows infection, beans or selected drugs. Heinz bodies form inside cells and the spleen bites them out during a painful haemolytic episode. Enzyme testing during a crisis misleads because young cells contain more enzyme than older cells do.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -47,13 +47,24 @@
    }
   },
   {
-   "tx": "**Pyruvate kinase deficiency** starves red cells of ATP causing chronic haemolysis with spiky echinocytes, splenomegaly and iron overload even without transfusions from ineffective erythropoiesis signals. Paroxysmal nocturnal haemoglobinuria is acquired instead: PIGA mutation loses CD55 and CD59 anchors, causing complement intravascular haemolysis, dark morning urine, thrombosis and marrow failure.",
-   "say": "Pyruvate kinase lack starves cells of ATP for lifelong haemolysis. PNH is acquired anchor loss causing complement bursts, dark urine and clots. Hereditary versus acquired splits them.",
+   "tx": "The film shows red cells with a semicircular defect called **bite cells** after the spleen has removed damaged haemoglobin inclusions. The inset shows dark **Heinz bodies** inside red cells, which are precipitates of oxidised haemoglobin during oxidant stress. This pairing is classic for **G6PD deficiency** during an acute haemolytic episode triggered by infection, beans or drugs. In the exam, bite cells with Heinz bodies should immediately raise oxidant haemolysis rather than membrane disease.",
+   "say": "This film shows bite cells where the spleen has removed damaged inclusions from circulating red cells. The inset shows dark Heinz bodies that represent oxidised haemoglobin precipitated during severe oxidant stress inside cells. Together they point toward G6PD deficiency during a crisis triggered by infection, beans or selected drugs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-haemolytic-hereditary-gen1.webp",
+    "alt": "Red cell smear with notched bite cells; magnified inset shows dark Heinz bodies in red cells.",
+    "caption": "Blood film showing bite cells with Heinz body inset. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Pyruvate kinase deficiency** starves red cells of ATP and causes chronic haemolysis with spiky echinocytes, splenomegaly and iron overload without regular transfusion. Iron overload develops because ineffective erythropoiesis signals increase gut iron absorption over many years of disease. **Paroxysmal nocturnal haemoglobinuria** is acquired rather than hereditary because a PIGA mutation removes CD55 and CD59 anchors from cell surfaces. Loss of those anchors allows complement mediated intravascular haemolysis with dark morning urine, thrombosis and marrow failure.",
+   "say": "Pyruvate kinase deficiency starves red cells of energy and causes lifelong haemolysis with splenic enlargement. Paroxysmal nocturnal haemoglobinuria is acquired because a mutation removes protective anchors and allows complement mediated destruction. Dark morning urine and unusual clots separate the acquired clone from purely inherited enzyme defects.",
    "vis": null
   },
   {
-   "tx": "Autoimmune haemolysis must be separated by the **direct antiglobulin (Coombs) test**: warm IgG disease (lymphoma, lupus, drugs) coats cells for splenic removal and responds to steroids, while cold IgM agglutinin disease (mycoplasma, lymphoma) fixes complement causing acral ischaemia. Hereditary films are Coombs negative, the decisive branch point in haemolysis stems.",
-   "say": "Positive Coombs means immune haemolysis; negative means hereditary or mechanical. Warm disease responds to steroids in spleen; cold disease clumps in cold fingers.",
+   "tx": "Autoimmune haemolysis must be separated from hereditary disease by the **direct antiglobulin test** that detects antibody or complement coating red cells. Warm IgG disease follows lymphoma, lupus or drugs, coats cells for splenic removal and responds to steroid treatment. Cold IgM agglutinin disease follows mycoplasma or lymphoma, fixes complement and causes acral ischaemia in cold fingers and toes. Hereditary films remain **Coombs negative**, which gives the decisive branch point in haemolysis stems.",
+   "say": "The Coombs test separates immune destruction from inherited disease because positive coating proves antibody mediated haemolysis. Warm disease responds to steroids and removes cells through the spleen in most patients with symptoms. Cold disease clumps cells in cold fingers, while inherited films remain negative and need morphology based sorting.",
    "vis": null
   }
  ],

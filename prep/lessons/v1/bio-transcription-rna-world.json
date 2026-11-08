@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-transcription",
+ "subject": "biochemistry",
+ "title": "RNA types, microRNA and control drugs",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "RNA species divide labour quantitatively: **rRNA** is eighty percent of cellular RNA (ribosome mass and catalysis, transcribed polymerase I and III five S), tRNA fifteen percent (adaptor decoding, polymerase III, heavily modified), mRNA one to five percent (information, polymerase II, shortest lived on average), plus snRNA splicing, snoRNA modification guiding, miRNA/siRNA silencing, lncRNA scaffolding (Xist coating, HOTAIR), circular RNAs sponging, and extracellular vesicle cargo biomarkers. Abundance inversely tracks information density, a quantitative intuition examinations reward when asking which RNA a Northern or total RNA preparation mostly shows.",
+   "say": "Ribosomal RNA is eighty percent of cellular RNA while messenger is only a few percent informationally. Abundance inversely tracks information density across silencing and scaffold species completing the RNA census quantitatively.",
+   "vis": {
+    "kind": "table",
+    "cols": ["RNA species", "Share and polymerase", "Signature job"],
+    "rows": [
+     ["rRNA (18/28/5.8 plus 5S)", "About 80 percent; Pol I plus III (5S)", "Ribosome catalysis (peptidyl transferase)"],
+     ["tRNA", "About 15 percent; Pol III", "Adaptor decoding, wobble modifications"],
+     ["mRNA", "1 to 5 percent; Pol II", "Protein information, cap/tail regulated half lives"],
+     ["miRNA and siRNA (21 to 23 nt)", "Trace mass; Pol II pri (mi) or dsRNA (si)", "RISC silencing, therapies patisiran/givosiran"]
+    ]
+   }
+  },
+  {
+   "tx": "**MicroRNA** biogenesis (primary transcript hairpins cropped by Drosha-DGCR8 Microprocessor nucleus, exported exportin five, Dicer dicing cytoplasm, Argonaute RISC loading one strand, seed nucleotides two to eight partial pairing to three prime UTRs repressing translation and accelerating deadenylation decay (GW182), one miRNA tuning hundreds of targets modestly as network rheostat (let-7 development, miR-122 liver hepatitis C hostage miravirsen history, miR-21 oncomiR, miR-155 immunity)) contrasts siRNA perfect pairing endonucleolytic slicing (exogenous defence and drugs) mechanistically at pairing completeness alone.",
+   "say": "MicroRNAs tune hundreds of targets modestly by seed pairing rheostatically, while siRNAs slice perfectly paired targets endonucleolytically. Pairing completeness alone mechanistically separates endogenous tuning from defence silencing pathways.",
+   "vis": {
+    "kind": "flow",
+    "title": "MicroRNA assembly line",
+    "nodes": [
+     {"id": "pri", "label": "Pri-miRNA hairpin (Pol II)"},
+     {"id": "dro", "label": "Drosha crops (nucleus)"},
+     {"id": "dic", "label": "Dicer dices (cytoplasm)"},
+     {"id": "risc", "label": "Argonaute RISC represses targets"}
+    ],
+    "edges": [["pri", "dro"], ["dro", "dic"], ["dic", "risc"]]
+   }
+  },
+  {
+   "tx": "RNA therapeutics industrialised silencing within a decade: **patisiran** (lipid nanoparticle siRNA transthyretin liver knockdown, first siRNA drug), inclisiran (GalNAc conjugate PCSK9 twice yearly), givosiran (ALA synthase in acute hepatic porphyria, prior module), nusinersen splice switching antisense (gapmer RNase H versus steric block designs distinguished), mRNA vaccines (modified nucleoside pseudouridine dampening innate sensing, Kariko Weissman Nobel, lipid nanoparticle delivery, cap and UTR engineering from this module processing rules), self amplifying and circular RNA investigational. Delivery to liver solved; extrahepatic delivery is the frontier examination awareness expects qualitatively.",
+   "say": "Silencing therapeutics industrialised within a decade from patisiran nanoparticles to GalNAc conjugates and splice antisense drugs. Modified nucleoside mRNA vaccines apply processing rules from this module clinically and Nobel recognised.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "RNase H gapmer antisense", "points": ["DNA gap degrades target RNA", "Tofersen (SOD1 ALS) exemplar", "Liver and CNS intrathecal delivery"]},
+    "right": {"title": "Steric block antisense (no cleavage)", "points": ["Splice switching or translation block", "Nusinersen and eteplirsen exemplars", "Chemistry (PMO, 2-prime modifications) decides fate"]
+    }
+   }
+  },
+  {
+   "tx": "**tRNA** structure serves decoding accuracy: cloverleaf secondary (acceptor stem three prime CCA (added post transcriptionally by nucleotidyltransferase where not encoded), D arm, anticodon loop, TpsiC arm, variable arm) folding to L tertiary, over fifty modifications (inosine wobble position thirty four, pseudouridine, methylations) expanding pairing and identity, aminoacylation identity elements read by synthetases (next module) more than anticodon alone in several systems (alanine G3:U70 classic). Mitochondrial tRNA mutations (MELAS m.3243 tRNA leucine) cripple mitochondrial translation selectively, bridging transcription products to oxidative disease.",
+   "say": "TRNA L folds present anticodons with over fifty modifications expanding wobble pairing accurately. Mitochondrial tRNA mutations cripple mitochondrial translation selectively, bridging transcription products to oxidative disease phenotypes clinically.",
+   "vis": null
+  },
+  {
+   "tx": "**Ribosomal RNA** is the ribosome catalytic heart (peptidyl transferase twenty three S (twenty eight S eukaryote) rRNA ribozyme, antibiotics binding rRNA pockets proving RNA catalysis druggable), processed from forty five S precursor in nucleolus (snoRNA guided methylation and pseudouridylation, ribosome biogenesis stress p53 surveillance (nucleolar stress in ribosomopathies Diamond-Blackfan RPS19 and marrow failure, Treacher Collins polymerase I TCOF1 craniofacial), five S polymerase III separate. Ribosome heterogeneity (specialised ribosomes translating subsets) is current frontier beyond uniform machine teaching.",
+   "say": "Ribosomal RNA catalyses peptide bonds as ribozyme heart with antibiotics binding its pockets druggably. Ribosomopathies prove biogenesis stress surveillance through p53 in marrow failure syndromes genetically and clinically.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Ribosome fact", "Eukaryote (80S)", "Bacteria (70S drug target)"],
+    "rows": [
+     ["Subunits", "60S plus 40S", "50S plus 30S (Svedbergs not additive)"],
+     ["Catalytic rRNA", "28S in 60S", "23S in 50S (peptidyl transferase)"],
+     ["Antibiotic pockets (bridge)", "Cycloheximide experimental only", "Macrolide 50S, aminoglycoside 30S (next module)"]
+    ]
+   }
+  },
+  {
+   "tx": "Long noncoding and circular RNAs regulate without proteins: **Xist** coats the future inactive X recruiting Polycomb silencing (regulation lesson climax), H19 imprinted growth locus (Beckwith-Wiedemann), MALAT1 nuclear speckles cancer associated, circular RNAs (backspliced covalent loops, miRNA sponges CDR1as, stable biomarkers) and enhancer RNAs marking active enhancers experimentally. Actinomycin D global transcription blockade (prior lesson) remains the laboratory kill switch proving RNA half lives by chase, actinomycin sensitivity historically separating polymerase products before sequencing existed.",
+   "say": "Xist coats inactive X recruiting Polycomb silencing climactically for regulation lessons ahead. Circular RNAs sponge microRNAs stably as biomarkers, while actinomycin chase proves RNA half lives experimentally historically.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-transcription-gen1.webp",
+    "alt": "Blot lanes show a faded target band after knockdown with a steady GAPDH loading control band below.",
+    "caption": "Knockdown blot with preserved loading control, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

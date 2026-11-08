@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "bio-recombinant-techniques",
+ "subject": "biochemistry",
+ "title": "Sequencing, arrays and cytogenetics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sanger sequencing** (dideoxy chain termination: ddNTPs lacking three prime hydroxyl terminate randomly when polymerase incorporates them (about one percent dd to dNTP), fragments separated capillary electrophoretically by single base, four colour fluorescence laser reading chromatogram peaks) reads five hundred to one thousand bases per reaction, gold standard for single gene confirmation, familial variant testing, PCR product verification and outbreak typing where accuracy per base exceeds throughput needs. Heterozygote double peaks, indel heterozygous trace collapse after breakpoint (deconvolution), GC compressions and dye blobs artefacts read manually in diagnostic literacy.",
+   "say": "Sanger termination reads five hundred to one thousand bases gold standard for familial variant confirmation accurately. Heterozygote double peaks and indel trace collapse read manually in diagnostic literacy daily practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sequencing generation",
+     "Logic",
+     "Read and throughput sketch"
+    ],
+    "rows": [
+     [
+      "Sanger (first)",
+      "Dideoxy termination, capillary",
+      "About 1000 bases, single amplicons precise"
+     ],
+     [
+      "NGS massively parallel (second)",
+      "Bridge PCR clusters (Illumina reversible terminators) or semiconductor",
+      "Millions short reads 100 to 300 bases, panels/exomes/genomes"
+     ],
+     [
+      "Long read (third)",
+      "PacBio single molecule, Nanopore current disruptions",
+      "Tens kilobases plus, repeats, phasing, methylation direct (nanopore)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Next generation** choices by question: targeted panels (high depth hundreds fold, curated actionable genes, leukaemia and solid tumour, germline cardiomyopathy panels), whole exome (one to two percent coding, most Mendelian diagnoses, twenty thousand genes, incidental secondary findings ACMG list consent), whole genome (noncoding, structural variants, rapid intensive care neonatal diagnoses days to hours record protocols), RNA sequencing (expression, fusions, splicing). Depth versus breadth, tumour normal subtraction, circulating tumour DNA (ctDNA) low fraction limits (prior PCR digital) and variant allele fraction mosaicism/clonality reading distinguish competent reports.",
+   "say": "Panels, exome and genome trade depth against breadth by clinical question deliberately consented. Tumour normal subtraction and allele fractions distinguish competent genomic reports in oncology and rare disease clinics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Targeted panel",
+     "points": [
+      "Deep (hundreds x), curated genes",
+      "Fast, cheaper, fewer incidentals",
+      "Known syndrome or tumour typing"
+     ]
+    },
+    "right": {
+     "title": "Exome or genome",
+     "points": [
+      "Broad, shallower per base economics",
+      "Undiagnosed rare disease hunting",
+      "Incidental findings consent essential"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Variant interpretation (ACMG five tiers pathogenic to benign integrating population frequency (gnomAD common equals unlikely rare disease), computational, functional, segregation, de novo, allelic data) produces **variants of uncertain significance**, pharmacogenomic star alleles and somatic tiering (AMP oncogenicity) separate grammars. Microarrays (expression two colour historical, SNP arrays genotyping plus copy number (log R and B allele), methylation arrays cancer classification (CNS tumours) and imprinting) bridge hybridisation to sequencing eras still clinically sovereign for copy number screening.",
+   "say": "Variant tiers integrate frequency, function and segregation, with uncertain variants never directing irreversible action alone responsibly. SNP arrays remain sovereign for copy number screening in developmental diagnostics currently worldwide.",
+   "vis": null
+  },
+  {
+   "tx": "**Karyotyping** (colcemid metaphase arrest, Giemsa banding about five hundred bands resolution five to ten megabases, twenty metaphases mosaicism statistics) diagnoses aneuploidy, balanced translocations (invisible to microarray), Robertsonian carriers (Down recurrence counselling (fourteen twenty one carrier mother risk higher than father teaching), infertility and recurrent miscarriage balanced carriers, leukaemia translocation clones (BCR-ABL t(9;22) prototype with FISH/PCR monitoring succession). Culture failure, maternal contamination in prenatal samples, and resolution limits mandate complementary tests chosen in the testing strategy lesson synthesised next.",
+   "say": "Karyotyping diagnoses aneuploidy and balanced translocations invisible to microarrays essentially. Robertsonian carrier risks and leukaemia clones mandate complementary test choices synthesised in strategy lessons following cytogenetics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cytogenetic platform",
+     "Sees",
+     "Blind to"
+    ],
+    "rows": [
+     [
+      "Karyotype G-banding",
+      "Aneuploidy, balanced rearrangements over 5 to 10 Mb",
+      "Submicroscopic CNVs, sequence variants"
+     ],
+     [
+      "Chromosomal microarray (SNP array)",
+      "Submicroscopic deletions/duplications, UPD stretches (SNP)",
+      "Balanced translocations, low mosaicism"
+     ],
+     [
+      "FISH (locus probes)",
+      "Targeted trisomy, HER2 amplification, BCR-ABL, microdeletion if probed",
+      "Anything not probed (probe choice is diagnosis)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**FISH** (fluorescent in situ hybridisation, interphase rapid aneuploidy screens twenty four to forty eight hours prenatal, metaphase microdeletion mapping (DiGeorge twenty two q, Williams seven q elastin), oncology break apart (ALK, MYC Burkitt), dual fusion (BCR-ABL), HER2/CEP17 ratios trastuzumab) and spectral karyotyping multiplex painting (research complex rearrangements) trade genome breadth for targeted speed and single cell mosaicism. Array comparative genomic hybridisation historically (two colour test/reference) now SNP arrays unify copy number plus absence of heterozygosity (consanguinity, UPD) in developmental delay first tier testing guidelines.",
+   "say": "FISH trades genome breadth for targeted speed and single cell mosaicism detection prenatally and oncologically. SNP arrays unify copy number plus heterozygosity absence in developmental first tier testing guidelines currently.",
+   "vis": {
+    "kind": "flow",
+    "title": "Prenatal speed versus completeness",
+    "nodes": [
+     {
+      "id": "qf",
+      "label": "Rapid QF-PCR/FISH: common trisomies in 1 to 2 days"
+     },
+     {
+      "id": "array",
+      "label": "Microarray: genome copy number in 1 to 2 weeks"
+     },
+     {
+      "id": "kary",
+      "label": "Karyotype: balanced and Robertsonian context for recurrence"
+     }
+    ],
+    "edges": [
+     [
+      "qf",
+      "array"
+     ],
+     [
+      "array",
+      "kary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Long reads** now resolve what short reads and arrays cannot: repeat expansions sized and methylated natively, structural variant breakpoints base precise, haplotype phasing (compound heterozygote cis/trans without parents), centromeric and segmental duplication genes (SMN1/2, CYP2D6 copy and hybrids pharmacogenomic relevance). CRISPR editing and gene therapy next convert reading genomes into rewriting them, where delivery and mosaicism, not nuclease chemistry, limit cures in clinic today.",
+   "say": "Long reads resolve repeat expansions and structural breakpoints with native methylation phasing completely. CRISPR next converts reading genomes into rewriting them, where delivery limits cures in clinic today primarily.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Short reads struggle",
+     "points": [
+      "Repeats longer than reads",
+      "Segmental duplications ambiguous",
+      "Phasing needs parents"
+     ]
+    },
+    "right": {
+     "title": "Long reads resolve",
+     "points": [
+      "Expansions sized plus methylation",
+      "Breakpoints base precise",
+      "Haplotypes phased directly"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

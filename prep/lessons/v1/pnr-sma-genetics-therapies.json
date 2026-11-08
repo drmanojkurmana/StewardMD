@@ -1,0 +1,251 @@
+{
+  "id": "pnr-sma-genetics-therapies",
+  "title": "Spinal Muscular Atrophy: SMN Genetics, Subtypes and Disease-Modifying Therapies",
+  "subject": "ss-paediatric-neurology",
+  "module": "Spinal Muscular Atrophy, Duchenne Dystrophy and Neuropathies",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Spinal muscular atrophy is an autosomal recessive motor neuron disease driven by homozygous loss of the survival motor neuron one gene.",
+      "tx": "Identify the **SMN1 homozygous deletion** as the foundational genetic cause of 5q spinal muscular atrophy. More than 95% of affected children display homozygous deletion of exon 7, or combined deletion of exons 7 and 8, in the telomeric survival motor neuron 1 (SMN1) gene located on chromosome 5q13. The resulting deficiency of ubiquitous SMN protein causes selective, progressive degeneration of anterior horn alpha motor neurons in the spinal cord and motor nuclei in the brainstem (SMN2 copy number modifier).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genetic Element",
+          "Locus & Molecular Defect",
+          "Pathological Outcome"
+        ],
+        "rows": [
+          [
+            "Primary gene",
+            "SMN1 on chromosome 5q13",
+            "Homozygous deletion of exon 7 in >95% of cases"
+          ],
+          [
+            "Protein function",
+            "SMN protein complex",
+            "Spliceosomal snRNP assembly and axonal RNA transport"
+          ],
+          [
+            "Target pathology",
+            "Anterior horn alpha motor neurons",
+            "Selective apoptosis and progressive spinal denervation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The centromeric duplicate gene SMN two serves as the main phenotypic modifier based on how many copies the child inherits.",
+      "tx": "Evaluate the **SMN2 copy number modifier** when predicting disease onset and phenotypic severity. The centromeric pseudogene SMN2 differs from SMN1 by a silent C-to-T transition in exon 7 that disrupts an exonic splicing enhancer, causing exon 7 exclusion in roughly 90% of transcripts and yielding unstable, truncated SMN protein. Only 10% of SMN2 transcripts encode full-length functional SMN. Consequently, inheriting higher SMN2 copy numbers (3 or 4 copies) partially compensates for SMN1 loss, producing significantly milder phenotypes (SMA Type 1 Werdnig-Hoffmann).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "SMN1 Gene (Telomeric)",
+          "points": [
+            "Normal functional transcript includes exon 7",
+            "Produces 100% full-length, stable SMN protein",
+            "Homozygous loss causes anterior horn cell death"
+          ]
+        },
+        "right": {
+          "title": "SMN2 Gene (Centromeric)",
+          "points": [
+            "C-to-T transition causes exon 7 skipping in 90%",
+            "Only 10% produces functional full-length protein",
+            "Copy numbers (1 to 4+) directly determine clinical severity"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Infantile spinal muscular atrophy or type one presents before six months with profound weakness and characteristic tongue fasciculations.",
+      "tx": "Recognise **SMA Type 1 Werdnig-Hoffmann** as the classic severe infantile presentation emerging before 6 months of age. Infants exhibit profound symmetric flaccid hypotonia (the floppy infant posture), generalized areflexia, fine resting tongue fasciculations, and a classic bell-shaped thorax due to preserved diaphragmatic excursion contrasting with intercostal muscle wasting (paradoxical respiration). Without disease-modifying intervention, affected infants never achieve unsupported sitting and succumb to respiratory failure within two years (SMA Type 2 and 3 milestones).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Physical Exam Finding",
+          "Underlying Anatomical Substrate",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Floppy infant posture",
+            "Severe axial and proximal limb hypotonia",
+            "Infant lies in frog-leg posture with minimal spontaneous movement"
+          ],
+          [
+            "Tongue fasciculations",
+            "Hypoglossal nucleus lower motor neuron loss",
+            "Pathognomonic sign visible during quiet rest or feeding"
+          ],
+          [
+            "Bell-shaped thorax",
+            "Intercostal weakness with spared diaphragm",
+            "Paradoxical abdominal breathing leading to early respiratory insufficiency"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Types two and three are distinguished by whether the child achieves independent sitting or independent walking milestones.",
+      "tx": "Differentiate **SMA Type 2 and 3 milestones** to establish accurate long-term functional prognoses. Intermediate SMA Type 2 manifests between 6-18 months of age; children gain the motor ability to sit unsupported when placed, but they never achieve independent ambulation and frequently develop progressive kyphoscoliosis. Juvenile SMA Type 3 (Kugelberg-Welander disease) manifests after 18 months; affected patients achieve unassisted walking, though proximal muscle weakness may later result in frequent falls or loss of ambulation in adolescence (Nusinersen antisense oligonucleotide).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subtype",
+          "Onset Age",
+          "Highest Motor Milestone Achieved",
+          "Typical SMN2 Copies"
+        ],
+        "rows": [
+          [
+            "Type 1 (Werdnig-Hoffmann)",
+            "< 6 months",
+            "Never sits unsupported",
+            "2 copies (rarely 3)"
+          ],
+          [
+            "Type 2 (Intermediate)",
+            "6-18 months",
+            "Sits unsupported; never walks independently",
+            "3 copies"
+          ],
+          [
+            "Type 3 (Kugelberg-Welander)",
+            "> 18 months",
+            "Walks independently (may lose later)",
+            "3 or 4 copies"
+          ],
+          [
+            "Type 4 (Adult onset)",
+            "> 21 years",
+            "Normal ambulation with mild proximal weakness",
+            ">= 4 copies"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Nusinersen is an antisense oligonucleotide administered intrathecally to splice full-length survival motor neuron protein into the central nervous system.",
+      "tx": "Administer **Nusinersen antisense oligonucleotide** (Spinraza) as targeted splice-altering therapy for spinal muscular atrophy. Nusinersen binds specifically to an intronic splicing silencer in SMN2 pre-mRNA, displacing negative splicing factors and promoting inclusion of exon 7 into mature mRNA transcripts. Delivered via lumbar puncture into the cerebrospinal fluid, it requires a loading protocol of 4 intrathecal doses over 2 months followed by lifelong maintenance injections every 4 months, accompanied by baseline platelet and urine protein checks (Onasemnogene abeparvovec gene therapy).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "Intrathecal lumbar injection (12 mg)"
+          },
+          {
+            "id": "s2",
+            "label": "Binds intronic splicing silencer ISS-N1 on SMN2"
+          },
+          {
+            "id": "s3",
+            "label": "Promotes inclusion of exon 7 during pre-mRNA splicing"
+          },
+          {
+            "id": "s4",
+            "label": "Translates full-length SMN protein in spinal cord motor neurons"
+          }
+        ],
+        "edges": [
+          [
+            "s1",
+            "s2"
+          ],
+          [
+            "s2",
+            "s3"
+          ],
+          [
+            "s3",
+            "s4"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Onasemnogene abeparvovec delivers a functional copy of the human gene directly through an adeno-associated virus vector.",
+      "tx": "Deploy **Onasemnogene abeparvovec gene therapy** (Zolgensma) as a one-time intravenous replacement vector for children under 2 years of age. It employs a non-replicating adeno-associated virus serotype 9 (AAV9) vector delivering self-complementary cDNA encoding full-length human SMN protein. Administered as a single intravenous infusion at 1.1 x 10^14 vg/kg, therapy requires pre-infusion anti-AAV9 antibody titre verification (must be <= 1:50) to prevent neutralizing immune rejection and ensure robust motor neuron transduction (Risdiplam oral therapy).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vector Parameter",
+          "Clinical Requirement",
+          "Safety Vigilance"
+        ],
+        "rows": [
+          [
+            "Vector platform",
+            "Self-complementary AAV9 capsid",
+            "Crosses blood-brain barrier into spinal cord motor neurons"
+          ],
+          [
+            "Target population",
+            "Children < 2 years with bi-allelic SMN1 mutations",
+            "Verify anti-AAV9 antibody titre <= 1:50 prior to infusion"
+          ],
+          [
+            "Dosing specification",
+            "1.1 x 10^14 vg/kg single IV infusion",
+            "Careful infusion over 60 minutes with emergency airway setup"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Risdiplam offers a daily oral liquid medication that modifies splicing both in the brain and throughout peripheral organs.",
+      "tx": "Prescribe **Risdiplam oral therapy** (Evrysdi) as a non-invasive, systemically distributed disease-modifying alternative. Risdiplam is a small-molecule chemical agent that binds directly to the 5' splice site of SMN2 pre-mRNA, shifting alternative splicing toward complete exon 7 inclusion. Taken orally or via gastrostomy tube once daily with meals, it provides widespread exposure to both the central nervous system and peripheral tissues such as skeletal muscle, liver, and myocardium, showing significant event-free survival and motor milestone gains in infants and older children (Corticosteroid co-medication with AAV9).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nusinersen (Intrathecal ASO)",
+          "points": [
+            "Delivered directly into CSF via repeated lumbar puncture",
+            "Concentrates almost exclusively in the central nervous system",
+            "Requires hospital visit every 4 months for maintenance"
+          ]
+        },
+        "right": {
+          "title": "Risdiplam (Oral Small Molecule)",
+          "points": [
+            "Administered daily at home via oral syringe or G-tube",
+            "Distributes systemically to CNS and peripheral organs",
+            "Avoids spinal puncture; requires refrigerated storage"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Corticosteroid protection is mandatory when infusing gene therapy to prevent severe acute liver inflammation.",
+      "tx": "Mandate **Corticosteroid co-medication with AAV9** before and following onasemnogene gene therapy infusion. To suppress systemic capsid-induced immune responses and prevent acute liver injury, oral prednisolone at 1 mg/kg/day is initiated 24 hours prior to onasemnogene infusion. This steroid regimen is continued daily for at least 30 days post-infusion, with gradual taper only after serum transaminases (ALT, AST) and total bilirubin have normalised, alongside regular troponin I and platelet monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Timing Phase",
+          "Steroid Protocol",
+          "Clinical Vigilance"
+        ],
+        "rows": [
+          [
+            "Pre-infusion",
+            "Prednisolone 1 mg/kg/day started 24 hours prior",
+            "Blunts immediate innate and T-cell mediated immune activation"
+          ],
+          [
+            "Post-infusion",
+            "Continue prednisolone 1 mg/kg/day for >= 30 days",
+            "Weekly liver enzymes (AST, ALT), bilirubin, troponin I, platelets"
+          ],
+          [
+            "Tapering criteria",
+            "Taper over 28 days only once transaminases < 2x ULN",
+            "Promptly re-escalate steroids if acute hepatitis or jaundice develops"
+          ]
+        ]
+      }
+    }
+  ]
+}
