@@ -1,0 +1,248 @@
+{
+  "id": "pnr-traumatic-brain-injury-raised-icp",
+  "title": "Pediatric Traumatic Brain Injury: Raised ICP, Monroe-Kellie and Tiered Management",
+  "subject": "ss-paediatric-neurology",
+  "module": "Congenital Malformations, Hydrocephalus and Raised ICP",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The PECARN head injury rules identify children at very low risk of traumatic brain injury. Following these validated rules safely eliminates unnecessary radiation from head CT scans.",
+      "tx": "Apply the **PECARN pediatric head trauma rules** to avoid unnecessary cranial computed tomography radiation in children. The pediatric emergency care applied research network established age-stratified criteria with > 99.9% negative predictive value for clinically important traumatic brain injury (ciTBI). In children aged >= 2 years, CT is safely omitted if: Glasgow Coma Scale score is 15, there are no signs of basilar skull fracture, no loss of consciousness, no vomiting, normal parental behavior, and no severe injury mechanism (Cerebral perfusion pressure).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "PECARN Age group",
+          "High risk indicators (CT mandatory)",
+          "Intermediate risk (Observe vs CT)"
+        ],
+        "rows": [
+          [
+            "Children < 2 years",
+            "GCS <= 14, palpable skull fracture, altered mental status",
+            "Non-frontal hematoma, LOC > 5s, severe mechanism"
+          ],
+          [
+            "Children >= 2 years",
+            "GCS <= 14, signs of basilar skull fracture, altered mental status",
+            "History of LOC, vomiting, severe mechanism, worsening headache"
+          ],
+          [
+            "Very low risk (< 0.05%)",
+            "Meets none of the above criteria",
+            "Safe to discharge without cranial CT radiation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. Pediatric targets vary with age to protect the brain from both ischemia and hyperemia.",
+      "tx": "Target age-specific **Pediatric cerebral perfusion pressure (CPP) targets** during neurointensive resuscitation. Cerebral perfusion pressure is calculated as mean arterial pressure minus intracranial pressure (CPP = MAP - ICP). To maintain cerebral autoregulation and prevent secondary ischemic infarction, guidelines establish minimum CPP thresholds: 40 to 45 mmHg for infants and young children, and 50 to 60 mmHg for older children and adolescents, avoiding both hypoperfusion and hyperemic cerebral swelling (ICP intervention threshold).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pediatric age group",
+          "Target CPP threshold",
+          "Clinical management principle"
+        ],
+        "rows": [
+          [
+            "Infants & young children (< 2 yr)",
+            "40 to 45 mmHg",
+            "Avoid hypotension; titrate vasopressors to maintain MAP"
+          ],
+          [
+            "Children (2 to 12 yr)",
+            "45 to 50 mmHg",
+            "Maintain adequate cerebral blood flow and oxygen delivery"
+          ],
+          [
+            "Adolescents (> 12 yr)",
+            "50 to 60 mmHg",
+            "Mirror adult targets; aggressive ICP reduction protocols"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "In pediatric neurotrauma, twenty millimeters of mercury serves as the critical intervention line. Sustained elevations above this level trigger stepwise escalation of therapies.",
+      "tx": "Enforce the **Intracranial pressure threshold for intervention** in severe pediatric traumatic brain injury (GCS <= 8). The critical intracranial pressure intervention threshold is established at 20 mmHg. Sustained elevations of ICP > 20 mmHg for longer than 5 minutes compromise capillary microcirculation and accelerate secondary brain ischemia, mandating immediate step-up through tiered intracranial hypertension protocols under continuous invasive ICP catheter monitoring (Tier-1 measures).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "monitor",
+            "label": "Severe TBI (GCS <= 8): Invasive ICP monitoring"
+          },
+          {
+            "id": "normal",
+            "label": "ICP <= 20 mmHg: Continue baseline neuroprotective measures"
+          },
+          {
+            "id": "spike",
+            "label": "Sustained ICP > 20 mmHg for > 5 min: Immediate tiered therapy escalation"
+          }
+        ],
+        "edges": [
+          [
+            "monitor",
+            "normal"
+          ],
+          [
+            "normal",
+            "spike"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Tier one neuroprotective interventions optimize systemic physiology and intracranial dynamics. Raising the head to thirty degrees and maintaining normal carbon dioxide levels are vital first steps.",
+      "tx": "Implement **Tier-1 ICP interventions** as the baseline physiological foundation in pediatric neurointensive care. Tier-1 protocol includes: elevating the head of the bed to 30 degrees with neck in midline to maximize jugular venous drainage; providing adequate sedation and analgesia (fentanyl and midazolam); strictly maintaining normothermia (36-37 degrees C); maintaining normocapnia with arterial PaCO2 targeted between 35 and 40 mmHg; and draining CSF via an external ventricular drain (Hyperosmolar therapy).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tier-1 intervention",
+          "Clinical parameter / Target",
+          "Physiological rationale"
+        ],
+        "rows": [
+          [
+            "Head & neck positioning",
+            "Head elevated 30 degrees, neutral midline",
+            "Optimizes internal jugular venous drainage without carotid kink"
+          ],
+          [
+            "Sedation & analgesia",
+            "Continuous analgesia (fentanyl, morphine)",
+            "Suppresses pain-induced spikes in systemic blood pressure and ICP"
+          ],
+          [
+            "Ventilatory target",
+            "Normocapnia: PaCO2 35 to 40 mmHg",
+            "Prevents profound cerebral vasodilation caused by hypercapnia"
+          ],
+          [
+            "CSF drainage",
+            "External ventricular drain opened at 10-15 cmH2O",
+            "Direct volume reduction of cerebrospinal fluid compartment"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When intracranial pressure spikes despite first-line measures, hyperosmolar therapy pulls water from brain parenchyma. Three percent hypertonic saline is preferred over mannitol.",
+      "tx": "Administer **Hyperosmolar therapy (3% NaCl vs mannitol)** for acute intracranial hypertension spikes. Hypertonic 3% sodium chloride administered as a bolus of 2 to 5 mL/kg over 10 to 20 minutes (or continuous infusion of 0.1 to 1 mL/kg/hr) creates an osmolar gradient that draws water out of edematous astrocytic footplates, targeting serum sodium between 150 and 155 mEq/L and serum osmolarity under 360 mOsm/L. Hypertonic saline is superior to mannitol in trauma because it preserves circulating blood volume and maintains mean arterial pressure (Prophylactic hyperventilation).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "3% Hypertonic Saline (Preferred)",
+          "points": [
+            "Bolus: 2 to 5 mL/kg over 10-20 minutes",
+            "Maintains intravascular volume & blood pressure",
+            "Target serum Na: 150-155 mEq/L; Osm < 360 mOsm/L"
+          ]
+        },
+        "right": {
+          "title": "Mannitol (Reserve)",
+          "points": [
+            "Dose: 0.25 to 1.0 g/kg IV over 20-30 minutes",
+            "Potent osmotic diuresis; risk of hypovolemia & hypotension",
+            "Contraindicated in hypotensive, unstable pediatric trauma"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Routine prophylactic hyperventilation causes severe cerebral vasoconstriction and worsens ischemic injury. Deep hyperventilation must be reserved strictly for acute herniation emergencies.",
+      "tx": "Avoid **Prophylactic hyperventilation harm** in pediatric traumatic brain injury. Routine prophylactic aggressive hyperventilation (PaCO2 < 30 mmHg) triggers profound precapillary cerebral vasoconstriction, drastically reducing cerebral blood flow during the critical post-injury window when cerebral perfusion is already compromised. Mild brief hyperventilation (PaCO2 30-35 mmHg) is restricted strictly as an emergency temporizing measure during acute neurological deterioration or uncal herniation (pupillary asymmetry, extensor posturing) while hyperosmolar therapy is prepared (Tier-2 therapies).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "paco2",
+            "label": "Aggressive hyperventilation (PaCO2 < 30 mmHg)"
+          },
+          {
+            "id": "vaso",
+            "label": "Extreme precapillary cerebral vasoconstriction & low CBF"
+          },
+          {
+            "id": "infarct",
+            "label": "Severe secondary ischemic brain infarction (prohibited)"
+          }
+        ],
+        "edges": [
+          [
+            "paco2",
+            "vaso"
+          ],
+          [
+            "vaso",
+            "infarct"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When intracranial pressure remains refractory to tier one therapies, intensive second tier interventions are mobilized. High dose barbiturates and decompressive craniectomy can prevent fatal herniation.",
+      "tx": "Escalate to **Tier-2 and refractory ICP therapies** for medically refractory intracranial hypertension. Tier-2 measures comprise: neuromuscular blockade infusion; high-dose barbiturate coma (pentobarbital or thiopental titrated to electrographic burst suppression on continuous EEG); therapeutic hypothermia (32-34 degrees C); or emergency decompressive craniectomy (large unilateral hemicraniectomy or bifrontal craniectomy with duraplasty) to physically expand the cranial vault volume and relieve compartment pressure (Seizure prophylaxis).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Refractory therapy",
+          "Mechanism of action",
+          "Clinical endpoint & risk"
+        ],
+        "rows": [
+          [
+            "Barbiturate coma (Pentobarbital)",
+            "Suppresses cerebral metabolic rate of oxygen (CMRO2)",
+            "Continuous EEG burst suppression; severe myocardial depression"
+          ],
+          [
+            "Decompressive craniectomy",
+            "Surgical removal of bone flap with expansile duraplasty",
+            "Increases cranial vault volume; relieves brainstem compression"
+          ],
+          [
+            "Mild hypothermia (32-34\u00b0C)",
+            "Slows enzymatic cascades and cellular necrosis",
+            "Suppresses edema; coagulopathy and infection risks"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Early post-traumatic seizures can provoke devastating spikes in intracranial pressure. Intravenous anti-seizure medication for seven days provides effective short term protection.",
+      "tx": "Prescribe **Post-traumatic seizure prophylaxis** to prevent early secondary insults following moderate-to-severe pediatric head trauma. Post-traumatic seizures occur in up to 10% of pediatric severe TBI cases, provoking profound spikes in metabolic demand, lactic acidosis, and ICP. Administer intravenous levetiracetam (20 to 30 mg/kg/day divided q12h) or fosphenytoin (15 to 20 mg PE/kg loading dose) for exactly 7 days post-injury to prevent early post-traumatic seizures; routine prophylaxis beyond 7 days is not recommended as it does not prevent late epilepsy (Evaluation complete).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tbi",
+            "label": "Severe pediatric TBI (GCS <= 8 or acute intracranial hemorrhage)"
+          },
+          {
+            "id": "asm",
+            "label": "Levetiracetam (20-30 mg/kg/day) or Fosphenytoin IV for 7 days"
+          },
+          {
+            "id": "stop",
+            "label": "Discontinue at day 7: Prevents early seizures without altering late epilepsy"
+          }
+        ],
+        "edges": [
+          [
+            "tbi",
+            "asm"
+          ],
+          [
+            "asm",
+            "stop"
+          ]
+        ]
+      }
+    }
+  ]
+}

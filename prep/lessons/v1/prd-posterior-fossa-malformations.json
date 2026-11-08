@@ -1,0 +1,235 @@
+{
+  "gen": "AI",
+  "id": "prd-posterior-fossa-malformations",
+  "module": "Posterior Fossa Anomalies, Dysraphism and Brain Tumors",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Dandy-Walker, Joubert, Chiari and Posterior Fossa Malformations",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Dandy-Walker malformation is defined by a triad involving the cerebellar vermis, fourth ventricle, and tentorium. High insertion of the torcular herophili is a key differentiating feature.",
+      "tx": "Recognize the **Dandy-Walker malformation triad** on cranial ultrasound and neuroimaging. The classic anatomical triad comprises agenesis or marked hypoplasia of the cerebellar vermis, massive cystic dilation of the fourth ventricle filling the posterior fossa, and upward displacement of the tentorium with torcular-lambdoid inversion (confluence of sinuses elevated above the lambdoid suture) (Blake pouch cyst differentiation).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical structure",
+          "Pathological finding",
+          "Key diagnostic clue"
+        ],
+        "rows": [
+          [
+            "Cerebellar vermis",
+            "Agenesis or severe hypoplasia",
+            "Rostral remnant rotated upwards"
+          ],
+          [
+            "Fourth ventricle",
+            "Cystic ballooning into posterior fossa",
+            "Continuity with retrocerebellar space"
+          ],
+          [
+            "Torcular herophili",
+            "Elevated above lambdoid suture",
+            "Inverted torcular-lambdoid relationship"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A Blake pouch cyst looks like a posterior fossa fluid collection, but the cerebellar vermis remains intact. Failed fenestration of the foramen of Magendie causes this retrocerebellar pouch.",
+      "tx": "Establish **Blake pouch cyst differentiation** to prevent misdiagnosis of Dandy-Walker malformation. A Blake pouch cyst results from transient failure of fenestration of the foramen of Magendie, causing outward ballooning of the inferior medullary velum. Crucially, the cerebellar vermis is structurally complete and normal, the fourth ventricle is not massively enlarged, and the posterior fossa volume is normal (Mega cisterna magna criteria).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Blake pouch cyst",
+          "points": [
+            "Completely intact, non-hypoplastic vermis",
+            "Mild cystic outpouching behind cerebellum",
+            "Normal posterior fossa size and torcular"
+          ]
+        },
+        "right": {
+          "title": "Dandy-Walker malformation",
+          "points": [
+            "Marked vermian hypoplasia and rotation",
+            "Massive expansion of posterior fossa",
+            "Torcular elevated above lambdoid suture"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Mega cisterna magna simply represents an enlarged retrocerebellar fluid space without any distortion of the cerebellum. The vermis, fourth ventricle, and posterior fossa architecture remain entirely normal.",
+      "tx": "Apply the **mega cisterna magna criteria** on midline sagittal brain imaging. Mega cisterna magna is defined by an enlarged retrocerebellar subarachnoid space measuring > 10 mm on midline sagittal neuroimaging. It communicates freely with the fourth ventricle through the foramina of Luschka and Magendie, exhibiting a completely intact cerebellar vermis, normal fourth ventricle morphology, and absent hydrocephalus (Chiari II malformation hallmark).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Measurement / landmark",
+          "Normal anatomy",
+          "Mega cisterna magna threshold"
+        ],
+        "rows": [
+          [
+            "Retrocerebellar fluid depth",
+            "2 to 10 mm fluid space",
+            "> 10 mm on midline sagittal MRI"
+          ],
+          [
+            "Cerebellar vermis",
+            "Fully developed and lobulated",
+            "Completely normal vermian structure"
+          ],
+          [
+            "Hydrocephalus association",
+            "Absent",
+            "Absent (asymptomatic incidental finding)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Chiari two malformation occurs in all infants with open lumbar myelomeningocele. Cerebellar tonsils and the medulla herniate downward through an undersized posterior fossa.",
+      "tx": "Identify the **Chiari II malformation hallmark** on neonatal MRI and antenatal ultrasound. Chiari II arises from in-utero CSF leakage through an open neural tube defect, producing an abnormally diminutive posterior fossa. Key imaging features include downward peg-like herniation of the inferior vermis and medulla through the foramen magnum, beaked tectum, low tentorial insertion, and a 100% association with lumbar myelomeningocele (Molar tooth sign in Joubert).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chiari II malformation",
+          "points": [
+            "Herniation of inferior vermis and brainstem",
+            "100% associated with open myelomeningocele",
+            "Tectal beaking and small posterior fossa"
+          ]
+        },
+        "right": {
+          "title": "Chiari I malformation",
+          "points": [
+            "Isolated cerebellar tonsillar herniation > 5 mm",
+            "No open spinal dysraphism association",
+            "Frequent association with cervical syrinx"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Joubert syndrome produces the pathognomonic molar tooth sign on axial MRI. Non-decussating superior cerebellar peduncles and a hypoplastic vermis create this distinctive shape.",
+      "tx": "Demonstrate the **molar tooth sign in Joubert** syndrome on axial brain MRI through the midbrain. The classic appearance consists of an unusually deepened interpeduncular fossa, thickened and elongated superior cerebellar peduncles that travel horizontally without decussation, and severe vermian hypoplasia. Affected infants present with neonatal episodic tachypnea or apnea, abnormal jerky eye movements, and ataxia (Rhombencephalosynapsis).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "defect",
+            "label": "Ciliary axonal pathfinding mutation"
+          },
+          {
+            "id": "nondecussate",
+            "label": "Non-decussating superior cerebellar peduncles"
+          },
+          {
+            "id": "anatomy",
+            "label": "Elongated peduncles + deep interpeduncular fossa"
+          },
+          {
+            "id": "molar",
+            "label": "Pathognomonic molar tooth sign on axial MRI"
+          }
+        ],
+        "edges": [
+          [
+            "defect",
+            "nondecussate"
+          ],
+          [
+            "nondecussate",
+            "anatomy"
+          ],
+          [
+            "anatomy",
+            "molar"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Rhombencephalosynapsis is an uncommon anomaly characterized by complete or partial absence of the vermis with fusion of the cerebellar hemispheres. The dentate nuclei form a single fused structure across the midline.",
+      "tx": "Recognize **rhombencephalosynapsis** as a unique malformation of cerebellar midline fusion. Rather than separation by a vermis, the cerebellar hemispheres and dentate nuclei fuse continuously across the midline, producing an unbroken transverse orientation of cerebellar folia on coronal and axial imaging. The fourth ventricle loses its normal diamond shape, adopting a narrow keyhole or diamond-free configuration (Holoprosencephaly spectrum).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Structure",
+          "Normal cerebellum",
+          "Rhombencephalosynapsis"
+        ],
+        "rows": [
+          [
+            "Cerebellar vermis",
+            "Separates hemispheres",
+            "Agenesis of vermis with hemisphere fusion"
+          ],
+          [
+            "Dentate nuclei",
+            "Paired lateral structures",
+            "Single fused horseshoe midline nucleus"
+          ],
+          [
+            "Fourth ventricle",
+            "Diamond-shaped cavity",
+            "Narrowed, keyhole-shaped ventricle"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The holoprosencephaly spectrum results from failure of the forebrain to divide into two cerebral hemispheres. Alobar holoprosencephaly is characterized by complete non-separation with a single monoventricle and fused thalami.",
+      "tx": "Characterize the **holoprosencephaly spectrum** on fetal ultrasound and pediatric MRI. Alobar holoprosencephaly represents complete failure of forebrain cleavage, showing a large horseshoe-shaped monoventricle, completely fused thalami, absent corpus callosum, and absent interhemispheric fissure. It is strongly linked to Sonic Hedgehog (SHH) gene mutations and severe midline facial defects like cyclopia or proboscis (Lissencephaly / agyria-pachygyria).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Alobar holoprosencephaly",
+          "points": [
+            "Single monoventricle with fused thalami",
+            "Completely absent interhemispheric fissure",
+            "Severe facial anomalies (cyclopia, hypotelorism)"
+          ]
+        },
+        "right": {
+          "title": "Semilobar / lobar forms",
+          "points": [
+            "Partial posterior interhemispheric separation",
+            "Partially separated thalami and lateral ventricles",
+            "Milder craniofacial dysmorphism"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Lissencephaly produces a completely smooth brain surface from arrested neuronal migration. Type one lissencephaly shows a thick four-layered cortex and a figure of eight configuration on axial scans.",
+      "tx": "Examine **lissencephaly / agyria-pachygyria** caused by defective radial neuroblast migration. Type 1 lissencephaly (classical lissencephaly linked to LIS1 gene mutations and Miller-Dieker syndrome) demonstrates a smooth cerebral surface with complete agyria or pachygyria. The neocortex appears pathologically thickened, consisting of 4 primitive cortical layers instead of 6, creating an hourglass or figure-of-8 appearance on axial imaging.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Normal neocortex",
+          "Type 1 lissencephaly"
+        ],
+        "rows": [
+          [
+            "Cortical layers",
+            "6 distinct organized layers",
+            "4 disorganized thickened layers"
+          ],
+          [
+            "Surface morphology",
+            "Complex gyral and sulcal folding",
+            "Smooth agyria (posterior > anterior)"
+          ],
+          [
+            "Axial configuration",
+            "Oval hemispheric contour",
+            "Figure-of-8 hourglass appearance"
+          ]
+        ]
+      }
+    }
+  ]
+}

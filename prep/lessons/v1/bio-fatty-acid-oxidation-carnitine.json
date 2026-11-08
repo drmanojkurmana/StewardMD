@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "bio-fatty-acid-oxidation",
+ "subject": "biochemistry",
+ "title": "Carnitine shuttle and beta-oxidation yield",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Fatty acids are activated to acyl-CoA in the cytosol at a cost of two ATP equivalents (ATP to AMP), then face a membrane problem: the inner mitochondrial membrane refuses acyl-CoA entry. The **carnitine shuttle** solves it by swapping CoA for carnitine at CPT-I, ferrying acylcarnitine across, and restoring acyl-CoA at CPT-II inside the matrix where oxidation waits.",
+   "say": "Fatty acids are activated at a cost of two ATP equivalents, then swap CoA for carnitine at CPT-I to cross the inner membrane. CPT-II restores acyl-CoA inside the matrix where oxidation waits.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-fatty-acid-oxidation-gen1.webp",
+    "alt": "Carnitine shuttle ferrying long chain fatty acids across the inner mitochondrial membrane into the matrix.",
+    "caption": "Carnitine shuttle ferrying fats into mitochondria, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**CPT-I** is the rate limiting gate and is inhibited by malonyl-CoA, the first building block of fatty acid synthesis. Fed cells making fat therefore cannot simultaneously burn it, preventing a futile spiral. Muscle CPT-I and liver CPT-I differ in malonyl sensitivity, tuning exercise fuel choice, while CPT-II or translocase failure traps acylcarnitines that acylcarnitine profiling detects beautifully.",
+   "say": "CPT-I is rate limiting and is inhibited by malonyl-CoA, so fed cells cannot burn fat while making it. Muscle and liver forms differ in sensitivity. Trapped acylcarnitines are detected beautifully by profiling.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Fed (malonyl-CoA high)", "points": ["CPT-I inhibited", "Fat synthesis proceeds", "Burning paused"]},
+    "right": {"title": "Fasting and exercise (malonyl low)", "points": ["CPT-I open", "Fat burning proceeds", "Synthesis paused"]
+    }
+   }
+  },
+  {
+   "tx": "Each **beta-oxidation** spiral turn dehydrogenates with FAD, hydrates, dehydrogenates with NAD, then thiolyses off acetyl-CoA, shortening the chain by two carbons. Unsaturated and odd chains need auxiliary isomerases and carboxylation detours detailed next lesson. Very long chains (22 carbons and above) start shortened in peroxisomes, whose failure raises their plasma levels diagnostically.",
+   "say": "Each beta-oxidation turn shortens the chain by two carbons, capturing FADH2, NADH and acetyl-CoA. Very long chains start shortened in peroxisomes, whose failure raises their plasma levels diagnostically.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/bio-beta-oxidation.svg",
+    "alt": "Beta oxidation spiral diagram showing dehydrogenation, hydration, dehydrogenation and thiolysis repeating, with palmitate yielding acetyl-CoA units.",
+    "caption": "Same four steps every turn; palmitate gives 8 acetyl-CoA and about 106 ATP.",
+    "ar": 1.5384615384615385
+   }
+  },
+  {
+   "tx": "Palmitate (16 carbons) needs seven turns, yields eight acetyl-CoA plus seven NADH and seven FADH2 from the spiral, and nets about **106 ATP** by modern P/O values after the two bond activation cost (129 by older integers). Acetyl-CoA then earns about ten ATP each through the TCA cycle, which is why fat outyields carbohydrate gram for gram and why mitochondria dense tissues hoard it.",
+   "say": "Palmitate needs seven turns and nets about one hundred and six ATP by modern values after activation cost. Acetyl-CoA earns about ten ATP each through the cycle, which is why fat outyields carbohydrate gram for gram.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Palmitate ledger", "Yield"],
+    "rows": [
+     ["Spiral (7 turns)", "7 NADH, 7 FADH2, 8 acetyl-CoA"],
+     ["TCA (8 acetyl-CoA)", "About 80 ATP"],
+     ["Activation cost", "Minus 2 ATP equivalents"],
+     ["Net (modern)", "About 106 ATP"]
+    ]
+   }
+  },
+  {
+   "tx": "Carnitine itself comes from diet (meat, milk) and synthesis from lysine and methionine, recycled efficiently by kidney; true dietary deficiency is rare outside prematurity, dialysis or genetic transporter failure (which presents with cardiomyopathy and hypoketotic hypoglycaemia). Valproate and pivalate antibiotics waste carnitine as urinary esters. **Primary carnitine deficiency** answers dramatically to oral carnitine replacement.",
+   "say": "Carnitine comes from diet and synthesis, recycled by kidney. True deficiency is rare outside prematurity, dialysis or transporter failure. Primary deficiency answers dramatically to oral carnitine replacement.",
+   "vis": null
+  },
+  {
+   "tx": "Bedside translation: any fasting child who cannot burn fat shows **hypoketotic hypoglycaemia** because liver must burn fat to power gluconeogenesis and ketones. That single pairing (low glucose with inappropriately low ketones) should trigger acylcarnitine profiling and emergency glucose without waiting for confirmation. The next lesson walks the genetic defects that produce exactly this picture step by step.",
+   "say": "Any fasting child who cannot burn fat shows hypoketotic hypoglycaemia, because liver must burn fat to power glucose production. Low glucose with low ketones should trigger profiling and emergency glucose without waiting.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fat block to hypoketotic lows",
+    "nodes": [
+     {"id": "blk", "label": "Fat oxidation blocked"},
+     {"id": "ket", "label": "Ketones fail to rise"},
+     {"id": "glu", "label": "Glucose falls (no fuel for GNG)"},
+     {"id": "act", "label": "Give glucose, profile acylcarnitines"}
+    ],
+    "edges": [["blk", "ket"], ["ket", "glu"], ["glu", "act"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
