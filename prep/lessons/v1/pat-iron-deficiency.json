@@ -6,13 +6,24 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Microcytic anaemia** means red cells smaller than normal with low mean corpuscular volume, and iron deficiency is its commonest cause worldwide. Other causes are thalassaemia traits, anaemia of chronic disease in some cases, lead poisoning and sideroblastic defects. Mentzer index, red cell count and distribution width help separate iron deficiency from thalassaemia trait at the bedside.",
-   "say": "Small red cells most often mean iron deficiency. Thalassaemia trait, lead and sideroblastic defects also cause microcytosis. Red cell count and distribution width help separate iron deficiency from thalassaemia trait.",
+   "tx": "**Microcytic anaemia** means red cells are smaller than normal with a low mean corpuscular volume on the blood count. **Iron deficiency** is its commonest cause worldwide, but thalassaemia trait, chronic disease, lead poisoning and sideroblastic defects also produce small cells. The red cell count and distribution width help separate iron deficiency from thalassaemia trait at the bedside. The **Mentzer index** supports that separation, although iron studies and the clinical context decide the final diagnosis.",
+   "say": "Small red cells most often reflect iron deficiency, although thalassaemia trait and lead exposure also cause microcytosis. Red cell count and distribution width help separate iron deficiency from thalassaemia trait at the bedside reliably. Iron studies confirm the pattern because a single index never decides the diagnosis in isolation for patients.",
    "vis": null
   },
   {
-   "tx": "Iron studies follow a pattern that must be read together, never as ferritin alone. In **iron deficiency**, ferritin and serum iron fall, total iron binding capacity rises and transferrin saturation falls. In anaemia of chronic disease, ferritin is normal or high as an acute phase reactant while binding capacity falls. Inflammation therefore masks deficiency and needs clinical judgement.",
-   "say": "Iron deficiency lowers ferritin and saturation while binding capacity rises. Chronic inflammation raises ferritin and lowers binding capacity. Ferritin alone misleads during inflammation. Read the full pattern.",
+   "tx": "The film shows small pale **microcytic hypochromic red cells** with wide central pallor beside elongated **pencil cells** and marked variation in size and shape. Platelets appear plentiful, and the inset of normal red cells highlights how pale and small the deficient cells look. This morphology is classic for **iron deficiency anaemia** and should prompt iron studies plus a search for blood loss. In the exam, pencil cells with anisopoikilocytosis strongly support iron deficiency over thalassaemia trait.",
+   "say": "This film shows small pale cells with elongated pencil forms and marked variation in size and shape throughout. The normal inset makes the pallor and microcytosis easier to appreciate during careful film examination at the microscope. Pencil cells with varied shapes strongly support iron deficiency and should prompt iron studies plus a search for loss.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-iron-deficiency-gen1.webp",
+    "alt": "Blood smear with microcytic hypochromic cells, pencil elliptocytes and platelets plus normal comparison.",
+    "caption": "Microcytic hypochromic cells with pencil cells and anisopoikilocytosis. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Iron studies need reading together as a pattern and never as ferritin alone in an inflamed patient. In **iron deficiency**, ferritin and serum iron fall while total iron binding capacity rises and **transferrin saturation** falls. In anaemia of chronic disease, ferritin remains normal or high as an acute phase reactant while binding capacity falls. Inflammation therefore masks deficiency, so clinical judgement and additional tests guide difficult cases in practice.",
+   "say": "Iron deficiency lowers ferritin and saturation while binding capacity rises as the body seeks more iron. Chronic inflammation raises ferritin and lowers binding capacity, so ferritin alone misleads during active illness in hospital. You should read the full pattern together because inflammation masks deficiency and distorts every single result.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -50,13 +61,13 @@
    }
   },
   {
-   "tx": "**Ferritin** is the storage iron marker, but as an acute phase reactant it rises with infection, inflammation and liver disease. A very low ferritin proves deficiency even during illness, while a normal ferritin does not exclude it in inflamed patients. Soluble transferrin receptor and reticulocyte haemoglobin help in grey zones where standard studies conflict.",
-   "say": "Ferritin stores iron but rises with inflammation. Very low ferritin always means deficiency. Normal ferritin during inflammation proves nothing. Extra tests help when studies conflict.",
+   "tx": "**Ferritin** stores iron inside tissues, but it also rises with infection, inflammation and liver disease as an acute phase reactant. A very low ferritin value proves deficiency even during illness, while a normal value does not exclude deficiency in inflamed patients. **Soluble transferrin receptor** and reticulocyte haemoglobin content help in grey zones where standard studies conflict with the clinical picture. Repeating studies after inflammation settles also clarifies whether true deficiency persists in many patients.",
+   "say": "Ferritin reflects stored iron but rises whenever inflammation, infection or liver disease activates the acute phase response. Very low ferritin always proves deficiency, while normal ferritin during inflammation proves nothing about iron stores. Extra tests help when studies conflict, and repeating tests after recovery often clarifies the true iron state.",
    "vis": null
   },
   {
-   "tx": "Causes of iron loss matter as much as replacement, especially in adult men and postmenopausal women where **gastrointestinal blood loss** must be excluded. Menstrual loss dominates in younger women, while malabsorption from coeliac disease, gastrectomy or proton pump use reduces uptake. Koilonychia, angular cheilitis, glossitis and pica are classic tissue signs of established deficiency.",
-   "say": "Always seek the source of iron loss. Adult men and older women need gut blood loss excluded. Younger women usually lose iron through menstruation. Spoon nails, sore mouth corners and pica signal established deficiency.",
+   "tx": "Finding the cause of iron loss matters as much as replacing iron, especially when deficiency appears in adult men. **Gastrointestinal blood loss** must be excluded in adult men and postmenopausal women because cancer and ulcer disease hide behind anaemia. Menstrual loss dominates in younger women, while malabsorption from coeliac disease, gastrectomy or acid suppression reduces iron uptake. Established deficiency causes **koilonychia**, angular cheilitis, glossitis and pica that signal tissue iron lack.",
+   "say": "You must always seek the source of iron loss because replacement alone misses cancer and ulcer disease. Adult men and older women need gut blood loss excluded, while younger women usually lose iron through menstruation. Spoon shaped nails, sore mouth corners and pica signal established tissue deficiency that needs prompt correction and follow up.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -80,8 +91,8 @@
    }
   },
   {
-   "tx": "**Sideroblastic anaemia** impairs haem synthesis inside mitochondria, producing ring sideroblasts where iron loaded mitochondria circle the nucleus in marrow precursors. Causes include alcohol, lead, isoniazid and inherited enzyme defects, and paradoxically systemic iron may be high. Lead poisoning also basophilic stippling of red cells from impaired RNA degradation, linking morphology to cause.",
-   "say": "Sideroblastic anaemia traps iron in marrow ring sideroblasts despite body iron overload. Alcohol, lead and isoniazid are causes. Lead also stipples red cells. Iron studies run opposite to deficiency.",
+   "tx": "**Sideroblastic anaemia** impairs haem synthesis inside mitochondria and produces **ring sideroblasts** where iron loaded mitochondria circle the nucleus. Causes include alcohol, lead, isoniazid and inherited enzyme defects that disrupt mitochondrial haem production over time. Systemic iron may paradoxically remain high because iron cannot enter haem normally despite anaemia in these patients. Lead poisoning also causes **basophilic stippling** from impaired RNA degradation, which links red cell morphology directly to the cause.",
+   "say": "Sideroblastic disease traps iron inside marrow precursors and forms ring sideroblasts despite high body iron levels. Alcohol, lead and isoniazid cause acquired disease, while inherited enzyme defects cause disease from childhood onward. Lead also stipples red cells visibly, so morphology links the anaemia directly to its toxic cause in practice.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-iron-deficiency-fig1.webp",

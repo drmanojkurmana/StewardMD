@@ -3,11 +3,11 @@
  "module": "rad-ir-venous",
  "subject": "radiology",
  "title": "Venous access and IVC filters",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Venous access devices are matched to therapy length and veins. **Peripheral cannulas** suit days, **PICC lines** suit weeks to months of antibiotics or fluids, **tunnelled catheters** suit dialysis and prolonged therapy, and **implantable ports** suit intermittent chemotherapy over months. The **right internal jugular vein** gives the straightest run to the superior vena cava under **ultrasound guidance**. Tip position at the **cavoatrial junction** is confirmed before vesicants run. **Catheter-related thrombosis** presents with arm swelling and needs anticoagulation with line review.",
-   "say": "Devices match therapy length. Cannulas suit days, PICC lines suit weeks to months, tunnelled catheters suit dialysis, and ports suit intermittent chemotherapy. The right internal jugular vein gives the straightest run under ultrasound, with tips confirmed at the cavoatrial junction. Arm swelling signals catheter thrombosis needing anticoagulation.",
+   "tx": "Venous access choice follows therapy length and vein quality, because each device trades convenience against infection and thrombosis. A **peripheral cannula** suits days, while a **PICC line** suits weeks to months of antibiotics or fluids. A tunnelled catheter suits dialysis and prolonged therapy, and an **implantable port** suits intermittent chemotherapy over months. The **right internal jugular vein** gives the straightest run toward the cava under ultrasound guidance for placement. Tip position at the cavoatrial junction needs confirmation before vesicant drugs run through the line safely.",
+   "say": "Venous access choice follows therapy length and vein quality because each device trades convenience against harm. A peripheral cannula is suitable for days while an arm line suits weeks to months of treatment. A tunnelled catheter suits dialysis and prolonged therapy and a port suits intermittent chemotherapy. The right neck vein gives the straightest run toward the cava under ultrasound guidance. Tip position needs confirmation before vesicant drugs run through the line safely afterwards.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -35,8 +35,8 @@
    }
   },
   {
-   "tx": "Malignant **superior vena cava syndrome** with facial swelling, plethora and dilated chest collaterals responds rapidly to **venous stenting**. Stenting suits patients needing urgent relief before or alongside oncology, while chemosensitive tumours may resolve with drugs alone. **Balloon angioplasty** predilates tight malignant strictures before stent deployment. **Bilateral brachiocephalic** disease needs kissing stents to keep both sides open. **Anticoagulation** after venous stenting follows local protocol rather than a universal rule.",
-   "say": "Facial swelling with chest collaterals marks superior vena cava syndrome, which stenting relieves rapidly. Chemosensitive tumours may resolve with drugs, but tight strictures need balloon predilation first. Bilateral disease needs kissing stents, and anticoagulation after stenting follows local protocol.",
+   "tx": "Malignant caval obstruction presents dramatically, and stenting relieves that presentation faster than drugs alone usually can. **Superior vena cava syndrome** causes facial swelling, plethora and dilated chest collaterals that worsen over days. **Venous stenting** suits a patient who needs urgent relief before or alongside cancer treatment in hospital. A chemosensitive tumour may resolve with drugs alone, while a tight stricture needs **balloon predilation** before stent deployment. Bilateral brachiocephalic disease needs kissing stents, and anticoagulation after stenting follows local protocol in practice.",
+   "say": "Malignant caval obstruction presents dramatically and stenting relieves that presentation faster than drugs alone usually. Caval syndrome causes facial swelling and plethora and dilated chest vessels that worsen over days. Venous stenting suits a patient who needs urgent relief before or alongside cancer treatment. A chemosensitive tumour may resolve with drugs alone while a tight narrowing needs balloon predilation. Bilateral disease needs kissing stents and anticoagulation after stenting follows local protocol.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -74,8 +74,19 @@
    }
   },
   {
-   "tx": "IVC filters catch clots when blood thinners cannot be used. The core indications are **venous thromboembolism with a contraindication to anticoagulation** and **recurrent embolism despite adequate therapy**. **Retrievable filters** suit temporary risk such as trauma or perioperative bleeding, while **permanent filters** suit lifelong contraindications. Filters sit **below the renal veins** so renal drainage stays open. **Insertion-site thrombosis** and access bleeding are the commonest immediate harms.",
-   "say": "Filters catch clots when thinners cannot be used. Core indications are clots with a contraindication to anticoagulation and recurrence despite therapy. Retrievable filters suit temporary risk, permanent ones suit lifelong bans. Filters sit below the renal veins, and insertion-site thrombosis is the commonest early harm.",
+   "tx": "This coronal CT venogram shows both **brachiocephalic veins** joining above a tight **SVC stricture** in the mediastinum. Dilated **collateral vessels** snake down the chest wall because caval blood finds longer routes around the blockage. Labels above and below the stricture mark the **stent landing zones** that the operator needs for complete coverage. The image matters for the exam because landing zone choice decides whether a caval stent stays open. Urgent stenting then relieves facial swelling while cancer treatment addresses the underlying cause.",
+   "say": "This coronal scan is helpful because it shows both brachiocephalic veins joining above a tight caval narrowing in the chest. Dilated collateral vessels snake down the chest wall because caval blood finds longer routes. Labels above and below the narrowing mark the landing zones that the operator needs. Landing zone choice decides whether a caval stent stays open after venous stenting. Urgent stenting then relieves facial swelling while cancer treatment addresses the underlying cause.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-venous-gen1.webp",
+    "alt": "Coronal chest CT venogram with labelled brachiocephalic veins, SVC stricture, collaterals and two stent landing zones.",
+    "caption": "Coronal CT venogram showing SVC stricture, collaterals and stent landing zones. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "An IVC filter traps travelling clot when anticoagulation cannot protect the lungs during a dangerous period. Core indications are **venous thromboembolism with contraindication** to anticoagulation and **recurrent embolism despite adequate therapy** in hospital. A **retrievable filter** suits temporary risk such as trauma or perioperative bleeding with recovery expected soon. A **permanent filter** suits a lifelong contraindication where retrieval would never become safe for that patient. The device sits below the renal veins so renal drainage stays open after deployment in the cava.",
+   "say": "A caval filter traps travelling clot when anticoagulation cannot protect the lungs during danger. Core indications are clot with a contraindication to anticoagulation and recurrence despite adequate therapy. A retrievable filter suits temporary risk such as trauma or perioperative bleeding with recovery expected. A permanent filter suits a lifelong contraindication where retrieval would never become safe later. The device is placed below the renal veins so renal drainage stays open after deployment.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -103,8 +114,8 @@
    }
   },
   {
-   "tx": "A filter left behind becomes a hazard. **Retrieval** is booked as soon as protection is no longer needed and thinners can resume, ideally within weeks to a few months. **Tilted filters** with hooks embedded in the caval wall need advanced retrieval with loops or forceps. Complications of neglected filters include **IVC thrombosis**, **strut fracture with embolisation**, **migration** and difficult removal. **Filter registries** with recall dates prevent the commonest failure, which is simply forgetting the device.",
-   "say": "Filters left behind become hazards. Retrieval is booked once protection ends and thinners resume. Tilted hooks need advanced retrieval techniques. Neglected filters thrombose, fracture, migrate or become irretrievable, so registries with recall dates prevent simply forgetting the device.",
+   "tx": "A filter that stays behind becomes a hazard, so retrieval planning starts on the day of insertion. **Retrieval** takes booking as soon as protection ends and thinners resume, ideally within weeks to a few months. A **tilted filter** with an embedded hook needs advanced retrieval with loops or forceps in expert hands. Neglected devices cause caval thrombosis, strut fracture with embolisation, migration and difficult removal over time. A **filter registry** with recall dates prevents the commonest failure, which remains simple forgetting of the device.",
+   "say": "A filter that stays behind becomes a hazard so retrieval planning starts on insertion day. Retrieval takes booking as soon as protection ends and thinners resume within weeks or months. A tilted filter with an embedded hook needs advanced retrieval with loops or forceps. Neglected devices cause caval thrombosis and fracture and migration and difficult removal over time. A registry with recall dates prevents the commonest failure which remains simple forgetting.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-venous-fig1.webp",

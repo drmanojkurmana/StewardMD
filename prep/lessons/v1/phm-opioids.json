@@ -1,89 +1,106 @@
 {
- "v": 1,
- "module": "phm-opioids",
- "subject": "pharmacology",
- "title": "Opioid analgesics, receptors and dependence",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Opioid receptors** (mu, kappa, delta; Gi coupled closing calcium) divide labour: **mu-1** analgesia with euphoria, **mu-2** respiratory depression with constipation and miosis, kappa spinal analgesia with dysphoria, delta mood. Full agonists (morphine, fentanyl) ceiling only by toxicity; **naloxone** (short pure antagonist) reverses while **naltrexone** maintains abstinence. Pinpoint pupils with slow breathing diagnose overdose; tolerance spares constipation (never abates).",
-   "say": "Mu-1 kills pain, mu-2 slows breath and stalls gut. Pinpoint slow breath is opioid: naloxone short.",
-   "vis": {"kind": "image", "src": "prep/lessons/media/pharma-opioid-receptors.svg", "alt": "Mu-1 gives analgesia and euphoria; mu-2 gives respiratory depression, constipation and miosis. Kappa gives spinal analgesia with dysphoria; delta modulates mood. Naloxone is a short pure antagonist for overdose; naltrexone maintains abstinence.", "caption": "Mu-1 kills pain, mu-2 slows breath and stalls gut.", "ar": 1.5384615384615385}
-  },
-  {
-   "tx": "**Agents** specialise: **morphine** (gold standard, active M6G accumulating in renal failure, histamine itch), **pethidine** (normeperidine seizures, avoided obstetrics and kidneys), **fentanyl** (lipophilic patches for stable chronic pain, chest rigidity IV, lollipops paediatric), **tramadol** (SNRI plus weak mu, seizures with SSRI, safer constipation), **methadone** (long QT with torsades, tissue stores, de-addiction supervised), codeine (CYP2D6 ultra rapid metabolisers poison breastfed babies). Renal failure prefers fentanyl or alfentanil.",
-   "say": "Kidneys failing in pain prefer fentanyl. Pethidine seizes kidneys: avoid. Codeine kills ultra rapid babies.",
-   "vis": null
-  },
-  {
-   "tx": "**Buprenorphine** (partial mu agonist, ceiling on respiratory depression, **precipitated withdrawal** if given too early in dependence) maintains opioid use disorder sublingually with naloxone combo deterring injection; **naloxone** infusion (short half life, repeat boluses with watch for re-narcotisation) reverses acute overdose. **Methylnaltrexone** (peripheral antagonist crossing neither brain nor relief) treats opioid constipation; loperamide (peripheral mu) diarrhoeas without central effects. Clonidine bridges withdrawal autonomics.",
-   "say": "Too early buprenorphine precipitates withdrawal; timed it maintains. Naloxone wears off first: watch re-narcotisation.",
-   "vis": null
-  },
-  {
-   "tx": "**WHO analgesic ladder** (nonopioid, weak opioid, strong opioid by pain with adjuvants at every rung) with **equianalgesic caution** (incomplete cross tolerance, cut calculated dose) governs prescribing; **tolerance** (needing more), **dependence** (withdrawal without), **addiction** (compulsive use despite harm) differ medicolegally. Constipation prophylaxis (laxatives from day one), antiemetics briefly, driving and storage counselling complete safe starts. De-addiction pairs OST with psychosocial care.",
-   "say": "Laxatives start day one with opioids. Tolerance needs more; dependence withdraws; addiction compulses.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Opioid",
-     "Pearl",
-     "Watch"
+    "v": 1,
+    "module": "phm-opioids",
+    "subject": "pharmacology",
+    "title": "Opioid analgesics, receptors and dependence",
+    "minutes": 6,
+    "steps": [
+        {
+            "tx": "**Opioid receptors** include mu, kappa and delta types that couple to inhibitory signalling inside neurons. Mu activation produces powerful **analgesia** with euphoria, but it also depresses respiration, slows the gut and constricts the pupils. Kappa activation gives spinal analgesia with dysphoria, while delta receptors modulate mood in the brain. Full agonists such as morphine and fentanyl reach a ceiling only through toxicity in practice. Naloxone reverses overdose briefly, while naltrexone maintains abstinence over longer periods.",
+            "say": "Opioid receptors include mu, kappa and delta types that inhibit signalling inside neurons when activated. Mu activation produces powerful analgesia but it also depresses respiration and slows the gut considerably. Kappa activation gives spinal analgesia with dysphoria while delta receptors modulate mood in the brain. Pinpoint pupils with slow breathing diagnose overdose and naloxone reverses the syndrome briefly afterwards.",
+            "vis": {
+                "kind": "image",
+                "src": "prep/lessons/media/pharma-opioid-receptors.svg",
+                "alt": "Mu-1 gives analgesia and euphoria; mu-2 gives respiratory depression, constipation and miosis. Kappa gives spinal analgesia with dysphoria; delta modulates mood. Naloxone is a short pure antagonist for overdose; naltrexone maintains abstinence.",
+                "caption": "Mu-1 kills pain, mu-2 slows breath and stalls gut.",
+                "ar": 1.5384615384615385
+            }
+        },
+        {
+            "tx": "Different **opioid agents** specialise by metabolism, organ failure risk and clinical niche in practice. **Morphine** remains the reference drug, but its active metabolite accumulates dangerously in renal failure. Pethidine produces a metabolite that causes seizures, so clinicians avoid it in kidney disease and obstetrics. Fentanyl suits renal failure and stable chronic pain through patches, while tramadol adds serotonin and noradrenaline reuptake inhibition. Codeine becomes dangerous when rapid metabolism converts it quickly in breastfeeding mothers.",
+            "say": "Different opioid agents specialise by metabolism and organ failure risk in ways examinations test repeatedly. Morphine remains the reference drug but its active metabolite accumulates dangerously in renal failure patients. Pethidine produces a metabolite that causes seizures so clinicians avoid it in kidney disease. Fentanyl is suited to renal failure because the liver clears it without active metabolite accumulation there. Codeine becomes dangerous when rapid metabolism converts it quickly in breastfeeding mothers at home.",
+            "vis": null
+        },
+        {
+            "tx": "**Buprenorphine** partially activates mu receptors and it shows a ceiling for respiratory depression in patients. Given too early during dependence, it displaces full agonists and precipitates an acute **withdrawal** syndrome immediately. Timed correctly, sublingual buprenorphine maintains treatment for opioid use disorder in the community. Naloxone has a short half life, so teams repeat boluses and watch closely for re narcotisation after reversal. Methylnaltrexone blocks peripheral receptors only and it treats opioid constipation without removing analgesia.",
+            "say": "Buprenorphine partially activates mu receptors and it shows a ceiling for respiratory depression in patients treated. Given too early during dependence it displaces full agonists and precipitates acute withdrawal syndrome immediately afterwards. When it is timed correctly, buprenorphine maintains treatment for opioid use disorder in the community over months. Naloxone has a short half life so teams watch closely for re narcotisation after reversal. Methylnaltrexone blocks peripheral receptors only and it treats constipation without removing analgesia centrally.",
+            "vis": null
+        },
+        {
+            "tx": "The **WHO analgesic ladder** starts with non opioid drugs and adds weaker then stronger opioids as pain escalates. Adjuvant drugs join treatment at every rung and they improve control for specific pain types. Rotation between opioids needs **equianalgesic caution**, because incomplete cross tolerance makes the calculated dose excessive for the new drug. Tolerance means needing more drug, dependence means withdrawal without it, and addiction means compulsive use despite harm. Clinicians start laxatives from day one and counsel about safe storage.",
+            "say": "The analgesic ladder starts with non opioid drugs and it adds stronger opioids as pain escalates gradually. Adjuvant drugs join treatment at every rung and they improve control for specific pain types considerably. Rotation between opioids needs caution because incomplete cross tolerance makes calculated doses excessive for patients. Tolerance means needing more drug while dependence means withdrawal follows sudden stopping without tapering slowly. Clinicians start laxatives from day one because constipation never develops tolerance during treatment courses.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Opioid",
+                    "Pearl",
+                    "Watch"
+                ],
+                "rows": [
+                    [
+                        "Morphine",
+                        "M6G kidneys",
+                        "Itch, retain"
+                    ],
+                    [
+                        "Pethidine",
+                        "Normeperidine",
+                        "Seizes"
+                    ],
+                    [
+                        "Fentanyl",
+                        "Patch stable",
+                        "Rigidity IV"
+                    ],
+                    [
+                        "Methadone",
+                        "Long QT",
+                        "Torsades"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "This stepped diagram shows the **analgesic ladder** rising from mild pain at the bottom to severe pain at the top. The first rung uses non opioid drugs alone, the second adds a weak opioid, and the third uses a strong **opioid** such as morphine or fentanyl. Adjuvants run beside every rung and they are never reserved only for the top step. The callouts warn that tolerance may need dose escalation and that rotation needs a reduced starting dose.",
+            "say": "This stepped diagram shows pain treatment rising from mild pain at the bottom to severe pain above. The first rung is built on non opioid drugs alone and the second rung adds a weak opioid drug. The third rung is reserved for a strong opioid such as morphine or fentanyl for severe pain. Adjuvants run beside every rung and they improve control for specific pain types considerably. Rotation needs a reduced starting dose because cross tolerance remains incomplete between different opioids used.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/phm-opioids-gen1.webp",
+                "alt": "Stepped WHO analgesic ladder with rung drug classes plus tolerance and equianalgesic caution callouts",
+                "caption": "Three rung analgesic ladder from non-opioid to strong opioid. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        }
     ],
-    "rows": [
-     [
-      "Morphine",
-      "M6G kidneys",
-      "Itch, retain"
-     ],
-     [
-      "Pethidine",
-      "Normeperidine",
-      "Seizes"
-     ],
-     [
-      "Fentanyl",
-      "Patch stable",
-      "Rigidity IV"
-     ],
-     [
-      "Methadone",
-      "Long QT",
-      "Torsades"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "bk2-phm-151",
-  "bk2-phm-152",
-  "bk2-phm-153",
-  "bk2-phm-154",
-  "bk2-phm-155",
-  "bk2-phm-156",
-  "bk2-phm-157",
-  "bk2-phm-158",
-  "bk2-phm-159",
-  "bk2-phm-160"
- ],
- "src": [],
- "refs": [
-  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-pharma2b",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+    "quiz": [
+        "bk2-phm-151",
+        "bk2-phm-152",
+        "bk2-phm-153",
+        "bk2-phm-154",
+        "bk2-phm-155",
+        "bk2-phm-156",
+        "bk2-phm-157",
+        "bk2-phm-158",
+        "bk2-phm-159",
+        "bk2-phm-160"
+    ],
+    "src": [],
+    "refs": [
+        "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+    ],
+    "gen": "AI",
+    "run": "books2-pharma2b",
+    "model": "muse-wonder (local authoring, no external API)",
+    "checks": {
+        "shape": true,
+        "numbers": true,
+        "drugs": true,
+        "verbatim": true,
+        "dashes": true,
+        "verify": true,
+        "redone": 0,
+        "dropped": 0,
+        "kbWords": 0,
+        "itemN": 10
+    }
 }

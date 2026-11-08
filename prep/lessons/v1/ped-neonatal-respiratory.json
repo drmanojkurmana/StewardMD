@@ -3,26 +3,37 @@
  "module": "ped-neonatal-respiratory",
  "subject": "paediatrics",
  "title": "Neonatal respiratory distress: RDS to air leaks",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Recognition** (**Silverman** chest retractions nasal, **Downes** grunting cyanosis air, **tachypnoea** sixty rates counts, **grunting** PEEP auto-recruit, **flaring** alar distress signs, **cyanosis** central saturation gaps, **apnoea** prematurity sepsis flags, **choanae** atresia bilateral probes) with **scores** (**trends** deterioration tracks, **oxygen** blender needs) grades; **sepsis** (mimic screens) rules. Newborns pant.",
-   "say": "Silvermans Downes tachypnoeas gruntings is recognition: flarings widen cyanoses blue apnoeas pause choanae block scores trend oxygens titrate sepses mimic. Ribs suck.",
+   "tx": "Score distress at the cot side with the **Silverman score** and **Downes score** because trends matter more than one reading. Count the respiratory rate for a full minute, and note grunting, flaring, retractions and central cyanosis. Grunting is the baby making its own positive pressure to recruit alveoli. Apnoea in a preterm or unwell newborn flags sepsis until proved otherwise. Rising oxygen need with worsening scores means you escalate support without delay.",
+   "say": "You should score distress repeatedly because trends matter more than single readings. Grunting helps the baby recruit alveoli by creating positive pressure. Apnoea in a preterm baby suggests sepsis until you prove otherwise. Rising oxygen need with worsening scores means support needs escalation promptly.",
    "vis": null
   },
   {
-   "tx": "**Causes** (**RDS** preterm surfactant ground-glass, **TTN** term caesarean fissure fluid, **MAS** post-term meconium patchy, **pneumonia** maternal fever infiltrates, **diaphragm** scaphoid bowel chest, **choanal** cyclical cyanosis feeds, **cardiac** duct-dependent echo, **PPHN** labile pre-post ducts) with **x-rays** (**air** bronchograms bell volumes, **fluid** perihilar streaking) sorts; **echo** (cardiac rules) confirms. Lungs haze.",
-   "say": "RDSs TTNs MASs pneumonias is causes: diaphragms herniate choanae block cardiacs duct echoes confirm PPHNs labilise x-rays haze fluids streak. Causes sort.",
+   "tx": "Separate **respiratory distress syndrome** of prematurity from transient tachypnoea, meconium aspiration and pneumonia by history and film pattern. Ground glass change with air bronchograms and low volumes fits surfactant deficiency, while fluid in fissures fits retained lung liquid. A scaphoid abdomen with bowel in the chest means diaphragmatic hernia and changes airway plans. Labile saturations with a pre and post ductal gap point to **persistent pulmonary hypertension** that needs echocardiography.",
+   "say": "Prematurity with ground glass change suggests surfactant deficiency most strongly. Fluid in the fissures suggests retained lung liquid after caesarean birth. Bowel in the chest with a scaphoid abdomen indicates diaphragmatic hernia. A ductal saturation gap suggests pulmonary hypertension and needs echocardiography urgently.",
    "vis": null
   },
   {
-   "tx": "**Support** (**CPAP** prongs distending weans, **oxygen** saturation targets blenders, **surfactant** RDS rescue repeats, **ventilation** SIMV HFOV volumes, **iNO** PPHN oxygenation index, **ECMO** reversible failure bridges, **caffeine** extubation apnoea, **steroids** BPD DART courses) with **lines** (**umbilical** arterial venous access, **fluids** restricted humidified) steadies; **sepsis** (antibiotics covers) treats. Breaths ease.",
-   "say": "CPAPs oxygens surfactants ventilations is support: iNOs dilate ECMOs bridge caffeines wean steroids shorten lines place fluids restrict sepses cover. Pressures gentle.",
+   "tx": "The film shows diffuse **ground glass opacification** with dark **air bronchograms** standing out against hazy lungs and **low lung volumes** overall. That triad is the classic picture of surfactant deficiency in a preterm baby with worsening distress. Examiners contrast it with the streaky wet film of transient tachypnoea and the patchy shadowing of meconium aspiration. Reading the pattern correctly points you to surfactant and positive pressure without delay.",
+   "say": "The film shows ground glass shadowing with air bronchograms and low volumes. That pattern reflects surfactant deficiency in a preterm baby. Transient tachypnoea gives a wetter streaky film by contrast. Correct reading points you toward surfactant and positive pressure support.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-neonatal-respiratory-gen1.webp",
+    "alt": "Neonatal chest radiograph labeled ground glass opacification, air bronchograms and low lung volumes.",
+    "caption": "Chest radiograph showing ground glass opacification with air bronchograms. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Start **continuous positive airway pressure** early for preterm distress and titrate oxygen to saturation targets with a blender. Give **surfactant** for established respiratory distress syndrome and repeat it when the response is incomplete. Reserve ventilation, inhaled nitric oxide and extracorporeal support for babies who fail gentler steps in sequence. **Caffeine** helps preterm apnoea and eases extubation in this group. Treat possible sepsis in parallel because infection mimics every lung cause here.",
+   "say": "Early positive airway pressure supports preterm lungs and reduces ventilation need. Surfactant treats established deficiency and improves oxygenation in most babies. Caffeine helps preterm apnoea and eases extubation after ventilation. Possible sepsis needs treatment in parallel because infection mimics lung disease.",
    "vis": null
   },
   {
-   "tx": "**Air-leaks** (**pneumothorax** transillumination asymmetric, **needle** emergency decompresses, **drain** underwater seals bubbling, **interstitial** PIE ventilator maps, **pneumomediastinum** spinnaker thymus lifts, **prevention** gentle volumes weans, **follow** BPD clinic reviews, **counsel** chronicity home oxygen) with **traps** (**tension** arrest shifts, **re-expansion** pulmonary oedema, **chronic** BPD steroids) closes; **records** (settings trends) charts. Chests drain.",
-   "say": "Pneumothoraxes needles drains interstitals is air-leaks: pneumomediastini lift preventions gentle follows review counsels warn tensions shift re-expansions flood chronics linger records chart volumes trend. Leaks seal.",
+   "tx": "Sudden deterioration on support means **pneumothorax** until you prove otherwise, so transilluminate and image the chest at once. A tension leak shifts the mediastinum and obstructs venous return, causing collapse. Emergency **needle decompression** buys minutes, then a chest drain on an underwater seal completes treatment. Interstitial emphysema and pneumomediastinum are the gentler leaks that map ventilator pressure injury. Gentle volumes and timely weaning prevent most leaks in preterm lungs.",
+   "say": "Sudden deterioration during support suggests pneumothorax until you prove otherwise. A tension leak shifts the mediastinum and obstructs venous return dangerously. Needle decompression buys minutes before a chest drain is placed. Gentle ventilation and timely weaning prevent most air leaks effectively.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/ped-neonatal-respiratory-fig1.webp",

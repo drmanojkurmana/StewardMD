@@ -6,23 +6,29 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Antiepileptics** sort by channel: **sodium blockade** (phenytoin, carbamazepine, lamotrigine, lacosamide; use dependent, partial and tonic clonic), **calcium T blockade** (**ethosuximide** absence), **GABA enhancement** (benzodiazepines, phenobarbital, vigabatrin irreversible, tiagabine reuptake), **glutamate blockade** (topiramate, perampanel AMPA), **SV2A** (**levetiracetam** broad, safe pregnancy). Choice follows seizure type (absence needs ethosuximide or valproate, never phenytoin), age, pregnancy and comorbidity; monotherapy titrates first.",
-   "say": "Partial and tonic clonic take sodium blockers; absence takes ethosuximide. Never phenytoin absence: worsens.",
-   "vis": {"kind": "image", "src": "prep/lessons/media/pharma-antiepileptic-mechanisms.svg", "alt": "Sodium blockade with phenytoin, carbamazepine, lamotrigine and lacosamide for partial and tonic-clonic seizures; T-type calcium blockade with ethosuximide for absence; GABA enhancement with benzodiazepines, phenobarbital, vigabatrin and tiagabine; status ladder lorazepam then fosphenytoin, levetiracetam or valproate then midazolam or propofol.", "caption": "Match the channel to the seizure type; sodium blockers worsen absence.", "ar": 1.5384615384615385}
+   "tx": "Match the channel to the seizure type because sodium blockers worsen absence seizures predictably. **Sodium blockade** suits focal and tonic clonic seizures, while ethosuximide blocks T type calcium channels for absence alone. GABA enhancement, glutamate blockade and SV2A binding cover the remaining broad options in the diagram. **Levetiracetam** is broad and safer in pregnancy than older agents generally. Start monotherapy and titrate slowly before adding second drugs for control.",
+   "say": "Sodium blockers are focal because they suit focal and tonic clonic seizures in most patients. Ethosuximide is absence specific because it treats absence seizures through calcium channel blockade selectively. Phenytoin is harmful in absence because it worsens absence and is avoided there always. Monotherapy is first because it is titrated slowly before combination therapy is considered for control.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/pharma-antiepileptic-mechanisms.svg",
+    "alt": "Sodium blockade with phenytoin, carbamazepine, lamotrigine and lacosamide for partial and tonic-clonic seizures; T-type calcium blockade with ethosuximide for absence; GABA enhancement with benzodiazepines, phenobarbital, vigabatrin and tiagabine; status ladder lorazepam then fosphenytoin, levetiracetam or valproate then midazolam or propofol.",
+    "caption": "Match the channel to the seizure type; sodium blockers worsen absence.",
+    "ar": 1.5384615384615385
+   }
   },
   {
-   "tx": "**Phenytoin** (**zero order** saturation kinetics, **gingival hyperplasia** with hirsutism and megaloblastic anaemia, **HLA-B*1502** hypersensitivity, teratogenic, inducer) needs level monitoring (free in hypoalbuminaemia and renal failure); **carbamazepine** (**autoinduction**, **SIADH hyponatraemia**, agranulocytosis, SJS HLA screened, trigeminal neuralgia first line) interacts widely. **Valproate** (broadest including myoclonus, **neural tube defects** with PCOS, weight gain, pancreatitis, hyperammonaemia, tremor) is avoided in pregnancy; levels with LFTs watch all three.",
-   "say": "Saturation kinetics, gum overgrowth, HLA rash: phenytoin, watch levels. Autoinduction plus low sodium: carbamazepine.",
+   "tx": "Phenytoin shows saturating **zero order kinetics**, gum hypertrophy and HLA linked hypersensitivity, so levels guide every dose change. Free levels matter when albumin is low or kidneys fail badly. **Carbamazepine** autoinduces its own metabolism, lowers sodium and treats trigeminal neuralgia first line among older drugs. **Valproate** is broadest but teratogenic with weight gain and pancreatitis risks attached. Levels and liver tests watch all three drugs during maintenance therapy.",
+   "say": "Phenytoin is saturable because it saturates metabolism and needs level guided dosing at all times. Gum hypertrophy is chronic because it signals chronic phenytoin exposure in patients taking drug. Carbamazepine is autoinducing because it autoinduces metabolism and lowers sodium levels over time gradually. Valproate is broad because it is broadest but is teratogenic in pregnancy for babies.",
    "vis": null
   },
   {
-   "tx": "**Absence** (3 Hz spike wave, hyperventilation provokes, ethosuximide first) and **myoclonic** (valproate or levetiracetam, photosensitive juvenile) epilepsies start young; new agents fill niches (**levetiracetam** irritability, brivaracetam calmer, lacosamide PR prolonging, perampanel aggression, topiramate weight loss with stones and glaucoma, zonisamide sulfa stones, gabapentinoids pain not epilepsy). **Never withdraw abruptly** (rebound status); switch overlapping. Comorbidity guides (migraine topiramate, pain gabapentin, mood valproate or lamotrigine).",
-   "say": "Blank staring hyperventilated is absence: ethosuximide. Never stop suddenly: status rebounds.",
+   "tx": "Absence seizures show generalised spike wave and hyperventilation provokes attacks, with **ethosuximide** first for pure absence. Juvenile myoclonic epilepsy needs valproate or levetiracetam and lifelong treatment usually after diagnosis. Newer agents trade irritability, PR prolongation, aggression, weight loss and stones between them by drug. Never withdraw therapy abruptly because **rebound status** follows sudden stopping dangerously. Comorbidity guides choice: migraine favours topiramate and mood favours lamotrigine often.",
+   "say": "Absence seizures are provoked because they are provoked by hyperventilation during testing in clinic often. Ethosuximide is first line because it treats pure absence seizures first in children with epilepsy. Sudden drug withdrawal is dangerous because it causes rebound status epilepticus without warning in patients. Comorbidity is guiding because it guides choice between newer agents for patients with epilepsy individually.",
    "vis": null
   },
   {
-   "tx": "**Status epilepticus** (over 5 minutes convulsive, time is brain) runs **lorazepam IV** (buccal midazolam prehospital, rectal diazepam children) then **fosphenytoin, levetiracetam or valproate** infusion, then **midazolam or propofol** anaesthesia with EEG burst suppression for refractory; pyridoxine in neonates, glucose with thiamine always. Nonconvulsive (prolonged postictal, subtle twitches) needs EEG. **Pregnancy** prefers **levetiracetam or lamotrigine** with high dose folate; breastfeeding mostly continues.",
-   "say": "Seizing past 5 minutes is status: lorazepam, then fosphenytoin or levetiracetam, then anaesthesia. Pregnant epilepsy prefers levetiracetam.",
+   "tx": "Convulsive activity beyond five minutes is **status epilepticus**, where time is brain and the ladder runs without pauses. Give **lorazepam** first, by vein in hospital or buccal route before arrival when veins fail. Then load fosphenytoin, levetiracetam or valproate, and move to midazolam or propofol anaesthesia with EEG for refractory disease. Pyridoxine rescues neonatal seizures and glucose with thiamine accompanies resuscitation always. Pregnancy prefers levetiracetam or lamotrigine with high dose folate cover.",
+   "say": "Status epilepticus beyond five minutes needs immediate ladder treatment. Lorazepam is first by vein or buccal route quickly. Second line loading follows without pauses between steps. Refractory disease needs anaesthesia with EEG monitoring in intensive care.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -52,6 +58,17 @@
       "GI upset"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The unit scene lays out the status ladder as Step 1 **lorazepam bolus**, Step 2 **fosphenytoin infusion** and Step 3 continuous **midazolam infusion with EEG** monitoring, under the banner time is brain. It turns an abstract protocol into a bedside sequence the team can follow without pauses. Examiners test the five minute definition, the order of drugs and the EEG endpoint for refractory disease. Nonconvulsive activity after convulsions stop is why the EEG keeps running.",
+   "say": "The scene is sequential because it presents lorazepam first then fosphenytoin then midazolam infusion clearly. EEG monitoring is continuous because it guides treatment when convulsions become refractory in intensive care. Time is critical because prolonged seizures injure brain tissue progressively during status epilepticus episodes. The ladder is continuous because it runs without pauses between steps in hospital resuscitation areas.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-antiepileptics-gen1.webp",
+    "alt": "Critical care team at bedside with stepwise lorazepam, fosphenytoin and midazolam EEG infusions shown",
+    "caption": "ICU team following lorazepam, fosphenytoin and midazolam EEG protocol. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],
