@@ -377,7 +377,7 @@
             // (otaSay is defined below, hoisted - see the note there.)
             SMD_OTA.check().then(function (r) {
               otaCheck.disabled = false; r = r || {};
-              if (r.status === "available") { pending = r; if (otaStatus) otaStatus.textContent = "Update available: v" + r.version; if (otaInstall) otaInstall.style.display = ""; }
+              if (r.status === "available") { pending = r; if (otaStatus) otaStatus.textContent = "Update available: v" + r.version; if (otaInstall) otaInstall.style.display = ""; otaCheck.style.display = "none"; }
               else if (r.status === "uptodate") { pending = null; if (otaStatus) otaStatus.textContent = "You're up to date" + (r.current ? " (v" + r.current + ")" : ""); if (otaInstall) otaInstall.style.display = "none"; }
               else { if (otaStatus) otaStatus.textContent = otaSay(r.error, "Couldn't check for updates"); }
             });
@@ -400,10 +400,10 @@
           }
           if (otaInstall) otaInstall.addEventListener("click", function () {
             if (!window.SMD_OTA || !pending) return;
-            otaInstall.disabled = true;
+            otaInstall.disabled = true; otaInstall.style.display = "none"; if (otaCheck) otaCheck.style.display = "none";
             SMD_OTA.install(pending, function (pct, label) { if (otaStatus) otaStatus.textContent = label || ("Downloading… " + pct + "%"); }).then(function (res) {
               if (res && res.ok) { if (otaStatus) otaStatus.textContent = "Update ready, reopening…"; }
-              else { otaInstall.disabled = false; if (otaStatus) otaStatus.textContent = otaSay(res && res.error, "Update failed"); }
+              else { otaInstall.disabled = false; otaInstall.style.display = ""; if (otaCheck) otaCheck.style.display = ""; if (otaStatus) otaStatus.textContent = otaSay(res && res.error, "Update failed"); }
             });
           });
         })();
