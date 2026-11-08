@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-lipoproteins",
+ "subject": "biochemistry",
+ "title": "Exogenous, endogenous and LDL receptor pathways",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The exogenous pathway moves meal fat: gut assembles **chylomicrons** around ApoB-48 with microsomal transfer protein, lymph delivers them to blood, HDL donates ApoC-II and ApoE, lipoprotein lipase unloads triacylglycerol to muscle and fat, and ApoE steers the shrunken remnant into liver receptors. Post meal lipemia normally clears within eight to ten hours, so fasting samples should show no chylomicrons at all.",
+   "say": "Meal fat travels as chylomicrons around ApoB-48 to blood, where lipase unloads triacylglycerol and ApoE steers remnants into liver. Fasting samples should show no chylomicrons at all after eight to ten hours.",
+   "vis": {
+    "kind": "flow",
+    "title": "Exogenous (meal) pathway",
+    "nodes": [
+     {"id": "gut", "label": "Gut chylomicron (B-48)"},
+     {"id": "lpl", "label": "Lipase unloads (C-II on)"},
+     {"id": "rem", "label": "Remnant (ApoE rich)"},
+     {"id": "liv", "label": "Liver remnant uptake"}
+    ],
+    "edges": [["gut", "lpl"], ["lpl", "rem"], ["rem", "liv"]]
+   }
+  },
+  {
+   "tx": "The endogenous pathway exports liver fat as **VLDL** around ApoB-100; the same lipase cascade shrinks VLDL to IDL, half of which liver reclaims by ApoE while hepatic lipase trims the rest to LDL. LDL therefore is not secreted but manufactured in blood, carries most plasma cholesterol, and circulates for days (versus hours for triacylglycerol rich particles), explaining its atherogenic dominance.",
+   "say": "Liver exports VLDL around ApoB-100, which lipolysis shrinks through IDL to LDL manufactured in blood. LDL carries most plasma cholesterol and circulates for days, explaining its atherogenic dominance.",
+   "vis": {
+    "kind": "flow",
+    "title": "Endogenous (liver) pathway",
+    "nodes": [
+     {"id": "vldl", "label": "VLDL secreted (B-100)"},
+     {"id": "idl", "label": "IDL after lipolysis"},
+     {"id": "ldl", "label": "LDL (hepatic lipase trims)"},
+     {"id": "rec", "label": "LDL receptor clearance"}
+    ],
+    "edges": [["vldl", "idl"], ["idl", "ldl"], ["ldl", "rec"]]
+   }
+  },
+  {
+   "tx": "The **LDL receptor** (Brown and Goldstein) binds ApoB-100 (and ApoE particles faster), clusters in clathrin pits, endocytoses, releases cargo in acid endosomes, then recycles while lysosomes degrade LDL and free its cholesterol. Intracellular cholesterol then suppresses HMG-CoA reductase and receptor synthesis (SREBP retention) and activates ACAT storage, a feedback triad every stem on cholesterol homeostasis expects you to recite together.",
+   "say": "The LDL receptor endocytoses through clathrin pits and recycles, while cholesterol suppresses reductase and receptor synthesis and activates ACAT storage. Recite that feedback triad together for homeostasis questions.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Rising cell cholesterol does what", "Effect"],
+    "rows": [
+     ["Suppresses HMG-CoA reductase (plus faster degradation)", "Less synthesis"],
+     ["Retains SREBP, fewer LDL receptors", "Less uptake (protects cell, raises plasma LDL if systemic)"],
+     ["Activates ACAT", "Stores cholesteryl esters safely"]
+    ]
+   }
+  },
+  {
+   "tx": "**PCSK9** escorts bound LDL receptors to lysosomal destruction instead of recycling, capping receptor lifespan; gain of function mutations cause hypercholesterolaemia, loss of function causes lifelong low LDL with healthy carriers, and monoclonal antibodies (alirocumab, evolocumab) free receptors to recycle, cutting LDL by half again atop statins. Inclisiran silences PCSK9 synthesis by RNA interference twice yearly, extending the same axis.",
+   "say": "PCSK9 escorts LDL receptors to destruction instead of recycling. Antibodies free receptors to recycle and cut LDL by half again atop statins. Inclisiran silences PCSK9 synthesis twice yearly on the same axis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-lipoproteins-gen1.webp",
+    "alt": "Defective LDL receptor clearance with PCSK9 blockade, retained LDL and xanthoma formation diagram.",
+    "caption": "Defective LDL receptor clearance with PCSK9 blockade, retained LDL and xanthoma.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Three drug classes map to three consecutive stations: **ezetimibe** blocks gut NPC1L1 cholesterol absorption (less delivery to liver), statins block liver synthesis (receptors multiply), PCSK9 blockers preserve those receptors (clearance maximal). Bile resins add a fourth station (sterol excretion). Stems that give one drug failure and ask the rational add on expect this station logic, not memorised potency tables alone.",
+   "say": "Ezetimibe blocks gut absorption, statins block liver synthesis, and PCSK9 blockers preserve receptors. Resins add sterol excretion as a fourth station. Rational add on questions expect this station logic.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Reduce input to liver", "points": ["Ezetimibe: gut NPC1L1 blocked", "Resins: bile sterols lost", "Diet plant sterols compete"]},
+    "right": {"title": "Increase clearance by liver", "points": ["Statins: synthesis blocked, receptors up", "PCSK9 antibodies: receptors recycled", "Combination cuts LDL most"]
+    }
+   }
+  },
+  {
+   "tx": "When receptors fail genetically, scavenger pathways in macrophages clear modified LDL without feedback restraint, filling foam cells, tendon **xanthomas** and arterial plaques despite intracellular cholesterol plenty. That unrestrained scavenger uptake (by oxidised LDL receptors) explains why familial hypercholesterolaemia arteries suffer while hepatocytes stay cholesterol hungry. The familial classification lesson now names each break by Fredrickson pattern.",
+   "say": "When receptors fail, macrophages clear modified LDL without feedback restraint, filling foam cells and xanthomas. Scavenger uptake explains why arteries suffer while hepatocytes stay cholesterol hungry in familial disease.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

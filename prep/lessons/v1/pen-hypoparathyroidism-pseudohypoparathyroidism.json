@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "id": "pen-hypoparathyroidism-pseudohypoparathyroidism",
+  "title": "Hypoparathyroidism and Pseudohypoparathyroidism: Albright Osteodystrophy, GNAS and PTH Resistance",
+  "module": "pen-bone-water-metabolism",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Biochemical Hallmarks of Hypoparathyroidism",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biochemical Parameter",
+          "True Hypoparathyroidism",
+          "Pseudohypoparathyroidism",
+          "Renal Failure"
+        ],
+        "rows": [
+          [
+            "Serum Total & Ionized Calcium",
+            "Markedly reduced",
+            "Markedly reduced",
+            "Reduced or normal"
+          ],
+          [
+            "Serum Inorganic Phosphate",
+            "Elevated (hyperphosphatemia)",
+            "Elevated (hyperphosphatemia)",
+            "Markedly elevated"
+          ],
+          [
+            "Intact Parathyroid Hormone",
+            "Inappropriately low / undetectable",
+            "Markedly elevated (PTH resistance)",
+            "Markedly elevated (secondary)"
+          ],
+          [
+            "Renal Glomerular Function",
+            "Normal BUN and creatinine",
+            "Normal BUN and creatinine",
+            "Elevated creatinine, low eGFR"
+          ]
+        ]
+      },
+      "tx": "True hypoparathyroidism features hypocalcemia, hyperphosphatemia, and inappropriately low or undetectable serum intact PTH in the presence of normal renal function. Establishing the **Biochemical hallmark of hypoparathyroidism** reveals that without parathyroid hormone, distal renal tubular calcium reabsorption fails while proximal tubular phosphate excretion is severely diminished. Impaired renal 1-alpha-hydroxylase activity reduces calcitriol synthesis, compounding intestinal calcium malabsorption.",
+      "say": "Primary hypoparathyroidism is characterized by low calcium and elevated phosphate alongside inappropriately low intact parathyroid hormone."
+    },
+    {
+      "title": "DiGeorge Syndrome 22q11.2 Microdeletion Pathology",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pharyngeal Pouch Dysgenesis",
+          "points": [
+            "Defective 3rd and 4th pharyngeal pouch migration",
+            "Aplasia or hypoplasia of parathyroid glands",
+            "Thymic hypoplasia with cellular T-cell immune deficiency"
+          ]
+        },
+        "right": {
+          "title": "Cardiofacial Phenotype",
+          "points": [
+            "Conotruncal cardiac defects (tetralogy, truncus arteriosus)",
+            "Cleft palate, velopharyngeal insufficiency",
+            "Dysmorphic facies with micrognathia and low-set ears"
+          ]
+        }
+      },
+      "tx": "Congenital hypoparathyroidism occurs in up to 60% of infants with 22q11.2 deletion syndrome (DiGeorge) due to defective 3rd and 4th pharyngeal pouch embryogenesis, accompanied by conotruncal cardiac defects and thymic hypoplasia. Recognizing **DiGeorge syndrome 22q11.2 deletion** is vital because neonatal hypocalcemic convulsions or tremors are frequently the initial presentation. Fluorescent in situ hybridization or chromosomal microarray confirms the microdeletion.",
+      "say": "DiGeorge syndrome from a twenty-two q eleven microdeletion produces neonatal hypoparathyroidism, thymic hypoplasia, and conotruncal cardiac defects."
+    },
+    {
+      "title": "Clinical Signs of Neuromuscular Hyperexcitability",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chvostek Sign",
+          "points": [
+            "Tapping facial nerve anterior to external auditory meatus",
+            "Ipsilateral twitching of facial muscles (angle of mouth, eye)",
+            "Elicited by heightened peripheral nerve excitability"
+          ]
+        },
+        "right": {
+          "title": "Trousseau Sign",
+          "points": [
+            "Inflating BP cuff 20 mmHg above systolic pressure for 3 min",
+            "Induces painful carpopedal spasm with thumb adduction",
+            "Higher sensitivity and specificity than Chvostek sign"
+          ]
+        }
+      },
+      "tx": "Latent hypocalcemia is elicited by Chvostek sign (facial nerve tapping producing ipsilateral facial muscle twitch) and Trousseau sign (carpopedal spasm induced by inflating BP cuff 20 mmHg above systolic for 3 minutes). Testing for **Chvostek and Trousseau signs of tetany** demonstrates how low extracellular calcium destabilizes neuronal membranes by reducing depolarization thresholds. Trousseau sign carries superior diagnostic accuracy, as Chvostek twitching can occur in healthy children.",
+      "say": "Latent hypocalcemia is revealed through Chvostek facial nerve twitching and Trousseau carpopedal spasm upon blood pressure cuff inflation."
+    },
+    {
+      "title": "Emergency Parenteral Calcium Gluconate Resuscitation",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Calcium Gluconate 10%",
+          "points": [
+            "1-2 mL/kg (100-200 mg/kg, max 10 mL)",
+            "Dilute equally with normal saline or D5W",
+            "Slow infusion over 10 minutes"
+          ]
+        },
+        "right": {
+          "title": "Monitoring and Precautions",
+          "points": [
+            "Continuous ECG rhythm monitoring",
+            "Halt infusion if bradycardia develops",
+            "Avoid calcium chloride due to extravasation necrosis"
+          ]
+        }
+      },
+      "tx": "Acute symptomatic hypocalcemia (seizures, laryngospasm) requires immediate IV 10% calcium gluconate (1-2 mL/kg or 100-200 mg/kg, max 10 mL) infused slowly over 10 minutes under continuous ECG monitoring. Administering **Emergency acute tetany calcium gluconate** avoids calcium chloride due to severe extravasation necrosis. Continuous electrocardiographic monitoring is required during infusion to detect bradycardia, PR prolongation, and lethal ventricular arrhythmias.",
+      "say": "Acute hypocalcemic seizures or tetany require slow intravenous calcium gluconate over ten minutes under continuous cardiac monitoring."
+    },
+    {
+      "title": "Pseudohypoparathyroidism Type 1a PTH Resistance",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Maternal GNAS Mutation\nLoss-of-function on maternal allele"
+          },
+          {
+            "id": "2",
+            "label": "Defective Gs-alpha Protein\nImpaired receptor coupling"
+          },
+          {
+            "id": "3",
+            "label": "Renal Tubular Resistance\nPTH fails to activate renal cAMP"
+          },
+          {
+            "id": "4",
+            "label": "PHP-1a Phenotype\nHypocalcemia, hyperphosphatemia, high PTH"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "PHP-1a features target-organ resistance to PTH: hypocalcemia and hyperphosphatemia with markedly elevated PTH, caused by maternally inherited heterozygous loss-of-function GNAS mutations. Investigating **Pseudohypoparathyroidism type 1a (PHP-1a) PTH resistance** reveals that because the renal proximal tubule exhibits tissue-specific maternal GNAS expression, maternal inheritance silences G-alpha signaling. Resistance extends to other G-protein coupled receptors, causing subclinical hypothyroidism and blunted growth hormone release.",
+      "say": "Pseudohypoparathyroidism type one a features parathyroid hormone resistance with elevated PTH due to maternal GNAS gene mutations."
+    },
+    {
+      "title": "Albright Hereditary Osteodystrophy Somatic Phenotype",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Craniofacial and Stature Features",
+          "points": [
+            "Short stature with early growth plate fusion",
+            "Rounded moon facies with depressed nasal bridge",
+            "Centripetal childhood obesity and cognitive impairment"
+          ]
+        },
+        "right": {
+          "title": "Skeletal and Ectodermal Findings",
+          "points": [
+            "Shortening of 4th and 5th metacarpals (brachydactyly type E)",
+            "Dimpling over knuckles upon fist clenching (Archibald sign)",
+            "Subcutaneous osteomas and soft tissue ectopic ossification"
+          ]
+        }
+      },
+      "tx": "AHO somatic phenotype consists of short stature, rounded moon facies, obesity, subcutaneous ossifications, and characteristic shortening of the 4th and 5th metacarpals/metatarsals (brachydactyly type E). Diagnosing the **Albright hereditary osteodystrophy (AHO) phenotype** is supported when knuckle dimpling replaces normal prominence over shortened metacarpals upon making a fist (Archibald sign). Subcutaneous nodules represent de novo dermal bone formation independent of circulating calcium levels.",
+      "say": "Albright hereditary osteodystrophy displays short stature, round facies, obesity, ectopic ossifications, and short fourth and fifth metacarpals."
+    },
+    {
+      "title": "Pseudopseudohypoparathyroidism and Genomic Imprinting",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disorder",
+          "GNAS Inheritance",
+          "AHO Somatic Phenotype",
+          "Endocrine Hormone Resistance"
+        ],
+        "rows": [
+          [
+            "PHP Type 1a",
+            "Maternal GNAS allele mutation",
+            "Present (short stature, brachydactyly)",
+            "Severe (high PTH, high TSH, low calcium)"
+          ],
+          [
+            "Pseudopseudohypoparathyroidism (PPHP)",
+            "Paternal GNAS allele mutation",
+            "Present (identical AHO features)",
+            "Completely absent (normal calcium, normal PTH)"
+          ]
+        ]
+      },
+      "tx": "Paternally inherited GNAS mutations cause PPHP: patients inherit the identical AHO physical phenotype (brachydactyly, short stature) but maintain completely normal serum calcium, phosphate, and PTH due to tissue-specific maternal imprinting. Differentiating **Pseudopseudohypoparathyroidism (PPHP) paternal GNAS** inheritance shows that because renal tubular cells selectively express the maternal GNAS allele, the intact maternal copy maintains unhindered hormonal responsiveness. Thus, endocrine laboratory values remain entirely normal.",
+      "say": "Paternal GNAS mutations cause pseudopseudohypoparathyroidism, exhibiting physical Albright features without any endocrine resistance."
+    },
+    {
+      "title": "Chronic Maintenance Therapy and Calcium-Phosphate Targets",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pharmacological Regimen",
+          "points": [
+            "Oral calcitriol 20-40 ng/kg/day active vitamin D",
+            "Elemental calcium 30-50 mg/kg/day divided doses",
+            "Maintain low-normal serum calcium (8.5-9.0 mg/dL)"
+          ]
+        },
+        "right": {
+          "title": "Renal Safety Surveillance",
+          "points": [
+            "Prevent hypercalciuria (urine Ca/Cr < 0.2)",
+            "Avoid calcium-phosphate product > 55 mg²/dL²",
+            "Periodic renal ultrasound to screen for nephrocalcinosis"
+          ]
+        }
+      },
+      "tx": "Maintenance therapy uses oral active vitamin D calcitriol (20-40 ng/kg/day) and elemental calcium carbonate (30-50 mg/kg/day), maintaining serum calcium in low-normal range (8.5-9.0 mg/dL) to prevent hypercalciuria and nephrocalcinosis. Achieving the **Chronic therapy goal (calcium-phosphate product)** with calcitriol and calcium carbonate requires vigilance because intact PTH is absent and renal calcium reabsorption is minimal, creating a profound risk for nephrocalcinosis if serum calcium is normalized too aggressively. Monitoring urinary calcium and renal sonography is mandatory.",
+      "say": "Long-term therapy uses calcitriol and oral calcium, keeping serum calcium low-normal to avoid hypercalciuria and nephrocalcinosis."
+    }
+  ]
+}

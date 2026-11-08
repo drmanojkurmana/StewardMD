@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "module": "bio-lipoproteins",
+ "subject": "biochemistry",
+ "title": "Particles and apolipoproteins",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Lipoproteins solve an insolubility problem: a **triacylglycerol** and cholesteryl ester core wrapped in phospholipid, free cholesterol and apolipoproteins that act as address labels and enzyme switches. Density rises as triacylglycerol leaves: chylomicrons (largest, lightest) through VLDL, IDL and LDL to HDL (smallest, densest, most protein). Ultracentrifuge names (VLDL, LDL, HDL) report density; electrophoresis names report charge; both describe the same particles.",
+   "say": "Lipoproteins wrap a fat core in phospholipid and apoliprotein labels. Density rises as triacylglycerol leaves, from chylomicrons to HDL. Ultracentrifuge names report density, while electrophoresis names report charge for the same particles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Particle (large to small)",
+     "Main core cargo",
+     "Birthplace"
+    ],
+    "rows": [
+     [
+      "Chylomicron",
+      "Dietary triacylglycerol",
+      "Gut (ApoB-48)"
+     ],
+     [
+      "VLDL",
+      "Liver triacylglycerol",
+      "Liver (ApoB-100)"
+     ],
+     [
+      "IDL (remnant)",
+      "Mixed, shrinking",
+      "Blood lipolysis"
+     ],
+     [
+      "LDL",
+      "Cholesteryl ester",
+      "Blood (from VLDL)"
+     ],
+     [
+      "HDL",
+      "Cholesteryl ester, protein rich",
+      "Liver, gut (ApoA-I)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "One **ApoB** molecule rides each gut or liver particle for its whole life, so plasma ApoB counts atherogenic particles directly. Gut ApoB-48 is RNA edited to forty eight percent length and lacks the LDL receptor binding domain, sparing chylomicrons themselves from receptor uptake while their remnants use ApoE instead. Liver ApoB-100 is full length and is the LDL receptor ligand on LDL.",
+   "say": "One ApoB rides each particle for its whole life, so ApoB counts atherogenic particles. Gut ApoB-48 lacks the receptor binding domain, while liver ApoB-100 is the LDL receptor ligand on LDL.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ApoB-48 (gut)",
+     "points": [
+      "48 percent, RNA edited",
+      "Chylomicrons only",
+      "Cannot bind LDL receptor"
+     ]
+    },
+    "right": {
+     "title": "ApoB-100 (liver)",
+     "points": [
+      "Full length",
+      "VLDL, IDL, LDL",
+      "Binds LDL receptor"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exchangeable apolipoproteins transfer between particles and run metabolism: **ApoC-II** activates lipoprotein lipase on capillary walls, ApoC-III inhibits it and delays clearance, ApoE mediates remnant uptake by liver receptors, and ApoA-I activates LCAT esterification on HDL. HDL serves as the circulating reservoir donating ApoC and ApoE to newborn chylomicrons and VLDL, without which lipolysis cannot start.",
+   "say": "ApoC-II activates lipoprotein lipase, ApoE mediates remnant uptake, and ApoA-I activates LCAT on HDL. HDL donates ApoC and ApoE to newborn particles, without which lipolysis cannot start.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Apolipoprotein",
+     "Chief job",
+     "Deficiency or excess clue"
+    ],
+    "rows": [
+     [
+      "ApoA-I",
+      "Activates LCAT, HDL structure",
+      "Low HDL when absent"
+     ],
+     [
+      "ApoC-II",
+      "Switches lipoprotein lipase ON",
+      "Absent: type I chylomicronaemia"
+     ],
+     [
+      "ApoC-III",
+      "Brakes lipase and clearance",
+      "Excess: triglycerides rise"
+     ],
+     [
+      "ApoE",
+      "Remnant clearance ligand",
+      "E2/2: type III remnant disease"
+     ],
+     [
+      "Apo(a)",
+      "Plasminogen like, on Lp(a)",
+      "Independent coronary risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lipoprotein lipase** anchored to capillary endothelium (heparin releasable, hence post heparin lipolytic activity) hydrolyses core triacylglycerol for muscle burning or adipose storage; insulin raises adipose lipase in the fed state to deposit meal fat. Freed fatty acids that exceed albumin carriage injure pancreas locally in severe hypertriglyceridaemia, linking particle failure to pancreatitis risk above roughly five hundred to one thousand milligrams per decilitre.",
+   "say": "Lipoprotein lipase hydrolyses core triacylglycerol for muscle or adipose, raised by insulin in fat after meals. Severe hypertriglyceridaemia injures pancreas, linking particle failure to pancreatitis risk.",
+   "vis": null
+  },
+  {
+   "tx": "Size explains behaviour: particles under about seventy nanometres (LDL, IDL, remnants, Lp(a)) cross endothelium into artery walls, while huge chylomicrons cannot, so fasting chylomicronaemia threatens pancreas more than coronaries, and LDL burden threatens coronaries over decades. **Lipoprotein(a)**, an LDL like particle with Apo(a) kringle repeats, is genetically set, barely diet responsive, and antifibrinolytic by plasminogen mimicry.",
+   "say": "Particles under about seventy nanometres cross into artery walls, while huge chylomicrons threaten pancreas instead. Lipoprotein(a) is genetically set and antifibrinolytic by plasminogen mimicry, threatening coronaries over decades.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Large particles (chylomicrons)",
+     "points": [
+      "Cannot enter artery wall",
+      "Pancreatitis when extreme",
+      "Cream layer on standing plasma"
+     ]
+    },
+    "right": {
+     "title": "Small particles (LDL, remnants, Lp(a))",
+     "points": [
+      "Enter artery wall",
+      "Atherosclerosis over decades",
+      "ApoB count captures risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Standing plasma** at four degrees still teaches at the bench: a cream top layer means chylomicrons, diffuse turbidity means VLDL excess, clear plasma with high cholesterol means LDL excess. Combine that inspection with ApoB logic (particle number) and triglyceride logic (pancreas threshold) before the pathways lesson traces each particle birth to clearance step by step.",
+   "say": "Cream top means chylomicrons, turbidity means VLDL excess, and clear plasma with high cholesterol means LDL excess. Combine inspection with ApoB particle logic before tracing each particle from birth to clearance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-lipoproteins-fig1.webp",
+    "alt": "Lipoprotein pathways diagram with particle sizes, apolipoproteins and Fredrickson classification of dyslipidaemias.",
+    "caption": "Lipoprotein pathways and Fredrickson classification of dyslipidaemias.",
+    "ar": 1.8349
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

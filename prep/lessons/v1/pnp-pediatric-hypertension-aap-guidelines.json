@@ -1,0 +1,162 @@
+{
+  "id": "pnp-pediatric-hypertension-aap-guidelines",
+  "title": "Pediatric Hypertension: AAP 2017 Blood Pressure Percentiles, Staging and Therapy",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Hypertension, CAKUT and Nephrolithiasis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Blood pressure classification in young children relies on normative percentiles based on age, sex, and height.",
+      "tx": "Apply established criteria for **AAP 2017 staging definitions (age 1-13 years)** during clinical screening. For children aged 1-13 years, blood pressure is categorized using normative percentile tables adjusted for age, sex, and height: Normal BP is < 90th percentile; Elevated BP is >= 90th to < 95th percentile (or 120/80 mmHg, whichever is lower); Stage 1 hypertension is >= 95th to < 95th percentile + 12 mmHg; and Stage 2 hypertension is >= 95th percentile + 12 mmHg (or >= 140/90 mmHg).",
+      "vis": {
+        "kind": "table",
+        "title": "AAP 2017 Blood Pressure Staging (Ages 1-13 Years)",
+        "cols": ["Classification", "Systolic and Diastolic Criteria", "Clinical Management"],
+        "rows": [
+          ["Normal BP", "< 90th percentile", "Routine annual screening"],
+          ["Elevated BP", ">= 90th to < 95th percentile (or 120/80 mmHg)", "Lifestyle modifications, recheck in 6 months"],
+          ["Stage 1 HTN", ">= 95th to < 95th percentile + 12 mmHg", "Confirm over 3 visits, ABPM, lifestyle + meds"],
+          ["Stage 2 HTN", ">= 95th percentile + 12 mmHg (or >= 140/90)", "Urgent diagnostic evaluation, prompt medication"]
+        ]
+      }
+    },
+    {
+      "say": "Beginning at thirteen years of age, pediatric staging aligns directly with adult guidelines using absolute thresholds.",
+      "tx": "Utilize simplified cutoffs for **Adolescent BP classification (age >= 13 years)** in older teenagers. In adolescents >= 13 years of age, the AAP guidelines align staging directly with the adult ACC/AHA definitions using absolute numerical thresholds: Normal BP is < 120/< 80 mmHg; Elevated BP is 120-129/< 80 mmHg; Stage 1 hypertension is 130-139/80-89 mmHg; and Stage 2 hypertension is >= 140/>= 90 mmHg.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adolescent Staging (>= 13 Years)",
+          "points": [
+            "Normal: < 120/< 80 mmHg",
+            "Elevated: 120-129/< 80 mmHg",
+            "Stage 1 HTN: 130-139/80-89 mmHg",
+            "Stage 2 HTN: >= 140/>= 90 mmHg"
+          ]
+        },
+        "right": {
+          "title": "Child Staging (< 13 Years)",
+          "points": [
+            "Normal: < 90th percentile",
+            "Elevated: >= 90th to < 95th percentile",
+            "Stage 1: >= 95th to < 95th + 12 mmHg",
+            "Stage 2: >= 95th + 12 mmHg (or >= 140/90)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Twenty-four-hour ambulatory monitoring distinguishes true sustained hypertension from white-coat and masked phenotypes.",
+      "tx": "Order specialized testing with **Ambulatory blood pressure monitoring (ABPM) gold standard** protocols. Twenty-four-hour ABPM is the gold standard diagnostic tool to confirm persistent pediatric hypertension, assess nocturnal dipping, and reliably distinguish true sustained hypertension from white-coat hypertension (elevated in-clinic BP but normal ABPM) and masked hypertension (normal clinic BP but elevated wake or sleep mean BP > 95th percentile or abnormal BP load > 25%).",
+      "vis": {
+        "kind": "table",
+        "title": "Ambulatory Blood Pressure Monitoring Phenotypes",
+        "cols": ["Phenotype", "Clinic BP", "ABPM Mean / Load", "Target Organ Risk"],
+        "rows": [
+          ["Normal", "Normal (< 90th / < 120/80)", "Normal wake/sleep (< 95th)", "Baseline normal risk"],
+          ["White-coat", "Elevated (>= 95th)", "Normal wake/sleep (< 95th)", "Low risk; avoid overtreatment"],
+          ["Masked", "Normal in clinic", "Elevated wake or sleep (> 95th)", "High risk; equal to sustained HTN"],
+          ["Sustained", "Elevated in clinic", "Elevated on ABPM (> 95th)", "Highest target-organ damage risk"]
+        ]
+      }
+    },
+    {
+      "say": "Hypertension in children younger than six years is overwhelmingly secondary to renal parenchymal and vascular anomalies.",
+      "tx": "Prioritize diagnostic investigations based on **Etiology age stratification (secondary vs primary)** patterns. In young children < 6 years of age, hypertension is almost universally secondary (> 85%), most commonly caused by renal parenchymal diseases (such as CAKUT, glomerulonephritis, and reflux nephropathy), renovascular stenosis, or aortic coarctation; conversely, in post-pubertal adolescents, primary (essential) hypertension associated with obesity and metabolic syndrome predominates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ages < 6 Years: Secondary (> 85%)",
+          "points": [
+            "Renal parenchymal disease (CAKUT, reflux, GN)",
+            "Renovascular hypertension (fibromuscular dysplasia)",
+            "Coarctation of the aorta",
+            "Endocrine disorders (pheochromocytoma, CAH)"
+          ]
+        },
+        "right": {
+          "title": "Adolescents >= 13 Years: Primary",
+          "points": [
+            "Strong association with obesity (BMI > 95th)",
+            "Positive family history of essential hypertension",
+            "Milder Stage 1 elevations without organ damage",
+            "Absence of secondary historical or physical cues"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Echocardiographic assessment of left ventricular mass identifies early cardiac target organ damage.",
+      "tx": "Evaluate cardiac target-organ damage via **Left ventricular hypertrophy screening** at the time of diagnosis. Transthoracic echocardiography is indicated in all children with confirmed persistent hypertension to screen for hypertensive cardiomyopathy; left ventricular hypertrophy (LVH) is formally defined as an elevated left ventricular mass index >= 38.6 g/m^2.7 for children and adolescent girls, or > 51 g/m^2.7 for adolescent boys, serving as a mandatory indication to initiate antihypertensive medication.",
+      "vis": {
+        "kind": "table",
+        "title": "Echocardiographic Target Organ Thresholds",
+        "cols": ["Patient Population", "LV Mass Index Threshold", "Clinical Significance"],
+        "rows": [
+          ["Children and girls", ">= 38.6 g/m^2.7", "Indicates concentric or eccentric LV hypertrophy"],
+          ["Adolescent boys", "> 51 g/m^2.7", "Indicates significant cardiac remodel/hypertrophy"],
+          ["Concentric geometry", "Relative wall thickness > 0.42", "Reflects chronic pressure-overload adaptation"]
+        ]
+      }
+    },
+    {
+      "say": "First-line pharmacological options comprise angiotensin-converting enzyme inhibitors, receptor blockers, and calcium channel blockers.",
+      "tx": "Prescribe initial pharmacotherapy selecting from **First-line antihypertensive drug classes** recommended by pediatric guidelines. Acceptable first-line monotherapy classes in children include ACE inhibitors (such as enalapril or lisinopril), angiotensin receptor blockers (such as losartan), and dihydropyridine calcium channel blockers (such as amlodipine at 0.1-0.6 mg/kg/day once daily); thiazide diuretics are typically added as a second agent if monotherapy fails to achieve target blood pressure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "init", "label": "Stage 1 with LVH or Stage 2 Hypertension"},
+          {"id": "mono", "label": "Start ACEi (Enalapril), ARB (Losartan), or CCB (Amlodipine 0.1-0.6 mg/kg/day)"},
+          {"id": "comb", "label": "Inadequate response: Add Thiazide diuretic or second agent"}
+        ],
+        "edges": [
+          ["init", "mono"],
+          ["mono", "comb"]
+        ]
+      }
+    },
+    {
+      "say": "Severe blood pressure elevations accompanied by acute end-organ damage constitute a medical emergency.",
+      "tx": "Distinguish life-threatening presentations based on the **Hypertensive emergency vs urgency definition**. A hypertensive emergency is defined as severe Stage 2 hypertension (blood pressure > 30 mmHg above the 95th percentile or > 180/120 mmHg) accompanied by acute, life-threatening target-organ injury such as hypertensive encephalopathy, seizures, papilledema, acute pulmonary edema, aortic dissection, or acute renal failure, necessitating ICU admission and continuous intravenous infusions of nicardipine or labetalol.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypertensive Urgency",
+          "points": [
+            "Severe Stage 2 BP elevation",
+            "No acute target-organ injury",
+            "Managed with oral agents over 24-48 hours",
+            "Outpatient or regular ward observation"
+          ]
+        },
+        "right": {
+          "title": "Hypertensive Emergency",
+          "points": [
+            "Severe Stage 2 BP (> 30 mmHg above 95th)",
+            "Acute encephalopathy, seizures, or heart failure",
+            "Requires immediate PICU admission",
+            "Continuous titratable IV infusions (nicardipine)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Blood pressure must be lowered gradually to prevent watershed cerebral ischemia and neurological deficits.",
+      "tx": "Enforce strict guidelines regarding the **Rate of BP reduction in emergency** resuscitation. In a pediatric hypertensive emergency, rapid blood pressure reduction is strictly avoided to prevent ischemic cerebral or spinal infarction from loss of autoregulation; blood pressure should be lowered by no more than 25% of the planned reduction in the first 8 hours, followed by gradual normalization toward the 95th percentile over the subsequent 24-48 hours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "start", "label": "Emergency Presentation: Severe Stage 2 BP"},
+          {"id": "eight", "label": "First 8 hours: Reduce BP by no more than 25% of excess"},
+          {"id": "norm", "label": "Next 24-48 hours: Gradually normalize toward 95th percentile"}
+        ],
+        "edges": [
+          ["start", "eight"],
+          ["eight", "norm"]
+        ]
+      }
+    }
+  ]
+}
