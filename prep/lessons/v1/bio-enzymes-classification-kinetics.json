@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "bio-enzymes",
+ "subject": "biochemistry",
+ "title": "Classes and Michaelis-Menten kinetics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Enzymes classify by reaction into oxidoreductases, transferases, hydrolases, lyases, isomerases, ligases (and translocases added as seventh class), each with EC numbers, while molecular identity separates **apoenzyme** (protein), cofactors (metal ions loosely), coenzymes (organic carriers, usually vitamin derived, transiently bound) and prosthetic groups (tightly or covalently bound, FAD in succinate dehydrogenase), together making holoenzyme. Specificity ranges from absolute (urease) through group and bond to stereospecific (L amino acids only), governing every downstream kinetic story.",
+   "say": "Enzymes classify by reaction into six classic classes plus translocases. Apoenzyme plus cofactor, coenzyme or prosthetic group makes holoenzyme, with specificity ranging from absolute to stereospecific recognition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "EC class",
+     "Reaction",
+     "Exemplar"
+    ],
+    "rows": [
+     [
+      "1 Oxidoreductases",
+      "Electron transfer",
+      "Lactate dehydrogenase, cytochrome oxidase"
+     ],
+     [
+      "2 Transferases",
+      "Group transfer",
+      "ALT, AST, hexokinase (phosphotransfer)"
+     ],
+     [
+      "3 Hydrolases",
+      "Bond cleavage with water",
+      "Lipase, pepsin, acetylcholinesterase"
+     ],
+     [
+      "4 Lyases",
+      "Cleavage without water (double bonds)",
+      "Aldolase, fumarase (hydratase subset teaching)"
+     ],
+     [
+      "5 Isomerases",
+      "Rearrangement within molecule",
+      "Triose phosphate isomerase, epimerases"
+     ],
+     [
+      "6 Ligases",
+      "Joining with ATP hydrolysis",
+      "Pyruvate carboxylase, DNA ligase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Michaelis-Menten** kinetics (steady state assumption, enzyme far below substrate, initial velocity before product accumulates) gives a rectangular hyperbola: velocity equals Vmax times substrate over Km plus substrate. Km (substrate at half Vmax) inversely reports affinity operationally (low Km high apparent affinity when catalysis slow caveats aside), Vmax scales with enzyme concentration, and Kcat (Vmax per enzyme site, per second turnovers to over a million for carbonic anhydrase and catalase) with Kcat over Km (near diffusion limit ten to the eight or nine for perfect enzymes) quantifies efficiency.",
+   "say": "Michaelis-Menten gives a hyperbola where Km inversely reports affinity and Vmax scales with enzyme amount. Kcat over Km near diffusion limits defines catalytically perfect enzymes in kinetic teaching.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-enzymes-fig1.webp",
+    "alt": "A graph illustrating Michaelis-Menten enzyme kinetics, showing reaction velocity against substrate concentration with Vmax and Km marked.",
+    "caption": "Michaelis-Menten kinetics: Vmax, Km, and specificity. Image: Hansehan, Wikimedia Commons (CC-BY).",
+    "ar": 1.4035
+   }
+  },
+  {
+   "tx": "Kinetic order flips with saturation: below Km velocity is **first order** (proportional to substrate, clearance constant fraction), above Km zero order (constant amount per time, enzymes saturated, ethanol and phenytoin clinical zero order kinetics where small dose rises explode levels). Non Michaelian sigmoidal curves announce allosteric oligomers (next lessons), while substrate inhibition at extremes and product inhibition physiologically restrain pathways without genetic change.",
+   "say": "Below Km velocity is first order and above Km zero order when enzymes saturate. Ethanol and phenytoin show clinical zero order kinetics where small dose rises explode blood levels dangerously.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First order zone ([S] below Km)",
+     "points": [
+      "Velocity proportional to substrate",
+      "Constant fraction cleared",
+      "Most drugs at therapeutic levels"
+     ]
+    },
+    "right": {
+     "title": "Zero order zone ([S] far above Km)",
+     "points": [
+      "Velocity constant at Vmax",
+      "Constant amount cleared",
+      "Ethanol, phenytoin, salicylate in overdose"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Physiology assigns Km deliberately: **hexokinase** low Km (about zero point one millimolar) saturates at fasting glucose for housekeeping tissues, glucokinase high Km (about ten) grades liver and beta cell flux across fed excursions (prior module), pancreatic lipase and salivary enzymes operate flooded, blood enzymes measured clinically are leakage markers whose plasma activity reflects tissue mass and injury, not pathway flux control, a conceptual separation examinations enforce.",
+   "say": "Hexokinase low Km saturates for housekeeping tissues, while glucokinase high Km grades flux across fed excursions. Plasma enzymes report tissue injury mass, not pathway flux control concepts.",
+   "vis": null
+  },
+  {
+   "tx": "**Temperature and pH optima** curve every enzyme (activity rises Q10 about two per ten degrees until denaturation collapses, pH optima pepsin about two, trypsin about eight, blood enzymes seven point four, lysosomal hydrolases five matching compartments), and irreversible loss (aspirin acetylation, organophosphate phosphorylation ageing on acetylcholinesterase) versus reversible inhibition frames pharmacology. Induced fit (hexokinase closing on glucose excluding water waste) refines lock and key (Fischer) through Koshland dynamics modern structural biology confirms.",
+   "say": "Temperature and pH optima match compartments from pepsin acid to lysosomal hydrolases. Induced fit refines lock and key dynamics, while irreversible inhibition frames organophosphate and aspirin pharmacology mechanisms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme",
+     "pH optimum mirror",
+     "Compartment lesson"
+    ],
+    "rows": [
+     [
+      "Pepsin",
+      "About 1.5 to 2",
+      "Stomach acid activates pepsinogen"
+     ],
+     [
+      "Lysosomal hydrolases",
+      "About 5",
+      "V-ATPase acidifies lysosome"
+     ],
+     [
+      "Trypsin, blood enzymes",
+      "About 7.4 to 8",
+      "Pancreatic bicarbonate neutralises chyme"
+     ],
+     [
+      "Alkaline phosphatase",
+      "About 9 to 10 (name origin)",
+      "Assay pH differs from tissue action"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Catalytic mechanisms** worth naming in finals: acid base catalysis (histidine shuttles), covalent intermediates (serine protease acyl enzyme, Ser-His-Asp catalytic triad in chymotrypsin, trypsin, elastase specificity pockets by residue one ninety nine geography), metal catalysis (carbonic anhydrase zinc hydroxide), proximity and strain (lysozyme). Serine protease zymogen activation cascades (coagulation, complement, digestion) weaponise the triad with regulatory precision revisited under translation targeting and clinical enzymology.",
+   "say": "Acid base, covalent triad, metal and strain catalysis are worth naming in finals. Serine protease cascades weaponise the triad with regulatory precision across coagulation and digestion systems.",
+   "vis": {
+    "kind": "flow",
+    "title": "From binding to turnover numbers",
+    "nodes": [
+     {
+      "id": "bind",
+      "label": "Substrate binds (Km context)"
+     },
+     {
+      "id": "cat",
+      "label": "Chemistry at active site (Kcat)"
+     },
+     {
+      "id": "rel",
+      "label": "Product releases, enzyme recycles"
+     }
+    ],
+    "edges": [
+     [
+      "bind",
+      "cat"
+     ],
+     [
+      "cat",
+      "rel"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
