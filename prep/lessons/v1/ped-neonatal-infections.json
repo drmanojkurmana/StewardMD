@@ -3,16 +3,16 @@
  "module": "ped-neonatal-infections",
  "subject": "paediatrics",
  "title": "Neonatal sepsis and congenital infections: screens to lumbar puncture",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Recognition** (**EOS** rupture fever tachycardia labour, **LOS** lines ventilation late NICU, **lethargy** poor feed temperature swings, **apnoea** bradycardia desaturation spells, **jaundice** unwell sepsis overlaps, **mottling** shock refill delays, **maternal** GBS UTI chorioamnionitis, **TORCH** rash microcephaly cataracts) with **scores** (**screen** CRP procalcitonin counts, **risk** Kaiser calculators) stratifies; **cultures** (pre-antibiotic draws) hurries. Newborns sicken.",
-   "say": "EOSs LOSs lethargies apnoeas is recognition: jaundices overlap mottlings shock maternals seed TORCHs scar scores stratify cultures draw antibiotics hang. Bugs invade.",
+   "tx": "Neonatal sepsis is divided by timing and source because organisms and risks differ. **Early onset sepsis** follows prolonged rupture, maternal fever, or chorioamnionitis, while late onset disease follows NICU lines and ventilation. Lethargy, poor feeding, temperature instability, apnoea with bradycardia and desaturation, mottling, and delayed refill are warning signs, and jaundice in an unwell baby overlaps with sepsis. Maternal GBS and UTI history, risk calculators, screening counts and CRP, and **blood cultures** before antibiotics stratify and confirm risk.",
+   "say": "Neonatal sepsis presents with subtle and nonspecific warning signs. The baby may feed poorly or become lethargic quickly. Temperature may swing rather than stay raised. Apnoea and bradycardia are signals of serious infection in preterm infants. Blood cultures must be taken before antibiotics whenever possible.",
    "vis": null
   },
   {
-   "tx": "**TORCH** (**toxo** chorioretinitis calcifications hydrocephalus, **rubella** cataract deafness blueberry, **CMV** petechiae microcephaly hearing, **herpes** vesicles SEM disseminated, **syphilis** snuffles rash bones, **Zika** collapsed microcephaly, **parvo** hydrops anaemia, **varicella** limb scars shingles) with **tests** (**IgM** PCR titres pairs, **eye** hearing screens) confirms; **treat** (pyrimethamine ganciclovir penicillin) targets. Wombs transmit.",
-   "say": "Toxos rubellas CMVs herpes is TORCH: syphilises snuffle Zikas shrink parvos swell varicellas scar tests pair eyes screen treats target penicillins cure. Germs cross.",
+   "tx": "Congenital infections are grouped by pattern because timing in pregnancy shapes injury. **Toxoplasmosis** causes chorioretinitis, intracranial calcifications, and hydrocephalus, **rubella** causes cataract, deafness, and blueberry muffin rash, and CMV causes petechiae, microcephaly, and hearing loss. Herpes causes vesicles and disseminated disease, syphilis causes snuffles and bone changes, Zika causes severe microcephaly, and parvovirus causes hydrops. IgM, PCR, paired titres, eye and hearing screens confirm, and targeted antimicrobials treat selected infections.",
+   "say": "Congenital infections injure the fetus during pregnancy. Each organism produces a recognisable pattern of injury. Rubella can damage the eyes and the ears and the heart. Cytomegalovirus can damage hearing and brain development in the newborn period. Testing confirms the organism and screening helps detect hidden sensory loss early.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/ped-neonatal-infections-fig1.webp",
@@ -22,13 +22,24 @@
    }
   },
   {
-   "tx": "**Workup** (**cultures** blood CSF urine draws, **LP** meningitis pleocytosis, **counts** neutropenia I-T ratios, **CRP** serial trends guides, **chest** pneumonia infiltrates, **herpes** surface PCR acyclovir, **fungal** candida parenteral lines, **viral** enterovirus parechovirus) with **monitors** (**apnoea** bradycardia trends, **feeds** intolerance residuals) watches; **echo** (endocarditis vegetations) rules. Sepsis hunts.",
-   "say": "Cultures LPs counts CRPs is workup: chests haze herpes stains fungals bud virals rage monitors trend feeds stall echoes clear antibiotics cover. Needles tap.",
+   "tx": "The sepsis workup samples every likely site before treatment narrows. Take **blood culture**, CSF by lumbar puncture, and urine, and assess full blood count for neutropenia and immature to total ratio, serial **CRP** trends, and chest radiograph for pneumonia. Herpes needs surface PCR and acyclovir when suspected, candida threatens babies with parenteral lines, and enterovirus or parechovirus can mimic bacterial sepsis. Monitor apnoea and bradycardia, watch feed intolerance, and use echocardiography when endocarditis is questioned.",
+   "say": "The workup is a search of blood and spinal fluid and urine together. Lumbar puncture detects meningitis that blood tests miss. Serial inflammatory markers show whether infection is improving. Chest imaging reveals pneumonia in a baby with respiratory signs. Monitoring continues because apnoea may recur during treatment.",
    "vis": null
   },
   {
-   "tx": "**Treatment** (**amp-gentamicin** EOS empiric covers, **cefotaxime** meningitis gram-negative, **acyclovir** HSV encephalitis doses, **fluconazole** candida lines out, **support** fluids pressors ventilation, **duration** culture-negative stops, **follow** hearing neurodevelopment, **prevent** GBS screening handwash) with **traps** (**nephrotoxic** drug levels, **resistance** de-escalate narrows, **LP** delayed unstable) closes; **records** (times doses) documents. Babies recover.",
-   "say": "Amp-gentamicins cefotaximes acyclovirs fluconazoles is treatment: supports sustain durations stop follows track prevents screen nephrotoxins watch resistances narrow LPs wait records log times chart. Drugs cure.",
+   "tx": "This photograph shows a monitored newborn held with hips flexed and neck neutral for **lumbar puncture** under a radiant warmer, with pre antibiotic blood culture bottles and tubes ready. Safe positioning protects oxygenation while apnoea and saturation are monitored, and cultures taken before antibiotics preserve diagnostic yield. For exams, unstable babies may need LP delayed, but a stable septic newborn needs CSF examination because **meningitis** changes drug choice, duration, and follow up.",
+   "say": "This photograph shows safe positioning for lumbar puncture in a newborn. The hips are flexed while the neck stays neutral. Monitoring watches breathing and oxygen saturation throughout the procedure. Cultures are collected before antibiotics to preserve diagnostic yield. Meningitis leads to longer treatment so spinal fluid examination is greatly important.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-neonatal-infections-gen1.webp",
+    "alt": "Newborn under warmer held in flexed position with monitors, blood culture bottle, blood tubes and lumbar puncture kit.",
+    "caption": "Monitored newborn in safe hold with culture bottles and LP kit. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Empirical treatment starts fast and narrows with cultures and clinical course. **Ampicillin with gentamicin** covers early onset disease, **cefotaxime** suits meningitis and gram negative cover, acyclovir treats suspected herpes encephalitis, and fluconazole with line removal treats candida. Support fluids, pressors, and ventilation while planning duration, stopping when cultures stay negative and the baby recovers. Follow hearing and neurodevelopment, prevent GBS disease by maternal screening, watch nephrotoxic drug levels, de escalate against resistance, and delay LP only when the baby is unstable.",
+   "say": "Treatment starts empirically and narrows as results return. Early onset disease needs cover for common neonatal organisms. Meningitis leads to a different antibiotic choice and a longer duration. Supportive care maintains circulation and breathing during recovery. Hearing and development need follow up because infection can leave hidden injury.",
    "vis": null
   }
  ],
