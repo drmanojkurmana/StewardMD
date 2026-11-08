@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "med-nephrotic",
+ "subject": "medicine",
+ "title": "Nephrotic syndrome pathophysiology, minimal change disease, and membranous nephropathy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Profound breakdown of the glomerular filtration barrier allows massive, uninhibited protein leakage into the urinary collecting system. Clinically defining **Nephrotic syndrome** requires a classic diagnostic tetrad: heavy proteinuria exceeding three point five grams per twenty-four hours (or a spot urine protein-to-creatinine ratio greater than three), severe hypoalbuminaemia below thirty grams per litre, generalized dependent pitting oedema (progressing to anasarca), and secondary hyperlipidaemia with lipiduria. Microscopic examination of urine reveals degenerated fatty casts and free oval fat bodies displaying pathognomonic Maltese cross birefringence under polarized light microscopy.",
+   "say": "Profound breakdown of the glomerular filtration barrier causes massive protein leakage into the urine. Clinically defining Nephrotic syndrome requires a diagnostic tetrad: heavy proteinuria exceeding three point five grams daily, severe hypoalbuminaemia, generalized pitting oedema, and hyperlipidaemia. Urine microscopy demonstrates oval fat bodies displaying a pathognomonic Maltese cross under polarized light.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glomerular-diseases-nephritic-nephrotic-fig1.webp",
+    "alt": "Diagram showing glomerular filtration barrier disruption, massive proteinuria, and lipiduria.",
+    "caption": "Glomerular filtration barrier breakdown, massive proteinuria, and lipiduria. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Disruption of both electrostatic charge and structural pore-size selectivity across the podocyte slit diaphragm underpins massive urinary protein losses. Establishing **heavy proteinuria** reflects injury to specialized podocyte interdigitating foot processes and transmembrane slit diaphragm proteins, predominantly nephrin (encoded by NPHS1) and podocin (NPHS2). In selective proteinuria, such as minimal change disease, charge barrier loss permits passage of intermediate-weight polyanionic albumin while retaining larger immunoglobulins. Conversely, non-selective proteinuria reflects extensive structural detachment of podocytes from the underlying basement membrane, permitting indiscriminate clearance of high-molecular-weight globulins.",
+   "say": "Disruption of electrical charge and pore size across the podocyte slit diaphragm causes massive urinary protein loss. Establishing heavy proteinuria reflects injury to podocyte foot processes and key structural proteins like nephrin and podocin. Selective proteinuria clears albumin preferentially, whereas non-selective proteinuria indicates structural podocyte detachment that permits high-molecular-weight globulins to pass.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Selective Proteinuria",
+     "points": [
+      "Preferential clearance of albumin (>80% of protein)",
+      "Loss of negative electrostatic heparan sulfate charge",
+      "Pristine structural pores retain IgG and macroglobulins",
+      "Classic feature of pediatric Minimal Change Disease"
+     ]
+    },
+    "right": {
+     "title": "Non-Selective Proteinuria",
+     "points": [
+      "Indiscriminate loss of albumin, IgG, and transferrin",
+      "Gross architectural pore disruption and podocyte detachment",
+      "Higher risk of progressive glomerulosclerosis",
+      "Characteristic of FSGS and Membranous Nephropathy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The single most common cause of childhood nephrotic syndrome displays unremarkable architectural appearances on conventional histological staining. Diagnosing **minimal change disease** (MCD) accounts for over eighty-five percent of nephrotic presentations in children aged two to six years. Conventional light microscopy appears completely normal, while immunofluorescence demonstrates an absence of immunoglobulin and complement deposition. The clinical hallmark is exquisite glucocorticoid responsiveness, with over ninety percent of patients entering complete remission within four to eight weeks of oral steroid therapy. In adults, secondary presentations associate with Hodgkin lymphoma or NSAID therapy.",
+   "say": "The commonest cause of childhood nephrotic syndrome exhibits normal microscopic appearances on routine histological staining. Diagnosing minimal change disease accounts for eighty-five percent of nephrotic presentations in young children. Light microscopy appears completely normal with negative immunofluorescence, while over ninety percent of patients enter complete remission following oral corticosteroid therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-nephrotic-gen1.webp",
+    "alt": "Electron microscopy showing diffuse podocyte foot process effacement in minimal change disease.",
+    "caption": "Normal light microscopy and diffuse podocyte foot process effacement in MCD. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ultrastructural examination under transmission electron microscopy provides the sole definitive diagnostic confirmation in histologically normal glomeruli. Demonstrating diffuse **podocyte effacement** reveals widespread flattening, retraction, and fusion of visceral epithelial cell foot processes along the outer aspect of the glomerular basement membrane. The actin cytoskeleton within podocyte pedicels undergoes reorganization from a parallel contractile bundle into a dense, disorganized meshwork. Following successful corticosteroid-induced clinical remission, the foot process architecture reconstitutes completely, restoring normal slit diaphragm filtration barrier integrity.",
+   "say": "Ultrastructural examination using electron microscopy provides the sole definitive diagnostic method in histologically normal glomeruli. Demonstrating diffuse podocyte effacement shows widespread flattening and fusion of foot processes along the outer basement membrane. Following corticosteroid therapy, the actin cytoskeleton reorganizes completely, restoring normal filtration barrier integrity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cytokine",
+      "label": "T-cell Cytokine Dysregulation or Circulating Factor"
+     },
+     {
+      "id": "effacement",
+      "label": "Diffuse Podocyte Foot Process Effacement on Electron Microscopy"
+     },
+     {
+      "id": "remission",
+      "label": "Steroid Therapy -> Cytoskeletal Reconstitution & Remission"
+     }
+    ],
+    "edges": [
+     [
+      "cytokine",
+      "effacement"
+     ],
+     [
+      "effacement",
+      "remission"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sclerotic obliteration involving portions of the capillary tuft across a subset of glomeruli represents a leading cause of steroid-resistant nephrotic syndrome in adults. Characterized as **focal segmental glomerulosclerosis** (FSGS), light microscopy demonstrates collagenous scarring and hyalinosis affecting some but not all glomeruli (focal), and involving portions of the individual tuft (segmental). Primary FSGS stems from putative circulating permeability factors and frequently resists corticosteroids, while secondary forms arise from APOL1 genetic risk variants, hyperfiltration in severe obesity or solitary kidneys, HIV infection (collapsing variant), and intravenous heroin use.",
+   "say": "Sclerotic scarring affecting portions of capillary tufts in selected glomeruli represents a leading cause of steroid-resistant nephrotic syndrome. Characterized as focal segmental glomerulosclerosis, light microscopy demonstrates segmental scarring and hyalinosis. Primary cases often resist corticosteroids and recur following transplantation, while secondary causes include APOL1 genetic variants, severe obesity, and HIV infection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "FSGS variant",
+     "Aetiological mechanism",
+     "Histological characteristic",
+     "Response to immunosuppression"
+    ],
+    "rows": [
+     [
+      "Primary FSGS",
+      "Circulating permeability factors",
+      "Diffuse foot process effacement; tip or perihilar lesion",
+      "Partial steroid response; 30-50% recurrence in graft"
+     ],
+     [
+      "Collapsing variant",
+      "HIV-associated (HIVAN), high-risk APOL1",
+      "Global podocyte collapse, microcystic tubular dilation",
+      "Aggressive course; antiretroviral therapy indicated"
+     ],
+     [
+      "Adaptive / Secondary",
+      "Hyperfiltration (obesity, solitary kidney, reflux)",
+      "Glomerulomegaly, perihilar sclerosis, partial effacement",
+      "Steroids ineffective; requires ACEi/ARB and weight loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In situ immune complex formation beneath the visceral epithelial cell layer generates progressive, non-inflammatory basement membrane thickening. Diagnosing **membranous nephropathy** accounts for the most common cause of primary nephrotic syndrome in Caucasian adults over fifty years of age. Light microscopy shows diffuse, uniform thickening of capillary walls without endocapillary cellular proliferation. Silver staining classically demonstrates a pathognomonic spike and dome pattern, formed as new extracellular basement membrane matrix projects upward around subepithelial electron-dense immune deposits. Immunofluorescence confirms granular capillary loop deposition of immunoglobulin G (predominantly IgG4) and complement C3.",
+   "say": "In situ immune complex formation beneath podocytes causes progressive basement membrane thickening. Diagnosing membranous nephropathy accounts for the commonest cause of primary nephrotic syndrome in older adults. Light microscopy shows diffuse capillary wall thickening without cellular proliferation, while silver stains show diagnostic spikes projecting around subepithelial immune deposits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Membranous Nephropathy",
+     "points": [
+      "In situ autoantibody binding to podocyte antigens",
+      "Positive anti-PLA2R antibodies in 70% to 80%",
+      "Subepithelial IgG4-dominant immune deposits",
+      "Rule of thirds: spontaneous cure, persistent, ESRD"
+     ]
+    },
+    "right": {
+     "title": "Secondary Membranous Nephropathy",
+     "points": [
+      "Circulating antigen-antibody complex trapping",
+      "Negative anti-PLA2R; associated with malignancy (carcinoma)",
+      "Infections (HBV, HCV, syphilis) and drugs (NSAIDs, penicillamine)",
+      "Lupus nephritis Class V (shows full-house staining)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Discovery of circulating autoantibodies directed against endogenous podocyte transmembrane receptors revolutionized the non-invasive diagnosis and monitoring of membranous nephropathy. Circulating **anti-PLA2R** (M-type phospholipase A2 receptor) autoantibodies are detectable in approximately seventy to eighty percent of patients with primary membranous nephropathy. Titer levels correlate directly with clinical disease activity: rising titres herald clinical relapse, while falling titres predict immunological remission months before urinary protein excretion improves. A second autoantibody, anti-thrombospondin type-one domain-containing 7A (anti-THSD7A), accounts for an additional three to five percent of primary presentations.",
+   "say": "Discovery of autoantibodies targeting podocyte receptors revolutionized the non-invasive diagnosis of membranous nephropathy. Circulating anti-PLA2R autoantibodies occur in eighty percent of primary cases, targeting the phospholipase A2 receptor. Antibody titres correlate directly with clinical activity, where declining levels predict immunological recovery months before proteinuria resolves.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serological antibody",
+     "Prevalence in primary MN",
+     "Clinical utility & monitoring",
+     "Associated secondary triggers"
+    ],
+    "rows": [
+     [
+      "Anti-PLA2R autoantibody",
+      "70% to 80% of primary cases",
+      "Confirms primary etiology; guides therapy timing",
+      "Absence prompts mandatory malignancy screening"
+     ],
+     [
+      "Anti-THSD7A autoantibody",
+      "3% to 5% of primary cases",
+      "Second most common target antigen in podocytes",
+      "Occasional association with underlying solid tumours"
+     ],
+     [
+      "Secondary MN workup",
+      "Negative PLA2R / THSD7A",
+      "CT chest/abdomen/pelvis, colonoscopy, mammography",
+      "Solid organ carcinomas (lung, colon, prostate, breast)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Risk-stratified immunosuppression protocols balance the probability of spontaneous remission against progressive renal failure and thromboembolism. Directing **nephrotic immunosuppressive regimens** in minimal change disease relies upon high-dose oral prednisolone (one milligram per kilogram daily for eight to sixteen weeks). In membranous nephropathy, patients exhibiting high risk of progression (persistent proteinuria exceeding four grams daily, elevated anti-PLA2R) receive targeted therapy with the anti-CD20 monoclonal antibody rituximab, or cyclical alternating months of corticosteroids and oral cyclophosphamide (the modified Ponticelli regimen).",
+   "say": "Risk-stratified immunosuppressive therapy balances the chance of spontaneous remission against progressive renal failure. Directing nephrotic immunosuppressive regimens in minimal change disease uses high-dose oral corticosteroids for two to four months. In high-risk membranous nephropathy, targeted therapy with rituximab or cyclical cyclophosphamide with steroids induces durable immunological remission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Biopsy / Serology Confirmed Nephrotic Syndrome"
+     },
+     {
+      "id": "mcd",
+      "label": "MCD: Oral Prednisolone 1 mg/kg/day (taper over 6 months)"
+     },
+     {
+      "id": "mn",
+      "label": "High-Risk Membranous: Rituximab OR Modified Ponticelli Regimen"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "mcd"
+     ],
+     [
+      "dx",
+      "mn"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
