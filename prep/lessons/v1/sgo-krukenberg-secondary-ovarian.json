@@ -1,0 +1,289 @@
+{
+  "v": 1,
+  "module": "sgo-krukenberg-secondary-ovarian",
+  "title": "Krukenberg Tumors & Secondary Ovarian Neoplasms",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 17 (Metastatic Ovarian Cancer)",
+    "DeVita, Hellman, and Rosenberg's Cancer 11th Edition Ch 85 (Ovarian Neoplasms)",
+    "DiSaia and Creasman Clinical Gynecologic Oncology 10th Edition Ch 12"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "A true Krukenberg tumor is strictly defined as an ovarian metastasis harboring signet ring cells containing intracellular mucin embedded within a cellular, proliferating pseudosarcomatous ovarian stroma. Gastric adenocarcinoma serves as the most frequent primary source globally.",
+      "tx": "A true **Krukenberg tumor** is strictly defined by the World Health Organization as an ovarian metastasis characterized by **mucin-secreting signet ring cells** infiltrating a proliferating pseudosarcomatous ovarian stroma, most commonly arising from **gastric adenocarcinoma** (70% of cases).  Evidence-based practice integrates WHO definition, mucin-producing signet-ring cells, ovarian pseudostroma.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prim",
+            "label": "Primary diffuse gastric signet ring carcinoma develops"
+          },
+          {
+            "id": "spread",
+            "label": "Retrograde lymphatic or transcoelomic dissemination occurs"
+          },
+          {
+            "id": "ovary",
+            "label": "Bilateral ovarian cortical seeding and stromal infiltration"
+          },
+          {
+            "id": "kruk",
+            "label": "Characteristic bilateral multinodular Krukenberg masses form"
+          }
+        ],
+        "edges": [
+          [
+            "prim",
+            "spread"
+          ],
+          [
+            "spread",
+            "ovary"
+          ],
+          [
+            "ovary",
+            "kruk"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Krukenberg tumors characteristically present as bilateral, solid, multinodular ovarian masses that maintain the smooth bosselated contour of the ovary without capsular breach. In up to eighty percent of cases, bilateral ovarian involvement is detected at presentation.",
+      "tx": "Grossly, Krukenberg tumors present as **bilateral solid ovarian masses** (in up to 80% of patients) that preserve the smooth, bosselated kidney-like contour of the ovary with an **intact capsule**, distinguishing them from the necrotic, cystic, surface-breaching architecture of primary ovarian carcinomas.  Evidence-based practice integrates gastric primary 70-75%, linitis plastica, colorectal primary, lobular breast cancer. Key numerical parameters include 70, 75, 15.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Krukenberg Tumor Morphology",
+          "points": [
+            "Bilateral involvement in up to 80%",
+            "Firm, solid, multinodular bosselated surface",
+            "Ovarian capsule typically intact and smooth"
+          ]
+        },
+        "right": {
+          "title": "Primary Ovarian Carcinoma",
+          "points": [
+            "Frequently unilateral in early stages",
+            "Cystic and solid friable necrotic architecture",
+            "Surface excrescences and capsular breach common"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Microscopic examination demonstrates intracellular mucin droplets expanding the cell cytoplasm and eccentrically displacing hyperchromatic, crescentic nuclei to the periphery. The intracellular mucin droplet stains intensely positive with mucicarmine and periodic acid Schiff after diastase digestion.",
+      "tx": "Microscopic examination reveals characteristic **signet ring cells**, wherein intracellular mucin droplets displace hyperchromatic nuclei eccentrically against the cell membrane. Intracellular mucin is highlighted brilliantly by **mucicarmine staining** and periodic acid-Schiff with diastase resistance (**PAS-D**).  Evidence-based practice integrates bilateral involvement >80%, solid lobulated masses, intact external capsule. Key numerical parameters include 80.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Special Stain",
+          "Target Substrate",
+          "Staining Appearance",
+          "Diagnostic Value"
+        ],
+        "rows": [
+          [
+            "Mucicarmine",
+            "Intracellular epithelial mucin",
+            "Bright rose-red intracellular droplets",
+            "Identifies epithelial signet ring morphology"
+          ],
+          [
+            "PAS with diastase (PAS-D)",
+            "Neutral mucopolysaccharides",
+            "Magenta cytoplasmic positivity",
+            "Confirms mucin and excludes glycogen in clear cells"
+          ],
+          [
+            "Alcian blue",
+            "Acidic mucins (pH 2.5)",
+            "Deep turquoise blue staining",
+            "Detects gastrointestinal intestinal metaplasia"
+          ],
+          [
+            "Reticulin silver stain",
+            "Stromal reticulin meshwork",
+            "Fibers encircle single signet cells",
+            "Differentiates from epithelial glandular rosettes"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The primary tumor origin is gastric adenocarcinoma in seventy percent of cases, followed by colorectal, appendix, breast, and pancreatobiliary carcinomas. In breast metastases, invasive lobular carcinoma has an overwhelming predilection for metastasizing to the ovaries.",
+      "tx": "The primary anatomical site is the **stomach** in ~70% of cases, followed by **colorectal adenocarcinoma**, appendix, and **invasive lobular breast cancer**. Lobular breast carcinoma metastasizes to the ovaries far more frequently than ductal carcinoma due to loss of E-cadherin expression.  Evidence-based practice integrates IHC profile, CK7 positive CK20 negative (ovarian), CK7 negative CK20 positive CDX2 positive (colorectal), PAX8. Key numerical parameters include 20, 8.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Primary Origin Site",
+          "Specific Histological Lineage",
+          "Relative Frequency",
+          "Clinical Characteristics"
+        ],
+        "rows": [
+          [
+            "Stomach",
+            "Diffuse signet ring cell adenocarcinoma",
+            "60% to 70%",
+            "Frequently in young perimenopausal women"
+          ],
+          [
+            "Colorectal",
+            "Colonic signet ring or mucinous cancer",
+            "10% to 15%",
+            "Often manifests with elevated serum CEA"
+          ],
+          [
+            "Breast",
+            "Invasive lobular carcinoma (E-cadherin loss)",
+            "5% to 10%",
+            "May occur years after primary mastectomy"
+          ],
+          [
+            "Appendix / Gallbladder",
+            "Appendiceal goblet cell or biliary adenocarcinoma",
+            "2% to 5%",
+            "Often misdiagnosed as primary mucinous ovarian cancer"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Immunohistochemical profiling with cytokeratin seven and cytokeratin twenty is essential for differentiating metastatic gastrointestinal adenocarcinomas from primary ovarian mucinous neoplasms. Gastric cancers are usually CK7 and CK20 positive, whereas colorectal cancers are CK7 negative and CK20 positive.",
+      "tx": "Immunohistochemical profiling differentiates primary from secondary ovarian neoplasms: colorectal metastases are **CK7 negative / CK20 positive** and **CDX2 positive**; gastric Krukenberg tumors are typically **CK7 positive / CK20 positive**; whereas primary ovarian serous tumors are **CK7 positive / CK20 negative** and **WT1 positive**.  Evidence-based practice integrates signet-ring cells, PAS-D, mucicarmine, Alcian blue pH 2.5. Key numerical parameters include 2.5.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumor Origin",
+          "CK7 Profile",
+          "CK20 Profile",
+          "Key Differentiating Biomarkers"
+        ],
+        "rows": [
+          [
+            "Colorectal metastasis",
+            "Negative",
+            "Positive",
+            "CDX2 positive, SATB2 positive, WT1 negative"
+          ],
+          [
+            "Gastric Krukenberg",
+            "Positive (80%)",
+            "Positive (60%)",
+            "CDX2 variable, MUC5AC positive, WT1 negative"
+          ],
+          [
+            "Lobular breast metastasis",
+            "Positive",
+            "Negative",
+            "GATA3 positive, ER/PR positive, E-cadherin negative"
+          ],
+          [
+            "Primary ovarian serous",
+            "Positive",
+            "Negative",
+            "WT1 positive, PAX8 positive, p53 mutated"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The mechanism of metastatic spread to the ovaries remains contentious, but retrograde lymphatic dissemination via retroperitoneal lymphatic pathways is considered the primary route. Rich ovarian vascularity and extensive lymphatic anastomoses provide a fertile soil for circulating tumor emboli.",
+      "tx": "The pathophysiology of Krukenberg ovarian colonization involves **retrograde lymphatic dissemination** from retroperitoneal nodes into the ovary, which explains the high frequency of bilateral involvement with intact ovarian capsules, while direct **transcoelomic peritoneal seeding** and hematogenous spread represent secondary routes.  Evidence-based practice integrates retrograde lymphatic permeation, thoracic duct, retroperitoneal dissemination.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Retrograde Lymphatic Theory",
+          "points": [
+            "Retroperitoneal lymph nodes invaded by gastric tumor",
+            "Retrograde flow along subperitoneal lymphatics into ovary",
+            "Explains bilateral solid masses with intact capsules"
+          ]
+        },
+        "right": {
+          "title": "Transcoelomic Surface Seeding Theory",
+          "points": [
+            "Cells shed directly into peritoneal fluid currents",
+            "Implantation on ovarian surface cortex",
+            "Less consistent with intact capsules without surface implants"
+          ]
+        }
+      }
+    },
+    {
+      "say": "In pregnant patients, Krukenberg tumors can induce dramatic virilization due to marked luteinization of the non-neoplastic ovarian stroma under the influence of human chorionic gonadotropin. Elevated circulating testosterone and androstenedione levels produce maternal hirsutism and temporal balding.",
+      "tx": "During pregnancy, Krukenberg tumors can trigger profound **maternal virilization** and fetal masculinization. Gestational **hCG stimulation** induces intense **stromal luteinization** of the surrounding non-neoplastic ovarian stroma, which synthesizes massive quantities of testosterone and androstenedione.  Evidence-based practice integrates lobular breast cancer metastasis, loss of E-cadherin, Indian-file pattern.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hcg",
+            "label": "Placenta synthesizes massive physiological levels of hCG"
+          },
+          {
+            "id": "lutein",
+            "label": "hCG stimulates non-neoplastic ovarian stroma around tumor"
+          },
+          {
+            "id": "andro",
+            "label": "Luteinized stromal cells secrete excess androgens"
+          },
+          {
+            "id": "viril",
+            "label": "Produces maternal hirsutism, voice deepening, and clitoromegaly"
+          }
+        ],
+        "edges": [
+          [
+            "hcg",
+            "lutein"
+          ],
+          [
+            "lutein",
+            "andro"
+          ],
+          [
+            "andro",
+            "viril"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Palliative metastasectomy through bilateral salpingo-oophorectomy provides effective symptom relief from pelvic bulk, pain, and ascites. In patients with an isolated ovarian metastasis and a controlled primary lesion, complete surgical resection is associated with improved survival.",
+      "tx": "Therapeutic **metastasectomy** with bilateral salpingo-oophorectomy provides meaningful palliation for pelvic pain and pressure symptoms. In carefully selected patients with **isolated ovarian metastasis** without widespread peritoneal carcinomatosis, complete R0 resection combined with systemic chemotherapy improves overall survival.  Evidence-based practice integrates palliative oophorectomy, oligometastatic survival benefit, R0 macroscopic resection. Key numerical parameters include 9, 19, 24.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Palliative Resection Indicated",
+          "points": [
+            "Isolated bilateral ovarian masses without carcinomatosis",
+            "Primary gastric or colonic lesion controlled or resected",
+            "Severe pelvic pain, torsion, or compression symptoms"
+          ]
+        },
+        "right": {
+          "title": "Contraindicated / Non-Beneficial",
+          "points": [
+            "Extensive disseminated extra-ovarian carcinomatosis",
+            "Unresectable, progressive primary visceral neoplasm",
+            "Poor performance status (ECOG 3-4)"
+          ]
+        }
+      }
+    }
+  ]
+}

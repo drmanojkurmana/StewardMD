@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "sgo-germ-cell-teratoma-bead",
+ "title": "Immature Teratoma, Embryonal Carcinoma & BEP Chemotherapy: Grading, Serum Tumor Markers and Fertility Preservation",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 18",
+  "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11th Edition Ch 85",
+  "NCCN Clinical Practice Guidelines in Oncology: Ovarian Cancer/Malignant Germ Cell (Version 1.2024)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Immature teratoma is a malignant germ cell tumor containing tissues derived from all three embryonic germ layers, graded pathologically by the quantity of immature neuroectodermal elements.",
+   "tx": "Histological **Thurlbeck and Scully grading** stratifies immature teratoma based on the quantity of **immature neuroepithelium** per slide: **Grade 1 <=1 LPF**, Grade 2 spans 1 to 3 low-power fields, and **Grade 3 >=4 LPFs** (or >3.75 mm aggregate area), directly dictating biological aggressiveness and adjuvant chemotherapy requirements.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-benign-ovarian-gen1.webp",
+    "ar": 1.3393,
+    "caption": "Ultrasound showing classic dermoid cyst features of an ovarian teratoma, Illustration: StewardMD original.",
+    "alt": "Ultrasound image displaying cystic-solid adnexal mass with characteristic internal acoustic shadowing."
+   }
+  },
+  {
+   "say": "Stage one grade one immature teratoma exhibits an exceptionally favorable prognosis and does not require adjuvant cytotoxic chemotherapy following surgical resection.",
+   "tx": "In patients with **Stage IA Grade 1** immature teratoma, surgical resection alone achieves long-term disease-free survival exceeding 95%, allowing safe **omission of adjuvant chemo**. Conversely, **Grade 2-3 or Stage IC-IV** disease warrants immediate systemic combination chemotherapy to prevent aggressive intra-abdominal recurrence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stage IA Grade 1 (Favorable)",
+     "points": [
+      "Encapsulated tumor strictly confined to one ovary",
+      "Immature neuroepithelium limited to <= 1 low-power field",
+      "Surgery alone curative; no adjuvant chemotherapy required"
+     ]
+    },
+    "right": {
+     "title": "Grade 2/3 or Stage IC-IV (High Risk)",
+     "points": [
+      "Extensive immature neuroectoderm or capsular rupture/ascites",
+      "High propensity for rapid peritoneal dissemination",
+      "Mandates immediate adjuvant BEP chemotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Embryonal carcinoma of the ovary is a highly malignant, primitive germ cell neoplasm characterized by distinctive dual biomarker elevation.",
+   "tx": "**Embryonal carcinoma** produces both **elevated AFP and beta-hCG**, while **yolk sac tumor (endodermal sinus tumor)** secretes solely AFP and pathognomonically displays **Schiller-Duval bodies** (central blood vessel surrounded by primitive germ cells within a cystic space). Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Germ Cell Histology",
+     "Serum AFP",
+     "Serum beta-hCG",
+     "Classic Pathological Hallmark"
+    ],
+    "rows": [
+     [
+      "Dysgerminoma",
+      "Normal",
+      "Normal (or mild)",
+      "Fried-egg cells, lymphocytic infiltrate, c-KIT+"
+     ],
+     [
+      "Yolk Sac Tumor",
+      "Elevated (marked)",
+      "Normal",
+      "Schiller-Duval bodies, Schiller-Duval glom."
+     ],
+     [
+      "Embryonal Carcinoma",
+      "Elevated",
+      "Elevated",
+      "Pleomorphic sheets, syncytiotrophoblastic cells"
+     ],
+     [
+      "Choriocarcinoma (Non-gestational)",
+      "Normal",
+      "Elevated (extreme)",
+      "Biphasic syncytio- and cytotrophoblast"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The BEP regimen is the worldwide gold standard cytotoxic chemotherapy protocol for malignant ovarian germ cell neoplasms.",
+   "tx": "The definitive **BEP regimen** comprises **bleomycin etoposide cisplatin**. Standard administration consists of etoposide 100 mg/m2 daily for 5 days, cisplatin 20 mg/m2 daily for 5 days, and weekly bleomycin 30 units (maximum cumulative dose <= 400 units to prevent pulmonary toxicity), delivered every 21 days.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent in BEP",
+     "Dose and Schedule",
+     "Dose-Limiting Toxicity",
+     "Monitoring Rule"
+    ],
+    "rows": [
+     [
+      "Bleomycin",
+      "30 units IV weekly (Days 1, 8, 15)",
+      "Pulmonary fibrosis (max <=400 U)",
+      "Serial PFTs with DLCO monitoring"
+     ],
+     [
+      "Etoposide",
+      "100 mg/m2 IV Days 1 through 5",
+      "Myelosuppression, secondary AML",
+      "Complete blood counts, ANC nadir"
+     ],
+     [
+      "Cisplatin",
+      "20 mg/m2 IV Days 1 through 5",
+      "Nephrotoxicity, sensorineural ototoxicity",
+      "Aggressive IV hydration and audiometry"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The number of chemotherapy cycles in malignant germ cell tumors is tailored according to postoperative surgical residual and risk stratification.",
+   "tx": "Patients with completely resected early-stage disease receive **3 cycles BEP adjuvant**, whereas bulky residual disease or advanced metastatic presentation mandates **4 cycles advanced BEP**, achieving an overall cure rate of **90-95% cure rate** across prospective international GOG trials. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Complete staging and unilateral salpingo-oophorectomy"
+     },
+     {
+      "id": "b",
+      "label": "Completely resected disease: administer 3 cycles of BEP every 21 days"
+     },
+     {
+      "id": "c",
+      "label": "Bulky macroscopic residual or Stage IV disease: administer 4 cycles of BEP"
+     },
+     {
+      "id": "d",
+      "label": "Attain durable long-term radiographic and biochemical cure in >90% of cases"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Because malignant ovarian germ cell tumors occur predominantly in children and young women, surgical treatment must prioritize reproductive conservation.",
+   "tx": "Primary surgical management consists of **fertility-sparing USO** (unilateral salpingo-oophorectomy) with comprehensive surgical staging. Contralateral ovarian wedge resection carries an absolute **contraindication to routine bivalving**, as occult bilateral involvement is rare (<5% in non-dysgerminoma) and surgical trauma risks mechanical infertility. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fertility-Sparing Principles",
+     "points": [
+      "Unilateral salpingo-oophorectomy with intact capsule preservation",
+      "Thorough peritoneal washings and infracolic omentectomy",
+      "Careful visual inspection and palpation of contralateral ovary"
+     ]
+    },
+    "right": {
+     "title": "Prohibited Surgical Practices",
+     "points": [
+      "Routine bivalving or wedge biopsy of normal contralateral ovary",
+      "Unnecessary bilateral oophorectomy or hysterectomy in young patients",
+      "Blind morcellation or cyst rupture inside peritoneal cavity"
+     ]
+    }
+   }
+  },
+  {
+   "say": "During or following chemotherapy for immature teratoma, enlarging peritoneal masses may develop that represent fully benign differentiated teratomatous implants.",
+   "tx": "The **growing teratoma syndrome** presents as paradoxical enlargement of metastatic masses during or after systemic chemotherapy despite **normalizing tumor markers** (AFP and hCG). Histopathological biopsy demonstrates **mature teratoma histology** entirely devoid of malignant immature elements, which is managed definitively with surgical resection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Patient with immature teratoma completes cytotoxic BEP chemotherapy"
+     },
+     {
+      "id": "b",
+      "label": "Serial serum AFP and beta-hCG levels drop to completely normal ranges"
+     },
+     {
+      "id": "c",
+      "label": "Surveillance CT scans show paradoxical enlarging intra-abdominal masses"
+     },
+     {
+      "id": "d",
+      "label": "Perform surgical resection: confirm 100% benign mature teratoma (GTS)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Bleomycin-induced pulmonary toxicity is a potentially fatal complication that requires strict lifetime precautions regarding oxygen administration.",
+   "tx": "Bleomycin causes oxidative alveolar damage leading to **bleomycin pulmonary toxicity** with severe lung fibrosis. Patients require baseline **DLCO monitoring** before each cycle (withholding drug if DLCO drops >20%) and lifelong avoidance of **hyperoxia avoidance (FiO2 <30%)** during future surgical general anaesthesia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dicer1-syndrome-fig1.webp",
+    "ar": 1.8349,
+    "caption": "DICER1 tumour spectrum from lung to ovary to thyroid. Credit: StewardMD.",
+    "alt": "Diagram illustrating pleuropulmonary blastoma and ovarian germ cell tumor associations."
+   }
+  }
+ ]
+}

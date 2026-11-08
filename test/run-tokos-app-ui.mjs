@@ -79,7 +79,9 @@ try {
   ok(await ev(`return !!document.querySelector('#smdTokos [data-act=sim][data-s=osce]');`) === true, "Test hub lists the OSCE link");
   await ev(`TOKOS.back(); return 1;`);
   ok(await until(`return !TOKOS.isOpen();`, 5000), "back() closes Tokós and returns to home");
-  ok(await ev(`var a=document.activeElement; return !!(a && a.matches && a.matches('.rnav-tile[data-act=tokos]'));`) === true, "closing Tokós returns focus to the tile that opened it");
+  const focusNow = await ev(`var a=document.activeElement; return JSON.stringify({ok: !!(a && a.matches && a.matches('.rnav-tile[data-act=tokos]')), tag: a && a.tagName, id: a && a.id, cls: a && String(a.className).slice(0, 80), act: a && a.getAttribute && a.getAttribute("data-act"), inDoc: !!(document.querySelector('.rnav-tile[data-act=tokos]'))});`);
+  const focusInfo = JSON.parse(focusNow);
+  ok(focusInfo.ok === true, "closing Tokós returns focus to the tile that opened it (focus on " + [focusInfo.tag, focusInfo.id, focusInfo.act, focusInfo.cls].filter(Boolean).join(" ") + "; tokos tile in DOM: " + focusInfo.inDoc + ")");
   ok(await ev(`return !document.getElementById("smdTokos") || !document.getElementById("smdTokos").offsetParent;`) === true, "overlay is gone");
   await ev(`SMD_openRoute("tokos"); return 1;`);
   ok(await until(`return TOKOS.isOpen();`, 5000), "default: stewardmd://tokos (SMD_openRoute) opens Tokós");
@@ -126,6 +128,8 @@ try {
   await shot("review-desk-tokos-case-390");
   await ev(`document.querySelector('#smdReview [data-rv-act="read"]').click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && TOKOS._st.view === "clinic" && TOKOS._st.session.list.length === 1 && TOKOS._st.session.list[0].c.id === "1031";`, 20000), "Read it opens Tokós straight into case 1031");
+  // The overlay springs in from translateY(100%); hit-test only once it has settled at the top of the viewport.
+  await until(`var r=document.getElementById("smdTokos").getBoundingClientRect(); return r.top === 0 && r.height > 0;`, 5000);
   ok(await ev(`var r=document.getElementById("smdTokos").getBoundingClientRect(), e=document.elementFromPoint(r.left+r.width/2, r.top+r.height/2); return !!(e && e.closest("#smdTokos"));`) === true, "Tokós sits above the Review Desk");
   await ev(`TOKOS.back(); TOKOS.back(); return 1;`);
   ok(await until(`return !TOKOS.isOpen() && document.querySelector('#smdReview.on') && getComputedStyle(document.getElementById('smdReview')).display !== 'none';`, 5000), "closing Tokós returns to the Review Desk");

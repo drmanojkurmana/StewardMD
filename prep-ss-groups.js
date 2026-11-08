@@ -36,6 +36,7 @@
      "includes": "Urology, Neurosurgery, Surgical Oncology and 5 more",
      "subjects": [
       "ss-biostatistics",
+      "ss-ctvs",
       "ss-neurosurgery",
       "ss-paediatric-surgery",
       "ss-plastic-surgery",
@@ -43,7 +44,6 @@
       "ss-general-surgery",
       "ss-surgical-oncology",
       "ss-ctvs",
-      "ss-paediatric-surgery",
       "ss-vascular-surgery"
      ]
     },
@@ -67,6 +67,7 @@
      "includes": "Neonatology, Paediatric Cardiology and 6 more",
      "subjects": [
       "ss-biostatistics",
+      "ss-paediatric-cardiology",
       "ss-neonatology",
       "ss-paediatric-cardiology",
       "ss-paediatric-neurology",
@@ -85,6 +86,8 @@
      "includes": "Gynaecological Oncology, Reproductive Medicine",
      "subjects": [
       "ss-biostatistics",
+      "ss-gynaecological-oncology",
+      "ss-reproductive-medicine",
       "ss-gynaecological-oncology",
       "ss-reproductive-medicine"
      ]

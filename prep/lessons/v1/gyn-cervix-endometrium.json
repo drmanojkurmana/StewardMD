@@ -3,11 +3,11 @@
  "module": "gyn-cervix-endometrium",
  "subject": "obstetrics-gynaecology",
  "title": "SS gyn-oncology: cervical and endometrial cancer staging and therapy",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
-   "tx": "**Cervical** (**HPV 16 18**, screening VIA Pap HPV, **CIN 1 observe 2 3 excise LEEP**, **FIGO 2018** IB size nodes **IIIC**, parametrial IIB, bladder IVA) with **surgery** (**radical hysterectomy Querleu-Morrow** A B C, **trachelectomy** fertility IB, **sentinel** bilateral ultrastaging, **ovarian transposition** radiation) treats early; **adenocarcinoma** Pap misses endocervical. Colposcopy Reid directs.",
-   "say": "HPV screens excise high grades: nodes stage IIIC radicals lettered fertility trachelectomies. Sizes parametria stage.",
+   "tx": "Cervical cancer follows persistent **high-risk HPV infection**, mainly types 16 and 18, and screening combines VIA, Pap smear, and HPV testing, with colposcopy guiding biopsy. CIN 1 is observed while CIN 2 and CIN 3 are excised by LEEP. **FIGO 2018 staging** places node-positive disease in IIIC, parametrial invasion in IIB, and bladder spread in IVA. Early cancers receive **radical hysterectomy** or fertility-sparing trachelectomy with sentinel node mapping, and ovaries are transposed before radiation.",
+   "say": "Persistent high-risk HPV infection causes most cervical cancers, so screening relies on VIA, Pap smears, and HPV testing in combination. Colposcopy examines suspicious areas closely and guides the biopsy that confirms the diagnosis. Low-grade CIN 1 lesions usually regress and need observation, whereas CIN 2 and CIN 3 require excision by LEEP. Staging follows the FIGO 2018 system, where lymph node spread means stage IIIC and parametrial or bladder spread raises the stage further. Early disease is treated by radical hysterectomy, while young patients may keep fertility through trachelectomy with sentinel node mapping.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/gyn-cervix-endometrium-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Chemoradiation** (**IB3 to IVA cisplatin weekly** with brachytherapy, **outback** debated, **fistula** exenteration, **palliation** bevacizumab pembrolizumab) with **recurrence** (**pelvic exenteration** central, **chemo** paclitaxel cisplatin bevacizumab, **immunotherapy** PD-L1) manages advanced; **pregnancy** (trachelectomy, neoadjuvant, delay selected) individualises. Counselling ovaries bowels bladder; fertility teams transpose ovaries before rays.",
-   "say": "Weekly cisplatin rays brachy cures locally advanced: central recurs exenterates bevacizumab palliates. Fistulae divert.",
+   "tx": "Locally advanced disease from stage IB3 to IVA receives **concurrent chemoradiation** with weekly cisplatin plus brachytherapy, which offers the best chance of cure. Central pelvic recurrence after radiation may be treated by **pelvic exenteration**, while distant spread receives chemotherapy such as paclitaxel with cisplatin and bevacizumab, and immunotherapy helps selected PD-L1 positive cases. **Pregnancy-associated disease** is individualised with options like trachelectomy, neoadjuvant chemotherapy, or careful delay in selected patients, and counselling covers bowel, bladder, ovarian, and fertility effects.",
+   "say": "Weekly cisplatin with radiation and brachytherapy cures many locally advanced cervical cancers from stage IB3 to IVA. When cancer returns in the centre of the pelvis after radiation, surgeons can remove the pelvic organs through exenteration in selected cases. Distant recurrence needs systemic treatment, so doctors combine paclitaxel with cisplatin and bevacizumab for palliation. Immunotherapy benefits patients whose tumours express PD-L1 and improves outcomes in advanced disease. Pregnancy complicates treatment decisions, therefore specialists individualise care and may use trachelectomy, neoadjuvant chemotherapy, or planned delay in carefully chosen patients.",
    "vis": null
   },
   {
-   "tx": "**Endometrial** (**type 1 estrogen** hyperplasia, **type 2 serous clear** p53, **ProMisE POLE MSI p53 NSMP**, Lynch screens; **FIGO 2023** molecular stages, postmenopausal bleeding biopsies, **TVS 4 mm** triages) with **surgery** (**hysterectomy BSO nodes sentinel**, **fertility progestin** grade 1 no invasion, **omentectomy** serous) stages; **obesity** risk counsels. Pipelle hysteroscopy directs.",
-   "say": "Bleeding biopsies molecular POLE MSI p53 stage 2023: hysterectomy nodes sentinel fertility progestins selected. Obesity oestrogen drives.",
+   "tx": "The paired views show an intrauterine **tandem with vaginal ovoids** delivering pear shaped isodose curves to the **cervix**. Point A near the target and point B at the pelvic sidewall guide dosing, while bladder and rectum sit as organs at risk. This matches the chemoradiation step where weekly cisplatin with **brachytherapy** cures locally advanced disease. In the exam, link the pear shape with intracavitary treatment and fistula risk with massive recurrence.",
+   "say": "These paired views present a tandem applicator inside the uterus with vaginal ovoids on either side of the cervix. Pear shaped dose curves cover the tumour while sparing nearby organs. Point A near the cervix and point B at the pelvic wall guide the dose prescription. The bladder in front and the rectum behind remain the organs at risk. This intracavitary boost follows external radiation and explains the high cure rate in locally advanced disease.",
+   "vis": {
+    "alt": "Sagittal and coronal pelvis showing tandem and ovoid applicator, pear isodose curves, cervix target, bladder rectum points.",
+    "ar": 1.3393,
+    "caption": "Cervical brachytherapy applicator with isodose distribution. Illustration: StewardMD original.",
+    "kind": "image",
+    "src": "v1/lessons/media/gyn-cervix-endometrium-gen1.webp"
+   }
+  },
+  {
+   "tx": "Endometrial cancer includes estrogen-driven **type 1 endometrioid tumours** linked with hyperplasia and obesity, and aggressive **type 2 cancers** such as serous and clear cell types with p53 changes. Molecular grouping by **ProMisE** into POLE, MSI, p53 abnormal, and NSMP classes now shapes FIGO 2023 staging and treatment. Postmenopausal bleeding needs biopsy, often by Pipelle or hysteroscopy, while TVS triages with a 4 mm threshold. Surgery means hysterectomy with bilateral salpingo-oophorectomy plus sentinel node mapping, fertility-sparing progestin suits grade 1 disease without invasion, and serous cancers need omentectomy.",
+   "say": "Type 1 endometrioid cancers grow under excess estrogen and often follow endometrial hyperplasia, while obesity strongly raises this risk. Type 2 cancers include serous and clear cell tumours, behave aggressively, and usually carry p53 abnormalities. Modern classification uses the ProMisE system, which divides tumours into POLE, MSI, p53 abnormal, and NSMP groups that guide treatment. Any postmenopausal bleeding deserves prompt biopsy by Pipelle sampling or hysteroscopy for evaluation. Standard surgery removes the uterus with both tubes and ovaries and maps sentinel nodes, although selected grade 1 patients without invasion may preserve fertility with progestin therapy.",
    "vis": null
   },
   {
-   "tx": "**Adjuvant** (**vault brachytherapy** intermediate, **EBRT** high intermediate LVSI, **chemo carboplatin paclitaxel** high risk serous, **hormonal** progestin ER, **HER2** serous trastuzumab, **immunotherapy** MSI pembrolizumab dostarlimab) with **surveillance** (vault cytology symptoms, **CA-125** selected, **recurrence** hormones radiation surgery) closes; **Lynch** (colonoscopy aspirin, family cascades) screens. Trials molecular enrol.",
-   "say": "Brachy intermediate rays LVSI chemo serous hormones ER HER2 MSI immunotherapies: Lynch colons families. Vaults watch.",
+   "tx": "Adjuvant treatment follows risk: vault **brachytherapy** suits intermediate risk, EBRT helps high-intermediate disease with LVSI, and **carboplatin with paclitaxel** covers high-risk and serous cancers. Hormonal progestin therapy helps selected ER positive cases, HER2 positive serous cancers may receive trastuzumab, and MSI tumours respond to **immunotherapy** with pembrolizumab or dostarlimab. Surveillance watches vault symptoms with selective CA-125 testing, while recurrence is managed by hormones, radiation, or surgery. Lynch syndrome needs colonoscopy, aspirin prevention, and family cascade screening, and molecular trials remain an option.",
+   "say": "Intermediate risk disease needs vault brachytherapy after surgery, while EBRT serves high-intermediate disease that shows LVSI. High-risk and serous cancers need chemotherapy, so oncologists prescribe carboplatin with paclitaxel for these cases. Hormone receptor positive recurrences improve with progestin therapy, HER2 positive serous tumours need trastuzumab, and MSI tumours improve well with immunotherapy. Follow-up focuses on vault symptoms with selective CA-125 testing, and doctors manage recurrence with hormones, radiation, or repeat surgery. Families with Lynch syndrome need regular colonoscopy with aspirin prevention and cascade screening of relatives.",
    "vis": {
     "kind": "table",
     "cols": [

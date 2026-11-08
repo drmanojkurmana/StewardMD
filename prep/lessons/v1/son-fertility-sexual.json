@@ -1,0 +1,298 @@
+{
+  "v": 1,
+  "module": "son-fertility-sexual",
+  "subject": "ss-medical-oncology",
+  "title": "Gonadotoxicity, fertility preservation and sexual function",
+  "minutes": 12,
+  "steps": [
+    {
+      "tx": "Gonadal toxicity (damage to the testes or ovaries) from several drugs given together is **additive**, so each agent adds its own share of damage. The **cumulative dose** of each drug matters more than its dose rate. Combination regimens show no evidence of **synergy**, so the risk can be estimated by adding up the individual doses.",
+      "say": "Gonadal toxicity, meaning damage to the testes or ovaries, from several drugs given together is additive. Each agent has its own share of damage. The cumulative dose of each drug matters more than its dose rate. Combination regimens show no evidence of synergy, so the risk can be estimated by adding up the individual doses."
+    },
+    {
+      "tx": "**Cyclophosphamide** alone needs 19 grams per square metre (g/m2) to cause lasting sterility in half of men. With a median **doxorubicin** dose of 450 milligrams per square metre, that falls to 15 grams per square metre. Clinicians also use a cyclophosphamide equivalent dose (CED), a single total that converts each alkylating agent into cyclophosphamide units. Azoospermia (no sperm in the semen) is uncommon when that total stays below 4000 mg/m2.",
+      "say": "Cyclophosphamide alone needs about nineteen grams per square metre to cause lasting sterility in half of men. With a median doxorubicin dose of four hundred and fifty milligrams per square metre, that falls to fifteen grams per square metre. Clinicians also use a cyclophosphamide equivalent dose, a single total that converts each alkylating agent into cyclophosphamide units. Azoospermia is uncommon when that total stays below four thousand milligrams per square metre.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Setting",
+          "Cyclophosphamide dose for lasting sterility in half of men"
+        ],
+        "rows": [
+          [
+            "Cyclophosphamide alone",
+            "19 grams per square metre"
+          ],
+          [
+            "With median doxorubicin 450 milligrams per square metre",
+            "15 grams per square metre"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Alkylating agents** are the most sterilizing class of chemotherapy, and high-dose **cisplatin** is also strongly toxic. **Chlorambucil** and **cyclophosphamide** given alone cause prolonged azoospermia, while **procarbazine** is also highly sterilizing. **Busulfan** is likely to cause azoospermia, but usually only alongside other drugs. By contrast, **methotrexate** and **vincristine** produce only temporary drops in sperm count at usual doses.",
+      "say": "Alkylating agents are the most sterilizing class of chemotherapy, and high-dose cisplatin is also strongly toxic. Chlorambucil and cyclophosphamide given alone cause prolonged azoospermia. Procarbazine is also highly sterilizing. Busulfan is likely to cause azoospermia, but usually only alongside other drugs. By contrast, methotrexate and vincristine produce only temporary drops in sperm count at usual doses. Dacarbazine is the one alkylating agent that belongs in that milder group.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Highly sterilizing (prolonged azoospermia)",
+          "points": [
+            "Cyclophosphamide",
+            "Chlorambucil",
+            "Procarbazine",
+            "Busulfan, usually with other agents",
+            "High-dose cisplatin"
+          ]
+        },
+        "right": {
+          "title": "Temporary drop in sperm count",
+          "points": [
+            "Methotrexate",
+            "Vincristine",
+            "Bleomycin",
+            "Dacarbazine, the only alkylating agent here"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Regimen choice has a large effect on the risk. Four to nine courses of **CyOPPd** (cyclophosphamide, vincristine, procarbazine and prednisone) caused prolonged azoospermia in 100 percent of men studied. By contrast, six courses of **ABVD** (doxorubicin, bleomycin, vinblastine and dacarbazine) with radiotherapy caused none, which shows how much the choice of regimen matters.",
+      "say": "Regimen choice has a large effect on the risk. Four to nine courses of CyOPPd, which combines cyclophosphamide, vincristine, procarbazine and prednisone, caused prolonged azoospermia in 100 percent of men studied. By contrast, six courses of ABVD, combining doxorubicin, bleomycin, vinblastine and dacarbazine with radiotherapy, caused none.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Regimen",
+          "Disease",
+          "Men with prolonged azoospermia"
+        ],
+        "rows": [
+          [
+            "CyOPPd, 4 to 9 courses",
+            "Hodgkin lymphoma",
+            "100 percent"
+          ],
+          [
+            "Busulfan plus cyclophosphamide before stem cell transplant",
+            "Leukemia or lymphoma",
+            "50 percent"
+          ],
+          [
+            "ABVD with radiotherapy, 6 courses",
+            "Hodgkin lymphoma",
+            "0 percent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Spermatogonia**, the dividing stem cells of sperm production, are destroyed by many cytotoxic drugs (cell-killing cancer drugs), which can leave the semen without sperm. **Leydig cells**, which make testosterone, are largely spared by most chemotherapy regimens, so puberty timing and testosterone levels usually stay normal.",
+      "say": "Spermatogonia are the dividing stem cells of sperm production, and many cytotoxic drugs, meaning cell-killing cancer drugs, destroy them. Losing them can leave the semen without sperm. Leydig cells make testosterone, and most chemotherapy regimens largely spare them. Puberty timing and testosterone levels therefore usually stay normal.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cytotoxic drugs"
+          },
+          {
+            "id": "b",
+            "label": "Spermatogonia lost"
+          },
+          {
+            "id": "c",
+            "label": "Leydig cells spared"
+          },
+          {
+            "id": "d",
+            "label": "Azoospermia"
+          },
+          {
+            "id": "e",
+            "label": "Luteinizing hormone rises, testosterone kept normal"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "kill dividing cells"
+          ],
+          [
+            "a",
+            "c",
+            "largely spared"
+          ],
+          [
+            "b",
+            "d",
+            "no sperm"
+          ],
+          [
+            "c",
+            "e",
+            "pituitary compensates"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "This section of a **seminiferous tubule** after chemotherapy shows that pattern. The **spermatogonia** along the basement membrane are depleted, leaving mainly Sertoli cells lining the tubule. Between the tubules, the **Leydig cells** remain, so testosterone production continues. A small inset of normal testis shows the full layers of developing germ cells for comparison.",
+      "say": "This section of a seminiferous tubule after chemotherapy shows the pattern just described. The spermatogonia along the basement membrane are depleted, and mainly Sertoli cells line the tubule. Between the tubules, the Leydig cells remain, so testosterone production continues. A small inset of normal testis shows the full layers of developing germ cells for comparison.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-fertility-sexual-gen2.webp",
+        "alt": "Histology of seminiferous tubule with depleted spermatogonia, remaining Sertoli cells and spared Leydig cells beside normal control inset",
+        "caption": "Testicular histology showing depleted spermatogonia with spared Leydig cells. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The exception is **busulfan** plus **cyclophosphamide** given before a stem cell transplant, which delays puberty in about 30% of boys. Radiation has to exceed 18 grays (Gy) before testicular androgen output is affected, and major damage needs more than 30 Gy.",
+      "say": "The exception is busulfan plus cyclophosphamide given before a stem cell transplant, which delays puberty in about thirty percent of boys. Radiation has to exceed eighteen grays before testicular androgen output is affected. Major damage needs more than thirty grays.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Exposure",
+          "Threshold"
+        ],
+        "rows": [
+          [
+            "Testicular radiation affecting androgen output",
+            "More than 18 Gy"
+          ],
+          [
+            "Major damage to testicular androgen output",
+            "More than 30 Gy"
+          ],
+          [
+            "Busulfan plus cyclophosphamide before transplant",
+            "Puberty delayed in about 30% of boys"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Embryo cryopreservation** (freezing fertilised embryos) is the most successful fertility preservation method for women, and it is preferred whenever it is viable. **Oocyte vitrification** (rapid freezing of eggs) suits a woman without a partner. A standard **in vitro fertilisation** (IVF) cycle takes 2 to 3 weeks and can delay treatment, but a **random-start** protocol, which starts stimulation at presentation, cuts the wait to about 12 days.",
+      "say": "Embryo cryopreservation, which means freezing fertilised embryos, is the most successful fertility preservation method for women. It is preferred whenever it is viable, such as when a partner or donor sperm is available. Oocyte vitrification, which means rapid freezing of eggs, suits a woman without a partner. A standard IVF cycle takes two to three weeks and can delay cancer treatment. A random-start protocol starts stimulation at presentation and shortens that wait to about twelve days.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Method",
+          "Best fit",
+          "Time needed"
+        ],
+        "rows": [
+          [
+            "Embryo cryopreservation",
+            "Partner or donor sperm available",
+            "One IVF cycle, 2 to 3 weeks"
+          ],
+          [
+            "Oocyte vitrification",
+            "Woman without a partner",
+            "12 days to 6 weeks without random-start"
+          ],
+          [
+            "Ovarian tissue cryopreservation",
+            "Girls before puberty",
+            "No ovarian stimulation needed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ovarian tissue cryopreservation** removes strips of ovary containing many **primordial follicles** (immature egg reserves), freezes thin slices, and grafts them back later. No **ovarian stimulation** is needed, so the method suits girls who have not reached puberty. Its main drawback is the possibility of returning malignant (cancerous) cells to the patient, a concern that matters most in **leukemia**.",
+      "say": "Ovarian tissue cryopreservation removes strips of ovary containing many primordial follicles, freezes thin slices, and grafts them back later. No ovarian stimulation is needed, so the method suits girls who have not reached puberty. Its main drawback is the possibility of returning malignant cells to the patient. Leukemia is where that concern is greatest.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ovarian tissue cryopreservation",
+          "points": [
+            "No ovarian stimulation needed",
+            "Suits girls before puberty",
+            "Surgical removal of ovarian tissue",
+            "Concern about returning malignant cells"
+          ]
+        },
+        "right": {
+          "title": "Oocyte or embryo cryopreservation",
+          "points": [
+            "Hormone stimulation first",
+            "One IVF cycle takes 2 to 3 weeks",
+            "Embryo banking is the most successful option",
+            "Established routine option for adults"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The three routes for women are set side by side. **Embryo cryopreservation** needs ovarian stimulation, egg retrieval and fertilisation before freezing, and it is the most successful. **Oocyte vitrification** freezes unfertilised eggs after the same stimulation, suiting a woman without a partner. **Ovarian tissue cryopreservation** freezes ovarian strips with no stimulation, so it suits girls before puberty.",
+      "say": "Here the three routes for women are set side by side. Embryo cryopreservation needs ovarian stimulation, egg retrieval and fertilisation before freezing, and it is the most successful. Oocyte vitrification freezes unfertilised eggs after the same stimulation, which suits a woman without a partner. Ovarian tissue cryopreservation is used to freeze strips of ovary without any stimulation, so it suits girls before puberty.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-fertility-sexual-gen1.webp",
+        "alt": "Three panel diagram comparing embryo cryopreservation, oocyte vitrification and ovarian tissue cryopreservation steps",
+        "caption": "Embryo, oocyte and ovarian tissue fertility preservation pathways compared. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "**Gonadotropin-releasing hormone (GnRH)** analogs, drugs that copy or block this hormone, have uncertain value for protecting the ovary during chemotherapy. Human studies have not shown consistent benefit across cancer treatments. Their clearer role is **menstrual suppression**, which can limit heavy bleeding in blood cancers. Guidance from the American Society of Clinical Oncology (ASCO) in 2025 says they should not replace established methods, but they may be offered as an **adjunct** for women with breast cancer.",
+      "say": "Gonadotropin-releasing hormone analogs have uncertain value for protecting the ovary during chemotherapy. Human studies have not shown consistent benefit across cancer treatments. Most studies also fail to support hormone treatment in girls before their first period. Their clearer role is suppressing menstruation, which can limit heavy bleeding in blood cancers. Guidance from the American Society of Clinical Oncology in 2025 says they should not replace established methods, but they may be offered as an adjunct for women with breast cancer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Supported role",
+          "points": [
+            "Menstrual suppression during treatment",
+            "Adjunct for women with breast cancer",
+            "Urgent therapy where menstrual bleeding is heavy"
+          ]
+        },
+        "right": {
+          "title": "Not a substitute",
+          "points": [
+            "Ovarian protection not consistently shown",
+            "Cannot replace oocyte or embryo banking",
+            "Girls before first period: no clear benefit"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **International Index of Erectile Function** (IIEF) is a validated, self-completed scale of sexual function after prostate cancer treatment, including surgery. It takes 5 to 10 minutes, which makes it practical in clinic. The abridged **Sexual Health Inventory for Men** (SHIM) is a validated short form of the IIEF, used to grade **erectile dysfunction** (inability to get or keep an erection) and to track treatment response.",
+      "say": "The International Index of Erectile Function is a validated, self-completed scale of sexual function after prostate cancer treatment, including surgery. It takes five to ten minutes, which makes it practical in a clinic. The full scale has fifteen items across five areas, and the abridged Sexual Health Inventory for Men uses five of them. Clinicians use that short form to grade erectile dysfunction and to track how well treatment works.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tool",
+          "Length",
+          "Main use"
+        ],
+        "rows": [
+          [
+            "IIEF",
+            "Self-completed, 15 items, 5 to 10 minutes",
+            "Sexual function after prostate cancer"
+          ],
+          [
+            "SHIM",
+            "Abridged, 5 items, validated short form",
+            "Severity of erectile dysfunction and treatment response"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "refs": [
+    "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology, 12th edition",
+    "Harrison's Principles of Internal Medicine, 22nd edition",
+    "Fertility Preservation in People With Cancer: ASCO Guideline Update. J Clin Oncol. 2025",
+    "Green DM, et al. The cyclophosphamide equivalent dose as an approach for quantifying alkylating agent exposure. Pediatr Blood Cancer. 2014",
+    "Rosen RC, et al. The International Index of Erectile Function (IIEF): a multidimensional scale for assessment of erectile dysfunction. Urology. 1997",
+    "Rosen RC, et al. Development and evaluation of an abridged, 5-item version of the IIEF-5 as a diagnostic tool for erectile dysfunction. Int J Impot Res. 1999"
+  ],
+  "gen": "AI"
+}

@@ -35,7 +35,8 @@
   /* ================= pure ================= */
   var SPEEDS = [0.75, 1, 1.25, 1.5];
   var XP_STEP = 10;
-  var LIM = { steps: [4, 10], txWords: [40, 90], sayWords: 120, cols: [2, 5], rows: [2, 8], nodes: [3, 8], perLevel: 3, points: [1, 6] };
+  // 12: up to 10 teaching steps plus 2 image steps (owner 2026-11-07: add images, never trim lessons)
+  var LIM = { steps: [4, 12], txWords: [40, 90], sayWords: 120, cols: [2, 5], rows: [2, 8], nodes: [3, 8], perLevel: 3, points: [1, 6] };
   var FIG_RE = /^prep\/figures\/[a-z0-9-]{2,60}\.html$/;   // an interactive figure built with the Anima kit (prep/figures/<name>.html and <name>-light.html)
   var IMG_RE = /^(?!.*\.\.)[a-z0-9][a-z0-9_\/.-]*\.(?:webp|png|jpe?g|svg)$/i;
 
@@ -148,7 +149,7 @@
     var p = [];
     if (!l || l.v !== 1) return ["not a v1 lesson"];
     if (!nonEmpty(l.module) || !nonEmpty(l.title)) p.push("module and title are required");
-    if (!Array.isArray(l.steps) || !inRange(l.steps.length, LIM.steps)) p.push("a lesson has 4 to 10 steps");
+    if (!Array.isArray(l.steps) || !inRange(l.steps.length, LIM.steps)) p.push("a lesson has 4 to 12 steps");
     else l.steps.forEach(function (s, i) { checkStep(s).forEach(function (x) { p.push("step " + (i + 1) + ": " + x); }); });
     if (!Array.isArray(l.quiz)) p.push("quiz must be a list of bank item ids");
     if (l.gen !== "AI" && l.gen !== "hand") p.push('gen must be "AI" or "hand"');
@@ -243,9 +244,18 @@
   }
   /* subjectLessons(ix, topics) -> [{ mid, topic, list }] for a subject, in the subject's module order: each module that
      has a lesson, with its lessons (lessonsFor). */
-  function subjectLessons(ix, topics) {
-    var out = [];
-    (topics || []).forEach(function (t) { var list = lessonsFor(ix, t.id); if (list.length) out.push({ mid: t.id, topic: t, list: list }); });
+  /* sections (the subject's taxonomy sections, optional): modules come in section order and each entry carries its
+     section (sec), so a module that has a lesson but is not yet in the bank's topic list still shows (owner 2026-11-07:
+     Learn showed 91 of 133 Medical Oncology lessons) and Learn can group lessons by system. */
+  function subjectLessons(ix, topics, sections) {
+    var out = [], seen = {}, byId = {};
+    (topics || []).forEach(function (t) { byId[t.id] = t; });
+    var add = function (t, sec) {
+      if (!t || seen[t.id]) return; seen[t.id] = 1;
+      var list = lessonsFor(ix, t.id); if (list.length) out.push({ mid: t.id, topic: t, list: list, sec: sec || null });
+    };
+    (sections || []).forEach(function (sc) { (sc.modules || []).forEach(function (m) { add(byId[m.id] || { id: m.id, title: m.name }, sc); }); });
+    (topics || []).forEach(function (t) { add(t, null); });
     return out;
   }
   /* moduleOf(key, meta) -> the module a lesson belongs to. */
@@ -367,7 +377,7 @@
   }
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
-    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
+    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, groups: groups, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
     XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage, sayText: sayText, sayChunks: sayChunks, stepSentences: stepSentences, alignSay: alignSay, voiceScore: voiceScore, bestVoice: bestVoice };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -510,16 +520,25 @@
       if (n >= chunks.length) { done(); return; }
       var part = chunks[n++], pause = function () { G.setTimeout(next, 160); };
       if (onPiece) { try { onPiece(n - 1); } catch (e) {} }
+      // The phone's own voice: the reader when the natural voice is off, and the stand-in for a sentence it fails on.
+      var system = function () {
+        if (tok !== L.tok) return;
+        try {
+          var P = plugin();
+          if (P) { nativeVoice(P).then(function (vi) { if (tok !== L.tok) return; var o = { text: part, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return P.speak(o); }).then(pause, fail); return; }
+          var u = new G.SpeechSynthesisUtterance(part), wv = webVoice();
+          u.lang = "en-IN"; u.rate = rate; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
+          u.onend = pause; u.onerror = fail;
+          G.speechSynthesis.speak(u);
+        } catch (e) { fail(); }
+      };
       try {
         var V = G.PREP_VOICE;
-        if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, fail); return; }
-        var P = plugin();
-        if (P) { nativeVoice(P).then(function (vi) { if (tok !== L.tok) return; var o = { text: part, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return P.speak(o); }).then(pause, fail); return; }
-        var u = new G.SpeechSynthesisUtterance(part), wv = webVoice();
-        u.lang = "en-IN"; u.rate = rate; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
-        u.onend = pause; u.onerror = fail;
-        G.speechSynthesis.speak(u);
-      } catch (e) { L.playing = false; }
+        // A sentence the natural voice cannot read (synthesis or playback fails on the phone) is read by the phone's
+        // voice and the lesson reads on; before this, one such sentence stopped the narration with no word (owner 2026-11-08).
+        if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, system); return; }
+      } catch (e) {}
+      system();
     };
     if (!chunks.length) { done(); return; }
     next();
@@ -1021,7 +1040,7 @@
     host = h;
     if (!wrap) return;
     index().then(function (ix) {
-      var mods = subjectLessons(ix, topics), n = 0;
+      var sb = host.subjectById ? host.subjectById(sid) : null, mods = subjectLessons(ix, topics, sb && sb.sections), n = 0;
       mods.forEach(function (m) { n += m.list.length; });
       if (!n || !wrap.isConnected) return;
       if (wrap.querySelector("[data-act=l-subject]")) { wrap.hidden = false; return; }
@@ -1033,19 +1052,30 @@
       wrap.hidden = false;
     });
   }
-  /* openSubject(sid, h): the subject's lessons, grouped by module in module order. */
+  /* groups(mods) -> [{ title, n, mods }]: consecutive modules of one taxonomy section form one group. */
+  function groups(mods) {
+    var out = [];
+    (mods || []).forEach(function (m) {
+      var last = out[out.length - 1];
+      if (m.sec && last && last.sec === m.sec) { last.mods.push(m); last.n += m.list.length; return; }
+      out.push({ sec: m.sec, title: m.sec ? m.sec.name : m.topic.title, n: m.list.length, mods: [m] });
+    });
+    return out;
+  }
+  /* openSubject(sid, h): the subject's lessons, grouped by system (taxonomy section), in module order. */
   function openSubject(sid, h) {
     host = h;
     var view = function () {
       var ixs = host.ix ? host.ix() : {}, topics = (ixs[sid] && ixs[sid].topics) || [], sb = host.subjectById(sid), name = sb ? host.tx(sb.name) : "";
       index().then(function (ix) {
         if (host.stackTop() !== view) return;
-        var mods = subjectLessons(ix, topics), s = store(), n = 0, done = 0;
+        var mods = subjectLessons(ix, topics, sb && sb.sections), s = store(), n = 0, done = 0;
         mods.forEach(function (m) { m.list.forEach(function (x) { n++; if (s.ls[x[0]] && s.ls[x[0]].done) done++; }); });
         host.paint(host.bar("Learn", escH(name), "back") + '<div class="pn-body pn-lsn-all">' +
           (n ? '<p class="pn-mut pn-lsn-sum">' + n + (n === 1 ? " lesson" : " lessons") + " in " + mods.length + (mods.length === 1 ? " module" : " modules") + (done ? ", " + done + " finished" : "") + ". Each is a few short steps you can listen to, then quick questions.</p>" : '<p class="pn-empty">No lessons for this subject yet.</p>') +
-          mods.map(function (m) {
-            return '<section class="pn-lsn-mod"><h2 class="pn-sec">' + host.tx(m.topic.title) + '</h2><div class="pn-group">' + m.list.map(function (x) { return rowHtml(sid, m.mid, x[0], x[1], s, x[1].title || "Lesson"); }).join("") + "</div></section>";
+          groups(mods).map(function (g) {
+            // One heading per system (taxonomy section) with all its lessons; a module outside every section keeps its own heading.
+            return '<section class="pn-lsn-mod"><h2 class="pn-sec">' + host.tx(g.title) + (g.n > 1 ? ' <small class="pn-mut">' + g.n + " lessons</small>" : "") + '</h2><div class="pn-group">' + g.mods.map(function (m) { return m.list.map(function (x) { return rowHtml(sid, m.mid, x[0], x[1], s, x[1].title || host.tx(m.topic.title) || "Lesson"); }).join(""); }).join("") + "</div></section>";
           }).join("") + "</div>");
       });
     };

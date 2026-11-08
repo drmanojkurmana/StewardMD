@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sob-maternal-physiology",
+  "title": "Maternal Cardiovascular, Hematologic, Respiratory, and Renal Adaptations to Pregnancy",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 4 (Maternal Physiology)",
+    "Ten Teachers Gynaecology 21e",
+    "ACOG Practice Bulletin on Critical Care in Pregnancy"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Normal pregnancy triggers profound maternal cardiovascular adaptations to supply the expanding uteroplacental bed. Maternal cardiac output increases forty to fifty percent above baseline by twenty to twenty four weeks gestation. An early rise in stroke volume initiates this output expansion, and later gestational gains are maintained by an increased maternal resting heart rate.",
+      "tx": "Maternal **cardiac output** increases 40 to 50 percent above baseline by 20 to 24 weeks gestation to support uteroplacental perfusion. This hemodynamic expansion is driven initially by an augmented **stroke volume**, whereas progressive increases in maternal **resting heart rate** of 15 to 20 beats per minute sustain output in late pregnancy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/female-cycle-ovarian-hormones-menopause-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Maternal systemic endocrinology and cyclical steroid actions. Credit: StewardMD.",
+        "alt": "Maternal endocrine and systemic physiological adaptations during gestation."
+      }
+    },
+    {
+      "say": "Systemic vascular resistance falls dramatically during normal gestation due to the vasodilatory actions of nitric oxide and progesterone. This smooth muscle relaxation causes maternal diastolic blood pressure to decline, reaching its nadir between twenty four and twenty eight weeks before gradually returning toward baseline near term.",
+      "tx": "Systemic vascular resistance falls markedly under the influence of endothelial **nitric oxide** and elevated circulating **progesterone**, which induce widespread vascular smooth muscle relaxation. Consequently, maternal **diastolic blood pressure** reaches a physiologic nadir at 24 to 28 weeks before recovering toward non-pregnant baseline values near term.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Endothelial nitric oxide and progesterone rise"
+          },
+          {
+            "id": "b",
+            "label": "Systemic vascular smooth muscle relaxation"
+          },
+          {
+            "id": "c",
+            "label": "Systemic vascular resistance falls substantially"
+          },
+          {
+            "id": "d",
+            "label": "Diastolic blood pressure nadir at 24 to 28 weeks"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Maternal plasma volume expands forty five to fifty percent while total red cell mass increases by only twenty to thirty percent. This disproportionate fluid retention results in physiologic hemodilution, commonly referred to as physiologic anaemia of pregnancy. The lower limit of normal hemoglobin is ten point five grams per decilitre during the second trimester.",
+      "tx": "Maternal **plasma volume** expands 45 to 50 percent while erythrocyte mass increases by only 20 to 30 percent, generating marked **physiologic hemodilution**. Because intravascular fluid expansion outpaces erythropoiesis, the lower reference limit for normal maternal hemoglobin drops to **10.5 g/dL** during the second trimester.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hematologic Parameter",
+          "Gestational Change",
+          "Clinical Definition"
+        ],
+        "rows": [
+          [
+            "Plasma volume",
+            "Increases 45 to 50 percent",
+            "Hormonally driven sodium and water retention"
+          ],
+          [
+            "Red cell mass",
+            "Increases 20 to 30 percent",
+            "Accelerated erythropoiesis mediated by erythropoietin"
+          ],
+          [
+            "Second trimester Hb",
+            "Nadir at 10.5 g/dL",
+            "Physiologic hemodilution rather than true deficiency"
+          ],
+          [
+            "Term Hb threshold",
+            "11.0 g/dL minimum",
+            "Anemia diagnosed if hemoglobin falls below cut-off"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Renal blood flow and glomerular filtration rate increase by fifty percent beginning early in the first trimester. Enhanced filtration accelerates the clearance of urea and creatinine, lowering normal serum creatinine to zero point four to zero point six milligrams per decilitre. A serum creatinine above zero point eight indicates significant renal impairment.",
+      "tx": "Renal blood flow and **glomerular filtration rate** increase by 50 percent beginning in early pregnancy. Hyperfiltration lowers normal maternal **serum creatinine** to 0.4 to 0.6 mg/dL. Consequently, a serum creatinine level exceeding **0.8 mg/dL** is distinctly abnormal in gestation and indicates significant underlying renal impairment.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Pregnancy Renal Values",
+          "points": [
+            "Glomerular filtration rate up 50 percent",
+            "Serum creatinine 0.4 to 0.6 mg/dL",
+            "Enhanced clearance of urea and creatinine",
+            "Physiologic mild hydronephrosis on right"
+          ]
+        },
+        "right": {
+          "title": "Renal Impairment Thresholds",
+          "points": [
+            "Serum creatinine above 0.8 mg/dL",
+            "Urea nitrogen above 14 mg/dL",
+            "New-onset pathologic proteinuria",
+            "Oliguria below 0.5 mL/kg/h"
+          ]
+        }
+      }
+    },
+    {
+      "say": "High circulating levels of progesterone directly stimulate the maternal medullary respiratory centre to increase minute ventilation by forty percent. This hyperventilation occurs predominantly through increased tidal volume rather than respiratory rate. The resulting carbon dioxide washout produces a compensated respiratory alkalosis with an arterial partial pressure of twenty eight to thirty two millimetres of mercury.",
+      "tx": "Elevated **progesterone** acts directly on the medullary respiratory center to augment **minute ventilation** by 40 percent, achieved primarily through an increased tidal volume. The ensuing carbon dioxide washout establishes a physiologic **compensated respiratory alkalosis**, maintaining maternal arterial PaCO2 between 28 and 32 mmHg.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Progesterone stimulates medullary respiratory center"
+          },
+          {
+            "id": "b",
+            "label": "Tidal volume expands with unchanged respiratory rate"
+          },
+          {
+            "id": "c",
+            "label": "Minute ventilation rises by 40 percent above baseline"
+          },
+          {
+            "id": "d",
+            "label": "Compensated respiratory alkalosis with PaCO2 28 to 32 mmHg"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pregnancy induces a prothrombotic state that evolved to protect against fatal peripartum hemorrhage. Maternal hepatic synthesis of fibrinogen, factor seven, factor eight, factor nine, and factor ten increases substantially. Meanwhile, levels of anticoagulant protein S decrease and acquired activated protein C resistance develops.",
+      "tx": "Pregnancy induces a physiological **hypercoagulability** to guard against postpartum hemorrhage. Circulating **fibrinogen** doubles alongside dramatic surges in factors VII, VIII, IX, and X. Simultaneously, natural anticoagulant activity falls through **decreased protein S** levels and the emergence of acquired activated protein C resistance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Coagulation Component",
+          "Gestational Direction",
+          "Physiological Impact"
+        ],
+        "rows": [
+          [
+            "Fibrinogen (Factor I)",
+            "Elevated to 400 to 600 mg/dL",
+            "Provides substrate for rapid clot formation at placental separation"
+          ],
+          [
+            "Factors VII, VIII, IX, X",
+            "Markedly increased",
+            "Accelerates extrinsic and intrinsic cascade activation"
+          ],
+          [
+            "Free Protein S",
+            "Substantially reduced",
+            "Diminishes endogenous inhibition of activated factor V"
+          ],
+          [
+            "Protein C resistance",
+            "Acquired resistance develops",
+            "Elevates thromboembolic risk 5 to 6 fold across pregnancy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Placental estrogen stimulates a twofold increase in maternal hepatic thyroxine binding globulin production. This elevation increases circulating total triiodothyronine and total thyroxine. Crucially, free triiodothyronine and free thyroxine remain normal throughout gestation, preserving maternal euthyroid function.",
+      "tx": "High maternal estrogen concentrations induce hepatic synthesis of **thyroxine-binding globulin**, doubling its serum concentration. This carrier protein surge elevates **total T3 and total T4** levels in maternal circulation. However, concentrations of **free T3 and free T4** remain physiologically normal, ensuring maternal euthyroidism.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+        "ar": 1.3333,
+        "caption": "Maternal systemic examination and thyroid inspection under estrogen stimulation. Credit: StewardMD.",
+        "alt": "Maternal examination during pregnancy evaluating systemic and thyroid status."
+      }
+    },
+    {
+      "say": "Progesterone relaxes the lower esophageal sphincter, promoting gastroesophageal reflux and lowering gastric barrier pressure. Active labour further delays gastric emptying, especially following opioid administration. These physiologic changes significantly heighten the risk of gastric acid aspiration, known as Mendelson syndrome, during general anaesthesia.",
+      "tx": "Progesterone-mediated relaxation of the **gastroesophageal sphincter** promotes acid reflux, while gastric motility and emptying slow during active labour. These alterations increase gastric residual volume, substantially elevating the danger of pulmonary acid aspiration, known as **Mendelson syndrome**, whenever **general anaesthesia** is administered for emergency operative delivery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gastrointestinal Physiological Changes",
+          "points": [
+            "Relaxed lower esophageal sphincter",
+            "Reduced gastroesophageal barrier pressure elevates pulmonary aspiration risk",
+            "Gastric emptying delayed in active labour",
+            "Opioid analgesia further retards peristalsis"
+          ]
+        },
+        "right": {
+          "title": "Aspiration Prevention Protocol",
+          "points": [
+            "Routine non-particulate antacid (sodium citrate)",
+            "H2-receptor antagonist or proton pump inhibitor",
+            "Rapid sequence induction with cricoid pressure",
+            "Endotracheal intubation with cuffed tube"
+          ]
+        }
+      }
+    }
+  ]
+}

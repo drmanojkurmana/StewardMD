@@ -1,0 +1,218 @@
+{
+  "v": 1,
+  "module": "srm-pgt-genetics",
+  "title": "Preimplantation Genetic Testing and Reproductive Genetics",
+  "subject": "ss-reproductive-medicine",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Gardner Textbook of Assisted Reproductive Technologies 5e Ch 20",
+    "ESHRE PGT Consortium Good Practice Guidelines",
+    "Preimplantation Genetic Diagnosis International Society (PGDIS) Position Statement"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Preimplantation genetic testing for aneuploidy evaluates numerical and segmental chromosomal errors across all twenty-four chromosome pairs. Modern embryology laboratories utilize next-generation sequencing platforms capable of detecting whole-chromosome trisomies, monosomies, and structural gains or losses.",
+      "tx": "Contemporary **PGT-A** (preimplantation genetic testing for aneuploidy) comprehensively interrogates all **24 chromosomes** comprising 22 autosomes and the sex chromosomes. High-throughput **next-generation sequencing** (NGS) platforms identify numerical aneuploidies, segmental imbalances, and sub-chromosomal deletions from minute embryonic DNA inputs, prioritizing euploid embryos for transfer.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-inheritance-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Cytogenetic karyotype analysis identifying chromosomal aneuploidies. Credit: StewardMD.",
+        "alt": "Karyotype showing chromosomal pairs and aneuploidy identification."
+      }
+    },
+    {
+      "say": "Laser-assisted trophectoderm biopsy at the day 5 or 6 blastocyst stage has superseded day 3 cleavage-stage biopsy. Sampling five to ten extra-embryonic trophectoderm cells spares the inner cell mass, providing abundant DNA with negligible harm to implantation potential.",
+      "tx": "Executing a **trophectoderm biopsy** at the **day 5 blastocyst** (or day 6) stage samples 5 to 10 prospective placental cells opposite the **inner cell mass**. Compared to historic day 3 single-cell biopsy, multi-cell trophectoderm extraction yields superior DNA amplification without diminishing fetal developmental competence or implantation rates.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Culture embryo to expanded day 5 or 6 blastocyst stage with herniating trophectoderm"
+          },
+          {
+            "id": "b",
+            "label": "Laser-assisted dissection of 5 to 10 extra-embryonic trophectoderm cells"
+          },
+          {
+            "id": "c",
+            "label": "Cryopreserve blastocyst by vitrification while DNA undergoes NGS analysis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Preimplantation testing for monogenic disorders targets specific inherited gene mutations in couples at high genetic risk. Polymerase chain reaction amplification paired with short tandem repeat linkage analysis distinguishes mutant alleles from normal wild-type sequences.",
+      "tx": "Couples harboring known mendelian risks utilize **PGT-M** to avoid transmission of severe **monogenic disorders** such as cystic fibrosis, beta-thalassemia, or Huntington disease. Diagnostic protocols utilize multiplex polymerase chain reaction coupled with polymorphic marker **linkage analysis** to identify affected, carrier, and unaffected wild-type embryos.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "PGT Category",
+          "Clinical Indication",
+          "Analytical Method"
+        ],
+        "rows": [
+          [
+            "PGT-A (Aneuploidy)",
+            "Advanced maternal age, recurrent loss, RIF",
+            "Next-generation sequencing across 24 chromosomes"
+          ],
+          [
+            "PGT-M (Monogenic)",
+            "Single-gene mendelian risks (CF, thalassemia)",
+            "Targeted mutation detection with STR linkage analysis"
+          ],
+          [
+            "PGT-SR (Structural)",
+            "Parental balanced translocations, inversions",
+            "High-resolution NGS or targeted array-CGH"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Preimplantation genetic testing for structural rearrangements identifies unbalanced genomic complements resulting from parental balanced translocations. NGS protocols distinguish embryos inheriting balanced or normal genomes from those with lethal unbalanced duplications or deletions.",
+      "tx": "Carriers of parental balanced rearrangements require **PGT-SR** to screen out unbalanced gametic segregation products. Testing identifies unbalanced segmental gains or losses arising from a parental **reciprocal translocation** or **Robertsonian translocation**, which otherwise precipitate recurrent spontaneous miscarriages or severe congenital anomalies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reciprocal Translocation",
+          "points": [
+            "Exchange between non-homologous chromosome arms without centromere loss",
+            "Quadrivalent formation during meiotic prophase yields multiple segregation types",
+            "Generates partial duplications and deletions in unbalanced embryos"
+          ]
+        },
+        "right": {
+          "title": "Robertsonian Translocation",
+          "points": [
+            "Fusion of acrocentric chromosomes (13, 14, 15, 21, 22) at centromeres",
+            "Trivalent pairing yields alternate (normal/balanced) or adjacent segregants",
+            "Carries high risks of complete trisomy 21 (Down) or trisomy 13 (Patau)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Embryonic mosaicism describes the presence of genetically distinct cell lineages within the same blastocyst. The Preimplantation Genetic Diagnosis International Society categorizes blastocysts into low-level mosaicism between twenty and fifty percent abnormal cells, and high-level mosaicism exceeding fifty percent.",
+      "tx": "Biopsies frequently identify **embryonic mosaicism**, characterized by two or more distinct cytogenetic **cell lines** within the blastocyst. International guidelines define a **low-level mosaic** as harboring 20 to 50 percent aneuploid cells and high-level mosaicism as exceeding 50 percent, allowing prioritized transfer when euploid embryos are absent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "PGDIS Mosaic Staging",
+          "Aneuploid Cell Proportion",
+          "Clinical Transfer Recommendation"
+        ],
+        "rows": [
+          [
+            "Euploid",
+            "< 20 percent aneuploid cells",
+            "First priority for single blastocyst transfer"
+          ],
+          [
+            "Low-level mosaic",
+            "20 to 50 percent aneuploid cells",
+            "Second priority; acceptable with detailed genetic counseling"
+          ],
+          [
+            "High-level mosaic",
+            "> 50 percent aneuploid cells",
+            "Lower priority; reduced implantation and elevated loss risk"
+          ],
+          [
+            "Full Aneuploid",
+            "> 80 percent aneuploid cells",
+            "Not recommended for clinical embryo transfer"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Rigorous workup prior to single-gene PGT requires molecular testing of parental carriers and affected family members. Establishing the correct phase of linked polymorphic markers prevents misdiagnosis caused by preferential allele dropout during single-cell amplification.",
+      "tx": "A meticulous **pre-PGT workup** testing prospective parents and affected relatives is mandatory before commencing PGT-M. Establishing definitive **haplotype phasing** across flanking polymorphic markers prevents diagnostic false-negatives arising from **allele dropout**, where preferential enzymatic amplification of one parental allele obscures the mutant sequence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Collect genomic DNA from prospective parents and affected child or grandparent"
+          },
+          {
+            "id": "b",
+            "label": "Construct informative flanking STR polymorphic marker haplotypes"
+          },
+          {
+            "id": "c",
+            "label": "Confirm marker phasing to eliminate diagnostic false negatives from allele dropout"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Non-invasive preimplantation genetic testing analyzes cell-free embryonic DNA released into the culture media. By collecting spent blastocyst medium, clinicians can assess chromosomal ploidy without performing physical laser manipulation or cellular excision.",
+      "tx": "Emerging **non-invasive PGT** platforms extract and amplify **cell-free DNA** shed by the expanding embryo into the surrounding **spent media**. By avoiding micro-needle perforation and laser pulses, non-invasive testing offers potential whole-embryo chromosomal assessment, although maternal and cumulus cellular contamination remains an active technical challenge.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/bio-genetics-gen1.webp",
+        "ar": 1.3333,
+        "caption": "Cytogenetic and molecular genetic analysis platforms. Credit: StewardMD.",
+        "alt": "Chromosomal analysis and cytogenetic banding representation."
+      }
+    },
+    {
+      "say": "Preimplantation genetic testing cannot replace formal prenatal diagnostic verification during established pregnancy. Invasive testing via chorionic villus sampling or amniocentesis remains recommended to confirm embryonic findings and exclude residual mosaicism.",
+      "tx": "Clinicians must emphasize that PGT serves as a preimplantation screening tool rather than definitive **prenatal diagnosis**. International obstetrics bodies strongly recommend confirmatory invasive testing via **amniocentesis** or **chorionic villus sampling** (CVS) in all pregnancies conceived after PGT to definitively verify fetal chromosomal complement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PGT Screening (In Vitro)",
+          "points": [
+            "Biopsies 5 to 10 trophectoderm cells prior to embryo implantation",
+            "Risk of sampling error in the presence of confined placental mosaicism",
+            "Directs selection of unaffected or euploid blastocysts for transfer"
+          ]
+        },
+        "right": {
+          "title": "Confirmatory Prenatal Diagnosis",
+          "points": [
+            "Chorionic villus sampling (11-13 weeks) or amniocentesis (15-20 weeks)",
+            "Samples definitive fetal amniocytes or chorionic tissue directly",
+            "Provides gold standard karyotyping and microarray verification"
+          ]
+        }
+      }
+    }
+  ]
+}

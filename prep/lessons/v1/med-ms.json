@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-ms",
- "subject": "medicine",
- "title": "Multiple sclerosis and demyelination",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**relapsing** optic neuritis vision colour, **diplopia** INO nystagmus vertigo, **Lhermitte** neck electric legs, **weakness** spastic paraparesis falls, **bladder** urgency retention constipation, **fatigue** heat worsens Uhthoff, **NMO** bilateral optic longitudinally extensive, **ADEM** post-viral child encephalopathy) with **viva** (**demyelinated** scanning dysarthric, **neuritic** colour-blind painful) profiles; **dissemination** (time space counts) tallies. Myelins strip.",
-   "say": "Relapsings diplopias Lhermittes weaknesses is history: bladders urge fatigues heat NMOs blind ADEMs sicken disseminations tally demyelinateds scan neuritics dim colours fade. Nerves bare.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**vision** acuity colour RAPD disc, **INO** adduction nystagmus abducting, **speech** scanning staccato dysarthria, **limbs** spastic hyperreflexic Babinski, **cerebellar** past-pointing rebound gait, **sensory** Lhermitte vibration levels, **bladder** residual scans, **fatigue** heat tests) with **bedside** (**colour** Ishihara reds, **gait** tandem falls, **urodynamics** retention plans) colours; **optic** (disc swollen pale) scopes. Coats fray.",
-   "say": "Visions INOs speeches limbs is exam: cerebellars overshoot sensories buzz bladders hold fatigues wilt colours dim gaits sway urodynamics drain optics pale steroids pulse. Bodies uncoat.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**MRI** Dawson fingers callosal plaques, **bands** oligoclonal unmatched CSF, **VEP** delayed optic neuritis, **spine** longitudinally extensive NMO AQP4, **MOG** bilateral optic child ADEM, **McDonald** dissemination time space) with **differentials** (**MS** relapsing oligoclonal, **NMO** AQP4 longitudinal, **MOGAD** bilateral optic MOG, **ADEM** child post-viral encephalopathy) sorts; **neurology** (DMT decides) meets. Signals scatter.",
-   "say": "MRIs bands VEPs spines is Ix: MOGs mark McDonalds tally MSs relapse NMOs extend MOGADs blind ADEMs sicken neurologists meet steroids pulse plasmas wash. Lesions disseminate.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-ms-fig1.webp",
-    "alt": "Axial T2-weighted MRI brain scan showing hyperintense demyelinating lesions, including Dawson's fingers and callosal plaques, indicative of Multiple Sclerosis.",
-    "caption": "Characteristic MRI findings in Multiple Sclerosis: Dawson's fingers and callosal plaques",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**steroids** relapse methylprednisolone pulses, **DMT** interferon ocrelizumab natalizumab, **NMO** rituximab eculizumab plasma, **bladder** anticholinergic catheter plans, **spasticity** baclofen physio stretches, **fatigue** amantadine cooling) with **traps** (**PML** natalizumab JC watches, **steroid** bones sugars, **pregnancy** DMT plans) closes; **follow** (relapses MRI disability) tracks. Myelins rest.",
-   "say": "Steroids DMTs NMOs bladders is Rx: spasticities ease fatigues cool PMLs watch steroids thin pregnancies plan follows track relapses fade wishes respect. Nerves settle.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-511",
-  "bk2-med-512",
-  "bk2-med-513",
-  "bk2-med-514",
-  "bk2-med-515",
-  "bk2-med-516",
-  "bk2-med-517",
-  "bk2-med-518",
-  "bk2-med-519",
-  "bk2-med-520"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon6",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-ms",
+  "quiz": [
+    "bk2-med-511",
+    "bk2-med-512",
+    "bk2-med-513",
+    "bk2-med-514",
+    "bk2-med-515",
+    "bk2-med-516",
+    "bk2-med-517",
+    "bk2-med-518",
+    "bk2-med-519",
+    "bk2-med-520"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon6",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about relapsing optic neuritis with painful colour loss, double vision with INO and nystagmus, electric neck shocks of Lhermitte sign, and spastic weakness with falls. Ask about bladder urgency with retention and constipation, fatigue that worsens with heat, bilateral optic disease, and post viral encephalopathy in childhood. Count dissemination in time and space, as both are required.",
+      "tx": "Ask about relapsing optic neuritis with painful colour loss, double vision with INO and nystagmus, electric neck shocks of **Lhermitte sign**, and spastic weakness with falls. Ask about bladder urgency with retention and constipation, fatigue that worsens with heat called **Uhthoff phenomenon**, bilateral optic disease of NMO, and post viral encephalopathy of **childhood ADEM**. Count dissemination in time and space.",
+      "vis": null
+    },
+    {
+      "say": "Test acuity with colour vision, RAPD and discs, and catch internuclear ophthalmoplegia on failed adduction with abducting nystagmus. Listen for scanning staccato speech, test spastic limbs with brisk reflexes and Babinski, and demonstrate past pointing with rebound and gait. Map Lhermitte with vibration levels, scan bladder residuals, and test heat fatigue with colour plates.",
+      "tx": "Test acuity with colour vision, RAPD and discs, and catch **internuclear ophthalmoplegia** on failed adduction with abducting nystagmus. Listen for scanning staccato **dysarthria speech**, test spastic limbs with brisk reflexes and Babinski, and demonstrate past pointing with rebound and gait. Map Lhermitte with vibration levels, scan bladder residuals, and test **heat fatigue** with colour plates.",
+      "vis": null
+    },
+    {
+      "say": "Look at the fundus and notice the swollen hyperaemic disc with blurred margins and engorged retinal vessels. Such swelling with painful colour loss marks optic neuritis, often the first relapse of multiple sclerosis. For the exam, link blurred margins with raised disc pressure and vessel engorgement with inflammation.",
+      "tx": "The fundus shows a **swollen hyperaemic** disc with blurred margins and engorged retinal vessels, the picture of optic disc swelling. Such swelling with painful colour loss marks **optic neuritis**, often the first relapse of multiple sclerosis. For the exam, link blurred margins with raised disc pressure, vessel engorgement with inflammation, and recovery with **colour vision** charts.",
+      "vis": {
+        "alt": "Fundus photograph showing swollen hyperaemic optic disc with blurred margins and engorged retinal vessels.",
+        "ar": 1.3393,
+        "caption": "Fundoscopy shows swollen hyperaemic optic disc with blurred margins and engorged vessels. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-ms-gen1.webp"
+      }
+    },
+    {
+      "say": "Read MRI for Dawson fingers with callosal plaques, and test CSF for unmatched oligoclonal bands. The VEP is delayed in optic neuritis, the spine is imaged for longitudinally extensive NMO with AQP4, and bilateral optic disease is marked with MOG antibody. Apply McDonald criteria for dissemination in time and space, and involve neurology for DMT choice.",
+      "tx": "Read MRI for **Dawson fingers** with callosal plaques, and test CSF for unmatched **oligoclonal bands**. Delay the VEP in optic neuritis, image the spine for longitudinally extensive NMO with AQP4, and mark bilateral optic disease with **MOG antibody**. Apply McDonald criteria for dissemination in time and space, separate MS, NMO, MOGAD and ADEM, and involve neurology for DMT choice.",
+      "vis": {
+        "alt": "Axial T2-weighted MRI brain scan showing hyperintense demyelinating lesions, including Dawson's fingers and callosal plaques, indicative of Multiple Sclerosis.",
+        "ar": 1.8349,
+        "caption": "Characteristic MRI findings in Multiple Sclerosis: Dawson's fingers and callosal plaques",
+        "kind": "image",
+        "src": "v1/lessons/media/med-ms-fig1.webp"
+      }
+    },
+    {
+      "say": "Pulse relapses with methylprednisolone steroids, and start a disease modifying therapy such as interferon, ocrelizumab or natalizumab. Treat NMO with rituximab, eculizumab or plasma exchange, which is required, plan bladder care with anticholinergics and catheters, and ease spasticity with baclofen and physiotherapy. Cool fatigue with amantadine, which is allowed, watch natalizumab for PML infection, and plan DMT use in pregnancy.",
+      "tx": "Pulse relapses with **methylprednisolone steroids**, and start a **disease modifying** therapy such as interferon, ocrelizumab or natalizumab. Treat NMO with rituximab, eculizumab or plasma exchange, plan bladder care with anticholinergics and catheters, and ease spasticity with baclofen and physiotherapy. Cool fatigue with amantadine, watch natalizumab for **PML infection**, and plan DMT use in pregnancy.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Multiple sclerosis and demyelination",
+  "v": 1
 }

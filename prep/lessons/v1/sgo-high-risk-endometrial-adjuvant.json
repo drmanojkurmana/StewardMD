@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "sgo-high-risk-endometrial-adjuvant",
+  "title": "High-Risk Endometrial Cancer: Adjuvant RT, Chemotherapy & Immunotherapy",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 13",
+    "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11e Ch 84",
+    "NCCN Clinical Practice Guidelines in Oncology: Uterine Neoplasms (2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Landmark international clinical trials have redefined adjuvant therapy for women with high risk endometrial cancer. Combined modality treatment significantly improves overall and failure free survival in Stage III cohorts.",
+      "tx": "The randomized phase **3** **PORTEC-3 trial** demonstrated that adjuvant **chemoradiotherapy** (external pelvic radiation concurrent with **2** cycles of cisplatin followed by **4** cycles of adjuvant **carboplatin paclitaxel**) yielded significant **survival benefit in high-risk** Stage III disease, increasing **5**-year overall survival from **69** percent to **76** percent.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-endometrial-cancer-fig1.webp",
+        "ar": 1.3333,
+        "caption": "FIGO 2023 anatomical staging and molecular risk stratification in endometrial cancer. Credit: StewardMD.",
+        "alt": "High-risk endometrial cancer adjuvant management pathways"
+      }
+    },
+    {
+      "say": "The choice between systemic chemotherapy alone and combined chemoradiation was directly evaluated in a major cooperative group trial. Adding radiation dramatically reduces pelvic and para aortic nodal recurrences.",
+      "tx": "In protocol **GOG-258**, evaluating **chemotherapy vs chemoradiation** (**6** cycles of carboplatin-paclitaxel versus chemoradiotherapy) in advanced Stage **3** and **4** disease, chemoradiotherapy produced significant **pelvic recurrence reduction** (**11** percent vs **20** percent) and lowered para-aortic relapses, despite equivalence in overall progression-free survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adjuvant Chemoradiotherapy (GOG-258 / PORTEC-3)",
+          "points": [
+            "External beam radiation + concurrent cisplatin + carboplatin/paclitaxel",
+            "Significantly reduces pelvic locoregional recurrences (11% vs 20%)",
+            "Lower para-aortic nodal relapse rate"
+          ]
+        },
+        "right": {
+          "title": "Chemotherapy Alone (6 Cycles Carboplatin/Paclitaxel)",
+          "points": [
+            "Equivalent overall progression-free survival",
+            "Higher incidence of pelvic and vaginal vault failure",
+            "Avoids long-term pelvic radiation enteritis and bowel toxicity"
+          ]
+        }
+      }
+    },
+    {
+      "say": "For intermediate risk disease without adverse histological features, local vaginal treatment achieves equivalent disease control with minimal bowel toxicity. Brachytherapy replaces external pelvic beams in this setting.",
+      "tx": "In **high-intermediate risk** early endometrial carcinoma, the landmark **PORTEC-2 trial** established that **vaginal brachytherapy (VBT)** alone achieves vaginal vault local control equivalent to external beam pelvic radiotherapy (vault relapse <**2** percent) while producing marked **GI toxicity reduction**, avoiding chronic radiation proctitis and enteritis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Radiation Modality",
+          "Vaginal Relapse Rate",
+          "Grade 2+ Bowel Toxicity",
+          "Target Patient Cohort"
+        ],
+        "rows": [
+          [
+            "Vaginal Brachytherapy (VBT)",
+            "<2% at 5 years",
+            "3% to 5% (minimal)",
+            "PORTEC-2 high-intermediate risk (HIR)"
+          ],
+          [
+            "External Beam Pelvic RT (EBRT)",
+            "<2% at 5 years",
+            "20% to 25% (chronic diarrhea)",
+            "Cervical stroma invasion, positive pelvic nodes"
+          ],
+          [
+            "Chemoradiation (PORTEC-3)",
+            "1% to 2% at 5 years",
+            "35% to 40% (acute and late)",
+            "Stage III, serous, or clear cell carcinoma"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Immune checkpoint inhibition combined with platinum doublet chemotherapy has transformed first line systemic therapy for mismatch repair deficient neoplasms. The addition of dostarlimab produces unprecedented progression free survival improvements.",
+      "tx": "In the phase **3** **RUBY trial**, adding the anti-PD-**1** monoclonal antibody **dostarlimab** to carboplatin and paclitaxel in advanced or recurrent **dMMR/MSI-H** endometrial carcinoma resulted in a dramatic **PFS HR 0.28** (progression-free survival hazard ratio **0.28**), with **72** percent of dMMR patients remaining progression-free at two years.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify advanced stage III/IV or first recurrent endometrial carcinoma"
+          },
+          {
+            "id": "b",
+            "label": "Confirm dMMR/MSI-H status on universal tumor testing"
+          },
+          {
+            "id": "c",
+            "label": "Administer dostarlimab (500 mg Q3W) with carboplatin and paclitaxel"
+          },
+          {
+            "id": "d",
+            "label": "Continue dostarlimab maintenance (1000 mg Q6W) for up to 3 years"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A parallel cooperative trial confirmed that pembrolizumab yields similar breakthrough benefits when combined with standard chemotherapy. Therapeutic advantage is seen in both mismatch repair deficient and proficient populations.",
+      "tx": "The randomized phase III trial **NRG-GY018** demonstrated that adding **pembrolizumab** to carboplatin and paclitaxel in advanced endometrial cancer yielded an outstanding **dMMR HR 0.30** (**70** percent risk reduction) and a statistically significant **pMMR HR 0.54** (hazard ratio **0.54**, **18**-month PFS improvement), establishing front-line checkpoint inhibition across subtypes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "dMMR Cohort (NRG-GY018)",
+          "points": [
+            "PFS hazard ratio 0.30 (70% risk reduction)",
+            "Estimated 12-month PFS rate 74% vs 38%",
+            "Durable immune checkpoint clonal neoantigen response"
+          ]
+        },
+        "right": {
+          "title": "pMMR Cohort (NRG-GY018)",
+          "points": [
+            "PFS hazard ratio 0.54 (46% risk reduction)",
+            "Median PFS increased from 8.7 to 13.1 months",
+            "Statistically significant clinical benefit in proficient tumors"
+          ]
+        }
+      }
+    },
+    {
+      "say": "For patients with mismatch repair proficient disease progressing after prior chemotherapy, multi kinase inhibition combined with immunotherapy provides a standard second line regimen. Lenvatinib synergizes with pembrolizumab.",
+      "tx": "In the phase III trial **KEYNOTE-775**, the combination of **pembrolizumab plus lenvatinib** demonstrated significant overall survival and progression-free survival superiority over physician-choice chemotherapy for **pMMR recurrence** in patients progressing after prior platinum therapy, establishing an approved **TKI immunotherapy** standard regimen.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Arm",
+          "Median Progression-Free Survival",
+          "Median Overall Survival",
+          "Objective Response Rate"
+        ],
+        "rows": [
+          [
+            "Pembrolizumab + Lenvatinib (KEYNOTE-775)",
+            "6.6 months (pMMR cohort)",
+            "17.4 months",
+            "30.3% ORR"
+          ],
+          [
+            "Physician Choice Chemotherapy (Doxorubicin/Paclitaxel)",
+            "3.8 months (pMMR cohort)",
+            "12.0 months",
+            "15.1% ORR"
+          ],
+          [
+            "HR and Statistical Significance",
+            "HR 0.60 (p < 0.0001)",
+            "HR 0.68 (p < 0.0001)",
+            "Double the response rate"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Uterine serous carcinoma frequently overexpresses the human epidermal growth factor receptor two oncoprotein. Incorporating targeted anti HER2 therapy prolongs progression free survival.",
+      "tx": "In aggressive **uterine serous carcinoma**, approximately **30** percent of tumors exhibit **HER2 overexpression** (IHC **3**+ or FISH amplified). Adding the monoclonal antibody **trastuzumab** to carboplatin and paclitaxel significantly extended median **PFS 12.6 months** versus **8.0** months for chemotherapy alone in advanced or recurrent disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diagnose uterine serous carcinoma on surgical pathology"
+          },
+          {
+            "id": "b",
+            "label": "Perform reflex HER2 immunohistochemistry (IHC) and FISH"
+          },
+          {
+            "id": "c",
+            "label": "Confirm HER2 3+ or FISH amplified positivity (30% prevalence)"
+          },
+          {
+            "id": "d",
+            "label": "Initiate carboplatin-paclitaxel combined with trastuzumab"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Indolent low grade recurrent endometrioid carcinomas enriched with estrogen and progesterone receptors respond favorably to hormonal manipulation. Aromatase inhibitors and progestins provide durable disease stabilization.",
+      "tx": "In **low-grade ER/PR positive** recurrent endometrioid carcinoma without life-threatening visceral crisis, systemic **hormonal therapy** utilizing alternating **megestrol/tamoxifen** or aromatase inhibitors such as **letrozole** (2.5 mg daily) achieves objective response rates of **25** to **30** percent with prolonged disease stabilization and minimal toxicity.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/obg-endometrial-cancer-gen1.webp",
+        "ar": 1.3333,
+        "caption": "Histopathological and molecular pathways of Bokhman Type I and Type II endometrial tumors. Credit: StewardMD.",
+        "alt": "Hormone receptor pathways in low-grade endometrioid carcinoma"
+      }
+    }
+  ]
+}

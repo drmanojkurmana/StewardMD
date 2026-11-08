@@ -1,0 +1,310 @@
+{
+  "v": 1,
+  "module": "sct-thymoma-myasthenia-gravis",
+  "title": "Thymoma and myasthenia gravis: Masaoka staging, WHO histology and extended thymectomy",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 110 (The Mediastinum: Thymoma and Myasthenia Gravis)",
+    "Shields' General Thoracic Surgery 8e Ch 162",
+    "ITMIG Guidelines for Thymic Malignancies"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Thymomas are the most common primary neoplasms of the anterior mediastinum. Approximately thirty to fifty percent of thymoma patients have generalized myasthenia gravis. Conversely, ten to fifteen percent of all patients with myasthenia gravis harbor an underlying thymic neoplasm.",
+      "tx": "Primary neoplasms of the anterior mediastinum are predominantly **thymic epithelial tumors**. A clinical hallmark is their striking autoimmune link: 30 to 50 percent of thymoma patients present with **myasthenia gravis**, while 10 to 15 percent of all myasthenic individuals harbor an underlying **thymoma**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thymoma Cohort",
+          "points": [
+            "Most common anterior mediastinal mass in adults",
+            "30 to 50 percent manifest generalized myasthenia gravis",
+            "Additional autoimmune links: pure red cell aplasia, Good syndrome"
+          ]
+        },
+        "right": {
+          "title": "Myasthenia Gravis Cohort",
+          "points": [
+            "Autoantibodies against acetylcholine receptors",
+            "60 to 70 percent demonstrate thymic follicular lymphoid hyperplasia",
+            "10 to 15 percent harbor true neoplastic thymoma"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Myasthenia gravis is an autoimmune disorder of neuromuscular transmission. Circulating autoantibodies target acetylcholine receptors at the motor endplate, triggering complement-mediated receptor destruction. Patients present with fluctuating muscle weakness, ptosis, and life-threatening respiratory failure.",
+      "tx": "Pathophysiology involves pathogenic IgG autoantibodies directed against the **acetylcholine receptor** at the neuromuscular junction. This antibody binding triggers complement-mediated **motor endplate destruction**, accelerating receptor internalization and degradation, which produces fluctuating **muscle weakness**, ocular ptosis, and fatigable diplopia exacerbated by exertion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Thymic epithelial presentation of self-antigens"
+          },
+          {
+            "id": "b",
+            "label": "Production of anti-AChR pathogenic autoantibodies"
+          },
+          {
+            "id": "c",
+            "label": "Complement activation and membrane attack complex formation"
+          },
+          {
+            "id": "d",
+            "label": "Degradation of neuromuscular junction folds causing flaccid weakness"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The World Health Organization classifies thymomas based on the morphology of epithelial cells and lymphocyte content. Types A and AB are predominantly spindle-shaped with low malignant potential. Type B comprises round epithelioid cells with increasing cytological atypia, while type C represents invasive thymic carcinoma.",
+      "tx": "The **WHO histological classification** divides thymic tumors into prognostic subtypes: Type A and AB exhibit spindle-cell morphology with benign trajectories, **Type B1 to B3** exhibit progressive epithelial dominance and cytological atypia, and **Type C thymic carcinoma** exhibits overt malignant invasion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "WHO Subtype",
+          "Predominant Cell Type",
+          "Prognostic Behavior"
+        ],
+        "rows": [
+          [
+            "Type A",
+            "Spindle or oval epithelial cells, rare lymphocytes",
+            "Medullary thymoma; exceptionally low recurrence risk"
+          ],
+          [
+            "Type AB",
+            "Mixed spindle cells and abundant reactive lymphocytes",
+            "Favorable prognosis; rarely shows capsular invasion"
+          ],
+          [
+            "Type B1",
+            "Lymphocyte-rich, organoid cortical architecture",
+            "Resembles normal thymus cortex; low malignancy"
+          ],
+          [
+            "Type B2",
+            "Equal mix of plump dendritic cells and lymphocytes",
+            "Cortical thymoma; intermediate recurrence potential"
+          ],
+          [
+            "Type B3",
+            "Epithelial-predominant sheets with minimal lymphocytes",
+            "Atypical thymoma; aggressive local invasive behavior"
+          ],
+          [
+            "Type C",
+            "Overt cytological malignancy lacking thymus organoid signs",
+            "Thymic carcinoma; high nodal and distant metastatic rate"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The Masaoka-Koga staging system guides treatment based on local invasiveness. Stage one is defined by an intact capsule without microscopic invasion. Stage two involves microscopic capsular invasion or surrounding fatty tissue invasion. Stage three invades adjacent organs such as the pericardium, great vessels, or lungs.",
+      "tx": "Clinical management is guided by the **Masaoka-Koga staging** system: Stage I is completely encapsulated, **Masaoka Stage II** exhibits microscopic capsular or surrounding fat invasion, **Masaoka Stage III** invades neighboring organs such as the pericardium or innominate vein, and Stage IV exhibits pleural or distant metastases.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Masaoka Stage",
+          "Histopathological Extent of Tumor",
+          "Recommended Surgical Approach"
+        ],
+        "rows": [
+          [
+            "Stage I",
+            "Completely macroscopically and microscopically encapsulated",
+            "Complete surgical thymectomy alone (R0)"
+          ],
+          [
+            "Stage IIa",
+            "Microscopic transcapsular invasion into adjacent fat",
+            "Complete surgical resection; close surveillance"
+          ],
+          [
+            "Stage IIb",
+            "Macroscopic invasion into surrounding mediastinal fat",
+            "Complete surgical resection +/- adjuvant radiotherapy"
+          ],
+          [
+            "Stage III",
+            "Macroscopic invasion into pericardium, great vessels, or lung",
+            "En bloc radical multivisceral resection + adjuvant RT"
+          ],
+          [
+            "Stage IVa",
+            "Separate pleural or pericardial metastatic implants",
+            "Cytoreductive surgery, hyperthermic pleural perfusion"
+          ],
+          [
+            "Stage IVb",
+            "Lymphatic or hematogenous distant metastases",
+            "Systemic platinum chemotherapy + targeted radiation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Extended total thymectomy is the mandatory surgical standard of care. The surgeon resects the entire thymus gland from the lower thyroid poles down to the diaphragm, extending from phrenic nerve to phrenic nerve. Removing all cervical and mediastinal ectopic thymic tissue prevents persistent myasthenia.",
+      "tx": "The mandatory surgical benchmark is an **extended total thymectomy**, requiring complete en bloc resection of both upper cervical poles alongside all anterior mediastinal and pericardiophrenic fat extending strictly from **phrenic-to-phrenic dissection** to eliminate all microscopic **ectopic thymic rests**. Meticulous surgical clearance of all mediastinal adipose tissues dramatically reduces future recurrence and promotes sustained disease remission.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Full median sternotomy or robotic closed-port entry"
+          },
+          {
+            "id": "b",
+            "label": "Identification and continuous preservation of bilateral phrenic nerves"
+          },
+          {
+            "id": "c",
+            "label": "Bilateral superior cervical horn dissection from thyroid capsule"
+          },
+          {
+            "id": "d",
+            "label": "En bloc removal of all thymic parenchyma and pericardiophrenic fat pads"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The landmark MGTX randomized trial established the role of surgery in non-thymomatous myasthenia gravis. In patients with acetylcholine receptor antibodies, extended thymectomy significantly improved clinical weakness scores over three years. Surgery also permitted significant reductions in oral corticosteroid requirements.",
+      "tx": "The landmark **MGTX trial** provided definitive randomized evidence that in **non-thymomatous myasthenia**, extended thymectomy combined with medical therapy significantly improves quantitative myasthenia scores, achieves higher complete stable remission, and enables marked **prednisone reduction** compared to medication alone over a three-year period.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MGTX Trial: Thymectomy Arm",
+          "points": [
+            "Significantly lower average quantitative myasthenia score (6.15 vs 8.99)",
+            "Lower daily average prednisone dose (44 mg vs 60 mg alternate-day)",
+            "Reduced requirement for hospitalizations and crisis therapies"
+          ]
+        },
+        "right": {
+          "title": "MGTX Trial: Medical Therapy Alone",
+          "points": [
+            "Higher persistent symptom burden across 3-year follow-up",
+            "Sustained high requirement for chronic immunosuppression",
+            "Higher cumulative incidence of steroid-induced toxicities"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Minimally invasive thymectomy has become the preferred approach for early-stage thymomas. Video-assisted and robotic-assisted techniques achieve complete R0 resection rates comparable to open sternotomy. Patients can have significantly less blood loss, less pain, and shorter hospital stays.",
+      "tx": "For Stage I and II tumors, **robotic thymectomy** achieves oncological **R0 resection** rates and neurological outcomes equivalent to open transsternal sternotomy. The enhanced 3D magnification permits radical dissection while delivering **equivalent remission** rates with minimal blood loss and reduced chest wall morbidity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Operative Metric",
+          "Robotic Thymectomy",
+          "Open Median Sternotomy"
+        ],
+        "rows": [
+          [
+            "Surgical access",
+            "Three 8 mm lateral thoracic ports",
+            "Full vertical median sternotomy incision"
+          ],
+          [
+            "Mean blood loss",
+            "Minimal (< 50 mL)",
+            "Moderate (150 to 300 mL)"
+          ],
+          [
+            "Hospital length of stay",
+            "1 to 2 days",
+            "4 to 6 days with sternal precautions"
+          ],
+          [
+            "Complete R0 resection rate",
+            "Equivalent in Masaoka Stage I/II",
+            "Gold standard benchmark across all stages"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adjuvant radiation therapy is indicated following surgery for invasive tumors. Mediastinal irradiation reduces local pleural and mediastinal recurrence in patients with Masaoka stage two with capsular invasion, or stage three tumors. Postoperative radiation optimizes long-term disease-free survival.",
+      "tx": "Postoperative **adjuvant radiotherapy** is indicated following resection for **Masaoka Stage II and III** tumors exhibiting transmural capsular invasion or positive microscopic margins. External beam radiation delivers 45 to 54 Gy, achieving marked **local recurrence reduction** across long-term follow-up without increasing cardiac toxicity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Surgical resection and pathological staging"
+          },
+          {
+            "id": "b",
+            "label": "Masaoka Stage I: observation only (no radiation)"
+          },
+          {
+            "id": "c",
+            "label": "Masaoka Stage II with extensive invasion or Stage III: adjuvant radiation"
+          },
+          {
+            "id": "d",
+            "label": "Maintain local relapse-free survival > 85% at 10 years"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

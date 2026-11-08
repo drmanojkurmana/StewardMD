@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-haemolytic",
- "subject": "medicine",
- "title": "Haemolytic anaemia: spherocytosis, G6PD and AIHA",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**jaundice** intermittent stones colic, **spleen** dragging childhood transfusions, **family** spherocytosis dominant gallstones, **G6PD** fava beans primaquine infections, **AIHA** drugs lupus lymphoma CLL, **PNH** morning dark thrombosis, **crisis** parvovirus aplastic pain) with **viva** (**haemolysing** jaundiced splenomegalic, **favic** bean-triggered pallor) profiles; **ethnic** (Mediterranean African Asian sorts) maps. Reds burst.",
-   "say": "Jaundices spleens families G6PDs is history: AIHAs trigger PNHs darken crises halt ethnics map haemolysers yellow favics pale beans trigger drugs oxidise. Bilirubins rise.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**jaundice** lemon scleral pallor, **spleen** spherocytosis palpable massive, **gallstones** Murphy chronic ache, **leg** ulcers sickle malleolar, **lymph** AIHA nodes CLL, **dark** PNH morning cola, **heart** high-output failure flow) with **bedside** (**retics** high production shouts, **smear** spherocytes bite Heinz, **urine** haemosiderin cola) smears; **growth** (thalassaemic chipmunk) notes. Cells lyse.",
-   "say": "Jaundices spleens gallstones legs is exam: lymphs swell darks colour hearts race retics climb smears show urines darken growths stunt vaccines shield spleens guard. Skins yellow.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-haemolytic-fig1.webp",
-    "alt": "Microscopic view of red blood cells, showing normal cells, spherocytes, bite cells, and Heinz bodies, characteristic of hemolytic anemias.",
-    "caption": "Key red cell morphologies in hemolytic anemias on peripheral smear. Image: Simionato G, van Wijk R, Quint S, Wagner C, Bianchi P and Kaestner L, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 1.396
-   }
-  },
-  {
-   "tx": "**Investigations** (**retics** haemolysis production proves, **LDH** haptoglobin bilirubin triad, **DAT** Coombs AIHA warms colds, **osmotic** fragility EMA spherocytosis, **G6PD** assay between crises, **PNH** flow cytometry thrombosis) with **differentials** (**spherocytosis** dominant osmotic, **G6PD** oxidant Heinz, **AIHA** DAT drugs lupus, **PNH** nocturnal flow) sorts; **haematology** (splenectomy decides) meets. Membranes fail.",
-   "say": "Retics LDHs DATs osmotics is Ix: G6PDs starve PNHs flow spherocytoses dome G6PDs burst AIHAs coat PNHs clot haematologists meet knives ready vaccines first. Haemoglobins spill.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**folate** chronic haemolysis replaces, **steroids** AIHA first rituximab, **G6PD** trigger lists avoid, **spherocytosis** splenectomy vaccines gallstones, **PNH** eculizumab clots, **transfuse** crisis thresholds) with **traps** (**parvovirus** aplastic halts, **splenectomy** sepsis vaccines, **primaquine** G6PD bursts) closes; **follow** (retics bilirubin spleen) tracks. Reds survive.",
-   "say": "Folates steroids G6PDs spherocytoses is Rx: PNHs guard transfuses match parvoviruses halt splenectomies seed primaquines burst follows track retics steady wishes respect. Cells persist.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-581",
-  "bk2-med-582",
-  "bk2-med-583",
-  "bk2-med-584",
-  "bk2-med-585",
-  "bk2-med-586",
-  "bk2-med-587",
-  "bk2-med-588",
-  "bk2-med-589",
-  "bk2-med-590"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon7",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-haemolytic",
+  "quiz": [
+    "bk2-med-581",
+    "bk2-med-582",
+    "bk2-med-583",
+    "bk2-med-584",
+    "bk2-med-585",
+    "bk2-med-586",
+    "bk2-med-587",
+    "bk2-med-588",
+    "bk2-med-589",
+    "bk2-med-590"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon7",
+  "src": [],
+  "steps": [
+    {
+      "say": "When you take the history, separate the main causes clearly. Ask about yellow eyes that come and go, pain from gallstones, a heavy feeling from a large spleen, transfusions in childhood and similar illness in the family. Ask whether fava beans, infection or a new drug started the episode. Ask about joint pains, rashes, swollen glands or lymphoma that point toward autoimmune haemolysis. Ask about dark urine passed in the morning and any clots, because that pattern suggests paroxysmal nocturnal haemoglobinuria.",
+      "tx": "Take a focused history that separates the main causes of haemolysis. Ask about intermittent jaundice with gallstone colic, dragging pain from an enlarged spleen, childhood transfusions and a family history of spherocytosis. Ask about fava bean intake, recent infection and oxidant drugs such as primaquine for **G6PD deficiency**. Ask about lupus features, lymphoma, chronic lymphocytic leukaemia and offending drugs for **autoimmune haemolytic anaemia**, plus morning dark urine and thrombosis that suggest paroxysmal nocturnal haemoglobinuria.",
+      "vis": null
+    },
+    {
+      "say": "On examination, look for pale skin with yellow eyes and feel carefully for the spleen. A large spleen with gallstone pain favours spherocytosis, which is common in an Indian exam case. Look at the ankles for ulcers, feel all lymph node groups, and listen to the heart for a fast flowing circulation. Check the urine colour, review the smear for abnormal red cell shapes, and confirm that reticulocytes are high because that proves the marrow is responding.",
+      "tx": "On examination look for pallor with lemon yellow jaundice and a palpable spleen, which favours spherocytosis when seen with pigment gallstones. Examine for **leg ulcers** around the malleoli, lymphadenopathy that suggests lymphoma or chronic lymphocytic leukaemia, and signs of a high output cardiac state. Check the urine colour and the **peripheral smear** for spherocytes, bite cells and Heinz bodies, with a high reticulocyte count supporting active haemolysis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-haemolytic-fig1.webp",
+        "alt": "Microscopic view of red blood cells, showing normal cells, spherocytes, bite cells, and Heinz bodies, characteristic of hemolytic anemias.",
+        "caption": "Key red cell morphologies in hemolytic anemias on peripheral smear. Image: Simionato G, van Wijk R, Quint S, Wagner C, Bianchi P and Kaestner L, CC BY-SA 4.0, Wikimedia Commons.",
+        "ar": 1.396
+      }
+    },
+    {
+      "say": "Confirm haemolysis with blood tests before you name the cause. A high reticulocyte count with raised LDH, raised bilirubin and low haptoglobin proves red cells are breaking down. Request the direct antiglobulin test when you suspect autoimmune disease, because it shows antibody on the red cells and separates warm from cold types. Test for membrane fragility when spherocytosis is likely, check the enzyme assay between crises for G6PD deficiency, and order flow cytometry for suspected paroxysmal nocturnal haemoglobinuria.",
+      "tx": "Confirm haemolysis with a high reticulocyte count plus raised LDH, raised indirect bilirubin and low haptoglobin. Request the **direct antiglobulin test** when autoimmune haemolysis is suspected, since it detects antibody or complement on red cells and helps separate warm from cold disease. Confirm spherocytosis with osmotic fragility or EMA binding, test **G6PD assay** between crises rather than during acute haemolysis, and use flow cytometry when paroxysmal nocturnal haemoglobinuria with thrombosis is suspected.",
+      "vis": null
+    },
+    {
+      "say": "Look carefully at this bench photograph because it shows the test that confirms autoimmune haemolysis. The clumped red cells in three tubes mean the result is positive, while the smooth tube on the right is the negative control. The small diagram explains the principle, as the added globulin links antibody coated cells together. In the exam, link a positive result with spherocytes on the smear and choose immune destruction as the cause.",
+      "tx": "This bench photograph shows the direct antiglobulin test used to confirm **autoimmune haemolytic anaemia**. Clumped red cells in the polyspecific, anti IgG and anti C3d tubes indicate a positive result, while the smooth suspension in the control tube is negative. The inset diagram shows anti human globulin bridging antibody coated red cells. Remember that a positive **direct antiglobulin test** with spherocytes on the smear strongly favours immune destruction over membrane loss.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-haemolytic-gen1.webp",
+        "alt": "Bench with agglutinated red tubes, DAT card, and inset diagram of AHG bridging coated red cells.",
+        "caption": "Coombs tubes and DAT card showing RBC agglutination.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "Manage the cause while you protect red cells and prevent crises. Give folate during ongoing haemolysis and give a clear list of triggers to avoid in G6PD deficiency. Start corticosteroids first for warm autoimmune disease and add rituximab when the response is poor. Arrange vaccination before planned splenectomy, use complement blockade for paroxysmal nocturnal haemoglobinuria, transfuse wisely during crises, and watch for sudden marrow shutdown after parvovirus infection.",
+      "tx": "Replace folate during chronic haemolysis and counsel avoidance of oxidant triggers in **G6PD deficiency**, including fava beans and listed drugs. Treat warm autoimmune disease with corticosteroids first, adding rituximab when indicated. Plan splenectomy with prior vaccination for selected spherocytosis cases with gallstones, use complement blockade for paroxysmal nocturnal haemoglobinuria with clots, transfuse during crises by threshold, and watch for parvovirus induced **aplastic crisis** and post splenectomy sepsis.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Haemolytic anaemia: spherocytosis, G6PD and AIHA",
+  "v": 1
 }

@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-malaria",
- "subject": "medicine",
- "title": "Malaria: falciparum severity and radical cure",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**paroxysm** chill rigor sweat cycles, **tertian** vivax ovale forty-eight hours, **quotidian** falciparum daily malignant, **spleen** endemic childhood palpable, **dark** blackwater cola urine quinine, **coma** cerebral seizures post-ictal, **breathless** ARDS pulmonary oedema, **pregnant** severe anaemia stillbirth asks) with **viva** (**paroxysmal** splenomegalic anaemic, **cerebral** comatose seized) profiles; **travel** (forest chloroquine zones) asks. Fevers cycle.",
-   "say": "Paroxysms tertians quotidians spleens is history: darks stain comas cloud breaths drown pregnants pale travels expose paroxysmics shake cerebrals seize artesunates rescue smears guide. Shivers burst.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**spleen** soft huge endemic children, **anaemia** haemolytic pallor tachycardic, **jaundice** haemolysis hepatic dysfunction, **coma** Blantyre GCS posturing, **lungs** ARDS crackles fluid-wary, **urine** blackwater haemoglobinuria oliguria, **retina** whitening vessel changes, **algid** cold clammy shocked) with **bedside** (**smear** parasite counts rings, **glucose** hypoglycaemia fits, **acidosis** deep breathing lactate) grades; **glands** (nodes suggest viral) checks. Parasites burst.",
-   "say": "Spleens anaemias jaundices comas is exam: lungs crackle urines darken retinas pale algids chill smears teem glucoses crash acidoses pant artesunates drip quinines load. Fevers rage.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**smear** gold species counts rings, **RDT** falciparum vivax antigens, **rings** delicate accole applique, **schizonts** vivax enlarged amoeboid, **counts** hyperparasitaemia severity, **haemolysis** LDH haptoglobin blackwater, **acidosis** lactate renal failure, **G6PD** primaquine safety screens) with **differentials** (**dengue** leak NS1, **enteric** step-ladder Widal, **kala-azar** rK39 spleen giants, **babesia** Maltese tetrads) sorts; **physician** (ICU thresholds) meets. Smears speciate.",
-   "say": "Smears RDTs rings schizonts is Ix: counts soar haemolyses stain acidoses pant G6PDs screen dengues leak enterics climb kala-azars swell babesias cross physicians meet drips start wishes respect. Species show.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-malaria-fig1.webp",
-    "alt": "Microscopic images of Plasmodium falciparum ring forms and Plasmodium vivax schizonts in blood smears, alongside a positive malaria rapid diagnostic test (RDT) showing falciparum and vivax antigens.",
-    "caption": "Malaria diagnosis: Smear microscopy (Pf rings, Pv schizonts) and RDT. Image: Unknown, CC0/PD, Wikimedia Commons.",
-    "ar": 1.5021
-   }
-  },
-  {
-   "tx": "**Management** (**artesunate** IV severe first doses, **quinine** loading cardiac sugar watches, **ACT** uncomplicated courses complete, **primaquine** vivax radical G6PD first, **support** fluids-wary transfusion dialysis, **seizure** benzodiazepine glucose corrects, **pregnancy** quinine early ACT late, **prevent** nets spraying prophylaxis) with **traps** (**fluids** ARDS overload kills, **primaquine** G6PD haemolysis, **resistance** artemisinin kelch tracks) closes; **follow** (smear Hb urine) tracks. Parasites clear.",
-   "say": "Artesunates quinines ACTs primaquines is Rx: supports guard seizures calm pregnancies shield prevents net resistances track fluids drown haemolyses burst follow-ups clear smears fade wishes respect. Fevers lift.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-781",
-  "bk2-med-782",
-  "bk2-med-783",
-  "bk2-med-784",
-  "bk2-med-785",
-  "bk2-med-786",
-  "bk2-med-787",
-  "bk2-med-788",
-  "bk2-med-789",
-  "bk2-med-790"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon9",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-malaria",
+  "quiz": [
+    "bk2-med-781",
+    "bk2-med-782",
+    "bk2-med-783",
+    "bk2-med-784",
+    "bk2-med-785",
+    "bk2-med-786",
+    "bk2-med-787",
+    "bk2-med-788",
+    "bk2-med-789",
+    "bk2-med-790"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon9",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about cyclical chills, rigors and sweats, and time the cycle, which is forty eight hours for vivax and ovale. Ask about daily malignant fever of falciparum, an enlarged spleen in endemic children, dark cola urine, seizures and coma, and breathlessness from pulmonary oedema. Record severe anaemia with stillbirth in pregnancy, forest travel, and chloroquine zones, as all are common.",
+      "tx": "Ask about cyclical chills, rigors and sweats, and time the cycle since vivax and ovale return every **forty eight hours**. Ask about daily malignant fever of falciparum, an enlarged spleen in endemic children, dark cola urine of **blackwater fever**, seizures and coma of cerebral malaria, breathlessness of pulmonary oedema, and severe anaemia with stillbirth in **pregnant patients**. Record forest travel and chloroquine zones.",
+      "vis": null
+    },
+    {
+      "say": "Feel the soft huge spleen of endemic children, and read pallor with tachycardia as haemolytic anaemia. Assess coma with the Blantyre scale and watch posture, listen for crackles of pulmonary oedema while giving fluids with care, and inspect dark urine. Examine the retina for whitening and vessel changes of malarial retinopathy, and feel for cold clammy shock, with nodes suggesting virus instead.",
+      "tx": "Feel the soft huge spleen of endemic children, and read pallor and tachycardia of **haemolytic anaemia**. Assess coma with the Blantyre scale and watch posture, listen for crackles of **pulmonary oedema** while giving fluids with care, and inspect dark urine of blackwater fever. Examine the retina for whitening and vessel changes of **malarial retinopathy**, and feel for cold clammy shock with nodes that suggest virus instead.",
+      "vis": null
+    },
+    {
+      "say": "Study the fundus and notice the patchy pale whitening from ischaemia, the orange discoloured vessels packed with sequestered parasites, and the haemorrhages with white centres. This pattern is malarial retinopathy, and it confirms severe falciparum disease while separating cerebral malaria from other coma. For the exam, link whitening with capillary blockage and vessel colour change with parasite sequestration.",
+      "tx": "The fundus shows **patchy retinal whitening** from ischaemia, orange discoloured vessels packed with sequestered parasites, and white centred haemorrhages. This **malarial retinopathy** confirms severe falciparum disease and separates cerebral malaria from other coma. For the exam, link whitening with capillary blockage, vessel colour change with **parasite sequestration**, and haemorrhages with a poor prognosis.",
+      "vis": {
+        "alt": "Fundus photo with patchy whitening, orange vessels and white centred haemorrhages labelled.",
+        "ar": 1.3393,
+        "caption": "Fundus photo showing malarial retinopathy whitening, vessel discolouration and haemorrhages. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-malaria-gen1.webp"
+      }
+    },
+    {
+      "say": "Read the smear as the gold standard for species and counts, and pair it with rapid antigen testing. Learn delicate falciparum rings with accole forms against enlarged amoeboid vivax schizonts, and treat hyperparasitaemia as severe disease. Track LDH with haptoglobin for haemolysis and lactate for acidosis, and check G6PD status before primaquine. Separate dengue, enteric fever, kala azar and babesiosis.",
+      "tx": "Read the smear as gold standard for species and counts, and pair it with **rapid diagnostic** antigen testing. Learn delicate falciparum rings with accole forms against enlarged amoeboid vivax schizonts, and treat **hyperparasitaemia** as severe disease. Track LDH with haptoglobin for haemolysis, lactate for acidosis, and check **G6PD status** before primaquine. Separate dengue, enteric fever, kala azar and babesiosis.",
+      "vis": {
+        "alt": "Microscopic images of Plasmodium falciparum ring forms and Plasmodium vivax schizonts in blood smears, alongside a positive malaria rapid diagnostic test (RDT) showing falciparum and vivax antigens.",
+        "ar": 1.5021,
+        "caption": "Malaria diagnosis: Smear microscopy (Pf rings, Pv schizonts) and RDT. Image: Unknown, CC0/PD, Wikimedia Commons.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-malaria-fig1.webp"
+      }
+    },
+    {
+      "say": "Give intravenous artesunate first for severe malaria, with cardiac and sugar watches for quinine loading. Complete a full combination course for uncomplicated disease, and add primaquine for vivax relapse only after G6PD testing. Give fluids with care to avoid ARDS, transfuse and dialyse by thresholds, and correct seizures with benzodiazepine and glucose. Protect pregnancy with nets, spraying and chemoprophylaxis.",
+      "tx": "Give **intravenous artesunate** first for severe malaria with cardiac and sugar watches for quinine loading. Complete a full **combination course** for uncomplicated disease, and add primaquine for vivax relapse only after G6PD testing. Give fluids with care to avoid ARDS, transfuse and dialyse by thresholds, correct seizures with benzodiazepine and glucose, and protect pregnancy with nets, spraying and **chemoprophylaxis**.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Malaria: falciparum severity and radical cure",
+  "v": 1
 }

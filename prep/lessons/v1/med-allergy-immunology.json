@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-allergy-immunology",
- "subject": "medicine",
- "title": "Allergy, anaphylaxis and immunodeficiency",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**exposure** nuts venom latex drug minutes-onset, **skin** urticaria angioedema flushing, **breath** wheeze stridor hypoxia, **gut** cramp vomit collapse, **past** atopy eczema asthma rhinitis, **family** angioedema C1-esterase kin, **infections** recurrent sinopulmonary thrush, **vaccines** live BCG adverse asks) with **viva** (**anaphylactic** stridorous hypotensive, **immunodeficient** sinopulmonary thrushy) profiles; **stings** (beekeeping job) asks. Airways close.",
-   "say": "Exposures skins breaths guts is history: pasts link families swell infections recur vaccines harm stings threaten anaphylactics crash immunodeficients fade adrenalines jab fluids pour. Throats shut.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**airway** stridor tongue angioedema, **breath** wheeze saturation dips, **pressure** hypotensive tachycardic collapse, **skin** urticaria flushing angioedema, **oedema** C1-esterase nonpitting bowels, **lymph** nodes absent tonsils SCID, **growth** failure bronchiectatic clubbing, **thrush** candidal immunodeficient) with **bedside** (**tryptase** timed mast-cell peaks, **oxygen** saturation trends, **peak-flow** bronchospastic dips) grades; **auto-injector** (technique checks) drills. Pressures crash.",
-   "say": "Airways breaths pressures skins is exam: oedemas swell lymphs vanish growths stall thrushes coat tryptases peak oxygens dip flows fall injectors drill adrenalines save steroids guard. Faces swell.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**tryptase** mast-cell anaphylaxis confirms, **IgE** specific RAST triggers, **C1-esterase** angioedema low screens, **immunoglobulins** CVID low IgG IgA, **lymphocyte** SCID absent TRECs, **vaccine** antibody responses test, **spirometry** asthmatic reversible, **stool** Giardia CVID screens) with **differentials** (**vasovagal** bradycardic pallor, **mastocytosis** Darier flushing, **carcinoid** niacin diarrhoea, **hereditary** C1-esterase family) sorts; **immunology** (replacement tiers) meets. Triggers identified.",
-   "say": "Tryptases IgEs C1-esterases immunoglobulins is Ix: lymphocytes vanish vaccines fail spirometries swing stools seed vasovagals pale mastocytoses flush carcinoids flush hereditaries swell immunologists meet replaces start wishes respect. Allergens named.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**adrenaline** IM thigh early repeats, **airway** oxygen fluids leg-up, **antihistamine** steroid adjunct slow, **biphasic** observe tryptase re-times, **auto-injector** action-plan trains, **desensitise** venom immunotherapy cures, **IVIG** CVID replacement guards, **SCID** isolated transplant urgent) with **traps** (**beta-blocker** refractory adrenaline, **upright** fatal posture collapse, **live-vaccine** SCID BCG harm) closes; **follow** (triggers infections growth) tracks. Breathing returns.",
-   "say": "Adrenalines airways antihistamines biphasics is Rx: injectors train desensitises cure IVIGs replace transplants rescue blockers blunt uprights kill live-vaccines harm follows track triggers dodge wishes respect. Lives saved.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-allergy-immunology-fig1.webp",
-    "alt": "Diagram showing emergency anaphylaxis management: adrenaline auto-injector into thigh, oxygen, IV fluids, and leg elevation.",
-    "caption": "Initial management of anaphylaxis",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "bk2-med-751",
-  "bk2-med-752",
-  "bk2-med-753",
-  "bk2-med-754",
-  "bk2-med-755",
-  "bk2-med-756",
-  "bk2-med-757",
-  "bk2-med-758",
-  "bk2-med-759",
-  "bk2-med-760"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon8",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 7,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-allergy-immunology",
+  "quiz": [
+    "bk2-med-751",
+    "bk2-med-752",
+    "bk2-med-753",
+    "bk2-med-754",
+    "bk2-med-755",
+    "bk2-med-756",
+    "bk2-med-757",
+    "bk2-med-758",
+    "bk2-med-759",
+    "bk2-med-760"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon8",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask what the patient met just before the reaction started, because the trigger and the time to onset usually point to anaphylaxis. Check whether the skin showed hives or swelling, whether breathing became noisy or difficult, and whether vomiting or fainting followed. You should record background eczema, asthma or hay fever, since atopy strongly predicts future reactions. In children or adults with repeated chest infections or thrush, ask about vaccine reactions and family history, because these clues reveal immunodeficiency. Early clarity here decides whether you prescribe an auto-injector or refer for immune testing.",
+      "tx": "Take a focused allergy history after any suspected reaction, noting the **trigger exposure** such as nuts, insect venom, latex or a newly started drug, and the interval from exposure to onset in minutes. Ask about skin changes like urticaria or angioedema, breathing difficulty with wheeze or stridor, vomiting or collapse, and **background atopy** such as eczema, asthma or rhinitis. For suspected immunodeficiency, ask about **recurrent infection** with sinopulmonary episodes, thrush, adverse reactions to live vaccines, and family history of angioedema or early deaths from infection.",
+      "vis": null
+    },
+    {
+      "say": "Start with the airway in every suspected reaction, because stridor or tongue swelling means you must act before anything else. Listen to the chest and watch the saturation monitor, since wheeze with falling oxygen confirms a severe attack. Feel the pulse and record the blood pressure, because a fast thready pulse with hypotension warns of shock. Look for hives, flushing and swelling, and in recurrent infection ask about tonsils, growth and thrush. Recheck tryptase timing and observed auto-injector technique, so the next episode is managed without delay.",
+      "tx": "Examine the patient with anaphylaxis by first securing **airway patency**, looking for stridor, tongue swelling and angioedema, then listening for wheeze and checking oxygen saturation. Measure blood pressure and pulse because hypotension with tachycardia signals **circulatory collapse**, and inspect the skin for urticaria, flushing or oedema. In suspected immunodeficiency, look for absent tonsils or lymph nodes, growth failure, bronchiectasis, clubbing and oral thrush. Complete **bedside assessment** by timing serum tryptase correctly, trending saturation and peak flow, and checking auto-injector technique with the patient.",
+      "vis": null
+    },
+    {
+      "say": "Send timed tryptase samples during and after the reaction, because the rise and fall confirm mast cell activation. Request specific IgE or skin testing after recovery, so the true trigger is identified before re-exposure occurs. Measure C1 esterase level and function when swelling recurs without hives, because low values explain hereditary angioedema. Check immunoglobulins, lymphocyte subsets and vaccine responses when infections keep returning, and add stool and lung tests where indicated. Separate vasovagal faints, mastocytosis, carcinoid and inherited swelling by history, because each follows a different pathway.",
+      "tx": "Confirm anaphylaxis with timed **serum tryptase**, drawn during the event and repeated at baseline, because a transient rise reflects mast cell degranulation. Identify the trigger with **specific IgE** testing or skin prick assessment once the patient has recovered, and screen persistent angioedema without hives with C1 esterase levels and function. For suspected immunodeficiency, order an **immune workup** with immunoglobulin levels, lymphocyte subsets, vaccine antibody responses and spirometry, plus stool testing when chronic diarrhoea suggests malabsorption. Distinguish vasovagal syncope, mastocytosis, carcinoid and hereditary angioedema by their characteristic clinical and laboratory patterns.",
+      "vis": null
+    },
+    {
+      "say": "Look at the rack of labelled tubes and the pipette filling the assay plate, because this is how allergy testing happens in practice. You should notice the tryptase tube beside the allergen specific IgE tube, since one proves the event and the other names the trigger. Remember to send acute and baseline samples at the correct times, because mistimed blood gives a falsely reassuring result. Use this picture to fix the panel in memory, so every suspected reaction gets complete testing.",
+      "tx": "The photograph shows **labelled serum tubes** for tryptase and allergen specific IgE beside multichannel pipetting into a microplate, with callouts linking mast cell degranulation and RAST triggers. It reminds you that **timed sampling** matters, with acute and baseline tryptase proving anaphylaxis rather than a single random value. Use the image to revise which tube maps to which question, so your **trigger panel** stays complete and no culprit drug, venom or food goes untested.",
+      "vis": {
+        "alt": "Rack of labelled blood tubes including tryptase and IgE beside microplate pipetting; labels mast-cell degranulation and RAST triggers.",
+        "ar": 1.3393,
+        "caption": "Clinical photograph of labelled serum tubes and pipetting for allergy assays. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-allergy-immunology-gen1.webp"
+      }
+    },
+    {
+      "say": "Inject adrenaline into the thigh without delay when anaphylaxis is suspected, because early adrenaline saves lives. Add oxygen and fluids and keep the patient lying flat with legs raised, since upright posture can precipitate collapse. Observe the patient for several hours afterwards, because a second wave sometimes follows apparent recovery. Arrange an action plan with auto-injector training, consider desensitisation or immunoglobulin where indicated, and avoid live vaccines in severe immunodeficiency. Safety netting and follow up complete the episode.",
+      "tx": "Give **intramuscular adrenaline** into the outer thigh at the first sign of anaphylaxis, repeat it as needed, and add oxygen, intravenous fluids and leg elevation for hypotension. Use antihistamines and steroids only as slow adjuncts, never as substitutes for adrenaline, and arrange **biphasic observation** with repeat tryptase timing because deterioration can return hours later. Provide **long term protection** with an action plan, auto-injector training, venom immunotherapy where indicated, replacement immunoglobulin for deficiency, and urgent transplant referral for severe combined immunodeficiency while avoiding live vaccines and upright posture during shock.",
+      "vis": {
+        "alt": "Diagram showing emergency anaphylaxis management: adrenaline auto-injector into thigh, oxygen, IV fluids, and leg elevation.",
+        "ar": 1.8349,
+        "caption": "Initial management of anaphylaxis",
+        "kind": "image",
+        "src": "v1/lessons/media/med-allergy-immunology-fig1.webp"
+      }
+    }
+  ],
+  "subject": "medicine",
+  "title": "Allergy, anaphylaxis and immunodeficiency",
+  "v": 1
 }

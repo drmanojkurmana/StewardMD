@@ -47,8 +47,9 @@ export {
 
 // search-<8 hex>.json: a rebuilt subject search index under a new immutable name (the subject index.json names it).
 const PATH_RE = /^v\d{1,3}\/(?:manifest\.json|[a-z0-9-]{2,60}\/(?:index|search|search-[0-9a-f]{8})\.json|[a-z0-9-]{2,60}\/mcq\/[a-z0-9-]{2,80}\.json)$/;
-// PYQ (tools/prep-pyq.mjs): v<n>/pyq/index.json, items-<8 hex>.json and img/<name>.webp
-const PYQ_RE = /^v\d{1,3}\/pyq\/(?:index\.json|items-[0-9a-f]{8}\.json|img\/[a-z0-9-]{2,80}\.webp)$/;
+// PYQ (tools/prep-pyq.mjs): v<n>/pyq/index.json, items-<8 hex>.json and img/<name>.webp; NEET-SS papers
+// (tools/pyq-ss-build.mjs) use the same layout under v<n>/pyq-ss/
+const PYQ_RE = /^v\d{1,3}\/pyq(?:-ss)?\/(?:index\.json|items-[0-9a-f]{8}\.json|img\/[a-z0-9-]{2,80}\.webp)$/;
 // Lessons and Flashcards (tools/prep-lessons.mjs, tools/prep-cards.mjs)
 const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.json|lessons\/media\/[a-z0-9-]{2,80}\.(?:svg|webp)|kb\/media\/[a-z0-9-]{2,80}\.webp)$/;
 // Radiology media (tools/prep-rad.mjs): img/<name>.webp and scroll stacks stack/<id>/<window>/<NNN>.webp

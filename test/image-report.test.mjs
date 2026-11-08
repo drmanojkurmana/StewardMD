@@ -85,16 +85,18 @@ test("the viewer has the Report button, the admin console approves or declines, 
   assert.match(readFileSync(new URL("../image-viewer.css", import.meta.url), "utf8"), /\.pv-stage/);
 });
 
-test("watermark: three diagonal marks and a corner badge on our images, the corner badge only on Commons images, off by flag", () => {
+test("watermark: one big faint PrepNucleus mark and a Powered by StewardMD line; Commons images get the line only; off by flag", () => {
   const require = createRequire(import.meta.url);
   const W = require("../image-watermark.js");
   const ours = W.html("/api/prep/bank/v1/kb/media/x.webp", true);
-  assert.equal((ours.match(/<i>StewardMD<\/i>/g) || []).length, 3, "exactly three diagonal marks (owner: 'just 3 is enough')");
-  assert.match(ours, /class="smd-wm-c"/);
+  assert.equal((ours.match(/class="smd-wm-big"/g) || []).length, 1, "exactly one big mark (owner 2026-11-07: many marks irritate)");
+  assert.doesNotMatch(ours, /<i>StewardMD<\/i>/, "no repeated diagonal marks any more");
+  assert.match(ours, /class="smd-wm-by"[\s\S]*PrepNucleus[\s\S]*Powered by[\s\S]*Steward<b>MD<\/b>/, "the home lockup: PrepNucleus, Powered by StewardMD");
   assert.match(ours, /aria-hidden="true"/);
   const ext = W.html("https://upload.wikimedia.org/wikipedia/commons/a/b/c.jpg", true);
-  assert.equal((ext.match(/<i>/g) || []).length, 0, "no StewardMD marks across an image that is not ours");
+  assert.doesNotMatch(ext, /smd-wm-big/, "no big mark across an image that is not ours");
   assert.match(ext, /smd-wm--ext/);
+  assert.match(ext, /smd-wm-by/);
   assert.equal(W._external("https://thumb.wikimedia.org/x.png"), true);
   assert.equal(W._external("/logo.png"), false);
   const css = readFileSync(new URL("../image-viewer.css", import.meta.url), "utf8");

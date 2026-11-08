@@ -1,66 +1,75 @@
 {
- "v": 1,
- "module": "med-environmental",
- "subject": "medicine",
- "title": "Environmental emergencies: heat, cold, drowning and altitude",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**heat** exertional classic anhidrotic confusion, **cold** exposure alcohol frostbite shivering, **water** submersion time struggle aspiration, **altitude** ascent rate headache ataxia, **bites** marine envenomation stings, **current** lightning burns arrhythmia, **avalanche** burial asphyxia trauma, **exertion** marathon collapse asks) with **viva** (**hyperthermic** anhidrotic confused, **hypothermic** bradycardic Osborned) profiles; **gear** (wetsuits acclimatisation) asks. Climates kill.",
-   "say": "Heats colds waters altitudes is history: bites sting currents strike avalanches bury exertions collapse hyperthermics bake hypothermics slow rewarms grade descents save. Extremes strike.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**core** rectal temperature grades, **skin** hot-dry frostbite waxy, **mentation** delirious comatose GCS, **pulse** bradycardic arrhythmic Osborn, **lungs** drowning crackles ARDS, **ataxia** HACE wobbly papilloedema, **burns** lightning burns entry-exit, **shivering** present absent stages) with **bedside** (**ECG** Osborn QT arrests, **oxygen** drowning dips, **glucose** mimics corrects) grades; **rigor** (postmortem rules) respects. Temperatures swing.",
-   "say": "Cores skins mentations pulses is exam: lungs drown ataxias wobble burns char shiverings fade ECGs hump oxygens dive glucoses lift cools mist arrests guard. Bodies chill.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-environmental-fig1.webp",
-    "alt": "Multi-panel image showing ECG Osborn wave, frostbite stages on a hand, and hot-dry skin for environmental emergency diagnosis.",
-    "caption": "Key examination findings in environmental emergencies. Image: WikiSysop, CC BY 3.0, Wikimedia Commons.",
-    "ar": 2.3472
-   }
-  },
-  {
-   "tx": "**Investigations** (**gases** respiratory alkalosis acidosis, **electrolytes** rhabdo renal DIC panels, **ECG** hypothermic Osborn arrest, **troponin** lightning contusion climbs, **CXR** drowning ARDS whiteness, **oximetry** HAPE desaturation, **creatinine** crush rhabdo watches, **alcohol** hypothermia co-ingest screens) with **differentials** (**sepsis** cultures lactate, **stroke** focal imaging, **MI** troponin ECG, **epilepsy** witnessed jerks) sorts; **intensivist** (rewarm calls) meets. Cores confirm.",
-   "say": "Gases electrolytes ECGs troponins is Ix: CXRs white oximetries dip creatinines climb alcohols numb sepses brew strokes clot MIs ache epilepsies jerk intensivists meet warms choose wishes respect. Cold shows.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**cool** evaporative ice immersion classics, **rewarm** gentle handling arrhythmia guards, **oxygen** drowning PEEP ARDS nets, **descent** HAPE HACE urgent down, **nifedipine** HAPE dexamethasone HACE, **fluids** rhabdo crush alkaline, **arrest** hypothermic prolonged CPR, **prevent** acclimatise buddy water-safe) with **traps** (**alcohol** rewarming vasodilation, **rough** VF handling triggers, **prognosis** cold stiff declares) closes; **follow** (cores kidneys neuro) tracks. Extremes ease.",
-   "say": "Cools rewarms oxygens descents is Rx: nifedipines ease fluids flush arrests persist prevents plan alcohols dilate roughs fibrillate prognoses wait follows track cores norm wishes respect. Survivals warm.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-921",
-  "bk2-med-922",
-  "bk2-med-923",
-  "bk2-med-924",
-  "bk2-med-925",
-  "bk2-med-926",
-  "bk2-med-927",
-  "bk2-med-928",
-  "bk2-med-929",
-  "bk2-med-930"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon10",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 7,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-environmental",
+  "quiz": [
+    "bk2-med-921",
+    "bk2-med-922",
+    "bk2-med-923",
+    "bk2-med-924",
+    "bk2-med-925",
+    "bk2-med-926",
+    "bk2-med-927",
+    "bk2-med-928",
+    "bk2-med-929",
+    "bk2-med-930"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon10",
+  "src": [],
+  "steps": [
+    {
+      "say": "When you see a collapse outdoors, always ask what the environment did to the patient. Find out how long the person laboured in heat, whether sweating stopped, and whether confusion or fainting followed. Ask how long the person spent in cold water or wind, whether alcohol was involved, and whether shivering faded. For drowning, establish submersion time and aspiration. For hill trips, ask how fast the patient climbed and whether headache or unsteady walking appeared.",
+      "tx": "Take a focused exposure history in every suspected environmental emergency. Ask about **heat exposure** with exertion, sweating, confusion or collapse, and about **cold exposure** with alcohol use, shivering or frostbite. For drowning ask about submersion time, struggle and aspiration. For altitude illness ask about ascent rate, headache and ataxia. Also ask about marine stings, lightning strike, avalanche burial and marathon collapse.",
+      "vis": null
+    },
+    {
+      "say": "Start by recording the core temperature with a rectal thermometer because skin readings mislead in these patients. Look at the skin for the dry heat of heatstroke or the pale waxy patches of frostbite, and assess consciousness carefully. Feel the pulse for the slow irregular rhythm of hypothermia and listen to the chest for drowning crackles. Watch the patient walk for the ataxia of cerebral oedema at altitude, inspect any lightning burns, and note whether shivering persists. Confirm the rhythm on ECG, check oxygen saturation, and correct glucose.",
+      "tx": "Record **core temperature** with a rectal thermometer and grade the severity of hyperthermia or hypothermia. Examine the skin for hot dry heatstroke skin or waxy frostbite, test mentation with the Glasgow coma scale, and feel the pulse for bradycardia or arrhythmia. Listen to the lungs for drowning crackles and ARDS, test gait for HACE ataxia, inspect lightning burns, and note whether shivering is present. Check the ECG for the **Osborn wave**, measure oxygen saturation and correct low glucose.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-environmental-fig1.webp",
+        "alt": "Multi-panel image showing ECG Osborn wave, frostbite stages on a hand, and hot-dry skin for environmental emergency diagnosis.",
+        "caption": "Key examination findings in environmental emergencies. Image: WikiSysop, CC BY 3.0, Wikimedia Commons.",
+        "ar": 2.3472
+      }
+    },
+    {
+      "say": "Blood gases show whether the patient has developed respiratory alkalosis or a metabolic acidosis, so request them early. Check electrolytes and renal function for rhabdomyolysis and kidney injury, and stay alert for disseminated coagulation. Record an ECG to catch the Osborn wave and any malignant rhythm, measure troponin after lightning strike, and order a chest film when drowning or ARDS is suspected. Use oximetry to track desaturation in pulmonary oedema at altitude, screen for alcohol, and rule out sepsis, stroke, infarction and seizures.",
+      "tx": "Order **arterial blood gases** to detect respiratory alkalosis or metabolic acidosis in heatstroke, drowning and altitude illness. Check electrolytes, creatinine and **creatine kinase** for rhabdomyolysis and renal injury, and watch for DIC. Record an ECG for the hypothermic Osborn wave and arrest risk, measure troponin after lightning injury, and order **chest radiography** for drowning related ARDS. Use pulse oximetry for HAPE desaturation, screen for alcohol coingestion, and exclude sepsis, stroke, myocardial infarction and epilepsy.",
+      "vis": null
+    },
+    {
+      "say": "Cool heatstroke without delay using misting, fans and ice immersion for exertional cases. Rewarm hypothermic patients slowly and handle them very gently because rough handling provokes dangerous rhythms. Provide oxygen and ventilate with PEEP when drowning has caused ARDS, and send patients with altitude pulmonary or cerebral oedema down immediately. Add nifedipine for pulmonary oedema and dexamethasone for cerebral oedema, hydrate rhabdomyolysis well, persist with prolonged resuscitation in cold arrest, and counsel about acclimatisation and safe water habits.",
+      "tx": "Cool heatstroke rapidly with evaporative cooling and **ice water immersion** for exertional cases. Rewarm hypothermia gently with minimal handling because rough movement can trigger ventricular fibrillation. Give oxygen and PEEP ventilation for drowning related ARDS, and arrange urgent descent for HAPE and HACE. Use **nifedipine** for HAPE and dexamethasone for HACE, hydrate crush and rhabdomyolysis generously, continue prolonged CPR in hypothermic arrest, and advise acclimatisation and water safety.",
+      "vis": null
+    },
+    {
+      "say": "Look at the three panels together because examiners love asking you to separate these emergencies. The first panel shows a heatstroke patient cooled with mist and fans. The second panel shows a hypothermic patient wrapped and warmed while the monitor watches for slow rhythms. The third panel shows altitude patients receiving oxygen, with descent marked urgent and the correct drugs beside each bed. Link every picture to its treatment before you answer.",
+      "tx": "This panel reviews the three rescues you must contrast in the exam. Heatstroke needs rapid evaporative cooling with mist and fans, hypothermia needs gentle insulated rewarming with **cardiac monitoring** for bradycardia and the Osborn wave, and altitude illness needs oxygen with **immediate descent**, nifedipine for HAPE and dexamethasone for HACE. Match each picture to its emergency and its drug.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-environmental-gen1.webp",
+        "alt": "Three illustrated panels of cooled heatstroke patient, warmed hypothermia patient on monitor, and tented altitude patients.",
+        "caption": "Illustrated heatstroke, hypothermia and altitude illness management panels.",
+        "ar": 1.3393
+      }
+    }
+  ],
+  "subject": "medicine",
+  "title": "Environmental emergencies: heat, cold, drowning and altitude",
+  "v": 1
 }

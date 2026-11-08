@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sob-anaemia-pregnancy",
+  "title": "Anaemia in Pregnancy, Iron Deficiency, Megaloblastic Anaemia, Hemoglobinopathies, and Transfusion",
+  "subject": "ss-obg",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Williams Obstetrics 25e Ch 56 (Hematological Disorders)",
+    "WHO Guidelines on Daily Iron and Folic Acid Supplementation in Pregnant Women",
+    "Anemia Mukt Bharat Operational Guidelines"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The World Health Organization defines maternal anaemia as a hemoglobin level below eleven grams per decilitre in the first and third trimesters, or below ten point five grams per decilitre in the second trimester. Severe anaemia is defined by a hemoglobin below seven grams per decilitre, while very severe anaemia below four grams per decilitre risks high-output heart failure.",
+      "tx": "Under **WHO criteria**, anaemia in pregnancy is defined as a **haemoglobin threshold** below **11.0 g/dL** in the first and third trimesters, and below **10.5 g/dL** in the second trimester. **Severe anaemia** is defined as hemoglobin under **7.0 g/dL**, necessitating urgent therapeutic correction to prevent maternal high-output failure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anaemia-pregnancy-iron-transfusion-thresholds-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Maternal anaemia classification and transfusion thresholds. Credit: StewardMD.",
+        "alt": "Diagnostic thresholds, severity grading, and transfusion triggers for gestational anaemia."
+      }
+    },
+    {
+      "say": "Iron deficiency anaemia is the commonest cause of gestational anaemia, accounting for seventy five to eighty percent of cases. Diagnosis is established by serum ferritin below thirty micrograms per litre, microcytic hypochromic red cell indices, and an elevated total iron binding capacity. Serum ferritin represents the most reliable indicator of depleted storage iron.",
+      "tx": "**Iron deficiency anaemia** accounts for 75 to 80 percent of maternal anaemia cases. The diagnosis is confirmed by **serum ferritin** below 30 micrograms/L, microcytic hypochromic indices, and an elevated **total iron binding capacity**, reflecting exhausted reticuloendothelial iron stores before overt drop in hemoglobin occurs.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/iron-deficiency-and-microcytic-anaemias-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Microcytic hypochromic anaemia and iron study interpretation. Credit: StewardMD.",
+        "alt": "Laboratory evaluation and blood smear features of microcytic hypochromic anaemia."
+      }
+    },
+    {
+      "say": "Normal singleton pregnancy requires approximately one thousand milligrams of elemental iron. Three hundred milligrams supplies the fetus and placenta, five hundred milligrams supports maternal red blood cell mass expansion, and two hundred milligrams covers obligate gastrointestinal and skin desquamative losses throughout gestation.",
+      "tx": "The total maternal **iron requirement** across gestation is approximately 1000 mg. This allocation includes 300 mg for **fetal-placental demand**, 500 mg required to support maternal **RBC expansion**, and 200 mg lost via obligatory physiological shedding from the gut, urinary tract, and desquamated skin.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Iron Allocation Compartment",
+          "Amount (mg Elemental Iron)",
+          "Physiological Mechanism"
+        ],
+        "rows": [
+          [
+            "Fetal and placental uptake",
+            "300 mg",
+            "Active transplacental transport via syncytiotrophoblast transferrin receptors"
+          ],
+          [
+            "Maternal red cell expansion",
+            "500 mg",
+            "Accelerated erythropoiesis supporting 30% red cell mass expansion"
+          ],
+          [
+            "Obligatory maternal losses",
+            "200 mg",
+            "Basal gastrointestinal, desquamative, and urinary losses"
+          ],
+          [
+            "Total gestational requirement",
+            "1000 mg",
+            "Exceeds standard dietary absorption, mandating routine supplementation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When oral iron fails due to gastrointestinal intolerance, poor compliance, or when moderate to severe anaemia is diagnosed late in pregnancy, intravenous iron is indicated. The total iron deficit is calculated using the Ganzoni formula. Formulations like ferric carboxymaltose or iron sucrose allow safe and rapid repletion without test doses.",
+      "tx": "Administration of **intravenous iron** using **ferric carboxymaltose** or iron sucrose is indicated for oral iron intolerance or severe late-gestation anaemia. The dose is calculated via the **Ganzoni formula** (body weight in kg multiplied by target minus actual hemoglobin multiplied by 2.4, plus 500 mg depot iron).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify indication: oral failure, intolerance, or late third trimester"
+          },
+          {
+            "id": "b",
+            "label": "Apply Ganzoni formula: Weight (kg) x (Target Hb - Actual Hb) x 2.4 + 500 mg"
+          },
+          {
+            "id": "c",
+            "label": "Select parenteral agent: Ferric carboxymaltose or iron sucrose"
+          },
+          {
+            "id": "d",
+            "label": "Administer infusion without test dose; monitor reticulocyte response at 7 days"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Megaloblastic anaemia in pregnancy is almost universally due to folic acid deficiency, resulting from accelerated fetal cell division and maternal uterine growth. A peripheral blood smear demonstrates macrocytic red cell indices and hypersegmented neutrophils with five or more nuclear lobes. Treatment requires five milligrams of oral folic acid daily alongside standard iron supplementation.",
+      "tx": "**Megaloblastic anaemia** in pregnancy is almost universally caused by **folic acid deficiency** driven by fetal DNA replication and maternal tissue growth. The peripheral blood smear demonstrates **hypersegmented neutrophils** with five or more nuclear lobes and macrocytes, effectively treated with therapeutic oral folate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Folate Deficiency Megaloblastic Anaemia",
+          "points": [
+            "Driven by high fetal DNA synthesis demands",
+            "Peripheral macro-ovalocytes and hypersegmented PMNs",
+            "Serum folate below 3 ng/mL",
+            "Treated with 5 mg oral folic acid daily"
+          ]
+        },
+        "right": {
+          "title": "Vitamin B12 Deficiency in Pregnancy",
+          "points": [
+            "Rare in pregnancy; seen in strict vegans or pernicious anaemia",
+            "Elevated serum methylmalonic acid and homocysteine",
+            "Risk of permanent maternal neurological subacute degeneration",
+            "Treated with intramuscular cyanocobalamin"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Beta-thalassemia trait is an important differential diagnosis for microcytic anaemia in pregnancy. It presents with mild microcytic hypochromic anaemia accompanied by a disproportionately normal or elevated red blood cell count. The diagnosis is confirmed by finding a hemoglobin A2 level exceeding three point five percent on hemoglobin electrophoresis or high performance liquid chromatography.",
+      "tx": "**Beta-thalassemia trait** presents with mild microcytic anaemia and a disproportionately elevated erythrocyte count. Diagnosis is established by demonstrating an **HbA2** level exceeding 3.5 percent on **hemoglobin electrophoresis**, differentiating inherited hemoglobinopathy from nutritional iron deficiency and avoiding unnecessary toxic iron overload.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Laboratory Parameter",
+          "Iron Deficiency Anaemia",
+          "Beta-Thalassemia Trait"
+        ],
+        "rows": [
+          [
+            "Red blood cell count (RBC)",
+            "Reduced proportionally to anemia",
+            "Disproportionately normal or elevated (>5.0 million/mcL)"
+          ],
+          [
+            "Mentzer index (MCV/RBC)",
+            "Greater than 13",
+            "Less than 13 (suggests thalassemia trait)"
+          ],
+          [
+            "Serum ferritin",
+            "Below 30 mcg/L (depleted)",
+            "Normal or elevated (>50 mcg/L)"
+          ],
+          [
+            "HbA2 on electrophoresis",
+            "Normal or reduced (<2.5%)",
+            "Elevated above 3.5% (confirms beta-thalassemia trait)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sickle cell disease, or hemoglobin SS, carries severe maternal and perinatal morbidity during pregnancy. Patients face heightened risks of painful vaso-occlusive bone crises, acute chest syndrome, preeclampsia, and placental infarction. Management requires multidisciplinary care, aggressive hydration, analgesia, and prompt treatment of infections.",
+      "tx": "**Sickle cell disease** in pregnancy is complicated by recurrent **vaso-occlusive crisis** bone pain episodes, preeclampsia, and placental infarction. Furthermore, **acute chest syndrome** represents a leading cause of maternal mortality, presenting with sudden cough, pleuritic chest pain, hypoxemia, and new pulmonary infiltrates on chest radiography.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vaso-Occlusive Pain Crisis",
+          "points": [
+            "Microvascular sludging and bone marrow ischemia",
+            "Intense bone, joint, and back pain",
+            "Triggered by dehydration, cold, hypoxia, infection",
+            "Treated with intravenous fluids and parenteral opioids"
+          ]
+        },
+        "right": {
+          "title": "Acute Chest Syndrome",
+          "points": [
+            "Pulmonary fat embolism and microvascular sickling",
+            "Pleuritic chest pain, fever, cough, hypoxemia",
+            "Rapidly progressive respiratory failure",
+            "Mandates urgent exchange blood transfusion"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Prophylactic blood transfusion is not routinely recommended for all pregnant women with sickle cell disease. However, exchange transfusion is lifesaving in acute chest syndrome, acute ischemic stroke, multi-organ failure, or severe refractory vaso-occlusive crisis, rapidly reducing sickle hemoglobin levels below thirty percent.",
+      "tx": "While routine prophylactic blood transfusion is not indicated in stable sickle cell pregnancies, prompt **exchange transfusion** is life-saving for **acute chest syndrome**, acute ischemic **stroke**, or refractory multi-organ failure, rapidly reducing circulating sickle hemoglobin below 30 percent while restoring tissue oxygenation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sickle cell patient develops acute chest syndrome, hypoxia, or stroke"
+          },
+          {
+            "id": "b",
+            "label": "Mobilize blood bank for phenotypically matched, leukoreduced donor units"
+          },
+          {
+            "id": "c",
+            "label": "Initiate automated or manual red cell exchange transfusion"
+          },
+          {
+            "id": "d",
+            "label": "Target HbS <30% and total hemoglobin 10.0 g/dL to restore microvascular perfusion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

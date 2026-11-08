@@ -1,0 +1,295 @@
+{
+  "v": 1,
+  "module": "sct-acute-type-a-aortic-dissection",
+  "title": "Acute type A aortic dissection: Stanford vs DeBakey classification, malperfusion and emergency repair",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 113 (Thoracic Aortic Aneurysms and Acute Aortic Dissection)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 17 (Aortic Dissection)",
+    "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Aortic dissection begins when a tear in the intima allows blood to surge into the media. Pulsatile arterial flow strips the media apart, creating a true lumen and an expanding false lumen. An intimal flap separates the two channels along the length of the dissected aorta.",
+      "tx": "Acute aortic dissection originates from an **intimal tear** that allows pressurized blood to surge into the aortic media, driving apart the elastic layers. This process creates a dynamic **intimal flap** that partitions aortic blood flow between the original **true lumen** and a newly formed **false lumen**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Primary intimal entry tear in aortic wall"
+          },
+          {
+            "id": "b",
+            "label": "Pressurized blood dissects medial elastic lamellae"
+          },
+          {
+            "id": "c",
+            "label": "Formation of dynamic separating intimal flap"
+          },
+          {
+            "id": "d",
+            "label": "Creation of dual true and false luminal flow channels"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Classification systems guide emergency surgical decision-making. The Stanford system categorizes any dissection involving the ascending aorta as type A, which requires emergency surgery. The DeBakey system details extent, with type one involving ascending and descending aorta, and type two confined to the ascending segment.",
+      "tx": "The **Stanford classification** categorizes any dissection involving the ascending aorta as **Stanford Type A**, mandating emergency surgery, while dissection confined to the descending aorta is **Stanford Type B**. The **DeBakey classification** further separates extensive Type I from localized Type II ascending tears.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classification System",
+          "Subtype",
+          "Anatomical Involvement and Urgency"
+        ],
+        "rows": [
+          [
+            "Stanford",
+            "Type A",
+            "Involves ascending aorta; emergency surgical repair"
+          ],
+          [
+            "Stanford",
+            "Type B",
+            "Confined to descending thoracic aorta distal to LSA; medical or TEVAR"
+          ],
+          [
+            "DeBakey",
+            "Type I",
+            "Originates in ascending aorta, extends distally through arch and descending"
+          ],
+          [
+            "DeBakey",
+            "Type II",
+            "Confined strictly to the ascending aorta proximal to innominate takeoff"
+          ],
+          [
+            "DeBakey",
+            "Type III",
+            "Originates in descending aorta (IIIa thoracic, IIIb below diaphragm)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Acute type A dissection carries an ominous hourly mortality. Left untreated, mortality increases by one to two percent per hour, reaching fifty percent within the first forty-eight hours. Immediate surgical repair is required to prevent fatal pericardial tamponade, aortic rupture, or coronary ostial detachment.",
+      "tx": "Untreated acute Type A dissection carries a devastating **hourly mortality rate** of 1 to 2 percent per hour, culminating in nearly **50 percent mortality** within the first 48 hours. Emergency surgery is mandatory to prevent **fatal cardiac tamponade**, acute aortic rupture, and massive aortic regurgitation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Emergency Surgical Repair",
+          "points": [
+            "Immediate operating room transfer under bypass",
+            "Resects entry tear and prevents intrapericardial rupture",
+            "Reduces 48-hour mortality from 50% to roughly 10-15%"
+          ]
+        },
+        "right": {
+          "title": "Untreated / Delayed Medical Management",
+          "points": [
+            "1 to 2 percent per hour mortality progression",
+            "High risk of sudden death from cardiac tamponade",
+            "Progressive end-organ malperfusion and stroke"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Preoperative anti-impulse medical therapy slows dissection propagation while preparing the operating room. Intravenous beta-blockers such as esmolol reduce both heart rate and the rate of pressure rise. Clinicians target a heart rate under sixty and a systolic pressure between one hundred and one hundred and twenty.",
+      "tx": "Initial medical stabilization demands immediate **anti-impulse therapy** using intravenous **esmolol** or labetalol to lower both heart rate and the force of left ventricular contraction (dP/dt). Clinicians target a **heart rate < 60 bpm** and a systolic blood pressure between 100 and 120 mmHg.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Immediate intravenous beta-blocker (esmolol / labetalol)"
+          },
+          {
+            "id": "b",
+            "label": "Suppress ventricular contractility and dP/dt sheer stress"
+          },
+          {
+            "id": "c",
+            "label": "Titrate vasodilator (nitroprusside) if SBP remains > 120"
+          },
+          {
+            "id": "d",
+            "label": "Maintain target heart rate < 60 bpm and SBP 100-120 mmHg"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Branch vessel compromise causes life-threatening malperfusion syndromes. Dynamic obstruction occurs when the mobile intimal flap prolapses over a branch vessel origin. Static obstruction results from direct dissection into the branch vessel wall, producing false lumen expansion and true lumen thrombosis.",
+      "tx": "Vascular complications stem from **malperfusion syndrome**, manifesting through two distinct mechanisms. **Dynamic obstruction** occurs when the mobile intimal flap prolapses over a branch vessel orifice. In contrast, **static obstruction** involves direct entry of dissection into the branch wall with true lumen thrombosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dynamic Malperfusion",
+          "points": [
+            "Flap prolapses over branch orifice like a curtain",
+            "Dependent on cardiac cycle and aortic pressure gradients",
+            "Relieved completely once central aortic repair restores true lumen"
+          ]
+        },
+        "right": {
+          "title": "Static Malperfusion",
+          "points": [
+            "Dissection extends directly into branch artery wall",
+            "Thrombosis and compression narrow true vessel lumen",
+            "Often requires dedicated percutaneous branch stenting or fenestration"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Cerebral protection enables safe open distal aortic reconstruction during circulatory arrest. Perfusionists will initiate deep hypothermic circulatory arrest at eighteen to twenty degrees Celsius. Antegrade cerebral perfusion through the right axillary artery delivers cold oxygenated blood directly to the brain.",
+      "tx": "Surgical repair requires **deep hypothermic circulatory arrest** at 18 to 20 degrees Celsius alongside **selective antegrade cerebral perfusion** via right axillary cannulation. This strategy provides robust **cerebral protection**, permitting bloodless open distal inspection and hemiarch reconstruction without causing stroke. Delivering cold oxygenated blood directly through the axillary cannulation cannula protects vulnerable cortical neurons throughout the entire circulatory arrest interval.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Establish systemic bypass via right axillary artery"
+          },
+          {
+            "id": "b",
+            "label": "Cool core temperature to 18 to 20 degrees Celsius"
+          },
+          {
+            "id": "c",
+            "label": "Initiate circulatory arrest and clamp innominate artery"
+          },
+          {
+            "id": "d",
+            "label": "Maintain unilateral or bilateral antegrade cerebral perfusion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Distal reconstruction resects the primary intimal tear and reunites dissected aortic layers. The surgeon performs an open distal hemiarch anastomosis under circulatory arrest. Teflon felt neomedia strips reapproximate the dissected aortic wall, redirecting all blood flow into the true lumen.",
+      "tx": "The core surgical objective is an open **hemiarch replacement** with complete resection of the primary intimal tear. The surgeon reconstructs the distal aorta using inner and outer **Teflon felt neomedia** strips, reapproximating dissected layers to ensure all blood flow redirects into the **distal true lumen**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Open distal aorta during deep hypothermic arrest"
+          },
+          {
+            "id": "b",
+            "label": "Resect intimal tear and inspect arch branch origins"
+          },
+          {
+            "id": "c",
+            "label": "Sandwich dissected aortic wall between Teflon felt strips"
+          },
+          {
+            "id": "d",
+            "label": "Sew beveled Dacron graft anastomosis to reconstructed cuff"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Aortic root management depends on the integrity of the sinuses of Valsalva. When dissection spares the aortic root, resuspending the aortic valve commissures into the Dacron graft restores competence. When the root is destroyed or ectatic, a composite valve-graft conduit replacement is required.",
+      "tx": "Proximal root reconstruction utilizes **aortic valve resuspension** into the Dacron graft when the sinuses of Valsalva are structurally intact. However, in patients with root destruction, connective tissue disorders, or severe ectasia, a complete **Bentall procedure** composite root replacement is mandatory.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Root Pathology",
+          "Surgical Technique",
+          "Procedural Characteristics"
+        ],
+        "rows": [
+          [
+            "Preserved sinuses, detached commissures",
+            "Aortic valve resuspension",
+            "Pledgeted mattress sutures resuspend commissural pillars"
+          ],
+          [
+            "Ectatic root, destroyed coronary ostia",
+            "Bentall procedure",
+            "Composite mechanical/biological conduit with coronary buttons"
+          ],
+          [
+            "Connective tissue disease, pliable leaflets",
+            "Valve-sparing root reimplantation (David)",
+            "Preserves native aortic leaflets inside Dacron graft tube"
+          ]
+        ]
+      }
+    }
+  ]
+}

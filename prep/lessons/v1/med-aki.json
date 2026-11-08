@@ -1,37 +1,20 @@
 {
-  "v": 1,
-  "module": "med-aki",
-  "subject": "medicine",
-  "title": "Acute kidney injury: prerenal, intrinsic and postrenal",
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "gen": "AI",
   "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**oliguria** under 400 mL days, **anuria** obstructed warns, **prerenal** vomiting diarrhoea bleed diuretics hypotension sepsis, **intrinsic** aminoglycosides contrast NSAIDs cola glomerulonephritic crush myoglobin, **postrenal** prostatism dribbling stones colic, **past** CKD diabetes heart) with **viva** (**septic** hypotensive elder, **anuric** prostatic retainer) profiles; **KDIGO** (creatinine urine-output stages) triages. Kidneys fail.",
-      "say": "Oligurias anurias prerenals intrinsics is history: postrenals block pasts scar KDIGOs stage septics crash anurics retain resuscitations fill catheters drain. Urines fall.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**volume** JVP oedema lungs postural, **uraemic** pericardial rub asterixis breath fetor, **bladder** palpable dull prostate rectal, **rashes** vasculitic purpura livedo, **muscle** crush compartments tea urine, **BP** shock resuscitate) with **bedside** (**intake-output** strict hourly, **weights** daily gains, **dipstick** blood protein) charts; **ECG** (peaked hyperkalaemia warns) alarms. Bodies retain.",
-      "say": "Volumes uraemias bladders rashes is exam: muscles crush pressures drop outputs chart weights weigh dipsticks dip ECGs peak dialyses near asterixis flap rubs grate. Fluids shift.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**creatinine** trend KDIGO eGFR falls, **urea** electrolytes bicarbonate gaps, **urine** sodium FENa microscopy muddy-brown casts, **ultrasound** hydronephrosis kidney sizes, **ABG** metabolic acidosis compensates, **ECG** peaked arrests) with **differentials** (**prerenal** FENa low responds, **ATN** high persists, **GN** red-cell casts hypertenses, **obstruction** hydronephrotic anuric) sorts; **nephrology** (biopsy dialysis decides) meets. Creatinines climb.",
-      "say": "Creatinines ureas urines ultrasounds is Ix: gases acid ECGs peak prerenals fill ATNs persist GNs bleed obstructions dam nephrologies meet biopsies show dialyses rescue. Numbers stage.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/med-aki-fena.svg",
-        "alt": "Prerenal versus ATN panel: FENa below 1 percent, urine sodium below 20, osmolality above 500, bland sediment and BUN to creatinine ratio above 20 point prerenal; the mirror values with muddy brown casts point to ATN.",
-        "caption": "Dry kidneys concentrate; injured tubules cannot.",
-        "ar": 1.5385
-      }
-    },
-    {
-      "tx": "**Management** (**fluids** resuscitate unless overloaded crackles, **stop** nephrotoxins dose-adjust renally, **relieve** catheter stent nephrostomy drains, **hyperkalaemia** calcium insulin-glucose salbutamol, **acidosis** bicarbonate dialyses, **follow** creatinine recovery polyuria) with **traps** (**contrast** hydrate holds, **overload** lungs drown, **uraemic** bleed operates) closes; **counsel** (sick-day rules) warns. Kidneys recover.",
-      "say": "Fluids stops relieves shifts is Rx: acidoses buffer follows track contrasts hold overloads drown uraemias bleed counsels warn sick-days pause recoveries watch relapses guard. Urines return.",
-      "vis": null
-    }
-  ],
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-aki",
   "quiz": [
     "bk2-med-281",
     "bk2-med-282",
@@ -44,23 +27,51 @@
     "bk2-med-289",
     "bk2-med-290"
   ],
-  "src": [],
   "refs": [
     "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
   ],
-  "gen": "AI",
   "run": "books2-lon4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
-  }
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about urine output first, because a fall below 400 mL per day defines oliguria and absent urine suggests obstruction. Explore fluid losses, bleeding, diuretic use, low pressure and sepsis as prerenal triggers. Review medicines including aminoglycosides, contrast and painkillers, and ask about muscle injury with dark urine. Enquire about dribbling, poor stream, colic and stones, and record background kidney, diabetic and heart disease.",
+      "tx": "Suspect acute kidney injury when urine output falls below 400 mL per day, and treat **anuria** as a warning of obstruction. Separate **prerenal** causes such as vomiting, diarrhoea, bleeding, diuretics, hypotension and sepsis from intrinsic injury by aminoglycosides, contrast, anti inflammatory drugs or crush with cola coloured urine. Ask about prostatism, dribbling, colic and stones for **postrenal** blockage, and record background CKD, diabetes and heart disease.",
+      "vis": null
+    },
+    {
+      "say": "Assess fluid volume by checking the jugular pressure, oedema, lungs and lying standing pressure. Look for uraemic clues such as a pericardial rub, flapping tremor, altered smell of breath and drowsiness. Palpate the bladder, examine the prostate and inspect rashes and crushed muscle compartments. You should chart intake and output strictly, weigh the patient daily, dip the urine and inspect the ECG for hyperkalaemia.",
+      "tx": "Assess volume status through jugular pressure, oedema, lung crackles and **postural pressure** change, and look for uraemic signs such as pericardial rub, asterixis, fetor and drowsiness. Palpate for a dull suprapubic **bladder** with rectal and prostate examination, inspect rashes for vasculitis, and check crushed limbs with tea coloured urine. Record strict intake and output with daily weights, dip the urine, and read the **ECG** for peaked hyperkalaemia changes.",
+      "vis": null
+    },
+    {
+      "say": "Study this ECG and spot the tall tented T waves, the flattening P wave and the broadening QRS complex. These patterns signal that high potassium is slowing electrical conduction through the heart. Check the ECG in every patient with acute kidney injury, and treat these changes as an emergency because they can progress to cardiac arrest.",
+      "tx": "The new tracing shows a hyperkalaemia **ECG** with tall tented T waves, a flattened P wave and a widened QRS complex. These changes warn that potassium is poisoning cardiac conduction and arrest can follow. In the exam, read every AKI ECG systematically and act at once, because calcium, insulin with glucose and **salbutamol** only buy time before **dialysis** removes the potassium load.",
+      "vis": {
+        "alt": "Printed 12 lead ECG on grid paper with tall tented T waves, flattened P wave and widened QRS labeled.",
+        "ar": 1.3393,
+        "caption": "12 lead ECG showing hyperkalaemia T, P and QRS changes. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-aki-gen1.webp"
+      }
+    },
+    {
+      "say": "Follow creatinine trends and eGFR to stage the injury, and check urea, electrolytes, bicarbonate and arterial gases for acidosis. Measure urine sodium and FENa, and examine urinary sediment because muddy brown casts point to tubular necrosis. You should request an ultrasound to exclude hydronephrosis and compare kidney sizes. Repeat the ECG regularly since peaked changes warn of dangerous hyperkalaemia.",
+      "tx": "Track creatinine trends and falling eGFR to stage injury by **KDIGO** criteria, with urea, electrolytes, bicarbonate and **ABG** showing metabolic acidosis. Test urine sodium with **FENa** and examine microscopy, where muddy brown casts mark tubular necrosis. Use ultrasound to detect hydronephrosis and compare kidney sizes, and use the ECG to catch peaked potassium changes early.",
+      "vis": {
+        "alt": "Prerenal versus ATN panel: FENa below 1 percent, urine sodium below 20, osmolality above 500, bland sediment and BUN to creatinine ratio above 20 point prerenal; the mirror values with muddy brown casts point to ATN.",
+        "ar": 1.5385,
+        "caption": "Dry kidneys concentrate; injured tubules cannot.",
+        "kind": "image",
+        "src": "prep/lessons/media/med-aki-fena.svg"
+      }
+    },
+    {
+      "say": "Give fluids to restore perfusion unless the patient shows signs of overload, stop nephrotoxic medicines and adjust remaining drug doses. You should relieve obstruction promptly with a catheter, stent or nephrostomy tube. You should correct high potassium and severe acidosis without delay, and arrange dialysis when complications refuse to settle. Teach sick day rules for pausing risky medicines, and track creatinine until recovery completes.",
+      "tx": "Resuscitate with **cautious fluids** unless the lungs show overload, stop nephrotoxins, adjust drug doses for renal function and relieve obstruction with catheter, stent or **nephrostomy**. Treat hyperkalaemia with calcium, insulin plus glucose and salbutamol, correct severe acidosis, and dialyse for refractory complications. Warn about **sick day rules** for ACE inhibitors, diuretics and painkillers, and follow creatinine into recovery with its polyuric phase.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Acute kidney injury: prerenal, intrinsic and postrenal",
+  "v": 1
 }

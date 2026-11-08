@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "module": "sob-aph",
+ "title": "Antepartum Haemorrhage: Placenta Praevia, Abruptio Placentae and Vasa Praevia",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Williams Obstetrics 25e Ch 41 (Obstetrical Hemorrhage)",
+  "Ten Teachers Gynaecology 21e",
+  "RCOG Green-top Guideline No. 63 (Antepartum Haemorrhage)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Antepartum haemorrhage** (APH) is genital tract bleeding occurring from 24 weeks gestation until delivery. **Placenta praevia** manifests classically with sudden, recurrent episodes of painless, bright red **vaginal bleeding** without uterine tenderness or hypertonus, frequently initiated during lower uterine segment formation and thinning. Clinically, key parameters encompass painless bleeding, third trimester.",
+   "say": "Antepartum haemorrhage encompasses all genital tract bleeding arising from twenty-four weeks gestation onwards before delivery of the baby. Placenta praevia presents characteristically as spontaneous, painless, bright red vaginal bleeding in the absence of uterine contractions or maternal abdominal tenderness. Digital vaginal examination is strictly contraindicated prior to ultrasound confirmation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-aph-gen1.webp",
+    "ar": 1.7778,
+    "caption": "Transvaginal sonography measuring placental distance from internal os. Credit: StewardMD.",
+    "alt": "Ultrasound view showing transvaginal measurement of the lower placental edge relative to the internal cervical os."
+   }
+  },
+  {
+   "tx": "**Transvaginal sonography** (TVS) is the gold standard imaging modality for evaluating placental localisation, exhibiting superior diagnostic safety and accuracy over transabdominal scanning. When the placental leading edge lies **within 2 cm of the internal cervical os** at or beyond 32 weeks, it is classified as low-lying placenta. Clinically, key parameters encompass digital vaginal examination, contraindication, ultrasound localization.",
+   "say": "Transvaginal ultrasound is the unquestioned gold standard for diagnosing abnormal placentation. Contrary to traditional fears, careful probe introduction along the vaginal axis does not provoke bleeding. When the lower placental edge lies within twenty millimetres of the internal cervical os at thirty-two weeks, elective caesarean section is usually planned.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Placental Distance from Os",
+     "Sonographic Classification",
+     "Obstetric Delivery Route"
+    ],
+    "rows": [
+     [
+      "Overlying internal os",
+      "Placenta praevia (major)",
+      "Planned elective caesarean section at 36 to 37 weeks"
+     ],
+     [
+      "Edge < 20 mm from os",
+      "Low-lying placenta",
+      "High risk of bleeding; caesarean delivery strongly recommended"
+     ],
+     [
+      "Edge >= 20 mm from os",
+      "Normally situated placenta",
+      "Safe trial of labour and vaginal delivery permitted"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Abruptio placentae** is premature separation of a normally implanted placenta before delivery, presenting with constant severe **abdominal pain**, dark vaginal bleeding, and wooden **uterine hypertonus**. Primary etiological risk factors include chronic maternal hypertension, **preeclampsia**, blunt abdominal trauma, and acute cocaine exposure. Clinically, key parameters encompass low-lying placenta, internal cervical os, placental edge, 20, 2.",
+   "say": "Placental abruption represents premature detachment of the placenta prior to fetal expulsion. Patients present with acute, agonizing abdominal pain, dark altered vaginal bleeding, and a tense, hypertonic, tender uterus that fails to relax between contractions. Chronic hypertension, preeclampsia, and sudden decompression of polyhydramnios are major predisposing triggers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Placenta Praevia Presentation",
+     "points": [
+      "Painless, recurrent bright red vaginal bleeding",
+      "Uterus is soft, relaxed, and non-tender on palpation",
+      "Fetal parts easily felt; malpresentation common",
+      "Fetal heart sounds typically reassuring and normal"
+     ]
+    },
+    "right": {
+     "title": "Abruptio Placentae Presentation",
+     "points": [
+      "Severe constant abdominal and back pain",
+      "Uterus woody, hard, hypertonic, and tender",
+      "Fetal parts difficult to palpate due to high tone",
+      "Fetal distress, bradycardia, or death common"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In severe placental abruption, massive release of **decidual thromboplastin** into the maternal circulation triggers catastrophic **disseminated intravascular coagulation** (DIC). Extensive consumption coagulopathy rapidly exhausts **plasma fibrinogen below 150 mg/dL**, mandating aggressive transfusion of cryoprecipitate or fibrinogen concentrate alongside packed red cells. Clinically, key parameters encompass abruptio placentae, woody-hard uterus, uterine hypertonicity.",
+   "say": "Severe concealed abruption exposes maternal sinuses to high levels of tissue factor and decidual thromboplastin. The resulting consumption coagulopathy precipitates acute disseminated intravascular coagulation. Circulating fibrinogen plunges below one hundred and fifty milligrams per decilitre, demanding immediate administration of cryoprecipitate and balanced blood products.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Retroplacental hemorrhage and decidual cell necrosis"
+     },
+     {
+      "id": "b",
+      "label": "Massive systemic release of decidual tissue factor thromboplastin"
+     },
+     {
+      "id": "c",
+      "label": "Widespread microvascular thrombosis and consumption coagulopathy"
+     },
+     {
+      "id": "d",
+      "label": "Severe hypofibrinogenemia (<150 mg/dL) and systemic bleeding"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extravasation of blood into the myometrium and beneath the uterine serosa produces a bruised, purple-mottled **Couvelaire uterus** (uteroplacental apoplexy). The resultant myometrial dissociation severely impairs smooth muscle contractility, generating high risks of refractory life-threatening **atonic postpartum haemorrhage** following delivery of the fetus. Clinically, key parameters encompass concealed hemorrhage, myometrial extravasation, 20.",
+   "say": "Widespread interstitial extravasation of retroplacental hematoma dissects between myometrial smooth muscle bundles, producing the classic purplish, ecchymotic appearance known as Couvelaire uterus. Disrupted contractile fibres cannot achieve effective tonic vasoconstriction, predisposing the mother to profound atonic postpartum haemorrhage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Finding",
+     "Pathological Substrate",
+     "Targeted Intervention"
+    ],
+    "rows": [
+     [
+      "Uteroplacental apoplexy",
+      "Myometrial intramuscular hemorrhage",
+      "High-dose uterotonics and mechanical bimanual compression"
+     ],
+     [
+      "Hypofibrinogenemia",
+      "Consumption of clotting factors in retroplacental clot",
+      "Cryoprecipitate (10 units) or fibrinogen concentrate (2-4 g)"
+     ],
+     [
+      "Concealed hemorrhage",
+      "Retroplacental pocket without external blood loss",
+      "Continuous cardiotocography and invasive maternal monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vasa praevia** occurs when unsupported fetal umbilical vessels course within the membranes across the internal cervical os ahead of the fetal presentation, typically seen in **velamentous cord insertion** or succenturiate placental lobes. Vessel laceration produces rapid catastrophic fetal exsanguination and **high perinatal mortality** without immediate intervention. Clinically, key parameters encompass placenta accreta spectrum, placenta increta, placenta percreta.",
+   "say": "Vasa praevia occurs when membranous fetal vessels unprotected by Wharton jelly traverse the lower uterine segment directly over the internal os. Most cases complicate velamentous cord insertion or bilobed placenta. When the membranes rupture during labor, these delicate vessels tear, causing rapid exsanguinating fetal blood loss.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Velamentous cord insertion or succenturiate accessory lobe"
+     },
+     {
+      "id": "b",
+      "label": "Membranous fetal vessels traverse directly across internal os"
+     },
+     {
+      "id": "c",
+      "label": "Spontaneous or artificial rupture of amniotic membranes"
+     },
+     {
+      "id": "d",
+      "label": "Torn fetal vessels cause acute exsanguination and fetal demise"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Laceration of fetal vessels in vasa praevia produces a pathognomonic triad: **rupture of membranes**, immediate bright red vaginal bleeding, and acute catastrophic fetal **sinusoidal heart rate** pattern with profound bradycardia. Differentiating maternal from fetal blood via the **Apt test** or Kleihauer-Betke confirms fetal hemorrhage. Clinically, key parameters encompass velamentous cord insertion, succenturiate lobe.",
+   "say": "The diagnostic presentation of vasa praevia is unmistakable: rupture of amniotic membranes coincides with sudden vaginal bleeding and immediate fetal distress. Because the circulating fetal blood volume is only roughly two hundred and fifty millilitres, blood loss rapidly induces sinusoidal cardiotocography and fetal death unless emergency delivery occurs instantly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Abruptio Placentae Bleeding",
+     "points": [
+      "Source is 99% maternal venous/arterial blood",
+      "Maternal hemodynamic compromise precedes fetal distress",
+      "Apt test negative for alkali-resistant fetal hemoglobin"
+     ]
+    },
+    "right": {
+     "title": "Vasa Praevia Bleeding",
+     "points": [
+      "Source is 100% fetal blood from torn velamentous vessels",
+      "Rapid fetal exsanguination while mother remains stable",
+      "Apt test positive (solution remains pink upon alkali addition)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Antenatal diagnosis of vasa praevia by transvaginal color Doppler mandates planned elective **caesarean delivery at 34 to 36 weeks** of gestation before the onset of labour or rupture of membranes. Corticosteroids are administered at 32 weeks, and emergent operative delivery is undertaken if contractions or membrane rupture ensue. Clinically, key parameters encompass Apt test, alkali denaturation, fetal blood, 1.",
+   "say": "Color Doppler sonography permits reliable antenatal detection of aberrant vessels spanning the cervical os. Planned elective caesarean section is scheduled between thirty-four and thirty-six weeks, preceded by antenatal corticosteroid maturation. If spontaneous labour or membrane rupture occurs before the scheduled date, immediate delivery must proceed without delay.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-aph-fig1.webp",
+    "ar": 1.6393,
+    "caption": "Diagnostic comparison of placenta praevia, placental abruption, and vasa praevia. Credit: StewardMD.",
+    "alt": "Comprehensive clinical illustration contrasting placenta praevia, abruption, and vasa praevia anatomy and emergency management pathways."
+   }
+  }
+ ]
+}

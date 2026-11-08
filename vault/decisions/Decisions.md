@@ -12149,3 +12149,13 @@ operative note template.
 All new content is `ai_drafted`. A real 10/10 still needs a named consultant reviewer per specialty to flip
 `review.status`: that is the owner's step, not code. Reversible: content is data (revert the manifest entries); the
 WHO section and Clavien field are in `surgx-note-schema.js`; recovery point is the parent of the merge commit.
+
+## Home tools grouped by task, not job title (owner, 2026-11-07)
+Owner sketched tabs by role (Students corner, Resident tools, Physician, Oncologist tools). Chose task tabs instead:
+roles overlap (an oncology resident is two roles), specialties do not scale as tabs (about 20 kits), and a consultant
+would scroll past "Students" every day. Home now shows `[For you] [Learn] [Bedside] [Practice] [<branch> v]`.
+For you is the old grid unchanged; the task tabs list every tool of that kind, pinned or not; the last tab is one
+specialty named after the kit, switchable from a picker. Plus: plain-language subtitles (titles kept), Narke renamed
+**Anaesthetica** (British spelling, owner), problem search ("sodium 122" -> Electrolytes), a weekly "Try something
+new" card and New chips on never-opened tools. Not yet built: tools suggesting the next tool in context, and a
+"Try with a sample patient" button per tool. Flag `smd_home_tabs` (default on; "0" or `?hometabs=0` restores the grid).

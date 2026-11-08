@@ -1,0 +1,283 @@
+{
+  "v": 1,
+  "module": "sgo-locally-advanced-cervix",
+  "title": "Locally Advanced Cervical Cancer: CCRT, Extended Field & Brachytherapy",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 11 (Radiation Therapy)",
+    "DeVita, Hellman, and Rosenberg's Cancer 11th Edition Ch 83 (Gynecologic Cancers)",
+    "NCCN Clinical Practice Guidelines in Oncology: Cervical Cancer (Version 1.2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Concurrent chemoradiotherapy serves as the international definitive standard of care for patients with locally advanced cervical carcinoma. This protocol combines weekly intravenous cisplatin with external beam radiation therapy and image-guided intracavitary brachytherapy boosts.",
+      "tx": "Definitive **concurrent chemoradiotherapy** (CCRT) utilizing weekly **cisplatin** at 40 mg/m2 alongside external beam radiotherapy (EBRT) and subsequent intracavitary brachytherapy represents the standard of care for locally advanced cervical cancer encompassing FIGO stages IB3 through IVA.  Evidence-based practice integrates concurrent chemoradiotherapy (CCRT), weekly cisplatin 40 mg/m2, Stages IB3-IVA.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "eval",
+            "label": "Document locally advanced disease (stage IB3 to IVA)"
+          },
+          {
+            "id": "ebrt",
+            "label": "Deliver pelvic EBRT (45 to 50.4 Gy) with weekly cisplatin"
+          },
+          {
+            "id": "brachy",
+            "label": "Perform image-guided adaptive brachytherapy boost"
+          },
+          {
+            "id": "cure",
+            "label": "Achieve durable pelvic tumor control and eradication"
+          }
+        ],
+        "edges": [
+          [
+            "eval",
+            "ebrt"
+          ],
+          [
+            "ebrt",
+            "brachy"
+          ],
+          [
+            "brachy",
+            "cure"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Radiation oncologists emphasize that the entire course of external beam radiation and brachytherapy must be completed within fifty-six days. Unplanned treatment breaks trigger accelerated clonogen repopulation, which drastically compromises locoregional tumor control and pelvic cure rates.",
+      "tx": "The definitive radiation treatment course, integrating external beam radiation therapy (45 to 50.4 Gy) and high-dose-rate brachytherapy, must be completed within an overall **total treatment time** of 7 to 8 weeks (<=56 days) to prevent **accelerated clonogen repopulation** that lowers survival.  Evidence-based practice integrates overall treatment time <=56 days.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Completion <=56 Days",
+          "points": [
+            "Optimizes radiation biological effectiveness",
+            "Suppresses tumor clonogenic repopulation",
+            "Maintains high locoregional pelvic control rates"
+          ]
+        },
+        "right": {
+          "title": "Protracted >56 Days",
+          "points": [
+            "Triggers accelerated cellular repopulation",
+            "Pelvic control drops ~1% per day of delay",
+            "Associated with significantly inferior overall survival"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Image-guided adaptive brachytherapy has transformed clinical radiation outcomes by incorporating magnetic resonance imaging at applicator placement. Delineation of the high-risk clinical target volume ensures delivery of a biological equivalent dose of eighty-five to ninety Gray.",
+      "tx": "Modern **image-guided adaptive brachytherapy** (IGABT) employs magnetic resonance imaging with the applicator in situ to delineate the **high-risk clinical target volume** (HR-CTV), ensuring delivery of an equivalent total biological dose (EQD2) of at least 85 to 90 Gy to HR-CTV D90.  Evidence-based practice integrates image-guided adaptive brachytherapy (IGABT), EQD2 >=85-90 Gy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dosimetric Parameter",
+          "Target Organ / Structure",
+          "Prescribed EQD2 Limit",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "HR-CTV D90",
+            "Cervical tumor and residual stroma",
+            ">=85 to 90 Gy EQD2",
+            "Essential for local pelvic control"
+          ],
+          [
+            "Bladder D2cc",
+            "Bladder wall organ at risk",
+            "<=80 to 90 Gy EQD2",
+            "Prevents severe radiation cystitis"
+          ],
+          [
+            "Rectum D2cc",
+            "Rectal anterior wall organ at risk",
+            "<=65 to 75 Gy EQD2",
+            "Prevents ulceration and rectovaginal fistula"
+          ],
+          [
+            "Sigmoid D2cc",
+            "Sigmoid colon loops at risk",
+            "<=70 to 75 Gy EQD2",
+            "Prevents sigmoid stricture and perforation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When radiological imaging or biopsy identifies metastatic para-aortic lymphadenopathy, the standard radiation portal must be systematically extended superiorly. Extended-field external beam radiotherapy encompasses the retroperitoneal para-aortic nodal chain up to the level of the renal vessels.",
+      "tx": "In FIGO 2018 stage IIIC2 disease with documented para-aortic nodal metastasis, radiation portals must be extended superiorly. **Extended-field radiation** systematically covers the retroperitoneal **para-aortic nodal chain** up to the renal vessels while maintaining concurrent weekly cisplatin chemotherapy administration.  Evidence-based practice integrates extended-field radiotherapy (EFRT), para-aortic nodal basin, renal vessel superior border.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "detect",
+            "label": "Document para-aortic nodal metastasis (Stage IIIC2)"
+          },
+          {
+            "id": "map",
+            "label": "Map superior boundary to L1-L2 renal vessel origin"
+          },
+          {
+            "id": "imrt",
+            "label": "Deliver extended-field IMRT with weekly cisplatin"
+          },
+          {
+            "id": "boost",
+            "label": "Administer stereotactic or sequential nodal boost"
+          }
+        ],
+        "edges": [
+          [
+            "detect",
+            "map"
+          ],
+          [
+            "map",
+            "imrt"
+          ],
+          [
+            "imrt",
+            "boost"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The landmark phase three INTERLACE clinical trial showed significant survival benefits from delivering six cycles of induction chemotherapy prior to concurrent chemoradiotherapy. Induction carboplatin and paclitaxel significantly improved both progression-free and overall survival rates.",
+      "tx": "The randomized phase III **INTERLACE trial** demonstrated that short-course **induction chemotherapy** utilizing 6 weekly cycles of carboplatin and paclitaxel prior to standard CCRT significantly improves progression-free survival (73% vs 64%) and overall survival in locally advanced cervical carcinoma.  Evidence-based practice integrates carboplatin paclitaxel, survival improvement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Induction Plus CCRT (INTERLACE)",
+          "points": [
+            "Weekly carboplatin AUC 2 + paclitaxel 50 mg/m2 x6",
+            "Followed immediately by standard weekly cisplatin CCRT",
+            "Statistically significant reduction in death risk (HR 0.61)"
+          ]
+        },
+        "right": {
+          "title": "Standard CCRT Alone",
+          "points": [
+            "Weekly cisplatin 40 mg/m2 with EBRT and brachytherapy",
+            "Higher rate of distant metastatic recurrence",
+            "Previously established standard before trial reporting"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The KEYNOTE-A18 trial established a brand new standard for high-risk locally advanced cervical cancer by integrating programmed death receptor one blockade. Adding pembrolizumab to concurrent chemoradiotherapy provided marked improvements in progression-free and overall survival.",
+      "tx": "The practice-changing **KEYNOTE-A18 trial** confirmed that adding the PD-1 inhibitor **pembrolizumab** concurrently with chemoradiotherapy and continued as maintenance significantly improves **progression-free survival** and overall survival in high-risk locally advanced cervical cancer patients.  Evidence-based practice integrates anti-PD-1 checkpoint inhibition. Comprehensive multidisciplinary review ensures optimal patient survival outcomes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial Cohort",
+          "Experimental Regimen",
+          "Key Findings",
+          "Clinical Impact"
+        ],
+        "rows": [
+          [
+            "FIGO Stage III-IVA or node-positive IB3-IIA2",
+            "Pembrolizumab + CCRT followed by maintenance",
+            "Significant PFS and OS prolongation",
+            "FDA and guideline approved standard"
+          ],
+          [
+            "Safety profile",
+            "Manageable immune-mediated adverse events",
+            "No compromise of brachytherapy delivery",
+            "Monitored for thyroiditis and colitis"
+          ],
+          [
+            "Mechanism of synergy",
+            "Radiation triggers neoantigen release",
+            "Anti-PD-1 reinvigorates exhausted cytotoxic T cells",
+            "Enhances systemic anti-tumor immunity"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Radiation treatment planning requires strict adherence to normal tissue dose constraints for organs at risk surrounding the cervix. Limiting the dose received by the most exposed two cubic centimeters of bladder and rectum prevents intractable hemorrhagic radiation injuries.",
+      "tx": "Radiation safety requires strict dosimetric adherence to organs at risk constraints. Prescriptions mandate maximum **EQD2 D2cc limits** of <=90 Gy for the bladder, <=70 to 75 Gy for the rectum, and <=75 Gy for the sigmoid colon to prevent intractable **radiation proctitis**, cystitis, and fistulae.  Evidence-based practice integrates bladder <=90 Gy, rectum <=70-75 Gy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rectal and Sigmoid Constraints",
+          "points": [
+            "Rectum D2cc capped at <=70 to 75 Gy",
+            "Sigmoid D2cc capped at <=75 Gy",
+            "Prevents radiation strictures, bleeding, and rectovaginal fistula"
+          ]
+        },
+        "right": {
+          "title": "Bladder Tolerance Constraints",
+          "points": [
+            "Bladder D2cc capped at <=85 to 90 Gy",
+            "Bladder tolerates slightly higher biological doses",
+            "Prevents contracted bladder and vesicovaginal fistulae"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Post-treatment surveillance response assessment is routinely scheduled at twelve to sixteen weeks following completion of definitive chemoradiotherapy. Restaging with whole-body FDG PET-CT provides outstanding negative predictive value and early detection of distant relapse.",
+      "tx": "Definitive post-treatment surveillance relies on whole-body **18F-FDG PET-CT** performed at 12 to 16 weeks post-chemoradiotherapy. Delayed imaging avoids false-positive radiation-induced inflammation while delivering exceptional predictive power for durable **locoregional pelvic control** and distant recurrence.  Evidence-based practice integrates PET-CT response assessment, 12-16 weeks post-RT, prognostic surveillance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "complete",
+            "label": "Complete CCRT and brachytherapy course (<=56 days)"
+          },
+          {
+            "id": "interval",
+            "label": "Allow 12 to 16 weeks for acute tissue inflammation to subside"
+          },
+          {
+            "id": "petct",
+            "label": "Acquire surveillance 18F-FDG PET-CT and clinical exam"
+          },
+          {
+            "id": "remiss",
+            "label": "Confirm complete metabolic response or biopsy residual mass"
+          }
+        ],
+        "edges": [
+          [
+            "complete",
+            "interval"
+          ],
+          [
+            "interval",
+            "petct"
+          ],
+          [
+            "petct",
+            "remiss"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "module": "sob-heart-disease-pregnancy",
+ "title": "Cardiac Disease in Pregnancy: WHO Risk Classes, Valve Lesions and Peripartum Cardiomyopathy",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Williams Obstetrics 25e Ch 49 (Cardiovascular Disorders)",
+  "Ten Teachers Gynaecology 21e",
+  "2018 ESC Guidelines for the Management of Cardiovascular Diseases during Pregnancy"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The **modified WHO classification of maternal cardiovascular risk** stratifies maternal cardiac disease from Class I (no detectable increased risk of maternal mortality) to **Class IV**, wherein pregnancy is strictly contraindicated due to extremely high maternal mortality and severe morbidity exceeding 25 to 50 percent. Clinically, key parameters encompass 40.",
+   "say": "The modified World Health Organization classification provides the clinical gold standard for maternal cardiovascular risk assessment. While class one lesions carry negligible excess risk, class four conditions impose catastrophic maternal mortality and severe morbidity, warranting pre-pregnancy counselling against conception or recommendation of early termination.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-heart-disease-pregnancy-fig1.webp",
+    "ar": 1.6393,
+    "caption": "Modified WHO classification of maternal cardiovascular risk and contraindications. Credit: StewardMD.",
+    "alt": "Clinical flowchart outlining the four modified WHO maternal cardiovascular risk categories from mild lesions to strict contraindications."
+   }
+  },
+  {
+   "tx": "**WHO Class IV absolute contraindications** to pregnancy comprise severe **pulmonary arterial hypertension** (Eisenmenger syndrome), severe systemic ventricular dysfunction (LVEF <30% or NYHA III-IV), previous peripartum cardiomyopathy with residual impairment, severe symptomatic **aortic stenosis**, native aortic root dilation >45 mm in Marfan, and severe vascular Ehlers-Danlos.",
+   "say": "Six cardinal cardiac lesions represent absolute contraindications to pregnancy under WHO class four criteria. These comprise any form of pulmonary arterial hypertension including Eisenmenger syndrome, severe left ventricular systolic dysfunction with ejection fraction under thirty percent, prior peripartum cardiomyopathy with residual defect, severe symptomatic aortic stenosis, Marfan aortic root exceeding forty-five millimetres, and vascular Ehlers-Danlos.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "WHO Class IV Condition",
+     "Pathophysiological Hazard",
+     "Maternal Mortality Risk"
+    ],
+    "rows": [
+     [
+      "Pulmonary hypertension (PAH)",
+      "Fixed high PVR; right ventricular failure in labour",
+      "20 to 50% maternal mortality"
+     ],
+     [
+      "Severe systemic LV dysfunction",
+      "Decompensated biventricular congestive heart failure",
+      "15 to 30% maternal mortality"
+     ],
+     [
+      "Severe symptomatic aortic stenosis",
+      "Fixed stroke volume; inability to meet 50% CO rise",
+      "Up to 10% maternal mortality"
+     ],
+     [
+      "Marfan aortic root > 45 mm",
+      "Catastrophic Type A acute aortic dissection/rupture",
+      "10 to 30% maternal mortality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mitral stenosis** (most commonly rheumatic in developing countries) is poorly tolerated because pregnancy-induced tachycardia shortens diastolic filling time, while plasma volume expansion increases left atrial pressure, triggering acute **pulmonary oedema** and atrial fibrillation, managed with beta-1 selective blockers (**metoprolol**) and diuretics. Clinically, key parameters encompass balloon mitral valvuloplasty, 1.0.",
+   "say": "Rheumatic mitral stenosis is the most prevalent dangerous valvular lesion encountered in pregnancy. As maternal physiological tachycardia shortens diastolic filling time, the elevated transvalvular pressure gradient causes acute left atrial hypertension. This directly precipitates flash pulmonary oedema and atrial fibrillation, treated aggressively with cardioselective beta-blockade and diuretics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gestational tachycardia shortens diastolic filling period"
+     },
+     {
+      "id": "b",
+      "label": "Marked increase in trans-mitral pressure gradient"
+     },
+     {
+      "id": "c",
+      "label": "Left atrial hypertension and pulmonary venous congestion"
+     },
+     {
+      "id": "d",
+      "label": "Acute pulmonary edema and high-rate atrial fibrillation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In severe symptomatic mitral stenosis refractory to medical therapy (valve area <1.0 cm2), **percutaneous mitral balloon commissurotomy** (PMBC) is the preferred interventional procedure, ideally performed after 20 weeks gestation with abdominal and pelvic **lead shielding** to minimize fetal radiation exposure. Clinically, key parameters encompass mechanical prosthetic valve, anticoagulation, valve thrombosis.",
+   "say": "When medical therapy with beta-blockers fails to control severe symptomatic mitral stenosis, percutaneous transvenous mitral commissurotomy is the intervention of choice. Performed under transesophageal echocardiography and fluoroscopic guidance with careful pelvic shielding, PMBC avoids cardiopulmonary bypass and carries excellent hemodynamic success.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Percutaneous Mitral Balloon Commissurotomy",
+     "points": [
+      "Minimally invasive transcatheter femoral vein approach",
+      "Pelvic lead shielding limits fetal radiation exposure",
+      "No cardiopulmonary bypass or hypothermia required"
+     ]
+    },
+    "right": {
+     "title": "Open Surgical Valve Replacement",
+     "points": [
+      "Requires median sternotomy and cardiopulmonary bypass",
+      "High fetal mortality (15 to 35%) due to altered uterine perfusion",
+      "Reserved strictly for failed PMBC or severe mitral regurgitation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pregnant patients with **mechanical heart valves** require meticulous anticoagulation: **low-dose warfarin** (<=5 mg daily) maintains superior valve thrombosis prevention with acceptable teratogenic risks, whereas doses >5 mg daily warrant conversion to therapeutic **dose-adjusted LMWH** with peak anti-factor Xa monitoring (0.8 to 1.2 IU/mL). Clinically, key parameters encompass warfarin dosing, anti-Xa monitoring, low-molecular-weight heparin.",
+   "say": "Anticoagulating pregnant women with mechanical prosthetic valves demands a precise balance between maternal valve thrombosis and fetal embryopathy. If the maternal therapeutic warfarin dose is five milligrams daily or less, continuing warfarin through the first trimester provides the lowest maternal thromboembolic risk. Above five milligrams, switching to weight-adjusted LMWH with strict anti-factor Xa monitoring is advised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anticoagulation Regimen",
+     "First Trimester Strategy",
+     "Target Therapeutic Metric"
+    ],
+    "rows": [
+     [
+      "Warfarin <= 5 mg daily",
+      "Continue oral warfarin throughout first trimester",
+      "INR 2.5 to 3.5 according to valve prosthesis position"
+     ],
+     [
+      "Warfarin > 5 mg daily",
+      "Switch to therapeutic subcutaneous LMWH (weeks 6-12)",
+      "Peak anti-Xa 0.8 to 1.2 IU/mL drawn 4 hours post-dose"
+     ],
+     [
+      "Peripartum protocol",
+      "Stop warfarin at 36 weeks; start IV unfractionated heparin",
+      "APTT 2.0 to 2.5 times control; stop 4-6 hours prior to delivery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Peripartum cardiomyopathy** (PPCM) is an idiopathic heart failure syndrome presenting with marked **LVEF < 45%** towards the end of pregnancy or in the months following delivery, without identifiable alternative etiology, mediated in part by anti-angiogenic **16-kDa prolactin cleavage fragments** and soluble Flt-1. Clinically, key parameters encompass left ventricular ejection fraction, 5.",
+   "say": "Peripartum cardiomyopathy is an acute life-threatening heart failure syndrome developing between the last month of gestation and five months postpartum. Characterized by severe left ventricular systolic dysfunction with ejection fraction below forty-five percent, its molecular pathogenesis involves vascular endothelial damage triggered by cleaved sixteen-kilodalton prolactin fragments and placental anti-angiogenic factors.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Peripartum oxidative stress and cathepsin D activation"
+     },
+     {
+      "id": "b",
+      "label": "Cleavage of 23-kDa prolactin into vasculotoxic 16-kDa fragment"
+     },
+     {
+      "id": "c",
+      "label": "Endothelial cell apoptosis and capillary microvascular rarefaction"
+     },
+     {
+      "id": "d",
+      "label": "Acute ventricular dilation and systolic pump failure (LVEF < 45%)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Therapeutic medical management of acute peripartum cardiomyopathy incorporates **bromocriptine** (a dopamine D2 receptor agonist administered to block pituitary prolactin secretion) alongside standard guideline-directed heart failure medical therapy (loop diuretics, **hydralazine-nitrates** in the antenatal period, beta-blockers, and conversion to ACE inhibitors postpartum). Clinically, key parameters encompass 16-kDa prolactin, myocardial recovery, 16.",
+   "say": "Management of acute peripartum cardiomyopathy targets prolactin suppression and rapid hemodynamic unloading. Bromocriptine prevents further generation of cardiotoxic sixteen-kilodalton prolactin fragments. Concomitant medical therapy utilizes loop diuretics, safe antenatal vasodilators like hydralazine and nitrates, beta-blockers, and full anticoagulation to combat intracardiac thrombus formation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antenatal PPCM Medical Regimen",
+     "points": [
+      "Loop diuretics (furosemide) for pulmonary venous congestion",
+      "Hydralazine and oral nitrates as safe afterload reducers",
+      "Cardioselective beta-1 blocker (metoprolol succinate)",
+      "Strictly avoid ACE inhibitors, ARBs, and sacubitril"
+     ]
+    },
+    "right": {
+     "title": "Postpartum PPCM Management",
+     "points": [
+      "Immediate conversion to enalapril or captopril",
+      "Bromocriptine protocol (2.5 mg BID for 2 weeks, then daily)",
+      "Prophylactic anticoagulation for LVEF < 35%",
+      "Mineralocorticoid receptor antagonists (eplerenone)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The safest mode of delivery for most cardiac patients is planned **assisted vaginal delivery** under early continuous epidural analgesia. Operative caesarean delivery is strictly reserved for formal obstetric indications, therapeutic oral anticoagulation during active labour, acute **intractable heart failure**, or severe acute thoracic aortic dissection. Clinically, key parameters encompass assisted second stage.",
+   "say": "Contrary to common assumptions, vaginal delivery under effective low-dose epidural analgesia is the safest delivery method for the vast majority of stable cardiac patients. Instrumental assistance with vacuum or forceps cuts short maternal pushing in the second stage. Caesarean section is reserved strictly for severe aortic dissection, root dilation, acute hemodynamic decompensation, or warfarin within two weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peripartum Phase",
+     "Physiological Hemodynamic Shift",
+     "Obstetric Management Strategy"
+    ],
+    "rows": [
+     [
+      "First stage of labour",
+      "Autotransfusion of 300 to 500 mL blood per contraction",
+      "Left lateral positioning and early lumbar epidural analgesia"
+     ],
+     [
+      "Second stage of labour",
+      "Valsalva increases intrathoracic pressure and reduces preload",
+      "Passive fetal descent and elective instrumental vacuum/forceps delivery"
+     ],
+     [
+      "Third stage of labour",
+      "Sudden vena caval decompression and autotransfusion increase CO",
+      "Slow intravenous infusion of oxytocin; strictly avoid ergometrine"
+     ]
+    ]
+   }
+  }
+ ]
+}

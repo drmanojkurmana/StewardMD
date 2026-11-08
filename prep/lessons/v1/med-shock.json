@@ -6,18 +6,29 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**History** (**collapse** infection bleed cardiac tamponade, **fevers** septic rigors source focus, **chest** MI rupture arrhythmia pain, **allergy** anaphylaxis exposure stridor, **trauma** blood loss pelvic femur, **spine** neurogenic warm priapism, **drugs** overdose adrenal crisis, **fluids** vomiting diarrhoea losses asks) with **viva** (**shocked** mottled oliguric confused, **bleeding** tachycardic narrow-pulsed) profiles; **wishes** (escalation limits) asks. Pressures crash.",
-   "say": "Collapses fevers chests allergies is history: traumas bleed spines warm drugs drop fluids drain wishes bound shockeds fade bleedings exsanguinate lactates guide fluids fill. Organs starve.",
+   "tx": "Take a focused history in suspected shock because the trigger decides treatment. Ask about **collapse** with infection, fever, or a septic focus, and about chest pain that suggests myocardial infarction or arrhythmia. Ask about allergy with stridor, trauma with blood loss, and spinal injury with warm skin. Record **fluid losses** from vomiting or diarrhoea, culprit **drugs**, and escalation wishes.",
+   "say": "In suspected shock the history points to the trigger, so ask carefully about each cause. Fever with infection or a septic focus suggests sepsis, while chest pain suggests infarction or arrhythmia. Allergy with stridor suggests anaphylaxis, and major trauma suggests blood loss, whereas spinal injury with warm skin suggests neurogenic shock. Record vomiting, diarrhoea, and culprit drugs, and confirm escalation wishes with the family.",
    "vis": null
   },
   {
-   "tx": "**Examination** (**pressure** MAP diastolic gaps, **perfusion** mottled refill oliguria, **neck** distended tamponade tension, **lungs** crackles cardiogenic ARDS, **heart** murmurs rub gallop MI, **belly** AAA ruptured pulsatile, **skin** warm vasoplegic cold cardiogenic, **neuro** confused agitated hypoperfused) with **bedside** (**lactate** clearance tracks, **ScvO2** delivery gaps, **ultrasound** IVC heart lungs) grades; **urine** (hourly outputs) measures. Tissues hunger.",
-   "say": "Pressures perfusions necks lungs is exam: hearts gallop bellies pulse skins contrast neuros cloud lactates climb ScvO2s gap ultrasounds peer noradrenalines squeeze dobutamines boost. Vessels clamp.",
+   "tx": "Examine perfusion and look for the shock category at the bedside. Measure **blood pressure** including mean arterial pressure, and check capillary refill, mottled skin, and hourly urine output. Examine neck veins for distension, listen to the lungs and heart, and palpate the abdomen for a pulsatile mass. Note warm vasodilated versus cold clammy skin, and assess **consciousness** for agitation or **confusion** from hypoperfusion.",
+   "say": "Examination separates shock by perfusion and by bedside signs. Low pressure with mottled skin, slow refill, and low urine output indicates poor perfusion. Raised neck veins suggest tamponade or tension, while crackles suggest cardiac failure and murmurs suggest valve or infarct problems. A pulsatile abdomen suggests ruptured aneurysm. Warm skin suggests vasodilation and cold clammy skin suggests a low output state, and confusion is a sign that the brain remains hypoperfused.",
    "vis": null
   },
   {
-   "tx": "**Investigations** (**lactate** shock defines clears, **gases** metabolic gap sorts, **cultures** septic source before, **troponin** MI takotsubo climbs, **echo** EF tamponade valves, **IVC** fluid tolerance collapses, **haemoglobin** bleed transfuse triggers, **cortisol** adrenal crisis tests) with **differentials** (**cardiogenic** wet cold troponin, **obstructive** distended equalisation, **distributive** warm bounding cultures, **hypovolaemic** dry narrow bleed) sorts; **intensivist** (pressors tiers) meets. Lactates stage.",
-   "say": "Lactates gases cultures troponins is Ix: echoes squeeze IVCs vary haemoglobins drop cortisols fail cardiogenics wet obstructives choke distributives flush hypovolaemics dry intensivists meet pressors choose wishes respect. Types split.",
+   "tx": "Bedside **ultrasound** helps separate shock causes when the examination is unclear. A small collapsing inferior vena cava with the liver and right atrium in view suggests fluid tolerance, while a dilated noncollapsing cava suggests overload or obstruction. An enlarged strained **right ventricle** points toward pulmonary embolism or right heart failure, and **pleural fluid** with B lines explains breathlessness and warns against further fluids.",
+   "say": "Bedside ultrasound is the key test when shock remains unclear. The subcostal view identifies the inferior vena cava beside the liver as it enters the right atrium, and its size and collapse with breathing reflect fluid tolerance. The cardiac view compares the ventricles, and an enlarged right ventricle indicates strain from embolism or right heart failure. The lung view reveals pleural fluid and B lines, which explain breathlessness and warn that further fluids may harm the lungs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-shock-gen1.webp",
+    "alt": "Three bedside ultrasound panels showing labeled IVC with liver and right atrium, enlarged right ventricle, and pleural fluid with B lines",
+    "caption": "Bedside ultrasound of IVC, cardiac strain, and pleural fluid Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Confirm shock with **lactate** and arterial gases, and track lactate clearance during resuscitation. Send blood cultures before antibiotics when sepsis is suspected, and check troponin, bedside echocardiography, and caval ultrasound for cardiac and obstructive causes. Check **haemoglobin** for bleeding and **cortisol** when adrenal crisis is possible. Then classify the picture as cardiogenic, obstructive, distributive, or hypovolaemic, and involve intensive care early.",
+   "say": "Investigations confirm shock and separate the four categories. Lactate confirms hypoperfusion and clearance tracks resuscitation, while gases explain the metabolic gap. Cultures come before antibiotics in suspected sepsis. Troponin, echocardiography, and caval ultrasound identify cardiac and obstructive causes. Haemoglobin guides transfusion, and cortisol testing identifies adrenal crisis. The pattern is cardiogenic, obstructive, distributive, or hypovolaemic, and intensive care helps to set pressor tiers.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/med-shock-fig1.webp",
@@ -27,8 +38,8 @@
    }
   },
   {
-   "tx": "**Management** (**fluids** balanced bolus leg-raise, **noradrenaline** first-line MAP targets, **dobutamine** cardiogenic low-output adds, **adrenaline** anaphylaxis IM bridges, **blood** massive ratio calcium warms, **source** sepsis drains lines out, **steroids** adrenal vasopressor gaps, **support** lung kidney protective) with **traps** (**fluids** ARDS overload drowns, **pressors** ischaemic digits extravasate, **delay** source control kills) closes; **follow** (lactate urine mentation) tracks. Pressures rise.",
-   "say": "Fluids noradrenalines dobutamines adrenalines is Rx: bloods warm sources drain steroids bridge supports shield overloads drown digits blacken delays kill follows track lactates clear wishes respect. Perfusion returns.",
+   "tx": "Treat the cause while restoring perfusion with fluids, pressors, and blood. Give balanced crystalloid boluses guided by leg raise and reassessment, and start **noradrenaline** as the first line vasopressor for a low mean pressure. Add **dobutamine** for cardiogenic shock with low output, and give intramuscular **adrenaline** for anaphylaxis. Transfuse for major bleeding, drain the septic source, and protect lungs and kidneys during support.",
+   "say": "Management is about restoring perfusion and removing the trigger together. Balanced crystalloid boluses with leg raise testing guide fluids, and noradrenaline supports a low mean pressure as the first line pressor. Dobutamine helps cardiogenic shock with low output, while intramuscular adrenaline is the treatment for anaphylaxis. Major bleeding needs transfusion, sepsis needs rapid source drainage, and adrenal failure may need steroids. Lactate, urine output, and mentation track whether perfusion is returning.",
    "vis": null
   }
  ],

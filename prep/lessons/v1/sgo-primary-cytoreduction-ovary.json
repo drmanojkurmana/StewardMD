@@ -1,0 +1,254 @@
+{
+  "v": 1,
+  "module": "sgo-primary-cytoreduction-ovary",
+  "title": "Primary Cytoreductive Surgery & Residual Disease Status (R0)",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 16",
+    "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11e Ch 85",
+    "ESGO Advanced Ovarian Cancer Surgery Guidelines"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Primary surgical debulking aims to eradicate all macroscopically evident peritoneal tumor implants. The prognostic benefit of cytoreduction is directly proportional to the residual disease volume.",
+      "tx": "The central oncological goal of **primary cytoreduction** is achieving **complete resection (R0)** with **zero gross residual disease** (residual disease **0** mm). This surgical endpoint functions as the single most powerful **survival predictor** in advanced ovarian carcinoma, conferring marked prolongation in progression-free and overall survival compared to any residual disease.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-ovary.webp",
+        "ar": 1.3333,
+        "caption": "High-grade serous carcinoma STIC lesions confirming fallopian tube origin. Credit: StewardMD.",
+        "alt": "Advanced ovarian peritoneal carcinomatosis and cytoreduction goals"
+      }
+    },
+    {
+      "say": "Surgical residual disease volume is categorized according to strict international cooperative group thresholds. Complete macroscopic clearance yields the greatest therapeutic benefit.",
+      "tx": "Residual disease is categorized into: **R0 complete** (no macroscopic residual tumor, residual **0** mm), **optimal <=1 cm (R1)** (macroscopic residual deposits <=**1** cm diameter), and **suboptimal >1 cm (R2)** (macroscopic residual deposits >1 cm or residual grade **2**), with prognosis declining progressively across these surgical tiers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "R0 Complete Resection (Target Standard)",
+          "points": [
+            "Zero macroscopic residual tumor throughout the entire abdomen",
+            "Highest median overall survival (>60-70 months)",
+            "Achievable in >75% of patients with extensive upper abdominal surgery"
+          ]
+        },
+        "right": {
+          "title": "Optimal (R1) vs Suboptimal (R2) Debulking",
+          "points": [
+            "Optimal R1: residual disease <=1 cm (intermediate survival ~40 months)",
+            "Suboptimal R2: residual disease >1 cm (poor survival ~25-30 months)",
+            "Predictive scoring directs bulky unresectable cases to neoadjuvant therapy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Achieving complete macroscopic clearance in advanced stage disease frequently necessitates radical upper abdominal surgical procedures. Diaphragmatic stripping, splenectomy, and cholecystectomy are commonly required.",
+      "tx": "Aggressive **upper abdominal debulking** incorporating **diaphragm peritonectomy**, **splenectomy**, distal pancreatectomy, and cholecystectomy elevates the **R0 rate >75%** (over **75** percent) compared to historical rates of **40** percent, overcoming complex peritoneal carcinomatosis in the upper abdomen and significantly extending long-term patient survival.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Upper Abdominal Procedure",
+          "Surgical Target & Anatomy",
+          "Impact on Debulking Success"
+        ],
+        "rows": [
+          [
+            "Diaphragm Peritonectomy",
+            "Right/left diaphragmatic peritoneum and muscle",
+            "Clears 80% of upper quadrant plaques"
+          ],
+          [
+            "Splenectomy & Pancreatectomy",
+            "Splenic hilum, gastrosplenic ligament, tail",
+            "Clears bulky left upper quadrant tumor"
+          ],
+          [
+            "Liver Resection / Glissonectomy",
+            "Hepatic surface deposits, parenchymal wedge",
+            "Eliminates perihepatic seeding"
+          ],
+          [
+            "Total Omentectomy / Bursectomy",
+            "Greater and lesser omentum, burse floor",
+            "Clears confluent tumor cake en bloc"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The randomized LION trial resolved the controversy surrounding routine pelvic and para aortic lymphadenectomy in advanced ovarian cancer. Systematic nodal dissection in clinically negative cases does not prolong survival.",
+      "tx": "The randomized **LION trial** published by **Harter 2019** (**2019**) proved that **omission of systematic lymphadenectomy in R0** resection with clinically negative nodes did not compromise progression-free or overall survival, while systematic lymphadenectomy caused **increased morbidity** and higher **60**-day postoperative mortality (**3.1** percent vs **0.9** percent).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Arm (LION Trial)",
+          "Median Overall Survival",
+          "Median Progression-Free Survival",
+          "Postoperative Complications"
+        ],
+        "rows": [
+          [
+            "No Lymphadenectomy (Clinically Normal Nodes)",
+            "69.2 months",
+            "25.5 months",
+            "Significantly lower infection, lymphocele, and death"
+          ],
+          [
+            "Systematic Pelvic & Para-Aortic LND",
+            "65.5 months",
+            "25.5 months",
+            "Higher re-laparotomy, transfusion, and 60-day mortality"
+          ],
+          [
+            "Clinical Recommendation",
+            "Omit routine LND in R0 normal nodes",
+            "Resect only bulky suspicious lymph nodes",
+            "Standard of care confirmed by ESGO/NCCN"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pelvic peritoneal tumor infiltration typically engulfs the cul de sac, rectosigmoid junction, and reproductive organs. An en bloc retroperitoneal resection removes these structures in continuity.",
+      "tx": "Executing a **modified posterior exenteration** with en bloc **rectosigmoid resection** achieves total **cul-de-sac clearance** when pelvic carcinomatosis obliterates the pouch of Douglas. Restoring bowel continuity via a circular stapled **end-to-end anastomosis** safely re-establishes intestinal transit and achieves complete macroscopic pelvic disease clearance without permanent colostomy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Develop avascular pararectal and paravesical retroperitoneal spaces"
+          },
+          {
+            "id": "b",
+            "label": "Ligate uterine and internal iliac branches; mobilize ureters bilaterally"
+          },
+          {
+            "id": "c",
+            "label": "Transect proximal sigmoid colon above pelvic disease margin"
+          },
+          {
+            "id": "d",
+            "label": "Excise cul-de-sac en bloc with uterus and re-anastomose rectum"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Laparoscopic assessment prior to formal laparotomy provides an objective score to evaluate surgical resectability. Fagotti's scoring framework reliably predicts the likelihood of achieving complete cytoreduction.",
+      "tx": "The laparoscopic **Fagotti score** during **predictive laparoscopy** evaluates peritoneal carcinomatosis, diaphragmatic sheets, and mesenteric disease. A **score >=8 suboptimal cutoff** (**8** or higher) identifies a very high likelihood of suboptimal debulking, facilitating accurate **neoadjuvant selection** for neoadjuvant chemotherapy rather than futile open laparotomy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Laparoscopic Parameter",
+          "Finding for 2 Points",
+          "Finding for 0 Points"
+        ],
+        "rows": [
+          [
+            "Peritoneal Carcinomatosis",
+            "Confluent or diffuse nodules / sheets",
+            "Isolated nodules or absent"
+          ],
+          [
+            "Diaphragmatic Infiltration",
+            "Confluent sheets / plaques covering >50%",
+            "Isolated lesions or normal mobility"
+          ],
+          [
+            "Mesenteric Retraction",
+            "Shortened root, impaired peristalsis",
+            "Pliable, freely mobile small bowel"
+          ],
+          [
+            "Bowel / Stomach Infiltration",
+            "Mural penetration, serosal retraction",
+            "Superficial implants or clear"
+          ],
+          [
+            "Omental Cake & Liver Mets",
+            "Bulky coalescent mass / parenchymal mets",
+            "Separable omentum / surface lesions only"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Radical excision of diaphragmatic tumor implants frequently breaches the pleural space. Close coordination with anesthesia ensures proper intraoperative lung re expansion and air evacuation.",
+      "tx": "Full-thickness **diaphragmatic resection** for invasive diaphragmatic implants necessitates intraoperative communication with anesthesia for lung recruitment maneuvers and active **pleural evacuation** during muscular closure. Placing a temporary chest catheter ensures comprehensive **pneumothorax prevention** and reduces postoperative atelectasis, symptomatic pleural effusion, and pulmonary morbidity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Mobilize liver by dividing falciform and coronary ligaments"
+          },
+          {
+            "id": "b",
+            "label": "Resect diaphragm peritoneum and involved muscle full-thickness"
+          },
+          {
+            "id": "c",
+            "label": "Coordinate with anesthesia for sustained positive pressure lung inflation"
+          },
+          {
+            "id": "d",
+            "label": "Perform airtight pleural closure over underwater drain to evacuate air"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Protective intestinal diversion protects low pelvic bowel anastomoses from catastrophic leak. Specific anatomical and clinical criteria mandate temporary stoma creation.",
+      "tx": "Constructing a protective **loop ileostomy** is indicated following **ultra-low colorectal anastomosis <5-6 cm** (<**5** to **6** cm from anal verge), in patients who have undergone **multiple bowel resections**, or in malnourished patients receiving neoadjuvant chemotherapy to prevent catastrophic pelvic anastomotic leakage and peritonitis.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-prc-laparoscopic-technique.webp",
+        "ar": 1.3333,
+        "caption": "Primary laparoscopic entry via Veress or open Hasson technique. Credit: StewardMD.",
+        "alt": "Laparoscopic evaluation of mesenteric root and diaphragmatic tumor deposits"
+      }
+    }
+  ]
+}

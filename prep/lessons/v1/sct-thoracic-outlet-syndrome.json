@@ -1,0 +1,275 @@
+{
+  "v": 1,
+  "module": "sct-thoracic-outlet-syndrome",
+  "title": "Thoracic outlet syndrome: neurogenic vs vascular, first rib resection and venous thrombolysis",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 114 (Thoracic Outlet Syndrome)",
+    "Rutherford's Vascular Surgery and Endovascular Therapy 10e Ch 105",
+    "Society for Vascular Surgery Practice Guidelines for Thoracic Outlet Syndrome"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Thoracic outlet syndrome encompasses symptoms caused by compression of neurovascular structures passing from the neck to the axilla. The scalene triangle is bordered by the anterior scalene muscle, middle scalene muscle, and first rib. It holds and transmits the brachial plexus trunks and subclavian artery.",
+      "tx": "Thoracic outlet syndrome arises from dynamic extrinsic compression of the brachial plexus and subclavian vessels within three confined anatomical spaces. The **scalene triangle**, bounded by the **anterior scalene muscle**, middle scalene, and the **first rib**, contains the brachial trunks and subclavian artery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cervical nerve roots C5-T1 exit neural foramina"
+          },
+          {
+            "id": "b",
+            "label": "Passage through interscalene triangle over first rib"
+          },
+          {
+            "id": "c",
+            "label": "Traverse costoclavicular space beneath subclavius muscle"
+          },
+          {
+            "id": "d",
+            "label": "Enter retropectoral minor space into the upper arm"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Thoracic outlet syndrome is categorized into three distinct clinical forms. Neurogenic syndrome accounts for over ninety percent of cases, causing upper extremity pain, numbness, and paresthesias. Venous thoracic outlet syndrome, or Paget-Schroetter syndrome, causes acute arm swelling, while arterial compression causes digital ischemia.",
+      "tx": "Thoracic outlet syndrome is classified into three clinical subtypes. **Neurogenic TOS** accounts for over 90 percent of cases, presenting with paresthesias and pain. **Venous TOS** presents with sudden axillosubclavian thrombosis, while rare **arterial TOS** causes upper extremity claudication and digital microembolism.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Subtype",
+          "Proportion of Cases",
+          "Characteristic Presentation"
+        ],
+        "rows": [
+          [
+            "Neurogenic TOS",
+            "> 90 to 95 percent",
+            "Ulnar paresthesias, medial arm aching, Gilliatt-Sumner hand wasting"
+          ],
+          [
+            "Venous TOS (Paget-Schroetter)",
+            "3 to 5 percent",
+            "Acute dominant arm cyanosis, severe swelling, prominent chest veins"
+          ],
+          [
+            "Arterial TOS",
+            "1 to 2 percent",
+            "Subclavian aneurysm, distal thromboembolism, digital pallor and ischemia"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Physical examination provokes symptoms by narrowing the thoracic outlet. The elevated arm stress test, or Roos test, reproduces aching and paresthesias within three minutes. The Adson test detects subclavian compression by monitoring radial pulse dampening during deep inspiration and neck rotation.",
+      "tx": "Diagnostic evaluation utilizes provocative maneuvers that exacerbate neurovascular compression. The **Roos test** reproduces forearm aching and paresthesias within three minutes of 90-degree abduction. The **Adson test** monitors obliteration of the **radial pulse dampening** during neck extension and ipsilateral head rotation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Roos Elevated Arm Stress Test",
+          "points": [
+            "Arms abducted 90 degrees with continuous hand gripping",
+            "Inability to sustain 3 minutes due to pain and fatigue",
+            "Highly sensitive clinical test for neurogenic compression"
+          ]
+        },
+        "right": {
+          "title": "Adson Provocative Maneuver",
+          "points": [
+            "Neck extended and rotated toward symptomatic side with deep breath",
+            "Monitors reduction or loss of radial pulse amplitude",
+            "Evaluates scalene triangle narrowing and arterial compression"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Bony anomalies such as cervical ribs and elongated transverse processes are major structural etiologies. A complete or incomplete cervical rib arises from the seventh cervical vertebra, narrowing the scalene space. Congenital fibrous bands extending from the cervical rib compress the lower trunk of the brachial plexus.",
+      "tx": "Congenital skeletal anomalies predispose to severe thoracic outlet entrapment. A complete **cervical rib** arising from the C7 vertebra or a rigid fibrous band elevates and compresses the brachial plexus lower trunk and subclavian artery, precipitating post-stenotic dilation and **bony compression**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Congenital presence of C7 cervical rib or fibrous band"
+          },
+          {
+            "id": "b",
+            "label": "Elevation and anterior displacement of brachial trunks"
+          },
+          {
+            "id": "c",
+            "label": "Repetitive mechanical friction during arm abduction"
+          },
+          {
+            "id": "d",
+            "label": "Axonal demyelination or post-stenotic arterial aneurysm"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Venous thoracic outlet syndrome, also known as Paget-Schroetter syndrome, represents effort thrombosis of the subclavian vein. Repetitive vigorous overhead arm movements compress the vein between the subclavius muscle, clavicle, and first rib. Endothelial injury causes acute extensive thrombosis.",
+      "tx": "Venous TOS, or **Paget-Schroetter syndrome**, presents as acute **effort thrombosis** of the axillosubclavian vein following repetitive overhead exertion. The vein suffers repeated crushing between the first rib and **subclavius muscle**, causing intimal inflammation, fibrosis, and acute extensive thrombosis. Emergency clinical presentation demands prompt diagnostic duplex sonography and catheter venography to establish the full extent of venous obstruction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Paget-Schroetter Effort Thrombosis",
+          "points": [
+            "Young, muscular athletes engaging in overhead sports",
+            "Mechanical compression between subclavius and first rib",
+            "Requires urgent catheter-directed thrombolysis and rib excision"
+          ]
+        },
+        "right": {
+          "title": "Secondary Upper Extremity DVT",
+          "points": [
+            "Related to indwelling central lines, pacemakers, or ports",
+            "Underlying foreign body thrombogenesis and endothelial stasis",
+            "Managed primarily with systemic anticoagulation without surgery"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Management of Paget-Schroetter syndrome follows a multidisciplinary protocol. Clinicians initiate urgent catheter-directed thrombolysis to clear thrombus and restore vein patency. Prompt surgical resection of the first rib within two to six weeks relieves mechanical compression, preventing recurrent thrombosis.",
+      "tx": "Modern management of acute venous TOS mandates emergency **catheter-directed thrombolysis** to achieve complete clot clearance. Once vein patency is restored, surgical **first rib resection** is performed during the index admission to eliminate the extrinsic bone compression and prevent **recurrent thrombosis**.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute arm swelling: perform duplex ultrasound and venogram"
+          },
+          {
+            "id": "b",
+            "label": "Catheter-directed tPA infusion to lyse acute vein clot"
+          },
+          {
+            "id": "c",
+            "label": "Confirm vein patency and demonstrate costoclavicular pinch"
+          },
+          {
+            "id": "d",
+            "label": "Perform prompt surgical first rib resection to prevent recurrence"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgical decompression removes the bony floor of the thoracic outlet. The transaxillary approach provides cosmetic exposure for complete first rib resection and cervical rib removal. Alternatively, the supraclavicular approach provides excellent visualization for neurogenic decompression and brachial plexus neurolysis.",
+      "tx": "Surgical decompression involves **first rib resection** combined with anterior and middle **scalene muscle release**. The cosmetic **transaxillary approach** provides an incision for total rib removal, while the supraclavicular exposure allows wide direct visualization for comprehensive brachial plexus neurolysis and fibrous band excision.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Exposure",
+          "Primary Indications",
+          "Key Anatomical Advantage"
+        ],
+        "rows": [
+          [
+            "Transaxillary approach",
+            "Venous TOS and routine first rib resection",
+            "Direct access to entire rib length; hidden axillary scar"
+          ],
+          [
+            "Supraclavicular approach",
+            "Neurogenic TOS with cervical rib / fibrous bands",
+            "Direct visualization of roots C5-T1 and brachial neurolysis"
+          ],
+          [
+            "Infraclavicular approach",
+            "Subclavian vein reconstruction and venolysis",
+            "Direct exposure of subclavian vein and subclavius tendon"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "First rib resection demands meticulous surgical dissection to prevent iatrogenic nerve injury. Retraction or transection can injure the long thoracic nerve, causing a winged scapula. Damage to the phrenic nerve produces hemidiaphragmatic paralysis, while traction on the lower trunk causes permanent hand numbness.",
+      "tx": "Iatrogenic complications during first rib resection demand extreme vigilance. Traction or transection of the **long thoracic nerve** produces a debilitating **winged scapula**, while dividing the **phrenic nerve** causes hemidiaphragmatic paralysis, and stretch injury to the lower trunk causes permanent hand dysfunction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Neural Structure",
+          "Vulnerable Location",
+          "Clinical Deficit from Injury"
+        ],
+        "rows": [
+          [
+            "Long thoracic nerve",
+            "Posterior surface of middle scalene",
+            "Serratus anterior paralysis causing winged scapula"
+          ],
+          [
+            "Phrenic nerve",
+            "Anterior surface of anterior scalene",
+            "Ipsilateral diaphragmatic elevation and paralysis"
+          ],
+          [
+            "Brachial plexus lower trunk (C8-T1)",
+            "Directly overlying posterior first rib",
+            "Ulnar sensory loss and intrinsic hand muscle wasting"
+          ]
+        ]
+      }
+    }
+  ]
+}

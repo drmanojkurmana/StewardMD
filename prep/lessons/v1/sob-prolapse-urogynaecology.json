@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "sob-prolapse-urogynaecology",
+ "title": "Pelvic Organ Prolapse, POP-Q Staging, Urinary Incontinence and Urogenital Fistulae",
+ "subject": "ss-obg",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Ten Teachers Gynaecology 21e Ch 10 (Urogynaecology and Pelvic Floor Problems)",
+  "Williams Obstetrics 25e",
+  "IUGA/ICS Joint Report on the Terminology for Female Pelvic Floor Dysfunction"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The **Pelvic Organ Prolapse Quantification (POP-Q)** system is an objective site-specific system measuring 9 anatomical landmarks in centimetres relative to the **hymen (plane 0)** during maximal Valsalva: 6 defined points (Aa, Ba, C, D, Ap, Bp) and 3 landmark dimensions: **genital hiatus (gh)**, **perineal body (pb)**, and **total vaginal length (tvl)**. Clinically, key parameters encompass POP-Q system, hymen landmark, procidentia, IV.",
+   "say": "The International Continence Society POP-Q system provides reproducible, quantitative staging of pelvic organ prolapse. All measurements are recorded in centimetres during maximal Valsalva relative to the plane of the hymen, designated as zero. Points proximal to the hymen are negative numbers, while points protruding distal to the hymen carry positive values. Nine specific landmarks define the anatomical grid.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-prolapse-urogynaecology-gen1.webp",
+    "ar": 1.7778,
+    "caption": "Pelvic Organ Prolapse Quantification (POP-Q) 9-point anatomical grid system. Credit: StewardMD.",
+    "alt": "Diagrammatic representation of the female pelvic floor illustrating the 9 POP-Q measuring points relative to the hymenal ring."
+   }
+  },
+  {
+   "tx": "POP-Q staging categorizes prolapse severity: **Stage 0** (no prolapse; points Aa, Ba, Ap, Bp at -3 cm, C between -tvl and -[tvl-2]); **Stage I** (leading edge >1 cm above hymen, <-1 cm); **Stage II** (leading edge between -1 cm and +1 cm relative to hymen); **Stage III** (leading edge >+1 cm but <[tvl-2 cm]); and **Stage IV** (complete eversion / **procidentia**, leading edge >=[tvl-2 cm]). Clinically, key parameters encompass cystocele, rectocele, apical prolapse.",
+   "say": "The POP-Q staging system categorizes pelvic organ prolapse into five progressive clinical tiers from stage zero to four. In stage zero, perfect anatomical support is preserved. In stage two, the leading edge of the prolapse descends within one centimetre above or below the hymenal plane. Stage four represents complete eversion of the vagina, historically known as total procidentia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "POP-Q Stage",
+     "Leading Prolapse Edge Relative to Hymen",
+     "Clinical Anatomical Correlate"
+    ],
+    "rows": [
+     [
+      "Stage 0",
+      "Points Aa, Ba, Ap, Bp all at -3 cm; C at top of vagina",
+      "Normal anatomical support; no prolapse detected"
+     ],
+     [
+      "Stage I",
+      "Leading edge remains > 1 cm above hymenal plane (<-1 cm)",
+      "Mild asymptomatic descent within vaginal canal"
+     ],
+     [
+      "Stage II",
+      "Leading edge descends between -1 cm and +1 cm of hymen",
+      "Prolapse reaches or slightly protrudes through introitus"
+     ],
+     [
+      "Stage III",
+      "Leading edge protrudes > +1 cm but < (tvl - 2 cm)",
+      "Extensive protrusion beyond introitus outside body"
+     ],
+     [
+      "Stage IV",
+      "Leading edge extends >= (tvl - 2 cm); total eversion",
+      "Complete vaginal vault procidentia and uterine eversion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First-line conservative management for symptomatic pelvic organ prolapse comprises **pelvic floor muscle training** (supervised Kegel exercises for mild to moderate Stage I-II prolapse) and **vaginal pessaries** (supportive **ring pessary with support** or space-occupying **Gellhorn pessary**), suitable across all stages in patients wishing to avoid surgery. Clinically, key parameters encompass vaginal pessary.",
+   "say": "Non-surgical conservative therapy is the primary initial approach for women with symptomatic pelvic prolapse. Supervised pelvic floor muscle physiotherapy strengthens the levator ani and reduces bother in mild to moderate stages. Vaginal pessaries, such as flexible silicone ring pessaries or space-occupying Gellhorn devices, effectively restore pelvic organ position in over eighty percent of patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ring Pessary with Support",
+     "points": [
+      "Supportive pessary retained behind pubic symphysis",
+      "Permits sexual intercourse while in situ",
+      "Easily removed and reinserted by the patient",
+      "Best for mild to moderate Stage II prolapse"
+     ]
+    },
+    "right": {
+     "title": "Gellhorn Space-Occupying Pessary",
+     "points": [
+      "Concave disc creates suction against vaginal cuff",
+      "Precludes sexual intercourse; requires clinic changes",
+      "Stem assists with extraction and prevents tilting",
+      "Gold standard conservative device for Stage III-IV procidentia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Abdominal or laparoscopic **sacrocolpopexy** using permanent macroporous polypropylene mesh anchored to the **anterior longitudinal sacral ligament** at S1 promontory is the gold standard surgical procedure for **apical vaginal vault prolapse**, conferring superior anatomical durability and lower dyspareunia rates than transvaginal sacrospinous ligament fixation. Clinically, key parameters encompass apical repair.",
+   "say": "Laparoscopic or robotic sacrocolpopexy represents the definitive gold standard operation for apical vaginal vault prolapse. Using lightweight macroporous polypropylene mesh, the anterior and posterior vaginal walls are suspended directly to the anterior longitudinal ligament overlying the first sacral vertebra. It provides ninety percent long-term anatomical durability and preserves vaginal length and caliber.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Peritoneal dissection over sacral promontory avoiding middle sacral artery"
+     },
+     {
+      "id": "b",
+      "label": "Dissection of vesicovaginal and rectovaginal spaces to pelvic floor"
+     },
+     {
+      "id": "c",
+      "label": "Fixation of Y-shaped mesh to anterior and posterior vaginal muscularis"
+     },
+     {
+      "id": "d",
+      "label": "Anchoring proximal mesh arm to anterior longitudinal ligament at S1"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stress urinary incontinence (SUI)** is defined as involuntary leakage of urine on effort or exertion (coughing, sneezing, laughing, exercise), resulting from **urethral hypermobility** (loss of pubourethral and suburethral support) or **intrinsic sphincter deficiency (ISD)** (leak point pressure <60 cmH2O), without uninhibited detrusor contraction.",
+   "say": "Stress urinary incontinence is involuntary loss of urine coinciding with elevated intra-abdominal pressure such as coughing, lifting, or sneezing. Pathophysiology stems from either urethral hypermobility due to disruption of the pubourethral ligaments and endopelvic fascia, or intrinsic sphincter deficiency where the mucosal coaptation seal of the bladder neck is compromised.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stress Urinary Incontinence (SUI)",
+     "points": [
+      "Leakage instantaneous with physical exertion/cough",
+      "Absence of urgency; normal bladder sensation",
+      "Cystometry: Leakage without detrusor pressure rise",
+      "Treated by pelvic physiotherapy and mid-urethral slings"
+     ]
+    },
+    "right": {
+     "title": "Urge Urinary Incontinence (UUI)",
+     "points": [
+      "Leakage accompanied or immediately preceded by urgency",
+      "Associated with nocturnal polyuria and high daytime frequency",
+      "Cystometry: Involuntary detrusor muscle contractions",
+      "Treated by bladder training, antimuscarinics, and mirabegron"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive surgical gold standard for stress urinary incontinence refractory to pelvic physiotherapy is the synthetic **mid-urethral sling (MUS)**, utilizing a tension-free polypropylene tape placed beneath the mid-urethra via **retropubic (TVT)** or **transobturator (TOT)** approaches, providing dynamic backstop support during increased intra-abdominal pressure. Clinically, key parameters encompass tension-free vaginal tape.",
+   "say": "The tension-free synthetic mid-urethral sling is the most rigorously validated operation for female stress incontinence. A macroporous polypropylene tape is placed beneath the mid-portion of the urethra through retropubic or transobturator paths. During sudden rises in intra-abdominal pressure, the dynamic mid-urethral backstop compresses the urethra, preventing involuntary leakage with eighty-five to ninety percent long-term cure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sling Technique",
+     "Anatomical Trocar Trajectory",
+     "Distinguishing Procedural Nuance"
+    ],
+    "rows": [
+     [
+      "Tension-free Vaginal Tape (TVT)",
+      "Retropubic space from introitus to suprapubic",
+      "Mandatory rigid 70-degree cystoscopy to rule out bladder perforation"
+     ],
+     [
+      "Transobturator Tape (TOT)",
+      "Through obturator foramen inside-out or outside-in",
+      "Minimizes bladder and bowel perforation; risk of groin/thigh pain"
+     ],
+     [
+      "Single-incision mini-sling (SIMS)",
+      "Anchored into obturator internus muscle membrane",
+      "Avoids external skin exit punctures; slightly lower cure rate in ISD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Urge urinary incontinence** (overactive bladder syndrome, OAB) is caused by involuntary **detrusor muscle overactivity** during the filling phase. Management incorporates bladder training, fluid modification, pelvic floor physiotherapy, and pharmacotherapy with **antimuscarinics** (solifenacin, oxybutynin) or the selective **beta-3 adrenergic agonist mirabegron** (50 mg daily). Clinically, key parameters encompass urge incontinence, detrusor overactivity.",
+   "say": "Overactive bladder with urge incontinence is driven by involuntary detrusor contractions during bladder filling. First-line therapy focuses on bladder retraining and reducing dietary bladder irritants like caffeine. Pharmacotherapy employs anticholinergic agents like solifenacin, or the selective beta-three adrenoceptor agonist mirabegron, which relaxes detrusor smooth muscle during filling without causing anticholinergic dry mouth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "First-line: Bladder retraining, fluid management, pelvic muscle therapy"
+     },
+     {
+      "id": "b",
+      "label": "Second-line medical: Antimuscarinics (solifenacin) or beta-3 agonist (mirabegron)"
+     },
+     {
+      "id": "c",
+      "label": "Third-line procedural: Intravesical OnabotulinumtoxinA (100 units) injection"
+     },
+     {
+      "id": "d",
+      "label": "Refractory therapy: Sacral neuromodulation (InterStim) or PTNS"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vesicovaginal fistula (VVF)** in developing nations arises predominantly from **prolonged obstructed labour** (90% of cases), wherein the fetal head impaction compresses the bladder base and anterior vaginal wall against the pubic symphysis, producing extensive **ischemic necrosis** and sloughing within 7 to 10 days, presenting with continuous, involuntary urinary leakage.",
+   "say": "In low-resource settings, obstetric vesicovaginal fistula is an agonizing consequence of neglected obstructed labour. Prolonged impaction of the fetal skull crushes maternal soft tissues against the pubic bone, cutting off microvascular perfusion. After seven to ten days, ischemic necrosis causes tissue sloughing, presenting as continuous, unremitting urinary leakage through the vagina.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-prolapse-urogynaecology-fig1.webp",
+    "ar": 1.7778,
+    "caption": "Anatomical classification and surgical repair of vesicovaginal fistulae. Credit: StewardMD.",
+    "alt": "Clinical and anatomical illustration displaying vesicovaginal and rectovaginal fistula tracts and principles of layered flap closure."
+   }
+  }
+ ]
+}
