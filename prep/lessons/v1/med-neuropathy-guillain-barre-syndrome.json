@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "med-neuropathy",
+ "subject": "medicine",
+ "title": "Guillain-Barré Syndrome, CIDP, and Inflammatory Polyneuropathies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An acute post-infectious immune-mediated demyelinating polyradiculoneuropathy presenting with rapidly progressive symmetrical ascending flaccid paralysis and generalized areflexia is **Guillain-Barré syndrome** (GBS). The commonest antecedent trigger is gastrointestinal infection with Campylobacter jejuni, wherein lipooligosaccharide surface antigens elicit cross-reactive autoantibodies targeting gangliosides on peripheral nerve axolemma and myelin through molecular mimicry.",
+   "say": "An acute immune-mediated polyneuropathy presenting with rapidly progressive symmetrical ascending flaccid paralysis and areflexia is Guillain-Barré syndrome. The most common trigger is Campylobacter jejuni gastroenteritis, which elicits cross-reactive autoantibodies against peripheral nerve gangliosides through molecular mimicry.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gbs-fig1.webp",
+    "alt": "Pathophysiology and immune-mediated demyelination in Guillain-Barré syndrome.",
+    "caption": "Autoimmune attack on peripheral myelin and nodes of Ranvier in GBS. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Molecular mimicry against ganglioside epitopes generates distinct clinico-pathological variants. The classical acute inflammatory demyelinating polyneuropathy (AIDP) targets Schwann cell surface antigens, whereas the acute motor axonal neuropathy (AMAN) variant, strongly linked to **Campylobacter jejuni**, is mediated by anti-GM1 and anti-GD1a autoantibodies targeting nodal voltage-gated sodium channel clusters.",
+   "say": "Molecular mimicry against ganglioside epitopes generates distinct variants. Classical demyelinating GBS targets Schwann cell membranes, whereas acute motor axonal neuropathy, linked to Campylobacter jejuni, is driven by anti-GM1 antibodies targeting nodal sodium channel clusters.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gbs-fig2.webp",
+    "alt": "Molecular mimicry between Campylobacter lipooligosaccharide and human nerve gangliosides.",
+    "caption": "Molecular mimicry between bacterial lipooligosaccharides and human GM1 gangliosides. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A unique regional variant of GBS characterised by the clinical triad of acute ophthalmoplegia, prominent ataxia, and generalised areflexia is **Miller Fisher syndrome**. Driven by circulating IgG autoantibodies targeting ganglioside GQ1b, which is heavily enriched within the paranodal myelin of the oculomotor, trochlear, abducens, and muscle spindle afferent nerves, patients display normal limb strength.",
+   "say": "A unique regional variant of GBS characterized by acute ophthalmoplegia, ataxia, and areflexia is Miller Fisher syndrome. Driven by IgG autoantibodies targeting ganglioside GQ1b, which is heavily enriched in oculomotor nerves, patients display normal limb motor power.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gq1b",
+      "label": "Anti-GQ1b Autoantibody Synthesis"
+     },
+     {
+      "id": "paranod",
+      "label": "Nodal Injury in CN III, IV, VI & Spindle Afferents"
+     },
+     {
+      "id": "triad",
+      "label": "Ophthalmoplegia + Ataxia + Areflexia"
+     }
+    ],
+    "edges": [
+     [
+      "gq1b",
+      "paranod"
+     ],
+     [
+      "paranod",
+      "triad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pathognomonic laboratory hallmark of Guillain-Barré syndrome on lumbar puncture is **albuminocytological dissociation**. Examination of cerebrospinal fluid typically beyond the initial week of symptom onset reveals markedly elevated protein concentrations (exceeding one-hundred milligrams per decilitre) resulting from inflamed nerve root breakdown, alongside a completely normal white blood cell count (under five cells per microlitre).",
+   "say": "The pathognomonic laboratory hallmark of Guillain-Barré syndrome on lumbar puncture is albuminocytological dissociation. Cerebrospinal fluid reveals markedly elevated protein concentrations from inflamed nerve root breakdown alongside a normal white blood cell count under five cells per microlitre.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Albuminocytological Dissociation",
+     "points": [
+      "Elevated CSF protein (often > 100 to 400 mg/dL)",
+      "Normal CSF cell count (< 5 WBC / uL)",
+      "Peak protein elevation at 2 to 3 weeks",
+      "Hallmark of GBS and chronic CIDP"
+     ]
+    },
+    "right": {
+     "title": "Infectious Meningoradiculitis",
+     "points": [
+      "Elevated CSF protein AND marked pleocytosis",
+      "Elevated WBC count (> 50 to 500 cells / uL)",
+      "Seen in Lyme neuroborreliosis, HIV, and Polio",
+      "Pleocytosis > 50 cells excludes pure GBS"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive first-line disease-modifying therapies for Guillain-Barré syndrome are intravenous immunoglobulin (**IVIG**, 0.4 g/kg/day for five consecutive days) or plasma exchange (plasmapheresis, five sessions over two weeks). Both modalities possess equal clinical efficacy in halting disease progression, reducing time on mechanical ventilation, and accelerating motor recovery, whereas systemic corticosteroids are completely ineffective.",
+   "say": "The definitive first-line disease-modifying therapies for Guillain-Barré syndrome are intravenous immunoglobulin or plasma exchange. Both modalities possess equal clinical efficacy in halting disease progression and shortening ventilator dependence, whereas systemic corticosteroids are ineffective.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Modality",
+     "Standard Administration Regimen",
+     "Clinical Pearls and Invariants"
+    ],
+    "rows": [
+     [
+      "Intravenous Immunoglobulin (IVIG)",
+      "0.4 g/kg/day for 5 days (total 2 g/kg)",
+      "Easier to administer; preferred in autonomic instability"
+     ],
+     [
+      "Plasma Exchange (PLEX)",
+      "4 to 5 exchanges (200-250 mL plasma/kg) over 10-14 days",
+      "Equivalent efficacy; requires stable hemodynamics and central access"
+     ],
+     [
+      "Systemic Corticosteroids",
+      "Oral Prednisone OR IV Methylprednisolone",
+      "Ineffective and NOT recommended in acute GBS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most dangerous life-threatening hazard in Guillain-Barré syndrome is neuromuscular respiratory failure resulting from diaphragmatic and intercostal muscle paralysis. Frequent bedside vital capacity (FVC) monitoring is mandatory; an FVC falling below fifteen millilitres per kilogram, maximum inspiratory pressure worse than negative thirty centimetres of water, or severe autonomic **instability** constitutes an absolute indication for elective endotracheal intubation.",
+   "say": "The most dangerous hazard in Guillain-Barré syndrome is respiratory failure from diaphragmatic paralysis. Bedside forced vital capacity monitoring is mandatory; an FVC falling below fifteen millilitres per kilogram or severe autonomic instability represents an absolute indication for elective intubation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mon",
+      "label": "Serial Bedside Vital Capacity (q4h)"
+     },
+     {
+      "id": "drop",
+      "label": "FVC < 15 mL/kg OR NIF < -30 cm H2O"
+     },
+     {
+      "id": "intub",
+      "label": "Elective ICU Endotracheal Intubation"
+     }
+    ],
+    "edges": [
+     [
+      "mon",
+      "drop"
+     ],
+     [
+      "drop",
+      "intub"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A chronic acquired autoimmune demyelinating polyneuropathy evolving progressively or relapsing over at least eight weeks is **chronic inflammatory demyelinating polyradiculoneuropathy** (CIDP). In sharp contrast to acute GBS, CIDP follows a protracted course, features symmetrical proximal and distal weakness with areflexia, and responds robustly to oral corticosteroids, maintenance IVIG, or chronic plasma exchange.",
+   "say": "A chronic acquired autoimmune demyelinating polyneuropathy progressing over at least eight weeks is CIDP. In contrast to acute GBS, CIDP follows a protracted course, features symmetrical proximal and distal weakness, and responds robustly to oral corticosteroids and maintenance IVIG.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Guillain-Barré Syndrome (GBS)",
+     "CIDP"
+    ],
+    "rows": [
+     [
+      "Time to Maximal Nadir",
+      "Rapid (< 4 weeks; 80% reach nadir in 2 wk)",
+      "Protracted (> 8 weeks, progressive or relapsing)"
+     ],
+     [
+      "Weakness Distribution",
+      "Ascending distal to proximal",
+      "Prominent symmetrical proximal AND distal weakness"
+     ],
+     [
+      "Corticosteroid Response",
+      "Completely ineffective (may worsen outcome)",
+      "Highly effective (first-line alongside IVIG)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The single most common neuropathy worldwide is distal symmetrical sensorimotor **diabetic neuropathy**. Caused by chronic hyperglycaemic microvascular endoneurial ischaemia and intracellular sorbitol accumulation via the aldose reductase pathway, patients develop length-dependent glove-and-stocking sensory loss, burning neuropathic dysaesthesias, loss of vibration and ankle reflexes, and neuropathic foot ulceration.",
+   "say": "The single most common neuropathy worldwide is distal symmetrical sensorimotor diabetic neuropathy. Caused by hyperglycaemic endoneurial ischemia and sorbitol accumulation, patients develop glove-and-stocking sensory loss, burning dysaesthesias, and high risk for neuropathic foot ulceration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neuropathic Domain",
+     "Clinical Manifestation",
+     "First-Line Symptomatic Therapy"
+    ],
+    "rows": [
+     [
+      "Sensory Polyneuropathy",
+      "Burning dysaesthesias, lancinating leg pains",
+      "Duloxetine, Pregabalin, or Gabapentin"
+     ],
+     [
+      "Autonomic Neuropathy",
+      "Gastroparesis, postural hypotension, erectile dysfunction",
+      "Midodrine, Fludrocortisone, Metoclopramide"
+     ],
+     [
+      "Diabetic Amyotrophy",
+      "Severe unilateral thigh pain, profound quadriceps wasting",
+      "Strict glycemic control, physical rehabilitation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 438"
+}

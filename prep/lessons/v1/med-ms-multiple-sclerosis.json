@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "med-ms",
+ "subject": "medicine",
+ "title": "Multiple Sclerosis: Demyelination, Diagnostics, and Disease Modification",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A chronic autoimmune inflammatory neurodegenerative disorder of the central nervous system characterised by recurrent episodes of inflammatory demyelination and axonal transection is **multiple sclerosis** (MS). Mediated primarily by autoreactive CD4 positive Th1 and Th17 lymphocytes targeting myelin basic protein and proteolipid protein, it predominantly affects young adults between twenty and forty years of age.",
+   "say": "A chronic autoimmune inflammatory neurodegenerative disorder of the central nervous system characterized by recurrent demyelination and axonal injury is multiple sclerosis. Mediated by autoreactive T lymphocytes targeting myelin proteins, it predominantly affects young adults between twenty and forty years of age.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cns-stroke-ms-meningitis-prion-hydrocephalus-fig1.webp",
+    "alt": "Pathology of multiple sclerosis plaques and inflammatory demyelination.",
+    "caption": "Autoimmune myelin destruction, plaque formation, and axonal injury in MS. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most frequent initial presentation of multiple sclerosis is acute inflammatory demyelination of the optic nerve, designated as **optic neuritis**. Patients present with acute, painful unilateral vision loss, impaired colour desaturation (dyschromatopsia), and an afferent pupillary defect, frequently exhibiting transient worsening of visual acuity and neurological symptoms during passive heating or physical exertion, termed Uhthoff phenomenon.",
+   "say": "The most frequent initial presentation of multiple sclerosis is acute inflammatory demyelination of the optic nerve, designated as optic neuritis. Patients present with painful unilateral vision loss, colour desaturation, and transient worsening of symptoms in warm temperatures, known as Uhthoff phenomenon.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/optic-neuritis-fig1.webp",
+    "alt": "Clinical and fundoscopic features of acute optic neuritis and visual field deficits.",
+    "caption": "Painful unilateral vision loss and optic nerve demyelination in optic neuritis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Another classic physical sign reflecting posterior column cervical cord demyelination is an electric shock-like sensation radiating down the spine into the extremities upon active neck flexion, recognized as **Lhermitte sign**. Diagnostic confirmation requires magnetic resonance imaging demonstrating dissemination in space (lesions in periventricular, juxtacortical, infratentorial, or spinal regions) and dissemination in time.",
+   "say": "Another classic physical sign reflecting cervical spinal cord demyelination is an electric shock-like sensation radiating down the spine upon neck flexion, recognized as Lhermitte sign. Diagnostic confirmation requires MRI demonstrating dissemination in space and time under McDonald criteria.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cerv",
+      "label": "Cervical Cord Posterior Column Demyelination"
+     },
+     {
+      "id": "flex",
+      "label": "Active Neck Flexion (Axonal Stretch)"
+     },
+     {
+      "id": "lher",
+      "label": "Electric Shock-Like Paresthesias (Lhermitte)"
+     }
+    ],
+    "edges": [
+     [
+      "cerv",
+      "flex"
+     ],
+     [
+      "flex",
+      "lher"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On sagittal FLAIR and T2-weighted brain magnetic resonance imaging, perivenular inflammatory demyelination produces pathognomonic ovoid hyperintense lesions oriented perpendicularly to the lateral ventricles along medullary veins, universally designated as **Dawson fingers**. Formal clinical verification of dissemination relies on the revised McDonald criteria.",
+   "say": "On sagittal FLAIR brain magnetic resonance imaging, perivenular demyelination produces pathognomonic ovoid hyperintense lesions oriented perpendicularly to the lateral ventricles, designated as Dawson fingers. Formal verification of dissemination relies on the revised McDonald criteria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical CNS Zone",
+     "Characteristic MRI Plaque Appearance",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Periventricular",
+      "Ovoid hyperintensities perpendicular to ventricles (Dawson fingers)",
+      "Fulfills dissemination in space criterion"
+     ],
+     [
+      "Juxtacortical / Cortical",
+      "Subcortical U-fibre and intracortical demyelination",
+      "Correlates with cognitive decline and seizures"
+     ],
+     [
+      "Infratentorial",
+      "Pons, medulla, or middle cerebellar peduncle plaques",
+      "Produces diplopia, ataxia, or internuclear ophthalmoplegia"
+     ],
+     [
+      "Spinal Cord",
+      "Short-segment (< 2 vertebral bodies) eccentric cervical plaques",
+      "Produces Lhermitte sign and partial Brown-Sequard deficit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lumbar puncture analysis supports the diagnosis by demonstrating intrathecal immunoglobulin synthesis. Agarose gel electrophoresis with isoelectric focusing detects two or more cerebrospinal fluid-restricted **oligoclonal bands** that are completely absent in matched serum samples, indicating compartmentalized B-cell clonal expansion within the central nervous system.",
+   "say": "Lumbar puncture analysis supports the diagnosis by demonstrating intrathecal immunoglobulin synthesis. Agarose gel electrophoresis detects two or more cerebrospinal fluid-restricted oligoclonal bands absent in matched serum, confirming compartmentalized B-cell activation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Positive CSF Oligoclonal Bands",
+     "points": [
+      "Two or more bands present in CSF but absent in serum",
+      "Indicates central intrathecal IgG synthesis",
+      "Present in > 85% of relapsing-remitting MS",
+      "Fulfills dissemination in time criterion"
+     ]
+    },
+    "right": {
+     "title": "Matched Serum and CSF Bands",
+     "points": [
+      "Identical bands present in both CSF and serum",
+      "Indicates systemic paraproteinemia or infection",
+      "Does NOT reflect intrathecal neuroinflammation",
+      "Seen in HIV, syphilis, and multiple myeloma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute relapses of multiple sclerosis are managed with high-dose intravenous methylprednisolone (one gram daily for three to five days) to accelerate functional recovery. Long-term disease-modifying therapies (DMTs) reduce relapse rates and delay disability progression, utilizing injectable interferon beta, oral fingolimod, or high-efficacy monoclonal antibodies such as the alpha-4 integrin blocker **natalizumab**.",
+   "say": "Acute relapses of multiple sclerosis are managed with high-dose intravenous methylprednisolone to accelerate recovery. Long-term disease-modifying therapies reduce relapse rates and disability progression, utilizing injectable interferon beta, oral sphingosine-1-phosphate modulators, or monoclonal antibodies like natalizumab.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "DMT Agent",
+     "Mechanism of Action",
+     "Primary Clinical Consideration"
+    ],
+    "rows": [
+     [
+      "Interferon-beta-1a",
+      "Downregulates MHC Class II and Th1 cytokines",
+      "First-generation injectable; flu-like side effects"
+     ],
+     [
+      "Natalizumab (Tysabri)",
+      "Blocks alpha-4 integrin, preventing leukocyte CNS entry",
+      "High efficacy; monitor anti-JCV antibody for PML risk"
+     ],
+     [
+      "Ocrelizumab (Ocrevus)",
+      "Anti-CD20 monoclonal B-cell depleting antibody",
+      "Approved for both relapsing AND primary progressive MS"
+     ],
+     [
+      "Fingolimod (Gilenya)",
+      "Sphingosine-1-phosphate receptor modulator",
+      "Traps lymphocytes in lymph nodes; causes first-dose bradycardia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A distinct autoimmune astrocytopathy frequently misdiagnosed as multiple sclerosis is **neuromyelitis optica** (NMO, Devic disease). Clinically characterised by severe bilateral sequential optic neuritis and longitudinally extensive transverse myelitis (LETM spanning three or more contiguous vertebral segments), the pathognomonic diagnostic biomarker is circulating IgG autoantibodies directed against aquaporin-4 water channels.",
+   "say": "A distinct autoimmune astrocytopathy frequently misdiagnosed as multiple sclerosis is neuromyelitis optica. Characterized by severe bilateral optic neuritis and longitudinally extensive transverse myelitis spanning three or more vertebral segments, it is defined by autoantibodies against aquaporin-4 water channels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Multiple Sclerosis (MS)",
+     "points": [
+      "Short-segment spinal cord plaques (< 2 segments)",
+      "Unilateral mild to moderate optic neuritis",
+      "Aquaporin-4 antibody negative",
+      "CSF oligoclonal bands positive in > 85%"
+     ]
+    },
+    "right": {
+     "title": "Neuromyelitis Optica (NMO)",
+     "points": [
+      "Longitudinally extensive transverse myelitis (>= 3 segments)",
+      "Severe, bilateral, necrotising optic neuritis",
+      "Aquaporin-4 (AQP4-IgG) seropositive in 75%",
+      "CSF oligoclonal bands classically absent (< 20%)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Another primary demyelinating syndrome targeting myelin oligodendrocyte glycoprotein is **MOG antibody disease**, presenting with recurrent bilateral optic neuritis and conus medullaris myelitis. In children following a viral prodrome, acute monophasic widespread demyelination involving both white matter and deep grey nuclei defines acute disseminated encephalomyelitis (ADEM), responding robustly to high-dose corticosteroids.",
+   "say": "Another primary demyelinating syndrome targeting myelin oligodendrocyte glycoprotein is MOG antibody disease, presenting with recurrent bilateral optic neuritis. In children following a viral illness, acute monophasic widespread demyelination defines acute disseminated encephalomyelitis, responding well to high-dose corticosteroids.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Demyelinating Condition",
+     "Target Autoantigen",
+     "Spinal Cord MRI Lesion",
+     "Therapeutic Response"
+    ],
+    "rows": [
+     [
+      "Multiple Sclerosis",
+      "Myelin basic protein / PLP",
+      "Short, eccentric, dorsolateral plaques",
+      "Responds to DMTs; interferon, anti-CD20"
+     ],
+     [
+      "Neuromyelitis Optica",
+      "Aquaporin-4 (AQP4) water channel",
+      "Centrally located LETM >= 3 segments",
+      "PLEX for acute flares; Rituximab/Eculizumab"
+     ],
+     [
+      "MOG Antibody Disease",
+      "Myelin oligodendrocyte glycoprotein",
+      "Conus medullaris / LETM with T2 swelling",
+      "Responds to steroids; maintenance IVIG/Rituximab"
+     ],
+     [
+      "ADEM",
+      "Post-infectious molecular mimicry",
+      "Bilateral asymmetric subcortical & thalamic lesions",
+      "Monophasic; pulsed Methylprednisolone"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 436"
+}
