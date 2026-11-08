@@ -2629,7 +2629,7 @@
       return '<button type="button" role="tab" class="rnav-htab' + (on ? ' on' : '') + '" id="rnavHtab-' + id + '" data-hometab="' + id + '" aria-selected="' + on + '" aria-controls="rnavHpanel-' + id + '" tabindex="' + (on ? 0 : -1) + '">' + homeTabLabel(T, id) + '</button>';
     }).join("");
     return '<div class="rnav-tools-head"><h2 class="rnav-tools-h" id="rnavToolsH">Clinical Tools</h2>' +
-        '<button type="button" class="rnav-alltools" data-act="alltools">' + ric("apps") + '<span>All Tools</span>' + ric("chevron_right") + '</button></div>' +
+        '<button type="button" class="rnav-alltools" data-act="alltools">' + ric("apps") + '<span>All tools</span>' + ric("chevron_right") + '</button></div>' +
       '<div class="hrf-pillsrow"><div class="rnav-htabs" role="tablist" aria-labelledby="rnavToolsH">' + tabs + '</div></div>' +
       '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-foryou" aria-labelledby="rnavHtab-foryou"' + (cur === "foryou" ? '' : ' hidden') + '>' + grid + '<div id="rnavTry">' + homeTryCard(T) + '</div></div>' +
       T.TAB_IDS.filter(function (id) { return id !== "foryou"; }).map(function (id) {
