@@ -1,0 +1,261 @@
+{
+  "gen": "AI",
+  "id": "prd-anorectal-malformations-imaging",
+  "module": "Neonatal GI Obstruction and Volvulus",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Anorectal Malformations and VACTERL Association",
+  "v": 1,
+  "steps": [
+    {
+      "say": "The Krickenbeck classification categorizes anorectal malformations by fistula anatomy. Identifying the fistula location determines whether a primary perineal repair or diverting colostomy is needed.",
+      "tx": "Apply the **Krickenbeck international classification** for comprehensive evaluation of anorectal malformations (ARM). The Krickenbeck classification categorizes anorectal malformations (ARM) by fistula presence: perineal, rectourethral (bulbar or prostatic), rectovesical, vestibular, and persistent cloaca, alongside lesions without fistula and rectal atresia. Fistula identification directs whether primary repair or initial colostomy is indicated (Cross-table prone lateral radiograph timing).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fistula category",
+          "Anatomical opening",
+          "Primary surgical approach"
+        ],
+        "rows": [
+          [
+            "Perineal fistula (low)",
+            "Perineal skin anterior to sphincter",
+            "Primary posterior sagittal anorectoplasty (PSARP)"
+          ],
+          [
+            "Rectourethral (intermediate/high)",
+            "Prostatic or bulbar urethra (males)",
+            "Initial diverting colostomy, delayed PSARP"
+          ],
+          [
+            "Rectovesical (high)",
+            "Bladder neck or trigone",
+            "Diverting colostomy, complex reconstruction"
+          ],
+          [
+            "Vestibular fistula (females)",
+            "Vulvar vestibule outside hymen",
+            "Colostomy or primary PSARP in selected cases"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "An invertogram or cross-table prone lateral radiograph must never be performed before 18 to 24 hours of life. It takes that long for swallowed air to reach the blind pouch against sphincter tone.",
+      "tx": "Observe the **cross-table prone lateral radiograph timing** post-birth. Prone cross-table lateral (or invertogram) radiograph is performed at 18-24 hours of life to allow swallowed gas to reach the distal rectal pouch through meconium. If performed earlier, physiological puborectalis contraction and viscous meconium prevent air entry into the distal pouch, causing false-positive overestimation of pouch height (PC line and I-point landmarks).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "birth",
+            "label": "Infant born with imperforate anus"
+          },
+          {
+            "id": "wait",
+            "label": "Wait 18-24 hours of life for bowel gas transit"
+          },
+          {
+            "id": "position",
+            "label": "Cross-table lateral prone position with pelvis elevated"
+          },
+          {
+            "id": "measure",
+            "label": "Measure air-skin distance and PC/I-line relationships"
+          }
+        ],
+        "edges": [
+          [
+            "birth",
+            "wait"
+          ],
+          [
+            "wait",
+            "position"
+          ],
+          [
+            "position",
+            "measure"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The pubococcygeal line and ischial spine provide crucial radiographic benchmarks on lateral pelvic films. Gas extending below the ischial spine indicates a low malformation.",
+      "tx": "Evaluate **PC line and I-point landmarks** on lateral pelvic radiography. On lateral pelvic radiography, the pubococcygeal (PC) line connects the superior pubic bone to the sacrococcygeal junction; rectal gas ending below the ischial spine indicates a low malformation, whereas termination above the PC line indicates a high supralevator anomaly (Perineal ultrasound pouch distance).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Radiographic line / landmark",
+          "Anatomical correlation",
+          "Lesion classification"
+        ],
+        "rows": [
+          [
+            "Pubococcygeal (PC) line",
+            "Level of levator ani origin",
+            "Pouch above = High malformation"
+          ],
+          [
+            "Ischial spine (I-point)",
+            "Puborectalis muscle sling",
+            "Pouch at spine = Intermediate malformation"
+          ],
+          [
+            "Below ischial spine",
+            "Superficial perineal subcutaneous fat",
+            "Pouch below = Low malformation"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "High-frequency ultrasound placed on the perineum provides precise millimeter measurements of the blind pouch. A pouch-to-perineum distance under ten millimeters confirms a low malformation.",
+      "tx": "Measure the **perineal ultrasound pouch distance** directly at the bedside. High-frequency perineal ultrasound accurately measures the distance from the blind rectal pouch to the perineal skin (pouch-perineum distance < 10 mm indicates low ARM amenable to primary repair). This non-invasive ultrasound method eliminates the need to wait 24 hours for gas transit, providing immediate surgical triage (VACTERL association screening).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low ARM (ultrasound)",
+          "points": [
+            "Pouch-to-skin distance < 10 mm",
+            "Intact internal anal sphincter complex",
+            "Primary perineal reconstruction"
+          ]
+        },
+        "right": {
+          "title": "High ARM (ultrasound)",
+          "points": [
+            "Pouch-to-skin distance > 15 mm",
+            "Disrupted or hypoplastic sphincter complex",
+            "Diverting colostomy required first"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Every baby with an anorectal malformation requires full VACTERL screening. Vertebral and renal anomalies are especially common and must be searched for immediately.",
+      "tx": "Conduct comprehensive **VACTERL association screening** in all neonates diagnosed with an anorectal malformation. Every infant with ARM mandates complete VACTERL screening: Vertebral anomalies (70%), Anal atresia, Cardiac defects (30-40%), Tracheoesophageal fistula (20%), Renal anomalies (50%), and Limb anomalies (radial ray). Immediate workup includes spine and extremity radiographs, echocardiography, and renal ultrasonography (Persistent cloaca anatomy).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organ system",
+          "Component of VACTERL",
+          "Screening modality & frequency"
+        ],
+        "rows": [
+          [
+            "Vertebral column",
+            "Vertebral segmentation / hemivertebra",
+            "Spinal radiographs (70% frequency)"
+          ],
+          [
+            "Cardiovascular",
+            "ASD, VSD, Tetralogy of Fallot",
+            "Echocardiogram (30-40% frequency)"
+          ],
+          [
+            "Tracheoesophageal",
+            "TE fistula with esophageal atresia",
+            "Nasogastric tube passage (20% frequency)"
+          ],
+          [
+            "Genitourinary",
+            "Renal agenesis, hydronephrosis, VUR",
+            "Renal ultrasound & VCUG (50% frequency)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Persistent cloaca occurs in female infants when the urinary, genital, and digestive tracts converge into a single perineal orifice. Pelvic MRI and genitography provide clear mapping of this complex anatomy.",
+      "tx": "Examine **persistent cloaca anatomy** in female neonates with an imperforate anus and a single perineal opening. Persistent cloaca in females features confluence of the urethra, vagina, and rectum into a single common perineal channel, requiring genitography and 3D pelvic MRI to measure channel length and assess for associated hydrocolpos, m\u00fcllerian duplication, and urinary tract obstruction (Tethered cord screening in ARM).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "exam",
+            "label": "Single perineal opening in female newborn"
+          },
+          {
+            "id": "genito",
+            "label": "Fluoroscopic genitography via opening"
+          },
+          {
+            "id": "mri",
+            "label": "Pelvic 3D MRI for sphincter & channel length"
+          },
+          {
+            "id": "reconstruct",
+            "label": "Total urogenital mobilization planning"
+          }
+        ],
+        "edges": [
+          [
+            "exam",
+            "genito"
+          ],
+          [
+            "genito",
+            "mri"
+          ],
+          [
+            "mri",
+            "reconstruct"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Up to forty-five percent of infants with intermediate or high anorectal malformations have occult spinal dysraphism. Spinal ultrasound or MRI is mandatory to detect a tethered cord.",
+      "tx": "Mandate **tethered cord screening in ARM** using neonatal neurosonography or spine MRI. Spinal MRI or neonatal neurosonography is mandatory in all high/intermediate ARMs due to a 30-45% coexistence of occult spinal dysraphism and tethered cord. Early identification allows elective neurosurgical detethering to protect against progressive neuropathic bladder dysfunction and lower extremity motor deficits (Sacral ratio prognostic significance).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal neonatal spine",
+          "points": [
+            "Conus medullaris ends at L1-L2",
+            "Filum terminale diameter < 2 mm",
+            "Freely pulsating cauda equina roots"
+          ]
+        },
+        "right": {
+          "title": "Tethered cord in ARM",
+          "points": [
+            "Conus medullaris terminates below L2-L3",
+            "Thickened filum > 2 mm with lipoma",
+            "Dorsally displaced, non-pulsatile cord"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The sacral ratio measured on pelvic radiographs provides a reliable forecast of future fecal continence. Severe sacral hypoplasia correlates with poor sphincter innervation.",
+      "tx": "Calculate the **sacral ratio prognostic significance** on AP and lateral pelvic radiographs. The sacral ratio measured on lateral pelvic radiograph (< 0.74 normal, < 0.4 severely hypoplastic) correlates with sacral nerve root innervation and predicts long-term fecal continence. Severe sacral dysgenesis alerts clinicians to anticipatory bowel and bladder management needs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sacral ratio value",
+          "Sacral development",
+          "Continence prognosis"
+        ],
+        "rows": [
+          [
+            "> 0.74",
+            "Normal sacral development (5 segments)",
+            "Good fecal and urinary continence potential"
+          ],
+          [
+            "0.40 to 0.74",
+            "Moderate sacral hypoplasia",
+            "Partial sphincter control; may require bowel management"
+          ],
+          [
+            "< 0.4",
+            "Severely hypoplastic sacral dysgenesis",
+            "Poor long-term continence; neurogenic bladder"
+          ]
+        ]
+      }
+    }
+  ]
+}
