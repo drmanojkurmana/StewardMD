@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sct-lung-cancer-staging-resection",
+  "title": "Lung Cancer: TNM 8th Edition, Anatomic Resections, Sublobar Trials and Multimodality",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 110 (Lung: Neoplasms)",
+    "IASLC 8th Edition Lung Cancer Staging Manual",
+    "CALGB 140503 and JCOG0802 Phase 3 Randomized Trials"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The eighth edition TNM classification published by the IASLC refined tumor size thresholds for non-small cell lung cancer. Every centimetre increase in primary tumor diameter up to five centimetres shifts the T stage. T1 tumors measure three centimetres or less, T2 tumors span three to five centimetres, and larger tumors advance to T3 and T4.",
+      "tx": "The **IASLC staging** system in the **8th Edition TNM** establishes precise size cut-offs: T1a is 1 cm or less; T1b is 1 to 2 cm; T1c is 2 to 3 cm; T2a is 3 to 4 cm; T2b is 4 to 5 cm; T3 spans 5 to 7 cm; and **T1 to T4 thresholds** designate any primary tumor exceeding 7 cm as T4.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "T Stage (8th Edition)",
+          "Tumor Diameter Range",
+          "Key Invasive Anatomical Characteristics"
+        ],
+        "rows": [
+          [
+            "T1 (a/b/c)",
+            "<=3 cm (increments <=1, 1-2, 2-3 cm)",
+            "Surrounded by lung or visceral pleura, not proximal to lobar bronchus"
+          ],
+          [
+            "T2 (a/b)",
+            ">3 to <=5 cm (increments 3-4, 4-5 cm)",
+            "Involves main bronchus without carina, invades visceral pleura, atelectasis"
+          ],
+          [
+            "T3",
+            ">5 to <=7 cm",
+            "Invades chest wall, pericardium, phrenic nerve, or satellite nodule same lobe"
+          ],
+          [
+            "T4",
+            ">7 cm",
+            "Invades mediastinum, heart, great vessels, carina, trachea, or different ipsilateral lobe"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Lymph node staging is a critical prognostic determinant that guides multimodality treatment decisions. N1 disease involves ipsilateral peribronchial, intrapulmonary, or hilar lymph nodes. N2 disease indicates spread to ipsilateral mediastinal or subcarinal nodes, whereas N3 nodes involve contralateral mediastinal or supraclavicular stations.",
+      "tx": "Nodal staging stratifies metastatic burden: **N1 nodes** encompass ipsilateral peribronchial, interlobar, and hilar stations (stations 10 to 14); **N2 nodes** designate metastasis to ipsilateral mediastinal or subcarinal stations (stations 1 to 9); and **N3 nodes** represent spread to contralateral mediastinal, contralateral hilar, or supraclavicular fossa lymph nodes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "N1 Nodal Disease (Hilar)",
+          "points": [
+            "Involves stations 10 through 14",
+            "Contained within visceral pleural envelope",
+            "Standard surgical candidate for upfront resection",
+            "Adjuvant systemic chemotherapy recommended postop"
+          ]
+        },
+        "right": {
+          "title": "N2 Nodal Disease (Mediastinal)",
+          "points": [
+            "Involves stations 1 through 9 (ipsilateral/subcarinal)",
+            "Crosses into mediastinal connective tissue",
+            "Classically treated with induction neoadjuvant therapy",
+            "Requires invasive mediastinal staging (EBUS/mediastinoscopy)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Preoperative physiologic evaluation ensures that the patient will tolerate anatomic lung resection. Pulmonary function testing measures forced expiratory volume in one second and carbon monoxide diffusing capacity. Postoperative predicted values of both parameters must exceed forty percent to avoid high cardiopulmonary mortality.",
+      "tx": "Preoperative evaluation requires spirometry and diffusion capacity testing to calculate **predicted postoperative FEV1** and **DLCO**. If either parameter falls below 40 percent of predicted normal, the patient carries elevated **resection risk**, prompting formal cardiopulmonary exercise testing to measure maximal oxygen consumption (VO2 max).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Perform baseline spirometry and DLCO testing in thoracic candidate"
+          },
+          {
+            "id": "b",
+            "label": "Calculate ppoFEV1 and ppoDLCO based on functional lung segments remaining"
+          },
+          {
+            "id": "c",
+            "label": "If ppoFEV1 and ppoDLCO both >40%, proceed safely with planned resection"
+          },
+          {
+            "id": "d",
+            "label": "If <40%, perform CPET (VO2 max <10 mL/kg/min indicates prohibitive operative risk)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Anatomic lobectomy with systematic lymph node dissection remains the oncologic standard of care for early-stage lung cancer. Complete resection of the tumor-bearing lobe requires individual ligation of the pulmonary arterial branches, pulmonary vein, and lobar bronchus. Dissection must include station seven subcarinal lymph nodes.",
+      "tx": "Surgical **anatomic lobectomy** with **systematic lymphadenectomy** represents the gold standard for fit patients with stage I and II disease. Complete oncologic clearance demands en bloc removal of at least 3 mediastinal nodal stations, with mandatory sampling of **station 7 subcarinal** nodes and lobar stations, ensuring accurate pathological staging.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sct-thoracic-lung-trauma-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Thoracic anatomy and anatomic lobectomy resection planes. Credit: StewardMD.",
+        "alt": "Thoracic surgical anatomy, lobectomy planes and hilar vascular dissection."
+      }
+    },
+    {
+      "say": "Landmark randomized clinical trials have redefined the surgical management of small peripheral lung cancers. The CALGB 140503 and Japanese JCOG0802 trials proved that anatomic segmentectomy is non-inferior to lobectomy. For peripheral tumors two centimetres or smaller, segmentectomy preserves lung function with equivalent five-year survival, which is recognized by surgical teams.",
+      "tx": "The landmark **CALGB 140503** and **JCOG0802** randomized phase 3 trials established that **anatomic segmentectomy** achieves non-inferior overall and disease-free survival compared to lobectomy for peripheral stage IA non-small cell lung tumors 2 cm or smaller, while preserving superior pulmonary parenchymal function.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anatomic Lobectomy (Historical Standard)",
+          "points": [
+            "Full removal of entire anatomical lobe",
+            "Higher loss of post-resection FEV1 and DLCO",
+            "Mandatory for tumors >2 cm or central location",
+            "Traditional gold standard benchmark for decades"
+          ]
+        },
+        "right": {
+          "title": "Sublobar Segmentectomy (CALGB 140503)",
+          "points": [
+            "Removes specific bronchopulmonary segments",
+            "Non-inferior survival for peripheral tumors <=2 cm",
+            "Saves valuable functional pulmonary parenchyma",
+            "Requires confirmation of negative nodal stations 10-14"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Centrally located tumors that invade the origin of the lobar bronchus frequently pose technical challenges. In these patients, bronchial sleeve lobectomy is preferred over complete pneumonectomy. Resecting a sleeve of the main bronchus and creating an end-to-end anastomosis preserves distal lung parenchyma and reduces operative mortality.",
+      "tx": "For central tumors invading the lobar bronchial orifice, **sleeve lobectomy** is strongly preferred over complete **pneumonectomy avoidance**. Resection of the involved bronchial cylinder followed by end-to-end **bronchial anastomosis** preserves distal healthy parenchyma, reducing perioperative operative mortality from 6 to 8 percent down to 1 to 2 percent.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Central tumor involving mainstem or intermediate bronchial junction"
+          },
+          {
+            "id": "b",
+            "label": "Circumferential resection of involved bronchial cylinder with negative margins"
+          },
+          {
+            "id": "c",
+            "label": "Preserve and protect adjacent pulmonary artery branch vessels"
+          },
+          {
+            "id": "d",
+            "label": "Construct end-to-end bronchial anastomosis using interrupted monofilament sutures"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Minimally invasive approaches have become the standard technique for anatomic pulmonary resections. Video-assisted thoracoscopic surgery and robotic platforms achieve equivalent oncologic lymph node dissection compared to thoracotomy. Patients experience significantly less postoperative pain, shorter hospital stays, and faster recovery, which is recognized by surgical teams.",
+      "tx": "Adoption of **VATS lobectomy** and **robotic lobectomy** achieves identical long-term oncologic survival compared to open thoracotomy. Minimally invasive visualization yields **reduced morbidity**, significantly less postoperative pain, shorter chest tube duration, and lower rates of pulmonary complications, facilitating rapid transition to adjuvant chemotherapy.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-surg-haemothorax_tamponade.webp",
+        "ar": 1.3333,
+        "caption": "Thoracotomy and thoracic cavity surgical exploration. Credit: StewardMD.",
+        "alt": "Thoracoscopic port placement and surgical exploration of the pleural space."
+      }
+    },
+    {
+      "say": "In patients with resectable stage three-a disease with documented mediastinal nodal metastases, multimodal therapy is indicated. The CheckMate 816 trial demonstrated that neoadjuvant chemoimmunotherapy with platinum doublet plus nivolumab improves event-free survival. Up to twenty-four percent of patients achieve a complete pathological response prior to surgery, which is recognized by surgical teams.",
+      "tx": "In resectable Stage IIIA (N2) disease, the practice-changing **CheckMate 816** trial established **neoadjuvant chemoimmunotherapy** combining platinum doublet chemotherapy with nivolumab. This induction regimen produces a remarkable 24 percent **pathological complete response** rate and significantly prolongs event-free survival compared to chemotherapy alone prior to definitive resection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Arm (CheckMate 816)",
+          "Pathological Complete Response (pCR)",
+          "Event-Free Survival Hazard Ratio"
+        ],
+        "rows": [
+          [
+            "Platinum Chemotherapy Alone",
+            "3.2 percent",
+            "1.00 (Reference control)"
+          ],
+          [
+            "Nivolumab + Platinum Doublet",
+            "24.0 percent",
+            "0.63 (37 percent reduction in recurrence or death)"
+          ],
+          [
+            "Definitive Resection Rate",
+            "83 percent completed planned surgery",
+            "High R0 complete resection rate (89 percent)"
+          ],
+          [
+            "Postoperative Complications",
+            "Equivalent between treatment arms",
+            "No increase in bronchial stump dehiscence or mortality"
+          ]
+        ]
+      }
+    }
+  ]
+}
