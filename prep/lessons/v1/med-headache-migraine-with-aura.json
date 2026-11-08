@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "med-headache",
+ "subject": "medicine",
+ "title": "Primary Headaches: Migraine, Tension-Type, and Cluster Headache",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A common neurovascular disorder characterised by recurrent episodes of unilateral, pulsating, moderate-to-severe headache accompanied by nausea, photophobia, and phonophobia is migraine. In up to thirty percent of patients, the headache phase is preceded or accompanied by transient, fully reversible focal neurological symptoms, designated as **migraine with aura**.",
+   "say": "A common neurovascular disorder characterized by recurrent episodes of unilateral, pulsating headache with nausea and light sensitivity is migraine. In thirty percent of patients, the headache phase is preceded by transient focal neurological symptoms, designated as migraine with aura.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/migraine-fig1.webp",
+    "alt": "Pathophysiology and trigeminovascular activation in migraine headache.",
+    "caption": "Trigeminovascular activation and neurogenic inflammation in migraine. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The underlying neurophysiological substrate responsible for the migraine aura is a wave of neuronal and glial depolarisation slowly propagating across the cerebral cortex, termed **cortical spreading depression**. This depolarising wavefront moves across the occipital cortex at two to six millimetres per minute, followed by prolonged cortical oligemia, producing classic scintillating scotomas and expanding visual fortification spectra.",
+   "say": "The underlying neurophysiological substrate responsible for the migraine aura is a wave of cellular depolarisation slowly propagating across the cerebral cortex, termed cortical spreading depression. Moving at three millimetres per minute, it produces classic scintillating scotomas and visual fortification spectra.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dep",
+      "label": "Cortical Spreading Depression"
+     },
+     {
+      "id": "aur",
+      "label": "Scintillating Visual Fortification Spectrum"
+     },
+     {
+      "id": "tgv",
+      "label": "Trigeminovascular CGRP Release & Headache"
+     }
+    ],
+    "edges": [
+     [
+      "dep",
+      "aur"
+     ],
+     [
+      "aur",
+      "tgv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute abortive therapy for moderate to severe acute migraine attacks relies on selective serotonin 5-HT1B/1D receptor agonists, collectively designated as **triptans** (such as sumatriptan, zolmitriptan, or rizatriptan). Triptans induce intracranial arterial vasoconstriction, inhibit peripheral trigeminal calcitonin gene-related peptide (CGRP) release, and block central trigeminal nociceptive transmission, though they are strictly contraindicated in coronary artery disease.",
+   "say": "Acute abortive therapy for moderate to severe migraine attacks relies on selective 5-HT1B/1D receptor agonists, designated as triptans. Triptans induce cranial vasoconstriction and block calcitonin gene-related peptide release, though they are contraindicated in established coronary artery disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Agent",
+     "Mechanism of Action",
+     "Primary Clinical Role in Migraine"
+    ],
+    "rows": [
+     [
+      "Sumatriptan / Rizatriptan",
+      "5-HT1B/1D receptor agonist",
+      "First-line acute abortive therapy for moderate to severe attacks"
+     ],
+     [
+      "NSAIDs (Naproxen / Ibuprofen)",
+      "COX-1 and COX-2 prostaglandin inhibition",
+      "Acute abortive therapy for mild to moderate attacks"
+     ],
+     [
+      "Gepants (Rimegepant)",
+      "Small-molecule oral CGRP antagonist",
+      "Acute abortive therapy when triptans are contraindicated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When migraine headaches occur four or more days per month, cause severe functional disability, or fail acute therapies, pharmacological **migraine prophylaxis** is indicated. Evidence-based first-line preventive options include beta-blockers (propranolol), calcium channel blockers (flunarizine), tricyclic antidepressants (amitriptyline), and anti-CGRP monoclonal antibodies (erenumab, galcanezumab).",
+   "say": "When migraine headaches occur four or more days monthly, cause functional disability, or fail acute therapies, pharmacological migraine prophylaxis is indicated. First-line preventive options include beta-blockers, flunarizine, amitriptyline, and anti-CGRP monoclonal antibodies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Abortive Therapy",
+     "points": [
+      "Taken at immediate headache onset",
+      "Restores function within 2 hours",
+      "Triptans, NSAIDs, Antiemetics",
+      "Limit to < 10 days/month to avoid MOH"
+     ]
+    },
+    "right": {
+     "title": "Preventive (Prophylactic) Therapy",
+     "points": [
+      "Taken daily on a scheduled basis",
+      "Reduces monthly attack frequency by >= 50%",
+      "Propranolol, Topiramate, Amitriptyline",
+      "Requires 2 to 3 months to evaluate efficacy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An effective first-line prophylactic antiepileptic agent proven to reduce monthly migraine frequency is **topiramate**. Through multiple mechanisms, including voltage-gated sodium channel blockade, GABA-A receptor potentiation, AMPA/kainate glutamate inhibition, and carbonic anhydrase inhibition, topiramate suppresses cortical hyperexcitability, though patients must be counselled regarding paraesthesias, cognitive slowing, weight loss, and teratogenicity.",
+   "say": "An effective first-line prophylactic antiepileptic agent proven to reduce migraine frequency is topiramate. Through sodium channel blockade, GABA potentiation, and carbonic anhydrase inhibition, topiramate dampens cortical hyperexcitability, though patients must be monitored for cognitive slowing and weight loss.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Preventive Class",
+     "Representative Drug",
+     "Key Adverse Effects / Contraindications"
+    ],
+    "rows": [
+     [
+      "Anticonvulsant",
+      "Topiramate",
+      "Paresthesias, cognitive slowing, kidney stones, weight loss"
+     ],
+     [
+      "Beta-Blocker",
+      "Propranolol",
+      "Bradycardia, hypotension, bronchospasm (contraindicated in asthma)"
+     ],
+     [
+      "Tricyclic Antidepressant",
+      "Amitriptyline",
+      "Sedation, dry mouth, urinary retention, cardiac conduction delay"
+     ],
+     [
+      "CGRP Monoclonal",
+      "Erenumab (subcutaneous)",
+      "Constipation, mild injection-site erythema"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most prevalent primary headache disorder worldwide is the non-pulsatile, dull, bilateral band-like ache classified as **tension-type headache**. Lacking nausea, vomiting, or focal neurological aura, the headache is characterised by mild-to-moderate constricting tightness across the forehead or occiput, frequently provoked by musculoskeletal pericranial muscle myofascial tenderness and emotional stress.",
+   "say": "The most prevalent primary headache disorder worldwide is the non-pulsatile, dull, bilateral band-like ache classified as tension-type headache. Lacking nausea, vomiting, or neurological aura, it is characterized by mild to moderate constricting tightness provoked by pericranial muscle tenderness and emotional stress.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tension-Type Headache",
+     "points": [
+      "Bilateral constricting or pressing band",
+      "Mild to moderate intensity; not aggravated by walking",
+      "Absence of nausea, vomiting, or photophobia",
+      "Treated with simple analgesics (Paracetamol, NSAIDs)"
+     ]
+    },
+    "right": {
+     "title": "Migraine Headache",
+     "points": [
+      "Unilateral throbbing or pulsating pain",
+      "Moderate to severe; aggravated by physical exertion",
+      "Prominent nausea, photophobia, and phonophobia",
+      "Treated with 5-HT1B/1D agonists (Triptans)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A severe trigeminal autonomic cephalalgia characterised by excruciating, strictly unilateral, periorbital or retro-orbital stabbing pain is **cluster headache**. Occurring predominantly in young male smokers, attacks last fifteen to one-hundred-eighty minutes and recur at identical times daily (peaking during REM sleep), accompanied by ipsilateral cranial autonomic features including lacrimation, conjunctival injection, nasal congestion, and partial Horner syndrome.",
+   "say": "A severe trigeminal autonomic cephalalgia characterized by excruciating unilateral periorbital stabbing pain is cluster headache. Occurring predominantly in young male smokers, attacks last up to three hours and recur at identical times daily, accompanied by ipsilateral eye redness, tearing, and nasal congestion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cluster-headache-fig1.webp",
+    "alt": "Clinical features and ipsilateral autonomic signs in acute cluster headache.",
+    "caption": "Periorbital agonizing pain and parasympathetic autonomic activation in cluster headache. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The acute first-line treatment of choice for aborting an acute cluster headache attack is inhalation of one-hundred percent **high-flow oxygen** delivered via a non-rebreather face mask at ten to fifteen litres per minute for fifteen minutes, or subcutaneous sumatriptan (6 mg). Transition and long-term prophylactic prevention require verapamil titrated with electrocardiographic monitoring of the PR interval.",
+   "say": "The acute first-line treatment of choice for aborting a cluster headache attack is inhalation of one-hundred percent high-flow oxygen via a non-rebreather mask at twelve litres per minute, or subcutaneous sumatriptan. Long-term prophylaxis requires verapamil titrated with electrocardiographic monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cluster Headache Phase",
+     "First-Line Therapeutic Regimen",
+     "Clinical Notes"
+    ],
+    "rows": [
+     [
+      "Acute Attack Abortive",
+      "100% High-flow Oxygen (12-15 L/min)",
+      "Rapid relief within 15 min; safe for multiple daily uses"
+     ],
+     [
+      "Acute Alternative",
+      "Subcutaneous Sumatriptan 6 mg",
+      "Fastest pharmacological relief; limit to 2 doses/day"
+     ],
+     [
+      "Transitional Prophylaxis",
+      "Oral Prednisone taper (60 mg burst)",
+      "Rapid bridging while verapamil titration takes effect"
+     ],
+     [
+      "Maintenance Prophylaxis",
+      "Oral Verapamil (240 to 960 mg/day)",
+      "First-line preventative; requires serial ECGs for PR block"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 422"
+}
