@@ -202,10 +202,23 @@
       "say": "When an older child presents with progressive difficulty swallowing solids and liquids, think of achalasia. High resolution manometry confirms the diagnosis by showing absent peristalsis in the body and failed relaxation of the lower sphincter, with barium swallow revealing the classic birds beak sign.",
       "tx": "Identify the **pediatric achalasia hallmark** through motor testing. Achalasia is a neurodegenerative disorder of the myenteric plexus resulting in impaired lower esophageal sphincter (LES) relaxation and aperistalsis of the esophageal body. High-resolution manometry is the gold standard showing integrated relaxation pressure (IRP) elevation, while barium esophagogram demonstrates distal tapering known as the bird's beak sign.",
       "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/achalasia-fig1.webp",
-        "alt": "Barium swallow showing a dilated oesophagus with bird beak narrowing.",
-        "caption": "Achalasia: dilated oesophagus with a bird beak taper. Credit: Farnoosh Farrokhi and Michael F. Vaezi, CC BY 2.0."
+        "kind": "compare",
+        "left": {
+          "title": "High-Resolution Manometry",
+          "points": [
+            "Incomplete LES relaxation (elevated IRP)",
+            "Complete aperistalsis across esophageal body",
+            "Classification into Chicago Types I, II, or III"
+          ]
+        },
+        "right": {
+          "title": "Barium Esophagogram",
+          "points": [
+            "Dilated, tortuous proximal esophageal body",
+            "Smooth symmetric distal tapering",
+            "Classic bird's beak narrowing at GE junction"
+          ]
+        }
       }
     }
   ],
