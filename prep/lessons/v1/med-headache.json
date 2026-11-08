@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-headache",
- "subject": "medicine",
- "title": "Headache: migraine, red flags and thunderclap",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**migraine** unilateral throbbing hours aura photophobia vomiting menses, **tension** bilateral band stress evenings, **cluster** orbital tearing red eye nocturnal alcohol, **thunderclap** peak seconds SAH vomit collapse, **red** fever rash neck weight cancer pregnancy, **drugs** overuse caffeine withdrawal) with **viva** (**migrainous** photophobic vomiter, **thunderclapped** collapsed neck-stiff) profiles; **diary** (triggers menses foods sleep) charts. Heads ache.",
-   "say": "Migraines tensions clusters thunderclaps is history: reds warn drugs rebound diaries chart migrainous hide thunderclappeds drop triggers note lights blind sounds deafen. Pains pound.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**vitals** fever BP malignant fundus, **neck** stiffness Kernig Brudzinski, **neuro** focal cranial fields fundoscopy papilloedema, **temporal** tender pulseless jaw ESR, **sinus** tender teeth malocclusion, **posture** worse cough strain mass, **toxics** carbon monoxide carboxy) with **bedside** (**fundi** papilloedema bleeds, **BP** eclampsia crisis, **urine** pregnancy eclampsia) fundoscopes; **trauma** (subdural lucid) asks. Skulls signal.",
-   "say": "Vitals necks neuros temporals is exam: sinuses ache postures strain toxics poison fundis swell pressures surge urines test traumas recall lucid intervals bleed. Heads warn.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**CT** thunderclap blood hydrocephalus, **LP** xanthochromia meningitis pressures, **ESR** CRP temporal arteritis age, **MRI** mass venous sinus tumour, **MRA** aneurysm vasospasm, **fundus** photo grades) with **differentials** (**migraine** aura diary, **cluster** tearing nocturnal, **SAH** thunderclap xanthochromia, **arteritis** elderly jaw blind) sorts; **neurosurgery** (aneurysm bleed decides) meets. Pains localise.",
-   "say": "CTs LPs ESRs MRIs is Ix: MRAs show fundi snap migraines pulse clusters burn SAHs blast arteritides blind surgeons meet coils clip steroids save sights spare. Scans reveal.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-headache-fig1.webp",
-    "alt": "A composite image showing a CT scan with subarachnoid hemorrhage, a lumbar puncture tube with yellow CSF (xanthochromia), and an MRA revealing a cerebral aneurysm, illustrating critical headache investigations.",
-    "caption": "Key investigations for headache red flags: CT, LP, MRA reveal critical findings. Image: Lipothymia, CC BY-SA 3.0, Wikimedia Commons.",
-    "ar": 0.7883
-   }
-  },
-  {
-   "tx": "**Management** (**triptan** early NSAID antiemetic dark, **prophylaxis** propranolol topiramate amitriptyline, **cluster** oxygen verapamil lithium, **SAH** nimodipine coil clip ICU, **arteritis** steroids blind saves biopsy, **overuse** withdrawal diary) with **traps** (**triptan** coronary strokes, **steroid** delay blinds, **LP** mass herniates) closes; **follow** (diary frequency neurology) tracks. Heads settle.",
-   "say": "Triptans prophylaxes oxygens coils is Rx: arteritides dose overuses wean triptans spare steroids save LPs wait masses herniate follows track diaries thin attacks fade wishes respect. Aches ease.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-461",
-  "bk2-med-462",
-  "bk2-med-463",
-  "bk2-med-464",
-  "bk2-med-465",
-  "bk2-med-466",
-  "bk2-med-467",
-  "bk2-med-468",
-  "bk2-med-469",
-  "bk2-med-470"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon6",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 7,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-headache",
+  "quiz": [
+    "bk2-med-461",
+    "bk2-med-462",
+    "bk2-med-463",
+    "bk2-med-464",
+    "bk2-med-465",
+    "bk2-med-466",
+    "bk2-med-467",
+    "bk2-med-468",
+    "bk2-med-469",
+    "bk2-med-470"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon6",
+  "src": [],
+  "steps": [
+    {
+      "say": "When a patient reports headache, start by mapping the pattern because the diagnosis usually comes from the story. Ask whether the pain sits on one side with throbbing, nausea, light sensitivity or aura, which favours migraine. Check for a tight band on both sides that worsens with stress, which favours tension headache. Ask about severe pain around one eye with watering, redness and night attacks, which favours cluster headache. Treat any headache that peaks within seconds as a possible bleed and ask about fever, weight loss, pregnancy and painkiller use. You should record triggers and periods in a diary.",
+      "tx": "Take a focused headache history that separates the common patterns examiners test. **Migraine** is typically unilateral and throbbing, lasts hours, and brings aura, photophobia, nausea and menstrual linkage. **Tension headache** feels bilateral like a band, often worse with stress toward evening. **Cluster headache** gives severe orbital pain with tearing, red eye, nocturnal attacks and alcohol trigger. A **thunderclap headache** peaks within seconds and suggests subarachnoid bleed, while fever, weight loss, cancer history and medication overuse point to secondary causes. A symptom diary helps track triggers and frequency.",
+      "vis": null
+    },
+    {
+      "say": "Examine the patient systematically because bedside signs often decide urgency. Measure temperature, blood pressure and consciousness, and inspect for rash and neck stiffness. Test neck flexion and perform Kernig and Brudzinski manoeuvres when meningitis is possible. Assess cranial nerves, visual fields and eye movements, and examine the fundus for swollen discs or bleeds. Feel the temporal arteries in older adults and ask about jaw pain on chewing and visual symptoms. Check sinuses and teeth, note whether coughing or straining worsens pain, and ask about head injury and possible carbon monoxide exposure.",
+      "tx": "Examine every headache patient for danger signs before settling on a primary cause. Record **blood pressure**, temperature and level of consciousness, and look for fever with rash or neck stiffness. Test neck rigidity with Kernig and Brudzinski signs and complete a full **neurological examination** including cranial nerves, visual fields and fundoscopy for papilloedema. Palpate the temporal arteries in older patients and ask about jaw pain and vision change. Check sinuses and teeth, note pain worsened by cough or strain, and consider toxin exposure such as carbon monoxide.",
+      "vis": null
+    },
+    {
+      "say": "Look at this fundus photograph because it shows what raised pressure does to the eye. Notice how the optic disc appears swollen and congested, while the normal sharp edge has become blurred. Observe the small flame shaped bleeds scattered around the disc. Connect this picture to your bedside routine and examine the fundus whenever headache comes with vomiting, visual blurring or fits. Treat this appearance as a red flag and arrange urgent brain imaging with a neurology or neurosurgery opinion.",
+      "tx": "This fundus photograph shows **papilloedema** with a swollen optic disc, blurred disc margins and flame shaped peripapillary haemorrhages. Labels point to the swollen disc, the indistinct edge and nearby bleeding. The picture reminds you to perform **fundoscopy** in every patient with headache, vomiting, visual change or seizure. Raised pressure from a mass, bleed or venous thrombosis can present this way, so this finding of **raised intracranial pressure** should prompt urgent neuroimaging and specialist referral.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-headache-gen1.webp",
+        "alt": "Retinal fundus image centered on a swollen optic disc with blurred margins and flame hemorrhages radiating outward.",
+        "caption": "Fundus photograph showing swollen disc, blurred margins and peripapillary hemorrhages.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "say": "Choose investigations that answer one question at a time and exclude the dangerous causes first. Request urgent CT of the head when thunderclap onset, collapse, neck stiffness or reduced consciousness suggests bleeding. Perform lumbar puncture when the scan is normal but suspicion remains, and inspect the fluid for yellow discoloration and infection. Check inflammatory markers in older patients with headache, jaw pain or visual change. Request MRI for suspected mass or venous thrombosis and angiography for aneurysm, then document the fundus appearance with photographs.",
+      "tx": "Order tests that rule out dangerous secondary causes when red flags are present. A non contrast **CT head** detects blood, hydrocephalus or mass effect in thunderclap headache and altered consciousness. Lumbar puncture showing **xanthochromia** supports subarachnoid bleed after a negative scan and also evaluates meningitis and opening pressure. Check ESR and CRP in older patients with jaw pain or visual symptoms. Use MRI for suspected tumour or venous thrombosis and angiography when aneurysm or vasospasm is likely. Photograph and grade the fundus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-headache-fig1.webp",
+        "alt": "A composite image showing a CT scan with subarachnoid hemorrhage, a lumbar puncture tube with yellow CSF (xanthochromia), and an MRA revealing a cerebral aneurysm, illustrating critical headache investigations.",
+        "caption": "Key investigations for headache red flags: CT, LP, MRA reveal critical findings. Image: Lipothymia, CC BY-SA 3.0, Wikimedia Commons.",
+        "ar": 0.7883
+      }
+    },
+    {
+      "say": "Match treatment to the cause and protect vision and life when red flags appear. Relieve migraine early with appropriate pain relief plus an anti sickness drug and quiet rest. Offer preventive medicines when attacks recur often and review triggers through the diary. You should arrange oxygen and specialist prevention for cluster headache. Shift suspected bleeding to intensive care and involve neurosurgery for securing the aneurysm. Begin steroids immediately when an older patient has headache with jaw pain or visual loss, and taper painkillers that drive medication overuse headache.",
+      "tx": "Treat the attack, prevent recurrence and act fast on secondary causes. Give a **triptan** early with an antiemetic and rest in a dark room for migraine, and consider propranolol, topiramate or amitriptyline for frequent attacks. Provide high flow oxygen and verapamil for cluster headache. Manage suspected subarachnoid bleed in intensive care with nimodipine and neurosurgical coiling or clipping. Start high dose steroids at once when **giant cell arteritis** threatens vision, and withdraw overused analgesics with diary follow up.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Headache: migraine, red flags and thunderclap",
+  "v": 1
 }

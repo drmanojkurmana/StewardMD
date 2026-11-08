@@ -1,0 +1,219 @@
+{
+  "v": 1,
+  "module": "sgo-vulvar-cancer-staging-surgery",
+  "title": "Vulvar Cancer FIGO 2021 Staging, SLNB & Radical Vulvectomy",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 20",
+    "FIGO Cancer Report 2021: Cancer of the Vulva",
+    "NCCN Clinical Practice Guidelines in Oncology: Vulvar Cancer (2024)"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Vulvar squamous cell carcinoma arises via two biologically and clinically disparate oncogenic pathways. HPV dependent lesions affect younger women while lichen sclerosus drives differentiated VIN in elderly patients.",
+      "tx": "Vulvar squamous cell carcinoma arises via two **vulvar SCC pathways**: **HPV-associated (uVIN, p16 positive)** driven by HPV **16** in younger women (**30** to **40** percent of cases), and **HPV-independent (dVIN, TP53 mutated, lichen sclerosus)** arising from chronic lichen sclerosus in women aged **60** to **70** with mutated p**53**.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-vulva.webp",
+        "ar": 1.3333,
+        "caption": "FIGO 2021 staging, anatomical margins, and nodal drainage in carcinoma of the vulva. Credit: StewardMD.",
+        "alt": "Vulvar cancer anatomy and lymphatic drainage"
+      }
+    },
+    {
+      "say": "Accurate measurement of stromal invasion depth determines whether inguinofemoral lymphadenectomy is indicated. Depth is measured from the adjacent dermal papilla to the deepest invasive front.",
+      "tx": "Standardized **depth of invasion measurement** measures from the epithelial-stromal junction of the adjacent **superficial dermal papilla** to the deepest tumor cell nest. In **Stage IA <=2 cm invasion <=1.0 mm** (tumor diameter <=**2** cm, invasion depth <=**1.0 mm**), nodal metastasis is <1 percent, permitting safe **omission of groin dissection**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage IA Microinvasive (Invasion <=1.0 mm)",
+          "points": [
+            "Tumor diameter <=2 cm, stromal invasion <=1.0 mm",
+            "Inguinofemoral lymph node metastasis risk <1%",
+            "Radical local excision alone; omit groin lymphadenectomy"
+          ]
+        },
+        "right": {
+          "title": "Stage IB Invasive (Invasion >1.0 mm)",
+          "points": [
+            "Tumor diameter >2 cm OR stromal invasion depth >1.0 mm",
+            "Lymph node metastasis risk rises to 10% to 30%",
+            "Mandates inguinofemoral lymphadenectomy or sentinel node biopsy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The updated FIGO 2021 staging system categorizes regional lymph node metastasis by number, size, and extracapsular extension. Nodal parameters directly allocate patients into Stage IIIA, IIIB, or IIIC.",
+      "tx": "In **FIGO 2021 Stage III nodal** staging: **IIIA 1-2 nodes** (metastasis in **1** or **2** lymph nodes <**5 mm cutoff**, or **1** node >=5 mm), **IIIB >=3 nodes** (**>=3** lymph node metastases <5 mm, or >=2 nodes >=5 mm), and **IIIC extracapsular extension** (any nodal metastasis displaying extracapsular spread through the node capsule).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FIGO 2021 Stage",
+          "Regional Lymph Node Metastasis Characteristics",
+          "Prognosis & Adjuvant Radiation Requirement"
+        ],
+        "rows": [
+          [
+            "Stage IIIA",
+            "1-2 nodes with metastasis <5 mm, or 1 node >=5 mm",
+            "Adjuvant groin/pelvic radiotherapy indicated if >1 node or >=5 mm"
+          ],
+          [
+            "Stage IIIB",
+            ">=3 nodes with metastasis <5 mm, or >=2 nodes >=5 mm",
+            "Bilateral groin and pelvic external beam radiotherapy mandatory"
+          ],
+          [
+            "Stage IIIC",
+            "Any nodal metastasis with extracapsular tumor spread",
+            "High risk of regional relapse; concurrent chemoradiation required"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sentinel lymph node biopsy using technetium radiocolloid and blue dye has revolutionized surgical staging for early unifocal tumors. Groin dissection is avoided in node negative patients.",
+      "tx": "In the prospective **GROINSS-V** trial for **unifocal tumor <4 cm** with stromal invasion >**1** mm and clinically negative groins, **SLNB** utilizing technetium-**99**m radiocolloid and isosulfan blue dye identified sentinel nodes with >**95** percent sensitivity, delivering a marked **lymphedema reduction 40% to <10%** (**40** percent down to less than **10** percent).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Select unifocal vulvar tumor <4 cm with clinically negative groins"
+          },
+          {
+            "id": "b",
+            "label": "Inject 99mTc-nanocolloid and patent blue peritumorally"
+          },
+          {
+            "id": "c",
+            "label": "Identify radioactive and blue sentinel lymph nodes in inguinofemoral basins"
+          },
+          {
+            "id": "d",
+            "label": "Submit for serial ultrastaging: omit complete lymphadenectomy if negative"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Pathological evaluation of sentinel lymph nodes requires rigorous protocol sectioning combined with immunohistochemistry. Ultrastaging identifies subtle micrometastatic deposits.",
+      "tx": "**Pathologic ultrastaging** mandates **serial sectioning 50-100 um** (**50** to **100** um intervals) through the entire sentinel node combined with anti-**cytokeratin IHC** (AE**1**/AE**3**). This distinguishes macrometastases (>**2** mm) from **micrometastases** (>**0.2** to <=2 mm) and isolated tumor cells (<=0.2 mm or under **200** cells).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Metastatic Volume Category",
+          "Size Cutoff & Microscopic Criteria",
+          "Clinical Management Protocol"
+        ],
+        "rows": [
+          [
+            "Macrometastasis",
+            "Tumor deposit >2.0 mm",
+            "Full inguinofemoral lymphadenectomy or chemoradiotherapy"
+          ],
+          [
+            "Micrometastasis",
+            "Tumor deposit >0.2 mm to <=2.0 mm",
+            "Inguinofemoral radiotherapy 50 Gy (GROINSS-V II)"
+          ],
+          [
+            "Isolated Tumor Cells (ITCs)",
+            "Tumor cluster <=0.2 mm or <200 cells",
+            "Controversial; currently observed or managed individually"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The subsequent GROINSS V II trial investigated whether groin radiotherapy could replace completion lymphadenectomy in patients with micrometastatic sentinel nodes. Radiotherapy achieved outstanding regional control.",
+      "tx": "The phase II trial **GROINSS-V II** proved that in patients with **sentinel micrometastasis <=2 mm** (**2** mm or less without extracapsular spread), adjuvant **inguinofemoral radiotherapy 50 Gy** (**50** Gy) safely replaced completion groin lymphadenectomy, achieving a very low **groin recurrence 1.6%** (**1.6** percent) without severe lymphedema.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sentinel Micrometastasis (<=2 mm, No ECE)",
+          "points": [
+            "Inguinofemoral radiotherapy (50 Gy) is safe and effective",
+            "Low isolated groin recurrence rate (1.6%)",
+            "Avoids severe surgical lymphedema from complete groin dissection"
+          ]
+        },
+        "right": {
+          "title": "Sentinel Macrometastasis (>2 mm or ECE)",
+          "points": [
+            "Radiation alone carries unacceptable groin relapse rate (>25%)",
+            "Mandates completion inguinofemoral lymphadenectomy",
+            "Followed by postoperative adjuvant chemoradiotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Contemporary surgical technique utilizes separate incision approaches rather than en bloc radical vulvectomy. Triple incision techniques substantially reduce operative wound breakdown.",
+      "tx": "Standard surgical execution utilizes the **triple incision technique** (one midline vulvar incision plus **separate groin incision** bilaterally), executing **radical local excision** with inguinofemoral lymphadenectomy. This approach eliminates the historical skin bridge and achieves a marked **reduced wound breakdown** rate (dropping dehiscence from 50 percent to 15 percent).",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/vulvar-cancer-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Histopathological features and regional lymphatic spread in vulvar carcinoma. Credit: StewardMD.",
+        "alt": "Vulvar radical local excision and separate groin incisions"
+      }
+    },
+    {
+      "say": "Obtaining clear microscopic margins is essential to prevent local recurrence on the vulva. Formalin fixation induces tissue shrinkage requiring wider surgical clearance in the operating theater.",
+      "tx": "Securing an **8 mm fixed margin** on permanent formalin-fixed pathology represents the gold standard for **local recurrence prevention**. Because tissue contracts 20 to 25 percent upon formalin immersion, the surgeon must achieve an intraoperative **10-15 mm surgical margin** (**10** to **15** mm) around macroscopic tumor edges to secure pathological clearance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathological Margin Distance",
+          "Observed Local Recurrence Rate",
+          "Recommended Clinical Action"
+        ],
+        "rows": [
+          [
+            ">=8 mm microscopic clear margin",
+            "<10% local recurrence at 5 years",
+            "Routine surveillance; no re-excision required"
+          ],
+          [
+            "<8 mm close margin",
+            "Rises sharply to 25% to 30%",
+            "Surgical re-excision to achieve 8 mm if anatomically feasible"
+          ],
+          [
+            "Positive surgical margin",
+            "High local recurrence (>50%)",
+            "Re-excision or post-operative local external beam radiotherapy"
+          ]
+        ]
+      }
+    }
+  ]
+}
