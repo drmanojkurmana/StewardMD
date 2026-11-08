@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "med-tb",
+ "subject": "medicine",
+ "title": "Antitubercular pharmacology, drug resistance, and extrapulmonary tuberculosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Primary mycobacterial infection leaves distinct radiographic and pathological markers within the human thoracic anatomy. Developing a subpleural parenchymal lesion termed the **Ghon focus**, typically in the middle or lower pulmonary lobes, represents the site of initial bacillary implantation. Draining lymphatic vessels transport organisms to ipsilateral hilar lymph nodes, forming the classic Ghon complex. Subsequent fibrous encapsulation and dystrophic calcification of both the parenchymal nodule and regional lymph node constitute the radiologically visible Ranke complex, which frequently harbors a clinically silent latent TB infection.",
+   "say": "Primary infection leaves distinct anatomical lesions within the thoracic cavity. Developing a subpleural parenchymal granuloma termed the Ghon focus reflects initial bacillary implantation. Regional lymphatic drainage to hilar nodes forms the Ghon complex. Subsequent calcification of both sites produces the radiographically apparent Ranke complex.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "implant",
+      "label": "Subpleural bacillary implantation"
+     },
+     {
+      "id": "ghon",
+      "label": "Ghon focus granulomatous lesion"
+     },
+     {
+      "id": "lymph",
+      "label": "Hilar lymph node enlargement"
+     },
+     {
+      "id": "ranke",
+      "label": "Ranke complex calcified scar"
+     }
+    ],
+    "edges": [
+     [
+      "implant",
+      "ghon"
+     ],
+     [
+      "ghon",
+      "lymph"
+     ],
+     [
+      "lymph",
+      "ranke"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suppression of bacterial ribonucleic acid transcription drives potent sterilizing activity throughout intensive and continuation phases. Administering oral **rifampicin** inhibits mycobacterial deoxyribonucleic acid-dependent RNA polymerase by binding to the beta subunit encoded by rpoB. Beyond its potent sterilizing efficacy, rifampicin strongly induces hepatic cytochrome P450 enzymes (notably CYP3A4), dramatically accelerating the clearance of oral contraceptives, warfarin, antiretrovirals, and corticosteroids. Patients must be counseled that benign harmless orange-red discoloration of urine, saliva, tears, and soft contact lenses occurs universally.",
+   "say": "Suppressing bacterial ribonucleic acid transcription drives potent sterilizing activity. Administering oral rifampicin inhibits mycobacterial RNA polymerase by binding the beta subunit. Beyond antimicrobial activity, the drug strongly induces hepatic cytochrome enzymes, decreasing levels of concurrent medications. Harmless orange-red staining of urine and tears occurs universally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rifampicin therapeutic actions",
+     "points": [
+      "Binds beta subunit of RNA polymerase",
+      "Sterilizing kill against semi-dormant bacilli",
+      "Shortens total therapy duration to 6 months",
+      "High tissue and intracellular penetration"
+     ]
+    },
+    "right": {
+     "title": "Adverse effects & interactions",
+     "points": [
+      "Potent CYP3A4 enzyme induction",
+      "Transient cholestatic hyperbilirubinemia",
+      "Flu-like syndrome on intermittent dosing",
+      "Harmless reddish-orange body fluid staining"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Eradicating slow-replicating dormant bacilli inside acidic intracellular compartments accelerates early sputum conversion. Incorporating oral **pyrazinamide** into the initial two-month intensive phase targets mycobacteria residing within acidic phagolysosomes of activated macrophages. Converted to pyrazinoic acid by bacterial pyrazinamidase (encoded by pncA), the active drug disrupts mycobacterial membrane potential and adenosine triphosphate synthesis. Frequent adverse effects include hyperuricemia resulting from competitive inhibition of renal uric acid excretion, causing arthralgias, as well as acute drug-induced hepatitis.",
+   "say": "Eradicating dormant bacilli within acidic intracellular compartments speeds up early sputum conversion. Incorporating oral pyrazinamide during the intensive phase targets mycobacteria inside acidic phagolysosomes. Bacterial enzymes convert the prodrug into pyrazinoic acid to disrupt cellular energy production. Common adverse effects include hyperuricemia leading to arthralgias and hepatotoxicity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug agent",
+     "Enzymatic activation",
+     "Molecular mechanism",
+     "Primary toxicity"
+    ],
+    "rows": [
+     [
+      "Isoniazid",
+      "KatG catalase-peroxidase",
+      "InhA mycolic acid synthesis block",
+      "Hepatitis and peripheral neuropathy"
+     ],
+     [
+      "Rifampicin",
+      "Direct active molecule",
+      "Binds rpoB RNA polymerase",
+      "CYP450 induction and cholestasis"
+     ],
+     [
+      "Pyrazinamide",
+      "pncA pyrazinamidase",
+      "Acidic intracellular membrane disruption",
+      "Hyperuricemia, arthralgia, hepatitis"
+     ],
+     [
+      "Ethambutol",
+      "Direct active molecule",
+      "Inhibits embB arabinosyl transferase",
+      "Retrobulbar optic neuritis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preventing emergent drug resistance to companion bactericidal agents requires an effective companion cell wall inhibitor. Administering daily **ethambutol** interferes with arabinogalactan biosynthesis by inhibiting the mycobacterial arabinosyl transferase enzyme encoded by embB, thereby destabilizing the mycobacterial cell envelope. Ethambutol is primarily bacteriostatic rather than bactericidal. The cardinal drug-related adverse effect is dose-dependent retrobulbar optic neuritis, presenting with decreased visual acuity, central scotoma, and impaired red-green color discrimination, mandating baseline and periodic visual acuity assessments.",
+   "say": "Preventing emergent drug resistance to companion agents requires an effective fourth drug. Administering daily ethambutol blocks arabinogalactan synthesis by inhibiting mycobacterial arabinosyl transferases. The drug is predominantly bacteriostatic. Its principal adverse effect is dose-dependent retrobulbar optic neuritis with red-green dyschromatopsia, requiring regular visual monitoring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "drug",
+      "label": "Ethambutol oral absorption"
+     },
+     {
+      "id": "embB",
+      "label": "Inhibition of embB arabinosyl transferase"
+     },
+     {
+      "id": "wall",
+      "label": "Arabinogalactan disruption in mycobacterial wall"
+     },
+     {
+      "id": "block",
+      "label": "Prevention of secondary resistance emergence"
+     }
+    ],
+    "edges": [
+     [
+      "drug",
+      "embB"
+     ],
+     [
+      "embB",
+      "wall"
+     ],
+     [
+      "wall",
+      "block"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antimicrobial resistance poses a severe threat to global tuberculosis control programs. Clinical development of **MDR-TB** refers specifically to infection by strains resistant simultaneously to at least isoniazid and rifampicin, regardless of additional drug susceptibilities. Extensive resistance arises primarily through inadequate treatment adherence, suboptimal drug dosages, or direct transmission of resistant clones. Diagnosing drug resistance utilizes phenotypic culture-based susceptibility testing or rapid molecular line probe assays and cartridge-based technologies capable of identifying specific genetic mutations.",
+   "say": "Antimicrobial resistance represents a major threat to global disease control. Development of multidrug-resistant tuberculosis refers specifically to resistance against both isoniazid and rifampicin. This condition stems from incomplete treatment adherence, poor drug quality or direct primary transmission. Diagnosis relies on molecular assays detecting resistance-conferring mutations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Resistance category",
+     "Defining drug resistance pattern",
+     "First-line screening modality"
+    ],
+    "rows": [
+     [
+      "MDR-TB",
+      "Resistant to at least isoniazid AND rifampicin",
+      "GeneXpert (rpoB) & Line Probe Assay"
+     ],
+     [
+      "Pre-XDR-TB",
+      "MDR-TB plus resistance to any fluoroquinolone",
+      "Second-line Line Probe Assay (gyrA/gyrB)"
+     ],
+     [
+      "XDR-TB",
+      "Pre-XDR plus resistance to bedaquiline or linezolid",
+      "Liquid culture phenotypic DST (MGIT)"
+     ],
+     [
+      "H-Mono resistance",
+      "Resistance to isoniazid with rifampicin susceptibility",
+      "First-line LPA (inhA & katG mutation)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern therapeutic breakthroughs have established all-oral, shorter therapeutic regimens for drug-resistant disease. Adding oral **bedaquiline** transforms multidrug-resistant management by selectively inhibiting subunit c of mycobacterial adenosine triphosphate synthase, starving the bacterium of metabolic energy. Bedaquiline forms the core foundation of contemporary all-oral regimens alongside linezolid, clofazimine, and fluoroquinolones. Because bedaquiline can prolong the electrocardiographic QT interval, patients require baseline and serial electrocardiograms, especially when co-administered with other cardiotoxic agents such as moxifloxacin or clofazimine.",
+   "say": "Modern therapeutic advancements have enabled all-oral treatment regimens for drug-resistant disease. Adding oral bedaquiline improves outcomes by selectively inhibiting mycobacterial ATP synthase. The drug forms the cornerstone of shortened regimens alongside linezolid and clofazimine. Because it prolongs the cardiac QT interval, baseline and regular serial electrocardiograms are required.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bedaquiline properties",
+     "points": [
+      "Inhibits mycobacterial ATP synthase",
+      "High potency against dormant bacilli",
+      "Enables all-oral injection-free regimens",
+      "Terminal half-life of 5 to 6 months"
+     ]
+    },
+    "right": {
+     "title": "Safety monitoring",
+     "points": [
+      "Serial ECG monitoring for QT prolongation",
+      "Caution when combined with fluoroquinolones",
+      "Electrolyte monitoring (potassium, magnesium)",
+      "Avoidance of strong CYP3A4 inducers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Uncontrolled lymphohematogenous dissemination of tubercle bacilli seeds multiple distant organs simultaneously. Massive bacteremia causes **miliary tuberculosis**, characterized pathologically by countless tiny, yellowish, one to two-millimeter granulomatous lesions resembling millet seeds scattered throughout the lungs, liver, spleen, and bone marrow. Chest radiography demonstrates uniform, diffuse, bilateral reticulonodular opacities throughout all pulmonary zones. Fundoscopic examination may reveal diagnostic choroidal tubercles, providing immediate bedside clinical confirmation of disseminated hematogenous tuberculosis in critically ill febrile patients.",
+   "say": "Unchecked hematogenous dissemination of tubercle bacilli can seed distant organ systems. Massive bloodstream spread produces miliary tuberculosis, characterized by countless tiny granulomas scattered throughout lungs, liver and spleen. Chest radiography demonstrates uniform millet-seed nodular infiltration across all lung fields. Fundoscopic examination can reveal choroidal tubercles.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-xray-chest-signs.webp",
+    "alt": "Paediatric chest radiograph demonstrating bilateral diffuse miliary nodular infiltration.",
+    "caption": "Miliary infiltration and radiographic patterns in disseminated tuberculosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Seeding of bacilli outside the pulmonary parenchyma accounts for approximately twenty percent of all active infections. Manifesting as **extrapulmonary TB**, common sites include peripheral lymph nodes (tuberculous lymphadenitis or scrofula), pleura, osteoarticular structures (Pott disease of the thoracolumbar spine with vertebral collapse), and the central nervous system. Tuberculous meningitis represents the most devastating complication, causing thick gelatinous basal exudates, cranial nerve palsies (commonly third and sixth nerves), hydrocephalus, and obliterative endarteritis, mandating immediate antitubercular therapy with adjunctive systemic corticosteroids.",
+   "say": "Bacillary seeding beyond the lung parenchyma accounts for one fifth of all active clinical infections. Presenting as extrapulmonary TB, common sites include cervical lymph nodes, pleura, spine and central nervous system. Tuberculous meningitis represents the most severe form, causing thick basal exudates, cranial neuropathies and hydrocephalus, requiring urgent treatment with adjunctive corticosteroids.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tuberculous-meningitis-fig1.webp",
+    "alt": "Neuroimaging findings in tuberculous meningitis showing basal meningeal enhancement.",
+    "caption": "Basal exudative enhancement and complications in tuberculous meningitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
