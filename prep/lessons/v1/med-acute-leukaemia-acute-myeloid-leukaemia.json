@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "med-acute-leukaemia",
+ "subject": "medicine",
+ "title": "Acute Myeloid and Lymphoblastic Leukaemias",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Clonal neoplastic proliferation of immature myeloid precursors that arrest at an early blast stage causes profound marrow failure. Diagnosing **acute myeloid leukaemia** (AML) requires demonstrating twenty percent or more myeloid blasts in the bone marrow or peripheral blood. Myeloblasts characteristically exhibit large delicate nuclei, open chromatin, prominent nucleoli, and azurophilic crystalline inclusions composed of fused lysosomal granules known as Auer rods. Cytochemical staining confirms strong positivity for myeloperoxidase (MPO) and Sudan Black B, definitively distinguishing myeloid blasts from lymphoblasts.",
+   "say": "Clonal neoplastic proliferation of immature myeloid precursors that arrest at an early blast stage causes profound marrow failure. Diagnosing acute myeloid leukaemia requires demonstrating twenty percent or more myeloid blasts in marrow or blood. Myeloblasts exhibit open chromatin, prominent nucleoli, and pathognomonic crystalline Auer rods. Cytochemical staining confirms strong positivity for myeloperoxidase, definitively distinguishing myeloid blasts from lymphoblasts.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-myeloid-leukemia-fig1.webp",
+    "alt": "Peripheral blood smear and marrow aspirate displaying myeloblasts containing crystalline Auer rods.",
+    "caption": "Marrow aspirate displaying large myeloblasts with characteristic needle-like Auer rods and delicate chromatin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A highly distinctive medical emergency subtype of acute myeloid leukaemia features a specific reciprocal balanced chromosomal translocation. Designated as **acute promyelocytic leukaemia** (APL, FAB M3), the balanced translocation t(15;17)(q22;q21) fuses the promyelocytic leukaemia (PML) gene with the retinoic acid receptor alpha (RARA) gene. The resulting PML-RARA fusion protein represses transcription and arrests promyelocyte differentiation. Promyelocytes contain multiple stacked Auer rods (faggot cells) that release procoagulant tissue factor and annexin II, precipitating severe life-threatening disseminated intravascular coagulation (DIC).",
+   "say": "A highly distinctive medical emergency subtype of acute myeloid leukaemia features a specific reciprocal chromosomal translocation. Designated as acute promyelocytic leukaemia, the balanced translocation between chromosomes 15 and 17 fuses the PML and RARA genes. The resulting fusion protein blocks promyelocyte differentiation. Abnormal promyelocytes contain multiple Auer rods that release procoagulants, precipitating life-threatening disseminated intravascular coagulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1517",
+      "label": "Reciprocal Translocation t(15;17)(q22;q21)"
+     },
+     {
+      "id": "fusion",
+      "label": "PML-RARA Oncoprotein Blocks Differentiation"
+     },
+     {
+      "id": "dic",
+      "label": "Promyelocyte Lysis Triggers Severe Consumptive DIC"
+     },
+     {
+      "id": "rx",
+      "label": "Immediate ATRA + Arsenic Trioxide: 95% Cure"
+     }
+    ],
+    "edges": [
+     [
+      "t1517",
+      "fusion"
+     ],
+     [
+      "fusion",
+      "dic"
+     ],
+     [
+      "dic",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted differentiating pharmacotherapy directly degrades the oncogenic fusion protein and overcomes transcriptional repression in acute promyelocytic leukaemia. Prescribing **all-trans retinoic acid** (ATRA) paired with arsenic trioxide (ATO) binds the RARA and PML moieties respectively, inducing proteasomal oncoprotein degradation and terminal promyelocyte differentiation into mature neutrophils. This targeted, chemotherapy-free regimen achieves complete clinical remission and cure rates exceeding ninety-five percent, while immediately halting consumptive coagulopathy. Clinicians must monitor for differentiation syndrome (fever, dyspnoea, pulmonary infiltrates, and weight gain), treated with intravenous dexamethasone.",
+   "say": "Targeted differentiating pharmacotherapy directly degrades the oncogenic fusion protein and overcomes transcriptional repression in acute promyelocytic leukaemia. Prescribing all-trans retinoic acid paired with arsenic trioxide binds RARA and PML moieties, inducing oncoprotein degradation and terminal promyelocyte maturation. This chemotherapy-free regimen achieves cure rates exceeding ninety-five percent, while immediately halting coagulopathy. Clinicians must monitor for differentiation syndrome, treated promptly with dexamethasone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ATRA + Arsenic Trioxide Regimen",
+     "points": [
+      "Dual targeted molecular differentiation",
+      "Degrades PML-RARA fusion protein",
+      "Chemotherapy-free frontline regimen",
+      "Complete cure rate > 95%",
+      "Adverse risk: Differentiation syndrome (DEXA)"
+     ]
+    },
+    "right": {
+     "title": "Standard AML 7+3 Induction",
+     "points": [
+      "Cytarabine (7 days) + Daunorubicin (3 days)",
+      "Non-specific cytotoxic DNA damage",
+      "Prolonged severe marrow aplasia (3-4 weeks)",
+      "High infectious and mucosal toxicity",
+      "Used for non-APL acute myeloid leukaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The commonest paediatric malignancy arises from clonal transformation of committed B or T lymphoid progenitor cells. In **acute lymphoblastic leukaemia** (ALL), lymphoblasts express nuclear terminal deoxynucleotidyl transferase (TdT), a unique DNA polymerase that adds template-independent nucleotides during V(D)J rearrangement. Over eighty percent represent B-cell ALL, expressing pan-B surface markers CD19, CD22, CD79a, and the common ALL antigen CD10 (CALLA). T-cell ALL presents classically in adolescent males with a mediastinal mass, expressing CD2, CD3, and CD7.",
+   "say": "The commonest paediatric malignancy arises from clonal transformation of committed lymphoid progenitor cells. In acute lymphoblastic leukaemia, lymphoblasts express nuclear terminal deoxynucleotidyl transferase, a unique DNA polymerase that adds nucleotides during antigen receptor rearrangement. Most cases represent B-cell ALL, expressing CD19, CD22, and the common ALL antigen CD10. T-cell ALL presents classically in adolescent males with a prominent mediastinal mass.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-lymphoid-leukemia-fig1.webp",
+    "alt": "Bone marrow aspirate cytopathology demonstrating lymphoblasts expressing CD10 and TdT in acute lymphoblastic leukaemia.",
+    "caption": "Marrow aspirate displaying small to intermediate lymphoblasts with high nuclear-cytoplasmic ratio in B-ALL. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A specific cytogenetic abnormality characterized by reciprocal translocation between chromosomes 9 and 22 historically conferred an exceptionally poor prognosis in acute lymphoblastic leukaemia. Found in roughly twenty-five percent of adult ALL patients, **philadelphia chromosome-positive all** creates the BCR-ABL1 p190 fusion kinase (or occasionally p210). Incorporating tyrosine kinase inhibitors (imatinib, dasatinib, or ponatinib) into induction and consolidation regimens transformed outcomes, turning a dismal leukaemia into a highly manageable disease. Achieving molecular complete remission before allogeneic haematopoietic stem cell transplantation is paramount.",
+   "say": "A specific cytogenetic abnormality characterized by reciprocal translocation between chromosomes 9 and 22 historically conferred an exceptionally poor prognosis in acute lymphoblastic leukaemia. Found in twenty-five percent of adult ALL patients, Philadelphia chromosome-positive ALL creates the BCR-ABL1 fusion kinase. Incorporating tyrosine kinase inhibitors such as dasatinib into induction chemotherapy transformed outcomes, converting a refractory leukaemia into a treatable disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cytogenetic Subgroup in ALL",
+     "Molecular Fusion Gene",
+     "Frequency (Pediatric vs Adult)",
+     "Prognostic Risk Category"
+    ],
+    "rows": [
+     [
+      "Hyperdiploidy (> 50 chromosomes)",
+      "Extra chromosomes 4, 10, 17, 21",
+      "25% Paediatric / 5% Adult",
+      "Favourable (Excellent OS > 90%)"
+     ],
+     [
+      "ETV6-RUNX1 / t(12;21)",
+      "TEL-AML1 chimeric factor",
+      "25% Paediatric / 2% Adult",
+      "Favourable (Standard chemotherapy cure)"
+     ],
+     [
+      "BCR-ABL1 / t(9;22)",
+      "p190 / p210 BCR-ABL kinase",
+      "3% Paediatric / 25% Adult",
+      "Adverse (Mandates TKI therapy)"
+     ],
+     [
+      "KMT2A (MLL) Rearranged / t(4;11)",
+      "MLL-AF4 epigenetic deregulation",
+      "80% Infants / 10% Adult",
+      "Very Poor (Early relapse, chemo-refractory)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because systemic cytotoxic chemotherapeutic agents fail to penetrate the blood-brain barrier in therapeutic concentrations, the central nervous system represents a sanctuary site for leukaemic lymphoblasts. Delivering structured **cns prophylaxis** is mandatory for all patients with acute lymphoblastic leukaemia, regardless of baseline cerebrospinal fluid examination. Prophylactic protocols employ scheduled intrathecal injections of methotrexate, cytarabine, and hydrocortisone throughout induction, consolidation, and maintenance phases, paired with high-dose intravenous methotrexate. This preventive regimen reduces CNS relapse rates from over fifty percent to under five percent.",
+   "say": "Because systemic cytotoxic chemotherapeutic agents fail to penetrate the blood-brain barrier in therapeutic concentrations, the central nervous system represents a sanctuary site for leukaemic lymphoblasts. Delivering structured CNS prophylaxis is mandatory for all patients with acute lymphoblastic leukaemia. Prophylactic protocols employ scheduled intrathecal injections of methotrexate and cytarabine throughout chemotherapy, paired with systemic high-dose methotrexate, reducing CNS relapse to under five percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "ALL Diagnosis Established"
+     },
+     {
+      "id": "diaglp",
+      "label": "Diagnostic Lumbar Puncture: Cytospin Evaluation"
+     },
+     {
+      "id": "it",
+      "label": "Intrathecal Triple Chemotherapy (Methotrexate + Ara-C + Steroid)"
+     },
+     {
+      "id": "sys",
+      "label": "Systemic High-Dose IV Methotrexate with Leucovorin Rescue"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "diaglp"
+     ],
+     [
+      "diaglp",
+      "it"
+     ],
+     [
+      "it",
+      "sys"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid massive necrosis of malignant haematopoietic blasts following initiation of cytotoxic therapy releases lethal amounts of intracellular ions and nucleic acids into the systemic circulation. Developing **tumour lysis syndrome** (TLS) is characterized by hyperkalaemia, hyperphosphataemia, secondary hypocalcaemia from calcium phosphate precipitation, and hyperuricaemia from purine catabolism. Acute uric acid and calcium phosphate crystallization in renal collecting ducts precipitates oliguric acute kidney injury and fatal cardiac arrhythmias. Management mandates aggressive intravenous hydration, rasburicase (recombinant urate oxidase) to degrade uric acid to soluble allantoin, and allopurinol.",
+   "say": "Rapid massive necrosis of malignant haematopoietic blasts following initiation of cytotoxic therapy releases lethal amounts of intracellular ions into the circulation. Developing tumour lysis syndrome is characterized by hyperkalaemia, hyperphosphataemia, secondary hypocalcaemia, and hyperuricaemia. Acute crystallization in renal tubules precipitates acute kidney injury and fatal cardiac arrhythmias. Management mandates aggressive intravenous hydration, rasburicase to degrade uric acid to soluble allantoin, and continuous cardiac monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metabolic Abnormality",
+     "Cairo-Bishop Laboratory Definition",
+     "Underlying Mechanism",
+     "Specific Therapeutic Countermeasure"
+    ],
+    "rows": [
+     [
+      "Hyperkalaemia",
+      "Potassium >= 6.0 mEq/L (or 25% rise)",
+      "Rapid lysis of intracellular K+ stores",
+      "Calcium gluconate, Insulin-Dextrose, Kayexalate"
+     ],
+     [
+      "Hyperphosphataemia",
+      "Phosphate >= 4.5 mg/dL (or 25% rise)",
+      "Nucleic acid and polyphosphate breakdown",
+      "Oral phosphate binders (Sevelamer), IV hydration"
+     ],
+     [
+      "Hypocalcaemia",
+      "Corrected Ca <= 7.0 mg/dL (or 25% fall)",
+      "Metastable calcium phosphate precipitation",
+      "Treat only if symptomatic (tetany / seizure)"
+     ],
+     [
+      "Hyperuricaemia",
+      "Uric acid >= 8.0 mg/dL (or 25% rise)",
+      "Purine nucleotide catabolism via xanthine oxidase",
+      "Rasburicase (0.2 mg/kg IV) / Allopurinol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extreme hyperleukocytosis causing microvascular sludging and tissue hypoperfusion represents an acute medical emergency in acute leukaemias. In **leukostasis syndrome**, circulating blast counts exceeding 50,000 to 100,000 per microlitre produce intravascular plugging because large, rigid, non-deformable myeloblasts physically obstruct capillary lumens. Patients present with respiratory distress from pulmonary vascular congestion and neurological signs including confusion, visual blur, stupor, and intracranial haemorrhage. Emergency intervention mandates prompt cytoreduction with high-dose hydroxyurea, immediate induction chemotherapy, and avoidance of packed red blood cell transfusions that increase blood viscosity.",
+   "say": "Extreme hyperleukocytosis causing microvascular sludging and tissue hypoperfusion represents an acute medical emergency in acute leukaemias. In leukostasis syndrome, circulating blast counts exceeding 100,000 per microlitre produce intravascular plugging because rigid myeloblasts obstruct capillary lumens. Patients present with respiratory distress and neurological deficits including confusion, stupor, and stroke. Emergency intervention requires cytoreduction with hydroxyurea, immediate chemotherapy, and avoiding red cell transfusions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Manifestations of Leukostasis",
+     "points": [
+      "Circulating blast count > 100,000/mcL (AML > ALL)",
+      "Pulmonary: Dyspnoea, hypoxia, diffuse infiltrates",
+      "Neurological: Headache, delirium, stupor, retinal haemorrhage",
+      "Renal: Renal vein thrombosis, oliguria",
+      "High early mortality from cerebral haemorrhage"
+     ]
+    },
+    "right": {
+     "title": "Emergency Therapeutic Protocol",
+     "points": [
+      "High-dose oral Hydroxyurea (2-4 g daily)",
+      "Aggressive IV hydration without potassium",
+      "Rasburicase for TLS prophylaxis",
+      "Avoid packed RBC transfusions (raises viscosity)",
+      "Initiate emergent induction chemotherapy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
