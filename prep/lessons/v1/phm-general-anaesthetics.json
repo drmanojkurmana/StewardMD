@@ -3,11 +3,11 @@
  "module": "phm-general-anaesthetics",
  "subject": "pharmacology",
  "title": "General anaesthetics, premedication and malignant hyperthermia",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**General anaesthesia** passes Guedel stages (analgesia, excitement with struggling, surgical planes, medullary paralysis) now tracked by **MAC** (minimum alveolar concentration preventing movement in half, lower in elderly, higher in infants and alcoholics) with BIS and end tidal monitoring. Balanced technique (hypnotic plus analgesic plus relaxant) minimises each toxicity; day care favours rapid emergence agents. Preoperative fasting, consent and allergy history precede every plan.",
-   "say": "MAC measures potency: low in elderly, high in infants. Balanced hypnosis plus analgesia plus relaxation minimises harm.",
+   "tx": "**General anaesthesia** historically passed through Guedel stages from analgesia and excitement to surgical planes and medullary paralysis in unpremedicated patients. Modern potency uses **minimum alveolar concentration**, the concentration preventing movement in half of patients, which falls in elderly patients and rises in infants and chronic alcohol users. **Balanced anaesthesia** combines a hypnotic, an analgesic and a relaxant so each drug contributes less toxicity at lower doses.",
+   "say": "General anaesthesia combines hypnosis, analgesia and muscle relaxation in balanced technique. Minimum alveolar concentration measures inhaled potency across different patient groups. Elderly patients require less agent while infants and alcohol users require more. Fasting, consent and allergy history precede every anaesthetic plan safely.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/phm-general-anaesthetics-fig1.webp",
@@ -17,18 +17,18 @@
    }
   },
   {
-   "tx": "**Inhaled agents** (sevoflurane smooth induction, isoflurane pungent with coronary steal debates, desflurane fastest with airway irritability, **nitrous oxide** analgesic second gas effect but **diffusion hypoxia** on discontinuation needing 100 percent oxygen, B12 inactivating with chronic use) vasodilate dose dependently; sevoflurane suits children while desflurane suits morbid obesity. Compound A (sevoflurane with dry absorbent) and carbon monoxide (desflurane) warn circuits; scavenging protects staff. Hepatitis (halothane) retired older vapours.",
-   "say": "Sweet sevoflurane induces kids; fast desflurane wakes the obese. Nitrous off needs pure oxygen: diffusion hypoxia.",
+   "tx": "**Inhaled agents** vasodilate in a dose dependent manner and differ in induction speed, airway irritation and recovery profile for day care surgery. **Sevoflurane** induces children smoothly, desflurane wakes obese patients fastest but irritates airways, and isoflurane smells pungent during inhalational induction. **Nitrous oxide** provides analgesia with a second gas effect but causes diffusion hypoxia on stopping and inactivates vitamin B12 during chronic exposure.",
+   "say": "Inhaled agents differ in speed, smell and recovery profile for surgery. Sevoflurane helps induce children smoothly while desflurane provides the fastest waking in obese patients undergoing surgery. Nitrous oxide provides analgesia but expands closed gas spaces harmfully. Stopping nitrous oxide requires oxygen because diffusion hypoxia develops rapidly.",
    "vis": null
   },
   {
-   "tx": "**Intravenous agents** specialise: **propofol** (rapid smooth, antiemetic, **egg and soy allergy caution**, injection pain, bacterial growth, infusion syndrome with prolonged high dose), **etomidate** (haemodynamically kind, **adrenal suppression** single dose, myoclonus), **ketamine** (**dissociative**, bronchodilator suiting asthmatics, **emergence delirium** with laryngospasm in children, raised intracranial pressure caution), thiopental (porphyria banned, laryngospasm), **dexmedetomidine** (cooperative sedation, bradycardia). Opioids (fentanyl chest wall rigidity) with relaxants complete.",
-   "say": "Egg allergic asthmatic child: ketamine dissociates kindly. Propofol burns veins and bugs: strict asepsis.",
+   "tx": "**Intravenous induction agents** specialise by haemodynamic and airway profile, and propofol gives rapid smooth induction with antiemetic benefit after surgery. **Propofol** causes injection pain and supports bacterial growth, while prolonged high dose infusion causes a dangerous infusion syndrome in critical care. **Etomidate** preserves blood pressure but suppresses adrenals after even one dose, and ketamine dissociates while bronchodilating asthmatic patients usefully.",
+   "say": "Intravenous agents differ in haemodynamic stability and recovery characteristics significantly. Propofol induces smoothly and reduces vomiting after surgery in many patients. Etomidate preserves blood pressure but suppresses adrenal function after one dose. Ketamine bronchodilates and supports circulation in asthmatic shocked patients.",
    "vis": null
   },
   {
-   "tx": "**Premedication** (glycopyrrolate drying secretions, midazolam anxiolysis, ondansetron antiemesis, ranitidine with metoclopramide aspiration prophylaxis in obstetrics and reflux) smooths induction; malignant hyperthermia (**RYR1** calcium storm from volatiles or suxamethonium: masseter spasm, rising ETCO2, mixed acidosis, hyperthermia late) is aborted by **stopping triggers with dantrolene** (plus cooling, bicarbonate, hyperkalaemia treated). Family screening with caffeine halothane contracture testing follows; safe anaesthesia thereafter avoids triggers.",
-   "say": "Masseter locked with soaring CO2 is malignant hyperthermia: stop triggers, dantrolene now.",
+   "tx": "Premedication with glycopyrrolate, midazolam, ondansetron and aspiration prophylaxis smooths induction for obstetric and reflux patients at higher risk. **Malignant hyperthermia** follows RYR1 calcium release triggered by volatile agents or suxamethonium and presents with masseter spasm, rising end tidal carbon dioxide and mixed acidosis. Treatment stops triggers immediately and gives **dantrolene** with cooling and correction of hyperkalaemia and acidosis.",
+   "say": "Premedication reduces secretions, anxiety, vomiting and aspiration risk before induction. Malignant hyperthermia releases calcium uncontrollably after volatile agents or suxamethonium exposure. Masseter spasm and rising carbon dioxide warn the anaesthetist earliest. Dantrolene stops calcium release while cooling treats established hyperthermia urgently.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -58,6 +58,17 @@
       "Emergence"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The muscle image shows the **sarcoplasmic reticulum** releasing a bright calcium storm through the abnormal **RYR1 channel** onto myofibrils below. Volatile anaesthetics trigger this uncontrolled release in susceptible muscle, and sustained contraction produces the rigidity, acidosis and rising carbon dioxide of malignant hyperthermia. The labelled **dantrolene site** shows where treatment closes the channel and stops further calcium flooding into the cell.",
+   "say": "The image shows calcium flooding from the sarcoplasmic reticulum through abnormal RYR1 channels. Volatile anaesthetics trigger uncontrolled release and sustained muscle contraction in susceptible patients. Rigidity and rising carbon dioxide warn the team before temperature rises late. Dantrolene blocks the channel and stops further calcium release urgently.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-general-anaesthetics-gen1.webp",
+    "alt": "Muscle ultrastructure showing sarcoplasmic reticulum, RYR1 channel, calcium particles and myofibrils below",
+    "caption": "Muscle cell showing RYR1 calcium storm and rigidity. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

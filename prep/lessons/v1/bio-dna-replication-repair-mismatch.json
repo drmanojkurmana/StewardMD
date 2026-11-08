@@ -1,0 +1,183 @@
+{
+ "v": 1,
+ "module": "bio-dna-replication-repair",
+ "subject": "biochemistry",
+ "title": "Mismatch and excision repair",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Mismatch repair** proofreads after polymerases: MutS homologues (MSH2-MSH6 for single mismatches and small loops, MSH2-MSH3 for larger loops) clamp sliding on DNA recognising distortion, MutL (MLH1-PMS2 endonuclease) licenses, strand discrimination uses nascent strand nicks and PCNA orientation (bacteria use Dam methylation delay teaching ancestor), exonuclease one excises to polymerase delta resynthesis and ligase. Failure multiplies mutation rate hundred to thousand fold with microsatellite instability signature (repetitive tracts slip unrepaired).",
+   "say": "Mismatch repair proofreads after polymerases through MutS and MutL homologue clamps and excision resynthesis. Failure multiplies mutation rates with microsatellite instability signatures in repetitive tracts characteristically unrepaired.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mismatch repair in four moves",
+    "nodes": [
+     {
+      "id": "find",
+      "label": "MSH clamp finds mismatch or loop"
+     },
+     {
+      "id": "lic",
+      "label": "MLH licenses, nick directs new strand"
+     },
+     {
+      "id": "exc",
+      "label": "Exonuclease excises segment"
+     },
+     {
+      "id": "fill",
+      "label": "Pol delta fills, ligase seals"
+     }
+    ],
+    "edges": [
+     [
+      "find",
+      "lic"
+     ],
+     [
+      "lic",
+      "exc"
+     ],
+     [
+      "exc",
+      "fill"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lynch syndrome** (heterozygous MLH1, MSH2 (EPCAM deletions silencing it), MSH6, PMS2; biallelic constitutional MMR deficiency childhood cancers separate) predisposes colorectal, endometrial (often sentinel in women), ovarian, gastric, urothelial, small bowel and sebaceous (Muir-Torre) cancers with microsatellite instability guiding screening, aspirin prevention evidence, frequent colonoscopy and checkpoint sensitivity. Sporadic MSI by MLH1 promoter methylation (BRAF V600E companion) mimics Lynch in elderly women, methylation testing separating referral urgency.",
+   "say": "Lynch predisposes colorectal and endometrial cancers with microsatellite instability predicting checkpoint sensitivity therapeutically. Sporadic MLH1 methylation mimics Lynch in elderly women, methylation testing separating referral urgency pathways.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour MSI clue",
+     "Lynch (germline MMR)",
+     "Sporadic MSI (methylation)"
+    ],
+    "rows": [
+     [
+      "IHC loss pattern",
+      "Matches germline gene (MSH2/6, MLH1/PMS2 pairs)",
+      "MLH1/PMS2 loss with MLH1 methylation, BRAF often mutated"
+     ],
+     [
+      "Age and family",
+      "Young, Amsterdam/Bethesda families",
+      "Elderly women, no family cluster"
+     ],
+     [
+      "Action",
+      "Germline test, cascade, colonoscopy 1 to 2 yearly",
+      "No cascade; checkpoint therapy still applies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nucleotide excision repair** removes helix distorting bulky lesions (ultraviolet cyclobutane pyrimidine dimers and 6-4 photoproducts, cisplatin intrastrand crosslinks, polycyclic hydrocarbon adducts): global genome (XPC sensor) and transcription coupled (stalled polymerase, CSB/CSA recruiters) subpathways converge on TFIIH helicase opening (XPB/XPD), XPA/RPA verification, XPG and ERCC1-XPF dual incisions excising twenty four to thirty two nucleotide oligomers, polymerase filling. Endogenous oxidative bulky adducts and formaldehyde crosslinks add daily load beyond sunlight teaching.",
+   "say": "Nucleotide excision repair removes bulky ultraviolet dimers and cisplatin adducts through dual incisions excising short oligomers. Global and transcription coupled subpathways converge on TFIIH opening verification steps.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Global genome NER (XPC)",
+     "points": [
+      "Patrols whole genome slowly",
+      "Silent DNA protected eventually",
+      "XPC failure: skin cancers without neurology classic"
+     ]
+    },
+    "right": {
+     "title": "Transcription coupled NER (CSB/CSA)",
+     "points": [
+      "Stalled polymerases recruit urgently",
+      "Active genes protected first",
+      "Cockayne: neurology without cancer excess"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Xeroderma pigmentosum** (XPA through XPG plus variant polymerase eta translesion form XPV) abolishes dimer handling: extreme sun sensitivity from infancy (freckling under two years pathognomonic, burning on minimal exposure), photophobia and corneal disease, thousands fold skin cancers (basal, squamous, melanoma) in childhood, progressive neurology in XPA/D/G subsets (sensorineural deafness, microcephaly, ataxia from unrepaired endogenous lesions in neurons), rigorous photoprotection, dermatology and ophthalmology surveillance, oral retinoid chemoprevention selected, no systemic therapy yet. Polymerase eta loss (XPV) leaves NER intact but dimers misbypassed mutagenically, separating repair from tolerance.",
+   "say": "Xeroderma pigmentosum gives extreme sun sensitivity with childhood skin cancers thousands fold and neurology in subsets. Polymerase eta loss separates damage tolerance from excision repair mechanistically in variant forms.",
+   "vis": null
+  },
+  {
+   "tx": "**Base excision repair** handles daily endogenous small lesions (depurination thousands per cell daily, cytosine deamination to uracil, oxidation 8-oxoguanine, alkylation, single strand breaks): lesion specific glycosylases flip damaged bases out (uracil DNA glycosylase, OGG1 for 8-oxoG paired with MUTYH adenine glycosylase whose biallelic failure causes adenomatous polyposis), AP endonuclease cuts, polymerase beta short patch (single nucleotide, XRCC1 ligase scaffold) or long patch delta/FEN1 completes. PARP senses breaks (inhibitor trapping in BRCA cancers ahead), APE1 and polynucleotide kinase process ends, failure signatures mutational (COSMIC) in cancers.",
+   "say": "Base excision repair handles daily depurination and oxidation through glycosylase flipping and short patch filling. MUTYH biallelic failure causes polyposis, proving endogenous repair failure alone cancers intestines.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Daily lesion",
+     "Glycosylase or sensor",
+     "Repair route"
+    ],
+    "rows": [
+     [
+      "Uracil (cytosine deamination, dUTP misincorporation)",
+      "UDG/UNG",
+      "BER short patch; thymidylate balance prevents load"
+     ],
+     [
+      "8-oxoguanine (ROS)",
+      "OGG1 (plus MUTYH partner)",
+      "BER; polyposis when MUTYH biallelic lost"
+     ],
+     [
+      "Depurination AP sites (heat, acid)",
+      "APE1 after spontaneous loss",
+      "BER thousands daily background"
+     ],
+     [
+      "Single strand breaks",
+      "PARP1 sensor, XRCC1 scaffold",
+      "BER/SSBR; PARP trapping therapy link"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Direct reversal repairs without excision elegantly: **MGMT** (O6-methylguanine DNA methyltransferase) transfers methyl to its own cysteine suicidally (one protein per lesion, consumed), protecting from alkylator mutagenesis while tumours silencing MGMT by promoter methylation gain temozolomide sensitivity in glioblastoma (biomarker prescribed), and photolyase (placental mammals lost it, marsupials retain teaching contrast) reverses dimers with light energy unavailable to humans who must excise. AlkB oxidative demethylation homologues (ALKBH, FTO obesity gene RNA demethylation fame) extend reversal into epitranscriptomics borders examiners now touch.",
+   "say": "MGMT reverses methylation suicidally one protein per lesion, and its tumour silencing predicts temozolomide sensitivity in glioblastoma prescribing. Humans lost photolyase and must excise dimers instead completely.",
+   "vis": {
+    "kind": "flow",
+    "title": "Choose repair by lesion shape",
+    "nodes": [
+     {
+      "id": "small",
+      "label": "Small base damage daily: BER glycosylases"
+     },
+     {
+      "id": "bulky",
+      "label": "Bulky helix distortion: NER dual incision"
+     },
+     {
+      "id": "mis",
+      "label": "Replication mismatch: MMR excision"
+     },
+     {
+      "id": "meth",
+      "label": "Methyl on guanine O6: MGMT suicide reversal"
+     }
+    ],
+    "edges": [
+     [
+      "small",
+      "bulky"
+     ],
+     [
+      "bulky",
+      "mis"
+     ],
+     [
+      "mis",
+      "meth"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

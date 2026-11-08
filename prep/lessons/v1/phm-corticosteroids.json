@@ -3,11 +3,11 @@
  "module": "phm-corticosteroids",
  "subject": "pharmacology",
  "title": "Corticosteroids: potency, Cushing, taper and uses",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Corticosteroids** act genomically (hours, transrepression of inflammation) and non-genomically (pulses); potency sorts duration: **hydrocortisone** (short, mineralocorticoid full, replacement), **prednisolone** (intermediate, workhorse), **dexamethasone and betamethasone** (long, no mineralocorticoid, cerebral oedema and fetal lung), **fludrocortisone** (pure mineralocorticoid, Addison and salt wasting). Dose equivalence (hydrocortisone 20 equals prednisolone 5 equals dexamethasone 0.75) converts.",
-   "say": "Short hydrocortisone replaces, intermediate prednisolone works, long dexamethasone oedemas. Fludrocortisone salts.",
+   "tx": "**Corticosteroids** suppress inflammation through genomic transrepression over hours, with rapid non genomic effects during high dose pulses in emergencies. **Hydrocortisone** acts briefly with full mineralocorticoid activity for replacement, prednisolone works intermediately as the common workhorse, and **dexamethasone** acts longest without mineralocorticoid effect for cerebral oedema and fetal lung maturity. Fludrocortisone provides pure mineralocorticoid replacement in Addison disease and salt wasting disorders.",
+   "say": "Corticosteroids reduce inflammation through gene regulation and act over several hours of treatment in patients. Hydrocortisone helps replace deficient cortisol briefly and causes salt and water retention through mineralocorticoid activity. Prednisolone serves as the intermediate workhorse for inflammatory disease flares. Dexamethasone acts longest and treats cerebral oedema without mineralocorticoid effects.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/phm-corticosteroids-fig1.webp",
@@ -17,18 +17,18 @@
    }
   },
   {
-   "tx": "**Iatrogenic Cushing** (commonest cause: prescriptions, central obesity with striae, hypertension, glucose intolerance, cataract, psychosis) reverses on taper while endogenous (pituitary, adrenal, ectopic) works up separately. **Adrenal suppression** (weeks of steroids blunt HPA) demands **taper** (alternate day, slow below physiological) with **stress cover** (double or triple perioperative and febrile illness, parenteral if vomiting); abrupt stops crisis (hypotension, hyponatraemia, shock). Sick day rules card every chronic user.",
-   "say": "Weeks of steroids blunt adrenals: taper slow, double sick days. Stopping abruptly crises.",
+   "tx": "**Iatrogenic Cushing syndrome** from prescribed steroids remains the commonest cause of Cushing features and improves gradually as treatment tapers safely. Weeks of therapy suppress the hypothalamic pituitary adrenal axis, so **tapering** slows below physiological doses and **stress cover** doubles or triples during surgery and febrile illness. Abrupt withdrawal precipitates adrenal crisis with hypotension, hyponatraemia and shock that needs urgent hydrocortisone replacement.",
+   "say": "Prescribed steroids cause most Cushing syndrome seen in routine clinical practice. Prolonged therapy suppresses adrenal function and requires slow tapering for safety. Patients double steroid doses during fever, surgery and serious illness. Abrupt withdrawal causes hypotension and shock from adrenal crisis.",
    "vis": null
   },
   {
-   "tx": "**Systemic uses** target inflammation and immunity: asthma and COPD exacerbations (prednisolone bursts), rheumatoid and IBD flares, **multiple sclerosis relapse** (methylprednisolone pulses), **cerebral oedema** around tumours (dexamethasone), **Pneumocystis hypoxia** (adjunct saving), **TB meningitis** (dexamethasone mortality benefit), ALL induction, transplant rejection, anaphylaxis adjunct (adrenaline leads). Pulses treat flares; maintenance seeks sparers (methotrexate, azathioprine, biologics).",
-   "say": "MS relapse pulses methylprednisolone; tumour oedema dexamethasones; TB meningitis steroids save. Sparers maintain.",
+   "tx": "**Systemic corticosteroids** treat asthma and COPD exacerbations, rheumatoid and bowel flares, transplant rejection and several neurological emergencies with proven benefit. Methylprednisolone pulses treat **multiple sclerosis relapse**, dexamethasone reduces tumour related **cerebral oedema**, and adjunctive steroids save life in Pneumocystis hypoxia and tuberculous meningitis. Anaphylaxis still needs adrenaline first, while maintenance care seeks steroid sparing drugs that limit cumulative toxicity over time.",
+   "say": "Systemic steroids help treat inflammatory flares and reduce disease activity across respiratory, rheumatic and bowel diseases. Methylprednisolone pulses reduce multiple sclerosis relapse duration and help restore neurological function more quickly afterwards. Dexamethasone reduces tumour oedema and treats tuberculous meningitis with survival benefit. Maintenance treatment seeks steroid sparing alternatives that limit cumulative harm.",
    "vis": null
   },
   {
-   "tx": "**Adverse shield** anticipates: hyperglycaemia (diabetes screen), **osteoporosis** (calcium, vitamin D, bisphosphonates, DEXA), cataract with glaucoma (eye checks), psychosis and mania, **avascular necrosis** hips, skin thinning with striae, weight gain. **Inhaled** (beclomethasone, budesonide; rinse mouth preventing **candidiasis**, spacer technique) and topical (fingertip units, potency ladders, tachyphylaxis) localise benefit. Live vaccines wait immunosuppression out.",
-   "say": "Steroid bones thin: calcium, D, bisphosphonate, DEXA. Inhalers rinse: thrush follows otherwise.",
+   "tx": "Long term steroids demand an **adverse effect shield** that anticipates hyperglycaemia, osteoporosis, cataract, glaucoma, psychosis and avascular necrosis before harm develops silently. Bone protection combines calcium, vitamin D, bisphosphonates and **DEXA monitoring**, while eye checks detect cataract and raised pressure early. **Inhaled steroids** localise benefit to the airways, and rinsing the mouth after each dose prevents candidiasis and reduces hoarseness substantially.",
+   "say": "Long term steroids increase glucose, reduce bone strength and cause damage to eyes and skin. Bone protection requires calcium, vitamin D and bisphosphonates with density monitoring. Eye checks detect cataract and glaucoma before vision suffers permanently. Inhaled steroids localise treatment and mouth rinsing prevents oral thrush.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -58,6 +58,17 @@
       "Salt"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The abdomen shows wide purple **violaceous striae** wider than one centimetre with thinned fragile skin and large bruises after minor trauma. These changes reflect dermal **collagen catabolism** from prolonged steroid excess and mark **iatrogenic Cushing syndrome** from prescribed treatment rather than stretch marks of simple obesity. Spotting wide striae with easy bruising in a stem should trigger review of steroid dose and duration.",
+   "say": "The abdomen shows wide purple striae with thin skin and extensive bruising. Steroid excess breaks down dermal collagen and weakens skin and vessels progressively. Wide violaceous striae distinguish Cushing syndrome from simple stretch marks reliably. Reviewing steroid dose and duration prevents further harm in affected patients.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-corticosteroids-gen1.webp",
+    "alt": "Abdomen with wide violaceous striae, bruising and thinned skin",
+    "caption": "Iatrogenic Cushing syndrome with striae and bruising. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

@@ -1,0 +1,146 @@
+{
+  "id": "pnp-steroid-sensitive-nephrotic-syndrome",
+  "title": "Steroid-Sensitive Nephrotic Syndrome: First Episode, Relapses and Steroid-Sparing Agents",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Glomerular Diseases, Nephrotic Syndrome and Nephritis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Nephrotic syndrome in young children is defined by a triad of massive proteinuria, profound hypoalbuminemia, and generalized dependent edema.",
+      "tx": "Recognize the classic **Diagnostic nephrotic triad and criteria** to initiate timely pediatric evaluation. Nephrotic syndrome is formally diagnosed by heavy nephrotic-range proteinuria demonstrating urinary protein excretion exceeding 40 mg/m²/hr or a spot urine protein-to-creatinine ratio > 2.0 mg/mg (or 3+ on dipstick analysis), coupled with severe hypoalbuminemia with serum albumin < 2.5 g/dL, and marked generalized dependent edema (periorbital and peripheral swelling).",
+      "vis": {
+        "kind": "table",
+        "title": "Nephrotic Syndrome Diagnostic Thresholds",
+        "cols": ["Parameter", "Diagnostic Value", "Clinical Significance"],
+        "rows": [
+          ["Proteinuria rate", "> 40 mg/m²/hr", "Defines nephrotic-range urinary protein loss"],
+          ["Spot UPCR", "> 2.0 mg/mg", "Confirms massive selective glomerular leak"],
+          ["Serum albumin", "< 2.5 g/dL", "Produces loss of intravascular oncotic pressure"],
+          ["Physical signs", "Generalized edema", "Dependent periorbital and peripheral fluid shift"]
+        ]
+      }
+    },
+    {
+      "say": "Standard primary therapy for the first presentation follows standardized international pediatric protocols using oral prednisolone.",
+      "tx": "Prescribe the evidence-based **IPNA/KDIGO initial steroid regimen** for presenting pediatric patients. The initial treatment protocol for a child with an inaugural episode of steroid-sensitive nephrotic syndrome consists of oral prednisolone administered at 60 mg/m²/day (or 2 mg/kg/day, maximum dose 60 mg) daily for 4-6 weeks, followed by alternate-day dosing at 40 mg/m² (1.5 mg/kg) on alternate days for another 4-6 weeks before stopping or gradual tapering.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "init", "label": "Initial Presentation"},
+          {"id": "daily", "label": "Prednisolone 60 mg/m²/day daily x 4-6 weeks"},
+          {"id": "alt", "label": "Prednisolone 40 mg/m² alternate days x 4-6 weeks"}
+        ],
+        "edges": [
+          ["init", "daily"],
+          ["daily", "alt"]
+        ]
+      }
+    },
+    {
+      "say": "Daily urine monitoring allows clear distinctions between complete therapeutic remission and early clinical relapse.",
+      "tx": "Track daily home urinary protein to apply standard **Definitions of remission and relapse** during follow-up. Complete remission is documented when urine dipstick testing becomes trace or zero (or spot UPCR < 0.2 mg/mg) for 3 consecutive days; conversely, nephrotic relapse is diagnosed when urine dipstick shows >= 3+ protein (or spot UPCR > 2.0 mg/mg) across 3 consecutive days, typically triggered by an intercurrent viral infection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complete Remission",
+          "points": [
+            "Dipstick trace or negative protein",
+            "Spot UPCR < 0.2 mg/mg",
+            "Maintained for 3 consecutive days"
+          ]
+        },
+        "right": {
+          "title": "Nephrotic Relapse",
+          "points": [
+            "Dipstick >= 3+ protein",
+            "Spot UPCR > 2.0 mg/mg",
+            "Present for 3 consecutive days"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Specific clinical definitions distinguish children who relapse frequently from those who remain dependent on steroids.",
+      "tx": "Differentiate patients by established **Frequent relapser and steroid-dependent criteria** to identify candidates for steroid-sparing therapy. Frequently relapsing nephrotic syndrome (FRNS) is defined as experiencing >= 2 relapses within 6 months of initial response or >= 4 relapses in any 12-month period; steroid dependence (SDNS) is diagnosed when a patient develops 2 consecutive relapses during steroid taper or within 14 days of cessation.",
+      "vis": {
+        "kind": "table",
+        "title": "Subclassification of Complicated Relapsing SSNS",
+        "cols": ["Classification", "Defining Frequency", "Clinical Implication"],
+        "rows": [
+          ["FRNS", ">= 2 relapses in 6 months or >= 4 in 12-month period", "Steroid toxicity risk; add steroid-sparing agent"],
+          ["SDNS", "2 consecutive relapses during taper or within 14 days", "Inability to wean steroids; steroid-sparing mandatory"],
+          ["Infrequent relapser", "< 2 relapses in 6 months and < 4 in 12 months", "Managed with standard short steroid courses"]
+        ]
+      }
+    },
+    {
+      "say": "Steroid-sparing agents mitigate growth failure, cataracts, and cushingoid toxicity in children with difficult courses.",
+      "tx": "Select appropriate second-line **Steroid-sparing agents for FRNS/SDNS** to preserve linear growth and minimize toxicity. First-line steroid-sparing options include oral levamisole (2.5 mg/kg alternate days), alkylating cyclophosphamide (2 mg/kg/day for 8-12 weeks, adhering strictly to a cumulative limit 168-200 mg/kg to prevent gonadal toxicity), and mycophenolate mofetil (MMF 1200 mg/m²/day in two divided doses) to maintain sustained remission.",
+      "vis": {
+        "kind": "table",
+        "title": "Pediatric Steroid-Sparing Agents and Dosing",
+        "cols": ["Drug", "Standard Dosage", "Safety Caveats"],
+        "rows": [
+          ["Levamisole", "2.5 mg/kg alternate days", "Mild steroid-sparing, check neutropenia"],
+          ["Cyclophosphamide", "2 mg/kg/day for 8-12 weeks", "Keep cumulative limit 168-200 mg/kg"],
+          ["Mycophenolate mofetil", "MMF 1200 mg/m²/day divided BID", "Monitor gastrointestinal upset and leukopenia"]
+        ]
+      }
+    },
+    {
+      "say": "Targeted B-cell depletion using rituximab offers long-term disease control in patients refractory to oral agents.",
+      "tx": "Deploy anti-CD20 therapy with **Rituximab in refractory SDNS** when conventional steroid-sparing therapies fail. Intravenous rituximab (administered at 375 mg/m² IV for 1-2 doses) targets selective B-cell depletion (defined by flow cytometric CD19 < 1% of total lymphocytes), demonstrating profound efficacy in inducing and maintaining long-term treatment-free remission in refractory steroid-dependent nephrotic syndrome.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "refract", "label": "Refractory SDNS / Toxicity"},
+          {"id": "rtx", "label": "Rituximab 375 mg/m² IV (1-2 doses)"},
+          {"id": "cd19", "label": "Confirm B-cell depletion (CD19 < 1%)"}
+        ],
+        "edges": [
+          ["refract", "rtx"],
+          ["rtx", "cd19"]
+        ]
+      }
+    },
+    {
+      "say": "Hypercoagulability and profound intravascular oncotic depletion predispose young nephrotic children to venous thrombosis.",
+      "tx": "Institute active precautions against **Thromboembolism prophylaxis and triggers** in severely hypoproteinemic children. Severe hypoalbuminemia (serum albumin < 2.0 g/dL), coupled with hemoconcentration, thrombocytosis, elevated fibrinogen, and marked urinary loss of antithrombin III, establishes high venous and arterial thromboembolic risk; clinicians must enforce strict avoidance of femoral venipuncture and provide prompt rehydration during intercurrent gastroenteritis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prothrombotic Drivers",
+          "points": [
+            "Serum albumin < 2.0 g/dL",
+            "Urinary antithrombin III depletion",
+            "Elevated fibrinogen and hemoconcentration"
+          ]
+        },
+        "right": {
+          "title": "Preventive Precautions",
+          "points": [
+            "Avoid femoral venipuncture or lines",
+            "Prompt rehydration in gastroenteritis",
+            "Active mobilization and surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Impaired humoral opsonization creates heightened vulnerability to invasive encapsulated bacterial infections.",
+      "tx": "Recognize the pathophysiology of **Peritonitis and encapsulated bacteria** to initiate emergency antimicrobial coverage. Spontaneous bacterial peritonitis in nephrotic ascites is predominantly caused by encapsulated Streptococcus pneumoniae and gram-negative E. coli due to urinary loss of complement factors B and D; optimal care demands complete pneumococcal conjugate vaccination and immediate empiric intravenous cefotaxime or ceftriaxone upon clinical suspicion.",
+      "vis": {
+        "kind": "table",
+        "title": "Nephrotic Infection Vulnerability and Prevention",
+        "cols": ["Pathogen", "Mechanism of Vulnerability", "Management Strategy"],
+        "rows": [
+          ["Streptococcus pneumoniae", "Urinary loss of properdin factor B and IgG", "Pneumococcal vaccine, IV cefotaxime/ceftriaxone"],
+          ["Escherichia coli", "Ascitic fluid bacterial translocation", "Prompt broad-spectrum cephalosporin therapy"],
+          ["Varicella zoster", "Steroid and immunosuppressive impairment", "Varicella zoster immune globulin (VZIG) on exposure"]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "module": "bio-protein-structure",
+ "subject": "biochemistry",
+ "title": "Protein separation and denaturation in the lab",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**SDS-PAGE** coats denatured chains with SDS (uniform negative charge per mass, beta-mercaptoethanol or DTT reducing disulfides) so migration reports molecular mass against ladders; native PAGE preserves charge and shape for enzyme activity gels, isoelectric focusing separates by pI in pH gradients, and two dimensional gels (pI then mass) resolve thousands of proteome spots for mass spectrometry identification. Western blotting transfers PAGE proteins for antibody identity after separation by mass.",
+   "say": "SDS-PAGE reports molecular mass after uniform coating, while focusing separates by isoelectric point. Two dimensional gels resolve proteomes for spectrometry, and Western blotting adds antibody identity afterwards.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "Separates by",
+     "Preserves native?"
+    ],
+    "rows": [
+     [
+      "SDS-PAGE (reducing)",
+      "Mass only",
+      "No (denatured, disulfides cut)"
+     ],
+     [
+      "Native PAGE",
+      "Charge, size, shape",
+      "Yes (activity possible)"
+     ],
+     [
+      "Isoelectric focusing",
+      "pI (stops at net zero)",
+      "Mostly (no SDS)"
+     ],
+     [
+      "2D gel (IEF then SDS)",
+      "pI then mass",
+      "First dimension only"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chromatography sorts by orthogonal chemistries: **gel filtration** (size exclusion, large elutes first excluded from beads, small delayed entering pores, void versus total volume calibrates mass and shape), ion exchange (charge at chosen pH versus pI, salt gradient elutes), affinity (ligand specificity: nickel His tags, protein A antibodies, lectin glycans, dye ligands), hydrophobic interaction (high salt binding, falling gradient). Sequential columns (capture, intermediate, polish) purify therapeutic insulin and antibodies industrially.",
+   "say": "Gel filtration elutes large proteins first, opposite to gels, while ion exchange and affinity sort by charge and ligand. Sequential columns purify therapeutic insulin and antibodies industrially at scale.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gel filtration (size exclusion)",
+     "points": [
+      "Large first (excluded)",
+      "Small last (pore delayed)",
+      "Gentle, diluting, mass and shape"
+     ]
+    },
+    "right": {
+     "title": "SDS-PAGE (gel sieving)",
+     "points": [
+      "Small first (migrates far)",
+      "Large last (retarded)",
+      "Denaturing, analytical mass only"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ultracentrifugation** sediments by mass, density and shape (Svedberg S units non additive, 70S bacterial equals 50 plus 30, 80S eukaryotic 60 plus 40), differential spins fractionate organelles for marker enzyme assays (prior module), density gradients (sucrose, caesium chloride Meselson-Stahl DNA history, lipoprotein flotation) separate by buoyant density. Analytical ultracentrifugation measures mass and interactions in solution without matrices, the quiet gold standard behind textbook constants.",
+   "say": "Ultracentrifugation sediments by mass and shape in Svedberg units that never add arithmetically. Density gradients separated DNA historically and float lipoproteins diagnostically in metabolic medicine.",
+   "vis": {
+    "kind": "flow",
+    "title": "Differential spins in order",
+    "nodes": [
+     {
+      "id": "low",
+      "label": "Low speed: nuclei and debris"
+     },
+     {
+      "id": "mid",
+      "label": "Medium: mitochondria and lysosomes"
+     },
+     {
+      "id": "high",
+      "label": "High: microsomes (ER fragments)"
+     },
+     {
+      "id": "sup",
+      "label": "Supernatant: cytosol soluble proteins"
+     }
+    ],
+    "edges": [
+     [
+      "low",
+      "mid"
+     ],
+     [
+      "mid",
+      "high"
+     ],
+     [
+      "high",
+      "sup"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Quantification chemistry must be quoted with interferences: Biuret (peptide bonds, milligram sensitivity, clinical serum total protein), Lowry (Folin phenol, microgram, detergent sensitive), Bradford Coomassie (fast, arginine biased), BCA, ultraviolet **A280** (tryptophan, nucleic acid correction A260 ratio), ninhydrin (amino acids, proline yellow exception, chromatography analysers). Kjeldahl nitrogen times six point two five estimates crude protein in nutrition labels and melamine adulteration history tested in food safety.",
+   "say": "Biuret measures clinical serum protein, while Bradford and A280 trade speed for biases worth quoting. Kjeldahl nitrogen estimates crude protein in nutrition labels and food safety history.",
+   "vis": null
+  },
+  {
+   "tx": "**Denaturation in practice** sterilises and cooks and preserves: autoclave moist heat denatures microbial proteins (prions exceptionally resist, requiring extended prevacuum cycles and chemical adjuncts), alcohol hand rubs denature and dehydrate, heavy metals (lead, mercury, silver nitrate cautery) precipitate proteins as poison mechanisms and antidote rationales (egg white folk history, chelation modern), picric acid (Esbach) and sulfosalicylic acid turbidimetry historically quantified urine protein before dye binding assays.",
+   "say": "Autoclaves denature microbial proteins, though prions resist exceptionally with extended cycles needed. Heavy metals precipitate proteins as poison mechanisms, linking laboratory denaturation to toxicology antidotes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Denaturant",
+     "Level attacked",
+     "Practical use or poison"
+    ],
+    "rows": [
+     [
+      "Heat, autoclave",
+      "Secondary/tertiary (prions resist)",
+      "Sterilisation; prion adjunct chemistry"
+     ],
+     [
+      "Urea, guanidinium, SDS",
+      "H-bonds, hydrophobic, charge coat",
+      "Gels and refolding screens"
+     ],
+     [
+      "Beta-mercaptoethanol, DTT",
+      "Disulfides only",
+      "Reducing gels; perm chemistry"
+     ],
+     [
+      "Heavy metals, strong acid/alkali",
+      "Precipitation, hydrolysis extremes",
+      "Poisons; urine protein history"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mass spectrometry** now sequences and quantifies proteomes (tryptic peptides, tandem fragmentation, database and de novo matching, post translational modification mapping, amyloid typing gold standard from the prior lesson), while Edman survives niche N-terminal confirmation. Protein chemistry thus ends clinically: every serum electrophoresis, amyloid type, haemoglobin variant and monoclonal spike you will ever report is these separations wearing hospital clothes, and collagen next shows one protein family exploiting every level therapeutically.",
+   "say": "Mass spectrometry types amyloid and sequences proteomes as the modern gold standard. Every variant and monoclonal spike reported clinically is these separations wearing hospital clothes for patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Separation answers what is it",
+     "points": [
+      "Mass, pI, charge, ligand identity",
+      "Gels, columns, centrifugation",
+      "Then antibody or MS confirms"
+     ]
+    },
+    "right": {
+     "title": "Denaturation answers how stable",
+     "points": [
+      "Tm, urea midpoint, protease resistance",
+      "Prion and amyloid extremes",
+      "Sterilisation and storage design"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

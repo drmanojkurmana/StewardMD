@@ -1,0 +1,155 @@
+{
+  "id": "pnp-atypical-hus-complement-blockade",
+  "title": "Atypical HUS: Alternative Complement Gene Variants and Terminal C5 Inhibition",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Hemolytic Uremic Syndrome and Microangiopathies",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Atypical hemolytic uremic syndrome is driven by uncontrolled complement activation destroying vascular endothelium.",
+      "tx": "Map genetic pathogenic drivers within the **Atypical HUS genetic landscape** to identify primary thrombotic microangiopathy mechanisms. Atypical HUS represents uncontrolled alternative complement activation on host endothelial surfaces, driven predominantly by loss-of-function mutations in regulatory protective proteins including CFH, CFI, and CD46/MCP, or by gain-of-function mutations in active convertase components C3 and CFB.",
+      "vis": {
+        "kind": "table",
+        "title": "Alternative Complement Pathway Genetic Alterations",
+        "cols": ["Gene & Factor", "Mutation Mechanism", "Pathologic Consequence"],
+        "rows": [
+          ["CFH, CFI, CD46/MCP", "Loss-of-function variants", "Failed protection of self endothelial cell surfaces"],
+          ["C3, CFB", "Gain-of-function variants", "Hyperactive C3/C5 alternative convertase assembly"],
+          ["Endothelial Impact", "Unchecked MAC (C5b-9) deposition", "Microvascular thrombosis and mechanical hemolysis"]
+        ]
+      }
+    },
+    {
+      "say": "Factor H mutations represent the most frequent genetic aberration and carry poor natural prognosis.",
+      "tx": "Assess prognosis by determining the **Complement Factor H (CFH) variant frequency** in presenting pediatric cohorts. Heterozygous or homozygous mutations in CFH located on chromosome 1q31.3 account for 25-30% of all atypical HUS cases, historically carrying a devastating 70% risk of progressing to end-stage renal disease or death within 1 year of onset without anti-complement therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CFH Genetic Variants",
+          "points": [
+            "Accounts for 25-30% of atypical HUS",
+            "Located on chromosome 1q31.3",
+            "70% ESRD or mortality within 1 year if untreated"
+          ]
+        },
+        "right": {
+          "title": "Therapeutic Transformation",
+          "points": [
+            "Responsive to prompt terminal complement inhibition",
+            "Halts progressive endothelial microvascular thrombosis",
+            "Dramatic reduction in dialysis dependency"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Acquired autoantibodies against factor H represent a distinct treatable immunological subgroup.",
+      "tx": "Screen for circulating autoantibodies identifying **Anti-factor H autoantibody HUS and CFHR1-3 deletion** patterns in childhood. Circulating anti-CFH autoantibodies cause 10-15% of pediatric atypical HUS (forming the predominant etiology in India), strongly linked to homozygous deletion of CFHR1-CFHR3 genes; management mandates therapeutic plasma exchange paired with pulsed oral prednisolone and rituximab to suppress autoantibody synthesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "del", "label": "Homozygous CFHR1-CFHR3 Gene Deletion"},
+          {"id": "ab", "label": "Anti-CFH Autoantibodies Form (10-15% Cases)"},
+          {"id": "tma", "label": "Alternative Pathway Endothelial Lysis"},
+          {"id": "rx", "label": "Plasma Exchange + Prednisolone + Rituximab"}
+        ],
+        "edges": [
+          ["del", "ab"],
+          ["ab", "tma"],
+          ["tma", "rx"]
+        ]
+      }
+    },
+    {
+      "say": "Terminal complement blockade blocks cell destruction and restores native microvascular patency.",
+      "tx": "Arrest microvascular thrombosis using the protocolized **Eculizumab terminal C5 blockade protocol** immediately upon diagnosis. Eculizumab, a recombinant humanized anti-C5 monoclonal antibody, binds cleavage fragment C5 to prevent terminal membrane attack complex (C5b-9) assembly and leukocyte chemotaxis, reliably inducing complete hematologic remission and substantial renal recovery in > 80% of treated atypical HUS patients.",
+      "vis": {
+        "kind": "table",
+        "title": "Eculizumab Monoclonal Antibody Profile",
+        "cols": ["Feature", "Mechanism / Specification", "Clinical Benefit"],
+        "rows": [
+          ["Molecular Target", "Complement C5 protein cleavage site", "Prevents generation of C5a and C5b"],
+          ["Complex Blockade", "Halts terminal C5b-9 MAC assembly", "Shields glomerular endothelium from lysis"],
+          ["Efficacy Profile", "Hematologic & renal response > 80%", "Permits recovery of native renal filtration"]
+        ]
+      }
+    },
+    {
+      "say": "Inhibiting terminal complement creates immense vulnerability to encapsulated meningococcal organisms.",
+      "tx": "Instituting terminal blockade necessitates strict adherence to **Meningococcal prophylaxis requirement** standards before drug delivery. Terminal complement blockade increases individual patient susceptibility to invasive Neisseria meningitidis by 2000-fold; mandatory immunization with conjugated MenACWY and recombinant MenB vaccines combined with daily oral prophylactic penicillin or erythromycin must be initiated immediately alongside eculizumab.",
+      "vis": {
+        "kind": "table",
+        "title": "Mandatory Meningococcal Protection Protocol",
+        "cols": ["Preventive Component", "Required Action", "Immunological Objective"],
+        "rows": [
+          ["Vaccination 1", "Conjugated MenACWY vaccine", "Capsular protective antibodies against serogroups A,C,W,Y"],
+          ["Vaccination 2", "Recombinant MenB vaccine", "Protects against prevalent serogroup B strains"],
+          ["Chemoprophylaxis", "Daily oral penicillin or erythromycin", "Bactericidal barrier against 2000-fold infection surge"]
+        ]
+      }
+    },
+    {
+      "say": "Engineered long-acting inhibitors offer extended maintenance intervals that dramatically reduce hospital burden.",
+      "tx": "Optimize outpatient maintenance convenience by selecting the **Ravulizumab extended-interval C5 inhibitor** formulation for ongoing suppression. Ravulizumab is an engineered long-acting C5 monoclonal inhibitor with histidine-swapped Fc recycling providing an extended terminal elimination half-life, requiring intravenous maintenance infusions only once every 8 weeks in children weighing >= 20 kg, or every 4 weeks if < 20 kg.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eculizumab Regimen",
+          "points": [
+            "Conventional terminal C5 inhibitor",
+            "Infusions required every 2-3 weeks",
+            "Higher frequency of vascular access strain"
+          ]
+        },
+        "right": {
+          "title": "Ravulizumab Regimen",
+          "points": [
+            "Fc-engineered extended half-life C5 inhibitor",
+            "Maintenance every 8 weeks (>= 20 kg)",
+            "Maintenance every 4 weeks (< 20 kg)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Surface-bound regulator defects allow successful renal allografting without fears of disease recurrence.",
+      "tx": "Evaluate post-transplant risk stratifying by **CD46 / MCP mutation transplant outcomes** during pre-transplant assessment. Isolated membrane cofactor protein (CD46/MCP) mutations carry a low risk of post-transplant recurrence (< 20%), because unlike soluble circulating factors, CD46 is a transmembrane protein expressed natively by donor graft endothelium, providing normal intrinsic local complement regulation within the newly transplanted allograft.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CD46 / MCP Mutations",
+          "points": [
+            "Transmembrane surface complement regulator",
+            "Low recurrence risk in renal allografts (< 20%)",
+            "Donor allograft carries normal protective CD46"
+          ]
+        },
+        "right": {
+          "title": "CFH / CFI Mutations",
+          "points": [
+            "Circulating plasma regulators produced in liver",
+            "High allograft recurrence risk (> 70-80%)",
+            "Requires prophylactic C5 inhibitor or combined liver-kidney transplant"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Unusual non-complement pathways present in early infancy and prove completely refractory to biologic inhibitors.",
+      "tx": "Identify atypical non-complement phenotypes by investigating **DGKE non-complement atypical HUS** in neonates. Biallelic mutations in diacylglycerol kinase epsilon (DGKE) cause an infantile recessively inherited thrombotic microangiopathy without complement activation, manifesting before age 1 with relapsing nephrotic-range proteinuria and microvascular thrombosis that proves uniformly refractory to eculizumab or ravulizumab terminal complement inhibitors.",
+      "vis": {
+        "kind": "table",
+        "title": "DGKE Recessive Microangiopathy Features",
+        "cols": ["Feature", "Clinical Characterization", "Management Distinction"],
+        "rows": [
+          ["Gene & Function", "DGKE (diacylglycerol kinase epsilon)", "Phosphorylates DAG to phosphatidic acid"],
+          ["Age of Onset", "Infantile onset before age 1 year", "Recurrent episodes of microangiopathy & proteinuria"],
+          ["Complement Involvement", "Alternative complement cascade normal", "No systemic complement consumption"],
+          ["Drug Response", "Refractory to eculizumab & C5 blockade", "Requires aggressive supportive care and ACEi"]
+        ]
+      }
+    }
+  ]
+}

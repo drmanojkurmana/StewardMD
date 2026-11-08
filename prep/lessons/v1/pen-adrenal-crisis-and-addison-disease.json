@@ -1,0 +1,202 @@
+{
+  "v": 1,
+  "id": "pen-adrenal-crisis-and-addison-disease",
+  "title": "Pediatric Adrenal Crisis and Addison Disease: Stress Dosing and Autoimmune Polyglandular Syndromes",
+  "module": "pen-adrenal-dsd",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Autoimmune Etiology of Juvenile Addison Disease",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Autoimmune Adrenalitis",
+          "points": [
+            "Responsible for 85% of primary adrenal failure",
+            "Targeted against 21-hydroxylase steroid enzyme",
+            "High-titer anti-21-hydroxylase autoantibodies"
+          ]
+        },
+        "right": {
+          "title": "Monogenic Causes in Boys",
+          "points": [
+            "X-linked adrenoleukodystrophy (ABCD1 mutation)",
+            "Impaired peroxisomal very long chain fatty acid beta-oxidation",
+            "Combined cerebral demyelination and adrenal failure"
+          ]
+        }
+      },
+      "tx": "Primary adrenal insufficiency (Addison disease) in children is mostly autoimmune (85%), confirmed by positive anti-21-hydroxylase autoantibodies, or due to X-linked adrenoleukodystrophy (ABCD1) in boys. Examining **Addison disease etiology and 21-hydroxylase antibodies** reveals immune-mediated destruction of all three adrenocortical zones, eliminating glucocorticoid, mineralocorticoid, and adrenal androgen production. Male pediatric patients presenting without autoantibodies require urgent serum very long chain fatty acid quantification.",
+      "say": "Childhood Addison disease is predominantly autoimmune with twenty-one hydroxylase antibodies, though boys must be screened for adrenoleukodystrophy."
+    },
+    {
+      "title": "Hyperpigmentation Pathophysiology and Distribution",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Biochemical Driver",
+          "points": [
+            "Absence of circulating cortisol negative feedback",
+            "Massive uninhibited POMC transcription",
+            "High ACTH and alpha-MSH cleavage peptides"
+          ]
+        },
+        "right": {
+          "title": "Cutaneous Distribution",
+          "points": [
+            "Palmar creases, nail beds, and friction points",
+            "Buccal mucosa, gingiva, and vermilion border",
+            "Areolae, genital skin, and recent surgical scars"
+          ]
+        }
+      },
+      "tx": "Loss of cortisol negative feedback induces massive pro-opiomelanocortin (POMC) and ACTH hypersecretion, whose alpha-MSH subunit stimulates melanocytes, creating classic hyperpigmentation of palmar creases, gingiva, and scars. The **Hyperpigmentation distribution mechanism** reflects elevated plasma adrenocorticotropic hormone binding melanocortin-1 receptors on dermal melanocytes. Mucocutaneous bronzing provides an invaluable diagnostic clue distinguishing primary adrenal insufficiency from secondary hypothalamic-pituitary deficiency.",
+      "say": "Unchecked POMC synthesis due to cortisol lack drives alpha melanocyte-stimulating hormone release, causing generalized hyperpigmentation of skin and mucosa."
+    },
+    {
+      "title": "Acute Adrenal Crisis Presentation and Mortality",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adrenal-crisis-fig1.webp",
+        "alt": "Adrenal insufficiency causing vascular collapse with low sodium and high potassium.",
+        "caption": "Adrenal crisis: circulatory collapse with hyponatraemia and hyperkalaemia. Credit: StewardMD."
+      },
+      "tx": "Adrenal crisis is precipitated by physiological stress (gastroenteritis, high fever, surgery) in cortisol-deficient children, characterized by refractory hypotension, severe hyponatremia, hyperkalemia, and hypoglycemia. Analyzing the **Adrenal crisis trigger and mortality** demonstrates that mineralocorticoid lack promotes renal sodium wasting and potassium retention, while cortisol deficiency impairs vascular adrenergic tone. Prompt recognition and emergent intravenous rescue are vital to avert fatal cardiovascular arrest.",
+      "say": "Adrenal crisis triggered by acute illness produces life-threatening circulatory collapse, severe hyponatremia, hyperkalemia, and hypoglycemia."
+    },
+    {
+      "title": "Emergency Parenteral Hydrocortisone Bolus Dosing",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Age Cohort",
+          "Emergency Bolus",
+          "Administration Route",
+          "Supportive Fluid"
+        ],
+        "rows": [
+          [
+            "Infants < 1 year",
+            "25 mg hydrocortisone",
+            "IV or deep IM injection",
+            "D10 0.9% normal saline bolus (20 mL/kg)"
+          ],
+          [
+            "Children 1-5 years",
+            "50 mg hydrocortisone",
+            "IV or deep IM injection",
+            "Correct hypoglycemia and restore volume"
+          ],
+          [
+            "Older children > 5 years",
+            "100 mg hydrocortisone",
+            "IV or deep IM injection",
+            "Continuous infusion 50-100 mg/m²/day"
+          ]
+        ]
+      },
+      "tx": "In acute adrenal crisis, intramuscular or intravenous hydrocortisone is administered immediately: 25 mg for infants (< 1 year), 50 mg for children (1-5 years), and 100 mg for older children (> 5 years). The **Emergency hydrocortisone stress dosing bolus** saturates glucocorticoid receptors while providing potent intrinsic mineralocorticoid activity at these high emergency levels. Never postpone parenteral steroid rescue while awaiting confirmatory laboratory results.",
+      "say": "Emergency hydrocortisone boluses of twenty-five milligrams for infants, fifty for young children, and one hundred for older children reverse adrenal shock."
+    },
+    {
+      "title": "Febrile Illness Oral Stress Dosing Guidelines",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Febrile Trigger\nTemperature > 38.5°C or injury"
+          },
+          {
+            "id": "2",
+            "label": "Multiplier Adjustment\nTriple baseline oral dose"
+          },
+          {
+            "id": "3",
+            "label": "Dose Distribution\n30-50 mg/m²/day divided TID-QID"
+          },
+          {
+            "id": "4",
+            "label": "Clinical Recovery\nTaper back to maintenance"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "During febrile illness (> 38.5°C) or significant physical trauma, oral maintenance hydrocortisone must be doubled or tripled (30-50 mg/m²/day) divided into 3-4 doses until clinical recovery. Adhering to the **Oral febrile stress dosing multiplier** compensates for increased metabolic cortisol clearance during infectious challenge. If persistent emesis prevents oral tablet retention, parents must inject parenteral hydrocortisone immediately.",
+      "say": "Parents must triple the oral hydrocortisone dose during febrile illnesses above thirty-eight point five degrees to prevent adrenal collapse."
+    },
+    {
+      "title": "Autoimmune Polyglandular Syndrome Type 1 (APECED)",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-polyendocrine-syndrome-type-1-fig1.webp",
+        "alt": "AIRE mutation leading to candidiasis, hypoparathyroidism and Addison disease.",
+        "caption": "APS-1: the AIRE triad of candidiasis, hypoparathyroidism and adrenal failure. Credit: StewardMD."
+      },
+      "tx": "APS-1 is an autosomal recessive mutation in the AIRE gene (21q22.3), defined by >= 2 of triad: chronic mucocutaneous candidiasis (infancy), hypoparathyroidism (childhood), and Addison disease (adolescence). Investigating **Autoimmune polyglandular syndrome type 1 (APS-1 / APECED)** shows that autoimmune regulator failure permits autoreactive T-cell clones to escape negative thymic selection. Patients require ongoing surveillance for secondary autoimmune hepatitis, gonadal failure, and pernicious anemia.",
+      "say": "Autoimmune polyglandular syndrome type one arises from AIRE mutations and features infant candidiasis, juvenile hypoparathyroidism, and Addison disease."
+    },
+    {
+      "title": "Autoimmune Polyglandular Syndrome Type 2 (Schmidt)",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "APS-2 Core Criteria",
+          "points": [
+            "Mandatory presence of Addison disease",
+            "Autoimmune thyroiditis (Schmidt syndrome)",
+            "Type 1 diabetes mellitus association"
+          ]
+        },
+        "right": {
+          "title": "Genetic Architecture",
+          "points": [
+            "Complex polygenic inheritance pattern",
+            "Strong linkage with HLA-DR3 and HLA-DR4 alleles",
+            "Peak clinical presentation in young adults"
+          ]
+        }
+      },
+      "tx": "APS-2 is polygenic (HLA-DR3/DR4 association), defined by Addison disease accompanied by autoimmune thyroid disease (Schmidt syndrome) and/or Type 1 diabetes mellitus. Characterizing **Autoimmune polyglandular syndrome type 2 (APS-2 / Schmidt)** prevents iatrogenic catastrophe: initiating levothyroxine in undiagnosed Addison disease accelerates hepatic corticosteroid clearance, precipitating acute adrenal crisis. Adrenal function must be evaluated and hydrocortisone initiated prior to starting thyroid hormone replacement.",
+      "say": "Autoimmune polyglandular syndrome type two combines Addison disease with autoimmune thyroiditis or type one diabetes, linked to HLA-DR3 and DR4."
+    },
+    {
+      "title": "Emergency Injectable Kits and Medical Identification",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Injectable Kit Requirements",
+          "points": [
+            "Solu-Cortef Act-O-Vial 100 mg preparation",
+            "Intramuscular needles and alcohol swabs",
+            "Hands-on parent and caregiver injection training"
+          ]
+        },
+        "right": {
+          "title": "Emergency Identification",
+          "points": [
+            "Indelible medical alert bracelet or necklace",
+            "Explicit steroid dependence warning label",
+            "Emergency endocrinologist direct phone contacts"
+          ]
+        }
+      },
+      "tx": "Every child with adrenal insufficiency must carry an emergency intramuscular hydrocortisone kit (Solu-Cortef Act-O-Vial 100 mg) and wear an indelible medical alert bracelet at all times. Providing **Emergency injectable hydrocortisone and medic-alert identification** ensures school staff and caregivers receive hands-on instruction in intramuscular injection technique for emergency resuscitation during severe trauma or unresponsive collapse. Clear emergency action plans eliminate dangerous hospital arrival delays.",
+      "say": "Children with adrenal insufficiency must continuously wear medical alert identification and carry an emergency injectable hydrocortisone vial."
+    }
+  ]
+}

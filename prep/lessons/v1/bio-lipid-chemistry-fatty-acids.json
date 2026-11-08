@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-lipid-chemistry",
+ "subject": "biochemistry",
+ "title": "Fatty acids and triacylglycerol",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Fatty acids name themselves by chain length, double bond count and position in two dialects: delta numbering from carboxyl carbon (18:1 delta-9 oleate) and omega numbering from methyl end (omega-3 families share terminal geometry regardless of length). Saturation stiffens and raises melting point (stearate solid, oleate liquid) because straight saturated chains pack tightly while **cis** double bonds kink chains apart, the physical chemistry behind butter versus oils.",
+   "say": "Fatty acids name themselves by delta and omega numbering dialects. Cis double bonds kink chains apart and lower melting points, the physical chemistry behind butter versus oils at room temperature.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-lipid-chemistry-fig1.webp",
+    "alt": "Diagram comparing cis and trans fatty acid structures, showing bent cis chains and straight trans chains with hydrogenation.",
+    "caption": "Trans fats: structure, formation, and health impact.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Trans** double bonds straighten chains back toward saturated behaviour (higher melting, longer shelf life) and arise industrially by partial hydrogenation (and naturally in ruminant vaccenic acid in small amounts); trans fats raise LDL, lower HDL and inflame endothelium worse than saturates gram for gram, driving global elimination policies. Reading labels for partially hydrogenated oils remains the practical skill after chemistry is understood.",
+   "say": "Trans bonds straighten chains toward saturated behaviour and worsen lipids beyond saturates gram for gram. Reading labels for partially hydrogenated oils remains the practical skill after chemistry.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Cis (natural oils)", "points": ["Kinked, liquid", "Membrane fluidity favoured", "Essential families cis configured"]},
+    "right": {"title": "Trans (partial hydrogenation)", "points": ["Straight, solid, shelf stable", "LDL up, HDL down", "Elimination policies worldwide"]
+    }
+   }
+  },
+  {
+   "tx": "Essential families cannot be synthesised past delta-9: **linoleate** (18:2 omega-6) elongates and desaturates to arachidonate (20:4 omega-6, eicosanoid precursor, conditionally essential when linoleate scarce), while alpha-linolenate (18:3 omega-3) converts inefficiently (under ten percent) to EPA and DHA, making oily fish or algae preformed sources decisive for retina and brain DHA accretion in pregnancy and infancy guidance.",
+   "say": "Linoleate reaches arachidonate for eicosanoids, while alpha-linolenate converts inefficiently to EPA and DHA. Oily fish provides preformed sources decisive for retina and brain accretion in infancy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Family", "Parent (essential)", "Long chain products"],
+    "rows": [
+     ["Omega-6", "Linoleic acid (18:2)", "Arachidonic acid (20:4) to eicosanoids"],
+     ["Omega-3", "Alpha-linolenic acid (18:3)", "EPA (20:5), DHA (22:6) brain and retina"],
+     ["Omega-9 (non essential)", "Oleic acid (18:1) made de novo", "Mead acid rises in EFA deficiency (20:3)"]
+    ]
+   }
+  },
+  {
+   "tx": "**Triacylglycerol** esterifies three fatty acids to glycerol (positions sn-1/2/3 non random, pancreatic lipase sn-1/3 specific leaving 2-monoacylglycerol for absorption), storing anhydrous energy at nine kilocalories per gram without associated water (glycogen binds three grams water per gram), which is why fat, not carbohydrate, is the long term depot. Saponification (alkali hydrolysis to soaps and glycerol), iodine number (unsaturation), acid number (rancidity free acids) and Reichert-Meissl (volatile milk acids) remain practical examination chemistry.",
+   "say": "Triacylglycerol stores anhydrous energy at nine kilocalories per gram without water, which is why fat is the long term depot. Iodine and acid numbers remain practical examination chemistry for fats.",
+   "vis": {
+    "kind": "flow",
+    "title": "Why fat wins long term storage",
+    "nodes": [
+     {"id": "tag", "label": "Triacylglycerol anhydrous droplets"},
+     {"id": "dens", "label": "9 kcal per gram, no water carried"},
+     {"id": "gly", "label": "Glycogen: 4 kcal plus 3 g water each"},
+     {"id": "dep", "label": "Fat depot outlasts glycogen days to months"}
+    ],
+    "edges": [["tag", "dens"], ["gly", "dep"], ["dens", "dep"]]
+   }
+  },
+  {
+   "tx": "Odd, branched and very long chains preview metabolism exceptions: odd chains yield propionyl-CoA (glucogenic, B12), branched phytanic needs alpha oxidation (Refsum), very long chains start in **peroxisomes**, cyclopropane and trans oddities appear in bacterial and ruminant fats. Hydroxyl (ricinoleic castor laxative) and epoxy modifications explain industrial and toxic oil properties without new theory, only substituent geography on the same hydrocarbon spine.",
+   "say": "Odd chains yield glucogenic propionyl-CoA, branched phytanic needs alpha oxidation, and very long chains start in peroxisomes. Substituent geography explains industrial oil properties on the same hydrocarbon spine.",
+   "vis": null
+  },
+  {
+   "tx": "**Eicosanoid** precursor arachidonate hides esterified at membrane phospholipid sn-2, released by phospholipase A2 (steroid suppressed at annexin induction) for the next lesson cyclooxygenase and lipoxygenase cascades. Diet omega-3 EPA competes for the same enzymes yielding less inflammatory three series prostaglandins and five series leukotrienes plus resolvins, the mechanistic kernel inside fish oil outcome debates that stems expect separated from marketing.",
+   "say": "Arachidonate hides at membrane sn-2 for phospholipase release into eicosanoid cascades. EPA competes toward less inflammatory series plus resolvins, the kernel inside fish oil debates worth separating from marketing.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Number fact", "Value to quote"],
+    "rows": [
+     ["Fat energy density", "9 kcal per gram (carbohydrate and protein 4)"],
+     ["Arachidonic acid shorthand", "20:4 omega-6 (delta 5,8,11,14)"],
+     ["EPA and DHA shorthand", "20:5 and 22:6 omega-3"],
+     ["EFA deficiency ratio", "Triene to tetraene above 0.2"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

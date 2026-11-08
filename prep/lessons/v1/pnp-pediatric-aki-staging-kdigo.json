@@ -1,0 +1,146 @@
+{
+  "id": "pnp-pediatric-aki-staging-kdigo",
+  "title": "Pediatric AKI: KDIGO & pRIFLE Staging, Biomarkers and Fluid Overload",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Pediatric AKI, Dialysis and Chronic Kidney Disease",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Serum creatinine elevation defines pediatric kidney injury severity across three standardized stages.",
+      "tx": "Evaluate acute filtration loss using the standard **KDIGO pediatric AKI staging criteria** across age brackets. Stage 1 requires a serum creatinine increase >= 0.3 mg/dL within 48h or 1.5-1.9x baseline; Stage 2 spans 2.0-2.9x baseline; Stage 3 reaches >= 3.0x baseline, SCr >= 4.0 mg/dL, initiation of RRT, or an acute decrease in eGFR < 35 mL/min/1.73m² in patients < 18 years.",
+      "vis": {
+        "kind": "table",
+        "title": "KDIGO Pediatric AKI Creatinine Staging",
+        "cols": ["Stage", "Creatinine Criteria", "Pediatric eGFR Criterion"],
+        "rows": [
+          ["Stage 1", "Increase >= 0.3 mg/dL in 48h or 1.5-1.9x baseline", "Baseline function preserved"],
+          ["Stage 2", "Increase 2.0-2.9x baseline", "Moderate filtration impairment"],
+          ["Stage 3", ">= 3.0x baseline or SCr >= 4.0 mg/dL or RRT", "eGFR < 35 mL/min/1.73m² (< 18 years)"]
+        ]
+      }
+    },
+    {
+      "say": "Oliguria thresholds establish sensitive functional staging independently of biochemical delays.",
+      "tx": "Monitor hourly urine flow to apply standardized **Urine output thresholds per stage** in hospitalized children. Oliguria staging classifies injury into Stage 1 (< 0.5 mL/kg/hr for 6-12 hours), Stage 2 (< 0.5 mL/kg/hr for >= 12 hours), and Stage 3 (< 0.3 mL/kg/hr for >= 24 hours or complete anuria for >= 12 hours), identifying hypoperfusion earlier than serum markers.",
+      "vis": {
+        "kind": "table",
+        "title": "KDIGO Urine Output Staging Thresholds",
+        "cols": ["Stage", "Urine Output Rate", "Duration Criterion"],
+        "rows": [
+          ["Stage 1", "< 0.5 mL/kg/hr", "Sustained for 6-12 hours"],
+          ["Stage 2", "< 0.5 mL/kg/hr", "Sustained for >= 12 hours"],
+          ["Stage 3", "< 0.3 mL/kg/hr or anuria", ">= 24 hours (or anuria >= 12 hours)"]
+        ]
+      }
+    },
+    {
+      "say": "Cumulative fluid accumulation impairs organ perfusion and drastically elevates pediatric mortality.",
+      "tx": "Calculate cumulative volume accumulation using the **Fluid overload percentage calculation** in intensive care. Percent fluid overload (%FO) is quantified as [(Fluid In - Fluid Out) / Admission Weight] x 100%; developing fluid overload > 10-15% in critically ill children is independently associated with a 3-fold increase in pediatric mortality and severe prolonged mechanical ventilator dependence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Controlled Fluid Balance",
+          "points": [
+            "Fluid overload < 10% admission weight",
+            "Preserved pulmonary gas exchange",
+            "Prompt response to conservative diuretics"
+          ]
+        },
+        "right": {
+          "title": "Severe Fluid Overload",
+          "points": [
+            "Fluid overload > 10-15% admission weight",
+            "Associated with 3-fold increase in mortality",
+            "Urgent indication for dialytic ultrafiltration"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Structural biomarkers uncover subclinical tubular damage days before creatinine begins to climb.",
+      "tx": "Detect early subclinical cellular injury employing **Novel renal tubular injury biomarkers** following toxic insults. Both urinary and serum Neutrophil Gelatinase-Associated Lipocalin (NGAL > 150 ng/mL) and Kidney Injury Molecule-1 (KIM-1) concentrations surge within 2-4 hours of ischemic or toxic insults, reliably preceding standard serum creatinine rise by 24-48 hours and enabling pre-emptive nephroprotective interventions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "insult", "label": "Tubular Ischemic or Toxic Insult"},
+          {"id": "early", "label": "NGAL > 150 ng/mL & KIM-1 Rise at 2-4 Hours"},
+          {"id": "late", "label": "Serum Creatinine Elevation at 24-48 Hours"}
+        ],
+        "edges": [
+          ["insult", "early"],
+          ["early", "late"]
+        ]
+      }
+    },
+    {
+      "say": "Dynamic tubular provocative testing stratifies patients at immediate risk of progressive functional shutdown.",
+      "tx": "Assess nephron functional reserve using the protocolized **Furosemide stress test (FST) in children** under monitoring. The stress test assesses medullary tubular integrity by administering intravenous furosemide at 1.0 mg/kg in loop-diuretic naive children, or 1.5 mg/kg if previously exposed; an ensuing urine output < 2 mL/kg over 2 hours accurately predicts rapid progression to advanced Stage 3 injury.",
+      "vis": {
+        "kind": "table",
+        "title": "Pediatric Furosemide Stress Test (FST)",
+        "cols": ["Patient Exposure", "Intravenous Furosemide Dose", "2-Hour Response Threshold"],
+        "rows": [
+          ["Diuretic Naive", "1.0 mg/kg bolus", "Output < 2 mL/kg over 2 hours predicts severe AKI"],
+          ["Prior Exposure", "1.5 mg/kg bolus", "Output >= 2 mL/kg indicates responsive tubules"]
+        ]
+      }
+    },
+    {
+      "say": "Angina risk scores guide targeted biomarker deployment before renal catastrophe develops.",
+      "tx": "Risk-stratify susceptible intensive care patients utilizing **Renal angina index (RAI) stratification** at early timepoints. The pediatric Renal Angina Index multiplies baseline susceptibility risk factors such as ICU admission or solid organ transplant by injury scores derived from slight creatinine rise or fluid overload; scoring an RAI >= 8 identifies patients with high probability of progressing to severe AKI, prompting focused biomarker testing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "risk", "label": "Baseline Risk (ICU, Transplant, Sepsis)"},
+          {"id": "inj", "label": "Injury Severity (Creatinine Shift, %FO)"},
+          {"id": "rai", "label": "Score RAI >= 8: High Risk for Severe AKI"},
+          {"id": "bio", "label": "Deploy NGAL Biomarker & Initiate Renal Support"}
+        ],
+        "edges": [
+          ["risk", "rai"],
+          ["inj", "rai"],
+          ["rai", "bio"]
+        ]
+      }
+    },
+    {
+      "say": "Sodium excretion fraction separates transient pre-renal volume depletion from established tubular necrosis.",
+      "tx": "Distinguish hemodynamic hypoperfusion from intrinsic parenchymal death using the **Fractional excretion of sodium (FeNa) utility** equation. Calculated as [(Urine Na x Serum Cr) / (Serum Na x Urine Cr)] x 100%, an FeNa < 1% (< 2.5% in neonates due to immature tubular handling) confirms prerenal azotemia with avid sodium preservation, whereas FeNa > 2% indicates intrinsic acute tubular necrosis with failed tubular reabsorption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prerenal Azotemia",
+          "points": [
+            "FeNa < 1% (< 2.5% in neonates)",
+            "Intact tubular sodium reabsorption",
+            "Reversible with isotonic volume repletion"
+          ]
+        },
+        "right": {
+          "title": "Acute Tubular Necrosis",
+          "points": [
+            "FeNa > 2%",
+            "Impaired tubular epithelial sodium handling",
+            "Persists despite fluid challenge"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Structured toxic exposure surveillance prevents secondary hospital-acquired kidney injury.",
+      "tx": "Implement proactive clinical safety bundles through **Nephrotoxic medication stewardship** across inpatient wards. The NINJA quality initiative demonstrated that systematic daily electronic surveillance for simultaneous exposure to >= 3 nephrotoxic medications, or receipt of >= 3 days of intravenous aminoglycosides such as gentamicin, tobramycin, or vancomycin, successfully reduces hospital-acquired AKI rates by 38%.",
+      "vis": {
+        "kind": "table",
+        "title": "NINJA Nephrotoxin Stewardship Guidelines",
+        "cols": ["High-Risk Exposure Criterion", "Monitored Antibiotics", "Target Outcome"],
+        "rows": [
+          [">= 3 simultaneous nephrotoxins", "Gentamicin & tobramycin", "Daily creatinine screening"],
+          [">= 3 days of aminoglycosides", "Intravenous vancomycin", "TDM drug level optimization"],
+          ["Institutional Protocol", "Multi-disciplinary surveillance", "38% overall reduction in hospital AKI"]
+        ]
+      }
+    }
+  ]
+}

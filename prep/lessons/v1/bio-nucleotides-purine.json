@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "bio-nucleotides",
+ "subject": "biochemistry",
+ "title": "Purine synthesis, salvage and gout",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**PRPP** (ribose-5-phosphate plus ATP by PRPP synthetase, activated by phosphate, inhibited by purine nucleotides) starts both de novo synthesis and salvage as activated ribose donor. De novo builds the purine base atom by atom on ribose (glycine whole backbone, glutamine nitrogens at nine and three/one positions, aspartate nitrogen, bicarbonate carbon, formate one carbons from THF), committed at glutamine-PRPP amidotransferase (feedback by IMP/AMP/GMP, azaserine glutamine antagonist experimentally), costing far more ATP than salvage, through IMP branching to AMP (aspartate, GTP energy) and GMP (glutamine, ATP energy) reciprocal energy balancing.",
+   "say": "PRPP starts synthesis and salvage as activated ribose donor, building purine atoms from glycine, glutamine, aspartate, bicarbonate and formate. Salvage costs far less ATP than de novo construction energetically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Purine atom source",
+     "Atoms donated",
+     "Folate or vitamin link"
+    ],
+    "rows": [
+     [
+      "Glycine (whole)",
+      "C4, C5, N7",
+      "Serine glycine one carbon pool"
+     ],
+     [
+      "Glutamine amide N",
+      "N9, N3 (committed step)",
+      "Azaserine blocks experimentally"
+     ],
+     [
+      "Aspartate",
+      "N1 (fumarate leaves, Krebs bicycle echo)",
+      "Transamination supply"
+     ],
+     [
+      "Bicarbonate, formate (THF)",
+      "C6; C2 and C8",
+      "Folate deficiency impairs synthesis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Salvage** recycles free bases (from diet, turnover, nucleic acid digestion) through HGPRT (hypoxanthine to IMP, guanine to GMP, PRPP consumed) and APRT (adenine to AMP), sparing de novo cost in brain and marrow especially dependent. Partial HGPRT deficiency gives Kelley-Seegmiller (uric overproduction gout, kidney stones, no neurology), complete absence gives Lesch-Nyhan next step, while PRPP synthetase superactivity (feedback resistant X linked) overproduces purines in young men with gout and sensorineural deafness, three overproduction mechanisms examinations rotate.",
+   "say": "Salvage recycles bases through HGPRT and APRT sparing de novo cost in brain especially. Partial HGPRT deficiency causes gout without neurology, while synthetase superactivity overproduces purines in young men.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-nucleotides-fig1.webp",
+    "alt": "Diagram of the purine salvage pathway highlighting the HGPRT block causing uric acid overproduction in Lesch-Nyhan syndrome.",
+    "caption": "Purine salvage pathway and metabolic block in Lesch-Nyhan syndrome.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Lesch-Nyhan syndrome** (HGPRT absent, X linked boys) floods PRPP into de novo overdrive (uric acid stones, gout in childhood) while dopamine systems fail developmentally (choreoathetosis, dystonia, spasticity, intellectual disability) culminating in compulsive self mutilation (lip and finger biting with preserved pain sensation, restraints and dental extraction histories) unexplained mechanistically beyond basal ganglia dopamine deficiency imaging. Allopurinol controls uric consequences lifelong but never neurology, the therapeutic honesty families must hear early.",
+   "say": "Lesch-Nyhan floods de novo synthesis while dopamine systems fail, culminating in compulsive self mutilation with preserved pain sensation. Allopurinol controls uric consequences but never neurology therapeutically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete HGPRT absence (Lesch-Nyhan)",
+     "points": [
+      "Boys, self mutilation, dystonia",
+      "Uric stones in childhood",
+      "Allopurinol: joints yes, brain no"
+     ]
+    },
+    "right": {
+     "title": "Partial HGPRT (Kelley-Seegmiller)",
+     "points": [
+      "Uric overproduction gout",
+      "No neurology",
+      "Allopurinol prevents most harm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Degradation converges on **xanthine oxidase** (molybdenum, FAD, iron sulfur; gut and liver, converted dehydrogenase to oxidase in ischaemia generating ROS in reperfusion): hypoxanthine to xanthine to uric acid (humans and apes lack uricase, an evolutionary loss with antioxidant compensation theories), excreted two thirds kidney (URAT1 reabsorption probenecid blocked, ABCG2 gut and kidney secretion losartan fenofibrate modestly uricosuric) one third gut uricolysis. Overproducers (ten percent, synthesis driven) versus underexcretors (ninety percent, renal handling, CKD, diuretics, lactate and ketones competing secretion) frame gout aetiology investigations.",
+   "say": "Xanthine oxidase makes uric acid humans cannot further degrade without uricase evolutionarily. Underexcretors dominate gout over overproducers, with URAT1 reabsorption and competing organic acids explaining renal handling clinically.",
+   "vis": null
+  },
+  {
+   "tx": "**Gout** crystallises monosodium urate in cool joints (podagra first) when saturation near six point eight is exceeded chronically: needle shaped negatively birefringent intracellular crystals on tap, NLRP3 interleukin-1 fire treated acutely with colchicine, NSAIDs or steroids. Long term treat to target urate under six (under five if tophaceous) with allopurinol first line, febuxostat alternative, and HLA-B*5801 screening in high risk ancestries. Pseudogout rhomboid positively birefringent crystals in elderly knees must never merge.",
+   "say": "Gout shows needle negatively birefringent crystals, treated acutely with colchicine, NSAIDs or steroids and long term to urate under six. Pseudogout rhomboids in elderly knees must never merge diagnostically in examinations or clinics.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-nucleotides-gen1.webp",
+    "alt": "Polarized fields show long gout needles beside small rhomboid pseudogout crystals with opposite birefringence colours.",
+    "caption": "Needle versus rhomboid crystals separating gout from pseudogout, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Attack prophylaxis** during urate lowering initiation (colchicine or NSAID three to six months, never stop allopurinol during attacks), uricosurics (probenecid needs renal function and no stone history, lesinurad historical), pegloticase (recombinant uricase to allantoin in refractory tophaceous, G6PD screening for haemolysis) and rasburicase (tumour lysis prophylaxis, same G6PD haemolysis and methaemoglobinaemia cautions from prior modules) complete gout therapeutics. Asymptomatic hyperuricaemia generally observes without drugs unless tumour lysis, stones or CKD trajectories dictate, restraint examiners now reward.",
+   "say": "Prophylaxis covers urate lowering initiation without stopping allopurinol during attacks ever. Pegloticase and rasburicase need G6PD screening, while asymptomatic hyperuricaemia generally observes without drugs by restraint.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gout decision",
+     "Rule to quote"
+    ],
+    "rows": [
+     [
+      "Acute attack",
+      "Colchicine early, NSAID or steroid; tap if septic doubt"
+     ],
+     [
+      "Long term target",
+      "Urate under 6 mg/dL (under 5 if tophi or severe)"
+     ],
+     [
+      "Starting allopurinol",
+      "Add prophylaxis 3 to 6 months; screen HLA-B*5801 at risk ancestries"
+     ],
+     [
+      "Refractory tophaceous",
+      "Pegloticase after G6PD screen; rasburicase for tumour lysis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
