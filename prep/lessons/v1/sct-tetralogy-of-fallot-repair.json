@@ -1,0 +1,248 @@
+{
+  "v": 1,
+  "module": "sct-tetralogy-of-fallot-repair",
+  "title": "Tetralogy of Fallot: Anatomy, Spells, BT Shunt, Complete Repair and Long-Term PR",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Congenital Heart Disease: Tetralogy of Fallot)",
+    "Kirklin/Barratt-Boyes Cardiac Surgery 4e Ch 24 (Tetralogy of Fallot)",
+    "AHA/ACC Guideline for the Management of Adults With Congenital Heart Disease"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Tetralogy of Fallot is the most common cyanotic congenital heart defect encountered beyond the newborn period. The single unifying developmental embryologic anomaly is anterior and cephalad deviation of the infundibular outlet septum. This primary malalignment produces a large non-restrictive subaortic ventricular septal defect and right ventricular outflow tract obstruction.",
+      "tx": "The anatomical hallmark of Tetralogy of Fallot results from anterior and cephalad **infundibular septum deviation**. This single developmental embryologic error produces 4 classic defects: a large **subaortic VSD**, severe right ventricular **outflow tract obstruction**, overriding aorta across the ventricular septum, and compensatory right ventricular concentric hypertrophy.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-misc-fallot.webp",
+        "ar": 1.3333,
+        "caption": "Tetralogy of Fallot anatomical tetrad and anatomy. Credit: StewardMD.",
+        "alt": "Pathological anatomy of Tetralogy of Fallot classic anatomical tetrad."
+      }
+    },
+    {
+      "say": "Hypercyanotic or tet spells represent life-threatening medical crises caused by acute spasm of the infundibular muscle. Sudden increases in outflow obstruction divert deoxygenated blood across the ventricular septal defect into the aorta. Placing the infant in the knee-chest position increases systemic vascular resistance, while intravenous phenylephrine restores forward pulmonary flow.",
+      "tx": "Acute infundibular spasm precipitates a life-threatening **hypercyanotic spell**, marked by intense cyanosis, hyperpnea, and syncope. Immediate management places the child in the **knee-chest position** to elevate systemic vascular resistance. Intravenous **phenylephrine** raises aortic afterload, driving desaturated blood away from the VSD and restoring forward flow into the pulmonary artery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Agitation, crying, or dehydration triggers infundibular catecholamine surge"
+          },
+          {
+            "id": "b",
+            "label": "Dynamic infundibular muscular spasm markedly increases RVOT resistance"
+          },
+          {
+            "id": "c",
+            "label": "Massive right-to-left shunting across VSD into overriding aorta"
+          },
+          {
+            "id": "d",
+            "label": "Knee-chest position, oxygen, morphine, and phenylephrine restore pulmonary perfusion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Palliative systemic-to-pulmonary shunts are indicated in symptomatic neonates with hypoplastic pulmonary arteries. The modified Blalock-Taussig shunt uses a Gore-Tex tube graft interposed between the subclavian artery and the pulmonary artery. The shunt provides dependable pulmonary blood flow to promote branch vessel growth.",
+      "tx": "Palliative intervention in symptomatic neonates with diminutive pulmonary vasculature utilizes a **modified Blalock-Taussig shunt**. An expanded PTFE interposition tube graft (3.0 to 3.5 mm) is anastomosed between the **subclavian artery** and the ipsilateral branch **pulmonary artery**, establishing reliable pulmonary blood flow without sacrificing native subclavian architecture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic Blalock-Taussig Shunt",
+          "points": [
+            "Direct end-to-side subclavian-to-pulmonary anastomosis",
+            "Sacrifices ipsilateral subclavian artery flow",
+            "Risks arm ischemia and limb growth discrepancy",
+            "Historical technique largely abandoned"
+          ]
+        },
+        "right": {
+          "title": "Modified Blalock-Taussig Shunt",
+          "points": [
+            "PTFE tube graft (3.0 to 4.0 mm) interposition",
+            "Preserves continuous native subclavian distal flow",
+            "Regulates pulmonary blood volume precisely",
+            "Readily clamped and divided at time of complete repair"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Primary complete repair is now the preferred standard strategy for most infants. Elective surgical repair is ideally scheduled between three and six months of age. Surgery is performed under full cardiopulmonary bypass and hypothermic arrest using bicaval cannulation to expose the right atrium.",
+      "tx": "Contemporary practice favors **primary complete repair** performed at an **elective timing** between 3 and 6 months of age, avoiding interim palliative shunt morbidity. Under cardiopulmonary bypass with **bicaval cannulation** and cardioplegic arrest, complete anatomical reconstruction addresses both the intracardiac shunt and the pulmonary outflow tract stenosis.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-ix-paed-cxr_chd.webp",
+        "ar": 1.3333,
+        "caption": "Chest radiograph and boot-shaped cardiac silhouette in Fallot. Credit: StewardMD.",
+        "alt": "Classic boot-shaped heart (coeur en sabot) on chest radiography in Tetralogy of Fallot."
+      }
+    },
+    {
+      "say": "Surgical repair involves resection of obstructive infundibular muscle bundles and patch closure of the ventricular septal defect. Surgeons access the defect through the right atrium and tricuspid valve, avoiding ventriculotomy. A Dacron or glutaraldehyde-treated pericardial patch closes the defect without damaging conduction tissue.",
+      "tx": "Intracardiac repair emphasizes **infundibular resection** of obstructing parietal and septal muscle bands through a right atriotomy. Surgeons achieve **transatrial VSD closure** utilizing a trimmed **Dacron patch** secured with interrupted pledgeted sutures, carefully placing bites along the right ventricular side of the septum to avoid injuring the bundle of His.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Right atriotomy exposure through tricuspid valve orifice"
+          },
+          {
+            "id": "b",
+            "label": "Resect hypertrophied infundibular muscle bands obstructing RVOT"
+          },
+          {
+            "id": "c",
+            "label": "Place pledgeted sutures around VSD perimeter, avoiding conduction axis"
+          },
+          {
+            "id": "d",
+            "label": "Parachute Dacron patch into place and inspect for residual shunt"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When the pulmonary valve annulus is hypoplastic, surgeons enlarge the outflow tract with a transannular patch. Calibrating the pulmonary valve annulus to normal pediatric charts yields a z-score. An annular z-score below minus two to minus three dictates transannular incision and patch reconstruction.",
+      "tx": "When intraoperative sizing demonstrates that the **pulmonary valve annulus** has a **z-score threshold** below negative 2 to 3, relieving stenosis requires an incision across the annulus. Surgeons reconstruct the outflow tract with a **transannular patch** made of treated autologous pericardium, deliberately sacrificing valve competence to abolish residual RVOT obstruction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Annular Sizing Metric",
+          "Pulmonary Valve Annulus Z-Score",
+          "Surgical Reconstructive Technique"
+        ],
+        "rows": [
+          [
+            "Adequate annulus",
+            "Z-score >= -1.5",
+            "Valve-sparing repair; commissurotomy without transannular incision"
+          ],
+          [
+            "Borderline annulus",
+            "Z-score -1.5 to -2.0",
+            "Infundibular resection; balloon dilation or limited subannular patch"
+          ],
+          [
+            "Hypoplastic annulus",
+            "Z-score < -2.0 to -3.0",
+            "Transannular pericardial patch crossing pulmonary valve ring"
+          ],
+          [
+            "Pulmonary atresia",
+            "Absent native valve",
+            "Right ventricle-to-pulmonary artery valved conduit (Rastelli)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "An anomalous coronary artery crossing the right ventricular outflow tract is a critical anatomical variant. In five percent of patients, the left anterior descending artery arises from the right coronary artery. A transannular incision would sever the anomalous vessel, representing a contraindication to transannular patching.",
+      "tx": "In approximately 5 percent of Fallot patients, an **anomalous LAD** arises from the right coronary artery, coursing directly across the anterior surface of the infundibulum. This **anterior RVOT crossing** represents an absolute **transannular contraindication**, as a standard incision would sever the artery, requiring instead an extracardiac valved conduit.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard Coronary Anatomy",
+          "points": [
+            "Normal LAD origin from left coronary trunk",
+            "Clear anterior RVOT surface for ventriculotomy",
+            "Permits transannular incision if annulus is hypoplastic",
+            "Present in 95 percent of Fallot cases"
+          ]
+        },
+        "right": {
+          "title": "Anomalous Crossing LAD (5%)",
+          "points": [
+            "LAD arises anomalously from right coronary sinus",
+            "Traverses directly across anterior infundibulum",
+            "Ventriculotomy causes fatal anterior wall infarction",
+            "Mandates RV-to-PA valved conduit reconstruction"
+          ]
+        }
+      }
+    },
+    {
+      "say": "A transannular patch inevitably produces chronic pulmonary regurgitation and long-term right ventricular dilation. Adult congenital cardiology guidelines mandate elective pulmonary valve replacement before irreversible dysfunction develops. A right ventricular end-diastolic volume index exceeding one hundred and sixty millilitres per square metre is a key threshold.",
+      "tx": "Decades following transannular repair, severe **chronic PR** causes progressive right ventricular volume overload and ventricular arrhythmias. Guidelines recommend elective **pulmonary valve replacement** when the **RV end-diastolic volume** index exceeds 160 mL/m2 on cardiac MRI or when the ejection fraction drops below 47 percent, before irreversible right ventricular fibrosis ensues.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Childhood transannular patch repair leaves free pulmonary valve regurgitation"
+          },
+          {
+            "id": "b",
+            "label": "Progressive right ventricular dilation and QRS duration prolongation (>180 ms)"
+          },
+          {
+            "id": "c",
+            "label": "Serial cardiac MRI surveillance identifies RVEDVI >160 mL/m2 or RVESVI >80 mL/m2"
+          },
+          {
+            "id": "d",
+            "label": "Elective surgical or transcatheter pulmonary valve replacement (Melody/Edwards)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
