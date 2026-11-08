@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "med-peptic-gi-bleed",
+ "subject": "medicine",
+ "title": "Non-variceal mucosal tears, vascular malformations, and lower GI bleeding",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Abrupt elevations in intragastric pressure can provoke traumatic longitudinal lacerations across the gastro-oesophageal junction. Developing a **Mallory-Weiss tear** characteristically occurs after forceful retching, vomiting, coughing, or straining, most frequently following acute heavy binge alcohol consumption. Violent vomiting forces gastric contents against a closed or unrelaxed cardia, producing linear, non-transmural mucosal and submucosal tears immediately across or distal to the squamocolumnar junction. Patients present with initial non-bloody emesis rapidly followed by bright red haematemesis. Bleeding resolves spontaneously in over eighty percent of patients.",
+   "say": "Abrupt surges in intragastric pressure can cause traumatic mucosal lacerations across the gastro-oesophageal junction. Developing a Mallory-Weiss tear occurs typically after violent vomiting, retching or straining, frequently following alcohol binges. Forceful vomiting produces non-transmural longitudinal tears across the squamocolumnar junction. Patients report initial non-bloody vomiting followed by sudden haematemesis. Most tears stop bleeding spontaneously.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mallory-weiss-tear-fig1.webp",
+    "alt": "Longitudinal non-transmural mucosal laceration at the gastro-oesophageal junction.",
+    "caption": "Longitudinal mucosal tear across the gastro-oesophageal junction in Mallory-Weiss syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Differentiating partial-thickness mucosal tears from catastrophic transmural oesophageal perforation is critical for immediate clinical survival. A non-transmural tear confined to mucosa and submucosa characterizes Mallory-Weiss syndrome, presenting with bright red haematemesis and mild epigastric discomfort. In sharp contrast, spontaneous full-thickness transmural rupture termed **Boerhaave syndrome** involves all histological layers of the distal posterolateral oesophagus. Boerhaave syndrome manifests with Mackler triad: violent retching, sudden excruciating retrosternal chest pain, and cervical subcutaneous emphysema (crepitus), accompanied by pneumomediastinum and mediastinitis requiring emergency surgical or endoscopic repair.",
+   "say": "Differentiating mucosal tears from transmural perforation is essential for emergency management. A non-transmural mucosal tear defines Mallory-Weiss syndrome, presenting with haematemesis and mild discomfort. In contrast, full-thickness transmural rupture of the distal oesophagus defines Boerhaave syndrome. Boerhaave syndrome produces the triad of violent retching, severe retrosternal pain and subcutaneous emphysema, leading to mediastinitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mallory-Weiss syndrome",
+     "points": [
+      "Non-transmural mucosal & submucosal tear",
+      "Located at gastro-oesophageal junction (gastric side 80%)",
+      "Presents with bright red haematemesis",
+      "Spontaneous hemostasis in > 80% with PPI support"
+     ]
+    },
+    "right": {
+     "title": "Boerhaave syndrome",
+     "points": [
+      "Full-thickness transmural oesophageal rupture",
+      "Left posterolateral wall of distal oesophagus",
+      "Severe chest pain, subcutaneous emphysema, shock",
+      "Life-threatening mediastinitis requiring surgical repair"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anomalous tortuous submucosal arteriovenous malformations represent the commonest vascular source of recurrent lower digestive hemorrhage in older adults. Developing intestinal **angiodysplasia** (arteriovenous malformation) involves dilated, ectatic, thin-walled submucosal venules and capillaries communicating directly with arterioles, predominantly within the caecum and ascending colon. Chronic colonic muscular contractions obstruct submucosal venous outflow, inducing localized vascular ectasia. Bleeding is typically painless, episodic, and self-limited, presenting with recurrent acute haematochezia or chronic iron deficiency anaemia with occult blood loss. Endoscopy reveals bright red, fern-like, stellate mucosal lesions.",
+   "say": "Tortuous vascular malformations represent the commonest cause of recurrent lower digestive bleeding in older adults. Intestinal angiodysplasia involves dilated, thin-walled capillaries and venules, most commonly in the caecum and ascending colon. Intermittent colonic contractions obstruct venous outflow, producing vascular ectasias. Patients experience painless, intermittent bleeding manifesting as bright red blood or chronic iron deficiency anaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "age",
+      "label": "Aging & chronic colonic muscular contractions"
+     },
+     {
+      "id": "venous",
+      "label": "Intermittent obstruction of submucosal venous drainage"
+     },
+     {
+      "id": "ectasia",
+      "label": "Progressive arteriolar-venous capillary ectasia"
+     },
+     {
+      "id": "bleed",
+      "label": "Thin-walled fragile vessel rupture causing episodic bleeding"
+     }
+    ],
+    "edges": [
+     [
+      "age",
+      "venous"
+     ],
+     [
+      "venous",
+      "ectasia"
+     ],
+     [
+      "ectasia",
+      "bleed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vascular ectasias exhibit strong clinical associations with systemic cardiovascular and haematological disorders. The co-occurrence of colonic angiodysplasia with severe calcific aortic valve stenosis constitutes **Heyde syndrome**. Severe shear stress across the calcified, stenotic aortic valve uncoils and cleaves high-molecular-weight multimers of von Willebrand factor (acquired type 2A von Willebrand disease), precipitating recurrent gastrointestinal bleeding from friable angiodysplastic lesions. Remarkably, definitive surgical or transcatheter aortic valve replacement restores von Willebrand factor multimer integrity, permanently resolving the recurrent gastrointestinal hemorrhage.",
+   "say": "Vascular ectasias show strong associations with specific cardiac conditions. The association of colonic angiodysplasia with severe aortic stenosis defines Heyde syndrome. Shear stress across the stenotic aortic valve cleaves large multimers of von Willebrand factor, predisposing fragile vascular lesions to bleed. Aortic valve replacement restores multimer structure and permanently stops recurrent bleeding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peptic-ulcer-fig2.webp",
+    "alt": "Gastrointestinal mucosal vascularity, capillary ectasia, and mucosal hemorrhage.",
+    "caption": "Mucosal microvascular architecture and pathogenesis of gastrointestinal vascular bleeding. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The physical appearance and color of passed blood reflect the anatomical site of bleeding, transit time, and intraluminal digestive alteration. Evacuating black, tarry, foul-smelling stools termed **melaena** results from the degradation of hemoglobin by intestinal bacteria and digestive enzymes, generating black hematin. Melaena typically indicates bleeding proximal to the ligament of Treitz, requiring at least fifty to one hundred millilitres of blood loss and an intraluminal transit time exceeding fourteen hours. However, massive upper tract hemorrhage with rapid transit can bypass digestion and present with crimson red rectal bleeding.",
+   "say": "The appearance and color of evacuated blood reflect bleeding site and intestinal transit time. Passing dark, tarry, pungent stools termed melaena stems from hemoglobin degradation by digestive enzymes and gut bacteria into black hematin. Melaena typically signals bleeding proximal to the ligament of Treitz. However, massive upper tract hemorrhage with rapid intestinal transit can present as bright red blood.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bleed",
+      "label": "Upper gastrointestinal tract luminal hemorrhage"
+     },
+     {
+      "id": "digest",
+      "label": "Gastric acid & bacterial enzymatic hemoglobin degradation"
+     },
+     {
+      "id": "hematin",
+      "label": "Formation of black hematin pigment (> 14 hr transit)"
+     },
+     {
+      "id": "melaena",
+      "label": "Evacuation of black, tarry, sticky melaena stools"
+     }
+    ],
+    "edges": [
+     [
+      "bleed",
+      "digest"
+     ],
+     [
+      "digest",
+      "hematin"
+     ],
+     [
+      "hematin",
+      "melaena"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Passing fresh, bright red or maroon blood per rectum reflects bleeding distal to the ligament of Treitz or massive rapid upper hemorrhage. Developing acute **haematochezia** is the hallmark of lower gastrointestinal bleeding, originating primarily from colonic diverticulosis (most common cause), colonic angiodysplasia, ischemic colitis, hemorrhoids, or colorectal malignancy. Colonic diverticular bleeding characteristically presents as abrupt, painless, large-volume haematochezia in elderly patients. In hemodynamically unstable patients presenting with haematochezia, an urgent upper endoscopy must precede colonoscopy to rule out a massive, life-threatening upper source.",
+   "say": "Passing fresh red or maroon blood per rectum signals lower tract hemorrhage or massive upper gastrointestinal bleeding. Developing acute haematochezia represents the hallmark of lower tract bleeding, caused predominantly by colonic diverticulosis, angiodysplasias, ischemic colitis or hemorrhoids. Diverticular bleeding characteristically causes painless, abrupt hemorrhage. When patients with haematochezia present in shock, urgent upper endoscopy must exclude an upper source first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiological condition",
+     "Typical clinical presentation",
+     "Endoscopic visual findings",
+     "Definitive management"
+    ],
+    "rows": [
+     [
+      "Diverticular bleeding",
+      "Painless large-volume haematochezia",
+      "Blood issuing from diverticular neck",
+      "Colonoscopic hemoclips or coil embolization"
+     ],
+     [
+      "Colonic angiodysplasia",
+      "Episodic painless bright red blood",
+      "Stellate, fern-like submucosal ectasias",
+      "Argon plasma coagulation (APC)"
+     ],
+     [
+      "Ischemic colitis",
+      "Crampy lower abdominal pain, then bleeding",
+      "Segmental mucosal erythema / sloughing",
+      "Supportive care, hydration, bowel rest"
+     ],
+     [
+      "Internal hemorrhoids",
+      "Bright red blood dripping into toilet bowl",
+      "Engorged prolapsing anal cushions",
+      "Rubber band ligation or infrared coagulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrent or persistent digestive hemorrhage with negative standard upper endoscopy and colonoscopy poses a complex diagnostic challenge. Investigating an **obscure GI bleed** focuses on the twenty feet of small bowel between the ligament of Treitz and the ileocaecal valve. Video capsule endoscopy represents the initial non-invasive investigation of choice, visualizing small bowel angiodysplasias, Crohn ulcers, and neuroendocrine tumors with high sensitivity. For targeted tissue biopsy or therapeutic intervention, deep balloon-assisted enteroscopy (single- or double-balloon enteroscopy) allows active diagnostic advance, argon plasma coagulation, and hemoclip placement.",
+   "say": "Recurrent digestive bleeding that remains unexplained after negative upper endoscopy and colonoscopy requires investigation of the small bowel. Investigating an obscure gastrointestinal bleed focuses on the intestine between the duodenum and ileocaecal valve. Wireless video capsule endoscopy serves as the preferred first-line tool, detecting small bowel vascular lesions and ulcers. For targeted biopsy or hemostasis, deep balloon-assisted enteroscopy provides therapeutic access.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "negative",
+      "label": "Negative initial upper endoscopy and colonoscopy"
+     },
+     {
+      "id": "capsule",
+      "label": "Video capsule endoscopy of entire small bowel lumen"
+     },
+     {
+      "id": "enteroscopy",
+      "label": "Deep balloon-assisted enteroscopy for targeted therapy"
+     },
+     {
+      "id": "angio",
+      "label": "CT angiography / catheter embolization for active bleeding"
+     }
+    ],
+    "edges": [
+     [
+      "negative",
+      "capsule"
+     ],
+     [
+      "capsule",
+      "enteroscopy"
+     ],
+     [
+      "capsule",
+      "angio"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted endoscopic hemostasis using non-contact thermal coagulation effectively seals bleeding mucosal vascular anomalies. Applying **argon plasma coagulation** (APC) delivers high-frequency electrical current conducted through ionized argon gas to achieve superficial, non-contact thermal desiccation of mucosal angiodysplasias. Because thermal penetration is limited to two to three millimetres, APC carries a low risk of transmural colonic perforation, making it ideal for thin-walled caecal lesions. For briskly bleeding lesions or Dieulafoy vascular malformations, endoscopic through-the-scope hemoclips or band ligators provide rapid mechanical hemostasis.",
+   "say": "Targeted endoscopic therapy using thermal coagulation effectively treats mucosal vascular anomalies. Applying argon plasma coagulation delivers electric current through ionized argon gas to achieve superficial, non-contact thermal desiccation of vascular malformations. Because tissue penetration is shallow, it carries low risk of wall perforation, making it safe for thin-walled caecal lesions. Mechanical hemoclips treat briskly bleeding vessels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Argon plasma coagulation (APC)",
+     "points": [
+      "Non-contact thermal delivery through ionized gas",
+      "Superficial coagulation depth (2 to 3 mm)",
+      "Ideal for widespread colonic & gastric angiodysplasias",
+      "Low risk of transmural perforation in right colon"
+     ]
+    },
+    "right": {
+     "title": "Endoscopic hemoclips",
+     "points": [
+      "Direct mechanical apposition of tissue and vessel",
+      "No thermal injury or delayed mucosal necrosis",
+      "Treatment of choice for Dieulafoy vascular lesions",
+      "Permanent vessel closure with subsequent spontaneous slough"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
