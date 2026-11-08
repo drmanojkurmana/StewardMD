@@ -1,0 +1,256 @@
+{
+ "v": 1,
+ "module": "med-mpn",
+ "subject": "medicine",
+ "title": "Myeloproliferative Neoplasms and Myelofibrosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A chronic myeloproliferative neoplasm characterized by sustained clonal megakaryocytic proliferation and persistent thrombocytosis carries significant thrombotic and haemorrhagic risks. In **essential thrombocythaemia** (ET), sustained platelet counts exceeding 450,000 per microlitre occur in the absence of reactive inflammatory causes. Over fifty percent of patients harbour the JAK2 V617F mutation, twenty-five percent carry calreticulin (CALR) exon 9 frameshift mutations, and four percent have MPL mutations. Patients present with microvascular erythromelalgia, arterial or venous thromboses, or paradoxically with mucosal bleeding when extreme thrombocytosis exceeding one million consumes large von Willebrand factor multimers.",
+   "say": "A chronic myeloproliferative neoplasm characterized by sustained megakaryocytic proliferation and elevated platelet counts carries thrombotic and haemorrhagic risks. In essential thrombocythaemia, sustained platelet counts exceeding 450,000 occur without reactive inflammatory causes. Patients harbour mutations in JAK2, calreticulin, or MPL genes. Patients present with microvascular burning pain, thromboses, or mucosal bleeding when extreme thrombocytosis produces acquired von Willebrand syndrome.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/essential-thrombocythemia-fig1.webp",
+    "alt": "Bone marrow histology showing large, mature, hyperlobated megakaryocytes in clusters in essential thrombocythaemia.",
+    "caption": "Marrow histology demonstrating hyperlobated staghorn megakaryocytic hyperplasia in essential thrombocythaemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clonal megakaryocyte hyperplasia driving neoplastic release of fibroblast growth factors precipitates progressive bone marrow fibrosis and extramedullary haematopoiesis. Clinically recognized as **primary myelofibrosis** (PMF), atypical clonal megakaryocytes secrete transforming growth factor-beta (TGF-beta) and platelet-derived growth factor (PDGF). These cytokines stimulate polyclonal marrow fibroblasts, causing extensive collagen deposition and marrow obliteration. Progressive marrow failure forces haematopoietic stem cells into the spleen and liver, producing massive, symptomatic hepatosplenomegaly, severe constitutional B-symptoms (cachexia, fatigue, night sweats), and portal hypertension.",
+   "say": "Clonal megakaryocyte hyperplasia driving neoplastic release of fibroblast growth factors precipitates progressive bone marrow fibrosis and extramedullary haematopoiesis. Clinically recognized as primary myelofibrosis, atypical megakaryocytes secrete transforming growth factor-beta and platelet-derived growth factor. These cytokines stimulate marrow fibroblasts, causing collagen deposition and marrow obliteration. Progressive marrow displacement drives extramedullary haematopoiesis into the spleen and liver, producing massive hepatosplenomegaly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myeloproliferative-and-myelodysplastic-syndromes-fig1.webp",
+    "alt": "Peripheral blood smear showing leucoerythroblastic picture with prominent teardrop poikilocytes in myelofibrosis.",
+    "caption": "Leucoerythroblastic peripheral blood smear showing nucleated red cells and teardrop cells (dacrocytes). [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Extensive reticulin and collagen fibrosis encasing marrow trabeculae prevents liquid marrow aspiration during diagnostic procedures. Attempting marrow aspiration yields a characteristic **dry tap**, necessitating a core trephine bone marrow biopsy for histopathological evaluation. Reticulin and trichrome silver staining demonstrates dense, diffuse collagen fibrosis (grade MF-2 or MF-3). As haematopoietic stem cells escape the fibrotic marrow environment into peripheral sinusoidal beds, extramedullary haematopoiesis establishes secondary marrow colonies within the red pulp of the spleen, occasionally enlarging the spleen into the pelvis.",
+   "say": "Extensive reticulin and collagen fibrosis encasing marrow trabeculae prevents liquid marrow aspiration during diagnostic procedures. Attempting marrow aspiration yields a characteristic dry tap, necessitating a core trephine biopsy for histopathological confirmation. Silver staining demonstrates dense reticulin and collagen fibrosis throughout the marrow. Displaced haematopoietic stem cells establish secondary colonies within the red pulp of the spleen, producing massive splenomegaly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "clon",
+      "label": "Clonal Megakaryocyte Hyperplasia (JAK2 / CALR / MPL)"
+     },
+     {
+      "id": "tgf",
+      "label": "Pathological Secretion of TGF-beta & PDGF Fibrogenic Cytokines"
+     },
+     {
+      "id": "dry",
+      "label": "Diffuse Reticulin & Collagen Fibrosis: Dry Tap on Aspirate"
+     },
+     {
+      "id": "emh",
+      "label": "Extramedullary Haematopoiesis: Splenomegaly & Cytopenias"
+     }
+    ],
+    "edges": [
+     [
+      "clon",
+      "tgf"
+     ],
+     [
+      "tgf",
+      "dry"
+     ],
+     [
+      "dry",
+      "emh"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Premature egress of red blood cells through fibrotic marrow sinuses and distorted splenic cords deforms the erythrocyte membrane into a classic morphology. The peripheral blood film displays **teardrop cells** (dacrocytes), formed as erythrocytes are mechanically stretched during transudation across distorted, tight endothelial pores. Concurrently, premature release of immature erythroid and myeloid precursors produces a leucoerythroblastic blood picture, featuring nucleated red blood cells, myelocytes, and metamyelocytes alongside giant bizarre platelets, serving as an unmistakable diagnostic signal of marrow infiltrative disease.",
+   "say": "Premature egress of red blood cells through fibrotic marrow sinuses and distorted splenic cords deforms the erythrocyte membrane into a classic morphology. The peripheral blood film displays teardrop cells, formed as erythrocytes are mechanically stretched squeezing through tight endothelial pores. Concurrently, premature release of immature precursors produces a leucoerythroblastic blood picture with nucleated red cells and myelocytes, signaling marrow infiltration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peripheral Smear Feature",
+     "Cytological Description",
+     "Pathophysiological Origin",
+     "Clinical Association"
+    ],
+    "rows": [
+     [
+      "Teardrop Cells (Dacrocytes)",
+      "Erythrocytes with tapered, pear-shaped tail",
+      "Mechanical stretching escaping fibrotic marrow",
+      "Primary Myelofibrosis / Myelophthisic processes"
+     ],
+     [
+      "Leucoerythroblastic Picture",
+      "Nucleated RBCs + immature granulocytes",
+      "Disrupted marrow blood barrier & extramedullary output",
+      "Severe myelofibrosis, marrow metastasis"
+     ],
+     [
+      "Giant Platelets",
+      "Platelets larger than normal erythrocytes",
+      "Dysplastic clonal megakaryocyte fragmentation",
+      "Essential Thrombocythaemia / PMF"
+     ],
+     [
+      "Basophilia & Eosinophilia",
+      "Elevated circulating granular leukocytes",
+      "Clonal multipotent progenitor expansion",
+      "Chronic Myeloid Leukaemia / MPNs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted inhibition of constitutive Janus kinase signaling provides substantial symptom relief and splenomegaly reduction in myelofibrosis. Prescribing oral **ruxolitinib**, a potent selective inhibitor of JAK1 and JAK2 kinases, blunts downstream pro-inflammatory cytokine cascades and abnormal clonal signaling regardless of JAK2 mutation status. Clinical trials demonstrated rapid, dramatic shrinkage of massive splenomegaly, resolution of debilitating constitutional B-symptoms, and improved quality of life and overall survival. Dose-dependent adverse effects include dose-limiting thrombocytopenia and anaemia, which require regular complete blood count monitoring and dose titration.",
+   "say": "Targeted inhibition of constitutive Janus kinase signaling provides substantial symptom relief and splenomegaly reduction in myelofibrosis. Prescribing oral ruxolitinib, a potent selective inhibitor of JAK1 and JAK2, blunts pro-inflammatory cytokine cascades and abnormal clonal signaling. Clinical trials demonstrated rapid shrinkage of massive splenomegaly, resolution of debilitating constitutional symptoms, and improved overall survival. Dose-dependent adverse effects include thrombocytopenia and anaemia, requiring regular monitoring.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ruxolitinib Mechanism & Benefits",
+     "points": [
+      "Selective JAK1 and JAK2 kinase inhibitor",
+      "Suppresses pro-inflammatory cytokines (IL-6, TNF)",
+      "Dramatically reduces massive splenomegaly",
+      "Resolves constitutional fevers, sweats, and cachexia",
+      "Effective in both JAK2-mutated and CALR-mutated PMF"
+     ]
+    },
+    "right": {
+     "title": "Clinical Adverse Effects & Monitoring",
+     "points": [
+      "Dose-dependent thrombocytopenia",
+      "Dose-dependent normocytic anaemia",
+      "Increased susceptibility to herpes zoster and infections",
+      "Requires complete blood count monitoring every 2-4 weeks",
+      "Dose titrated according to baseline platelet count"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The genetic landscape of BCR-ABL1 negative myeloproliferative neoplasms features three major driver mutations that dictate clinical phenotype and prognosis. While JAK2 V617F occurs in nearly all polycythaemia vera and half of ET and PMF, mutations in calreticulin (**calr**) occur in twenty to twenty-five percent of ET and PMF. Patients with CALR mutations are typically younger, have lower thrombotic risk, and significantly longer overall survival than JAK2-mutated patients. Activating mutations in the thrombopoietin receptor (MPL) occur in five percent of cases.",
+   "say": "The genetic landscape of BCR-ABL1 negative myeloproliferative neoplasms features three major driver mutations that dictate clinical phenotype and prognosis. While JAK2 occurs in most polycythaemia vera and half of ET and PMF, mutations in calreticulin occur in twenty to twenty-five percent of ET and PMF. Patients with calreticulin mutations are typically younger, have lower thrombotic risk, and significantly longer overall survival. Mutations in the thrombopoietin receptor MPL occur in five percent of cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Driver Mutation",
+     "Polycythaemia Vera",
+     "Essential Thrombocythaemia",
+     "Primary Myelofibrosis",
+     "Prognostic Significance"
+    ],
+    "rows": [
+     [
+      "JAK2 V617F (Exon 14)",
+      "> 95%",
+      "50% to 60%",
+      "50% to 60%",
+      "Higher thrombotic risk, older presentation"
+     ],
+     [
+      "JAK2 Exon 12",
+      "2% to 3%",
+      "Absent (0%)",
+      "Absent (0%)",
+      "Isolated erythrocytosis, normal platelets"
+     ],
+     [
+      "CALR (Exon 9 InDels)",
+      "Absent (0%)",
+      "20% to 25%",
+      "25% to 35%",
+      "Younger age, lower thrombosis, superior survival"
+     ],
+     [
+      "MPL (Codon 515)",
+      "Absent (0%)",
+      "3% to 5%",
+      "5% to 8%",
+      "Higher risk of transfusion-dependent anaemia"
+     ],
+     [
+      "Triple Negative",
+      "Strictly Absent",
+      "10% to 15%",
+      "8% to 10%",
+      "Poor prognosis, requires NGS testing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Risk stratification in essential thrombocythaemia determines whether patients require simple antiplatelet therapy or aggressive cytoreductive intervention. Low-risk patients (age under sixty years, no prior thrombosis, and absence of JAK2 mutation) are managed safely with low-dose aspirin alone. In high-risk patients (age sixty or older, or any history of arterial or venous thrombosis), cytoreductive therapy with oral **hydroxyurea** is mandatory to reduce platelet counts below 400,000 per microlitre. Anagrelide, an oral phosphodiesterase-3 inhibitor that blocks megakaryocyte polyploidization, represents an effective second-line alternative in intolerant or refractory patients.",
+   "say": "Risk stratification in essential thrombocythaemia determines whether patients require simple antiplatelet therapy or aggressive cytoreductive intervention. Low-risk patients under sixty years with no prior thrombosis are managed safely with low-dose aspirin alone. In high-risk patients over sixty or with prior thrombosis, cytoreductive therapy with oral hydroxyurea is mandatory to reduce platelet counts. Anagrelide represents an effective second-line agent for patients intolerant of hydroxyurea.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "et",
+      "label": "Confirmed Essential Thrombocythaemia (PLT > 450,000/mcL)"
+     },
+     {
+      "id": "strat",
+      "label": "Risk Stratification: Age >= 60 or Prior Thrombosis"
+     },
+     {
+      "id": "low",
+      "label": "Low Risk: Low-Dose Aspirin (75-100 mg daily) Alone"
+     },
+     {
+      "id": "high",
+      "label": "High Risk: Hydroxyurea + Low-Dose Aspirin (Target PLT < 400,000)"
+     }
+    ],
+    "edges": [
+     [
+      "et",
+      "strat"
+     ],
+     [
+      "strat",
+      "low"
+     ],
+     [
+      "strat",
+      "high"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Allogeneic haematopoietic stem cell transplantation represents the only curative therapeutic modality for primary myelofibrosis, though it carries substantial procedure-related mortality. Candidate selection utilizes the Dynamic International Prognostic Scoring System (DIPSS Plus), reserving transplantation for intermediate-2 or high-risk patients. Because massive splenomegaly can impede haematopoietic engraftment, pre-transplant therapy with ruxolitinib is administered to shrink the spleen and resolve constitutional symptoms. For older or frail patients ineligible for transplantation, supportive therapy focuses on erythropoietin-stimulating agents, danazol, transfusions, and **ruxolitinib** for symptom palliation.",
+   "say": "Allogeneic haematopoietic stem cell transplantation represents the only curative therapeutic modality for primary myelofibrosis, though it carries substantial procedure-related mortality. Candidate selection utilizes the DIPSS Plus prognostic system, reserving transplantation for higher-risk patients. Pre-transplant therapy with ruxolitinib is administered to shrink massive splenomegaly and resolve constitutional symptoms. For older patients ineligible for transplant, supportive therapy focuses on transfusions and ruxolitinib.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Allogeneic Stem Cell Transplant",
+     "points": [
+      "Sole curative therapy for primary myelofibrosis",
+      "Indicated for Intermediate-2 or High DIPSS-Plus risk",
+      "Requires HLA-matched sibling or unrelated donor",
+      "Pre-transplant ruxolitinib shrinks massive spleen",
+      "Carries 20-30% treatment-related mortality"
+     ]
+    },
+    "right": {
+     "title": "Supportive Medical Palliation",
+     "points": [
+      "Ruxolitinib / Fedratinib for spleen and B-symptoms",
+      "Erythropoietin / Danazol for refractory anaemia",
+      "Leukodepleted packed RBC transfusions as needed",
+      "Iron chelation for chronic transfusion hemosiderosis",
+      "Low-dose splenic radiation for refractory splenomegaly"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
