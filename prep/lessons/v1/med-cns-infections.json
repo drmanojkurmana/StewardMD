@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-cns-infections",
- "subject": "medicine",
- "title": "Meningitis, encephalitis and brain abscess",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**fever** headache vomit photophobia, **neck** stiffness Kernig Brudzinski rash, **herpes** temporal confusion seizures smell, **abscess** ear sinus teeth immune, **TB** weeks weight contacts HIV, **exposures** travel animals water vaccines) with **viva** (**meningitic** Kernig photophobic, **encephalitic** confused seizing) profiles; **tempo** (hours bacterial sorts) clocks. Meninges inflame.",
-   "say": "Fevers necks herpes abscesses is history: TBs linger exposures bite tempos clock meningitics stiffen encephalitics seize rashes spot ears seed. Heads infect.",
-   "vis": null
-  },
-  {
-   "tx": "**Examination** (**Kernig** hip knee resists, **Brudzinski** neck hips flex, **rash** purpuric meningococcal glass, **temporal** dysphasia hallucinates smells, **papilloedema** abscess focal mass, **otitis** sinus teeth sources, **GCS** encephalitic coma grades, **seizures** herpes warns) with **bedside** (**non-blanching** glass tests, **glucose** hypo fits, **sepsis** fluids cultures) glasses; **isolation** (droplet masks) guards. Necks stiffen.",
-   "say": "Kernigs Brudzinskis rashes temporals is exam: papilloedemas bulge otitides seed GCSs sink seizures warn glasses press glucoses correct sepses fill isolations mask contacts trace. Brains swell.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**LP** opening pressure cloudy bacteria, **glucose** low protein high neutrophils, **PCR** herpes TB cryptococcal, **CT** before LP mass papilloedema, **blood** cultures lactate procalcitonin, **MRI** temporal abscess ring) with **differentials** (**bacterial** neutrophils low glucose, **viral** lymphocytes normal, **TB** weeks low chloride, **abscess** ring source) sorts; **microbiology** (de-escalates decides) meets. Fluids cloud.",
-   "say": "LPs glucoses PCRs CTs is Ix: bloods culture MRIs ring bacterials cloud virals clear TBs linger abscesses wall microbiologists meet drugs narrow steroids time. Taps diagnose.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-cns-infections-fig1.webp",
-    "alt": "A composite image showing cloudy and clear CSF tubes with labels for bacterial and viral meningitis, alongside an MRI scan of a brain with a ring-enhancing abscess.",
-    "caption": "CSF analysis and MRI differentiate meningitis types and brain abscess. Image: Aimun AB Jamjoom , Abrar R Waliuddin and Abdulhakim B Jamjoom, CC BY 2.5, Wikimedia Commons.",
-    "ar": 0.9658
-   }
-  },
-  {
-   "tx": "**Management** (**ceftriaxone** hours dexamethasone before, **acyclovir** temporal confusion early, **abscess** aspirate excise weeks, **TB** months steroids HIV, **seizures** levetiracetam controls, **raised** head osmotherapy ICU, **contacts** prophylaxis vaccines) with **traps** (**delay** antibiotics kills, **LP** herniates mass, **steroid** late misses) closes; **follow** (hearing neuro sequelae) tracks. Meninges clear.",
-   "say": "Ceftriaxones acyclovirs abscesses TBs is Rx: seizures calm raisings lower contacts shield delays kill LPs cone steroids miss follows track hearings test sequelae watch wishes respect. Fevers settle.",
-   "vis": null
+  "v": 1,
+  "module": "med-cns-infections",
+  "subject": "medicine",
+  "title": "Meningitis, encephalitis and brain abscess",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Record fever with headache, vomiting and **photophobia**, neck stiffness with a purpuric rash, and temporal lobe clues of confusion, seizures and strange smells suggesting **herpes encephalitis**. Ask about ear discharge with sinus or dental sepsis pointing to abscess, and weeks of weight loss with tuberculosis contacts or HIV risk. Note travel with animal and water exposure plus vaccine history, because tempo separates **bacterial meningitis** over hours from slower mimics.",
+      "say": "Ask about fever with headache, vomiting and pain in bright light, then ask whether the neck feels stiff and whether any rash has appeared. Confusion with seizures and strange smells points toward the temporal lobe and herpes infection. Ask about ear discharge and sinus or dental sepsis that could seed an abscess, and about weeks of weight loss with tuberculosis contacts. Travel, animal contact and vaccines complete the history because speed of onset separates bacterial disease.",
+      "vis": null
+    },
+    {
+      "tx": "Test **neck stiffness** with Kernig extension and Brudzinski flexion responses, press a glass against any rash to confirm a **non blanching purpura** of meningococcal septicaemia, and assess temporal lobe function for dysphasia with hallucinations. Look for papilloedema with focal deficit suggesting abscess or mass, inspect ears with sinuses and teeth for a source, and record **conscious level** with seizure activity before giving fluids and cultures.",
+      "say": "Test for neck stiffness by extending the knee with the hip flexed and by flexing the neck to watch the hips. Press a glass tumbler against any rash to see whether the spots fade, because persistence means bleeding into the skin. Assess speech, behaviour and smell for temporal lobe involvement, look into the eyes for swelling of the disc, and examine the ears, sinuses and teeth for a source before you record consciousness and start fluids.",
+      "vis": null
+    },
+    {
+      "tx": "The photograph shows a forearm studded with purple **non blanching spots** that stay visible through the pressed glass tumbler, confirming **purpuric rash** of meningococcal disease. Labels link the finding with Kernig and Brudzinski signs plus **temporal confusion** from brain involvement. In the exam, treat this rash as septicaemia until proven otherwise, start fluids with blood cultures, and give antibiotics without waiting for further tests.",
+      "say": "Look at the forearm where purple spots of different sizes remain clearly visible through the glass pressed on the skin. Because they do not fade with pressure, they represent bleeding into the skin from meningococcal septicaemia rather than a simple viral rash. This finding belongs with neck stiffness and confusion in the same examination. Treat it as an emergency, send blood cultures, give fluids and start antibiotics at once.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-cns-infections-gen1.webp",
+        "alt": "Forearm with purple non-blanching spots pressed under glass tumbler; labels Kernig and Brudzinski signs and temporal confusion.",
+        "caption": "Clinical photograph of non-blanching purpuric forearm rash under glass. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Measure opening pressure at **lumbar puncture** with cloudy fluid suggesting bacteria, and read low glucose with high protein and neutrophils against lymphocytic viral patterns. Use **polymerase chain reaction** testing for herpes, tuberculosis and cryptococcus, image first with CT when papilloedema or focal signs threaten herniation, and add blood cultures with lactate. Request **magnetic resonance** imaging for temporal swelling and ring enhancing abscess.",
+      "say": "Perform lumbar puncture when imaging shows it is safe, and record the opening pressure with the appearance of the fluid. Low sugar with high protein and neutrophils favours bacterial infection, while lymphocytes with normal sugar favour viral disease, which guides early therapy. Send the fluid for molecular testing for herpes, tuberculosis and cryptococcal infection, culture the blood, and request brain imaging to reveal temporal swelling or a ring of abscess wall.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-cns-infections-fig1.webp",
+        "alt": "A composite image showing cloudy and clear CSF tubes with labels for bacterial and viral meningitis, alongside an MRI scan of a brain with a ring-enhancing abscess.",
+        "caption": "CSF analysis and MRI differentiate meningitis types and brain abscess. Image: Aimun AB Jamjoom , Abrar R Waliuddin and Abdulhakim B Jamjoom, CC BY 2.5, Wikimedia Commons.",
+        "ar": 0.9658
+      }
+    },
+    {
+      "tx": "Give **ceftriaxone promptly** with dexamethasone before or with the first dose, and start **aciclovir early** when temporal confusion or seizures suggest herpes. Aspirate or excise a brain abscess with prolonged antibiotics, treat tuberculosis over months with steroids and HIV review, and control seizures with **levetiracetam**. Nurse the head up with osmotherapy in intensive care for raised pressure, and offer prophylaxis with vaccines to close contacts.",
+      "say": "Give antibiotics within the hour when bacterial meningitis is possible, with a steroid dose before or alongside the first injection. Start antiviral treatment at once when confusion or seizures suggest herpes involving the temporal lobe. Drain a brain abscess surgically and continue antibiotics for weeks, treat tuberculosis over months with steroids, and control seizures while supporting raised pressure in intensive care. You should trace contacts for preventive treatment and vaccines.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-551",
+    "bk2-med-552",
+    "bk2-med-553",
+    "bk2-med-554",
+    "bk2-med-555",
+    "bk2-med-556",
+    "bk2-med-557",
+    "bk2-med-558",
+    "bk2-med-559",
+    "bk2-med-560"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon6",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ],
- "quiz": [
-  "bk2-med-551",
-  "bk2-med-552",
-  "bk2-med-553",
-  "bk2-med-554",
-  "bk2-med-555",
-  "bk2-med-556",
-  "bk2-med-557",
-  "bk2-med-558",
-  "bk2-med-559",
-  "bk2-med-560"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon6",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
 }

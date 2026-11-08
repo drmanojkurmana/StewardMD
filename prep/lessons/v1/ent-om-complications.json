@@ -3,16 +3,16 @@
  "module": "ent-om-complications",
  "subject": "ent",
  "title": "Complications of otitis media",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
-   "tx": "**Key point.** Middle ear infection spreads beyond its box by direct bone erosion, thrombophlebitic veins or preformed pathways into mastoid, labyrinth, meninges, brain and sigmoid sinus. Antibiotics reduced but never abolished these complications, and chronic cholesteatoma erodes silently toward them. Any ear infection with headache, fever persistence, swelling or neurology is complicated until assessed.",
-   "say": "Ear infection escaping its box threatens mastoid, brain and venous sinuses. Headache, swelling or neurology with ear disease means complication until checked.",
+   "tx": "Middle ear infection escapes through **direct bone erosion**, infected veins, or preformed pathways into the mastoid, labyrinth, meninges, brain, and **sigmoid sinus**. Antibiotics have reduced these complications without abolishing them, and **cholesteatoma** erodes silently toward the same targets. Any ear infection with persistent headache, ongoing fever, new swelling, or focal neurology carries a complication until imaging and specialist review prove otherwise.",
+   "say": "Infection of the middle ear can escape through eroded bone, infected veins, or natural pathways into nearby structures. Antibiotics have reduced these complications greatly but have never abolished them completely. A skin lined sac called cholesteatoma remains especially dangerous because it erodes bone silently over months. Any ear infection with persistent headache, ongoing fever, fresh swelling, or new neurology requires urgent imaging and specialist review.",
    "vis": null
   },
   {
-   "tx": "**Acute mastoiditis** follows otitis media when pus fills mastoid air cells and erodes their septa: postauricular swelling pushes the pinna forward and down, with fever and mastoid tenderness. Subperiosteal abscess fluctuates behind the ear; Bezold abscess tracks into the neck. CT confirms coalescent mastoiditis; drainage plus mastoid surgery treats abscess or intracranial extension.",
-   "say": "Mastoiditis swells behind the ear pushing pinna out. Abscess or brain spread needs drainage and mastoid surgery.",
+   "tx": "**Acute mastoiditis** follows otitis media when pus fills the mastoid air cells and dissolves their thin septa. Swelling behind the ear pushes the **pinna** forward and down, with fever and marked mastoid tenderness. A fluctuant subperiosteal abscess or a **Bezold abscess** tracking into the neck confirms advanced spread. **Contrast CT** confirms coalescent disease, and drainage with mastoid surgery treats abscess or intracranial extension.",
+   "say": "Mastoiditis develops when pus fills the air cells behind the ear and dissolves the thin walls between them. Swelling behind the ear pushes the pinna forward and downward, and the child remains febrile with marked tenderness. A soft fluctuant swelling confirms a collection under the skin, while spread into the neck indicates a Bezold abscess. Scans confirm coalescent disease, and surgeons drain the pus and remove diseased air cells.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/ent-om-complications-fig1.webp",
@@ -22,13 +22,24 @@
    }
   },
   {
-   "tx": "Intracranial spread causes **meningitis** (commonest intracranial complication), extradural and subdural empyema, and temporal lobe or cerebellar **brain abscess** classically with headache, fever, seizures or focal signs and a swinging course. Otogenic abscesses often grow mixed anaerobes and gram negatives. Neurosurgical drainage plus ear surgery and prolonged antibiotics are combined.",
-   "say": "Ear brain abscesses hide in temporal lobe and cerebellum with headache and seizures. Drain brain and ear together with long antibiotics.",
+   "tx": "Intracranial spread most often produces **meningitis**, the commonest intracranial complication, along with extradural and subdural empyema. Temporal lobe or cerebellar **brain abscess** presents with headache, fever, seizures, or focal signs and a swinging febrile course. Otogenic abscesses often grow mixed anaerobes and gram negative organisms. Cure requires **neurosurgical drainage** with ear surgery and prolonged antibiotics together.",
+   "say": "Spread inside the skull most often produces meningitis, which remains the commonest intracranial complication of ear disease. Collections of pus can also gather outside or under the dura, while temporal lobe or cerebellar abscesses produce headache, fever, seizures, or focal signs. The fever often rises and falls dramatically between rigors and sweats. Cure requires joint drainage by brain and ear surgeons with prolonged antibiotics that cover mixed anaerobes.",
    "vis": null
   },
   {
-   "tx": "**Lateral (sigmoid) sinus thrombophlebitis** seeds picket fence swinging fevers with rigors as infected clot showers the bloodstream, plus papilloedema from venous hypertension. Gradenigo syndrome combines otorrhoea, retro-orbital pain (trigeminal) and abducens palsy from petrous apex inflammation. Labyrinthitis and facial palsy complete the classic complication catalogue tested repeatedly.",
-   "say": "Swinging rigors with ear disease mean infected sinus clot. Eye pain plus double vision plus discharging ear means Gradenigo at the petrous tip.",
+   "tx": "The axial scan displays a ring enhancing temporal **brain abscess** with surrounding swelling beside the diseased mastoid, proving **otogenic spread**. This matches the intracranial step where headache, fever, and seizures complicate chronic ear disease. In the exam, link a temporal or cerebellar ring lesion with combined **neurosurgical drainage**, ear surgery, and prolonged **antibiotics**.",
+   "say": "This axial scan presents a bright ring lesion in the temporal lobe with dark swelling around it, lying beside the diseased mastoid. The picture proves that infection has spread from the ear into the brain. Such lesions produce headache, fever, and seizures with a swinging course. Cure requires combined drainage by brain and ear surgeons with prolonged antibiotics that cover mixed organisms.",
+   "vis": {
+    "alt": "Axial head CT showing right temporal ring-enhancing abscess with surrounding edema adjacent to mastoid consistent with otogenic spread.",
+    "ar": 1.3393,
+    "caption": "Axial CT showing ring-enhancing temporal lesion from otogenic spread. Illustration: StewardMD original.",
+    "kind": "image",
+    "src": "v1/lessons/media/ent-om-complications-gen1.webp"
+   }
+  },
+  {
+   "tx": "**Lateral sinus thrombophlebitis** showers infected clot into the bloodstream and produces picket fence swinging fevers with rigors, plus papilloedema from venous hypertension. **Gradenigo syndrome** combines discharging ear, retro orbital pain, and abducens palsy from **petrous apex** inflammation. Labyrinthitis with vertigo and facial palsy complete the classic complication set that exams love, and each pattern points to its site.",
+   "say": "An infected clot in the lateral sinus showers bacteria into the blood and produces swinging fevers with rigors. Raised venous pressure can swell the optic discs and blur vision over days. Gradenigo syndrome combines a discharging ear with deep eye pain and double vision from an abducens palsy. The pattern points to inflammation at the petrous apex of the temporal bone. Vertigo with facial weakness remains part of the classic set of complications.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -61,8 +72,8 @@
    }
   },
   {
-   "tx": "**Key point.** Facial nerve traverses the middle ear and mastoid, so infection or cholesteatoma paralyses it; labyrinthine fistula gives vertigo on pressure. Management principles never change: image urgently, start broad antibiotics per protocol, involve ENT and neurosurgery, and operate the ear source once the patient is stabilised. Lumbar puncture waits for imaging when abscess or raised pressure is possible.",
-   "say": "Facial palsy or pressure vertigo with ear disease signals nerve or labyrinth breach. Scan first, puncture later when pressure threatens.",
+   "tx": "The **facial nerve** crosses the middle ear and mastoid, so infection or cholesteatoma can paralyse it, while a labyrinthine fistula causes vertigo on pressure or loud sound. Management always starts with urgent imaging and broad **antibiotics**, with ENT and neurosurgery involved early. Surgeons tackle the ear source once the patient stabilises. **Lumbar puncture** waits until imaging excludes abscess or raised pressure.",
+   "say": "The facial nerve crosses the middle ear, so infection or cholesteatoma can paralyse the face within hours. A leak into the labyrinth produces vertigo whenever pressure or loud sound disturbs the inner ear. Management always starts with urgent imaging and broad antibiotics, and senior ENT and brain surgeons join the team early. Surgeons tackle the ear source once the patient stabilises and remains fit for theatre. Spinal fluid sampling remains unsafe until scans exclude abscess or raised pressure.",
    "vis": null
   }
  ],

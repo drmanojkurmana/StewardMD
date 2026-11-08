@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-myeloma",
- "subject": "medicine",
- "title": "Multiple myeloma and plasma cell disorders",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**back** pain pathological ribs falls, **anaemia** fatigue infections shingles, **renal** thirst polyuria casts, **calcium** thirst confusion stones, **neuropathy** carpal amyloid tongue, **clots** thalidomide strokes, **MGUS** incidental gap watches) with **viva** (**myelomatous** aching anaemic, **amyloid** macroglossic purpuric) profiles; **CRAB** (calcium renal anaemia bones tallies) tallies. Plasma clones.",
-   "say": "Backs anaemias renals calciums is history: neuropathies tingle clots stroke MGUSs hide CRABs tally myelomas ache amyloids thicken tongues knot purpuras dot. Bones dissolve.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**pallor** anaemic rouleaux ESR, **spine** tender gibbus cord signs, **macroglossia** amyloid dental scallops, **purpura** periorbital amyloid pinch, **neuropathy** carpal stocking, **bones** ribs skull tenderness, **oedema** nephrotic cardiac, **infections** shingles chest) with **bedside** (**protein** gap albumin globulin, **urine** Bence Jones dip, **calcium** thirst confusion) gaps; **height** (loss measures) measures. Skeletons moth-eat.",
-   "say": "Pallors spines macroglossias purpuras is exam: neuropathies numb bones ache oedemas swell infections strike proteins gap urines spill calciums climb heights shrink replacements guard. Backs break.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**electrophoresis** M spike immunofixation types, **light** chains ratio renal sorts, **marrow** 10 percent clonal proves, **X-ray** punched pepper skull, **MRI** cord compression hunts, **amyloid** fat pad Congo reds) with **differentials** (**myeloma** CRAB clonal, **MGUS** small watches, **smouldering** high observes, **amyloid** Congo tongue) sorts; **haematology** (transplant decides) meets. Proteins spike.",
-   "say": "Electrophoreses lights marrows X-rays is Ix: MRIs squeeze amyloids stain myelomas spike MGUSs idle smoulderings wait amyloids redden haematologists meet proteasomes block transplants harvest. Gaps widen.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-myeloma-fig1.webp",
-    "alt": "A composite image showing an M-spike on electrophoresis, lytic skull lesions on X-ray, and clonal plasma cells in bone marrow, illustrating multiple myeloma diagnosis.",
-    "caption": "Multiple myeloma: key diagnostic findings",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**bortezomib** lenalidomide dexamethasone kills, **transplant** young autologous harvests, **bisphosphonate** bones pain guards, **renal** fluids urgent dialysis, **amyloid** daratumumab hearts, **vaccinate** shingles flu guards, **cord** dexamethasone operates) with **traps** (**renal** contrast NSAID kills, **clots** IMiD anticoagulates, **infection** neutropenic treats) closes; **follow** (paraprotein chains marrow) tracks. Clones suppressed.",
-   "say": "Bortezomibs transplants bisphosphonates renals is Rx: amyloids calm vaccinates shield cords free renals fail clots thin infections strike follows track spikes flatten wishes respect. Marrows clear.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-621",
-  "bk2-med-622",
-  "bk2-med-623",
-  "bk2-med-624",
-  "bk2-med-625",
-  "bk2-med-626",
-  "bk2-med-627",
-  "bk2-med-628",
-  "bk2-med-629",
-  "bk2-med-630"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon7",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-myeloma",
+  "quiz": [
+    "bk2-med-621",
+    "bk2-med-622",
+    "bk2-med-623",
+    "bk2-med-624",
+    "bk2-med-625",
+    "bk2-med-626",
+    "bk2-med-627",
+    "bk2-med-628",
+    "bk2-med-629",
+    "bk2-med-630"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon7",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about back pain with fractures of ribs after minor falls, and fatigue with infections and shingles. Ask about thirst with polyuria, thirst with confusion and stones, tingling with carpal tunnel and a thick tongue, and clots on thalidomide. Record incidental protein gaps, and tally calcium, renal, anaemia and bone features, which is routine.",
+      "tx": "Ask about back pain with pathological fractures of ribs after minor falls, and fatigue with infections and shingles of **marrow failure**. Ask about thirst with polyuria of renal injury, thirst with confusion and stones of **calcium excess**, tingling with carpal tunnel and a thick tongue of amyloid, and clots on thalidomide. Record incidental protein gaps of **MGUS disease**, and tally CRAB features.",
+      "vis": null
+    },
+    {
+      "say": "Read pallor of anaemia, and press the spine for tenderness with gibbus and cord compression. Inspect the enlarged scalloped tongue, pinch periorbital purpura, and test carpal tunnel with stocking neuropathy. Feel ribs with skull for bony tenderness, read oedema of cardiac or nephrotic strain, note shingles with chest infections, and measure height loss.",
+      "tx": "Read pallor of anaemia, and press the spine for tenderness with gibbus and **cord compression**. Inspect the enlarged scalloped tongue of **macroglossia disease**, pinch periorbital purpura of amyloid, and test carpal tunnel with stocking neuropathy. Feel ribs with skull for bony tenderness, read oedema of cardiac or nephrotic strain, note shingles with chest infections, and measure **height loss** with protein gaps.",
+      "vis": null
+    },
+    {
+      "say": "Look at the photograph and notice the enlarged tongue with tooth indentations along its edge, ringed by purpuric spots around the mouth. This macroglossia with purpura is AL amyloidosis from a plasma cell clone, often beside myeloma. For the exam, link scalloped tongue with tissue biopsy and purpura with capillary fragility.",
+      "tx": "The photograph shows an **enlarged tongue** with lateral dental scalloping from tooth indentations, ringed by perioral purpura. This macroglossia with purpura marks **AL amyloidosis** from a plasma cell clone, often beside myeloma. For the exam, link scalloped tongue with tissue biopsy, purpura with capillary fragility, and both with **cardiac staging** before therapy.",
+      "vis": {
+        "alt": "Open mouth with enlarged scalloped tongue and perioral purpura in amyloid patient.",
+        "ar": 1.3393,
+        "caption": "Clinical photo showing macroglossia with dental scalloping in amyloidosis. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-myeloma-gen1.webp"
+      }
+    },
+    {
+      "say": "Run serum electrophoresis for the M spike with immunofixation typing, and track free light chains with the ratio for renal sorting. Confirmation needs clonal marrow plasma cells above the threshold, X-ray of the skull for pepper pot lesions, and MRI scan for cord compression. Confirm amyloid on fat pad biopsy with Congo red staining, and involve haematology for transplant choice.",
+      "tx": "Run serum electrophoresis for the **M spike** with immunofixation typing, and track free light chains with the ratio for renal sorting. Prove clonal marrow plasma cells above the threshold, X-ray the skull for **pepper pot** lesions, and scan by MRI for cord compression. Confirm amyloid on fat pad biopsy with Congo red staining, separate myeloma, MGUS, smouldering disease and amyloid, and involve **haematology services** for transplant choice.",
+      "vis": {
+        "alt": "A composite image showing an M-spike on electrophoresis, lytic skull lesions on X-ray, and clonal plasma cells in bone marrow, illustrating multiple myeloma diagnosis.",
+        "ar": 1.8349,
+        "caption": "Multiple myeloma: key diagnostic findings",
+        "kind": "image",
+        "src": "v1/lessons/media/med-myeloma-fig1.webp"
+      }
+    },
+    {
+      "say": "Kill the clone with bortezomib, lenalidomide and dexamethasone, and harvest young fit patients for autologous transplant. Guard bones with bisphosphonates for pain, rescue kidneys with urgent fluids and dialysis, and calm cardiac amyloid with daratumumab. Decompress cord disease with steroids and surgery, avoid renal toxins, and anticoagulate IMiD clots.",
+      "tx": "Kill the clone with **bortezomib therapy** using lenalidomide and dexamethasone, and harvest young fit patients for **autologous transplant**. Guard bones with bisphosphonates for pain, rescue kidneys with urgent fluids and dialysis, calm cardiac amyloid with daratumumab, and shield with shingles and flu vaccines. Decompress cord disease with steroids and surgery, avoid renal toxins, anticoagulate IMiD clots, and track paraprotein with **light chains**.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Multiple myeloma and plasma cell disorders",
+  "v": 1
 }

@@ -1,0 +1,176 @@
+{
+  "gen": "AI",
+  "id": "prd-neuroblastoma-wilms-rad",
+  "module": "Pediatric Solid Abdominal Tumors: Neuroblastoma and Wilms Tumor",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Imaging Differentiation of Neuroblastoma and Wilms Tumor",
+  "v": 1,
+  "steps": [
+    {
+      "say": "The single most useful habit with a child's abdominal mass is asking what it does to the great vessels. Neuroblastoma wraps itself around the aorta and its branches, draping and encasing them without blocking them, and it happily crosses the midline behind the aorta.",
+      "tx": "Use **neuroblastoma vascular encasement** as the first discriminator of a paediatric abdominal mass. Neuroblastoma encases, drapes and surrounds the retroperitoneal great vessels, including the aorta, celiac trunk and superior mesenteric artery (SMA), without occluding them, and extends across the midline behind the aorta. That infiltrative behaviour reflects its origin in the adrenal medulla or sympathetic chain and immediately argues against a primary renal tumour.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/neuroblastoma-fig1.webp",
+        "alt": "Cross sectional imaging of neuroblastoma encasing retroperitoneal vessels.",
+        "caption": "Neuroblastoma: vessel encasement and midline spread. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Calcification then strengthens the neuroblastoma case considerably. Coarse, amorphous calcium is seen in eighty to ninety percent of these tumours on computed tomography and in about half on ultrasound, far more often than in a Wilms tumour of similar size.",
+      "tx": "Weigh the **neuroblastoma calcification rate** when separating the two great childhood abdominal tumours. Coarse, amorphous calcification is detected by computed tomography (CT) in 80-90% and by ultrasound in 50% of neuroblastomas. Wilms tumour calcifies uncommonly by comparison. Calcification alone never makes the diagnosis, but coarse calcium inside a vessel encasing suprarenal mass in a toddler is a powerful pointer toward neuroblastoma and should prompt urinary catecholamine testing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Neuroblastoma"
+        ],
+        "rows": [
+          [
+            "Calcification on CT",
+            "80-90% of tumours"
+          ],
+          [
+            "Calcification on ultrasound",
+            "About 50%"
+          ],
+          [
+            "Vessels",
+            "Encased, not occluded"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Modern neuroblastoma staging is written in the language of imaging defined risk factors. A localised tumour without them is stage L1, one or more risk factors makes it L2, distant spread is M, and the special MS pattern belongs to infants under eighteen months with limited metastatic sites.",
+      "tx": "Stage with **INRGSS imaging-defined risk factors (IDRFs)**. The International Neuroblastoma Risk Group Staging System classifies L1 as localized without IDRFs, L2 as locoregional with one or more IDRFs, M as distant metastases, and MS as infants under 18 months with metastases limited to skin, liver and bone marrow. The radiologist's list of risk factors, such as vessel encasement or airway compression, directly decides resectability and protocol allocation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Assess imaging-defined risk factors"
+          },
+          {
+            "id": "b",
+            "label": "L1 none, L2 one or more"
+          },
+          {
+            "id": "c",
+            "label": "M distant, MS infant pattern"
+          },
+          {
+            "id": "d",
+            "label": "Risk group and surgery plan"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "A Wilms tumour tells the opposite story because it grows out of the kidney itself. The surviving rim of renal tissue stretches around the mass like a claw or beak, and spotting that claw sign places the origin inside the kidney in one move.",
+      "tx": "Look for the **Wilms tumor claw sign** to prove a renal origin. Wilms tumor, or nephroblastoma, originates from the renal parenchyma, displacing normal parenchyma peripherally to create the claw sign, a beak of stretched parenchyma wrapping the tumor. A mass that forms an obtuse angle with the kidney and carries a claw is intrarenal, while an extrinsic mass compressing the kidney with an acute angle has usually arrived from outside, such as the adrenal gland.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/paediatric-urology-hypospadias-cryptorchidism-and-wilms-tumor-fig1.webp",
+        "alt": "Imaging of Wilms tumour arising within the kidney in a child.",
+        "caption": "Wilms tumour: intrarenal mass with claw sign. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Where neuroblastoma encases vessels, a Wilms tumour simply pushes them aside. It also calcifies rarely, in under ten to fifteen percent, but it has its own vascular trick: tumour thrombus growing up the renal vein into the inferior vena cava in five to ten percent of children.",
+      "tx": "Contrast **Wilms vascular displacement** with neuroblastoma encasement. Wilms tumor displaces adjacent vessels rather than encasing them; calcification is rare at under 10-15%; and there is a high propensity for renal vein and inferior vena cava (IVC) tumor thrombus extension in 5-10% of children. Every Wilms study must therefore trace the renal vein and cava with Doppler or contrast imaging, because thrombus reaching the atrium changes the surgical approach entirely.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wilms tumour",
+          "points": [
+            "Displaces vessels aside",
+            "Calcification under 10-15%",
+            "Vein and IVC thrombus 5-10%"
+          ]
+        },
+        "right": {
+          "title": "Neuroblastoma",
+          "points": [
+            "Encases aorta and branches",
+            "Calcification 80-90% on CT",
+            "Crosses midline behind aorta"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Some kidneys carry the precursor tissue from which Wilms tumours arise. Nephroblastomatosis appears as plaques of nephrogenic rests hugging the outer cortex, wedge shaped, low in signal and enhancing less than the healthy kidney beside them, and these children need close surveillance imaging.",
+      "tx": "Recognise **nephroblastomatosis as the Wilms precursor**. It manifests as diffuse, subcapsular, wedge-shaped peripheral cortical nephrogenic rests with low T1 signal and minimal contrast enhancement compared to normal renal parenchyma. The rests are embryonic tissue that failed to involute. Children with extensive nephroblastomatosis, often alongside Beckwith-Wiedemann spectrum or hemihypertrophy, enter ultrasound surveillance because each rest carries a risk of transforming into Wilms tumour (Nephroblastomatosis precursor).",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/solid-wilms-neuroblastoma-brain-fig1.webp",
+        "alt": "Comparative imaging of solid childhood tumours including Wilms tumour and neuroblastoma.",
+        "caption": "Solid childhood tumours: Wilms and neuroblastoma compared. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "In the liver of a child under three, one malignant tumour leads the differential. Hepatoblastoma forms a large solitary vascular mass, calcifies in about half of cases, and usually announces itself biochemically with a markedly raised alpha fetoprotein for the child's age.",
+      "tx": "Diagnose **hepatoblastoma as the infant malignant liver tumour**. Hepatoblastoma is the most common primary malignant liver tumor in infants under 3 years, presenting as a solitary large, heterogeneous vascular mass with calcifications in 50% and marked alpha-fetoprotein (AFP) elevation. Imaging defines the PRETEXT group by which liver sections are involved, which in turn decides whether upfront resection is possible or chemotherapy must shrink the tumour first (Hepatoblastoma imaging).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Hepatoblastoma"
+        ],
+        "rows": [
+          [
+            "Age",
+            "Most under 3 years"
+          ],
+          [
+            "Calcification",
+            "About 50%"
+          ],
+          [
+            "Marker",
+            "Markedly raised AFP"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The newborn kidney mass obeys a different rule again. Congenital mesoblastic nephroma is the commonest renal neoplasm under three months of age, its cellular subtype carries a characteristic gene fusion, and on imaging alone nobody can reliably separate it from a Wilms tumour.",
+      "tx": "Apply the **mesoblastic nephroma age distinction** to neonatal renal masses. Congenital mesoblastic nephroma is the most common renal neoplasm in neonates under 3 months; the cellular subtype harbors the ETV6-NTRK3 gene fusion shared with infantile fibrosarcoma. Imaging cannot reliably distinguish it from Wilms tumor, which is rare at this age, so a solid renal mass in a young neonate is managed as mesoblastic nephroma until histology returns.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Under 3 months",
+          "points": [
+            "Mesoblastic nephroma commonest",
+            "ETV6-NTRK3 in cellular subtype",
+            "Imaging overlaps Wilms tumour"
+          ]
+        },
+        "right": {
+          "title": "Age 2 to 5 years",
+          "points": [
+            "Wilms tumour peak age",
+            "Claw sign, vein thrombus",
+            "Calcification uncommon"
+          ]
+        }
+      }
+    }
+  ]
+}

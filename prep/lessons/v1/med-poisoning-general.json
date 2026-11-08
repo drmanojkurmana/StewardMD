@@ -1,66 +1,76 @@
 {
- "v": 1,
- "module": "med-poisoning-general",
- "subject": "medicine",
- "title": "Approach to poisoning and antidotes: ABCs to enhanced elimination",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**agent** dose time co-ingestants wrappers, **toxidrome** cholinergic anticholinergic sympatho opioid, **intent** accidental deliberate neglect, **paracetamol** staggered chronic Rumack limits, **alcohol** methanol vision gaps blindness, **bites** snake scorpion unknown, **past** psychiatry prior attempts, **pregnancy** antidote safety asks) with **viva** (**toxidromic** miotic sweaty bronchorrhoeic, **comatose** hypoventilating pinpoint) profiles; **access** (farm chemicals) asks. Poisons hide.",
-   "say": "Agents toxidromes intents paracetamols is history: alcohols blind bites strike pasts repeat pregnants balance toxidromics drool comatoseds fade NACs pour fomepizoles block. Overdoses conceal.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**ABCs** airway breathing circulation first, **pupils** miotic mydriatic toxidromes, **skin** sweaty dry flushed murmurs, **bowels** hyper hypoactive murmurs, **lungs** aspiration pulmonary oedema, **heart** QT QRS sodium-channel, **neuro** GCS seizures agitation, **bite** fang necrosis compartments) with **bedside** (**glucose** sulphonylurea lows, **ECG** tricyclic QRS QT, **temperature** sympatho hyperthermia) grades; **smell** (bitter garlic fruity) sniffs. Toxidromes declare.",
-   "say": "ABCs pupils skins bowels is exam: lungs gurgle hearts race neuros cloud bites necrose glucoses dip ECGs widen temperatures soar charcoals bind dialyses clear. Signs cluster.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-poisoning-general-fig1.webp",
-    "alt": "Composite image showing miotic and mydriatic pupils, sweaty, dry, and flushed skin, and ECG changes (QRS/QT prolongation) in poisoned patients.",
-    "caption": "Key physical examination findings aiding toxidrome identification in poisoned patients",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Investigations** (**paracetamol** timed Rumack plots, **salicylate** gases Done levels, **osmolal** methanol ethylene gaps, **cholinesterase** OP SLUDGE tracks, **ABG** lactate metabolic sorts, **ECG** sodium-channel QRS QT, **levels** iron lithium digoxin, **pregnancy** antidote risk screens) with **differentials** (**sepsis** cultures lactate, **stroke** focal imaging, **DKA** ketones gases, **encephalitis** CSF fever) sorts; **toxicology** (elimination calls) meets. Levels guide.",
-   "say": "Paracetamols salicylates osmolals cholinesterases is Ix: ABGs gas ECGs trace levels quantify pregnancies screen sepses brew strokes clot DKAs sweeten encephalitides cloud toxicologists meet clears choose wishes respect. Numbers steer.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**ABCs** oxygen fluids monitors lead, **NAC** paracetamol Rumack-timed, **atropine** pralidoxime OP SLUDGE, **fomepizole** methanol ethylene blocks, **bicarbonate** TCA salicylate traps, **naloxone** opioid titrated repeats, **charcoal** early lavage WBI selects, **dialysis** salicylate lithium clears) with **traps** (**flumazenil** chronic fits seize, **physostigmine** TCA asystole, **ipecac** lavage routine harm) closes; **follow** (levels gases psychiatry) tracks. Poisons loose.",
-   "say": "ABCs NACs atropines fomepizoles is Rx: bicarbonates trap naloxones wake charcoals adsorb dialyses wash flumazenils seize physostigmines stop ipecacs harm follows track levels fall wishes respect. Patients wake.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-911",
-  "bk2-med-912",
-  "bk2-med-913",
-  "bk2-med-914",
-  "bk2-med-915",
-  "bk2-med-916",
-  "bk2-med-917",
-  "bk2-med-918",
-  "bk2-med-919",
-  "bk2-med-920"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon10",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 7,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-poisoning-general",
+  "quiz": [
+    "bk2-med-911",
+    "bk2-med-912",
+    "bk2-med-913",
+    "bk2-med-914",
+    "bk2-med-915",
+    "bk2-med-916",
+    "bk2-med-917",
+    "bk2-med-918",
+    "bk2-med-919",
+    "bk2-med-920"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon10",
+  "src": [],
+  "steps": [
+    {
+      "say": "Start by asking exactly what was taken, with the dose, the time and the route, plus any alcohol or sedatives taken alongside it. Explore why the act happened and ask about past attempts or known psychiatric illness, speaking to the family whenever you can. Record early nausea, vomiting, sweating and any change in behaviour along with the vital signs. In pregnancy, confirm the gestation and prior antenatal care because antidote choices change. Finally ask what pesticides or workplace chemicals are kept at home or at work.",
+      "tx": "Ask what **poison** was taken with dose time and route, plus any **coingestants** such as alcohol sedatives or paracetamol combinations found in wrappers nearby. Elicit intent behind the act and any prior attempts or psychiatric illness, with collateral history from family when possible. Note onset of nausea vomiting sweating or altered behaviour and record vital signs early. In **pregnancy** confirm gestation and prior antenatal care because antidote choices change. Ask about access to pesticides or workplace chemicals.",
+      "vis": null
+    },
+    {
+      "say": "Begin with the airway, breathing and circulation, then record the pulse, blood pressure, respiratory rate and temperature. Examine the pupils for constriction or dilatation and inspect the skin for sweating, dryness or flushing. Listen carefully to the bowel sounds and to the chest for aspiration, and keep a watch for seizures or agitation. Check the ECG for QRS widening or QT prolongation and test the bedside glucose early. Smell the breath for bitter almond, garlic or fruity odour, and look for fang marks or limb swelling after a bite.",
+      "tx": "Start with **airway** breathing and circulation, then record pulse blood pressure respiratory rate and temperature. Examine **pupils** for miosis or mydriasis and inspect skin for sweating dryness or flushing. Listen to bowel sounds and the chest for aspiration, and watch for seizures or agitation. Check the **ECG** for QRS widening or QT prolongation and test bedside glucose early. Smell the breath for bitter almond garlic or fruity odour, and look for fang marks or limb swelling after a bite.",
+      "vis": {
+        "alt": "Composite image showing miotic and mydriatic pupils, sweaty, dry, and flushed skin, and ECG changes (QRS/QT prolongation) in poisoned patients.",
+        "ar": 1.8349,
+        "caption": "Key physical examination findings aiding toxidrome identification in poisoned patients",
+        "kind": "image",
+        "src": "v1/lessons/media/med-poisoning-general-fig1.webp"
+      }
+    },
+    {
+      "say": "Plot the timed paracetamol level on the treatment nomogram and check the salicylate level with arterial blood gases. Measure the osmolal gap whenever methanol or ethylene glycol poisoning seems possible, and order serum cholinesterase activity after organophosphate exposure. Test the bedside glucose and electrolytes with lactate, and record a twelve lead ECG to look for sodium channel blockade. Screen for pregnancy before giving antidotes, and exclude sepsis, stroke and ketoacidosis when the picture looks unclear. Repeat the levels to track elimination.",
+      "tx": "Plot timed **paracetamol** levels on the treatment nomogram and check salicylate levels with arterial gases. Measure the **osmolal gap** when methanol or ethylene glycol poisoning is possible, and order serum **cholinesterase** activity after organophosphate exposure. Test bedside glucose and electrolytes with lactate, and record a twelve lead ECG for sodium channel blockade. Screen for pregnancy before antidotes, and exclude sepsis stroke and ketoacidosis when the picture is unclear. Repeat levels to track elimination.",
+      "vis": null
+    },
+    {
+      "say": "This panel shows the paracetamol treatment nomogram with its treatment line plotted against the hours since ingestion. Beside it, the osmolal gap panel links a raised gap to methanol and ethylene glycol poisoning. The salicylate inset reminds you that drug levels guide dialysis decisions. Read each scale at the bedside and act early whenever a plotted point falls above the treatment line.",
+      "tx": "This panel shows the **paracetamol** treatment nomogram with its treatment line plotted against hours since ingestion. Beside it the **osmolal gap** panel links raised gap to methanol and ethylene glycol poisoning. The salicylate inset reminds you that levels guide dialysis decisions. Read each scale at the bedside and act early when a point falls above the line.",
+      "vis": {
+        "alt": "Paracetamol nomogram with treatment line beside osmolal gap panel and salicylate inset.",
+        "ar": 1.3393,
+        "caption": "Paracetamol, osmolal gap and salicylate nomograms. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-poisoning-general-gen1.webp"
+      }
+    },
+    {
+      "say": "Secure the airway, breathing and circulation first with oxygen, fluids and close monitoring. Give NAC for paracetamol poisoning timed by the nomogram, with atropine and pralidoxime for organophosphate SLUDGE signs. Use fomepizole to block methanol metabolism and sodium bicarbonate for tricyclic or salicylate toxicity. Reverse opioid poisoning with carefully titrated naloxone, and arrange dialysis for a heavy salicylate, lithium or methanol load. Never induce vomiting, and follow the drug levels, gases and psychiatry review.",
+      "tx": "Secure **airway** breathing and circulation first with oxygen fluids and monitoring. Give **NAC** for paracetamol poisoning timed by the nomogram, and atropine with pralidoxime for organophosphate SLUDGE signs. Use fomepizole to block methanol metabolism and sodium bicarbonate for tricyclic or salicylate toxicity. Reverse opioids with titrated naloxone, and arrange dialysis for salicylate lithium or methanol load. Never induce vomiting, and follow levels gases and psychiatry review.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Approach to poisoning and antidotes: ABCs to enhanced elimination",
+  "v": 1
 }

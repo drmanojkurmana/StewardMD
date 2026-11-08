@@ -3,21 +3,32 @@
  "module": "med-thrombosis-transfusion",
  "subject": "medicine",
  "title": "Thrombosis, anticoagulation and transfusion",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
-   "tx": "**History** (**swollen** calf Wells Homan pain, **PE** breathless pleuritic tachycardic, **APLA** recurrent miscarriage livedo strokes, **HIT** heparin platelets clots, **warfarin** diet interactions INR, **DOAC** renal bleeds compliance, **transfusion** reactions rigors rashes past) with **viva** (**thrombotic** swollen breathless, **transfused** reacted rigored) profiles; **Wells** (scores sorts) grades. Clots travel.",
-   "say": "Swollens PEs APLAs HITs is history: warfarins interact DOACs bleed transfusions react Wellss score thrombotics swell transfuseds chill calves ache lungs clutch. Veins block.",
+   "tx": "Ask about a painful **swollen calf** with warmth and tenderness, then score the probability with **Wells criteria** before further testing. Note sudden breathlessness with pleuritic pain and a fast pulse, which suggests **pulmonary embolism** in an at-risk patient. Record recurrent miscarriage with livedo rash or stroke for antiphospholipid syndrome, and fresh clots with falling platelets during heparin treatment. Review warfarin diet with interacting medicines and INR control, kidney function with bleeding on direct agents, and rigors or rash after previous transfusion.",
+   "say": "Ask about a painful swollen calf, as warmth with tenderness is typical of deep vein thrombosis. Score the probability with Wells criteria, which guides whether D-dimer testing is appropriate. Note sudden breathlessness with pleuritic pain and a fast pulse, which suggests embolism to the lungs. Record recurrent miscarriage with livedo rash or stroke, which is typical of antiphospholipid syndrome in young patients. Suspect heparin induced disease when fresh clots appear while platelets are falling during treatment. Review warfarin diet with INR control and kidney function, which guides safe choice of anticoagulant.",
    "vis": null
   },
   {
-   "tx": "**Examination** (**calf** swollen tender Homan girth, **lungs** tachypnoeic pleuritic A2, **livedo** APLA ulcers valves, **HIT** skin necrotic digits, **bleed** warfarin gums nose, **TACO** crackles hypertensive overload, **TRALI** hypoxic bilateral infiltrates) with **bedside** (**D-dimer** rules out low, **duplex** compresses confirms, **CTPA** filling defects) compresses; **platelets** (HIT falls) watches. Emboli lodge.",
-   "say": "Calves lungs livedos HITs is exam: bleeds ooze TACOs wet TRALIs white D-dimers rule duplexes squeeze CTPAs fill platelets plunge heparins stop. Legs swell.",
+   "tx": "Measure both calves for swelling with tenderness and record any girth difference. Listen for breathing with pleuritic pain and a loud **second heart sound** in embolism. Inspect livedo rash with ulcers and valves in antiphospholipid disease, and digits with necrotic skin in **heparin induced thrombocytopenia**. Look for gum and nose bleeds in warfarin users, crackles with hypertension in circulatory overload, and hypoxia with bilateral infiltrates in **lung injury**. Exclude low probability cases with D-dimer, confirm with compression duplex and computed pulmonary angiography, and track platelets for heparin induced falls.",
+   "say": "Measure both calves for swelling with tenderness, which is typical of deep vein thrombosis. Listen to rapid lungs for pleuritic signs, which is typical of embolism to the chest. Inspect the skin for livedo rash with ulcers, which indicates antiphospholipid disease in young patients. Look for black necrotic patches on the digits, which is typical of a severe heparin reaction with clots. Look for gum and nose bleeds in warfarin users, which suggests that control of clotting is excessive. Listen for crackles with high pressure, which indicates overload, and watch oxygen levels, which are low in lung injury.",
    "vis": null
   },
   {
-   "tx": "**Investigations** (**duplex** DVT compresses proves, **CTPA** PE defects hunts, **D-dimer** low rules Wells, **APLA** lupus cardiolipin beta2, **HIT** PF4 serotonin release, **crossmatch** group screen types) with **differentials** (**DVT** duplex positive, **cellulitis** hot bilateral, **APLA** recurrent serology, **HIT** heparin timing) sorts; **haematology** (duration decides) meets. Thrombi show.",
-   "say": "Duplexes CTPAs D-dimers APLAs is Ix: HITs drop crossmatches match DVTs squeeze cellulitides redden APLAs clot HITs immune haematologists meet durations set filters place. Clots image.",
+   "tx": "The photograph shows black **skin necrosis** ringed by a purple halo, with an inset diagram of **thrombus blocking** a vessel. Necrotic skin lesions with falling platelets during heparin therapy warn of heparin induced thrombocytopenia, where antibodies against platelet factor 4 trigger clotting. Stop all heparin at once when this picture appears, and switch to a non heparin anticoagulant such as argatroban. The paired photo with the **vessel diagram** links the skin sign to the clot within.",
+   "say": "The photograph shows a black dead skin patch ringed by purple bruising, which is typical of severe heparin induced disease. An inset diagram shows a clot blocking a vessel, which is why fresh clots appear with falling platelets. Antibodies against platelet factor drive the paradox, which is why low platelets occur with new clots. Stop every heparin product at once when this picture appears, as continued exposure can cause fatal clots. Switch to an alternative anticoagulant without delay, which allows safe treatment to continue.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-thrombosis-transfusion-gen1.webp",
+    "alt": "Black skin eschar with purple halo plus inset illustration of thrombus occluding vessel.",
+    "caption": "Photo of necrotic skin eschar with vessel thrombus inset diagram. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Prove leg clots with **compression duplex** scanning and chest clots with **computed pulmonary angiography**. A normal D-dimer rules out disease only in low Wells probability cases. Send lupus anticoagulant with cardiolipin and beta2 glycoprotein for antiphospholipid syndrome, and platelet factor 4 with serotonin release testing for heparin induced disease. Group and screen blood before any transfusion for safety. Separate duplex proven thrombosis, hot bilateral cellulitis, recurrent antibody positive disease, and heparin timed platelet falls with **haematology guidance** on duration.",
+   "say": "Confirm leg clots with compression ultrasound, which is the standard test for deep vein thrombosis. Confirm chest clots with lung angiography, which is the standard test for pulmonary embolism. Trust a normal D-dimer only in low probability cases, as higher risk requires imaging. Send lupus anticoagulant with cardiolipin studies, which confirms antiphospholipid syndrome when persistently positive. Test platelet factor with serotonin release assays, which supports heparin induced disease when strongly positive. Group and screen blood before any transfusion, which is essential for safe transfusion practice.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/med-thrombosis-transfusion-fig1.webp",
@@ -27,8 +38,8 @@
    }
   },
   {
-   "tx": "**Management** (**heparin** LMWH bridges starts, **warfarin** INR diet monitors, **DOAC** renal selects bleeds, **HIT** argatroban fondaparinux switches, **thrombolyse** massive PE rescues, **transfuse** thresholds TRALI TACO watches, **irradiate** immunocompromised guards) with **traps** (**HIT** heparin kills, **warfarin** pregnancy harms, **TACO** overload drowns) closes; **follow** (INR clots reactions) tracks. Bloods flow.",
-   "say": "Heparins warfarins DOACs HITs is Rx: thrombolyses rescue transfuses match irradiates guard HITs kill warfarins harm TACOs drown follows track INRs steady wishes respect. Veins clear.",
+   "tx": "Start low molecular weight **heparin** bridging to warfarin, and monitor warfarin by INR with diet advice. Select direct oral agents by kidney function while watching for bleeding, and switch heparin induced cases to argatroban or **fondaparinux**. Lyse massive embolism with haemodynamic collapse as rescue therapy. Transfuse red cells to thresholds while watching for lung injury and circulatory overload, and irradiate products for immunocompromised recipients. Never continue heparin when induced thrombocytopenia strikes, never give warfarin in **pregnancy**, and never overload fluids. Follow INR with clot extent and transfusion reactions.",
+   "say": "Start low molecular weight heparin bridging to warfarin, which remains standard for many thrombotic conditions. Monitor warfarin through INR with diet counselling, which is vital for safe anticoagulation control. Choose newer oral agents by kidney function, which guides safe dosing and bleeding risk. Switch heparin induced cases to argatroban or fondaparinux without delay, which allows anticoagulation to continue safely. Lyse massive embolism with collapse as rescue therapy, which can restore circulation when pressure is crashing. Transfuse to thresholds while watching for lung injury and overload, which is essential for safe transfusion practice.",
    "vis": null
   }
  ],

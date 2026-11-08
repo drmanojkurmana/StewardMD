@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-microcytic",
- "subject": "medicine",
- "title": "Microcytic anaemia: iron deficiency and thalassaemia",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**fatigue** exertional breathless palpitations, **pica** ice mud chalk pagophagia, **nails** spoon koilonychia brittle hair, **mouth** angular cheilitis glossitis dysphagia, **thalassaemia** family Mediterranean consanguinity transfusions, **lead** paint batteries colic wrist, **bleed** menses piles NSAID black) with **viva** (**iron-deficient** pica koilonychic, **thalassaemic** transfused chipmunk) profiles; **diet** (tea phytate weaning) asks. Bloods pale.",
-   "say": "Fatigues picas nails mouths is history: thalassaemias inherit leads poison bleeds drain diets lack iron-deficients crave thalassaemics transfuse teas block milks displace. Haemoglobins fall.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**pallor** conjunctival palmar nail beds, **koilonychia** spoon nails plummer, **cheilitis** angular glossitis bald tongue, **thalassaemic** chipmunk bossing maxillary, **spleen** thalassaemic palpable, **lead** Burton gum wrist drop, **Plummer** webs dysphagia nails, **growth** thalassaemic stunts) with **bedside** (**ferritin** low TIBC high, **smear** pencil anisopoikilocytosis, **retics** low production) smears; **stool** (occult bleed hunts) tests. Nails spoon.",
-   "say": "Pallors koilonychias cheilitides thalassaemics is exam: spleens swell leads line plummers web growths stall ferritins dip smears pencil retics flat stools guaiac worms treat. Faces pale.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-microcytic-fig1.webp",
-    "alt": "Composite image showing koilonychia, thalassaemia facies, and microcytic hypochromic blood smear.",
-    "caption": "Key examination findings in microcytic anaemia. Image: Ed Uthman from Houston, TX, USA, CC BY 2.0, Wikimedia Commons.",
-    "ar": 1.5023
-   }
-  },
-  {
-   "tx": "**Investigations** (**ferritin** low iron TIBC transferrin, **Mentzer** MCV over RBC thalassaemia, **HbA2** beta trait high electrophoresis, **lead** basophilic stippling ALA, **endoscopy** bleed coeliac screens, **marrow** absent iron stores) with **differentials** (**iron** low ferritin pica, **thalassaemia** high RBC Mentzer, **lead** stippling colic, **sideroblastic** ring marrow) sorts; **haematology** (transfusion chelation decides) meets. Reds shrink.",
-   "say": "Ferritins Mentzers HbA2s leads is Ix: endoscopies scope marrows stain irons lack thalassaemics target leads stipple sideroblasts ring haematologists meet transfuse chelate counsels plan. Indices sort.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**iron** ferrous vitamin C months, **cause** menses piles coeliac treats, **thalassaemia** transfuse chelate folate, **counsel** prenatal chorionic screens, **lead** chelate source removes, **transfusion** thresholds reactions) with **traps** (**iron** overload thalassaemic, **tea** blocks absorbs, **malignancy** elderly bleeds) closes; **follow** (ferritin Hb growth) tracks. Bloods redden.",
-   "say": "Irons causes thalassaemias counsels is Rx: leads clear transfuses match irons load teas block malignancies bleed follows track ferritins rise wishes respect. Haemoglobins climb.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-561",
-  "bk2-med-562",
-  "bk2-med-563",
-  "bk2-med-564",
-  "bk2-med-565",
-  "bk2-med-566",
-  "bk2-med-567",
-  "bk2-med-568",
-  "bk2-med-569",
-  "bk2-med-570"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon7",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-microcytic",
+  "quiz": [
+    "bk2-med-561",
+    "bk2-med-562",
+    "bk2-med-563",
+    "bk2-med-564",
+    "bk2-med-565",
+    "bk2-med-566",
+    "bk2-med-567",
+    "bk2-med-568",
+    "bk2-med-569",
+    "bk2-med-570"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon7",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about exertional fatigue with breathlessness and palpitations, and cravings for ice, mud or chalk called pica. Ask about spoon shaped nails with brittle hair, mouth cracks with swallowing difficulty, Mediterranean family history with transfusions, and paint or battery exposure with colic. Record monthly, pile or NSAID blood loss, and tea, phytate and weaning diet.",
+      "tx": "Ask about exertional fatigue with breathlessness and palpitations, and cravings for ice, mud or chalk called **pica behaviour**. Ask about spoon shaped nails with brittle hair, mouth cracks with swallowing difficulty, Mediterranean family history with transfusions of **thalassaemia disease**, paint or battery exposure with colic of **lead poisoning**, and monthly, pile or NSAID blood loss. Record tea, phytate and weaning diet.",
+      "vis": null
+    },
+    {
+      "say": "Read pallor of the conjunctiva, palms and nail beds, and inspect spoon nails with Plummer Vinson webs. Look for angular mouth cracks with a bald tongue, chipmunk facies with maxillary overgrowth, a palpable spleen, and a Burton gum line with wrist drop. Check ferritin with TIBC, read pencil cells on the blood smear, and test stools for occult loss.",
+      "tx": "Read pallor of the conjunctiva, palms and nail beds, and inspect spoon nails with **Plummer Vinson** webs. Look for angular mouth cracks with a bald tongue, chipmunk facies with maxillary overgrowth of **thalassaemia major**, a palpable spleen, a Burton gum line with wrist drop of lead, and stunted growth. Check ferritin with TIBC, read pencil cells on the **blood smear**, and test stools for occult loss.",
+      "vis": {
+        "alt": "Composite image showing koilonychia, thalassaemia facies, and microcytic hypochromic blood smear.",
+        "ar": 1.5023,
+        "caption": "Key examination findings in microcytic anaemia. Image: Ed Uthman from Houston, TX, USA, CC BY 2.0, Wikimedia Commons.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-microcytic-fig1.webp"
+      }
+    },
+    {
+      "say": "Order ferritin with iron, TIBC and transferrin saturation, and apply the Mentzer index of MCV over red cell count for thalassaemia, which is standard. Confirm beta trait with raised HbA2 on haemoglobin electrophoresis, and read basophilic stippling with ALA for lead. Scope bleeding with coeliac screens, check marrow iron stores, and separate iron deficiency, thalassaemia, lead and sideroblastic anaemia.",
+      "tx": "Order ferritin with iron, TIBC and transferrin saturation, and apply the **Mentzer index** of MCV over red cell count for thalassaemia. Confirm beta trait with raised HbA2 on **haemoglobin electrophoresis**, and read basophilic stippling with ALA for lead. Scope bleeding with coeliac screens, check marrow iron stores, and separate iron deficiency, thalassaemia, lead and **sideroblastic anaemia**.",
+      "vis": null
+    },
+    {
+      "say": "Look at the film and notice the pale red cells with two cells carrying coarse dark blue dots. These dots are basophilic stippling, which marks aggregates of ribosomal RNA, and such coarse stippling points toward lead poisoning. For the exam, link stippling with ALA testing and source removal, and remember that thalassaemia shows targets while lead shows dots.",
+      "tx": "The film shows pale red cells with two cells carrying coarse dark blue **basophilic stippling**, which marks aggregates of ribosomal RNA. Such coarse stippling points toward **lead poisoning** rather than simple iron deficiency. For the exam, link stippling with ALA testing and source removal, pallor with **iron studies**, and remember that thalassaemia shows targets while lead shows dots.",
+      "vis": {
+        "alt": "Blood smear with pale red cells plus two cells containing coarse dark blue stippling dots.",
+        "ar": 1.3393,
+        "caption": "Blood film with coarse blue stippled red cells shown. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-microcytic-gen1.webp"
+      }
+    },
+    {
+      "say": "Replace iron with ferrous salt and vitamin C for months, and treat the cause in menses, piles and coeliac disease. Transfuse thalassaemia major with chelation and folate, screen parents before pregnancy with chorionic sampling, and remove the lead source with chelation. Guard against iron overload in thalassaemia, tea blocking absorption, and missed malignancy in elderly bleeding.",
+      "tx": "Replace iron with ferrous salt and vitamin C for months, and treat the cause in menses, piles and **coeliac disease**. Transfuse thalassaemia major with chelation and folate, screen parents before pregnancy with **chorionic sampling**, and remove the lead source with chelation. Guard against iron overload in thalassaemia, tea blocking absorption, and **missed malignancy** in elderly bleeding.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Microcytic anaemia: iron deficiency and thalassaemia",
+  "v": 1
 }

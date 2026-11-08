@@ -1,0 +1,225 @@
+{
+ "gen": "AI",
+ "id": "prd-nec-imaging",
+ "minutes": 7,
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Gas trapped inside the bowel wall confirms necrotizing enterocolitis on the plain film. It shows definite disease rather than feeding intolerance, and it starts close surgical surveillance from that moment.",
+   "tx": "**Pneumatosis intestinalis hallmark** gas inside the bowel wall remains the diagnostic hallmark of necrotizing enterocolitis (NEC) at **Bell stage IIA**. Linear or bubbly radiolucencies tracking the wall on a supine abdominal film confirm intramural gas, separate definite NEC from feeding intolerance, and start surgical surveillance.",
+   "vis": {
+    "alt": "Abdominal wall and peritoneal pathology on diagnostic imaging.",
+    "ar": 1.3333,
+    "caption": "Peritoneal complications and bowel ischemia. Credit: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/acute-peritonitis-damage-control-and-compartment-syndrome-fig1.webp"
+   }
+  },
+  {
+   "say": "Gas migrating from the bowel wall enters the mesenteric venous system, appearing as branching lucencies within the hepatic silhouette. Portal venous gas extends towards the liver periphery, distinguishing it from central biliary gas.",
+   "tx": "**Portal venous gas pattern** manifests on supine radiographs and bedside sonography as transient, mobile echogenic microbubbles entering the liver. Branching lucencies extend toward the **hepatic periphery (within 2 cm of capsule)** due to centrifugal portal flow, differentiating it from centrally oriented aerobilia.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Portal Venous Gas",
+     "Pneumobilia (Biliary Gas)"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Direction of flow",
+      "Centrifugal (towards capsule)",
+      "Centripetal (towards hilum)"
+     ],
+     [
+      "Distribution",
+      "Peripheral liver parenchyma",
+      "Central, main bile ducts"
+     ],
+     [
+      "Acoustic quality",
+      "Transient echogenic sparkles",
+      "Fixed linear echogenic branching"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "One loop that stays fixed is a warning sign across a day of films. A persistently fixed dilated loop warns of dying bowel wall and possible perforation, demanding frequent repeat imaging.",
+   "tx": "**Persistent fixed bowel loop** describes one dilated loop that never changes position or calibre on sequential films over **24-36 hours**. A fixed, unchanging dilated bowel loop signals full-thickness ischaemia (loss of blood supply) or impending perforation, so serial radiographs every six to eight hours track it closely.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "Serial radiographs"
+     ],
+     [
+      "b",
+      "c",
+      "Zero peristalsis / fixed loop"
+     ],
+     [
+      "c",
+      "d",
+      "Impending gangrene"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Baseline NEC film"
+     },
+     {
+      "id": "b",
+      "label": "Repeat film at 24-36 hrs"
+     },
+     {
+      "id": "c",
+      "label": "Fixed, motionless bowel segment"
+     },
+     {
+      "id": "d",
+      "label": "High suspicion for transmural necrosis"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Both conditions block the newborn bowel, but the enema separates them. Meconium ileus gives a soap-bubble right iliac fossa and tiny unused colon, while a simple plug often clears during the study itself.",
+   "tx": "**Meconium ileus vs meconium plug** separates two neonatal obstructions on contrast enema. Meconium ileus shows the **Neuhauser soap-bubble sign** in the right iliac fossa with an unused microcolon, while meconium plug syndrome displays transient rectosigmoid plugs that the therapeutic enema usually washes out completely.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Meconium ileus",
+     "points": [
+      "Soap-bubble right iliac fossa",
+      "Unused microcolon on enema",
+      "Linked to cystic fibrosis"
+     ]
+    },
+    "right": {
+     "title": "Meconium plug",
+     "points": [
+      "Rectosigmoid filling defects",
+      "Normal calibre colon beyond",
+      "Often clears during enema"
+     ]
+    }
+   }
+  },
+  {
+   "say": "The decubitus view is essential when the supine film cannot settle whether free air exists. Air rises over the liver on a decubitus or cross-table view, and even a small collection can decide the operation.",
+   "tx": "**Cross-table lateral / left decubitus utility** matters whenever free air is suspected but the supine film looks equivocal. Left lateral decubitus or cross-table lateral views collect free peritoneal air over the non-dependent liver surface, revealing small pneumoperitoneum volumes that decide surgery in a deteriorating preterm infant.",
+   "vis": {
+    "alt": "Abdominal cross-table radiography demonstrating free air and peritoneal space.",
+    "ar": 1.3333,
+    "caption": "Pneumoperitoneum: crescent of free gas on horizontal-beam imaging. Credit: StewardMD.",
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-pneumoperitoneum-gas-under-diaphragm.webp"
+   }
+  },
+  {
+   "say": "Massive free air produces dramatic signs on the supine film. The football sign shows the entire peritoneal cavity outlined with gas, while Rigler sign reveals both inner and outer surfaces of the bowel wall.",
+   "tx": "The **football sign and Rigler sign** identify massive pneumoperitoneum on supine radiographs. The **football sign** represents an oval, gas-distended peritoneal cavity outlined by the falciform ligament mimicking a ball lace, while **Rigler sign** visualizes gas outlining both luminal and serosal surfaces of the bowel wall.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "points": [
+      "Oval peritoneal air collection",
+      "Falciform ligament clearly outlined",
+      "Seen in massive neonatal perforation",
+      "Parietal peritoneum distended"
+     ],
+     "title": "Football Sign"
+    },
+    "right": {
+     "points": [
+      "Double-wall sign on bowel loop",
+      "Gas on luminal and serosal sides",
+      "Requires free air in peritoneum",
+      "Can occur with smaller air volumes"
+     ],
+     "title": "Rigler Double-Wall Sign"
+    }
+   }
+  },
+  {
+   "say": "High frequency ultrasound with color Doppler provides real time assessment of bowel viability. The absence of mural flow on Doppler is a sign of transmural ischemia and imminent bowel necrosis.",
+   "tx": "**Color Doppler of ischemic bowel** has transformed NEC staging. Utilizing high-frequency linear transducers (12-18 MHz), bowel wall thinning (<1 mm) or thickening (>2.5 mm) is documented, while **absence of mural blood flow on color Doppler** predicts non-viable, transmural bowel infarction with near-perfect specificity.",
+   "vis": {
+    "edges": [
+     [
+      "a",
+      "b",
+      "Color Doppler exam"
+     ],
+     [
+      "b",
+      "c",
+      "Absent Doppler flow"
+     ],
+     [
+      "c",
+      "d",
+      "Surgical exploration"
+     ]
+    ],
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected necrotic bowel"
+     },
+     {
+      "id": "b",
+      "label": "Interrogate intestinal wall"
+     },
+     {
+      "id": "c",
+      "label": "Zero mural perfusion detected"
+     },
+     {
+      "id": "d",
+      "label": "Urgent bedside drain or resection"
+     }
+    ]
+   }
+  },
+  {
+   "say": "Following recovery from necrotizing enterocolitis, ischemic strictures develop in up to thirty percent of surviving infants. Contrast enema is mandatory before re feeding to evaluate the colon, particularly the splenic flexure.",
+   "tx": "**Post-NEC strictures** arise in **15-30%** of medically and surgically managed infants due to fibrotic cicatrization of ischemic bowel segments. Because the **splenic flexure and rectosigmoid junction** are predilection sites, an elective water-soluble **contrast enema** is mandatory prior to restarting full enteral feeds or closing enterostomies.",
+   "vis": {
+    "cols": [
+     "Parameter",
+     "Post-NEC Colonic Stricture",
+     "Clinical Protocol"
+    ],
+    "kind": "table",
+    "rows": [
+     [
+      "Incidence",
+      "15-30% of survivors",
+      "High clinical index of suspicion"
+     ],
+     [
+      "Primary location",
+      "Splenic flexure & sigmoid",
+      "Watershed vascular zones"
+     ],
+     [
+      "Diagnostic test",
+      "Water-soluble contrast enema",
+      "Mandatory before feed re-initiation"
+     ]
+    ]
+   }
+  }
+ ],
+ "subject": "ss-paediatric-radiology",
+ "system": "gi",
+ "title": "Necrotizing Enterocolitis (NEC) and Neonatal Perforation",
+ "v": 1,
+ "module": "prd-neonatal-intestinal-obstruction"
+}

@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "ort-malignant-bone-tumours",
- "subject": "orthopaedics",
- "title": "Malignant bone tumours and metastasis: stage, chemo, salvage",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Osteosarcoma** (**adolescent** knee metaphysis fast-growth, **pain** night swelling limp, **Codman** sunburst periosteal spikes, **ALP** raised LDH, **MRI** skip lesions chest-CT, **Rosen** neoadjuvant MAP necrosis, **salvage** wide-margin prosthesis, **amputate** neurovascular fungating) with **maps** (**whole-bone** MRI extents, **lung** nodule screens) stages; **chemo** (pre-post surgery) shrinks. Teens ache.",
-   "say": "Osteosarcomas adolescents pains Codmans is osteo: metaphyses seed knees swell nights ache triangles lift bursts spike lesions skip lungs seed shrinks melt chemos burn maps scan wholes stage chemos bracket knives wide. Growths turn.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Ewing** (**child** diaphysis flat-bones young, **onion-skin** laminated periosteal, **fever** ESR mimic infection, **CD99** MIC2 membranous, **EWS-FLI1** eleven-twenty-two translocation, **small-round** rosettes glycogen, **chemo-radio** sensitive surgery-select, **prognosis** pelvic worse) with **separates** (**biopsy** molecular confirms, **marrow** bilateral screens) sorts; **irradiate** (inoperable spares) burns. Fevers mimic.",
-   "say": "Ewings childs onions fevers is Ewing: shafts hollow diaphyses ache layers peel onions skin ESRs rise fevers burn stains mark CD99s glow swaps fuse translocations code separates sort biopsies prove irradiates burn inoperables spare. Round cells crowd.",
-   "vis": null
-  },
-  {
-   "tx": "**Chondro-metastasis** (**chondrosarcoma** older pelvis rings grades, **resistant** chemo-radio useless wide-cuts, **chordoma** sacral midline brachyury, **adamantinoma** tibia soap-bubble epithelial, **metastasis** breast prostate lung kidney, **Mirels** site pain lesion size twelve-nails, **prophylactic** impending fractures pins, **palliate** single-fraction radiates) with **hunts** (**primary** breast-prostate-thyroid screens, **bone-scan** hot spots) finds; **fix** (intramedullary stabilises) steadies. Secondaries settle.",
-   "say": "Chondros metastases Mirels prophylactics is spread: pelvises ring elders ache grades climb cuts wide useless chemos fail primaries hide breasts seed spots glow scans hot hunts track originals find fixes rod longs steady palliates ease singles fractionate. Cancers travel.",
-   "vis": null
-  },
-  {
-   "tx": "**Biopsy-surgery** (**longitudinal** incision extensile lines, **tract** excised with specimen, **frozen** grade confirms margins, **contaminate** planes never-cross, **tourniquet** released before-sample debates, **margins** intralesional marginal wide radical, **reconstruct** allograft prosthesis rotationplasty, **follow** lung-local surveillance) with **plans** (**MDT** oncology radiology, **consent** salvage-amputation) counsels; **audit** (margins reviews) learns. Knives plan.",
-   "say": "Longitudinals tracts frozens margins is technique: lines run lengths follow excises rinse tracts seed grades freeze sections confirm planes respect compartments guard margins grade fours sort plans meet MDTs gather audits review margins learn. Surgery stages.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/ort-malignant-bone-tumours-fig1.webp",
-    "alt": "Diagram illustrating surgical margin definitions (intralesional, marginal, wide, radical) and reconstruction methods like endoprosthesis and rotationplasty.",
-    "caption": "Surgical margins and reconstruction options for malignant bone tumors",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "bk2-ort-091",
-  "bk2-ort-092",
-  "bk2-ort-093",
-  "bk2-ort-094",
-  "bk2-ort-095",
-  "bk2-ort-096",
-  "bk2-ort-097",
-  "bk2-ort-098",
-  "bk2-ort-099",
-  "bk2-ort-100"
- ],
- "src": [],
- "refs": [
-  "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-ort2",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "ort-malignant-bone-tumours",
+  "quiz": [
+    "bk2-ort-091",
+    "bk2-ort-092",
+    "bk2-ort-093",
+    "bk2-ort-094",
+    "bk2-ort-095",
+    "bk2-ort-096",
+    "bk2-ort-097",
+    "bk2-ort-098",
+    "bk2-ort-099",
+    "bk2-ort-100"
+  ],
+  "refs": [
+    "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-ort2",
+  "src": [],
+  "steps": [
+    {
+      "say": "Osteosarcoma strikes teenagers at the fast growing end of the thigh bone with night pain, swelling, and limp. The radiograph shows a mixed lesion with a lifted periosteal edge and sunburst spikes. Raised alkaline phosphatase supports the diagnosis, while whole bone imaging maps the extent and chest scans hunt lung nodules. Chemotherapy before surgery shrinks the tumour, and wide margin salvage with a prosthesis follows. Amputation stays reserved for fungating growths or disease wrapped around nerves and vessels.",
+      "tx": "**Osteosarcoma** strikes adolescents at the fast growing knee metaphysis with night pain, swelling and limp. The radiograph shows a mixed lesion with **Codman triangle** and sunburst spikes lifting the periosteum. Raised alkaline phosphatase supports the diagnosis, while whole bone magnetic resonance maps the extent and chest imaging hunts lung nodules. **Neoadjuvant chemotherapy** shrinks the tumour before wide margin salvage with a prosthesis, and amputation stays reserved for fungating or neurovascular disease.",
+      "vis": null
+    },
+    {
+      "say": "These paired knee radiographs show a destructive mixed lesion in the distal femoral metaphysis of a teenager. The lifted edge of periosteum forms the Codman triangle, while fine bony rays form the sunburst reaction. An aggressive periosteal reaction with night pain should trigger urgent referral with whole bone imaging. Chest staging hunts lung nodules before any definitive plan is made. Recognising this pattern matters because treatment starts only after a carefully planned biopsy.",
+      "tx": "These paired knee radiographs show a distal femoral metaphyseal **osteosarcoma** with a destructive mixed lesion. The lifted edge of periosteum forms the **Codman triangle**, while fine rays form the **sunburst reaction** labelled on both views. Spotting an aggressive periosteal reaction in a teenager with night pain should trigger urgent referral with whole bone imaging and chest staging. Recognising this pattern matters because neoadjuvant treatment starts only after planned biopsy and confirmed margins.",
+      "vis": {
+        "alt": "AP and lateral radiographs of distal femur showing mixed lesion, Codman triangle and sunburst reaction",
+        "ar": 1.3393,
+        "caption": "AP and lateral knee radiographs showing metaphyseal lesion with periosteal reaction Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/ort-malignant-bone-tumours-gen1.webp"
+      }
+    },
+    {
+      "say": "Ewing sarcoma affects children in the shaft of long bones and flat bones, and it presents with pain, swelling, and fever. Fever with a raised inflammatory picture can mimic infection, which often delays the diagnosis. The radiograph shows laminated layering of the periosteum like onion skin, and the cells stain strongly for CD99. Marrow study and whole body workup separate local from spread disease. Combined chemotherapy with selective surgery or radiotherapy treats the tumour, while pelvic disease carries a worse outlook.",
+      "tx": "**Ewing sarcoma** affects children in the shaft of long bones and flat bones, presenting with pain, swelling and fever that can mimic infection. The film shows laminated **onion skin** layering of the periosteum, and the cells stain for CD99 with a characteristic translocation. Whole body workup with marrow study separates local from spread disease. **Combined chemotherapy** with selective surgery or radiotherapy treats the tumour, while pelvic or large lesions carry a worse outlook and need close follow up.",
+      "vis": null
+    },
+    {
+      "say": "Chondrosarcoma grows in older adults around the pelvis, and it resists drugs and radiation so wide surgery remains the cure. Chordoma grows midline in the sacrum, while adamantinoma involves the shin bone. Metastasis from breast, prostate, lung, or kidney causes rest pain with spots that light up the bone scan. The Mirels score assesses the site, pain, lesion, and size to grade the fracture risk. Impending fractures need prophylactic pinning, while painful deposits receive palliative radiation.",
+      "tx": "**Chondrosarcoma** grows in older adults around the pelvis and shoulder girdle, graded by cartilage change, and it resists drugs and radiation so wide surgery cures. Chordoma sits midline in the sacrum, while adamantinoma bubbles the tibia. **Bone metastasis** from breast, prostate, lung or kidney deposits causes rest pain and lytic or blastic spots that light the bone scan. The **Mirels score** weighs site, pain, lesion and size to judge fracture risk, guiding prophylactic pinning and single fraction palliation.",
+      "vis": null
+    },
+    {
+      "say": "Safe biopsy uses a longitudinal line that later surgery can remove together with the whole tract. The needle must never cross tissue planes, and frozen section confirms the grade while the team plans the margin. Wide excision removes the tumour with a cuff of normal tissue, and reconstruction uses allograft, prosthesis, or rotationplasty. The multidisciplinary team counsels the family on salvage against amputation and takes careful consent. Margins are audited after surgery, with lung and local surveillance through follow up.",
+      "tx": "Safe **biopsy** uses a longitudinal extensile line that later surgery can excise with the tract, never crossing tissue planes. Frozen section confirms the grade while the team plans the margin from intralesional to radical. **Wide excision** removes the tumour with a cuff of normal tissue, then reconstruction uses allograft, prosthesis or rotationplasty. The **multidisciplinary team** counsels on salvage against amputation, consents carefully, and audits margins with lung and local surveillance after the operation.",
+      "vis": {
+        "alt": "Diagram illustrating surgical margin definitions (intralesional, marginal, wide, radical) and reconstruction methods like endoprosthesis and rotationplasty.",
+        "ar": 1.8349,
+        "caption": "Surgical margins and reconstruction options for malignant bone tumors",
+        "kind": "image",
+        "src": "v1/lessons/media/ort-malignant-bone-tumours-fig1.webp"
+      }
+    }
+  ],
+  "subject": "orthopaedics",
+  "title": "Malignant bone tumours and metastasis: stage, chemo, salvage",
+  "v": 1
 }

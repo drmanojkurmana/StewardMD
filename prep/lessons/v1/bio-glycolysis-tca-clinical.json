@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Clinical defects of glycolysis and PDH",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Inherited glycolytic defects declare themselves where glycolysis is irreplaceable, above all in red cells that own no mitochondria. **Pyruvate kinase deficiency** is the commonest of them, inherited recessively with wide severity: ATP starved cells dehydrate, stiffen into echinocytes and are culled by the spleen. Neonatal jaundice, gallstones from chronic haemolysis and iron loading from transfusions or increased absorption complete the lifelong picture.",
+   "say": "Glycolytic defects declare themselves in red cells that own no mitochondria. Pyruvate kinase deficiency is the commonest, inherited recessively. ATP starved cells stiffen and are culled by the spleen, causing neonatal jaundice, gallstones and iron loading.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Pyruvate kinase deficiency"],
+    "rows": [
+     ["Inheritance and frequency", "Autosomal recessive, commonest glycolytic haemolysis"],
+     ["Blood film clue", "Echinocytes, high reticulocytes"],
+     ["2,3-BPG", "Raised, eases oxygen release"],
+     ["Splenectomy", "Helps severe cases, does not cure"]
+    ]
+   }
+  },
+  {
+   "tx": "Rarer entry defects teach the same lesson at different steps: **hexokinase deficiency** and glucose phosphate isomerase deficiency both cause nonspherocytic haemolytic anaemia without the splenic or metabolic signatures of kinase failure. Muscle phosphofructokinase deficiency (Tarui disease) adds exercise intolerance and myoglobinuria to haemolysis because muscle and red cells share the same subunit, a pattern examiners use to test tissue isoform reasoning.",
+   "say": "Hexokinase and isomerase deficiencies cause haemolysis without kinase signatures. Muscle phosphofructokinase deficiency, Tarui disease, adds exercise intolerance and myoglobinuria because muscle and red cells share the same subunit. Examiners use that pattern to test isoform reasoning.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Red cell only picture", "points": ["Pyruvate kinase, hexokinase defects", "Haemolysis and splenomegaly", "Exercise tolerance normal"]},
+    "right": {"title": "Red cell plus muscle picture", "points": ["Muscle PFK deficiency (Tarui)", "Haemolysis plus exercise collapse", "Shared subunit explains both"]
+    }
+   }
+  },
+  {
+   "tx": "Pyruvate dehydrogenase failure presents in the opposite compartment, the nervous system, because brain cannot tolerate lactate or energy shortfall. Infants show congenital **lactic acidosis**, hypotonia, poor feeding, seizures and developmental delay, often with structural brain anomalies. Episodes worsen with carbohydrate loads and intercurrent illness, when pyruvate flux surges against the blocked gate.",
+   "say": "Pyruvate dehydrogenase failure presents in the nervous system. Infants show congenital lactic acidosis, hypotonia, seizures and developmental delay. Episodes worsen with carbohydrate loads and illness, when pyruvate flux surges against the blocked gate.",
+   "vis": null
+  },
+  {
+   "tx": "Management of PDH deficiency works around the gate rather than through it: a **ketogenic diet** supplies acetyl-CoA from fat below the block, dichloroacetate inhibits PDH kinase to squeeze residual activity, and thiamine helps responsive E1 variants. Families need illness plans with early glucose control, because uncontrolled catabolism and carbohydrate surges both precipitate acidosis through different arms.",
+   "say": "Management works around the gate. A ketogenic diet supplies acetyl-CoA from fat below the block, dichloroacetate squeezes residual activity, and thiamine helps responsive variants. Families need illness plans because carbohydrate surges precipitate acidosis.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Strategy", "How it bypasses the block"],
+    "rows": [
+     ["Ketogenic diet", "Fat gives acetyl-CoA directly"],
+     ["Dichloroacetate", "Kinase blocked, enzyme held on"],
+     ["Thiamine trial", "Helps cofactor responsive E1 faults"],
+     ["Illness plan", "Prevents surge and catabolism crises"]
+    ]
+   }
+  },
+  {
+   "tx": "Acquired **lactic acidosis** in adults sorts into overproduction with tissue hypoxia versus under clearance or dehydrogenase failure without it. Shock, sepsis, seizures and mesenteric ischaemia drive the first group; liver failure, metformin accumulation, thiamine deficiency and PDH poisons drive the second. Measuring lactate with pyruvate, reviewing drugs and perfusion, and checking thiamine risk separates them faster than lactate alone.",
+   "say": "Adult lactic acidosis sorts into overproduction with hypoxia versus under clearance without it. Shock and sepsis drive the first group, liver failure, metformin and thiamine deficiency drive the second. Lactate with pyruvate and a drug review separates them faster.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Overproduction (hypoxic)", "points": ["Shock, sepsis, ischaemia", "Lactate to pyruvate ratio high", "Fix perfusion urgently"]},
+    "right": {"title": "Under clearance or PDH failure", "points": ["Liver failure, metformin, thiamine lack", "Pyruvate rises alongside", "Remove drug, give thiamine"]
+    }
+   }
+  },
+  {
+   "tx": "Close this module by contrasting three bedside stories: chronic haemolysis with splenomegaly means payoff failure in red cells, infant neurology with lactate means gate failure at **PDH**, and adult lactate with shock means oxygen delivery failure downstream of both. Each story maps to one segment of the pathway you have walked. The gluconeogenesis lessons now reverse direction and rebuild glucose from these same intermediates.",
+   "say": "Contrast three stories. Chronic haemolysis means payoff failure in red cells, infant neurology with lactate means gate failure at PDH, and adult lactate with shock means oxygen delivery failure. The next lessons reverse direction and rebuild glucose.",
+   "vis": {
+    "kind": "flow",
+    "title": "Three stories, three sites",
+    "nodes": [
+     {"id": "haem", "label": "Haemolysis: payoff enzymes"},
+     {"id": "brain", "label": "Brain lactate: PDH gate"},
+     {"id": "shock", "label": "Shock lactate: oxygen delivery"}
+    ],
+    "edges": [["haem", "brain"], ["brain", "shock"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

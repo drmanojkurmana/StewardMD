@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-bleeding",
- "subject": "medicine",
- "title": "Bleeding disorders: platelets, von Willebrand and haemophilia",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**mucosal** epistaxis gums menorrhagia post-op, **purpura** petechiae bruises ITP, **haemarthrosis** knees ankles elbows boys, **muscle** pseudotumour iliopsoas tingling, **vWD** family epistaxis extraction bleed, **drugs** aspirin clopidogrel NSAID, **liver** alcohol coagulopathy) with **viva** (**thrombocytopenic** petechial menorrhagic, **haemophilic** haemarthrotic inhibitor) profiles; **pattern** (mucosal joints sorts) maps. Bloods ooze.",
-   "say": "Mucosals purpuras haemarthroses muscles is history: vWDs bleed drugs thin livers fail patterns map thrombocytopenics spot haemophilics limp joints bleed inhibitors block. Clots fail.",
-   "vis": null
-  },
-  {
-   "tx": "**Examination** (**petechiae** palate legs tourniquet, **purpura** palpable vasculitic differs, **haemarthrosis** swollen warm limited, **muscle** iliopsoas femoral numb, **epistaxis** Kiesselbach cauterised, **menorrhagia** clots anaemic, **liver** spider palmar flaps, **inhibitor** target joints bleed) with **bedside** (**platelets** counts smear clumps, **BT** prolonged mucosal, **joints** aspirate factor) taps; **mouth** (gum oozes) looks. Joints bleed.",
-   "say": "Petechiaes purpuras haemarthroses muscles is exam: epistaxes drip menorrhagias flood livers stigmata inhibitors persist platelets dip BTs stretch joints tap mouths ooze factors replace. Knees swell.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-bleeding-fig1.webp",
-    "alt": "Composite image showing petechiae, purpura, haemarthrosis in a knee, and gum oozing, illustrating clinical signs of bleeding disorders.",
-    "caption": "Key physical examination findings in bleeding disorders",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Investigations** (**platelets** ITP TTP HIT counts, **PT** warfarin liver vitamin K, **APTT** haemophilia heparin lupus, **vWF** ristocetin multimers types, **factor** VIII IX levels carriers, **inhibitor** Bethesda fails) with **differentials** (**ITP** isolated mucosal, **vWD** ristocetin family, **haemophilia** X-linked joints, **liver** PT all factors) sorts; **haematology** (factor decides) meets. Cascades break.",
-   "say": "Platelets PTs APTTs vWFs is Ix: factors dip inhibitors rise ITPs isolate vWDs fail haemophilias link livers scar haematologists meet concentrates push emicizumabs bridge. Clotting stalls.",
-   "vis": null
-  },
-  {
-   "tx": "**Management** (**platelets** thresholds steroids IVIg, **tranexamic** mucosal menorrhagia guards, **DDAVP** vWD minor releases, **factor** haemophilia prophylaxis treats, **inhibitor** bypassing emicizumab, **warfarin** vitamin K PCC reverses, **liver** transplant corrects) with **traps** (**platelets** TTP worsens, **IM** haematoma avoids, **surgery** factor covers) closes; **follow** (counts joints inhibitors) tracks. Clots hold.",
-   "say": "Platelets tranexamics DDAVPs factors is Rx: inhibitors bypass warfarins reverse livers fail TTPs worsen IMs bruise surgeries cover follows track counts steady wishes respect. Bleeds stop.",
-   "vis": null
+  "v": 1,
+  "module": "med-bleeding",
+  "subject": "medicine",
+  "title": "Bleeding disorders: platelets, von Willebrand and haemophilia",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Take a focused bleeding history by asking about **mucosal bleeding** such as nosebleeds, gum oozing and heavy periods, skin **purpura** with petechiae and bruises, and joint **haemarthrosis** with muscle haematomas in boys. Note family history of von Willebrand disease, drug use including aspirin and NSAIDs, alcohol intake, liver disease, and bleeding after surgery or tooth extraction.",
+      "say": "Start by asking where the patient bleeds. Nosebleeds, gum oozing and heavy periods point toward a platelet or vessel wall problem. Recurrent painful swelling of knees or ankles in a boy suggests haemophilia. Ask about family history, aspirin or NSAID use, alcohol intake and liver disease, and any excess bleeding after surgery or tooth extraction.",
+      "vis": null
+    },
+    {
+      "tx": "Examine the skin and mouth for **petechiae** on the legs and palate, palpable purpura, bruises and gum oozing. Inspect joints for warm swollen **haemarthrosis** with restricted movement and test for iliopsoas haematoma. Look for epistaxis, pallor from menorrhagia, stigmata of **liver disease**, and record blood pressure, platelet count clues and bleeding time pattern.",
+      "say": "Look first at the skin, gums and palate for petechiae, bruises and oozing. Then examine the joints for warm tender swelling with limited movement, and check for thigh numbness that suggests an iliopsoas bleed. You should note active nosebleeds, pallor from heavy periods, and signs of liver disease such as spider naevi and palmar erythema.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-bleeding-fig1.webp",
+        "alt": "Composite image showing petechiae, purpura, haemarthrosis in a knee, and gum oozing, illustrating clinical signs of bleeding disorders.",
+        "caption": "Key physical examination findings in bleeding disorders",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "Order a platelet count with peripheral smear plus **PT** for warfarin and liver failure and **APTT** for haemophilia and heparin effect. Add von Willebrand factor activity with **ristocetin** cofactor testing and factor eight and nine assays. Use mixing studies and the Bethesda assay when an **inhibitor** is suspected because bleeding persists despite factor replacement.",
+      "say": "Send blood for a platelet count and peripheral smear first. A prolonged PT points toward warfarin effect, vitamin K deficiency or liver failure, while a prolonged APTT suggests haemophilia, heparin or lupus anticoagulant. Add von Willebrand factor testing and factor eight and nine levels. Request mixing studies and a Bethesda assay when bleeding continues despite factor replacement.",
+      "vis": null
+    },
+    {
+      "tx": "Study the analyser display showing prolonged **APTT** that corrects on mixing with low **factor eight**, alongside citrated tubes ready for **PT** and ristocetin testing. This pattern confirms factor deficiency rather than an inhibitor and directs replacement therapy. Correlate the screen values with the clinical picture before ordering the **Bethesda assay**.",
+      "say": "Look at the analyser screen in this photograph. The APTT is prolonged but corrects on mixing, and factor eight is low, which confirms a factor deficiency rather than an inhibitor. The blue top citrated tubes beside the machine provide samples for PT and ristocetin testing. Always match these laboratory values with the clinical picture before requesting a Bethesda assay.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/med-bleeding-gen1.webp",
+        "alt": "Rack of blue-top blood tubes beside coagulation analyser screen with mixing results; labels PT, ristocetin and Bethesda inhibitor.",
+        "caption": "Clinical photograph of citrate tubes and analyser showing prolonged APTT workup. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Treat immune thrombocytopenia with **steroids** or immunoglobulin using platelet transfusion only for critical bleeding, and control mucosal oozing with **tranexamic acid**. Give desmopressin for minor von Willebrand bleeds and **factor concentrate** prophylaxis for haemophilia. Reverse warfarin with vitamin K and prothrombin complex, avoid intramuscular injections, and cover surgery with **haemostatic cover**.",
+      "say": "Manage immune thrombocytopenia with steroids or immunoglobulin, and reserve platelet transfusion for critical bleeding. Prescribe tranexamic acid for mucosal oozing and heavy periods, and use desmopressin for minor von Willebrand bleeds. You should treat haemophilia with factor concentrate prophylaxis, reverse warfarin with vitamin K and prothrombin complex, and avoid intramuscular injections.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-651",
+    "bk2-med-652",
+    "bk2-med-653",
+    "bk2-med-654",
+    "bk2-med-655",
+    "bk2-med-656",
+    "bk2-med-657",
+    "bk2-med-658",
+    "bk2-med-659",
+    "bk2-med-660"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon7",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ],
- "quiz": [
-  "bk2-med-651",
-  "bk2-med-652",
-  "bk2-med-653",
-  "bk2-med-654",
-  "bk2-med-655",
-  "bk2-med-656",
-  "bk2-med-657",
-  "bk2-med-658",
-  "bk2-med-659",
-  "bk2-med-660"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon7",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
 }

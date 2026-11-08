@@ -1,0 +1,220 @@
+{
+  "gen": "AI",
+  "id": "prd-skeletal-dysplasias-ddh",
+  "module": "Developmental Dysplasia of the Hip and Common Skeletal Dysplasias",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Developmental Dysplasia of the Hip and Common Skeletal Dysplasias",
+  "v": 1,
+  "steps": [
+    {
+      "say": "Hip ultrasound in the young infant is reported in angles, and Graf's alpha angle carries the verdict. Sixty degrees or more means a mature type one hip, while an alpha below fifty degrees signals significant dysplasia that needs harness treatment and follow up scanning.",
+      "tx": "Report the **Graf ultrasound alpha angle** for developmental dysplasia of the hip. In the Graf method the alpha angle, the bony acetabular roof angle, of at least 60 degrees indicates a mature Type 1 hip, the beta angle of the cartilage roof should be under 55 degrees, and an alpha below 50 degrees indicates significant dysplasia. Accurate coronal plane selection is essential because a tilted probe manufactures dysplasia that is not there.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Graf measurement",
+          "Interpretation"
+        ],
+        "rows": [
+          [
+            "Alpha at least 60 degrees",
+            "Mature Type 1 hip"
+          ],
+          [
+            "Beta under 55 degrees",
+            "Normal cartilage roof"
+          ],
+          [
+            "Alpha under 50 degrees",
+            "Significant dysplasia"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Angles are backed up by a simple coverage check that anyone can repeat. At least half of the cartilaginous femoral head should sit inside the bony socket on a static scan, and a head that rides up and out with less than fifty percent coverage is unstable or dislocated.",
+      "tx": "Confirm **femoral head coverage of at least 50%** on static hip ultrasound. Normal imaging demonstrates at least 50% of the cartilaginous femoral head seated within the bony acetabular fossa. Coverage falling below half, especially with lateral or upward displacement on stress views, indicates subluxation or dislocation requiring Pavlik harness treatment. Document coverage as a percentage alongside the Graf angles so change over serial scans can be judged objectively.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Static coronal hip ultrasound"
+          },
+          {
+            "id": "b",
+            "label": "Measure femoral head coverage"
+          },
+          {
+            "id": "c",
+            "label": "At least 50% seated in socket"
+          },
+          {
+            "id": "d",
+            "label": "Harness if coverage falls short"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Once the femoral head ossifies at four to six months, plain radiography takes over from ultrasound. Drawing Hilgenreiner's horizontal line and Perkin's vertical line divides the pelvis into quadrants, and the ossification centre belongs in the inner lower quadrant of a normal hip.",
+      "tx": "Use **Hilgenreiner and Perkin reference lines** on pelvic radiographs after 4-6 months of age. The normal femoral head ossification center lies in the inferomedial quadrant formed by the horizontal Hilgenreiner line through the triradiate cartilages and the vertical Perkin line at the lateral acetabular rim. A centre sitting in the outer quadrants is subluxed or dislocated. A delayed or asymmetric ossific nucleus is itself a soft sign of dysplasia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/achondroplasia-fig1.webp",
+        "alt": "Skeletal imaging showing pelvic and hip changes in a skeletal dysplasia.",
+        "caption": "Pelvic imaging: lines, angles and hip position. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "The socket itself is graded with the acetabular index, an angle that should fall steadily as the child grows. Under thirty degrees at birth and under twenty degrees by two years is normal, so a socket still measuring over thirty degrees is dysplastic and will not seat the head securely.",
+      "tx": "Measure the **acetabular index against age cut-offs**. The acetabular angle should normally measure under 30 degrees at birth and declines to under 20 degrees by 2 years as the roof ossifies and remodels under a centred femoral head. Angles persistently over 30 degrees indicate acetabular dysplasia. Serial measurement matters more than one value: a dysplastic roof that fails to improve in a harness predicts the need for later pelvic osteotomy (Acetabular angle cut-offs).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal acetabular roof",
+          "points": [
+            "Under 30 degrees at birth",
+            "Under 20 degrees by 2 years",
+            "Head centred, roof remodels"
+          ]
+        },
+        "right": {
+          "title": "Dysplastic acetabulum",
+          "points": [
+            "Persistently over 30 degrees",
+            "Shallow, sloping socket",
+            "Harness, then osteotomy if fixed"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Achondroplasia writes its signature across the whole skeleton in a pattern worth reciting. The lumbar interpediculate distances narrow as you descend instead of widening, the iliac wings look squared like tombstones, the socket roofs lie flat and horizontal, and the hands show a trident configuration.",
+      "tx": "Recognise **achondroplasia radiographic hallmarks** as a skeletal pattern. This FGFR3 disorder features progressive narrowing of interpediculate distances caudally in the lumbar spine, tombstone iliac wings, horizontal flat acetabular roofs and trident hands. Add short tubular bones with metaphyseal flaring and a small foramen magnum, and the pattern is diagnostic. Imaging surveillance watches the craniocervical junction and spine because stenosis at those sites causes the serious complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Achondroplasia sign"
+        ],
+        "rows": [
+          [
+            "Lumbar spine",
+            "Interpediculate distance narrows caudally"
+          ],
+          [
+            "Pelvis",
+            "Tombstone iliac wings, flat roofs"
+          ],
+          [
+            "Hands",
+            "Trident configuration"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Thanatophoric dysplasia is the lethal end of the same FGFR3 family, and its two types split on bone shape. Type one bends the femurs like telephone receivers, while type two keeps straighter femurs but folds the skull into the cloverleaf shape, both with severely flattened vertebral bodies.",
+      "tx": "Separate the **thanatophoric dysplasia types** on the skeletal survey. This lethal FGFR3 condition displays telephone receiver-curved femurs in Type 1, or a cloverleaf skull (kleeblattschadel) with straighter femurs in Type 2, both with severe platyspondyly and a small thorax. Antenatal ultrasound usually detects the short limbs and narrow chest first. Postnatal imaging confirms the pattern for counselling, since recurrence risk and prognosis discussions depend on an accurate skeletal diagnosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Lethal short limb dysplasia suspected"
+          },
+          {
+            "id": "b",
+            "label": "Curved telephone receiver femurs: Type 1"
+          },
+          {
+            "id": "c",
+            "label": "Cloverleaf skull, straighter femurs: Type 2"
+          },
+          {
+            "id": "d",
+            "label": "Confirm FGFR3 and counsel family"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Lethal osteogenesis imperfecta breaks bones before birth has even finished. Type two shows long bones crumpled like an accordion, ribs fractured into beads along their length, and a skull so poorly ossified that the calvarium barely shows on the film.",
+      "tx": "Identify **osteogenesis imperfecta Type II** as the perinatal lethal bone fragility pattern. COL1A1 and COL1A2 collagen defects produce accordion-pleated crumpling of long bones, innumerable rib fractures with beading, and defective calvarial ossification with wormian bones. The bones are diffusely osteopenic and deform under normal intrauterine forces. Distinguishing this pattern from non accidental injury matters greatly, and the generalised osteopenia with wormian bones points to a primary bone disorder.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Osteogenesis imperfecta II",
+          "points": [
+            "Accordion crumpled long bones",
+            "Beaded rib fractures",
+            "Poor skull ossification, wormian bones"
+          ]
+        },
+        "right": {
+          "title": "Non accidental injury",
+          "points": [
+            "Normal bone density",
+            "Corner metaphyseal lesions",
+            "Fractures of differing ages"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Rickets finishes the survey at the growth plates, where mineralisation has failed. Instead of a crisp white line the metaphysis cups, frays and splays, the radiolucent growth zone widens, and the wrist and knee, growing fastest, show the change first and worst.",
+      "tx": "Diagnose **rickets from metaphyseal change** at rapidly growing sites. Nutritional and metabolic rickets produces cupping, fraying, splaying and widening of the radiolucent physeal zone at the metaphyses of the wrist and knee. The provisional zone of calcification disappears, so the metaphysis looks indistinct rather than sharp. Biochemical correlation with calcium, phosphate, alkaline phosphatase and vitamin D separates nutritional deficiency from renal and hypophosphataemic causes (Rickets radiographic signs).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Rickets sign",
+          "Where seen best"
+        ],
+        "rows": [
+          [
+            "Cupping and fraying",
+            "Wrist metaphyses"
+          ],
+          [
+            "Widened physeal zone",
+            "Knee and wrist"
+          ],
+          [
+            "Loss of calcification line",
+            "All fast growing metaphyses"
+          ]
+        ]
+      }
+    }
+  ]
+}
