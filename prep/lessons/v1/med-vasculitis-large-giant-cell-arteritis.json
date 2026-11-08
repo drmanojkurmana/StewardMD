@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "module": "med-vasculitis-large",
+ "subject": "medicine",
+ "title": "Large Vessel Vasculitis: GCA and Takayasu",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A granulomatous large-vessel vasculitis predominantly affecting the cranial branches of the carotid arteries and aorta in individuals over age fifty defines **giant cell arteritis** (temporal arteritis). Mediated by dendritic cells and CD4 T-helper cells secreting interferon-gamma and interleukin-6, transmural granulomatous inflammation targets elastic arterial laminae. Patients present with new-onset unitemporal headache, scalp tenderness when brushing hair, and thickened, tender, non-pulsatile temporal arteries. Crucially, ischaemic optic neuropathy from posterior ciliary artery occlusion causes sudden, painless, permanent blindness, constituting a medical emergency.",
+   "say": "A granulomatous large-vessel vasculitis predominantly affecting the cranial branches of the carotid arteries and aorta in individuals over age fifty defines giant cell arteritis. Transmural granulomatous inflammation targets elastic arterial laminae. Patients present with new-onset headache, scalp tenderness, and thickened, non-pulsatile temporal arteries. Crucially, ischaemic optic neuropathy from posterior ciliary artery occlusion causes sudden permanent blindness, constituting a medical emergency.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/temporal-arteritis-fig1.webp",
+    "alt": "Temporal artery histopathology showing transmural granulomatous inflammation and internal elastic lamina fragmentation.",
+    "caption": "Temporal artery biopsy histology displaying multinucleated giant cells and elastic lamina fragmentation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ischaemia of the masticatory muscles during repetitive chewing represents the most specific clinical symptom of cranial giant cell arteritis. Experiencing **jaw claudication** results from luminal narrowing and hypoperfusion of the maxillary and facial arteries supplying the masseter and temporalis muscles. Patients report severe aching cramping pain in the jaw that worsens progressively during mastication and resolves with rest. Jaw claudication carries an odds ratio exceeding four for a positive temporal artery biopsy and strongly predicts impending visual loss, mandating immediate high-dose intravenous corticosteroid therapy.",
+   "say": "Ischaemia of the masticatory muscles during repetitive chewing represents the most specific clinical symptom of cranial giant cell arteritis. Experiencing jaw claudication results from luminal narrowing of the arteries supplying the masseter muscles. Patients report aching cramping pain in the jaw that worsens during mastication and resolves with rest. Jaw claudication carries high clinical specificity and strongly predicts impending visual loss, mandating immediate corticosteroid therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Jaw Claudication (GCA)",
+     "points": [
+      "Aching pain in masseter muscles during chewing",
+      "Relieved promptly upon stopping mastication",
+      "Caused by maxillary/facial arterial vasculitis",
+      "Highest specificity for GCA diagnosis (OR > 4.0)",
+      "Strong predictor of anterior ischaemic optic neuropathy"
+     ]
+    },
+    "right": {
+     "title": "Temporomandibular Joint (TMJ) Dysfunction",
+     "points": [
+      "Localized pain over TMJ preauricular region",
+      "Clicking, popping, or crepitus on jaw opening",
+      "Pain reproduced by palpating TMJ joint space",
+      "Normal inflammatory markers (ESR, CRP)",
+      "Managed with bite guards and physical therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Performing an adequate surgical biopsy of the superficial temporal artery provides the gold-standard histological confirmation of giant cell arteritis. Obtaining a **temporal artery biopsy** measuring at least two to three centimetres in length is essential because inflammatory lesions characteristically occur as discontinuous skip lesions along the vessel. Histopathology demonstrates transmural granulomatous inflammation, multinucleated histiocytic giant cells, intimal hyperplasia with severe luminal narrowing, and fragmentation of the internal elastic lamina. Crucially, corticosteroid therapy must never be delayed while awaiting biopsy, as histological features persist for several weeks.",
+   "say": "Performing an adequate surgical biopsy of the superficial temporal artery provides the gold-standard histological confirmation of giant cell arteritis. Obtaining a temporal artery biopsy measuring at least two to three centimetres in length is essential because inflammatory lesions characteristically occur as discontinuous skip lesions. Histopathology demonstrates transmural granulomatous inflammation and fragmentation of the internal elastic lamina. Corticosteroids must never be delayed while awaiting biopsy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "susp",
+      "label": "Suspected GCA (Headache, Scalp Tenderness, Jaw Claudication, ESR > 50)"
+     },
+     {
+      "id": "ster",
+      "label": "Immediate High-Dose Steroids (Oral Prednisone 60 mg / IV Pulse Methylpred)"
+     },
+     {
+      "id": "biop",
+      "label": "Unilateral Temporal Artery Biopsy (2-3 cm specimen to avoid skip lesions)"
+     },
+     {
+      "id": "path",
+      "label": "Histopathology Confirms Transmural Giant Cells & Lamina Fragmentation"
+     }
+    ],
+    "edges": [
+     [
+      "susp",
+      "ster"
+     ],
+     [
+      "ster",
+      "biop"
+     ],
+     [
+      "biop",
+      "path"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An inflammatory condition closely related to giant cell arteritis occurs in up to fifty percent of GCA patients. Clinically designated as **polymyalgia rheumatica** (PMR), patients over age fifty present with severe symmetrical aching pain and morning stiffness lasting over forty-five minutes in the shoulder and pelvic girdles. Active joint synovitis is absent, though bursitis is prominent. Both PMR and GCA exhibit marked elevation of erythrocyte sedimentation rate. PMR demonstrates dramatic clinical response within forty-eight hours to low-dose prednisone.",
+   "say": "An inflammatory condition closely related to giant cell arteritis occurs in up to fifty percent of GCA patients. Clinically designated as polymyalgia rheumatica, patients present with severe symmetrical aching pain and morning stiffness in the shoulder and hip girdles. Active joint synovitis is absent, but bilateral bursitis is prominent on ultrasound. Both conditions exhibit marked ESR elevations. Polymyalgia rheumatica demonstrates dramatic clinical improvement within forty-eight hours of low-dose prednisone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Polymyalgia Rheumatica (PMR)",
+     "points": [
+      "Bilateral shoulder and pelvic girdle aching & stiffness",
+      "Subacromial bursitis and biceps tenosynovitis",
+      "ESR > 50 mm/hr, CRP markedly elevated",
+      "Dramatic response to low-dose steroids (15 mg/day)",
+      "Zero risk of direct visual loss"
+     ]
+    },
+    "right": {
+     "title": "Giant Cell Arteritis (GCA)",
+     "points": [
+      "Cranial headache, scalp tenderness, jaw claudication",
+      "Temporal arteritis with risk of ischaemic blindness",
+      "ESR > 50-100 mm/hr, CRP elevated",
+      "Requires high-dose steroids (40-60 mg/day or IV pulse)",
+      "Mandates temporal artery biopsy / ultrasound"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A chronic granulomatous panarteritis predominantly affecting the aortic arch, its primary branch vessels, and pulmonary arteries in young females characterizes **takayasu arteritis**. Striking women under forty years of age, transmural granulomatous inflammation produces marked arterial wall thickening, segmental stenosis, occlusion, or post-stenotic aneurysms. Narrowing of the subclavian arteries causes marked pulse discrepancies between arms and claudication of the upper extremities, historically designated as pulseless disease. Patients present with constitutional fatigue, carotidynia (tenderness over carotid bifurcations), visual disturbances, limb claudication, and secondary renovascular hypertension from renal artery stenosis.",
+   "say": "A chronic granulomatous panarteritis predominantly affecting the aortic arch and its primary branch vessels in young females characterizes Takayasu arteritis. Striking women under forty, transmural inflammation produces arterial wall thickening, stenosis, or aneurysms. Narrowing of the subclavian arteries causes marked pulse discrepancies between arms and limb claudication, historically termed pulseless disease. Patients present with carotidynia, visual changes, limb claudication, and renovascular hypertension.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/takayasu-arteritis-fig1.webp",
+    "alt": "MR angiography of the aortic arch showing concentric wall thickening and severe subclavian stenosis in Takayasu arteritis.",
+    "caption": "MRA reconstruction displaying aortic arch branch stenosis and pulseless subclavian occlusion in Takayasu. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnostic evaluation of Takayasu arteritis relies on cross-sectional vascular imaging demonstrating characteristic morphological changes in major arteries. Computed tomography angiography (CTA) or magnetic resonance angiography (MRA) characteristically demonstrates smooth, tapered, concentric wall thickening and luminal stenosis affecting the aorta, subclavian, and common carotid arteries. Demonstrating a **blood pressure discrepancy** exceeding ten millimetres of mercury in systolic pressure between the bilateral arms fulfills ACR classification criteria. Management requires high-dose corticosteroids paired with steroid-sparing agents (methotrexate, tocilizumab), deferring endovascular stenting or surgical bypass until systemic inflammation is quiescent.",
+   "say": "Diagnostic evaluation of Takayasu arteritis relies on cross-sectional vascular imaging demonstrating characteristic morphological changes in major arteries. Computed tomography or magnetic resonance angiography demonstrates smooth, concentric wall thickening and stenosis affecting the aorta and subclavian arteries. Demonstrating a blood pressure discrepancy exceeding ten millimetres of mercury between arms fulfills classification criteria. Management requires corticosteroids and tocilizumab.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification Criterion",
+     "Clinical / Imaging Finding",
+     "Diagnostic Threshold",
+     "Pathophysiological Implication"
+    ],
+    "rows": [
+     [
+      "Age at Disease Onset",
+      "<= 40 years at presentation",
+      "Mandatory criterion",
+      "Distinguishes Takayasu from Giant Cell Arteritis"
+     ],
+     [
+      "Extremity Claudication",
+      "Claudication of arms or legs",
+      "Present during physical exertion",
+      "Reflects luminal arterial stenosis & ischaemia"
+     ],
+     [
+      "Brachial Artery Pulse",
+      "Decreased or absent pulse in 1/both arms",
+      "Physical examination",
+      "Historically termed 'pulseless disease'"
+     ],
+     [
+      "Blood Pressure Difference",
+      "Systolic difference between arms",
+      "> 10 mmHg discrepancy",
+      "Subclavian arterial stenosis"
+     ],
+     [
+      "Bruits over Major Arteries",
+      "Bruits over subclavian or abdominal aorta",
+      "Auscultation",
+      "High-velocity turbulent blood flow"
+     ],
+     [
+      "Arteriographic Abnormality",
+      "Aorta or primary branch narrowing",
+      "CTA / MRA / Catheter angiography",
+      "Concentric wall thickening, stenosis, aneurysms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A necrotizing systemic vasculitis of medium-sized and small muscular arteries characteristically sparing the pulmonary circulation defines **polyarteritis nodosa** (PAN). Transmural necrotizing inflammation with fibrinoid necrosis causes focal weakening of the arterial media, producing multiple small aneurysms interspersed with luminal thrombosis, yielding a characteristic string-of-pearls appearance on mesenteric or renal angiography. Classical clinical features include livedo reticularis, painful subcutaneous nodules, digital gangrene, mononeuritis multiplex (foot drop from peroneal nerve infarction), renovascular hypertension without glomerulonephritis, and severe postprandial abdominal angina from mesenteric arteritis.",
+   "say": "A necrotizing systemic vasculitis of medium-sized and small muscular arteries characteristically sparing the pulmonary circulation defines polyarteritis nodosa. Transmural inflammation with fibrinoid necrosis causes focal weakening of the arterial wall, producing multiple small aneurysms interspersed with thrombosis, creating a string-of-pearls appearance on angiography. Classical features include livedo reticularis, painful nodules, digital gangrene, foot drop from mononeuritis multiplex, and renovascular hypertension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Clinical Manifestation in PAN",
+     "Pathophysiological Basis",
+     "Diagnostic Test"
+    ],
+    "rows": [
+     [
+      "Renal",
+      "Renovascular hypertension, renal infarction",
+      "Arcuate/interlobular artery microaneurysms",
+      "Renal angiography (String-of-pearls)"
+     ],
+     [
+      "Neurological",
+      "Mononeuritis multiplex (foot/wrist drop)",
+      "Arteritis of vasa nervorum (ischemic neuropathy)",
+      "Nerve conduction studies / Sural nerve biopsy"
+     ],
+     [
+      "Cutaneous",
+      "Livedo reticularis, subcutaneous nodules, ulcers",
+      "Dermal muscular artery necrotizing vasculitis",
+      "Deep punch / excisional skin biopsy"
+     ],
+     [
+      "Gastrointestinal",
+      "Severe postprandial abdominal angina, bowel infarct",
+      "Mesenteric arterial aneurysm thrombosis",
+      "Mesenteric catheter angiography / CT angiogram"
+     ],
+     [
+      "Pulmonary",
+      "Strictly Spared (Zero pulmonary involvement)",
+      "Pathognomonic negative feature",
+      "Distinguishes PAN from ANCA vasculitides"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted biologic therapy directed against the interleukin-6 receptor transformed glucocorticoid-sparing management in giant cell arteritis and large-vessel vasculitis. Administering subcutaneous or intravenous **tocilizumab**, a humanized monoclonal antibody targeting the IL-6 receptor, potently suppresses systemic acute-phase reactant synthesis, achieves sustained glucocorticoid-free clinical remissions, and reduces cumulative steroid-induced morbidity by more than fifty percent. Because tocilizumab completely normalizes C-reactive protein and erythrocyte sedimentation rate regardless of clinical activity, clinicians must monitor clinical symptoms directly to evaluate disease flares.",
+   "say": "Targeted biologic therapy directed against the interleukin-6 receptor transformed glucocorticoid-sparing management in giant cell arteritis. Administering tocilizumab, a monoclonal antibody targeting the IL-6 receptor, potently suppresses systemic inflammation and achieves sustained steroid-free clinical remissions. Because tocilizumab completely normalizes C-reactive protein and sedimentation rate, clinicians must monitor patient symptoms directly to detect disease flares.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gca",
+      "label": "Giant Cell Arteritis Diagnosed (Steroid Induction Initiated)"
+     },
+     {
+      "id": "toci",
+      "label": "Add Tocilizumab (Subcutaneous Weekly Anti-IL6 Receptor mAb)"
+     },
+     {
+      "id": "crp",
+      "label": "Rapid Normalization of CRP/ESR & Suppression of Vessel Inflammation"
+     },
+     {
+      "id": "taper",
+      "label": "Accelerated Glucocorticoid Taper: Halves Long-term Steroid Toxicity"
+     }
+    ],
+    "edges": [
+     [
+      "gca",
+      "toci"
+     ],
+     [
+      "toci",
+      "crp"
+     ],
+     [
+      "crp",
+      "taper"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

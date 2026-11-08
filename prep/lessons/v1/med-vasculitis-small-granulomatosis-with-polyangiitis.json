@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "med-vasculitis-small",
+ "subject": "medicine",
+ "title": "Granulomatosis with Polyangiitis and Microscopic Polyangiitis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Small vessel vasculitides predominantly involve postcapillary venules, capillaries, and arterioles, frequently driven by circulating anti-neutrophil cytoplasmic antibodies. **Granulomatosis with polyangiitis** (GPA, formerly Wegener granulomatosis) is a severe systemic necrotising vasculitis characterised by a classic triad of necrotising granulomatous inflammation of the upper and lower respiratory tracts paired with focal necrotising crescentic glomerulonephritis.",
+   "say": "Small vessel vasculitides involve postcapillary venules, capillaries, and arterioles, frequently driven by anti-neutrophil cytoplasmic antibodies. Granulomatosis with polyangiitis is a necrotising vasculitis defined by granulomatous inflammation of both upper and lower respiratory tracts paired with necrotising crescentic glomerulonephritis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vasculitis-fig1.webp",
+    "alt": "Calibre-based classification of systemic vasculitis.",
+    "caption": "Systemic vasculitides categorized by vessel caliber and distribution. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Upper respiratory involvement occurs in over ninety percent of patients with GPA, presenting with refractory chronic sinusitis, nasal crusting, purulent epistaxis, and subglottic stenosis. Chondritis of the nasal cartilaginous septum leads to structural collapse, producing the classic permanent cosmetic deformity designated as **saddle nose** deformity. Pulmonary manifestations include persistent cough, haemoptysis, and multiple bilateral nodular lung lesions that frequently cavitate.",
+   "say": "Upper respiratory involvement occurs in over ninety percent of patients with GPA, presenting with refractory chronic sinusitis, crusting, epistaxis, and subglottic stenosis. Destruction of the nasal septal cartilage produces the characteristic saddle nose deformity. Pulmonary manifestations feature cough, haemoptysis, and multiple bilateral nodular cavitating lung lesions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anca-small-vessel-vasculitis-long-case-fig1.webp",
+    "alt": "Clinical triad of saddle nose, purpura, and crescentic glomerulonephritis in GPA.",
+    "caption": "Classic clinical signs and histopathology of ANCA small vessel vasculitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The diagnostic serological hallmark of granulomatosis with polyangiitis is a diffuse cytoplasmic immunofluorescence pattern on ethanol-fixed human neutrophils, designated as **c-ANCA**. This cytoplasmic staining pattern is produced by circulating autoantibodies directed specifically against neutrophil granule enzyme proteinase 3. Serial titres of c-ANCA frequently correlate with active disease relapses and assist in monitoring therapeutic responsiveness.",
+   "say": "The diagnostic serological hallmark of granulomatosis with polyangiitis is a diffuse cytoplasmic immunofluorescence pattern on ethanol-fixed neutrophils, designated as c-ANCA. This cytoplasmic pattern is produced by circulating autoantibodies directed against proteinase three. Serial titres frequently correlate with disease relapses and assist in monitoring treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "c-ANCA (Cytoplasmic)",
+     "points": [
+      "Diffuse granular cytoplasmic pattern",
+      "Target: Proteinase 3 (PR3)",
+      "Strong association with GPA (> 90%)",
+      "Correlates with disease flares"
+     ]
+    },
+    "right": {
+     "title": "p-ANCA (Perinuclear)",
+     "points": [
+      "Perinuclear nuclear rim staining",
+      "Target: Myeloperoxidase (MPO)",
+      "Associated with MPA and EGPA",
+      "Ethanol-fixation artifact"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The specific molecular target antigen recognised by circulating c-ANCA autoantibodies is neutrophil **proteinase 3** (PR3), a neutral serine protease stored within primary azurophilic granules. Priming by inflammatory cytokines translocates PR3 onto the neutrophil cell surface, where autoantibody binding triggers inappropriate neutrophil degranulation, respiratory burst activation, and severe oxidative injury to vascular endothelial cells.",
+   "say": "The molecular target antigen recognized by c-ANCA antibodies is neutrophil proteinase 3, a neutral serine protease stored in primary azurophilic granules. Priming by inflammatory cytokines translocates proteinase 3 to the cell surface, where autoantibody binding induces neutrophil degranulation and vascular endothelial injury.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pr3",
+      "label": "PR3 Surface Translocation"
+     },
+     {
+      "id": "canca",
+      "label": "c-ANCA Autoantibody Binding"
+     },
+     {
+      "id": "degran",
+      "label": "Endothelial Necrosis & Lysis"
+     }
+    ],
+    "edges": [
+     [
+      "pr3",
+      "canca"
+     ],
+     [
+      "canca",
+      "degran"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A related ANCA-associated small vessel vasculitis that lacks granulomatous inflammation or upper airway destructive disease is termed **microscopic polyangiitis** (MPA). This condition presents as a rapidly progressive pauci-immune glomerulonephritis frequently accompanied by pulmonary capillaritis causing severe diffuse alveolar haemorrhage. In direct contrast to GPA, microscopic polyangiitis is strongly linked to p-ANCA targeting myeloperoxidase.",
+   "say": "A related small vessel vasculitis that lacks granulomatous inflammation or destructive upper airway disease is termed microscopic polyangiitis. This condition presents as a rapidly progressive pauci-immune glomerulonephritis frequently accompanied by diffuse alveolar haemorrhage. Microscopic polyangiitis is predominantly linked to p-ANCA directed against myeloperoxidase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Granulomatosis with Polyangiitis (GPA)",
+     "Microscopic Polyangiitis (MPA)"
+    ],
+    "rows": [
+     [
+      "Histopathology",
+      "Necrotising granulomatous vasculitis",
+      "Non-granulomatous necrotising vasculitis"
+     ],
+     [
+      "Upper Airway",
+      "Severe sinusitis, saddle nose, crusting",
+      "Classically absent or minimal"
+     ],
+     [
+      "Predominant ANCA",
+      "c-ANCA directed against PR3",
+      "p-ANCA directed against MPO"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal involvement in both GPA and microscopic polyangiitis manifests histologically as a severe rapidly progressive focal and segmental **necrotising crescentic glomerulonephritis**. On direct immunofluorescence microscopy, renal tissue demonstrates a striking absence or paucity of immunoglobulin and complement deposition, confirming the pathognomonic diagnostic category of pauci-immune glomerulonephritis.",
+   "say": "Renal involvement in both conditions manifests histologically as a severe rapidly progressive focal necrotising crescentic glomerulonephritis. On direct immunofluorescence microscopy, renal biopsies demonstrate a striking paucity of immunoglobulin and complement deposition, confirming the diagnostic category of pauci-immune glomerulonephritis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pauci-Immune Crescentic GN",
+     "points": [
+      "Negative immunofluorescence (< 1+)",
+      "Hallmark of GPA and MPA",
+      "Focal segmental glomerular necrosis",
+      "Cellular crescents compressing tuft"
+     ]
+    },
+    "right": {
+     "title": "Immune Complex Crescentic GN",
+     "points": [
+      "Granular Ig and complement staining",
+      "Seen in Lupus Nephritis and HSP",
+      "Lumpy-bumpy subendothelial deposits",
+      "Associated with low serum complement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnostic tissue confirmation requires biopsy of actively involved tissue sites such as nasal mucosa, lung, or kidney. Renal histology shows glomerular crescents, while wedge lung biopsy provides highest diagnostic yield for GPA by demonstrating the pathognomonic triad of vasculitis, necrosis, and non-caseating **granulomas**. Sural nerve biopsy reveals necrotising arteritis of the epineural arterioles in patients presenting with mononeuritis multiplex.",
+   "say": "Diagnostic tissue confirmation requires biopsy of actively involved anatomical sites such as nasal mucosa, lung, or renal cortex. Renal histology shows glomerular crescents, while surgical lung biopsy demonstrates the pathognomonic triad of vasculitis, necrosis, and non-caseating granulomas. Sural nerve biopsy reveals necrotising arteritis of epineural arterioles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "biop",
+      "label": "Targeted Organ Biopsy"
+     },
+     {
+      "id": "gran",
+      "label": "Granulomatous Vasculitis"
+     },
+     {
+      "id": "conf",
+      "label": "Definitive GPA Diagnosis"
+     }
+    ],
+    "edges": [
+     [
+      "biop",
+      "gran"
+     ],
+     [
+      "gran",
+      "conf"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Remission induction for severe, organ-threatening GPA or microscopic polyangiitis requires aggressive immunosuppressive therapy consisting of pulsed intravenous methylprednisolone combined with either cyclophosphamide or the monoclonal anti-CD20 antibody **rituximab**. Following successful clinical remission, maintenance therapy transitions to safer oral immunosuppressive agents such as azathioprine or rituximab re-infusions paired with low-dose oral glucocorticoids.",
+   "say": "Remission induction for severe, organ-threatening ANCA vasculitis requires aggressive immunosuppression using pulsed intravenous methylprednisolone combined with either cyclophosphamide or the monoclonal anti-CD20 antibody rituximab. Following clinical remission, maintenance transitions to azathioprine or scheduled rituximab re-infusions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "First-Line Therapeutic Agents",
+     "Treatment Objectives"
+    ],
+    "rows": [
+     [
+      "Induction",
+      "IV Methylprednisolone + Rituximab/Cyclo",
+      "Rapidly arrest necrotising inflammation"
+     ],
+     [
+      "Maintenance",
+      "Rituximab (q6m) OR Azathioprine",
+      "Sustain remission, prevent relapses"
+     ],
+     [
+      "Prophylaxis",
+      "Trimethoprim-sulfamethoxazole",
+      "Prevent Pneumocystis jirovecii pneumonia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 356"
+}
