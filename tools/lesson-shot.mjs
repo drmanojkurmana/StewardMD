@@ -234,10 +234,16 @@ try {
     mobile: true
   });
 
+  const firstStepBold = (steps[0]?.tx || "").match(/\*\*([^*]+)\*\*/)?.[1] || null;
+
   const stubScript = `
     window.SMD_PREP_VOICE = false;
     window.confirm = function(){ return true; };
     window.SMD_PREP_ONBOARD = false;
+    try {
+      localStorage.setItem("smd_prep", "1");
+      localStorage.setItem("smd_prep_v1", JSON.stringify({ v: 1, pl: { ob: 1, exam: "neet-pg", date: "2027-05-01", min: 60, rem: 0 } }));
+    } catch (e) {}
     window.SpeechSynthesisUtterance = function (t) { this.text = t; this.rate = 1; this.lang = ""; };
     Object.defineProperty(window, "speechSynthesis", { configurable: true, value: {
       speaking: false,
@@ -249,24 +255,54 @@ try {
 
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k);if(e)e.remove();});return 1;`;
 
-  await call("Page.navigate", { url: base });
-  await until(`return !!window.PREP;`, 25000);
-  await ev(`try{localStorage.setItem("smd_prep","1");localStorage.removeItem("smd_prep_v1");}catch(e){}return 1;`);
-
   await call("Page.navigate", { url: base + "?prep=1" });
-  await until(`return !!(window.PREP && window.PREP_LESSONS);`, 25000);
+  await until(`return !!window.PREP;`, 25000);
+  await ev(`
+    try {
+      localStorage.setItem("smd_prep", "1");
+      localStorage.setItem("smd_prep_v1", JSON.stringify({ v: 1, pl: { ob: 1, exam: "neet-pg", date: "2027-05-01", min: 60, rem: 0 } }));
+    } catch (e) {}
+    return 1;
+  `);
   await ev(clean);
 
+  // Drive route into PrepNucleus Learn: open PrepNucleus, then open the lesson
+  await ev(`
+    if (window.PREP && window.PREP.open) {
+      window.PREP.open();
+    }
+    return 1;
+  `);
+  await until(`return !!(window.PREP && window.PREP._host && window.PREP_LESSONS);`, 25000);
+
+  const lessonSub = lessonData.subject || "";
+  const lessonMod = lessonData.module || lessonData.id || key;
+  const lessonKey = lessonData.id || key;
+
   const openLesson = async () => {
+    // Navigate via Learn tab if available, or directly through PREP_LESSONS
+    await ev(`
+      (function() {
+        var btn = document.querySelector('.pnv-tab[data-tab="learn"]');
+        if (btn) btn.click();
+      })();
+      return 1;
+    `);
+    await sleep(150);
+
     await ev(`
       (function() {
         var host = window.PREP._host;
         window.PREP_LESSONS._l.jumpStep = null;
-        window.PREP_LESSONS.open(${JSON.stringify(lessonData.subject || "")}, ${JSON.stringify(lessonData.module || key)}, host, ${JSON.stringify(key)}, true);
+        window.PREP_LESSONS.open(${JSON.stringify(lessonSub)}, ${JSON.stringify(lessonMod)}, host, ${JSON.stringify(lessonKey)}, true);
       })();
       return 1;
     `);
-    await until(`return !!document.querySelector("#smdPrep #pnLsn");`, 10000);
+    const opened = await until(`return !!document.querySelector("#smdPrep #pnLsn .pn-lsn-tx");`, 15000);
+    if (!opened) {
+      console.error("Error: lesson viewer failed to open (#smdPrep #pnLsn .pn-lsn-tx not found).");
+      process.exit(1);
+    }
     await sleep(200);
   };
 
@@ -285,7 +321,21 @@ try {
         return 1;
       })();
     `);
+    const stepped = await until(`return !!(window.PREP_LESSONS._l && window.PREP_LESSONS._l.i === ${targetIndex} && document.querySelector("#smdPrep #pnLsn .pn-lsn-tx"));`, 10000);
+    if (!stepped) {
+      console.error(`Error: failed to navigate to step ${targetIndex}.`);
+      process.exit(1);
+    }
     await sleep(300);
+  };
+
+  const verifyStep0BoldTerm = async () => {
+    if (!firstStepBold) return;
+    const pageText = await ev(`return document.body ? (document.body.innerText || document.body.textContent || "") : "";`);
+    if (!pageText || !pageText.includes(firstStepBold)) {
+      console.error(`Error: first step bold term "${firstStepBold}" was not present in page text at capture time.`);
+      process.exit(1);
+    }
   };
 
   const themes = [
@@ -299,6 +349,7 @@ try {
     // First step
     await openLesson();
     await goToStep(0);
+    await verifyStep0BoldTerm();
     const bufStep0 = await shotCall();
     if (bufStep0) {
       const outPath = join(outDir, `${key}-${th.name}.png`);
