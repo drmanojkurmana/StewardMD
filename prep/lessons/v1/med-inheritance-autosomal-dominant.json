@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "med-inheritance",
+ "subject": "medicine",
+ "title": "Mendelian and Non-Mendelian Genetic Inheritance",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Mendelian transmission follows classical rules of gene segregation based on chromosome location and dominant or recessive allelic expression. An **autosomal dominant** trait manifests in heterozygous individuals possessing a single mutant allele, displaying a vertical pedigree pattern spanning successive generations, fifty percent recurrence risk for offspring of an affected parent, and equal sex distribution without male-to-male transmission barriers.",
+   "say": "Mendelian transmission follows classical rules of gene segregation based on chromosome location and allelic expression. An autosomal dominant trait manifests in heterozygous individuals possessing a single mutant allele, displaying a vertical pedigree spanning successive generations and equal sex distribution.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-downs.webp",
+    "alt": "Pediatric genetic manifestations and classical dysmorphic syndromes.",
+    "caption": "Genetic inheritance patterns, chromosomal aneuploidies, and dysmorphic features. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In contrast, an autosomal recessive trait requires homozygous or compound heterozygous mutations in both alleles on autosomes. Characterised by a horizontal pedigree where affected siblings appear in a single generation born to unaffected carrier parents, each pregnancy carries a twenty-five percent recurrence risk. Consanguinity significantly increases the probability of unmasking rare recessive **alleles**.",
+   "say": "In contrast, an autosomal recessive trait requires homozygous mutations in both alleles. Characterized by a horizontal pedigree where affected siblings appear in a single generation born to carrier parents, each pregnancy carries a twenty-five percent recurrence risk. Consanguinity increases this probability.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autosomal Dominant Pattern",
+     "points": [
+      "Heterozygous mutant allele causes phenotype",
+      "Vertical pedigree spanning successive generations",
+      "Male-to-male transmission is observed",
+      "Examples: Marfan, Huntington, ADPKD, Achondroplasia"
+     ]
+    },
+    "right": {
+     "title": "Autosomal Recessive Pattern",
+     "points": [
+      "Homozygous mutations required (both alleles mutant)",
+      "Horizontal pedigree (siblings affected, parents carriers)",
+      "Consanguinity markedly increases recurrence",
+      "Examples: Cystic fibrosis, Sickle cell, Wilson, Thalassaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sex-linked inheritance involves genes situated on the X chromosome. An **X-linked recessive** trait expresses fully in hemizygous males (possessing one X chromosome) and rarely in heterozygous carrier females. Carrier mothers transmit the mutant allele with a fifty percent probability to sons (who are affected) and daughters (who are carriers), displaying an absolute absence of male-to-male transmission.",
+   "say": "Sex-linked inheritance involves genes on the X chromosome. An X-linked recessive trait expresses in hemizygous males and rarely in carrier females. Carrier mothers transmit the mutation to half their sons and daughters, with an absolute absence of male-to-male transmission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inheritance Pattern",
+     "Affected Sex Ratio",
+     "Father-to-Son Transmission",
+     "Classical Disease Examples"
+    ],
+    "rows": [
+     [
+      "Autosomal Dominant",
+      "Males equal to Females (1:1)",
+      "Present and observed",
+      "Huntington disease, Marfan syndrome, Neurofibromatosis"
+     ],
+     [
+      "Autosomal Recessive",
+      "Males equal to Females (1:1)",
+      "Present and observed",
+      "Cystic fibrosis, Sickle cell anaemia, Hemochromatosis"
+     ],
+     [
+      "X-Linked Recessive",
+      "Almost exclusively Males",
+      "Strictly absent (impossible)",
+      "Haemophilia A/B, Duchenne muscular dystrophy, G6PD"
+     ],
+     [
+      "X-Linked Dominant",
+      "Females twice as common as Males",
+      "All daughters affected, all sons normal",
+      "Rett syndrome, Hypophosphatemic rickets"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extranuclear maternal transmission characterizes **mitochondrial inheritance**. Because the mammalian zygote inherits virtually all mitochondria exclusively from the oocyte cytoplasm, an affected mother transmits the mitochondrial DNA mutation to one-hundred percent of her offspring, whereas an affected father never transmits the condition to any children.",
+   "say": "Extranuclear maternal transmission characterizes mitochondrial inheritance. Because the zygote inherits mitochondria exclusively from the oocyte cytoplasm, an affected mother transmits the mutation to all of her children, whereas an affected father never transmits the disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ooc",
+      "label": "Maternal Oocyte Cytoplasm Contains Mutant mtDNA"
+     },
+     {
+      "id": "all",
+      "label": "100% of Offspring Inherit Mitochondrial Mutation"
+     },
+     {
+      "id": "fat",
+      "label": "Affected Fathers Have 0% Transmission to Offspring"
+     }
+    ],
+    "edges": [
+     [
+      "ooc",
+      "all"
+     ],
+     [
+      "ooc",
+      "fat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Within an individual cell, the coexistence of a mixture of mutant and wild-type mitochondrial genomes is defined as **heteroplasmy**. As cells divide, mitochondria segregate randomly into daughter cells. Clinical disease manifests only when the proportion of mutant mitochondria exceeds a critical tissue energy threshold, explaining marked clinical phenotypic variability in MELAS and MERRF syndromes.",
+   "say": "Within an individual cell, the coexistence of mutant and normal mitochondrial genomes is defined as heteroplasmy. Clinical disease manifests only when the proportion of mutant mitochondria exceeds a critical tissue energy threshold, explaining variable severity in mitochondrial myopathies.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+    "alt": "Chromosomal and non-Mendelian genetic mechanisms in clinical medicine.",
+    "caption": "Non-Mendelian mechanisms, chromosomal anomalies, and threshold effects in genetics. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An epigenetic phenomenon where the expression of a gene is determined by its parental origin via differential DNA methylation and chromatin silencing is **genomic imprinting**. Imprinted genes are expressed exclusively from either the maternal or paternal allele, while the homologous allele from the opposite parent is transcriptionally silenced.",
+   "say": "An epigenetic phenomenon where gene expression depends on parental origin through DNA methylation is genomic imprinting. Imprinted genes are expressed exclusively from either the maternal or paternal allele, while the opposite allele is transcriptionally silenced.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "meth",
+      "label": "Parent-Specific DNA Methylation"
+     },
+     {
+      "id": "sil",
+      "label": "Monoallelic Transcriptional Silencing"
+     },
+     {
+      "id": "exp",
+      "label": "Phenotypic Disease from Unopposed Mutant Allele"
+     }
+    ],
+    "edges": [
+     [
+      "meth",
+      "sil"
+     ],
+     [
+      "sil",
+      "exp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classic clinical demonstration of genomic imprinting involves chromosome 15q11-q13. Loss of the normally active paternal allele in this region (via paternal microdeletion or maternal uniparental disomy) causes **Prader-Willi syndrome**, characterized by infantile hypotonia, hypogonadism, severe hyperphagia with morbid obesity, and almond-shaped palpebral fissures.",
+   "say": "The classic demonstration of genomic imprinting involves chromosome 15. Loss of the active paternal allele causes Prader-Willi syndrome, characterized by infantile hypotonia, severe hyperphagia leading to morbid obesity, and hypogonadism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prader-Willi Syndrome",
+     "points": [
+      "Loss of active PATERNAL allele on 15q11-q13",
+      "70% paternal microdeletion; 25% maternal UPD",
+      "Infantile hypotonia, failure to thrive in infancy",
+      "Insatiable hyperphagia, morbid obesity, short stature"
+     ]
+    },
+    "right": {
+     "title": "Angelman Syndrome",
+     "points": [
+      "Loss of active MATERNAL allele (UBE3A) on 15q11-q13",
+      "70% maternal microdeletion; 5% paternal UPD",
+      "Severe intellectual disability, absent speech, ataxia",
+      "Inappropriate laughter and happy puppet demeanor"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Conversely, loss of the normally active maternal allele in the identical 15q11-q13 region encoding the ubiquitin-protein ligase E3A (UBE3A) gene causes **Angelman syndrome**. Affected children present with severe intellectual disability, complete absence of speech, puppet-like jerky ataxic gait, and paroxysms of inappropriate laughter, earning the historical designation happy puppet syndrome.",
+   "say": "Conversely, loss of the active maternal allele in the identical region causes Angelman syndrome. Affected children present with severe intellectual disability, complete lack of speech, puppet-like ataxic gait, and paroxysms of inappropriate laughter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genetic Imprinting Syndrome",
+     "Deleted / Mutated Parental Allele",
+     "Key Candidate Gene",
+     "Pathognomonic Clinical Triad"
+    ],
+    "rows": [
+     [
+      "Prader-Willi Syndrome",
+      "Paternal chromosome 15q11-q13 loss",
+      "SNRPN / snoRNAs",
+      "Hypotonia, insatiable hyperphagia, morbid obesity"
+     ],
+     [
+      "Angelman Syndrome",
+      "Maternal chromosome 15q11-q13 loss",
+      "UBE3A (ubiquitin ligase)",
+      "Severe amaurosis, puppet-like ataxic gait, happy laughter"
+     ],
+     [
+      "Beckwith-Wiedemann",
+      "Paternal 11p15 duplication (loss of maternal)",
+      "IGF2 overexpression",
+      "Macrosomia, macroglossia, omphalocele, Wilms tumour"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 450"
+}
