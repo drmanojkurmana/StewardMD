@@ -1,0 +1,260 @@
+{
+ "v": 1,
+ "module": "med-diabetes-complications",
+ "subject": "medicine",
+ "title": "Diabetic Foot and Autonomic Complications",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The synergy of peripheral sensory neuropathy, peripheral artery disease, and impaired immune defence precipitates chronic lower extremity ulceration. Developing a **diabetic foot** ulcer typically originates at sites of excessive mechanical pressure beneath metatarsal heads or deformed claw toes. Loss of protective pain sensation allows unperceived repetitive microtrauma, causing dermal necrosis, secondary bacterial infection, and ascending deep-space osteomyelitis. Multidisciplinary management mandates aggressive surgical debridement, targeted antimicrobial therapy, vascular revascularization when indicated, and offloading with total contact casts.",
+   "say": "The synergy of peripheral sensory neuropathy, peripheral artery disease, and impaired immune defence precipitates chronic lower extremity ulceration. Developing a diabetic foot ulcer typically originates at sites of excessive pressure beneath metatarsal heads. Loss of protective sensation allows unperceived trauma, causing tissue necrosis and ascending infection. Management requires surgical debridement, targeted antibiotics, revascularization, and pressure offloading.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-wagner_diabetic_foot.webp",
+    "alt": "Clinical staging system and cross-sectional tissue depth blocks illustrating diabetic foot ulcer progression.",
+    "caption": "Wagner staging classification illustrating depth of tissue involvement and gangrene in diabetic foot disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Delayed gastric emptying occurring in the absence of mechanical gastric outlet obstruction represents a debilitating autonomic complication. Clinically designated as **gastroparesis**, vagal nerve autonomic neuropathy impairs normal antral motility and gastroduodenal motor coordination. Patients present with early satiety, postprandial fullness, nausea, intractable vomiting of undigested food hours after eating, and erratic glycaemic swings due to mismatched insulin absorption. Diagnosis is confirmed by four-hour gastric emptying scintigraphy showing over ten percent meal retention, managed with prokinetics like metoclopramide and smaller, low-fibre meals.",
+   "say": "Delayed gastric emptying occurring in the absence of mechanical gastric outlet obstruction represents a debilitating autonomic complication. Clinically designated as gastroparesis, vagal neuropathy impairs antral motility and gastroduodenal coordination. Patients present with early satiety, nausea, vomiting of undigested food, and unpredictable glycaemic fluctuations. Diagnosis is confirmed by gastric emptying scintigraphy, treated with dietary modifications and prokinetic agents.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetic-foot-fig1.webp",
+    "alt": "Neuropathic and vascular pathways culminating in diabetic foot tissue breakdown and ulceration.",
+    "caption": "Neuropathic, vascular, and biomechanical pathways culminating in diabetic foot tissue breakdown. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An abnormally low plasma glucose concentration triggering autonomic activation and neuroglycopenic dysfunction constitutes an acute medical emergency. Precipitating acute **hypoglycaemia**, defined clinically as plasma glucose below 70 milligrams per decilitre, results most frequently from mismatch between exogenous insulin or sulfonylurea dosing and carbohydrate intake or physical exertion. Autonomic warning symptoms include tremors, diaphoresis, palpitations, anxiety, and hunger. If left uncorrected, neuroglycopenia ensues, causing confusion, bizarre behaviour, seizures, focal neurological deficits, irreversible encephalopathy, and death.",
+   "say": "An abnormally low plasma glucose concentration triggering autonomic activation and neuroglycopenic dysfunction constitutes an acute medical emergency. Precipitating acute hypoglycaemia results most frequently from mismatch between insulin dosing and carbohydrate intake or exercise. Autonomic warning symptoms include tremors, diaphoresis, palpitations, and intense hunger. Without rapid correction, neuroglycopenia causes confusion, seizures, coma, and irreversible neurological injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Glycaemic Level",
+     "Plasma Glucose Threshold",
+     "Clinical Features",
+     "Immediate Management"
+    ],
+    "rows": [
+     [
+      "Level 1 (Alert)",
+      "< 70 mg/dL",
+      "Sweating, tremor, palpitations, hunger",
+      "15-20 g fast-acting oral glucose"
+     ],
+     [
+      "Level 2 (Clinically Significant)",
+      "< 54 mg/dL",
+      "Neuroglycopenia, confusion, cognitive slowing",
+      "Oral glucose or glucagon if uncooperative"
+     ],
+     [
+      "Level 3 (Severe Emergency)",
+      "No specific threshold",
+      "Altered mental status, seizure, coma",
+      "IV 50% Dextrose (25-50 mL) or IM Glucagon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Establishing the clinical and biochemical diagnosis of true pathological hypoglycaemic disorders requires fulfilling three classic diagnostic tenets. Named the **whipple triad**, the criteria mandate: first, the presence of typical hypoglycaemic symptoms; second, documented low plasma glucose under 55 milligrams per decilitre measured simultaneously during symptoms; and third, prompt resolution of symptoms immediately following carbohydrate or glucose administration. Satisfying all three criteria rules out psychogenic pseudohypoglycaemia, directing subsequent investigation toward hyperinsulinaemic states, hormone deficiencies, or exogenous medication toxicity.",
+   "say": "Establishing the diagnosis of true pathological hypoglycaemic disorders requires fulfilling three classic diagnostic tenets. Named the whipple triad, the criteria mandate: first, documented hypoglycaemic symptoms; second, concurrent low plasma glucose under 55 milligrams per decilitre; and third, prompt relief of symptoms following glucose administration. Satisfying all three tenets confirms true hypoglycaemia, prompting detailed investigation for insulinoma or medication excess.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "symp",
+      "label": "Documented Hypoglycaemic Symptoms (Autonomic / Neuroglycopenic)"
+     },
+     {
+      "id": "lab",
+      "label": "Concurrent Venous Plasma Glucose < 55 mg/dL"
+     },
+     {
+      "id": "relief",
+      "label": "Prompt Symptom Resolution Post-Glucose Ingestion"
+     },
+     {
+      "id": "dx",
+      "label": "Whipple Triad Confirmed: Investigate Etiology"
+     }
+    ],
+    "edges": [
+     [
+      "symp",
+      "lab"
+     ],
+     [
+      "lab",
+      "relief"
+     ],
+     [
+      "relief",
+      "dx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The standardised clinical protocol for treating mild to moderate hypoglycaemic episodes adheres to the universal rule of fifteen. Consuming **fifteen grams of oral glucose** in the form of fruit juice, glucose tablets, or table sugar rapidly raises circulating glucose without inducing rebound hyperglycaemia. Patients recheck capillary blood glucose precisely fifteen minutes later. If glucose remains below 70 milligrams per decilitre, another fifteen grams of carbohydrate is administered. Once normalized, consuming a complex carbohydrate meal prevents recurrent late hypoglycaemic dips.",
+   "say": "The standardised clinical protocol for treating mild to moderate hypoglycaemic episodes adheres to the universal rule of fifteen. Consuming fifteen grams of oral glucose in the form of fruit juice or glucose tablets rapidly raises circulating glucose without inducing rebound hyperglycaemia. Patients recheck capillary blood glucose precisely fifteen minutes later. If readings remain below 70, repeat carbohydrates are administered, followed by a complex meal.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "check",
+      "label": "Hypoglycaemia Detected (< 70 mg/dL)"
+     },
+     {
+      "id": "rule",
+      "label": "Administer 15 g Fast-Acting Simple Carbohydrate"
+     },
+     {
+      "id": "wait",
+      "label": "Wait 15 Minutes & Re-test Capillary Glucose"
+     },
+     {
+      "id": "meal",
+      "label": "If >= 70 mg/dL, Provide Meal / Long-Acting Snack"
+     }
+    ],
+    "edges": [
+     [
+      "check",
+      "rule"
+     ],
+     [
+      "rule",
+      "wait"
+     ],
+     [
+      "wait",
+      "meal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Structured clinical classification systems stratify diabetic foot lesions to guide debridement, antibiotic therapy, and amputation risk. The widely utilized **wagner classification** categorizes foot lesions from grade 0 to grade 5 based on tissue depth and vascular necrosis. Grade 0 denotes intact skin with high-risk bony deformities; grade 1 represents superficial ulceration; grade 2 extends to deep tendon, capsule, or bone without abscess; grade 3 features deep abscess, osteomyelitis, or joint sepsis; grade 4 involves localized forefoot gangrene; and grade 5 represents extensive foot gangrene.",
+   "say": "Structured clinical classification systems stratify diabetic foot lesions to guide debridement, antibiotic therapy, and amputation risk. The widely utilized wagner classification categorizes foot lesions from grade zero to grade five based on tissue depth and gangrene. Grade zero denotes intact skin with deformities; grade one represents superficial ulcers; grade two extends to tendon; grade three features deep abscess or osteomyelitis; grade four involves forefoot gangrene; and grade five indicates total foot gangrene.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Wagner Grade",
+     "Depth and Extent of Tissue Pathology",
+     "Infection Status",
+     "Surgical Action"
+    ],
+    "rows": [
+     [
+      "Grade 0",
+      "Intact skin, prominent bony deformity",
+      "None",
+      "Custom footwear and offloading"
+     ],
+     [
+      "Grade 1",
+      "Superficial ulcer involving dermis only",
+      "Superficial",
+      "Wound care, oral antibiotics"
+     ],
+     [
+      "Grade 2",
+      "Deep ulcer penetrating tendon or capsule",
+      "Subcutaneous",
+      "Surgical debridement, IV antibiotics"
+     ],
+     [
+      "Grade 3",
+      "Deep ulcer with osteomyelitis or abscess",
+      "Deep space / Bone",
+      "Surgical drainage, bone resection"
+     ],
+     [
+      "Grade 4",
+      "Gangrene limited to toes or forefoot",
+      "Severe ischaemia",
+      "Partial foot amputation"
+     ],
+     [
+      "Grade 5",
+      "Extensive gangrene of entire foot",
+      "Systemic sepsis",
+      "Major below-knee amputation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Assessing peripheral vascular perfusion in patients with diabetic foot ulcers requires objective non-invasive arterial hemodynamic evaluation. Measuring the **ankle brachial index** (ABI) compares systolic pressures in the dorsalis pedis or posterior tibial artery against brachial artery readings. An ABI below 0.90 confirms peripheral artery disease, while values below 0.50 indicate critical limb-threatening ischaemia. In long-standing diabetes, medial arterial calcification (Mönckeberg sclerosis) renders vessels non-compressible, falsely elevating ABI above 1.40, which mandates toe-brachial index testing.",
+   "say": "Assessing peripheral vascular perfusion in patients with diabetic foot ulcers requires objective non-invasive arterial hemodynamic evaluation. Measuring the ankle brachial index compares systolic pressures in the ankle against brachial artery readings. An index below 0.90 confirms arterial disease, while values under 0.50 indicate critical ischaemia. In diabetes, medial arterial calcification can falsely elevate readings above 1.40, requiring toe-brachial pressure measurements.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal & Atherosclerotic ABI",
+     "points": [
+      "Normal: 0.91 to 1.30",
+      "Mild-Moderate PAD: 0.41 to 0.90",
+      "Severe Critical Ischaemia: < 0.40",
+      "Intermittent claudication and rest pain"
+     ]
+    },
+    "right": {
+     "title": "Non-Compressible Calcinosis (ABI > 1.40)",
+     "points": [
+      "Mönckeberg medial calcific sclerosis",
+      "Rigid pipe-stem tibial arteries",
+      "Falsely elevated suprasystolic readings",
+      "Requires Toe-Brachial Index (TBI normal > 0.70)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Preventing recurrent foot ulceration and lower extremity amputation hinges on patient education, custom orthotics, and daily home self-inspection. Prescribing custom-moulded **therapeutic footwear** redistributes plantar pressure away from bony prominences, reducing repetitive shear stresses. Patients must be taught to inspect their feet daily using a mirror, wash with lukewarm water, apply emollients to prevent xerotic fissures while avoiding interdigital spaces, and never walk barefoot, thereby drastically reducing the lifetime incidence of amputation.",
+   "say": "Preventing recurrent foot ulceration and amputation hinges on patient education, custom orthotics, and daily home self-inspection. Prescribing custom-moulded therapeutic footwear redistributes plantar pressure away from bony prominences, reducing repetitive shear stresses. Patients must inspect feet daily, wash with lukewarm water, apply moisturizing creams, and avoid walking barefoot, substantially decreasing amputation risks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eval",
+      "label": "Comprehensive Foot Risk Stratification"
+     },
+     {
+      "id": "ortho",
+      "label": "Prescribe Custom Pressure-Relieving Footwear"
+     },
+     {
+      "id": "daily",
+      "label": "Daily Patient Visual Inspection with Mirror"
+     },
+     {
+      "id": "prevent",
+      "label": "Avoid Barefoot Walking: Prevent Ulcer Recurrence"
+     }
+    ],
+    "edges": [
+     [
+      "eval",
+      "ortho"
+     ],
+     [
+      "ortho",
+      "daily"
+     ],
+     [
+      "daily",
+      "prevent"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

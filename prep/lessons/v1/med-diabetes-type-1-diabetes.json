@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-diabetes",
+ "subject": "medicine",
+ "title": "Type 1 Diabetes and Diagnostic Glycaemic Thresholds",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Autoimmune destruction of insulin-secreting pancreatic beta cells precipitates absolute endogenous insulin deficiency. In **type 1 diabetes**, genetically susceptible individuals harbouring HLA-DR3 and HLA-DR4 haplotypes generate autoantibodies directed against glutamic acid decarboxylase, islet antigen-2, zinc transporter 8, and insulin. Symptom onset typically occurs in children or adolescents presenting with classic polyuria, polydipsia, polyphagia, and rapid weight loss. Without exogenous insulin replacement, patients rapidly progress to life-threatening ketoacidosis due to unconstrained lipolysis and ketogenesis.",
+   "say": "Autoimmune destruction of insulin-secreting pancreatic beta cells precipitates absolute endogenous insulin deficiency. In type 1 diabetes, genetically susceptible individuals harbouring HLA-DR3 and HLA-DR4 haplotypes generate autoantibodies targeting beta-cell antigens. Symptom onset typically occurs in young people presenting with polyuria, polydipsia, polyphagia, and marked weight loss. Without exogenous insulin therapy, patients rapidly progress to life-threatening ketoacidosis driven by unrestrained lipolysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetes-mellitus-fig1.webp",
+    "alt": "Pathophysiological mechanisms of autoimmune beta-cell destruction and metabolic consequences.",
+    "caption": "Autoimmune destruction of pancreatic beta cells causing absolute insulin deficiency. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A progressive metabolic disorder arising from peripheral insulin resistance combined with gradual secretor failure defines **type 2 diabetes**. Strongly linked to central adiposity, physical inactivity, and family history, peripheral tissues fail to respond effectively to circulating insulin. Compensatory beta-cell hypersecretion initially maintains normoglycaemia, but persistent metabolic overload causes beta-cell exhaustion and amyloid polypeptide deposition. Most adult patients remain asymptomatic for years, frequently presenting with established microvascular or macrovascular complications at initial diagnosis.",
+   "say": "A progressive metabolic disorder arising from peripheral insulin resistance combined with secretor failure defines type 2 diabetes. Strongly linked to central adiposity and inactivity, peripheral target tissues fail to respond to circulating insulin. Compensatory beta-cell hypersecretion initially maintains normoglycaemia, but long-standing metabolic stress causes beta-cell exhaustion. Most adult patients remain asymptomatic for years, often presenting with established vascular complications at initial diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 Diabetes",
+     "points": [
+      "Autoimmune beta-cell destruction",
+      "Absolute insulin deficiency",
+      "HLA-DR3/DR4 association",
+      "Prone to ketoacidosis",
+      "Younger age of onset"
+     ]
+    },
+    "right": {
+     "title": "Type 2 Diabetes",
+     "points": [
+      "Peripheral insulin resistance",
+      "Relative secretor deficiency",
+      "Strong polygenic and lifestyle links",
+      "Prone to hyperosmolar state",
+      "Adult onset with silent progression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Quantifying glycated haemoglobin provides an objective reflection of chronic glycaemic exposure over the preceding three months. Measuring **hba1c** at or above 6.5 percent confirms the diagnosis of diabetes mellitus in non-pregnant adults. Values between 5.7 and 6.4 percent identify prediabetes, signaling high future cardiometabolic risk. Conditions that alter erythrocyte turnover, such as haemolytic anaemia, recent blood transfusion, or chronic haemoglobinopathies, invalidate HbA1c measurements, necessitating direct venous plasma glucose assays for diagnostic assessment.",
+   "say": "Quantifying glycated haemoglobin provides an objective reflection of chronic glycaemic exposure over the preceding three months. Measuring hba1c at or above 6.5 percent confirms the diagnosis of diabetes mellitus in non-pregnant adults. Values between 5.7 and 6.4 percent identify prediabetes with high cardiovascular risk. Conditions altering erythrocyte lifespan, including haemolysis or hemoglobinopathies, invalidate HbA1c measurements, requiring direct venous plasma glucose testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Glycaemic Category",
+     "HbA1c Threshold",
+     "Fasting Plasma Glucose",
+     "2-Hour OGTT Value"
+    ],
+    "rows": [
+     [
+      "Normal",
+      "< 5.7%",
+      "< 100 mg/dL",
+      "< 140 mg/dL"
+     ],
+     [
+      "Prediabetes",
+      "5.7% to 6.4%",
+      "100 to 125 mg/dL",
+      "140 to 199 mg/dL"
+     ],
+     [
+      "Diabetes Mellitus",
+      ">= 6.5%",
+      ">= 126 mg/dL",
+      ">= 200 mg/dL"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Direct assessment of morning glycaemia following an overnight fast of at least eight hours represents standard clinical practice. An elevated **fasting plasma glucose** concentration of 126 milligrams per decilitre or higher establishes diabetes mellitus. Concentrations between 100 and 125 milligrams per decilitre define impaired fasting glucose. In an asymptomatic patient, an isolated abnormal laboratory result must always be confirmed by repeating the same test on a subsequent day, whereas unequivocal hyperglycaemic crisis requires immediate therapeutic intervention.",
+   "say": "Direct assessment of morning glycaemia following an overnight fast of eight hours represents standard clinical practice. An elevated fasting plasma glucose concentration of 126 milligrams per decilitre or higher establishes diabetes mellitus. Concentrations between 100 and 125 define impaired fasting glucose. In an asymptomatic patient, an abnormal test must be confirmed by repeat testing, whereas acute hyperglycaemic symptoms warrant immediate treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fast",
+      "label": "Overnight Fast (>= 8 hours)"
+     },
+     {
+      "id": "test",
+      "label": "Venous Plasma Glucose Assay"
+     },
+     {
+      "id": "result",
+      "label": ">= 126 mg/dL: Confirmatory Repeat"
+     },
+     {
+      "id": "dx",
+      "label": "Diagnosis: Diabetes Mellitus"
+     }
+    ],
+    "edges": [
+     [
+      "fast",
+      "test"
+     ],
+     [
+      "test",
+      "result"
+     ],
+     [
+      "result",
+      "dx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dynamic physiological testing evaluates postprandial glucose disposal following a standardised oral carbohydrate challenge. During an **ogtt**, the non-pregnant patient drinks 75 grams of anhydrous glucose dissolved in water after fasting. Plasma glucose measured two hours post-ingestion at or above 200 milligrams per decilitre confirms diabetes, whereas values between 140 and 199 milligrams per decilitre define impaired glucose tolerance. OGTT remains the definitive test for diagnosing gestational diabetes and identifying early impaired glucose handling.",
+   "say": "Dynamic physiological testing evaluates postprandial glucose disposal following a standardised oral carbohydrate challenge. During an ogtt, the non-pregnant patient consumes 75 grams of anhydrous glucose after fasting. Plasma glucose measured two hours post-ingestion at or above 200 milligrams per decilitre confirms diabetes, while values between 140 and 199 indicate impaired glucose tolerance. OGTT remains the primary test for gestational diabetes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timing",
+     "Normal Response",
+     "Impaired Glucose Tolerance",
+     "Diabetes Mellitus"
+    ],
+    "rows": [
+     [
+      "Fasting (0 min)",
+      "< 100 mg/dL",
+      "100 to 125 mg/dL",
+      ">= 126 mg/dL"
+     ],
+     [
+      "2-Hour Post-Load",
+      "< 140 mg/dL",
+      "140 to 199 mg/dL",
+      ">= 200 mg/dL"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A group of monogenic disorders characterized by non-ketotic diabetes inherited in an autosomal dominant pattern mimics young-onset disease. Diagnosing **mody** involves identifying young patients presenting before age twenty-five who lack autoimmune islet autoantibodies and retain endogenous insulin secretion. Mutations in the hepatocyte nuclear factor 1-alpha gene cause MODY 3, the most prevalent variant, exhibiting exquisite therapeutic sensitivity to low-dose sulfonylureas. Conversely, glucokinase mutations cause MODY 2, producing lifelong mild asymptomatic fasting hyperglycaemia requiring no pharmacotherapy.",
+   "say": "A group of monogenic disorders characterized by non-ketotic diabetes inherited in an autosomal dominant pattern mimics young-onset disease. Diagnosing mody involves identifying young patients presenting before age twenty-five who lack islet autoantibodies and retain endogenous insulin secretion. Mutations in the hepatocyte nuclear factor 1-alpha gene cause MODY 3, which responds exquisitely to low-dose sulfonylureas. Glucokinase mutations cause MODY 2, requiring no pharmacotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MODY 2 (GCK Mutation)",
+     "points": [
+      "Defective glucose sensor",
+      "Mild lifelong fasting hyperglycaemia",
+      "Non-progressive, no complications",
+      "No pharmacotherapy required"
+     ]
+    },
+    "right": {
+     "title": "MODY 3 (HNF1A Mutation)",
+     "points": [
+      "Transcription factor defect",
+      "Progressive beta-cell dysfunction",
+      "Low renal glucose threshold",
+      "Exquisitely sensitive to sulfonylureas"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Distinguishing monogenic diabetes and type 1 diabetes from common type 2 presentation requires integrating clinical markers and autoantibody profiling. Testing for anti-GAD65, IA-2, and ZnT8 autoantibodies confirms autoimmune beta-cell attack, while measuring urinary or serum C-peptide confirms residual endogenous beta-cell reserve. Patients presenting with **random plasma glucose** concentrations of 200 milligrams per decilitre or higher alongside classic hyperglycaemic symptoms require no confirmatory testing, establishing immediate diagnosis and prompting rapid therapy.",
+   "say": "Distinguishing monogenic diabetes and type 1 diabetes from type 2 disease requires integrating clinical markers and autoantibody profiling. Testing for anti-GAD65 and islet autoantibodies confirms autoimmune disease, while measuring C-peptide evaluates residual endogenous beta-cell reserve. Patients presenting with random plasma glucose concentrations of 200 milligrams per decilitre or higher alongside classic symptoms require no confirmatory testing, establishing immediate diagnosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetes-mellitus-complications-fig1.webp",
+    "alt": "Comprehensive schematic of multisystem complications and end-organ targets in diabetes mellitus.",
+    "caption": "Multisystem microvascular and macrovascular complications resulting from chronic hyperglycaemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Establishing comprehensive preventive care at initial diabetes confirmation prevents devastating chronic microvascular and macrovascular end-organ damage. Glycaemic management must be coupled with blood pressure control, lipid-lowering statin therapy, annual retinal screening, urine albumin-to-creatinine testing, and structured foot evaluation. Target **glycaemic targets** generally mandate an HbA1c below 7.0 percent for most non-pregnant adults, individualizing looser targets in elderly patients with extensive atherosclerotic comorbidities or severe hypoglycaemia unawareness.",
+   "say": "Establishing comprehensive preventive care at initial diabetes confirmation prevents devastating microvascular and macrovascular end-organ damage. Glycaemic management must be coupled with blood pressure control, statin therapy, annual retinal screening, urine albumin testing, and structured foot examination. Target glycaemic targets generally mandate an HbA1c below 7.0 percent, individualizing looser goals in frail individuals with cardiovascular disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Confirmed Diabetes Mellitus"
+     },
+     {
+      "id": "a1c",
+      "label": "Individualized HbA1c Target (< 7.0%)"
+     },
+     {
+      "id": "screen",
+      "label": "Annual Retinal, Renal, and Neuropathy Screening"
+     },
+     {
+      "id": "cvd",
+      "label": "Statin + Antihypertensive Protection"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "a1c"
+     ],
+     [
+      "a1c",
+      "screen"
+     ],
+     [
+      "screen",
+      "cvd"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
