@@ -1956,7 +1956,7 @@
       "#homeV2 .rnav-try-go{min-height:44px;padding:0 18px;border:0;border-radius:10px;background:var(--rds-primary,#0f766e);color:#fff;font:700 15px var(--rds-font,system-ui);cursor:pointer;touch-action:manipulation}",
       "#homeV2 .rnav-try-no{min-height:44px;padding:0 6px;border:0;background:none;color:var(--rds-muted,#5b7083);font:600 15px var(--rds-font,system-ui);cursor:pointer;touch-action:manipulation}",
       "@media (prefers-reduced-motion:reduce){#homeV2 .rnav-htab{transition:none}}",
-      ".rnav-bpick{display:flex;flex-direction:column;gap:2px;margin-top:8px;font-family:'Atkinson Hyperlegible Next','Inter Variable',system-ui,sans-serif}.rnav-bpick-row{width:100%;text-align:left;border:0;background:none;cursor:pointer;min-height:52px;touch-action:manipulation}.rnav-bpick-row.on{background:var(--hbg,rgba(15,118,110,.08))}",
+      ".rnav-bpick{display:flex;flex-direction:column;gap:2px;margin-top:8px;font-family:'Manrope','Atkinson Hyperlegible Next','Inter Variable',system-ui,sans-serif}.rnav-bpick-row{width:100%;text-align:left;border:0;background:none;cursor:pointer;min-height:52px;touch-action:manipulation}.rnav-bpick-row.on{background:var(--hbg,rgba(15,118,110,.08))}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
@@ -2816,7 +2816,7 @@
     var pro = isProV4();
     return '' +
       '<main class="v3-main rnav-main"><div class="rnav-stack">' +
-        '<div class="hrf-hero"><img class="hrf-art" src="/assets/home-hero.webp" width="190" height="128" alt="" aria-hidden="true" fetchpriority="high">' +
+        '<div class="hrf-hero"><img class="hrf-art" src="/assets/home-hero.webp" width="1170" height="886" alt="" aria-hidden="true" fetchpriority="high">' +
       '<header class="rnav-head hrf-head">' +
         '<button class="rds-icon-btn" data-act="menu" aria-label="Menu">' + ric("menu") + '</button>' +
         '<div class="rnav-brand"><img src="/logo.png" alt="StewardMD"><span>Steward<b>MD</b></span><span class="hrf-pro" id="hrfProChip"' + (pro ? '' : ' hidden') + '>Pro</span></div>' +
@@ -10360,7 +10360,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   window.SMD_dictateMaik = function () { try { openAskAi("", { dictate: true }); } catch (e) {} };
 
   // ---- Display & Accessibility engine ----
-  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default", appearance: "liquid", appearSet: false };
+  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { homeColor: "", fontScale: 1, density: "default", autoFit: true, theme: "classic", font: "plex", headingStyle: "default", appearance: "liquid", appearSet: false };
   var APPEARANCES = [{ id: "standard", name: "Standard" }, { id: "frosted", name: "Frosted" }, { id: "liquid", name: "Liquid" }, { id: "tinted3d", name: "Tinted 3D" }, { id: "blend", name: "Blend" }];
   var THEMES = [
     { id: "classic", name: "Classic", accent: "#0e6e63", paper: "#f6f7f5" },
@@ -10400,6 +10400,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           fontScale: Math.min(2, Math.max(.8, +o.fontScale || 1)),
           density: o.density, autoFit: !!o.autoFit, userSet: !!o.userSet,
           theme: okTheme ? o.theme : "classic",
+          homeColor: normHexD(o.homeColor),
           font: okFont ? o.font : "plex",
           headingStyle: o.headingStyle === "script" ? "script" : "default",
           // Liquid is the default look (owner 2026-10-18). A saved "standard" counts as a choice only when the user picked it
@@ -10411,6 +10412,25 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     } catch (e) {}
     return Object.assign({}, DDEF);
   }
+  // Home-only colour code from Settings. Returns #rrggbb, or "" if it is not a colour.
+  function normHexD(v) {
+    v = String(v || "").trim().replace(/^#/, "");
+    if (/^[0-9a-f]{3}$/i.test(v)) v = v.replace(/./g, "$&$&");
+    return /^[0-9a-f]{6}$/i.test(v) ? "#" + v.toLowerCase() : "";
+  }
+  // White hero text must stay readable: WCAG 4.5:1 against the chosen colour.
+  function hexOkD(hex) {
+    var c = [1, 3, 5].map(function (i) { var v = parseInt(hex.substr(i, 2), 16) / 255; return v <= .03928 ? v / 12.92 : Math.pow((v + .055) / 1.055, 2.4); });
+    return 1.05 / (.2126 * c[0] + .7152 * c[1] + .0722 * c[2] + .05) >= 4.5;
+  }
+  function applyHomeColorD() {
+    var hc = normHexD(ds.homeColor), el = document.documentElement, st = document.getElementById("hrfHomeColor");
+    ds.homeColor = hc;
+    if (!hc) { el.removeAttribute("data-home-color"); if (st) st.remove(); return; }
+    el.setAttribute("data-home-color", hc);
+    if (!st) { st = document.createElement("style"); st.id = "hrfHomeColor"; document.head.appendChild(st); }
+    st.textContent = "html[data-home-color] #homeV2#homeV2.rnav{--sphere-mid:" + hc + ";--sphere-base:color-mix(in srgb," + hc + " 55%,#000);--sphere-hi:color-mix(in srgb," + hc + " 62%,#fff);--sphere-glow:color-mix(in srgb," + hc + " 45%,transparent);--teal:" + hc + ";--rds-primary:" + hc + "}";
+  }
   function saveD() { try { localStorage.setItem(DKEY, JSON.stringify(ds)); } catch (e) {} }
   function applyD() {
     try {
@@ -10421,6 +10441,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     if (ds.density !== "default") document.body.classList.add("smd-dens-" + ds.density);
     var el = document.documentElement;
     if (ds.theme && ds.theme !== "classic") el.setAttribute("data-theme", ds.theme); else el.removeAttribute("data-theme");
+    applyHomeColorD();
     if (ds.appearance && ds.appearance !== "standard") el.setAttribute("data-appearance", ds.appearance); else el.removeAttribute("data-appearance");
     if (ds.font && ds.font !== "plex") el.setAttribute("data-font", ds.font); else el.removeAttribute("data-font");
     if (ds.headingStyle === "script") { el.setAttribute("data-head", "script"); ensureFont(SCRIPT_FONT); } else el.removeAttribute("data-head");
@@ -10532,6 +10553,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<div class="hv-d-sec"><h4>Theme</h4><div class="hv-theme" id="hvTheme">' +
         THEMES.map(function (t) { return '<button class="hv-th" data-t="' + t.id + '" style="--sw-paper:' + t.paper + ';--sw-acc:' + t.accent + '"><span class="hv-th-dot"></span><span class="hv-th-nm">' + t.name + '</span></button>'; }).join("") +
       '</div></div>' +
+      '<div class="hv-d-sec"><h4>Home colour</h4><div style="display:flex;gap:8px;align-items:center"><input id="hvHomeColor" type="text" maxlength="7" placeholder="#00004d" aria-label="Home colour code" aria-describedby="hvHomeColorMsg" autocomplete="off" autocapitalize="off" spellcheck="false" style="flex:1;min-width:0;height:44px;box-sizing:border-box;padding:0 12px;border:1px solid var(--line,#dde);border-radius:10px;background:var(--panel,#fff);color:var(--ink,#111);font:500 16px var(--mono,monospace)"><button type="button" class="hv-fn" id="hvHomeColorReset" style="min-height:44px">Reset</button></div><div class="hv-info" id="hvHomeColorMsg" role="status" style="margin-top:6px">Type a colour code to colour the Home screen. Other screens keep your theme.</div></div>' +
       '<div class="hv-d-sec"><h4>App appearance</h4><div class="hv-fonts" id="hvAppear">' +
         APPEARANCES.map(function (a) { return '<button class="hv-fn" data-a="' + a.id + '">' + a.name + '</button>'; }).join("") +
       '</div><div class="hv-info" style="margin-top:6px">Liquid-glass styling across the app. The ICU dashboard is never affected.</div></div>' +
@@ -10594,6 +10616,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       applyD(); refreshD();
     });
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
+    var hcIn = s.querySelector("#hvHomeColor"), hcMsg = s.querySelector("#hvHomeColorMsg"), hcRs = s.querySelector("#hvHomeColorReset");
+    if (hcIn) hcIn.addEventListener("input", function () {
+      var h = normHexD(hcIn.value);
+      if (!h) { hcMsg.textContent = hcIn.value.trim().length < 4 ? "Type a colour code like #00004d." : "That is not a colour code. Try one like #00004d."; return; }
+      if (!hexOkD(h)) { hcMsg.textContent = "Too light: white text would be hard to read. Choose a darker colour."; return; }
+      ds.homeColor = h; applyD(); hcMsg.textContent = "Home colour set to " + h + ".";
+    });
+    if (hcRs) hcRs.addEventListener("click", function () { ds.homeColor = ""; applyD(); hcIn.value = ""; hcMsg.textContent = "Home colour reset. Home follows your theme again."; });
     s.querySelectorAll("#hvAppear button").forEach(function (b) { b.addEventListener("click", function () { ds.appearance = b.getAttribute("data-a"); ds.appearSet = true; applyD(); refreshD(); }); });
 
     // The MaiK section edits the theme on screen: it used to edit only the light palette, so in dark
@@ -10718,6 +10748,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     [a, hp].forEach(function (b) { if (b) { b.setAttribute("role", "switch"); b.setAttribute("aria-checked", String(b.classList.contains("on"))); b.setAttribute("aria-label", b === a ? "Optimise for this device" : "Vibration feedback on tap"); } });
     var d = s.querySelector("#hvDet"); if (d) d.textContent = window.innerWidth + "×" + window.innerHeight + " · DPR " + (window.devicePixelRatio || 1).toFixed(2);
     s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-t") === ds.theme); });
+    var hcv = s.querySelector("#hvHomeColor"); if (hcv && document.activeElement !== hcv) hcv.value = ds.homeColor || "";
     s.querySelectorAll("#hvAppear button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-a") === ds.appearance); });
     s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-f") === ds.font); });
     s.querySelectorAll("#hvHead button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-h") === ds.headingStyle); });
