@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-nucleotides",
+ "subject": "biochemistry",
+ "title": "Nucleotide defects and drug targets",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Adenosine deaminase deficiency** floods lymphocytes with deoxyadenosine converted to dATP, which allosterically locks ribonucleotide reductase in off conformations, starving all deoxy nucleotides and arresting dividing T, B and NK precursors: severe combined immunodeficiency (SCID) with absent thymic shadow, lymphopenia from birth, opportunistic and live vaccine (BCG, rotavirus) disasters, chronic diarrhoea and failure to thrive. PEG-ADA enzyme replacement bridges to stem cell transplant or lentiviral gene therapy (first ex vivo gene therapy approvals lineage), while excess ADA in pleural fluids separately diagnoses tuberculosis by activity, same enzyme opposite directions.",
+   "say": "Adenosine deaminase deficiency locks reductase with dATP, arresting all lymphocyte lineages as SCID. Enzyme replacement bridges to transplant or gene therapy, the first ex vivo approvals lineage historically.",
+   "vis": {
+    "kind": "flow",
+    "title": "ADA failure to SCID",
+    "nodes": [
+     {"id": "ada", "label": "ADA absent, deoxyadenosine floods"},
+     {"id": "datp", "label": "dATP locks reductase off"},
+     {"id": "starve", "label": "All dNTPs starve in precursors"},
+     {"id": "scid", "label": "T B NK SCID from birth"}
+    ],
+    "edges": [["ada", "datp"], ["datp", "starve"], ["starve", "scid"]]
+   }
+  },
+  {
+   "tx": "**Purine nucleoside phosphorylase deficiency** accumulates dGTP selectively in T cells (B relatively spared initially, neurology and autoimmunity joining), milder and later than ADA SCID, while adenosine deaminase 2 deficiency (DADA2, different gene entirely) vasculitis and stroke syndrome punishes name confusion in genetics clinics. Ribonucleotide reductase itself (two subunits, radical tyrosyl chemistry quenched by hydroxyurea, gemcitabine diphosphate, iron chelation triapine investigational) is the S phase chokepoint every deoxy starvation strategy shares.",
+   "say": "PNP deficiency accumulates dGTP selectively in T cells later than ADA SCID presents. Ribonucleotide reductase is the S phase chokepoint every deoxy starvation strategy shares mechanistically across drugs.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "ADA deficiency", "points": ["dATP locks reductase globally", "T B NK absent, earliest SCID", "PEG-ADA bridge therapy"]},
+    "right": {"title": "PNP deficiency", "points": ["dGTP T selective toxicity", "Later, neurology and autoimmunity", "Transplant mainstay"]
+    }
+   }
+  },
+  {
+   "tx": "**Hydroxyurea** quenches the reductase tyrosyl radical, synchronising tumours historically and, decisively, raising fetal haemoglobin in sickle cell disease (stress erythropoiesis and nitric oxide contributions debated, HbF induction proven) reducing crises, acute chest and mortality with myelosuppression monitoring. Thiopurines (6-mercaptopurine, azathioprine prodrug) require HGPRT activation to thioguanine nucleotides (fake purines incorporated and strand damaging), detoxified by TPMT methylation and NUDT15 hydrolysis, genotyped before dosing (prior SAM lesson), with allopurinol co prescription dangerously shunting activation (dose cut two thirds rule).",
+   "say": "Hydroxyurea raises fetal haemoglobin in sickle disease decisively beyond its reductase history. Thiopurines require HGPRT activation with TPMT genotyping, and allopurinol co prescription dangerously shunts activation requiring dose cuts.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug", "Nucleotide chokepoint", "Fatal interaction or screen"],
+    "rows": [
+     ["Hydroxyurea", "Reductase radical quenched; HbF up", "Monitor marrow; sickle cornerstone"],
+     ["6-Mercaptopurine", "HGPRT activated fake purine", "TPMT/NUDT15 genotype; allopurinol shunt"],
+     ["Methotrexate", "DHFR folate starvation", "Leucovorin timing rescue"],
+     ["5-Fluorouracil", "Thymidylate synthase suicide", "DPYD screen; leucovorin potentiates"]
+    ]
+   }
+  },
+  {
+   "tx": "Viral nucleotide selectivity exploits activation geography: **acyclovir** needs herpes thymidine kinase first phosphorylation (hundred fold enrichment in infected cells) then host kinases to triphosphate chain terminator (no 3 hydroxyl) at viral polymerase preferentially, sparing host marrow; AZT (zidovudine) reverses the lesson (host kinases activate, HIV reverse transcriptase prefers, host mitochondrial polymerase gamma pays with lactic acidosis, myopathy and marrow suppression). Tenofovir nucleotides bypass first kinase (phosphonates) resisting kinase loss resistance routes.",
+   "say": "Acyclovir needs viral kinase first phosphorylation for infected cell enrichment therapeutically. AZT reverses activation geography with mitochondrial polymerase paying in lactic acidosis and marrow suppression toxicities historically.",
+   "vis": null
+  },
+  {
+   "tx": "**Allopurinol** hypersensitivity and tumour lysis illustrate metabolite extremes: oxypurinol renal cleared accumulates in kidney failure (dose adjust, HLA-B*5801 Stevens-Johnson risk), febuxostat hepatic alternative; rasburicase recombinant uricase converts urate to soluble allantoin preventing TLS nephropathy but haemolyses G6PD deficient red cells and falsely lowers urate ex vivo unless tubes iced (enzyme keeps working in tube, laboratory pearl). Pegloticase immunogenicity (anti drug antibodies, infusion reactions, G6PD screen) limits refractory gout durability, co administered methotrexate improving persistence in modern protocols.",
+   "say": "Rasburicase prevents tumour lysis nephropathy but haemolyses G6PD deficient cells and falsely lowers urate unless tubes ice immediately. Pegloticase immunogenicity limits refractory gout durability without methotrexate co therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Synthesis blockers (prevent urate birth)", "points": ["Allopurinol and febuxostat (xanthine oxidase)", "Treat to target chronic gout", "Start low, prophylaxis cover"]},
+    "right": {"title": "Urate destroyers (remove existing load)", "points": ["Rasburicase (TLS acute), pegloticase (refractory chronic)", "G6PD screen mandatory", "Ice tubes after rasburicase draws"]
+    }
+   }
+  },
+  {
+   "tx": "Mitochondrial nucleotide salvage failure (TK2, and polymerase gamma maintenance next module) and **ribonucleotide reductase** subunit mutations (RRM2B) deplete mitochondrial DNA in muscle, liver and kidney, proving deoxy supply is compartmentalised, not merely S phase. DNA structure and replication next assemble these nucleotides into chromosomes whose copying fidelity (one error per billion after proofreading and repair) these starvation and analogue drugs deliberately degrade in cancer and viruses.",
+   "say": "Mitochondrial salvage failure depletes mitochondrial DNA proving deoxy supply is compartmentalised beyond S phase. DNA replication next assembles nucleotides into chromosomes whose fidelity drugs deliberately degrade therapeutically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Deoxy supply compartments",
+    "nodes": [
+     {"id": "cyto", "label": "Cytosol: reductase plus TK1 (S phase)"},
+     {"id": "mito", "label": "Mitochondria: TK2 salvage constitutive"},
+     {"id": "fail", "label": "Either fails: division or mtDNA depletes"}
+    ],
+    "edges": [["cyto", "fail"], ["mito", "fail"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
