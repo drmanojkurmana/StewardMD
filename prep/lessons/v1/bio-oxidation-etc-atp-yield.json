@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-oxidation-etc",
+ "subject": "biochemistry",
+ "title": "Chemiosmosis, ATP synthase and yield",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Chemiosmosis** (Mitchell, Nobel recognised against contemporary scepticism) stores chain energy as proton motive force (electrical membrane potential about minus one hundred eighty millivolts matrix negative plus pH gradient about half to one unit alkaline inside, totalling roughly two hundred twenty millivolts). Isolated mitochondria acidifying their medium, reconstituted bacteriorhodopsin plus synthase vesicles making ATP in light, and uncoupler sensitivity proved coupling without any direct chemical intermediate ever found, ending the substrate level search for oxidative phosphorylation mechanism.",
+   "say": "Chemiosmosis stores chain energy as proton motive force of roughly two hundred twenty millivolts total. Reconstitution experiments proved coupling without any direct chemical intermediate ever being found historically.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-oxidation-etc-gen1.webp",
+    "alt": "Protons flow through synthase to spin its head and form ATP beside a blocked adenine nucleotide exchanger inset.",
+    "caption": "Proton driven synthase making ATP beside its blocked exchanger, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**ATP synthase** is a rotary motor: protons drive the F0 c ring (eight c subunits in humans) rotating gamma shaft inside F1 alpha3 beta3 hexamer, whose binding change mechanism (Boyer) cycles beta subunits through loose ADP plus Pi binding, tight ATP formation (energy step is release, not synthesis), and open release, three ATP per full turn. Roughly four protons per ATP delivered to cytosol counting phosphate and adenine nucleotide exchange costs, yielding P/O two point five and one point five modern integers replaced.",
+   "say": "ATP synthase rotates its gamma shaft to cycle beta subunits through binding change steps, three ATP per turn. Roughly four protons per cytosolic ATP yields modern P/O values of two point five.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Synthase part", "Job", "Blocker anchor"],
+    "rows": [
+     ["F0 c ring (membrane)", "Proton turbine rotation", "Oligomycin plugs; DCCD experimental"],
+     ["Gamma shaft", "Cam forcing beta conformations", "Rotation visualised single molecule Nobel work"],
+     ["F1 alpha3 beta3", "Loose, tight, open ATP cycle", "Aurovertin, efrapeptin experimental"],
+     ["ANT exchanger (separate protein)", "ATP out, ADP in (electrogenic)", "Atractyloside and bongkrekic acid poisons"]
+    ]
+   }
+  },
+  {
+   "tx": "**Respiratory control** couples burning to need elegantly: ADP availability gates synthase proton return, gradient otherwise rises until pumping thermodynamically stalls (state four rest), ADP pulse drops gradient and respiration surges (state three) giving respiratory control ratios measuring mitochondrial health experimentally. Calcium uptake (uniporter, matrix dehydrogenases activated), thyroid hormone (uncoupling and biogenesis chronic), and catecholamine thermogenesis tune the set point physiologically beyond ADP alone.",
+   "say": "ADP availability gates proton return, so gradient stalls pumping at rest until ADP pulses surge respiration. Calcium and thyroid hormone tune the set point physiologically beyond ADP alone mechanisms.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "State 4 (resting, ADP low)", "points": ["Gradient maximal", "Respiration slow, leak only", "Heat fraction highest"]},
+    "right": {"title": "State 3 (working, ADP high)", "points": ["Gradient partially discharged usefully", "Respiration maximal coupled", "ATP output maximal"]
+    }
+   }
+  },
+  {
+   "tx": "**Uncouplers** short circuit the gradient as heat: chemical protonophores (dinitrophenol historic weight loss deaths, FCCP experimental), free fatty acids cycling, and physiological UCP1 thermogenin in brown adipose (opened by fatty acids, closed by purine nucleotides, sympathetic beta-3 drive in infants and cold exposed adults burning fat without shivering, PET incidentalomas). Aspirin overdose uncouples clinically (hyperthermia, tachypnoea, mixed acid base chaos), while oligomycin does the diagnostic opposite (blocks synthase, respiration secondarily stalls, uncoupler rescues oxygen consumption experimentally).",
+   "say": "Uncouplers short circuit gradient as heat physiologically in brown fat and fatally with dinitrophenol historically. Aspirin overdose uncouples clinically, while oligomycin blocks synthase with respiration stalling secondarily behind it.",
+   "vis": null
+  },
+  {
+   "tx": "Yield bookkeeping must quote assumptions: per **NADH** ten protons pumped, at about four per cytosolic ATP gives two point five; succinate six protons gives one point five; glucose totals thirty (glycerol phosphate shuttle, cytosolic NADH as FAD) or thirty two (malate-aspartate, as NADH) modern versus thirty six/thirty eight classic integers three and two. Anaerobic glycolysis net two looks derisory until oxygen independence (red cells, retina, exercising white fibres, tumours Warburg) prices it correctly.",
+   "say": "Glucose totals thirty or thirty two ATP modern by shuttle choice, versus thirty six or thirty eight classic. Anaerobic net two prices correctly only against oxygen independence in red cells and tumours.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Yield line (per glucose)", "Modern (2.5/1.5)", "Classic (3/2)"],
+    "rows": [
+     ["Substrate level net (glycolysis plus GTP)", "2 plus 2 GTP counted in TCA lines", "Same substrate counts"],
+     ["With glycerol phosphate shuttle", "30 ATP total", "36 ATP total"],
+     ["With malate-aspartate shuttle", "32 ATP total", "38 ATP total"],
+     ["Anaerobic only", "2 net always", "2 net always"]
+    ]
+   }
+  },
+  {
+   "tx": "Inhibitor geography completes yield reasoning (rotenone I, antimycin III, cyanide IV, **oligomycin** V/synthase, atractyloside ANT, uncouplers gradient itself), each predicting NADH fluorescence, oxygen consumption and ATP patterns in respirometry stems (oligomycin insensitive respiration equals leak, FCCP maximal reveals reserve capacity, rotenone plus succinate isolates complex II downstream segments in mitochondrial medicine diagnostics). Free radical leak and P450 systems next close oxidation by spending its carriers on defence and detoxification instead of ATP.",
+   "say": "Inhibitor geography predicts respirometry patterns segment by segment in mitochondrial diagnostics experimentally. Free radical leak and P450 systems next spend carriers on defence and detoxification instead of ATP production.",
+   "vis": {
+    "kind": "flow",
+    "title": "Respirometry reads blocks",
+    "nodes": [
+     {"id": "base", "label": "Basal respiration (coupled)"},
+     {"id": "oligo", "label": "Oligomycin: leak remains"},
+     {"id": "fccp", "label": "Uncoupler: maximal reserve"},
+     {"id": "rot", "label": "Rotenone/antimycin: non mitochondrial remainder"}
+    ],
+    "edges": [["base", "oligo"], ["oligo", "fccp"], ["fccp", "rot"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

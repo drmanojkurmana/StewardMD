@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "module": "bio-enzymes",
+ "subject": "biochemistry",
+ "title": "Allosteric control and coenzymes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Allosteric enzymes** (oligomeric, regulatory sites distinct from active sites) give sigmoid substrate curves (substrate itself a homotropic activator across subunits, concerted Monod-Wyman-Changeux T/R versus sequential Koshland models), where heterotropic effectors shift the curve (K systems change S0.5 affinity) or scale capacity (V systems change Vmax) without obeying Michaelis Km language strictly. Haemoglobin is the non enzyme prototype; PFK-1, pyruvate kinase, acetyl-CoA carboxylase and ATCase are metabolic exemplars already met.",
+   "say": "Allosteric enzymes give sigmoid curves where effectors shift affinity or capacity distinctly from active sites. Haemoglobin is the prototype, with PFK-1 and carboxylase as metabolic exemplars already met previously.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "K system (affinity shifted)", "points": ["S0.5 moves, Vmax same", "Curve slides left (activator) or right", "PFK-1 with F-2,6-BP prototype"]},
+    "right": {"title": "V system (capacity shifted)", "points": ["Vmax moves, S0.5 same", "Curve scales vertically", "Fewer teaching prototypes, rarer stems"]
+    }
+   }
+  },
+  {
+   "tx": "**Covalent modification** switches enzymes interconvertibly, above all phosphorylation (kinases spend ATP onto serine/threonine/tyrosine hydroxyls, phosphatases hydrolyse off) amplified through cascades (glycogen phosphorylase kinase chain, MAP kinase tiers, insulin receptor tyrosine autophosphorylation) with each tier multiplying signal and integrating multiple inputs. Adenylylation, ADP-ribosylation (cholera toxin locking Gs), ubiquitination and limited proteolysis diversify the same logic of post translational state as information.",
+   "say": "Phosphorylation switches enzymes through amplified kinase cascades integrating multiple inputs tier by tier. Adenylylation, ADP-ribosylation and proteolysis diversify post translational state as information across systems physiologically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cascade amplification logic",
+    "nodes": [
+     {"id": "hor", "label": "Hormone receptor (few molecules)"},
+     {"id": "kin", "label": "Kinase tiers multiply signal"},
+     {"id": "enz", "label": "Target enzymes switched coordinately"},
+     {"id": "off", "label": "Phosphatases reset (insulin favours here in glycogen)"}
+    ],
+    "edges": [["hor", "kin"], ["kin", "enz"], ["enz", "off"]]
+   }
+  },
+  {
+   "tx": "**Zymogens** store destructive or clotting power inert until limited proteolysis clips activation segments irreversibly: enteropeptidase ignites trypsinogen to trypsin, trypsin ignites chymotrypsinogen, procarboxypeptidases, proelastase and its ownogen in cascade (premature pancreatic activation equals pancreatitis, guarded by SPINK1 inhibitor, acidic granules, low calcium), prothrombin to thrombin on platelet surfaces, procaspases in apoptosis, proinsulin to insulin plus C-peptide. Irreversibility suits one way commitments (digest, clot, die) versus reversible phosphorylation for toggling metabolism.",
+   "say": "Zymogens store destructive power until proteolysis clips them irreversibly for digestion, clotting and apoptosis commitments. Premature pancreatic activation equals pancreatitis guarded by inhibitor proteins and granule acidity.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Zymogen", "Activator clip", "Guard against premature fire"],
+    "rows": [
+     ["Trypsinogen", "Enteropeptidase (duodenal brush)", "SPINK1 inhibitor, granule acidity"],
+     ["Pepsinogen", "Stomach acid autoactivation", "Mucus bicarbonate barrier"],
+     ["Prothrombin", "Factor Xa complex on platelets", "Vitamin K carboxylation needed first"],
+     ["Proinsulin", "Prohormone convertases (Golgi granules)", "C-peptide co-secreted equimolar marker"]
+    ]
+   }
+  },
+  {
+   "tx": "The **coenzyme vitamin map** must be recitable cold: NAD/NADP from niacin (redox), FAD/FMN riboflavin (redox, flavoproteins), TPP thiamine (decarboxylations), PLP pyridoxine (amino transfers and decarboxylations), coenzyme A pantothenate (acyl carriage on phosphopantetheine), THF folate (one carbons), methyl/adenosyl cobalamin B12 (two reactions), biotin (carboxylations), lipoamide (swinging arm, made endogenously), ascorbate (hydroxylase reductant), vitamin K (carboxylase cofactor recycled). Metals (zinc carbonic anhydrase and alcohol dehydrogenase, copper oxidases, selenium as selenocysteine in peroxidases) complete cofactor literacy.",
+   "say": "The coenzyme vitamin map must be recitable cold from NAD through biotin and vitamin K recycling. Metals complete cofactor literacy across zinc, copper and selenium enzyme systems in metabolism.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Coenzyme", "Vitamin source", "Flagship enzymes"],
+    "rows": [
+     ["TPP", "Thiamine B1", "PDH, alpha-KGDH, BCKDH, transketolase"],
+     ["PLP", "Pyridoxine B6", "Transaminases, decarboxylases, ALA synthase, phosphorylase"],
+     ["Coenzyme A (pantetheine)", "Pantothenate B5", "PDH E2, fatty acid synthase ACP"],
+     ["THF", "Folate", "Thymidylate synthase, purine synthesis"],
+     ["Biotin (covalently bound)", "Biotin", "Pyruvate, acetyl-CoA, propionyl-CoA carboxylases"],
+     ["NAD, FAD", "Niacin B3, riboflavin B2", "Dehydrogenases everywhere (prior modules)"]
+    ]
+   }
+  },
+  {
+   "tx": "Apoenzyme without cofactor is catalytically crippled, explaining vitamin deficiency as distributed enzyme failure (beriberi dehydrogenases, pellagra NAD starvation, scurvy hydroxylases) and **holoenzyme** reconstitution assays (red cell transketolase TPP stimulation diagnosing thiamine). Tight prosthetic groups (FAD succinate dehydrogenase covalently, heme peroxidases, biotin carboxylases lysine linked) survive purification while loose coenzymes dialysis away, a laboratory distinction stems use to interpret activity losses.",
+   "say": "Vitamin deficiency is distributed enzyme failure across dehydrogenases and hydroxylases simultaneously. Tight prosthetic groups survive purification while loose coenzymes dialyse away, interpreting activity losses in laboratory stems precisely.",
+   "vis": null
+  },
+  {
+   "tx": "Isoenzymes (same reaction, different subunits, kinetics and regulation by tissue) preview the next lesson through **hexokinase** I to IV already contrasted and lactate dehydrogenase tetramers ahead, while multienzyme complexes (PDH, fatty acid synthase) channel intermediates without dilution (substrate channelling, metabolons). Regulation thus layers allosteric seconds, covalent minutes, zymogen irreversibility and gene expression hours, one temporal hierarchy governing every pathway lesson before and after this module.",
+   "say": "Isoenzymes tune the same reaction by tissue, previewing lactate dehydrogenase tetramers next lesson. Regulation layers seconds, minutes, irreversibility and hours in one temporal hierarchy governing every pathway.",
+   "vis": {
+    "kind": "flow",
+    "title": "Regulation by timescale",
+    "nodes": [
+     {"id": "sec", "label": "Seconds: allosteric effectors"},
+     {"id": "min", "label": "Minutes: phosphorylation cascades"},
+     {"id": "irr", "label": "Irreversible: zymogen clips"},
+     {"id": "hrs", "label": "Hours: enzyme synthesis and degradation"}
+    ],
+    "edges": [["sec", "min"], ["min", "irr"], ["irr", "hrs"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
