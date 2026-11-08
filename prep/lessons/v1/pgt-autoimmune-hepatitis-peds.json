@@ -91,39 +91,10 @@
       "say": "Liver biopsy is essential before starting immunosuppression. The pathognomonic hallmark is interface hepatitis, where dense infiltration of lymphocytes and plasma cells spills across the limiting plate into the hepatic lobule, causing rosetting of hepatocytes.",
       "tx": "Verify the **interface hepatitis hallmark** on histopathological examination. Liver biopsy is mandatory to confirm AIH and exclude other etiologies. Microscopic hallmarks include interface hepatitis (lymphoplasmacytic infiltration crossing the portal tract limiting plate and destroying adjacent periportal hepatocytes), hepatic rosette formation, emperipolesis (intracellular lymphocytes within hepatocytes), and variable portal fibrosis.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Dense portal lymphoplasmacytic infiltration"
-          },
-          {
-            "id": "b",
-            "label": "Erosion of limiting plate into lobule (interface hepatitis)"
-          },
-          {
-            "id": "c",
-            "label": "Apoptosis and degeneration of periportal hepatocytes"
-          },
-          {
-            "id": "d",
-            "label": "Hepatocyte regeneration in cords (liver cell rosetting)"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-hepatitis-fig2.webp",
+        "alt": "Liver lobule histology, serology chart and treatment mechanism in autoimmune hepatitis.",
+        "caption": "Interface hepatitis confirms autoimmune hepatitis. Credit: StewardMD."
       }
     },
     {
@@ -193,23 +164,10 @@
       "say": "Up to half of children with autoimmune hepatitis also have autoimmune sclerosing cholangitis. Always evaluate the biliary tree with magnetic resonance cholangiopancreatography, which reveals telltale intrahepatic and extrahepatic bile duct beading and stricturing.",
       "tx": "Investigate **autoimmune sclerosing cholangitis overlap** in pediatric patients. Autoimmune sclerosing cholangitis (ASC) coexists in up to 50% of pediatric AIH cases. Children present with classical AIH features but magnetic resonance cholangiopancreatography (MRCP) reveals irregular intrahepatic and extrahepatic bile duct strictures, dilatation, and pruning. Adding ursodeoxycholic acid (15 mg/kg/day) to immunosuppression is standard in ASC.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Isolated Pediatric AIH",
-          "points": [
-            "Normal cholangiography (MRCP)",
-            "Strictly parenchymal interface hepatitis",
-            "Rapid complete response to immunosuppression"
-          ]
-        },
-        "right": {
-          "title": "Autoimmune Sclerosing Cholangitis (ASC)",
-          "points": [
-            "Bile duct beading and pruning on MRCP",
-            "High association with inflammatory bowel disease",
-            "Requires UDCA addition; slower resolution"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/igg4-sclerosing-cholangitis-fig1.webp",
+        "alt": "Biliary stricture with storiform fibrosis and obliterative phlebitis.",
+        "caption": "Sclerosing cholangitis overlap changes management. Credit: StewardMD."
       }
     },
     {
