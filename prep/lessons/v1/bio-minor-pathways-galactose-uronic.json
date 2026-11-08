@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "bio-minor-pathways",
+ "subject": "biochemistry",
+ "title": "Galactose, uronic acid and pentosuria",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Galactose from milk lactose enters through **galactokinase** to galactose-1-phosphate, then galactose-1-phosphate uridylyltransferase (GALT) swaps it onto UDP so the epimerase GALE can return UDP-glucose for glycogen or glycolysis. The pathway therefore converts dietary galactose into glucose currency without net ATP drama, provided all three enzymes work and UDP sugars recycle cleanly.",
+   "say": "Galactose enters through galactokinase, then GALT swaps it onto UDP so the epimerase can return UDP-glucose. The pathway converts dietary galactose into glucose currency, provided all three enzymes work cleanly.",
+   "vis": {
+    "kind": "flow",
+    "title": "Galactose to glucose currency",
+    "nodes": [
+     {
+      "id": "gal",
+      "label": "Galactose"
+     },
+     {
+      "id": "g1p",
+      "label": "Galactose-1-phosphate (kinase)"
+     },
+     {
+      "id": "udp",
+      "label": "UDP-galactose (GALT swap)"
+     },
+     {
+      "id": "glu",
+      "label": "UDP-glucose (epimerase)"
+     }
+    ],
+    "edges": [
+     [
+      "gal",
+      "g1p"
+     ],
+     [
+      "g1p",
+      "udp"
+     ],
+     [
+      "udp",
+      "glu"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic **galactosaemia** (GALT absent) poisons the newborn within days of milk feeds: galactose-1-phosphate injures liver, kidney tubules and brain, while aldose reductase makes galactitol that swells the lens into an oil droplet cataract. Jaundice, hepatomegaly, poor feeding, Gram negative (especially E. coli) sepsis and later intellectual disability and ovarian failure define the untreated course.",
+   "say": "Classic galactosaemia poisons the newborn within days of milk feeds. Galactose-1-phosphate injures liver, kidney and brain, while galactitol swells the lens. Jaundice, liver enlargement, sepsis and later disability define the untreated course.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Toxic driver"
+    ],
+    "rows": [
+     [
+      "Liver failure, coagulopathy",
+      "Galactose-1-phosphate load"
+     ],
+     [
+      "Oil droplet cataract",
+      "Galactitol osmotic swelling"
+     ],
+     [
+      "E. coli sepsis risk",
+      "Galactose impairs neutrophils (teaching link)"
+     ],
+     [
+      "Premature ovarian insufficiency",
+      "Chronic galactose metabolite injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediate lactose withdrawal (soya or elemental formula, lifelong galactose restriction, calcium support) rescues survival, yet speech, cognition and ovarian outcomes may still falter from endogenous galactose production, an honesty point for counselling. By contrast **galactokinase deficiency** causes cataract alone in infancy, with no liver or brain disease, because only galactitol accumulates behind the first step.",
+   "say": "Immediate lactose withdrawal rescues survival, yet speech, cognition and ovarian outcomes may still falter from endogenous production. Galactokinase deficiency causes cataract alone, because only galactitol accumulates behind the first step.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "GALT deficiency (classic)",
+     "points": [
+      "Systemic poisoning",
+      "Liver, brain, ovary injured",
+      "Strict lifelong restriction"
+     ]
+    },
+    "right": {
+     "title": "Galactokinase deficiency",
+     "points": [
+      "Cataract only",
+      "Liver and brain spared",
+      "Diet prevents lens injury"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Newborn screening** detects classic disease through low GALT activity or raised total galactose, but transfusions and heat can distort enzyme assays, so genetics confirms borderline results. Reducing substance in urine (galactose) with a negative glucose oxidase test mirrors fructosuria reasoning. Families need emergency letters because intercurrent illness plus hidden lactose in medicines rekindles metabolite load.",
+   "say": "Newborn screening detects classic disease, but transfusions can distort enzyme assays, so genetics confirms borderline results. Reducing substance with a negative glucose test mirrors fructosuria reasoning. Families need emergency letters for hidden lactose.",
+   "vis": null
+  },
+  {
+   "tx": "The **uronic acid pathway** oxidises glucose-6-phosphate carbon one into UDP-glucuronate, the donor for bilirubin, steroid and drug glucuronidation and for glycosaminoglycan synthesis. Humans stop short of vitamin C here because gulonolactone oxidase is a pseudogene in us, so ascorbate remains dietary. Xylulose handling on this route explains the benign pentosuria that follows.",
+   "say": "The uronic acid pathway makes UDP-glucuronate for conjugation and glycosaminoglycan synthesis. Humans cannot finish vitamin C here because gulonolactone oxidase is a pseudogene. Xylulose handling on this route explains benign pentosuria.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-minor-pathways-fig1.webp",
+    "alt": "Diagram of the uronic acid pathway showing glucose conversion to glucuronic acid, its role in conjugation and glycosaminoglycan synthesis.",
+    "caption": "Uronic acid pathway: glucose to glucuronic acid, conjugation, GAGs, and clinical relevance.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Essential pentosuria** excretes L-xylulose because xylitol dehydrogenase handling falters; it is entirely benign, needs no diet, and historically mattered only when urine reducing tests mislabelled carriers as diabetic. Close the minor pathways by separating alarms from curiosities: G6PD crises, fructose intolerance and classic galactosaemia demand action, while essential fructosuria and pentosuria demand only recognition and reassurance.",
+   "say": "Essential pentosuria excretes L-xylulose and is entirely benign. Separate alarms from curiosities: G6PD crises, fructose intolerance and classic galactosaemia demand action, while essential fructosuria and pentosuria need only reassurance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Act urgently",
+     "points": [
+      "G6PD oxidant crisis",
+      "Hereditary fructose intolerance",
+      "Classic galactosaemia"
+     ]
+    },
+    "right": {
+     "title": "Recognise and reassure",
+     "points": [
+      "Essential fructosuria",
+      "Essential pentosuria",
+      "Galactokinase cataract (diet only)"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
