@@ -1,95 +1,106 @@
 {
- "v": 1,
- "module": "psy-psychopathology",
- "subject": "psychiatry",
- "title": "Psychopathology",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Psychopathology** is the precise description of abnormal mental experience, behaviour and cognition, recorded without premature diagnosis. Form (how a symptom is structured) matters more than content (its theme): a belief is classified by fixity and plausibility, not by whether its topic is persecution or jealousy. Accurate description drives reliable diagnosis across clinicians.",
-   "say": "Describe symptoms by form, not theme. Fixity and plausibility classify a belief, not its topic.",
-   "vis": null
-  },
-  {
-   "tx": "**Delusions** are fixed false beliefs held with absolute conviction despite contradictory evidence and not shared by the person's culture. Primary delusions arrive fully formed (delusional percept attaches delusional meaning to a normal perception), while secondary delusions elaborate from mood or hallucinations. Delusional mood, misidentification (Capgras: familiar person replaced by impostor; Fregoli: stranger is familiar person in disguise) and somatic, grandiose, persecutory and referential themes recur in examinations.",
-   "say": "Fixed, unshakeable, culturally alien beliefs are delusions. Capgras says impostor; Fregoli says disguised familiar.",
-   "vis": null
-  },
-  {
-   "tx": "**Hallucinations** are perceptions without external stimulus, experienced as real and in external space, distinguished from illusions (misinterpretation of a real stimulus), pseudohallucinations (recognised as internal, in inner space) and hypnagogic or hypnopompic phenomena on sleep borders which are normal. Auditory hallucinations dominate psychosis; visual hallucinations suggest organic disease; tactile formication suggests stimulant or alcohol related states.",
-   "say": "Perception without stimulus is hallucination. Visual hallucinations point organic; misread real stimuli are illusions.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/psy-psychopathology-fig1.webp",
-    "alt": "Multi-panel diagram comparing hallucination, illusion, pseudohallucination, and hypnagogic phenomena.",
-    "caption": "Visual guide to distinguishing hallucinations from related perceptions",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Formal thought disorder** shows in speech structure: loosening of associations, tangentiality, circumstantiality, word salad, neologisms, clang associations, perseveration and thought block. Schneider first rank symptoms (thought insertion, withdrawal, broadcasting, third person and running commentary hallucinations, delusional perception, passivity) historically flagged schizophrenia but occur in other psychoses and no longer carry diagnostic primacy. Negative symptoms (affective flattening, alogia, avolition, anhedonia) predict function better than positive ones.",
-   "say": "Disordered speech form reveals thought disorder. First rank symptoms occur beyond schizophrenia. Negative symptoms drive disability.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Phenomenon",
-     "Stimulus",
-     "Insight and space"
-    ],
-    "rows": [
-     [
-      "Hallucination",
-      "Absent",
-      "Real, external space, no insight"
-     ],
-     [
-      "Illusion",
-      "Present but misread",
-      "Corrects with attention"
-     ],
-     [
-      "Pseudohallucination",
-      "Absent",
-      "Recognised internal, inner space"
-     ],
-     [
-      "Hypnagogic imagery",
-      "Sleep onset",
-      "Normal phenomenon"
-     ]
-    ]
-   }
+  "v": 1,
+  "module": "psy-psychopathology",
+  "subject": "psychiatry",
+  "title": "Psychopathology",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "**Psychopathology** is the precise description of abnormal mental experience, behaviour and cognition without premature diagnosis. Clinicians describe the **form of a symptom** because structure matters more than the theme alone. A belief is classified by fixity and plausibility rather than by whether the topic concerns persecution or jealousy. Accurate description allows different clinicians to record the same phenomenon reliably during assessment. Good description therefore drives reliable diagnosis and safer treatment planning for patients.",
+      "say": "Psychopathology describes abnormal mental experience precisely without making a premature diagnosis quickly. Clinicians describe form carefully because structure matters more than theme alone. A belief is classified by fixity and plausibility during careful mental state examination. Accurate description allows different clinicians to record phenomena reliably and consistently.",
+      "vis": null
+    },
+    {
+      "tx": "**Delusions** are fixed false beliefs that patients hold with absolute conviction despite clear contradictory evidence. The belief is not shared by the culture of the patient and remains unshakeable during discussion. **Primary delusions** arrive fully formed when a normal perception suddenly acquires delusional meaning for the patient. Secondary delusions develop from abnormal mood or hallucinations and elaborate an existing abnormal experience. **Capgras syndrome** describes a familiar person replaced by an impostor while Fregoli describes a stranger as a familiar person.",
+      "say": "Delusions are fixed false beliefs that patients hold despite clear contradictory evidence. Primary delusions arrive fully formed when normal perception suddenly acquires delusional meaning. Secondary delusions develop from abnormal mood or hallucinations during an illness episode. Capgras syndrome describes a familiar person replaced by an exact impostor.",
+      "vis": null
+    },
+    {
+      "tx": "**Hallucinations** are perceptions that occur without an external stimulus and feel real in external space. Illusions are misinterpretations of a real stimulus and correct when the patient pays closer attention. **Pseudohallucinations** feel internal and patients recognise them as unreal within inner subjective space. Auditory hallucinations dominate psychosis while **visual hallucinations** should prompt clinicians to search for organic disease. Hypnagogic phenomena occur at sleep onset and remain normal experiences for many healthy people.",
+      "say": "Hallucinations are perceptions that occur without any external stimulus being present nearby. Illusions are misinterpretations of real stimuli and correct with closer attention afterwards. Pseudohallucinations feel internal and patients recognise them as unreal experiences themselves. Visual hallucinations should prompt clinicians to search carefully for organic disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/psy-psychopathology-fig1.webp",
+        "alt": "Multi-panel diagram comparing hallucination, illusion, pseudohallucination, and hypnagogic phenomena.",
+        "caption": "Visual guide to distinguishing hallucinations from related perceptions",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "**Formal thought disorder** describes abnormal structure of speech rather than the content that patients discuss. Features include loosening of associations, tangentiality, circumstantiality, word salad, neologisms, clang associations, perseveration and thought block. **Schneider first rank symptoms** include thought insertion, thought withdrawal, thought broadcasting, running commentary voices and delusional perception. These symptoms occur in other psychoses and no longer carry diagnostic primacy for schizophrenia alone. **Negative symptoms** predict long term function better than positive symptoms in many patients.",
+      "say": "Formal thought disorder describes abnormal speech structure rather than discussed content itself. Features include loosening of associations, tangentiality, word salad and new invented words. Schneider first rank symptoms include thought insertion, broadcasting and running commentary voices. Negative symptoms are important because they predict long term function better than positive symptoms generally.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phenomenon",
+          "Stimulus",
+          "Insight and space"
+        ],
+        "rows": [
+          [
+            "Hallucination",
+            "Absent",
+            "Real, external space, no insight"
+          ],
+          [
+            "Illusion",
+            "Present but misread",
+            "Corrects with attention"
+          ],
+          [
+            "Pseudohallucination",
+            "Absent",
+            "Recognised internal, inner space"
+          ],
+          [
+            "Hypnagogic imagery",
+            "Sleep onset",
+            "Normal phenomenon"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "These diagrams contrast **loosening of associations** and tangentiality with word salad and neologisms through simple speech trajectories. One panel stresses that **form of thought** concerns how thinking is organised while content concerns what the patient believes. Another panel lists **Schneider first rank symptoms** including thought withdrawal, broadcasting, passivity and delusional perception. The figure helps candidates name speech abnormalities precisely instead of writing vague descriptions during examinations.",
+      "say": "These diagrams show loosening of associations and tangentiality beside word salad clearly. One panel separates form of thought from content of thought for students. Another panel lists Schneider first rank symptoms including thought withdrawal and broadcasting. The figure helps candidates name speech abnormalities precisely during clinical examinations and vivas.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/psy-psychopathology-gen1.webp",
+        "alt": "Diagrams of loosening, tangentiality, word salad, neologisms and Schneider symptoms",
+        "caption": "Diagrams of thought form defects and Schneider symptoms. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-psy-001",
+    "bk2-psy-002",
+    "bk2-psy-003",
+    "bk2-psy-004",
+    "bk2-psy-005",
+    "bk2-psy-006",
+    "bk2-psy-007",
+    "bk2-psy-008",
+    "bk2-psy-009",
+    "bk2-psy-010"
+  ],
+  "src": [],
+  "refs": [
+    "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-batch2-psychiatry",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ],
- "quiz": [
-  "bk2-psy-001",
-  "bk2-psy-002",
-  "bk2-psy-003",
-  "bk2-psy-004",
-  "bk2-psy-005",
-  "bk2-psy-006",
-  "bk2-psy-007",
-  "bk2-psy-008",
-  "bk2-psy-009",
-  "bk2-psy-010"
- ],
- "src": [],
- "refs": [
-  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-batch2-psychiatry",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
 }

@@ -3,11 +3,11 @@
  "module": "phm-antivirals",
  "subject": "pharmacology",
  "title": "Antivirals: herpes, hepatitis, influenza and COVID",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Aciclovir** (viral thymidine kinase activated, HSV and VZV, **crystal nephropathy** with hydration, neurotoxicity in renal failure) with **valaciclovir** (prodrug bioavailability, zoster and suppression) and famciclovir treats; **resistance** (thymidine kinase mutants in immunocompromise) switches to **foscarnet**. Encephalitis IV high dose with fluids saves; neonatal and ocular emergencies dose aggressively. TTP and HUS with high dose immunocompromise watched.",
-   "say": "HSV VZV encephalitis gets IV aciclovir hydrated: crystals clog dry kidneys. Resistant immunocompromise foscarnet.",
+   "tx": "**Aciclovir** treats herpes simplex and varicella zoster infections after activation by viral thymidine kinase inside infected cells. Intravenous treatment saves life in encephalitis but causes **crystal nephropathy** when the patient remains dehydrated during infusion. **Valaciclovir** improves oral bioavailability for zoster and suppressive therapy, while resistance from thymidine kinase mutation in immunocompromised patients requires a change to foscarnet therapy.",
+   "say": "Aciclovir treats herpes simplex and varicella zoster infections after viral enzymes activate the drug. Intravenous therapy saves life in encephalitis when clinicians start treatment early. The drug crystallises in renal tubules and damages kidneys when hydration remains inadequate. Resistant infection in immunocompromised patients requires foscarnet instead of aciclovir.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/phm-antivirals-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Ganciclovir and valganciclovir** (CMV retinitis, colitis, transplant prophylaxis; **neutropenia** with G-CSF backup, teratogenic) suppress while **foscarnet** (resistant CMV and HSV, **electrolyte chaos**: hypo and hypercalcaemia, hypo and hyperphosphataemia, hypomagnesaemia with seizures, **hydration mandatory**, penile ulcers) rescues; **cidofovir** (nephrotoxic with **probenecid** and saline, uveitis) thirds. Electrolytes with creatinine gate foscarnet courses.",
-   "say": "CMV marrow suppresses on ganciclovir; resistant electrolytes chaos on foscarnet hydrated. Counts and chemistry gate.",
+   "tx": "**Ganciclovir** and valganciclovir suppress cytomegalovirus retinitis, colitis and transplant infection but commonly cause **neutropenia** that may need growth factor support. **Foscarnet** rescues resistant cytomegalovirus and herpes infection but disturbs calcium, phosphate and magnesium and causes seizures when electrolytes shift rapidly. Cidofovir remains a third option but harms kidneys and requires probenecid with saline protection during treatment.",
+   "say": "Ganciclovir suppresses cytomegalovirus disease in transplant recipients and patients with advanced immunodeficiency. The drug suppresses bone marrow and causes neutropenia that requires regular blood monitoring. Foscarnet helps rescue resistant infection but causes several electrolyte disturbances simultaneously in patients. Clinicians check blood counts and kidney chemistry before every foscarnet course.",
    "vis": null
   },
   {
-   "tx": "**Oseltamivir** (high risk flu 48 hours, prophylaxis outbreaks, nausea) with **baloxavir** (single dose cap dependent, resistance PA) and **zanamivir** (bronchospasm) treats influenza; **ribavirin** (RSV aerosol legacy, HCV with interferon past, **teratogenic** with haemolytic anaemia) is now niche. Amantadine (Parkinson, adamantane resistance ubiquitous) retired flu. Vaccines prevent best; steroids debate severe.",
-   "say": "High risk flu 48 hours gets oseltamivir; single dose baloxavir caps. Ribavirin teratogenic anaemias limit.",
+   "tx": "The fundus image shows **cytomegalovirus retinitis** with pale yellow necrotic retina, flame haemorrhages and white sheathing of vessels spreading from the optic disc. This pizza pie appearance threatens sight in advanced immunodeficiency and needs urgent **ganciclovir** treatment with immune recovery. Recognising necrosis with haemorrhage distinguishes this emergency from quieter retinal disease and explains why **valganciclovir** maintenance follows induction.",
+   "say": "The fundus shows necrotic yellow retina with haemorrhage and sheathed vessels near the disc. Cytomegalovirus causes progressive retinal damage and leads to blindness without urgent treatment. Ganciclovir suppresses the virus while immune recovery protects the remaining vision. Regular eye screening catches disease before the macula suffers damage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-antivirals-gen1.webp",
+    "alt": "Fundus photo showing yellow necrotic retinal patches, red haemorrhages and white sheathed vessels near disc.",
+    "caption": "Fundus photo of necrotic retina with haemorrhage and sheathing. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Oseltamivir** treats high risk influenza best within forty eight hours and also prevents infection during outbreaks in closed settings. **Baloxavir** offers single dose treatment through a different mechanism, while zanamivir can provoke bronchospasm in airway disease. **Ribavirin** now has a niche role because it causes haemolytic anaemia and carries major teratogenic risk, and widespread resistance has retired amantadine from influenza treatment.",
+   "say": "Oseltamivir treats influenza most effectively when high risk patients start treatment within forty eight hours. Baloxavir provides convenient single dose therapy through cap dependent endonuclease inhibition. Zanamivir provokes bronchospasm and suits only selected patients with healthy airways. Ribavirin causes haemolytic anaemia and damages the unborn baby during pregnancy.",
    "vis": null
   },
   {
-   "tx": "**HCV DAAs** (**sofosbuvir with velpatasvir** pangenotypic 12 weeks, **amiodarone bradycardia** lethal combo, **HBV reactivation** screened) cure; **HBV** (tenofovir, entecavir per hepatitis wave) suppresses. **Remdesivir** (early COVID outpatient and hypoxic inpatient, transaminases watched) with **nirmatrelvir-ritonavir** (**Paxlovid**: **CYP3A4 interactions** pausing statins and anticoagulants, dysgeusia, **rebound**, renal dosed) treats COVID by risk; molnupiravir (mutagenic, pregnancy banned) lasts. Monoclonals variant chase.",
-   "say": "Amiodarone plus sofosbuvir stops hearts: screen. Paxlovid pauses CYP3A4 victims; rebound counsels.",
+   "tx": "Direct acting antivirals cure hepatitis C, and **sofosbuvir with velpatasvir** provides pangenotypic treatment over twelve weeks in most patients. The combination with amiodarone causes dangerous **bradycardia**, and clinicians screen for **hepatitis B reactivation** before starting therapy. Tenofovir or entecavir suppresses hepatitis B, while nirmatrelvir with ritonavir treats high risk COVID but interacts widely through strong CYP3A4 inhibition.",
+   "say": "Direct acting antivirals cure hepatitis C in most patients within twelve weeks. Sofosbuvir combinations cause dangerous bradycardia when patients also receive amiodarone treatment. Clinicians screen every patient for hepatitis B because reactivation complicates hepatitis C therapy. Nirmatrelvir with ritonavir affects many medicines and causes interactions through strong enzyme inhibition.",
    "vis": {
     "kind": "table",
     "cols": [
