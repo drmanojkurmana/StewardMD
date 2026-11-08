@@ -1,0 +1,274 @@
+{
+  "id": "pen-monogenic-diabetes-mody-neonatal",
+  "title": "Monogenic Diabetes: MODY (GCK, HNF1A, HNF4A) and Neonatal Diabetes (KCNJ11/ABCC8)",
+  "subject": "ss-paediatric-endocrinology",
+  "module": "Type 1 Diabetes, Diabetic Ketoacidosis and Neonatal Hypoglycemia",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Monogenic diabetes must be actively distinguished from autoimmune diabetes in young non-obese individuals.",
+      "tx": "Identify characteristic **MODY clinical diagnostic features** indicating single-gene autosomal dominant diabetes. MODY features non-ketotic, non-insulin-dependent diabetes presenting before 25 years of age with autosomal dominant inheritance across >= 3 generations, preserved C-peptide secretion, and absent pancreatic islet autoantibodies. Molecular genetic confirmation provides accurate risk counseling for extended family members and distinguishes these entities from type 1 diabetes.",
+      "vis": {
+        "kind": "table",
+        "title": "MODY Diagnostic Characteristics",
+        "cols": [
+          "Diagnostic Feature",
+          "Finding in MODY",
+          "Contrasting Feature in T1D"
+        ],
+        "rows": [
+          [
+            "Age of presentation",
+            "Young, classically before 25 years",
+            "Any age, peak in mid-childhood"
+          ],
+          [
+            "Inheritance pattern",
+            "Autosomal dominant across >= 3 generations",
+            "Polygenic with rare direct vertical transmission"
+          ],
+          [
+            "Islet autoantibodies",
+            "Persistently negative (GADA, IA-2A, ZnT8A)",
+            "Positive in > 90-95% at diagnosis"
+          ],
+          [
+            "Endogenous insulin",
+            "Preserved C-peptide (> 200 pmol/L) after years",
+            "Rapidly undetectable after honeymoon phase"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Glucokinase mutations reset the glycemic set-point, causing mild stable fasting hyperglycemia without microvascular risk.",
+      "tx": "Recognize the benign course of **GCK-MODY (MODY 2) set-point defect** across pediatric and adult cohorts. GCK mutations (7p13) alter the pancreatic glucokinase glucose sensor, raising the threshold for insulin secretion; patients demonstrate mild, asymptomatic, stable fasting hyperglycemia (100-145 mg/dL), HbA1c 5.6-7.3%, and do NOT require pharmacotherapy or develop microvascular complications.",
+      "vis": {
+        "kind": "compare",
+        "title": "GCK-MODY (MODY 2) Pathophysiology",
+        "left": {
+          "title": "Biochemical Characteristics",
+          "points": [
+            "Fasting hyperglycemia stable lifelong (100-145 mg/dL)",
+            "Small OGTT increment (< 54 mg/dL / 3.0 mmol/L)",
+            "HbA1c tightly held between 5.6-7.3%"
+          ]
+        },
+        "right": {
+          "title": "Clinical Management",
+          "points": [
+            "Zero risk of microvascular complications",
+            "No pharmacologic therapy (insulin/OHAs ineffective)",
+            "Treatment only considered during pregnancy if fetus unaffected"
+          ]
+        }
+      }
+    },
+    {
+      "say": "HNF1A mutations cause progressive diabetes with a low renal glucose threshold and exquisite sulfonylurea sensitivity.",
+      "tx": "Identify the genetics and treatment of **HNF1A-MODY (MODY 3) low renal threshold** in adolescents. HNF1A mutations cause progressive beta-cell dysfunction, low renal glucose threshold (glycosuria at blood glucose < 180 mg/dL), marked sensitivity to low-dose oral sulfonylureas, and cardiovascular risk, managed effectively with gliclazide or glibenclamide.",
+      "vis": {
+        "kind": "flow",
+        "title": "HNF1A-MODY Diagnostic and Management Pathway",
+        "nodes": [
+          {
+            "id": "h1",
+            "label": "Adolescent Diabetes + Glycosuria at BG < 180 mg/dL"
+          },
+          {
+            "id": "h2",
+            "label": "Genetic Confirmation of Heterozygous HNF1A Mutation"
+          },
+          {
+            "id": "h3",
+            "label": "Initiate Low-Dose Oral Sulfonylurea (Gliclazide)"
+          },
+          {
+            "id": "h4",
+            "label": "Excellent Glycemic Control & Discontinue Insulin"
+          }
+        ],
+        "edges": [
+          [
+            "h1",
+            "h2",
+            "Negative islet autoantibodies"
+          ],
+          [
+            "h2",
+            "h3",
+            "Exquisite SUR1 receptor sensitivity"
+          ],
+          [
+            "h3",
+            "h4",
+            "Replaces insulin in over 80% of cases"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "HNF4A mutations uniquely cause transient hyperinsulinemic hypoglycemia and macrosomia in neonates.",
+      "tx": "Recognize the perinatal presentation of **HNF4A-MODY (MODY 1) neonatal macrosomia** in infant carriers. Mutations in HNF4A cause transient hyperinsulinemic hypoglycemia and macrosomia (> 4 kg birth weight) in neonates, followed in adolescence by progressive non-ketotic diabetes responsive to sulfonylureas such as glibenclamide.",
+      "vis": {
+        "kind": "compare",
+        "title": "HNF4A Dual-Stage Clinical Phenotype",
+        "left": {
+          "title": "Neonatal Presentation",
+          "points": [
+            "Transient hyperinsulinemic hypoglycemia",
+            "Marked macrosomia with birth weight > 4 kg",
+            "Responsive to diazoxide therapy in infancy"
+          ]
+        },
+        "right": {
+          "title": "Adolescent Presentation",
+          "points": [
+            "Progressive non-ketotic beta-cell failure",
+            "Normal renal threshold (unlike HNF1A)",
+            "Highly sensitive to low-dose oral sulfonylureas"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Any diabetes diagnosed before six months of age is monogenic and mandates urgent genetic testing.",
+      "tx": "Establish the critical **Neonatal diabetes mellitus (NDM) definition window** for diagnostic decision-making. Diabetes diagnosed before 6 months of age is monogenic in > 85% of cases and is NOT autoimmune type 1 diabetes; testing for KCNJ11 and ABCC8 mutations is urgently indicated to guide therapy.",
+      "vis": {
+        "kind": "table",
+        "title": "Neonatal Diabetes vs Type 1 Diabetes Distinctions",
+        "cols": [
+          "Feature",
+          "Neonatal Diabetes (NDM)",
+          "Autoimmune T1D"
+        ],
+        "rows": [
+          [
+            "Age of onset",
+            "< 6 months of age (> 85% monogenic)",
+            "Extremely rare before 6 months of age"
+          ],
+          [
+            "Primary genetics",
+            "KCNJ11, ABCC8, 6q24, INS mutations",
+            "Polygenic HLA class II DR3/DR4 susceptibility"
+          ],
+          [
+            "First-line therapy",
+            "High-dose oral sulfonylureas (KATP mutants)",
+            "Immediate lifelong subcutaneous insulin"
+          ],
+          [
+            "Islet antibodies",
+            "Consistently negative",
+            "Positive in > 90%"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Most infants with potassium channel mutations can be successfully transitioned from insulin to high-dose sulfonylureas.",
+      "tx": "Execute the protocol for **Oral sulfonylurea transition in KCNJ11 NDM** under careful inpatient monitoring. Over 90% of infants with permanent neonatal diabetes caused by activating KCNJ11 or ABCC8 mutations can be successfully transitioned off insulin injections to high-dose oral sulfonylureas (glibenclamide 0.2-1.0 mg/kg/day), binding SUR1 directly to close KATP channels.",
+      "vis": {
+        "kind": "flow",
+        "title": "Inpatient Glibenclamide Transition Protocol",
+        "nodes": [
+          {
+            "id": "g1",
+            "label": "Confirmed Activating KCNJ11 / ABCC8 Mutation"
+          },
+          {
+            "id": "g2",
+            "label": "Initiate Oral Glibenclamide (0.2 mg/kg/day)"
+          },
+          {
+            "id": "g3",
+            "label": "Titrate Glibenclamide (Up to 0.2-1.0 mg/kg/day)"
+          },
+          {
+            "id": "g4",
+            "label": "Wean and Cease Subcutaneous Insulin Injections"
+          }
+        ],
+        "edges": [
+          [
+            "g1",
+            "g2",
+            "Under continuous blood glucose monitoring"
+          ],
+          [
+            "g2",
+            "g3",
+            "Escalate dose every 48 hours"
+          ],
+          [
+            "g3",
+            "g4",
+            "Over 90% successfully achieve complete insulin independence"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Severe activating KCNJ11 mutations couple neonatal diabetes with developmental delay and early-onset epilepsy.",
+      "tx": "Identify the multi-system neurodevelopmental features of the **DEND syndrome spectrum** in affected infants. Severe activating KCNJ11 mutations cause Developmental delay, Epilepsy, and Neonatal Diabetes (DEND syndrome), where high-dose sulfonylureas such as glibenclamide penetrate the blood-brain barrier and improve neurodevelopment. Prompt genetic sequencing enables early targeted pharmacotherapy with high-dose sulfonylureas to improve neurodevelopmental outcomes and seizure frequency.",
+      "vis": {
+        "kind": "table",
+        "title": "DEND Syndrome Triad and Severity",
+        "cols": [
+          "Domain",
+          "Pathology",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "Pancreatic endocrine",
+            "Open KATP channels in beta cells",
+            "Permanent neonatal diabetes mellitus"
+          ],
+          [
+            "Central nervous system",
+            "Open KATP channels in cortical neurons",
+            "Severe developmental delay and infantile epilepsy"
+          ],
+          [
+            "Neuromuscular",
+            "Hyperpolarized motor neurons",
+            "Generalized hypotonia and muscle weakness"
+          ],
+          [
+            "Therapy",
+            "High-dose glibenclamide",
+            "Improves both glycemic control and neurological scores"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transient neonatal diabetes resolves in early life but carries a substantial risk of relapse during adolescence.",
+      "tx": "Recognize the genetic etiology and clinical trajectory of **Transient neonatal diabetes (6q24 imprinting)** in infants. Transient NDM resolves spontaneously by 12-18 months of life, caused by overexpression of imprinted genes at 6q24 (paternal uniparental isodisomy or duplication of PLAGL1/HYMAI), though relapsing during puberty into permanent non-ketotic diabetes.",
+      "vis": {
+        "kind": "compare",
+        "title": "Transient NDM (6q24) Natural History",
+        "left": {
+          "title": "Infant Phase",
+          "points": [
+            "Onset in first weeks of life with severe IUGR",
+            "Insulin required for initial metabolic control",
+            "Spontaneous resolution typically by 12-18 months"
+          ]
+        },
+        "right": {
+          "title": "Adolescent Relapse",
+          "points": [
+            "Recurrence of diabetes during pubertal insulin resistance",
+            "Permanent diabetes requiring lifestyle and oral agents",
+            "Underlying PLAGL1/HYMAI overexpression at 6q24"
+          ]
+        }
+      }
+    }
+  ]
+}

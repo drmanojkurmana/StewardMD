@@ -1,0 +1,285 @@
+{
+  "id": "pen-t1d-ispad-insulin-regimens",
+  "title": "Pediatric Type 1 Diabetes: ISPAD 2022 Guidelines, MDI Regimens and CGM Targets",
+  "subject": "ss-paediatric-endocrinology",
+  "module": "Type 1 Diabetes, Diabetic Ketoacidosis and Neonatal Hypoglycemia",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Type 1 diabetes is confirmed by detecting circulating autoantibodies directed against pancreatic islet antigens.",
+      "tx": "Identify the **Type 1 diabetes autoantibody quartet** establishing an autoimmune etiology. T1D is diagnosed by presence of >= 1 (usually >= 2) pancreatic islet autoantibodies: Glutamic Acid Decarboxylase (GADA), Islet Antigen-2 (IA-2A), Insulin Autoantibodies (IAA), and Zinc Transporter 8 (ZnT8A), distinguishing autoimmune diabetes from monogenic forms.",
+      "vis": {
+        "kind": "table",
+        "title": "Pancreatic Islet Autoantibody Quartet",
+        "cols": [
+          "Autoantibody Marker",
+          "Target Antigen",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "GADA",
+            "Glutamic acid decarboxylase 65",
+            "High sensitivity across all pediatric age groups"
+          ],
+          [
+            "IA-2A",
+            "Protein tyrosine phosphatase-like protein",
+            "Associated with rapid beta-cell destruction"
+          ],
+          [
+            "IAA",
+            "Circulating insulin molecule",
+            "Most frequent autoantibody in infants and toddlers"
+          ],
+          [
+            "ZnT8A",
+            "Zinc transporter 8 in secretory granules",
+            "Enhances diagnostic yield in GADA/IA-2A negative cases"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Total daily insulin dose progresses from initial diagnosis through the honeymoon phase and pubertal growth spurt.",
+      "tx": "Anticipate dynamic **Total daily insulin dose progression** across pediatric developmental milestones. Total daily insulin (TDI) dose is 0.5-0.7 U/kg/day at onset, decreases to < 0.5 U/kg/day during the honeymoon phase (residual beta-cell secretion for 3-12 months), and rises to 1.0-1.5 U/kg/day during pubertal growth spurt, requiring titration with insulin glargine and insulin aspart.",
+      "vis": {
+        "kind": "table",
+        "title": "Total Daily Insulin Evolution Over Childhood",
+        "cols": [
+          "Clinical Phase",
+          "TDI Range",
+          "Physiological Driver"
+        ],
+        "rows": [
+          [
+            "New onset / Post-DKA",
+            "0.5-0.7 U/kg/day",
+            "Reversal of glucotoxicity and re-establishing metabolic control"
+          ],
+          [
+            "Honeymoon phase (3-12 months)",
+            "< 0.5 U/kg/day",
+            "Temporary recovery of residual beta-cell insulin secretion"
+          ],
+          [
+            "Prepubertal maintenance",
+            "0.7-1.0 U/kg/day",
+            "Steady baseline pediatric replacement requirement"
+          ],
+          [
+            "Pubertal growth spurt",
+            "1.0-1.5 U/kg/day",
+            "Growth hormone and sex steroid mediated insulin resistance"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Multiple daily injection regimens divide total daily insulin into basal coverage and rapid-acting meal boluses.",
+      "tx": "Structure the **Basal-bolus multiple daily injection (MDI) distribution** to mimic endogenous physiology. MDI regimens split TDI into 40-50% basal insulin (long-acting analog: glargine, degludec, or detemir once daily) and 50-60% rapid-acting prandial insulin (aspart, lispro, or glulisine) divided across meals, utilizing insulin degludec, insulin glargine, insulin aspart, and insulin lispro.",
+      "vis": {
+        "kind": "compare",
+        "title": "MDI Basal-Bolus Partitioning Paradigm",
+        "left": {
+          "title": "Basal Analogues (40-50%)",
+          "points": [
+            "Insulin glargine, degludec, or detemir once daily",
+            "Suppresses hepatic glucose output between meals and overnight",
+            "Peakless 24-hour pharmacokinetic profile"
+          ]
+        },
+        "right": {
+          "title": "Prandial Analogues (50-60%)",
+          "points": [
+            "Insulin aspart, lispro, or glulisine before meals",
+            "Matches postprandial glycemic excursions",
+            "Dosed dynamically using carbohydrate ratios"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Continuous glucose monitoring consensus guidelines establish strict targets for time in range and hypoglycemia avoidance.",
+      "tx": "Audit glycemic control using international **Continuous glucose monitoring (CGM) metrics** targets. International consensus targets: Time in Range (TIR 70-180 mg/dL) > 70%, Time Below Range (< 70 mg/dL) < 4%, Time < 54 mg/dL < 1%, and Glucose Management Indicator (GMI / target HbA1c) < 7.0% (53 mmol/mol), while maintaining coefficient of variation <= 36%.",
+      "vis": {
+        "kind": "table",
+        "title": "International Consensus CGM Metrics",
+        "cols": [
+          "CGM Metric",
+          "Target Consensus Level",
+          "Clinical Rationale"
+        ],
+        "rows": [
+          [
+            "Time in Range (70-180 mg/dL)",
+            "> 70%",
+            "Optimal microvascular complication protection"
+          ],
+          [
+            "Time Below Range (< 70 mg/dL)",
+            "< 4%",
+            "Minimizes hypoglycemic symptoms and unawareness"
+          ],
+          [
+            "Time Very Low (< 54 mg/dL)",
+            "< 1%",
+            "Prevents neuroglycopenia, seizures, and coma"
+          ],
+          [
+            "Target HbA1c / GMI",
+            "< 7.0% (53 mmol/mol)",
+            "Gold-standard systemic glycation benchmark"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Carbohydrate ratios and sensitivity factors are calculated using the classic mathematical 500 and 1800 rules.",
+      "tx": "Calculate meal boluses and glycemic corrections using the **Carbohydrate-to-insulin ratio (CIR) 500 rule** and 1800 rule. Carbohydrate coverage is calculated as CIR = 500 / TDI (grams of carbohydrate covered by 1 unit of rapid-acting insulin); Insulin Sensitivity Factor (ISF) for corrections is calculated as 1800 / TDI (mg/dL drop per unit).",
+      "vis": {
+        "kind": "flow",
+        "title": "Meal Bolus and Correction Calculation",
+        "nodes": [
+          {
+            "id": "r1",
+            "label": "Determine TDI from Recent Stable Days"
+          },
+          {
+            "id": "r2",
+            "label": "Calculate CIR = 500 / TDI (g carb / unit)"
+          },
+          {
+            "id": "r3",
+            "label": "Calculate ISF = 1800 / TDI (mg/dL / unit)"
+          },
+          {
+            "id": "r4",
+            "label": "Total Bolus = (Carbs / CIR) + ((BG - Target) / ISF)"
+          }
+        ],
+        "edges": [
+          [
+            "r1",
+            "r2",
+            "Rule of 500"
+          ],
+          [
+            "r1",
+            "r3",
+            "Rule of 1800"
+          ],
+          [
+            "r2",
+            "r4",
+            "Meal component"
+          ],
+          [
+            "r3",
+            "r4",
+            "Correction component"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Teplizumab represents a major breakthrough, delaying clinical onset of stage three type 1 diabetes.",
+      "tx": "Evaluate clinical evidence supporting **Teplizumab delay of clinical T1D** in high-risk individuals. Teplizumab, an anti-CD3 monoclonal antibody, is FDA-approved for stage 2 T1D (dysglycemia with >= 2 autoantibodies); a 14-day intravenous infusion course delays progression to clinical stage 3 diabetes by a median of 2-3 years, preserving endogenous beta-cell function.",
+      "vis": {
+        "kind": "compare",
+        "title": "Teplizumab Disease-Modifying Immunotherapy",
+        "left": {
+          "title": "Indications & Regimen",
+          "points": [
+            "Stage 2 T1D: normoglycemia or dysglycemia with >= 2 islet autoantibodies",
+            "Administered as a daily 14-day intravenous infusion course",
+            "Exhausts autoreactive CD8+ effector T lymphocytes"
+          ]
+        },
+        "right": {
+          "title": "Clinical Efficacy",
+          "points": [
+            "Delays clinical stage 3 diagnosis by median 2-3 years",
+            "Preserves C-peptide production and functional beta-cell mass",
+            "Adverse events include transient lymphopenia and cytokine release"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Severe hypoglycemia with unconsciousness or seizures requires immediate rescue with nasal or parenteral glucagon.",
+      "tx": "Execute immediate emergency protocols for **Severe hypoglycemia management (nasal glucagon)** in pediatric diabetes. Severe hypoglycemia (seizures/coma) is treated with dry nasal powder glucagon 3 mg (approved for age >= 4 years) or intramuscular glucagon (0.5 mg for weight < 25 kg, 1.0 mg for >= 25 kg), followed by oral complex carbohydrates once conscious.",
+      "vis": {
+        "kind": "flow",
+        "title": "Severe Hypoglycemia Emergency Protocol",
+        "nodes": [
+          {
+            "id": "h1",
+            "label": "Unconscious / Seizing Hypoglycemic Child"
+          },
+          {
+            "id": "h2",
+            "label": "Administer Glucagon (Nasal 3 mg or IM 0.5-1.0 mg)"
+          },
+          {
+            "id": "h3",
+            "label": "Position in Recovery Lateral Decubitus"
+          },
+          {
+            "id": "h4",
+            "label": "Oral Carbohydrates Once Alert & Re-check Glucose"
+          }
+        ],
+        "edges": [
+          [
+            "h1",
+            "h2",
+            "No oral fluids permitted"
+          ],
+          [
+            "h2",
+            "h3",
+            "Prevent aspiration from post-glucagon emesis"
+          ],
+          [
+            "h3",
+            "h4",
+            "Replenish hepatic glycogen stores"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Routine surveillance for associated autoimmune conditions must be maintained throughout childhood.",
+      "tx": "Adhere to the mandatory **Celiac and thyroid screening schedule** recommended by ISPAD 2022 guidelines. Annual thyroid screening (TSH and anti-TPO antibodies) and celiac disease screening (anti-tTG IgA with total IgA) are recommended at diagnosis and every 1-2 years thereafter, given high comorbid prevalence in pediatric type 1 diabetes.",
+      "vis": {
+        "kind": "table",
+        "title": "Autoimmune Comorbidity Surveillance Schedule",
+        "cols": [
+          "Disorder",
+          "Screening Tests",
+          "Frequency & Action"
+        ],
+        "rows": [
+          [
+            "Autoimmune Thyroiditis",
+            "TSH, Free T4, Anti-TPO",
+            "At diagnosis, then annually; start levothyroxine if elevated TSH"
+          ],
+          [
+            "Celiac Disease",
+            "Tissue transglutaminase IgA, Total IgA",
+            "At diagnosis, at 2 and 5 years, then biannually; confirm on duodenal biopsy"
+          ],
+          [
+            "Addison Disease",
+            "Electrolytes, morning cortisol if symptomatic",
+            "Screen in presence of recurrent unexplained hypoglycemia"
+          ]
+        ]
+      }
+    }
+  ]
+}
