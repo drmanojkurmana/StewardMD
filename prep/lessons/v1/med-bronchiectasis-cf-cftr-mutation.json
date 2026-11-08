@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "module": "med-bronchiectasis-cf",
+ "subject": "medicine",
+ "title": "Cystic fibrosis: CFTR genetics, sweat testing, and pseudomonal eradication",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Mutations in the ATP-binding cassette transporter gene on chromosome 7q31 disrupt epithelial fluid secretion across multiple organ systems. The commonest genetic defect is the **CFTR mutation** delta-F508, present in seventy percent of cystic fibrosis alleles. This class II mutation involves a three-base-pair deletion of phenylalanine at position 508, resulting in misfolding of the CFTR protein. Endoplasmic reticulum quality control mechanisms degrade the misfolded channel, preventing its trafficking to the apical plasma membrane.",
+   "say": "Mutations in the transporter gene on chromosome seven affect fluid secretion across organ systems. The commonest genetic defect is the delta-F508 mutation, present in seventy percent of alleles. This class-two mutation involves a three-base deletion causing protein misfolding. Quality control mechanisms degrade the abnormal channel, preventing its trafficking to the cell membrane.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cystic-fibrosis-fig2.webp",
+    "alt": "Diagram illustrating CFTR chloride channel defect and sweat chloride excretion.",
+    "caption": "CFTR apical channel defect, chloride conductance, and transepithelial transport. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The definitive diagnostic gold standard for establishing cystic fibrosis evaluates transepithelial chloride absorption in sweat ducts. Performing the quantitative pilocarpine iontophoresis **sweat chloride test** stimulates localized sweating to collect at least seventy-five milligrams of sweat. A sweat chloride concentration of 60 mmol/L or higher on two separate occasions confirms the diagnosis of cystic fibrosis. Intermediate values between 30 and 59 mmol/L warrant comprehensive CFTR gene sequencing and nasal potential difference testing.",
+   "say": "The definitive diagnostic standard for cystic fibrosis evaluates chloride absorption in sweat glands. Performing the quantitative pilocarpine iontophoresis sweat test stimulates sweating to collect an adequate sample. A sweat chloride concentration of sixty millimoles per litre or higher on two separate days confirms the diagnosis. Intermediate values warrant gene sequencing and specialized testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sweat chloride level",
+     "Diagnostic interpretation",
+     "Underlying CFTR channel function",
+     "Next clinical step"
+    ],
+    "rows": [
+     [
+      "<= 29 mmol/L",
+      "Normal (CF unlikely)",
+      "Intact CFTR chloride reabsorption",
+      "Investigate alternative diagnoses"
+     ],
+     [
+      "30 to 59 mmol/L",
+      "Intermediate (Borderline)",
+      "Partial CFTR dysfunction or rare variant",
+      "Complete CFTR gene sequencing"
+     ],
+     [
+      ">= 60 mmol/L",
+      "Positive (Diagnostic of CF)",
+      "Severe failure of ductal chloride uptake",
+      "Initiate multidisciplinary CF care"
+     ],
+     [
+      "Insufficient weight",
+      "Quantity not sufficient (< 75 mg)",
+      "Technical collection failure",
+      "Repeat test on contralateral forearm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progressive colonisation by opportunistic gram-negative bacteria accelerates pulmonary decline and bronchiectasis in cystic fibrosis. Infection with **Pseudomonas** aeruginosa typically follows early childhood colonization with Staphylococcus aureus and Haemophilus influenzae. Once established, Pseudomonas transitions into an alginate-producing mucoid phenotype that forms impenetrable biofilms, resisting host neutrophil phagocytosis and shielding bacteria from systemic antibiotics, driving rapid lung function decline and increasing hospitalizations.",
+   "say": "Progressive colonization by opportunistic gram-negative bacteria accelerates pulmonary decline in cystic fibrosis. Infection with Pseudomonas aeruginosa typically follows early colonization with Staphylococcus aureus. Once established, Pseudomonas converts into a mucoid phenotype that forms thick biofilms, resisting host defences and shielding bacteria from antibiotics, accelerating functional decline.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cystic-fibrosis-fig1.webp",
+    "alt": "Pathological schematic of Pseudomonas colonization and cystic fibrosis lung disease.",
+    "caption": "Pseudomonas aeruginosa airway colonization and bronchiectatic destruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Early aggressive eradication protocols prevent the transition of Pseudomonas from intermittent colonization to permanent chronic biofilm infection. Detecting initial growth on routine sputum surveillance triggers immediate eradication therapy using nebulized **tobramycin inhalation solution** (300 mg twice daily) or nebulized colistimethate sodium for twenty-eight days, often combined with oral ciprofloxacin. For established chronic pseudomonal infection, alternating twenty-eight-day on/off cycles of inhaled tobramycin suppress bacterial density and halve pulmonary exacerbation rates.",
+   "say": "Early aggressive eradication regimens prevent Pseudomonas from establishing permanent biofilm infection. Detecting initial growth on sputum screening triggers immediate eradication therapy using nebulized tobramycin or colistimethate for twenty-eight days, combined with oral ciprofloxacin. For established chronic infection, alternating monthly cycles of inhaled tobramycin suppress bacterial load and lower flare rates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early eradication protocol",
+     "points": [
+      "Triggered by first isolation of Pseudomonas",
+      "Nebulized tobramycin 300 mg BD for 28 days",
+      "Oral ciprofloxacin for 2 to 3 weeks",
+      "Goal: Complete microbiological clearance"
+     ]
+    },
+    "right": {
+     "title": "Chronic suppressive therapy",
+     "points": [
+      "For permanent mucoid Pseudomonas colonization",
+      "Alternating 28 days on, 28 days off cycles",
+      "Inhaled tobramycin, colistimethate, or aztreonam",
+      "Goal: Reduce bacterial burden & exacerbations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Small-molecule CFTR modulators help restore function to defective chloride channels at the cellular level. Administering **ivacaftor**, a CFTR potentiator, increases the open-channel probability of cell-surface CFTR channels carrying class III gating mutations like G551D. Combining ivacaftor with CFTR correctors (elexacaftor and tezacaftor) in the triple-combination regimen (ETI) assists proper folding and trafficking of delta-F508 protein to the cell surface, producing dramatic improvements in FEV1, body mass index, and sweat chloride.",
+   "say": "Small-molecule CFTR modulators help restore function to defective chloride channels at the cellular level. Giving ivacaftor, a CFTR potentiator, increases channel opening probability in gating mutations like G551D. Combining ivacaftor with correctors like elexacaftor and tezacaftor assists proper folding of delta-F508 channels, producing dramatic gains in lung function, weight and sweat chloride levels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Modulator class",
+     "Representative drug agents",
+     "Targeted CFTR defect",
+     "Primary cellular mechanism"
+    ],
+    "rows": [
+     [
+      "CFTR Potentiator",
+      "Ivacaftor (VX-770)",
+      "Class III gating (G551D)",
+      "Increases open-channel gating probability at cell surface"
+     ],
+     [
+      "CFTR Corrector",
+      "Tezacaftor / Elexacaftor",
+      "Class II processing (delta-F508)",
+      "Facilitates chaperone folding and ER-to-membrane trafficking"
+     ],
+     [
+      "Triple therapy (ETI)",
+      "Elexacaftor + Tezacaftor + Ivacaftor",
+      "At least one delta-F508 allele",
+      "Dual correction of folding plus potentiated gating"
+     ],
+     [
+      "Read-through agents",
+      "Ataluren (investigational)",
+      "Class I nonsense / stop codons",
+      "Promotes ribosomal read-through of premature stop codon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Localized suppurative infection with cavitation and tissue necrosis within the lung parenchyma constitutes a serious complication. A **lung abscess** typically arises from aspiration of oral anaerobes (Peptostreptococcus, Prevotella, Fusobacterium) in patients with impaired consciousness, poor dentition, or alcohol intoxication. On chest radiography and computed tomography, an abscess appears as a round cavity with thick irregular walls and an air-fluid level, requiring prolonged targeted antibiotic therapy with clindamycin or ampicillin-sulbactam for four to six weeks.",
+   "say": "Localized suppurative infection with cavitation and tissue necrosis represents a serious complication. A lung abscess typically arises from aspirating oral anaerobes in individuals with impaired consciousness or dental disease. On chest imaging, an abscess appears as a round cavity displaying an air-fluid level, requiring antibiotic therapy with clindamycin or ampicillin-sulbactam for four to six weeks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "asp",
+      "label": "Aspiration of oral anaerobic bacteria"
+     },
+     {
+      "id": "pneu",
+      "label": "Pneumonitis in dependent lung segment (posterior upper/superior lower)"
+     },
+     {
+      "id": "necr",
+      "label": "Liquefactive tissue necrosis & parenchymal destruction"
+     },
+     {
+      "id": "cav",
+      "label": "Cavitary lung abscess with air-fluid level"
+     },
+     {
+      "id": "abx",
+      "label": "Targeted antibiotic therapy for 4 to 6 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "asp",
+      "pneu"
+     ],
+     [
+      "pneu",
+      "necr"
+     ],
+     [
+      "necr",
+      "cav"
+     ],
+     [
+      "cav",
+      "abx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypertrophy of bronchial arteries driven by chronic airway inflammation predisposes patients to life-threatening respiratory haemorrhage. Clinicians define **massive haemoptysis** as expectoration of more than one hundred to two hundred millilitres of blood within twenty-four hours, which threatens asphyxiation. The bleeding originates from high-pressure systemic bronchial arteries rather than the low-pressure pulmonary circulation. Urgent bronchial artery embolisation via interventional angiography represents the definitive treatment of choice to achieve immediate haemostasis.",
+   "say": "Enlargement of bronchial arteries driven by chronic inflammation predisposes patients to life-threatening bleeding. Clinicians define massive haemoptysis as bleeding exceeding one hundred to two hundred millilitres daily, threatening asphyxiation. The haemorrhage originates from high-pressure bronchial arteries rather than pulmonary vessels. Urgent bronchial artery embolisation via angiography is the treatment of choice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bronchial artery bleeding",
+     "points": [
+      "Source of 90% of massive haemoptysis",
+      "High systemic arterial pressure (120/80 mmHg)",
+      "Hypertrophied, tortuous collateral vessels",
+      "Treated by bronchial artery embolisation"
+     ]
+    },
+    "right": {
+     "title": "Pulmonary artery bleeding",
+     "points": [
+      "Source of < 10% of massive haemoptysis",
+      "Low pulmonary arterial pressure (25/10 mmHg)",
+      "Rasmussen aneurysm (TB) or pulmonary trauma",
+      "Treated by coil embolisation or surgical resection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Congenital mirror-image transposition of the thoracic and abdominal viscera requires careful clinical recognition during physical examination. Finding **dextrocardia** with complete situs inversus reverses the anatomical positions of internal organs: the cardiac apex points toward the right hemithorax, the liver resides in the left hypochondrium, and the spleen sits in the right. On electrocardiography, dextrocardia produces inverted P and T waves with negative QRS complexes in lead I, alongside reverse R-wave progression across precordial leads.",
+   "say": "Mirror-image transposition of thoracic and abdominal organs requires careful clinical recognition during examination. Finding dextrocardia with complete situs inversus reverses internal organ positions: the cardiac apex points rightward, the liver lies on the left and the spleen sits on the right. On electrocardiography, dextrocardia produces inverted P and T waves in lead one and reversed precordial R-wave progression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic test",
+     "Normal anatomical finding",
+     "Dextrocardia with situs inversus finding"
+    ],
+    "rows": [
+     [
+      "Apex beat palpation",
+      "Left 5th intercostal space midclavicular line",
+      "Right 5th intercostal space midclavicular line"
+     ],
+     [
+      "Lead I ECG tracing",
+      "Upright positive P wave, R wave, and T wave",
+      "Inverted negative P wave, QRS complex, and T wave"
+     ],
+     [
+      "Precordial ECG leads",
+      "Progressive R-wave growth from V1 to V5",
+      "Reverse R-wave progression (tall in V1, flat in V6)"
+     ],
+     [
+      "Chest radiograph",
+      "Left-sided aortic arch and cardiac apex",
+      "Right-sided cardiac apex and right-sided gastric bubble"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
