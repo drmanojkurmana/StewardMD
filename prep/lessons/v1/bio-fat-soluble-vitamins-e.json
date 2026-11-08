@@ -1,0 +1,77 @@
+{
+  "v": 1,
+  "module": "bio-fat-soluble-vitamins",
+  "subject": "biochemistry",
+  "title": "Vitamin E antioxidant defence",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Alpha-tocopherol** is the most active vitamin E form in humans. The liver tocopherol transfer protein selects this form for export in very low density lipoprotein, while other tocopherols are cleared faster. Dietary vitamin E travels with fat in chylomicrons, so absorption needs bile, pancreatic enzymes and intact mucosa exactly like vitamins A, D and K.",
+      "say": "Alpha-tocopherol is the form your liver deliberately keeps. A transfer protein loads it into lipoproteins for delivery, which is why blood levels of this one form dominate.",
+      "vis": null
+    },
+    {
+      "tx": "**Membrane protection** is the core job. Vitamin E sits inside cell membranes beside polyunsaturated fatty acids. When a free radical starts lipid peroxidation, tocopherol donates a hydrogen atom and breaks the chain reaction. One molecule can stop a cascade that would otherwise damage many membrane lipids and embedded proteins.",
+      "say": "Think of vitamin E as a firebreak inside the membrane. It sacrifices itself to stop a chain reaction of lipid damage before that reaction spreads.",
+      "vis": {
+        "kind": "flow",
+        "title": "Chain breaking in the membrane",
+        "nodes": [
+          {
+            "id": "rad",
+            "label": "Free radical attacks membrane lipid"
+          },
+          {
+            "id": "chain",
+            "label": "Lipid peroxidation chain spreads"
+          },
+          {
+            "id": "toc",
+            "label": "Tocopherol donates hydrogen"
+          },
+          {
+            "id": "stop",
+            "label": "Chain stops, membrane survives"
+          }
+        ],
+        "edges": [
+          [
+            "rad",
+            "chain"
+          ],
+          [
+            "chain",
+            "toc"
+          ],
+          [
+            "toc",
+            "stop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Vitamin C regeneration** recycles spent vitamin E. After tocopherol neutralises a radical it becomes a tocopheroxyl radical. Ascorbate in the water phase reduces it back to active tocopherol at the membrane surface. This partnership explains why antioxidant vitamins are tested together and why isolated deficiency of vitamin E is so uncommon.",
+      "say": "Vitamin C recharges vitamin E at the membrane surface. The two antioxidants work as a relay team, which is one reason single vitamin E deficiency is rare.",
+      "vis": null
+    },
+    {
+      "tx": "**Deficiency causes** are almost always fat malabsorption. Cystic fibrosis, chronic cholestasis, pancreatic insufficiency and abetalipoproteinaemia prevent vitamin E reaching tissues. A healthy adult eating a varied diet essentially never becomes deficient, because stores in adipose tissue last for years and the vitamin is widely present in vegetable oils, nuts and seeds.",
+      "say": "When you see vitamin E deficiency, look for fat malabsorption first. The diet is rarely the problem; the gut and its fat handling usually are.",
+      "vis": null
+    },
+    {
+      "tx": "**Neurological signs** dominate deficiency. Loss of vitamin E injures long axons and the retina, producing spinocerebellar ataxia, loss of vibration and position sense, absent reflexes and retinitis pigmentosa. Preterm infants may develop haemolytic anaemia because red cell membranes lack protection. Symptoms reverse only partly once axonal loss is established.",
+      "say": "The picture is a wobbly patient who cannot feel joint position, with fading reflexes and retinal damage. In preterm babies the same lack shows up as haemolysis.",
+      "vis": null
+    },
+    {
+      "tx": "**High dose harm** is the exam trap at the other end. Large vitamin E supplements can impair platelet function and antagonise vitamin K dependent clotting, raising bleeding risk in patients taking warfarin. Routine supplementation in well nourished adults has no proven benefit, so the teaching line is simple: treat proven deficiency, avoid megadoses.",
+      "say": "More is not better here. Megadoses can promote bleeding, especially alongside warfarin, so reserve supplements for proven deficiency or malabsorption.",
+      "vis": null
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
