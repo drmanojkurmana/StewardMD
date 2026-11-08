@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-pituitary",
+ "subject": "medicine",
+ "title": "Pituitary Apoplexy and Sellar Lesions",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Acute haemorrhage or infarction into a pre-existing pituitary tumour constitutes a neurosurgical and endocrine emergency. Characterized clinically as **pituitary apoplexy**, the sudden expansion of sellar contents produces abrupt, severe retro-orbital or frontal headache, often described as a thunderclap cephalalgia mimicking subarachnoid haemorrhage. Precipitating events include systemic arterial hypertension, major cardiac surgery, anticoagulant therapy, or dynamic pituitary endocrine stimulation tests. Rapid sellar expansion causes compression of the adjacent optic chiasm, optic nerves, and cavernous sinuses, accompanied by acute secondary adrenal insufficiency from corticotroph necrosis.",
+   "say": "Acute haemorrhage or infarction into a pre-existing pituitary tumour constitutes an endocrine and neurosurgical emergency. Characterized clinically as pituitary apoplexy, the sudden expansion of sellar contents produces abrupt, severe retro-orbital headache mimicking subarachnoid haemorrhage. Precipitating triggers include hypertension, cardiac surgery, and anticoagulation. Rapid sellar expansion causes compression of the optic chiasm, optic nerves, and cavernous sinuses, accompanied by acute adrenal crisis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pituitary-apoplexy-fig1.webp",
+    "alt": "Sagittal T1-weighted magnetic resonance image demonstrating enlarged sella with heterogeneous haemorrhagic pituitary apoplexy.",
+    "caption": "Sagittal T1 MRI demonstrating acute sellar enlargement and heterogeneous signal in pituitary apoplexy. [Credit: Dr. Frank Gaillard]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Emergency stabilization of suspected apoplexy mandates immediate endocrinological intervention before awaiting specialized neurosurgical transfer. The immediate administration of high-dose intravenous **hydrocortisone** prevents life-threatening vascular collapse secondary to acute corticotroph failure. Magnetic resonance imaging is the investigation of choice, demonstrating acute intra-sellar haemorrhage and suprasellar extension with intrinsic high or heterogeneous T1 signal. While stable patients with mild symptoms may be managed conservatively, emergent surgical decompression is indicated for progressive visual acuity deterioration, deteriorating visual fields, or depressed level of consciousness.",
+   "say": "Emergency stabilization of suspected apoplexy mandates immediate endocrinological intervention before awaiting neurosurgical transfer. The administration of high-dose intravenous hydrocortisone prevents life-threatening vascular collapse secondary to acute corticotroph failure. Magnetic resonance imaging represents the diagnostic modality of choice, revealing acute intra-sellar haemorrhage and suprasellar extension. Urgent surgical decompression is indicated for progressive visual failure or declining consciousness.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "present",
+      "label": "Sudden thunderclap headache + diplopia + visual deficit"
+     },
+     {
+      "id": "steroid",
+      "label": "Immediate IV Hydrocortisone (100 mg bolus, then 100 mg q8h)"
+     },
+     {
+      "id": "mri",
+      "label": "Urgent Sellar MRI: Confirm haemorrhagic necrosis"
+     },
+     {
+      "id": "decomp",
+      "label": "Progressive visual loss or coma: Emergent transsphenoidal surgery"
+     }
+    ],
+    "edges": [
+     [
+      "present",
+      "steroid"
+     ],
+     [
+      "steroid",
+      "mri"
+     ],
+     [
+      "mri",
+      "decomp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Benign dysontogenetic epithelial tumours arising from vestigial remnants of Rathke pouch in the pituitary stalk represent three percent of intracranial tumours. Exhibiting a distinct bimodal age distribution peaking in childhood and middle adulthood, a **craniopharyngioma** is typically a sellar and suprasellar mass that compresses the pituitary gland, optic chiasm, and third ventricle. The classic adamantinomatous histological subtype features cystic cavities filled with dark, cholesterol-rich machine-oil fluid, wet keratin pearls, and extensive peripheral calcification visible on computed tomography. Clinical presentation includes visual disturbances, growth retardation, delayed puberty, and central diabetes insipidus.",
+   "say": "Benign dysontogenetic tumours arising from vestigial remnants of Rathke pouch in the pituitary stalk represent three percent of intracranial tumours. Exhibiting a bimodal age distribution in childhood and middle age, a craniopharyngioma is a sellar and suprasellar mass that compresses the chiasm and third ventricle. The classic adamantinomatous histological subtype features cystic cavities filled with cholesterol-rich machine-oil fluid, wet keratin, and calcification visible on computed tomography.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adamantinomatous Craniopharyngioma",
+     "points": [
+      "Predominantly pediatric presentation (5-14 years)",
+      "CT shows prominent nodular and rim calcification",
+      "Multicystic filled with motor-oil fluid and wet keratin",
+      "Associated with CTNNB1 (beta-catenin) mutations"
+     ]
+    },
+    "right": {
+     "title": "Papillary Craniopharyngioma",
+     "points": [
+      "Predominantly adult presentation (50-75 years)",
+      "Calcification is rare on neuroimaging",
+      "Predominantly solid mass with monomorphic papillae",
+      "High frequency of BRAF V600E point mutations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Suprasellar extension of expanding sellar masses predictably impinges upon crossing retinotopic fibres located along the inferior aspect of the visual pathway. Compressing the central decussating nasal retinal fibres at the optic chiasm classically produces symmetrical **bitemporal hemianopia**, restricting peripheral visual fields in both temporal quadrants. Because the decussating fibers from the inferior nasal retinas course anteriorly into the contralateral optic nerve before ascending (Wilbrand knee), asymmetric compression can produce junctional scotoma: an ipsilateral central scotoma with a contralateral superior temporal quadrant deficit.",
+   "say": "Suprasellar extension of expanding sellar masses predictably impinges upon crossing retinotopic fibres located along the visual pathway. Compressing the central decussating nasal retinal fibres at the optic chiasm classically produces symmetrical bitemporal hemianopia, restricting peripheral visual fields in both temporal quadrants. Because inferior nasal retinal fibers course anteriorly into the contralateral optic nerve, asymmetric compression can produce junctional scotoma with central and temporal field defects.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pituitary-tumor-syndromes-fig1.webp",
+    "alt": "Anatomical schematic showing pituitary mass expanding into suprasellar space compressing optic chiasm.",
+    "caption": "Suprasellar expansion compressing the decussating optic chiasm fibres to cause bitemporal field loss. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Herniation of the subarachnoid space through an incomplete or incompetent sellar diaphragm flattens pituitary tissue against the bony floor. Characterized on neuroimaging as an **empty sella**, cerebrospinal fluid pulsatility remodels and enlarges the sella turcica, creating the radiological appearance of an air- or fluid-filled cavity. Primary empty sella occurs predominantly in obese, hypertensive, multiparous females, often associated with benign intracranial hypertension. Although endocrine hypofunction is uncommon and pituitary secretion is generally preserved, roughly ten percent develop hyperprolactinaemia from pituitary stalk stretching, requiring endocrine surveillance.",
+   "say": "Herniation of the subarachnoid space through an incomplete sellar diaphragm flattens pituitary tissue against the bony floor. Characterized on neuroimaging as an empty sella, cerebrospinal fluid pulsatility remodels the sella turcica, creating the radiological appearance of a fluid-filled cavity. Primary empty sella occurs predominantly in obese, hypertensive, multiparous females, often associated with intracranial hypertension. Although endocrine hypofunction is uncommon, mild hyperprolactinaemia can develop from stalk stretching.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Empty Sella",
+     "points": [
+      "Congenital defect or incompetence of diaphragma sellae",
+      "Chronic transmission of pulsatile CSF pressure",
+      "Associated with idiopathic intracranial hypertension",
+      "Normal pituitary function in > 85% of cases"
+     ]
+    },
+    "right": {
+     "title": "Secondary Empty Sella",
+     "points": [
+      "Occurs following necrosis or treatment of adenoma",
+      "Post-transsphenoidal surgical resection",
+      "Post-pituitary apoplexy or radiation therapy",
+      "High frequency of permanent panhypopituitarism"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Endoscopic endonasal exploration has superseded traditional microscopic and transcranial approaches for managing modern sellar pathology. Performing **transsphenoidal surgery** allows neurosurgeons direct access to the sella turcica through the sphenoid sinus, avoiding brain retraction and minimizing morbidity. It is the primary surgical therapy for symptomatic pituitary macroadenomas, craniopharyngiomas, ACTH-secreting Cushing disease, and complicated pituitary apoplexy. Intraoperative navigation and angled high-definition endoscopes optimize gross total resection while preserving the normal gland. Postoperative complications include transient central diabetes insipidus, cerebrospinal fluid rhinorrhoea, anterior hypopituitarism, and secondary bacterial meningitis.",
+   "say": "Endoscopic endonasal exploration has superseded traditional microscopic and transcranial approaches for modern sellar pathology. Performing transsphenoidal surgery allows neurosurgeons direct access to the sella turcica through the sphenoid sinus, avoiding brain retraction and minimizing morbidity. It is the primary surgical therapy for symptomatic macroadenomas, craniopharyngiomas, Cushing disease, and apoplexy. Postoperative complications include transient diabetes insipidus, cerebrospinal fluid leak, and hypopituitarism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Postoperative Complication",
+     "Clinical Presentation",
+     "Diagnostic Evaluation",
+     "Management Strategy"
+    ],
+    "rows": [
+     [
+      "Central Diabetes Insipidus",
+      "Polyuria (> 3 L/day), polydipsia, hypernatraemia",
+      "Urine Osm < 300, Serum Osm > 295",
+      "Oral or subcutaneous Desmopressin (DDAVP)"
+     ],
+     [
+      "CSF Rhinorrhoea",
+      "Clear salty fluid dripping from nostrils",
+      "Beta-2 transferrin assay in fluid",
+      "Bedrest, lumbar drain, or surgical repair"
+     ],
+     [
+      "Anterior Hypopituitarism",
+      "Fatigue, hypotension, hyponatraemia",
+      "Morning cortisol, free T4, electrolytes",
+      "Hydrocortisone and levothyroxine replacement"
+     ],
+     [
+      "Syndrome of Inappropriate ADH",
+      "Hyponatraemia occurring around day 7 post-op",
+      "Low serum sodium with concentrated urine",
+      "Fluid restriction and close electrolyte monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transient or triphasic disturbances of water balance represent a classic complication following pituitary surgery or stalk injury. Direct surgical manipulation of the neurohypophyseal tract often precipitates a **triphasic response** in antidiuretic hormone secretion. The initial phase manifests as acute diabetes insipidus lasting one to two days from axonal shock. Phase two features transient inappropriate antidiuretic hormone excess lasting two to fourteen days. Phase three produces permanent central diabetes insipidus if supraoptic and paraventricular neurons are destroyed.",
+   "say": "Transient or triphasic disturbances of water balance represent a classic complication following pituitary surgery or stalk injury. Direct manipulation of the neurohypophyseal tract often precipitates a triphasic response in antidiuretic hormone secretion. The initial phase manifests as acute diabetes insipidus from axonal shock. Phase two features inappropriate antidiuretic hormone excess as dying axons release stored hormone. Phase three produces permanent diabetes insipidus if supraoptic neurons are destroyed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Phase 1 (Days 1-2): Axonal shock inhibits ADH -> Polyuria (DI)"
+     },
+     {
+      "id": "p2",
+      "label": "Phase 2 (Days 3-7): Unregulated ADH leak -> Hyponatraemia (SIADH)"
+     },
+     {
+      "id": "p3",
+      "label": "Phase 3 (> Day 8): Permanent ADH depletion -> Chronic DI"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A comprehensive multidisciplinary pathway ensures optimal visual, endocrine, and oncological outcomes in sellar pathology. Patients with sellar lesions require systematic baseline Goldmann or automated perimetry visual field mapping, complete anterior and posterior pituitary endocrine profiling, and high-resolution thin-cut contrast sellar magnetic resonance imaging. Postoperatively, meticulous surveillance of fluid intake and urinary output detects insidious water balance derangements. Long-term management requires monitoring for tumour recurrence and titrating lifetime hormone replacement under **endocrinology** guidance.",
+   "say": "A comprehensive multidisciplinary pathway ensures optimal visual, endocrine, and oncological outcomes in sellar pathology. Patients with sellar lesions require baseline automated perimetry visual field mapping, complete anterior and posterior pituitary profiling, and thin-cut sellar magnetic resonance imaging. Postoperatively, surveillance of fluid balance detects insidious water derangements. Long-term management requires monitoring for tumour recurrence and titrating hormone replacement under endocrinology guidance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "baseline",
+      "label": "Pre-op: Automated perimetry + complete endocrine panel + MRI"
+     },
+     {
+      "id": "postop",
+      "label": "Post-op: Hourly fluid balance, daily Na+, stress-dose steroids"
+     },
+     {
+      "id": "longterm",
+      "label": "Long-term: 12-week MRI, repeat hormonal panel, vision recheck"
+     }
+    ],
+    "edges": [
+     [
+      "baseline",
+      "postop"
+     ],
+     [
+      "postop",
+      "longterm"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
