@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "med-parathyroid",
+ "subject": "medicine",
+ "title": "Primary Hyperparathyroidism and Calcium Homeostasis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Autonomous, unregulated hypersecretion of parathyroid hormone represents the single most common cause of hypercalcaemia in the outpatient setting. Encountering **primary hyperparathyroidism** occurs predominantly in postmenopausal women with a female-to-male ratio of three to one. A single benign solitary parathyroid adenoma accounts for eighty-five percent of cases, four-gland parathyroid hyperplasia accounts for fifteen percent, and parathyroid carcinoma accounts for under one percent. Most patients in contemporary practice are asymptomatic, detected on routine biochemical screening showing elevated serum calcium with an inappropriately elevated parathyroid hormone.",
+   "say": "Autonomous, unregulated hypersecretion of parathyroid hormone represents the most common cause of hypercalcaemia in outpatients. Encountering primary hyperparathyroidism occurs predominantly in postmenopausal women with a three-to-one ratio. A single solitary adenoma accounts for eighty-five percent of cases, four-gland hyperplasia accounts for fifteen percent, and carcinoma for under one percent. Familial forms occur in multiple endocrine neoplasia syndromes. Most modern patients are asymptomatic, detected on routine biochemical screening.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/primary-hyperparathyroidism-fig1.webp",
+    "alt": "Etiology and clinical signs of primary hyperparathyroidism including skeletal and renal manifestations.",
+    "caption": "Multisystem organ involvement and pathology of primary hyperparathyroidism. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The eighty-four-amino-acid peptide hormone synthesized by parathyroid chief cells tightly orchestrates systemic calcium and phosphate homeostasis. Circulating **pth** acts directly on osteoblasts and renal tubular epithelial cells, and indirectly on enterocytes. In the distal tubule, it stimulates calcium reabsorption, while in the proximal tubule it promotes phosphaturia. In addition, PTH upregulates renal one-alpha-hydroxylase, synthesizing calcitriol to augment enterocyte calcium absorption. In bone, continuous high PTH levels activate osteoclasts to drive bone resorption and calcium efflux into the circulation.",
+   "say": "The eighty-four-amino-acid peptide hormone synthesized by parathyroid chief cells tightly orchestrates systemic calcium and phosphate homeostasis. Circulating pth acts directly on osteoblasts and renal tubular epithelial cells, and indirectly on intestinal enterocytes. In the distal tubule, it stimulates calcium reabsorption, while in the proximal tubule it promotes phosphaturia. In addition, PTH upregulates renal one-alpha-hydroxylase to synthesize calcitriol. In bone, continuous PTH stimulates osteoclasts to mobilize skeletal calcium.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pth",
+      "label": "Elevated intact PTH from adenoma"
+     },
+     {
+      "id": "kidney",
+      "label": "Kidney: Reabsorbs Ca2+, excretes PO4-, activates calcitriol"
+     },
+     {
+      "id": "bone",
+      "label": "Bone: Activates RANKL-mediated osteoclast resorption"
+     },
+     {
+      "id": "serum",
+      "label": "Biochemical profile: High Ca2+, low PO4-, elevated alkaline phosphatase"
+     }
+    ],
+    "edges": [
+     [
+      "pth",
+      "kidney"
+     ],
+     [
+      "pth",
+      "bone"
+     ],
+     [
+      "kidney",
+      "serum"
+     ],
+     [
+      "bone",
+      "serum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic multiorgan clinical manifestations of prolonged calcium elevation are historically summarized as stones, bones, abdominal groans, and psychic moans. Developing chronic **hypercalcaemia** promotes nephrolithiasis and nephrocalcinosis from hypercalciuria, causing recurrent calcium oxalate stones. Skeletal involvement manifests as osteopenia and osteitis fibrosa cystica with subperiosteal bone resorption on the radial aspect of the middle phalanges. Gastrointestinal manifestations include constipation, peptic ulcer disease from gastrin stimulation, and acute pancreatitis. Neuropsychiatric manifestations range from fatigue to depression and cognitive slowing.",
+   "say": "Classic multiorgan clinical manifestations of prolonged calcium elevation are historically summarized as stones, bones, groans, and psychic moans. Developing chronic hypercalcaemia promotes nephrolithiasis and nephrocalcinosis from hypercalciuria, causing recurrent calcium stones. Skeletal involvement manifests as osteoporosis and osteitis fibrosa cystica with subperiosteal resorption. Gastrointestinal features include constipation, peptic ulcer disease, and pancreatitis. Neuropsychiatric symptoms include depression and cognitive slowing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Symptom Complex",
+     "Pathophysiological Mechanism"
+    ],
+    "rows": [
+     [
+      "Renal (Stones)",
+      "Nephrolithiasis, polyuria, nephrocalcinosis",
+      "Hypercalciuria and impaired renal concentrating ability"
+     ],
+     [
+      "Skeletal (Bones)",
+      "Bone pain, fractures, osteitis fibrosa cystica",
+      "Continuous osteoclastic bone resorption via RANKL"
+     ],
+     [
+      "Gastrointestinal (Groans)",
+      "Constipation, nausea, pancreatitis, peptic ulcer",
+      "Decreased smooth muscle motility, gastrin release"
+     ],
+     [
+      "Neurological (Moans)",
+      "Depression, fatigue, memory loss, coma",
+      "Altered neuronal membrane potential and synaptic function"
+     ],
+     [
+      "Cardiovascular",
+      "Shortened QT interval, hypertension, arrhythmias",
+      "Accelerated myocardial repolarization and vascular tone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguishing primary hyperparathyroidism from other hypercalcaemic conditions requires systematic evaluation of parathyroid hormone and urinary calcium excretion. Demonstrating elevated serum calcium paired with an inappropriately elevated intact parathyroid hormone establishes primary hyperparathyroidism. In contrast, **hypercalcaemia of malignancy**, driven by PTHrP from solid tumours or osteolytic bone metastases, suppresses endogenous intact PTH to undetectable levels. Measuring twenty-four-hour urinary calcium excretion is essential to exclude familial hypocalciuric hypercalcaemia, where an inactivating calcium-sensing receptor mutation produces low urinary calcium excretion.",
+   "say": "Distinguishing primary hyperparathyroidism from other hypercalcaemic conditions requires evaluating parathyroid hormone and urinary calcium excretion. Demonstrating elevated serum calcium paired with an inappropriately high or non-suppressed parathyroid hormone establishes primary hyperparathyroidism. In contrast, hypercalcaemia of malignancy suppresses intact parathyroid hormone to undetectable levels. Measuring urinary calcium excretion excludes familial hypocalciuric hypercalcaemia, which features low urinary calcium excretion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Hyperparathyroidism (PHPT)",
+     "points": [
+      "Serum calcium elevated (> 10.5 mg/dL)",
+      "Intact PTH elevated or inappropriately normal",
+      "24-hour urine calcium high or normal (> 200 mg/day)",
+      "Calcium/creatinine clearance ratio > 0.02"
+     ]
+    },
+    "right": {
+     "title": "Familial Hypocalciuric Hypercalcaemia",
+     "points": [
+      "Inactivating mutation in calcium-sensing receptor (CaSR)",
+      "Lifelong mild hypercalcaemia with borderline PTH",
+      "24-hour urine calcium low (< 100 mg/day)",
+      "Calcium/creatinine clearance ratio < 0.01; benign"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Potent antiresorptive medications providing rapid inhibition of osteoclastic bone destruction constitute the primary medical therapy for acute severe hypercalcaemia. Intravenous **bisphosphonates**, such as zoledronic acid four milligrams or pamidronate sixty to ninety milligrams infused over several hours, bind mineralized hydroxyapatite and inhibit osteoclast farnesyl pyrophosphate synthase. This blockade arrests bone resorption, decreasing serum calcium concentrations within two to four days and reaching nadir at four to seven days. Bisphosphonates are vital for emergency stabilization of symptomatic hypercalcaemic crisis and provide temporary skeletal protection in inoperable primary hyperparathyroidism.",
+   "say": "Potent antiresorptive medications providing rapid inhibition of osteoclastic bone destruction constitute the medical therapy for severe hypercalcaemia. Intravenous bisphosphonates, such as zoledronic acid or pamidronate infused over several hours, bind hydroxyapatite and inhibit osteoclast farnesyl pyrophosphate synthase. This blockade arrests bone resorption, decreasing serum calcium concentrations within two to four days. Bisphosphonates are vital for emergency stabilization and temporary skeletal protection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bone-calcium-bisphosphonates-hypercalcaemia-fig1.webp",
+    "alt": "Pharmacological mechanism of bisphosphonates on osteoclast bone resorption and calcium homeostasis.",
+    "caption": "Bisphosphonates inhibiting osteoclast hydroxyapatite resorption to lower circulating calcium. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A critical pharmacological strategy manages acute hypercalcaemic emergencies through sequential and coordinated interventions. When corrected serum calcium exceeds fourteen milligrams per decilitre, immediate **fluid resuscitation** with intravenous isotonic saline restores intravascular volume, inducing kaliuresis and calciuresis. Once volume is replete, loop diuretics such as furosemide may be administered cautiously to promote further calcium wasting, while calcitonin provides immediate but transient calcium reduction via tachyphylaxis. Bisphosphonates are concurrently administered to ensure sustained calcium normalization beyond seventy-two hours, with haemodialysis reserved for refractory crisis or end-stage renal disease.",
+   "say": "A critical pharmacological strategy manages acute hypercalcaemic emergencies through sequential interventions. When serum calcium exceeds fourteen milligrams per decilitre, immediate fluid resuscitation with intravenous isotonic saline restores intravascular volume, inducing urinary calcium wasting. Once volume is replete, loop diuretics may be administered cautiously, while calcitonin provides transient calcium reduction. Bisphosphonates ensure sustained calcium normalization beyond seventy-two hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "saline",
+      "label": "Step 1: Aggressive IV normal saline (200-300 mL/hr) to restore volume"
+     },
+     {
+      "id": "calci",
+      "label": "Step 2: Subcutaneous Calcitonin (4-8 IU/kg q12h) for rapid 24-hr drop"
+     },
+     {
+      "id": "bisph",
+      "label": "Step 3: IV Zoledronic acid (4 mg) or Pamidronate for sustained control"
+     }
+    ],
+    "edges": [
+     [
+      "saline",
+      "calci"
+     ],
+     [
+      "calci",
+      "bisph"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted small-molecule allosteric activators of the extracellular calcium-sensing receptor provide medical control when surgery is contraindicated. Administering oral **cinacalcet** increases the sensitivity of calcium-sensing receptors on parathyroid chief cells to extracellular calcium, suppressing PTH synthesis and secretion without altering parathyroid gland mass. Cinacalcet successfully normalizes serum calcium in up to eighty percent of patients with primary hyperparathyroidism, serving as an effective non-surgical maintenance option for elderly patients with significant comorbidities, inoperable parathyroid carcinoma, or recurrent hyperparathyroidism following subtotal parathyroidectomy.",
+   "say": "Targeted small-molecule allosteric activators of the calcium-sensing receptor provide medical control when surgery is contraindicated. Administering oral cinacalcet increases the sensitivity of calcium-sensing receptors on parathyroid chief cells, suppressing parathyroid hormone secretion without altering gland mass. Cinacalcet successfully normalizes serum calcium in eighty percent of patients, serving as an effective maintenance option for patients with high surgical risk or inoperable parathyroid carcinoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Agent",
+     "Mechanism of Action",
+     "Route of Administration",
+     "Key Adverse Effect"
+    ],
+    "rows": [
+     [
+      "Cinacalcet",
+      "Calcimimetic (allosteric CaSR activator)",
+      "Oral with meals",
+      "Nausea, vomiting, hypocalcaemia"
+     ],
+     [
+      "Zoledronic Acid",
+      "Nitrogenous bisphosphonate (osteoclast inhibitor)",
+      "Intravenous infusion",
+      "Acute phase reaction, renal toxicity"
+     ],
+     [
+      "Calcitonin",
+      "Inhibits osteoclastic resorption; promotes calciuresis",
+      "Subcutaneous / Intramuscular",
+      "Tachyphylaxis after 48 hours, flushing"
+     ],
+     [
+      "Denosumab",
+      "Monoclonal antibody against RANK ligand",
+      "Subcutaneous injection",
+      "Severe hypocalcaemia in renal failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive curative management of primary hyperparathyroidism is achieved exclusively through surgical resection of the hyperfunctioning parathyroid tissue. Undergoing **parathyroidectomy** is indicated for all symptomatic individuals and for asymptomatic patients meeting international criteria: age under fifty, serum calcium exceeding one milligram per decilitre above normal, or T-score below minus two point five. Preoperative localization using sestamibi SPECT scanning and neck ultrasound enables minimally invasive targeted parathyroidectomy, confirmed intraoperatively by a greater than fifty percent drop in intact parathyroid hormone.",
+   "say": "Definitive curative management of primary hyperparathyroidism is achieved exclusively through surgical resection of hyperfunctioning parathyroid tissue. Undergoing parathyroidectomy is indicated for all symptomatic patients and asymptomatic patients meeting criteria such as age under fifty, osteoporosis, or renal compromise. Preoperative localization using sestamibi scanning and ultrasound enables minimally invasive surgery, confirmed intraoperatively by a fifty percent drop in parathyroid hormone following adenoma excision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "loc",
+      "label": "Localization: 99mTc-Sestamibi SPECT scan + high-resolution ultrasound"
+     },
+     {
+      "id": "surg",
+      "label": "Minimally invasive parathyroidectomy with intraoperative PTH monitoring"
+     },
+     {
+      "id": "drop",
+      "label": "Success benchmark: > 50% fall in intact PTH at 10 minutes post-excision"
+     }
+    ],
+    "edges": [
+     [
+      "loc",
+      "surg"
+     ],
+     [
+      "surg",
+      "drop"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
