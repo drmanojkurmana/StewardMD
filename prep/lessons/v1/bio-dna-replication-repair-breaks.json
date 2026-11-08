@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "bio-dna-replication-repair",
+ "subject": "biochemistry",
+ "title": "Double strand breaks and genome disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Double strand breaks (radiation, replication collapse, topoisomerase failures, CRISPR and VDJ engineering) choose between **homologous recombination** (error free sister chromatid template, S/G2 only, BRCA1 resection commitment, BRCA2 RAD51 filament loading, strand invasion, Holliday junction synthesis and dissolution/resolution, gene conversion) and non-homologous end joining (Ku70/80 plus DNA-PKcs capture any phase especially G1, Artemis trimming, ligase IV/XRCC4 sealing, small indels scarred, fast but error prone, dominant in mammals quantitatively). Pathway choice (53BP1 shielding ends versus BRCA1 resection, cell cycle CDK licence) is regulated competition, not chance.",
+   "say": "Breaks choose homologous recombination error free in S/G2 versus fast error prone end joining any phase. BRCA1 resection versus 53BP1 shielding regulates competition by cell cycle licence mechanistically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Homologous recombination (HR)",
+     "points": [
+      "Sister template, error free",
+      "BRCA1, BRCA2, RAD51 essential",
+      "S/G2 only; PARP synthetic lethality when lost"
+     ]
+    },
+    "right": {
+     "title": "End joining (NHEJ)",
+     "points": [
+      "Ku, DNA-PK, ligase IV, any phase",
+      "Small indels scarred, fast",
+      "VDJ recombination and SCID when Artemis/DNA-PK lost"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**BRCA1 and BRCA2** germline cancers (breast, ovarian high grade serous, pancreatic, prostate aggressive; PARP inhibitors olaparib synthetic lethality trapping PARP on breaks HR cannot repair, platinum sensitivity companion) and Fanconi anaemia pathway overlap (interstrand crosslink unhooking by Fanconi core complex monoubiquitinating FANCD2/I recruiting BRCA machinery, twenty plus genes, biallelic marrow failure, congenital radial/thumb and skin pigment anomalies, head/neck and gynaecologic cancers, diepoxybutane chromosome breakage diagnostic) prove crosslink repair is recombination specialised for replication forks meeting covalent bridges (mitomycin, cisplatin, endogenous aldehydes ALDH2 protected).",
+   "say": "BRCA cancers die by PARP trapping synthetic lethality when recombination cannot repair breaks. Fanconi crosslink repair specialises recombination for forks meeting covalent bridges diagnostically by breakage testing chromosomes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Break disorder",
+     "Gene axis",
+     "Cancer or failure signature"
+    ],
+    "rows": [
+     [
+      "Hereditary breast ovarian (HBOC)",
+      "BRCA1/2 HR heterozygous germline",
+      "Breast, ovary, pancreas, prostate; PARP sensitive"
+     ],
+     [
+      "Fanconi anaemia",
+      "Crosslink unhooking to HR (FANC/BRCA overlap)",
+      "Marrow failure, radial thumbs, breakage test positive"
+     ],
+     [
+      "Ataxia telangiectasia",
+      "ATM break signalling kinase",
+      "Ataxia, telangiectasia, IgA low, radiation sensitive"
+     ],
+     [
+      "Nijmegen breakage, LIG4, Artemis SCID",
+      "MRN sensing, NHEJ sealing",
+      "Microcephaly or radiosensitive SCID"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ataxia telangiectasia** (ATM serine kinase phosphorylating p53, Chk2, BRCA1, H2AX after MRN (Mre11-Rad50-Nbs1) senses breaks) gives progressive cerebellar ataxia (wheelchair by teens), oculocutaneous telangiectasia, immunodeficiency (IgA/IgG2 low, sinopulmonary), lymphoid malignancy, extreme radiosensitivity (radiotherapy and radiomimetic chemotherapy dose disasters, imaging minimised), raised alpha fetoprotein persistently (bedside clue), insulin resistance and premature aging features. ATM carriers (about one percent) have modest breast cancer and radiation considerations genetically counselled, distinct from biallelic disease severity.",
+   "say": "Ataxia telangiectasia gives cerebellar ataxia, telangiectasia and immunodeficiency with extreme radiosensitivity disasters. Persistently raised alpha fetoprotein is a bedside clue separating it from other ataxias diagnostically.",
+   "vis": null
+  },
+  {
+   "tx": "Helicase genome guardians fragment by phenotype: **Bloom** (BLM RecQ, sister chromatid exchanges ten fold diagnostic, small proportionate stature, sun sensitive malar rash, immunodeficiency, all cancers early, diabetes), Werner (WRN adult progeria twenties cataracts, scleroderma skin, diabetes, sarcomas, premature myocardial death), Rothmund-Thomson (RECQL4 poikiloderma, radial defects, osteosarcoma), and Cockayne (CSA/CSB transcription coupled NER, growth failure cachectic dwarfism, photosensitivity without skin cancer excess (apoptosis removes damaged cells), demyelination, retinal degeneration, progeroid death) separating cancer prone from transcription maintenance progerias conceptually.",
+   "say": "Bloom exchanges sister chromatids diagnostically with early all cancers, while Cockayne photosensitises without cancer excess through apoptosis. Helicase and transcription progerias separate cancer prone from maintenance concepts cleanly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cancer prone instability",
+     "points": [
+      "Bloom: exchanges high, all cancers",
+      "XP: skin cancers extreme",
+      "Lynch and BRCA: tissue patterned cancers"
+     ]
+    },
+    "right": {
+     "title": "Progeroid maintenance failure",
+     "points": [
+      "Cockayne: neurology, no cancer excess",
+      "Werner: adult ageing, sarcomas",
+      "Trichothiodystrophy: brittle hair, TFIIH"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**p53** integrates break signalling (ATM/ATR Chk phosphorylation stabilising p53 from MDM2 degradation) to p21 G1 arrest, repair facilitation, senescence or apoptosis (BAX/PUMA) by damage burden, mutated somatically in over half cancers and germline Li-Fraumeni (sarcomas, premenopausal breast, brain, adrenocortical childhood, leukaemia, early multiple primaries, radiation avoided where possible, whole body MRI surveillance protocols). MDM2 amplification and HPV E6 degradation phenocopy p53 loss virally and somatically, guardian biology examiners expect integrated with checkpoints G1/S (Rb), G2/M and spindle (Mad/Bub) already governing replication licensing.",
+   "say": "p53 integrates break signalling to arrest, senescence or apoptosis by damage burden, mutated in over half cancers somatically. Li-Fraumeni germline disease avoids radiation with whole body MRI surveillance protocols.",
+   "vis": {
+    "kind": "flow",
+    "title": "Damage to p53 decision",
+    "nodes": [
+     {
+      "id": "brk",
+      "label": "Breaks: ATM/ATR Chk signal"
+     },
+     {
+      "id": "p53",
+      "label": "p53 stabilised (MDM2 released)"
+     },
+     {
+      "id": "arr",
+      "label": "p21 arrest and repair attempted"
+     },
+     {
+      "id": "die",
+      "label": "Senescence or apoptosis if irremediable"
+     }
+    ],
+    "edges": [
+     [
+      "brk",
+      "p53"
+     ],
+     [
+      "p53",
+      "arr"
+     ],
+     [
+      "arr",
+      "die"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Translesion synthesis** tolerates what repair cannot finish before S phase ends: specialised polymerases (eta bypassing thymine dimers accurately inserting AA (XP variant loss mutates), iota, kappa, zeta extender, Rev1 scaffold, ubiquitinated PCNA switch) trade fidelity (errors ten to ten thousand fold higher) for completion, preventing fork collapse at mutagenic price that sunlight and chemotherapy exploit therapeutically and carcinogenically. Next module transcribes this defended genome selectively, where TFIIH moonlights between repair and transcription initiation proving genome maintenance and expression are one machinery budget.",
+   "say": "Translesion polymerases trade fidelity for completion preventing fork collapse at mutagenic prices carcinogenically. TFIIH moonlights between repair and transcription next, proving maintenance and expression share machinery budgets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tolerance polymerase",
+     "Lesion bypassed",
+     "Cost when wrong or absent"
+    ],
+    "rows": [
+     [
+      "Eta",
+      "Thymine dimers accurately (AA inserted)",
+      "Absent (XPV): sunlight mutations soar"
+     ],
+     [
+      "Iota and kappa",
+      "Adducts and minor groove lesions variably",
+      "Error prone, context mutagenesis"
+     ],
+     [
+      "Zeta plus Rev1 (extender scaffold)",
+      "Extends distorted primers others cannot",
+      "Most damage induced mutations need it"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
