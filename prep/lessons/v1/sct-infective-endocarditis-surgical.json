@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sct-infective-endocarditis-surgical",
+  "title": "Surgical Management of Infective Endocarditis: Indications, Root Abscess and Reconstruction",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Valvular Heart Disease: Endocarditis)",
+    "AHA/ACC Guideline for the Management of Patients With Infective Endocarditis",
+    "EACTS Guidelines on the Prevention, Diagnosis and Treatment of Infective Endocarditis"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The modified Duke criteria provide the international benchmark for diagnosing infective endocarditis. The diagnosis combines major microbiological and imaging criteria with clinical minor criteria. Persistently positive blood cultures with typical organisms and echocardiographic proof of vegetations represent the cornerstones of diagnosis, which is recognized by surgical teams.",
+      "tx": "Diagnosis of active valvular infection relies on the **modified Duke criteria**, integrating major microbiological criteria with direct imaging findings. Demonstrating persistent bacteremia with typical pathogens alongside **echocardiographic evidence** of **vegetation**, leaflet perforation, or newly discovered perivalvular abscess establishes a definitive clinical diagnosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Category",
+          "Modified Duke Criterion",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Major microbiological",
+            "Persistent positive blood cultures with typical organisms (S. viridans, S. aureus, enterococci)",
+            "Confirms sustained intravascular bacteremia"
+          ],
+          [
+            "Major imaging",
+            "Echocardiographic vegetation, abscess, pseudoaneurysm, or new dehiscence",
+            "Visualizes active valvular destruction"
+          ],
+          [
+            "Minor clinical",
+            "Predisposing heart condition, fever >=38.0 C, vascular phenomena, immunologic signs",
+            "Supports diagnosis when major criteria are borderline"
+          ],
+          [
+            "Diagnostic threshold",
+            "2 major, 1 major + 3 minor, or 5 minor criteria",
+            "Establishes definitive infective endocarditis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transesophageal echocardiography is essential in all patients with suspected or confirmed endocarditis. Its close proximity to the posterior mediastinum eliminates thoracic acoustic impedance, achieving diagnostic sensitivity exceeding ninety to ninety-five percent. It is vastly superior to transthoracic imaging for detecting perivalvular root abscesses.",
+      "tx": "Due to its high ultrasonic resolution, **transesophageal echocardiography** provides diagnostic sensitivity exceeding 90 to 95 percent for identifying mobile endocardial vegetations. It is significantly superior to transthoracic imaging for detecting invasive **perivalvular abscess**, leaflet fenestration, intracardiac fistulae, and early **prosthetic valve dehiscence**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transthoracic Echo (TTE)",
+          "points": [
+            "Sensitivity 60 to 70 percent for vegetations",
+            "Non-invasive rapid initial screening examination",
+            "Frequently misses vegetations <5 mm in size",
+            "Very poor detection of posterior root abscesses"
+          ]
+        },
+        "right": {
+          "title": "Transesophageal Echo (TEE)",
+          "points": [
+            "Sensitivity 90 to 95 percent for vegetations",
+            "Mandatory before any planned cardiac surgical intervention",
+            "Resolves micro-abscesses and fistulous tracts",
+            "Accurately evaluates prosthetic valve seating and stability"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Urgent surgical intervention is required in native valve endocarditis under three specific Class One indications. Acute severe valve regurgitation precipitating refractory heart failure represents the most frequent indication. Uncontrolled infection with abscess formation and recurrent systemic embolization are the other primary surgical drivers.",
+      "tx": "International guidelines define 3 primary Class 1 **urgent surgery indications** in native valve infection: cardiogenic shock from acute regurgitation, **uncontrolled infection** manifesting as persistent fever or abscess, and crucial **embolic prevention** in patients with large mobile vegetations despite appropriate antimicrobial therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-cvs-infection-cyanosis.webp",
+        "ar": 1.3333,
+        "caption": "Infective endocarditis peripheral stigmata and valve lesions. Credit: StewardMD.",
+        "alt": "Pathological stigmata and peripheral lesions of active infective endocarditis."
+      }
+    },
+    {
+      "say": "Vegetation size directly correlates with the risk of catastrophic systemic thromboembolism. A mobile vegetation exceeding ten millimetres on the mitral or aortic valve accompanied by an embolic event is an urgent indication for surgery. Isolated persistent vegetations larger than fifteen millimetres also warrant surgical resection.",
+      "tx": "Mobile **vegetation size** strongly predicts **embolic risk**. An **urgent intervention** is indicated when a mobile vegetation exceeds 10 mm following an embolic episode, or when an isolated persistent vegetation measures greater than 15 mm despite therapeutic antimicrobial coverage, preventing fatal stroke or visceral infarction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "TEE measures maximal vegetation length and mobility on leaflet"
+          },
+          {
+            "id": "b",
+            "label": "Vegetation >10 mm with prior embolic event OR isolated >15 mm"
+          },
+          {
+            "id": "c",
+            "label": "Significantly elevated risk of recurrent cerebrovascular stroke"
+          },
+          {
+            "id": "d",
+            "label": "Urgent surgical excision and valve repair or replacement within 24-48 hours"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Extension of infection beyond the aortic valve annulus creates an aortic root abscess. Because the conduction axis passes through the membranous septum adjacent to the non-coronary and right coronary commissure, abscess expansion causes heart block. Progressive PR interval prolongation on electrocardiography is a critical warning sign.",
+      "tx": "Invasive extension into the fibrous skeleton forms an **aortic root abscess**. Because the atrioventricular conduction bundle traverses the membranous septum near the right and non-coronary commissure, tissue necrosis produces progressive **PR prolongation** or sudden complete **heart block**, representing a surgical emergency.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-paed-cvs-heart_failure_ie.webp",
+        "ar": 1.3333,
+        "caption": "Signs of infective endocarditis and secondary valvular destruction. Credit: StewardMD.",
+        "alt": "Clinical signs of heart failure and valvular tissue destruction in endocarditis."
+      }
+    },
+    {
+      "say": "The primary oncological principle of endocarditis surgery is radical surgical debridement of all infected tissue. The surgeon excises all necrotic, infected fibrous tissue until clean, healthy, bleeding margins are exposed. Incomplete debridement leaves infected foci that inevitably cause recurrent prosthetic valve endocarditis.",
+      "tx": "The paramount surgical mandate in active endocarditis is **radical debridement** of all infected, non-viable, and **necrotic tissue**. The surgeon sharply excises infected tissue until healthy bleeding margins are exposed around the circumference, as retained bacterial biofilms across an **annular infection** cause catastrophic recurrent valve dehiscence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Open aortic root and inspect diseased leaflets and annulus"
+          },
+          {
+            "id": "b",
+            "label": "Exadicate all vegetation, friable thrombus, and necrotic tissue"
+          },
+          {
+            "id": "c",
+            "label": "Debride cavity edges back to firm, healthy, bleeding myocardium"
+          },
+          {
+            "id": "d",
+            "label": "Irrigate extensively with warm antiseptic rifampin or saline solutions"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Extensive destructive root abscesses with aorto-cavitary fistulae preclude conventional valve seating. Surgeons perform complete aortic root replacement using a biological conduit or homograft. Cryopreserved aortic allografts provide unmatched pliability to reconstruct disrupted fibrous skeletons and close fistulous communications.",
+      "tx": "When invasive destruction creates aorto-cavitary fistulae or circumferential annular loss, surgeons perform total **root replacement**. Implantation of a cryopreserved **aortic homograft** or bovine pericardial conduit is preferred, as pliable homograft tissue allows closure of complex **aorto-cavitary fistulae** and reconstruction of the destroyed left ventricular outflow tract.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Aortic Homograft Conduit",
+          "points": [
+            "Pliable allograft tissue reconstructs ragged defects",
+            "Highest resistance to recurrent reinfection",
+            "Concomitant coronary reimplantation required",
+            "Prone to late structural calcification in young patients"
+          ]
+        },
+        "right": {
+          "title": "Bovine Pericardial Root / Conduit",
+          "points": [
+            "Readily available off the shelf in multiple sizes",
+            "Provides excellent tissue handling and suture retention",
+            "Allows annular patch reconstruction and mechanical valve seating",
+            "Acceptable infection clearance rates with radical debridement"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Surgical eradication of endocarditis must be consolidated with prolonged intravenous antimicrobial therapy. Even after radical debridement, microscopic bacterial colonies persist in deep tissues, which is recognized by surgical teams. Guidelines mandate completing a four to six week course of targeted intravenous antibiotics starting from the day of surgery.",
+      "tx": "Following surgical tissue debridement and valve reconstruction, patients must complete a full 4 to 6 week course of tailored **antimicrobial therapy** using bactericidal **intravenous antibiotics**. This required **postoperative duration** is counted starting from day one of surgical tissue debridement to eliminate residual microscopic pathogens.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Postoperative Care Phase",
+          "Therapeutic Protocol",
+          "Monitoring Endpoint"
+        ],
+        "rows": [
+          [
+            "Antimicrobial continuation",
+            "Targeted bactericidal IV antibiotics for 4 to 6 weeks",
+            "Day 1 begins on date of surgical debridement"
+          ],
+          [
+            "Microbiological surveillance",
+            "Weekly serial blood cultures",
+            "Documents sustained clearance of bacteremia"
+          ],
+          [
+            "Conduction monitoring",
+            "Continuous telemetry or temporary pacing",
+            "Detects late-onset AV nodal block from root healing"
+          ],
+          [
+            "Echocardiographic baseline",
+            "Predischarge baseline TTE / TEE",
+            "Establishes reference seating for prosthetic valve"
+          ]
+        ]
+      }
+    }
+  ]
+}

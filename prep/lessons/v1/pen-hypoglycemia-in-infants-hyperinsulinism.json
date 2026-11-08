@@ -1,0 +1,145 @@
+{
+  "id": "pen-hypoglycemia-in-infants-hyperinsulinism",
+  "title": "Congenital Hyperinsulinism of Infancy: ABCC8 Genetics, 18F-DOPA and Diazoxide",
+  "subject": "ss-paediatric-endocrinology",
+  "module": "Type 1 Diabetes, Diabetic Ketoacidosis and Neonatal Hypoglycemia",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Drawing laboratory studies at the immediate nadir of blood glucose captures inappropriately active anabolism.",
+      "tx": "Document endogenous hyperinsulinemic drive through immediate **Critical sample diagnostic hormone benchmarks** during hypoglycemia. During spontaneous hypoglycemia (plasma glucose < 50 mg/dL), a critical blood sample confirms hyperinsulinism: detectable serum insulin (> 2-3 microU/mL), suppressed beta-hydroxybutyrate (< 1.8 mmol/L), and absent free fatty acids.",
+      "vis": {
+        "kind": "table",
+        "title": "Critical Sample Diagnostic Hormone Thresholds",
+        "cols": ["Laboratory Marker", "Diagnostic Cutoff", "Pathophysiological Implication"],
+        "rows": [
+          ["Plasma Glucose", "< 50 mg/dL (nadir)", "Triggers collection of critical diagnostic blood sample"],
+          ["Serum Insulin", "> 2-3 microU/mL (inappropriate)", "Fails to shut off during severe hypoglycemia"],
+          ["Beta-Hydroxybutyrate", "< 1.8 mmol/L (hypoketotic)", "Suppressed lipolysis and ketogenesis from insulin excess"],
+          ["Serum Free Fatty Acids", "Profoundly suppressed", "Inhibition of hormone-sensitive lipase in adipose"]
+        ]
+      }
+    },
+    {
+      "say": "Intravenous or intramuscular glucagon challenge tests liver glycogen mobilization during severe neuroglycopenia.",
+      "tx": "Confirm inappropriate glycogen preservation through the **Glucagon stimulation test glycemic response** at hypoglycemia nadir. Intramuscular or IV glucagon (1 mg or 0.03 mg/kg) given at the nadir of hypoglycemia triggers an exaggerated glucose rise >= 30 mg/dL within 40 minutes, pathognomonic of inappropriately preserved liver glycogen stores.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "nad", "label": "Documented Hypoglycemia Nadir (< 50 mg/dL)"},
+          {"id": "glu", "label": "Glucagon Administration (1 mg or 0.03 mg/kg)"},
+          {"id": "glyc", "label": "Exaggerated Glucose Rise >= 30 mg/dL in 40 Minutes"},
+          {"id": "dx", "label": "Pathognomonic Inappropriate Glycogen Preservation"}
+        ],
+        "edges": [
+          ["nad", "glu"],
+          ["glu", "glyc"],
+          ["glyc", "dx"]
+        ]
+      }
+    },
+    {
+      "say": "Loss of function mutations within potassium channel subunits cause uninterrupted beta cell depolarization.",
+      "tx": "Investigate channelopathy molecular mechanisms analyzing **K_ATP channel molecular genetics (ABCC8 and KCNJ11)** on chromosome 11. Loss-of-function mutations in ABCC8 (SUR1) and KCNJ11 (Kir6.2) on chromosome 11p15.1 impair K_ATP channel closure, causing continuous beta-cell membrane depolarization and unsuppressed calcium-driven exocytosis of insulin.",
+      "vis": {
+        "kind": "table",
+        "title": "K_ATP Channel Subunit Mutations",
+        "cols": ["Gene Subunit", "Chromosomal Locus", "Molecular Functional Impact"],
+        "rows": [
+          ["ABCC8 (SUR1)", "Chromosome 11p15.1", "Sulfonylurea receptor 1 regulatory subunit inactivation"],
+          ["KCNJ11 (Kir6.2)", "Chromosome 11p15.1", "Inwardly rectifying potassium pore inactivation"],
+          ["Cellular Cascade", "Continuous depolarization", "Voltage-gated calcium influx drives exocytosis"]
+        ]
+      }
+    },
+    {
+      "say": "Potassium channel opening agents represent the standard first line pharmacotherapy for persistent hyperinsulinism.",
+      "tx": "Restore membrane polarization through pharmacologic management initiating **Diazoxide first-line medical therapy** in neonates. Diazoxide (5-15 mg/kg/day divided TID) is the first-line K_ATP channel opener; co-administration with chlorothiazide (7-10 mg/kg/day) is mandatory to prevent fluid retention, pulmonary hypertension, and cardiac failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "dz", "label": "Oral Diazoxide (5-15 mg/kg/day Divided TID)"},
+          {"id": "k", "label": "Opens Intact Beta-Cell K_ATP Channels"},
+          {"id": "ctz", "label": "Mandatory Chlorothiazide (7-10 mg/kg/day)"},
+          {"id": "safe", "label": "Prevents Severe Fluid Retention & Pulmonary Hypertension"}
+        ],
+        "edges": [
+          ["dz", "k"],
+          ["dz", "ctz"],
+          ["ctz", "safe"]
+        ]
+      }
+    },
+    {
+      "say": "Differentiation between focal adenomatous lesions and generalized pancreatic involvement governs surgical strategy.",
+      "tx": "Distinguish distinct structural and genetic variants comparing **Focal vs diffuse histological forms** of hyperinsulinism. Diffuse hyperinsulinism affects the entire pancreas (autosomal recessive/dominant), while focal hyperinsulinism is caused by a paternal ABCC8 mutation combined with somatic maternal 11p15 loss of heterozygosity in a localized adenomatous cluster.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diffuse Hyperinsulinism",
+          "points": [
+            "Affects every beta cell across entire pancreas",
+            "Autosomal recessive or dominant mutations",
+            "Requires near-total 95-98% pancreatectomy"
+          ]
+        },
+        "right": {
+          "title": "Focal Hyperinsulinism",
+          "points": [
+            "Localized adenomatous cluster of beta cells",
+            "Paternal mutation + maternal 11p15 LOH",
+            "Curable by limited partial lesionectomy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Positron emission tomography utilizing radiofluorinated dopamine precursors accurately identifies focal lesions.",
+      "tx": "Map focal lesions preoperatively by utilizing **18F-fluoro-L-DOPA PET-CT scan gold standard** molecular imaging. 18F-DOPA PET-CT accurately discriminates focal from diffuse disease with > 95% sensitivity and pinpoints the anatomical location of the focal lesion for curative partial surgical resection. This avoids extensive pancreatic tissue loss.",
+      "vis": {
+        "kind": "table",
+        "title": "18F-DOPA PET-CT Diagnostic Accuracy",
+        "cols": ["Parameter", "Performance Value", "Clinical Impact"],
+        "rows": [
+          ["Diagnostic Sensitivity", "> 95% sensitivity", "Accurately separates focal from diffuse forms"],
+          ["Anatomical Localization", "Sub-centimeter resolution", "Guides targeted laparoscopic or open lesionectomy"],
+          ["Surgical Outcome", "Complete biochemical cure", "Spares normal surrounding pancreatic tissue"]
+        ]
+      }
+    },
+    {
+      "say": "Somatostatin receptor agonists suppress insulin exocytosis downstream of defective potassium channel architecture.",
+      "tx": "Manage diazoxide-refractory neonates using second-line agents through **Octreotide and somatostatin analogs** administration. In diazoxide-unresponsive patients, subcutaneous octreotide (5-30 mcg/kg/day divided QID or continuous SC) inhibits insulin release via somatostatin receptor 5 (SSTR5); monitor for tachyphylaxis and necrotizing enterocolitis in neonates.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "refr", "label": "Diazoxide-Unresponsive Neonate"},
+          {"id": "oct", "label": "Subcutaneous Octreotide (5-30 mcg/kg/day)"},
+          {"id": "sstr", "label": "SSTR5 Activation & Calcium Influx Inhibition"},
+          {"id": "mon", "label": "Surveillance for Tachyphylaxis & Necrotizing Enterocolitis"}
+        ],
+        "edges": [
+          ["refr", "oct"],
+          ["oct", "sstr"],
+          ["sstr", "mon"]
+        ]
+      }
+    },
+    {
+      "say": "Near total resection carries inevitable long term endocrine and exocrine functional failure in children.",
+      "tx": "Evaluate definitive surgical salvage in diffuse refractory disease through **Subtotal pancreatectomy in refractory diffuse disease** procedures. Severe diffuse K_ATP hyperinsulinism refractory to medical therapies requires 95-98% near-total pancreatectomy, carrying a 90% long-term risk of insulin-dependent diabetes mellitus and exocrine insufficiency.",
+      "vis": {
+        "kind": "table",
+        "title": "Outcomes of Near-Total Pancreatectomy",
+        "cols": ["Outcome Metric", "Incidence / Finding", "Management Requirement"],
+        "rows": [
+          ["Resection Extent", "95-98% near-total pancreatectomy", "Spares rim of tissue along duodenal loop"],
+          ["Diabetes Risk", "90% long-term diabetes mellitus", "Lifelong basal-bolus insulin replacement"],
+          ["Exocrine Failure", "High prevalence in childhood", "Oral pancreatic enzyme replacement therapy"]
+        ]
+      }
+    }
+  ]
+}

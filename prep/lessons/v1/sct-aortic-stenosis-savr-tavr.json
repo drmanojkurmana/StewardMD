@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "sct-aortic-stenosis-savr-tavr",
+  "title": "Aortic Stenosis: Hemodynamics, SAVR vs TAVR, Annular Enlargement and Outcomes",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Valvular Heart Disease: Aortic Valve Replacement)",
+    "ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+    "PARTNER and Evolut Randomized Clinical Trials"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Severe high-gradient aortic stenosis is defined by well-established echocardiographic criteria. Transthoracic Doppler echocardiography quantifies valve restriction by measuring the effective orifice area and flow velocity. An aortic valve area of one point zero square centimetres or less defines severe disease.",
+      "tx": "Hemodynamic criteria for severe high-gradient aortic stenosis require an **aortic valve area** of 1.0 cm2 or less, or an indexed valve area below 0.6 cm2/m2. Continuous-wave Doppler echocardiography reveals a **mean transvalvular gradient** of 40 mmHg or greater and a **peak jet velocity** of 4.0 m/s or higher across the stenotic orifice.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Mild to Moderate Stenosis",
+          "Severe High-Gradient Stenosis"
+        ],
+        "rows": [
+          [
+            "Aortic valve area (AVA)",
+            ">1.0 to 1.5 cm2",
+            "<=1.0 cm2 (or indexed <=0.6 cm2/m2)"
+          ],
+          [
+            "Peak jet velocity (Vmax)",
+            "2.0 to 3.9 m/s",
+            ">=4.0 m/s (or very severe >=5.0 m/s)"
+          ],
+          [
+            "Mean pressure gradient",
+            "<40 mmHg",
+            ">=40 mmHg"
+          ],
+          [
+            "Velocity ratio (DVI)",
+            ">0.25 to 0.50",
+            "<0.25 (severe obstruction)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The classical symptom triad of severe aortic stenosis reflects decompensating cardiac mechanics. Patients classically present with exertional angina, effort syncope, or progressive dyspnea from heart failure. Once symptoms emerge, the natural history without valve replacement is grim, with mortality accelerating rapidly.",
+      "tx": "The **natural history** of severe uncorrected aortic stenosis is characterized by an ominous drop in survival following symptom onset. Average life expectancy drops to 5 years once exertional **angina** develops, 3 years following effort **syncope**, and only 2 years once congestive **dyspnea** from heart failure occurs, mandating prompt valve intervention.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Progressive calcific aortic leaflet stiffening and stenosis"
+          },
+          {
+            "id": "b",
+            "label": "Concentric left ventricular hypertrophy with diastolic dysfunction"
+          },
+          {
+            "id": "c",
+            "label": "Onset of classic symptoms: angina (5 yr), syncope (3 yr), dyspnea (2 yr)"
+          },
+          {
+            "id": "d",
+            "label": "Rapid cardiovascular decompensation and sudden cardiac death"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Certain asymptomatic patients also warrant prompt surgical or transcatheter intervention, which is recognized by surgical teams. A decline in resting left ventricular ejection fraction below fifty percent represents a class one indication for surgery. Very severe stenosis with peak jet velocity exceeding five metres per second is also an indication.",
+      "tx": "In patients with **asymptomatic aortic stenosis**, intervention carries a Class I recommendation when resting left ventricular **ejection fraction** declines below 50 percent in the absence of another cause. Guidelines also support intervention (Class IIa) when very severe calcification drives **peak velocity** above 5.0 m/s or during concomitant cardiac surgical procedures.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Symptomatic Severe AS",
+          "points": [
+            "Class I indication for all patients",
+            "Urgent referral for SAVR or TAVR",
+            "Relieves symptoms and prevents sudden death",
+            "Reverses secondary myocardial remodeling"
+          ]
+        },
+        "right": {
+          "title": "Asymptomatic Indications",
+          "points": [
+            "Left ventricular EF <50 percent (Class I)",
+            "Undergoing other planned cardiac surgery (Class I)",
+            "Peak aortic jet velocity >5.0 m/s (Class IIa)",
+            "Abnormal exercise stress test with fall in BP"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Surgical aortic valve replacement remains the gold standard operation through a median sternotomy or right minithoracotomy. The surgeon enters the aortic root through a transverse or hockey-stick aortotomy placed one centimetre above the sinotubular junction. The calcified leaflets are excised and the annulus debrided.",
+      "tx": "Conventional **SAVR** is performed via median sternotomy or minimally invasive right anterior **minithoracotomy**. Cardiopulmonary bypass is established and the ascending aorta opened through an oblique or transverse **aortotomy** placed 1 cm above the sinotubular junction. Calcified leaflets are meticulously excised, and circumferential annular decalcification prepares the bed for prosthetic seating.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aortic-stenosis-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Calcific aortic stenosis valve morphology and gradient. Credit: StewardMD.",
+        "alt": "Pathology of severe calcific aortic stenosis and transvalvular gradient."
+      }
+    },
+    {
+      "say": "Patient-prosthesis mismatch occurs when an implanted valve is too small for the patient's body size. The resulting residual pressure gradient mimics persistent aortic stenosis and impairs reverse ventricular remodeling. Mismatch is defined when the indexed effective orifice area is zero point eight five square centimetres per square metre or less.",
+      "tx": "Severe **patient-prosthesis mismatch** arises when the **effective orifice area** of an implanted prosthesis is inappropriately small relative to patient **body surface area**. Mismatch is defined by an indexed effective orifice area of 0.85 cm2/m2 or less (or severe mismatch at <=0.65 cm2/m2), causing persistent postoperative pressure gradients and impaired ventricular mass regression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mismatch Severity",
+          "Indexed Effective Orifice Area (iEOA)",
+          "Clinical Consequence"
+        ],
+        "rows": [
+          [
+            "No mismatch",
+            ">0.85 cm2/m2",
+            "Normal hemodynamic gradients and excellent LV remodeling"
+          ],
+          [
+            "Moderate mismatch",
+            "0.65 to 0.85 cm2/m2",
+            "Mild residual gradient with slightly elevated late cardiac mortality"
+          ],
+          [
+            "Severe mismatch",
+            "<=0.65 cm2/m2",
+            "High transprosthetic gradients, persistent heart failure, and early mortality"
+          ],
+          [
+            "Obese patient threshold",
+            "<=0.70 cm2/m2 (BMI >=30)",
+            "Adjusted lower threshold used in severely obese individuals"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "When a small aortic annulus threatens to cause patient-prosthesis mismatch, surgeons enlarge the aortic root. Posterior root enlargement techniques like the Nicks and Manouguian procedures widen the annulus into the non-coronary sinus or mitral curtain, which is recognized by surgical teams. This allows placement of a prosthesis one to two sizes larger.",
+      "tx": "To prevent severe mismatch in patients with a small aortic root, surgeons perform surgical **root enlargement**. The **Nicks procedure** extends the aortotomy through the non-coronary sinus, while the **Manouguian procedure** incises through the commissure into the anterior mitral curtain. These patch reconstructions enlarge the annulus by 1 to 2 valve sizes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Intraoperative sizing identifies narrow aortic annulus (<19 to 21 mm)"
+          },
+          {
+            "id": "b",
+            "label": "High predicted risk for patient-prosthesis mismatch based on BSA"
+          },
+          {
+            "id": "c",
+            "label": "Perform Nicks (non-coronary) or Manouguian (mitral curtain) incision"
+          },
+          {
+            "id": "d",
+            "label": "Graft bovine pericardial patch to enlarge annular diameter by 1-2 sizes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Transcatheter aortic valve replacement has transformed the management of severe aortic stenosis. TAVR delivers a balloon-expandable or self-expanding bioprosthesis transfemorally under fluoroscopic guidance. It is preferred in elderly patients aged eighty or older and in those with high surgical risk scores.",
+      "tx": "Contemporary **TAVR** is the preferred therapy for patients aged 80 years or older or those with high surgical operative risk defined by an **STS-PROM score** greater than 8 percent. Using catheter-based **transfemoral delivery**, balloon-expandable or self-expanding valves are deployed inside the native calcified leaflets without sternotomy or cardiopulmonary bypass.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aortic-stenosis-fig2.webp",
+        "ar": 1.3333,
+        "caption": "Aortic stenosis gradient and left ventricular remodeling. Credit: StewardMD.",
+        "alt": "Doppler gradient assessment and left ventricular remodeling in aortic stenosis."
+      }
+    },
+    {
+      "say": "Surgical valve replacement remains strongly recommended in younger patients under sixty-five years of age or with life expectancies exceeding twenty years. Younger individuals have higher long-term bioprosthetic degeneration rates and frequently present with bicuspid anatomy. Mechanical or long-lasting surgical valves provide superior durability in this cohort.",
+      "tx": "A definitive **surgical recommendation** for SAVR is strongly favored over TAVR in patients aged younger than 65 years or having a **life expectancy** exceeding 20 years. SAVR is similarly preferred in patients with congenital **bicuspid aortic valve** anatomy, severe multi-level outflow tract calcification, or concomitant thoracic aortic aneurysm requiring surgical replacement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Surgical Replacement (SAVR)",
+          "points": [
+            "Preferred in age <65 years or life expectancy >20 years",
+            "Option for durable mechanical prosthesis",
+            "Addresses bicuspid morphology and associated aortopathy",
+            "Eliminates paravalvular leak and low pacemaker rate"
+          ]
+        },
+        "right": {
+          "title": "Transcatheter Implantation (TAVR)",
+          "points": [
+            "Preferred in age >=80 years or high STS score (>8%)",
+            "Transfemoral approach eliminates sternotomy and CPB",
+            "Rapid hospital recovery and discharge",
+            "Higher risk of pacemaker insertion and paravalvular leak"
+          ]
+        }
+      }
+    }
+  ]
+}

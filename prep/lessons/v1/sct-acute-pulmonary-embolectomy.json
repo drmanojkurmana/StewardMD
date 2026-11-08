@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "sct-acute-pulmonary-embolectomy",
+  "title": "Surgical Pulmonary Embolectomy: Massive PE, Hemodynamics, Technique and Outcomes",
+  "subject": "ss-ctvs",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Sabiston Textbook of Surgery 22e Ch 111 (Pulmonary Embolism and Pulmonary Thromboendarterectomy)",
+    "ESC Guidelines for the Diagnosis and Management of Acute Pulmonary Embolism",
+    "AHA Scientific Statement on Surgical Pulmonary Embolectomy"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Massive or high-risk pulmonary embolism is defined by profound systemic hemodynamic instability. Patients present with sustained arterial hypotension, defined as systolic blood pressure below ninety millimetres of mercury or a drop of forty millimetres for over fifteen minutes. Obstruction of the pulmonary vascular bed triggers acute right ventricular failure and cardiogenic shock, which is recognized by surgical teams.",
+      "tx": "Clinical guidelines define **massive pulmonary embolism**, or high-risk PE, by the development of **sustained hypotension** (systolic BP below 90 mmHg or a drop of 40 mmHg or greater lasting more than 15 minutes) or overt **cardiogenic shock**. Acute physical obstruction of the pulmonary trunk induces right ventricular failure and arrest.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "PE Risk Stratification",
+          "Hemodynamic State",
+          "Right Ventricular Strain / Biomarkers"
+        ],
+        "rows": [
+          [
+            "High risk (Massive)",
+            "Hypotension (SBP <90 mmHg) or shock",
+            "Severe RV dilation, hypokinesia, and elevated troponin/BNP"
+          ],
+          [
+            "Intermediate risk (Submassive)",
+            "Normotensive (SBP >=90 mmHg)",
+            "Positive RV strain on CT/echo PLUS positive troponin or BNP"
+          ],
+          [
+            "Low risk",
+            "Normotensive, completely stable",
+            "Normal RV size and function; negative cardiac biomarkers"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Submassive or intermediate-risk pulmonary embolism is diagnosed in normotensive patients who exhibit objective evidence of right ventricular compromise. Echocardiography or computed tomography reveals right ventricular dilation and dysfunction. Concurrently elevated serum cardiac troponin or brain natriuretic peptide indicates acute myocardial injury.",
+      "tx": "Patients with **submassive PE** maintain normal systemic arterial pressures but demonstrate objective **right ventricular strain** on echocardiography, with an RV-to-LV diameter ratio exceeding 0.9. Concurrently elevated serum **cardiac troponin** and brain natriuretic peptide signal acute ischemic strain and elevated early decompensation risk.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pe-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Massive pulmonary embolism occluding pulmonary trunk bifurcation. Credit: StewardMD.",
+        "alt": "Thrombus straddling pulmonary bifurcation causing massive acute obstruction."
+      }
+    },
+    {
+      "say": "Surgical pulmonary embolectomy is indicated in patients with massive pulmonary embolism and contraindications to thrombolysis. Recent major surgery, trauma, or intracranial hemorrhage preclude systemic fibrinolytics, which is recognized by surgical teams. Surgery is also life-saving in patients who fail systemic thrombolysis or harbor mobile thrombus in transit through the right atrium.",
+      "tx": "Immediate **surgical embolectomy** is indicated in massive acute PE when a strict **thrombolysis contraindication** exists, such as recent major surgery, intracranial hemorrhage, or active trauma. It is also indicated following failed systemic thrombolysis with shock, or when echocardiography identifies a **thrombus in transit** in right heart chambers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Systemic Thrombolysis",
+          "points": [
+            "First-line for massive PE without contraindications",
+            "High risk of fatal intracranial hemorrhage (2-3%)",
+            "Slow hemodynamic resolution over several hours",
+            "Ineffective for organized or chronic thrombi"
+          ]
+        },
+        "right": {
+          "title": "Surgical Embolectomy",
+          "points": [
+            "Indicated when thrombolysis is contraindicated or fails",
+            "Immediate mechanical relief of RV afterload",
+            "Allows direct extraction of right atrial thrombus in transit",
+            "Enables concomitant closure of patent foramen ovale"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Surgical embolectomy is performed through a median sternotomy under full cardiopulmonary bypass. The operation is typically executed on the normothermic beating heart without cross-clamping. The surgeon enters the pulmonary trunk through a longitudinal arteriotomy positioned one centimetre above the pulmonary valve.",
+      "tx": "Under median sternotomy, full **normothermic bypass** is conducted on the beating heart without aortic cross-clamping. The surgeon opens the **main pulmonary artery** through a **longitudinal arteriotomy** placed 1 cm above the pulmonary valve annulus. Operating on the beating perfused heart maintains coronary flow and minimizes right ventricular injury.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Median sternotomy and systemic heparinization (300 units/kg)"
+          },
+          {
+            "id": "b",
+            "label": "Cannulate ascending aorta and bicaval venous cannulation"
+          },
+          {
+            "id": "c",
+            "label": "Initiate full cardiopulmonary bypass without aortic cross-clamping"
+          },
+          {
+            "id": "d",
+            "label": "Open main pulmonary trunk 1 cm distal to pulmonary valve"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Thrombi are systematically extracted from the main trunk and both pulmonary arterial branches. The surgeon uses smooth ring forceps, malleable suction catheters, and gentle manual compression of the lungs, which is recognized by surgical teams. Flushing retrograde saline washes fragments out of distal segmental vessels without damaging the fragile intima.",
+      "tx": "Systematic **thrombus extraction** from the main trunk and **pulmonary branches** utilizes smooth ring forceps, specialized **suction catheters**, and gentle pleural compression of both lung fields. Surgeons perform retrograde saline flush through the branch pulmonary arteries, dislodging peripheral segmental clots to achieve complete vascular clearance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Maneuver",
+          "Instrument Utilized",
+          "Technical Objective"
+        ],
+        "rows": [
+          [
+            "Main trunk extraction",
+            "Smooth ring forceps (DeBakey / Russian)",
+            "Gently grasp and extract intact saddle embolus"
+          ],
+          [
+            "Lobar branch clearance",
+            "Angled suction catheter (Yankauer / malleable)",
+            "Aspirate secondary clots from right and left branches"
+          ],
+          [
+            "Distal segmental washout",
+            "Manual lung compression and retrograde flush",
+            "Milks peripheral thrombi backward into open arteriotomy"
+          ],
+          [
+            "Closure of arteriotomy",
+            "Running 4-0 or 5-0 polypropylene suture",
+            "Meticulous hemostasis to prevent pulmonary hemorrhage"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Aortic cross-clamping and cardioplegic arrest are generally avoided to protect the ischemic right ventricle. However, cross-clamping becomes necessary if the patient requires intracardiac repairs. Concomitant closure of a patent foramen ovale or resection of a right ventricular thrombus requires brief cardioplegic arrest.",
+      "tx": "While normothermic beating-heart perfusion is preferred, **aortic cross-clamping** and **cardioplegic arrest** become necessary if concomitant intracardiac repairs are required. Opening the right atrium under arrest allows **closure of patent foramen ovale** to eliminate right-to-left shunt cyanosis and enables thorough resection of intracardiac mural thrombus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Beating Heart Embolectomy",
+          "points": [
+            "No global myocardial ischemia or arrest",
+            "Optimal for isolated pulmonary trunk and branch emboli",
+            "Continuous coronary perfusion supports failing RV",
+            "Shorter total bypass duration"
+          ]
+        },
+        "right": {
+          "title": "Arrested Heart Embolectomy",
+          "points": [
+            "Cross-clamp and cardioplegic delivery required",
+            "Necessary to inspect right atrium and right ventricle",
+            "Allows secure primary closure of patent foramen ovale",
+            "Enables removal of entangled tricuspid thrombi"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Modern clinical series demonstrate excellent outcomes following surgical embolectomy for massive pulmonary embolism. Survival rates exceeding eighty-five to ninety percent are achieved when surgery is undertaken promptly. Operating before profound cardiac arrest or irreversible multiorgan failure is the critical determinant of success.",
+      "tx": "Contemporary cardiac surgical centers report **operative survival** exceeding 85 to 90 percent when pulmonary embolectomy is performed promptly. Achieving excellent outcomes requires **prompt intervention** before the onset of irreversible multiorgan failure, prolonged **cardiogenic shock**, or resuscitation-dependent cardiac arrest in the emergency bay.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cor-pulmonale-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Acute cor pulmonale and right ventricular pressure overload. Credit: StewardMD.",
+        "alt": "Right ventricular strain, pressure overload and recovery after surgical decompression."
+      }
+    },
+    {
+      "say": "Placement of an inferior vena cava filter is not routinely required after surgical embolectomy. Indications are restricted to patients with documented recurrent embolism despite therapeutic anticoagulation. Patients with permanent absolute contraindications to anticoagulation also benefit from filter placement, which is recognized by surgical teams.",
+      "tx": "Routine insertion of an **inferior vena cava filter** is not recommended following surgical embolectomy. Placement is reserved strictly for patients who suffer documented **recurrent embolism** while maintaining therapeutic anticoagulation levels, or in those with an absolute **anticoagulation contraindication** such as active major gastrointestinal or intracranial bleeding.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Successful surgical embolectomy and chest closure"
+          },
+          {
+            "id": "b",
+            "label": "Initiate systemic unfractionated heparin once surgical hemostasis secure"
+          },
+          {
+            "id": "c",
+            "label": "Evaluate for recurrent DVT/PE or absolute bleeding contraindications"
+          },
+          {
+            "id": "d",
+            "label": "Deploy retrievable IVC filter only if anticoagulation fails or is prohibited"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

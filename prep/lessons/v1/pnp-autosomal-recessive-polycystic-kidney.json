@@ -1,0 +1,238 @@
+{
+  "id": "pnp-autosomal-recessive-polycystic-kidney",
+  "title": "Autosomal Recessive Polycystic Kidney Disease: PKHD1, Fibrocystin and Portal Hypertension",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Tubular Disorders, Cystic Diseases and Stones",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Mutations in the PKHD1 gene encoding fibrocystin cause autosomal recessive polycystic kidney disease and ductal plate malformations.",
+      "tx": "Examine the molecular genetics underlying **PKHD1 fibrocystin genetics** in presenting families. Autosomal recessive polycystic kidney disease (ARPKD) is caused by mutations in the PKHD1 gene located on chromosome 6p12.3-p12.2. PKHD1 encodes fibrocystin (also known as polyductin), a large receptor-like membrane protein localized to the primary cilia and basal body of renal collecting duct epithelia and biliary tract cholangiocytes.",
+      "vis": {
+        "kind": "table",
+        "title": "PKHD1 Genetic and Molecular Characteristics",
+        "cols": [
+          "Feature",
+          "Description",
+          "Clinical Impact"
+        ],
+        "rows": [
+          [
+            "Chromosomal locus",
+            "6p12.3-p12.2",
+            "Autosomal recessive inheritance"
+          ],
+          [
+            "Encoded protein",
+            "Fibrocystin / Polyductin",
+            "Essential for ciliary structure and planar polarity"
+          ],
+          [
+            "Ciliary localization",
+            "Primary cilium and basal body",
+            "Disruption drives collecting duct and biliary ectasia"
+          ],
+          [
+            "Genotype-phenotype",
+            "Truncating vs missense variants",
+            "Two truncating alleles produce lethal neonatal disease"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Massive bilateral nephromegaly and oligohydramnios produce classic Potter sequence and severe pulmonary hypoplasia in neonates.",
+      "tx": "Recognize the life-threatening neonatal manifestations of **Potter sequence and pulmonary hypoplasia** at delivery. Severe antenatal ARPKD presentation features massive symmetric bilateral nephromegaly, marked oligohydramnios from reduced fetal urine output, Potter sequence (compressed flat facial features, low-set ears, clubbed feet), pulmonary hypoplasia, and a thirty percent neonatal mortality rate primarily caused by respiratory insufficiency.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cystic",
+            "label": "Massive Collecting Duct Cystic Ectasia"
+          },
+          {
+            "id": "oligo",
+            "label": "Severe Oligohydramnios / Anhydramnios"
+          },
+          {
+            "id": "potter",
+            "label": "Potter Sequence (Compressed Facies, Limb Deformities)"
+          },
+          {
+            "id": "pulm",
+            "label": "Pulmonary Hypoplasia & Respiratory Failure (30% Mortality)"
+          }
+        ],
+        "edges": [
+          [
+            "cystic",
+            "oligo"
+          ],
+          [
+            "oligo",
+            "potter"
+          ],
+          [
+            "potter",
+            "pulm"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "High-resolution ultrasonography demonstrates symmetrically enlarged echogenic kidneys with radial acoustic shadowing.",
+      "tx": "Evaluate characteristic imaging features to identify the **Ultrasound spoke-wheel appearance** in pediatric patients. High-resolution renal ultrasonography demonstrates massively enlarged, symmetric, highly echogenic kidneys with poor corticomedullary differentiation. Millions of microscopic cylindrical dilated collecting ducts oriented radially from the medulla to the cortex create acoustic interfaces resembling a spoke-wheel or salt-and-pepper pattern.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adpkd-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Comparative renal ultrasonography and imaging illustrating cystic architectural disruption across pediatric polycystic nephropathies",
+        "alt": "Comparative renal ultrasonography and imaging illustrating cystic architectural disruption across pediatric polycystic nephropathies"
+      },
+      "caption": "Comparative renal ultrasonography and imaging illustrating cystic architectural disruption across pediatric polycystic nephropathies",
+      "alt": "Comparative renal ultrasonography and imaging illustrating cystic architectural disruption across pediatric polycystic nephropathies"
+    },
+    {
+      "say": "All patients with autosomal recessive polycystic kidney disease have concomitant congenital hepatic fibrosis.",
+      "tx": "Screen for hepatobiliary complications reflecting **Congenital hepatic fibrosis (CHF) pairing** across childhood follow-up. All patients with ARPKD have concomitant congenital hepatic fibrosis resulting from abnormal development of the embryonic ductal plate. Children surviving the neonatal period present in childhood with portal hypertension, severe splenomegaly, hypersplenism, and bleeding gastroesophageal varices.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Renal Predominance (Early)",
+          "points": [
+            "Neonatal bilateral massive nephromegaly",
+            "Collecting duct fusiform dilatation",
+            "Early hypertension and renal insufficiency"
+          ]
+        },
+        "right": {
+          "title": "Hepatic Predominance (Late)",
+          "points": [
+            "Ductal plate malformation and portal fibrosis",
+            "Non-cirrhotic portal hypertension",
+            "Splenomegaly, hypersplenism, variceal bleeding"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Non-obstructive intrahepatic cystic biliary dilatation predisposes to life-threatening ascending bacterial cholangitis.",
+      "tx": "Recognize the presentation and management of **Caroli disease and bacterial cholangitis** in affected children. Non-obstructive cystic dilatation of the intrahepatic bile ducts (Caroli disease or Caroli syndrome when combined with congenital hepatic fibrosis) predisposes to biliary stasis, lithiasis, and recurrent ascending bacterial cholangitis. Acute episodes demand intravenous antibiotics, and recurrent disease warrants prophylactic co-trimoxazole or cephalosporins.",
+      "vis": {
+        "kind": "table",
+        "title": "Caroli Syndrome Complications and Care",
+        "cols": [
+          "Clinical Problem",
+          "Diagnostic Finding",
+          "Management Approach"
+        ],
+        "rows": [
+          [
+            "Ascending cholangitis",
+            "Fever, right upper quadrant pain, elevated CRP",
+            "Empiric IV broad-spectrum cephalosporins"
+          ],
+          [
+            "Intrahepatic lithiasis",
+            "Intraductal calculi on liver ultrasound / MRCP",
+            "Ursodeoxycholic acid, biliary drainage"
+          ],
+          [
+            "Recurrent sepsis",
+            "Repeated bacteremic infections",
+            "Long-term prophylactic oral co-trimoxazole"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Severe early-onset systemic hypertension develops in over eighty percent of children, requiring aggressive multidrug therapy.",
+      "tx": "Control cardiovascular risk through management of **Severe early-onset systemic hypertension** from the first months of life. Over eighty percent of children with ARPKD develop severe hypertension in the first months of life due to intrarenal ischemia and hyper-reninemia secondary to tubular compression. Blood pressure management requires aggressive multi-drug therapy with angiotensin-converting enzyme inhibitors (such as enalapril) and calcium channel blockers (amlodipine).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "compress",
+            "label": "Fusiform Cysts Compress Intrarenal Vessels"
+          },
+          {
+            "id": "renin",
+            "label": "Severe Intrarenal Ischemia & Hyper-Reninemia"
+          },
+          {
+            "id": "htn",
+            "label": "Severe Hypertension (> 80% Infants)"
+          },
+          {
+            "id": "rx",
+            "label": "Aggressive Therapy: ACEi (Enalapril) + CCB (Amlodipine)"
+          }
+        ],
+        "edges": [
+          [
+            "compress",
+            "renin"
+          ],
+          [
+            "renin",
+            "htn"
+          ],
+          [
+            "htn",
+            "rx"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Hepatic synthetic function remains completely normal in uncomplicated congenital hepatic fibrosis despite massive portal hypertension.",
+      "tx": "Identify the critical laboratory finding of **Preserved liver synthetic function hallmark** to distinguish CHF from cirrhosis. Despite severe portal hypertension, massive splenomegaly, and bleeding esophageal varices, hepatic synthetic function (measured by serum albumin, serum bilirubin, and prothrombin time / international normalized ratio) remains completely normal in uncomplicated congenital hepatic fibrosis, because hepatocytes are structurally uninjured.",
+      "vis": {
+        "kind": "table",
+        "title": "Liver Function Profile in Uncomplicated CHF",
+        "cols": [
+          "Parameter",
+          "Test Result",
+          "Clinical Rationale"
+        ],
+        "rows": [
+          [
+            "Serum Albumin",
+            "Normal (3.5-5.0 g/dL)",
+            "Hepatocyte protein synthesis intact"
+          ],
+          [
+            "Prothrombin Time / INR",
+            "Normal (INR 0.9-1.1)",
+            "Coagulation factor synthesis preserved"
+          ],
+          [
+            "Total Bilirubin",
+            "Normal (unless acute cholangitis)",
+            "Biliary excretory function intact"
+          ],
+          [
+            "Portal Pressure",
+            "Markedly elevated",
+            "Presinusoidal portal tract fibrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Combined liver and kidney transplantation is indicated for patients with kidney failure and severe hepatic complications.",
+      "tx": "Evaluate surgical indications to recommend **Combined liver-kidney transplantation criteria** in advanced multisystem disease. Dual-organ combined liver-kidney transplantation is indicated in patients reaching end-stage renal disease who have concomitant recurrent life-threatening ascending bacterial cholangitis, intractable gastroesophageal variceal bleeding refractory to endoscopic therapy, or severe hypersplenism.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-genetic-kidney-disorders-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Genetic kidney disorders: clinical, radiologic, and histopathologic hallmarks of progressive ciliopathies and cystic nephropathies",
+        "alt": "Genetic kidney disorders: clinical, radiologic, and histopathologic hallmarks of progressive ciliopathies and cystic nephropathies"
+      },
+      "caption": "Genetic kidney disorders: clinical, radiologic, and histopathologic hallmarks of progressive ciliopathies and cystic nephropathies",
+      "alt": "Genetic kidney disorders: clinical, radiologic, and histopathologic hallmarks of progressive ciliopathies and cystic nephropathies"
+    }
+  ]
+}
