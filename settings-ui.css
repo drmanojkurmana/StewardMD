@@ -414,7 +414,9 @@ html body:is(.dark,.v3-dark) .settings-detail{
 /* iOS grouped Settings (owner 2026-11-08). Applies to the main page only; the Experimental page has no .settings-card. */
 #sbrSettings[data-settings-ui]{--st-bg:#f2f2f7;--st-card:#fff;--st-ink:#000;--st-sep:rgba(60,60,67,.29);--st-sub:rgba(60,60,67,.6);--st-press:rgba(120,120,128,.16);background:var(--st-bg);color:var(--st-ink)}
 body.dark #sbrSettings[data-settings-ui],body.v3-dark #sbrSettings[data-settings-ui]{--st-bg:#000;--st-card:#1c1c1e;--st-ink:#fff;--st-sep:rgba(84,84,88,.65);--st-sub:rgba(235,235,245,.6);--st-press:rgba(120,120,128,.32)}
-html:not([data-font]) #sbrSettings[data-settings-ui]{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",var(--sans,system-ui),sans-serif}
+/* Apple's system font (San Francisco) on every element, since rows and buttons set their own font. A font picked in Settings still wins. */
+html:not([data-font]) #sbrSettings[data-settings-ui],html:not([data-font]) #sbrSettings[data-settings-ui] *:not(.rds-icon):not([class*="material-symbols"]){font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",var(--sans,system-ui),sans-serif}
+#sbrSettings[data-settings-ui]{-webkit-font-smoothing:antialiased}
 #sbrSettings[data-settings-ui] .sbr-set-head{position:sticky;top:0;z-index:4;flex-wrap:nowrap;gap:0;min-height:44px;padding:max(8px,env(safe-area-inset-top,0px)) max(16px,calc((100% - 760px)/2)) 0;background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;transition:background-color .18s ease,box-shadow .18s ease}
 #sbrSettings[data-settings-ui] .sbr-set-head h2{position:absolute;left:0;right:0;bottom:0;margin:0;height:44px;line-height:44px;text-align:center;font-size:17px;font-weight:600;letter-spacing:0;color:var(--st-ink);opacity:0;transition:opacity .18s ease;pointer-events:none}
 #sbrSettings[data-settings-ui] .sbr-set-head.is-scrolled{background:color-mix(in srgb,var(--st-bg) 78%,transparent);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:0 .5px 0 var(--st-sep)}
