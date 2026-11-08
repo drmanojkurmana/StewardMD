@@ -1,0 +1,254 @@
+{
+  "v": 1,
+  "id": "pen-autoimmune-thyroid-hashimoto-graves",
+  "title": "Pediatric Autoimmune Thyroid Disease: Hashimoto, Graves and Antithyroid Therapies",
+  "module": "pen-thyroid-growth",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Autoantibody Hallmark of Hashimoto Thyroiditis",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Serological Markers",
+          "points": [
+            "Elevated serum anti-thyroid peroxidase in > 90%",
+            "Positive anti-thyroglobulin antibodies",
+            "Hallmark of juvenile chronic lymphocytic thyroiditis"
+          ]
+        },
+        "right": {
+          "title": "Clinical Hallmark",
+          "points": [
+            "Painless, firm, bosselated symmetric goiter",
+            "Leading cause of acquired pediatric hypothyroidism",
+            "Decline in linear growth velocity before weight changes"
+          ]
+        }
+      },
+      "tx": "Chronic lymphocytic thyroiditis is the leading cause of acquired hypothyroidism and goiter in children, diagnosed by elevated serum anti-thyroid peroxidase (anti-TPO) in > 90% and anti-thyroglobulin (anti-TG) antibodies. Clinical evaluation confirms **Hashimoto thyroiditis antibody serology** as the diagnostic cornerstone, identifying an indolent, firm, non-tender goiter with insidious linear growth slowing. Early serological identification prevents neurocognitive slowing and growth arrest.",
+      "say": "Hashimoto thyroiditis is the foremost cause of acquired juvenile hypothyroidism, verified by high anti-thyroid peroxidase and anti-thyroglobulin titers."
+    },
+    {
+      "title": "Transient Hashitoxicosis Presentation",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Autoimmune Lysis\nFollicular injury"
+          },
+          {
+            "id": "2",
+            "label": "Colloid Discharge\nPreformed T4 and T3 surge"
+          },
+          {
+            "id": "3",
+            "label": "Hashitoxicosis Phase\nMild transient thyrotoxicosis"
+          },
+          {
+            "id": "4",
+            "label": "Spontaneous Euthyroidism\nResolves in weeks to months"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "Initial presentation of Hashimoto thyroiditis can feature transient mild hyperthyroidism (hashitoxicosis) due to inflammatory disruption of thyroid follicles, which spontaneously subsides in weeks to months without antithyroid drugs. Follicular architecture ruptures under cytotoxic autoimmune attack, producing the **Hashitoxicosis transient phase** by spilling stored thyroglobulin into circulation. Thionamides are unnecessary because autonomous hormone hyper-synthesis is absent.",
+      "say": "Transient thyrotoxicosis from follicular disruption during early Hashimoto thyroiditis resolves spontaneously within weeks without antithyroid drugs."
+    },
+    {
+      "title": "Pathophysiology of Pediatric Graves Disease",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Receptor Autoantibodies",
+          "points": [
+            "Circulating TRAb and TSI bind TSH receptor",
+            "Constitutive stimulation of adenylate cyclase",
+            "Uncontrolled endogenous thyroid hormone synthesis"
+          ]
+        },
+        "right": {
+          "title": "Systemic Manifestations",
+          "points": [
+            "Smooth diffuse vascular goiter with audible bruit",
+            "Heat intolerance, nervousness, and weight loss",
+            "Accelerated linear growth with advanced bone age"
+          ]
+        }
+      },
+      "tx": "Pediatric Graves disease is driven by autoantibodies that bind and stimulate the TSH receptor (TRAb / TSI), causing smooth diffuse vascular goiter, weight loss, heat intolerance, proptosis, and accelerated linear growth. Understanding **Pediatric Graves disease pathogenesis** highlights increased osteoclastic bone turnover that initially accelerates stature velocity while disproportionately advancing epiphyses. Incomplete closure and premature craniosynostosis represent critical risks in early childhood thyrotoxicosis.",
+      "say": "Pediatric Graves disease stems from thyroid-stimulating immunoglobulins driving diffuse vascular goiter, hypermetabolism, proptosis, and rapid linear growth."
+    },
+    {
+      "title": "Methimazole as Sole First-Line Thionamide",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Thionamide Drug",
+          "Pediatric Status",
+          "Standard Dosage",
+          "Toxicity Profile"
+        ],
+        "rows": [
+          [
+            "Methimazole (MMI)",
+            "Exclusive first-line",
+            "0.2-0.5 mg/kg/day once daily, max 30 mg",
+            "Dose-dependent rash, agranulocytosis"
+          ],
+          [
+            "Propylthiouracil (PTU)",
+            "Strictly contraindicated",
+            "Avoid entirely in children",
+            "Fatal fulminant hepatic necrosis (black-box)"
+          ]
+        ]
+      },
+      "tx": "Oral methimazole (0.2-0.5 mg/kg/day once daily, max 30 mg) is the sole recommended first-line antithyroid drug in children; propylthiouracil (PTU) is strictly black-box contraindicated due to fatal fulminant hepatic necrosis. Clinical guidelines establish **Methimazole as exclusive first-line thionamide** therapy, fostering adherence and blocking thyroid peroxidase iodination without hepatotoxic mitochondrial toxicity. PTU remains restricted solely to refractory maternal thyrotoxicosis in early pregnancy.",
+      "say": "Oral methimazole once daily is the exclusive first-line thionamide in children because propylthiouracil carries a black-box warning for fatal hepatic necrosis."
+    },
+    {
+      "title": "Agranulocytosis Surveillance Protocol",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Warning Symptoms",
+          "points": [
+            "High sudden fever above 38.5°C",
+            "Severe painful sore throat or pharyngitis",
+            "Oral stomatitis and aphthous ulcerations"
+          ]
+        },
+        "right": {
+          "title": "Mandatory Action",
+          "points": [
+            "Stop oral methimazole immediately",
+            "Urgent absolute neutrophil count (ANC)",
+            "Agranulocytosis defined as ANC < 500/mm³"
+          ]
+        }
+      },
+      "tx": "Parents must be educated to stop methimazole immediately and obtain urgent absolute neutrophil count (ANC) if the child develops fever, sore throat, or mouth ulceration; agranulocytosis (ANC < 500/mm³) occurs in 0.3-0.5%. The strict **Agranulocytosis monitoring rule** dictates that routine baseline surveillance remains uninformative because idiosyncratic marrow suppression develops precipitously. Prompt drug withdrawal and broad-spectrum antimicrobial cover avert fatal neutropenic sepsis.",
+      "say": "Families must halt methimazole and seek emergency neutrophil counts immediately if a child develops sudden fever or a severe sore throat."
+    },
+    {
+      "title": "Beta-Adrenergic Blockade for Symptom Relief",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Sympathetic Surge\nTachycardia, tremor, anxiety"
+          },
+          {
+            "id": "2",
+            "label": "Propranolol or Atenolol\nBeta-blocker administration"
+          },
+          {
+            "id": "3",
+            "label": "Rapid Symptomatic Relief\nWithin hours"
+          },
+          {
+            "id": "4",
+            "label": "Bridge to Methimazole\nEuthyroid at 4 to 8 weeks"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "Propranolol (1-2 mg/kg/day divided TID) or atenolol provides immediate symptomatic relief of palpitations, tachycardia, and severe tremor until methimazole achieves euthyroid state at 4-8 weeks. Adjunctive **Beta-blocker symptom control** counters sympathetic hyper-responsiveness that accounts for debilitating sleep disruption, fine motor instability, and emotional lability in school-aged children. Beta-blockers are safely tapered and discontinued once free thyroxine levels normalize into reference range.",
+      "say": "Beta-blocker therapy provides swift symptomatic control of palpitations and tremor until methimazole restores normal thyroid hormone levels over four to eight weeks."
+    },
+    {
+      "title": "Definitive Ablative and Surgical Interventions",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Total Thyroidectomy",
+          "points": [
+            "Immediate definitive cure for thyrotoxicosis",
+            "Preferred in children under 5 years of age",
+            "Risks include recurrent nerve injury and hypoparathyroidism"
+          ]
+        },
+        "right": {
+          "title": "Radioiodine Ablation (131-I)",
+          "points": [
+            "High-dose ablative therapy > 150-200 microCi/g",
+            "Reserved for older pediatric cohorts > 5-10 years",
+            "Eliminates residual autonomous thyroid tissue"
+          ]
+        }
+      },
+      "tx": "If medical remission is not achieved after 2-3 years of methimazole, definitive treatment options are total thyroidectomy or 131-I radioiodine ablation (doses > 150-200 microCi/g, preferably in children > 5-10 years). Selecting **Definitive Graves therapies (Radioactive iodine vs Surgery)** avoids subtotal surgery or low-dose radioiodine due to unacceptable recurrence rates. Lifelong oral levothyroxine replacement begins immediately following complete thyroid tissue ablation.",
+      "say": "Definitive therapy with total thyroidectomy or radioactive iodine ablation is indicated when prolonged thionamide therapy fails to induce permanent remission."
+    },
+    {
+      "title": "Neonatal Graves Disease from Maternal TRAb",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Maternal Graves\nHigh circulating TRAb"
+          },
+          {
+            "id": "2",
+            "label": "Transplacental Transfer\nActive IgG transport"
+          },
+          {
+            "id": "3",
+            "label": "Neonatal Thyrotoxicosis\nTachycardia, failure to thrive"
+          },
+          {
+            "id": "4",
+            "label": "Gradual Resolution\nResolves by 3-4 months as IgG clears"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "Transplacental passage of maternal TRAb causes transient neonatal thyrotoxicosis (fetal tachycardia, craniosynostosis, cardiac failure), treated with methimazole, Lugol iodine, and propranolol, resolving by 3-4 months as maternal IgG clears. Recognizing **Neonatal Graves disease pathophysiology** is crucial because high maternal receptor antibodies trigger autonomous hypersecretion despite maternal euthyroid status post-ablation. Aggressive multi-agent therapy prevents acute congestive heart failure and premature cranial suture closure.",
+      "say": "Maternal antibody transfer can cause severe neonatal thyrotoxicosis requiring urgent multi-agent therapy, resolving naturally as maternal antibodies decay."
+    }
+  ]
+}
