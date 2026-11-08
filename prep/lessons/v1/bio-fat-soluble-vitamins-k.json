@@ -1,0 +1,75 @@
+{
+  "v": 1,
+  "module": "bio-fat-soluble-vitamins",
+  "subject": "biochemistry",
+  "title": "Vitamin K and carboxylation",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Gamma carboxylation** is the reaction vitamin K enables. A carboxylase adds a second carboxyl group to specific glutamate residues, creating Gla residues that bind calcium. Without this modification, clotting factors circulate as inactive precursors that cannot attach to platelet surfaces. Vitamin K is therefore a cofactor for activation, not a clotting factor itself.",
+      "say": "Vitamin K switches clotting factors on by adding calcium gripping groups. Without it the factors are present but useless, like keys cut to the wrong shape.",
+      "vis": null
+    },
+    {
+      "tx": "**The Gla proteins** follow the 1972 pattern: factors II, VII, IX and X gain function after carboxylation. Proteins C and S, the natural anticoagulants, need the same step, as does osteocalcin in bone. Remembering 1972 gives you the procoagulant list instantly, and adding C, S and osteocalcin completes the tested set.",
+      "say": "Nineteen seventy two names the four clotting factors. Add proteins C and S for anticoagulation and osteocalcin for bone, and you have the full exam list.",
+      "vis": {
+        "kind": "table",
+        "title": "Proteins needing vitamin K",
+        "cols": [
+          "Protein",
+          "Role"
+        ],
+        "rows": [
+          [
+            "Factor II",
+            "Prothrombin, clot formation"
+          ],
+          [
+            "Factor VII",
+            "First to fall, PT prolongs"
+          ],
+          [
+            "Factor IX",
+            "Intrinsic pathway factor"
+          ],
+          [
+            "Factor X",
+            "Common pathway factor"
+          ],
+          [
+            "Proteins C and S",
+            "Natural anticoagulants"
+          ],
+          [
+            "Osteocalcin",
+            "Bone mineral binding"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**The vitamin K cycle** explains warfarin. Carboxylation converts vitamin K to its epoxide, and vitamin K epoxide reductase, VKORC1, recycles it back. Warfarin blocks VKORC1, so carboxylation stalls. Existing active factors must decay before anticoagulation appears, factor VII falls first, and the prothrombin time prolongs before the APTT.",
+      "say": "Warfarin jams the recycling enzyme VKORC1. Because old factors must wear out first, factor VII goes earliest and the PT rises before the APTT.",
+      "vis": null
+    },
+    {
+      "tx": "**Protein C timing** creates the early clot risk. Protein C has a short half life, so warfarin lowers this anticoagulant almost as fast as factor VII, briefly tipping balance toward clotting. That is why large loading doses can cause skin necrosis and why heparin bridging covers the first days in high risk patients.",
+      "say": "Early warfarin can briefly favour clotting because protein C disappears fast. Bridging with heparin covers that vulnerable window in high risk patients.",
+      "vis": null
+    },
+    {
+      "tx": "**Newborn protection** reflects a sterile gut. Babies are born with low vitamin K stores and no gut bacteria making K2, so haemorrhagic disease of the newborn can cause skin, gut or intracranial bleeding. A single intramuscular vitamin K dose at birth is the standard preventive measure in most delivery units.",
+      "say": "A newborn gut makes no vitamin K yet, and stores are tiny. One intramuscular dose at birth prevents a bleeding disease that can reach the brain.",
+      "vis": null
+    },
+    {
+      "tx": "**Deficiency versus liver failure** is separated by response to vitamin K. In pure deficiency, giving vitamin K restores carboxylation and corrects the prothrombin time within a day. In advanced liver disease the hepatocytes cannot synthesise factors even with vitamin K present, so correction fails. Superwarfarin rodenticide poisoning, by contrast, needs prolonged high dose vitamin K.",
+      "say": "Give vitamin K and watch the PT. Correction means deficiency; no correction points to a liver that cannot make factors, while superwarfarin poisoning needs weeks of treatment.",
+      "vis": null
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
