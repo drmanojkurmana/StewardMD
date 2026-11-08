@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "bio-carbohydrate-chemistry",
+ "subject": "biochemistry",
+ "title": "Disaccharides and glycosidic bonds",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **glycosidic bond** condenses an anomeric carbon with a hydroxyl (O-glycosidic), amino (N-glycosidic in nucleosides and N-glycans) or sulfur, locking anomeric configuration and creating reducing or non reducing ends by whether any anomeric carbon stays free. Numbering names the bond precisely (alpha-1,4 means anomeric C1 alpha to C4 of next ring), and brush border hydrolases read that precision absolutely, one enzyme per bond geography.",
+   "say": "Glycosidic bonds lock anomeric configuration and create reducing ends only when an anomeric carbon stays free. Brush border hydrolases read bond geography absolutely, one enzyme per bond type.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-carbohydrate-chemistry-fig1.webp",
+    "alt": "This figure illustrates the structures of key disaccharides sucrose, lactose and maltose with glycosidic bonds marked.",
+    "caption": "Key disaccharide and polysaccharide structures.",
+    "ar": 1.8333
+   }
+  },
+  {
+   "tx": "Maltose (glucose alpha-1,4 glucose, one free anomeric carbon, reducing) arrives from starch by amylases and finishes at maltase; isomaltose (alpha-1,6) needs isomaltase in the sucrase-isomaltase complex, whose congenital failure causes sucrose and starch intolerance with osmotic diarrhoea. **Cellobiose** (beta-1,4) is the cellulose repeat humans cannot split, defining dietary fibre by bond alone rather than composition.",
+   "say": "Maltose finishes at maltase, while isomaltose needs isomaltase whose failure causes sucrose and starch intolerance. Cellobiose defines dietary fibre by its unsplittable beta bond alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disaccharide",
+     "Bond",
+     "Reducing?",
+     "Brush enzyme"
+    ],
+    "rows": [
+     [
+      "Maltose",
+      "Glucose alpha-1,4 glucose",
+      "Yes",
+      "Maltase-glucoamylase"
+     ],
+     [
+      "Isomaltose",
+      "Glucose alpha-1,6 glucose",
+      "Yes",
+      "Isomaltase"
+     ],
+     [
+      "Lactose",
+      "Galactose beta-1,4 glucose",
+      "Yes",
+      "Lactase"
+     ],
+     [
+      "Sucrose",
+      "Glucose alpha-1,beta-2 fructose",
+      "No",
+      "Sucrase"
+     ],
+     [
+      "Trehalose",
+      "Glucose alpha-1,1 glucose",
+      "No",
+      "Trehalase (insects, fungi, renal brush)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lactose** (milk sugar) needs lactase-phlorizin hydrolase at the brush border, whose developmental down regulation after weaning (lactase non persistence, the ancestral human norm) leaves undigested lactose to ferment (gas, bloating, osmotic diarrhoea, acidic stool) while mucosal disease (coeliac, gastroenteritis) causes secondary transient failure. Persistence mutations near the lactase gene in Europeans and pastoralist Africans invert the teaching: tolerance, not intolerance, is the derived mutation.",
+   "say": "Lactase non persistence is the ancestral norm, leaving lactose to ferment with bloating and diarrhoea. Persistence mutations invert the teaching: tolerance is the derived mutation in pastoralist populations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lactose intolerance (enzyme low)",
+     "points": [
+      "Symptoms dose dependent",
+      "Hydrogen breath test rises",
+      "Yoghurt and hard cheese often tolerated"
+     ]
+    },
+    "right": {
+     "title": "Galactosaemia (metabolism blocked)",
+     "points": [
+      "Toxicity, liver and lens injury",
+      "Newborn emergency on milk",
+      "Lifelong galactose restriction, not just lactose dose"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sucrose** (table sugar, glucose plus fructose, non reducing, dextrorotatory until inverted) splits at sucrase to absorbable halves whose fructose half bypasses metabolic control (prior module consequences for fat and intolerance). Congenital sucrase-isomaltase deficiency presents at weaning onto sucrose and starch with watery diarrhoea and failure to thrive, treated by sucrose exclusion and sacrosidase replacement, mirroring lactase logic at a neighbouring enzyme.",
+   "say": "Sucrose splits at sucrase, whose congenital failure presents at weaning with watery diarrhoea. Treatment excludes sucrose and replaces enzyme, mirroring lactase logic at a neighbouring enzyme.",
+   "vis": null
+  },
+  {
+   "tx": "Oligosaccharides extend the same bonds into information: human milk oligosaccharides (fucosylated, indigestible to infant) feed Bifidobacteria and decoy pathogens, ABO blood group antigens are oligosaccharide tips on glycoproteins and glycolipids (H substance plus A/B transferases using nucleotide sugar donors), and **raffinose** family sugars in legumes ferment to flatus because human alpha-galactosidase is absent (Beano supplies it exogenously).",
+   "say": "Human milk oligosaccharides feed Bifidobacteria and decoy pathogens, while ABO antigens are oligosaccharide tips. Raffinose ferments to flatus because human alpha-galactosidase is absent in gut.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Oligosaccharide system",
+     "Bond or donor lesson"
+    ],
+    "rows": [
+     [
+      "ABO antigens",
+      "Transferases add GalNAc (A) or Gal (B) to H fucose scaffold"
+     ],
+     [
+      "Human milk oligosaccharides",
+      "Fucose and sialic acid tips, prebiotic decoys"
+     ],
+     [
+      "Raffinose, stachyose (beans)",
+      "Alpha-galactose bonds, gas when fermented"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Polysaccharides** are the next size of the same idea, so preview their bond logic here: storage alpha-1,4 with alpha-1,6 branches (glycogen denser than starch) versus structural beta-1,4 sheets (cellulose) versus glycosaminoglycan repeats (next lesson). If you can name the bond, its anomer and its branching, you can predict digestibility, solubility and storage disease behaviour before meeting any named polymer in isolation.",
+   "say": "Name the bond, its anomer and its branching, and you can predict digestibility and storage behaviour before meeting any named polymer. Polysaccharides extend this same idea by size alone.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bond predicts fate",
+    "nodes": [
+     {
+      "id": "bond",
+      "label": "Bond named (anomer, numbers)"
+     },
+     {
+      "id": "enz",
+      "label": "Human enzyme exists?"
+     },
+     {
+      "id": "fate",
+      "label": "Energy, fibre, or storage disease"
+     }
+    ],
+    "edges": [
+     [
+      "bond",
+      "enz"
+     ],
+     [
+      "enz",
+      "fate"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

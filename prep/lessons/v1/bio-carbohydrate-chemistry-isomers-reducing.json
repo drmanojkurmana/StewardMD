@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "bio-carbohydrate-chemistry",
+ "subject": "biochemistry",
+ "title": "Sugar isomers and reducing tests",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Monosaccharides classify by carbonyl (**aldoses** with terminal aldehyde versus ketoses with internal ketone, glyceraldehyde and dihydroxyacetone as triose parents) and carbon count (triose to heptose), almost all D configured at the highest numbered chiral centre (L fucose and L iduronate in glycans are honoured exceptions). Glucose, mannose and galactose share formula C6H12O6 yet differ biologically entirely by stereochemistry, the founding lesson of carbohydrate chemistry.",
+   "say": "Aldoses and ketoses classify by carbonyl, almost all D configured. Glucose, mannose and galactose share one formula yet differ entirely by stereochemistry, the founding lesson here.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Isomer term", "What differs", "Canonical example"],
+    "rows": [
+     ["Epimers", "One chiral centre", "Glucose/mannose (C2), glucose/galactose (C4)"],
+     ["Anomers", "Anomeric carbon (ring closure)", "Alpha versus beta glucose"],
+     ["Enantiomers", "Mirror image, all centres", "D versus L glucose"],
+     ["Aldose ketose isomers", "Carbonyl position, same formula", "Glucose versus fructose"]
+    ]
+   }
+  },
+  {
+   "tx": "Ring closure creates the **anomeric carbon** (C1 in aldoses, C2 in fructose) whose hydroxyl below the ring (alpha, cis to CH2OH in D sugars Haworth) or above (beta) interconverts through open chain mutarotation until equilibrium (glucose about thirty six percent alpha, sixty four percent beta). Enzymes and glycosidic bonds lock one anomer absolutely, so starch (alpha) digests while cellulose (beta) resists the same glucose polymer chemistry.",
+   "say": "Ring closure creates the anomeric carbon whose alpha or beta hydroxyl interconverts by mutarotation. Bonds lock one anomer absolutely, so starch digests while cellulose resists with identical glucose units.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Alpha anomer (starch, glycogen)", "points": ["Bond down in Haworth D sugars", "Human amylases hydrolyse", "Storage and diet energy"]},
+    "right": {"title": "Beta anomer (cellulose, lactose)", "points": ["Bond up in Haworth D sugars", "Needs beta enzymes (lactase, cellulase absent)", "Fibre and milk sugar fates"]
+    }
+   }
+  },
+  {
+   "tx": "A sugar is **reducing** when its anomeric carbon is free to open and reduce cupric ions in Benedict or Fehling alkaline solutions (brick red cuprous oxide with heating); all monosaccharides qualify, most disaccharides qualify through one free end, sucrose does not (both anomeric carbons bonded, glucose alpha1 beta2 fructose). Urine Benedict positivity with negative glucose oxidase therefore hunts lactose, galactose, fructose or pentoses, not glucose.",
+   "say": "Reducing sugars have a free anomeric carbon that reduces Benedict reagent to brick red. Sucrose cannot because both anomeric carbons are bonded. Benedict positive with glucose negative hunts other sugars.",
+   "vis": {
+    "kind": "flow",
+    "title": "Benedict logic at the bench",
+    "nodes": [
+     {"id": "ur", "label": "Urine reduces Benedict (heated, brick red)"},
+     {"id": "ox", "label": "Glucose oxidase strip negative"},
+     {"id": "hunt", "label": "Hunt lactose, galactose, fructose, pentose"}
+    ],
+    "edges": [["ur", "ox"], ["ox", "hunt"]]
+   }
+  },
+  {
+   "tx": "**Osazone** crystallisation with phenylhydrazine (same first two carbons reacting) gives glucose, mannose and fructose an identical needle glucosazone (they differ only at C1/C2, erased in reaction), while lactose gives powder puff (cotton ball) and maltose sunflower petal crystals on cooling timelines historically timed in practical examinations. Modern mass spectrometry replaced bench osazones clinically, but the C1/C2 erasure logic remains a perfect stereochemistry test.",
+   "say": "Osazone reaction erases carbons one and two, so glucose, mannose and fructose share needle crystals. Lactose gives powder puff and maltose sunflower crystals, a perfect stereochemistry test historically.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sugar", "Osazone crystals", "Why"],
+    "rows": [
+     ["Glucose, mannose, fructose", "Needle (identical)", "Differ only at C1/C2, erased"],
+     ["Lactose", "Powder puff or cotton ball", "Galactose C4 difference preserved"],
+     ["Maltose", "Sunflower petals", "Two glucose units, C4 preserved"]
+    ]
+   }
+  },
+  {
+   "tx": "Oxidation and reduction create sugar relatives with clinical jobs: oxidation at C1 gives aldonic (gluconic), at C6 uronic (**glucuronic** for conjugation), both ends aldaric acids; reduction gives sugar alcohols (sorbitol, xylitol sweeteners, mannitol osmotic diuretic and raised pressure therapy). Deoxy sugars (2-deoxyribose in DNA), amino sugars (glucosamine, N-acetylneuraminic sialic acid capping glycans, influenza neuraminidase target) and phosphorylated sugars (trapped metabolic intermediates) complete the derivative families in one sweep.",
+   "say": "Oxidation gives glucuronic acid for conjugation, reduction gives sorbitol and mannitol, and amino and deoxy sugars build DNA and glycan caps. Derivative families complete the chemistry in one sweep.",
+   "vis": null
+  },
+  {
+   "tx": "**Invert sugar** (sucrose hydrolysed, optical rotation inverting from dextro to laevo because fructose laevorotation dominates) sweetens honey and intravenous historical fluids, while caramelisation and Maillard glycation (reducing sugar plus protein amino groups, Amadori rearrangement to advanced glycation end products) explain HbA1c measurement, diabetic tissue injury chemistry and food browning with one non enzymatic reaction sequence. Glycation needs no enzyme, only time and glucose concentration, which is why red cell lifespan sets the HbA1c window.",
+   "say": "Invert sugar and Maillard glycation explain HbA1c, diabetic tissue chemistry and food browning together. Glycation needs only time and glucose concentration, which is why red cell lifespan sets the window.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Enzymatic glycosylation ( Golgi)", "points": ["Sequon directed, precise", "Builds functional glycans", "Reversible control by enzymes"]},
+    "right": {"title": "Non enzymatic glycation (Maillard)", "points": ["Concentration and time driven", "HbA1c and AGE injury", "Irreversible accumulation"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
