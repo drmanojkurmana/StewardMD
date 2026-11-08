@@ -550,7 +550,20 @@
     fingerprint: '<path d="M12 3a7 7 0 0 0-7 7c0 3 .5 5.5 1.5 8"/><path d="M12 3a7 7 0 0 1 7 7c0 1.5-.1 2.8-.3 4"/><path d="M8.5 18.5C7.4 16 7 13.5 7 11a5 5 0 0 1 10 0v2"/><path d="M15.5 20c.6-1.2 1-2.5 1.3-4"/><path d="M9.5 20.5C8.3 17.8 7.8 14.8 8 12a4 4 0 0 1 8 0v1.5"/><path d="M12 12v2.5"/>',
     hub: '<circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><circle cx="5" cy="18" r="2"/><path d="M12 9V6M12 15v3M10 10.5 6.5 7.5M14 10.5l3.5-3M10 13.5l-3.5 3M14 13.5l3.5 3"/>',
     receipt_long: '<path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>',
-    bill: '<rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>'
+    bill: '<rect x="4" y="3" width="16" height="18" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="13" y2="15"/>',
+    // ── Home reference-look icons (owner 2026-11-08): hand-drawn line icons, one per tile, no two alike.
+    hrfStart: '<rect x="5" y="4.5" width="14" height="17" rx="2"/><path d="M9 4.5V3h6v1.5"/><path d="M9 2.8h6"/><path d="M12 10v6M9 13h6"/>',
+    hrfDx: '<circle cx="10" cy="8" r="3.2"/><path d="M4.5 19.5a5.5 5.5 0 0 1 9-4.2"/><circle cx="17" cy="16.5" r="3"/><path d="m19.3 18.8 2 2"/>',
+    hrfCapsule: '<rect x="3.5" y="8" width="17" height="8" rx="4" transform="rotate(-45 12 12)"/><path d="m8.5 8.5 7 7"/>',
+    hrfCalc: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 7h7"/><circle cx="8.5" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="8.5" cy="14.5" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="14.5" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="14.5" r=".9" fill="currentColor" stroke="none"/><circle cx="8.5" cy="18" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="18" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="18" r=".9" fill="currentColor" stroke="none"/>',
+    hrfVirus: '<circle cx="12" cy="12" r="4.5"/><path d="M12 7.5V4M12 20v-3.5M7.5 12H4M20 12h-3.5M8.8 8.8 6.3 6.3M17.7 17.7l-2.5-2.5M15.2 8.8l2.5-2.5M6.3 17.7l2.5-2.5"/><circle cx="10.2" cy="10.8" r="1" fill="currentColor" stroke="none"/><circle cx="13.8" cy="13.2" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r=".6" fill="currentColor" stroke="none"/>',
+    hrfFlask: '<path d="M10 3h4"/><path d="M10.5 3v5L5 18a1.8 1.8 0 0 0 1.6 2.7h10.8A1.8 1.8 0 0 0 19 18L13.5 8V3"/><path d="M7.5 14.5h9"/>',
+    hrfIvBag: '<path d="M9 3.5h6"/><rect x="6.5" y="5" width="11" height="13" rx="2.5"/><path d="M9.5 9.5h5M12 8v5M9.5 11h5" stroke-width="1.4"/><path d="M12 18v1.5a2 2 0 0 0 2 2"/>',
+    hrfHospital: '<path d="M5 21V8.5A1.5 1.5 0 0 1 6.5 7h6A1.5 1.5 0 0 1 14 8.5V21"/><path d="M14 11h3.5A1.5 1.5 0 0 1 19 12.5V21"/><path d="M3.5 21h17"/><path d="M9.5 9.5v4M7.5 11.5h4"/>',
+    hrfHome: '<path d="M12 3.8 3.8 11.2h2.4v8.6h11.6v-8.6h2.4Z" fill="currentColor" stroke="none"/><path d="M10.2 19.8v-4.6h3.6v4.6" fill="none" stroke="#fff" stroke-width="1.6"/>',
+    hrfFolder: '<path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9v8.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5Z"/>',
+    hrfGrid4: '<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
+    hrfSparkle: '<path d="M11 4c.6 3.8 2.2 5.4 6 6-3.8.6-5.4 2.2-6 6-.6-3.8-2.2-5.4-6-6 3.8-.6 5.4-2.2 6-6Z" fill="currentColor" stroke="none"/><path d="M18.5 3.5c.3 1.8 1 2.5 2.8 2.8-1.8.3-2.5 1-2.8 2.8-.3-1.8-1-2.5-2.8-2.8 1.8-.3 2.5-1 2.8-2.8Z" fill="currentColor" stroke="none"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + '</svg>'; }
   // Shared icon accessor so icu.js / antibiogram.js / sheets use ONE catalog (no emojis, no dup SVG).
@@ -2606,7 +2619,7 @@
   }
   function homeToolsSectionMarkup() {
     var T = homeTabsApi();
-    var grid = '<p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p><div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div>';
+    var grid = '<div class="rnav-grid" id="rnavToolsGrid">' + renderHomeToolsGrid() + '</div><p id="rnavReorderHint" role="status">Touch and hold a tool to rearrange.</p>';
     if (!T) return '<div class="rds-section-header"><span class="rds-section-title">Clinical tools</span></div>' + grid;
     // First run with tabs: what the user already has on Home is not "new" to them.
     try { var st = homeStarter(); T.seedSeen(HOME_TOOLS.filter(function (t) { return homeToolEligible(t) && homeToolVisible(t, st); }).map(function (t) { return t.act; })); } catch (e) {}
@@ -2617,8 +2630,8 @@
     }).join("");
     return '<div class="rnav-tools-head"><h2 class="rnav-tools-h" id="rnavToolsH">Clinical Tools</h2>' +
         '<button type="button" class="rnav-alltools" data-act="alltools">' + ric("apps") + '<span>All Tools</span>' + ric("chevron_right") + '</button></div>' +
-      '<div class="hrf-pillsrow"><div class="rnav-htabs" role="tablist" aria-labelledby="rnavToolsH">' + tabs + '</div><button type="button" class="hrf-chev" data-hometab-pick="1" aria-label="More categories">' + ric("expand_more") + '</button></div>' +
-      '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-foryou" aria-labelledby="rnavHtab-foryou"' + (cur === "foryou" ? '' : ' hidden') + '><div id="rnavTry">' + homeTryCard(T) + '</div>' + grid + '</div>' +
+      '<div class="hrf-pillsrow"><div class="rnav-htabs" role="tablist" aria-labelledby="rnavToolsH">' + tabs + '</div></div>' +
+      '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-foryou" aria-labelledby="rnavHtab-foryou"' + (cur === "foryou" ? '' : ' hidden') + '>' + grid + '<div id="rnavTry">' + homeTryCard(T) + '</div></div>' +
       T.TAB_IDS.filter(function (id) { return id !== "foryou"; }).map(function (id) {
         return '<div class="rnav-hpanel" role="tabpanel" id="rnavHpanel-' + id + '" aria-labelledby="rnavHtab-' + id + '"' + (cur === id ? '' : ' hidden') + '>' + (cur === id ? homeTabPanel(T, id) : '') + '</div>';
       }).join("");
@@ -2813,17 +2826,17 @@
       '<main class="v3-main rnav-main"><div class="rnav-stack">' +
         '<div class="hrf-hero"><div class="rnav-greet"><div class="rnav-eyebrow hrf-date">' + dateV4() + '</div><div class="rnav-hi hrf-greet">' + greetHeroV4() + '</div><div class="hrf-rule" aria-hidden="true"></div></div><img class="hrf-steth" src="/assets/home-hero.webp" width="430" height="218" alt="" aria-hidden="true" fetchpriority="high" decoding="async"></div>' +
         '<div class="rnav-qa hrf-qa">' +
-          '<button class="rnav-qa-btn hrf-qa-btn is-first" data-act="startcase" aria-label="Start a Case">' + ric("stethoscope") + '<span>Start Case</span></button>' +
-          '<button class="rnav-qa-btn hrf-qa-btn" data-act="reasoning" aria-label="Dx My Patient">' + ric("neurology") + '<span>Dx Patient</span></button>' +
-          '<button class="rnav-qa-btn hrf-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + ric("medication") + '<span>Drugs</span></button>' +
-          '<button class="rnav-qa-btn hrf-qa-btn" data-act="calculators" aria-label="Calculators">' + ric("calculate") + '<span>Calculators</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn is-first" data-act="startcase" aria-label="Start a Case">' + svg("hrfStart", "hrf-ic") + '<span>Start Case</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn" data-act="reasoning" aria-label="Dx My Patient">' + svg("hrfDx", "hrf-ic") + '<span>Dx Patient</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn" data-act="drugmenu" aria-label="Drugs &amp; Interactions">' + svg("hrfCapsule", "hrf-ic") + '<span>Drugs</span></button>' +
+          '<button class="rnav-qa-btn hrf-qa-btn" data-act="calculators" aria-label="Calculators">' + svg("hrfCalc", "hrf-ic") + '<span>Calculators</span></button>' +
         '</div>' +
-        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + (pro ? '' : ' data-act="paywall" role="button" tabindex="0" aria-label="StewardMD Pro — see plans"') + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">StewardMD <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p">Evidence-based decisions at the point of care.</p></div><img class="rnav-hero-logo hrf-banner-logo" src="/logo.png" alt=""><span class="hrf-dots" aria-hidden="true"></span></section>' +
+        '<section class="rnav-hero hrf-banner" id="hrfBanner"' + (pro ? '' : ' data-act="paywall" role="button" tabindex="0" aria-label="StewardMD Pro — see plans"') + '><div class="rnav-hero-bd"><div class="rnav-hero-tt">StewardMD <span class="hrf-banner-pro">Pro</span></div><div class="rnav-hero-tag hrf-banner-tag">Clinical decision support</div><p class="rnav-hero-p"><span class="hrf-banner-line">Evidence-based decisions at the</span> point of care.</p></div><span class="hrf-banner-logo" aria-hidden="true"></span><span class="hrf-dots" aria-hidden="true"></span><span class="hrf-wave" aria-hidden="true"></span></section>' +
         '<div class="rnav-qrow hrf-qrow">' +
-          '<button class="rnav-qc hrf-qc" data-act="syndromes" aria-label="Syndromes">' + ric("coronavirus") + '<span>Syndromes</span></button>' +
-          '<button class="rnav-qc hrf-qc" data-act="antibiogram" aria-label="Antibiogram">' + ric("biotech") + '<span>Antibiogram</span></button>' +
-          '<button class="rnav-qc hrf-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + ric("medication") + '<span>Dosing</span></button>' +
-          '<button class="rnav-qc hrf-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + ric("local_hospital") + '<span>Hospital+</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="syndromes" aria-label="Syndromes">' + svg("hrfVirus", "hrf-ic") + '<span>Syndromes</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="antibiogram" aria-label="Antibiogram">' + svg("hrfFlask", "hrf-ic") + '<span>Antibiogram</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="dosing" aria-label="Dosing: insulin &amp; electrolytes">' + svg("hrfIvBag", "hrf-ic") + '<span>Dosing</span></button>' +
+          '<button class="rnav-qc hrf-qc" data-act="hospital" aria-label="Hospital: OPD, ICU, Ward, FollowCare">' + svg("hrfHospital", "hrf-ic") + '<span>Hospital+</span></button>' +
         '</div>' +
         '<div id="rnavWatch"></div>' +
         '<div id="rnavResume"></div>' +
@@ -2835,11 +2848,11 @@
           '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a role="button" tabindex="0" onclick="openModal(\'privacyModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Privacy Policy</a> · <a role="button" tabindex="0" onclick="openModal(\'termsModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Terms of Use</a> · <a role="button" tabindex="0" onclick="openModal(\'contactModal\')" style="cursor:pointer;color:inherit;text-decoration:underline">Support</a></div><div class="v4-rev" style="margin-top:4px;font:500 11px/1.5 var(--v3-font,sans-serif);color:var(--v3-muted,#889)">Clinical content last reviewed · 5 Jul 2026</div></div>' +
       '</div></main>' +
       '<nav class="rnav-tabbar rds-safe-bottom hrf-tabbar">' +
-        '<button class="rnav-tab active" data-act="home" aria-label="Home" aria-current="page">' + ric("home") + '<span>Home</span></button>' +
-        '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + ric("folder_open") + '<span>Cases</span></button>' +
-        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="rds-icon rnav-maik-mark" aria-hidden="true">auto_awesome</span><span>Ask MaiK</span></button>' +
-        '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + ric("medication") + '<span>Drugs</span></button>' +
-        '<button class="rnav-tab" data-act="more" aria-label="More">' + ric("apps") + '<span>More</span></button>' +
+        '<button class="rnav-tab active" data-act="home" aria-label="Home" aria-current="page">' + svg("hrfHome", "hrf-tab-ic") + '<span>Home</span></button>' +
+        '<button class="rnav-tab" data-act="cases" aria-label="Cases">' + svg("hrfFolder", "hrf-tab-ic") + '<span>Cases</span></button>' +
+        '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="hrf-maik-circle" aria-hidden="true">' + svg("hrfSparkle", "hrf-sparkle") + '</span><span>Ask MaiK</span></button>' +
+        '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + svg("hrfCapsule", "hrf-tab-ic") + '<span>Drugs</span></button>' +
+        '<button class="rnav-tab" data-act="more" aria-label="More">' + svg("hrfGrid4", "hrf-tab-ic") + '<span>More</span></button>' +
       '</nav>';
   }
   // Populate the dashboard cards from REAL data only (no placeholders). Anything with
@@ -6099,7 +6112,7 @@
   background:var(--mk-bg);border-radius:20px 20px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);
   display:flex;flex-direction:column;overflow:hidden;
   transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);
-  font-family:var(--sans,'Inter Variable','Inter',-apple-system,system-ui,sans-serif)}
+  font-family:'Inter',-apple-system,system-ui,sans-serif}
 #maikSheet.on{transform:translateY(0)}
 body.dark #maikSheet{
   --mk-bg:#101a2c;--mk-ink:#eaf0f7;--mk-mut:#8c9ab0;--mk-faint:#5d6e86;--mk-bd:#233149;--mk-soft:#182338;--mk-field:#0e1829;
@@ -6508,7 +6521,7 @@ body.dark .maik-topicmode button[aria-pressed="true"],body.v3-dark .maik-topicmo
 .maik-welcome{font:500 12.5px/1.55 'Inter';color:var(--mk-ink)}
 .maik-calc-pf{margin-top:9px}.maik-calc-pf ul{margin:4px 0 0;padding-left:18px}.maik-calc-pf li{margin:2px 0}.maik-calc-src{color:var(--mk-mut);font-size:11.5px}.maik-calc-res{margin-top:6px}.maik-calc-in{margin-top:6px;color:var(--mk-mut)}
 .maik-edu{font:600 11px 'Inter';color:var(--mk-mut);background:var(--mk-soft);border-radius:10px;padding:6px 9px;margin-bottom:6px}
-.maik-assume{font:600 12px 'Inter';color:var(--mk-ink);background:rgba(37,99,235,.08);border:1px solid var(--mk-acc);border-radius:10px;padding:7px 10px;margin-bottom:8px}
+.maik-assume{font:600 12px 'Inter';color:var(--mk-ink);background:rgba(37,99,235,.08);border-left:3px solid var(--mk-acc);border-radius:10px;padding:7px 10px;margin-bottom:8px}
 .maik-assume b{color:var(--mk-acc)}
 /* content sits above the faint watermark */
 .maik-body>.maik-wm{z-index:0}
@@ -6584,7 +6597,7 @@ body.mk2.dark #maikSheet,body.mk2.v3-dark #maikSheet{
   --mk-teal:#2dd4bf;--mk-tsoft:rgba(45,212,191,.12);--mk-acc:#2dd4bf;--mk-glow:rgba(45,212,191,.22);
   --mk-userbub:#0f766e;--mk-userink:#fff;--mk-usersh:0 1px 2px rgba(0,0,0,.4);--mk-send:#0f766e}
 /* answer → clinical readout: teal grounding spine + hairline top, no card */
-body.mk2 #maikSheet .maik-b.ai{background:transparent;border:none;border-top:1px solid var(--mk-bd);border-radius:0;box-shadow:none;padding:13px 2px 5px 2px;margin-top:4px;max-width:100%;font-variant-numeric:tabular-nums;animation:mk2rise .26s cubic-bezier(.4,0,.2,1) both}
+body.mk2 #maikSheet .maik-b.ai{background:transparent;border:none;border-top:1px solid var(--mk-bd);border-left:2px solid var(--mk-teal);border-radius:0;box-shadow:none;padding:13px 2px 5px 14px;margin-top:4px;max-width:100%;font-variant-numeric:tabular-nums;animation:mk2rise .26s cubic-bezier(.4,0,.2,1) both}
 @keyframes mk2rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){body.mk2 #maikSheet .maik-b.ai{animation:none}}
 body.mk2 #maikSheet .maik-attr{margin-bottom:9px}
@@ -11674,8 +11687,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".ntf-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:720px;margin:0 auto;width:100%;box-sizing:border-box;padding-bottom:calc(40px + env(safe-area-inset-bottom))}",
       ".ntf-note{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--teal-soft,#e0f2f1);border-radius:10px;padding:10px 12px;margin-bottom:14px;line-height:1.5}",
       ".ntf-list{display:flex;flex-direction:column;gap:10px}",
-      ".ntf-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px}",
-      ".ntf-card.hi{border-color:#ef4444}",
+      ".ntf-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--line,#e5e5e0)}",
+      ".ntf-card.hi{border-left-color:#ef4444}",
       ".ntf-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}",
       ".ntf-cat{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1);border-radius:6px;padding:2px 8px}",
       ".ntf-cat.cat-safety,.ntf-cat.cat-recall{color:#b45309;background:#fef3c7}",
@@ -11704,9 +11717,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".fd-chip.on{background:var(--teal,#0a9396);border-color:var(--teal,#0a9396);color:#fff}",
       ".fd-search{width:100%;box-sizing:border-box;border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:9px 12px;font:500 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);background:var(--panel,#fff)}",
       // feed card
-      ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
+      ".fd-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--teal,#0a9396);cursor:pointer;transition:transform .08s ease,box-shadow .12s ease}",
       ".fd-card:hover,.fd-card:focus{box-shadow:0 3px 14px rgba(0,0,0,.08);outline:none}.fd-card:active{transform:scale(.995)}",
-      ".fd-card.hi{border-color:#ef4444}",
+      ".fd-card.hi{border-left-color:#ef4444}",
       ".fd-signed{font:600 11px var(--sans,system-ui);color:#0f766e;background:rgba(15,118,110,.1);border-radius:999px;padding:2px 8px;white-space:nowrap}",
       ".fd-org{font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396);margin-top:3px}",
       ".fd-meta{display:flex;align-items:center;gap:10px;margin-top:9px;flex-wrap:wrap}",
