@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-onc-emergencies",
- "subject": "medicine",
- "title": "Oncological emergencies: neutropenic sepsis, TLS and cord compression",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**fevers** neutropenic rigors recent chemo, **tumour** burden bulky ALL lymphoma, **back** band-like cord compression retention, **thirst** hypercalcaemia polyuria confusion, **swell** SVC face plethora stridor, **breathless** tamponade orthopnoea pulsus, **seizures** hyponatraemia brain mets, **drugs** chemo steroids asks) with **viva** (**neutropenic** rigored hypotensive, **compressed** retentive banded) profiles; **counts** (nadir days) asks. Cancers crash.",
-   "say": "Fevers tumours backs thirsts is history: swells choke breaths fail seizures strike drugs suppress counts nadir neutropenics crash compresseds retain bundles start scans rush. Malignancies surge.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true,
+    "dashes": true,
+    "drugs": true
   },
-  {
-   "tx": "**Examination** (**temperature** neutropenic fever charts, **perfusion** septic mottled oliguric, **spine** tender level sensory retention, **face** SVC plethora collaterals, **neck** tamponade distended muffled, **calcium** dehydrated confused polyuric, **fundi** papilloedema mets screens, **mouth** mucositis neutropenic) with **bedside** (**neutrophils** nadir counts, **calcium** corrected levels, **ECG** tamponade alternans) grades; **bladder** (retention scans) checks. Emergencies threaten.",
-   "say": "Temperatures perfusions spines faces is exam: necks bulge calciums climb fundi swell mouths ulcer neutrophils vanish calciums soar ECGs swing steroids pulse decompresses call. Counts crash.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**cultures** pre-antibiotic neutropenic pairs, **TLS** potassium phosphate calcium uric, **Cairo-Bishop** laboratory clinical grades, **MRI** whole-spine cord compression, **calcium** PTHrP myeloma screens, **echo** tamponade respiratory swing, **LDH** burden haemolysis tracks, **counts** MASCC risk scores) with **differentials** (**sepsis** non-neutropenic bundles, **disc** prolapse trauma cord, **PE** tamponade pleuritic, **dehydration** hypercalcaemia mimics) sorts; **oncology** (regimen holds) meets. Labs warn.",
-   "say": "Cultures TLSs Cairos MRIs is Ix: calciums flag echoes swing LDHs soar counts score sepses bundle discs bulge PEs clot dehydrations dry oncologists meet holds decide wishes respect. Numbers scream.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-onc-emergencies-fig1.webp",
-    "alt": "A composite image showing an MRI of spinal cord compression, a table of lab values for Tumor Lysis Syndrome, and blood culture bottles for neutropenic sepsis, illustrating critical diagnostic investigations.",
-    "caption": "Diagnostic investigations for oncological emergencies. Image: Jmarchn, CC BY-SA 3.0, Wikimedia Commons.",
-    "ar": 0.8971
-   }
-  },
-  {
-   "tx": "**Management** (**door-antibiotics** piperacillin-tazobactam hour, **TLS** aggressive fluids rasburicase, **steroids** cord compression urgent dose, **decompress** surgical radiotherapy slots, **bisphosphonate** hypercalcaemia fluids calcitonin, **pericardiocentesis** tamponade echo-guided, **G-CSF** high-risk prophylaxis, **counsel** escalation DNAR limits) with **traps** (**aminoglycoside** single-dose renal, **calcium** digoxin arrhythmia, **radiotherapy** cord delay worsens) closes; **follow** (counts calcium neuro) tracks. Crises pass.",
-   "say": "Door-drugs TLS-fluids steroids decompresses is Rx: bisphosphonates lower taps drain G-CSFs guard counsels limit nephrotoxins watch digoxins slow radiotherapies wait follows track counts rise wishes respect. Patients survive.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-871",
-  "bk2-med-872",
-  "bk2-med-873",
-  "bk2-med-874",
-  "bk2-med-875",
-  "bk2-med-876",
-  "bk2-med-877",
-  "bk2-med-878",
-  "bk2-med-879",
-  "bk2-med-880"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon10",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-onc-emergencies",
+  "quiz": [
+    "bk2-med-871",
+    "bk2-med-872",
+    "bk2-med-873",
+    "bk2-med-874",
+    "bk2-med-875",
+    "bk2-med-876",
+    "bk2-med-877",
+    "bk2-med-878",
+    "bk2-med-879",
+    "bk2-med-880"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon10",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about rigors after recent chemotherapy, which suggest neutropenic fever, and bulky tumour burden of ALL with lymphoma. Ask about band like back pain with retention, thirst with polyuria and confusion, facial swelling with stridor, and breathlessness with pulsus. Record seizures with brain lesions, chemotherapy with steroids, and nadir timing of counts.",
+      "tx": "Ask about rigors after recent chemotherapy that mark **neutropenic fever**, and bulky tumour burden of ALL with lymphoma. Ask about band like back pain with retention of **cord compression**, thirst with polyuria and confusion of hypercalcaemia, facial swelling with stridor of vena cava obstruction, and breathlessness with pulsus of tamponade. Record seizures with brain lesions, chemotherapy with steroids, and **nadir timing** of counts.",
+      "vis": null
+    },
+    {
+      "say": "Chart fever in neutropenia, and read mottled perfusion with oliguria of septic shock. Press the tender spine for a sensory level with retention, inspect facial plethora with collaterals, and feel a distended neck with muffled heart sounds. Read dehydration with confusion and polyuria, scope fundi for papilloedema, and grade mucositis ulcers.",
+      "tx": "Chart fever in neutropenia, and read mottled perfusion with oliguria of **septic shock**. Press the tender spine for a sensory level with retention, inspect facial plethora with collaterals of vena cava obstruction, and feel a distended neck with muffled heart sounds of tamponade. Read dehydration with confusion and polyuria of **calcium excess**, scope fundi for papilloedema with metastases, and grade **mucositis ulcers** with neutrophil nadir.",
+      "vis": null
+    },
+    {
+      "say": "Draw culture pairs before antibiotics in neutropenia, and read potassium with phosphate, calcium and uric acid for tumour lysis. Grade laboratory with clinical Cairo Bishop criteria, scan the whole spine by MRI for cord compression, and screen PTHrP with myeloma for calcium. Swing the echo for tamponade, track LDH for burden, and score risk by counts.",
+      "tx": "Draw culture pairs before antibiotics in neutropenia, and read potassium with phosphate, calcium and uric acid for **tumour lysis**. Grade laboratory with clinical Cairo Bishop criteria, scan the whole spine by MRI for **cord compression**, and screen PTHrP with myeloma for calcium. Swing the echo for tamponade, track LDH with haemolysis for burden, and score risk by counts with **MASCC grading**.",
+      "vis": {
+        "alt": "A composite image showing an MRI of spinal cord compression, a table of lab values for Tumor Lysis Syndrome, and blood culture bottles for neutropenic sepsis, illustrating critical diagnostic investigations.",
+        "ar": 0.8971,
+        "caption": "Diagnostic investigations for oncological emergencies. Image: Jmarchn, CC BY-SA 3.0, Wikimedia Commons.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-onc-emergencies-fig1.webp"
+      }
+    },
+    {
+      "say": "Start piperacillin tazobactam within the golden hour for neutropenic sepsis, and flood tumour lysis with aggressive fluids and rasburicase. Dose urgent steroids for cord compression with surgical and radiotherapy slots, lower calcium with fluids, calcitonin and bisphosphonate, and drain tamponade by echo guided pericardiocentesis. Guard high risk patients with G-CSF prophylaxis, and set escalation limits.",
+      "tx": "Start piperacillin tazobactam within the **golden hour** for neutropenic sepsis, and flood tumour lysis with aggressive fluids and rasburicase. Dose urgent steroids for cord compression with surgical and radiotherapy slots, lower calcium with fluids, calcitonin and **bisphosphonate therapy**, and drain tamponade by echo guided pericardiocentesis. Guard high risk patients with G-CSF prophylaxis, and set escalation with **DNAR limits**.",
+      "vis": null
+    },
+    {
+      "say": "Study the bedside and notice blood cultures drawn first, piperacillin tazobactam with fluids running, a door to antibiotic timer, and rasburicase ready. This bundle is cultures before drugs, antibiotics within the hour, and fluids with rasburicase cover. For the exam, link cultures first with stewardship and the timer with the golden hour.",
+      "tx": "The bedside shows blood cultures drawn first, piperacillin tazobactam with fluids running, a **door antibiotic** timer, and rasburicase ready. This bundle delivers cultures before drugs, antibiotics within the hour, and fluids with **rasburicase cover** for tumour lysis. For the exam, link cultures first with stewardship, the timer with the **golden hour**, and rasburicase with uric acid control.",
+      "vis": {
+        "alt": "Hospital bedside with IV antibiotics and fluids, blood culture bottles, timer and rasburicase vial labeled.",
+        "ar": 1.3393,
+        "caption": "Febrile inpatient receiving fluids, antibiotics and rasburicase. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-onc-emergencies-gen1.webp"
+      }
+    }
+  ],
+  "subject": "medicine",
+  "title": "Oncological emergencies: neutropenic sepsis, TLS and cord compression",
+  "v": 1
 }

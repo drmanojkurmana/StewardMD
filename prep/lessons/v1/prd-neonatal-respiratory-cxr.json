@@ -1,0 +1,205 @@
+{
+  "gen": "AI",
+  "id": "prd-neonatal-respiratory-cxr",
+  "module": "Neonatal Respiratory Distress and Congenital Thoracic Pathology",
+  "quiz": [],
+  "subject": "ss-paediatric-radiology",
+  "title": "Neonatal Respiratory Distress: RDS, TTN, MAS and Air Leak",
+  "v": 1,
+  "steps": [
+    {
+      "say": "A preterm baby under thirty two weeks who cannot make surfactant gives the classic first film of neonatal care. The lungs look small inside a bell shaped chest, the lung fields are diffusely grainy, and dark air filled bronchi stand out against the pale lung.",
+      "tx": "Recognise **respiratory distress syndrome (RDS) reticulogranular ground-glass** opacification. Surfactant deficiency in preterm infants under 32 weeks produces low lung volumes with a bell-shaped thorax, diffuse symmetrical reticulogranular opacities and prominent air bronchograms. The granular pattern reflects collapsed alveoli alternating with aerated airways. Severity on the first film helps judge surfactant need alongside the clinical work of breathing and oxygen requirement.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "RDS pattern"
+        ],
+        "rows": [
+          [
+            "Lung volume",
+            "Low, bell-shaped thorax"
+          ],
+          [
+            "Opacity",
+            "Diffuse reticulogranular, symmetrical"
+          ],
+          [
+            "Air bronchograms",
+            "Prominent against white lung"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The baby born by caesarean section near term often breathes fast for a very different reason: fetal lung fluid that has not yet cleared. The film shows streaky markings around the hila, normal or large lung volumes, and a tell tale line of fluid sitting in the horizontal fissure.",
+      "tx": "Identify **transient tachypnea of the newborn (TTN) fluid in the fissures**. Delayed clearance of fetal lung fluid in near-term and Cesarean deliveries displays normal to hyperinflated lung volumes, perihilar streaky interstitial markings and fluid in the horizontal minor fissure. The picture improves within twenty four to seventy two hours as fluid absorbs. That rapid resolution separates TTN from respiratory distress syndrome and from neonatal pneumonia (TTN fluid in fissures).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "TTN",
+          "points": [
+            "Normal or hyperinflated volumes",
+            "Perihilar streaks, fissure fluid",
+            "Resolves in 24-72 hours"
+          ]
+        },
+        "right": {
+          "title": "RDS",
+          "points": [
+            "Low lung volumes",
+            "Reticulogranular ground glass",
+            "Preterm under 32 weeks"
+          ]
+        }
+      }
+    },
+    {
+      "say": "When a term or post term baby inhales meconium, the film looks coarse and uneven rather than uniformly pale. Patchy rope like shadows alternate with overinflated areas, the diaphragms flatten, and a pneumothorax complicates twenty to thirty percent of cases, so look hard for one.",
+      "tx": "Diagnose **meconium aspiration syndrome (MAS) coarse ropy infiltrates** in term and post-term neonates. The chest radiograph presents with asymmetric coarse ropy infiltrates, hyperinflation with flattened diaphragms and areas of atelectasis beside overinflated segments. Chemical pneumonitis and ball-valve air trapping explain the pattern. Pneumothorax develops in 20-30% of cases, so every meconium aspiration film needs a deliberate search for pleural air and mediastinal shift.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Term baby, meconium at delivery"
+          },
+          {
+            "id": "b",
+            "label": "Coarse ropy asymmetric infiltrates"
+          },
+          {
+            "id": "c",
+            "label": "Hyperinflation, flat diaphragms"
+          },
+          {
+            "id": "d",
+            "label": "Exclude pneumothorax (20-30%)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Air that escapes into the mediastinum lifts the thymus away from the heart in a memorable way. The thymic lobes swing up and out like sails on a boat, producing the spinnaker sail sign that tells you pneumomediastinum is present even on a single frontal film.",
+      "tx": "Recognise the **spinnaker-sail sign of pneumomediastinum**. Escaped alveolar air tracks into the mediastinum and elevates and displaces the thymic lobes laterally, creating the angel wing or spinnaker-sail sign on a neonatal anteroposterior chest radiograph. The thymus is large and mobile in newborns, which makes the sign so visible. Most neonatal pneumomediastinum resolves without drainage, but the film should still be checked for an associated pneumothorax.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pneumothorax-fig2.webp",
+        "alt": "Chest imaging of pleural air collection in a patient with pneumothorax.",
+        "caption": "Air leak imaging: search for pleural and mediastinal air. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "A newborn lying flat hides a pneumothorax in a different place from an upright adult. Air collects at the front and base of the chest, deepening the costophrenic sulcus into a dark deep sulcus and outlining the diaphragm and heart border with unnatural sharpness.",
+      "tx": "Use the **deep sulcus sign in the supine neonate** to detect occult pneumothorax. Because the baby lies supine, free pleural air collects anteriorly and basally rather than at the apex. It manifests as deepening and lucency of the ipsilateral costophrenic sulcus, or sharp delineation of the hemidiaphragm and cardiac border. When the frontal film is equivocal, a cross table lateral or decubitus view confirms the collection before drainage (Deep sulcus sign in supine neonate).",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tension-pneumothorax-fig1.webp",
+        "alt": "Chest imaging showing tension pneumothorax with mediastinal shift.",
+        "caption": "Tension pneumothorax: deep sulcus and mediastinal shift. Credit: StewardMD."
+      }
+    },
+    {
+      "say": "Ventilated preterm lungs can be injured by the very pressure that keeps them open. Air ruptures out of alveoli into the tissue around the airways, drawing fine linear and tiny cystic lucencies that branch along the bronchovascular bundles, a pattern called pulmonary interstitial emphysema.",
+      "tx": "Identify **pulmonary interstitial emphysema (PIE)** in ventilated premature infants. Alveolar rupture dissects air into the per bronchovascular interstitium, appearing as linear and small cystic branching radiolucencies tracking along bronchovascular bundles. The pattern may be diffuse or localised to one lobe, which can then overexpand and compress its neighbours. Pulmonary interstitial emphysema signals barotrauma and usually prompts gentler ventilation settings or high frequency oscillation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Air leak",
+          "Imaging clue"
+        ],
+        "rows": [
+          [
+            "PIE",
+            "Linear cystic lucencies along bundles"
+          ],
+          [
+            "Pneumothorax",
+            "Deep sulcus, sharp diaphragm"
+          ],
+          [
+            "Pneumomediastinum",
+            "Spinnaker-sail thymus"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Every neonatal film doubles as a check of the tubes and lines the team has placed. The tip of the endotracheal tube should sit in the mid trachea between the first and second thoracic vertebrae, at least a centimetre above the carina, and neck flexion moves it more than people expect.",
+      "tx": "Confirm the **endotracheal tube tip position** on every neonatal radiograph. The ideal tip lies at the mid-trachea between vertebral levels T1 and T2, at least 1 cm above the carina. A tube at the carina risks selective right main bronchus intubation with collapse of the left lung, while a high tube can slip out during handling. Remember the tip moves down with neck flexion and up with extension.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Find tube tip on the film"
+          },
+          {
+            "id": "b",
+            "label": "Mid-trachea at T1-T2 level"
+          },
+          {
+            "id": "c",
+            "label": "At least 1 cm above carina"
+          },
+          {
+            "id": "d",
+            "label": "Recheck after any repositioning"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Umbilical catheters follow strict vertebral landmarks that are easy to state in a report. The arterial line sits high at T6 to T8 or low at L3 to L5, while the venous line travels through the ductus venosus to rest where the inferior vena cava meets the right atrium.",
+      "tx": "Report **umbilical catheter positions** against vertebral landmarks. The umbilical arterial catheter (UAC) high line tip rests at T6-T8, above the celiac axis, and the low line at L3-L5 below the renal arteries. The umbilical venous catheter (UVC) traverses the ductus venosus to rest at the inferior vena cava to right atrium (IVC-RA) junction at T8-T9. A venous line coiled in the liver needs repositioning before infusions run.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Umbilical arterial catheter",
+          "points": [
+            "High line at T6-T8",
+            "Low line at L3-L5",
+            "Avoids celiac and renal origins"
+          ]
+        },
+        "right": {
+          "title": "Umbilical venous catheter",
+          "points": [
+            "Through ductus venosus",
+            "Tip at IVC-RA junction, T8-T9",
+            "Never leave coiled in liver"
+          ]
+        }
+      }
+    }
+  ]
+}

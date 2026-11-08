@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-amyloid-misc",
- "subject": "medicine",
- "title": "Amyloidosis and multisystem inflammatory disorders",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**tongue** macroglossia dental scallops, **bruises** periorbital raccoon strain, **hands** carpal tunnel numbness, **froth** nephrotic oedema diarrhoea, **fevers** FMF serositis days-heralded, **rash** Still salmon quotidian sore throat, **joints** chronic RA TB bronchiectasis, **family** Mediterranean Armenian FMF kin asks) with **viva** (**waxy** bruised macroglossic, **periodic** febrile serositic) profiles; **myeloma** (bone pain weight loss) asks. Tongues swell.",
-   "say": "Tongues bruises hands froths is history: fevers spike rashes bloom joints ache families share myelomas lurk waxys stiff periodics burn colchicines guard daratumumabs clear. Proteins fold.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Examination** (**tongue** enlarged waxy furrowed, **periorbital** pinch purpura raccoon, **carpal** Tinel Phalen bilateral, **oedema** nephrotic anasarca, **joints** chronic deforming RA, **rash** Still evanescent salmon, **erysipelas** FMF shin red, **heart** restrictive failure listens) with **bedside** (**urine** protein massive selects, **BP** autonomic drops, **ECG** low-voltage pseudoinfarct) grades; **skin** (waxy papules) maps. Fibrils deposit.",
-   "say": "Tongues periorbitals carpals oedemas is exam: joints twist rashes fade erysipelas redden hearts stiffen urines froth pressures dip ECGs flatten biopsies stain regimens clear. Bodies waxy.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**Congo** apple-green birefringence confirms, **typing** mass-spec immunofix guides, **light-chains** myeloma marrow hunts, **SAP** burden scans, **protein** nephrotic electrophoresis dips, **echo** granular sparkling strain, **MRI** subendocardial late gadolinium, **FMF** MEFV gene colchicine trials) with **differentials** (**myeloma** lytic CRAB, **nephrotic** diabetic membranous, **Still** infection lymphoma serology, **Behcet** oral genital pathergy) sorts; **haematology** (clone-directed tiers) meets. Congo proves.",
-   "say": "Congos typings light-chains SAPs is Ix: proteins spill echoes sparkle MRIs ring FMFs gene myelomas lyse nephrotics foam Stills spike Behcets ulcer haematologists meet clones chase wishes respect. Fibrils glow.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-amyloid-misc-fig1.webp",
-    "alt": "Histological image of tissue stained with Congo red viewed under polarized light, revealing characteristic apple-green birefringence of amyloid deposits, confirming diagnosis.",
-    "caption": "Congo red stain under polarized light confirms amyloid deposits with apple-green birefringence. Image: Ed Uthman from Houston, TX, USA, CC BY 2.0, Wikimedia Commons.",
-    "ar": 0.8751
-   }
-  },
-  {
-   "tx": "**Management** (**clone-directed** daratumumab CyBorD AL, **colchicine** FMF lifelong amyloid guards, **IL-1** Still refractory cools, **supportive** diuretics transplant lists, **neuropathy** diflunisal tafamidis ATTR, **dialysis** renal amyloid bridges, **genetic** FMF family screens, **vaccine** asplenia infection guards) with **traps** (**cardiac** sudden stiff deaths, **bleeding** factor-X vascular, **sepsis** nephrotic asplenic) closes; **follow** (light-chains protein echo) tracks. Folds clear.",
-   "say": "Clone-drugs colchicines IL-1s supportives is Rx: neuropathies steady dialyses bridge genetics screen vaccines shield cardiacs arrest bleeds soak sepses strike follows track chains fall wishes respect. Organs ease.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-741",
-  "bk2-med-742",
-  "bk2-med-743",
-  "bk2-med-744",
-  "bk2-med-745",
-  "bk2-med-746",
-  "bk2-med-747",
-  "bk2-med-748",
-  "bk2-med-749",
-  "bk2-med-750"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon8",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-amyloid-misc",
+  "quiz": [
+    "bk2-med-741",
+    "bk2-med-742",
+    "bk2-med-743",
+    "bk2-med-744",
+    "bk2-med-745",
+    "bk2-med-746",
+    "bk2-med-747",
+    "bk2-med-748",
+    "bk2-med-749",
+    "bk2-med-750"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon8",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask about tongue enlargement, easy bruising around the eyes, tingling hands and frothy urine, because these complaints reveal amyloid deposition. Clarify the fever pattern carefully, since brief attacks with chest or abdominal pain suggest familial Mediterranean fever. Note daily fever with sore throat and a salmon rash, because that combination points to adult Still disease. Record long standing joint disease, chest disease and weight loss, since chronic inflammation and myeloma precede secondary and AL disease. Ask about family origin, because ancestry guides genetic testing.",
+      "tx": "Ask about **tissue deposition clues** such as macroglossia with dental scalloping, periorbital bruising after minor strain, bilateral hand numbness from carpal tunnel involvement, and frothy urine with swelling or diarrhoea suggesting nephrotic or gut infiltration. Take a careful fever history because a **periodic fever pattern** with brief serositis points toward familial Mediterranean fever, while quotidian fever with sore throat and salmon rash suggests adult Still disease. Record **underlying chronic disease** such as rheumatoid arthritis, tuberculosis or bronchiectasis, plus myeloma symptoms and Mediterranean or Armenian family background.",
+      "vis": null
+    },
+    {
+      "say": "Inspect the tongue and the skin around the eyes, because waxy enlargement and purpura are classic amyloid clues. Test both wrists for carpal tunnel signs, since bilateral disease often precedes cardiac involvement. Examine joints and skin for deformity, fleeting rash and shin redness, because each points to a different systemic cause. Listen to the heart and check oedema, blood pressure and urine, since restriction, autonomic fall and proteinuria mark organ damage. Correlate every sign before ordering biopsy.",
+      "tx": "Look for **waxy infiltration signs** including an enlarged furrowed tongue, periorbital purpura that appears after gentle pinching, and bilateral carpal tunnel features on Tinel and Phalen testing. Complete a **joint and skin survey** for chronic rheumatoid deformities, the evanescent salmon rash of Still disease, and tender shin redness resembling erysipelas in familial Mediterranean fever. Perform **cardiac and renal bedside** checks for restrictive heart failure, nephrotic oedema, autonomic blood pressure drops, low voltage on ECG, and massive proteinuria on dip testing.",
+      "vis": null
+    },
+    {
+      "say": "Study the four chamber echo with its labelled chambers and septum, because the walls look thick and bright. Recognise the granular sparkling texture, since amyloid infiltration creates this classic appearance. Connect the picture to breathlessness and a stiff ventricle, because restriction explains the symptoms better than hypertrophy. Let this image prompt biopsy and haematology referral, so cardiac amyloid is caught before advanced failure.",
+      "tx": "The image shows a labelled **four chamber view** with right and left chambers around the septum, where thickened ventricular walls stand out. Note the bright granular **sparkling myocardium** and thickened septum marked by arrows, which reflect amyloid infiltration rather than true hypertrophy. Exams link this picture to **restrictive physiology** with heart failure, low voltage ECG and strain abnormalities, so treat the echo as an early trigger for Congo red biopsy and clone directed workup.",
+      "vis": {
+        "alt": "Four chamber echocardiogram labeled RA, RV, LA, LV and septum with thick sparkling walls.",
+        "ar": 1.3393,
+        "caption": "Echo shows thickened walls and granular sparkling myocardium. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-amyloid-misc-gen1.webp"
+      }
+    },
+    {
+      "say": "Biopsy the involved tissue and request Congo red staining, because apple green birefringence confirms amyloid. Type the deposit and hunt for a plasma cell clone, since AL disease needs clone directed therapy. Quantify proteinuria and scan disease burden, because these values track response. Image the heart with echo and magnetic resonance when breathlessness appears, and exclude myeloma, infection, lymphoma and Behcet disease by targeted tests. Haematology input should shape the final plan.",
+      "tx": "Prove amyloid with **Congo red proof** on biopsy showing apple green birefringence under polarised light, then type the fibril with immunofixation and mass spectrometry to guide therapy. Complete a **clone and burden workup** with serum light chains, marrow assessment, protein electrophoresis and SAP scanning, plus MEFV gene assessment where familial Mediterranean fever is suspected. Add a **cardiac imaging set** with echocardiography for granular sparkling and strain loss plus magnetic resonance showing subendocardial late enhancement, while sorting myeloma, nephrotic mimics, Still disease and Behcet disease from the presentation.",
+      "vis": {
+        "alt": "Histological image of tissue stained with Congo red viewed under polarized light, revealing characteristic apple-green birefringence of amyloid deposits, confirming diagnosis.",
+        "ar": 0.8751,
+        "caption": "Congo red stain under polarized light confirms amyloid deposits with apple-green birefringence. Image: Ed Uthman from Houston, TX, USA, CC BY 2.0, Wikimedia Commons.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-amyloid-misc-fig1.webp"
+      }
+    },
+    {
+      "say": "Treat the clone behind AL amyloid with haematology, because organ deposits only regress when light chains fall. Continue lifelong colchicine in familial Mediterranean fever, since stopping allows attacks and amyloid to return. Add targeted cytokine blockade when Still disease resists steroids, and support the heart and kidneys with diuretics, dialysis or transplant listing as needed. Screen relatives, vaccinate vulnerable patients and track chains, urine and echo. Guard against sudden cardiac death, bleeding and sepsis throughout.",
+      "tx": "Start **clone directed therapy** for AL amyloid with regimens used against the plasma cell clone, and add neuropathy stabilisers where transthyretin disease explains the picture. Give lifelong **colchicine prophylaxis** in familial Mediterranean fever to prevent attacks and secondary amyloid, and use interleukin blockade for refractory Still disease. Arrange an **organ support plan** with diuretics, dialysis bridging, transplant listing, family screening, vaccination against encapsulated organisms, and close tracking of light chains, proteinuria and echo, while watching for cardiac events, vascular bleeding and sepsis.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Amyloidosis and multisystem inflammatory disorders",
+  "v": 1
 }
