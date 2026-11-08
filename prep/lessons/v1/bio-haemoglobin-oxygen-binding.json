@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "module": "bio-haemoglobin",
+ "subject": "biochemistry",
+ "title": "Globins and oxygen binding",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Adult **HbA** (alpha2 beta2) dominates after infancy, with HbA2 (alpha2 delta2, two to three percent, raised in beta thalassaemia trait) and HbF (alpha2 gamma2, fetal, alkali resistant, under one percent adult residual in F cells). Each subunit cradles one heme (ferrous iron binding one oxygen reversibly; ferric methaemoglobin cannot, next lesson), so one haemoglobin carries four oxygens with interactions between subunits creating cooperativity myoglobin (single subunit muscle store) lacks entirely.",
+   "say": "HbA dominates in adults, with HbA2 raised in beta thalassaemia trait and HbF residual from fetal life. Four subunits carry four oxygens cooperatively, which single subunit myoglobin lacks entirely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Haemoglobin",
+     "Chains",
+     "Share or flag"
+    ],
+    "rows": [
+     [
+      "HbA",
+      "Alpha2 beta2",
+      "About 97 percent adult"
+     ],
+     [
+      "HbA2",
+      "Alpha2 delta2",
+      "Raised in beta thalassaemia trait"
+     ],
+     [
+      "HbF",
+      "Alpha2 gamma2",
+      "Fetal; raised by hydroxyurea in sickle disease"
+     ],
+     [
+      "Myoglobin (compare)",
+      "Single chain",
+      "Muscle store, hyperbolic curve, rhabdomyolysis marker"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oxygenation moves iron into the porphyrin plane, tugging proximal histidine F8 and helix F, rotating alpha-beta dimers fifteen degrees from **T (tense, deoxy, salt bridged, low affinity)** to R (relaxed, oxy, high affinity): the Perutz trigger. Binding at one subunit raises affinity at others (cooperativity, Hill coefficient about two point eight, sigmoid curve, P50 about twenty seven millimetres mercury versus myoglobin hyperbolic P50 about two point eight), unloading cooperatively where oxygen was just released.",
+   "say": "Oxygenation triggers T to R rotation, raising affinity cooperatively with a sigmoid curve. Myoglobin hyperbola contrasts at far higher affinity for muscle storage duties in tissues.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-haemoglobin-fig1.webp",
+    "alt": "Graph showing haemoglobin oxygen dissociation curve with directional shifts from BPG, pH and temperature effectors.",
+    "caption": "Allosteric modulation of haemoglobin oxygen affinity.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**2,3-BPG** (one per deoxy tetramer, central cavity between beta chains, made by the red cell Rapoport-Luebering shunt) stabilises T and right shifts the curve, rising with altitude, anaemia, hypoxia and alkalosis compensation over hours to days, falling in stored blood and with hypophosphataemia. HbF gamma chains bind BPG weakly (serine replacing histidine 143), left shifting fetal blood to steal oxygen across placenta, the same chemistry hydroxyurea exploits therapeutically after birth.",
+   "say": "2,3-BPG stabilises the tense state and right shifts the curve with altitude and anaemia. HbF binds it weakly, left shifting fetal blood to draw oxygen across placenta therapeutically exploited later.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right shift (release more)",
+     "points": [
+      "BPG, H+, CO2, temperature up",
+      "Exercising muscle, altitude adapted",
+      "P50 rises above 27"
+     ]
+    },
+    "right": {
+     "title": "Left shift (hold tighter)",
+     "points": [
+      "BPG low, HbF, CO, methaemoglobin",
+      "Stored blood, fetus",
+      "P50 falls, unloading suffers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **Bohr effect** couples metabolism to delivery chemically: protons (from carbonic acid of tissue CO2) and CO2 itself (carbamino on N termini, chloride shift exchanging bicarbonate out of red cells through band 3) stabilise T in working tissues, while lungs reverse both as CO2 exhales (Haldane effect reciprocally aiding CO2 carriage by deoxyhaemoglobin). Temperature completes the exercise quartet, right shifting in hot muscle precisely where oxygen demand peaks.",
+   "say": "The Bohr effect couples tissue metabolism to delivery through protons and carbon dioxide, reversing in lungs by the Haldane reciprocity. Temperature completes the exercise quartet in hot muscle.",
+   "vis": null
+  },
+  {
+   "tx": "**Carbon monoxide** binds heme iron about two hundred to two hundred fifty times oxygen affinity, occupies sites (carboxyhaemoglobin cherry red, pulse oximetry fooled toward normal), and left shifts remaining sites so tissues starve despite pink blood and normal dissolved PaO2. Treatment is high flow one hundred percent oxygen (halving elimination time repeatedly, hyperbaric in pregnancy, coma or cardiac instability by centre criteria), never methylene blue confusion with methaemoglobinaemia next lesson.",
+   "say": "Carbon monoxide binds far tighter than oxygen and left shifts remaining sites, starving tissues despite pink blood. High flow oxygen is treatment, never methylene blue confusion with methaemoglobinaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Effector",
+     "Curve shift",
+     "Tissue meaning"
+    ],
+    "rows": [
+     [
+      "BPG, H+, CO2, heat up",
+      "Right",
+      "Release where working"
+     ],
+     [
+      "BPG down (stored blood), cold",
+      "Left",
+      "Hold; transfused cells recover in a day"
+     ],
+     [
+      "HbF dominant",
+      "Left",
+      "Placental steal; sickle therapy raises it"
+     ],
+     [
+      "Carbon monoxide, methaemoglobin fraction",
+      "Left plus sites lost",
+      "Starvation despite pink; treat cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Globin switching** choreographs development (embryonic zeta/epsilon, fetal gamma, adult beta/delta on chromosome sixteen alpha and eleven beta clusters, locus control regions sequencing expression), and its failures (thalassaemias next lesson, hereditary persistence of fetal haemoglobin benignly masking sickle and beta thalassaemia) explain why reawakening gamma (hydroxyurea, BCL11A editing approved ex vivo therapy) treats beta chain diseases without touching the mutant beta gene itself.",
+   "say": "Globin switching sequences embryonic, fetal and adult chains developmentally. Reawakening gamma treats beta chain diseases without touching the mutant beta gene itself through editing advances recently approved.",
+   "vis": {
+    "kind": "flow",
+    "title": "Switching solves beta disease",
+    "nodes": [
+     {
+      "id": "beta",
+      "label": "Beta chain faulty or absent"
+     },
+     {
+      "id": "gamma",
+      "label": "Gamma reawakened (HbF up)"
+     },
+     {
+      "id": "cover",
+      "label": "Alpha chains paired, disease softened"
+     }
+    ],
+    "edges": [
+     [
+      "beta",
+      "gamma"
+     ],
+     [
+      "gamma",
+      "cover"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
