@@ -1,0 +1,98 @@
+{
+  "v": 1,
+  "module": "bio-nutrition-integration",
+  "subject": "biochemistry",
+  "title": "Fed, fasting and starvation integration",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**The well fed state** is insulin directing traffic after a meal. Liver burns glucose, builds glycogen and makes fat; adipose tissue takes up fatty acids through lipoprotein lipase; muscle imports glucose through GLUT4 and builds protein; the brain simply burns glucose. Every tissue hears the same insulin signal but answers according to its own equipment and needs.",
+      "say": "After a meal insulin tells liver to store, fat tissue to fill, muscle to build and the brain just burns glucose. One signal, tissue specific answers.",
+      "vis": null
+    },
+    {
+      "tx": "**The postabsorptive state** flips the insulin to glucagon ratio as hours pass. Liver glycogen breaks down first, then gluconeogenesis takes over using alanine from muscle, lactate and glycerol. Falling insulin releases its brake on hormone sensitive lipase, so fat tissue pours out fatty acids, and the liver begins making ketone bodies from the overflow.",
+      "say": "As insulin falls, glycogen empties, gluconeogenesis starts and fat pours out. Ketones begin rising as fatty acids flood the liver.",
+      "vis": {
+        "kind": "flow",
+        "title": "Fasting sequence",
+        "nodes": [
+          {
+            "id": "gly",
+            "label": "Glycogen breakdown"
+          },
+          {
+            "id": "gng",
+            "label": "Gluconeogenesis"
+          },
+          {
+            "id": "lip",
+            "label": "Fat lipolysis"
+          },
+          {
+            "id": "ket",
+            "label": "Ketone production"
+          }
+        ],
+        "edges": [
+          [
+            "gly",
+            "gng"
+          ],
+          [
+            "gng",
+            "lip"
+          ],
+          [
+            "lip",
+            "ket"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Prolonged starvation** is protein sparing above all. Within weeks the brain takes about two thirds of its energy from ketones, slashing its glucose demand, so muscle protein breakdown and urinary nitrogen losses fall sharply. Survival time is then set mainly by fat stores. The adaptation fails only when fat runs out and protein catabolism must accelerate again toward death.",
+      "say": "The starving brain switches two thirds to ketones, sparing muscle protein. After that switch, fat stores alone decide how long survival lasts.",
+      "vis": null
+    },
+    {
+      "tx": "**Refeeding syndrome** punishes feeding a starved patient too fast. Renewed carbohydrate triggers an insulin surge that drives phosphate, potassium and magnesium into cells, while thiamine demand spikes. Blood levels crash, and heart failure, arrhythmia and Wernicke encephalopathy can follow within days. Prevention is slow calorie introduction, generous electrolytes and thiamine before glucose, echoing the vitamin lesson directly.",
+      "say": "Feed a starved patient carefully: insulin drags phosphate, potassium and magnesium into cells and levels crash. Thiamine first, calories slowly, electrolytes generously.",
+      "vis": null
+    },
+    {
+      "tx": "**Marasmus and kwashiorkor** are the two faces of protein energy malnutrition. Marasmus is total energy starvation: matchstick limbs, no oedema, albumin preserved until late, a child adapted to famine. Kwashiorkor keeps some energy but lacks protein: oedema from low albumin plus sodium and infection effects, flaky paint rash, fatty liver and hair that bands pale in the flag sign.",
+      "say": "Marasmus wastes without oedema; kwashiorkor swells with oedema, rash and fatty liver despite some calories. The oedema is the bedside separator.",
+      "vis": {
+        "kind": "compare",
+        "title": "Marasmus versus kwashiorkor",
+        "left": {
+          "title": "Marasmus",
+          "points": [
+            "Total energy lack",
+            "Matchstick limbs, severe wasting",
+            "No oedema",
+            "Albumin kept until late"
+          ]
+        },
+        "right": {
+          "title": "Kwashiorkor",
+          "points": [
+            "Protein lack, some energy kept",
+            "Oedema from low albumin",
+            "Flaky paint rash, fatty liver",
+            "Hair flag sign"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Diabetes and obesity integration** closes the module by reversing the fed state logic. Insulin resistance leaves liver glucose production unsuppressed while muscle uptake fails, and visceral fat exports fatty acids plus inflammatory signals. Metabolic syndrome gathers the laboratory fingerprints together: raised triglycerides, low HDL, central obesity, hypertension and fasting glucose creeping upward year by year.",
+      "say": "Diabetes is the fed state signal no longer heard. Metabolic syndrome collects its fingerprints: triglycerides up, HDL down, waist, pressure and glucose rising.",
+      "vis": null
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
