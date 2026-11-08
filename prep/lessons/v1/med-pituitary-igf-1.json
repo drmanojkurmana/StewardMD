@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-pituitary",
+ "subject": "medicine",
+ "title": "IGF-1 and Hypopituitarism",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Physiological pulsatility and short serum half-life render random growth hormone measurements completely unreliable for screening acromegaly. Circulating **igf-1**, synthesized predominantly by hepatocytes under growth hormone stimulation, circulates bound to ternary binding protein complexes with minimal diurnal fluctuation. Serum concentrations of IGF-1 provide an accurate, integrated index of overall daily growth hormone bioactivity. Because normal reference ranges vary significantly with age and pubertal status, laboratory results must always be interpreted against age-adjusted normative standards, with elevated levels prompting formal confirmatory suppression testing.",
+   "say": "Physiological pulsatility and short half-life render random growth hormone measurements unreliable for screening acromegaly. Circulating igf-1, synthesized predominantly by hepatocytes under growth hormone stimulation, circulates bound to binding proteins with minimal diurnal fluctuation. Serum concentrations of IGF-1 provide an accurate index of daily growth hormone bioactivity. Because normal reference ranges vary with age, results must always be interpreted against age-adjusted standards before suppression testing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acromegaly-fig1.webp",
+    "alt": "Physical examination signs and systemic acral manifestations of chronic growth hormone and IGF-1 elevation.",
+    "caption": "Clinical phenotype of acromegaly driven by persistent hepatic IGF-1 release. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Confirming autonomous, unregulated somatotroph secretion requires demonstrating failure of physiological hormonal feedback. In healthy individuals, oral glucose stimulates rapid pancreatic insulin release and suppresses hypothalamic growth hormone-releasing hormone, driving serum growth hormone below one nanogram per millilitre. The standard **oral glucose suppression test** measures serum growth hormone at thirty-minute intervals for two hours following a seventy-five-gram glucose load. In patients with acromegaly, growth hormone fails to suppress adequately or paradoxically rises, establishing autonomous neoplastic secretion and justifying sellar magnetic resonance neuroimaging.",
+   "say": "Confirming autonomous somatotroph secretion requires demonstrating failure of physiological hormonal feedback. In healthy individuals, oral glucose stimulates pancreatic insulin release and suppresses growth hormone below one nanogram per millilitre. The standard oral glucose suppression test measures growth hormone every thirty minutes for two hours after seventy-five grams of glucose. In acromegaly, growth hormone fails to suppress adequately, establishing autonomous neoplastic secretion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acromegaly-fig2.webp",
+    "alt": "Endocrine feedback loops of the hypothalamic-pituitary-somatotroph axis and peripheral IGF-1 generation.",
+    "caption": "Disruption of hypothalamic-pituitary feedback control and IGF-1 production in acromegaly. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Synthetic somatostatin peptide analogues constitute the cornerstone of medical therapy for persistent or inoperable acromegaly. Administering long-acting **octreotide** binds selectively to somatostatin receptor subtype two on somatotroph cell membranes, inhibiting adenylate cyclase and blocking growth hormone exocytosis. Monthly depot formulations induce biochemical normalization of IGF-1 and growth hormone in roughly fifty to sixty percent of patients while achieving significant tumour shrinkage in up to forty percent. Common adverse effects include transient abdominal cramps, diarrhoea, flatulence, and an increased risk of cholesterol gallstones from impaired gallbladder motility.",
+   "say": "Synthetic somatostatin peptide analogues constitute the cornerstone of medical therapy for inoperable acromegaly. Administering long-acting octreotide binds selectively to somatostatin receptor subtype two on somatotroph membranes, inhibiting adenylate cyclase and blocking growth hormone exocytosis. Monthly depot formulations normalize IGF-1 and growth hormone in up to sixty percent of patients while inducing tumour shrinkage. Common adverse effects include abdominal cramping, diarrhoea, and asymptomatic gallstones.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug Class",
+     "Representative Agent",
+     "Mechanism of Action",
+     "Adverse Effects"
+    ],
+    "rows": [
+     [
+      "Somatostatin Analogue (First-Gen)",
+      "Octreotide LAR, Lanreotide",
+      "SST2 receptor activation; suppresses GH",
+      "Biliary sludge, cholelithiasis, nausea"
+     ],
+     [
+      "Somatostatin Analogue (Second-Gen)",
+      "Pasireotide",
+      "Broad receptor binding (SST1,2,3,5)",
+      "Marked hyperglycaemia, diabetes mellitus"
+     ],
+     [
+      "GH Receptor Antagonist",
+      "Pegvisomant",
+      "Blocks peripheral GH receptor dimerisation",
+      "Elevated hepatic transaminases, lipohypertrophy"
+     ],
+     [
+      "Dopamine Agonist",
+      "Cabergoline",
+      "D2 receptor stimulation on mixed tumours",
+      "Postural hypotension, gastrointestinal upset"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Partial or complete loss of anterior pituitary hormone production impairs end-organ endocrine function across multiple axes. Presenting with variable clinical severity, **hypopituitarism** arises from compressive sellar tumours, pituitary apoplexy, radiation therapy, trauma, or infiltrative granulomatous disorders such as sarcoidosis and hemochromatosis. Hormone loss typically follows a predictable sequential pattern: growth hormone deficiency manifests first, followed successively by luteinizing hormone and follicle-stimulating hormone, thyroid-stimulating hormone, and finally adrenocorticotropic hormone. Secondary adrenal insufficiency caused by ACTH loss spares aldosterone secretion because mineralocorticoid production is regulated by the renin-angiotensin system.",
+   "say": "Partial or complete loss of anterior pituitary hormone production impairs endocrine function across multiple axes. Presenting with variable clinical severity, hypopituitarism arises from compressive sellar tumours, apoplexy, irradiation, or infiltrative granulomatous diseases. Hormone loss typically follows a predictable sequence: growth hormone fails first, followed by gonadotropins, thyroid-stimulating hormone, and finally adrenocorticotropic hormone. ACTH deficiency spares aldosterone secretion because mineralocorticoids depend on renin and angiotensin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cause",
+      "label": "Etiology: Sellar macroadenoma, apoplexy, or cranial radiation"
+     },
+     {
+      "id": "seq",
+      "label": "Sequential Loss: GH -> LH/FSH -> TSH -> ACTH (Aldosterone spared)"
+     },
+     {
+      "id": "effect",
+      "label": "End-organ failure: Secondary hypogonadism, hypothyroidism, adrenal crisis"
+     }
+    ],
+    "edges": [
+     [
+      "cause",
+      "seq"
+     ],
+     [
+      "seq",
+      "effect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe obstetric haemorrhage leading to hypovolaemic shock predisposes the hypertrophied peripartum pituitary gland to ischaemic infarction. Historically recognized as **sheehan syndrome**, the physiological hyperplasia of lactotrophs during gestation increases anterior pituitary metabolic demand without augmenting low-pressure portal capillary vascular supply. Marked intrapartum hypotension triggers vasospasm and occlusive ischaemic necrosis of the anterior lobe. The earliest clinical herald is failure of postpartum lactation (agraphia) due to prolactin deficiency, followed by persistent amenorrhoea, genital atrophy, severe lethargy, cold intolerance, and secondary adrenal crisis during subsequent physiological stress.",
+   "say": "Severe obstetric haemorrhage leading to hypovolaemic shock predisposes the hypertrophied peripartum pituitary gland to ischaemic necrosis. Recognized as sheehan syndrome, physiological lactotroph hyperplasia during gestation increases metabolic demand without expanding portal blood supply. Marked intrapartum hypotension triggers vasospasm and occlusive infarction of the anterior lobe. The earliest clinical herald is failure of postpartum lactation, followed by persistent amenorrhoea, fatigue, and secondary adrenal crisis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Presentation",
+     "points": [
+      "Severe postpartum uterine haemorrhage and shock",
+      "Failure of postpartum lactation (agalactia)",
+      "Profound maternal lethargy and hypotension",
+      "Acute secondary adrenal insufficiency"
+     ]
+    },
+    "right": {
+     "title": "Chronic Presentation (Months to Years)",
+     "points": [
+      "Persistent secondary postpartum amenorrhoea",
+      "Loss of pubic and axillary hair (adrenal androgens)",
+      "Secondary hypothyroidism (cold intolerance, fatigue)",
+      "Empty or partially empty sella on neuroimaging"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Biochemical diagnosis of anterior pituitary insufficiency mandates pairing target hormone measurements with pituitary trophic hormones. In secondary endocrinopathies, low target organ hormones accompany inappropriately normal or low pituitary stimulatory hormones. Demonstrating low free thyroxine with an un-elevated TSH confirms secondary hypothyroidism, while low morning cortisol with inappropriately low ACTH confirms secondary adrenal failure. To verify adrenal reserve, a standard synthetic **acth stimulation test** using cosyntropin evaluates adrenal responsiveness, with a peak cortisol below eighteen micrograms per decilitre confirming secondary atrophy.",
+   "say": "Biochemical diagnosis of anterior pituitary insufficiency mandates pairing target hormone measurements with pituitary trophic hormones. In secondary endocrinopathies, low target hormones accompany inappropriately normal or low pituitary stimulatory hormones. Demonstrating low free thyroxine with an normal or low TSH confirms secondary hypothyroidism, while low cortisol with low ACTH confirms secondary adrenal failure. A synthetic acth stimulation test evaluates adrenal reserve, with blunted peak cortisol confirming secondary atrophy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endocrine Axis",
+     "Target Hormone Level",
+     "Pituitary Trophic Level",
+     "Diagnostic Interpretation"
+    ],
+    "rows": [
+     [
+      "Adrenal Axis",
+      "Low morning serum cortisol",
+      "Low or inappropriately normal ACTH",
+      "Secondary adrenal insufficiency"
+     ],
+     [
+      "Thyroid Axis",
+      "Low free T4",
+      "Low or inappropriately normal TSH",
+      "Secondary central hypothyroidism"
+     ],
+     [
+      "Gonadal Axis (Female)",
+      "Low serum estradiol",
+      "Inappropriately low LH and FSH",
+      "Hypogonadotropic hypogonadism"
+     ],
+     [
+      "Gonadal Axis (Male)",
+      "Low total testosterone",
+      "Inappropriately low LH and FSH",
+      "Hypogonadotropic hypogonadism"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hormone replacement therapy in panhypopituitarism requires strict adherence to a critical physiological sequence. When initiating therapy, clinicians must always administer **hydrocortisone** replacement before initiating levothyroxine. Initiating thyroid hormone first accelerates metabolic rate and hepatic clearance of residual cortisol, precipitating an acute, potentially fatal adrenal crisis in patients with uncorrected adrenal deficiency. Hydrocortisone is dosed physiologically in divided daily regimens, typically fifteen to twenty milligrams total, with double or triple stress dosing instructed for febrile illnesses or minor surgical procedures.",
+   "say": "Hormone replacement therapy in panhypopituitarism requires strict adherence to a critical physiological sequence. When initiating therapy, clinicians must always administer hydrocortisone replacement before initiating levothyroxine. Starting thyroid hormone first accelerates basal metabolic rate and hepatic clearance of residual cortisol, precipitating acute adrenal crisis in uncorrected patients. Hydrocortisone is dosed in divided daily regimens, with mandatory stress dosing for febrile illness.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Panhypopituitarism diagnosed: Secondary adrenal + thyroid failure"
+     },
+     {
+      "id": "step1",
+      "label": "Step 1: Initiate Hydrocortisone (15-20 mg daily in divided doses)"
+     },
+     {
+      "id": "step2",
+      "label": "Step 2: Add Levothyroxine AFTER adequate cortisol repletion"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "step1"
+     ],
+     [
+      "step1",
+      "step2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Comprehensive hormone maintenance restores quality of life and prevents metabolic complications in hypopituitary adults. In addition to glucocorticoid and thyroid coverage, sex steroid replacement using estrogen-progestin in females and intramuscular or transdermal testosterone in males preserves bone mineral density and prevents premature osteoporosis. Recombinant human **growth hormone** replacement is increasingly administered in adults with severe deficiency to improve body composition, exercise capacity, lipid profiles, and cardiovascular risk, monitored carefully by titrating doses against age-adjusted serum IGF-1 targets.",
+   "say": "Comprehensive hormone maintenance restores quality of life and prevents metabolic complications in hypopituitary adults. In addition to glucocorticoid and thyroid coverage, sex steroid replacement in hypogonadal patients preserves bone mineral density and prevents premature osteoporosis. Recombinant human growth hormone replacement is administered in adults with severe deficiency to improve body composition and lipid profiles, titrated carefully against age-adjusted serum IGF-1 targets.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Essential Life-Sustaining Hormones",
+     "points": [
+      "Oral hydrocortisone (prevents fatal adrenal crisis)",
+      "Oral levothyroxine (restores basal metabolic rate)",
+      "Mandatory stress dose rules for acute illness",
+      "Never omit or delay glucocorticoid coverage"
+     ]
+    },
+    "right": {
+     "title": "Quality of Life & Metabolic Hormones",
+     "points": [
+      "Estrogen or testosterone (bone mineral preservation)",
+      "Recombinant human GH (body composition, lipids)",
+      "Desmopressin (if central diabetes insipidus coexists)",
+      "Fertility induction with gonadotropins if desired"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
