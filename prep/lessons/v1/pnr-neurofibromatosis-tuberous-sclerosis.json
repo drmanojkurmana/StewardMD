@@ -11,34 +11,10 @@
       "say": "Neurofibromatosis type one is diagnosed through specific clinical and genetic criteria. Meeting at least two of the revised criteria confirms the diagnosis.",
       "tx": "Apply the revised **NF1 diagnostic criteria (revised Legius)** requiring at least two cardinal features or a pathogenic NF1 mutation alongside one clinical sign. Cardinal features include: 6 or more cafe-au-lait macules (> 5 mm in prepubertal children, > 15 mm in postpubertal individuals); 2 or more neurofibromas of any type or 1 plexiform neurofibroma; axillary or inguinal freckling (Crowe sign); optic pathway glioma; 2 or more iris Lisch nodules or choroidal abnormalities; distinctive sphenoid wing dysplasia or anterolateral tibial bowing; or a first-degree relative with NF1 (Optic pathway gliomas).",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Diagnostic criterion",
-          "Cutoff / Definition in children",
-          "Clinical evaluation method"
-        ],
-        "rows": [
-          [
-            "Cafe-au-lait macules",
-            ">= 6 macules (> 5 mm prepubertal, > 15 mm postpubertal)",
-            "Wood lamp examination under dark room"
-          ],
-          [
-            "Axillary / inguinal freckles",
-            "Multiple lentiginous macules (Crowe sign)",
-            "Skin folds inspection (emerges ages 3-5 yr)"
-          ],
-          [
-            "Ophthalmological signs",
-            ">= 2 Lisch nodules or >= 2 choroidal abnormalities",
-            "Slit-lamp examination & optical coherence tomography"
-          ],
-          [
-            "Skeletal dysplasia",
-            "Sphenoid wing dysplasia or anterolateral tibial bowing",
-            "Plain radiography; congenital pseudarthrosis risk"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/cafe-au-lait-macule-fig1.webp",
+        "alt": "Cafe au lait macules with border types and associated freckling.",
+        "caption": "Cafe au lait macules count toward NF1 criteria. Credit: StewardMD."
       }
     },
     {
@@ -113,31 +89,10 @@
       "say": "Congenital bowing of the tibia presents a difficult orthopedic challenge in neurofibromatosis type one. Pathological fracture leads to stubborn pseudarthrosis with high rates of non-union.",
       "tx": "Recognize **Tuberous sclerosis complex major criteria** as a pathognomonic osseous manifestation of NF1. Anterolateral bowing of the lower leg is present at birth or manifests during early weight-bearing infancy, characterized by cortical thinning, intramedullary sclerosis, and osteoclast-driven bone resorption. Minor trauma precipitates a pathological fracture that notoriously fails to heal, producing a mobile false joint (pseudarthrosis of the tibia) that requires complex intramedullary rodding, vascularized fibular grafting, or Ilizarov external fixation (TSC criteria).",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "bow",
-            "label": "Congenital anterolateral bowing of the tibia"
-          },
-          {
-            "id": "fx",
-            "label": "Pathological fracture following minor weight-bearing stress"
-          },
-          {
-            "id": "pseudo",
-            "label": "Non-union & pseudarthrosis: Intramedullary rodding & bone graft"
-          }
-        ],
-        "edges": [
-          [
-            "bow",
-            "fx"
-          ],
-          [
-            "fx",
-            "pseudo"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/tuberous-sclerosis-complex-fig1.webp",
+        "alt": "Brain tubers, cardiac rhabdomyoma, renal angiomyolipomas and skin signs.",
+        "caption": "Tuberous sclerosis touches brain, heart, kidney and skin. Credit: StewardMD."
       }
     },
     {

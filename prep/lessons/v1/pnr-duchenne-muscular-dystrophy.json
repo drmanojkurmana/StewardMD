@@ -11,23 +11,10 @@
       "say": "Duchenne muscular dystrophy is an X-linked recessive disorder caused by disruptions in the dystrophin reading frame. Without dystrophin, the sarcolemma loses its mechanical anchor.",
       "tx": "Differentiate the **X-linked out-of-frame mutation** responsible for Duchenne muscular dystrophy. DMD arises from deletions (accounting for 60% to 70%), duplications, or point mutations within the 79 exons of the DMD gene on Xp21.2. The reading frame hypothesis dictates that out-of-frame mutations introduce premature stop codons resulting in complete loss of dystrophin (< 5% on muscle biopsy), whereas in-frame mutations produce shortened, partially functional dystrophin causing milder Becker dystrophy (Creatine kinase elevation).",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Duchenne (Out-of-Frame)",
-          "points": [
-            "Frameshift deletion or duplication",
-            "Truncated protein degraded completely",
-            "Dystrophin < 5% of normal; severe progression"
-          ]
-        },
-        "right": {
-          "title": "Becker (In-Frame)",
-          "points": [
-            "Intact reading frame maintained",
-            "Shortened semi-functional dystrophin",
-            "Dystrophin 20-50%; ambulation preserved > 16 yr"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/muscular-dystrophies-and-other-muscle-fig1.webp",
+        "alt": "Dystrophin complex failure in Duchenne and Becker disease with Gower sign.",
+        "caption": "Dystrophin failure: Duchenne and Becker mechanisms. Credit: StewardMD."
       }
     },
     {
@@ -220,31 +207,10 @@
       "say": "Respiratory insufficiency stems from progressive diaphragm and intercostal weakness. Non-invasive positive pressure ventilation provides life prolonging nocturnal support.",
       "tx": "Initiate **Becker muscular dystrophy reading frame** as vital capacity declines in teenage years. Progressive respiratory muscle exhaustion leads to nocturnal hypoventilation, hypercapnia, morning headaches, and ineffective cough mechanics. Monitor forced vital capacity and peak cough flow every 6 months; when forced vital capacity drops below 50% predicted or nocturnal pulse oximetry confirms desaturations, commence nocturnal bilevel non-invasive positive pressure ventilation and prescribe a mechanical insufflation-exsufflation cough assist device (Management complete).",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "resp",
-            "label": "Diaphragm weakness: FVC < 50% predicted or nocturnal desaturations"
-          },
-          {
-            "id": "bilevel",
-            "label": "Nocturnal bilevel non-invasive ventilation (BiPAP)"
-          },
-          {
-            "id": "cough",
-            "label": "Mechanical insufflation-exsufflation (cough assist) device"
-          }
-        ],
-        "edges": [
-          [
-            "resp",
-            "bilevel"
-          ],
-          [
-            "resp",
-            "cough"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/becker-muscular-dystrophy-fig1.webp",
+        "alt": "Calf pseudohypertrophy and truncated dystrophin in Becker muscular dystrophy.",
+        "caption": "Becker disease: truncated dystrophin and calf pseudohypertrophy. Credit: StewardMD."
       }
     }
   ]
