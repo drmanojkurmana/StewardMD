@@ -1,0 +1,85 @@
+{
+ "v": 1,
+ "module": "bio-lipid-chemistry",
+ "subject": "biochemistry",
+ "title": "Eicosanoids and cholesterol chemistry",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Arachidonic acid released from membrane sn-2 by **phospholipase A2** (calcium and MAP kinase activated, annexin/lipocortin mediation of corticosteroid anti-inflammatory action) feeds two great cascades: cyclooxygenases (COX-1 constitutive housekeeping, COX-2 induced inflammatory and fever, COX-3 teaching variant) making prostaglandins and thromboxanes through PGH2, and 5-lipoxygenase (leukocytes, FLAP assisted) making leukotrienes and lipoxins. Platelet versus endothelial PGH2 fate (thromboxane versus prostacyclin) balances thrombosis minute by minute.",
+   "say": "Phospholipase A2 releases arachidonic acid for cyclooxygenase and lipoxygenase cascades. Platelet thromboxane versus endothelial prostacyclin balances thrombosis minute by minute in vessel walls.",
+   "vis": {
+    "kind": "flow",
+    "title": "Arachidonate forks",
+    "nodes": [
+     {"id": "ara", "label": "Arachidonic acid (PLA2 released)"},
+     {"id": "cox", "label": "COX to PGH2: PGs, TXA2, PGI2"},
+     {"id": "lox", "label": "5-LOX to leukotrienes, lipoxins"}
+    ],
+    "edges": [["ara", "cox"], ["ara", "lox"]]
+   }
+  },
+  {
+   "tx": "Prostaglandin letters encode rings, numbers encode double bonds (PGE2 fever, pain sensitisation, ductus arteriosus patency and gastric mucosal defence; PGF2alpha luteolysis and labour; **prostacyclin** PGI2 vasodilator antiaggregant from endothelium, epoprostenol in pulmonary hypertension). Alprostadil (PGE1) keeps ductus open in duct dependent congenital heart disease, misoprostol (PGE1 analogue) protects stomach and ripens cervix, latanoprost (PGF analogue) drains aqueous in glaucoma, three prescriptions proving one chemistry family.",
+   "say": "PGE2 mediates fever and ductus patency, while prostacyclin vasodilates against platelet aggregation. Alprostadil, misoprostol and latanoprost prove one chemistry family across three prescriptions daily.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Eicosanoid", "Chief actions", "Drug mirror"],
+    "rows": [
+     ["Thromboxane A2 (platelets)", "Aggregation, vasoconstriction", "Aspirin blocks synthesis irreversibly"],
+     ["Prostacyclin I2 (endothelium)", "Anti aggregation, vasodilation", "Epoprostenol in pulmonary hypertension"],
+     ["PGE2", "Fever, pain, ductus open, stomach defence", "NSAID fever and ductus closure effects"],
+     ["Leukotriene B4", "Neutrophil chemotaxis", "Inflammation amplification"],
+     ["LTC4/D4/E4 (cysLTs)", "Bronchospasm, mucus, permeability", "Montelukast blocks receptor in asthma"]
+    ]
+   }
+  },
+  {
+   "tx": "**Aspirin** acetylates COX serine irreversibly, so anucleate platelets lose thromboxane for their ten day lifespan while nucleated endothelium resynthesises prostacyclin capacity, the kinetic basis of low dose cardioprotection; other NSAIDs inhibit reversibly and competitively, lose selectivity dramas (rofecoxib cardiovascular lesson: prostacyclin suppressed without platelet thromboxane blockade), and precipitate aspirin exacerbated respiratory disease (COX-1 blockade shunting to leukotrienes in susceptible asthmatics with polyps, Samter triad).",
+   "say": "Aspirin acetylates COX irreversibly, so platelets lose thromboxane for their lifespan while endothelium recovers. COX-1 blockade shunts to leukotrienes in aspirin exacerbated respiratory disease with polyps.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Low dose aspirin net effect", "points": ["Platelet TXA2 off for 10 days", "Endothelium PGI2 recovers daily", "Anti thrombotic balance"]},
+    "right": {"title": "COX-2 selective cautionary tale", "points": ["Endothelial PGI2 suppressed", "Platelet TXA2 intact", "Pro thrombotic imbalance (rofecoxib)"]
+    }
+   }
+  },
+  {
+   "tx": "Cysteinyl **leukotrienes** (LTC4, LTD4, LTE4, formerly slow reacting substance of anaphylaxis) constrict bronchi a thousand fold more potently than histamine, raise permeability and mucus in asthma and allergic rhinitis, blocked at synthesis (zileuton 5-LOX, liver monitored) or receptor (montelukast, zafirlukast). Lipoxins and omega-3 derived resolvins, protectins and maresins actively resolve inflammation rather than merely blocking it, the modern second half examiners now expect beside inhibition.",
+   "say": "Cysteinyl leukotrienes constrict bronchi far more potently than histamine in asthma, blocked by montelukast at receptor. Lipoxins and resolvins actively resolve inflammation rather than merely blocking it.",
+   "vis": null
+  },
+  {
+   "tx": "**Cholesterol** chemistry is a flat amphipathic tetracycle (cyclopentanoperhydrophenanthrene three six rings plus five ring, 3-beta hydroxyl head, iso-octyl tail) esterified at the hydroxyl by ACAT intracellularly and LCAT in HDL for transport storage. It stiffens membranes at heat, fluidises at cold (with raft organisation), and oxidises to oxysterols regulating SREBP and LXR genes, while 7-dehydrocholesterol in skin photolyses to vitamin D, tying sterol chemistry to sunlight endocrinology.",
+   "say": "Cholesterol esterifies at its hydroxyl for transport storage and organises membrane rafts. Skin 7-dehydrocholesterol photolyses to vitamin D, tying sterol chemistry to sunlight endocrinology directly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sterol form", "Where made or held", "Exam hook"],
+    "rows": [
+     ["Free cholesterol", "Membranes, myelin (brain richest)", "Fluidity buffer, rafts"],
+     ["Cholesteryl esters (ACAT)", "Cell droplets, LDL core (via CETP)", "Storage and transport form"],
+     ["Cholesteryl esters (LCAT)", "HDL maturation in plasma", "Reverse transport trapping"],
+     ["Oxysterols, bile acids, steroids", "Liver and glands onward", "Gene regulation and disposal"]
+    ]
+   }
+  },
+  {
+   "tx": "Plant sterols (sitosterol, campesterol) differ by side chain alkyls, compete for NPC1L1 micellar absorption (fortified margarines lower LDL modestly, ezetimibe blocks the transporter), and accumulate pathologically in **sitosterolaemia** (ABCG5/8 export failure) mimicking familial hypercholesterolaemia with haemolysis and arthritis twists. Cholesterol chemistry thus ends where lipoprotein medicine began: absorption, synthesis, carriage and excretion audited as one sterol economy.",
+   "say": "Plant sterols compete for absorption and accumulate in sitosterolaemia mimicking familial hypercholesterolaemia. Absorption, synthesis, carriage and excretion audit as one sterol economy across modules.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sterol economy audit",
+    "nodes": [
+     {"id": "in", "label": "Absorb (NPC1L1, ezetimibe blocks)"},
+     {"id": "make", "label": "Synthesise (HMG-CoA reductase, statins)"},
+     {"id": "carry", "label": "Carry (LDL forward, HDL reverse)"},
+     {"id": "out", "label": "Excrete (bile acids, resins interrupt)"}
+    ],
+    "edges": [["in", "make"], ["make", "carry"], ["carry", "out"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
