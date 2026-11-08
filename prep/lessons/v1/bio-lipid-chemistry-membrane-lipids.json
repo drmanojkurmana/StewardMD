@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-lipid-chemistry",
+ "subject": "biochemistry",
+ "title": "Phospholipids, sphingolipids and glycolipids",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Glycerophospholipids build bilayers from glycerol, two fatty acids (sn-2 usually unsaturated arachidonate reservoir), phosphate and a head alcohol: **lecithin** is phosphatidylcholine (lung surfactant active ingredient with sphingomyelin ratio testing fetal lung maturity, L/S at or above two reassuring), cephalin phosphatidylethanolamine, phosphatidylserine (inner leaflet, flipped out as eat me and clotting surface in apoptosis and platelet activation), phosphatidylinositol (PIP2 signalling cleavage to IP3 and DAG).",
+   "say": "Lecithin is phosphatidylcholine and the surfactant ingredient in fetal lung maturity ratios. Phosphatidylserine flips out as an eat me and clotting surface, while PIP2 cleaves to IP3 and DAG signals.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-lipid-chemistry-gen1.webp",
+    "alt": "A labeled bilayer shows lecithin, cephalin, cholesterol and sphingomyelin seated with a lung surfactant inset.",
+    "caption": "Membrane lipids seated in bilayer with lung surfactant inset, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Dipalmitoyl lecithin** (two saturated palmitates) packs to collapse surface tension at end expiration in alveoli, made by type II pneumocytes (lamellar bodies) under cortisol induction, deficient in preterm respiratory distress syndrome treated by exogenous surfactant and antenatal steroids. Cardiolipin (double glycerophospholipid, inner mitochondrial membrane, Barth syndrome tafazzin failure with cardiomyopathy and neutropenia) and platelet activating factor (ether linked acetyl choline like mediator) complete glycerolipid specialities worth naming exactly.",
+   "say": "Dipalmitoyl lecithin collapses alveolar surface tension and is deficient in preterm distress syndrome. Cardiolipin anchors inner mitochondrial membranes, failing in Barth syndrome cardiomyopathy and neutropenia.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Glycerolipid", "Head or quirk", "Clinical anchor"],
+    "rows": [
+     ["Phosphatidylcholine (lecithin)", "Choline head", "Surfactant DPPC, L/S ratio"],
+     ["Phosphatidylserine", "Serine, inner leaflet", "Apoptosis eat me, clotting surface"],
+     ["Phosphatidylinositol", "Inositol, PIP2", "IP3/DAG signalling, lithium mood link"],
+     ["Cardiolipin", "Double molecule, mitochondria", "Barth syndrome, antiphospholipid antibodies"]
+    ]
+   }
+  },
+  {
+   "tx": "Sphingolipids replace glycerol with **sphingosine** (serine plus palmitoyl-CoA origin): ceramide (plus fatty acid) is hub, sphingomyelin adds phosphocholine (myelin bulk, Niemann-Pick storage), cerebrosides add one sugar (gluco or galactocerebroside, Gaucher and Krabbe), sulfatides add sulfate (metachromatic), gangliosides add sialic acid NANA chains (GM1 cholera toxin receptor, Tay-Sachs GM2). One backbone thus generates membrane identity, myelin and storage diseases by head group alone.",
+   "say": "Sphingosine replaces glycerol as the sphingolipid backbone, generating myelin and storage diseases by head group alone. GM1 receives cholera toxin, while Tay-Sachs stores GM2 ganglioside in neurons.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ceramide hub radiates",
+    "nodes": [
+     {"id": "cer", "label": "Ceramide (sphingosine plus fatty acid)"},
+     {"id": "smy", "label": "Sphingomyelin (myelin)"},
+     {"id": "cerb", "label": "Cerebrosides and sulfatides"},
+     {"id": "gang", "label": "Gangliosides (sialic acid, brain)"}
+    ],
+    "edges": [["cer", "smy"], ["cer", "cerb"], ["cer", "gang"]]
+   }
+  },
+  {
+   "tx": "**Plasmalogens** (vinyl ether glycerophospholipids, peroxisome started synthesis) enrich myelin and heart and scavenge oxidants, falling diagnostically in Zellweger spectrum and rhizomelic chondrodysplasia. Glycolipid blood group and Forssman antigens, sulfatide metachromasia with toluidine blue, and ceramide signalling (apoptosis, insulin resistance lipotoxicity narratives) extend sphingolipid reach from chemistry practicals to metabolic medicine frontiers in single coherent family portrait.",
+   "say": "Plasmalogens enrich myelin and fall diagnostically in peroxisome diseases. Ceramide signalling reaches apoptosis and insulin resistance narratives, extending sphingolipids from practicals to metabolic frontiers coherently.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Glycerol based (phospholipids)", "points": ["Bilayer bulk, surfactant", "Arachidonate reservoir sn-2", "Cardiolipin in mitochondria"]},
+    "right": {"title": "Sphingosine based (sphingolipids)", "points": ["Myelin and rafts enriched", "Sugar heads store in lysosomes", "Ceramide signals apoptosis"]
+    }
+   }
+  },
+  {
+   "tx": "Amphipathic geometry predicts location without memorisation: cylindrical phospholipids tile flat bilayers, cone shaped lysophospholipids and detergents curve into micelles (bile salts as biological detergents emulsifying fat, critical micellar concentration), inverted cone phosphatidylethanolamine favours fusion curves. **Lysophospholipid** excess haemolyses (snake venom phospholipase) and surfactant phospholipid turnover (alveolar proteinosis lavage) show geometry becoming disease at extremes.",
+   "say": "Geometry predicts location: cylinders tile bilayers while cones curve into micelles like bile salt detergents. Lysophospholipid excess haemolyses, showing geometry becoming disease at extremes of composition.",
+   "vis": null
+  },
+  {
+   "tx": "Antiphospholipid syndrome closes chemistry to clinic: antibodies to beta-2 glycoprotein I bound to **cardiolipin** and phosphatidylserine surfaces prolong phospholipid dependent clotting tests paradoxically (lupus anticoagulant in vitro) while thrombosing arteries, veins and placenta in vivo (anticardiolipin, anti beta-2 GPI, lupus anticoagulant triple positivity highest risk). Membrane lipid heads are antigens, signals and toxins at once, which the eicosanoid and cholesterol lesson completes next.",
+   "say": "Antiphospholipid antibodies prolong clotting tests in vitro while thrombosing in vivo, a paradox worth stating exactly. Membrane heads are antigens, signals and toxins at once across this family.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Lipid head lesson", "One line anchor"],
+    "rows": [
+     ["Phosphatidylserine exposed", "Eat me and procoagulant surface"],
+     ["Cardiolipin antibody target", "Antiphospholipid thrombosis paradox"],
+     ["GM1 ganglioside", "Cholera toxin entry receptor"],
+     ["Sphingomyelin storage", "Niemann-Pick foam cells"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
