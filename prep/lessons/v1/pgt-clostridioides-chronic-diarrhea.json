@@ -125,39 +125,10 @@
       "say": "In severe colitis, lower endoscopy demonstrates classic pseudomembranes on inspection. You will see raised, discrete, yellowish white mucosal plaques made of fibrin, dead epithelial cells, and inflammatory neutrophils scattered across intensely inflamed colonic mucosa.",
       "tx": "Recognise **pseudomembranous colitis endoscopy** findings during sigmoidoscopy or colonoscopy. Severe CDI produces pathognomonic raised, discrete, yellowish-white mucosal plaques (pseudomembranes) ranging from 2 to 10 mm in diameter, adherent to an intensely erythematous, edematous colonic mucosal backdrop. Biopsy reveals mucosal necrosis with exploding 'volcano' lesions erupting fibrin and neutrophils.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Toxin A and B disrupt enterocyte actin cytoskeleton"
-          },
-          {
-            "id": "b",
-            "label": "Mucosal epithelial apoptosis and microvascular thrombosis"
-          },
-          {
-            "id": "c",
-            "label": "Eruption of fibrin, mucus, and neutrophils ('volcano' lesions)"
-          },
-          {
-            "id": "d",
-            "label": "Confluent yellowish-white pseudomembranous plaques"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/c-diff-fig1.webp",
+        "alt": "Colonic volcano lesions, endoscopic plaques and testing pathway in C difficile infection.",
+        "caption": "Pseudomembranous colitis: plaques on endoscopy. Credit: StewardMD."
       }
     },
     {
@@ -216,39 +187,10 @@
       "say": "In children with compromised immune systems, Cryptosporidium causes devastating watery diarrhea that can last for months. Diagnose it by finding acid fast oocysts on modified Kinyoun staining of the stool, and treat with nitazoxanide alongside restoring immune function.",
       "tx": "Identify **cryptosporidiosis in immunocompromise** as a dangerous opportunistic protozoal enteritis. Cryptosporidium parvum and hominis trigger severe, voluminous watery diarrhea and dehydration in children with severe combined immunodeficiency, HIV, or solid organ transplants. Diagnosis is established by identifying 4-6 mcm round oocysts on modified acid-fast (Kinyoun) stool staining or stool antigen testing; treatment combines nitazoxanide with immune restoration.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Ingestion of chlorine-resistant Cryptosporidium oocysts"
-          },
-          {
-            "id": "b",
-            "label": "Sporozoites invade apical intracellular, extracytoplasmic niche"
-          },
-          {
-            "id": "c",
-            "label": "Villous blunting and severe secretory watery diarrhea"
-          },
-          {
-            "id": "d",
-            "label": "Diagnosis via modified acid-fast stain (bright red round oocysts)"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/cryptosporidiosis-fig1.webp",
+        "alt": "Modified acid fast stain showing Cryptosporidium oocysts in stool.",
+        "caption": "Cryptosporidium oocysts on modified acid fast stain. Credit: CDC."
       }
     }
   ],
