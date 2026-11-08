@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "med-diabetes-complications",
+ "subject": "medicine",
+ "title": "Diabetic Nephropathy and Neuropathy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Chronic glomerular hemodynamic hypertension coupled with non-enzymatic glycation of matrix proteins drives progressive renal injury. In **diabetic nephropathy**, early efferent arteriolar constriction mediated by angiotensin II produces glomerular hyperfiltration, followed by glomerular basement membrane thickening and mesangial expansion. Histopathologically, nodular glomerulosclerosis featuring pathognomonic eosinophilic Kimmelstiel-Wilson nodules establishes the diagnosis. Over decades, progressive podocyte detachment and diffuse glomerulosclerosis culminate in heavy proteinuria, worsening hypertension, and terminal end-stage renal disease requiring renal replacement therapy.",
+   "say": "Chronic glomerular hemodynamic hypertension coupled with non-enzymatic glycation of matrix proteins drives progressive renal injury. In diabetic nephropathy, early efferent arteriolar constriction mediated by angiotensin II produces hyperfiltration, followed by basement membrane thickening and mesangial expansion. Histopathology revealing nodular Kimmelstiel-Wilson lesions establishes the diagnosis. Progressive podocyte injury leads to heavy proteinuria, hypertension, and end-stage renal disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetes-mellitus-and-men-syndromes-fig1.webp",
+    "alt": "Renal histological section showing nodular glomerulosclerosis with Kimmelstiel-Wilson nodules.",
+    "caption": "Renal biopsy demonstrating pathognomonic Kimmelstiel-Wilson nodular glomerulosclerosis in diabetic nephropathy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The earliest clinically detectable indicator of diabetic glomerular damage reflects subtle breakdown of the podocyte filtration barrier. Detecting **microalbuminuria**, defined by a urinary albumin-to-creatinine ratio between 30 and 300 milligrams per gram on a spot morning urine sample, identifies early reversible nephropathy. Unchecked, microalbuminuria inevitably progresses to macroalbuminuria exceeding 300 milligrams per gram alongside accelerated eGFR decline. Annual screening with spot urinary albumin-to-creatinine ratio is mandatory for all type 2 diabetic patients from diagnosis and five years post-diagnosis in type 1.",
+   "say": "The earliest clinically detectable indicator of diabetic glomerular damage reflects subtle breakdown of the podocyte filtration barrier. Detecting microalbuminuria, defined by an albumin-to-creatinine ratio between 30 and 300 milligrams per gram on a spot urine sample, identifies early reversible disease. Unchecked, microalbuminuria progresses to macroalbuminuria and accelerated filtration loss. Annual urine albumin screening is mandatory for all patients with diabetes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Albuminuria Category",
+     "Spot Urine ACR (mg/g)",
+     "24-Hour Urine Albumin",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Normal to Mild",
+      "< 30 mg/g",
+      "< 30 mg/day",
+      "Baseline normal physiology"
+     ],
+     [
+      "Microalbuminuria (A2)",
+      "30 to 300 mg/g",
+      "30 to 300 mg/day",
+      "Early nephropathy: Initiate ACEi/ARB"
+     ],
+     [
+      "Macroalbuminuria (A3)",
+      "> 300 mg/g",
+      "> 300 mg/day",
+      "Overt nephropathy: High risk of ESRD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pharmacological blockade of the renin-angiotensin-aldosterone axis provides specific renal protection by dilating the glomerular efferent arteriole. Administering **ace inhibitors** or angiotensin receptor blockers reduces intraglomerular capillary hydrostatic pressure, attenuating mechanical stress on podocytes and reducing proteinuria. Co-prescribing SGLT2 inhibitors and non-steroidal mineralocorticoid receptor antagonists such as finerenone delivers synergistic renal and cardiovascular protection. Serum creatinine may rise up to thirty percent following ACE inhibitor initiation due to hemodynamic decompression, which represents an expected pharmacological response.",
+   "say": "Pharmacological blockade of the renin-angiotensin system provides specific renal protection by dilating the glomerular efferent arteriole. Administering ace inhibitors or angiotensin receptor blockers reduces intraglomerular capillary pressure, protecting podocytes and decreasing proteinuria. Co-prescribing SGLT2 inhibitors and mineralocorticoid receptor antagonists provides additive nephroprotection. An initial mild creatinine rise up to thirty percent reflects hemodynamic decompression and does not require stopping therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ace",
+      "label": "ACE Inhibitor / ARB Therapy"
+     },
+     {
+      "id": "efferent",
+      "label": "Efferent Arteriolar Vasodilation"
+     },
+     {
+      "id": "press",
+      "label": "Reduced Intraglomerular Hydrostatic Pressure"
+     },
+     {
+      "id": "pro",
+      "label": "Sustained Reduction in Albuminuria & GFR Loss"
+     }
+    ],
+    "edges": [
+     [
+      "ace",
+      "efferent"
+     ],
+     [
+      "efferent",
+      "press"
+     ],
+     [
+      "press",
+      "pro"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Symmetrical length-dependent sensory axonal loss driven by metabolic and microvascular injury represents the commonest manifestation of nerve damage. Developing **diabetic neuropathy** characteristically begins in the distal lower extremities in a classic stocking-and-glove distribution. Patients report tingling paresthesias, burning pain, and hyperalgesia that worsens at night, alongside loss of vibratory sensation and ankle reflex depression. Screening annually with a 10-gram Semmes-Weinstein monofilament identifies loss of protective sensation, which strongly predicts future foot ulceration and amputation.",
+   "say": "Symmetrical length-dependent sensory axonal loss driven by metabolic and microvascular injury represents the commonest manifestation of nerve damage. Developing diabetic neuropathy characteristically begins in the lower extremities in a stocking-and-glove distribution. Patients report tingling, burning pain, and hyperalgesia worsening at night, alongside loss of vibratory sensation and ankle jerks. Annual screening with a 10-gram monofilament identifies loss of protective sensation, predicting foot ulceration risk.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetic-neuropathy-fig1.webp",
+    "alt": "Anatomical distribution of diabetic peripheral neuropathy and clinical sensory testing methods.",
+    "caption": "Length-dependent stocking-and-glove sensory neuropathy and bedside monofilament examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A severe neuroarthropathy triggered by repetitive microtrauma to an insensate foot produces profound joint architecture collapse. In a **charcot joint** (neuropathic arthropathy), sensory denervation eliminates protective pain sensation, while autonomic neuropathy induces hypervascularity and osteoclast activation. Continued weight-bearing on fractured tarsal bones causes tarsometatarsal joint dislocation, producing the pathognomonic rocker-bottom foot deformity. Early acute presentation presents with an erythematous, warm, swollen foot mimicking cellulitis; urgent non-weight-bearing immobilization with total contact casting is mandatory to halt permanent bone collapse.",
+   "say": "A severe neuroarthropathy triggered by repetitive microtrauma to an insensate foot produces profound joint architecture collapse. In a charcot joint, sensory denervation eliminates protective pain sensation, while autonomic neuropathy promotes hypervascular bone resorption. Continued weight-bearing causes tarsal collapse, producing the classic rocker-bottom foot deformity. Early presentation features a warm, swollen, erythematous foot mimicking cellulitis, requiring immediate non-weight-bearing casting to preserve foot architecture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Charcot Neuroarthropathy",
+     "points": [
+      "Warm, swollen, erythematous foot",
+      "Skin temperature 2-3°C higher than contralateral",
+      "Pain often mild or absent due to neuropathy",
+      "Normal initial plain radiographs",
+      "Management: Immediate total contact cast"
+     ]
+    },
+    "right": {
+     "title": "Acute Cellulitis",
+     "points": [
+      "Erythema, swelling, tenderness",
+      "Elevated inflammatory markers (CRP, ESR)",
+      "Elevated leg improves swelling but not erythema",
+      "No joint deformity or osteolysis",
+      "Management: Targeted intravenous antibiotics"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "First-line pharmacological management of painful diabetic peripheral neuropathy targets central nociceptive transmission pathways without modifying underlying nerve degeneration. Administering **duloxetine**, a serotonin-norepinephrine reuptake inhibitor, or pregabalin and gabapentin, which bind voltage-gated calcium channel alpha-2-delta subunits, significantly reduces burning neuropathic discomfort. Tricyclic antidepressants like amitriptyline offer effective secondary therapy but carry anticholinergic adverse effects, orthostatic hypotension, and cardiac conduction risks. Simple analgesics such as paracetamol and non-steroidal anti-inflammatory drugs provide negligible therapeutic efficacy for neuropathic dysaesthesias.",
+   "say": "First-line pharmacological management of painful diabetic peripheral neuropathy targets central nociceptive transmission pathways without modifying underlying nerve degeneration. Administering duloxetine or alpha-2-delta calcium channel ligands such as pregabalin significantly alleviates neuropathic symptoms. Tricyclic antidepressants offer effective secondary treatment but carry anticholinergic adverse effects and cardiac risks. Non-steroidal anti-inflammatory drugs provide negligible relief for neuropathic pain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological Class",
+     "First-Line Agent",
+     "Mechanism of Analgesia",
+     "Primary Adverse Effects"
+    ],
+    "rows": [
+     [
+      "SNRI",
+      "Duloxetine",
+      "Inhibits 5-HT and NE reuptake",
+      "Nausea, somnolence, dizziness"
+     ],
+     [
+      "Gabapentinoid",
+      "Pregabalin",
+      "Alpha-2-delta Ca2+ channel ligand",
+      "Peripheral oedema, sedation, weight gain"
+     ],
+     [
+      "Tricyclic Antidepressant",
+      "Amitriptyline",
+      "Mixed monoamine reuptake inhibition",
+      "Anticholinergic dry mouth, QT prolongation"
+     ],
+     [
+      "Topical Agent",
+      "Capsaicin 8% Patch",
+      "TRPV1 receptor defunctionalization",
+      "Local transient burning and erythema"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Asymmetrical motor weakness resulting from acute ischemic infarction of the lumbosacral plexus produces profound pelvic and proximal leg debilitation. Referred to as **diabetic amyotrophy** (diabetic lumbosacral radiculoplexus neuropathy), this condition affects older men presenting with sudden, severe aching thigh pain followed rapidly by proximal quadriceps muscle wasting and absent knee jerks. Driven by an underlying immune-mediated microvasculitis, spontaneous recovery typically occurs slowly over twelve to twenty-four months with intensive glycaemic control and structured physical rehabilitation.",
+   "say": "Asymmetrical motor weakness resulting from acute ischemic infarction of the lumbosacral plexus produces profound pelvic and proximal leg debilitation. Referred to as diabetic amyotrophy, this condition affects older adults presenting with sudden severe thigh pain followed by proximal quadriceps wasting and loss of knee reflexes. Driven by microvascular inflammation, gradual recovery typically occurs over twelve to twenty-four months with physical therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vasc",
+      "label": "Microvascular Ischaemia of Lumbosacral Plexus"
+     },
+     {
+      "id": "pain",
+      "label": "Severe Unilateral Thigh / Hip Pain"
+     },
+     {
+      "id": "atrophy",
+      "label": "Quadriceps Atrophy & Absent Patellar Reflex"
+     },
+     {
+      "id": "rehab",
+      "label": "Gradual Spontaneous Recovery with Glycaemic Control"
+     }
+    ],
+    "edges": [
+     [
+      "vasc",
+      "pain"
+     ],
+     [
+      "pain",
+      "atrophy"
+     ],
+     [
+      "atrophy",
+      "rehab"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diabetic autonomic neuropathy impairs involuntary homeostatic regulation across cardiovascular, gastrointestinal, and genitourinary organ systems. Cardiovascular autonomic dysfunction manifests as persistent resting tachycardia and disabling orthostatic hypotension, defined by a systolic drop exceeding twenty millimetres of mercury upon standing. Genitourinary involvement induces neurogenic **diabetic cystopathy** causing incomplete bladder emptying, urinary retention, and recurrent pyelonephritis. Erectile dysfunction represents an exceptionally prevalent early autonomic complication, requiring phosphodiesterase-5 inhibitor therapy and cardiovascular risk factor optimization.",
+   "say": "Diabetic autonomic neuropathy impairs involuntary homeostatic regulation across cardiovascular, gastrointestinal, and genitourinary organ systems. Cardiovascular autonomic dysfunction manifests as persistent resting tachycardia and disabling orthostatic hypotension upon standing. Genitourinary involvement induces diabetic cystopathy causing urinary retention, overflow incontinence, and recurrent infections. Erectile dysfunction represents an exceptionally prevalent autonomic complication, requiring targeted cardiovascular evaluation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cardiovascular Autonomic Neuropathy",
+     "points": [
+      "Resting fixed tachycardia (> 100 bpm)",
+      "Orthostatic hypotension (> 20 mmHg fall)",
+      "Loss of normal nocturnal BP dipping",
+      "Painless silent myocardial ischaemia",
+      "Increased perioperative mortality"
+     ]
+    },
+    "right": {
+     "title": "Visceral Autonomic Neuropathy",
+     "points": [
+      "Gastroparesis diabeticorum",
+      "Diabetic diarrhoea / Constipation",
+      "Hypoglycaemia unawareness",
+      "Neurogenic bladder retention",
+      "Sudomotor gustatory sweating"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
