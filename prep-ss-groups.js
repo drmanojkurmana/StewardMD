@@ -85,6 +85,7 @@
      "includes": "Gynaecological Oncology, Reproductive Medicine",
      "subjects": [
       "ss-biostatistics",
+      "ss-gynaecological-oncology",
       "ss-reproductive-medicine",
       "ss-gynaecological-oncology",
       "ss-reproductive-medicine"

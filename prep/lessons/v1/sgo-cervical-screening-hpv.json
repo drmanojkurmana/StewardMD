@@ -1,0 +1,249 @@
+{
+  "v": 1,
+  "module": "sgo-cervical-screening-hpv",
+  "title": "Cervical Cancer Screening, HPV Virology & Prophylactic Vaccines",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 7",
+    "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11e Ch 83",
+    "WHO Guidelines for Screening and Treatment of Cervical Pre-cancer Lesions"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Persistent infection with oncogenic mucosal human papillomaviruses represents the mandatory etiological factor in cervical neoplasia. Genotypes sixteen and eighteen predominate globally, driving roughly seventy percent of invasive carcinomas with notable glandular predilection.",
+      "tx": "Persistent infection with **high-risk HPV** (predominantly genotypes **HPV 16** and **HPV 18**) causes approximately **70** percent of invasive cervical cancers worldwide. While HPV 16 remains the most prevalent and oncogenic type overall, HPV 18 is disproportionately enriched in cervical **adenocarcinoma** cases compared to squamous lesions.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-cervix.webp",
+        "ar": 1.3333,
+        "caption": "Anatomical staging and local invasion pathways in carcinoma cervix. Credit: StewardMD.",
+        "alt": "Anatomical cervical cancer invasion diagram"
+      }
+    },
+    {
+      "say": "Viral oncogene integration disrupts normal eukaryotic cell cycle checkpoints. Early gene six directs targeted degradation of p53 through ubiquitin ligase complexes, while early gene seven uncouples retinoblastoma protein from its inhibitory complex.",
+      "tx": "Neoplastic transformation requires sustained expression of viral **E6 oncogene** and **E7 oncogene**. The E6 oncoprotein recruits the cellular ubiquitin ligase E6AP to mediate rapid **p53 degradation** (preventing cellular apoptosis), whereas E7 binds and inactivates **retinoblastoma protein (pRb)**, displacing transcription factor E2F to promote uncontrolled S-phase entry in cells with **6** or **7** viral copies and loss of p**53** arrest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "HPV E6 binds E6AP ubiquitin ligase"
+          },
+          {
+            "id": "b",
+            "label": "Accelerated ubiquitin-mediated p53 degradation"
+          },
+          {
+            "id": "c",
+            "label": "Loss of DNA repair and apoptotic check"
+          },
+          {
+            "id": "d",
+            "label": "HPV E7 binds and phosphorylates pRb"
+          },
+          {
+            "id": "e",
+            "label": "Displaces E2F to trigger unrestrained S-phase entry"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "d",
+            "e"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Recombinant virus like particle vaccines confer robust neutralising immunity against both oncogenic and condylomatous strains. The modern nonavalent vaccine expands type protection to cover ninety percent of all malignant cervical lesions.",
+      "tx": "The **nonavalent vaccine** (**Gardasil 9**) incorporates purified L1 capsid proteins against low-risk **types 6 and 11** (responsible for **90** percent of anogenital condylomata) and high-risk oncogenic types **16**, **18**, and **types 31, 33, 45, 52, 58**, preventing up to **90** percent of HPV-attributable cervical malignancies globally across all **9** targeted serotypes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vaccine Formulation",
+          "Valency & Antigens Covered",
+          "Clinical Protection Spectrum"
+        ],
+        "rows": [
+          [
+            "Bivalent (Cervarix)",
+            "HPV types 16, 18 (AS04 adjuvant)",
+            "High-grade cervical precancer and cancer (~70%)"
+          ],
+          [
+            "Quadrivalent (Gardasil)",
+            "HPV types 6, 11, 16, 18 (Alum)",
+            "Adds protection against 90% of genital warts"
+          ],
+          [
+            "Nonavalent (Gardasil 9)",
+            "HPV 6, 11, 16, 18, 31, 33, 45, 52, 58",
+            "Prevents 90% of HPV cancers and 90% of genital warts"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "International guidelines increasingly prioritise high sensitivity nucleic acid detection over conventional exfoliative cytology. Primary molecular screening commences at age twenty-five and operates at quinquennial intervals.",
+      "tx": "Per the official **WHO screening guideline**, **primary HPV testing** starting at age **25** years repeated every **5-year interval** is the gold-standard screening modality over cytology alone. Nucleic acid assays yield superior **CIN3+ sensitivity**, detecting severe grade **3** cervical intraepithelial neoplasia substantially earlier than morphological Papanicolaou smear analysis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Initiate primary HPV testing at age 25"
+          },
+          {
+            "id": "b",
+            "label": "HPV 16 or 18 positive: direct colposcopy mandatory"
+          },
+          {
+            "id": "c",
+            "label": "Other 12 high-risk types positive: reflex cytology triage"
+          },
+          {
+            "id": "d",
+            "label": "Negative high-risk HPV: routine rescreening in 5 years"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "a",
+            "c"
+          ],
+          [
+            "a",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dual testing protocols that combine cervical cytology with high risk viral genotyping provide extraordinary reassurance against hidden neoplasia. A mutually negative screen maintains five year risk beneath one tenth of a percent.",
+      "tx": "In dual **co-testing** strategies combining Papanicolaou smear examination with high-risk oncogenic genotyping, individuals aged **30** to **65** years exhibiting **negative HPV** and **negative cytology** demonstrate a **5**-year cumulative **CIN3 risk** below **0.1** percent, safely supporting a five-year screening recall interval.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary HPV DNA Screening Alone",
+          "points": [
+            "Commences at age 25 every 5 years",
+            "Significantly higher clinical sensitivity for CIN3+",
+            "Direct colposcopy for genotypes 16 or 18"
+          ]
+        },
+        "right": {
+          "title": "Cytology and HPV Co-Testing Strategy",
+          "points": [
+            "Standard in women aged 30 to 65 every 5 years",
+            "Double-negative confers 5-year CIN3 risk <0.1%",
+            "Generates higher colposcopy referral overhead"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Immunocytochemical dual biomarker panels resolve ambiguous smear findings by identifying aberrant cell cycle kinetics. Simultaneous nuclear overexpression of cyclin dependent kinase inhibitors and proliferation markers confirms transforming infection.",
+      "tx": "Qualitative **dual-stain cytology** combining **p16INK4a** (p**16** CDK inhibitor) and **Ki-67** cellular immunomarkers (nuclear antigen marker in **4** cell compartments) confirms cell-cycle dysregulation. Because p16 overexpression reflects Rb inactivation while Ki-**67** indicates active replication, simultaneous staining within a single squamous cell objectively identifies **transforming CIN** with high clinical specificity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Immunocytochemical Biomarker",
+          "Physiological Function",
+          "Diagnostic Clinical Significance"
+        ],
+        "rows": [
+          [
+            "p16INK4a overexpression",
+            "CDK4/6 tumor suppressor inhibitor",
+            "Surrogate marker of HPV E7 driven pRb functional loss"
+          ],
+          [
+            "Ki-67 nuclear expression",
+            "Cellular proliferation antigen",
+            "Confirms active mitotic cycle in non-basal squamous cells"
+          ],
+          [
+            "Dual-positive p16/Ki-67",
+            "Concurrent cycle arrest and replication",
+            "High specificity for transforming high-grade CIN2/3"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Immunosuppressed populations experience accelerated oncogenic progression requiring intensified surveillance schedules. Women living with human immunodeficiency virus require screening initiation within twelve months of exposure.",
+      "tx": "In **immunocompromised** individuals, particularly **HIV cervical screening** cohorts, testing mandates **early debut screening** initiated within **1** year of sexual debut or diagnosis. Due to impaired viral clearance and rapid dysplastic evolution, guideline recommendations mandate primary HPV testing with an intensified **3-year interval** to prevent invasive progression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Document HIV-positive status or severe immunosuppression"
+          },
+          {
+            "id": "b",
+            "label": "Initiate screening within 1 year of diagnosis or sexual debut"
+          },
+          {
+            "id": "c",
+            "label": "Perform high-risk HPV testing with cytology reflex"
+          },
+          {
+            "id": "d",
+            "label": "Maintain intensified 3-year surveillance throughout lifespan"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Older women possessing an established history of negative surveillance can safely transition out of routine screening programs. Termination requires consecutive nonreactive tests within the preceding decade.",
+      "tx": "Formal **cessation of screening** is appropriate at **age 65** for average-risk individuals with documented **adequate prior screening**. This benchmark requires either **2** consecutive negative HPV tests or **3** consecutive negative cytology results within **10** years, provided the most recent assessment occurred within **5** years.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cervical-cancer-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Microscopic morphology, pelvic lymph node drainage, and brachytherapy targets. Credit: StewardMD.",
+        "alt": "Microscopic morphology and staging in cervical carcinoma"
+      }
+    }
+  ]
+}

@@ -1,0 +1,246 @@
+{
+  "v": 1,
+  "module": "sgo-hydatidiform-mole-genetics",
+  "title": "Hydatidiform Mole: Complete vs Partial Mole & Post-Molar hCG Surveillance",
+  "subject": "ss-gynaecological-oncology",
+  "minutes": 8,
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "dashes": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "verify": true
+  },
+  "refs": [
+    "Berek & Hacker's Gynecologic Oncology 7e Ch 22",
+    "Williams Obstetrics 25e Ch 20",
+    "FIGO Cancer Report 2021: Gestational Trophoblastic Disease"
+  ],
+  "src": [],
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Complete hydatidiform moles result from the fertilization of an enucleated ovum by paternal chromosomes. The resulting diploid conceptus possesses purely androgenetic genetic material.",
+      "tx": "A **complete mole** is genetically **diploid androgenetic** containing **no maternal DNA**, resulting from the fertilization of an **empty ovum** by a haploid sperm that duplicates (**46,XX (90%)** in **90** percent) or by two sperms (**46**,XY in **10** percent), characterized by diffuse hydropic villi, circumferential trophoblastic hyperplasia, and absent embryonic tissue.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-figo-gtn.webp",
+        "ar": 1.3333,
+        "caption": "FIGO anatomical staging and FIGO-WHO score matrix for GTN. Credit: StewardMD.",
+        "alt": "Gestational trophoblastic disease staging and scoring"
+      }
+    },
+    {
+      "say": "Partial hydatidiform moles arise through dispermic fertilization of a normal maternal oocyte. The conceptus is triploid with two paternal sets and one maternal chromosome complement.",
+      "tx": "A **partial mole** is genetically **triploid diandric** (**69,XXY** in **70** percent, 69,XXX, or 69,XYY), arising from the fertilization of an intact haploid ovum (containing **23** maternal chromosomes) by two paternal sperms (**two paternal sets**). It is distinguished by scalloped villi, focal trophoblastic atypia, and the **presence of fetal tissue**.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complete Hydatidiform Mole",
+          "points": [
+            "Diploid androgenetic (46,XX or 46,XY); empty ovum",
+            "Complete absence of fetal or embryonic tissues",
+            "Diffuse hydropic villi with circumferential trophoblastic hyperplasia",
+            "Post-molar GTN malignant risk is 15% to 20%"
+          ]
+        },
+        "right": {
+          "title": "Partial Hydatidiform Mole",
+          "points": [
+            "Triploid diandric (69,XXY, 69,XXX, or 69,XYY)",
+            "Presence of fetal erythrocytes, amnion, or embryo",
+            "Focal hydropic swelling with scalloped villous outlines",
+            "Post-molar GTN malignant risk is low (1% to 5%)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Immunohistochemical evaluation of p57 expression reliably distinguishes complete from partial moles. Because p57 is a maternally transcribed gene, complete moles exhibit absent nuclear staining.",
+      "tx": "**p57KIP2 IHC** (p**57** protein expression, encoded by the **paternally imprinted maternal gene** CDKN1C) is an indispensable diagnostic biomarker: because maternal alleles are absent, a **complete mole p57-negative** shows absent nuclear staining in cytotrophoblast and villous stroma, whereas a **partial mole p57-positive** shows strong nuclear positivity in **2** tissue layers.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trophoblastic Tissue Layer",
+          "Complete Mole p57 Expression",
+          "Partial Mole p57 Expression",
+          "Hydropic Abortus Expression"
+        ],
+        "rows": [
+          [
+            "Villous Cytotrophoblast",
+            "Completely Negative (absence of maternal CDKN1C)",
+            "Strong Nuclear Positive",
+            "Strong Nuclear Positive"
+          ],
+          [
+            "Villous Mesenchymal Stroma",
+            "Completely Negative",
+            "Strong Nuclear Positive",
+            "Strong Nuclear Positive"
+          ],
+          [
+            "Maternal Decidual Stroma",
+            "Positive (internal positive control)",
+            "Positive (internal positive control)",
+            "Positive (internal positive control)"
+          ],
+          [
+            "Diagnostic Utility",
+            "Diagnostic of androgenetic complete mole",
+            "Confirms presence of maternal genome",
+            "Non-molar hydropic miscarriage"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Surgical uterine evacuation should be performed promptly using suction curettage under real time ultrasound visualization. Medical oxytocic induction must be avoided to prevent pulmonary embolism.",
+      "tx": "Uterine evacuation requires **suction curettage 10-12 mm** (**10** to **12** mm vacuum cannula) under continuous **ultrasound guidance**. There is strict **avoidance of medical induction** (prostaglandins or high-dose oxytocin before evacuation) due to severe **trophoblastic embolization risk** to maternal pulmonary circulation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Establish diagnosis of hydatidiform mole on pelvic ultrasound"
+          },
+          {
+            "id": "b",
+            "label": "Crossmatch blood and prepare for suction curettage in operating theater"
+          },
+          {
+            "id": "c",
+            "label": "Perform gentle suction curettage with 10-12 mm cannula under direct ultrasound"
+          },
+          {
+            "id": "d",
+            "label": "Start intravenous oxytocin infusion only after significant volume evacuation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The biological risk of malignant post molar trophoblastic neoplasia varies sharply between complete and partial gestations. Complete moles carry a substantial risk of persistent disease.",
+      "tx": "The **post-molar GTN risk** after molar evacuation varies markedly by genetic subtype: a **complete mole 15-20%** (**15** to **20** percent) risk of malignant persistence (invasive mole or choriocarcinoma), whereas a **partial mole 1-5%** (**1** to **5** percent) risk of malignant progression, rarely ever metastasizing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complete Mole Persistence Factors",
+          "points": [
+            "Post-molar GTN risk: 15% to 20%",
+            "High-risk features: age >40, pre-evacuation hCG >100,000 mIU/mL",
+            "Theca lutein ovarian cysts >6 cm and excessive uterine enlargement"
+          ]
+        },
+        "right": {
+          "title": "Partial Mole Persistence Factors",
+          "points": [
+            "Post-molar GTN risk: only 1% to 5%",
+            "Extremely rare progression to metastatic choriocarcinoma",
+            "Shorter surveillance requirement once hCG normalizes"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Post evacuation monitoring relies on serial quantitative serum human chorionic gonadotropin measurements. Surveillance protocols dictate weekly testing until negative levels are documented.",
+      "tx": "Rigorous post-evacuation **hCG surveillance** requires **weekly until negative for 3 weeks** (serum beta-hCG <**5** mIU/mL across **3** consecutive weeks), followed by **monthly for 6 months** (**6** months) in complete moles, and **1** confirmation month in partial moles to document remission and detect early GTN.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Complete suction evacuation of hydatidiform mole"
+          },
+          {
+            "id": "b",
+            "label": "Obtain baseline serum quantitative beta-hCG within 48 hours"
+          },
+          {
+            "id": "c",
+            "label": "Monitor serum hCG weekly until levels are normal (<5 mIU/mL) for 3 weeks"
+          },
+          {
+            "id": "d",
+            "label": "Continue monthly hCG surveillance for 6 months post-normalization"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Reliable contraception is mandatory throughout the human chorionic gonadotropin surveillance interval to avoid confounding rising levels with pregnancy. Intrauterine devices are temporarily contraindicated.",
+      "tx": "Strict **contraception during hCG monitoring** (oral contraceptive pills, barrier methods, or depot medroxyprogesterone) is mandatory for 6 months to prevent pregnancy from obscuring GTN diagnosis. There is a **contraindication to IUD before normalization** due to risk of uterine perforation and hemorrhage into vascular trophoblastic tissue.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Contraceptive Method",
+          "Safety Status during hCG Monitoring",
+          "Clinical Rationale & Mechanism"
+        ],
+        "rows": [
+          [
+            "Combined Oral Contraceptives",
+            "Safe and highly recommended",
+            "Suppresses pituitary LH cross-reactivity and prevents pregnancy"
+          ],
+          [
+            "Progestin Injections (DMPA) / Implants",
+            "Safe and effective",
+            "High efficacy without increasing post-molar GTN risk"
+          ],
+          [
+            "Intrauterine Devices (Copper / LNG-IUD)",
+            "Strictly contraindicated until hCG normal",
+            "Risk of uterine perforation into subinvolution / vascular choriocarcinoma"
+          ],
+          [
+            "Barrier Methods (Condoms)",
+            "Safe secondary method",
+            "Zero systemic effects, but higher real-world failure rate"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Recurrent hydatidiform moles are rare but may stem from maternal effect gene mutations. Biallelic alterations in NLRP7 or KHDC3L disrupt normal oocyte genomic imprinting.",
+      "tx": "While molar recurrence is rare (1-2%), **familial recurrent biparental mole** represents an autosomal recessive disorder caused by biallelic **NLRP7 mutation** (accounting for **75** percent of familial cases with gene on chromosome **7**) or **KHDC3L mutation** (chromosome **3**), causing maternal **imprinting failure** during oogenesis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hydatidiform-mole-fig1.webp",
+        "ar": 1.3333,
+        "caption": "Hydatidiform mole with vesicular hydropic villi. Credit: StewardMD.",
+        "alt": "Macroscopic hydropic villi in complete hydatidiform mole"
+      }
+    }
+  ]
+}
