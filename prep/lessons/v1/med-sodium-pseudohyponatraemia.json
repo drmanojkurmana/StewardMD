@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "med-sodium",
+ "subject": "medicine",
+ "title": "Pseudohyponatraemia, hypernatraemia, and water deficit calculations",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Artefactual laboratory measurement errors caused by abnormal expansion of non-aqueous serum phases produce misleading low electrolyte values. Clinically recognized as **pseudohyponatraemia**, this phenomenon occurs when severe hypertriglyceridaemia (lactescent serum with triglycerides exceeding fifteen hundred milligrams per decilitre) or marked paraproteinaemia (multiple myeloma) expands the non-water fraction of plasma from normal seven percent to over twenty percent. Indirect ion-selective electrodes dilute whole serum prior to measurement, falsely reporting low sodium concentrations. Measured plasma osmolality and direct potentiometric ion-selective electrodes (blood gas analyzers) remain completely normal, requiring no treatment.",
+   "say": "Artefactual laboratory measurements caused by abnormal expansion of non-aqueous serum phases produce misleading low sodium results. Clinically recognized as pseudohyponatraemia, this phenomenon occurs in extreme hypertriglyceridaemia or multiple myeloma paraproteinaemia. Because indirect laboratory analyzers dilute whole plasma before testing, measured sodium appears spuriously low while true aqueous sodium and osmolality remain completely normal.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyponatremia-fig2.webp",
+    "alt": "Diagram showing aqueous versus non-aqueous plasma fractions in pseudohyponatraemia.",
+    "caption": "Non-aqueous plasma volume expansion and indirect electrode dilution artifact. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A persistent deficit of free water relative to exchangeable sodium elevates circulating tonicity, establishing a state of hypertonic cellular dehydration. Defining **hypernatraemia** requires documentation of serum sodium exceeding one hundred and forty-five milliequivalents per litre. Hypernatraemia always represents hypertonicity, creating an osmotic gradient that shifts water out of brain cells into the hypertonic extracellular space, causing acute neuronal shrinkage. Cellular contraction strains intracranial bridging veins, creating substantial risks of subarachnoid or subdural haemorrhage. Severe manifestations include intense thirst, restlessness, hyperreflexia, ataxia, spasticity, generalized seizures, and coma.",
+   "say": "A persistent deficit of free water relative to sodium elevates circulating tonicity, causing cellular dehydration. Defining hypernatraemia requires serum sodium exceeding one hundred and forty-five milliequivalents per litre. Hypernatraemia causes water to leave brain cells, shrinking neurons and straining bridging veins with risks of intracranial haemorrhage, producing intense thirst, restlessness, hyperreflexia, and seizures.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Extracellular volume status",
+     "Underlying physiological mechanism",
+     "Urinary sodium concentration",
+     "Common clinical aetiologies"
+    ],
+    "rows": [
+     [
+      "Hypovolaemic hypernatraemia",
+      "Hypotonic fluid loss (water loss > sodium loss)",
+      "UNa < 20 mEq/L (extrarenal) or > 40 (renal)",
+      "Osmotic diuresis, loop diuretics, profuse sweating, burns"
+     ],
+     [
+      "Euvolaemic hypernatraemia",
+      "Pure water loss with preserved total body sodium",
+      "Variable (reflects water intake and output)",
+      "Central diabetes insipidus, nephrogenic DI, hypodipsia"
+     ],
+     [
+      "Hypervolaemic hypernatraemia",
+      "Hypertonic sodium gain (sodium gain > water)",
+      "UNa > 40 mEq/L with volume expansion",
+      "Hypertonic sodium bicarbonate infusion, salt poisoning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Quantifying the volume of water needed to restore physiological tonicity guides safe rehydration protocols. Calculating the **free water deficit** uses body weight, biological sex, and current serum sodium through the formula: total body water multiplied by measured sodium divided by one hundred and forty, minus one. Total body water is zero point six of weight in men and zero point five in women. Correction utilizes hypotonic fluids, strictly limiting sodium decline to under ten milliequivalents per litre in twenty-four hours to prevent cerebral oedema.",
+   "say": "Quantifying the exact volume of water needed to restore normal tonicity guides safe fluid replenishment. Calculating the free water deficit uses patient weight, sex, and measured sodium in a validated mathematical formula. Replacement therapy infuses hypotonic fluids like five percent dextrose, strictly limiting the rate of sodium reduction to under ten milliequivalents daily to avoid brain swelling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "formula",
+      "label": "Water Deficit = TBW * [(Serum Na / 140) - 1]"
+     },
+     {
+      "id": "fluid",
+      "label": "Select Hypotonic Fluid: 5% Dextrose in Water (D5W) or 0.45% Saline"
+     },
+     {
+      "id": "rate",
+      "label": "Infusion Rate: Replace deficit + ongoing losses over 48h (Drop <10 mEq/L/24h)"
+     }
+    ],
+    "edges": [
+     [
+      "formula",
+      "fluid"
+     ],
+     [
+      "fluid",
+      "rate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Impaired hypothalamic synthesis or defective posterior pituitary secretion of arginine vasopressin produces dramatic urinary water dissipation. Presenting as **central diabetes insipidus** (neurogenic DI), patients excrete massive daily volumes of dilute urine (polyuria exceeding three to twenty litres in twenty-four hours), accompanied by unquenchable thirst (polydipsia) and nocturnal awakenings. Major causes encompass idiopathic autoimmune hypophysitis, head trauma, transsphenoidal pituitary surgery, craniopharyngiomas, pituitary apoplexy, and infiltrative granulomatous diseases like sarcoidosis or Langerhans cell histiocytosis. When free water access is maintained, serum sodium remains within normal or borderline high limits.",
+   "say": "Impaired hypothalamic synthesis or defective pituitary secretion of vasopressin causes dramatic urinary water dissipation. Presenting as central diabetes insipidus, patients excrete massive volumes of dilute urine, accompanied by intense thirst and nocturia. Causes include head trauma, pituitary surgery, craniopharyngiomas, and granulomatous disease, with serum sodium staying normal if fluid access remains intact.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-sodium-fig1.webp",
+    "alt": "Hypothalamic-neurohypophyseal tract anatomy and pathophysiology of central diabetes insipidus.",
+    "caption": "Hypothalamic vasopressin neurosecretion and collecting duct aquaporin water channels. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Dynamic physiological dehydration testing distinguishes defective vasopressin secretion from peripheral tubular unresponsiveness and habitual polydipsia. Performing a **water deprivation test** involves strictly withholding oral fluid under continuous medical monitoring until urine osmolality plateaus across three consecutive hourly measurements (or body weight falls by three to five percent). Exogenous subcutaneous or intranasal desmopressin is administered at the plateau. In central diabetes insipidus, urine osmolality rises dramatically by more than fifty to one hundred percent, whereas nephrogenic diabetes insipidus exhibits absent response (rise under ten to forty-five percent).",
+   "say": "Dynamic dehydration testing distinguishes defective vasopressin secretion from peripheral receptor resistance and primary water drinking. Performing a water deprivation test involves withholding fluids until urine osmolality plateaus, followed by desmopressin injection. In central diabetes insipidus, urine osmolality rises by more than fifty percent, whereas nephrogenic diabetes insipidus fails to concentrate urine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical condition",
+     "Urine osmolality during dehydration",
+     "Response to Desmopressin (dDAVP)",
+     "Baseline plasma vasopressin (ADH)"
+    ],
+    "rows": [
+     [
+      "Central diabetes insipidus",
+      "Remains dilute (< 300 mOsm/kg)",
+      "Rises dramatically (> 50% to 100% increase)",
+      "Undetectable or low for serum osmolality"
+     ],
+     [
+      "Nephrogenic diabetes insipidus",
+      "Remains dilute (< 300 mOsm/kg)",
+      "Minimal or absent rise (< 10% to 45%)",
+      "Normal or elevated for serum osmolality"
+     ],
+     [
+      "Primary polydipsia",
+      "Concentrates progressively (> 500-800 mOsm)",
+      "Minimal additional rise (< 10%)",
+      "Suppressed by low serum osmolality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Selective pharmacological replacement of deficient antidiuretic hormone provides complete symptomatic control in neurogenic diabetes insipidus. Administering **desmopressin** (one-deamino-eight-D-arginine vasopressin, dDAVP) utilizes a synthetic peptide analogue displaying three hundred times the antidiuretic potency of endogenous vasopressin with completely negligible vascular V1 smooth muscle pressor activity. Available in oral, sublingual, intranasal, and parenteral formulations, desmopressin is titrated to control nocturia and polyuria. The most dangerous potential complication is acute water intoxication and severe hyponatraemia, which occurs if patients continue uninhibited compulsive fluid consumption following drug dosing.",
+   "say": "Selective pharmacological replacement of antidiuretic hormone provides complete symptomatic control in central diabetes insipidus. Administering desmopressin uses a synthetic analogue possessing potent antidiuretic activity with negligible vascular pressor effects. Titrated orally or intranasally to control polyuria, the medication requires strict moderation of voluntary fluid intake to avoid acute water intoxication and severe hyponatraemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Desmopressin (dDAVP)",
+     "points": [
+      "Selective Vasopressin V2 receptor agonist",
+      "Promotes collecting duct AQP2 water channel insertion",
+      "Lacks vascular V1 vasoconstrictor pressor activity",
+      "Treatment of choice for Central Diabetes Insipidus"
+     ]
+    },
+    "right": {
+     "title": "Native Vasopressin (Arginine Vasopressin)",
+     "points": [
+      "Activates both V1 (vascular) and V2 (renal) receptors",
+      "Induces intense splanchnic and systemic vasoconstriction",
+      "Utilized for septic shock and variceal haemorrhage",
+      "Short biological half-life requiring continuous IV infusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Compulsive oral fluid ingestion driven by psychiatric disturbances or altered central thirst thresholds produces severe secondary polyuria. Diagnosing **psychogenic polydipsia** (primary polydipsia) occurs predominantly in patients with chronic psychiatric conditions, particularly schizophrenia, or hypothalamic lesions affecting osmoreceptors. Ingestion of massive volumes of free water exceeding maximal renal excretory capacity (ten to fifteen litres daily) suppresses endogenous vasopressin secretion, generating profound polyuria with dilute urine. Unlike diabetes insipidus, serum sodium and serum osmolality remain in the low-normal or mildly hyponatraemic range, and intact renal concentration occurs during fluid restriction.",
+   "say": "Compulsive water consumption driven by psychiatric illness causes severe secondary polyuria with dilute urine. Diagnosing psychogenic polydipsia occurs in psychiatric patients or hypothalamic conditions where excessive fluid ingestion exceeds renal excretory capacity. Unlike diabetes insipidus, serum sodium remains low-normal, and the kidneys concentrate urine normally when fluid is restricted.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Psychogenic Polydipsia",
+     "points": [
+      "Primary compulsive water intake",
+      "Serum sodium: Low-normal (<137 mEq/L) or hyponatraemic",
+      "Urine concentrates (>500-800 mOsm) during water deprivation",
+      "Managed by behavioural fluid restriction"
+     ]
+    },
+    "right": {
+     "title": "Diabetes Insipidus (Central/Nephrogenic)",
+     "points": [
+      "Primary renal water excretion defect",
+      "Serum sodium: High-normal (>142 mEq/L) or hypernatraemic",
+      "Urine fails to concentrate during water deprivation",
+      "Managed with Desmopressin or Thiazides/Amiloride"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Structured therapeutic resuscitation algorithms match the composition of replacement fluids to underlying hemodynamic volume status in hypernatraemia. Directing **hypernatraemia fluid management** requires immediate restoration of intravascular perfusion with isotonic zero point nine percent saline if the patient exhibits frank hypovolaemic shock or orthostatic hypotension. Once circulatory stability is achieved, intravenous fluid is switched to hypotonic maintenance solutions, such as five percent dextrose in water or half-normal zero point four five percent saline, calculating hourly infusion rates to replace the calculated free water deficit plus ongoing urinary and insensible losses.",
+   "say": "Structured fluid resuscitation algorithms match the composition of fluids to patient volume status in hypernatraemia. Directing hypernatraemia fluid management requires immediate restoration of blood pressure with normal saline in patients with hypovolaemic shock. Once hemodynamics stabilize, fluids switch to hypotonic solutions like five percent dextrose, replacing the calculated water deficit over two days.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "shock",
+      "label": "Hypovolaemic Shock Present: Give 0.9% Normal Saline until stable"
+     },
+     {
+      "id": "switch",
+      "label": "Circulation Stable: Switch to 5% Dextrose or 0.45% Saline"
+     },
+     {
+      "id": "deficit",
+      "label": "Infuse at rate correcting Water Deficit over 48h (Max drop 10 mEq/L/day)"
+     }
+    ],
+    "edges": [
+     [
+      "shock",
+      "switch"
+     ],
+     [
+      "switch",
+      "deficit"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

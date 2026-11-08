@@ -1,0 +1,226 @@
+{
+ "v": 1,
+ "module": "med-potassium",
+ "subject": "medicine",
+ "title": "Potassium shifting, elimination, and tubular gradient assessment",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Intravenous infusion of regular crystalline insulin paired with concentrated carbohydrate solution constitutes the cornerstone of rapid pharmacodynamic potassium shifting. Prescribing **insulin dextrose** involves administering ten units of regular intravenous insulin alongside fifty milliliters of fifty percent dextrose (twenty-five grams of glucose) over five minutes. Insulin binds to cell surface receptors, triggering rapid translocation of sodium-potassium ATPase units into the plasma membrane. This action shifts potassium into skeletal muscle within fifteen minutes, lowering serum potassium for four to six hours while preventing hypoglycaemia.",
+   "say": "Intravenous regular insulin paired with concentrated carbohydrate solution forms the cornerstone of rapid potassium shifting. Prescribing insulin dextrose involves giving ten units of regular insulin alongside fifty millilitres of fifty percent dextrose. Insulin stimulates sodium-potassium ATPase pumps, driving extracellular potassium into skeletal myocytes. This rapid shift lowers serum potassium within fifteen minutes while protecting against dangerous hypoglycaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "admin",
+      "label": "Administer 10 units IV Regular Insulin + 50 mL 50% Dextrose"
+     },
+     {
+      "id": "pump",
+      "label": "Stimulates cell membrane Na+/K+ ATPase active pumps"
+     },
+     {
+      "id": "shift",
+      "label": "Drives K+ influx into skeletal muscle and hepatic cells"
+     },
+     {
+      "id": "result",
+      "label": "Serum K+ falls 0.5-1.2 mEq/L within 15-30 min (duration 4-6 hours)"
+     }
+    ],
+    "edges": [
+     [
+      "admin",
+      "pump"
+     ],
+     [
+      "pump",
+      "shift"
+     ],
+     [
+      "shift",
+      "result"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Enhanced gastrointestinal elimination of excess potassium ensures negative balance and sustained reduction of total body stores. Utilizing oral **potassium binders** removes surplus cations through non-absorbable polymer exchange in the colon. Newer agents like patiromer and sodium zirconium cyclosilicate bind potassium in exchange for calcium or sodium, demonstrating superior gastrointestinal tolerability compared to older sodium polystyrene sulfonate. Sodium polystyrene sulfonate carries serious hazards of intestinal necrosis and colonic perforation, particularly when co-administered with sorbitol, and is no longer preferred in emergency practice.",
+   "say": "Enhanced gastrointestinal elimination of surplus potassium provides sustained reduction of total body stores. Utilizing oral potassium binders removes potassium through non-absorbable cation exchange inside the colon. Modern agents like patiromer and sodium zirconium cyclosilicate provide excellent tolerability without mucosal damage. Clinicians do not use older sodium polystyrene sulfonate because it causes colonic ulceration and intestinal necrosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Potassium binding agent",
+     "Exchanged counterion",
+     "Primary anatomical site",
+     "Onset and adverse considerations"
+    ],
+    "rows": [
+     [
+      "Sodium Zirconium Cyclosilicate (SZC)",
+      "Hydrogen and sodium",
+      "Entire GI tract (stomach to colon)",
+      "Fast onset (1 hour); risk of sodium overload and oedema"
+     ],
+     [
+      "Patiromer",
+      "Calcium",
+      "Distal colon",
+      "Onset 4 to 7 hours; hypomagnesaemia, binds oral drugs"
+     ],
+     [
+      "Sodium Polystyrene Sulfonate (SPS)",
+      "Sodium",
+      "Colon",
+      "Slow onset; risk of intestinal necrosis and bowel perforation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Semi-quantitative physiological assessment of distal nephron potassium secretion clarifies the renal response to systemic electrolyte disturbances. Calculating the **transtubular potassium gradient** (TTKG) evaluates aldosterone-mediated potassium excretion in the cortical collecting duct. Computed as urine potassium multiplied by serum osmolality, divided by the product of serum potassium and urine osmolality, a normal value exceeds seven during hyperkalaemia. A low gradient below four in hyperkalaemic states reveals impaired aldosterone secretion or renal tubular resistance, while a gradient exceeding four during hypokalaemia confirms inappropriate renal wasting.",
+   "say": "Physiological assessment of distal potassium excretion indicates the renal response to electrolyte disturbances. Calculating the transtubular potassium gradient evaluates aldosterone activity in the cortical collecting duct. A gradient exceeding seven indicates appropriate renal potassium excretion during hyperkalaemia. A low value during hyperkalaemia points to hypoaldosteronism, whereas a high value during hypokalaemia identifies pathological renal potassium wasting.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "formula",
+      "label": "TTKG = [Urine K * Serum Osmolality] / [Serum K * Urine Osmolality]"
+     },
+     {
+      "id": "hyper",
+      "label": "In Hyperkalaemia: TTKG > 7 is normal; TTKG < 4 reveals Hypoaldosteronism"
+     },
+     {
+      "id": "hypo",
+      "label": "In Hypokalaemia: TTKG < 2 is normal conservation; TTKG > 4 reveals Renal Wasting"
+     }
+    ],
+    "edges": [
+     [
+      "formula",
+      "hyper"
+     ],
+     [
+      "formula",
+      "hypo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Paroxysmal episodes of flaccid muscle weakness triggered by acute intracellular potassium redistribution characterize this rare skeletal muscle channelopathy. Presenting as **hypokalaemic periodic paralysis**, mutations in voltage-gated calcium (CACNA1S) or sodium (SCN4A) channels cause aberrant depolarization and cellular potassium sequestration. Attacks occur after carbohydrate-heavy meals or rest following vigorous physical exertion, leading to symmetrical quadriparesis with spared cranial and respiratory muscles. Low serum potassium during episodes contrasts with normal interictal levels. Oral potassium chloride aborts attacks, while acetazolamide provides effective long-term prophylactic prevention.",
+   "say": "Paroxysmal episodes of flaccid muscle weakness caused by sudden intracellular potassium shifts characterize this skeletal muscle channelopathy. Presenting as hypokalaemic periodic paralysis, mutated calcium or sodium channels cause muscle membrane inexcitability and potassium trapping. Attacks follow heavy carbohydrate meals or strenuous exercise, producing reversible limb paralysis. Oral potassium chloride aborts acute attacks, while carbonic anhydrase inhibitors provide long-term prevention.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypokalemic-periodic-paralysis-fig1.webp",
+    "alt": "Pathophysiology and clinical features of hypokalaemic periodic paralysis.",
+    "caption": "Skeletal muscle channelopathy, carbohydrate triggers, and potassium repletion in hypokalaemic periodic paralysis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Concomitant depletion of total body magnesium stores exerts profound regulatory effects on distal tubular potassium handling and cardiac electrophysiology. Coexisting **hypomagnesaemia** impairs the function of the sodium-potassium ATPase pump and removes intrinsic magnesium blockade from renal outer medullary potassium (ROMK) channels. Uninhibited ROMK channels cause relentless distal potassium wasting into the tubule lumen, producing refractory hypokalaemia that completely resists oral or intravenous potassium repletion. Correction of serum magnesium using intravenous magnesium sulfate is mandatory before serum potassium concentrations can successfully normalize.",
+   "say": "Concomitant depletion of magnesium stores exerts profound regulatory effects on tubular potassium handling. Coexisting hypomagnesaemia impairs sodium-potassium ATPase function and relieves inhibitory control over outer medullary potassium channels. Uninhibited channels cause excessive urinary potassium excretion, creating refractory hypokalaemia. Clinicians must administer intravenous magnesium sulfate to correct hypomagnesaemia before serum potassium levels can normalize.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Magnesium Level",
+     "points": [
+      "Intracellular Mg2+ blocks ROMK channel pore",
+      "Restricts excessive potassium efflux into lumen",
+      "Maintains Na+/K+ ATPase pump enzymatic activity",
+      "Potassium repletion normalizes serum levels efficiently"
+     ]
+    },
+    "right": {
+     "title": "Severe Hypomagnesaemia",
+     "points": [
+      "Loss of intrinsic Mg2+ channel blockade",
+      "Unrestricted ROMK potassium secretion into urine",
+      "Impaired sodium-potassium pump activity",
+      "Produces refractory hypokalaemia resistant to KCl"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extracorporeal clearance modalities deliver the most definitive and rapid potassium elimination in severe life-threatening hyperkalaemia refractory to medical therapy. Initiating emergent **haemodialysis** is indicated when serum potassium exceeds six point five milliequivalents per litre associated with electrocardiographic abnormalities, severe oliguric acute kidney injury, or marked metabolic acidosis. Utilizing a low-potassium dialysate bath achieves rapid diffusive potassium clearance across the semipermeable dialyzer membrane, lowering circulating concentrations by one to two milliequivalents per litre within two hours. Continuous monitoring prevents sudden post-dialytic rebound hypokalaemia.",
+   "say": "Extracorporeal clearance delivers the most rapid potassium elimination in life-threatening hyperkalaemia refractory to medications. Initiating emergent haemodialysis is indicated when serum potassium exceeds six point five milliequivalents per litre with cardiac electrical conduction defects or kidney failure. Diffusive clearance across the dialyzer membrane rapidly removes potassium from blood. Clinicians monitor patients closely to avoid post-dialytic rebound shifts or arrhythmia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperkalemia-fig2.webp",
+    "alt": "Emergency management algorithm for hyperkalaemia and indication for urgent haemodialysis.",
+    "caption": "Urgent medical therapies, potassium shifting, and dialysis indications in severe hyperkalaemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Pharmacological stimulation of kaliuresis through inhibition of solute transport in the thick ascending limb promotes negative potassium balance. Prescribing **loop diuretics** such as intravenous furosemide or bumetanide blocks the sodium-potassium-two-chloride cotransporter, accelerating tubular fluid and sodium delivery to the distal aldosterone-sensitive nephron. High luminal flow and active sodium reabsorption create a lumen-negative electrical potential that enhances potassium secretion into the collecting duct. Loop diuretics effectively lower serum potassium in hyperkalaemic patients with preserved glomerular filtration, provided adequate intravascular hydration is maintained.",
+   "say": "Pharmacological stimulation of kaliuresis through transport inhibition in the thick ascending limb enhances potassium excretion. Prescribing loop diuretics like furosemide blocks the sodium-potassium-two-chloride cotransporter, increasing distal sodium delivery and tubular flow. Enhanced distal flow generates a lumen-negative voltage that pulls potassium into the urine. Loop diuretics reduce hyperkalaemia effectively in patients with adequate renal function and blood volume.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "loop",
+      "label": "Furosemide blocks NKCC2 cotransporter in thick ascending limb"
+     },
+     {
+      "id": "delivery",
+      "label": "Delivers high volume of sodium and water to cortical collecting duct"
+     },
+     {
+      "id": "voltage",
+      "label": "ENaC sodium uptake creates lumen-negative transepithelial potential"
+     },
+     {
+      "id": "secretion",
+      "label": "Accelerates ROMK and BK potassium secretion into tubular urine"
+     }
+    ],
+    "edges": [
+     [
+      "loop",
+      "delivery"
+     ],
+     [
+      "delivery",
+      "voltage"
+     ],
+     [
+      "voltage",
+      "secretion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathological fluid losses from the lower alimentary tract generate severe metabolic hypokalaemia accompanied by normal anion gap acidosis. Experiencing extensive **gastrointestinal potassium wasting** occurs commonly in secretory diarrhoea, chronic laxative abuse, villous adenomas, and external enterocutaneous fistulae. Colonic secretions contain potassium concentrations up to thirty to fifty milliequivalents per litre, far exceeding plasma levels. In contrast, gastric vomiting induces hypokalaemia primarily through secondary hyperaldosteronism and metabolic alkalosis rather than direct gastric fluid potassium loss. Documenting low urinary potassium below twenty milliequivalents per day confirms extrarenal potassium loss.",
+   "say": "Pathological fluid losses from the lower alimentary tract cause severe hypokalaemia accompanied by non-gap acidosis. Experiencing extensive gastrointestinal potassium wasting occurs during secretory diarrhoea, laxative abuse, and enterocutaneous fistulae. Intestinal fluids contain substantial potassium concentrations, depleting total body stores rapidly. In contrast, vomiting causes potassium loss predominantly through renal wasting. Measuring low urinary potassium confirms extrarenal fluid losses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lower GI Loss (Diarrhoea / Fistulae)",
+     "points": [
+      "Direct colonic fluid loss rich in potassium and HCO3-",
+      "Urinary potassium is appropriately low (<20 mEq/day)",
+      "Systemic state: Hypokalaemia + Normal Anion Gap Acidosis",
+      "Responds to fluid replenishment and base replacement"
+     ]
+    },
+    "right": {
+     "title": "Upper GI Loss (Vomiting / Gastric Suction)",
+     "points": [
+      "Gastric fluid has low K+ (10 mEq/L) but high HCl",
+      "Urinary potassium is elevated (>20 mEq/day) from alkalosis",
+      "Systemic state: Hypokalaemia + Metabolic Alkalosis",
+      "Responds to volume expansion with 0.9% Normal Saline"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

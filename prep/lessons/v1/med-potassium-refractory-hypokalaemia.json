@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "med-potassium",
+ "subject": "medicine",
+ "title": "Refractory hypokalaemia, refeeding syndrome, and phosphate imbalances",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Persistent failure of serum potassium to normalize despite aggressive oral and intravenous potassium replacement defines a frustrating diagnostic challenge. Encountering **refractory hypokalaemia** most frequently stems from uncorrected coexisting hypomagnesaemia, which permits unchecked potassium efflux through renal outer medullary potassium channels. Additional drivers comprise surreptitious diuretic ingestion, chronic vomiting, severe primary hyperaldosteronism, Gitelman syndrome, and amphotericin B nephrotoxicity. Resolving the condition necessitates systematic measurement of serum magnesium and urinary potassium excretion, followed by aggressive parenteral magnesium replacement to restore renal potassium conservation.",
+   "say": "Persistent failure of serum potassium to normalize despite aggressive replacement defines a challenging clinical dilemma. Encountering refractory hypokalaemia most frequently stems from uncorrected hypomagnesaemia, which permits continuous potassium wasting through renal medullary channels. Unrecognized diuretic use, vomiting, and hyperaldosteronism also sustain losses. Resolving this refractory state requires parenteral magnesium replacement to restore tubular potassium conservation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "refractory",
+      "label": "Hypokalaemia refractory to repeated KCl repletion"
+     },
+     {
+      "id": "check_mg",
+      "label": "Measure serum magnesium and spot urine potassium"
+     },
+     {
+      "id": "replete_mg",
+      "label": "If Mg < 1.7 mg/dL, infuse IV Magnesium Sulfate (1-2 g)"
+     },
+     {
+      "id": "resolved",
+      "label": "ROMK channel closed, renal potassium wasting ceases"
+     }
+    ],
+    "edges": [
+     [
+      "refractory",
+      "check_mg"
+     ],
+     [
+      "check_mg",
+      "replete_mg"
+     ],
+     [
+      "replete_mg",
+      "resolved"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Potentially fatal metabolic and electrolyte shifts provoked by aggressive nutritional rehabilitation of severely malnourished individuals demand vigilant clinical monitoring. Precipitating **refeeding syndrome** occurs when introducing concentrated carbohydrates to starved patients stimulates rapid surges in endogenous insulin secretion. Insulin drives massive cellular uptake of phosphate, potassium, and magnesium, causing precipitous drops in circulating electrolyte concentrations within twenty-four to seventy-two hours. Clinical consequences include cardiac arrhythmias, acute congestive heart failure, neuromuscular weakness, delirium, and sudden death. Prevention mandates gradual calorie reintroduction and prophylactic electrolyte supplementation.",
+   "say": "Potentially fatal electrolyte shifts provoked by nutritional rehabilitation of malnourished patients demand vigilant clinical care. Precipitating refeeding syndrome occurs when carbohydrates stimulate rapid endogenous insulin secretion. Insulin drives massive cellular uptake of phosphate, potassium, and magnesium, triggering dangerous drops in circulating electrolyte concentrations. Patients can develop arrhythmias, congestive heart failure, and seizures, requiring slow calorie advancement and prophylactic electrolyte repletion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prolonged Starvation State",
+     "points": [
+      "Catabolism relies on fat oxidation and ketone production",
+      "Insulin secretion is deeply suppressed",
+      "Whole-body stores of phosphate and potassium are depleted",
+      "Serum electrolyte concentrations appear deceptively normal"
+     ]
+    },
+    "right": {
+     "title": "Carbohydrate Refeeding Phase",
+     "points": [
+      "Rapid glucose intake triggers massive insulin surge",
+      "Insulin forces phosphate, potassium, and magnesium into cells",
+      "Causes precipitous hypophosphataemia and hypokalaemia",
+      "Leads to heart failure, respiratory arrest, and arrhythmias"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe decline in serum inorganic phosphate below one point zero milligram per decilitre impairs cellular energy production and tissue oxygenation. Developing severe **hypophosphataemia** depletes intracellular adenosine triphosphate and two-three-diphosphoglycerate, shifting the oxyhaemoglobin dissociation curve to the left and producing profound tissue hypoxia. Manifestations encompass diaphragmatic weakness leading to acute respiratory failure, proximal myopathy, rhabdomyolysis, impaired myocardial contractility, erythrocyte haemolysis, and metabolic encephalopathy. Management entails careful intravenous sodium or potassium phosphate infusion with continuous cardiac telemetry to avoid precipitating calcium phosphate crystallization.",
+   "say": "Severe decline in serum phosphate below one milligram per decilitre reduces cellular energy production and tissue oxygen delivery. Developing severe hypophosphataemia depletes intracellular ATP and red cell two-three-DPG, shifting the oxygen dissociation curve leftward. Patients develop diaphragmatic weakness, proximal myopathy, rhabdomyolysis, and encephalopathy. Intravenous sodium phosphate repletion must proceed cautiously under cardiac monitoring to prevent metastatic calcium phosphate deposition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serum phosphate severity",
+     "Laboratory concentration",
+     "Typical clinical manifestations",
+     "Preferred repletion protocol"
+    ],
+    "rows": [
+     [
+      "Mild hypophosphataemia",
+      "2.0 to 2.5 mg/dL",
+      "Usually asymptomatic, mild fatigue",
+      "Oral dietary phosphate or oral sodium phosphate"
+     ],
+     [
+      "Moderate hypophosphataemia",
+      "1.0 to 1.9 mg/dL",
+      "Muscle weakness, reduced cardiac contractility",
+      "Oral phosphate tablets (1-2 mmol/kg/day)"
+     ],
+     [
+      "Severe hypophosphataemia",
+      "< 1.0 mg/dL",
+      "Respiratory failure, rhabdomyolysis, coma",
+      "IV Sodium or Potassium Phosphate (0.2-0.5 mmol/kg)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sustained accumulation of inorganic phosphate in the extracellular compartment poses severe risks of vascular and soft tissue calcification. Clinically identified as **hyperphosphataemia**, serum phosphate exceeding four point five milligrams per decilitre develops primarily from acute or chronic renal failure, hypoparathyroidism, pseudohypoparathyroidism, and massive cellular destruction. Elevated phosphate binds circulating ionized calcium, provoking acute symptomatic hypocalcaemia with tetany and QT interval prolongation. When the calcium-phosphate product exceeds fifty-five milligrams squared per decilitre squared, calcium phosphate precipitates in coronary arteries, myocardium, and periarticular soft tissues.",
+   "say": "Sustained accumulation of inorganic phosphate creates severe risks of vascular and soft tissue calcification. Clinically identified as hyperphosphataemia, serum phosphate exceeding four point five milligrams per decilitre arises from kidney failure, hypoparathyroidism, and massive cell destruction. Elevated phosphate precipitates with ionized calcium, causing acute hypocalcaemic tetany and long-term arterial calcification. Management relies on dietary phosphate restriction and oral non-calcium phosphate binders.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "etiology",
+      "label": "Kidney Failure or Massive Tissue Lysis (Rhabdo / Tumour Lysis)"
+     },
+     {
+      "id": "elevated",
+      "label": "Serum Phosphate rises above 4.5 mg/dL"
+     },
+     {
+      "id": "binding",
+      "label": "Phosphate complexes with ionized Calcium (Hypocalcaemia & Tetany)"
+     },
+     {
+      "id": "calcify",
+      "label": "Calcium-Phosphate Product > 55 leads to Metastatic Calcification"
+     }
+    ],
+    "edges": [
+     [
+      "etiology",
+      "elevated"
+     ],
+     [
+      "elevated",
+      "binding"
+     ],
+     [
+      "binding",
+      "calcify"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massive oncological necrosis following the initiation of cytotoxic chemotherapy in rapidly proliferating haematological malignancies generates severe metabolic devastation. Known as **tumour lysis** syndrome, dying blast cells discharge massive quantities of intracellular electrolytes and nucleic acids into the circulation within twelve to seventy-two hours of treatment. The classic Cairo-Bishop criteria encompass hyperuricaemia, hyperkalaemia, hyperphosphataemia, and secondary hypocalcaemia. Precipitation of uric acid and calcium phosphate crystals in renal tubules causes acute oliguric renal failure. Prophylaxis with aggressive intravenous hydration and rasburicase is mandatory in high-risk patients.",
+   "say": "Massive oncological cell death following cytotoxic chemotherapy in rapidly dividing haematological cancers causes devastating metabolic disruption. Known as tumour lysis syndrome, dying malignant cells release massive intracellular potassium, phosphate, and nucleic acids into circulation. Patients develop hyperuricaemia, hyperkalaemia, hyperphosphataemia, and hypocalcaemia. Intratubular crystallization causes acute renal failure, necessitating aggressive intravenous hydration and rasburicase prophylaxis before chemotherapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tumour-lysis-syndrome-fig1.webp",
+    "alt": "Cairo-Bishop diagnostic criteria and pathophysiology of tumour lysis syndrome.",
+    "caption": "Tumour lysis syndrome electrolyte release, intratubular crystallization, and rasburicase prophylaxis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The mathematical product of serum total calcium and serum phosphate provides a critical threshold index for evaluating extraosseous mineral precipitation. Monitoring the **calcium phosphate product** prevents catastrophic tissue calcification in patients with advanced chronic kidney disease and mineral bone disorder. When the product of calcium and phosphate exceeds fifty-five milligrams squared per decilitre squared, the solubility product is surpassed, precipitating amorphous calcium phosphate crystals in cardiac valves, arterial media, skin, and viscera. Severe manifestations include calciphylaxis, an excruciating ischemic necrotizing arteriolopathy with cutaneous infarction and ulceration.",
+   "say": "The mathematical product of serum calcium and serum phosphate provides a crucial index for evaluating extraosseous mineral precipitation. Monitoring the calcium phosphate product helps prevent tissue calcification in chronic kidney disease. When the product exceeds fifty-five, mineral solubility is surpassed, depositing calcium phosphate in blood vessels and heart valves. Severe deposition can cause calciphylaxis, an excruciating necrotizing skin disease with cutaneous infarction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Calcium-Phosphate Product < 55",
+     "points": [
+      "Within biological solubility limit in serum",
+      "Mineral remains dissolved without precipitation",
+      "Vascular wall architecture remains preserved",
+      "Target maintenance range in chronic kidney disease"
+     ]
+    },
+    "right": {
+     "title": "Calcium-Phosphate Product > 55",
+     "points": [
+      "Exceeds physiological precipitation threshold",
+      "Deposition of calcium phosphate crystals in tissues",
+      "Accelerated medial arterial calcification (Mönckeberg)",
+      "Triggers calcific uraemic arteriolopathy (calciphylaxis)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sequential escalation and de-escalation protocols ensure safe electrolyte management during recovery from acute medical emergencies. Executing structured **potassium stepdown** therapy begins once emergency intravenous membrane stabilization and intracellular shifting successfully control life-threatening cardiac electrical toxicity. Serial serum electrolyte determinations every two to four hours guide the cessation of temporary shift therapies like insulin infusions. Maintenance therapy transitions toward gentle oral potassium binders, dietary moderation, and cautious resumption of necessary baseline medications. Concurrently, clinicians treat the underlying trigger, such as resolving acute renal failure or adjusting renin-angiotensin inhibitors.",
+   "say": "Sequential escalation and de-escalation protocols ensure safe electrolyte management during recovery from acute emergencies. Executing structured potassium stepdown therapy begins after emergency membrane stabilization and intracellular shifting neutralize cardiac toxicity. Serial blood draws guide the discontinuation of temporary insulin infusions and fluid therapies. Patients transition toward oral binders and dietary modifications while clinicians correct the underlying renal or medication causes.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-potassium-steps.svg",
+    "alt": "Algorithm diagram illustrating clinical steps in acute hyperkalaemia management and transition to stepdown care.",
+    "caption": "Sequential clinical stepdown protocol for acute hyperkalaemia resolution. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Parenteral administration of elemental magnesium restores enzymatic function across critical ion translocating pumps in the cardiac and renal systems. Providing urgent **magnesium repletion** uses intravenous magnesium sulfate, infusing one to two grams over fifteen to thirty minutes in emergent situations like torsades de pointes or digitalis toxicity. In asymptomatic refractory hypokalaemia, two to four grams is infused slowly over several hours to ensure adequate tissue uptake without exceeding renal reabsorptive capacity. Serial monitoring of deep tendon reflexes and respiratory rate prevents iatrogenic hypermagnesaemia and neuromuscular blockade.",
+   "say": "Parenteral administration of magnesium provides enzymatic support across critical ion pumps in cardiac and renal systems. Providing urgent magnesium repletion uses intravenous magnesium sulfate, infusing one to two grams rapidly for torsades de pointes. For refractory hypokalaemia, several grams are infused slowly over several hours to replenish cellular stores. Monitoring tendon reflexes and respiration prevents iatrogenic hypermagnesaemia and muscle weakness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical emergency",
+     "Intravenous magnesium sulfate dose",
+     "Infusion rate and vehicle",
+     "Key monitoring parameters"
+    ],
+    "rows": [
+     [
+      "Torsades de pointes",
+      "1 to 2 grams IV push / infusion",
+      "Diluted in 10 mL D5W over 1 to 2 minutes",
+      "Continuous cardiac rhythm monitoring"
+     ],
+     [
+      "Eclampsia / Pre-eclampsia",
+      "4 grams loading, then 1 to 2 g/hour",
+      "Infused continuously via volumetric pump",
+      "Patellar reflexes, urine output, respiratory rate"
+     ],
+     [
+      "Refractory hypokalaemia",
+      "2 to 4 grams IV piggyback",
+      "Diluted in 100 mL saline over 1 to 2 hours",
+      "Serum magnesium and potassium levels"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
