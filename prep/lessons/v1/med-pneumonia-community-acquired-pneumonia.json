@@ -1,0 +1,270 @@
+{
+ "v": 1,
+ "module": "med-pneumonia",
+ "subject": "medicine",
+ "title": "Community-acquired pneumonia: severity stratification and microbial etiology",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Acute infection of the pulmonary parenchymal tissue acquired outside healthcare settings is a leading cause of global infectious mortality. Diagnosing **community-acquired pneumonia** requires clinical symptoms of acute lower respiratory tract infection (cough, fever, pleuritic chest pain, dyspnoea) accompanied by new focal consolidation on chest radiography. Pathophysiologically, pathogen replication in alveolar spaces incites intense inflammatory exudation, filling alveoli with neutrophils, erythrocytes, and fibrin, leading to localized ventilation-perfusion mismatch and hypoxaemia.",
+   "say": "Acute infection of lung tissue acquired outside healthcare environments represents a leading cause of infectious mortality. Diagnosing community-acquired pneumonia requires clinical symptoms of acute respiratory infection accompanied by new focal consolidation on chest imaging. Pathogen multiplication inside alveoli prompts inflammatory exudation, filling airspaces with neutrophils and fibrin, causing hypoxaemia.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix-consolidation-triad.jpg",
+    "alt": "The consolidation triad: dullness, bronchial breath sounds, increased vocal resonance.",
+    "caption": "Physical examination findings in lobar consolidation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rapid bedside objective triage determines whether patients require outpatient care, hospital admission, or intensive care monitoring. Calculating the **CURB-65** score assigns one point for each of five parameters: Confusion (abbreviated mental test score <= 8), Urea > 7 mmol/L (BUN > 19 mg/dL), Respiratory rate >= 30 breaths/min, Blood pressure (systolic < 90 or diastolic <= 60 mmHg), and age >= 65 years. Scores 0 to 1 permit outpatient care, score 2 warrants hospitalisation, and scores 3 or higher demand ICU evaluation.",
+   "say": "Bedside objective triage determines whether patients require outpatient care, hospital admission or intensive care monitoring. Calculating the CURB-65 score assigns one point for confusion, elevated urea, respiratory rate thirty or higher, low blood pressure and age sixty-five or older. Scores of zero to one allow outpatient therapy, score two requires hospitalisation, and scores three or above warrant intensive care admission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CURB-65 score",
+     "Risk stratification",
+     "30-day mortality risk",
+     "Recommended site of care"
+    ],
+    "rows": [
+     [
+      "Score 0 to 1",
+      "Low risk",
+      "< 3% mortality",
+      "Outpatient oral antimicrobial therapy"
+     ],
+     [
+      "Score 2",
+      "Intermediate risk",
+      "9% mortality",
+      "Inpatient hospital ward admission"
+     ],
+     [
+      "Score 3",
+      "High risk",
+      "15% to 20% mortality",
+      "Urgent inpatient admission / consider ICU"
+     ],
+     [
+      "Score 4 to 5",
+      "Very high risk",
+      "> 30% mortality",
+      "Immediate intensive care unit admission"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The commonest bacterial cause of community-acquired pneumonia across all age groups and clinical settings is a lancet-shaped gram-positive diplococcus. Infection with **Streptococcus pneumoniae** (pneumococcus) characteristically presents with abrupt onset of a shaking chill (rigor), high spiking fever, pleuritic chest pain, and rust-colored sputum resulting from lysed alveolar erythrocytes. Urinary antigen testing provides rapid diagnostic identification that remains positive even after initiating empiric antibiotic therapy, guiding narrow-spectrum penicillin therapy.",
+   "say": "The commonest bacterial cause of community-acquired pneumonia across all age groups is a gram-positive diplococcus. Infection with Streptococcus pneumoniae presents with abrupt rigors, high fever, pleuritic chest pain and rust-coloured sputum from lysed red cells. Urinary antigen testing provides rapid identification that remains positive after starting antibiotics, facilitating targeted therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inhal",
+      "label": "Inhalation / aspiration of Streptococcus pneumoniae"
+     },
+     {
+      "id": "alveol",
+      "label": "Pneumolysin & capsule mediate alveolar inflammation"
+     },
+     {
+      "id": "congest",
+      "label": "Red hepatization: Alveolar filling with RBCs & fibrin"
+     },
+     {
+      "id": "sputum",
+      "label": "Rust-colored sputum & lobar consolidation"
+     },
+     {
+      "id": "rx",
+      "label": "Amoxicillin / Penicillin or macrolide therapy"
+     }
+    ],
+    "edges": [
+     [
+      "inhal",
+      "alveol"
+     ],
+     [
+      "alveol",
+      "congest"
+     ],
+     [
+      "congest",
+      "sputum"
+     ],
+     [
+      "sputum",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infections caused by atypical pathogens fail to grow on standard microbiological media and lack cell wall structures vulnerable to beta-lactams. Developing **atypical pneumonia** manifests clinically with a dry non-productive cough, prominent extrapulmonary symptoms (headache, myalgias, fatigue), and diffuse patchy reticulonodular opacities on chest radiography that appear far more extensive than physical examination suggests. Because Mycoplasma, Chlamydia, and Legionella lack conventional peptidoglycan walls, treatment requires macrolides, doxycycline, or respiratory fluoroquinolones.",
+   "say": "Infections caused by atypical pathogens do not grow on standard culture media and resist beta-lactam antibiotics. Developing atypical pneumonia manifests with a dry non-productive cough, prominent body aches and patchy infiltrates on chest imaging that look worse than clinical signs suggest. Because these pathogens lack peptidoglycan cell walls, therapy requires macrolides, doxycycline or fluoroquinolones.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Typical pneumonia",
+     "points": [
+      "Streptococcus pneumoniae, Haemophilus",
+      "Abrupt high fever, rigors, productive cough",
+      "Dense lobar consolidation on chest X-ray",
+      "Responsive to beta-lactam antimicrobials"
+     ]
+    },
+    "right": {
+     "title": "Atypical pneumonia",
+     "points": [
+      "Mycoplasma, Legionella, Chlamydophila",
+      "Insidious dry cough with headache and myalgia",
+      "Diffuse patchy bilateral interstitial infiltrates",
+      "Requires macrolides, doxycycline, or fluoroquinolones"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most frequent atypical pathogen in school-aged children, military recruits, and college students lacks a peptidoglycan cell wall entirely. Infection with **Mycoplasma** pneumoniae causes an indolent walking pneumonia featuring persistent hacking cough, pharyngitis, and bullous myringitis (tympanic membrane vesicles). Autoantibodies against erythrocyte I antigens produce cold agglutinin autoimmune haemolytic anaemia, seen as red cell clumping on peripheral blood smear. First-line therapy relies on oral azithromycin or doxycycline.",
+   "say": "The most common atypical pathogen in young adults and school children does not have a cell wall. Infection with Mycoplasma pneumoniae causes an indolent walking pneumonia with persistent cough, pharyngitis and bullous myringitis. Cold agglutinin autoantibodies can trigger autoimmune haemolytic anaemia, visible as red cell agglutination. Treatment relies on oral azithromycin or doxycycline.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Atypical pathogen",
+     "Distinctive clinical clues",
+     "Unique extrapulmonary feature",
+     "Preferred antimicrobial therapy"
+    ],
+    "rows": [
+     [
+      "Mycoplasma pneumoniae",
+      "Young adult, walking pneumonia, bullous myringitis",
+      "Cold agglutinin autoimmune haemolytic anaemia",
+      "Azithromycin 500 mg or Doxycycline"
+     ],
+     [
+      "Legionella pneumophila",
+      "Air conditioning, contaminated water, high fever",
+      "Hyponatraemia, diarrhea, confusion, elevated LFTs",
+      "Levofloxacin or Azithromycin IV"
+     ],
+     [
+      "Chlamydophila psittaci",
+      "Contact with parrots or poultry birds (psittacosis)",
+      "Splenomegaly and Horder spots",
+      "Doxycycline 100 mg BD for 14 days"
+     ],
+     [
+      "Coxiella burnetii",
+      "Contact with livestock placenta (Q fever)",
+      "Culture-negative endocarditis and hepatitis",
+      "Doxycycline 100 mg BD for 14 days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inhalation of contaminated aerosolized water droplets from air-conditioning cooling towers, showers, or hot tubs transmits an aggressive aquatic pathogen. Developing **Legionella** pneumophila pneumonia classically produces high unremitting fever with relative bradycardia (Faget sign), watery diarrhea, severe confusion out of proportion to fever, and marked hyponatraemia caused by syndrome of inappropriate antidiuretic hormone secretion (SIADH). Diagnosis is confirmed rapidly by detecting Legionella serogroup 1 urinary antigen.",
+   "say": "Inhaling contaminated water droplets from cooling towers or showers transmits an aggressive aquatic pathogen. Developing Legionella pneumonia produces high unremitting fever with relative bradycardia, watery diarrhea, confusion and marked hyponatraemia from inappropriate antidiuretic hormone release. Diagnosis is confirmed by detecting the urinary antigen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "water",
+      "label": "Aerosolized water from cooling towers / hotel plumbing"
+     },
+     {
+      "id": "legion",
+      "label": "Legionella pneumophila macrophage infection"
+     },
+     {
+      "id": "extra",
+      "label": "Extrapulmonary spread: Diarrhea, confusion, hyponatraemia"
+     },
+     {
+      "id": "faget",
+      "label": "Faget sign: Relative bradycardia with high fever"
+     },
+     {
+      "id": "urin",
+      "label": "Diagnosis via Legionella urinary antigen testing"
+     }
+    ],
+    "edges": [
+     [
+      "water",
+      "legion"
+     ],
+     [
+      "legion",
+      "extra"
+     ],
+     [
+      "extra",
+      "faget"
+     ],
+     [
+      "faget",
+      "urin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A virulent encapsulated gram-negative bacillus causes devastating necrotizing pneumonia in chronic alcoholic, diabetic, and malnourished patients. Severe pneumonia caused by **Klebsiella** pneumoniae characteristically involves the right upper lobe, producing thick, gelatinous, blood-streaked sputum termed red currant jelly sputum. Because Klebsiella produces extensive alveolar tissue necrosis and microabscesses, chest radiography classically demonstrates a bulging interlobar fissure due to massive dense inflammatory consolidation, requiring third-generation cephalosporins or carbapenems.",
+   "say": "An aggressive encapsulated gram-negative bacillus causes necrotizing pneumonia in malnourished individuals and chronic alcoholics. Severe pneumonia caused by Klebsiella pneumoniae characteristically targets the upper lobes, producing gelatinous red currant jelly sputum. Because Klebsiella causes tissue necrosis, chest radiographs show a bulging interlobar fissure due to massive consolidation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acinetobacter-infections-fig1.webp",
+    "alt": "Gross pathology and Gram stain appearance of necrotizing bacterial pneumonia.",
+    "caption": "Gross necrotizing consolidation and dense parenchymal bacterial invasion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Empiric antimicrobial selection in community-acquired pneumonia balances patient setting against pathogen risk factors. For outpatient adults without comorbidities, oral **amoxicillin or doxycycline** provides excellent coverage. In hospitalized ward patients, guidelines recommend combination therapy with an intravenous beta-lactam (ceftriaxone or ampicillin-sulbactam) plus a macrolide (azithromycin), or respiratory fluoroquinolone monotherapy (levofloxacin). Adding vancomycin or piperacillin-tazobactam is reserved strictly for patients with confirmed risk factors for methicillin-resistant S. aureus or Pseudomonas.",
+   "say": "Empiric antibiotic selection in community-acquired pneumonia balances patient setting against pathogen risks. For outpatients without comorbidities, oral amoxicillin or doxycycline provides effective coverage. For hospitalised ward patients, guidelines recommend combining an intravenous beta-lactam with a macrolide like azithromycin. Adding vancomycin or piperacillin-tazobactam is restricted to individuals with verified risks for methicillin-resistant staphylococci or Pseudomonas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient care setting",
+     "Underlying risk factors",
+     "Recommended empiric regimen",
+     "Therapeutic goal"
+    ],
+    "rows": [
+     [
+      "Outpatient healthy",
+      "No chronic comorbidities",
+      "Amoxicillin 1 g TDS OR Doxycycline 100 mg BD",
+      "Covers S. pneumoniae and atypicals"
+     ],
+     [
+      "Outpatient with comorbidity",
+      "COPD, diabetes, heart failure",
+      "Amoxicillin-clavulanate + Azithromycin",
+      "Expanded gram-negative coverage"
+     ],
+     [
+      "Inpatient hospital ward",
+      "CURB-65 score 2 (non-severe)",
+      "IV Ceftriaxone 2 g + IV Azithromycin 500 mg",
+      "Dual coverage for typicals & atypicals"
+     ],
+     [
+      "Inpatient ICU (severe)",
+      "CURB-65 score >= 3 / shock",
+      "IV Ceftriaxone + Azithromycin + Vancomycin (if MRSA)",
+      "Broad-spectrum coverage for sepsis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
