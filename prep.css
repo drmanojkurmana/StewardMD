@@ -1139,11 +1139,17 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
   .pn-root .pn-run:not(.pn-battle) .pn-qw:not(:has(> .pn-yq-fig, > .pn-stack)) > .pn-q { position: sticky; top: 0; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > :is(.pn-yq-fig:last-of-type, .pn-stack) { position: sticky; top: 0; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-stack { margin-top: 2px; }
-  /* The IQoach intro comes before the stem in the markup: float it to the top of the answer column so the stem starts
-     at the top on the left (2026-11-07: it pushed the stem down level with option A). What follows in the answer column
-     clears it. */
-  .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-intro { float: right; clear: right; width: calc(100% - var(--pn-ql) - 14px); margin-left: 0; }
+  /* Layout D (owner 2026-11-08): the question is a card on the left with the IQoach intro under it, so the answer column
+     holds only the options, their strike cells and the confidence row, all on one right edge. */
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-intro { float: left; clear: left; width: calc(var(--pn-ql) - 14px); margin-left: 0; }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > :not(.pn-yq-tags, .pn-q, .pn-yq-fig, .pn-stack, .ky-intro) { clear: right; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-q { box-sizing: border-box; padding: 24px 26px; border-radius: 20px; background: var(--pn-card); box-shadow: var(--pn-elev), inset 0 0 0 1px var(--pn-card-edge, var(--pn-edge)); }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-intro { box-sizing: border-box; border-radius: 14px; background: var(--pn-s1); box-shadow: none; }
+  .pn-root .pn-run:not(.pn-battle) .pn-opt .pn-l { width: 36px; height: 36px; border-radius: 10px; }
+  .pn-root .pn-run:not(.pn-battle) .pn-opt { min-height: 64px; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-cap > .pn-wrap { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 14px; background: var(--pn-s1); }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-cap > .pn-wrap > .pn-chip { min-height: 44px; height: auto; padding: 6px 10px; white-space: normal; text-align: center; justify-content: center; line-height: 1.25; border-color: transparent; border-radius: 10px; background: transparent; box-shadow: none; }
+  .pn-root .pn-run:not(.pn-battle) .pn-qw > .ky-cap > .pn-wrap > .pn-chip.on { background: var(--pn-card); color: var(--pn-text); box-shadow: var(--pn-elev); }
   .pn-root .pn-run:not(.pn-battle) .pn-qw > .pn-fb + .pn-navrow { margin-bottom: 0; }   /* the footer row ends flush with the scroller */
 }
 

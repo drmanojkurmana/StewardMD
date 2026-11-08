@@ -1,0 +1,243 @@
+{
+  "id": "pnr-movement-disorders-ataxia",
+  "title": "Pediatric Movement Disorders, Tics and Acute Ataxia",
+  "subject": "ss-paediatric-neurology",
+  "module": "Pediatric Stroke, Moyamoya and Movement Disorders",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Acute cerebellar ataxia is the commonest cause of sudden gait disturbance in toddlers. It typically follows a benign viral illness and resolves spontaneously over several months.",
+      "tx": "Diagnose **Acute post-infectious cerebellar ataxia** in young preschool children presenting with sudden unsteady gait. Post-infectious acute cerebellar ataxia typically strikes toddlers aged 1 to 4 years within 5 to 21 days following varicella-zoster virus, Epstein-Barr virus, or enterovirus infection. Children present with sudden profound truncal ataxia, dysmetria, tremor, and horizontal nystagmus without fever or encephalopathy. Neuroimaging and CSF are unremarkable; greater than 90% of children achieve spontaneous complete recovery within 2 to 3 months (Opsoclonus-myoclonus).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical parameter",
+          "Characteristic findings",
+          "Prognostic course"
+        ],
+        "rows": [
+          [
+            "Onset & demographics",
+            "Ages 1 to 4 years; sudden gait refusal/wobble",
+            "5-21 days after varicella or viral exanthem"
+          ],
+          [
+            "Physical examination",
+            "Truncal ataxia, titubation, dysmetria, nystagmus",
+            "Consciousness preserved; no focal weakness"
+          ],
+          [
+            "Clinical outcome",
+            "Benign self-limiting autoimmune inflammation",
+            "> 90% full spontaneous resolution by 8-12 weeks"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Dancing eyes and dancing feet describe opsoclonus myoclonus ataxia syndrome. This paraneoplastic phenomenon demands an urgent search for occult neuroblastoma.",
+      "tx": "Investigate **Opsoclonus-myoclonus-ataxia syndrome** as a paraneoplastic emergency in young children. Characterized by chaotic, conjugate multi-directional saccadic eye movements (opsoclonus), myoclonic jerking of the trunk and extremities, severe ataxia, and extreme irritability, opsoclonus-myoclonus-ataxia syndrome is associated with occult peripheral neuroblastic tumors (neuroblastoma or ganglioneuroblastoma) in 50% of cases. Prompt whole-body MRI, chest-abdomen-pelvis CT, and urinary catecholamines (VMA and HVA) are mandatory, followed by immunomodulatory therapy with ACTH, rituximab, or IVIG (Sydenham chorea).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "triad",
+            "label": "Opsoclonus (dancing eyes) + Myoclonus + Severe ataxia & rage"
+          },
+          {
+            "id": "screen",
+            "label": "Urgent CT/MRI neck, chest, abdomen, pelvis + urine VMA/HVA"
+          },
+          {
+            "id": "rx",
+            "label": "Occult neuroblastoma resection + ACTH / IVIG / Rituximab"
+          }
+        ],
+        "edges": [
+          [
+            "triad",
+            "screen"
+          ],
+          [
+            "screen",
+            "rx"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sydenham chorea is the major neurological manifestation of acute rheumatic fever. Rapid, non-rhythmic involuntary movements are accompanied by emotional lability.",
+      "tx": "Recognize **Tourette syndrome criteria** in school-age children presenting with subacute movement abnormalities. Sydenham chorea occurs as a delayed autoimmune sequela 1 to 6 months following Group A streptococcal pharyngitis, caused by molecular mimicry antibodies cross-reacting against striatal dopamine receptors (anti-basal ganglia antibodies). It presents with migratory choreoathetoid movements of the face and limbs, milkmaid grip, chameleon tongue, hypotonia, and emotional lability, establishing a major Jones criterion and requiring long-term penicillin secondary prophylaxis (Tourette diagnostic).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical sign",
+          "Elicitation technique",
+          "Pathognomonic manifestation"
+        ],
+        "rows": [
+          [
+            "Milkmaid grip",
+            "Patient squeezes examiner index & middle fingers",
+            "Rhythmic fluctuating grip contractions (cannot sustain)"
+          ],
+          [
+            "Chameleon tongue",
+            "Patient attempts to protrude tongue for 20 seconds",
+            "Involuntary darting in and out (trombone tongue)"
+          ],
+          [
+            "Spoon hand / Pronator sign",
+            "Patient extends arms forward overhead with palms down",
+            "Hyperpronation of forearms with hyperextension of fingers"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Tourette syndrome requires the presence of both multiple motor tics and at least one vocal tic. Symptoms must persist for longer than one year without a symptom-free break.",
+      "tx": "Apply the **Comprehensive Behavioral Intervention for Tics** to evaluate chronic tic disorders in childhood. The diagnosis requires both multiple motor tics (such as eye blinking, shoulder shrugging, facial grimacing) and at least one vocal/phonic tic (such as grunting, throat clearing, barking, coprolalia), with onset before age 18 years and persisting for greater than 1 year, waxing and waning in severity. Tics are characteristically preceded by a premonitory somatosensory urge and are temporarily suppressible through conscious effort (Tic pharmacotherapy).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "DSM-5 Diagnostic Criteria",
+          "points": [
+            "Both multiple motor & >= 1 vocal tic present",
+            "Duration > 1 year; waxing & waning frequency",
+            "Onset before age 18; not due to substances"
+          ]
+        },
+        "right": {
+          "title": "Clinical Hallmarks & Comorbidities",
+          "points": [
+            "Premonitory urge with sense of relief",
+            "Temporary volitional suppressibility",
+            "High comorbidity with ADHD (60%) and OCD (50%)"
+          ]
+        }
+      }
+    },
+    {
+      "say": "When tics cause social distress or physical discomfort, behavioural therapy serves as first-line treatment. Alpha-two adrenergic agonists provide safe first-line medication options.",
+      "tx": "Select **Dopa-responsive dystonia Segawa disease** when symptoms cause significant academic impairment or pain. Comprehensive behavioral intervention for tics (CBIT) is the first-line non-pharmacological therapy. When medication is required, presynaptic alpha-2 adrenergic agonists (guanfacine 1 to 4 mg/day or clonidine 0.05 to 0.3 mg/day) are first-line, especially in children with comorbid ADHD. For severe refractory tics, atypical antipsychotics (aripiprazole 2 to 10 mg/day or risperidone) provide potent D2 receptor antagonism (DYT1 dystonia).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cbit",
+            "label": "First-line non-drug: Comprehensive Behavioral Intervention for Tics (CBIT)"
+          },
+          {
+            "id": "alpha2",
+            "label": "First-line medical: Guanfacine or Clonidine (ideal for comorbid ADHD)"
+          },
+          {
+            "id": "antipsy",
+            "label": "Second-line medical: Aripiprazole or Risperidone for severe distressing tics"
+          }
+        ],
+        "edges": [
+          [
+            "cbit",
+            "alpha2"
+          ],
+          [
+            "alpha2",
+            "antipsy"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "DYT1 dystonia is an autosomal dominant inherited dystonia caused by a GAG deletion in the torsin A gene. Deep brain stimulation targeting the globus pallidus provides dramatic relief.",
+      "tx": "Investigate **Ataxia telangiectasia ATM gene** in children presenting with progressive twisted limb posturing. Autosomal dominant DYT1 dystonia arises from a heterozygous 3-base-pair GAG deletion (DeltaE302) in the TOR1A gene on chromosome 9q34 encoding torsin A, an endoplasmic reticulum chaperone protein. Symptoms typically begin around age 9 to 12 in an arm or leg, progressing to severe generalized axial torsion and contractures. In medically refractory cases, bilateral deep brain stimulation (DBS) of the globus pallidus internus yields profound motor improvement (Dopa-responsive Segawa).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "DYT1 Torsin A Dystonia",
+          "Clinical management"
+        ],
+        "rows": [
+          [
+            "Genetics & mutation",
+            "Autosomal dominant; TOR1A 3-bp GAG deletion",
+            "Incomplete penetrance (~30-40% carriers manifest)"
+          ],
+          [
+            "Onset & course",
+            "Mean age 9-12 yr; starts in foot/arm, generalizes",
+            "Normal cognition; normal brain MRI and metabolic tests"
+          ],
+          [
+            "Advanced therapy",
+            "Bilateral GPi Deep Brain Stimulation",
+            "Dramatic sustained motor relief; halts progression"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Segawa syndrome is a dopamine-responsive dystonia characterized by prominent diurnal fluctuation. A diagnostic trial of low dose levodopa leads to dramatic complete symptom resolution.",
+      "tx": "Prescribe a **Friedreich ataxia trinucleotide repeat** in any child presenting with unexplained gait dystonia. Segawa syndrome (DYT5a) is an autosomal dominant disorder caused by heterozygous mutations in GCH1 on chromosome 14q22 encoding GTP cyclohydrolase 1, the rate-limiting enzyme in tetrahydrobiopterin and dopamine biosynthesis. Children present at age 4 to 8 with lower extremity dystonic posturing that worsens dramatically towards the evening and improves after sleep. A low-dose trial of oral levodopa/carbidopa (1-5 mg/kg/day) produces near-miraculous, permanent resolution (Wilson copper).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gch1",
+            "label": "GCH1 mutation: GTP cyclohydrolase 1 deficiency (low dopamine)"
+          },
+          {
+            "id": "diurn",
+            "label": "Equinovarus foot dystonia with diurnal worsening towards evening"
+          },
+          {
+            "id": "ldopa",
+            "label": "Low-dose Levodopa/Carbidopa trial (1-5 mg/kg/day): Dramatic complete cure"
+          }
+        ],
+        "edges": [
+          [
+            "gch1",
+            "diurn"
+          ],
+          [
+            "diurn",
+            "ldopa"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Wilson disease causes systemic copper toxicity affecting the liver and basal ganglia. Slit lamp examination reveals Kayser-Fleischer rings in the peripheral cornea.",
+      "tx": "Investigate **Sydenham chorea clinical features** in any child or adolescent presenting with new motor, cognitive, or psychiatric disturbances. Biallelic mutations in ATP7B impair biliary copper excretion and ceruloplasmin incorporation, leading to copper accumulation in the striatum, globus pallidus, and cerebral cortex. Neurological Wilson disease manifests with dysarthria, resting tremor, wing-beating tremor, dystonia, and risus sardonicus. Slit-lamp exam detects Kayser-Fleischer rings; serum ceruloplasmin is < 20 mg/dL, 24-hour urine copper is > 100 mcg/day, and brain MRI shows the panda face sign (Evaluation complete).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic test",
+          "Characteristic finding in Wilson disease",
+          "Clinical significance"
+        ],
+        "rows": [
+          [
+            "Slit-lamp biomicroscopy",
+            "Kayser-Fleischer rings (Descemet membrane)",
+            "Present in > 95% of patients with neurological Wilson"
+          ],
+          [
+            "Serum ceruloplasmin",
+            "Markedly decreased (< 20 mg/dL, often < 5 mg/dL)",
+            "Impaired copper-binding chaperone protein synthesis"
+          ],
+          [
+            "24-hour urinary copper",
+            "Markedly elevated (> 100 mcg/24h or > 40 mcg/24h)",
+            "Gold standard biochemical screen for chelation therapy"
+          ]
+        ]
+      }
+    }
+  ]
+}

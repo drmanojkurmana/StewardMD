@@ -1,0 +1,147 @@
+{
+  "id": "pnp-thrombotic-thrombocytopenic-purpura-pediatric",
+  "title": "Pediatric TTP: Congenital Upshaw-Schulman Syndrome vs Immune ADAMTS13 Deficiency",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Hemolytic Uremic Syndrome and Microangiopathies",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Thrombotic thrombocytopenic purpura is caused by severe functional deficiency of the von Willebrand factor cleaving protease.",
+      "tx": "Understand the central molecular defect driving **ADAMTS13 deficiency and vWF multimers** in thrombotic microangiopathy. Thrombotic thrombocytopenic purpura (TTP) results from a severe functional deficiency of ADAMTS13 (a disintegrin and metalloproteinase with thrombospondin type 1 motifs, member 13), defined as plasma activity < 10%; absent protease activity prevents normal cleavage of ultra-large von Willebrand factor (ULVWF) multimers, precipitating spontaneous microvascular platelet agglutination and widespread microthrombosis.",
+      "vis": {
+        "kind": "table",
+        "title": "Molecular Mechanisms in TTP",
+        "cols": ["Component", "Physiological Function", "Pathology in TTP"],
+        "rows": [
+          ["ADAMTS13", "Cleaves endothelial ULVWF multimers", "Activity < 10% permits multimer persistence"],
+          ["ULVWF multimers", "Stored in Weibel-Palade bodies", "Spontaneously anchor and aggregate platelets"],
+          ["Microthrombi", "None in healthy microvasculature", "Cause shear-induced erythrocyte fragmentation"]
+        ]
+      }
+    },
+    {
+      "say": "Severe congenital deficiency manifests in neonates and young infants as Upshaw-Schulman syndrome.",
+      "tx": "Recognize the genetic presentation of **Congenital TTP (Upshaw-Schulman syndrome)** during early pediatric life. Congenital TTP (Upshaw-Schulman syndrome, cTTP) is an autosomal recessive disorder caused by biallelic mutations in the ADAMTS13 gene on chromosome 9q34; it characteristically manifests in the neonatal period or infancy with severe Coombs-negative hemolytic jaundice, profound thrombocytopenia, and exchange transfusion dependency, often triggered by minor viral infections or childhood vaccinations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neonatal Presentation",
+          "points": [
+            "Hyperbilirubinemia requiring exchange transfusion",
+            "Severe early thrombocytopenia",
+            "Absence of anti-ADAMTS13 autoantibodies"
+          ]
+        },
+        "right": {
+          "title": "Childhood Triggers",
+          "points": [
+            "Precipitated by routine vaccines or febrile illness",
+            "Recurrent episodes of Coombs-negative hemolysis",
+            "Lifelong requirement for plasma prophylaxis"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Acquired autoimmune TTP occurs in older children and adolescents mediated by neutralizing autoantibodies.",
+      "tx": "Evaluate autoantibody-mediated pathophysiology in **Acquired/immune TTP (iTTP) in adolescents** presenting acutely. Acquired immune TTP (iTTP) is mediated by IgG autoantibodies (inhibitors) directed against ADAMTS13, predominantly seen in adolescent females and frequently associated with systemic lupus erythematosus or other autoimmune diseases; presentation is marked by acute, explosive microangiopathic hemolytic anemia, severe consumptive thrombocytopenia, and fluctuating neurological deficits.",
+      "vis": {
+        "kind": "table",
+        "title": "Congenital vs Immune TTP Comparison",
+        "cols": ["Feature", "Congenital TTP (cTTP)", "Acquired Immune TTP (iTTP)"],
+        "rows": [
+          ["Etiology", "Biallelic ADAMTS13 gene mutation", "Acquired anti-ADAMTS13 IgG autoantibodies"],
+          ["Typical age", "Neonates and young infants", "Adolescents and older children"],
+          ["Inhibitor assay", "Negative (zero inhibitor titer)", "Positive (detectable neutralizing Bethesda units)"],
+          ["First-line therapy", "Fresh frozen plasma infusion", "Therapeutic plasma exchange + immunosuppression"]
+        ]
+      }
+    },
+    {
+      "say": "The classic pentad includes fever, microangiopathic hemolytic anemia, thrombocytopenia, neurological signs, and renal injury.",
+      "tx": "Identify the multi-system manifestations of the **Classic pentad of TTP** during emergency evaluation. The complete pentad comprises microangiopathic hemolytic anemia (MAHA with abundant schistocytes on blood film), severe thrombocytopenia, fluctuating neurological symptoms (ranging from headache and confusion to focal seizures and coma), fever, and mild renal impairment; however, only the dyad of unexplained MAHA and thrombocytopenia is required to initiate emergent therapy.",
+      "vis": {
+        "kind": "table",
+        "title": "TTP Clinical Manifestation Spectrum",
+        "cols": ["Manifestation", "Frequency", "Clinical Significance"],
+        "rows": [
+          ["MAHA + thrombocytopenia", "> 95%", "Essential dyad; mandates emergent treatment"],
+          ["Neurological symptoms", "~60-70%", "Fluctuating confusion, focal deficits, seizures"],
+          ["Fever", "~50%", "Systemic microvascular inflammation"],
+          ["Renal dysfunction", "~50%", "Mild hematuria/proteinuria; anuria is rare"]
+        ]
+      }
+    },
+    {
+      "say": "Immediate therapeutic plasma exchange with fresh frozen plasma is life-saving and drastically reduces mortality.",
+      "tx": "Institute emergency resuscitation using **Therapeutic plasma exchange (TPE) urgency** without delaying for confirmatory assays. Emergency therapeutic plasma exchange (TPE, 1.0-1.5 plasma volumes daily replaced with fresh frozen plasma or solvent-detergent plasma) is life-saving in acquired iTTP, removing anti-ADAMTS13 autoantibodies and high-molecular-weight vWF multimers while replenishing active ADAMTS13 protease, reducing acute mortality from > 90% down to < 10-15%.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "susp", "label": "Suspected TTP: MAHA + Thrombocytopenia"},
+          {"id": "draw", "label": "Draw baseline ADAMTS13 activity and inhibitor"},
+          {"id": "tpe", "label": "Initiate daily TPE (1-1.5 plasma vol) + steroids immediately"}
+        ],
+        "edges": [
+          ["susp", "draw"],
+          ["draw", "tpe"]
+        ]
+      }
+    },
+    {
+      "say": "Children with congenital deficiency require regular prophylactic plasma infusions every two to three weeks.",
+      "tx": "Prescribe maintenance therapy with **Plasma infusion prophylaxis in congenital TTP** for long-term health. Because patients with Upshaw-Schulman syndrome lack antibodies and merely require protease replacement, they do not require plasma exchange; lifelong prophylactic fresh frozen plasma infusions (10-15 mL/kg every 2-3 weeks) or recombinant ADAMTS13 (apadamtase alfa) successfully prevent recurrent ischemic episodes and progressive organ damage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "cttp", "label": "Congenital Upshaw-Schulman Syndrome confirmed"},
+          {"id": "ffp", "label": "Prophylactic FFP (10-15 mL/kg every 2-3 weeks)"},
+          {"id": "apad", "label": "Or recombinant ADAMTS13 (Apadamtase alfa)"}
+        ],
+        "edges": [
+          ["cttp", "ffp"],
+          ["ffp", "apad"]
+        ]
+      }
+    },
+    {
+      "say": "Anti-vWF nanobodies rapidly block platelet-multimer interaction and halt microvascular thrombosis.",
+      "tx": "Incorporate targeted biologics including **Caplacizumab and rituximab in immune TTP** to achieve rapid remission. In pediatric patients with acquired iTTP, modern regimens combine daily plasma exchange and high-dose corticosteroids with rituximab (anti-CD20 monoclonal antibody at 375 mg/m² weekly for 4 doses to eliminate inhibitor-producing B-cell clones) and caplacizumab (an anti-vWF A1-domain humanized bivalent nanobody that rapidly prevents ULVWF-platelet adhesion).",
+      "vis": {
+        "kind": "table",
+        "title": "Adjuvant Biologic Agents in Immune TTP",
+        "cols": ["Drug", "Mechanism of Action", "Clinical Benefit"],
+        "rows": [
+          ["Caplacizumab", "Binds vWF A1 domain to block GP1b", "Stops microthrombi within hours, prevents stroke"],
+          ["Rituximab", "Depletes CD20+ B-lymphocytes", "Suppresses anti-ADAMTS13 inhibitor production"],
+          ["Corticosteroids", "Broad immunosuppression (IV methylpred)", "Blunts immediate autoantibody synthesis"]
+        ]
+      }
+    },
+    {
+      "say": "Transfusing platelets in active TTP can fuel widespread fatal thrombosis and is strictly contraindicated.",
+      "tx": "Enforce strict clinical prohibition regarding **Platelet transfusion contraindication in TTP** during acute flares. Platelet transfusions are strictly contraindicated in active TTP because infusing exogenous platelets provides immediate substrate for circulating ultra-large vWF multimers, precipitating catastrophic widespread microthrombosis that can cause sudden acute myocardial infarction, fatal stroke, and rapid clinical deterioration (unless life-threatening hemorrhage is present).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dangerous Practice",
+          "points": [
+            "Prophylactic platelet transfusion for low count",
+            "Fuel for ultra-large vWF multimers",
+            "Precipitates fatal stroke and myocardial infarction"
+          ]
+        },
+        "right": {
+          "title": "Correct Management",
+          "points": [
+            "Withhold platelets despite profound thrombocytopenia",
+            "Permit transfusion only for catastrophic bleeding",
+            "Prioritize immediate plasma exchange and immunosuppression"
+          ]
+        }
+      }
+    }
+  ]
+}

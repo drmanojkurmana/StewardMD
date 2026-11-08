@@ -1,0 +1,146 @@
+{
+  "id": "pnp-post-streptococcal-gn-apscn",
+  "title": "Acute Post-Streptococcal Glomerulonephritis: APSGN Latency, Complement and Course",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Glomerular Diseases, Nephrotic Syndrome and Nephritis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Specific streptococcal bacterial antigens trigger post-infectious glomerular inflammation after defined latent windows.",
+      "tx": "Evaluate presenting timeline against known **Nephritogenic streptococcal antigens and latency** parameters. Acute post-streptococcal glomerulonephritis is triggered by specific nephritogenic Group A Streptococcus strains carrying speB (streptococcal pyrogenic exotoxin B) and NAPlr antigens; onset follows a characteristic latent period of 1-2 weeks after streptococcal pharyngitis, or an extended interval of 3-6 weeks following streptococcal pyoderma or impetigo.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Post-Pharyngitis Presentation",
+          "points": [
+            "Latent period: 1-2 weeks",
+            "Winter and spring seasonality",
+            "High correlation with rising ASO titers"
+          ]
+        },
+        "right": {
+          "title": "Post-Pyoderma Presentation",
+          "points": [
+            "Latent period: 3-6 weeks",
+            "Summer and humid tropical climate",
+            "Anti-DNase B antibody diagnostic benchmark"
+          ]
+        }
+      }
+    },
+    {
+      "say": "The clinical syndrome classically unites smoky dark urine, peripheral swelling, and sudden volume-dependent hypertension.",
+      "tx": "Identify the hallmark findings of the **Classic acute nephritic syndrome triad** during emergency triage. Affected children typically present with sudden onset gross hematuria producing tea-colored or cola-colored smoky urine, variable dependent edema (prominently periorbital upon morning waking and pretibial fluid accumulation), and systemic hypertension accompanied by oliguria and circulatory congestion.",
+      "vis": {
+        "kind": "table",
+        "title": "Nephritic Syndrome Triad Components",
+        "cols": ["Feature", "Clinical Manifestation", "Physiologic Basis"],
+        "rows": [
+          ["Hematuria", "Smoky cola-colored urine, RBC casts", "Glomerular capillary wall disruption"],
+          ["Edema", "Periorbital and pretibial swelling", "Sodium and water retention via reduced GFR"],
+          ["Hypertension", "Elevated systolic and diastolic BP", "Expanded intravascular fluid volume"]
+        ]
+      }
+    },
+    {
+      "say": "Transient hypocomplementemia serves as an essential laboratory marker that must normalize within two months.",
+      "tx": "Monitor the pathognomonic trajectory of **Complement C3 depression kinetics** to confirm typical post-infectious recovery. Serum complement C3 and total hemolytic complement CH50 levels are profoundly depressed in > 90% of acute APSGN cases due to robust alternative complement pathway activation; critically, serum C3 must normalize within 6-8 weeks of onset, and failure to recover beyond 8 weeks mandates renal biopsy to exclude membranoproliferative GN or C3 glomerulopathy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "onset", "label": "Acute presentation: C3 depressed > 90%"},
+          {"id": "resolv", "label": "6-8 weeks: C3 returns to normal"},
+          {"id": "bx", "label": "> 8 weeks low C3: mandatory renal biopsy"}
+        ],
+        "edges": [
+          ["onset", "resolv"],
+          ["resolv", "bx"]
+        ]
+      }
+    },
+    {
+      "say": "Serological evidence confirms antecedent streptococcal disease depending on the original site of infection.",
+      "tx": "Order site-specific assays to establish **Serological evidence of streptococcal infection** when confirming etiology. A rising or elevated anti-streptolysin O (ASO) titer provides diagnostic confirmation in 80% of children following acute pharyngitis; in contrast, anti-DNase B testing proves vastly superior (> 90% positive) for children presenting after cutaneous streptococcal pyoderma because skin lipids inhibit streptolysin O antigenicity.",
+      "vis": {
+        "kind": "table",
+        "title": "Serological Testing in Post-Streptococcal Nephritis",
+        "cols": ["Assay", "Sensitivity by Site", "Key Diagnostic Feature"],
+        "rows": [
+          ["ASO titer", "80% in pharyngitis; low in skin", "Standard screening for upper respiratory entry"],
+          ["Anti-DNase B", "> 90% in pyoderma and impetigo", "Preferred antibody test for cutaneotropic strains"],
+          ["Streptozyme", "High combined screen (> 95%)", "Measures five distinct streptococcal antibodies"]
+        ]
+      }
+    },
+    {
+      "say": "Renal tissue inspection demonstrates hypercellular capillary tufts with prominent dome-shaped subepithelial deposits.",
+      "tx": "Interpret characteristic biopsy findings identifying **Light and electron microscopy subepithelial humps** in atypical presentations. Light microscopy demonstrates diffuse endocapillary proliferative glomerulonephritis characterized by global endothelial swelling and neutrophil infiltration occluding capillary lumina; ultrastructural electron microscopy classically reveals pathognomonic dome-shaped electron-dense subepithelial humps situated on the outer aspect of the glomerular basement membrane.",
+      "vis": {
+        "kind": "table",
+        "title": "Histopathological Signatures of APSGN",
+        "cols": ["Modality", "Characteristic Finding", "Location in Glomerulus"],
+        "rows": [
+          ["Light microscopy", "Diffuse endocapillary proliferation", "Glomerular tufts occluded by neutrophils"],
+          ["Electron microscopy", "Dome-shaped dense humps", "Subepithelial surface of basement membrane"],
+          ["Immunofluorescence", "Granular C3 and IgG deposition", "Capillary loops and mesangial matrix"]
+        ]
+      }
+    },
+    {
+      "say": "Fluorescence microscopy demonstrates coarse granular immune complexes scattered throughout the capillary loops.",
+      "tx": "Examine immunofluorescence patterns establishing the **Immunofluorescence starry sky pattern** diagnostic of immune-complex deposition. Direct immunofluorescence microscopy reveals heavy, coarse granular deposition composed of complement C3 and immunoglobulin IgG distributed irregularly along capillary loops and throughout the mesangium, creating the classic starry sky or garland appearance reflecting subepithelial and mesangial immune lattice complexes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Starry Sky Pattern",
+          "points": [
+            "Coarse irregular granular C3 and IgG deposits",
+            "Scattered across mesangium and capillary walls",
+            "Corresponds to resolving subepithelial humps"
+          ]
+        },
+        "right": {
+          "title": "Garland Pattern",
+          "points": [
+            "Continuous dense peripheral capillary deposits",
+            "Associated with more prominent proteinuria",
+            "Reflects extensive subepithelial immune complexes"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Severe blood pressure elevations require aggressive fluid restriction and parenteral loop diuretic therapy.",
+      "tx": "Manage acute circulatory overload and prevent **Hypertensive encephalopathy and loop diuretics** emergencies. Acute hypertensive crises in APSGN stem entirely from hypervolemia; immediate management requires strict dietary fluid and sodium restriction, prompt intravenous furosemide at 1-2 mg/kg to force natriuresis, and the cautious addition of calcium channel blockers (such as amlodipine, nicardipine, or labetalol) if severe hypertension persists.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "vol", "label": "Fluid overload & acute hypertension"},
+          {"id": "diur", "label": "IV furosemide 1-2 mg/kg + strict fluid limit"},
+          {"id": "ccb", "label": "Add CCB/labetalol if encephalopathy persists"}
+        ],
+        "edges": [
+          ["vol", "diur"],
+          ["diur", "ccb"]
+        ]
+      }
+    },
+    {
+      "say": "The vast majority of children enjoy full clinical recovery following an orderly timeline of symptom resolution.",
+      "tx": "Reassure families regarding the **Natural history and long-term resolution** expected in pediatric APSGN. The clinical course follows a predictable trajectory: diuresis and resolution of fluid overload occur within 1-2 weeks, gross hematuria and hypertension abate within 2-4 weeks, proteinuria resolves by 2-3 weeks, while microscopic hematuria may persist harmlessly for up to 1-2 years before complete healing without chronic kidney damage.",
+      "vis": {
+        "kind": "table",
+        "title": "Clinical Recovery Timetable in APSGN",
+        "cols": ["Clinical Parameter", "Expected Resolution Window", "Prognostic Significance"],
+        "rows": [
+          ["Edema and oliguria", "1-2 weeks", "Marks onset of spontaneous diuretic phase"],
+          ["Hypertension", "2-4 weeks", "Normalization allows weaning of antihypertensives"],
+          ["Proteinuria", "2-3 weeks", "Significant proteinuria beyond 6 months warrants biopsy"],
+          ["Microscopic hematuria", "1-2 years", "Benign persistent finding; does not imply chronicity"]
+        ]
+      }
+    }
+  ]
+}

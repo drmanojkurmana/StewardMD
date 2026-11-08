@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "bio-lipid-synthesis",
+ "subject": "biochemistry",
+ "title": "Triacylglycerol and steroid synthesis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Triacylglycerol assembly needs glycerol-3-phosphate, supplied in liver from glucose or free glycerol (glycerol kinase present), but adipose lacks **glycerol kinase**, so fat storage absolutely requires glucose entry to make the backbone. That dependency explains why insulin (GLUT4 entry plus lipoprotein lipase activation) is the master storage hormone and why uncontrolled diabetes melts fat despite hyperglycaemia.",
+   "say": "Adipose lacks glycerol kinase, so fat storage requires glucose entry to make the backbone. Insulin is therefore the master storage hormone, and uncontrolled diabetes melts fat despite hyperglycaemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Liver backbone supply",
+     "points": [
+      "From glucose (DHAP)",
+      "From free glycerol (kinase present)",
+      "Exports VLDL"
+     ]
+    },
+    "right": {
+     "title": "Adipose backbone supply",
+     "points": [
+      "From glucose only (no kinase)",
+      "Insulin GLUT4 dependent",
+      "Stores, rarely exports intact"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Phosphatidic acid stands at the branch: dephosphorylated to diacylglycerol it accepts a third fatty acid for storage fat, or activated as **CDP-diacylglycerol** (and CDP-choline Kennedy routes) it builds membrane phospholipids. Lung surfactant dipalmitoyl lecithin and platelet activating factor branch nearby. Liver packages storage fat into VLDL with ApoB-100 and microsomal transfer protein, previewing the lipoprotein lessons.",
+   "say": "Phosphatidic acid branches to storage fat or membrane phospholipids. Liver packages storage fat into VLDL with ApoB-100. Surfactant dipalmitoyl lecithin branches nearby in lung.",
+   "vis": {
+    "kind": "flow",
+    "title": "Phosphatidic acid branch",
+    "nodes": [
+     {
+      "id": "pa",
+      "label": "Phosphatidic acid"
+     },
+     {
+      "id": "tag",
+      "label": "Triacylglycerol (storage)"
+     },
+     {
+      "id": "pl",
+      "label": "Phospholipids (membranes)"
+     },
+     {
+      "id": "vldl",
+      "label": "VLDL export (liver ApoB-100)"
+     }
+    ],
+    "edges": [
+     [
+      "pa",
+      "tag"
+     ],
+     [
+      "pa",
+      "pl"
+     ],
+     [
+      "tag",
+      "vldl"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Steroidogenesis begins when **StAR** ferries cholesterol to inner mitochondrial CYP11A1 (side chain cleavage, desmolase), making pregnenolone, the universal precursor and rate limiting commitment. ACTH acutely raises StAR (minutes) and chronically raises enzyme transcription (days). Congenital StAR failure (lipoid congenital adrenal hyperplasia) engorges adrenals with cholesterol esters while all steroids fail, proving transport, not synthesis, limits first.",
+   "say": "Steroidogenesis begins when StAR ferries cholesterol to CYP11A1, making pregnenolone. ACTH raises StAR acutely and enzymes chronically. StAR failure engorges adrenals while all steroids fail, proving transport limits first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adrenal zone",
+     "Signature product",
+     "Chief controller"
+    ],
+    "rows": [
+     [
+      "Glomerulosa",
+      "Aldosterone",
+      "Angiotensin II, potassium"
+     ],
+     [
+      "Fasciculata",
+      "Cortisol",
+      "ACTH"
+     ],
+     [
+      "Reticularis",
+      "DHEA and androgens",
+      "ACTH and age"
+     ],
+     [
+      "Medulla (separate)",
+      "Adrenaline (PNMT by cortisol)",
+      "Splanchnic nerves, cortisol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**21-hydroxylase deficiency** causes over ninety percent of congenital adrenal hyperplasia: cortisol and usually aldosterone fall, ACTH drives hyperplasia, and precursors shunt to androgens virilising genetic females, with salt wasting crisis in severe neonatal forms. 11-beta and 17-alpha hydroxylase defects instead raise mineralocorticoid precursors (hypertension with virilisation failure patterns), so blood pressure separates the three classic blocks at the bedside.",
+   "say": "21-hydroxylase deficiency causes most congenital adrenal hyperplasia, with salt wasting and virilisation. The 11 and 17 hydroxylase defects raise blood pressure instead, so blood pressure separates the classic blocks at the bedside.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "21-hydroxylase absent",
+     "points": [
+      "Cortisol and aldosterone low",
+      "Androgens high, virilisation",
+      "Salt wasting, low blood pressure"
+     ]
+    },
+    "right": {
+     "title": "11-beta hydroxylase absent",
+     "points": [
+      "DOC excess mineralocorticoid",
+      "Androgens high, virilisation",
+      "Hypertension, low potassium"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gonadal and placental steroid routes reuse the same pregnenolone trunk: testes make testosterone (Leydig, LH), ovaries sequence oestradiol through theca androgen to granulosa aromatisation (two cell, two gonadotropin model), placenta makes progesterone and oestriol with fetal adrenal cooperation (fetoplacental unit, DHEA sulfate supply). **Aromatase** (CYP19) in fat also converts androgens to oestrogens after menopause and in obesity, with drug inhibitors central to breast oncology.",
+   "say": "Gonads reuse the pregnenolone trunk. Ovaries sequence oestradiol through theca and granulosa cooperation, while placenta cooperates with the fetal adrenal. Aromatase in fat converts androgens to oestrogens after menopause.",
+   "vis": null
+  },
+  {
+   "tx": "**Vitamin D** completes steroid family teaching as a secosteroid hormone made from cholesterol in skin, activated in liver then kidney (fat soluble module details the calcium axis). Bile acids, steroids and vitamin D together justify cholesterol essentiality despite its cardiovascular notoriety: the problem is transport excess (LDL burden), not the molecule. Keep synthesis, disposal and carriage conceptually separate for the lipoprotein lessons ahead.",
+   "say": "Vitamin D completes the steroid family from cholesterol in skin. Bile acids, steroids and vitamin D justify cholesterol essentiality. The problem is transport excess, not the molecule itself.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cholesterol descendant",
+     "First committed enzyme",
+     "Deficiency flag"
+    ],
+    "rows": [
+     [
+      "Bile acids",
+      "7-alpha hydroxylase",
+      "Fat malabsorption when bile fails"
+     ],
+     [
+      "Cortisol and aldosterone",
+      "CYP11A1 via StAR",
+      "CAH virilisation patterns"
+     ],
+     [
+      "Vitamin D (calcitriol)",
+      "Skin photolysis, then hydroxylases",
+      "Rickets and osteomalacia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

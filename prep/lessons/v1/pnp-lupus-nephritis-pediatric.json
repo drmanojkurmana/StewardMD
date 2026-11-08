@@ -1,0 +1,153 @@
+{
+  "id": "pnp-lupus-nephritis-pediatric",
+  "title": "Pediatric Lupus Nephritis: ISN/RPS Classes, Induction and Targeted Therapies",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Glomerular Diseases, Nephrotic Syndrome and Nephritis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Renal involvement in juvenile systemic lupus is remarkably common and dictates long-term survival.",
+      "tx": "Assess pediatric patients early recognizing the high **Pediatric SLE renal involvement frequency** across clinical cohorts. Clinically evident renal involvement occurs in 50-80% of children with systemic lupus erythematosus, demonstrating substantially greater proliferative severity, higher rates of acute kidney injury, and accelerated progression compared with adult-onset disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pediatric Lupus Nephritis",
+          "points": [
+            "Renal involvement in 50-80% of children",
+            "Higher frequency of diffuse proliferative class IV",
+            "More aggressive inflammatory damage and hypertension"
+          ]
+        },
+        "right": {
+          "title": "Adult Lupus Nephritis",
+          "points": [
+            "Renal involvement in 30-50% of adults",
+            "Higher proportion of membranous class V lesions",
+            "Lower lifetime cumulative glucocorticoid exposure burden"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Standardized histological staging groups glomerular injury into six prognostic classes based on biopsy findings.",
+      "tx": "Classify renal tissue architecture utilizing the consensus **ISN/RPS pathological classification classes** on light microscopy. Histological categories comprise Class I (minimal mesangial), Class II (mesangial proliferative), Class III (focal proliferative < 50% glomeruli), Class IV (diffuse proliferative >= 50%), Class V (membranous), and Class VI (advanced sclerosing >= 90%), establishing the foundation for protocolized immunosuppression.",
+      "vis": {
+        "kind": "table",
+        "title": "ISN/RPS Lupus Nephritis Histological Classification",
+        "cols": ["Class", "Glomerular Pathology", "Clinical Picture"],
+        "rows": [
+          ["Class I", "Minimal mesangial alterations", "Normal urinalysis, normal renal function"],
+          ["Class II", "Mesangial hypercellularity", "Microscopic hematuria, low-grade proteinuria"],
+          ["Class III", "Focal proliferative (< 50% glomeruli)", "Active urinary sediment, hypertension"],
+          ["Class IV", "Diffuse proliferative (>= 50% glomeruli)", "Nephritic/nephrotic syndrome, rapid decline"],
+          ["Class V", "Subepithelial immune deposits", "Nephrotic-range proteinuria"],
+          ["Class VI", "Advanced global glomerulosclerosis (>= 90%)", "Chronic renal failure, bland urine sediment"]
+        ]
+      }
+    },
+    {
+      "say": "Intensive induction therapy arrests severe proliferative immune injury to preserve surviving nephrons.",
+      "tx": "Initiate urgent immunosuppression following evidence-based **Class III/IV proliferative induction protocols** without delay. Proliferative induction therapy combines intravenous pulse methylprednisolone followed by high-dose oral corticosteroids with either mycophenolate mofetil at 1200 mg/m²/day or intravenous pulsed cyclophosphamide according to low-dose Euro-Lupus protocols, successfully achieving early disease remission in aggressive presentations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "biop", "label": "Biopsy Confirmed Class III or IV LN"},
+          {"id": "pulse", "label": "IV Pulse Methylprednisolone (10-30 mg/kg x 3 doses)"},
+          {"id": "ind", "label": "Oral Corticosteroids + MMF 1200 mg/m²/day or IV Cyclophosphamide"}
+        ],
+        "edges": [
+          ["biop", "pulse"],
+          ["pulse", "ind"]
+        ]
+      }
+    },
+    {
+      "say": "Biologic add-on therapy enhances renal response rates while reducing toxic corticosteroid dependence.",
+      "tx": "Incorporate approved targeted biologics using **Belimumab add-on therapy** for refractory or active disease. Belimumab, an anti-BAFF/BLyS human monoclonal antibody, is approved as targeted add-on therapy for active lupus nephritis in children >= 5 years, binding soluble B-lymphocyte stimulator to improve primary renal response rates while significantly reducing maintenance corticosteroid exposure.",
+      "vis": {
+        "kind": "table",
+        "title": "Belimumab Monoclonal Antibody Specifications",
+        "cols": ["Parameter", "Clinical Specification", "Mechanism"],
+        "rows": [
+          ["Target Ligand", "Soluble BAFF / BLyS cytokine", "Inhibits autoreactive B-cell survival"],
+          ["Approved Age", "Children >= 5 years of age", "Reduces autoreactive plasmablast differentiation"],
+          ["Dosing Regimen", "10 mg/kg IV at weeks 0, 2, 4, then monthly", "Decreases systemic autoantibody production"],
+          ["Therapeutic Goal", "Corticosteroid-sparing renal remission", "Reduces relapses and chronic organ damage"]
+        ]
+      }
+    },
+    {
+      "say": "The diagnostic pathognomonic hallmark on biopsy is intense multi-immunoglobulin and complement deposition.",
+      "tx": "Verify immune complex composition by demonstrating the pathognomonic **Full house immunofluorescence signature** under microscopy. Diagnostic renal immunofluorescence in pediatric lupus nephritis reveals intense granular full house staining positive for IgG, IgA, IgM, C3, and C1q deposited densely along the glomerular capillary walls and throughout the mesangial matrix, confirming systemic immune complex deposition.",
+      "vis": {
+        "kind": "table",
+        "title": "Glomerular Immunofluorescence Staining Profile",
+        "cols": ["Marker", "Deposition Pattern", "Diagnostic Significance"],
+        "rows": [
+          ["IgG & IgM", "Granular peripheral capillary loops", "Reflects circulating immune-complex entrapment"],
+          ["IgA", "Mesangial granular staining", "Distinguishes SLE from pure post-infectious GN"],
+          ["C3 & C1q", "Capillary wall and mesangium", "Confirms classical complement pathway activation"],
+          ["Overall", "Intense full house staining", "Pathognomonic hallmark of lupus glomerulonephritis"]
+        ]
+      }
+    },
+    {
+      "say": "Serological markers correlate closely with histologic activity and warn of approaching relapses.",
+      "tx": "Track disease activity non-invasively through systematic **Anti-dsDNA and complement monitoring** at each visit. Proliferative inflammatory exacerbations correlate tightly with rising anti-dsDNA antibody titers and marked consumption of serum complement C3 and C4 components, signaling active complement activation in glomeruli and providing an early alert before overt worsening of clinical proteinuria occurs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Active Proliferative Flare",
+          "points": [
+            "Markedly elevated or rising anti-dsDNA titers",
+            "Depressed serum complement C3 and C4 levels",
+            "Active urine sediment with dysmorphic RBCs and casts"
+          ]
+        },
+        "right": {
+          "title": "Serological Remission",
+          "points": [
+            "Low, falling or negative anti-dsDNA titers",
+            "Normalization of both serum C3 and C4 levels",
+            "Resolution of active microscopic hematuria"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Universal antimalarial coverage forms the essential background shield for all pediatric patients.",
+      "tx": "Prescribe disease-modifying therapy ensuring **Hydroxychloroquine baseline protection** is maintained continuously. Every child diagnosed with lupus nephritis must receive daily oral hydroxychloroquine at 3-5 mg/kg/day up to a maximum daily dose of 200-400 mg unless strictly contraindicated, providing vital protection against severe disease flares, arterial thrombosis, and progressive irreversible chronic renal damage.",
+      "vis": {
+        "kind": "table",
+        "title": "Hydroxychloroquine Baseline Therapy Parameters",
+        "cols": ["Aspect", "Target Parameter", "Clinical Benefit"],
+        "rows": [
+          ["Weight-Based Dose", "3-5 mg/kg/day (maximum 200-400 mg)", "Optimizes efficacy while preventing maculopathy"],
+          ["Ophthalmology", "Baseline and annual visual screening", "Monitors for rare retinal toxicity"],
+          ["Flares & Damage", "Significant reduction in renal relapses", "Inhibits endosomal TLR-7 and TLR-9 signalling"],
+          ["Vascular Benefit", "Decreases antiphospholipid thrombosis risk", "Improves lipid profiles and vascular compliance"]
+        ]
+      }
+    },
+    {
+      "say": "Maintenance therapy must be sustained over years to avoid debilitating relapses and graft loss.",
+      "tx": "Structure prolonged secondary prevention following the standard **Maintenance immunosuppression duration** guidelines. Following successful induction, maintenance immunosuppression with oral mycophenolate mofetil or azathioprine paired with low-dose oral prednisone must be sustained continuously for at least 3-5 years, preventing late nephritic relapses before any cautious dose taper is contemplated.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "rem", "label": "Induction Remission Achieved (Months 3-6)"},
+          {"id": "maint", "label": "Oral MMF or Azathioprine + Low-Dose Prednisone"},
+          {"id": "dur", "label": "Continue for Minimum 3-5 Years"},
+          {"id": "taper", "label": "Slow Monitored Taper if Quiescent"}
+        ],
+        "edges": [
+          ["rem", "maint"],
+          ["maint", "dur"],
+          ["dur", "taper"]
+        ]
+      }
+    }
+  ]
+}
