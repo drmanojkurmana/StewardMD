@@ -26,33 +26,10 @@
       "say": "Azoospermia requires rigorous laboratory verification before assigning a definitive diagnosis. Examining two consecutive semen specimens centrifuged at 3000g for 15 minutes must show zero spermatozoa in the pellet.",
       "tx": "Establishing a formal **azoospermia definition** requires strict laboratory **verification** on at least 2 separate ejaculates. Thorough microscopic inspection of the **centrifuged pellet** following centrifugation at 3000g for 15 minutes must reveal zero spermatozoa before diagnosing complete absence of ejaculated gametes. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "m1",
-            "label": "Initial semen analysis shows zero sperm"
-          },
-          {
-            "id": "m2",
-            "label": "Centrifugation at 3000g for 15 minutes"
-          },
-          {
-            "id": "m3",
-            "label": "Examination of pellet confirms azoospermia"
-          }
-        ],
-        "edges": [
-          [
-            "m1",
-            "m2",
-            "Repeat specimen"
-          ],
-          [
-            "m2",
-            "m3",
-            "Pellet analysis"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/female-infertility-fig1.webp",
+        "alt": "Four-panel couple infertility workup covering ovulatory, tubal and uterine testing and semen analysis.",
+        "caption": "Couple workup panels including semen testing. Credit: StewardMD."
       }
     },
     {
@@ -84,39 +61,10 @@
       "say": "Obstructive azoospermia features normal hormone production alongside a physical block. The testes retain normal size, serum FSH remains normal, and physical examination reveals epididymal distension.",
       "tx": "Preserved spermatogenesis characterizes **obstructive azoospermia**, where bilateral testicular volume exceeds 18 mL alongside completely **normal FSH**. Physical examination detects tense, indurated **epididymal distension** caused by fluid backpressure from a mechanical obstruction spanning from the rete testis to ejaculatory ducts. Accurate clinical assessment and rigorous monitoring guide optimal therapeutic decisions in reproductive medicine.",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Clinical Parameter",
-          "Obstructive Azoospermia",
-          "Non-Obstructive Azoospermia",
-          "Diagnostic Significance"
-        ],
-        "rows": [
-          [
-            "Testicular Volume",
-            "Normal (>=18 mL)",
-            "Reduced (<15 mL)",
-            "Assesses primary germ cell mass"
-          ],
-          [
-            "Serum FSH",
-            "Normal (1.5 to 8 IU/L)",
-            "Elevated (>7.6 to 10 IU/L)",
-            "Evaluates pituitary feedback"
-          ],
-          [
-            "Epididymal Exam",
-            "Tense, dilated, indurated",
-            "Soft, flat, collapsed",
-            "Identifies ductal engorgement"
-          ],
-          [
-            "Sperm Retrieval",
-            "Near 100 percent (PESA/MESA)",
-            "40 to 60 percent (micro-TESE)",
-            "Dictates surgical intervention"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/male-infertility-fig1.webp",
+        "alt": "Illustration of a varicocele, vas deferens obstruction and abnormal sperm shapes in male infertility.",
+        "caption": "Varicocele, duct obstruction and abnormal sperm shapes. Credit: StewardMD."
       }
     },
     {
