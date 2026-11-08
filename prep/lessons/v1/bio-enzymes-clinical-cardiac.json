@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "bio-enzymes",
+ "subject": "biochemistry",
+ "title": "Cardiac and muscle enzymology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Cardiac **troponins** I and T (myofibrillar regulatory subunits, cardiac isoforms antibody distinct) are the most specific and sensitive necrosis markers: detectable three to six hours after infarction (high sensitivity assays within one to three hours with delta algorithms), peaking about twenty four hours, persisting seven to fourteen days (T longer, renal failure elevation caveat, skeletal re-expression in myopathies for T more than I). Rise and fall with ischaemic context defines infarction (universal definition), while stable elevation means injury (myocarditis, pulmonary embolism strain, sepsis, tachyarrhythmia demand) without acute plaque event adjudication.",
+   "say": "Troponins are the most specific necrosis markers, persisting seven to fourteen days after infarction. Rise and fall with ischaemic context defines infarction, while stable elevation means injury without plaque adjudication.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Rises",
+     "Stays up",
+     "Best use today"
+    ],
+    "rows": [
+     [
+      "High sensitivity troponin I/T",
+      "1 to 6 hours (assay dependent)",
+      "7 to 14 days",
+      "Diagnose and rule out MI (0/1 or 0/2 hour deltas)"
+     ],
+     [
+      "CK-MB (mass)",
+      "4 to 8 hours",
+      "2 to 3 days",
+      "Reinfarction timing, historical comparator"
+     ],
+     [
+      "Myoglobin",
+      "1 to 4 hours (earliest)",
+      "Under 24 hours",
+      "Sensitive, nonspecific; largely retired"
+     ],
+     [
+      "BNP and NT-proBNP (not enzymes)",
+      "Wall stress hours",
+      "Variable with renal, age, obesity",
+      "Heart failure diagnosis and prognosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Marker kinetics timestamp events enzymes cannot see: **myoglobin** earliest but ubiquitous (any muscle injury), CK-MB intermediate with reinfarction niche (falls fast enough to re-rise detectably while troponin still plateaued), AST and LDH flipped patterns retired to history except haemolysis and tumour contexts. High sensitivity troponin deltas (absolute change in one to two hours) outperform single cutoffs, and ninety ninth percentile upper reference limits sex specific increasingly, laboratory literacy now examineable bedside.",
+   "say": "High sensitivity troponin deltas outperform single cutoffs with sex specific reference limits increasingly. CK-MB retains a reinfarction timing niche because it falls fast enough to re-rise detectably afterwards.",
+   "vis": {
+    "kind": "flow",
+    "title": "Timestamp by marker windows",
+    "nodes": [
+     {
+      "id": "early",
+      "label": "Hours 1 to 6: hs-troponin deltas decide"
+     },
+     {
+      "id": "mid",
+      "label": "Day 1 to 3: CK-MB window for reinfarction"
+     },
+     {
+      "id": "late",
+      "label": "Week 1 to 2: troponin still testifies"
+     }
+    ],
+    "edges": [
+     [
+      "early",
+      "mid"
+     ],
+     [
+      "mid",
+      "late"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**BNP** (active, thirty two amino acids, neprilysin degraded, sacubitril raises measured BNP while NT-proBNP unaffected monitoring trick) and NT-proBNP (inactive fragment, renal cleared, age stratified cutoffs) report ventricular wall stress, diagnosing breathlessness (very low excludes heart failure usefully), prognosticating, and guiding therapy modestly; obesity lowers both (natriuretic handicap), atrial fibrillation, age, renal failure and sepsis raise them. They are peptide hormones, not enzymes, a classification trap built into this lesson title deliberately.",
+   "say": "BNP peptides report wall stress and exclude heart failure usefully when very low, though obesity lowers and renal failure raises them. They are hormones, not enzymes, a classification trap deliberately.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "BNP (active peptide)",
+     "points": [
+      "Neprilysin degraded (sacubitril raises assay)",
+      "Shorter half life about 20 minutes",
+      "Physiology and drug mirror"
+     ]
+    },
+    "right": {
+     "title": "NT-proBNP (inactive fragment)",
+     "points": [
+      "Renal cleared, longer half life",
+      "Sacubitril monitoring preferred analyte",
+      "Age stratified cutoffs higher"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Skeletal muscle enzymology grades injury breadth: total **CK** thousands to hundreds of thousands in rhabdomyolysis (crush, exertion, heat stroke, statins plus interacting inhibitors, hypothyroidism, seizures, immobility) with myoglobinuric acute kidney injury (pigmented granular casts, heme iron tubular toxicity, volume depletion triad) treated by aggressive fluids and cause removal; aldolase adds myositis sensitivity historically, transaminases rise from muscle (AST over ALT) mimicking hepatitis until CK separates sources, a weekly ward trap.",
+   "say": "CK grades rhabdomyolysis breadth with myoglobinuric kidney injury treated by aggressive fluids. Transaminases rise from muscle mimicking hepatitis until CK separates sources in a weekly ward trap scenario.",
+   "vis": null
+  },
+  {
+   "tx": "**Duchenne dystrophy** CK (tens of thousands from early childhood, pseudohypertrophy calves, Gower sign) versus inflammatory myopathies (CK plus aldolase, autoantibodies anti-HMGCR statin associated necrotising, antisynthetase lung) versus metabolic myopathies (McArdle flat lactate, CPT II adult attacks from prior modules) show enzymes stratifying neurology referrals before biopsy or genetics. Asymptomatic hyperCKaemia workup (hypothyroidism, drugs, exercise timing, macro-CK) prevents biopsy overuse when algorithm followed.",
+   "say": "Duchenne, inflammatory and metabolic myopathies stratify by enzyme patterns before biopsy or genetics referrals. Asymptomatic hyperCKaemia algorithms prevent biopsy overuse when hypothyroidism and drugs are excluded first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle pattern",
+     "CK scale",
+     "Next discriminator"
+    ],
+    "rows": [
+     [
+      "Duchenne and Becker dystrophy",
+      "Very high (10 to 100x) early",
+      "Genetics dystrophin, biopsy historical"
+     ],
+     [
+      "Inflammatory myopathy",
+      "High (5 to 50x), aldolase too",
+      "Antibodies, MRI, biopsy, lung screen"
+     ],
+     [
+      "Rhabdomyolysis (acquired)",
+      "Extreme (often over 10,000)",
+      "Cause hunt, kidney protection fluids"
+     ],
+     [
+      "Hypothyroid myopathy",
+      "Moderate (5 to 10x)",
+      "TSH corrects CK with thyroxine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Half lives** discipline repeat testing: enzymes clear by reticuloendothelial and renal routes at characteristic rates (amylase hours, CK about a day and a half functionally, troponin biphasic weeks tail), so falling slopes confirm single insults while re-elevations announce extension, reperfusion washout spikes after thrombolysis or intervention historically, and chronic plateaus announce myopathy, renal retention or macro enzyme artefacts. Liver, pancreas and bone enzymes next extend the same leakage, induction and clearance grammar to cholestasis and metabolic bone disease.",
+   "say": "Half lives discipline repeat testing, with falling slopes confirming single insults and plateaus announcing chronic artefacts. Liver and bone enzymes next extend the same grammar to cholestasis patterns diagnostically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Slope tells the story",
+    "nodes": [
+     {
+      "id": "fall",
+      "label": "Falling slope: single insult resolving"
+     },
+     {
+      "id": "re",
+      "label": "Re-rise: extension or reinfarction"
+     },
+     {
+      "id": "flat",
+      "label": "Plateau: chronic, renal or macro enzyme"
+     }
+    ],
+    "edges": [
+     [
+      "fall",
+      "re"
+     ],
+     [
+      "re",
+      "flat"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

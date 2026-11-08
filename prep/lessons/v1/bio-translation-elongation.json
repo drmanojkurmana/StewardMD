@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "module": "bio-translation",
+ "subject": "biochemistry",
+ "title": "Elongation, termination and ribosome drugs",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Elongation cycles three sites (A aminoacyl entry, P peptidyl holding, E exit deacylated) at about fifteen to twenty residues per second bacteria (four to six eukaryotes): EF-Tu (eEF1A) GTP delivers charged tRNA, codon recognition triggers GTPase after proofreading delay (kinetic proofreading discarding near cognates twice, at delivery and after hydrolysis before accommodation), peptide bond forms, **EF-G** (eEF2) GTP translocates ribosome one codon ratcheting subunits, E tRNA ejects. Fidelity about one error per ten thousand residues balances speed against synthetase and initial selection layers multiplicatively.",
+   "say": "Elongation cycles A, P and E sites with kinetic proofreading discarding near cognates twice before accommodation. EF-G translocates one codon per GTP at fifteen to twenty residues per second bacterially.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-translation-gen1.webp",
+    "alt": "A large ribosome holds mRNA with tRNAs in the A and P sites while a new amino acid joins the growing chain.",
+    "caption": "Ribosome complex showing tRNA sites and peptide growth, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Peptidyl transferase** is twenty three/twenty eight S rRNA ribozyme (no protein within eighteen angstroms of the bond, substrate positioning and ribose two prime hydroxyl proton shuttle catalysis, entropy trap), attacking P site ester by A site alpha amino forming peptide and deacylated P tRNA without ATP or GTP at chemistry step. Chloramphenicol binds bacterial peptidyl centre blocking A site amino acid accommodation.",
+   "say": "Peptidyl transferase is ribosomal RNA ribozyme costing no nucleotide at the bond step itself. Chloramphenicol and linezolid bind its bacterial pocket with grey baby and mitochondrial toxicities respectively duration dependent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Elongation factor or step",
+     "GTP/ATP cost",
+     "Drug or toxin anchor"
+    ],
+    "rows": [
+     [
+      "EF-Tu/eEF1A delivery plus proofreading",
+      "1 GTP",
+      "Kirromycin traps EF-Tu experimental; aminoglycosides corrupt decoding readout"
+     ],
+     [
+      "Peptidyl transferase (rRNA)",
+      "None at bond step",
+      "Chloramphenicol, linezolid (50S PTC)"
+     ],
+     [
+      "EF-G/eEF2 translocation",
+      "1 GTP",
+      "Fusidic acid traps EF-G; diphtheria toxin ADP-ribosylates eEF2"
+     ],
+     [
+      "Termination (RF1/2/3 bacteria; eRF1/3)",
+      "GTP in recycling",
+      "Aminoglycoside readthrough, ataluren investigational"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Termination**: stop codons enter A site read by protein release factors mimicking tRNA shape (bacterial RF1 UAA/UAG, RF2 UAA/UGA, RF3 GTP recycling; eukaryote eRF1 all three plus eRF3 GTP), GGQ motif hydrolysing peptidyl tRNA ester with water releasing finished protein, ribosome recycling (RRF plus EF-G bacteria, ABCE1 ATP eukaryotes) splits subunits, mRNA released or reinitiated polysomally. Nonsense mediated decay (prior processing) destroys premature stop messages whose stop lies over fifty nucleotides upstream of last exon junction (beta globin early nonsense null versus late nonsense truncated dominant thalassaemia distinction clinically).",
+   "say": "Release factors mimic tRNA shape hydrolysing finished chains with water at stop codons recognised directly. Premature stop geography decides decay versus truncated dominance in beta globin diseases clinically distinguished.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal termination (stop in last exon context)",
+     "points": [
+      "eRF1 reads stop, water hydrolyses",
+      "Full length protein released",
+      "Message recycled or decayed normally"
+     ]
+    },
+    "right": {
+     "title": "Premature termination (NMD geography)",
+     "points": [
+      "Stop over 50 nt before last junction: decay",
+      "Late truncations escape: dominant toxins possible",
+      "Readthrough drugs context dependent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Thirty S antibiotics corrupt initiation and decoding: **aminoglycosides** (gentamicin, amikacin, streptomycin historical TB) bind sixteen S decoding centre flipping adenosines to accept near cognates (misreading) and block translocation bactericidally (oxygen dependent uptake, concentration dependent killing, post antibiotic effect; nephrotoxicity and ototoxicity cochlear/vestibular, mitochondrial sixteen S like deafness mutation synergy), tetracyclines block A site tRNA entry bacteriostatically (chelation calcium/iron/antacids, teeth discoloration under eight and pregnancy, photosensitivity, tigecycline glycylcycline evading pumps), spectinomycin translocation neighbour mechanistically.",
+   "say": "Aminoglycosides corrupt decoding bactericidally with kidney and ear toxicities, while tetracyclines block A site entry bacteriostatically with teeth and chelation cautions. Oxygen dependent uptake governs aminoglycoside killing concentration dependently.",
+   "vis": null
+  },
+  {
+   "tx": "Fifty S antibiotics block tunnel and transfer: **macrolides** (erythromycin, azithromycin) plug nascent peptide exit tunnel context specifically stalling leader sequences (bacteriostatic, motilin agonist gastro upset, CYP3A4 erythro/clarithro interactions, QT), clindamycin overlapping (C. difficile colitis risk signature), streptogramins synergistic pairs, pleuromutilins (lefamulin) PTC distinct, fusidic acid EF-G trapping in staphylococcal skin and bone niches. Selectivity rests on bacterial seventy S versus eukaryotic eighty S divergence, mitochondrial seventy S like ribosomes paying collateral (chloramphenicol marrow, linezolid lactic/optic, aminoglycoside deafness genetics) unifying adverse effect stems.",
+   "say": "Macrolides plug exit tunnels context specifically, while mitochondrial ribosome similarity pays collateral across antibiotic classes unified. Selectivity rests on seventy versus eighty S divergence therapeutically exploited daily in prescribing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ribosome drug",
+     "Subunit site",
+     "One line caution"
+    ],
+    "rows": [
+     [
+      "Aminoglycosides",
+      "30S decoding centre",
+      "Kidney and ear; once daily concentration killing"
+     ],
+     [
+      "Tetracyclines (tigecycline)",
+      "30S A site block",
+      "Teeth under 8, pregnancy; chelation absorption"
+     ],
+     [
+      "Macrolides, clindamycin",
+      "50S exit tunnel",
+      "QT, CYP3A4 (erythro/clarithro); C. diff (clinda)"
+     ],
+     [
+      "Chloramphenicol, linezolid",
+      "50S peptidyl centre",
+      "Grey baby and aplasia; serotonin and optic (linezolid)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Polysomes** (many ribosomes per mRNA, spaced eighty nucleotides, circularised by PABP eIF4G) amplify output, free (cytosolic proteins) versus bound rough ER (secretory/membrane, next lesson targeting) geography decided by nascent signal sequence emergence, hibernating ribosomes in starvation and oocytes stored. Ribosome profiling (footprint sequencing) maps translation genome wide (drug mechanisms, upstream ORFs, stall sites in neurodegeneration repeat expansions RAN translation without AUG in C9orf72 and Huntington frontiers), completing elongation from chemistry to systems measurement before mutations reinterpret every step pathologically.",
+   "say": "Polysomes amplify output geographically between free and rough endoplasmic destinations decided by signal emergence. Ribosome profiling maps translation genome wide, completing elongation from chemistry to systems measurement currently.",
+   "vis": {
+    "kind": "flow",
+    "title": "One message, many ribosomes",
+    "nodes": [
+     {
+      "id": "cap",
+      "label": "Cap recruits first ribosome"
+     },
+     {
+      "id": "poly",
+      "label": "Polysome queue translates simultaneously"
+     },
+     {
+      "id": "sig",
+      "label": "Signal emerges: free stays, secretory docks ER"
+     }
+    ],
+    "edges": [
+     [
+      "cap",
+      "poly"
+     ],
+     [
+      "poly",
+      "sig"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,81 @@
+{
+ "v": 1,
+ "module": "bio-oxidation-etc",
+ "subject": "biochemistry",
+ "title": "Inhibitors, poisons and clinical failure",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Site map first, antidotes second: **rotenone** and amobarbital block complex I (NADH backs up, succinate bypasses experimentally), antimycin A blocks complex III Qi (both upstream carriers reduce, cytochrome c oxidises paradoxically downstream starved), cyanide, carbon monoxide, azide and sulfide block complex IV (all carriers reduce fully, venous oxygen high), oligomycin blocks synthase (respiration stalls secondarily, uncoupler restores oxygen use without ATP), uncouplers collapse gradient (respiration maximal, ATP minimal, heat maximal).",
+   "say": "Rotenone blocks complex one, antimycin complex three, cyanide complex four, oligomycin the synthase, and uncouplers the gradient itself. Site first predicts carrier patterns before antidotes in poisoning stems accurately.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Blocker", "Site", "Oxygen use after block"],
+    "rows": [
+     ["Rotenone, amobarbital", "Complex I", "Restored partly by succinate (complex II entry)"],
+     ["Antimycin A", "Complex III", "Stalled; downstream starved"],
+     ["Cyanide, CO, azide", "Complex IV", "Stalled; tissues cannot extract oxygen"],
+     ["Oligomycin", "ATP synthase", "Stalled secondarily; uncoupler restores use without ATP"],
+     ["Dinitrophenol, UCP1 (physiological)", "Gradient leak", "Maximal; heat replaces ATP"]
+    ]
+   }
+  },
+  {
+   "tx": "**Cyanide** (smoke inhalation, bitter almond unreliable anosmia genetics, nitroprusside infusions, apricot kernels amygdalin, industrial) binds ferric cytochrome a3 halting extraction despite normal PaO2: severe lactic acidosis, venous blood scarlet, seizures and cardiovascular collapse. Hydroxocobalamin (binds cyanide to cyanocobalamin, safe in smoke CO co-exposure, reddens urine and interferes colorimetric assays) is first line; sodium thiosulfate donates sulfur to rhodanese (thiocyanate renal excretion); nitrites deliberately make methaemoglobin to bait cyanide away but endanger CO poisoned and hypoxic patients, sequencing examiners probe.",
+   "say": "Cyanide halts oxygen extraction despite normal PaO2 with scarlet venous blood and severe lactic acidosis. Hydroxocobalamin is first line, thiosulfate donates sulfur, and nitrites endanger carbon monoxide co-exposure cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Hydroxocobalamin route (preferred in smoke)", "points": ["Binds cyanide directly", "No methaemoglobin cost", "Red urine, assay interference warns lab"]},
+    "right": {"title": "Nitrite route (caution)", "points": ["Methaemoglobin baits cyanide off oxidase", "Worsens CO carriage and hypoxia", "Follow with thiosulfate sulfur donation"]
+    }
+   }
+  },
+  {
+   "tx": "**Carbon monoxide** poisons two targets (haemoglobin carriage two hundred plus fold, complex IV at high tissue loads) from faulty heaters, shisha, vehicle exhaust and fires: headache, dizziness, cherry red lividity late and unreliable, carboxyhaemoglobin by co-oximetry (pulse oximetry and calculated saturations lie), delayed neuropsychiatric syndrome days later. One hundred percent oxygen by non rebreather (elimination half life from about five hours air to about one hour) and hyperbaric referral by coma, pregnancy, cardiac or severe thresholds centre criteria decide.",
+   "say": "Carbon monoxide poisons haemoglobin and complex four together with co-oximetry diagnosis because oximetry lies. One hundred percent oxygen shortens elimination, with hyperbaric referral by centre thresholds deciding.",
+   "vis": null
+  },
+  {
+   "tx": "**Metformin** weakly inhibits complex I and hepatic glycerophosphate shuttle at therapeutic exposure, trivial until kidney failure, sepsis, hypoxia or contrast illness accumulates drug and lactate together (metformin associated lactic acidosis, dialysis clears both drug and acid in extremis). Salicylate uncoupling plus direct medullary stimulation mixes respiratory alkalosis with anion gap acidosis and hyperthermia; ethanol and isopropanol (ketosis without acidosis, osmolar gap) complete toxic alcohol respirometry differentials from the nucleotide era glycol poisons ahead.",
+   "say": "Metformin weakly inhibits complex one until kidney failure accumulates drug and lactate together for dialysis consideration. Salicylate uncouples with mixed acid base chaos completing toxic differentials across wards.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Poison pattern", "Chain or gradient lesion", "Bedside flag"],
+    "rows": [
+     ["Cyanide", "Complex IV locked, extraction zero", "Scarlet veins, lactate extreme, PaO2 normal"],
+     ["Carbon monoxide", "Haemoglobin plus complex IV", "Co-oximetry carboxyhaemoglobin; oximeter lies"],
+     ["Metformin accumulation", "Weak complex I, clearance failed", "Lactate with AKI and sepsis; dialysis threshold"],
+     ["Salicylate (aspirin overdose)", "Uncoupler plus respiratory centre drive", "Alkalosis plus gap acidosis, fever, tinnitus"]
+    ]
+   }
+  },
+  {
+   "tx": "Inherited chain failure presents by energy hungry organs: **Leber hereditary optic neuropathy** (mtDNA complex I genes ND1/4/6, maternal, young men sequential painless central vision loss, telangiectatic disc pseudoedema, smoking and alcohol precipitants, idebenone window), Leigh syndrome (subacute necrotising encephalomyelopathy, multiple genes nuclear and mtDNA, brainstem lesions, lactate), MELAS (m.3243 tRNA leucine, stroke like episodes crossing vascular territories, seizures, diabetes, deafness, arginine acute therapy debated), Kearns-Sayre deletions (ophthalmoplegia, pigmentary retinopathy, heart block pacing). Heteroplasmy thresholds explain maternal relatives grading from diabetes/deafness to lethal infancy.",
+   "say": "Leber optic neuropathy, Leigh, MELAS and Kearns-Sayre present by energy hungry organs with maternal heteroplasmy grading severity. Heart block pacing and stroke like episode recognition save function and life.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "LHON (complex I mtDNA)", "points": ["Young men, sequential painless central blindness", "Maternal inheritance", "Avoid smoking and excess alcohol"]},
+    "right": {"title": "MELAS (tRNA mtDNA)", "points": ["Stroke like episodes, seizures, lactate", "Diabetes and deafness cluster", "MRI crosses vascular territories"]
+    }
+   }
+  },
+  {
+   "tx": "Mitochondrial medicine principles close oxidation: maternal inheritance with **heteroplasmy** (mixed mutant loads, threshold effect, replicative segregation varying tissues and siblings), exercise intolerance with premature lactate rise, multisystem flags (ptosis ophthalmoplegia, retinitis, cardiomyopathy, endocrinopathies, renal tubulopathy), muscle biopsy ragged red fibres (modified Gomori trichrome subsarcolemmal accumulation, COX negative fibres mosaic), genetics on blood may miss urinary or buccal loads, valproate avoided in POLG disease (liver failure), and metformin, aminoglycosides (m.1555 deafness mutation) and linezolid (mitochondrial ribosome) used cautiously by genotype.",
+   "say": "Heteroplasmy thresholds explain maternal grading across siblings and tissues variably. Valproate is avoided in POLG disease, and aminoglycoside deafness mutation screening prevents iatrogenic mitochondrial injury families.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mitochondrial red flag cluster",
+    "nodes": [
+     {"id": "eye", "label": "Ptosis, ophthalmoplegia, retinitis, optic atrophy"},
+     {"id": "sys", "label": "Diabetes, deafness, heart block, short stature"},
+     {"id": "lac", "label": "Lactate rises early with exercise"},
+     {"id": "mat", "label": "Maternal pattern: test mtDNA (urine if blood negative)"}
+    ],
+    "edges": [["eye", "sys"], ["sys", "lac"], ["lac", "mat"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

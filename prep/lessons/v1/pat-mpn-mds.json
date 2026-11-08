@@ -6,18 +6,18 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Myeloproliferative neoplasms** are clonal stem cell proliferations overproducing mature blood cells: polycythaemia vera (red cells), essential thrombocythaemia (platelets) and primary myelofibrosis (fibrotic marrow with leukoerythroblastic blood). JAK2 V617F drives most cases through constitutive signalling, with CALR and MPL mutations filling many JAK2 negative thrombocythaemia and fibrosis cases.",
-   "say": "Myeloproliferative clones overproduce mature cells under JAK2 family signalling. Red, platelet or fibrotic phenotypes share mutations. CALR and MPL fill JAK2 gaps.",
+   "tx": "**Myeloproliferative neoplasms** are clonal stem cell disorders where the marrow overproduces mature blood cells over time. Polycythaemia vera increases red cells, essential thrombocythaemia increases platelets, and primary myelofibrosis replaces marrow with fibrosis. The **JAK2 V617F** mutation drives most cases because it switches on signalling without normal growth factor control. CALR and MPL mutations explain many cases where JAK2 testing returns negative in clinic.",
+   "say": "Myeloproliferative neoplasms are clonal disorders where stem cells overproduce mature blood cells without normal regulatory control. JAK2 signalling is central because this mutation activates growth pathways continuously in the marrow clone. Different phenotypes develop because the clone expands mainly red cells, platelets or fibrotic marrow tissue.",
    "vis": null
   },
   {
-   "tx": "**Polycythaemia vera** raises red mass with low erythropoietin, panmyelosis, aquagenaic itching after showers, erythromelalgia burning red feet, gout and thrombotic risk in unusual sites like hepatic veins (Budd Chiari). Venesection to target haematocrit plus antiplatelet therapy prevents clots, distinguishing true vera from secondary erythrocytosis of hypoxia or EPO tumours where EPO rises.",
-   "say": "True polycythaemia suppresses erythropoietin, itches after showers and clots in odd veins. Secondary red excess raises erythropoietin from hypoxia or tumours. Hormone level splits them.",
+   "tx": "**Polycythaemia vera** increases red cell mass while erythropoietin levels fall because the clone grows without hormonal drive. Patients report aquagenic itching after showers, burning erythromelalgia in the feet, gout and thrombosis in unusual veins. Hepatic vein thrombosis causing **Budd Chiari syndrome** is a classic presentation that examiners favour in stems. Venesection and antiplatelet therapy reduce thrombotic risk, while secondary erythrocytosis shows raised erythropoietin from hypoxia or tumours.",
+   "say": "Polycythaemia vera is a clonal disease where red cell mass rises while erythropoietin levels become suppressed appropriately. Aquagenic itching is characteristic because patients notice intense itching after warm showers or baths. Hormone measurement helps clinicians separate true vera from secondary causes driven by hypoxia.",
    "vis": null
   },
   {
-   "tx": "**Primary myelofibrosis** replaces marrow with reticulin and collagen so blood production moves to spleen and liver (extramedullary), causing massive splenomegaly, teardrop red cells (dacrocytes), leukoerythroblastic film and constitutional sweats and weight loss. Dry tap on aspiration is a clue, and transformation to acute leukaemia ends many courses.",
-   "say": "Fibrotic marrows squeeze teardrop cells out and move blood making to a huge spleen. Dry taps and dacrocytes signpost myelofibrosis. Leukaemia transforms it fatally.",
+   "tx": "**Primary myelofibrosis** replaces normal marrow with reticulin and collagen, so blood production shifts to spleen and liver. This extramedullary production causes massive splenomegaly, while squeezed red cells become teardrop shaped **dacrocytes** in blood. The film also shows a **leukoerythroblastic picture** with nucleated red cells and immature myeloid precursors escaping the fibrotic marrow. Dry tap on aspiration supports the diagnosis, and transformation to acute leukaemia worsens prognosis greatly.",
+   "say": "Primary myelofibrosis is a disease where marrow becomes fibrotic and blood production moves into the spleen instead. Teardrop cells appear because red cells are squeezed through fibrotic marrow and splenic tissue during release. Dry tap occurs because the aspirate needle cannot withdraw liquid marrow from fibrotic tissue.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -41,8 +41,19 @@
    }
   },
   {
-   "tx": "**Myelodysplastic syndromes** are the mirror image: clonal marrows producing dysplastic, ineffective cells causing cytopenias despite cellular marrows, in older adults. Ring sideroblasts, blasts percentage and cytogenetics grade risk toward acute myeloid leukaemia. The 5q deletion syndrome (macrocytic anaemia, lobated megakaryocytes) uniquely responds to lenalidomide.",
-   "say": "Dysplastic clones fill marrows yet starve blood through ineffective production. Blast count and chromosomes grade leukaemia risk. Deleting 5q creates a drug responsive subtype.",
+   "tx": "This blood smear shows teardrop shaped **dacrocytes** together with nucleated red cells and immature myeloid precursors in circulation. That combination forms a **leukoerythroblastic picture**, which points strongly towards marrow fibrosis rather than simple anaemia. In **primary myelofibrosis** the fibrotic marrow forces blood production into the spleen, causing massive splenomegaly and constitutional symptoms. Examiners use this film because one image captures the morphology, mechanism and likely marrow aspiration difficulty.",
+   "say": "This smear shows teardrop cells because fibrotic marrow distorts red cells as they leave the marrow space. Leukoerythroblastic features appear because nucleated red cells and immature myeloid cells escape into blood early. This film helps clinicians suspect myelofibrosis before marrow biopsy confirms the fibrosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-mpn-mds-gen1.webp",
+    "alt": "Blood smear with teardrop dacrocytes, nucleated red cell and immature myeloid precursors.",
+    "caption": "Teardrop cells with leukoerythroblastic features in myelofibrosis. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Myelodysplastic syndromes** are clonal marrow disorders where production is ineffective despite a cellular marrow in older adults. Dysplastic cells die inside the marrow, so cytopenias develop even though precursors appear numerous on biopsy. **Ring sideroblasts**, blast percentage and cytogenetic abnormalities grade the risk of progression towards acute myeloid leukaemia. The **5q deletion syndrome** causes macrocytic anaemia with lobated megakaryocytes and responds uniquely well to lenalidomide therapy.",
+   "say": "Myelodysplastic syndromes are disorders where clonal marrow produces dysplastic cells that fail to mature into blood properly. Cytopenias develop because ineffective production destroys precursors before they reach the peripheral circulation successfully. Blast percentage helps clinicians grade risk because higher counts predict progression towards acute leukaemia.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-mpn-mds-fig1.webp",
@@ -52,8 +63,8 @@
    }
   },
   {
-   "tx": "**Chronic myeloid leukaemia** (BCR ABL1, Philadelphia chromosome) is the tyrosine kinase prototype with leukocytosis, basophilia and splenomegaly cured functionally by imatinib class inhibitors, bridging proliferative and leukaemic worlds. Mastocytosis (KIT D816V, raised tryptase) and hypereosinophilic clonal disorders complete the WHO proliferative family examiners sample.",
-   "say": "CML kinase BCR ABL is blocked by imatinib transforming prognosis. Basophilia and huge counts signpost it. Philadelphia chromosome made targeted therapy famous.",
+   "tx": "**Chronic myeloid leukaemia** is driven by the BCR ABL1 fusion gene on the **Philadelphia chromosome** in stem cells. The disease causes marked leukocytosis with basophilia and splenomegaly because granulocyte production expands massively over time. **Imatinib** blocks the abnormal tyrosine kinase and transforms survival for most patients with this disease. Mastocytosis and clonal hypereosinophilic disorders complete the proliferative family that examiners sample less frequently in papers.",
+   "say": "Chronic myeloid leukaemia is a disease where the Philadelphia chromosome creates an abnormal kinase that drives granulocyte production. Imatinib treatment is effective because it blocks that kinase directly inside the leukaemic clone cells. Basophilia helps clinicians suspect this diagnosis when leukocytosis appears with splenomegaly in stems.",
    "vis": null
   }
  ],

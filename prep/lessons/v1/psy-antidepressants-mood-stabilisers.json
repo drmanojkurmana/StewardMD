@@ -3,21 +3,32 @@
  "module": "psy-antidepressants-mood-stabilisers",
  "subject": "psychiatry",
  "title": "Antidepressants and mood stabilisers",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Antidepressants** classes: SSRIs first line (sertraline post MI friendly, fluoxetine long half life and interactions, paroxetine discontinuation and weight, citalopram QT dose caps), SNRIs (venlafaxine hypertension and discontinuation), mirtazapine (sedation, appetite, low sexual effects), tricyclics (effective but cardiotoxic, anticholinergic, lethal in overdose, amitriptyline pain at low dose), MAOIs (specialist, tyramine diet, washouts). Onset takes weeks; review at two to four weeks, continue six to twelve months after first episode remission, taper slowly avoiding discontinuation syndrome (dizzy, electric shocks, irritability with short half life agents).",
-   "say": "SSRIs first. Weeks to work, months to stay, taper slowly. Paroxetine stops hardest; tricyclics kill in overdose.",
+   "tx": "**Selective serotonin reuptake inhibitors** start first line treatment, with sertraline favoured after myocardial infarction, fluoxetine lasting longest, paroxetine stopping hardest and citalopram prolonging QT at higher doses. Venlafaxine raises blood pressure, mirtazapine sedates with weight gain, and tricyclic drugs kill in overdose through cardiac toxicity. Benefit takes weeks, review happens at two to four weeks, and treatment continues six to twelve months after a first episode remits. **Discontinuation syndrome** follows abrupt stopping of short acting agents.",
+   "say": "Serotonin reuptake inhibitors start treatment first and benefit builds over several weeks slowly. Sertraline is suitable for cardiac patients and fluoxetine is the agent that lingers longest in the body afterwards. Paroxetine is hard to stop and tricyclic drugs are dangerous in overdose because cardiac toxicity can develop rapidly. Treatment continues for months after recovery and tapering prevents discontinuation symptoms later.",
    "vis": null
   },
   {
-   "tx": "**Serotonin syndrome** follows serotonergic stacking (SSRI plus MAOI, tramadol, linezolid, triptans context, St John wort) with mental agitation, autonomic hyperactivity and neuromuscular clonus or hyperreflexia, treated by stopping serotonergics, benzodiazepine sedation, cooling and cyproheptadine in moderate severe hospital care. Switching antidepressants respects washouts (fluoxetine five weeks before MAOI due norfluoxetine). Hyponatraemia SIADH in elderly, bleeding risk with NSAIDs or anticoagulants (platelet serotonin), and initial activation or suicidal thought monitoring in youth frame SSRI safety.",
-   "say": "Stack serotonergics and clonus burns: stop, sedate, cool. Fluoxetine needs five weeks before MAOI.",
+   "tx": "**Serotonin syndrome** follows stacking serotonergic drugs such as an SSRI with an MAOI, tramadol or linezolid in the same patient. Agitation appears with sweating, fever and diarrhoea, while clonus with hyperreflexia separates it from neuroleptic malignant syndrome at the bedside. Treatment stops every serotonergic drug, sedates with benzodiazepines, cools the patient and adds cyproheptadine in moderate to severe hospital cases. **Fluoxetine washout** needs five weeks before an MAOI, because its metabolite lingers and keeps serotonin raised.",
+   "say": "Serotonin syndrome follows drug stacking and agitation appears with sweating and fever quickly. Clonus and brisk reflexes dominate examination and bowel activity increases in these patients. Treatment stops serotonergic drugs immediately and benzodiazepines sedate while cooling begins urgently. Fluoxetine needs five weeks washout because its metabolite keeps serotonin raised.",
    "vis": null
   },
   {
-   "tx": "**Lithium** remains gold standard for bipolar prophylaxis and acute mania adjunct with anti suicide benefit, narrow therapeutic index (target ranges per local protocol, lower elderly), requiring renal, thyroid, calcium and level monitoring (12 hour post dose). Toxicity (coarse tremor, vomiting, diarrhoea, confusion, seizures) precipitates with dehydration, NSAIDs, ACE inhibitors and thiazides reducing clearance. Long term harms: hypothyroidism, hyperparathyroidism, nephrogenic diabetes insipidus and CKD surveillance, plus teratogenic cardiac risk counselling (Ebstein relative risk small absolute).",
-   "say": "Lithium saves bipolar lives on a knife edge: levels, kidneys, thyroid, calcium. NSAIDs and dehydration poison it.",
+   "tx": "This ward scene shows **serotonin syndrome** as an agitated sweating patient with fever, while drug packets on the table reveal serotonergic stacking as the cause. The examiner tests patellar reflexes because **clonus and hyperreflexia** separate serotonin excess from the lead pipe rigidity of neuroleptic malignant syndrome. Temperature reads high, autonomic overactivity drives the storm, and treatment starts by stopping every serotonergic drug. For the exam, you should name clonus first when reflexes dominate the picture.",
+   "say": "The patient looks agitated and sweating soaks the gown while fever rises dangerously high. Drug packets reveal stacking and the examiner tests reflexes at the knee carefully. Clonus dominates the legs and that sign separates serotonin excess from rigidity syndromes. Treatment stops every serotonergic drug and sedation with cooling follows immediately.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/psy-antidepressants-mood-stabilisers-gen1.webp",
+    "alt": "Hospital photo of agitated sweating patient with thermometer and reflex hammer testing, with SSRI, MAOI and tramadol packets on bedside table.",
+    "caption": "Agitated diaphoretic patient with clonus examined amid serotonergic drugs. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The diagram stresses that **lithium** protects bipolar patients with a narrow therapeutic index, so levels, kidneys, thyroid and calcium all need regular monitoring in clinic. Twelve hour post dose levels guide dosing, lower targets suit older patients, and toxicity brings coarse tremor with vomiting, confusion and seizures during illness. Dehydration, NSAIDs, ACE inhibitors and thiazides all reduce clearance and precipitate poisoning after stable years. Long term harm includes hypothyroidism, hyperparathyroidism and **nephrogenic diabetes insipidus** with dilute urine.",
+   "say": "Lithium protects bipolar patients powerfully and blood levels need regular checking in clinic. Kidneys and thyroid suffer long term and calcium rises with parathyroid overactivity slowly. Dehydration precipitates toxicity quickly and interacting drugs reduce lithium clearance during illness. Coarse tremor with confusion warns the team before seizures develop later.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/psy-antidepressants-mood-stabilisers-fig1.webp",
@@ -27,8 +38,8 @@
    }
   },
   {
-   "tx": "Other mood agents: **valproate** effective mania prophylaxis but major teratogen (neural tube, neurodevelopmental) restricted in women and girls with pregnancy prevention programmes, also weight, hepatic, platelet and PCOS effects; carbamazepine (enzyme inducer, hyponatraemia, blood dyscrasias, HLA rash screening in at risk ancestries); lamotrigine prevents bipolar depression (slow titration against Stevens Johnson, valproate doubles levels); quetiapine and other atypicals span mania and bipolar depression licences. Pregnancy and breastfeeding choices are individualised specialist decisions never abrupt cessation by default.",
-   "say": "Valproate and pregnancy do not mix without prevention programme. Lamotrigine titrates slowly or skin falls off.",
+   "tx": "**Valproate** treats mania but causes neural tube defects, so pregnancy prevention programmes restrict its use in girls and women who could conceive. Carbamazepine induces enzymes, lowers sodium and rarely suppresses blood counts, while lamotrigine prevents bipolar depression and needs slow titration against serious rash. **Lamotrigine levels** double with valproate, and Stevens Johnson syndrome follows rapid escalation in susceptible patients during early weeks. The table below contrasts bipolar strengths, and pregnancy choices always need specialist individual planning.",
+   "say": "Valproate prevents mania effectively and pregnancy exposure causes neural tube defects in babies. Prevention programmes restrict prescribing and counselling documents that risk before treatment starts clearly. Lamotrigine prevents bipolar depression and slow titration protects skin from serious rash. Carbamazepine induces enzymes widely and sodium falls in susceptible patients sometimes.",
    "vis": {
     "kind": "table",
     "cols": [

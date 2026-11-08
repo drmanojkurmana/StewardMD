@@ -6,8 +6,8 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Diuretics** block sodium reabsorption at successive nephron stations, and potency follows how much sodium that station normally reclaims: the loop of Henle reabsorbs the largest share, so loop diuretics are strongest, thiazides act moderately in the distal tubule, and potassium sparing agents weakly in the collecting duct. Water follows sodium out, shrinking extracellular volume and relieving congestion or pressure according to the clinical target chosen.",
-   "say": "Diuretics block sodium uptake along the kidney tubule. Loop drugs are strongest, thiazides moderate, potassium sparing weakest. Water follows sodium, relieving congestion or pressure.",
+   "tx": "**Diuretics** block sodium reabsorption at successive nephron stations, and potency follows the fraction of filtered sodium that each station normally reclaims daily. The loop of Henle reclaims the largest share, so **loop diuretics** act strongest, thiazides act moderately in the distal tubule, and potassium sparing agents act weakly in the collecting duct. Water follows sodium outward and shrinks extracellular volume to relieve congestion or lower pressure.",
+   "say": "Diuretics block sodium reabsorption at different stations along the nephron. Loop diuretics act strongest because the loop reclaims the largest sodium fraction. Thiazides act moderately and potassium sparing agents act weakly in comparison. Water follows sodium and reduces congestion or blood pressure effectively.",
    "vis": {
     "kind": "image",
     "src": "prep/lessons/media/pharma-nephron-diuretics.svg",
@@ -17,8 +17,8 @@
    }
   },
   {
-   "tx": "**Loop diuretics** such as furosemide block the sodium potassium chloride cotransporter, wasting potassium, calcium and magnesium while flooding urine output for acute pulmonary oedema and congestion. High doses or rapid pushes cause ototoxicity, and gout follows urate competition. Thiazides block the distal sodium chloride channel, wasting potassium but retaining calcium, a pairing that treats hypertension and recurrent calcium stones yet provokes hyponatraemia, gout and glucose rise.",
-   "say": "Furosemide unloads flooded lungs fast but wastes potassium and calcium and can deafen at high doses. Thiazides lower pressure, retain calcium for stone formers, and drop sodium and potassium.",
+   "tx": "**Loop diuretics** such as furosemide block the sodium potassium chloride cotransporter and waste potassium, calcium and magnesium while producing brisk urine output for pulmonary oedema. Rapid high doses cause **ototoxicity**, and urate competition provokes gout during prolonged therapy in susceptible patients. **Thiazides** block the distal sodium chloride channel, waste potassium but retain calcium, and cause hyponatraemia, gout and glucose rise during treatment.",
+   "say": "Furosemide unloads flooded lungs rapidly but wastes potassium, calcium and magnesium significantly. High doses damage hearing and precipitate gout in susceptible patients. Thiazides reduce blood pressure and help retain calcium for patients who form recurrent calcium stones. Both classes require electrolyte monitoring after every dose change.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -51,13 +51,24 @@
    }
   },
   {
-   "tx": "**Potassium sparing** diuretics split into aldosterone antagonists (spironolactone, eplerenone) and channel blockers (amiloride). Spironolactone transforms heart failure and ascites outcomes beyond its mild diuresis, but hyperkalaemia, gynaecomastia and menstrual upset limit it, while eplerenone spares sex hormone receptors. Combining potassium sparing agents with ACE inhibitors, supplements or kidney failure invites dangerous hyperkalaemia needing scheduled monitoring after every change.",
-   "say": "Spironolactone saves lives in heart failure and ascites beyond making urine. Its costs are high potassium and breast tenderness. Recheck potassium and kidneys after every dose change.",
+   "tx": "**Potassium sparing diuretics** divide into aldosterone antagonists such as spironolactone and eplerenone and channel blockers such as amiloride acting in the collecting duct. **Spironolactone** transforms heart failure and ascites outcomes beyond weak diuresis but causes hyperkalaemia, gynaecomastia and menstrual upset that limit tolerability. Combining these agents with ACE inhibitors, supplements or kidney failure invites dangerous **hyperkalaemia** without scheduled monitoring.",
+   "say": "Potassium sparing diuretics act in the collecting duct through two distinct mechanisms. Spironolactone improves survival in heart failure beyond its weak diuretic effect. Gynaecomastia and menstrual upset reduce spironolactone tolerability while eplerenone helps spare sex hormone receptors completely. Combining potassium sparing drugs with ACE inhibitors risks dangerous hyperkalaemia.",
    "vis": null
   },
   {
-   "tx": "**Antidiuretics** reverse the flow: desmopressin mimics vasopressin at V2 receptors inserting aquaporins, rescuing central diabetes insipidus and nocturnal enuresis and raising von Willebrand factor in mild bleeding disorders, with hyponatraemia as its overshoot danger when fluids are unrestricted. Vasopressin itself at V1 receptors constricts vessels in shock and bleeding varices through terlipressin, separating receptor jobs between water retention and vascular squeeze.",
-   "say": "Desmopressin inserts water channels to treat central diabetes insipidus and enuresis, but excess water intake on it drops sodium dangerously. Vasopressin cousins squeeze vessels for shock and varices.",
+   "tx": "The tubular cell shows spironolactone blocking the **aldosterone receptor** inside the nucleus so sodium reabsorption through ENaC falls and **potassium sparing** follows in the collecting duct. Insets connect treatment to heart failure with ascites, where benefit exceeds simple urine loss, and to **gynaecomastia** from sex hormone effects of spironolactone. The diagram explains both the lifesaving indication and the adverse effect that favours eplerenone.",
+   "say": "The diagram shows spironolactone blocking aldosterone inside the tubular cell nucleus. Sodium reabsorption falls while potassium remains in the body instead. Insets link treatment to heart failure, ascites and gynaecomastia in men. Eplerenone avoids sex hormone effects while preserving potassium sparing action.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-diuretics-gen1.webp",
+    "alt": "Tubular epithelial cell with blocked aldosterone receptor and ENaC, plus heart failure and gynaecomastia inset torsos",
+    "caption": "Renal tubular cell showing aldosterone blockade, potassium sparing, clinical insets. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Desmopressin** mimics vasopressin at V2 receptors and inserts aquaporins that rescue central diabetes insipidus, nocturnal enuresis and mild bleeding disorders through von Willebrand release. Unrestricted fluids during treatment cause dangerous **hyponatraemia** as retained water dilutes plasma sodium progressively. Vasopressin at V1 receptors constricts vessels, and terlipressin uses this squeeze for shock and bleeding varices while separating water retention from vascular effects.",
+   "say": "Desmopressin inserts water channels and treats central diabetes insipidus effectively. Excess fluid intake during treatment dilutes sodium and causes seizures dangerously. The drug also raises von Willebrand factor in mild bleeding disorders. Terlipressin constricts vessels and treats bleeding varices through V1 receptors.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -79,8 +90,8 @@
    }
   },
   {
-   "tx": "**Diuretic resistance** in heart failure yields to sequential nephron blockade, adding thiazide to loop therapy, while acetazolamide's proximal carbonic anhydrase blockade serves altitude sickness, glaucoma and metabolic alkalosis niches. Every diuretic prescription pairs with a monitoring promise: weight, blood pressure lying and standing, creatinine and electrolytes within one to two weeks of changes. Exam stems hide the diagnosis in electrolyte patterns, so read potassium, calcium and sodium as class fingerprints.",
-   "say": "Read electrolytes as fingerprints: loop loses calcium, thiazide keeps it, both drop potassium, spironolactone raises it. Recheck bloods within two weeks of any change.",
+   "tx": "**Diuretic resistance** in heart failure responds to sequential nephron blockade when clinicians add a thiazide to ongoing loop therapy carefully. **Acetazolamide** blocks proximal carbonic anhydrase and serves altitude sickness, glaucoma and metabolic alkalosis in niche situations beyond routine diuresis. Every prescription needs weight, postural blood pressure, creatinine and electrolytes within one to two weeks, and **electrolyte patterns** fingerprint the responsible drug class.",
+   "say": "Diuretic resistance improves when clinicians block successive nephron segments in combination. Acetazolamide serves altitude sickness, glaucoma and metabolic alkalosis in selected patients. Weight and postural pressure guide ongoing congestion assessment at follow up. Electrolyte patterns identify the responsible class and guide correction safely.",
    "vis": null
   }
  ],

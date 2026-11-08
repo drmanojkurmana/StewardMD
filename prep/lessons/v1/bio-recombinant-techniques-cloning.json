@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "module": "bio-recombinant-techniques",
+ "subject": "biochemistry",
+ "title": "Restriction enzymes, vectors and cloning",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Restriction endonucleases** cut double stranded DNA at palindromic recognition sites (four to eight bases, reading identically on both strands), leaving sticky cohesive ends (EcoRI), blunt ends (HaeIII), or overhang families whose complementarity ligates efficiently. Bacteria methylate their own sites for self protection (restriction modification), and fragment patterns from variant sites create RFLPs. Ligase seals nicks (ATP dependent eukaryotes/viral, NAD bacterial), alkaline phosphatase prevents vector self ligation in cloning design.",
+   "say": "Restriction enzymes cut palindromic sites leaving sticky or blunt ends for ligation cloning. Bacteria methylate their own sites for protection, and variant fragment patterns create RFLP markers diagnostically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool enzyme",
+     "Cut or action",
+     "Cloning use"
+    ],
+    "rows": [
+     [
+      "EcoRI (type II)",
+      "Sticky AATT overhangs",
+      "Directional compatible cloning"
+     ],
+     [
+      "HaeIII",
+      "Blunt ends",
+      "Any blunt ligation, lower efficiency"
+     ],
+     [
+      "DNA ligase",
+      "Seals phosphodiester nicks",
+      "Joins insert to vector"
+     ],
+     [
+      "Alkaline phosphatase (vector)",
+      "Removes 5-prime phosphates",
+      "Prevents self ligation background"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A cloning **plasmid vector** needs an origin of replication, selectable marker (ampicillin beta-lactamase classic), multiple cloning site polylinker, and screening system (lacZ alpha complementation blue-white: intact lacZ plus X-gal blue, insert interrupted white). Capacity grades vectors: plasmids to about ten kilobases, lambda phage and cosmids tens, BACs one to three hundred, YACs megabases with instability costs. Shuttle vectors replicate in two hosts (bacterial amplification, yeast or mammalian expression).",
+   "say": "Plasmid vectors need origin, selectable marker and blue-white screening in one design. Capacity grades from plasmids to megabase YACs with instability costs trading against insert size requirements practically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Genomic library",
+     "points": [
+      "All DNA cloned (introns, promoters in)",
+      "Large inserts (BAC/cosmid screens)",
+      "Find genomic locus structure"
+     ]
+    },
+    "right": {
+     "title": "CDNA library",
+     "points": [
+      "From mRNA by reverse transcriptase (no introns)",
+      "Only expressed genes of that tissue",
+      "Express human protein in bacteria (insulin)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Reverse transcriptase** (retroviral RNA dependent DNA polymerase, no proofreading) copies mRNA through RNA-DNA hybrid, RNase H degrading template strand, second strand synthesis to double stranded cDNA cloned for expression because bacteria cannot splice introns. Recombinant human insulin (separate A/B chains historically, now proinsulin fusions in E. coli or yeast), growth hormone (ending cadaver prion transmission), erythropoietin (glycosylation requiring mammalian CHO cells), factor VIII, tissue plasminogen activator and monoclonal antibodies grade expression hosts by post translational needs.",
+   "say": "Reverse transcriptase copies mRNA to intron free cDNA for bacterial expression of human proteins. Glycosylation needs grade expression hosts from bacteria to mammalian CHO cells by modification requirements.",
+   "vis": null
+  },
+  {
+   "tx": "Cloning workflow order is examinable as a single chain: cut vector and insert compatibly, ligate, transform (heat shock or electroporation competence), select (antibiotic), screen (blue-white, colony PCR, restriction digest of minipreps), verify by **Sanger sequencing** across junctions (no clone trusted unsequenced), express and purify (affinity tags). Transformation versus transfection (animal cells) versus transduction (viral delivery) vocabulary separates hosts precisely, and selectable versus screenable markers separate survival from colour identification conceptually.",
+   "say": "Cut, ligate, transform, select, screen and sequence verify in one examinable chain order. Transformation, transfection and transduction vocabulary separates hosts precisely by delivery mechanism and cell kingdom.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cloning in order",
+    "nodes": [
+     {
+      "id": "cut",
+      "label": "Cut vector and insert compatibly"
+     },
+     {
+      "id": "lig",
+      "label": "Ligate, transform, select"
+     },
+     {
+      "id": "scr",
+      "label": "Screen white colonies, digest minipreps"
+     },
+     {
+      "id": "seq",
+      "label": "Sequence junctions, then express"
+     }
+    ],
+    "edges": [
+     [
+      "cut",
+      "lig"
+     ],
+     [
+      "lig",
+      "scr"
+     ],
+     [
+      "scr",
+      "seq"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**DNA fingerprinting** (Jeffreys) progressed from multilocus minisatellite VNTR Southern fingerprints to PCR amplified short tandem repeat (STR) multiplexes (CODIS core loci, amelogenin sexing, capillary electrophoresis profiles, match probabilities population genetics (Hardy-Weinberg next lesson) with mixture and low template stochastic caveats), mitochondrial hypervariable sequencing for degraded maternal lineage, and Y-STR paternal lines. Paternity indices multiply locus likelihoods identically in principle, chimerism after transplant and monozygotic twin identity limits stated honestly in reports.",
+   "say": "Fingerprinting progressed from VNTR Southern blots to STR multiplex profiles with population match probabilities. Mitochondrial and Y markers serve degraded and lineage cases with stated limits honestly reported.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Forensic system",
+     "Reads",
+     "Best for"
+    ],
+    "rows": [
+     [
+      "Autosomal STR multiplex (PCR)",
+      "Short tandem repeat lengths",
+      "Identity, paternity (standard)"
+     ],
+     [
+      "Mitochondrial HV sequencing",
+      "Maternal lineage variants",
+      "Degraded bone, hair shafts"
+     ],
+     [
+      "Y-STR",
+      "Paternal lineage haplotype",
+      "Male mixtures, surname lineages"
+     ],
+     [
+      "SNP identity panels (NGS)",
+      "Single base variants genome wide",
+      "Distant kinship, disaster victim ID"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Applied products** audit expression choices finally: hepatitis B surface antigen yeast subunit vaccine (first recombinant vaccine), HPV virus like particles (self assembling L1 no genome, non infectious by design), insulin analogues engineered kinetics (lispro monomeric rapid, glargine precipitating basal by sequence changes), erythropoiesis and colony stimulating biologics, enzyme replacements from prior modules. Each product is cloning decisions (host, introns, glycosylation, tags) frozen into prescribing, which PCR quantification next measures at nucleic acid scale.",
+   "say": "Recombinant vaccines and insulin analogues freeze cloning decisions into prescribing products daily. Each product audits host, intron and glycosylation choices, which PCR quantification measures next at nucleic scale.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bacterial expression wins when",
+     "points": [
+      "No glycosylation needed (insulin)",
+      "Speed and cost dominate",
+      "Inclusion body refolding acceptable"
+     ]
+    },
+    "right": {
+     "title": "Mammalian (CHO) required when",
+     "points": [
+      "Glycosylation functional (EPO, antibodies)",
+      "Complex folding and assembly",
+      "Cost accepted for fidelity"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

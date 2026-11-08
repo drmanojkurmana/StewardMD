@@ -3,11 +3,11 @@
  "module": "rad-ir-safety-anticoag-consent",
  "subject": "radiology",
  "title": "Anticoagulation and consent in IR",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Blood thinners pause by risk. **SIR bleeding-risk categories** sort low, moderate and high-risk procedures guiding drug holds. **Direct oral anticoagulants** pause one to two days by renal function and risk. **Bridging heparin** suits mechanical valves, rarely others. **Restart plans** written before procedures prevent forgotten resumption.",
-   "say": "Blood thinners pause by risk. Bleeding-risk categories sort procedures guiding drug holds. Oral anticoagulants pause by renal function and risk. Bridging suits mechanical valves, rarely others. Written restart plans prevent forgotten resumption.",
+   "tx": "Before any interventional procedure, the team first sorts the procedure into a low, moderate or high bleeding risk group, because that group decides how blood thinners are handled. The **bleeding risk category** therefore guides whether each drug continues or stops before the puncture. A **direct oral anticoagulant** usually pauses for one to two days, and the exact pause depends on kidney function and procedural risk. Only a patient with a mechanical heart valve usually needs **bridging heparin**, while a written **restart plan** prevents a forgotten resumption after the procedure ends.",
+   "say": "The team first sorts every procedure by bleeding risk because that sorting decides how each blood thinner is handled. A direct oral anticoagulant usually pauses for one to two days and the pause depends on kidney function. Only a patient with a mechanical valve usually needs bridging cover during the pause. A written restart plan keeps the team from forgetting to resume treatment after the procedure.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,8 @@
    }
   },
   {
-   "tx": "Platelets and knives coordinate. **Dual antiplatelets** continue through low-risk work but pause for high-risk punctures with cardiology. **Neuraxial rules** forbid spinal work on dual drugs. **Aspirin alone** continues through most IR. **Stent thrombosis** fears outweigh groin oozing where cardiology advises continuing.",
-   "say": "Platelets and knives coordinate. Dual tablets continue through low-risk work but pause for high-risk sticks with cardiology. Spinal work forbids dual drugs. Aspirin alone continues through most IR. Stent clot fears outweigh groin oozing.",
+   "tx": "Antiplatelet treatment needs a careful balance between bleeding at the puncture site and clotting inside a coronary stent. A patient who takes **aspirin alone** usually continues the drug through most interventional procedures without any interruption. Treatment with **dual antiplatelet therapy** also continues through low risk work, but the team pauses the second drug for high risk punctures after discussion with cardiology. Neuraxial procedures remain forbidden while both drugs act, because spinal bleeding can injure the cord. The fear of **stent thrombosis** often outweighs the fear of groin oozing.",
+   "say": "Antiplatelet treatment balances bleeding at the puncture site against clotting inside a coronary stent. A patient who takes aspirin alone usually continues the drug through most procedures without any interruption. Dual treatment remains in place through low risk work but one drug stops for high risk punctures after cardiology advice. Neuraxial work remains forbidden while both drugs act because spinal bleeding can injure the cord.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +74,8 @@
    }
   },
   {
-   "tx": "Consent respects Montgomery. **Material risks** a reasonable patient would weigh include death, stroke and organ loss. **Montgomery disclosure** replaces doctor-knows-best with patient-centred choice. **Alternatives with no treatment** frame honest options including waiting. **Documented discussions** with names and risks protect patients and teams.",
-   "say": "Consent respects Montgomery. Material risks a reasonable patient would weigh include death, stroke and organ loss. Patient-centred choice replaces doctor-knows-best. Alternatives with waiting frame honest options. Documented discussions protect everyone.",
+   "tx": "Valid consent means the patient understands the choices and freely agrees before the procedure starts. The clinician must explain every **material risk** that a reasonable person in that position would want to know, including death, stroke and loss of an organ. This **patient centred disclosure** replaces the older idea that the doctor alone decides what matters most. The discussion also covers reasonable **alternatives** for care, including the option of no treatment or simply waiting. The team records the discussion carefully so the note protects the patient and the team afterwards.",
+   "say": "Valid consent means the patient understands the choices and freely agrees before the procedure starts. The clinician explains every important risk that a reasonable person would want to know before deciding. That discussion is serious because it includes death and stroke and also includes loss of an organ. The clinician covers reasonable alternatives and also covers the option of waiting without any treatment. The team records the discussion carefully because a clear record protects everyone involved afterwards.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-safety-anticoag-consent-fig1.webp",
@@ -85,8 +85,8 @@
    }
   },
   {
-   "tx": "Capacity and children need careful care. **Gillick competence** lets mature minors consent where understanding proves. **Best interests** guide adults lacking capacity with family input. **Language barriers** need interpreters, never relatives, for consent. **Second opinions** offered where stakes run high reassure.",
-   "say": "Capacity and children need care. Mature minors consent where understanding proves. Best interests guide incapacitated adults with family input. Language barriers need interpreters, never relatives. High stakes offer second opinions.",
+   "tx": "Consent becomes harder when the patient is a child or lacks the ability to decide alone. A mature minor can consent alone when **Gillick competence** shows understanding of the choice and consequences. For an adult who lacks capacity, the team acts in the patient **best interests** and involves the family in that judgement. A patient who faces a **language barrier** needs a professional interpreter, and relatives must never translate the consent discussion. The team offers a **second opinion** whenever the stakes feel especially high.",
+   "say": "Consent becomes harder when the patient is a child or cannot decide alone. A mature minor can consent alone when careful assessment shows that the young person understands the choice fully. For an adult who lacks capacity the team acts in the best interests and involves the family. A professional interpreter supports consent when language blocks understanding and relatives never translate that discussion. The team offers another opinion whenever the stakes feel especially high for the family.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -121,6 +121,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "This picture is helpful because it shows a consent discussion with a teenager, a parent and two clinicians beside a scan display in clinic. The labels remind the viewer to test **Gillick competence**, to hold a **best interests discussion**, and to write the **material risks** clearly on the consent form. That sequence matters for the exam because a mature minor may consent alone after proper assessment. An adult without capacity instead needs a best interests decision with family involvement and a clear written record.",
+   "say": "This picture is helpful because it shows two clinicians who discuss consent with a teenager and a parent beside a scan. One label reminds the team to test whether the teenager understands the choice well enough. Another label reminds the team to discuss best interests when the patient cannot decide alone. The form records the important risks and that record supports safe care during later review.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-safety-anticoag-consent-gen1.webp",
+    "alt": "Doctor and colleague seated with teenager and parent reviewing consent form beside CT display.",
+    "caption": "Clinicians discuss best interests and document material risks with family. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

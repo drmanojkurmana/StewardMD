@@ -3,16 +3,16 @@
  "module": "ped-newborn-care",
  "subject": "paediatrics",
  "title": "Newborn resuscitation and essential newborn care",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Assessment** (**APGAR** appearance pulse grimace activity respiration, **Ballard** neuromuscular physical maturity, **weight** LBW VLBW ELBW bands, **gestation** preterm term post-term, **cord** gases acidosis base, **tone** floppy asphyxiated vigorous, **anomalies** head-to-toe dysmorphism, **maternal** diabetes hypertension infection) with **charts** (**growth** Fenton Intergrowth, **scores** Apgar timed) grades; **resuscitate** (NRP algorithm readies) prepares. Newborns arrive.",
-   "say": "APGARs Ballards weights gestations is assessment: cords gas tones flag anomalies scan maternals share charts plot scores time resuscitates ready warmers preheat. Babies cry.",
+   "tx": "Record the **Apgar score** at set times after birth, but never let scoring delay resuscitation of a flat baby. Add gestation, birth weight band and maturity examination to sort preterm, term and growth restricted babies. **Cord gases** show acidosis when asphyxia is suspected at delivery. Examine head to toe for anomalies and ask about maternal diabetes, hypertension and infection. Growth charts and timed scores grade progress and trigger referrals appropriately.",
+   "say": "The Apgar score describes condition at set times after birth. Scoring must never delay resuscitation of a flat baby. Gestation and weight bands sort preterm and growth restricted babies correctly. Cord gases and maternal history help you judge asphyxia risk accurately.",
    "vis": null
   },
   {
-   "tx": "**Resuscitation** (**dry** warm stimulate back-rub, **position** sniffing shoulder-roll, **suction** mouth nose meconium, **PPV** bag-mask rate pressures, **compress** three-to-one depth, **adrenaline** umbilical doses, **volume** saline blood loss, **reassess** breathing heart colour) with **equipment** (**warmer** preheated linen, **oxygen** blender titrates, **monitor** saturation probes) runs; **call** (advanced help early) summons. Breaths start.",
-   "say": "Dries warms positions suctions is resuscitation: PPVs push compresses press adrenalines dose volumes fill reassesses loop equipments warm oxygens blend monitors beep calls summon helps arrive. Chests rise.",
+   "tx": "Follow the resuscitation sequence in order: dry, warm and stimulate, then position the airway in the **sniffing position**. Give **positive pressure ventilation** with a bag and mask when breathing is absent or the heart rate stays low. Add chest compressions in a three to one rhythm when ventilation alone fails. Use umbilical adrenaline and volume only for the indications the algorithm states. Reassess breathing, heart rate and colour after every step you take.",
+   "say": "You should dry and warm the baby and position the airway first. Bag and mask ventilation follows when breathing is absent or ineffective. Chest compressions are added when ventilation alone fails to raise heart rate. Reassessment after every step guides the next action in sequence.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/ped-newborn-care-fig1.webp",
@@ -22,13 +22,24 @@
    }
   },
   {
-   "tx": "**Essential** (**cord** delayed one-minute clamps, **skin** kangaroo bonding warmth, **breast** first-hour colostrum latching, **vitamin-K** bleeding prevents, **eyes** erythromycin prophylaxis, **BCG** OPV-0 hepatitis birth, **screens** hearing thyroid hips, **weigh** daily loss gains) with **counsels** (**danger** feeding breathing fever, **cord** dry stump care) teaches; **follow** (home visits tracks) plans. Babies thrive.",
-   "say": "Cords skins breasts vitamins is essential: eyes shield BCGs prick screens hear weighs chart counsels warn cords dry follows visit homes track jaundices watch feeds suck. Mothers bond.",
+   "tx": "Protect every newborn with delayed cord clamping, immediate **skin to skin contact** and a first breastfeed within the first hour. Give **vitamin K** to prevent bleeding, protect the eyes, and record birth vaccines and screening tests before discharge. Teach cord care, danger signs and feeding cues before the mother leaves. Weigh the baby daily at first because excess loss flags feeding failure early. Home follow up tracks jaundice, feeding and growth after discharge.",
+   "say": "Skin to skin contact keeps the baby warm and supports bonding. The first breastfeed should start within the first hour after birth. Vitamin K prevents bleeding and birth vaccines are recorded before discharge. Daily weights and danger sign teaching protect babies after discharge home.",
    "vis": null
   },
   {
-   "tx": "**Traps** (**hypothermia** cold stress sugars, **hypoglycaemia** jittery poor feed, **asphyxia** HIE cooling criteria, **sepsis** risk-factor screens, **jaundice** early discharge watches, **dehydration** weight sodium checks, **malformation** atresia fistula probes, **safe-sleep** back bare crib) with **referrals** (**NICU** thresholds transports, **surgery** anomaly calls) closes; **records** (birth details cards) writes. Dangers dodge.",
-   "say": "Hypothermias hypoglycaemias asphyxias sepses is traps: jaundices yellow dehydrations dry malformations block safe-sleeps guard referrals rush surgeries fix records write cards carry. Vigilance guards.",
+   "tx": "The photograph shows **skin to skin contact** straight after birth, with the naked newborn prone on the mothers chest under a towel. This single act delivers the **warm chain**, steadies breathing and blood glucose, and promotes early **breastfeeding** with colostrum. Examiners link it to kangaroo care for stable low birth weight babies and to bonding benefits for the mother. Notice the hat and covering, because head and surface losses cool newborns fastest.",
+   "say": "The photograph is valuable because it presents the newborn lying prone on the mothers bare chest. Skin contact helps the baby stay warm and helps breathing settle after birth. It also helps early breastfeeding and bonding develop in the first hour. The hat and towel help reduce heat loss from the head and skin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-newborn-care-gen1.webp",
+    "alt": "Mother in hospital bed holding newborn prone on bare chest under towel labeled skin to skin and warm chain.",
+    "caption": "Delivery room photograph showing newborn skin to skin contact. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Guard against **hypothermia** and **hypoglycaemia** together because cold stress burns glucose in small babies. Suspect sepsis when risk factors or poor feeding, lethargy and temperature instability cluster. Watch early discharged babies closely for jaundice and dehydration with weight and sodium checks when intake is poor. Pass a tube or probe when atresia or fistula is suspected from drooling or choking. Safe sleep means supine position in a bare cot every time.",
+   "say": "Cold stress is harmful because it burns glucose and causes hypoglycaemia in small babies. Poor feeding with lethargy and temperature instability is suggestive and needs urgent sepsis assessment. Early discharged babies need close watching for jaundice and dehydration at home. Safe sleep is essential and means the baby is supine in a bare cot always.",
    "vis": null
   }
  ],

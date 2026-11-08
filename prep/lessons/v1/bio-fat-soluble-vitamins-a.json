@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "bio-fat-soluble-vitamins",
+ "subject": "biochemistry",
+ "title": "Vitamin A and vision",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Retinoids** name three oxidation states with three jobs: retinol (transport/storage alcohol, RBP4 transthyretin delivery, stellate liver esters reserve months), retinal (aldehyde visual pigment), retinoic acid (acid hormone binding RAR/RXR nuclear receptors patterning embryos, differentiating epithelia and acute promyelocytic leukaemia blasts (ATRA differentiation therapy for PML-RARA t(15;17), differentiation syndrome vigilance). Provitamin beta-carotene (intestinal dioxygenase cleavage to retinal, regulated by vitamin A status, hypothyroid/diabetes carotenaemia yellow skin sparing sclerae versus jaundice scleral).",
+   "say": "Retinol transports, retinal sees, and retinoic acid patterns embryos through nuclear receptors therapeutically in promyelocytic leukaemia. Beta-carotene cleavage regulates supply, yellowing skin while sparing sclerae unlike jaundice diagnostically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Retinoid form",
+     "Chief job",
+     "Clinical anchor"
+    ],
+    "rows": [
+     [
+      "Retinol (plus esters stored)",
+      "Transport on RBP, liver reserve",
+      "Deficiency after bariatric/malabsorption delay months"
+     ],
+     [
+      "11-cis retinal",
+      "Rhodopsin chromophore",
+      "Night blindness earliest deficiency sign"
+     ],
+     [
+      "All-trans retinoic acid",
+      "Nuclear receptor differentiation",
+      "ATRA cures APL; teratogen isotretinoin embryopathy"
+     ],
+     [
+      "Beta-carotene (provitamin)",
+      "Antioxidant precursor, cleavage regulated",
+      "Carotenaemia skin yellow, sclerae white"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **visual cycle** (Wald): rod opsin plus eleven cis retinal equals rhodopsin; photon isomerises to all trans (bleaching, metarhodopsin II activating transducin G protein cascade closing cGMP channels hyperpolarising (prior signal logic in photoreceptors inverted sign)), all trans reduced to retinol, shuttled to retinal pigment epithelium (RPE65 isomerohydrolase regenerating eleven cis (Leber congenital amaurosis gene therapy voretigene approved), ABCA4 Stargardt lipofuscin toxicity), dark adaptation delayed measurably in deficiency (rod before cone failure sequence). Cone iodopsins colour parallels compress to one line for examinations.",
+   "say": "Photon bleaching isomerises retinal while pigment epithelium regenerates eleven cis forms enzymatically. Dark adaptation delays measurably in deficiency with rod failure preceding cone failure in visual sequences examinable.",
+   "vis": {
+    "kind": "flow",
+    "title": "Visual cycle loop",
+    "nodes": [
+     {
+      "id": "rho",
+      "label": "Rhodopsin (11-cis retinal plus opsin)"
+     },
+     {
+      "id": "bleach",
+      "label": "Light: all-trans, signal cascade fires"
+     },
+     {
+      "id": "rpe",
+      "label": "RPE regenerates 11-cis (RPE65)"
+     },
+     {
+      "id": "back",
+      "label": "Chromophore returns to opsin"
+     }
+    ],
+    "edges": [
+     [
+      "rho",
+      "bleach"
+     ],
+     [
+      "bleach",
+      "rpe"
+     ],
+     [
+      "rpe",
+      "back"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deficiency marches predictably across ocular surface (WHO xerophthalmia staging): night blindness (XN) functional first, conjunctival xerosis with **Bitot spots** (foamy keratinised plaques temporal conjunctiva, responsive in children), corneal xerosis to ulceration keratomalacia (melting, perforation, irreversible blindness emergency high dose schedules age/pregnancy graded), corneal scars and fundus. Systemically impaired dark adaptation, epithelial keratinisation (follicular hyperkeratosis), growth and infection severity (measles mortality amplified, supplementation trials in deficient populations reducing child mortality historically (Sommer), neonatal and maternal night blindness programmes).",
+   "say": "Night blindness marches to Bitot spots and corneal melting emergencies staged by WHO criteria preventably. Measles severity amplifies in deficiency, and supplementation reduced child mortality in deficient populations historically proven.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-fat-soluble-vitamins-gen1.webp",
+    "alt": "Close eye view shows a foamy white raised conjunctival plaque beside the corneal edge under bright slit illumination.",
+    "caption": "Foamy Bitot spot on conjunctiva, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Absorption** needs fat and micelles (bariatric, pancreatic, cholestatic, abetalipoproteinaemia (prior), mineral oil laxative and orlistat lipase blockade depleting all fat solubles together (A D E K deficiency pattern recognition in malabsorption stems (coeliac, CF, short bowel, Whipple) with night blindness often presenting vitamin clue), transport RBP falls in protein energy malnutrition and zinc deficiency (RBP synthesis) and liver disease and nephrotic losses, so retinol levels misread without RBP/inflammation context (acute phase lowers RBP, supplementation decisions epidemiological in programmes).",
+   "say": "Malabsorption depletes all fat soluble vitamins together with night blindness often presenting first clue diagnostically. Retinol levels misread without binding protein and inflammation context in protein malnutrition states confounding assays.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True deficiency risk patterns",
+     "points": [
+      "Fat malabsorption (CF, coeliac, bariatric)",
+      "Restricted diets, alcohol dependence",
+      "Measles in deficient child (WHO treatment)"
+     ]
+    },
+    "right": {
+     "title": "Level interpretation traps",
+     "points": [
+      "RBP falls with inflammation and PEM",
+      "Zinc needed for RBP release",
+      "Liver stores mask diet history months"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hypervitaminosis A** (supplements and liver diets, polar bear liver history) injures liver (stellate fibrosis, portal hypertension non cirrhotic), bone (pain, hyperostosis, premature epiphyseal, osteoporosis paradox), CNS (raised intracranial pressure pseudotumour, headache, diplopia), skin (desquamation, alopecia, cheilitis retinoid overlap), lipids, and embryo (isotretinoin/acitretin teratogenicity craniofacial cardiac thymic, iPLEDGE/PPP pregnancy prevention programmes, acitretin years long contraception by ester storage in fat with alcohol). Beta-carotene excess only yellows (plus lung cancer signal in smoker supplement trials CARET/ATBC caution against pharmacologic antioxidant megadoses generally).",
+   "say": "Excess vitamin A injures liver, bone and intracranial pressure while teratogenic retinoids demand pregnancy prevention programmes strictly. Beta-carotene only yellows, though smoker supplement trials signalled lung cancer harm unexpectedly.",
+   "vis": null
+  },
+  {
+   "tx": "**Retinoid therapeutics** span dermatology and oncology by receptor selectivity: tretinoin acne, adapalene, tazarotene psoriasis, isotretinoin severe nodular acne (teratogen, lipids, mood monitoring debates, iPLEDGE), acitretin psoriasis (years teratogen), bexarotene RXR cutaneous T cell lymphoma (central hypothyroidism and lipids mechanism), ATRA plus arsenic APL cure without conventional chemotherapy backbone (differentiation syndrome steroids). Vitamin D next inverts solubility logic to sunlight endocrinology where deficiency diseases are skeletal, not ocular.",
+   "say": "Retinoid therapeutics span acne to promyelocytic leukaemia cure by receptor selectivity and differentiation mechanisms. Vitamin D next inverts logic to sunlight endocrinology where deficiency diseases are skeletal, not ocular.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Retinoid drug",
+     "Receptor emphasis",
+     "Vigilance headline"
+    ],
+    "rows": [
+     [
+      "Isotretinoin",
+      "Broad RAR (severe acne)",
+      "Teratogen programme, lipids, mucocutaneous dryness"
+     ],
+     [
+      "Acitretin",
+      "RAR (psoriasis)",
+      "Teratogen years (alcohol ester storage)"
+     ],
+     [
+      "ATRA (tretinoin systemic)",
+      "RAR alpha (APL PML-RARA)",
+      "Differentiation syndrome: steroids ready"
+     ],
+     [
+      "Bexarotene",
+      "RXR (CTCL)",
+      "Central hypothyroidism, triglycerides"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

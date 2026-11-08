@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "bio-genetics",
+ "subject": "biochemistry",
+ "title": "Patterns, repeats and population genetics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Autosomal dominant** inheritance runs vertically (every generation, both sexes equally, fifty percent offspring risk, affected heterozygotes (homozygotes often lethal/severe achondroplasia), male to male transmission proving autosomal over X) with variable expressivity (neurofibromatosis signs spectrum), incomplete penetrance (BRCA lifetime risks not certainties, retinoblastoma ninety percent, skipped generations carrying silently), late onset (Huntington), and new mutations (advanced paternal age achondroplasia, Apert). Autosomal recessive runs horizontally (siblings twenty five percent, parents obligate carriers, consanguinity enrichment, pseudodominance when carrier frequency high (haemochromatosis communities), compound heterozygotes majority outbred (CF deltaF508 plus rare allele).",
+   "say": "Dominant runs vertically at fifty percent with variable expressivity and incomplete penetrance complexities. Recessive runs horizontally at twenty five percent enriched by consanguinity, with compound heterozygotes majority outbred clinically.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-genetics-fig1.webp",
+    "alt": "Schematic of chromosome 15q11-q13 imprinting showing paternal deletion in Prader Willi and maternal deletion in Angelman syndromes.",
+    "caption": "Genomic imprinting on chromosome 15q11-q13 and clinical syndromes.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**X-linked recessive** (carrier mothers to fifty percent sons affected, fifty percent daughters carriers, no male to male, affected males severe (Duchenne, haemophilia, G6PD, OTC), skewed X inactivation manifesting carriers, new mutation one third Duchenne (Haldane, lethal X recessive mutation balance) versus X dominant (affected daughters double, male lethal often (Rett MECP2, incontinentia pigmenti), vitamin D resistant rickets XLD hypophosphataemia PHEX (both sexes, males not more severe paradox teaching), Y holandric (SRY, hairy ears debated) and pseudoautosomal SHOX (dominant-like X/Y homologues) complete sex chromosome grammar.",
+   "say": "X recessive passes carrier mothers to sons without male to male transmission ever. X dominant affects daughters doubly with male lethality often, and skewed inactivation manifests carriers needing surveillance clinically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Pedigree tell",
+     "Prototype diseases"
+    ],
+    "rows": [
+     [
+      "Autosomal dominant",
+      "Vertical, male to male present",
+      "Huntington, Marfan, FH, NF1 (penetrance/expressivity varies)"
+     ],
+     [
+      "Autosomal recessive",
+      "Horizontal, consanguinity, 25 percent sibs",
+      "CF, PKU, sickle, most metabolic"
+     ],
+     [
+      "X-linked recessive",
+      "Knights move via carrier women, no male to male",
+      "Duchenne, haemophilia, G6PD, OTC deficiency"
+     ],
+     [
+      "X-linked dominant",
+      "Both sexes, male often lethal/severe, no male to male",
+      "Rett (girls), hypophosphataemic rickets PHEX"
+     ],
+     [
+      "Mitochondrial (matrilineal)",
+      "Mother to all children variable, fathers never",
+      "MELAS, LHON, heteroplasmy thresholds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hardy-Weinberg** equilibrium converts incidence to carriers: recessive disease one in ten thousand (q squared) gives q one in one hundred, carriers two pq about one in fifty (the quoted CF northern European one in twenty five from incidence one in twenty five hundred arithmetic (q one fiftieth, carriers about one in twenty five), sickle trait malaria balanced polymorphism (heterozygote selection maintaining q, founder effects and endogamy local frequencies (beta thalassaemia Mediterranean, Tay-Sachs Ashkenazi (hexosaminidase plus founder diseases panel), Finnish disease heritage) population history in allele frequencies screened accordingly.",
+   "say": "Hardy-Weinberg converts incidence one in ten thousand to carriers about one in fifty arithmetically. Balanced malaria polymorphism and founder effects write population history into allele frequencies screened accordingly regionally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Worked carrier arithmetic (AR disease 1/10000)",
+     "points": [
+      "q squared equals 1/10000 so q equals 1/100",
+      "Carriers 2pq about 2/100 equals 1/50",
+      "Couple both carriers: 1/2500 couples times 1/4 child risk"
+     ]
+    },
+    "right": {
+     "title": "Assumptions that break usefully",
+     "points": [
+      "Consanguinity raises homozygosity (F coefficient)",
+      "Stratification (Wahlund) pools hide subgroups",
+      "Selection (sickle malaria) holds q high deliberately"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anticipation** and dynamic mutation (prior translation repeats consolidated clinically): paternal expansion bias (Huntington juvenile Westphal rigid, congenital myotonic maternal expansion paradox by repeat and sex (CTG maternal congenital, CAG paternal juvenile), fragile X premutation carriers at risk FXTAS (tremor ataxia males) and FXPOI (ovarian insufficiency) distinct from full mutation intellectual disability (methylated silenced sons, daughters variable by X inactivation ratios), repeat lengths borderline (intermediate, premutation) counselling ranges gene specific never memorised as one threshold, somatic instability (blood versus brain lengths, cancer MSI separate microsatellite mechanism distinguished verbally).",
+   "say": "Anticipation biases by transmitting sex and repeat type mechanistically distinct across diseases. Premutation carriers face tremor and ovarian diseases distinct from full mutation silencing phenotypes counselled separately generationally.",
+   "vis": null
+  },
+  {
+   "tx": "**Mosaicism** times mutations postzygotically: somatic (segmental NF1, McCune-Albright GNAS lethal germline surviving mosaic (polyostotic dysplasia, coast of Maine cafe au lait, precocious puberty triad), Proteus AKT1 overgrowth, cancers as somatic mosaic evolution, clonal haematopoiesis ageing), gonadal (parental blood negative yet recurrence, combined gonosomal. Uniparental disomy (trisomy rescue losing one parental chromosome (fifteen Prader/Angelman prior), monosomy rescue duplication, UPD fourteen Temple/Kagami, seven Silver-Russell, twenty pseudohypoparathyroidism spectra) and genomic imprinting reset failures complete pedigree paradoxes where inheritance looks broken but methylation obeys.",
+   "say": "Mosaicism times mutations postzygotically with gonadal recurrence despite normal parental blood testing counselled empirically. Uniparental disomy rescues trisomies creating imprinting paradoxes where inheritance looks broken but methylation obeys rules.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-genetics-gen1.webp",
+    "alt": "An ordered banded karyotype shows three circled copies at chromosome position twenty one among otherwise paired chromosomes.",
+    "caption": "Banded karyotype with circled triplet marking trisomy 21, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Karyotype notation** closes genetics (forty seven XX plus twenty one, forty five X, forty six XY t(9;22), Robertsonian forty five XX der(14;21) carriers forty five chromosomes yet balanced (centric fusion acrocentrics thirteen fourteen fifteen twenty one twenty two, Down recurrence by carrier sex, inversions (pericentric/paracentric recombinant risks), rings and markers genetics reports translated to risks, penetrance modifiers (prior translation) and polygenic multifactorial thresholds separating Mendelian certainty from population probability in counselling language finals demand.",
+   "say": "Robertsonian carrier sex decides Down recurrence from percent ranges to one hundred percent absolutes counselled distinctly. Polygenic thresholds separate Mendelian certainty from population probability in counselling language finals demand precisely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Notation fragment",
+     "Reads as",
+     "Counselling hook"
+    ],
+    "rows": [
+     [
+      "47,XX,+21",
+      "Female, trisomy 21 (47 total)",
+      "Recurrence mostly age related if free trisomy"
+     ],
+     [
+      "45,XX,der(14;21)",
+      "Female Robertsonian carrier (45, balanced)",
+      "Offspring Down risk by carrier sex quoted"
+     ],
+     [
+      "46,XY,t(9;22)",
+      "Male balanced BCR-ABL translocation (somatic in leukaemia context)",
+      "CML biology and TKI monitoring (germline distinction)"
+     ],
+     [
+      "mos 47,XX,+21/46,XX",
+      "Mosaic trisomy 21",
+      "Phenotype often milder, tissue sampling matters"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

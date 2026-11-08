@@ -1,0 +1,234 @@
+{
+  "v": 1,
+  "id": "pen-delayed-puberty-hypogonadotropic",
+  "title": "Hypogonadotropic Hypogonadism and Kallmann Syndrome: Olfactory and Neuroendocrine Axes",
+  "module": "pen-puberty-dsd",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Operational Criteria for Delayed Pubertal Onset",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-smr-puberty-timing-boneage.webp",
+        "alt": "Left hand radiograph with a bone age reading marked for each hand bone.",
+        "caption": "Bone age from a left hand film: one reading per bone. Credit: Mikael Häggström."
+      },
+      "tx": "Delayed puberty is absence of initial secondary sexual signs by 13 years in girls (no breast buds) or 14 years in boys (testicular volume < 4 mL), or absence of menarche by 15-16 years. Applying standardized **Delayed puberty operational definitions** highlights that stature velocity frequently wanes during early adolescence due to missing pubertal growth spurts. Systematic auxological monitoring distinguishes isolated pubertal delay from broader chronic systemic or neuroendocrine diseases.",
+      "say": "Pubertal onset is formally delayed when secondary sexual characteristics are absent by age thirteen in girls or age fourteen in boys."
+    },
+    {
+      "title": "Biochemical Profile of Hypogonadotropic Hypogonadism",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/growth-puberty-ageing-fig1.webp",
+        "alt": "Hypothalamic GnRH driving pituitary gonadotropins and gonadal steroids at puberty.",
+        "caption": "The HPG axis: GnRH, gonadotropins and gonadal steroids. Credit: StewardMD."
+      },
+      "tx": "Characterized by inappropriately low or undetectable serum LH and FSH in the presence of subnormal sex steroids (testosterone < 20 ng/dL in boys, estradiol < 10 pg/mL in girls). Verifying the **Hypogonadotropic hypogonadism biochemical profile** distinguishes it from hypergonadotropic states where gonadotropins rise markedly. Conversely, hypogonadotropic profiles establish failure of the hypothalamic gonadotropin-releasing hormone pulse generator or anterior pituitary gonadotrophs.",
+      "say": "Hypogonadotropic hypogonadism demonstrates low or undetectable gonadotropins alongside subnormal testosterone or estradiol levels."
+    },
+    {
+      "title": "Embryological Defect in Kallmann Syndrome",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Olfactory Placode\nShared embryonic origin"
+          },
+          {
+            "id": "2",
+            "label": "Disrupted Co-Migration\nAxons fail to reach cribriform plate"
+          },
+          {
+            "id": "3",
+            "label": "Hypothalamic Arrest\nGnRH neurons fail to reach arcuate nucleus"
+          },
+          {
+            "id": "4",
+            "label": "Kallmann Phenotype\nAnosmia plus hypogonadotropic hypogonadism"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "Kallmann syndrome pairs congenital hypogonadotropic hypogonadism with anosmia or hyposmia due to defective embryonic co-migration of GnRH neuroendocrine cells and olfactory axons from the olfactory placode. Understanding **Kallmann syndrome anosmia and embryology** explains how GnRH neuroblasts migrate along olfactory and vomeronasal nerves across the cribriform plate into the hypothalamus. Failure of axonal elongation leads to agenesis of olfactory bulbs.",
+      "say": "Kallmann syndrome links hypogonadism with anosmia due to disrupted embryonic co-migration of GnRH neurons and olfactory nerves."
+    },
+    {
+      "title": "Genetics of Syndromic Kallmann Variants",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "X-Linked Form (ANOS1 / KAL1)",
+          "points": [
+            "Encodes anosmin-1 extracellular adhesion protein",
+            "Associated with bimanual synkinesia (mirror movements)",
+            "Unilateral renal agenesis in 30% of affected boys"
+          ]
+        },
+        "right": {
+          "title": "Autosomal Dominant / Recessive",
+          "points": [
+            "FGFR1 mutations with cleft lip and dental agenesis",
+            "PROKR2 and PROK2 prokineticin signaling defects",
+            "CHD7 mutations overlapping with CHARGE syndrome"
+          ]
+        }
+      },
+      "tx": "X-linked Kallmann is caused by ANOS1 / KAL1 mutations (Xp22.3, paired with bimanual synkinesia and unilateral renal agenesis); autosomal forms involve FGFR1, PROKR2, and CHD7. Mapping **Kallmann genetic variants (ANOS1, FGFR1, PROKR2)** demonstrates how anosmin-1 guides axonal pathfinding during cranial morphogenesis. Identifying associated features like involuntary mirror hand movements or absent kidney focuses targeted genetic testing and renal ultrasonography.",
+      "say": "X-linked Kallmann syndrome from ANOS1 mutations features involuntary mirror hand movements and unilateral renal agenesis alongside anosmia."
+    },
+    {
+      "title": "Normosmic Idiopathic Hypogonadotropic Hypogonadism",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Molecular Pathway",
+          "Mutated Genes",
+          "Sensory Olfaction",
+          "Endocrine Phenotype"
+        ],
+        "rows": [
+          [
+            "GnRH Receptor Axis",
+            "GNRHR, GNRH1",
+            "Completely normal smell",
+            "Selective pituitary gonadotroph unresponsiveness"
+          ],
+          [
+            "Neurokinin B Axis",
+            "TAC3, TACR3",
+            "Preserved olfaction",
+            "Failure of arcuate KNDy pulse generation"
+          ],
+          [
+            "Kisspeptin Signaling",
+            "KISS1, KISS1R",
+            "Preserved olfaction",
+            "Loss of upstream GnRH release trigger"
+          ]
+        ]
+      },
+      "tx": "Patients with nIHH have completely intact sense of smell, harboring mutations in GNRHR, TAC3 / TACR3 (neurokinin B pathway), KISS1 / KISS1R (kisspeptin pathway), or GNRH1. Evaluating **Normosmic idiopathic hypogonadotropic hypogonadism (nIHH)** via formal smell testing with the University of Pennsylvania Smell Identification Test reliably distinguishes nIHH from Kallmann. Defective kisspeptin-neurokinin signaling impairs pulsatile GnRH release despite anatomically normal hypothalamic development.",
+      "say": "Normosmic hypogonadotropic hypogonadism retains normal olfactory function and stems from defects in kisspeptin or neurokinin signaling pathways."
+    },
+    {
+      "title": "Diagnostic Window of Infantile Mini-Puberty",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Placental Steroid Clearance\nPostnatal withdrawal of estrogens"
+          },
+          {
+            "id": "2",
+            "label": "Pituitary Surge\nLH and FSH peak at 1-3 months"
+          },
+          {
+            "id": "3",
+            "label": "Mini-Puberty Window\nTestosterone peaks at 1-6 months"
+          },
+          {
+            "id": "4",
+            "label": "Diagnostic Seam\nAbsent surge detects hypogonadism early"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "During the neonatal mini-puberty (1-6 months of life), normal infants exhibit transient activation of LH/FSH and testosterone/estradiol; absence of mini-puberty in an infant boy with cryptorchidism and micropenis identifies congenital hypogonadism. Leveraging the **Mini-puberty window for early infant diagnosis** allows measuring serum gonadotropins and testosterone to circumvent waiting until 14 years of age. Inhibin B and AMH provide supplemental markers of Sertoli cell mass.",
+      "say": "The infant mini-puberty window permits early diagnosis of congenital hypogonadism in baby boys presenting with micropenis and undescended testes."
+    },
+    {
+      "title": "Testosterone Escalation Regimen in Adolescent Boys",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Initial Low-Dose Depot\nTestosterone enanthate 50 mg IM monthly"
+          },
+          {
+            "id": "2",
+            "label": "Stepwise Escalation\nIncrease by 50 mg every 6 months"
+          },
+          {
+            "id": "3",
+            "label": "Gradual Virilization\nPhallic growth, voice, height spurt"
+          },
+          {
+            "id": "4",
+            "label": "Full Adult Replacement\n200 mg IM every 2 weeks"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "Pubertal induction begins with low-dose depot testosterone (testosterone enanthate 50 mg IM monthly for 6 months, escalating by 50 mg every 6 months to adult dose 200 mg every 2 weeks). A structured **Pubertal induction regimen in adolescent boys** mirrors normal physiological puberty, allowing proportionate skeletal trunk growth and avoiding premature epiphyseal arrest. Serial bone age radiographs guide dose advancement toward adult replacement levels.",
+      "say": "Pubertal induction in adolescent boys uses gradually escalating depot testosterone over two to three years to mimic normal pubertal development."
+    },
+    {
+      "title": "Gonadotropin Therapy for Future Fertility Induction",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Testosterone Monotherapy",
+          "points": [
+            "Induces secondary virilization and libido",
+            "Suppresses intratesticular testosterone levels",
+            "Does not stimulate spermatogenesis or testicular growth"
+          ]
+        },
+        "right": {
+          "title": "Pulsatile / Gonadotropin Protocol",
+          "points": [
+            "hCG (1000-2000 IU twice weekly) stimulates Leydig cells",
+            "Recombinant FSH promotes Sertoli proliferation",
+            "Achieves testicular enlargement and fertile sperm counts"
+          ]
+        }
+      },
+      "tx": "Unlike testosterone replacement which does not stimulate spermatogenesis, gonadotropin therapy combining human chorionic gonadotropin hCG (LH analog, 1000-2000 IU twice weekly) with recombinant FSH follitropin induces testicular growth and fertile spermatogenesis. Utilizing **Gonadotropin therapy for future fertility** primes immature Sertoli cells with recombinant follitropin before human chorionic gonadotropin stimulates Leydig cells to produce high local intratesticular testosterone. Successful spermatogenesis is achieved in up to 80-90% of hypogonadotropic men.",
+      "say": "Combined human chorionic gonadotropin and follicle-stimulating hormone therapy induces testicular enlargement and fertile sperm production."
+    }
+  ]
+}

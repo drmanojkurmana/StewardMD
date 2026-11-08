@@ -3,11 +3,11 @@
  "module": "pat-joints-soft-tissue",
  "subject": "pathology",
  "title": "Arthritis and soft tissue tumours",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Osteoarthritis** (wear and tear, **Heberden DIP with Bouchard PIP nodes**, knee and hip, joint space narrowing with **osteophytes** and sclerosis, no systemic features) is managed by weight loss, physiotherapy, analgesia and arthroplasty; **rheumatoid arthritis** (symmetric **MCP and PIP** with morning stiffness over an hour, **pannus** erosions, **rheumatoid factor with anti CCP**, nodules with Felty and Caplan, **atlantoaxial instability**) needs early **methotrexate** with biologics to remission. Heberden nodes never rheumatoid; ulnar deviation with swan neck deforms RA hands.",
-   "say": "DIP nodes without systemics are OA: replace late. Symmetric MCP stiffness over an hour is RA: methotrexate early.",
+   "tx": "**Osteoarthritis** is degenerative joint disease with cartilage loss, joint space narrowing, osteophytes and subchondral sclerosis without systemic inflammation. It affects knees, hips and hands, where **Heberden nodes** involve the distal joints and Bouchard nodes involve the proximal joints. Weight loss, physiotherapy, analgesia and arthroplasty form its management, with surgery reserved for refractory disabling disease. **Rheumatoid arthritis** instead causes symmetric small joint synovitis with pannus, erosions and prolonged morning stiffness that needs early methotrexate.",
+   "say": "Osteoarthritis wears cartilage away and forms bony spurs without causing systemic inflammation in affected older patients. Rheumatoid disease inflames small joints symmetrically, erodes bone through pannus and stiffens the hands every morning. Early methotrexate controls rheumatoid disease, while osteoarthritis needs weight control, physiotherapy, analgesia and eventual joint replacement.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-joints-soft-tissue-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Gout** (hyperuricaemia, **negatively birefringent needle** crystals, **podagra** first MTP, tophi with renal stones, alcohol and diuretics precipitate) is aborted by **colchicine or NSAIDs** (steroids if contraindicated) and prevented by **allopurinol or febuxostat** (HLA-B5801 screening Asians, flare cover on initiation); **pseudogout** (**positively birefringent rhomboid** calcium pyrophosphate, chondrocalcinosis, knee in elderly, haemochromatosis and hyperpara associates) is aspirated with NSAIDs. Joint fluid polarised microscopy decides; serum urate misleads acutely.",
-   "say": "Needles negative bright podagra is gout: colchicine now, allopurinol later. Rhomboid positive knee is pseudogout.",
+   "tx": "**Gout** follows hyperuricaemia and deposits needle shaped monosodium urate crystals that appear **negatively birefringent** under polarised light. Acute podagra affects the first toe joint, while tophi and kidney stones mark chronic disease precipitated by alcohol and diuretics. Acute flares respond to **colchicine or anti inflammatory drugs**, and long term prevention uses allopurinol or febuxostat with flare cover. **Pseudogout** deposits rhomboid calcium pyrophosphate crystals that appear positively birefringent in an elderly knee joint.",
+   "say": "Gout deposits needle crystals that shine negatively under polarised light and inflame the big toe joint severely. Colchicine treats the acute flare, while allopurinol prevents recurrence after the flare settles with cover. Pseudogout forms rhomboid crystals with opposite birefringence and usually inflames an elderly knee joint instead.",
    "vis": null
   },
   {
-   "tx": "**Spondyloarthritis** (HLA-B27, sacroiliitis, enthesitis, uveitis) includes **ankylosing spondylitis** (**bamboo spine** with squaring, morning back pain easing exercise, **anti TNF**), psoriatic (DIP with **sausage digits** and nail pitting, methotrexate or biologics), reactive (post dysentery or chlamydia triad with circinate balanitis, self limited with antibiotics for trigger), enteropathic (IBD). **Septic arthritis** (Staph aureus, gonococcal migratory with tenosynovitis, prosthetic) is **urgent washout with IV antibiotics**; crystals never exclude sepsis. Spine MRI sacroiliitis stages.",
-   "say": "Bamboo morning back easing motion is AS: anti TNF. Hot single joint is septic until washed: never trust crystals alone.",
+   "tx": "The polarised image shows bright yellow and blue **needle shaped urate crystals** scattered through pink joint fluid from an inflamed toe. Their **negative birefringence** under the compensator confirms monosodium urate rather than calcium pyrophosphate in this acute flare. Recognising needle crystals matters because it proves **gout** and separates it from septic arthritis and pseudogout at microscopy. In the exam, podagra with negatively birefringent needles should immediately trigger gout treatment thinking.",
+   "say": "This polarised image shows long needle crystals that shine yellow and blue against pink joint fluid from podagra. Negative birefringence proves monosodium urate, which confirms gout rather than infection or pseudogout in this joint. Crystal microscopy decides the diagnosis because serum urate often misleads during an acute flare in hospital.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-joints-soft-tissue-gen1.webp",
+    "alt": "Polarized micrograph of yellow and blue needle crystals in pink fluid with explanatory arrows.",
+    "caption": "Needle urate crystals with negative birefringence in podagra. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Spondyloarthritis** links HLA B27 with sacroiliitis, enthesitis and uveitis across several related diseases that affect young adults. **Ankylosing spondylitis** produces a bamboo spine with vertebral squaring and morning back pain that eases with exercise and activity. Psoriatic disease involves distal joints with sausage digits and nail pitting, while reactive disease follows dysentery or chlamydial infection. **Septic arthritis** is separate and urgent because a hot single joint needs washout and intravenous antibiotics without delay.",
+   "say": "Spondyloarthritis inflames the sacroiliac joints and tendon insertions, with back pain that eases during daily activity. Bamboo spine, sausage digits and eye inflammation separate its subtypes across psoriatic, reactive and bowel related disease. A hot single joint suggests septic arthritis instead, and urgent washout protects cartilage from rapid destruction by infection.",
    "vis": null
   },
   {
-   "tx": "**Soft tissue tumours** sort benign versus malignant: lipoma (soft, slips, observe) versus **liposarcoma** (deep large, MDM2 amplified, wide resection), **GIST** (stomach, **CD117 and DOG1** positive, **imatinib** for KIT mutants), **synovial sarcoma** (young, X;18 SS18-SSX, biphasic, ifosfamide based), embryonal **rhabdomyosarcoma** (orbit in children, VAC chemo) versus alveolar (PAX-FOXO1, worse), **desmoid** (FAP Gardner, beta catenin, infiltrative without metastases, watch or resect), DFSP (storiform, Mohs). Size over 5 cm deep masses biopsy by core.",
-   "say": "Deep large fatty mass is liposarcoma until MDM2 says otherwise. CD117 gut wall tumour is GIST: imatinib.",
+   "tx": "**Soft tissue tumours** need separation of benign lesions from sarcomas because deep large masses behave very differently. Lipoma feels soft and mobile, while **liposarcoma** forms a deep large fatty mass with MDM2 amplification that needs wide resection. **GIST** arises in the stomach wall, expresses CD117 and DOG1, and responds to imatinib when KIT driven mutations drive growth. Synovial sarcoma affects young patients with a characteristic translocation, desmoid tumours infiltrate without metastasising, and any deep mass over 5 cm needs core biopsy.",
+   "say": "Soft tissue masses need biopsy when they lie deep, grow large or feel fixed to surrounding structures. Liposarcoma forms a deep fatty malignancy, while GIST arises in the stomach wall and responds to targeted therapy. Synovial sarcoma affects young patients, and desmoid tumours infiltrate locally without spreading to distant organs through blood.",
    "vis": {
     "kind": "table",
     "cols": [

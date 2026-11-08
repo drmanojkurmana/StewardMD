@@ -3,11 +3,11 @@
  "module": "rad-ir-tips",
  "subject": "radiology",
  "title": "TIPS and portal interventions",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "The **transjugular intrahepatic portosystemic shunt** connects a hepatic vein to a portal branch through liver parenchyma, lowering **portal pressure** without abdominal surgery. Its two evidence-based indications are **refractory variceal bleeding** and **refractory ascites** despite maximal medical therapy. The shunt uses a **covered stent-graft**, usually Viatorr-type, which stays open longer than bare metal. Success is measured on the table by the **portosystemic gradient**, with flow confirmed into the right atrium.",
-   "say": "A TIPS connects a hepatic vein to a portal branch through the liver, lowering portal pressure without open surgery. It is indicated for refractory variceal bleeding and refractory ascites despite full medical therapy. A covered stent-graft keeps the tract open, and success is measured by the pressure gradient on the table.",
+   "tx": "A transjugular intrahepatic portosystemic shunt creates a channel through liver tissue between portal and systemic veins. The **transjugular intrahepatic portosystemic shunt** connects a hepatic vein to a portal branch and lowers **portal pressure** without abdominal surgery. The two proven indications are **refractory variceal bleeding** and **refractory ascites** that persist despite maximal medical therapy. A covered stent graft lines the tract and stays open longer than bare metal in follow up. Success shows on the table through gradient measurement and confirmed flow toward the heart.",
+   "say": "A shunt creates a channel through liver tissue between portal and systemic veins for decompression. The shunt is a channel that connects a hepatic vein to a portal branch without surgery. The two proven indications are refractory variceal bleeding and refractory ascites despite maximal medical therapy. A covered stent graft lines the tract and stays open longer than bare metal afterwards. Success shows on the table through gradient measurement and confirmed flow toward the heart.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Numbers decide who benefits from TIPS. The **portosystemic gradient** should fall to **12 mmHg or below**, the level at which variceal bleeding risk drops sharply under **Baveno and SIR guidance**. A gradient above this after deployment calls for **stent dilation** or revision. **Refractory ascites** needs repeated large-volume taps despite salt restriction and diuretics before TIPS is offered. Early or pre-emptive TIPS suits selected high-risk bleeders with preserved liver function rather than everyone with varices.",
-   "say": "Numbers decide who benefits. The gradient should fall to 12 or below, where bleeding risk drops sharply. Higher gradients need stent dilation or revision. Refractory ascites means repeated taps despite diet and diuretics, and early TIPS suits selected high-risk bleeders with preserved liver function.",
+   "tx": "This fluoroscopy image is helpful because it shows a **stent graft** that joins a portal branch below to a **hepatic vein** above through liver tissue. Contrast fills the channel and the label notes a **gradient drop**, which confirms that portal pressure falls after shunt creation. The tract crosses the liver without open surgery because access came through the jugular vein and cava. The image matters for the exam because the channel anatomy explains both benefit and encephalopathy risk. A wide channel decompresses varices while portal blood bypasses liver detoxification completely.",
+   "say": "This fluoroscopy image is helpful because it shows a stent graft that joins a portal branch to a hepatic vein. Contrast fills the channel and the label notes a pressure drop which confirms decompression after creation. The tract crosses the liver without open surgery because access came through the neck vein. The channel anatomy explains both benefit and brain risk in shunt treatment for portal hypertension. A wide channel is effective because it decompresses varices while portal blood bypasses liver detoxification afterwards.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-tips-gen1.webp",
+    "alt": "Chest and upper abdomen fluoroscopy showing stent graft shunt between portal branch and hepatic vein.",
+    "caption": "Fluoroscopy shows TIPS stent graft joining portal branch to hepatic vein. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Numbers decide who benefits from a shunt, because pressure reduction predicts bleeding control after deployment. The **portosystemic gradient** should fall to **12 mmHg or below**, where variceal bleeding risk drops sharply after treatment. A gradient that stays above target calls for **stent dilation** or revision before the patient leaves the lab. **Refractory ascites** means repeated large volume taps despite salt restriction and diuretics before shunt treatment begins. Early shunt placement suits a selected high risk bleeder with preserved liver function rather than every patient.",
+   "say": "Numbers decide who benefits from a shunt because pressure reduction predicts bleeding control after deployment. The gradient should fall to twelve or below where variceal bleeding risk drops sharply afterwards. A gradient that stays above target calls for stent dilation or revision before discharge. Refractory ascites means repeated large volume taps despite salt restriction and diuretics before treatment. Early shunt placement suits a selected high risk bleeder with preserved liver function.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Shunting portal blood past the liver has a price. **Hepatic encephalopathy** worsens or appears de novo in a substantial minority, managed with **lactulose** and **rifaximin** before shunt reduction is considered. **Liver failure** can follow in patients with very poor reserve, so bilirubin, MELD trajectory and frailty enter selection. **Heart failure** decompensates because the shunt returns splanchnic blood to the heart at once. **Polycystic liver disease**, uncontrolled sepsis and severe pulmonary hypertension weigh heavily against TIPS.",
-   "say": "Shunting blood past the liver has a price. Encephalopathy worsens in a substantial minority and is managed with lactulose and rifaximin before shunt reduction. Very poor liver reserve predicts failure, and heart failure can decompensate from the sudden return of blood. Polycystic disease and severe pulmonary hypertension argue against TIPS.",
+   "tx": "Shunting portal blood past the liver carries a price, and selection weighs that price before any puncture. **Hepatic encephalopathy** worsens or appears in a substantial minority and treatment starts with **lactulose and rifaximin** before reduction. **Liver failure** can follow when reserve already runs very poor, so bilirubin and frailty shape the decision. The shunt returns splanchnic blood to the heart at once, so **heart failure** can decompensate after deployment. Polycystic liver disease, uncontrolled sepsis and severe pulmonary hypertension weigh heavily against shunt creation in practice.",
+   "say": "Shunting portal blood past the liver carries a price and selection weighs that price before puncture. Brain dysfunction worsens or appears in a substantial minority and treatment starts with gut drugs. Liver failure can follow when reserve already runs very poor so bilirubin and frailty shape decisions. The shunt returns splanchnic blood to the heart at once so heart failure can decompensate. Cystic liver disease and uncontrolled sepsis and severe lung hypertension weigh heavily against shunting.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-tips-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "The portal venous system offers more than TIPS. **Portal vein recanalisation** with angioplasty and stenting treats symptomatic **non-cirrhotic thrombosis** and cavernous transformation with recurrent bleeding. **Transplenic access** reaches the portal system when jugular or transhepatic routes fail. **Variceal embolisation** with coils or glue accompanies TIPS when large spontaneous shunts steal flow. **BRTO** occludes bleeding gastric varices with a gastrorenal shunt through balloon-occluded retrograde injection of sclerosant.",
-   "say": "The portal system offers more than TIPS. Recanalisation with angioplasty treats symptomatic non-cirrhotic thrombosis with bleeding. Transplenic access helps when jugular routes fail. Coil embolisation of large shunts accompanies TIPS, and BRTO closes gastric varices through a gastrorenal shunt.",
+   "tx": "Portal intervention extends beyond shunt creation, because thrombosis and gastric varices need different tools entirely. **Portal vein recanalisation** with angioplasty and stenting treats symptomatic **non cirrhotic thrombosis** with recurrent bleeding or pain. **Transplenic access** reaches the portal system when jugular or transhepatic routes fail to give safe entry. **Variceal embolisation** with coils or glue accompanies a shunt when large spontaneous shunts steal flow away. BRTO occludes bleeding gastric varices through a gastrorenal shunt with balloon occluded retrograde sclerosant injection.",
+   "say": "Portal intervention extends beyond shunt creation because thrombosis and gastric varices need different tools. Recanalisation with angioplasty and stenting treats symptomatic non cirrhotic thrombosis with recurrent bleeding or pain. Spleen access reaches the portal system when jugular or liver routes fail to give entry. Coil embolisation is added to a shunt when large spontaneous shunts steal flow away from varices. Retrograde occlusion closes bleeding gastric varices through a gastrorenal shunt with sclerosant injection.",
    "vis": {
     "kind": "table",
     "cols": [

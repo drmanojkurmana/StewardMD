@@ -3,11 +3,11 @@
  "module": "rad-ir-drainage-ptbd",
  "subject": "radiology",
  "title": "PTBD technique and biliary stenting",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Blocked bile needs an outside lane. **Percutaneous transhepatic biliary drainage** punctures peripheral ducts under ultrasound with fluoroscopic wire guidance, rescuing failed ERCP and hilar blocks. **Right-sided access** suits distal blocks while left-sided suits hilar tumours. **Cholangitis with Charcot features** makes drainage urgent within hours. **Coagulopathy correction** precedes liver punctures since tracts bleed freely.",
-   "say": "Blocked bile needs an outside lane. Biliary drainage punctures peripheral ducts under ultrasound, rescuing failed endoscopy and hilar blocks. Right-sided access suits distal blocks while left suits hilar tumours. Fever with pain and jaundice makes drainage urgent. Clotting correction precedes liver punctures.",
+   "tx": "Blocked bile needs an external route when endoscopic drainage has failed. **Percutaneous transhepatic biliary drainage** punctures a peripheral duct under ultrasound with fluoroscopic wire guidance. Right sided access suits distal blocks, while left sided access suits **hilar tumours** better. **Cholangitis** with fever, pain and jaundice makes drainage urgent within hours. Clotting is corrected before liver puncture because the tract through liver can bleed freely.",
+   "say": "Blocked bile needs an external route when endoscopic drainage has failed. Biliary drainage is performed by puncturing a peripheral duct under ultrasound guidance carefully. Right sided access suits distal blocks, while left sided access suits hilar tumours. Fever with pain and jaundice makes drainage urgent, and clotting is corrected before liver puncture.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,8 @@
    }
   },
   {
-   "tx": "Internal-external tubes bridge to stents. **Internal-external catheters** drain bags outside while side-holes stent past blocks into duodenum. **Capping trials** clamp bags testing internal flow before tube removal. **Cholangiography through tubes** maps strictures for stent sizing. **Metal versus plastic stents** follows malignant durability against benign remodelling needs.",
-   "say": "Tubes bridge to stents. Internal-external catheters drain outside while stenting past blocks into gut. Capping trials clamp bags testing internal flow. Tube cholangiograms map strictures for sizing. Metal suits malignant durability while benign remodels.",
+   "tx": "An internal external catheter bridges external drainage towards a definitive stent. The **internal external catheter** drains into a bag while side holes stent past the block into the duodenum. A **capping trial** clamps the bag and tests whether bile flows internally before removal. Cholangiography through the tube maps the stricture and guides **stent sizing** accurately. Metal stents suit malignant durability, while plastic or retrievable stents suit benign remodelling.",
+   "say": "An internal external catheter is a bridge that links external drainage towards stenting. The catheter drains into a bag while side holes stent past the block. A capping trial clamps the bag and tests internal flow properly. Cholangiography maps the stricture, and metal suits malignant disease while benign strictures need remodelling options.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +74,19 @@
    }
   },
   {
-   "tx": "Sepsis and bleeding stalk every puncture. **Post-PTBD cholangitis** flares despite drainage needing blood cultures with antibiotic escalation. **Haemobilia with melaena** usually settles while arterial pseudoaneurysms need coils. **Catheter dislodgement** declares with lost output and pain needing urgent replacement before tracts close. **Pleural transgression** from high sticks causes effusions needing drainage.",
-   "say": "Sepsis and bleeding stalk every puncture. Cholangitis flares need cultures with stronger antibiotics. Bloody bile usually settles while arterial sacs need coils. Dislodged tubes declare with lost output needing urgent replacement. High sticks breach pleura causing effusions.",
+   "tx": "The fluoroscopic cholangiogram shows dilated intrahepatic ducts filling from a **PTBD catheter** that enters through the liver. The catheter crosses a tight **hilar stricture** and continues as an **internal external drain** towards the duodenum. Contrast reaches the duodenum along the stent path and proves internal drainage is possible. Examiners value this view because it links obstruction level with catheter position clearly.",
+   "say": "The cholangiogram shows dilated ducts that fill from a catheter through the liver. The catheter crosses a hilar stricture and continues towards the duodenum. Contrast reaches the duodenum and proves internal drainage is possible here. Examiners value this view because obstruction level and catheter position are shown clearly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-drainage-ptbd-gen1.webp",
+    "alt": "Fluoroscopic view of dilated intrahepatic ducts with internal external drain ending in duodenum.",
+    "caption": "Fluoroscopic cholangiogram shows PTBD catheter across hilar stricture to duodenum. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Sepsis and bleeding are the important complications after biliary puncture. **Post procedure cholangitis** can flare despite drainage and needs blood cultures with stronger antibiotics. Blood stained bile with melaena usually settles, but an arterial **pseudoaneurysm** needs coil embolisation. A dislodged catheter gives lost output with pain and needs urgent replacement before the tract closes. A high puncture that crosses pleura can cause an effusion that needs drainage.",
+   "say": "Sepsis and bleeding are the important complications after biliary puncture. Cholangitis can flare despite drainage and needs cultures with stronger antibiotics. Blood stained bile usually settles, but an arterial sac needs coil embolisation. A dislodged catheter needs urgent replacement, while a high puncture can cause pleural effusion and breathlessness.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-drainage-ptbd-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Maturation decides tube freedom. **Tract maturation** over weeks lets exchanges and removals happen without bile leaks. **Stent occlusion** returns with jaundice needing exchange through mature tracts. **Benign remodelling** with prolonged stenting reshapes postoperative strictures. **Follow-up cholangiograms** schedule exchanges before sludge blocks metal.",
-   "say": "Maturation decides tube freedom. Weeks of tract healing allow safe exchanges and removals. Occluded stents return with jaundice needing exchange through mature tracts. Prolonged stents remodel benign strictures. Scheduled cholangiograms exchange before sludge blocks.",
+   "tx": "Tract maturation decides when tubes can be exchanged or removed safely. A **mature tract** over weeks allows exchanges without bile leaking into the peritoneum. **Stent occlusion** returns with jaundice and needs exchange through the mature tract. Prolonged stenting can remodel a benign postoperative stricture and restore bile flow. Follow up cholangiograms schedule exchanges before sludge blocks the stent and causes sepsis.",
+   "say": "Tract maturation decides when tubes can be exchanged or removed safely. A mature tract over weeks allows exchanges without bile leakage occurring. Stent occlusion returns with jaundice and needs exchange through the tract. Prolonged stenting remodels benign strictures, and scheduled cholangiograms prevent sludge blockage and recurrent sepsis.",
    "vis": {
     "kind": "flow",
     "nodes": [

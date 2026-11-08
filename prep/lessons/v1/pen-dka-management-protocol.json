@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "id": "pen-dka-management-protocol",
+  "title": "Pediatric Diabetic Ketoacidosis: ISPAD 2022 Protocol, Fluid Resuscitation and Cerebral Edema",
+  "module": "pen-diabetes-glucose",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "ISPAD Biochemical Diagnostic Triad for DKA",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dka-fig1.webp",
+        "alt": "Insulin deficiency driving lipolysis and hepatic ketone production in ketoacidosis.",
+        "caption": "DKA: insulin lack drives lipolysis and ketogenesis. Credit: StewardMD."
+      },
+      "tx": "DKA is defined by hyperglycemia (blood glucose > 200 mg/dL / 11 mmol/L), venous pH < 7.30 or serum bicarbonate < 18 mEq/L, and ketonemia (blood beta-hydroxybutyrate >= 3.0 mmol/L) or moderate/large ketonuria. The **ISPAD biochemical diagnostic triad for DKA** establishes that absolute insulin deficiency triggers uninhibited lipolysis and hepatic oxidation of free fatty acids into acetoacetate and beta-hydroxybutyrate. Point-of-care capillary beta-hydroxybutyrate provides immediate confirmation.",
+      "say": "Diabetic ketoacidosis requires blood glucose over two hundred, venous pH under seven point three or bicarbonate under eighteen, and elevated beta-hydroxybutyrate."
+    },
+    {
+      "title": "Severity Stratification by Venous Blood Gas",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mild to Moderate DKA",
+          "points": [
+            "Mild: venous pH 7.20-7.29, bicarbonate 10-17 mEq/L",
+            "Moderate: venous pH 7.10-7.19, bicarbonate 5-9 mEq/L",
+            "Managed in high-dependency step-down unit"
+          ]
+        },
+        "right": {
+          "title": "Severe DKA Risk Profile",
+          "points": [
+            "Venous pH < 7.10 or serum bicarbonate < 5 mEq/L",
+            "Mandates pediatric intensive care admission",
+            "High risk for hypoperfusion and cerebral edema"
+          ]
+        }
+      },
+      "tx": "Severity is classified by acidosis: Mild (venous pH 7.20-7.29 or bicarbonate 10-17 mEq/L), Moderate (pH 7.10-7.19 or bicarbonate 5-9 mEq/L), and Severe (venous pH < 7.10 or bicarbonate < 5 mEq/L). Clinical **DKA severity stratification by venous pH** dictates the level of nursing surveillance, frequency of neurologic observations, and intensive care bed placement. Severe cases experience profound intravascular volume depletion requiring cautious staged resuscitation.",
+      "say": "Diabetic ketoacidosis is stratified by acidosis severity, where a venous pH below seven point one defines severe disease requiring intensive care."
+    },
+    {
+      "title": "Initial Crystalloid Fluid Resuscitation Guidelines",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Assessment of Dehydration\nTypically 5-10% volume deficit"
+          },
+          {
+            "id": "2",
+            "label": "Initial Isotonic Crystalloid\n10-20 mL/kg over 1-2 hours"
+          },
+          {
+            "id": "3",
+            "label": "Avoid Rapid Overhydration\nNo boluses > 20 mL/kg"
+          },
+          {
+            "id": "4",
+            "label": "Maintenance + Deficit\nEven replacement over 48 hours"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "Initial fluid resuscitation is 10-20 mL/kg of isotonic crystalloid (0.9% normal saline or Plasmalyte) infused over 1-2 hours; rapid large boluses (> 20 mL/kg) are strictly avoided to minimize cerebral edema risk. Calibrating the **Initial fluid bolus volume and timing** restores effective circulating volume, enhances renal perfusion, and lowers plasma osmolality gradually. Total remaining deficit and maintenance are distributed evenly across 48 hours.",
+      "say": "Resuscitation starts with ten to twenty milliliters per kilogram of isotonic crystalloid over one to two hours, avoiding aggressive rapid boluses."
+    },
+    {
+      "title": "Insulin Infusion Timing and Protocol Strictures",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bolus Insulin Contraindicated",
+          "points": [
+            "Never administer an IV insulin bolus",
+            "Rapid osmolar drop triggers cerebral swelling",
+            "Causes abrupt hypokalemia and vascular collapse"
+          ]
+        },
+        "right": {
+          "title": "Continuous Regular Infusion",
+          "points": [
+            "Start 0.05-0.1 U/kg/hr regular insulin",
+            "Delay start until 1 hour of fluid resuscitation",
+            "Restores volume before accelerating glucose uptake"
+          ]
+        }
+      },
+      "tx": "Insulin is NEVER administered as an intravenous bolus; continuous regular insulin infusion is started at 0.05-0.1 U/kg/hr only after 1 hour of fluid therapy has restored intravascular volume. Emphasizing **No insulin bolus and delayed infusion start** prevents sudden osmotic collapse and cardiovascular compromise while drastically reducing cerebral edema risk. Initiating insulin after fluid expansion allows hemodynamic stabilization before cellular glucose uptake accelerates.",
+      "say": "Insulin is never given as an intravenous bolus, but infused at zero point zero five to zero point one units per kilo per hour after an hour of fluids."
+    },
+    {
+      "title": "Two-Bag System and Dextrose Thresholds",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Blood Glucose < 250-300 mg/dL\nThreshold reached"
+          },
+          {
+            "id": "2",
+            "label": "Two-Bag System\nBag 1: 0% Dextrose, Bag 2: 10% Dextrose"
+          },
+          {
+            "id": "3",
+            "label": "Maintain Target Glucose\nTarget 150-200 mg/dL"
+          },
+          {
+            "id": "4",
+            "label": "Sustained Insulin Rate\nContinue insulin until ketoacidosis clears"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "When blood glucose drops below 250-300 mg/dL (14-17 mmol/L), 5-10% dextrose must be added to IV fluids (using the two-bag system) to maintain blood glucose between 150-200 mg/dL while continuing insulin to clear ketoacidosis. Employing the **Two-bag system and dextrose addition threshold** avoids halting or decreasing insulin prematurely, which would perpetuate lipolysis and prolong acidosis. Titrating rates between bag 1 and bag 2 prevents hypoglycemia while clearing ketones.",
+      "say": "When glucose drops below three hundred, dextrose is added to intravenous fluids using a two-bag system to allow continued insulin infusion."
+    },
+    {
+      "title": "Potassium Repletion Protocol and Electrolyte Timing",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dka-fig2.webp",
+        "alt": "Lipolysis, ketogenesis, acidosis, osmotic diuresis and potassium shifts in ketoacidosis.",
+        "caption": "DKA: acidosis, osmotic diuresis and potassium shifts. Credit: StewardMD."
+      },
+      "tx": "Potassium (40 mEq/L as 50% potassium chloride and 50% potassium phosphate) must be added to IV fluids immediately upon establishing urine output and verifying K < 5.5 mEq/L; insulin shifts potassium intracellularly. Observing strict **Potassium repletion timing and composition** is vital because as insulin drives potassium into hepatocytes and myocytes and rehydration dilutes plasma, rapid life-threatening hypokalemia and fatal cardiac dysrhythmias develop if replacement is neglected.",
+      "say": "Potassium must be added to maintenance fluids once urine output is established, providing forty milliequivalents per liter to avert dangerous hypokalemia."
+    },
+    {
+      "title": "Contraindication of Sodium Bicarbonate Therapy",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bicarbonate Fallacies",
+          "points": [
+            "Appears to rapidly correct arterial pH",
+            "Historically used for profound acidemia",
+            "Fails to improve clinical recovery time"
+          ]
+        },
+        "right": {
+          "title": "Proven Severe Hazards",
+          "points": [
+            "Paradoxical CSF and central cerebral acidosis",
+            "Aggravates acute intracellular hypokalemia",
+            "Significantly increases risk of fatal cerebral edema"
+          ]
+        }
+      },
+      "tx": "Bicarbonate therapy is contraindicated in pediatric DKA because it worsens cerebral intracellular acidosis, causes paradoxical CSF acidosis, hypokalemia, and increases cerebral edema risk. Enforcing the **Sodium bicarbonate contraindication** reflects that exogenous bicarbonate generates lipid-soluble carbon dioxide that diffuses readily across the blood-brain barrier while charged bicarbonate remains excluded. Furthermore, bicarbonate shifts the oxyhemoglobin dissociation curve leftward, impairing tissue oxygen release.",
+      "say": "Sodium bicarbonate is contraindicated in pediatric ketoacidosis because it induces paradoxical central nervous system acidosis and worsens cerebral edema risk."
+    },
+    {
+      "title": "Cerebral Edema Recognition and Hyperosmolar Rescue",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "1",
+            "label": "Warning Signs\nHeadache, bradycardia, lethargy, incontinence"
+          },
+          {
+            "id": "2",
+            "label": "Immediate Bedside Intervention\nElevate head of bed to 30 degrees"
+          },
+          {
+            "id": "3",
+            "label": "Hyperosmolar Therapy\n3% saline 3-5 mL/kg or mannitol 0.5-1 g/kg"
+          },
+          {
+            "id": "4",
+            "label": "Defer Imaging\nNever delay hyperosmolar rescue for CT"
+          }
+        ],
+        "edges": [
+          [
+            "1",
+            "2"
+          ],
+          [
+            "2",
+            "3"
+          ],
+          [
+            "3",
+            "4"
+          ]
+        ]
+      },
+      "tx": "Cerebral edema occurs in 0.5-1% of pediatric DKA, signaled by headache, bradycardia, lethargy, or incontinence; immediately treat with 3% hypertonic saline (3-5 mL/kg over 15 min) or mannitol (0.5-1.0 g/kg) prior to neuroimaging. Rapid response to **Cerebral edema signs and hyperosmolar therapy** recognizes deterioration typically occurring 4-12 hours after starting treatment. Emergency hyperosmolar agents must be drawn and infused immediately at the bedside, without delaying for diagnostic neuroimaging.",
+      "say": "Suspected cerebral edema demands urgent administration of three percent hypertonic saline or mannitol before sending the child for brain imaging."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "bio-collagen-ecm",
+ "subject": "biochemistry",
+ "title": "Elastin, fibrillin and matrix disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Elastin** stretches and recoils in aorta, lung, skin and ligamenta flava through hydrophobic tropoelastin coacervation crosslinked by lysyl oxidase into unique desmosine and isodesmosine tetrafunctional junctions (urine desmosine tracks elastolysis). Unlike collagen it is made largely before adulthood with a half life measured in decades (about seventy years), so developmental elastin failures (supravalvular aortic stenosis in Williams syndrome ELN deletion, cutis laxa) and acquired elastolysis (emphysema, photoaging solar elastosis) are essentially irreversible.",
+   "say": "Elastin recoils through desmosine crosslinks with a half life measured in decades. Developmental failures and acquired elastolysis are essentially irreversible because adult synthesis barely replaces it.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Collagen (strength)", "points": ["Gly-X-Y triple helix, crosslinked fibrils", "Turns over, remodels wounds", "Tensile, minimally extensible"]},
+    "right": {"title": "Elastin (recoil)", "points": ["Desmosine crosslinked amorphous core", "Decades half life, developmental laid", "Stretches and snaps back"]
+    }
+   }
+  },
+  {
+   "tx": "**Alpha-1 antitrypsin** shields elastin from neutrophil elastase in lung; PiZZ deficiency (prior lesson polymers) lets elastolysis destroy alveolar walls into early lower lobe panacinar emphysema, especially with smoking (never smoking PiZZ cohorts still progress slower), while augmentation therapy and transplant frame advanced care. Elastase also drives aneurysm wall destruction with macrophage proteases (MMP-9/12), linking emphysema and abdominal aortic aneurysm protease biology examinations share.",
+   "say": "Antitrypsin shields elastin from neutrophil elastase in lung, and PiZZ deficiency destroys alveolar walls into early emphysema. Protease biology links emphysema and aortic aneurysm examinations together.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Elastin enemy", "Tissue destroyed", "Protection"],
+    "rows": [
+     ["Neutrophil elastase", "Alveolar walls (emphysema)", "Alpha-1 antitrypsin (augmentation if severe PiZZ)"],
+     ["MMP-9 and MMP-12 (macrophage)", "Aneurysm walls, plaques", "Doxycycline investigated; risk factor control standard"],
+     ["Ultraviolet plus enzymes", "Dermal elastin (solar elastosis)", "Photoprotection only prevention"]
+    ]
+   }
+  },
+  {
+   "tx": "**Marfan syndrome** (fibrillin-1 FBN1, microfibril scaffold and TGF-beta sequestration failure) gives tall arachnodactyly habitus (wrist and thumb signs, pectus), ectopia lentis upward and outward (contrast homocystinuria downward), myopia, spontaneous pneumothorax, dural ectasia, and lethal aortic root dilatation and dissection (pregnancy risk stratified by root diameter, beta blockade and losartan TGF-beta modulation, prophylactic root replacement thresholds, activity guidance). Revised Ghent criteria weight aortic root and genetics over habitus alone.",
+   "say": "Marfan fibrillin failure gives upward lens dislocation and lethal aortic root dilatation. Ghent criteria weight aortic root and genetics over habitus alone for diagnosis and prophylaxis thresholds.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Marfan (FBN1)", "points": ["Lens UP and out", "Aortic root aneurysm lethal", "Beta blockade, losartan, root surgery thresholds"]},
+    "right": {"title": "Homocystinuria (CBS, prior module)", "points": ["Lens DOWN and in", "Thrombosis lethal", "Pyridoxine, diet, betaine"]
+    }
+   }
+  },
+  {
+   "tx": "Matrix supporting cast completes tissue mechanics: **fibronectin** (RGD integrin bridges, wound provisional matrix, opsonin), laminins (basement membrane networks, congenital muscular dystrophy LAMA2, Pierson glomerular), nidogen and perlecan (heparan sulfate filtration charge in glomerulus, lost early in diabetic nephropathy thickening paradox), tenascins and thrombospondins (modulatory), and matrix metalloproteinases with TIMP brakes remodelling wounds, ovulation, angiogenesis and arthritic cartilage (aggrecanases ADAMTS in osteoarthritis).",
+   "say": "Fibronectin, laminins and perlecan complete tissue mechanics from wounds to glomerular filtration. Metalloproteinases with TIMP brakes remodel wounds and arthritic cartilage throughout adult medicine daily.",
+   "vis": null
+  },
+  {
+   "tx": "**Wound healing** sequences matrix deliberately: haemostasis fibrin clot, inflammation neutrophil then macrophage debridement, proliferation fibroblast collagen III plus angiogenesis granulation, remodelling collagen III replaced by crosslinked I (tensile strength plateau about eighty percent of original, never complete) with scar maturation over a year. Diabetes (glycation, microangiopathy), steroids (synthesis suppression), vitamin C and zinc failure, pressure and infection each break a named phase, making chronic ulcer stems phase diagnosis exercises.",
+   "say": "Wound healing replaces collagen three with crosslinked one to about eighty percent strength over a year. Diabetes, steroids and vitamin failure each break a named phase in ulcer stems.",
+   "vis": {
+    "kind": "flow",
+    "title": "Wound matrix in sequence",
+    "nodes": [
+     {"id": "clot", "label": "Fibrin clot scaffold"},
+     {"id": "gran", "label": "Granulation: collagen III, vessels"},
+     {"id": "remod", "label": "Remodel: collagen I crosslinked"},
+     {"id": "scar", "label": "Scar at about 80 percent strength"}
+    ],
+    "edges": [["clot", "gran"], ["gran", "remod"], ["remod", "scar"]]
+   }
+  },
+  {
+   "tx": "Basement membrane collagen IV diseases anchor nephrology returns: **Alport syndrome** (COL4A5 X linked commonest, A3/A4 recessive and dominant spectrum) loses the alpha3/4/5 network in glomeruli (haematuria, split lamina densa basket weave, sensorineural deafness, anterior lenticonus), while Goodpasture antibodies attack alpha3 NC1 Goodpasture antigen (rapidly progressive glomerulonephritis plus lung haemorrhage, plasmapheresis). Thin basement membrane (A3/A4 carriers) bridges them genetically, one collagen network explaining an entire renal examination chapter.",
+   "say": "Alport loses the collagen four network in glomeruli with deafness and lenticonus, while Goodpasture antibodies attack its alpha three chain. One network explains an entire renal examination chapter completely.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Collagen IV disease", "Genetics or antibody", "Ear and eye flags"],
+    "rows": [
+     ["Alport syndrome", "COL4A5 (X) or A3/A4", "Sensorineural deafness, lenticonus"],
+     ["Thin basement membrane nephropathy", "COL4A3/A4 carriers", "Isolated haematuria, usually benign"],
+     ["Goodpasture (anti-GBM)", "Autoantibody to alpha3 NC1", "Lung haemorrhage plus crescentic GN"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
