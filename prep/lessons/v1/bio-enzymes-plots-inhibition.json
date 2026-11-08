@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "bio-enzymes",
+ "subject": "biochemistry",
+ "title": "Plots and reversible inhibition",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Lineweaver-Burk** double reciprocal (one over velocity versus one over substrate) straightens the hyperbola: y intercept one over Vmax, x intercept minus one over Km, slope Km over Vmax, letting inhibition patterns read at a glance despite distorting low substrate errors (Eadie-Hofstee and Hanes plots modern alternatives). Competitive lines converge at the y axis, pure noncompetitive at the x axis, uncompetitive run parallel, mixed converge elsewhere, a visual grammar examinations still draw freehand.",
+   "say": "Lineweaver-Burk straightens the hyperbola with intercepts reading Vmax and Km directly. Competitive lines converge at the y axis, noncompetitive at the x axis, and uncompetitive run parallel visually.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-enzymes-gen1.webp",
+    "alt": "Paired surface models and kinetic plots contrast active site competitive inhibition with allosteric noncompetitive inhibition patterns.",
+    "caption": "Competitive and noncompetitive inhibition models with kinetic plots, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Competitive inhibition** (inhibitor resembles substrate, binds active site reversibly, overcome by raising substrate: apparent Km rises, Vmax unchanged) powers statins at HMG-CoA reductase, methotrexate at dihydrofolate reductase, malonate at succinate dehydrogenase (prior module), physostigmine at acetylcholinesterase, and ethanol/fomepizole competing alcohol dehydrogenase in methanol poisoning (substrate competition as antidote, affinity order methanol over ethanol reversed therapeutically by higher ethanol affinity management historically, fomepizole modern). Ki quantifies inhibitor potency independent of substrate concentration only for competitive comparisons taught carefully.",
+   "say": "Competitive inhibition raises apparent Km with Vmax unchanged and is overcome by substrate. Statins, methotrexate and fomepizole in methanol poisoning power therapy through active site competition daily.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Inhibition type", "Km apparent", "Vmax apparent", "Burk lines meet"],
+    "rows": [
+     ["Competitive", "Increased", "Unchanged", "At y axis (same 1/Vmax)"],
+     ["Pure noncompetitive", "Unchanged", "Decreased", "At x axis (same -1/Km)"],
+     ["Uncompetitive", "Decreased", "Decreased", "Parallel (binds ES only)"],
+     ["Mixed", "Either direction", "Decreased", "Elsewhere (left of y axis)"]
+    ]
+   }
+  },
+  {
+   "tx": "**Noncompetitive** inhibitors bind elsewhere (allosteric, either E or ES) lowering effective enzyme (Vmax falls, Km unchanged in pure form; cyanide at cytochrome oxidase taught classically with mixed features in reality), while uncompetitive bind only ES (Km and Vmax both fall, herbicide glyphosate and lithium teaching examples, physiological rarity because multic substrate reactions favour it). Irreversible inhibitors leave kinetics for toxicology: Km/Vmax of survivors normal but enzyme number permanently reduced until resynthesis.",
+   "say": "Noncompetitive inhibitors lower Vmax from allosteric sites, while uncompetitive bind only the enzyme substrate complex. Irreversible inhibitors reduce enzyme number permanently until cellular resynthesis restores activity slowly.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Reversible (equilibrium governed)", "points": ["Washes out, dialysis or time reverses", "Km/Vmax patterns classify", "Most drugs live here"]},
+    "right": {"title": "Irreversible (covalent)", "points": ["Activity returns by resynthesis only", "Aspirin platelet 10 days; OP ageing", "Survivor enzymes kinetically normal"]
+    }
+   }
+  },
+  {
+   "tx": "**Suicide (mechanism based) inhibition** tricks the enzyme into manufacturing its own covalent trap from an inert substrate analogue: clavulanate destroyed by beta-lactamase protecting amoxicillin, allopurinol oxidised by xanthine oxidase to oxypurinol chelating molybdenum, 5-fluorouracil metabolite locking thymidylate synthase ternary complex, penicillin acylating transpeptidase, disulfiram aldehyde dehydrogenase blockade (acetaldehyde flushing with ethanol), selegiline MAO-B covalent. Each drug is a substrate first, which is why selectivity exceeds simple competitive mimics.",
+   "say": "Suicide inhibitors trick enzymes into manufacturing covalent traps from inert analogues, as clavulanate and allopurinol demonstrate. Each drug is a substrate first, explaining selectivity beyond simple competitive mimics therapeutically.",
+   "vis": null
+  },
+  {
+   "tx": "Feedback inhibition closes pathways economically (CTP on aspartate **transcarbamoylase** bacterial prototype, cholesterol on HMG-CoA reductase layered, ATP on PFK-1) at first committed steps rather than last, preventing intermediate waste, while product inhibition (glucose-6-phosphate on hexokinase) restrains single enzymes locally. Allosteric activators (AMP on phosphorylase, fructose-2,6-bisphosphate on PFK-1) integrate energy state faster than gene expression, bridging to covalent cascades and zymogens in the next lesson.",
+   "say": "Feedback inhibition closes pathways at first committed steps to prevent intermediate waste economically. Allosteric activators integrate energy state faster than gene expression changes could ever respond physiologically.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Competitive drug pair", "Enzyme contested", "Clinical theatre"],
+    "rows": [
+     ["Statins versus HMG-CoA", "HMG-CoA reductase", "Cholesterol synthesis (prior module)"],
+     ["Methotrexate versus dihydrofolate", "Dihydrofolate reductase", "Cancer, rheumatoid, leucovorin rescue"],
+     ["Fomepizole versus methanol", "Alcohol dehydrogenase", "Methanol and ethylene glycol poisoning"],
+     ["Malonate versus succinate (teaching)", "Succinate dehydrogenase", "TCA classic, not a drug"]
+    ]
+   }
+  },
+  {
+   "tx": "Plot literacy drills close the lesson: given shifted curves, state Km and Vmax arrows, name inhibition, predict whether excess substrate rescues, then anchor to one drug. Examiners award the drug anchor disproportionately because it proves transfer. **Allosteric enzymes** deliberately break Michaelis assumptions next (sigmoid curves, K systems changing affinity versus V systems changing capacity), where haemoglobin oxygen binding becomes the kinetic Rosetta stone already learned.",
+   "say": "State Km and Vmax arrows, name inhibition, predict substrate rescue, then anchor to one drug for transfer marks. Allosteric enzymes break Michaelis assumptions next with sigmoid curves deliberately.",
+   "vis": {
+    "kind": "flow",
+    "title": "Reading any inhibition plot",
+    "nodes": [
+     {"id": "int", "label": "Compare intercepts (Vmax, Km)"},
+     {"id": "type", "label": "Name competitive, non, un or mixed"},
+     {"id": "drug", "label": "Anchor to one drug and rescue prediction"}
+    ],
+    "edges": [["int", "type"], ["type", "drug"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
