@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "med-acid-base",
+ "subject": "medicine",
+ "title": "Urine Anion Gap and Renal Tubular Acidosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Evaluation of normal anion gap metabolic acidosis requires distinguishing gastrointestinal bicarbonate loss from renal tubular acidification defects. Calculating the **urine anion gap** using the formula sodium plus potassium minus chloride provides an indirect estimate of urinary ammonium excretion. When ammonium excretion rises appropriately alongside unmeasured chloride anions, the calculated gap becomes negative, pointing to diarrhoea or enterocutaneous fistula. Conversely, impaired distal tubular proton secretion reduces ammonium output, yielding a positive urine anion gap that confirms a renal tubular acidification failure.",
+   "say": "Evaluation of normal anion gap metabolic acidosis requires distinguishing gut bicarbonate loss from renal tubular acidification defects. Calculating the urine anion gap using sodium plus potassium minus chloride estimates urinary ammonium excretion. When ammonium excretion rises appropriately alongside unmeasured chloride, the gap becomes negative, confirming gut loss. Conversely, impaired distal tubular proton secretion yields a positive urine anion gap, indicating a renal tubular defect.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Negative Urine Anion Gap",
+     "points": [
+      "Formula: (Na + K) - Cl < 0",
+      "High urinary ammonium (NH4+) excretion",
+      "Chloride exceeds sodium plus potassium",
+      "Typical cause: severe diarrhoea, laxatives"
+     ]
+    },
+    "right": {
+     "title": "Positive Urine Anion Gap",
+     "points": [
+      "Formula: (Na + K) - Cl > 0",
+      "Impaired urinary ammonium secretion",
+      "Unmeasured ammonium is markedly reduced",
+      "Typical cause: distal renal tubular acidosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Defective proton secretion by alpha-intercalated cells in the collecting duct leads to systemic acidaemia with paradoxically alkaline urine. Diagnosing **distal rta type 1** relies on demonstrating a persistent urinary pH above five point five despite profound systemic metabolic acidosis. Because the failing apical proton pump cannot acidify urine, calcium phosphate precipitates readily in alkaline tubular fluid. Patients frequently present with recurrent nephrolithiasis, bilateral nephrocalcinosis, osteomalacia, and severe hypokalaemia from compensatory potassium wasting, necessitating lifelong oral sodium bicarbonate or potassium citrate supplementation.",
+   "say": "Defective proton secretion by alpha-intercalated cells in the collecting duct leads to systemic acidaemia with alkaline urine. Diagnosing distal rta type 1 relies on demonstrating a persistent urinary pH above five point five despite systemic metabolic acidosis. Because apical proton pumps fail to acidify urine, calcium phosphate precipitates readily. Patients frequently present with recurrent nephrolithiasis, nephrocalcinosis, and severe hypokalaemia, requiring oral bicarbonate or potassium citrate replacement.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/distal-renal-tubular-acidosis-fig1.webp",
+    "alt": "Pathophysiology and cellular mechanism of distal renal tubular acidosis type 1 in collecting duct.",
+    "caption": "Distal RTA cellular transport failure in intercalated cells with nephrocalcinosis risk. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Impaired proximal tubular reabsorption of filtered bicarbonate lowers the renal threshold for bicarbonate recovery, spilling base into the urine. Characterized as **proximal rta type 2**, this disorder stems from dysfunction of the sodium-bicarbonate cotransporter or sodium-hydrogen exchanger in the proximal tubule. While initial bicarbonate wasting produces alkalinuria, urine pH can fall below five point five once serum bicarbonate drops below the lower tubular threshold. It frequently occurs as part of generalized proximal dysfunction in Fanconi syndrome, driven by multiple myeloma light chains, cystinosis, or tenofovir toxicity.",
+   "say": "Impaired proximal tubular reabsorption of filtered bicarbonate lowers the renal threshold for base recovery. Characterized as proximal rta type 2, this disorder stems from dysfunction of proximal cotransporters or exchangers. While initial bicarbonate wasting causes alkalinuria, urine pH can fall below five point five once serum bicarbonate drops below the lower tubular threshold. It frequently occurs in Fanconi syndrome driven by myeloma light chains, cystinosis, or tenofovir toxicity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Distal RTA (Type 1)",
+     "Proximal RTA (Type 2)"
+    ],
+    "rows": [
+     [
+      "Primary defect",
+      "Impaired H+ secretion in collecting duct",
+      "Impaired HCO3- reabsorption in proximal tubule"
+     ],
+     [
+      "Minimal urine pH",
+      "Always > 5.5 despite acidaemia",
+      "Can drop < 5.5 when serum HCO3- is very low"
+     ],
+     [
+      "Serum potassium",
+      "Hypokalaemia (often severe)",
+      "Hypokalaemia (worsens with HCO3- therapy)"
+     ],
+     [
+      "Nephrocalcinosis",
+      "Common, with calcium phosphate stones",
+      "Absent; citrate excretion remains normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypoaldosteronism or collecting duct unresponsiveness to mineralocorticoids causes a distinctive hyperkalaemic metabolic acidosis. Identifying **type 4 rta** hinges on finding a normal anion gap metabolic acidosis paired with hyperkalaemia and an acidic urine pH below five point five. Elevated serum potassium directly suppresses renal cortical ammoniagenesis, starving the collecting duct of ammonium buffer and reducing net acid excretion. Common etiologies include diabetic nephropathy with hyporeninaemic hypoaldosteronism, interstitial nephritis, nonsteroidal anti-inflammatory drugs, angiotensin pathway blockers, and potassium-sparing diuretics.",
+   "say": "Hypoaldosteronism or collecting duct unresponsiveness to mineralocorticoids causes a distinctive hyperkalaemic metabolic acidosis. Identifying type 4 rta hinges on finding a normal anion gap acidosis paired with hyperkalaemia and an acidic urine pH below five point five. Elevated serum potassium directly suppresses renal ammoniagenesis, starving the collecting duct of ammonium buffer and reducing net acid excretion. Common etiologies include diabetic nephropathy, interstitial nephritis, and renin-angiotensin inhibitors.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glomerular-nephrotic-nephritic-rta-fig1.webp",
+    "alt": "Classification and tubular localization of renal tubular acidosis subtypes.",
+    "caption": "Tubular localization of RTA types 1, 2, and 4 across nephron segments. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Differentiating among the three primary forms of renal tubular acidosis requires integrating serum potassium levels with urinary acidification benchmarks. When evaluating **renal tubular acidosis**, clinicians initially assess serum potassium to isolate hyperkalaemic type 4 RTA from hypokalaemic types 1 and 2. Next, measuring urinary pH and calculating fractional excretion of bicarbonate following intravenous bicarbonate loading exposes the site of transport failure. Type 1 shows negligible bicarbonate excretion with persistently alkaline urine, whereas type 2 exhibits massive fractional excretion exceeding fifteen percent.",
+   "say": "Differentiating among the three primary forms of renal tubular acidosis requires integrating serum potassium levels with urinary benchmarks. When evaluating renal tubular acidosis, clinicians first assess serum potassium to isolate hyperkalaemic type 4 RTA from hypokalaemic types 1 and 2. Next, measuring urinary pH and fractional excretion of bicarbonate during bicarbonate infusion pinpoints the transport failure. Type 1 exhibits negligible excretion, whereas type 2 demonstrates massive excretion exceeding fifteen percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "RTA Subtype",
+     "Serum Potassium",
+     "Urine pH",
+     "Urine Anion Gap",
+     "Classic Etiology"
+    ],
+    "rows": [
+     [
+      "Type 1 (Distal)",
+      "Low or normal",
+      "> 5.5",
+      "Positive",
+      "Sjogren syndrome, amphotericin B"
+     ],
+     [
+      "Type 2 (Proximal)",
+      "Low or normal",
+      "Variable (< 5.5 or > 5.5)",
+      "Negative or positive",
+      "Fanconi syndrome, tenofovir, myeloma"
+     ],
+     [
+      "Type 4 (Hyperkalaemic)",
+      "High (> 5.0 mEq/L)",
+      "< 5.5",
+      "Positive",
+      "Diabetic nephropathy, ACE inhibitors"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Therapeutic strategies differ markedly based on the pathophysiological mechanism and underlying electrolyte imbalances of each tubular defect. Administering oral **citrate therapy** provides effective alkalinization for type 1 RTA because hepatic metabolism converts citrate into bicarbonate while urinary citrate prevents calcium stone precipitation. In proximal RTA, enormous amounts of bicarbonate are required because administered alkali is rapidly excreted, often requiring thiazide diuretics to contract extracellular volume. Conversely, treating type 4 RTA centers on dietary potassium restriction, loop diuretics, and fludrocortisone replacement in mineralocorticoid deficiency.",
+   "say": "Therapeutic strategies differ markedly based on the pathophysiological mechanism and underlying electrolyte imbalances of each tubular defect. Administering oral citrate therapy provides effective alkalinization for distal RTA because hepatic metabolism converts citrate to bicarbonate while urinary citrate prevents stone precipitation. In proximal RTA, massive bicarbonate doses are required because administered alkali is rapidly wasted. Conversely, treating type 4 RTA centers on potassium restriction, loop diuretics, and fludrocortisone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "assess",
+      "label": "Normal anion gap acidosis: Check serum K+"
+     },
+     {
+      "id": "hyper",
+      "label": "Hyperkalaemia: Type 4 RTA (Fludrocortisone, loop diuretics)"
+     },
+     {
+      "id": "hypo",
+      "label": "Hypokalaemia: Measure urine pH and urine anion gap"
+     },
+     {
+      "id": "rx",
+      "label": "pH > 5.5: Distal RTA (Citrate) | pH < 5.5: Proximal RTA (High-dose HCO3-)"
+     }
+    ],
+    "edges": [
+     [
+      "assess",
+      "hyper"
+     ],
+     [
+      "assess",
+      "hypo"
+     ],
+     [
+      "hypo",
+      "rx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measurement of the urine osmolal gap provides essential diagnostic corroboration when unmeasured urinary cations distort standard electrolyte calculations. The clinical **urine osmolal gap** represents the difference between measured urine osmolality and calculated urine osmolality based on urea nitrogen, glucose, sodium, and potassium. Because ammonium salts account for roughly half of the normal osmolal gap, a gap exceeding one hundred milliosmoles per kilogram indicates intact renal ammonium production. A narrow osmolal gap below forty confirms impaired ammoniagenesis, verifying distal acidification failure even if unusual organic anions are present.",
+   "say": "Measurement of the urine osmolal gap provides essential diagnostic corroboration when unmeasured urinary cations distort standard calculations. The clinical urine osmolal gap represents the difference between measured urine osmolality and calculated osmolality from urea, glucose, sodium, and potassium. Because ammonium salts account for half of the normal osmolal gap, a gap exceeding one hundred indicates intact ammonium excretion. A narrow gap below forty confirms impaired ammoniagenesis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "formula",
+      "label": "Calculate: Measured Osm - [2(Na + K) + Urea/2.8 + Glucose/18]"
+     },
+     {
+      "id": "high",
+      "label": "Gap > 100 mOsm/kg: Appropriate NH4+ excretion (Diarrhoea)"
+     },
+     {
+      "id": "low",
+      "label": "Gap < 40 mOsm/kg: Impaired NH4+ excretion (Distal RTA defect)"
+     }
+    ],
+    "edges": [
+     [
+      "formula",
+      "high"
+     ],
+     [
+      "formula",
+      "low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-term surveillance prevents catastrophic skeletal, nephrological, and metabolic sequelae in patients with chronic tubular acidosis. Chronic systemic acidaemia in distal tubular disease leaches calcium and phosphate from skeleton to buffer protons, provoking osteomalacia and **rickets** in paediatric cohorts. Maintaining normal serum bicarbonate levels through titrated alkali therapy arrests bone demineralization, restores normal growth velocities in children, and suppresses hypercalciuria to prevent progressive nephrocalcinosis and end-stage renal disease.",
+   "say": "Long-term surveillance prevents catastrophic skeletal, nephrological, and metabolic sequelae in patients with chronic tubular acidosis. Chronic acidaemia in distal tubular disease leaches calcium and phosphate from bone to buffer protons, provoking osteomalacia and rickets in children. Maintaining normal serum bicarbonate levels through alkali therapy arrests bone demineralization, restores growth velocity, and halts progressive nephrocalcinosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Untreated Chronic Acidosis",
+     "points": [
+      "Persistent bone buffer dissolution",
+      "Hypercalciuria and hypocitraturia",
+      "Recurrent calcium phosphate stones",
+      "Stunted linear growth in children"
+     ]
+    },
+    "right": {
+     "title": "Optimized Alkali Replacement",
+     "points": [
+      "Serum bicarbonate maintained at 22-24 mEq/L",
+      "Restoration of urinary citrate excretion",
+      "Resolution of hypercalciuria and stone formation",
+      "Preservation of normal skeletal mineralisation"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
