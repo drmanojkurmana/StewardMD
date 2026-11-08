@@ -1,0 +1,237 @@
+{
+  "id": "pnr-lennox-gastaut-syndrome",
+  "title": "Lennox-Gastaut Syndrome and Atonic Seizures",
+  "subject": "ss-paediatric-neurology",
+  "module": "Pediatric Epilepsy Syndromes and Status Epilepticus",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Lennox-Gastaut syndrome is an epileptic encephalopathy defined by a triad of clinical and electrographic findings. Affected children experience persistent cognitive decline alongside multiple seizure types.",
+      "tx": "Recognize the classical **LGS diagnostic triad** that establishes Lennox-Gastaut syndrome in early childhood. The clinical diagnosis requires: multiple intractable seizure types including tonic, atonic drop attacks, and atypical absence seizures; an electroencephalogram showing slow diffuse spike-and-wave discharges at frequencies below 2.5 Hz; and progressive cognitive impairment with behavioral dysfunction, typically appearing between 2 and 7 years of age (Nocturnal tonic hallmark).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic component",
+          "Specific diagnostic criteria",
+          "Clinical impact"
+        ],
+        "rows": [
+          [
+            "Polymorphic seizures",
+            "Tonic, atonic drop attacks, atypical absence",
+            "Frequent daily clusters and sudden falls"
+          ],
+          [
+            "Interictal EEG",
+            "Slow generalized spike-and-wave (< 2.5 Hz)",
+            "Severe background disruption and slowing"
+          ],
+          [
+            "Neurodevelopment",
+            "Progressive intellectual & behavioral decline",
+            "High rates of developmental delay and autism"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Tonic seizures occurring during sleep represent the single most reliable electroclinical hallmark of this syndrome. Polysomnography reveals high frequency generalized discharges.",
+      "tx": "Identify the **Nocturnal tonic seizures hallmark** on polysomnography and sleep electroencephalography. Brief tonic contractions of the axial, neck, and facial musculature occurring predominantly during non-rapid eye movement sleep are mandatory for diagnosing Lennox-Gastaut syndrome. The electrographic correlate is generalized paroxysmal fast activity consisting of rhythmic 10 to 20 Hz fast discharges lasting several seconds, frequently overlooked unless recorded during sleep (Drop attacks).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nrem",
+            "label": "Non-REM sleep transition"
+          },
+          {
+            "id": "gpfa",
+            "label": "Generalized Paroxysmal Fast Activity (10-20 Hz)"
+          },
+          {
+            "id": "tonic",
+            "label": "Bilateral brief axial tonic stiffening"
+          }
+        ],
+        "edges": [
+          [
+            "nrem",
+            "gpfa"
+          ],
+          [
+            "gpfa",
+            "tonic"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Atonic drop attacks lead to violent sudden falls and recurrent facial trauma. Prescribing specialized protective headgear is an essential safety precaution.",
+      "tx": "Mitigate the catastrophic **Atonic drop attacks injury risk** through aggressive physical protection. Sudden brief loss of postural tone causes the child to collapse violently to the ground without defensive reflexes, resulting in frequent dental fractures, facial lacerations, and closed head trauma. All ambulatory patients must be fitted with a custom protective helmet equipped with a faceguard, while long-term surgical planning evaluates corpus callosotomy (First-line polytherapy).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Drop Attack Mechanisms",
+          "points": [
+            "Sudden atonic loss of postural tone",
+            "Myoclonic-atonic lightning drop",
+            "Very brief flexor axial tonic spasm"
+          ]
+        },
+        "right": {
+          "title": "Injury Prevention Protocol",
+          "points": [
+            "Protective hard helmet with faceguard",
+            "Environmental home padding & safety gates",
+            "Evaluation for early palliative callosotomy"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Medical treatment requires rational polytherapy because monotherapy rarely achieves seizure control. Sodium valproate provides the foundation for initial regimens.",
+      "tx": "Construct **First-line polytherapy drugs** regimens to manage refractory multi-type seizures. Sodium valproate at 20 to 40 mg/kg/day serves as the primary backbone, demonstrating broad-spectrum efficacy against tonic, atonic, and atypical absence components. Clobazam at 0.5 to 1 mg/kg/day or lamotrigine is added sequentially; lamotrigine must be titrated very slowly over months to avoid fatal Stevens-Johnson syndrome given valproate-mediated glucuronidation inhibition (Rufinamide adjunctive).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antiseizure drug",
+          "Starting & target dosage",
+          "Key pharmacology & precautions"
+        ],
+        "rows": [
+          [
+            "Sodium valproate",
+            "20-40 mg/kg/day divided BID/TID",
+            "Broad-spectrum backbone; inhibits UGT metabolism"
+          ],
+          [
+            "Clobazam",
+            "0.5-1.0 mg/kg/day divided BID",
+            "GABA-A positive modulator; highly effective for drops"
+          ],
+          [
+            "Lamotrigine",
+            "Titrate very slowly (0.15 mg/kg/day start)",
+            "Slow titration mandatory to prevent Stevens-Johnson"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Rufinamide is specifically approved as an add-on medication for Lennox-Gastaut syndrome. It acts by prolonging the inactive state of voltage-gated sodium channels.",
+      "tx": "Incorporate **Rufinamide sodium channel blocker** therapy as targeted adjunctive treatment for drop attacks. Rufinamide is approved for patients aged 1 year and older with Lennox-Gastaut syndrome, dosed between 10 and 45 mg/kg/day divided twice daily with food. It prolongs the refractory period of voltage-gated sodium channels without worsening other seizure types, significantly reducing the frequency of injurious atonic and tonic drop attacks in clinical trials (Felbamate monitoring).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dose",
+            "label": "Rufinamide: 10 to 45 mg/kg/day with food"
+          },
+          {
+            "id": "mech",
+            "label": "Prolongs sodium channel refractory state"
+          },
+          {
+            "id": "drop",
+            "label": "Selective reduction in tonic-atonic drop attacks"
+          }
+        ],
+        "edges": [
+          [
+            "dose",
+            "mech"
+          ],
+          [
+            "mech",
+            "drop"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Felbamate can be exceptionally effective when multiple other medications have failed. However, its use requires strict surveillance for fatal marrow and liver toxicities.",
+      "tx": "Conduct rigorous **Felbamate aplastic anemia monitoring** when deploying this reserve agent for drug-resistant disease. While felbamate possesses potent dual NMDA-antagonist and GABA-enhancing properties that suppress intractable drop attacks, it carries black-box warnings for aplastic anemia (occurring in approximately 1 in 4000 patients) and fatal acute hepatic failure. Complete blood counts, reticulocytes, and liver function panels must be monitored biweekly (Ketogenic diet).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Black-box toxicity",
+          "Incidence & risk period",
+          "Mandatory surveillance protocol"
+        ],
+        "rows": [
+          [
+            "Aplastic anemia",
+            "1 in 4,000 (usually within 6-12 months)",
+            "Biweekly CBC with differential & reticulocytes"
+          ],
+          [
+            "Acute hepatic failure",
+            "Rare but often fatal necrosis",
+            "Biweekly ALT, AST, total bilirubin, albumin"
+          ],
+          [
+            "Anorexia & weight loss",
+            "Common (dose-dependent)",
+            "Growth charts and caloric monitoring at every visit"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "The ketogenic diet is a highly effective non-pharmacological therapy for refractory Lennox-Gastaut syndrome. Shifting brain metabolism to ketone bodies suppresses neuronal hyperexcitability.",
+      "tx": "Evaluate **Ketogenic diet efficacy** for children failing multiple second-line anti-seizure medications. A classic 4:1 or 3:1 fat-to-(protein plus carbohydrate) ratio ketogenic diet induces sustained systemic ketosis, elevating beta-hydroxybutyrate levels to 3 to 5 mmol/L. More than 40% to 50% of children with refractory Lennox-Gastaut syndrome experience at least a 50% reduction in total seizures, with substantial improvements in alertness and behavior (Corpus callosotomy).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ketogenic Diet Induction",
+          "points": [
+            "Classic 4:1 or 3:1 fat to non-fat ratio",
+            "Target beta-hydroxybutyrate: 3-5 mmol/L",
+            "Urine ketones checked twice daily"
+          ]
+        },
+        "right": {
+          "title": "Clinical Outcomes & Monitoring",
+          "points": [
+            "> 50% seizure reduction in 40-50% cases",
+            "Reduces atonic drops & improves alertness",
+            "Monitor renal ultrasound for nephrolithiasis"
+          ]
+        }
+      }
+    },
+    {
+      "say": "When medical therapy and diet fail to stop injurious drop attacks, palliative neurosurgery provides substantial relief. Corpus callosotomy disconnects the cerebral hemispheres to prevent generalized propagation.",
+      "tx": "Perform **Corpus callosotomy for drop attacks** in patients with non-resectable, catastrophic fall injuries. Disconnecting the anterior two-thirds or the complete corpus callosum disrupts rapid interhemispheric synchronization of secondary generalized epileptiform discharges. While it does not cure focal discharges, callosotomy achieves greater than 70% to 80% reduction in violent atonic and tonic drop attacks, dramatically curtailing head trauma and improving quality of life (Evaluation complete).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cand",
+            "label": "Refractory drop attacks causing head injury"
+          },
+          {
+            "id": "surg",
+            "label": "Anterior 2/3 or complete corpus callosotomy"
+          },
+          {
+            "id": "out",
+            "label": "> 70-80% reduction in atonic drop attacks"
+          }
+        ],
+        "edges": [
+          [
+            "cand",
+            "surg"
+          ],
+          [
+            "surg",
+            "out"
+          ]
+        ]
+      }
+    }
+  ]
+}
