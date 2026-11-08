@@ -483,25 +483,32 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-group-title { color: #e6f0ed; 
 @media (prefers-reduced-motion:reduce) { .il-card:active { transform:none; } }
 
 /* ============================================================================
- * Disease reader card (2026-11-03). Reading text sits on one raised white sheet.
- * The mint-to-lavender wash stays on the page and behind the header only.
- * The sheet is a grid sibling of the scroller, so the frame does not scroll away
- * and .dx-mgmt-body remains the full-width scrollport the jump chips measure.
+ * Disease reader card (2026-11-03; reworked 2026-11-04). The article itself
+ * (.kbr-read) is the raised card and scrolls with the content inside
+ * .dx-mgmt-body, which stays the full-width scrollport the jump chips measure.
+ * The header (grid row 1) is fully opaque; the card is row 2 content, so no
+ * line is cut by a fixed sheet edge and no empty white band trails the text.
+ * The mint-to-lavender wash stays on the page behind the card and header.
  * ========================================================================== */
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-hero { padding-top: 0; }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) {
   --kbr-ink: #16161a;
   --kbr-muted: #3a4250;
   --kbr-red: #c01018;
   --kbr-dot: #5b46b0;
   --kbr-line: #e3e6ee;
-  --kbr-gap-t: 8px;
-  --kbr-gap-b: 12px;
-  --kbr-radius: 14px;
-  --kbr-pad-x: 16px;
-  --kbr-pad-y: 16px;
+  --kbr-gap-t: 14px;
+  --kbr-gap-b: 20px;
+  --kbr-radius: 18px;
+  --kbr-pad-x: 22px;
+  --kbr-pad-y: 20px;
+  --kbr-card-bg: #fff;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  /* 16 px gutters (were 10): the sheet sat almost on the screen edge (owner 2026-11-05) */
+  /* 16 px gutters (were 10): the sheet sat almost on the screen edge (owner 2026-11-05).
+     The article itself is the card now (branch reader-card): header and body span
+     1 / -1 and the visible inset comes from .kbr-read margins below, so these
+     gutter tracks stay empty and both intents hold. */
   grid-template-columns: max(16px, env(safe-area-inset-left, 0px)) minmax(0, 1fr) max(16px, env(safe-area-inset-right, 0px));
   background: linear-gradient(90deg, #dff3ec 0%, #e8eef6 48%, #e6e0f4 100%) !important;
 }
@@ -510,29 +517,18 @@ html[data-appearance] #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) {
 }
 @media (min-width: 700px) {
   #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) {
-    --kbr-gap-t: 16px;
+    --kbr-gap-t: 18px;
     --kbr-gap-b: 32px;
     --kbr-radius: 20px;
-    --kbr-pad-x: 24px;
-    --kbr-pad-y: 22px;
-    grid-template-columns: minmax(32px, 1fr) minmax(0, 960px) minmax(32px, 1fr);
+    --kbr-pad-x: 28px;
+    --kbr-pad-y: 24px;
   }
 }
-#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-sheet {
-  grid-column: 2;
-  grid-row: 2;
-  z-index: 0;
-  margin: var(--kbr-gap-t) 0 var(--kbr-gap-b);
-  border-radius: var(--kbr-radius);
-  background: #fff;
-  border: 1px solid rgba(22, 28, 45, 0.10);
-  border-top-color: rgba(255, 255, 255, 0.95);
-  box-shadow:
-    inset 0 1px 0 #fff,
-    0 1px 1px rgba(22, 28, 45, 0.06),
-    0 10px 22px rgba(28, 36, 64, 0.12);
-  pointer-events: none;
-}
+/* The sheet element stays in the markup for any code that queries it, but the
+ * article itself is now the card: .kbr-read carries the card look and scrolls
+ * with the content inside .dx-mgmt-body (see below), so no fixed white layer
+ * can leave an empty band under cut-off text. */
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-sheet { display: none; }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-mgmt-top {
   grid-column: 1 / -1;
   grid-row: 1;
@@ -541,14 +537,16 @@ html[data-appearance] #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  background: transparent !important;
+  /* Fully opaque: the scroller lives in grid row 2 below this row, and the
+   * header paints its own wash so no article text can show through it. */
+  background: linear-gradient(90deg, #dff3ec 0%, #e8eef6 48%, #e6e0f4 100%) !important;
   border-bottom: 0 !important;
   box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
 html[data-appearance] #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-mgmt-top {
-  background: transparent !important;
+  background: linear-gradient(90deg, #dff3ec 0%, #e8eef6 48%, #e6e0f4 100%) !important;
   border-bottom: 0 !important;
   box-shadow: none !important;
   -webkit-backdrop-filter: none !important;
@@ -607,7 +605,7 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
   box-shadow: none !important;
 }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-mgmt-body {
-  grid-column: 2;
+  grid-column: 1 / -1;
   grid-row: 2;
   z-index: 1;
   align-self: stretch;
@@ -615,8 +613,11 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
   max-width: none;
   min-width: 0;
   min-height: 0;
-  /* inset from the sheet so the radius stays empty white and a line is not cut by the curve */
-  margin: calc(var(--kbr-gap-t) + 8px) 0 calc(var(--kbr-gap-b) + 28px);
+  /* Edge-to-edge scrollport with no top/bottom inset: the card (.kbr-read)
+   * scrolls inside it, so no line is sliced by a fixed sheet edge and no
+   * empty white band sits under the last visible line. The jump chips keep
+   * measuring this full-width scrollport (kbWireJump). */
+  margin: 0;
   padding: 0;
   border-radius: 0;
   background: transparent !important;
@@ -626,11 +627,28 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
 }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-read {
   box-sizing: border-box;
-  width: 100%;
+  width: auto;
   max-width: 100%;
   min-width: 0;
-  margin: 0;
+  /* Outer margin clears the screen edges (16px at 390px); the bottom margin
+   * plus safe-area keeps the card's bottom edge and corners visible after
+   * the last line. */
+  margin: var(--kbr-gap-t) max(16px, env(safe-area-inset-right, 0px)) calc(var(--kbr-gap-b) + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
   padding: var(--kbr-pad-y) var(--kbr-pad-x) 28px;
+  border-radius: var(--kbr-radius);
+  background: var(--kbr-card-bg);
+  border: 1px solid rgba(22, 28, 45, 0.10);
+  border-top-color: rgba(255, 255, 255, 0.95);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 1px 1px rgba(22, 28, 45, 0.06),
+    0 10px 22px rgba(28, 36, 64, 0.12);
+}
+@media (min-width: 700px) {
+  #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-read {
+    width: min(960px, calc(100% - 56px));
+    margin-inline: auto;
+  }
 }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) :is(.dx-mgmt-name, .kbr-summary, .kbr-sec p, .dx-mgmt-body li, .ev-ul li, .dx-mgmt-sys) {
   color: var(--kbr-ink);
@@ -652,6 +670,44 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
   color: var(--kbr-red);
   font-weight: 700;
 }
+/* Red flags: tinted callout with a red left rule (owner target photo). */
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert {
+  margin: 0 0 14px;
+  padding: 14px 16px 6px;
+  border: 0;
+  border-left: 3px solid var(--kbr-red);
+  border-radius: 12px;
+  background: #fdf1f0;
+}
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 2px;
+}
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert h4::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 22V3' stroke='%23c01018' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M5 4h13l-3 4 3 4H5z' fill='%23c01018'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert h4::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 22V3' stroke='%23ff8b84' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M5 4h13l-3 4 3 4H5z' fill='%23ff8b84'/%3E%3C/svg%3E");
+}
+body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert { background: rgba(255, 139, 132, 0.13); }
+/* the table scroll-hint fade paints --panel; on the card it must be the card colour or it shows as black bars */
+body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) :is(.kbv2-scroll, .kbr-scroll) { --panel: var(--kbr-card-bg); }
+/* Key terms: soft lavender pill. Background only, no vertical padding, so
+ * line height and wrapping are unchanged. */
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) [class^="md-"]:not(.md-abs):not(.md-emerg):not(.md-cite) {
+  padding-inline: 3px;
+  border-radius: 5px;
+  background: rgba(91, 70, 176, 0.12);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) [class^="md-"]:not(.md-abs):not(.md-emerg):not(.md-cite) { background: rgba(196, 182, 255, 0.18); }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .ev-ul { margin: 2px 0 4px; padding: 0; }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .ev-ul li {
   padding: 8px 0 8px 16px;
@@ -680,7 +736,7 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
   min-width: 0;
   max-width: 100%;
   overflow: hidden;
-  background: #fff;
+  background: var(--kbr-card-bg);
   border-bottom: 1px solid var(--kbr-line);
 }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-jump::after {
@@ -690,7 +746,7 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
   right: 0;
   bottom: 1px;
   width: var(--kbr-chip-cover, 0px);
-  background: #fff;
+  background: var(--kbr-card-bg);
   pointer-events: none;
   z-index: 2;
 }
@@ -761,10 +817,15 @@ body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) {
   --kbr-red: #ff8b84;
   --kbr-dot: #c4b6ff;
   --kbr-line: rgba(255, 255, 255, 0.12);
+  --kbr-card-bg: #1c1e26;
   background: linear-gradient(90deg, #16302c 0%, #1a1e2c 48%, #241e32 100%) !important;
 }
-body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-sheet {
-  background: #1c1e26;
+body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-mgmt-top,
+html[data-appearance] body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-mgmt-top {
+  background: linear-gradient(90deg, #16302c 0%, #1a1e2c 48%, #241e32 100%) !important;
+}
+body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-read {
+  background: var(--kbr-card-bg);
   border-color: rgba(255, 255, 255, 0.14);
   border-top-color: rgba(255, 255, 255, 0.28);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.45), 0 12px 24px rgba(0, 0, 0, 0.4);

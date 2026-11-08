@@ -3,11 +3,11 @@
  "module": "phm-cns-stimulants",
  "subject": "pharmacology",
  "title": "CNS stimulants, ADHD and narcolepsy",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**ADHD** (inattention with hyperactivity impairing school, comorbidity with tics and anxiety) is treated by **methylphenidate** (dopamine noradrenaline reuptake, appetite and sleep watched, drug holidays debated) or **atomoxetine** (selective noradrenaline, tics safer, suicidal ideation boxed, slower onset); guanfacine extended release suits tics and aggression. Diagnosis excludes thyroid, anaemia and sleep apnoea; behavioural therapy pairs. Cardiovascular screen (murmur, family sudden death) precedes stimulants.",
-   "say": "School impairing inattention with hyperactivity is ADHD: methylphenidate first, atomoxetine with tics. Hearts screened first.",
+   "tx": "**ADHD** causes inattention with hyperactivity that impairs school performance, and diagnosis requires exclusion of thyroid disease, anaemia and sleep apnoea before drug treatment. **Methylphenidate** blocks dopamine and noradrenaline reuptake and remains first line, while **atomoxetine** suits tics and anxiety with slower onset and a suicidal ideation warning. Guanfacine extended release helps tics and aggression, and behavioural therapy accompanies every drug regimen.",
+   "say": "ADHD impairs attention, impulse control and school performance across different settings. Methylphenidate improves focus by blocking dopamine and noradrenaline reuptake centrally. Atomoxetine works more slowly and suits children whose tics worsen on stimulants. Clinicians check the heart and help exclude medical mimics before treatment starts in every child.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/phm-cns-stimulants-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Stimulant cautions** (growth slowing, insomnia, appetite loss, **diversion** and misuse, psychosis at dose, seizures lowered threshold) are managed by lowest effective dose with holidays, locked storage and prescription monitoring; **tics** worsen on stimulants favouring atomoxetine or guanfacine. Blood pressure with weight charts follow; substance misuse history favours nonstimulants. Teachers rate progress blinded.",
-   "say": "Stimulants stunt appetite and sleep: holidays with locked cupboards. Tics worsen: atomoxetine instead.",
+   "tx": "**Stimulant treatment** suppresses appetite, delays sleep and slows growth velocity, so clinicians chart weight, height and blood pressure throughout therapy. Risks include **diversion and misuse**, psychosis at higher doses and lowering of seizure threshold in susceptible children. Lowest effective dosing, planned holidays, locked storage and prescription monitoring reduce harm, while **tics** often worsen and favour atomoxetine or guanfacine instead.",
+   "say": "Stimulants reduce appetite and delay sleep in many treated children. Growth and blood pressure require regular charting throughout long term treatment. Misuse and diversion increase when families store medicines insecurely at home. Tics worsen on stimulants and improve after switching to atomoxetine.",
    "vis": null
   },
   {
-   "tx": "**Narcolepsy** (hypocretin orexin loss, **cataplexy** laughing into weakness, sleep paralysis with hypnagogic hallucinations, MSLT early REM) is kept awake by **modafinil** (eugeroic, no euphoria, contraceptive failure caution) or pitolisant, with **sodium oxybate** nights consolidating sleep and cataplexy; amphetamines legacy. Driving licensed restricted; scheduled naps help. Idiopathic hypersomnia (long unrefreshing sleep) differs without cataplexy.",
-   "say": "Laughing into weakness with dream intrusions is narcolepsy: modafinil days, oxybate nights. Pills fail contraception: warn.",
+   "tx": "**Narcolepsy** follows hypocretin or orexin loss and presents with excessive sleepiness, cataplexy on laughter, sleep paralysis and hypnagogic hallucinations in the classic tetrad. **Modafinil** promotes wakefulness without euphoria but reduces contraceptive reliability, while **sodium oxybate** at night consolidates sleep and reduces cataplexy frequency. The multiple sleep latency test shows early REM entry and confirms the diagnosis objectively.",
+   "say": "Narcolepsy causes irresistible daytime sleepiness after loss of hypocretin neurones centrally. Laughter causes cataplexy and leads to sudden loss of muscle tone without loss of consciousness. Modafinil promotes wakefulness during the day but weakens hormonal contraception reliably. Sodium oxybate consolidates night sleep and reduces cataplexy attacks significantly.",
    "vis": null
   },
   {
-   "tx": "**Caffeine** (adenosine antagonism, neonatal **apnoea** treated, withdrawal headaches) and **theophylline** (narrow index, seizures, CYP interactions) stimulate modestly; **cocaine** (vasospasm MI with excited delirium, chest pain benzodiazepines not beta blockers, rhabdomyolysis) harms acutely. **Nootropics** (piracetam and analogues, evidence thin, myoclonus niche) are counselled realistically. Energy drinks stack caffeine with taurine risking arrhythmia.",
-   "say": "Neonatal apnoea of prematurity is caffeine territory. Cocaine chest pain never gets beta blockers.",
+   "tx": "The brain section marks **hypocretin loss** in the hypothalamus, the defect that destabilises wakefulness and REM sleep control in narcolepsy. The inset shows **cataplexy** as a laughing woman collapses with lost muscle tone while consciousness stays preserved. The tracing above shows early REM entry across five naps on the **multiple sleep latency test**, which confirms the diagnosis objectively.",
+   "say": "The image links hypothalamic hypocretin loss to the symptoms of narcolepsy directly. Laughter triggers cataplexy and sudden collapse while consciousness remains preserved throughout. Sleep testing shows REM sleep arriving abnormally early across repeated naps. Modafinil promotes wakefulness by acting on arousal pathways centrally.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-cns-stimulants-gen1.webp",
+    "alt": "Midline brain section marking hypothalamic hypocretin loss, laughing woman collapsing inset, five nap MSLT tracing",
+    "caption": "Brain section showing hypothalamic hypocretin loss, cataplexy inset, MSLT graph. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Caffeine** blocks adenosine receptors and treats neonatal apnoea of prematurity, while withdrawal after regular use causes headache in older patients. **Theophylline** stimulates modestly but carries a narrow index with seizures and drug interactions limiting routine use. **Cocaine** causes vasospasm myocardial infarction and excited delirium, and chest pain needs benzodiazepines while beta blockers remain forbidden because unopposed alpha stimulation worsens vasospasm.",
+   "say": "Caffeine treats apnoea of prematurity by blocking adenosine receptors in neonates. Theophylline carries a narrow safety margin and interacts with many medicines. Cocaine causes coronary vasospasm, myocardial infarction and dangerous agitation acutely. Benzodiazepines calm cocaine toxicity while beta blockers worsen vasospasm harmfully.",
    "vis": {
     "kind": "table",
     "cols": [

@@ -6,13 +6,13 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**CNS tumours** present by location through seizures, focal deficits, raised pressure headaches or endocrine failure rather than by systemic cancer behaviour. Adult tumours favour supratentorial compartments while childhood tumours favour the posterior fossa, a first fork in every stem. Metastases outnumber primary tumours in adults and sit at grey white junctions with oedema.",
-   "say": "Brain tumours declare by location: seizures, deficits, pressure or hormones. Adults grow them above the tentorium, children below. Adult brain masses are metastases first.",
+   "tx": "Brain tumours present by location rather than by systemic cancer symptoms. A **brain tumour** can cause seizures and focal deficits, and raised pressure causes **headache and vomiting** in many patients. Adult tumours favour supratentorial sites, childhood tumours favour the posterior fossa, and metastases outnumber primary tumours in adults.",
+   "say": "Tumours present by location because seizures and focal deficits reflect involved cortex. Raised intracranial pressure causes headache and vomiting in many affected patients. Adult tumours are supratentorial whereas childhood tumours are infratentorial more often. Metastases outnumber primary tumours because systemic cancers spread to brain.",
    "vis": null
   },
   {
-   "tx": "**Glioblastoma** is the commonest malignant primary adult tumour, crossing the corpus callosum as a butterfly lesion with ring enhancement, central necrosis and vasogenic oedema. Histology shows pseudopalisading necrosis and microvascular proliferation defining grade 4 behaviour. IDH mutation status now splits glioma biology, with IDH wildtype glioblastoma behaving worst.",
-   "say": "Glioblastoma crosses hemispheres as a ring enhancing butterfly mass. Pseudopalisading necrosis and new vessels make it grade four. IDH wildtype behaves worst.",
+   "tx": "Glioblastoma is the commonest malignant primary brain tumour in adults. **Glioblastoma** crosses the corpus callosum as a butterfly lesion, and **pseudopalisading necrosis** with microvascular proliferation defines grade four histology. Ring enhancement with central necrosis and oedema is characteristic on imaging, and IDH wild type tumours behave most aggressively.",
+   "say": "Glioblastoma is malignant and it crosses the corpus callosum between hemispheres. Ring enhancement is present because central necrosis develops inside the tumour mass. Pseudopalisading necrosis is characteristic and microvascular proliferation indicates grade four disease. IDH status is important because wild type tumours behave aggressively.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-cns-tumours-fig1.webp",
@@ -22,8 +22,8 @@
    }
   },
   {
-   "tx": "**Meningioma** grows slowly from arachnoid cap cells attached to dura, compressing rather than invading brain, with whorls and psammoma bodies and progesterone receptor expression. Most are benign grade 1 cured by excision, though atypical types recur. Dural tail enhancement and hyperostosis of overlying bone are imaging signatures examiners pair with histology.",
-   "say": "Meningioma grows slowly off the dura compressing brain, with whorls and psammoma bodies. Dural tail and thickened bone signpost it. Most are benign and curable.",
+   "tx": "Meningioma is a slow growing tumour that arises from arachnoid cap cells. A **meningioma** compresses brain rather than invading it, and **psammoma bodies** with whorls are seen on histology. Dural tail enhancement and hyperostosis are imaging clues, and most tumours are benign and are cured by complete surgical excision.",
+   "say": "Meningioma arises from arachnoid cells and it grows slowly over years. Compression occurs without invasion because the tumour remains extra axial typically. Whorls and psammoma bodies are seen and progesterone receptors are expressed frequently. Excision is curative because most tumours are benign grade one lesions.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -61,13 +61,24 @@
    }
   },
   {
-   "tx": "Childhood **medulloblastoma** fills the cerebellar vermis with small blue embryonal cells forming Homer Wright rosettes, obstructing the fourth ventricle and seeding the neuraxis through spinal fluid, so staging scans the whole spine. Pilocytic astrocytoma instead forms a cyst with enhancing mural nodule and Rosenthal fibres, often cured by excision alone.",
-   "say": "Medulloblastoma seeds spinal fluid from the vermis in children and needs whole spine staging. Pilocytic tumours form cyst plus nodule and often cure by surgery.",
+   "tx": "Medulloblastoma is an embryonal tumour of the cerebellar vermis in children. **Medulloblastoma** obstructs the fourth ventricle, and **Homer Wright rosettes** are formed by small blue embryonal cells. Spread occurs through cerebrospinal fluid to the spine, so staging images the whole neuraxis before treatment is planned for the child.",
+   "say": "Medulloblastoma is centred in the vermis and the fourth ventricle is obstructed in children. Small blue cells form rosettes and the tumour grows very rapidly clinically. Spinal seeding occurs because cells spread through cerebrospinal fluid pathways readily. Whole spine imaging is required because staging determines treatment intensity.",
    "vis": null
   },
   {
-   "tx": "**Pituitary adenomas** are now classified by hormone lineage transcription factors, presenting with hormone excess (prolactin, growth hormone, ACTH) or mass effect compressing optic chiasm into bitemporal hemianopia. Haemorrhage into a tumour (apoplexy) causes thunderclap headache with visual collapse needing urgent steroids and surgical opinion. Metastasis to brain favours lung, breast and melanoma primaries.",
-   "say": "Pituitary tumours over secrete hormones or compress the chiasm cutting temporal fields. Bleeding into one is apoplexy, an emergency. Lung, breast and melanoma seed brain most.",
+   "tx": "This MRI shows a midline cerebellar vermis mass with enhancing spinal nodules. The tumour is **medulloblastoma** with **spinal seeding** through cerebrospinal fluid, and the inset shows small blue cells around a Homer Wright rosette. Whole spine staging matters because drop metastases change treatment in this childhood tumour.",
+   "say": "This sagittal image is striking because a bright mass occupies the cerebellar vermis. Small enhancing nodules are present along the spinal canal from seeding. The inset is magnified and small blue cells with a rosette are visible. Spinal spread is important because staging changes treatment planning greatly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-cns-tumours-gen1.webp",
+    "alt": "Contrast enhanced sagittal head MRI with midline cerebellar mass and spinal nodules, plus histology inset.",
+    "caption": "Sagittal brain MRI showing cerebellar mass and spinal seeding. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Pituitary tumours present with hormone excess or with local mass effect. A **pituitary adenoma** can compress the optic chiasm, and **bitemporal hemianopia** results from that compression superiorly. Bleeding into a tumour causes apoplexy with headache and visual collapse, and lung, breast and melanoma are common sources of brain metastases.",
+   "say": "Pituitary tumours secrete hormones or they compress adjacent structures by expansion. The optic chiasm is compressed and temporal visual fields are lost bilaterally. Apoplexy occurs when bleeding develops inside an existing pituitary tumour suddenly. Steroids and urgent surgical opinion are required in that emergency.",
    "vis": null
   }
  ],
