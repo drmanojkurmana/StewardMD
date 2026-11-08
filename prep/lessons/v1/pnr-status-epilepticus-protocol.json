@@ -11,31 +11,10 @@
       "say": "The International League Against Epilepsy defines status epilepticus using two distinct operational milestones. Treatment must begin promptly at time one, before cellular injury sets in at time two.",
       "tx": "Apply the **ILAE operational definition t1 and t2** to direct emergency resuscitation. Convulsive status epilepticus is defined by two critical time points: t1 at 5 minutes, representing the threshold when spontaneous seizure cessation becomes unlikely and emergent pharmacological therapy must start, and t2 at 30 minutes, representing the boundary beyond which sustained epileptic firing precipitates irreversible neuronal injury, excitotoxicity, and pharmacoresistance (Benzodiazepine dosing).",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "t0",
-            "label": "0 min: Seizure onset"
-          },
-          {
-            "id": "t1",
-            "label": "5 min (t1): Initiate first-line therapy"
-          },
-          {
-            "id": "t2",
-            "label": "30 min (t2): Neuronal injury & receptor internalization"
-          }
-        ],
-        "edges": [
-          [
-            "t0",
-            "t1"
-          ],
-          [
-            "t1",
-            "t2"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/status-epilepticus-fig1.webp",
+        "alt": "Time critical escalation algorithm for convulsive status epilepticus.",
+        "caption": "Status epilepticus: escalate treatment by the clock. Credit: StewardMD."
       }
     },
     {

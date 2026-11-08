@@ -1,0 +1,204 @@
+{
+  "v": 1,
+  "id": "pnr-viral-encephalitis-hsv-je",
+  "title": "Pediatric Viral Encephalitis: HSV, Japanese Encephalitis and Enterovirus",
+  "module": "pnr-cns-demyelination-infections",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Herpes Simplex Encephalitis Neurotropism and EEG",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/brain-abscess-fig1.webp",
+        "alt": "Axial neuroimaging showing necrotizing temporal lobe edema and cerebritis",
+        "caption": "Necrotizing frontotemporal inflammation with prominent cerebral edema in viral encephalitis (StewardMD)."
+      },
+      "tx": "In children beyond the neonatal period, **HSV encephalitis localization and EEG** exhibits striking tropism for the limbic cortex, temporal lobes, and inferior frontal regions. Patients present with fever, hemicranial headache, personality changes, memory deficits, and focal seizures. Electroencephalography demonstrates pathognomonic periodic lateralized epileptiform discharges (PLEDs) over the involved temporal leads against a severely slowed background.",
+      "say": "Herpes simplex encephalitis predominantly targets the temporal and inferior frontal lobes, showing diagnostic periodic lateralized epileptiform discharges on EEG."
+    },
+    {
+      "title": "Intravenous Acyclovir Regimens and Duration",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient Cohort",
+          "Acyclovir Dosing Protocol",
+          "Mandatory Treatment Duration"
+        ],
+        "rows": [
+          [
+            "Children (3 mo to 12 yr)",
+            "20 mg/kg/dose IV every 8 hours",
+            "21 consecutive days of IV therapy"
+          ],
+          [
+            "Adolescents (> 12 yr)",
+            "10-15 mg/kg/dose IV every 8 hours",
+            "14 to 21 consecutive days of IV therapy"
+          ],
+          [
+            "Neonates (< 28 days)",
+            "20 mg/kg/dose IV every 8 hours",
+            "21 days followed by 6 months oral suppressive therapy"
+          ]
+        ]
+      },
+      "tx": "Empiric high-dose therapy must begin immediately upon suspicion. Guidelines for **Acyclovir dosing and duration in children** dictate 20 mg/kg/dose intravenously every 8 hours for 21 consecutive days in children under 12 years (10-15 mg/kg/dose in adolescents). Adequate hydration prevents obstructive acyclovir crystal nephropathy, while renal function and serum creatinine are monitored closely alongside absolute neutrophil counts.",
+      "say": "Intravenous acyclovir at twenty milligrams per kilogram per dose every eight hours for twenty one days is mandatory to optimize neurological recovery."
+    },
+    {
+      "title": "Secondary Post-HSV Autoimmune Encephalitis",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "h1",
+            "label": "Acute HSV encephalitis treated with acyclovir"
+          },
+          {
+            "id": "h2",
+            "label": "Viral clearance & secondary neuronal antigen release"
+          },
+          {
+            "id": "h3",
+            "label": "Anti-NMDAR encephalitis relapse at 2 to 8 weeks"
+          }
+        ],
+        "edges": [
+          [
+            "h1",
+            "h2"
+          ],
+          [
+            "h2",
+            "h3"
+          ]
+        ]
+      },
+      "tx": "A biphasic clinical deterioration occurring 2 to 8 weeks after successful viral clearance signals **Post-HSV autoimmune encephalitis**. Secondary to extensive viral necrotic cytolysis, liberated neuronal surface antigens elicit secondary autoantibodies, predominantly targeting the NMDA receptor. Children develop choreoathetosis, behavioral agitation, mutism, and relapsing encephalopathy with negative repeat HSV PCR, requiring immunotherapy with corticosteroids and IVIG.",
+      "say": "Clinical relapse weeks after herpes encephalitis is often autoimmune anti-NMDAR encephalitis triggered by necrotic viral antigen release, responding to immunotherapy."
+    },
+    {
+      "title": "Japanese Encephalitis Thalamic Tropism",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anatomical Neurotropism",
+          "points": [
+            "Bilateral thalamic predilection (hallmark sign)",
+            "Basal ganglia, substantia nigra & brainstem involvement",
+            "Hemorrhagic necrosis of bilateral thalamic nuclei"
+          ]
+        },
+        "right": {
+          "title": "Clinical Presentation",
+          "points": [
+            "High fever, rigors, and altered sensorium",
+            "Dystonia, cogwheel rigidity and mask-like facies",
+            "Flaccid anterior horn cell paralysis resembling polio"
+          ]
+        }
+      },
+      "tx": "The flavivirus causing **Japanese encephalitis neurotropism** displays a unique and selective affinity for deep gray nuclei. Brain MRI reveals classic T2/FLAIR hyperintensity and hemorrhagic necrosis within bilateral thalami, basal ganglia, and midbrain. Clinically, infected children exhibit marked parkinsonian extrapyramidal features: mask-like facies, generalized tremors, cogwheel rigidity, dystonia, and acute lower motor neuron flaccid paralysis.",
+      "say": "Japanese encephalitis selectively destroys the bilateral thalami and basal ganglia, manifesting with severe parkinsonian rigidity, tremors, and dystonia."
+    },
+    {
+      "title": "Diagnostic Serology in Japanese Encephalitis",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Modality",
+          "Diagnostic Benchmark",
+          "Clinical Utility & Timing"
+        ],
+        "rows": [
+          [
+            "CSF IgM Capture ELISA",
+            "Elevated specific IgM optical density",
+            "Confirmatory gold standard; positive by day 3 to 5"
+          ],
+          [
+            "Serum IgM ELISA",
+            "High titer in endemic setting",
+            "Helpful screening; cross-reacts with dengue"
+          ],
+          [
+            "CSF Viral RT-PCR",
+            "Typically negative (< 20% yield)",
+            "Transient viremia limits usefulness; not gold standard"
+          ]
+        ]
+      },
+      "tx": "Definitive confirmation relies on **JE diagnosis via IgM capture ELISA** in cerebrospinal fluid or paired acute and convalescent serum. Because the neuroinvasive flaviviral load is transient and low, molecular PCR yields are poor. Demonstrating virus-specific IgM antibodies in CSF establishes neuroinvasion, as IgM cannot cross an intact blood-brain barrier and indicates active local central nervous system antibody production.",
+      "say": "Definitive diagnosis of Japanese encephalitis is confirmed by detecting virus specific IgM antibodies in the cerebrospinal fluid via capture ELISA."
+    },
+    {
+      "title": "Enterovirus A71 Rhombencephalitis",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tuberculous-meningitis-fig1.webp",
+        "alt": "Brainstem MRI demonstrating posterior medullary and pontine inflammatory lesions",
+        "caption": "Rhombencephalitis with prominent dorsal pontine and medullary hyperintensity (StewardMD)."
+      },
+      "tx": "Epidemic outbreaks of hand, foot, and mouth disease caused by **Enterovirus A71 brainstem encephalitis** carry high pediatric mortality. Following cutaneous vesicles and fever, the virus ascends to produce severe rhombencephalitis involving the dorsal medulla and pons. Children manifest myoclonic jerks, ataxia, cranial neuropathies, and rapid neurogenic pulmonary edema driven by fulminant autonomic sympathetic storm.",
+      "say": "Enterovirus A71 causes severe brainstem encephalitis, presenting with nocturnal myoclonus, ataxia, and catastrophic neurogenic pulmonary edema."
+    },
+    {
+      "title": "CSF PCR Sensitivity and Repeat Testing Protocol",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pcr1",
+            "label": "Initial CSF PCR within first 24-48 hours"
+          },
+          {
+            "id": "pcr2",
+            "label": "False negative rate up to 10-15% very early"
+          },
+          {
+            "id": "pcr3",
+            "label": "Maintain IV acyclovir & re-test CSF at 72 hours"
+          }
+        ],
+        "edges": [
+          [
+            "pcr1",
+            "pcr2"
+          ],
+          [
+            "pcr2",
+            "pcr3"
+          ]
+        ]
+      },
+      "tx": "Understanding cerebrospinal fluid **CSF PCR sensitivity timing** is critical to avoid premature drug withdrawal. While HSV DNA amplification exceeds 95% sensitivity after day 3, lumbar punctures performed within the initial 24 to 48 hours yield false-negative rates of 10-15%. If clinical suspicion remains high, intravenous acyclovir must continue uninterrupted, with a repeat lumbar puncture performed at 72 hours.",
+      "say": "CSF viral PCR can be falsely negative in the first forty eight hours; high clinical suspicion mandates continuing acyclovir and repeating testing at seventy two hours."
+    },
+    {
+      "title": "Acute Necrotizing Encephalopathy of Childhood",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pathophysiology and Genetics",
+          "points": [
+            "Autosomal dominant RANBP2 missense mutations",
+            "Massive systemic cytokine storm (IL-6, TNF-alpha)",
+            "Microvascular breakdown and breakdown of blood-brain barrier"
+          ]
+        },
+        "right": {
+          "title": "Radiological Signature",
+          "points": [
+            "Symmetric tricolour sign in bilateral thalami",
+            "Concentric necrotic, edema, and hemorrhage rings",
+            "Brainstem tegmentum and periventricular white matter lesions"
+          ]
+        }
+      },
+      "tx": "A catastrophic hyperinflammatory reaction to common viral infections produces **Acute necrotizing encephalopathy of childhood (ANEC)**, strongly associated with autosomal dominant missense mutations in the RANBP2 gene. Triggered by influenza or parainfluenza cytokine storm, neuroimaging reveals pathognomonic symmetric tricolour lesions in the bilateral thalami with central necrosis, surrounding petechiae, and peripheral edema, requiring emergent pulse steroids and tocilizumab.",
+      "say": "Acute necrotizing encephalopathy of childhood features symmetric necrotic thalamic lesions and cytokine storm, linked to genetic RANBP2 mutations."
+    }
+  ]
+}
