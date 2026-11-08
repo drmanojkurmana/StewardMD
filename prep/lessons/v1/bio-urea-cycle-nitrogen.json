@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "module": "bio-urea-cycle",
+ "subject": "biochemistry",
+ "title": "Nitrogen handling before the cycle",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Transamination** shuffles amino groups onto alpha-ketoglutarate (making glutamate) or oxaloacetate and pyruvate through ALT and AST, all needing pyridoxal phosphate and all reversible without releasing free ammonia. Lysine and threonine largely skip transamination, a classic exception. Serum transaminases leaking from injured liver and muscle make this intracellular shuffle visible in daily laboratory practice.",
+   "say": "Transamination shuffles amino groups through ALT and AST without releasing free ammonia, needing pyridoxal phosphate. Lysine and threonine largely skip it. Leaked transaminases make this shuffle visible in laboratory practice.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Reaction", "Enzyme (PLP)", "Direction in fasting"],
+    "rows": [
+     ["Alanine plus alpha-KG to pyruvate plus glutamate", "ALT", "Muscle exports alanine nitrogen"],
+     ["Aspartate plus alpha-KG to OAA plus glutamate", "AST", "Feeds urea aspartate nitrogen"],
+     ["Glutamate oxidative deamination", "GDH (not PLP)", "Releases free ammonia in liver"]
+    ]
+   }
+  },
+  {
+   "tx": "**Glutamate dehydrogenase** in liver mitochondria uniquely releases free ammonia oxidatively (using NAD or NADP), activated by ADP and leucine and inhibited by GTP, positioning glutamate as the central nitrogen collector from all transaminations. Activating mutations cause hyperinsulinism hyperammonaemia syndrome (post protein hypoglycaemia with high ammonia), curable partly with diazoxide, proving one enzyme can yoke insulin secretion to nitrogen flux.",
+   "say": "Glutamate dehydrogenase releases free ammonia in liver mitochondria, positioning glutamate as the central nitrogen collector. Activating mutations cause hyperinsulinism with hyperammonaemia, yoking insulin secretion to nitrogen flux.",
+   "vis": {
+    "kind": "flow",
+    "title": "Nitrogen converges on glutamate",
+    "nodes": [
+     {"id": "aa", "label": "Amino acids transaminate"},
+     {"id": "glu", "label": "Glutamate collects nitrogen"},
+     {"id": "nh3", "label": "GDH releases ammonia"},
+     {"id": "urea", "label": "Urea cycle disposes it"}
+    ],
+    "edges": [["aa", "glu"], ["glu", "nh3"], ["nh3", "urea"]]
+   }
+  },
+  {
+   "tx": "Safe transport forms prevent ammonia travelling free: **glutamine** (glutamine synthetase, ATP costing, in muscle and astrocytes) carries two nitrogens per molecule to liver, kidney and gut, while alanine carries muscle nitrogen with glucose carbon through the glucose-alanine cycle. Glutaminase in liver and kidney releases the amide nitrogen exactly where urea synthesis or acid excretion needs it.",
+   "say": "Glutamine carries two nitrogens safely to liver and kidney, while alanine carries muscle nitrogen with glucose carbon. Glutaminase releases the nitrogen exactly where urea synthesis or acid excretion needs it.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Glutamine shuttle", "points": ["Two nitrogens per molecule", "Muscle and brain export form", "Kidney ammonia for acid excretion"]},
+    "right": {"title": "Alanine shuttle", "points": ["One nitrogen plus glucose carbon", "Muscle to liver (fasting)", "Nitrogen to urea, carbon to glucose"]
+    }
+   }
+  },
+  {
+   "tx": "Gut bacteria add a second ammonia source: urease splits urea recycled into colon, protein deamination loads portal blood, and healthy liver clears it first pass so systemic ammonia stays low. Portosystemic shunting, TIPS or liver failure lets gut ammonia bypass clearance, which is why lactulose (colonic acidification trapping **ammonium**) and rifaximin anchor hepatic encephalopathy therapy despite a primarily hepatic disease.",
+   "say": "Gut bacteria load portal ammonia that healthy liver clears first pass. Shunting lets it bypass clearance, which is why lactulose trapping ammonium anchors encephalopathy therapy despite a hepatic disease.",
+   "vis": null
+  },
+  {
+   "tx": "Brain lacks a urea cycle, so astrocytes detoxify ammonia solely by **glutamine synthetase**, and accumulated glutamine osmotically swells astrocytes while draining alpha-ketoglutarate and glutamate neurotransmitter pools. Asterixis, confusion, vomiting, cerebral oedema and herniation in acute hyperammonaemia follow this cellular story, whether the cause is a cycle defect, valproate, or liver failure with shunting.",
+   "say": "Brain lacks a urea cycle, so astrocyte glutamine swells cells and drains neurotransmitter pools. Asterixis, confusion and cerebral oedema follow this story in any acute hyperammonaemia cause.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-urea-cycle-gen1.webp",
+    "alt": "Astrocyte between neuron and capillary converting glutamate and ammonia into accumulated glutamine with swelling.",
+    "caption": "Astrocyte glutamine accumulation with swelling and energy failure during hyperammonaemia.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Keep the pre cycle map in one breath: amino groups converge on **glutamate**, glutamate releases ammonia or donates aspartate nitrogen, glutamine and alanine ferry nitrogen safely, gut adds portal load, and brain pays first when disposal fails. The cycle steps lesson now spends the ATP to package those two nitrogens into urea, and the defects lesson reads ammonia patterns backwards to the block.",
+   "say": "Amino groups converge on glutamate, glutamine and alanine ferry nitrogen safely, and brain pays first when disposal fails. The next lesson spends ATP to package those nitrogens into urea.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Nitrogen form in blood", "Toxic?", "Destination"],
+    "rows": [
+     ["Glutamine (high)", "Carrier, safe", "Liver urea, kidney acid handling"],
+     ["Alanine", "Carrier, safe", "Liver glucose plus urea"],
+     ["Free ammonia (high)", "Toxic, brain first", "Emergency: find the block"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

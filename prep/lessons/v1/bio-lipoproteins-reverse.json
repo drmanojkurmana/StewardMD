@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "bio-lipoproteins",
+ "subject": "biochemistry",
+ "title": "HDL and reverse cholesterol transport",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Reverse transport begins when liver and gut release lipid poor **ApoA-I**, which folds into disc shaped nascent HDL after collecting phospholipid and free cholesterol from cell membranes through the ABCA1 transporter. Macrophages overloaded with cholesterol depend on this exit, so ABCA1 failure (Tangier disease) leaves almost no HDL, orange cholesterol laden tonsils and premature coronary disease despite low LDL.",
+   "say": "Reverse transport begins when ApoA-I collects cholesterol through ABCA1 into disc shaped nascent HDL. Tangier disease, with ABCA1 failure, leaves almost no HDL and orange cholesterol laden tonsils.",
+   "vis": {
+    "kind": "flow",
+    "title": "Birth of an HDL particle",
+    "nodes": [
+     {
+      "id": "apo",
+      "label": "Lipid poor ApoA-I released"
+     },
+     {
+      "id": "abca",
+      "label": "ABCA1 loads cholesterol"
+     },
+     {
+      "id": "disc",
+      "label": "Disc nascent HDL"
+     },
+     {
+      "id": "core",
+      "label": "LCAT esterifies, sphere forms"
+     }
+    ],
+    "edges": [
+     [
+      "apo",
+      "abca"
+     ],
+     [
+      "abca",
+      "disc"
+     ],
+     [
+      "disc",
+      "core"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**LCAT**, activated by ApoA-I on the disc surface, esterifies free cholesterol with a fatty acid from lecithin, and the hydrophobic ester sinks into the core, trapping cholesterol irreversibly and rounding the particle into spherical HDL3 then HDL2. Familial LCAT deficiency therefore accumulates free cholesterol in cornea (fish eye disease in partial forms), red cells and kidney, with very low HDL cholesterol.",
+   "say": "LCAT esterifies free cholesterol and traps it in the core, rounding the particle into spherical HDL. Familial LCAT deficiency clouds the cornea and injures kidney, with very low HDL cholesterol.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Enzyme or transporter",
+     "Failure looks like"
+    ],
+    "rows": [
+     [
+      "Load ApoA-I discs",
+      "ABCA1",
+      "Tangier: near absent HDL"
+     ],
+     [
+      "Trap ester in core",
+      "LCAT (ApoA-I activated)",
+      "Corneal opacity, renal injury"
+     ],
+     [
+      "Enlarge mature HDL",
+      "ABCG1 loading",
+      "Reduced efflux capacity"
+     ],
+     [
+      "Unload in liver",
+      "SR-B1 selective uptake",
+      "HDL recycling impaired"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mature HDL unloads by two roads: hepatic **SR-B1** selectively extracts cholesteryl ester without destroying the particle (so HDL recycles), while CETP swaps HDL cholesteryl ester for VLDL and LDL triacylglycerol, indirectly delivering cholesterol to liver via ApoB clearance. In hypertriglyceridaemia CETP exchange overloads HDL with triglyceride, hepatic lipase shrinks it, ApoA-I sheds and clears renally, which is why high triglycerides and low HDL travel together.",
+   "say": "HDL unloads through hepatic SR-B1 selective uptake, while CETP swaps ester for triglyceride on ApoB particles. In hypertriglyceridaemia this shrinks HDL and sheds ApoA-I, which is why high triglycerides and low HDL travel together.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Direct road (SR-B1)",
+     "points": [
+      "Ester extracted in liver",
+      "Particle survives and recycles",
+      "ApoA-I reused"
+     ]
+    },
+    "right": {
+     "title": "Indirect road (CETP swap)",
+     "points": [
+      "Ester traded for triglyceride",
+      "Cleared later with ApoB particles",
+      "High TG states drain HDL"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Beyond carriage, HDL carries antioxidant enzymes (paraoxonase), accepts cholesterol via **ABCG1** and aqueous diffusion, and delivers ester to steroidogenic tissues through SR-B1 for hormone synthesis. Efflux capacity assays predict risk better than HDL cholesterol mass in studies, yet raising HDL cholesterol pharmacologically (niacin, CETP inhibitors) largely failed to cut events, teaching that HDL function and LDL burden are not interchangeable targets.",
+   "say": "HDL carries antioxidant enzymes and accepts cholesterol through ABCG1. Raising HDL cholesterol with drugs largely failed to cut events, teaching that HDL function and LDL burden are not interchangeable targets.",
+   "vis": null
+  },
+  {
+   "tx": "**Low HDL** in clinic usually reports company it keeps: smoking, obesity, diabetes, high triglycerides, sedentary habit and anabolic steroids all lower it, while oestrogen, exercise and moderate alcohol raise it without proven event benefit from the number alone. Very low HDL (under twenty) should trigger thought of Tangier, LCAT or ApoA-I defects, severe liver disease or paraproteinaemia mimics.",
+   "say": "Low HDL usually reports smoking, obesity, diabetes and high triglycerides. Very low HDL should trigger thought of Tangier, LCAT or ApoA-I defects and severe liver disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "HDL pattern",
+     "Common drivers",
+     "Exam caution"
+    ],
+    "rows": [
+     [
+      "Low HDL, high triglycerides",
+      "Diabetes, obesity, smoking",
+      "Treat LDL and triglyceride risk, not HDL number"
+     ],
+     [
+      "Very low HDL, orange tonsils",
+      "Tangier (ABCA1)",
+      "Coronary risk despite low LDL"
+     ],
+     [
+      "Low HDL, corneal opacity, anaemia",
+      "LCAT deficiency",
+      "Kidney failure progresses"
+     ],
+     [
+      "High HDL, no protection guarantee",
+      "Oestrogen, alcohol, CETP defects",
+      "Function matters more than mass"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Close the HDL story with the macrophage: foam cells form when scavenger uptake exceeds **efflux** through ABCA1 and ABCG1 to HDL acceptors, so reverse transport is literally plaque prevention at cellular scale. Diabetes glycates ApoA-I and impairs efflux, one more mechanism linking hyperglycaemia to atherosclerosis beyond LDL. Next, the familial disorders break each leg of ApoB traffic in turn.",
+   "say": "Foam cells form when scavenger uptake exceeds efflux to HDL acceptors, so reverse transport is plaque prevention at cellular scale. Diabetes impairs efflux by glycating ApoA-I, linking hyperglycaemia to atherosclerosis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Foam cell balance",
+    "nodes": [
+     {
+      "id": "in",
+      "label": "Scavenger uptake (modified LDL)"
+     },
+     {
+      "id": "cell",
+      "label": "Macrophage cholesterol pool"
+     },
+     {
+      "id": "out",
+      "label": "Efflux to HDL (ABCA1, ABCG1)"
+     },
+     {
+      "id": "foam",
+      "label": "Foam cell if uptake wins"
+     }
+    ],
+    "edges": [
+     [
+      "in",
+      "cell"
+     ],
+     [
+      "cell",
+      "out"
+     ],
+     [
+      "cell",
+      "foam"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
