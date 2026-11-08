@@ -11,34 +11,10 @@
       "say": "The Krickenbeck classification categorizes anorectal malformations by fistula anatomy. Identifying the fistula location determines whether a primary perineal repair or diverting colostomy is needed.",
       "tx": "Apply the **Krickenbeck international classification** for comprehensive evaluation of anorectal malformations (ARM). The Krickenbeck classification categorizes anorectal malformations (ARM) by fistula presence: perineal, rectourethral (bulbar or prostatic), rectovesical, vestibular, and persistent cloaca, alongside lesions without fistula and rectal atresia. Fistula identification directs whether primary repair or initial colostomy is indicated (Cross-table prone lateral radiograph timing).",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Fistula category",
-          "Anatomical opening",
-          "Primary surgical approach"
-        ],
-        "rows": [
-          [
-            "Perineal fistula (low)",
-            "Perineal skin anterior to sphincter",
-            "Primary posterior sagittal anorectoplasty (PSARP)"
-          ],
-          [
-            "Rectourethral (intermediate/high)",
-            "Prostatic or bulbar urethra (males)",
-            "Initial diverting colostomy, delayed PSARP"
-          ],
-          [
-            "Rectovesical (high)",
-            "Bladder neck or trigone",
-            "Diverting colostomy, complex reconstruction"
-          ],
-          [
-            "Vestibular fistula (females)",
-            "Vulvar vestibule outside hymen",
-            "Colostomy or primary PSARP in selected cases"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/anorectal-malformation-fig1.webp",
+        "alt": "Blind rectal pouch with rectourethral fistula and imperforate perineum.",
+        "caption": "Anorectal malformation: blind pouch and fistula. Credit: StewardMD."
       }
     },
     {
@@ -136,39 +112,15 @@
       "say": "Every baby with an anorectal malformation requires full VACTERL screening. Vertebral and renal anomalies are especially common and must be searched for immediately.",
       "tx": "Conduct comprehensive **VACTERL association screening** in all neonates diagnosed with an anorectal malformation. Every infant with ARM mandates complete VACTERL screening: Vertebral anomalies (70%), Anal atresia, Cardiac defects (30-40%), Tracheoesophageal fistula (20%), Renal anomalies (50%), and Limb anomalies (radial ray). Immediate workup includes spine and extremity radiographs, echocardiography, and renal ultrasonography (Persistent cloaca anatomy).",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Organ system",
-          "Component of VACTERL",
-          "Screening modality & frequency"
-        ],
-        "rows": [
-          [
-            "Vertebral column",
-            "Vertebral segmentation / hemivertebra",
-            "Spinal radiographs (70% frequency)"
-          ],
-          [
-            "Cardiovascular",
-            "ASD, VSD, Tetralogy of Fallot",
-            "Echocardiogram (30-40% frequency)"
-          ],
-          [
-            "Tracheoesophageal",
-            "TE fistula with esophageal atresia",
-            "Nasogastric tube passage (20% frequency)"
-          ],
-          [
-            "Genitourinary",
-            "Renal agenesis, hydronephrosis, VUR",
-            "Renal ultrasound & VCUG (50% frequency)"
-          ]
-        ]
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-misc-vacterl.webp",
+        "alt": "Vertebral, anal, cardiac, tracheo oesophageal, renal and limb anomalies of VACTERL.",
+        "caption": "VACTERL: screen every associated system. Credit: StewardMD."
       }
     },
     {
       "say": "Persistent cloaca occurs in female infants when the urinary, genital, and digestive tracts converge into a single perineal orifice. Pelvic MRI and genitography provide clear mapping of this complex anatomy.",
-      "tx": "Examine **persistent cloaca anatomy** in female neonates with an imperforate anus and a single perineal opening. Persistent cloaca in females features confluence of the urethra, vagina, and rectum into a single common perineal channel, requiring genitography and 3D pelvic MRI to measure channel length and assess for associated hydrocolpos, m\u00fcllerian duplication, and urinary tract obstruction (Tethered cord screening in ARM).",
+      "tx": "Examine **persistent cloaca anatomy** in female neonates with an imperforate anus and a single perineal opening. Persistent cloaca in females features confluence of the urethra, vagina, and rectum into a single common perineal channel, requiring genitography and 3D pelvic MRI to measure channel length and assess for associated hydrocolpos, müllerian duplication, and urinary tract obstruction (Tethered cord screening in ARM).",
       "vis": {
         "kind": "flow",
         "nodes": [
