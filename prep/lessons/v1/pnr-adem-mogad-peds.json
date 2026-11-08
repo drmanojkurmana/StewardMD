@@ -1,0 +1,202 @@
+{
+  "v": 1,
+  "id": "pnr-adem-mogad-peds",
+  "title": "Acute Disseminated Encephalomyelitis and MOGAD",
+  "module": "pnr-cns-demyelination-infections",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "International Pediatric Consensus Criteria for ADEM",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Criterion",
+          "Mandatory Clinical Requirement",
+          "Exclusionary Findings"
+        ],
+        "rows": [
+          [
+            "Encephalopathy",
+            "Altered consciousness, lethargy, or irritability",
+            "Not explained by fever, systemic sepsis, or postictal state"
+          ],
+          [
+            "Multifocal Deficits",
+            "Polysymptomatic CNS deficits (motor, cranial, ataxia)",
+            "Monofocal isolated optic neuritis or isolated transverse myelitis"
+          ],
+          [
+            "Imaging Hallmarks",
+            "Diffuse, poorly demarcated, bilateral CNS demyelination",
+            "Well-demarcated Dawson fingers or periventricular sparing"
+          ]
+        ]
+      },
+      "tx": "The definitive **IPMSSG consensus criteria for ADEM** mandate acute multifocal neurological deficits combined with encephalopathy, defined as behavioral change or altered consciousness unexplained by fever or postictal states. Developing typically 1 to 3 weeks after a viral infection or vaccination, acute disseminated encephalomyelitis features polyfocal deficits including motor weakness, cranial neuropathies, ataxia, and optic neuritis.",
+      "say": "The international consensus criteria define acute disseminated encephalomyelitis by acute multifocal neurological deficits combined with encephalopathy."
+    },
+    {
+      "title": "Neuroimaging Signature of ADEM",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/mneur-neuropathy-gen1.webp",
+        "alt": "Axial and sagittal MRI demonstrating widespread multifocal white matter demyelinating lesions",
+        "caption": "Large, fluffy, poorly demarcated T2 and FLAIR hyperintensities in cerebral white matter (StewardMD)."
+      },
+      "tx": "Magnetic resonance imaging confirms the classic **MRI hallmarks of ADEM**, displaying multiple, large, bilateral, asymmetric, poorly demarcated T2/FLAIR hyperintensities. Lesions predominantly involve subcortical and deep cerebral white matter, thalamus, basal ganglia, brainstem, and spinal cord. Punctate or incomplete ring enhancement occurs during active acute myelin breakdown without preexisting silent lesions.",
+      "say": "Magnetic resonance imaging demonstrates large, fluffy, poorly demarcated hyperintensities in white matter, basal ganglia, and spinal cord."
+    },
+    {
+      "title": "Myelin Oligodendrocyte Glycoprotein Antibodies",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MOG Antibody Profile",
+          "points": [
+            "Present in 40-60% of pediatric ADEM presentations",
+            "High titers at disease onset with rapid clinical recovery",
+            "Persistent high titers predict relapsing MOGAD phenotype"
+          ]
+        },
+        "right": {
+          "title": "Clinical Manifestations",
+          "points": [
+            "Severe bilateral simultaneous optic neuritis with disc edema",
+            "Longitudinally extensive transverse myelitis with conus lesions",
+            "Cortical encephalitis with prominent seizure activity"
+          ]
+        }
+      },
+      "tx": "A major paradigm shift identifies **MOG antibodies in pediatric ADEM**, with cell-based assays detecting serum IgG against myelin oligodendrocyte glycoprotein in 40-60% of children. MOG-antibody-associated disease (MOGAD) presents as ADEM, bilateral optic neuritis with marked disc swelling, or longitudinally extensive transverse myelitis. While transient seropositivity associates with monophasic recovery, persistently high titers warn of future clinical relapses.",
+      "say": "Serum MOG antibodies are detected in over half of children with ADEM, identifying myelin oligodendrocyte glycoprotein associated disease."
+    },
+    {
+      "title": "First-Line Pulse Corticosteroid Protocol",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Phase",
+          "Therapeutic Agent & Dosage",
+          "Duration & Monitoring"
+        ],
+        "rows": [
+          [
+            "Acute Induction",
+            "IV Methylprednisolone 30 mg/kg/day (max 1000 mg)",
+            "3 to 5 consecutive daily intravenous infusions"
+          ],
+          [
+            "Oral Consolidation",
+            "Oral Prednisolone 1-2 mg/kg/day",
+            "Tapered gradually over 4 to 6 weeks"
+          ],
+          [
+            "Tapering Principle",
+            "Avoid rapid weaning under 3 weeks",
+            "Premature withdrawal triggers secondary neuroinflammatory rebound"
+          ]
+        ]
+      },
+      "tx": "Prompt initiation of **First-line high-dose corticosteroid pulse** therapy halts active demyelination. Intravenous methylprednisolone is administered at 30 mg/kg/day (maximum 1000 mg daily) for 3 to 5 consecutive days. This pulse is followed by an oral prednisolone taper over 4 to 6 weeks. Rapid tapering within three weeks is avoided because premature corticosteroid withdrawal triggers acute neuroinflammatory rebound.",
+      "say": "First line treatment requires high dose intravenous methylprednisolone pulse therapy for three to five days, followed by an oral taper over four to six weeks."
+    },
+    {
+      "title": "Rescue Therapies for Refractory Demyelination",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "High-dose IV methylprednisolone for 3-5 days"
+          },
+          {
+            "id": "s2",
+            "label": "Minimal motor recovery or worsening encephalopathy"
+          },
+          {
+            "id": "s3",
+            "label": "Second-line rescue: IVIG or Plasma Exchange"
+          }
+        ],
+        "edges": [
+          [
+            "s1",
+            "s2"
+          ],
+          [
+            "s2",
+            "s3"
+          ]
+        ]
+      },
+      "tx": "When patients exhibit inadequate improvement or clinical progression during steroid infusions, **Second-line rescue with IVIG or PLEX** is immediately escalated. Therapeutic options include intravenous immunoglobulin at 2 g/kg total dose divided over 2 to 5 days or therapeutic plasma exchange (5 to 7 cycles every other day). Early rescue therapy prevents permanent axonal transection and severe secondary motor disability.",
+      "say": "For steroid refractory disease, second line therapy with intravenous immunoglobulin or plasma exchange is initiated without delay."
+    },
+    {
+      "title": "Neuromyelitis Optica Spectrum Disorder",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/neuromyelitis-optica-spectrum-disorder-fig1.webp",
+        "alt": "Aquaporin-4 astrocytic endfoot immune attack and longitudinally extensive spinal cord lesion",
+        "caption": "Autoantibodies against aquaporin-4 astrocytic water channels produce necrotizing central cord myelitis (StewardMD)."
+      },
+      "tx": "In the differential diagnosis of pediatric demyelination, **Neuromyelitis optica spectrum disorder** (NMOSD) is distinguished by IgG autoantibodies targeting the aquaporin-4 water channel on astrocytic foot processes. NMOSD produces severe longitudinally extensive transverse myelitis (LETM extending across >= 3 contiguous vertebral segments), intractable area postrema hiccups and vomiting, and destructive optic chiasm lesions.",
+      "say": "Neuromyelitis optica spectrum disorder is driven by aquaporin four antibodies, causing longitudinally extensive transverse myelitis and area postrema syndrome."
+    },
+    {
+      "title": "Monophasic Course Versus Multiphasic Disease",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic Monophasic ADEM",
+          "points": [
+            "Single clinical and imaging episode without relapse",
+            "New or fluctuating symptoms within 3 months part of index event",
+            "Excellent prognosis with complete functional motor recovery"
+          ]
+        },
+        "right": {
+          "title": "Multiphasic Encephalomyelitis (MDEM)",
+          "points": [
+            "Second distinct ADEM event separated by >= 3 months",
+            "Requires new encephalopathy and new multifocal MRI lesions",
+            "Subsequent events prompt re-evaluation for MS or relapsing MOGAD"
+          ]
+        }
+      },
+      "tx": "Distinguishing a **Monophasic vs multiphasic course** requires strict longitudinal observation. True ADEM is characteristically monophasic, with symptoms reaching maximum nadir within days. Fluctuation within 3 months of onset is considered part of the initial episode. A second distinct demyelinating event with encephalopathy occurring at least 3 months later defines multiphasic ADEM, necessitating testing for relapsing MOGAD.",
+      "say": "Classic ADEM follows a monophasic trajectory, whereas demyelinating relapses beyond three months suggest multiphasic disease, MOGAD, or multiple sclerosis."
+    },
+    {
+      "title": "Pediatric Multiple Sclerosis Diagnostic Distinction",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "Pediatric Multiple Sclerosis",
+          "Acute Disseminated Encephalomyelitis"
+        ],
+        "rows": [
+          [
+            "Mental Status",
+            "Encephalopathy absent; preserved awareness",
+            "Encephalopathy mandatory for clinical diagnosis"
+          ],
+          [
+            "CSF Oligoclonal Bands",
+            "Present in over 85-90% of children",
+            "Typically absent (< 10-15%); transient if found"
+          ],
+          [
+            "MRI Dissemination",
+            "Dissemination in space and time (Dawson fingers)",
+            "Large, bilateral, poorly demarcated; monophasic resolution"
+          ]
+        ]
+      },
+      "tx": "Differentiating pediatric MS from ADEM centers on **Pediatric multiple sclerosis oligoclonal bands** and clinical encephalopathy. Children with multiple sclerosis present without encephalopathy, displaying clinically silent periventricular oval lesions aligned perpendicular to the lateral ventricles. Cerebrospinal fluid demonstrates persistent intrathecal oligoclonal IgG bands in over 85-90% of pediatric MS, contrasting with the negative CSF bands typical of ADEM.",
+      "say": "Pediatric multiple sclerosis is distinguished from ADEM by the absence of encephalopathy and the presence of persistent cerebrospinal fluid oligoclonal bands."
+    }
+  ]
+}

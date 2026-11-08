@@ -1,0 +1,196 @@
+{
+  "v": 1,
+  "id": "pnr-absence-epilepsy",
+  "title": "Childhood Absence Epilepsy and Self-Limited Focal Epilepsies",
+  "module": "pnr-epilepsy",
+  "gen": "hand",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Classic EEG Diagnostic Hallmark",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/seizures-and-epilepsy-fig1.webp",
+        "alt": "Electroencephalogram showing generalized bilateral synchronous spike and wave discharges",
+        "caption": "Generalized 3 Hz spike-and-wave bursts on a preserved background (StewardMD)."
+      },
+      "tx": "The electrophysiological hallmark of Childhood Absence Epilepsy is the characteristic **Three Hertz spike and wave** discharge pattern. Interictal and ictal recordings show generalized, symmetric, frontally dominant bursts typically firing at 3 Hz, with acceptable frequency variance from 2.5-3.5 Hz. The background cerebral rhythms remain entirely normal, distinguishing typical absence from secondary encephalopathies with slow spike-and-wave rhythms.",
+      "say": "The diagnostic hallmark of childhood absence epilepsy is generalized three Hertz spike and wave discharges occurring on a normal background rhythm."
+    },
+    {
+      "title": "Hyperventilation Provocation Maneuver",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Provocation Protocol",
+          "points": [
+            "Deep voluntary hyperventilation for 3 minutes",
+            "Respiratory alkalosis and cerebral vasoconstriction",
+            "Evokes typical clinical absence in over 90%"
+          ]
+        },
+        "right": {
+          "title": "Clinical Semiology",
+          "points": [
+            "Sudden staring spell with unresponsiveness",
+            "Subtle eyelid fluttering or myoclonic twitches",
+            "Immediate recovery without postictal confusion"
+          ]
+        }
+      },
+      "tx": "Routine diagnostic evaluation requires bedside **Hyperventilation provocation**, having the child breathe deeply and vigorously for 3 minutes. Respiratory alkalosis triggers synchronous thalamocortical oscillatory bursting, eliciting an electroclinical absence event with 3 Hz bursts in over 90% of untreated children. The brief pause lasts seconds without postictal lethargy, distinguishing it from focal impaired-awareness seizures.",
+      "say": "Hyperventilation for three minutes reliably provokes clinical absence seizures with synchronous three Hertz discharges in over ninety percent of untreated children."
+    },
+    {
+      "title": "First-Line Pharmacotherapy with Ethosuximide",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antiseizure Medication",
+          "Target Dosage",
+          "Clinical Profile"
+        ],
+        "rows": [
+          [
+            "Ethosuximide",
+            "15-40 mg/kg/day divided bid",
+            "First-line monotherapy, superior attentional profile"
+          ],
+          [
+            "Sodium Valproate",
+            "20-40 mg/kg/day divided bid",
+            "Broad spectrum, effective for coexisting tonic-clonic"
+          ],
+          [
+            "Lamotrigine",
+            "1-5 mg/kg/day slow titration",
+            "Second-line, slower titration to avoid severe rash"
+          ]
+        ]
+      },
+      "tx": "Definitive randomized clinical trial evidence establishes **Ethosuximide drug of choice** for childhood absence epilepsy. Administered at 15-40 mg/kg/day, ethosuximide specifically inhibits low-threshold T-type calcium channels in the reticular thalamic nucleus. While matching valproate in seizure freedom, ethosuximide causes significantly lower rates of attentional dysfunction and weight gain, making it the preferred initial agent.",
+      "say": "Ethosuximide at fifteen to forty milligrams per kilogram per day is the first line drug of choice with proven superior cognitive tolerability."
+    },
+    {
+      "title": "Valproate for Coexisting Convulsive Seizures",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ethosuximide Limitations",
+          "points": [
+            "Exclusively controls typical absence seizures",
+            "Ineffective against generalized tonic-clonic seizures",
+            "Leaves patients vulnerable to status epilepticus"
+          ]
+        },
+        "right": {
+          "title": "Valproate Spectrum",
+          "points": [
+            "Broad spectrum covering absence and myoclonic jerks",
+            "Provides robust prophylaxis against tonic-clonic seizures",
+            "Mandatory monitoring of liver function and platelets"
+          ]
+        }
+      },
+      "tx": "When patients experience coexisting primary generalized tonic-clonic seizures alongside absences, **Valproate alternative for generalized seizures** becomes the mandatory regimen. Because ethosuximide lacks efficacy against generalized convulsive seizures, sodium valproate provides vital broad-spectrum coverage. Clinicians counsel adolescent females regarding profound teratogenicity and monitor for hyperammonemic encephalopathy, thrombocytopenia, and weight gain.",
+      "say": "Sodium valproate is the preferred alternative when absence seizures coexist with generalized tonic clonic seizures, providing vital broad spectrum protection."
+    },
+    {
+      "title": "Self-Limited Epilepsy with Centrotemporal Spikes",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/status-epilepticus-fig1.webp",
+        "alt": "Focal centrotemporal spikes and nocturnal sensorimotor seizure monitoring",
+        "caption": "Unilateral facial sensorimotor seizures characteristic of benign centrotemporal epilepsy (StewardMD)."
+      },
+      "tx": "The most common pediatric focal epilepsy is **Benign epilepsy with centrotemporal spikes**, also designated self-limited epilepsy with centrotemporal spikes (SeLECTS). Typically presenting between 3 and 12 years of age, brief nocturnal seizures feature unilateral facial paresthesias, clonic twitching, guttural gurgling, and preserved consciousness. Interictal electroencephalography reveals broad, high-voltage diphasic centrotemporal spikes activated by non-REM sleep.",
+      "say": "Self limited epilepsy with centrotemporal spikes presents with nocturnal hemifacial motor seizures, preserved awareness, and characteristic broad centrotemporal spikes."
+    },
+    {
+      "title": "Pharmacological Approach in SeLECTS",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Strategy",
+          "Selected Medication",
+          "Dosing and Rationale"
+        ],
+        "rows": [
+          [
+            "Observational Management",
+            "No daily pharmacotherapy",
+            "Infrequent nocturnal seizures with normal learning"
+          ],
+          [
+            "First-line Sulthiame",
+            "Sulthiame 5 mg/kg/day",
+            "Carbonic anhydrase inhibitor normalizing sleep EEG"
+          ],
+          [
+            "Alternative Levetiracetam",
+            "Levetiracetam 20-30 mg/kg/day",
+            "Broad-spectrum SV2A ligand with high tolerability"
+          ]
+        ]
+      },
+      "tx": "Many children require only reassurance, but when seizures are frequent or interfere with daytime learning, **Sulthiame and levetiracetam in SeLECTS** offer targeted control. Sulthiame dosed at 5 mg/kg/day or levetiracetam at 20-30 mg/kg/day effectively reduces epileptiform discharges without worsening neurocognitive function. In contrast, carbamazepine and sodium channel blockers are avoided if atypical spike-wave activation during sleep develops.",
+      "say": "When pharmacotherapy is indicated for frequent seizures, sulthiame at five milligrams per kilogram or levetiracetam at twenty to thirty milligrams per kilogram is preferred."
+    },
+    {
+      "title": "Panayiotopoulos Syndrome Autonomic Seizures",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Nocturnal autonomic onset: ictus emeticus"
+          },
+          {
+            "id": "p2",
+            "label": "Pallor, cyanosis, mydriasis & altered responsiveness"
+          },
+          {
+            "id": "p3",
+            "label": "Prolonged autonomic status lasting > 30 minutes"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2"
+          ],
+          [
+            "p2",
+            "p3"
+          ]
+        ]
+      },
+      "tx": "Another prevalent self-limited focal epilepsy is **Panayiotopoulos syndrome autonomic seizures**, presenting between 1 and 14 years with nocturnal paroxysmal autonomic symptoms. Episodes feature prominent ictus emeticus with recurrent retching, pallor, thermoregulatory changes, and pupillary dilation. Seizures frequently last over 30 minutes, representing autonomic status epilepticus, yet long-term neurological outcome remains completely benign.",
+      "say": "Panayiotopoulos syndrome presents with prolonged nocturnal autonomic seizures characterized by prominent vomiting, pallor, and pupillary changes."
+    },
+    {
+      "title": "Natural History and Spontaneous Remission",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Childhood Absence Remission",
+          "points": [
+            "Spontaneous remission occurs in over 80-90%",
+            "Seizures typically cease before 12 years of age",
+            "Normal cognitive development when treated early"
+          ]
+        },
+        "right": {
+          "title": "SeLECTS Natural History",
+          "points": [
+            "Complete seizure resolution by 15-16 years",
+            "Centrotemporal spikes normalize on follow-up EEG",
+            "No increased risk of refractory adult epilepsy"
+          ]
+        }
+      },
+      "tx": "Parents receive reassurance regarding the predictable **Spontaneous remission timeline** characteristic of these benign channelopathies and focal syndromes. In childhood absence epilepsy and SeLECTS, spontaneous complete remission occurs in over 90-95% of patients by mid-adolescence (age 12-15 years). Clinical seizures cease and follow-up sleep electroencephalography normalizes completely, safely permitting discontinuation of therapy.",
+      "say": "Both conditions carry an excellent prognosis, with spontaneous remission occurring before twelve years in absence epilepsy and by mid adolescence in benign focal epilepsy."
+    }
+  ]
+}

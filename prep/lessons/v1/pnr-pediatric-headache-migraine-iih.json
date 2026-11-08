@@ -124,39 +124,10 @@
       "say": "Definite pseudotumour cerebri requires papilloedema normal imaging and elevated lumbar puncture opening pressure.",
       "tx": "Apply the **Idiopathic intracranial hypertension (IIH) Friedman criteria** to establish diagnosis of pediatric pseudotumor cerebri syndrome. Definite IIH mandates the presence of bilateral papilledema, a completely normal neurological examination (with the sole exception of a unilateral or bilateral abducens nerve 6th palsy), normal brain MRI and MR venography excluding mass lesions and sinus thrombosis, normal CSF composition, and an elevated lumbar puncture opening pressure >= 28 cmH2O measured in a calm, non-crying, recumbent child (or >= 25 cmH2O if non-sedated/non-obese) (Acetazolamide dosing in pediatric IIH).",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "f1",
-            "label": "Document bilateral papilledema & formal visual fields"
-          },
-          {
-            "id": "f2",
-            "label": "Normal brain MRI + MR venogram (empty sella allowed)"
-          },
-          {
-            "id": "f3",
-            "label": "LP in lateral decubitus: Opening pressure >= 28 cmH2O"
-          },
-          {
-            "id": "f4",
-            "label": "Normal CSF cytology, protein, and chemistry -> Definite IIH"
-          }
-        ],
-        "edges": [
-          [
-            "f1",
-            "f2"
-          ],
-          [
-            "f2",
-            "f3"
-          ],
-          [
-            "f3",
-            "f4"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/iih-fig1.webp",
+        "alt": "Venous sinus stenosis with raised pressure, sheath distension and papilloedema.",
+        "caption": "IIH: raised pressure distends the optic sheath. Credit: StewardMD."
       }
     },
     {
