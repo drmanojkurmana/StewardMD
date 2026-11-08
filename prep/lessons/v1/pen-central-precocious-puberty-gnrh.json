@@ -1,0 +1,153 @@
+{
+  "id": "pen-central-precocious-puberty-gnrh",
+  "title": "Central Precocious Puberty: Hypothalamic Hamartoma, GnRH Testing and Leuprolide",
+  "subject": "ss-paediatric-endocrinology",
+  "module": "Precocious and Delayed Puberty, Hypogonadism and Gynecomastia",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Appearance of secondary sexual characteristics before strict chronological milestones mandates systematic evaluation.",
+      "tx": "Define premature maturation limits by checking **Chronological age cutoffs for precocious puberty** against physical findings. Precocious puberty is defined as the onset of secondary sexual characteristics before 8 years of age in girls (breast development, thelarche) and before 9 years of age in boys (testicular volume >= 4 mL).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Precocious Cutoff in Girls",
+          "points": [
+            "Onset of thelarche before 8 years of age",
+            "Accelerated linear growth velocity",
+            "Advanced bone age on radiograph"
+          ]
+        },
+        "right": {
+          "title": "Precocious Cutoff in Boys",
+          "points": [
+            "Testicular volume >= 4 mL before 9 years of age",
+            "Penile enlargement and pubic hair",
+            "Rapid virilization and growth spurt"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Premature reactivation of the central neuroendocrine axis coordinates harmonious pubertal sequence development.",
+      "tx": "Distinguish central drivers from peripheral sex steroid excess through **Central vs peripheral pathophysiology** evaluation. Central precocious puberty (CPP) is gonadotropin-dependent, caused by premature maturation of the hypothalamic-pituitary-gonadal (HPG) axis, maintaining normal pubertal sequence and concordant testicular enlargement in boys. Peripheral precocious puberty occurs independently of gonadotropin secretion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "gnrh", "label": "Pulsatile Hypothalamic GnRH Secretion"},
+          {"id": "pit", "label": "Anterior Pituitary LH and FSH Release"},
+          {"id": "gon", "label": "Gonadal Maturation (Testes / Ovaries)"},
+          {"id": "seq", "label": "Concordant Normal Pubertal Sequence"}
+        ],
+        "edges": [
+          ["gnrh", "pit"],
+          ["pit", "gon"],
+          ["gon", "seq"]
+        ]
+      }
+    },
+    {
+      "say": "Precocious puberty in young boys carries high probability of underlying structural intracranial pathology.",
+      "tx": "Evaluate sex-stratified neuroimaging requirements by analyzing **Sex difference in underlying pathology** across pediatric cohorts. Over 80-90% of CPP cases in girls are idiopathic, whereas in boys > 50% are pathological, secondary to CNS lesions (hypothalamic hamartoma, astrocytoma, hydrocephalus, germinoma) mandating routine brain magnetic resonance imaging.",
+      "vis": {
+        "kind": "table",
+        "title": "CPP Etiology Stratified by Biological Sex",
+        "cols": ["Sex", "Idiopathic Frequency", "Pathological CNS Lesions"],
+        "rows": [
+          ["Girls", "> 80-90% idiopathic", "< 10-20% intracranial pathology"],
+          ["Boys", "< 50% idiopathic", "> 50% pathological CNS lesions"],
+          ["Clinical Mandate", "MRI selective if < 6 years old", "Contrast brain MRI mandatory in all boys"]
+        ]
+      }
+    },
+    {
+      "say": "Non neoplastic congenital heterotopias generate autonomous gonadotropin pulses alongside characteristic laughing spells.",
+      "tx": "Identify structural hypothalamic lesions by evaluating **Hypothalamic hamartoma and gelastic seizures** during clinical consultation. Hypothalamic hamartomas are non-neoplastic congenital heterotopias composed of GnRH-secreting neurons, presenting with CPP and pathognomonic refractory gelastic (laughing) seizures originating from the tuber cinereum. Surgical resection or laser ablation is considered for medically intractable epilepsy.",
+      "vis": {
+        "kind": "table",
+        "title": "Hypothalamic Hamartoma Clinical Manifestations",
+        "cols": ["Feature", "Clinical Finding", "Pathological Mechanism"],
+        "rows": [
+          ["Seizure Type", "Gelastic (laughing) seizures", "Epileptogenic focus within hypothalamic heterotopia"],
+          ["Endocrine Impact", "Severe precocious puberty", "Autonomous pulsatile GnRH neurosecretion"],
+          ["MRI Appearance", "Isointense on T1, non-enhancing mass", "Located at tuber cinereum or mammillary bodies"]
+        ]
+      }
+    },
+    {
+      "say": "Dynamic stimulation with gonadotropin releasing hormone confirms pubertal awakening of the pituitary gland.",
+      "tx": "Confirm central axis activation by establishing **GnRH / Leuprolide stimulation test diagnostic peak** thresholds. Diagnosis is confirmed by GnRH stimulation test: a peak LH > 5.0 IU/L (or stimulated LH-to-FSH ratio > 0.66) indicates pubertal activation of the hypothalamic-pituitary axis. Basal LH > 0.3-0.5 IU/L also strongly supports central puberty.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "base", "label": "Baseline Gonadotropins (LH / FSH)"},
+          {"id": "stim", "label": "GnRH / Leuprolide Challenge Test"},
+          {"id": "resp", "label": "Peak LH > 5.0 IU/L (or LH:FSH Ratio > 0.66)"},
+          {"id": "cpp", "label": "Confirmed Central Precocious Puberty"}
+        ],
+        "edges": [
+          ["base", "stim"],
+          ["stim", "resp"],
+          ["resp", "cpp"]
+        ]
+      }
+    },
+    {
+      "say": "Continuous pituitary receptor occupancy with long acting agonists halts downstream gonadotropin secretion.",
+      "tx": "Suppress central axis maturation by implementing **Depot GnRH analog therapy protocol** using long-acting formulations. First-line therapy is depot GnRH agonist (leuprolide acetate 7.5-11.25 mg IM monthly, or 30 mg every 3 months) to continuously saturate and desensitize pituitary GnRH receptors, halting LH/FSH secretion.",
+      "vis": {
+        "kind": "table",
+        "title": "Depot GnRH Agonist Therapeutic Regimens",
+        "cols": ["Medication", "Dosing Schedule", "Mechanism of Action"],
+        "rows": [
+          ["Leuprolide Acetate Depot", "7.5-11.25 mg IM monthly", "Desensitizes pituitary GnRH receptors"],
+          ["Leuprolide 3-Month Depot", "30 mg IM every 3 months", "Sustained receptor saturation and LH suppression"],
+          ["Subcutaneous Histrelin", "50 mg implant yearly", "Continuous zero-order release agonist delivery"]
+        ]
+      }
+    },
+    {
+      "say": "Arresting skeletal age advancement prevents premature epiphyseal closure and maximizes ultimate adult height.",
+      "tx": "Assess therapeutic efficacy and duration through **Treatment monitoring and adult height preservation** auxological tracking. Therapy halts bone age progression and prevents premature epiphyseal fusion, preserving final adult height; treatment is continued until chronological age 11 years in girls and 12 years in boys.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Discontinuation in Girls",
+          "points": [
+            "Stop therapy at chronological age 11 years",
+            "Permits physiological pubertal resumption",
+            "Menarche typically follows in 12-18 months"
+          ]
+        },
+        "right": {
+          "title": "Discontinuation in Boys",
+          "points": [
+            "Stop therapy at chronological age 12 years",
+            "Allows normal adolescent virilization",
+            "Maximizes final adult target stature"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Monogenic familial forms result from loss of imprinted central inhibitory tone across the hypothalamus.",
+      "tx": "Investigate genetic etiologies in familial clustering by analyzing **MKRN3 and DLK1 genetic mutations** on genomic testing. Familial central precocious puberty is most frequently caused by paternally inherited inactivating mutations in makorin ring finger protein 3 (MKRN3 on 15q11.2) or delta-like 1 (DLK1 on 14q32.2).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "gene", "label": "Paternally Inherited MKRN3 (15q11.2) or DLK1 (14q32.2)"},
+          {"id": "loss", "label": "Loss of Central Hypothalamic Repressive Brake"},
+          {"id": "kiss", "label": "Premature Kisspeptin and GnRH Pulse Induction"},
+          {"id": "fcpp", "label": "Familial Central Precocious Puberty"}
+        ],
+        "edges": [
+          ["gene", "loss"],
+          ["loss", "kiss"],
+          ["kiss", "fcpp"]
+        ]
+      }
+    }
+  ]
+}
