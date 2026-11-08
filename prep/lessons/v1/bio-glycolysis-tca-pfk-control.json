@@ -1,0 +1,79 @@
+{
+ "v": 1,
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Phosphofructokinase-1 and fructose-2,6-bisphosphate",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The committed step of glycolysis belongs to **phosphofructokinase-1**, which spends one ATP to turn fructose-6-phosphate into fructose-1,6-bisphosphate. Once this step runs, the sugar is destined for pyruvate because no other pathway claims that intermediate. Control therefore concentrates here, while hexokinase and pyruvate kinase play supporting regulatory roles at the entry and exit of the pathway respectively.",
+   "say": "Phosphofructokinase-one runs the committed step of glycolysis, spending one ATP to make fructose-1,6-bisphosphate. Once this step runs, the sugar is destined for pyruvate. Control concentrates here, while hexokinase and pyruvate kinase regulate the entry and exit.",
+   "vis": {
+    "kind": "flow",
+    "title": "The three regulated steps",
+    "nodes": [
+     {"id": "hk", "label": "Hexokinase or glucokinase"},
+     {"id": "pfk", "label": "PFK-1 committed step"},
+     {"id": "pk", "label": "Pyruvate kinase exit step"}
+    ],
+    "edges": [["hk", "pfk"], ["pfk", "pk"]]
+   }
+  },
+  {
+   "tx": "Energy shortage switches this enzyme on through **AMP** and ADP, which signal that ATP has been spent faster than it is made. Abundance switches it off through ATP itself and through citrate leaking from a well fed TCA cycle. Falling pH also inhibits the enzyme, a protection that slows lactate production when muscle or ischaemic tissue has already become dangerously acidic.",
+   "say": "Energy shortage switches the enzyme on through AMP and ADP, which signal that ATP is being spent too fast. Abundance switches it off through ATP itself and through citrate from a well fed citric acid cycle. Falling pH also inhibits it, which slows lactate production when tissue is already acidic.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Signal", "Effect on PFK-1", "What it reports"],
+    "rows": [
+     ["AMP and ADP rise", "Strong activation", "ATP spent, energy short"],
+     ["Fructose-2,6-bisphosphate", "Strongest activation", "Fed signal from insulin in liver"],
+     ["ATP high", "Inhibition", "Energy plentiful"],
+     ["Citrate high", "Inhibition", "TCA cycle fed, spare glucose"],
+     ["Low pH", "Inhibition", "Lactate already high"]
+    ]
+   }
+  },
+  {
+   "tx": "The strongest activator is **fructose-2,6-bisphosphate**, a side product made from fructose-6-phosphate by a bifunctional enzyme that both builds and destroys it. When insulin dephosphorylates the liver form, its kinase half dominates and the activator floods PFK-1. When glucagon phosphorylates the same protein, its phosphatase half dominates, the activator vanishes, and glycolysis yields to gluconeogenesis within minutes.",
+   "say": "The strongest activator is fructose-2,6-bisphosphate, made by a bifunctional enzyme that both builds and destroys it. When insulin dephosphorylates the liver form, its kinase half dominates and the activator floods phosphofructokinase-one. When glucagon phosphorylates it, the phosphatase half dominates and glycolysis yields to glucose production.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Fed liver (insulin high)", "points": ["Bifunctional enzyme dephosphorylated", "Kinase half makes fructose-2,6-BP", "PFK-1 on, glycolysis runs", "F-1,6-bisphosphatase off"]},
+    "right": {"title": "Fasting liver (glucagon high)", "points": ["Bifunctional enzyme phosphorylated", "Phosphatase half destroys the activator", "PFK-1 off, glycolysis rests", "Gluconeogenesis allowed to run"]
+    }
+   }
+  },
+  {
+   "tx": "Heart muscle carries a different **bifunctional enzyme** isoform whose phosphorylation response is reversed, so adrenaline raises fructose-2,6-bisphosphate there instead of lowering it. That design makes sense because a racing heart needs faster glycolysis during stress, not glucose export. Skeletal muscle lacks glucagon receptors for this system, so adrenaline and rising AMP and calcium drive its glycolysis directly during exercise.",
+   "say": "Heart muscle carries a different bifunctional isoform whose response is reversed, so adrenaline raises fructose-2,6-bisphosphate there. A racing heart needs faster glycolysis during stress, not glucose export. Skeletal muscle has no glucagon response in this system, so adrenaline, AMP and calcium drive its glycolysis during exercise.",
+   "vis": null
+  },
+  {
+   "tx": "Downstream, **fructose-1,6-bisphosphate** feed forward activates pyruvate kinase, so the exit step opens only after the committed step has run. This coupling prevents three carbon intermediates pooling uselessly in the cell. Liver pyruvate kinase is also switched off by glucagon driven phosphorylation and by alanine arriving from muscle, sparing pyruvate carbon for glucose rebuilding during a fast.",
+   "say": "Fructose-1,6-bisphosphate feed forward activates pyruvate kinase, so the exit opens only after the committed step has run. That coupling prevents intermediates from pooling uselessly. Liver pyruvate kinase is also switched off by glucagon and by alanine from muscle, sparing carbon for glucose rebuilding during a fast.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Regulator", "Pyruvate kinase effect", "Physiological logic"],
+    "rows": [
+     ["Fructose-1,6-bisphosphate", "Activates", "Exit follows commitment"],
+     ["ATP and alanine", "Inhibit", "Energy and substrate plentiful"],
+     ["Glucagon (liver only)", "Phosphorylates off", "Fasting liver exports glucose"]
+    ]
+   }
+  },
+  {
+   "tx": "Reciprocal control completes the picture because **fructose-1,6-bisphosphatase**, the gluconeogenesis bypass, answers the same signals in opposite directions. Fructose-2,6-bisphosphate and AMP inhibit it while citrate activates it, so liver never runs glycolysis and gluconeogenesis hard together. Without this reciprocity the two pathways would form a futile cycle that merely hydrolyses ATP and releases heat.",
+   "say": "Fructose-1,6-bisphosphatase, the gluconeogenesis bypass, answers the same signals in opposite directions. Fructose-2,6-bisphosphate and AMP inhibit it while citrate activates it. The liver therefore never runs glycolysis and gluconeogenesis hard together, which would waste ATP as heat in a futile cycle.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Glycolysis forward (PFK-1)", "points": ["On with AMP and F-2,6-BP", "Off with ATP and citrate", "Dominates after meals"]},
+    "right": {"title": "Gluconeogenesis bypass (F-1,6-BPase)", "points": ["Off with AMP and F-2,6-BP", "On with citrate", "Dominates during fasting"]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

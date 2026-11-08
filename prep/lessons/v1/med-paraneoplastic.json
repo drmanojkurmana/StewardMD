@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "med-paraneoplastic",
- "subject": "medicine",
- "title": "Paraneoplastic syndromes and tumour markers: hormones to antibodies",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**History** (**thirst** hypercalcaemia squamous polyuria, **swell** SIADH confusion seizures, **flush** carcinoid diarrhoea wheeze, **weak** Lambert-Eaton stairs autonomic, **seizures** limbic memory faciobrachial, **skin** acanthosis tripe palms Leser, **clots** Trousseau migratory pancreas, **smoke** small-cell weight loss asks) with **viva** (**hyponatraemic** confused seizing, **myasthenic** incrementing autonomic) profiles; **family** (MEN kin) asks. Tumours signal.",
-   "say": "Thirsts swells flushes weaks is history: seizures cloud skins darken clots wander smokes stain hyponatraemics dilute myasthenics fade tumours hunt markers trend. Hormones stray.",
-   "vis": null
+  "checks": {
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "verify": true,
+    "verbatim": true,
+    "dashes": true,
+    "drugs": true,
+    "shape": true
   },
-  {
-   "tx": "**Examination** (**volume** SIADH euvolaemic concentrated, **moon** ectopic Cushing bruised weak, **flush** carcinoid wheeze diarrhoeal, **power** Lambert-Eaton incremental grip, **memory** limbic confused seized, **skin** acanthosis velvety axillae, **veins** Trousseau corded migratory, **clubbing** hypertrophic pulmonary) with **bedside** (**sodium** dilutional lows, **potassium** ACTH lows, **glucose** insulinoma sweats) grades; **nodes** (scalene supraclavicular) feels. Syndromes parade.",
-   "say": "Volumes moons flushes powers is exam: memories slip skins velvet veins cord clubs drum sodiums dilute potassiums plunge glucoses swing tumours stage markers follow. Bodies hint.",
-   "vis": null
-  },
-  {
-   "tx": "**Investigations** (**sodium** osmolality urine concentrated, **ACTH** ectopic pituitary sorts, **calcium** PTHrP HHM confirms, **chromogranin** carcinoid gut tracks, **VGCC** Lambert-Eaton confirms, **LGI1** faciobrachial hyponatraemia, **markers** PSA CEA CA trends, **imaging** occult small-cell hunts) with **differentials** (**pituitary** Cushing dexamethasone, **primary** SIADH drugs lungs, **myasthenia** decrement AChR, **DVT** provoked clots) sorts; **oncology** (syndrome-first treats) meets. Antibodies point.",
-   "say": "Sodiums ACTHs calciums chromogranins is Ix: VGCCs confirm LGI1s seize markers trend imagings hunt pituitaries suppress primaries dilute myasthenias fade DVTs provoke oncologists meet primaries treat wishes respect. Signals localise.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/med-paraneoplastic-fig1.webp",
-    "alt": "Diagram showing paraneoplastic syndromes like SIADH, Ectopic Cushing, and Lambert-Eaton, linking them to associated tumours and diagnostic markers like VGCC antibodies, PTHrP, and chromogranin.",
-    "caption": "Key paraneoplastic syndromes, associated tumours, and diagnostic investigations",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Management** (**tumour-first** resection chemo syndromes melt, **fluid-restrict** SIADH demeclocycline, **ketoconazole** ectopic Cushing bridges, **octreotide** carcinoid flush diarrhoea, **3-4-DAP** Lambert-Eaton strength, **steroids** limbic encephalitis calms, **anticoagulate** Trousseau heparinoids, **counsel** marker anxiety limits) with **traps** (**markers** screen healthy harm, **hyponatraemia** rapid correct pontine, **biopsy** small-cell crush delays) closes; **follow** (sodium markers neuro) tracks. Signals fade.",
-   "say": "Tumour-treats restricts blocks octreotides is Rx: DAPs strengthen steroids calm heparins thin counsels soothe screens harm corrects pontine biopsies wait follows track sodiums rise wishes respect. Syndromes melt.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-med-881",
-  "bk2-med-882",
-  "bk2-med-883",
-  "bk2-med-884",
-  "bk2-med-885",
-  "bk2-med-886",
-  "bk2-med-887",
-  "bk2-med-888",
-  "bk2-med-889",
-  "bk2-med-890"
- ],
- "src": [],
- "refs": [
-  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-lon10",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "med-paraneoplastic",
+  "quiz": [
+    "bk2-med-881",
+    "bk2-med-882",
+    "bk2-med-883",
+    "bk2-med-884",
+    "bk2-med-885",
+    "bk2-med-886",
+    "bk2-med-887",
+    "bk2-med-888",
+    "bk2-med-889",
+    "bk2-med-890"
+  ],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-lon10",
+  "src": [],
+  "steps": [
+    {
+      "say": "Ask every patient with suspected paraneoplastic disease about thirst and polyuria because hypercalcaemia develops in squamous cancers. Ask about confusion and seizures because low sodium develops when SIADH retains excess water. Ask about flushing with diarrhoea and wheeze because carcinoid tumours release vasoactive mediators. Ask about weakness with dry mouth, memory loss with jerks, and migratory clots because neuromuscular and clotting syndromes reveal pancreatic and small cell cancers early.",
+      "tx": "Ask about **thirst** with polyuria and nocturia that suggests hypercalcaemia from squamous cancer, confusion with seizures that suggests **low sodium** from SIADH, and flushing with diarrhoea and wheeze that suggests carcinoid syndrome. Ask about proximal weakness with dry mouth that suggests Lambert Eaton syndrome, memory loss with faciobrachial jerks that suggests limbic encephalitis, and migratory clots with weight loss that suggests **Trousseau syndrome** from pancreatic cancer.",
+      "vis": null
+    },
+    {
+      "say": "Examine volume status carefully because SIADH preserves euvolaemia while urine remains concentrated. Look for moon face with bruising and weakness because ectopic hormone secretion drives cortisol excess. Listen for wheeze and inspect flushing because carcinoid activity involves lung and gut. Test grip strength repeatedly because Lambert Eaton syndrome shows improvement with effort. Inspect the axillae and mouth closely because malignant skin change heralds gastric cancer and guides urgent referral.",
+      "tx": "Examine volume status and urine concentration because SIADH causes euvolaemia with concentrated urine, and look for moon face with bruising and weakness because ectopic **ACTH excess** drives cortisol effects. Listen for wheeze and inspect flushing because carcinoid activity affects gut and lung, test grip and eye movements because **Lambert Eaton syndrome** shows incremental strength, and inspect the axillae and mouth because **malignant skin change** can herald gastric cancer.",
+      "vis": null
+    },
+    {
+      "say": "This photograph shows the axilla with a dark velvety plaque that has a rough papillomatous surface and small skin tags. Examine both axillae under good light and palpate the area gently because true velvet thickening feels different from dry eczema. Inspect the neck and mouth as well because similar change appears at other flexures. Arrange an age appropriate cancer review promptly because sudden pigmentation in an adult can precede gastric cancer and needs urgent assessment.",
+      "tx": "The photograph shows the axilla with a dark **velvety plaque** that has a papillomatous surface and small skin tags, typical of **malignant acanthosis nigricans**. Examine both axillae with good light and palpate the texture because velvet thickening differs from dry eczema, inspect the neck and mouth because similar change appears at flexures, and arrange age appropriate cancer review because sudden **axillary pigmentation** in adults can precede gastric cancer diagnosis.",
+      "vis": {
+        "alt": "Clinical photograph of axilla with velvety hyperpigmented papillomatous plaque of malignant acanthosis nigricans.",
+        "ar": 1.3393,
+        "caption": "Axillary photo shows velvety hyperpigmented papillomatous malignant plaque. Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/med-paraneoplastic-gen1.webp"
+      }
+    },
+    {
+      "say": "Request paired serum and urine osmolality with urinary sodium because SIADH produces dilute serum with concentrated urine. Measure morning cortisol with ACTH because ectopic secretion resists pituitary suppression. Measure corrected calcium with PTHrP because humoral hypercalcaemia explains thirst and polyuria. Request VGCC antibodies with repetitive stimulation because Lambert Eaton syndrome is confirmed when strength increases with effort. Use chest imaging with marker trends because occult small cell cancer often hides until the syndrome points to the chest.",
+      "tx": "Request paired serum and urine osmolality with urinary sodium because SIADH shows dilute serum with concentrated urine, and measure morning cortisol with **ACTH level** because ectopic secretion resists pituitary suppression. Measure corrected calcium with **PTHrP assay** because humoral hypercalcaemia explains thirst and polyuria, request **VGCC antibodies** with repetitive stimulation because Lambert Eaton syndrome shows an increment, and use CT of chest plus marker trends to locate occult small cell cancer.",
+      "vis": {
+        "alt": "Diagram showing paraneoplastic syndromes like SIADH, Ectopic Cushing, and Lambert-Eaton, linking them to associated tumours and diagnostic markers like VGCC antibodies, PTHrP, and chromogranin.",
+        "ar": 1.8349,
+        "caption": "Key paraneoplastic syndromes, associated tumours, and diagnostic investigations",
+        "kind": "image",
+        "src": "v1/lessons/media/med-paraneoplastic-fig1.webp"
+      }
+    },
+    {
+      "say": "Treat the primary tumour with surgery or chemotherapy because cure is most likely when the source shrinks. Restrict fluids and monitor sodium closely because SIADH improves when water intake falls. Use octreotide for carcinoid flushing and diarrhoea because hormone blockade calms gut and lung symptoms. Use pyridostigmine with immunotherapy for Lambert Eaton weakness and give steroids for limbic encephalitis because targeted therapy restores function. Start heparin for Trousseau clots and counsel clearly because isolated markers never justify population screening.",
+      "tx": "Treat the primary tumour with surgery or chemotherapy because most syndromes melt when the source shrinks, restrict fluids with salt tablets for **SIADH control** while monitoring sodium closely, and use octreotide for **carcinoid symptoms** with flushing and diarrhoea. Use pyridostigmine with immunotherapy for **Lambert Eaton weakness**, give steroids for limbic encephalitis, start heparin for Trousseau clots, and counsel that isolated markers never justify population screening.",
+      "vis": null
+    }
+  ],
+  "subject": "medicine",
+  "title": "Paraneoplastic syndromes and tumour markers: hormones to antibodies",
+  "v": 1
 }

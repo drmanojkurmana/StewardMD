@@ -188,6 +188,9 @@
      items vh: true; markLevels sets d 4 on those at load time (the files are not rewritten). levelOf reads either. */
   function levelOf(it) { return it.vh === true || it.d === 4 ? 4 : it.d === 1 || it.d === 3 ? it.d : 2; }
   function markLevels(items) { (items || []).forEach(function (it) { if (it && it.vh === true) it.d = 4; }); return items; }
+  // A stem that reads a picture the item does not carry ("The radiograph of skull is suggestive of") is flagged, so no
+  // test, practice or Nucleus360 set shows an unanswerable question (owner 2026-11-08). Run after fixes: a fix can add the image.
+  function flagNoImage(items) { (items || []).forEach(function (it) { if (ASSESS && ASSESS.needsImage && ASSESS.needsImage(it) && !(it.flags && it.flags.indexOf("img-missing") >= 0)) it.flags = (it.flags || []).concat("img-missing"); }); return items; }
   function shuffle(a, rnd) { rnd = rnd || Math.random; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
   // Custom module: n questions from the given items, optionally one difficulty, spread across modules and,
   // since topic-diverse selection, across concepts too: each module pool is concept-ordered first, then round-robin
@@ -1086,6 +1089,7 @@
             var c = JSON.parse(JSON.stringify(n)); c._s = sid; c._m = mid; c._pub = 1; items.push(c);
           });
         }
+        flagNoImage(items);
         if ((!bankErr || addedMod) && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
         return items;
       });
@@ -1154,6 +1158,7 @@
       var bankU = unionItems(banks), items = markLevels(unionItems([bankU].concat(ovs)));
       if (!items.length && bankErr) throw bankErr;
       items.forEach(function (it) { it._s = sid; it._m = g.id; });
+      flagNoImage(items);
       if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
       writeBackXCounts(g, bankU, unionItems(ovs));
       return items;

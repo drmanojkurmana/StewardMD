@@ -1,66 +1,77 @@
 {
- "v": 1,
- "module": "ort-hand-wrist-conditions",
- "subject": "orthopaedics",
- "title": "Hand and wrist: tunnels, cords, ganglia and lunates",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**CTS** (**nocturnal** shaking-flick signs wake, **Phalen** minute-flexion reproduces, **Durkan** direct-pressure fastest, **Tinel** percussion tingles, **thenar** APB wasting weakens, **NCS** prolonged-latency confirms, **splint** neutral-night steroids-bridge, **release** transverse-ligament divides) with **grades** (**Bland** neurophysiological severity, **diabetes** hypothyroid screens) sorts; **refer** (surgery thresholds) sends. Medians squeeze.",
-   "say": "Nocturnals Phalens Durkans Tinels is CTS: shakes flick signs wake flexions bend minutes reproduce pressures push directs tingle tap percussions waste thin thenars weaken grades sort Blands stage refers send surgeries free releases cut ligaments split. Nerves entrap.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "drugs": true,
+    "dropped": 0,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "shape": true,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Dupuytren** (**palmar** nodule cord ring-little, **tabletop** Hueston positive cannot-flatten, **Garrod** dorsal knuckle-pads marks, **diathesis** bilateral ectopic early-recurs, **Xiaflex** collagenase selected dissolves, **needle** fasciotomy office divides, **fasciectomy** regional-disease excises, **amputate** fifth-severe salvage) with **angles** (**PIP** contracture prognosis rules, **MCP** forgiving corrects) measures; **therapy** (extension-splints) holds. Palms cord.",
-   "say": "Palmars tabletops Garrods diatheses is Dupuytren: nodules seed cords rope littles curl flattens fail tabletops tilt pads mark knuckles bare dissolves melt Xiaflex jabs divides prick needles cut strip fasciectomies wide measures gauge angles bend therapies prop extensions hold. Fascia shrinks.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/ort-hand-wrist-conditions-fig1.webp",
-    "alt": "Clinical image of a hand with Dupuytren's contracture, showing palmar cords, finger flexion, the Hueston tabletop test, and dorsal knuckle pads.",
-    "caption": "Dupuytren's contracture: palmar cords, Hueston test, and Garrod pads. Image: Photograph: Frank C. Müller , Baden-Baden, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 1.3333
-   }
-  },
-  {
-   "tx": "**Lumps-trigger** (**ganglion** SL-dorsal transilluminates reassures, **mucous** DIP osteoarthritic discharges, **trigger** Notta-nodule A1-locks, **steroid** sheath-injection settles, **release** pulley-divides frees, **de Quervain** Finkelstein APL-EPB sheaths, **spica** thumb-immobilise rests, **intersection** proximal-creak pads) with **aspirates** (**reassure** watchful resolves, **recurrence** excision-counsels) manages; **splint** (activity-modify) calms. Tendons catch.",
-   "say": "Ganglions mucous triggers Quervains is lump: bumps swell dorsals dome lights glow transilluminates nodules roll Nottas catch locks grate pulleys injects calm sheaths soothe spicas wrap thumbs rest aspirates suck watches wait manages counsel recurrences warn splints calm activities ease. Sheaths snag.",
-   "vis": null
-  },
-  {
-   "tx": "**Lunate-degenerate** (**Kienbock** AVN negative-ulnar young, **Lichtman** sclerosis-collapse stages, **SNAC** scaphoid-nonunion arthritis, **SLAC** ligament-dissociation gaps, **TFCC** fovea ulnar-variance clicks, **ulnar** impaction Wafer-resects, **four-corner** SLAC-wrist fuses, **proximal-row** carpectomy motion-spares) with **views** (**clenched-fist** dynamic gaps, **MRI** AVN-marrow early) shows; **stage** (surgical-ladder) guides. Wrists collapse.",
-   "say": "Kienbocks SNACs SLACs TFCCs is degenerate: lunates die negatives unload ulnas short scleroses harden Lichtmans stage collapses crush scaphoids bridge nonunions fake gaps split ligaments part clicks grate foveas tear views grip fists clench stages climb ladders guide. Carpals fail.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-ort-161",
-  "bk2-ort-162",
-  "bk2-ort-163",
-  "bk2-ort-164",
-  "bk2-ort-165",
-  "bk2-ort-166",
-  "bk2-ort-167",
-  "bk2-ort-168",
-  "bk2-ort-169",
-  "bk2-ort-170"
- ],
- "src": [],
- "refs": [
-  "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-ort2",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 7,
+  "model": "muse-wonder (local authoring, no external API)",
+  "module": "ort-hand-wrist-conditions",
+  "quiz": [
+    "bk2-ort-161",
+    "bk2-ort-162",
+    "bk2-ort-163",
+    "bk2-ort-164",
+    "bk2-ort-165",
+    "bk2-ort-166",
+    "bk2-ort-167",
+    "bk2-ort-168",
+    "bk2-ort-169",
+    "bk2-ort-170"
+  ],
+  "refs": [
+    "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-ort2",
+  "src": [],
+  "steps": [
+    {
+      "say": "Carpal tunnel syndrome causes tingling in the thumb and nearby fingers that often wakes the patient at night. The tingling returns when the wrist stays bent, when pressure is applied over the tunnel, or when the nerve is tapped. Weak thumb movement shows that the thenar muscles are wasting in advanced disease. A nerve conduction study confirms slowing across the wrist, and diabetes and thyroid function should be checked. Night splints and activity change help early cases, while persistent or severe cases need referral for release.",
+      "tx": "**Carpal tunnel syndrome** causes nocturnal tingling in the thumb, index and middle fingers, and shaking the hand often relieves it. Phalen wrist flexion, Durkan direct compression and Tinel tapping reproduce the tingling in clinic. Weak thumb abduction shows thenar wasting in advanced disease. A **nerve conduction study** confirms delayed conduction across the carpal tunnel. Screen for diabetes and hypothyroidism, grade severity with the Bland scale, and use night **splinting** early while referring persistent or severe cases for release.",
+      "vis": null
+    },
+    {
+      "say": "Dupuytren disease causes firm nodules and cords in the palm that slowly pull the ring and little fingers into flexion. The tabletop test is positive when the hand cannot lie flat on a table, and small pads may appear over the knuckles. Bilateral disease with early recurrence suggests an aggressive diathesis that needs counselling. Needle release or collagenase injection can divide selected cords, while larger disease needs fasciectomy to remove the fascia. Hand therapy with extension splints supports recovery after the procedure.",
+      "tx": "**Dupuytren disease** forms firm palmar nodules and cords that slowly bend the ring and little fingers toward the palm. The **tabletop test** is positive when the hand cannot lie flat on a table, and small knuckle pads called Garrod nodes may appear. Bilateral disease with early recurrence suggests Dupuytren diathesis. Needle release or collagenase injection can divide selected cords, while limited or regional **fasciectomy** removes diseased fascia, and extension splints with hand therapy support recovery after the procedure.",
+      "vis": {
+        "alt": "Clinical image of a hand with Dupuytren's contracture, showing palmar cords, finger flexion, the Hueston tabletop test, and dorsal knuckle pads.",
+        "ar": 1.3333,
+        "caption": "Dupuytren's contracture: palmar cords, Hueston test, and Garrod pads. Image: Photograph: Frank C. Müller , Baden-Baden, CC BY-SA 4.0, Wikimedia Commons.",
+        "kind": "image",
+        "src": "v1/lessons/media/ort-hand-wrist-conditions-fig1.webp"
+      }
+    },
+    {
+      "say": "A ganglion feels like a smooth tense swelling on the back of the wrist that lights up when transilluminated. Simple reassurance helps many patients because some swellings resolve without any treatment. A mucous cyst near the fingertip joint marks underlying arthritis and may discharge or disturb nail growth. Trigger finger locks or clicks when a nodule catches inside its sheath, and a steroid injection or pulley release frees the tendon. Pain on the thumb side of the wrist suggests de Quervain tenosynovitis, which eases with a thumb spica and activity change.",
+      "tx": "A dorsal wrist **ganglion** feels like a smooth tense swelling that transilluminates, and simple reassurance suits many patients because some resolve without treatment. A mucous cyst at the distal finger joint marks underlying osteoarthritis and may discharge or threaten the nail. **Trigger finger** locks or clicks when a nodule catches in the tendon sheath, and a steroid injection or pulley release frees the tendon. **De Quervain tenosynovitis** pains the thumb side of the wrist, eases with a thumb spica and activity change, and settles when the sheath inflammation calms.",
+      "vis": null
+    },
+    {
+      "say": "Kienbock disease means the lunate loses its blood supply and slowly collapses, which causes chronic wrist pain with weak grip. Magnetic resonance imaging shows marrow change early, while plain films reveal sclerosis and collapse in later stages. The Lichtman stage guides treatment from splinting toward salvage procedures. Scaphoid nonunion and scapholunate dissociation cause similar collapse patterns, while ulnar impaction and triangular fibrocartilage tears explain pain on the little finger side. Clenched fist views reveal dynamic gaps, and staging decides between repair, partial fusion, or carpectomy.",
+      "tx": "**Kienbock disease** is avascular necrosis of the lunate, often seen in young adults with ulnar variance, and it causes chronic wrist pain with weak grip. Magnetic resonance imaging shows marrow change early, while plain views and clenched fist films reveal sclerosis, collapse and carpal gaps in later stages. The **Lichtman stage** guides treatment from splinting to salvage. Scaphoid nonunion arthritis and scapholunate dissociation cause similar collapse patterns, while ulnar impaction and triangular fibrocartilage tears explain ulnar sided pain that may need debridement, repair or **four corner fusion**.",
+      "vis": null
+    },
+    {
+      "say": "This coronal scan shows a dark sclerotic lunate that has collapsed from avascular necrosis. The inset panel summarises the Lichtman stages that examiners love to test. Stage one keeps a normal contour, stage two shows sclerosis, stage three adds collapse with carpal instability, and stage four means arthritis across the whole wrist. Spotting sclerosis before collapse matters because early disease can be splinted, while late collapse needs a salvage operation.",
+      "tx": "**Kienbock disease** appears on this coronal wrist scan as a dark sclerotic and collapsed lunate marked by the arrow. The inset panel summarises the **Lichtman stages** used in the examination: stage one keeps a normal contour, stage two shows sclerosis, stage three adds lunate collapse with carpal instability, and stage four means pancarpal arthritis. Recognising sclerosis before collapse matters because early disease can be splinted or revascularised, while late collapse needs salvage such as proximal row carpectomy or **four corner fusion**.",
+      "vis": {
+        "alt": "Coronal MRI of wrist with collapsed lunate labeled plus inset diagram of Lichtman stages",
+        "ar": 1.3393,
+        "caption": "Coronal wrist MRI showing sclerotic collapsed lunate with staging diagram Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/ort-hand-wrist-conditions-gen1.webp"
+      }
+    }
+  ],
+  "subject": "orthopaedics",
+  "title": "Hand and wrist: tunnels, cords, ganglia and lunates",
+  "v": 1
 }
