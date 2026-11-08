@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "module": "bio-protein-structure",
+ "subject": "biochemistry",
+ "title": "Folding and chaperones",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Levinthal paradox frames assistance: random search of conformations would take longer than the universe, yet proteins fold in milliseconds to seconds through biased pathways (hydrophobic collapse to molten globule, secondary nucleation, domain wise assembly) on funnelled energy landscapes. **Chaperones** do not encode fold information; they prevent aggregation, unfold traps with ATP and isolate Anfinsen cages, raising yield of the sequence encoded outcome, a distinction stems test verbatim.",
+   "say": "Chaperones do not encode fold information; they prevent aggregation and isolate folding cages, raising yield of the sequence encoded outcome. That distinction is tested verbatim in examinations.",
+   "vis": {
+    "kind": "flow",
+    "title": "Folding funnel with assistance",
+    "nodes": [
+     {"id": "u", "label": "Unfolded chain (ribosome exit)"},
+     {"id": "m", "label": "Molten globule collapse"},
+     {"id": "ch", "label": "Chaperones prevent aggregation traps"},
+     {"id": "n", "label": "Native fold (sequence encoded)"}
+    ],
+    "edges": [["u", "m"], ["m", "ch"], ["ch", "n"]]
+   }
+  },
+  {
+   "tx": "**Hsp70** (DnaK system) binds exposed hydrophobic stretches co-translationally in ATP driven clamp cycles (J proteins deliver clients and trigger hydrolysis, nucleotide exchange factors reopen), preventing aggregation early. Nascent chain associated and trigger factors shield ribosome exits in bacteria and eukaryotes respectively. Heat shock transcription (HSF1) induces the whole chaperone battery (hence Hsp names by kilodaltons) when unfolded load rises, a proteostasis stress programme cancers hijack for survival.",
+   "say": "Hsp70 clamps exposed hydrophobics co-translationally in ATP cycles, while heat shock transcription induces the whole battery. Cancers hijack this proteostasis programme for survival advantage therapeutically.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Chaperone system", "Client moment", "ATP logic"],
+    "rows": [
+     ["Hsp70 (DnaK/DnaJ/GrpE)", "Nascent and stressed unfolded", "ATP clamp, ADP hold, exchange release"],
+     ["Hsp60 GroEL/ES (Hsp10)", "Collapsed intermediates needing isolation", "Cage encapsulates one chain to fold alone"],
+     ["Hsp90", "Late maturation: steroid receptors, kinases", "ATP conformational cycle, drug target (geldanamycin class)"],
+     ["Small Hsps (alpha-crystallin)", "Hold unfolded without ATP", "Lens transparency; cataract when failed"]
+    ]
+   }
+  },
+  {
+   "tx": "The **GroEL/GroES** barrel (bacterial Hsp60, mitochondrial orthologue) encapsulates one non native chain beneath its GroES lid in an expanded hydrophilic cage for seconds, folding in splendid isolation without aggregation partners, then ejects finished or retrying chains on ATP turnover. Mitochondrial Hsp60 failure causes hereditary spastic paraplegia and hypomyelinating leukodystrophy variants, proving cage essentiality in humans beyond textbook bacteria.",
+   "say": "The GroEL barrel encapsulates one chain to fold in splendid isolation without aggregation partners. Mitochondrial cage failure causes spastic paraplegia and leukodystrophy variants in human disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Hsp70 strategy (hold)", "points": ["Binds stretches openly", "Prevents aggregation early", "No isolation chamber"]},
+    "right": {"title": "Hsp60 strategy (isolate)", "points": ["Sealed Anfinsen cage", "One chain folds alone", "ATP timed ejection and retry"]
+    }
+   }
+  },
+  {
+   "tx": "Endoplasmic reticulum specialists finish secreted folds: **calnexin and calreticulin** retain monoglucosylated N-glycans in reglucosylation cycles (glucosyltransferase senses non nativeness) until folded or ERAD condemned, protein disulfide isomerase shuffles disulfides, peptidyl prolyl isomerases flip proline peptide bonds (cis trans rate limiting steps, cyclophilin target of ciclosporin whose calcineurin blockade, not folding, immunosuppresses). Quality control here decides secretion versus degradation for a third of the proteome.",
+   "say": "Calnexin cycles retain glycoproteins until folded or condemned to degradation. Disulfide and prolyl isomerases finish secreted folds for a third of the proteome passing quality control gates.",
+   "vis": null
+  },
+  {
+   "tx": "Failed folding routes to disposal with ubiquitin triage: cytosolic chaperones hand terminal clients to E3 ligases (CHIP with Hsp70) for **proteasome**, ER clients retrotranslocate through ERAD (p97 extraction, N-glycanase) to the same proteasome, aggregates beyond proteasome bore route to aggresomes and autophagy lysosomes. Proteasome inhibition (bortezomib) therefore poisons myeloma cells drowning in immunoglobulin synthesis, converting quality control overload into oncology.",
+   "say": "Failed folding routes through ubiquitin triage to proteasome or autophagy disposal. Proteasome inhibition poisons myeloma cells drowning in immunoglobulin synthesis, converting overload into oncology therapy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fold or dispose triage",
+    "nodes": [
+     {"id": "try", "label": "Chaperone attempts (Hsp70/60/ER cycle)"},
+     {"id": "tag", "label": "Ubiquitin tagged if terminal"},
+     {"id": "prot", "label": "Proteasome (soluble) or autophagy (aggregates)"}
+    ],
+    "edges": [["try", "tag"], ["tag", "prot"]]
+   }
+  },
+  {
+   "tx": "**Proteostasis** collapse with aging (chaperone capacity falls, aggregates rise) underlies cataract (crystallin), neurodegeneration and metabolic misfolding in the next lesson, while pharmacological chaperones (migalastat in Fabry, tafamidis kinetic stabilisation, CFTR correctors lumacaftor trafficking rescue) prove small molecules can escort specific mutants past quality control. Learn chaperones as therapeutics, not only as helpers, and storage, channel and amyloid lessons fuse into one proteostasis syllabus.",
+   "say": "Proteostasis collapse underlies cataract and neurodegeneration with aging. Pharmacological chaperones escort specific mutants past quality control, fusing storage, channel and amyloid lessons into one syllabus.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Pharmacological escort", "Client rescued", "Disease"],
+    "rows": [
+     ["Migalastat (oral chaperone)", "Amenable alpha-galactosidase A", "Fabry disease"],
+     ["Lumacaftor/tezacaftor correctors", "DeltaF508 CFTR trafficking", "Cystic fibrosis"],
+     ["Tafamidis (kinetic stabiliser)", "Transthyretin tetramer held", "Transthyretin amyloidosis"]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

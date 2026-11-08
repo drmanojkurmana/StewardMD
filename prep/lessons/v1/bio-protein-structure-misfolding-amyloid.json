@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "module": "bio-protein-structure",
+ "subject": "biochemistry",
+ "title": "Misfolding, amyloid and prions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Amyloid** is not a protein but an architecture: cross beta fibrils (beta strands perpendicular to fibril axis, four point seven angstrom meridional reflection) binding Congo red with apple green birefringence under polarised light and thioflavin T fluorescence, protease resistant, seeding templated growth like crystallisation. Over thirty human precursors share it (immunoglobulin light chains, transthyretin, Abeta, islet amyloid polypeptide, beta-2 microglobulin), so diagnosis must type the precursor by mass spectrometry or immunohistochemistry before therapy.",
+   "say": "Amyloid is an architecture of cross beta fibrils binding Congo red with apple green birefringence. Over thirty precursors share it, so typing the precursor must precede therapy decisions in patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Amyloid type",
+     "Precursor",
+     "Signature organs"
+    ],
+    "rows": [
+     [
+      "AL",
+      "Immunoglobulin light chains (plasma cell clone)",
+      "Heart, kidney, nerves, tongue; myeloma link"
+     ],
+     [
+      "AA",
+      "Serum amyloid A (chronic inflammation)",
+      "Kidney, liver, spleen; RA, IBD, FMF drivers"
+     ],
+     [
+      "ATTR",
+      "Transthyretin (wild type aging or variant)",
+      "Heart failure thick walls, carpal tunnel, neuropathy"
+     ],
+     [
+      "Abeta (localised)",
+      "Amyloid precursor protein fragment",
+      "Brain Alzheimer plaques, cerebral vessels"
+     ],
+     [
+      "AIAPP, Abeta2M (localised/systemic dialysis)",
+      "Islet polypeptide; beta-2 microglobulin",
+      "Diabetic islets; dialysis osteoarticular"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**AL versus AA** separates by driver and treatment absolutely: AL needs clone directed chemotherapy (daratumumab regimens, transplant in selected) with cardiac staging by troponin and NT-proBNP and free light chain response tracking, while AA needs inflammation extinguishing (anti interleukin agents, colchicine in familial Mediterranean fever) with serum amyloid A suppression predicting renal survival. SAP scintigraphy maps visceral load where available; fat pad aspiration Congo red screens with modest sensitivity, organ biopsy when stakes demand certainty.",
+   "say": "AL needs clone directed chemotherapy with cardiac staging, while AA needs inflammation extinguishing with colchicine or cytokine blockade. Typing separates treatment absolutely before any drug is chosen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "AL (clone driven)",
+     "points": [
+      "Free light chains abnormal",
+      "Heart and kidney, macroglossia",
+      "Chemotherapy, track light chains"
+     ]
+    },
+    "right": {
+     "title": "AA (inflammation driven)",
+     "points": [
+      "SAA high chronically",
+      "Kidney dominant",
+      "Suppress inflammation, track SAA"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Transthyretin** amyloidosis teaches kinetic stabilisation: tetramer dissociation to monomers rate limits fibril formation, so tafamidis (and silencers patisiran, vutrisiran, inotersen cutting hepatic production for variant neuropathy) prevent dissociation or supply. Wild type ATTR hides in elderly heart failure with preserved ejection, low ECG voltage despite wall thickening (voltage mass mismatch), bilateral carpal tunnel years prior and lumbar stenosis, diagnosed by bone scintigraphy (PYP) after AL exclusion, no biopsy often needed.",
+   "say": "Transthyretin dissociation rate limits fibril formation, so stabilisers and silencers prevent disease. Wild type disease hides in elderly heart failure with voltage mass mismatch and carpal tunnel years prior.",
+   "vis": {
+    "kind": "flow",
+    "title": "ATTR bottleneck and brakes",
+    "nodes": [
+     {
+      "id": "tet",
+      "label": "Transthyretin tetramer (liver made)"
+     },
+     {
+      "id": "mono",
+      "label": "Monomers (rate limiting dissociation)"
+     },
+     {
+      "id": "fib",
+      "label": "Amyloid fibrils in heart and nerves"
+     },
+     {
+      "id": "drug",
+      "label": "Stabilise tetramer or silence production"
+     }
+    ],
+    "edges": [
+     [
+      "tet",
+      "mono"
+     ],
+     [
+      "mono",
+      "fib"
+     ],
+     [
+      "tet",
+      "drug"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prions** convert without nucleic acid: cellular PrPC (alpha helical, protease sensitive, GPI anchored neuronal) refolds templated by PrPSc (beta rich, protease resistant core) into aggregates causing sporadic Creutzfeldt-Jakob (one per million, rapid dementia, myoclonus, periodic sharp waves, diffusion MRI cortical ribbon, RT-QuIC seed assay), variant disease from BSE beef (young, psychiatric first, pulvinar thalamic sign), kuru, and iatrogenic (dura, hormones, instruments) forms. No treatment alters course; infection control (prions resist autoclaves, need extended cycles and sodium hydroxide/hypochlorite) is examinable public health.",
+   "say": "Prions convert without nucleic acid, causing rapid dementia with myoclonus in sporadic Jakob disease. No treatment alters course, and prions resist autoclaves, making infection control examinable public health.",
+   "vis": null
+  },
+  {
+   "tx": "Neurodegenerative amyloids localise intracellularly and extracellularly with strain biology: Alzheimer **Abeta** plaques plus tau neurofibrillary tangles (hyperphosphorylated, Braak staging), Parkinson alpha-synuclein Lewy bodies (multiple system atrophy glial inclusions), Huntington polyglutamine huntingtin aggregates (CAG length), ALS TDP-43 and SOD1 variants. Seeding and spread along networks (prion like, not prion infectious between people except rare contexts) now frames trial designs (anti amyloid antibodies lecanemab slowing early Alzheimer modestly with ARIA oedema vigilance).",
+   "say": "Alzheimer plaques plus tau tangles, Parkinson synuclein Lewy bodies and Huntington polyglutamine aggregates spread prion like along networks. Anti amyloid antibodies slow early Alzheimer modestly with oedema vigilance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Aggregating protein",
+     "Hallmark inclusion"
+    ],
+    "rows": [
+     [
+      "Alzheimer",
+      "Abeta plus tau",
+      "Plaques and tangles"
+     ],
+     [
+      "Parkinson and Lewy body dementia",
+      "Alpha-synuclein",
+      "Lewy bodies"
+     ],
+     [
+      "Huntington",
+      "Huntingtin polyQ",
+      "Nuclear inclusions, CAG repeats"
+     ],
+     [
+      "CJD and prion family",
+      "PrPSc",
+      "Spongiform change, no inflammation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non amyloid misfolding completes the clinic: **alpha-1 antitrypsin** Z (Glu342Lys) polymerises in hepatocyte ER (PAS diastase globules, neonatal hepatitis, cirrhosis, hepatocellular risk) while lung loses antiprotease protection (early panacinar emphysema, augmentation therapy, smoking catastrophic synergy), one allele injuring two organs by gain and loss simultaneously. Serpin polymerisation (neuroserpin dementia), CFTR trafficking and haemoglobin polymerisation (sickle, a solubility not amyloid polymer) finish the misfolding spectrum before laboratory separation methods.",
+   "say": "Antitrypsin Z polymerises in liver while lung loses protection, injuring two organs by gain and loss simultaneously. Sickle polymerisation finishes the misfolding spectrum before laboratory methods next.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Liver gain of toxicity (Z polymers)",
+     "points": [
+      "PAS-D globules retained",
+      "Cirrhosis and cancer risk",
+      "No augmentation benefit to liver"
+     ]
+    },
+    "right": {
+     "title": "Lung loss of function (no antiprotease)",
+     "points": [
+      "Early basal panacinar emphysema",
+      "Smoking synergy catastrophic",
+      "Augmentation therapy helps selected"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "module": "bio-protein-structure",
+ "subject": "biochemistry",
+ "title": "Peptide bond and primary structure",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **peptide bond** condenses amino carboxyl with the next amino group (water lost, ribosome catalysed), acquiring partial double bond character by resonance that holds six atoms planar, forbids rotation, and forces trans configuration (cis almost only before proline, five percent there). Rigidity plus alpha carbon rotation (phi, psi Ramachandran angles, glycine widest, proline narrowest allowed) generates all folding geometry from one repeating chemistry.",
+   "say": "The peptide bond is planar and rigid by resonance, forcing trans configuration except sometimes before proline. Alpha carbon rotations generate all folding geometry from one repeating chemistry.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Bond property", "Structural consequence"],
+    "rows": [
+     ["Partial double bond (resonance)", "Planar, no rotation, 1.32 angstrom intermediate"],
+     ["Trans configuration", "Side chains alternate, steric relief (cis only pre-Pro)"],
+     ["Phi and psi rotations free", "Ramachandran allowed regions; Gly widest, Pro fixed"],
+     ["Hydrogen bond donor/acceptor pattern", "Helices and sheets in next lesson"]
+    ]
+   }
+  },
+  {
+   "tx": "**Primary structure** is the covalent sequence (N to C terminus by convention) including disulfide pairing positions, and Anfinsen ribonuclease refolding proved sequence encodes fold (denatured enzyme regained activity and correct disulfides in vitro, with protein disulfide isomerase accelerating in cells). Single substitutions rewrite destiny (glutamate to valine sickling haemoglobin, glycine substitutions shattering collagen Gly-X-Y), so sequencing and variant interpretation remain diagnostic foundations.",
+   "say": "Primary sequence encodes fold, proved by ribonuclease refolding. Single substitutions rewrite destiny in sickle haemoglobin and collagen, so variant interpretation remains a diagnostic foundation today.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sequence to destiny",
+    "nodes": [
+     {"id": "seq", "label": "Primary sequence (N to C)"},
+     {"id": "fold", "label": "Fold encoded (Anfinsen)"},
+     {"id": "var", "label": "One substitution can rewrite function"}
+    ],
+    "edges": [["seq", "fold"], ["fold", "var"]]
+   }
+  },
+  {
+   "tx": "Proteases read sequence with postal precision: **trypsin** cuts after lysine and arginine (unless proline follows), chymotrypsin after aromatics (phenylalanine, tyrosine, tryptophan) and methionine, elastase after small neutrals (alanine, glycine, serine), pepsin broadly before aromatics at acid pH, carboxypeptidases trim C termini (pancreatic B after basics, A after aromatics). Mass spectrometry proteomics digests with trypsin precisely because its cuts are predictable at common residues.",
+   "say": "Trypsin cuts after lysine and arginine, chymotrypsin after aromatics, and elastase after small residues. Proteomics digests with trypsin because its cuts are predictable at common residues.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Endopeptidases (cut inside)", "points": ["Trypsin: after K, R", "Chymotrypsin: after F, Y, W", "Pepsin: acid, broad aromatic"]},
+    "right": {"title": "Exopeptidases (trim ends)", "points": ["Carboxypeptidase B: C-term K, R", "Aminopeptidases: N-term sequential", "Dipeptidyl enzymes in gut and ACE family"]
+    }
+   }
+  },
+  {
+   "tx": "Sequencing history still examines: **Edman degradation** removes and identifies N-terminal residues cyclically (phenylisothiocyanate, about fifty residues, blocked N termini fail), Sanger dinitrofluorobenzene end labelling preceded it, cyanogen bromide cuts uniquely after methionine chemically, and modern tandem mass spectrometry sequences peptides de novo and by database matching. Insulin sequencing (Sanger, first protein, two chains A twenty one and B thirty residues, three disulfides) proved proteins have defined sequences at all.",
+   "say": "Edman degradation reads N termini cyclically for about fifty residues. Insulin sequencing first proved proteins have defined sequences, with two chains and three disulfide bridges defined exactly.",
+   "vis": null
+  },
+  {
+   "tx": "Biologically active small peptides reuse the bond at miniature scale: **glutathione** (gamma glutamyl, not alpha, resisting peptidases), oxytocin and vasopressin (nine residues, one disulfide ring, differing at two positions with uterine versus renal empires), bradykinin, substance P, enkephalins (opioid pentapeptides), thyrotropin releasing hormone (three residues, pyroglutamate protected), and carnosine (beta-alanyl histidine in muscle). Length never predicts potency in peptide pharmacology.",
+   "say": "Glutathione uses a gamma bond resisting peptidases, while oxytocin and vasopressin differ at two positions with uterine versus renal empires. Length never predicts potency in peptide pharmacology.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Peptide", "Length trick", "Job"],
+    "rows": [
+     ["Glutathione", "Gamma bond, 3 residues", "Redox buffer (prior module)"],
+     ["Oxytocin vs vasopressin", "9 residues, 2 differ", "Uterus and milk vs kidney water"],
+     ["TRH", "3 residues, blocked ends", "Pituitary thyrotropin release"],
+     ["Insulin", "A 21 plus B 30, 3 disulfides", "First sequenced, proinsulin C-peptide equal secretion marker"]
+    ]
+   }
+  },
+  {
+   "tx": "**Disulfide bonds** (cysteine oxidation, protein disulfide isomerase shuffled in endoplasmic reticulum, reducing cytosol normally forbids them intracellularly) covalently staple extracellular and secreted folds (insulin chains, antibodies, digestive enzymes surviving gut). Beta-mercaptoethanol and dithiothreitol break them in laboratories (permanent waves thioglycolate in hair keratin commercially), and wrong pairings (mucus, amyloid precursors) show why isomerase proofreading matters before secondary structures even form next.",
+   "say": "Disulfide bonds staple secreted folds covalently and are shuffled by isomerase proofreading. Laboratory reductants break them, and wrong pairings show why proofreading matters before secondary structures form.",
+   "vis": {
+    "kind": "flow",
+    "title": "Disulfide decisions",
+    "nodes": [
+     {"id": "cys", "label": "Cysteine pairs meet in ER (oxidising)"},
+     {"id": "pdi", "label": "PDI shuffles wrong pairs"},
+     {"id": "lock", "label": "Correct staples lock the fold"}
+    ],
+    "edges": [["cys", "pdi"], ["pdi", "lock"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
