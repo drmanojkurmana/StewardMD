@@ -1,0 +1,214 @@
+{
+  "id": "pnp-shiga-toxin-d-plus-hus",
+  "title": "STEC D+ Hemolytic Uremic Syndrome: Shiga Toxin, Microangiopathy and Supportive Care",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Renal Failure, Dialysis and Transplantation",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The classic hemolytic uremic syndrome triad comprises microangiopathic hemolytic anemia, thrombocytopenia, and acute kidney injury.",
+      "tx": "Recognize the diagnostic presentation of the **STEC D+ HUS classic triad** in children following bloody diarrhea. Hemolytic uremic syndrome is formally defined by the clinical triad of microangiopathic hemolytic anemia (Coombs-negative, characterized by fragmented red blood cells or schistocytes on peripheral blood smear), thrombocytopenia (platelet count < 150,000/mm\u00b3), and acute kidney injury manifesting with oliguria, hematuria, and azotemia.",
+      "vis": {
+        "kind": "table",
+        "title": "Classic HUS Diagnostic Triad",
+        "cols": [
+          "Feature",
+          "Laboratory Criteria",
+          "Pathophysiologic Basis"
+        ],
+        "rows": [
+          [
+            "Microangiopathic hemolytic anemia",
+            "Hb drop, schistocytes, Coombs negative, high LDH",
+            "Mechanical erythrocyte shearing across microthrombi"
+          ],
+          [
+            "Thrombocytopenia",
+            "Platelets < 150,000/mm\u00b3 (often < 50,000)",
+            "Platelet consumption within glomerular capillary clots"
+          ],
+          [
+            "Acute kidney injury",
+            "Elevated creatinine, oliguria, hematuria/proteinuria",
+            "Glomerular microvascular thrombosis and ischemia"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Shiga toxins bind endothelial globotriaosylceramide receptors, halting protein synthesis and triggering microvascular thrombosis.",
+      "tx": "Understand molecular pathogenesis involving **Shiga toxin pathogenesis and Gb3 receptors** in target tissues. Enterohemorrhagic Escherichia coli (such as O157:H7, O26, and O104) produce Shiga toxins (Stx1 and Stx2). These toxins enter the bloodstream and bind globotriaosylceramide (Gb3) receptors abundantly expressed on glomerular endothelial cells. Receptor-mediated endocytosis delivers toxin subunits that cleave ribosomal RNA, halting protein synthesis and inciting endothelial apoptosis and microvascular thrombosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ttp-hus-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Thrombotic microangiopathy: peripheral smear showing fragmented schistocytes and histopathology of microvascular thrombosis",
+        "alt": "Thrombotic microangiopathy: peripheral smear showing fragmented schistocytes and histopathology of microvascular thrombosis"
+      },
+      "caption": "Thrombotic microangiopathy: peripheral smear showing fragmented schistocytes and histopathology of microvascular thrombosis",
+      "alt": "Thrombotic microangiopathy: peripheral smear showing fragmented schistocytes and histopathology of microvascular thrombosis"
+    },
+    {
+      "say": "Antibiotics and antimotility agents during prodromal colitis increase toxin release and elevate HUS risk up to seventeen fold.",
+      "tx": "Enforce strict medication avoidance to prevent the **Antibiotic hazard in STEC colitis** in children with enteritis. Antibiotics (including fluoroquinolones like ciprofloxacin and co-trimoxazole) and antimotility agents (such as loperamide) administered during the prodromal diarrheal phase induce bacterial SOS stress responses, increasing Shiga toxin expression and release. This dramatically elevates the risk of developing systemic HUS by up to seventeen-fold.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Strictly Prohibited Therapies",
+          "points": [
+            "Antibiotics (ciprofloxacin, trimethoprim-sulfa)",
+            "Antimotility agents (loperamide)",
+            "Up to 17-fold elevated risk of systemic HUS"
+          ]
+        },
+        "right": {
+          "title": "Mandated Clinical Approach",
+          "points": [
+            "Vigorous early intravenous isotonic rehydration",
+            "Meticulous fluid balance and electrolyte monitoring",
+            "Avoidance of nephrotoxic medications"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Vigorous early volume expansion preserves renal microvascular perfusion and halves the need for emergency dialysis.",
+      "tx": "Administer aggressive fluid protocols for **Early volume expansion renal protection** during the acute diarrheal phase. Early intravenous volume expansion with isotonic saline (administered at 10-15 mL/kg/hr initially during the diarrheal prodrome) preserves renal capillary perfusion, counteracts microvascular hypoperfusion, and halves the requirement for acute renal replacement therapy in pediatric patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "colitis",
+            "label": "STEC Bloody Diarrheal Prodrome"
+          },
+          {
+            "id": "ivf",
+            "label": "Early Isotonic Saline Expansion (10-15 mL/kg/hr)"
+          },
+          {
+            "id": "perfusion",
+            "label": "Preserves Glomerular Microvascular Perfusion"
+          },
+          {
+            "id": "dialysis",
+            "label": "Halves Need for Acute Dialysis & Renal Failure"
+          }
+        ],
+        "edges": [
+          [
+            "colitis",
+            "ivf"
+          ],
+          [
+            "ivf",
+            "perfusion"
+          ],
+          [
+            "perfusion",
+            "dialysis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Platelet transfusions are contraindicated because infusing platelets fuels active microvascular thrombosis in glomerular capillaries.",
+      "tx": "Adhere strictly to the established **Platelet transfusion restriction rule** during supportive care. Platelet transfusions are strictly contraindicated in hemolytic uremic syndrome because transfused platelets become incorporated into active glomerular microthrombi, worsening microvascular occlusion and renal ischemia. Transfusions are reserved exclusively for patients with life-threatening intracranial hemorrhage or active invasive surgical bleeding.",
+      "vis": {
+        "kind": "table",
+        "title": "Transfusion Thresholds in Pediatric HUS",
+        "cols": [
+          "Blood Product",
+          "Indication Threshold",
+          "Rationale / Safety Rule"
+        ],
+        "rows": [
+          [
+            "Packed Red Blood Cells",
+            "Hb < 6-7 g/dL or symptomatic anemia",
+            "Transfuse slowly to maintain tissue oxygen delivery"
+          ],
+          [
+            "Platelet Concentrates",
+            "Life-threatening bleeding only",
+            "Strictly avoid routinely; fuels microvascular thrombosis"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Diagnosis is confirmed by isolating non-sorbitol fermenting colonies on MacConkey agar or detecting toxin genes by PCR.",
+      "tx": "Order appropriate microbiological diagnostics through **Stx stool PCR and sorbitol-MacConkey agar** stool testing. Diagnosis is confirmed by stool culture on Sorbitol-MacConkey (SMAC) agar, where classic E. coli O157:H7 strains appear colorless due to failure to ferment sorbitol, or by stool enzyme immunoassay (EIA) and multiplex polymerase chain reaction (PCR) targeting Stx1 and Stx2 genes.",
+      "vis": {
+        "kind": "table",
+        "title": "Microbiological Identification of STEC",
+        "cols": [
+          "Diagnostic Modality",
+          "Positive Result",
+          "Diagnostic Value"
+        ],
+        "rows": [
+          [
+            "Sorbitol-MacConkey agar (SMAC)",
+            "Colorless colonies (sorbitol non-fermenter)",
+            "Rapid screen for classic O157:H7 strains"
+          ],
+          [
+            "Stool Multiplex PCR",
+            "Detection of stx1 and stx2 genes",
+            "High sensitivity, detects non-O157 STEC strains"
+          ],
+          [
+            "Enzyme Immunoassay (EIA)",
+            "Direct Shiga toxin antigen detection",
+            "Rapid confirmation in diarrheal stool samples"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Over fifty percent of children require acute peritoneal dialysis or hemodialysis to manage anuria and fluid overload.",
+      "tx": "Evaluate acute indications to determine the **Indications for acute dialysis in D+ HUS** during the oliguric phase. Acute peritoneal dialysis or continuous hemodialysis is required in over fifty percent of children with D+ HUS due to refractory anuria, severe fluid overload with pulmonary edema, symptomatic uremic encephalopathy, or intractable hyperkalemia unresponsive to medical therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aki-ckd-hus-dialysis-transplant-fig1.webp",
+        "credit": "StewardMD",
+        "caption": "Management of acute pediatric kidney injury and hemolytic uremic syndrome requiring urgent renal replacement therapy",
+        "alt": "Management of acute pediatric kidney injury and hemolytic uremic syndrome requiring urgent renal replacement therapy"
+      },
+      "caption": "Management of acute pediatric kidney injury and hemolytic uremic syndrome requiring urgent renal replacement therapy",
+      "alt": "Management of acute pediatric kidney injury and hemolytic uremic syndrome requiring urgent renal replacement therapy"
+    },
+    {
+      "say": "Up to thirty percent of survivors develop late-onset hypertension or chronic kidney disease from hyperfiltration injury.",
+      "tx": "Establish structured long-term outpatient follow-up for **Long-term renal sequelae surveillance** following acute recovery. Up to thirty percent of children surviving acute STEC HUS develop hypertension, proteinuria, or progressive chronic kidney disease years later due to hyperfiltration and secondary glomerulosclerosis in surviving nephrons. Long-term management requires annual blood pressure checks and urine protein-to-creatinine ratio surveillance.",
+      "vis": {
+        "kind": "table",
+        "title": "Long-Term Surveillance Protocol Post-HUS",
+        "cols": [
+          "Timing",
+          "Surveillance Tests",
+          "Long-Term Sequelae Screened"
+        ],
+        "rows": [
+          [
+            "Discharge to 1 year",
+            "Blood pressure, urinalysis, creatinine every 3 months",
+            "Persistent microalbuminuria, evolving hypertension"
+          ],
+          [
+            "1 to 5 years",
+            "Annual blood pressure, UPCR, serum creatinine",
+            "Hyperfiltration nephropathy, secondary FSGS"
+          ],
+          [
+            "Long-term follow-up",
+            "Annual screening until adulthood",
+            "Chronic kidney disease progression, pregnancy risk"
+          ]
+        ]
+      }
+    }
+  ]
+}
