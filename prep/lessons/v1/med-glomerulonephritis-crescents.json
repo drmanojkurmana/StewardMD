@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "med-glomerulonephritis",
+ "subject": "medicine",
+ "title": "Rapidly progressive glomerulonephritis, epithelial crescents, and anti-GBM disease",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Extensive physical disruptions within the capillary wall allow inflammatory plasma constituents to extravasate into the urinary space. Demonstrating histological **epithelial crescents** identifies the pathological hallmark of rapidly progressive crescentic glomerulonephritis. Rupture of glomerular capillary loops releases fibrin and tissue factor into Bowman space, stimulating intense proliferation of parietal epithelial cells and infiltrating monocyte-macrophages. Accumulating cellular layers compress the capillary tuft, initially forming cellular crescents that subsequently organize through fibroblast activation into irreversible fibrocellular and dense fibrous scars.",
+   "say": "Extensive physical tears within capillary walls allow inflammatory plasma into the urinary space. Demonstrating histological epithelial crescents identifies the hallmark of rapidly progressive glomerulonephritis. Rupture of capillary loops releases fibrin into Bowman space, stimulating parietal cell proliferation and macrophage infiltration that compresses capillary tufts into dense fibrous scars.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glomerulonephritis-fig1.webp",
+    "alt": "Microscopic view of cellular epithelial crescent compressing the glomerular capillary tuft.",
+    "caption": "Cellular epithelial crescent compressing glomerular capillaries in Bowman space. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immunofluorescence microscopy categorizes crescentic rapidly progressive glomerulonephritis into three distinct pathophysiological mechanisms. Staging by **RPGN classification** identifies type one as anti-glomerular basement membrane disease (smooth, continuous linear IgG staining), type two as immune complex-mediated disease (chunky granular immune complex deposits accompanied by hypocomplementaemia), and type three as pauci-immune necrotizing crescentic glomerulonephritis (scant or absent immunoglobulins, strongly associated with circulating antineutrophil cytoplasmic antibodies). A small subset exhibiting dual antibody positivity designates type four disease.",
+   "say": "Immunofluorescence microscopy classifies crescentic glomerulonephritis into three distinct pathophysiological mechanisms. Staging by RPGN classification identifies type one as anti-GBM disease with linear staining, type two as immune complex disease with granular deposits, and type three as pauci-immune vasculitis with negative staining. Circulating ANCA antibodies strongly associate with pauci-immune presentations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "RPGN category",
+     "Immunofluorescence pattern",
+     "Primary serological markers",
+     "Representative clinical aetiologies"
+    ],
+    "rows": [
+     [
+      "Type 1: Anti-GBM",
+      "Linear IgG along capillary walls",
+      "Circulating anti-GBM antibodies",
+      "Goodpasture syndrome, isolated anti-GBM disease"
+     ],
+     [
+      "Type 2: Immune complex",
+      "Granular IgG / C3 deposits",
+      "Low serum C3/C4, positive ANA/dsDNA",
+      "Lupus nephritis (Class IV), PSGN, MPGN, IgA GN"
+     ],
+     [
+      "Type 3: Pauci-immune",
+      "Scant or absent staining (<1+)",
+      "Positive ANCA (c-ANCA/PR3 or p-ANCA/MPO)",
+      "Granulomatosis with polyangiitis (GPA), MPA, EGPA"
+     ],
+     [
+      "Type 4: Double positive",
+      "Linear IgG + crescentic necrotizing",
+      "Both anti-GBM and ANCA positive",
+      "Combined systemic vasculitis and anti-GBM syndrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autoantibody production directed against structural basement membrane epitopes triggers explosive necrotizing capillary inflammation. Developing **anti-GBM disease** results from circulating autoantibodies specifically targeting the non-collagenous domain one (NC1) of the alpha-three chain of type four collagen. When necrotizing glomerulonephritis coincides with pulmonary alveolar capillary haemorrhage (manifesting with haemoptysis, dyspnoea, and bilateral alveolar infiltrates), the clinical presentation constitutes **Goodpasture syndrome**. Young male cigarette smokers demonstrate particular vulnerability to pulmonary haemorrhage due to alveolar capillary basement membrane exposure.",
+   "say": "Autoantibody production against structural basement membrane targets causes explosive capillary inflammation. Developing anti-GBM disease results from autoantibodies targeting the non-collagenous domain of type four collagen. When necrotizing glomerulonephritis coincides with pulmonary alveolar haemorrhage and haemoptysis, the condition constitutes Goodpasture syndrome. Cigarette smoking increases vulnerability to pulmonary alveolar bleeding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-glomerulonephritis-gen1.webp",
+    "alt": "Linear immunofluorescence pattern along the glomerular basement membrane in Goodpasture syndrome.",
+    "caption": "Linear IgG immunofluorescence staining along the glomerular basement membrane in anti-GBM disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Urgent mechanical antibody removal combined with profound cellular immunosuppression prevents irreversible loss of all renal function. Directing **anti-GBM therapeutic management** initiates daily plasma exchange (plasmapheresis) for fourteen days, removing pathogenic circulating autoantibodies until serum anti-GBM titres become undetectable. Concurrently, high-dose intravenous pulse methylprednisolone (one gram daily for three days) followed by oral prednisone is combined with oral cyclophosphamide for three months to arrest de novo antibody synthesis. Dialysis-dependent patients presenting with one hundred percent circumferential cellular crescents rarely recover native function.",
+   "say": "Urgent mechanical antibody removal combined with intensive immunosuppression prevents irreversible loss of kidney function. Directing anti-GBM therapeutic management initiates daily plasma exchange for two weeks to remove circulating antibodies. High-dose intravenous steroids and cyclophosphamide are co-administered to stop ongoing antibody synthesis, although patients presenting with total crescentic scarring rarely recover native filtration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Anti-GBM Disease / Goodpasture Syndrome Confirmed"
+     },
+     {
+      "id": "plex",
+      "label": "Daily Plasma Exchange (Plasmapheresis) for 14 days"
+     },
+     {
+      "id": "immuno",
+      "label": "Pulse IV Methylprednisolone + Oral Cyclophosphamide"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "plex"
+     ],
+     [
+      "plex",
+      "immuno"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic autoimmune complex deposition within renal parenchyma produces diverse patterns of glomerular and tubulointerstitial inflammation. Classifying **lupus nephritis** through the International Society of Nephrology criteria stratifies disease from class one minimal mesangial to class six advanced sclerosing. Class four diffuse proliferative lupus nephritis represents the most frequent and aggressive subtype, characterized by severe subendothelial immune deposits creating rigid wire-loop lesions on light microscopy. Diagnostic immunofluorescence demonstrates intense full-house staining positive for all three immunoglobulin classes (IgG, IgA, IgM) and both complement components (C3, C1q).",
+   "say": "Systemic immune complex deposition within the kidneys causes diverse patterns of glomerular inflammation. Classifying lupus nephritis through consensus criteria stratifies lesions across six distinct histological classes. Class four diffuse proliferative nephritis represents the most aggressive form, showing wire-loop capillary lesions on light microscopy and full-house staining positive for all immunoglobulin classes and complement components.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ISN/RPS Class",
+     "Histological designation",
+     "Microscopic & immunofluorescence features",
+     "Clinical management"
+    ],
+    "rows": [
+     [
+      "Class I",
+      "Minimal mesangial",
+      "Normal light microscopy; mesangial deposits",
+      "Treat extrarenal lupus symptoms"
+     ],
+     [
+      "Class II",
+      "Mesangial proliferative",
+      "Mesangial hypercellularity; mild proteinuria",
+      "Low-dose steroids if symptomatic"
+     ],
+     [
+      "Class III",
+      "Focal proliferative (<50%)",
+      "Subendothelial deposits; active necrotizing lesions",
+      "Intensive immunosuppression (steroid + MMF)"
+     ],
+     [
+      "Class IV",
+      "Diffuse proliferative (>=50%)",
+      "Wire-loop lesions, crescents, full-house staining",
+      "Aggressive induction: Pulse steroids + MMF/CyC"
+     ],
+     [
+      "Class V",
+      "Membranous lupus nephritis",
+      "Subepithelial deposits, thickened basement membrane",
+      "Manage nephrotic syndrome; immunosuppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measuring serum complement components provides critical diagnostic discrimination among competing aetiologies of acute nephritic presentation. Identifying **low complement nephritides** differentiates conditions activating the classic pathway from those consuming alternative pathway factors. Lupus nephritis classically consumes both C3 and C4 through immune complex activation of C1q. Similarly, mixed cryoglobulinaemia and infective endocarditis-associated glomerulonephritis exhibit profound C4 and C3 depression. In sharp contrast, post-streptococcal glomerulonephritis and C3 glomerulopathy selectively consume C3 through the alternative pathway, maintaining normal circulating C4 levels.",
+   "say": "Measuring serum complement components provides critical diagnostic discrimination among causes of acute nephritis. Identifying low complement nephritides distinguishes conditions activating the classical pathway from those consuming alternative pathway factors. Lupus nephritis and cryoglobulinaemia depress both C3 and C4 levels, whereas post-streptococcal disease selectively depresses C3 while preserving normal C4 values.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low C3 and Low C4 (Classical Pathway)",
+     "points": [
+      "Lupus nephritis (Class III and IV)",
+      "Mixed cryoglobulinaemia (Hepatitis C-associated)",
+      "Infective endocarditis-associated GN",
+      "Shunt nephritis (Staphylococcus epidermidis)"
+     ]
+    },
+    "right": {
+     "title": "Low C3 with Normal C4 (Alternative Pathway)",
+     "points": [
+      "Post-streptococcal glomerulonephritis (PSGN)",
+      "Dense deposit disease (MPGN Type II / C3G)",
+      "C3 glomerulonephritis (C3 nephritic factor)",
+      "Atypical haemolytic uraemic syndrome (aHUS)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Halting inflammatory cellular proliferation and preventing end-stage glomerular scarring in proliferative lupus nephritis demands aggressive multimodal induction protocols. Initiating **lupus induction therapy** for active class three or four disease combines high-dose intravenous pulse methylprednisolone followed by oral prednisone with either oral mycophenolate mofetil (two to three grams daily) or low-dose intravenous cyclophosphamide (the Euro-Lupus protocol delivering five hundred milligrams every two weeks for six doses). All patients receive background hydroxychloroquine. Addition of the B-cell activating factor blocker belimumab or calcineurin inhibitor voclosporin provides enhanced renal response.",
+   "say": "Halting inflammatory proliferation and preventing end-stage scarring in lupus nephritis requires aggressive induction therapy. Initiating lupus induction therapy for proliferative disease combines high-dose corticosteroids with either mycophenolate mofetil or intravenous cyclophosphamide. All patients receive background hydroxychloroquine, with targeted biologic agents like belimumab providing superior complete renal remission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Biopsy-Proven Class III or IV Lupus Nephritis"
+     },
+     {
+      "id": "pulse",
+      "label": "Pulse IV Methylprednisolone + Oral Prednisone taper"
+     },
+     {
+      "id": "induction",
+      "label": "Mycophenolate Mofetil (MMF) OR IV Cyclophosphamide + Hydroxychloroquine"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "pulse"
+     ],
+     [
+      "pulse",
+      "induction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Necrotizing pauci-immune glomerulonephritis lacking significant immune complex deposition represents the renal manifestation of systemic small-vessel vasculitis. Characterized as **pauci-immune crescentic GN**, the disorder features circulating antineutrophil cytoplasmic antibodies directed against proteinase three (PR3-ANCA / c-ANCA, classically seen in granulomatosis with polyangiitis) or myeloperoxidase (MPO-ANCA / p-ANCA, characteristic of microscopic polyangiitis). Renal histology demonstrates segmental necrotizing glomerulonephritis with extensive crescent formation. Prompt remission induction utilizing the anti-CD20 monoclonal antibody rituximab (or intravenous cyclophosphamide) combined with pulsed glucocorticoids achieves clinical remission in over eighty percent of patients.",
+   "say": "Necrotizing pauci-immune glomerulonephritis without immune complex deposition represents the renal manifestation of systemic small-vessel vasculitis. Characterized as pauci-immune crescentic GN, this disorder associates with circulating ANCA antibodies against proteinase three or myeloperoxidase. Renal biopsy shows segmental necrosis with crescent formation, treated effectively with rituximab and glucocorticoids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "c-ANCA / PR3-ANCA Vasculitis",
+     "points": [
+      "Granulomatosis with polyangiitis (GPA / Wegener)",
+      "Upper airway: Sinusitis, saddle-nose, subglottic stenosis",
+      "Pulmonary: Cavitating pulmonary nodules and haemorrhage",
+      "Cytoplasmic granular neutrophil immunofluorescence"
+     ]
+    },
+    "right": {
+     "title": "p-ANCA / MPO-ANCA Vasculitis",
+     "points": [
+      "Microscopic polyangiitis (MPA)",
+      "Lacks necrotizing granulomatous upper airway inflammation",
+      "Pulmonary-renal syndrome with pulmonary capillaritis",
+      "Perinuclear neutrophil immunofluorescence staining"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
