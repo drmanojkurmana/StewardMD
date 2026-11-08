@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "med-aki",
+ "subject": "medicine",
+ "title": "Acute kidney injury definitions, KDIGO staging, prerenal azotaemia, and ATN",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Sudden decline in glomerular filtration rate over hours to days leads to retention of nitrogenous waste and disruption of fluid balance. Clinically defined as **Acute kidney injury** (AKI), this syndrome encompasses a broad continuum ranging from subclinical functional injury to catastrophic anuric renal failure requiring renal replacement therapy. Impaired clearance precipitates rapid accumulation of urea nitrogen, creatinine, metabolic acids, and potassium within the intravascular compartment. Prompt clinical recognition and aetiological classification are essential to prevent permanent nephron loss and progression to chronic kidney disease.",
+   "say": "Sudden decline in glomerular filtration rate over hours or days causes retention of nitrogenous wastes and fluid imbalance. Clinically defined as Acute kidney injury, this syndrome spans from subclinical injury to anuric renal failure requiring dialysis. Impaired filtration causes rapid accumulation of urea, creatinine, acids, and potassium, requiring prompt recognition to preserve functioning nephrons.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-aki-fena.svg",
+    "alt": "Diagnostic algorithm distinguishing prerenal azotaemia from acute tubular necrosis using FENa.",
+    "caption": "Diagnostic discrimination between prerenal azotaemia and acute tubular necrosis using FENa. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Standardized consensus guidelines classify acute kidney injury into stages based on serum creatinine dynamics and urine output volume. Utilizing **KDIGO staging** establishes stage one by an absolute creatinine increase of zero point three milligrams per decilitre within forty-eight hours, or urine output under zero point five millilitres per kilogram per hour for six hours. Stage two features a two- to three-fold creatinine elevation, while stage three denotes a threefold increase, creatinine over four milligrams per decilitre, or renal replacement initiation.",
+   "say": "Standardized consensus guidelines classify acute kidney injury into stages based on serum creatinine dynamics and urine output. Utilizing KDIGO staging defines stage one injury by a creatinine increase of zero point three milligrams per decilitre, or reduced urine volume for six hours. Stage two features a doubling of baseline creatinine, while stage three represents a threefold rise or dialysis initiation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "KDIGO Stage",
+     "Serum creatinine criteria",
+     "Urine output criteria",
+     "Clinical severity & management"
+    ],
+    "rows": [
+     [
+      "Stage 1",
+      "Rise >= 0.3 mg/dL in 48h OR 1.5-1.9x baseline",
+      "< 0.5 mL/kg/h for 6 to 12 hours",
+      "Identify cause, stop nephrotoxins, optimize hydration"
+     ],
+     [
+      "Stage 2",
+      "2.0 to 2.9 times baseline creatinine",
+      "< 0.5 mL/kg/h for >= 12 hours",
+      "Dose adjust medications, monitor fluid and electrolytes"
+     ],
+     [
+      "Stage 3",
+      "3.0x baseline OR >= 4.0 mg/dL OR dialysis",
+      "< 0.3 mL/kg/h for >= 24h OR anuria >= 12h",
+      "Intensive care, prepare vascular access for RRT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypoperfusion of structurally intact renal parenchyma without cellular tubular damage accounts for the most common cause of community-acquired acute kidney injury. Characterized as **prerenal azotaemia**, this functional condition results from systemic intravascular volume depletion, congestive heart failure, severe sepsis, or bilateral renal artery stenosis. Haemodynamic medications frequently precipitate prerenal failure: non-steroidal anti-inflammatory drugs inhibit vasodilatory prostaglandins at the afferent arteriole, while angiotensin-converting enzyme inhibitors prevent angiotensin-two-mediated vasoconstriction at the efferent arteriole, abolishing compensatory glomerular capillary filtration pressure.",
+   "say": "Hypoperfusion of structurally intact renal tissue without tubular damage accounts for most community-acquired acute kidney injury. Characterized as prerenal azotaemia, this functional state arises from intravascular depletion, heart failure, or sepsis. Medications often precipitate prerenal failure: anti-inflammatory drugs constrict afferent arterioles, while ACE inhibitors dilate efferent arterioles, reducing glomerular capillary filtration pressure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prerenal Azotaemia",
+     "points": [
+      "Structurally intact tubular epithelial cells",
+      "Avid sodium and water retention (aldosterone/ADH)",
+      "BUN to Creatinine ratio > 20:1",
+      "Rapidly reversible within 24-48 hours of volume repletion"
+     ]
+    },
+    "right": {
+     "title": "Intrinsic Acute Tubular Necrosis",
+     "points": [
+      "Structural necrosis and denudation of tubular epithelium",
+      "Impaired tubular reabsorption of sodium and water",
+      "BUN to Creatinine ratio 10-15:1",
+      "Prolonged recovery phase spanning weeks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Calculating the fraction of filtered sodium that escapes tubular reabsorption provides the most reliable biochemical index distinguishing prerenal hypoperfusion from established tubular necrosis. Calculating the **FENa** (fractional excretion of sodium) utilizes paired spot urine and plasma sodium and creatinine measurements through the standard formula: urine sodium multiplied by plasma creatinine divided by plasma sodium multiplied by urine creatinine. A fractional excretion below one percent indicates avid tubular sodium preservation characteristic of prerenal azotaemia, whereas a value exceeding two percent signifies intrinsic tubular epithelial failure.",
+   "say": "Calculating the fraction of filtered sodium excreted in urine provides the most reliable index distinguishing hypoperfusion from tubular necrosis. Calculating the FENa formula compares urinary and plasma sodium against creatinine excretion. A fractional excretion below one percent confirms avid tubular sodium reabsorption in prerenal failure, whereas values above two percent indicate intrinsic tubular necrosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "formula",
+      "label": "FENa = (U_Na * P_Cr) / (P_Na * U_Cr) * 100"
+     },
+     {
+      "id": "prerenal",
+      "label": "FENa < 1% -> Intact tubules, prerenal azotaemia"
+     },
+     {
+      "id": "atn",
+      "label": "FENa > 2% -> Impaired tubules, intrinsic acute tubular necrosis"
+     }
+    ],
+    "edges": [
+     [
+      "formula",
+      "prerenal"
+     ],
+     [
+      "formula",
+      "atn"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evaluating urinary biochemical parameters reflects the physiological concentrating and reabsorptive competence of the tubular epithelium under hypoperfusion stress. Measuring spot **urine sodium** demonstrates low concentrations below twenty milliequivalents per litre in prerenal azotaemia, reflecting intact aldosterone-driven sodium reabsorption. Conversely, acute tubular necrosis results in wasted urinary sodium exceeding forty milliequivalents per litre. Concurrently, prerenal states maintain urinary osmolality above five hundred milliosmoles per kilogram and a blood urea nitrogen to creatinine ratio exceeding twenty to one, whereas tubular necrosis exhibits isosthenuria with osmolality under three hundred and fifty.",
+   "say": "Evaluating urinary parameters reflects the concentrating and reabsorptive function of tubular cells under stress. Measuring spot urine sodium reveals low concentrations below twenty milliequivalents per litre in prerenal azotaemia, demonstrating preserved tubular reabsorption. In acute tubular necrosis, injured tubules waste sodium above forty milliequivalents per litre, accompanied by low urine osmolality below three hundred and fifty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic urinary index",
+     "Prerenal azotaemia",
+     "Intrinsic Acute Tubular Necrosis (ATN)"
+    ],
+    "rows": [
+     [
+      "Urine Sodium (UNa)",
+      "< 20 mEq/L (avid retention)",
+      "> 40 mEq/L (impaired reabsorption)"
+     ],
+     [
+      "Fractional excretion of sodium (FENa)",
+      "< 1%",
+      "> 2%"
+     ],
+     [
+      "Fractional excretion of urea (FEUrea)",
+      "< 35% (useful if on diuretics)",
+      "> 50%"
+     ],
+     [
+      "Urine Osmolality",
+      "> 500 mOsm/kg (concentrated)",
+      "< 350 mOsm/kg (isosthenuric)"
+     ],
+     [
+      "Serum BUN to Creatinine ratio",
+      "> 20:1 (urea back-diffusion)",
+      "10:1 to 15:1 (normal baseline ratio)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prolonged severe renal hypoperfusion or direct exposure to endogenous and exogenous nephrotoxins produces irreversible structural injury to tubular epithelial cells. Characterized as **acute tubular necrosis** (ATN), this pathology accounts for over eighty-five percent of intrinsic acute kidney injury. The straight S3 segment of the proximal tubule and the medullary thick ascending limb are exceptionally vulnerable to ischemic necrosis because high metabolic oxygen consumption coincides with low baseline medullary oxygen tension. Sloughed necrotic epithelial cells obstruct tubular lumens, producing back-leak of filtrate and progressive filtration arrest.",
+   "say": "Prolonged hypoperfusion or exposure to nephrotoxic agents causes structural damage to tubular epithelial cells. Characterized as acute tubular necrosis, this condition accounts for most intrinsic renal failure. The proximal tubule and medullary thick ascending limb are exceptionally vulnerable to ischemic injury due to high metabolic demand, leading to cell shedding and tubular obstruction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-aki-fig1.webp",
+    "alt": "Microscopic appearance of tubular necrosis with loss of brush border and luminal casts.",
+    "caption": "Tubular epithelial necrosis, brush border loss, and luminal cast obstruction in ATN. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Microscopic examination of unspun freshly voided urine sediment provides an indispensable non-invasive biopsy of the active intrarenal pathological process. Identifying pathognomonic **muddy brown casts** (pigmented granular casts composed of sloughed, degenerated tubular epithelial cells and Tamm-Horsfall mucoprotein) confirms acute tubular necrosis with exceptional specificity. In contrast, prerenal azotaemia features completely acellular or bland hyaline casts, acute glomerulonephritis displays dysmorphic red blood cells and red cell casts, while acute interstitial nephritis demonstrates white blood cell casts and urinary eosinophils.",
+   "say": "Microscopic examination of urine sediment provides a rapid non-invasive view of active renal pathology. Identifying pathognomonic muddy brown casts confirms acute tubular necrosis with exceptional specificity. In contrast, prerenal failure shows transparent hyaline casts, acute glomerulonephritis produces red blood cell casts, and interstitial nephritis features white cell casts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Muddy Brown Granular Casts",
+     "points": [
+      "Pathognomonic hallmark of Acute Tubular Necrosis",
+      "Coarse, pigmented degenerated epithelial debris",
+      "Reflects tubular denudation and luminal obstruction",
+      "Accompanied by free renal tubular epithelial cells"
+     ]
+    },
+    "right": {
+     "title": "Alternative Urinary Cast Types",
+     "points": [
+      "Hyaline casts: Concentrated normal urine / prerenal",
+      "Red blood cell casts: Active glomerulonephritis",
+      "White blood cell casts: Acute interstitial nephritis / pyelonephritis",
+      "Broad waxy casts: Advanced chronic kidney disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Administration of iodinated intravascular radiocontrast media in patients with pre-existing renal impairment can precipitate acute iatrogenic tubular necrosis. Developing **contrast nephropathy** (contrast-induced acute kidney injury) features an acute serum creatinine elevation occurring within twenty-four to forty-eight hours following contrast exposure, peaking at three to five days. Combined medullary vasoconstriction, reactive oxygen species generation, and direct tubular cytotoxicity drive the injury. Proven prophylactic management requires pre-procedure intravenous volume expansion with isotonic zero point nine percent saline, minimizing contrast volume, and temporarily holding concurrent nephrotoxic medications.",
+   "say": "Administration of iodinated radiocontrast media in patients with pre-existing renal impairment can trigger acute tubular injury. Developing contrast nephropathy features an acute rise in serum creatinine within forty-eight hours of exposure. Proven preventive therapy requires intravenous volume expansion with normal saline, minimizing contrast volume, and holding nephrotoxic medications.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "risk",
+      "label": "High-Risk Patient (eGFR <30-45 mL/min, Diabetes, Dehydration)"
+     },
+     {
+      "id": "proph",
+      "label": "IV 0.9% Normal Saline (1 mL/kg/h for 12h pre and post procedure)"
+     },
+     {
+      "id": "contrast",
+      "label": "Minimize Iso-osmolar Contrast Volume & Withhold NSAIDs/RAASi"
+     }
+    ],
+    "edges": [
+     [
+      "risk",
+      "proph"
+     ],
+     [
+      "proph",
+      "contrast"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

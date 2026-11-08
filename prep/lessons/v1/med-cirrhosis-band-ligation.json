@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-cirrhosis",
+ "subject": "medicine",
+ "title": "Endoscopic band ligation, beta-blocker prophylaxis, TIPS, and ascites management",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Sudden rupture of high-pressure gastro-oesophageal varices constitutes a critical medical emergency carrying a six-week mortality rate approaching twenty percent. Resuscitation during **acute variceal haemorrhage** prioritizes immediate airway protection, restrictive blood transfusion targeting a haemoglobin between seven and eight grams per decilitre, and immediate vasoactive drug infusion with terlipressin or octreotide to induce splanchnic vasoconstriction. Concurrently, delivering short-term intravenous ceftriaxone prophylaxis for seven days markedly reduces spontaneous bacterial peritonitis, rebleeding episodes, and all-cause hospital mortality.",
+   "say": "Sudden rupture of high-pressure oesophageal varices represents a life-threatening medical emergency carrying substantial mortality. Resuscitation in acute variceal haemorrhage requires restrictive blood transfusion targeting haemoglobin near eight grams, immediate vasoactive drug infusions, and early diagnostic endoscopy. Intravenous ceftriaxone prophylaxis for one week significantly reduces bacterial infections and recurrent bleeding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/portal-hypertension-and-variceal-hemorrhage-fig1.webp",
+    "alt": "Endoscopic appearance of acute variceal bleeding and endoscopic therapy technique.",
+    "caption": "Endoscopic view of variceal haemorrhage and mechanical haemostatic intervention. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Definitive mechanical control of bleeding oesophageal variceal columns requires urgent endoscopic intervention within twelve hours of patient admission. Performing endoscopic **band ligation** (EVL) involves suctioning the offending submucosal venous column into an endoscope-mounted cylinder and deploying elastic rubber bands around the vessel base, inducing localized thrombosis and sloughing. Repeated elective band ligation sessions scheduled every two to four weeks achieve complete variceal obliteration, serving as the cornerstone of secondary prophylaxis to prevent recurrent haemorrhage.",
+   "say": "Definitive mechanical control of bleeding oesophageal varices requires urgent endoscopic intervention within twelve hours of admission. Performing endoscopic band ligation involves deploying rubber bands around engorged submucosal veins, causing local thrombosis and mucosal sloughing. Repeating ligation sessions every two to four weeks obliterates variceal channels, preventing recurrent haemorrhage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endoscopic Band Ligation (EVL)",
+     "points": [
+      "Suction and mechanical elastic band deployment",
+      "First-line treatment for acute variceal bleeding",
+      "Repeated every 2 to 4 weeks until eradication",
+      "Lower complication rate than sclerotherapy"
+     ]
+    },
+    "right": {
+     "title": "Endoscopic Sclerotherapy",
+     "points": [
+      "Direct intravascular chemical sclerosant injection",
+      "Historically used with ethanolamine or sodium tetradecyl",
+      "High incidence of oesophageal ulceration and stricture",
+      "Reserved for situations where banding fails technically"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long-term pharmacological reduction of portal venous inflow protects against initial bleeding and prevents catastrophic recurrent haemorrhagic events. Administering **propranolol** or nadolol achieves non-selective beta-adrenergic blockade, reducing portal venous pressure by dampening cardiac output through beta-one blockade while simultaneously inducing unopposed alpha-one splanchnic vasoconstriction via beta-two blockade. The dosage is titrated upward to achieve a resting heart rate between fifty-five and sixty beats per minute, or until systolic arterial pressure falls to ninety millimetres of mercury.",
+   "say": "Long-term pharmacological suppression of portal venous inflow prevents initial bleeding and recurrent variceal rupture. Administering propranolol produces non-selective beta-adrenergic blockade, reducing cardiac output and causing splanchnic vasoconstriction. The medication is titrated to achieve a resting pulse near fifty-five beats per minute while maintaining adequate blood pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Beta-blocker agent",
+     "Receptor selectivity",
+     "Haemodynamic mechanism",
+     "Clinical titration target"
+    ],
+    "rows": [
+     [
+      "Propranolol",
+      "Non-selective (Beta-1 + Beta-2)",
+      "Reduced cardiac output + splanchnic vasoconstriction",
+      "Resting heart rate 55 to 60 beats/min"
+     ],
+     [
+      "Nadolol",
+      "Non-selective (Beta-1 + Beta-2)",
+      "Long-acting daily dosing with renal excretion",
+      "Heart rate 55 to 60 beats/min"
+     ],
+     [
+      "Carvedilol",
+      "Non-selective + Alpha-1 blocker",
+      "Decreases hepatic vascular resistance directly",
+      "Target systolic BP > 90 mmHg (6.25-12.5 mg/day)"
+     ],
+     [
+      "Metoprolol / Atenolol",
+      "Selective Beta-1 only",
+      "Lacks splanchnic vasoconstriction mechanism",
+      "Ineffective for portal pressure reduction (avoid)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Interventional radiological decompression of the hypertensive portal circulation provides salvage relief when pharmacological and endoscopic therapies fail to control portal complications. Deploying a **TIPS** (transjugular intrahepatic portosystemic shunt) involves passing an expandable polytetrafluoroethylene-covered metal stent between a high-pressure portal vein branch and a hepatic vein via the internal jugular approach. The created low-resistance conduit immediately reduces portal pressure below twelve millimetres of mercury, resolving refractory bleeding and ascites but substantially increasing the risk of post-shunt hepatic encephalopathy.",
+   "say": "Radiological decompression of the portal circulation provides effective rescue when endoscopic and drug therapies fail. Deploying a TIPS involves placing an expandable covered metal stent between a portal vein branch and a hepatic vein. This low-resistance channel immediately reduces portal pressure, resolving refractory bleeding but increasing the risk of hepatic encephalopathy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "failure",
+      "label": "Refractory Variceal Bleeding or Refractory Ascites"
+     },
+     {
+      "id": "tips",
+      "label": "TIPS Placement: Stent between Portal and Hepatic Vein"
+     },
+     {
+      "id": "decomp",
+      "label": "Portal Pressure Falls <12 mmHg (Risk: Hepatic Encephalopathy)"
+     }
+    ],
+    "edges": [
+     [
+      "failure",
+      "tips"
+     ],
+     [
+      "tips",
+      "decomp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathological fluid accumulation within the peritoneal cavity represents the single most common clinical manifestation of decompensated chronic liver disease. Developing cirrhotic **ascites** stems from a complex hemodynamic cascade initiating with sinusoidal hypertension and massive nitric oxide-mediated splanchnic arterial vasodilation. Splanchnic pooling diminishes effective arterial blood volume, triggering compensatory hyperactivation of the renin-angiotensin-aldosterone axis, sympathetic nervous system, and non-osmotic vasopressin release. This profound neurohumoral activation drives relentless renal sodium and free water retention, promoting transudation across peritoneal capillaries.",
+   "say": "Pathological fluid accumulation within the peritoneal cavity represents the commonest manifestation of decompensated liver disease. Developing cirrhotic ascites arises from sinusoidal hypertension combined with extensive splanchnic arterial dilatation. Arterial underfilling triggers the renin-angiotensin system and sympathetic activation, driving relentless renal sodium retention and peritoneal fluid transudation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/portal-hypertension-fig1.webp",
+    "alt": "Diagram depicting splanchnic vasodilation, effective hypovolaemia, and peritoneal fluid transudation.",
+    "caption": "Pathophysiological mechanisms of splanchnic vasodilation and ascites transudation in cirrhosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnostic assessment of peritoneal fluid is mandatory upon hospital admission for any patient with new-onset, worsening, or complicated ascites. Performing a **diagnostic paracentesis** involves ultrasound-guided puncture, submitting ascitic fluid for total cell count, differential, albumin concentration, and bedside inoculation into blood culture bottles. The absolute neutrophil count distinguishes sterile transudative ascites from spontaneous bacterial peritonitis when values reach two hundred and fifty cells per microlitre or greater, dictating immediate empirical antibiotic therapy before culture confirmation.",
+   "say": "Diagnostic assessment of peritoneal fluid is mandatory whenever a cirrhotic patient is admitted with worsening ascites. Performing a diagnostic paracentesis involves needle aspiration for cell count, albumin concentration, and blood culture inoculation. An absolute neutrophil count exceeding two hundred and fifty cells per microlitre confirms spontaneous bacterial peritonitis, requiring immediate empirical antibiotic treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ascitic fluid parameter",
+     "Diagnostic threshold",
+     "Pathological significance"
+    ],
+    "rows": [
+     [
+      "Neutrophil count (PMN)",
+      ">= 250 cells/uL (0.25 x 10^9/L)",
+      "Confirms Spontaneous Bacterial Peritonitis (SBP)"
+     ],
+     [
+      "SAAG calculation",
+      ">= 1.1 g/dL (>= 11 g/L)",
+      "High gradient confirms portal hypertension"
+     ],
+     [
+      "Total Ascitic Protein",
+      "< 1.5 g/dL",
+      "Low protein marks high risk for developing SBP"
+     ],
+     [
+      "Cytology & Amylase",
+      "Atypical cells / elevated enzyme",
+      "Evaluates peritoneal carcinomatosis or pancreatic ascites"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stepwise pharmacological therapy targeting secondary hyperaldosteronism successfully manages uncomplicated cirrhotic ascites in over ninety percent of patients. Initiating **medical ascites therapy** combines moderate dietary sodium restriction to two grams daily with oral diuretic co-administration using spironolactone and furosemide. Combining spironolactone at one hundred milligrams with furosemide at forty milligrams maintains this balanced one hundred to forty ratio, optimizing natriuresis at distal and loop nephron sites while preserving serum potassium balance. Doses are titrated every three to five days up to four hundred milligrams of spironolactone.",
+   "say": "Stepwise medical therapy targeting secondary hyperaldosteronism manages uncomplicated ascites in most patients. Initiating medical ascites therapy combines dietary sodium restriction with dual diuretic treatment using spironolactone and furosemide. Prescribing spironolactone and furosemide in a fixed one hundred to forty milligram ratio optimizes sodium excretion while maintaining normal potassium levels.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diet",
+      "label": "Dietary Sodium Restriction (<2 g / 88 mmol per day)"
+     },
+     {
+      "id": "diuretics",
+      "label": "Spironolactone 100 mg + Furosemide 40 mg daily (Ratio 100:40)"
+     },
+     {
+      "id": "titrate",
+      "label": "Titrate up to Spironolactone 400 mg + Furosemide 160 mg daily"
+     }
+    ],
+    "edges": [
+     [
+      "diet",
+      "diuretics"
+     ],
+     [
+      "diuretics",
+      "titrate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of maximal diuretic regimens or the development of intractable diuretic-induced renal impairment designates end-stage fluid overload. Classifying **refractory ascites** occurs when peritoneal fluid cannot be mobilized despite sodium restriction and maximal diuretic dosing (four hundred milligrams of spironolactone and one hundred and sixty milligrams of furosemide), or when diuretic-induced azotaemia, hyponatraemia, or severe encephalopathy precludes medication continuation. Serial large-volume paracentesis combined with intravenous albumin infusion (eight grams per litre of fluid removed above five litres) provides primary symptomatic control.",
+   "say": "Failure of maximal diuretic therapy or the development of renal impairment indicates intractable fluid overload. Classifying refractory ascites occurs when peritoneal fluid persists despite maximal diuretics, or when electrolyte derangements preclude further medication. Serial large-volume paracentesis with intravenous albumin infusion provides effective symptomatic relief while awaiting liver transplantation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diuretic-Resistant Ascites",
+     "points": [
+      "Ascites refractory to maximal diuretic doses",
+      "Spironolactone 400 mg + Furosemide 160 mg",
+      "Inability to excrete sodium despite adherence",
+      "Managed by therapeutic large-volume paracentesis"
+     ]
+    },
+    "right": {
+     "title": "Diuretic-Intractable Ascites",
+     "points": [
+      "Diuretics cannot be titrated to effective doses",
+      "Severe hyponatraemia, hypokalaemia, or AKI occurs",
+      "Precipitation of recurrent hepatic encephalopathy",
+      "Requires diuretic cessation and TIPS evaluation"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

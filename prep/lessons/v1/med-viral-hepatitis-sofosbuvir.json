@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-viral-hepatitis",
+ "subject": "medicine",
+ "title": "Hepatitis C direct-acting antivirals, sofosbuvir, delta hepatitis, and hepatitis E",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Targeted inhibition of the hepatitis C non-structural viral polymerase produces sustained virological response rates exceeding ninety-five percent across all genotypes. Administering **sofosbuvir**, a uridine nucleotide analogue that selectively inhibits the viral NS5B RNA-dependent RNA polymerase, halts chain elongation during viral replication. Combining sofosbuvir with NS5A replication complex inhibitors such as velpatasvir or ledipasvir achieves cure across genotypes one through six. Treatment typically spans twelve weeks without requiring interferon, eliminating the severe neuropsychiatric and haematological toxicities of legacy regimens.",
+   "say": "Targeted inhibition of the hepatitis C polymerase yields cure rates exceeding ninety-five percent across all viral genotypes. Administering sofosbuvir halts viral replication by selectively inhibiting the NS5B polymerase. Combining sofosbuvir with companion agents like velpatasvir achieves sustained cure in twelve weeks without requiring interferon injections.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antivirals-herpes-hepatitis-flu-covid-fig1.webp",
+    "alt": "Mechanisms and targets of antiviral agents against hepatitis and respiratory viruses.",
+    "caption": "Direct-acting antiviral molecular targets and replication inhibition pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Modern oral therapeutic regimens for chronic hepatitis C classify curative agents into distinct pharmacological categories according to viral protein targets. Implementing **direct-acting antivirals** employs three primary classes: NS3/4A protease inhibitors ending in the suffix previr, NS5A replication complex blockers ending in asvir, and NS5B polymerase inhibitors ending in buvir. Pangenotypic combinations such as sofosbuvir-velpatasvir or glecaprevir-pibrentasvir eliminate mandatory genotype testing prior to treatment initiation. Achieving sustained virological response at twelve weeks post-therapy correlates directly with permanent eradication.",
+   "say": "Modern oral therapies for hepatitis C classify curative agents by their molecular viral targets. Implementing direct-acting antivirals combines protease inhibitors, NS5A complex blockers, and polymerase inhibitors. Pangenotypic regimens like sofosbuvir with velpatasvir achieve cure without requiring prior genotype identification.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antiviral class",
+     "Molecular target",
+     "Drug suffix",
+     "Representative agents"
+    ],
+    "rows": [
+     [
+      "Protease inhibitors",
+      "NS3/4A serine protease",
+      "-previr",
+      "Glecaprevir, Grazoprevir"
+     ],
+     [
+      "Replication blockers",
+      "NS5A viral assembly",
+      "-asvir",
+      "Velpatasvir, Ledipasvir, Pibrentasvir"
+     ],
+     [
+      "Polymerase inhibitors",
+      "NS5B RNA polymerase",
+      "-buvir",
+      "Sofosbuvir (nucleotide analog)"
+     ],
+     [
+      "Pangenotypic combinations",
+      "Dual targeted mechanism",
+      "Co-formulated",
+      "Sofosbuvir-Velpatasvir, Glecaprevir-Pibrentasvir"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Replication of delta agent requires envelope lipoproteins provided exclusively by concurrent hepatitis B surface antigen expression. Infection by **hepatitis D** virus involves a defective single-stranded circular RNA viroid coated by an outer envelope composed entirely of HBsAg. Because HDV cannot assemble infectious virions independently, delta infection occurs strictly as simultaneous coinfection with hepatitis B or as superinfection in an existing chronic HBsAg carrier. Prevention of hepatitis B vaccination directly prevents hepatitis D transmission.",
+   "say": "Replication of the delta agent relies completely on envelope lipoproteins provided by hepatitis B. Infection by hepatitis D involves a defective single-stranded RNA viroid encased in an outer HBsAg envelope. Because delta particles cannot assemble independently, infection occurs exclusively as coinfection or superinfection in hepatitis B patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hepatitis D Virology",
+     "points": [
+      "Defective circular single-stranded RNA viroid",
+      "Requires HBsAg for virion envelope and entry",
+      "Diagnosis via anti-HDV antibodies and HDV RNA",
+      "Suppressed by interferon-alfa or bulevirtide"
+     ]
+    },
+    "right": {
+     "title": "Hepatitis B Helper Role",
+     "points": [
+      "Provides surface antigen envelope proteins",
+      "HBV clearance simultaneously clears HDV",
+      "HBV vaccination confers complete HDV protection",
+      "Shares parenteral and mucosal transmission routes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Simultaneous exposure to both hepatitis B and hepatitis D viruses in an immunological naive individual produces a severe but typically self-limiting acute illness. Experiencing acute **delta coinfection** presents with prominent jaundice and marked transaminase elevations, often demonstrating a biphasic peak in serum aminotransferases representing sequential HBV and HDV peaks. Although the risk of acute fulminant liver failure reaches five percent, progression to chronic infection remains low, occurring in less than five percent of adult coinfections.",
+   "say": "Simultaneous exposure to both hepatitis B and delta viruses in an unexposed individual causes acute hepatitis. Experiencing acute delta coinfection presents with marked jaundice and often a biphasic transaminase elevation. While fulminant liver failure occurs in up to five percent, progression to chronicity remains under five percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "naive",
+      "label": "Immunologically naive host"
+     },
+     {
+      "id": "coinf",
+      "label": "Simultaneous HBV + HDV exposure"
+     },
+     {
+      "id": "outcome",
+      "label": "95% resolve completely; <5% chronic"
+     }
+    ],
+    "edges": [
+     [
+      "naive",
+      "coinf"
+     ],
+     [
+      "coinf",
+      "outcome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inoculation of the delta agent into an established chronic hepatitis B carrier precipitates catastrophic hepatic decompensation and accelerated fibrosis. Developing acute **delta superinfection** causes severe acute exacerbation in a previously stable carrier, carrying an acute fulminant failure risk of up to twenty percent. Over eighty percent of superinfected patients develop chronic delta hepatitis, which progresses rapidly to cirrhosis within five to ten years. Treatment options remain limited, focusing on pegylated interferon-alfa and entry inhibitor bulevirtide.",
+   "say": "Inoculation of delta virus into an established chronic hepatitis B carrier triggers rapid liver failure. Developing acute delta superinfection produces severe hepatic decompensation in previously stable patients. Over eighty percent of infected patients develop chronic delta hepatitis, which advances rapidly to cirrhosis within a decade.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Delta Coinfection",
+     "points": [
+      "Simultaneous HBV and HDV infection",
+      "Biphasic transaminase elevation",
+      "Anti-HBc IgM positive",
+      "Chronicity rate under 5%"
+     ]
+    },
+    "right": {
+     "title": "Delta Superinfection",
+     "points": [
+      "HDV infection in established HBsAg carrier",
+      "Severe acute decompensation",
+      "Anti-HBc IgM negative (IgG positive)",
+      "Chronicity rate exceeds 80%"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Enteric transmission of a non-enveloped RNA hepevirus through contaminated drinking water causes self-limiting hepatitis in the general public but catastrophic hepatic necrosis during gestation. Contracting **hepatitis E in pregnancy** carries a case fatality rate approaching twenty percent during the third trimester, primarily due to fulminant acute liver failure, disseminated intravascular coagulation, and massive obstetric haemorrhage. Transmitted via the faecal-oral route, genotypes one and two cause extensive waterborne epidemics in developing regions. Ribavirin is strictly contraindicated in pregnancy due to severe teratogenicity.",
+   "say": "Waterborne transmission of an RNA hepevirus causes mild acute hepatitis generally but catastrophic disease during pregnancy. Contracting hepatitis E in pregnancy carries a mortality rate near twenty percent during the third trimester from acute liver failure and bleeding. Ribavirin is strictly contraindicated in pregnant patients due to teratogenicity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "General population",
+     "Third-trimester pregnancy"
+    ],
+    "rows": [
+     [
+      "Primary agent",
+      "Hepatitis E virus (genotypes 1, 2)",
+      "Hepatitis E virus (genotype 1, 2)"
+     ],
+     [
+      "Mortality rate",
+      "1% to 2% overall",
+      "Up to 20% to 25%"
+     ],
+     [
+      "Complications",
+      "Self-limited acute hepatitis",
+      "Fulminant liver failure, DIC, haemorrhage"
+     ],
+     [
+      "Chronicity",
+      "Rare (immunosuppressed only)",
+      "Does not become chronic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-term suppression of chronic hepatitis B viral replication requires potent oral nucleoside or nucleotide analogues displaying exceptionally high barriers to genetic resistance. Prescribing **tenofovir**, available as tenofovir disoproxil fumarate or tenofovir alafenamide, potently blocks HBV reverse transcriptase, achieving durable viral suppression in over ninety-five percent of treated patients. Tenofovir disoproxil fumarate carries a minor risk of proximal renal tubular dysfunction and bone mineral density loss, whereas tenofovir alafenamide delivers equivalent antiviral efficacy with significantly reduced renal and skeletal toxicity.",
+   "say": "Long-term suppression of chronic hepatitis B requires potent oral agents with high barriers to resistance. Prescribing tenofovir blocks reverse transcriptase, achieving durable viral suppression in almost all adherent patients. While tenofovir disoproxil carries minor renal and bone risks, tenofovir alafenamide minimizes these toxicities while preserving antiviral efficacy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-viral-hepatitis-gen1.webp",
+    "alt": "Microscopic and conceptual overview of hepatitis virus suppression and viral control.",
+    "caption": "Long-term antiviral suppression of hepatitis B replication and liver histology protection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Antiviral prophylaxis initiated during the third trimester reduces viral load and prevents vertical transmission in highly viraemic mothers. Administering **perinatal antiviral prophylaxis** with tenofovir disoproxil fumarate is formally indicated starting at twenty-eight weeks of gestation when maternal serum HBV DNA exceeds two hundred thousand international units per millilitre. Combining maternal antenatal tenofovir suppression with prompt infant immunoprophylaxis using hepatitis B immune globulin and vaccine within twelve hours of delivery drives perinatal transmission rates below one percent.",
+   "say": "Antiviral prophylaxis started in the third trimester reduces maternal viraemia and prevents transmission to the baby. Administering perinatal antiviral prophylaxis with tenofovir is indicated at twenty-eight weeks when maternal viral DNA exceeds two hundred thousand units. Combining maternal therapy with neonatal immunoglobulin and vaccine lowers transmission below one percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mother",
+      "label": "Maternal HBV DNA >200,000 IU/mL"
+     },
+     {
+      "id": "tenofovir",
+      "label": "Start Tenofovir at 28 weeks gestation"
+     },
+     {
+      "id": "baby",
+      "label": "Give infant HBIG + vaccine at birth"
+     }
+    ],
+    "edges": [
+     [
+      "mother",
+      "tenofovir"
+     ],
+     [
+      "tenofovir",
+      "baby"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "med-cirrhosis",
+ "subject": "medicine",
+ "title": "Cirrhosis staging, Child-Pugh and MELD scores, and portal hypertension",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Chronic diffuse necroinflammatory injury culminates in irreversible architectural disorganization throughout the hepatic parenchyma. Morphologically defining **Cirrhosis** requires widespread bridging fibrosis linking portal tracts and central veins, accompanied by structurally abnormal regenerative nodules lacking normal central venules. Activation of perisinusoidal hepatic stellate cells (Ito cells) drives excessive extracellular collagen deposition within the space of Disse. This parenchymal collapse increases vascular resistance across the hepatic microcirculation while progressively diminishing hepatic synthetic and metabolic functional reserve.",
+   "say": "Chronic diffuse injury culminates in irreversible architectural disorganization across the liver parenchyma. Morphologically defining Cirrhosis requires widespread bridging fibrosis and abnormal regenerative nodules lacking central venules. Activation of hepatic stellate cells drives dense collagen deposition, increasing vascular resistance and impairing synthetic liver reserve.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-cirrhosis-fig1.webp",
+    "alt": "Gross and histological findings in micronodular and macronodular cirrhosis.",
+    "caption": "Parenchymal architecture collapse, regenerative nodules, and bridging fibrosis in cirrhosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Prognostic evaluation of chronic liver failure relies on validated clinical scoring systems combining biochemical and physical signs. Calculating the **Child-Pugh score** incorporates five distinct clinical variables: total serum bilirubin, serum albumin concentration, international normalized ratio, ascites severity, and hepatic encephalopathy grade. Patients scoring five to six points belong to class A with preserved compensation, seven to nine points denote class B with moderate functional compromise, and ten to fifteen points indicate class C with severe decompensation and a one-year survival under fifty percent.",
+   "say": "Prognostic assessment of chronic liver failure uses validated clinical scoring systems combining biochemical and physical signs. Calculating the Child-Pugh score incorporates bilirubin, albumin, INR, ascites, and encephalopathy. Patients scoring five to six points belong to class A, seven to nine points mark class B, and ten to fifteen points denote decompensated class C.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Variable scored",
+     "1 point",
+     "2 points",
+     "3 points"
+    ],
+    "rows": [
+     [
+      "Total Bilirubin (mg/dL)",
+      "< 2.0 (<34 umol/L)",
+      "2.0 to 3.0",
+      "> 3.0 (>50 umol/L)"
+     ],
+     [
+      "Serum Albumin (g/dL)",
+      "> 3.5 (>35 g/L)",
+      "2.8 to 3.5",
+      "< 2.8 (<28 g/L)"
+     ],
+     [
+      "INR / Prothrombin time",
+      "< 1.7 (<4 s prolonged)",
+      "1.7 to 2.3 (4-6 s)",
+      "> 2.3 (>6 s prolonged)"
+     ],
+     [
+      "Ascites",
+      "None detectable",
+      "Mild (diuretic-responsive)",
+      "Moderate to severe (tense)"
+     ],
+     [
+      "Hepatic Encephalopathy",
+      "None",
+      "Grade 1 to 2",
+      "Grade 3 to 4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Equitable organ allocation for deceased donor liver transplantation demands objective, continuous mathematical models devoid of subjective clinical variables. Calculating the **MELD score** (Model for End-Stage Liver Disease) utilizes three objective serum laboratory parameters: total bilirubin, creatinine, and the international normalized ratio. The modern MELD-Na variant incorporates serum sodium concentration to account for severe dilutional hyponatraemia, a potent independent risk factor for perioperative mortality. A calculated score exceeding twenty-five indicates an urgent requirement for expedited liver transplantation.",
+   "say": "Equitable organ allocation for liver transplantation requires objective mathematical models free of subjective variables. Calculating the MELD score incorporates three laboratory parameters: serum bilirubin, creatinine, and the international normalized ratio. The modern MELD-Na score adds serum sodium to capture severe dilutional hyponatraemia, with scores above twenty-five prioritizing patients for transplantation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Child-Pugh Classification",
+     "points": [
+      "Five variables: Bilirubin, Albumin, INR, Ascites, Encephalopathy",
+      "Includes subjective assessments of fluid and mentation",
+      "Categorical staging: Class A, B, and C",
+      "Directs surgical risk assessment and drug dosing"
+     ]
+    },
+    "right": {
+     "title": "MELD-Na Scoring",
+     "points": [
+      "Four objective metrics: Bilirubin, Creatinine, INR, Sodium",
+      "Continuous logarithmic scale from 6 to 40",
+      "Predicts 90-day waitlist transplant mortality",
+      "Primary determinant of donor organ allocation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Increased intrahepatic structural resistance to blood flow combined with splanchnic arterial vasodilatation establishes pathological circulatory hypertension across the splanchnic bed. Developing **portal hypertension** occurs when the hepatic venous pressure gradient between the portal vein and inferior vena cava exceeds normal resting values of one to five millimetres of mercury. Pressure gradients of ten millimetres of mercury or greater define clinically significant portal hypertension, precipitating collateral formation and ascites, whereas gradients exceeding twelve millimetres of mercury trigger acute variceal rupture.",
+   "say": "Increased intrahepatic vascular resistance combined with splanchnic arterial dilatation produces pathological hypertension across the portal bed. Developing portal hypertension occurs when the hepatic venous pressure gradient exceeds five millimetres of mercury. Gradients of ten or higher define clinically significant disease that creates collaterals, while values above twelve provoke acute variceal haemorrhage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical level",
+     "Aetiological examples",
+     "Wedged hepatic venous pressure",
+     "Free hepatic venous pressure"
+    ],
+    "rows": [
+     [
+      "Pre-hepatic",
+      "Portal vein thrombosis, splenic vein thrombosis",
+      "Normal (sinusoids unaffected)",
+      "Normal"
+     ],
+     [
+      "Intra-hepatic (sinusoidal)",
+      "Cirrhosis (alcoholic, viral, MASLD)",
+      "Elevated (HVPG increased)",
+      "Normal"
+     ],
+     [
+      "Intra-hepatic (presinusoidal)",
+      "Schistosomiasis, congenital hepatic fibrosis",
+      "Normal to mildly elevated",
+      "Normal"
+     ],
+     [
+      "Post-hepatic",
+      "Budd-Chiari syndrome, constrictive pericarditis",
+      "Elevated",
+      "Elevated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progressive elevations in portal venous pressure divert splanchnic blood flow away from the congested liver through embryonic vascular communications into the systemic circulation. Opening **portosystemic collaterals** decompresses the hypertensive portal system through four primary anatomical anastomoses: the gastro-oesophageal junction, the recanalized umbilical vein creating caput medusae, the superior haemorrhoidal to systemic middle and inferior rectal veins, and retroperitoneal veins of Retzius. While relieving pressure, these bypass channels shunt unpurified neurotoxins directly into the systemic circulation, promoting encephalopathy.",
+   "say": "Progressive elevations in portal pressure send venous blood away from the liver through embryonic vascular channels into the systemic circulation. Opening portosystemic collaterals involves four primary anastomoses, including gastro-oesophageal veins, the recanalized umbilical vein, and haemorrhoidal communications. While decompressing portal pressure, these shunts bypass liver metabolism and promote encephalopathy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "htn",
+      "label": "Clinically Significant Portal Hypertension (HVPG >= 10 mmHg)"
+     },
+     {
+      "id": "shunts",
+      "label": "Recanalization of Portosystemic Anastomoses"
+     },
+     {
+      "id": "clinical",
+      "label": "Gastro-oesophageal varices, Caput medusae, Haemorrhoids"
+     }
+    ],
+    "edges": [
+     [
+      "htn",
+      "shunts"
+     ],
+     [
+      "shunts",
+      "clinical"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vascular engorgement of the left gastric coronary vein delivers high-pressure portal blood into thin-walled submucosal channels within the lower third of the oesophagus. Developing **oesophageal varices** represents the most dangerous complication of portal hypertension, occurring in approximately fifty percent of cirrhotic patients. Baseline endoscopic screening is indicated in all patients upon cirrhosis diagnosis unless non-invasive markers (stiffness below twenty kilopascals and platelet count above one hundred and fifty thousand) safely rule out clinically significant portal hypertension.",
+   "say": "Engorgement of the left gastric vein delivers high-pressure portal blood into thin-walled submucosal vessels of the lower oesophagus. Developing oesophageal varices represents a dangerous complication occurring in half of cirrhotic patients. Baseline endoscopic screening is indicated upon diagnosing cirrhosis to detect large varices before catastrophic bleeding occurs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cirrhosis-and-its-complications-fig1.webp",
+    "alt": "Endoscopic and anatomical appearance of tortuous dilated oesophageal varices.",
+    "caption": "Submucosal tortuous oesophageal varices at the gastro-oesophageal junction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Endoscopic inspection of variceal morphology and red colour signs informs the estimated probability of spontaneous rupture and haemorrhage. Performing **variceal risk stratification** categorizes lesions as small (under five millimetres in diameter) or medium to large (exceeding five millimetres or occupying over one-third of the lumen). The presence of cherry-red spots, red wale markings, or Child-Pugh class C cirrhosis dramatically increases the twelve-month bleeding risk, indicating the necessity for immediate primary pharmacological or endoscopic prophylaxis.",
+   "say": "Endoscopic inspection of variceal size and surface signs determines the probability of spontaneous rupture and bleeding. Performing variceal risk stratification classifies lesions as small under five millimetres or medium to large exceeding five millimetres. The presence of red wale markings or advanced cirrhosis indicates high bleeding risk requiring immediate prophylaxis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low-Risk Varices",
+     "points": [
+      "Small calibre (<5 mm diameter)",
+      "Absence of overlying red wale marks",
+      "Child-Pugh class A liver compensation",
+      "Re-evaluate with endoscopy in 1 to 2 years"
+     ]
+    },
+    "right": {
+     "title": "High-Risk Varices",
+     "points": [
+      "Medium to large calibre (>5 mm diameter)",
+      "Prominent red wale markings or cherry-red spots",
+      "Decompensated Child-Pugh class B or C",
+      "Immediate primary prophylaxis indicated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Interventions targeted at decreasing portal venous inflow or mechanically eradicating fragile varices prevent catastrophic initial haemorrhagic episodes. Implementing **primary bleeding prophylaxis** utilizes non-selective beta-blockers such as carvedilol, nadolol, or propranolol, which lower portal pressure through combined beta-one cardiac output reduction and beta-two splanchnic vasoconstriction. In patients demonstrating intolerance, contraindications, or very large varices with prominent red wales, endoscopic variceal ligation (band ligation) provides equivalent prophylactic protection against sentinel bleeding.",
+   "say": "Interventions designed to decrease portal inflow or eradicate fragile vessels prevent catastrophic initial haemorrhage. Implementing primary bleeding prophylaxis uses non-selective beta-blockers like carvedilol or propranolol to reduce splanchnic blood flow. In patients with contraindications or large varices, endoscopic band ligation provides equivalent protection against sentinel bleeding.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "High-Risk Varices Identified on Endoscopy"
+     },
+     {
+      "id": "nsbb",
+      "label": "Non-Selective Beta-Blocker (Carvedilol or Propranolol)"
+     },
+     {
+      "id": "evl",
+      "label": "Endoscopic Band Ligation (if NSBB contraindicated or not tolerated)"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "nsbb"
+     ],
+     [
+      "dx",
+      "evl"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
