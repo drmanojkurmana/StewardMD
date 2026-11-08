@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "med-lymphoma",
+ "subject": "medicine",
+ "title": "Indolent Lymphomas, CLL, and Hairy Cell Leukaemia",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "An aggressive B-cell neoplasm arising from naive B cells in the mantle zone surrounding germinal centers carries a characteristic molecular translocation. In **mantle cell lymphoma**, reciprocal translocation t(11;14)(q13;q32) translocates the CCND1 gene on chromosome 11 to the immunoglobulin heavy chain locus on chromosome 14. This juxtaposition drives constitutive overexpression of cyclin D1, promoting uncontrolled G1-to-S cell cycle transition. Patients present with generalized lymphadenopathy, splenomegaly, and multiple mucosal polyps throughout the gastrointestinal tract termed lymphomatous polyposis. Neoplastic cells co-express CD5 and CD20, while remaining negative for CD23 and CD10.",
+   "say": "An aggressive B-cell neoplasm arising from naive B cells in the mantle zone surrounding germinal centers carries a characteristic molecular translocation. In mantle cell lymphoma, reciprocal translocation between chromosomes 11 and 14 drives constitutive overexpression of cyclin D1, promoting cell cycle entry. Patients present with generalized lymphadenopathy, splenomegaly, and gastrointestinal polyps termed lymphomatous polyposis. Cells co-express CD5 and CD20 while lacking CD23.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mantle Cell Lymphoma",
+     "points": [
+      "t(11;14)(q13;q32) translocation",
+      "Cyclin D1 (CCND1) overexpression",
+      "Immunophenotype: CD5+, CD20+, CD23-",
+      "Lymphomatous polyposis of GI tract",
+      "Aggressive clinical course with poor survival"
+     ]
+    },
+    "right": {
+     "title": "Chronic Lymphocytic Leukaemia (CLL)",
+     "points": [
+      "del 13q14, trisomy 12, del 17p (TP53)",
+      "Negative for Cyclin D1",
+      "Immunophenotype: CD5+, CD20+ (dim), CD23+",
+      "Peripheral blood lymphocytosis + smudge cells",
+      "Indolent clinical course in most patients"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronic antigenic stimulation by infectious pathogens or autoimmune inflammation drives extranodal marginal zone B-cell lymphomas in mucosal tissues. Clinically recognized as **malt lymphoma** (mucosa-associated lymphoid tissue), the commonest site is the stomach driven by chronic Helicobacter pylori gastritis. Other sites include the salivary glands in Sjögren syndrome, thyroid in Hashimoto thyroiditis, and orbit in Chlamydia psittaci infection. Early gastric MALT lymphoma is entirely dependent on H. pylori antigen-driven T-cell help; eradicating H. pylori with triple antibiotic therapy induces durable complete lymphoma regression in over eighty percent of early-stage cases.",
+   "say": "Chronic antigenic stimulation by infectious pathogens or autoimmune inflammation drives extranodal marginal zone B-cell lymphomas in mucosal tissues. Clinically recognized as malt lymphoma, the commonest site is the stomach driven by chronic Helicobacter pylori gastritis. Other sites include salivary glands in Sjögren syndrome and thyroid in Hashimoto thyroiditis. Early gastric MALT lymphoma depends on antigen-driven inflammation; eradicating H. pylori with antibiotic therapy induces complete lymphoma remission in most patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hp",
+      "label": "Chronic Helicobacter pylori Gastric Infection"
+     },
+     {
+      "id": "malt",
+      "label": "Development of Gastric MALT Marginal Zone Lymphoma"
+     },
+     {
+      "id": "antib",
+      "label": "Eradication with Triple Antibiotic / PPI Regimen"
+     },
+     {
+      "id": "cure",
+      "label": "Complete Lymphoma Regression in > 80% Early Cases"
+     }
+    ],
+    "edges": [
+     [
+      "hp",
+      "malt"
+     ],
+     [
+      "malt",
+      "antib"
+     ],
+     [
+      "antib",
+      "cure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The commonest leukaemia among adults in Western nations features an accumulation of mature-appearing, immunologically incompetent monoclonal B lymphocytes. Diagnosing **chronic lymphocytic leukaemia** (CLL) requires sustained peripheral absolute monoclonal B-lymphocytosis of 5,000 per microlitre or higher lasting at least three months. Striking predominantly elderly individuals over seventy years, patients are frequently asymptomatic, diagnosed incidentally on routine complete blood counts. Clinical presentation can feature painless generalized lymphadenopathy, splenomegaly, recurrent sinopulmonary infections due to hypogammaglobulinaemia, and secondary autoimmune haemolytic anaemia or immune thrombocytopenia.",
+   "say": "The commonest leukaemia among adults in Western nations features an accumulation of mature-appearing, immunologically incompetent monoclonal B lymphocytes. Diagnosing chronic lymphocytic leukaemia requires sustained peripheral B-lymphocytosis of 5,000 per microlitre or higher. Striking predominantly elderly individuals, patients are frequently asymptomatic on presentation. Clinical signs include painless lymphadenopathy, splenomegaly, hypogammaglobulinaemia, and autoimmune cytopenias.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-lymphocytic-leukemia-fig1.webp",
+    "alt": "Peripheral blood smear displaying mature small lymphocytes and characteristic fragile smudge cells.",
+    "caption": "Peripheral blood film demonstrating mature small lymphocytes and disrupted smudge cells in CLL. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During preparation of stained peripheral blood smears, the mechanical fragility of mature leukaemic B lymphocytes causes cell rupture. Examination reveals pathognomonic disrupted nuclear remnants recognized as **smudge cells** (Gumprecht shadows or basket cells). A higher percentage of smudge cells on peripheral smear correlates with high cytoskeletal vimentin expression and predicts an indolent clinical course. Flow cytometry confirms monoclonal B-cell expansion co-expressing CD19, CD20 (characteristically dim), CD5 (aberrant T-cell marker), and CD23, paired with weak surface immunoglobulin light-chain restriction (kappa or lambda).",
+   "say": "During preparation of stained peripheral blood smears, the mechanical fragility of mature leukaemic B lymphocytes causes cell rupture. Examination reveals pathognomonic disrupted nuclear remnants recognized as smudge cells. A higher percentage of smudge cells correlates with cytoskeletal vimentin content and predicts an indolent clinical course. Flow cytometry confirms monoclonal B-cells co-expressing CD19, dim CD20, aberrant CD5, and CD23.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Test",
+     "Typical Finding in CLL",
+     "Pathophysiological Basis",
+     "Differential Comparison"
+    ],
+    "rows": [
+     [
+      "Peripheral Blood Film",
+      "Mature small lymphocytes + Smudge cells",
+      "Cytoskeletal fragility during smear shearing",
+      "Mantle cell lacks smudge cells"
+     ],
+     [
+      "Flow Cytometry Panel",
+      "CD19+, CD20 (dim)+, CD5+, CD23+",
+      "Aberrant co-expression of T-cell marker CD5",
+      "Mantle cell is CD23 negative"
+     ],
+     [
+      "Immunoglobulin Repertoire",
+      "Monoclonal light chain (kappa or lambda)",
+      "Clonal single-cell origin of B neoplasm",
+      "Reactive lymphocytosis is polyclonal"
+     ],
+     [
+      "Serum Immunoglobulins",
+      "Hypogammaglobulinaemia (low IgG/IgA)",
+      "Suppressed normal plasma cell maturation",
+      "Predisposes to bacterial infections"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An uncommon indolent B-cell leukaemia striking middle-aged men features distinctive fine hair-like cytoplasmic projections on circulating mononuclear cells. In **hairy cell leukaemia**, mature B cells infiltrate the splenic red pulp and bone marrow, producing massive splenomegaly without significant lymphadenopathy, accompanied by profound monocytopenia and pancytopenia. More than ninety-five percent of patients harbour the somatic BRAF V600E point mutation, which constitutively activates the downstream MEK-ERK pathway. Neoplastic cells demonstrate cytochemical positivity for tartrate-resistant acid phosphatase (TRAP) and express surface CD11c, CD25, CD103, and CD123.",
+   "say": "An uncommon indolent B-cell leukaemia striking middle-aged men features distinctive fine cytoplasmic projections on circulating mononuclear cells. In hairy cell leukaemia, mature B cells infiltrate splenic red pulp and bone marrow, producing massive splenomegaly without lymphadenopathy, accompanied by pancytopenia. Almost all patients harbour the somatic BRAF V600E mutation. Cells show positivity for tartrate-resistant acid phosphatase and express CD11c, CD25, and CD103.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hairy-cell-leukemia-fig1.webp",
+    "alt": "Peripheral blood smear showing atypical lymphoid cells with fine, irregular hair-like cytoplasmic projections.",
+    "caption": "Cytological film displaying lymphoid cells with circumferential hair-like cytoplasmic projections and TRAP positivity. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Targeted chemotherapy utilizing purine nucleoside analogues delivers durable complete remissions in over eighty-five percent of patients with hairy cell leukaemia. Administering a single cycle of intravenous **cladribine** (2-chlorodeoxyadenosine) or pentostatin inhibits adenosine deaminase and incorporates into replicating DNA, inducing resistant hairy cells to undergo apoptosis. Patients achieve long-term relapse-free survival exceeding ten to fifteen years. In relapsed or purine analogue-refractory disease, the oral BRAF V600E inhibitor vemurafenib or the immunotoxin moxetumomab pasudotox targeting CD22 delivers outstanding salvage efficacy.",
+   "say": "Targeted chemotherapy utilizing purine nucleoside analogues delivers durable complete remissions in over eighty-five percent of patients with hairy cell leukaemia. Administering a single cycle of cladribine or pentostatin incorporates into DNA, inducing hairy cells to undergo apoptosis. Patients achieve long-term relapse-free survival exceeding ten years. In relapsed disease, the oral BRAF inhibitor vemurafenib or targeted CD22 immunotoxins provide outstanding salvage efficacy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hcl",
+      "label": "Pancytopenia, Massive Splenomegaly, BRAF V600E Positive"
+     },
+     {
+      "id": "clad",
+      "label": "Single Cycle Cladribine (2-CdA) Infusion"
+     },
+     {
+      "id": "marrow",
+      "label": "Apoptosis of Hairy Cells & Reversal of Fibrosis"
+     },
+     {
+      "id": "remiss",
+      "label": "Durable Complete Remission in > 85% of Patients"
+     }
+    ],
+    "edges": [
+     [
+      "hcl",
+      "clad"
+     ],
+     [
+      "clad",
+      "marrow"
+     ],
+     [
+      "marrow",
+      "remiss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most prevalent cutaneous T-cell lymphoma manifests with slow progression across clinical patches, plaques, and cutaneous tumours. In **mycosis fungoides**, clonal CD4+ helper T cells homing to the skin express cutaneous lymphocyte antigen (CLA) and chemokine receptor CCR4. Skin biopsy demonstrates pathognomonic Pautrier microabscesses, characterized by intraepidermal clusters of atypical lymphocytes with hyperconvoluted, cerebriform nuclei showing epidermotropism. Sézary syndrome represents the leukemic erythroderma variant, characterized by pruritic generalised exfoliative erythroderma, lymphadenopathy, and circulating neoplastic cerebriform Sézary cells in peripheral blood.",
+   "say": "The most prevalent cutaneous T-cell lymphoma manifests with slow progression across patches, plaques, and cutaneous tumours. In mycosis fungoides, clonal CD4 helper T cells homing to the skin infiltrate the epidermis. Skin biopsy demonstrates pathognomonic Pautrier microabscesses with cerebriform lymphocytes. Sézary syndrome represents the leukemic variant, characterized by generalised erythroderma, lymphadenopathy, and circulating cerebriform Sézary cells in peripheral blood.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Entity",
+     "Predominant Tissue Involvement",
+     "Pathognomonic Histology",
+     "Therapeutic Approach"
+    ],
+    "rows": [
+     [
+      "Mycosis Fungoides (Patch/Plaque)",
+      "Epidermis and dermis of skin",
+      "Pautrier microabscesses, cerebriform nuclei",
+      "Topical corticosteroids, phototherapy (PUVA/UVB)"
+     ],
+     [
+      "Mycosis Fungoides (Tumour Stage)",
+      "Deep dermis and subcutaneous tissues",
+      "Diffuse atypical T-cell dermal infiltrates",
+      "Local radiation, oral retinoids (Bexarotene)"
+     ],
+     [
+      "Sézary Syndrome",
+      "Blood, skin, and lymph nodes",
+      "Circulating cerebriform Sézary T cells (> 1000/mcL)",
+      "Extracorporeal photopheresis, Mogamulizumab"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted therapeutic strategies for chronic lymphocytic leukaemia have shifted from non-specific cytotoxic chemotherapy to targeted oral inhibitors of B-cell receptor signaling and apoptosis evasion. Prescribing **ibrutinib** or acalabrutinib irreversibly blocks Bruton tyrosine kinase (BTK), preventing downstream B-cell proliferation and mobilizing leukaemic cells out of protective lymph node niches into the blood. Concurrently, venetoclax selectively inhibits the anti-apoptotic protein Bcl-2, directly triggering mitochondrial apoptosis of malignant clones. Fixed-duration venetoclax combined with the anti-CD20 antibody obinutuzumab achieves deep, undetectable minimal residual disease remissions.",
+   "say": "Targeted therapeutic strategies for chronic lymphocytic leukaemia have shifted from cytotoxic chemotherapy to oral inhibitors of B-cell signaling and apoptosis. Prescribing ibrutinib or acalabrutinib blocks Bruton tyrosine kinase, preventing downstream proliferation and mobilizing leukaemic cells out of lymph node niches. Concurrently, venetoclax selectively inhibits Bcl-2, directly triggering mitochondrial apoptosis. Fixed-duration venetoclax with anti-CD20 antibody achieves deep minimal residual disease remissions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bruton Tyrosine Kinase Inhibitors (Ibrutinib)",
+     "points": [
+      "Inhibits BTK downstream of BCR signaling",
+      "Continuous once-daily oral dosing",
+      "Initial redistribution lymphocytosis expected",
+      "Overcomes adverse del(17p) and TP53 mutations",
+      "Adverse risks: Atrial fibrillation, bleeding"
+     ]
+    },
+    "right": {
+     "title": "BCL-2 Antagonists (Venetoclax)",
+     "points": [
+      "Selective BH3-mimetic Bcl-2 inhibitor",
+      "Triggers rapid mitochondrial apoptosis",
+      "Time-limited fixed-duration therapy (1-2 years)",
+      "High rate of undetectable MRD clearance",
+      "Requires step-up ramp-up to prevent TLS"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
