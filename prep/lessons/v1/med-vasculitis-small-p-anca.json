@@ -1,0 +1,206 @@
+{
+ "v": 1,
+ "module": "med-vasculitis-small",
+ "subject": "medicine",
+ "title": "Eosinophilic Granulomatosis with Polyangiitis and Anti-GBM Disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Perinuclear anti-neutrophil cytoplasmic antibody staining on ethanol fixation produces a characteristic rim-like fluorescence encircling the neutrophil nucleus, designated as **p-ANCA**. This distinct perinuclear staining pattern is an artifact of basic cytoplasmic proteins redistributing toward the negatively charged cell nucleus during ethanol dehydration, distinguishing it from the diffuse cytoplasmic pattern of c-ANCA.",
+   "say": "Perinuclear anti-neutrophil cytoplasmic antibody staining produces a characteristic rim-like fluorescence encircling the neutrophil nucleus, designated as p-ANCA. This distinct pattern represents an artifact of basic proteins redistributing toward the nucleus during ethanol fixation, distinguishing it from cytoplasmic c-ANCA.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/the-vasculitis-syndromes-fig1.webp",
+    "alt": "Perinuclear vs cytoplasmic ANCA immunofluorescence patterns.",
+    "caption": "Diagnostic immunofluorescence patterns distinguishing p-ANCA and c-ANCA. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The principal target antigen recognised by p-ANCA autoantibodies in systemic vasculitis is neutrophil **myeloperoxidase** (MPO), an enzyme situated within azurophilic granules responsible for generating hypohalous acids. Circulating antibodies directed against MPO are detected in approximately sixty percent of patients with microscopic polyangiitis and thirty to forty percent of patients with eosinophilic granulomatosis with polyangiitis.",
+   "say": "The principal target antigen recognized by p-ANCA antibodies in systemic vasculitis is neutrophil myeloperoxidase, an enzyme located within azurophilic granules. Circulating antibodies against myeloperoxidase are detected in sixty percent of microscopic polyangiitis and forty percent of eosinophilic granulomatosis with polyangiitis cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme Target",
+     "Granular Compartment",
+     "ANCA Staining",
+     "Primary Diseases"
+    ],
+    "rows": [
+     [
+      "Myeloperoxidase (MPO)",
+      "Primary azurophilic granules",
+      "p-ANCA (Perinuclear)",
+      "MPA, EGPA, Crescentic GN"
+     ],
+     [
+      "Proteinase 3 (PR3)",
+      "Azurophilic granules & membrane",
+      "c-ANCA (Cytoplasmic)",
+      "GPA (Wegener granulomatosis)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A multi-system necrotising vasculitis uniquely characterised by allergic diathesis, severe airway hyperexcitability, and necrotising extravascular granulomas is **eosinophilic granulomatosis with polyangiitis** (EGPA). Formerly recognised as Churg-Strauss syndrome, this rare systemic disorder evolves through three sequential clinical phases: an initial prodromal allergic phase, a tissue eosinophilic infiltrative phase, and a terminal systemic necrotising vasculitic phase.",
+   "say": "A multi-system necrotising vasculitis characterized by allergic diathesis, severe airway hyperreactivity, and extravascular granulomas is eosinophilic granulomatosis with polyangiitis. Formerly recognized as Churg-Strauss syndrome, this rare disorder evolves through an allergic phase, a tissue eosinophilic phase, and a terminal necrotising vasculitic phase.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "EGPA (Churg-Strauss)",
+     "points": [
+      "Severe asthma and allergic rhinitis",
+      "Prominent eosinophilia (> 1500/uL)",
+      "Tissue granulomas + eosinophilic infiltrate",
+      "Cardiac eosinophilic involvement frequent"
+     ]
+    },
+    "right": {
+     "title": "GPA (Wegener)",
+     "points": [
+      "Destructive upper airway disease",
+      "Absence of peripheral eosinophilia",
+      "Necrotising granulomas without eosinophils",
+      "PR3 c-ANCA in > 90% of active cases"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The clinical history of EGPA almost invariably begins with adult-onset, difficult-to-control **asthma** accompanied by allergic rhinitis, recurrent nasal polyposis, and maxillary sinus mucosal thickening. The asthma typically precedes systemic vasculitic manifestations by several years and becomes progressively more recalcitrant to standard inhaled bronchodilators, requiring repeated courses of systemic corticosteroids.",
+   "say": "The clinical history of EGPA almost invariably begins with adult-onset, difficult-to-control asthma accompanied by allergic rhinitis and nasal polyposis. The asthma typically precedes systemic vasculitic manifestations by several years and becomes recalcitrant to standard bronchodilators, requiring oral corticosteroid courses.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "asth",
+      "label": "Adult-Onset Refractory Asthma"
+     },
+     {
+      "id": "poly",
+      "label": "Allergic Rhinitis & Nasal Polyposis"
+     },
+     {
+      "id": "sys",
+      "label": "Systemic Necrotising Vasculitis"
+     }
+    ],
+    "edges": [
+     [
+      "asth",
+      "poly"
+     ],
+     [
+      "poly",
+      "sys"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Laboratory evaluation in active EGPA demonstrates marked **peripheral eosinophilia**, with absolute eosinophil counts frequently exceeding 1500 cells per microlitre and accounting for over ten percent of circulating white blood cells. Eosinophils infiltrate target tissues, releasing major basic protein, eosinophil cationic protein, and eosinophil peroxidase that induce direct endothelial cytotoxicity and tissue necrosis.",
+   "say": "Laboratory evaluation in active EGPA demonstrates marked peripheral eosinophilia, with absolute counts frequently exceeding 1500 cells per microlitre and comprising over ten percent of white cells. Activated eosinophils release toxic cationic proteins that cause direct endothelial necrosis and myocardial injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Diagnostic Threshold",
+     "Pathophysiological Significance"
+    ],
+    "rows": [
+     [
+      "Absolute Eosinophils",
+      "> 1500 / uL (> 10% differential)",
+      "Tissue infiltration & cytotoxicity"
+     ],
+     [
+      "Serum IgE",
+      "Markedly elevated (> 1000 IU/mL)",
+      "Reflects allergic Th2 cytokine drive"
+     ],
+     [
+      "p-ANCA / Anti-MPO",
+      "Positive in 40% to 50%",
+      "Correlates with glomerulonephritis & neuropathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pulmonary imaging in patients during the eosinophilic phase of EGPA reveals non-segmental, migratory, non-cavitating **transient pulmonary infiltrates** on chest radiography and high-resolution computed tomography. Cardiac involvement represents the most dangerous complication and leading cause of mortality in EGPA, manifesting as acute eosinophilic myocarditis, endomyocardial fibrosis, or pericarditis.",
+   "say": "Pulmonary imaging in patients during the eosinophilic phase of EGPA reveals non-segmental, migratory, non-cavitating transient pulmonary infiltrates on chest imaging. Cardiac involvement represents the most dangerous complication and primary cause of mortality in EGPA, manifesting as eosinophilic myocarditis or endomyocardial fibrosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anca-small-vessel-vasculitis-long-case-fig1.webp",
+    "alt": "Pulmonary infiltrates and multiorgan manifestations in ANCA vasculitis.",
+    "caption": "Multiorgan manifestations of small vessel vasculitis and pulmonary involvement. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Peripheral nervous system involvement represents one of the most debilitating manifestations of EGPA, occurring in up to seventy-five percent of untreated patients. Ischaemic infarction of the epineural vasa nervorum causes **mononeuritis multiplex**, characterised by acute, painful, asymmetric sensorimotor deficits affecting distinct nerve trunks such as the peroneal, tibial, or radial nerves.",
+   "say": "Peripheral nervous system involvement represents one of the most debilitating manifestations of EGPA, occurring in up to seventy-five percent of patients. Ischemic infarction of the epineural vasa nervorum causes mononeuritis multiplex, presenting as acute asymmetric foot drop or wrist drop across distinct peripheral nerves.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vasa",
+      "label": "Vasa Nervorum Necrotising Arteritis"
+     },
+     {
+      "id": "isch",
+      "label": "Ischaemic Axonal Nerve Infarction"
+     },
+     {
+      "id": "mono",
+      "label": "Asymmetric Mononeuritis Multiplex"
+     }
+    ],
+    "edges": [
+     [
+      "vasa",
+      "isch"
+     ],
+     [
+      "isch",
+      "mono"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Corticosteroids constitute the cornerstone of therapy for eosinophilic granulomatosis with polyangiitis, rapidly abolishing peripheral eosinophilia and controlling bronchospasm. Patients with high-risk features, evaluated by the Five-Factor Score (renal impairment, cardiac involvement, severe gastrointestinal ischaemia, or severe weight loss), require the addition of **cyclophosphamide** to achieve remission and prevent permanent myocardial injury.",
+   "say": "Corticosteroids constitute the cornerstone of therapy for eosinophilic granulomatosis with polyangiitis, rapidly suppressing eosinophilia and asthma. Patients presenting with high-risk features on the Five-Factor Score, particularly cardiac or severe renal involvement, require adjunctive cyclophosphamide to secure clinical remission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity Category",
+     "First-Line Therapeutic Agents",
+     "Target Outcomes"
+    ],
+    "rows": [
+     [
+      "Mild (FFS = 0)",
+      "Oral Prednisone monotherapy",
+      "Suppress eosinophils & airway disease"
+     ],
+     [
+      "Severe (FFS >= 1)",
+      "Prednisone + IV Cyclophosphamide",
+      "Arrest cardiac, renal, or GI necrosis"
+     ],
+     [
+      "Maintenance",
+      "Azathioprine OR Mepolizumab (Anti-IL5)",
+      "Prevent relapse and spare steroids"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 356"
+}
