@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "med-hiv",
+ "subject": "medicine",
+ "title": "HIV Infection: Virology, Staging, and Antiretroviral Regimens",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Human immunodeficiency virus (**HIV**) is an enveloped, positive-sense, single-stranded retrovirus belonging to the Lentivirus genus that selectively targets human CD4 positive T-helper lymphocytes, monocytes, and dendritic cells. Viral envelope glycoprotein gp120 binds the host CD4 receptor and a chemokine coreceptor (CCR5 or CXCR4), triggering gp41-mediated fusion and capsid entry into the host cytoplasm.",
+   "say": "Human immunodeficiency virus is an enveloped single-stranded retrovirus that selectively targets human CD4 T-helper lymphocytes and macrophages. Viral surface glycoprotein gp120 binds the host CD4 receptor and chemokine coreceptors, initiating membrane fusion and cell entry.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hiv-aids-fig1.webp",
+    "alt": "Natural history, viral load kinetics, and CD4 cell decline in HIV infection.",
+    "caption": "Primary HIV viraemia, chronic clinical latency, and progressive CD4 T-cell decline. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Inside the host cell, viral reverse transcriptase transcribes viral RNA into double-stranded proviral DNA, which is permanently integrated into the host nuclear genome by viral integrase. Active transcription and translation generate polyprotein precursors cleaved by viral **protease** into infectious mature virions, causing progressive CD4 lymphocyte apoptosis, lymphoid architecture destruction, and severe acquired immunodeficiency.",
+   "say": "Inside the host cell, viral reverse transcriptase converts viral RNA into double-stranded DNA, which is integrated into the host genome by viral integrase. Protease cleavage creates mature virions, causing progressive CD4 cell destruction and acquired immunodeficiency.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hiv-aids-fig2.webp",
+    "alt": "HIV replication life cycle and pharmacological targets of antiretroviral drugs.",
+    "caption": "Retroviral replication life cycle and molecular drug targets in HIV management. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Screening for HIV infection utilizes fourth-generation **HIV ELISA** combination assays that detect both host anti-HIV-1/2 antibodies and free viral p24 capsid antigen simultaneously. This fourth-generation antigen-antibody design shortens the diagnostic window period to fourteen days following exposure. Repeatedly reactive immunoassay screening mandates confirmatory differentiation assay distinguishing HIV-1 from HIV-2.",
+   "say": "Screening for HIV infection utilizes fourth-generation HIV ELISA combination assays that detect host antibodies and free viral p24 antigen simultaneously. This design shortens the diagnostic window period to two weeks following exposure. Reactive results require confirmatory differentiation testing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "4th Gen HIV-1/2 Antigen/Antibody Immunoassay"
+     },
+     {
+      "id": "diff",
+      "label": "HIV-1 / HIV-2 Differentiation Assay"
+     },
+     {
+      "id": "nat",
+      "label": "HIV-1 Qualitative Nucleic Acid RNA Testing"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "diff"
+     ],
+     [
+      "diff",
+      "nat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immune competence and opportunistic disease risk are quantified by the peripheral blood **CD4 count**. A normal adult CD4 count ranges between five-hundred and fifteen-hundred cells per microlitre. A CD4 count falling below two-hundred cells per microlitre (or CD4 percentage under fourteen percent) establishes the diagnosis of acquired immunodeficiency syndrome (AIDS), requiring immediate opportunistic prophylaxis.",
+   "say": "Immune competence and opportunistic infection risk are quantified by the absolute CD4 count. A normal adult count ranges between five-hundred and fifteen-hundred cells per microlitre. A count falling below two-hundred cells defines AIDS, requiring immediate antimicrobial prophylaxis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CD4 Count Tier",
+     "Immunological Stage",
+     "High-Risk Opportunistic Infections"
+    ],
+    "rows": [
+     [
+      "> 500 cells / uL",
+      "Stage 1 (Normal / Mild)",
+      "Persistent generalized lymphadenopathy, acute retroviral syndrome"
+     ],
+     [
+      "200 to 500 cells / uL",
+      "Stage 2 (Moderate)",
+      "Recurrent shingles, oral candidiasis (thrush), pulmonary tuberculosis"
+     ],
+     [
+      "< 200 cells / uL",
+      "Stage 3 (AIDS)",
+      "Pneumocystis jirovecii pneumonia, esophageal candidiasis"
+     ],
+     [
+      "< 100 cells / uL",
+      "Stage 3 (Severe)",
+      "Cerebral toxoplasmosis, Cryptococcal meningitis, PML"
+     ],
+     [
+      "< 50 cells / uL",
+      "Stage 3 (Advanced)",
+      "Cytomegalovirus retinitis, Mycobacterium avium complex (MAC)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The critical biomarker for evaluating treatment efficacy and monitoring viral replication is plasma **viral load**, quantified by quantitative reverse-transcriptase polymerase chain reaction (RT-PCR). Successful antiretroviral therapy aims for complete viral suppression, defined as undetectable plasma HIV RNA below fifty copies per millilitre within twenty-four weeks, establishing the principle that Undetectable equals Untransmittable (U=U).",
+   "say": "The critical biomarker for evaluating treatment efficacy and monitoring viral replication is plasma viral load, measured by RT-PCR. Successful antiretroviral therapy aims for undetectable plasma HIV RNA below fifty copies per millilitre, establishing that undetectable equals untransmittable.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CD4 Count Biomarker",
+     "points": [
+      "Measures immunological cellular competence",
+      "Determines timing of opportunistic infection prophylaxis",
+      "Rises slowly over months following ART initiation",
+      "Normal reference: 500 to 1500 cells / uL"
+     ]
+    },
+    "right": {
+     "title": "Viral Load Biomarker",
+     "points": [
+      "Measures active retroviral replication in plasma",
+      "Direct indicator of antiretroviral drug efficacy",
+      "Declines precipitously within weeks of starting ART",
+      "Treatment goal: Undetectable (< 50 copies / mL)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Modern international guidelines recommend immediate initiation of **antiretroviral therapy** (ART) in all individuals diagnosed with HIV, regardless of absolute CD4 cell count or clinical staging. Rapid ART initiation preserves immune function, reduces systemic cardiovascular inflammation, prolongs survival, and completely eliminates sexual transmission of the virus to uninfected partners.",
+   "say": "Modern international guidelines recommend immediate initiation of antiretroviral therapy in all individuals diagnosed with HIV, regardless of CD4 count. Rapid initiation preserves immune function, reduces systemic inflammation, prolongs life, and completely eliminates sexual viral transmission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Confirmed Positive HIV Diagnosis"
+     },
+     {
+      "id": "base",
+      "label": "Baseline CD4, Viral Load, Genotypic Resistance"
+     },
+     {
+      "id": "art",
+      "label": "Immediate Triple-Drug Antiretroviral Initiation (Same Day)"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "base"
+     ],
+     [
+      "base",
+      "art"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The globally endorsed preferred first-line antiretroviral regimen for treatment-naive adults is the single-tablet daily fixed-dose combination of **tenofovir** disoproxil fumarate (TDF), lamivudine (3TC), and the second-generation integrase inhibitor dolutegravir (TLD). Tenofovir acts as an acyclic nucleoside phosphonate reverse transcriptase inhibitor, though renal function and bone mineral density require baseline screening.",
+   "say": "The globally endorsed preferred first-line antiretroviral regimen for treatment-naive adults is the single-tablet fixed-dose combination of tenofovir, lamivudine, and dolutegravir. Tenofovir acts as a nucleotide reverse transcriptase inhibitor, requiring baseline monitoring of renal function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug Component in TLD",
+     "Antiretroviral Drug Class",
+     "Mechanism of Action & Benefit"
+    ],
+    "rows": [
+     [
+      "Tenofovir DF (300 mg)",
+      "Nucleotide Reverse Transcriptase Inhibitor (NRTI)",
+      "High genetic barrier; dual activity against Hepatitis B virus"
+     ],
+     [
+      "Lamivudine (300 mg)",
+      "Nucleoside Reverse Transcriptase Inhibitor (NRTI)",
+      "Potent, well-tolerated cytosine analogue backbone"
+     ],
+     [
+      "Dolutegravir (50 mg)",
+      "Integrase Strand Transfer Inhibitor (INSTI)",
+      "Rapid viral suppression, high resistance barrier, low toxicity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Post-exposure prophylaxis (PEP) following occupational needlestick or non-occupational sexual exposure must be initiated within seventy-two hours of exposure and continued for twenty-eight consecutive days. The standard three-drug PEP regimen combines tenofovir, lamivudine, and dolutegravir, accompanied by baseline, six-week, and twelve-week repeat HIV **serological** testing.",
+   "say": "Post-exposure prophylaxis following needlestick or sexual exposure must be started within seventy-two hours and continued for twenty-eight days. The standard PEP regimen combines tenofovir, lamivudine, and dolutegravir, accompanied by repeat serological follow-up at six and twelve weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prevention Strategy",
+     "Target Population",
+     "Standard Regimen & Duration"
+    ],
+    "rows": [
+     [
+      "Post-Exposure Prophylaxis (PEP)",
+      "Occupational or sexual exposure within 72 hr",
+      "TDF + 3TC + Dolutegravir daily for 28 consecutive days"
+     ],
+     [
+      "Pre-Exposure Prophylaxis (PrEP)",
+      "HIV-negative individuals at ongoing substantial risk",
+      "Oral daily Tenofovir DF + Emtricitabine (FTC)"
+     ],
+     [
+      "PMTCT (Maternal to Child)",
+      "All pregnant and breastfeeding women with HIV",
+      "Lifelong TLD regimen; infant receives oral Nevirapine or Zidovudine"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 202"
+}
