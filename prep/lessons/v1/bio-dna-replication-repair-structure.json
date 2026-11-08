@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "bio-dna-replication-repair",
+ "subject": "biochemistry",
+ "title": "DNA structure and chromatin",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Watson-Crick** B-DNA (right handed antiparallel double helix, bases inside hydrogen bonded A=T two bonds and G triple C three bonds, sugar phosphate outside, major groove information rich and minor groove narrower, about ten point five base pairs per turn, rise three point four angstroms) obeys Chargaff parity (A equals T, G equals C, purines equal pyrimidines) in double stranded DNA only. Melting temperature climbs with GC content and length and falls with formamide and urea (hybridisation stringency logic for blots and PCR ahead).",
+   "say": "B-DNA is right handed antiparallel with GC pairs triple bonded and stronger thermally. Chargaff parity holds in double stranded DNA only, and melting climbs with GC content for hybridisation logic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Helix form",
+     "Hand and context",
+     "Exam flag"
+    ],
+    "rows": [
+     [
+      "B-DNA",
+      "Right, physiological hydrated",
+      "10.5 bp/turn, major/minor grooves"
+     ],
+     [
+      "A-DNA",
+      "Right, dehydrated, DNA-RNA hybrids",
+      "Shorter, wider; RNA duplexes A-like"
+     ],
+     [
+      "Z-DNA",
+      "Left handed zigzag, alternating purine-pyrimidine",
+      "Transient regulatory, antibody curiosities"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Denaturation** (melting, hyperchromicity ultraviolet rise as bases unstack) and renaturation (annealing, Cot curves revealing repetitive versus unique sequences historically) underpin every probe, primer and sequencing technology in the techniques module; supercoiling (topoisomerase managed torsional stress, linking number, bacterial gyrase negative supercoils fluoroquinolone target) packs metres of DNA into microns while keeping it readable. Single stranded binding and histone packaging solve exposure versus access oppositely in replication versus chromatin.",
+   "say": "Melting and renaturation underpin every probe and primer technology ahead in techniques. Supercoiling packs metres into microns while keeping DNA readable through topoisomerase managed torsional stress relief.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Denature (melt)",
+     "points": [
+      "Heat, alkali, formamide separate strands",
+      "A260 hyperchromicity rises",
+      "GC rich melts hotter"
+     ]
+    },
+    "right": {
+     "title": "Renature (anneal)",
+     "points": [
+      "Cool slowly, strands re-find complements",
+      "Probes and PCR primers exploit it",
+      "Repetitive DNA reanneals fastest (Cot)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Nucleosomes** wrap about one hundred forty six base pairs one point six five turns around histone octamers (H2A, H2B, H3, H4 twice, arginine rich positive tails gripping negative DNA), linker DNA with H1 sealing beads on a string compacting to thirty nanometre fibres and looped domains on scaffolds into chromosomes (human metaphase chromatid about ten thousand fold compaction). Histone variants (H2A.Z, CENP-A centromere identity) and octamer sliding remodelers (SWI/SNF ATP, BAF complex cancers) position nucleosomes as regulatory decisions, not packaging filler.",
+   "say": "Nucleosomes wrap one hundred forty six base pairs around histone octamers compacting ten thousand fold to chromosomes. Remodelers position nucleosomes as regulatory decisions, not packaging filler in nuclei.",
+   "vis": {
+    "kind": "flow",
+    "title": "Compaction staircase",
+    "nodes": [
+     {
+      "id": "dna",
+      "label": "DNA 2 nm helix"
+     },
+     {
+      "id": "nuc",
+      "label": "Nucleosome beads 11 nm"
+     },
+     {
+      "id": "fib",
+      "label": "Chromatin fibre and loops 30 to 300 nm"
+     },
+     {
+      "id": "chr",
+      "label": "Metaphase chromosome 1400 nm"
+     }
+    ],
+    "edges": [
+     [
+      "dna",
+      "nuc"
+     ],
+     [
+      "nuc",
+      "fib"
+     ],
+     [
+      "fib",
+      "chr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histone tail modifications write chromatin state chemically: **acetylation** (Lys, HAT writers, bromodomain readers, charge neutralisation loosening DNA grip, active euchromatin, HDAC erasers targeted by vorinostat oncology), methylation (Lys/Arg, context dependent activation H3K4 versus silencing H3K9/K27 Polycomb, no charge change, chromodomain readers), phosphorylation, ubiquitination and citrullination (NETosis neutrophil traps) combinatorially as histone code read by effector complexes. DNA methylation (next modules) silences in parallel at CpG cytosines themselves.",
+   "say": "Acetylation loosens DNA grip for active euchromatin, while methylation silences or activates by residue context combinatorially. HDAC inhibitors exploit eraser biology in oncology prescribing today clinically.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tail mark",
+     "Typical reading",
+     "Drug or disease anchor"
+    ],
+    "rows": [
+     [
+      "H3K9ac, H3K27ac (acetyl)",
+      "Active promoters/enhancers",
+      "HDAC inhibitors (vorinostat)"
+     ],
+     [
+      "H3K4me3",
+      "Active promoters",
+      "MLL leukaemia translocations"
+     ],
+     [
+      "H3K27me3 (Polycomb)",
+      "Facultative silencing",
+      "EZH2 inhibitors (tazemetostat)"
+     ],
+     [
+      "H3K9me3",
+      "Constitutive heterochromatin",
+      "Repeat and centromere silencing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Euchromatin** (light staining, gene rich, early replicating, accessible DNase hypersensitive regulatory sites) versus heterochromatin (dark, constitutive centromere/telomere repeats always silent versus facultative Xi Barr body and developmental loci conditionally silent) explains variegation when genes relocate near heterochromatin (position effect, white mottled Drosophila history) and why lamina associated peripheral localisation silences. Chromatin immunoprecipitation sequencing (ChIP-seq) maps marks genome wide as modern examination literacy.",
+   "say": "Euchromatin replicates early and stays accessible, while heterochromatin silences constitutively or facultatively as Barr bodies. Position effect variegation explains genes silenced by heterochromatin relocation historically in genetics.",
+   "vis": null
+  },
+  {
+   "tx": "DNA itself modifies sparingly but decisively: **5-methylcytosine** at CpG (DNMT writers, maintenance DNMT1 copying through replication, TET dioxygenase erasure through hydroxymethyl intermediates, vitamin C cofactor), base J and hydroxymethyl teaching extensions aside, CpG islands at promoters normally unmethylated (hypermethylated silencing in cancers: MLH1 Lynch mimic sporadic, CDKN2A, BRCA1 subsets) with genome wide hypomethylation reactivating repeats simultaneously. Replication machinery next must copy sequence and methylation pattern together or epigenetic memory dies with division.",
+   "say": "DNA methylation copies through replication by maintenance DNMT1 or epigenetic memory dies with division. Promoter hypermethylation silences tumour suppressors in cancers including MLH1 sporadic mimicry diagnostically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Promoter CpG islands (normal)",
+     "points": [
+      "Unmethylated, genes available",
+      "Housekeeping always on",
+      "Cancer hypermethylates to silence"
+     ]
+    },
+    "right": {
+     "title": "Bulk genome CpG",
+     "points": [
+      "Heavily methylated, repeats silenced",
+      "Cancer hypomethylates globally",
+      "Imprinted loci monoallelically methylated"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
