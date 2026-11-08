@@ -410,3 +410,67 @@ html body:is(.dark,.v3-dark) .settings-detail{
   .sbr-set-ov[data-settings-ui] .sbr-set-head { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
   .sbr-set-ov[data-settings-ui] .sbr-set-body { max-width: none; padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
 }
+
+/* iOS grouped Settings (owner 2026-11-08). Applies to the main page only; the Experimental page has no .settings-card. */
+#sbrSettings[data-settings-ui]{--st-bg:#f2f2f7;--st-card:#fff;--st-ink:#000;--st-sep:rgba(60,60,67,.29);--st-sub:rgba(60,60,67,.6);--st-press:rgba(120,120,128,.16);background:var(--st-bg);color:var(--st-ink)}
+body.dark #sbrSettings[data-settings-ui],body.v3-dark #sbrSettings[data-settings-ui]{--st-bg:#000;--st-card:#1c1c1e;--st-ink:#fff;--st-sep:rgba(84,84,88,.65);--st-sub:rgba(235,235,245,.6);--st-press:rgba(120,120,128,.32)}
+html:not([data-font]) #sbrSettings[data-settings-ui]{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",var(--sans,system-ui),sans-serif}
+#sbrSettings[data-settings-ui] .sbr-set-head{position:sticky;top:0;z-index:4;flex-wrap:nowrap;gap:0;min-height:44px;padding:max(8px,env(safe-area-inset-top,0px)) max(16px,calc((100% - 760px)/2)) 0;background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;transition:background-color .18s ease,box-shadow .18s ease}
+#sbrSettings[data-settings-ui] .sbr-set-head h2{position:absolute;left:0;right:0;bottom:0;margin:0;height:44px;line-height:44px;text-align:center;font-size:17px;font-weight:600;letter-spacing:0;color:var(--st-ink);opacity:0;transition:opacity .18s ease;pointer-events:none}
+#sbrSettings[data-settings-ui] .sbr-set-head.is-scrolled{background:color-mix(in srgb,var(--st-bg) 78%,transparent);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:0 .5px 0 var(--st-sep)}
+#sbrSettings[data-settings-ui] .sbr-set-head.is-scrolled h2{opacity:1}
+#sbrSettings[data-settings-ui] .settings-largetitle{margin:2px 4px 16px;font-size:34px;line-height:1.12;font-weight:700;letter-spacing:-.02em;color:var(--st-ink)}
+#sbrSettings[data-settings-ui] .sbr-set-back{min-height:44px;padding:0;border:0;background:none;box-shadow:none;font-size:17px;font-weight:400;color:var(--settings-primary)}
+#sbrSettings[data-settings-ui] .sbr-set-body{padding:4px 16px calc(112px + env(safe-area-inset-bottom))}
+#sbrSettings[data-settings-ui] .settings-intro{display:none}
+#sbrSettings[data-settings-ui] .settings-tools{position:fixed;z-index:3;left:50%;transform:translateX(-50%);bottom:max(14px,calc(env(safe-area-inset-bottom,0px) - 6px));width:min(calc(100% - 32px),520px);margin:0}
+#sbrSettings[data-settings-ui] .settings-search{display:block;margin:0}
+#sbrSettings[data-settings-ui] .settings-search>span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+#sbrSettings[data-settings-ui] .settings-search input{display:block;width:100%;height:52px;box-sizing:border-box;padding:0 18px 0 48px;border:.5px solid var(--st-sep);border-radius:999px;font-size:17px;color:var(--st-ink);background:color-mix(in srgb,var(--st-card) 74%,transparent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238e8e93' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E") 16px center/22px no-repeat;-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:0 8px 28px -8px rgba(0,0,0,.28);outline-offset:2px}
+#sbrSettings[data-settings-ui] .settings-tools [role=status]{position:absolute;left:16px;right:16px;bottom:calc(100% + 6px);margin:0;padding:6px 12px;border-radius:10px;font-size:13px;text-align:center;background:var(--st-card);color:var(--st-sub)}
+@media (prefers-reduced-transparency:reduce){#sbrSettings[data-settings-ui] .settings-search input{background-color:var(--st-card);-webkit-backdrop-filter:none;backdrop-filter:none}}
+#sbrSettings[data-settings-ui] .settings-group{margin-bottom:28px}
+#sbrSettings[data-settings-ui] .sbr-sec{padding:0 16px 7px;font-size:13px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--st-sub)}
+#sbrSettings[data-settings-ui] .settings-card{overflow:hidden;border-radius:26px;background:var(--st-card)}
+#sbrSettings[data-settings-ui] .settings-card>*{position:relative;margin:0}
+#sbrSettings[data-settings-ui] .settings-card>*+*::before{content:"";position:absolute;z-index:1;top:0;left:16px;right:0;height:.5px;background:var(--st-sep);pointer-events:none}
+#sbrSettings[data-settings-ui] .settings-card>.sbr-row+*::before{left:60px}
+#sbrSettings[data-settings-ui] .settings-card>[hidden]+*::before,#sbrSettings[data-settings-ui] .settings-card>[style*="none"]+*::before{display:none}
+#sbrSettings[data-settings-ui] .settings-card .sbr-row{width:100%;min-height:54px;margin:0;padding:10px 16px;gap:14px;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:17px;font-weight:400;color:var(--st-ink);transition:none}
+#sbrSettings[data-settings-ui] .settings-card .sbr-row:active{transform:none;background:var(--st-press)}
+#sbrSettings[data-settings-ui] .settings-card .sbr-lbl{font-size:17px;font-weight:400;color:inherit}
+#sbrSettings[data-settings-ui] .settings-card .settings-description{display:none}
+#sbrSettings[data-settings-ui] .settings-card .sbr-chev{font-size:22px;font-weight:500;color:rgba(60,60,67,.3)}
+body.dark #sbrSettings[data-settings-ui] .settings-card .sbr-chev,body.v3-dark #sbrSettings[data-settings-ui] .settings-card .sbr-chev{color:rgba(235,235,245,.3)}
+#sbrSettings[data-settings-ui] .settings-card .sbr-row>svg:first-of-type{flex:0 0 30px;width:30px;height:30px;box-sizing:border-box;padding:6px;border-radius:8px;background:#8e8e93;color:#fff;stroke:#fff}
+#sbrSettings[data-settings-ui] [data-sbr-act=notifications]>svg:first-of-type{background:#ff3b30!important}
+#sbrSettings[data-settings-ui] [data-sbr-act=appearance]>svg:first-of-type,#sbrSettings[data-settings-ui] [data-sbr-act=offlinedb]>svg:first-of-type,#sbrSettings[data-settings-ui] #otaInstall>svg:first-of-type{background:#007aff!important}
+#sbrSettings[data-settings-ui] #otaCheck>svg:first-of-type,#sbrSettings[data-settings-ui] [data-sbr-act=account]>svg:first-of-type{background:#34c759!important}
+#sbrSettings[data-settings-ui] [data-sbr-act=experimental]>svg:first-of-type,#sbrSettings[data-settings-ui] [data-sbr-act=workspace]>svg:first-of-type{background:#5856d6!important}
+#sbrSettings[data-settings-ui] [data-sbr-act=mail]>svg:first-of-type,#sbrSettings[data-settings-ui] [data-sbr-act=hospadmin]>svg:first-of-type{background:#ff9500!important}
+#sbrSettings[data-settings-ui] .settings-profile{min-height:84px!important}
+#sbrSettings[data-settings-ui] .settings-profile>svg:first-of-type{display:none}
+#sbrSettings[data-settings-ui] .settings-avatar{flex:0 0 60px;display:flex;align-items:center;justify-content:center;width:60px;height:60px;border-radius:50%;font-size:26px;font-weight:600;color:#fff;background:linear-gradient(160deg,var(--settings-primary),color-mix(in srgb,var(--settings-primary) 62%,#000))}
+#sbrSettings[data-settings-ui] .settings-profile .sbr-lbl{font-size:21px;font-weight:600;letter-spacing:-.01em}
+#sbrSettings[data-settings-ui] .settings-profile .settings-description{display:block;font-size:14px;margin-top:2px;color:var(--st-sub)}
+#sbrSettings[data-settings-ui] .settings-card .sbr-card{margin:0;padding:0;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+#sbrSettings[data-settings-ui] .settings-card .sbr-tg{min-height:54px;padding:10px 16px;border:0;background:transparent;position:relative}
+#sbrSettings[data-settings-ui] .settings-card .sbr-tg+.sbr-tg::before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:var(--st-sep)}
+#sbrSettings[data-settings-ui] .settings-card .sbr-tg-t{font-size:17px;font-weight:400;color:var(--st-ink)}
+#sbrSettings[data-settings-ui] .settings-card .sbr-tg-s{font-size:13px;color:var(--st-sub)}
+#sbrSettings[data-settings-ui] .settings-card .sbr-sw{flex:0 0 51px;width:51px;min-width:51px;height:31px;min-height:31px;box-shadow:none}
+#sbrSettings[data-settings-ui] .settings-card .sbr-sw>span{width:27px;height:27px;top:2px;left:2px;box-shadow:0 3px 8px rgba(0,0,0,.15),0 1px 1px rgba(0,0,0,.16)}
+#sbrSettings[data-settings-ui] .settings-card .sbr-sw.on>span{left:22px}
+#sbrSettings[data-settings-ui] .settings-card .sbr-note{padding:11px 16px;font-size:13px;line-height:1.4;color:var(--st-sub)}
+#sbrSettings[data-settings-ui] .settings-card .settings-detail>summary{min-height:54px;display:flex;align-items:center;justify-content:space-between;padding:10px 16px;font-size:17px;font-weight:400;color:var(--st-ink);cursor:pointer;list-style:none}
+#sbrSettings[data-settings-ui] .settings-card .settings-detail>summary::-webkit-details-marker{display:none}
+#sbrSettings[data-settings-ui] .settings-card .settings-detail>summary::after{content:"›";font-size:22px;font-weight:500;line-height:1;color:var(--st-sub);opacity:.55;transition:transform .2s ease}
+#sbrSettings[data-settings-ui] .settings-card .settings-detail[open]>summary::after{transform:rotate(90deg)}
+#sbrSettings[data-settings-ui] .settings-card .settings-detail>summary:active{background:var(--st-press)}
+#sbrSettings[data-settings-ui] .settings-card .settings-detail{border:0;border-radius:0;background:transparent;box-shadow:none}
+#sbrSettings[data-settings-ui] #otaProg:not([hidden]){padding:2px 16px 8px}
+#sbrSettings[data-settings-ui] #otaProg .otp{margin:0;padding:10px 0 4px;border:0;border-radius:0;background:transparent}
+#sbrSettings[data-settings-ui] #otaProg .otp-bar{height:6px;margin:10px 0 8px;border-radius:3px}
+#sbrSettings[data-settings-ui] #otaProg .otp-bar i{border-radius:3px}
+@media (prefers-reduced-transparency:reduce){#sbrSettings[data-settings-ui] .sbr-set-head.is-scrolled{background:var(--st-bg);-webkit-backdrop-filter:none;backdrop-filter:none}}
+@media (prefers-reduced-motion:reduce){#sbrSettings[data-settings-ui] *{scroll-behavior:auto}}
