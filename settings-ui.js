@@ -75,15 +75,31 @@
       }
       if (!button.querySelector('.sbr-chev')) { var arrow = document.createElement('span'); arrow.className = 'sbr-chev'; arrow.setAttribute('aria-hidden', 'true'); arrow.textContent = '›'; button.appendChild(arrow); }
     });
-    var controls = document.createElement('div'); controls.className = 'settings-tools';
-    controls.innerHTML = '<label class="settings-search"><span>Find a setting</span><input type="search" placeholder="Search settings…" autocomplete="off" spellcheck="false"></label><nav class="settings-nav" aria-label="Settings categories"></nav><p class="settings-results" role="status" aria-live="polite" hidden></p>';
-    intro.insertAdjacentElement('afterend', controls);
-    var nav = controls.querySelector('nav'), input = controls.querySelector('input'), status = controls.querySelector('[role=status]'), active = lastView.category; input.value = lastView.query;
-    if (active !== 'All' && !groups.some(function (g) { return g.getAttribute('data-title') === active; })) active = 'All';
-    ['All'].concat(groups.map(function (g) { return g.getAttribute('data-title'); })).forEach(function (name) {
-      var b = document.createElement('button'); b.type = 'button'; b.textContent = name; b.setAttribute('aria-pressed', String(name === active));
-      b.addEventListener('click', function () { active = name; input.value = ''; apply(); }); nav.appendChild(b);
+    // iOS grouped list: each section's rows sit in one inset card, with the heading above it.
+    groups.forEach(function (g) {
+      var card = document.createElement('div'); card.className = 'settings-card';
+      Array.prototype.slice.call(g.children).forEach(function (n) { if (!n.classList.contains('sbr-sec')) card.appendChild(n); });
+      g.appendChild(card);
     });
+    // The account row leads the page with the doctor's own name, like the Apple Account card.
+    var prof = body.querySelector('[data-sbr-act="profile"]'), acctName = '';
+    try { acctName = String((JSON.parse(localStorage.getItem('stewardmd_account') || '{}') || {}).name || '').trim(); } catch (e) {}
+    if (prof && acctName && acctName.indexOf('@') < 0) {
+      var lbl = prof.querySelector('.sbr-lbl'), avatar = document.createElement('span');
+      avatar.className = 'settings-avatar'; avatar.setAttribute('aria-hidden', 'true');
+      avatar.textContent = acctName.replace(/^\s*(dr|prof|mr|mrs|ms)\.?\s+/i, '').charAt(0).toUpperCase();
+      prof.classList.add('settings-profile'); prof.insertBefore(avatar, prof.firstChild); lbl.textContent = acctName;
+      var psub = prof.querySelector('.settings-description'); if (psub) psub.textContent = 'Profile, ID & verification';
+    }
+    // iOS navigation: the large title scrolls away and the small centred title fades in. No layout shift.
+    var large = document.createElement('div'); large.className = 'settings-largetitle'; large.setAttribute('aria-hidden', 'true'); large.textContent = 'Settings';
+    body.insertBefore(large, body.firstChild);
+    var bar = root.querySelector('.sbr-set-head');
+    root.addEventListener('scroll', function () { bar.classList.toggle('is-scrolled', root.scrollTop > 44); }, { passive: true });
+    var controls = document.createElement('div'); controls.className = 'settings-tools';
+    controls.innerHTML = '<label class="settings-search"><span>Find a setting</span><input type="search" placeholder="Search" autocomplete="off" spellcheck="false"></label><p class="settings-results" role="status" aria-live="polite" hidden></p>';
+    intro.insertAdjacentElement('afterend', controls);
+    var input = controls.querySelector('input'), status = controls.querySelector('[role=status]'), active = 'All'; input.value = lastView.query;
     function apply() {
       var q = input.value.trim().toLowerCase(), count = 0;
       lastView = { category: active, query: input.value };
@@ -93,7 +109,6 @@
         if (match) count++;
         Array.prototype.forEach.call(g.querySelectorAll('details'), function (d) { if (q) { if (!d.hasAttribute('data-search-open')) d.setAttribute('data-search-open', String(d.open)); d.open = match; } else if (d.hasAttribute('data-search-open')) { d.open = d.getAttribute('data-search-open') === 'true'; d.removeAttribute('data-search-open'); } });
       });
-      Array.prototype.forEach.call(nav.children, function (b) { b.setAttribute('aria-pressed', String(!q && b.textContent === active)); });
       status.hidden = !q; status.textContent = count ? count + ' matching section' + (count === 1 ? '' : 's') : 'No matching settings. Try “theme”, “voice” or “clinical”.';
     }
     Array.prototype.forEach.call(body.querySelectorAll('.sbr-sec'), function (heading) { heading.setAttribute('role', 'heading'); heading.setAttribute('aria-level', '3'); });

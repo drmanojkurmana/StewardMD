@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "med-peptic-gi-bleed",
+ "subject": "medicine",
+ "title": "Helicobacter pylori, peptic ulcerogenesis, and antimicrobial eradication",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Colonization of the human gastric mucosa by a microaerophilic, flagellated Gram-negative bacillus represents the primary etiological driver of peptic ulcer disease. Adapting to the harsh acidic lumen, **Helicobacter pylori** utilizes constitutive bacterial urease to hydrolyze endogenous urea into carbon dioxide and ammonia, buffering gastric acid and creating a hospitable neutral microenvironment. Flagellar motility and BabA/SabA adhesins anchor the bacterium to gastric foveolar epithelial cells. Pathogenic strains expressing cytotoxin-associated gene A (CagA) and vacuolating cytotoxin A (VacA) induce chronic mucosal inflammation.",
+   "say": "Colonization of the gastric lining by a flagellated bacterium represents the primary driver of peptic ulcer disease. Surviving within the acidic stomach, Helicobacter pylori uses urease to convert urea into carbon dioxide and ammonia, neutralizing gastric acid. Flagellar motility enables penetration through mucus to attach to epithelial cells. Pathogenic strains expressing CagA and VacA toxins provoke mucosal inflammation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/helicobacter-pylori-infection-fig1.webp",
+    "alt": "Helicobacter pylori colonization, virulence factors, and pathological outcomes.",
+    "caption": "Urease neutralization, bacterial virulence factors, and peptic ulcerogenesis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anatomical distribution of chronic gastritis dictates clinical gastric acid output and disease phenotype. Antral-predominant gastritis damages somatostatin-producing D cells, disinhibiting gastrin release from G cells. Resulting hypergastrinemia stimulates parietal cell hyperplasia, promoting excessive acid secretion that provokes gastric metaplasia in the duodenal bulb and predisposes to **duodenal ulcer** formation. Conversely, corpus-predominant pangastritis causes progressive glandular destruction, mucosal atrophy, and hypochlorhydria, predisposing to gastric ulceration, intestinal metaplasia, and gastric adenocarcinoma.",
+   "say": "The anatomical pattern of chronic gastritis dictates acid secretion and clinical presentation. Antral-predominant inflammation destroys somatostatin D cells, provoking hypergastrinemia and excessive acid production. High acid loads damage the duodenal bulb, leading to duodenal ulcers. In contrast, corpus pangastritis causes glandular atrophy and low acid secretion, predisposing to gastric ulcers and adenocarcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antral-predominant gastritis",
+     "points": [
+      "Destruction of mucosal D cells (low somatostatin)",
+      "Hypergastrinemia and elevated acid secretion",
+      "Predisposes to duodenal peptic ulcers",
+      "Protective against gastric adenocarcinoma"
+     ]
+    },
+    "right": {
+     "title": "Corpus-predominant pangastritis",
+     "points": [
+      "Extensive parietal cell destruction and atrophy",
+      "Hypochlorhydria or complete achlorhydria",
+      "Predisposes to benign gastric ulcers",
+      "Recognized precursor to gastric adenocarcinoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Non-invasive diagnostic modalities evaluate active ongoing gastric colonization with high diagnostic accuracy. Performing a carbon-13 or carbon-14 **urea breath test** (UBT) is the non-invasive test of choice for detecting active infection and confirming post-treatment eradication. The patient ingests isotope-labeled urea; bacterial urease cleaves the compound, releasing labeled carbon dioxide that is measured in exhaled breath. Stool antigen testing utilizing monoclonal antibodies exhibits equivalent diagnostic accuracy. Patients must withhold proton pump inhibitors for two weeks and bismuth or antibiotics for four weeks prior to testing to avoid false-negative results.",
+   "say": "Non-invasive diagnostic tools detect active gastric colonization with high precision. Performing a carbon-labeled urea breath test is the preferred investigation to diagnose active infection and confirm eradication. Ingested labeled urea is cleaved by bacterial urease, releasing labeled carbon dioxide in exhaled breath. Stool antigen testing offers comparable accuracy. Patients must avoid proton pump inhibitors for two weeks prior to testing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ingest",
+      "label": "Oral ingestion of 13C- or 14C-labeled urea"
+     },
+     {
+      "id": "urease",
+      "label": "Bacterial urease converts labeled urea to 13CO2 & NH3"
+     },
+     {
+      "id": "blood",
+      "label": "Absorption of labeled 13CO2 into systemic circulation"
+     },
+     {
+      "id": "breath",
+      "label": "Exhaled breath mass spectrometry detects active infection"
+     }
+    ],
+    "edges": [
+     [
+      "ingest",
+      "urease"
+     ],
+     [
+      "urease",
+      "blood"
+     ],
+     [
+      "blood",
+      "breath"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biopsy-based invasive diagnostic tests performed during upper endoscopy provide direct histological and enzymatic confirmation. Placing an antral mucosal biopsy into a commercial **rapid urease test** (Campylobacter-like organism or CLO test) gel causes a rapid color change from yellow to magenta within hours if bacterial urease is present, confirming colonization. Endoscopic histology provides simultaneous evaluation of mucosal inflammation, intestinal metaplasia, and glandular atrophy. Direct bacterial culture allows antibiotic susceptibility testing, while polymerase chain reaction rapidly identifies clarithromycin resistance mutations in the bacterial 23S ribosomal RNA gene.",
+   "say": "Biopsy-based tests performed during upper endoscopy provide direct enzymatic and histological confirmation. Inoculating mucosal tissue into a rapid urease test gel causes a color change to magenta if bacterial urease is present. Endoscopic histology concurrently evaluates glandular atrophy and metaplasia. Bacterial culture allows susceptibility testing, while molecular assays identify clarithromycin resistance mutations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic modality",
+     "Mechanism of detection",
+     "Sensitivity & Specificity",
+     "Pre-test requirements"
+    ],
+    "rows": [
+     [
+      "Urea breath test",
+      "Exhaled labeled 13CO2 gas",
+      "> 95% sensitive and specific",
+      "Stop PPIs 2 wks; antibiotics 4 wks"
+     ],
+     [
+      "Stool antigen test",
+      "Monoclonal enzyme immunoassay",
+      "> 95% sensitive and specific",
+      "Stop PPIs 2 wks; antibiotics 4 wks"
+     ],
+     [
+      "Rapid urease test",
+      "pH-sensitive biopsy gel color shift",
+      "> 90% sensitive and specific",
+      "Requires invasive upper endoscopy"
+     ],
+     [
+      "Serology (IgG)",
+      "Circulating anti-H. pylori antibodies",
+      "Poor specificity (cannot track cure)",
+      "No medication cessation required"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rising worldwide clarithromycin resistance has modified recommended empirical antimicrobial eradication regimens. Traditional first-line **triple therapy** combines a standard-dose proton pump inhibitor twice daily with clarithromycin 500 mg twice daily and amoxicillin 1000 mg twice daily (or metronidazole 500 mg in penicillin allergy) for fourteen days. However, in regions where local clarithromycin resistance exceeds fifteen percent, bismuth-based quadruple therapy (PPI, bismuth subsalicylate, metronidazole, and tetracycline for 14 days) is established as the preferred first-line eradication protocol. Confirming eradication via breath or stool testing at least four weeks post-treatment is mandatory.",
+   "say": "Rising worldwide clarithromycin resistance has altered empirical eradication strategies. Traditional triple therapy combines a proton pump inhibitor with clarithromycin and amoxicillin for fourteen days. Where clarithromycin resistance exceeds fifteen percent, bismuth quadruple therapy combining a proton pump inhibitor, bismuth, metronidazole and tetracycline is preferred. Confirming cure four weeks after finishing antibiotics is mandatory.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clarithromycin triple therapy",
+     "points": [
+      "PPI twice daily",
+      "Clarithromycin 500 mg twice daily",
+      "Amoxicillin 1000 mg twice daily",
+      "Restricted to areas with clarithromycin resistance < 15%"
+     ]
+    },
+    "right": {
+     "title": "Bismuth quadruple therapy",
+     "points": [
+      "PPI twice daily",
+      "Bismuth subsalicylate 524 mg four times daily",
+      "Metronidazole 500 mg three to four times daily",
+      "Tetracycline 500 mg four times daily for 14 days"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inhibition of gastroprotective prostaglandin synthesis represents the second major etiological pathway of peptic ulceration. Ingesting non-steroidal anti-inflammatory drugs drives **NSAID ulcer** formation by inhibiting cyclooxygenase-1 (COX-1), blocking mucosal prostaglandin E2 and prostacyclin synthesis. This reduces gastric mucosal blood flow, diminishes protective bicarbonate and mucus secretion, and increases parietal acid secretion. Concurrently, topical acidic properties of NSAIDs cause direct epithelial injury. High-risk patients, including elderly individuals, prior ulcer bleeders, or those on concurrent anticoagulants or corticosteroids: require prophylactic co-prescription of misoprostol or a daily proton pump inhibitor.",
+   "say": "Inhibition of mucosal prostaglandin production represents a major pathway of peptic injury. Ingesting non-steroidal anti-inflammatory drugs promotes ulcer formation by blocking cyclooxygenase-1, reducing protective prostaglandin E2 synthesis. This decreases mucosal blood flow and impairs mucus secretion. Concurrently, acidic compounds damage surface epithelial cells. High-risk individuals require prophylactic proton pump inhibitors or misoprostol co-prescription.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "nsaid",
+      "label": "Systemic NSAID administration"
+     },
+     {
+      "id": "cox",
+      "label": "Inhibition of gastroprotective COX-1 enzyme"
+     },
+     {
+      "id": "pg",
+      "label": "Depletion of mucosal PGE2 & prostacyclin"
+     },
+     {
+      "id": "ulcer",
+      "label": "Impaired mucosal blood flow, mucus drop, & ulceration"
+     }
+    ],
+    "edges": [
+     [
+      "nsaid",
+      "cox"
+     ],
+     [
+      "cox",
+      "pg"
+     ],
+     [
+      "pg",
+      "ulcer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe, refractory peptic ulceration accompanied by chronic secretory diarrhoea suggests an autonomous gastrin-secreting neuroendocrine neoplasm. Developing **Zollinger-Ellison syndrome** is caused by a gastrinoma, located predominantly in the duodenum (60%) or pancreas (30%) within the anatomical gastrinoma triangle. Autonomous hypersecretion of gastrin stimulates massive parietal cell hyperplasia, increasing basal gastric acid secretion manifold. Patients develop multiple, recurrent, refractory peptic ulcers located in atypical anatomical sites such as the distal duodenum or jejunum. Approximately twenty-five percent of gastrinomas occur in association with multiple endocrine neoplasia type 1 (MEN-1).",
+   "say": "Refractory peptic ulceration accompanied by chronic diarrhea suggests an autonomous gastrin-secreting neuroendocrine neoplasm. Developing Zollinger-Ellison syndrome is caused by a gastrinoma situated within the anatomical gastrinoma triangle. Autonomous gastrin release stimulates profound parietal cell hyperplasia and extreme acid production. Patients develop multiple atypical ulcers in the distal duodenum and jejunum. One quarter of cases link to multiple endocrine neoplasia type one.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/zollinger-ellison-fig1.webp",
+    "alt": "Anatomical gastrinoma triangle boundaries, neuroendocrine tumor spread, and acid hypersecretion.",
+    "caption": "Gastrinoma localization within the gastrinoma triangle and acid hypersecretion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnostic evaluation of suspected gastrinoma requires demonstrating hypergastrinemia in the presence of acidic gastric juice. An elevated fasting serum gastrin level (> 1000 pg/mL) with gastric pH < 2.0 confirms the diagnosis. In equivocal cases, a **secretin stimulation test** is the diagnostic gold standard: intravenous injection of secretin (2 U/kg) paradoxically stimulates gastrin release from gastrinoma cells, producing an increase in serum gastrin > 120 pg/mL over baseline within fifteen minutes. Somatostatin receptor scintigraphy (68Ga-DOTATATE PET-CT) localizes the primary tumor and distant hepatic metastases.",
+   "say": "Diagnostic evaluation of suspected gastrinoma requires proving hypergastrinemia in the presence of low gastric pH. Fasting gastrin exceeding one thousand picograms per milliliter confirms the diagnosis. For borderline values, a secretin stimulation test serves as the gold standard, producing a paradoxical surge in serum gastrin above baseline. Gallium-labeled somatostatin receptor PET-CT precisely localizes the primary tumor and metastases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic investigation",
+     "Physiological mechanism",
+     "Diagnostic criteria for gastrinoma"
+    ],
+    "rows": [
+     [
+      "Fasting serum gastrin",
+      "Measures circulating gastrin peptide",
+      "> 1000 pg/mL in presence of pH < 2.0"
+     ],
+     [
+      "Secretin stimulation test",
+      "Paradoxical release from tumor cells",
+      "Serum gastrin rise > 120 pg/mL post-secretin"
+     ],
+     [
+      "68Ga-DOTATATE PET-CT",
+      "Binds somatostatin receptors (SSTR2)",
+      "High sensitivity localization of tumor & nodes"
+     ],
+     [
+      "Endoscopic ultrasound (EUS)",
+      "High-frequency transducer visualization",
+      "Detects small submucosal duodenal/pancreatic tumors"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
