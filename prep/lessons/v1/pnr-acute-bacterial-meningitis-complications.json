@@ -1,0 +1,239 @@
+{
+  "id": "pnr-acute-bacterial-meningitis-complications",
+  "title": "Pediatric Bacterial Meningitis: Pathogens, CSF Interpretation and Complications",
+  "subject": "ss-paediatric-neurology",
+  "module": "CNS Demyelinating and Inflammatory Disorders",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "The causative organisms in bacterial meningitis vary by pediatric age bracket. Neonates are susceptible to perinatal maternal vaginal flora, whereas older infants contract encapsulated respiratory pathogens.",
+      "tx": "Distinguish the **Age-specific bacterial pathogens** to direct empirical antimicrobial coverage. In neonates (under 1 month of age), maternal genital tract flora predominate: Streptococcus agalactiae (Group B Streptococcus), Escherichia coli (K1 capsular antigen), and Listeria monocytogenes. Beyond the neonatal period into early childhood, encapsulated respiratory tract organisms dominate: Streptococcus pneumoniae, Neisseria meningitidis, and Haemophilus influenzae type b in unimmunized children (Empirical antimicrobial regimens).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Age group",
+          "Dominant bacterial pathogens",
+          "First-line antimicrobial regimen"
+        ],
+        "rows": [
+          [
+            "Neonates (< 28 days)",
+            "Group B Strep, E. coli K1, Listeria monocytogenes",
+            "Ampicillin + Cefotaxime (or Gentamicin)"
+          ],
+          [
+            "Infants & children (> 1 month)",
+            "Streptococcus pneumoniae, Neisseria meningitidis",
+            "Ceftriaxone (or Cefotaxime) + Vancomycin"
+          ],
+          [
+            "Post-neurosurgical / VP shunt",
+            "Staphylococcus epidermidis, S. aureus, Pseudomonas",
+            "Vancomycin + Cefepime (or Meropenem)"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Analysis of cerebrospinal fluid reveals marked neutrophilic pleocytosis, elevated protein, and depressed glucose. Calculating the CSF to blood glucose ratio provides definitive confirmation.",
+      "tx": "Interpret the **CSF diagnostic benchmarks** during emergency evaluation. Classic untreated bacterial meningitis produces a marked cerebrospinal fluid pleocytosis exceeding 1000 to 5000 white blood cells per microliter with greater than 80% to 90% polymorphonuclear neutrophils. The cerebrospinal fluid to blood glucose ratio is markedly depressed below 0.4 (often < 0.2), protein is significantly elevated above 100 to 500 mg/dL, and CSF opening pressure is elevated above 20 to 28 cmH2O (Empirical antimicrobials).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bacterial Meningitis CSF",
+          "points": [
+            "Leukocytes > 1000/mcL; > 80% neutrophils",
+            "CSF to blood glucose ratio < 0.4 (often < 0.2)",
+            "Protein markedly elevated (100-500 mg/dL)",
+            "Positive Gram stain in 60-80%"
+          ]
+        },
+        "right": {
+          "title": "Viral Aseptic Meningitis CSF",
+          "points": [
+            "Leukocytes 50-500/mcL; lymphocytic predominance",
+            "CSF to blood glucose ratio normal (> 0.6)",
+            "Protein normal or mildly elevated (< 100 mg/dL)",
+            "Gram stain negative; PCR confirms enterovirus/HSV"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Empirical intravenous antibiotics must be administered immediately without delay. Ceftriaxone combined with vancomycin covers resistant pneumococcal and meningococcal strains.",
+      "tx": "Administer **Empiric antimicrobial regimen** within the first hour of clinical suspicion. Beyond 1 month of age, standard first-line empirical therapy consists of ceftriaxone (100 mg/kg/day divided q12h, max 4 g/day) or cefotaxime (300 mg/kg/day divided q6-8h) combined with vancomycin (60 mg/kg/day divided q6h, targeting trough 15-20 mcg/mL) to guarantee bactericidal coverage against cephalosporin-resistant Streptococcus pneumoniae (Dexamethasone timing).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "susp",
+            "label": "Clinical suspicion of bacterial meningitis"
+          },
+          {
+            "id": "blood",
+            "label": "Immediate blood cultures (do not delay therapy for LP)"
+          },
+          {
+            "id": "abx",
+            "label": "Ceftriaxone (100 mg/kg/day) + Vancomycin (60 mg/kg/day)"
+          }
+        ],
+        "edges": [
+          [
+            "susp",
+            "blood"
+          ],
+          [
+            "blood",
+            "abx"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Adjunctive dexamethasone suppresses inflammatory cytokine cascades and prevents sensorineural hearing loss. The first dose must precede or coincide with the initial antibiotic infusion.",
+      "tx": "Administer **Adjuvant dexamethasone timing** before or concurrently with the first dose of antimicrobial therapy. Dexamethasone (0.15 mg/kg/dose IV every 6 hours for 4 days or 0.4 mg/kg q12h for 2 days) dampens subarachnoid space tumor necrosis factor-alpha and interleukin-1 beta release triggered by antibiotic-induced bacterial lysis. It significantly reduces severe sensorineural hearing loss in Haemophilus influenzae type b meningitis and mortality in Streptococcus pneumoniae meningitis, but provides no benefit if given > 1 hour after antibiotics (Subdural effusion).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Evidence-based protocol",
+          "Clinical rationale"
+        ],
+        "rows": [
+          [
+            "Dose & frequency",
+            "0.15 mg/kg IV every 6 hours x 4 days",
+            "Suppresses subarachnoid pro-inflammatory cytokine surge"
+          ],
+          [
+            "Timing relative to abx",
+            "10-20 minutes before or WITH first antibiotic",
+            "Blocks bacterial lysis-induced inflammatory shockwave"
+          ],
+          [
+            "Primary clinical benefit",
+            "Reduces severe sensorineural hearing loss",
+            "Proven benefit in H. influenzae b & S. pneumoniae"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Subdural effusions frequently complicate bacterial meningitis in young infants. Most resolve spontaneously and do not require neurosurgical drainage unless intracranial pressure rises.",
+      "tx": "Recognize **Sensorineural hearing loss surveillance** in infants undergoing treatment. Subdural effusions develop in 15% to 50% of infants with bacterial meningitis (especially Haemophilus influenzae and pneumococcus), typically manifesting as persistent low-grade fever, enlarging head circumference, or full anterior fontanelle. Neuroimaging (cranial ultrasound or MRI) demonstrates sterile, hypodense crescentic subdural fluid collections over the cerebral convexities. Routine aspiration is contraindicated; conservative observation is standard unless focal deficits, seizures, or mass effect ensue (SIADH hyponatremia).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "infant",
+            "label": "Infant with persistent fever / bulging fontanelle on antibiotics"
+          },
+          {
+            "id": "mri",
+            "label": "MRI/US: Subdural fluid over convexities without mass effect"
+          },
+          {
+            "id": "plan",
+            "label": "Conservative management: Continue IV antibiotics; do not tap"
+          }
+        ],
+        "edges": [
+          [
+            "infant",
+            "mri"
+          ],
+          [
+            "mri",
+            "plan"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Syndrome of inappropriate antidiuretic hormone secretion leads to water retention and dilutional hyponatremia. Fluid restriction must be managed cautiously to avoid compromising cerebral perfusion.",
+      "tx": "Manage **Subdural effusion vs empyema** during acute neurointensive care. Inflammatory hypothalamic-pituitary irritation induces non-osmotic release of arginine vasopressin, producing euvolemic hyponatremia, high urine osmolality (> 100 mOsm/kg), and elevated urine sodium (> 40 mEq/L). While mild fluid restriction (two-thirds maintenance) was historically practiced, current neurotrauma guidelines recommend isotonic maintenance fluids (0.9% normal saline with 5% dextrose) to avoid intravascular volume depletion and maintain cerebral perfusion pressure (Cerebral sinus thrombosis).",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "SIADH Pathophysiology",
+          "points": [
+            "Non-osmotic central vasopressin release",
+            "Dilutional hyponatremia (Na < 135 mEq/L)",
+            "Urine osmolality > serum osmolality; high urine Na"
+          ]
+        },
+        "right": {
+          "title": "Fluid Resuscitation Target",
+          "points": [
+            "Use isotonic maintenance (0.9% NaCl with D5)",
+            "Avoid hypotonic solutions (risk of cerebral edema)",
+            "Avoid severe fluid restriction to preserve CPP"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Septic thrombophlebitis of the cerebral venous sinuses leads to secondary venous infarction and seizures. Magnetic resonance venography confirms the lack of flow void.",
+      "tx": "Diagnose **Cranial imaging indications before LP** when clinical deterioration occurs despite antibiotic therapy. Endothelial injury and local hypercoagulability from adjoining meningeal inflammation can precipitate septic thrombosis of the superior sagittal sinus, transverse sinus, or cortical veins, manifesting with new-onset focal seizures, hemiparesis, or acute intracranial hypertension. Contrast-enhanced magnetic resonance venography demonstrates absent flow voids and the characteristic empty delta sign in the superior sagittal sinus (Audiological follow-up).",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Imaging modality",
+          "Diagnostic radiological sign",
+          "Pathology"
+        ],
+        "rows": [
+          [
+            "Contrast-enhanced CT",
+            "Empty delta sign in superior sagittal sinus",
+            "Thrombus non-enhancing lumen with rim enhancement"
+          ],
+          [
+            "MR Venography (MRV)",
+            "Absent flow void signal in major dural sinuses",
+            "Complete intraluminal flow occlusion"
+          ],
+          [
+            "Diffusion MRI",
+            "Parasagittal cortical restricted diffusion & hemorrhage",
+            "Venous hemorrhagic infarction and cytotoxic edema"
+          ]
+        ]
+      }
+    },
+    {
+      "say": "Sensorineural hearing loss represents the most prevalent long-term neurological sequela. Formal audiological assessment must be arranged for every survivor before hospital discharge.",
+      "tx": "Mandate **Chemoprophylaxis for close contacts** surveillance for all pediatric survivors of bacterial meningitis. Suppurative labyrinthitis occurs when bacteria traverse the cochlear aqueduct from the subarachnoid space into the perilymphatic fluid of the scala tympani, causing irreversible cochlear hair cell necrosis in up to 10% to 30% of cases. All infants and children must undergo auditory brainstem response (ABR) or otoacoustic emissions testing prior to discharge; rapid cochlear ossification requires urgent early cochlear implantation evaluation (Management complete).",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "path",
+            "label": "Meningeal spread via cochlear aqueduct into scala tympani"
+          },
+          {
+            "id": "abr",
+            "label": "Pre-discharge Auditory Brainstem Response (ABR) screening"
+          },
+          {
+            "id": "implant",
+            "label": "Rapid CT/MRI temporal bone: Urgent cochlear implant before fibrotic ossification"
+          }
+        ],
+        "edges": [
+          [
+            "path",
+            "abr"
+          ],
+          [
+            "abr",
+            "implant"
+          ]
+        ]
+      }
+    }
+  ]
+}

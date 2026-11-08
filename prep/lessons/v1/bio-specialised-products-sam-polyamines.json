@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "bio-specialised-products",
+ "subject": "biochemistry",
+ "title": "SAM, methyl gifts and polyamines",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**S-adenosylmethionine** (SAM), made from methionine plus ATP (all three phosphates spent, uniquely expensive activation), is the universal methyl donor for over a hundred reactions: creatine synthesis (largest consumer), PNMT adrenaline methylation, phosphatidylcholine synthesis, DNA CpG and histone methylation, neurotransmitter breakdown by COMT, and drug methylations (thiopurine TPMT, catechol drugs). Its product SAH strongly inhibits methyltransferases, so the SAM to SAH ratio (methylation potential) is the regulated variable.",
+   "say": "S-adenosylmethionine is the universal methyl donor for creatine, adrenaline, phospholipid, DNA and drug methylation. Its product inhibits methyltransferases, so the SAM to SAH ratio is the regulated variable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Methylation consumer",
+     "Product significance"
+    ],
+    "rows": [
+     [
+      "Guanidinoacetate to creatine",
+      "Largest SAM consumer daily"
+     ],
+     [
+      "Noradrenaline to adrenaline (PNMT)",
+      "Medulla output identity"
+     ],
+     [
+      "DNA and histone methyltransferases",
+      "Epigenetic silencing patterns"
+     ],
+     [
+      "COMT catechol breakdown",
+      "Drug and transmitter clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After donating, SAH hydrolyses to **homocysteine**, whose remethylation (methionine synthase, methyl THF plus B12, or betaine) regenerates methionine and SAM, while transsulfuration exits to cysteine and glutathione. Folate or B12 failure therefore simultaneously raises homocysteine, traps folate as methyl THF, lowers SAM methylation and impairs myelin and DNA synthesis, one loop explaining megaloblastic blood, thrombosis tendency and neuropsychiatric disease together.",
+   "say": "Homocysteine remethylation regenerates methionine and SAM, while transsulfuration exits to glutathione. Folate or B12 failure raises homocysteine, traps folate and lowers methylation, explaining blood, clot and brain disease together.",
+   "vis": {
+    "kind": "flow",
+    "title": "Methyl loop in one circuit",
+    "nodes": [
+     {
+      "id": "met",
+      "label": "Methionine plus ATP"
+     },
+     {
+      "id": "sam",
+      "label": "SAM donates methyl"
+     },
+     {
+      "id": "sah",
+      "label": "SAH to homocysteine"
+     },
+     {
+      "id": "back",
+      "label": "Remethylate (folate, B12) or exit to cysteine"
+     }
+    ],
+    "edges": [
+     [
+      "met",
+      "sam"
+     ],
+     [
+      "sam",
+      "sah"
+     ],
+     [
+      "sah",
+      "back"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Polyamines** (putrescine, spermidine, spermine) grow from ornithine through ornithine decarboxylase (ODC, pyridoxal phosphate, shortest half life enzyme, growth and androgen induced, antizyme feedback) plus decarboxylated SAM donating aminopropyl groups. Positively charged at body pH, they stabilise DNA, ribosomes and membranes and surge in proliferation, wound healing and hair follicles, making ODC a drug target (eflithornine DFMO in sleeping sickness and hirsutism, investigated in neuroblastoma maintenance).",
+   "say": "Polyamines grow from ornithine through ornithine decarboxylase plus decarboxylated SAM. They stabilise DNA in proliferating cells, making the enzyme a drug target in sleeping sickness and neuroblastoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Polyamine synthesis ON",
+     "points": [
+      "Growth, healing, spermatogenesis",
+      "ODC induced, antizyme low",
+      "DNA stabilised for division"
+     ]
+    },
+    "right": {
+     "title": "Polyamine synthesis blocked (DFMO)",
+     "points": [
+      "Trypanosomes starve (static)",
+      "Hair growth slowed topically",
+      "Hearing monitored systemically"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Glycine plus succinyl-CoA (ALA synthase, next module) and glutamate to **heme** and GABA respectively remind you that specialised products reuse TCA intermediates as much as amino acids. Carnitine (lysine methylated by SAM then hydroxylated, needing vitamin C and iron) and taurine (cysteine oxidation, bile conjugation, retinal osmolyte) complete one line products examiners attach to amino acid stems opportunistically.",
+   "say": "Specialised products reuse TCA intermediates as much as amino acids. Carnitine needs SAM methylation then vitamin C hydroxylation, and taurine conjugates bile, completing one line products examiners attach opportunistically.",
+   "vis": null
+  },
+  {
+   "tx": "Clinical methylation failures reward pattern reading: **homocysteine** elevation grades cardiovascular and thrombosis risk discussions (lowering vitamins disappointingly failed to cut events in trials, separating marker from mediator), MTHFR polymorphisms are common and usually clinically minor without vitamin deficiency, and thiopurine dosing needs TPMT (and NUDT15) genotyping because methylator failure shunts to myelotoxic thioguanine nucleotides.",
+   "say": "Homocysteine lowering failed to cut events, separating marker from mediator. Thiopurine dosing needs TPMT genotyping because methylator failure shunts to myelotoxic nucleotides, a prescribing pattern worth keeping.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Methylation test or drug",
+     "Action it changes"
+    ],
+    "rows": [
+     [
+      "TPMT and NUDT15 genotype",
+      "Thiopurine starting dose"
+     ],
+     [
+      "Homocysteine high",
+      "Hunt B12, folate, renal, CBS causes"
+     ],
+     [
+      "SAM dependent COMT variants",
+      "Teaching link: catechol drug handling"
+     ],
+     [
+      "Betaine therapy",
+      "Homocystinuria remethylation bypass"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trace one **methionine** molecule through all its fates (protein, SAM methyls, homocysteine loop, cysteine, glutathione, taurine, sulfate) and one tyrosine molecule through its own (protein, thyroid hormone iodination preview, catecholamines, melanin, fumarate energy). Heme synthesis next consumes glycine and succinyl-CoA at industrial scale in marrow, where amino acid, iron and B6 lessons converge in blood.",
+   "say": "Trace one methionine through SAM, homocysteine, cysteine and glutathione, and one tyrosine through catecholamines, melanin and energy. Heme synthesis next converges amino acid, iron and B6 lessons in marrow.",
+   "vis": {
+    "kind": "flow",
+    "title": "Two amino acids, whole syllabus",
+    "nodes": [
+     {
+      "id": "met",
+      "label": "Methionine to SAM, cysteine, GSH"
+     },
+     {
+      "id": "tyr",
+      "label": "Tyrosine to catechols, melanin, energy"
+     },
+     {
+      "id": "heme",
+      "label": "Glycine plus succinyl-CoA to heme"
+     }
+    ],
+    "edges": [
+     [
+      "met",
+      "heme"
+     ],
+     [
+      "tyr",
+      "heme"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "bio-lipid-synthesis",
+ "subject": "biochemistry",
+ "title": "Cholesterol synthesis, bile acids and statins",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Cholesterol synthesis builds the four fused ring sterol entirely from acetyl-CoA through cytosolic **HMG-CoA** and the endoplasmic reticulum enzyme HMG-CoA reductase, which spends NADPH to make mevalonate. Every tissue can synthesise cholesterol, but liver dominates export, and roughly a gram daily balances dietary intake, bile loss and steroid consumption in steady state adults.",
+   "say": "Cholesterol is built entirely from acetyl-CoA through HMG-CoA reductase, which spends NADPH to make mevalonate. Liver dominates export, and roughly a gram daily balances intake, bile loss and steroid use.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sterol assembly line",
+    "nodes": [
+     {"id": "aco", "label": "Acetyl-CoA (cytosol)"},
+     {"id": "hmg", "label": "HMG-CoA"},
+     {"id": "mev", "label": "Mevalonate (reductase step)"},
+     {"id": "cho", "label": "Cholesterol (rings closed)"}
+    ],
+    "edges": [["aco", "hmg"], ["hmg", "mev"], ["mev", "cho"]]
+   }
+  },
+  {
+   "tx": "**HMG-CoA reductase** is controlled at every level examiners can name: sterols retain its transcription factor SREBP in the membrane (less enzyme made), insulin dephosphorylates it on while glucagon and AMP kinase switch it off, sterols accelerate its degradation, and cholesterol esterification by ACAT drains the free pool. Statins competitively inhibit this single step, lowering liver cholesterol until LDL receptors multiply to clear blood LDL.",
+   "say": "HMG-CoA reductase is controlled by SREBP transcription, covalent switching, degradation and esterification. Statins competitively inhibit this step, lowering liver cholesterol until LDL receptors multiply to clear blood LDL.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Control layer", "Signal", "Reductase result"],
+    "rows": [
+     ["Transcription (SREBP)", "Low sterols release SREBP", "More enzyme made"],
+     ["Covalent", "Insulin on, glucagon off", "Activity follows feeding"],
+     ["Degradation", "Sterols accelerate destruction", "Enzyme half life shortens"],
+     ["Drug", "Statins compete at active site", "LDL receptors up, LDL falls"]
+    ]
+   }
+  },
+  {
+   "tx": "Do not confuse the two HMG-CoA pools: cytosolic HMG-CoA (from HMG-CoA synthase one) feeds cholesterol, while mitochondrial HMG-CoA feeds **ketones** during fasting. Same name, opposite compartments and opposite nutritional states; stems exploit the confusion deliberately. Mevalonate also supplies isoprenoids for ubiquinone, dolichol and protein prenylation, which is why reductase biology exceeds cholesterol alone.",
+   "say": "Cytosolic HMG-CoA feeds cholesterol, while mitochondrial HMG-CoA feeds ketones during fasting. Same name, opposite compartments and opposite states. Mevalonate also supplies isoprenoids for ubiquinone and prenylation.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Cytosolic HMG-CoA (fed)", "points": ["To mevalonate and cholesterol", "Reductase statin target", "Insulin favoured"]},
+    "right": {"title": "Mitochondrial HMG-CoA (fasting)", "points": ["To ketone bodies", "Lyase releases acetoacetate", "Glucagon favoured"]
+    }
+   }
+  },
+  {
+   "tx": "The liver disposes cholesterol as bile acids through rate limiting **7-alpha hydroxylase** (CYP7A1), making primary cholic and chenodeoxycholic acids, conjugated with glycine or taurine to bile salts. Gut bacteria deconjugate and dehydroxylate them to secondary deoxycholic and lithocholic acids. Vitamin C deficiency impairs the hydroxylase in classic teaching, linking scurvy to cholesterol handling.",
+   "say": "Liver disposes cholesterol as bile acids through rate limiting 7-alpha hydroxylase. Gut bacteria make secondary bile acids from primary ones. Vitamin C deficiency impairs the hydroxylase in classic teaching.",
+   "vis": null
+  },
+  {
+   "tx": "Bile salts recycle through the **enterohepatic circulation** six to ten times daily (ileal transporters reclaim about ninety five percent; faecal loss forces new synthesis). Bile acid sequestrants (cholestyramine) interrupt recycling, draining liver cholesterol into new bile and multiplying LDL receptors, at the cost of triglyceride rise and fat vitamin malabsorption. Gallstones form when cholesterol supersaturates bile relative to salts and phospholipid (the Admirand triangle).",
+   "say": "Bile salts recycle six to ten times daily, with ileal transporters reclaiming about ninety five percent. Sequestrants interrupt recycling and multiply LDL receptors. Gallstones form when cholesterol supersaturates bile.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Intervention", "Bile circuit effect", "LDL result"],
+    "rows": [
+     ["Cholestyramine (resin)", "Faecal bile loss up", "Receptors up, LDL down"],
+     ["Ileal resection or Crohn disease", "Recycling broken", "Bile diarrhoea, stones risk"],
+     ["Statin plus resin", "Synthesis and loss combined", "Additive LDL fall"]
+    ]
+   }
+  },
+  {
+   "tx": "Cholesterol fates complete the map: membranes (fluidity), steroid hormones (next lesson), vitamin D in skin, myelin bulk, and cholesteryl esters stored by ACAT intracellularly or created in plasma by **LCAT** on HDL. Plant sterols compete for gut absorption (sitosterolaemia loads them pathologically), and ezetimibe blocks the NPC1L1 transporter upstream of all synthesis control.",
+   "say": "Cholesterol becomes membranes, steroid hormones, vitamin D and esters stored by ACAT or created by LCAT on HDL. Plant sterols compete for absorption, and ezetimibe blocks the gut transporter upstream of synthesis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Five fates of cholesterol",
+    "nodes": [
+     {"id": "cho", "label": "Cholesterol pool"},
+     {"id": "mem", "label": "Membranes and myelin"},
+     {"id": "bile", "label": "Bile acids and salts"},
+     {"id": "hor", "label": "Steroids and vitamin D"}
+    ],
+    "edges": [["cho", "mem"], ["cho", "bile"], ["cho", "hor"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

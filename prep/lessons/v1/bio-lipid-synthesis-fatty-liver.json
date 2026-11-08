@@ -1,0 +1,85 @@
+{
+ "v": 1,
+ "module": "bio-lipid-synthesis",
+ "subject": "biochemistry",
+ "title": "Fatty liver and lipotropic factors",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Hepatic **steatosis** obeys a four term balance: fatty acid inflow (adipose lipolysis, diet), de novo lipogenesis, fatty acid oxidation, and VLDL export. Steatosis means the first two outrun the last two for weeks. Ultrasound bright liver and raised transaminases (ALT usually above AST in metabolic disease) are consequences, not definitions; biopsy or imaging fat quantification defines the condition.",
+   "say": "Steatosis means inflow and synthesis outrun oxidation and VLDL export for weeks. Bright liver and raised transaminases are consequences, not definitions. Imaging fat quantification defines the condition.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Balance term", "Raises liver fat when", "Lowers liver fat when"],
+    "rows": [
+     ["Inflow (lipolysis, diet)", "Insulin resistance frees adipose fat", "Weight loss, insulin sensitivity"],
+     ["Lipogenesis", "Fructose, alcohol, insulin driven", "Fasting, AMP kinase active"],
+     ["Oxidation", "Blocked by alcohol NADH, CPT faults", "Exercise, fibrates (PPAR alpha)"],
+     ["VLDL export", "ApoB or choline failure traps fat", "Adequate protein and choline"]
+    ]
+   }
+  },
+  {
+   "tx": "**Lipotropic factors** (choline foremost, with methionine, folate and B12 supporting methyl supply) prevent steatosis by enabling phosphatidylcholine synthesis for the VLDL surface coat; without coat material, triglyceride cannot leave and droplets swell hepatocytes. Choline deficiency during parenteral nutrition reproduces fatty liver reversibly, and methionine donates methyls through SAM for the alternative phospholipid methylation route.",
+   "say": "Choline enables phosphatidylcholine for the VLDL coat, without which triglyceride cannot leave. Methionine, folate and B12 support methyl supply. Choline deficiency during parenteral nutrition reproduces fatty liver reversibly.",
+   "vis": {
+    "kind": "flow",
+    "title": "Coat failure traps fat",
+    "nodes": [
+     {"id": "cho", "label": "Choline short"},
+     {"id": "pc", "label": "Phosphatidylcholine short"},
+     {"id": "vldl", "label": "VLDL export fails"},
+     {"id": "fat", "label": "Droplets swell hepatocytes"}
+    ],
+    "edges": [["cho", "pc"], ["pc", "vldl"], ["vldl", "fat"]]
+   }
+  },
+  {
+   "tx": "Alcohol attacks three terms simultaneously: acetate supplies lipogenic carbon, high **NADH** from ethanol oxidation blocks fatty acid oxidation and gluconeogenesis, and acetaldehyde injures export machinery. Alcoholic steatosis therefore reverses within weeks of abstinence if hepatitis and fibrosis have not supervened. The AST above ALT (often near two to one) pattern with high GGT separates alcoholic from metabolic dominance imperfectly but usefully.",
+   "say": "Alcohol supplies lipogenic carbon, blocks oxidation through NADH, and injures export machinery. Steatosis reverses within weeks of abstinence if fibrosis has not supervened. AST above ALT with high GGT suggests alcoholic dominance.",
+   "vis": {
+    "kind": "compare",
+    "left": {"title": "Alcoholic fatty liver pattern", "points": ["AST above ALT (about 2:1)", "GGT high, MCV high", "Abstinence reverses early fat"]},
+    "right": {"title": "Metabolic (NAFLD) pattern", "points": ["ALT above AST early", "Central obesity, diabetes", "Weight loss reverses early fat"]
+    }
+   }
+  },
+  {
+   "tx": "Metabolic fatty liver rides **insulin resistance**: adipose lipolysis resists insulin suppression (inflow up), hyperinsulinaemia drives hepatic lipogenesis (synthesis up), and hyperglycaemia supplies substrate. A subset progresses to steatohepatitis with ballooning and fibrosis (NASH), cirrhosis and hepatocellular carcinoma, now staged by elastography and scores rather than biopsy alone. Cardiovascular disease, not liver failure, kills most patients with simple steatosis.",
+   "say": "Metabolic fatty liver rides insulin resistance, with inflow and synthesis both raised. A subset progresses to steatohepatitis and cirrhosis. Cardiovascular disease kills most patients with simple steatosis, not liver failure.",
+   "vis": null
+  },
+  {
+   "tx": "Drug and toxin steatosis mechanisms reward classification: valproate and tetracyclines injure mitochondria (microvesicular, oxidation term), amiodarone and methotrexate accumulate phospholipid or fibrosis patterns, tamoxifen mimics metabolic disease, and rapid weight loss or jejunoileal bypass floods inflow. Acute fatty liver of **pregnancy** (fetal LCHAD link from the oxidation lesson) presents microvesicular failure with hypoglycaemia and coagulopathy needing delivery.",
+   "say": "Valproate injures mitochondria, amiodarone mimics metabolic disease, and acute fatty liver of pregnancy links to fetal LCHAD defects. Classify steatosis by which balance term each drug attacks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cause", "Term attacked", "Vesicle pattern"],
+    "rows": [
+     ["Alcohol, fructose excess", "Synthesis up, oxidation down", "Macrovesicular"],
+     ["Valproate, tetracycline, Reye aspirin link", "Mitochondrial oxidation", "Microvesicular, liver failure"],
+     ["Choline deficiency (TPN)", "Export coat", "Macrovesicular, reversible"],
+     ["Acute fatty liver of pregnancy", "Fetal and placental oxidation", "Microvesicular, deliver"]
+    ]
+   }
+  },
+  {
+   "tx": "Reversal follows the balance in reverse: seven to ten percent body weight loss, fructose and alcohol removal, diabetes and lipid control, and exercise (which burns hepatic fat even without weight change through **AMP kinase** and oxidation). No drug replaces substrate removal, though vitamin E and pioglitazone have biopsy trial niches in selected NASH. Recheck the four terms whenever a stem gives steatosis; the term named is the treatment hinted.",
+   "say": "Reversal needs seven to ten percent weight loss, fructose and alcohol removal, and exercise, which burns hepatic fat even without weight change. The balance term named in a stem is the treatment hinted.",
+   "vis": {
+    "kind": "flow",
+    "title": "Reversing the balance",
+    "nodes": [
+     {"id": "in", "label": "Cut inflow (weight, alcohol, fructose)"},
+     {"id": "ox", "label": "Raise oxidation (exercise)"},
+     {"id": "out", "label": "Restore export (protein, choline)"},
+     {"id": "rev", "label": "Steatosis regresses"}
+    ],
+    "edges": [["in", "rev"], ["ox", "rev"], ["out", "rev"]]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

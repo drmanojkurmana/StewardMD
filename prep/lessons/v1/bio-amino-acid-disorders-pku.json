@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "bio-amino-acid-disorders",
+ "subject": "biochemistry",
+ "title": "Phenylketonuria and tetrahydrobiopterin",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Phenylalanine hydroxylase** in liver converts phenylalanine to tyrosine using tetrahydrobiopterin (BH4), molecular oxygen and iron; its absence causes classic phenylketonuria, where phenylalanine floods alternative transamination routes to phenylpyruvate, phenyllactate and phenylacetate (mousy, musty urine and sweat). Tyrosine simultaneously becomes essential, thinning melanin (fair hair, blue eyes, eczema relative to siblings) and thyroid and catecholamine precursor supply.",
+   "say": "Phenylalanine hydroxylase converts phenylalanine to tyrosine using tetrahydrobiopterin. Its absence floods alternative routes to mousy phenylketones, while tyrosine becomes essential and melanin thins.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-amino-acid-disorders-gen1.webp",
+    "alt": "Cell view shows phenylalanine diverted to phenylpyruvate and phenylacetate around a blocked hydroxylase enzyme.",
+    "caption": "Blocked enzyme diverts phenylalanine to phenylketones, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Untreated brain injury is the tragedy screening prevents: phenylalanine saturates the large neutral amino acid transporter at the blood brain barrier, starving brain of tyrosine and tryptophan for dopamine and serotonin while injuring myelin and protein synthesis, producing irreversible intellectual disability, microcephaly, seizures, hyperactivity and eczema. Newborn **Guthrie** screening (now tandem mass spectrometry phenylalanine and ratio) plus diet started within the first weeks converts that fate to near normal cognition.",
+   "say": "Phenylalanine starves brain of tyrosine and tryptophan, producing irreversible disability without treatment. Newborn screening plus diet started within weeks converts that fate to near normal cognition.",
+   "vis": {
+    "kind": "flow",
+    "title": "Screening changes fate",
+    "nodes": [
+     {
+      "id": "scr",
+      "label": "Newborn screen day 2 to 5"
+     },
+     {
+      "id": "diet",
+      "label": "Low phenylalanine diet started early"
+     },
+     {
+      "id": "brain",
+      "label": "Brain competition relieved"
+     },
+     {
+      "id": "out",
+      "label": "Near normal cognition"
+     }
+    ],
+    "edges": [
+     [
+      "scr",
+      "diet"
+     ],
+     [
+      "diet",
+      "brain"
+     ],
+     [
+      "brain",
+      "out"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dietary treatment restricts natural protein to a titrated phenylalanine allowance, supplying the rest as phenylalanine free amino acid medical food, with tyrosine, vitamin and mineral fortification and lifelong blood spot monitoring (targets tighten in childhood and pregnancy). **Aspartame** (phenylalanine containing sweetener) is forbidden, food labelling literacy is survival skill, and sapropterin (synthetic BH4) frees a responsive minority (milder mutations with residual enzyme) to liberalise protein measurably.",
+   "say": "Treatment titrates natural protein with phenylalanine free medical food and lifelong monitoring. Aspartame is forbidden, and sapropterin frees a responsive minority to liberalise protein measurably.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diet element",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Natural protein",
+      "Counted phenylalanine allowance daily"
+     ],
+     [
+      "Medical amino acid food",
+      "Supplies protein without phenylalanine"
+     ],
+     [
+      "Aspartame sweetener",
+      "Avoid (phenylalanine source)"
+     ],
+     [
+      "Sapropterin trial",
+      "Test responsiveness, keep monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Maternal PKU** inverts protection: a treated woman who relaxes diet before conception exposes her genetically normal fetus to teratogenic phenylalanine, causing microcephaly, congenital heart disease, growth restriction and intellectual disability proportional to maternal levels. Preconception strict control (ideally before pregnancy, throughout) prevents it entirely, so adult PKU clinics now centre reproductive planning as much as neurology.",
+   "say": "Maternal phenylketonuria exposes a normal fetus to teratogenic phenylalanine, causing microcephaly and heart disease. Preconception strict control prevents it entirely, so adult clinics centre reproductive planning.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Untreated infant PKU",
+     "points": [
+      "Baby enzyme missing",
+      "Brain injured after birth",
+      "Diet rescues cognition"
+     ]
+    },
+    "right": {
+     "title": "Maternal PKU syndrome",
+     "points": [
+      "Baby enzyme normal",
+      "Brain and heart injured before birth",
+      "Maternal diet prevents"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "About one to two percent of hyperphenylalaninaemia is **BH4 deficiency** (synthesis GTP cyclohydrolase, PTPS, or recycling DHPR faults), where hydroxylase protein is normal but cofactor empty, and dopamine and serotonin synthesis (both BH4 dependent hydroxylases) fail alongside. Diet alone leaves progressive dystonia, truncal hypotonia with limb rigidity, seizures and drooling; treatment adds sapropterin or BH4 plus L-DOPA/carbidopa and 5-hydroxytryptophan, guided by CSF neurotransmitters and prolactin.",
+   "say": "BH4 deficiency empties the cofactor for three hydroxylases, so diet alone leaves dystonia and neurotransmitter failure. Treatment adds BH4 plus dopamine and serotonin precursors, guided by spinal fluid studies.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination separation** therefore runs: high phenylalanine with normal BH4 axis equals classic PKU (diet cornerstone); high phenylalanine with dystonia, parkinsonism or poor diet response equals BH4 axis failure (neurotransmitter replacement cornerstone); high maternal phenylalanine equals fetal syndrome regardless of baby genotype. Tyrosine downstream disorders (alkaptonuria, albinism, tyrosinaemias) occupy the next lesson on this same catabolic road.",
+   "say": "High phenylalanine with diet response means classic PKU, while dystonia despite diet means BH4 failure needing neurotransmitter replacement. Tyrosine downstream disorders occupy the next lesson on this road.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Diagnosis",
+     "Cornerstone"
+    ],
+    "rows": [
+     [
+      "High Phe, diet responsive",
+      "Classic PKU (hydroxylase)",
+      "Phenylalanine restriction"
+     ],
+     [
+      "High Phe, dystonia persists",
+      "BH4 synthesis or recycling",
+      "BH4 plus L-DOPA, 5-HTP"
+     ],
+     [
+      "Mother high Phe, baby normal gene",
+      "Maternal PKU syndrome",
+      "Preconception control"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
