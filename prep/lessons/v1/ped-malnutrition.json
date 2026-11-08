@@ -3,11 +3,11 @@
  "module": "ped-malnutrition",
  "subject": "paediatrics",
  "title": "Severe acute malnutrition and undernutrition: admit to rehabilitate",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Detect** (**MUAC** severe moderate cutoffs tapes, **WHZ** wasted z-scores, **oedema** bilateral pitting grades, **appetite** RUTF test passes, **stunting** height chronic flags, **weigh** admission trends, **classify** complicated uncomplicated, **screen** HIV TB contacts) with **counsels** (**mothers** feeding demonstrations, **hygiene** water sanitation) teaches; **register** (OTP SC admits) sorts. Children waste.",
-   "say": "MUACs WHZs oedemas appetites is detect: stuntings flag weighs trend classifies sort screens hunt counsels demo registers admit SCs stabilise. Tapes circle.",
+   "tx": "Severe acute malnutrition is detected by anthropometry, oedema, and appetite. **MUAC** and weight for height z score identify severe and moderate wasting, bilateral pitting **oedema** alone can define severe disease, and stunting reflects chronic undernutrition. An RUTF appetite test separates children who can eat from those needing admission, and classification into complicated or uncomplicated disease decides outpatient or stabilisation care. Screen for HIV and tuberculosis contacts, demonstrate feeding and hygiene to mothers, and register children correctly.",
+   "say": "Detection uses simple measurements that community workers can perform. Mid upper arm circumference identifies children at highest risk. Bilateral oedema signals severe disease even without severe wasting. The appetite test separates outpatient care from admission. Screening also searches for infections that commonly accompany malnutrition.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/ped-malnutrition-fig1.webp",
@@ -17,19 +17,30 @@
    }
   },
   {
-   "tx": "**Stabilise** (**hypoglycaemia** dextrose feeds, **hypothermia** kangaroo warms, **dehydration** ReSoMal cautious sips, **electrolytes** potassium magnesium replete, **infection** ampicillin gentamicin routine, **micronutrients** vitamin-A zinc folate, **F75** stabilisation starter, **transfuse** severe anaemia slow) with **monitors** (**feeds** three-hourly volumes, **oxygen** saturation dips) watches; **avoid** (iron diuretics early) withholds. Lives steady.",
-   "say": "Hypoglycaemias hypothermias dehydrations electrolytes is stabilise: infections cover micronutrients dose F75s start transfuses slow monitors watch avoids withhold irons wait diuretics harm. Steps save.",
+   "tx": "Stabilisation treats silent emergencies before catch up feeding begins. Correct **hypoglycaemia** with dextrose or feeds, warm hypothermia with kangaroo care, rehydrate cautiously with ReSoMal, and replace potassium and magnesium while treating infection routinely with ampicillin and gentamicin. Give micronutrients such as vitamin A, zinc, and folate, start **F75** as the stabilisation feed, and transfuse severe anaemia slowly. Withhold iron and diuretics early, feed three hourly, and monitor oxygen saturation and volumes carefully.",
+   "say": "Stabilisation corrects hidden emergencies before rapid feeding starts. Low glucose and low temperature can kill quietly in these children. Infection is treated routinely because signs may be absent. The starter feed is cautious and low in sodium. Iron is withheld early because it can worsen infection.",
    "vis": null
   },
   {
-   "tx": "**Rehabilitate** (**F100** catch-up transitions, **RUTF** home weekly gains, **breast** relactation supports, **play** stimulation psychosocial, **immunise** catch-up schedules, **deworm** albendazole quarterly, **discharge** target weights MUAC, **follow** monthly reviews) with **mothers** (**MUAC** home tapes, **feeds** enriched demonstrations) empowers; **relapse** (food insecurity) guards. Weights climb.",
-   "say": "F100s RUTFs breasts plays is rehabilitate: immunises catch deworms dose discharges target follows review mothers tape feeds enrich relapses guard insecurities persist. Grams gain.",
+   "tx": "Rehabilitation builds weight, development, and family skills after appetite returns. Transition to **F100** or ready to use therapeutic food, support relactation, add play and psychosocial stimulation, complete catch up immunisation, and deworm as scheduled. Discharge needs target weight or MUAC recovery, and monthly follow up detects relapse from food insecurity. Teach mothers home **MUAC** use and enriched feeding demonstrations so gains continue after discharge and clinic visits become less frequent over time.",
+   "say": "Rehabilitation is started when appetite returns and complications have settled. Energy dense feeds support rapid catch up growth. Play and stimulation protect development during recovery. Mothers learn to measure arm circumference at home. Follow up detects relapse early when food remains insecure.",
    "vis": null
   },
   {
-   "tx": "**Traps** (**refeeding** phosphate crashes, **overload** heart failure fluids, **missed** TB HIV lurks, **Kwash** flaky paint dermatosis, **hair** flag-sign straightens, **eyes** xerophthalmia night, **anaemia** folate B12 sorts, **audit** mortality reviews) with **prevent** (**exclusive** breast months, **complementary** timely diverse, **growth** monitoring plots) closes; **community** (screening volunteers) sustains. Futures nourish.",
-   "say": "Refeedings overloads misseds Kwashes is traps: hairs flag eyes dry anaemias pale audits review prevents guard exclusives nurse complementaries diversify communities screen volunteers weigh. Programs prevent.",
+   "tx": "The traps in malnutrition are refeeding, overload, and missed infection. **Refeeding syndrome** crashes phosphate when feeding restarts too fast, excess fluid precipitates heart failure, and tuberculosis or HIV can hide behind wasting. Kwashiorkor shows **flaky paint dermatosis**, flag sign hair changes, oedema, and xerophthalmia or anaemia clues that need sorting. Prevention rests on exclusive breastfeeding, timely diverse complementary feeding, growth monitoring, community screening by volunteers, and mortality audit to improve programmes.",
+   "say": "Refeeding can harm when nutrition restarts too quickly. Phosphate falls and the weakened heart may fail. Hidden tuberculosis or HIV infection can drive continued wasting. Skin and hair changes help recognise kwashiorkor clinically. Prevention depends on breastfeeding and timely complementary feeding.",
    "vis": null
+  },
+  {
+   "tx": "These photographs show **flaky paint dermatosis** with pitting oedema on the leg and pale banded flag sign hair in kwashiorkor. The skin peels like paint and the foot retains a thumbprint, while hair bands record episodes of poor nutrition. For exams, oedema with dermatosis and hair changes identifies **kwashiorkor** rather than pure marasmus, and it warns that cautious stabilisation must precede rehabilitation because refeeding and fluid overload can kill.",
+   "say": "These photographs show peeling skin and pitting oedema with banded hair. The skin change looks like flaking paint over the leg. Hair bands record periods when nutrition was poor. Together these signs identify kwashiorkor rather than simple wasting. Careful stabilisation must come before rapid rehabilitation feeding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-malnutrition-gen1.webp",
+    "alt": "Two photos showing peeling leg rash with foot swelling and back of head with pale banded hair.",
+    "caption": "Leg with flaky paint dermatosis, pitting edema, and banded hair. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   }
  ],
  "quiz": [

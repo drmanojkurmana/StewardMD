@@ -6111,3 +6111,222 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | ort-hand-wrist-conditions-gen1.webp (R2) | Coronal wrist MRI showing sclerotic collapsed lunate with staging diagram | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | ort-low-back-pain-gen1.webp (R2) | Lumbar radiographs showing degenerative and isthmic spondylolisthesis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | ort-malignant-bone-tumours-gen1.webp (R2) | AP and lateral knee radiographs showing metaphyseal lesion with periosteal reaction | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| nan-icp-brain-gen1.webp (R2) | Axial head CT showing midline shift, uncal herniation and effaced cisterns. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| nan-spine-awake-gen1.webp (R2) | Spine surgery setup with sensory and motor monitoring and anesthesia pump. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| neo-infections-jaundice-gen1.webp (R2) | Neonatal heel prick blood sampling for glucometer testing. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| neo-respiratory-gen1.webp (R2) | Diaphragmatic hernia with persistent pulmonary hypertension physiology | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| neo-resuscitation-gen1.webp (R2) | Illustration showing two thumb chest compressions and umbilical venous catheter. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-metabolic-bone-gen1.webp (R2) | Skull salt and pepper change in hyperparathyroidism. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-nerve-injuries-gen1.webp (R2) | Clinical photo showing wrist drop from radial nerve palsy. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-osteomyelitis-gen1.webp (R2) | Sagittal lumbar MRI showing infected disc and endplate edema | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-perthes-scfe-gen1.webp (R2) | Pelvic radiograph showing Perthes disease right hip. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-scoliosis-kyphosis-gen1.webp (R2) | Lateral thoracic radiograph showing hyperkyphosis, wedging and Schmorl nodes | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-septic-arthritis-joint-tb-gen1.webp (R2) | Acute septic arthritis of child knee. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-shoulder-elbow-conditions-gen1.webp (R2) | Shoulder MRI showing supraspinatus tear with muscle atrophy. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-skeletal-dysplasia-gen1.webp (R2) | Skeletal survey showing osteogenesis imperfecta fractures and features. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ort-spinal-injuries-gen1.webp (R2) | Axial and sagittal CT showing bilateral C2 pars fractures with subluxation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pan-neonatal-gen1.webp (R2) | Doppler echo showing patent ductus arteriosus shunt. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pan-paediatric-gen1.webp (R2) | Sagittal illustration of infant head and neck showing airway differences. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-acute-leukaemias-gen1.webp (R2) | Blood smear showing faggot cell with Auer rods. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-amyloidosis-gen1.webp (R2) | Twelve lead ECG showing low limb lead voltage and pseudoinfarct pattern. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-atherosclerosis-aneurysm-gen1.webp (R2) | Contrast CT showing infrarenal aneurysm sac with mural thrombus. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-autoimmune-gen1.webp (R2) |  | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-breast-gen1.webp (R2) | Ductal versus lobular breast carcinoma histology. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-cervix-uterus-gen1.webp (R2) | Cervical histology showing full thickness atypia with intact basement membrane. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-chronic-granulomatous-gen1.webp (R2) | Granulation tissue showing macrophages, fibroblasts, collagen and angiogenesis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-cns-non-neoplastic-gen1.webp (R2) | Axial brain CT showing hyperdense blood in basal cisterns. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-cns-tumours-gen1.webp (R2) | Sagittal brain MRI showing cerebellar mass and spinal seeding. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-coagulation-disorders-gen1.webp (R2) | Knee radiograph showing joint narrowing, epiphyseal overgrowth and cysts. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-colorectal-tumours-gen1.webp (R2) | Pedunculated adenomatous polyp undergoing snare polypectomy around stalk. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-diabetes-men-gen1.webp (R2) | Glomerulus with Kimmelstiel Wilson nodules and mesangial expansion. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-environmental-nutritional-gen1.webp (R2) | Axial chest CT showing pleural plaques and lower lobe fibrosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-gallbladder-pancreas-gen1.webp (R2) | Contrast CT showing pancreatic necrosis with peripancreatic stranding. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-glomerular-gen1.webp (R2) | Renal histology showing glomerular crescent compressing tuft. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-haematopoiesis-marrow-failure-gen1.webp (R2) | Cafe au lait macules, thumb anomaly and DEB testing | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-haemoglobinopathies-gen1.webp (R2) | Blood film showing sickled cells, target cells and polychromasia | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-haemolytic-acquired-gen1.webp (R2) | Schistocytes, helmet cell and thrombocytopenia in TTP smear. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-haemolytic-hereditary-gen1.webp (R2) | Blood film showing bite cells with Heinz body inset. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-hepatitis-cirrhosis-gen1.webp (R2) | Steatosis with Mallory-Denk bodies and satellitosis | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-hodgkin-lymphoma-gen1.webp (R2) | Chest CT showing bulky anterior mediastinal mass | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-immunodeficiency-gen1.webp (R2) | Histology showing necrotising granuloma with multinucleated giant cells. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-intestine-gen1.webp (R2) | Duodenal histology showing villous atrophy and crypt hyperplasia | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-iron-deficiency-gen1.webp (R2) | Microcytic hypochromic cells with pencil cells and anisopoikilocytosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-ischaemic-heart-gen1.webp (R2) | Cardiac histology showing wavy fibres, necrosis and neutrophils. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-joints-soft-tissue-gen1.webp (R2) | Needle urate crystals with negative birefringence in podagra | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-lung-tumours-gen1.webp (R2) | Histology showing small blue cells with moulding | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-lysosomal-storage-gen1.webp (R2) | Gaucher macrophages with crumpled tissue paper cytoplasm. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-male-genital-gen1.webp (R2) | Testis histology showing seminoma cells rimmed by lymphocytes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-megaloblastic-gen1.webp (R2) | Spinal MRI showing dorsal column T2 hyperintensity | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-metabolic-liver-tumours-gen1.webp (R2) | Eye photograph showing Kayser-Fleischer ring at limbus. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-mpn-mds-gen1.webp (R2) | Teardrop cells with leukoerythroblastic features in myelofibrosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-myocardial-pericardial-gen1.webp (R2) | Myocardial histology showing lymphocytic infiltrate and necrotic myocyte. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-nerve-muscle-gen1.webp (R2) | Thymoma on CT with fatigable ptosis and antibodies | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-nonclassic-inheritance-gen1.webp (R2) | Ragged red fibers showing subsarcolemmal mitochondrial proliferation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-obstructive-restrictive-gen1.webp (R2) | Emphysematous lung histology with destroyed septa and enlarged airspaces. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-oesophagus-stomach-gen1.webp (R2) | Barium swallow showing dilated oesophagus with distal tapering | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-ovary-gen1.webp (R2) | Granulosa cell tumour showing grooved nuclei and Call-Exner bodies. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-paediatric-diseases-gen1.webp (R2) | Neonatal lung histology with hyaline membranes and atelectasis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-pituitary-adrenal-gen1.webp (R2) | Adrenal adenoma CT in Conn syndrome workup | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-plasma-cell-histiocytic-gen1.webp (R2) | Histology showing grooved nuclei with eosinophils | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-platelet-disorders-gen1.webp (R2) | Fatty empty marrow in aplastic anaemia contrasted with blast packed leukaemic marrow. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-pneumoconiosis-gen1.webp (R2) | Asbestosis histology showing asbestos body and interstitial fibrosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-renal-urinary-tumours-gen1.webp (R2) | Abdominal CT showing large Wilms tumour | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-shock-gen1.webp (R2) | Warm vasodilated septic shock contrasted with cold vasoconstricted hypovolaemic shock signs. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-skin-gen1.webp (R2) | Basal cell carcinoma histology with palisading and stromal cleft. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-thyroid-parathyroid-gen1.webp (R2) | Papillary carcinoma with Annie nuclei and psammoma body | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-tubulointerstitial-cystic-gen1.webp (R2) | Urine microscopy showing muddy brown granular casts of acute tubular necrosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-valvular-heart-gen1.webp (R2) | H and E stained myocardium containing granulomatous Aschoff body with giant cells | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pat-vasculitis-vascular-tumours-gen1.webp (R2) | Artery with granulomatous inflammation, giant cells, and fragmented elastic lamina. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pcc-shock-sepsis-gen1.webp (R2) | Clinical photo showing chest urticaria and lip angioedema. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pcc-ventilation-sedation-gen1.webp (R2) | Neonatal cooling with EEG, ICP and timed control | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pcd-acquired-rhythm-gen1.webp (R2) | Twelve lead ECG showing regular narrow complex tachycardia at 180 bpm | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pcd-congenital-gen1.webp (R2) | Chest radiograph showing figure 3 sign and rib notching in coarctation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-acquired-heart-gen1.webp (R2) | Echocardiogram showing mitral stenosis with anterior leaflet doming. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-chromosomal-gen1.webp (R2) | Echocardiogram showing common AV valve and primum defect. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-chronic-respiratory-gen1.webp (R2) | CFTR defect with plugged bronchi, pancreatic and bowel disease | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-congenital-heart-gen1.webp (R2) | Frontal chest radiograph showing figure of 3 aorta and rib notching | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-diabetes-puberty-gen1.webp (R2) | Hand radiograph showing advanced carpal ossification versus reference. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-diarrhoea-gen1.webp (R2) | Comma shaped Vibrio with darting motility and rehydration therapy | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-emergencies-poisoning-gen1.webp (R2) | Intraosseous needle entering tibial marrow distal to growth plate. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-fluids-electrolytes-gen1.webp (R2) | Swollen versus shrunken neurons with pontine demyelination injury | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-glomerular-gen1.webp (R2) | Subepithelial humps with complement activation and neutrophil infiltration in glomerulus. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-growth-gen1.webp (R2) | Hand wrist radiograph showing delayed carpal ossification and physis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-haematology-gen1.webp (R2) | Petechiae and purpura with isolated thrombocytopenia, normal marrow | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-immunology-rheumatology-gen1.webp (R2) | Child with bilateral swollen knees and lost parapatellar contours. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-inborn-errors-gen1.webp (R2) | Slit lamp eye photograph showing central lens opacity cataract. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-inheritance-syndromes-gen1.webp (R2) | Parasternal echocardiogram showing dilated 5.6 cm aortic root | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-malnutrition-gen1.webp (R2) | Leg with flaky paint dermatosis, pitting edema, and banded hair. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-micronutrients-gen1.webp (R2) | Wrist radiograph showing cupping fraying and widened physis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-neonatal-infections-gen1.webp (R2) | Monitored newborn in safe hold with culture bottles and LP kit. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antihypertensives-gen1.webp (R2) | Amlodipine adverse effects with ankle oedema | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antimalarials-gen1.webp (R2) | G6PD analyser with haemolysis, hypnozoite and pregnancy warnings | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antiplatelets-fibrinolytics-gen1.webp (R2) | Axial CT with MCA clot and angiogram noting thrombolysis window | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antipsychotics-gen1.webp (R2) | Clozapine ANC monitoring with agranulocytosis and smoking note | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antiretrovirals-gen1.webp (R2) | Cellular illustration of antiretrovirals blocking reverse transcriptase and integrase. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antivirals-gen1.webp (R2) | Fundus photo of necrotic retina with haemorrhage and sheathing | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-asthma-cough-gen1.webp (R2) | Severe asthma airway with biologic therapy targets | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-beta-lactams-gen1.webp (R2) | Liver and gallbladder with biliary sludge, meningitis and gonorrhoea insets | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-bone-calcium-gen1.webp (R2) | Lateral spine radiograph showing osteoporotic wedge fractures | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-chelators-antidotes-gen1.webp (R2) | Chronic lead poisoning needing chelation therapy | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-cns-stimulants-gen1.webp (R2) | Brain section showing hypothalamic hypocretin loss, cataplexy inset, MSLT graph | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-contraceptives-uterine-gen1.webp (R2) | Compression ultrasound showing noncompressible thrombosed femoral vein | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-corticosteroids-gen1.webp (R2) | Iatrogenic Cushing syndrome with striae and bruising | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-diuretics-gen1.webp (R2) | Renal tubular cell showing aldosterone blockade, potassium sparing, clinical insets | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-general-anaesthetics-gen1.webp (R2) | Muscle cell showing RYR1 calcium storm and rigidity | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-haematinics-gen1.webp (R2) | Macro ovalocytes and hypersegmented neutrophil in megaloblastic anaemia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-immunosuppressants-gen1.webp (R2) | T cell showing sirolimus and mycophenolate proliferation blockade | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-insulin-gen1.webp (R2) | Liver ketogenesis, fruity breath and Kussmaul breathing, saline infusion | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-laxatives-ibd-gen1.webp (R2) | Endoscopy of continuous inflamed friable colonic mucosa | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-local-anaesthetics-gen1.webp (R2) | Spinal anaesthesia needle placement below conus at L3 L4. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-neuromuscular-blockers-gen1.webp (R2) | Malignant hyperthermia from RYR1 calcium flood treated by dantrolene. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-nsaids-gen1.webp (R2) | Endoscopy showing antral gastric ulcer with surrounding gastritis | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-opioids-gen1.webp (R2) | Three rung analgesic ladder from non-opioid to strong opioid | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-oral-antidiabetics-gen1.webp (R2) | Frontal chest radiograph showing cardiogenic pulmonary oedema signs. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-other-antibacterials-gen1.webp (R2) | Bilateral infiltrates in daptomycin associated eosinophilic pneumonia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-pituitary-gen1.webp (R2) | Coronal MRI showing sellar adenoma compressing optic chiasm. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-protein-synthesis-inhibitors-gen1.webp (R2) | Aminoglycoside binding 30S subunit causing mRNA misreading. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-sedative-hypnotics-gen1.webp (R2) | Tremulous monitored patient with CIWA scoring guiding benzodiazepine therapy. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-shock-pah-gen1.webp (R2) | Arteriole section showing PAH pathways and drug targets | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-targeted-anticancer-gen1.webp (R2) | Blood film showing left shifted myeloid series and basophilia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-thyroid-gen1.webp (R2) | Graves disease thyroid uptake with ophthalmopathy and therapy notes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-vitamins-dermatology-gen1.webp (R2) | Frontal wrist radiograph showing widened physes, cupping and fraying. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| php-cholestasis-gen1.webp (R2) | Liver with Roux-en-Y jejunal loop anastomosed at porta hepatis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| php-failure-metabolic-gen1.webp (R2) | Liver histology showing glycogen laden hepatocytes near portal tract. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phy-motility-gen1.webp (R2) | Fed segmentation mixing and fasting MMC housekeeper waves in small bowel. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pnp-aki-ckd-gen1.webp (R2) | Ultrasound showing bladder wall thickening with obstructive hydronephrosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pnp-glomerular-gen1.webp (R2) | Hypercellular glomerulus with neutrophils and endocapillary proliferation after streptococcal infection. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pnr-epilepsy-gen1.webp (R2) | Child in recovery position receiving buccal midazolam with oxygen nearby. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pnr-neuromuscular-development-gen1.webp (R2) | Floppy infant with SMN neuron gene and splicing therapies. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pon-leukaemia-lymphoma-gen1.webp (R2) | Lymph node histology showing binucleate Reed Sternberg cell with owl eye nucleoli | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pon-solid-tumours-gen1.webp (R2) | Knee radiographs showing metaphyseal lesion with sunburst reaction and Codman triangle. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-alcohol-gen1.webp (R2) | Brain illustration showing thalamic and mammillary lesions with classic triad. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-antidepressants-mood-stabilisers-gen1.webp (R2) | Agitated diaphoretic patient with clonus examined amid serotonergic drugs. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-antipsychotics-gen1.webp (R2) | Neuronal membrane rendering showing antipsychotic blocking D2 receptor amid dopamine | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-anxiety-gen1.webp (R2) | Student presenting in classroom with avoidance, arousal, and fear of scrutiny labeled. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-delirium-gen1.webp (R2) | Hospital room showing orientation aids, hydration, sensory aids and mobilisation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-dissociative-somatic-gen1.webp (R2) | Clinician validating somatic symptoms and reviewing diary with limited red flag checks. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-eating-gen1.webp (R2) | Clinical oral photo showing palatal erosion and enamel loss from vomiting. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-neurodevelopmental-gen1.webp (R2) | Schoolboy with motor and vocal tics in classroom | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-opioids-gen1.webp (R2) | Resuscitation for opioid overdose with miosis, respiratory depression, and naloxone treatment. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-other-psychoses-gen1.webp (R2) | Axial FLAIR MRI showing bilateral medial temporal lobe hyperintensities | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-other-substances-gen1.webp (R2) | Brains showing acute THC effects versus withdrawal syndrome | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-personality-gen1.webp (R2) | Group photo showing DBT skills group studying mindfulness and distress tolerance modules | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-psychopathology-gen1.webp (R2) | Diagrams of thought form defects and Schneider symptoms | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-schizophrenia-gen1.webp (R2) | Brain dopamine pathways linking striatal excess to prefrontal hypofunction in schizophrenia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-sexual-gender-gen1.webp (R2) | Clinical team reviewing care plan with distressed patient and family | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-stress-trauma-gen1.webp (R2) | Therapist guides graded imaginal and in vivo exposure using SUDS hierarchy. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| psy-suicide-gen1.webp (R2) | Clinician and patient completing safety plan listing warning signs and contacts | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-ablation-gen1.webp (R2) | Angiogram of Yttrium microspheres treating liver tumour | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-ablation-liver-directed-gen1.webp (R2) | Hepatic angiogram shows hypervascular tumour blush targeted for chemoembolisation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-neonatal-jaundice-gen1.webp (R2) | Blood smear microscopy showing spherocytes and polychromasia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-neonatal-misc-gen1.webp (R2) | Whole body cooling for HIE with suppressed aEEG | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-neonatal-respiratory-gen1.webp (R2) | Chest radiograph showing ground glass opacification with air bronchograms. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-newborn-care-gen1.webp (R2) | Delivery room photograph showing newborn skin to skin contact. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-oncology-gen1.webp (R2) | Marrow blasts with TdT positivity in pallor fever | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-preterm-lbw-gen1.webp (R2) | Fundus photograph showing fibrovascular ridge with plus disease. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-respiratory-infections-gen1.webp (R2) | Chest radiograph with dense lobar consolidation, air bronchograms, and effusion. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-seizures-gen1.webp (R2) | Bedside photograph showing child receiving rescue dose with monitor. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-thyroid-adrenal-gen1.webp (R2) | Guthrie card with urgent TSH recall for hypothyroidism | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| ped-urinary-tract-gen1.webp (R2) | Slit lamp photo showing corneal cystine crystals in stroma. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pgt-gi-nutrition-gen1.webp (R2) | Duodenal histology showing villous atrophy crypt hyperplasia and lymphocytes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| pgt-liver-gen1.webp (R2) | Asterixis exam with lactulose, ammonia chart and protein plan | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-adrenergic-agonists-gen1.webp (R2) | IM adrenaline to thigh for anaphylaxis emergency treatment | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-alpha-blockers-gen1.webp (R2) | Adrenal tumour with catecholamine surge and arterial alpha blockade | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antiarrhythmics-gen1.webp (R2) | Twelve lead ECG showing prolonged QT progressing to torsades de pointes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-anticholinesterases-gen1.webp (R2) | Synapse with acetylcholinesterase inhibition, SLUDGE signs and antidotes | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antidepressants-gen1.webp (R2) | TCA overdose ECG with wide QRS treated with bicarbonate | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antiemetics-gen1.webp (R2) | Brainstem diagram of cisplatin vomiting pathways blocked by antiemetics. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antiepileptics-gen1.webp (R2) | ICU team following lorazepam, fosphenytoin and midazolam EEG protocol | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| phm-antifungals-gen1.webp (R2) | Stained micrograph of broad aseptate hyphae showing angioinvasion | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-ablation-planning-gen1.webp (R2) | Liver tumour with microwave antenna hydrodissection and margin annotation | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-access-gen1.webp (R2) | Doppler of groin pseudoaneurysm during thrombin injection | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-access-closure-gen1.webp (R2) | Illustration shows suture foot closing arterial wall puncture. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-access-complications-gen1.webp (R2) | Pelvic angiogram shows intimal flap with contrast in false channel. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-access-radial-gen1.webp (R2) | Hand and forearm showing radial ulnar arteries and puncture sites | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-drainage-gen1.webp (R2) | Ultrasound and fluoroscopy of nephrostomy and antegrade stenting | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-drainage-aftercare-gen1.webp (R2) | Patient with capped abdominal drain, clamp, and warning card. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-drainage-nephrostomy-gen1.webp (R2) | Renal ultrasound shows dilated system with obstructing ureteric stone. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-drainage-ptbd-gen1.webp (R2) | Fluoroscopic cholangiogram shows PTBD catheter across hilar stricture to duodenum. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-embolisation-gen1.webp (R2) | Angiogram of GI bleeding treated by coil embolisation | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-embolisation-agents-gen1.webp (R2) | Angiogram shows microcatheter in target branch with contrast blush. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-embolisation-gi-gen1.webp (R2) | Arterial CT shows active intraluminal contrast blush from mesenteric branch. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-embolisation-trauma-gen1.webp (R2) | Axial CT shows splenic injury with arterial blush circled as embolisation target. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-malformation-gen1.webp (R2) | Catheter angiogram shows AVM nidus with feeding artery and draining vein. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-malformation-avm-gen1.webp (R2) | Axial brain MRI shows nidus with flow voids. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-malformation-sclerotherapy-gen1.webp (R2) | Ultrasound with Doppler shows compressible multilocular low flow venous malformation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-pain-spine-gen1.webp (R2) | Fluoroscopy shows balloon inflation then PMMA cement fill without leak. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-pain-spine-augmentation-gen1.webp (R2) | Balloon kyphoplasty with cement for vertebral fracture | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-pain-spine-neurolysis-gen1.webp (R2) | Fluoroscopy shows needle tip at lumbar medial branch. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-safety-gen1.webp (R2) | Angiography suite staff use shielding, collimation and pregnancy checklist. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-safety-anticoag-consent-gen1.webp (R2) | Clinicians discuss best interests and document material risks with family. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-safety-contrast-gen1.webp (R2) | Illustration of contrast kidney injury and hydration protection | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-safety-radiation-gen1.webp (R2) | Operator wears apron, thyroid collar, glasses near screen. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-selective-gen1.webp (R2) | Pelvic angiogram shows tortuous uterine artery and fibroid blush. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-selective-pae-gen1.webp (R2) | Pelvic angiogram shows prostatic perfusion with coil protection and rectal shunt. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-selective-uae-gen1.webp (R2) | Angiogram of uterine arteries during fibroid embolisation | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-stent-gen1.webp (R2) | Carotid angiogram with stent and embolic protection | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-stent-femoro-gen1.webp (R2) | Femoral angioplasty showing stenosis, dissection flap and treatment zones. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-stent-iliac-gen1.webp (R2) | Angiogram shows kissing iliac stents from aortic bifurcation preserving internal iliac. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-thrombolysis-gen1.webp (R2) | Angiogram shows lysis catheter across popliteal thrombus with meniscus and runoff. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-thrombolysis-ali-gen1.webp (R2) | Knee angiogram shows popliteal embolus with meniscus cutoff. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-thrombolysis-pe-gen1.webp (R2) | Saddle pulmonary embolus with right heart strain and lytic catheter. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-tips-gen1.webp (R2) | Fluoroscopy shows TIPS stent graft joining portal branch to hepatic vein. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-tips-encephalopathy-gen1.webp (R2) | Venogram of TIPS reduction stent for encephalopathy | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-tips-selection-gen1.webp (R2) | Portogram shows stent graft joining portal and hepatic veins. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-tips-technique-gen1.webp (R2) | TIPS access through hepatic vein into portal vein with needle. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-venous-gen1.webp (R2) | Coronal CT venogram showing SVC stricture, collaterals and stent landing zones | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-venous-catheter-gen1.webp (R2) | Chest image of jugular catheter tip position | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-venous-filter-gen1.webp (R2) | Coronal CT showing tilted IVC filter perforation with haematoma. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| rad-ir-venous-svc-gen1.webp (R2) | SVC obstruction with collaterals relieved by caval stent placement. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| spl-burns-hand-gen1.webp (R2) | Hand dissection mapping flexor tendon zones with tendon repair insets. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| spl-craniofacial-aesthetic-gen1.webp (R2) | Skull CT views and diagrams of cranial vault surgery. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| spl-reconstructive-gen1.webp (R2) | Free flap illustration showing microvascular anastomoses and Doppler monitoring. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-andrology-infertility-gen1.webp (R2) | Diagram comparing obstructive versus nonobstructive azoospermia testicular findings. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-bph-prostate-gen1.webp (R2) | T2W and ADC prostate MRI with fusion biopsy diagram and Gleason grading | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-oncology-gen1.webp (R2) | Scrotal ultrasound showing hypoechoic testicular tumour mass. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-paediatric-reconstructive-gen1.webp (R2) | Fetal ultrasound showing keyhole sign of urethral valves. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sur-stones-gen1.webp (R2) | CT coronal and axial showing calculus with hydronephrosis | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| tan-liver-gen1.webp (R2) | Thromboelastography tracing shows coagulopathy with prolonged times and low amplitude | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| tan-renal-crit-gen1.webp (R2) | Chest radiograph with diffuse infiltrates, ventilation, prone and bundle panels | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| vir-diagnosis-gen1.webp (R2) | Histology panels show CMV owl eye, rabies Negri, herpes Cowdry and koilocytes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| vir-hiv-emerging-gen1.webp (R2) | Clinical photo of positive tourniquet test with petechiae. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |

@@ -6,13 +6,13 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Ischaemic heart disease** results when coronary supply fails myocardial demand, most often from atherosclerotic plaque disruption with thrombosis. Stable narrowing causes exertional angina, while unstable plaque events cause the acute coronary syndromes. Transmural infarction follows prolonged total occlusion, whereas subendocardial infarction follows partial or brief occlusion with global demand stress.",
-   "say": "Ischaemic heart disease is supply failing demand. Stable plaque causes exertional angina. Disrupted plaque causes acute syndromes. Total lasting occlusion infarcts the full wall; partial occlusion injures the subendocardium.",
+   "tx": "**Ischaemic heart disease** develops when coronary supply fails to meet myocardial demand in a territory of heart muscle. Atherosclerotic plaque disruption with thrombosis causes most acute events, while stable narrowing causes exertional angina that settles with rest. **Transmural infarction** follows prolonged total occlusion and injures the full wall thickness in one arterial territory. **Subendocardial infarction** follows partial or brief occlusion with global demand stress from hypotension, tachycardia or severe anaemia.",
+   "say": "Ischaemic heart disease means supply fails demand, most often after plaque disruption triggers thrombosis inside a coronary artery. Stable narrowing causes exertional pain, while total lasting occlusion infarcts the full wall in that territory. Partial occlusion or severe demand stress causes injury mainly to the vulnerable inner wall instead of the whole thickness.",
    "vis": null
   },
   {
-   "tx": "Infarct evolution follows a wavefront from **subendocardium outward**, because the inner wall faces highest pressure and poorest perfusion. Irreversible injury begins after about twenty to forty minutes and completes over hours without reperfusion, defining the salvage window. Coagulative necrosis with wavy fibres appears first, then neutrophils, macrophages and granulation tissue in sequence.",
-   "say": "Necrosis spreads outward from subendocardium over hours, so early reperfusion salvages outer wall. Wavy fibres come first, then neutrophils and macrophages. Timing questions follow this sequence.",
+   "tx": "Infarct evolution follows a wavefront from the **subendocardium outward** because the inner wall faces the highest pressure and poorest perfusion. Irreversible injury begins after about twenty to forty minutes and completes over hours without reperfusion, which defines the salvage window. **Coagulative necrosis** with wavy fibres appears first, then neutrophils, macrophages and granulation tissue follow in sequence. Early reperfusion salvages the outer wall, so timing of treatment decides the final infarct size.",
+   "say": "Necrosis spreads outward from the inner wall over hours, so early reperfusion salvages muscle that would otherwise die. Wavy fibres appear first, then neutrophils and macrophages clear debris in a predictable healing sequence over days. Timing questions follow that sequence closely because each microscopic stage matches a different complication risk in patients.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Mechanical complications cluster when necrotic wall is weakest several days after transmural infarction. **Free wall rupture** causes tamponade, papillary muscle rupture causes torrential mitral regurgitation and ventricular septal rupture causes a new shunt murmur. True aneurysm forms later from thinned scar that balloons paradoxically, while pseudoaneurysm is a contained rupture needing urgent surgery.",
-   "say": "Days three to seven the wall is weakest and ruptures: free wall tamponades, papillary muscle floods the lungs, septum shunts. Late scar balloons into true aneurysm. Contained rupture is surgical.",
+   "tx": "The section shows pale elongated **wavy fibres** beside deeply pink necrotic myocytes that have lost normal striations from **coagulative necrosis**. Dark neutrophils infiltrate between the fibres, which places this infarct in the early inflammatory phase of healing. Recognising wavy fibres with necrosis and neutrophils matters because examiners use microscopy to time infarction and predict wall weakness. In the exam, neutrophil rich necrosis points toward the period when rupture risk begins to rise.",
+   "say": "This section shows wavy fibres beside bright necrotic muscle cells that neutrophils have begun to infiltrate between fibres. That combination is placing the infarct in its early inflammatory phase before macrophages clear the debris later. Microscopy timing matters greatly because wall weakness and rupture risk follow the healing stage in transmural infarction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-ischaemic-heart-gen1.webp",
+    "alt": "Heart muscle section with pale wavy fibres beside hypereosinophilic necrotic myocytes infiltrated by neutrophils.",
+    "caption": "Cardiac histology showing wavy fibres, necrosis and neutrophils. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Mechanical complications cluster when the necrotic wall becomes weakest several days after transmural infarction has destroyed muscle. **Free wall rupture** causes tamponade with rapid circulatory collapse, while papillary muscle rupture causes severe acute mitral regurgitation. **Ventricular septal rupture** creates a new shunt murmur with acute heart failure that needs urgent surgical assessment. True aneurysm forms later from thinned scar that balloons paradoxically, while pseudoaneurysm is a contained rupture needing urgent surgery.",
+   "say": "The wall becomes weakest several days after infarction and ruptures through the free wall, papillary muscle or septum. Free rupture tamponades the heart, papillary rupture floods the lungs and septal rupture creates an acute shunt. Late scar balloons into true aneurysm, while contained rupture behaves differently and needs urgent surgical repair.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-ischaemic-heart-fig1.webp",
@@ -56,8 +67,8 @@
    }
   },
   {
-   "tx": "**Reperfusion** salvages muscle but itself injures through calcium overload, oxidative burst and microvascular obstruction, producing contraction band necrosis histologically. Arrhythmias follow reperfusion and scar formation, and sudden death is often the first presentation of coronary disease. Stunned myocardium recovers function over days despite restored flow after brief ischaemia.",
-   "say": "Reperfusion saves muscle yet causes contraction bands and arrhythmias. Sudden death may be the first symptom of coronary disease. Stunned muscle recovers slowly after brief ischaemia.",
+   "tx": "**Reperfusion** salvages muscle but also injures tissue through calcium overload, oxidative burst and microvascular obstruction after flow returns. Histology shows **contraction band necrosis** where hypercontracted fibres mark reperfused myocardium beside necrotic areas. Arrhythmias follow reperfusion and later scar formation, and sudden death often becomes the first presentation of coronary disease. **Stunned myocardium** recovers function over days despite restored flow after brief ischaemia has temporarily impaired contraction.",
+   "say": "Reperfusion saves muscle yet causes contraction bands and arrhythmias through calcium overload and oxidative injury after flow returns. Sudden death may become the first symptom because scar and ischaemia both disturb cardiac rhythm unpredictably. Stunned muscle recovers slowly after brief ischaemia despite restored flow, so function improves over days with support.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -81,8 +92,8 @@
    }
   },
   {
-   "tx": "Chronic ischaemic disease remodels the heart through hibernating myocardium, interstitial fibrosis and chamber dilation toward ischaemic cardiomyopathy. **Troponin** release marks myocyte necrosis whatever the mechanism, so type 2 infarction from supply demand mismatch must be separated from plaque disruption. Pathology stems reward naming the territory: left anterior descending artery supplies anterior wall and septum.",
-   "say": "Chronic ischaemia dilates and scars the heart into failure. Troponin marks necrosis from any cause, so demand infarction differs from plaque rupture. LAD supplies anterior wall and septum.",
+   "tx": "Chronic ischaemic disease remodels the heart through hibernating myocardium, interstitial fibrosis and chamber dilation toward **ischaemic cardiomyopathy**. **Troponin** release marks myocyte necrosis whatever the mechanism, so type 2 infarction from supply demand mismatch needs separation from plaque disruption. Oxygen supply failure from hypotension, tachycardia or anaemia can raise troponin without any acute plaque rupture event. Pathology stems reward naming the territory because the left anterior descending artery supplies the anterior wall and septum.",
+   "say": "Chronic ischaemia dilates and scars the heart gradually into pump failure through fibrosis and hibernating muscle. Troponin marks necrosis from any mechanism, so demand related injury differs fundamentally from acute plaque rupture events. The anterior descending artery supplies the anterior wall and septum, which examiners test through territory based stems repeatedly.",
    "vis": null
   }
  ],
