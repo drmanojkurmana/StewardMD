@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "bio-recombinant-techniques",
+ "subject": "biochemistry",
+ "title": "Blots, ELISA and protein detection",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Blots share one grammar (separate by size, immobilise on membrane, probe specifically, visualise): **Southern** DNA (restriction digest, agarose, alkali denature to single strands, capillary transfer to nitrocellulose/nylon, labelled probe hybridisation stringency by temperature and salt (high stringency only near perfect matches survive), autoradiography/chemiluminescence), Northern RNA (formaldehyde denaturing gels, expression sizes and abundance, RNase paranoia), Western protein (SDS-PAGE, PVDF transfer, antibody primary/secondary enzyme, loading controls housekeeping). Southwestern (protein binding DNA probe) and Northwestern complete compass mnemonics students confuse deliberately under pressure.",
+   "say": "Southern DNA, Northern RNA and Western protein share separate, immobilise, probe grammar memorably. Stringency by temperature and salt decides match perfection surviving hybridisation washes specifically and diagnostically.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-recombinant-techniques-gen1.webp",
+    "alt": "Bench with two ultraviolet gels showing DNA and mRNA size with 28S and 18S bands and an immunoblot membrane beside.",
+    "caption": "Gels and immunoblot distinguishing DNA, mRNA size and antibody detection, Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Southern applications defined pre-PCR genetics: sickle **RFLP** (HpaI fragment length linked historically, MstII site destroyed directly by sickle mutation (CCTGAGG to CCTGTGG losing cleavage, larger fragment diagnostic) textbook direct versus linked marker distinction), Huntington CAG expansion sizing (large expansions Southern/junction PCR, juvenile alleles), fragile X full mutations (methylation sensitive Southern historically, now repeat primed PCR plus methylation PCR/Southern hybrid protocols), myotonic dystrophy expansions, mitochondrial deletions, gene rearrangements in leukaemia and lymphoma clonality (immunoglobulin/TCR Southern heritage). Repeat expansions too large or GC rich for PCR remain Southern sovereign territory.",
+   "say": "Sickle MstII site loss gives direct fragment diagnosis historically textbook defining. Huge repeat expansions remain Southern sovereign territory where PCR fails across GC rich lengths diagnostically in genetics laboratories.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blot",
+     "Molecule and probe",
+     "Classic diagnostic"
+    ],
+    "rows": [
+     [
+      "Southern",
+      "DNA probed with DNA/RNA",
+      "Sickle MstII RFLP, expansions, rearrangements"
+     ],
+     [
+      "Northern",
+      "RNA probed (size plus abundance)",
+      "Transcript sizes, alternative splicing forms"
+     ],
+     [
+      "Western",
+      "Protein probed with antibody",
+      "HIV historical confirmation, Lyme, prion protease resistance patterns"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ELISA** formats trade geometry: direct (antigen coated, labelled antibody), indirect (antibody detected, anti-immunoglobulin labelled, HIV screening generations, autoantibody serology), sandwich (capture and detection antibodies sandwiching antigen, troponin and hCG immunoassay cousins, high specificity by dual epitopes), competitive (signal inverse to analyte, small molecules T4 historically). Enzyme labels (HRP TMB colour, alkaline phosphatase) quantify against standard curves with hook/prozone effect (antigen excess saturating both antibodies separately in sandwich (macroprolactin and hCG phantom pitfalls, dilution resolves), heterophile antibody interference (human anti mouse blocking/bridging falsely, blocking reagents).",
+   "say": "Sandwich ELISA dual epitopes give high specificity shared with troponin assay cousins clinically. Hook effect and heterophile interference falsely distort extremes resolved by dilution protocols in laboratories professionally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sandwich (antigen measured)",
+     "points": [
+      "Two antibodies, signal proportional",
+      "Troponin, hCG, cytokines",
+      "Hook effect at extreme excess (dilute)"
+     ]
+    },
+    "right": {
+     "title": "Indirect (antibody measured)",
+     "points": [
+      "Antigen coats, patient antibody binds",
+      "HIV serology heritage, autoantibodies",
+      "Rheumatoid factor interference classically"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lateral flow immunochromatography (pregnancy hCG urine, malaria HRP2/pLDH antigens (pfhrp2 deletions escaping in surveillance eras), dengue NS1, influenza and COVID antigens with sensitivity timing windows, urine lipoarabinomannan tuberculosis in advanced HIV) miniaturises sandwich logic to bedside with control line validity logic identical to laboratory quality thinking. **Immunohistochemistry** localises antigens in tissue architecture (ER/PR/HER2 breast scoring, mismatch repair loss Lynch screening prior, PD-L1 therapy selection) bridging blots to pathology reports clinicians actually receive.",
+   "say": "Lateral flow miniaturises sandwich logic to bedside with control line validity identical to laboratory quality thinking. Immunohistochemistry localises antigens in tissue for therapy selection reports clinicians receive daily.",
+   "vis": null
+  },
+  {
+   "tx": "**Specificity controls** decide credibility: positive/negative tissues, absorption and knockout validation (antibody reproducibility crisis literature), isotype controls flow cytometry (prior membrane sorting cousins: FACS fluorescence activated sorting by surface markers immunophenotyping leukaemias, CD4 counts), mass cytometry metal isotopes expanding parameters. Dot/slot blots skip separation for throughput (reverse dot blot allele specific oligonucleotides for beta thalassaemia and HLA panels genotyping without gels), microarrays next scale the same hybridisation to hundreds of thousands of spots simultaneously.",
+   "say": "Specificity controls decide credibility from knockout validation to isotype controls in flow sorting immunophenotyping. Dot blots skip separation for throughput genotyping panels without gels in diagnostic workflows efficiently.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Detection platform",
+     "Separation first?",
+     "Throughput logic"
+    ],
+    "rows": [
+     [
+      "Southern/Northern/Western",
+      "Yes (size evidence)",
+      "Low throughput, high information per band"
+     ],
+     [
+      "Dot/slot blot",
+      "No",
+      "Genotyping panels, allele specific probes"
+     ],
+     [
+      "ELISA (96 well)",
+      "No (affinity only)",
+      "Quantitative screening at scale"
+     ],
+     [
+      "Lateral flow",
+      "Chromatography strip only",
+      "Bedside minutes, qualitative/semi quantitative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sequencing** next replaces probe guessing with direct reading, but blots retain sovereignty where size, integrity, modification or protein identity is the question (RNA integrity numbers, prion glycoform Western signatures in variant CJD tonsil and brain, phospho protein signalling Westerns in every molecular paper). Choose evidence type by question, not fashion: detection (PCR), size/integrity (blot/gel), location (IHC/FISH next), quantity kinetics (qPCR/ELISA), identity definitive (sequencing/MS). That decision table is the techniques module examinable core compressed.",
+   "say": "Choose evidence type by question, not fashion across detection, size, location, quantity and identity platforms. That decision table is the techniques module examinable core compressed for finals and wards.",
+   "vis": {
+    "kind": "flow",
+    "title": "Question chooses platform",
+    "nodes": [
+     {
+      "id": "det",
+      "label": "Present? PCR or ELISA"
+     },
+     {
+      "id": "size",
+      "label": "Right size/intact? Gel and blot"
+     },
+     {
+      "id": "where",
+      "label": "Where? IHC, FISH, imaging"
+     },
+     {
+      "id": "id",
+      "label": "Definitive identity? Sequencing or MS"
+     }
+    ],
+    "edges": [
+     [
+      "det",
+      "size"
+     ],
+     [
+      "size",
+      "where"
+     ],
+     [
+      "where",
+      "id"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
