@@ -3,21 +3,21 @@
  "module": "med-peptic-gi-bleed",
  "subject": "medicine",
  "title": "Peptic ulcer disease and gastrointestinal bleeding",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
-   "tx": "**History** (**epigastric** hunger nocturnal relief, **NSAID** aspirin steroids smoking, **H pylori** crowded water, **bleed** haematemesis melaena syncope, **liver** alcohol varices, **drugs** anticoagulant SSRI bleeds, **weight** malignant outlet, **past** ulcer surgery scopes) with **viva** (**pale** melaenic NSAID, **alcoholic** variceal bleeder) profiles; **Blatchford** (scores admits) triages. Bellies bleed.",
-   "say": "Epigastrics NSAIDs pyloris bleeds is history: livers hard drugs thin weights fall pasts recur Blatchfords score Rockalls stage transfusions trigger vomits bleed stools black. Stomachs ulcerate.",
+   "tx": "Take a focused history in suspected peptic ulcer disease and upper gastrointestinal bleeding. Ask about **epigastric pain** that eases with food and wakes the patient at night, and about **NSAID use** including aspirin and steroids with smoking. Ask about **H pylori exposure** from crowded living conditions, past ulcers and endoscopies, bleeding with vomiting or black stools, alcohol related liver disease, anticoagulant use, weight loss suggesting outlet block, and fainting. Apply the Blatchford score to decide admission.",
+   "say": "Take a focused history when you suspect an ulcer or an upper gut bleed. Ask about burning pain in the upper abdomen that improves with food and wakes the patient at night. Ask about painkiller use, especially aspirin and steroids, and about smoking, which worsens ulcers. Ask about crowded living conditions that favour H pylori infection, past ulcers and endoscopies, vomiting of blood, black tarry stools, liver disease from alcohol, blood thinners, weight loss, and fainting. Use the Blatchford score to decide who needs admission.",
    "vis": null
   },
   {
-   "tx": "**Examination** (**pallor** shock postural, **haematemesis** fresh coffee-grounds, **melaena** tarry offensive, **epigastric** tender guarding, **stigmata** spider palmar liver, **spleen** portal hypertensive, **rectal** melaena confirms, **vitals** shock resuscitate) with **bedside** (**BP** postural drops, **urine** output kidneys, **ECG** ischaemia anaemia) resuscitates; **peritonism** (perforated boards) alarms. Bodies bleed.",
-   "say": "Pallors vomits melaenas tenders is exam: stigmatas mark spleens swell rectals confirm vitals crash urines measure ECGs strain peritonisms board resuscitations fill surgeries call. Hands pale.",
+   "tx": "Examine for **pallor** with low blood pressure on standing and fast pulse suggesting shock, and inspect vomitus for fresh blood or coffee ground material. Note **melaena** as black tarry offensive stools and confirm it on rectal examination. Feel the epigastrium for tenderness and guarding, look for **liver stigmata** such as spider naevi and palmar erythema, feel for an enlarged spleen, record urine output, obtain an ECG for ischaemia, and watch for board like peritonism that signals perforation.",
+   "say": "Examine the patient for paleness with a fast pulse and a drop in pressure on standing, which suggest shock from blood loss. Check any vomitus for fresh red blood or dark coffee ground material. Note black tarry offensive stools and confirm them on rectal examination. Feel the upper abdomen for tenderness and guarding, look for spider naevi and palmar redness that point to liver disease, feel for an enlarged spleen, record urine output, obtain an ECG to detect ischaemia from anaemia, and watch for rigid board like rigidity that signals perforation.",
    "vis": null
   },
   {
-   "tx": "**Investigations** (**scope** 24-hour band injects, **biopsy** H pylori CLO, **Blatchford** zero discharges, **Rockall** rebleed predicts, **FBC** urea raised bleeds, **LFT** variceal clues, **CT** obscure capsule, **mesenteric** angio embolises) with **differentials** (**variceal** liver stigmata bands, **Mallory** vomit tears, **tumour** mass outlet blocks, **colonic** bright red scopes) sorts; **resuscitate** (blood 70 g) firsts. Scopes band.",
-   "say": "Scopes biopsies scores is Ix: ureas rise LFTs hint CTs hide angios coil varices band Mallorys tear tumours block colonics bright resuscitations first transfusions match rebleeds watch ICUs admit. Vessels leak.",
+   "tx": "Arrange early endoscopy for diagnosis with banding or injection, and take biopsies for **H pylori testing**. Use the **Blatchford score** where zero allows discharge and use the Rockall score to predict rebleeding. Send full blood count and note raised urea in bleeding, check liver tests for variceal clues, and use CT or capsule study for obscure bleeding with **mesenteric angiography** and embolisation when endoscopy cannot reach the site. Separate variceal bleeding, Mallory tears after vomiting, tumour with outlet block, and bright red colonic bleeding, and resuscitate before scoping.",
+   "say": "Arrange an early endoscopy that diagnoses the source and treats it with banding or injection, and take biopsies to test for H pylori. Use the Blatchford score to identify patients who can go home and use the Rockall score to predict rebleeding. Send a full blood count and note that urea rises with upper gut bleeding, check liver tests for clues to varices, and use CT or capsule study for obscure bleeding with angiography and embolisation when endoscopy cannot reach the site. Distinguish variceal bleeding, tears after vomiting, tumour with outlet block, and bright red colonic bleeding, and resuscitate the patient before scoping.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/med-peptic-gi-bleed-fig1.webp",
@@ -27,9 +27,20 @@
    }
   },
   {
-   "tx": "**Management** (**PPI** IV bolus infuses, **eradicate** triple clarithromycin, **banding** varices octreotide, **surgery** perforated Graham patch, **embolise** radiology rescues, **transfuse** restrictive 70, **stop** NSAIDs test rebleeds, **follow** scope H pylori) with **traps** (**rebleed** second-look operates, **C diff** antibiotics diarrhoea, **ischaemia** elderly transfuses) closes; **counsel** (alcohol NSAIDs) warns. Bleeds stop.",
-   "say": "PPIs eradicates bandings is Rx: surgeries patch embolises coil transfuses match stops avoid follows scope rebleeds look diarrhoeas stop ischaemias guard ages transfuse habits counsel relapses watch. Ulcers heal.",
+   "tx": "Start high dose intravenous **proton pump inhibitor** treatment, eradicate H pylori with triple therapy, and band varices while giving octreotide. Arrange surgery with Graham patch for perforation, use **coil embolisation** by radiology when endoscopy fails, transfuse restrictively at low haemoglobin, stop NSAIDs, test for rebleeding, and repeat endoscopy to confirm healing. Watch for rebleeding needing a second look, diarrhoea from antibiotics, and ischaemia in older patients, and counsel the patient to avoid alcohol and **NSAIDs**.",
+   "say": "Start treatment with an intravenous proton pump inhibitor that suppresses acid, and eradicate H pylori with triple therapy. Band varices while you give octreotide to lower portal pressure. Arrange surgery with a Graham patch for perforation, and use coil embolisation by radiology when endoscopy fails. Transfuse restrictively at low haemoglobin, stop painkillers, test for rebleeding, and repeat endoscopy to confirm healing. Watch for rebleeding that needs a second look, diarrhoea from antibiotics, and ischaemia in older patients, and counsel the patient to avoid alcohol and painkillers.",
    "vis": null
+  },
+  {
+   "tx": "This paired angiogram shows active **contrast extravasation** as a dark blush on the left panel, marking ongoing gastrointestinal bleeding. The right panel shows the same vessel after **coil embolisation**, where the blush has vanished and flow is controlled. Remember this rescue option because **radiology embolisation** saves patients when endoscopy cannot reach or stop the bleeding, especially in massive or recurrent haemorrhage.",
+   "say": "Look at this paired angiogram because it shows the rescue treatment for severe bleeding. The left panel shows a dark blush of leaking contrast that marks active bleeding from the vessel. The right panel shows the same vessel after coil embolisation, where the blush has vanished and bleeding is controlled. Remember this option when endoscopy cannot reach or stop the bleed, because radiology can save patients with massive or recurrent haemorrhage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-peptic-gi-bleed-gen1.webp",
+    "alt": "Paired pre and post embolisation angiograms showing active contrast extravasation then control by coil embolisation.",
+    "caption": "Angiography shows active contrast extravasation controlled by coil embolisation. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   }
  ],
  "quiz": [

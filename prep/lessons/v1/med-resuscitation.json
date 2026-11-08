@@ -6,18 +6,29 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**History** (**collapse** witnessed downtime bystander CPR, **prodrome** chest pain breathless syncope, **rhythm** VF VT asystole PEA known, **reversibles** Hs-Ts drugs electrolytes, **wishes** DNAR escalation frailty, **pregnancy** aortocaval tilt perimortem, **toxins** overdose hanging drowning, **post** ROSC GCS myoclonus asks) with **viva** (**arrested** pulseless apnoeic, **post-ROSC** myoclonic comatose) profiles; **records** (rhythm strips) asks. Hearts stop.",
-   "say": "Collapses prodromes rhythms reversibles is history: wishes limit pregnancies tilt toxins poison posts cloud arresteds still post-ROSCs stir compressions pump shocks flash. Pulses vanish.",
+   "tx": "When a patient collapses, ask whether the **collapse** was witnessed and how long the downtime lasted before **bystander CPR** began. Explore prodrome symptoms such as chest pain, breathlessness or fainting, and review known cardiac disease, prescribed drugs and prior rhythm strips. Clarify the initial **arrest rhythm** and any reversible triggers found so far. Finally, confirm escalation wishes, frailty and pregnancy status so the team can plan resuscitation and post arrest care together.",
+   "say": "When someone collapses, the team leader asks who witnessed the event and how long the heart has been stopped. A colleague explores warning symptoms such as chest pain or fainting and reviews known heart disease and prescribed drugs. The leader confirms the first recorded rhythm and asks about reversible triggers found so far. Finally the team clarifies escalation wishes and pregnancy status, so everyone has a clear resuscitation plan.",
    "vis": null
   },
   {
-   "tx": "**Examination** (**pulse** carotid femoral absent apnoea, **rhythm** VF VT PEA asystole monitors, **airway** obstruction dentures vomit, **breath** agonal absent capnography, **access** IO IV adrenaline routes, **signs** reversible tamponade tension, **pupils** fixed dilated downtime, **tone** posturing myoclonus ROSC) with **bedside** (**capnography** quality ROSC numbers, **rhythm** shockable sorts, **ultrasound** tamponade standstill) grades; **compressions** (depth recoil audits) drills. Chest pumps.",
-   "say": "Pulses rhythms airways breaths is exam: accesses bore signs hint pupils fix tones jerk capnographies guide rhythms shock ultrasounds peer compressions drive adrenalines push. Teams swarm.",
+   "tx": "On arrival, confirm **cardiac arrest** by checking for absent carotid pulse and apnoea, and attach the monitor to define the **arrest rhythm**. Begin high quality chest compressions with minimal pauses while a colleague secures the airway and gains vascular access. Use waveform **capnography** to judge compression quality and to spot return of spontaneous circulation. Search actively for reversible causes such as tamponade or tension pneumothorax during rhythm checks.",
+   "say": "On arrival the leader feels for a carotid pulse and watches for normal breathing while a colleague attaches the monitor. The team begins strong chest compressions with minimal pauses while a colleague secures the airway and the leader ensures that vascular access is gained. Waveform capnography guides compression quality and reveals return of spontaneous circulation. During each rhythm check the team looks for tamponade and tension pneumothorax that remain reversible.",
    "vis": null
   },
   {
-   "tx": "**Investigations** (**rhythm** shockable nonshockable sorts, **Hs-Ts** hypoxia tamponade toxins panels, **gases** acidosis lactate ROSC, **potassium** arrest dialysis triggers, **troponin** post-ROSC MI hunts, **CT** head bleed post-ROSC, **echo** wall motion effusion, **pregnancy** perimortem foetal screens) with **differentials** (**seizure** postictal breathing returns, **syncope** spontaneous recovery pulses, **stroke** focal imaging, **overdose** toxidrome pupils) sorts; **intensivist** (TTM PCI calls) meets. Rhythms decide.",
-   "say": "Rhythms Hs-Ts gases potassiums is Ix: troponins rise CTs clear echoes squeeze pregnancies screen seizures jerk syncopes wake strokes clot overdoses pinpoint intensivists meet cools open wishes respect. Causes reverse.",
+   "tx": "This echocardiogram shows a large dark **pericardial effusion** surrounding the heart, with the right ventricle collapsing in diastole because rising pressure prevents normal filling. That collapse pattern signals **cardiac tamponade**, a reversible cause of pulseless electrical activity that must be relieved urgently. In the exam, link a hypotensive shocked patient with raised venous pressure and quiet heart sounds to this image. Bedside **ultrasound** during a rhythm check confirms the effusion and guides urgent drainage.",
+   "say": "This ultrasound image shows a large dark fluid collection around the heart that compresses the chambers. The right ventricle collapses during diastole because surrounding pressure prevents normal filling. That collapse pattern indicates tamponade, which causes shock and can trigger cardiac arrest. During resuscitation the team uses bedside ultrasound to confirm the effusion and arrange urgent drainage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-resuscitation-gen1.webp",
+    "alt": "Cardiac ultrasound showing large pericardial effusion around heart with diastolic right ventricular collapse indicating tamponade.",
+    "caption": "Echocardiogram shows large pericardial effusion with right ventricular diastolic collapse. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "After the rhythm is identified, sort shockable rhythms from nonshockable ones because only ventricular fibrillation and pulseless ventricular tachycardia merit **defibrillation**. Send arterial gases and lactate to track acidosis, and check potassium urgently since severe hyperkalaemia often precipitates **refractory arrest**. Arrange bedside echocardiography to look for tamponade or major wall motion defects, and consider computed tomography of the head when the cause remains unclear. Involve intensive care early to plan targeted temperature management and **coronary reperfusion**.",
+   "say": "Once the rhythm is identified, the team separates shockable rhythms from nonshockable ones because only fibrillation and pulseless tachycardia respond to a shock. Blood gases and lactate reveal acidosis while urgent potassium testing detects hyperkalaemia that keeps the arrest refractory. Bedside echocardiography looks for tamponade or severe wall weakness, and head scanning follows when the cause remains unclear. Intensive care colleagues guide temperature control and coronary treatment after circulation returns.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/med-resuscitation-fig1.webp",
@@ -27,8 +38,8 @@
    }
   },
   {
-   "tx": "**Management** (**compress** hard fast recoil minimal pauses, **shock** VF VT unsynchronised joules, **adrenaline** amiodarone protocol timings, **reversibles** Hs-Ts treat concurrently, **airway** supraglottic intubate capnography, **ROSC** TTM PCI glucose control, **DNAR** sensitive escalation talks, **debrief** team family support) with **traps** (**hyperventilate** coronary perfusion drops, **interruptions** pulse-check delays, **hypothermia** coagulopathy bleeds) closes; **follow** (neuro daily prognosticates) tracks. Pulses return.",
-   "say": "Compresses shocks adrenalines reversibles is Rx: airways secure ROSCs cool DNARs discuss debriefs heal hyperventilations starve interruptions stall hypothermias bleed follows track awakenings hope wishes respect. Lives restart.",
+   "tx": "Treat every arrest with continuous hard and fast **chest compressions**, allowing full recoil and keeping pauses under ten seconds. Deliver prompt unsynchronised shocks for ventricular fibrillation or pulseless ventricular tachycardia, then give **adrenaline** and amiodarone at protocol timings without stopping compressions. Treat reversible causes in parallel and secure the airway with capnography confirmation. After return of spontaneous circulation, pursue targeted temperature management, urgent **coronary angiography** when indicated and sensitive family discussion.",
+   "say": "The team delivers continuous hard and fast compressions and allows full chest recoil while keeping every pause brief. Shocks follow promptly for fibrillation or pulseless tachycardia, and adrenaline with amiodarone is given at protocol times without stopping compressions. Reversible causes receive parallel treatment while the airway helper secures the airway where capnography is used. After circulation returns, the team tracks temperature control, urgent coronary assessment and a sensitive family discussion.",
    "vis": null
   }
  ],

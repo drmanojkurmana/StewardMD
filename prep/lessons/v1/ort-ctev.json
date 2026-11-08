@@ -1,66 +1,75 @@
 {
- "v": 1,
- "module": "ort-ctev",
- "subject": "orthopaedics",
- "title": "Clubfoot: Ponseti casting before scalpels",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Describe** (**CAVE** cavus adductus varus equinus, **Pirani** mid-hindfoot scores severity, **Dimeglio** stiffness grades, **idiopathic** isolated boys bilateral, **neurogenic** arthrogryposis meningomyelocele rigid, **egg-heel** wasted calf creases, **beans** kidney-shaped sole, **differentiate** metatarsus adductus flexible) with **scores** (**weekly** Pirani tracks, **photos** serial angles) grades; **counsel** (benign prognosis) reassures. Feet twist.",
-   "say": "CAVEs Piranis Dimeglios idiopathics is describe: orders rank CAVE spells heels waste calves shrink soles curve beans bend scores tally weeklies track photographs chart serials grade counsels calm benigns soothe. Births twist.",
-   "vis": null
+  "checks": {
+    "dashes": true,
+    "dropped": 0,
+    "drugs": true,
+    "itemN": 10,
+    "kbWords": 0,
+    "numbers": true,
+    "redone": 0,
+    "verbatim": true,
+    "verify": true
   },
-  {
-   "tx": "**Ponseti** (**cavus first** supinate forefoot pronates, **abduct** talar-head fulcrum never-pronate, **equinus last** dorsiflex after-adduction, **casts** weekly toe-to-groin moulds, **tenotomy** seventy-percent percutaneous heals, **correct** sixty-seventy degrees abduction, **feet** counterpressure stabilises, **sessions** five-seven changes) with **holds** (**assistant** foot steadies, **plaster** smooth wrinkles) moulds; **time** (newborn starts) begins. Casts correct.",
-   "say": "Cavus abducts equinus casts is Ponseti: firsts lift cavus straight fulcrums rock talars head lasts stretch equinus late moulds wrap weeks long heals nick tenotomies small corrects swing sixties wide holds brace assistants steady times start newborns soon. Plasters shape.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/ort-ctev-fig1.webp",
-    "alt": "Diagrams illustrating the Ponseti method for clubfoot: sequential foot manipulations (cavus, abduction, dorsiflexion), weekly toe-to-groin casting, and percutaneous Achilles tenotomy.",
-    "caption": "Ponseti method: sequential manipulations, casting, and tenotomy",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Brace-relapse** (**Denis Browne** seventy-out-toe twenty-three-hours, **compliance** relapse predictor stresses, **years** four-five nights continues, **relapse** dynamic supination tibialis-transfer, **stretch** dorsiflexion maintains, **shoes** straight-last supports, **review** gait into-childhood, **re-cast** early-slip rescues) with **fits** (**bars** shoulder-width sets, **heels** seated checks) wears; **warn** (non-wear recurs) stresses. Braces hold.",
-   "say": "Brownes compliances years relapses is brace: bars spread seventies flare wears bind days long stresses preach compliances guard continues last years long slips slide dynamics return fits set widths gauge wears check heels seat warns preach non-wears doom. Nights brace.",
-   "vis": null
-  },
-  {
-   "tx": "**Resistant-surgery** (**Kite error** cuboid pressure worsens, **atypical** short hyperextended treats-modified, **posteromedial** release Turco McKay, **tendon** lengthenings sequential, **JESS** Ilizarov neglected frames, **triple** arthrodesis salvage stiff, **recurrence** growth monitors, **counsel** stiffness trades) with **selects** (**age** severity matches, **gait** labs guide) chooses; **rehab** (physio lifelong) moves. Scalpels wait.",
-   "say": "Kites atypicals releases JESSs is resistant: cuboids crush Kites wrong shorts stub atypicals bend releases free backs medial lengthens stretch tendons stage frames ring JESSs span selects match ages fit rehabs move physios lifelong. Failures cut.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-ort-111",
-  "bk2-ort-112",
-  "bk2-ort-113",
-  "bk2-ort-114",
-  "bk2-ort-115",
-  "bk2-ort-116",
-  "bk2-ort-117",
-  "bk2-ort-118",
-  "bk2-ort-119",
-  "bk2-ort-120"
- ],
- "src": [],
- "refs": [
-  "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-ort2",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+  "gen": "AI",
+  "minutes": 6,
+  "module": "ort-ctev",
+  "quiz": [
+    "bk2-ort-111",
+    "bk2-ort-112",
+    "bk2-ort-113",
+    "bk2-ort-114",
+    "bk2-ort-115",
+    "bk2-ort-116",
+    "bk2-ort-117",
+    "bk2-ort-118",
+    "bk2-ort-119",
+    "bk2-ort-120"
+  ],
+  "refs": [
+    "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "run": "books2-ort2",
+  "src": [],
+  "steps": [
+    {
+      "say": "Clubfoot combines cavus, adductus, varus, and equinus, and severity is scored with Pirani and Dimeglio systems. Most cases are idiopathic in boys and bilateral, while stiff feet point toward neurogenic causes such as arthrogryposis. A wasted calf with deep creases and a kidney shaped sole marks the diagnosis, weekly scoring with photos tracks progress, and counselling stresses the excellent outlook with treatment.",
+      "tx": "Clubfoot shows **CAVE** deformity with cavus, adductus, varus, and equinus, scored by the **Pirani score** for midfoot and hindfoot and by Dimeglio stiffness grades. Most cases are idiopathic in boys and bilateral, while rigid feet suggest neurogenic causes such as arthrogryposis or meningomyelocele. A wasted calf, egg shaped heel, deep creases, and kidney shaped sole mark the diagnosis, and **metatarsus adductus** differs by a flexible hindfoot. Weekly scoring with serial photos tracks severity, and counselling stresses the benign outlook with treatment.",
+      "vis": null
+    },
+    {
+      "say": "Ponseti casting corrects cavus first, then abducts the foot around the talar head without pronation, and stretches equinus last. Weekly toe to groin casts mould each gain while an assistant steadies the foot, aiming for wide abduction over five to seven sessions. About seventy percent need a small percutaneous Achilles tenotomy, and starting in the newborn period gives the softest tissues.",
+      "tx": "**Ponseti** correction orders cavus first by supinating the forefoot, then abduction around the talar head without pronation, and equinus last with dorsiflexion after adduction corrects. Weekly toe to groin **casts** mould each gain with counterpressure while an assistant steadies the foot, aiming about sixty to seventy degrees of abduction over five to seven sessions. About seventy percent need percutaneous **Achilles tenotomy** which heals quickly, and treatment begins in the newborn period for the softest tissues.",
+      "vis": {
+        "alt": "Diagrams illustrating the Ponseti method for clubfoot: sequential foot manipulations (cavus, abduction, dorsiflexion), weekly toe-to-groin casting, and percutaneous Achilles tenotomy.",
+        "ar": 1.8349,
+        "caption": "Ponseti method: sequential manipulations, casting, and tenotomy",
+        "kind": "image",
+        "src": "v1/lessons/media/ort-ctev-fig1.webp"
+      }
+    },
+    {
+      "say": "After casting, Denis Browne boots and bar hold the correction, worn most of the day at first and then at night until four to five years. Compliance decides success, so the bar width is set carefully and the heel is checked seated in the boot. Slipping or dynamic supination warns of relapse, early recasting rescues a slip, and stretch with gait review continues into childhood.",
+      "tx": "Maintenance uses **Denis Browne** boots and bar at seventy degrees outward toe for twenty three hours daily, then nights until four to five years. **Compliance** is the main predictor of **relapse**, so bars are set shoulder width and heels are checked seated. Relapse shows dynamic supination and is rescued by early recasting with tibialis transfer for persistent imbalance, while dorsiflexion stretch, supportive shoes, and gait review continue into childhood.",
+      "vis": null
+    },
+    {
+      "say": "This photograph shows an infant wearing Denis Browne boots joined by a bar after casting. Both feet rest at seventy degrees of abduction, worn most of the day at first and then at night for years. Staying in the boots as advised guards against relapse, and the angles with the hours and years are favourite exam questions.",
+      "tx": "This photograph shows an infant wearing **Denis Browne** boots joined by a bar, the maintenance phase that holds Ponseti correction. Labels mark seventy degrees of **abduction** on each side, full time wear of twenty three hours, and night wear until four to five years. The picture matters because **compliance** with boots and bar is the main guard against relapse, and examiners test the angles, hours, and years.",
+      "vis": {
+        "alt": "Infant wearing Denis Browne boots connected by bar with abduction and wear time labels.",
+        "ar": 1.3393,
+        "caption": "Denis Browne boots and bar for clubfoot maintenance Illustration: StewardMD original.",
+        "kind": "image",
+        "src": "v1/lessons/media/ort-ctev-gen1.webp"
+      }
+    },
+    {
+      "say": "Feet that resist casting need surgery matched to age and severity, guided by gait study. Pressing on the cuboid was the Kite error that worsened deformity, while atypical short feet need a modified approach. Posteromedial release with tendon lengthening or ring frames for neglected feet rebuilds alignment, salvage fuses stiff joints, and physiotherapy continues lifelong with watch for recurrence.",
+      "tx": "Resistant feet need surgery matched to age and severity with gait study guidance. The Kite error presses the cuboid and worsens deformity, while short hyperextended atypical feet need a modified approach. **Posteromedial release** by Turco or McKay technique, sequential tendon lengthening, and **JESS** or Ilizarov frames for neglected feet rebuild alignment. Stiff salvage uses **triple arthrodesis**, growth is watched for recurrence, families accept some stiffness, and physiotherapy continues lifelong.",
+      "vis": null
+    }
+  ],
+  "subject": "orthopaedics",
+  "title": "Clubfoot: Ponseti casting before scalpels",
+  "v": 1
 }
