@@ -44,7 +44,6 @@
       "ss-general-surgery",
       "ss-surgical-oncology",
       "ss-ctvs",
-      "ss-paediatric-surgery",
       "ss-vascular-surgery"
      ]
     },

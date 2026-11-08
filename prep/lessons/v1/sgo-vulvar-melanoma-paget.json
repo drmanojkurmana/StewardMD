@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "sgo-vulvar-melanoma-paget",
+ "title": "Extramammary Paget Disease, Vulvar Melanoma & Rare Vulvar Tumors: Immunohistochemistry, Breslow Depth and KIT Mutations",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 20",
+  "DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology 11th Edition Ch 86",
+  "NCCN Clinical Practice Guidelines in Oncology: Vulvar Cancer (Version 1.2024)"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Extramammary Paget disease of the vulva is a rare intraepithelial adenocarcinoma presenting with chronic pruritus and a pathognomonic macroscopic appearance.",
+   "tx": "Vulvar **extramammary Paget disease (EMPD)** classically presents as an erythematous, eczematoid, velvety plaque studded with white islands of hyperkeratosis, described pathognomonically as a **strawberries and cream plaque**. Histologically, intraepidermal **Paget cells** display abundant **pale cytoplasm** and atypical vesicular nuclei. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/gyn-ovary-vulva-gtn-fig1.webp",
+    "ar": 1.8349,
+    "caption": "Vulvar cancer staging: sentinel node and groin dissection. Credit: StewardMD.",
+    "alt": "Illustration of vulvar anatomy, groin lymphatic drainage, and surgical dissection margins."
+   }
+  },
+  {
+   "say": "Immunohistochemical staining is essential to distinguish primary cutaneotrophic Paget disease from secondary epidermotropic spread of internal adenocarcinomas.",
+   "tx": "In **primary EMPD IHC**, cells are characteristically **CK7 positive CK20 negative** and GCDFP-15 positive, confirming apocrine/sweat gland origin. Conversely, **secondary EMPD CK20 positive CDX2 positive** points to underlying urothelial or **colorectal primary** adenocarcinoma secondarily spreading into the perineal epidermis. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature",
+     "Primary Vulvar EMPD",
+     "Secondary Anorectal EMPD",
+     "Secondary Urothelial EMPD"
+    ],
+    "rows": [
+     [
+      "Cytokeratin 7 (CK7)",
+      "Positive (strong, diffuse)",
+      "Positive or negative",
+      "Positive (diffuse)"
+     ],
+     [
+      "Cytokeratin 20 (CK20)",
+      "Negative (characteristic)",
+      "Positive (strong, diffuse)",
+      "Positive (frequent)"
+     ],
+     [
+      "CDX2 Transcription Factor",
+      "Negative",
+      "Positive (gastrointestinal origin)",
+      "Negative"
+     ],
+     [
+      "GATA3 Transcription Factor",
+      "Negative or focal",
+      "Negative",
+      "Positive (urothelial origin)"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "All patients diagnosed with extramammary Paget disease must undergo systematic screening to exclude occult invasive carcinoma or synchronistic internal malignancies.",
+   "tx": "Clinical evaluation must investigate for an **underlying invasive adenocarcinoma 10-15%** arising within the dermis, as well as an **associated internal malignancy 20-30%** (colorectal, urothelial, or breast carcinoma), mandating comprehensive **systemic screening** with colonoscopy, mammography, and pelvic imaging. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Perform full-thickness vulvar punch biopsy confirming intraepidermal Paget cells"
+     },
+     {
+      "id": "b",
+      "label": "Perform IHC panel: CK7, CK20, CDX2, GATA3, and GCDFP-15"
+     },
+     {
+      "id": "c",
+      "label": "Conduct screening: colonoscopy, cystoscopy, mammography, and pelvic CT"
+     },
+     {
+      "id": "d",
+      "label": "Plan definitive wide local excision or topical immunomodulatory therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Surgical management of extramammary Paget disease is challenging because subclinical microscopic extension frequently extends far beyond visible lesion borders.",
+   "tx": "Because intraepidermal disease demonstrates irregular **skip lesions**, surgical excision carries a high local **recurrence rate 30-40%**. For widespread, multifocal, or recurrent non-invasive lesions, medical therapy using **topical imiquimod 5%** cream or **photodynamic therapy** achieves excellent tissue-sparing disease control. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surgical Wide Local Excision",
+     "points": [
+      "Resection with 1 to 2 cm gross margins and frozen sections",
+      "High rate of microscopically positive margins (due to skip lesions)",
+      "Risk of substantial vulvar scarring and architectural distortion"
+     ]
+    },
+    "right": {
+     "title": "Topical Imiquimod 5% Cream",
+     "points": [
+      "Toll-like receptor 7 agonist stimulating local interferon release",
+      "Applied 3 times weekly for 12 to 16 weeks",
+      "Complete clinical and histological response rates exceeding 70%"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Vulvar melanoma is the second most common vulvar malignancy, arising predominantly on non-hair-bearing mucosal surfaces of the clitoris and labia minora.",
+   "tx": "Malignant **vulvar melanoma** represents the **second most common vulvar cancer** (accounting for 5% of vulvar malignancies). The tumor occurs predominantly in postmenopausal women with a characteristic **clitoral/labia minora location** and is staged pathologically by microscopic **Breslow depth** of invasion. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Breslow Tumor Thickness",
+     "Recommended Surgical Margin",
+     "Sentinel Node Indication"
+    ],
+    "rows": [
+     [
+      "Melanoma in situ",
+      "0.5 cm clear surgical margin",
+      "Not indicated"
+     ],
+     [
+      "Thickness <= 1.0 mm",
+      "1.0 cm clear surgical margin",
+      "Selective (if ulceration or high mitoses)"
+     ],
+     [
+      "Thickness 1.01 mm to 2.0 mm",
+      "1.0 to 2.0 cm clear surgical margin",
+      "Indicated (SLN mapping recommended)"
+     ],
+     [
+      "Thickness > 2.0 mm",
+      "2.0 cm clear surgical margin",
+      "Indicated (bilateral SLN mapping)"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Surgical resection margins for vulvar melanoma are determined strictly by Breslow microstaging thickness rather than macroscopic lesion diameter.",
+   "tx": "Current surgical **Breslow margins** require a clear surgical **margin 1 cm for <=1 mm** thickness and a **margin 2 cm for >2 mm** depth of invasion. Deep subcutaneous tissue is resected to the muscular fascia, avoiding unnecessary ultraradical vulvectomies that do not improve survival.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Perform complete excisional biopsy of suspicious pigmented vulvar lesion"
+     },
+     {
+      "id": "b",
+      "label": "Determine exact Breslow depth of invasion and presence of ulceration"
+     },
+     {
+      "id": "c",
+      "label": "Execute wide local excision with 1 cm or 2 cm margin based on thickness"
+     },
+     {
+      "id": "d",
+      "label": "Perform sentinel lymph node biopsy for tumors > 0.8 to 1.0 mm thickness"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Mucosal melanomas of the vulva exhibit a unique genomic driver mutation profile distinct from cutaneous sun-exposed melanomas.",
+   "tx": "Vulvar melanomas harbor frequent oncogenic **KIT mutations 15-25%** localized to **exons 11 and 13**, conferring clinical **imatinib sensitivity** in advanced metastatic disease, while demonstrating a characteristically **low BRAF mutation <10%** frequency compared to cutaneous melanomas. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vulvar Mucosal Melanoma Genetics",
+     "points": [
+      "Frequent KIT activating mutations (exons 11, 13, 17)",
+      "Responsive to tyrosine kinase inhibitors (imatinib, nilotinib)",
+      "Low frequency of BRAF V600E mutations (<10%)"
+     ]
+    },
+    "right": {
+     "title": "Cutaneous Cutaneous Melanoma Genetics",
+     "points": [
+      "High frequency of BRAF V600E mutations (50% to 60%)",
+      "Responsive to combined BRAF and MEK inhibitors (dabrafenib/trametinib)",
+      "Rare KIT activating mutations (<2%)"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Carcinoma of the Bartholin gland represents a rare vulvar malignancy characterized by deep posterior labial location and specific diagnostic criteria.",
+   "tx": "Diagnosis of **Bartholin gland carcinoma** requires fulfillment of the classic **Honan criteria** (correct anatomical location, histology compatible with gland origin, and absence of another primary tumor). Adenoid cystic carcinoma variants characteristically exhibit **adenoid cystic perineural invasion** and recurrent **MYB-NFIB fusion**.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vulvar-cancer-fig1.webp",
+    "ar": 1.3333,
+    "caption": "Vulvar tumour with groin drainage deciding prognosis. Credit: StewardMD.",
+    "alt": "Anatomical schematic showing vulvar drainage pathways to superficial and deep femoral nodes."
+   }
+  }
+ ]
+}

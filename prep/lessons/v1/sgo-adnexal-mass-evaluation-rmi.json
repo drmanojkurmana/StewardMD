@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "module": "sgo-adnexal-mass-evaluation-rmi",
+ "title": "Adnexal Mass Evaluation, Biomarkers & Risk of Malignancy Indices: RMI 1, IOTA Simple Rules and O-RADS",
+ "subject": "ss-gynaecological-oncology",
+ "minutes": 8,
+ "gen": "AI",
+ "checks": {
+  "shape": true,
+  "dashes": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "verify": true
+ },
+ "refs": [
+  "Berek & Hacker's Gynecologic Oncology 7th Edition Ch 15",
+  "DiSaia and Creasman Clinical Gynecologic Oncology 10th Edition Ch 11",
+  "ACOG Practice Bulletin No. 174: Evaluation and Management of Adnexal Masses"
+ ],
+ "src": [],
+ "quiz": [],
+ "steps": [
+  {
+   "say": "The Risk of Malignancy Index 1, developed by Jacobs, represents an internationally validated algorithmic scoring tool that stratifies pelvic adnexal masses for specialist referral.",
+   "tx": "The **RMI 1 (Jacobs)** scores malignancy risk using the product equation **U x M x CA-125**. The score combines ultrasound score (U = 0, 1, or 3), menopausal status (M = 1 or 3), and absolute serum CA-125; a diagnostic **cutoff >200** achieves approximately 85% sensitivity and 97% specificity for malignancy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-benign-ovarian-gen1.webp",
+    "ar": 1.3393,
+    "caption": "Ultrasound showing classic dermoid cyst features of an ovarian teratoma, Illustration: StewardMD original.",
+    "alt": "Ultrasound image displaying hyperechoic lines, acoustic shadowing, and fluid-debris level characteristic of benign dermoid cyst."
+   }
+  },
+  {
+   "say": "Human Epididymis Protein 4 has emerged as a valuable novel serum biomarker that complements CA-125 in the diagnostic evaluation of pelvic masses.",
+   "tx": "The **HE4 biomarker** provides superior **premenopausal accuracy** compared to CA-125 because of its notable **absence of rise in endometriosis**, adenomyosis, pregnancy, or pelvic inflammatory disease, preventing false-positive referrals common with traditional glycoprotein assays in premenopausal women. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CA-125 Biomarker Limitations",
+     "points": [
+      "Frequently elevated in benign premenopausal conditions",
+      "Rises in endometriosis, adenomyosis, PID, and uterine fibroids",
+      "Lower specificity in premenopausal cohorts"
+     ]
+    },
+    "right": {
+     "title": "HE4 Biomarker Advantages",
+     "points": [
+      "Expressed predominantly by serous and endometrioid ovarian cancers",
+      "Unaffected by endometriosis, pelvic inflammation, or benign cysts",
+      "High specificity and sensitivity in premenopausal adnexal triage"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Combining serum HE4 and CA-125 within a mathematical algorithm allows objective quantification of epithelial ovarian cancer probability before surgical exploration.",
+   "tx": "The **ROMA algorithm** incorporates **CA-125 plus HE4** concentrations alongside patient **menopausal stratification** (premenopausal vs postmenopausal algorithms) to generate a numeric predictive index, categorizing women into low-risk and high-risk groups for epithelial ovarian malignancy prior to surgical exploration. Multidisciplinary tumour board review ensures optimal clinical staging and coordinates tailored surgical oncological interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Identify suspicious pelvic adnexal mass on bimanual exam or pelvic ultrasound"
+     },
+     {
+      "id": "b",
+      "label": "Measure concurrent serum CA-125 and HE4 concentrations"
+     },
+     {
+      "id": "c",
+      "label": "Apply menopausal status to ROMA mathematical logistic regression"
+     },
+     {
+      "id": "d",
+      "label": "Categorize patient as high risk or low risk to direct gynecologic oncology referral"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The International Ovarian Tumor Analysis group established standardized ultrasound criteria known as Simple Rules to categorize adnexal pathology with high diagnostic precision.",
+   "tx": "The **IOTA Simple Rules** utilize five benign features (**B-features**) and five malignant features (**M-features**). Malignant hallmarks include irregular solid tumor, ascites, at least four papillary structures (**papillary projections >=4**), irregular multilocular solid mass >=100 mm, and very strong color Doppler blood flow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rule Category",
+     "Ultrasonic Hallmark",
+     "Pathological Correlation"
+    ],
+    "rows": [
+     [
+      "B-1 Feature",
+      "Unilocular cystic mass",
+      "Benign cystadenoma or simple follicular cyst"
+     ],
+     [
+      "B-2 Feature",
+      "Presence of solid components < 7 mm",
+      "Benign mural nodule or dermoid plug"
+     ],
+     [
+      "B-3 Feature",
+      "Acoustic shadows behind lesion",
+      "Benign cystic teratoma or ovarian fibroma"
+     ],
+     [
+      "M-1 Feature",
+      "Irregular solid tumor architecture",
+      "High-grade invasive ovarian carcinoma"
+     ],
+     [
+      "M-3 Feature",
+      "At least 4 papillary projections",
+      "Borderline tumor or malignant papillary carcinoma"
+     ],
+     [
+      "M-4 Feature",
+      "Irregular multilocular-solid mass >= 100 mm",
+      "Advanced stage primary ovarian malignancy"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The IOTA Assessment of Different NEoplasias in the adneXa model represents an advanced polychotomous predictive algorithm that surpasses binary triage systems.",
+   "tx": "The advanced **IOTA ADNEX model** is a polychotomous risk prediction tool that calculates individual probabilities of benignity, borderline tumor, early Stage I invasive cancer, advanced Stage II to IV cancer, or secondary **metastatic ovarian disease**, incorporating oncology center status and CA-125 levels.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Input patient age, oncology center setting, and serum CA-125"
+     },
+     {
+      "id": "b",
+      "label": "Input maximal lesion diameter and maximal diameter of largest solid component"
+     },
+     {
+      "id": "c",
+      "label": "Input number of papillary projections, acoustic shadows, and presence of ascites"
+     },
+     {
+      "id": "d",
+      "label": "Generate individual probabilities across 5 specific histological malignancy categories"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "The American College of Radiology developed the O-RADS ultrasound risk stratification system to standardize reporting and clinical management across institutions.",
+   "tx": "The **O-RADS ultrasound** lexicon standardizes adnexal mass characterization into categories 1 through 5. **O-RADS 4 intermediate risk** encompasses a 10% to <50% malignancy risk, while **O-RADS 5 high risk** indicates a >=50% risk, mandating evaluation and surgery by a trained gynecologic oncologist.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "O-RADS Category",
+     "Risk of Malignancy",
+     "Management Recommendation"
+    ],
+    "rows": [
+     [
+      "O-RADS 1",
+      "0% (Normal ovary)",
+      "Physiological findings; no follow-up required"
+     ],
+     [
+      "O-RADS 2",
+      "< 1% (Almost certainly benign)",
+      "Conservative management or follow-up optional"
+     ],
+     [
+      "O-RADS 3",
+      "1% to < 10% (Low risk)",
+      "Ultrasound specialist review or gynecologist management"
+     ],
+     [
+      "O-RADS 4",
+      "10% to < 50% (Intermediate risk)",
+      "Gynecologic oncologist consultation or specialized MRI"
+     ],
+     [
+      "O-RADS 5",
+      ">= 50% (High risk)",
+      "Mandatory gynecologic oncologist surgical referral"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "In asymptomatic postmenopausal women, the serendipitous detection of small, completely unilocular ovarian cysts on routine pelvic imaging can often be managed conservatively.",
+   "tx": "In postmenopausal women, an asymptomatic **simple cyst <5 cm** with thin smooth walls, no septations, and **normal CA-125** carries a malignancy risk under 1%, allowing safe **conservative surveillance** with serial pelvic ultrasonography rather than immediate surgical intervention or invasive exploratory laparotomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Safe for Conservative Surveillance",
+     "points": [
+      "Asymptomatic unilocular thin-walled cyst < 5 cm",
+      "Completely anechoic fluid without internal echoes",
+      "Normal serum CA-125 and HE4 levels"
+     ]
+    },
+    "right": {
+     "title": "Indications for Surgical Intervention",
+     "points": [
+      "Symptomatic or cyst diameter >= 5 cm",
+      "Development of internal septations or papillary nodules",
+      "Rising serum CA-125 or abnormal Doppler vascularity"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Under no circumstances should a clinician perform percutaneous needle aspiration of an intact, potentially resectable cystic adnexal mass.",
+   "tx": "Percutaneous or transvaginal needle biopsy carries a strict **contraindication to aspiration/FNA** because inadvertent cyst puncture causes spillage of malignant cells, leading to **iatrogenic upstaging IA to IC1**, peritoneal seeding, and chemical peritonitis without providing diagnostic tissue architecture for histological staging.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-benign-ovarian-fig1.webp",
+    "ar": 1.8349,
+    "caption": "Adnexal torsion: twisted ovary and fallopian tube on vascular pedicle. Credit: StewardMD.",
+    "alt": "Illustration showing twisted infundibulopelvic pedicle causing vascular compromise and adnexal infarction."
+   }
+  }
+ ]
+}
