@@ -3,16 +3,27 @@
  "module": "pat-intestine",
  "subject": "pathology",
  "title": "Intestinal pathology: malabsorption, IBD, polyps and Hirschsprung",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Coeliac disease** (HLA-DQ2 and DQ8, gluten gliadin, **tTG IgA** with total IgA checked, **villous atrophy** with intraepithelial lymphocytes) causes iron deficiency, diarrhoea and failure to thrive with **dermatitis herpetiformis** (itchy extensor vesicles, dapsone) and **refractory sprue with enteropathy lymphoma** risk; **gluten free diet** heals with serology followed. **Whipple disease** (Tropheryma whipplei, **PAS positive** foamy macrophages, arthralgia with diarrhoea and nodes, CNS oculomasticatory) needs prolonged **ceftriaxone then cotrimoxazole**; SIBO (blind loops, B12 low with folate high, breath tests, rifaximin) and disaccharidase deficiency complete malabsorption.",
-   "say": "Villous flattening with tTG positivity is coeliac: gluten free for life. PAS foamy macrophages with joints are Whipple: long antibiotics.",
+   "tx": "**Coeliac disease** is a gluten sensitive enteropathy linked to HLA DQ2 and DQ8 where gliadin triggers immune injury in the small bowel. Testing uses **tTG IgA** with total IgA checked, and biopsy shows **villous atrophy** with crypt hyperplasia and intraepithelial lymphocytes. It causes iron deficiency, diarrhoea and failure to thrive, with itchy extensor vesicles of dermatitis herpetiformis in some patients. A **gluten free diet** heals the mucosa, while refractory disease carries enteropathy associated lymphoma risk that needs specialist care.",
+   "say": "Coeliac disease follows gluten exposure in genetically susceptible patients and flattens the small bowel villi severely. Serology and biopsy confirm the diagnosis, and iron deficiency often provides the first clinical clue for doctors. Strict gluten avoidance heals the mucosa, while refractory disease needs specialist care because lymphoma risk rises.",
    "vis": null
   },
   {
-   "tx": "**Crohn disease** (mouth to anus, **skip lesions** with **creeping fat** and strictures, **transmural** with **noncaseating granulomas**, cobblestoning, fistulas, smoking worsens) differs from **ulcerative colitis** (rectum upward continuous, **crypt abscesses** with goblet depletion, toxic megacolon, smoking protects, **primary sclerosing cholangitis** associates). UC bleeds superficially; Crohn obstructs and fistulises. Treatment steps mesalazine (UC), steroids, thiopurines, **anti TNF and vedolizumab or ustekinumab**; surgery colectomises UC curatively while Crohn recurs. Colonoscopy with biopsies sorts.",
-   "say": "Skip transmural fistulising is Crohn; continuous rectal bleeding is UC. Smoking harms Crohn, shields UC.",
+   "tx": "The biopsy shows a flat mucosal surface with **villous atrophy**, deep hyperplastic crypts and many lymphocytes inside the surface epithelium. The inset of tall normal villi makes the loss of absorptive surface easy to appreciate at low power. This triad is classic for **coeliac disease** and explains malabsorption with iron deficiency and diarrhoea in susceptible patients. In the exam, flat villi with crypt hyperplasia and **intraepithelial lymphocytosis** should immediately raise coeliac disease.",
+   "say": "This biopsy shows flat villi with deep crypts and many lymphocytes inside the surface lining of the bowel. The normal inset highlights how much absorptive surface has disappeared in the diseased mucosa shown here. That triad causes malabsorption and iron deficiency, and it should immediately suggest coeliac disease during examination revision.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-intestine-gen1.webp",
+    "alt": "Duodenal biopsy with villous atrophy, crypt hyperplasia and lymphocytosis beside normal villi inset",
+    "caption": "Duodenal histology showing villous atrophy and crypt hyperplasia. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Crohn disease** can affect any part of the gut from mouth to anus with skip lesions, creeping fat, strictures and transmural inflammation. Noncaseating granulomas, cobblestoning and fistulas support Crohn disease, and smoking worsens its course over time in affected patients. **Ulcerative colitis** instead starts in the rectum and spreads continuously with mucosal inflammation, crypt abscesses and goblet cell depletion. Smoking protects against ulcerative colitis, colectomy cures its colonic disease, and **primary sclerosing cholangitis** associates strongly with it.",
+   "say": "Crohn disease affects any gut segment with skipped transmural inflammation, strictures and fistula formation over time. Ulcerative colitis starts in the rectum, spreads continuously and inflames only the mucosa in most patients. Smoking worsens Crohn disease but protects against ulcerative colitis, which colectomy can cure when medical therapy fails.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-intestine-fig1.webp",
@@ -22,13 +33,13 @@
    }
   },
   {
-   "tx": "**Colorectal polyps** sort malignant potential: hyperplastic (serrated benign, distal), **adenomas** (tubular, tubulovillous, villous with worst risk, size and high grade dysplasia drive), sessile serrated (BRAF, right sided, interval cancers), hamartomatous (juvenile, Peutz-Jeghers STK11 with mucocutaneous pigment, Cowden PTEN). **APC pathway** (chromosomal instability, FAP with hundreds of polyps and desmoids, prophylactic colectomy) differs from **microsatellite instability** (**HNPCC Lynch** with MSH2 and MLH1, right sided with endometrial and ovarian tumours, Amsterdam criteria, aspirin debates). Snare with surveillance intervals prevents.",
-   "say": "Villous large polyps threaten most. Hundreds of polyps with desmoids are FAP: colectomy prevents.",
+   "tx": "**Colorectal polyps** need sorting by malignant potential because hyperplastic polyps are usually benign while adenomas progress toward cancer. Tubular, tubulovillous and **villous adenomas** carry increasing risk, and larger size with high grade dysplasia raises that risk further. Sessile serrated lesions follow the BRAF pathway on the right side, while hamartomatous polyps mark syndromes such as Peutz Jeghers and Cowden disease. **Familial adenomatous polyposis** follows the APC pathway with hundreds of polyps, while **Lynch syndrome** follows mismatch repair failure with right sided cancers.",
+   "say": "Polyps need sorting because villous and large adenomas progress toward cancer far more often than small lesions. Hundreds of polyps suggest familial polyposis that needs prophylactic colectomy before cancer develops in young patients. Mismatch repair failure causes Lynch syndrome with right sided bowel cancers and tumours outside the bowel as well.",
    "vis": null
   },
   {
-   "tx": "**Hirschsprung disease** (aganglionic distal bowel from failed neural crest migration, **RET** mutations, Down association, male predominance) presents with delayed meconium, bilious vomiting and enterocolitis; **suction biopsy** (absent ganglia with hypertrophic nerves, calretinin lost) confirms with transition zone on contrast enema. Treatment is pull through (Swenson, Soave, Duhamel) resecting to ganglionic bowel. **Mesenteric ischaemia** (AF emboli with pain out of proportion and lactic acidosis, watershed ischaemic colitis) and Ogilvie pseudo obstruction complete emergencies.",
-   "say": "No meconium in 48 hours with transition zone is Hirschsprung: biopsy then pull through. Pain out of proportion is mesenteric ischaemia.",
+   "tx": "**Hirschsprung disease** follows failed neural crest migration that leaves the distal bowel aganglionic and unable to relax normally. RET mutations, Down syndrome association and male predominance support the diagnosis in a newborn with delayed meconium passage. Bilious vomiting and enterocolitis complicate the obstructed segment, while **suction biopsy** confirms absent ganglia with hypertrophic nerves and lost calretinin staining. Contrast enema shows a transition zone, and pull through surgery resects bowel up to the normally ganglionic segment.",
+   "say": "Hirschsprung disease leaves distal bowel without ganglia, so the segment cannot relax and obstructs from birth onward. Delayed meconium, bilious vomiting and enterocolitis support the diagnosis, while suction biopsy confirms absent ganglia definitively. Pull through surgery removes the abnormal segment and joins normally ganglionic bowel to complete treatment for most infants.",
    "vis": {
     "kind": "table",
     "cols": [

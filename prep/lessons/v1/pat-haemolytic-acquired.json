@@ -6,13 +6,24 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "Acquired haemolysis divides into immune (Coombs positive), mechanical microangiopathic (schistocytes, Coombs negative), infectious, drug oxidant and marrow clone causes. **Schistocytes** are sheared red fragments proving mechanical destruction in small vessels or on prosthetic valves. The Coombs test plus film splits the differential faster than any panel.",
-   "say": "Acquired haemolysis splits by Coombs and film. Schistocytes prove shearing. Immune coats test positive. Film plus Coombs triages fastest.",
+   "tx": "Acquired haemolysis divides into immune, mechanical, infectious, drug related and marrow clone causes that need different treatment. **Schistocytes** are sheared red cell fragments that prove mechanical destruction inside small vessels or across prosthetic valves. Immune haemolysis coats red cells with antibody or complement and gives a positive **direct antiglobulin test** result. The blood film plus the Coombs test splits the differential faster than any broad panel in an emergency stem.",
+   "say": "Acquired haemolysis needs sorting by the film and the Coombs test before treatment can start safely. Fragmented cells prove mechanical shearing inside vessels, while a positive Coombs result proves immune coating instead. Those two results triage the patient faster than any broad laboratory panel in an emergency.",
    "vis": null
   },
   {
-   "tx": "**Thrombotic thrombocytopenic purpura** from ADAMTS13 failure lets ultra large von Willebrand multimers platelet clump microvessels, shearing red cells and consuming platelets with fever, renal and neurological fluctuation (classic pentad rarely complete). Plasma exchange is emergent and must not wait for ADAMTS13 results when schistocytes, thrombocytopenia and haemolysis combine without another cause.",
-   "say": "TTP clumps platelets through uncleaved von Willebrand factor, shearing cells and confusing brains. Exchange plasma immediately on suspicion; do not wait for enzyme proof.",
+   "tx": "The film shows fragmented **schistocytes** and a helmet cell beside very few platelets in a patient with microangiopathic haemolysis. This combination points toward **thrombotic thrombocytopenic purpura** where platelet rich microthrombi shear passing red cells inside small vessels. Recognising schistocytes with thrombocytopenia matters because plasma exchange must start urgently without waiting for confirmatory enzyme testing. In the exam, fragmented cells plus low platelets should immediately raise a microangiopathic process.",
+   "say": "This film shows fragmented red cells and a helmet cell with very few platelets visible anywhere. That combination proves mechanical shearing and points toward thrombotic thrombocytopenic purpura in the right clinical setting. Plasma exchange must start urgently because schistocytes with thrombocytopenia signal a life threatening microangiopathic process.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-haemolytic-acquired-gen1.webp",
+    "alt": "Blood smear with fragmented schistocytes, helmet cell and few platelets in TTP.",
+    "caption": "Schistocytes, helmet cell and thrombocytopenia in TTP smear. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Thrombotic thrombocytopenic purpura** follows failure of **ADAMTS13** to cleave ultra large von Willebrand multimers that trap platelets inside small vessels. The resulting microthrombi shear red cells and consume platelets, with fluctuating brain and kidney features that rarely complete the classic pentad. Fever may occur, but absence of the full pentad should never delay treatment when the film and counts fit. **Plasma exchange** is emergent and must start on suspicion without waiting for the ADAMTS13 result.",
+   "say": "This disease traps platelets inside small vessels because uncleaved von Willebrand factor forms long sticky multimers. Sheared cells and low platelets follow, and brain symptoms fluctuate while kidney injury remains relatively milder. Plasma exchange must start immediately on suspicion because waiting for enzyme proof costs lives in practice.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-haemolytic-acquired-fig1.webp",
@@ -22,8 +33,8 @@
    }
   },
   {
-   "tx": "**Haemolytic uraemic syndrome** instead injures renal endothelium, typically after Shiga toxin E coli bloody diarrhoea in children, causing haemolysis, thrombocytopenia and acute kidney injury dominating over neurology. Atypical HUS from complement dysregulation recurs and responds to complement blockade. TTP and HUS overlap but organ emphasis and age separate them usefully.",
-   "say": "HUS follows bloody diarrhoea in children and destroys kidneys mainly. TTP confuses brains mainly in adults. Organ emphasis separates the twins.",
+   "tx": "**Haemolytic uraemic syndrome** injures renal endothelium and usually follows Shiga toxin producing Escherichia coli with bloody diarrhoea in children. It causes haemolysis, low platelets and **acute kidney injury** that dominates over neurological features in typical disease. **Atypical haemolytic uraemic syndrome** follows complement dysregulation, recurs more often and responds to complement blockade in selected patients. Organ emphasis and age separate it usefully from thrombotic thrombocytopenic purpura at the bedside and in exams.",
+   "say": "This syndrome follows bloody diarrhoea in children and injures the kidney more than the brain. Atypical disease follows complement dysregulation and recurs, so complement blockade helps selected patients over time. Age and organ emphasis separate this condition from thrombotic thrombocytopenic purpura in most examination stems.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -47,13 +58,13 @@
    }
   },
   {
-   "tx": "**Autoimmune haemolysis** warm and cold types were contrasted previously; drug immune haemolysis adds hapten (penicillin), immune complex (quinidine) and true autoantibody (methyldopa) mechanisms resolving on drug withdrawal. Paroxysmal cold haemoglobinuria after viral illness in children lyses cells through biphasic Donath Landsteiner antibody, darkening urine after cold exposure.",
-   "say": "Drugs haemolyse by hapten, immune complex or autoantibody tricks stopping when withdrawn. Childhood post viral cold antibody lyses after chilling. Withdrawal is diagnostic therapy.",
+   "tx": "**Autoimmune haemolysis** includes warm and cold types, while drug induced immune haemolysis adds hapten, immune complex and true autoantibody mechanisms. Penicillin illustrates the hapten mechanism, quinidine illustrates immune complex injury, and methyldopa illustrates true autoantibody formation against red cells. Every mechanism resolves after the culprit drug is withdrawn, which makes drug history diagnostic and therapeutic. **Paroxysmal cold haemoglobinuria** follows viral illness in children and lyses cells through a biphasic antibody after cold exposure.",
+   "say": "Drugs destroy red cells through hapten binding, immune complex injury or true autoantibody formation in susceptible patients. Stopping the culprit drug causes recovery because every mechanism depends on continued drug exposure in these cases. Childhood cold haemoglobinuria lyses cells after chilling and darkens the urine following a viral illness.",
    "vis": null
   },
   {
-   "tx": "Infections haemolyse directly: malaria ruptures parasitised cells cyclically, babesiosis mimics it in asplenic patients, clostridial sepsis alpha toxin lyses massively and bartonella in immunosuppression destroys cells. **Mechanical valves** and malignant hypertension or DIC shear cells chronically, so haemolysis stems always ask for film, Coombs, cultures and drug history together.",
-   "say": "Malaria and clostridia lyse from inside; valves and DIC shear from outside. Film, Coombs, cultures and drug history together solve haemolysis.",
+   "tx": "Infections destroy red cells directly because malaria ruptures parasitised cells cyclically and babesiosis mimics malaria in patients without a spleen. Clostridial sepsis releases alpha toxin that lyses cells massively, while bartonella destroys cells in immunosuppressed patients. **Mechanical valves**, malignant hypertension and **disseminated intravascular coagulation** shear cells chronically from outside the red cell. Every haemolysis stem therefore needs the film, Coombs test, cultures and drug history assessed together.",
+   "say": "Malaria and clostridial toxins destroy red cells from inside, while valves and clotting disorders shear them from outside. Babesiosis mimics malaria closely in patients who have lost splenic function after surgery or disease. Film findings, Coombs testing, cultures and drug history together solve most haemolysis questions in the examination.",
    "vis": null
   }
  ],

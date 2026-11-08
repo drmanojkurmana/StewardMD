@@ -6,13 +6,13 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Coagulation disorders** divide into factor deficiencies causing deep bleeding and platelet or vessel defects causing mucocutaneous bleeding, a bedside split examiners use constantly. Haemophilias bleed into joints and muscles hours after injury, while von Willebrand disease and platelet defects ooze immediately from gums, nose and skin. Laboratory patterns then confirm which arm has failed.",
-   "say": "Deep joint and muscle bleeding means factor deficiency. Immediate gum, nose and skin oozing means platelet or von Willebrand failure. Bleeding style localises the defect before labs return.",
+   "tx": "Bleeding pattern at the bedside separates factor defects from platelet defects. **Factor deficiency** causes deep joint and muscle bleeding, and **platelet defects** cause immediate mucocutaneous oozing from skin and gums. Haemophilia bleeds hours after injury, whereas von Willebrand disease oozes promptly, and laboratory testing then confirms which arm has failed.",
+   "say": "Deep bleeding indicates factor deficiency because joints and muscles are affected characteristically. Mucocutaneous oozing indicates platelet or von Willebrand failure at the bedside. The timing is useful because factor bleeding is delayed after injury occurs. Laboratory patterns confirm the defect after clinical assessment is complete.",
    "vis": null
   },
   {
-   "tx": "**Haemophilia A** lacks factor VIII and haemophilia B lacks factor IX, both X linked recessive so males suffer while females carry and transmit. Activated partial thromboplastin time prolongs with normal prothrombin time, platelet count and bleeding time. Recurrent haemarthrosis destroys joints without prophylaxis, now prevented by regular factor replacement or emicizumab for haemophilia A.",
-   "say": "Haemophilia A lacks factor eight, B lacks factor nine, both X linked in males. APTT prolongs alone. Repeated joint bleeds destroy joints without prophylaxis.",
+   "tx": "Haemophilia A and B are X linked disorders of intrinsic coagulation factors. **Haemophilia A** lacks factor VIII, and **haemophilia B** lacks factor IX in affected males. The activated partial thromboplastin time is prolonged alone, and recurrent haemarthrosis destroys joints unless regular prophylactic factor replacement is given.",
+   "say": "Factor eight is lacking in haemophilia A and factor nine is lacking in haemophilia B. Inheritance is X linked recessive so males are affected most severely clinically. The clotting screen shows isolated prolongation of activated partial thromboplastin time only. Joint destruction develops because repeated haemarthrosis damages cartilage over years.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -50,8 +50,19 @@
    }
   },
   {
-   "tx": "**Von Willebrand disease** is the commonest inherited bleeding disorder, impairing platelet adhesion and factor VIII carriage together. Mucocutaneous bleeding, menorrhagia and post extraction oozing dominate, with prolonged bleeding time and variably prolonged APTT. Desmopressin releases stored factor in mild type 1 disease, the most testable treatment fact in this group.",
-   "say": "Von Willebrand disease is commonest, causing mucosal bleeding and heavy periods. It impairs platelet adhesion and factor eight carriage. Mild type one responds to desmopressin release.",
+   "tx": "This knee radiograph shows the late joint damage caused by repeated haemarthrosis. **Joint space narrowing** reflects cartilage loss, and **epiphyseal overgrowth** with a widened notch and subchondral cysts is also shown. This image matters because regular prophylaxis prevents exactly this destructive arthropathy in boys with haemophilia.",
+   "say": "This radiograph shows narrowing of the knee joint space from cartilage loss. The epiphysis is overgrown and the intercondylar notch is widened abnormally. Subchondral cysts are present below the articular surface in both bones. Repeated bleeding causes this damage because blood destroys cartilage progressively.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-coagulation-disorders-gen1.webp",
+    "alt": "Frontal knee radiograph with arrows marking joint space narrowing, epiphyseal overgrowth with widened notch and subchondral cysts.",
+    "caption": "Knee radiograph showing joint narrowing, epiphyseal overgrowth and cysts. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Von Willebrand disease is the commonest inherited bleeding disorder overall. **Von Willebrand factor** supports platelet adhesion and carries factor VIII, and **desmopressin** releases stored factor in mild type one disease. Mucocutaneous bleeding, menorrhagia and post extraction oozing dominate the presentation, and bleeding time is prolonged in affected patients.",
+   "say": "Von Willebrand disease is commonest among inherited bleeding disorders in practice. Platelet adhesion is impaired and factor eight carriage is reduced simultaneously. Mucosal bleeding and heavy periods dominate because surface oozing persists after injury. Desmopressin is effective because stored factor is released in mild disease.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -75,8 +86,8 @@
    }
   },
   {
-   "tx": "**Disseminated intravascular coagulation** consumes platelets and factors in systemic microthrombosis while secondary fibrinolysis bleeds, so patients clot and haemorrhage simultaneously. Platelets and fibrinogen fall, both clotting times prolong and D dimer soars with schistocytes. Sepsis, obstetric catastrophes, promyelocytic leukaemia and trauma are triggers, and treating the cause outranks any product transfusion.",
-   "say": "DIC clots microvessels while consuming factors until bleeding follows. Platelets and fibrinogen fall, D dimer soars. Sepsis and obstetric disasters trigger it. Treat the cause first.",
+   "tx": "Disseminated intravascular coagulation causes clotting and bleeding at the same time. In **disseminated intravascular coagulation**, platelets and fibrinogen fall, and **D dimer** rises markedly with schistocytes on the film. Sepsis, obstetric catastrophe, promyelocytic leukaemia and trauma are triggers, and treating the underlying cause outranks product transfusion alone.",
+   "say": "Disseminated coagulation consumes platelets and factors during widespread microvascular thrombosis systemically. Bleeding develops because consumed factors cannot sustain normal haemostasis any longer. Fibrinogen falls and D dimer rises markedly in this consumptive process. The trigger is treated first because transfusion alone cannot control consumption.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-coagulation-disorders-fig1.webp",
@@ -86,8 +97,8 @@
    }
   },
   {
-   "tx": "Liver disease mixes bleeding and clotting because the failing liver underproduces procoagulant and anticoagulant factors while portal hypertension sequesters platelets. **Vitamin K deficiency** selectively lowers factors II, VII, IX and X plus proteins C and S, corrected by vitamin K when deficiency rather than hepatocellular failure is the cause. Test interpretation must respect this rebalanced haemostasis concept.",
-   "say": "Liver failure lowers both clotting and anticlotting factors in a fragile rebalance. Vitamin K deficiency drops factors two, seven, nine and ten. Vitamin K corrects deficiency, not dead hepatocytes.",
+   "tx": "Liver disease produces a fragile rebalanced state of bleeding and clotting. The failing liver underproduces **procoagulant factors** and anticoagulant proteins, and **vitamin K deficiency** selectively lowers factors II, VII, IX and X. Vitamin K corrects true deficiency, whereas it cannot restore function when hepatocellular failure is the cause.",
+   "say": "Liver failure lowers clotting factors and anticoagulant proteins at the same time. Portal hypertension sequesters platelets and bleeding risk increases in advanced disease. Four procoagulant factors are lowered in vitamin K deficiency with proteins C and S. Correction occurs in deficiency because hepatocytes can still synthesise factors.",
    "vis": null
   }
  ],

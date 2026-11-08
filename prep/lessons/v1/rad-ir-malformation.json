@@ -3,11 +3,11 @@
  "module": "rad-ir-malformation",
  "subject": "radiology",
  "title": "Vascular malformations",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Flow decides everything in vascular anomalies. The **ISSVA classification** splits lesions into **high-flow** arteriovenous malformations and fistulas versus **low-flow** venous, lymphatic and capillary lesions. **Arteriovenous malformations** shunt blood through a **nidus** without capillaries, with warmth, thrill and high-output failure. **Venous malformations** are soft, compressible and blue, swelling with dependency and containing **phleboliths**. Correct flow labelling precedes every treatment plan.",
-   "say": "Flow decides everything. ISSVA splits high-flow shunts from low-flow venous, lymphatic and capillary lesions. Malformations with a nidus run warm with thrills and can fail hearts, while venous ones feel soft and blue with stones inside. Flow labelling precedes every plan.",
+   "tx": "Flow pattern decides the type and treatment of a vascular anomaly. The standard classification separates **high flow lesions** such as arteriovenous malformations and fistulas from low flow lesions. **Venous malformations** are soft, compressible and blue and often contain small phleboliths. An arteriovenous lesion shunts through a **nidus** without capillaries and feels warm with a thrill. Correct flow labelling comes before any treatment plan is made for the patient.",
+   "say": "Flow pattern decides the type and treatment of a vascular anomaly. High flow shunts are different from low flow lesions in behaviour. A venous lesion feels soft and blue and often contains small stones inside. A high flow lesion feels warm with a thrill, and correct labelling precedes every treatment plan safely.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -35,8 +35,8 @@
    }
   },
   {
-   "tx": "The nidus is the target in AVM work. **Nidus embolisation** with ethanol or **Onyx** closes the shunt core, while proximal ligation alone merely recruits collaterals. The **Yakes classification** guides access choice between transarterial, transvenous and direct puncture. **Staging** across sessions limits swelling and skin loss in large lesions. **Coils alone** in feeding arteries without nidus penetration invite recurrence. **Heart failure** from massive shunting reverses as the nidus closes.",
-   "say": "The nidus is the target. Ethanol or Onyx must reach the shunt core, since proximal ties merely recruit collaterals. Classification guides arterial, venous or direct routes. Staging limits skin loss, coils alone invite recurrence, and heart failure reverses as the nidus closes.",
+   "tx": "The nidus is the true target in arteriovenous malformation treatment. **Nidus embolisation** with ethanol or a liquid copolymer closes the shunt core from inside. Tying a feeding artery alone fails because **collateral recruitment** reopens the lesion around the block. Treatment is staged across sessions because **large lesions** swell and may lose skin if treated at once. Heart failure from massive shunting improves as the nidus closes and steal falls.",
+   "say": "The nidus is the true target in arteriovenous malformation treatment. Liquid agents are effective because they close the shunt core from inside. Tying a feeder alone fails because collaterals reopen the lesion quickly. Treatment is staged across sessions, and heart failure improves as the nidus closes and steal falls.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -74,8 +74,19 @@
    }
   },
   {
-   "tx": "Low-flow lesions shrink with sclerosants. **Venous malformations** respond to **sodium tetradecyl sulphate**, doxycycline or ethanol injected under ultrasound or fluoroscopy. **Lymphatic malformations** with macrocysts collapse after **doxycycline or bleomycin** instillation with aspiration. **Compression garments** control swelling between sessions. **Coagulopathy** with low fibrinogen in extensive venous lesions needs correction before needling. **Airway lymphatics** in the neck demand intensive care backup for post-procedure swelling.",
-   "say": "Low-flow lesions shrink with sclerosants. Venous ones respond to tetradecyl, doxycycline or ethanol under imaging. Lymphatic macrocysts collapse after doxycycline or bleomycin with aspiration. Garments control swelling, coagulopathy needs correction first, and neck lesions need airway backup.",
+   "tx": "The lateral cerebral angiogram shows an enlarged **feeding artery** entering a dense tangled **nidus** in the brain. A large draining vein leaves the tangle early because blood bypasses the capillary bed completely. The centre of the nidus is marked as the liquid embolic target for treatment. Examiners stress this target because closing a feeder alone allows **collateral recurrence** around the block.",
+   "say": "The cerebral angiogram shows a feeding artery that enters a tangled nidus. A large vein drains early because blood bypasses capillaries completely. The nidus centre is the target for liquid embolic treatment here. Closing a feeder alone allows recurrence because collaterals reopen the lesion around the block.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-malformation-gen1.webp",
+    "alt": "Lateral cerebral angiogram showing tangled nidus supplied by enlarged feeding artery draining to large vein.",
+    "caption": "Catheter angiogram shows AVM nidus with feeding artery and draining vein. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Low flow lesions shrink when a sclerosant injures their lining. **Venous malformations** respond to tetradecyl sulphate, doxycycline or ethanol injected under imaging guidance. **Lymphatic malformations** with large cysts collapse after doxycycline or bleomycin is instilled after aspiration. Compression garments control swelling between treatment sessions and support shrinkage. Extensive venous lesions may consume clotting factors, so **low fibrinogen** is corrected before needling, and neck lesions need airway backup.",
+   "say": "Low flow lesions shrink when a sclerosant injures their lining. Venous lesions respond to injections that are guided by imaging. Lymphatic cysts are treated by aspiration followed by drug instillation inside the cyst. Compression controls swelling between sessions, while extensive lesions need clotting correction and neck lesions need airway backup ready.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-malformation-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Tumours mimic malformations and must be separated. Infantile **haemangioma** is a true tumour with rapid growth then involution, treated first-line with **propranolol** rather than needles. **Klippel-Trenaunay syndrome** combines capillary stain, venous malformation and limb overgrowth with clotting risks. **Parkes Weber syndrome** adds high-flow shunts with overgrowth. **Biopsy** is avoided in typical malformations where imaging suffices, since needling invites bleeding. **Multidisciplinary clinics** with dermatology, surgery and genetics steer complex cases.",
-   "say": "Tumours mimic malformations. Infantile haemangioma grows then involutes and takes propranolol first. Klippel-Trenaunay combines stain, venous lesions and overgrowth, while Parkes Weber adds high-flow shunts. Biopsy is avoided where imaging suffices, and joint clinics steer complex cases.",
+   "tx": "Some vascular tumours mimic malformations and must be separated carefully. Infantile **haemangioma** is a true tumour that grows rapidly and then involutes with time. It responds first to **propranolol** rather than to needles or sclerosants. One limb syndrome combines a capillary stain with venous malformation and overgrowth, while another adds high flow shunts. Biopsy is avoided in typical malformations because imaging is enough and needling invites bleeding.",
+   "say": "Some vascular tumours mimic malformations and must be separated carefully. Infantile haemangioma is a true tumour that grows and then involutes. It is treated first with propranolol rather than needles in infants today. Biopsy is avoided in typical malformations because imaging is enough and needling invites bleeding unnecessarily.",
    "vis": {
     "kind": "table",
     "cols": [

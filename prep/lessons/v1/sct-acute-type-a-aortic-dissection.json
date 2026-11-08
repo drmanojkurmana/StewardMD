@@ -25,78 +25,20 @@
       "say": "Aortic dissection begins when a tear in the intima allows blood to surge into the media. Pulsatile arterial flow strips the media apart, creating a true lumen and an expanding false lumen. An intimal flap separates the two channels along the length of the dissected aorta.",
       "tx": "Acute aortic dissection originates from an **intimal tear** that allows pressurized blood to surge into the aortic media, driving apart the elastic layers. This process creates a dynamic **intimal flap** that partitions aortic blood flow between the original **true lumen** and a newly formed **false lumen**.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Primary intimal entry tear in aortic wall"
-          },
-          {
-            "id": "b",
-            "label": "Pressurized blood dissects medial elastic lamellae"
-          },
-          {
-            "id": "c",
-            "label": "Formation of dynamic separating intimal flap"
-          },
-          {
-            "id": "d",
-            "label": "Creation of dual true and false luminal flow channels"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/aortic-dissection-fig1.webp",
+        "alt": "Illustration of an ascending aortic intimal tear with true and false lumina and Stanford types.",
+        "caption": "Intimal tear with true and false lumina in aortic dissection. Credit: StewardMD."
       }
     },
     {
       "say": "Classification systems guide emergency surgical decision-making. The Stanford system categorizes any dissection involving the ascending aorta as type A, which requires emergency surgery. The DeBakey system details extent, with type one involving ascending and descending aorta, and type two confined to the ascending segment.",
       "tx": "The **Stanford classification** categorizes any dissection involving the ascending aorta as **Stanford Type A**, mandating emergency surgery, while dissection confined to the descending aorta is **Stanford Type B**. The **DeBakey classification** further separates extensive Type I from localized Type II ascending tears.",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Classification System",
-          "Subtype",
-          "Anatomical Involvement and Urgency"
-        ],
-        "rows": [
-          [
-            "Stanford",
-            "Type A",
-            "Involves ascending aorta; emergency surgical repair"
-          ],
-          [
-            "Stanford",
-            "Type B",
-            "Confined to descending thoracic aorta distal to LSA; medical or TEVAR"
-          ],
-          [
-            "DeBakey",
-            "Type I",
-            "Originates in ascending aorta, extends distally through arch and descending"
-          ],
-          [
-            "DeBakey",
-            "Type II",
-            "Confined strictly to the ascending aorta proximal to innominate takeoff"
-          ],
-          [
-            "DeBakey",
-            "Type III",
-            "Originates in descending aorta (IIIa thoracic, IIIb below diaphragm)"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/aortic-dissection-fig2.webp",
+        "alt": "Dissecting aorta diagram with true and false lumina and Stanford and DeBakey classification panels.",
+        "caption": "Stanford and DeBakey classification of aortic dissection. Credit: StewardMD."
       }
     },
     {

@@ -3,16 +3,16 @@
  "module": "pcd-congenital",
  "subject": "paediatrics",
  "title": "Congenital heart disease: shunts, TOF, PDA and coarctation",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Shunts** (**VSD commonest**, harsh pansystolic, **ASD** fixed split, **PDA** continuous machinery bounding, **AV canal** Down; **pulmonary overcirculation** failure sweaty feeds, **Eisenmenger** reversed cyanotic clubbed) with **echo** (defect size, pressures, **cath** operability) evaluates; **heart failure** (digoxin diuretics, fortified feeds, **surgery** timing) manages. Murmurs thrill.",
-   "say": "Harsh hole sweaty failure bounding machinery is shunts: echo pressures cath operability. Failures feed fortified.",
+   "tx": "Left to right **shunts** include ventricular septal defect, which is commonest and gives a harsh pansystolic murmur. Atrial septal defect gives a fixed split second sound, patent ductus gives a continuous machinery murmur with bounding pulses, and AV canal links with Down syndrome. Large shunts cause **pulmonary overcirculation** with sweaty feeds and heart failure, while reversal produces Eisenmenger syndrome with cyanosis and clubbing. Echocardiography sizes the defect and catheter studies judge operability.",
+   "say": "Ventricular septal defect is the commonest congenital heart lesion. Large shunts overcirculate the lungs and cause heart failure. Babies feed poorly and sweat during feeds. Eisenmenger reversal produces cyanosis and clubbing over time.",
    "vis": null
   },
   {
-   "tx": "**TOF** (**pulmonary stenosis, VSD, overriding aorta, RVH**; **PROVe** paroxysmal hypercyanotic spells, **boot heart**, **knee chest** relieves, **beta blocker** propranolol, **iron** relative anaemia) with **TGA** (**D** dextro, **egg on string**, **balloon septostomy** Rashkind, **arterial switch** Jatene) and **tricuspid pulmonary atresia** (**prostaglandin** duct open, **shunt** BT) ducts; **tet spells** (cry feeds, morphine phenylephrine) abort. Knees squat.",
-   "say": "Boot PROVe squatting spells is TOF: knees propranolol iron abort. Eggs septostomise switch.",
+   "tx": "**Tetralogy of Fallot** combines pulmonary stenosis, a ventricular septal defect, an overriding aorta and right ventricular hypertrophy. The chest film shows a **boot shaped heart**, and hypercyanotic spells are relieved by the knee chest position. Propranolol prevents spells and iron treats relative anaemia, while crying spells may need morphine and phenylephrine. Transposition instead shows an egg on string heart, needs a Rashkind septostomy and then an arterial switch operation.",
+   "say": "Tetralogy of Fallot has four defects in one heart. Spells turn the child deeply blue during crying. The knee chest position is relieving a spell quickly. Propranolol and iron help prevent further spells.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pcd-congenital-fig1.webp",
@@ -22,13 +22,24 @@
    }
   },
   {
-   "tx": "**PDA** (**preterm**, continuous, **indomethacin ibuprofen** close, **paracetamol** selected, **fluid restrict**, **surgical ligation** failed ventilated) with **coarctation** (**femoral delay**, **rib notching**, **upper hypertension**, **prostaglandin** neonatal, **balloon repair** surgery) and **aortic pulmonary stenosis** (ejection systolic, **balloon valvuloplasty**) obstructs; **HLHS** (**norwood** staged, transplant) palliates. Femorals compare.",
-   "say": "Machinery preterm closes drugs restricts ties: femorals delay ribs notch prostaglandin bridges. Pressures compare.",
+   "tx": "**Patent ductus arteriosus** in preterm infants gives a continuous murmur and it is closed with indomethacin or ibuprofen. Paracetamol is selected in some infants, fluids are restricted, and surgical ligation follows failed medical closure in a ventilated baby. **Coarctation** causes femoral delay, rib notching and upper limb hypertension, and prostaglandin keeps the duct open in a sick newborn. Balloon repair or surgery corrects the narrowing, and balloon valvuloplasty treats stenotic valves.",
+   "say": "Patent ductus in preterm infants is often closing with drug therapy. Fluids are restricted while the duct stays open. Coarctation delays the femoral pulse compared with the arm. Prostaglandin keeps the duct open in sick newborns.",
    "vis": null
   },
   {
-   "tx": "**Endocarditis** (**prophylaxis** high risk dental, **Duke** cultures echo vegetations, **penicillin gentamicin** strep, **vancomycin** MRSA, **surgery** large mobile abscess) with **follow** (**growth** charts, **immunise** flu RSV, **dental** hygiene, **sports** lesions graded, **pregnancy** counselled) closes; **Down** (AV canal, hypothyroid leukaemia atlantoaxial) screens. Teeth brush.",
-   "say": "Fevers vegetations cultures echo penicillin genta is endocarditis: high risk dental prophylaxes. Growth sports counselled.",
+   "tx": "This chest radiograph shows coarctation with a **figure 3 sign** where the aortic contour is indented at the narrowing. The magnified inset and lower ribs show **inferior rib notching** produced by enlarged collateral intercostal arteries. The film also reminds the student to expect radio femoral delay and upper limb hypertension on examination. These radiology signs matter because coarctation is missed when clinicians fail to compare arm and leg pulses.",
+   "say": "This radiograph shows an indented aortic contour called the figure three sign. The lower ribs show notching from enlarged collateral arteries. Coarctation delays the femoral pulse and raises arm pressure. Clinicians must compare pulses in arms and legs carefully.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pcd-congenital-gen1.webp",
+    "alt": "Chest Xray with figure 3 aortic contour, inferior rib notching from collaterals, and magnified rib inset.",
+    "caption": "Chest radiograph showing figure 3 sign and rib notching in coarctation. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Infective endocarditis** prophylaxis is reserved for high risk children during dental procedures. Diagnosis uses **Duke criteria** with blood cultures, echocardiography and vegetations, and streptococcal disease is treated with penicillin and gentamicin while MRSA needs vancomycin. Surgery follows large mobile vegetations or abscess formation around a valve. Follow up tracks growth, immunisation, dental hygiene and sports advice, and children with Down syndrome need screening for associated problems.",
+   "say": "Endocarditis prophylaxis protects only high risk children during dentistry. Blood cultures and echocardiography confirm the diagnosis with Duke criteria. Large vegetations or abscess formation need surgical referral. Dental hygiene and immunisation protect children during follow up.",
    "vis": {
     "kind": "table",
     "cols": [
