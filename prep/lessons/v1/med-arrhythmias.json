@@ -6,18 +6,18 @@
   "minutes": 6,
   "steps": [
     {
-      "tx": "**History** (**palpitation** regular irregular onset offset, **sudden** abrupt vagal ends, **triggers** caffeine alcohol stress exercise, **syncope** prodrome injury driving, **chest** pain breathless failure, **thyroid** tremor weight drugs, **family** sudden young WPW, **pills** digoxin beta antiarrhythmics) with **viva** (**anxious** young hyperthyroid, **elderly** hypertensive AF) profiles; **Holter** (48-hour captures) times. Hearts race.",
-      "say": "Regulars irregulars abrupt triggers syncopes chests thyroids families pills is history: anxious young elderlies hypertensive Holters capture episodes time scares stop. Beats flutter.",
+      "tx": "Start by asking about **palpitations** in detail: are they regular or irregular, abrupt or gradual, and what starts and stops them. Ask about syncope with or without warning, chest pain and breathlessness, thyroid symptoms such as tremor and weight loss, family history of sudden death or Wolff Parkinson White syndrome, and current drugs including digoxin and beta blockers. A Holter monitor can capture episodes that come and go.",
+      "say": "Begin the rhythm history by asking about palpitations: whether the racing feels regular or irregular, how suddenly episodes start and stop, and what triggers them, such as caffeine, alcohol, stress or exercise. Ask about blackouts, any warning or injury, chest pain and breathlessness, thyroid symptoms, and a family history of sudden death. Note all heart drugs, because a Holter monitor may be needed to catch fleeting attacks.",
       "vis": null
     },
     {
-      "tx": "**Examination** (**pulse** irregularly irregular AF, **cannon** AV dissociation paces, **JVP** frog systolic, **BP** drops hypotensive, **murmurs** AS syncope falls, **failure** crackles oedema, **thyroid** eye tremor bruit, **anaemia** pallor rate) with **bedside** (**ECG** P absent fibrillatory, **carotid** massage SVT slows, **vagal** strain bears) feels; **dizzy** (postural drops) stands. Pulses feel.",
-      "say": "Irregulars cannons frogs drops murmurs failures thyroids anaemias is exam: ECGs fibrillate massages slow strains bear dizzies stand drives pause. Necks throb.",
+      "tx": "On examination feel the **pulse** for an irregularly irregular rhythm in atrial fibrillation, and look for cannon waves in the jugular venous pulse, which suggest atrioventricular dissociation. Check blood pressure for a postural drop, listen for murmurs such as aortic stenosis, and look for heart failure signs, thyroid eye signs, tremor or a goitre, and pallor from anaemia. Carotid massage and vagal manoeuvres may slow a regular narrow complex tachycardia.",
+      "say": "Examination starts with the pulse, which feels irregularly irregular in atrial fibrillation, followed by the neck veins, where cannon waves betray atrioventricular dissociation. Measure blood pressure lying and standing, listen for the murmur of aortic stenosis, and check for crackles and ankle swelling from heart failure. Look for thyroid eye signs and tremor and for pallor. Vagal manoeuvres such as carotid massage can slow some fast regular rhythms.",
       "vis": null
     },
     {
-      "tx": "**AF** (**rate** beta digoxin control, **rhythm** flecainide amiodarone cardiovert, **stroke** CHA2DS2 HAS-BLED scores, **warfarin** INR DOAC bleeds, **ablation** pulmonary vein isolates, **thyroid** treats triggers, **echo** LA clots) with **SVT** (**vagal** first bears, **adenosine** 6 mg blocks, **verapamil** stable slows, **ablate** WPW accessory) sorts; **flutter** (sawtooth 300 cardioverts) flutters. Rhythms sort.",
-      "say": "Rates rhythms strokes warfarins ablations thyroids is AF: vagals bear adenosines block verapamils slow ablates cure flutters saw cardioversions shock anticoagulations guard. Beats regularise.",
+      "tx": "In **atrial fibrillation** decide rate control with beta blockers or digoxin, consider rhythm control with flecainide or amiodarone or cardioversion, and assess stroke risk with CHA2DS2-VASc and bleeding risk with HAS-BLED. Anticoagulate with warfarin or a direct oral anticoagulant as scored, consider ablation to isolate the pulmonary veins, treat thyroid triggers, and use echocardiography to look for atrial size and clot. Supraventricular tachycardia is managed with vagal manoeuvres, adenosine and verapamil, or ablation.",
+      "say": "Atrial fibrillation needs three decisions: controlling the ventricular rate, choosing whether to restore rhythm, and preventing stroke. Rate is usually controlled with beta blockers or digoxin, while rhythm options include flecainide, amiodarone, cardioversion or pulmonary vein isolation by ablation. Stroke risk is scored with CHA2DS2-VASc and bleeding with HAS-BLED, and warfarin or a direct anticoagulant follows the score. The card summarises the cut offs, while an echocardiogram and thyroid tests search for causes.",
       "vis": {
         "kind": "image",
         "src": "prep/lessons/media/med-cha2ds2.svg",
@@ -27,8 +27,8 @@
       }
     },
     {
-      "tx": "**Brady** (**blocks** PR lengthens Wenkebach drops, **Mobitz** II wide paces, **complete** dissociation paces now, **sick** sinus pauses alternates, **syncope** driving bans paced, **pacemaker** box checks magnets, **drugs** beta digoxin stops, **Lyme** young blocks treats) with **traps** (**digoxin** vision yellow arrhythmias, **QT** drugs torsades magnesium, **hyperkalaemia** peaked sine treats) closes; **follow** (device yearly) tracks. Rates slow.",
-      "say": "Blocks drops dissociations pauses syncopes boxes is brady: digoxins yellow QTs twist potassiums peak devices check drugs stop Lymes treat falls ban drives track beats pace. Pauses pace.",
+      "tx": "Bradycardia includes **heart block** in which the PR interval lengthens and then drops a beat in Wenckebach, drops without warning in Mobitz type II, and shows complete dissociation in third degree block. Sick sinus syndrome causes long pauses, while beta blockers and digoxin slow conduction and Lyme disease can block the young. Syncope brings driving restrictions until pacing, and pacemakers need regular device checks. Digoxin toxicity blurs vision yellow, a long QT may twist into torsades treated with magnesium, and peaked T waves warn of hyperkalaemia.",
+      "say": "Slow rhythms range from Wenckebach block, where the PR interval stretches until a beat drops, to Mobitz type II and complete heart block, where atria and ventricles march independently and pacing cannot wait. The image ladder shows which blocks only need watching and which need a pacemaker now, with atropine as a bridge. Remember drug effects from beta blockers and digoxin, yellow vision in digoxin toxicity, torsades after QT prolonging drugs, and peaked T waves in hyperkalaemia.",
       "vis": {
         "kind": "image",
         "src": "prep/lessons/media/med-avblock.svg",
@@ -56,7 +56,7 @@
   ],
   "gen": "AI",
   "run": "books2-lon1",
-  "model": "muse-wonder (local authoring, no external API)",
+  "model": "muse-wonder-1.0",
   "checks": {
     "shape": true,
     "numbers": true,
