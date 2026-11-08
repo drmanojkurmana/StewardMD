@@ -6,13 +6,13 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Shock** is a state of systemic hypoperfusion where oxygen delivery fails tissue demand, causing reversible injury at first and irreversible cell death if prolonged. It is not defined by blood pressure alone, since early compensated shock may preserve pressure while tissues already suffer. Lactate rises as cells switch to anaerobic metabolism, making it a useful marker of severity.",
-   "say": "Shock means systemic hypoperfusion where oxygen delivery fails tissue demand. Early shock can preserve blood pressure while tissues already suffer. Rising lactate marks anaerobic metabolism and severity. Pressure alone does not define shock.",
+   "tx": "**Shock** is a state of systemic hypoperfusion in which oxygen delivery fails to meet tissue demand and cells are injured. The injury is reversible at first but it becomes irreversible when shock is prolonged. Blood pressure alone does not define shock because early compensated shock may preserve pressure while tissues already suffer. A rising **lactate** level reflects anaerobic metabolism and helps the clinician judge severity at the bedside.",
+   "say": "Shock means that oxygen delivery fails to meet the demand of tissues throughout the body. Early shock can preserve blood pressure while tissues already suffer from poor perfusion. Lactate rises because cells switch toward anaerobic metabolism during prolonged hypoperfusion. The clinician should never define shock by blood pressure alone.",
    "vis": null
   },
   {
-   "tx": "The major mechanistic types guide both diagnosis and treatment. **Hypovolaemic shock** follows blood or fluid loss. Cardiogenic shock follows pump failure after infarction or arrhythmia. Obstructive shock follows blocked filling or outflow, as in tamponade or massive pulmonary embolism. Distributive shock, including septic and anaphylactic forms, follows profound vasodilation and maldistributed flow.",
-   "say": "Hypovolaemic shock follows fluid loss. Cardiogenic shock follows pump failure. Obstructive shock follows blocked filling or outflow. Distributive shock follows vasodilation in sepsis or anaphylaxis. Mechanism directs treatment.",
+   "tx": "The major types of shock guide both diagnosis and treatment in every exam stem. **Hypovolaemic shock** follows loss of blood or fluid and it reduces preload. **Cardiogenic shock** follows pump failure after a large infarction or a serious arrhythmia. Obstructive shock follows blocked filling or outflow, as in tamponade, while distributive shock follows profound vasodilation in sepsis or anaphylaxis.",
+   "say": "Hypovolaemic shock follows loss of blood or fluid from the circulation. Cardiogenic shock follows failure of the heart as a pump. Obstructive shock follows blocked filling or blocked outflow from the heart. Distributive shock follows profound vasodilation in sepsis or anaphylaxis.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -45,13 +45,13 @@
    }
   },
   {
-   "tx": "Shock evolves through stages that examiners test as a sequence. In the **nonprogressive stage**, sympathetic reflexes, tachycardia and vasoconstriction maintain perfusion of heart and brain. In the progressive stage, hypoxia and acidosis worsen, vessels lose responsiveness and organ injury spreads. In the irreversible stage, lysosomal enzyme release and membrane failure make death inevitable despite restored pressure.",
-   "say": "Early shock compensates with tachycardia and vasoconstriction. Progressive shock adds acidosis and spreading organ injury. Irreversible shock involves membrane failure where restoring pressure no longer saves tissue. Stages move from reversible to fatal.",
+   "tx": "Shock evolves through stages that examiners often test as an ordered sequence. In the **nonprogressive stage**, sympathetic reflexes raise heart rate and constrict vessels to protect the heart and brain. In the **progressive stage**, hypoxia and acidosis worsen and injured organs begin to fail. In the irreversible stage, membrane failure and enzyme release make death inevitable despite restored pressure.",
+   "say": "Early shock compensates through tachycardia and vasoconstriction that protect vital organs. Progressive shock adds acidosis and spreading injury across several organs. Irreversible shock involves membrane failure where restoring pressure no longer saves tissue. The stages are moving steadily from reversible injury toward fatal injury.",
    "vis": null
   },
   {
-   "tx": "Warm peripheries do not exclude shock, and this contrast is heavily tested. Early **septic shock** often shows vasodilation with warm skin and a wide pulse pressure from distributive failure, although output may be high. Hypovolaemic and cardiogenic shock usually show cold clammy skin from intense vasoconstriction. Bedside pattern recognition must always combine perfusion, mentation, urine output and lactate.",
-   "say": "Early septic shock often feels warm from vasodilation. Hypovolaemic and cardiogenic shock usually feel cold and clammy from vasoconstriction. Never judge by skin alone. Combine mentation, urine output and lactate.",
+   "tx": "Warm peripheries do not exclude shock and this contrast is heavily tested. Early **septic shock** often shows vasodilation with warm skin and a wide pulse pressure because flow is maldistributed. **Hypovolaemic shock** and cardiogenic shock usually show cold clammy skin because vessels constrict intensely. The clinician must always combine skin findings with mentation, urine output and lactate before judging perfusion.",
+   "say": "Early septic shock often feels warm because vessels are widely dilated. Hypovolaemic and cardiogenic shock usually feel cold and clammy because vessels constrict. The clinician should never judge perfusion by skin findings alone. Mentation, urine output and lactate together give the safer picture.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -75,8 +75,19 @@
    }
   },
   {
-   "tx": "Prolonged shock injures organs in predictable patterns that appear in pathology stems. The kidney develops **acute tubular necrosis**, the lung develops diffuse alveolar damage, the liver shows centrilobular necrosis, and the gut may infarct. Adrenal haemorrhage in meningococcal sepsis forms part of Waterhouse Friderichsen syndrome. Multiorgan failure is the usual final pathway to death.",
-   "say": "Prolonged shock injures kidney tubules, lung alveoli, liver centrilobular zones and gut. Meningococcal sepsis can haemorrhage into the adrenals. Multiorgan failure is the final pathway. Organ patterns help identify shock in stems.",
+   "tx": "This image contrasts two shocked patients and it makes the bedside pattern very clear. The patient with **septic shock** looks flushed and warm with a bounding pulse because arterioles are dilated. The patient with **hypovolaemic shock** looks pale and clammy with a thready pulse because arterioles are constricted. Both patients share altered mentation, low urine output and raised lactate, which show that tissues are underperfused.",
+   "say": "This image contrasts a flushed patient in septic shock with a pale patient in hypovolaemic shock. The septic patient has warm skin because dilated arterioles lower vascular resistance. The hypovolaemic patient has cold skin because constricted arterioles raise vascular resistance. Both patients show altered mentation and low urine output from tissue hypoperfusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-shock-gen1.webp",
+    "alt": "Two patients in bed: flushed warm septic shock with bounding pulse and wide pressure; pale clammy hypovolaemic shock with thready pulse, plus vessel insets.",
+    "caption": "Warm vasodilated septic shock contrasted with cold vasoconstricted hypovolaemic shock signs. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Prolonged shock injures organs in predictable patterns that appear often in pathology stems. The kidney develops **acute tubular necrosis**, the lung develops diffuse alveolar damage and the liver shows centrilobular necrosis. The gut may infarct when perfusion fails for a long period. Adrenal haemorrhage in meningococcal sepsis forms part of **Waterhouse Friderichsen syndrome**, and multiorgan failure is the usual final pathway.",
+   "say": "Prolonged shock injures the kidney tubules and the alveoli of the lung. The liver shows centrilobular necrosis and the gut may infarct. Meningococcal sepsis can cause haemorrhage into the adrenal glands. Multiorgan failure is the usual final pathway toward death.",
    "vis": {
     "kind": "image",
     "src": "prep/lessons/media/path-shock-organs.svg",

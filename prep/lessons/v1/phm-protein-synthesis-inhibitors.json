@@ -1,95 +1,106 @@
 {
- "v": 1,
- "module": "phm-protein-synthesis-inhibitors",
- "subject": "pharmacology",
- "title": "Protein synthesis inhibitors: aminoglycosides to linezolid",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Aminoglycosides** (**gentamicin, tobramycin, amikacin**: concentration dependent killing with **post antibiotic effect**, poor oral absorption, **once daily dosing** with extended interval, **ototoxicity** vestibular and cochlear with **nephrotoxicity** tubular) need levels (peak efficacy, trough toxicity) with magnesium, calcium watched; **myasthenia worsens** (neuromuscular blockade) while loop diuretics add ototoxicity. Synergy (endocarditis with ampicillin, febrile neutropenia with pip-tazo) justifies; pregnancy avoids (fetal ototoxicity). Amikacin reserves resistant TB and Acinetobacter.",
-   "say": "Once daily peaks kill, troughs toxify ears and kidneys: levels both. Myasthenia worsens on aminoglycosides.",
-   "vis": null
-  },
-  {
-   "tx": "**Macrolides** (erythromycin, clarithromycin, **azithromycin**: 50S blockade, atypical pneumonia, **traveller's diarrhoea**, **chlamydia single dose**, pertussis, H. pylori triple) trade QT prolongation (erythromycin IV most) with **CYP3A4 inhibition** (clarithromycin statins and warfarin); **erythromycin prokinetic** (motilin agonist, gastroparesis) with **infantile pyloric stenosis** caution, azithromycin hearing reversible. **Clindamycin** (anaerobic above diaphragm, **toxin suppression** in necrotising infections with penicillin, **C. difficile** risk, Pneumocystis with primaquine) complements.",
-   "say": "Atypical pneumonia traveller chlamydia single dose is azithromycin. Toxin shutting necrotising clindamycin risks C. diff.",
-   "vis": null
-  },
-  {
-   "tx": "**Tetracyclines** (**doxycycline**: atypical, rickettsia, cholera adjunct, Lyme, malaria prophylaxis, acne, **teeth and bone banned under 8 and pregnancy**, photosensitivity, oesophagitis upright) with **minocycline** (vertigo, pigmentation, acne) and **tigecycline** (broad rescue, **black box mortality**, nausea) chelate with cations (iron, calcium, antacids spaced); **demeclocycline** (SIADH aquaresis) niches. **Chloramphenicol** (**aplastic anaemia** idiosyncratic, **grey baby** glucuronidation failure, meningitis where nothing else) is last resort monitored.",
-   "say": "Under 8 and pregnant never tetracyclines: teeth stain. Doxy covers rickettsia to acne upright with water.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/phm-protein-synthesis-inhibitors-fig1.webp",
-    "alt": "Composite image showing tetracycline-induced tooth discoloration, photosensitivity rash, and chelation with cations.",
-    "caption": "Tetracycline effects: teeth, photosensitivity, chelation",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Linezolid** (oxazolidinone, **VRE and MRSA pneumonia**, 50S unique, **serotonin syndrome** with SSRIs, **optic neuropathy** with lactic acidosis beyond 28 days, thrombocytopenia weekly) with tedizolid (less marrow) and **streptogramins** (quinupristin dalfopristin, VRE faecium only, arthralgia) rescue resistant Gram positives; **nitrofurantoin and fosfomycin** (cystitis, covered next wave) differ by site. Vancomycin stays first where susceptible; daptomycin covers bacteraemia (never lung). Duration caps linezolid.",
-   "say": "VRE pneumonia beyond 28 days blinds and lactates on linezolid: weekly platelets, stop SSRIs clashing.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Protein drug",
-     "Pearl",
-     "Watch"
+    "v": 1,
+    "module": "phm-protein-synthesis-inhibitors",
+    "subject": "pharmacology",
+    "title": "Protein synthesis inhibitors: aminoglycosides to linezolid",
+    "minutes": 7,
+    "steps": [
+        {
+            "tx": "**Aminoglycosides** such as gentamicin and amikacin kill bacteria in a concentration dependent manner. High peaks drive killing and a **post antibiotic effect** suppresses regrowth after levels fall below the target. Poor oral absorption means serious infection always needs parenteral treatment in hospital practice. Once daily extended interval dosing exploits killing while limiting accumulation in kidney and ear tissues. Drug levels guide safety because **ototoxicity** and nephrotoxicity rise with sustained trough exposure over time.",
+            "say": "Aminoglycosides kill bacteria in a concentration dependent manner and high peaks drive killing most effectively overall. A post antibiotic effect suppresses regrowth after levels fall below the target range in tissues treated. Poor oral absorption means serious infection always needs parenteral treatment in hospital practice for patients admitted. Once daily dosing exploits killing while limiting accumulation in kidney and ear tissues over time. Drug levels guide safety because ear and kidney injury rises with sustained trough exposure daily.",
+            "vis": null
+        },
+        {
+            "tx": "This ribosome image shows an **aminoglycoside** molecule glowing where it binds the **30S subunit** at the decoding centre. Binding distorts the 16S ribosomal RNA site and the ribosome misreads messenger RNA codons during translation. Faulty membrane proteins then damage the bacterial envelope, which explains rapid concentration dependent killing in the inset graph. The graph also shows killing that continues below the inhibitory level because the post antibiotic effect persists. Once daily dosing exploits that peak effect while troughs fall and protect ears and kidneys.",
+            "say": "This ribosome image shows a drug molecule glowing where it binds the smaller subunit at the decoding centre. Binding distorts the decoding site and the ribosome misreads messenger RNA codons during translation in bacteria. Faulty membrane proteins then damage the bacterial envelope and that injury explains rapid killing overall here. The inset graph shows killing that continues after levels fall because suppression persists below target levels. Once daily dosing exploits peak effect while falling troughs protect ears and kidneys during therapy.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/phm-protein-synthesis-inhibitors-gen1.webp",
+                "alt": "Ribosome with 30S and 50S subunits, mRNA, 16S rRNA and concentration time graph inset.",
+                "caption": "Aminoglycoside binding 30S subunit causing mRNA misreading. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "tx": "**Macrolides** block the 50S ribosomal subunit and cover atypical pneumonia, pertussis and chlamydial infection reliably. A single dose of **azithromycin** treats uncomplicated chlamydia, which makes adherence easy for young patients in clinics. Erythromycin prolongs the QT interval most and clarithromycin inhibits drug metabolism, raising statin and warfarin levels dangerously. Erythromycin also stimulates motilin receptors and treats gastroparesis in selected diabetic patients with vomiting. Clindamycin suppresses toxin production in necrotising infection but it carries a major colitis risk.",
+            "say": "Macrolides block the bacterial ribosome and they cover atypical pneumonia and chlamydial infection reliably in practice. A single dose treats uncomplicated chlamydia and that simplicity makes adherence easy for young patients attending clinics. Erythromycin prolongs cardiac conduction most while clarithromycin raises statin and warfarin levels dangerously during treatment courses. Erythromycin also stimulates gut motility and it treats gastroparesis in selected diabetic patients with vomiting daily. Clindamycin suppresses toxin production in necrotising infection but it carries a major colitis risk afterwards.",
+            "vis": null
+        },
+        {
+            "tx": "**Tetracyclines** such as doxycycline cover atypical organisms, rickettsial disease, Lyme disease and acne in practice. They damage developing teeth and bone, so children under eight years and pregnant patients must avoid them. **Doxycycline** also causes photosensitivity and oesophagitis, so patients take it upright with plenty of water daily. Iron, calcium and antacids chelate the drug in the gut and block absorption when taken together. Chloramphenicol remains a last resort because idiosyncratic aplastic anaemia can kill without warning.",
+            "say": "Tetracyclines are broad agents that cover atypical organisms and rickettsial disease and also treat Lyme disease and acne effectively. They damage developing teeth and bone so young children and pregnant patients must avoid them always completely. Doxycycline causes photosensitivity and oesophagitis so patients take it upright with plenty of water every day. Iron and calcium chelate the drug in the gut and they block absorption when taken together. Chloramphenicol remains a last resort because aplastic anaemia can kill without warning in rare patients.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/phm-protein-synthesis-inhibitors-fig1.webp",
+                "alt": "Composite image showing tetracycline-induced tooth discoloration, photosensitivity rash, and chelation with cations.",
+                "caption": "Tetracycline effects: teeth, photosensitivity, chelation",
+                "ar": 1.8349
+            }
+        },
+        {
+            "tx": "**Linezolid** blocks a unique ribosomal site and treats resistant Gram positive pneumonia and skin infection. Beyond four weeks it can cause **optic neuropathy**, lactic acidosis and falling platelet counts in treated patients. Combining it with serotonergic antidepressants risks serotonin syndrome, so medication review precedes every prescription in hospital. Tedizolid injures marrow less, while vancomycin remains first choice wherever the organism stays susceptible to it. Daptomycin covers bacteraemia instead because surfactant inactivates it inside the lung completely every time.",
+            "say": "Linezolid treats resistant Gram positive pneumonia and skin infection when standard drugs fail in hospital practice. Longer courses can injure the optic nerve and they lower platelet counts in treated patients over time. Combining it with serotonergic antidepressants risks serotonin syndrome so medication review precedes every prescription given safely. Vancomycin remains first choice wherever the organism stays susceptible to it in culture results available. Daptomycin covers bacteraemia instead because surfactant inactivates it inside the lung completely every time used.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Protein drug",
+                    "Pearl",
+                    "Watch"
+                ],
+                "rows": [
+                    [
+                        "Gentamicin",
+                        "Once daily",
+                        "Ears kidneys"
+                    ],
+                    [
+                        "Azithromycin",
+                        "Single STI",
+                        "QT"
+                    ],
+                    [
+                        "Doxycycline",
+                        "Rickettsia acne",
+                        "Teeth kids"
+                    ],
+                    [
+                        "Linezolid",
+                        "VRE lung",
+                        "28 day cap"
+                    ]
+                ]
+            }
+        }
     ],
-    "rows": [
-     [
-      "Gentamicin",
-      "Once daily",
-      "Ears kidneys"
-     ],
-     [
-      "Azithromycin",
-      "Single STI",
-      "QT"
-     ],
-     [
-      "Doxycycline",
-      "Rickettsia acne",
-      "Teeth kids"
-     ],
-     [
-      "Linezolid",
-      "VRE lung",
-      "28 day cap"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "bk2-phm-301",
-  "bk2-phm-302",
-  "bk2-phm-303",
-  "bk2-phm-304",
-  "bk2-phm-305",
-  "bk2-phm-306",
-  "bk2-phm-307",
-  "bk2-phm-308",
-  "bk2-phm-309",
-  "bk2-phm-310"
- ],
- "src": [],
- "refs": [
-  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-pharma3",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+    "quiz": [
+        "bk2-phm-301",
+        "bk2-phm-302",
+        "bk2-phm-303",
+        "bk2-phm-304",
+        "bk2-phm-305",
+        "bk2-phm-306",
+        "bk2-phm-307",
+        "bk2-phm-308",
+        "bk2-phm-309",
+        "bk2-phm-310"
+    ],
+    "src": [],
+    "refs": [
+        "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+    ],
+    "gen": "AI",
+    "run": "books2-pharma3",
+    "model": "muse-wonder (local authoring, no external API)",
+    "checks": {
+        "shape": true,
+        "numbers": true,
+        "drugs": true,
+        "verbatim": true,
+        "dashes": true,
+        "verify": true,
+        "redone": 0,
+        "dropped": 0,
+        "kbWords": 0,
+        "itemN": 10
+    }
 }

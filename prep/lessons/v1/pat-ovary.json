@@ -3,21 +3,21 @@
  "module": "pat-ovary",
  "subject": "pathology",
  "title": "Ovarian tumours: surface epithelial, germ cell and sex cord",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**High grade serous carcinoma** (BRCA1 and BRCA2, **STIC lesions** in fimbriae seeding peritoneum, p53 null, bloating with ascites and omental cake presenting late) is treated by **debulking surgery with platinum taxane chemotherapy** (neoadjuvant where unresectable, PARP inhibitors in BRCA); risk reducing salpingo oophorectomy protects carriers after childbearing. **CA-125** with transvaginal ultrasound triages (ROMA with HE4), though endometriosis and fibroids raise it benignly. Low grade serous (KRAS, indolent) differs molecularly.",
-   "say": "Bloated ascitic omental cake with p53 is high grade serous: debulk plus platinum. BRCA carriers remove tubes and ovaries.",
+   "tx": "**High grade serous carcinoma** is the commonest lethal ovarian cancer and often originates from precursor lesions in fallopian tube fimbriae. BRCA1 and BRCA2 mutations increase risk greatly, while abnormal p53 staining supports high grade serous biology in tumours. Patients present late with bloating, ascites and **omental cake** because peritoneal spread occurs before a pelvic mass becomes obvious. Treatment combines debulking surgery with platinum based chemotherapy, and **CA-125** helps triage and follow disease.",
+   "say": "High grade serous carcinoma is a tumour that spreads across the peritoneum before patients notice a discrete pelvic mass. Bloating develops because ascites and omental deposits accumulate silently over months before diagnosis is finally made. BRCA mutations matter because they increase lifetime risk and predict sensitivity to maintenance therapies.",
    "vis": null
   },
   {
-   "tx": "**Mucinous tumours** (large multilocular, pseudomyxoma peritonei from appendiceal primaries mimicking, CK20 with CDX2 pointing gut) are resected intact (rupture seeds); **endometrioid** (endometriosis associated, PTEN, synchronous endometrial primaries) and **clear cell** (endometriosis, HNF1B, thromboembolism, chemoresistant) complete epithelial patterns. Borderline tumours (atypical proliferation without invasion, young, fertility sparing surgery) recur but rarely kill. Frozen section guides extent intraoperatively.",
-   "say": "Huge mucinous mass with pseudomyxoma is appendiceal until proven: resect intact. Clear cell clots and resists chemo.",
+   "tx": "**Mucinous tumours** grow as large multilocular masses and must be removed intact because rupture can seed mucin into peritoneum. Pseudomyxoma peritonei usually originates from appendiceal primaries even when a large ovarian mucinous mass dominates imaging findings initially. **Endometrioid** and **clear cell tumours** associate with endometriosis, while clear cell tumours also cause thromboembolism and resist chemotherapy relatively often. Borderline tumours show atypical proliferation without invasion and often allow fertility sparing surgery in young patients.",
+   "say": "Mucinous tumours are large masses that require intact removal because rupture spills mucin producing cells into the peritoneum. Appendiceal origin is important because pseudomyxoma peritonei usually starts in appendix rather than ovary itself primarily. Clear cell tumours are concerning because thromboembolism accompanies them and chemotherapy response remains relatively poor.",
    "vis": null
   },
   {
-   "tx": "**Germ cell tumours** (young, rapid, curable) sort by markers: **dysgerminoma** (sheets with lymphocytes, **LDH** raised, radiosensitive, KIT), **yolk sac** (**AFP** raised, **Schiller-Duval bodies**), **choriocarcinoma** (hCG with haemorrhage), immature teratoma (neural grading), **struma ovarii** (thyroid tissue with hyperthyroidism). Fertility sparing unilateral salpingo oophorectomy with BEP chemotherapy cures mostly; markers (AFP, hCG, LDH) stage and follow. Mature cystic teratoma (dermoid, Rokitansky protuberance, teeth and hair) torses or rarely squamous transforms.",
-   "say": "AFP Schiller-Duval is yolk sac; hCG haemorrhage is choriocarcinoma; LDH sheets are dysgerminoma. Dermoids twist.",
+   "tx": "**Germ cell tumours** arise in young patients, grow rapidly and remain highly curable with modern chemotherapy regimens available today. Dysgerminoma forms sheets with lymphocytes and raises LDH, while yolk sac tumour raises AFP and shows **Schiller-Duval bodies** microscopically. **Choriocarcinoma** secretes hCG and bleeds heavily because trophoblastic tissue invades vessels very aggressively during growth. Mature cystic teratoma contains hair and teeth, twists on its pedicle, and rarely undergoes squamous malignant transformation later.",
+   "say": "Germ cell tumours are cancers that affect young patients and grow rapidly before treatment starts in hospital. Marker patterns help clinicians separate dysgerminoma from yolk sac tumour and choriocarcinoma before histology returns finally. Fertility sparing surgery is preferred because chemotherapy cures most patients while preserving the other ovary.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-ovary-fig1.webp",
@@ -27,8 +27,8 @@
    }
   },
   {
-   "tx": "**Sex cord stromal tumours** (inhibin positive) include **granulosa cell** (**Call-Exner bodies** with coffee bean nuclei, **inhibin** raised, endometrial hyperplasia with postmenopausal bleed, late recurrences), Sertoli-Leydig (virilisation with amenorrhoea), and **fibroma** (**Meigs syndrome**: fibroma with ascites and pleural effusion resolving on removal). Surgery stages; granulosa needs decades of follow up. Thecomas estrogenise similarly.",
-   "say": "Coffee bean Call-Exner with inhibin is granulosa: watch endometrium for decades. Fibroma plus fluid that surgery cures is Meigs.",
+   "tx": "**Sex cord stromal tumours** stain positively for inhibin and often secrete hormones that produce striking clinical syndromes in patients. **Granulosa cell tumours** show Call-Exner bodies with coffee bean nuclei, raise inhibin and cause postmenopausal bleeding through endometrial hyperplasia. Sertoli-Leydig tumours virilise patients, while fibromas cause **Meigs syndrome** with ascites and pleural effusion that resolves after removal. Granulosa tumours recur late, so follow up continues for decades after initial surgery succeeds.",
+   "say": "Granulosa tumours are hormone active tumours that stimulate endometrium and cause bleeding after menopause in older women. Inhibin measurement is useful because this marker rises with tumour burden and falls after successful surgical removal. Late recurrence occurs because granulosa tumours can return decades after apparently complete initial treatment.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -58,6 +58,17 @@
       "Resect, follow"
      ]
     ]
+   }
+  },
+  {
+   "tx": "This microscopy shows small pink **Call-Exner bodies** surrounded by tumour cells with longitudinally grooved coffee bean nuclei throughout. The brown inset confirms strong **inhibin positivity**, which supports a sex cord stromal origin for this ovarian tumour. Together these features identify a **granulosa cell tumour**, which often secretes oestrogen and presents with postmenopausal bleeding from endometrial stimulation. Examiners favour this image because nuclei, microfollicles and immunostaining each point to the same diagnosis.",
+   "say": "This microscopy is showing Call-Exner bodies because small follicle like spaces sit among granulosa tumour cells on the slide. Coffee bean nuclei appear because longitudinal grooves fold the nuclear membrane in these tumour cells characteristically. Inhibin staining helps clinicians confirm sex cord stromal origin when morphology alone is uncertain.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-ovary-gen1.webp",
+    "alt": "Microscopy of ovarian tumour cells with coffee bean grooved nuclei, pink Call-Exner microfollicles, plus brown inhibin stain inset.",
+    "caption": "Granulosa cell tumour showing grooved nuclei and Call-Exner bodies. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

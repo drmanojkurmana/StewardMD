@@ -3,11 +3,11 @@
  "module": "rad-ir-drainage-nephrostomy",
  "subject": "radiology",
  "title": "Emergency nephrostomy and antegrade stents",
- "minutes": 7,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "Infected blocked kidneys die fast. **Obstructive pyelonephritis** with fever, pain and an obstructing stone needs pus out within hours. **Percutaneous nephrostomy** under ultrasound drains pus saving kidneys and lives. **Pregnancy with obstructing stones** favours nephrostomy over radiation-heavy surgery. **Sepsis bundles** with fluids and antibiotics run alongside drainage, never after it.",
-   "say": "Infected blocked kidneys die fast. Obstructive pyelonephritis with fever and stones needs pus out within hours. Ultrasound nephrostomy drains pus saving kidneys and lives. Pregnant obstructed stones favour nephrostomy. Sepsis fluids with antibiotics run during drainage.",
+   "tx": "An infected blocked kidney deteriorates quickly and needs pus drained within hours. **Obstructive pyelonephritis** with fever, pain and an obstructing stone is the classic presentation. **Percutaneous nephrostomy** under ultrasound drains the infected system and saves the kidney and the patient. Pregnancy with obstructing stones favours nephrostomy over radiation heavy surgery. Fluids and antibiotics run alongside drainage as part of **sepsis care** and never replace drainage.",
+   "say": "An infected blocked kidney deteriorates quickly and needs pus drained within hours. Fever with pain and an obstructing stone is the classic presentation here. Nephrostomy under ultrasound drains the infected system and saves kidney function. Fluids and antibiotics run alongside drainage and never replace urgent drainage in sepsis.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,19 @@
    }
   },
   {
-   "tx": "Stents follow once sepsis settles. **Antegrade ureteric stenting** pushes double-J stents down past stones once pus clears. **Nephrostogram checks** map ureters before stenting attempts. **Failed antegrade passage** from tight strictures keeps nephrostomy until surgery. **Stent symptoms** of frequency and loin ache need warning before placement.",
-   "say": "Stents follow once sepsis settles. Antegrade stenting pushes double-J tubes past stones once pus clears. Dye studies map ureters before attempts. Tight strictures keep nephrostomy until surgery. Frequency with loin ache needs warning before stents.",
+   "tx": "The kidney ultrasound shows a markedly **dilated pelvicalyceal system** with black urine filled spaces that indicate hydronephrosis. A bright upper ureteric stone casts a dark **posterior acoustic shadow** and marks the level of obstruction. Infected urine cannot escape past the stone, so **obstructive pyelonephritis** develops under pressure. This appearance is the classic indication for urgent nephrostomy in examination questions.",
+   "say": "The kidney ultrasound shows a dilated collecting system that indicates hydronephrosis clearly. A bright ureteric stone is visible because it casts a shadow at the obstruction. Infected urine cannot escape past the stone and builds pressure inside. This appearance is the classic indication for urgent nephrostomy drainage in examinations.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-drainage-nephrostomy-gen1.webp",
+    "alt": "Kidney ultrasound showing dilated pelvicalyceal system, upper ureteric stone shadowing and nephrostomy indication.",
+    "caption": "Renal ultrasound shows dilated system with obstructing ureteric stone. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Internal drainage follows once infection has settled and the kidney recovers. **Antegrade ureteric stenting** pushes a double J stent down past the stone or stricture into the bladder. A **nephrostogram** maps the ureter before any stenting attempt is made. A tight stricture that cannot be crossed keeps the nephrostomy until definitive surgery is planned. Patients are warned that a stent commonly causes **urinary frequency** and loin ache after placement.",
+   "say": "Internal drainage follows once infection has settled and the kidney recovers. Antegrade stenting pushes a double J stent past the block into the bladder. A dye study maps the ureter before any attempt is made. A tight stricture keeps the nephrostomy in place, and patients need warning about frequency and loin ache.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +85,8 @@
    }
   },
   {
-   "tx": "Tubes fail loudly when blocked. **Falling output with pain and fever** marks clotted or displaced tubes needing exchange. **Flushing meets resistance** where force bursts collecting systems. **Skin excoriation** from urinary leaks needs tube repositioning with skin care. **Accidental pull-outs** through mature tracts reseat easily while fresh ones need re-puncture.",
-   "say": "Tubes fail loudly when blocked. Falling output with pain and fever marks clotted tubes needing exchange. Forced flushing bursts kidneys. Urinary leaks excoriate skin needing repositioning. Mature pull-outs reseat easily while fresh ones need re-sticks.",
+   "tx": "A blocked nephrostomy tube declares itself loudly and needs prompt action. **Falling output** with pain and fever suggests a clotted or displaced tube that needs exchange. Flushing that meets resistance must stop because force can burst the collecting system. Urine leaking around the tube causes **skin excoriation** and needs repositioning with skin care. A tube pulled out through a mature tract reseats easily, while a fresh tract needs repuncture.",
+   "say": "A blocked nephrostomy tube declares itself loudly and needs prompt action. Falling output with pain and fever suggests clotting or displacement clearly. Flushing that meets resistance must stop because force damages the kidney. Leaking urine damages skin and needs repositioning, while a mature tract reseats more easily than a fresh tract.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-drainage-nephrostomy-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Stones leave once kidneys calm. **Definitive stone surgery** follows weeks after sepsis resolves with sterile urine. **Stent removal with strings** suits short-term stents while forgotten ones encrust. **Encrusted forgotten stents** need staged endourology, never blind pulls. **Stone prevention** with fluids and metabolic workup stops returns.",
-   "say": "Stones leave once kidneys calm. Definitive surgery follows weeks after sepsis with sterile urine. Stringed stents suit short terms while forgotten ones encrust. Encrusted stents need staged surgery, never blind pulls. Fluids with metabolic workup stop returns.",
+   "tx": "Definitive stone treatment waits until the kidney is calm and urine is sterile. **Definitive stone surgery** follows some weeks after sepsis resolves and infection clears. Short term stents may be removed with strings, while **forgotten stents** encrust and block. An encrusted stent needs staged endoscopic treatment and must never be pulled blindly. Generous fluids and a **metabolic workup** reduce the chance of further stone formation.",
+   "say": "Definitive stone treatment waits until the kidney is calm and urine is sterile. Stone surgery follows some weeks after sepsis resolves completely. Short term stents may leave with strings, while forgotten stents encrust badly. An encrusted stent needs staged treatment, and fluids with metabolic testing reduce recurrence risk.",
    "vis": {
     "kind": "flow",
     "nodes": [

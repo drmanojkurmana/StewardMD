@@ -6,13 +6,13 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Obstructive lung disease** limits expiratory airflow through airway narrowing or loss of elastic recoil, trapping air and raising residual volume. Emphysema destroys alveolar walls, bronchitis plugs airways with mucus and asthma reversibly constricts bronchial smooth muscle. Restrictive disease instead shrinks expandable volume through stiff lungs or weak chest mechanics.",
-   "say": "Obstruction traps air by narrowing airways or destroying recoil. Restriction shrinks volumes through stiff lungs or weak mechanics. Emphysema, bronchitis and asthma obstruct differently.",
+   "tx": "**Obstructive lung disease** limits expiratory airflow because airways narrow or elastic recoil is lost from lung tissue. Air trapping develops during expiration, so residual volume rises while exercise tolerance falls progressively in patients. Emphysema destroys alveolar walls, chronic bronchitis plugs airways with mucus, and asthma reversibly constricts bronchial smooth muscle. **Restrictive disease** behaves oppositely because stiff lungs or weak chest mechanics reduce the volume that can expand.",
+   "say": "Obstructive disease is a pattern where expiratory airflow becomes limited because airways narrow or recoil is lost. Air trapping develops because small airways collapse during expiration before the lungs empty completely each breath. Restrictive disease is different because stiff lungs reduce the total volume that can expand.",
    "vis": null
   },
   {
-   "tx": "**Emphysema** destroys alveolar septa and capillaries by protease antiprotease imbalance, driven by smoking and, in pure form, alpha 1 antitrypsin deficiency. Centriacinar disease hits upper lobes in smokers, while panacinar disease hits lower lobes in antitrypsin deficiency. Lost recoil collapses small airways on expiration, the core physiological defect.",
-   "say": "Emphysema digests alveolar walls when proteases beat antiproteases. Smokers lose upper lobes centriacinar; antitrypsin deficiency loses lower lobes panacinar. Recoil loss collapses airways.",
+   "tx": "**Emphysema** destroys alveolar septa and capillaries because protease activity overwhelms antiprotease protection in lung tissue over years. Smoking drives centriacinar disease in upper lobes, while **alpha 1 antitrypsin deficiency** causes panacinar disease in lower lobes. Loss of elastic recoil collapses small airways during expiration, which is the central physiological defect in emphysema. Chronic bronchitis differs because mucus gland hypertrophy and airway plugging dominate over alveolar wall destruction.",
+   "say": "Emphysema is a destructive disease where alveolar septa disappear because proteases overwhelm protective antiprotease activity in lungs. Smoking related disease is centriacinar because upper lobes receive the greatest inhaled smoke exposure over years. Recoil loss is important because small airways collapse during expiration and trap air distally.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -36,8 +36,19 @@
    }
   },
   {
-   "tx": "**Asthma** is reversible airway hyperreactivity with eosinophilic inflammation, smooth muscle hypertrophy, mucus plugging and basement membrane thickening. Fatal attacks show lungs overinflated with widespread mucus plugs, Charcot Leyden crystals from eosinophils and Curschmann spirals in sputum. Atopy and type 2 cytokines drive most childhood and many adult cases.",
-   "say": "Asthma reversibly narrows hyperreactive airways with eosinophilic inflammation and mucus plugs. Fatal lungs overinflate with plugged airways. Type 2 cytokines drive most cases.",
+   "tx": "This lung section shows large empty spaces where normal alveolar walls have disappeared between remaining thin septa. The labelled **destroyed septa** and **enlarged airspaces** together define emphysema at tissue level rather than simple hyperinflation. Loss of alveolar walls reduces surface area for gas exchange and removes elastic recoil that normally holds small airways open. Examiners use this histology because smoking history plus breathlessness should immediately suggest protease mediated alveolar destruction.",
+   "say": "This section shows enlarged airspaces because alveolar septa have broken down and adjacent alveoli merged together permanently. Destroyed septa are important because recoil disappears when the elastic alveolar framework is lost from lungs. This histology helps clinicians distinguish emphysema from asthma where alveolar walls remain intact.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-obstructive-restrictive-gen1.webp",
+    "alt": "Lung histology with large empty airspaces and broken alveolar walls labeled enlarged airspace and destroyed septa.",
+    "caption": "Emphysematous lung histology with destroyed septa and enlarged airspaces. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Asthma** causes reversible airway hyperreactivity with eosinophilic inflammation, smooth muscle hypertrophy and mucus plugging of bronchi. Fatal attacks show overinflated lungs with widespread mucus plugs obstructing small and large airways throughout both lungs. **Charcot Leyden crystals** form from eosinophil breakdown products, while Curschmann spirals appear as mucus casts in sputum samples. Type 2 cytokines drive most childhood asthma and many adult cases with atopic backgrounds in clinic.",
+   "say": "Asthma is a reversible disease where hyperreactive airways narrow after exposure to triggers in sensitised patients. Eosinophilic inflammation is central because type two cytokines recruit eosinophils into bronchial walls and mucus. Fatal attacks occur because widespread mucus plugs block airways while lungs become severely overinflated.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-obstructive-restrictive-fig1.webp",
@@ -47,13 +58,13 @@
    }
   },
   {
-   "tx": "**Restrictive interstitial diseases** scar the interstitium into stiff honeycombed lungs, as in idiopathic pulmonary fibrosis with usual interstitial pneumonia pattern worst at subpleural bases. Sarcoidosis restricts through granulomas with a different, upper lobe and nodal pattern. Physiology shows reduced volumes with preserved or raised flow ratios and impaired gas transfer.",
-   "say": "Fibrosis stiffens lungs into honeycombs shrinking all volumes. Idiopathic fibrosis scars the bases; sarcoid granulomas favour upper lobes and nodes. Transfer factor falls early.",
+   "tx": "**Restrictive interstitial disease** scars the lung interstitium until lungs become stiff and honeycombed on imaging studies. Idiopathic pulmonary fibrosis shows a usual interstitial pneumonia pattern that is worst at subpleural lung bases bilaterally. **Sarcoidosis** restricts lung expansion through granulomas, but it favours upper lobes and hilar nodes rather than lung bases. Physiology shows reduced lung volumes with impaired gas transfer because thickened interstitium blocks oxygen diffusion effectively.",
+   "say": "Interstitial fibrosis is a process where scarring stiffens lungs and reduces every expandable lung volume progressively. Idiopathic fibrosis is basal because subpleural lower lobes show the most advanced honeycombing on imaging studies. Transfer factor falls because thickened interstitium impairs oxygen movement from alveoli into blood.",
    "vis": null
   },
   {
-   "tx": "**Pulmonary hypertension** remodels small pulmonary arteries through medial hypertrophy, intimal fibrosis and plexiform lesions in severe idiopathic disease, straining the right ventricle into cor pulmonale. Chronic hypoxia from lung disease constricts vessels reversibly at first, then fixes them structurally. Left heart disease raises pressure passively backward from filled lungs, the commonest overall mechanism.",
-   "say": "Pulmonary hypertension thickens small arteries until the right ventricle fails. Hypoxia constricts then fixes vessels. Left heart disease backs pressure up most commonly overall.",
+   "tx": "**Pulmonary hypertension** remodels small pulmonary arteries through medial hypertrophy, intimal fibrosis and plexiform lesions in severe disease. The right ventricle strains against raised resistance and eventually fails, producing **cor pulmonale** with systemic venous congestion. Chronic hypoxia first constricts pulmonary vessels reversibly and later fixes them through structural vascular remodelling over time. Left heart disease remains the commonest mechanism because raised filling pressures pass backwards into pulmonary circulation.",
+   "say": "Pulmonary hypertension is a vascular disease where small arteries thicken and resistance rises against the right ventricle progressively. Cor pulmonale develops because the right ventricle fails after years of pressure overload from lung vessels. Left heart disease is commonest because raised filling pressures transmit backwards into pulmonary veins.",
    "vis": {
     "kind": "table",
     "cols": [
