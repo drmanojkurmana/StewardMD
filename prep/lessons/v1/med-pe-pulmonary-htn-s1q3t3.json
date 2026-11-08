@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "med-pe-pulmonary-htn",
+ "subject": "medicine",
+ "title": "Acute pulmonary embolism: electrocardiography, imaging, and advanced therapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Hemodynamic instability dictates immediate risk stratification and therapeutic strategy in acute pulmonary vascular occlusion. Identifying **massive pulmonary embolism** requires documented sustained systemic arterial hypotension (systolic blood pressure < 90 mmHg for at least 15 minutes, or vasopressor requirement), profound bradycardia, or obstructive cardiac arrest. Intermediate-risk (submassive) patients maintain normal systemic arterial pressures but demonstrate right ventricular dysfunction on echocardiography or CT, accompanied by elevated cardiac biomarkers (troponin or BNP). Low-risk patients exhibit normal hemodynamics, intact right ventricular function, and normal biomarkers.",
+   "say": "Hemodynamic stability determines immediate risk stratification and management in acute pulmonary vascular occlusion. Identifying massive pulmonary embolism requires sustained hypotension, cardiogenic shock or vasopressor dependence. Submassive cases maintain blood pressure but demonstrate right ventricular dysfunction or elevated cardiac biomarkers. Low-risk patients display normal pressures, preserved ventricular function and negative biomarkers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk category",
+     "Hemodynamic status",
+     "RV dysfunction / Troponin",
+     "Primary intervention"
+    ],
+    "rows": [
+     [
+      "High-risk (Massive)",
+      "Hypotension (SBP < 90 mmHg) or shock",
+      "Present (severe acute strain)",
+      "Systemic thrombolysis or embolectomy"
+     ],
+     [
+      "Intermediate-High",
+      "Normotensive (SBP >= 90 mmHg)",
+      "Both RV strain and elevated troponin",
+      "Hospitalization, anticoagulation, monitor"
+     ],
+     [
+      "Intermediate-Low",
+      "Normotensive (SBP >= 90 mmHg)",
+      "Either RV strain OR troponin elevated",
+      "Anticoagulation, early transition"
+     ],
+     [
+      "Low-risk",
+      "Normotensive, stable",
+      "Neither RV strain nor troponin elevated",
+      "Outpatient anticoagulation eligible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute pressure overload on the right ventricle produces classic, though insensitive, electrocardiographic alterations. Observing the McGinn-White **S1Q3T3** pattern demonstrates acute right ventricular strain: a prominent deep S wave in lead I, a pathognomonic Q wave in lead III, and an inverted T wave in lead III. While S1Q3T3 occurs in fewer than twenty percent, it signals acute cor pulmonale. The most frequent electrocardiographic finding in pulmonary embolism is sinus tachycardia, followed by complete or incomplete right bundle branch block and T-wave inversions across precordial leads V1 through V4.",
+   "say": "Acute pressure overload on the right ventricle causes characteristic electrocardiographic changes. Identifying the McGinn-White S1Q3T3 pattern reflects acute ventricular strain with a deep S wave in lead one, and Q wave with inverted T wave in lead three. Though present in under twenty percent, it signals acute cor pulmonale. Sinus tachycardia remains the most common finding.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pe",
+      "label": "Acute pulmonary vascular bed occlusion"
+     },
+     {
+      "id": "rvp",
+      "label": "Abrupt surge in right ventricular afterload"
+     },
+     {
+      "id": "strain",
+      "label": "Right ventricular dilation & clockwise axis rotation"
+     },
+     {
+      "id": "ecg",
+      "label": "S1Q3T3 pattern, sinus tachycardia, & RBBB"
+     }
+    ],
+    "edges": [
+     [
+      "pe",
+      "rvp"
+     ],
+     [
+      "rvp",
+      "strain"
+     ],
+     [
+      "strain",
+      "ecg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Focal reduction in pulmonary blood flow produces distinct oligemia on plain chest radiography. Visualizing the **Westermark sign** demonstrates localized, circumscribed hyperlucency in a lung zone secondary to mechanical hypoperfusion distal to an occluded lobar or segmental pulmonary artery. The affected pulmonary segment appears strikingly radiolucent compared to surrounding lung tissue due to diminished vascular markings. Westermark sign is frequently accompanied by dilation of the proximal pulmonary artery immediately upstream of the occluding thrombus (Fleischner sign), reflecting localized vascular distension.",
+   "say": "Focal reduction in pulmonary blood flow causes distinct oligemia on plain chest radiography. Observing the Westermark sign reveals localized hyperlucency due to reduced perfusion distal to an occluded pulmonary artery. The affected lung zone appears radiolucent because vascular markings are diminished. Upstream dilation of the pulmonary artery often accompanies this finding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Westermark sign",
+     "points": [
+      "Focal oligemia and hyperlucency",
+      "Located distal to occluded pulmonary artery",
+      "Loss of normal vascular branching markings",
+      "High specificity for major vascular obstruction"
+     ]
+    },
+    "right": {
+     "title": "Fleischner sign",
+     "points": [
+      "Prominent central pulmonary artery dilation",
+      "Located proximal to impacted large embolus",
+      "Caused by acute pulmonary hypertension distension",
+      "Seen on PA chest radiograph at hilum"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Peripheral thromboembolic occlusion involving smaller segmental or subsegmental branches can precipitate localized pulmonary infarction. Identifying a **Hampton hump** on chest radiography reveals a shallow, wedge-shaped, pleural-based consolidation with its rounded apex directed centrally toward the pulmonary hilum. Pulmonary infarction occurs primarily in peripheral zones where dual arterial blood supply from bronchial arteries is insufficient to prevent ischemic necrosis. The consolidation typically persists for weeks, gradually resolving with a residual linear fibrous scar, and is often accompanied by a small reactive ipsilateral pleural effusion.",
+   "say": "Peripheral vascular occlusion involving smaller branches can produce localized pulmonary infarction. Identifying a Hampton hump reveals a wedge-shaped pleural-based opacity with its apex pointing toward the hilum. Pulmonary infarction occurs when bronchial arterial collateral flow fails to preserve peripheral lung tissue. The lesion resolves slowly over weeks, leaving a linear scar.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "distal",
+      "label": "Distal segmental pulmonary arterial occlusion"
+     },
+     {
+      "id": "ischemia",
+      "label": "Alveolar hemorrhage & ischemic parenchymal necrosis"
+     },
+     {
+      "id": "hump",
+      "label": "Wedge-shaped pleural opacity (Hampton hump)"
+     },
+     {
+      "id": "effusion",
+      "label": "Reactive sterile exudative pleural effusion"
+     }
+    ],
+    "edges": [
+     [
+      "distal",
+      "ischemia"
+     ],
+     [
+      "ischemia",
+      "hump"
+     ],
+     [
+      "hump",
+      "effusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside transthoracic echocardiography provides rapid hemodynamic assessment and guides emergency reperfusion in unstable patients. Demonstrating regional wall motion abnormalities termed the **McConnell sign** reveals severe hypokinesis of the right ventricular free wall with preserved, hyperdynamic contraction of the right ventricular apex. This distinct wall motion discordance exhibits high specificity for acute pulmonary embolism, differentiating it from chronic pulmonary hypertension. Additional echocardiographic hallmarks include right ventricular enlargement (end-diastolic RV to LV diameter ratio > 0.9), paradoxical interventricular septal flattening, and tricuspid regurgitation velocity > 2.8 m/s.",
+   "say": "Bedside echocardiography delivers rapid assessment in unstable patients. Identifying the McConnell sign reveals severe hypokinesis of the right ventricular free wall with preserved hyperdynamic apical contraction. This discordance exhibits high specificity for acute embolism over chronic pulmonary hypertension. Additional signs include right ventricular dilation, paradoxical septal shift and elevated tricuspid velocity.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-xray-chest-signs.webp",
+    "alt": "Chest imaging signs displaying cardiothoracic abnormalities and pulmonary vascular alterations.",
+    "caption": "Radiographic and imaging signs of acute cardiopulmonary vascular embarrassment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rapid restoration of pulmonary arterial perfusion is essential in patients presenting with cardiogenic shock or refractory hypotension. Administering systemic **thrombolysis** using recombinant tissue plasminogen activator (alteplase 100 mg intravenously infused over two hours) accelerates clot dissolution, rapidly unloads the failing right ventricle, and restores cardiac output. Systemic thrombolysis is indicated strictly for high-risk massive pulmonary embolism. The major hazard is severe bleeding, with intracranial hemorrhage occurring in approximately two percent of patients, mandating careful exclusion of absolute contraindications such as recent hemorrhagic stroke or intracranial neoplasm.",
+   "say": "Rapid restoration of arterial perfusion is vital in patients with cardiogenic shock. Administering systemic thrombolysis with recombinant tissue plasminogen activator accelerates clot lysis, unloads the right ventricle and restores cardiac output. Fibrinolysis is reserved for high-risk massive presentations. The major complication is intracranial hemorrhage, requiring screening for bleeding contraindications.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thrombolysis-and-thrombectomy-fig1.webp",
+    "alt": "Catheter-directed and systemic pharmacological thrombolysis in occlusive vascular thrombosis.",
+    "caption": "Reperfusion mechanisms and catheter interventions in severe thromboembolic disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When systemic thrombolytic therapy is contraindicated by active bleeding or has failed to restore hemodynamic stability, mechanical reperfusion is indicated. Performing emergency **catheter embolectomy** or surgical pulmonary embolectomy enables direct mechanical fragmenting, aspiration, or open surgical extraction of large central occlusive emboli from the main pulmonary trunk. Catheter-directed therapies utilize ultrasound-facilitated low-dose local fibrinolytic infusion or suction thrombectomy devices, achieving significant pulmonary arterial pressure reduction with substantially lower systemic hemorrhagic complications than full-dose systemic intravenous thrombolysis.",
+   "say": "When systemic fibrinolysis is contraindicated due to bleeding risk, mechanical intervention becomes mandatory. Performing catheter-directed embolectomy or open surgical extraction enables mechanical fragmenting or suction removal of occlusive thrombi from main pulmonary arteries. Catheter therapies utilize suction devices or localized low-dose thrombolytic infusion, lowering bleeding complications compared to systemic therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "contra",
+      "label": "Absolute contraindication to systemic thrombolytic"
+     },
+     {
+      "id": "access",
+      "label": "Transfemoral venous catheter access to pulmonary trunk"
+     },
+     {
+      "id": "mech",
+      "label": "Catheter aspiration or ultrasound-assisted thrombolysis"
+     },
+     {
+      "id": "relief",
+      "label": "Immediate reduction in pulmonary vascular resistance"
+     }
+    ],
+    "edges": [
+     [
+      "contra",
+      "access"
+     ],
+     [
+      "access",
+      "mech"
+     ],
+     [
+      "mech",
+      "relief"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mechanical vena caval interruption prevents recurrent life-threatening pulmonary embolisation when pharmacological anticoagulation cannot be administered. Deploying a retrievable **IVC filter** within the infrarenal inferior vena cava is indicated strictly in acute proximal deep vein thrombosis or PE with absolute contraindications to therapeutic anticoagulation, or recurrent pulmonary embolism despite therapeutic-range anticoagulation. Routine prophylactic filter placement is strongly discouraged because filters increase long-term risk of lower extremity deep vein thrombosis, filter migration, and caval thrombosis. Retrievable devices should be removed promptly once anticoagulation can be safely resumed.",
+   "say": "Mechanical vena caval interruption prevents recurrent embolisation when pharmacological anticoagulation is impossible. Placing a retrievable IVC filter in the infrarenal vena cava is indicated only in acute venous thrombosis with absolute bleeding contraindications or recurrent embolism on therapeutic anticoagulation. Routine placement is discouraged due to long-term thrombotic risks. Filters should be removed when anticoagulation resumes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "IVC filter indications",
+     "points": [
+      "Acute VTE with active major hemorrhage",
+      "Immediate planned major surgery with acute VTE",
+      "Proven recurrent PE despite therapeutic anticoagulation",
+      "Severe heparin-induced thrombocytopenia with bleeding"
+     ]
+    },
+    "right": {
+     "title": "Filter complications",
+     "points": [
+      "Increased risk of secondary lower extremity DVT",
+      "Inferior vena cava thrombosis and occlusion",
+      "Device migration or strut fracture",
+      "Requires removal once bleeding risk abates"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

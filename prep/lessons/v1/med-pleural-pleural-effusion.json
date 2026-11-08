@@ -1,0 +1,221 @@
+{
+ "v": 1,
+ "module": "med-pleural",
+ "subject": "medicine",
+ "title": "Pleural effusion: Light criteria, exudates, and diagnostic evaluation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Pathological accumulation of fluid within the pleural space occurs when rate of fluid formation exceeds lymphatic absorption capacity. Developing a **pleural effusion** reflects an imbalance in Starling hydrostatic and oncotic forces across parietal pleural microvessels, increased capillary permeability, or impaired lymphatic drainage. Under normal physiological conditions, approximately fifteen milliliters of low-protein serous fluid lubricates the parietal and visceral pleural membranes. Excessive accumulation compresses adjacent pulmonary parenchyma, impairs diaphragmatic excursion, and produces progressive dyspnoea, pleuritic chest pain, and dry cough.",
+   "say": "Pathological accumulation of fluid within the pleural cavity occurs when formation exceeds lymphatic clearance. Developing a pleural effusion stems from imbalances in hydrostatic and oncotic forces, heightened microvascular permeability or impaired lymphatic drainage. Normal pleural spaces contain minimal serous lubricating fluid. Pathological accumulation compresses lung tissue, causing breathlessness and pleuritic pain.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pleural-effusion-fig1.webp",
+    "alt": "Mechanisms of pleural fluid formation and reabsorption across parietal and visceral pleura.",
+    "caption": "Pathophysiological fluid flux dynamics between pleural membranes and systemic circulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bedside physical examination of the thorax yields a classic constellation of physical findings over the fluid collection. Auscultation and percussion reveal **stony dullness** to percussion over the affected hemithorax, representing the most reliable physical examination sign of fluid. Breath sounds are markedly decreased or absent over the effusion. Tactile vocal fremitus and vocal resonance are diminished because fluid insulates against transmission of sound vibrations. Immediately above the upper meniscus of fluid, compressed lung tissue may transmit bronchial breath sounds and high-pitched nasal egophony.",
+   "say": "Bedside examination of the chest reveals classic physical signs over fluid collections. Percussion produces stony dullness, which represents the most dependable physical sign of fluid. Breath sounds and tactile vocal fremitus are markedly reduced over the effusion because fluid dampens sound transmission. Compressed lung tissue immediately above the fluid line may transmit bronchial breath sounds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pleural effusion",
+     "points": [
+      "Stony dull percussion note",
+      "Absent or decreased breath sounds",
+      "Decreased tactile vocal fremitus",
+      "Mediastinal shift away from lesion (if large)"
+     ]
+    },
+    "right": {
+     "title": "Lobar consolidation",
+     "points": [
+      "Dull percussion note",
+      "Bronchial breath sounds with crackles",
+      "Increased tactile vocal fremitus",
+      "No mediastinal displacement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Erect frontal and lateral chest radiographs confirm the presence and approximate volume of accumulated pleural fluid. Demonstrating obliteration of the posterior costophrenic angle on a lateral view requires approximately fifty milliliters of fluid, whereas blunting of the lateral costophrenic angle on an erect posteroanterior film requires at least 175 to 200 milliliters. Classic radiological features include a dense, homogeneous opacity at the lung base with a superiorly concave **meniscus sign**. Massive effusions opacify the entire hemithorax, displacing the trachea and mediastinum toward the contralateral side.",
+   "say": "Erect chest radiography confirms the presence and volume of accumulated fluid. Blunting of the posterior costophrenic angle on lateral projection requires fifty milliliters, while lateral angle obliteration requires roughly two hundred milliliters. Classic imaging reveals dense homogeneous opacification with a concave upper meniscus sign. Massive fluid collections displace the trachea and mediastinum contralaterally.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-pleural-effusion-empyema.webp",
+    "alt": "Erect frontal chest radiograph showing dense homogeneous basal opacity with superior concave meniscus.",
+    "caption": "Classic concave fluid meniscus and costophrenic angle blunting in pleural effusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnostic thoracentesis with biochemical analysis of aspirated fluid is the essential first step in evaluating undiagnosed effusions. Applying **Light criteria** distinguishes exudative from transudative effusions with greater than ninety-eight percent sensitivity. An effusion is categorized as an exudate if at least one of three criteria is fulfilled: pleural fluid to serum total protein ratio > 0.5; pleural fluid to serum lactate dehydrogenase (LDH) ratio > 0.6; or pleural fluid LDH level > two-thirds the upper reference limit for normal serum LDH.",
+   "say": "Diagnostic thoracocentesis with fluid chemistry analysis is essential for evaluating undiagnosed collections. Applying Light criteria separates exudative from transudative effusions with high sensitivity. An effusion qualifies as an exudate if it meets any one of three criteria: protein ratio over 0.5, lactate dehydrogenase ratio over 0.6, or fluid enzyme level exceeding two thirds normal serum upper limit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Light criterion parameter",
+     "Exudate threshold",
+     "Diagnostic implication"
+    ],
+    "rows": [
+     [
+      "Pleural / serum protein ratio",
+      "> 0.5",
+      "Reflects increased pleural capillary permeability"
+     ],
+     [
+      "Pleural / serum LDH ratio",
+      "> 0.6",
+      "Reflects local pleural inflammation and cell lysis"
+     ],
+     [
+      "Pleural fluid LDH level",
+      "> 2/3 upper normal serum limit",
+      "Fulfills exudative definition independently"
+     ],
+     [
+      "Serum-effusion protein gradient",
+      "< 31 g/L",
+      "Validates exudate if diuretics falsely elevate LDH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic non-inflammatory conditions that alter hydrostatic or oncotic pressure gradients produce ultrafiltrates across intact pleural membranes. Developing a **transudate** occurs characteristically in congestive heart failure, hepatic hydrothorax in cirrhosis with ascites, nephrotic syndrome, and severe hypoalbuminaemia. Transudates exhibit low protein concentrations (< 30 g/L), normal glucose levels matching serum values, a physiological pH of 7.40 to 7.55, and low LDH activity. Managing a transudative effusion centers on treating the underlying systemic organ failure through diuretics, sodium restriction, or albumin repletion rather than invasive pleural interventions.",
+   "say": "Systemic non-inflammatory conditions that alter pressure gradients generate ultrafiltrates across intact pleural membranes. Developing a transudate occurs typically in congestive heart failure, liver cirrhosis and nephrotic syndrome. Transudative fluid displays low protein content, normal glucose levels and physiological pH. Management focuses on treating the underlying systemic disease with diuretics rather than chest tube drainage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transudative effusion",
+     "points": [
+      "Intact pleural microvascular barrier",
+      "Protein < 30 g/L and LDH low",
+      "Heart failure, cirrhosis, nephrotic syndrome",
+      "Treat underlying systemic medical condition"
+     ]
+    },
+    "right": {
+     "title": "Exudative effusion",
+     "points": [
+      "Altered pleural permeability or lymphatic block",
+      "Protein > 30 g/L and LDH elevated",
+      "Pneumonia, malignancy, tuberculosis, PE",
+      "Requires targeted etiology-specific diagnostic workup"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Local inflammatory, infectious, or neoplastic disorders of the pleura disrupt vascular permeability and provoke protein-rich fluid formation. Investigating an **exudate** requires cell count differential, microbiological culture, cytology, glucose, and pH measurement. Neutrophil predominance indicates acute inflammatory processes such as parapneumonic effusion or pulmonary embolism. Lymphocyte predominance (> 50%) strongly suggests tuberculosis, lymphoma, or metastatic carcinoma. Pleural fluid glucose < 60 mg/dL or pH < 7.20 occurs in complicated parapneumonic effusions, empyema, rheumatoid pleurisy, tuberculosis, and advanced pleural malignancy.",
+   "say": "Local inflammatory or neoplastic diseases disrupt vascular integrity to produce protein-rich fluid collections. Evaluating an exudate requires differential cell counts, bacterial culture, cytology, glucose and pH analysis. Neutrophil predominance signifies acute inflammation like pneumonia or embolism. Lymphocyte predominance indicates tuberculosis, lymphoma or carcinoma. Low glucose and acidic pH signify severe infection or malignancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "light",
+      "label": "Light criteria confirms exudative effusion"
+     },
+     {
+      "id": "diff",
+      "label": "Perform differential cell count & biochemistry"
+     },
+     {
+      "id": "poly",
+      "label": "Neutrophils: parapneumonic / PE / pancreatitis"
+     },
+     {
+      "id": "lymph",
+      "label": "Lymphocytes: tuberculosis / malignancy / sarcoid"
+     }
+    ],
+    "edges": [
+     [
+      "light",
+      "diff"
+     ],
+     [
+      "diff",
+      "poly"
+     ],
+     [
+      "diff",
+      "lymph"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tuberculous pleurisy represents one of the most common causes of exudative effusion in endemic countries. Measuring elevated **pleural fluid ADA** (adenosine deaminase) provides rapid, highly sensitive diagnostic confirmation of tuberculous pleurisy. An ADA activity exceeding 40 units per litre in a lymphocytic-predominant exudate carries a diagnostic sensitivity and specificity exceeding ninety percent in high-prevalence settings. Pleural fluid interferon-gamma levels are similarly elevated. Sputum and pleural fluid acid-fast smears are frequently negative due to low bacillary numbers, but closed needle or thoracoscopic pleural biopsy confirms caseating granulomas.",
+   "say": "Tuberculous pleurisy represents a major cause of exudative fluid in endemic regions. Measuring elevated pleural fluid ADA delivers rapid, highly reliable confirmation of tuberculous pleurisy. An enzyme activity exceeding forty units per litre in a lymphocytic exudate carries high diagnostic specificity. While direct smears are often negative due to paucibacillary fluid, pleural biopsy confirms caseating granulomas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiological category",
+     "Cellular differential",
+     "Pleural fluid glucose",
+     "Diagnostic hallmark"
+    ],
+    "rows": [
+     [
+      "Tuberculous pleurisy",
+      "Lymphocytes (> 80%)",
+      "Normal to low (30 to 60 mg/dL)",
+      "Pleural fluid ADA > 40 U/L & granulomas"
+     ],
+     [
+      "Complicated parapneumonic",
+      "Polymorphonuclear neutrophils",
+      "Low (< 60 mg/dL), pH < 7.20",
+      "LDH > 1000 U/L; needs chest tube"
+     ],
+     [
+      "Malignant effusion",
+      "Lymphocytes or mixed",
+      "Low (< 60 mg/dL in 30%)",
+      "Positive malignant cytology (50 to 60%)"
+     ],
+     [
+      "Rheumatoid pleuritis",
+      "Mixed inflammatory cells",
+      "Severely low (< 30 mg/dL)",
+      "Extremely low glucose & high rheumatoid factor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Macroscopic visual inspection of pleural aspirate guides immediate therapeutic decision-making in specific pathological syndromes. Frank purulent fluid, positive Gram stain, or presence of gross bacterial microorganisms defines **empyema**, mandating urgent tube thoracostomy drainage to prevent loculation and restrictive fibrothorax. In contrast, milky, turbid fluid that fails to clear with centrifugation characterizes chylothorax, resulting from thoracic duct disruption or obstruction by lymphoma or trauma. Chylothorax fluid analysis reveals elevated triglyceride levels exceeding 110 mg/dL and presence of diagnostic chylomicrons on lipoprotein electrophoresis.",
+   "say": "Visual inspection of pleural aspirate guides immediate clinical interventions in specific syndromes. Frank pus or positive Gram staining defines empyema, requiring urgent intercostal tube drainage to prevent loculation. In contrast, milky opaque fluid that remains turbid after centrifuging characterizes chylothorax, caused by thoracic duct disruption. Chylothorax exhibits triglycerides exceeding 110 milligrams per decilitre.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Empyema thoracis",
+     "points": [
+      "Frank thick purulent macroscopic fluid",
+      "pH < 7.20 and glucose < 40 mg/dL",
+      "LDH markedly elevated (> 1000 U/L)",
+      "Mandatory intercostal tube drainage"
+     ]
+    },
+    "right": {
+     "title": "Chylothorax",
+     "points": [
+      "Milky opalescent macroscopic appearance",
+      "Triglycerides > 110 mg/dL with chylomicrons",
+      "Low cholesterol content (cholesterol < trig)",
+      "Caused by thoracic duct trauma or lymphoma"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,209 @@
+{
+ "v": 1,
+ "module": "med-ild",
+ "subject": "medicine",
+ "title": "Sarcoidosis, silicosis, and asbestosis: clinical and radiologic patterns",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Multisystem inflammatory granulomatous disease of undetermined origin primarily targets the respiratory system and mediastinal lymphatics. The histopathologic hallmark of **sarcoidosis** is the formation of non-caseating epithelioid cell granulomas containing multinucleated Langhans giant cells, Schaumann bodies, and asteroid bodies. Granuloma formation is driven by helper T-cell type one (Th1) immune activation, resulting in local accumulation of CD4-positive T-cells with elevated CD4 to CD8 ratios exceeding 3.5 on bronchoalveolar lavage fluid analysis. Lesions can resolve spontaneously or progress to chronic parenchymal pulmonary fibrosis.",
+   "say": "Multisystem inflammatory disease of unknown origin predominantly involves the lungs and thoracic lymphatics. The defining hallmark of sarcoidosis is the non-caseating epithelioid granuloma containing multinucleated giant cells and inclusion bodies. Driven by helper T-cell type one activation, local CD4-positive lymphocytes accumulate with elevated lavage ratios. Granulomas may resolve or produce permanent fibrosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sarcoidosis-fig1.webp",
+    "alt": "Histopathology of non-caseating granuloma in sarcoidosis with giant cells.",
+    "caption": "Non-caseating granulomatous inflammation and histopathologic features of sarcoidosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Initial diagnostic evaluation frequently reveals characteristic mediastinal and hilar radiographic abnormalities. Symmetrical enlargement termed **bilateral hilar lymphadenopathy** represents the quintessential radiological presentation of thoracic sarcoidosis. The Scadding staging system categorizes chest radiograph findings into five stages: Stage 0 (normal), Stage I (bilateral hilar lymphadenopathy alone), Stage II (bilateral hilar adenopathy with pulmonary parenchymal infiltrates), Stage III (parenchymal infiltrates without adenopathy), and Stage IV (established upper-lobe predominant pulmonary fibrosis with architectural distortion). Stage I disease carries a high spontaneous remission rate exceeding seventy percent.",
+   "say": "Initial evaluation frequently demonstrates classic mediastinal and hilar lymph node enlargement. Symmetrical expansion termed bilateral hilar lymphadenopathy represents the quintessential radiological hallmark. The Scadding staging system classifies findings from isolated lymphadenopathy in stage one to advanced parenchymal fibrosis in stage four. Stage one disease exhibits spontaneous resolution in over seventy percent.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sarcoidosis-lung-fig1.webp",
+    "alt": "Chest imaging showing symmetric bilateral hilar and mediastinal lymphadenopathy in pulmonary sarcoidosis.",
+    "caption": "Bilateral hilar lymphadenopathy and perilymphatic nodular distribution in sarcoidosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An acute, self-limiting clinical presentation carries an exceptionally favorable prognosis in young individuals. Presenting with **Lofgren syndrome** combines the classic clinical triad of acute erythema nodosum, bilateral hilar lymphadenopathy, and bilateral ankle periarthritis or arthralgias, frequently accompanied by low-grade fever. Erythema nodosum produces tender, erythematous subcutaneous nodules over the pretibial surfaces. Over eighty-five percent of patients with Lofgren syndrome experience complete spontaneous clinical resolution within two years without requiring long-term systemic corticosteroid immunosuppression, making invasive lung biopsy generally unnecessary.",
+   "say": "An acute self-limiting clinical presentation carries an exceptionally favorable clinical course. Presenting with Lofgren syndrome combines acute erythema nodosum, bilateral hilar lymphadenopathy and bilateral ankle arthralgias. Tender erythematous nodules appear over the pretibial skin. Most patients experience spontaneous recovery within two years without needing protracted corticosteroid therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Triad component",
+     "Clinical manifestation",
+     "Diagnostic relevance"
+    ],
+    "rows": [
+     [
+      "Erythema nodosum",
+      "Tender pretibial red subcutaneous nodules",
+      "Marker of acute inflammatory burst; high remission"
+     ],
+     [
+      "Bilateral hilar adenopathy",
+      "Symmetric enlargement of pulmonary hilum",
+      "Matches Scadding Stage I thoracic radiograph"
+     ],
+     [
+      "Periarticular arthritis",
+      "Bilateral ankle warmth and swelling",
+      "Distinguishes from rheumatoid or reactive arthritis"
+     ],
+     [
+      "Pyrexia & malaise",
+      "Constitutional mild temperature spikes",
+      "Resolves with non-steroidal anti-inflammatory drugs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biochemical testing reflects active macrophage enzymatic synthesis within widespread systemic granulomas. Elevated **serum ACE** (angiotensin-converting enzyme) levels occur in sixty percent of patients due to constitutive secretion by epithelioid macrophages in granulomatous tissues. Although non-specific, serum ACE titers correlate moderately with total granuloma burden and disease activity during treatment monitoring. Additionally, unregulated 1-alpha-hydroxylase expression within sarcoid macrophages converts 25-hydroxyvitamin D into active 1,25-dihydroxyvitamin D3, causing hypercalciuria and hypercalcaemia that can induce nephrolithiasis and renal insufficiency.",
+   "say": "Biochemical investigations reflect macrophage activity within systemic granulomas. Elevated serum ACE concentrations occur in sixty percent of patients through secretion by epithelioid cells. While non-specific, enzyme levels reflect overall granulomatous burden. Furthermore, macrophage production of active vitamin D stimulates intestinal calcium absorption, predisposing to hypercalcaemia and nephrolithiasis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mac",
+      "label": "Sarcoid epithelioid macrophage activation"
+     },
+     {
+      "id": "ace",
+      "label": "Constitutive secretion of serum ACE"
+     },
+     {
+      "id": "vitd",
+      "label": "1-alpha-hydroxylase production"
+     },
+     {
+      "id": "calc",
+      "label": "Elevated 1,25-(OH)2D3 with hypercalcaemia"
+     }
+    ],
+    "edges": [
+     [
+      "mac",
+      "ace"
+     ],
+     [
+      "mac",
+      "vitd"
+     ],
+     [
+      "vitd",
+      "calc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extrapulmonary granulomatous infiltration can involve ocular, cardiac, dermatological, and neurological organ systems. Developing **ocular sarcoidosis** occurs in a quarter of patients, causing granulomatous anterior uveitis, mutton-fat keratic precipitates, or posterior chorioretinitis. Myocardial infiltration by non-caseating granulomas causes cardiac sarcoidosis, precipitating complete heart block, ventricular arrhythmias, and sudden cardiac death. Neurological involvement (neurosarcoidosis) classically produces unilateral or bilateral lower motor neuron facial nerve palsies, diabetes insipidus, and basilar meningitis, mandating prompt initiation of systemic corticosteroid therapy.",
+   "say": "Extrapulmonary granulomatous disease can affect ocular, cardiac, cutaneous and neurological systems. Developing ocular sarcoidosis causes anterior uveitis with mutton-fat precipitates. Cardiac granulomatous infiltration triggers complete heart block and fatal ventricular arrhythmias. Neurosarcoidosis characteristically causes facial nerve palsies and basilar meningitis, requiring systemic corticosteroid therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lofgren syndrome",
+     "points": [
+      "Erythema nodosum & ankle arthritis",
+      "Bilateral hilar lymphadenopathy",
+      "Benign self-limiting course",
+      "> 85% spontaneous remission"
+     ]
+    },
+    "right": {
+     "title": "Heerfordt syndrome",
+     "points": [
+      "Uveoparotid fever presentation",
+      "Anterior uveitis & parotid swelling",
+      "Facial nerve cranial neuropathy",
+      "Requires systemic immunosuppression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Occupational inhalation of respirable free crystalline silicon dioxide particles produces progressive nodular pulmonary fibrosis. Industrial exposure causing **silicosis** occurs in sandblasting, quarrying, stonecutting, and foundry work. Alveolar macrophages phagocytose silica crystals, causing macrophage lysis, release of toxic reactive oxygen species, and persistent fibroblastic activation. Chest radiography demonstrates small, rounded, well-circumscribed nodules predominant in the upper lung zones, accompanied by pathognomonic peripheral eggshell calcification of hilar and mediastinal lymph nodes. Disease can progress to fatal progressive massive fibrosis even after exposure stops.",
+   "say": "Occupational inhalation of crystalline silicon dioxide generates progressive nodular pulmonary fibrosis. Industrial exposures causing silicosis occur in sandblasting, quarrying and foundry operations. Macrophages ingest silica crystals, leading to cellular lysis and persistent fibroblastic stimulation. Chest radiography demonstrates upper-lobe nodules and characteristic eggshell calcification of hilar lymph nodes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/silicosis-fig1.webp",
+    "alt": "Gross and microscopic pulmonary silicosis displaying whorled collagenous nodules and polarisable silica particles.",
+    "caption": "Silicotic fibrotic nodule pathology and hilar lymph node calcification. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Impairment of innate alveolar antibacterial defenses dramatically increases vulnerability to secondary mycobacterial infections. Developing **silicotuberculosis** reflects crystalline silica-induced destruction of alveolar macrophages, which cripples intracellular killing mechanisms and cell-mediated immunity against Mycobacterium tuberculosis. Silicosis patients carry a thirty-fold increased relative risk of developing active tuberculosis throughout their lifetime. New constitutional symptoms, progressive weight loss, cavitary parenchymal changes, or rapid enlargement of existing silicotic nodules in an exposed worker mandate immediate microbiological sputum screening for acid-fast bacilli and molecular GeneXpert testing.",
+   "say": "Disruption of alveolar macrophage defense mechanisms elevates susceptibility to secondary mycobacterial infection. Developing silicotuberculosis reflects silica-mediated macrophage destruction, which cripples intracellular bacillary containment. Exposed workers have a thirty-fold increased risk of developing active tuberculosis. Unexplained weight loss, fever or new cavitary nodules require prompt sputum testing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "silica",
+      "label": "Crystalline silica inhalation"
+     },
+     {
+      "id": "macro",
+      "label": "Alveolar macrophage cytotoxicity & lysis"
+     },
+     {
+      "id": "immune",
+      "label": "Defective mycobacterial containment"
+     },
+     {
+      "id": "active",
+      "label": "High risk of active silicotuberculosis"
+     }
+    ],
+    "edges": [
+     [
+      "silica",
+      "macro"
+     ],
+     [
+      "macro",
+      "immune"
+     ],
+     [
+      "immune",
+      "active"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inhaled silicate mineral fibres deposit within the terminal bronchioles, inciting chronic interstitial parenchymal fibrosis. Occupational exposure causing **asbestosis** occurs in shipbuilding, demolition, insulation manufacturing, and brake lining repair. Inhaled fibres resist enzymatic degradation, becoming coated with ferritin and hemosiderin to form golden-brown, dumbbell-shaped asbestos bodies (ferruginous bodies). High-resolution computed tomography demonstrates basilar, subpleural interstitial fibrosis with subpleural dot-like opacities and honeycombing. Unlike silicosis, asbestosis predominantly targets the lower lung zones and confers a markedly heightened risk of bronchogenic carcinoma.",
+   "say": "Inhaled mineral silicate fibres cause chronic interstitial pulmonary fibrosis. Occupational exposure causing asbestosis occurs during shipbuilding, demolition and insulation work. Durable fibres become coated with iron and protein to form dumbbell-shaped ferruginous bodies. Imaging demonstrates lower-lobe subpleural interstitial fibrosis. The condition carries a high risk of bronchogenic carcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Silicosis",
+     "points": [
+      "Crystalline silicon dioxide particles",
+      "Upper pulmonary lobe predilection",
+      "Whorled collagenous fibrotic nodules",
+      "Eggshell lymph node calcification",
+      "Marked silicotuberculosis predisposition"
+     ]
+    },
+    "right": {
+     "title": "Asbestosis",
+     "points": [
+      "Hydrated magnesium silicate fibres",
+      "Lower pulmonary lobe predilection",
+      "Golden-brown coated ferruginous bodies",
+      "Associated parietal pleural plaques",
+      "Synergistic lung cancer risk with smoking"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
