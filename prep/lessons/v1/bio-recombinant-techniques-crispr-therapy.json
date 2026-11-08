@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "bio-recombinant-techniques",
+ "subject": "biochemistry",
+ "title": "CRISPR, gene therapy and transgenics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**CRISPR-Cas9** (bacterial adaptive immunity repurposed: guide RNA twenty nucleotides programmable plus PAM (NGG Streptococcus pyogenes) adjacent DNA, Cas9 HNH and RuvC blades double strand cutting three bases upstream PAM) repairs by non-homologous end joining or homology directed repair choosing outcome by design. Base editors (deaminase fused nickase, C to T or A to G without double breaks (bystander edits window)) and prime editors refine chemistry beyond cutting, off target nomination (GUIDE-seq, in silico) and mosaicism (editing after first divisions) limiting embryos absolutely.",
+   "say": "CRISPR cuts by guide and PAM with joining outcomes chosen by template design deliberately. Base and prime editors refine without double breaks, while germline editing remains prohibited clinically by consensus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "NHEJ outcome (no template)",
+     "points": [
+      "Indels frameshift knockouts",
+      "Efficient all cell phases",
+      "Research knockouts, ex vivo disruption (BCL11A enhancer)"
+     ]
+    },
+    "right": {
+     "title": "HDR outcome (template given)",
+     "points": [
+      "Precise correction copied",
+      "Dividing cells, low efficiency",
+      "Competition with NHEJ scars"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ex vivo editing dominates approvals: blood stem cells edited outside (Casgevy **exagamglogene** BCL11A enhancer disruption reactivating fetal haemoglobin for sickle and beta thalassaemia (prior globin logic), conditioning busulfan risks, long follow up registries), CAR T cells (lentiviral chimeric antigen receptors CD19 leukaemias, cytokine release and neurotoxicity, antigen escape CD19 negative relapses), T cell receptor and allogeneic off shelf editing investigational. In vivo editing (lipid nanoparticle liver ATTR transthyretin knockout NTLA-2001 proof, AAV eye and muscle) faces delivery, immunity to Cas/AAV capsids (pre existing, redosing blocked), hepatotoxicity dose ceilings.",
+   "say": "Ex vivo stem cell editing reactivating fetal haemoglobin anchors approvals for haemoglobin diseases curatively. In vivo delivery faces capsid immunity and dose ceilings limiting redosing in liver and eye programmes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene therapy route",
+     "Exemplar",
+     "Limiting risk"
+    ],
+    "rows": [
+     [
+      "Ex vivo HSC editing (CRISPR)",
+      "Casgevy: HbF reactivation sickle/thalassaemia",
+      "Conditioning infertility, off target surveillance 15 years"
+     ],
+     [
+      "Ex vivo CAR T (lentiviral)",
+      "CD19 CAR leukaemias/lymphomas",
+      "Cytokine release, antigen escape relapse"
+     ],
+     [
+      "In vivo AAV replacement",
+      "Haemophilia, SMA (onasemnogene), retinal RPE65",
+      "Capsid immunity, liver enzymes, cost and durability"
+     ],
+     [
+      "In vivo LNP editing (investigational)",
+      "Liver transthyretin knockout",
+      "Infusion reactions, editing mosaicism liver"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vector grammar grades by integration and cargo: gamma retrovirus (dividing only, integration semi random (SCID-X1 LMO2 insertional leukaemias historical lesson driving self inactivating lentiviral successors)), lentivirus (non dividing too, safer integration profile intragenic), adenovirus (episomal, inflammatory, transient, vaccine vectors), **AAV** (episomal concatemers mostly, about four point seven kilobase cargo (dual vector strategies for large genes dystrophin micro/mini constructs), tissue serotype tropisms, dorsal root ganglion toxicity high dose animals), herpes and vaccinia oncolytic niches. Integrating versus episomal persistence in dividing tissues (dilution) decides paediatric durability reasoning.",
+   "say": "Vector grammar grades by integration, cargo and tropism tropisms with historical insertional leukaemia lessons driving safer designs. Episomal dilution in dividing tissues decides paediatric durability reasoning for families counselling.",
+   "vis": null
+  },
+  {
+   "tx": "**Antisense and RNA drugs** (prior transcription) complete rewriting without DNA cuts: splice switching (nusinersen, eteplirsen), RNase H degradation (inotersen transthyretin neuropathy (thrombocytopenia monitoring), tofersen SOD1), siRNA conjugates (inclisiran, givosiran, vutrisiran), mRNA replacement (lipid nanoparticle enzyme mRNA investigational metabolic), aptamers (pegaptanib historical VEGF eye). Transgenic animals (knockout by embryonic stem homologous recombination historically, now zygote CRISPR direct; conditional Cre-lox tissue/time (tamoxifen CreER), knockin reporters, humanised mice) and pharming (antithrombin goats milk) model diseases and manufacture proteins, animal welfare and mosaic founders caveats included.",
+   "say": "Antisense and RNA drugs rewrite expression without DNA cuts across splice and degradation mechanisms approved. Conditional transgenics model diseases with tissue timing control, completing rewriting toolkits beyond nucleases alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Permanent DNA edits",
+     "points": [
+      "CRISPR knockout/correction, integrating vectors",
+      "One time, irreversible, mosaicism watched",
+      "Germline prohibited; somatic registries long"
+     ]
+    },
+    "right": {
+     "title": "Reversible RNA drugs",
+     "points": [
+      "Antisense, siRNA, mRNA (repeat dosed)",
+      "Titratable, stoppable",
+      "Delivery chemistry decides tissue reach"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pharmacogenomics** applies rewriting knowledge to prescribing today (prior lessons anchors consolidated): CYP2D6 codeine and tamoxifen, CYP2C19 clopidogrel and voriconazole, CYP2C9/VKORC1 warfarin algorithms (modest trial gains, DOAC eclipse in many indications), DPYD fluoropyrimidines, TPMT/NUDT15 thiopurines, UGT1A1 irinotecan, HLA-B*5701 abacavir hypersensitivity (screening success standard), HLA-B*1502 carbamazepine Stevens-Johnson (ancestry), HLA-B*5801 allopurinol, G6PD rasburicase/primaquine haemolysis. Preemptive panel testing programmes debate actionability breadth; single gene reactive testing remains examination sovereign.",
+   "say": "Pharmacogenomics applies genomic knowledge to prescribing today across CYP, DPYD, TPMT and HLA screening standards. Single gene reactive testing remains examination sovereign over preemptive panel debates currently unresolved professionally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene and drug",
+     "Action when risk genotype"
+    ],
+    "rows": [
+     [
+      "HLA-B*5701 and abacavir",
+      "Never prescribe if positive (hypersensitivity)"
+     ],
+     [
+      "DPYD and fluoropyrimidines",
+      "Reduce dose or avoid by activity score"
+     ],
+     [
+      "TPMT/NUDT15 and thiopurines",
+      "Reduce starting dose drastically if deficient"
+     ],
+     [
+      "CYP2C19 loss and clopidogrel (PCI)",
+      "Switch P2Y12 agent by cardiology guidance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Testing strategy** and separation science in the final two lessons convert this catalogue into orders: which platform answers which clinical question first (karyotype versus array versus sequencing versus methylation) and how molecules are purified and counted (electrophoresis, chromatography, spectrometry) for diagnostics and manufacturing alike. Ethical rails run throughout (consent for germline findings, incidental findings opt choices, data sharing, equity of million dollar therapies access), examiners increasingly allocate marks to counselling language, not only nuclease mechanisms.",
+   "say": "Testing strategy converts catalogues into orders by clinical question first in final lessons. Ethical rails on consent and equity increasingly allocate marks to counselling language beyond nuclease mechanisms alone.",
+   "vis": {
+    "kind": "flow",
+    "title": "Edit decision ladder",
+    "nodes": [
+     {
+      "id": "exvivo",
+      "label": "Can cells leave, edit, return? (blood yes)"
+     },
+     {
+      "id": "invivo",
+      "label": "Must edit in place? Delivery decides vector"
+     },
+     {
+      "id": "rna",
+      "label": "Reversible need? RNA drug repeat dosed"
+     }
+    ],
+    "edges": [
+     [
+      "exvivo",
+      "invivo"
+     ],
+     [
+      "invivo",
+      "rna"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
