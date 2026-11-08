@@ -11,23 +11,10 @@
       "say": "Congenital nephrotic syndrome manifests in early infancy with profound proteinuria requiring strict diagnostic chronology.",
       "tx": "Apply the chronological **Timing definition of congenital and infantile NS** to guide initial clinical evaluation. Congenital nephrotic syndrome formally presents within the first 3 months of life or 0-90 days from delivery, whereas infantile nephrotic syndrome presents between 3 and 12 months of life, distinguishing neonatal developmental defect categories from acquired post-neonatal glomerulopathies.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Congenital NS (CNS)",
-          "points": [
-            "Presents within first 3 months of life (0-90 days)",
-            "Intrauterine onset typical with fetal proteinuria",
-            "Severe genetic podocytopathy or antenatal infection"
-          ]
-        },
-        "right": {
-          "title": "Infantile NS (INS)",
-          "points": [
-            "Presents between 3 and 12 months of life",
-            "Heterogeneous genetic spectrum (podocin, WT1, LAMB2)",
-            "Steroid responsiveness extremely uncommon"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/nephrotic-fig1.webp",
+        "alt": "Glomerular podocyte effacement causing massive proteinuria and oedema.",
+        "caption": "Congenital nephrotic syndrome starts with podocyte failure. Credit: StewardMD."
       }
     },
     {
@@ -36,12 +23,32 @@
       "vis": {
         "kind": "table",
         "title": "Finnish Type CNS (CNF) Hallmarks",
-        "cols": ["Feature", "Finding", "Clinical Significance"],
+        "cols": [
+          "Feature",
+          "Finding",
+          "Clinical Significance"
+        ],
         "rows": [
-          ["Gene & Locus", "NPHS1 (19q13.1)", "Encodes slit diaphragm nephrin"],
-          ["Maternal Serum", "AFP > 10 MoM", "Massive fetal intrauterine proteinuria"],
-          ["Placental Size", "> 25% infant birth weight", "Compensatory placental hypertrophy"],
-          ["Renal Biopsy", "Microcystic tubular dilation", "Radial microcysts in proximal tubules"]
+          [
+            "Gene & Locus",
+            "NPHS1 (19q13.1)",
+            "Encodes slit diaphragm nephrin"
+          ],
+          [
+            "Maternal Serum",
+            "AFP > 10 MoM",
+            "Massive fetal intrauterine proteinuria"
+          ],
+          [
+            "Placental Size",
+            "> 25% infant birth weight",
+            "Compensatory placental hypertrophy"
+          ],
+          [
+            "Renal Biopsy",
+            "Microcystic tubular dilation",
+            "Radial microcysts in proximal tubules"
+          ]
         ]
       }
     },
@@ -51,15 +58,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "mut", "label": "NPHS2 Mutation (1q25-q31)"},
-          {"id": "pod", "label": "Abnormal Podocin Synthesis"},
-          {"id": "pheno", "label": "Infantile to Adolescent FSGS"},
-          {"id": "rx", "label": "Steroid-Resistant Disease"}
+          {
+            "id": "mut",
+            "label": "NPHS2 Mutation (1q25-q31)"
+          },
+          {
+            "id": "pod",
+            "label": "Abnormal Podocin Synthesis"
+          },
+          {
+            "id": "pheno",
+            "label": "Infantile to Adolescent FSGS"
+          },
+          {
+            "id": "rx",
+            "label": "Steroid-Resistant Disease"
+          }
         ],
         "edges": [
-          ["mut", "pod"],
-          ["pod", "pheno"],
-          ["pheno", "rx"]
+          [
+            "mut",
+            "pod"
+          ],
+          [
+            "pod",
+            "pheno"
+          ],
+          [
+            "pheno",
+            "rx"
+          ]
         ]
       }
     },
@@ -67,14 +95,10 @@
       "say": "Denys-Drash syndrome links early nephropathy with gonadal dysgenesis and oncologic danger.",
       "tx": "Screen for systemic complications defining the **Denys-Drash syndrome triad and WT1 mutations** in infants with early proteinuria. Denys-Drash syndrome is caused by heterozygous missense mutations in WT1 on chromosome 11p13 within exon 8 or 9, featuring a triad of early-onset diffuse mesangial sclerosis (DMS), 46,XY disorder of sex development, and > 90% risk of Wilms tumor.",
       "vis": {
-        "kind": "table",
-        "title": "Denys-Drash Syndrome Triad Components",
-        "cols": ["Component", "Manifestation", "Pathologic Basis"],
-        "rows": [
-          ["Renal", "Diffuse mesangial sclerosis (DMS)", "Early rapid progression to end-stage kidney failure"],
-          ["Genital", "46,XY DSD (gonadal dysgenesis)", "Ambiguous genitalia or streak gonads"],
-          ["Neoplastic", "> 90% risk of Wilms tumor", "WT1 11p13 zinc-finger oncogenic disruption"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/wagr-syndrome-fig1.webp",
+        "alt": "WT1 related spectrum with Wilms tumour, aniridia and genital anomalies.",
+        "caption": "WT1 disease: tumour, eye and genital features. Credit: StewardMD."
       }
     },
     {
@@ -106,12 +130,32 @@
       "vis": {
         "kind": "table",
         "title": "CNS Intensive Supportive Medical Protocol",
-        "cols": ["Intervention", "Regimen & Dosing", "Therapeutic Rationale"],
+        "cols": [
+          "Intervention",
+          "Regimen & Dosing",
+          "Therapeutic Rationale"
+        ],
         "rows": [
-          ["Albumin infusion", "20% albumin at 3-4 g/kg/day", "Maintains intravascular oncotic volume"],
-          ["Antiproteinuric", "Enalapril & indomethacin", "Reduces intraglomerular pressure and GFR"],
-          ["Endocrine repletion", "Oral levothyroxine", "Compensates for urinary thyroglobulin loss"],
-          ["Anticoagulation", "Subcutaneous LMWH", "Counteracts profound antithrombin III deficit"]
+          [
+            "Albumin infusion",
+            "20% albumin at 3-4 g/kg/day",
+            "Maintains intravascular oncotic volume"
+          ],
+          [
+            "Antiproteinuric",
+            "Enalapril & indomethacin",
+            "Reduces intraglomerular pressure and GFR"
+          ],
+          [
+            "Endocrine repletion",
+            "Oral levothyroxine",
+            "Compensates for urinary thyroglobulin loss"
+          ],
+          [
+            "Anticoagulation",
+            "Subcutaneous LMWH",
+            "Counteracts profound antithrombin III deficit"
+          ]
         ]
       }
     },
@@ -121,13 +165,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "sup", "label": "Daily Albumin & High-Calorie Nutrition"},
-          {"id": "wt1", "label": "Weight 7-9 kg: Bilateral Nephrectomy & PD"},
-          {"id": "trans", "label": "Weight 10-12 kg: Renal Transplantation"}
+          {
+            "id": "sup",
+            "label": "Daily Albumin & High-Calorie Nutrition"
+          },
+          {
+            "id": "wt1",
+            "label": "Weight 7-9 kg: Bilateral Nephrectomy & PD"
+          },
+          {
+            "id": "trans",
+            "label": "Weight 10-12 kg: Renal Transplantation"
+          }
         ],
         "edges": [
-          ["sup", "wt1"],
-          ["wt1", "trans"]
+          [
+            "sup",
+            "wt1"
+          ],
+          [
+            "wt1",
+            "trans"
+          ]
         ]
       }
     },
@@ -137,12 +196,32 @@
       "vis": {
         "kind": "table",
         "title": "Non-Genetic Treatable Infectious CNS Causes",
-        "cols": ["Pathogen", "Diagnostic Method", "Targeted Antimicrobial"],
+        "cols": [
+          "Pathogen",
+          "Diagnostic Method",
+          "Targeted Antimicrobial"
+        ],
         "rows": [
-          ["Treponema pallidum", "Maternal/neonatal VDRL & FTA-ABS", "Intravenous penicillin G"],
-          ["Cytomegalovirus", "Urine CMV PCR within 2-3 weeks", "Intravenous ganciclovir"],
-          ["Toxoplasma gondii", "Serum IgM and PCR analysis", "Pyrimethamine and sulfadiazine"],
-          ["Rubella virus", "Viral serology and RT-PCR", "Supportive neonatal care"]
+          [
+            "Treponema pallidum",
+            "Maternal/neonatal VDRL & FTA-ABS",
+            "Intravenous penicillin G"
+          ],
+          [
+            "Cytomegalovirus",
+            "Urine CMV PCR within 2-3 weeks",
+            "Intravenous ganciclovir"
+          ],
+          [
+            "Toxoplasma gondii",
+            "Serum IgM and PCR analysis",
+            "Pyrimethamine and sulfadiazine"
+          ],
+          [
+            "Rubella virus",
+            "Viral serology and RT-PCR",
+            "Supportive neonatal care"
+          ]
         ]
       }
     }

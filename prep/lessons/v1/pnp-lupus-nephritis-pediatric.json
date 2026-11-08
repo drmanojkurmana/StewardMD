@@ -11,40 +11,20 @@
       "say": "Renal involvement in juvenile systemic lupus is remarkably common and dictates long-term survival.",
       "tx": "Assess pediatric patients early recognizing the high **Pediatric SLE renal involvement frequency** across clinical cohorts. Clinically evident renal involvement occurs in 50-80% of children with systemic lupus erythematosus, demonstrating substantially greater proliferative severity, higher rates of acute kidney injury, and accelerated progression compared with adult-onset disease.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Pediatric Lupus Nephritis",
-          "points": [
-            "Renal involvement in 50-80% of children",
-            "Higher frequency of diffuse proliferative class IV",
-            "More aggressive inflammatory damage and hypertension"
-          ]
-        },
-        "right": {
-          "title": "Adult Lupus Nephritis",
-          "points": [
-            "Renal involvement in 30-50% of adults",
-            "Higher proportion of membranous class V lesions",
-            "Lower lifetime cumulative glucocorticoid exposure burden"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/sle-flare-fig1.webp",
+        "alt": "Immune complex deposition causing malar rash and lupus nephritis.",
+        "caption": "Lupus: immune complexes injure skin and kidney together. Credit: StewardMD."
       }
     },
     {
       "say": "Standardized histological staging groups glomerular injury into six prognostic classes based on biopsy findings.",
       "tx": "Classify renal tissue architecture utilizing the consensus **ISN/RPS pathological classification classes** on light microscopy. Histological categories comprise Class I (minimal mesangial), Class II (mesangial proliferative), Class III (focal proliferative < 50% glomeruli), Class IV (diffuse proliferative >= 50%), Class V (membranous), and Class VI (advanced sclerosing >= 90%), establishing the foundation for protocolized immunosuppression.",
       "vis": {
-        "kind": "table",
-        "title": "ISN/RPS Lupus Nephritis Histological Classification",
-        "cols": ["Class", "Glomerular Pathology", "Clinical Picture"],
-        "rows": [
-          ["Class I", "Minimal mesangial alterations", "Normal urinalysis, normal renal function"],
-          ["Class II", "Mesangial hypercellularity", "Microscopic hematuria, low-grade proteinuria"],
-          ["Class III", "Focal proliferative (< 50% glomeruli)", "Active urinary sediment, hypertension"],
-          ["Class IV", "Diffuse proliferative (>= 50% glomeruli)", "Nephritic/nephrotic syndrome, rapid decline"],
-          ["Class V", "Subepithelial immune deposits", "Nephrotic-range proteinuria"],
-          ["Class VI", "Advanced global glomerulosclerosis (>= 90%)", "Chronic renal failure, bland urine sediment"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/glomerular-diseases-fig1.webp",
+        "alt": "Microscopic patterns separating minimal change, FSGS, IgA and membranoproliferative disease.",
+        "caption": "Glomerular patterns that frame the lupus class. Credit: StewardMD."
       }
     },
     {
@@ -53,13 +33,28 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "biop", "label": "Biopsy Confirmed Class III or IV LN"},
-          {"id": "pulse", "label": "IV Pulse Methylprednisolone (10-30 mg/kg x 3 doses)"},
-          {"id": "ind", "label": "Oral Corticosteroids + MMF 1200 mg/m²/day or IV Cyclophosphamide"}
+          {
+            "id": "biop",
+            "label": "Biopsy Confirmed Class III or IV LN"
+          },
+          {
+            "id": "pulse",
+            "label": "IV Pulse Methylprednisolone (10-30 mg/kg x 3 doses)"
+          },
+          {
+            "id": "ind",
+            "label": "Oral Corticosteroids + MMF 1200 mg/m²/day or IV Cyclophosphamide"
+          }
         ],
         "edges": [
-          ["biop", "pulse"],
-          ["pulse", "ind"]
+          [
+            "biop",
+            "pulse"
+          ],
+          [
+            "pulse",
+            "ind"
+          ]
         ]
       }
     },
@@ -69,12 +64,32 @@
       "vis": {
         "kind": "table",
         "title": "Belimumab Monoclonal Antibody Specifications",
-        "cols": ["Parameter", "Clinical Specification", "Mechanism"],
+        "cols": [
+          "Parameter",
+          "Clinical Specification",
+          "Mechanism"
+        ],
         "rows": [
-          ["Target Ligand", "Soluble BAFF / BLyS cytokine", "Inhibits autoreactive B-cell survival"],
-          ["Approved Age", "Children >= 5 years of age", "Reduces autoreactive plasmablast differentiation"],
-          ["Dosing Regimen", "10 mg/kg IV at weeks 0, 2, 4, then monthly", "Decreases systemic autoantibody production"],
-          ["Therapeutic Goal", "Corticosteroid-sparing renal remission", "Reduces relapses and chronic organ damage"]
+          [
+            "Target Ligand",
+            "Soluble BAFF / BLyS cytokine",
+            "Inhibits autoreactive B-cell survival"
+          ],
+          [
+            "Approved Age",
+            "Children >= 5 years of age",
+            "Reduces autoreactive plasmablast differentiation"
+          ],
+          [
+            "Dosing Regimen",
+            "10 mg/kg IV at weeks 0, 2, 4, then monthly",
+            "Decreases systemic autoantibody production"
+          ],
+          [
+            "Therapeutic Goal",
+            "Corticosteroid-sparing renal remission",
+            "Reduces relapses and chronic organ damage"
+          ]
         ]
       }
     },
@@ -84,12 +99,32 @@
       "vis": {
         "kind": "table",
         "title": "Glomerular Immunofluorescence Staining Profile",
-        "cols": ["Marker", "Deposition Pattern", "Diagnostic Significance"],
+        "cols": [
+          "Marker",
+          "Deposition Pattern",
+          "Diagnostic Significance"
+        ],
         "rows": [
-          ["IgG & IgM", "Granular peripheral capillary loops", "Reflects circulating immune-complex entrapment"],
-          ["IgA", "Mesangial granular staining", "Distinguishes SLE from pure post-infectious GN"],
-          ["C3 & C1q", "Capillary wall and mesangium", "Confirms classical complement pathway activation"],
-          ["Overall", "Intense full house staining", "Pathognomonic hallmark of lupus glomerulonephritis"]
+          [
+            "IgG & IgM",
+            "Granular peripheral capillary loops",
+            "Reflects circulating immune-complex entrapment"
+          ],
+          [
+            "IgA",
+            "Mesangial granular staining",
+            "Distinguishes SLE from pure post-infectious GN"
+          ],
+          [
+            "C3 & C1q",
+            "Capillary wall and mesangium",
+            "Confirms classical complement pathway activation"
+          ],
+          [
+            "Overall",
+            "Intense full house staining",
+            "Pathognomonic hallmark of lupus glomerulonephritis"
+          ]
         ]
       }
     },
@@ -122,12 +157,32 @@
       "vis": {
         "kind": "table",
         "title": "Hydroxychloroquine Baseline Therapy Parameters",
-        "cols": ["Aspect", "Target Parameter", "Clinical Benefit"],
+        "cols": [
+          "Aspect",
+          "Target Parameter",
+          "Clinical Benefit"
+        ],
         "rows": [
-          ["Weight-Based Dose", "3-5 mg/kg/day (maximum 200-400 mg)", "Optimizes efficacy while preventing maculopathy"],
-          ["Ophthalmology", "Baseline and annual visual screening", "Monitors for rare retinal toxicity"],
-          ["Flares & Damage", "Significant reduction in renal relapses", "Inhibits endosomal TLR-7 and TLR-9 signalling"],
-          ["Vascular Benefit", "Decreases antiphospholipid thrombosis risk", "Improves lipid profiles and vascular compliance"]
+          [
+            "Weight-Based Dose",
+            "3-5 mg/kg/day (maximum 200-400 mg)",
+            "Optimizes efficacy while preventing maculopathy"
+          ],
+          [
+            "Ophthalmology",
+            "Baseline and annual visual screening",
+            "Monitors for rare retinal toxicity"
+          ],
+          [
+            "Flares & Damage",
+            "Significant reduction in renal relapses",
+            "Inhibits endosomal TLR-7 and TLR-9 signalling"
+          ],
+          [
+            "Vascular Benefit",
+            "Decreases antiphospholipid thrombosis risk",
+            "Improves lipid profiles and vascular compliance"
+          ]
         ]
       }
     },
@@ -137,15 +192,36 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          {"id": "rem", "label": "Induction Remission Achieved (Months 3-6)"},
-          {"id": "maint", "label": "Oral MMF or Azathioprine + Low-Dose Prednisone"},
-          {"id": "dur", "label": "Continue for Minimum 3-5 Years"},
-          {"id": "taper", "label": "Slow Monitored Taper if Quiescent"}
+          {
+            "id": "rem",
+            "label": "Induction Remission Achieved (Months 3-6)"
+          },
+          {
+            "id": "maint",
+            "label": "Oral MMF or Azathioprine + Low-Dose Prednisone"
+          },
+          {
+            "id": "dur",
+            "label": "Continue for Minimum 3-5 Years"
+          },
+          {
+            "id": "taper",
+            "label": "Slow Monitored Taper if Quiescent"
+          }
         ],
         "edges": [
-          ["rem", "maint"],
-          ["maint", "dur"],
-          ["dur", "taper"]
+          [
+            "rem",
+            "maint"
+          ],
+          [
+            "maint",
+            "dur"
+          ],
+          [
+            "dur",
+            "taper"
+          ]
         ]
       }
     }
