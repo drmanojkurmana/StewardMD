@@ -1121,11 +1121,11 @@ body.dark #homeV2.rnav .rnav-main{background:#071318}
 /* One surface: header + greeting sit on a single art layer. html[data-appearance] outranks appearance.css. */
 html[data-appearance] #homeV2.rnav .hrf-hero .hrf-head{position:relative;z-index:2;margin:0;min-height:0;height:auto;padding:calc(env(safe-area-inset-top,0px) + 1px) 8px 0 8px;background:transparent!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;color:#fff}
 #homeV2.rnav .hrf-hero .rnav-greet{position:relative;z-index:2;padding:16px 21px 0;background:transparent}
-#homeV2.rnav .rnav-greet .hrf-date{font:400 14px/1.3 var(--rds-font);letter-spacing:0;text-transform:none;color:#a9d6cf}
+#homeV2.rnav .rnav-greet .hrf-date{font:400 14px/1.3 var(--rds-font);letter-spacing:0;text-transform:none;color:var(--hrf-date)}
 #homeV2.rnav .rnav-greet .hrf-rule{width:36px;height:4px;border-radius:99px;background:var(--hrf-mint);margin:9px 0 0 2px}
 #homeV2.rnav .hrf-banner::after{content:"";position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 361 112' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='1'%3E%3Cstop stop-color='%233fd6ae' stop-opacity='0'/%3E%3Cstop offset='.55' stop-color='%233fd6ae' stop-opacity='.6'/%3E%3Cstop offset='1' stop-color='%233fd6ae' stop-opacity='.05'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='%23fff' fill-opacity='.05' d='M205 112C255 72 270 30 361 0V112Z'/%3E%3Cpath fill='url(%23a)' d='M130 112C180 92 225 92 260 100C300 109 335 104 361 88V112Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
-html[data-appearance] #homeV2.rnav .hrf-hero,#homeV2.rnav .hrf-hero{position:relative;overflow:hidden;margin:-8px -15px 0;padding:0 0 126px;border-radius:0;background:linear-gradient(180deg,#0c3b3e 0,#09373b 100px,#1a4e4e 205px,#316c67 225px,#579089 250px,#90bab6 275px,#c9dfe0 300px,var(--hrf-page) 320px)}
-body.dark #homeV2.rnav .hrf-hero{background:linear-gradient(180deg,#0c3b3e 0,#09373b 100px,#1a4e4e 205px,#174544 240px,#0c2a2c 280px,var(--hrf-page) 320px)}
+html[data-appearance] #homeV2.rnav .hrf-hero,#homeV2.rnav .hrf-hero{position:relative;isolation:isolate;overflow:hidden;margin:-8px -15px 0;padding:0 0 126px;border-radius:0;background:linear-gradient(180deg,var(--hrf-h0) 0,var(--hrf-h1) 100px,var(--hrf-h2) 205px,var(--hrf-h3) 225px,var(--hrf-h4) 250px,var(--hrf-h5) 275px,var(--hrf-h6) 300px,var(--hrf-page) 320px)}
+body.dark #homeV2.rnav{--hrf-h3:#174544;--hrf-h4:#123a3a;--hrf-h5:#0c2a2c;--hrf-h6:#091d21;--hrf-sh:rgba(0,0,0,.55);--hrf-hl:rgba(255,255,255,.08);--hrf-lo:rgba(0,0,0,.28)}
 /* shortcut: art is cut from the owner's 851px mockup, swap for a 3x master if one is generated. */
 #homeV2.rnav .hrf-art{position:absolute;right:0;top:calc(env(safe-area-inset-top,0px) + 38px);width:190px;height:128px;-webkit-mask-image:linear-gradient(to right,transparent,#000 34%),linear-gradient(to bottom,transparent,#000 12%,#000 80%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent,#000 34%),linear-gradient(to bottom,transparent,#000 12%,#000 80%,transparent);mask-composite:intersect;pointer-events:none}
 #homeV2.rnav .hrf-qa{position:relative;z-index:3;margin-top:-109px;gap:8px}
@@ -1134,13 +1134,13 @@ html[data-appearance] #homeV2#homeV2.rnav .hrf-qc{height:82px!important;min-heig
 html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2.rnav .hrf-qc{background:var(--hrf-tile)!important;border-color:rgba(255,255,255,.9)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
 body.dark #homeV2.rnav{--hrf-tile:#0d1d23}
 html[data-appearance] body.dark #homeV2#homeV2.rnav .hrf-qa-btn:not(.is-first),html[data-appearance] body.dark #homeV2#homeV2.rnav .hrf-qc{border-color:#1e3a32!important}
-html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn.is-first{background:linear-gradient(165deg,#d4f7ec 0%,#a9efd9 100%)!important;border-color:#7fd8bc!important;color:#0b352a}
+html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn.is-first{background:linear-gradient(165deg,var(--hrf-first1) 0%,var(--hrf-first2) 100%)!important;border-color:var(--hrf-firstb)!important;color:var(--hrf-firstink)}
 html[data-appearance] #homeV2#homeV2.rnav .hrf-tabbar{background:#fff!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding:6px 6px calc(2px + env(safe-area-inset-bottom,0px))}
 html[data-appearance] body.dark #homeV2#homeV2.rnav .hrf-tabbar{background:#0d1d23!important}
 #homeV2#homeV2.rnav .hrf-tabbar .rnav-tab{min-height:46px}
 #homeV2#homeV2.rnav .hrf-maik-circle{width:43px;height:43px;margin-top:-18px;background:#fff;overflow:hidden}
 #homeV2#homeV2.rnav .hrf-maik-circle .mkai{display:block;width:43px;height:43px}
-#homeV2#homeV2.rnav .hrf-banner{height:118px;margin-top:11px;background:linear-gradient(100deg,#03463e 0%,#05725f 58%,#076958 100%)}
+#homeV2#homeV2.rnav .hrf-banner{height:118px;margin-top:11px;background:linear-gradient(100deg,var(--hrf-b1) 0%,var(--hrf-b2) 58%,var(--hrf-b3) 100%);box-shadow:0 2px 3px var(--hrf-sh),0 10px 18px -4px var(--hrf-sh),0 24px 38px -14px var(--hrf-sh),inset 0 1px 0 rgba(255,255,255,.22),inset 0 -14px 26px -14px rgba(0,0,0,.32)}
 #homeV2#homeV2.rnav .hrf-qrow{margin-top:5px}
 #homeV2#homeV2.rnav .rnav-tools-head{margin:10px 0 -10px}
 #homeV2#homeV2.rnav .hrf-pillsrow{align-items:flex-start;height:39px;padding-bottom:0;margin-bottom:6px}
@@ -1168,7 +1168,7 @@ html[data-appearance] #homeV2#homeV2.rnav .hrf-tabbar{padding:13px 6px max(2px,c
 body.dark #homeV2.rnav .hrf-ic{color:var(--hrf-deep)}
 #homeV2.rnav .hrf-qa-btn.is-first{background:linear-gradient(165deg,#D4F7EC 0%,#A9EFD9 100%);border-color:#7fd8bc;box-shadow:0 12px 26px rgba(6,80,60,.22);font-weight:800}
 body.dark #homeV2.rnav .hrf-qa-btn.is-first{background:linear-gradient(165deg,#D4F7EC 0%,#A9EFD9 100%);color:#0b352a;border-color:#7fd8bc}
-body.dark #homeV2.rnav .hrf-qa-btn.is-first .hrf-ic{color:#0b4f43}
+body.dark #homeV2.rnav .hrf-qa-btn.is-first .hrf-ic{color:var(--hrf-firstink)}
 #homeV2.rnav .hrf-banner{position:relative;overflow:hidden;height:112px;box-sizing:border-box;border-radius:18px;padding:16px 18px;display:flex;align-items:center;background:linear-gradient(120deg,#04382a 0%,#07573d 55%,#0d8563 100%);box-shadow:0 14px 30px rgba(4,60,45,.28)}
 #homeV2.rnav .hrf-banner .rnav-hero-bd{position:relative;z-index:2}
 #homeV2.rnav .hrf-banner .rnav-hero-tt{font:800 22px/1.15 var(--rds-font);color:#fff}
@@ -1210,3 +1210,24 @@ body.dark #homeV2.rnav .hrf-tabbar .rnav-tab-maik span:last-child{color:#e9f4ef}
 #homeV2.rnav .hrf-head .rds-icon-btn:focus-visible,#homeV2.rnav .hrf-banner:focus-visible,#homeV2.rnav .hrf-pillsrow .rnav-htab:focus-visible,#homeV2.rnav .hrf-tabbar .rnav-tab:focus-visible{outline:2px solid var(--hrf-mint);outline-offset:2px}
 @media (max-width:340px){#homeV2.rnav .hrf-greet-line{font-size:21px}#homeV2.rnav .hrf-greet-name{font-size:24px}#homeV2.rnav .hrf-qa-btn,#homeV2.rnav .hrf-qc{font-size:11px}#homeV2.rnav .hrf-pillsrow .rnav-htab{font-size:12px;padding:0 3px}}
 @media (prefers-reduced-motion:reduce){#homeV2.rnav .hrf-qa-btn,#homeV2.rnav .hrf-qc,#homeV2.rnav .rnav-tile{transition:none}}
+#homeV2.rnav{--hrf-h0:#0c3b3e;--hrf-h1:#09373b;--hrf-h2:#1a4e4e;--hrf-h3:#316c67;--hrf-h4:#579089;--hrf-h5:#90bab6;--hrf-h6:#c9dfe0;--hrf-date:#a9d6cf;--hrf-first1:#d4f7ec;--hrf-first2:#a9efd9;--hrf-firstb:#7fd8bc;--hrf-firstink:#0b352a;--hrf-b1:#03463e;--hrf-b2:#05725f;--hrf-b3:#076958;--hrf-sh:rgba(6,60,50,.2);--hrf-hl:rgba(255,255,255,.95);--hrf-lo:rgba(6,60,50,.08)}
+/* Every non-Classic Settings theme derives the look from its own sphere palette; Classic keeps the mockup's sampled colours. */
+html[data-theme]:not([data-theme="classic"]) #homeV2.rnav{--hrf-h0:color-mix(in srgb,var(--sphere-base) 62%,var(--sphere-mid));--hrf-h1:var(--hrf-h0);--hrf-h2:var(--sphere-mid);--hrf-h3:color-mix(in srgb,var(--sphere-mid) 60%,var(--sphere-hi));--hrf-h4:color-mix(in srgb,var(--sphere-hi) 72%,var(--hrf-page));--hrf-h5:color-mix(in srgb,var(--sphere-hi) 40%,var(--hrf-page));--hrf-h6:color-mix(in srgb,var(--sphere-hi) 16%,var(--hrf-page));--hrf-mint:color-mix(in srgb,var(--sphere-hi) 45%,#fff);--hrf-date:color-mix(in srgb,var(--sphere-hi) 30%,#fff);--hrf-first1:color-mix(in srgb,var(--sphere-hi) 16%,#fff);--hrf-first2:color-mix(in srgb,var(--sphere-hi) 40%,#fff);--hrf-firstb:color-mix(in srgb,var(--sphere-hi) 60%,#fff);--hrf-firstink:var(--sphere-base);--hrf-b1:var(--sphere-base);--hrf-b2:var(--sphere-mid);--hrf-b3:color-mix(in srgb,var(--sphere-mid) 70%,var(--sphere-hi));--hrf-green:var(--sphere-mid);--hrf-deep:var(--sphere-mid);--hrf-page:color-mix(in srgb,var(--sphere-hi) 9%,#f4f8fb);--rds-bg:var(--hrf-page);--hrf-sh:color-mix(in srgb,var(--sphere-base) 22%,transparent);--hrf-lo:color-mix(in srgb,var(--sphere-base) 9%,transparent);background:var(--hrf-page)}
+html[data-theme]:not([data-theme="classic"]) body.dark #homeV2.rnav{--hrf-page:#000;--hrf-deep:var(--hrf-mint);--hrf-green:var(--sphere-mid);--hrf-h3:color-mix(in srgb,var(--sphere-mid) 60%,#000);--hrf-h4:color-mix(in srgb,var(--sphere-mid) 42%,#000);--hrf-h5:color-mix(in srgb,var(--sphere-mid) 26%,#000);--hrf-h6:color-mix(in srgb,var(--sphere-mid) 12%,#000);--hrf-tile:#0c0c0e;--hrf-sh:rgba(0,0,0,.55);--hrf-lo:rgba(0,0,0,.28);background:#000}
+/* Dark mode resets --sphere-* and --teal to green app-wide; home pins each theme's own palette so the theme still shows. */
+html[data-theme="amber"] body.dark #homeV2.rnav{--sphere-hi:#f59e0b;--sphere-mid:#b45309;--sphere-base:#451a03;--sphere-glow:rgba(69,26,3,.6);--teal:#a86412;--rds-primary:#a86412;--hrf-mint:color-mix(in srgb,#f59e0b 45%,#fff)}
+html[data-theme="blue"] body.dark #homeV2.rnav{--sphere-hi:#3b82f6;--sphere-mid:#1d4ed8;--sphere-base:#0b254a;--sphere-glow:rgba(15,37,74,.6);--teal:#1560b0;--rds-primary:#1560b0;--hrf-mint:color-mix(in srgb,#3b82f6 45%,#fff)}
+html[data-theme="ocean"] body.dark #homeV2.rnav{--sphere-hi:#06b6d4;--sphere-mid:#0e7490;--sphere-base:#083344;--sphere-glow:rgba(8,51,68,.6);--teal:#0a7d8c;--rds-primary:#0a7d8c;--hrf-mint:color-mix(in srgb,#06b6d4 45%,#fff)}
+html[data-theme="slate"] body.dark #homeV2.rnav{--sphere-hi:#64748b;--sphere-mid:#334155;--sphere-base:#0f172a;--sphere-glow:rgba(15,23,42,.6);--teal:#3d5166;--rds-primary:#3d5166;--hrf-mint:color-mix(in srgb,#64748b 45%,#fff)}
+html[data-theme="tiranga"] body.dark #homeV2.rnav{--sphere-hi:#10b981;--sphere-mid:#047857;--sphere-base:#064e3b;--sphere-glow:rgba(6,78,59,.6);--teal:#1a7a41;--rds-primary:#1a7a41;--hrf-mint:color-mix(in srgb,#10b981 45%,#fff)}
+html[data-theme]:not([data-theme="classic"]) #homeV2.rnav .hrf-art,html[data-theme]:not([data-theme="classic"]) #homeV2.rnav .hrf-banner::after{mix-blend-mode:luminosity}
+/* Mild depth: contact + ambient shadow, lit top edge, shaded foot. */
+html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2.rnav .hrf-qc{box-shadow:0 1px 2px var(--hrf-sh),0 6px 12px -2px var(--hrf-sh),0 16px 26px -12px var(--hrf-sh),inset 0 1px 0 var(--hrf-hl),inset 0 -3px 5px -2px var(--hrf-lo)!important;transition:transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .16s}
+html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn:active,html[data-appearance] #homeV2#homeV2.rnav .hrf-qc:active{transform:translateY(1px) scale(.98)}
+#homeV2#homeV2.rnav .hrf-ic{filter:drop-shadow(0 1px 1px var(--hrf-sh))}
+#homeV2#homeV2.rnav .hrf-hero .rnav-greet{text-shadow:0 1px 2px rgba(0,0,0,.28)}
+#homeV2#homeV2.rnav .hrf-pillsrow .rnav-htab.on::before{box-shadow:0 1px 2px var(--hrf-sh),0 5px 10px -3px var(--hrf-sh),inset 0 1px 0 rgba(255,255,255,.28)}
+html[data-appearance] #homeV2#homeV2.rnav .hrf-tabbar{box-shadow:0 -1px 2px var(--hrf-sh),0 -10px 26px -8px var(--hrf-sh),inset 0 1px 0 var(--hrf-hl)!important}
+#homeV2#homeV2.rnav .hrf-maik-circle{box-shadow:0 0 0 5px var(--hrf-ring,#fff),0 3px 8px var(--hrf-sh),0 14px 22px -4px var(--hrf-sh)}
+body.dark #homeV2.rnav{--hrf-ring:#0d1d23}
+@media (prefers-reduced-motion:reduce){html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2.rnav .hrf-qc{transition:none}html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn:active,html[data-appearance] #homeV2#homeV2.rnav .hrf-qc:active{transform:none}}
