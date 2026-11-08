@@ -1233,3 +1233,7 @@ html[data-appearance] #homeV2#homeV2.rnav .hrf-tabbar{box-shadow:0 -1px 2px var(
 #homeV2#homeV2.rnav .hrf-maik-circle{box-shadow:0 0 0 5px var(--hrf-ring,#fff),0 3px 8px var(--hrf-sh),0 14px 22px -4px var(--hrf-sh)}
 body.dark #homeV2.rnav{--hrf-ring:#0d1d23}
 @media (prefers-reduced-motion:reduce){html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2.rnav .hrf-qc{transition:none}html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn:active,html[data-appearance] #homeV2#homeV2.rnav .hrf-qc:active{transform:none}}
+/* Ask MaiK uses the Clinical Tools sphere recipe, theme-driven; the MaiK disc is knocked out to a white mark on it. */
+#homeV2#homeV2.rnav .hrf-maik-circle{position:relative;background:radial-gradient(circle at 34% 26%,var(--sphere-hi,#2f9184) 0%,var(--sphere-mid,#12564a) 52%,var(--sphere-base,#06231e) 100%);box-shadow:0 0 0 4px var(--hrf-ring,#fff),inset 0 2px 5px rgba(255,255,255,.28),inset 0 -6px 10px rgba(0,0,0,.42),0 10px 18px -5px var(--sphere-glow,rgba(8,40,35,.6))}
+#homeV2#homeV2.rnav .hrf-maik-circle::before{content:"";position:absolute;z-index:1;top:9%;left:21%;width:34%;height:26%;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,.6),rgba(255,255,255,0) 70%);pointer-events:none}
+#homeV2#homeV2.rnav .hrf-maik-circle .mkai{width:33px;height:33px;-webkit-filter:grayscale(1) invert(1) brightness(1.5) contrast(1.2);filter:grayscale(1) invert(1) brightness(1.5) contrast(1.2);mix-blend-mode:screen}
