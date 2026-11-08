@@ -1,0 +1,150 @@
+{
+  "id": "pnp-congenital-nephrotic-syndrome-finnish",
+  "title": "Congenital Nephrotic Syndrome: Finnish Type, Denys-Drash and Early Management",
+  "subject": "ss-paediatric-nephrology",
+  "module": "Glomerular Diseases, Nephrotic Syndrome and Nephritis",
+  "v": 1,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "say": "Congenital nephrotic syndrome manifests in early infancy with profound proteinuria requiring strict diagnostic chronology.",
+      "tx": "Apply the chronological **Timing definition of congenital and infantile NS** to guide initial clinical evaluation. Congenital nephrotic syndrome formally presents within the first 3 months of life or 0-90 days from delivery, whereas infantile nephrotic syndrome presents between 3 and 12 months of life, distinguishing neonatal developmental defect categories from acquired post-neonatal glomerulopathies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Congenital NS (CNS)",
+          "points": [
+            "Presents within first 3 months of life (0-90 days)",
+            "Intrauterine onset typical with fetal proteinuria",
+            "Severe genetic podocytopathy or antenatal infection"
+          ]
+        },
+        "right": {
+          "title": "Infantile NS (INS)",
+          "points": [
+            "Presents between 3 and 12 months of life",
+            "Heterogeneous genetic spectrum (podocin, WT1, LAMB2)",
+            "Steroid responsiveness extremely uncommon"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Finnish type congenital nephrotic syndrome features severe intrauterine podocyte dysfunction linked to nephrin mutations.",
+      "tx": "Recognize the genetic and antenatal features of **Finnish type CNS (CNF) NPHS1 genetics** on maternal evaluation. Finnish type CNS is an autosomal recessive mutation in NPHS1 on chromosome 19q13.1 encoding nephrin, presenting with massive intrauterine proteinuria, elevated maternal alpha-fetoprotein (AFP > 10 MoM), and an enlarged placenta exceeding 25% infant birth weight.",
+      "vis": {
+        "kind": "table",
+        "title": "Finnish Type CNS (CNF) Hallmarks",
+        "cols": ["Feature", "Finding", "Clinical Significance"],
+        "rows": [
+          ["Gene & Locus", "NPHS1 (19q13.1)", "Encodes slit diaphragm nephrin"],
+          ["Maternal Serum", "AFP > 10 MoM", "Massive fetal intrauterine proteinuria"],
+          ["Placental Size", "> 25% infant birth weight", "Compensatory placental hypertrophy"],
+          ["Renal Biopsy", "Microcystic tubular dilation", "Radial microcysts in proximal tubules"]
+        ]
+      }
+    },
+    {
+      "say": "Podocin defects present across a broad pediatric age spectrum and fail steroid therapy.",
+      "tx": "Evaluate podocyte structural integrity by testing for **NPHS2 podocin mutations and age of onset** across pediatric presentations. Autosomal recessive mutations in NPHS2 on chromosome 1q25-q31 encode the slit-diaphragm scaffold protein podocin, causing resistant podocytopathy presenting from early infancy up to adolescence, characterized by universal non-responsiveness to corticosteroid immunosuppression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "mut", "label": "NPHS2 Mutation (1q25-q31)"},
+          {"id": "pod", "label": "Abnormal Podocin Synthesis"},
+          {"id": "pheno", "label": "Infantile to Adolescent FSGS"},
+          {"id": "rx", "label": "Steroid-Resistant Disease"}
+        ],
+        "edges": [
+          ["mut", "pod"],
+          ["pod", "pheno"],
+          ["pheno", "rx"]
+        ]
+      }
+    },
+    {
+      "say": "Denys-Drash syndrome links early nephropathy with gonadal dysgenesis and oncologic danger.",
+      "tx": "Screen for systemic complications defining the **Denys-Drash syndrome triad and WT1 mutations** in infants with early proteinuria. Denys-Drash syndrome is caused by heterozygous missense mutations in WT1 on chromosome 11p13 within exon 8 or 9, featuring a triad of early-onset diffuse mesangial sclerosis (DMS), 46,XY disorder of sex development, and > 90% risk of Wilms tumor.",
+      "vis": {
+        "kind": "table",
+        "title": "Denys-Drash Syndrome Triad Components",
+        "cols": ["Component", "Manifestation", "Pathologic Basis"],
+        "rows": [
+          ["Renal", "Diffuse mesangial sclerosis (DMS)", "Early rapid progression to end-stage kidney failure"],
+          ["Genital", "46,XY DSD (gonadal dysgenesis)", "Ambiguous genitalia or streak gonads"],
+          ["Neoplastic", "> 90% risk of Wilms tumor", "WT1 11p13 zinc-finger oncogenic disruption"]
+        ]
+      }
+    },
+    {
+      "say": "Frasier syndrome presents later in life with distinct splice site disruption in the same regulatory gene.",
+      "tx": "Differentiate atypical gonadal and glomerular phenotypes by detecting **Frasier syndrome WT1 donor splice site** alterations. Frasier syndrome results from WT1 intron 9 splice-site mutations altering the +KTS/-KTS transcription ratio, presenting with progressive adolescent FSGS, complete 46,XY female sex reversal, streak gonads, and high risk of gonadoblastoma rather than Wilms nephroblastoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Denys-Drash Syndrome",
+          "points": [
+            "WT1 exon 8/9 missense mutations",
+            "Diffuse mesangial sclerosis (infantile onset)",
+            "Predisposition to Wilms tumor (> 90%)"
+          ]
+        },
+        "right": {
+          "title": "Frasier Syndrome",
+          "points": [
+            "WT1 intron 9 donor splice site mutation",
+            "Focal segmental glomerulosclerosis (adolescence)",
+            "Risk of gonadoblastoma in streak gonads"
+          ]
+        }
+      }
+    },
+    {
+      "say": "Supportive protocols sustain infants through continuous replacement and vascular control.",
+      "tx": "Administer an intensive medical **Aggressive supportive therapy protocol** to stabilize severe neonatal protein excretion. Finnish CNS requires daily intravenous 20% albumin infusions at 3-4 g/kg/day combined with furosemide, oral enalapril and indomethacin to reduce glomerular filtration pressure and urinary protein wasting, along with levothyroxine supplementation to correct severe urinary thyroglobulin losses.",
+      "vis": {
+        "kind": "table",
+        "title": "CNS Intensive Supportive Medical Protocol",
+        "cols": ["Intervention", "Regimen & Dosing", "Therapeutic Rationale"],
+        "rows": [
+          ["Albumin infusion", "20% albumin at 3-4 g/kg/day", "Maintains intravascular oncotic volume"],
+          ["Antiproteinuric", "Enalapril & indomethacin", "Reduces intraglomerular pressure and GFR"],
+          ["Endocrine repletion", "Oral levothyroxine", "Compensates for urinary thyroglobulin loss"],
+          ["Anticoagulation", "Subcutaneous LMWH", "Counteracts profound antithrombin III deficit"]
+        ]
+      }
+    },
+    {
+      "say": "Definitive surgical therapy prepares the developing infant for formal allograft placement.",
+      "tx": "Coordinate specialized surgical milestones governed by **Unilateral vs bilateral nephrectomy timing** in failing infants. Bilateral nephrectomy with initiation of peritoneal dialysis is performed once the infant reaches 7-9 kg weight to halt life-threatening protein loss, severe hypogammaglobulinemia, and recurrent anasarca, thereby optimizing somatic nutrition and growth for definitive kidney transplantation at 10-12 kg body weight.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "sup", "label": "Daily Albumin & High-Calorie Nutrition"},
+          {"id": "wt1", "label": "Weight 7-9 kg: Bilateral Nephrectomy & PD"},
+          {"id": "trans", "label": "Weight 10-12 kg: Renal Transplantation"}
+        ],
+        "edges": [
+          ["sup", "wt1"],
+          ["wt1", "trans"]
+        ]
+      }
+    },
+    {
+      "say": "Secondary infectious etiologies must be distinguished because eradication produces complete nephrotic recovery.",
+      "tx": "Exclude treatable secondary causes by investigating potential **Infectious CNS etiologies** at diagnosis. Congenital nephrotic syndrome can arise from intrauterine infections including congenital syphilis, cytomegalovirus (CMV), toxoplasmosis, and congenital rubella, where early antimicrobial eradication with penicillin G or ganciclovir resolves immune-complex deposition and reverses nephrotic proteinuria without nephrectomy.",
+      "vis": {
+        "kind": "table",
+        "title": "Non-Genetic Treatable Infectious CNS Causes",
+        "cols": ["Pathogen", "Diagnostic Method", "Targeted Antimicrobial"],
+        "rows": [
+          ["Treponema pallidum", "Maternal/neonatal VDRL & FTA-ABS", "Intravenous penicillin G"],
+          ["Cytomegalovirus", "Urine CMV PCR within 2-3 weeks", "Intravenous ganciclovir"],
+          ["Toxoplasma gondii", "Serum IgM and PCR analysis", "Pyrimethamine and sulfadiazine"],
+          ["Rubella virus", "Viral serology and RT-PCR", "Supportive neonatal care"]
+        ]
+      }
+    }
+  ]
+}
