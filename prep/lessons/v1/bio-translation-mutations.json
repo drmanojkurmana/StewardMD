@@ -1,0 +1,163 @@
+{
+ "v": 1,
+ "module": "bio-translation",
+ "subject": "biochemistry",
+ "title": "Mutations and their consequences",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Point mutations rename by protein consequence: **silent** (same amino acid, splicing caveats prior lesson), missense (one residue swapped, conservative (similar chemistry, often tolerated) versus nonconservative (charge or proline/glycine geometry disruptions, sickle glutamate to valine nonconservative surface hydrophobe prototypical), nonsense (to stop, decay or truncation geography), stop loss (extension into three prime UTR until next stop, haemoglobin Constant Spring alpha elongation unstable). Splice, promoter, UTR and polyadenylation mutations complete pathogenic grammar beyond coding sense (beta thalassaemia catalogue over two hundred alleles across all categories teaching).",
+   "say": "Missense splits conservative versus nonconservative by chemistry, with sickle as surface hydrophobe prototype. Splice, promoter and UTR mutations complete pathogenic grammar beyond coding sense in thalassaemia catalogues comprehensively.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mutation class",
+     "Frame or length",
+     "Prototype consequence"
+    ],
+    "rows": [
+     [
+      "Transition (purine to purine, pyrimidine to pyrimidine)",
+      "Point, commoner chemically",
+      "CpG deamination C to T hotspots (methyl cytosine)"
+     ],
+     [
+      "Transversion (ring class swaps)",
+      "Point, rarer",
+      "Sickle A to T transversion in codon 6"
+     ],
+     [
+      "Indel multiple of 3",
+      "In frame, residues added/lost",
+      "CF deltaF508 (one residue, folding null), Becker dystrophin"
+     ],
+     [
+      "Indel not multiple of 3",
+      "Frameshift, premature stop downstream",
+      "Duchenne null, Tay-Sachs 4 base insertion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Transitions** outnumber transversions (deamination chemistry, CpG methylcytosine to thymine hotspots in arginine CGA codons to stops in tumour suppressors and clotting factors), oxidative guanine mispairing transversions signature smoking and aflatoxin (TP53 codon two forty nine aflatoxin hepatocellular fingerprint), ultraviolet CC to TT tandem transitions fingerprint sunlight in skin cancers (mutational signatures COSMIC catalogues assigning exposures from genomes forensically).",
+   "say": "Transitions outnumber transversions through deamination hotspots at methylated CpG arginines characteristically. Mutational signatures assign sunlight, smoking and aflatoxin exposures from cancer genomes forensically in modern diagnostics routinely.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transition (same ring class)",
+     "points": [
+      "A to G, G to A, C to T, T to C",
+      "CpG C to T hotspots dominate human disease",
+      "Commoner overall"
+     ]
+    },
+    "right": {
+     "title": "Transversion (ring class swapped)",
+     "points": [
+      "Purine to pyrimidine or reverse",
+      "Sickle codon 6 A to T",
+      "Oxidative and bulky carcinogen signatures"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Reading frame diseases grade severity by protein preserved: Duchenne (out of frame deletions, no dystrophin, lethal teens historically steroids and exon skipping era) versus **Becker** (in frame deletions, shortened semifunctional dystrophin, adult ambulation) reading frame rule holds ninety percent (exceptions by domain deleted, hinge versus rod and cysteine rich binding ends), deltaF508 cystic fibrosis loses one residue yet folds null (processing mutation classes I to VI (no protein, folding, gating, conductance, abundance, stability) organising modulator therapies (correctors plus potentiator ivacaftor combinations) by molecular consequence, precision medicine grammar worth quoting verbatim.",
+   "say": "Duchenne versus Becker grades severity by frame preserved dystrophin quantity functionally. CFTR classes one to six organise modulator therapies by molecular consequence, precision medicine grammar worth quoting verbatim clinically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Reading frame rule (Duchenne/Becker)",
+    "nodes": [
+     {
+      "id": "del",
+      "label": "Exon deletion size counted"
+     },
+     {
+      "id": "frame",
+      "label": "Multiple of 3? Frame preserved or lost"
+     },
+     {
+      "id": "prot",
+      "label": "Shortened protein (Becker) or null (Duchenne)"
+     }
+    ],
+    "edges": [
+     [
+      "del",
+      "frame"
+     ],
+     [
+      "frame",
+      "prot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trinucleotide expansions** mutate dynamically across generations (repeat length instability in gametogenesis, anticipation earlier/severe offspring): CAG polyglutamine coding (Huntington over thirty six (full over thirty nine), spinocerebellar ataxias, Kennedy), CTG noncoding (myotonic dystrophy DMPK three prime, over fifty to thousands, congenital maternal), CGG (fragile X FMR1 five prime over two hundred methylated silenced (premutation fifty five to two hundred FXTAS tremor ataxia males, FXPOI ovarian insufficiency females distinct RNA toxicity), GAA intronic Friedreich (recessive, frataxin silencing heterochromatin), CCTG and pentanucleotide families expanding.",
+   "say": "Expansions anticipate across generations dynamically by repeat location coding or silencing distinctly. Fragile X premutation diseases differ mechanistically from full mutation silencing, and huge expansions defeat standard PCR diagnostically in laboratories.",
+   "vis": null
+  },
+  {
+   "tx": "**Mitochondrial mutations** obey heteroplasmy rules (prior telomere lesson) with tissue thresholds (brain, muscle, endocrine first), nuclear DNA repair failures mutate somatically to cancers (prior repair), germline versus somatic versus mosaic timing decides recurrence counselling (gonadal mosaicism Duchenne and osteogenesis imperfecta empiric risks after apparently de novo cases, lethal dominant mutations surviving only mosaic (McCune-Albright GNAS, Proteus AKT1), somatic cancer evolution (driver versus passenger, clonal haematopoiesis DNMT3A/TET2 ageing). Variant classification (ACMG pathogenic to benign, VUS uncertainty) governs reporting restraint in genomic medicine clinics daily.",
+   "say": "Mosaic timing decides recurrence counselling after apparently de novo cases empirically in clinics. Variant classification governs reporting restraint, with variants of uncertain significance never directing irreversible decisions alone responsibly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mutation arena",
+     "Inheritance or timing rule",
+     "Counselling consequence"
+    ],
+    "rows": [
+     [
+      "Germline heterozygous",
+      "50 percent transmission (dominant)",
+      "Cascade testing relatives"
+     ],
+     [
+      "Gonadal mosaic parent",
+      "Blood test normal, gonad loaded",
+      "Recurrence quoted empirically (percent range)"
+     ],
+     [
+      "Somatic mosaic child",
+      "Postzygotic, tissue patchy",
+      "Parents low recurrence; child gonads uncertain"
+     ],
+     [
+      "Mitochondrial heteroplasmic",
+      "Maternal, bottleneck random",
+      "Offspring load unpredictable range quoted"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suppressor and modifier genetics soften determinism: **nonsense suppression** by near cognate tRNAs and drugs, second site intragenic suppressors restoring frame (Becker revertant fibres in Duchenne biopsies natural exon skipping proof), genetic modifiers (HbF quantitative loci BCL11A/HBS1L in sickle severity, SMN2 copy number in SMA (one gene copy variable deciding phenotype from same SMN1 loss, nusinersen target), APOE in Alzheimer risk not destiny). Targeting and destruction next show finished proteins reaching addresses or proteasomes, where location mutations (deltaF508 retention) already blurred mutation and trafficking categories productively.",
+   "say": "Modifiers soften determinism through fetal haemoglobin loci and SMN2 copy numbers deciding phenotypes variably. Targeting next shows finished proteins reaching addresses or proteasomes where location mutations blur categories productively onward.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Same primary lesion, mild outcome",
+     "points": [
+      "High HbF modifiers (sickle)",
+      "SMN2 copies high (SMA)",
+      "In frame deletion (Becker)"
+     ]
+    },
+    "right": {
+     "title": "Same primary lesion, severe outcome",
+     "points": [
+      "Alpha thalassaemia co-inherited variably (sickle complexity)",
+      "SMN2 one copy (SMA type 0/1)",
+      "Out of frame or critical domain lost"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

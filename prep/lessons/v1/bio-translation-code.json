@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "module": "bio-translation",
+ "subject": "biochemistry",
+ "title": "Genetic code and wobble",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **genetic code** maps sixty four triplets to twenty amino acids plus stops with properties recitable as a set: triplet, non overlapping, commaless (no punctuation, frame set at start), unambiguous (each codon one meaning), degenerate (multiple codons per amino acid except methionine AUG and tryptophan UGG singles), ordered (related codons differ by one base, minimising mutation damage), near universal (mitochondria and ciliates variant: mitochondrial UGA tryptophan, AGA/AGG stops, AUA methionine, teaching exceptions that prove universality by rarity, synthetic recoding frontier).",
+   "say": "The code is triplet, commaless, unambiguous, degenerate and near universal with mitochondrial exceptions proving rarity. Methionine and tryptophan have single codons each among sixty four triplets total mapped.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Code landmark",
+     "Codons",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Start",
+      "AUG (methionine; fMet bacteria)",
+      "Sets reading frame; internal AUG also codes Met"
+     ],
+     [
+      "Stops (nonsense)",
+      "UAA ochre, UAG amber, UGA opal",
+      "No tRNA normally; release factors read them"
+     ],
+     [
+      "Single codon amino acids",
+      "Met AUG, Trp UGG only",
+      "Any point mutation changes identity (no degeneracy shield)"
+     ],
+     [
+      "Six codon families",
+      "Leu, Arg, Ser (split boxes)",
+      "Wobble plus separate tRNAs needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Degeneracy concentrates at the third **codon position** (family boxes of four sharing first two bases (glycine GGN, alanine GCN) completely degenerate, split boxes by purine pyrimidine third (histidine CAU/C versus glutamine CAA/G)), so most third position point mutations are silent, first position occasionally conservative, second position always identity changing (hydrophobic core second U families). Mutation consequence prediction (next lesson) is therefore positional arithmetic, not memorisation of sixty four entries, codon usage bias (species preferred synonymous codons matching tRNA abundance, recombinant expression optimisation and mRNA vaccine design) adding translational speed regulation.",
+   "say": "Degeneracy concentrates at the third position so most third changes are silent, while second position always changes identity. Mutation prediction is positional arithmetic, not memorisation of sixty four entries individually.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Third position change",
+     "points": [
+      "Often silent (family boxes)",
+      "Purine/pyrimidine split sometimes changes",
+      "Least dangerous position"
+     ]
+    },
+    "right": {
+     "title": "Second position change",
+     "points": [
+      "Always changes amino acid",
+      "Polarity class often flips (U second = hydrophobic)",
+      "Most dangerous position"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Wobble** (Crick) relaxes pairing only at anticodon first base (tRNA position thirty four) against codon third: inosine (deaminated adenine) pairs U, C or A (one tRNA reads three codons), G pairs C or U, U pairs A or G (modified U restricts or expands in mitochondria superwobble reading four with unmodified U), C pairs G only, A pairs U only, so cells need at least thirty two tRNAs (forty six human cytosolic species) not sixty one, mitochondria twenty two with superwobble economy.",
+   "say": "Wobble relaxes pairing at anticodon first base, with inosine reading three codons from one tRNA. Mitochondria economise to twenty two tRNAs with superwobble reading four codons unmodified efficiently.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-translation-fig1.webp",
+    "alt": "Diagram showing aminoacyl-tRNA synthetase charging tRNA with an amino acid and wobble pairing at the third codon position.",
+    "caption": "tRNA charging and wobble pairing ensure accurate protein synthesis.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Selenocysteine** (twenty first amino acid) recodes specific UGA stops when SECIS stem loops in three prime UTR (bacteria adjacent) recruit dedicated tRNA-Sec (charged serine converted to selenocysteine on tRNA, EFSec factor) into glutathione peroxidases, thioredoxin reductases, deiodinases and selenoprotein P, selenium deficiency phenotypes (Keshan, Kashin-Beck prior mineral logic) thus translational. Pyrrolysine (twenty second, UAG in methanogen archaea only) and engineered genetic code expansion (orthogonal synthetase tRNA pairs inserting noncanonical amino acids for conjugates and probes) prove code evolvability examinations now sample qualitatively.",
+   "say": "Selenocysteine recodes specific UGA stops through SECIS loops into antioxidant enzymes translationally. Pyrrolysine and engineered code expansion prove code evolvability qualitatively beyond standard twenty amino acids universally.",
+   "vis": null
+  },
+  {
+   "tx": "Reading frame integrity depends on start selection and triplet counting: insertions or deletions not multiples of three **frameshift** every downstream codon (premature stops usually within dozens, nonsense mediated decay clearing), multiples of three preserve frame (in frame indels, Becker dystrophin logic next lesson), suppressor tRNAs (mutant anticodons reading stops or frameshifts) rescue experimentally and aminoglycoside readthrough therapeutically attempts stop suppression (ataluren contested, gentamicin in selected nonsense cystic fibrosis and Duchenne trials). Programmed frameshifting (viral gag-pol, ornithine decarboxylase antizyme) exploits slippage deliberately, code fluidity within rules.",
+   "say": "Frameshifts scramble every downstream codon to premature stops cleared by decay surveillance. Suppressor readthrough attempts therapeutic stop suppression in nonsense diseases, while viruses programme frameshifting deliberately within rules.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Coding lesion",
+     "Frame effect",
+     "Protein fate sketch"
+    ],
+    "rows": [
+     [
+      "Silent (third position mostly)",
+      "None",
+      "Same amino acid; splicing may still break"
+     ],
+     [
+      "Missense (one codon)",
+      "None",
+      "One residue swapped (sickle prototype)"
+     ],
+     [
+      "Nonsense (to stop)",
+      "None, truncated",
+      "NMD degrades or truncated toxic (context)"
+     ],
+     [
+      "Frameshift (indel not multiple of 3)",
+      "All downstream recoded",
+      "Premature stop, usually null"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Codon optimality** couples translation to decay (slow ribosomes on non optimal codons recruit CCR4-NOT deadenylation, codon stabilisation coefficients), tRNA pools remodel in differentiation and cancer (proliferation tRNAs up), and synonymous mutations once dismissed silent alter splicing enhancers, mRNA structure, cotranslational folding pauses (MDR1 synonymous altering pump conformation classic) and miRNA sites. The code lesson therefore ends anti reductionist: synonymous is a sequence statement, never a functional guarantee, charging and initiation fidelity next ensure the code is read as written.",
+   "say": "Synonymous mutations alter splicing, folding pauses and decay despite identical amino acids functionally. The code is read as written only when charging and initiation fidelity ensure accuracy next lesson mechanistically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Synonymous is not silent by default",
+    "nodes": [
+     {
+      "id": "syn",
+      "label": "Synonymous codon swap"
+     },
+     {
+      "id": "check",
+      "label": "Check splicing, structure, speed, miRNA"
+     },
+     {
+      "id": "verd",
+      "label": "Only then call it silent"
+     }
+    ],
+    "edges": [
+     [
+      "syn",
+      "check"
+     ],
+     [
+      "check",
+      "verd"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

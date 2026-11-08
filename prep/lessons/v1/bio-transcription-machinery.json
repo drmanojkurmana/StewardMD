@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "bio-transcription",
+ "subject": "biochemistry",
+ "title": "Polymerases, promoters and factors",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Eukaryotes divide transcription among three polymerases by product and poison sensitivity: **RNA polymerase I** (nucleolus, forty five S precursor to eighteen, five point eight and twenty eight S rRNAs, most cellular RNA mass, alpha-amanitin insensitive), II (mRNA, most snRNA and miRNA precursors, exquisitely amanitin sensitive), III (tRNA, five S rRNA, other small RNAs, intermediate sensitivity). Bacteria use one polymerase (core alpha2 beta beta prime omega plus sigma specificity) whose beta subunit rifampicin blocks initiation channel (tuberculosis cornerstone, orange secretions, CYP induction powerhouse).",
+   "say": "Three eukaryotic polymerases divide products with polymerase two exquisitely amanitin sensitive lethally in mushrooms. Bacteria use one polymerase whose beta subunit rifampicin blocks in tuberculosis cornerstone therapy safely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Polymerase",
+     "Products",
+     "Alpha-amanitin"
+    ],
+    "rows": [
+     [
+      "I (nucleolus)",
+      "45S pre-rRNA (most RNA mass)",
+      "Insensitive"
+     ],
+     [
+      "II",
+      "mRNA, snRNA, miRNA precursors",
+      "Most sensitive (mushroom lethality)"
+     ],
+     [
+      "III",
+      "tRNA, 5S rRNA, small RNAs",
+      "Intermediate"
+     ],
+     [
+      "Bacterial (one plus sigma)",
+      "All RNAs; rifampicin beta target",
+      "Not applicable (rifampicin instead)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Polymerase II promoters assemble general transcription factors stepwise: **TATA box** (about minus twenty five, TBP saddle bending DNA in TFIID with TAFs reading other elements), initiator, BRE, DCE and downstream promoter elements in TATA-less housekeeping promoters (CpG islands, Sp1 GC boxes), CAAT boxes, then TFIIB, polymerase with TFIIF, TFIIE and TFIIH. Enhancers (distance, orientation independent, looping by cohesin and mediator) and silencers and insulators (CTCF boundaries) integrate signals combinatorially per cell type.",
+   "say": "TATA binding protein bends DNA assembling general factors stepwise until TFIIH opens and phosphorylates the polymerase tail to escape. Enhancers loop by mediator integrating signals combinatorially per cell type specifically.",
+   "vis": {
+    "kind": "flow",
+    "title": "Initiation assembly line",
+    "nodes": [
+     {
+      "id": "tata",
+      "label": "TFIID (TBP) binds promoter"
+     },
+     {
+      "id": "pol",
+      "label": "Pol II plus TFIIB/F recruited"
+     },
+     {
+      "id": "tfiih",
+      "label": "TFIIH opens bubble, tail Ser5 phosphorylated"
+     },
+     {
+      "id": "elong",
+      "label": "Promoter escape into elongation"
+     }
+    ],
+    "edges": [
+     [
+      "tata",
+      "pol"
+     ],
+     [
+      "pol",
+      "tfiih"
+     ],
+     [
+      "tfiih",
+      "elong"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**TFIIH** moonlighting explains human disease unity: its XPB/XPD helicases open both transcription bubbles and nucleotide excision repair bubbles (prior lesson), so mutations give xeroderma pigmentosum with or without Cockayne and trichothiodystrophy (brittle sulfur deficient hair, photosensitivity subsets, developmental failure) along a transcription versus repair balance spectrum. Elongation factors (DSIF, P-TEFb CDK9 phosphorylating serine two tail plus DSIF/NELF releasing promoter proximal pausing (a major regulatory checkpoint in metazoans, BRD4 readers drug targeted in oncology), ELL, FACT histone chaperoning through nucleosomes) govern productive mRNA synthesis beyond initiation frequency textbooks once taught.",
+   "say": "TFIIH opens both transcription and repair bubbles, unifying xeroderma and trichothiodystrophy diseases along one spectrum. Promoter proximal pausing release governs productive synthesis beyond initiation frequency textbooks taught previously.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Initiation control (classic)",
+     "points": [
+      "Factors assemble, TFIIH opens",
+      "Ser5 tail phosphorylation escapes",
+      "Enhancer looping decides frequency"
+     ]
+    },
+    "right": {
+     "title": "Pause release control (metazoan layer)",
+     "points": [
+      "Pol II pauses 30 to 60 bases in (NELF/DSIF)",
+      "P-TEFb Ser2 phosphorylation releases",
+      "BRD4 and super elongation complex drug targets"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Termination differs by polymerase with examination precision: polymerase II transcribes past **polyadenylation signal** AAUAAA, cleavage and polyadenylation (next lesson) coupled to torpedo exonuclease XRN2 chasing and degrading trailing RNA ejecting polymerase (plus allosteric slowing models cooperating), polymerase I terminator Sal boxes with TTF1, polymerase III simple oligo dT tracts without hairpin (bacterial intrinsic terminators GC hairpin plus U tract teaching mirror), rho helicase bacterial termination (bicyclomycin target) versus intrinsic in bacteria teaching both. Failed termination reads through into downstream genes (influenza, cancer fusion transcripts) pathologically.",
+   "say": "Polymerase two terminates by torpedo exonuclease chasing after polyadenylation cleavage signals downstream. Failed termination reads through into downstream genes producing fusion transcripts pathologically in cancers and viruses.",
+   "vis": null
+  },
+  {
+   "tx": "Transcription **inhibitors** as probes and poisons: alpha-amanitin (pol II death), actinomycin D (DNA intercalation at GpC blocking elongation all polymerases at low dose, antitumour historic, extravasation necrosis), rifampicin (bacterial initiation), triptolide (TFIIH covalent, trials), flavopiridol/alvocidib CDK9 pause release blockade, and amanitin antibody drug conjugate payloads modern oncology recycling the mushroom toxin with targeting. Bacterial sigma factor exchange (sporulation, heat shock sigma thirty two, flagellar sigma twenty eight) reprograms promoters wholesale without new polymerases, economy eukaryotes achieve by factor combinatorics instead.",
+   "say": "Amanitin, actinomycin and rifampicin probe polymerases as poisons with modern conjugate payloads recycling amanitin targeted. Bacterial sigma exchange reprograms promoters wholesale without new polymerases economically during sporulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blocker",
+     "Target polymerase step",
+     "Theatre"
+    ],
+    "rows": [
+     [
+      "Alpha-amanitin",
+      "Pol II translocation (bridge helix)",
+      "Mushroom death; conjugate payloads"
+     ],
+     [
+      "Rifampicin",
+      "Bacterial beta initiation channel (2 to 3 nt limit)",
+      "TB therapy; CYP induction interactions"
+     ],
+     [
+      "Actinomycin D",
+      "DNA intercalation, elongation block",
+      "Historic antitumour; probe use"
+     ],
+     [
+      "CDK9 inhibitors (investigational)",
+      "Pause release Ser2 phosphorylation",
+      "Transcription addicted cancers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Coupled processes** prevent category errors: bacteria transcribe and translate simultaneously (no nucleus, polarity nonsense mutations silencing downstream operon genes by rho exposure, attenuation decisions in real time next regulation lesson), eukaryotes cap, splice and export through nuclear pores with surveillance (exosome trimming, nonsense mediated decay cytoplasmic after export). Processing next converts a fragile capped primary transcript into export competent mature mRNA whose half life regulation (AU rich elements, miRNA) already begins co-transcriptionally.",
+   "say": "Bacteria couple transcription and translation simultaneously with operon polarity consequences operon lessons ahead. Eukaryotes cap, splice and export with surveillance, processing next maturing fragile primary transcripts competently.",
+   "vis": {
+    "kind": "flow",
+    "title": "From initiation to export competence",
+    "nodes": [
+     {
+      "id": "init",
+      "label": "Initiation and pause release"
+     },
+     {
+      "id": "proc",
+      "label": "Cap, splice, polyadenylate (co-transcriptional)"
+     },
+     {
+      "id": "surv",
+      "label": "Surveillance: exosome and export licence"
+     },
+     {
+      "id": "cyto",
+      "label": "Cytoplasm: translate or decay (NMD)"
+     }
+    ],
+    "edges": [
+     [
+      "init",
+      "proc"
+     ],
+     [
+      "proc",
+      "surv"
+     ],
+     [
+      "surv",
+      "cyto"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
