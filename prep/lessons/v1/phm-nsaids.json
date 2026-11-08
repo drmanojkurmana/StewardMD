@@ -1,118 +1,129 @@
 {
- "v": 1,
- "module": "phm-nsaids",
- "subject": "pharmacology",
- "title": "NSAIDs and antipyretic analgesics",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**NSAIDs** inhibit cyclooxygenase enzymes that convert arachidonic acid into prostaglandins driving pain, fever and inflammation. COX 1 is constitutive, protecting stomach mucosa, platelets and kidney perfusion, while COX 2 is induced at inflamed sites yet also constitutive in kidney and endothelium. Every benefit and harm of this class flows from which enzyme is blocked, where, and for how long, making selectivity a spectrum rather than a slogan.",
-   "say": "NSAIDs block prostaglandin production. COX one protects stomach, platelets and kidneys. COX two drives inflammation but also helps kidney and vessels. Benefits and harms follow which enzyme is blocked.",
-   "vis": null
-  },
-  {
-   "tx": "Nonselective agents such as **ibuprofen, naproxen and diclofenac** relieve musculoskeletal pain and dysmenorrhoea but erode gastric protection causing ulcers and bleeding, especially with age, steroids, anticoagulants or alcohol. Enteric coating and proton pump cover reduce but never abolish risk. Aspirin uniquely acetylates COX irreversibly, so platelet inhibition lasts the platelet lifespan and powers its antiplatelet career at low doses far below analgesic doses.",
-   "say": "Common NSAIDs relieve pain but can ulcerate the stomach, worst with age, steroids and blood thinners. Aspirin blocks platelets irreversibly for their whole lifespan, which is why tiny doses protect arteries.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Nonselective NSAIDs",
-     "points": [
-      "Block COX 1 and COX 2",
-      "Higher ulcer and bleeding risk",
-      "Antiplatelet effect while present (aspirin permanent)"
-     ]
-    },
-    "right": {
-     "title": "COX 2 selective (celecoxib)",
-     "points": [
-      "Spare COX 1 at usual doses",
-      "Fewer ulcers, but cardiovascular risk remains",
-      "No useful antiplatelet action"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Selective **COX 2 inhibitors** such as celecoxib spare gastric COX 1 and platelets, cutting ulcer complications, but endothelial prostacyclin suppression without platelet thromboxane blockade tilts toward thrombosis, the lesson that withdrew rofecoxib. All NSAIDs can raise blood pressure, retain salt and water, and precipitate heart failure or kidney injury when prostaglandins defend renal perfusion in dehydration, cirrhosis or heart failure, the triple whammy with ACE inhibitors and diuretics.",
-   "say": "Celecoxib spares the stomach but not the heart or kidney. All NSAIDs can raise pressure, retain fluid and injure kidneys, especially combined with ACE inhibitors and diuretics in dehydrated patients.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/phm-nsaids-fig1.webp",
-    "alt": "Diagram of arachidonic acid pathway, COX-1 and COX-2 enzymes, their products, and NSAID inhibition sites.",
-    "caption": "COX-1 and COX-2 pathways and NSAID selectivity determine effects. Image: BQUB23-Ccorrea, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 1.3308
-   }
-  },
-  {
-   "tx": "**Paracetamol** relieves pain and fever centrally with negligible peripheral anti inflammatory action and no platelet or gastric COX 1 harm at therapeutic doses, making it the safer base analgesic in pregnancy and ulcer risk. Its ceiling is hepatic: excess dose saturates conjugation, shunting to toxic NAPQI that depletes glutathione and causes centrilobular liver necrosis. N acetylcysteine replenishes glutathione and saves liver when given early by the nomogram guided protocol.",
-   "say": "Paracetamol eases pain and fever without stomach or platelet harm, but overdose poisons the liver through NAPQI when glutathione runs out. N acetylcysteine is the antidote and works best early.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "NSAIDs",
-     "Paracetamol"
+    "v": 1,
+    "module": "phm-nsaids",
+    "subject": "pharmacology",
+    "title": "NSAIDs and antipyretic analgesics",
+    "minutes": 7,
+    "steps": [
+        {
+            "tx": "**NSAIDs** inhibit cyclooxygenase enzymes that convert arachidonic acid into prostaglandins in tissues. **Prostaglandins** drive pain, fever and inflammation, so blocking their production relieves all three together. One enzyme form protects the stomach mucosa, platelets and kidney perfusion continuously. The other form appears mainly at inflamed sites, yet it also functions in kidney and endothelium. Every benefit and harm of this class follows which enzyme the drug blocks and for how long.",
+            "say": "These drugs inhibit cyclooxygenase enzymes that convert arachidonic acid into prostaglandins in tissues. Prostaglandins drive pain, fever and inflammation so blocking their production relieves all three together. One enzyme form protects the stomach and kidneys while the other form dominates inflamed sites. Every benefit and harm follows which enzyme the drug blocks in each patient.",
+            "vis": null
+        },
+        {
+            "tx": "Nonselective agents such as **ibuprofen**, naproxen and diclofenac relieve musculoskeletal pain and dysmenorrhoea effectively. They also erode **gastric protection**, so ulcers and bleeding follow, especially with age, steroids, anticoagulants or alcohol. Enteric coating and proton pump cover reduce the risk but they never abolish it completely. **Aspirin** uniquely acetylates the enzyme irreversibly, so platelet inhibition lasts the entire platelet lifespan. That permanent platelet effect powers low dose aspirin for arterial protection in cardiology.",
+            "say": "Nonselective agents such as ibuprofen are used to relieve musculoskeletal pain and dysmenorrhoea in many patients every day. They also erode gastric protection so ulcers and bleeding follow in susceptible patients taking them. Age, steroids, anticoagulants and alcohol raise the risk of bleeding considerably during treatment overall. Aspirin acetylates the enzyme irreversibly so platelet inhibition lasts the entire platelet lifespan afterwards.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Nonselective NSAIDs",
+                    "points": [
+                        "Block COX 1 and COX 2",
+                        "Higher ulcer and bleeding risk",
+                        "Antiplatelet effect while present (aspirin permanent)"
+                    ]
+                },
+                "right": {
+                    "title": "COX 2 selective (celecoxib)",
+                    "points": [
+                        "Spare COX 1 at usual doses",
+                        "Fewer ulcers, but cardiovascular risk remains",
+                        "No useful antiplatelet action"
+                    ]
+                }
+            }
+        },
+        {
+            "tx": "This endoscopic image shows an **antral gastric ulcer** with a pale base and raised inflamed margins. The surrounding mucosa looks red and swollen because widespread **gastritis** accompanies the ulcer crater. Loss of protective prostaglandins after nonselective treatment explains why the antrum suffers this injury pattern. Examiners expect you to connect epigastric pain and bleeding in a treated patient with mucosal defence failure. Stopping the offending drug and adding acid suppression allows the ulcer to heal.",
+            "say": "This endoscopic image shows an antral gastric ulcer with a pale base and inflamed margins surrounding it. The surrounding mucosa looks red and swollen because widespread gastritis accompanies the ulcer crater visible. Loss of protective prostaglandins explains why the antrum suffers this injury pattern after treatment ends. Examiners expect you to connect epigastric pain and bleeding with mucosal defence failure here. Stopping the offending drug allows the ulcer to heal with acid suppression given.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/phm-nsaids-gen1.webp",
+                "alt": "Endoscopic view of antral gastric ulcer with white base and inflamed surrounding mucosa",
+                "caption": "Endoscopy showing antral gastric ulcer with surrounding gastritis. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "tx": "Selective **COX 2 inhibitors** such as celecoxib spare gastric protection and platelets at usual doses. They cut ulcer complications, but endothelial prostacyclin suppression without platelet thromboxane blockade tilts the balance toward **thrombosis**. That imbalance explains why rofecoxib left the market after cardiovascular harm emerged clearly. Every drug in this class can raise blood pressure, retain salt and water, and precipitate heart failure or kidney injury. Dehydration, cirrhosis and heart failure make the kidney depend on protective prostaglandins.",
+            "say": "Selective inhibitors such as celecoxib spare gastric protection and platelets at usual therapeutic doses given. They cut ulcer complications but they tilt the vascular balance toward thrombosis in patients treated. Endothelial prostacyclin falls while platelet thromboxane continues and that imbalance promotes arterial clotting events. Every drug in this class can raise blood pressure and retain salt and water. Dehydration makes the kidney depend on prostaglandins so injury follows more easily there.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/phm-nsaids-fig1.webp",
+                "alt": "Diagram of arachidonic acid pathway, COX-1 and COX-2 enzymes, their products, and NSAID inhibition sites.",
+                "caption": "COX-1 and COX-2 pathways and NSAID selectivity determine effects. Image: BQUB23-Ccorrea, CC BY-SA 4.0, Wikimedia Commons.",
+                "ar": 1.3308
+            }
+        },
+        {
+            "tx": "**Paracetamol** relieves pain and fever centrally with negligible peripheral anti inflammatory action in tissues. It causes no platelet or gastric harm at therapeutic doses, so clinicians favour it in pregnancy and ulcer risk. Excess dose saturates conjugation pathways and shunts metabolism toward toxic **NAPQI** inside hepatocytes. That metabolite depletes glutathione and it causes centrilobular liver necrosis in severe overdose. N acetylcysteine replenishes glutathione and it saves the liver when teams give it early.",
+            "say": "Paracetamol is used to relieve pain and fever centrally with negligible peripheral anti inflammatory action in tissues overall. It causes no platelet or gastric harm at therapeutic doses in most patients treated safely. Excess dose shunts metabolism toward toxic metabolite formation inside hepatocytes during severe overdose episodes alone. That metabolite depletes glutathione and it causes centrilobular liver necrosis without early treatment given. Acetylcysteine replenishes glutathione and it saves the liver when teams give it early.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Feature",
+                    "NSAIDs",
+                    "Paracetamol"
+                ],
+                "rows": [
+                    [
+                        "Main site",
+                        "Peripheral and central COX block",
+                        "Central, weak peripheral COX effect"
+                    ],
+                    [
+                        "Anti inflammatory",
+                        "Yes",
+                        "Negligible"
+                    ],
+                    [
+                        "Key toxicity",
+                        "Ulcer, kidney, cardiovascular",
+                        "Liver necrosis in overdose"
+                    ],
+                    [
+                        "Antidote",
+                        "Supportive; stop drug",
+                        "N acetylcysteine"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "Aspirin in children with viral illness risks **Reye syndrome**, which combines liver failure with encephalopathy. Paediatric fever therefore uses paracetamol or ibuprofen instead of aspirin in routine practice. **NSAID exacerbated respiratory disease** links aspirin sensitivity, asthma and nasal polyps through leukotriene shunting in airways. In pregnancy, these drugs after mid gestation risk premature ductus closure and low amniotic fluid. Low dose aspirin paradoxically protects high risk mothers against pre eclampsia when treatment starts early.",
+            "say": "Aspirin in children with viral illness is linked to a syndrome that combines liver failure with encephalopathy dangerously. Paediatric fever is therefore treated with paracetamol or ibuprofen instead of aspirin in routine clinical practice today. These drugs can worsen aspirin sensitive asthma because leukotriene production rises in the airways afterwards. In pregnancy these drugs are linked to premature ductus closure and low amniotic fluid after mid gestation. Low dose aspirin protects high risk mothers against pre eclampsia when treatment starts early.",
+            "vis": null
+        }
     ],
-    "rows": [
-     [
-      "Main site",
-      "Peripheral and central COX block",
-      "Central, weak peripheral COX effect"
-     ],
-     [
-      "Anti inflammatory",
-      "Yes",
-      "Negligible"
-     ],
-     [
-      "Key toxicity",
-      "Ulcer, kidney, cardiovascular",
-      "Liver necrosis in overdose"
-     ],
-     [
-      "Antidote",
-      "Supportive; stop drug",
-      "N acetylcysteine"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Aspirin in children with viral illness risks **Reye syndrome** of liver failure and encephalopathy, so paediatric fever uses paracetamol or ibuprofen instead. NSAID exacerbated respiratory disease links aspirin sensitivity, asthma and nasal polyps through leukotriene shunting. In pregnancy, NSAIDs after mid gestation risk premature ductus closure and low amniotic fluid, while low dose aspirin paradoxically protects against pre eclampsia in high risk mothers when started early.",
-   "say": "Children with viral fever must avoid aspirin because of Reye syndrome. NSAIDs can worsen aspirin sensitive asthma and close the fetal ductus, yet low dose aspirin prevents pre eclampsia in high risk pregnancy.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "bk2-phm-041",
-  "bk2-phm-042",
-  "bk2-phm-043",
-  "bk2-phm-044",
-  "bk2-phm-045",
-  "bk2-phm-046",
-  "bk2-phm-047",
-  "bk2-phm-048",
-  "bk2-phm-049",
-  "bk2-phm-050"
- ],
- "src": [],
- "refs": [
-  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "AI",
- "run": "books2-batch2-pharma1",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+    "quiz": [
+        "bk2-phm-041",
+        "bk2-phm-042",
+        "bk2-phm-043",
+        "bk2-phm-044",
+        "bk2-phm-045",
+        "bk2-phm-046",
+        "bk2-phm-047",
+        "bk2-phm-048",
+        "bk2-phm-049",
+        "bk2-phm-050"
+    ],
+    "src": [],
+    "refs": [
+        "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+    ],
+    "gen": "AI",
+    "run": "books2-batch2-pharma1",
+    "model": "muse-wonder (local authoring, no external API)",
+    "checks": {
+        "shape": true,
+        "numbers": true,
+        "drugs": true,
+        "verbatim": true,
+        "dashes": true,
+        "verify": true,
+        "redone": 0,
+        "dropped": 0,
+        "kbWords": 0,
+        "itemN": 10
+    }
 }

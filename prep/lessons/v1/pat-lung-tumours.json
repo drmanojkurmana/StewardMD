@@ -6,13 +6,24 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Lung cancers** divide into small cell and non small cell groups because biology and treatment diverge sharply. Adenocarcinoma, now commonest overall and in non smokers, arises peripherally often with targetable mutations. Squamous carcinoma arises centrally in smokers with keratinisation. Small cell carcinoma grows fastest, metastasises earliest and secretes hormones.",
-   "say": "Lung cancer splits into small cell and non small cell types. Adenocarcinoma is peripheral and commonest. Squamous is central in smokers. Small cell grows fastest and secretes hormones.",
+   "tx": "**Lung cancers** divide into small cell and non small cell groups because their biology and treatment diverge sharply in practice. **Adenocarcinoma** is now the commonest type overall, arises peripherally and often carries targetable driver mutations in affected patients. **Squamous carcinoma** arises centrally in smokers and shows keratinisation, while small cell carcinoma grows fastest and metastasises earliest. Small cell tumours also secrete hormones, which links their histology directly to several paraneoplastic presentations in exams.",
+   "say": "Lung cancer splits into small cell and non small cell groups because treatment and biology differ sharply between them. Adenocarcinoma arises peripherally and occurs commonly in non smokers, while squamous cancer arises centrally in smokers. Small cell cancer grows fastest, spreads earliest and secretes hormones that cause distant syndromes in patients.",
    "vis": null
   },
   {
-   "tx": "Central tumours obstruct bronchi causing cough, haemoptysis, recurrent pneumonia and lobar collapse, while peripheral tumours stay silent until pleura or chest wall pain appears. **Pancoast tumours** at the apex invade ribs, sympathetic chain and brachial plexus causing shoulder pain, Horner syndrome and hand muscle wasting. Clubbing and hypertrophic osteoarthropathy accompany many types.",
-   "say": "Central cancers cough, bleed and collapse lobes. Peripheral cancers hide until pain. Apex Pancoast cancers cause shoulder pain, Horner syndrome and wasted hand muscles.",
+   "tx": "The biopsy shows sheets of **small blue tumour cells** with scant cytoplasm, nuclear moulding where nuclei press against each other, and dark crush artefact along one edge. This appearance is classic for **small cell lung carcinoma**, a neuroendocrine tumour that grows rapidly and spreads very early. Recognising small cells with moulding matters because small cell histology changes treatment away from surgery toward chemotherapy based regimens. In the exam, crush artefact with moulding should immediately raise small cell carcinoma.",
+   "say": "This biopsy shows sheets of small blue cells with moulded nuclei and dark crush artefact along one edge. That appearance identifies small cell carcinoma, which grows rapidly and spreads very early to distant organs. Histology matters greatly because small cell disease needs chemotherapy based treatment rather than primary surgical resection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-lung-tumours-gen1.webp",
+    "alt": "Lung biopsy histology showing sheets of small blue cells with moulding and crush artefact",
+    "caption": "Histology showing small blue cells with moulding. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Central tumours obstruct bronchi and cause cough, haemoptysis, recurrent pneumonia and lobar collapse behind the blocked airway. Peripheral tumours remain silent for longer until pleural or chest wall pain announces local invasion in the chest. **Pancoast tumours** arise at the lung apex and invade ribs, the sympathetic chain and the brachial plexus in that region. They cause shoulder pain, **Horner syndrome** and wasting of hand muscles, while clubbing accompanies many lung tumour types.",
+   "say": "Central cancers cough, bleed and collapse lobes because they obstruct large airways near the hilum directly. Peripheral cancers hide silently until pleural pain appears, while apical cancers invade nerves and ribs in the neck. Pancoast tumours cause shoulder pain, Horner syndrome and wasted hand muscles that examiners pair together predictably.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -45,8 +56,8 @@
    }
   },
   {
-   "tx": "Paraneoplastic syndromes reveal tumour secretions far from the chest and are favourite exam pairings. Squamous tumours secrete **parathyroid hormone related protein** causing hypercalcaemia, while small cell tumours secrete ADH causing hyponatraemia and ACTH causing Cushing syndrome. Lambert Eaton syndrome from small cell cancer antibodies improves strength briefly with activity, unlike myasthenia.",
-   "say": "Squamous cancer raises calcium through PTHrP. Small cell cancer causes SIADH hyponatraemia, Cushing syndrome and Lambert Eaton weakness. Hormone pairings are exam favourites.",
+   "tx": "Paraneoplastic syndromes reveal tumour secretions far from the chest and give favourite examination pairings for each histology. Squamous tumours secrete **parathyroid hormone related protein** and cause hypercalcaemia with constipation, thirst and confusion in affected patients. Small cell tumours secrete antidiuretic hormone causing hyponatraemia and ACTH causing **Cushing syndrome** with proximal weakness and hypertension. **Lambert Eaton syndrome** follows small cell cancer antibodies and improves strength briefly with activity, unlike myasthenia gravis.",
+   "say": "Squamous cancer raises calcium through a parathyroid related protein that mimics hormone action throughout the body. Small cell cancer lowers sodium through inappropriate hormone secretion and causes Cushing syndrome through ACTH release from tumour. Lambert Eaton weakness improves briefly with activity, which separates it from myasthenia in examination stems about lung cancer.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -70,8 +81,8 @@
    }
   },
   {
-   "tx": "Spread follows lymphatics to hilar and mediastinal nodes, blood to brain, bone, liver and adrenals, and pleural seeding causing malignant effusion. **Staging by TNM** with PET CT and brain imaging decides resectability, and mediastinal node sampling protects patients from futile surgery. Superior vena cava obstruction from mediastinal mass causes facial swelling worse lying flat.",
-   "say": "Cancer spreads to nodes, brain, bone, liver and adrenals. PET staging and node sampling decide surgery. Mediastinal masses can block the vena cava causing facial swelling.",
+   "tx": "Spread follows lymphatics to hilar and mediastinal nodes, blood to brain, bone, liver and adrenals, and pleural seeding that causes malignant effusion. **TNM staging** with PET scanning and brain imaging decides resectability, while mediastinal node sampling protects patients from futile surgery. Nodal spread changes the operation offered because involved mediastinal nodes usually need systemic therapy first in modern practice. **Superior vena cava obstruction** from a mediastinal mass causes facial swelling that worsens when the patient lies flat.",
+   "say": "Cancer spreads through lymphatics to chest nodes and through blood to brain, bone, liver and adrenal glands. Staging scans and node sampling decide surgery because mediastinal spread usually needs systemic therapy before any operation. Mediastinal masses can obstruct the vena cava and cause facial swelling that worsens when lying flat overnight.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-lung-tumours-fig1.webp",
@@ -81,8 +92,8 @@
    }
   },
   {
-   "tx": "**Molecular profiling** now directs therapy more than histology alone in non small cell disease. EGFR, ALK, ROS1 and KRAS alterations predict targeted drug benefit, while PD L1 expression guides immunotherapy. Small cell cancer instead relies on chemotherapy with immunotherapy additions and prophylactic cranial irradiation in selected responders.",
-   "say": "Gene profiling directs lung cancer drugs: EGFR and ALK targets, PD L1 for immunotherapy. Small cell cancer uses chemotherapy based regimens. Molecular results change first line choices.",
+   "tx": "**Molecular profiling** now directs therapy more than histology alone in non small cell lung cancer for many patients. EGFR, ALK, ROS1 and KRAS alterations predict targeted drug benefit, while **PD L1 expression** guides immunotherapy selection in advanced disease. Testing therefore changes first line treatment before chemotherapy is chosen for adenocarcinoma and other non small cell types. Small cell cancer instead relies on chemotherapy based regimens with immunotherapy additions and cranial irradiation in selected responders.",
+   "say": "Gene profiling directs modern lung cancer therapy because driver mutations predict targeted drug benefit in non small cell disease. PD L1 expression guides immunotherapy, so molecular results change first line choices before chemotherapy starts for patients. Small cell cancer relies mainly on chemotherapy based regimens because targetable drivers remain uncommon in that subtype.",
    "vis": null
   }
  ],

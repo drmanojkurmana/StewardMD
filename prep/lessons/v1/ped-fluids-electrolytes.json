@@ -6,18 +6,29 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Maintenance** (**Holliday-Segar** weight-based rates, **isotonic** NS RL post-op, **hypotonic** hyponatraemia risks, **glucose** neonate ketosis prevents, **restrict** SIADH cardiac renal, **bolus** shock reassess volumes, **monitor** strict input-output, **weigh** daily oedema) with **chooses** (**deficit** replaces losses, **ongoing** stool vomit covers) plans; **review** (electrolytes daily) checks. Fluids balance.",
-   "say": "Holliday-Segars isotonics hypotonics glucoses is maintenance: weights scale post-ops guard risks dilute neonates guard prevents starve restricts curb overloads spare boluses push shocks fill monitors tally balances weigh tracks gains swell chooses plan deficits fill reviews check salts daily. Drips balance.",
+   "tx": "Maintenance fluids are calculated from weight using the **Holliday Segar** method and reviewed daily with input, output, and weight. Isotonic fluids such as normal saline or **Ringer lactate** are safer after surgery, while hypotonic fluids increase hyponatraemia risk. Glucose prevents ketosis in neonates, fluid restriction suits SIADH and cardiac or renal failure, and shock needs bolus fluid with reassessment rather than a fixed unmonitored prescription.",
+   "say": "Maintenance fluids are prescribed from weight and reviewed every day. The chart is used to record intake and output while daily weights are tracked. Isotonic fluids reduce the risk of hyponatraemia after surgery. Shock needs a bolus followed by careful reassessment. Restriction helps when the body retains water inappropriately.",
    "vis": null
   },
   {
-   "tx": "**Sodium** (**hypo** seizures irritability oedema, **hyper** thirst doughy dehydration, **correct** slow pontine guards, **hypertonic** seizing rescues, **cause** diarrhoea DI adrenal, **measure** serum osmolality urine, **restrict** water overload, **diabetes** insipidus desmopressin) with **rates** (**8-10** daily limits, **recheck** frequent sodiums) paces; **history** (feeds formula) probes. Salts shift.",
-   "say": "Hypos hypers corrects hypertonics is sodium: fits seize thirsts parch paces slow bridges guard rescues save seizes halt causes hunt diarrhoeas drain measures gauge osmols count restricts curb waters drown treats dry DI thirsts quench rates cap eights ten rechecks time hours probe. Sodiums swing.",
+   "tx": "Sodium disorders disturb brain function and correction must be paced carefully. **Hyponatraemia** causes irritability, seizures, and cerebral oedema, while **hypernatraemia** causes intense thirst and doughy skin in dehydration. Measure serum and urine osmolality, seek causes such as diarrhoea, diabetes insipidus, or adrenal disease, restrict water in overload, and use hypertonic saline only for severe symptomatic hyponatraemia. Slow correction protects the pons, with frequent sodium rechecks guiding the rate.",
+   "say": "Sodium disorders affect the brain and correction must stay controlled. Low sodium can cause seizures because water enters brain cells. High sodium develops when water loss exceeds salt loss. The doctor measures osmolality and searches for the underlying cause. Frequent rechecks guide correction and protect the pons from injury.",
    "vis": null
   },
   {
-   "tx": "**Potassium** (**hypo** U-waves ileus weakness, **hyper** peaked arrest calcium, **replace** oral IV rates ECG, **shifts** insulin glucose bicarbonate, **renal** failure oliguria dialyse, **RTA** tubular losses sorts, **drugs** diuretics salbutamol, **monitor** telemetry magnesium) with **avoids** (**IV-push** arrest kills, **mix** errors double-checks) guards; **recheck** (levels gases) confirms. Pulses steady.",
-   "say": "Hypos hypers replaces shifts is potassium: Us dip peaks spike drips run shifts push insulins drive failures clog dialyses wash losses spill RTA sorts drugs move diuretics waste monitors watch telemetries beep avoids dodge pushes kill checks pair rechecks draw levels confirm. Hearts rhythm.",
+   "tx": "This image contrasts swollen neurons in **hyponatraemia** on the left with shrunken neurons in hypernatraemia on the right. The centre panel shows pontine injury from **osmotic demyelination** after correction that is too rapid. The visual explains why seizures occur in hyponatraemia and why sodium correction needs strict daily limits and frequent rechecks. Exam questions often test this rate limit rather than the absolute sodium value alone.",
+   "say": "This image is a comparison of swollen brain cells with shrunken brain cells in sodium disorders. Water enters cells when sodium falls and leaves cells when sodium rises. The centre panel is a picture of pontine damage after overly rapid correction. The lesson is simple because correction speed protects the brain as much as the final sodium value does.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-fluids-electrolytes-gen1.webp",
+    "alt": "Swollen neurons, seizing brain, and shrunken neurons flanking a pons with myelin injury glow.",
+    "caption": "Swollen versus shrunken neurons with pontine demyelination injury. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Potassium disorders threaten cardiac rhythm and are visible on the ECG. **Hypokalaemia** flattens T waves, produces U waves, and causes ileus and weakness, while **hyperkalaemia** produces peaked T waves, wide QRS, and arrest risk. Replace potassium orally or intravenously at safe rates with ECG monitoring, never by intravenous push. Insulin with glucose and bicarbonate shift potassium into cells, while renal failure, tubular losses, diuretics, and magnesium depletion shape the plan.",
+   "say": "Potassium abnormalities disturb the heart and appear on the electrocardiogram. Low potassium flattens the tracing and produces prominent U waves. High potassium causes peaked T waves and a widened QRS complex on the tracing. Calcium protects the heart while shifting treatment moves potassium into cells. Safe replacement needs monitoring and never uses an intravenous push.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/ped-fluids-electrolytes-fig1.webp",
@@ -27,8 +38,8 @@
    }
   },
   {
-   "tx": "**Acid-base** (**gap** anion lactate ketones, **normal-gap** diarrhoea RTA losses, **bicarbonate** severe pH rescues, **DKA** insulin fluids close, **lactic** shock sepsis perfuse, **renal** failure acidosis dialyse, **compensate** Kussmaul pCO2 blows, **drugs** salicylate methanol) with **traps** (**missed** inborn errors, **over-correct** alkalosis harms, **dilutional** chloride loads) closes; **gases** (venous trends) follow. Balances restore.",
-   "say": "Gaps normal-gaps bicarbonates DKAs is acid-base: anions split lactates rise diarrhoeas spill rescues save pHs crash closes shut perfusions restore failures clog dialyses wash compensates blow Kussmauls heave poisons list salicylates burn traps dodge errors hide overshoots swing dilutionals flood gases trend veins track. pHs steady.",
+   "tx": "Acid base analysis starts with pH, bicarbonate, and the **anion gap**. A raised gap suggests lactate, ketones, renal failure, or toxins such as salicylate and methanol, while a normal gap suggests diarrhoea or **renal tubular acidosis** with bicarbonate loss. Treat the cause with perfusion, insulin and fluids in diabetic ketoacidosis, or dialysis in severe renal failure. Kussmaul breathing compensates for metabolic acidosis, and overcorrection or chloride rich fluids can create new problems.",
+   "say": "Acid base interpretation is started with the pH and bicarbonate level. The anion gap separates toxin and ketone causes from bicarbonate losing causes. Diabetic ketoacidosis needs insulin and careful fluid replacement. Shock needs perfusion restored before acidosis improves. A venous gas helps the team track the trend during treatment.",
    "vis": null
   }
  ],

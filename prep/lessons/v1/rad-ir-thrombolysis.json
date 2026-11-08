@@ -3,11 +3,11 @@
  "module": "rad-ir-thrombolysis",
  "subject": "radiology",
  "title": "Thrombolysis and thrombectomy",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Fresh clot dissolves, old clot organises. **Acute limb ischaemia** with a viable limb and symptoms under **14 days** suits **catheter-directed thrombolysis** under AHA and ACC guidance, dissolving thrombus through a multi-sidehole catheter. **Alteplase** infusions run with heparin cover and serial angiographic checks. **Viability** with audible Doppler signals and no fixed mottling separates candidates from those needing open surgery. **Embolic occlusion** with a clear source lyses faster than in-situ thrombosis on plaque.",
-   "say": "Fresh clot dissolves and old clot organises. Acute limb ischaemia under 14 days with a viable limb suits catheter-directed thrombolysis with alteplase through a multi-sidehole catheter. Audible Doppler signals without fixed mottling mark viability, and embolic clots lyse faster than thrombosis on plaque.",
+   "tx": "Fresh thrombus dissolves with lytic treatment, while old organised clot resists drugs and needs a different plan. A viable limb with symptoms under **14 days** suits **catheter directed thrombolysis** through a multi sidehole catheter in the clot. The infusion uses **alteplase** with heparin cover, and serial angiographic checks track progress during treatment. A limb with audible Doppler signals and no fixed mottling stays viable and suits catheter treatment well. An **embolic occlusion** with a clear source lyses faster than thrombosis that forms on diseased plaque.",
+   "say": "Fresh thrombus dissolves with lytic treatment while old organised clot resists drugs and needs another plan. A viable limb with recent symptoms suits catheter lysis through a multi sidehole catheter inside clot. The infusion uses a lytic drug with heparin cover and serial checks track progress during treatment. A limb with audible signals and no fixed mottling stays viable and suits catheter treatment. An embolic blockage with a clear source lyses faster than thrombosis on diseased plaque.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -35,8 +35,19 @@
    }
   },
   {
-   "tx": "Technique decides safety in thrombolysis. **Ultrasound-accelerated catheters** and pulse-spray speed lysis without proven superiority over standard infusion. **Fibrinogen monitoring** with dose reduction or pause follows local protocol when levels fall sharply. **Puncture-site bleeding** is the commonest complication, managed with pressure and dose review. **Intracranial bleeding**, though rare, is the feared catastrophe and ends the infusion at once. **Distal embolisation** during lysis is retrieved or aspirated before completion.",
-   "say": "Technique decides safety. Accelerated catheters speed lysis without proven superiority. Fibrinogen is monitored with dose pauses per protocol. Puncture bleeding is commonest and managed with pressure, while any intracranial bleed ends the infusion at once. Distal emboli are retrieved before completion.",
+   "tx": "This knee angiogram shows a **multi sidehole lysis catheter** that crosses an occluded popliteal segment during catheter directed treatment. Contrast stops with a **meniscus sign** at the upper edge of thrombus, which marks fresh clot rather than chronic disease. Faint **runoff vessels** reappear below the knee and those vessels show that lytic treatment has begun to restore flow. The image matters for the exam because catheter position inside clot decides drug contact and success. Serial checks then judge whether flow improves enough to stop the infusion safely.",
+   "say": "This knee angiogram shows a multi sidehole catheter that crosses an occluded popliteal segment during treatment. Contrast stops with a curved edge at the upper border of thrombus which marks fresh clot. Faint vessels are visible below the knee and those vessels show that treatment restores flow gradually. Catheter position inside clot decides drug contact and success during catheter directed lysis work. Serial checks then judge whether flow improves enough to stop the infusion safely.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-thrombolysis-gen1.webp",
+    "alt": "Angiogram of knee showing multi sidehole catheter across occluded segment with distal runoff vessels.",
+    "caption": "Angiogram shows lysis catheter across popliteal thrombus with meniscus and runoff. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Technique and monitoring decide safety during thrombolysis, because the same drug that clears clot also causes bleeding. **Ultrasound accelerated catheters** and pulse spray speed lysis, although proven superiority over standard infusion remains absent. The team follows **fibrinogen monitoring** with dose reduction or pause when levels fall sharply during infusion. **Puncture site bleeding** occurs most often and the team manages that bleeding with pressure and dose review. **Intracranial bleeding** remains rare but catastrophic, so any suggestion ends the infusion at once without delay.",
+   "say": "Technique and monitoring decide safety during lysis because the same drug that clears clot causes bleeding. Accelerated catheters and pulse spray speed lysis although proven superiority over standard infusion remains absent. The team follows fibrinogen levels with dose reduction or pause when levels fall sharply. Puncture site bleeding occurs most often and the team manages that bleeding with pressure promptly. Brain bleeding remains rare but catastrophic so any suggestion ends the infusion at once.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-thrombolysis-fig1.webp",
@@ -46,8 +57,8 @@
    }
   },
   {
-   "tx": "Pulmonary embolism care escalates by risk. **High-risk massive embolism** with hypotension receives **systemic thrombolysis** where no contraindication exists under **ESC guidance**. **Catheter-directed therapy** with fragmentation, aspiration or local lysis suits massive embolism where systemic lysis is banned or has failed. **Submassive disease** with right-heart strain but stable pressure usually stays anticoagulated with escalation only on deterioration. **Phlegmasia cerulea dolens** with venous gangrene threatens the limb and justifies catheter removal of clot.",
-   "say": "Embolism care escalates by risk. Massive embolism with hypotension receives systemic lysis where allowed. Catheter therapy suits cases where systemic lysis is banned or failed. Submassive disease usually stays anticoagulated, while phlegmasia with gangrene justifies catheter clot removal.",
+   "tx": "Pulmonary embolism treatment escalates by risk, and blood pressure sorts the urgency before any drug starts. A **high risk embolism** with hypotension receives **systemic thrombolysis** when no contraindication blocks that rescue treatment. **Catheter directed therapy** with fragmentation, aspiration or local lysis suits a massive embolism when systemic lysis stays banned. Stable disease with right heart strain usually stays anticoagulated, with escalation only when deterioration appears. **Phlegmasia cerulea dolens** with venous gangrene threatens the limb and justifies catheter removal of the clot burden.",
+   "say": "Pulmonary embolism treatment escalates by risk and blood pressure sorts the urgency before any drug starts. A high risk embolism with low pressure receives systemic lysis when no contraindication blocks rescue. Catheter therapy with fragmentation or aspiration suits a massive embolism when systemic lysis stays banned. Stable disease with heart strain usually stays anticoagulated with escalation only when deterioration appears. Venous gangrene threatens the limb and justifies catheter removal of the clot burden urgently.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -75,8 +86,8 @@
    }
   },
   {
-   "tx": "Clot-busting is forbidden in some patients. **Absolute bans** include prior **intracranial bleeding**, recent **ischaemic stroke**, active bleeding and recent intracranial or spinal surgery. **Recent major surgery**, trauma, gastrointestinal bleeding and severe hypertension demand case-by-case judgement. **Pregnancy and postpartum** states raise bleeding risk sharply. The **ATTRACT** trial tempered enthusiasm for routine DVT thrombolysis, showing limited benefit against bleeding risk, so iliofemoral DVT lysis stays selective for young low-bleed-risk limbs.",
-   "say": "Some patients must never receive lysis. Prior intracranial bleeding, recent stroke, active bleeding and recent brain or spine surgery ban it absolutely. Recent surgery, trauma and gut bleeding need individual judgement. ATTRACT tempered routine DVT lysis, so iliofemoral cases stay selective for young low-risk limbs.",
+   "tx": "Some patients must never receive lytic treatment, because bleeding risk outweighs any possible clot benefit completely. **Absolute contraindications** include prior intracranial bleeding, recent ischaemic stroke, active bleeding and recent brain or spine surgery. Recent major surgery, trauma, gut bleeding and severe hypertension demand careful case by case judgement. **Pregnancy and the postpartum period** raise bleeding risk sharply and need senior multidisciplinary input before treatment. Routine deep vein lysis stays selective after trial evidence showed limited benefit against bleeding, favouring young low risk limbs.",
+   "say": "Some patients must never receive lytic treatment because bleeding risk outweighs any possible clot benefit. Absolute bans include prior brain bleeding and recent stroke and active bleeding and recent surgery. Recent major surgery and trauma and gut bleeding instead demand careful case by case judgement. Pregnancy and the postpartum period raise bleeding risk sharply and need senior multidisciplinary input. Routine deep vein lysis stays selective because trial evidence showed limited benefit against bleeding.",
    "vis": {
     "kind": "flow",
     "nodes": [

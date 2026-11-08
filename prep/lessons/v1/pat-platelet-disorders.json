@@ -6,8 +6,8 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Platelet and vascular bleeding** is immediate, superficial and mucocutaneous: petechiae, purpura, gum and nose bleeds, menorrhagia and oozing from cuts, contrasting factor deficiency deep delayed bleeding. Counts may be low (production, destruction or sequestration) or function may fail with normal counts (drugs, uraemia, inherited receptor defects). Film and count triage first.",
-   "say": "Platelet bleeding oozes immediately from skin and mucosa. Low counts or broken function both cause it. Count plus film triages before factor tests.",
+   "tx": "**Platelet bleeding** begins immediately after injury and affects skin and mucosa rather than deep joints or muscles predominantly. Patients develop petechiae, purpura, gum bleeding, nosebleeds, menorrhagia and oozing from cuts when platelet number or function fails sufficiently. Counts fall through reduced production, immune destruction or splenic sequestration, while function fails despite normal counts in uraemia or drug exposure. **Blood film examination** therefore triages platelet disorders before specialised aggregation or factor testing begins in clinic.",
+   "say": "Platelet bleeding is immediate because defective plugs fail to seal superficial vessels in skin and mucosa after minor trauma occurs daily. Petechiae develop because tiny vessels leak red cells when platelet numbers fall severely in circulation below haemostatic needs. Film examination helps clinicians separate low production from destruction before treatment choices diverge.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-platelet-disorders-fig1.webp",
@@ -17,13 +17,13 @@
    }
   },
   {
-   "tx": "**Immune thrombocytopenia (ITP)** destroys antibody coated platelets in spleen causing isolated thrombocytopenia with large young platelets and otherwise normal film, acutely after viral illness in children (often self limited) and chronically in adults (often women, associated autoimmunity). Bleeding tracks count severity, and intracranial bleed is the feared rare complication at very low counts.",
-   "say": "ITP antibodies destroy platelets leaving isolated low counts with big young platelets. Children recover after viruses; adults persist. Very low counts risk brain bleeds.",
+   "tx": "**Immune thrombocytopenia** destroys antibody coated platelets in the spleen and leaves an isolated low platelet count in otherwise well patients. The film shows large young platelets while other cell lines remain normal because marrow production compensates for peripheral destruction continuously. Children often recover after viral illness, while adults develop chronic disease that associates with other autoimmune conditions over time. **Intracranial bleeding** remains the feared complication when counts fall extremely low in vulnerable patients.",
+   "say": "Immune thrombocytopenia is a disorder where antibodies coat platelets and splenic macrophages remove them from circulation prematurely each day. Large platelets appear because marrow releases young platelets early to compensate for accelerated peripheral destruction in spleen tissue during active disease. Brain bleeding is feared because extremely low counts remove protection from minor vascular injury.",
    "vis": null
   },
   {
-   "tx": "Production failure lowers platelets with marrow clues: **aplastic anaemia** empties marrow trifactorially, leukaemia floods it with blasts, B12 deficiency dysplasias it reversibly and drugs or alcohol suppress it transiently. Splenic sequestration in portal hypertension pools platelets with leukopenia proportionally. Each mechanism demands different therapy, so marrow context matters more than count alone.",
-   "say": "Empty, flooded, deficient or suppressed marrows all lower platelets differently. Big spleens pool them. Mechanism, not count alone, chooses treatment.",
+   "tx": "Platelet production fails when marrow becomes empty, infiltrated, deficient or suppressed by drugs and systemic illness over time. **Aplastic anaemia** empties the marrow and causes pancytopenia, while leukaemia floods marrow spaces with blasts that crowd normal production completely. Vitamin B12 deficiency causes reversible dysplasia, and **splenic sequestration** pools platelets inside an enlarged spleen during portal hypertension episodes. Mechanism matters more than the count alone because each cause demands fundamentally different treatment in practice.",
+   "say": "Production failure is a mechanism where empty or infiltrated marrow cannot release enough platelets into blood each day adequately. Leukaemia differs because blasts crowd marrow while aplastic marrow becomes empty and fatty on biopsy examination samples taken from iliac crest. Mechanism identification helps clinicians choose immunosuppression, chemotherapy or transfusion support appropriately.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -56,13 +56,24 @@
    }
   },
   {
-   "tx": "Inherited function defects bleed with normal counts: **Glanzmann thrombasthenia** lacks GPIIb IIIa aggregation (absent clot retraction), Bernard Soulier lacks GPIb adhesion with giant platelets and lowish counts, and storage pool defects lack granule release. Aspirin irreversibly acetylates platelet COX for the cell lifespan, NSAIDs reversibly, uraemia coats function reversibly, all unmasked by bleeding time or aggregometry historically and clinical pattern today.",
-   "say": "Normal counts can still bleed without platelet receptors or granules. Aspirin disables platelets for life; uraemia disables temporarily. Receptor names answer function stems.",
+   "tx": "These side by side marrow biopsies contrast an empty fatty marrow on the left with densely packed dark blasts on the right. The left pattern shows **aplastic anaemia** because fat replaces haemopoietic tissue and all three blood lineages fall together as pancytopenia. The right pattern shows leukaemic infiltration because **blasts** crowd out normal platelet, red cell and neutrophil production completely. Examiners use this contrast because identical low platelet counts require opposite treatments depending on marrow appearance.",
+   "say": "This contrast shows fatty marrow because aplastic anaemia replaces haemopoietic tissue with empty fat spaces on biopsy sections examined under microscopy daily in laboratories. Blast packed marrow is opposite because leukaemic cells crowd every space and suppress normal platelet production completely through marrow replacement by malignant clone expansion. Pancytopenia develops because all lineages fail when marrow cannot produce cells.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-platelet-disorders-gen1.webp",
+    "alt": "Side by side marrow biopsies: left yellow fatty empty marrow, right densely blue blast packed marrow, with pancytopenia lab summary.",
+    "caption": "Fatty empty marrow in aplastic anaemia contrasted with blast packed leukaemic marrow. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Inherited platelet function defects cause bleeding despite normal platelet counts because adhesion, aggregation or granule release fails at injury sites. **Glanzmann thrombasthenia** lacks the GPIIb IIIa receptor, so platelets cannot aggregate or retract clots normally after vascular injury occurs. **Bernard Soulier syndrome** lacks GPIb adhesion and produces giant platelets, while aspirin irreversibly disables cyclooxygenase for the platelet lifespan. Uraemia impairs function reversibly, which explains bleeding with normal counts in renal failure patients.",
+   "say": "Function defects are disorders where platelet counts stay normal while adhesion or aggregation fails at sites of vascular injury during haemostasis attempts. Glanzmann disease is recognised because absent GPIIb IIIa prevents platelets linking fibrinogen between adjacent cells after activation signals arrive normally through other receptors. Aspirin exposure helps clinicians explain acquired dysfunction because cyclooxygenase stays disabled for lifespan.",
    "vis": null
   },
   {
-   "tx": "Vascular purpura bleeds without platelet fault: **Henoch Schonlein (IgA vasculitis)** palpably purpuras buttocks and legs in children with arthritis, gut pain and nephritis; scurvy weakens collagen vessels; amyloid infiltrates them fragile; senile and steroid purpura thin supporting skin. Palpable purpura means vessel inflammation, non blanching petechiae mean platelet or vessel leak, a bedside split.",
-   "say": "Palpable purpura inflames vessels visibly in IgA disease of childhood. Flat petechiae leak from platelet lack. Scurvy and amyloid weaken walls themselves.",
+   "tx": "Vascular purpura causes bleeding without platelet failure because vessel walls or supporting tissues become inflamed, fragile or thin over time. **IgA vasculitis** produces palpable purpura over buttocks and legs in children with arthritis, abdominal pain and nephritis together. Scurvy weakens collagen support, amyloid infiltrates vessel walls, and steroids thin skin until minor trauma causes large bruises easily. **Palpable purpura** therefore signals vessel inflammation, while flat petechiae suggest platelet deficiency or simple vascular leakage clinically.",
+   "say": "Vascular purpura is bleeding where vessel walls become inflamed or fragile while platelet counts remain normal throughout illness episodes in affected children and adults. Palpable lesions develop because inflammatory infiltrate and oedema raise purpuric spots above surrounding skin surface noticeably during palpation by examining clinician fingers. Collagen weakness helps clinicians explain scurvy bruising when vitamin C deficiency impairs vessel support.",
    "vis": null
   }
  ],

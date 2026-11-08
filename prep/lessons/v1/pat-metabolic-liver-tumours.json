@@ -3,21 +3,32 @@
  "module": "pat-metabolic-liver-tumours",
  "subject": "pathology",
  "title": "Metabolic liver disease and hepatic tumours",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Non alcoholic fatty liver** (insulin resistance, ballooning with lobular inflammation grading NASH activity) and **alcoholic liver disease** (central **Mallory hyaline** with neutrophilic satellitosis, chicken wire fibrosis, AST double ALT) both march steatosis to cirrhosis; abstinence with weight loss reverses early stages. **Hereditary haemochromatosis** (**C282Y** HFE, **bronze diabetes** with arthropathy of second and third MCPs, hypogonadism, cardiomyopathy, ferritin with high transferrin saturation, hepatic iron index) is treated with **phlebotomy**; secondary overload (thalassaemia transfusions) needs chelation. Fibroscan stages all.",
-   "say": "AST double ALT with Mallory is alcoholic. Bronze skin with diabetes and MCP pain is haemochromatosis: bleed it.",
+   "tx": "**Non alcoholic fatty liver disease** develops with insulin resistance and progresses from steatosis through steatohepatitis towards cirrhosis over time. Alcoholic liver disease shows **Mallory hyaline** with neutrophilic satellitosis and a characteristic pattern where AST exceeds ALT. **Hereditary haemochromatosis** causes bronze diabetes with arthropathy, hypogonadism and cardiomyopathy because iron deposits damage multiple organs. Phlebotomy removes excess iron in haemochromatosis, while abstinence and weight loss reverse early fatty liver disease.",
+   "say": "Fatty liver disease is a condition where insulin resistance drives fat accumulation and progressive inflammation in hepatocytes. Alcoholic disease is suggested because AST exceeds ALT and Mallory hyaline appears inside damaged liver cells. Haemochromatosis causes bronze diabetes because iron deposition damages the pancreas, joints and heart together.",
    "vis": null
   },
   {
-   "tx": "**Wilson disease** (ATP7B copper excretion failure, **Kayser-Fleischer rings**, low ceruloplasmin, high urinary copper, Coombs negative haemolysis with parkinsonism and dysarthria in youth) is treated with **penicillamine or trientine** (zinc blocks absorption, transplant fulminant); siblings screen. **Alpha 1 antitrypsin deficiency** (PiZZ, **PAS diastase resistant globules**, neonatal cholestasis, early panacinar emphysema, panniculitis) is managed supportively with augmentation debates. **Primary biliary cholangitis** (middle aged women, **anti mitochondrial M2**, pruritus with xanthelasma, ursodiol) differs from PSC (men, IBD, beading, cholangiocarcinoma risk).",
-   "say": "Young parkinsonism with brown corneal rings is Wilson: chelate copper. PASD globules with early emphysema are A1AT.",
+   "tx": "**Wilson disease** results from ATP7B failure, so copper excretion into bile is impaired from childhood onwards. Copper deposits in the cornea produce **Kayser-Fleischer rings**, while low ceruloplasmin and high urinary copper support the diagnosis. Young patients present with parkinsonism, dysarthria and Coombs negative haemolysis because copper injures brain, liver and red cells. **Penicillamine or trientine** chelates copper, zinc blocks absorption, and siblings require screening for this treatable disease.",
+   "say": "Wilson disease is an inherited disorder where copper excretion fails because the ATP7B transporter does not work properly. Kayser-Fleischer rings appear because copper deposits at the corneal limbus in affected young patients. Chelation treatment is essential because removing copper prevents progressive liver failure and neurological damage.",
    "vis": null
   },
   {
-   "tx": "**Hepatocellular carcinoma** (HBV, HCV cirrhosis, alcohol, aflatoxin, **rising AFP**) is diagnosed radiologically: **arterial enhancement with portal venous washout** on triple phase CT or MRI (LI-RADS) with threshold growth; biopsy reserved for atypical lesions. **Milan criteria** (single under 5 cm or three under 3 cm, no vascular invasion or spread) gate transplant; resection suits noncirrhotic or preserved function, ablation bridges small lesions, **sorafenib or lenvatinib** with immunotherapy palliates advanced. Six monthly ultrasound with AFP surveils cirrhosis.",
-   "say": "Arterial blush washing out venously is HCC: Milan gates transplant. Cirrhosis images twice yearly.",
+   "tx": "This eye photograph shows a brown green ring at the corneal limbus, which is the classic **Kayser-Fleischer ring** of Wilson disease. Copper deposition creates this ring because excess copper accumulates in Descemet membrane at the corneal edge. The sign matters because **Wilson disease** is treatable, yet it causes irreversible brain and liver damage when missed. Examiners pair this image with young parkinsonism, dysarthria or unexplained liver disease in stems.",
+   "say": "This photograph is showing a Kayser-Fleischer ring because copper deposits at the outer edge of the cornea. The ring is important because Wilson disease remains treatable when clinicians recognise it early enough. Examiners test this sign because it links eye findings with liver and movement disorders.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-metabolic-liver-tumours-gen1.webp",
+    "alt": "Close up photograph of an eye showing brown green ring at outer iris edge labeled Kayser-Fleischer ring and limbus.",
+    "caption": "Eye photograph showing Kayser-Fleischer ring at limbus. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Hepatocellular carcinoma** usually arises in cirrhosis from hepatitis B, hepatitis C, alcohol or aflatoxin exposure over years. Diagnosis relies on imaging because tumours show **arterial enhancement with portal venous washout** on triple phase scans. A rising **alpha fetoprotein** supports suspicion, although imaging criteria often make biopsy unnecessary in typical lesions. Milan criteria decide transplant eligibility, while resection, ablation and systemic therapy suit different stages of disease.",
+   "say": "Hepatocellular carcinoma is a tumour that develops in cirrhotic livers after years of viral or alcohol related injury. Arterial enhancement with venous washout is diagnostic because this vascular pattern rarely occurs in benign liver lesions. Transplant eligibility is decided because Milan criteria select patients with limited tumour burden.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-metabolic-liver-tumours-fig1.webp",
@@ -27,8 +38,8 @@
    }
   },
   {
-   "tx": "**Cholangiocarcinoma** (PSC, **Clonorchis**, choledochal cysts, Thorotrast history, **CA19-9** with painless progressive jaundice and pruritus) is staged by Bismuth-Corlette hilar extent; resection with Roux-en-Y or transplant protocols suit selected hilar disease while stenting palliates. **Benign lesions** (haemangioma with peripheral nodular enhancement, **FNH** with central scar, adenoma with bleeding risk in OCP users needing resection) spare surgery mostly. Klatskin hilar tumours obstruct early; intrahepatic masses mimic HCC without washout.",
-   "say": "Painless progressive jaundice with CA19-9 is cholangiocarcinoma. Central scar is FNH: observe.",
+   "tx": "**Cholangiocarcinoma** presents with painless progressive jaundice and pruritus because bile ducts become obstructed by tumour growth. Risk factors include primary sclerosing cholangitis and liver fluke infection, and **CA19-9** often rises in advanced disease. Benign lesions behave differently because haemangiomas show peripheral nodular enhancement and **focal nodular hyperplasia** shows a central scar. Recognising these imaging patterns helps clinicians avoid unnecessary surgery for benign lesions that only need observation.",
+   "say": "Cholangiocarcinoma is a bile duct cancer that presents with painless jaundice because the tumour obstructs bile flow progressively. Focal nodular hyperplasia is benign because its central scar appears on imaging without malignant vascular invasion. This distinction helps clinicians observe benign lesions while resecting cancers that obstruct the ducts.",
    "vis": {
     "kind": "table",
     "cols": [
