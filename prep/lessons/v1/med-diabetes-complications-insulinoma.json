@@ -1,0 +1,256 @@
+{
+ "v": 1,
+ "module": "med-diabetes-complications",
+ "subject": "medicine",
+ "title": "Insulinoma and Factitious Hypoglycaemia",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A rare neuroendocrine neoplasm arising from pancreatic beta cells causes autonomous, unregulated endogenous hyperinsulinaemia. Developing an **insulinoma** represents the commonest functioning pancreatic neuroendocrine tumour, typically presenting as a solitary, benign, highly vascular adenoma under two centimetres in diameter. Because tumour cells secrete insulin continuously despite plummeting blood glucose, patients experience recurrent fasting and exertional hypoglycaemia accompanied by neuroglycopenic symptoms including confusion, visual disturbances, and personality changes, frequently misdiagnosed as psychiatric or seizure disorders for years.",
+   "say": "A rare neuroendocrine neoplasm arising from pancreatic beta cells causes autonomous, unregulated endogenous hyperinsulinaemia. Developing an insulinoma represents the commonest functioning pancreatic neuroendocrine tumour, typically presenting as a solitary, benign adenoma under two centimetres. Because tumour cells secrete insulin continuously despite low glucose, patients experience recurrent fasting hypoglycaemia with neuroglycopenic symptoms, often misdiagnosed for years as psychiatric or seizure disorders.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/insulinoma-fig1.webp",
+    "alt": "Endocrine neoplasia pathology of pancreatic beta-cell insulinoma and clinical manifestations.",
+    "caption": "Histopathological and biochemical hallmarks of functioning pancreatic insulinoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Equimolar cleavage of proinsulin during vesicular processing within pancreatic beta cells yields native insulin and a connecting peptide. Measuring circulating **c-peptide** serves as the definitive biochemical surrogate of endogenous beta-cell secretory activity. Because commercial exogenous pharmaceutical insulins lack the connecting peptide, measuring serum C-peptide provides the critical laboratory seam for differentiating endogenous hyperinsulinaemic states from exogenous insulin administration. Normal beta cells suppress C-peptide secretion during hypoglycaemia, whereas autonomous insulinomas and sulfonylurea toxicity maintain inappropriately elevated concentrations.",
+   "say": "Equimolar cleavage of proinsulin during vesicular processing within pancreatic beta cells yields native insulin and a connecting peptide. Measuring circulating c-peptide serves as the definitive surrogate of endogenous beta-cell secretory activity. Because commercial pharmaceutical insulins lack this connecting chain, serum C-peptide provides the critical test for distinguishing endogenous hyperinsulinism from exogenous insulin administration. Normal beta cells suppress C-peptide during hypoglycaemia, while insulinomas maintain elevated levels.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypoglycemia-fig1.webp",
+    "alt": "Counterregulatory hormone response and differential diagnostic algorithm for fasting hypoglycaemia.",
+    "caption": "Diagnostic biochemical algorithms and counterregulatory cascades in fasting hypoglycaemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The gold-standard inpatient diagnostic procedure for proving endogenous hyperinsulinaemic hypoglycaemia is the prolonged supervised fasting test. During a **72-hour fast**, the patient consumes only calorie-free liquids while plasma glucose, insulin, C-peptide, and proinsulin are monitored at regular intervals. The test terminates when plasma glucose drops below 45 milligrams per decilitre alongside Whipple triad symptoms. Diagnosing insulinoma requires demonstrating inappropriately elevated serum insulin (at or above 3 micro-units per millilitre), elevated C-peptide (at or above 0.6 nanograms per millilitre), and absence of plasma sulfonylureas.",
+   "say": "The gold-standard inpatient diagnostic procedure for proving endogenous hyperinsulinaemic hypoglycaemia is the prolonged supervised fasting test. During a 72-hour fast, the patient consumes only calorie-free liquids while glucose, insulin, and C-peptide are monitored regularly. The test terminates when glucose falls below 45 milligrams per decilitre with symptoms. Diagnosing insulinoma requires demonstrating inappropriately elevated insulin and C-peptide alongside negative sulfonylurea screening.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Parameter",
+     "Normal Hypoglycaemic Response",
+     "Insulinoma Diagnostic Value",
+     "Physiological Interpretation"
+    ],
+    "rows": [
+     [
+      "Plasma Glucose",
+      "< 55 mg/dL",
+      "< 45 mg/dL with Whipple Triad",
+      "Significant neuroglycopenic stimulus"
+     ],
+     [
+      "Serum Insulin",
+      "Suppressed (< 3 mcU/mL)",
+      "Inappropriately high (>= 3 mcU/mL)",
+      "Autonomous unregulated secretion"
+     ],
+     [
+      "Serum C-Peptide",
+      "Suppressed (< 0.6 ng/mL)",
+      "Inappropriately high (>= 0.6 ng/mL)",
+      "Active endogenous proinsulin cleavage"
+     ],
+     [
+      "Serum Proinsulin",
+      "Suppressed (< 5 pmol/L)",
+      "Elevated (>= 5 pmol/L)",
+      "Aberrant immature precursor processing"
+     ],
+     [
+      "Plasma Beta-hydroxybutyrate",
+      "Elevated (> 2.7 mmol/L)",
+      "Suppressed (<= 2.7 mmol/L)",
+      "Insulin blocks hepatic ketogenesis"
+     ],
+     [
+      "Oral Hypoglycaemic Screen",
+      "Negative",
+      "Strictly Negative",
+      "Rules out surreptitious secretagogue use"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surreptitious self-administration of insulin or insulin secretagogues produces severe, unexplained neuroglycopenic crises mimicking neuroendocrine tumours. In **factitious hypoglycaemia**, the clinical laboratory profile reveals striking diagnostic divergence depending on the covert agent utilized. Covert injection of exogenous pharmaceutical insulin suppresses endogenous beta-cell secretion, producing markedly elevated serum insulin with undetectable C-peptide and absent sulfonylureas. Conversely, surreptitious ingestion of oral sulfonylureas stimulates native beta cells, generating high insulin, high C-peptide, and positive plasma or urine sulfonylurea screens.",
+   "say": "Surreptitious self-administration of insulin or insulin secretagogues produces severe, unexplained neuroglycopenic crises mimicking neuroendocrine tumours. In factitious hypoglycaemia, the laboratory profile reveals striking diagnostic divergence based on the agent taken. Covert injection of pharmaceutical insulin suppresses endogenous secretion, producing high insulin with undetectable C-peptide. Conversely, surreptitious ingestion of oral sulfonylureas stimulates native beta cells, generating high insulin, high C-peptide, and positive drug screens.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Exogenous Insulin Surreptitious Use",
+     "points": [
+      "Serum Insulin: Markedly elevated",
+      "Serum C-Peptide: Undetectable / Suppressed",
+      "Serum Proinsulin: Suppressed",
+      "Plasma Sulfonylurea Screen: Negative",
+      "Insulin antibodies: Frequently elevated"
+     ]
+    },
+    "right": {
+     "title": "Surreptitious Sulfonylurea Ingestion",
+     "points": [
+      "Serum Insulin: Elevated",
+      "Serum C-Peptide: Elevated",
+      "Serum Proinsulin: Elevated",
+      "Plasma Sulfonylurea Screen: Positive",
+      "Biochemical profile identical to insulinoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Blunting of sympatoadrenal autonomic warning symptoms preceding neuroglycopenic decompensation exposes patients to catastrophic accidents and coma. Developing **hypoglycaemia unawareness** stems from recurrent episodes of antecedent hypoglycaemia, which downregulate central hypothalamic glucose sensors and attenuate adrenomedullary adrenaline release. Patients fail to perceive autonomic signals such as tremors and sweating, transitioning abruptly into confusion, seizures, or loss of consciousness. Management mandates strictly relaxing glycaemic targets for two to three weeks to avoid any hypoglycaemia, successfully resetting autonomic thresholds.",
+   "say": "Blunting of sympathoadrenal autonomic warning symptoms preceding neuroglycopenic decompensation exposes patients to catastrophic accidents and coma. Developing hypoglycaemia unawareness stems from recurrent episodes of antecedent hypoglycaemia, which downregulate hypothalamic sensors and blunt adrenaline release. Patients fail to experience warning tremors or sweating, transitioning abruptly into confusion or seizures. Relaxing glycaemic targets for several weeks resets autonomic thresholds.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "recurrent",
+      "label": "Recurrent Antecedent Hypoglycaemic Episodes"
+     },
+     {
+      "id": "reset",
+      "label": "Blunted Hypothalamic Sensing & Adrenaline Response"
+     },
+     {
+      "id": "unaware",
+      "label": "Loss of Warning Autonomic Signs (Tremor, Diaphoresis)"
+     },
+     {
+      "id": "relax",
+      "label": "Relax Glycaemic Goals: Reset Sympathoadrenal Thresholds"
+     }
+    ],
+    "edges": [
+     [
+      "recurrent",
+      "reset"
+     ],
+     [
+      "reset",
+      "unaware"
+     ],
+     [
+      "unaware",
+      "relax"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Localizing an insulinoma prior to operative resection requires sensitive cross-sectional and endoscopic imaging modalities. Because insulinomas are typically tiny, multiphase CT detects only sixty to seventy percent of lesions. Utilizing **endoscopic ultrasound** represents the most sensitive non-invasive imaging modality, identifying over ninety percent of small pancreatic parenchymal neuroendocrine tumours. If non-invasive imaging proves inconclusive, selective arterial calcium stimulation testing with hepatic venous sampling accurately regionalizes the tumour to the pancreatic head, body, or tail by detecting localized insulin surges.",
+   "say": "Localizing an insulinoma prior to operative resection requires sensitive cross-sectional and endoscopic imaging modalities. Because insulinomas are typically tiny, contrast-enhanced CT or MRI detects sixty to seventy percent of lesions. Endoscopic ultrasound represents the most sensitive non-invasive modality, detecting over ninety percent of tumours. If non-invasive imaging is inconclusive, selective arterial calcium stimulation with hepatic venous sampling accurately regionalizes the neoplasm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Modality",
+     "Sensitivity for Insulinoma",
+     "Primary Clinical Advantage",
+     "Procedural Role"
+    ],
+    "rows": [
+     [
+      "Multiphase Triphasic CT",
+      "60% to 75%",
+      "Non-invasive anatomical survey",
+      "First-line cross-sectional imaging"
+     ],
+     [
+      "Gadolinium MRI Pancreas",
+      "70% to 80%",
+      "Superior soft-tissue resolution",
+      "Delineates small parenchymal lesions"
+     ],
+     [
+      "Endoscopic Ultrasound (EUS)",
+      "85% to 95%",
+      "Direct transducer proximity",
+      "Highest sensitivity non-invasive tool"
+     ],
+     [
+      "Arterial Calcium Stimulation",
+      "90% to 95%",
+      "Functional regionalization",
+      "Gold standard when imaging is occult"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Medical stabilization of intractable hypoglycaemia is necessary while preparing patients for definitive surgical intervention or for unresectable disease. Prescribing **diazoxide**, an oral potassium channel opener, directly activates ATP-sensitive potassium channels in pancreatic beta cells, preventing membrane depolarization and inhibiting insulin exocytosis. Alternatively, somatostatin analogues like octreotide suppress hormone release in tumours expressing somatostatin receptor subtype 2. Small, frequent meals rich in complex carbohydrates and nocturnal cornstarch prevent fasting glycaemic drops before scheduled operative enucleation.",
+   "say": "Medical stabilization of intractable hypoglycaemia is necessary while preparing patients for definitive surgical intervention or in metastatic disease. Prescribing diazoxide, an oral potassium channel opener, activates ATP-sensitive potassium channels in beta cells, inhibiting insulin secretion. Alternatively, somatostatin analogues like octreotide suppress hormone exocytosis in receptor-positive neoplasms. Frequent complex carbohydrate meals and nocturnal cornstarch prevent fasting glycaemic crashes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diazoxide Therapy",
+     "points": [
+      "Opens beta-cell K-ATP channels",
+      "Hyperpolarizes cell membrane",
+      "Directly suppresses insulin release",
+      "Adverse effects: Fluid retention, hirsutism",
+      "First-line medical therapy"
+     ]
+    },
+    "right": {
+     "title": "Octreotide Therapy",
+     "points": [
+      "Somatostatin analogue (SSTR2/SSTR5)",
+      "Inhibits hormone exocytosis",
+      "May paradoxically worsen hypoglycaemia",
+      "Suppresses glucagon & growth hormone",
+      "Second-line or metastatic disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical enucleation of the solitary adenoma provides definitive, curative therapy in over ninety percent of patients with sporadic insulinomas. Because most tumours are benign, well-circumscribed, and superficial, laparoscopic or open **surgical enucleation** preserves native pancreatic parenchymal architecture and exocrine function. Intraoperative ultrasonography facilitates precise visual and tactile localization, verifying clear margins and avoiding injury to the main pancreatic duct. In patients with diffuse microadenomatosis associated with MEN 1, subtotal or distal pancreatectomy combined with enucleation is required.",
+   "say": "Surgical enucleation of the solitary adenoma provides definitive curative therapy in over ninety percent of patients with sporadic insulinomas. Because most tumours are benign and superficial, surgical enucleation preserves pancreatic parenchymal architecture and exocrine function. Intraoperative ultrasonography facilitates precise localization, verifying margins and protecting the main pancreatic duct. In MEN 1 patients, subtotal pancreatectomy combined with enucleation is often needed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "biochem",
+      "label": "Biochemical Proof (Whipple Triad, Low Glucose, High C-Peptide)"
+     },
+     {
+      "id": "local",
+      "label": "Anatomical Localization (EUS / Triphasic CT / MRI)"
+     },
+     {
+      "id": "surgery",
+      "label": "Laparoscopic Enucleation with Intraoperative Ultrasound"
+     },
+     {
+      "id": "cure",
+      "label": "Definitive Cure (> 90% Long-Term Success)"
+     }
+    ],
+    "edges": [
+     [
+      "biochem",
+      "local"
+     ],
+     [
+      "local",
+      "surgery"
+     ],
+     [
+      "surgery",
+      "cure"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
