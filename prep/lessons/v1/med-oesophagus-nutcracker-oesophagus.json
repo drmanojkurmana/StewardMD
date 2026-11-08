@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "med-oesophagus",
+ "subject": "medicine",
+ "title": "Oesophageal motility hypercontractility, diverticula, and inflammatory rings",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Hypercontractile motility disorders generate extraordinarily elevated peristaltic pressures without impairing lower sphincter relaxation. Clinically characterizing **nutcracker oesophagus** (hypertensive peristalsis) requires demonstrating preserved, coordinated peristalsis in the smooth muscle oesophagus with distal peristaltic wave amplitudes exceeding 180 to 220 mmHg on conventional manometry. Under modern high-resolution manometry, hypercontractile (Jackhammer) oesophagus is defined by a distal contractile integral (DCI) exceeding 8,000 mmHg-s-cm in >= 20% of swallows. Patients present with recurring non-cardiac chest pain and mild dysphagia, treated with calcium channel blockers or phosphodiesterase-5 inhibitors.",
+   "say": "Hypercontractile motility disorders generate extraordinarily high peristaltic pressures while maintaining normal sphincter relaxation. Characterizing nutcracker oesophagus requires identifying coordinated peristalsis with wave amplitudes exceeding two hundred millimeters of mercury. High-resolution manometry defines hypercontractile oesophagus by extreme contractile integral values. Patients experience recurrent non-cardiac chest pain and mild dysphagia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nutcracker / Jackhammer oesophagus",
+     "points": [
+      "Extremely high contractile pressure (DCI > 8000)",
+      "Normal coordinated peristaltic sequencing",
+      "Lower oesophageal sphincter relaxation is normal",
+      "Presents with severe non-cardiac chest pain"
+     ]
+    },
+    "right": {
+     "title": "Diffuse oesophageal spasm",
+     "points": [
+      "Premature, uncoordinated simultaneous contractions",
+      "Shortened distal latency (< 4.5 seconds)",
+      "Lower oesophageal sphincter relaxation is normal",
+      "Presents with both chest pain and dysphagia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Immune-mediated, chronic allergic inflammation provoked by food allergens causes progressive transmural fibrostenosis in atopic young individuals. Developing **eosinophilic oesophagitis** (EoE) is triggered by dietary aeroallergens and food antigens (dairy, wheat, egg, soy), driving Th2-mediated interleukin-5 and interleukin-13 secretion. Patients characteristically present with solid-food dysphagia, recurrent food bolus impactions requiring emergency endoscopic disimpaction, and refractory reflux symptoms. Endoscopic evaluation demonstrates trachealization (concentric rings), longitudinal furrows, white punctate exudates, and mucosal friability ('crepe paper' mucosa).",
+   "say": "Chronic allergic inflammation provoked by dietary antigens causes progressive oesophageal remodeling in atopic individuals. Developing eosinophilic oesophagitis is driven by helper T-cell cytokines in response to food antigens like dairy and wheat. Young adults present with solid-food dysphagia and acute food bolus impaction. Endoscopy reveals concentric mucosal rings, longitudinal furrows and punctate white exudates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "allergen",
+      "label": "Dietary food allergen exposure (milk, wheat, soy)"
+     },
+     {
+      "id": "th2",
+      "label": "Th2 immune activation & IL-5 / IL-13 cytokine release"
+     },
+     {
+      "id": "eos",
+      "label": "Eosinophil recruitment & transmural mucosal inflammation"
+     },
+     {
+      "id": "stricture",
+      "label": "Subepithelial fibrosis, ring formation, & food impaction"
+     }
+    ],
+    "edges": [
+     [
+      "allergen",
+      "th2"
+     ],
+     [
+      "th2",
+      "eos"
+     ],
+     [
+      "eos",
+      "stricture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive diagnosis of allergic oesophageal disease requires mucosal biopsy demonstrating marked tissue eosinophilia. Establishing eosinophilic oesophagitis mandates identifying at least fifteen eosinophils per high-power field (**eos/HPF**) on oesophageal biopsy, after excluding systemic eosinophilia, parasitic infection, and Crohn disease. First-line therapy utilizes swallowed topical fluticasone or budesonide slurries, which coat the oesophageal mucosa to suppress local allergic inflammation. Concurrently, an empiric six-food elimination diet (omitting milk, wheat, eggs, soy, peanuts/tree nuts, fish/shellfish) or proton pump inhibitors induce histological and clinical remission in over seventy percent of patients.",
+   "say": "Definitive diagnosis of allergic oesophageal inflammation requires biopsy confirmation of marked tissue eosinophilia. Establishing eosinophilic oesophagitis mandates identifying at least fifteen eosinophils per high-power field on mucosal biopsy. First-line management uses swallowed topical corticosteroids like budesonide slurry. Concurrently, empiric food elimination diets or proton pump inhibitors achieve histological and clinical remission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic strategy",
+     "Mechanism of action",
+     "Clinical application"
+    ],
+    "rows": [
+     [
+      "Swallowed topical steroids",
+      "Inhaled fluticasone / budesonide slurry",
+      "First-line induction & maintenance therapy"
+     ],
+     [
+      "Empiric elimination diet",
+      "Omits milk, wheat, egg, soy, nuts, seafood",
+      "Identifies specific causative dietary antigen"
+     ],
+     [
+      "Proton pump inhibitors",
+      "Anti-inflammatory and acid suppression",
+      "Restores mucosal barrier integrity"
+     ],
+     [
+      "Endoscopic balloon dilation",
+      "Mechanical disruption of fibrotic rings",
+      "Reserved for persistent symptomatic strictures"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe chronic iron deficiency anaemia can produce upper digestive mucosal webs and predispose to squamous cell malignancy. Characterizing **Plummer-Vinson syndrome** (Paterson-Kelly syndrome) encompasses the classic clinical triad of microcytic hypochromic iron deficiency anaemia, postcricoid cervical oesophageal webs causing painless dysphagia to solids, and atrophic glossitis with angular cheilitis and spoon nails (koilonychia). Oesophageal webs are thin, smooth, membranous mucosal folds protruding into the anterior cervical lumen. The syndrome carries a significant premalignant predisposition, with roughly ten percent of patients eventually developing squamous cell carcinoma of the postcricoid region.",
+   "say": "Severe chronic iron deficiency anaemia can produce upper mucosal webs and heighten cancer risk. Characterizing Plummer-Vinson syndrome involves the classic triad of microcytic iron deficiency anaemia, cervical oesophageal webs causing solid-food dysphagia, and atrophic glossitis with spoon nails. These webs are thin mucosal folds across the cervical lumen. The condition carries a recognized predisposition to postcricoid squamous carcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Plummer-Vinson triad",
+     "points": [
+      "Microcytic hypochromic iron deficiency anaemia",
+      "Postcricoid cervical oesophageal web",
+      "Atrophic glossitis, angular cheilitis, koilonychia",
+      "High risk of postcricoid squamous carcinoma"
+     ]
+    },
+    "right": {
+     "title": "Schatzki ring",
+     "points": [
+      "Lower oesophageal mucosal ring at squamocolumnar junction",
+      "Intermittent dysphagia to solid meats ('steakhouse syndrome')",
+      "No association with iron deficiency or anaemia",
+      "Benign non-premalignant lesion treated with dilation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pulsion herniation of pharyngeal mucosa through an anatomical area of muscular weakness creates a false diverticulum. Developing a **Zenker diverticulum** (pharyngeal pouch) occurs through Killian dehiscence, a triangular muscular gap between the oblique thyropharyngeus and transverse cricopharyngeus muscle fibres of the inferior pharyngeal constrictor. High intraluminal pharyngeal pressures during uncoordinated swallowing herniate mucosa posterior-medially. Patients present with progressive oropharyngeal dysphagia, regurgitation of foul undigested food, halitosis, gurgling in the neck upon swallowing, and aspiration pneumonia. Diagnosis is confirmed by barium swallow, while flexible endoscopy risks pouch perforation.",
+   "say": "Herniation of pharyngeal mucosa through an anatomical area of weakness produces a false diverticulum. Developing a Zenker diverticulum occurs through Killian dehiscence, an area between the thyropharyngeus and cricopharyngeus muscles. Elevated pharyngeal swallowing pressure pushes the mucosa outward. Patients suffer from dysphagia, halitosis, regurgitation of foul food and aspiration. Contrast barium swallow confirms the pouch safely.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "crico",
+      "label": "Cricopharyngeal spasm & uncoordinated swallowing"
+     },
+     {
+      "id": "killian",
+      "label": "Elevated hypopharyngeal pressure at Killian dehiscence"
+     },
+     {
+      "id": "hernia",
+      "label": "Pulsion herniation of mucosa creating posterior pouch"
+     },
+     {
+      "id": "stagnate",
+      "label": "Food stagnation, halitosis, & regurgitation"
+     }
+    ],
+    "edges": [
+     [
+      "crico",
+      "killian"
+     ],
+     [
+      "killian",
+      "hernia"
+     ],
+     [
+      "hernia",
+      "stagnate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute severe pain experienced during swallowing signifies active mucosal ulceration, full-thickness inflammation, or infectious breach. Experiencing severe **odynophagia** contrasts sharply with non-painful mechanical dysphagia, pointing directly toward erosive or ulcerative mucosal pathology. Cardinal etiologies include pill-induced oesophagitis (doxycycline, bisphosphonates, ferrous sulfate, potassium chloride becoming lodged at physiological anatomical narrowings), viral ulceration from herpes simplex or cytomegalovirus in immunocompromised hosts, severe caustic ingestion, and candida fungal plaque infection. Urgent diagnostic upper gastrointestinal endoscopy identifies and biopsies the ulcerated lesions.",
+   "say": "Severe pain experienced during swallowing signals active mucosal ulceration or infection. Experiencing true odynophagia differs from painless dysphagia, pointing directly toward mucosal damage. Leading causes include pill-induced ulceration from stuck doxycycline or potassium tablets, viral ulcers from herpes or cytomegalovirus in immunocompromised patients, caustic chemical burns and fungal candidiasis. Upper endoscopy provides definitive visualization and biopsy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dysphagia-fig1.webp",
+    "alt": "Diagnostic and anatomical spectrum of acute odynophagia and mucosal ulceration.",
+    "caption": "Oesophageal mucosal ulceration patterns and diagnostic evaluation in acute odynophagia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Solid medications ingested with inadequate fluid or in recumbent postures can lodge in the mid-oesophagus, causing localized chemical burns. Developing **pill-induced oesophagitis** occurs commonly with oral doxycycline, ferrous sulfate, alendronate, and non-steroidal anti-inflammatory drugs. Medications arrest where the aortic arch naturally compresses the lumen. Caustic, acidic dissolution creates localized kissing ulcers on opposing mucosal walls. Prevention requires swallowing pills while standing upright with at least 200 millilitres of water and remaining erect for thirty minutes.",
+   "say": "Solid medications swallowed with little fluid or before lying down can lodge in the mid-oesophagus, creating chemical ulceration. Developing pill-induced oesophagitis occurs frequently with oral doxycycline, iron supplements and bisphosphonates. Tablets arrest where the aorta compresses the oesophageal lumen. Caustic dissolution causes discrete kissing ulcers on opposing mucosal surfaces. Prevention requires drinking ample water while standing upright.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pill",
+      "label": "Pill swallowed dry or immediately prior to recumbency"
+     },
+     {
+      "id": "arrest",
+      "label": "Tablet arrests at mid-oesophagus aortic indentation"
+     },
+     {
+      "id": "caustic",
+      "label": "Local high-concentration acidic / caustic mucosal burn"
+     },
+     {
+      "id": "ulcer",
+      "label": "Discrete 'kissing' ulceration with abrupt odynophagia"
+     }
+    ],
+    "edges": [
+     [
+      "pill",
+      "arrest"
+     ],
+     [
+      "arrest",
+      "caustic"
+     ],
+     [
+      "caustic",
+      "ulcer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endoscopic and surgical therapies resolve structural diverticular pouches and lower mucosal web rings. Treating Zenker diverticulum utilizes rigid or flexible endoscopic diverticulotomy (**cricopharyngeal myotomy** using harmonic scalpel, needle knife, or stapler) to divide the common septum between the pouch and oesophageal lumen, converting the pouch into a continuous functional conduit. For postcricoid webs and Schatzki rings causing refractory luminal stenosis, endoscopic fluoroscopic balloon dilation or wire-guided bougienage mechanically fractures the fibrous ring, rapidly restoring normal luminal caliber and swallowing function.",
+   "say": "Endoscopic and surgical interventions effectively treat diverticular pouches and fibrous luminal rings. Treating Zenker diverticulum utilizes endoscopic cricopharyngeal myotomy to divide the septum between the pouch and oesophageal lumen, restoring continuous drainage. For postcricoid webs and Schatzki rings causing solid-food dysphagia, endoscopic balloon dilation gently fractures the ring, promptly resolving mechanical swallowing difficulty.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-dysphagia_score.webp",
+    "alt": "Dysphagia scoring criteria and anatomical levels of oesophageal obstruction.",
+    "caption": "Clinical severity grading and anatomical localization in mechanical dysphagia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
