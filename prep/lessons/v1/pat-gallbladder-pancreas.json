@@ -3,11 +3,11 @@
  "module": "pat-gallbladder-pancreas",
  "subject": "pathology",
  "title": "Gallbladder, biliary and pancreatic pathology",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Gallstones** sort by chemistry: **cholesterol stones** (obesity, OCP, rapid weight loss, clofibrate; supersaturated bile) versus **black pigment** (haemolysis, cirrhosis, sterile) versus **brown pigment** (infected, stasis with E. coli and Ascaris, primary ductal). **Acute cholecystitis** (cystic duct stone, **Murphy sign** arresting inspiration, fever with leukocytosis, ultrasound wall thickening with pericholecystic fluid) gets early **laparoscopic cholecystectomy** with antibiotics; **Charcot triad** (pain, fever, jaundice) marks cholangitis while **Reynolds pentad** adds shock with confusion, and **Courvoisier law** (palpable gallbladder with jaundice is malignant, not stone) redirects.",
-   "say": "Fatty forty female OCP stones are cholesterol. Murphy arresting breath is cholecystitis: operate early.",
+   "tx": "Gallstones are classified by chemical composition into three main types. **Cholesterol stones** form in supersaturated bile, and **pigment stones** are black in haemolysis or brown in infected bile. Acute cholecystitis causes a positive Murphy sign, whereas Charcot triad indicates cholangitis and Courvoisier law redirects painless jaundice toward malignancy.",
+   "say": "Cholesterol stones form because bile becomes supersaturated with cholesterol over time gradually. Black pigment stones occur in haemolysis whereas brown stones form in infected bile. Murphy sign indicates cholecystitis because inspiratory arrest occurs on palpation typically. Courvoisier gallbladder indicates malignancy because painless jaundice accompanies a palpable gallbladder.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-gallbladder-pancreas-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Gallbladder cancer** (elderly women, large stones, **porcelain gallbladder** calcification, anomalous pancreaticobiliary junction) presents late with jaundice and weight loss; cholecystectomy cures incidental T1 while advanced needs extended resection with palliation. **Biliary emergencies** sort by triads: cholangitis (Charcot, ERCP drainage with antibiotics), gallstone ileus (Rigler triad: obstruction with pneumobilia and ectopic stone, enterolithotomy), Mirizzi (impacted cystic stone compressing hepatic duct), emphysematous cholecystitis (diabetics, gas, urgent surgery). Porcelain prophylactically resects debated.",
-   "say": "Palpable gallbladder with jaundice is cancer until proven: Courvoisier. Porcelain calcified sac threatens malignancy.",
+   "tx": "Gallbladder cancer presents late and biliary emergencies are separated by classic triads. **Gallbladder cancer** is linked to large stones and a **porcelain gallbladder**, and cholangitis requires urgent drainage with antibiotics. Gallstone ileus causes obstruction with pneumobilia, whereas Mirizzi syndrome results from an impacted cystic duct stone compressing the hepatic duct.",
+   "say": "Gallbladder cancer presents late because early disease causes few specific symptoms initially. Porcelain calcification is associated with malignancy and large stones increase risk substantially. Cholangitis requires drainage urgently because infected bile causes sepsis very rapidly. Bowel obstruction occurs because an ectopic gallstone impacts in the ileum distally.",
    "vis": null
   },
   {
-   "tx": "**Acute pancreatitis** (gallstones, alcohol, hypertriglyceridaemia over 1000, hypercalcaemia, drugs like azathioprine, ERCP, mumps) autodigests with epigastric pain radiating to back relieved leaning forward; **lipase** (specific, longer than amylase) with contrast CT (**BISAP** severity, Atlanta classification) stages. Management is aggressive fluids, analgesia, antiemetics, early enteral feeding, ERCP only in cholangitis or persistent obstruction; **infected necrosis** (gas, procalcitonin, FNA) needs step up drainage with necrosectomy debated, sterile necrosis observes. Pseudocysts maturing over 4 weeks drain if symptomatic.",
-   "say": "Back boring pain with high lipase is pancreatitis: fluids, feed early, ERCP only if cholangitic. Gas in necrosis infects: drain up.",
+   "tx": "Acute pancreatitis is autodigestion of the pancreas triggered most often by gallstones or alcohol. **Acute pancreatitis** causes epigastric pain radiating to the back, and **serum lipase** is more specific and persists longer than amylase. Contrast imaging stages severity, and infected necrosis requires drainage whereas sterile necrosis is usually observed carefully.",
+   "say": "Pancreatitis causes epigastric pain because autodigestion inflames the gland and retroperitoneum intensely. Pain radiates to the back and leaning forward relieves it in many patients. Lipase is preferred because specificity is higher and elevation persists longer diagnostically. Infected necrosis requires drainage whereas sterile necrosis is observed carefully usually.",
    "vis": null
   },
   {
-   "tx": "**Chronic pancreatitis** (alcohol, smoking, PRSS1 hereditary, autoimmune IgG4 sausage pancreas with steroids, pancreas divisum) calcifies with ductal stones, **steatorrhoea** (lipase lost first), diabetes and pseudocysts; **faecal elastase** diagnoses insufficiency treated with enzyme replacement. **Cystic tumours** sort malignant risk: **serous** (central scar, benign, observe), **mucinous MCN** (ovarian stroma, body tail women, resect), **IPMN** (main duct dilates, mural nodules, Whipple or surveillance by Sendai), **PDAC** (**double duct sign**, desmoplasia, CA19-9, painless jaundice with Courvoisier, Whipple if resectable, FOLFIRINOX palliates).",
-   "say": "Calcified pancreas with greasy stools is chronic: replace enzymes. Double duct elderly jaundice is PDAC: stage for Whipple.",
+   "tx": "This contrast CT shows a dark non enhancing area within the pancreas with surrounding stranding. **Pancreatic necrosis** fails to enhance after contrast, and **peripancreatic fluid** with fat stranding is shown around the gland. This appearance matters because necrosis determines severity and the later risk of infected necrosis in acute pancreatitis.",
+   "say": "This scan shows pancreatic tissue that fails to enhance after contrast administration clearly. Surrounding fat is stranded and fluid collects around the inflamed gland extensively. Necrosis indicates severe disease because dead tissue risks secondary infection later. Severity scoring is performed because imaging extent predicts complications accurately.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-gallbladder-pancreas-gen1.webp",
+    "alt": "Axial contrast CT showing nonenhancing pancreatic necrosis with peripancreatic stranding and fluid.",
+    "caption": "Contrast CT showing pancreatic necrosis with peripancreatic stranding. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Chronic pancreatitis destroys gland function and pancreatic tumours differ greatly in risk. **Chronic pancreatitis** causes steatorrhoea and diabetes, and **pancreatic ductal adenocarcinoma** causes painless jaundice with a double duct sign. Serous cysts are benign with a central scar, whereas mucinous and main duct lesions require resection or close surveillance.",
+   "say": "Chronic pancreatitis calcifies the gland because repeated inflammation destroys tissue progressively over years. Steatorrhoea develops because lipase secretion is lost earliest among enzymes typically. Ductal cancer causes painless jaundice and weight loss in elderly patients characteristically. Double duct dilation indicates malignancy because pancreatic and bile ducts obstruct together.",
    "vis": {
     "kind": "table",
     "cols": [

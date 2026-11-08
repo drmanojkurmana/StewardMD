@@ -3,11 +3,11 @@
  "module": "rad-ir-access",
  "subject": "radiology",
  "title": "Angiography and vascular access",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Most IR procedures begin with the **Seldinger technique**, where a needle punctures the vessel, a **guidewire** threads through the needle, and a **sheath** or catheter then slides over the wire after the needle is removed. The **common femoral artery** remains the default access for angiography, entered below the inguinal ligament with the **anterior wall** punctured to avoid back-wall bleeding. **Ultrasound guidance** with a **micropuncture** needle lowers failed sticks and groin complications. **Radial access** suits coronary and selected visceral work with faster ambulation.",
-   "say": "Most procedures begin with the Seldinger sequence of needle, guidewire, then sheath or catheter. The common femoral artery is the default access, punctured on its anterior wall below the inguinal ligament. Ultrasound guidance with a micropuncture needle reduces failed punctures and groin complications. Radial access allows faster ambulation for suitable cases.",
+   "tx": "Most interventional procedures begin with the **Seldinger technique**, where a needle punctures the vessel and a guidewire passes through the needle. The sheath or catheter then slides over the wire after the needle is removed from the vessel. The **common femoral artery** is the default access and is entered below the inguinal ligament through the anterior wall only. **Ultrasound guidance** with a micropuncture needle lowers failed punctures and reduces groin complications.",
+   "say": "Most interventional procedures begin with the Seldinger technique and follow a clear sequence. A needle punctures the vessel and a guidewire passes through the needle. The sheath then slides over the wire after the needle is removed. The common femoral artery is the default access, and ultrasound guidance reduces failed punctures and groin complications.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,8 @@
    }
   },
   {
-   "tx": "Diagnostic angiography maps vessels when CT or MR leaves doubt. **Four-vessel digital subtraction angiography** stays the investigation of choice for the cause of **subarachnoid haemorrhage**, showing aneurysms and vasospasm in real time. **DSA** is also the gold standard for **arterial occlusive disease** and for confirming **chronic thromboembolic pulmonary hypertension** before endarterectomy. **Mesenteric angiography** localises brisk **gastrointestinal bleeding** and can treat it in the same sitting. **Spinal angiography** maps a dural fistula before surgery.",
-   "say": "Angiography maps vessels when CT or MR leaves doubt. Four-vessel digital subtraction angiography finds the cause of subarachnoid haemorrhage and grades vasospasm. DSA is the gold standard for arterial occlusive disease and for confirming chronic clot in the lungs. Mesenteric angiography localises brisk gut bleeding and can treat it at once.",
+   "tx": "Diagnostic angiography maps vessels when CT or magnetic resonance imaging leaves doubt. **Four vessel digital subtraction angiography** is the investigation of choice for finding the cause of **subarachnoid haemorrhage** and grading vasospasm. Angiography is also the standard test for arterial occlusive disease and for confirming chronic thromboembolic pulmonary hypertension before surgery. **Mesenteric angiography** localises brisk gastrointestinal bleeding and can treat the bleeding vessel in the same sitting.",
+   "say": "Diagnostic angiography maps vessels when other imaging leaves doubt about the anatomy. Four vessel angiography is the investigation of choice for subarachnoid haemorrhage and vasospasm. The test is also the standard for occlusive disease and for chronic clot in the pulmonary arteries. Mesenteric angiography localises brisk gut bleeding and can treat the vessel immediately.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +74,8 @@
    }
   },
   {
-   "tx": "Groin complications follow access and each has a signature. A **pseudoaneurysm** shows a **to-and-fro** Doppler waveform and is treated with **ultrasound-guided thrombin injection** when small and narrow-necked. An **arteriovenous fistula** gives a continuous bruit with a palpable thrill. A **high femoral stick** above the ligament risks **retroperitoneal bleeding** with hypotension and flank pain. **Dissection** flaps appear as a double lumen on contrast runs. **Radial occlusion** is usually silent because the ulnar artery keeps the hand perfused.",
-   "say": "Each groin complication has a signature. A pseudoaneurysm shows to-and-fro flow on Doppler and small ones close with thrombin injection. A fistula gives a continuous bruit with a thrill. A high stick risks hidden bleeding behind the peritoneum. Radial occlusion is usually silent thanks to ulnar supply.",
+   "tx": "Each groin complication after access has a recognisable clinical and Doppler signature. A **pseudoaneurysm** shows a to and fro Doppler waveform and a small narrow necked lesion responds to **ultrasound guided thrombin injection**. An arteriovenous fistula gives a continuous bruit with a palpable thrill over the groin. A high puncture above the ligament risks retroperitoneal bleeding with hypotension and flank pain, while **radial occlusion** usually stays silent because ulnar flow perfuses the hand.",
+   "say": "Each groin complication after access has a recognisable clinical and Doppler signature. A pseudoaneurysm has a to and fro waveform and responds to thrombin injection when small. A fistula gives a continuous bruit with a palpable thrill. A high puncture risks hidden retroperitoneal bleeding, while radial occlusion usually stays silent because ulnar flow perfuses the hand.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -103,8 +103,19 @@
    }
   },
   {
-   "tx": "Safe angiography starts before the needle. **Consent** explains benefits, groin risks, contrast allergy, radiation and alternatives in plain language. **Anticoagulants** are reviewed against **SIR periprocedural guidance**, with moderate and high-risk procedures needing corrected clotting. **Kidney function** is checked and high-risk patients receive **prehydration**. Prior contrast reactions trigger **steroid premedication** under local protocol. Pregnancy is asked about so the **foetal dose** can be justified and minimised under **ALARA**.",
-   "say": "Safety starts before the needle. Consent covers benefits, groin risks, contrast allergy, radiation and alternatives. Blood thinners are reviewed against SIR periprocedural guidance. Kidneys are checked with fluids for high-risk patients. Prior contrast reactions trigger steroid cover, and pregnancy is always asked about.",
+   "tx": "The Doppler image shows a round **pseudoaneurysm** sac in the groin with swirling red and blue flow inside it. A narrow neck connects the sac with the artery below and explains the **to and fro waveform** on the trace underneath. The needle delivers **thrombin injection** into the sac so clot forms and flow stops. Examiners favour this image because neck width decides whether injection is suitable.",
+   "say": "The Doppler image shows a pseudoaneurysm sac that contains swirling red and blue flow. A narrow neck connects the sac with the artery and produces the waveform below. The needle delivers thrombin into the sac so clot forms quickly. Neck width decides whether injection is suitable and safe.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-access-gen1.webp",
+    "alt": "Colour Doppler of groin pseudoaneurysm with narrow neck and thrombin injection",
+    "caption": "Doppler of groin pseudoaneurysm during thrombin injection. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Safe angiography starts before the needle enters the skin in the laboratory. **Consent** explains the benefits, groin risks, contrast allergy, radiation exposure and available alternatives in plain language. The team reviews **anticoagulants** and corrects clotting before moderate and high risk procedures. Kidney function is checked beforehand and high risk patients receive fluids before and after the procedure. Prior contrast reactions need cover under local protocol, and pregnancy is asked about so fetal dose is justified and minimised.",
+   "say": "Safe angiography starts before the needle enters the skin in the laboratory. Consent explains the benefits and risks and covers contrast allergy and radiation exposure. The team reviews blood thinners and corrects clotting before higher risk procedures. Kidney function is checked beforehand, and high risk patients receive fluids around the procedure for protection.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-access-fig1.webp",

@@ -3,16 +3,16 @@
  "module": "phm-antiplatelets-fibrinolytics",
  "subject": "pharmacology",
  "title": "Antiplatelets, DAPT and fibrinolytics",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Aspirin** (irreversible **COX-1**, lifelong low dose secondary prevention, dyspepsia with PPI cover, Reye ban in viral children) with **clopidogrel** (prodrug needing **CYP2C19** activation; poor metabolisers and **omeprazole interaction** blunt effect, **TTP** rare) form DAPT backbones; genotyping with pantoprazole swaps personalise. Aspirin resistance (diabetes, noncompliance) checks adherence first; desensitisation protocols serve CAD with allergy.",
-   "say": "Lifelong low aspirin protects stents and strokes; clopidogrel needs CYP2C19 and dodges omeprazole. Genotype poor metabolisers.",
+   "tx": "Aspirin irreversibly blocks platelet **COX 1** and forms the lifelong low dose backbone of secondary prevention, with dyspepsia reduced by PPI cover and Reye syndrome banning use in viral illness in children. **Clopidogrel** is a prodrug needing CYP2C19 activation, so poor metabolisers and the omeprazole interaction blunt its effect, while TTP is a rare complication. Together they form DAPT backbones after stenting, genotyping with pantoprazole substitution can personalise care, and aspirin resistance first needs an adherence check before desensitisation is considered for allergy.",
+   "say": "Aspirin blocks platelet activation irreversibly for secondary prevention. Clopidogrel needs metabolic activation before it works. Omeprazole can blunt clopidogrel activation in susceptible patients. Poor metabolisers may need an alternative platelet inhibitor. Adherence should be checked before true resistance is declared.",
    "vis": null
   },
   {
-   "tx": "**Prasugrel** (potent, **prior stroke or TIA ban**, CABG bleed ban, diabetes benefit) and **ticagrelor** (reversible, **dyspnoea**, no CYP issue, twice daily, CABG shorter hold) escalate ACS; **GP IIb/IIIa blockers** (**abciximab** thrombocytopenia, eptifibatide, tirofiban) bridge PCI thrombus. Cangrelor IV bridges surgery gaps; cilostazol (claudication, heart failure ban) walks legs. Potency trades bleeding; choice follows stroke, surgery and genes.",
-   "say": "Prior stroke bans prasugrel; ticagrelor breathes hard twice daily. Abciximab drops platelets acutely.",
+   "tx": "Potent P2Y12 blockers escalate treatment in acute coronary syndrome but trade potency for bleeding. **Prasugrel** is banned after prior stroke or TIA and before CABG because bleeding rises, while **ticagrelor** is reversible, needs twice daily dosing, causes dyspnoea, and needs a shorter hold before CABG. GP IIb IIIa blockers such as abciximab, eptifibatide, and tirofiban bridge high thrombus PCI, abciximab can drop platelets, cangrelor bridges surgery gaps intravenously, and cilostazol helps claudication but is banned in heart failure.",
+   "say": "Prasugrel is potent but dangerous after previous stroke. Ticagrelor acts reversibly and needs twice daily dosing. Dyspnoea is a common limit on ticagrelor tolerability in clinical practice. Intravenous blockers help when thrombus burden is high during intervention. Bleeding risk guides every escalation decision carefully.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/phm-antiplatelets-fibrinolytics-fig1.webp",
@@ -22,13 +22,13 @@
    }
   },
   {
-   "tx": "**DAPT duration** (ACS 12 months, stable PCI 6 months, high bleeding PRECISE-DAPT shortens, high ischaemia extends; **triple therapy** AF with PCI minimised to days then dual DOAC plus clopidogrel) balances stent thrombosis against bleed; PPI covers GI risk while NSAIDs stop. De-escalation (prasugrel to clopidogrel guided) and aspirin withdrawal (TWILIGHT ticagrelor monotherapy) modernise. Bleeding scores (PRECISE-DAPT, ARC-HBR) gate.",
-   "say": "Stent bleeds balance twelve months ACS, six stable; triple therapy shrinks to days. PPI shields guts, NSAIDs stop.",
+   "tx": "Dual antiplatelet duration balances stent thrombosis against bleeding for each patient. **DAPT** usually runs twelve months after acute coronary syndrome and six months after stable PCI, while high bleeding risk scores shorten it and high ischaemic risk can extend it. Triple therapy with anticoagulation after PCI in atrial fibrillation is minimised to days before dropping to a DOAC plus clopidogrel, PPI cover protects the gut, and NSAIDs stop. De escalation and aspirin withdrawal strategies modernise care, guided by **PRECISE DAPT** and bleeding criteria.",
+   "say": "Duration balances stent thrombosis against bleeding risk carefully. Acute coronary syndrome usually needs twelve months of treatment. Stable disease usually needs a shorter course after stenting. Triple therapy should shrink quickly to reduce bleeding. Proton pump cover can protect patients who are at gastrointestinal risk.",
    "vis": null
   },
   {
-   "tx": "**Fibrinolytics** (**alteplase** stroke 4.5h and MI, **tenecteplase** single bolus MI, reteplase double) lyse with intracranial bleed watched (BP, glucose, age gates); **streptokinase** (antigenic, antibodies bar reuse, hypotension) cheaply infarcts where PCI lags. **Tranexamic acid** (**CRASH-2** trauma, **WOMAN** PPH, menorrhagia, epistaxis, dental) blocks fibrinolysis early (3 hour windows); haematuria upper tract clots caution. Urokinase niches catheters.",
-   "say": "Stroke lyses 4.5 hours alteplase; MI tenecteplases single bolus. Trauma and PPH tranexamic inside 3 hours.",
+   "tx": "Fibrinolytics dissolve clot but risk intracranial bleeding in every patient. **Alteplase** treats ischaemic stroke within 4.5 hours and myocardial infarction, **tenecteplase** offers single bolus treatment for infarction, and streptokinase is antigenic so antibodies bar reuse while hypotension limits it where PCI is delayed. Blood pressure, glucose, and age gate stroke treatment carefully. Tranexamic acid blocks fibrinolysis and helps trauma, postpartum haemorrhage, menorrhagia, and dental bleeding when given early, while upper urinary tract clots need caution with its use.",
+   "say": "Fibrinolytics dissolve clot but can bleed into the brain. Alteplase can treat eligible stroke only within the early treatment window. Tenecteplase is a convenient single bolus treatment option for myocardial infarction. Streptokinase cannot be reused because antibodies develop. Tranexamic acid helps bleeding when given early after trauma or delivery.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -58,6 +58,17 @@
       "Brain bleed"
      ]
     ]
+   }
+  },
+  {
+   "tx": "This brain CT shows a middle cerebral artery clot with angiography inset and labels for alteplase within 4.5 hours, tenecteplase single bolus, and bleed watch. It teaches that **fibrinolysis** is time critical in ischaemic stroke, because earlier treatment salvages more brain, while uncontrolled pressure, glucose problems, and bleeding risk can exclude the patient. Exam stems reward linking **MCA occlusion** with the thrombolysis window and intracranial haemorrhage as the feared complication.",
+   "say": "This scan shows a clot blocking the middle cerebral artery. Thrombolysis can work only when it is given within a narrow early window. Earlier treatment salvages more threatened brain tissue. Bleeding into the brain remains the feared complication throughout. Blood pressure and glucose must satisfy eligibility gates before treatment starts.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-antiplatelets-fibrinolytics-gen1.webp",
+    "alt": "Axial brain CT showing MCA clot with angiogram inset and thrombolysis timing labels",
+    "caption": "Axial CT with MCA clot and angiogram noting thrombolysis window. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   }
  ],

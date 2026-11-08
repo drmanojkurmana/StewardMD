@@ -6,8 +6,8 @@
  "minutes": 6,
  "steps": [
   {
-   "tx": "**Antiarrhythmics** are classified by Vaughan Williams according to dominant ion channel action: sodium blockers (class I), beta blockers (II), potassium blockers prolonging repolarisation (III), and calcium blockers (IV), with adenosine, digoxin and magnesium as unclassified essentials. The classification organises thinking, but every drug here can also provoke arrhythmia (proarrhythmia), so indications stay narrow, structural heart disease vetoes several agents, and monitoring is part of the prescription itself.",
-   "say": "Antiarrhythmics block sodium, beta, potassium or calcium pathways, and every one can also cause arrhythmias. Structural heart disease forbids several. Indications stay narrow and monitored.",
+   "tx": "The Vaughan Williams system sorts drugs by dominant channel: class I blocks sodium, class II blocks beta receptors, class III blocks potassium and class IV blocks calcium. **Adenosine**, digoxin and magnesium sit outside the classes as unclassified essentials. Every class can also provoke arrhythmia, which is called **proarrhythmia** and limits casual use. Structural heart disease vetoes several agents outright in examination stems. Monitoring is part of the prescription itself for this whole class.",
+   "say": "Vaughan Williams is organisational because it sorts drugs by dominant channel blocked in membranes. Sodium and beta and potassium and calcium classes are separate because they organise thinking for prescribers. Every antiarrhythmic is risky because it can also provoke arrhythmia in susceptible patients. Structural heart disease is restrictive because it forbids several agents outright for patient safety.",
    "vis": {
     "kind": "image",
     "src": "prep/lessons/media/pharma-vaughan-williams.svg",
@@ -17,8 +17,8 @@
    }
   },
   {
-   "tx": "**Amiodarone** (class III dominant) treats life threatening ventricular arrhythmias and controls atrial fibrillation when others fail, but its iodine load and tissue accumulation tax thyroid, lung, liver, cornea and skin over months, demanding baseline and periodic organ checks and interacting through CYP and digoxin pathways. Dronedarone is its weaker non iodine cousin barred in permanent atrial fibrillation and heart failure after harm trials taught restraint.",
-   "say": "Amiodarone controls dangerous rhythms but burdens thyroid, lungs, liver, eyes and skin over time. It needs scheduled organ checks and interacts widely. Never treat it as harmless.",
+   "tx": "Amiodarone controls dangerous ventricular rhythms and atrial fibrillation when other drugs fail, but its burden grows with time. Its iodine load and tissue stores injure **thyroid**, lung, liver, cornea and skin over months of therapy. Baseline and periodic organ checks are therefore mandatory, not optional extras. It interacts through metabolic pathways and raises **digoxin** levels predictably. Dronedarone is weaker, lacks iodine and is barred in permanent atrial fibrillation with heart failure.",
+   "say": "Amiodarone controls dangerous rhythms but burdens many organs slowly. Thyroid and lung and liver and eye checks are mandatory. It interacts widely and raises digoxin levels predictably. Scheduled monitoring is part of safe prescribing for amiodarone.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -56,13 +56,13 @@
    }
   },
   {
-   "tx": "**Flecainide** suppresses atrial fibrillation elegantly in structurally normal hearts (pill in pocket strategies) yet the CAST trial proved class Ic drugs kill after myocardial infarction by provoking ventricular arrhythmia in scarred myocardium, permanently barring them in structural or ischaemic disease. Sotalol mixes beta blockade with potassium blockade and torsades risk, needing QT and kidney surveillance. Digoxin slows atrioventricular conduction vagally for rate control but its narrow index intoxicates with kidney failure, hypokalaemia and interacting drugs.",
-   "say": "Flecainide suits only structurally normal hearts; after infarction it kills. Sotalol risks torsades. Digoxin controls rate narrowly and poisons easily when kidneys fail or potassium falls.",
+   "tx": "Flecainide suppresses atrial fibrillation well in structurally normal hearts, including pill in the pocket strategies for selected patients. The CAST lesson proved class Ic drugs kill after infarction by provoking ventricular arrhythmia in scarred muscle. **Sotalol** mixes beta and potassium blockade and carries torsades risk needing QT surveillance. **Digoxin** slows nodal conduction vagally for rate control but intoxicates with renal failure and low potassium. Substrate decides safety more than rhythm appearance ever does.",
+   "say": "Flecainide is restricted because it suits structurally normal hearts only for atrial fibrillation control. After infarction it is dangerous because it provokes ventricular arrhythmia and increases mortality risk. Sotalol is monitored because it risks torsades and needs QT surveillance at regular intervals. Digoxin is narrow because it intoxicates easily when kidneys fail or potassium falls low.",
    "vis": null
   },
   {
-   "tx": "**Adenosine** agonises A1 receptors, transiently blocking the atrioventricular node for seconds to terminate AV nodal dependent supraventricular tachycardia and unmask atrial flutter waves, given as rapid push with warning about flushing, chest tightness and breathlessness that pass in seconds. Verapamil sensitive and wide complex dilemmas separate: unknown wide complex tachycardia is treated as ventricular, and calcium blockers there can collapse the patient, while procainamide or cardioversion lead.",
-   "say": "Adenosine freezes the AV node for seconds, ending SVT and revealing flutter. Never give verapamil to unknown wide complex tachycardia or Wolff Parkinson White atrial fibrillation.",
+   "tx": "**Adenosine** blocks the atrioventricular node for seconds, ending nodal supraventricular tachycardia and unmasking flutter waves during the pause. Give it as a rapid push and warn about flushing, chest tightness and breathlessness that pass quickly. Unknown wide complex tachycardia is treated as ventricular, and **verapamil** there can collapse the patient catastrophically. Verapamil is also dangerous in Wolff Parkinson White atrial fibrillation with rapid conduction. Procainamide or cardioversion leads when the complex is wide and uncertain.",
+   "say": "Adenosine is brief because it freezes the nodal pathway for seconds during supraventricular tachycardia. It is diagnostic because it ends tachycardia and reveals flutter waves during the pause. Unknown wide complex tachycardia is ventricular because it is treated as ventricular until proved otherwise. Verapamil is dangerous because it can collapse such patients and is avoided in this setting.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -84,9 +84,20 @@
    }
   },
   {
-   "tx": "Torsades de pointes from QT prolonging antiarrhythmics (and antibiotics, antipsychotics) is treated by stopping culprits, intravenous **magnesium**, potassium repletion and overdrive pacing or isoprenaline to shorten repolarisation, never with standard class I agents. All antiarrhythmic starts deserve ECG, electrolyte, thyroid, kidney and drug interaction review, because the class history (CAST, dronedarone trials) teaches that suppressing ECG appearances can worsen survival when substrate is diseased.",
-   "say": "Twisting torsades needs magnesium, potassium and faster pacing, not more antiarrhythmics. Suppressing ECG blips in scarred hearts can kill: substrate decides safety.",
+   "tx": "Twisting QRS complexes with prolonged QT mean **torsades de pointes**, treated by stopping culprits and giving intravenous **magnesium** first. Replete potassium and shorten repolarisation with overdrive pacing or isoprenaline when episodes recur. Standard class I agents worsen torsades and must never be used here. Every antiarrhythmic start deserves electrocardiogram, electrolyte, thyroid, kidney and interaction review beforehand. Suppressing appearances in scarred hearts worsens survival, so indications stay deliberately narrow.",
+   "say": "Twisting complexes with long QT indicate torsades de pointes clearly. Magnesium is first treatment after stopping culprit drugs immediately. Potassium repletion and faster pacing shorten repolarisation safely. Standard sodium blockers worsen torsades and must be avoided.",
    "vis": null
+  },
+  {
+   "tx": "The tracing shows **prolonged QT**, an **R on T** premature beat and a lower strip of twisting QRS that is **torsades de pointes**, with intravenous magnesium cued in the corner. Reading left to right teaches the sequence examiners love: substrate, trigger, then polymorphic storm. Treatment is magnesium, potassium and faster pacing after stopping culprits, never more class I drug. This image anchors the rule that repolarisation prolongation kills differently from conduction block.",
+   "say": "The tracing shows prolonged QT and an early beat triggering torsades. Twisting QRS complexes confirm polymorphic ventricular tachycardia clearly. Magnesium treats torsades after culprit drugs are stopped immediately. Potassium and pacing shorten repolarisation when episodes recur frequently.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-antiarrhythmics-gen1.webp",
+    "alt": "Twelve lead ECG showing prolonged QT, R on T beat, twisting QRS, and torsades rhythm strip.",
+    "caption": "Twelve lead ECG showing prolonged QT progressing to torsades de pointes. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   }
  ],
  "quiz": [

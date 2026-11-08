@@ -3,11 +3,11 @@
  "module": "rad-ir-venous-svc",
  "subject": "radiology",
  "title": "SVC syndrome and venous recanalisation",
- "minutes": 7,
+ "minutes": 6,
  "steps": [
   {
-   "tx": "Faces swell when cavae choke. **SVC syndrome** balloons faces with neck vein distension and arm swelling, worse when bending forward. **Malignant compression** from lung tumours and nodes drives most cases needing urgent stenting. **Benign fibrosing lines** from chronic catheters suit gradual recanalisation. **Stridor with confusion** marks severe obstruction needing emergency airways alongside stents.",
-   "say": "Faces swell when cavae choke. SVC blockage balloons faces with neck distension, worse bending forward. Lung tumours drive most cases needing urgent stents. Chronic line scarring suits gradual reopening. Stridor with confusion marks severe blocks needing emergency airways.",
+   "tx": "Caval obstruction swells the face, because venous blood from head and arms cannot reach the heart normally. **SVC syndrome** balloons the face with neck vein distension and arm swelling that worsens when bending forward. **Malignant compression** from lung tumours and nodes drives most cases and often needs urgent stenting for relief. Benign fibrosing disease from chronic catheters suits gradual recanalisation rather than emergency stenting in stable patients. **Stridor with confusion** marks severe obstruction and needs emergency airway support alongside urgent stent treatment in hospital.",
+   "say": "Caval obstruction is dramatic because it swells the face when venous blood cannot reach the heart. Caval syndrome balloons the face with neck distension and arm swelling that worsens bending forward. Malignant compression from lung tumours and nodes drives most cases and needs urgent stenting. Benign scarring from chronic catheters suits gradual reopening rather than emergency stenting in stable patients. Stridor with confusion marks severe obstruction and needs emergency airway support alongside treatment.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -45,8 +45,8 @@
    }
   },
   {
-   "tx": "Stents reopen venous highways fast. **Self-expanding venous stents** scaffold SVC and brachiocephalic trunks with same-day face deflation. **Through-and-through access** from groin and neck steadies crossings of total occlusions. **Kissing stents** rebuild bifurcations where both brachiocephalics fail. **Anticoagulation after** keeps sluggish venous metal open per CIRSE-aligned protocols.",
-   "say": "Stents reopen venous highways fast. Self-expanding metal scaffolds caval trunks with same-day deflation. Combined groin-neck access steadies crossings of total blocks. Kissing stents rebuild failed bifurcations. Anticoagulation after keeps sluggish venous metal open.",
+   "tx": "Venous stenting reopens the caval highway quickly, and facial swelling often deflates on the same day. A **self expanding venous stent** scaffolds the cava and brachiocephalic trunks with strong radial support after deployment. **Through and through access** from groin and neck steadies crossing when the cava occludes completely in the chest. **Kissing stents** rebuild the bifurcation when both brachiocephalic veins fail together at the caval confluence. Anticoagulation after deployment keeps sluggish venous metal open and protects the reconstruction during early healing.",
+   "say": "Venous stenting reopens the caval highway quickly and facial swelling often deflates on the same day. A self expanding stent scaffolds the cava and brachiocephalic trunks with strong support after deployment. Combined groin and neck access steadies crossing when the cava occludes completely in the chest. Kissing stents rebuild the bifurcation when both brachiocephalic veins fail together at the confluence. Anticoagulation after deployment keeps sluggish venous metal open and protects the reconstruction during healing.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -74,8 +74,19 @@
    }
   },
   {
-   "tx": "Legs swell when iliacs squeeze. **May-Thurner compression** of left common iliac vein under the artery breeds left-leg clots and ulcers. **Iliac stenting** scaffolds the squeeze with lasting patency. **Dialysis outflow stenosis** from old fistulae narrows central veins needing balloons with selective stents. **Post-thrombotic scarring** recanalises where organised clot still wires through.",
-   "say": "Legs swell when iliacs squeeze. Left iliac compression under the artery breeds left-leg clots. Iliac stents scaffold squeezes durably. Dialysis outflow narrowing from old fistulae takes balloons with selective stents. Scarred post-clot veins recanalise where wires still pass.",
+   "tx": "These paired venograms compare caval obstruction before treatment with restored flow after stent deployment in the cava. The left panel shows a **high grade SVC obstruction** with tortuous mediastinal and azygos **collateral veins** that carry blood around the blockage. The right panel shows a **self expanding caval stent** that restores a straight channel toward the heart after deployment. The image matters for the exam because collateral burden proves severity while same day deflation proves stent success. Cause directed cancer treatment still continues because the stent bypasses rather than cures disease.",
+   "say": "These paired venograms compare caval obstruction before treatment with restored flow after stent deployment. The left panel shows a high grade obstruction with tortuous collateral veins around the blockage. The right panel is clear because it shows a caval stent that restores a straight channel. Collateral burden is proof of severity while same day deflation proves stent success in caval obstruction. Cause directed cancer treatment still continues because the stent bypasses rather than cures disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-venous-svc-gen1.webp",
+    "alt": "Paired venograms showing SVC obstruction with collaterals before and open stent after.",
+    "caption": "SVC obstruction with collaterals relieved by caval stent placement. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Leg swelling also follows venous compression, and iliac disease explains many unilateral presentations in clinic practice. **May Thurner compression** squeezes the left common iliac vein under the artery and breeds left leg clots with ulcers. **Iliac stenting** scaffolds that squeeze and gives lasting patency after clot clearance in the iliac segment. Dialysis outflow stenosis from old fistulae narrows central veins and needs balloons with selective stents for relief. **Post thrombotic scarring** can recanalise when organised clot still allows a wire to pass through the vein.",
+   "say": "Leg swelling also follows venous compression and iliac disease explains many unilateral presentations in clinic. Left iliac compression under the artery breeds left leg clots with ulcers over time. Iliac stenting scaffolds that squeeze and gives lasting patency after clot clearance in the segment. Dialysis outflow narrowing from old fistulae narrows central veins and needs balloon treatment for relief. Scarred veins after clot can reopen when organised clot still allows a wire through.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/rad-ir-venous-svc-fig1.webp",
@@ -85,8 +96,8 @@
    }
   },
   {
-   "tx": "Follow-up keeps metal moving. **Duplex with symptom checks** pairs velocities against swelling at every visit. **Re-stenosis with returning faces** earns re-ballooning before total re-occlusion. **Stent migration checks** confirm positions after coughing fits and trauma. **Cause-directed therapy** of tumours and lines continues since stents bypass blocks rather than curing disease.",
-   "say": "Follow-up keeps metal moving. Duplex with swelling checks pairs velocities against symptoms each visit. Returning faces earn re-ballooning before total re-blockage. Position checks follow coughing fits. Tumour and line treatment continues since stents bypass rather than cure.",
+   "tx": "Follow up keeps venous metal moving, because slow venous flow restenoses faster than arterial flow after stenting. **Duplex with symptom checks** pairs velocity against swelling at every visit for that patient in clinic. Restenosis with a returning swollen face earns **re ballooning** before total re occlusion closes the cava again. **Stent position checks** confirm placement after coughing fits and trauma that could shift the scaffold slightly. Cause directed therapy for tumour and lines continues because a stent bypasses blockage rather than curing disease.",
+   "say": "Follow up keeps venous metal moving because slow venous flow restenoses faster than arterial flow. Duplex with symptom checks pairs velocity against swelling at every visit for that patient. Narrowing with a returning swollen face earns repeat balloon treatment before total closure occurs. Position checks confirm placement after coughing fits and trauma that could shift the scaffold. Cause directed therapy continues because a stent bypasses blockage rather than curing disease.",
    "vis": {
     "kind": "flow",
     "nodes": [

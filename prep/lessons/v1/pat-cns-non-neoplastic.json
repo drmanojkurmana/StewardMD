@@ -3,11 +3,11 @@
  "module": "pat-cns-non-neoplastic",
  "subject": "pathology",
  "title": "Non neoplastic CNS disease: stroke, MS, meningitis and prions",
- "minutes": 6,
+ "minutes": 5,
  "steps": [
   {
-   "tx": "**Ischaemic stroke** (thrombotic atherosclerosis, embolic AF, lacunar lipohyalinosis) syndromes localise: **MCA** (contralateral face arm weakness with aphasia or neglect), ACA (leg), PCA (visual), basilar (locked in), lacunar (pure motor or sensory). Management is **IV alteplase within 4.5 hours** (no bleed on CT, BP controlled) with **thrombectomy to 24 hours** in large vessel occlusion, then aspirin, statin, AF anticoagulation delayed, decompressive hemicraniectomy in malignant oedema. Stroke mimics (hypoglycaemia, Todd, conversion) glucose first.",
-   "say": "Face arm aphasia is MCA: CT rules bleed, alteplase in 4.5 hours, thrombectomy to 24. Glucose every mimic first.",
+   "tx": "Ischaemic stroke syndromes localise accurately from the pattern of neurological deficit. A **middle cerebral artery stroke** causes contralateral face and arm weakness, and **intravenous thrombolysis** is given within the stated window after bleeding is excluded. Large vessel occlusion can require thrombectomy, and glucose is checked first because hypoglycaemia mimics stroke closely.",
+   "say": "Stroke localisation is determined by the pattern of weakness and language deficit. The middle cerebral artery causes face and arm weakness with aphasia commonly. Bleeding is excluded by imaging before thrombolysis is given to eligible patients. Glucose is checked first because hypoglycaemia mimics stroke very closely.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/pat-cns-non-neoplastic-fig1.webp",
@@ -17,18 +17,29 @@
    }
   },
   {
-   "tx": "**Subarachnoid haemorrhage** (**berry aneurysms** at bifurcations: ACom, PCom with third nerve palsy, MCA; autosomal dominant PKD, smoking) strikes as **thunderclap headache** with vomiting and neck stiffness; noncontrast CT with **LP xanthochromia** (if CT negative) confirms, CTA finds. Complications (rebleed, **vasospasm** days 4 to 14 with **nimodipine**, hydrocephalus, SIADH or cerebral salt wasting) are coiled or clipped urgently; grading (Hunt Hess, Fisher) prognosticates. Sentinel leaks warn.",
-   "say": "Thunderclap worst headache is SAH: CT, xanthochromia if clean, nimodipine for vasospasm. PCom blows the third nerve.",
+   "tx": "Subarachnoid haemorrhage presents suddenly with the worst headache of life. A ruptured **berry aneurysm** causes thunderclap headache, and **xanthochromia** in cerebrospinal fluid confirms bleeding when imaging is negative. Vasospasm develops days later and nimodipine is used, whereas rebleeding and hydrocephalus are other major early complications.",
+   "say": "Subarachnoid bleeding presents with thunderclap headache and vomiting very suddenly. A berry aneurysm ruptures at a bifurcation and blood fills basal cisterns. Xanthochromia confirms bleeding when the initial scan is negative in suspected cases. Vasospasm develops later and nimodipine is used for prevention.",
    "vis": null
   },
   {
-   "tx": "**Multiple sclerosis** (autoimmune demyelination, young women, temperate latitudes, EBV linked, **periventricular Dawson fingers**, juxtacortical and infratentorial plaques) relapses with **internuclear ophthalmoplegia** (MLF, adduction lag with nystagmus), optic neuritis, Lhermitte and Uhthoff heat worsening; **oligoclonal bands** with raised IgG index confirm dissemination in time and space on MRI. Relapses get pulsed steroids with plasma exchange refractory; **disease modifiers** (interferon, natalizumab with **PML** risk, ocrelizumab, fingolimod) slow. **ADEM** (postviral children, monophasic, encephalopathy) differs.",
-   "say": "Heat worsened internuclear lag with Dawson fingers is MS: bands confirm, steroids pulse. PML haunts natalizumab.",
+   "tx": "This axial CT shows bright blood filling the basal cisterns around the midbrain. **Subarachnoid blood** appears hyperdense on non contrast imaging, and the **basal cisterns** are the key place to inspect after thunderclap headache. This pattern matters because it confirms aneurysmal bleeding and triggers urgent vascular imaging and neurosurgical referral.",
+   "say": "This scan is abnormal because bright blood is present in basal cisterns. Blood is hyperdense on non contrast CT and it outlines the cisterns clearly. This pattern confirms subarachnoid haemorrhage in the correct clinical setting rapidly. Urgent vascular imaging is required because an aneurysm requires treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pat-cns-non-neoplastic-gen1.webp",
+    "alt": "Axial noncontrast head CT showing bright subarachnoid blood filling basal cisterns around midbrain.",
+    "caption": "Axial brain CT showing hyperdense blood in basal cisterns. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Multiple sclerosis is an autoimmune demyelinating disease of young adults. **Multiple sclerosis** produces periventricular plaques and **Dawson fingers** on imaging, and internuclear ophthalmoplegia results from a medial longitudinal fasciculus lesion. Oligoclonal bands support the diagnosis, and relapses are treated with pulsed steroids while disease modifying drugs reduce future relapses.",
+   "say": "Multiple sclerosis is autoimmune and it demyelinates central white matter tracts progressively. Periventricular plaques are characteristic and Dawson fingers extend from the ventricles outward. Internuclear ophthalmoplegia occurs because the medial longitudinal fasciculus is demyelinated focally. Oligoclonal bands support diagnosis because intrathecal antibody production is present.",
    "vis": null
   },
   {
-   "tx": "**Meningitis** sorts by CSF: bacterial (neutrophils, low glucose, high protein, ceftriaxone plus vancomycin with dexamethasone before antibiotics), viral (lymphocytes, normal glucose, support), **TB** (basal exudates with cranial nerve palsies, low glucose with high protein, ATT with steroids). **Brain abscess** (otitis or cyanotic heart, ring enhancement with toxoplasma in AIDS treated empirically, bacterial aspirated) and **CJD prion** (rapid dementia with myoclonus, periodic sharp complexes, 14-3-3, no cure, precautions) complete emergencies; **normal pressure hydrocephalus** (**wet, wobbly, wacky** triad, tap test improving, shunt) reverses dementia.",
-   "say": "Neck stiffness photophobia: tap CSF, dexamethasone then antibiotics. Wet wobbly wacky improving on tap is NPH: shunt.",
+   "tx": "Cerebrospinal fluid patterns separate bacterial, viral and tuberculous meningitis rapidly. Bacterial meningitis shows **neutrophilic fluid** with low glucose, and tuberculous meningitis shows **basal exudates** with cranial nerve palsies. Normal pressure hydrocephalus causes gait disturbance, incontinence and cognitive decline, and Creutzfeldt Jakob disease causes rapid dementia with myoclonus.",
+   "say": "Bacterial fluid is neutrophilic and glucose is low with high protein levels. Viral fluid is lymphocytic and glucose remains normal in most cases typically. Tuberculous disease causes basal exudates and cranial nerve palsies over weeks. Normal pressure hydrocephalus is reversible because shunting improves gait in selected patients.",
    "vis": {
     "kind": "table",
     "cols": [

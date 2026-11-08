@@ -25,39 +25,10 @@
       "say": "Extracorporeal circulation temporarily takes over cardiopulmonary function during open heart procedures. Systemic deoxygenated blood drains into an artificial oxygenator through venous cannulas. A mechanical arterial pump reinfuses freshly oxygenated blood into the aorta under physiological pressure.",
       "tx": "Cardiopulmonary bypass diverts deoxygenated venous return from the right atrium or venae cavae into an artificial **membrane oxygenator** for gas exchange. A calibrated mechanical pump continuously returns fully saturated blood into the **ascending aorta**, sustaining systemic arterial perfusion while the heart is arrested.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Venous drainage via right atrium or cavae"
-          },
-          {
-            "id": "b",
-            "label": "Cardiotomy reservoir and gas exchange in oxygenator"
-          },
-          {
-            "id": "c",
-            "label": "Mechanical pump generation of arterial head"
-          },
-          {
-            "id": "d",
-            "label": "Arterial reinfusion into distal ascending aorta"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/cpb-bypass-myocardial-protection-fig1.webp",
+        "alt": "Diagram of a cardiopulmonary bypass circuit with venous cannulas draining to a reservoir, pump and membrane oxygenator returning blood to the aorta.",
+        "caption": "Bypass circuit: venous drainage, reservoir, pump and oxygenator before arterial return. Credit: StewardMD."
       }
     },
     {
@@ -145,23 +116,10 @@
       "say": "Arterial cannulation delivers oxygenated blood directly into the patient arterial tree. Surgeons insert the primary arterial cannula into the distal ascending aorta just proximal to the innominate takeoff. In cases of extensive aortic pathology, the right axillary or common femoral artery provides reliable peripheral inflow.",
       "tx": "Primary **arterial cannulation** enters the distal **ascending aorta** immediately proximal to the innominate takeoff, avoiding atherosclerotic plaques and fragile calcified tissue. When ascending aortic dissection or extensive circumferential calcification precludes central access, surgical teams select peripheral cannulation through the right **axillary artery** or the common femoral vessel.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Central Aortic Cannulation",
-          "points": [
-            "Distal ascending aorta insertion site",
-            "Antegrade flow mimics physiological hemodynamics",
-            "Avoids peripheral vascular injury or groin cutdown"
-          ]
-        },
-        "right": {
-          "title": "Peripheral Cannulation",
-          "points": [
-            "Axillary or femoral artery cannulation site",
-            "Essential for acute dissection and reoperations",
-            "Carries potential risks of retrograde malperfusion"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/cardiac-surgery-cabg-valvular-repair-and-cardiopulmonary-bypass-fig1.webp",
+        "alt": "Anatomical diagram of coronary bypass grafting with arterial and venous grafts and aortic cannulation.",
+        "caption": "Bypass grafts and cannulation for coronary revascularisation. Credit: StewardMD."
       }
     },
     {
